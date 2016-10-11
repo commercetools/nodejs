@@ -1,0 +1,31 @@
+language: node_js
+node_js:
+  - 4
+  - 6
+
+before_install: ./scripts/check-npm.sh
+
+cache:
+  directories:
+  - node_modules
+
+deploy:
+  provider: script
+  script: ./scripts/deploy.sh
+  skip_cleanup: true
+  on:
+    branch: master
+    node: 6
+
+env:
+  global:
+    - ENCRYPTION_LABEL: fb365c1216b5
+    - ORIGIN_URL: git@github.com:commercetools/nodejs.git
+
+notifications:
+  email: false
+
+script:
+  - npm run check-updates
+  - npm run coverage
+  - npm run codecov

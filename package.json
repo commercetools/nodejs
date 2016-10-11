@@ -1,0 +1,74 @@
+{
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "install": "run-s -s install:*",
+    "install:mkdirp-bin": "lerna exec -- mkdirp ./node_modules/.bin/",
+    "install:bootstrap": "lerna bootstrap",
+    "install:symlink-bin": "lerna exec -- node ../../scripts/symlink-bin.js",
+    "clean": "lerna exec -- rm -rf lib/* && lerna clean --yes",
+    "lint": "lerna exec -- npm run lint -s",
+    "build": "lerna exec -- npm run build -s",
+    "test": "lerna exec -- npm run test -s",
+    "coverage": "lerna exec -- npm run coverage -s",
+    "codecov": "lerna exec -- npm run codecov -s",
+    "commit": "git-cz || true",
+    "check-updates": "run-p -s check-updates:*",
+    "check-updates:root": "ncu --error-level 2",
+    "check-updates:packages": "lerna exec -- ncu --error-level 2",
+    "upgrade": "run-p -s check-updates:*",
+    "upgrade:root": "ncu --loglevel minimal --upgrade",
+    "upgrade:packages": "lerna exec -- ncu --loglevel minimal --upgrade",
+    "release": "run-s -s release:*",
+    "release:changelog": "lerna-semantic-release post && git add packages/*/CHANGELOG.md",
+    "release:versioning": "lerna-semantic-release pre",
+    "release:publish": "lerna-semantic-release perform"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-eslint": "^7.0.0",
+    "babel-plugin-istanbul": "^2.0.1",
+    "babel-preset-es2015": "^6.16.0",
+    "chokidar-cli": "^1.2.0",
+    "codecov": "^1.0.1",
+    "commitizen": "^2.8.6",
+    "cross-env": "^3.1.2",
+    "cz-conventional-changelog": "^1.2.0",
+    "cz-lerna-changelog": "^0.3.0",
+    "eslint": "^3.7.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-config-commercetools": "^4.0.1",
+    "eslint-formatter-pretty": "^1.1.0",
+    "eslint-plugin-import": "^2.0.0",
+    "ghooks": "^1.3.2",
+    "lerna": "2.0.0-beta.30",
+    "lerna-semantic-release": "*",
+    "npm-check-updates": "^2.8.5",
+    "npm-run-all": "^3.1.0",
+    "nyc": "^8.3.1",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.2",
+    "validate-commit-msg": "^2.8.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    },
+    "ghooks": {
+      "commit-msg": "validate-commit-msg",
+      "pre-commit": "./scripts/lint-staged-files.sh"
+    }
+  },
+  "eslintConfig": {
+    "extends": "commercetools",
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "paths": [
+            "src/"
+          ]
+        }
+      }
+    }
+  }
+}

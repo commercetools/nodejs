@@ -1,0 +1,16 @@
+# Logs
+npm-debug.log
+lerna-debug.log
+
+# Dependencies
+node_modules
+.npm
+.released-packages
+
+# Build artifacts
+lib
+coverage
+.nyc_output
+
+# OS clutter
+.DS_Store
