@@ -1,7 +1,8 @@
 #!/bin/bash -e
 
-# package name to run the tests from
+# The package name where the tests should run
 package="${1}"
+# An optiona flag to pass to the test runner (see validation below)
 flag="${2}"
 
 if [ -z "$package" ]; then
@@ -16,6 +17,7 @@ if [ -n "$flag" ]; then
   fi
 fi
 
+# Path to jest executable
 cmd="$(pwd)/node_modules/.bin/jest"
 
 pushd "./packages/${package}"
