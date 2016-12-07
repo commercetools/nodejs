@@ -25,7 +25,7 @@ export default function createHttpMiddleware (options) {
           // TODO: check if this works in the browser
           ...(body ? { 'Content-Length': Buffer.byteLength(body) } : {}),
         },
-        ...(body || {}),
+        ...(body ? { body } : {}),
       },
     )
     .then((res) => {

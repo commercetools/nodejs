@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@commercetools/sdk-middleware-auth": "file:../commercetools-sdk-middleware-auth",
-    "@commercetools/sdk-middleware-http": "file:../commercetools-sdk-middleware-http"
+    "@commercetools/sdk-middleware-http": "file:../commercetools-sdk-middleware-http",
+    "nock": "~9.0.2"
   }
 }
