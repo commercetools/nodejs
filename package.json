@@ -1,17 +1,14 @@
 {
   "private": true,
-  "license": "MIT",
   "scripts": {
     "install": "run-s -s install:*",
     "install:mkdirp-bin": "lerna exec -- mkdirp ./node_modules/.bin/",
     "install:bootstrap": "lerna bootstrap",
     "install:symlink-bin": "lerna exec -- node ../../scripts/symlink-bin.js",
     "clean": "lerna exec -- rm -rf lib/* && lerna clean --yes",
-    "lint": "lerna exec -- npm run lint -s",
+    "lint": "./scripts/lint packages",
     "build": "lerna exec -- npm run build -s",
     "test": "lerna exec -- npm run test -s",
-    "coverage": "lerna exec -- npm run coverage -s",
-    "codecov": "lerna exec -- npm run codecov -s",
     "commit": "git-cz || true",
     "check-updates": "run-p -s check-updates:*",
     "check-updates:root": "ncu --error-level 2",
@@ -25,30 +22,29 @@
     "release:publish": "lerna-semantic-release perform"
   },
   "devDependencies": {
-    "babel-cli": "^6.16.0",
-    "babel-eslint": "^7.0.0",
-    "babel-plugin-istanbul": "^2.0.1",
-    "babel-preset-es2015": "^6.16.0",
-    "chokidar-cli": "^1.2.0",
-    "codecov": "^1.0.1",
-    "commitizen": "^2.8.6",
-    "cross-env": "^3.1.2",
-    "cz-conventional-changelog": "^1.2.0",
-    "cz-lerna-changelog": "^0.3.0",
-    "eslint": "^3.7.1",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-config-commercetools": "^4.0.1",
-    "eslint-formatter-pretty": "^1.1.0",
-    "eslint-plugin-import": "^2.0.0",
-    "ghooks": "^1.3.2",
+    "babel-cli": "6.16.0",
+    "babel-eslint": "7.1.1",
+    "babel-jest": "17.0.2",
+    "babel-plugin-transform-export-extensions": "6.8.0",
+    "babel-plugin-transform-object-rest-spread": "6.19.0",
+    "babel-preset-es2015": "6.16.0",
+    "commitizen": "2.8.6",
+    "cz-conventional-changelog": "1.2.0",
+    "cz-lerna-changelog": "0.3.0",
+    "eslint": "3.10.2",
+    "eslint-config-airbnb": "13.0.0",
+    "eslint-config-commercetools": "4.0.2",
+    "eslint-formatter-pretty": "1.1.0",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "2.2.3",
+    "eslint-plugin-react": "6.7.1",
+    "ghooks": "1.3.2",
+    "jest": "17.0.3",
     "lerna": "2.0.0-beta.30",
     "lerna-semantic-release": "*",
-    "npm-check-updates": "^2.8.5",
-    "npm-run-all": "^3.1.0",
-    "nyc": "^8.3.1",
-    "tap-spec": "^4.1.1",
-    "tape": "^4.6.2",
-    "validate-commit-msg": "^2.8.2"
+    "npm-check-updates": "2.8.5",
+    "npm-run-all": "3.1.0",
+    "validate-commit-msg": "2.8.2"
   },
   "config": {
     "commitizen": {
@@ -56,11 +52,26 @@
     },
     "ghooks": {
       "commit-msg": "validate-commit-msg",
-      "pre-commit": "./scripts/lint-staged-files.sh"
+      "pre-commit": "./scripts/lint-staged-files"
     }
   },
   "eslintConfig": {
     "extends": "commercetools",
+    "env": {
+      "es6": true,
+      "jest": true,
+      "node": true
+    },
+    "rules": {
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": [
+            "**/src/*.js"
+          ]
+        }
+      ]
+    },
     "settings": {
       "import/resolver": {
         "node": {
@@ -70,5 +81,28 @@
         }
       }
     }
+  },
+  "jest": {
+    "globals": {
+      "process.env": {
+        "NODE_ENV": "test"
+      }
+    },
+    "moduleDirectories": [
+      "packages/.*/src"
+    ],
+    "transform": {
+      "^.+\\.js$": "<rootDir>/packages/babel-jest"
+    },
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/packages/.*/dist",
+      "/packages/.*/lib",
+      "/packages/.*/src"
+    ],
+    "testPathDirs": [
+      "packages/.*/test"
+    ]
   }
 }

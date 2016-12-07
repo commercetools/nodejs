@@ -1,8 +1,7 @@
 {
   "presets": ["es2015"],
-  "env": {
-    "test": {
-      "plugins": [ "istanbul" ]
-    }
-  }
+  "plugins": [
+    "transform-export-extensions",
+    "transform-object-rest-spread"
+  ]
 }

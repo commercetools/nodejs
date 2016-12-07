@@ -1,7 +1,12 @@
 coverage/*
+**/coverage/*
 dist/*
+**/dist/*
 lib/*
+**/lib/*
 target/*
+**/target/*
 scripts/*
+**/scripts/*
 node_modules/*
 **/node_modules/*

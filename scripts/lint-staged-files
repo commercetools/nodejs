@@ -9,7 +9,7 @@ FILES="$(git diff --cached --name-only --diff-filter=ACM | grep '\.js$')"
 
 if [ $? -eq 0 ]; then
   # lint these files
-  ./scripts/lint.sh $FILES
+  ./scripts/lint $FILES
 else
   exit 0
 fi

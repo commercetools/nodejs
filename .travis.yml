@@ -3,7 +3,7 @@ node_js:
   - 4
   - 6
 
-before_install: ./scripts/check-npm.sh
+before_install: ./scripts/check-npm
 
 cache:
   directories:
@@ -11,7 +11,7 @@ cache:
 
 deploy:
   provider: script
-  script: ./scripts/deploy.sh
+  script: ./scripts/deploy
   skip_cleanup: true
   on:
     branch: master
