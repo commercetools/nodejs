@@ -1,7 +1,4 @@
-#!/usr/bin/env bash
-
-# Exit with nonzero exit code if anything fails
-set -e
+#!/bin/bash -e
 
 # Configure git
 git config user.name "Travis CI"

@@ -1,0 +1,27 @@
+#!/bin/bash -e
+
+# package name to run the tests from
+package="${1}"
+flag="${2}"
+
+if [ -z "$package" ]; then
+  echo "Missing required package name"
+  exit 1
+fi
+
+if [ -n "$flag" ]; then
+  if [[ "$flag" != "--watch" && "$flag" != "--coverage" ]]; then
+    echo "Only --watch or --coverage mode are supported as flag"
+    exit 1
+  fi
+fi
+
+cmd="$(pwd)/node_modules/.bin/jest"
+
+pushd "./packages/${package}"
+if [ -z "$flag" ]; then
+  eval "$cmd"
+else
+  eval "$cmd $flag"
+fi
+popd
