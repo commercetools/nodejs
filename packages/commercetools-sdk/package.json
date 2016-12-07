@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "name": "@commercetools/sdk",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "commercetools",
+    "nodejs",
+    "sdk"
+  ],
+  "homepage": "https://github.com/commercetools/nodejs",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "author": "",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs.git"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "@commercetools/sdk-middleware-auth": "file:../commercetools-sdk-middleware-auth",
+    "@commercetools/sdk-middleware-http": "file:../commercetools-sdk-middleware-http"
+  }
+}

@@ -10,7 +10,6 @@ node_modules
 # Build artifacts
 lib
 coverage
-.nyc_output
 
 # OS clutter
 .DS_Store
