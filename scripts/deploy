@@ -19,4 +19,4 @@ mv deploy-key ~/.ssh/id_rsa
 npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN -q
 
 # All set up, run the release task
-npm run release
+# npm run release

@@ -86,7 +86,7 @@ describe('buildRequestForClientCredentialsFlow', () => {
 
 describe('getBasicAuth', () => {
   it('return encoded base64 value', () => {
-    expect(getBasicAuth('foo', 'bar')).toBe('Zm9vOmJhcg==')
+    expect(getBasicAuth('foo', 'bar', {})).toBe('Zm9vOmJhcg==')
   })
 
   it('simulate encoding in browser environment', () => {
