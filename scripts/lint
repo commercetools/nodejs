@@ -1,6 +1,4 @@
-#!/usr/bin/env bash
-
-set -e
+#!/bin/bash -e
 
 # Lints all files passed as arguments,
 # unless they are ignored by .eslintignore

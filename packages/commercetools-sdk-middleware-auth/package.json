@@ -8,7 +8,8 @@
     "nodejs",
     "sdk",
     "middleware",
-    "auth"
+    "auth",
+    "oauth"
   ],
   "homepage": "https://github.com/commercetools/nodejs",
   "bugs": "https://github.com/commercetools/nodejs/issues",
@@ -18,10 +19,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
-  },
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch"
   },
   "dependencies": {
     "isomorphic-fetch": "2.2.1"
