@@ -1,0 +1,16 @@
+#!/bin/bash
+
+updateCmd="$(pwd)/node_modules/.bin/ncu"
+lernaCmd="$(pwd)/node_modules/.bin/lerna"
+
+# main dependencies
+eval "$updateCmd --error-level 2"
+resultRoot="$?"
+
+# packages dependencies
+eval "$lernaCmd exec -- $updateCmd --error-level 2"
+resultPackages="$?"
+
+if [ "$resultRoot" -eq 1 ] || [ "$resultPackages" -eq 1 ]; then
+  exit 1
+fi
