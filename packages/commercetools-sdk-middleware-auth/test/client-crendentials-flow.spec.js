@@ -240,4 +240,46 @@ describe('Client Crentials Flow', () => {
       )(request, response)
     }),
   )
+
+  it(
+    'ensure to fetch new token only once and keep track of pending tasks',
+  () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest()
+      const response = createTestResponse({
+        resolve,
+        reject,
+      })
+      const middlewareOptions = createTestMiddlewareOptions()
+      const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
+        middlewareOptions,
+      )
+      let requestCount = 0
+      nock(middlewareOptions.host)
+        .persist() // <-- use the same interceptor for all requests
+        .log(() => (requestCount += 1)) // <-- keep track of the request count
+        .filteringRequestBody(/.*/, '*')
+        .post('/oauth/token', '*')
+        .reply(200, {
+          access_token: 'xxx',
+          expires_in: (Date.now() + (60 * 60 * 24)),
+        })
+
+      // Execute multiple requests at once
+      let nextCount = 0
+      const next = () => {
+        nextCount += 1
+        if (nextCount === 6) {
+          expect(requestCount).toBe(1)
+          resolve()
+        }
+      }
+      authMiddleware(next)(request, response)
+      authMiddleware(next)(request, response)
+      authMiddleware(next)(request, response)
+      authMiddleware(next)(request, response)
+      authMiddleware(next)(request, response)
+      authMiddleware(next)(request, response)
+    }),
+  )
 })
