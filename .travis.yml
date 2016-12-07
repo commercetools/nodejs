@@ -1,21 +1,17 @@
+sudo: false
 language: node_js
 node_js:
-  - 4
   - 6
 
-before_install: ./scripts/check-npm
+cache: 'yarn'
 
-cache:
-  directories:
-  - node_modules
-
-deploy:
-  provider: script
-  script: ./scripts/deploy
-  skip_cleanup: true
-  on:
-    branch: master
-    node: 6
+# deploy:
+#   provider: script
+#   script: ./scripts/deploy
+#   skip_cleanup: true
+#   on:
+#     branch: master
+#     node: 6
 
 env:
   global:
@@ -26,6 +22,4 @@ notifications:
   email: false
 
 script:
-  - npm run check-updates
-  - npm run coverage
-  - npm run codecov
+  - npm run test -- --coverage
