@@ -8,7 +8,7 @@ export default function createAuthMiddlewareForClientCredentialsFlow (options) {
   const cache = {
     // [token]: expirationTime
   }
-  const pendingTasks = []
+  let pendingTasks = []
   let isFetchingToken = false
 
   return next => (request, response) => {
@@ -79,7 +79,11 @@ export default function createAuthMiddlewareForClientCredentialsFlow (options) {
 
           // Dispatch all pending requests
           isFetchingToken = false
-          pendingTasks.forEach((task) => {
+          // Freeze and copy pending queue, reset original one for accepting
+          // new pending tasks
+          const executionQueue = pendingTasks.slice()
+          pendingTasks = []
+          executionQueue.forEach((task) => {
             // Assign the new token in the request header
             const requestWithAuth = mergeAuthHeader(token, task.request)
             next(requestWithAuth, task.response)

@@ -1,43 +1,10 @@
-// TODO: remove
-export const authMiddleware = next => (req, res) => {
-  if (
-    req.headers['authorization'] ||
-    req.headers['Authorization']
-  ) {
-    next(req, res)
-    return
-  }
-
-  setTimeout(() => {
-    const requestWithAuth = {
-      ...req,
-      headers: {
-        ...req.headers,
-        Authorization: '123',
-      },
-    }
-    next(requestWithAuth, res)
-  }, 500)
-}
-
-// TODO: remove
-export const httpMiddleware = next => (req, res) => {
-  setTimeout(() => {
-    const parsedResponse = {
-      ...res,
-      body: {
-        foo: 'bar',
-      },
-      statusCode: 200,
-    }
-    next(req, parsedResponse)
-  }, 500)
-}
-
-export function createClient (options) {
+export default function createClient (options) {
   const {
     middlewares,
   } = options
+
+  if (!middlewares || !Array.isArray(middlewares) || !middlewares.length)
+    throw new Error('You need to provide at least one middleware')
 
   return {
     execute (request) {
@@ -45,17 +12,20 @@ export function createClient (options) {
         const response = {
           resolve,
           reject,
-          // error: null,
           body: null,
-          raw: null,
+          error: null,
           statusCode: null,
+          // raw: null, // ??
         }
         const resolver = (rq, rs) => {
-          if (rs.statusCode > 399)
+          if (rs.error)
             // TODO: pass all necessary information
             // (original req, statusCode, ...)
-            return reject(rs.body)
-          return resolve(rs.body)
+            return reject(rs.error)
+          return resolve({
+            body: rs.body,
+            statusCode: rs.statusCode,
+          })
         }
 
         const dispatch = compose(...middlewares)(resolver)
