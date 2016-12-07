@@ -8,6 +8,8 @@ export default function createAuthMiddlewareForClientCredentialsFlow (options) {
   const cache = {
     // [token]: expirationTime
   }
+  const pendingTasks = []
+  let isFetchingToken = false
 
   return next => (request, response) => {
     const currentAuthHeader = (
@@ -37,6 +39,15 @@ export default function createAuthMiddlewareForClientCredentialsFlow (options) {
       // Token is not present or is invalid. Request a new token...
     }
 
+    // Keep pending tasks until a token is fetched
+    pendingTasks.push({ request, response })
+
+    // If a token is currently being fetched, just wait ;)
+    if (isFetchingToken) return
+
+    // Mark that a token is being fetched
+    isFetchingToken = true
+
     const {
       basicAuth,
       url,
@@ -65,9 +76,14 @@ export default function createAuthMiddlewareForClientCredentialsFlow (options) {
           const expirationTime = calculateExpirationTime(expiresIn)
           // Cache new token
           Object.assign(cache, { [token]: expirationTime })
-          // Assign the new token in the request header
-          const requestWithAuth = mergeAuthHeader(result.access_token, request)
-          next(requestWithAuth, response)
+
+          // Dispatch all pending requests
+          isFetchingToken = false
+          pendingTasks.forEach((task) => {
+            // Assign the new token in the request header
+            const requestWithAuth = mergeAuthHeader(token, task.request)
+            next(requestWithAuth, task.response)
+          })
         })
 
       // Handle error response
