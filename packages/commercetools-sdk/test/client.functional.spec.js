@@ -6,8 +6,9 @@ import {
 import {
   createHttpMiddleware,
 } from '../../commercetools-sdk-middleware-http/src'
-// import authMiddleware from '@commercetools/sdk-middleware-auth'
-// import httpMiddleware from '@commercetools/sdk-middleware-http'
+// eslint-disable-next-line max-len
+// import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
+// import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import {
   createClient,
 } from '../src'
