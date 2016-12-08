@@ -22,4 +22,4 @@ notifications:
   email: false
 
 script:
-  - npm run test -- --coverage
+  - npm run coverage:ci

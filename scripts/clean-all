@@ -1,0 +1,17 @@
+#!/bin/bash -e
+
+cmd="rm -rf node_modules; rm -rf coverage; rm -rf lib"
+
+# Clean root
+eval "$cmd"
+echo "Cleaned root"
+echo ""
+
+# Clean packages
+for d in packages/* ; do
+  pushd "$d"
+  eval "$cmd"
+  echo "Cleaned $d"
+  echo ""
+  popd
+done
