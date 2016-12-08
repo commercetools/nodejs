@@ -1,5 +1,6 @@
 /* global fetch */
 import 'isomorphic-fetch'
+import parseHeaders from './parse-headers'
 
 const defaultApiHost = 'https://api.sphere.io'
 
@@ -78,20 +79,4 @@ export default function createHttpMiddleware (options) {
       next(request, { ...response, error })
     })
   }
-}
-
-function parseHeaders (headers) {
-  if (headers.raw)
-    // node-fetch
-    return headers.raw()
-
-  // Tmp fix for Firefox until it supports iterables
-  if (!headers.forEach) return {}
-
-  // whatwg-fetch
-  const map = {}
-  headers.forEach((value, name) => {
-    map[name] = value
-  })
-  return map
 }
