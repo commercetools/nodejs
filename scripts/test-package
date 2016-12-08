@@ -2,7 +2,7 @@
 
 # The package name where the tests should run
 package="${1}"
-# An optiona flag to pass to the test runner (see validation below)
+# An optional flag to pass to the test runner (see validation below)
 flag="${2}"
 
 if [ -z "$package" ]; then

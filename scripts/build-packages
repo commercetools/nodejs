@@ -1,0 +1,12 @@
+#!/bin/bash -e
+
+# Path to jest executable
+cmd="$(pwd)/node_modules/.bin/babel"
+
+for d in packages/* ; do
+  pushd "$d"
+  eval "$cmd src --out-dir lib"
+  echo "Built $d"
+  echo ""
+  popd
+done
