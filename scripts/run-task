@@ -54,6 +54,9 @@ fs.readdirSync(packagesDir)
   .map(file => path.resolve(packagesDir, file))
   .filter(f => fs.lstatSync(path.resolve(f)).isDirectory())
   .forEach(packagePath => {
+    const dirParts = packagePath.split('packages/')
+    const packageName = dirParts[dirParts.length - 1]
+
     const localPackageDefinition = parsePackageJson(
       path.resolve(packagePath, 'package.json')
     )
@@ -61,17 +64,28 @@ fs.readdirSync(packagesDir)
       localPackageDefinition.scripts &&
       localPackageDefinition.scripts[taskName]
     )
-
     const taskCommand = localTaskCommand || mainTaskCommand
 
-    const dirParts = packagePath.split('packages/')
-    const packageName = dirParts[dirParts.length - 1]
-    const commandType = chalk.underline(localTaskCommand ? 'custom' : 'main')
+    const commandType = taskCommand
+      ? chalk.underline(localTaskCommand ? 'custom' : 'main')
+      : ''
     process.stdout.write(
       chalk.dim(`Running ${commandType} command (`) +
       packageName +
       chalk.dim(')\n')
     )
+
+    if (!taskCommand) {
+      process.stdout.write(`${chalk.red(`[  ERROR  ]`)}\n`)
+      process.stdout.write(
+        chalk.red(
+          `Could not find any task for ${chalk.underline(name)} command, ` +
+          'both in the main package.json or in the local package.json\n\n'
+        )
+      )
+      thereWasAnError = true
+      return
+    }
 
     try {
       const result = execSync(
