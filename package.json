@@ -1,11 +1,12 @@
 {
   "private": true,
+  "license": "MIT",
   "engines": {
     "node": ">=6",
     "npm": ">=3"
   },
   "scripts": {
-    "postinstall": "check-node-version --package && lerna bootstrap",
+    "postinstall": "check-node-version --package && lerna bootstrap && npm run build",
     "check-updates": "./scripts/check-updates",
     "clean": "rm -rf coverage && ./scripts/run-task clean",
     "build": "./scripts/run-task build",
@@ -13,7 +14,7 @@
     "lint": "./scripts/lint packages",
     "test": "npm run build && lerna exec -- jest",
     "coverage": "npm run build && jest --no-watchman --coverage",
-    "coverage:ci": "npm run coverage && codecov",
+    "coverage:ci": "jest --no-watchman --coverage && codecov",
     "test:package": "npm run build && ./scripts/test-package",
     "release": "run-s -s release:*",
     "release:changelog": "lerna-semantic-release post && git add packages/*/CHANGELOG.md",
