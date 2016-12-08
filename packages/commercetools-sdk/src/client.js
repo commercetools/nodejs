@@ -1,7 +1,10 @@
-export default function createClient (options) {
+export default function createClient (options = {}) {
   const {
     middlewares,
   } = options
+
+  if (middlewares && !Array.isArray(middlewares))
+    throw new Error('Middlewares should be an array')
 
   if (!middlewares || !Array.isArray(middlewares) || !middlewares.length)
     throw new Error('You need to provide at least one middleware')
@@ -37,9 +40,6 @@ export default function createClient (options) {
 
 
 function compose (...args) {
-  if (args.length === 0)
-    return arg => arg
-
   const funcs = args.filter(func => typeof func === 'function')
 
   if (funcs.length === 1)
