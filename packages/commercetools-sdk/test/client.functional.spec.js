@@ -1,14 +1,12 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
 import nock from 'nock'
 import {
   createAuthMiddlewareForClientCredentialsFlow,
-} from '../../commercetools-sdk-middleware-auth/src'
+} from '@commercetools/sdk-middleware-auth'
 import {
   createHttpMiddleware,
-} from '../../commercetools-sdk-middleware-http/src'
-// eslint-disable-next-line max-len
-// import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
-// import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
+} from '@commercetools/sdk-middleware-http'
+/* eslint-enable import/no-extraneous-dependencies */
 import {
   createClient,
 } from '../src'
