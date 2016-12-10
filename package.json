@@ -2,8 +2,8 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": ">=6",
-    "npm": ">=3"
+    "node": ">=4",
+    "npm": ">=2"
   },
   "scripts": {
     "postinstall": "check-node-version --package && lerna bootstrap && npm run build",
