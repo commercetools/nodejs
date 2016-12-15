@@ -17,9 +17,6 @@
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
   },
-  "scripts": {
-    "task:clean": "rm -rf lib"
-  },
   "devDependencies": {
     "@commercetools/sdk-middleware-auth": "*",
     "@commercetools/sdk-middleware-http": "*",
