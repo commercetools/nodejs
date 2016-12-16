@@ -1,14 +1,13 @@
 {
   "private": true,
-  "name": "@commercetools/sdk-middleware-auth",
+  "name": "@commercetools/sdk-middleware-queue",
   "version": "1.0.0",
-  "description": "Middleware for different authentication flows of commercetools platform API, to use with @commercetools/sdk-client",
+  "description": "Middleware for queueing requests, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
     "sdk",
     "middleware",
-    "auth",
-    "oauth"
+    "queue"
   ],
   "homepage": "https://github.com/commercetools/nodejs",
   "bugs": "https://github.com/commercetools/nodejs/issues",
@@ -18,14 +17,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
-  },
-  "scripts": {
-    "task:clean": "rm -rf lib"
-  },
-  "dependencies": {
-    "isomorphic-fetch": "2.2.1"
-  },
-  "devDependencies": {
-    "nock": "~9.0.2"
   }
 }

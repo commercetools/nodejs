@@ -1,6 +1,6 @@
 # commercetools-sdk-middlware-http
 
-Auth middlewares collection for usage with `@commercetools/sdk-client`
+Middleware for making http requests for usage with `@commercetools/sdk-client`
 
 ## Usage
 
