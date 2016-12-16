@@ -1,0 +1,6 @@
+export const query = 'query'
+export const queryOne = 'queryOne'
+export const queryExpand = 'queryExpand'
+export const queryString = 'queryString'
+export const search = 'search'
+export const projection = 'projection'

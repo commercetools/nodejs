@@ -2,10 +2,9 @@
   "private": true,
   "name": "@commercetools/sdk-middleware-auth",
   "version": "1.0.0",
-  "description": "",
+  "description": "Middleware for different authentication flows of commercetools platform API, to use with @commercetools/sdk",
   "keywords": [
     "commercetools",
-    "nodejs",
     "sdk",
     "middleware",
     "auth",
