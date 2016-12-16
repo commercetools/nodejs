@@ -1,8 +1,6 @@
-# commercetools-sdk
+# commercetools-sdk-client
 
 TODO:
-- request builder
-  - services
 - flow
 - UMD build (webpack)
 - travis build

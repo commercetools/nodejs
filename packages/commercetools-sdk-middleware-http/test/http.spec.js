@@ -6,7 +6,7 @@ import {
 
 function createTestRequest (options) {
   return {
-    url: '',
+    uri: '',
     method: 'GET',
     body: null,
     headers: {},
@@ -35,7 +35,7 @@ describe('Http', () => {
   it('execute a get request (success)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
-        url: '/foo/bar',
+        uri: '/foo/bar',
       })
       const response = createTestResponse({
         resolve,
@@ -70,7 +70,7 @@ describe('Http', () => {
   it('execute a post request (success)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
-        url: '/foo/bar',
+        uri: '/foo/bar',
         method: 'POST',
         body: { hello: 'world' },
       })
@@ -108,7 +108,7 @@ describe('Http', () => {
   it('handle failed response (network error)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
-        url: '/foo/bar',
+        uri: '/foo/bar',
       })
       const response = createTestResponse({
         resolve,
@@ -142,7 +142,7 @@ describe('Http', () => {
   it('handle failed response (api error)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
-        url: '/foo/bar',
+        uri: '/foo/bar',
       })
       const response = createTestResponse({
         resolve,

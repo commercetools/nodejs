@@ -1,12 +1,11 @@
 # commercetools-sdk-middlware-http
 
-Auth middlewares collection for usage with `@commercetools/sdk`
+Auth middlewares collection for usage with `@commercetools/sdk-client`
 
 ## Usage
 
 ```js
-// Middleware for client credentials flow
-import { createClient } from '@commercetools/sdk'
+import { createClient } from '@commercetools/sdk-client'
 import {
   createHttpMiddleware,
 } from '@commercetools/sdk-middleware-http'

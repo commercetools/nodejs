@@ -11,7 +11,7 @@ export default function createHttpMiddleware (options) {
   } = options
 
   return next => (request, response) => {
-    const url = host + request.url
+    const url = host + request.uri
     const body = typeof request.body === 'string'
       ? request.body
       : JSON.stringify(request.body)

@@ -11,6 +11,7 @@ export default function createClient (options = {}) {
 
   return {
     execute (request) {
+      // TODO: validate request shape
       return new Promise((resolve, reject) => {
         const response = {
           resolve,
