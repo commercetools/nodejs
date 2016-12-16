@@ -12,7 +12,7 @@ import {
 } from '../src'
 
 const request = {
-  url: '/test/products',
+  uri: '/test/products',
   method: 'GET',
   body: null,
   headers: {},
@@ -47,22 +47,22 @@ describe('Client integration', () => {
       access_token: 'xxx',
       expires_in: (Date.now() + (60 * 60 * 24)),
     })
-  const url1 = '/test/products/1'
-  const url2 = '/test/products/2'
+  const uri1 = '/test/products/1'
+  const uri2 = '/test/products/2'
   // Mock http
   nock('https://api.sphere.io')
-    .get(url1)
+    .get(uri1)
     .reply(200, {
       id: '123',
       version: 1,
     })
-    .get(url2)
+    .get(uri2)
     .reply(400, {
       message: 'Invalid password',
     })
 
   it('execute and resolve a simple request', () =>
-    client.execute({ ...request, url: url1 })
+    client.execute({ ...request, uri: uri1 })
     .then((response) => {
       expect(response).toEqual({
         body: {
@@ -75,7 +75,7 @@ describe('Client integration', () => {
   )
 
   it('execute and reject a request', () =>
-    client.execute({ ...request, url: url2 })
+    client.execute({ ...request, uri: uri2 })
     .then(() =>
       Promise.reject(
         'This function should never be called, the response was rejected',

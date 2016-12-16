@@ -1,6 +1,6 @@
 # commercetools-sdk-middlware-auth
 
-Auth middlewares collection for usage with `@commercetools/sdk`
+Auth middlewares collection for usage with `@commercetools/sdk-client`
 
 ## Supported middleware types
 - `client-credentials-flow` ([link](http://dev.commercetools.com/http-api-authorization.html#client-credentials-flow))
@@ -11,8 +11,7 @@ Auth middlewares collection for usage with `@commercetools/sdk`
 ## Usage
 
 ```js
-// Middleware for client credentials flow
-import { createClient } from '@commercetools/sdk'
+import { createClient } from '@commercetools/sdk-client'
 import {
   createAuthMiddlewareForClientCredentialsFlow,
 } from '@commercetools/sdk-middleware-auth'

@@ -1,12 +1,13 @@
 {
   "private": true,
-  "name": "@commercetools/sdk",
+  "name": "@commercetools/sdk-client",
   "version": "1.0.0",
-  "description": "Node.js SDK for usage of commercetools platform API",
+  "description": "Node.js SDK Client for usage of commercetools platform API",
   "keywords": [
     "commercetools",
     "sdk",
-    "api"
+    "api",
+    "client"
   ],
   "homepage": "https://github.com/commercetools/nodejs",
   "bugs": "https://github.com/commercetools/nodejs/issues",
