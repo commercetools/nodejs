@@ -2,7 +2,7 @@
   "private": true,
   "name": "@commercetools/sdk-middleware-http",
   "version": "1.0.0",
-  "description": "Middleware for http requests, to use with @commercetools/sdk",
+  "description": "Middleware for http requests, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
     "sdk",
