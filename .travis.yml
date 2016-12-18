@@ -25,3 +25,4 @@ notifications:
 script:
   - npm run lint
   - npm run coverage:ci
+  - npm run it
