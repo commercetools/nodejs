@@ -149,17 +149,20 @@ describe('Http', () => {
         reject,
       })
       const next = (req, res) => {
+        const expectedError = new Error('oops')
+        expectedError.body = {
+          message: 'oops',
+          error: [{ code: 'InvalidField' }],
+        }
+        expectedError.code = 400
+        expectedError.statusCode = 400
         expect(res).toEqual({
           ...response,
-          body: {
-            message: 'oops',
-            error: [{ code: 'InvalidField' }],
-          },
           statusCode: 400,
           headers: {
             'content-type': ['application/json'],
           },
-          error: new Error('oops'),
+          error: expectedError,
         })
         resolve()
       }
