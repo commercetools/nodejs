@@ -2,7 +2,9 @@ export default function loadCredentials (projectKey) {
   // 1. Try to read credentials from ENV variables first.
   // The format is:
   //   CREDENTIALS_<PROJECT_KEY>=<CLIENT_ID:CLIENT_SECRET>
-  const envVarKey = `CREDENTIALS_${projectKey.toUpperCase()}`
+  // E.g.: projectKey = `foo-123`
+  //   CREDENTIALS_FOO_123=<CLIENT_ID:CLIENT_SECRET>
+  const envVarKey = `CREDENTIALS_${projectKey.toUpperCase().replace('-', '_')}`
   const envVar = process.env[envVarKey]
   if (envVar) {
     const [ clientId, clientSecret ] = envVar.split(':')
