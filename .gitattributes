@@ -1,0 +1,1 @@
+integration-tests/credentials.js filter=git-crypt diff=git-crypt
