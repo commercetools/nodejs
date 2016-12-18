@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "name": "@commercetools/integration-tests",
+  "version": "1.0.0",
+  "dependencies": {
+    "@commercetools/api-request-builder": "*",
+    "@commercetools/sdk-client": "*",
+    "@commercetools/sdk-middleware-auth": "*",
+    "@commercetools/sdk-middleware-http": "*",
+    "@commercetools/sdk-middleware-queue": "*",
+    "lodash.omit": "4.5.0"
+  }
+}

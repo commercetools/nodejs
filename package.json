@@ -12,6 +12,9 @@
     "build": "lerna exec -- babel src --out-dir lib",
     "lint": "./scripts/lint packages",
     "test": "npm run build && lerna exec -- jest",
+    "it": "npm run it:install && npm run it:run",
+    "it:run": "jest --config integration-tests/config.json",
+    "it:install": "npm run build && ./scripts/install-npm-packages-for-integration-tests",
     "coverage": "npm run build && jest --no-watchman --coverage",
     "coverage:ci": "jest --no-watchman --coverage && codecov",
     "test:package": "npm run build && ./scripts/test-package",
@@ -91,6 +94,8 @@
     },
     "testPathIgnorePatterns": [
       "/node_modules/",
+      "/integration-tests/",
+      "/packages/.*/node_modules",
       "/packages/.*/dist",
       "/packages/.*/lib"
     ]

@@ -53,7 +53,7 @@ export default function createHttpMiddleware (options) {
         } catch (error) {
           /* noop */
         }
-        // TODO: use typed errors
+        // TODO: use typed errors based on status code
         // - BadRequest
         // - Unauthorized
         // - Forbidden
@@ -64,10 +64,12 @@ export default function createHttpMiddleware (options) {
         // - HttpError
         const error = new Error(parsed ? parsed.message : text)
         if (parsed) error.body = parsed
+        error.code = res.status
+        error.statusCode = res.status
+
         // Let the final resolver to reject the promise
         const parsedResponse = {
           ...response,
-          body: parsed,
           statusCode: res.status,
           headers: parseHeaders(res.headers),
           error,

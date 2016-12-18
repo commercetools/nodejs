@@ -79,12 +79,16 @@ export default function createService (definition) {
     ),
 
     // Call this method to get the built request URI
-    build () {
+    build (options) {
+      const { projectKey } = options
+
       const endpointWithId = this.params.id
         ? `${this.baseEndpoint}/${this.params.id}`
         : this.baseEndpoint
       const queryParams = buildQueryString(this.params)
-      const uri = endpointWithId + (queryParams ? `?${queryParams}` : '')
+      const uri = (projectKey ? `/${projectKey}` : '') +
+        endpointWithId +
+        (queryParams ? `?${queryParams}` : '')
 
       setDefaultParams.call(this)
       return uri

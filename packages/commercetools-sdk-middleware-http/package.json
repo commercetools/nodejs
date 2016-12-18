@@ -18,9 +18,9 @@
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
   },
-  "scripts": {
-    "task:clean": "rm -rf lib"
-  },
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "isomorphic-fetch": "2.2.1"
   },

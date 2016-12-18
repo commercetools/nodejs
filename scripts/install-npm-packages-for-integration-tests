@@ -1,0 +1,23 @@
+#!/bin/bash -e
+
+tars=()
+
+echo "--> Pack all packages:"
+for dir in $(ls ./packages); do
+  pushd "./packages/$dir" > /dev/null
+  echo "$dir"
+  tarName=$(npm pack)
+  tars=(${tars[@]} "$(pwd)/${tarName}")
+  popd > /dev/null
+done
+
+echo "--> Install dependencies and packages for integration-tests:"
+pushd "./integration-tests" > /dev/null
+npm i ${tars[@]}
+npm i
+popd > /dev/null
+
+echo "--> Cleanup tarballs"
+for tar in "${tars[@]}"; do
+  rm ${tar}
+done
