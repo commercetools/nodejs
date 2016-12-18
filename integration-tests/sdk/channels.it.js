@@ -10,11 +10,13 @@ import {
   createQueueMiddleware,
 } from '@commercetools/sdk-middleware-queue'
 import omit from 'lodash.omit'
+import loadCredentials from '../load-credentials'
 
-// FIXME
-const projectKey = 'foo'
-const clientId = '123'
-const clientSecret = 'secret'
+const {
+  projectKey,
+  clientId,
+  clientSecret,
+} = loadCredentials('node-sdk-integration-tests')
 
 const ignoredResponseKeys = [ 'id', 'createdAt', 'lastModifiedAt' ]
 
