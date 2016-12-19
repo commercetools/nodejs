@@ -77,4 +77,34 @@ describe('createService', () => {
      /Definition requires `features` to be a non empty array/,
     )
   })
+
+  describe('build', () => {
+    const options = {
+      type: 'foo',
+      endpoint: '/foo',
+      features: ['queryOne', 'queryExpand'],
+    }
+    it('only base endpoint', () => {
+      expect(createService(options).build()).toBe('/foo')
+    })
+    it('endpoint with id', () => {
+      expect(createService(options).byId('123').build()).toBe('/foo/123')
+    })
+    it('endpoint with query params', () => {
+      expect(createService(options).expand('channel').build())
+        .toBe('/foo?expand=channel')
+    })
+    it('endpoint with projectKey', () => {
+      expect(createService(options).build({ projectKey: 'test-123' }))
+        .toBe('/test-123/foo')
+    })
+    it('full endpoint', () => {
+      expect(
+        createService(options)
+        .byId('123')
+        .expand('channel')
+        .build({ projectKey: 'test-123' }),
+      ).toBe('/test-123/foo/123?expand=channel')
+    })
+  })
 })
