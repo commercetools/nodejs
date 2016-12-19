@@ -2,6 +2,16 @@
   "presets": ["es2015"],
   "plugins": [
     "transform-export-extensions",
-    "transform-object-rest-spread"
+    "transform-flow-strip-types",
+    "transform-object-rest-spread",
+    [
+      "module-resolver",
+      {
+        "cwd": "./",
+        "alias": {
+          "types": "./types"
+        }
+      }
+    ]
   ]
 }

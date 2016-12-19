@@ -1,20 +1,38 @@
+/* @flow */
+import type {
+  AuthMiddlewareOptions,
+  Middleware,
+  Request as ClientRequest,
+  Response as ClientResponse,
+} from 'types/sdk'
+
 /* global fetch */
 import 'isomorphic-fetch'
 import {
   buildRequestForClientCredentialsFlow,
 } from './build-requests'
 
-export default function createAuthMiddlewareForClientCredentialsFlow (options) {
-  const cache = {
+type TokensCache = {
+  [key: string]: number;
+}
+type Task = {
+  request: ClientRequest;
+  response: ClientResponse;
+}
+
+export default function createAuthMiddlewareForClientCredentialsFlow (
+  options: AuthMiddlewareOptions,
+): Middleware {
+  const cache: TokensCache = {
     // [token]: expirationTime
   }
-  let pendingTasks = []
+  let pendingTasks: Array<Task> = []
   let isFetchingToken = false
 
-  return next => (request, response) => {
+  return next => (request: ClientRequest, response: ClientResponse) => {
     const currentAuthHeader = (
-      request.headers['authorization'] ||
-      request.headers['Authorization']
+      (request.headers && request.headers['authorization']) ||
+      (request.headers && request.headers['Authorization'])
     )
 
     if (currentAuthHeader) {
@@ -61,16 +79,16 @@ export default function createAuthMiddlewareForClientCredentialsFlow (options) {
         headers: {
           Authorization: `Basic ${basicAuth}`,
           // TODO: check if this works in the browser
-          'Content-Length': Buffer.byteLength(body),
+          'Content-Length': Buffer.byteLength(body).toString(),
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body,
       },
     )
-    .then((res) => {
+    .then((res: Response): Promise<*> => {
       if (res.ok)
         return res.json()
-        .then((result) => {
+        .then((result: Object) => {
           const token = result.access_token
           const expiresIn = result.expires_in
           const expirationTime = calculateExpirationTime(expiresIn)
@@ -92,14 +110,14 @@ export default function createAuthMiddlewareForClientCredentialsFlow (options) {
 
       // Handle error response
       return res.text()
-      .then((text) => {
+      .then((text: any) => {
         let parsed
         try {
           parsed = JSON.parse(text)
         } catch (error) {
           /* noop */
         }
-        const error = new Error(parsed ? parsed.message : text)
+        const error: Object = new Error(parsed ? parsed.message : text)
         if (parsed) error.body = parsed
         response.reject(error)
       })
@@ -110,7 +128,7 @@ export default function createAuthMiddlewareForClientCredentialsFlow (options) {
   }
 }
 
-function mergeAuthHeader (token, req) {
+function mergeAuthHeader (token: string, req: ClientRequest): ClientRequest {
   return {
     ...req,
     headers: {
@@ -120,7 +138,7 @@ function mergeAuthHeader (token, req) {
   }
 }
 
-function calculateExpirationTime (expiresIn) {
+function calculateExpirationTime (expiresIn: number): number {
   return (
     Date.now() +
     (expiresIn * 1000)

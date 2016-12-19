@@ -1,0 +1,13 @@
+[ignore]
+.*/node_modules/config-chain/.*
+.*/node_modules/conventional-changelog-core/.*
+.*/node_modules/findup/.*
+.*/node_modules/fixtures/.*
+.*/node_modules/.*/fixtures/.*
+
+[include]
+
+[libs]
+
+[options]
+module.name_mapper='^types/\(.*\)$' -> '<PROJECT_ROOT>/types/\1.js'

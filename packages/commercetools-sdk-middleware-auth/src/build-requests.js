@@ -1,11 +1,24 @@
+/* @flow */
+import type {
+  AuthMiddlewareOptions,
+} from 'types/sdk'
+
 /* global window */
 import * as authScopes from './scopes'
+
+type BuiltRequestParams = {
+  basicAuth: string;
+  url: string;
+  body: string;
+}
 
 const defaultAuthHost = 'https://auth.sphere.io'
 
 // POST https://{host}/oauth/token?grant_type=client_credentials&scope={scope}
 // Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
-export function buildRequestForClientCredentialsFlow (options) {
+export function buildRequestForClientCredentialsFlow (
+  options: AuthMiddlewareOptions,
+): BuiltRequestParams {
   const {
     host = defaultAuthHost,
     projectKey,
@@ -46,7 +59,11 @@ export function buildRequestForAnonymousSessionFlow () {
   // TODO
 }
 
-export function getBasicAuth (username, password, windowObject = window) {
+export function getBasicAuth (
+  username: string,
+  password: string,
+  windowObject: Object = window,
+): string {
   const basicAuth = `${username}:${password}`
   if (
     windowObject &&

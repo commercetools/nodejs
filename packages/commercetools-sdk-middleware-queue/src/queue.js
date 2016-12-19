@@ -1,12 +1,28 @@
-export default function createHttpMiddleware (options) {
+/* @flow */
+import type {
+  QueueMiddlewareOptions,
+  Dispatch,
+  Middleware,
+  Request,
+  Response,
+} from 'types/sdk'
+
+type Task = {
+  request: Request;
+  response: Response;
+}
+
+export default function createHttpMiddleware (
+  options: QueueMiddlewareOptions,
+): Middleware {
   const {
     concurrency = 20,
   } = options
 
-  const queue = []
+  const queue: Array<Task> = []
   let runningCount = 0
 
-  const dequeue = (next) => {
+  const dequeue = (next: Dispatch) => {
     // We assume here that this task has been completed
     runningCount -= 1
 
@@ -18,17 +34,17 @@ export default function createHttpMiddleware (options) {
     }
   }
 
-  return next => (request, response) => {
+  return next => (request: Request, response: Response) => {
     // Override response `resolve` and `reject` to know when the request has
     // been completed and therefore trigger a pending task in the queue.
     const patchedResponse = {
       ...response,
-      resolve (data) {
+      resolve (data: any) {
         // Resolve original promise
         response.resolve(data)
         dequeue(next)
       },
-      reject (error) {
+      reject (error: any) {
         // Reject original promise
         response.reject(error)
         dequeue(next)

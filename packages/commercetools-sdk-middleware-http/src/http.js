@@ -1,16 +1,26 @@
+/* @flow */
+import type {
+  HttpMiddlewareOptions,
+  Middleware,
+  Request as ClientRequest,
+  Response as ClientResponse,
+} from 'types/sdk'
+
 /* global fetch */
 import 'isomorphic-fetch'
 import parseHeaders from './parse-headers'
 
 const defaultApiHost = 'https://api.sphere.io'
 
-export default function createHttpMiddleware (options) {
+export default function createHttpMiddleware (
+  options: HttpMiddlewareOptions,
+): Middleware {
   const {
     host = defaultApiHost,
     // TODO: other options?
   } = options
 
-  return next => (request, response) => {
+  return next => (request: ClientRequest, response: ClientResponse) => {
     const url = host + request.uri
     const body = typeof request.body === 'string'
       ? request.body
@@ -24,15 +34,19 @@ export default function createHttpMiddleware (options) {
           'Content-Type': 'application/json',
           ...request.headers,
           // TODO: check if this works in the browser
-          ...(body ? { 'Content-Length': Buffer.byteLength(body) } : {}),
+          ...(
+            body
+              ? { 'Content-Length': Buffer.byteLength(body).toString() }
+              : {}
+          ),
         },
         ...(body ? { body } : {}),
       },
     )
-    .then((res) => {
+    .then((res: Response): Promise<*> => {
       if (res.ok)
         return res.json()
-        .then((result) => {
+        .then((result: Object) => {
           const parsedResponse = {
             ...response,
             body: result,
@@ -45,7 +59,7 @@ export default function createHttpMiddleware (options) {
 
       // Network request
       return res.text()
-      .then((text) => {
+      .then((text: any) => {
         // Try to parse the error response as JSON
         let parsed
         try {
@@ -62,7 +76,7 @@ export default function createHttpMiddleware (options) {
         // - ServiceUnavailable
         // - NotFound
         // - HttpError
-        const error = new Error(parsed ? parsed.message : text)
+        const error: Object = new Error(parsed ? parsed.message : text)
         if (parsed) error.body = parsed
         error.code = res.status
         error.statusCode = res.status
