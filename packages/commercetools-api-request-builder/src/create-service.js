@@ -36,7 +36,6 @@ export default function createService (definition) {
   return classify({
     type,
     features,
-    baseEndpoint: endpoint,
     params: getDefaultQueryParams(),
 
     ...(
@@ -79,15 +78,17 @@ export default function createService (definition) {
     ),
 
     // Call this method to get the built request URI
-    build (options) {
+    // Pass some options to further configure the URI:
+    // - `projectKey`: will prefix the URI with the given projectKey
+    build (options = {}) {
       const { projectKey } = options
 
-      const endpointWithId = this.params.id
-        ? `${this.baseEndpoint}/${this.params.id}`
-        : this.baseEndpoint
       const queryParams = buildQueryString(this.params)
-      const uri = (projectKey ? `/${projectKey}` : '') +
-        endpointWithId +
+
+      const uri =
+        (projectKey ? `/${projectKey}` : '') +
+        endpoint +
+        (this.params.id ? `/${this.params.id}` : '') +
         (queryParams ? `?${queryParams}` : '')
 
       setDefaultParams.call(this)
