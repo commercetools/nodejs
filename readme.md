@@ -17,20 +17,12 @@
   </a>
 </p>
 
-## About
-This repository is managed as a monorepo; it's composed of many npm packages. To make managing this repository easy we use [Lerna](https://github.com/lerna/lerna).
-
-## Getting started
-To get everything working `npm install` will also trigger some additional commands that symlink internal packages and common development dependencies. For all common commands such as `npm test` running from root will test all packages. To test a specific package you'll have to run `npm test` from within that package directory.
-
-## Packages
-### Core Packages
-
-| Package | Version | Dependencies |
-|--------|-------|------------|
-| [`placeholder`](/packages/placeholder) | [![placeholder Version][placeholder-version-icon]][placeholder-version] | [![placeholder Dependencies Status][placeholder-dependencies-icon]][placeholder-dependencies] |
-
-[placeholder-version]: https://www.npmjs.com/package/@commercetools/placeholder
-[placeholder-version-icon]: https://img.shields.io/npm/v/@commercetools/placeholder.svg?style=flat-square
-[placeholder-dependencies]: https://david-dm.org/Siilwyn/lerna-labs?path=packages/placeholder
-[placeholder-dependencies-icon]: https://img.shields.io/david/Siilwyn/lerna-labs.svg?path=packages/placeholder&style=flat-square
+TODO:
+- UMD build (webpack), specific for some packages
+- readme for `sdk-client`
+- think about how to re-implement `process` fn
+- basic setup for gitbook documentation
+  - document middlewareAPI contract
+  - document usage of new sdk
+  - document migration
+- test + check release process (+ changelog)
