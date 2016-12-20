@@ -7,7 +7,7 @@ export type ClientRequest = {
   body?: string | Object;
   headers?: {
     [key: string]: string;
-  };
+  }
 }
 export type ClientResponse = {
   resolve: Function;
@@ -25,10 +25,10 @@ export type ClientOptions = {
   middlewares?: Array<Middleware>;
 }
 // TODO: specify resolve/reject shape
-export type ClientResult = Object
+export type ClientResult = Object;
 export type Client = {
-  execute: (request: ClientRequest) => Promise<ClientResult>
-  }
+  execute: (request: ClientRequest) => Promise<ClientResult>;
+}
 
 
 /* Middlewares */
