@@ -2,8 +2,8 @@
 import type {
   AuthMiddlewareOptions,
   Middleware,
-  Request as ClientRequest,
-  Response as ClientResponse,
+  ClientRequest,
+  ClientResponse,
 } from 'types/sdk'
 
 /* global fetch */

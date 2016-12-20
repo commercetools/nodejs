@@ -3,13 +3,13 @@ import type {
   QueueMiddlewareOptions,
   Dispatch,
   Middleware,
-  Request,
-  Response,
+  ClientRequest,
+  ClientResponse,
 } from 'types/sdk'
 
 type Task = {
-  request: Request;
-  response: Response;
+  request: ClientRequest;
+  response: ClientResponse;
 }
 
 export default function createHttpMiddleware (
@@ -34,7 +34,7 @@ export default function createHttpMiddleware (
     }
   }
 
-  return next => (request: Request, response: Response) => {
+  return next => (request: ClientRequest, response: ClientResponse) => {
     // Override response `resolve` and `reject` to know when the request has
     // been completed and therefore trigger a pending task in the queue.
     const patchedResponse = {

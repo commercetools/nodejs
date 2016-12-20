@@ -46,9 +46,6 @@ describe('Http', () => {
           ...response,
           body: { foo: 'bar' },
           statusCode: 200,
-          headers: {
-            'content-type': ['application/json'],
-          },
         })
         resolve()
       }
@@ -83,9 +80,6 @@ describe('Http', () => {
           ...response,
           body: { foo: 'bar' },
           statusCode: 200,
-          headers: {
-            'content-type': ['application/json'],
-          },
         })
         resolve()
       }
@@ -115,13 +109,15 @@ describe('Http', () => {
         reject,
       })
       const next = (req, res) => {
+        expect(res.error.name).toBe('NetworkError')
+        expect(res.error.headers).toBeUndefined()
+        expect(res.error.originalRequest).toBeDefined()
         expect(res.error.message).toBe(
           // eslint-disable-next-line max-len
-          'request to https://api.commercetools.co/foo/bar failed, reason: oops',
+          'request to https://api.commercetools.co/foo/bar failed, reason: Connection timeout',
         )
         expect(res.body).toBeUndefined()
-        expect(res.statusCode).toBeUndefined()
-        expect(res.headers).toBeUndefined()
+        expect(res.statusCode).toBe(0)
         resolve()
       }
       const middlewareOptions = createTestMiddlewareOptions()
@@ -133,7 +129,7 @@ describe('Http', () => {
           'Content-Type': 'application/json',
         })
         .get('/foo/bar')
-        .replyWithError({ message: 'oops' })
+        .replyWithError('Connection timeout')
 
       httpMiddleware(next)(request, response)
     }),
@@ -156,12 +152,12 @@ describe('Http', () => {
         }
         expectedError.code = 400
         expectedError.statusCode = 400
+        expectedError.headers = {
+          'content-type': ['application/json'],
+        }
         expect(res).toEqual({
           ...response,
           statusCode: 400,
-          headers: {
-            'content-type': ['application/json'],
-          },
           error: expectedError,
         })
         resolve()
@@ -178,6 +174,71 @@ describe('Http', () => {
         .reply(400, {
           message: 'oops',
           error: [{ code: 'InvalidField' }],
+        })
+
+      httpMiddleware(next)(request, response)
+    }),
+  )
+
+  it('handle failed response (not found)', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = createTestResponse({
+        resolve,
+        reject,
+      })
+      const next = (req, res) => {
+        expect(res.error.message).toBe('URI not found: /foo/bar')
+        expect(res.error.body).toBeUndefined()
+        expect(res.body).toBeUndefined()
+        expect(res.statusCode).toBe(404)
+        resolve()
+      }
+      const middlewareOptions = createTestMiddlewareOptions()
+      const httpMiddleware = createHttpMiddleware(
+        middlewareOptions,
+      )
+      nock(middlewareOptions.host)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(404)
+
+      httpMiddleware(next)(request, response)
+    }),
+  )
+
+  it('handle failed response (unmapped error code)', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = createTestResponse({
+        resolve,
+        reject,
+      })
+      const next = (req, res) => {
+        expect(res.error.message).toBe('oops')
+        expect(res.error.name).toBe('HttpError')
+        expect(res.error.body).toEqual({ message: 'oops' })
+        expect(res.body).toBeUndefined()
+        expect(res.statusCode).toBe(415)
+        resolve()
+      }
+      const middlewareOptions = createTestMiddlewareOptions()
+      const httpMiddleware = createHttpMiddleware(
+        middlewareOptions,
+      )
+      nock(middlewareOptions.host)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(415, {
+          message: 'oops',
         })
 
       httpMiddleware(next)(request, response)

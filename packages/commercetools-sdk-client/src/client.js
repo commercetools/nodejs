@@ -3,9 +3,9 @@
 import type {
   Client,
   ClientOptions,
-  Request,
-  Response,
-  Result,
+  ClientRequest,
+  ClientResponse,
+  ClientResult,
 } from 'types/sdk'
 
 export default function createClient (options: ClientOptions = {}): Client {
@@ -20,7 +20,7 @@ export default function createClient (options: ClientOptions = {}): Client {
     throw new Error('You need to provide at least one middleware')
 
   return {
-    execute (request: Request): Promise<Result> {
+    execute (request: ClientRequest): Promise<ClientResult> {
       // TODO: validate request shape
       return new Promise((resolve, reject) => {
         const response = {
@@ -31,7 +31,7 @@ export default function createClient (options: ClientOptions = {}): Client {
           // statusCode: null,
           // raw: null, // ??
         }
-        const resolver = (rq: Request, rs: Response) => {
+        const resolver = (rq: ClientRequest, rs: ClientResponse) => {
           if (rs.error)
             // TODO: pass all necessary information
             // (original req, statusCode, ...)

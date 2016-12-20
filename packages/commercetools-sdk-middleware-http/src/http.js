@@ -2,13 +2,18 @@
 import type {
   HttpMiddlewareOptions,
   Middleware,
-  Request as ClientRequest,
-  Response as ClientResponse,
+  ClientRequest,
+  ClientResponse,
 } from 'types/sdk'
 
 /* global fetch */
 import 'isomorphic-fetch'
 import parseHeaders from './parse-headers'
+import {
+  NetworkError,
+  HttpError,
+  getErrorByCode,
+} from './errors'
 
 const defaultApiHost = 'https://api.sphere.io'
 
@@ -43,22 +48,23 @@ export default function createHttpMiddleware (
         ...(body ? { body } : {}),
       },
     )
-    .then((res: Response): Promise<*> => {
-      if (res.ok)
-        return res.json()
+    .then((res: Response) => {
+      if (res.ok) {
+        res.json()
         .then((result: Object) => {
           const parsedResponse = {
             ...response,
             body: result,
             statusCode: res.status,
-            headers: parseHeaders(res.headers),
-            // TODO: anything else?
           }
           next(request, parsedResponse)
         })
+        return
+      }
 
-      // Network request
-      return res.text()
+      // Server responded with an error. Try to parse it as JSON, then return
+      // a proper error type with all necessary meta information.
+      res.text()
       .then((text: any) => {
         // Try to parse the error response as JSON
         let parsed
@@ -67,32 +73,39 @@ export default function createHttpMiddleware (
         } catch (error) {
           /* noop */
         }
-        // TODO: use typed errors based on status code
-        // - BadRequest
-        // - Unauthorized
-        // - Forbidden
-        // - ConcurrentModification
-        // - InternalServerError
-        // - ServiceUnavailable
-        // - NotFound
-        // - HttpError
-        const error: Object = new Error(parsed ? parsed.message : text)
-        if (parsed) error.body = parsed
-        error.code = res.status
-        error.statusCode = res.status
 
+        const error = createError({
+          statusCode: res.status,
+          originalRequest: request,
+          headers: parseHeaders(res.headers),
+          ...(parsed
+            ? { message: parsed.message, body: parsed }
+            : {}
+          ),
+        })
         // Let the final resolver to reject the promise
         const parsedResponse = {
           ...response,
-          statusCode: res.status,
-          headers: parseHeaders(res.headers),
           error,
+          statusCode: res.status,
         }
         next(request, parsedResponse)
       })
     })
-    .catch((error) => {
-      next(request, { ...response, error })
+    .catch((e: Error) => {
+      const error = new NetworkError(e.message, { originalRequest: request })
+      next(request, { ...response, error, statusCode: 0 })
     })
   }
+}
+
+function createError ({ statusCode, message, ...rest }): typeof Error {
+  let errorMessage = message || 'Unexpected non-JSON error response'
+  if (statusCode === 404)
+    errorMessage = `URI not found: ${rest.originalRequest.uri}`
+
+  const ResponseError = getErrorByCode(statusCode)
+  if (ResponseError)
+    return new ResponseError(errorMessage, rest)
+  return new HttpError(statusCode, errorMessage, rest)
 }

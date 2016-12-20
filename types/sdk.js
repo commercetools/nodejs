@@ -1,7 +1,7 @@
 /* @flow */
 
 /* Client */
-export type Request = {
+export type ClientRequest = {
   uri: string;
   method: MethodType;
   body?: string | Object;
@@ -9,7 +9,7 @@ export type Request = {
     [key: string]: string;
   };
 }
-export type Response = {
+export type ClientResponse = {
   resolve: Function;
   reject: Function;
   body?: Object;
@@ -17,16 +17,17 @@ export type Response = {
   statusCode?: number;
 }
 
-export type Dispatch = (request: Request, response: Response) => any;
+// eslint-disable-next-line max-len
+export type Dispatch = (request: ClientRequest, response: ClientResponse) => any;
 export type Middleware = (next: Dispatch) => Dispatch;
 
 export type ClientOptions = {
   middlewares?: Array<Middleware>;
 }
 // TODO: specify resolve/reject shape
-export type Result = Object
+export type ClientResult = Object
 export type Client = {
-  execute: (request: Request) => Promise<Result>
+  execute: (request: ClientRequest) => Promise<ClientResult>
   }
 
 

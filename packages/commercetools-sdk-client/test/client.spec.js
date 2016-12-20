@@ -48,6 +48,12 @@ describe('execute', () => {
     const client = createClient({
       middlewares: [
         next => (req, res) => {
+          const headers = {
+            Authorization: 'Bearer 123',
+          }
+          next({ ...req, headers }, res)
+        },
+        next => (req, res) => {
           const body = {
             id: '123',
             version: 1,
