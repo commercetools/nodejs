@@ -9,12 +9,24 @@ export type ClientRequest = {
     [key: string]: string;
   }
 }
+export type HttpErrorType = {
+  name: string;
+  message: string;
+  code: number;
+  status: number;
+  statusCode: number;
+  body: Object;
+  originalRequest: ClientRequest;
+  headers?: {
+    [key: string]: string;
+  }
+}
 export type ClientResponse = {
-  resolve: Function;
-  reject: Function;
+  resolve(): void;
+  reject(): void;
   body?: Object;
-  error?: any;
-  statusCode?: number;
+  error?: HttpErrorType;
+  statusCode: number;
 }
 
 // eslint-disable-next-line max-len
@@ -24,8 +36,10 @@ export type Middleware = (next: Dispatch) => Dispatch;
 export type ClientOptions = {
   middlewares?: Array<Middleware>;
 }
-// TODO: specify resolve/reject shape
-export type ClientResult = Object;
+export type ClientResult = {
+  body: ?Object;
+  statusCode: number;
+} | HttpErrorType
 export type Client = {
   execute: (request: ClientRequest) => Promise<ClientResult>;
 }
