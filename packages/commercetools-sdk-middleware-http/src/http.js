@@ -10,10 +10,9 @@ import type {
 /* global fetch */
 import 'isomorphic-fetch'
 import parseHeaders from './parse-headers'
-import {
+import getErrorByCode, {
   NetworkError,
   HttpError,
-  getErrorByCode,
 } from './errors'
 
 const defaultApiHost = 'https://api.sphere.io'
@@ -39,7 +38,6 @@ export default function createHttpMiddleware (
         headers: {
           'Content-Type': 'application/json',
           ...request.headers,
-          // TODO: check if this works in the browser
           ...(
             body
               ? { 'Content-Length': Buffer.byteLength(body).toString() }

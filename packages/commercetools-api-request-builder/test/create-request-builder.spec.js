@@ -1,4 +1,7 @@
-import createRequestBuilder, { features } from '../src'
+import {
+  createRequestBuilder,
+  features,
+} from '../src'
 
 // order matters!
 const expectedServiceKeys = [

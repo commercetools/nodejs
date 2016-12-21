@@ -23,7 +23,7 @@ export function InternalServerError (...args) { defineError.call(this, 500, ...a
 export function ServiceUnavailable (...args) { defineError.call(this, 503, ...args) }
 /* eslint-enable max-len */
 
-export function getErrorByCode (code) {
+export default function getErrorByCode (code) {
   switch (code) {
     case 0:
       return NetworkError

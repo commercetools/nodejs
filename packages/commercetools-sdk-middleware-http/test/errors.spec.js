@@ -1,4 +1,4 @@
-import {
+import getErrorByCode, {
   NetworkError,
   HttpError,
   BadRequest,
@@ -8,7 +8,6 @@ import {
   ConcurrentModification,
   InternalServerError,
   ServiceUnavailable,
-  getErrorByCode,
 } from '../src/errors'
 
 describe('errors', () => {

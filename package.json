@@ -8,8 +8,9 @@
   "scripts": {
     "postinstall": "check-node-version --package && lerna bootstrap && npm run build",
     "check-updates": "./scripts/check-updates",
-    "clean": "rm -rf coverage; lerna exec -- rm -rf lib",
+    "clean": "rm -rf coverage; lerna exec -- rm -rf lib dist",
     "build": "lerna exec -- babel src --out-dir lib",
+    "dist": "lerna run dist",
     "lint": "flow check && ./scripts/lint packages",
     "test": "npm run build && lerna exec -- jest",
     "it": "npm run it:install && npm run it:run",
@@ -27,6 +28,7 @@
     "babel-cli": "6.18.0",
     "babel-eslint": "7.1.1",
     "babel-jest": "17.0.2",
+    "babel-loader": "6.2.10",
     "babel-plugin-module-resolver": "2.4.0",
     "babel-plugin-transform-export-extensions": "6.8.0",
     "babel-plugin-transform-flow-strip-types": "6.21.0",
@@ -53,7 +55,8 @@
     "lerna-semantic-release": "^8.0.2",
     "npm-check-updates": "~2.8.8",
     "npm-run-all": "3.1.2",
-    "validate-commit-msg": "2.8.2"
+    "validate-commit-msg": "2.8.2",
+    "webpack": "1.14.0"
   },
   "config": {
     "commitizen": {

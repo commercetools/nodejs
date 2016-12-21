@@ -26,15 +26,9 @@ export default function createClient (options: ClientOptions = {}): Client {
         const response = {
           resolve,
           reject,
-          // body: null,
-          // error: null,
-          // statusCode: null,
-          // raw: null, // ??
         }
         const resolver = (rq: ClientRequest, rs: ClientResponse) => {
           if (rs.error)
-            // TODO: pass all necessary information
-            // (original req, statusCode, ...)
             reject(rs.error)
           else
             resolve({

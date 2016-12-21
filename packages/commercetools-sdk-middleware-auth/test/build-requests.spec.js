@@ -5,7 +5,7 @@ import {
   // buildRequestForAnonymousSessionFlow,
   getBasicAuth,
 } from '../src/build-requests'
-import * as scopes from '../src/scopes'
+import { scopes } from '../src'
 
 const allScopes = Object.values(scopes)
 

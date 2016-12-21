@@ -19,6 +19,12 @@
     "url": "https://github.com/commercetools/nodejs.git"
   },
   "files": [
+    "dist",
     "lib"
-  ]
+  ],
+  "scripts": {
+    "dist": "npm run build:umd && npm run build:umd:min",
+    "build:umd": "NODE_ENV=development webpack --config ../../webpack.config.js --output-library CommercetoolsSdkMiddlewareQueue --output-library-target umd src/index.js dist/commercetools-sdk-middleware-queue.js",
+    "build:umd:min": "NODE_ENV=production webpack --config ../../webpack.config.js --output-library CommercetoolsSdkMiddlewareQueue --output-library-target umd src/index.js dist/commercetools-sdk-middleware-queue.min.js"
+  }
 }

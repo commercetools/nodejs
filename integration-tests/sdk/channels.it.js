@@ -1,4 +1,4 @@
-import createRequestBuilder from '@commercetools/api-request-builder'
+import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createClient } from '@commercetools/sdk-client'
 import {
   createAuthMiddlewareForClientCredentialsFlow,

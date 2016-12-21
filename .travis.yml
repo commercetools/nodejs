@@ -24,5 +24,6 @@ notifications:
 
 script:
   - npm run lint
+  - npm run dist
   - npm run coverage:ci
   - npm run it

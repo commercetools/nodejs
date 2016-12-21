@@ -78,7 +78,6 @@ export default function createAuthMiddlewareForClientCredentialsFlow (
         method: 'POST',
         headers: {
           Authorization: `Basic ${basicAuth}`,
-          // TODO: check if this works in the browser
           'Content-Length': Buffer.byteLength(body).toString(),
           'Content-Type': 'application/x-www-form-urlencoded',
         },

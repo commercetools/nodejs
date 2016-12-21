@@ -53,7 +53,6 @@ export type AuthMiddlewareOptions = {
     clientId: string;
     clientSecret: string;
   };
-  // TODO: list all supported scopes
   scopes: Array<string>;
 }
 export type HttpMiddlewareOptions = {
