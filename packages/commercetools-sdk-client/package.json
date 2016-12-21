@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@commercetools/sdk-client",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Node.js SDK Client for usage of commercetools platform API",
   "keywords": [
     "commercetools",
@@ -12,7 +12,7 @@
   "homepage": "https://github.com/commercetools/nodejs",
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
-  "author": "",
+  "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "dist": "npm run build:umd && npm run build:umd:min",
-    "build:umd": "NODE_ENV=development webpack --config ../../webpack.config.js --output-library CommercetoolsSdkClient --output-library-target umd src/index.js dist/commercetools-sdk-client.js",
-    "build:umd:min": "NODE_ENV=production webpack --config ../../webpack.config.js --output-library CommercetoolsSdkClient --output-library-target umd src/index.js dist/commercetools-sdk-client.min.js"
+    "build:umd": "cross-env NODE_ENV=development webpack --config ../../webpack.config.js --output-library CommercetoolsSdkClient --output-library-target umd src/index.js dist/commercetools-sdk-client.js",
+    "build:umd:min": "cross-env NODE_ENV=production webpack --config ../../webpack.config.js --output-library CommercetoolsSdkClient --output-library-target umd src/index.js dist/commercetools-sdk-client.min.js"
   }
 }

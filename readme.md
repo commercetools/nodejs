@@ -18,7 +18,6 @@
 </p>
 
 TODO:
-- UMD build (webpack), specific for some packages
 - readme for `sdk-client`
 - think about how to re-implement `process` fn
 - basic setup for gitbook documentation
@@ -26,3 +25,6 @@ TODO:
   - document usage of new sdk
   - document migration
 - test + check release process (+ changelog)
+- middlewares:
+  - retry
+  - logger
