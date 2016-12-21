@@ -23,10 +23,9 @@ The **commercetools nodejs** repo is managed as a [monorepo](https://github.com/
 https://commercetools.github.io/nodejs/
 
 TODO:
-- readme for `sdk-client`
 - think about how to re-implement `process` fn
+- migrate `sync-actions` package
 - basic setup for gitbook documentation
-  - document usage of new sdk
   - document migration
 - test + check release process (+ changelog)
 - middlewares:

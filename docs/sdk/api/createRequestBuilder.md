@@ -9,10 +9,7 @@ Creates a *request builder* that allows to declaratively build a HTTP API reques
 #### Example
 
 ```js
-import {
-  createRequestBuilder,
-  features,
-} from '@commercetools/api-request-builder'
+import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createClient } from '@commercetools/sdk-client'
 
 const requestBuilder = createRequestBuilder()
