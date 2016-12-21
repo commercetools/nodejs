@@ -26,7 +26,6 @@ TODO:
 - readme for `sdk-client`
 - think about how to re-implement `process` fn
 - basic setup for gitbook documentation
-  - document middlewareAPI contract
   - document usage of new sdk
   - document migration
 - test + check release process (+ changelog)

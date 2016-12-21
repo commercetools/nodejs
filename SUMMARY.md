@@ -10,5 +10,7 @@
     * [createClient](/docs/sdk/api/createClient.md)
     * [createAuthMiddlewareForClientCredentialsFlow](/docs/sdk/api/createAuthMiddlewareForClientCredentialsFlow.md)
     * [createHttpMiddleware](/docs/sdk/api/createHttpMiddleware.md)
+    * [getErrorByCode](/docs/sdk/api/getErrorByCode.md)
     * [createQueueMiddleware](/docs/sdk/api/createQueueMiddleware.md)
+    * [createRequestBuilder](/docs/sdk/api/createRequestBuilder.md)
 * [CLI](/docs/cli/README.md)

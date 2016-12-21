@@ -2,7 +2,7 @@
   "private": true,
   "name": "@commercetools/sdk-client",
   "version": "0.1.0",
-  "description": "Node.js SDK Client for usage of commercetools platform API",
+  "description": "SDK Client for usage of commercetools platform API",
   "keywords": [
     "commercetools",
     "sdk",

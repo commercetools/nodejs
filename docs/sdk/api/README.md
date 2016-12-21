@@ -24,7 +24,7 @@ This section documents the SDK packages APIs.
 
 ### `api-request-builder`
 
-* [createRequestBuilder(options)](createRequestBuilder.md)
+* [createRequestBuilder(customServices)](createRequestBuilder.md)
 
 
 ## Importing
