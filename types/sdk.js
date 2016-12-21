@@ -15,8 +15,8 @@ export type HttpErrorType = {
   code: number;
   status: number;
   statusCode: number;
-  body: Object;
   originalRequest: ClientRequest;
+  body?: Object;
   headers?: {
     [key: string]: string;
   }
