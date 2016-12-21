@@ -8,6 +8,7 @@ node_modules
 .released-packages
 
 # Build artifacts
+_book
 dist
 lib
 coverage
