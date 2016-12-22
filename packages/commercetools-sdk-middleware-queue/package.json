@@ -1,5 +1,8 @@
 {
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "name": "@commercetools/sdk-middleware-queue",
   "version": "0.0.1",
   "description": "Middleware for queueing requests, to use with @commercetools/sdk-client",

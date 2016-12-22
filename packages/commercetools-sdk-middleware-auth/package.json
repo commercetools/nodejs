@@ -1,5 +1,8 @@
 {
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "name": "@commercetools/sdk-middleware-auth",
   "version": "0.0.1",
   "description": "Middleware for different authentication flows of commercetools platform API, to use with @commercetools/sdk-client",

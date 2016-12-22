@@ -1,5 +1,8 @@
 {
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "name": "@commercetools/api-request-builder",
   "version": "0.0.1",
   "description": "Helper functions to construct API requests URI for the commercetools platform in a declarative way.",

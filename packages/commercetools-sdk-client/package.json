@@ -1,5 +1,8 @@
 {
   "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "name": "@commercetools/sdk-client",
   "version": "0.0.1",
   "description": "SDK Client for usage of commercetools platform API",
