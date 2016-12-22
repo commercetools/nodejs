@@ -19,7 +19,7 @@
     "it:install": "npm run build && ./scripts/install-npm-packages-for-integration-tests",
     "coverage": "npm run build && jest --no-watchman --coverage",
     "coverage:ci": "jest --no-watchman --coverage && codecov",
-    "semantic-release": "lerna-semantic-release pre && lerna-semantic-release post && git add packages/*/CHANGELOG.md && lerna-semantic-release perform",
+    "semantic-release": "lerna-semantic-release pre && lerna-semantic-release post && lerna-semantic-release perform",
     "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
     "docs:build": "npm run docs:prepare && gitbook build && cp logo/apple-touch-icon.png _book/gitbook/images/apple-touch-icon-precomposed-152.png && cp logo/favicon.ico _book/gitbook/images",
