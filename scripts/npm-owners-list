@@ -1,0 +1,11 @@
+#!/bin/bash -e
+
+for f in packages/*; do
+  package=`basename $f`
+  npm_package="${package/commercetools-/@commercetools/}"
+
+  if [ -d "$f" ]; then
+    echo "(${npm_package})"
+    npm owner ls $npm_package
+  fi
+done

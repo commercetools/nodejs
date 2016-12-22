@@ -1,0 +1,7 @@
+# This is just a reference list to see who is owner of the npm packages.
+# The main user is the "Automation Bot" https://www.npmjs.com/~commercetools.
+# To easily grant access to a user, run the `./scripts/npm-owners-grant`.
+# To easily revoke access to a user, run the `./scripts/npm-owners-revoke`.
+# To easily list owners, run the `./scripts/npm-owners-list`.
+
+emmenko
