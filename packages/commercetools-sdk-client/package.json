@@ -1,7 +1,7 @@
 {
-  "private": true,
+  "private": false,
   "name": "@commercetools/sdk-client",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "SDK Client for usage of commercetools platform API",
   "keywords": [
     "commercetools",

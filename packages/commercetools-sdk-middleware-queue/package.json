@@ -1,7 +1,7 @@
 {
-  "private": true,
+  "private": false,
   "name": "@commercetools/sdk-middleware-queue",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Middleware for queueing requests, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
