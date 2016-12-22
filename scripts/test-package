@@ -1,14 +1,7 @@
 #!/bin/bash -e
 
-# The package name where the tests should run
-package="${1}"
 # An optional flag to pass to the test runner (see validation below)
-flag="${2}"
-
-if [ -z "$package" ]; then
-  echo "Missing required package name"
-  exit 1
-fi
+flag="${1}"
 
 if [ -n "$flag" ]; then
   if [[ "$flag" != "--watch" && "$flag" != "--coverage" ]]; then
@@ -17,13 +10,19 @@ if [ -n "$flag" ]; then
   fi
 fi
 
-# Path to jest executable
-cmd="$(pwd)/node_modules/.bin/jest"
+packages=()
+for dir in packages/*; do
+  packages=(${packages[@]} "${dir/packages\/commercetools-/@commercetools/}")
+done
 
-pushd "./packages/${package}"
+select package in "${packages[@]}"; do
+  selected_package=$package
+  echo "Selected package $selected_package"
+  break
+done
+
 if [ -z "$flag" ]; then
-  eval "$cmd"
+  $(npm bin)/lerna --scope $selected_package exec -- $(pwd)/node_modules/.bin/jest
 else
-  eval "$cmd $flag"
+  $(npm bin)/lerna --scope $selected_package exec -- $(pwd)/node_modules/.bin/jest $flag
 fi
-popd
