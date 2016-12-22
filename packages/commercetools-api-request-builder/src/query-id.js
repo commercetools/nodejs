@@ -1,3 +1,4 @@
+/* @flow */
 /**
  * Set the given `id` to the internal state of the service instance.
  *
@@ -6,7 +7,7 @@
  * @return {Object} The instance of the service, can be chained.
  */
 // eslint-disable-next-line import/prefer-default-export
-export function byId (id) {
+export function byId (id: string): Object {
   if (!id)
     throw new Error('Required argument for `byId` is missing')
 

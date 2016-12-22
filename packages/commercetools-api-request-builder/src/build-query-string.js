@@ -1,3 +1,8 @@
+/* @flow */
+import type {
+  ServiceBuilderDefaultParams,
+} from 'types/sdk'
+
 /**
  * Build the query string with the given parameters.
  *
@@ -5,7 +10,9 @@
  * @throws If argument is missing.
  * @return {string} The fully encoded query string.
  */
-export default function buildQueryString (params) {
+export default function buildQueryString (
+  params: ServiceBuilderDefaultParams,
+): string {
   if (!params)
     throw new Error('Missing options object to build query string.')
 
@@ -13,7 +20,7 @@ export default function buildQueryString (params) {
   let queryString = []
 
   if (typeof staged === 'boolean')
-    queryString.push(`staged=${staged}`)
+    queryString.push(`staged=${staged.toString()}`)
 
   if (expand && expand.length)
     queryString = queryString.concat(expand.map(e => `expand=${e}`))

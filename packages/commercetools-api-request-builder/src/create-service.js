@@ -1,3 +1,8 @@
+/* @flow */
+import type {
+  ServiceBuilder,
+  ServiceBuilderDefinition,
+} from 'types/sdk'
 import {
   getDefaultQueryParams,
   getDefaultSearchParams,
@@ -13,17 +18,23 @@ import * as queryPage from './query-page'
 import * as queryProjection from './query-projection'
 import * as querySearch from './query-search'
 
+type BuildOptions = {
+  projectKey?: string;
+}
+
 const requiredDefinitionProps = [
   'type',
   'endpoint',
   'features',
 ]
 
-export default function createService (definition) {
+export default function createService (
+  definition: ServiceBuilderDefinition,
+): ServiceBuilder {
   if (!definition)
     throw new Error('Cannot create a service without its definition.')
 
-  requiredDefinitionProps.forEach((key) => {
+  requiredDefinitionProps.forEach((key: string) => {
     if (!definition[key])
       throw new Error(`Definition is missing required parameter ${key}.`)
   })
@@ -80,7 +91,7 @@ export default function createService (definition) {
     // Call this method to get the built request URI
     // Pass some options to further configure the URI:
     // - `projectKey`: will prefix the URI with the given projectKey
-    build (options = {}) {
+    build (options: BuildOptions = {}): string {
       const { projectKey } = options
 
       const queryParams = buildQueryString(this.params)

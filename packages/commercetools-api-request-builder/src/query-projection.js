@@ -1,3 +1,4 @@
+/* @flow */
 /**
  * Define whether to get the staged or current projection
  *
@@ -6,7 +7,7 @@
  * @return {Object} The instance of the service, can be chained.
  */
 // eslint-disable-next-line import/prefer-default-export
-export function staged (isStaged = true) {
+export function staged (isStaged: boolean = true): Object {
   this.params.staged = isStaged
   return this
 }

@@ -61,3 +61,45 @@ export type HttpMiddlewareOptions = {
 export type QueueMiddlewareOptions = {
   concurrency?: number;
 }
+
+
+/* API Request Builder */
+export type ServiceBuilderDefaultParams = {
+  expand: Array<string>;
+  pagination: {
+    page: ?number;
+    perPage: ?number;
+    sort: Array<string>;
+  };
+  id?: ?string;
+  staged?: boolean;
+  query?: {
+    operator: 'and' | 'or';
+    where: Array<string>;
+  };
+  search?: {
+    facet: Array<string>;
+    filter: Array<string>;
+    filterByQuery: Array<string>;
+    filterByFacets: Array<string>;
+    fuzzy: boolean;
+    text: ?{
+      lang: string;
+      value: string;
+    };
+  };
+}
+export type ServiceBuilder = {
+  type: string;
+  features: Array<string>;
+  params: ServiceBuilderDefaultParams;
+  build(): string;
+}
+export type ServiceBuilderDefinition = {
+  type: string;
+  endpoint: string;
+  features: Array<string>;
+}
+export type ApiRequestBuilder = {
+  [key: string]: ServiceBuilder;
+}

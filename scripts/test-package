@@ -15,6 +15,7 @@ for dir in packages/*; do
   packages=(${packages[@]} "${dir/packages\/commercetools-/@commercetools/}")
 done
 
+echo "Select a package to run the tests for:"
 select package in "${packages[@]}"; do
   selected_package=$package
   echo "Selected package $selected_package"

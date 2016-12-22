@@ -6,7 +6,7 @@
  * @throws If `predicate` is missing.
  * @return {Object} The instance of the service, can be chained.
  */
-export function where (predicate) {
+export function where (predicate: string): Object {
   if (!predicate)
     throw new Error('Required argument for `where` is missing')
 
@@ -23,7 +23,7 @@ export function where (predicate) {
  * @throws If `operator` is missing or has a wrong value.
  * @return {Object} The instance of the service, can be chained.
  */
-export function whereOperator (operator) {
+export function whereOperator (operator: 'and' | 'or'): Object {
   if (!operator)
     throw new Error('Required argument for `whereOperator` is missing')
   if (!(operator === 'and' || operator === 'or'))

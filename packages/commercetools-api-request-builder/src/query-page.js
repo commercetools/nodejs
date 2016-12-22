@@ -1,3 +1,4 @@
+/* @flow */
 /**
  * Set the sort expression for the query, if the related endpoint supports it.
  * It is possible to specify several `sort` parameters.
@@ -11,7 +12,7 @@
  * @throws If `sortPath` is missing.
  * @return {Object} The instance of the service, can be chained.
  */
-export function sort (sortPath, ascending = true) {
+export function sort (sortPath: string, ascending: boolean = true): Object {
   if (!sortPath)
     throw new Error('Required argument for `sort` is missing')
 
@@ -29,7 +30,7 @@ export function sort (sortPath, ascending = true) {
  * @throws If `value` is missing or is a number lesser then one.
  * @return {Object} The instance of the service, can be chained.
  */
-export function page (value) {
+export function page (value: number): Object {
   if (typeof value !== 'number' && !value)
     throw new Error('Required argument for `page` is missing or invalid')
 
@@ -50,7 +51,7 @@ export function page (value) {
  * @throws If `value` is missing or is a number lesser then zero.
  * @return {Object} The instance of the service, can be chained.
  */
-export function perPage (value) {
+export function perPage (value: number): Object {
   if (typeof value !== 'number' && !value)
     throw new Error('Required argument for `perPage` is missing or invalid')
 

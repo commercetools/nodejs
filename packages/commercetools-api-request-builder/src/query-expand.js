@@ -1,3 +1,4 @@
+/* @flow */
 /**
  * Set the
  * [ExpansionPath](http://dev.sphere.io/http-api.html#reference-expansion)
@@ -10,7 +11,7 @@
  * @return {Object} The instance of the service, can be chained.
  */
 // eslint-disable-next-line import/prefer-default-export
-export function expand (value) {
+export function expand (value: string): Object {
   if (!value)
     throw new Error('Required argument for `expand` is missing')
 

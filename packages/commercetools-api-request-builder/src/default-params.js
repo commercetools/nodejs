@@ -1,3 +1,7 @@
+/* @flow */
+import type {
+  ServiceBuilderDefaultParams,
+} from 'types/sdk'
 import * as features from './features'
 
 /**
@@ -5,7 +9,7 @@ import * as features from './features'
  *
  * @return {Object}
  */
-export function getDefaultQueryParams () {
+export function getDefaultQueryParams (): ServiceBuilderDefaultParams {
   return {
     id: null,
     expand: [],
@@ -26,7 +30,7 @@ export function getDefaultQueryParams () {
  *
  * @return {Object}
  */
-export function getDefaultSearchParams () {
+export function getDefaultSearchParams (): ServiceBuilderDefaultParams {
   return {
     expand: [],
     staged: true,
