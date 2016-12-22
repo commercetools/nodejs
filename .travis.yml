@@ -6,24 +6,20 @@ node_js:
 
 cache: 'yarn'
 
-# deploy:
-#   provider: script
-#   script: ./scripts/deploy
-#   skip_cleanup: true
-#   on:
-#     branch: master
-#     node: 6
-
-env:
-  global:
-    - ENCRYPTION_LABEL: fb365c1216b5
-    - ORIGIN_URL: git@github.com:commercetools/nodejs.git
-
 notifications:
   email: false
+
+before_install:
+  - .travis/before_install.sh
 
 script:
   - npm run lint
   - npm run dist
   - npm run coverage:ci
   - npm run it
+
+after_success:
+  - .travis/after_success.sh
+
+git:
+  depth: 1
