@@ -1,11 +1,14 @@
-#!/usr/bin/env bash
+#!/bin/bash -e
 # https://github.com/atlassian/lerna-semantic-release/blob/caribou/.travis/after_success.sh
 # http://stackoverflow.com/questions/18027115/committing-via-travis-ci-failing
 
-set -e
-
 if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   echo "We are in a pull request, not releasing"
+  exit 0
+fi
+
+if [ "$TRAVIS_NODE_VERSION" != "6" ]; then
+  echo "We should run the release task only once in the node 6 build, not releasing"
   exit 0
 fi
 
