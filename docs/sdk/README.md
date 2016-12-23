@@ -22,6 +22,12 @@ If we take a step back and look at the general requirement, at the end we simply
 
 ## Usage example
 
+In this example (integration test) we are going to make some requests to the `/channels` API endpoint. For that we need to be able to make actual requests (`http` middleware) as well as to authenticate the requests using the API Client Credentials Flow (`auth` middleware).
+
+The `queue` middleware is not really necessary in this simple example but it is usually useful to limit a bit the number of concurrent requests.
+
+The `api-request-builder` package comes in handy to easily construct the request _URI_ but it is not really necessary as the _URI_ could be also typed manually.
+
 ```js
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createClient } from '@commercetools/sdk-client'
