@@ -15,7 +15,7 @@ A *Middleware* is a higher-order function that composes a *dispatch function* to
 const middleware = next => (request, response) => next(request, response)
 ```
 
-The dispatch function accepts 2 arguments: [`request`](/docs/sdk/Glossary.md#client-request) and [`response`](/docs/sdk/Glossary.md#client-response) objects.
+The dispatch function accepts 2 arguments: [`request`](/docs/sdk/Glossary.md#clientrequest) and [`response`](/docs/sdk/Glossary.md#clientresponse) objects.
 After doing the side effects, the middleware should call `next`, passing the (mutated) `request` and `response` to the next middleware.
 
 ## Implement a logging middleware
@@ -31,4 +31,4 @@ const loggerMiddleware = next => (request, response) => {
 }
 ```
 
-See [official middlewares](/docs/sdk/api) for more advanced examples.
+See [official middlewares](/docs/sdk/api/README.md) for more advanced examples.
