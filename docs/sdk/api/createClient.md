@@ -1,6 +1,6 @@
 # `createClient(options)`
 
-Creates a [client](/docs/sdk/Glossary,md#client) instance.
+Creates a [client](/docs/sdk/Glossary.md#client) instance.
 
 #### Named arguments (options)
 

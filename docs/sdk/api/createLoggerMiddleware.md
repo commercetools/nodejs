@@ -1,6 +1,6 @@
 # `createLoggerMiddleware(options)`
 
-Creates a [middleware](/docs/sdk/Glossary,md#middleware) to log request and response objects being executed.
+Creates a [middleware](/docs/sdk/Glossary.md#middleware) to log request and response objects being executed.
 
 #### Example
 

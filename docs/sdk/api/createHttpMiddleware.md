@@ -1,6 +1,6 @@
 # `createHttpMiddleware(options)`
 
-Creates a [middleware](/docs/sdk/Glossary,md#middleware) to handle HTTP requests for the commercetools platform API.
+Creates a [middleware](/docs/sdk/Glossary.md#middleware) to handle HTTP requests for the commercetools platform API.
 
 #### Named arguments (options)
 

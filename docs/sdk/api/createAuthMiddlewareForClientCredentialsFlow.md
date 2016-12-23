@@ -1,6 +1,6 @@
 # `createAuthMiddlewareForClientCredentialsFlow(options)`
 
-Creates a [middleware](/docs/sdk/Glossary,md#middleware) to handle authentication for the [Client Credentials Flow](http://dev.commercetools.com/http-api-authorization.html#client-credentials-flow) of the commercetools platform API.
+Creates a [middleware](/docs/sdk/Glossary.md#middleware) to handle authentication for the [Client Credentials Flow](http://dev.commercetools.com/http-api-authorization.html#client-credentials-flow) of the commercetools platform API.
 
 #### Named arguments (options)
 

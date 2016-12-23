@@ -1,6 +1,6 @@
 # `createQueueMiddleware(options)`
 
-Creates a [middleware](/docs/sdk/Glossary,md#middleware) to handle concurrent requests.
+Creates a [middleware](/docs/sdk/Glossary.md#middleware) to handle concurrent requests.
 
 #### Named arguments (options)
 

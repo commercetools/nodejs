@@ -1,6 +1,6 @@
 # `getErrorByCode(code)`
 
-Returns a [custom error type](/docs/sdk/Glossary,md#httperrortype) given its status *code*.
+Returns a [custom error type](/docs/sdk/Glossary.md#httperrortype) given its status *code*.
 
 #### Arguments
 
