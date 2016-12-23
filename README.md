@@ -27,7 +27,5 @@ TODO:
 - migrate `sync-actions` package
 - basic setup for gitbook documentation
   - document migration
-- test + check release process (+ changelog)
 - middlewares:
   - retry
-  - logger
