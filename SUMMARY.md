@@ -12,5 +12,6 @@
     * [createHttpMiddleware](/docs/sdk/api/createHttpMiddleware.md)
     * [getErrorByCode](/docs/sdk/api/getErrorByCode.md)
     * [createQueueMiddleware](/docs/sdk/api/createQueueMiddleware.md)
+    * [createLoggerMiddleware](/docs/sdk/api/createLoggerMiddleware.md)
     * [createRequestBuilder](/docs/sdk/api/createRequestBuilder.md)
 * [CLI](/docs/cli/README.md)

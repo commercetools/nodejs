@@ -22,6 +22,10 @@ This section documents the SDK packages APIs.
 
 * [createQueueMiddleware(options)](createQueueMiddleware.md)
 
+### `sdk-middleware-logger`
+
+* [createLoggerMiddleware(options)](createLoggerMiddleware.md)
+
 ### `api-request-builder`
 
 * [createRequestBuilder(customServices)](createRequestBuilder.md)
