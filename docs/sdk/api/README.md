@@ -51,3 +51,4 @@ var createClient = require('@commercetools/sdk-client').createClient
 
 ```js
 var createClient = CommercetoolsSdkClient.createClient
+```
