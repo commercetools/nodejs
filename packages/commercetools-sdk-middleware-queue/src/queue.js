@@ -12,7 +12,7 @@ type Task = {
   response: ClientResponse;
 }
 
-export default function createHttpMiddleware (
+export default function createQueueMiddleware (
   options: QueueMiddlewareOptions,
 ): Middleware {
   const {
