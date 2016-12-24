@@ -1,55 +1,47 @@
-# Contributing
-First of all, thank you for contributing. It’s appreciated. This guide details how to use issues and pull requests to improve this project.
+# Contributing to commercetools nodejs
 
-## Running
-**From within a package directory:**
-- `npm start` - Watch for file changes then test.
+Please take a moment to review this document in order to make the contribution
+process easy and effective for everyone involved.
 
-- `npm test` - Run the tests and report the results.
+Following these guidelines helps to communicate that you respect the time of
+the developers managing and developing this open source project. In return,
+they should reciprocate that respect in addressing your issue or assessing
+patches and features.
 
-- `npm run build` - Babelify everything in `src` output to `lib`.
+## Submitting a Pull Request
 
-- `npm run lint` - Check if the code follows the [ESLint](https://github.com/commercetools/eslint-config) rules.
+Good pull requests, such as patches, improvements, and new features, are a fantastic help. They should remain focused in scope and avoid containing unrelated commits.
 
-**From the repository root:**
-- `npm run clean` - Remove the `node_modules` directory and `lib` content from all packages.
+Please **ask first** if somebody else is already working on this or the core developers think your feature is in-scope for the related package / project. Generally always have a related issue with discussions for whatever you are including.
 
-- `npm run check-updates` - Checks for outdated dependencies in all packages and the root.
+Please also provide a **test plan**, i.e. specify how you verified that your addition works.
 
-- `npm run upgrade` - Upgrades all outdated dependencies by changing their semver range.
+Please adhere to the coding conventions used throughout a project (indentation,
+accurate comments, etc.) and any other requirements (such as test coverage).
 
-- `npm run release` - Fires up [`lerna-semantic-release`](https://github.com/atlassian/lerna-semantic-release/) to tag a new release, push to git and publish a new version to npm.
+## Setting Up a Local Copy
 
-## Making changes
-* Create a topic branch from where you want to base your work.
-* Make commits of logical units.
-* Make sure you have added the necessary tests for your changes.
+1. Clone the repo with `git clone git@github.com:commercetools/nodejs.git`
 
-### Branching
-When creating a branch. Use the issue number(without the '#') as the prefix and add a short title, like: `1-commit-message-example`
+2. Run `npm install` (or `yarn`) in the root `nodejs` folder. This will ensure that all package dependencies are properly installed / linked. The repository uses [lerna](https://github.com/lerna/lerna) to orchestrate the different packages.
 
-### Commit message
-Make sure your commit messages follow the [Angular's format](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines) and includes the affected package if there is any. To make this easy run `npm run commit` or `git cz` from the root.
-````
-    docs(contributing): make the example in contributing guidelines concrete
+3. If you're writing documentation, you can start the gitbook development server with `npm run docs:watch`
 
-    affects: @commercetools/docs-parser
+4. To run all packages tests simply do `npm test` (we use [jest](https://github.com/facebook/jest)). If you want to work on a specific package and run the tests only for that package, we recommend to use `npm run test:package`. This will prompt you to select one of the available packages. To run in _watch_ mode simply do `npm run test:package -- --watch`
 
-    The example commit message in the contributing.md document is not a concrete example. This is a problem because the
-    contributor is left to imagine what the commit message should look like
-    based on a description rather than an example. Fix the
-    problem by making the example concrete and imperative.
+5. Linting and static checks are done by `npm run lint`. Commiting also runs a git hook to lint the changed files.
 
-    Closes #1
-    Breaks having an open issue
-````
+## Releases
 
-## Creating an Issue
-Before you create a new issue:
-  * Check the issues on Github to ensure that one doesn't already exist.
-  * Clearly describe the issue, there is an [ISSUE_TEMPLATE](.github/ISSUE_TEMPLATE.md) to guide you.
+We use [semantic release](https://github.com/semantic-release/semantic-release) to automatically do releases based on the commit message.
+Since we are using [lerna](https://github.com/lerna/lerna) we need to specify in the commit description which packages might be affected by the release (`affects: <pkg-name>, <pkg-name>, ...`)
 
-## Tests
-We use [tape](https://github.com/substack/tape) for unit and integration test.
+```
+<type>(<scope>): <subject>
+<BLANK LINE>
+affects: pkg-1, pkg-3
+```
 
-We try to maintain a code coverage of 100%. Please ensure you do so too 😉
+------------
+
+*Many thanks to [h5bp](https://github.com/h5bp/html5-boilerplate/blob/master/CONTRIBUTING.md) and [create-react-app](https://github.com/facebookincubator/create-react-app/blob/master/CONTRIBUTING.md) for the inspiration with this contributing guide*
