@@ -1,7 +1,14 @@
 {
   "gitbook": ">=3.2.1",
   "title": "commercetools node.js",
-  "plugins": ["edit-link", "prism", "-highlight", "github", "anchorjs", "ga"],
+  "plugins": [
+    "edit-link",
+    "prism",
+    "-highlight",
+    "github",
+    "anchorjs",
+    "ga"
+  ],
   "pluginsConfig": {
     "edit-link": {
       "base": "https://github.com/commercetools/nodejs/tree/master",

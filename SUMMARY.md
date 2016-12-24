@@ -5,6 +5,7 @@
 * [SDK](/docs/sdk/README.md)
   * [Middlewares](/docs/sdk/Middlewares.md)
   * [Upgrading from sphere-node-sdk](/docs/sdk/upgrading-from-sphere-node-sdk.md)
+  * [Testing](/docs/sdk/Testing.md)
   * [Glossary](/docs/sdk/Glossary.md)
   * [API Reference](/docs/sdk/api/README.md)
     * [createClient](/docs/sdk/api/createClient.md)
