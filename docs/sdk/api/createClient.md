@@ -1,12 +1,14 @@
 # `createClient(options)`
 
+> From package [@commercetools/sdk-client](/docs/sdk/api/README.md#sdk-client).
+
 Creates a [client](/docs/sdk/Glossary.md#client) instance.
 
 #### Named arguments (options)
 
 1. `middlewares` *(Array)*: A list of [middlewares](/docs/sdk/Middlewares.md) to be used within this client. **The order of the middlewares is really important!** (e.g. it does not make sense to put the `http` middleware *before* the `auth` middleware).
 
-#### Example
+#### Usage example
 
 ```js
 import { createClient } from '@commercetools/sdk-client'

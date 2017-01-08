@@ -1,5 +1,7 @@
 # `createAuthMiddlewareForClientCredentialsFlow(options)`
 
+> From package [@commercetools/sdk-middleware-auth](/docs/sdk/api/README.md#sdk-middleware-auth).
+
 Creates a [middleware](/docs/sdk/Glossary.md#middleware) to handle authentication for the [Client Credentials Flow](http://dev.commercetools.com/http-api-authorization.html#client-credentials-flow) of the commercetools platform API.
 
 #### Named arguments (options)
@@ -10,7 +12,7 @@ Creates a [middleware](/docs/sdk/Glossary.md#middleware) to handle authenticatio
 4. `scopes` *(Array)*: a list of [scopes](http://dev.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
 
 
-#### Example
+#### Usage example
 
 ```js
 import { createClient } from '@commercetools/sdk-client'

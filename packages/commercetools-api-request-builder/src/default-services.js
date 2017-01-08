@@ -8,7 +8,6 @@ export default {
       features.query,
       features.queryOne,
       features.queryExpand,
-      features.queryString,
     ],
   },
   channels: {
@@ -18,7 +17,6 @@ export default {
       features.query,
       features.queryOne,
       features.queryExpand,
-      features.queryString,
     ],
   },
   customerGroups: {
@@ -28,7 +26,6 @@ export default {
       features.query,
       features.queryOne,
       features.queryExpand,
-      features.queryString,
     ],
   },
   productProjections: {
@@ -38,7 +35,6 @@ export default {
       features.query,
       features.queryOne,
       features.queryExpand,
-      features.queryString,
       features.projection,
     ],
   },
@@ -49,7 +45,6 @@ export default {
       features.search,
       features.queryOne,
       features.queryExpand,
-      features.queryString,
       features.projection,
     ],
   },
@@ -60,7 +55,6 @@ export default {
       features.query,
       features.queryOne,
       features.queryExpand,
-      features.queryString,
     ],
   },
   productTypes: {
@@ -69,7 +63,6 @@ export default {
     features: [
       features.query,
       features.queryOne,
-      features.queryString,
     ],
   },
   taxCategories: {
@@ -78,7 +71,6 @@ export default {
     features: [
       features.query,
       features.queryOne,
-      features.queryString,
     ],
   },
 }

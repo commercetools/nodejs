@@ -1,8 +1,10 @@
 # `createLoggerMiddleware(options)`
 
+> From package [@commercetools/sdk-middleware-logger](/docs/sdk/api/README.md#sdk-middleware-logger).
+
 Creates a [middleware](/docs/sdk/Glossary.md#middleware) to log request and response objects being executed.
 
-#### Example
+#### Usage example
 
 ```js
 import { createClient } from '@commercetools/sdk-client'

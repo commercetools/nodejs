@@ -2,7 +2,7 @@
 import type {
   ApiRequestBuilder,
 } from 'types/sdk'
-import services from './services'
+import services from './default-services'
 import createService from './create-service'
 
 export default function createRequestBuilder (

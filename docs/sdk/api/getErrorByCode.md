@@ -1,5 +1,7 @@
 # `getErrorByCode(code)`
 
+> From package [@commercetools/sdk-middleware-http](/docs/sdk/api/README.md#sdk-middleware-http).
+
 Returns a [custom error type](/docs/sdk/Glossary.md#httperrortype) given its status *code*.
 
 #### Arguments
@@ -10,7 +12,7 @@ Returns a [custom error type](/docs/sdk/Glossary.md#httperrortype) given its sta
 
 (*Error* or *undefined*): A custom error type (e.g. `BadRequest`, `Unauthorized`) if the *code* matches, otherwise `undefined`.
 
-#### Example
+#### Usage example
 
 ```js
 import { getErrorByCode } from '@commercetools/sdk-middleware-http'

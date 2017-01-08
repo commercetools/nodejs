@@ -1,12 +1,40 @@
 # `createRequestBuilder(customServices)`
 
+> From package [@commercetools/api-request-builder](/docs/sdk/api/README.md#api-request-builder).
+
 Creates a *request builder* that allows to declaratively build a HTTP API request URI for the commercetools platform.
 
 #### Arguments
 
 1. `customServices` *(Object)*: A map of custom services that are not provided by default. This might be useful to build a request for a different API with similar query parameters.
 
-#### Example
+A _service_ is created by defining its `features`. Features give a service specific _characteristics_ to correctly build URIs. For example, if a service can query a resource by ID you would include `queryOne`. Available features types are:
+
+- `query`: allows to use standard query capabilities (`page`, `perPage`, `sort`, `where`, `whereOperator`)
+- `queryOne`: allows to query a single resource (`byId`)
+- `queryExpand`: allows to use reference expansion (`expand`)
+- `search`: allows to use search capabilities (`text`, `fuzzy`, `facet`, `filter`, `filterByQuery`, `filterByFacets`)
+- `projection`: allows to use projections capabilities (`staged`)
+
+```js
+import {
+  createRequestBuilder,
+  features,
+} from '@commercetools/api-request-builder'
+const customServices = {
+  users: {
+    type: 'users',
+    endpoint: '/users',
+    features: [
+      features.query,
+      features.queryOne,
+    ],
+  },
+}
+const requestBuilder = createRequestBuilder(customServices)
+```
+
+#### Usage example
 
 ```js
 import { createRequestBuilder } from '@commercetools/api-request-builder'
