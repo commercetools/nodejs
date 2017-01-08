@@ -1,3 +1,8 @@
+/* @flow */
+import type {
+  SyncAction,
+  ActionGroup,
+} from 'types/sdk'
 import flatten from 'lodash.flatten'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
@@ -23,7 +28,7 @@ function createOrderMapActions (mapActionGroup) {
   }
 }
 
-export default (config) => {
+export default (config: Array<ActionGroup>): SyncAction => {
   // config contains information about which action groups
   // are white/black listed
 

@@ -1,3 +1,8 @@
+/* @flow */
+import type {
+  SyncAction,
+  ActionGroup,
+} from 'types/sdk'
 import flatten from 'lodash.flatten'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
@@ -49,7 +54,7 @@ function createProductMapActions (mapActionGroup) {
   }
 }
 
-export default (config) => {
+export default (config: Array<ActionGroup>): SyncAction => {
   const mapActionGroup = createMapActionGroup(config)
   const doMapActions = createProductMapActions(mapActionGroup)
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
