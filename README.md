@@ -21,11 +21,3 @@ The **commercetools nodejs** repo is managed as a [monorepo](https://github.com/
 
 ## Documentation
 https://commercetools.github.io/nodejs/
-
-TODO:
-- think about how to re-implement `process` fn
-- migrate `sync-actions` package
-- basic setup for gitbook documentation
-  - document migration
-- middlewares:
-  - retry
