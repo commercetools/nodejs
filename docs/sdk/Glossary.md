@@ -83,3 +83,20 @@ type HttpErrorType = {
 ```
 
 A *HttpErrorType* describes the shape of the `error` rejected by `execute`. The `error` is typed (e.g. `BadRequest`, `Unauthorized`) and contains useful meta information to help debug the cause of the error.
+
+### SyncAction
+
+```js
+type UpdateAction = {
+  action: string;
+  [key: string]: any;
+}
+type SyncAction = {
+  buildActions: (before: Object, now: Object) => Array<UpdateAction>;
+}
+
+type ActionGroup = {
+  type: string;
+  group: 'black' | 'white';
+}
+```
