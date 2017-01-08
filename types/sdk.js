@@ -103,3 +103,17 @@ export type ServiceBuilderDefinition = {
 export type ApiRequestBuilder = {
   [key: string]: ServiceBuilder;
 }
+
+
+/* Sync Actions */
+export type UpdateAction = {
+  action: string;
+  [key: string]: any;
+}
+export type SyncAction = {
+  buildActions: (before: Object, now: Object) => Array<UpdateAction>;
+}
+export type ActionGroup = {
+  type: string;
+  group: 'black' | 'white';
+}

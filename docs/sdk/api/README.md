@@ -30,6 +30,14 @@ This section documents the SDK packages APIs.
 
 * [createRequestBuilder(customServices)](createRequestBuilder.md)
 
+### `sync-actions`
+
+* [createSyncCategories(actionGroups)](createSyncCategories.md)
+* [createSyncCustomers(actionGroups)](createSyncCustomers.md)
+* [createSyncInventories(actionGroups)](createSyncInventories.md)
+* [createSyncProducts(actionGroups)](createSyncProducts.md)
+* [createSyncOrders(actionGroups)](createSyncOrders.md)
+
 
 ## Importing
 

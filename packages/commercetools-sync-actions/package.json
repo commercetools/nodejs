@@ -1,0 +1,38 @@
+{
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "name": "@commercetools/sync-actions",
+  "version": "0.1.0",
+  "description": "Build API update actions for the commercetools platform.",
+  "keywords": [
+    "commercetools",
+    "sync",
+    "actions"
+  ],
+  "homepage": "https://commercetools.github.io/nodejs/",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs.git"
+  },
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "scripts": {
+    "dist": "npm run build:umd && npm run build:umd:min",
+    "build:umd": "cross-env NODE_ENV=development webpack --config ../../webpack.config.js --output-library CommercetoolsSyncActions --output-library-target umd src/index.js dist/commercetools-sync-actions.js",
+    "build:umd:min": "cross-env NODE_ENV=production webpack --config ../../webpack.config.js --output-library CommercetoolsSyncActions --output-library-target umd src/index.js dist/commercetools-sync-actions.min.js"
+  },
+  "dependencies": {
+    "jsondiffpatch": "emmenko/jsondiffpatch#patch-webpack",
+    "lodash.flatten": "4.4.0",
+    "lodash.foreach": "4.5.0",
+    "lodash.uniqwith": "4.5.0"
+  }
+}
