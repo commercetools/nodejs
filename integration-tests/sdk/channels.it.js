@@ -9,7 +9,11 @@ import {
 import {
   createQueueMiddleware,
 } from '@commercetools/sdk-middleware-queue'
+import {
+  createUserAgentMiddleware,
+} from '@commercetools/sdk-middleware-user-agent'
 import omit from 'lodash.omit'
+import pkg from '../package.json'
 import loadCredentials from '../load-credentials'
 
 const {
@@ -36,11 +40,17 @@ const httpMiddleware = createHttpMiddleware({
 const queueMiddleware = createQueueMiddleware({
   concurrency: 5,
 })
+const userAgentMiddleware = createUserAgentMiddleware({
+  name: pkg.name,
+  version: pkg.version,
+  url: 'https://github.com/commercetools/nodejs',
+})
 const client = createClient({
   middlewares: [
     authMiddleware,
-    httpMiddleware,
     queueMiddleware,
+    userAgentMiddleware,
+    httpMiddleware,
   ],
 })
 

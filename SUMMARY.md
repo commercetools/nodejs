@@ -14,6 +14,7 @@
     * [getErrorByCode](/docs/sdk/api/getErrorByCode.md)
     * [createQueueMiddleware](/docs/sdk/api/createQueueMiddleware.md)
     * [createLoggerMiddleware](/docs/sdk/api/createLoggerMiddleware.md)
+    * [createUserAgentMiddleware](/docs/sdk/api/createUserAgentMiddleware.md)
     * [createRequestBuilder](/docs/sdk/api/createRequestBuilder.md)
     * [createSyncCategories](/docs/sdk/api/createSyncCategories.md)
     * [createSyncCustomers](/docs/sdk/api/createSyncCustomers.md)
