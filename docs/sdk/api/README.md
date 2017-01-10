@@ -26,6 +26,10 @@ This section documents the SDK packages APIs.
 
 * [createLoggerMiddleware(options)](createLoggerMiddleware.md)
 
+### `sdk-middleware-user-agent`
+
+* [createUserAgentMiddleware(options)](createUserAgentMiddleware.md)
+
 ### `api-request-builder`
 
 * [createRequestBuilder(customServices)](createRequestBuilder.md)
