@@ -31,4 +31,7 @@ const client = createClient({
     createHttpMiddleware({...}),
   ],
 })
+
+// The User-Agent will be something like:
+// commercetools-node-sdk Node.js/6.9.0 (darwin; x64) my-awesome-library/1.0.0 (+https://github.com/my-company/my-awesome-library; +helpdesk@commercetools.com)
 ```
