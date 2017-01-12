@@ -34,6 +34,10 @@ This section documents the SDK packages APIs.
 
 * [createRequestBuilder(customServices)](createRequestBuilder.md)
 
+### `http-user-agent`
+
+* [createHttpUserAgent(options)](createHttpUserAgent.md)
+
 ### `sync-actions`
 
 * [createSyncCategories(actionGroups)](createSyncCategories.md)

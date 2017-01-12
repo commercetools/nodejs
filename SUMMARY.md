@@ -21,4 +21,5 @@
     * [createSyncInventories](/docs/sdk/api/createSyncInventories.md)
     * [createSyncProducts](/docs/sdk/api/createSyncProducts.md)
     * [createSyncOrders](/docs/sdk/api/createSyncOrders.md)
+    * [createHttpUserAgent](/docs/sdk/api/createHttpUserAgent.md)
 * [CLI](/docs/cli/README.md)
