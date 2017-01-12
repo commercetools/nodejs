@@ -62,9 +62,10 @@ export type QueueMiddlewareOptions = {
   concurrency?: number;
 }
 export type UserAgentMiddlewareOptions = {
-  name?: string;
-  version?: string;
-  url?: string;
+  libraryName?: string;
+  libraryVersion?: string;
+  contactUrl?: string;
+  contactEmail?: string;
 }
 
 

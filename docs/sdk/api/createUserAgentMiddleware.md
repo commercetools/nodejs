@@ -6,10 +6,10 @@ Creates a [middleware](/docs/sdk/Glossary.md#middleware) to append the `User-Age
 
 #### Named arguments (options)
 
-1. `name` *(String)*: the name of the library / package / application using the SDK (optional)
-2. `version` *(String)*: the version of the library / package / application using the SDK (optional)
-3. `url` *(String)*: the url of the library / package / application using the SDK (optional)
-
+1. `libraryName` *(String)*: the name of the library / package / application using the SDK (optional)
+2. `libraryVersion` *(String)*: the version of the library / package / application using the SDK (optional)
+3. `contactUrl` *(String)*: the contact URL of the library / package / application using the SDK (optional)
+4. `contactEmail` *(String)*: the contact email of the library / package / application using the SDK (optional)
 
 #### Usage example
 
@@ -24,14 +24,15 @@ const client = createClient({
   middlewares: [
     createAuthMiddleware({...}),
     createUserAgentMiddleware({
-      name: 'my-awesome-library',
-      version: '1.0.0',
-      url: 'https://github.com/my-company/my-awesome-library'
+      libraryName: 'my-awesome-library',
+      libraryVersion: '1.0.0',
+      contactUrl: 'https://github.com/commercetools/my-awesome-library'
+      contactEmail: 'helpdesk@commercetools.com'
     }),
     createHttpMiddleware({...}),
   ],
 })
 
 // The User-Agent will be something like:
-// commercetools-node-sdk Node.js/6.9.0 (darwin; x64) my-awesome-library/1.0.0 (+https://github.com/my-company/my-awesome-library; +helpdesk@commercetools.com)
+// commercetools-js-sdk Node.js/6.9.0 (darwin; x64) my-awesome-library/1.0.0 (+https://github.com/commercetools/my-awesome-library; +helpdesk@commercetools.com)
 ```

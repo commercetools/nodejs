@@ -4,9 +4,10 @@ import {
 
 describe('UserAgent', () => {
   const userAgentMiddleware = createUserAgentMiddleware({
-    name: 'foo',
-    version: '1.0.0',
-    url: 'http://foo.com',
+    libraryName: 'my-awesome-library',
+    libraryVersion: '1.0.0',
+    contactUrl: 'https://commercetools.com',
+    contactEmail: 'helpdesk@commercetools.com',
   })
   const request = {
     headers: {
@@ -19,7 +20,7 @@ describe('UserAgent', () => {
       expect(req.headers['Authorization']).toBe('123')
     })
     it('has sdk info', () => {
-      expect(req.headers['User-Agent']).toMatch('commercetools-node-sdk')
+      expect(req.headers['User-Agent']).toMatch('commercetools-js-sdk')
     })
     it('has browser info', () => {
       // because we use jsdom
@@ -30,10 +31,10 @@ describe('UserAgent', () => {
       expect(req.headers['User-Agent']).toMatch(process.version.slice(1))
     })
     it('has library info', () => {
-      expect(req.headers['User-Agent']).toMatch('foo/1.0.0')
+      expect(req.headers['User-Agent']).toMatch('my-awesome-library/1.0.0')
     })
     it('has library url', () => {
-      expect(req.headers['User-Agent']).toMatch('http://foo.com')
+      expect(req.headers['User-Agent']).toMatch('https://commercetools.com')
     })
     it('has contact info', () => {
       expect(req.headers['User-Agent']).toMatch('helpdesk@commercetools.com')
