@@ -41,9 +41,10 @@ const queueMiddleware = createQueueMiddleware({
   concurrency: 5,
 })
 const userAgentMiddleware = createUserAgentMiddleware({
-  name: pkg.name,
-  version: pkg.version,
-  url: 'https://github.com/commercetools/nodejs',
+  libraryName: pkg.name,
+  libraryVersion: pkg.version,
+  contactUrl: 'https://github.com/commercetools/nodejs',
+  contactEmail: 'npmjs@commercetools.com',
 })
 const client = createClient({
   middlewares: [

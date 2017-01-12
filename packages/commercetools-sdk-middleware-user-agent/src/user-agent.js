@@ -5,12 +5,15 @@ import type {
   ClientResponse,
   UserAgentMiddlewareOptions,
 } from 'types/sdk'
-import createUserAgent from './create-user-agent'
+import createHttpUserAgent from '@commercetools/http-user-agent'
 
 export default function createUserAgentMiddleware (
   options: UserAgentMiddlewareOptions,
 ): Middleware {
-  const userAgent = createUserAgent(options)
+  const userAgent = createHttpUserAgent({
+    name: 'commercetools-js-sdk',
+    ...options,
+  })
 
   return next => (request: ClientRequest, response: ClientResponse) => {
     const requestWithUserAgent = {
