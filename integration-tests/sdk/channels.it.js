@@ -148,6 +148,29 @@ describe('Channels', () => {
       expect(response.statusCode).toBe(200)
     })
   })
+
+  it('process', () => {
+    const processRequest = {
+      uri: service.perPage(3).build({ projectKey }),
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }
+
+    let resultCount = 0
+    return client.process(
+      processRequest,
+      (payload) => {
+        resultCount += payload.body.results.length
+        return Promise.resolve(payload.body.results.map(c => c.id))
+      },
+    )
+    .then((response) => {
+      expect(response).toHaveLength(resultCount)
+    })
+  })
 })
 
 let uniqueIdCounter = 0
