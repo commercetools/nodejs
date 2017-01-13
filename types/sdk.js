@@ -36,14 +36,18 @@ export type Middleware = (next: Dispatch) => Dispatch;
 export type ClientOptions = {
   middlewares?: Array<Middleware>;
 }
-export type ClientResult = {
-  body: ?Object;
+export type SuccessResult = {
+  body: Object;
   statusCode: number;
-} | HttpErrorType
+}
+export type ClientResult = SuccessResult | HttpErrorType
 export type Client = {
   execute: (request: ClientRequest) => Promise<ClientResult>;
 }
-
+export type ProcessFn = (result: SuccessResult) => Promise<any>;
+export type ProcessOptions = {
+  accumulate?: boolean;
+}
 
 /* Middlewares */
 export type AuthMiddlewareOptions = {
