@@ -9,6 +9,7 @@
     "postinstall": "check-node-version --package && lerna bootstrap && npm run build",
     "check-updates": "./scripts/check-updates",
     "clean": "rm -rf coverage; lerna exec -- rimraf lib dist",
+    "commit": "git-cz",
     "build": "lerna exec -- babel src --out-dir lib",
     "dist": "lerna run dist",
     "lint": "flow check && ./scripts/lint packages",
