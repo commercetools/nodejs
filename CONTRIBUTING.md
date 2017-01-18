@@ -34,13 +34,22 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 ## Releases
 
 We use [semantic release](https://github.com/semantic-release/semantic-release) to automatically do releases based on the commit message.
-Since we are using [lerna](https://github.com/lerna/lerna) we need to specify in the commit description which packages might be affected by the release (`affects: <pkg-name>, <pkg-name>, ...`)
+Since we are using [lerna](https://github.com/lerna/lerna) we need to specify in the commit description which packages might be affected by the release.
 
-```
-<type>(<scope>): <subject>
-<BLANK LINE>
-affects: pkg-1, pkg-3
-```
+#### Commit message
+Make sure your commit messages follow [Angular's commit message format](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines). To make this easy run `npm run commit` from the root.
+````
+    docs(contributing): add example of a full commit message
+
+    affects: @commercetools/readers
+
+    The example commit message in the contributing.md document is not a concrete example. This is a problem because the
+    contributor is left to imagine what the commit message should look like based on a description rather than an example. Fix the
+    problem by making the example concrete and imperative.
+
+    Closes #1
+    BREAKING CHANGE: imagination no longer works
+````
 
 #### Release triggers
 
