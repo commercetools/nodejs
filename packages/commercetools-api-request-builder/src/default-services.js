@@ -28,6 +28,15 @@ export default {
       features.queryExpand,
     ],
   },
+  payments: {
+    type: 'payments',
+    endpoint: '/payments',
+    features: [
+      features.query,
+      features.queryOne,
+      features.queryExpand,
+    ],
+  },
   productProjections: {
     type: 'product-projections',
     endpoint: '/product-projections',
