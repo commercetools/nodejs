@@ -13,6 +13,8 @@ npm run coverage:ci
 # thus tasks that rely on that should not run.
 if [ "$TRAVIS_SECURE_ENV_VARS" == "true" ]; then
   npm run it
+else
+  echo "Build does not have secure env variables, skipping integration tests!"
 fi
 
 # 4. run dist tasks where necessary
