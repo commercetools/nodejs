@@ -44,7 +44,7 @@
     "codecov": "1.0.1",
     "commitizen": "2.9.5",
     "cross-env": "3.1.4",
-    "cz-lerna-changelog": "1.0.0",
+    "cz-lerna-changelog": "0.3.2",
     "eslint": "3.12.2",
     "eslint-config-airbnb": "13.0.0",
     "eslint-config-commercetools": "5.0.0",
