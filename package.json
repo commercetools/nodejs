@@ -47,7 +47,7 @@
     "cz-lerna-changelog": "0.3.2",
     "eslint": "3.13.1",
     "eslint-config-airbnb": "13.0.0",
-    "eslint-config-commercetools": "5.0.0",
+    "eslint-config-commercetools": "6.0.0",
     "eslint-formatter-pretty": "1.1.0",
     "eslint-import-resolver-babel-module": "2.2.1",
     "eslint-plugin-flowtype": "2.30.0",
