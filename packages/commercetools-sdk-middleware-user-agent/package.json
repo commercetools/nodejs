@@ -1,0 +1,36 @@
+{
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "name": "@commercetools/sdk-middleware-user-agent",
+  "version": "1.1.0",
+  "description": "Middleware for setting the User-Agent on the HTTP request, to use with @commercetools/sdk-client",
+  "keywords": [
+    "commercetools",
+    "sdk",
+    "middleware",
+    "user-agent"
+  ],
+  "homepage": "https://commercetools.github.io/nodejs/",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs.git"
+  },
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "scripts": {
+    "dist": "npm run build:umd && npm run build:umd:min",
+    "build:umd": "cross-env cross-env NODE_ENV=development webpack --config ../../webpack.config.js --output-library CommercetoolsSdkMiddlewareUserAgent --output-library-target umd src/index.js dist/commercetools-sdk-middleware-user-agent.js",
+    "build:umd:min": "cross-env cross-env NODE_ENV=production webpack --config ../../webpack.config.js --output-library CommercetoolsSdkMiddlewareUserAgent --output-library-target umd src/index.js dist/commercetools-sdk-middleware-user-agent.min.js"
+  },
+  "dependencies": {
+    "@commercetools/http-user-agent": "1.0.0"
+  }
+}

@@ -8,11 +8,13 @@ const expectedServiceKeys = [
   'categories',
   'channels',
   'customerGroups',
+  'payments',
   'productProjections',
   'productProjectionsSearch',
   'products',
   'productTypes',
   'taxCategories',
+  'types',
 ]
 
 
