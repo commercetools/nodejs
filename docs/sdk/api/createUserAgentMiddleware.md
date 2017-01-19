@@ -1,0 +1,38 @@
+# `createUserAgentMiddleware(options)`
+
+> From package [@commercetools/sdk-middleware-user-agent](/docs/sdk/api/README.md#sdk-middleware-user-agent).
+
+Creates a [middleware](/docs/sdk/Glossary.md#middleware) to append the `User-Agent` HTTP header to the request.
+
+#### Named arguments (options)
+
+1. `libraryName` *(String)*: the name of the library / package / application using the SDK (optional)
+2. `libraryVersion` *(String)*: the version of the library / package / application using the SDK (optional)
+3. `contactUrl` *(String)*: the contact URL of the library / package / application using the SDK (optional)
+4. `contactEmail` *(String)*: the contact email of the library / package / application using the SDK (optional)
+
+#### Usage example
+
+```js
+import { createClient } from '@commercetools/sdk-client'
+import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
+import { createAuthMiddleware } from '@commercetools/sdk-middleware-auth'
+import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
+
+const userAgentMiddleware = createUserAgentMiddleware(),
+const client = createClient({
+  middlewares: [
+    createAuthMiddleware({...}),
+    createUserAgentMiddleware({
+      libraryName: 'my-awesome-library',
+      libraryVersion: '1.0.0',
+      contactUrl: 'https://github.com/commercetools/my-awesome-library'
+      contactEmail: 'helpdesk@commercetools.com'
+    }),
+    createHttpMiddleware({...}),
+  ],
+})
+
+// The User-Agent will be something like:
+// commercetools-js-sdk Node.js/6.9.0 (darwin; x64) my-awesome-library/1.0.0 (+https://github.com/commercetools/my-awesome-library; +helpdesk@commercetools.com)
+```

@@ -34,13 +34,37 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 ## Releases
 
 We use [semantic release](https://github.com/semantic-release/semantic-release) to automatically do releases based on the commit message.
-Since we are using [lerna](https://github.com/lerna/lerna) we need to specify in the commit description which packages might be affected by the release (`affects: <pkg-name>, <pkg-name>, ...`)
+Since we are using [lerna](https://github.com/lerna/lerna) we need to specify in the commit description which packages might be affected by the release.
 
-```
-<type>(<scope>): <subject>
-<BLANK LINE>
-affects: pkg-1, pkg-3
-```
+#### Commit message
+Make sure your commit messages follow [Angular's commit message format](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines). To make this easy run `npm run commit` from the root.
+````
+    docs(contributing): add example of a full commit message
+
+    affects: @commercetools/readers
+
+    The example commit message in the contributing.md document is not a concrete example. This is a problem because the
+    contributor is left to imagine what the commit message should look like based on a description rather than an example. Fix the
+    problem by making the example concrete and imperative.
+
+    Closes #1
+    BREAKING CHANGE: imagination no longer works
+````
+
+#### Release triggers
+
+Based on the semantic release conventions, there are 3 triggers to control the semver version plus a trigger for releasing the actual packages.
+
+- `fix` *(commit type)*: commits with this type will [bump a `patch` version](https://github.com/semantic-release/semantic-release#patch-release)
+- `feat` *(commit type)*: commits with this type will [bump a `minor` version](https://github.com/semantic-release/semantic-release#minor-feature-release)
+- `BREAKING CHANGE` *(commit description)*: commits with this keywords in the description will [bump a `major` version](https://github.com/semantic-release/semantic-release#major-breaking-release)
+
+- `affects: <package-1>,<package-2>,...` *(release targets)*: commits with this sentence in the description will target the release of the listed packages with the version based on the triggers above
+
+#### Merging Pull Requests
+
+To avoid possible mistakes in the commit messages, and ensure that merging PRs will lead to releasing new versions, there is only one way to merge the PR: by `Squash and Commit`.
+This is the perfect opportunity to ensure to adjust the commit message description following the semantic release conventions. This means that commits done while developing the PR don't necessary need to include the _release triggers_. You can simply do that when squashing the "final" commit.
 
 ------------
 

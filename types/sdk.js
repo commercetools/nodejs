@@ -36,14 +36,18 @@ export type Middleware = (next: Dispatch) => Dispatch;
 export type ClientOptions = {
   middlewares?: Array<Middleware>;
 }
-export type ClientResult = {
-  body: ?Object;
+export type SuccessResult = {
+  body: Object;
   statusCode: number;
-} | HttpErrorType
+}
+export type ClientResult = SuccessResult | HttpErrorType
 export type Client = {
   execute: (request: ClientRequest) => Promise<ClientResult>;
 }
-
+export type ProcessFn = (result: SuccessResult) => Promise<any>;
+export type ProcessOptions = {
+  accumulate?: boolean;
+}
 
 /* Middlewares */
 export type AuthMiddlewareOptions = {
@@ -60,6 +64,12 @@ export type HttpMiddlewareOptions = {
 }
 export type QueueMiddlewareOptions = {
   concurrency?: number;
+}
+export type UserAgentMiddlewareOptions = {
+  libraryName?: string;
+  libraryVersion?: string;
+  contactUrl?: string;
+  contactEmail?: string;
 }
 
 
@@ -102,6 +112,17 @@ export type ServiceBuilderDefinition = {
 }
 export type ApiRequestBuilder = {
   [key: string]: ServiceBuilder;
+}
+
+
+/* HTTP User Agent */
+export type HttpUserAgentOptions = {
+  name: string;
+  version?: string;
+  libraryName?: string;
+  libraryVersion?: string;
+  contactUrl?: string;
+  contactEmail?: string;
 }
 
 

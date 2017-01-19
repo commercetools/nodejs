@@ -9,7 +9,11 @@ import {
 import {
   createQueueMiddleware,
 } from '@commercetools/sdk-middleware-queue'
+import {
+  createUserAgentMiddleware,
+} from '@commercetools/sdk-middleware-user-agent'
 import omit from 'lodash.omit'
+import pkg from '../package.json'
 import loadCredentials from '../load-credentials'
 
 const {
@@ -36,11 +40,18 @@ const httpMiddleware = createHttpMiddleware({
 const queueMiddleware = createQueueMiddleware({
   concurrency: 5,
 })
+const userAgentMiddleware = createUserAgentMiddleware({
+  libraryName: pkg.name,
+  libraryVersion: pkg.version,
+  contactUrl: 'https://github.com/commercetools/nodejs',
+  contactEmail: 'npmjs@commercetools.com',
+})
 const client = createClient({
   middlewares: [
     authMiddleware,
-    httpMiddleware,
     queueMiddleware,
+    userAgentMiddleware,
+    httpMiddleware,
   ],
 })
 
@@ -135,6 +146,29 @@ describe('Channels', () => {
     return client.execute(deleteRequest)
     .then((response) => {
       expect(response.statusCode).toBe(200)
+    })
+  })
+
+  it('process', () => {
+    const processRequest = {
+      uri: service.perPage(3).build({ projectKey }),
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }
+
+    let resultCount = 0
+    return client.process(
+      processRequest,
+      (payload) => {
+        resultCount += payload.body.results.length
+        return Promise.resolve(payload.body.results.map(c => c.id))
+      },
+    )
+    .then((response) => {
+      expect(response).toHaveLength(resultCount)
     })
   })
 })
