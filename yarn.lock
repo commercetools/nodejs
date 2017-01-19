@@ -1508,15 +1508,15 @@ cz-conventional-changelog@1.2.0:
     right-pad "^1.0.1"
     word-wrap "^1.0.3"
 
-cz-conventional-changelog@jpnelson/cz-conventional-changelog#a9a5468d:
+"cz-conventional-changelog@github:jpnelson/cz-conventional-changelog#a9a5468d":
   version "0.0.0-semantically-released.0"
   resolved "https://codeload.github.com/jpnelson/cz-conventional-changelog/tar.gz/a9a5468d"
   dependencies:
     word-wrap "^1.0.3"
 
-cz-lerna-changelog@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/cz-lerna-changelog/-/cz-lerna-changelog-1.0.0.tgz#c2959c3242954ebb1ebb412b846ee3d6262b5914"
+cz-lerna-changelog@0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/cz-lerna-changelog/-/cz-lerna-changelog-0.3.2.tgz#59a1a82472af1d69c50cb91cfa5d153b7ff8e6f1"
   dependencies:
     cz-conventional-changelog jpnelson/cz-conventional-changelog#a9a5468d
     shelljs "0.7.0"
