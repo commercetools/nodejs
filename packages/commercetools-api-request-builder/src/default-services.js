@@ -73,4 +73,13 @@ export default {
       features.queryOne,
     ],
   },
+  types: {
+    type: 'types',
+    endpoint: '/types',
+    features: [
+      features.query,
+      features.queryOne,
+      features.queryExpand,
+    ],
+  },
 }

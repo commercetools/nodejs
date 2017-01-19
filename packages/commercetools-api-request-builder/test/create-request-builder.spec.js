@@ -13,6 +13,7 @@ const expectedServiceKeys = [
   'products',
   'productTypes',
   'taxCategories',
+  'types',
 ]
 
 
