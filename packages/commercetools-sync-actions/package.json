@@ -30,7 +30,7 @@
     "build:umd:min": "cross-env NODE_ENV=production webpack --config ../../webpack.config.js --output-library CommercetoolsSyncActions --output-library-target umd src/index.js dist/commercetools-sync-actions.min.js"
   },
   "dependencies": {
-    "jsondiffpatch": "emmenko/jsondiffpatch#patch-webpack",
+    "jsondiffpatch": "0.2.4",
     "lodash.flatten": "4.4.0",
     "lodash.foreach": "4.5.0",
     "lodash.uniqwith": "4.5.0"
