@@ -1,6 +1,7 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
 # This file runs all the main scripts to be run in the build.
-# Note: ensure to have `set -e` in order to fail the build fast.
+# Exit if one of the build steps errors
+set -e
 
 # 1. lint code
 npm run lint
