@@ -1,4 +1,18 @@
 {
   "lerna": "2.0.0-beta.30",
-  "version": "independent"
+  "version": "independent",
+  "changelog": {
+    "rootPath": ".",
+    "repo": "commercetools/nodejs",
+    "labels": {
+      "Type: New Feature": ":rocket: New Feature",
+      "Type: Breaking Change": ":boom: Breaking Change",
+      "Type: Bug": ":bug: Bug Fix",
+      "Type: Enhancement": ":nail_care: Enhancement",
+      "Type: Documentation": ":memo: Documentation",
+      "Type: Maintenance": ":house: Maintenance"
+    },
+    "cacheDir": ".changelog",
+    "ignoreCommitters": ["greenkeeper"]
+  }
 }
