@@ -19,6 +19,7 @@ const expectedServiceProperties = [
   'page',
   'perPage',
   'byId',
+  'byKey',
   'expand',
   'text',
   'facet',
@@ -89,6 +90,9 @@ describe('createService', () => {
     })
     it('endpoint with id', () => {
       expect(createService(options).byId('123').build()).toBe('/foo/123')
+    })
+    it('endpoint with key', () => {
+      expect(createService(options).byKey('bar').build()).toBe('/foo/key=bar')
     })
     it('endpoint with query params', () => {
       expect(createService(options).expand('channel').build())

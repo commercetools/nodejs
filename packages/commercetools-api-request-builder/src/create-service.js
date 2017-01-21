@@ -99,11 +99,19 @@ export default function createService (
       const uri =
         (projectKey ? `/${projectKey}` : '') +
         endpoint +
-        (this.params.id ? `/${this.params.id}` : '') +
+        getIdOrKey(this.params) +
         (queryParams ? `?${queryParams}` : '')
 
       setDefaultParams.call(this)
       return uri
     },
   })
+}
+
+function getIdOrKey (params: Object): string {
+  if (params.id)
+    return `/${params.id}`
+  else if (params.key)
+    return `/key=${params.key}`
+  return ''
 }

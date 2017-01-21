@@ -22,7 +22,6 @@ export default function createHttpMiddleware (
 ): Middleware {
   const {
     host = defaultApiHost,
-    // TODO: other options?
   } = options
 
   return next => (request: ClientRequest, response: ClientResponse) => {
