@@ -112,7 +112,6 @@ export function actionsMapAttributes (
   newObj,
   sameForAllAttributeNames = [],
 ) {
-  // TODO: validate ProductType between products
   let actions = []
   const { masterVariant, variants } = diff
 

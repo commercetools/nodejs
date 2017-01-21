@@ -27,7 +27,6 @@ export default function createClient (options: ClientOptions = {}): Client {
       Given a request object,
     */
     execute (request: ClientRequest): Promise<ClientResult> {
-      // TODO: validate request shape
       return new Promise((resolve, reject) => {
         const resolver = (rq: ClientRequest, rs: ClientResponse) => {
           // Note: pick the promise `resolve` and `reject` function from
@@ -62,10 +61,6 @@ export default function createClient (options: ClientOptions = {}): Client {
       fn: ProcessFn,
       opt: ProcessOptions = { accumulate: true },
     ): Promise<Array<Object>> {
-      // Validate arguments
-      // - request must be a GET request
-      // - fn must be a function
-
       return new Promise((resolve, reject) => {
         const [path, queryString] = request.uri.split('?')
         const query = {

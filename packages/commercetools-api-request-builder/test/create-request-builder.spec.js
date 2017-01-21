@@ -5,16 +5,32 @@ import {
 
 // order matters!
 const expectedServiceKeys = [
+  'cartDiscounts',
+  'carts',
   'categories',
   'channels',
   'customerGroups',
+  'customers',
+  'customObjects',
+  'discountCodes',
+  'inventory',
+  'messages',
+  'myCarts',
+  'myOrders',
+  'orders',
   'payments',
+  'productDiscounts',
   'productProjections',
   'productProjectionsSearch',
   'products',
   'productTypes',
+  'reviews',
+  'shippingMethods',
+  'states',
+  'subscriptions',
   'taxCategories',
   'types',
+  'zones',
 ]
 
 
