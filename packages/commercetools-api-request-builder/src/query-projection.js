@@ -11,9 +11,3 @@ export function staged (isStaged: boolean = true): Object {
   this.params.staged = isStaged
   return this
 }
-
-// TODO: add price selection query params
-// - priceCurrency
-// - priceCountry (requires priceCurrency)
-// - priceCustomerGroup (requires priceCurrency)
-// - priceChannel (requires priceCurrency)

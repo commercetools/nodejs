@@ -155,7 +155,6 @@ export default {
       features.projection,
     ],
   },
-  // TODO: productSuggestions
   products: {
     type: 'products',
     endpoint: '/products',

@@ -92,7 +92,6 @@ export default function createService (
     // Pass some options to further configure the URI:
     // - `projectKey`: will prefix the URI with the given projectKey
     build (options: BuildOptions = {}): string {
-      // FIXME: make it an option of `createRequestBuilder`
       const { projectKey } = options
 
       const queryParams = buildQueryString(this.params)
