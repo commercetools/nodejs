@@ -27,9 +27,17 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 
 3. If you're writing documentation, you can start the gitbook development server with `npm run docs:watch`
 
-4. To run all packages tests simply do `npm test` (we use [jest](https://github.com/facebook/jest)). If you want to work on a specific package and run the tests only for that package, we recommend to use `npm run test:package`. This will prompt you to select one of the available packages. To run in _watch_ mode simply do `npm run test:package -- --watch`
+4. To run all packages tests simply do `npm test` (we use [jest](https://github.com/facebook/jest)). If you want to work on a specific package and run the tests only for that package, we recommend to use `npm run test:package`. This will prompt you to select one of the available packages. To run in _watch_ mode simply do `npm run test:package -- --watch`.
 
-5. Linting and static checks are done by `npm run lint`. Commiting also runs a git hook to lint the changed files.
+5. Linting and static checks are done by `npm run lint`. We follow lint rules defined in our [eslint-config](https://github.com/commercetools/eslint-config) which is based on [Airbnb eslint config](https://www.npmjs.com/package/eslint-config-airbnb). Static checks are done using [Flow](https://flowtype.org/) and can be included / adopted incrementally. Commiting also runs a git hook to lint the changed files.
+
+## Upgrading dependencies
+
+We use [Greenkeeper](https://greenkeeper.io/) to get notified whenever there is a new version of a dependency, in form of a Pull Request. It's recommended to check the changes of the new versions before merging the PR. If necessary the PR should be updated with necessary code changes / migrations.
+
+#### Update `yarn.lock` file
+
+To ensure the lock file is up-to-date with the new versions, it's recommended to do checkout the branch, install the new deps with `yarn` and push the updated lock file to the PR.
 
 ## Releases
 

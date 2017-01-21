@@ -22,7 +22,6 @@ export default function createHttpMiddleware (
     host: defaultApiHost
   },
 ): Middleware {
-
   return next => (request: ClientRequest, response: ClientResponse) => {
     const url = options.host + request.uri
     const body = typeof request.body === 'string'
