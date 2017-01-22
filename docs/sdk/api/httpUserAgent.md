@@ -1,6 +1,20 @@
-# `createHttpUserAgent(options)`
+# `http-user-agent`
+Creates a proper HTTP User-Agent. Can be used everywhere.
 
-> From package [@commercetools/http-user-agent](/docs/sdk/api/README.md#http-user-agent).
+## Install
+
+#### Node.js
+```bash
+npm install --save @commercetools/http-user-agent
+```
+
+#### Browser
+```html
+<script src="https://unpkg.com/@commercetools/http-user-agent/dist/commercetools-http-user-agent.min.js"></script>
+<script>// global: CommercetoolsHttpUserAgent</script>
+```
+
+## `createHttpUserAgent(options)`
 
 Creates a proper HTTP `User-Agent`.
 

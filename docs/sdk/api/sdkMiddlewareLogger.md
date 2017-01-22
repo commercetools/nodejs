@@ -1,8 +1,22 @@
-# `createLoggerMiddleware(options)`
+# `sdk-middleware-logger`
+Middelware to log incoming [request](/sdk/Glossary.md#clientrequest) and [response](/sdk/Glossary.md#clientrequest) objects.
 
-> From package [@commercetools/sdk-middleware-logger](/docs/sdk/api/README.md#sdk-middleware-logger).
+## Install
 
-Creates a [middleware](/docs/sdk/Glossary.md#middleware) to log request and response objects being executed.
+#### Node.js
+```bash
+npm install --save @commercetools/sdk-middleware-logger
+```
+
+#### Browser
+```html
+<script src="https://unpkg.com/@commercetools/sdk-middleware-logger/dist/commercetools-sdk-middleware-logger.min.js"></script>
+<script>// global: CommercetoolsSdkMiddlewareLogger</script>
+```
+
+## `createLoggerMiddleware(options)`
+
+Creates a [middleware](/sdk/Glossary.md#middleware) to log request and response objects being executed.
 
 #### Usage example
 

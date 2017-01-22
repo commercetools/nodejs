@@ -5,7 +5,7 @@ If you've used libraries like [Express](http://expressjs.com/) and [Koa](http://
 The SDK middlewares work similarly to those concepts. Given an initial `request` and `response` definition, each middleware can do "side effects" and "transform" those objects, passing them to the next middleware in the chain. **This provides a third-party extension point for handling HTTP requests.**
 For example, there are middlewares for doing authentication, for logging, for actually making the HTTP request, for retrying failed requests, etc.
 
-The most important thing is the **contract** the middlewares have between each other: the [`request`](/docs/sdk/Glossary.md#clientrequest) and [`response`](/docs/sdk/Glossary.md#clientresponse) objects passed to each middleware have a *well predefined shape*, known to each middleware. This is important to ensure that middlewares can do side effects on those objects.
+The most important thing is the **contract** the middlewares have between each other: the [`request`](/sdk/Glossary.md#clientrequest) and [`response`](/sdk/Glossary.md#clientresponse) objects passed to each middleware have a *well predefined shape*, known to each middleware. This is important to ensure that middlewares can do side effects on those objects.
 
 ## Middlewares API
 
@@ -15,7 +15,7 @@ A *Middleware* is a higher-order function that composes a *dispatch function* to
 const middleware = next => (request, response) => next(request, response)
 ```
 
-The dispatch function accepts 2 arguments: [`request`](/docs/sdk/Glossary.md#clientrequest) and [`response`](/docs/sdk/Glossary.md#clientresponse) objects.
+The dispatch function accepts 2 arguments: [`request`](/sdk/Glossary.md#clientrequest) and [`response`](/sdk/Glossary.md#clientresponse) objects.
 After doing the side effects, the middleware should call `next`, passing the (mutated) `request` and `response` to the next middleware.
 
 ## Implement a logging middleware
@@ -31,4 +31,4 @@ const loggerMiddleware = next => (request, response) => {
 }
 ```
 
-See [official middlewares](/docs/sdk/api/README.md#middlewares) for more advanced examples.
+See [official middlewares](/sdk/api/README.md#middlewares) for more advanced examples.

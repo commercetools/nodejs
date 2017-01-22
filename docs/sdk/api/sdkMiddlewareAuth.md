@@ -1,8 +1,22 @@
-# `createAuthMiddlewareForClientCredentialsFlow(options)`
+# `sdk-middleware-auth`
+Middelware to authenticate the [request](/sdk/Glossary.md#clientrequest) using one of the supported _auth flows_.
 
-> From package [@commercetools/sdk-middleware-auth](/docs/sdk/api/README.md#sdk-middleware-auth).
+## Install
 
-Creates a [middleware](/docs/sdk/Glossary.md#middleware) to handle authentication for the [Client Credentials Flow](http://dev.commercetools.com/http-api-authorization.html#client-credentials-flow) of the commercetools platform API.
+#### Node.js
+```bash
+npm install --save @commercetools/sdk-middleware-auth
+```
+
+#### Browser
+```html
+<script src="https://unpkg.com/@commercetools/sdk-middleware-auth/dist/commercetools-sdk-middleware-auth.min.js"></script>
+<script>// global: CommercetoolsSdkMiddlewareAuth</script>
+```
+
+## `createAuthMiddlewareForClientCredentialsFlow(options)`
+
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Client Credentials Flow](http://dev.commercetools.com/http-api-authorization.html#client-credentials-flow) of the commercetools platform API.
 
 #### Named arguments (options)
 

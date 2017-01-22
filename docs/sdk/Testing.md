@@ -58,4 +58,4 @@ const client = createClient({
 })
 ```
 
-Furthermore, if you're using [`jest`](https://github.com/facebook/jest) for testing, you might decide to define [manual mocks](http://facebook.github.io/jest/docs/manual-mocks.html#content) for the SDK modules. You might think of using this if you just want to mock the SDK modules altogether.
+Furthermore, if you're using [`jest`](https://github.com/facebook/jest) for testing, you might decide to define [manual mocks](http://facebook.github.io/jest/manual-mocks.html#content) for the SDK modules. You might think of using this if you just want to mock the SDK modules altogether.
