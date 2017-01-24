@@ -60,7 +60,7 @@ export type AuthMiddlewareOptions = {
   scopes: Array<string>;
 }
 export type HttpMiddlewareOptions = {
-  host?: string;
+  host: string;
 }
 export type QueueMiddlewareOptions = {
   concurrency?: number;
