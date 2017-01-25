@@ -19,7 +19,7 @@ Older versions might still work but we don't support them. Use them at your own 
 
 ### Dependencies
 
-The SDK is _not a single package_ anymore, it's [composed by different packages](/sdk/api/README.md).
+The SDK is _not a single package_ anymore, it's [composed of different packages](/sdk/api/README.md).
 It's up to you to _pick only the packages that you need_, many of them are optional and can also be replaced with custom implementations.
 
 > All new packages are now [scoped](https://docs.npmjs.com/misc/scope) to `@commercetools`. This is mainly to have better package names and to have them all under _commercetools_ organization.
