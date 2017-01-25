@@ -51,7 +51,7 @@ export type ProcessOptions = {
 
 /* Middlewares */
 export type AuthMiddlewareOptions = {
-  host?: string;
+  host: string;
   projectKey: string;
   credentials: {
     clientId: string;
@@ -63,7 +63,7 @@ export type HttpMiddlewareOptions = {
   host: string;
 }
 export type QueueMiddlewareOptions = {
-  concurrency?: number;
+  concurrency: number;
 }
 export type UserAgentMiddlewareOptions = {
   libraryName?: string;

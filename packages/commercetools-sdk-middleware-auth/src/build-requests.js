@@ -17,15 +17,13 @@ const defaultAuthHost = 'https://auth.sphere.io'
 // POST https://{host}/oauth/token?grant_type=client_credentials&scope={scope}
 // Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 export function buildRequestForClientCredentialsFlow (
-  options: AuthMiddlewareOptions,
-): BuiltRequestParams {
-  const {
+  {
     host = defaultAuthHost,
     projectKey,
     credentials,
     scopes,
-  } = options
-
+  }: AuthMiddlewareOptions = {},
+): BuiltRequestParams {
   if (!projectKey)
     throw new Error('Missing required option (projectKey)')
 
