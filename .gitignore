@@ -9,6 +9,7 @@ node_modules
 
 # Build artifacts
 _book
+.changelog
 dist
 lib
 coverage
