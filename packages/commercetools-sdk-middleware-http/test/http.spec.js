@@ -20,12 +20,8 @@ function createTestResponse (options) {
   }
 }
 
-function createTestMiddlewareOptions (options) {
-  return {
-    host: 'https://api.commercetools.co',
-    ...options,
-  }
-}
+const defaultHost = 'https://api.sphere.io'
+const customHost = 'https://api.commercetools.co'
 
 describe('Http', () => {
   beforeEach(() => {
@@ -49,11 +45,9 @@ describe('Http', () => {
         })
         resolve()
       }
-      const middlewareOptions = createTestMiddlewareOptions()
-      const httpMiddleware = createHttpMiddleware(
-        middlewareOptions,
-      )
-      nock(middlewareOptions.host)
+      // Use default options
+      const httpMiddleware = createHttpMiddleware()
+      nock(defaultHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
         })
@@ -83,11 +77,9 @@ describe('Http', () => {
         })
         resolve()
       }
-      const middlewareOptions = createTestMiddlewareOptions()
-      const httpMiddleware = createHttpMiddleware(
-        middlewareOptions,
-      )
-      nock(middlewareOptions.host)
+      // Use custom options
+      const httpMiddleware = createHttpMiddleware({ host: customHost })
+      nock(customHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
         })
@@ -114,17 +106,14 @@ describe('Http', () => {
         expect(res.error.originalRequest).toBeDefined()
         expect(res.error.message).toBe(
           // eslint-disable-next-line max-len
-          'request to https://api.commercetools.co/foo/bar failed, reason: Connection timeout',
+          `request to ${defaultHost}/foo/bar failed, reason: Connection timeout`,
         )
         expect(res.body).toBeUndefined()
         expect(res.statusCode).toBe(0)
         resolve()
       }
-      const middlewareOptions = createTestMiddlewareOptions()
-      const httpMiddleware = createHttpMiddleware(
-        middlewareOptions,
-      )
-      nock(middlewareOptions.host)
+      const httpMiddleware = createHttpMiddleware()
+      nock(defaultHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
         })
@@ -162,11 +151,8 @@ describe('Http', () => {
         })
         resolve()
       }
-      const middlewareOptions = createTestMiddlewareOptions()
-      const httpMiddleware = createHttpMiddleware(
-        middlewareOptions,
-      )
-      nock(middlewareOptions.host)
+      const httpMiddleware = createHttpMiddleware()
+      nock(defaultHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
         })
@@ -196,11 +182,8 @@ describe('Http', () => {
         expect(res.statusCode).toBe(404)
         resolve()
       }
-      const middlewareOptions = createTestMiddlewareOptions()
-      const httpMiddleware = createHttpMiddleware(
-        middlewareOptions,
-      )
-      nock(middlewareOptions.host)
+      const httpMiddleware = createHttpMiddleware()
+      nock(defaultHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
         })
@@ -228,11 +211,8 @@ describe('Http', () => {
         expect(res.statusCode).toBe(415)
         resolve()
       }
-      const middlewareOptions = createTestMiddlewareOptions()
-      const httpMiddleware = createHttpMiddleware(
-        middlewareOptions,
-      )
-      nock(middlewareOptions.host)
+      const httpMiddleware = createHttpMiddleware()
+      nock(defaultHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
         })
