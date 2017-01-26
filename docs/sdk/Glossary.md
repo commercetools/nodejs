@@ -1,6 +1,6 @@
 # Glossary
 
-This is a glossary of the core terms around SDK packages, along with their type signatures. The types are documented using [Flow notation](http://flowtype.org/docs/quick-reference.html).
+This is a glossary of the core terms around SDK packages, along with their type signatures. The types are documented using [Flow notation](https://flowtype.org/docs/quick-reference.html).
 
 ## ClientRequest
 
@@ -15,7 +15,7 @@ type ClientRequest = {
 }
 ```
 
-A *ClientRequest* is an object describing the request that needs to be executed by the `sdk-client`. This is also the signature of the **request** object passed to a [middleware](/docs/sdk/Middlewares.md).
+A *ClientRequest* is an object describing the request that needs to be executed by the `sdk-client`. This is also the signature of the **request** object passed to a [middleware](/sdk/Middlewares.md).
 
 ## ClientResponse
 
@@ -29,7 +29,7 @@ type ClientResponse = {
 }
 ```
 
-A *ClientResponse* is an object describing the **response** object passed to a [middleware](/docs/sdk/Middlewares.md).
+A *ClientResponse* is an object describing the **response** object passed to a [middleware](/sdk/Middlewares.md).
 
 ## Middleware
 
@@ -40,7 +40,7 @@ type Middleware = (next: Dispatch) => Dispatch;
 
 A *Middleware* is a higher-order function that composes a *dispatch function* to return a new *dispatch function*.
 
-Middleware is composable using function composition. It is used for authentication, making http requests, logging requests, etc. See section about [middlewares](/docs/sdk/Middlewares.md) for more information.
+Middleware is composable using function composition. It is used for authentication, making http requests, logging requests, etc. See section about [middlewares](/sdk/Middlewares.md) for more information.
 
 ## Client
 

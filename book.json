@@ -1,5 +1,6 @@
 {
   "gitbook": ">=3.2.1",
+  "root": "docs",
   "title": "commercetools node.js",
   "plugins": [
     "edit-link",

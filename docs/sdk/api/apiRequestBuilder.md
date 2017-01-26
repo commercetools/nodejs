@@ -1,6 +1,20 @@
-# `createRequestBuilder(customServices)`
+# `api-request-builder`
+Provides an API to construct a URI for the HTTP API endpoints in a declarative way. Useful for building [request](/sdk/Glossary.md#clientrequest) `uri` for requests.
 
-> From package [@commercetools/api-request-builder](/docs/sdk/api/README.md#api-request-builder).
+## Install
+
+#### Node.js
+```bash
+npm install --save @commercetools/api-request-builder
+```
+
+#### Browser
+```html
+<script src="https://unpkg.com/@commercetools/api-request-builder/dist/commercetools-api-request-builder.min.js"></script>
+<script>// global: CommercetoolsApiRequestBuilder</script>
+```
+
+## `createRequestBuilder(customServices)`
 
 Creates a *request builder* that allows to declaratively build a HTTP API request URI for the commercetools platform.
 
