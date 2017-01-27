@@ -1,3 +1,37 @@
+## @commercetools/sdk-middleware-auth@2.0.0 (2017-01-27)
+
+#### :boom: Breaking Change
+* `commercetools-sdk-middleware-auth`
+  * [#53](https://github.com/commercetools/nodejs/pull/53) fix(middleware-auth): fix usage of cached token, no default options. ([@emmenko](https://github.com/emmenko))
+
+#### :bug: Bug Fix
+* `commercetools-sdk-middleware-auth`
+  * [#53](https://github.com/commercetools/nodejs/pull/53) fix(middleware-auth): fix usage of cached token, no default options. ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 1
+- Nicola Molinari ([emmenko](https://github.com/emmenko))
+
+### Migrating from @commercetools/sdk-middleware-auth@1.1.0 to @commercetools/sdk-middleware-auth@2.0.0
+When creating the _auth middleware_, the `uri` option is now required.
+
+```js
+import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
+const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
+  host: 'https://admin.commercetools.com',
+})
+```
+
+## @commercetools/sdk-middleware-http@1.1.1 (2017-01-26)
+
+#### :memo: Bug Fix
+* `commercetools-sdk-middleware-http`
+  * [#37](https://github.com/commercetools/nodejs/pull/37) fix(middleware-http): set options parameter to an object. ([@Siilwyn](https://github.com/Siilwyn))
+
+#### Committers: 1
+- Selwyn ([Siilwyn](https://github.com/Siilwyn))
+
+
+
 ## @commercetools/api-request-builder@1.6.0 (2017-01-21)
 
 #### :rocket: New Feature
