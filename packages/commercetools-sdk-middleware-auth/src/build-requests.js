@@ -17,7 +17,6 @@ type BuiltRequestParams = {
 export function buildRequestForClientCredentialsFlow (
   options: AuthMiddlewareOptions,
 ): BuiltRequestParams {
-  // TODO: use a better validator
   if (!options)
     throw new Error('Missing required options')
 
