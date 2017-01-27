@@ -12,8 +12,9 @@ import {
   buildRequestForClientCredentialsFlow,
 } from './build-requests'
 
-type TokensCache = {
-  [key: string]: number;
+type TokenCache = {
+  token: string;
+  expirationTime: number;
 }
 type Task = {
   request: ClientRequest;
@@ -23,39 +24,29 @@ type Task = {
 export default function createAuthMiddlewareForClientCredentialsFlow (
   options: AuthMiddlewareOptions,
 ): Middleware {
-  const cache: TokensCache = {
-    // [token]: expirationTime
-  }
+  let cache: TokenCache
   let pendingTasks: Array<Task> = []
   let isFetchingToken = false
 
   return next => (request: ClientRequest, response: ClientResponse) => {
-    const currentAuthHeader = (
+    // Check if there is already a `Authorization` header in the request.
+    // If so, then go directly to the next middleware.
+    if (
       (request.headers && request.headers['authorization']) ||
       (request.headers && request.headers['Authorization'])
-    )
-
-    if (currentAuthHeader) {
-      const token = currentAuthHeader.replace('Bearer ', '')
-      // Check that the token is cached and is not expired
-      const tokenExpirationTime = cache[token]
-      if (!tokenExpirationTime) {
-        // Token is not in cache, meaning it's not been requested from
-        // this middleware and was passed to the request manually.
-        // In this case we assume the renewal of expired tokens will be
-        // handled manually as well, outside of this middleare, since
-        // we don't know the expiration time for that token.
-        next(request, response)
-        return
-      }
-      // Check if the cached token is still valid
-      if (Date.now() < tokenExpirationTime) {
-        // Token is valid, continue
-        next(request, response)
-        return
-      }
-      // Token is not present or is invalid. Request a new token...
+    ) {
+      next(request, response)
+      return
     }
+
+    // If there was a token in the cache, and it's not expired, append
+    // the token in the `Authorization` header.
+    if (cache && cache.token && Date.now() < cache.expirationTime) {
+      const requestWithAuth = mergeAuthHeader(cache.token, request)
+      next(requestWithAuth, response)
+      return
+    }
+    // Token is not present or is invalid. Request a new token...
 
     // Keep pending tasks until a token is fetched
     pendingTasks.push({ request, response })
@@ -92,7 +83,7 @@ export default function createAuthMiddlewareForClientCredentialsFlow (
           const expiresIn = result.expires_in
           const expirationTime = calculateExpirationTime(expiresIn)
           // Cache new token
-          Object.assign(cache, { [token]: expirationTime })
+          cache = { token, expirationTime }
 
           // Dispatch all pending requests
           isFetchingToken = false

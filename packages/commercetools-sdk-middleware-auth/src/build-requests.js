@@ -12,34 +12,34 @@ type BuiltRequestParams = {
   body: string;
 }
 
-const defaultAuthHost = 'https://auth.sphere.io'
-
 // POST https://{host}/oauth/token?grant_type=client_credentials&scope={scope}
 // Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 export function buildRequestForClientCredentialsFlow (
-  {
-    host = defaultAuthHost,
-    projectKey,
-    credentials,
-    scopes,
-  }: AuthMiddlewareOptions = {},
+  options: AuthMiddlewareOptions,
 ): BuiltRequestParams {
-  if (!projectKey)
+  // TODO: use a better validator
+  if (!options)
+    throw new Error('Missing required options')
+
+  if (!options.host)
+    throw new Error('Missing required option (host)')
+
+  if (!options.projectKey)
     throw new Error('Missing required option (projectKey)')
 
-  if (!credentials)
+  if (!options.credentials)
     throw new Error('Missing required option (credentials)')
 
-  const { clientId, clientSecret } = credentials
+  const { clientId, clientSecret } = options.credentials
 
   if (!(clientId && clientSecret))
     throw new Error('Missing required credentials (clientId, clientSecret)')
 
-  const defaultScope = `${authScopes.MANAGE_PROJECT}:${projectKey}`
-  const scope = (scopes || [defaultScope]).join(' ')
+  const defaultScope = `${authScopes.MANAGE_PROJECT}:${options.projectKey}`
+  const scope = (options.scopes || [defaultScope]).join(' ')
 
   const basicAuth = getBasicAuth(clientId, clientSecret)
-  const url = `${host}/oauth/token`
+  const url = `${options.host}/oauth/token`
   const body = `grant_type=client_credentials&scope=${scope}`
 
   return { basicAuth, url, body }

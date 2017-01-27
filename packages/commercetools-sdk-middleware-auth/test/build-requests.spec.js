@@ -9,17 +9,22 @@ import { scopes } from '../src'
 
 const allScopes = Object.values(scopes)
 
+function createTestOptions (options) {
+  return {
+    host: 'http://localhost:8080',
+    projectKey: 'test',
+    credentials: {
+      clientId: '123',
+      clientSecret: 'secret',
+    },
+    scopes: allScopes,
+    ...options,
+  }
+}
+
 describe('buildRequestForClientCredentialsFlow', () => {
   it('build request values with all the given options', () => {
-    const options = {
-      host: 'http://localhost:8080',
-      projectKey: 'test',
-      credentials: {
-        clientId: '123',
-        clientSecret: 'secret',
-      },
-      scopes: allScopes,
-    }
+    const options = createTestOptions()
     expect(buildRequestForClientCredentialsFlow(options)).toEqual({
       basicAuth: 'MTIzOnNlY3JldA==',
       url: 'http://localhost:8080/oauth/token',
@@ -27,60 +32,52 @@ describe('buildRequestForClientCredentialsFlow', () => {
     })
   })
 
-  it('build request values with default options', () => {
-    const options = {
-      projectKey: 'test',
-      credentials: {
-        clientId: '123',
-        clientSecret: 'secret',
-      },
-    }
-    expect(buildRequestForClientCredentialsFlow(options)).toEqual({
-      basicAuth: 'MTIzOnNlY3JldA==',
-      url: 'https://auth.sphere.io/oauth/token',
-      body: 'grant_type=client_credentials&scope=manage_project:test',
-    })
+  it('validate required options', () => {
+    expect(
+      () => buildRequestForClientCredentialsFlow(),
+    ).toThrowError('Missing required options')
+  })
+
+  it('validate required option (host)', () => {
+    expect(
+      () => buildRequestForClientCredentialsFlow({}),
+    ).toThrowError('Missing required option (host)')
   })
 
   it('validate required option (projectKey)', () => {
-    const options = {
-      credentials: {
-        clientId: '123',
-        clientSecret: 'secret',
-      },
-    }
+    const options = createTestOptions({
+      projectKey: undefined,
+    })
     expect(
       () => buildRequestForClientCredentialsFlow(options),
     ).toThrowError('Missing required option (projectKey)')
   })
 
   it('validate required option (credentials)', () => {
-    const options = {
-      projectKey: 'test',
-    }
+    const options = createTestOptions({
+      credentials: undefined,
+    })
     expect(
       () => buildRequestForClientCredentialsFlow(options),
     ).toThrowError('Missing required option (credentials)')
   })
 
   it('validate required option (clientId, clientSecret)', () => {
-    const options = {
-      projectKey: 'test',
+    const options = createTestOptions({
       credentials: {},
-    }
+    })
     expect(
       () => buildRequestForClientCredentialsFlow(options),
     ).toThrowError('Missing required credentials (clientId, clientSecret)')
+  })
 
-    it('both credentials are required', () => {
-      const options2 = {
-        projectKey: 'test',
-        credentials: { clientId: '123' },
-      }
-      expect(
-        () => buildRequestForClientCredentialsFlow(options2),
-      ).toThrowError('Missing required credentials (clientId, clientSecret)')
+  it('validate both credentials are required', () => {
+    const options = createTestOptions({
+      credentials: { clientId: '123' },
     })
+    expect(
+      () => buildRequestForClientCredentialsFlow(options),
+    ).toThrowError('Missing required credentials (clientId, clientSecret)')
   })
 })
 
