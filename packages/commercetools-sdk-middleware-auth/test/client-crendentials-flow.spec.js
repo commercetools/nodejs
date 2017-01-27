@@ -154,7 +154,7 @@ describe('Client Crentials Flow', () => {
           access_token: 'xxx',
           // Return the first 2 requests with an expired token
           expires_in: requestCount < 2
-            ? requestCount // <-- to ensure it expires
+            ? 1 // <-- to ensure it expires
             : (Date.now() + (60 * 60 * 24)),
         }))
 
@@ -163,17 +163,13 @@ describe('Client Crentials Flow', () => {
       // - a new token is fetched
       authMiddleware(
         () => {
+          expect(requestCount).toBe(1)
           // Second call:
           // - we simulate that the request has a token set in the headers
           // - the previous token was expired though, so we need to refetch it
-          const requestWithHeaders = {
-            ...request,
-            headers: {
-              Authorization: 'Bearer xxx',
-            },
-          }
           authMiddleware(
             () => {
+              expect(requestCount).toBe(2)
               // Third call:
               // - we simulate that the request has a token set in the headers
               // - the previous token is still valid, no more requests
@@ -182,9 +178,9 @@ describe('Client Crentials Flow', () => {
                   expect(requestCount).toBe(2)
                   resolve()
                 },
-              )(requestWithHeaders, response)
+              )(request, response)
             },
-          )(requestWithHeaders, response)
+          )(request, response)
         },
       )(request, response)
     }),
@@ -265,7 +261,6 @@ describe('Client Crentials Flow', () => {
           expires_in: (Date.now() + (60 * 60 * 24)),
         })
 
-      // Execute multiple requests at once
       let nextCount = 0
       const next = () => {
         nextCount += 1
@@ -274,12 +269,58 @@ describe('Client Crentials Flow', () => {
           resolve()
         }
       }
+      // Execute multiple requests at once.
+      // This should queue all of them until the token has been fetched.
       authMiddleware(next)(request, response)
       authMiddleware(next)(request, response)
       authMiddleware(next)(request, response)
       authMiddleware(next)(request, response)
       authMiddleware(next)(request, response)
       authMiddleware(next)(request, response)
+    }),
+  )
+
+  it(
+    'if a token has been fetched, use it for the new incoming requests',
+  () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest()
+      const response = createTestResponse({
+        resolve,
+        reject,
+      })
+      const middlewareOptions = createTestMiddlewareOptions()
+      const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
+        middlewareOptions,
+      )
+      let requestCount = 0
+      nock(middlewareOptions.host)
+        .persist() // <-- use the same interceptor for all requests
+        .log(() => (requestCount += 1)) // <-- keep track of the request count
+        .filteringRequestBody(/.*/, '*')
+        .post('/oauth/token', '*')
+        .reply(200, {
+          access_token: 'xxx',
+          expires_in: (Date.now() + (60 * 60 * 24)),
+        })
+
+      // 1. Execute multiple requests at once.
+      // This should queue all of them until the token has been fetched.
+      authMiddleware(() => {
+        // 1. Got a token
+        expect(requestCount).toBe(1)
+
+        authMiddleware((rq2) => {
+          // 2. Should not get a new token
+          expect(requestCount).toBe(1)
+          expect(rq2).toEqual(expect.objectContaining({
+            headers: expect.objectContaining({
+              Authorization: 'Bearer xxx',
+            }),
+          }))
+          resolve()
+        })(request, response)
+      })(request, response)
     }),
   )
 })
