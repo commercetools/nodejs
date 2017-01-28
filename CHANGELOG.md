@@ -1,3 +1,27 @@
+## @commercetools/sdk-middleware-http@2.0.0 (2017-01-28)
+
+#### :boom: Breaking Change
+* `commercetools-sdk-middleware-http`
+  * [#56](https://github.com/commercetools/nodejs/pull/56) refactor(middleware-http): make host option required. ([@emmenko](https://github.com/emmenko))
+
+#### :memo: Documentation
+* `commercetools-sdk-client`, `commercetools-sdk-middleware-auth`, `commercetools-sdk-middleware-http`, `commercetools-sdk-middleware-logger`, `commercetools-sdk-middleware-queue`, `commercetools-sdk-middleware-user-agent`
+  * [#57](https://github.com/commercetools/nodejs/pull/57) refactor(sdk): use more specific types for middlewares args. ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 1
+- Nicola Molinari ([emmenko](https://github.com/emmenko))
+
+### Migrating from @commercetools/sdk-middleware-http@1.1.1 to @commercetools/sdk-middleware-http@2.0.0
+When creating the _http middleware_, the `host` option is now required.
+
+```js
+import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
+const httpMiddleware = createHttpMiddleware({
+  host: 'https://api.commercetools.com',
+})
+```
+
+
 ## @commercetools/sdk-middleware-auth@2.0.0 (2017-01-27)
 
 #### :boom: Breaking Change
@@ -12,12 +36,12 @@
 - Nicola Molinari ([emmenko](https://github.com/emmenko))
 
 ### Migrating from @commercetools/sdk-middleware-auth@1.1.0 to @commercetools/sdk-middleware-auth@2.0.0
-When creating the _auth middleware_, the `uri` option is now required.
+When creating the _auth middleware_, the `host` option is now required.
 
 ```js
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
-  host: 'https://admin.commercetools.com',
+  host: 'https://auth.commercetools.com',
 })
 ```
 
