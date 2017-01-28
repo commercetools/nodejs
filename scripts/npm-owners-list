@@ -2,7 +2,7 @@
 
 for f in packages/*; do
   package=`basename $f`
-  npm_package="${package/commercetools-/@commercetools/}"
+  npm_package="@commercetools/$package"
 
   if [ -d "$f" ]; then
     echo "(${npm_package})"
