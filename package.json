@@ -13,13 +13,13 @@
     "build": "lerna exec -- babel src --out-dir lib",
     "dist": "lerna run dist",
     "lint": "flow check && ./scripts/lint packages",
-    "test": "npm run build && lerna exec -- jest",
+    "test": "npm run build && jest --config test-config.json",
     "test:package": "npm run build && ./scripts/test-package",
     "it": "npm run it:install && npm run it:run",
     "it:run": "jest --config integration-tests/config.json",
     "it:install": "npm run build && ./scripts/install-npm-packages-for-integration-tests",
-    "coverage": "npm run build && jest --no-watchman --coverage",
-    "coverage:ci": "jest --no-watchman --coverage && codecov",
+    "coverage": "npm run build && jest --config test-config.json --no-watchman --coverage",
+    "coverage:ci": "jest --config test-config.json --no-watchman --coverage && codecov",
     "semantic-release": "lerna-semantic-release pre && lerna-semantic-release post && lerna-semantic-release perform",
     "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
@@ -120,19 +120,5 @@
         "babel-module": {}
       }
     }
-  },
-  "jest": {
-    "globals": {
-      "process.env": {
-        "NODE_ENV": "test"
-      }
-    },
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/integration-tests/",
-      "/packages/.*/node_modules",
-      "/packages/.*/dist",
-      "/packages/.*/lib"
-    ]
   }
 }
