@@ -15,15 +15,11 @@ import getErrorByCode, {
   HttpError,
 } from './errors'
 
-const defaultApiHost = 'https://api.sphere.io'
-
 export default function createHttpMiddleware (
-  {
-    host = defaultApiHost,
-  }: HttpMiddlewareOptions = {},
+  options: HttpMiddlewareOptions,
 ): Middleware {
   return next => (request: ClientRequest, response: ClientResponse) => {
-    const url = host + request.uri
+    const url = options.host + request.uri
     const body = typeof request.body === 'string'
       ? request.body
       : JSON.stringify(request.body)

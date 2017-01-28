@@ -14,14 +14,7 @@ function createTestRequest (options) {
   }
 }
 
-function createTestResponse (options) {
-  return {
-    ...options,
-  }
-}
-
-const defaultHost = 'https://api.sphere.io'
-const customHost = 'https://api.commercetools.co'
+const testHost = 'https://api.commercetools.com'
 
 describe('Http', () => {
   beforeEach(() => {
@@ -33,10 +26,7 @@ describe('Http', () => {
       const request = createTestRequest({
         uri: '/foo/bar',
       })
-      const response = createTestResponse({
-        resolve,
-        reject,
-      })
+      const response = { resolve, reject }
       const next = (req, res) => {
         expect(res).toEqual({
           ...response,
@@ -46,8 +36,8 @@ describe('Http', () => {
         resolve()
       }
       // Use default options
-      const httpMiddleware = createHttpMiddleware()
-      nock(defaultHost)
+      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      nock(testHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
         })
@@ -65,10 +55,7 @@ describe('Http', () => {
         method: 'POST',
         body: { hello: 'world' },
       })
-      const response = createTestResponse({
-        resolve,
-        reject,
-      })
+      const response = { resolve, reject }
       const next = (req, res) => {
         expect(res).toEqual({
           ...response,
@@ -78,8 +65,8 @@ describe('Http', () => {
         resolve()
       }
       // Use custom options
-      const httpMiddleware = createHttpMiddleware({ host: customHost })
-      nock(customHost)
+      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      nock(testHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
         })
@@ -96,24 +83,21 @@ describe('Http', () => {
       const request = createTestRequest({
         uri: '/foo/bar',
       })
-      const response = createTestResponse({
-        resolve,
-        reject,
-      })
+      const response = { resolve, reject }
       const next = (req, res) => {
         expect(res.error.name).toBe('NetworkError')
         expect(res.error.headers).toBeUndefined()
         expect(res.error.originalRequest).toBeDefined()
         expect(res.error.message).toBe(
           // eslint-disable-next-line max-len
-          `request to ${defaultHost}/foo/bar failed, reason: Connection timeout`,
+          `request to ${testHost}/foo/bar failed, reason: Connection timeout`,
         )
         expect(res.body).toBeUndefined()
         expect(res.statusCode).toBe(0)
         resolve()
       }
-      const httpMiddleware = createHttpMiddleware()
-      nock(defaultHost)
+      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      nock(testHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
         })
@@ -129,10 +113,7 @@ describe('Http', () => {
       const request = createTestRequest({
         uri: '/foo/bar',
       })
-      const response = createTestResponse({
-        resolve,
-        reject,
-      })
+      const response = { resolve, reject }
       const next = (req, res) => {
         const expectedError = new Error('oops')
         expectedError.body = {
@@ -151,8 +132,8 @@ describe('Http', () => {
         })
         resolve()
       }
-      const httpMiddleware = createHttpMiddleware()
-      nock(defaultHost)
+      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      nock(testHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
         })
@@ -171,10 +152,7 @@ describe('Http', () => {
       const request = createTestRequest({
         uri: '/foo/bar',
       })
-      const response = createTestResponse({
-        resolve,
-        reject,
-      })
+      const response = { resolve, reject }
       const next = (req, res) => {
         expect(res.error.message).toBe('URI not found: /foo/bar')
         expect(res.error.body).toBeUndefined()
@@ -182,8 +160,8 @@ describe('Http', () => {
         expect(res.statusCode).toBe(404)
         resolve()
       }
-      const httpMiddleware = createHttpMiddleware()
-      nock(defaultHost)
+      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      nock(testHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
         })
@@ -199,10 +177,7 @@ describe('Http', () => {
       const request = createTestRequest({
         uri: '/foo/bar',
       })
-      const response = createTestResponse({
-        resolve,
-        reject,
-      })
+      const response = { resolve, reject }
       const next = (req, res) => {
         expect(res.error.message).toBe('oops')
         expect(res.error.name).toBe('HttpError')
@@ -211,8 +186,8 @@ describe('Http', () => {
         expect(res.statusCode).toBe(415)
         resolve()
       }
-      const httpMiddleware = createHttpMiddleware()
-      nock(defaultHost)
+      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      nock(testHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
         })
