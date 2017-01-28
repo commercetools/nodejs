@@ -3,7 +3,6 @@ import {
   // buildRequestForPasswordFlow,
   // buildRequestForRefreshTokenFlow,
   // buildRequestForAnonymousSessionFlow,
-  getBasicAuth,
 } from '../src/build-requests'
 import { scopes } from '../src'
 
@@ -78,19 +77,5 @@ describe('buildRequestForClientCredentialsFlow', () => {
     expect(
       () => buildRequestForClientCredentialsFlow(options),
     ).toThrowError('Missing required credentials (clientId, clientSecret)')
-  })
-})
-
-describe('getBasicAuth', () => {
-  it('return encoded base64 value', () => {
-    expect(getBasicAuth('foo', 'bar', {})).toBe('Zm9vOmJhcg==')
-  })
-
-  it('simulate encoding in browser environment', () => {
-    const spy = jest.fn((value) => {
-      expect(value).toBe('foo:bar')
-      return new Buffer(value).toString('base64')
-    })
-    expect(getBasicAuth('foo', 'bar', { btoa: spy })).toBe('Zm9vOmJhcg==')
   })
 })

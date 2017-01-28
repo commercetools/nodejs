@@ -23,7 +23,7 @@ select package in "${packages[@]}"; do
 done
 
 if [ -z "$flag" ]; then
-  $(npm bin)/lerna --scope $selected_package exec -- $(pwd)/node_modules/.bin/jest
+  $(npm bin)/lerna --scope $selected_package exec -- $(pwd)/node_modules/.bin/jest --config $(pwd)/test-config.json
 else
-  $(npm bin)/lerna --scope $selected_package exec -- $(pwd)/node_modules/.bin/jest $flag
+  $(npm bin)/lerna --scope $selected_package exec -- $(pwd)/node_modules/.bin/jest --config $(pwd)/test-config.json $flag
 fi

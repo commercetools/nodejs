@@ -1,9 +1,5 @@
 /* @flow */
-import type {
-  AuthMiddlewareOptions,
-} from 'types/sdk'
-
-/* global window */
+import type { AuthMiddlewareOptions } from 'types/sdk'
 import * as authScopes from './scopes'
 
 type BuiltRequestParams = {
@@ -37,7 +33,7 @@ export function buildRequestForClientCredentialsFlow (
   const defaultScope = `${authScopes.MANAGE_PROJECT}:${options.projectKey}`
   const scope = (options.scopes || [defaultScope]).join(' ')
 
-  const basicAuth = getBasicAuth(clientId, clientSecret)
+  const basicAuth = new Buffer(`${clientId}:${clientSecret}`).toString('base64')
   const url = `${options.host}/oauth/token`
   const body = `grant_type=client_credentials&scope=${scope}`
 
@@ -54,20 +50,4 @@ export function buildRequestForRefreshTokenFlow () {
 
 export function buildRequestForAnonymousSessionFlow () {
   // TODO
-}
-
-export function getBasicAuth (
-  username: string,
-  password: string,
-  windowObject: Object = window,
-): string {
-  const basicAuth = `${username}:${password}`
-  if (
-    windowObject &&
-    windowObject.btoa &&
-    typeof windowObject.btoa === 'function'
-  )
-    return windowObject.btoa(basicAuth)
-
-  return new Buffer(basicAuth).toString('base64')
 }

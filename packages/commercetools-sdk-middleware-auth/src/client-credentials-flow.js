@@ -8,9 +8,7 @@ import type {
 
 /* global fetch */
 import 'isomorphic-fetch'
-import {
-  buildRequestForClientCredentialsFlow,
-} from './build-requests'
+import { buildRequestForClientCredentialsFlow } from './build-requests'
 
 type TokenCache = {
   token: string;
