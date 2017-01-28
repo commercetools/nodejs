@@ -47,7 +47,7 @@ const ignoredResponseKeys = [ 'id', 'createdAt', 'lastModifiedAt' ]
 const service = createRequestBuilder().channels
 
 const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
-  host: 'https://auth.sphere.io',
+  host: 'https://auth.commercetools.com',
   projectKey 'test',
   credentials: {
     clientId: '123',
@@ -55,7 +55,7 @@ const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
   },
 })
 const httpMiddleware = createHttpMiddleware({
-  host: 'https://api.sphere.io',
+  host: 'https://api.commercetools.com',
 })
 const queueMiddleware = createQueueMiddleware({
   concurrency: 5,

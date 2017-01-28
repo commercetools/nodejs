@@ -48,9 +48,9 @@ const client = new SphereClient({
     client_secret: 'secret',
   },
   user_agent: 'sphere-node-sdk',
-  host: 'api.sphere.io',
+  host: 'api.commercetools.com',
   protocol: 'https',
-  oauth_host: 'auth.sphere.io',
+  oauth_host: 'auth.commercetools.com',
   oauth_protocol: 'https',
 })
 const sync = new ProductSync()
@@ -76,7 +76,7 @@ const client = createClient({
   // The order of the middlewares is important !!!
   middlewares: [
     createAuthMiddlewareForClientCredentialsFlow({
-      host: 'https://auth.sphere.io',
+      host: 'https://auth.commercetools.com',
       projectKey: 'my-project',
       credentials: {
         clientId: '123',
@@ -84,7 +84,7 @@ const client = createClient({
       },
     }),
     createQueueMiddleware({ concurrency: 10 }),
-    createHttpMiddleware({ host: 'https://api.sphere.io' }),
+    createHttpMiddleware({ host: 'https://api.commercetools.com' }),
     createHttpUserAgent({
       libraryName: 'my-library',
       libraryVersion: '1.0.0',

@@ -3,8 +3,8 @@ import type {
   HttpErrorType,
   HttpMiddlewareOptions,
   Middleware,
-  ClientRequest,
-  ClientResponse,
+  MiddlewareRequest,
+  MiddlewareResponse,
 } from 'types/sdk'
 
 /* global fetch */
@@ -18,7 +18,7 @@ import getErrorByCode, {
 export default function createHttpMiddleware (
   options: HttpMiddlewareOptions,
 ): Middleware {
-  return next => (request: ClientRequest, response: ClientResponse) => {
+  return next => (request: MiddlewareRequest, response: MiddlewareResponse) => {
     const url = options.host + request.uri
     const body = typeof request.body === 'string'
       ? request.body

@@ -22,20 +22,11 @@ export type HttpErrorType = {
   }
 }
 export type ClientResponse = {
-  resolve(): void;
-  reject(): void;
   body?: Object;
   error?: HttpErrorType;
   statusCode: number;
 }
 
-// eslint-disable-next-line max-len
-export type Dispatch = (request: ClientRequest, response: ClientResponse) => any;
-export type Middleware = (next: Dispatch) => Dispatch;
-
-export type ClientOptions = {
-  middlewares?: Array<Middleware>;
-}
 export type SuccessResult = {
   body: Object;
   statusCode: number;
@@ -50,6 +41,20 @@ export type ProcessOptions = {
 }
 
 /* Middlewares */
+export type MiddlewareRequest = ClientRequest;
+export type MiddlewareResponse = {
+  resolve(): void;
+  reject(): void;
+  body?: Object;
+  error?: HttpErrorType;
+  statusCode: number;
+}
+// eslint-disable-next-line max-len
+export type Dispatch = (request: MiddlewareRequest, response: MiddlewareResponse) => any;
+export type Middleware = (next: Dispatch) => Dispatch;
+export type ClientOptions = {
+  middlewares: Array<Middleware>;
+}
 export type AuthMiddlewareOptions = {
   host: string;
   projectKey: string;

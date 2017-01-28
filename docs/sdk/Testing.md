@@ -8,7 +8,7 @@ This library allows to deeply customize how you want to mock the actual node `ht
 
 ```js
 // We'll mock a request to fetch some products
-nock('https://api.sphere.io')
+nock('https://api.commercetools.com')
   .defaultReplyHeaders({ 'Content-Type': 'application/json' })
   .get('/my-project/products')
   .reply(
@@ -21,7 +21,7 @@ nock('https://api.sphere.io')
   )
 
 // or mock a request to create a channel
-nock('https://api.sphere.io')
+nock('https://api.commercetools.com')
   .defaultReplyHeaders({ 'Content-Type': 'application/json' })
   .filteringRequestBody(() => '*')
   .post('/my-project/channels', '*')

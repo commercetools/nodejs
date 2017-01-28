@@ -1,8 +1,8 @@
 /* @flow */
 import type {
   Middleware,
-  ClientRequest,
-  ClientResponse,
+  MiddlewareRequest,
+  MiddlewareResponse,
   UserAgentMiddlewareOptions,
 } from 'types/sdk'
 import createHttpUserAgent from '@commercetools/http-user-agent'
@@ -15,7 +15,7 @@ export default function createUserAgentMiddleware (
     ...options,
   })
 
-  return next => (request: ClientRequest, response: ClientResponse) => {
+  return next => (request: MiddlewareRequest, response: MiddlewareResponse) => {
     const requestWithUserAgent = {
       ...request,
       headers: {
