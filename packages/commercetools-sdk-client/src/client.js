@@ -3,23 +3,27 @@ import type {
   Client,
   ClientOptions,
   ClientRequest,
-  ClientResponse,
   ClientResult,
+  MiddlewareRequest,
+  MiddlewareResponse,
   ProcessFn,
   ProcessOptions,
   SuccessResult,
 } from 'types/sdk'
 import qs from 'querystring'
 
-export default function createClient (options: ClientOptions = {}): Client {
-  const {
-    middlewares,
-  } = options
+export default function createClient (options: ClientOptions): Client {
+  if (!options)
+    throw new Error('Missing required options')
 
-  if (middlewares && !Array.isArray(middlewares))
+  if (options.middlewares && !Array.isArray(options.middlewares))
     throw new Error('Middlewares should be an array')
 
-  if (!middlewares || !Array.isArray(middlewares) || !middlewares.length)
+  if (
+    !options.middlewares ||
+    !Array.isArray(options.middlewares) ||
+    !options.middlewares.length
+  )
     throw new Error('You need to provide at least one middleware')
 
   return {
@@ -28,7 +32,7 @@ export default function createClient (options: ClientOptions = {}): Client {
     */
     execute (request: ClientRequest): Promise<ClientResult> {
       return new Promise((resolve, reject) => {
-        const resolver = (rq: ClientRequest, rs: ClientResponse) => {
+        const resolver = (rq: MiddlewareRequest, rs: MiddlewareResponse) => {
           // Note: pick the promise `resolve` and `reject` function from
           // the response object. This is not necessary the same function
           // given from the `new Promise` constructor, as middlewares could
@@ -42,7 +46,7 @@ export default function createClient (options: ClientOptions = {}): Client {
             })
         }
 
-        const dispatch = compose(...middlewares)(resolver)
+        const dispatch = compose(...options.middlewares)(resolver)
         dispatch(
           request,
           // Initial response shape

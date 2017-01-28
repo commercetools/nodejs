@@ -2,8 +2,8 @@
 import type {
   AuthMiddlewareOptions,
   Middleware,
-  ClientRequest,
-  ClientResponse,
+  MiddlewareRequest,
+  MiddlewareResponse,
 } from 'types/sdk'
 
 /* global fetch */
@@ -17,8 +17,8 @@ type TokenCache = {
   expirationTime: number;
 }
 type Task = {
-  request: ClientRequest;
-  response: ClientResponse;
+  request: MiddlewareRequest;
+  response: MiddlewareResponse;
 }
 
 export default function createAuthMiddlewareForClientCredentialsFlow (
@@ -28,7 +28,7 @@ export default function createAuthMiddlewareForClientCredentialsFlow (
   let pendingTasks: Array<Task> = []
   let isFetchingToken = false
 
-  return next => (request: ClientRequest, response: ClientResponse) => {
+  return next => (request: MiddlewareRequest, response: MiddlewareResponse) => {
     // Check if there is already a `Authorization` header in the request.
     // If so, then go directly to the next middleware.
     if (
@@ -118,7 +118,10 @@ export default function createAuthMiddlewareForClientCredentialsFlow (
   }
 }
 
-function mergeAuthHeader (token: string, req: ClientRequest): ClientRequest {
+function mergeAuthHeader (
+  token: string,
+  req: MiddlewareRequest,
+): MiddlewareRequest {
   return {
     ...req,
     headers: {

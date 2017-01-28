@@ -20,7 +20,7 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle HTTP requests for 
 
 #### Named arguments (options)
 
-1. `host` *(String)*: the host of the HTTP API service (default `https://api.sphere.io`)
+1. `host` *(String)*: the host of the HTTP API service
 
 #### Usage example
 
@@ -38,8 +38,6 @@ const client = createClient({
 ```
 
 ## `getErrorByCode(code)`
-
-> From package [@commercetools/sdk-middleware-http](/sdk/api/README.md#sdk-middleware-http).
 
 Returns a [custom error type](/sdk/Glossary.md#httperrortype) given its status *code*.
 

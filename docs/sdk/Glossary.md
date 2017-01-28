@@ -21,8 +21,6 @@ A *ClientRequest* is an object describing the request that needs to be executed 
 
 ```js
 type ClientResponse = {
-  resolve(): void;
-  reject(): void;
   body?: Object;
   error?: HttpErrorType;
   statusCode: number;
@@ -34,7 +32,16 @@ A *ClientResponse* is an object describing the **response** object passed to a [
 ## Middleware
 
 ```js
-type Dispatch = (request: ClientRequest, response: ClientResponse) => any;
+type MiddlewareRequest = ClientRequest;
+type MiddlewareResponse = {
+  resolve(): void;
+  reject(): void;
+  body?: Object;
+  error?: HttpErrorType;
+  statusCode: number;
+}
+
+type Dispatch = (request: MiddlewareRequest, response: MiddlewareResponse) => any;
 type Middleware = (next: Dispatch) => Dispatch;
 ```
 

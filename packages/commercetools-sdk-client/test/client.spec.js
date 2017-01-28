@@ -6,7 +6,7 @@ import {
 describe('validate options', () => {
   it('middlewares (required)', () => {
     expect(() => createClient()).toThrowError(
-      'You need to provide at least one middleware',
+      'Missing required options',
     )
   })
   it('middlewares (array)', () => {
