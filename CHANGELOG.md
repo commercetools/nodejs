@@ -1,3 +1,33 @@
+## @commercetools/http-user-agent@1.0.1 (2017-01-29)
+
+#### :bug: Bug Fix
+* `http-user-agent`, `sdk-middleware-auth`
+  * [#58](https://github.com/commercetools/nodejs/pull/58) Safely check for browser env when accessing global.window. ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 1
+- Nicola Molinari ([emmenko](https://github.com/emmenko))
+
+
+## @commercetools/sdk-middleware-auth@2.0.1 (2017-01-29)
+
+#### :bug: Bug Fix
+* `http-user-agent`, `sdk-middleware-auth`
+  * [#58](https://github.com/commercetools/nodejs/pull/58) Safely check for browser env when accessing global.window. ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 1
+- Nicola Molinari ([emmenko](https://github.com/emmenko))
+
+
+## @commercetools/sdk-middleware-user-agent@1.1.1 (2017-01-29)
+
+#### :bug: Bug Fix
+* `http-user-agent`, `sdk-middleware-auth`
+  * [#58](https://github.com/commercetools/nodejs/pull/58) Safely check for browser env when accessing global.window. ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 1
+- Nicola Molinari ([emmenko](https://github.com/emmenko))
+
+
 ## @commercetools/sdk-middleware-http@2.0.0 (2017-01-28)
 
 #### :boom: Breaking Change
