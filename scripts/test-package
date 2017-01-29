@@ -12,7 +12,7 @@ fi
 
 packages=()
 for dir in packages/*; do
-  packages=(${packages[@]} "${dir/packages\/commercetools-/@commercetools/}")
+  packages=(${packages[@]} "${dir/packages\//@commercetools/}")
 done
 
 echo "Select a package to run the tests for:"
