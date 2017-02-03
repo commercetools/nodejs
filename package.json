@@ -45,7 +45,7 @@
     "commitizen": "2.9.5",
     "cross-env": "3.1.4",
     "cz-lerna-changelog": "1.1.0",
-    "eslint": "3.14.1",
+    "eslint": "3.15.0",
     "eslint-config-airbnb": "14.0.0",
     "eslint-config-commercetools": "6.0.0",
     "eslint-formatter-pretty": "1.1.0",
