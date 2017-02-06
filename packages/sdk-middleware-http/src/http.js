@@ -1,4 +1,6 @@
 /* @flow */
+import normalizeUrl from 'normalize-url'
+
 import type {
   HttpErrorType,
   HttpMiddlewareOptions,
@@ -19,7 +21,7 @@ export default function createHttpMiddleware (
   options: HttpMiddlewareOptions,
 ): Middleware {
   return next => (request: MiddlewareRequest, response: MiddlewareResponse) => {
-    const url = options.host + request.uri
+    const url = normalizeUrl(options.host + request.uri)
     const body = typeof request.body === 'string'
       ? request.body
       : JSON.stringify(request.body)

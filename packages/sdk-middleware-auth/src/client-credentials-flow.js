@@ -20,8 +20,7 @@ type Task = {
 }
 
 export default function createAuthMiddlewareForClientCredentialsFlow (
-  options: AuthMiddlewareOptions,
-): Middleware {
+  options: AuthMiddlewareOptions): Middleware {
   let cache: TokenCache
   let pendingTasks: Array<Task> = []
   let isFetchingToken = false

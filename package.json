@@ -120,5 +120,8 @@
         "babel-module": {}
       }
     }
+  },
+  "dependencies": {
+    "normalize-url": "^1.9.0"
   }
 }
