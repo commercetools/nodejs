@@ -1,0 +1,4 @@
+variant-sku,value.currencyCode,value.centAmount,customType,customField.foo
+my-price,EUR,3000,custom-type,true
+my-price,EUR,4000,custom-type,false
+do-price,EUR,4000,custom-type,true

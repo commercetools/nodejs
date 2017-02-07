@@ -20,7 +20,7 @@ const {
   projectKey,
   clientId,
   clientSecret,
-} = loadCredentials('node-sdk-integration-tests')
+} = loadCredentials('hardcoded')
 
 const ignoredResponseKeys = [ 'id', 'createdAt', 'lastModifiedAt' ]
 
@@ -55,7 +55,7 @@ const client = createClient({
   ],
 })
 
-describe('Channels', () => {
+describe.skip('Channels', () => {
   const key = uniqueId('channel_')
   let channelResponse
 

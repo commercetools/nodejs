@@ -1,0 +1,53 @@
+{
+  "name": "@commercetools/csv-parser-price",
+  "version": "1.1.4",
+  "description": "Module that parses price csv to json",
+  "keywords": [
+    "commercetools",
+    "csv",
+    "parser",
+    "price",
+    "json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs/tree/master/packages/csv-parser-price"
+  },
+  "homepage": "https://github.com/commercetools/csv-parser-price#readme",
+  "bugs": "https://github.com/commercetools/csv-parser-price/issues",
+  "license": "MIT",
+  "contributors": [
+    "Abimbola Idowu <abimbola.idowu@commercetools.com>",
+    "Selwyn Versteeg <selwyn.versteeg@commercetools.com> (https://selwyn.cc/)"
+  ],
+  "main": "./lib/index.js",
+  "bin": {
+    "csvparserprice": "bin/csvparserprice.js"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "dependencies": {
+    "@commercetools/api-request-builder": "^1.2.0",
+    "@commercetools/sdk-client": "^1.2.0",
+    "@commercetools/sdk-middleware-auth": "^3.0.0",
+    "@commercetools/sdk-middleware-http": "^2.0.0",
+    "@commercetools/sdk-middleware-user-agent": "^1.2.0",
+    "JSONStream": "^1.2.1",
+    "bluebird": "^3.4.6",
+    "csv-parser": "^1.11.0",
+    "flat": "^2.0.1",
+    "highland": "^2.10.1",
+    "lodash.mapvalues": "^4.6.0",
+    "lodash.memoize": "^4.1.2",
+    "npmlog": "^4.0.1",
+    "pretty-error": "^2.0.2",
+    "yargs": "^6.4.0"
+  },
+  "devDependencies": {
+    "sinon": "^1.17.6",
+    "streamtest": "^1.2.2",
+    "tmp": "^0.0.31"
+  }
+}
