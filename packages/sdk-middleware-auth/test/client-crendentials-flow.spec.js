@@ -97,7 +97,6 @@ describe('Client Crentials Flow', () => {
       )
       nock(middlewareOptions.host)
         .filteringRequestBody(/.*/, '*')
-        // Check hear
         .post('/oauth/token', '*')
         .reply(400, { message: 'Oops' }) // <-- JSON error response
 
