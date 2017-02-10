@@ -31,7 +31,7 @@ describe('buildRequestForClientCredentialsFlow', () => {
     })
   })
 
-  it('parses a host that ends with \'/\'', () => {
+  it(`parses a host that ends with '/'`, () => {
     const options = createTestOptions({
       host: 'http://localhost:8080/',
     })
@@ -42,7 +42,7 @@ describe('buildRequestForClientCredentialsFlow', () => {
     })
   })
 
-  it('parses a host that ends without \'/\'', () => {
+  it(`parses a host that ends without '/'`, () => {
     const options = createTestOptions({
       host: 'http://localhost:8080',
     })

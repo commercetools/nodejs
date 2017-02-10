@@ -200,7 +200,7 @@ describe('Http', () => {
     }),
   )
 
-  it('parses a host that ends with \'/\'', () =>
+  it(`parses a host that ends with '/'`, () =>
     new Promise((resolve, reject) => {
       const sampleHost = 'https://api.commercetools.com/'
       const request = createTestRequest({
@@ -223,7 +223,7 @@ describe('Http', () => {
     }),
   )
 
-  it('parses a host that ends without \'/\'', () =>
+  it(`parses a host that ends without '/'`, () =>
     new Promise((resolve, reject) => {
       const sampleHost = 'https://api.commercetools.com'
       const request = createTestRequest({
