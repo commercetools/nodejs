@@ -60,7 +60,7 @@
     "husky": "0.12.0",
     "jest": "18.1.0",
     "lerna": "2.0.0-beta.34",
-    "lerna-semantic-release": "9.0.2",
+    "lerna-semantic-release": "9.0.4",
     "npm-check-updates": "~2.8.9",
     "npm-run-all": "4.0.1",
     "rimraf": "2.5.4",
