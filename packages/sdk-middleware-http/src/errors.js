@@ -1,4 +1,5 @@
 function defineError (statusCode, message, meta = {}) {
+  // eslint-disable-next-line no-multi-assign
   this.status = this.statusCode = this.code = statusCode
   this.message = message
   Object.assign(this, meta)
