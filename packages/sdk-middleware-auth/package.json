@@ -29,7 +29,7 @@
   "scripts": {
     "dist": "npm run build:umd && npm run build:umd:min",
     "build:umd": "cross-env NODE_ENV=development webpack --config ../../webpack.config.js --output-library CommercetoolsSdkMiddlewareAuth --output-library-target umd src/index.js dist/commercetools-sdk-middleware-auth.js",
-    "build:umd:min": "cross-env NODE_ENV=production webpack --config ../../webpack.config.js --output-library CommercetoolsSdkMiddlewareAuth --output-library-target umd src/index.js dist/commercetools-sdk-middleware-auth.min.js"
+    "build:umd:min": "cross-env NODE_ENV=production webpack -p --config ../../webpack.config.js --output-library CommercetoolsSdkMiddlewareAuth --output-library-target umd src/index.js dist/commercetools-sdk-middleware-auth.min.js"
   },
   "dependencies": {
     "isomorphic-fetch": "2.2.1"
