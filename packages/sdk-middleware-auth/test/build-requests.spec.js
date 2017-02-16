@@ -31,6 +31,28 @@ describe('buildRequestForClientCredentialsFlow', () => {
     })
   })
 
+  it('parses a host that ends with slash', () => {
+    const options = createTestOptions({
+      host: 'http://localhost:8080/',
+    })
+    expect(buildRequestForClientCredentialsFlow(options)).toEqual({
+      basicAuth: 'MTIzOnNlY3JldA==',
+      url: 'http://localhost:8080/oauth/token',
+      body: `grant_type=client_credentials&scope=${allScopes.join(' ')}`,
+    })
+  })
+
+  it('parses a host that ends without slash', () => {
+    const options = createTestOptions({
+      host: 'http://localhost:8080',
+    })
+    expect(buildRequestForClientCredentialsFlow(options)).toEqual({
+      basicAuth: 'MTIzOnNlY3JldA==',
+      url: 'http://localhost:8080/oauth/token',
+      body: `grant_type=client_credentials&scope=${allScopes.join(' ')}`,
+    })
+  })
+
   it('validate required options', () => {
     expect(
       () => buildRequestForClientCredentialsFlow(),

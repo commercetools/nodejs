@@ -34,7 +34,7 @@ export function buildRequestForClientCredentialsFlow (
   const scope = (options.scopes || [defaultScope]).join(' ')
 
   const basicAuth = new Buffer(`${clientId}:${clientSecret}`).toString('base64')
-  const url = `${options.host}/oauth/token`
+  const url = `${options.host.replace(/\/$/, '')}/oauth/token`
   const body = `grant_type=client_credentials&scope=${scope}`
 
   return { basicAuth, url, body }
