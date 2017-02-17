@@ -1,5 +1,5 @@
 # `get-credentials`
-Retrieve commercetools platform credentials from environment variables or file system.
+Retrieve commercetools project credentials from environment variables or file system.
 
 ## Install
 
@@ -23,18 +23,11 @@ Set environment variables from a [dotenv](https://github.com/motdotla/dotenv) fi
 
 ### Arguments
 
-1. `projectKey` *(String)*: The project key to get the client ID and client secret for.
+1. `projectKey` *(String)*: The project key to retrieve the associated client credentials for.
 
 ### Returns
 
-The function returns a promise which if the credentials are found resolves to an object like this:
-```js
-{
-  clientId: 'id',
-  clientSecret: 'secret',
-}
-```
-When no credentials are found for the given project key an array of errors is rejected.
+Returns a `Promise` which resolves to `{ clientId, clientSecret }`. When no credentials are found for the given project key an array of errors is rejected.
 
 ### Usage example
 ```js

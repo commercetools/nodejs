@@ -5,7 +5,7 @@ import { homepage } from '../package.json'
 
 export default function getCredentials (projectKey) {
   if (!projectKey)
-    return Promise.reject([new Error('Project Key is needed')])
+    return Promise.reject([new Error('Missing "projectKey" argument')])
 
   return Promise.resolve(setCredentialsFromEnvFile())
     .catch(Promise.resolve)

@@ -8,12 +8,18 @@ import {
 } from '../src/index'
 import { homepage } from '../package.json'
 
+const expectedErrorText = {
+  dotenv: new RegExp(/could not .+ from .env file/, 'i'),
+  invalidEnvFormat: new RegExp(/could not get credentials/, 'i'),
+  undefinedEnv: new RegExp(/could not find environment variable/, 'i'),
+}
+
 describe('getCredentials', () => {
   test('should reject error when missing project key argument', (done) => {
     getCredentials()
       .then(done.fail)
       .catch((errors) => {
-        expect(errors[0].message).toBe('Project Key is needed')
+        expect(errors[0].message).toBe('Missing "projectKey" argument')
         done()
       })
   })
@@ -23,8 +29,8 @@ describe('getCredentials', () => {
       .then(done.fail)
       .catch((errors) => {
         expect(errors.length).toBe(2)
-        expect(errors[0].message).toBeTruthy()
-        expect(errors[1].message).toBeTruthy()
+        expect(errors[0].message).toMatch(expectedErrorText.dotenv)
+        expect(errors[1].message).toMatch(expectedErrorText.undefinedEnv)
         done()
       })
   })
@@ -53,7 +59,7 @@ describe('getCredentialsFromEnvironment', () => {
     getCredentialsFromEnvironment('stroopwafel')
       .then(done.fail)
       .catch((error) => {
-        expect(error.message).toMatch(/could not get credentials/i)
+        expect(error.message).toMatch(expectedErrorText.invalidEnvFormat)
         expect(error.message).toMatch(new RegExp(homepage))
         done()
       })
@@ -63,7 +69,7 @@ describe('getCredentialsFromEnvironment', () => {
     getCredentialsFromEnvironment('pepernoten')
       .then(done.fail)
       .catch((error) => {
-        expect(error.message).toMatch(/could not find environment variable/i)
+        expect(error.message).toMatch(expectedErrorText.undefinedEnv)
         done()
       })
   })
@@ -99,6 +105,6 @@ describe('setCredentialsFromEnvFile', () => {
   test('should return error when no dotenv file exists', () => {
     const result = setCredentialsFromEnvFile()
 
-    expect(result.message).toMatch(/could not .+ from .+ file/i)
+    expect(result.message).toMatch(expectedErrorText.dotenv)
   })
 })
