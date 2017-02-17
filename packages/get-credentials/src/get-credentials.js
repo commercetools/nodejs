@@ -22,7 +22,8 @@ export function getCredentialsFromEnvironment (projectKey) {
 
     if (!envValue)
       return reject(new Error(
-        `Could not find environment variable ${envKey}`,
+        `Could not find environment variable ${envKey}
+        see ${homepage}#usage`,
       ))
 
     if (!envValue.match(/\w+:\w+/))
@@ -42,10 +43,10 @@ export function getCredentialsFromEnvironment (projectKey) {
 
 export function setCredentialsFromEnvFile () {
   const currentDirectoryResult = dotenv.config({
-    path: path.resolve('ct-credentials.env'),
+    path: path.resolve('.ct-credentials.env'),
   })
   const etcDirectoryResult = dotenv.config({
-    path: path.resolve(path.join('/etc', 'ct-credentials.env')),
+    path: path.resolve(path.join('/etc', '.ct-credentials.env')),
   })
 
   if (currentDirectoryResult.error && etcDirectoryResult.error)

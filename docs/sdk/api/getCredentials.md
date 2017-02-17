@@ -9,7 +9,15 @@ npm install --save @commercetools/get-credentials
 
 ## Usage
 
-First `get-credentials` will try to load the credentials from a file `ct-credentials.env` in the current directory and then from the `/etc` directory. If a project's credentials exist in both files the values from the current directory are used. Secondly credentials will be retrieved from an environment variable containing the project key: `CT_<project key>` containing `<client id>:<client secret>`. Notice that a project key will be uppercased and dashes will be replaced by an underscore. So for example: `my-projectkey` becomes `MY_PROJECTKEY`.
+### From a file
+
+Read the credentials from a [`dotenv`](https://github.com/motdotla/dotenv) file in the following locations, descending priority:
+- `./.ct-credentials.env` *Current directory*
+- `/etc/.ct-credentials.env`
+
+### From environment variables
+
+Read the credentials from an environment variable named after the project key like: `CT_<project key>`. The contained credentials are expected like this: `<client id>:<client secret>`. Notice that the given project key will be uppercased and dashes will be replaced by an underscore. So for example: `my-projectkey` becomes `MY_PROJECTKEY`.
 
 Example `ct-credentials.env` file:
 ```dosini
@@ -19,7 +27,7 @@ CT_OTHER_PROJECTKEY=myclientid:mysecret
 
 ## `getCredentials(projectKey)`
 
-Set environment variables from a [dotenv](https://github.com/motdotla/dotenv) file and load the credentials from an environment variable based on the passed project key.
+Set environment variables from a [`dotenv`](https://github.com/motdotla/dotenv) file and load the credentials from an environment variable based on the passed project key.
 
 ### Arguments
 

@@ -70,6 +70,7 @@ describe('getCredentialsFromEnvironment', () => {
       .then(done.fail)
       .catch((error) => {
         expect(error.message).toMatch(expectedErrorText.undefinedEnv)
+        expect(error.message).toMatch(new RegExp(homepage))
         done()
       })
   })
