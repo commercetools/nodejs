@@ -35,7 +35,7 @@ Set environment variables from a [`dotenv`](https://github.com/motdotla/dotenv) 
 
 ### Returns
 
-Returns a `Promise` which resolves to `{ clientId, clientSecret }`. When no credentials are found for the given project key an array of errors is rejected.
+Returns a `Promise` which resolves to `{ clientId, clientSecret }`. When no credentials are found for the given project key an error is rejected.
 
 ### Usage example
 ```js
@@ -43,5 +43,5 @@ import { getCredentials } from '@commercetools/get-credentials'
 
 getCredentials('my-project-key')
   .then(console.log)
-  .catch(errors => errors.forEach(console.error))
+  .catch(console.error)
 ```

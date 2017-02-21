@@ -1,4 +1,5 @@
 import fs from 'fs'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import sinon from 'sinon'
 
 import {
@@ -15,22 +16,24 @@ const expectedErrorText = {
 }
 
 describe('getCredentials', () => {
+  const sandbox = sinon.sandbox.create()
+
+  afterEach(() => sandbox.restore())
+
   test('should reject error when missing project key argument', (done) => {
     getCredentials()
       .then(done.fail)
-      .catch((errors) => {
-        expect(errors[0].message).toBe('Missing "projectKey" argument')
+      .catch((error) => {
+        expect(error.message).toBe('Missing "projectKey" argument')
         done()
       })
   })
 
-  test('should reject an array of all errors', (done) => {
+  test('should reject when project credentials are not found', (done) => {
     getCredentials('forgery')
       .then(done.fail)
-      .catch((errors) => {
-        expect(errors.length).toBe(2)
-        expect(errors[0].message).toMatch(expectedErrorText.dotenv)
-        expect(errors[1].message).toMatch(expectedErrorText.undefinedEnv)
+      .catch((error) => {
+        expect(error.message).toMatch(expectedErrorText.undefinedEnv)
         done()
       })
   })
@@ -101,11 +104,5 @@ describe('setCredentialsFromEnvFile', () => {
     setCredentialsFromEnvFile()
 
     expect(process.env.CT_STROOPWAFEL).toBe('nyw:les')
-  })
-
-  test('should return error when no dotenv file exists', () => {
-    const result = setCredentialsFromEnvFile()
-
-    expect(result.message).toMatch(expectedErrorText.dotenv)
   })
 })

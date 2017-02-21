@@ -5,14 +5,13 @@ import { homepage } from '../package.json'
 
 export default function getCredentials (projectKey) {
   if (!projectKey)
-    return Promise.reject([new Error('Missing "projectKey" argument')])
+    return Promise.reject(new Error('Missing "projectKey" argument'))
 
   return Promise.resolve(setCredentialsFromEnvFile())
-    .catch(Promise.resolve)
-    .then(dotenvError => getCredentialsFromEnvironment(projectKey)
-      .catch(environmentError =>
-        Promise.reject([dotenvError, environmentError]),
-      ))
+    .then(() => getCredentialsFromEnvironment(projectKey))
+    .catch(environmentError =>
+      Promise.reject(environmentError),
+    )
 }
 
 export function getCredentialsFromEnvironment (projectKey) {
@@ -48,11 +47,6 @@ export function setCredentialsFromEnvFile () {
   const etcDirectoryResult = dotenv.config({
     path: path.resolve(path.join('/etc', '.ct-credentials.env')),
   })
-
-  if (currentDirectoryResult.error && etcDirectoryResult.error)
-    return new Error(
-      'Could not get credentials from .env file',
-    )
 
   return {
     ...currentDirectoryResult.parsed,
