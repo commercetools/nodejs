@@ -9,15 +9,17 @@ npm install --save @commercetools/get-credentials
 
 ## Usage
 
+Getting the credentials in comes in two ways where the environment variable has priority:
+
+### From environment variables
+
+Read the credentials from an environment variable named after the project key like: `CT_<project key>`. The contained credentials are expected like this: `<client id>:<client secret>`. Notice that the given project key will be uppercased and dashes will be replaced by an underscore. So for example: `my-projectkey` becomes `MY_PROJECTKEY`.
+
 ### From a file
 
 Read the credentials from a [`dotenv`](https://github.com/motdotla/dotenv) file in the following locations, descending priority:
 - `./.ct-credentials.env` *Current directory*
 - `/etc/.ct-credentials.env`
-
-### From environment variables
-
-Read the credentials from an environment variable named after the project key like: `CT_<project key>`. The contained credentials are expected like this: `<client id>:<client secret>`. Notice that the given project key will be uppercased and dashes will be replaced by an underscore. So for example: `my-projectkey` becomes `MY_PROJECTKEY`.
 
 Example `ct-credentials.env` file:
 ```dosini
