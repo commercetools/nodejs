@@ -62,7 +62,7 @@
     "lerna": "2.0.0-beta.37",
     "lerna-semantic-release": "9.0.6",
     "npm-check-updates": "~2.10.2",
-    "npm-run-all": "4.0.1",
+    "npm-run-all": "4.0.2",
     "rimraf": "2.5.4",
     "validate-commit-msg": "2.11.0",
     "webpack": "2.2.1"
