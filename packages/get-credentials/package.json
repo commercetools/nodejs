@@ -11,7 +11,7 @@
     "url": "https://github.com/commercetools/nodejs/tree/master/packages/get-credentials"
   },
   "homepage": "https://commercetools.github.io/nodejs/sdk/api/getCredentials.html",
-  "bugs": "https://github.com/commercetools/get-credentials/issues",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "contributors": [
     "Selwyn Versteeg <selwyn.versteeg@commercetools.com> (https://selwyn.cc/)"
