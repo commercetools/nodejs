@@ -10,7 +10,6 @@ import {
 import { homepage } from '../package.json'
 
 const expectedErrorText = {
-  dotenv: new RegExp(/could not .+ from .env file/, 'i'),
   invalidEnvFormat: new RegExp(/could not get credentials/, 'i'),
   undefinedEnv: new RegExp(/could not find environment variable/, 'i'),
 }
