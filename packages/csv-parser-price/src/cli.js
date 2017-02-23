@@ -53,6 +53,16 @@ Convert commercetools price CSV data to JSON.`,
     return process.stdout
   })
 
+  .option('apiUrl', {
+    default: CONSTANTS.host.api,
+    describe: 'The host URL of the OAuth API service.',
+  })
+
+  .option('authUrl', {
+    default: CONSTANTS.host.auth,
+    describe: 'The host URL of the OAuth API service.',
+  })
+
   .option('batchSize', {
     alias: 'b',
     default: CONSTANTS.standardOption.batchSize,
@@ -69,11 +79,6 @@ Convert commercetools price CSV data to JSON.`,
     alias: 'p',
     describe: 'API project key.',
     demand: true,
-  })
-
-  .option('host', {
-    default: CONSTANTS.host.auth,
-    describe: 'The host URL of the OAuth API service.',
   })
 
   .option('logLevel', {
@@ -107,7 +112,8 @@ getCredentials(args.projectKey)
   .then(credentials =>
     new CsvParserPrice({
       apiConfig: {
-        host: args.host,
+        host: args.authUrl,
+        apiUrl: args.apiUrl,
         projectKey: args.projectKey,
         credentials,
       },

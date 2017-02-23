@@ -4,7 +4,7 @@ export default function loadCredentials (projectKey) {
   //   CREDENTIALS_<PROJECT_KEY>=<CLIENT_ID:CLIENT_SECRET>
   // E.g.: projectKey = `foo-123`
   //   CREDENTIALS_FOO_123=<CLIENT_ID:CLIENT_SECRET>
-  const envVarKey = `CREDENTIALS_${projectKey.toUpperCase().replace(/-/g, '_')}`
+  const envVarKey = `CT_${projectKey.toUpperCase().replace(/-/g, '_')}`
   const envVar = process.env[envVarKey]
   if (envVar) {
     const [ clientId, clientSecret ] = envVar.split(':')

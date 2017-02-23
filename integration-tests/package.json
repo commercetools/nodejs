@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "dependencies": {
     "@commercetools/api-request-builder": "*",
+    "@commercetools/csv-parser-price": "*",
     "@commercetools/sdk-client": "*",
     "@commercetools/sdk-middleware-auth": "*",
     "@commercetools/sdk-middleware-http": "*",

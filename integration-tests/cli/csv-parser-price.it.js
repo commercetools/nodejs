@@ -16,6 +16,7 @@ import { version } from '../../packages/csv-parser-price/package.json'
 
 import loadCredentials from '../load-credentials'
 
+const binPath = './integration-tests/node_modules/.bin/csvparserprice'
 const {
   projectKey,
   clientId,
@@ -32,7 +33,104 @@ const apiConfig = {
   },
 }
 
-describe('parse CSV to JSON', () => {
+describe('CLI basic functionality', () => {
+  test('should print usage information given the help flag', (done) => {
+    exec(`${binPath} --help`, (error, stdout, stderr) => {
+      expect(String(stdout)).toMatch(/help/)
+      expect(error && stderr).toBeFalsy()
+      done()
+    })
+  })
+
+  test('should print the module version given the version flag', (done) => {
+    exec(`${binPath} --version`, (error, stdout, stderr) => {
+      expect(stdout).toBe(`${version}\n`)
+      expect(error && stderr).toBeFalsy()
+      done()
+    })
+  })
+
+  test('should take input from file', (done) => {
+    const csvFilePath = './packages/csv-parser-price/test/helpers/sample.csv'
+    exec(`${binPath} -p ${projectKey} --inputFile ${csvFilePath}`,
+      (error, stdout, stderr) => {
+        expect(stdout.match(/prices/)).toBeTruthy()
+        expect(error && stderr).toBeFalsy()
+        done()
+      },
+    )
+  })
+
+  test('should write output to file', (done) => {
+    // eslint-disable-next-line max-len
+    const csvFilePath = './packages/csv-parser-price/test/helpers/simple-sample.csv'
+    const jsonFilePath = tmp.fileSync().name
+
+    // eslint-disable-next-line max-len
+    exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
+      (cliError, stdout, stderr) => {
+        expect(cliError && stderr).toBeFalsy()
+
+        fs.readFile(jsonFilePath, { encoding: 'utf8' }, (error, data) => {
+          expect(data.match(/prices/)).toBeTruthy()
+          expect(error).toBeFalsy()
+          done()
+        })
+      },
+    )
+  })
+})
+
+describe('CLI logs specific errors', () => {
+  test('on faulty CSV format', (done) => {
+    // eslint-disable-next-line max-len
+    const csvFilePath = './packages/csv-parser-price/test/helpers/faulty-sample.csv'
+    const jsonFilePath = tmp.fileSync().name
+
+    // eslint-disable-next-line max-len
+    exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
+      (error, stdout, stderr) => {
+        expect(error.code).toBe(1)
+        expect(stdout).toBeFalsy()
+        expect(stderr.match(/Row length does not match headers/)).toBeTruthy()
+        done()
+      },
+    )
+  })
+
+  test('on parsing errors', (done) => {
+    // eslint-disable-next-line max-len
+    const csvFilePath = './packages/csv-parser-price/test/helpers/missing-type-sample.csv'
+    const jsonFilePath = tmp.fileSync().name
+
+    // eslint-disable-next-line max-len
+    exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
+      (error, stdout, stderr) => {
+        expect(error.code).toBe(1)
+        expect(stdout).toBeFalsy()
+        expect(stderr).toMatch(/No type with key .+ found/)
+        done()
+      },
+    )
+  })
+
+  test('stack trace on verbose level', (done) => {
+    // eslint-disable-next-line max-len
+    const csvFilePath = './packages/csv-parser-price/test/helpers/faulty-sample.csv'
+
+    // eslint-disable-next-line max-len
+    exec(`${binPath} -p ${projectKey} -i ${csvFilePath} --logLevel verbose`,
+      (error, stdout, stderr) => {
+        expect(error.code).toBe(1)
+        expect(stdout).toBeFalsy()
+        expect(stderr).toMatch(/\.js:\d+:\d+/)
+        done()
+      },
+    )
+  })
+})
+
+describe('handles API calls correctly and parses CSV to JSON', () => {
   beforeAll(() => {
     const client = createClient({
       middlewares: [
@@ -71,6 +169,22 @@ describe('parse CSV to JSON', () => {
         body: customTypePayload,
         method: 'POST',
       }))
+  })
+
+  test('CLI exits on type mapping errors', (done) => {
+    // eslint-disable-next-line max-len
+    const csvFilePath = './packages/csv-parser-price/test/helpers/wrong-type-sample.csv'
+    const jsonFilePath = tmp.fileSync().name
+
+    // eslint-disable-next-line max-len
+    exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
+      (error, stdout, stderr) => {
+        expect(error.code).toBe(1)
+        expect(stdout).toBeFalsy()
+        expect(stderr).toMatch(/row 2: custom-type.+ valid/)
+        done()
+      },
+    )
   })
 
   test('should parse CSV into JSON with array of prices', (done) => {
