@@ -55,7 +55,7 @@ const client = createClient({
   ],
 })
 
-describe.skip('Channels', () => {
+describe('Channels', () => {
   const key = uniqueId('channel_')
   let channelResponse
 

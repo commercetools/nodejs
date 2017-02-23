@@ -1,0 +1,75 @@
+[
+  {
+    "variant-sku": "my-price",
+    "prices": [
+      {
+        "variant-sku": "my-price",
+        "value": {
+          "centAmount": 4200
+        },
+        "country": "DE",
+        "customerGroup": {
+          "id": "customer-group"
+        },
+        "channel": {
+          "id": "my-channel"
+        },
+        "validFrom": "2016-11-01T08:01:19+0000",
+        "validUntil": "2016-12-01T08:03:10+0000",
+        "custom": {
+          "type": {},
+          "fields": {
+            "foo": 12
+          }
+        }
+      },
+      {
+        "variant-sku": "my-price",
+        "value": {
+          "centAmount": 4200
+        },
+        "country": "DE",
+        "customerGroup": {
+          "id": "customer-group"
+        },
+        "channel": {
+          "id": "my-channel"
+        },
+        "validFrom": "2016-11-01T08:01:19+0000",
+        "validUntil": "2016-12-01T08:03:10+0000",
+        "custom": {
+          "type": {},
+          "fields": {
+            "foo": 12
+          }
+        }
+      }
+    ]
+  },
+  {
+    "variant-sku": "my-price2",
+    "prices": [
+      {
+        "variant-sku": "my-price2",
+        "value": {
+          "centAmount": 4200
+        },
+        "country": "DE",
+        "customerGroup": {
+          "id": "customer-group"
+        },
+        "channel": {
+          "id": "my-channel"
+        },
+        "validFrom": "2016-11-01T08:01:19+0000",
+        "validUntil": "2016-12-01T08:03:10+0000",
+        "custom": {
+          "type": {},
+          "fields": {
+            "foo": 12
+          }
+        }
+      }
+    ]
+  }
+]
