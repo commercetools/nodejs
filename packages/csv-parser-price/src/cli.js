@@ -55,7 +55,7 @@ Convert commercetools price CSV data to JSON.`,
 
   .option('apiUrl', {
     default: CONSTANTS.host.api,
-    describe: 'The host URL of the OAuth API service.',
+    describe: 'The host URL of the HTTP API service.',
   })
 
   .option('authUrl', {
