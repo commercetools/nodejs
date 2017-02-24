@@ -21,7 +21,7 @@ const {
   projectKey,
   clientId,
   clientSecret,
-} = loadCredentials('hardcoded')
+} = loadCredentials('node-sdk-integration-tests')
 
 const apiConfig = {
   host: CONSTANTS.host.auth,
@@ -87,7 +87,6 @@ describe('CLI logs specific errors', () => {
     const csvFilePath = './packages/csv-parser-price/test/helpers/faulty-sample.csv'
     const jsonFilePath = tmp.fileSync().name
 
-    // eslint-disable-next-line max-len
     exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
       (error, stdout, stderr) => {
         expect(error.code).toBe(1)
@@ -103,7 +102,6 @@ describe('CLI logs specific errors', () => {
     const csvFilePath = './packages/csv-parser-price/test/helpers/missing-type-sample.csv'
     const jsonFilePath = tmp.fileSync().name
 
-    // eslint-disable-next-line max-len
     exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
       (error, stdout, stderr) => {
         expect(error.code).toBe(1)
@@ -118,7 +116,6 @@ describe('CLI logs specific errors', () => {
     // eslint-disable-next-line max-len
     const csvFilePath = './packages/csv-parser-price/test/helpers/faulty-sample.csv'
 
-    // eslint-disable-next-line max-len
     exec(`${binPath} -p ${projectKey} -i ${csvFilePath} --logLevel verbose`,
       (error, stdout, stderr) => {
         expect(error.code).toBe(1)
@@ -176,7 +173,6 @@ describe('handles API calls correctly and parses CSV to JSON', () => {
     const csvFilePath = './packages/csv-parser-price/test/helpers/wrong-type-sample.csv'
     const jsonFilePath = tmp.fileSync().name
 
-    // eslint-disable-next-line max-len
     exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
       (error, stdout, stderr) => {
         expect(error.code).toBe(1)

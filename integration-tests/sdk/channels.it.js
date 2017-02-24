@@ -20,7 +20,7 @@ const {
   projectKey,
   clientId,
   clientSecret,
-} = loadCredentials('hardcoded')
+} = loadCredentials('node-sdk-integration-tests')
 
 const ignoredResponseKeys = [ 'id', 'createdAt', 'lastModifiedAt' ]
 
