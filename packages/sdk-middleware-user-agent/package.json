@@ -28,7 +28,7 @@
   "scripts": {
     "dist": "npm run build:umd && npm run build:umd:min",
     "build:umd": "cross-env cross-env NODE_ENV=development webpack --config ../../webpack.config.js --output-library CommercetoolsSdkMiddlewareUserAgent --output-library-target umd src/index.js dist/commercetools-sdk-middleware-user-agent.js",
-    "build:umd:min": "cross-env cross-env NODE_ENV=production webpack --config ../../webpack.config.js --output-library CommercetoolsSdkMiddlewareUserAgent --output-library-target umd src/index.js dist/commercetools-sdk-middleware-user-agent.min.js"
+    "build:umd:min": "cross-env cross-env NODE_ENV=production webpack -p --config ../../webpack.config.js --output-library CommercetoolsSdkMiddlewareUserAgent --output-library-target umd src/index.js dist/commercetools-sdk-middleware-user-agent.min.js"
   },
   "dependencies": {
     "@commercetools/http-user-agent": "^1.0.1"

@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-middleware-http",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Middleware for http requests, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
@@ -28,7 +28,7 @@
   "scripts": {
     "dist": "npm run build:umd && npm run build:umd:min",
     "build:umd": "cross-env NODE_ENV=development webpack --config ../../webpack.config.js --output-library CommercetoolsSdkMiddlewareHttp --output-library-target umd src/index.js dist/commercetools-sdk-middleware-http.js",
-    "build:umd:min": "cross-env NODE_ENV=production webpack --config ../../webpack.config.js --output-library CommercetoolsSdkMiddlewareHttp --output-library-target umd src/index.js dist/commercetools-sdk-middleware-http.min.js"
+    "build:umd:min": "cross-env NODE_ENV=production webpack -p --config ../../webpack.config.js --output-library CommercetoolsSdkMiddlewareHttp --output-library-target umd src/index.js dist/commercetools-sdk-middleware-http.min.js"
   },
   "dependencies": {
     "isomorphic-fetch": "2.2.1"

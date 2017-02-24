@@ -199,4 +199,50 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }),
   )
+
+  it('parses a host that ends with slash', () =>
+    new Promise((resolve, reject) => {
+      const sampleHost = 'https://api.commercetools.com/'
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res.statusCode).toBe(200)
+        resolve()
+      }
+      const httpMiddleware = createHttpMiddleware({ host: sampleHost })
+      nock(sampleHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    }),
+  )
+
+  it('parses a host that ends without slash', () =>
+    new Promise((resolve, reject) => {
+      const sampleHost = 'https://api.commercetools.com'
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res.statusCode).toBe(200)
+        resolve()
+      }
+      const httpMiddleware = createHttpMiddleware({ host: sampleHost })
+      nock(sampleHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    }),
+  )
 })

@@ -1,5 +1,12 @@
 {
-  "presets": ["es2015"],
+  "presets": [
+    ["env", {
+      "targets": {
+        "node": "current",
+        "browsers": "last 2 versions"
+      }
+    }]
+  ],
   "plugins": [
     "transform-export-extensions",
     "transform-flow-strip-types",
