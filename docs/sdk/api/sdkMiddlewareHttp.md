@@ -21,6 +21,7 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle HTTP requests for 
 #### Named arguments (options)
 
 1. `host` *(String)*: the host of the HTTP API service
+2. `includeHeaders` *(Boolean)*: flag whether to include the headers in the response, if omitted headers is omitted from response
 
 #### Usage example
 
@@ -32,6 +33,7 @@ const client = createClient({
   middlewares: [
     createHttpMiddleware({
       host: 'https://api.commercetools.com',
+      includeHeaders: true,
     }),
   ],
 })
