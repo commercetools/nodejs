@@ -48,6 +48,65 @@ describe('Http', () => {
     }),
   )
 
+  it('should return the headers in the response when enabled', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          body: { foo: 'bar' },
+          statusCode: 200,
+          headers: {
+            'content-type': ['application/json'],
+          },
+        })
+        resolve()
+      }
+      // Use default options
+      const httpOptions = { host: testHost, includeHeaders: true }
+      const httpMiddleware = createHttpMiddleware(httpOptions)
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    }),
+  )
+
+  it('should omit the headers when headers flag is false or omitted', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          body: { foo: 'bar' },
+          statusCode: 200,
+        })
+        resolve()
+      }
+      // Use default options
+      const httpOptions = { host: testHost }
+      const httpMiddleware = createHttpMiddleware(httpOptions)
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    }),
+  )
+
   it('execute a post request (success)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
