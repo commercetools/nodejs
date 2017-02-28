@@ -51,7 +51,7 @@ export default function createHttpMiddleware (
               statusCode: res.status,
             }
             if (options.includeHeaders)
-              parsedResponse.headers = res.headers.raw()
+              parsedResponse.headers = parseHeaders(res.headers)
             next(request, parsedResponse)
           })
           return

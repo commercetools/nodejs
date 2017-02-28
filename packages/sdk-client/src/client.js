@@ -43,6 +43,7 @@ export default function createClient (options: ClientOptions): Client {
             rs.resolve({
               body: rs.body || {},
               statusCode: rs.statusCode,
+              headers: rs.headers || {},
             })
         }
 

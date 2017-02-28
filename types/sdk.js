@@ -30,6 +30,7 @@ export type ClientResponse = {
 export type SuccessResult = {
   body: Object;
   statusCode: number;
+  headers?: Object;
 }
 export type ClientResult = SuccessResult | HttpErrorType
 export type Client = {
