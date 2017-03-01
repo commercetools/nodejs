@@ -72,6 +72,7 @@ describe('execute', () => {
           version: 1,
         },
         statusCode: 200,
+        headers: {},
       })
     })
   })
