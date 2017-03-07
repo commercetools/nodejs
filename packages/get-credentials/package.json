@@ -1,0 +1,29 @@
+{
+  "name": "@commercetools/get-credentials",
+  "version": "1.0.0",
+  "description": "Get CT credentials from the system environment.",
+  "keywords": [
+    "commercetools",
+    "credentials"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs/tree/master/packages/get-credentials"
+  },
+  "homepage": "https://commercetools.github.io/nodejs/sdk/api/getCredentials.html",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "contributors": [
+    "Selwyn Versteeg <selwyn.versteeg@commercetools.com> (https://selwyn.cc/)"
+  ],
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "devDependencies": {
+    "sinon": "^1.17.7"
+  },
+  "dependencies": {
+    "dotenv": "^4.0.0"
+  }
+}
