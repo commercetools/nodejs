@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sync-actions",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Build API update actions for the commercetools platform.",
   "keywords": [
     "commercetools",
@@ -27,7 +27,7 @@
   "scripts": {
     "dist": "npm run build:umd && npm run build:umd:min",
     "build:umd": "cross-env NODE_ENV=development webpack --config ../../webpack.config.js --output-library CommercetoolsSyncActions --output-library-target umd src/index.js dist/commercetools-sync-actions.js",
-    "build:umd:min": "cross-env NODE_ENV=production webpack --config ../../webpack.config.js --output-library CommercetoolsSyncActions --output-library-target umd src/index.js dist/commercetools-sync-actions.min.js"
+    "build:umd:min": "cross-env NODE_ENV=production webpack -p --config ../../webpack.config.js --output-library CommercetoolsSyncActions --output-library-target umd src/index.js dist/commercetools-sync-actions.min.js"
   },
   "dependencies": {
     "jsondiffpatch": "0.2.4",

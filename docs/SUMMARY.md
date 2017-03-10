@@ -17,6 +17,8 @@
       * [sdk-middleware-user-agent](/sdk/api/sdkMiddlewareUserAgent.md)
     * [helpers](/sdk/api/README.md#helpers)
       * [api-request-builder](/sdk/api/apiRequestBuilder.md)
+      * [get-credentials](/sdk/api/getCredentials.md)
       * [http-user-agent](/sdk/api/httpUserAgent.md)
       * [sync-actions](/sdk/api/syncActions.md)
 * [CLI](/cli/README.md)
+  * [Credentials](/cli/getCredentials.md)
