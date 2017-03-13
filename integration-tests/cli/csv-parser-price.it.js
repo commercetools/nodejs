@@ -3,6 +3,7 @@ from '@commercetools/sdk-middleware-auth'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
+import { getCredentials } from '@commercetools/get-credentials'
 
 import { exec } from 'child_process'
 import fs from 'fs'
@@ -14,196 +15,197 @@ import CONSTANTS from '../../packages/csv-parser-price/src/constants'
 import CsvParserPrice from '../../packages/csv-parser-price/src/main'
 import { version } from '../../packages/csv-parser-price/package.json'
 
-import loadCredentials from '../load-credentials'
+describe('CSV and CLI Tests', () => {
+  const projectKey = 'node-sdk-integration-tests'
+  const binPath = './integration-tests/node_modules/.bin/csvparserprice'
+  let apiConfig
 
-const binPath = './integration-tests/node_modules/.bin/csvparserprice'
-const {
-  projectKey,
-  clientId,
-  clientSecret,
-} = loadCredentials('node-sdk-integration-tests')
+  beforeAll(() => getCredentials(projectKey)
+    .then((credentials) => {
+      apiConfig = {
+        host: CONSTANTS.host.auth,
+        apiUrl: CONSTANTS.host.api,
+        projectKey,
+        credentials: {
+          clientId: credentials.clientId,
+          clientSecret: credentials.clientSecret,
+        },
+      }
+    }),
+  )
 
-const apiConfig = {
-  host: CONSTANTS.host.auth,
-  apiUrl: CONSTANTS.host.api,
-  projectKey,
-  credentials: {
-    clientId,
-    clientSecret,
-  },
-}
-
-describe('CLI basic functionality', () => {
-  test('should print usage information given the help flag', (done) => {
-    exec(`${binPath} --help`, (error, stdout, stderr) => {
-      expect(String(stdout)).toMatch(/help/)
-      expect(error && stderr).toBeFalsy()
-      done()
-    })
-  })
-
-  test('should print the module version given the version flag', (done) => {
-    exec(`${binPath} --version`, (error, stdout, stderr) => {
-      expect(stdout).toBe(`${version}\n`)
-      expect(error && stderr).toBeFalsy()
-      done()
-    })
-  })
-
-  test('should take input from file', (done) => {
-    const csvFilePath = './packages/csv-parser-price/test/helpers/sample.csv'
-    exec(`${binPath} -p ${projectKey} --inputFile ${csvFilePath}`,
-      (error, stdout, stderr) => {
-        expect(stdout.match(/prices/)).toBeTruthy()
+  describe('CLI basic functionality', () => {
+    test('should print usage information given the help flag', (done) => {
+      exec(`${binPath} --help`, (error, stdout, stderr) => {
+        expect(String(stdout)).toMatch(/help/)
         expect(error && stderr).toBeFalsy()
         done()
-      },
-    )
-  })
+      })
+    })
 
-  test('should write output to file', (done) => {
-    // eslint-disable-next-line max-len
-    const csvFilePath = './packages/csv-parser-price/test/helpers/simple-sample.csv'
-    const jsonFilePath = tmp.fileSync().name
+    test('should print the module version given the version flag', (done) => {
+      exec(`${binPath} --version`, (error, stdout, stderr) => {
+        expect(stdout).toBe(`${version}\n`)
+        expect(error && stderr).toBeFalsy()
+        done()
+      })
+    })
 
-    // eslint-disable-next-line max-len
-    exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
-      (cliError, stdout, stderr) => {
-        expect(cliError && stderr).toBeFalsy()
-
-        fs.readFile(jsonFilePath, { encoding: 'utf8' }, (error, data) => {
-          expect(data.match(/prices/)).toBeTruthy()
-          expect(error).toBeFalsy()
+    test('should take input from file', (done) => {
+      const csvFilePath = './packages/csv-parser-price/test/helpers/sample.csv'
+      exec(`${binPath} -p ${projectKey} --inputFile ${csvFilePath}`,
+        (error, stdout, stderr) => {
+          expect(stdout.match(/prices/)).toBeTruthy()
+          expect(error && stderr).toBeFalsy()
           done()
-        })
-      },
-    )
-  })
-})
-
-describe('CLI logs specific errors', () => {
-  test('on faulty CSV format', (done) => {
-    // eslint-disable-next-line max-len
-    const csvFilePath = './packages/csv-parser-price/test/helpers/faulty-sample.csv'
-    const jsonFilePath = tmp.fileSync().name
-
-    exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
-      (error, stdout, stderr) => {
-        expect(error.code).toBe(1)
-        expect(stdout).toBeFalsy()
-        expect(stderr.match(/Row length does not match headers/)).toBeTruthy()
-        done()
-      },
-    )
-  })
-
-  test('on parsing errors', (done) => {
-    // eslint-disable-next-line max-len
-    const csvFilePath = './packages/csv-parser-price/test/helpers/missing-type-sample.csv'
-    const jsonFilePath = tmp.fileSync().name
-
-    exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
-      (error, stdout, stderr) => {
-        expect(error.code).toBe(1)
-        expect(stdout).toBeFalsy()
-        expect(stderr).toMatch(/No type with key .+ found/)
-        done()
-      },
-    )
-  })
-
-  test('stack trace on verbose level', (done) => {
-    // eslint-disable-next-line max-len
-    const csvFilePath = './packages/csv-parser-price/test/helpers/faulty-sample.csv'
-
-    exec(`${binPath} -p ${projectKey} -i ${csvFilePath} --logLevel verbose`,
-      (error, stdout, stderr) => {
-        expect(error.code).toBe(1)
-        expect(stdout).toBeFalsy()
-        expect(stderr).toMatch(/\.js:\d+:\d+/)
-        done()
-      },
-    )
-  })
-})
-
-describe('handles API calls correctly and parses CSV to JSON', () => {
-  beforeAll(() => {
-    const client = createClient({
-      middlewares: [
-        createAuthMiddlewareForClientCredentialsFlow(apiConfig),
-        createHttpMiddleware({
-          host: CONSTANTS.host.api,
-        }),
-      ],
-    })
-
-    const customTypePayload = {
-      key: 'custom-type',
-      name: { nl: 'selwyn' },
-      resourceTypeIds: ['product-price'],
-      fieldDefinitions: [
-        {
-          type: { name: 'Number' },
-          name: 'foo',
-          label: { en: 'said the barman' },
-          required: true,
         },
-      ],
-    }
-
-    // Clean up and create new custom type
-    return client.execute({
-      uri: `/${projectKey}/types/key=${customTypePayload.key}?version=1`,
-      method: 'DELETE',
+      )
     })
-      // Ignore rejection, we want to create the type either way
-      .catch(() => true)
-      .then(() => client.execute({
-        uri: createRequestBuilder().types.build({
-          projectKey,
-        }),
-        body: customTypePayload,
-        method: 'POST',
-      }))
-  })
 
-  test('CLI exits on type mapping errors', (done) => {
-    // eslint-disable-next-line max-len
-    const csvFilePath = './packages/csv-parser-price/test/helpers/wrong-type-sample.csv'
-    const jsonFilePath = tmp.fileSync().name
-
-    exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
-      (error, stdout, stderr) => {
-        expect(error.code).toBe(1)
-        expect(stdout).toBeFalsy()
-        expect(stderr).toMatch(/row 2: custom-type.+ valid/)
-        done()
-      },
-    )
-  })
-
-  test('should parse CSV into JSON with array of prices', (done) => {
-    const csvFilePath = './packages/csv-parser-price/test/helpers/sample.csv'
-    const csvParserPrice = new CsvParserPrice({ apiConfig })
-    const inputStream = fs.createReadStream(csvFilePath)
-    const outputStream = streamtest['v2'].toText((error, output) => {
-      const prices = JSON.parse(output)
+    test('should write output to file', (done) => {
       // eslint-disable-next-line max-len
-      const expected = path.join(__dirname, 'expected-output', 'csv-parser-price.json')
-      const expectedArray = JSON.parse(fs.readFileSync(expected, 'utf8'))
+      const csvFilePath = './packages/csv-parser-price/test/helpers/simple-sample.csv'
+      const jsonFilePath = tmp.fileSync().name
 
-      expect(prices).toBeInstanceOf(Array)
-      expect(prices).toMatchObject(expectedArray)
-      expect(prices.length).toBe(2)
+      // eslint-disable-next-line max-len
+      exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
+        (cliError, stdout, stderr) => {
+          expect(cliError && stderr).toBeFalsy()
 
-      // Because customTypeId is dynamic, match it against uuid regex
-      expect(isuuid(prices[0].prices[0].custom.type.id)).toBe(true)
-      expect(isuuid(prices[0].prices[1].custom.type.id)).toBe(true)
-      expect(isuuid(prices[1].prices[0].custom.type.id)).toBe(true)
-      done()
+          fs.readFile(jsonFilePath, { encoding: 'utf8' }, (error, data) => {
+            expect(data.match(/prices/)).toBeTruthy()
+            expect(error).toBeFalsy()
+            done()
+          })
+        },
+      )
+    })
+  })
+
+  describe('CLI logs specific errors', () => {
+    test('on faulty CSV format', (done) => {
+      // eslint-disable-next-line max-len
+      const csvFilePath = './packages/csv-parser-price/test/helpers/faulty-sample.csv'
+      const jsonFilePath = tmp.fileSync().name
+
+      exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
+        (error, stdout, stderr) => {
+          expect(error.code).toBe(1)
+          expect(stdout).toBeFalsy()
+          expect(stderr.match(/Row length does not match headers/)).toBeTruthy()
+          done()
+        },
+      )
     })
 
-    csvParserPrice.parse(inputStream, outputStream)
+    test('on parsing errors', (done) => {
+      // eslint-disable-next-line max-len
+      const csvFilePath = './packages/csv-parser-price/test/helpers/missing-type-sample.csv'
+      const jsonFilePath = tmp.fileSync().name
+
+      exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
+        (error, stdout, stderr) => {
+          expect(error.code).toBe(1)
+          expect(stdout).toBeFalsy()
+          expect(stderr).toMatch(/No type with key .+ found/)
+          done()
+        },
+      )
+    })
+
+    test('stack trace on verbose level', (done) => {
+      // eslint-disable-next-line max-len
+      const csvFilePath = './packages/csv-parser-price/test/helpers/faulty-sample.csv'
+
+      exec(`${binPath} -p ${projectKey} -i ${csvFilePath} --logLevel verbose`,
+        (error, stdout, stderr) => {
+          expect(error.code).toBe(1)
+          expect(stdout).toBeFalsy()
+          expect(stderr).toMatch(/\.js:\d+:\d+/)
+          done()
+        },
+      )
+    })
+  })
+
+  describe('handles API calls correctly and parses CSV to JSON', () => {
+    beforeAll(() => {
+      const client = createClient({
+        middlewares: [
+          createAuthMiddlewareForClientCredentialsFlow(apiConfig),
+          createHttpMiddleware({
+            host: CONSTANTS.host.api,
+          }),
+        ],
+      })
+
+      const customTypePayload = {
+        key: 'custom-type',
+        name: { nl: 'selwyn' },
+        resourceTypeIds: ['product-price'],
+        fieldDefinitions: [
+          {
+            type: { name: 'Number' },
+            name: 'foo',
+            label: { en: 'said the barman' },
+            required: true,
+          },
+        ],
+      }
+
+      // Clean up and create new custom type
+      return client.execute({
+        uri: `/${projectKey}/types/key=${customTypePayload.key}?version=1`,
+        method: 'DELETE',
+      })
+        // Ignore rejection, we want to create the type either way
+        .catch(() => true)
+        .then(() => client.execute({
+          uri: createRequestBuilder().types.build({
+            projectKey,
+          }),
+          body: customTypePayload,
+          method: 'POST',
+        }))
+    })
+
+    test('CLI exits on type mapping errors', (done) => {
+      // eslint-disable-next-line max-len
+      const csvFilePath = './packages/csv-parser-price/test/helpers/wrong-type-sample.csv'
+      const jsonFilePath = tmp.fileSync().name
+
+      exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
+        (error, stdout, stderr) => {
+          expect(error.code).toBe(1)
+          expect(stdout).toBeFalsy()
+          expect(stderr).toMatch(/row 2: custom-type.+ valid/)
+          done()
+        },
+      )
+    })
+
+    test('should parse CSV into JSON with array of prices', (done) => {
+      const csvFilePath = './packages/csv-parser-price/test/helpers/sample.csv'
+      const csvParserPrice = new CsvParserPrice({ apiConfig })
+      const inputStream = fs.createReadStream(csvFilePath)
+      const outputStream = streamtest['v2'].toText((error, output) => {
+        const prices = JSON.parse(output)
+        // eslint-disable-next-line max-len
+        const expected = path.join(__dirname, 'expected-output', 'csv-parser-price.json')
+        const expectedArray = JSON.parse(fs.readFileSync(expected, 'utf8'))
+
+        expect(prices).toBeInstanceOf(Array)
+        expect(prices).toMatchObject(expectedArray)
+        expect(prices.length).toBe(2)
+
+        // Because customTypeId is dynamic, match it against uuid regex
+        expect(isuuid(prices[0].prices[0].custom.type.id)).toBe(true)
+        expect(isuuid(prices[0].prices[1].custom.type.id)).toBe(true)
+        expect(isuuid(prices[1].prices[0].custom.type.id)).toBe(true)
+        done()
+      })
+
+      csvParserPrice.parse(inputStream, outputStream)
+    })
   })
 })

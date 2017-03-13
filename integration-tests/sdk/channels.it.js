@@ -1,5 +1,6 @@
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createClient } from '@commercetools/sdk-client'
+import { getCredentials } from '@commercetools/get-credentials'
 import {
   createAuthMiddlewareForClientCredentialsFlow,
 } from '@commercetools/sdk-middleware-auth'
@@ -14,50 +15,47 @@ import {
 } from '@commercetools/sdk-middleware-user-agent'
 import omit from 'lodash.omit'
 import pkg from '../package.json'
-import loadCredentials from '../load-credentials'
-
-const {
-  projectKey,
-  clientId,
-  clientSecret,
-} = loadCredentials('node-sdk-integration-tests')
-
-const ignoredResponseKeys = [ 'id', 'createdAt', 'lastModifiedAt' ]
-
-const service = createRequestBuilder().channels
-
-const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
-  host: 'https://auth.sphere.io',
-  projectKey,
-  credentials: {
-    clientId,
-    clientSecret,
-  },
-})
-const httpMiddleware = createHttpMiddleware({
-  host: 'https://api.sphere.io',
-})
-const queueMiddleware = createQueueMiddleware({
-  concurrency: 5,
-})
-const userAgentMiddleware = createUserAgentMiddleware({
-  libraryName: pkg.name,
-  libraryVersion: pkg.version,
-  contactUrl: 'https://github.com/commercetools/nodejs',
-  contactEmail: 'npmjs@commercetools.com',
-})
-const client = createClient({
-  middlewares: [
-    authMiddleware,
-    queueMiddleware,
-    userAgentMiddleware,
-    httpMiddleware,
-  ],
-})
 
 describe('Channels', () => {
+  const projectKey = 'node-sdk-integration-tests'
+  const ignoredResponseKeys = [ 'id', 'createdAt', 'lastModifiedAt' ]
+  const service = createRequestBuilder().channels
+  const httpMiddleware = createHttpMiddleware({
+    host: 'https://api.sphere.io',
+  })
+  const queueMiddleware = createQueueMiddleware({
+    concurrency: 5,
+  })
+  const userAgentMiddleware = createUserAgentMiddleware({
+    libraryName: pkg.name,
+    libraryVersion: pkg.version,
+    contactUrl: 'https://github.com/commercetools/nodejs',
+    contactEmail: 'npmjs@commercetools.com',
+  })
   const key = uniqueId('channel_')
   let channelResponse
+  let client
+
+  beforeAll(() => getCredentials(projectKey)
+    .then((credentials) => {
+      const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
+        host: 'https://auth.sphere.io',
+        projectKey,
+        credentials: {
+          clientId: credentials.clientId,
+          clientSecret: credentials.clientSecret,
+        },
+      })
+      client = createClient({
+        middlewares: [
+          authMiddleware,
+          queueMiddleware,
+          userAgentMiddleware,
+          httpMiddleware,
+        ],
+      })
+    }),
+  )
 
   it('create', () => {
     const body = {
