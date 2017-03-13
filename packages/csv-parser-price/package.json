@@ -30,6 +30,7 @@
   ],
   "dependencies": {
     "@commercetools/api-request-builder": "^1.2.0",
+    "@commercetools/get-credentials": "^2.0.0",
     "@commercetools/sdk-client": "^1.2.0",
     "@commercetools/sdk-middleware-auth": "^3.0.0",
     "@commercetools/sdk-middleware-http": "^2.0.0",

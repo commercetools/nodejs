@@ -112,7 +112,7 @@ export default (function MapCustomFields () {
 
   function mapBoolean (value) {
     const result = {}
-    if (value === undefined || (typeof value === 'string' && value === ''))
+    if (!isValidValue(value))
       return result
     const _value = value.trim()
     const errorMsg = `The value '${_value}' is not a valid boolean value`
