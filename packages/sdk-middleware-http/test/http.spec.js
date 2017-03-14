@@ -66,7 +66,75 @@ describe('Http', () => {
         resolve()
       }
       // Use default options
-      const httpOptions = { host: testHost, includeHeaders: true }
+      const httpOptions = { host: testHost, includeResponseHeaders: true }
+      const httpMiddleware = createHttpMiddleware(httpOptions)
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    }),
+  )
+
+  it('should return the request in the response when enabled', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res.request).toMatchObject({
+          method: 'GET',
+          path: '/foo/bar',
+          headers: {
+            'content-type': ['application/json'],
+          },
+        })
+        resolve()
+      }
+      // Use default options
+      const httpOptions = { host: testHost, includeOriginalRequest: true }
+      const httpMiddleware = createHttpMiddleware(httpOptions)
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    }),
+  )
+
+  it('should maskSensitiveHeaderData in the response when enabled', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+        headers: {
+          Authorization: 'Bearer 123',
+        },
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res.request).toMatchObject({
+          method: 'GET',
+          path: '/foo/bar',
+          headers: {
+            'content-type': ['application/json'],
+            authorization: 'Bearer ********',
+          },
+        })
+        resolve()
+      }
+      // Use default options
+      const httpOptions = {
+        host: testHost,
+        includeOriginalRequest: true,
+        maskSensitiveHeaderData: true,
+      }
       const httpMiddleware = createHttpMiddleware(httpOptions)
       nock(testHost)
         .defaultReplyHeaders({
