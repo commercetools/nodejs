@@ -21,6 +21,9 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle HTTP requests for 
 #### Named arguments (options)
 
 1. `host` *(String)*: the host of the HTTP API service
+2. `includeResponseHeaders` *(Boolean)*: flag whether to include the response headers in the response, if omitted headers is omitted from response
+3. `includeOriginalRequest` *(Boolean)*: flag whether to include the original request sent in the response. Can be useful if you want to see the final request being sent.
+4. `maskSensitiveHeaderData` *(Boolean)*: flag to mask sensitie data in the header. e.g. Authorization token
 
 #### Usage example
 
@@ -32,6 +35,9 @@ const client = createClient({
   middlewares: [
     createHttpMiddleware({
       host: 'https://api.commercetools.com',
+      includeResponseHeaders: true,
+      includeOriginalRequest: true,
+      maskSensitiveHeaderData: true,
     }),
   ],
 })

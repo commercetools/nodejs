@@ -39,11 +39,17 @@ export default function createClient (options: ClientOptions): Client {
           // override those functions for custom behaviours.
           if (rs.error)
             rs.reject(rs.error)
-          else
-            rs.resolve({
+          else {
+            const resObj: Object = {
               body: rs.body || {},
               statusCode: rs.statusCode,
-            })
+            }
+            if (rs.headers)
+              resObj.headers = rs.headers
+            if (rs.request)
+              resObj.request = rs.request
+            rs.resolve(resObj)
+          }
         }
 
         const dispatch = compose(...options.middlewares)(resolver)

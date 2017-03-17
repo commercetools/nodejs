@@ -7,7 +7,7 @@ import type {
   MiddlewareResponse,
 } from 'types/sdk'
 
-/* global fetch */
+/* global fetch Request Headers */
 import 'isomorphic-fetch'
 import parseHeaders from './parse-headers'
 import getErrorByCode, {
@@ -23,32 +23,43 @@ export default function createHttpMiddleware (
     const body = typeof request.body === 'string'
       ? request.body
       : JSON.stringify(request.body)
-
-    fetch(
+    const requestHeader = {
+      'Content-Type': 'application/json',
+      ...request.headers,
+      ...(
+        body
+          ? { 'Content-Length': Buffer.byteLength(body).toString() }
+          : {}
+      ),
+    }
+    const requestObj: Object = new Request(
       url,
       {
         method: request.method,
-        headers: {
-          'Content-Type': 'application/json',
-          ...request.headers,
-          ...(
-            body
-              ? { 'Content-Length': Buffer.byteLength(body).toString() }
-              : {}
-          ),
-        },
+        headers: new Headers(requestHeader),
         ...(body ? { body } : {}),
       },
     )
+    fetch(requestObj)
     .then(
       (res: Response) => {
         if (res.ok) {
           res.json()
           .then((result: Object) => {
-            const parsedResponse = {
+            const parsedResponse: Object = {
               ...response,
               body: result,
               statusCode: res.status,
+            }
+            if (options.includeResponseHeaders)
+              parsedResponse.headers = parseHeaders(res.headers)
+            if (options.includeOriginalRequest) {
+              parsedResponse.request = {
+                ...requestObj,
+                headers: parseHeaders(requestObj.headers),
+              }
+              if (options.maskSensitiveHeaderData)
+                parsedResponse.request.headers.authorization = 'Bearer ********'
             }
             next(request, parsedResponse)
           })

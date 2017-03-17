@@ -25,11 +25,14 @@ export type ClientResponse = {
   body?: Object;
   error?: HttpErrorType;
   statusCode: number;
+  headers?: Object;
+  request?: Object;
 }
 
 export type SuccessResult = {
   body: Object;
   statusCode: number;
+  headers?: Object;
 }
 export type ClientResult = SuccessResult | HttpErrorType
 export type Client = {
@@ -48,6 +51,8 @@ export type MiddlewareResponse = {
   body?: Object;
   error?: HttpErrorType;
   statusCode: number;
+  headers?: Object;
+  request?: Object;
 }
 // eslint-disable-next-line max-len
 export type Dispatch = (request: MiddlewareRequest, response: MiddlewareResponse) => any;
@@ -66,6 +71,7 @@ export type AuthMiddlewareOptions = {
 }
 export type HttpMiddlewareOptions = {
   host: string;
+  includeHeaders?: boolean;
 }
 export type QueueMiddlewareOptions = {
   concurrency: number;
