@@ -29,7 +29,13 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 
 4. To run all packages tests simply do `npm test` (we use [jest](https://github.com/facebook/jest)). If you want to work on a specific package and run the tests only for that package, we recommend to use `npm run test:package`. This will prompt you to select one of the available packages. To run in _watch_ mode simply do `npm run test:package -- --watch`.
 
-5. Linting and static checks are done by `npm run lint`. We follow lint rules defined in our [eslint-config](https://github.com/commercetools/eslint-config) which is based on [Airbnb eslint config](https://www.npmjs.com/package/eslint-config-airbnb). Static checks are done using [Flow](https://flowtype.org/) and can be included / adopted incrementally. Commiting also runs a git hook to lint the changed files.
+5. Integration tests are separated out in another folder "/integration-tests". To run the integration test, you need to create a env file as specified [here](https://commercetools.github.io/nodejs/sdk/api/getCredentials.html). Then run integration test with
+  ```
+  npm run it -- --projectkey=testing-project
+  ```
+  replace "testing-project" with your project
+
+6. Linting and static checks are done by `npm run lint`. We follow lint rules defined in our [eslint-config](https://github.com/commercetools/eslint-config) which is based on [Airbnb eslint config](https://www.npmjs.com/package/eslint-config-airbnb). Static checks are done using [Flow](https://flowtype.org/) and can be included / adopted incrementally. Commiting also runs a git hook to lint the changed files.
 
 ## Upgrading dependencies
 
