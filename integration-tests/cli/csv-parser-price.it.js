@@ -15,11 +15,15 @@ import CONSTANTS from '../../packages/csv-parser-price/src/constants'
 import CsvParserPrice from '../../packages/csv-parser-price/src/main'
 import { version } from '../../packages/csv-parser-price/package.json'
 
+let projectKey
+if (process.env.CI === 'true')
+  projectKey = process.env.CT_NODE_SDK_INTEGRATION_TESTS
+else
+  projectKey = process.env.npm_config_projectkey
+
 describe('CSV and CLI Tests', () => {
-  const projectKey = 'node-sdk-integration-tests'
   const binPath = './integration-tests/node_modules/.bin/csvparserprice'
   let apiConfig
-
   beforeAll(() => getCredentials(projectKey)
     .then((credentials) => {
       apiConfig = {

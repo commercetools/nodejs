@@ -16,8 +16,13 @@ import {
 import omit from 'lodash.omit'
 import pkg from '../package.json'
 
+let projectKey
+if (process.env.CI === 'true')
+  projectKey = process.env.CT_NODE_SDK_INTEGRATION_TESTS
+else
+  projectKey = process.env.npm_config_projectkey
+
 describe('Channels', () => {
-  const projectKey = 'node-sdk-integration-tests'
   const ignoredResponseKeys = [ 'id', 'createdAt', 'lastModifiedAt' ]
   const service = createRequestBuilder().channels
   const httpMiddleware = createHttpMiddleware({
