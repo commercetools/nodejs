@@ -18,7 +18,7 @@ import pkg from '../package.json'
 
 let projectKey
 if (process.env.CI === 'true')
-  projectKey = process.env.CT_NODE_SDK_INTEGRATION_TESTS
+  projectKey = 'node-sdk-integration-tests'
 else
   projectKey = process.env.npm_config_projectkey
 
