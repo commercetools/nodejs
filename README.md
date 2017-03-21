@@ -59,11 +59,15 @@ https://commercetools.github.io/nodejs/
 [sdk-middleware-user-agent-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/sdk-middleware-user-agent
 [sdk-middleware-user-agent-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/sdk-middleware-user-agent&style=flat-square
 
+### CLI tools
+| Package | Version | Dependencies |
+|--------|-------|------------|
+| [`csv-parser-price`](/packages/csv-parser-price) | [![csv-parser-price Version][csv-parser-price-icon]][csv-parser-price-version] | [![csv-parser-price Dependencies Status][csv-parser-price-dependencies-icon]][csv-parser-price-dependencies] |
+
 ### Other
 | Package | Version | Dependencies |
 |--------|-------|------------|
 | [`api-request-builder`](/packages/api-request-builder) | [![api-request-builder Version][api-request-builder-icon]][api-request-builder-version] | [![api-request-builder Dependencies Status][api-request-builder-dependencies-icon]][api-request-builder-dependencies] |
-| [`csv-parser-price`](/packages/csv-parser-price) | [![csv-parser-price Version][csv-parser-price-icon]][csv-parser-price-version] | [![csv-parser-price Dependencies Status][csv-parser-price-dependencies-icon]][csv-parser-price-dependencies] |
 | [`sync-actions`](/packages/sync-actions) | [![sync-actions Version][sync-actions-icon]][sync-actions-version] | [![sync-actions Dependencies Status][sync-actions-dependencies-icon]][sync-actions-dependencies] |
 
 [api-request-builder-version]: https://www.npmjs.com/package/@commercetools/api-request-builder
