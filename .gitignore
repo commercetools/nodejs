@@ -2,6 +2,8 @@
 npm-debug.log
 lerna-debug.log
 
+# Env files
+*.env
 # Dependencies
 node_modules
 .npm
