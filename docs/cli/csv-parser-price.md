@@ -64,10 +64,10 @@ Errors on the level `error` come from events that are fatal and thus stop the st
 
 Sample CSV file
 ```csv
-variant-sku,value.currencyCode,value.centAmount,customType,customField.foo
-my-price,EUR,3000,custom-type,true
-my-price,EUR,4000,custom-type,false
-do-price,EUR,4000,custom-type,true
+variant-sku,value.currencyCode,value.centAmount,country,customerGroup.groupName,channel.key,validFrom,validUntil,customType,customField.foo,customField.bar,customField.current,customField.name.nl,customField.name.de,customField.status,customField.price,customField.priceset
+my-price,EUR,4200,DE,customer-group,my-channel,2016-11-01T08:01:19+0000,2016-12-01T08:03:10+0000,custom-type,12,nac,true,Selwyn,Merkel,Ready,EUR 1200,"1,2,3,5"
+my-price2,EUR,4200,DE,customer-group,my-channel,2016-11-01T08:01:19+0000,2016-12-01T08:03:10+0000,custom-type,12,nac,true,Selwyn,Merkel,Ready,EUR 1200,"1,2,3,5"
+my-price,EUR,4200,DE,customer-group,my-channel,2016-11-01T08:01:19+0000,2016-12-01T08:03:10+0000,custom-type,12,nac,true,Selwyn,Merkel,Ready,EUR 1200,"1,2,3,5"
 ```
 
 JSON object returned from the conversion of the CSV file above
@@ -75,52 +75,73 @@ JSON object returned from the conversion of the CSV file above
 {
   "prices": [
     {
-      "variant-sku": "do-price",
-      "prices": [
-        {
-          "variant-sku": "do-price",
-          "value": {
-            "centAmount": 4000
-          },
-          "custom": {
-            "type": {
-              "id": "664f5681-e0d1-442f-a241-acfb6f1d7bce"
-            },
-            "fields": {
-              "foo": true
-            }
-          }
-        }
-      ]
-    },
-    {
       "variant-sku": "my-price",
       "prices": [
         {
           "variant-sku": "my-price",
           "value": {
-            "centAmount": 3000
+            "centAmount": 4200
           },
+          "country": "DE",
+          "customerGroup": {
+            "id": "customer-group"
+          },
+          "channel": {
+            "id": "my-channel"
+          },
+          "validFrom": "2016-11-01T08:01:19+0000",
+          "validUntil": "2016-12-01T08:03:10+0000",
           "custom": {
-            "type": {
-              "id": "664f5681-e0d1-442f-a241-acfb6f1d7bce"
-            },
+            "type": {},
             "fields": {
-              "foo": true
+              "foo": 12
             }
           }
         },
         {
           "variant-sku": "my-price",
           "value": {
-            "centAmount": 4000
+            "centAmount": 4200
           },
+          "country": "DE",
+          "customerGroup": {
+            "id": "customer-group"
+          },
+          "channel": {
+            "id": "my-channel"
+          },
+          "validFrom": "2016-11-01T08:01:19+0000",
+          "validUntil": "2016-12-01T08:03:10+0000",
           "custom": {
-            "type": {
-              "id": "664f5681-e0d1-442f-a241-acfb6f1d7bce"
-            },
+            "type": {},
             "fields": {
-              "foo": false
+              "foo": 12
+            }
+          }
+        }
+      ]
+    },
+    {
+      "variant-sku": "my-price2",
+      "prices": [
+        {
+          "variant-sku": "my-price2",
+          "value": {
+            "centAmount": 4200
+          },
+          "country": "DE",
+          "customerGroup": {
+            "id": "customer-group"
+          },
+          "channel": {
+            "id": "my-channel"
+          },
+          "validFrom": "2016-11-01T08:01:19+0000",
+          "validUntil": "2016-12-01T08:03:10+0000",
+          "custom": {
+            "type": {},
+            "fields": {
+              "foo": 12
             }
           }
         }
