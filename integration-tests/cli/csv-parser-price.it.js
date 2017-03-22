@@ -193,13 +193,16 @@ describe('CSV and CLI Tests', () => {
       const csvParserPrice = new CsvParserPrice({ apiConfig })
       const inputStream = fs.createReadStream(csvFilePath)
       const outputStream = streamtest['v2'].toText((error, output) => {
-        const prices = JSON.parse(output)
-        // eslint-disable-next-line max-len
-        const expected = path.join(__dirname, 'expected-output', 'csv-parser-price.json')
+        const prices = JSON.parse(output).prices
+        const expected = path.join(
+          __dirname,
+          'expected-output',
+          'csv-parser-price.json',
+        )
         const expectedArray = JSON.parse(fs.readFileSync(expected, 'utf8'))
 
         expect(prices).toBeInstanceOf(Array)
-        expect(prices).toMatchObject(expectedArray)
+        expect(prices).toMatchObject(expectedArray.prices)
         expect(prices.length).toBe(2)
 
         // Because customTypeId is dynamic, match it against uuid regex

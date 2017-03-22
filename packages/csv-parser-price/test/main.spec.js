@@ -45,7 +45,7 @@ describe('CsvParserPrice::parse', () => {
     )
 
     const outputStream = streamtest['v2'].toText((error, result) => {
-      const prices = JSON.parse(result)
+      const prices = JSON.parse(result).prices
       expect(prices.length).toBe(2)
       expect(prices[0][CONSTANTS.header.sku]).toBeTruthy()
       done()
@@ -64,7 +64,7 @@ describe('CsvParserPrice::parse', () => {
     )
 
     const outputStream = streamtest['v2'].toText((error, result) => {
-      const prices = JSON.parse(result)
+      const prices = JSON.parse(result).prices
       expect(prices.length).toBe(2)
       expect(prices[0].prices.length).toBe(2)
       expect(prices[1].prices.length).toBe(1)

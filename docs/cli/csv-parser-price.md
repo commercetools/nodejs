@@ -72,60 +72,62 @@ do-price,EUR,4000,custom-type,true
 
 JSON object returned from the conversion of the CSV file above
 ```json
-[
-  {
-    "variant-sku": "do-price",
-    "prices": [
-      {
-        "variant-sku": "do-price",
-        "value": {
-          "centAmount": 4000
-        },
-        "custom": {
-          "type": {
-            "id": "664f5681-e0d1-442f-a241-acfb6f1d7bce"
+{
+  "prices": [
+    {
+      "variant-sku": "do-price",
+      "prices": [
+        {
+          "variant-sku": "do-price",
+          "value": {
+            "centAmount": 4000
           },
-          "fields": {
-            "foo": true
+          "custom": {
+            "type": {
+              "id": "664f5681-e0d1-442f-a241-acfb6f1d7bce"
+            },
+            "fields": {
+              "foo": true
+            }
           }
         }
-      }
-    ]
-  },
-  {
-    "variant-sku": "my-price",
-    "prices": [
-      {
-        "variant-sku": "my-price",
-        "value": {
-          "centAmount": 3000
-        },
-        "custom": {
-          "type": {
-            "id": "664f5681-e0d1-442f-a241-acfb6f1d7bce"
+      ]
+    },
+    {
+      "variant-sku": "my-price",
+      "prices": [
+        {
+          "variant-sku": "my-price",
+          "value": {
+            "centAmount": 3000
           },
-          "fields": {
-            "foo": true
+          "custom": {
+            "type": {
+              "id": "664f5681-e0d1-442f-a241-acfb6f1d7bce"
+            },
+            "fields": {
+              "foo": true
+            }
+          }
+        },
+        {
+          "variant-sku": "my-price",
+          "value": {
+            "centAmount": 4000
+          },
+          "custom": {
+            "type": {
+              "id": "664f5681-e0d1-442f-a241-acfb6f1d7bce"
+            },
+            "fields": {
+              "foo": false
+            }
           }
         }
-      },
-      {
-        "variant-sku": "my-price",
-        "value": {
-          "centAmount": 4000
-        },
-        "custom": {
-          "type": {
-            "id": "664f5681-e0d1-442f-a241-acfb6f1d7bce"
-          },
-          "fields": {
-            "foo": false
-          }
-        }
-      }
-    ]
-  }
-]
+      ]
+    }
+  ]
+}
 ```
 
 [commercetools]: https://commercetools.com/

@@ -75,7 +75,8 @@ export default class CsvParserPrice {
         rowIndex += 1
       })
       .stopOnError(error => this.logger.error(error))
-      .reduce([], this.mergeBySku)
+      .reduce({ prices: [] }, this.mergeBySku)
+      .stopOnError(error => this.logger.error(error))
       .doto((data) => {
         const numberOfPrices = Number(JSON.stringify(data.length)) + 1
         this.logger.info(`Done with conversion of ${numberOfPrices} prices`)
@@ -136,19 +137,19 @@ export default class CsvParserPrice {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  mergeBySku (prices, currentPrice) {
-    const previousPrice = prices[prices.length - 1]
+  mergeBySku (data, currentPrice) {
+    const previousPrice = data.prices[data.prices.length - 1]
     const sku = CONSTANTS.header.sku
 
     if (previousPrice && previousPrice[sku] === currentPrice[sku])
       previousPrice.prices.push(currentPrice)
     else
-      prices.push({
+      data.prices.push({
         [sku]: currentPrice[sku],
         prices: [currentPrice],
       })
 
-    return prices
+    return data
   }
 
   // eslint-disable-next-line class-methods-use-this
