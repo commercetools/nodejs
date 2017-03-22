@@ -4,11 +4,16 @@
   "version": "1.0.0",
   "dependencies": {
     "@commercetools/api-request-builder": "*",
+    "@commercetools/csv-parser-price": "*",
+    "@commercetools/get-credentials": "*",
     "@commercetools/sdk-client": "*",
     "@commercetools/sdk-middleware-auth": "*",
     "@commercetools/sdk-middleware-http": "*",
     "@commercetools/sdk-middleware-queue": "*",
     "@commercetools/sdk-middleware-user-agent": "*",
-    "lodash.omit": "4.5.0"
+    "isuuid": "^0.1.0",
+    "lodash.omit": "^4.5.0",
+    "streamtest": "^1.2.2",
+    "tmp": "^0.0.31"
   }
 }

@@ -33,6 +33,7 @@ https://commercetools.github.io/nodejs/
 | [`sdk-middleware-logger`](/packages/sdk-middleware-logger) | [![sdk-middleware-logger Version][sdk-middleware-logger-icon]][sdk-middleware-logger-version] | [![sdk-middleware-logger Dependencies Status][sdk-middleware-logger-dependencies-icon]][sdk-middleware-logger-dependencies] |
 | [`sdk-middleware-queue`](/packages/sdk-middleware-queue) | [![sdk-middleware-queue Version][sdk-middleware-queue-icon]][sdk-middleware-queue-version] | [![sdk-middleware-queue Dependencies Status][sdk-middleware-queue-dependencies-icon]][sdk-middleware-queue-dependencies] |
 | [`sdk-middleware-user-agent`](/packages/sdk-middleware-user-agent) | [![sdk-middleware-user-agent Version][sdk-middleware-user-agent-icon]][sdk-middleware-user-agent-version] | [![sdk-middleware-user-agent Dependencies Status][sdk-middleware-user-agent-dependencies-icon]][sdk-middleware-user-agent-dependencies] |
+
 [sdk-client-version]: https://www.npmjs.com/package/@commercetools/sdk-client
 [sdk-client-icon]: https://img.shields.io/npm/v/@commercetools/sdk-client.svg?style=flat-square
 [sdk-client-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/sdk-client
@@ -58,15 +59,25 @@ https://commercetools.github.io/nodejs/
 [sdk-middleware-user-agent-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/sdk-middleware-user-agent
 [sdk-middleware-user-agent-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/sdk-middleware-user-agent&style=flat-square
 
+### CLI tools
+| Package | Version | Dependencies |
+|--------|-------|------------|
+| [`csv-parser-price`](/packages/csv-parser-price) | [![csv-parser-price Version][csv-parser-price-icon]][csv-parser-price-version] | [![csv-parser-price Dependencies Status][csv-parser-price-dependencies-icon]][csv-parser-price-dependencies] |
+
 ### Other
 | Package | Version | Dependencies |
 |--------|-------|------------|
 | [`api-request-builder`](/packages/api-request-builder) | [![api-request-builder Version][api-request-builder-icon]][api-request-builder-version] | [![api-request-builder Dependencies Status][api-request-builder-dependencies-icon]][api-request-builder-dependencies] |
 | [`sync-actions`](/packages/sync-actions) | [![sync-actions Version][sync-actions-icon]][sync-actions-version] | [![sync-actions Dependencies Status][sync-actions-dependencies-icon]][sync-actions-dependencies] |
+
 [api-request-builder-version]: https://www.npmjs.com/package/@commercetools/api-request-builder
 [api-request-builder-icon]: https://img.shields.io/npm/v/@commercetools/api-request-builder.svg?style=flat-square
 [api-request-builder-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/api-request-builder
 [api-request-builder-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/api-request-builder&style=flat-square
+[csv-parser-price-version]: https://www.npmjs.com/package/@commercetools/csv-parser-price
+[csv-parser-price-icon]: https://img.shields.io/npm/v/@commercetools/csv-parser-price.svg?style=flat-square
+[csv-parser-price-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/csv-parser-price
+[csv-parser-price-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/csv-parser-price&style=flat-square
 [sync-actions-version]: https://www.npmjs.com/package/@commercetools/sync-actions
 [sync-actions-icon]: https://img.shields.io/npm/v/@commercetools/sync-actions.svg?style=flat-square
 [sync-actions-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/sync-actions

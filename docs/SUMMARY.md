@@ -21,4 +21,4 @@
       * [http-user-agent](/sdk/api/httpUserAgent.md)
       * [sync-actions](/sdk/api/syncActions.md)
 * [CLI](/cli/README.md)
-  * [Credentials](/cli/getCredentials.md)
+  * [CSV Price Parser](/cli/csv-parser-price.md)

@@ -1,0 +1,96 @@
+{
+  "id": "53 45 4c 57 59 4e 2e",
+  "key": "liqui 63 69 ty",
+  "fieldDefinitions": [
+    {
+      "name": "stringtype",
+      "type": {
+        "name": "String"
+      }
+    },
+    {
+      "name": "booleantype",
+      "type": {
+        "name": "Boolean"
+      }
+    },
+    {
+      "name": "unsupportedType",
+      "type": {
+        "name": "unsupported"
+      }
+    },
+    {
+      "name": "moneytype",
+      "type": {
+        "name": "Money"
+      }
+    },
+    {
+      "name": "numbertype",
+      "type": {
+        "name": "Number"
+      }
+    },
+    {
+      "name": "localizedstringtype",
+      "type": {
+        "name": "LocalizedString"
+      }
+    },
+    {
+      "name": "enumtype",
+      "type": {
+        "name": "Enum",
+        "values": [
+          {
+            "key": "en",
+            "label": "okay"
+          }
+        ]
+      }
+    },
+    {
+      "name": "localizedenumtype",
+      "type": {
+        "name": "LocalizedEnum",
+        "values": [
+          {
+            "key": "enwew",
+            "label": {
+              "de": "Hundefutter",
+              "en": "dog food"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "settype",
+      "type": {
+        "name": "Set",
+        "elementType": {
+          "name": "Number"
+        }
+      }
+    },
+    {
+      "name": "datetype",
+      "type": {
+        "name": "Date"
+      }
+    },
+    {
+      "name": "datetimetype",
+      "type": {
+        "name": "DateTime"
+      }
+    },
+    {
+      "name": "time",
+      "type": {
+        "name": "Time"
+      }
+    }
+  ]
+}
