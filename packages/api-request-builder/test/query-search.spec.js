@@ -30,6 +30,22 @@ describe('querySearch', () => {
     expect(service.params.search.fuzzy).toBeTruthy()
   })
 
+  it('should set the fuzzy level', () => {
+    service.fuzzyLevel(2)
+    expect(service.params.search.fuzzyLevel).toBe(2)
+  })
+
+  it('should throw if fuzzy level is missing', () => {
+    expect(() => service.fuzzyLevel()).toThrowError(
+      /Required argument for `fuzzyLevel` is missing/,
+    )
+  })
+
+  it('should set the markMatchingVariants parameter', () => {
+    service.markMatchingVariants()
+    expect(service.params.search.markMatchingVariants).toBeTruthy()
+  })
+
   it('should set the facet param', () => {
     service.facet('categories.id:"123"')
     expect(service.params.search.facet).toEqual([
