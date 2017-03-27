@@ -74,4 +74,7 @@ export function setDefaultParams () {
 
   if (this.features.indexOf(features.projection) >= 0)
     this.params.staged = true
+
+  if (this.features.indexOf(features.suggest) >= 0)
+    this.params.searchKeywords = []
 }

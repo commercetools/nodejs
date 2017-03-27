@@ -155,6 +155,16 @@ export default {
       features.projection,
     ],
   },
+  productProjectionsSuggest: {
+    type: 'product-projections-suggest',
+    endpoint: '/product-projections/suggest',
+    features: [
+      features.search,
+      features.suggest,
+      features.queryOne,
+      features.projection,
+    ],
+  },
   products: {
     type: 'products',
     endpoint: '/products',

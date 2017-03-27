@@ -16,7 +16,7 @@ export default function buildQueryString (
   if (!params)
     throw new Error('Missing options object to build query string.')
 
-  const { query, pagination, search, expand, staged } = params
+  const { query, pagination, search, expand, staged, searchKeywords } = params
   let queryString = []
 
   if (typeof staged === 'boolean')
@@ -60,6 +60,10 @@ export default function buildQueryString (
     filterByQuery.forEach(f => queryString.push(`filter.query=${f}`))
     filterByFacets.forEach(f => queryString.push(`filter.facets=${f}`))
   }
+  if (searchKeywords)
+    searchKeywords.forEach(f =>
+      queryString.push(`searchKeywords.${f.lang}=${f.value}`),
+    )
 
   return queryString.join('&')
 }
