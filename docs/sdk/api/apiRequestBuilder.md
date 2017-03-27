@@ -29,6 +29,7 @@ A _service_ is created by defining its `features`. Features give a service speci
 - `queryExpand`: allows to use reference expansion (`expand`)
 - `search`: allows to use search capabilities (`text`, `fuzzy`, `facet`, `filter`, `filterByQuery`, `filterByFacets`)
 - `projection`: allows to use projections capabilities (`staged`)
+- `suggest`: allows to use suggest capabilities (`searchKeywords`)
 
 ```js
 import {
