@@ -124,9 +124,6 @@ export type ServiceBuilderDefinition = {
 export type ApiRequestBuilder = {
   [key: string]: ServiceBuilder;
 }
-export type BuildOptions = {
-  projectKey?: string;
-}
 
 
 /* HTTP User Agent */

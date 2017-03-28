@@ -183,11 +183,9 @@ export default class CsvParserPrice {
 // Easiest way to wrap the getCustomTypeDefinition in the memoize method
 CsvParserPrice.prototype.getCustomTypeDefinition = memoize(
   function _getCustomTypeDefinition (customTypeKey) {
-    const getTypeByKeyUri = createRequestBuilder({
-      projectKey: this.apiConfig.projectKey,
-    }).types
+    const getTypeByKeyUri = createRequestBuilder().types
       .where(`key="${customTypeKey}"`)
-      .build()
+      .build({ projectKey: this.apiConfig.projectKey })
 
     return this.client.execute({
       uri: getTypeByKeyUri,

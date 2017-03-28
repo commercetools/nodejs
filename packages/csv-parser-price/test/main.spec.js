@@ -16,13 +16,10 @@ const logger = {
   info: () => {},
   verbose: () => {},
 }
-const apiConfig = {
-  projectKey: 'foo',
-}
 
 test(`CsvParserPrice
   should initialize default values`, () => {
-  const csvParserPrice = new CsvParserPrice({ apiConfig })
+  const csvParserPrice = new CsvParserPrice({ apiConfig: {} })
 
   // logger
   expect(Object.keys(csvParserPrice.logger))
@@ -38,7 +35,7 @@ test(`CsvParserPrice
 
 describe('CsvParserPrice::parse', () => {
   test('should accept a stream and output a stream', (done) => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
     const readStream = fs.createReadStream(
       path.join(__dirname, 'helpers/sample.csv'),
     )
@@ -57,7 +54,7 @@ describe('CsvParserPrice::parse', () => {
   })
 
   test('should group prices by variants sku', (done) => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
     const readStream = fs.createReadStream(
       path.join(__dirname, 'helpers/sample.csv'),
     )
@@ -78,7 +75,7 @@ describe('CsvParserPrice::parse', () => {
   })
 
   test('should exit on faulty CSV format', (done) => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
     const inputStream = fs.createReadStream(
       path.join(__dirname, 'helpers/faulty-sample.csv'),
     )
@@ -96,7 +93,7 @@ describe('CsvParserPrice::parse', () => {
   })
 
   test('should exit on CSV parsing error', (done) => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
     const inputStream = fs.createReadStream(
       path.join(__dirname, 'helpers/missing-type-sample.csv'),
     )
@@ -117,7 +114,7 @@ describe('CsvParserPrice::parse', () => {
 
 describe('CsvParserPrice::transformPriceData', () => {
   test('should transform price values to the expected type', () => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
     const result = csvParserPrice.transformPriceData(priceSample())
 
     expect(result.value.centAmount).toBe(4200)
@@ -126,7 +123,7 @@ describe('CsvParserPrice::transformPriceData', () => {
 
 describe('CsvParserPrice::transformCustomData', () => {
   test('should process object and build valid price object', (done) => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
 
     sinon.stub(csvParserPrice, 'getCustomTypeDefinition').returns(
       Promise.resolve(customTypeSample),
@@ -149,7 +146,7 @@ describe('CsvParserPrice::transformCustomData', () => {
   })
 
   test('should return input when there is no price.customType', (done) => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
 
     csvParserPrice.transformCustomData({ a: true })
       .then((result) => {
@@ -163,7 +160,7 @@ describe('CsvParserPrice::transformCustomData', () => {
 describe('CsvParserPrice::renameHeaders', () => {
   test(`should rename customerGroup.groupName to customerGroup.id
     for compatibility with product price import module`, () => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
     const modifiedPriceSample = priceSample()
     delete modifiedPriceSample.customType
     delete modifiedPriceSample.customField
@@ -177,7 +174,7 @@ describe('CsvParserPrice::renameHeaders', () => {
 
   test(`should rename channel.key to channel.id
       for compatibility with product price import module`, () => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
     const modifiedPriceSample = priceSample()
     delete modifiedPriceSample.customType
     delete modifiedPriceSample.customField
@@ -192,7 +189,7 @@ describe('CsvParserPrice::renameHeaders', () => {
   test(`should return input if no price.customerGroup
       or price.customerGroup.groupName and price.channel or
       price.channel.key`, () => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
 
     const result = csvParserPrice.renameHeaders({ foo: 'bar' })
     expect(result).toEqual({ foo: 'bar' })
@@ -201,7 +198,7 @@ describe('CsvParserPrice::renameHeaders', () => {
 
 describe('CsvParserPrice::processCustomField', () => {
   test('should build custom object', (done) => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
 
     sinon.stub(csvParserPrice, 'getCustomTypeDefinition').returns(
       Promise.resolve(customTypeSample),
@@ -229,7 +226,7 @@ describe('CsvParserPrice::processCustomField', () => {
   })
 
   test('should build report errors on data', (done) => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
     const modifiedPriceSample = priceSample()
 
     modifiedPriceSample.customField.settype = '1,\'2\',3,4'
@@ -254,7 +251,7 @@ describe('CsvParserPrice::processCustomField', () => {
 
 describe('CsvParserPrice::getCustomTypeDefinition', () => {
   test('should reject when no type with given key exists', (done) => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
 
     sinon.stub(csvParserPrice.client, 'execute').returns(
       Promise.resolve({
@@ -271,7 +268,7 @@ describe('CsvParserPrice::getCustomTypeDefinition', () => {
   })
 
   test('should resolve to type definition when given key exists', (done) => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
 
     sinon.stub(csvParserPrice.client, 'execute').returns(
       Promise.resolve({
@@ -295,7 +292,7 @@ describe('CsvParserPrice::getCustomTypeDefinition', () => {
 
 describe('CsvParserPrice::deleteMovedData', () => {
   test('should delete leftover data if present', () => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
 
     const result = csvParserPrice.deleteMovedData(priceSample())
 
@@ -304,7 +301,7 @@ describe('CsvParserPrice::deleteMovedData', () => {
   })
 
   test('should return input if leftover data absent', () => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const csvParserPrice = new CsvParserPrice({ apiConfig: {}, logger })
 
     const result = csvParserPrice.deleteMovedData({ foo: 'bar' })
     expect(result).toEqual({ foo: 'bar' })
