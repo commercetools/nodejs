@@ -35,13 +35,18 @@ const expectedServiceKeys = [
 
 
 describe('createRequestBuilder', () => {
-  it('export initialized services', () => {
-    const requestBuilder = createRequestBuilder()
+  it('should throw if not initialized with a project key', () => {
+    const errorMessage = 'No project defined. Please enter a project key'
+    expect(() => createRequestBuilder()).toThrowError(errorMessage)
+  })
+
+  it('export initialized services with projectKey as first arg', () => {
+    const requestBuilder = createRequestBuilder({ projectKey: 'foo' })
     expect(Object.keys(requestBuilder)).toEqual(expectedServiceKeys)
   })
 
   it('export initialized services with custom services', () => {
-    const requestBuilder = createRequestBuilder({
+    const requestBuilder = createRequestBuilder({ projectKey: 'foo' }, {
       foo: {
         type: 'foo',
         endpoint: '/foo',

@@ -29,17 +29,24 @@ const expectedServiceProperties = [
   'staged',
   'build',
 ]
+const project = { projectKey: 'my-project1' }
 
 
 describe('createService', () => {
-  it('should create a fully service', () => {
-    const service = createService(fakeService)
+  it('should create a full service', () => {
+    const service = createService(fakeService, project)
 
     expectedServiceProperties.forEach((key) => {
       it(`has property ${key}`, () => {
         expect(service[key]).toBeDefined()
       })
     })
+  })
+
+  it('should throw if project key is missing', () => {
+    expect(() => createService(fakeService)).toThrowError(
+     /No project defined. Please enter a project key/,
+    )
   })
 
   it('should throw if definition is missing', () => {
@@ -66,7 +73,7 @@ describe('createService', () => {
     )
   })
 
-  it('should throw if definition prop (features) is a non empty array', () => {
+  it('should throw if definition prop (features) is an empty array', () => {
     expect(
       () => createService({ type: 'foo', endpoint: '/foo', features: 'wrong' }),
     ).toThrowError(
@@ -85,30 +92,45 @@ describe('createService', () => {
       endpoint: '/foo',
       features: ['queryOne', 'queryExpand'],
     }
+
+    it('include projectkey in uri by default', () => {
+      expect(createService(options, project)
+        .build())
+        .toBe('/my-project1/foo')
+    })
+    it('exclude projectkey from uri using flag', () => {
+      const excludeProjectKey = { withProjectKey: false }
+      expect(createService(options, project)
+        .build(excludeProjectKey))
+        .toBe('/foo')
+    })
     it('only base endpoint', () => {
-      expect(createService(options).build()).toBe('/foo')
+      expect(createService(options, project)
+        .build())
+        .toBe('/my-project1/foo')
     })
     it('endpoint with id', () => {
-      expect(createService(options).byId('123').build()).toBe('/foo/123')
+      expect(createService(options, project)
+        .byId('123').build())
+        .toBe('/my-project1/foo/123')
     })
     it('endpoint with key', () => {
-      expect(createService(options).byKey('bar').build()).toBe('/foo/key=bar')
+      expect(createService(options, project)
+        .byKey('bar').build())
+        .toBe('/my-project1/foo/key=bar')
     })
     it('endpoint with query params', () => {
-      expect(createService(options).expand('channel').build())
-        .toBe('/foo?expand=channel')
-    })
-    it('endpoint with projectKey', () => {
-      expect(createService(options).build({ projectKey: 'test-123' }))
-        .toBe('/test-123/foo')
+      expect(createService(options, project)
+        .expand('channel').build())
+        .toBe('/my-project1/foo?expand=channel')
     })
     it('full endpoint', () => {
       expect(
-        createService(options)
+        createService(options, project)
         .byId('123')
         .expand('channel')
-        .build({ projectKey: 'test-123' }),
-      ).toBe('/test-123/foo/123?expand=channel')
+        .build(),
+      ).toBe('/my-project1/foo/123?expand=channel')
     })
   })
 })

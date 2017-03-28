@@ -1,7 +1,7 @@
 /* @flow */
 import type {
   ServiceBuilderDefaultParams,
-} from 'types/sdk'
+} from '../../../types/sdk'
 
 /**
  * Build the query string with the given parameters.

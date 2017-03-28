@@ -2,7 +2,8 @@
 import type {
   ServiceBuilder,
   ServiceBuilderDefinition,
-} from 'types/sdk'
+  BuildOptions,
+} from '../../../types/sdk'
 import {
   getDefaultQueryParams,
   getDefaultSearchParams,
@@ -18,8 +19,8 @@ import * as queryPage from './query-page'
 import * as queryProjection from './query-projection'
 import * as querySearch from './query-search'
 
-type BuildOptions = {
-  projectKey?: string;
+type UseKey = {
+  withProjectKey: boolean;
 }
 
 const requiredDefinitionProps = [
@@ -30,6 +31,7 @@ const requiredDefinitionProps = [
 
 export default function createService (
   definition: ServiceBuilderDefinition,
+  project: BuildOptions = {},
 ): ServiceBuilder {
   if (!definition)
     throw new Error('Cannot create a service without its definition.')
@@ -42,7 +44,12 @@ export default function createService (
   if (!Array.isArray(definition.features) || !definition.features.length)
     throw new Error('Definition requires `features` to be a non empty array.')
 
+  if (!project.projectKey)
+    throw new Error('No project defined. Please enter a project key')
+
+
   const { type, endpoint, features } = definition
+  const { projectKey } = project
 
   return classify({
     type,
@@ -90,14 +97,14 @@ export default function createService (
 
     // Call this method to get the built request URI
     // Pass some options to further configure the URI:
-    // - `projectKey`: will prefix the URI with the given projectKey
-    build (options: BuildOptions = {}): string {
-      const { projectKey } = options
+    // - `withProjectKey: false`: will omit the projectKey from the URI
+    build (options: UseKey = { withProjectKey: true }): string {
+      const { withProjectKey } = options
 
       const queryParams = buildQueryString(this.params)
 
       const uri =
-        (projectKey ? `/${projectKey}` : '') +
+        (withProjectKey ? `/${projectKey}` : '') +
         endpoint +
         getIdOrKey(this.params) +
         (queryParams ? `?${queryParams}` : '')
