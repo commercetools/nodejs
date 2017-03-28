@@ -24,7 +24,7 @@ else
 
 describe('Channels', () => {
   const ignoredResponseKeys = [ 'id', 'createdAt', 'lastModifiedAt' ]
-  const service = createRequestBuilder({ projectKey }).channels
+  const service = createRequestBuilder().channels
   const httpMiddleware = createHttpMiddleware({
     host: 'https://api.sphere.io',
   })
@@ -68,7 +68,7 @@ describe('Channels', () => {
       name: { en: key },
     }
     const createRequest = {
-      uri: service.build(),
+      uri: service.build({ projectKey }),
       method: 'POST',
       body,
       headers: {
@@ -91,7 +91,7 @@ describe('Channels', () => {
 
   it('fetch', () => {
     const fetchRequest = {
-      uri: service.where(`key = "${key}"`).build(),
+      uri: service.where(`key = "${key}"`).build({ projectKey }),
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -108,7 +108,7 @@ describe('Channels', () => {
 
   it('update', () => {
     const updateRequest = {
-      uri: service.byId(channelResponse.id).build(),
+      uri: service.byId(channelResponse.id).build({ projectKey }),
       method: 'POST',
       body: {
         version: channelResponse.version,
@@ -136,7 +136,7 @@ describe('Channels', () => {
   })
 
   it('delete', () => {
-    const uri = service.byId(channelResponse.id).build()
+    const uri = service.byId(channelResponse.id).build({ projectKey })
     const deleteRequest = {
       uri: `${uri}?version=${channelResponse.version}`,
       method: 'DELETE',
@@ -154,7 +154,7 @@ describe('Channels', () => {
 
   it('process', () => {
     const processRequest = {
-      uri: service.perPage(3).build(),
+      uri: service.perPage(3).build({ projectKey }),
       method: 'GET',
       headers: {
         Accept: 'application/json',
