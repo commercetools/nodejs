@@ -168,9 +168,7 @@ describe('CSV and CLI Tests', () => {
         // Ignore rejection, we want to create the type either way
         .catch(() => true)
         .then(() => client.execute({
-          uri: createRequestBuilder().types.build({
-            projectKey,
-          }),
+          uri: createRequestBuilder({ projectKey }).types.build(),
           body: customTypePayload,
           method: 'POST',
         }))
