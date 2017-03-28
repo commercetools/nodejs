@@ -1,0 +1,5 @@
+lineItemId,quantity,comment,shipmentState,returnDate,returnTrackingId,_returnId
+12ae,4,yeah,shipped,2016-11-01T08:01:19+0000,aefa34fe,1
+12ae,4,yeah,not-shipped,2016-11-01T08:01:19+0000,aefa34fe,1
+12ae,4,yeah,not-shipped,2016-11-01T08:01:19+0000,aefa34fe,2
+12ae,4,yeah,not-shipped,2016-11-01T08:01:19+0000,aefa34fe,2
