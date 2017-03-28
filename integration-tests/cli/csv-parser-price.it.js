@@ -59,6 +59,9 @@ describe('CSV and CLI Tests', () => {
       const csvFilePath = './packages/csv-parser-price/test/helpers/sample.csv'
       exec(`${binPath} -p ${projectKey} --inputFile ${csvFilePath}`,
         (error, stdout, stderr) => {
+          console.log(error)
+          console.log(stdout)
+          console.log(stderr)
           expect(stdout.match(/prices/)).toBeTruthy()
           expect(error && stderr).toBeFalsy()
           done()
