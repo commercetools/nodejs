@@ -1,20 +1,20 @@
 import fs from 'fs'
-import { getCredentials } from '@commercetools/get-credentials'
 import npmlog from 'npmlog'
 import PrettyError from 'pretty-error'
 import yargs from 'yargs'
 
 import CONSTANTS from './constants'
-import CsvParserPrice from './main'
+import LineItemStateCsvParser from './parsers/line-item-state'
+import AddReturnInfoCsvParser from './parsers/add-return-info'
 import { version } from '../package.json'
 
-process.title = 'csvparserprice'
+process.title = 'csvparserorder'
 
 const args = yargs
   .usage(
     `\n
 Usage: $0 [options]
-Convert commercetools price CSV data to JSON.`,
+Convert commercetools order CSV data to JSON.`,
   )
   .showHelpOnFail(false)
 
@@ -27,7 +27,14 @@ Convert commercetools price CSV data to JSON.`,
     alias: 'v',
     type: 'boolean',
   })
-  .version('version', 'Show version number.', () => version)
+  .version('version', 'Show version number.', version)
+
+  .option('type', {
+    alias: 't',
+    choices: ['lineitemstate', 'returninfo'],
+    describe: 'Predefined type of csv.',
+    demand: true,
+  })
 
   .option('inputFile', {
     alias: 'i',
@@ -53,16 +60,6 @@ Convert commercetools price CSV data to JSON.`,
     return process.stdout
   })
 
-  .option('apiUrl', {
-    default: CONSTANTS.host.api,
-    describe: 'The host URL of the HTTP API service.',
-  })
-
-  .option('authUrl', {
-    default: CONSTANTS.host.auth,
-    describe: 'The host URL of the OAuth API service.',
-  })
-
   .option('batchSize', {
     alias: 'b',
     default: CONSTANTS.standardOption.batchSize,
@@ -75,18 +72,15 @@ Convert commercetools price CSV data to JSON.`,
     describe: 'Used CSV delimiter.',
   })
 
-  .option('projectKey', {
-    alias: 'p',
-    describe: 'API project key.',
-    demand: true,
+  .option('strictMode', {
+    alias: 's',
+    default: CONSTANTS.standardOption.strictMode,
+    describe: 'Parse CSV strictly.',
   })
 
   .option('logLevel', {
-    default: 'info',
+    alias: 'l',
     describe: 'Logging level: error, warn, info or verbose.',
-  })
-  .coerce('logLevel', (arg) => {
-    npmlog.level = arg
   })
   .argv
 
@@ -108,26 +102,34 @@ const errorHandler = (errors) => {
   process.exit(1)
 }
 
-getCredentials(args.projectKey)
-  .then(credentials =>
-    new CsvParserPrice({
-      apiConfig: {
-        host: args.authUrl,
-        apiUrl: args.apiUrl,
-        projectKey: args.projectKey,
-        credentials,
-      },
-      logger: {
-        error: errorHandler,
-        warn: npmlog.warn.bind(this, ''),
-        info: npmlog.info.bind(this, ''),
-        verbose: npmlog.verbose.bind(this, ''),
-      },
-      csvConfig: {
-        delimiter: args.delimiter,
-        batchSize: args.batchSize,
-      },
-    }),
-  )
-  .then(csvParserPrice => csvParserPrice.parse(args.inputFile, args.outputFile))
+const getModuleConfig = () => {
+  // do not print info messages when exporting data to stdout
+  if (args.outputFile._type === 'tty' && !args.logLevel)
+    npmlog.level = 'error'
+  else
+    // else use required logLevel or the default one
+    npmlog.level = args.logLevel || CONSTANTS.standardOption.defaultLogLevel
+
+  return {
+    logger: {
+      error: errorHandler,
+      warn: npmlog.warn.bind(this, ''),
+      info: npmlog.info.bind(this, ''),
+      verbose: npmlog.verbose.bind(this, ''),
+    },
+    csvConfig: {
+      delimiter: args.delimiter,
+      batchSize: args.batchSize,
+      strictMode: args.strictMode,
+    },
+  }
+}
+
+const methodMapping = {
+  lineitemstate: config => new LineItemStateCsvParser(config),
+  returninfo: config => new AddReturnInfoCsvParser(config),
+}
+
+methodMapping[args.type](getModuleConfig())
+  .parse(args.inputFile, args.outputFile)
   .catch(errorHandler)
