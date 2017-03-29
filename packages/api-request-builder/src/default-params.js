@@ -1,7 +1,7 @@
 /* @flow */
 import type {
   ServiceBuilderDefaultParams,
-} from '../../../types/sdk'
+} from 'types/sdk'
 import * as features from './features'
 
 /**

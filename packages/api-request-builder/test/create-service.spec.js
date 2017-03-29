@@ -73,12 +73,14 @@ describe('createService', () => {
     )
   })
 
-  it('should throw if definition prop (features) is an empty array', () => {
+  it('should throw if definition prop (features) is not an array', () => {
     expect(
       () => createService({ type: 'foo', endpoint: '/foo', features: 'wrong' }),
     ).toThrowError(
      /Definition requires `features` to be a non empty array/,
     )
+  })
+  it('should throw if definition prop (features) is an empty array', () => {
     expect(
       () => createService({ type: 'foo', endpoint: '/foo', features: [] }),
     ).toThrowError(

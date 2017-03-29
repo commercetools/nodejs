@@ -2,8 +2,8 @@
 import type {
   ServiceBuilder,
   ServiceBuilderDefinition,
-  BuildOptions,
-} from '../../../types/sdk'
+  ApiRequestBuilderServiceOptions,
+} from 'types/sdk'
 import {
   getDefaultQueryParams,
   getDefaultSearchParams,
@@ -31,7 +31,7 @@ const requiredDefinitionProps = [
 
 export default function createService (
   definition: ServiceBuilderDefinition,
-  project: BuildOptions = {},
+  options: ApiRequestBuilderServiceOptions = {},
 ): ServiceBuilder {
   if (!definition)
     throw new Error('Cannot create a service without its definition.')
@@ -44,12 +44,12 @@ export default function createService (
   if (!Array.isArray(definition.features) || !definition.features.length)
     throw new Error('Definition requires `features` to be a non empty array.')
 
-  if (!project.projectKey)
+  if (!options.projectKey)
     throw new Error('No project defined. Please enter a project key')
 
 
   const { type, endpoint, features } = definition
-  const { projectKey } = project
+  const { projectKey } = options
 
   return classify({
     type,
@@ -98,8 +98,8 @@ export default function createService (
     // Call this method to get the built request URI
     // Pass some options to further configure the URI:
     // - `withProjectKey: false`: will omit the projectKey from the URI
-    build (options: UseKey = { withProjectKey: true }): string {
-      const { withProjectKey } = options
+    build (uriOptions: UseKey = { withProjectKey: true }): string {
+      const { withProjectKey } = uriOptions
 
       const queryParams = buildQueryString(this.params)
 

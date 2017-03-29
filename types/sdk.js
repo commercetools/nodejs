@@ -124,7 +124,7 @@ export type ServiceBuilderDefinition = {
 export type ApiRequestBuilder = {
   [key: string]: ServiceBuilder;
 }
-export type BuildOptions = {
+export type ApiRequestBuilderServiceOptions = {
   projectKey?: string;
 }
 
