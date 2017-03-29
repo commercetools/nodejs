@@ -63,6 +63,7 @@ https://commercetools.github.io/nodejs/
 | Package | Version | Dependencies |
 |--------|-------|------------|
 | [`csv-parser-price`](/packages/csv-parser-price) | [![csv-parser-price Version][csv-parser-price-icon]][csv-parser-price-version] | [![csv-parser-price Dependencies Status][csv-parser-price-dependencies-icon]][csv-parser-price-dependencies] |
+| [`csv-parser-order`](/packages/csv-parser-order) | [![csv-parser-order Version][csv-parser-order-icon]][csv-parser-order-version] | [![csv-parser-order Dependencies Status][csv-parser-order-dependencies-icon]][csv-parser-order-dependencies] |
 
 ### Other
 | Package | Version | Dependencies |
@@ -78,6 +79,10 @@ https://commercetools.github.io/nodejs/
 [csv-parser-price-icon]: https://img.shields.io/npm/v/@commercetools/csv-parser-price.svg?style=flat-square
 [csv-parser-price-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/csv-parser-price
 [csv-parser-price-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/csv-parser-price&style=flat-square
+[csv-parser-order-version]: https://www.npmjs.com/package/@commercetools/csv-parser-order
+[csv-parser-order-icon]: https://img.shields.io/npm/v/@commercetools/csv-parser-order.svg?style=flat-square
+[csv-parser-order-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/csv-parser-order
+[csv-parser-order-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/csv-parser-order&style=flat-square
 [sync-actions-version]: https://www.npmjs.com/package/@commercetools/sync-actions
 [sync-actions-icon]: https://img.shields.io/npm/v/@commercetools/sync-actions.svg?style=flat-square
 [sync-actions-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/sync-actions
