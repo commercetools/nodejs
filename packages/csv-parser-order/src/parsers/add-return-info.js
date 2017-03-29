@@ -13,6 +13,7 @@ export default class AddReturnInfoParser extends AbstractParser {
     return new Promise((resolve, reject) => {
       const stream = this._streamInput(input)
         .reduce([], AddReturnInfoParser._reduceOrders)
+        .stopOnError(reject)
         .pipe(JSONStream.stringify(false))
         .pipe(output)
 

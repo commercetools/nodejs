@@ -40,7 +40,8 @@
     "lodash.find": "^4.6.0",
     "npmlog": "^4.0.2",
     "pretty-error": "^2.0.3",
-    "yargs": "^7.0.2"
+    "yargs": "^7.0.2",
+    "streamtest": "^1.2.2"
   },
   "devDependencies": {
     "sinon": "^1.17.6",

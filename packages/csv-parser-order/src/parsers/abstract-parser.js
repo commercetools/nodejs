@@ -8,21 +8,21 @@ import CONSTANTS from '../constants'
 
 /* eslint class-methods-use-this:["error", {"exceptMethods":["_processData"]}]*/
 export default class AbstractParser {
-  constructor ({ logger, csvConfig = {} }, moduleName) {
+  constructor (conf = {}, moduleName) {
     this.moduleName = moduleName
 
-    this.csvConfig = defaults(csvConfig, {
+    this.csvConfig = defaults(conf.csvConfig || {}, {
       batchSize: CONSTANTS.standardOption.batchSize,
       delimiter: CONSTANTS.standardOption.delimiter,
       strictMode: CONSTANTS.standardOption.strictMode,
     })
 
-    this.logger = logger || {
+    this.logger = defaults(conf.logger || {}, {
       error: npmlog.error.bind(this, ''),
       warn: npmlog.warn.bind(this, ''),
       info: npmlog.info.bind(this, ''),
       verbose: npmlog.verbose.bind(this, ''),
-    }
+    })
   }
 
   _streamInput (input) {
@@ -34,13 +34,16 @@ export default class AbstractParser {
         strict: this.csvConfig.strictMode,
       }))
       .batch(this.csvConfig.batchSize)
-      .stopOnError(error => this.logger.error(error))
       .doto((data) => {
         this.logger.verbose(`Parsed row-${rowIndex}: ${JSON.stringify(data)}`)
         rowIndex += 1
       })
       .flatMap(highland)
       .flatMap(data => highland(this._processData(data)))
+      .errors((err, push) => {
+        this.logger.error(err)
+        push(err)
+      })
       .doto(data => this.logger.verbose(
         `Converted row-${rowIndex}: ${JSON.stringify(data)}`))
   }

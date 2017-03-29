@@ -11,6 +11,7 @@ export default class LineItemStateParser extends AbstractParser {
     this.logger.info('Starting LineItemState CSV conversion')
     return new Promise((resolve, reject) => {
       const stream = this._streamInput(input)
+        .stopOnError(reject)
         .pipe(JSONStream.stringify())
         .pipe(output)
 
