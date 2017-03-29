@@ -18,8 +18,17 @@ Convert commercetools price CSV data to JSON.
 Options:
   --help, -h        Show help text.                                    [boolean]
   --version, -v     Show version number.                               [boolean]
+  --inputFile, -i   Path to input CSV file.                   [default: "stdin"]
+  --outputFile, -o  Path to output JSON file.                [default: "stdout"]
+  --apiUrl          The host URL of the HTTP API service.
+                                              [default: "https://api.sphere.io"]
+  --authUrl         The host URL of the OAuth API service.
+                                             [default: "https://auth.sphere.io"]
+  --batchSize, -b   Number of CSV rows to handle simultaneously.  [default: 100]
+  --delimiter, -d   Used CSV delimiter.                           [default: ","]
+  --projectKey, -p  API project key.                                  [required]
+  --logLevel        Logging level: error, warn, info or verbose.
                                                                [default: "info"]
-                  REGENERATE THIS
 ```
 
 ### JS
