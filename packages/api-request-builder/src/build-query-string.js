@@ -47,13 +47,18 @@ export default function buildQueryString (
 
   if (search) {
     const {
-      text, fuzzy, facet, filter, filterByQuery, filterByFacets,
+      text, fuzzy, fuzzyLevel, markMatchingVariants, facet,
+      filter, filterByQuery, filterByFacets,
     } = search
 
     if (text)
       queryString.push(`text.${text.lang}=${text.value}`)
     if (fuzzy)
       queryString.push('fuzzy=true')
+    if (fuzzyLevel)
+      queryString.push(`fuzzyLevel=${fuzzyLevel}`)
+    if (markMatchingVariants)
+      queryString.push('markMatchingVariants=true')
 
     facet.forEach(f => queryString.push(`facet=${f}`))
     filter.forEach(f => queryString.push(`filter=${f}`))
