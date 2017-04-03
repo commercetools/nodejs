@@ -70,7 +70,7 @@ import { createClient } from '@commercetools/sdk-client'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 
-const requestBuilder = createRequestBuilder()
+const requestBuilder = createRequestBuilder({ projectKey: 'foo' })
 const productProjectionsService = requestBuilder.productProjections
 const productsService = requestBuilder.products
 
@@ -82,7 +82,7 @@ const client = createClient({
 const uri = productProjectionsService
   .where('masterData(published = "false")')
   .where('masterData(hasStagedChanges = "true")')
-  .build({ projectKey: 'foo' })
+  .build()
 
 const request = {
   uri,
@@ -100,7 +100,7 @@ client.process(
     return Promise.all(
       results.map(product =>
         client.execute({
-          uri: productsService.byId(product.id).build({ projectKey: 'foo' }),
+          uri: productsService.byId(product.id).build(),
           method: 'POST',
           body: JSON.stringify({
             version: product.version,
