@@ -22,6 +22,7 @@ export function getDefaultQueryParams (): ServiceBuilderDefaultParams {
       operator: 'and',
       where: [],
     },
+    searchKeywords: [],
   }
 }
 
@@ -33,6 +34,7 @@ export function getDefaultQueryParams (): ServiceBuilderDefaultParams {
 export function getDefaultSearchParams (): ServiceBuilderDefaultParams {
   return {
     expand: [],
+    searchKeywords: [],
     staged: true,
     pagination: {
       page: null,
