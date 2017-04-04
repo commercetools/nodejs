@@ -35,19 +35,22 @@ const expectedServiceKeys = [
 
 
 describe('createRequestBuilder', () => {
-  it('export initialized services with projectKey as first arg', () => {
+  it('export initialized services when passed only projectKey', () => {
     const requestBuilder = createRequestBuilder({ projectKey: 'foo' })
     expect(Object.keys(requestBuilder)).toEqual(expectedServiceKeys)
   })
 
   it('export initialized services with custom services', () => {
-    const requestBuilder = createRequestBuilder({ projectKey: 'foo' }, {
-      foo: {
-        type: 'foo',
-        endpoint: '/foo',
-        features: [
-          features.query,
-        ],
+    const requestBuilder = createRequestBuilder({
+      projectKey: 'foo',
+      customServices: {
+        foo: {
+          type: 'foo',
+          endpoint: '/foo',
+          features: [
+            features.query,
+          ],
+        },
       },
     })
     expect(Object.keys(requestBuilder)).toEqual(

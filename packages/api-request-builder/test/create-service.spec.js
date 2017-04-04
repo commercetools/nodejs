@@ -29,12 +29,12 @@ const expectedServiceProperties = [
   'staged',
   'build',
 ]
-const project = { projectKey: 'my-project1' }
+const projectKey = 'my-project1'
 
 
 describe('createService', () => {
   it('should create a full service', () => {
-    const service = createService(fakeService, project)
+    const service = createService(fakeService, projectKey)
 
     expectedServiceProperties.forEach((key) => {
       it(`has property ${key}`, () => {
@@ -96,39 +96,39 @@ describe('createService', () => {
     }
 
     it('include projectkey in uri by default', () => {
-      expect(createService(options, project)
+      expect(createService(options, projectKey)
         .build())
         .toBe('/my-project1/foo')
     })
     it('exclude projectkey from uri using flag', () => {
       const excludeProjectKey = { withProjectKey: false }
-      expect(createService(options, project)
+      expect(createService(options, projectKey)
         .build(excludeProjectKey))
         .toBe('/foo')
     })
     it('only base endpoint', () => {
-      expect(createService(options, project)
+      expect(createService(options, projectKey)
         .build())
         .toBe('/my-project1/foo')
     })
     it('endpoint with id', () => {
-      expect(createService(options, project)
+      expect(createService(options, projectKey)
         .byId('123').build())
         .toBe('/my-project1/foo/123')
     })
     it('endpoint with key', () => {
-      expect(createService(options, project)
+      expect(createService(options, projectKey)
         .byKey('bar').build())
         .toBe('/my-project1/foo/key=bar')
     })
     it('endpoint with query params', () => {
-      expect(createService(options, project)
+      expect(createService(options, projectKey)
         .expand('channel').build())
         .toBe('/my-project1/foo?expand=channel')
     })
     it('full endpoint', () => {
       expect(
-        createService(options, project)
+        createService(options, projectKey)
         .byId('123')
         .expand('channel')
         .build(),
