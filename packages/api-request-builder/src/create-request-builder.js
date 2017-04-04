@@ -5,13 +5,30 @@ import type {
 import services from './default-services'
 import createService from './create-service'
 
+// pass an options argument of type object containing
+// the `projectkey` (string) and `customServices` (object)
+// The projectKey property is required
+// A sample options object would be:
+//
+//     options: {
+//       projectKey: 'myProject',
+//       customServices: {
+//         foo: {
+//           type: 'foo',
+//           endpoint: '/foo',
+//           features: [
+//             features.query,
+//           ],
+//         }
+//       }
+//     }
 export default function createRequestBuilder (
-  customServices: Object = {},
+  options: Object = {},
 ): ApiRequestBuilder {
-  const allServices = { ...services, ...customServices }
+  const allServices = { ...services, ...options.customServices }
 
   return Object.keys(allServices).reduce((acc, key) => ({
     ...acc,
-    [key]: createService(allServices[key]),
+    [key]: createService(allServices[key], options.projectKey),
   }), {})
 }

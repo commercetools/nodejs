@@ -44,11 +44,11 @@ import omit from 'lodash.omit'
 
 const ignoredResponseKeys = [ 'id', 'createdAt', 'lastModifiedAt' ]
 
-const service = createRequestBuilder().channels
+const service = createRequestBuilder({ projectKey }).channels
 
 const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
   host: 'https://auth.commercetools.com',
-  projectKey 'test',
+  projectKey: 'test',
   credentials: {
     clientId: '123',
     clientSecret: 'secret',
@@ -78,7 +78,7 @@ describe('Channels', () => {
       name: { en: key },
     }
     const createRequest = {
-      uri: service.build({ projectKey }),
+      uri: service.build(),
       method: 'POST',
       body,
       headers: {
@@ -101,7 +101,7 @@ describe('Channels', () => {
 
   it('fetch', () => {
     const fetchRequest = {
-      uri: service.where(`key = "${key}"`).build({ projectKey }),
+      uri: service.where(`key = "${key}"`).build(),
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -118,7 +118,7 @@ describe('Channels', () => {
 
   it('update', () => {
     const updateRequest = {
-      uri: service.byId(channelResponse.id).build({ projectKey }),
+      uri: service.byId(channelResponse.id).build(),
       method: 'POST',
       body: {
         version: channelResponse.version,
@@ -146,7 +146,7 @@ describe('Channels', () => {
   })
 
   it('delete', () => {
-    const uri = service.byId(channelResponse.id).build({ projectKey })
+    const uri = service.byId(channelResponse.id).build()
     const deleteRequest = {
       uri: `${uri}?version=${channelResponse.version}`,
       method: 'DELETE',
