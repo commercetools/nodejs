@@ -34,7 +34,10 @@ export function buildRequestForClientCredentialsFlow (
   const scope = (options.scopes || [defaultScope]).join(' ')
 
   const basicAuth = new Buffer(`${clientId}:${clientSecret}`).toString('base64')
-  const url = `${options.host.replace(/\/$/, '')}/oauth/token`
+  // This is mostly useful for internal testing purposes to be able to check
+  // other oauth endpoints.
+  const oauthUri = options.oauthUri || '/oauth/token'
+  const url = options.host.replace(/\/$/, '') + oauthUri
   const body = `grant_type=client_credentials&scope=${scope}`
 
   return { basicAuth, url, body }

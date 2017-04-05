@@ -68,6 +68,8 @@ export type AuthMiddlewareOptions = {
     clientSecret: string;
   };
   scopes: Array<string>;
+  // For internal usage only
+  oauthUri: string;
 }
 export type HttpMiddlewareOptions = {
   host: string;
