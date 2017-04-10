@@ -31,6 +31,15 @@ describe('buildRequestForClientCredentialsFlow', () => {
     })
   })
 
+  it('uses custom oauth uri, if given', () => {
+    const options = createTestOptions({ oauthUri: '/foo/bar' })
+    expect(buildRequestForClientCredentialsFlow(options)).toEqual({
+      basicAuth: 'MTIzOnNlY3JldA==',
+      url: 'http://localhost:8080/foo/bar',
+      body: `grant_type=client_credentials&scope=${allScopes.join(' ')}`,
+    })
+  })
+
   it('parses a host that ends with slash', () => {
     const options = createTestOptions({
       host: 'http://localhost:8080/',

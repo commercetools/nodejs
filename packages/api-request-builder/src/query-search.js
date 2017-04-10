@@ -28,6 +28,30 @@ export function fuzzy (): Object {
 }
 
 /**
+ * Define the level of the fuzzy search
+ *
+ * @param  {number} value - An integer representing the fuzzy level
+ * @throws If `value` is missing.
+ * @return {Object} The instance of the service, can be chained.
+ */
+export function fuzzyLevel (value: number): Object {
+  if (!value)
+    throw new Error('Required argument for `fuzzyLevel` is missing')
+  this.params.search.fuzzyLevel = value
+  return this
+}
+
+/**
+ * Define whether to enable markMatchingVariants
+ *
+ * @return {Object} The instance of the service, can be chained.
+ */
+export function markMatchingVariants (): Object {
+  this.params.search.markMatchingVariants = true
+  return this
+}
+
+/**
  * Set the given `facet` filter used for calculating statistical counts.
  *
  * @param  {string} value - A non-URI encoded string representing a

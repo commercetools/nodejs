@@ -47,6 +47,8 @@ describe('buildQueryString', () => {
           encodeURIComponent('categories.id:"123"'),
         ],
         fuzzy: true,
+        fuzzyLevel: 2,
+        markMatchingVariants: true,
         text: { lang: 'en', value: 'Foo' },
       },
     }
@@ -61,6 +63,8 @@ describe('buildQueryString', () => {
     `sort=${encodeURIComponent('createdAt asc')}&` +
     `text.en=${encodeURIComponent('Foo')}&` +
     'fuzzy=true&' +
+    'fuzzyLevel=2&' +
+    'markMatchingVariants=true&' +
     `facet=${encodeURIComponent('variants.attributes.foo:"bar")')}&` +
     `facet=${encodeURIComponent('variants.sku:"foo123"')}&` +
     `filter=${encodeURIComponent('variants.attributes.color.key:"red")')}&` +

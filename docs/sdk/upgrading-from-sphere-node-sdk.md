@@ -93,11 +93,11 @@ const client = createClient({
     }),
   ],
 })
-const service = createRequestBuilder().products
+const service = createRequestBuilder({ projectKey: 'my-project' }).products
 const uri = service
   .byId('1')
   .expand('productType')
-  .build({ projectKey: 'my-project' })
+  .build()
 const sync = createSyncProducts()
 const updateActions = sync.buildActions(/* newProduct, existingProduct */)
 const updateRequest = {
@@ -150,10 +150,10 @@ client.execute({
   method: 'GET',
 })
 
-const channels = createRequestBuilder().channels
+const channels = createRequestBuilder({ projectKey: 'my-project' }).channels
 client.execute({
   // define the request URI using the request builder
-  uri: channels.perPage(10).build({ projectKey: 'my-project' }),
+  uri: channels.perPage(10).build(),
   method: 'GET',
 })
 ```
@@ -176,7 +176,7 @@ const customServices = {
     ],
   },
 }
-const requestBuilder = createRequestBuilder(customServices)
+const requestBuilder = createRequestBuilder({ projectKey: 'my-project' }, customServices)
 requestBuilder.users.byId('1').build()
 ```
 

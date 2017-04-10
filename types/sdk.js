@@ -68,6 +68,8 @@ export type AuthMiddlewareOptions = {
     clientSecret: string;
   };
   scopes: Array<string>;
+  // For internal usage only
+  oauthUri: string;
 }
 export type HttpMiddlewareOptions = {
   host: string;
@@ -104,6 +106,8 @@ export type ServiceBuilderDefaultParams = {
     filterByQuery: Array<string>;
     filterByFacets: Array<string>;
     fuzzy: boolean;
+    fuzzyLevel: number;
+    markMatchingVariants: boolean;
     text: ?{
       lang: string;
       value: string;
