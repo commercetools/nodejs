@@ -146,9 +146,13 @@ describe('Channels', () => {
   })
 
   it('delete', () => {
-    const uri = service.byId(channelResponse.id).build()
+    const uri = service
+      .byId(channelResponse.id)
+      .toDelete(channelResponse.version)
+      .build()
+
     const deleteRequest = {
-      uri: `${uri}?version=${channelResponse.version}`,
+      uri,
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
