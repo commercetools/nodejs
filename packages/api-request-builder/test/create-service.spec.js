@@ -9,6 +9,7 @@ const fakeService = {
     'queryExpand',
     'search',
     'projection',
+    'suggest',
   ],
 }
 
@@ -27,6 +28,7 @@ const expectedServiceProperties = [
   'filterByQuery',
   'filterByFacets',
   'staged',
+  'searchKeywords',
   'build',
 ]
 const projectKey = 'my-project1'
@@ -35,11 +37,8 @@ const projectKey = 'my-project1'
 describe('createService', () => {
   it('should create a full service', () => {
     const service = createService(fakeService, projectKey)
-
     expectedServiceProperties.forEach((key) => {
-      it(`has property ${key}`, () => {
-        expect(service[key]).toBeDefined()
-      })
+      expect(service[key]).toBeDefined()
     })
   })
 

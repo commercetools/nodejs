@@ -89,6 +89,7 @@ export type UserAgentMiddlewareOptions = {
 /* API Request Builder */
 export type ServiceBuilderDefaultParams = {
   expand: Array<string>;
+  searchKeywords: Array<{lang: string; value: string;}>;
   pagination: {
     page: ?number;
     perPage: ?number;
