@@ -47,6 +47,8 @@ export function getDefaultSearchParams (): ServiceBuilderDefaultParams {
       filterByQuery: [],
       filterByFacets: [],
       fuzzy: false,
+      fuzzyLevel: 0,
+      markMatchingVariants: false,
       text: null,
     },
   }
