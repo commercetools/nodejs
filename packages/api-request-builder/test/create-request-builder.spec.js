@@ -27,6 +27,7 @@ const expectedServiceKeys = [
   'productTypes',
   'reviews',
   'shippingMethods',
+  'shoppingLists',
   'states',
   'subscriptions',
   'taxCategories',
