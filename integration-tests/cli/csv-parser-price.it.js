@@ -55,8 +55,7 @@ describe('CSV and CLI Tests', () => {
       })
     })
 
-    // FIXME: fails with `ERR! No type with key \'custom-type\' found`
-    test.skip('should take input from file', (done) => {
+    test('should take input from file', (done) => {
       const csvFilePath = './packages/csv-parser-price/test/helpers/sample.csv'
       exec(`${binPath} -p ${projectKey} --inputFile ${csvFilePath}`,
         (error, stdout, stderr) => {
