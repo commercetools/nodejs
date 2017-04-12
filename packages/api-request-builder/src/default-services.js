@@ -201,6 +201,15 @@ export default {
       features.queryExpand,
     ],
   },
+  shoppingLists: {
+    type: 'shopping-lists',
+    endpoint: '/shopping-lists',
+    features: [
+      features.query,
+      features.queryOne,
+      features.queryExpand,
+    ],
+  },
   states: {
     type: 'states',
     endpoint: '/states',
