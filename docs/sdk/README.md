@@ -148,7 +148,7 @@ describe('Channels', () => {
   it('delete', () => {
     const uri = service
       .byId(channelResponse.id)
-      .toDelete(channelResponse.version)
+      .withVersion(channelResponse.version)
       .build()
 
     const deleteRequest = {
