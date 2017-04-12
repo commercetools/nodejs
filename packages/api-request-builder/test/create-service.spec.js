@@ -128,7 +128,7 @@ describe('createService', () => {
     })
     it('include version in uri', () => {
       expect(createService(options, projectKey)
-        .toDelete(2).build())
+        .withVersion(2).build())
         .toBe('/my-project1/foo?version=2')
     })
     it('full endpoint', () => {
