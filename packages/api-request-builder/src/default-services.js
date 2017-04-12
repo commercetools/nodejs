@@ -155,6 +155,16 @@ export default {
       features.projection,
     ],
   },
+  productProjectionsSuggest: {
+    type: 'product-projections-suggest',
+    endpoint: '/product-projections/suggest',
+    features: [
+      features.search,
+      features.suggest,
+      features.queryOne,
+      features.projection,
+    ],
+  },
   products: {
     type: 'products',
     endpoint: '/products',
@@ -185,6 +195,15 @@ export default {
   shippingMethods: {
     type: 'shipping-methods',
     endpoint: '/shipping-methods',
+    features: [
+      features.query,
+      features.queryOne,
+      features.queryExpand,
+    ],
+  },
+  shoppingLists: {
+    type: 'shopping-lists',
+    endpoint: '/shopping-lists',
     features: [
       features.query,
       features.queryOne,

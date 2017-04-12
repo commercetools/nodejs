@@ -15,6 +15,7 @@ describe('exports', () => {
       'queryExpand',
       'search',
       'projection',
+      'suggest',
     ])
   })
 })

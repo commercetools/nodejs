@@ -17,6 +17,7 @@ import * as queryId from './query-id'
 import * as queryExpand from './query-expand'
 import * as queryPage from './query-page'
 import * as queryProjection from './query-projection'
+import * as querySuggest from './query-suggest'
 import * as querySearch from './query-search'
 
 type UseKey = {
@@ -83,6 +84,14 @@ export default function createService (
             ...querySearch,
             ...queryPage,
             params: getDefaultSearchParams(),
+          }
+
+        if (feature === defaultFeatures.suggest)
+          return {
+            ...acc,
+            ...querySearch,
+            ...queryPage,
+            ...querySuggest,
           }
 
         if (feature === defaultFeatures.projection)
