@@ -10,6 +10,7 @@ import {
 } from './default-params'
 import classify from './classify'
 import buildQueryString from './build-query-string'
+import withVersion from './version'
 import * as defaultFeatures from './features'
 import * as query from './query'
 import * as queryId from './query-id'
@@ -54,6 +55,7 @@ export default function createService (
     type,
     features,
     params: getDefaultQueryParams(),
+    withVersion,
 
     ...(
       features.reduce((acc, feature) => {
@@ -109,12 +111,14 @@ export default function createService (
       const { withProjectKey } = uriOptions
 
       const queryParams = buildQueryString(this.params)
+      const version = this.params.version
 
       const uri =
         (withProjectKey ? `/${options}` : '') +
         endpoint +
         getIdOrKey(this.params) +
-        (queryParams ? `?${queryParams}` : '')
+        (queryParams ? `?${queryParams}` : '') +
+        (version ? `?version=${version}` : '')
 
       setDefaultParams.call(this)
       return uri

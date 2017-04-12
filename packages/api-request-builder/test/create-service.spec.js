@@ -125,6 +125,11 @@ describe('createService', () => {
         .expand('channel').build())
         .toBe('/my-project1/foo?expand=channel')
     })
+    it('include version in uri', () => {
+      expect(createService(options, projectKey)
+        .withVersion(2).build())
+        .toBe('/my-project1/foo?version=2')
+    })
     it('full endpoint', () => {
       expect(
         createService(options, projectKey)
