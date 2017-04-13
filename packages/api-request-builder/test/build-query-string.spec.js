@@ -51,6 +51,7 @@ describe('buildQueryString', () => {
         markMatchingVariants: true,
         text: { lang: 'en', value: 'Foo' },
       },
+      searchKeywords: [{ lang: 'en', value: 'Foo' }],
     }
     /* eslint-disable max-len*/
     const expectedQueryString =
@@ -72,7 +73,8 @@ describe('buildQueryString', () => {
     `filter.query=${encodeURIComponent('variants.attributes.color.key:"red")')}&` +
     `filter.query=${encodeURIComponent('categories.id:"123"')}&` +
     `filter.facets=${encodeURIComponent('variants.attributes.color.key:"red")')}&` +
-    `filter.facets=${encodeURIComponent('categories.id:"123"')}`
+    `filter.facets=${encodeURIComponent('categories.id:"123"')}&` +
+    `searchKeywords.en=${encodeURIComponent('Foo')}`
     /* eslint-enable max-len*/
 
     expect(buildQueryString(params)).toEqual(expectedQueryString)

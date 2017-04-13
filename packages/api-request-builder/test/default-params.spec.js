@@ -43,6 +43,29 @@ describe('defaultParams', () => {
     })
   })
 
+  it('should set default params for product-projections-suggest', () => {
+    const serviceFeatures = [
+      features.query, features.queryOne, features.projection, features.suggest,
+    ]
+    const params = {}
+    setDefaultParams.call({ features: serviceFeatures, params })
+    expect(params).toEqual({
+      id: null,
+      expand: [],
+      staged: true,
+      pagination: {
+        page: null,
+        perPage: null,
+        sort: [],
+      },
+      query: {
+        operator: 'and',
+        where: [],
+      },
+      searchKeywords: [],
+    })
+  })
+
   it('should set default params for product-projections-search', () => {
     const serviceFeatures = [ features.search, features.projection ]
     const params = {}

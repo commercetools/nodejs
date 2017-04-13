@@ -35,6 +35,7 @@ A _service_ is created by defining its `features`. Features give a service speci
 - `queryExpand`: allows to use reference expansion (`expand`)
 - `search`: allows to use search capabilities (`text`, `fuzzy`, `fuzzyLevel`, `facet`, `markMatchingVariants`, `filter`, `filterByQuery`, `filterByFacets`)
 - `projection`: allows to use projections capabilities (`staged`)
+- `suggest`: allows to use suggest capabilities (`searchKeywords`)
 
 ```js
 import {
@@ -57,6 +58,15 @@ const options = {
 const requestBuilder = createRequestBuilder(options)
 ```
 
+#### Version
+
+It is also possible to append the version of a resource to the uri when making a request that requires this (for example a `DELETE` request). This can be done by passing the required version to the `.withVersion()` method.
+
+```js
+const service = createRequestBuilder(options)
+const uri = service.channels.withVersion(2).build()
+```
+
 #### Usage example
 
 ```js
@@ -70,6 +80,7 @@ const client = createClient({
 const channelsUri = requestBuilder.channels
   .where('key = "foo"')
   .perPage(1)
+  .withVersion(3)
   .build()
 const channelsRequest = {
   url: channelsUri,
