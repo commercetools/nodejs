@@ -26,13 +26,17 @@ describe('api', () => {
     next => (...args) => next(...args),
   ]
   const client = createClient({ middlewares })
+  const request = {
+    uri: '/foo',
+    method: 'POST',
+  }
 
   it('expose "execute" function', () => {
     expect(typeof client.execute).toBe('function')
   })
 
   it('execute should return a promise', () => {
-    const promise = client.execute({})
+    const promise = client.execute(request)
     expect(promise.then).toBeDefined()
   })
 })
@@ -44,6 +48,28 @@ describe('execute', () => {
     body: null,
     headers: {},
   }
+
+  it('should throw if request is missing', () => {
+    const middlewares = [
+      next => (...args) => next(...args),
+    ]
+    const client = createClient({ middlewares })
+    expect(() => client.execute())
+      .toThrowError(/Missing required `request` argument/)
+  })
+
+  it('should throw if request is invalid', () => {
+    const middlewares = [
+      next => (...args) => next(...args),
+    ]
+    const client = createClient({ middlewares })
+    const badRequest = {
+      ...request,
+      method: '',
+    }
+    expect(() => client.execute(badRequest))
+      .toThrowError(/Request is invalid/)
+  })
 
   it('execute and resolve a simple request', () => {
     const client = createClient({
@@ -153,6 +179,28 @@ describe('process', () => {
     body: null,
     headers: {},
   }
+
+  describe('validate arguments', () => {
+    const middlewares = [
+      next => (...args) => next(...args),
+    ]
+    const client = createClient({ middlewares })
+
+    it('should throw if second argument missing', () => {
+      expect(() => client.process(request))
+        .toThrow('Missing argument! Second argument must be defined')
+    })
+
+    it('should throw if second argument is not a function', () => {
+      expect(() => client.process(request, 'foo'))
+        .toThrow('Invalid argument! Second argument must be a function')
+    })
+
+    it('should throw if request method is invalid', () => {
+      expect(() => client.process({ uri: 'foo', method: 'POST' }, () => {}))
+        .toThrowError('Invalid request type. Must be a `GET` request')
+    })
+  })
 
   it('process and resolve paginating 3 times', () => {
     const createPayloadResult = tot => ({

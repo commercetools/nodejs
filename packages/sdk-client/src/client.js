@@ -31,6 +31,8 @@ export default function createClient (options: ClientOptions): Client {
       Given a request object,
     */
     execute (request: ClientRequest): Promise<ClientResult> {
+      validate(request)
+
       return new Promise((resolve, reject) => {
         const resolver = (rq: MiddlewareRequest, rs: MiddlewareResponse) => {
           // Note: pick the promise `resolve` and `reject` function from
@@ -71,6 +73,11 @@ export default function createClient (options: ClientOptions): Client {
       fn: ProcessFn,
       opt: ProcessOptions = { accumulate: true },
     ): Promise<Array<Object>> {
+      if (!fn)
+        throw new Error('Missing argument! Second argument must be defined')
+
+      validate(request, fn)
+
       return new Promise((resolve, reject) => {
         const [path, queryString] = request.uri.split('?')
         const query = {
@@ -134,4 +141,17 @@ function compose (...funcs: Array<Function>): Function {
     return funcs[0]
 
   return funcs.reduce((a, b) => (...args) => a(b(...args)))
+}
+
+function validate (request: Object, fn: ProcessFn) {
+  if (!request)
+    throw new Error('Missing required `request` argument.')
+  if (typeof request.uri !== 'string' || !request.method)
+    throw new Error('Request is invalid.')
+  if (fn) {
+    if (request.method !== 'GET')
+      throw new Error('Invalid request type. Must be a `GET` request')
+    if (typeof fn !== 'function')
+      throw new Error('Invalid argument! Second argument must be a function')
+  }
 }
