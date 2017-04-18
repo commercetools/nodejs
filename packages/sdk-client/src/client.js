@@ -143,7 +143,7 @@ function compose (...funcs: Array<Function>): Function {
   return funcs.reduce((a, b) => (...args) => a(b(...args)))
 }
 
-function validate (request: Object, fn: ProcessFn) {
+function validate (request: Object, fn?: ProcessFn) {
   if (!request)
     throw new Error('Missing required `request` argument.')
   if (typeof request.uri !== 'string' || !request.method)
