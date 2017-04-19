@@ -25,6 +25,7 @@ const expectedServiceKeys = [
   'productProjectionsSuggest',
   'products',
   'productTypes',
+  'project',
   'reviews',
   'shippingMethods',
   'shoppingLists',
