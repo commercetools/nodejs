@@ -11,6 +11,7 @@ import type {
   SuccessResult,
 } from 'types/sdk'
 import qs from 'querystring'
+import validate from './validate'
 
 export default function createClient (options: ClientOptions): Client {
   if (!options)
@@ -31,7 +32,7 @@ export default function createClient (options: ClientOptions): Client {
       Given a request object,
     */
     execute (request: ClientRequest): Promise<ClientResult> {
-      validate(request)
+      validate('exec', request)
 
       return new Promise((resolve, reject) => {
         const resolver = (rq: MiddlewareRequest, rs: MiddlewareResponse) => {
@@ -73,10 +74,11 @@ export default function createClient (options: ClientOptions): Client {
       fn: ProcessFn,
       opt: ProcessOptions = { accumulate: true },
     ): Promise<Array<Object>> {
-      if (!fn)
-        throw new Error('Missing argument! Second argument must be defined')
+      validate('process', request, { allowedMethods: ['GET'] })
 
-      validate(request, fn)
+      if (typeof fn !== 'function')
+      // eslint-disable-next-line max-len
+        throw new Error('The "process" function accepts a "Function" as a second argument that returns a Promise. See https://commercetools.github.io/nodejs/sdk/api/sdkClient.html#processrequest-processfn-options')
 
       return new Promise((resolve, reject) => {
         const [path, queryString] = request.uri.split('?')
@@ -141,17 +143,4 @@ function compose (...funcs: Array<Function>): Function {
     return funcs[0]
 
   return funcs.reduce((a, b) => (...args) => a(b(...args)))
-}
-
-function validate (request: Object, fn?: ProcessFn) {
-  if (!request)
-    throw new Error('Missing required `request` argument.')
-  if (typeof request.uri !== 'string' || !request.method)
-    throw new Error('Request is invalid.')
-  if (fn) {
-    if (request.method !== 'GET')
-      throw new Error('Invalid request type. Must be a `GET` request')
-    if (typeof fn !== 'function')
-      throw new Error('Invalid argument! Second argument must be a function')
-  }
 }

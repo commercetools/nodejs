@@ -55,20 +55,33 @@ describe('execute', () => {
     ]
     const client = createClient({ middlewares })
     expect(() => client.execute())
-      .toThrowError(/Missing required `request` argument/)
+      .toThrowError(/The "exec" function requires a "Request" object/)
   })
 
-  it('should throw if request is invalid', () => {
+  it('should throw if request uri is invalid', () => {
     const middlewares = [
       next => (...args) => next(...args),
     ]
     const client = createClient({ middlewares })
     const badRequest = {
       ...request,
-      method: '',
+      uri: 24,
     }
     expect(() => client.execute(badRequest))
-      .toThrowError(/Request is invalid/)
+      .toThrowError(/The "exec" Request object requires a valid uri/)
+  })
+
+  it('should throw if request method is invalid', () => {
+    const middlewares = [
+      next => (...args) => next(...args),
+    ]
+    const client = createClient({ middlewares })
+    const badRequest = {
+      ...request,
+      method: 'INVALID_METHOD',
+    }
+    expect(() => client.execute(badRequest))
+      .toThrowError(/The "exec" Request object requires a valid method./)
   })
 
   it('execute and resolve a simple request', () => {
@@ -188,17 +201,17 @@ describe('process', () => {
 
     it('should throw if second argument missing', () => {
       expect(() => client.process(request))
-        .toThrow('Missing argument! Second argument must be defined')
+        .toThrow(/The "process" function accepts a "Function"/)
     })
 
     it('should throw if second argument is not a function', () => {
       expect(() => client.process(request, 'foo'))
-        .toThrow('Invalid argument! Second argument must be a function')
+        .toThrow(/The "process" function accepts a "Function"/)
     })
 
-    it('should throw if request method is invalid', () => {
+    it('should throw if request method is not `GET`', () => {
       expect(() => client.process({ uri: 'foo', method: 'POST' }, () => {}))
-        .toThrowError('Invalid request type. Must be a `GET` request')
+        .toThrowError(/The "process" Request object requires a valid method/)
     })
   })
 
