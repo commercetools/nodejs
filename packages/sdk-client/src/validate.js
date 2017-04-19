@@ -13,7 +13,7 @@ export default function validate (
     // eslint-disable-next-line max-len
     throw new Error(`The "${funcName}" Request object requires a valid uri. See https://commercetools.github.io/nodejs/sdk/Glossary.html#clientrequest`)
 
-  if (options.allowedMethods.indexOf(request.method) === -1)
+  if (!options.allowedMethods.includes(request.method))
     // eslint-disable-next-line max-len
     throw new Error(`The "${funcName}" Request object requires a valid method. See https://commercetools.github.io/nodejs/sdk/Glossary.html#clientrequest`)
 }
