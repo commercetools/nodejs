@@ -183,6 +183,13 @@ export default {
       features.queryExpand,
     ],
   },
+  project: {
+    type: 'project',
+    endpoint: '/',
+    features: [
+      features.query,
+    ],
+  },
   reviews: {
     type: 'reviews',
     endpoint: '/reviews',
