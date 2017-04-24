@@ -117,6 +117,13 @@ export default {
       features.queryExpand,
     ],
   },
+  orderImport: {
+    type: 'orderImport',
+    endpoint: '/orders/import',
+    features: [
+      features.query,
+    ],
+  },
   payments: {
     type: 'payments',
     endpoint: '/payments',
