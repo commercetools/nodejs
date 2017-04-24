@@ -18,6 +18,7 @@ const expectedServiceKeys = [
   'myCarts',
   'myOrders',
   'orders',
+  'orderImport',
   'payments',
   'productDiscounts',
   'productProjections',
