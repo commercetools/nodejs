@@ -22,7 +22,8 @@ const apiConfig = {
 
 test(`CsvParserPrice
   should initialize default values`, () => {
-  const csvParserPrice = new CsvParserPrice({ apiConfig })
+  const options = { apiConfig, accessToken: 'testingToken' }
+  const csvParserPrice = new CsvParserPrice(options)
 
   // logger
   expect(Object.keys(csvParserPrice.logger))
@@ -31,6 +32,7 @@ test(`CsvParserPrice
     expect(typeof csvParserPrice.logger[key]).toBe('function')
   })
 
+  expect(csvParserPrice.accessToken).toBe(options.accessToken)
   // config
   expect(csvParserPrice.delimiter).toBe(CONSTANTS.standardOption.delimiter)
   expect(csvParserPrice.batchSize).toBe(CONSTANTS.standardOption.batchSize)
@@ -271,9 +273,10 @@ describe('CsvParserPrice::getCustomTypeDefinition', () => {
   })
 
   test('should resolve to type definition when given key exists', (done) => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const options = { apiConfig, logger, accessToken: 'testingToken' }
+    const csvParserPrice = new CsvParserPrice(options)
 
-    sinon.stub(csvParserPrice.client, 'execute').returns(
+    const stub = sinon.stub(csvParserPrice.client, 'execute').returns(
       Promise.resolve({
         body: {
           count: 1,
@@ -284,6 +287,9 @@ describe('CsvParserPrice::getCustomTypeDefinition', () => {
 
     csvParserPrice.getCustomTypeDefinition()
       .then((result) => {
+        expect(
+          stub.args[0][0].headers['Authorization'],
+        ).toBe(`Bearer ${options.accessToken}`)
         expect(result).toBe('Welcome')
         done()
       })
