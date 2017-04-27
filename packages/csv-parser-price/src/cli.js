@@ -124,6 +124,7 @@ resolveCredentials(args)
         host: args.authUrl,
         apiUrl: args.apiUrl,
         projectKey: args.projectKey,
+        accessToken: args.accessToken,
         credentials,
       },
       logger: {
