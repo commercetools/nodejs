@@ -1,0 +1,25 @@
+{
+  "name": "@commercetools/discount-code-generator",
+  "version": "0.0.1",
+  "description": "Generate discount codes according to constraints.",
+  "keywords": [
+    "commercetools",
+    "discount",
+    "code",
+    "generator"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs/tree/master/packages/discount-code-generator"
+  },
+  "homepage": "https://commercetools.github.io/nodejs/sdk/api/discountCodeGenerator.html",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "contributors": [
+    "Williams Omayuku <williams.omayuku@commercetools.com>"
+  ],
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ]
+}
