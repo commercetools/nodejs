@@ -45,7 +45,6 @@ describe('discountCodeGenerator', () => {
 
     codes.forEach((codeObject) => {
       expect(codeObject).toMatchObject(data)
-      expect(codeObject.code).toBeTruthy()
       expect(codeObject.code.length).toBe(15)
       expect(codeObject.code).toMatch(/^CT/)
     })
