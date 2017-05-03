@@ -177,6 +177,38 @@ describe('Http', () => {
     }),
   )
 
+  it('should accept a Buffer body', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+        method: 'POST',
+        body: Buffer.from('test'),
+        headers: {
+          'Content-Type': 'image/jpeg',
+        },
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          body: { foo: 'bar' },
+          statusCode: 200,
+        })
+        resolve()
+      }
+      // Use custom options
+      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .post('/foo/bar', 'test')
+        .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    }),
+  )
+
   it('handle failed response (network error)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
