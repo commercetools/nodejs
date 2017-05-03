@@ -1,3 +1,4 @@
+import isNil from 'lodash.isnil'
 import clone from './clone'
 import * as diffpatcher from './diffpatcher'
 
@@ -24,18 +25,20 @@ export function buildBaseAttributesActions ({
       const delta = diff[key]
       const before = oldObj[key]
       const now = newObj[key]
-
+      const isNotDefinedBefore = isNil(oldObj[key])
+      const isNotDefinedNow = isNil(newObj[key])
       if (!delta) return undefined
 
-      if (!now && !before) return undefined
+      if (isNotDefinedNow && isNotDefinedBefore) return undefined
 
-      if (now && !before) // no value previously set
+      if (!isNotDefinedNow && isNotDefinedBefore) // no value previously set
         return { action: item.action, [actionKey]: now }
 
-      if (!now && !{}.hasOwnProperty.call(newObj, key)) // no new value
+      /* no new value */
+      if (isNotDefinedNow && !{}.hasOwnProperty.call(newObj, key))
         return undefined
 
-      if (!now && {}.hasOwnProperty.call(newObj, key)) // value unset
+      if (isNotDefinedNow && {}.hasOwnProperty.call(newObj, key)) // value unset
         return { action: item.action }
 
       // We need to clone `before` as `patch` will mutate it
