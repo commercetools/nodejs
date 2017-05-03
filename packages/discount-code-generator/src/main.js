@@ -33,9 +33,9 @@ import type {
  *   maxApplications: 10,
  *   maxApplicationsPerCustomer: 2,
  *  }
- *
- *  More information about the discount codes can be found here: http://
- *  dev.commercetools.com/http-api-projects-discountCodes.html#discountcode
+**/
+// eslint-disable-next-line max-len
+/**  More information about the discount codes can be found here: http://dev.commercetools.com/http-api-projects-discountCodes.html#discountcode
 **/
 
 export default function discountCodeGenerator (
