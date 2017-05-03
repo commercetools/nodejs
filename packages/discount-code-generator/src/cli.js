@@ -12,12 +12,11 @@ import { version } from '../package.json'
 process.title = 'discountCodeGenerator'
 
 const args = yargs
-  .usage(
-    `\n
+  .usage(`
 Usage: $0 [options]
 Generate multiple discount codes to import to the commercetools platform.`,
   )
-  .showHelpOnFail(false)
+  .showHelpOnFail(false, 'Use --help to display the CLI options.\n')
 
   .option('help', {
     alias: 'h',
