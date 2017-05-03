@@ -4,10 +4,10 @@
 export type CodeData = {
   name?: Object;
   description?: Object;
-  cartDiscounts: [];
+  cartDiscounts: Array<string>;
   cartPredicate?: string;
   isActive: boolean;
-  maxApplicationsPerCustomer?: number;
+  maxApplications?: number;
   maxApplicationsPerCustomer?: number;
   uri: string;
   code?: string;

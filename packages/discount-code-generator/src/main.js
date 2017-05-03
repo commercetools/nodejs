@@ -18,7 +18,7 @@ import type {
  *   length: 15,
  *   prefix: CT,
  * }
-
+ *
  * The {data} should have the attributes of the discount codes
  * data = {
  *   name: {
@@ -30,9 +30,12 @@ import type {
  *   cartDiscounts: [],
  *   cartPredicate: 'some predicate',
  *   isActive: true,
- *   maxApplicationsPerCustomer: 10,
+ *   maxApplications: 10,
  *   maxApplicationsPerCustomer: 2,
  *  }
+ *
+ *  More information about the discount codes can be found here: http://
+ *  dev.commercetools.com/http-api-projects-discountCodes.html#discountcode
 **/
 
 export default function discountCodeGenerator (
