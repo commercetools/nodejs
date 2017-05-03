@@ -21,5 +21,8 @@
   "main": "lib/index.js",
   "files": [
     "lib"
-  ]
+  ],
+  "dependencies": {
+    "tokgen": "^1.0.0"
+  }
 }
