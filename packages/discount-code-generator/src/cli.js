@@ -98,7 +98,7 @@ Generate multiple discount codes to import to the commercetools platform.`,
   .argv
 
 // Resolve stream input to javascript object
-export default function resolveInput (_args) {
+const resolveInput = (_args) => {
   const input = _args.inputFile
   let _attributes
   return new Promise((resolve, reject) => {
