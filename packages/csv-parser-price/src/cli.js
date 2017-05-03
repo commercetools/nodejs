@@ -74,6 +74,9 @@ Convert commercetools price CSV data to JSON.`,
     default: CONSTANTS.standardOption.delimiter,
     describe: 'Used CSV delimiter.',
   })
+  .option('accessToken', {
+    describe: 'CTP client access token',
+  })
 
   .option('projectKey', {
     alias: 'p',
@@ -108,7 +111,13 @@ const errorHandler = (errors) => {
   process.exit(1)
 }
 
-getCredentials(args.projectKey)
+const resolveCredentials = (_args) => {
+  if (_args.accessToken)
+    return Promise.resolve({})
+  return getCredentials(_args.projectKey)
+}
+
+resolveCredentials(args)
   .then(credentials =>
     new CsvParserPrice({
       apiConfig: {
@@ -117,6 +126,7 @@ getCredentials(args.projectKey)
         projectKey: args.projectKey,
         credentials,
       },
+      accessToken: args.accessToken,
       logger: {
         error: errorHandler,
         warn: npmlog.warn.bind(this, ''),

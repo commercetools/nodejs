@@ -117,6 +117,13 @@ export default {
       features.queryExpand,
     ],
   },
+  orderImport: {
+    type: 'orderImport',
+    endpoint: '/orders/import',
+    features: [
+      features.query,
+    ],
+  },
   payments: {
     type: 'payments',
     endpoint: '/payments',
@@ -181,6 +188,13 @@ export default {
       features.query,
       features.queryOne,
       features.queryExpand,
+    ],
+  },
+  project: {
+    type: 'project',
+    endpoint: '/',
+    features: [
+      features.query,
     ],
   },
   reviews: {

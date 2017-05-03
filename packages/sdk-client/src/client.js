@@ -11,6 +11,7 @@ import type {
   SuccessResult,
 } from 'types/sdk'
 import qs from 'querystring'
+import validate from './validate'
 
 export default function createClient (options: ClientOptions): Client {
   if (!options)
@@ -31,6 +32,8 @@ export default function createClient (options: ClientOptions): Client {
       Given a request object,
     */
     execute (request: ClientRequest): Promise<ClientResult> {
+      validate('exec', request)
+
       return new Promise((resolve, reject) => {
         const resolver = (rq: MiddlewareRequest, rs: MiddlewareResponse) => {
           // Note: pick the promise `resolve` and `reject` function from
@@ -71,6 +74,12 @@ export default function createClient (options: ClientOptions): Client {
       fn: ProcessFn,
       opt: ProcessOptions = { accumulate: true },
     ): Promise<Array<Object>> {
+      validate('process', request, { allowedMethods: ['GET'] })
+
+      if (typeof fn !== 'function')
+      // eslint-disable-next-line max-len
+        throw new Error('The "process" function accepts a "Function" as a second argument that returns a Promise. See https://commercetools.github.io/nodejs/sdk/api/sdkClient.html#processrequest-processfn-options')
+
       return new Promise((resolve, reject) => {
         const [path, queryString] = request.uri.split('?')
         const query = {

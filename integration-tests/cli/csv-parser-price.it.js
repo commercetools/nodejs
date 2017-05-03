@@ -55,17 +55,6 @@ describe('CSV and CLI Tests', () => {
       })
     })
 
-    test('should take input from file', (done) => {
-      const csvFilePath = './packages/csv-parser-price/test/helpers/sample.csv'
-      exec(`${binPath} -p ${projectKey} --inputFile ${csvFilePath}`,
-        (error, stdout, stderr) => {
-          expect(error && stderr).toBeFalsy()
-          expect(stdout.match(/prices/)).toBeTruthy()
-          done()
-        },
-      )
-    })
-
     test('should write output to file', (done) => {
       // eslint-disable-next-line max-len
       const csvFilePath = './packages/csv-parser-price/test/helpers/simple-sample.csv'
@@ -169,6 +158,17 @@ describe('CSV and CLI Tests', () => {
           body: customTypePayload,
           method: 'POST',
         }))
+    })
+
+    test('should take input from file', (done) => {
+      const csvFilePath = './packages/csv-parser-price/test/helpers/sample.csv'
+      exec(`${binPath} -p ${projectKey} --inputFile ${csvFilePath}`,
+        (error, stdout, stderr) => {
+          expect(error && stderr).toBeFalsy()
+          expect(stdout.match(/prices/)).toBeTruthy()
+          done()
+        },
+      )
     })
 
     test('CLI exits on type mapping errors', (done) => {
