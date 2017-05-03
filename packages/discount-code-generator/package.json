@@ -32,6 +32,7 @@
     "json2csv": "^3.7.3",
     "npmlog": "^4.0.2",
     "pretty-error": "^2.1.0",
+    "tokgen": "^1.0.0",
     "yargs": "^7.1.0"
   }
 }
