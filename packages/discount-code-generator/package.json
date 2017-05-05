@@ -20,7 +20,7 @@
   ],
   "main": "./lib/index.js",
   "bin": {
-    "discountcodegen": "bin/discountcodegen.js"
+    "discount-code-gen": "bin/discountcodegen.js"
   },
   "files": [
     "bin",

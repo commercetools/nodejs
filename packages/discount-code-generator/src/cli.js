@@ -31,25 +31,31 @@ Generate multiple discount codes to import to the commercetools platform.`,
 
   .option('quantity', {
     alias: 'q',
-    describe: 'Quantity of discount codes to generate.',
+    describe: 'Quantity of discount codes to generate. (Between 1 and 500000)',
     demandOption: true,
   })
-  .coerce('quantity', arg => parseInt(arg, 10))
+  .coerce('quantity', (arg) => {
+    const quantity = parseInt(arg, 10)
+    if (quantity <= 0 || quantity > 500000)
+      throw new Error('Invalid quantity, must be a number between 1 and 500000')
 
-  .option('length', {
+    return quantity
+  })
+
+  .option('code-length', {
     alias: 'l',
     default: 11,
     describe: 'Length of the discount codes to generate.',
   })
   .coerce('length', arg => parseInt(arg, 10))
 
-  .option('prefix', {
+  .option('code-prefix', {
     alias: 'p',
     default: '',
     describe: 'Prefix for each code. No prefix will be used if omitted.',
   })
 
-  .option('inputFile', {
+  .option('input', {
     alias: 'i',
     describe: 'Path to code options CSV or JSON file.',
     demandOption: true,
@@ -61,12 +67,12 @@ Generate multiple discount codes to import to the commercetools platform.`,
     throw new Error('Invalid input file format. Must be CSV or JSON')
   })
 
-  .option('outputFile', {
+  .option('output', {
     alias: 'o',
     default: 'stdout',
     describe: 'Path to store generated output file.',
   })
-  .coerce('outputFile', (arg) => {
+  .coerce('output', (arg) => {
     if (arg === 'stdout')
       return process.stdout
     if (arg.match(/\.json$/i) || arg.match(/\.csv$/i))
@@ -98,7 +104,7 @@ Generate multiple discount codes to import to the commercetools platform.`,
 
 // Resolve stream input to javascript object
 const resolveInput = (_args) => {
-  const input = _args.inputFile
+  const input = _args.input
   let _attributes
   return new Promise((resolve, reject) => {
     if (input.path.match(/\.json$/i))
@@ -140,7 +146,7 @@ const resolveInput = (_args) => {
 
 // Resove output to file or stdout
 const resolveOutput = (_args, outputData) => {
-  const outputStream = _args.outputFile
+  const outputStream = _args.output
   const total = outputData.length
   return new Promise((resolve, reject) => {
     if (outputStream === process.stdout) {
