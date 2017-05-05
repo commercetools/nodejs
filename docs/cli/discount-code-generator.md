@@ -1,10 +1,5 @@
 # Discount Code Generator
 
-[![Travis Build Status][travis-icon]][travis]
-[![Codecov Coverage Status][codecov-icon]][codecov]
-[![David Dependencies Status][david-icon]][david]
-[![David devDependencies Status][david-dev-icon]][david-dev]
-
 Generate unique discount codes to be imported to the [commercetools platform](https://dev.commercetools.com/). See usage below
 
 ## Usage
@@ -13,7 +8,6 @@ Generate unique discount codes to be imported to the [commercetools platform](ht
 ### CLI
 ```
 Usage: discountCodeGenerator [options]
-Convert commercetools price CSV data to JSON.
 
 Options:
   --help, -h                 Show help text.                                                     [boolean]
@@ -153,16 +147,4 @@ The following would be written to the output file:
 - The JSON output option outputs an array of json objects
 - The input and output formats are interchangeable; that means JSON output can be requested with a CSV input and vice versa
 - All fields in the input are optional. However, the file must not be empty.
-- The input option can be left completely if no code attributes are required
-
-
-[commercetools]: https://commercetools.com/
-[commercetools-icon]: https://cdn.rawgit.com/commercetools/press-kit/master/PNG/72DPI/CT%20logo%20horizontal%20RGB%2072dpi.png
-[travis]: https://travis-ci.org/commercetools/discount-code-generator
-[travis-icon]: https://img.shields.io/travis/commercetools/discount-code-generator/master.svg?style=flat-square
-[codecov]: https://codecov.io/gh/commercetools/discount-code-generator
-[codecov-icon]: https://img.shields.io/codecov/c/github/commercetools/discount-code-generator.svg?style=flat-square
-[david]: https://david-dm.org/commercetools/discount-code-generator
-[david-icon]: https://img.shields.io/david/commercetools/discount-code-generator.svg?style=flat-square
-[david-dev]: https://david-dm.org/commercetools/discount-code-generator?type=dev
-[david-dev-icon]: https://img.shields.io/david/dev/commercetools/discount-code-generator.svg?style=flat-square
+- The input option can be left out completely if no code attributes are required
