@@ -47,7 +47,7 @@ Generate multiple discount codes to import to the commercetools platform.`,
     default: 11,
     describe: 'Length of the discount codes to generate.',
   })
-  .coerce('length', arg => parseInt(arg, 10))
+  .coerce('code-length', arg => parseInt(arg, 10))
 
   .option('code-prefix', {
     alias: 'p',
@@ -58,13 +58,15 @@ Generate multiple discount codes to import to the commercetools platform.`,
   .option('input', {
     alias: 'i',
     describe: 'Path to code options CSV or JSON file.',
-    demandOption: true,
   })
-  .coerce('inputFile', (arg) => {
-    if (arg.match(/\.json$/i) || arg.match(/\.csv$/i))
-      return fs.createReadStream(String(arg))
+  .coerce('input', (arg) => {
+    if (fs.existsSync(arg)) {
+      if (arg.match(/\.json$/i) || arg.match(/\.csv$/i))
+        return fs.createReadStream(String(arg))
 
-    throw new Error('Invalid input file format. Must be CSV or JSON')
+      throw new Error('Invalid input file format. Must be CSV or JSON')
+    }
+    throw new Error('Input file cannot be reached or does not exist')
   })
 
   .option('output', {
@@ -107,7 +109,9 @@ const resolveInput = (_args) => {
   const input = _args.input
   let _attributes
   return new Promise((resolve, reject) => {
-    if (input.path.match(/\.json$/i))
+    if (input === undefined)
+      resolve({})
+    else if (input.path.match(/\.json$/i))
       // Convert input stream to JSON file
       input
         .on('error', (error) => {
@@ -188,9 +192,9 @@ const resolveOutput = (_args, outputData) => {
 
 // Build discount code options
 const buildOptions = _args => ({
-  quantity: _args.quantity,
-  length: _args.length,
-  prefix: _args.prefix,
+  quantity: _args['quantity'],
+  length: _args['code-length'],
+  prefix: _args['code-prefix'],
 })
 
 const logError = (error) => {
