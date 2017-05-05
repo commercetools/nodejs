@@ -6,3 +6,4 @@ Our CLI tools perform various functions from importing and exporting to syncing 
 
 ### modules
   * [CSV Price Parser](/cli/csv-parser-price.md)
+  * [Discount Code Generator](/cli/discount-code-generator.md)
