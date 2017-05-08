@@ -22,19 +22,20 @@ Options:
 ```
 
 #### Info on flags
-- The ```--quantity``` flag represents the number of codes to be generated. It must be a number between 1 and 500000
-- The ```--code-length``` flag is used to customise the discount codes according to individual use cases. (more info in Exmples)
-- The ```--input``` flag specifies the path to a CSV or JSON file containing the options the discount codes should have. If this flag is omitted, discount codes without any attributes will be generated.
-- The ```--output``` flag specifies where to output the generated codes. Several notes on this flag:
+- The `--quantity` flag represents the number of codes to be generated. It must be a number between 1 and 500000
+- The `--code-length` flag is used to customise the discount codes according to individual use cases. (more info in [Examples](#examples))
+- The `--input` flag specifies the path to a CSV or JSON file containing the options the discount codes should have. If this flag is omitted, discount codes without any attributes will be generated.
+- The `--output` flag specifies where to output/save the generated codes. Several notes on this flag:
+  - The format of the generated output will depend on the format of the file specified here. It must be CSV or JSON as these are the only supported formats.
   - If the file specified already exists, it will be overwritten.
   - The default location for status report logging is the standard output.
   - If no output path is specified, the generated codes will be logged to the standard output as a result, status reports will be logged to a `discountCodeGenerator.log` file
-- The ```--delimiter``` flag specifies the delimiter used in the input file and/or output file if any or both are CSV. Defaults to ```','``` if omitted and will be ignored if neither input nor output is CSV
-- The ```--multivalueDelimiter``` flag specifies the delimiter for arrays in CSV. Note that only the ```cartDiscounts``` field if present should be an array. Defaults to ```';'``` if omitted
+- The `--delimiter` flag specifies the delimiter used in the input file and/or output file if any or both are CSV. Defaults to `','` if omitted and will be ignored if neither input nor output is CSV
+- The `--multivalueDelimiter` flag specifies the delimiter for multivalue cells in CSV. Note that only the `cartDiscounts` field if present should contain multiple values. Defaults to `';'` if omitted
 
 ### Examples
 #### CSV
-If we want to generate 3 discount codes, each having 9 digits, 'FOO' as prefix, and having the following data stored in a CSV file:
+If we want to generate 3 discount codes, each having 9 characters(code-length), 'FOO' as prefix, and having the following data stored in a CSV file:
 ```csv
 name.en,name.de,description.en,description.de,cartDiscounts,cartPredicate,isActive,maxApplications,maxApplicationsPerCustomer
 Sammy,Valerian,greatest promo,super angebot,good;better;best,value more than 20,true,10,2
@@ -53,7 +54,7 @@ The following would be written to the output file:
 ```
 
 #### JSON
-If we want to generate 3 discount codes, each having 9 digits, of 'Foo' as prefix, and having the following data stored in a JSON file:
+If we want to generate 3 discount codes, each having 9 characters(code-length), 'FOO' as prefix, and having the following data stored in a JSON file:
 ```js
 {
   "name": {
