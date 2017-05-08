@@ -75,8 +75,10 @@ Generate multiple discount codes to import to the commercetools platform.`,
     describe: 'Path to store generated output file.',
   })
   .coerce('output', (arg) => {
-    if (arg === 'stdout')
+    if (arg === 'stdout') {
+      npmlog.stream = fs.createWriteStream('discountCodeGenerator.log')
       return process.stdout
+    }
     if (arg.match(/\.json$/i) || arg.match(/\.csv$/i))
       return fs.createWriteStream(String(arg))
 
@@ -222,6 +224,6 @@ resolveInput(args)
     return resolveOutput(args, codes)
   })
   .then((total) => {
-    process.stdout.write(`Successfully generated ${total} discount codes\n`)
+    npmlog.info(`Successfully generated ${total} discount codes\n`)
   })
   .catch(errorHandler)
