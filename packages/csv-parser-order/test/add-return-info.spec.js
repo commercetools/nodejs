@@ -5,10 +5,6 @@ import path from 'path'
 import AddReturnInfoParser from '../src/parsers/add-return-info'
 
 describe('AddReturnInfoParser', () => {
-  it('should be a class', () => {
-    expect(typeof AddReturnInfoParser).toBe('function')
-  })
-
   it('::constructor should initialize default values', () => {
     const parser = new AddReturnInfoParser()
     // more of this test is in abstract-parser.spec.js

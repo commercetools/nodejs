@@ -5,10 +5,6 @@ import StreamTest from 'streamtest'
 import LineItemStateParser from '../src/parsers/line-item-state'
 
 describe('LineItemStateParser', () => {
-  it('should be a class', () => {
-    expect(typeof LineItemStateParser).toBe('function')
-  })
-
   it('::constructor should initialize default values', () => {
     const parser = new LineItemStateParser()
 
