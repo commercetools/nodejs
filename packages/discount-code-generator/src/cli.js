@@ -37,6 +37,7 @@ Generate multiple discount codes to import to the commercetools platform.`,
   })
   .coerce('quantity', (arg) => {
     const quantity = parseInt(arg, 10)
+    // Limit quantity to 500000 to avoid `out-of-memory` error
     if (quantity <= 0 || quantity > 500000)
       throw new Error('Invalid quantity, must be a number between 1 and 500000')
 
@@ -142,6 +143,7 @@ const resolveInput = (_args) => {
         })
         .on('data', (data) => {
           const arrayDelim = _args.multivalueDelimiter
+          // Add condition so module doesn't fail if there are no cartDiscounts
           if (data.cartDiscounts)
           // eslint-disable-next-line no-param-reassign
             data.cartDiscounts = data.cartDiscounts.split(arrayDelim)
@@ -178,6 +180,7 @@ const resolveOutput = (_args, outputData) => {
       // Convert to csv and write to file
       const arrayDelim = _args.multivalueDelimiter
       const flatObjects = outputData.map((obj) => {
+        // Add condition so module doesn't fail if there are no cartDiscounts
         if (obj.cartDiscounts)
         // eslint-disable-next-line no-param-reassign
           obj.cartDiscounts = obj.cartDiscounts.join(arrayDelim)

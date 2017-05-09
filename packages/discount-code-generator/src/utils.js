@@ -4,7 +4,7 @@ import { Transform } from 'stream'
 // from the CSV. This is necessary because the csv-parser parses all fields
 // as strings
 export class CsvTransform extends Transform {
-  constructor (typeCast) {
+  constructor (typeCast = {}) {
     super({ objectMode: true })
     this.typeCast = typeCast
   }
@@ -21,5 +21,5 @@ export class CsvTransform extends Transform {
 }
 
 export function parseBool (value) {
-  return value === 'true'
+  return value === 'true' || value === true
 }
