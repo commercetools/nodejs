@@ -26,6 +26,7 @@ Options:
                                              [default: "https://auth.sphere.io"]
   --batchSize, -b   Number of CSV rows to handle simultaneously.  [default: 100]
   --delimiter, -d   Used CSV delimiter.                           [default: ","]
+  --accessToken     CTP client access token
   --projectKey, -p  API project key.                                  [required]
   --logLevel        Logging level: error, warn, info or verbose.
                                                                [default: "info"]
@@ -43,6 +44,7 @@ const csvParserPrice = new CsvParserPrice(
       clientId: process.env.CT_CLIENT_ID,
       clientSecret: process.env.CT_CLIENT_SECRET,
       },
+    accessToken: '<tokenfromapi>'
   },
   {
     error: console.error,

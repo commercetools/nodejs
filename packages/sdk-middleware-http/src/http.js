@@ -21,6 +21,7 @@ export default function createHttpMiddleware (
   return next => (request: MiddlewareRequest, response: MiddlewareResponse) => {
     const url = options.host.replace(/\/$/, '') + request.uri
     const body = typeof request.body === 'string'
+      || Buffer.isBuffer(request.body)
       ? request.body
       : JSON.stringify(request.body)
     const requestHeader = {

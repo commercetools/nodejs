@@ -19,7 +19,7 @@ import mapCustomFields from './map-custom-fields'
 import { version } from '../package.json'
 
 export default class CsvParserPrice {
-  constructor ({ apiConfig, logger, csvConfig = {} }) {
+  constructor ({ apiConfig, logger, csvConfig = {}, accessToken }) {
     this.client = createClient({
       middlewares: [
         createAuthMiddlewareForClientCredentialsFlow(apiConfig),
@@ -34,6 +34,7 @@ export default class CsvParserPrice {
     })
 
     this.apiConfig = apiConfig
+    this.accessToken = accessToken
 
     this.logger = logger || {
       error: npmlog.error.bind(this, ''),
@@ -188,11 +189,16 @@ CsvParserPrice.prototype.getCustomTypeDefinition = memoize(
     }).types
       .where(`key="${customTypeKey}"`)
       .build()
-
-    return this.client.execute({
+    const execObj = {
       uri: getTypeByKeyUri,
       method: 'GET',
-    })
+    }
+    if (this.accessToken)
+      execObj.headers = {
+        Authorization: `Bearer ${this.accessToken}`,
+      }
+
+    return this.client.execute(execObj)
       .then((response) => {
         if (response.body.count === 0)
           return Promise.reject(
