@@ -8,6 +8,7 @@ import flatten, { unflatten } from 'flat'
 
 import discountCodeGenerator from './main'
 import { version } from '../package.json'
+import { CsvTransform, parseBool } from './utils'
 
 process.title = 'discountCodeGenerator'
 
@@ -131,6 +132,11 @@ const resolveInput = (_args) => {
         separator: _args.delimiter,
         strict: true,
       }))
+        .pipe(new CsvTransform({
+          isActive: parseBool,
+          maxApplications: parseInt,
+          maxApplicationsPerCustomer: parseInt,
+        }))
         .on('error', (error) => {
           reject(error)
         })
