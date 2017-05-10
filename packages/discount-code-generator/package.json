@@ -18,11 +18,24 @@
   "contributors": [
     "Williams Omayuku <williams.omayuku@commercetools.com>"
   ],
-  "main": "lib/index.js",
+  "main": "./lib/index.js",
+  "bin": {
+    "discount-code-gen": "bin/discountcodegen.js"
+  },
   "files": [
+    "bin",
     "lib"
   ],
   "dependencies": {
-    "tokgen": "^1.0.0"
+    "csv-parser": "^1.11.0",
+    "flat": "^2.0.1",
+    "json2csv": "^3.7.3",
+    "npmlog": "^4.0.2",
+    "pretty-error": "^2.1.0",
+    "tokgen": "^1.0.0",
+    "yargs": "^7.1.0"
+  },
+  "devDependencies": {
+    "JSONStream": "^1.3.1"
   }
 }
