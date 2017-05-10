@@ -18,3 +18,6 @@ coverage
 
 # OS clutter
 .DS_Store
+
+# IDE tools
+.idea

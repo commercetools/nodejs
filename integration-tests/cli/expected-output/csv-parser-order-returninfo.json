@@ -1,0 +1,57 @@
+[
+  {
+    "orderNumber": "123",
+    "returnInfo": [
+      {
+        "returnTrackingId": "aefa34fe",
+        "_returnId": "1",
+        "returnDate": "2016-11-01T08:01:19+0000",
+        "items": [
+          {
+            "quantity": 4,
+            "lineItemId": "12ae",
+            "comment": "yeah",
+            "shipmentState": "shipped"
+          },
+          {
+            "quantity": 4,
+            "lineItemId": "12ae",
+            "comment": "yeah",
+            "shipmentState": "not-shipped"
+          }
+        ]
+      },
+      {
+        "returnTrackingId": "aefa34fe",
+        "_returnId": "2",
+        "returnDate": "2016-11-01T08:01:19+0000",
+        "items": [
+          {
+            "quantity": 4,
+            "lineItemId": "12ae",
+            "comment": "yeah",
+            "shipmentState": "not-shipped"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "orderNumber": "124",
+    "returnInfo": [
+      {
+        "returnTrackingId": "aefa34fe",
+        "_returnId": "2",
+        "returnDate": "2016-11-01T08:01:19+0000",
+        "items": [
+          {
+            "quantity": 4,
+            "lineItemId": "12ae",
+            "comment": "yeah",
+            "shipmentState": "not-shipped"
+          }
+        ]
+      }
+    ]
+  }
+]
