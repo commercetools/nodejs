@@ -1,7 +1,7 @@
 {
   "prices": [
     {
-      "variant-sku": "my-price",
+      "sku": "my-price",
       "prices": [
         {
           "variant-sku": "my-price",
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "variant-sku": "my-price2",
+      "sku": "my-price2",
       "prices": [
         {
           "variant-sku": "my-price2",
