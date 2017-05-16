@@ -17,6 +17,7 @@ describe('Exports', () => {
       'images',
       'variants',
       'categories',
+      'categoryOrderHints',
     ])
   })
 
@@ -138,6 +139,7 @@ describe('Actions', () => {
         { id: 'aebe844e-0616-420a-8397-a22c48d5e99f' },
         { id: '34cae6ad-5898-4f94-973b-ae9ceb7464ce' },
       ],
+
     }
     const now = {
       categories: [
@@ -160,6 +162,60 @@ describe('Actions', () => {
       {
         action: 'addToCategory',
         category: { id: 'cca7a250-d8cf-4b8a-9d47-60fcc093b86b' },
+      },
+    ])
+  })
+
+  it('should add/remove category and categoryOrderHints', () => {
+    const before = {
+      categories: [
+        { id: '123e844e-0616-420a-8397-a22c48d5e99f' },
+        { id: 'aebe844e-0616-420a-8397-a22c48d5e99f' },
+        { id: '34cae6ad-5898-4f94-973b-ae9ceb7464ce' },
+      ],
+      categoryOrderHints: {
+        '123e844e-0616-420a-8397-a22c48d5e99f': '0.1', // will be preserved
+        'aebe844e-0616-420a-8397-a22c48d5e99f': '0.2', // will be changed to 0.5
+        '34cae6ad-5898-4f94-973b-ae9ceb7464ce': '0.5', // will be removed
+      },
+    }
+
+    const now = {
+      categories: [
+        { id: '123e844e-0616-420a-8397-a22c48d5e99f' },
+        { id: 'aebe844e-0616-420a-8397-a22c48d5e99f' },
+        { id: 'cca7a250-d8cf-4b8a-9d47-60fcc093b86b' },
+      ],
+      categoryOrderHints: {
+        '123e844e-0616-420a-8397-a22c48d5e99f': '0.1',
+        'aebe844e-0616-420a-8397-a22c48d5e99f': '0.5',
+        'cca7a250-d8cf-4b8a-9d47-60fcc093b86b': '0.999',
+      },
+    }
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual([
+      {
+        action: 'removeFromCategory',
+        category: { id: '34cae6ad-5898-4f94-973b-ae9ceb7464ce' },
+      },
+      {
+        action: 'addToCategory',
+        category: { id: 'cca7a250-d8cf-4b8a-9d47-60fcc093b86b' },
+      },
+      {
+        action: 'setCategoryOrderHint',
+        categoryId: 'aebe844e-0616-420a-8397-a22c48d5e99f',
+        orderHint: '0.5',
+      },
+      {
+        action: 'setCategoryOrderHint',
+        categoryId: '34cae6ad-5898-4f94-973b-ae9ceb7464ce',
+      },
+      {
+        action: 'setCategoryOrderHint',
+        categoryId: 'cca7a250-d8cf-4b8a-9d47-60fcc093b86b',
+        orderHint: '0.999',
       },
     ])
   })

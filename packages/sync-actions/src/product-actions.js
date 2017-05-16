@@ -106,6 +106,34 @@ export function actionsMapCategories (diff) {
   return removeFromCategoryActions.concat(addToCategoryActions)
 }
 
+export function actionsMapCategoryOrderHints (diff) {
+  const actions = []
+  if (!diff.categoryOrderHints) return actions
+
+  const categoryIds = Object.keys(diff.categoryOrderHints)
+
+  categoryIds.forEach((categoryId) => {
+    const hintChange = diff.categoryOrderHints[categoryId]
+
+    const action = {
+      action: 'setCategoryOrderHint',
+      categoryId,
+    }
+
+    if (hintChange.length === 1) // item was added
+      action.orderHint = hintChange[0]
+
+    else if (hintChange.length === 2 && hintChange[1] !== 0) // item was changed
+      action.orderHint = hintChange[1]
+
+    // else item was removed -> do not set 'orderHint' property
+
+    actions.push(action)
+  })
+
+  return actions
+}
+
 export function actionsMapAttributes (
   diff,
   oldObj,
