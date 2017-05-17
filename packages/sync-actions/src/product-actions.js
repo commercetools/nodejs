@@ -107,12 +107,9 @@ export function actionsMapCategories (diff) {
 }
 
 export function actionsMapCategoryOrderHints (diff) {
-  const actions = []
-  if (!diff.categoryOrderHints) return actions
+  if (!diff.categoryOrderHints) return []
 
-  const categoryIds = Object.keys(diff.categoryOrderHints)
-
-  categoryIds.forEach((categoryId) => {
+  return Object.keys(diff.categoryOrderHints).map((categoryId) => {
     const hintChange = diff.categoryOrderHints[categoryId]
 
     const action = {
@@ -128,10 +125,8 @@ export function actionsMapCategoryOrderHints (diff) {
 
     // else item was removed -> do not set 'orderHint' property
 
-    actions.push(action)
+    return action
   })
-
-  return actions
 }
 
 export function actionsMapAttributes (
