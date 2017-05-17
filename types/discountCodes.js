@@ -1,13 +1,35 @@
 /* @flow */
 
-export type loggerOptions = {
+/* Discount Codes */
+export type CodeData = {
+  name?: Object;
+  description?: Object;
+  cartDiscounts: Array<string>;
+  cartPredicate?: string;
+  isActive: boolean;
+  maxApplications?: number;
+  maxApplicationsPerCustomer?: number;
+  code?: string;
+}
+
+export type CodeDataArray = Array<CodeData>
+
+export type CodeOptions = {
+  quantity: number;
+  length?: number;
+  prefix?: string;
+}
+
+/* Logger */
+export type LoggerOptions = {
   error: () => mixed;
   info: () => mixed;
   warn: () => mixed;
   verbose: () => mixed;
 }
 
-export type apiConfigOptions = {
+/* Config */
+export type ApiConfigOptions = {
   oauthUri: string;
   projectKey: string;
   credentials?: {
@@ -18,4 +40,4 @@ export type apiConfigOptions = {
   apiUrl: string;
 }
 
-export type chunkOptions = Array<Object>
+export type ChunkOptions = Array<Object>
