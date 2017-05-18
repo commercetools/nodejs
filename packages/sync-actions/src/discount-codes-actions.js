@@ -12,9 +12,6 @@ export const baseActionsList = [
     action: 'setMaxApplicationsPerCustomer',
     key: 'maxApplicationsPerCustomer',
   },
-]
-
-export const referenceActionsList = [
   { action: 'changeCartDiscounts', key: 'cartDiscounts' },
 ]
 

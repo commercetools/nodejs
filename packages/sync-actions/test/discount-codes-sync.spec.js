@@ -1,8 +1,5 @@
 import discountCodesSyncFn, { actionGroups } from '../src/discount-codes'
-import {
-  baseActionsList,
-  referenceActionsList,
-} from '../src/discount-codes-actions'
+import { baseActionsList } from '../src/discount-codes-actions'
 
 describe('Exports', () => {
   it('action group list', () => {
@@ -20,12 +17,8 @@ describe('Exports', () => {
         action: 'setMaxApplicationsPerCustomer',
         key: 'maxApplicationsPerCustomer',
       },
-    ])
-  })
-
-  it('correctly defines reference Actions List', () => {
-    expect(referenceActionsList).toEqual([
       { action: 'changeCartDiscounts', key: 'cartDiscounts' },
+
     ])
   })
 })
@@ -123,17 +116,25 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  xit('should build `changeCartDiscounts` action', () => {
+  it('should build `changeCartDiscounts` action', () => {
     const before = {
       cartDiscounts: [
         {
           typeId: 'previous-cart-discount',
           id: 'previous-cart-discount-id',
         },
+        {
+          typeId: 'another-previous-cart-discount',
+          id: 'another-previous-cart-discount-id',
+        },
       ],
     }
     const now = {
       cartDiscounts: [
+        {
+          typeId: 'previous-cart-discount',
+          id: 'previous-cart-discount-id',
+        },
         {
           typeId: 'new-cart-discount-1',
           id: 'new-cart-discount-id-1',
@@ -141,6 +142,10 @@ describe('Actions', () => {
         {
           typeId: 'new-cart-discount-2',
           id: 'new-cart-discount-id-2',
+        },
+        {
+          typeId: 'another-new-cart-discount-2',
+          id: 'another-new-cart-discount-id-2',
         },
       ],
     }
@@ -151,12 +156,20 @@ describe('Actions', () => {
         action: 'changeCartDiscounts',
         cartDiscounts: [
           {
+            typeId: 'previous-cart-discount',
+            id: 'previous-cart-discount-id',
+          },
+          {
             typeId: 'new-cart-discount-1',
             id: 'new-cart-discount-id-1',
           },
           {
             typeId: 'new-cart-discount-2',
             id: 'new-cart-discount-id-2',
+          },
+          {
+            typeId: 'another-new-cart-discount-2',
+            id: 'another-new-cart-discount-id-2',
           },
         ],
       },
