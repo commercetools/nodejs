@@ -51,8 +51,11 @@ describe('CsvParserPrice::parse', () => {
 
     const outputStream = streamtest['v2'].toText((error, result) => {
       const prices = JSON.parse(result).prices
+      const price = prices[0].prices[0]
       expect(prices.length).toBe(2)
       expect(prices[0].sku).toBeTruthy()
+      expect(price.value.centAmount).toBeTruthy()
+      expect(price.value.currencyCode).toBeTruthy()
       done()
     })
     csvParserPrice.parse(readStream, outputStream)
