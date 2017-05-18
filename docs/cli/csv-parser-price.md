@@ -32,6 +32,8 @@ Options:
                                                                [default: "info"]
 ```
 
+Note that when the stdout is used as an output stream only log messages with an error logLevel are printed out except the JSON output. 
+
 ### JS
 ```js
 const fs = require('fs');

@@ -9,6 +9,7 @@ import CsvParserPrice from './main'
 import { version } from '../package.json'
 
 process.title = 'csvparserprice'
+let minLogLevel = 'info'
 
 const args = yargs
   .usage(
@@ -50,6 +51,7 @@ Convert commercetools price CSV data to JSON.`,
     if (arg !== 'stdout')
       return fs.createWriteStream(String(arg))
 
+    minLogLevel = 'error'
     return process.stdout
   })
 
@@ -85,13 +87,11 @@ Convert commercetools price CSV data to JSON.`,
   })
 
   .option('logLevel', {
-    default: 'info',
     describe: 'Logging level: error, warn, info or verbose.',
   })
-  .coerce('logLevel', (arg) => {
-    npmlog.level = arg
-  })
   .argv
+
+npmlog.level = args.logLevel || minLogLevel
 
 const logError = (error) => {
   const errorFormatter = new PrettyError()
