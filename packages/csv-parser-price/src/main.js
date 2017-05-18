@@ -93,6 +93,7 @@ export default class CsvParserPrice {
       if (value.centAmount)
         return {
           centAmount: Number(value.centAmount),
+          currencyCode: value.currencyCode,
         }
 
       return value
