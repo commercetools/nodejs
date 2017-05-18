@@ -18,6 +18,17 @@ function createDiscountCodesMapActions (mapActionGroup) {
 }
 
 export default (config) => {
+  // config contains information about which action groups
+  // are white/black listed
+
+  // createMapActionGroup returns function 'mapActionGroup' that takes params:
+  // - action group name
+  // - callback function that should return a list of actions that correspond
+  //    to the for the action group
+
+  // this resulting function mapActionGroup will call the callback function
+  // for whitelisted action groups and return the return value of the callback
+  // It will return an empty array for blacklisted action groups
   const mapActionGroup = createMapActionGroup(config)
   const doMapActions = createDiscountCodesMapActions(mapActionGroup)
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
