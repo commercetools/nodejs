@@ -58,6 +58,8 @@ const options = {
 const requestBuilder = createRequestBuilder(options)
 ```
 
+Note that `markMatchingVariants` is set by default to `false` which turns off this feature on the API. 
+  
 #### Version
 
 It is also possible to append the version of a resource to the uri when making a request that requires this (for example a `DELETE` request). This can be done by passing the required version to the `.withVersion()` method.
