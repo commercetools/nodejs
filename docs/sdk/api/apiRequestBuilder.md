@@ -34,7 +34,7 @@ A _service_ is created by defining its `features`. Features give a service speci
 - `queryOne`: allows to query a single resource (`byId`)
 - `queryExpand`: allows to use reference expansion (`expand`)
 - `search`: allows to use search capabilities (`text`, `fuzzy`, `fuzzyLevel`, `facet`, `markMatchingVariants`, `filter`, `filterByQuery`, `filterByFacets`)
-- `projection`: allows to use projections capabilities (`staged`)
+- `projection`: allows to use projections capabilities (`staged`, `priceCurrency`, `priceCountry`, `priceCustomerGroup`, `priceChannel`)
 - `suggest`: allows to use suggest capabilities (`searchKeywords`)
 
 ```js
