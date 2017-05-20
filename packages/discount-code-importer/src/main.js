@@ -1,11 +1,10 @@
 /* @flow */
-
 import type {
   LoggerOptions,
-  ApiConfigOptions,
   ChunkOptions,
   CodeDataArray,
   CodeData,
+  ConstructorOptions,
 } from 'types/discountCodes'
 import npmlog from 'npmlog'
 import Promise from 'bluebird'
@@ -15,31 +14,32 @@ import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createAuthMiddlewareForClientCredentialsFlow }
   from '@commercetools/sdk-middleware-auth'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
-import { createQueueMiddleware } from '@commercetools/sdk-middleware-queue'
 import { createUserAgentMiddleware }
   from '@commercetools/sdk-middleware-user-agent'
+import { createSyncDiscountCodes } from '@commercetools/sync-actions'
 import { version } from '../package.json'
 
 export default class CodeImport {
   constructor (
     logger: LoggerOptions,
-    apiConfig: ApiConfigOptions,
-    batchSize: number,
+    options: ConstructorOptions,
   ) {
+    this.batchSize = options.batchSize || 50
+    this.apiConfig = options.apiConfig
+    this.continueOnProblems = options.continueOnProblems || false
+
     this.client = createClient({
       middlewares: [
-        createAuthMiddlewareForClientCredentialsFlow(apiConfig),
+        createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
         createUserAgentMiddleware({
           libraryName: 'discount-code-importer',
           libraryVersion: version,
         }),
-        createHttpMiddleware({ host: apiConfig.apiUrl }),
-        createQueueMiddleware({}),
+        createHttpMiddleware({ host: this.apiConfig.apiUrl }),
       ],
     })
 
-    this.apiConfig = apiConfig
-    this.batchSize = batchSize || 50
+    this.syncDiscountCodes = createSyncDiscountCodes()
 
     this.logger = logger || {
       error: npmlog.error.bind(this, ''),
@@ -47,6 +47,13 @@ export default class CodeImport {
       info: npmlog.info.bind(this, ''),
       verbose: npmlog.verbose.bind(this, ''),
     }
+    this._resetSummary()
+  }
+
+  // Use static method because this is not called on any instance
+  static _buildPredicate (codeObjects: CodeDataArray): string {
+    const predicateArray = codeObjects.map(codeObject => codeObject.code)
+    return `code in ("${predicateArray.join('", "')}")`
   }
 
   performStream (chunk: ChunkOptions, cb: () => mixed) {
@@ -60,13 +67,14 @@ export default class CodeImport {
     const batchedList = _.chunk(codes, this.batchSize)
     return Promise.map(batchedList, (codeObjects: CodeDataArray) => {
       // Build predicate and fetch existing code
-      const predicate = _buildPredicate(batchedList)
+      const predicate = CodeImport._buildPredicate(batchedList)
       const service = createRequestBuilder({
         projectKey: this.apiConfig.projectKey,
       })
-      let uri = service.discountCodes.where(predicate).build()
-      // Add limit to uri to fetch the `batchSize` amount of codes
-      uri += `&limit=${this.batchSize}`
+      const uri = service.discountCodes
+        .where(predicate)
+        .perPage(this.batchSize)
+        .build()
       return this.client.execute({
         uri,
         method: 'GET',
@@ -84,10 +92,39 @@ export default class CodeImport {
     return Promise.map(newCodes, (newCode: CodeData) => {
       const existingCode = _.find(existingCodes, ['code', newCode.code])
       if (existingCode)
-        this._update(newCode, existingCode)
-      else
-        this._create(newCode)
+        return this._update(newCode, existingCode)
+          .then(() => {
+            this._summary.updated += 1
+            return Promise.resolve()
+          })
+          .catch((error) => {
+            if (this.continueOnProblems) {
+              this._summary.errorCount += 1
+              this._summary.errors.push(error)
+              const msg = 'Error occured and ignored. See summary for details'
+              this.logger.warn(msg)
+              return Promise.resolve()
+            }
+            this._summary.errorCount += 1
+            this._summary.errors.push(error)
+            return Promise.reject(error)
+          })
+      return this._create(newCode)
+    }, { concurrency: 1 })
+  }
+
+  _update (newCode: CodeData, existingCode: CodeData) {
+    const service = createRequestBuilder({
+      projectKey: this.apiConfig.projectKey,
     })
+    const actions = this.syncDiscountCodes.buildActions(newCode, existingCode)
+    const uri = service.discountCodes.byId(existingCode.id).build()
+    const req = {
+      uri,
+      method: 'POST',
+      body: { version: existingCode.version, actions },
+    }
+    return this.client.execute(req)
   }
 
   _create (code: CodeData) {
@@ -101,16 +138,16 @@ export default class CodeImport {
       body: code,
     }
     return this.client.execute(req)
-      .then(() => {
-        Promise.resolve()
-      })
-      .catch((error) => {
-        Promise.reject({ error })
-      })
   }
-}
 
-export function _buildPredicate (codeObjects: CodeDataArray): string {
-  const predicateArray = codeObjects.map(codeObject => codeObject.code)
-  return `code in ("${predicateArray.join('", "')}")`
+  _resetSummary () {
+    this._summary = {
+      imported: 0,
+      notImported: 0,
+      updated: 0,
+      errorCount: 0,
+      errors: [],
+    }
+    return this._summary
+  }
 }

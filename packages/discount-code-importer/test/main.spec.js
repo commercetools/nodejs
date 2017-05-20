@@ -1,13 +1,13 @@
 import fs from 'fs'
 import path from 'path'
-import CodeImport, { _buildPredicate } from '../src/main'
+import CodeImport from '../src/main'
 
 describe('DiscountCodeImporter', () => {
   const logger = {
-    error: console.error,
-    warn: console.log,
-    info: console.log,
-    verbose: console.log,
+    error: () => {},
+    warn: () => {},
+    info: () => {},
+    verbose: () => {},
   }
 
   const codes = JSON.parse(
@@ -16,8 +16,13 @@ describe('DiscountCodeImporter', () => {
 
   let codeImport
   beforeEach(() => {
-    codeImport = new CodeImport(logger, { projectKey: 'asafaelhn' })
+    codeImport = new CodeImport(logger, {
+      apiConfig: {
+        projectKey: 'asafaelhn',
+      },
+    })
   })
+
   it('should be a function', () => {
     expect(typeof CodeImport).toBe('function')
   })
@@ -27,6 +32,7 @@ describe('DiscountCodeImporter', () => {
     expect(codeImport.client).toBeDefined()
     expect(codeImport.apiConfig).toBeDefined()
     expect(codeImport.batchSize).toBeDefined()
+    expect(codeImport._summary).toBeDefined()
   })
 
   describe('::performStream', () => {
@@ -56,6 +62,19 @@ describe('DiscountCodeImporter', () => {
     })
   })
 
+  describe('::_buildPredicate', () => {
+    it('should be defined', () => {
+      expect(CodeImport._buildPredicate).toBeDefined()
+    })
+
+    it('should build predicate with codes from array of code objects', () => {
+      const predicate = CodeImport._buildPredicate(codes)
+      expect(predicate).toMatch(
+        'code in ("WILzALjj417", "WILBZ2UYol8", "WIL1EEWHOnY")',
+      )
+    })
+  })
+
   describe('::_processBatches', () => {
     it('should be defined', () => {
       expect(codeImport._processBatches).toBeDefined()
@@ -77,14 +96,15 @@ describe('DiscountCodeImporter', () => {
   describe('::_createOrUpdate', () => {
     const existingCodes = codes.slice(0, 2)
     beforeEach(() => {
-      codeImport._update = jest.fn()
-      codeImport._create = jest.fn()
+      codeImport._create = jest.fn(() => Promise.resolve())
+      codeImport._update = jest.fn(() => Promise.resolve())
     })
 
     it('should be defined', () => {
       expect(codeImport._createOrUpdate).toBeDefined()
     })
-    it('should call `_update` for every code that already exists', async () => {
+
+    it('should call `_update` if code already exists', async () => {
       await codeImport._createOrUpdate(codes, existingCodes)
       expect(codeImport._update).toHaveBeenCalledTimes(2)
       expect(codeImport._update).toHaveBeenCalledWith(
@@ -96,7 +116,46 @@ describe('DiscountCodeImporter', () => {
         existingCodes[1],
       )
     })
-    it('should call `_create` for every unique code', async () => {
+
+    it('should resolve if code is updated', async () => {
+      await codeImport._createOrUpdate(codes, existingCodes)
+      expect(codeImport._summary.updated).toBe(2)
+    })
+
+    it('should continue on errors if `continueOnProblems` is set', async () => {
+      codeImport.continueOnProblems = true
+      codeImport._update.mockImplementationOnce(
+        () => Promise.reject('First invalid code'),
+      )
+      codeImport._update.mockImplementationOnce(
+        () => Promise.reject('Second invalid code'),
+      )
+      await codeImport._createOrUpdate(codes, existingCodes)
+      expect(codeImport._update).toHaveBeenCalledTimes(2)
+      expect(codeImport._summary.updated).toBe(0)
+      expect(codeImport._summary.errorCount).toBe(2)
+      expect(codeImport._summary.errors.length).toBe(2)
+      expect(codeImport._summary.errors[0]).toBe('First invalid code')
+      expect(codeImport._summary.errors[1]).toBe('Second invalid code')
+    })
+
+    it('should reject by default and stop on update error', async () => {
+      codeImport._update.mockImplementationOnce(
+        () => Promise.reject('Invalid code'),
+      )
+      try {
+        await codeImport._createOrUpdate(codes, existingCodes)
+      } catch (error) {
+        expect(codeImport._update).toHaveBeenCalledTimes(1)
+        expect(codeImport._summary.updated).toBe(0)
+        expect(codeImport._summary.errorCount).toBe(1)
+        expect(codeImport._summary.errors.length).toBe(1)
+        expect(codeImport._summary.errors[0]).toBe('Invalid code')
+        expect(error).toMatch('Invalid code')
+      }
+    })
+
+    it('should call `_create` if code is unique', async () => {
       await codeImport._createOrUpdate(codes, existingCodes)
       expect(codeImport._create).toHaveBeenCalledTimes(1)
       expect(codeImport._create).toHaveBeenCalledWith(
@@ -105,16 +164,28 @@ describe('DiscountCodeImporter', () => {
     })
   })
 
-  describe('::_buildPredicate', () => {
+  describe('::_update', () => {
     it('should be defined', () => {
-      expect(_buildPredicate).toBeDefined()
+      expect(codeImport._update).toBeDefined()
     })
 
-    it('should build predicate with codes from array of code objects', () => {
-      const predicate = _buildPredicate(codes)
-      expect(predicate).toMatch(
-        'code in ("WILzALjj417", "WILBZ2UYol8", "WIL1EEWHOnY")',
-      )
+    it('should POST a discount code update', () => {
+      const currentCode = { ...codes[1], id: 'some_Id' }
+      codeImport.client.execute = jest.fn(() => Promise.resolve())
+      codeImport._update(codes[0], currentCode)
+      expect(codeImport.client.execute).toHaveBeenCalled()
+    })
+  })
+
+  describe('::_create', () => {
+    it('should be defined', () => {
+      expect(codeImport._create).toBeDefined()
+    })
+
+    it('should POST a new discount code', () => {
+      codeImport.client.execute = jest.fn(() => Promise.resolve())
+      codeImport._create(codes[0], codes[1])
+      expect(codeImport.client.execute).toHaveBeenCalled()
     })
   })
 })

@@ -40,4 +40,10 @@ export type ApiConfigOptions = {
   apiUrl: string;
 }
 
+export type ConstructorOptions = {
+  apiConfig: ApiConfigOptions;
+  batchSize?: number;
+  continueOnProblems?: boolean;
+}
+
 export type ChunkOptions = Array<Object>
