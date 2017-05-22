@@ -24,10 +24,12 @@ export default class CodeImport {
     logger: LoggerOptions,
     options: ConstructorOptions,
   ) {
-    this.batchSize = options.batchSize || 50
+    this.batchSize = options.batchSize || 100
     this.apiConfig = options.apiConfig
     this.continueOnProblems = options.continueOnProblems || false
-
+    // TODO: Add token to Bearer in requests if avaiable
+    // Authorization: `Bearer ${this.accessToken}`
+    this.accessToken = options.accessToken
     this.client = createClient({
       middlewares: [
         createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
@@ -67,7 +69,7 @@ export default class CodeImport {
     const batchedList = _.chunk(codes, this.batchSize)
     return Promise.map(batchedList, (codeObjects: CodeDataArray) => {
       // Build predicate and fetch existing code
-      const predicate = CodeImport._buildPredicate(batchedList)
+      const predicate = CodeImport._buildPredicate(codeObjects)
       const service = createRequestBuilder({
         projectKey: this.apiConfig.projectKey,
       })
@@ -81,36 +83,65 @@ export default class CodeImport {
       })
         .then((response: Object) => {
           const existingCodes = response.body.results
-          // Should return a promise signifyng if code was created or updated
-          this._createOrUpdate(codeObjects, existingCodes)
-          // TODO: Response should pass a way to update summary counter
+          return this._createOrUpdate(codeObjects, existingCodes)
         })
     }, { concurrency: 1 })
+      .then(() => {
+        // Success handler
+      })
+      .catch(() => {
+        // Error handler
+      })
   }
 
   _createOrUpdate (newCodes: CodeDataArray, existingCodes: CodeDataArray) {
+    // Set a variable to enable concurrent running to make code import faster
+    // Will still run 1 at a time if continueOnProblems is false
+    const concurrency = this.continueOnProblems ? 50 : 1
     return Promise.map(newCodes, (newCode: CodeData) => {
       const existingCode = _.find(existingCodes, ['code', newCode.code])
       if (existingCode)
         return this._update(newCode, existingCode)
-          .then(() => {
-            this._summary.updated += 1
+          .then((response) => {
+            if (response && response.statusCode === 304)
+              this._summary.unchanged += 1
+            else
+              this._summary.updated += 1
             return Promise.resolve()
           })
           .catch((error) => {
             if (this.continueOnProblems) {
-              this._summary.errorCount += 1
+              this._summary.updateErrorCount += 1
               this._summary.errors.push(error)
-              const msg = 'Error occured and ignored. See summary for details'
+              // eslint-disable-next-line max-len
+              const msg = 'Update error occured but ignored. See summary for details'
               this.logger.warn(msg)
               return Promise.resolve()
             }
-            this._summary.errorCount += 1
+            this._summary.updateErrorCount += 1
             this._summary.errors.push(error)
             return Promise.reject(error)
           })
       return this._create(newCode)
-    }, { concurrency: 1 })
+        .then(() => {
+          this._summary.created += 1
+          return Promise.resolve()
+        })
+        .catch((error) => {
+          if (this.continueOnProblems) {
+            this._summary.createErrorCount += 1
+            this._summary.errors.push(error)
+            // eslint-disable-next-line max-len
+            const msg = 'Create error occured but ignored. See summary for details'
+            // console.error(error)
+            this.logger.warn(msg)
+            return Promise.resolve()
+          }
+          this._summary.createErrorCount += 1
+          this._summary.errors.push(error)
+          return Promise.reject(error)
+        })
+    }, { concurrency })
   }
 
   _update (newCode: CodeData, existingCode: CodeData) {
@@ -118,6 +149,9 @@ export default class CodeImport {
       projectKey: this.apiConfig.projectKey,
     })
     const actions = this.syncDiscountCodes.buildActions(newCode, existingCode)
+    // don't call API if there's no update action
+    if (!actions.length)
+      return Promise.resolve({ statusCode: 304 })
     const uri = service.discountCodes.byId(existingCode.id).build()
     const req = {
       uri,
@@ -142,12 +176,42 @@ export default class CodeImport {
 
   _resetSummary () {
     this._summary = {
-      imported: 0,
-      notImported: 0,
+      created: 0,
       updated: 0,
-      errorCount: 0,
+      unchanged: 0,
+      createErrorCount: 0,
+      updateErrorCount: 0,
       errors: [],
     }
     return this._summary
+  }
+
+  summaryReport () {
+    const {
+      created,
+      updated,
+      unchanged,
+      createErrorCount,
+      updateErrorCount,
+    } = this._summary
+    let message = ''
+    if (created === 0 && updated === 0 && unchanged === 0 &&
+      createErrorCount === 0 && updateErrorCount === 0)
+      message = 'Summary: nothing to do, everything is fine'
+    else
+      // eslint-disable-next-line max-len
+      message = `Summary: there were ${created + updated} successfully imported discount codes (${created} were new, ${updated} were updates and ${unchanged} were unchanged).`
+    if (createErrorCount || updateErrorCount)
+      // eslint-disable-next-line max-len
+      message += ` ${createErrorCount + updateErrorCount} errors occured (${createErrorCount} create errors and ${updateErrorCount} update errors.)`
+    const report = {
+      reportMessage: message,
+      detailedSummary: { created,
+        updated,
+        unchanged,
+        createErrorCount,
+        updateErrorCount },
+    }
+    return report
   }
 }

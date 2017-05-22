@@ -25,7 +25,7 @@
     "lib"
   ],
   "dependencies": {
-    "@commercetools/api-request-builder": "^2.4.0",
+    "@commercetools/api-request-builder": "^3.0.0",
     "@commercetools/sdk-client": "^1.4.0",
     "@commercetools/sdk-middleware-auth": "^3.1.0",
     "@commercetools/sdk-middleware-http": "^2.1.1",

@@ -1,12 +1,12 @@
 [
  {
   "name": {
-   "en": "Sammuy",
-   "de": "Valerian"
+   "en": "Sammuy1",
+   "de": "Valerian1"
   },
   "description": {
-   "en": "greatest promo",
-   "de": "super angebot"
+   "en": "existing greatest promo",
+   "de": "existing super angebot"
   },
   "cartDiscounts": [
    {
@@ -22,12 +22,12 @@
  },
  {
   "name": {
-   "en": "Sammuy",
-   "de": "Valerian"
+   "en": "Sammuy2",
+   "de": "Valerian2"
   },
   "description": {
-   "en": "greatest promo",
-   "de": "super angebot"
+   "en": "existing greatest promo",
+   "de": "existing super angebot"
   },
   "cartDiscounts": [
    {
@@ -43,12 +43,12 @@
  },
  {
   "name": {
-   "en": "Sammuy",
-   "de": "Valerian"
+   "en": "Sammuy3",
+   "de": "Valerian3"
   },
   "description": {
-   "en": "greatest promo",
-   "de": "super angebot"
+   "en": "new greatest promo",
+   "de": "new super angebot"
   },
   "cartDiscounts": [
    {
@@ -61,5 +61,47 @@
   "maxApplications": 10,
   "maxApplicationsPerCustomer": 2,
   "code": "WIL1EEWHOnY"
+ },
+ {
+  "name": {
+   "en": "Sammuy4",
+   "de": "Valerian4"
+  },
+  "description": {
+   "en": "new greatest promo",
+   "de": "new super angebot"
+  },
+  "cartDiscounts": [
+   {
+    "typeId": "cart-discount",
+    "id": "some_ID"
+   }
+  ],
+  "cartPredicate": "lineItemTotal(1 = 1) >  \"10.00 USD\"",
+  "isActive": true,
+  "maxApplications": 10,
+  "maxApplicationsPerCustomer": 2,
+  "code": "WIopQm5d789"
+ },
+ {
+  "name": {
+   "en": "Sammuy5",
+   "de": "Valerian5"
+  },
+  "description": {
+   "en": "new greatest promo",
+   "de": "new super angebot"
+  },
+  "cartDiscounts": [
+   {
+    "typeId": "cart-discount",
+    "id": "some_ID"
+   }
+  ],
+  "cartPredicate": "lineItemTotal(1 = 1) >  \"10.00 USD\"",
+  "isActive": true,
+  "maxApplications": 10,
+  "maxApplicationsPerCustomer": 2,
+  "code": "WIopSEF55789"
  }
 ]
