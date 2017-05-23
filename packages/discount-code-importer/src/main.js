@@ -5,7 +5,13 @@ import type {
   CodeDataArray,
   CodeData,
   ConstructorOptions,
+  Summary,
 } from 'types/discountCodes'
+import type {
+  Client,
+  AuthMiddlewareOptions,
+  SyncAction,
+ } from 'types/sdk'
 import npmlog from 'npmlog'
 import Promise from 'bluebird'
 import _ from 'lodash'
@@ -20,6 +26,15 @@ import { createSyncDiscountCodes } from '@commercetools/sync-actions'
 import { version } from '../package.json'
 
 export default class DiscountCodeImport {
+  // Set flowtype annotations
+  batchSize: number;
+  continueOnProblems: boolean;
+  client: Client;
+  apiConfig: AuthMiddlewareOptions;
+  logger: LoggerOptions;
+  _summary: Summary;
+  syncDiscountCodes: SyncAction;
+
   constructor (
     logger: LoggerOptions,
     options: ConstructorOptions,
@@ -34,7 +49,7 @@ export default class DiscountCodeImport {
           libraryName: 'discount-code-importer',
           libraryVersion: version,
         }),
-        createHttpMiddleware({ host: this.apiConfig.apiUrl }),
+        createHttpMiddleware({ host: this.apiConfig.host }),
       ],
     })
 
