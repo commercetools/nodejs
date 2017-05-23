@@ -19,17 +19,14 @@ import { createUserAgentMiddleware }
 import { createSyncDiscountCodes } from '@commercetools/sync-actions'
 import { version } from '../package.json'
 
-export default class CodeImport {
+export default class DiscountCodeImport {
   constructor (
     logger: LoggerOptions,
     options: ConstructorOptions,
   ) {
-    this.batchSize = options.batchSize || 100
+    this.batchSize = options.batchSize || 50
     this.apiConfig = options.apiConfig
     this.continueOnProblems = options.continueOnProblems || false
-    // TODO: Add token to Bearer in requests if avaiable
-    // Authorization: `Bearer ${this.accessToken}`
-    this.accessToken = options.accessToken
     this.client = createClient({
       middlewares: [
         createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
@@ -69,7 +66,7 @@ export default class CodeImport {
     const batchedList = _.chunk(codes, this.batchSize)
     return Promise.map(batchedList, (codeObjects: CodeDataArray) => {
       // Build predicate and fetch existing code
-      const predicate = CodeImport._buildPredicate(codeObjects)
+      const predicate = DiscountCodeImport._buildPredicate(codeObjects)
       const service = createRequestBuilder({
         projectKey: this.apiConfig.projectKey,
       })
@@ -85,19 +82,16 @@ export default class CodeImport {
           const existingCodes = response.body.results
           return this._createOrUpdate(codeObjects, existingCodes)
         })
-    }, { concurrency: 1 })
-      .then(() => {
-        // Success handler
-      })
-      .catch(() => {
-        // Error handler
-      })
+    }, { concurrency: 1 }) // Run one batch at a time
+      .then(() => Promise.resolve(this.summaryReport()))
+      .catch(error => Promise.reject({
+        error,
+        summary: this._summary,
+      }),
+      )
   }
 
   _createOrUpdate (newCodes: CodeDataArray, existingCodes: CodeDataArray) {
-    // Set a variable to enable concurrent running to make code import faster
-    // Will still run 1 at a time if continueOnProblems is false
-    const concurrency = this.continueOnProblems ? 50 : 1
     return Promise.map(newCodes, (newCode: CodeData) => {
       const existingCode = _.find(existingCodes, ['code', newCode.code])
       if (existingCode)
@@ -133,7 +127,6 @@ export default class CodeImport {
             this._summary.errors.push(error)
             // eslint-disable-next-line max-len
             const msg = 'Create error occured but ignored. See summary for details'
-            // console.error(error)
             this.logger.warn(msg)
             return Promise.resolve()
           }
@@ -141,7 +134,7 @@ export default class CodeImport {
           this._summary.errors.push(error)
           return Promise.reject(error)
         })
-    }, { concurrency })
+    })
   }
 
   _update (newCode: CodeData, existingCode: CodeData) {
@@ -195,7 +188,7 @@ export default class CodeImport {
       updateErrorCount,
     } = this._summary
     let message = ''
-    if (created === 0 && updated === 0 && unchanged === 0 &&
+    if (created === 0 && updated === 0 &&
       createErrorCount === 0 && updateErrorCount === 0)
       message = 'Summary: nothing to do, everything is fine'
     else
@@ -206,11 +199,7 @@ export default class CodeImport {
       message += ` ${createErrorCount + updateErrorCount} errors occured (${createErrorCount} create errors and ${updateErrorCount} update errors.)`
     const report = {
       reportMessage: message,
-      detailedSummary: { created,
-        updated,
-        unchanged,
-        createErrorCount,
-        updateErrorCount },
+      detailedSummary: this._summary,
     }
     return report
   }

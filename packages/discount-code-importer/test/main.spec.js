@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import CodeImport from '../src/main'
+import DiscountCodeImport from '../src/main'
 
 describe('DiscountCodeImporter', () => {
   const logger = {
@@ -16,7 +16,7 @@ describe('DiscountCodeImporter', () => {
 
   let codeImport
   beforeEach(() => {
-    codeImport = new CodeImport(logger, {
+    codeImport = new DiscountCodeImport(logger, {
       apiConfig: {
         projectKey: 'asafaelhn',
       },
@@ -24,7 +24,7 @@ describe('DiscountCodeImporter', () => {
   })
 
   it('should be a function', () => {
-    expect(typeof CodeImport).toBe('function')
+    expect(typeof DiscountCodeImport).toBe('function')
   })
 
   it('should set default properties', () => {
@@ -64,11 +64,11 @@ describe('DiscountCodeImporter', () => {
 
   describe('::_buildPredicate', () => {
     it('should be defined', () => {
-      expect(CodeImport._buildPredicate).toBeDefined()
+      expect(DiscountCodeImport._buildPredicate).toBeDefined()
     })
 
     it('should build predicate with codes from array of code objects', () => {
-      const predicate = CodeImport._buildPredicate(codes)
+      const predicate = DiscountCodeImport._buildPredicate(codes)
       expect(predicate).toMatch(
         // eslint-disable-next-line max-len
         'code in ("WILzALjj417", "WILBZ2UYol8", "WIL1EEWHOnY", "WIopQm5d789", "WIopSEF55789")',
@@ -118,7 +118,6 @@ describe('DiscountCodeImporter', () => {
       )
     })
 
-    // TODO: Merge create and update in one test case
     it('should resolve if code is updated', async () => {
       await codeImport._createOrUpdate(codes, existingCodes)
       expect(codeImport._summary.updated).toBe(2)
@@ -133,7 +132,7 @@ describe('DiscountCodeImporter', () => {
       expect(codeImport._summary.updated).toBe(0)
     })
 
-    it('should continue on errors if `continueOnProblems` is set', async () => {
+    it('should continue update on errors if `continueOnProblems`', async () => {
       codeImport.continueOnProblems = true
       codeImport._update.mockImplementationOnce(
         () => Promise.reject('First invalid code'),
@@ -157,10 +156,11 @@ describe('DiscountCodeImporter', () => {
       try {
         await codeImport._createOrUpdate(codes, existingCodes)
       } catch (error) {
-        expect(codeImport._update).toHaveBeenCalledTimes(1)
+        // Put assertions in catch block because we expect promises to fail
+        expect(codeImport._update).toHaveBeenCalled()
         expect(codeImport._summary.updated).toBe(0)
-        expect(codeImport._summary.updateErrorCount).toBe(1)
-        expect(codeImport._summary.errors.length).toBe(1)
+        expect(codeImport._summary.updateErrorCount).toBe(2)
+        expect(codeImport._summary.errors.length).toBe(2)
         expect(codeImport._summary.errors[0]).toBe('Invalid code')
         expect(error).toMatch('Invalid code')
       }
@@ -179,7 +179,7 @@ describe('DiscountCodeImporter', () => {
       expect(codeImport._summary.created).toBe(3)
     })
 
-    it('should continue on errors if `continueOnProblems` is set', async () => {
+    it('should continue create on errors if `continueOnProblems`', async () => {
       codeImport.continueOnProblems = true
       codeImport._create.mockImplementationOnce(
         () => Promise.reject('First invalid code'),
@@ -207,10 +207,11 @@ describe('DiscountCodeImporter', () => {
       try {
         await codeImport._createOrUpdate(codes, existingCodes)
       } catch (error) {
-        expect(codeImport._create).toHaveBeenCalledTimes(1)
+        // Put assertions in catch block because we expect promises to fail
+        expect(codeImport._create).toHaveBeenCalled()
         expect(codeImport._summary.created).toBe(0)
-        expect(codeImport._summary.createErrorCount).toBe(1)
-        expect(codeImport._summary.errors.length).toBe(1)
+        expect(codeImport._summary.createErrorCount).toBe(3)
+        expect(codeImport._summary.errors.length).toBe(3)
         expect(codeImport._summary.errors[0]).toBe('Invalid new code')
         expect(error).toMatch('Invalid new code')
       }
