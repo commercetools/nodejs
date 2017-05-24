@@ -80,8 +80,7 @@ export default function buildQueryString (
       queryString.push('fuzzy=true')
     if (fuzzyLevel)
       queryString.push(`fuzzyLevel=${fuzzyLevel}`)
-    if (markMatchingVariants)
-      queryString.push('markMatchingVariants=true')
+    queryString.push(`markMatchingVariants=${markMatchingVariants.toString()}`)
 
     facet.forEach(f => queryString.push(`facet=${f}`))
     filter.forEach(f => queryString.push(`filter=${f}`))
