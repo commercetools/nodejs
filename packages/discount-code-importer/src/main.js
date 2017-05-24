@@ -23,7 +23,7 @@ import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createUserAgentMiddleware }
   from '@commercetools/sdk-middleware-user-agent'
 import { createSyncDiscountCodes } from '@commercetools/sync-actions'
-import { version } from '../package.json'
+import pkg from '../package.json'
 
 export default class DiscountCodeImport {
   // Set flowtype annotations
@@ -39,15 +39,18 @@ export default class DiscountCodeImport {
     logger: LoggerOptions,
     options: ConstructorOptions,
   ) {
-    this.batchSize = options.batchSize || 50
+    if (!options.apiConfig)
+      throw new Error('The contructor must be passed an `apiConfig` object')
+
     this.apiConfig = options.apiConfig
+    this.batchSize = options.batchSize || 50
     this.continueOnProblems = options.continueOnProblems || false
     this.client = createClient({
       middlewares: [
         createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
         createUserAgentMiddleware({
           libraryName: 'discount-code-importer',
-          libraryVersion: version,
+          libraryVersion: pkg.version,
         }),
         createHttpMiddleware({ host: this.apiConfig.host }),
       ],
@@ -123,9 +126,12 @@ export default class DiscountCodeImport {
               this._summary.errors.push(error)
               // eslint-disable-next-line max-len
               const msg = 'Update error occured but ignored. See summary for details'
-              this.logger.warn(msg)
+              this.logger.error(msg)
               return Promise.resolve()
             }
+            // eslint-disable-next-line max-len
+            const msg = 'Process stopped due to error while creating discount code. See summary for details'
+            this.logger.error(msg)
             this._summary.updateErrorCount += 1
             this._summary.errors.push(error)
             return Promise.reject(error)
@@ -141,9 +147,12 @@ export default class DiscountCodeImport {
             this._summary.errors.push(error)
             // eslint-disable-next-line max-len
             const msg = 'Create error occured but ignored. See summary for details'
-            this.logger.warn(msg)
+            this.logger.error(msg)
             return Promise.resolve()
           }
+          // eslint-disable-next-line max-len
+          const msg = 'Process stopped due to error while creating discount code. See summary for details'
+          this.logger.error(msg)
           this._summary.createErrorCount += 1
           this._summary.errors.push(error)
           return Promise.reject(error)
@@ -154,8 +163,7 @@ export default class DiscountCodeImport {
   _update (newCode: CodeData, existingCode: CodeData) {
     const actions = this.syncDiscountCodes.buildActions(newCode, existingCode)
     // don't call API if there's no update action
-    if (!actions.length)
-      return Promise.resolve({ statusCode: 304 })
+    if (!actions.length) return Promise.resolve({ statusCode: 304 })
     const service = this._createService()
     const uri = service.byId(existingCode.id).build()
     const req = {
@@ -163,6 +171,7 @@ export default class DiscountCodeImport {
       method: 'POST',
       body: { version: existingCode.version, actions },
     }
+    this.logger.verbose('Updating existing code entry')
     return this.client.execute(req)
   }
 
@@ -174,6 +183,7 @@ export default class DiscountCodeImport {
       method: 'POST',
       body: code,
     }
+    this.logger.verbose('Creating new code entry')
     return this.client.execute(req)
   }
 
@@ -209,7 +219,7 @@ export default class DiscountCodeImport {
       message = 'Summary: nothing to do, everything is fine'
     else
       // eslint-disable-next-line max-len
-      message = `Summary: there were ${created + updated} successfully imported discount codes (${created} were new, ${updated} were updates and ${unchanged} were unchanged).`
+      message = `Summary: there were ${created + updated} successfully imported discount codes (${created} were newly created, ${updated} were updated and ${unchanged} were unchanged).`
     if (createErrorCount || updateErrorCount)
       // eslint-disable-next-line max-len
       message += ` ${createErrorCount + updateErrorCount} errors occured (${createErrorCount} create errors and ${updateErrorCount} update errors.)`

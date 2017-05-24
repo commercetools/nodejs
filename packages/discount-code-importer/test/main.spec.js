@@ -23,16 +23,24 @@ describe('DiscountCodeImporter', () => {
     })
   })
 
-  it('should be a function', () => {
-    expect(typeof DiscountCodeImport).toBe('function')
-  })
+  describe('::constructor', () => {
+    it('should be a function', () => {
+      expect(typeof DiscountCodeImport).toBe('function')
+    })
 
-  it('should set default properties', () => {
-    expect(codeImport.logger).toEqual(logger)
-    expect(codeImport.client).toBeDefined()
-    expect(codeImport.apiConfig).toBeDefined()
-    expect(codeImport.batchSize).toBeDefined()
-    expect(codeImport._summary).toBeDefined()
+    it('should set default properties', () => {
+      expect(codeImport.logger).toEqual(logger)
+      expect(codeImport.client).toBeDefined()
+      expect(codeImport.apiConfig).toBeDefined()
+      expect(codeImport.batchSize).toBeDefined()
+      expect(codeImport._summary).toBeDefined()
+    })
+
+    it('should throw if no `apiConfig` in `options` parameter', () => {
+      expect(() => new DiscountCodeImport(logger, { foo: 'bar' })).toThrow(
+        /The contructor must be passed an `apiConfig` object/,
+      )
+    })
   })
 
   describe('::processStream', () => {
