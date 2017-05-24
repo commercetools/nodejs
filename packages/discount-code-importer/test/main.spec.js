@@ -35,9 +35,9 @@ describe('DiscountCodeImporter', () => {
     expect(codeImport._summary).toBeDefined()
   })
 
-  describe('::performStream', () => {
+  describe('::processStream', () => {
     it('should be defined', () => {
-      expect(codeImport.performStream).toBeDefined()
+      expect(codeImport.processStream).toBeDefined()
     })
 
     it('should call callback when done', (done) => {
@@ -46,19 +46,7 @@ describe('DiscountCodeImporter', () => {
       const myMockCallback = jest.fn(() => {
         done()
       })
-      codeImport.performStream('foo', myMockCallback)
-    })
-
-    it('should call callback with error if error', (done) => {
-      codeImport._processBatches = jest.fn()
-      codeImport._processBatches.mockReturnValue(
-        Promise.reject({ body: 'some' }),
-      )
-      const myMockCallback = jest.fn((err) => {
-        expect(err).toBe('some')
-        done()
-      })
-      codeImport.performStream('foo', myMockCallback)
+      codeImport.processStream('foo', myMockCallback)
     })
   })
 
@@ -248,6 +236,12 @@ describe('DiscountCodeImporter', () => {
       codeImport.client.execute = jest.fn(() => Promise.resolve())
       await codeImport._create(codes[0], codes[1])
       expect(codeImport.client.execute).toHaveBeenCalled()
+    })
+  })
+
+  describe('::_createService', () => {
+    it('should be defined', () => {
+      expect(codeImport._createService).toBeDefined()
     })
   })
 })

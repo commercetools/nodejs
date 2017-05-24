@@ -66,26 +66,26 @@ export default class DiscountCodeImport {
 
   // Use static method because this is not called on any instance
   static _buildPredicate (codeObjects: CodeDataArray): string {
-    const predicateArray = codeObjects.map(codeObject => codeObject.code)
+    const predicateArray = _.map(codeObjects, 'code')
     return `code in ("${predicateArray.join('", "')}")`
   }
 
-  performStream (chunk: ChunkOptions, cb: () => mixed) {
-    this._processBatches(chunk)
+  // Wrapper function for compatibility with CLI
+  processStream (chunk: ChunkOptions, cb: () => mixed) {
+    this.logger.info('Starting conversion')
+    return this._processBatches(chunk)
       .then(() => cb())
-      .catch(err => cb(err.body))
+      // No catch block as errors will be caught in the CLI
   }
 
   _processBatches (codes: CodeDataArray) {
     // Batch to `batchSize` to reduce necessary fetch API calls
     const batchedList = _.chunk(codes, this.batchSize)
-    return Promise.map(batchedList, (codeObjects: CodeDataArray) => {
+    return Promise.mapSeries(batchedList, (codeObjects: CodeDataArray) => {
       // Build predicate and fetch existing code
       const predicate = DiscountCodeImport._buildPredicate(codeObjects)
-      const service = createRequestBuilder({
-        projectKey: this.apiConfig.projectKey,
-      })
-      const uri = service.discountCodes
+      const service = this._createService()
+      const uri = service
         .where(predicate)
         .perPage(this.batchSize)
         .build()
@@ -93,11 +93,10 @@ export default class DiscountCodeImport {
         uri,
         method: 'GET',
       })
-        .then((response: Object) => {
-          const existingCodes = response.body.results
-          return this._createOrUpdate(codeObjects, existingCodes)
-        })
-    }, { concurrency: 1 }) // Run one batch at a time
+        .then(({ body: { results: existingCodes } }: Object) => (
+          this._createOrUpdate(codeObjects, existingCodes)
+        ))
+    })
       .then(() => Promise.resolve(this.summaryReport()))
       .catch(error => Promise.reject({
         error,
@@ -153,14 +152,12 @@ export default class DiscountCodeImport {
   }
 
   _update (newCode: CodeData, existingCode: CodeData) {
-    const service = createRequestBuilder({
-      projectKey: this.apiConfig.projectKey,
-    })
     const actions = this.syncDiscountCodes.buildActions(newCode, existingCode)
     // don't call API if there's no update action
     if (!actions.length)
       return Promise.resolve({ statusCode: 304 })
-    const uri = service.discountCodes.byId(existingCode.id).build()
+    const service = this._createService()
+    const uri = service.byId(existingCode.id).build()
     const req = {
       uri,
       method: 'POST',
@@ -170,16 +167,20 @@ export default class DiscountCodeImport {
   }
 
   _create (code: CodeData) {
-    const service = createRequestBuilder({
-      projectKey: this.apiConfig.projectKey,
-    })
-    const uri = service.discountCodes.build()
+    const service = this._createService()
+    const uri = service.build()
     const req = {
       uri,
       method: 'POST',
       body: code,
     }
     return this.client.execute(req)
+  }
+
+  _createService () {
+    return createRequestBuilder({
+      projectKey: this.apiConfig.projectKey,
+    }).discountCodes
   }
 
   _resetSummary () {
@@ -212,10 +213,9 @@ export default class DiscountCodeImport {
     if (createErrorCount || updateErrorCount)
       // eslint-disable-next-line max-len
       message += ` ${createErrorCount + updateErrorCount} errors occured (${createErrorCount} create errors and ${updateErrorCount} update errors.)`
-    const report = {
+    return {
       reportMessage: message,
       detailedSummary: this._summary,
     }
-    return report
   }
 }
