@@ -1,4 +1,4 @@
-# Discount Code Generator
+\# Discount Code Generator
 
 Generate unique discount codes to be imported to the [commercetools platform](https://dev.commercetools.com/). See usage below
 
@@ -7,7 +7,7 @@ Generate unique discount codes to be imported to the [commercetools platform](ht
 
 ### CLI
 ```
-Usage: discountCodeGenerator [options]
+Usage: discount-code-gen [options]
 
 Options:
   --help, -h                 Show help text.                                                     [boolean]
@@ -19,6 +19,7 @@ Options:
   --output, -o               Path to store generated output file.                      [default: "stdout"]
   --delimiter, -d            Used CSV delimiter for input and/or output file.               [default: ","]
   --multivalueDelimiter, -m  Used CSV delimiter in multivalue fields for input/output file. [default: ";"]
+  --logLevel,                Logging level: error, warn, info or verbose.                [default: "info"]
 ```
 
 #### Info on flags
