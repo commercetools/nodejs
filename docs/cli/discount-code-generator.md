@@ -1,4 +1,4 @@
-\# Discount Code Generator
+# Discount Code Generator
 
 Generate unique discount codes to be imported to the [commercetools platform](https://dev.commercetools.com/). See usage below
 
