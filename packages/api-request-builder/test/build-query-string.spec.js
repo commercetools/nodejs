@@ -14,6 +14,8 @@ describe('buildQueryString', () => {
         encodeURIComponent('categories[*]'),
       ],
       staged: false,
+      priceCurrency: 'EUR',
+      priceCountry: 'DE',
       pagination: {
         page: 3,
         perPage: 10,
@@ -56,6 +58,8 @@ describe('buildQueryString', () => {
     /* eslint-disable max-len*/
     const expectedQueryString =
     'staged=false&' +
+    'priceCurrency=EUR&' +
+    'priceCountry=DE&' +
     'expand=productType&' +
     `expand=${encodeURIComponent('categories[*]')}&` +
     `where=${encodeURIComponent('name(en = "Foo") or name(en = "Bar") and categories(id = "123")')}&` +

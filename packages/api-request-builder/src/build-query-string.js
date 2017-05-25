@@ -16,11 +16,34 @@ export default function buildQueryString (
   if (!params)
     throw new Error('Missing options object to build query string.')
 
-  const { query, pagination, search, expand, staged, searchKeywords } = params
+  const {
+    query,
+    pagination,
+    search,
+    expand,
+    staged,
+    priceCurrency,
+    priceCountry,
+    priceCustomerGroup,
+    priceChannel,
+    searchKeywords,
+  } = params
   let queryString = []
 
   if (typeof staged === 'boolean')
     queryString.push(`staged=${staged.toString()}`)
+
+  if (priceCurrency)
+    queryString.push(`priceCurrency=${priceCurrency}`)
+
+  if (priceCountry)
+    queryString.push(`priceCountry=${priceCountry}`)
+
+  if (priceCustomerGroup)
+    queryString.push(`priceCustomerGroup=${priceCustomerGroup}`)
+
+  if (priceChannel)
+    queryString.push(`priceChannel=${priceChannel}`)
 
   if (expand && expand.length)
     queryString = queryString.concat(expand.map(e => `expand=${e}`))
