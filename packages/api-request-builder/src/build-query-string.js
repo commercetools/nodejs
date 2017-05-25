@@ -57,7 +57,7 @@ export default function buildQueryString (
 
   if (pagination) {
     const { page, perPage, sort } = pagination
-    if (perPage)
+    if (typeof perPage === 'number')
       queryString.push(`limit=${perPage}`)
     if (page) {
       const limitParam = perPage || 20
