@@ -3,7 +3,7 @@
 /* Client */
 export type ClientRequest = {
   uri: string;
-  method: MethodType;
+  method: string;
   body?: string | Object;
   headers?: {
     [key: string]: string;
@@ -46,8 +46,8 @@ export type ProcessOptions = {
 /* Middlewares */
 export type MiddlewareRequest = ClientRequest;
 export type MiddlewareResponse = {
-  resolve(): void;
-  reject(): void;
+  resolve(response: Object): void;
+  reject(error: Object): void;
   body?: Object;
   error?: HttpErrorType;
   statusCode: number;
