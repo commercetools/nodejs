@@ -1,2 +1,2 @@
 codecov:
-  allow_coverage_offsets: false
+  allow_coverage_offsets: true
