@@ -34,8 +34,7 @@ export function page (value: number): Object {
   if (typeof value !== 'number' && !value)
     throw new Error('Required argument for `page` is missing or invalid')
 
-  if (typeof value !== 'number' ||
-    (typeof value === 'number' && value < 1))
+  if (typeof value !== 'number' || value < 1)
     throw new Error('Required argument for `page` must be a number >= 1')
 
   this.params.pagination.page = value
@@ -55,8 +54,7 @@ export function perPage (value: number): Object {
   if (typeof value !== 'number' && !value)
     throw new Error('Required argument for `perPage` is missing or invalid')
 
-  if (typeof value !== 'number' ||
-    (typeof value === 'number' && value < 0))
+  if (typeof value !== 'number' || value < 0)
     throw new Error('Required argument for `perPage` must be a number >= 0')
 
   this.params.pagination.perPage = value
