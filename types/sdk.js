@@ -1,9 +1,12 @@
 /* @flow */
 
+// eslint-disable-next-line max-len
+export type MethodType = 'GET' | 'POST' | 'DELETE' | 'HEAD' | 'OPTIONS' | 'PUT' | 'PATCH' | 'TRACE';
+
 /* Client */
 export type ClientRequest = {
   uri: string;
-  method: string;
+  method: MethodType;
   body?: string | Object;
   headers?: {
     [key: string]: string;
