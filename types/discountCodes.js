@@ -43,7 +43,7 @@ export type LoggerOptions = {
 /* Config */
 export type ConstructorOptions = {
   apiConfig: AuthMiddlewareOptions;
-  batchSize?: number;
+  batchSize: number;
   continueOnProblems?: boolean;
 }
 
