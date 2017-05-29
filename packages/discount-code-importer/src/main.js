@@ -41,7 +41,8 @@ export default class DiscountCodeImport {
   ) {
     if (!options.apiConfig)
       throw new Error('The contructor must be passed an `apiConfig` object')
-
+    if (options.batchSize > 500)
+      throw new Error('The `batchSize` must not be more than 500')
     this.apiConfig = options.apiConfig
     this.batchSize = options.batchSize || 50
     this.continueOnProblems = options.continueOnProblems || false

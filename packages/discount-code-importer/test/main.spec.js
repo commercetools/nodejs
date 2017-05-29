@@ -41,6 +41,15 @@ describe('DiscountCodeImporter', () => {
         /The contructor must be passed an `apiConfig` object/,
       )
     })
+
+    it('should throw if `batchSize` is more than 500', () => {
+      expect(() => new DiscountCodeImport(logger, {
+        apiConfig: {},
+        batchSize: 501 }))
+      .toThrow(
+        /The `batchSize` must not be more than 500/,
+      )
+    })
   })
 
   describe('::processStream', () => {
