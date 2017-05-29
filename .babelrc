@@ -9,7 +9,6 @@
   ],
   "plugins": [
     "array-includes",
-    "object-values-to-object-keys",
     "transform-export-extensions",
     "transform-flow-strip-types",
     "transform-object-rest-spread",
