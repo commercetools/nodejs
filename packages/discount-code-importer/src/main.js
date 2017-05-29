@@ -82,6 +82,11 @@ export default class DiscountCodeImport {
       // No catch block as errors will be caught in the CLI
   }
 
+  // Public function for direct module usage
+  run (codes: CodeDataArray) {
+    return this._processBatches(codes)
+  }
+
   _processBatches (codes: CodeDataArray) {
     // Batch to `batchSize` to reduce necessary fetch API calls
     const batchedList = _.chunk(codes, this.batchSize)
