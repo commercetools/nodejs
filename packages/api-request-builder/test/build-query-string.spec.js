@@ -84,6 +84,16 @@ describe('buildQueryString', () => {
     expect(buildQueryString(params)).toEqual(expectedQueryString)
   })
 
+  it('should build perPage with zero value', () => {
+    const params = {
+      pagination: {
+        perPage: 0,
+      },
+    }
+    const expectedQueryString = 'limit=0'
+    expect(buildQueryString(params)).toEqual(expectedQueryString)
+  })
+
   it('should disable markMatchingVariants by default', () => {
     const params = {
       search: {
