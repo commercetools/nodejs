@@ -36,8 +36,8 @@ export default class DiscountCodeImport {
   syncDiscountCodes: SyncAction;
 
   constructor (
-    logger: LoggerOptions,
     options: ConstructorOptions,
+    logger: LoggerOptions,
   ) {
     if (!options.apiConfig)
       throw new Error('The contructor must be passed an `apiConfig` object')

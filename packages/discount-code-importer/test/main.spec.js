@@ -16,11 +16,11 @@ describe('DiscountCodeImporter', () => {
 
   let codeImport
   beforeEach(() => {
-    codeImport = new DiscountCodeImport(logger, {
+    codeImport = new DiscountCodeImport({
       apiConfig: {
         projectKey: 'asafaelhn',
       },
-    })
+    }, logger)
   })
 
   describe('::constructor', () => {
@@ -37,15 +37,16 @@ describe('DiscountCodeImporter', () => {
     })
 
     it('should throw if no `apiConfig` in `options` parameter', () => {
-      expect(() => new DiscountCodeImport(logger, { foo: 'bar' })).toThrow(
+      expect(() => new DiscountCodeImport({ foo: 'bar' })).toThrow(
         /The contructor must be passed an `apiConfig` object/,
       )
     })
 
     it('should throw if `batchSize` is more than 500', () => {
-      expect(() => new DiscountCodeImport(logger, {
+      expect(() => new DiscountCodeImport({
         apiConfig: {},
-        batchSize: 501 }))
+        batchSize: 501,
+      }, logger))
       .toThrow(
         /The `batchSize` must not be more than 500/,
       )
