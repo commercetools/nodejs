@@ -19,6 +19,7 @@ export const baseActionsList = [
   { action: 'changeSlug', key: 'slug' },
   { action: 'setDescription', key: 'description' },
   { action: 'setSearchKeywords', key: 'searchKeywords' },
+  { action: 'setKey', key: 'key' },
 ]
 
 export const metaActionsList = [
@@ -104,6 +105,29 @@ export function actionsMapCategories (diff) {
 
   // Make sure `removeFromCategory` actions come first
   return removeFromCategoryActions.concat(addToCategoryActions)
+}
+
+export function actionsMapCategoryOrderHints (diff) {
+  if (!diff.categoryOrderHints) return []
+
+  return Object.keys(diff.categoryOrderHints).map((categoryId) => {
+    const hintChange = diff.categoryOrderHints[categoryId]
+
+    const action = {
+      action: 'setCategoryOrderHint',
+      categoryId,
+    }
+
+    if (hintChange.length === 1) // item was added
+      action.orderHint = hintChange[0]
+
+    else if (hintChange.length === 2 && hintChange[1] !== 0) // item was changed
+      action.orderHint = hintChange[1]
+
+    // else item was removed -> do not set 'orderHint' property
+
+    return action
+  })
 }
 
 export function actionsMapAttributes (

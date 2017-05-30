@@ -16,11 +16,34 @@ export default function buildQueryString (
   if (!params)
     throw new Error('Missing options object to build query string.')
 
-  const { query, pagination, search, expand, staged, searchKeywords } = params
+  const {
+    query,
+    pagination,
+    search,
+    expand,
+    staged,
+    priceCurrency,
+    priceCountry,
+    priceCustomerGroup,
+    priceChannel,
+    searchKeywords,
+  } = params
   let queryString = []
 
   if (typeof staged === 'boolean')
     queryString.push(`staged=${staged.toString()}`)
+
+  if (priceCurrency)
+    queryString.push(`priceCurrency=${priceCurrency}`)
+
+  if (priceCountry)
+    queryString.push(`priceCountry=${priceCountry}`)
+
+  if (priceCustomerGroup)
+    queryString.push(`priceCustomerGroup=${priceCustomerGroup}`)
+
+  if (priceChannel)
+    queryString.push(`priceChannel=${priceChannel}`)
 
   if (expand && expand.length)
     queryString = queryString.concat(expand.map(e => `expand=${e}`))
@@ -34,7 +57,7 @@ export default function buildQueryString (
 
   if (pagination) {
     const { page, perPage, sort } = pagination
-    if (perPage)
+    if (typeof perPage === 'number')
       queryString.push(`limit=${perPage}`)
     if (page) {
       const limitParam = perPage || 20
@@ -57,8 +80,7 @@ export default function buildQueryString (
       queryString.push('fuzzy=true')
     if (fuzzyLevel)
       queryString.push(`fuzzyLevel=${fuzzyLevel}`)
-    if (markMatchingVariants)
-      queryString.push('markMatchingVariants=true')
+    queryString.push(`markMatchingVariants=${markMatchingVariants.toString()}`)
 
     facet.forEach(f => queryString.push(`facet=${f}`))
     filter.forEach(f => queryString.push(`filter=${f}`))
