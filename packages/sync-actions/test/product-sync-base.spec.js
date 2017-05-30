@@ -27,6 +27,7 @@ describe('Exports', () => {
       { action: 'changeSlug', key: 'slug' },
       { action: 'setDescription', key: 'description' },
       { action: 'setSearchKeywords', key: 'searchKeywords' },
+      { action: 'setKey', key: 'key' },
     ])
   })
 
@@ -54,6 +55,7 @@ describe('Actions', () => {
   it('should ensure given objects are not mutated', () => {
     const before = {
       name: { en: 'Car', de: 'Auto' },
+      key: 'unique-key',
       masterVariant: {
         id: 1, sku: '001', attributes: [{ name: 'a1', value: 1 }] },
       variants: [
@@ -63,6 +65,7 @@ describe('Actions', () => {
     }
     const now = {
       name: { en: 'Sport car' },
+      key: 'unique-key-2',
       masterVariant: {
         id: 1, sku: '100', attributes: [{ name: 'a1', value: 100 }] },
       variants: [
@@ -73,6 +76,14 @@ describe('Actions', () => {
     productsSync.buildActions(now, before)
     expect(before).toEqual(clone(before))
     expect(now).toEqual(clone(now))
+  })
+
+  it('should build `setKey` action', () => {
+    const before = { key: 'unique-key-1' }
+    const now = { key: 'unique-key-2' }
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual([{ action: 'setKey', ...now }])
   })
 
   it('should build `changeName` action', () => {
