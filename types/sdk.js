@@ -97,6 +97,10 @@ export type ServiceBuilderDefaultParams = {
   };
   id?: ?string;
   staged?: boolean;
+  priceCurrency?: string;
+  priceCountry?: string;
+  priceCustomerGroup?: string;
+  priceChannel?: string;
   query?: {
     operator: 'and' | 'or';
     where: Array<string>;

@@ -34,7 +34,7 @@ A _service_ is created by defining its `features`. Features give a service speci
 - `queryOne`: allows to query a single resource (`byId`)
 - `queryExpand`: allows to use reference expansion (`expand`)
 - `search`: allows to use search capabilities (`text`, `fuzzy`, `fuzzyLevel`, `facet`, `markMatchingVariants`, `filter`, `filterByQuery`, `filterByFacets`)
-- `projection`: allows to use projections capabilities (`staged`)
+- `projection`: allows to use projections capabilities (`staged`, `priceCurrency`, `priceCountry`, `priceCustomerGroup`, `priceChannel`)
 - `suggest`: allows to use suggest capabilities (`searchKeywords`)
 
 ```js
@@ -58,6 +58,8 @@ const options = {
 const requestBuilder = createRequestBuilder(options)
 ```
 
+Note that `markMatchingVariants` is set by default to `false` which turns off this feature on the API. 
+  
 #### Version
 
 It is also possible to append the version of a resource to the uri when making a request that requires this (for example a `DELETE` request). This can be done by passing the required version to the `.withVersion()` method.

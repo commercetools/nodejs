@@ -20,7 +20,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: An list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -58,7 +58,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: An list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -97,7 +97,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: An list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -135,7 +135,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: An list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -173,7 +173,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: An list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -211,7 +211,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: An list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -237,6 +237,44 @@ const productDiscountsRequests = {
 }
 
 client.execute(productDiscountsRequests)
+.then(result => ...)
+.catch(error => ...)
+```
+
+## `createSyncDiscountCodes(actionGroups)`
+
+> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+
+Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _discount-codes_.
+
+#### Arguments
+
+1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+
+#### Usage example
+
+```js
+import { createSyncDiscountCodes } from '@commercetools/sync-actions'
+import { createClient } from '@commercetools/sdk-client'
+
+const syncDiscountCodes = createSyncDiscountCodes()
+const client = createClient({
+  middlewares: [...],
+})
+const before = {
+  name: { en: 'My Discount Code' }
+}
+const now = {
+  name: { en: 'My Discount Code', de: 'Mein Rabatt Code' }
+}
+const actions = syncDiscountCodes.buildActions(before, now)
+const discountCodesRequest = {
+  url: `/discount-codes/${before.id}`,
+  method: 'POST',
+  body: JSON.stringify({ version: before.version, actions }),
+}
+
+client.execute(discountCodesRequest)
 .then(result => ...)
 .catch(error => ...)
 ```
