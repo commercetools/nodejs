@@ -19,6 +19,7 @@ export const baseActionsList = [
   { action: 'changeSlug', key: 'slug' },
   { action: 'setDescription', key: 'description' },
   { action: 'setSearchKeywords', key: 'searchKeywords' },
+  { action: 'setKey', key: 'key' },
 ]
 
 export const metaActionsList = [
