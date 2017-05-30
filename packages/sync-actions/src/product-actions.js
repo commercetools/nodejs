@@ -19,6 +19,7 @@ export const baseActionsList = [
   { action: 'changeSlug', key: 'slug' },
   { action: 'setDescription', key: 'description' },
   { action: 'setSearchKeywords', key: 'searchKeywords' },
+  { action: 'setKey', key: 'key' },
 ]
 
 export const metaActionsList = [
@@ -106,6 +107,29 @@ export function actionsMapCategories (diff) {
   return removeFromCategoryActions.concat(addToCategoryActions)
 }
 
+export function actionsMapCategoryOrderHints (diff) {
+  if (!diff.categoryOrderHints) return []
+
+  return Object.keys(diff.categoryOrderHints).map((categoryId) => {
+    const hintChange = diff.categoryOrderHints[categoryId]
+
+    const action = {
+      action: 'setCategoryOrderHint',
+      categoryId,
+    }
+
+    if (hintChange.length === 1) // item was added
+      action.orderHint = hintChange[0]
+
+    else if (hintChange.length === 2 && hintChange[1] !== 0) // item was changed
+      action.orderHint = hintChange[1]
+
+    // else item was removed -> do not set 'orderHint' property
+
+    return action
+  })
+}
+
 export function actionsMapAttributes (
   diff,
   oldObj,
@@ -120,7 +144,12 @@ export function actionsMapAttributes (
       masterVariant,
       oldObj.masterVariant,
     )
+    const keyAction = _buildKeyActions(
+      masterVariant,
+      oldObj.masterVariant,
+    )
     if (skuAction) actions.push(skuAction)
+    if (keyAction) actions.push(keyAction)
 
     const { attributes } = masterVariant
     const attrActions = _buildVariantAttributesActions(
@@ -137,7 +166,10 @@ export function actionsMapAttributes (
       if (REGEX_NUMBER.test(key) && !Array.isArray(variant)) {
         const skuAction =
           _buildSkuActions(variant, oldObj.variants[key])
+        const keyAction =
+          _buildKeyActions(variant, oldObj.variants[key])
         if (skuAction) actions.push(skuAction)
+        if (keyAction) actions.push(keyAction)
 
         const { attributes } = variant
         const attrActions = _buildVariantAttributesActions(
@@ -239,6 +271,20 @@ function _buildSkuActions (variantDiff, oldVariant) {
       action: 'setSku',
       variantId: oldVariant.id,
       sku: newValue || null,
+    }
+  }
+  return null
+}
+
+function _buildKeyActions (variantDiff, oldVariant) {
+  if ({}.hasOwnProperty.call(variantDiff, 'key')) {
+    const newValue = diffpatcher.getDeltaValue(variantDiff.key)
+    if (!newValue && !oldVariant.key) return null
+
+    return {
+      action: 'setProductVariantKey',
+      variantId: oldVariant.id,
+      key: newValue || null,
     }
   }
   return null

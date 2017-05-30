@@ -7,11 +7,35 @@ import * as diffpatcher from '../../src/utils/diffpatcher'
 describe('Common actions', () => {
   describe('::buildBaseAttributesActions', () => {
     const testActions = [
-      { action: 'changeName', key: 'name' },
-      { action: 'setDescription', key: 'description' },
-      { action: 'setExternalId', key: 'externalId' },
-      { action: 'changeSlug', key: 'slug' },
-      { action: 'setCustomerNumber', key: 'customerNumber' },
+      {
+        action: 'changeName',
+        key: 'name',
+      },
+      {
+        action: 'setDescription',
+        key: 'description',
+      },
+      {
+        action: 'setExternalId',
+        key: 'externalId',
+      },
+      {
+        action: 'changeSlug',
+        key: 'slug',
+      },
+      {
+        action: 'setCustomerNumber',
+        key: 'customerNumber',
+      },
+      {
+        action: 'setCustomerNumber',
+        key: 'customerNumber',
+      },
+      {
+        action: 'changeQuantity',
+        key: 'quantityOnStock',
+        actionKey: 'quantity',
+      },
     ]
 
     it('should build base actions', () => {
@@ -21,6 +45,7 @@ describe('Common actions', () => {
         externalId: '123',
         slug: { en: 'foo' },
         customerNumber: undefined,
+        quantityOnStock: 1,
       }
       const now = {
         name: { en: 'Foo1', de: 'Foo2' },
@@ -28,6 +53,7 @@ describe('Common actions', () => {
         externalId: null,
         slug: { en: 'foo' },
         customerNumber: null,
+        quantityOnStock: 0,
       }
 
       const actions = buildBaseAttributesActions({
@@ -41,6 +67,7 @@ describe('Common actions', () => {
         { action: 'changeName', name: now.name },
         { action: 'setDescription', description: now.description },
         { action: 'setExternalId' },
+        { action: 'changeQuantity', quantity: now.quantityOnStock },
       ])
     })
   })
