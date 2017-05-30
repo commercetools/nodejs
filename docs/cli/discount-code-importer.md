@@ -13,13 +13,73 @@ The constructor may be passed in 2 parameters:
 - An optional logger object having four functions (`info`, `warn`, `error` and `debug`)
 
 ## Usage with `sphere-node-cli`
-You can use this package from the [`sphere-node-cli`](https://github.com/sphereio/sphere-node-cli). In order for the cli to import discount codes, the file to import from must ve a valid JSON and follow this structure:
-```js
+You can use this package from the [`sphere-node-cli`](https://github.com/sphereio/sphere-node-cli). In order for the cli to import discount codes, the file to import from must be a valid JSON and follow this structure:
+```json
 [
-  <code>,
-  <code>,
-  <code>,
-  ...
+ {
+  "name": {
+   "en": "Sammuy",
+   "de": "Valerian"
+  },
+  "description": {
+   "en": "some new promo",
+   "de": "super Angebot"
+  },
+  "cartDiscounts": [
+   {
+    "typeId": "cart-discount",
+    "id": "some-cart-discount-id"
+   }
+  ],
+  "cartPredicate": "lineItemTotal(1 = 1) >  \"10.00 USD\"",
+  "isActive": true,
+  "maxApplications": 10,
+  "maxApplicationsPerCustomer": 2,
+  "code": "MyDiscountCode1"
+ },
+ {
+  "name": {
+   "en": "Sammuy",
+   "de": "Valerian"
+  },
+  "description": {
+   "en": "some new promo",
+   "de": "super Angebot"
+  },
+  "cartDiscounts": [
+   {
+    "typeId": "cart-discount",
+    "id": "some-cart-discount-id"
+   }
+  ],
+  "cartPredicate": "lineItemTotal(1 = 1) >  \"20.00 USD\"",
+  "isActive": false,
+  "maxApplications": 10,
+  "maxApplicationsPerCustomer": 2,
+  "code": "MyDiscountCode2"
+ },
+ {
+  "name": {
+   "en": "Sammuy",
+   "de": "Valerian"
+  },
+  "description": {
+   "en": "some new promo",
+   "de": "super Angebot"
+  },
+  "cartDiscounts": [
+   {
+    "typeId": "cart-discount",
+    "id": "some-cart-discount-id"
+   }
+  ],
+  "cartPredicate": "lineItemTotal(1 = 1) >  \"50.00 USD\"",
+  "isActive": false,
+  "maxApplications": 10,
+  "maxApplicationsPerCustomer": 2,
+  "code": "MyDiscountCode3"
+ },
+ ...
 ]
 ```
 Then you can import this file using the cli:
@@ -34,13 +94,79 @@ sphere-node-cli -t discountCode -p my-project-key -f /sample_dir/codes.json -c '
 ## Direct Usage
 If you would like to have more control, you can also use this module directly in Javascript. To do this, you need to install it:
 ```bash
-npm install @commercetools/discount-code-importer -g
+npm install @commercetools/discount-code-importer
 ```
 Then you can use it to import discount codes:
 ```js
 import DiscountCodeImport from '@commercetools/discount-code-importer'
 
-const codes = [<code>, <code>, <code>, ...]
+const codes = [
+ {
+  name: {
+   en: 'Sammuy',
+   de: 'Valerian'
+  },
+  description: {
+   en: 'some new promo',
+   de: 'super Angebot'
+  },
+  cartDiscounts: [
+   {
+    typeId: 'cart-discount',
+    id: 'some-cart-discount-id'
+   }
+  ],
+  cartPredicate: 'lineItemTotal(1 = 1) > "10.00 USD"',
+  isActive: true,
+  maxApplications: 10,
+  maxApplicationsPerCustomer: 2,
+  code: 'MyDiscountCode1'
+ },
+ {
+  name: {
+   en: 'Sammuy',
+   de: 'Valerian'
+  },
+  description: {
+   en: 'some new promo',
+   de: 'super Angebot'
+  },
+  cartDiscounts: [
+   {
+    typeId: 'cart-discount',
+    id: 'some-cart-discount-id'
+   }
+  ],
+  cartPredicate: 'lineItemTotal(1 = 1) > "20.00 USD"',
+  isActive: false,
+  maxApplications: 10,
+  maxApplicationsPerCustomer: 2,
+  code: 'MyDiscountCode2'
+ },
+ {
+  name: {
+   en: 'Sammuy',
+   de: 'Valerian'
+  },
+  description: {
+   en: 'some new promo',
+   de: 'super Angebot'
+  },
+  cartDiscounts: [
+   {
+    typeId: 'cart-discount',
+    id: 'some-cart-discount-id'
+   }
+  ],
+  cartPredicate: 'lineItemTotal(1 = 1) > "50.00 USD"',
+  isActive: false,
+  maxApplications: 10,
+  maxApplicationsPerCustomer: 2,
+  code: 'MyDiscountCode3'
+ },
+ ...
+]
+
 const options = {
     apiConfig: {
       host: 'https://auth.commercetools.com'
