@@ -93,10 +93,10 @@ Generate multiple discount codes to import to the commercetools platform.`,
     describe: 'Used CSV delimiter for input and/or output file.',
   })
 
-  .option('multivalueDelimiter', {
+  .option('multiValueDelimiter', {
     alias: 'm',
     default: ';',
-    describe: 'Used CSV delimiter in multivalue fields for input/output file.',
+    describe: 'Used CSV delimiter in multiValue fields for input/output file.',
   })
 
   .option('logLevel', {
@@ -111,7 +111,7 @@ Generate multiple discount codes to import to the commercetools platform.`,
 // Resolve stream input to javascript object
 const resolveInput = (_args) => {
   const input = _args.input
-  let _attributes
+  let _attributes = ''
   return new Promise((resolve, reject) => {
     if (input === undefined)
       resolve({})
@@ -122,7 +122,7 @@ const resolveInput = (_args) => {
           reject(error)
         })
         .on('data', (data) => {
-          _attributes = data
+          _attributes += data
         })
         .on('end', () => {
           resolve(JSON.parse(_attributes))
@@ -142,19 +142,16 @@ const resolveInput = (_args) => {
           reject(error)
         })
         .on('data', (data) => {
-          const arrayDelim = _args.multivalueDelimiter
+          const arrayDelim = _args.multiValueDelimiter
           // Add condition so module doesn't fail if there are no cartDiscounts
           if (data.cartDiscounts)
           // eslint-disable-next-line no-param-reassign
             data.cartDiscounts = data.cartDiscounts.split(arrayDelim)
-          _attributes = data
+          _attributes += data
         })
         .on('end', () => {
           resolve(unflatten(_attributes))
         })
-    else reject(new Error(
-      'Invalid file format, must be JSON or CSV',
-    ))
   })
 }
 
@@ -178,7 +175,7 @@ const resolveOutput = (_args, outputData) => {
       })
     } else if (outputStream.path.match(/\.csv$/i)) {
       // Convert to csv and write to file
-      const arrayDelim = _args.multivalueDelimiter
+      const arrayDelim = _args.multiValueDelimiter
       const flatObjects = outputData.map((obj) => {
         // Add condition so module doesn't fail if there are no cartDiscounts
         if (obj.cartDiscounts)
@@ -197,7 +194,7 @@ const resolveOutput = (_args, outputData) => {
       outputStream.on('finish', () => {
         resolve(total)
       })
-    } else reject(new Error('Invalid file format. Must be CSV or JSON'))
+    }
   })
 }
 

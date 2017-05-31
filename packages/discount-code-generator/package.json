@@ -12,7 +12,7 @@
     "type": "git",
     "url": "https://github.com/commercetools/nodejs/tree/master/packages/discount-code-generator"
   },
-  "homepage": "https://commercetools.github.io/nodejs/sdk/api/discountCodeGenerator.html",
+  "homepage": "https://commercetools.github.io/nodejs/cli/discount-code-generator.html",
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "contributors": [
