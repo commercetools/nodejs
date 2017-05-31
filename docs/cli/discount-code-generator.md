@@ -18,7 +18,7 @@ Options:
   --input, -i                Path to code options CSV or JSON file.
   --output, -o               Path to store generated output file.                      [default: "stdout"]
   --delimiter, -d            Used CSV delimiter for input and/or output file.               [default: ","]
-  --multivalueDelimiter, -m  Used CSV delimiter in multivalue fields for input/output file. [default: ";"]
+  --multiValueDelimiter, -m  Used CSV delimiter in multiValue fields for input/output file. [default: ";"]
   --logLevel,                Logging level: error, warn, info or verbose.                [default: "info"]
 ```
 
@@ -32,7 +32,7 @@ Options:
   - The default location for status report logging is the standard output.
   - If no output path is specified, the generated codes will be logged to the standard output as a result, status reports will be logged to a `discountCodeGenerator.log` file
 - The `--delimiter` flag specifies the delimiter used in the input file and/or output file if any or both are CSV. Defaults to `','` if omitted and will be ignored if neither input nor output is CSV
-- The `--multivalueDelimiter` flag specifies the delimiter for multivalue cells in CSV. Note that only the `cartDiscounts` field if present should contain multiple values. Defaults to `';'` if omitted
+- The `--multiValueDelimiter` flag specifies the delimiter for multiValue cells in CSV. Note that only the `cartDiscounts` field if present should contain multiple values. Defaults to `';'` if omitted
 
 ### Examples
 #### CSV

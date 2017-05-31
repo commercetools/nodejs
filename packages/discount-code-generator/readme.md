@@ -2,7 +2,7 @@
 
 Generate discount codes to be imported to the commercetools platform.
 
-https://commercetools.github.io/nodejs/docs/cli/discount-code-generator.h
+https://commercetools.github.io/nodejs/cli/discount-code-generator.html
 
 ## Install
 
