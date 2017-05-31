@@ -50,7 +50,7 @@ export default class DiscountCodeImport {
       middlewares: [
         createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
         createUserAgentMiddleware({
-          libraryName: 'discount-code-importer',
+          libraryName: pkg.name,
           libraryVersion: pkg.version,
         }),
         createHttpMiddleware({ host: this.apiConfig.host }),
