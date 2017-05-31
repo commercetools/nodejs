@@ -144,7 +144,12 @@ export function actionsMapAttributes (
       masterVariant,
       oldObj.masterVariant,
     )
+    const keyAction = _buildKeyActions(
+      masterVariant,
+      oldObj.masterVariant,
+    )
     if (skuAction) actions.push(skuAction)
+    if (keyAction) actions.push(keyAction)
 
     const { attributes } = masterVariant
     const attrActions = _buildVariantAttributesActions(
@@ -161,7 +166,10 @@ export function actionsMapAttributes (
       if (REGEX_NUMBER.test(key) && !Array.isArray(variant)) {
         const skuAction =
           _buildSkuActions(variant, oldObj.variants[key])
+        const keyAction =
+          _buildKeyActions(variant, oldObj.variants[key])
         if (skuAction) actions.push(skuAction)
+        if (keyAction) actions.push(keyAction)
 
         const { attributes } = variant
         const attrActions = _buildVariantAttributesActions(
@@ -263,6 +271,20 @@ function _buildSkuActions (variantDiff, oldVariant) {
       action: 'setSku',
       variantId: oldVariant.id,
       sku: newValue || null,
+    }
+  }
+  return null
+}
+
+function _buildKeyActions (variantDiff, oldVariant) {
+  if ({}.hasOwnProperty.call(variantDiff, 'key')) {
+    const newValue = diffpatcher.getDeltaValue(variantDiff.key)
+    if (!newValue && !oldVariant.key) return null
+
+    return {
+      action: 'setProductVariantKey',
+      variantId: oldVariant.id,
+      key: newValue || null,
     }
   }
   return null

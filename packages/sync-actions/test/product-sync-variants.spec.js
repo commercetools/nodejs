@@ -222,6 +222,7 @@ describe('Actions', () => {
 
   it('should build `addVariant` action', () => {
     const newVariant = {
+      key: 'ddd',
       sku: 'ccc',
       attributes: [{ name: 'color', value: 'red' }],
       images: [{ url: 'http://foo.com', label: 'foo' }],
@@ -231,12 +232,14 @@ describe('Actions', () => {
     const before = { variants: [
       {
         id: 2,
+        key: 'eee',
         sku: 'aaa',
         attributes: [{ name: 'color', value: 'green' }],
         prices: [{ value: { centAmount: 100, currencyCode: 'EUR' } }],
       },
       {
         id: 3,
+        key: 'fff',
         sku: 'bbb',
         attributes: [{ name: 'color', value: 'yellow' }],
         prices: [{ value: { centAmount: 200, currencyCode: 'GBP' } }],
@@ -256,32 +259,34 @@ describe('Actions', () => {
     const before = {
       id: '123',
       masterVariant: {
-        id: 1, sku: 'v1', attributes: [{ name: 'foo', value: 'bar' }],
+        id: 1, sku: 'v1', key: 'v1', attributes: [{ name: 'foo', value: 'bar' }],
       },
       variants: [
-        { id: 2, sku: 'v2', attributes: [{ name: 'foo', value: 'qux' }] },
-        { id: 3, sku: 'v3', attributes: [{ name: 'foo', value: 'baz' }] },
+        { id: 2, sku: 'v2', key: 'v2', attributes: [{ name: 'foo', value: 'qux' }] },
+        { id: 3, sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'baz' }] },
       ],
     }
 
     const now = {
       id: '123',
       masterVariant: {
-        sku: 'v1', attributes: [{ name: 'foo', value: 'new value' }],
+        sku: 'v1', key: 'v2', attributes: [{ name: 'foo', value: 'new value' }],
       },
       variants: [
-        { id: 2, sku: 'v2', attributes: [{ name: 'foo', value: 'another value' }] },
-        { id: 3, sku: 'v4', attributes: [{ name: 'foo', value: 'i dont care' }] },
-        { sku: 'v3', attributes: [{ name: 'foo', value: 'yet another' }] },
+        { id: 2, sku: 'v2', key: 'v2', attributes: [{ name: 'foo', value: 'another value' }] },
+        { id: 3, sku: 'v4', key: 'v4', attributes: [{ name: 'foo', value: 'i dont care' }] },
+        { sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'yet another' }] },
       ],
     }
 
     const actions = productsSync.buildActions(now, before)
     expect(actions).toEqual([
-      { action: 'addVariant', sku: 'v3', attributes: [{ name: 'foo', value: 'yet another' }] },
+      { action: 'addVariant', sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'yet another' }] },
+      { action: 'setProductVariantKey', key: 'v2', variantId: 1 },
       { action: 'setAttribute', variantId: 1, name: 'foo', value: 'new value' },
       { action: 'setAttribute', variantId: 2, name: 'foo', value: 'another value' },
       { action: 'setSku', sku: 'v4', variantId: 3 },
+      { action: 'setProductVariantKey', key: 'v4', variantId: 3 },
       { action: 'setAttribute', variantId: 3, name: 'foo', value: 'i dont care' },
     ])
   })
@@ -297,8 +302,8 @@ describe('Actions', () => {
         attributes: [{ name: 'foo', value: 'bar' }],
       },
       variants: [
-        { id: 2, sku: 'v2', attributes: [{ name: 'foo', value: 'qux' }] },
-        { id: 3, sku: 'v3', attributes: [{ name: 'foo', value: 'baz' }] },
+        { id: 2, sku: 'v2', key: 'v2', attributes: [{ name: 'foo', value: 'qux' }] },
+        { id: 3, sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'baz' }] },
       ],
     }
 
@@ -307,18 +312,18 @@ describe('Actions', () => {
       // <-- no masterVariant
       variants: [
         // changed
-        { id: 2, sku: 'v2', attributes: [{ name: 'foo', value: 'another value' }] },
+        { id: 2, sku: 'v2', key: 'v2', attributes: [{ name: 'foo', value: 'another value' }] },
         // changed
-        { id: 3, sku: 'v3', attributes: [{ name: 'foo', value: 'i dont care' }] },
+        { id: 3, sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'i dont care' }] },
         // new
-        { sku: 'v4', attributes: [{ name: 'foo', value: 'yet another' }] },
+        { sku: 'v4', key: 'v4', attributes: [{ name: 'foo', value: 'yet another' }] },
       ],
     }
 
     const actions = productsSync.buildActions(now, before)
 
     expect(actions).toEqual([
-      { action: 'addVariant', sku: 'v4', attributes: [{ name: 'foo', value: 'yet another' }] },
+      { action: 'addVariant', sku: 'v4', key: 'v4', attributes: [{ name: 'foo', value: 'yet another' }] },
       { action: 'setAttribute', variantId: 2, name: 'foo', value: 'another value' },
       { action: 'setAttribute', variantId: 3, name: 'foo', value: 'i dont care' },
     ])
@@ -342,6 +347,27 @@ describe('Actions', () => {
     const actions = productsSync.buildActions(now, before)
     expect(actions).toEqual([
       { action: 'setSku', sku: null, variantId: 1 },
+    ])
+  })
+
+  it('should handle unsetting the key of a variant', () => {
+    const before = {
+      id: '123',
+      masterVariant: {
+        id: 1, key: 'v1', attributes: [{ name: 'foo', value: 'bar' }],
+      },
+    }
+
+    const now = {
+      id: '123',
+      masterVariant: {
+        key: '', attributes: [{ name: 'foo', value: 'bar' }],
+      },
+    }
+
+    const actions = productsSync.buildActions(now, before)
+    expect(actions).toEqual([
+      { action: 'setProductVariantKey', key: null, variantId: 1 },
     ])
   })
 
@@ -429,6 +455,28 @@ describe('Actions', () => {
     expect(actions).toEqual([])
   })
 
+  it('should ignore set key', () => {
+    // Case when key is not set, and the new value is empty or null
+    const before = {
+      id: '123',
+      masterVariant: {
+        id: 1,
+      },
+      variants: [{ id: 2 }],
+    }
+
+    const now = {
+      id: '123',
+      masterVariant: {
+        id: 1, key: '',
+      },
+      variants: [{ id: 2, key: null }],
+    }
+
+    const actions = productsSync.buildActions(now, before)
+    expect(actions).toEqual([])
+  })
+
   it('should ignore set sku if the sku was and still is empty', () => {
     // Case when sku is not set, and the new value is empty or null
     const before = {
@@ -445,6 +493,28 @@ describe('Actions', () => {
         id: 1, sku: '',
       },
       variants: [{ id: 2, sku: null }],
+    }
+
+    const actions = productsSync.buildActions(now, before)
+    expect(actions).toEqual([])
+  })
+
+  it('should ignore set key if the key was and still is empty', () => {
+    // Case when key is not set, and the new value is empty or null
+    const before = {
+      id: '123',
+      masterVariant: {
+        id: 1, key: '',
+      },
+      variants: [{ id: 2 }],
+    }
+
+    const now = {
+      id: '123',
+      masterVariant: {
+        id: 1, key: '',
+      },
+      variants: [{ id: 2, key: null }],
     }
 
     const actions = productsSync.buildActions(now, before)
