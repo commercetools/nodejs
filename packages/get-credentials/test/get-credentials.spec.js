@@ -10,8 +10,8 @@ import {
 import { homepage } from '../package.json'
 
 const expectedErrorText = {
-  invalidEnvFormat: new RegExp(/could not get credentials/, 'i'),
-  undefinedEnv: new RegExp(/could not find environment variable/, 'i'),
+  invalidEnvFormat: /could not get credentials/i,
+  undefinedEnv: /could not find environment variable/i,
 }
 
 describe('getCredentials', () => {
