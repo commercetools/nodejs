@@ -1,6 +1,5 @@
 import highland from 'highland'
-import defaults from 'lodash.defaults'
-import difference from 'lodash.difference'
+import { defaults, difference } from 'lodash'
 import csv from 'csv-parser'
 import npmlog from 'npmlog'
 

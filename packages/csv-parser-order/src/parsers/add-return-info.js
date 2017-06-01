@@ -1,6 +1,5 @@
 import JSONStream from 'JSONStream'
-import filter from 'lodash.filter'
-import find from 'lodash.find'
+import { filter, find } from 'lodash'
 import AbstractParser from './abstract-parser'
 
 export default class AddReturnInfoParser extends AbstractParser {
