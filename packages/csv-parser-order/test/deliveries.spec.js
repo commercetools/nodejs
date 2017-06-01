@@ -302,4 +302,34 @@ describe('DeliveriesParser', () => {
         deliveriesParser.logger.error.restore()
       })
   })
+
+  it('::parse returns an error when invalid item row is present', (done) => {
+    const inputStream = streamTestFile('delivery-error-invalid-item.csv')
+    const expectedError = /which has different values across multiple rows/
+    const csvParserOrder = new DeliveriesParser()
+
+    csvParserOrder.logger.error = () => {}
+    const outputStream = StreamTest['v2'].toText(() => {})
+
+    csvParserOrder.parse(inputStream, outputStream)
+      .catch((err) => {
+        expect(expectedError.test(err)).toBeTruthy()
+        done()
+      })
+  })
+
+  it('::parse returns an error when invalid parcel row is present', (done) => {
+    const inputStream = streamTestFile('parcel-error-invalid-item.csv')
+    const expectedError = /which has different values across multiple rows/
+    const csvParserOrder = new DeliveriesParser()
+
+    csvParserOrder.logger.error = () => {}
+    const outputStream = StreamTest['v2'].toText(() => {})
+
+    csvParserOrder.parse(inputStream, outputStream)
+      .catch((err) => {
+        expect(expectedError.test(err)).toBeTruthy()
+        done()
+      })
+  })
 })

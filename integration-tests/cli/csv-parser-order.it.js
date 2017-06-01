@@ -105,35 +105,6 @@ describe('CSV and CLI Tests', () => {
         },
       )
     })
-
-    test('should return an error when invalid item row is present', (done) => {
-      // eslint-disable-next-line max-len
-      const csvFile = `${samplesFolder}deliveries/delivery-error-invalid-item.csv`
-      const expectedError = /which has different values across multiple rows/
-
-      exec(`${binPath} -i ${csvFile} -t deliveries`,
-        (error, stdout, stderr) => {
-          expect(error).toBeTruthy()
-          expect(stdout).toBeFalsy()
-          expect(expectedError.test(stderr)).toBeTruthy()
-          done()
-        }
-      )
-    })
-
-    test('should return error when invalid parcel row is present', (done) => {
-      const csvFile = `${samplesFolder}deliveries/parcel-error-invalid-item.csv`
-      const expectedError = /which has different values across multiple rows/
-
-      exec(`${binPath} -i ${csvFile} -t deliveries`,
-        (error, stdout, stderr) => {
-          expect(error).toBeTruthy()
-          expect(stdout).toBeFalsy()
-          expect(expectedError.test(stderr)).toBeTruthy()
-          done()
-        }
-      )
-    })
   })
 
   describe('parses CSV to JSON', () => {
@@ -205,7 +176,7 @@ describe('CSV and CLI Tests', () => {
           expect(error && stderr).toBeFalsy()
           expect(JSON.parse(stdout)).toEqual(expectedOutput)
           done()
-        }
+        },
       )
     })
   })
