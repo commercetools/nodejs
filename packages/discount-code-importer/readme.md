@@ -1,8 +1,8 @@
 # discount-code-importer
 
-Import discount codes to the commercetools platform.
+Import [commercetools discount codes](https://dev.commercetools.com/http-api-projects-discountCodes.html) to the commercetools platform.
 
-https://commercetools.github.io/nodejs/api/discount-code-importer/
+https://commercetools.github.io/nodejs/cli/discount-code-importer/
 
 ## Install
 

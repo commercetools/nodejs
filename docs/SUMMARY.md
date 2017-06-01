@@ -23,3 +23,4 @@
 * [CLI](/cli/README.md)
   * [CSV Price Parser](/cli/csv-parser-price.md)
   * [Discount Code Generator](/cli/discount-code-generator.md)
+  * [Discount Code Importer](/cli/discount-code-importer.md)
