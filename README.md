@@ -63,6 +63,7 @@ https://commercetools.github.io/nodejs/
 | Package | Version | Dependencies |
 |--------|-------|------------|
 | [`csv-parser-price`](/packages/csv-parser-price) | [![csv-parser-price Version][csv-parser-price-icon]][csv-parser-price-version] | [![csv-parser-price Dependencies Status][csv-parser-price-dependencies-icon]][csv-parser-price-dependencies] |
+[`discount-code-importer`](/packages/discount-code-importer) | [![discount-code-importer Version][discount-code-importer-icon]][discount-code-importer-version] | [![discount-code-importer Dependencies Status][discount-code-importer-dependencies-icon]][discount-code-importer-dependencies] |
 
 ### Other
 | Package | Version | Dependencies |
@@ -78,6 +79,10 @@ https://commercetools.github.io/nodejs/
 [csv-parser-price-icon]: https://img.shields.io/npm/v/@commercetools/csv-parser-price.svg?style=flat-square
 [csv-parser-price-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/csv-parser-price
 [csv-parser-price-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/csv-parser-price&style=flat-square
+[discount-code-importer-version]: https://www.npmjs.com/package/@commercetools/discount-code-importer
+[discount-code-importer-icon]: https://img.shields.io/npm/v/@commercetools/discount-code-importer.svg?style=flat-square
+[discount-code-importer-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/discount-code-importer
+[discount-code-importer-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/discount-code-importer&style=flat-square
 [sync-actions-version]: https://www.npmjs.com/package/@commercetools/sync-actions
 [sync-actions-icon]: https://img.shields.io/npm/v/@commercetools/sync-actions.svg?style=flat-square
 [sync-actions-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/sync-actions
