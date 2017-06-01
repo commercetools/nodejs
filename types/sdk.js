@@ -1,5 +1,8 @@
 /* @flow */
 
+// eslint-disable-next-line max-len
+export type MethodType = 'GET' | 'POST' | 'DELETE' | 'HEAD' | 'OPTIONS' | 'PUT' | 'PATCH' | 'TRACE';
+
 /* Client */
 export type ClientRequest = {
   uri: string;
@@ -46,8 +49,8 @@ export type ProcessOptions = {
 /* Middlewares */
 export type MiddlewareRequest = ClientRequest;
 export type MiddlewareResponse = {
-  resolve(): void;
-  reject(): void;
+  resolve(response: Object): void;
+  reject(error: Object): void;
   body?: Object;
   error?: HttpErrorType;
   statusCode: number;
