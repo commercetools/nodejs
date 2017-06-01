@@ -34,7 +34,7 @@
     "babel-cli": "6.23.0",
     "babel-core": "6.23.1",
     "babel-eslint": "7.1.1",
-    "babel-jest": "18.0.0",
+    "babel-jest": "20.0.0",
     "babel-loader": "6.3.0",
     "babel-plugin-array-includes": "^2.0.3",
     "babel-plugin-module-resolver": "2.5.0",
