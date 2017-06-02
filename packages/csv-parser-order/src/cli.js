@@ -6,6 +6,8 @@ import yargs from 'yargs'
 import CONSTANTS from './constants'
 import LineItemStateCsvParser from './parsers/line-item-state'
 import AddReturnInfoCsvParser from './parsers/add-return-info'
+import DeliveriesCsvParser from './parsers/deliveries'
+
 import { version } from '../package.json'
 
 process.title = 'csvparserorder'
@@ -31,7 +33,7 @@ Convert commercetools order CSV data to JSON.`,
 
   .option('type', {
     alias: 't',
-    choices: ['lineitemstate', 'returninfo'],
+    choices: ['lineitemstate', 'returninfo', 'deliveries'],
     describe: 'Predefined type of csv.',
     demand: true,
   })
@@ -128,6 +130,7 @@ const getModuleConfig = () => {
 const methodMapping = {
   lineitemstate: config => new LineItemStateCsvParser(config),
   returninfo: config => new AddReturnInfoCsvParser(config),
+  deliveries: config => new DeliveriesCsvParser(config),
 }
 
 methodMapping[args.type](getModuleConfig())

@@ -11,13 +11,13 @@
             "quantity": 4,
             "lineItemId": "12ae",
             "comment": "yeah",
-            "shipmentState": "shipped"
+            "shipmentState": "Returned"
           },
           {
             "quantity": 4,
             "lineItemId": "12ae",
             "comment": "yeah",
-            "shipmentState": "not-shipped"
+            "shipmentState": "Returned"
           }
         ]
       },
@@ -30,7 +30,7 @@
             "quantity": 4,
             "lineItemId": "12ae",
             "comment": "yeah",
-            "shipmentState": "not-shipped"
+            "shipmentState": "Unusable"
           }
         ]
       }
@@ -48,7 +48,7 @@
             "quantity": 4,
             "lineItemId": "12ae",
             "comment": "yeah",
-            "shipmentState": "not-shipped"
+            "shipmentState": "Unusable"
           }
         ]
       }

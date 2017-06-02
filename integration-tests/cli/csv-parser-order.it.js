@@ -11,6 +11,7 @@ import { version } from '../../packages/csv-parser-order/package.json'
 
 describe('CSV and CLI Tests', () => {
   const binPath = './integration-tests/node_modules/.bin/csvparserorder'
+  const samplesFolder = './packages/csv-parser-order/test/data/'
 
   describe('CLI basic functionality', () => {
     test('should print usage information given the help flag', (done) => {
@@ -30,11 +31,9 @@ describe('CSV and CLI Tests', () => {
     })
 
     test('should write output to file', (done) => {
-      // eslint-disable-next-line max-len
-      const csvFilePath = './packages/csv-parser-order/test/data/return-info-sample.csv'
+      const csvFilePath = `${samplesFolder}return-info-sample.csv`
       const jsonFilePath = tmp.fileSync().name
 
-      // eslint-disable-next-line max-len
       exec(`${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t returninfo`,
         (cliError, stdout, stderr) => {
           expect(cliError && stderr).toBeFalsy()
@@ -52,10 +51,9 @@ describe('CSV and CLI Tests', () => {
   describe('CLI logs specific errors', () => {
     test('on faulty CSV format', (done) => {
       // eslint-disable-next-line max-len
-      const csvFilePath = './packages/csv-parser-order/test/data/faulty-sample.csv'
+      const csvFilePath = `${samplesFolder}faulty-sample.csv`
       const jsonFilePath = tmp.fileSync().name
 
-      // eslint-disable-next-line max-len
       exec(`${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t returninfo`,
         (error, stdout, stderr) => {
           expect(error.code).toBe(1)
@@ -67,8 +65,7 @@ describe('CSV and CLI Tests', () => {
     })
 
     test('on missing return-info headers', (done) => {
-      // eslint-disable-next-line max-len
-      const csvFilePath = './packages/csv-parser-order/test/data/return-info-error2-sample.csv'
+      const csvFilePath = `${samplesFolder}return-info-error2-sample.csv`
       const jsonFilePath = tmp.fileSync().name
 
       exec(`${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t returninfo`,
@@ -82,8 +79,7 @@ describe('CSV and CLI Tests', () => {
     })
 
     test('on missing line-item-state headers', (done) => {
-      // eslint-disable-next-line max-len
-      const csvFilePath = './packages/csv-parser-order/test/data/return-info-sample.csv'
+      const csvFilePath = `${samplesFolder}return-info-sample.csv`
       const jsonFilePath = tmp.fileSync().name
 
       exec(`${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t lineitemstate`,
@@ -98,8 +94,7 @@ describe('CSV and CLI Tests', () => {
     })
 
     test('stack trace on verbose level', (done) => {
-      // eslint-disable-next-line max-len
-      const csvFilePath = './packages/csv-parser-order/test/data/faulty-sample.csv'
+      const csvFilePath = `${samplesFolder}faulty-sample.csv`
 
       exec(`${binPath} -i ${csvFilePath} --logLevel verbose -t returninfo`,
         (error, stdout, stderr) => {
@@ -114,10 +109,10 @@ describe('CSV and CLI Tests', () => {
 
   describe('parses CSV to JSON', () => {
     test('should parse return-info CSV into JSON', (done) => {
-      // eslint-disable-next-line max-len
-      const csvFilePath = './packages/csv-parser-order/test/data/return-info-sample.csv'
+      const csvFilePath = `${samplesFolder}return-info-sample.csv`
       const csvParserOrder = new AddReturnInfoCsvParser()
       const inputStream = fs.createReadStream(csvFilePath)
+
       const outputStream = streamtest['v2'].toText((error, output) => {
         const returnInfos = JSON.parse(output)
         const expected = path.join(
@@ -136,10 +131,10 @@ describe('CSV and CLI Tests', () => {
     })
 
     test('should parse line-item-state CSV into JSON', (done) => {
-      // eslint-disable-next-line max-len
-      const csvFilePath = './packages/csv-parser-order/test/data/lineitemstate-sample.csv'
+      const csvFilePath = `${samplesFolder}lineitemstate-sample.csv`
       const csvParserOrder = new LineItemStateCsvParser()
       const inputStream = fs.createReadStream(csvFilePath)
+
       const outputStream = streamtest['v2'].toText((error, output) => {
         const lineItemStates = JSON.parse(output)
         const expected = path.join(
@@ -155,6 +150,34 @@ describe('CSV and CLI Tests', () => {
       })
 
       csvParserOrder.parse(inputStream, outputStream)
+    })
+
+    test('CLI accepts deliveries csv type', (done) => {
+      const csvFilePath = `${samplesFolder}deliveries/delivery-simple.csv`
+      exec(`${binPath} -t deliveries --inputFile ${csvFilePath}`,
+        (error, stdout, stderr) => {
+          const expectedOutput = [{
+            orderNumber: '222',
+            shippingInfo: {
+              deliveries: [
+                {
+                  id: '1',
+                  items: [
+                    {
+                      id: '1',
+                      quantity: 100,
+                    },
+                  ],
+                },
+              ],
+            },
+          }]
+
+          expect(error && stderr).toBeFalsy()
+          expect(JSON.parse(stdout)).toEqual(expectedOutput)
+          done()
+        },
+      )
     })
   })
 })
