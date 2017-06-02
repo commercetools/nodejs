@@ -18,6 +18,7 @@ const actionGroups = [
   'images',
   'variants',
   'categories',
+  'categoryOrderHints',
 ]
 
 function createProductMapActions (mapActionGroup) {
@@ -49,6 +50,9 @@ function createProductMapActions (mapActionGroup) {
 
     allActions.push(mapActionGroup('categories', () =>
       productActions.actionsMapCategories(diff)))
+
+    allActions.push(mapActionGroup('categories', () =>
+      productActions.actionsMapCategoryOrderHints(diff, oldObj)))
 
     return flatten(allActions)
   }

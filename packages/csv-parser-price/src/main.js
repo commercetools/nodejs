@@ -93,6 +93,7 @@ export default class CsvParserPrice {
       if (value.centAmount)
         return {
           centAmount: Number(value.centAmount),
+          currencyCode: value.currencyCode,
         }
 
       return value
@@ -141,12 +142,11 @@ export default class CsvParserPrice {
   mergeBySku (data, currentPrice) {
     const previousPrice = data.prices[data.prices.length - 1]
     const sku = CONSTANTS.header.sku
-
-    if (previousPrice && previousPrice[sku] === currentPrice[sku])
+    if (previousPrice && previousPrice.sku === currentPrice[sku])
       previousPrice.prices.push(currentPrice)
     else
       data.prices.push({
-        [sku]: currentPrice[sku],
+        sku: currentPrice[sku],
         prices: [currentPrice],
       })
 
