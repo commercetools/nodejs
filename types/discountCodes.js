@@ -1,4 +1,5 @@
 /* @flow */
+import type { AuthMiddlewareOptions } from 'types/sdk'
 
 /* Discount Codes */
 export type CodeData = {
@@ -11,6 +12,9 @@ export type CodeData = {
   maxApplicationsPerCustomer?: number;
   uri: string;
   code?: string;
+  code?: string;
+  id?: string;
+  version?: number;
 }
 
 export type CodeDataArray = Array<CodeData>
@@ -20,3 +24,29 @@ export type CodeOptions = {
   length?: number;
   prefix?: string;
 }
+
+export type Summary = {
+  created: number;
+  updated: number;
+  unchanged: number;
+  createErrorCount: number;
+  updateErrorCount: number;
+  errors: Array<any>;
+}
+
+/* Logger */
+export type LoggerOptions = {
+  error: () => mixed;
+  info: () => mixed;
+  warn: () => mixed;
+  verbose: () => mixed;
+}
+
+/* Config */
+export type ConstructorOptions = {
+  apiConfig: AuthMiddlewareOptions;
+  batchSize: number;
+  continueOnProblems?: boolean;
+}
+
+export type ChunkOptions = Array<Object>
