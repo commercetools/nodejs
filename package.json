@@ -62,7 +62,7 @@
     "jest": "20.0.4",
     "lerna": "2.0.0-rc.5",
     "lerna-semantic-release": "9.1.0",
-    "npm-check-updates": "2.11.2",
+    "npm-check-updates": "2.11.3",
     "npm-run-all": "4.0.2",
     "rimraf": "2.6.1",
     "validate-commit-msg": "2.12.1",
