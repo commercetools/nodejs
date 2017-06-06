@@ -1,0 +1,5 @@
+name.en,name.de,description.en,description.de,cartDiscounts,cartPredicate,isActive,maxApplications,maxApplicationsPerCustomer,code
+James,Flo,some description,eine beschreibung,disc1;disc2;disc3,LineItems > "50",true,9,3,WICd36fsdc
+Thanksgiving,Himmelfahrt,some description 2,eine beschreibung 2,disc1;disc2;disc3,LineItems > "50",true,9,3,WICd346F6
+Christmas,Weinachten,some description 3,eine beschreibung 3,,LineItems > "50",true,9,3,WICQ364EDr
+Easter,Oster,some description 4,eine beschreibung 4,disc1;disc2;disc3,LineItems > "50",true,9,3,WIC109axn

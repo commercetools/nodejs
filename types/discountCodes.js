@@ -20,3 +20,18 @@ export type CodeOptions = {
   length?: number;
   prefix?: string;
 }
+
+/* Logger */
+export type LoggerOptions = {
+  error: () => mixed;
+  info: () => mixed;
+  warn: () => mixed;
+  verbose: () => mixed;
+}
+
+export type ParseOptions = {
+  continueOnProblems?: boolean;
+  delimiter?: string;
+  multiValueDelimiter?: string;
+
+}
