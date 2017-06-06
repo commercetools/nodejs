@@ -1,5 +1,4 @@
 import JSONStream from 'JSONStream'
-
 import AbstractParser from './abstract-parser'
 
 export default class LineItemStateParser extends AbstractParser {

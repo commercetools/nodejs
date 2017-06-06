@@ -34,17 +34,13 @@
     "JSONStream": "^1.3.1",
     "csv-parser": "^1.11.0",
     "highland": "^2.10.5",
-    "lodash.defaults": "^4.2.0",
-    "lodash.difference": "^4.5.0",
-    "lodash.filter": "^4.6.0",
-    "lodash.find": "^4.6.0",
+    "lodash": "^4.17.4",
     "npmlog": "^4.0.2",
+    "object-path": "^0.11.4",
     "pretty-error": "^2.0.3",
-    "yargs": "^7.0.2",
-    "streamtest": "^1.2.2"
-  },
-  "devDependencies": {
-    "sinon": "^1.17.6",
+    "yargs": "^8.0.1",
+    "sinon": "^2.3.2",
+    "streamtest": "^1.2.2",
     "tmp": "^0.0.31"
   }
 }
