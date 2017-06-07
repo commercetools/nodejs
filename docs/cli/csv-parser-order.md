@@ -16,16 +16,15 @@ Usage: csvparserorder [options]
 Convert commercetools order CSV data to JSON.
 
 Options:
-  --help, -h        Show help text.                                    [boolean]
-  --version, -v     Show version number.                               [boolean]
-  --type, -t        Predefined type of csv.
-                             [required] [choices: "lineitemstate", "returninfo", 'deliveries']
-  --inputFile, -i   Path to input CSV file.                       [default: "stdin"]
-  --outputFile, -o  Path to output JSON file.                     [default: "stdout"]
-  --batchSize, -b   Number of CSV rows to handle simultaneously.  [default: 100]
-  --delimiter, -d   Used CSV delimiter.                           [default: ","]
-  --strictMode, -s  Parse CSV strictly.                           [default: true]
-  --logLevel, -l    Logging level: error, warn, info or verbose.  [default: "info"]
+  --help, -h        Show help text.                              [boolean]
+  --version, -v     Show version number.                         [boolean]
+  --type, -t        Predefined type of csv.                      [required] [choices: "lineitemstate", "returninfo", "deliveries"]
+  --inputFile, -i   Path to input CSV file.                      [default: "stdin"]
+  --outputFile, -o  Path to output JSON file.                    [default: "stdout"]
+  --batchSize, -b   Number of CSV rows to handle simultaneously. [default: 100]
+  --delimiter, -d   Used CSV delimiter.                          [default: ","]
+  --strictMode, -s  Parse CSV strictly.                          [default: true]
+  --logLevel, -l    Logging level: error, warn, info or verbose. [default: "info"]
 ```
 
 #### Usage
@@ -36,9 +35,18 @@ Options:
 csvparserorder -t lineitemstate -i data/lineitemstate-input.csv
 
 # Output:
-[
-  {"orderNumber":"234","lineItems":[{"id":"123","state":[{"quantity":10,"fromState":"order","toState":"shipped","_fromStateQty":100}]}]}
-]
+[{
+	"orderNumber": "234",
+	"lineItems": [{
+		"id": "123",
+		"state": [{
+			"quantity": 10,
+			"fromState": "order",
+			"toState": "shipped",
+			"_fromStateQty": 100
+		}]
+	}]
+}]
 ```
 
 **Return info parser:**
