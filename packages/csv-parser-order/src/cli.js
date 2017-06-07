@@ -106,7 +106,7 @@ const errorHandler = (errors) => {
 
 const getModuleConfig = () => {
   // do not print info messages when exporting data to stdout
-  if (args.outputFile._type === 'tty' && !args.logLevel)
+  if (!args.outputFile.path && !args.logLevel)
     npmlog.level = 'error'
   else
     // else use required logLevel or the default one
