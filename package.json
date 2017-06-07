@@ -66,7 +66,7 @@
     "npm-run-all": "4.0.2",
     "rimraf": "2.6.1",
     "validate-commit-msg": "2.12.1",
-    "webpack": "2.6.1"
+    "webpack": "3.0.0-rc.1"
   },
   "config": {
     "commitizen": {
