@@ -33,5 +33,11 @@ export type ParseOptions = {
   continueOnProblems?: boolean;
   delimiter?: string;
   multiValueDelimiter?: string;
+}
 
+export type ParserSummary = {
+  total: number;
+  parsed: number;
+  notParsed: number;
+  errors: Array<string>;
 }
