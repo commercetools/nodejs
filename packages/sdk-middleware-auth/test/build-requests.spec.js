@@ -6,7 +6,7 @@ import {
 } from '../src/build-requests'
 import { scopes } from '../src'
 
-const allScopes = Object.values(scopes)
+const allScopes = Object.keys(scopes).map(key => scopes[key])
 
 function createTestOptions (options) {
   return {

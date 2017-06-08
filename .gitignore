@@ -18,3 +18,5 @@ coverage
 
 # OS clutter
 .DS_Store
+
+.idea
