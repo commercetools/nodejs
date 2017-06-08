@@ -19,8 +19,8 @@ export default class CsvParser {
   maxErrors: number;
   logger: LoggerOptions;
   _summary: ParserSummary;
-  _resolveCartDiscounts: () => mixed;
-  _handleErrors: () => mixed;
+  _resolveCartDiscounts: Function;
+  _handleErrors: Function;
 
 
   // should take in optional parameters: a logger and a configuration object
@@ -96,7 +96,7 @@ export default class CsvParser {
     return item
   }
 
-  _handleErrors (error: any, cb: () => mixed) {
+  _handleErrors (error: any, cb: Function) {
     if (this.continueOnProblems) {
       if (!this._summary.notParsed)
       // Log this message only once, even for multiple errors
