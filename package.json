@@ -65,7 +65,7 @@
     "npm-check-updates": "2.11.2",
     "npm-run-all": "4.0.2",
     "rimraf": "2.6.1",
-    "validate-commit-msg": "2.12.1",
+    "validate-commit-msg": "2.12.2",
     "webpack": "2.6.1"
   },
   "config": {
