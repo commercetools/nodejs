@@ -16,10 +16,11 @@ export default class CsvParser {
   delimiter: string;
   multiValueDelimiter: string;
   continueOnProblems: boolean;
+  maxErrors: number;
   logger: LoggerOptions;
+  _summary: ParserSummary;
   _resolveCartDiscounts: () => mixed;
   _handleErrors: () => mixed;
-  _summary: ParserSummary;
 
 
   // should take in optional parameters: a logger and a configuration object
@@ -37,6 +38,7 @@ export default class CsvParser {
     this.delimiter = options.delimiter || ','
     this.multiValueDelimiter = options.multiValueDelimiter || ';'
     this.continueOnProblems = options.continueOnProblems || false
+    this.maxErrors = options.maxErrors || Number.MAX_VALUE
 
     this._resolveCartDiscounts = this._resolveCartDiscounts.bind(this)
     this._handleErrors = this._handleErrors.bind(this)
@@ -94,15 +96,17 @@ export default class CsvParser {
     return item
   }
 
-  _handleErrors (error: any, push: () => mixed) {
+  _handleErrors (error: any, cb: () => mixed) {
     if (this.continueOnProblems) {
       if (!this._summary.notParsed)
       // Log this message only once, even for multiple errors
         this.logger.error('Error occured but will be ignored')
       this._summary.total += 1
       this._summary.notParsed += 1
-      this._summary.errors.push(error.toString())
-    } else push(error)
+      // Push error to max length specified
+      if (this._summary.errors.length < this.maxErrors)
+        this._summary.errors.push(error.toString())
+    } else cb(error)
   }
 
   _resetSummary () {

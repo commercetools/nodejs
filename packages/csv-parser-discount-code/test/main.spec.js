@@ -91,9 +91,6 @@ describe('CsvParser', () => {
       csvParser.parse(inputStream, outputStream)
     })
 
-    // TODO
-    it('should throw by default on error ', () => {})
-
     it('should resolve on success', async (done) => {
       const summary = { parsed: 5, notParsed: 0, errors: [] }
 
@@ -111,6 +108,15 @@ describe('CsvParser', () => {
       expect(
         await csvParser.parse(inputStream, outputStream),
       ).toMatchObject(summary)
+    })
+
+    it('should throw by default on error ', () => {
+      const inputStream = fs.createReadStream(
+        path.join(__dirname, 'helpers/faultyCsv.csv'),
+      )
+      const outputStream = process.stdout
+
+      expect(() => csvParser(inputStream, outputStream)).toThrow()
     })
 
     it('should skip rows with error if `continueOnProblems`', async (done) => {

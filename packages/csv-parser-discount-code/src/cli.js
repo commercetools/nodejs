@@ -80,7 +80,15 @@ Convert commercetools discount codes CSV data to JSON.`,
     type: 'boolean',
   })
 
+  .option('errors', {
+    alias: 'e',
+    default: 20,
+    describe: 'Maximum number of errors to log.',
+    type: 'number',
+  })
+
   .option('logLevel', {
+    alias: 'l',
     default: 'info',
     describe: 'Logging level: error, warn, info or verbose.',
   })
@@ -95,6 +103,7 @@ const buildOptions = _args => ({
   delimiter: _args['delimiter'],
   multiValueDelimiter: _args['multiValueDelimiter'],
   continueOnProblems: _args['continueOnProblems'],
+  maxErrors: _args['errors'],
 })
 
 const logError = (error) => {
