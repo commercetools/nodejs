@@ -92,8 +92,10 @@ describe('CSV and CLI Tests', () => {
 
   describe('CLI logs specific errors', () => {
     test('on faulty CSV format', (done) => {
-      // eslint-disable-next-line max-len
-      const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
+      const csvFilePath = path.join(
+        samplesFolder,
+        'faulty-sample.csv',
+      )
       const jsonFilePath = tmp.fileSync().name
 
       exec(`${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t returninfo`,
@@ -130,8 +132,9 @@ describe('CSV and CLI Tests', () => {
         (error, stdout, stderr) => {
           expect(error.code).toBe(1)
           expect(stdout).toBeFalsy()
-          // eslint-disable-next-line max-len
-          expect(stderr).toMatch(/Required headers missing: 'fromState,toState'/)
+          expect(stderr).toMatch(
+            /Required headers missing: 'fromState,toState'/,
+          )
           done()
         },
       )
