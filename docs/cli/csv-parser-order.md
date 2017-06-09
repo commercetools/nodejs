@@ -5,7 +5,7 @@
 [![David Dependencies Status][david-icon]][david]
 [![David devDependencies Status][david-dev-icon]][david-dev]
 
-Convert [commercetools order](https://dev.commercetools.com/http-api-projects-orders.html) CSV data to JSON. See examples below for CSV format and sample responses.
+Convert [commercetools order](https://dev.commercetools.com/http-api-projects-orders.html) CSV data to JSON. See examples below for supported CSV format and sample responses.
 
 ## Usage
 `npm install @commercetools/csv-parser-order --global`
@@ -29,12 +29,14 @@ Options:
 
 #### Usage
 
-**Line item state parser:**
-```
-# Command:
-csvparserorder -t lineitemstate -i data/lineitemstate-input.csv
+##### Line item state parser:
 
-# Output:
+**Command:**
+```bash
+$ csvparserorder -t lineitemstate -i data/lineitemstate-input.csv
+```
+**Output:**
+```json
 [{
 	"orderNumber": "234",
 	"lineItems": [{
@@ -49,12 +51,14 @@ csvparserorder -t lineitemstate -i data/lineitemstate-input.csv
 }]
 ```
 
-**Return info parser:**
+##### Return info parser:
+**Command:**
+```bash
+$ csvparserorder -t returninfo -i data/return-info-sample-input.csv
 ```
-# Command:
-csvparserorder -t returninfo -i data/return-info-sample-input.csv
 
-# Indented output:
+**Output:**
+```json
 [{
 	"orderNumber": "123",
 	"returnInfo": [{
@@ -99,12 +103,14 @@ csvparserorder -t returninfo -i data/return-info-sample-input.csv
 }]
 ```
 
-**Deliveries parser:**
+##### Deliveries parser:
+**Command:**
+```bash
+$ csvparserorder.js -t deliveries -i data/deliveries/delivery.csv
 ```
-# Command:
-csvparserorder.js -t deliveries -i data/deliveries/delivery.csv
 
-# Indented output:
+**Output:**
+```json
 [{
 	"orderNumber": "222",
 	"shippingInfo": {
@@ -197,7 +203,7 @@ All `LineItemStateCsvParser`, `AddReturnInfoCsvParser` and `DeliveriesCsvParser`
   - `delimiter`: the used CSV delimiter (_default_: `,`)
   - `strictMode`: require CSV column length to match headers length (_default_: true)
 
-## CSV format
+## CSV formats
 
 ### Return info
 Sample returnInfo sample CSV file
