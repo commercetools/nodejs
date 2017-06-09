@@ -28,17 +28,20 @@ export default class CsvParser {
     logger: LoggerOptions,
     options: ParseOptions = {},
   ) {
+    const defaultOptions = {
+      delimiter: ',',
+      multiValueDelimiter: ';',
+      continueOnProblems: false,
+      maxErrors: Number.MAX_VALUE,
+    }
+    _.defaults(this, options, defaultOptions)
+
     this.logger = logger || {
       error: npmlog.error.bind(this, ''),
       warn: npmlog.warn.bind(this, ''),
       info: npmlog.info.bind(this, ''),
       verbose: npmlog.verbose.bind(this, ''),
     }
-
-    this.delimiter = options.delimiter || ','
-    this.multiValueDelimiter = options.multiValueDelimiter || ';'
-    this.continueOnProblems = options.continueOnProblems || false
-    this.maxErrors = options.maxErrors || Number.MAX_VALUE
 
     this._resolveCartDiscounts = this._resolveCartDiscounts.bind(this)
     this._handleErrors = this._handleErrors.bind(this)
@@ -53,7 +56,7 @@ export default class CsvParser {
   parse (input: ReadableStream, output: WritableStream) {
     this.logger.info('Starting conversion')
     // Define stream and it's transforms
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       const main = highland(input)
         .through(csv({
           separator: this.delimiter,
@@ -63,6 +66,7 @@ export default class CsvParser {
         .map(unflatten)
         .map(this._resolveCartDiscounts)
         .errors(this._handleErrors)
+        .stopOnError(reject) // <- Handle errors if continueOnProblems is false
 
       // Add an observer to handle count and attach a custom end marker
       // This is necessary because `pipe` consumes the stream and so does `done`
@@ -80,12 +84,12 @@ export default class CsvParser {
           if (!_.isEqual(data, { marker: 'endOfFile' })) {
             this._summary.total += 1
             this._summary.parsed += 1
-          } else {
-            this.logger.info('Operation Complete')
-            resolve(this._summary)
           }
         })
-        .done(() => {})
+        .done(() => {
+          this.logger.info('Operation Complete')
+          resolve(this._summary)
+        })
     })
   }
 
@@ -97,7 +101,7 @@ export default class CsvParser {
   }
 
   _handleErrors (error: any, cb: Function) {
-    if (this.continueOnProblems) {
+    if (this.continueOnProblems) { // <- Handle error here and continue
       if (!this._summary.notParsed)
       // Log this message only once, even for multiple errors
         this.logger.error('Error occured but will be ignored')
@@ -106,7 +110,7 @@ export default class CsvParser {
       // Push error to max length specified
       if (this._summary.errors.length < this.maxErrors)
         this._summary.errors.push(error.toString())
-    } else cb(error)
+    } else cb(error) // <- Rethrow the error to `stopOnError` function
   }
 
   _resetSummary () {

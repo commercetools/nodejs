@@ -30,11 +30,7 @@ describe('CsvParser', () => {
   })
 
   describe('::_removeEmptyFields', () => {
-    it('should be defined', () => {
-      expect(CsvParser._removeEmptyFields).toBeDefined()
-    })
-
-    it('should be remove empty fields from code objects', () => {
+    it('should remove empty fields from code objects', () => {
       const actual = {
         foo: 'bar',
         empty: '',
@@ -49,10 +45,6 @@ describe('CsvParser', () => {
   })
 
   describe('::_resolveCartDiscounts', () => {
-    it('should be defined', () => {
-      expect(csvParser._resolveCartDiscounts).toBeDefined()
-    })
-
     it('should convert `cartDiscounts` property to an Array', () => {
       const actual = {
         foo: 'bar',
@@ -72,10 +64,6 @@ describe('CsvParser', () => {
   })
 
   describe(':: parse', () => {
-    it('should be defined', () => {
-      expect(csvParser.parse).toBeDefined()
-    })
-
     it('should accept a stream and output a stream', (done) => {
       const inputStream = fs.createReadStream(
         path.join(__dirname, 'helpers/sampleCodes.csv'),
@@ -110,13 +98,19 @@ describe('CsvParser', () => {
       ).toMatchObject(summary)
     })
 
-    it('should throw by default on error ', () => {
+    it('should reject by default on error', async () => {
       const inputStream = fs.createReadStream(
         path.join(__dirname, 'helpers/faultyCsv.csv'),
       )
-      const outputStream = process.stdout
+      const outputStream = streamtest['v2'].toText(() => {})
+      const expectedError = new Error('Row length does not match headers')
 
-      expect(() => csvParser(inputStream, outputStream)).toThrow()
+      try {
+        await csvParser.parse(inputStream, outputStream)
+      } catch (error) {
+        expect(error).toMatchObject(expectedError)
+        expect(error.message).toMatch(expectedError.message)
+      }
     })
 
     it('should skip rows with error if `continueOnProblems`', async (done) => {
