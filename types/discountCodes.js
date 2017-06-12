@@ -36,10 +36,10 @@ export type Summary = {
 
 /* Logger */
 export type LoggerOptions = {
-  error: () => mixed;
-  info: () => mixed;
-  warn: () => mixed;
-  verbose: () => mixed;
+  error: Function;
+  info: Function;
+  warn: Function;
+  verbose: Function;
 }
 
 /* Config */
