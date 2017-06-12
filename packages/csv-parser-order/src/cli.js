@@ -59,7 +59,6 @@ Convert commercetools order CSV data to JSON.`,
     if (arg !== 'stdout')
       return fs.createWriteStream(String(arg))
 
-    npmlog.stream = fs.createWriteStream('csvparserorder.log')
     return process.stdout
   })
 
@@ -85,6 +84,11 @@ Convert commercetools order CSV data to JSON.`,
     alias: 'l',
     default: CONSTANTS.standardOption.defaultLogLevel,
     describe: 'Logging level: error, warn, info or verbose.',
+  })
+
+  .option('logFile', {
+    default: CONSTANTS.standardOption.defaultLogFile,
+    describe: 'Path to file where to save logs.',
   })
   .argv
 
@@ -124,6 +128,9 @@ const getModuleConfig = () => ({
   },
 })
 
+
+if (args.outputFile === process.stdout)
+  npmlog.stream = fs.createWriteStream(args.logFile)
 
 const methodMapping = {
   lineitemstate: config => new LineItemStateCsvParser(config),

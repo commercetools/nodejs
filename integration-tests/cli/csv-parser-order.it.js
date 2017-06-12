@@ -12,7 +12,6 @@ import { version } from '../../packages/csv-parser-order/package.json'
 describe('CSV and CLI Tests', () => {
   const binPath = './integration-tests/node_modules/.bin/csvparserorder'
   const samplesFolder = './packages/csv-parser-order/test/data'
-  const logFile = 'csvparserorder.log'
 
   describe('CLI basic functionality', () => {
     test('should print usage information given the help flag', (done) => {
@@ -231,13 +230,16 @@ describe('CSV and CLI Tests', () => {
     })
 
     test('CLI should log to file when using stdout for data output', (done) => {
+      const tmpFile = tmp.fileSync()
       const csvFilePath = path.join(
         samplesFolder, 'deliveries/delivery-simple.csv',
       )
-      exec(`${binPath} -t deliveries --inputFile ${csvFilePath}`,
+      // eslint-disable-next-line max-len
+      exec(`${binPath} -t deliveries --inputFile ${csvFilePath} --logFile ${tmpFile.name}`,
         () => {
-          fs.readFile(logFile, { encoding: 'utf8' }, (error, data) => {
+          fs.readFile(tmpFile.name, { encoding: 'utf8' }, (error, data) => {
             expect(data).toMatch(/info Starting Deliveries CSV conversion/)
+            tmpFile.removeCallback()
             done()
           })
         },
@@ -245,16 +247,18 @@ describe('CSV and CLI Tests', () => {
     })
 
     test('CLI should log errors to stderr and log file', (done) => {
+      const tmpFile = tmp.fileSync()
       const expectedError = 'Row length does not match headers'
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
-
-      exec(`${binPath} -t deliveries --inputFile ${csvFilePath}`,
+      // eslint-disable-next-line max-len
+      exec(`${binPath} -t deliveries --inputFile ${csvFilePath} --logFile ${tmpFile.name}`,
         (error, stdout, stderr) => {
           expect(error).toBeTruthy()
           expect(stderr).toMatch(expectedError)
 
-          fs.readFile(logFile, { encoding: 'utf8' }, (err, data) => {
+          fs.readFile(tmpFile.name, { encoding: 'utf8' }, (err, data) => {
             expect(data).toContain(expectedError)
+            tmpFile.removeCallback()
             done()
           })
         },

@@ -27,6 +27,7 @@ const CONSTANTS = {
     ],
   },
   standardOption: {
+    defaultLogFile: 'csvparserorder.log',
     defaultLogLevel: 'info',
     batchSize: 100,
     delimiter: ',',

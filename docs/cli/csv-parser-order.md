@@ -25,6 +25,7 @@ Options:
   --delimiter, -d   Used CSV delimiter.                          [default: ","]
   --strictMode, -s  Parse CSV strictly.                          [default: true]
   --logLevel, -l    Logging level: error, warn, info or verbose. [default: "info"]
+  --logFile         Path to file where to save logs.             [default: "csvparserorder.log"]
 ```
 
 #### Usage

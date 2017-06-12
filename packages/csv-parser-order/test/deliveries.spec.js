@@ -1,6 +1,5 @@
 import StreamTest from 'streamtest'
 import path from 'path'
-import sinon from 'sinon'
 import fs from 'fs'
 import DeliveriesParser from '../src/parsers/deliveries'
 
@@ -35,7 +34,6 @@ describe('DeliveriesParser', () => {
   it('::parse should return an error with invalid csv', (done) => {
     const expectedError = /Row length does not match headers/
     const deliveriesParser = new DeliveriesParser()
-    const spy = sinon.stub(deliveriesParser.logger, 'error')
     const readStream = streamTestFile('delivery-error-row-length.csv')
 
     const outputStream = StreamTest['v2'].toText((err) => {
@@ -43,11 +41,9 @@ describe('DeliveriesParser', () => {
     })
 
     return deliveriesParser.parse(readStream, outputStream)
+      .then(() => Promise.reject('Should return an error'))
       .catch((err) => {
         expect(expectedError.test(err)).toBeTruthy()
-        expect(expectedError.test(spy.args[0][0])).toBeTruthy()
-
-        deliveriesParser.logger.error.restore()
         done()
       })
   })
@@ -56,7 +52,6 @@ describe('DeliveriesParser', () => {
     // eslint-disable-next-line max-len
     const expectedError = /Required headers missing: 'orderNumber,item\.quantity'/
     const deliveriesParser = new DeliveriesParser()
-    const spy = sinon.stub(deliveriesParser.logger, 'error')
     const readStream = streamTestFile('delivery-error-missing-headers.csv')
 
     const outputStream = StreamTest['v2'].toText((err) => {
@@ -65,10 +60,7 @@ describe('DeliveriesParser', () => {
 
     return deliveriesParser.parse(readStream, outputStream)
       .catch((err) => {
-        expect(expectedError.test(spy.args[0][0])).toBeTruthy()
         expect(expectedError.test(err)).toBeTruthy()
-
-        deliveriesParser.logger.error.restore()
         done()
       })
   })
@@ -291,15 +283,12 @@ describe('DeliveriesParser', () => {
   it('::parse should return an error when not all measurements are provided', () => {
     const expectedError = /All measurement fields are mandatory/
     const deliveriesParser = new DeliveriesParser()
-    const spy = sinon.stub(deliveriesParser.logger, 'error')
     const readStream = streamTestFile('delivery-error-measurements.csv')
     const outputStream = StreamTest['v2'].toText(() => {})
 
     return deliveriesParser.parse(readStream, outputStream)
       .catch((err) => {
         expect(expectedError.test(err)).toBeTruthy()
-        expect(expectedError.test(spy.args[0][0])).toBeTruthy()
-        deliveriesParser.logger.error.restore()
       })
   })
 

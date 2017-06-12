@@ -39,10 +39,7 @@ export default class AbstractParser {
       })
       .flatMap(highland)
       .flatMap(data => highland(this._processData(data)))
-      .stopOnError((err) => {
-        this.logger.error(err)
-        return reject(err)
-      })
+      .stopOnError(reject)
       .doto(data => this.logger.verbose(
         `Converted row-${rowIndex}: ${JSON.stringify(data)}`))
   }

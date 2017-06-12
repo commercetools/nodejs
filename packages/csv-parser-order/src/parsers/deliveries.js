@@ -15,10 +15,6 @@ export default class DeliveriesParser extends AbstractParser {
     return new Promise((resolve, reject) => {
       const stream = this._streamInput(input, reject)
         .reduce([], DeliveriesParser._groupByDeliveryId)
-        .errors((err, push) => {
-          this.logger.error(err)
-          push(err)
-        })
         .stopOnError(reject)
         .flatMap(data => highland(DeliveriesParser._cleanOrders(data)))
         .pipe(JSONStream.stringify(false))

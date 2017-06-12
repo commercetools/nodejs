@@ -95,8 +95,6 @@ describe('AddReturnInfoParser', () => {
 
     const outputStream = StreamTest['v2'].toText((err, res) => {
       expect(res).toEqual('[]')
-      expect(mockErrorLog.mock.calls[0][0]).toEqual(
-        'Required headers missing: \'orderNumber\'')
     })
 
     parser.parse(readStream, outputStream)
