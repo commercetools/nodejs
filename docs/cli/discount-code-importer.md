@@ -88,7 +88,7 @@ sphere-node-cli -t discountCode -p my-project-key -f /sample_dir/codes.json
 ```
 Custom optional configuration can be passed in as described above using the `-c` flag
 ```bash
-sphere-node-cli -t discountCode -p my-project-key -f /sample_dir/codes.json -c '{ "batchSize": 20, "continueOnProblems": false }'
+sphere-node-cli -t discountCode -p my-project-key -f /sample_dir/codes.json -b 20 -c '{ "continueOnProblems": true }'
 ```
 
 ## Direct Usage
@@ -172,8 +172,8 @@ const options = {
       host: 'https://auth.commercetools.com'
       project_key: <PROJECT_KEY>,
       credentials: {
-        client_id: '*********',
-        client_secret: '*********'
+        clientId: '*********',
+        clientSecret: '*********'
       }
     },
     batchSize: 20,

@@ -53,7 +53,7 @@ export default class DiscountCodeImport {
           libraryName: pkg.name,
           libraryVersion: pkg.version,
         }),
-        createHttpMiddleware({ host: this.apiConfig.host }),
+        createHttpMiddleware({ host: this.apiConfig.apiUrl }),
       ],
     })
 
@@ -108,7 +108,7 @@ export default class DiscountCodeImport {
     })
       .then(() => Promise.resolve(this.summaryReport()))
       .catch(error => Promise.reject({
-        error,
+        error: error.message ? error.message : error,
         summary: this._summary,
       }),
       )
@@ -129,7 +129,9 @@ export default class DiscountCodeImport {
           .catch((error) => {
             if (this.continueOnProblems) {
               this._summary.updateErrorCount += 1
-              this._summary.errors.push(error)
+              this._summary.errors.push(
+                error.message ? error.message : error,
+              )
               // eslint-disable-next-line max-len
               const msg = 'Update error occured but ignored. See summary for details'
               this.logger.error(msg)
@@ -139,7 +141,9 @@ export default class DiscountCodeImport {
             const msg = 'Process stopped due to error while creating discount code. See summary for details'
             this.logger.error(msg)
             this._summary.updateErrorCount += 1
-            this._summary.errors.push(error)
+            this._summary.errors.push(
+              error.message ? error.message : error,
+            )
             return Promise.reject(error)
           })
       return this._create(newCode)
@@ -150,7 +154,9 @@ export default class DiscountCodeImport {
         .catch((error) => {
           if (this.continueOnProblems) {
             this._summary.createErrorCount += 1
-            this._summary.errors.push(error)
+            this._summary.errors.push(
+              error.message ? error.message : error,
+            )
             // eslint-disable-next-line max-len
             const msg = 'Create error occured but ignored. See summary for details'
             this.logger.error(msg)
@@ -160,7 +166,9 @@ export default class DiscountCodeImport {
           const msg = 'Process stopped due to error while creating discount code. See summary for details'
           this.logger.error(msg)
           this._summary.createErrorCount += 1
-          this._summary.errors.push(error)
+          this._summary.errors.push(
+            error.message ? error.message : error,
+          )
           return Promise.reject(error)
         })
     })
