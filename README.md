@@ -63,6 +63,7 @@ https://commercetools.github.io/nodejs/
 | Package | Version | Dependencies |
 |--------|-------|------------|
 | [`csv-parser-price`](/packages/csv-parser-price) | [![csv-parser-price Version][csv-parser-price-icon]][csv-parser-price-version] | [![csv-parser-price Dependencies Status][csv-parser-price-dependencies-icon]][csv-parser-price-dependencies] |
+| [`csv-parser-discount-code`](/packages/csv-parser-discount-code) | [![csv-parser-discount-code Version][csv-parser-discount-code-icon]][csv-parser-discount-code-version] | [![csv-parser-discount-code Dependencies Status][csv-parser-discount-code-dependencies-icon]][csv-parser-discount-code-dependencies] |
 | [`discount-code-generator`](/packages/discount-code-generator) | [![discount-code-generator Version][discount-code-generator-icon]][discount-code-generator-version] | [![discount-code-generator Dependencies Status][discount-code-generator-dependencies-icon]][discount-code-generator-dependencies] |
 
 ### Other
@@ -79,6 +80,10 @@ https://commercetools.github.io/nodejs/
 [csv-parser-price-icon]: https://img.shields.io/npm/v/@commercetools/csv-parser-price.svg?style=flat-square
 [csv-parser-price-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/csv-parser-price
 [csv-parser-price-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/csv-parser-price&style=flat-square
+[csv-parser-discount-code-version]: https://www.npmjs.com/package/@commercetools/csv-parser-discount-code
+[csv-parser-discount-code-icon]: https://img.shields.io/npm/v/@commercetools/csv-parser-discount-code.svg?style=flat-square
+[csv-parser-discount-code-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/csv-parser-discount-code
+[csv-parser-discount-code-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/csv-parser-discount-code&style=flat-square
 [discount-code-generator-version]: https://www.npmjs.com/package/@commercetools/discount-code-generator
 [discount-code-generator-icon]: https://img.shields.io/npm/v/@commercetools/discount-code-generator.svg?style=flat-square
 [discount-code-generator-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/discount-code-generator

@@ -21,5 +21,6 @@
       * [http-user-agent](/sdk/api/httpUserAgent.md)
       * [sync-actions](/sdk/api/syncActions.md)
 * [CLI](/cli/README.md)
-  * [CSV Price Parser](/cli/csv-parser-price.md)
+  * [CSV Parser Price](/cli/csv-parser-price.md)
+  * [CSV Parser Discount Code](/cli/csv-parser-discount-code.md)
   * [Discount Code Generator](/cli/discount-code-generator.md)
