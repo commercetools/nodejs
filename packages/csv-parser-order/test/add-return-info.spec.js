@@ -94,7 +94,7 @@ describe('AddReturnInfoParser', () => {
       path.join(__dirname, 'data/return-info-error2-sample.csv'))
 
     const outputStream = StreamTest['v2'].toText((err, res) => {
-      expect(res).toEqual('')
+      expect(res).toEqual('[]')
       expect(mockErrorLog.mock.calls[0][0]).toEqual(
         'Required headers missing: \'orderNumber\'')
     })

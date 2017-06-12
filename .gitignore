@@ -1,6 +1,5 @@
 # Logs
-npm-debug.log
-lerna-debug.log
+*.log
 
 # Env files
 *.env

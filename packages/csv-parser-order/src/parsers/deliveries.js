@@ -13,7 +13,7 @@ export default class DeliveriesParser extends AbstractParser {
   parse (input, output) {
     this.logger.info('Starting Deliveries CSV conversion')
     return new Promise((resolve, reject) => {
-      const stream = this._streamInput(input)
+      const stream = this._streamInput(input, reject)
         .reduce([], DeliveriesParser._groupByDeliveryId)
         .errors((err, push) => {
           this.logger.error(err)
@@ -28,7 +28,7 @@ export default class DeliveriesParser extends AbstractParser {
       stream.on('error', reject)
 
       // process.stdout does not emit finish stream
-      if (output._type === 'tty')
+      if (output === process.stdout)
         input.on('end', resolve)
     })
   }

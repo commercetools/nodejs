@@ -59,6 +59,7 @@ Convert commercetools order CSV data to JSON.`,
     if (arg !== 'stdout')
       return fs.createWriteStream(String(arg))
 
+    npmlog.stream = fs.createWriteStream('csvparserorder.log')
     return process.stdout
   })
 
@@ -82,6 +83,7 @@ Convert commercetools order CSV data to JSON.`,
 
   .option('logLevel', {
     alias: 'l',
+    default: CONSTANTS.standardOption.defaultLogLevel,
     describe: 'Logging level: error, warn, info or verbose.',
   })
   .argv
@@ -89,8 +91,12 @@ Convert commercetools order CSV data to JSON.`,
 const logError = (error) => {
   const errorFormatter = new PrettyError()
 
+  // print errors to stderr even if we use stdout for data output
+  if (args.outputFile === process.stdout)
+    console.error('ERR:', error.message || error)
+
   if (npmlog.level === 'verbose')
-    process.stderr.write(errorFormatter.render(error))
+    npmlog.error(errorFormatter.render(error))
   else
     npmlog.error('', error.message || error)
 }
@@ -101,31 +107,23 @@ const errorHandler = (errors) => {
   else
     logError(errors)
 
-  process.exit(1)
+  process.exitCode = 1
 }
 
-const getModuleConfig = () => {
-  // do not print info messages when exporting data to stdout
-  if (!args.outputFile.path && !args.logLevel)
-    npmlog.level = 'error'
-  else
-    // else use required logLevel or the default one
-    npmlog.level = args.logLevel || CONSTANTS.standardOption.defaultLogLevel
+const getModuleConfig = () => ({
+  logger: {
+    error: errorHandler,
+    warn: npmlog.warn.bind(this, ''),
+    info: npmlog.info.bind(this, ''),
+    verbose: npmlog.verbose.bind(this, ''),
+  },
+  csvConfig: {
+    delimiter: args.delimiter,
+    batchSize: args.batchSize,
+    strictMode: args.strictMode,
+  },
+})
 
-  return {
-    logger: {
-      error: errorHandler,
-      warn: npmlog.warn.bind(this, ''),
-      info: npmlog.info.bind(this, ''),
-      verbose: npmlog.verbose.bind(this, ''),
-    },
-    csvConfig: {
-      delimiter: args.delimiter,
-      batchSize: args.batchSize,
-      strictMode: args.strictMode,
-    },
-  }
-}
 
 const methodMapping = {
   lineitemstate: config => new LineItemStateCsvParser(config),

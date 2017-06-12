@@ -24,7 +24,7 @@ export default class AbstractParser {
     })
   }
 
-  _streamInput (input) {
+  _streamInput (input, reject) {
     let rowIndex = 1
 
     return highland(input)
@@ -39,9 +39,9 @@ export default class AbstractParser {
       })
       .flatMap(highland)
       .flatMap(data => highland(this._processData(data)))
-      .errors((err, push) => {
+      .stopOnError((err) => {
         this.logger.error(err)
-        push(err)
+        return reject(err)
       })
       .doto(data => this.logger.verbose(
         `Converted row-${rowIndex}: ${JSON.stringify(data)}`))

@@ -12,6 +12,7 @@ import { version } from '../../packages/csv-parser-order/package.json'
 describe('CSV and CLI Tests', () => {
   const binPath = './integration-tests/node_modules/.bin/csvparserorder'
   const samplesFolder = './packages/csv-parser-order/test/data'
+  const logFile = 'csvparserorder.log'
 
   describe('CLI basic functionality', () => {
     test('should print usage information given the help flag', (done) => {
@@ -146,8 +147,8 @@ describe('CSV and CLI Tests', () => {
       exec(`${binPath} -i ${csvFilePath} --logLevel verbose -t returninfo`,
         (error, stdout, stderr) => {
           expect(error.code).toBe(1)
-          expect(stdout).toBeFalsy()
-          expect(stderr).toMatch(/\.js:\d+:\d+/)
+          expect(stdout).toMatch('[]')
+          expect(stderr).toMatch(/ERR: Row length does not match headers/)
           done()
         },
       )
@@ -225,6 +226,37 @@ describe('CSV and CLI Tests', () => {
           expect(error && stderr).toBeFalsy()
           expect(JSON.parse(stdout)).toEqual(expectedOutput)
           done()
+        },
+      )
+    })
+
+    test('CLI should log to file when using stdout for data output', (done) => {
+      const csvFilePath = path.join(
+        samplesFolder, 'deliveries/delivery-simple.csv',
+      )
+      exec(`${binPath} -t deliveries --inputFile ${csvFilePath}`,
+        () => {
+          fs.readFile(logFile, { encoding: 'utf8' }, (error, data) => {
+            expect(data).toMatch(/info Starting Deliveries CSV conversion/)
+            done()
+          })
+        },
+      )
+    })
+
+    test('CLI should log errors to stderr and log file', (done) => {
+      const expectedError = 'Row length does not match headers'
+      const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
+
+      exec(`${binPath} -t deliveries --inputFile ${csvFilePath}`,
+        (error, stdout, stderr) => {
+          expect(error).toBeTruthy()
+          expect(stderr).toMatch(expectedError)
+
+          fs.readFile(logFile, { encoding: 'utf8' }, (err, data) => {
+            expect(data).toContain(expectedError)
+            done()
+          })
         },
       )
     })

@@ -10,7 +10,7 @@ export default class AddReturnInfoParser extends AbstractParser {
   parse (input, output) {
     this.logger.info('Starting Return Info CSV conversion')
     return new Promise((resolve, reject) => {
-      const stream = this._streamInput(input)
+      const stream = this._streamInput(input, reject)
         .reduce([], AddReturnInfoParser._reduceOrders)
         .stopOnError(reject)
         .pipe(JSONStream.stringify(false))
@@ -20,7 +20,7 @@ export default class AddReturnInfoParser extends AbstractParser {
       stream.on('error', reject)
 
       // process.stdout does not emit finish stream
-      if (output._type === 'tty')
+      if (output === process.stdout)
         input.on('end', resolve)
     })
   }
