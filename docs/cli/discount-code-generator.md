@@ -79,7 +79,7 @@ If we want to generate 3 discount codes, each having 9 characters(code-length), 
 ```
 and also wanting a JSON output, we would run the following command
 ```bash
-discount-code-generator -i /path-to-code-data/input.json -o /path-to-write-data/output.json -q 3 -l 9 -p FOO
+discount-code-gen -i /path-to-code-data/input.json -o /path-to-write-data/output.json -q 3 -l 9 -p FOO
 ```
 
 The following would be written to the output file:
