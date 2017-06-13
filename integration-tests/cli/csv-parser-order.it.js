@@ -147,7 +147,7 @@ describe('CSV and CLI Tests', () => {
       exec(`${binPath} -i ${csvFilePath} --logLevel verbose -t returninfo`,
         (error, stdout, stderr) => {
           expect(error.code).toBe(1)
-          expect(stdout).toMatch('[]')
+          expect(stdout).toMatch('')
           expect(stderr).toMatch(/ERR: Row length does not match headers/)
           done()
         },

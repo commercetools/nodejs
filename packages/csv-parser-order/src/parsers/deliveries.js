@@ -12,25 +12,15 @@ export default class DeliveriesParser extends AbstractParser {
 
   parse (input, output) {
     this.logger.info('Starting Deliveries CSV conversion')
-    return new Promise((resolve, reject) => {
-      const stream = this._streamInput(input, reject)
-        .reduce([], DeliveriesParser._groupByDeliveryId)
-        .errors((err, push) => {
-          this.logger.error(err)
-          push(err)
-        })
-        .stopOnError(reject)
-        .flatMap(data => highland(DeliveriesParser._cleanOrders(data)))
-        .pipe(JSONStream.stringify(false))
-        .pipe(output)
-
-      stream.on('finish', resolve)
-      stream.on('error', reject)
-
-      // process.stdout does not emit finish stream
-      if (output === process.stdout)
-        input.on('end', resolve)
-    })
+    this._streamInput(input, output)
+      .reduce([], DeliveriesParser._groupByDeliveryId)
+      .stopOnError((err) => {
+        this.logger.error(err)
+        return output.emit('error', err)
+      })
+      .flatMap(data => highland(DeliveriesParser._cleanOrders(data)))
+      .pipe(JSONStream.stringify(false))
+      .pipe(output)
   }
 
   // Take objectized CSV row and create an order object from it

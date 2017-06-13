@@ -29,7 +29,7 @@ describe('DeliveriesParser', () => {
       expect(JSON.parse(result).length).toEqual(2)
       done()
     })
-    return deliveriesParser.parse(readStream, outputStream)
+    deliveriesParser.parse(readStream, outputStream)
   })
 
   it('::parse should return an error with invalid csv', (done) => {
@@ -39,17 +39,12 @@ describe('DeliveriesParser', () => {
     const readStream = streamTestFile('delivery-error-row-length.csv')
 
     const outputStream = StreamTest['v2'].toText((err) => {
-      expect(err).toBeFalsy()
+      expect(expectedError.test(err)).toBeTruthy()
+      expect(expectedError.test(spy.args[0][0])).toBeTruthy()
+      done()
     })
 
-    return deliveriesParser.parse(readStream, outputStream)
-      .catch((err) => {
-        expect(expectedError.test(err)).toBeTruthy()
-        expect(expectedError.test(spy.args[0][0])).toBeTruthy()
-
-        deliveriesParser.logger.error.restore()
-        done()
-      })
+    deliveriesParser.parse(readStream, outputStream)
   })
 
   it('::parse should return an error with missing headers', (done) => {
@@ -60,17 +55,12 @@ describe('DeliveriesParser', () => {
     const readStream = streamTestFile('delivery-error-missing-headers.csv')
 
     const outputStream = StreamTest['v2'].toText((err) => {
-      expect(err).toBeFalsy()
+      expect(expectedError.test(spy.args[0][0])).toBeTruthy()
+      expect(expectedError.test(err)).toBeTruthy()
+      done()
     })
 
     return deliveriesParser.parse(readStream, outputStream)
-      .catch((err) => {
-        expect(expectedError.test(spy.args[0][0])).toBeTruthy()
-        expect(expectedError.test(err)).toBeTruthy()
-
-        deliveriesParser.logger.error.restore()
-        done()
-      })
   })
 
   it('::processData should accept a stream and output a stream', () => {
@@ -165,7 +155,7 @@ describe('DeliveriesParser', () => {
 
       done()
     })
-    return deliveriesParser.parse(readStream, outputStream)
+    deliveriesParser.parse(readStream, outputStream)
   })
 
   it('::parse should parse a CSV with multiple parcels', (done) => {
@@ -202,7 +192,7 @@ describe('DeliveriesParser', () => {
 
       done()
     })
-    return deliveriesParser.parse(readStream, outputStream)
+    deliveriesParser.parse(readStream, outputStream)
   })
 
   it('::parse should parse a CSV with multiple parcels', (done) => {
@@ -284,23 +274,22 @@ describe('DeliveriesParser', () => {
       expect(result).toEqual(_mockResult)
       done()
     })
-    return deliveriesParser.parse(readStream, outputStream)
+    deliveriesParser.parse(readStream, outputStream)
   })
 
   // eslint-disable-next-line max-len
-  it('::parse should return an error when not all measurements are provided', () => {
+  it('::parse should return an error when not all measurements are provided', (done) => {
     const expectedError = /All measurement fields are mandatory/
     const deliveriesParser = new DeliveriesParser()
     const spy = sinon.stub(deliveriesParser.logger, 'error')
     const readStream = streamTestFile('delivery-error-measurements.csv')
-    const outputStream = StreamTest['v2'].toText(() => {})
+    const outputStream = StreamTest['v2'].toText((err) => {
+      expect(expectedError.test(err)).toBeTruthy()
+      expect(expectedError.test(spy.args[0][0])).toBeTruthy()
+      done()
+    })
 
-    return deliveriesParser.parse(readStream, outputStream)
-      .catch((err) => {
-        expect(expectedError.test(err)).toBeTruthy()
-        expect(expectedError.test(spy.args[0][0])).toBeTruthy()
-        deliveriesParser.logger.error.restore()
-      })
+    deliveriesParser.parse(readStream, outputStream)
   })
 
   it('::parse returns an error when invalid item row is present', (done) => {
@@ -309,13 +298,12 @@ describe('DeliveriesParser', () => {
     const csvParserOrder = new DeliveriesParser()
 
     csvParserOrder.logger.error = () => {}
-    const outputStream = StreamTest['v2'].toText(() => {})
+    const outputStream = StreamTest['v2'].toText((err) => {
+      expect(expectedError.test(err)).toBeTruthy()
+      done()
+    })
 
     csvParserOrder.parse(inputStream, outputStream)
-      .catch((err) => {
-        expect(expectedError.test(err)).toBeTruthy()
-        done()
-      })
   })
 
   it('::parse returns an error when invalid parcel row is present', (done) => {
@@ -324,12 +312,11 @@ describe('DeliveriesParser', () => {
     const csvParserOrder = new DeliveriesParser()
 
     csvParserOrder.logger.error = () => {}
-    const outputStream = StreamTest['v2'].toText(() => {})
+    const outputStream = StreamTest['v2'].toText((err) => {
+      expect(expectedError.test(err)).toBeTruthy()
+      done()
+    })
 
     csvParserOrder.parse(inputStream, outputStream)
-      .catch((err) => {
-        expect(expectedError.test(err)).toBeTruthy()
-        done()
-      })
   })
 })

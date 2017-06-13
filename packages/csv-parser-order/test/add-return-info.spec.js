@@ -77,10 +77,10 @@ describe('AddReturnInfoParser', () => {
           }],
         },
       ])
+      done()
     })
 
     parser.parse(readStream, outputStream)
-      .then(done)
   })
 
   it('::parse should return error with missing headers', (done) => {
@@ -94,17 +94,15 @@ describe('AddReturnInfoParser', () => {
       path.join(__dirname, 'data/return-info-error2-sample.csv'))
 
     const outputStream = StreamTest['v2'].toText((err, res) => {
-      expect(res).toEqual('[]')
+      expect(res).toBeFalsy()
       expect(mockErrorLog.mock.calls[0][0]).toEqual(
-        'Required headers missing: \'orderNumber\'')
+        'Required headers missing: \'orderNumber\'',
+      )
+      expect(err).toEqual('Required headers missing: \'orderNumber\'')
+      done()
     })
 
     parser.parse(readStream, outputStream)
-      .then(() => done.fail('Should return an error.'))
-      .catch((err) => {
-        expect(err).toEqual('Required headers missing: \'orderNumber\'')
-        done()
-      })
   })
 
   it('::parse should return error with invalid csv', (done) => {
@@ -118,13 +116,12 @@ describe('AddReturnInfoParser', () => {
     const readStream = fs.createReadStream(
       path.join(__dirname, 'data/return-info-error-sample.csv'))
 
-    const outputStream = StreamTest['v2'].toText(() => {})
+    const outputStream = StreamTest['v2'].toText((err) => {
+      expect(err.toString())
+        .toEqual('Error: Row length does not match headers')
+      done()
+    })
     parser.parse(readStream, outputStream)
-      .catch((err) => {
-        expect(err.toString())
-          .toEqual('Error: Row length does not match headers')
-        done()
-      })
   })
 
   it('::processData should accept CSV object and output an order', (done) => {

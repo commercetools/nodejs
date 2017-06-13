@@ -24,7 +24,7 @@ export default class AbstractParser {
     })
   }
 
-  _streamInput (input, reject) {
+  _streamInput (input, output) {
     let rowIndex = 1
 
     return highland(input)
@@ -32,6 +32,10 @@ export default class AbstractParser {
         separator: this.csvConfig.delimiter,
         strict: this.csvConfig.strictMode,
       }))
+      .stopOnError((err) => {
+        this.logger.error(err)
+        return output.emit('error', err)
+      })
       .batch(this.csvConfig.batchSize)
       .doto((data) => {
         this.logger.verbose(`Parsed row-${rowIndex}: ${JSON.stringify(data)}`)
@@ -41,10 +45,12 @@ export default class AbstractParser {
       .flatMap(data => highland(this._processData(data)))
       .stopOnError((err) => {
         this.logger.error(err)
-        return reject(err)
+        return output.emit('error', err)
       })
       .doto(data => this.logger.verbose(
-        `Converted row-${rowIndex}: ${JSON.stringify(data)}`))
+        `Converted row-${rowIndex}: ${JSON.stringify(data)}`,
+        ),
+      )
   }
 
   _getMissingHeaders (data) {

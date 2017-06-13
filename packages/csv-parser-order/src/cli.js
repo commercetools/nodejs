@@ -131,6 +131,10 @@ const methodMapping = {
   deliveries: config => new DeliveriesCsvParser(config),
 }
 
+// Register error listener
+args.outputFile.on('error', (error) => {
+  errorHandler(error)
+})
+
 methodMapping[args.type](getModuleConfig())
   .parse(args.inputFile, args.outputFile)
-  .catch(errorHandler)
