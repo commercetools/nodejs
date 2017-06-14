@@ -44,7 +44,7 @@ describe('CsvParser', () => {
     })
   })
 
-  describe('::_resolveCartDiscounts', () => {
+  describe('::_cartDiscountsToArray', () => {
     it('should convert `cartDiscounts` property to an Array', () => {
       const actual = {
         foo: 'bar',
@@ -52,71 +52,55 @@ describe('CsvParser', () => {
       }
       const expected = {
         foo: 'bar',
-        cartDiscounts: ['high quality', 'low price'],
+        cartDiscounts: [
+          {
+            typeId: 'cart-discount',
+            id: 'high quality',
+          },
+          {
+            typeId: 'cart-discount',
+            id: 'low price',
+          }],
       }
-      expect(csvParser._resolveCartDiscounts(actual)).toEqual(expected)
+      expect(csvParser._cartDiscountsToArray(actual)).toEqual(expected)
     })
 
     it('should do nothing if there is no `cartDiscounts` property', () => {
       const sample = { foo: 'bar' }
-      expect(csvParser._resolveCartDiscounts(sample)).toEqual({ foo: 'bar' })
+      expect(csvParser._cartDiscountsToArray(sample)).toEqual({ foo: 'bar' })
     })
   })
 
   describe(':: parse', () => {
-    it('should accept a stream and output a stream', (done) => {
+    it('should successfully parse CSV to JSON', (done) => {
       const inputStream = fs.createReadStream(
         path.join(__dirname, 'helpers/sampleCodes.csv'),
       )
 
-      const outputStream = streamtest['v2'].toText(
-        (err, data) => {
-          const result = JSON.parse(data)
-          expect(result).toBeInstanceOf(Array)
-          expect(result.length).toBe(5)
-          done()
-        })
+      const outputStream = streamtest['v2'].toText((err, data) => {
+        const result = JSON.parse(data)
+        expect(result).toBeInstanceOf(Array)
+        expect(result.length).toBe(5)
+        done()
+      })
       csvParser.parse(inputStream, outputStream)
     })
 
-    it('should resolve on success', async (done) => {
-      const summary = { parsed: 5, notParsed: 0, errors: [] }
-
-      const inputStream = fs.createReadStream(
-        path.join(__dirname, 'helpers/sampleCodes.csv'),
-      )
-
-      const outputStream = streamtest['v2'].toText(
-        (err, data) => {
-          const result = JSON.parse(data)
-          expect(result).toBeInstanceOf(Array)
-          expect(result.length).toBe(5)
-          done()
-        })
-      expect(
-        await csvParser.parse(inputStream, outputStream),
-      ).toMatchObject(summary)
-    })
-
-    it('should reject by default on error', async () => {
+    it('should stop parsing by default on error', (done) => {
       const inputStream = fs.createReadStream(
         path.join(__dirname, 'helpers/faultyCsv.csv'),
       )
-      const outputStream = streamtest['v2'].toText(() => {})
-      const expectedError = new Error('Row length does not match headers')
-
-      try {
-        await csvParser.parse(inputStream, outputStream)
-      } catch (error) {
-        expect(error).toMatchObject(expectedError)
-        expect(error.message).toMatch(expectedError.message)
-      }
+      const expectedError = 'Row length does not match headers'
+      const outputStream = streamtest['v2'].toText((err, data) => {
+        expect(err.message).toMatch(expectedError)
+        expect(data).toBeFalsy()
+        done()
+      })
+      csvParser.parse(inputStream, outputStream)
     })
 
-    it('should skip rows with error if `continueOnProblems`', async (done) => {
+    it('should skip rows with error if `continueOnProblems`', (done) => {
       csvParser = new CsvParser(logger, { continueOnProblems: true })
-      const summary = { parsed: 3, notParsed: 2 }
-
       const inputStream = fs.createReadStream(
         path.join(__dirname, 'helpers/faultyCsv.csv'),
       )
@@ -128,9 +112,7 @@ describe('CsvParser', () => {
           expect(result.length).toBe(3)
           done()
         })
-      expect(
-        await csvParser.parse(inputStream, outputStream),
-      ).toMatchObject(summary)
+      csvParser.parse(inputStream, outputStream)
     })
   })
 })

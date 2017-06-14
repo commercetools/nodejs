@@ -1,5 +1,5 @@
 import fs from 'fs'
-import tmp from 'tmp-promise'
+import tmp from 'tmp'
 import npmlog from 'npmlog'
 import PrettyError from 'pretty-error'
 import yargs from 'yargs'
@@ -51,8 +51,10 @@ Convert commercetools discount codes CSV data to JSON.`,
     describe: 'Path to output JSON file.',
   })
   .coerce('output', (arg) => {
-    if (arg === 'stdout')
+    if (arg === 'stdout') {
+      npmlog.stream = fs.createWriteStream('discountCodeGenerator.log')
       return process.stdout
+    }
 
     if (arg.match(/\.json$/i))
       return String(arg)
@@ -79,13 +81,6 @@ Convert commercetools discount codes CSV data to JSON.`,
     type: 'boolean',
   })
 
-  .option('maxErrors', {
-    alias: 'e',
-    default: 20,
-    describe: 'Maximum number of errors to log.',
-    type: 'number',
-  })
-
   .option('logLevel', {
     alias: 'l',
     default: 'info',
@@ -102,8 +97,8 @@ const buildOptions = ({
   delimiter,
   multiValueDelimiter,
   continueOnProblems,
-  maxErrors }) => (
-  { delimiter, multiValueDelimiter, continueOnProblems, maxErrors }
+}) => (
+  { delimiter, multiValueDelimiter, continueOnProblems }
 )
 
 const logError = (error) => {
@@ -112,7 +107,7 @@ const logError = (error) => {
   if (npmlog.level === 'verbose')
     process.stderr.write(errorFormatter.render(error))
   else
-    npmlog.error('', error.message)
+    npmlog.error(error)
 }
 
 const errorHandler = (errors) => {
@@ -128,49 +123,35 @@ const errorHandler = (errors) => {
 const main = (_args) => {
   const options = buildOptions(_args)
   const csvParser = new CsvParser({
-    error: errorHandler,
-    warn: npmlog.warn.bind(this, ''),
-    info: npmlog.info.bind(this, ''),
-    verbose: npmlog.verbose.bind(this, ''),
+    error: npmlog.error.bind(this),
+    warn: npmlog.warn.bind(this),
+    info: npmlog.info.bind(this),
+    verbose: npmlog.verbose.bind(this),
   }, options)
-  if (_args.output === process.stdout) {
-    // Create temp file for log write to first,
-    // so we don't have empty log files
-    let tmpLog
-    tmp.file()
-      .then((tempLog) => {
-        tmpLog = tempLog.path
-        // Set temp file as default log destination
-        npmlog.stream = fs.createWriteStream(tempLog.path)
-        return csvParser.parse(_args.input, _args.output)
-      })
-      .then((info) => {
-        // Move temp log file to default location
-        fs.renameSync(tmpLog, 'csv-parser-discount-code.log')
-        npmlog.info(JSON.stringify(info, null, 1))
-      })
-      .catch((error) => {
-        // Log directly to `stderr` on error
-        npmlog.stream = process.stderr
-        errorHandler(error)
-      })
-  } else {
-    // Create temporary file for output to write to first,
-    // so we don't have broken file on errors
-    let tmpFile
-    tmp.file()
-      .then((temp) => {
-        tmpFile = temp.path
-        const tempOutputStream = fs.createWriteStream(temp.path)
-        return csvParser.parse(_args.input, tempOutputStream)
-      })
-      .then((info) => {
-        // Move temporary file to output file
-        fs.renameSync(tmpFile, _args.output)
-        npmlog.info(JSON.stringify(info, null, 1))
-      })
-      .catch(errorHandler)
+
+  // Create temporary file first if the output is a file,
+  // so we don't have broken file on errors
+  let tmpFile
+  let outputStream
+
+  if (_args.output === process.stdout)
+    outputStream = process.stdout
+  else {
+    tmpFile = tmp.fileSync()
+    outputStream = fs.createWriteStream(tmpFile.name)
   }
+
+  csvParser.parse(_args.input, outputStream)
+  // Listen for terminal errors on the output stream
+  outputStream
+    .on('error', (error) => {
+      npmlog.stream = process.stderr
+      errorHandler(error)
+    })
+    .on('finish', () => {
+      // Move temp file to output
+      fs.renameSync(tmpFile.name, _args.output)
+    })
 }
 
 main(args)
