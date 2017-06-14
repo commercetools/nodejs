@@ -91,28 +91,27 @@ Convert commercetools order CSV data to JSON.`,
 const logError = (error) => {
   const errorFormatter = new PrettyError()
 
-  // print errors to stderr even if we use stdout for data output
-  if (args.outputFile === process.stdout)
-    console.error('ERR:', error.message || error)
-
   if (npmlog.level === 'verbose')
-    npmlog.error(errorFormatter.render(error))
+    process.stderr.write(`ERR: ${errorFormatter.render(error)}`)
   else
-    npmlog.error('', error.message || error)
+    process.stderr.write(`ERR: ${error.message || error}`)
 }
 
 const errorHandler = (errors) => {
-  if (Array.isArray(errors))
-    errors.forEach(logError)
-  else
-    logError(errors)
+  // print errors to stderr if we use stdout for data output
+  // if we save data to output file errors are already logged by npmlog
+  if (args.outputFile === process.stdout)
+    if (Array.isArray(errors))
+      errors.forEach(logError)
+    else
+      logError(errors)
 
   process.exitCode = 1
 }
 
 const getModuleConfig = () => ({
   logger: {
-    error: errorHandler,
+    error: npmlog.error.bind(this, ''),
     warn: npmlog.warn.bind(this, ''),
     info: npmlog.info.bind(this, ''),
     verbose: npmlog.verbose.bind(this, ''),
@@ -132,9 +131,7 @@ const methodMapping = {
 }
 
 // Register error listener
-args.outputFile.on('error', (error) => {
-  errorHandler(error)
-})
+args.outputFile.on('error', errorHandler)
 
 methodMapping[args.type](getModuleConfig())
   .parse(args.inputFile, args.outputFile)
