@@ -20,7 +20,6 @@ Options:
                                fields for input/output file.                  [default: ";"]
   --continueOnProblems, -c   Flag if parsing should continue if module
                                encounters an error.               [boolean] [default: false]
-  --maxErrors, -e            Maximum number of errors to log.         [number] [default: 20]
   --logLevel, -l             Logging level: error, warn, info or verbose.  [default: "info"]
 ```
 
@@ -33,7 +32,6 @@ Options:
 - The `--delimiter` flag specifies the delimiter used in the input file. Defaults to `','` if omitted.
 - The `--multiValueDelimiter` flag specifies the delimiter for multiValue cells in CSV. Note that only the `cartDiscounts` field if present should contain multiple values. Defaults to `';'` if omitted.
 - The `--continueOnProblems` flag specifies if the module should continue parsing discount codes if it encounters an error. Defaults to `false` if omitted.
-- The `--maxErrors` flag specifies the maximum number of errors to log. This flag is ignored if `--continueOnProblems` is omitted or set to `false`. Defaults to 20.
 
 ### JS
 For more direct usage, it is possible to use this module directly:
@@ -43,15 +41,18 @@ const CsvParser = require('CsvParser')
 
 const csvParser = new CsvParser(logger, configuration)
 
-const input = fs.createReadStream('path-to-input-file.csv')
-const output = fs.createWriteStream('path-to-destination.json')
+const inputStream = fs.createReadStream('path-to-input-file.csv')
+const outputStream = fs.createWriteStream('path-to-destination.json')
 
-csvParser.parse(input, output)
-  .then((summary) => {
-    handleSuccess(summary)
+csvParser.parse(inputStream, outputStream)
+
+// Listen for events
+outputStream
+  .on('error', (error) => {
+    // <- Handle errors here
   })
-  .catch((error) => {
-    handleError( )
+  .on('finish', () => {
+    // <- Do something here
   })
 ```
 The constructor takes in 2 optional parameters
@@ -60,7 +61,6 @@ The constructor takes in 2 optional parameters
   - `delimiter` (String): Used delimeter in the CSV (Default: `','`)
   - `multiValueDelimiter` (String): Used delimeter in multiValue fields in the CSV (Default: `';'`)
   - `continueOnProblems` (Boolean): Option if module should continue on errors (Default: `false`)
-  - `maxErrors` (Number): Maximum number of errors to log
 
 ### Examples
 If we want to parse 3 discount codes from CSV to JSON; with the following as input:
@@ -85,7 +85,20 @@ And the following would be written to the JSON file
     "en": "some description",
     "de": "eine beschreibung"
   },
-  "cartDiscounts": ["disc1", "disc2", "disc3"],
+  "cartDiscounts": [
+    {
+      "typeId": "cart-discount",
+      "id": "disc1"
+    },
+    {
+      "typeId": "cart-discount",
+      "id": "disc2"
+    },
+    {
+      "typeId": "cart-discount",
+      "id": "disc3"
+    }
+  ],
   "cartPredicate": "LineItems > \"50\"",
   "isActive": "true",
   "maxApplications": "9",
@@ -101,7 +114,20 @@ And the following would be written to the JSON file
     "en": "some description 4",
     "de": "eine beschreibung 4"
   },
-  "cartDiscounts": ["disc1", "disc2", "disc3"],
+  "cartDiscounts": [
+    {
+      "typeId": "cart-discount",
+      "id": "disc1"
+    },
+    {
+      "typeId": "cart-discount",
+      "id": "disc2"
+    },
+    {
+      "typeId": "cart-discount",
+      "id": "disc3"
+    }
+  ],
   "cartPredicate": "LineItems > \"50\"",
   "isActive": "true",
   "maxApplications": "9",
@@ -117,7 +143,20 @@ And the following would be written to the JSON file
     "en": "some good description 5",
     "de": "eine gute beschreibung 5"
   },
-  "cartDiscounts": ["disc1", "disc2", "disc3"],
+  "cartDiscounts": [
+    {
+      "typeId": "cart-discount",
+      "id": "disc1"
+    },
+    {
+      "typeId": "cart-discount",
+      "id": "disc2"
+    },
+    {
+      "typeId": "cart-discount",
+      "id": "disc3"
+    }
+  ],
   "cartPredicate": "LineItems > \"50\"",
   "isActive": "true",
   "maxApplications": "9",
@@ -125,3 +164,7 @@ And the following would be written to the JSON file
   "code": "WI10sw34"
 }]
 ```
+
+#### Additional information
+- No field in the csv file is mandatory
+- the `cartDiscounts` field should contain a string of cart-discount IDs, delimited by the `multiValueDelimiter`
