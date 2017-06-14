@@ -107,7 +107,7 @@ const logError = (error) => {
   if (npmlog.level === 'verbose')
     process.stderr.write(errorFormatter.render(error))
   else
-    npmlog.error(error)
+    process.stderr.write(`ERR: ${error.message || error}\n`)
 }
 
 const errorHandler = (errors) => {
