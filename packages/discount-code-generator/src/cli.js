@@ -144,13 +144,20 @@ const resolveInput = (_args) => {
         .on('data', (data) => {
           const arrayDelim = _args.multiValueDelimiter
           // Add condition so module doesn't fail if there are no cartDiscounts
-          if (data.cartDiscounts)
-          // eslint-disable-next-line no-param-reassign
+          if (data.cartDiscounts) {
+            // eslint-disable-next-line no-param-reassign
             data.cartDiscounts = data.cartDiscounts.split(arrayDelim)
-          _attributes += data
+            // eslint-disable-next-line no-param-reassign
+            data.cartDiscounts = data.cartDiscounts.map(cartDiscount => ({
+              typeId: 'cart-discount',
+              id: cartDiscount,
+            }),
+            )
+          }
+          _attributes += JSON.stringify(data)
         })
         .on('end', () => {
-          resolve(unflatten(_attributes))
+          resolve(unflatten(JSON.parse(_attributes)))
         })
   })
 }
@@ -178,9 +185,14 @@ const resolveOutput = (_args, outputData) => {
       const arrayDelim = _args.multiValueDelimiter
       const flatObjects = outputData.map((obj) => {
         // Add condition so module doesn't fail if there are no cartDiscounts
-        if (obj.cartDiscounts)
-        // eslint-disable-next-line no-param-reassign
+        if (obj.cartDiscounts) {
+          // eslint-disable-next-line no-param-reassign
+          obj.cartDiscounts = obj.cartDiscounts.map(cartDiscountObj => (
+            cartDiscountObj.id
+          ))
+          // eslint-disable-next-line no-param-reassign
           obj.cartDiscounts = obj.cartDiscounts.join(arrayDelim)
+        }
         return flatten(obj)
       })
       const csvOutput = json2csv({
