@@ -1,77 +1,92 @@
-import fs from 'fs'
-import path from 'path'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import JSONStream from 'JSONStream'
-import { CsvTransform, parseBool } from '../src/utils'
+import prepareInput from '../src/utils'
 
-describe('CsvTransform', () => {
-  const expected = {
-    key1: 'value1',
-    key2: 'value2',
-    key3: 'value3',
-  }
+describe('prepareInput', () => {
+  test('should properly cast object types', () => {
+    const sample = {
+      name: {
+        de: 'Valerian',
+      },
+      description: {
+        en: 'greatest promo',
+      },
+      cartPredicate: 'value more than 20',
+      isActive: 'false',
+      maxApplications: '10',
+      maxApplicationsPerCustomer: '2',
+    }
 
-  test('should initialize', () => {
-    expect(new CsvTransform()).toBeInstanceOf(CsvTransform)
+    const expected = {
+      name: {
+        de: 'Valerian',
+      },
+      description: {
+        en: 'greatest promo',
+      },
+      cartPredicate: 'value more than 20',
+      isActive: false,
+      maxApplications: 10,
+      maxApplicationsPerCustomer: 2,
+    }
+
+    const actual = prepareInput(sample)
+    expect(actual).toEqual(expected)
   })
 
-  test('should mutate object according to fn passed to constructor', () => {
-    const sampleFunction = value => `I am transformed ${value}`
-    const anotherSampleFunction = value => `I am also transformed ${value}`
-    const transform = new CsvTransform({
-      key2: sampleFunction,
-      key3: anotherSampleFunction,
-    })
-    const readStream = fs.createReadStream(
-      path.join(__dirname, 'helpers/sampleJSON.json'),
-      'utf8',
-    )
-    let result
+  test('should properly hadle `cartDiscounts`', () => {
+    const sample = {
+      cartDiscounts: 'id1;id2;id3',
+      cartPredicate: 'value more than 20',
+      isActive: 'false',
+      maxApplications: '10',
+      maxApplicationsPerCustomer: '2',
+    }
 
-    readStream
-      .pipe(JSONStream.parse())
-      .pipe(transform)
-      .on('data', (data) => {
-        result = data
-      })
-      .on('end', () => {
-        expect(Object.keys(result)).toEqual(Object.keys(expected))
-        expect(result.key1).toBe('value1')
-        expect(result.key2).toBe('I am transformed value2')
-        expect(result.key3).toBe('I am also transformed value3')
-      })
+    const expected = {
+      cartDiscounts: [
+        {
+          typeId: 'cart-discount',
+          id: 'id1',
+        },
+        {
+          typeId: 'cart-discount',
+          id: 'id2',
+        },
+        {
+          typeId: 'cart-discount',
+          id: 'id3',
+        },
+      ],
+      cartPredicate: 'value more than 20',
+      isActive: false,
+      maxApplications: 10,
+      maxApplicationsPerCustomer: 2,
+    }
+
+    const actual = prepareInput(sample, ';')
+    expect(actual).toEqual(expected)
   })
 
-  test(`should not mutate object if property in
-      constructor does not exist`, () => {
-    const sampleFunction = value => `I am doing nothing with ${value}`
-    const transform = new CsvTransform({ key4: sampleFunction })
-    const readStream = fs.createReadStream(
-      path.join(__dirname, 'helpers/sampleJSON.json'),
-      'utf8',
-    )
-    let result
+  test('should not mutate object if no field to cast or mutate', () => {
+    const newSample = {
+      name: {
+        de: 'Valerian',
+      },
+      description: {
+        en: 'greatest promo',
+      },
+      cartPredicate: 'value more than 20',
+    }
+    const newExpected = {
+      name: {
+        de: 'Valerian',
+      },
+      description: {
+        en: 'greatest promo',
+      },
+      cartPredicate: 'value more than 20',
+    }
 
-    readStream
-      .pipe(JSONStream.parse())
-      .pipe(transform)
-      .on('data', (data) => {
-        result = data
-      })
-      .on('end', () => {
-        expect(result).toEqual(expected)
-      })
-  })
-})
-
-describe('parseBool', () => {
-  test('should return Boolean when passed a string', () => {
-    expect(parseBool('true')).toBe(true)
-    expect(parseBool('false')).toBe(false)
-  })
-
-  test('should return Boolean when passed a Boolean', () => {
-    expect(parseBool(true)).toBe(true)
-    expect(parseBool(false)).toBe(false)
+    const actual = prepareInput(newSample)
+    expect(actual).toEqual(newExpected)
   })
 })

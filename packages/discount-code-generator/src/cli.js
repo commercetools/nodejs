@@ -8,7 +8,7 @@ import flatten, { unflatten } from 'flat'
 
 import discountCodeGenerator from './main'
 import { version } from '../package.json'
-import { CsvTransform, parseBool } from './utils'
+import prepareInput from './utils'
 
 process.title = 'discountCodeGenerator'
 
@@ -64,7 +64,7 @@ Generate multiple discount codes to import to the commercetools platform.`,
   .coerce('input', (arg) => {
     if (fs.existsSync(arg)) {
       if (arg.match(/\.json$/i) || arg.match(/\.csv$/i))
-        return fs.createReadStream(String(arg))
+        return String(arg)
 
       throw new Error('Invalid input file format. Must be CSV or JSON')
     }
@@ -111,47 +111,30 @@ Generate multiple discount codes to import to the commercetools platform.`,
 // Resolve stream input to javascript object
 const resolveInput = (_args) => {
   const input = _args.input
-  let _attributes = ''
   return new Promise((resolve, reject) => {
     if (input === undefined)
       resolve({})
-    else if (input.path.match(/\.json$/i))
-      // Convert input stream to JSON file
-      input
-        .on('error', (error) => {
-          reject(error)
-        })
-        .on('data', (data) => {
-          _attributes += data
-        })
-        .on('end', () => {
-          resolve(JSON.parse(_attributes))
-        })
-    else if (input.path.match(/\.csv$/i))
-      // Convert input stream to CSV file
-      input.pipe(csv({
-        separator: _args.delimiter,
-        strict: true,
-      }))
-        .pipe(new CsvTransform({
-          isActive: parseBool,
-          maxApplications: parseInt,
-          maxApplicationsPerCustomer: parseInt,
+    else if (input.match(/\.json$/i))
+      resolve(JSON.parse(fs.readFileSync(input)))
+    else if (input.match(/\.csv$/i)) {
+      const _attributes = []
+      fs.createReadStream(input)
+        .pipe(csv({
+          separator: _args.delimiter,
+          strict: true,
         }))
         .on('error', (error) => {
           reject(error)
         })
         .on('data', (data) => {
           const arrayDelim = _args.multiValueDelimiter
-          // Add condition so module doesn't fail if there are no cartDiscounts
-          if (data.cartDiscounts)
-          // eslint-disable-next-line no-param-reassign
-            data.cartDiscounts = data.cartDiscounts.split(arrayDelim)
-          _attributes += data
+          // pass to `prepareInput` to handle object formatting
+          _attributes.push(prepareInput(data, arrayDelim))
         })
         .on('end', () => {
-          resolve(unflatten(_attributes))
+          resolve(unflatten(_attributes[0]))
         })
+    }
   })
 }
 
@@ -179,8 +162,12 @@ const resolveOutput = (_args, outputData) => {
       const flatObjects = outputData.map((obj) => {
         // Add condition so module doesn't fail if there are no cartDiscounts
         if (obj.cartDiscounts)
-        // eslint-disable-next-line no-param-reassign
-          obj.cartDiscounts = obj.cartDiscounts.join(arrayDelim)
+          // eslint-disable-next-line no-param-reassign
+          obj.cartDiscounts = obj.cartDiscounts
+            .map(cartDiscountObj => (
+              cartDiscountObj.id
+            ))
+            .join(arrayDelim)
         return flatten(obj)
       })
       const csvOutput = json2csv({
