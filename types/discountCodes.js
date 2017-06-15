@@ -20,3 +20,24 @@ export type CodeOptions = {
   length?: number;
   prefix?: string;
 }
+
+/* Logger */
+export type LoggerOptions = {
+  error: Function;
+  info: Function;
+  warn: Function;
+  verbose: Function;
+}
+
+export type ParseOptions = {
+  continueOnProblems?: boolean;
+  delimiter?: string;
+  multiValueDelimiter?: string;
+}
+
+export type ParserSummary = {
+  total: number;
+  parsed: number;
+  notParsed: number;
+  errors: Array<string>;
+}
