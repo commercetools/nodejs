@@ -5,32 +5,34 @@ import AbstractParser from '../src/parsers/abstract-parser'
 const sampleImportFile = 'data/lineitemstate-sample.csv'
 
 describe('AbstractParser', () => {
-  it('::constructor should set default settings', () => {
-    const parser = new AbstractParser()
+  describe('::constructor', () => {
+    it('should set default settings', () => {
+      const parser = new AbstractParser()
 
-    expect(parser.csvConfig).toEqual({
-      batchSize: 100,
-      delimiter: ',',
-      strictMode: true,
+      expect(parser.csvConfig).toEqual({
+        batchSize: 100,
+        delimiter: ',',
+        strictMode: true,
+      })
+
+      expect(parser.logger).toBeTruthy()
     })
 
-    expect(parser.logger).toBeTruthy()
-  })
+    it('should accept input options', () => {
+      const parser = new AbstractParser({
+        csvConfig: {
+          delimiter: ';',
+        },
+      })
 
-  it('::constructor should accept input options', () => {
-    const parser = new AbstractParser({
-      csvConfig: {
+      expect(parser.csvConfig).toEqual({
+        batchSize: 100,
         delimiter: ';',
-      },
-    })
+        strictMode: true,
+      })
 
-    expect(parser.csvConfig).toEqual({
-      batchSize: 100,
-      delimiter: ';',
-      strictMode: true,
+      expect(parser.logger).toBeTruthy()
     })
-
-    expect(parser.logger).toBeTruthy()
   })
 
   it('::_getMissingHeaders should return missing headers', () => {
@@ -50,9 +52,9 @@ describe('AbstractParser', () => {
   it('::_processData should throw an error when called', () => {
     const parser = new AbstractParser()
 
-    // console.log(parser._processData())
     expect(parser._processData).toThrowError(
-      'Method AbstractParser._processData has to be overridden!')
+      'Method AbstractParser._processData has to be overridden!',
+    )
   })
 
   it('::_streamInput should return a highland stream', () => {
