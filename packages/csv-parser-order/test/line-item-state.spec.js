@@ -56,7 +56,8 @@ describe('LineItemStateParser', () => {
 
       parser._processData(mockOrder)
         .then(() =>
-          done.fail('Should throw an error because of a missing headers.'))
+          done.fail('Should throw an error because of a missing headers.'),
+        )
         .catch((error) => {
           expect(error).toBe('Required headers missing: \'orderNumber\'')
           done()
@@ -71,7 +72,7 @@ describe('LineItemStateParser', () => {
     )
 
     const output = StreamTest['v2'].toText((err, result) => {
-      expect(err).toBeFalsy()
+      expect(err).toBe(null)
 
       expect(JSON.parse(result)).toEqual([{
         orderNumber: '234',

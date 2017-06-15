@@ -22,10 +22,11 @@ describe('AddReturnInfoParser', () => {
     it('should accept a stream and output a stream', (done) => {
       const parser = new AddReturnInfoParser()
       const readStream = fs.createReadStream(
-        path.join(__dirname, 'data/return-info-sample.csv'))
+        path.join(__dirname, 'data/return-info-sample.csv'),
+      )
 
       const outputStream = StreamTest['v2'].toText((err, result) => {
-        expect(err).toBeFalsy()
+        expect(err).toBe(null)
 
         const res = JSON.parse(result)
 
@@ -94,10 +95,11 @@ describe('AddReturnInfoParser', () => {
         },
       })
       const readStream = fs.createReadStream(
-        path.join(__dirname, 'data/return-info-error2-sample.csv'))
+        path.join(__dirname, 'data/return-info-error2-sample.csv'),
+      )
 
       const outputStream = StreamTest['v2'].toText((err, res) => {
-        expect(res).toBeFalsy()
+        expect(res).toBeUndefined()
         expect(mockErrorLog.mock.calls[0][0]).toEqual(
           'Required headers missing: \'orderNumber\'',
         )
@@ -117,7 +119,8 @@ describe('AddReturnInfoParser', () => {
       })
 
       const readStream = fs.createReadStream(
-        path.join(__dirname, 'data/return-info-error-sample.csv'))
+        path.join(__dirname, 'data/return-info-error-sample.csv'),
+      )
 
       const outputStream = StreamTest['v2'].toText((err) => {
         expect(err.toString())

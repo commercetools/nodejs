@@ -15,7 +15,11 @@ describe('AbstractParser', () => {
         strictMode: true,
       })
 
-      expect(parser.logger).toBeTruthy()
+      expect(parser.logger).toBeDefined()
+      expect(parser.logger.info).toBeInstanceOf(Function)
+      expect(parser.logger.error).toBeInstanceOf(Function)
+      expect(parser.logger.verbose).toBeInstanceOf(Function)
+      expect(parser.logger.warn).toBeInstanceOf(Function)
     })
 
     it('should accept input options', () => {
@@ -30,8 +34,6 @@ describe('AbstractParser', () => {
         delimiter: ';',
         strictMode: true,
       })
-
-      expect(parser.logger).toBeTruthy()
     })
   })
 

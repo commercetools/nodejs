@@ -28,7 +28,7 @@ describe('DeliveriesParser', () => {
       const deliveriesParser = new DeliveriesParser()
       const readStream = streamTestFile('delivery.csv')
       const outputStream = StreamTest['v2'].toText((err, result) => {
-        expect(err).toBeFalsy()
+        expect(err).toBe(null)
         expect(JSON.parse(result).length).toEqual(2)
         done()
       })
@@ -42,8 +42,8 @@ describe('DeliveriesParser', () => {
       const readStream = streamTestFile('delivery-error-row-length.csv')
 
       const outputStream = StreamTest['v2'].toText((err) => {
-        expect(expectedError.test(err)).toBeTruthy()
-        expect(expectedError.test(spy.args[0][0])).toBeTruthy()
+        expect(err.toString()).toMatch(expectedError)
+        expect(spy.args[0][0].toString()).toMatch(expectedError)
         done()
       })
 
@@ -58,8 +58,8 @@ describe('DeliveriesParser', () => {
       const readStream = streamTestFile('delivery-error-missing-headers.csv')
 
       const outputStream = StreamTest['v2'].toText((err) => {
-        expect(expectedError.test(spy.args[0][0])).toBeTruthy()
-        expect(expectedError.test(err)).toBeTruthy()
+        expect(err.toString()).toMatch(expectedError)
+        expect(spy.args[0][0].toString()).toMatch(expectedError)
         done()
       })
 
@@ -228,8 +228,8 @@ describe('DeliveriesParser', () => {
       const readStream = streamTestFile('delivery-error-measurements.csv')
 
       const outputStream = StreamTest['v2'].toText((err) => {
-        expect(expectedError.test(err)).toBeTruthy()
-        expect(expectedError.test(spy.args[0][0])).toBeTruthy()
+        expect(err.toString()).toMatch(expectedError)
+        expect(spy.args[0][0].toString()).toMatch(expectedError)
         done()
       })
 
@@ -243,7 +243,7 @@ describe('DeliveriesParser', () => {
 
       csvParserOrder.logger.error = () => {}
       const outputStream = StreamTest['v2'].toText((err) => {
-        expect(expectedError.test(err)).toBeTruthy()
+        expect(err.toString()).toMatch(expectedError)
         done()
       })
 
@@ -257,7 +257,7 @@ describe('DeliveriesParser', () => {
 
       csvParserOrder.logger.error = () => {}
       const outputStream = StreamTest['v2'].toText((err) => {
-        expect(expectedError.test(err)).toBeTruthy()
+        expect(err.toString()).toMatch(expectedError)
         done()
       })
 
