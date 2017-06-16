@@ -1,0 +1,48 @@
+{
+  "name": "@commercetools/csv-parser-order",
+  "version": "1.2.1",
+  "description": "Module that parses order csv to json",
+  "keywords": [
+    "commercetools",
+    "csv",
+    "nodejs",
+    "parser",
+    "orders",
+    "json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs/tree/master/packages/csv-parser-order"
+  },
+  "homepage": "https://github.com/commercetools/nodejs/tree/master/packages/csv-parser-order#readme",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "contributors": [
+    "Abimbola Idowu <abimbola.idowu@commercetools.com>",
+    "Selwyn Versteeg <selwyn.versteeg@commercetools.com> (https://selwyn.cc/)",
+    "Jan Juna <jan.juna@commercetools.com> (https://janjuna.cz/)"
+  ],
+  "main": "./lib/index.js",
+  "bin": {
+    "csvparserorder": "bin/csvparserorder.js"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "dependencies": {
+    "JSONStream": "^1.3.1",
+    "csv-parser": "^1.11.0",
+    "highland": "^2.10.5",
+    "lodash": "^4.17.4",
+    "npmlog": "^4.0.2",
+    "object-path": "^0.11.4",
+    "pretty-error": "^2.0.3",
+    "yargs": "^8.0.1"
+  },
+  "devDependencies": {
+    "sinon": "^1.17.6",
+    "streamtest": "^1.2.2",
+    "tmp": "^0.0.31"
+  }
+}

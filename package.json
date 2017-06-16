@@ -109,7 +109,7 @@
         "error",
         {
           "devDependencies": [
-            "**/src/*.js"
+            "**/test/**/*.js"
           ]
         }
       ]
