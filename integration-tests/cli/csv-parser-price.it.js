@@ -111,10 +111,12 @@ describe('CSV and CLI Tests', () => {
       const csvFilePath = './packages/csv-parser-price/test/helpers/faulty-sample.csv'
 
       exec(`${binPath} -p ${projectKey} -i ${csvFilePath} --logLevel verbose`,
-        (error, stdout, stderr) => {
+        (error, stdout) => {
           expect(error.code).toBe(1)
-          expect(stdout).toBeFalsy()
-          expect(stderr).toMatch(/\.js:\d+:\d+/)
+          expect(stdout).toMatch('{"prices":[]}')
+
+          const errorLog = fs.readFileSync('csvparserprice.log', 'utf8')
+          expect(errorLog).toMatch(/Row length does not match headers/)
           done()
         },
       )

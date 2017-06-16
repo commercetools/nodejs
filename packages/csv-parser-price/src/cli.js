@@ -50,6 +50,9 @@ Convert commercetools price CSV data to JSON.`,
     if (arg !== 'stdout')
       return fs.createWriteStream(String(arg))
 
+    // No output file given, log to file to not disturb stdout/stderr
+    npmlog.stream = fs.createWriteStream('csvparserprice.log')
+
     return process.stdout
   })
 
@@ -85,11 +88,7 @@ Convert commercetools price CSV data to JSON.`,
   })
 
   .option('logLevel', {
-    default: 'info',
     describe: 'Logging level: error, warn, info or verbose.',
-  })
-  .coerce('logLevel', (arg) => {
-    npmlog.level = arg
   })
   .argv
 
@@ -108,7 +107,7 @@ const errorHandler = (errors) => {
   else
     logError(errors)
 
-  process.exit(1)
+  process.exitCode = 1
 }
 
 const resolveCredentials = (_args) => {
