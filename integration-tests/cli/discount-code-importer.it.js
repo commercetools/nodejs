@@ -17,7 +17,7 @@ if (process.env.CI === 'true')
 else
   projectKey = process.env.npm_config_projectkey
 
-const templateFile = tmp.fileSync({ postfix: '.csv', keep: true })
+const templateFile = tmp.fileSync({ postfix: '.csv' })
 
 describe('DiscountCode tests', () => {
   let apiConfig
