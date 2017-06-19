@@ -63,7 +63,10 @@ export default class CsvParserPrice {
       .sortBy((a, b) => a['variant-sku'].localeCompare(b['variant-sku']))
       // Limit amount of rows to be handled at the same time
       .batch(this.batchSize)
-      .stopOnError(error => this.logger.error(error))
+      .stopOnError((err) => {
+        this.logger.error(err)
+        return output.emit('error', err)
+      })
       .flatMap(highland)
       // Unflatten object keys with a dot to nested values
       .map(unflatten)
@@ -75,9 +78,15 @@ export default class CsvParserPrice {
         this.logger.verbose(`Processed row ${rowIndex}`)
         rowIndex += 1
       })
-      .stopOnError(error => this.logger.error(error))
+      .stopOnError((err) => {
+        this.logger.error(err)
+        return output.emit('error', err)
+      })
       .reduce({ prices: [] }, this.mergeBySku)
-      .stopOnError(error => this.logger.error(error))
+      .stopOnError((err) => {
+        this.logger.error(err)
+        return output.emit('error', err)
+      })
       .doto((data) => {
         const numberOfPrices = Number(JSON.stringify(data.length)) + 1
         this.logger.info(`Done with conversion of ${numberOfPrices} prices`)
