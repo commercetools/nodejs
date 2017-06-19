@@ -108,9 +108,6 @@ Sammy,Valerian,greatest promo,super angebot,${cartDiscount.id},lineItemTotal(1 =
         }
         return client.execute(deleteCartRequest)
       })
-      .then(() => {
-        process.stdout.write('Successfully removed everything')
-      })
       .catch(process.stderr.write)
   })
 
