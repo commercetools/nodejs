@@ -202,6 +202,7 @@ Sammy,Valerian,greatest promo,super angebot,${cartDiscount.id},lineItemTotal(1 =
     test('should continueOnProblems if `continueOnProblems`', async () => {
       codeImport = new DiscountCodeImport({
         apiConfig,
+        batchSize: 5,
         continueOnProblems: true,
       }, logger)
       const codesToUpdate = generatedCodes.map(codeObj => (
