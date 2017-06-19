@@ -1,5 +1,6 @@
 /* @flow */
 import type {
+  ApiConfigOptions,
   LoggerOptions,
   ChunkOptions,
   CodeDataArray,
@@ -9,7 +10,6 @@ import type {
 } from 'types/discountCodes'
 import type {
   Client,
-  AuthMiddlewareOptions,
   SyncAction,
  } from 'types/sdk'
 import npmlog from 'npmlog'
@@ -30,7 +30,7 @@ export default class DiscountCodeImport {
   batchSize: number;
   continueOnProblems: boolean;
   client: Client;
-  apiConfig: AuthMiddlewareOptions;
+  apiConfig: ApiConfigOptions;
   logger: LoggerOptions;
   _summary: Summary;
   syncDiscountCodes: SyncAction;

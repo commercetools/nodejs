@@ -1,5 +1,4 @@
 /* @flow */
-import type { AuthMiddlewareOptions } from 'types/sdk'
 
 /* Discount Codes */
 export type CodeData = {
@@ -43,8 +42,19 @@ export type LoggerOptions = {
 }
 
 /* Config */
+export type ApiConfigOptions = {
+  host: string;
+  projectKey: string;
+  credentials: {
+    clientId: string;
+    clientSecret: string;
+  };
+  scopes: Array<string>;
+  apiUrl?: string;
+}
+
 export type ConstructorOptions = {
-  apiConfig: AuthMiddlewareOptions;
+  apiConfig: ApiConfigOptions;
   batchSize: number;
   continueOnProblems?: boolean;
 }
