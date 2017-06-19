@@ -22,5 +22,6 @@
       * [sync-actions](/sdk/api/syncActions.md)
 * [CLI](/cli/README.md)
   * [CSV Price Parser](/cli/csv-parser-price.md)
+  * [CSV Order Parser](/cli/csv-parser-order.md)
   * [Discount Code Generator](/cli/discount-code-generator.md)
   * [Discount Code Importer](/cli/discount-code-importer.md)

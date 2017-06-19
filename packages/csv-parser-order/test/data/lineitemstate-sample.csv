@@ -1,0 +1,2 @@
+orderNumber,lineItemId,quantity,fromState,toState,actualTransitionDate,_fromStateQty
+234,123,10,order,shipped,2016-11-01T08:01:19+0000,100

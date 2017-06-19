@@ -63,6 +63,7 @@ https://commercetools.github.io/nodejs/
 | Package | Version | Dependencies |
 |--------|-------|------------|
 | [`csv-parser-price`](/packages/csv-parser-price) | [![csv-parser-price Version][csv-parser-price-icon]][csv-parser-price-version] | [![csv-parser-price Dependencies Status][csv-parser-price-dependencies-icon]][csv-parser-price-dependencies] |
+| [`csv-parser-order`](/packages/csv-parser-order) | [![csv-parser-order Version][csv-parser-order-icon]][csv-parser-order-version] | [![csv-parser-order Dependencies Status][csv-parser-order-dependencies-icon]][csv-parser-order-dependencies] |
 | [`discount-code-generator`](/packages/discount-code-generator) | [![discount-code-generator Version][discount-code-generator-icon]][discount-code-generator-version] | [![discount-code-generator Dependencies Status][discount-code-generator-dependencies-icon]][discount-code-generator-dependencies] |
 [`discount-code-importer`](/packages/discount-code-importer) | [![discount-code-importer Version][discount-code-importer-icon]][discount-code-importer-version] | [![discount-code-importer Dependencies Status][discount-code-importer-dependencies-icon]][discount-code-importer-dependencies] |
 
@@ -80,6 +81,10 @@ https://commercetools.github.io/nodejs/
 [csv-parser-price-icon]: https://img.shields.io/npm/v/@commercetools/csv-parser-price.svg?style=flat-square
 [csv-parser-price-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/csv-parser-price
 [csv-parser-price-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/csv-parser-price&style=flat-square
+[csv-parser-order-version]: https://www.npmjs.com/package/@commercetools/csv-parser-order
+[csv-parser-order-icon]: https://img.shields.io/npm/v/@commercetools/csv-parser-order.svg?style=flat-square
+[csv-parser-order-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/csv-parser-order
+[csv-parser-order-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/csv-parser-order&style=flat-square
 [discount-code-generator-version]: https://www.npmjs.com/package/@commercetools/discount-code-generator
 [discount-code-generator-icon]: https://img.shields.io/npm/v/@commercetools/discount-code-generator.svg?style=flat-square
 [discount-code-generator-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/discount-code-generator

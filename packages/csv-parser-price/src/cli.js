@@ -135,6 +135,7 @@ resolveCredentials(args)
       },
       csvConfig: {
         delimiter: args.delimiter,
+        batchSize: args.batchSize,
       },
     }),
   )
