@@ -1,6 +1,6 @@
 # CSV Parser Discount Code
 
-Convert [commercetools discount codes](http://dev.commercetools.com/http-api-projects-discountCodes.html) CSV data to JSON. See example below for CSV format, sample response and usage
+Convert [commercetools discount codes](http://dev.commercetools.com/http-api-projects-discountCodes.html) CSV data to JSON. See example below for CSV format, sample response and usage.
 
 ## Usage
 `npm install @commercetools/csv-parser-discount-code --global`
@@ -28,18 +28,20 @@ Options:
 - The `--output` flag specifies where to output/save the parsed discount codes as JSON file. Several notes on this flag:
   - If the file specified already exists, it will be overwritten.
   - The default location for status report logging is the standard output.
-  - If no output path is specified, the generated codes will be logged to the standard output as a result, status reports will be logged to a `csv-parser-discount-code.log` file
+  - If no output path is specified, the generated codes will be logged to the standard output as a result, status reports will be logged to a `csv-parser-discount-code.log` file in the current directory.
 - The `--delimiter` flag specifies the delimiter used in the input file. Defaults to `','` if omitted.
 - The `--multiValueDelimiter` flag specifies the delimiter for multiValue cells in CSV. Note that only the `cartDiscounts` field if present should contain multiple values. Defaults to `';'` if omitted.
 - The `--continueOnProblems` flag specifies if the module should continue parsing discount codes if it encounters an error. Defaults to `false` if omitted.
+  - If the module should continue on error, all errors are logged to the logging location (see above).
+  - If the module should not continue on error, the failing error is written to the `stderr`, regardless of the output and logging locations
 
 ### JS
 For more direct usage, it is possible to use this module directly:
 ```js
 const fs = require('fs')
-const CsvParser = require('CsvParser')
+const CsvParserDiscountCode = require('@commercetools/csv-parser-discount-code')
 
-const csvParser = new CsvParser(logger, configuration)
+const csvParser = new CsvParserDiscountCode(logger, configuration)
 
 const inputStream = fs.createReadStream('path-to-input-file.csv')
 const outputStream = fs.createWriteStream('path-to-destination.json')

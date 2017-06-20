@@ -2,9 +2,9 @@
 import streamtest from 'streamtest'
 import fs from 'fs'
 import path from 'path'
-import CsvParser from '../src/main'
+import CsvParserDiscountCode from '../src/main'
 
-describe('CsvParser', () => {
+describe('CsvParserDiscountCode', () => {
   const logger = {
     error: () => {},
     warn: () => {},
@@ -14,12 +14,12 @@ describe('CsvParser', () => {
 
   let csvParser
   beforeEach(() => {
-    csvParser = new CsvParser(logger)
+    csvParser = new CsvParserDiscountCode(logger)
   })
 
   describe('::constructor', () => {
     it('should be a function', () => {
-      expect(typeof CsvParser).toBe('function')
+      expect(typeof CsvParserDiscountCode).toBe('function')
     })
 
     it('should set default properties', () => {
@@ -40,7 +40,7 @@ describe('CsvParser', () => {
         foo: 'bar',
         some: 'all',
       }
-      expect(CsvParser._removeEmptyFields(actual)).toEqual(expected)
+      expect(CsvParserDiscountCode._removeEmptyFields(actual)).toEqual(expected)
     })
   })
 
@@ -100,7 +100,12 @@ describe('CsvParser', () => {
     })
 
     it('should skip rows with error if `continueOnProblems`', (done) => {
-      csvParser = new CsvParser(logger, { continueOnProblems: true })
+      csvParser = new CsvParserDiscountCode(
+        logger,
+        {
+          continueOnProblems: true,
+        },
+      )
       const inputStream = fs.createReadStream(
         path.join(__dirname, 'helpers/faultyCsv.csv'),
       )

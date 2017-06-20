@@ -11,7 +11,7 @@ import highland from 'highland'
 import npmlog from 'npmlog'
 import { unflatten } from 'flat'
 
-export default class CsvParser {
+export default class CsvParserDiscountCode {
   // set flowtype annotations
   delimiter: string;
   multiValueDelimiter: string;
@@ -60,12 +60,11 @@ export default class CsvParser {
         separator: this.delimiter,
         strict: true,
       }))
-      .map(CsvParser._removeEmptyFields)
+      .map(CsvParserDiscountCode._removeEmptyFields)
       .map(unflatten)
       .map(this._cartDiscountsToArray)
       .errors(this._handleErrors) // <- Pass errors to errorHandler
       .stopOnError((error) => { // <- Emit error and close stream if needed
-        // this.logger.error(error.message)
         output.emit('error', error)
       })
       .doto(() => {
@@ -80,14 +79,14 @@ export default class CsvParser {
   // cartDiscounts
   _cartDiscountsToArray (item: Object) {
     if (item.cartDiscounts) {
-      // eslint-disable-next-line no-param-reassign
-      item.cartDiscounts = item.cartDiscounts.split(this.multiValueDelimiter)
-      // eslint-disable-next-line no-param-reassign
-      item.cartDiscounts = item.cartDiscounts.map(cartDiscount => ({
-        typeId: 'cart-discount',
-        id: cartDiscount,
-      }),
+      const cartDiscounts = item.cartDiscounts
+        .split(this.multiValueDelimiter)
+        .map(cartDiscount => ({
+          typeId: 'cart-discount',
+          id: cartDiscount,
+        }),
       )
+      return Object.assign(item, { cartDiscounts })
     }
     return item
   }

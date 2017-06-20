@@ -4,8 +4,7 @@ import npmlog from 'npmlog'
 import PrettyError from 'pretty-error'
 import yargs from 'yargs'
 
-import CsvParser from './main'
-import { version } from '../package.json'
+import CsvParserDiscountCode from './main'
 
 process.title = 'csvParserDiscountCode'
 
@@ -23,9 +22,8 @@ Convert commercetools discount codes CSV data to JSON.`,
 
   .option('version', {
     alias: 'v',
-    type: 'boolean',
   })
-  .version('version', 'Show version number.', version)
+  .version()
 
   .option('input', {
     alias: 'i',
@@ -52,7 +50,7 @@ Convert commercetools discount codes CSV data to JSON.`,
   })
   .coerce('output', (arg) => {
     if (arg === 'stdout') {
-      npmlog.stream = fs.createWriteStream('discountCodeGenerator.log')
+      npmlog.stream = fs.createWriteStream('csv-parser-discount-code.log')
       return process.stdout
     }
 
@@ -122,7 +120,7 @@ const errorHandler = (errors) => {
 
 const main = (_args) => {
   const options = buildOptions(_args)
-  const csvParser = new CsvParser({
+  const csvParserDiscountCode = new CsvParserDiscountCode({
     error: npmlog.error.bind(this),
     warn: npmlog.warn.bind(this),
     info: npmlog.info.bind(this),
@@ -141,7 +139,7 @@ const main = (_args) => {
     outputStream = fs.createWriteStream(tmpFile.name)
   }
 
-  csvParser.parse(_args.input, outputStream)
+  csvParserDiscountCode.parse(_args.input, outputStream)
   // Listen for terminal errors on the output stream
   outputStream
     .on('error', (error) => {

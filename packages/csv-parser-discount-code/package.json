@@ -37,8 +37,5 @@
     "pretty-error": "^2.1.0",
     "tmp": "0.0.31",
     "yargs": "^8.0.1"
-  },
-  "devDependencies": {
-    "streamtest": "^1.2.2"
   }
 }
