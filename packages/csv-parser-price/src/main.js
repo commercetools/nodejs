@@ -65,7 +65,7 @@ export default class CsvParserPrice {
       .batch(this.batchSize)
       .stopOnError((err) => {
         this.logger.error(err)
-        return output.emit('error', err)
+        output.emit('error', err)
       })
       .flatMap(highland)
       // Unflatten object keys with a dot to nested values
@@ -80,12 +80,12 @@ export default class CsvParserPrice {
       })
       .stopOnError((err) => {
         this.logger.error(err)
-        return output.emit('error', err)
+        output.emit('error', err)
       })
       .reduce({ prices: [] }, this.mergeBySku)
       .stopOnError((err) => {
         this.logger.error(err)
-        return output.emit('error', err)
+        output.emit('error', err)
       })
       .doto((data) => {
         const numberOfPrices = Number(JSON.stringify(data.length)) + 1

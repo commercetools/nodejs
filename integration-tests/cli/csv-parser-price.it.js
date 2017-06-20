@@ -117,7 +117,8 @@ describe('CSV and CLI Tests', () => {
       )
     })
 
-    test('should log errors to stderr and log file', (done) => {
+    // eslint-disable-next-line max-len
+    test('should log messages to a log file and print a final error to stderr', (done) => {
       const tmpFile = tmp.fileSync()
       const expectedError = 'Row length does not match headers'
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
@@ -130,7 +131,6 @@ describe('CSV and CLI Tests', () => {
 
           fs.readFile(tmpFile.name, { encoding: 'utf8' }, (err, data) => {
             expect(data).toContain(expectedError)
-            tmpFile.removeCallback()
             done()
           })
         },
