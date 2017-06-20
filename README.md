@@ -23,6 +23,7 @@ The **commercetools nodejs** repo is managed as a [monorepo](https://github.com/
 https://commercetools.github.io/nodejs/
 
 ## Packages
+
 ### SDK
 
 | Package | Version | Dependencies |
