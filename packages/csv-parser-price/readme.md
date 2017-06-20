@@ -2,7 +2,7 @@
 
 Convert [commercetools price](https://dev.commercetools.com/http-api-projects-products.html#price) CSV data to JSON
 
-https://commercetools.github.io/nodejs/docs/cli/csv-parser-price.html
+https://commercetools.github.io/nodejs/cli/csv-parser-price.html
 
 ## Install
 

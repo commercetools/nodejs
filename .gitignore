@@ -1,6 +1,5 @@
 # Logs
-npm-debug.log
-lerna-debug.log
+*.log
 
 # Env files
 *.env
@@ -19,4 +18,5 @@ coverage
 # OS clutter
 .DS_Store
 
+# IDE tools
 .idea
