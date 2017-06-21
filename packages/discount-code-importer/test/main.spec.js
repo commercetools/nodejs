@@ -68,6 +68,21 @@ describe('DiscountCodeImporter', () => {
     })
   })
 
+  describe('::run', () => {
+    it('should be defined', () => {
+      expect(codeImport.run).toBeDefined()
+    })
+    it('should return `_processBatches` and pass it the argument', async () => {
+      codeImport._processBatches = jest.fn()
+      codeImport._processBatches.mockReturnValue(Promise.resolve('bar'))
+
+      const response = await codeImport.run('foo')
+      expect(response).toBe('bar')
+      expect(codeImport._processBatches).toHaveBeenCalledTimes(1)
+      expect(codeImport._processBatches).toHaveBeenCalledWith('foo')
+    })
+  })
+
   describe('::_buildPredicate', () => {
     it('should be defined', () => {
       expect(DiscountCodeImport._buildPredicate).toBeDefined()
@@ -97,6 +112,29 @@ describe('DiscountCodeImporter', () => {
         codes,
         response.body.results,
       )
+    })
+
+    it('should reject on error', async () => {
+      const errorSummary = {
+        error: 'some random error',
+        summary: {
+          created: 0,
+          updated: 0,
+          unchanged: 0,
+          createErrorCount: 0,
+          updateErrorCount: 0,
+          errors: [],
+        },
+      }
+      codeImport.client.execute = jest.fn(
+        () => Promise.reject('some random error'),
+      )
+
+      try {
+        await codeImport._processBatches(codes)
+      } catch (e) {
+        expect(e).toMatchObject(errorSummary)
+      }
     })
   })
 
@@ -260,6 +298,39 @@ describe('DiscountCodeImporter', () => {
   describe('::_createService', () => {
     it('should be defined', () => {
       expect(codeImport._createService).toBeDefined()
+    })
+  })
+
+  describe('::summaryReport', () => {
+    it('should be defined', () => {
+      const report = codeImport.summaryReport()
+      expect(codeImport.summaryReport).toBeDefined()
+      expect(Object.keys(report)).toEqual(['reportMessage', 'detailedSummary'])
+    })
+
+    it('should display correct report messages', () => {
+      let report
+      report = codeImport.summaryReport()
+      expect(report.reportMessage).toMatch(
+        'Summary: nothing to do, everything is fine',
+      )
+
+      codeImport._summary.created = 3
+      codeImport._summary.updated = 2
+      codeImport._summary.unchanged = 4
+      report = codeImport.summaryReport()
+      expect(report.reportMessage).toMatch(
+        // eslint-disable-next-line max-len
+        'Summary: there were 5 successfully imported discount codes (3 were newly created, 2 were updated and 4 were unchanged).',
+      )
+
+      codeImport._summary.createErrorCount = 5
+      codeImport._summary.updateErrorCount = 7
+      report = codeImport.summaryReport()
+      expect(report.reportMessage).toMatch(
+        // eslint-disable-next-line max-len
+        'Summary: there were 5 successfully imported discount codes (3 were newly created, 2 were updated and 4 were unchanged). 12 errors occured (5 create errors and 7 update errors.)',
+      )
     })
   })
 })
