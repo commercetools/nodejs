@@ -15,11 +15,17 @@ import getErrorByCode, {
   HttpError,
 } from './errors'
 
-export default function createHttpMiddleware (
-  options: HttpMiddlewareOptions,
-): Middleware {
+export default function createHttpMiddleware ({
+  host,
+  includeResponseHeaders,
+  includeOriginalRequest,
+  maxRetries = 50,
+  enableRetry,
+  retryDelay = 200,
+  maskSensitiveHeaderData,
+}: HttpMiddlewareOptions): Middleware {
   return next => (request: MiddlewareRequest, response: MiddlewareResponse) => {
-    const url = options.host.replace(/\/$/, '') + request.uri
+    const url = host.replace(/\/$/, '') + request.uri
     const body = typeof request.body === 'string'
       || Buffer.isBuffer(request.body)
       ? request.body
@@ -41,68 +47,82 @@ export default function createHttpMiddleware (
         ...(body ? { body } : {}),
       },
     )
-    fetch(requestObj)
-    .then(
-      (res: Response) => {
-        if (res.ok) {
-          res.json()
-          .then((result: Object) => {
-            const parsedResponse: Object = {
-              ...response,
-              body: result,
-              statusCode: res.status,
-            }
-            if (options.includeResponseHeaders)
-              parsedResponse.headers = parseHeaders(res.headers)
-            if (options.includeOriginalRequest) {
-              parsedResponse.request = {
-                ...requestObj,
-                headers: parseHeaders(requestObj.headers),
+    let retryCount = 0
+    // wrap in a fn so we can retry if error occur
+    function executeFetch () {
+      fetch(requestObj)
+      .then(
+        (res: Response) => {
+          if (res.ok) {
+            res.json()
+            .then((result: Object) => {
+              const parsedResponse: Object = {
+                ...response,
+                body: result,
+                statusCode: res.status,
               }
-              if (options.maskSensitiveHeaderData)
-                parsedResponse.request.headers.authorization = 'Bearer ********'
+              if (includeResponseHeaders)
+                parsedResponse.headers = parseHeaders(res.headers)
+              if (includeOriginalRequest) {
+                parsedResponse.request = {
+                  ...requestObj,
+                  headers: parseHeaders(requestObj.headers),
+                }
+                if (maskSensitiveHeaderData)
+                  parsedResponse
+                    .request.headers.authorization = 'Bearer ********'
+              }
+              next(request, parsedResponse)
+            })
+            return
+          }
+
+          // Server responded with an error. Try to parse it as JSON, then
+          // return a proper error type with all necessary meta information.
+          res.text()
+          .then((text: any) => {
+            // Try to parse the error response as JSON
+            let parsed
+            try {
+              parsed = JSON.parse(text)
+            } catch (error) {
+              /* noop */
+            }
+
+            const error: HttpErrorType = createError({
+              statusCode: res.status,
+              originalRequest: request,
+              headers: parseHeaders(res.headers),
+              ...(parsed
+                ? { message: parsed.message, body: parsed }
+                : {}
+              ),
+            })
+            // Let the final resolver to reject the promise
+            const parsedResponse = {
+              ...response,
+              error,
+              statusCode: res.status,
             }
             next(request, parsedResponse)
           })
-          return
-        }
-
-        // Server responded with an error. Try to parse it as JSON, then return
-        // a proper error type with all necessary meta information.
-        res.text()
-        .then((text: any) => {
-          // Try to parse the error response as JSON
-          let parsed
-          try {
-            parsed = JSON.parse(text)
-          } catch (error) {
-            /* noop */
-          }
-
-          const error: HttpErrorType = createError({
-            statusCode: res.status,
-            originalRequest: request,
-            headers: parseHeaders(res.headers),
-            ...(parsed
-              ? { message: parsed.message, body: parsed }
-              : {}
-            ),
-          })
-          // Let the final resolver to reject the promise
-          const parsedResponse = {
-            ...response,
-            error,
-            statusCode: res.status,
-          }
-          next(request, parsedResponse)
-        })
-      },
-      // We know that this is a "network" error thrown by the `fetch` library
-      (e: Error) => {
-        const error = new NetworkError(e.message, { originalRequest: request })
-        next(request, { ...response, error, statusCode: 0 })
-      },
-    )
+        },
+        // We know that this is a "network" error thrown by the `fetch` library
+        (e: Error) => {
+          if (enableRetry)
+            if (retryCount < maxRetries) {
+              retryCount += 1
+              setTimeout(executeFetch, retryDelay)
+              return
+            }
+          const error = new NetworkError(
+            e.message, { originalRequest: request },
+          )
+          next(request, { ...response, error, statusCode: 0 })
+        },
+      )
+    }
+    executeFetch()
   }
 }
 
