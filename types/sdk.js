@@ -80,6 +80,8 @@ export type AuthMiddlewareOptions = {
 export type HttpMiddlewareOptions = {
   host: string;
   includeHeaders?: boolean;
+  includeResponseHeaders?: boolean;
+  includeOriginalRequest?: boolean;
 }
 export type QueueMiddlewareOptions = {
   concurrency: number;
