@@ -220,7 +220,6 @@ describe('Http', () => {
         expect(res.error.headers).toBeUndefined()
         expect(res.error.originalRequest).toBeDefined()
         expect(res.error.message).toBe(
-          // eslint-disable-next-line max-len
           `request to ${testHost}/foo/bar failed, reason: Connection timeout`,
         )
         expect(res.body).toBeUndefined()
