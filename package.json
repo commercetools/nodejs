@@ -65,6 +65,7 @@
     "npm-check-updates": "2.11.2",
     "npm-run-all": "4.0.2",
     "rimraf": "2.6.1",
+    "streamtest": "1.2.2",
     "validate-commit-msg": "2.12.1",
     "webpack": "2.6.1"
   },
