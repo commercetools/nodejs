@@ -10,7 +10,7 @@ The constructor may be passed in 2 parameters:
   - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
   - `batchSize` (Number): Amount of codes not more than 500 to process concurrently (Optional. Default: 50)
   - `continueOnProblems` (Boolean): Flag whether to continue processing if an error occurs (Optional. Default: false)
-- An optional logger object having four functions (`info`, `warn`, `error` and `debug`)
+- An optional logger object having four functions (`info`, `warn`, `error` and `verbose`)
 
 ## Usage with `sphere-node-cli`
 You can use this package from the [`sphere-node-cli`](https://github.com/sphereio/sphere-node-cli). In order for the cli to import discount codes, the file to import from must be a valid JSON and follow this structure:
