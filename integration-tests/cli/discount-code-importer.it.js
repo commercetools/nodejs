@@ -1,9 +1,9 @@
 import fs from 'fs'
-import tmp from 'tmp'
 import path from 'path'
 import Promise from 'bluebird'
-import { createAuthMiddlewareForClientCredentialsFlow }
-from '@commercetools/sdk-middleware-auth'
+import {
+  createAuthMiddlewareForClientCredentialsFlow,
+} from '@commercetools/sdk-middleware-auth'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
@@ -17,14 +17,11 @@ if (process.env.CI === 'true')
 else
   projectKey = process.env.npm_config_projectkey
 
-const templateFile = tmp.fileSync({ postfix: '.csv' })
-
 describe('DiscountCode tests', () => {
   let apiConfig
   let service
   let client
   let cartDiscount
-  let generatedCodes
 
   const logger = {
     error: () => {},
@@ -63,14 +60,6 @@ describe('DiscountCode tests', () => {
     })
     .then((data) => {
       cartDiscount = data.body
-      // Create csv templateFile from which to generate discount codes
-      const sampleGenCsv =
-      /* eslint-disable max-len */
-`name.en,name.de,description.en,description.de,cartDiscounts,cartPredicate,isActive,maxApplications,maxApplicationsPerCustomer
-Sammy,Valerian,greatest promo,super angebot,${cartDiscount.id},lineItemTotal(1 = 1) >  "10.00 USD",true,10,2`
-      /* eslint-enable max-len */
-
-      fs.writeFileSync(templateFile.name, sampleGenCsv, 'utf8')
     })
     .catch(process.stderr.write),
   )
@@ -119,14 +108,31 @@ Sammy,Valerian,greatest promo,super angebot,${cartDiscount.id},lineItemTotal(1 =
       fs.unlinkSync('discountCodeGenerator.log', 'utf8')
     })
 
-    test('should generate required codes by specs', (done) => {
-      exec(`${binPath} -q 10 -p IT -l 8 -i ${templateFile.name}`,
+    test('should generate required codes according to template', (done) => {
+      const expected = {
+        name: {
+          en: 'Sammy',
+          de: 'Valerian',
+        },
+        description: {
+          en: 'greatest promo',
+          de: 'super angebot',
+        },
+        cartPredicate: 'some cart predicate',
+        isActive: true,
+        maxApplications: 9,
+        maxApplicationsPerCustomer: 4,
+      }
+      const filePath = path.join(__dirname, './helpers/generatorTemplate.csv')
+
+      exec(`${binPath} -q 10 -p IT -l 8 -i ${filePath}`,
         (error, stdout, stderr) => {
           expect(error).toBeFalsy()
           expect(stderr).toBeFalsy()
-          generatedCodes = JSON.parse(stdout)
+          const generatedCodes = JSON.parse(stdout)
           expect(generatedCodes.length).toBe(10)
           generatedCodes.forEach((codeObj) => {
+            expect(codeObj).toMatchObject(expected)
             expect(codeObj.code).toMatch(/^IT/)
             expect(codeObj.code.length).toBe(8)
           })
@@ -138,8 +144,25 @@ Sammy,Valerian,greatest promo,super angebot,${cartDiscount.id},lineItemTotal(1 =
 
   describe('Discount code Importer', () => {
     let codeImport
+    let preparedDiscountCodes
     beforeEach(() => {
       codeImport = new DiscountCodeImport({ apiConfig }, logger)
+
+      // Get the sample discount codes and add cartDiscounts
+      preparedDiscountCodes = JSON.parse(
+        fs.readFileSync(
+          path.join(__dirname, './helpers/discountCodes.json'), 'utf8',
+        ),
+      ).map(codeObj => (
+        Object.assign({}, codeObj, {
+          cartDiscounts: [
+            {
+              typeId: 'cart-discount',
+              id: cartDiscount.id,
+            },
+          ],
+        })
+      ))
     })
     test('should create discount codes on CTP', async () => {
       const expected = {
@@ -154,11 +177,21 @@ Sammy,Valerian,greatest promo,super angebot,${cartDiscount.id},lineItemTotal(1 =
           errors: [],
         },
       }
-      const summary = await codeImport.run(generatedCodes)
+      const summary = await codeImport.run(preparedDiscountCodes)
       expect(summary).toEqual(expected)
     })
 
     test('should update discount codes on the CTP', async () => {
+      // First, import the codes that need to be updated
+      const oldCodesToUpdate = preparedDiscountCodes.map((codeObj) => {
+        const uniqueCode = codeObj.code
+        return Object.assign({}, codeObj, { code: `${uniqueCode}foo` })
+      })
+      await codeImport.run(oldCodesToUpdate)
+
+      // Call a new `codeImport` instance so we reset the summary
+      codeImport = new DiscountCodeImport({ apiConfig }, logger)
+
       const expected = {
         // eslint-disable-next-line max-len
         reportMessage: 'Summary: there were 10 successfully imported discount codes (0 were newly created, 10 were updated and 0 were unchanged).',
@@ -171,29 +204,31 @@ Sammy,Valerian,greatest promo,super angebot,${cartDiscount.id},lineItemTotal(1 =
           errors: [],
         },
       }
-      const codesToUpdate = generatedCodes.map(codeObj => (
+      const newCodesToUpdate = oldCodesToUpdate.map(codeObj => (
         Object.assign({}, codeObj, { maxApplications: 20 })
       ))
 
-      const summary = await codeImport.run(codesToUpdate)
+      const summary = await codeImport.run(newCodesToUpdate)
       expect(summary).toEqual(expected)
     })
 
     test('should stop import on first errors by default', async () => {
       // Set batchSize to 1 so it executes serially
       codeImport = new DiscountCodeImport({ apiConfig, batchSize: 1 }, logger)
-      const codesToUpdate = generatedCodes.map(codeObj => (
-        Object.assign({}, codeObj, { maxApplications: 30 })
-      ))
+      // Make codes unique
+      const discountCodesSample = preparedDiscountCodes.map((codeObj) => {
+        const uniqueCode = codeObj.code
+        return Object.assign({}, codeObj, { code: `${uniqueCode}bar` })
+      })
 
       // Make code invalid
-      codesToUpdate[1].code = ''
-      codesToUpdate[2].code = ''
+      discountCodesSample[1].code = ''
+      discountCodesSample[2].code = ''
 
       try {
-        await codeImport.run(codesToUpdate)
+        await codeImport.run(discountCodesSample)
       } catch (e) {
-        expect(e.summary.updated).toBe(1)
+        expect(e.summary.created).toBe(1)
         expect(e.summary.errors.length).toBe(1)
         expect(e.summary.errors[0]).toMatch(/'code' should not be empty/)
       }
@@ -205,27 +240,28 @@ Sammy,Valerian,greatest promo,super angebot,${cartDiscount.id},lineItemTotal(1 =
         batchSize: 5,
         continueOnProblems: true,
       }, logger)
-      const codesToUpdate = generatedCodes.map(codeObj => (
-        Object.assign({}, codeObj, { maxApplications: 40 })
-      ))
+      // Make codes unique
+      const discountCodesSample = preparedDiscountCodes.map((codeObj) => {
+        const uniqueCode = codeObj.code
+        return Object.assign({}, codeObj, { code: `${uniqueCode}foobar` })
+      })
       const expected = {
         // eslint-disable-next-line max-len
-        reportMessage: 'Summary: there were 8 successfully imported discount codes (0 were newly created, 8 were updated and 0 were unchanged). 2 errors occured (1 create errors and 1 update errors.)',
+        reportMessage: 'Summary: there were 8 successfully imported discount codes (8 were newly created, 0 were updated and 0 were unchanged). 2 errors occured (2 create errors and 0 update errors.)',
         detailedSummary: {
-          created: 0,
-          updated: 8,
+          created: 8,
+          updated: 0,
           unchanged: 0,
-          createErrorCount: 1,
-          updateErrorCount: 1,
-          // errors: [],
+          createErrorCount: 2,
+          updateErrorCount: 0,
         },
       }
 
       // Make code invalid
-      codesToUpdate[1].code = ''
-      codesToUpdate[7].cartDiscounts = 'INVALID-CART-DISCOUNT'
+      discountCodesSample[1].code = ''
+      discountCodesSample[7].cartDiscounts = 'INVALID-CART-DISCOUNT'
 
-      const summary = await codeImport.run(codesToUpdate)
+      const summary = await codeImport.run(discountCodesSample)
       expect(summary).toMatchObject(expected)
       const errors = summary.detailedSummary.errors
       expect(errors[0]).toMatch(/'code' should not be empty/)

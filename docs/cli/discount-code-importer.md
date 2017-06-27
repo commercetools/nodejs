@@ -5,7 +5,7 @@ This package is built to be used in conjunction with [sphere-node-cli](https://g
 
 ## Configuration
 
-The constructor may be passed in 2 parameters:
+The constructor accepts two arguments:
 - A required object containing the following values:
   - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
   - `batchSize` (Number): Amount of codes not more than 500 to process concurrently (Optional. Default: 50)

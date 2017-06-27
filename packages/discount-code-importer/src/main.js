@@ -78,7 +78,7 @@ export default class DiscountCodeImport {
   processStream (chunk: ChunkOptions, cb: () => mixed) {
     this.logger.info('Starting conversion')
     return this._processBatches(chunk)
-      .then(() => cb())
+      .then(cb)
       // No catch block as errors will be caught in the CLI
   }
 
@@ -108,7 +108,7 @@ export default class DiscountCodeImport {
     })
       .then(() => Promise.resolve(this.summaryReport()))
       .catch(error => Promise.reject({
-        error: error.message ? error.message : error,
+        error: error.message || error,
         summary: this._summary,
       }),
       )
@@ -130,7 +130,7 @@ export default class DiscountCodeImport {
             if (this.continueOnProblems) {
               this._summary.updateErrorCount += 1
               this._summary.errors.push(
-                error.message ? error.message : error,
+                error.message || error,
               )
               // eslint-disable-next-line max-len
               const msg = 'Update error occured but ignored. See summary for details'
@@ -142,7 +142,7 @@ export default class DiscountCodeImport {
             this.logger.error(msg)
             this._summary.updateErrorCount += 1
             this._summary.errors.push(
-              error.message ? error.message : error,
+              error.message || error,
             )
             return Promise.reject(error)
           })
@@ -155,7 +155,7 @@ export default class DiscountCodeImport {
           if (this.continueOnProblems) {
             this._summary.createErrorCount += 1
             this._summary.errors.push(
-              error.message ? error.message : error,
+              error.message || error,
             )
             // eslint-disable-next-line max-len
             const msg = 'Create error occured but ignored. See summary for details'
@@ -167,7 +167,7 @@ export default class DiscountCodeImport {
           this.logger.error(msg)
           this._summary.createErrorCount += 1
           this._summary.errors.push(
-            error.message ? error.message : error,
+            error.message || error,
           )
           return Promise.reject(error)
         })
@@ -228,8 +228,7 @@ export default class DiscountCodeImport {
       updateErrorCount,
     } = this._summary
     let message = ''
-    if (created === 0 && updated === 0 &&
-      createErrorCount === 0 && updateErrorCount === 0)
+    if (created + updated + createErrorCount + updateErrorCount === 0)
       message = 'Summary: nothing to do, everything is fine'
     else
       // eslint-disable-next-line max-len
