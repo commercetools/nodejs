@@ -10,6 +10,7 @@ export const baseActionsList = [
   { action: 'setDescription', key: 'description' },
   { action: 'changeOrderHint', key: 'orderHint' },
   { action: 'setExternalId', key: 'externalId' },
+  { action: 'setKey', key: 'key' },
 ]
 
 export const metaActionsList = [
