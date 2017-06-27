@@ -6,12 +6,12 @@ import tmp from 'tmp'
 import {
   AddReturnInfoCsvParser,
   LineItemStateCsvParser,
-} from '../../packages/csv-parser-order/src/index'
-import { version } from '../../packages/csv-parser-order/package.json'
+} from '../../packages/csv-parser-orders/src/index'
+import { version } from '../../packages/csv-parser-orders/package.json'
 
 describe('CSV and CLI Tests', () => {
   const binPath = './integration-tests/node_modules/.bin/csvparserorder'
-  const samplesFolder = './packages/csv-parser-order/test/data'
+  const samplesFolder = './packages/csv-parser-orders/test/data'
 
   describe('CLI basic functionality', () => {
     test('should print usage information given the help flag', (done) => {
