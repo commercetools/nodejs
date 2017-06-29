@@ -22,6 +22,7 @@ describe('Exports', () => {
       { action: 'setDescription', key: 'description' },
       { action: 'changeOrderHint', key: 'orderHint' },
       { action: 'setExternalId', key: 'externalId' },
+      { action: 'setKey', key: 'key' },
     ])
   })
 

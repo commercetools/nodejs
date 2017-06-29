@@ -1,0 +1,41 @@
+{
+  "name": "@commercetools/csv-parser-discount-code",
+  "version": "1.1.0",
+  "description": "Convert commercetools discount codes CSV data to JSON.",
+  "keywords": [
+    "commercetools",
+    "discount",
+    "code",
+    "csv",
+    "json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs/tree/master/packages/csv-parser-discount-code"
+  },
+  "homepage": "https://commercetools.github.io/nodejs/cli/csv-parser-discount-code.html",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "contributors": [
+    "Williams Omayuku <williams.omayuku@commercetools.com>"
+  ],
+  "main": "./lib/index.js",
+  "bin": {
+    "csvparserdiscountcode": "bin/csvparserdiscountcode.js"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "dependencies": {
+    "JSONStream": "^1.3.1",
+    "csv-parser": "^1.11.0",
+    "flat": "^2.0.1",
+    "highland": "^2.10.5",
+    "lodash": "^4.17.4",
+    "npmlog": "^4.1.0",
+    "pretty-error": "^2.1.0",
+    "tmp": "0.0.31",
+    "yargs": "^8.0.1"
+  }
+}
