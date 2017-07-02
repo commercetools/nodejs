@@ -83,10 +83,6 @@ export default class CsvParserPrice {
         output.emit('error', err)
       })
       .reduce({ prices: [] }, this.mergeBySku)
-      .stopOnError((err) => {
-        this.logger.error(err)
-        output.emit('error', err)
-      })
       .doto((data) => {
         const numberOfPrices = Number(JSON.stringify(data.length)) + 1
         this.logger.info(`Done with conversion of ${numberOfPrices} prices`)
