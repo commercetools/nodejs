@@ -14,7 +14,7 @@
     "type": "git",
     "url": "https://github.com/commercetools/nodejs/tree/master/packages/discount-code-importer"
   },
-  "homepage": "https://commercetools.github.io/nodejs/sdk/api/discountCodeImporter.html",
+  "homepage": "https://commercetools.github.io/nodejs/cli/discountCodeImporter.html",
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "contributors": [
