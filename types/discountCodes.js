@@ -11,6 +11,9 @@ export type CodeData = {
   maxApplicationsPerCustomer?: number;
   uri: string;
   code?: string;
+  code?: string;
+  id?: string;
+  version?: number;
 }
 
 export type CodeDataArray = Array<CodeData>
@@ -21,6 +24,15 @@ export type CodeOptions = {
   prefix?: string;
 }
 
+export type Summary = {
+  created: number;
+  updated: number;
+  unchanged: number;
+  createErrorCount: number;
+  updateErrorCount: number;
+  errors: Array<any>;
+}
+
 /* Logger */
 export type LoggerOptions = {
   error: Function;
@@ -28,6 +40,26 @@ export type LoggerOptions = {
   warn: Function;
   verbose: Function;
 }
+
+/* Config */
+export type ApiConfigOptions = {
+  host: string;
+  projectKey: string;
+  credentials: {
+    clientId: string;
+    clientSecret: string;
+  };
+  scopes: Array<string>;
+  apiUrl?: string;
+}
+
+export type ConstructorOptions = {
+  apiConfig: ApiConfigOptions;
+  batchSize: number;
+  continueOnProblems?: boolean;
+}
+
+export type ChunkOptions = Array<Object>
 
 export type ParseOptions = {
   continueOnProblems?: boolean;

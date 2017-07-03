@@ -11,6 +11,7 @@
     "@commercetools/sdk-middleware-http": "*",
     "@commercetools/sdk-middleware-queue": "*",
     "@commercetools/sdk-middleware-user-agent": "*",
+    "bluebird": "^3.5.0",
     "isuuid": "^0.1.0",
     "lodash.omit": "^4.5.0",
     "streamtest": "^1.2.2",
