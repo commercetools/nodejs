@@ -30,7 +30,11 @@ Options:
   --projectKey, -p  API project key.                                  [required]
   --logLevel        Logging level: error, warn, info or verbose.
                                                                [default: "info"]
+  --logFile         Path to file where to save logs.
+                                                 [default: "csvparserprice.log"]
 ```
+
+Note that when the stdout is used as an output stream all log messages are written by default to `csvparserprice.log` log file.
 
 ### JS
 ```js
@@ -57,9 +61,15 @@ const csvParserPrice = new CsvParserPrice(
   }
 );
 
+const outputStream = fs.createWriteStream('./output.json')
+
+outputStream.on('error', (err) => {
+  // handle error event
+})
+
 csvParserPrice.parse(
   fs.createReadStream('./input.csv'),
-  fs.createWriteStream('./output.json')
+  outputStream
 );
 ```
 Errors on the level `error` come from events that are fatal and thus stop the stream of data.
