@@ -22,5 +22,15 @@
   "main": "lib/index.js",
   "files": [
     "lib"
-  ]
+  ],
+  "dependencies": {
+    "@commercetools/api-request-builder": "^3.0.0",
+    "@commercetools/sdk-client": "^1.4.0",
+    "@commercetools/sdk-middleware-auth": "^3.1.0",
+    "@commercetools/sdk-middleware-http": "^2.1.1",
+    "@commercetools/sdk-middleware-user-agent": "^1.2.0",
+    "JSONStream": "^1.3.1",
+    "highland": "^2.11.0",
+    "npmlog": "^4.1.0"
+  }
 }
