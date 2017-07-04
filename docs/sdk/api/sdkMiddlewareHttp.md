@@ -24,7 +24,7 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle HTTP requests for 
 2. `includeResponseHeaders` *(Boolean)*: flag whether to include the response headers in the response, if omitted headers is omitted from response
 3. `includeOriginalRequest` *(Boolean)*: flag whether to include the original request sent in the response. Can be useful if you want to see the final request being sent.
 4. `maskSensitiveHeaderData` *(Boolean)*: flag to mask sensitie data in the header. e.g. Authorization token
-5. `enableRetry` *(Boolean)*: flag to enable retry on network and 500 requests
+5. `enableRetry` *(Boolean)*: flag to enable retry on network errors and `500` response.
 6. `maxRetries` *(Number)*: number of times to retry the request before failing the request. (Default: 50)
 7. `retryDelay` *(Number)*: amount of milliseconds to wait before retrying the next request. (Default: 200)
 
