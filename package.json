@@ -49,7 +49,7 @@
     "cross-env": "5.0.0",
     "cz-lerna-changelog": "1.2.1",
     "eslint": "3.19.0",
-    "eslint-config-airbnb": "15.0.1",
+    "eslint-config-airbnb": "15.0.2",
     "eslint-config-commercetools": "6.0.0",
     "eslint-formatter-pretty": "1.1.0",
     "eslint-import-resolver-babel-module": "3.0.0",
