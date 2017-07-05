@@ -19,10 +19,15 @@ export default function createHttpMiddleware ({
   host,
   includeResponseHeaders,
   includeOriginalRequest,
-  maxRetries = 50,
-  enableRetry,
-  retryDelay = 200,
   maskSensitiveHeaderData,
+  enableRetry,
+  retryConfig: {
+    // encourage exponential backoff to prevent spamming the server if down
+    maxRetries = 10,
+    backoff = true,
+    retryDelay = 200,
+    maxDelay = Infinity,
+  } = {},
 }: HttpMiddlewareOptions): Middleware {
   return next => (request: MiddlewareRequest, response: MiddlewareResponse) => {
     const url = host.replace(/\/$/, '') + request.uri
@@ -111,8 +116,14 @@ export default function createHttpMiddleware ({
         (e: Error) => {
           if (enableRetry)
             if (retryCount < maxRetries) {
+              setTimeout(executeFetch, calcDelayDuration(
+                retryCount,
+                retryDelay,
+                maxRetries,
+                backoff,
+                maxDelay,
+              ))
               retryCount += 1
-              setTimeout(executeFetch, retryDelay)
               return
             }
           const error = new NetworkError(
@@ -124,6 +135,24 @@ export default function createHttpMiddleware ({
     }
     executeFetch()
   }
+}
+
+// calculates the delay duration exponentially
+// More info about the algorithm use here https://goo.gl/Xk8h5f
+function calcDelayDuration (
+  retryCount: number,
+  retryDelay: number,
+  maxRetries: number,
+  backoff: boolean,
+  maxDelay: number,
+): number {
+  if (backoff)
+    return retryCount !== 0 // do not increase if it's the first retry
+    ? Math.min(Math.round(
+        (Math.random() + 1) * retryDelay * (2 ** retryCount),
+      ), maxDelay)
+    : retryDelay
+  return retryDelay
 }
 
 function createError ({ statusCode, message, ...rest }): HttpErrorType {

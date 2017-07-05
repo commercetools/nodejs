@@ -258,8 +258,10 @@ describe('Http', () => {
       const options = {
         host: testHost,
         enableRetry: true,
-        maxRetries: 2,
-        retryDelay: 500,
+        retryConfig: {
+          maxRetries: 2,
+          retryDelay: 300,
+        },
       }
       const httpMiddleware = createHttpMiddleware(options)
       nock(testHost)

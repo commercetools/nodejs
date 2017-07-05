@@ -84,8 +84,12 @@ export type HttpMiddlewareOptions = {
   includeOriginalRequest?: boolean;
   maskSensitiveHeaderData?: boolean;
   enableRetry?: boolean;
-  maxRetries?: number;
-  retryDelay?: number;
+  retryConfig?: {
+    maxRetries?: number;
+    retryDelay?: number;
+    backoff?: boolean;
+    maxDelay?: number;
+  }
 }
 export type QueueMiddlewareOptions = {
   concurrency: number;
