@@ -238,43 +238,78 @@ describe('Http', () => {
     }),
   )
 
-  it('handle failed response (network error)', () =>
-    new Promise((resolve, reject) => {
-      const request = createTestRequest({
-        uri: '/foo/bar',
-      })
-      const response = { resolve, reject }
-      const next = (req, res) => {
-        expect(res.error.name).toBe('NetworkError')
-        expect(res.error.headers).toBeUndefined()
-        expect(res.error.originalRequest).toBeDefined()
-        expect(res.error.message).toBe(
-          `request to ${testHost}/foo/bar failed, reason: Connection timeout`,
-        )
-        expect(res.body).toBeUndefined()
-        expect(res.statusCode).toBe(0)
-        resolve()
-      }
-      const options = {
-        host: testHost,
-        enableRetry: true,
-        retryConfig: {
-          maxRetries: 2,
-          retryDelay: 300,
-        },
-      }
-      const httpMiddleware = createHttpMiddleware(options)
-      nock(testHost)
-        .defaultReplyHeaders({
-          'Content-Type': 'application/json',
+  describe('::repeater', () => {
+    it('should retry on network error(503) if enabled', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
         })
-        .get('/foo/bar')
-        .times(3)
-        .replyWithError('Connection timeout')
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res.error.name).toBe('NetworkError')
+          expect(res.error.headers).toBeUndefined()
+          expect(res.error.originalRequest).toBeDefined()
+          expect(res.error.message).toBe(
+            `request to ${testHost}/foo/bar failed, reason: Connection timeout`,
+          )
+          expect(res.body).toBeUndefined()
+          expect(res.statusCode).toBe(0)
+          resolve()
+        }
+        const options = {
+          host: testHost,
+          enableRetry: true,
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+          },
+        }
+        const httpMiddleware = createHttpMiddleware(options)
+        nock(testHost)
+          .defaultReplyHeaders({
+            'Content-Type': 'application/json',
+          })
+          .get('/foo/bar')
+          .times(3)
+          .replyWithError('Connection timeout')
 
-      httpMiddleware(next)(request, response)
-    }),
-  )
+        httpMiddleware(next)(request, response)
+      }),
+    )
+
+    it('should not retry on 404 (not found) error', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res.error.message).toBe('URI not found: /foo/bar')
+          expect(res.error.body).toBeUndefined()
+          expect(res.body).toBeUndefined()
+          expect(res.statusCode).toBe(404)
+          resolve()
+        }
+        const options = {
+          host: testHost,
+          enableRetry: true,
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+          },
+        }
+        const httpMiddleware = createHttpMiddleware(options)
+        nock(testHost)
+          .defaultReplyHeaders({
+            'Content-Type': 'application/json',
+          })
+          .get('/foo/bar')
+          .reply(404)
+
+        httpMiddleware(next)(request, response)
+      }),
+    )
+  })
 
   it('handle failed response (api error)', () =>
     new Promise((resolve, reject) => {
