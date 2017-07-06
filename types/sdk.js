@@ -40,6 +40,7 @@ export type SuccessResult = {
 export type ClientResult = SuccessResult | HttpErrorType
 export type Client = {
   execute: (request: ClientRequest) => Promise<ClientResult>;
+  process: (request: ClientRequest, processFn, Object) => Promise<any>;
 }
 export type ProcessFn = (result: SuccessResult) => Promise<any>;
 export type ProcessOptions = {
