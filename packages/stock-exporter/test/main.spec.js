@@ -29,7 +29,7 @@ describe('StockExporter', () => {
         }
         return processFn(sampleResult).then(() => Promise.resolve())
       })
-      StockExporter._writeEachStock = jest.fn()
+      jest.spyOn(StockExporter, '_writeEachStock', jest.fn)
       stockExporter.client.process = processMock
       return stockExporter._fetchStocks().then(() => {
         expect(processMock).toHaveBeenCalledTimes(1)
@@ -39,6 +39,7 @@ describe('StockExporter', () => {
             'first argument is request object',
           )
         expect(StockExporter._writeEachStock).toHaveBeenCalledTimes(1)
+        StockExporter._writeEachStock.mockRestore()
       })
     })
     it('should add accessToken to request if present', () => {
@@ -51,7 +52,7 @@ describe('StockExporter', () => {
         return processFn(sampleResult).then(() => Promise.resolve())
       })
       stockExporter.accessToken = '12345'
-      StockExporter._writeEachStock = jest.fn()
+      jest.spyOn(StockExporter, '_writeEachStock', jest.fn)
       stockExporter.client.process = processMock
       return stockExporter._fetchStocks().then(() => {
         expect(processMock).toHaveBeenCalledTimes(1)
@@ -66,6 +67,7 @@ describe('StockExporter', () => {
           'first argument is request object',
           )
         expect(StockExporter._writeEachStock).toHaveBeenCalledTimes(1)
+        StockExporter._writeEachStock.mockRestore()
       })
     })
   })
@@ -91,6 +93,16 @@ describe('StockExporter', () => {
       })
       stockExporter._fetchStocks = _fetchStocksMock
       stockExporter.run(outputStream)
+    })
+  })
+  describe('::_writeEachStock', () => {
+    it('should loop over stocks and write to csvStream', () => {
+      const csvWriteMock = jest.fn()
+      const csvStreamMock = {
+        write: csvWriteMock,
+      }
+      StockExporter._writeEachStock(csvStreamMock, [1, 2, 3, 4, 5])
+      expect(csvWriteMock).toHaveBeenCalledTimes(5)
     })
   })
 })
