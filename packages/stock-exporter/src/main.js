@@ -5,6 +5,10 @@ import type {
 } from 'types/discountCodes'
 
 import type {
+  Stock,
+} from 'types/stock'
+
+import type {
   AuthMiddlewareOptions,
   Client,
   ApiRequestBuilder,
@@ -28,11 +32,14 @@ export default class StockExporter {
   client: Client;
   accessToken: string;
   reqBuilder: ApiRequestBuilder
+  csvMappings: Function
 
   constructor (
     logger: LoggerOptions,
     apiConfig: AuthMiddlewareOptions,
-    exportConfig = {},
+    exportConfig = {
+      format: 'json',
+    },
     accessToken: string,
   ) {
     this.logger = logger || {
@@ -54,6 +61,7 @@ export default class StockExporter {
         }),
       ],
     })
+    this.exportConfig = exportConfig
     this.accessToken = accessToken
     this.reqBuilder = createRequestBuilder(
       { projectKey: apiConfig.projectKey },
@@ -63,22 +71,21 @@ export default class StockExporter {
   // main public method to call for stock export
   run (outputStream: Stream) {
     this.logger.verbose('Starting Export')
-    // open a stream to write csv from object
-    const csvStream = csv
-      .createWriteStream({ headers: true })
-      .transform((row) => {
-        this.logger.verbose(`transforming another row ${JSON.stringify(row)}`)
-        return {
-          sku: row.sku,
-          quantityOnStock: row.quantityOnStock,
-          restockableInDays: row.restockableInDays,
-        }
-      })
-    csvStream.pipe(outputStream)
-    this._fetchStocks(csvStream)
+    if (this.exportConfig.format === 'csv') {
+      // open a stream to write csv from object
+      const csvStream = csv
+        .createWriteStream({ headers: true })
+        .transform((row) => {
+          this.logger.verbose(`transforming row ${JSON.stringify(row)}`)
+          return StockExporter.stockMappings(row)
+        })
+      csvStream.pipe(outputStream)
+      this._fetchStocks(csvStream)
+    } else
+      this._fetchStocks(outputStream)
   }
 
-  _fetchStocks (csvStream: Stream): Promise {
+  _fetchStocks (outputStream: Stream): Promise {
     const uri = this.reqBuilder.inventory.build()
     const request = {
       uri,
@@ -90,18 +97,47 @@ export default class StockExporter {
       }
     return this.client.process(
       request,
-      (payload) => {
-        const results = payload.body.results
-        StockExporter._writeEachStock(csvStream, results)
-        return Promise.resolve()
-      },
+      (payload: Object): Promise<any> => this._processFn(
+        payload.body.results,
+        outputStream,
+      ),
       { accumulate: false },
     )
   }
 
-  static _writeEachStock (csvStream: Stream, stocks) {
-    stocks.forEach((stock) => {
-      csvStream.write(stock)
+  _processFn (stocks: Array<Stock>, outputStream: Stream): Promise<any> {
+    this._writeEachStock(outputStream, stocks)
+    return Promise.resolve()
+  }
+  // map to format acceptable by csv especially for import
+  static stockMappings (row: Stock): Object {
+    const result = {
+      sku: row.sku,
+      quantityOnStock: row.quantityOnStock,
+    }
+    if (row.supplyChannel && row.supplyChannel.obj)
+      result.supplyChannel = row.supplyChannel.obj.key
+    if (row.restockableInDays)
+      result.restockableInDays = row.restockableInDays
+    if (row.expectedDelivery)
+      result.expectedDelivery = row.expectedDelivery
+    if (row.custom && Object.keys(row.custom).length !== 0) {
+      const customObj = row.custom
+      result.customType = customObj.type.obj.key
+      const keys = Object.keys(customObj.fields)
+      keys.forEach((key: string) => {
+        result[`custom.${key}`] = customObj.fields[key]
+      })
+    }
+    return result
+  }
+
+  _writeEachStock (outputStream: Stream, stocks: Array<Stock>) {
+    stocks.forEach((stock: Stock) => {
+      if (this.exportConfig.format === 'csv')
+        outputStream.write(stock)
+      else
+        outputStream.write(JSON.stringify(stock))
     })
   }
 }
