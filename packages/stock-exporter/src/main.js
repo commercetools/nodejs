@@ -95,7 +95,11 @@ export default class StockExporter {
   }
 
   _fetchStocks (outputStream: Stream): Promise {
-    const uri = this.reqBuilder.inventory.build()
+    const uri = this.reqBuilder
+      .inventory
+      .expand('custom.type')
+      .expand('supplyChannel')
+      .build()
     const request = {
       uri,
       method: 'GET',

@@ -35,10 +35,13 @@ describe('StockExporter', () => {
       return stockExporter._fetchStocks().then(() => {
         expect(processMock).toHaveBeenCalledTimes(1)
         expect(processMock.mock.calls[0][0])
-          .toEqual(
-            { uri: '/foo/inventory', method: 'GET' },
-            'first argument is request object',
-          )
+        .toEqual({
+          // should expand customfields object and supplyChannel
+          uri: '/foo/inventory?expand=custom.type&expand=supplyChannel',
+          method: 'GET',
+        },
+        'first argument is request object',
+        )
         expect(stockExporter._writeEachStock).toHaveBeenCalledTimes(1)
         stockExporter._writeEachStock.mockRestore()
       })
@@ -59,7 +62,7 @@ describe('StockExporter', () => {
         expect(processMock).toHaveBeenCalledTimes(1)
         expect(processMock.mock.calls[0][0])
           .toEqual({
-            uri: '/foo/inventory',
+            uri: '/foo/inventory?expand=custom.type&expand=supplyChannel',
             method: 'GET',
             headers: {
               Authorization: 'Bearer 12345',
