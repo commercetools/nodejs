@@ -6,6 +6,7 @@ import type {
 
 import type {
   Stock,
+  ExportConfig,
 } from 'types/stock'
 
 import type {
@@ -22,12 +23,15 @@ import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createUserAgentMiddleware }
   from '@commercetools/sdk-middleware-user-agent'
 import { version, name } from '../package.json'
+import CONS from './constants'
 
 export default class StockExporter {
   // TODO:
-  // fetch all stocks,
-  // transform stocks,
-  // output to outputStream
+  // fetch all stocks ✅,
+  // transform stocks ✅,
+  // output to outputStream ✅,
+  // accepts channel key and fetch
+  // accepts query string
   logger: LoggerOptions;
   client: Client;
   accessToken: string;
@@ -37,8 +41,9 @@ export default class StockExporter {
   constructor (
     logger: LoggerOptions,
     apiConfig: AuthMiddlewareOptions,
-    exportConfig = {
-      format: 'json',
+    exportConfig: ExportConfig = {
+      format: CONS.standardOption.format,
+      delimiter: CONS.standardOption.delimiter,
     },
     accessToken: string,
   ) {
@@ -73,9 +78,13 @@ export default class StockExporter {
     this.logger.verbose('Starting Export')
     if (this.exportConfig.format === 'csv') {
       // open a stream to write csv from object
+      const csvOptions = {
+        headers: true,
+        delimiter: this.exportConfig.delimiter,
+      }
       const csvStream = csv
-        .createWriteStream({ headers: true })
-        .transform((row) => {
+        .createWriteStream(csvOptions)
+        .transform((row: Stock) => {
           this.logger.verbose(`transforming row ${JSON.stringify(row)}`)
           return StockExporter.stockMappings(row)
         })

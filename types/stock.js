@@ -16,3 +16,8 @@ export type Stock = {
     fields: Object;
   }
 }
+
+export type ExportConfig = {
+  format: string;
+  delimiter: string;
+}
