@@ -88,7 +88,7 @@ describe('StockExporter', () => {
         .spyOn(stockExporter, '_fetchStocks')
         .mockImplementation((csvStream) => {
           csvStream.write(sampleStock)
-          csvStream.end()
+          return Promise.resolve()
         })
       const outputStream = streamtest['v2'].toText((error, result) => {
         const expectedResult = stripIndent`
@@ -113,7 +113,7 @@ describe('StockExporter', () => {
         .spyOn(stockExporter, '_fetchStocks')
         .mockImplementation((csvStream) => {
           csvStream.write(JSON.stringify(sampleStock))
-          csvStream.end()
+          return Promise.resolve()
         })
       const outputStream = streamtest['v2'].toText((error, result) => {
         const expectedResult = { ...sampleStock }

@@ -90,8 +90,19 @@ export default class StockExporter {
         })
       csvStream.pipe(outputStream)
       this._fetchStocks(csvStream)
+        .then((): Stream => csvStream.end())
+        .catch((e: Error) => {
+          outputStream.emit('error', e)
+        })
     } else
       this._fetchStocks(outputStream)
+        .then(() => {
+          if (outputStream !== process.stdout)
+            outputStream.end()
+        })
+        .catch((e: Error) => {
+          outputStream.emit('error', e)
+        })
   }
 
   _fetchStocks (outputStream: Stream): Promise {
