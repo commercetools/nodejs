@@ -15,6 +15,7 @@ import type {
   ApiRequestBuilder,
 } from 'types/sdk'
 import csv from 'fast-csv'
+import JSONStream from 'JSONStream'
 import { createAuthMiddlewareForClientCredentialsFlow }
   from '@commercetools/sdk-middleware-auth'
 import { createClient } from '@commercetools/sdk-client'
@@ -27,9 +28,6 @@ import CONS from './constants'
 
 export default class StockExporter {
   // TODO:
-  // fetch all stocks ✅,
-  // transform stocks ✅,
-  // output to outputStream ✅,
   // accepts channel key and fetch
   // accepts query string
   logger: LoggerOptions;
@@ -94,15 +92,18 @@ export default class StockExporter {
         .catch((e: Error) => {
           outputStream.emit('error', e)
         })
-    } else
-      this._fetchStocks(outputStream)
+    } else {
+      const jsonStream = JSONStream.stringify()
+      jsonStream.pipe(outputStream)
+      this._fetchStocks(jsonStream)
         .then(() => {
           if (outputStream !== process.stdout)
-            outputStream.end()
+            jsonStream.end()
         })
         .catch((e: Error) => {
           outputStream.emit('error', e)
         })
+    }
   }
 
   _fetchStocks (outputStream: Stream): Promise {
@@ -121,7 +122,7 @@ export default class StockExporter {
       }
     return this.client.process(
       request,
-      (payload: Object): Promise<any> => this._processFn(
+      (payload: Object): Promise<any> => StockExporter._processFn(
         payload.body.results,
         outputStream,
       ),
@@ -129,8 +130,8 @@ export default class StockExporter {
     )
   }
 
-  _processFn (stocks: Array<Stock>, outputStream: Stream): Promise<any> {
-    this._writeEachStock(outputStream, stocks)
+  static _processFn (stocks: Array<Stock>, outputStream: Stream): Promise<any> {
+    StockExporter._writeEachStock(outputStream, stocks)
     return Promise.resolve()
   }
   // map to format acceptable by csv especially for import
@@ -156,12 +157,9 @@ export default class StockExporter {
     return result
   }
 
-  _writeEachStock (outputStream: Stream, stocks: Array<Stock>) {
+  static _writeEachStock (outputStream: Stream, stocks: Array<Stock>) {
     stocks.forEach((stock: Stock) => {
-      if (this.exportConfig.format === 'csv')
-        outputStream.write(stock)
-      else
-        outputStream.write(JSON.stringify(stock))
+      outputStream.write(stock)
     })
   }
 }

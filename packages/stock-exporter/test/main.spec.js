@@ -29,8 +29,7 @@ describe('StockExporter', () => {
         }
         return processFn(sampleResult).then(() => Promise.resolve())
       })
-      // console.log(StockExporter.);
-      jest.spyOn(stockExporter, '_writeEachStock', jest.fn)
+      jest.spyOn(StockExporter, '_writeEachStock', jest.fn)
       stockExporter.client.process = processMock
       return stockExporter._fetchStocks().then(() => {
         expect(processMock).toHaveBeenCalledTimes(1)
@@ -42,8 +41,8 @@ describe('StockExporter', () => {
         },
         'first argument is request object',
         )
-        expect(stockExporter._writeEachStock).toHaveBeenCalledTimes(1)
-        stockExporter._writeEachStock.mockRestore()
+        expect(StockExporter._writeEachStock).toHaveBeenCalledTimes(1)
+        StockExporter._writeEachStock.mockRestore()
       })
     })
     it('should add accessToken to request if present', () => {
@@ -56,7 +55,7 @@ describe('StockExporter', () => {
         return processFn(sampleResult).then(() => Promise.resolve())
       })
       stockExporter.accessToken = '12345'
-      jest.spyOn(stockExporter, '_writeEachStock', jest.fn)
+      jest.spyOn(StockExporter, '_writeEachStock', jest.fn)
       stockExporter.client.process = processMock
       return stockExporter._fetchStocks().then(() => {
         expect(processMock).toHaveBeenCalledTimes(1)
@@ -70,8 +69,8 @@ describe('StockExporter', () => {
           },
           'first argument is request object',
           )
-        expect(stockExporter._writeEachStock).toHaveBeenCalledTimes(1)
-        stockExporter._writeEachStock.mockRestore()
+        expect(StockExporter._writeEachStock).toHaveBeenCalledTimes(1)
+        StockExporter._writeEachStock.mockRestore()
       })
     })
   })
@@ -112,11 +111,11 @@ describe('StockExporter', () => {
       const spy = jest
         .spyOn(stockExporter, '_fetchStocks')
         .mockImplementation((csvStream) => {
-          csvStream.write(JSON.stringify(sampleStock))
+          csvStream.write(sampleStock)
           return Promise.resolve()
         })
       const outputStream = streamtest['v2'].toText((error, result) => {
-        const expectedResult = { ...sampleStock }
+        const expectedResult = [{ ...sampleStock }]
         expect(JSON.parse(result)).toEqual(expectedResult)
         spy.mockRestore()
         done()
@@ -131,17 +130,7 @@ describe('StockExporter', () => {
       const csvStreamMock = {
         write: csvWriteMock,
       }
-      stockExporter._writeEachStock(csvStreamMock, [1, 2, 3, 4, 5])
-      expect(csvWriteMock).toHaveBeenCalledTimes(5)
-    })
-
-    it('should write to csvStream if format is csv', () => {
-      stockExporter.exportConfig.format = 'csv'
-      const csvWriteMock = jest.fn()
-      const csvStreamMock = {
-        write: csvWriteMock,
-      }
-      stockExporter._writeEachStock(csvStreamMock, [1, 2, 3, 4, 5])
+      StockExporter._writeEachStock(csvStreamMock, [1, 2, 3, 4, 5])
       expect(csvWriteMock).toHaveBeenCalledTimes(5)
     })
   })
