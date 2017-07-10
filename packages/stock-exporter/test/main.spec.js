@@ -15,6 +15,22 @@ describe('StockExporter', () => {
     expect(stockExporter.client).toBeDefined()
     expect(stockExporter.exportConfig).toBeDefined()
   })
+  it('should extend logger object', () => {
+    const apiConfig = {
+      projectKey: 'foo',
+    }
+    const mockErrorLogger = jest.fn()
+    const logger = {
+      error: mockErrorLogger,
+    }
+    const stockExporter = new StockExporter(logger, apiConfig)
+    stockExporter.logger.error()
+    expect(stockExporter.logger.info).toBeDefined()
+    expect(stockExporter.logger.warn).toBeDefined()
+    expect(stockExporter.logger.verbose).toBeDefined()
+    expect(mockErrorLogger).toHaveBeenCalled()
+  })
+
   let stockExporter
   const logger = {
     error: () => {},

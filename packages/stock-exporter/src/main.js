@@ -49,11 +49,12 @@ export default class StockExporter {
     },
     accessToken: string,
   ) {
-    this.logger = logger || {
+    this.logger = {
       error: () => {},
       info: () => {},
       warn: () => {},
       verbose: () => {},
+      ...logger,
     }
 
     this.client = createClient({
