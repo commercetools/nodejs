@@ -21,3 +21,17 @@ export type ExportConfig = {
   format: string;
   delimiter: string;
 }
+
+export type CsvStockMapping = {
+  sku: string;
+  supplyChannel?: Object;
+  quantityOnStock: number;
+  availableQuantity?: number;
+  restockableInDays?: number;
+  expectedDelivery?: string;
+  customType?: string;
+  custom?: {
+    type: Object;
+    fields: Object;
+  }
+}

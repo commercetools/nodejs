@@ -2,17 +2,18 @@
 
 import type {
   LoggerOptions,
+  ApiConfigOptions,
 } from 'types/discountCodes'
 
 import type {
   Stock,
   ExportConfig,
+  CsvStockMapping,
 } from 'types/stock'
 
 import type {
-  AuthMiddlewareOptions,
   Client,
-  ApiRequestBuilder,
+  ClientRequest,
 } from 'types/sdk'
 import csv from 'fast-csv'
 import JSONStream from 'JSONStream'
@@ -27,18 +28,23 @@ import { version, name } from '../package.json'
 import CONS from './constants'
 
 export default class StockExporter {
-  // TODO:
+  // TODO: //I will remove when done (Abi)
   // accepts channel key and fetch
   // accepts query string
   logger: LoggerOptions;
   client: Client;
   accessToken: string;
-  reqBuilder: ApiRequestBuilder
+  reqBuilder: {
+    [key: string]: {
+      expand: Function
+    }
+  }
   csvMappings: Function
+  exportConfig: ExportConfig
 
   constructor (
     logger: LoggerOptions,
-    apiConfig: AuthMiddlewareOptions,
+    apiConfig: ApiConfigOptions,
     exportConfig: ExportConfig = {
       format: CONS.standardOption.format,
       delimiter: CONS.standardOption.delimiter,
@@ -72,7 +78,7 @@ export default class StockExporter {
   }
 
   // main public method to call for stock export
-  run (outputStream: Stream) {
+  run (outputStream: stream$Writable) {
     this.logger.verbose('Starting Export')
     if (this.exportConfig.format === 'csv') {
       // open a stream to write csv from object
@@ -88,7 +94,7 @@ export default class StockExporter {
         })
       csvStream.pipe(outputStream)
       this._fetchStocks(csvStream)
-        .then((): Stream => csvStream.end())
+        .then((): stream$Writable => csvStream.end())
         .catch((e: Error) => {
           outputStream.emit('error', e)
         })
@@ -106,13 +112,13 @@ export default class StockExporter {
     }
   }
 
-  _fetchStocks (outputStream: Stream): Promise {
+  _fetchStocks (outputStream: stream$Writable): Promise<any> {
     const uri = this.reqBuilder
       .inventory
       .expand('custom.type')
       .expand('supplyChannel')
       .build()
-    const request = {
+    const request: ClientRequest = {
       uri,
       method: 'GET',
     }
@@ -130,13 +136,16 @@ export default class StockExporter {
     )
   }
 
-  static _processFn (stocks: Array<Stock>, outputStream: Stream): Promise<any> {
+  static _processFn (
+    stocks: Array<Stock>,
+    outputStream: stream$Writable,
+  ): Promise<any> {
     StockExporter._writeEachStock(outputStream, stocks)
     return Promise.resolve()
   }
   // map to format acceptable by csv especially for import
-  static stockMappings (row: Stock): Object {
-    const result = {
+  static stockMappings (row: Stock): CsvStockMapping {
+    const result: CsvStockMapping = {
       sku: row.sku,
       quantityOnStock: row.quantityOnStock,
     }
@@ -157,9 +166,13 @@ export default class StockExporter {
     return result
   }
 
-  static _writeEachStock (outputStream: Stream, stocks: Array<Stock>) {
+  static _writeEachStock (outputStream: stream$Writable, stocks: Array<Stock>) {
     stocks.forEach((stock: Stock) => {
-      outputStream.write(stock)
+      /* the any is a hack to make flow work, because the streams here are
+      not regular stream hence the type "stream$Writable" is not fully
+      compatible. should be fixed whenever flow supports extension of types
+      */
+      (outputStream: any).write(stock)
     })
   }
 }
