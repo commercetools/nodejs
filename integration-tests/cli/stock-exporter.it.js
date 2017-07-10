@@ -71,6 +71,21 @@ describe('StockExporter CLI', () => {
       )
     })
 
+    test('should accept query', (done) => {
+      const jsonFilePath = tmp.fileSync().name
+      const queryFlag = '-q "sku="invalid""'
+      exec(`${binPath} -p ${projectKey} -o ${jsonFilePath} ${queryFlag}`,
+        (cliError, stdout, stderr) => {
+          expect(cliError && stderr).toBeFalsy()
+          fs.readFile(jsonFilePath, { encoding: 'utf8' }, (error, data) => {
+            expect(error).toBeFalsy()
+            expect(data).toBeFalsy()
+            done()
+          })
+        },
+      )
+    })
+
     test('should export stocks to file as csv', (done) => {
       const csvFilePath = tmp.fileSync().name
 

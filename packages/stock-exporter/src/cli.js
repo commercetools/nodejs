@@ -62,6 +62,21 @@ ${description}`,
     demand: true,
   })
 
+  .option('channelKey', {
+    alias: 'c',
+    describe: `Channel key to use as filter for result to export.
+Useful if you only have channel key but not id.
+Can be used with the query flag
+`,
+  })
+
+  .option('query', {
+    alias: 'q',
+    describe: `filter query for stocks:
+dev.commercetools.com/http-api-projects-inventory.html#query-inventory
+can be used with channelKey flag
+`,
+  })
   .option('format', {
     alias: 'f',
     describe: 'Format for export',
@@ -136,6 +151,8 @@ resolveCredentials(args)
     const exportConfig = {
       delimiter: args.delimiter,
       format: args.format,
+      channelKey: args.channelKey,
+      queryString: args.query,
     }
     return new StockExporter(logger, apiConfig, exportConfig, accessToken)
   })
