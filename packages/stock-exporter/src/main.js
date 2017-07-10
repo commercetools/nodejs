@@ -28,15 +28,13 @@ import { version, name } from '../package.json'
 import CONS from './constants'
 
 export default class StockExporter {
-  // TODO: //I will remove when done (Abi)
-  // accepts channel key and fetch
-  // accepts query string
   logger: LoggerOptions;
   client: Client;
   accessToken: string;
   reqBuilder: {
     [key: string]: {
-      expand: Function
+      expand: Function;
+      where: Function;
     }
   }
   csvMappings: Function
@@ -112,12 +110,26 @@ export default class StockExporter {
     }
   }
 
-  _fetchStocks (outputStream: stream$Writable): Promise<any> {
-    const uri = this.reqBuilder
+  _fetchStocks (
+    outputStream: stream$Writable,
+  ): Promise<any> {
+    if (this.exportConfig.channelKey)
+      return this._resolveChannelKey(this.exportConfig.channelKey)
+        .then(channelId => this._makeRequest(outputStream, channelId))
+    return this._makeRequest(outputStream)
+  }
+
+  _makeRequest (outputStream: stream$Writable, channelId?: string) {
+    const query = this.reqBuilder
       .inventory
       .expand('custom.type')
       .expand('supplyChannel')
-      .build()
+      .whereOperator('and')
+    if (this.exportConfig.queryString)
+      query.where(this.exportConfig.queryString)
+    if (channelId)
+      query.where(`supplyChannel(id="${channelId}")`)
+    const uri = query.build()
     const request: ClientRequest = {
       uri,
       method: 'GET',
@@ -134,6 +146,30 @@ export default class StockExporter {
       ),
       { accumulate: false },
     )
+  }
+
+  _resolveChannelKey (channelKey: string): Promise<any> {
+    const queryString = `key="${channelKey}"`
+    const uri = this.reqBuilder
+      .channels
+      .where(queryString)
+      .build()
+    const request: ClientRequest = {
+      uri,
+      method: 'GET',
+    }
+    if (this.accessToken)
+      request.headers = {
+        Authorization: `Bearer ${this.accessToken}`,
+      }
+    return this.client.execute(request)
+      .then((result): Promise<any> => {
+        if (result.body && result.body.results.length)
+          return Promise.resolve(result.body.results[0].id)
+        return Promise.reject(
+          new Error('No data with channel key in CTP Platform'),
+        )
+      })
   }
 
   static _processFn (

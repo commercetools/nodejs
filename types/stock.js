@@ -20,6 +20,8 @@ export type Stock = {
 export type ExportConfig = {
   format: string;
   delimiter: string;
+  channelKey?: string;
+  queryString?: string;
 }
 
 export type CsvStockMapping = {
