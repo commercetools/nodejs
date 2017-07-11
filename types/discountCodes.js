@@ -69,6 +69,7 @@ export type ConstructorOptions = {
 
 export type ImporterOptions = {
   apiConfig: ApiConfigOptions;
+  accessToken?: string;
   batchSize: number;
   delimiter: string;
   exportFormat: string;

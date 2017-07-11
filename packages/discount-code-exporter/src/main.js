@@ -17,7 +17,6 @@ import {
 } from '@commercetools/sdk-middleware-user-agent'
 import csv from 'fast-csv'
 import JSONStream from 'JSONStream'
-import npmlog from 'npmlog'
 import { flatten } from 'flat'
 import pkg from '../package.json'
 
@@ -27,6 +26,7 @@ export default class DiscountCodeExport {
   batchSize: number;
   client: Client;
   logger: LoggerOptions;
+  accessToken: string;
   delimiter: string
   exportFormat: string;
   predicate: string;
@@ -59,14 +59,16 @@ export default class DiscountCodeExport {
       predicate: '',
       batchSize: 500,
       exportFormat: 'json',
+      accessToken: '',
     }
     Object.assign(this, defaultOptions, options)
 
-    this.logger = logger || {
-      error: npmlog.error.bind(this, ''),
-      warn: npmlog.warn.bind(this, ''),
-      info: npmlog.info.bind(this, ''),
-      verbose: npmlog.verbose.bind(this, ''),
+    this.logger = {
+      error: () => {},
+      warn: () => {},
+      info: () => {},
+      verbose: () => {},
+      ...logger,
     }
 
     this._processCode = this._processCode.bind(this)
@@ -125,8 +127,15 @@ export default class DiscountCodeExport {
     const uri = service.perPage(this.batchSize)
     if (this.predicate)
       uri.where(this.predicate)
-
-    return { uri: uri.build(), method: 'GET' }
+    const request: Object = {
+      uri: uri.build(),
+      method: 'GET',
+    }
+    if (this.accessToken)
+      request.headers = {
+        Authorization: `Bearer ${this.accessToken}`,
+      }
+    return request
   }
 
   _createService () {
