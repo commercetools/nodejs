@@ -196,7 +196,7 @@ describe('InventoryExporter', () => {
       inventoryExporter.run(outputStream)
     })
 
-    it('should fetch inventories and output json to stream as default', (done) => {
+    it('should fetch inventories and output json as default', (done) => {
       const sampleInventory = {
         sku: 'hello',
         quantityOnStock: 'me',
