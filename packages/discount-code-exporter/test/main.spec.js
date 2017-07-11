@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import streamtest from 'streamtest'
 import DiscountCodeExport from '../src/main'
 
 describe('DiscountCodeExport', () => {
@@ -27,6 +29,8 @@ describe('DiscountCodeExport', () => {
       expect(codeExport.batchSize).toBeDefined()
       expect(codeExport.client).toBeDefined()
       expect(codeExport.logger).toEqual(logger)
+      expect(codeExport.delimiter).toBe(',')
+      expect(codeExport.multiValueDelimiter).toBe(';')
     })
 
 
@@ -44,6 +48,170 @@ describe('DiscountCodeExport', () => {
       .toThrow(
         /The `batchSize` must not be more than 500/,
       )
+    })
+  })
+
+  describe('::run', () => {
+    it('should fetch discount codes and output csv to stream', (done) => {
+      codeExport.exportFormat = 'csv'
+      const sampleCode = {
+        code: 'discount-code',
+        name: { en: 'some-discount-name' },
+        cartDiscounts: [{ id: 'cart-discount-1' }, { id: 'cart-discount-2' }],
+      }
+      const spy = jest
+        .spyOn(codeExport, '_fetchCodes')
+        .mockImplementation((csvStream) => {
+          csvStream.write(sampleCode)
+          return Promise.resolve()
+        })
+      const outputStream = streamtest['v2'].toText((error, result) => {
+        const expectedResult = `code,name.en,cartDiscounts
+discount-code,some-discount-name,cart-discount-1;cart-discount-2`
+        expect(result).toEqual(expectedResult)
+        spy.mockRestore()
+        done()
+      })
+      codeExport.run(outputStream)
+    })
+
+    it('should fetch codes and output json to stream by default', (done) => {
+      const sampleCode = {
+        code: 'discount-code',
+        name: { en: 'some-discount-name' },
+        cartDiscounts: [{ id: 'cart-discount-1' }, { id: 'cart-discount-2' }],
+      }
+      const spy = jest
+        .spyOn(codeExport, '_fetchCodes')
+        .mockImplementation((jsonStream) => {
+          jsonStream.write(sampleCode)
+          return Promise.resolve()
+        })
+      const outputStream = streamtest['v2'].toText((error, result) => {
+        const expectedResult = [{ ...sampleCode }]
+        expect(JSON.parse(result)).toEqual(expectedResult)
+        spy.mockRestore()
+        done()
+      })
+      codeExport.run(outputStream)
+    })
+
+    it('should emit error if it occurs when streaming to csv', (done) => {
+      codeExport.exportFormat = 'csv'
+      const spy = jest
+        .spyOn(codeExport, '_fetchCodes')
+        .mockImplementation(() => Promise.reject(new Error('error occured')))
+      const outputStream = streamtest['v2'].toText((error, result) => {
+        expect(error.message).toBe('error occured')
+        expect(result).toBeUndefined()
+        spy.mockRestore()
+        done()
+      })
+      codeExport.run(outputStream)
+    })
+
+    it('should emit error if it occurs when streaming to json', (done) => {
+      const spy = jest
+        .spyOn(codeExport, '_fetchCodes')
+        .mockImplementation(() => Promise.reject(new Error('error occured')))
+      const outputStream = streamtest['v2'].toText((error, result) => {
+        expect(error.message).toBe('error occured')
+        expect(result).toBeUndefined()
+        spy.mockRestore()
+        done()
+      })
+      codeExport.run(outputStream)
+    })
+  })
+
+  describe('::_fetchCodes', () => {
+    let processMock
+    const sampleResult = {
+      body: {
+        results: [],
+      },
+    }
+    beforeEach(() => {
+      processMock = jest.fn((request, processFn) => (
+        processFn(sampleResult).then(() => Promise.resolve())
+      ))
+    })
+
+    it('should fail if status code is not 200', async () => {
+      codeExport.client.process = processMock
+      sampleResult.message = 'Error occured'
+      try {
+        await codeExport._fetchCodes()
+      } catch (error) {
+        expect(error.message).toBe('Error occured')
+      }
+    })
+
+    it('should fetch discount codes using `process` method', async () => {
+      codeExport.client.process = processMock
+      sampleResult.statusCode = 200
+      await codeExport._fetchCodes()
+      expect(processMock).toHaveBeenCalledTimes(1)
+      expect(processMock.mock.calls[0][0])
+      .toEqual({
+        uri: '/asafaelhn/discount-codes?limit=500',
+        method: 'GET',
+      })
+    })
+
+    it('should loop over discount codes and write to stream', async () => {
+      codeExport.client.process = processMock
+      sampleResult.statusCode = 200
+      sampleResult.body.results = [ 'code1', 'code2', 'code3' ]
+      const fakeStream = { write: jest.fn() }
+      await codeExport._fetchCodes(fakeStream)
+      expect(fakeStream.write).toHaveBeenCalledTimes(3)
+    })
+  })
+
+  describe('::_buildRequest', () => {
+    it('should build request according to query', () => {
+      codeExport.predicate = 'code-predicate'
+      const expected = {
+        uri: '/asafaelhn/discount-codes?where=code-predicate&limit=500',
+        method: 'GET',
+      }
+      const actual = codeExport._buildRequest()
+      expect(actual).toEqual(expected)
+    })
+  })
+
+  describe('::_processCode', () => {
+    const sampleCodeObj = {
+      name: { en: 'English', de: 'German' },
+      cartDiscounts: [{
+        typeId: 'cart-discount',
+        id: 'discount-id-1',
+      }],
+    }
+
+    it('should flatten object and return `cartDiscounts` as id string', () => {
+      const expected = {
+        'name.en': 'English',
+        'name.de': 'German',
+        cartDiscounts: 'discount-id-1',
+      }
+      const actual = codeExport._processCode(sampleCodeObj)
+      expect(actual).toEqual(expected)
+    })
+
+    it('should concatenate multiple `cartDiscounts` id', () => {
+      sampleCodeObj.cartDiscounts.push({
+        typeId: 'cart-discount',
+        id: 'discount-id-2',
+      })
+      const expected = {
+        'name.en': 'English',
+        'name.de': 'German',
+        cartDiscounts: 'discount-id-1;discount-id-2',
+      }
+      const actual = codeExport._processCode(sampleCodeObj)
+      expect(actual).toEqual(expected)
     })
   })
 })
