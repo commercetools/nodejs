@@ -4,10 +4,10 @@ import { exec } from 'child_process'
 import fs from 'fs'
 import { stripIndent } from 'common-tags'
 import tmp from 'tmp'
-import CONSTANTS from '../../packages/stock-exporter/src/constants'
+import CONSTANTS from '../../packages/inventories-exporter/src/constants'
 import { inventories, customFields } from './helpers/inventories.data'
 import { clearData, createData } from './helpers/utils'
-import { version } from '../../packages/stock-exporter/package.json'
+import { version } from '../../packages/inventories-exporter/package.json'
 
 let projectKey
 if (process.env.CI === 'true')
@@ -53,7 +53,7 @@ describe('StockExporter CLI', () => {
       })
     })
 
-    test('should export stocks to file as json', (done) => {
+    test('should export inventories to file as json', (done) => {
       const jsonFilePath = tmp.fileSync().name
 
       exec(`${binPath} -p ${projectKey} -o ${jsonFilePath}`,
@@ -86,7 +86,7 @@ describe('StockExporter CLI', () => {
       )
     })
 
-    test('should export stocks to file as csv', (done) => {
+    test('should export inventories to file as csv', (done) => {
       const csvFilePath = tmp.fileSync().name
 
       exec(`${binPath} -p ${projectKey} -o ${csvFilePath} -f csv`,

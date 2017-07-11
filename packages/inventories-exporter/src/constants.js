@@ -4,7 +4,7 @@ const CONSTANTS = {
     auth: 'https://auth.sphere.io',
   },
   standardOption: {
-    defaultLogFile: 'csvparserorder.log',
+    defaultLogFile: 'inventories-exporter.log',
     defaultLogLevel: 'info',
     delimiter: ',',
     format: 'json',

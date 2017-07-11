@@ -1,6 +1,6 @@
 /* @flow */
 
-export type Stock = {
+export type Inventory = {
   id: string;
   version: number;
   createdAt: string;
@@ -24,7 +24,7 @@ export type ExportConfig = {
   queryString?: string;
 }
 
-export type CsvStockMapping = {
+export type CsvInventoryMapping = {
   sku: string;
   supplyChannel?: Object;
   quantityOnStock: number;

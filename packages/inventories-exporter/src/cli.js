@@ -5,10 +5,10 @@ import PrettyError from 'pretty-error'
 import yargs from 'yargs'
 
 import CONSTANTS from './constants'
-import StockExporter from './main'
+import InventoryExporter from './main'
 import { description } from '../package.json'
 
-process.title = 'stock-exporter'
+process.title = 'inventories-exporter'
 
 const args = yargs
   .usage(
@@ -72,7 +72,7 @@ Can be used with the query flag
 
   .option('query', {
     alias: 'q',
-    describe: `filter query for stocks:
+    describe: `filter query for inventories:
 dev.commercetools.com/http-api-projects-inventory.html#query-inventory
 can be used with channelKey flag
 `,
@@ -154,6 +154,6 @@ resolveCredentials(args)
       channelKey: args.channelKey,
       queryString: args.query,
     }
-    return new StockExporter(logger, apiConfig, exportConfig, accessToken)
+    return new InventoryExporter(logger, apiConfig, exportConfig, accessToken)
   })
-  .then(stockExporter => stockExporter.run(args.outputFile))
+  .then(inventoryExporter => inventoryExporter.run(args.outputFile))
