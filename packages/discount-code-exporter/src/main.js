@@ -54,12 +54,12 @@ export default class DiscountCodeExport {
     })
 
     const defaultOptions = {
+      accessToken: '',
+      batchSize: 500,
       delimiter: ',',
+      exportFormat: 'json',
       multiValueDelimiter: ';',
       predicate: '',
-      batchSize: 500,
-      exportFormat: 'json',
-      accessToken: '',
     }
     Object.assign(this, defaultOptions, options)
 
