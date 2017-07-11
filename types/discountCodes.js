@@ -4,7 +4,7 @@
 export type CodeData = {
   name?: Object;
   description?: Object;
-  cartDiscounts: Array<string>;
+  cartDiscounts: Array<Object>;
   cartPredicate?: string;
   isActive: boolean;
   maxApplications?: number;
@@ -14,6 +14,13 @@ export type CodeData = {
   code?: string;
   id?: string;
   version?: number;
+  references?: Array<Object>;
+  attributeTypes?: Object;
+  cartFieldTypes?: Object;
+  lineItemFieldTypes?: Object;
+  customLineItemFieldTypes?: Object;
+  createdAt?: string;
+  lastModifiedAt?: string;
 }
 
 export type CodeDataArray = Array<CodeData>
@@ -57,6 +64,15 @@ export type ConstructorOptions = {
   apiConfig: ApiConfigOptions;
   batchSize: number;
   continueOnProblems?: boolean;
+}
+
+export type ImporterOptions = {
+  apiConfig: ApiConfigOptions;
+  batchSize: number;
+  delimiter: string;
+  exportFormat: string;
+  predicate: string;
+  multiValueDelimiter: string;
 }
 
 export type ChunkOptions = Array<Object>
