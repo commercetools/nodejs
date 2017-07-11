@@ -33,7 +33,6 @@ describe('DiscountCodeExport', () => {
       expect(codeExport.multiValueDelimiter).toBe(';')
     })
 
-
     it('should throw if no `apiConfig` in `options` parameter', () => {
       expect(() => new DiscountCodeExport({ foo: 'bar' })).toThrow(
         /The contructor must be passed an `apiConfig` object/,
@@ -172,9 +171,13 @@ discount-code,some-discount-name,cart-discount-1;cart-discount-2`
   describe('::_buildRequest', () => {
     it('should build request according to query', () => {
       codeExport.predicate = 'code-predicate'
+      codeExport.accessToken = 'myAccessToken'
       const expected = {
         uri: '/asafaelhn/discount-codes?where=code-predicate&limit=500',
         method: 'GET',
+        headers: {
+          Authorization: 'Bearer myAccessToken',
+        },
       }
       const actual = codeExport._buildRequest()
       expect(actual).toEqual(expected)
