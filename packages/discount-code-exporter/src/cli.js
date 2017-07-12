@@ -11,7 +11,7 @@ process.title = 'discount-code-exporter'
 
 const args = yargs
   .usage(
-    `\n
+    `
 Usage: $0 [options]
 ${description}`,
   )
@@ -110,14 +110,13 @@ const logError = (error) => {
     process.stderr.write(`ERR: ${error.message || error}`)
 }
 
+// print errors to stderr if we use stdout for data output
+// if we save data to output file errors are already logged by npmlog
 const errorHandler = (errors) => {
-  // print errors to stderr if we use stdout for data output
-  // if we save data to output file errors are already logged by npmlog
-  if (args.output === process.stdout)
-    if (Array.isArray(errors))
-      errors.forEach(logError)
-    else
-      logError(errors)
+  if (Array.isArray(errors))
+    errors.forEach(logError)
+  else
+    logError(errors)
 
   process.exitCode = 1
 }
@@ -161,3 +160,4 @@ resolveCredentials(args)
     return new DiscountCodeExport(constructorOptions, logger)
   })
   .then(discountCodeExport => discountCodeExport.run(args.output))
+  .catch(errorHandler)

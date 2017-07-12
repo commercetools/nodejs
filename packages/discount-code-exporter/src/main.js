@@ -5,7 +5,10 @@ import type {
   ImporterOptions,
   LoggerOptions,
 } from 'types/discountCodes'
-import type { Client } from 'types/sdk'
+import type {
+  Client,
+  ClientRequest,
+} from 'types/sdk'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
@@ -53,15 +56,12 @@ export default class DiscountCodeExport {
       ],
     })
 
-    const defaultOptions = {
-      accessToken: '',
-      batchSize: 500,
-      delimiter: ',',
-      exportFormat: 'json',
-      multiValueDelimiter: ';',
-      predicate: '',
-    }
-    Object.assign(this, defaultOptions, options)
+    this.accessToken = options.accessToken || ''
+    this.batchSize = options.batchSize || 500
+    this.delimiter = options.delimiter || ','
+    this.exportFormat = options.exportFormat || 'json'
+    this.multiValueDelimiter = options.multiValueDelimiter || ';'
+    this.predicate = options.predicate || ''
 
     this.logger = {
       error: () => {},
@@ -109,26 +109,30 @@ export default class DiscountCodeExport {
     }
   }
 
-  _fetchCodes (output: stream$Writable) {
+  _fetchCodes (output: stream$Writable): Promise<any> {
     const request = this._buildRequest()
-    return this.client.process(request, (data) => {
-      if (data.statusCode !== 200)
-        return Promise.reject(data)
-      this.logger.verbose(`Successfully exported ${data.body.count} codes`)
-      data.body.results.forEach((codeObj) => {
-        output.write(codeObj)
+    return this.client.process(request,
+      (data: Object): Promise<any> => {
+        if (data.statusCode !== 200)
+          return Promise.reject(data)
+        this.logger.verbose(`Successfully exported ${data.body.count} codes`)
+        data.body.results.forEach((codeObj: string) => {
+          output.write(codeObj)
+        })
+        return Promise.resolve()
+      },
+      {
+        accumulate: false,
       })
-      return Promise.resolve()
-    }, { accumulate: false })
   }
 
-  _buildRequest () {
+  _buildRequest (): ClientRequest {
     const service = this._createService()
-    const uri = service.perPage(this.batchSize)
+      .perPage(this.batchSize)
     if (this.predicate)
-      uri.where(this.predicate)
+      service.where(this.predicate)
     const request: Object = {
-      uri: uri.build(),
+      uri: service.build(),
       method: 'GET',
     }
     if (this.accessToken)
@@ -138,21 +142,24 @@ export default class DiscountCodeExport {
     return request
   }
 
-  _createService () {
+  _createService (): Object {
     return createRequestBuilder({
       projectKey: this.apiConfig.projectKey,
     }).discountCodes
   }
 
-  _processCode (data: CodeData) {
-    // Use this function to make the `cartDiscounts`
-    // field compatible with  the importer
-    const cartDiscounts = data.cartDiscounts.reduce((acc, discount) => {
+  // Use this method to make the `cartDiscounts`
+  // field compatible with  the importer
+  _processCode (data: CodeData): Object {
+    const cartDiscounts = data.cartDiscounts.reduce((
+      acc: string,
+      discount: Object,
+    ): string => {
       if (!acc)
         return discount.id
       return `${acc}${this.multiValueDelimiter}${discount.id}`
     }, '')
-    const newCodeObj = Object.assign({}, data, { cartDiscounts })
+    const newCodeObj = Object.assign({ ...data, cartDiscounts })
     return flatten(newCodeObj)
   }
 }
