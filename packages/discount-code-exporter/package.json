@@ -40,5 +40,9 @@
     "npmlog": "^4.1.0",
     "pretty-error": "^2.1.1",
     "yargs": "^8.0.2"
+  },
+  "devDependencies": {
+    "common-tags": "^1.4.0",
+    "streamtest": "^1.2.2"
   }
 }

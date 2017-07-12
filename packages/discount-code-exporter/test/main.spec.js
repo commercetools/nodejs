@@ -1,5 +1,5 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import streamtest from 'streamtest'
+import { stripIndent } from 'common-tags'
 import DiscountCodeExport from '../src/main'
 
 describe('DiscountCodeExport', () => {
@@ -65,8 +65,10 @@ describe('DiscountCodeExport', () => {
           return Promise.resolve()
         })
       const outputStream = streamtest['v2'].toText((error, result) => {
-        const expectedResult = `code,name.en,cartDiscounts
-discount-code,some-discount-name,cart-discount-1;cart-discount-2`
+        const expectedResult = stripIndent`
+          code,name.en,cartDiscounts
+          discount-code,some-discount-name,cart-discount-1;cart-discount-2
+          `
         expect(result).toEqual(expectedResult)
         spy.mockRestore()
         done()
@@ -80,16 +82,14 @@ discount-code,some-discount-name,cart-discount-1;cart-discount-2`
         name: { en: 'some-discount-name' },
         cartDiscounts: [{ id: 'cart-discount-1' }, { id: 'cart-discount-2' }],
       }
-      const spy = jest
-        .spyOn(codeExport, '_fetchCodes')
+      codeExport._fetchCodes = jest.fn()
         .mockImplementation((jsonStream) => {
           jsonStream.write(sampleCode)
           return Promise.resolve()
         })
       const outputStream = streamtest['v2'].toText((error, result) => {
-        const expectedResult = [{ ...sampleCode }]
+        const expectedResult = [sampleCode]
         expect(JSON.parse(result)).toEqual(expectedResult)
-        spy.mockRestore()
         done()
       })
       codeExport.run(outputStream)
@@ -97,26 +97,22 @@ discount-code,some-discount-name,cart-discount-1;cart-discount-2`
 
     it('should emit error if it occurs when streaming to csv', (done) => {
       codeExport.exportFormat = 'csv'
-      const spy = jest
-        .spyOn(codeExport, '_fetchCodes')
+      codeExport._fetchCodes = jest.fn()
         .mockImplementation(() => Promise.reject(new Error('error occured')))
       const outputStream = streamtest['v2'].toText((error, result) => {
         expect(error.message).toBe('error occured')
         expect(result).toBeUndefined()
-        spy.mockRestore()
         done()
       })
       codeExport.run(outputStream)
     })
 
     it('should emit error if it occurs when streaming to json', (done) => {
-      const spy = jest
-        .spyOn(codeExport, '_fetchCodes')
+      codeExport._fetchCodes = jest.fn()
         .mockImplementation(() => Promise.reject(new Error('error occured')))
       const outputStream = streamtest['v2'].toText((error, result) => {
         expect(error.message).toBe('error occured')
         expect(result).toBeUndefined()
-        spy.mockRestore()
         done()
       })
       codeExport.run(outputStream)
@@ -185,15 +181,18 @@ discount-code,some-discount-name,cart-discount-1;cart-discount-2`
   })
 
   describe('::_processCode', () => {
-    const sampleCodeObj = {
-      name: { en: 'English', de: 'German' },
-      cartDiscounts: [{
-        typeId: 'cart-discount',
-        id: 'discount-id-1',
-      }],
-    }
+    let sampleCodeObj
+    beforeEach(() => {
+      sampleCodeObj = {
+        name: { en: 'English', de: 'German' },
+        cartDiscounts: [{
+          typeId: 'cart-discount',
+          id: 'discount-id-1',
+        }],
+      }
+    })
 
-    it('should flatten object and return `cartDiscounts` as id string', () => {
+    it('flatten object and return the `cartDiscounts` id as string', () => {
       const expected = {
         'name.en': 'English',
         'name.de': 'German',
