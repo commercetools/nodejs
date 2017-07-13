@@ -3,14 +3,11 @@ import { stripIndent } from 'common-tags'
 import InventoryExporter from '../src/main'
 
 describe('InventoryExporter', () => {
-  it('should be defined', () => {
-    expect(InventoryExporter).toBeDefined()
-  })
   it('should initialize with defaults', () => {
     const apiConfig = {
       projectKey: 'foo',
     }
-    const inventoryExporter = new InventoryExporter(null, apiConfig)
+    const inventoryExporter = new InventoryExporter(apiConfig)
     expect(inventoryExporter.logger).toBeDefined()
     expect(inventoryExporter.client).toBeDefined()
     expect(inventoryExporter.exportConfig).toBeDefined()
@@ -23,7 +20,7 @@ describe('InventoryExporter', () => {
     const logger = {
       error: mockErrorLogger,
     }
-    const inventoryExporter = new InventoryExporter(logger, apiConfig)
+    const inventoryExporter = new InventoryExporter(apiConfig, logger)
     inventoryExporter.logger.error()
     expect(inventoryExporter.logger.info).toBeDefined()
     expect(inventoryExporter.logger.warn).toBeDefined()
@@ -42,7 +39,7 @@ describe('InventoryExporter', () => {
     projectKey: 'foo',
   }
   beforeEach(() => {
-    inventoryExporter = new InventoryExporter(logger, apiConfig)
+    inventoryExporter = new InventoryExporter(apiConfig, logger)
   })
   describe('::_fetchInventories', () => {
     it('should resolve channel key if present', () => {

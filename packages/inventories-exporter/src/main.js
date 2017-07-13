@@ -41,8 +41,8 @@ export default class InventoryExporter {
   exportConfig: ExportConfig
 
   constructor (
-    logger: LoggerOptions,
     apiConfig: ApiConfigOptions,
+    logger: LoggerOptions,
     exportConfig: ExportConfig = {
       format: CONS.standardOption.format,
       delimiter: CONS.standardOption.delimiter,

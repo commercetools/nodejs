@@ -10,7 +10,7 @@ The constructor accepts four arguments:
 - `exportConfig` (Object): Internal Export configurations
   - `delimiter` (Object): CSV delimiter
   - `format` (Object): Export format ['csv', 'json'] (Default: 'json')
-  - `channelKey` (String): Channel key to use a filter for results to export. Useful if you have channel key but not `id` to build your queryString
+  - `channelKey` (String): Channel key to use as filter for results to export. Useful if you have channel key but not `id` to build your queryString
   - `queryString` (String): Predicate to use to filter inventories to export
 - `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_products`]
 

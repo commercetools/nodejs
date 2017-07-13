@@ -1,5 +1,4 @@
 import { getCredentials } from '@commercetools/get-credentials'
-
 import { exec } from 'child_process'
 import fs from 'fs'
 import { stripIndent } from 'common-tags'
@@ -40,7 +39,8 @@ describe('StockExporter CLI', () => {
     it('should print usage information given the help flag', (done) => {
       exec(`${binPath} --help`, (error, stdout, stderr) => {
         expect(String(stdout)).toMatch(/help/)
-        expect(error && stderr).toBeFalsy()
+        expect(error).toBeFalsy()
+        expect(stderr).toBeFalsy()
         done()
       })
     })
@@ -48,7 +48,8 @@ describe('StockExporter CLI', () => {
     it('should print the module version given the version flag', (done) => {
       exec(`${binPath} --version`, (error, stdout, stderr) => {
         expect(stdout).toBe(`${version}\n`)
-        expect(error && stderr).toBeFalsy()
+        expect(error).toBeFalsy()
+        expect(stderr).toBeFalsy()
         done()
       })
     })
@@ -58,7 +59,8 @@ describe('StockExporter CLI', () => {
 
       exec(`${binPath} -p ${projectKey} -o ${jsonFilePath}`,
         (cliError, stdout, stderr) => {
-          expect(cliError && stderr).toBeFalsy()
+          expect(cliError).toBeFalsy()
+          expect(stderr).toBeFalsy()
 
           fs.readFile(jsonFilePath, { encoding: 'utf8' }, (error, data) => {
             const result = JSON.parse(data)
@@ -73,13 +75,14 @@ describe('StockExporter CLI', () => {
 
     it('should accept query', (done) => {
       const jsonFilePath = tmp.fileSync().name
-      const queryFlag = '-q "sku="invalid""'
+      const queryFlag = '-q "sku=\\"invalid\\""'
       exec(`${binPath} -p ${projectKey} -o ${jsonFilePath} ${queryFlag}`,
         (cliError, stdout, stderr) => {
-          expect(cliError && stderr).toBeFalsy()
+          expect(cliError).toBeFalsy()
+          expect(stderr).toBeFalsy()
           fs.readFile(jsonFilePath, { encoding: 'utf8' }, (error, data) => {
             expect(error).toBeFalsy()
-            expect(data).toBeFalsy()
+            expect(JSON.parse(data)).toEqual([])
             done()
           })
         },

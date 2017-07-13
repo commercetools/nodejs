@@ -5,7 +5,6 @@ import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 
-
 export function clearData (apiConfig, entityName) {
   const client = createClient({
     middlewares: [

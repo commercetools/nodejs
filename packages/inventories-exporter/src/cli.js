@@ -109,13 +109,10 @@ const logError = (error) => {
 }
 
 const errorHandler = (errors) => {
-  // print errors to stderr if we use stdout for data output
-  // if we save data to output file errors are already logged by npmlog
-  if (args.outputFile === process.stdout)
-    if (Array.isArray(errors))
-      errors.forEach(logError)
-    else
-      logError(errors)
+  if (Array.isArray(errors))
+    errors.forEach(logError)
+  else
+    logError(errors)
 
   process.exitCode = 1
 }
@@ -154,6 +151,7 @@ resolveCredentials(args)
       channelKey: args.channelKey,
       queryString: args.query,
     }
-    return new InventoryExporter(logger, apiConfig, exportConfig, accessToken)
+    return new InventoryExporter(apiConfig, logger, exportConfig, accessToken)
   })
   .then(inventoryExporter => inventoryExporter.run(args.outputFile))
+  .catch(errorHandler)
