@@ -102,8 +102,10 @@ export default class InventoryExporter {
       jsonStream.pipe(outputStream)
       this._fetchInventories(jsonStream)
         .then(() => {
-          if (outputStream !== process.stdout)
+          if (outputStream !== process.stdout) {
+            this.logger.info('Done exporting inventories.')
             jsonStream.end()
+          }
         })
         .catch((e: Error) => {
           outputStream.emit('error', e)

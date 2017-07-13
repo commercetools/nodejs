@@ -132,6 +132,7 @@ args.outputFile.on('error', errorHandler)
 
 resolveCredentials(args)
   .then((credentials) => {
+    npmlog.verbose('CLI:', 'fetched credentials')
     const apiConfig = {
       host: args.authUrl,
       apiUrl: args.apiUrl,
