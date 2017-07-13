@@ -126,6 +126,8 @@ const resolveCredentials = (_args) => {
 // If the stdout is used for a data output, save all logs to a log file.
 if (args.outputFile === process.stdout)
   npmlog.stream = fs.createWriteStream(args.logFile)
+else
+  npmlog.stream = process.stdout // npmlog streams to stderr by default
 
 // Register error listener
 args.outputFile.on('error', errorHandler)
