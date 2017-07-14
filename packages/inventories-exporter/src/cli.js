@@ -28,7 +28,7 @@ ${description}`,
   .option('outputFile', {
     alias: 'o',
     default: 'stdout',
-    describe: 'Path to output JSON file.',
+    describe: 'Path to output file.',
   })
   .coerce('outputFile', (arg) => {
     if (arg !== 'stdout')
@@ -72,7 +72,7 @@ Can be used with the query flag
 
   .option('query', {
     alias: 'q',
-    describe: `filter query for inventories:
+    describe: `Filter query for inventories:
 dev.commercetools.com/http-api-projects-inventory.html#query-inventory
 can be used with channelKey flag
 `,

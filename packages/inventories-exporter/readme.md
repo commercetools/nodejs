@@ -2,7 +2,7 @@
 
 Export inventories from the commercetools platform.
 
-more info here: https://commercetools.github.io/nodejs/cli/inventories-exporter/
+Read the documentation here => https://commercetools.github.io/nodejs/cli/inventories-exporter.html
 
 ## Install
 

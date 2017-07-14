@@ -12,8 +12,11 @@ export function clearData (apiConfig, entityName) {
       createHttpMiddleware({ host: apiConfig.apiUrl }),
     ],
   })
-  const requestOption = { projectKey: apiConfig.projectKey }
-  const service = createRequestBuilder(requestOption)[entityName]
+
+  const service = createRequestBuilder({
+    projectKey: apiConfig.projectKey,
+  })[entityName]
+
   const request = {
     uri: service.build(),
     method: 'GET',

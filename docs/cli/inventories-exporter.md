@@ -5,8 +5,8 @@ This package helps in exporting [inventories](http://dev.commercetools.com/http-
 ## Configuration
 
 The constructor accepts four arguments:
-- An optional logger object having four methods (`info`, `warn`, `error` and `verbose`)
 - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+- An optional logger object having four methods (`info`, `warn`, `error` and `verbose`)
 - `exportConfig` (Object): Internal Export configurations
   - `delimiter` (Object): CSV delimiter
   - `format` (Object): Export format ['csv', 'json'] (Default: 'json')
@@ -27,7 +27,7 @@ Export inventories from the commercetools platform.
 Options:
   --help, -h        Show help text.                                    [boolean]
   --version         Show version number                                [boolean]
-  --outputFile, -o  Path to output JSON file.                [default: "stdout"]
+  --outputFile, -o  Path to output file.                     [default: "stdout"]
   --apiUrl          The host URL of the HTTP API service.
                                               [default: "https://api.sphere.io"]
   --authUrl         The host URL of the OAuth API service.
@@ -39,7 +39,7 @@ Options:
                     Useful if you only have channel key but not id.
                     Can be used with the query flag
 
-  --query, -q       filter query for stocks:
+  --query, -q       Filter query for stocks:
                     dev.commercetools.com/http-api-projects-inventory.html#quer
                     y-inventory
                     can be used with channelKey flag
@@ -79,8 +79,8 @@ const exportConfig = {
   queryString: 'description="new stocks"',
 }
 const inventoryExporter = new InventoryExporter(
-  logger,
   apiConfig,
+  logger,
   exportConfig,
   accessToken,
 )
