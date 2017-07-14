@@ -21,4 +21,4 @@ after_success:
   - .travis/after_success.sh
 
 git:
-  depth: 1
+  depth: 5
