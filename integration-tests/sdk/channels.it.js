@@ -14,6 +14,7 @@ import {
   createUserAgentMiddleware,
 } from '@commercetools/sdk-middleware-user-agent'
 import omit from 'lodash.omit'
+import { clearData } from './../cli/helpers/utils'
 import pkg from '../package.json'
 
 let projectKey
@@ -40,17 +41,22 @@ describe('Channels', () => {
   const key = uniqueId('channel_')
   let channelResponse
   let client
+  let apiConfig
 
   beforeAll(() => getCredentials(projectKey)
     .then((credentials) => {
-      const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
+      apiConfig = {
         host: 'https://auth.sphere.io',
+        apiUrl: 'https://api.sphere.io',
         projectKey,
         credentials: {
           clientId: credentials.clientId,
           clientSecret: credentials.clientSecret,
         },
-      })
+      }
+      const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
+        apiConfig,
+      )
       client = createClient({
         middlewares: [
           authMiddleware,
@@ -59,7 +65,8 @@ describe('Channels', () => {
           httpMiddleware,
         ],
       })
-    }),
+    })
+    .then(() => clearData(apiConfig, 'channels')),
   )
 
   it('create', () => {
@@ -135,27 +142,6 @@ describe('Channels', () => {
     })
   })
 
-  it('delete', () => {
-    const uri = service
-      .byId(channelResponse.id)
-      .withVersion(channelResponse.version)
-      .build()
-
-    const deleteRequest = {
-      uri,
-      method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    }
-
-    return client.execute(deleteRequest)
-    .then((response) => {
-      expect(response.statusCode).toBe(200)
-    })
-  })
-
   it('process', () => {
     const processRequest = {
       uri: service.perPage(3).build(),
@@ -176,6 +162,27 @@ describe('Channels', () => {
     )
     .then((response) => {
       expect(response).toHaveLength(resultCount)
+    })
+  })
+
+  it('delete', () => {
+    const uri = service
+      .byId(channelResponse.id)
+      .withVersion(channelResponse.version)
+      .build()
+
+    const deleteRequest = {
+      uri,
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }
+
+    return client.execute(deleteRequest)
+    .then((response) => {
+      expect(response.statusCode).toBe(200)
     })
   })
 })

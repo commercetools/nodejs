@@ -10,3 +10,4 @@ Our CLI tools perform various functions from importing and exporting to syncing 
   * [CSV Order Parser](/cli/csv-parser-orders.md)
   * [Discount Code Generator](/cli/discount-code-generator.md)
   * [Discount Code Importer](/cli/discount-code-importer.md)
+  * [Inventories Exporter](/cli/inventories-exporter.md)
