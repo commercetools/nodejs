@@ -8,7 +8,7 @@ The constructor accepts two arguments:
 - A required object containing the following values:
   - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
   - `batchSize` (Number): Amount of codes not more than 500 to process concurrently (Optional. Default: 500)
-  - `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`manage_orders`]
+  - `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_orders`]
   - `delimiter` (String): CSV delimiter (Optional. Default: `','`)
   - `multiValueDelimiter` (String): CSV delimiter used in multivalue fields (Optional. Default: `';'`)
   - `exportFormat` (String): Export format ['csv', 'json'] (Optional. Default: 'json')
