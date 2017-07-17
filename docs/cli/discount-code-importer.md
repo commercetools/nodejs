@@ -186,6 +186,7 @@ const discountCodeImport = new DiscountCodeImport(options)
 
 discountCodeImport.run(codes)
   .then(() => {
+  discountCodeImport.summaryReport()
   // handle successful import
   })
   .catch((error) => {
