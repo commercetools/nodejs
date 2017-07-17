@@ -27,6 +27,7 @@ import pkg from '../package.json'
 
 export default class DiscountCodeImport {
   // Set flowtype annotations
+  accessToken: string;
   batchSize: number;
   continueOnProblems: boolean;
   client: Client;
@@ -44,6 +45,7 @@ export default class DiscountCodeImport {
     if (options.batchSize > 500)
       throw new Error('The `batchSize` must not be more than 500')
     this.apiConfig = options.apiConfig
+    this.accessToken = options.access_token
     this.batchSize = options.batchSize || 50
     this.continueOnProblems = options.continueOnProblems || false
     this.client = createClient({
@@ -98,10 +100,8 @@ export default class DiscountCodeImport {
         .where(predicate)
         .perPage(this.batchSize)
         .build()
-      return this.client.execute({
-        uri,
-        method: 'GET',
-      })
+      const req = this._buildRequest(uri, 'GET')
+      return this.client.execute(req)
         .then(({ body: { results: existingCodes } }: Object) => (
           this._createOrUpdate(codeObjects, existingCodes)
         ))
@@ -180,11 +180,11 @@ export default class DiscountCodeImport {
     if (!actions.length) return Promise.resolve({ statusCode: 304 })
     const service = this._createService()
     const uri = service.byId(existingCode.id).build()
-    const req = {
-      uri,
-      method: 'POST',
-      body: { version: existingCode.version, actions },
+    const body = {
+      version: existingCode.version,
+      actions,
     }
+    const req = this._buildRequest(uri, 'POST', body)
     this.logger.verbose('Updating existing code entry')
     return this.client.execute(req)
   }
@@ -192,11 +192,7 @@ export default class DiscountCodeImport {
   _create (code: CodeData) {
     const service = this._createService()
     const uri = service.build()
-    const req = {
-      uri,
-      method: 'POST',
-      body: code,
-    }
+    const req = this._buildRequest(uri, 'POST', code)
     this.logger.verbose('Creating new code entry')
     return this.client.execute(req)
   }
@@ -217,6 +213,24 @@ export default class DiscountCodeImport {
       errors: [],
     }
     return this._summary
+  }
+
+  _buildRequest (
+    uri: string,
+    method: string,
+    body?: Object,
+  ) {
+    const request: Object = {
+      uri,
+      method,
+    }
+    if (body)
+      request.body = body
+    if (this.accessToken)
+      request.headers = {
+        Authorization: `Bearer ${this.accessToken}`,
+      }
+    return request
   }
 
   summaryReport () {
