@@ -14,7 +14,7 @@ describe('DiscountCodeExport', () => {
   beforeEach(() => {
     codeExport = new DiscountCodeExport({
       apiConfig: {
-        projectKey: 'asafaelhn',
+        projectKey: 'test-project-key',
       },
     }, logger)
   })
@@ -25,12 +25,13 @@ describe('DiscountCodeExport', () => {
     })
 
     it('should set default properties', () => {
-      expect(codeExport.apiConfig).toBeDefined()
-      expect(codeExport.batchSize).toBeDefined()
-      expect(codeExport.client).toBeDefined()
+      expect(codeExport.batchSize).toBe(500)
       expect(codeExport.logger).toEqual(logger)
       expect(codeExport.delimiter).toBe(',')
       expect(codeExport.multiValueDelimiter).toBe(';')
+      expect(codeExport.apiConfig).toEqual({
+        projectKey: 'test-project-key',
+      })
     })
 
     it('should throw if no `apiConfig` in `options` parameter', () => {
@@ -58,8 +59,7 @@ describe('DiscountCodeExport', () => {
         name: { en: 'some-discount-name' },
         cartDiscounts: [{ id: 'cart-discount-1' }, { id: 'cart-discount-2' }],
       }
-      const spy = jest
-        .spyOn(codeExport, '_fetchCodes')
+      codeExport._fetchCodes = jest.fn()
         .mockImplementation((csvStream) => {
           csvStream.write(sampleCode)
           return Promise.resolve()
@@ -70,7 +70,6 @@ describe('DiscountCodeExport', () => {
           discount-code,some-discount-name,cart-discount-1;cart-discount-2
           `
         expect(result).toEqual(expectedResult)
-        spy.mockRestore()
         done()
       })
       codeExport.run(outputStream)
@@ -149,7 +148,7 @@ describe('DiscountCodeExport', () => {
       expect(processMock).toHaveBeenCalledTimes(1)
       expect(processMock.mock.calls[0][0])
       .toEqual({
-        uri: '/asafaelhn/discount-codes?limit=500',
+        uri: '/test-project-key/discount-codes?limit=500',
         method: 'GET',
       })
     })
@@ -169,7 +168,7 @@ describe('DiscountCodeExport', () => {
       codeExport.predicate = 'code-predicate'
       codeExport.accessToken = 'myAccessToken'
       const expected = {
-        uri: '/asafaelhn/discount-codes?where=code-predicate&limit=500',
+        uri: '/test-project-key/discount-codes?where=code-predicate&limit=500',
         method: 'GET',
         headers: {
           Authorization: 'Bearer myAccessToken',
