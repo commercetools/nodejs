@@ -106,7 +106,7 @@ export default class DiscountCodeImport {
           this._createOrUpdate(codeObjects, existingCodes)
         ))
     })
-      .then(() => Promise.resolve(this.summaryReport()))
+      .then(() => Promise.resolve())
       .catch(error => Promise.reject({
         error: error.message || error,
         summary: this._summary,
