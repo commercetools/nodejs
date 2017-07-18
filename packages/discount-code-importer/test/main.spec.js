@@ -20,7 +20,7 @@ describe('DiscountCodeImporter', () => {
       apiConfig: {
         projectKey: 'myProjectKey',
       },
-      access_token: 'myAccessToken',
+      accessToken: 'myAccessToken',
     }, logger)
   })
 

@@ -8,7 +8,7 @@ This package is built to be used in conjunction with [sphere-node-cli](https://g
 The constructor accepts two arguments:
 - A required object containing the following values:
   - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
-  - `access_token` (String): Access token to be used to authenticate requests to API. Requires scope of [`manage_orders`]
+  - `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`manage_orders`]
   - `batchSize` (Number): Amount of codes not more than 500 to process concurrently (Optional. Default: 50)
   - `continueOnProblems` (Boolean): Flag whether to continue processing if an error occurs (Optional. Default: false)
 - An optional logger object having four functions (`info`, `warn`, `error` and `verbose`)
@@ -194,4 +194,18 @@ discountCodeImport.run(codes)
   })
 ```
 
+On successful completion, a call to the `.summaryReport()` method returns a report in the following format:
+```js
+{
+  reportMessage: 'Summary: there were 5 successfully imported discount codes (3 were newly created, 2 were updated and 0 were unchanged).',
+  detailedSummary: {
+    created: 3,
+    updated: 2,
+    unchanged: 0,
+    createErrorCount: 0,
+    updateErrorCount: 0,
+    errors: []
+  }
+}
+```
 **Note:** By default, if a discount code already exists, the module tries to build update actions for it, and if no update actions can be built, the code will be ignored

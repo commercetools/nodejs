@@ -45,7 +45,7 @@ export default class DiscountCodeImport {
     if (options.batchSize > 500)
       throw new Error('The `batchSize` must not be more than 500')
     this.apiConfig = options.apiConfig
-    this.accessToken = options.access_token
+    this.accessToken = options.accessToken
     this.batchSize = options.batchSize || 50
     this.continueOnProblems = options.continueOnProblems || false
     this.client = createClient({
