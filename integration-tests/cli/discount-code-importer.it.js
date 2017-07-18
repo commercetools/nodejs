@@ -177,7 +177,8 @@ describe('DiscountCode tests', () => {
           errors: [],
         },
       }
-      const summary = await codeImport.run(preparedDiscountCodes)
+      await codeImport.run(preparedDiscountCodes)
+      const summary = codeImport.summaryReport()
       expect(summary).toEqual(expected)
     })
 
@@ -208,7 +209,8 @@ describe('DiscountCode tests', () => {
         Object.assign({}, codeObj, { maxApplications: 20 })
       ))
 
-      const summary = await codeImport.run(newCodesToUpdate)
+      await codeImport.run(newCodesToUpdate)
+      const summary = codeImport.summaryReport()
       expect(summary).toEqual(expected)
     })
 
@@ -261,7 +263,8 @@ describe('DiscountCode tests', () => {
       discountCodesSample[1].code = ''
       discountCodesSample[7].cartDiscounts = 'INVALID-CART-DISCOUNT'
 
-      const summary = await codeImport.run(discountCodesSample)
+      await codeImport.run(discountCodesSample)
+      const summary = codeImport.summaryReport()
       expect(summary).toMatchObject(expected)
       const errors = summary.detailedSummary.errors
       expect(errors[0]).toMatch(/'code' should not be empty/)

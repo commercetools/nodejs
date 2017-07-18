@@ -18,8 +18,9 @@ describe('DiscountCodeImporter', () => {
   beforeEach(() => {
     codeImport = new DiscountCodeImport({
       apiConfig: {
-        projectKey: 'asafaelhn',
+        projectKey: 'myProjectKey',
       },
+      accessToken: 'myAccessToken',
     }, logger)
   })
 
@@ -298,6 +299,33 @@ describe('DiscountCodeImporter', () => {
   describe('::_createService', () => {
     it('should be defined', () => {
       expect(codeImport._createService).toBeDefined()
+    })
+  })
+
+  describe('::_buildRequest', () => {
+    it('should build a `GET` request', () => {
+      const actual = codeImport._buildRequest('myUri/', 'GET')
+      const expected = {
+        uri: 'myUri/',
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer myAccessToken',
+        },
+      }
+      expect(actual).toEqual(expected)
+    })
+
+    it('should build a `POST` request with body', () => {
+      const actual = codeImport._buildRequest('myUri/', 'GET', { foo: 'bar' })
+      const expected = {
+        uri: 'myUri/',
+        method: 'GET',
+        body: { foo: 'bar' },
+        headers: {
+          Authorization: 'Bearer myAccessToken',
+        },
+      }
+      expect(actual).toEqual(expected)
     })
   })
 
