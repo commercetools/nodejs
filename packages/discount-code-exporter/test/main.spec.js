@@ -25,13 +25,13 @@ describe('DiscountCodeExport', () => {
     })
 
     it('should set default properties', () => {
-      expect(codeExport.batchSize).toBe(500)
-      expect(codeExport.logger).toEqual(logger)
-      expect(codeExport.delimiter).toBe(',')
-      expect(codeExport.multiValueDelimiter).toBe(';')
       expect(codeExport.apiConfig).toEqual({
         projectKey: 'test-project-key',
       })
+      expect(codeExport.logger).toEqual(logger)
+      expect(codeExport.config.batchSize).toBe(500)
+      expect(codeExport.config.delimiter).toBe(',')
+      expect(codeExport.config.multiValueDelimiter).toBe(';')
     })
 
     it('should throw if no `apiConfig` in `options` parameter', () => {
@@ -53,7 +53,7 @@ describe('DiscountCodeExport', () => {
 
   describe('::run', () => {
     it('should fetch discount codes and output csv to stream', (done) => {
-      codeExport.exportFormat = 'csv'
+      codeExport.config.exportFormat = 'csv'
       const sampleCode = {
         code: 'discount-code',
         name: { en: 'some-discount-name' },
@@ -165,8 +165,8 @@ describe('DiscountCodeExport', () => {
 
   describe('::_buildRequest', () => {
     it('should build request according to query', () => {
-      codeExport.predicate = 'code-predicate'
-      codeExport.accessToken = 'myAccessToken'
+      codeExport.config.predicate = 'code-predicate'
+      codeExport.config.accessToken = 'myAccessToken'
       const expected = {
         uri: '/test-project-key/discount-codes?where=code-predicate&limit=500',
         method: 'GET',

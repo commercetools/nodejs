@@ -23,17 +23,20 @@ import JSONStream from 'JSONStream'
 import { flatten } from 'flat'
 import pkg from '../package.json'
 
-export default class DiscountCodeExport {
-  // Set flowtype annotations
-  apiConfig: ApiConfigOptions;
+type ConfigType = {
   batchSize: number;
-  client: Client;
-  logger: LoggerOptions;
   accessToken: string;
-  delimiter: string
+  delimiter: string;
   exportFormat: string;
   predicate: string;
   multiValueDelimiter: string
+}
+export default class DiscountCodeExport {
+  // Set flowtype annotations
+  apiConfig: ApiConfigOptions;
+  client: Client;
+  config: ConfigType;
+  logger: LoggerOptions;
   _processCode: Function;
 
   constructor (
@@ -56,12 +59,14 @@ export default class DiscountCodeExport {
       ],
     })
 
-    this.accessToken = options.accessToken || ''
-    this.batchSize = options.batchSize || 500
-    this.delimiter = options.delimiter || ','
-    this.exportFormat = options.exportFormat || 'json'
-    this.multiValueDelimiter = options.multiValueDelimiter || ';'
-    this.predicate = options.predicate || ''
+    const defaultOptions = {
+      delimiter: ',',
+      multiValueDelimiter: ';',
+      batchSize: 500,
+      exportFormat: 'json',
+    }
+
+    this.config = { ...defaultOptions, ...options }
 
     this.logger = {
       error: () => {},
@@ -76,37 +81,36 @@ export default class DiscountCodeExport {
 
   run (outputStream: stream$Writable) {
     this.logger.info('Starting Export')
-    if (this.exportFormat === 'csv') {
+    if (this.config.exportFormat === 'csv') {
       const csvOptions = {
         headers: true,
-        delimiter: this.delimiter,
+        delimiter: this.config.delimiter,
       }
       const csvStream = csv
         .createWriteStream(csvOptions)
         .transform(this._processCode)
       csvStream.pipe(outputStream)
-      this._fetchCodes(csvStream)
-      .then(() => {
-        this.logger.info('Operation completed successfully')
-        csvStream.end()
-      })
-      .catch((e: Error) => {
-        outputStream.emit('error', e)
-      })
+      this._handleOutput(outputStream, csvStream)
     } else {
       const jsonStream = JSONStream.stringify()
       jsonStream.pipe(outputStream)
+      this._handleOutput(outputStream, jsonStream)
+    }
+  }
 
-      this._fetchCodes(jsonStream)
+  _handleOutput (
+    outputStream: stream$Writable,
+    pipeStream: stream$Writable,
+  ) {
+    this._fetchCodes(pipeStream)
       .then(() => {
         this.logger.info('Operation completed successfully')
         if (outputStream !== process.stdout)
-          jsonStream.end()
+          pipeStream.end()
       })
       .catch((e: Error) => {
         outputStream.emit('error', e)
       })
-    }
   }
 
   _fetchCodes (output: stream$Writable): Promise<any> {
@@ -128,16 +132,16 @@ export default class DiscountCodeExport {
 
   _buildRequest (): ClientRequest {
     const service = this._createService()
-      .perPage(this.batchSize)
-    if (this.predicate)
-      service.where(this.predicate)
+      .perPage(this.config.batchSize)
+    if (this.config.predicate)
+      service.where(this.config.predicate)
     const request: Object = {
       uri: service.build(),
       method: 'GET',
     }
-    if (this.accessToken)
+    if (this.config.accessToken)
       request.headers = {
-        Authorization: `Bearer ${this.accessToken}`,
+        Authorization: `Bearer ${this.config.accessToken}`,
       }
     return request
   }
@@ -157,7 +161,7 @@ export default class DiscountCodeExport {
     ): string => {
       if (!acc)
         return discount.id
-      return `${acc}${this.multiValueDelimiter}${discount.id}`
+      return `${acc}${this.config.multiValueDelimiter}${discount.id}`
     }, '')
     const newCodeObj = Object.assign({ ...data, cartDiscounts })
     return flatten(newCodeObj)

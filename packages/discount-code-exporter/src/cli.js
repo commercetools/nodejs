@@ -59,7 +59,7 @@ ${description}`,
   })
 
   .option('accessToken', {
-    describe: 'CTP client access token',
+    describe: 'CTP client access token.',
   })
 
   .option('projectKey', {
@@ -70,19 +70,19 @@ ${description}`,
 
   .option('where', {
     alias: 'w',
-    describe: 'specify where predicate',
+    describe: 'Specify where predicate.',
   })
 
   .option('exportFormat', {
     alias: 'f',
-    describe: 'Format for export',
+    describe: 'Format for export.',
     choices: ['csv', 'json'],
     default: 'json',
   })
 
   .option('batchSize', {
     alias: 'b',
-    describe: 'Number of codes to exports in a chunk',
+    describe: 'Number of codes to export in a chunk.',
     default: 500,
   })
 
