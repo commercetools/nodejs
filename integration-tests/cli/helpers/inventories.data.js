@@ -3,7 +3,7 @@ export const inventories = [{
   quantityOnStock: 20,
   custom: {
     type: {
-      key: 'custom-type',
+      key: 'inventory-custom-type',
     },
     fields: {
       description: 'integration tests!! arrgggh',
@@ -12,7 +12,7 @@ export const inventories = [{
 }]
 
 export const customFields = [{
-  key: 'custom-type',
+  key: 'inventory-custom-type',
   name: {
     en: 'customized fields',
   },
