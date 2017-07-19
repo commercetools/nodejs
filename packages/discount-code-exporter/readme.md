@@ -2,7 +2,7 @@
 
 Export discount codes from the commercetools platform.
 
-more info here: https://commercetools.github.io/nodejs/api/discount-code-exporter/
+more info here: https://commercetools.github.io/nodejs/cli/discount-code-exporter.html
 
 ## Install
 
