@@ -285,8 +285,8 @@ describe('Http', () => {
         const response = { resolve, reject }
         const next = (req, res) => {
           expect(res.error.message).toBe('URI not found: /foo/bar')
-          expect(res.error.body).toBeUndefined()
-          expect(res.body).toBeUndefined()
+          expect(res.error.body).toBeFalsy()
+          expect(res.body).toBeFalsy()
           expect(res.statusCode).toBe(404)
           resolve()
         }
@@ -350,6 +350,42 @@ describe('Http', () => {
     }),
   )
 
+  it('return non-JSON error to user', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        const expectedError = new Error('non json error occured')
+        expectedError.body = {
+          message: 'non json error occured',
+          error: [{ code: 'InvalidField' }],
+        }
+        expectedError.code = 500
+        expectedError.statusCode = 500
+        expectedError.headers = {
+          'content-type': ['application/json'],
+        }
+        expect(res).toEqual({
+          ...response,
+          statusCode: 500,
+          error: expectedError,
+        })
+        resolve()
+      }
+      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(500, 'non json error occured')
+
+      httpMiddleware(next)(request, response)
+    }),
+  )
+
   it('handle failed response (not found)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
@@ -358,8 +394,8 @@ describe('Http', () => {
       const response = { resolve, reject }
       const next = (req, res) => {
         expect(res.error.message).toBe('URI not found: /foo/bar')
-        expect(res.error.body).toBeUndefined()
-        expect(res.body).toBeUndefined()
+        expect(res.error.body).toBeFalsy()
+        expect(res.body).toBeFalsy()
         expect(res.statusCode).toBe(404)
         resolve()
       }

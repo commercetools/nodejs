@@ -91,16 +91,16 @@ export default function createHttpMiddleware ({
             try {
               parsed = JSON.parse(text)
             } catch (error) {
-              /* noop */
+              parsed = text
             }
 
             const error: HttpErrorType = createError({
               statusCode: res.status,
               originalRequest: request,
               headers: parseHeaders(res.headers),
-              ...(parsed
+              ...(typeof parsed === 'object'
                 ? { message: parsed.message, body: parsed }
-                : {}
+                : { message: parsed, body: parsed }
               ),
             })
             // Let the final resolver to reject the promise
