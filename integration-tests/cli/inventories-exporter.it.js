@@ -97,7 +97,7 @@ describe('StockExporter CLI', () => {
           expect(cliError && stderr).toBeFalsy()
           fs.readFile(csvFilePath, { encoding: 'utf8' }, (error, data) => {
             const expectedResult = stripIndent`
-              sku,quantityOnStock,customType,custom.description
+              sku,quantityOnStock,customType,customField.description
               12345,20,inventory-custom-type,integration tests!! arrgggh
             `
             expect(data).toEqual(expectedResult)
