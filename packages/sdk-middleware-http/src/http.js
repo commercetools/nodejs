@@ -127,7 +127,7 @@ export default function createHttpMiddleware ({
               return
             }
           const error = new NetworkError(
-            e.message, { originalRequest: request },
+            e.message, { originalRequest: request, retryCount },
           )
           next(request, { ...response, error, statusCode: 0 })
         },

@@ -239,7 +239,7 @@ describe('Http', () => {
   )
 
   describe('::repeater', () => {
-    it('should retry on network error(503) if enabled', () =>
+    it.only('should retry on network error(503) if enabled', () =>
       new Promise((resolve, reject) => {
         const request = createTestRequest({
           uri: '/foo/bar',
@@ -249,6 +249,7 @@ describe('Http', () => {
           expect(res.error.name).toBe('NetworkError')
           expect(res.error.headers).toBeUndefined()
           expect(res.error.originalRequest).toBeDefined()
+          expect(res.error.retryCount).toBe(2)
           expect(res.error.message).toBe(
             `request to ${testHost}/foo/bar failed, reason: Connection timeout`,
           )
