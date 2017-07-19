@@ -56,6 +56,7 @@ export type ApiConfigOptions = {
 export type ConstructorOptions = {
   apiConfig: ApiConfigOptions;
   batchSize: number;
+  accessToken: string;
   continueOnProblems?: boolean;
 }
 

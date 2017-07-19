@@ -1,7 +1,6 @@
 import highland from 'highland'
 import { defaults, difference } from 'lodash'
 import csv from 'csv-parser'
-import npmlog from 'npmlog'
 
 import CONSTANTS from '../constants'
 
@@ -17,10 +16,10 @@ export default class AbstractParser {
     })
 
     this.logger = defaults(conf.logger || {}, {
-      error: npmlog.error.bind(this, ''),
-      warn: npmlog.warn.bind(this, ''),
-      info: npmlog.info.bind(this, ''),
-      verbose: npmlog.verbose.bind(this, ''),
+      error: () => {},
+      warn: () => {},
+      info: () => {},
+      verbose: () => {},
     })
   }
 
