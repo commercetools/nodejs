@@ -9,6 +9,7 @@ import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { exec } from 'child_process'
 import { getCredentials } from '@commercetools/get-credentials'
+import { clearData } from './helpers/utils'
 import DiscountCodeImport from '../../packages/discount-code-importer/src/main'
 
 let projectKey
@@ -47,6 +48,11 @@ describe('DiscountCode tests', () => {
           createHttpMiddleware({ host: apiConfig.apiUrl }),
         ],
       })
+
+      return clearData(apiConfig, 'discountCodes')
+    })
+    .then(() => clearData(apiConfig, 'cartDiscounts'))
+    .then(() => {
       const cartDiscountDraft = fs.readFileSync(
         path.join(__dirname, './helpers/cartDiscountDraft.json'), 'utf8',
       )

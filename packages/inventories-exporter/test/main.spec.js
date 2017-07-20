@@ -283,8 +283,8 @@ describe('InventoryExporter', () => {
         ...inventory,
         supplyChannel: 'abi',
         customType: 'my-type',
-        'custom.nac': 'foo',
-        'custom.weg': 'Bearer',
+        'customField.nac': 'foo',
+        'customField.weg': 'Bearer',
       }
       delete expectedResult.custom // remove unused fields
       const result = InventoryExporter.inventoryMappings(inventory)
