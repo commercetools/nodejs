@@ -49,7 +49,6 @@ describe('DiscountCode tests', () => {
       return createData(apiConfig, 'cartDiscounts', [cartDiscountDraft])
     })
     .then((data) => {
-      // console.error(data);
       cartDiscount = data[0].body
     })
     .catch(process.stderr.write),
@@ -322,6 +321,22 @@ describe('DiscountCode tests', () => {
 
     test('should write csv output to file when passed the option', (done) => {
       const csvFilePath = tmp.fileSync().name
+      const expected = {
+        version: '1',
+        name: {
+          en: 'Sammy',
+          de: 'Valerian',
+        },
+        description: {
+          en: 'greatest promo',
+          de: 'super angebot',
+        },
+        cartDiscounts: cartDiscount.id,
+        cartPredicate: 'lineItemTotal(1 = 1) >  "10.00 USD"',
+        isActive: 'true',
+        maxApplications: '10',
+        maxApplicationsPerCustomer: '2',
+      }
 
       exec(`${bin} -o ${csvFilePath} -p ${projectKey} -f csv`,
         (cliError, stdout, stderr) => {
@@ -332,14 +347,11 @@ describe('DiscountCode tests', () => {
           fs.readFile(csvFilePath, { encoding: 'utf8' }, (error, data) => {
             expect(error).toBeFalsy()
             csv().fromString(data)
-              .on('csv', (csvRow) => {
-                expect(csvRow.length).toBe(15)
-                expect(isuuid(csvRow[0])).toBe(true)
-                expect(parseInt(csvRow[1], 10)).toBe(1)
-                expect(csvRow[2]).toMatch(/^IT/)
-                expect(csvRow[7]).toBe(cartDiscount.id)
-                expect(csvRow[13]).toMatch(UTCDateTimeRegex)
-                expect(csvRow[14]).toMatch(UTCDateTimeRegex)
+              .on('json', (jsonObj) => {
+                expect(jsonObj).toMatchObject(expected)
+                expect(isuuid(jsonObj.id)).toBe(true)
+                expect(jsonObj.createdAt).toMatch(UTCDateTimeRegex)
+                expect(jsonObj.lastModifiedAt).toMatch(UTCDateTimeRegex)
               })
               .on('done', () => done())
           })
