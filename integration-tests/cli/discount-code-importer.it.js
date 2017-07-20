@@ -51,6 +51,7 @@ describe('DiscountCode tests', () => {
 
       return clearData(apiConfig, 'discountCodes')
     })
+    .then(() => clearData(apiConfig, 'cartDiscounts'))
     .then(() => {
       const cartDiscountDraft = fs.readFileSync(
         path.join(__dirname, './helpers/cartDiscountDraft.json'), 'utf8',
