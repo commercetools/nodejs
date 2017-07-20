@@ -239,7 +239,7 @@ describe('Http', () => {
   )
 
   describe('::repeater', () => {
-    it.only('should retry on network error(503) if enabled', () =>
+    it('should retry on network error(503) if enabled', () =>
       new Promise((resolve, reject) => {
         const request = createTestRequest({
           uri: '/foo/bar',
