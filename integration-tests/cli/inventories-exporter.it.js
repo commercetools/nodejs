@@ -28,8 +28,9 @@ describe('StockExporter CLI', () => {
           clientSecret: credentials.clientSecret,
         },
       }
-      return clearData(apiConfig, 'inventory')
+      return clearData(apiConfig, 'orders')
     })
+    .then(() => clearData(apiConfig, 'inventory'))
     .then(() => clearData(apiConfig, 'types'))
     .then(() => createData(apiConfig, 'types', customFields))
     .then(() => createData(apiConfig, 'inventory', inventories))
