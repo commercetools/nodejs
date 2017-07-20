@@ -188,7 +188,23 @@ describe('DiscountCodeExport', () => {
           typeId: 'cart-discount',
           id: 'discount-id-1',
         }],
+        attributeTypes: {},
+        cartFieldTypes: {},
+        lineItemFieldTypes: {},
+        customLineItemFieldTypes: {},
       }
+    })
+
+    it('delete empty objects and ignores non-empty objects', () => {
+      sampleCodeObj.attributeTypes = { foo: 'bar' }
+      const expected = {
+        'name.en': 'English',
+        'name.de': 'German',
+        cartDiscounts: 'discount-id-1',
+        'attributeTypes.foo': 'bar',
+      }
+      const actual = codeExport._processCode(sampleCodeObj)
+      expect(actual).toEqual(expected)
     })
 
     it('flatten object and return the `cartDiscounts` id as string', () => {

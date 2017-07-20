@@ -1,15 +1,12 @@
 import fs from 'fs'
+import tmp from 'tmp'
 import path from 'path'
-import Promise from 'bluebird'
-import {
-  createAuthMiddlewareForClientCredentialsFlow,
-} from '@commercetools/sdk-middleware-auth'
-import { createClient } from '@commercetools/sdk-client'
-import { createRequestBuilder } from '@commercetools/api-request-builder'
-import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
+import isuuid from 'isuuid'
+import csv from 'csvtojson'
+import { oneLine } from 'common-tags'
 import { exec } from 'child_process'
 import { getCredentials } from '@commercetools/get-credentials'
-import { clearData } from './helpers/utils'
+import { createData, clearData } from './helpers/utils'
 import DiscountCodeImport from '../../packages/discount-code-importer/src/main'
 
 let projectKey
@@ -20,8 +17,6 @@ else
 
 describe('DiscountCode tests', () => {
   let apiConfig
-  let service
-  let client
   let cartDiscount
 
   const logger = {
@@ -40,77 +35,38 @@ describe('DiscountCode tests', () => {
         projectKey,
         credentials,
       }
-      // Create client and service
-      service = createRequestBuilder({ projectKey })
-      client = createClient({
-        middlewares: [
-          createAuthMiddlewareForClientCredentialsFlow(apiConfig),
-          createHttpMiddleware({ host: apiConfig.apiUrl }),
-        ],
-      })
-
+      // Clear all discount codes
       return clearData(apiConfig, 'discountCodes')
     })
+    // Clear all cart discounts
     .then(() => clearData(apiConfig, 'cartDiscounts'))
     .then(() => {
+      // Create cart-discount
       const cartDiscountDraft = fs.readFileSync(
         path.join(__dirname, './helpers/cartDiscountDraft.json'), 'utf8',
       )
-      const req = {
-        uri: service.cartDiscounts.build(),
-        method: 'POST',
-        body: cartDiscountDraft,
-      }
-      // Create cart-discount
-      return client.execute(req)
+      // Wrap in an array because the util function expects an array
+      return createData(apiConfig, 'cartDiscounts', [cartDiscountDraft])
     })
     .then((data) => {
-      cartDiscount = data.body
+      // console.error(data);
+      cartDiscount = data[0].body
     })
     .catch(process.stderr.write),
   )
 
-  afterAll(() => {
-    // Delete Discount codes
-    const req = {
-      uri: service.discountCodes.perPage(500).build(),
-      method: 'GET',
-    }
-    return client.execute(req)
-      .then((response) => {
-        const codes = response.body.results
-        return Promise.map(codes, (codeObj) => {
-          const deleteCodeRequest = {
-            uri: service
-              .discountCodes
-              .byId(codeObj.id)
-              .withVersion(codeObj.version)
-              .build(),
-            method: 'DELETE',
-          }
-          return client.execute(deleteCodeRequest)
-        })
-      })
-      .then(() => {
-        // Delete cart discount
-        const deleteCartRequest = {
-          uri: service
-            .cartDiscounts
-            .byId(cartDiscount.id)
-            .withVersion(1)
-            .build(),
-          method: 'DELETE',
-        }
-        return client.execute(deleteCartRequest)
-      })
-      .catch(process.stderr.write)
-  })
+  // Delete Discount codes
+  afterAll(() => clearData(apiConfig, 'discountCodes')
+    // Delete cart discounts
+    .then(() => clearData(apiConfig, 'cartDiscounts'))
+    .catch(process.stderr.write),
+  )
 
   describe('Discount code generator', () => {
     const binPath = './integration-tests/node_modules/.bin/discount-code-gen'
 
-    afterAll(() => {
     // Delete the generated log file
+    afterAll(() => {
       fs.unlinkSync('discountCodeGenerator.log', 'utf8')
     })
 
@@ -170,10 +126,19 @@ describe('DiscountCode tests', () => {
         })
       ))
     })
+
+    // Delete Discount codes
+    afterAll(() => clearData(apiConfig, 'discountCodes')
+      .catch(process.stderr.write),
+    )
+
     test('should create discount codes on CTP', async () => {
+      const reportMessage = oneLine`
+        Summary: there were 10 successfully imported discount codes
+        (10 were newly created, 0 were updated and 0 were unchanged).
+      `
       const expected = {
-        // eslint-disable-next-line max-len
-        reportMessage: 'Summary: there were 10 successfully imported discount codes (10 were newly created, 0 were updated and 0 were unchanged).',
+        reportMessage,
         detailedSummary: {
           created: 10,
           updated: 0,
@@ -198,10 +163,12 @@ describe('DiscountCode tests', () => {
 
       // Call a new `codeImport` instance so we reset the summary
       codeImport = new DiscountCodeImport({ apiConfig }, logger)
-
+      const reportMessage = oneLine`
+        Summary: there were 10 successfully imported discount codes
+        (0 were newly created, 10 were updated and 0 were unchanged).
+      `
       const expected = {
-        // eslint-disable-next-line max-len
-        reportMessage: 'Summary: there were 10 successfully imported discount codes (0 were newly created, 10 were updated and 0 were unchanged).',
+        reportMessage,
         detailedSummary: {
           created: 0,
           updated: 10,
@@ -253,9 +220,13 @@ describe('DiscountCode tests', () => {
         const uniqueCode = codeObj.code
         return Object.assign({}, codeObj, { code: `${uniqueCode}foobar` })
       })
+      const reportMessage = oneLine`
+        Summary: there were 8 successfully imported discount codes
+        (8 were newly created, 0 were updated and 0 were unchanged).
+        2 errors occured (2 create errors and 0 update errors.)
+      `
       const expected = {
-        // eslint-disable-next-line max-len
-        reportMessage: 'Summary: there were 8 successfully imported discount codes (8 were newly created, 0 were updated and 0 were unchanged). 2 errors occured (2 create errors and 0 update errors.)',
+        reportMessage,
         detailedSummary: {
           created: 8,
           updated: 0,
@@ -275,6 +246,105 @@ describe('DiscountCode tests', () => {
       const errors = summary.detailedSummary.errors
       expect(errors[0]).toMatch(/'code' should not be empty/)
       expect(errors[1]).toMatch(/Request body does not contain valid JSON/)
+    })
+  })
+
+  describe('Discount Code Exporter', () => {
+    const UTCDateTimeRegex = new RegExp(
+      /[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g,
+    )
+    let preparedDiscountCodes
+    const bin = './integration-tests/node_modules/.bin/discount-code-exporter'
+
+    beforeAll(() => {
+      // Get the sample discount codes and add cartDiscounts
+      preparedDiscountCodes = JSON.parse(
+        fs.readFileSync(
+          path.join(__dirname, './helpers/discountCodes.json'), 'utf8',
+        ),
+      ).map(codeObj => (
+        Object.assign({}, codeObj, {
+          cartDiscounts: [
+            {
+              typeId: 'cart-discount',
+              id: cartDiscount.id,
+            },
+          ],
+        })
+      ))
+      return createData(apiConfig, 'discountCodes', preparedDiscountCodes)
+      .catch(process.stderr.write)
+    })
+
+    test('should write json output to file by default', (done) => {
+      const jsonFilePath = tmp.fileSync().name
+      const expected = {
+        version: 1,
+        name: {
+          en: 'Sammy',
+          de: 'Valerian',
+        },
+        description: {
+          en: 'greatest promo',
+          de: 'super angebot',
+        },
+        cartDiscounts: [{
+          typeId: 'cart-discount',
+          id: cartDiscount.id,
+        }],
+        cartPredicate: 'lineItemTotal(1 = 1) >  "10.00 USD"',
+        isActive: true,
+        maxApplications: 10,
+        maxApplicationsPerCustomer: 2,
+      }
+
+      exec(`${bin} -o ${jsonFilePath} -p ${projectKey}`,
+        (cliError, stdout, stderr) => {
+          expect(cliError).toBeFalsy()
+          expect(stderr).toBeFalsy()
+          expect(stdout).toMatch(/Operation completed successfully/)
+
+          fs.readFile(jsonFilePath, { encoding: 'utf8' }, (error, data) => {
+            expect(error).toBeFalsy()
+            const actual = JSON.parse(data)
+            actual.forEach((codeObj) => {
+              expect(codeObj).toMatchObject(expected)
+              expect(isuuid(codeObj.id)).toBe(true)
+              expect(codeObj.createdAt).toMatch(UTCDateTimeRegex)
+              expect(codeObj.lastModifiedAt).toMatch(UTCDateTimeRegex)
+            })
+
+            done()
+          })
+        },
+      )
+    })
+
+    test('should write csv output to file when passed the option', (done) => {
+      const csvFilePath = tmp.fileSync().name
+
+      exec(`${bin} -o ${csvFilePath} -p ${projectKey} -f csv`,
+        (cliError, stdout, stderr) => {
+          expect(cliError).toBeFalsy()
+          expect(stderr).toBeFalsy()
+          expect(stdout).toMatch(/Operation completed successfully/)
+
+          fs.readFile(csvFilePath, { encoding: 'utf8' }, (error, data) => {
+            expect(error).toBeFalsy()
+            csv().fromString(data)
+              .on('csv', (csvRow) => {
+                expect(csvRow.length).toBe(15)
+                expect(isuuid(csvRow[0])).toBe(true)
+                expect(parseInt(csvRow[1], 10)).toBe(1)
+                expect(csvRow[2]).toMatch(/^IT/)
+                expect(csvRow[7]).toBe(cartDiscount.id)
+                expect(csvRow[13]).toMatch(UTCDateTimeRegex)
+                expect(csvRow[14]).toMatch(UTCDateTimeRegex)
+              })
+              .on('done', () => done())
+          })
+        },
+      )
     })
   })
 })
