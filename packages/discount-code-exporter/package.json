@@ -1,0 +1,27 @@
+{
+  "name": "@commercetools/discount-code-exporter",
+  "version": "1.0.0-development",
+  "description": "Export discount codes from the commercetools platform.",
+  "keywords": [
+    "commercetools",
+    "discount",
+    "code",
+    "export",
+    "exporter"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs/tree/master/packages/discount-code-exporter"
+  },
+  "homepage": "https://commercetools.github.io/nodejs/cli/discountCodeExporter.html",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "contributors": [
+    "Williams Omayuku <williams.omayuku@commercetools.com>"
+  ],
+  "main": "lib/index.js",
+  "files": [
+    "bin",
+    "lib"
+  ]
+}
