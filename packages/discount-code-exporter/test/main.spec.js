@@ -195,7 +195,7 @@ describe('DiscountCodeExport', () => {
       }
     })
 
-    it('delete empty objects and ignores non-empty objects', () => {
+    it('deletes empty objects and ignores non-empty objects', () => {
       sampleCodeObj.attributeTypes = { foo: 'bar' }
       const expected = {
         'name.en': 'English',
@@ -207,7 +207,7 @@ describe('DiscountCodeExport', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('flatten object and return the `cartDiscounts` id as string', () => {
+    it('flatten object and return the `cartDiscounts` id as a string', () => {
       const expected = {
         'name.en': 'English',
         'name.de': 'German',
@@ -217,7 +217,7 @@ describe('DiscountCodeExport', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('should concatenate multiple `cartDiscounts` id', () => {
+    it('should concatenate multiple `cartDiscounts` ids', () => {
       sampleCodeObj.cartDiscounts.push({
         typeId: 'cart-discount',
         id: 'discount-id-2',

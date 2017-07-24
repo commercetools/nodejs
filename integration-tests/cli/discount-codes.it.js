@@ -301,7 +301,7 @@ describe('DiscountCode tests', () => {
         (cliError, stdout, stderr) => {
           expect(cliError).toBeFalsy()
           expect(stderr).toBeFalsy()
-          expect(stdout).toMatch(/Operation completed successfully/)
+          expect(stdout).toMatch(/Export operation completed successfully/)
 
           fs.readFile(jsonFilePath, { encoding: 'utf8' }, (error, data) => {
             expect(error).toBeFalsy()
@@ -342,7 +342,7 @@ describe('DiscountCode tests', () => {
         (cliError, stdout, stderr) => {
           expect(cliError).toBeFalsy()
           expect(stderr).toBeFalsy()
-          expect(stdout).toMatch(/Operation completed successfully/)
+          expect(stdout).toMatch(/Export operation completed successfully/)
 
           fs.readFile(csvFilePath, { encoding: 'utf8' }, (error, data) => {
             expect(error).toBeFalsy()

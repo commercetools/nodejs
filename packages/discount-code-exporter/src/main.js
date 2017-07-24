@@ -2,7 +2,7 @@
 import type {
   ApiConfigOptions,
   CodeData,
-  ImporterOptions,
+  ExporterOptions,
   LoggerOptions,
 } from 'types/discountCodes'
 import type {
@@ -40,7 +40,7 @@ export default class DiscountCodeExport {
   _processCode: Function;
 
   constructor (
-    options: ImporterOptions,
+    options: ExporterOptions,
     logger: LoggerOptions,
   ) {
     if (!options.apiConfig)
@@ -104,7 +104,7 @@ export default class DiscountCodeExport {
   ) {
     this._fetchCodes(pipeStream)
       .then(() => {
-        this.logger.info('Operation completed successfully')
+        this.logger.info('Export operation completed successfully')
         if (outputStream !== process.stdout)
           pipeStream.end()
       })

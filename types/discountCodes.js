@@ -77,6 +77,8 @@ export type ImporterOptions = {
   multiValueDelimiter: string;
 }
 
+export type ExporterOptions = ImporterOptions
+
 export type ChunkOptions = Array<Object>
 
 export type ParseOptions = {
