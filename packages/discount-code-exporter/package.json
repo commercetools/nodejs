@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/discount-code-exporter",
-  "version": "1.0.0-development",
+  "version": "1.0.0",
   "description": "Export discount codes from the commercetools platform.",
   "keywords": [
     "commercetools",
