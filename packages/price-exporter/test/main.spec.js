@@ -1,11 +1,45 @@
-import addSum from '../src/main'
+import PriceExporter from '../src/main'
 
-describe('addSum', () => {
-  it('should be a function', () => {
-    expect(typeof addSum).toBe('function')
+describe('PriceExporter', () => {
+  const logger = {
+    error: () => {},
+    warn: () => {},
+    info: () => {},
+    verbose: () => {},
+  }
+
+  let priceExporter
+  beforeEach(() => {
+    priceExporter = new PriceExporter({
+      apiConfig: {
+        projectKey: 'test-project-key',
+      },
+    }, logger)
   })
 
-  it('should return the sum of two numbers', () => {
-    expect(addSum(2, 5)).toBe(7)
+  describe('constructor', () => {
+    it('should be a function', () => {
+      expect(typeof PriceExporter).toBe('function')
+    })
+
+    it('should throw if no `apiConfig` in `options` parameter', () => {
+      expect(() => new PriceExporter({ foo: 'bar' })).toThrowError(
+        /The constructor must be passed an `apiConfig` object/,
+      )
+    })
+
+    it('should set default properties', () => {
+      expect(priceExporter.apiConfig).toEqual({
+        projectKey: 'test-project-key',
+      })
+      expect(priceExporter.logger).toEqual(logger)
+      expect(priceExporter.config.delimiter).toBe(',')
+      expect(priceExporter.config.multiValueDelimiter).toBe(';')
+    })
+  })
+
+  describe('::run', () => {
+
   })
 })
+
