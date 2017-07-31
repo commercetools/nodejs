@@ -73,7 +73,7 @@
     "npm-run-all": "4.0.2",
     "rimraf": "2.6.1",
     "streamtest": "1.2.2",
-    "validate-commit-msg": "2.12.1",
+    "validate-commit-msg": "2.14.0",
     "webpack": "2.6.1"
   },
   "config": {
