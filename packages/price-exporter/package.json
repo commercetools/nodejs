@@ -1,0 +1,28 @@
+{
+  "name": "@commercetools/price-exporter",
+  "version": "1.0.0-development",
+  "description": "Export prices from the commercetools platform.",
+  "keywords": [
+    "commercetools",
+    "csv",
+    "parser",
+    "price",
+    "json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs/tree/master/packages/price-exporter"
+  },
+  "homepage": "https://commercetools.github.io/nodejs/cli/price-exporter.html",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "author": {
+    "name": "Williams Omayuku",
+    "email": "williams.omayuku@commercetools.de"
+  },
+  "main": "lib/index.js",
+  "files": [
+    "bin",
+    "lib"
+  ]
+}

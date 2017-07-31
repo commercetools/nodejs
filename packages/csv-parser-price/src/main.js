@@ -3,7 +3,6 @@ import highland from 'highland'
 import JSONStream from 'JSONStream'
 import mapValues from 'lodash.mapvalues'
 import memoize from 'lodash.memoize'
-import npmlog from 'npmlog'
 import { unflatten } from 'flat'
 
 import { createAuthMiddlewareForClientCredentialsFlow }
@@ -36,11 +35,12 @@ export default class CsvParserPrice {
     this.apiConfig = apiConfig
     this.accessToken = accessToken
 
+    // noop the logger if not defined, should not polute stdout
     this.logger = logger || {
-      error: npmlog.error.bind(this, ''),
-      warn: npmlog.warn.bind(this, ''),
-      info: npmlog.info.bind(this, ''),
-      verbose: npmlog.verbose.bind(this, ''),
+      error: () => {},
+      warn: () => {},
+      info: () => {},
+      verbose: () => {},
     }
 
     this.batchSize =
@@ -63,7 +63,10 @@ export default class CsvParserPrice {
       .sortBy((a, b) => a['variant-sku'].localeCompare(b['variant-sku']))
       // Limit amount of rows to be handled at the same time
       .batch(this.batchSize)
-      .stopOnError(error => this.logger.error(error))
+      .stopOnError((err) => {
+        this.logger.error(err)
+        output.emit('error', err)
+      })
       .flatMap(highland)
       // Unflatten object keys with a dot to nested values
       .map(unflatten)
@@ -75,9 +78,11 @@ export default class CsvParserPrice {
         this.logger.verbose(`Processed row ${rowIndex}`)
         rowIndex += 1
       })
-      .stopOnError(error => this.logger.error(error))
+      .stopOnError((err) => {
+        this.logger.error(err)
+        output.emit('error', err)
+      })
       .reduce({ prices: [] }, this.mergeBySku)
-      .stopOnError(error => this.logger.error(error))
       .doto((data) => {
         const numberOfPrices = Number(JSON.stringify(data.length)) + 1
         this.logger.info(`Done with conversion of ${numberOfPrices} prices`)

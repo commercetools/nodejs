@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/csv-parser-price",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Module that parses price csv to json",
   "keywords": [
     "commercetools",
@@ -13,8 +13,8 @@
     "type": "git",
     "url": "https://github.com/commercetools/nodejs/tree/master/packages/csv-parser-price"
   },
-  "homepage": "https://github.com/commercetools/csv-parser-price#readme",
-  "bugs": "https://github.com/commercetools/csv-parser-price/issues",
+  "homepage": "https://github.com/commercetools/nodejs/tree/master/packages/csv-parser-price#readme",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "contributors": [
     "Abimbola Idowu <abimbola.idowu@commercetools.com>",

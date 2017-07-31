@@ -32,7 +32,8 @@
 .*/node_modules/node-gyp/.*
 .*/node_modules/node-notifier/.*
 .*/node_modules/node-pre-gyp/.*
-.*/node_modules/npm.*
+.*/node_modules/npm/.*
+.*/node_modules/npmconf/.*
 .*/node_modules/optimist/.*
 .*/node_modules/semantic-release/.*
 .*/node_modules/semver/.*

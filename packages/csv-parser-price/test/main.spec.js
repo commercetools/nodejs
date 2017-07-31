@@ -1,8 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import sinon from 'sinon'
-// eslint-disable-next-line import/no-extraneous-dependencies
 import streamtest from 'streamtest'
 
 import CONSTANTS from '../src/constants'

@@ -88,6 +88,12 @@ Convert commercetools price CSV data to JSON.`,
     default: 'info',
     describe: 'Logging level: error, warn, info or verbose.',
   })
+
+  .option('logFile', {
+    default: CONSTANTS.standardOption.defaultLogFile,
+    describe: 'Path to file where to save logs.',
+  })
+
   .coerce('logLevel', (arg) => {
     npmlog.level = arg
   })
@@ -97,18 +103,21 @@ const logError = (error) => {
   const errorFormatter = new PrettyError()
 
   if (npmlog.level === 'verbose')
-    process.stderr.write(errorFormatter.render(error))
+    process.stderr.write(`ERR: ${errorFormatter.render(error)}`)
   else
-    npmlog.error('', error.message)
+    process.stderr.write(`ERR: ${error.message || error}`)
 }
 
 const errorHandler = (errors) => {
-  if (Array.isArray(errors))
-    errors.forEach(logError)
-  else
-    logError(errors)
+  // print errors to stderr if we use stdout for data output
+  // if we save data to output file errors are already logged by npmlog
+  if (args.outputFile === process.stdout)
+    if (Array.isArray(errors))
+      errors.forEach(logError)
+    else
+      logError(errors)
 
-  process.exit(1)
+  process.exitCode = 1
 }
 
 const resolveCredentials = (_args) => {
@@ -116,6 +125,13 @@ const resolveCredentials = (_args) => {
     return Promise.resolve({})
   return getCredentials(_args.projectKey)
 }
+
+// If the stdout is used for a data output, save all logs to a log file.
+if (args.outputFile === process.stdout)
+  npmlog.stream = fs.createWriteStream(args.logFile)
+
+// Register error listener
+args.outputFile.on('error', errorHandler)
 
 resolveCredentials(args)
   .then(credentials =>
@@ -128,15 +144,15 @@ resolveCredentials(args)
       },
       accessToken: args.accessToken,
       logger: {
-        error: errorHandler,
+        error: npmlog.error.bind(this, ''),
         warn: npmlog.warn.bind(this, ''),
         info: npmlog.info.bind(this, ''),
         verbose: npmlog.verbose.bind(this, ''),
       },
       csvConfig: {
         delimiter: args.delimiter,
+        batchSize: args.batchSize,
       },
     }),
   )
   .then(csvParserPrice => csvParserPrice.parse(args.inputFile, args.outputFile))
-  .catch(errorHandler)

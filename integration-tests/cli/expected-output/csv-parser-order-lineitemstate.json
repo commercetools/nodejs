@@ -1,0 +1,18 @@
+[
+  {
+    "orderNumber": "234",
+    "lineItems": [
+      {
+        "id": "123",
+        "state": [
+          {
+            "quantity": 10,
+            "fromState": "order",
+            "toState": "shipped",
+            "_fromStateQty": 100
+          }
+        ]
+      }
+    ]
+  }
+]
