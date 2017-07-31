@@ -22,6 +22,7 @@ else
   projectKey = process.env.npm_config_projectkey
 
 describe('CSV and CLI Tests', () => {
+  const samplesFolder = './packages/csv-parser-price/test/helpers/'
   const binPath = './integration-tests/node_modules/.bin/csvparserprice'
   let apiConfig
   beforeAll(() => getCredentials(projectKey)
@@ -56,8 +57,7 @@ describe('CSV and CLI Tests', () => {
     })
 
     test('should write output to file', (done) => {
-      // eslint-disable-next-line max-len
-      const csvFilePath = './packages/csv-parser-price/test/helpers/simple-sample.csv'
+      const csvFilePath = path.join(samplesFolder, 'simple-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
       // eslint-disable-next-line max-len
@@ -77,8 +77,7 @@ describe('CSV and CLI Tests', () => {
 
   describe('CLI logs specific errors', () => {
     test('on faulty CSV format', (done) => {
-      // eslint-disable-next-line max-len
-      const csvFilePath = './packages/csv-parser-price/test/helpers/faulty-sample.csv'
+      const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
       exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
@@ -92,8 +91,7 @@ describe('CSV and CLI Tests', () => {
     })
 
     test('on parsing errors', (done) => {
-      // eslint-disable-next-line max-len
-      const csvFilePath = './packages/csv-parser-price/test/helpers/missing-type-sample.csv'
+      const csvFilePath = path.join(samplesFolder, 'missing-type-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
       exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
@@ -107,8 +105,7 @@ describe('CSV and CLI Tests', () => {
     })
 
     test('stack trace on verbose level', (done) => {
-      // eslint-disable-next-line max-len
-      const csvFilePath = './packages/csv-parser-price/test/helpers/faulty-sample.csv'
+      const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
 
       exec(`${binPath} -p ${projectKey} -i ${csvFilePath} --logLevel verbose`,
         (error, stdout, stderr) => {
@@ -116,6 +113,26 @@ describe('CSV and CLI Tests', () => {
           expect(stdout).toBeFalsy()
           expect(stderr).toMatch(/\.js:\d+:\d+/)
           done()
+        },
+      )
+    })
+
+    // eslint-disable-next-line max-len
+    test('should log messages to a log file and print a final error to stderr', (done) => {
+      const tmpFile = tmp.fileSync()
+      const expectedError = 'Row length does not match headers'
+      const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
+
+      // eslint-disable-next-line max-len
+      exec(`${binPath} -p ${projectKey}  -i ${csvFilePath} --logFile ${tmpFile.name}`,
+        (error, stdout, stderr) => {
+          expect(error).toBeTruthy()
+          expect(stderr).toMatch(expectedError)
+
+          fs.readFile(tmpFile.name, { encoding: 'utf8' }, (err, data) => {
+            expect(data).toContain(expectedError)
+            done()
+          })
         },
       )
     })
@@ -161,7 +178,7 @@ describe('CSV and CLI Tests', () => {
     })
 
     test('should take input from file', (done) => {
-      const csvFilePath = './packages/csv-parser-price/test/helpers/sample.csv'
+      const csvFilePath = path.join(samplesFolder, 'sample.csv')
       exec(`${binPath} -p ${projectKey} --inputFile ${csvFilePath}`,
         (error, stdout, stderr) => {
           expect(error && stderr).toBeFalsy()
@@ -172,8 +189,7 @@ describe('CSV and CLI Tests', () => {
     })
 
     test('CLI exits on type mapping errors', (done) => {
-      // eslint-disable-next-line max-len
-      const csvFilePath = './packages/csv-parser-price/test/helpers/wrong-type-sample.csv'
+      const csvFilePath = path.join(samplesFolder, 'wrong-type-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
       exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
@@ -187,7 +203,7 @@ describe('CSV and CLI Tests', () => {
     })
 
     test('should parse CSV into JSON with array of prices', (done) => {
-      const csvFilePath = './packages/csv-parser-price/test/helpers/sample.csv'
+      const csvFilePath = path.join(samplesFolder, 'sample.csv')
       const csvParserPrice = new CsvParserPrice({ apiConfig })
       const inputStream = fs.createReadStream(csvFilePath)
       const outputStream = streamtest['v2'].toText((error, output) => {

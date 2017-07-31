@@ -357,4 +357,27 @@ describe('process', () => {
       return Promise.resolve()
     })
   })
+
+  it('process and reject on rejection from user', () => {
+    const client = createClient({
+      middlewares: [
+        next => (req, res) => {
+          next(req, { ...res, statusCode: 200 })
+        },
+      ],
+    })
+
+    return client.process(
+      request,
+      () => Promise.reject('Rejection from user'),
+    )
+    .then(() =>
+      Promise.reject(
+        'This function should never be called, the response was rejected',
+      ),
+    )
+    .catch((error) => {
+      expect(error).toEqual('Rejection from user')
+    })
+  })
 })
