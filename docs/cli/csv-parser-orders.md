@@ -1,4 +1,4 @@
-# CSV Parser Order
+# CSV Parser Orders
 
 [![Travis Build Status][travis-icon]][travis]
 [![Codecov Coverage Status][codecov-icon]][codecov]
@@ -8,7 +8,7 @@
 Convert [commercetools order](https://dev.commercetools.com/http-api-projects-orders.html) CSV data to JSON. See examples below for supported CSV format and sample responses.
 
 ## Usage
-`npm install @commercetools/csv-parser-order --global`
+`npm install @commercetools/csv-parser-orders --global`
 
 ### CLI
 ```
@@ -171,7 +171,7 @@ const {
   LineItemStateCsvParser, 
   AddReturnInfoCsvParser, 
   DeliveriesCsvParser,
-} = require('@commercetools/csv-parser-order')
+} = require('@commercetools/csv-parser-orders')
 
 const parser = new LineItemStateCsvParser({
   logger: {
@@ -350,7 +350,7 @@ Example provided above will be parsed into following JSON:
 }]
 ```
 
-More delivery examples can be seen [here](https://github.com/commercetools/nodejs/tree/master/packages/csv-parser-order/test/data/deliveries).
+More delivery examples can be seen [here](https://github.com/commercetools/nodejs/tree/master/packages/csv-parser-orders/test/data/deliveries).
 
 [commercetools]: https://commercetools.com/
 [commercetools-icon]: https://cdn.rawgit.com/commercetools/press-kit/master/PNG/72DPI/CT%20logo%20horizontal%20RGB%2072dpi.png

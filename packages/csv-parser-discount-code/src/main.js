@@ -10,6 +10,7 @@ import JSONStream from 'JSONStream'
 import highland from 'highland'
 import npmlog from 'npmlog'
 import { unflatten } from 'flat'
+import castTypes from './utils'
 
 export default class CsvParserDiscountCode {
   // set flowtype annotations
@@ -63,6 +64,7 @@ export default class CsvParserDiscountCode {
       .map(CsvParserDiscountCode._removeEmptyFields)
       .map(unflatten)
       .map(this._cartDiscountsToArray)
+      .map(castTypes)
       .errors(this._handleErrors) // <- Pass errors to errorHandler
       .stopOnError((error) => { // <- Emit error and close stream if needed
         output.emit('error', error)

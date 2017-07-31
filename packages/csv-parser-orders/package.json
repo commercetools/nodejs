@@ -1,6 +1,6 @@
 {
-  "name": "@commercetools/csv-parser-order",
-  "version": "3.0.0",
+  "name": "@commercetools/csv-parser-orders",
+  "version": "1.2.3",
   "description": "Module that parses order csv to json",
   "keywords": [
     "commercetools",
@@ -12,9 +12,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/commercetools/nodejs/tree/master/packages/csv-parser-order"
+    "url": "https://github.com/commercetools/nodejs/tree/master/packages/csv-parser-orders"
   },
-  "homepage": "https://github.com/commercetools/nodejs/tree/master/packages/csv-parser-order#readme",
+  "homepage": "https://github.com/commercetools/nodejs/tree/master/packages/csv-parser-orders#readme",
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "contributors": [
