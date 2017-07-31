@@ -67,9 +67,18 @@ If we want to generate 3 discount codes, each having 9 characters(code-length), 
    "de": "super angebot"
   },
   "cartDiscounts": [
-   "good",
-   "better",
-   "best"
+   {
+    "typeId": "cart-discount",
+    "id": "good"
+   },
+   {
+    "typeId": "cart-discount",
+    "id": "better"
+   },
+   {
+    "typeId": "cart-discount",
+    "id": "best"
+   }
   ],
   "cartPredicate": "value more than 20",
   "isActive": "true",
@@ -79,7 +88,7 @@ If we want to generate 3 discount codes, each having 9 characters(code-length), 
 ```
 and also wanting a JSON output, we would run the following command
 ```bash
-discount-code-generator -i /path-to-code-data/input.json -o /path-to-write-data/output.json -q 3 -l 9 -p FOO
+discount-code-gen -i /path-to-code-data/input.json -o /path-to-write-data/output.json -q 3 -l 9 -p FOO
 ```
 
 The following would be written to the output file:
@@ -95,9 +104,18 @@ The following would be written to the output file:
    "de": "super angebot"
   },
   "cartDiscounts": [
-   "good",
-   "better",
-   "best"
+   {
+    "typeId": "cart-discount",
+    "id": "good"
+   },
+   {
+    "typeId": "cart-discount",
+    "id": "better"
+   },
+   {
+    "typeId": "cart-discount",
+    "id": "best"
+   }
   ],
   "cartPredicate": "value more than 20",
   "isActive": "true",
@@ -115,9 +133,18 @@ The following would be written to the output file:
    "de": "super angebot"
   },
   "cartDiscounts": [
-   "good",
-   "better",
-   "best"
+   {
+    "typeId": "cart-discount",
+    "id": "good"
+   },
+   {
+    "typeId": "cart-discount",
+    "id": "better"
+   },
+   {
+    "typeId": "cart-discount",
+    "id": "best"
+   }
   ],
   "cartPredicate": "value more than 20",
   "isActive": "true",
@@ -135,9 +162,18 @@ The following would be written to the output file:
    "de": "super angebot"
   },
   "cartDiscounts": [
-   "good",
-   "better",
-   "best"
+   {
+    "typeId": "cart-discount",
+    "id": "good"
+   },
+   {
+    "typeId": "cart-discount",
+    "id": "better"
+   },
+   {
+    "typeId": "cart-discount",
+    "id": "best"
+   }
   ],
   "cartPredicate": "value more than 20",
   "isActive": "true",
@@ -149,6 +185,7 @@ The following would be written to the output file:
 ```
 
 ##### Additional Info
+- The `cartDiscounts` field in the csv should contain only the cart-discount IDs
 - The JSON output option outputs an array of json objects
 - The input and output formats are interchangeable; that means JSON output can be requested with a CSV input and vice versa
 - All fields in the input are optional. However, the file must not be empty.

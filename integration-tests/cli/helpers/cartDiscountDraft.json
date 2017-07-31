@@ -1,0 +1,16 @@
+{
+  "name": {
+    "en": "integration-test-cart-discount"
+  },
+  "value": {
+    "type": "relative",
+    "permyriad": 1000
+  },
+  "cartPredicate": "lineItemTotal(1 = 1) >  \"10.00 USD\"",
+  "target": {
+    "type": "lineItems",
+    "predicate": "1 = 1"
+  },
+  "sortOrder": "0.1",
+  "requiresDiscountCode": true
+}
