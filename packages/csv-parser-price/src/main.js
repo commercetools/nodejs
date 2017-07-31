@@ -3,7 +3,6 @@ import highland from 'highland'
 import JSONStream from 'JSONStream'
 import mapValues from 'lodash.mapvalues'
 import memoize from 'lodash.memoize'
-import npmlog from 'npmlog'
 import { unflatten } from 'flat'
 
 import { createAuthMiddlewareForClientCredentialsFlow }
@@ -36,11 +35,12 @@ export default class CsvParserPrice {
     this.apiConfig = apiConfig
     this.accessToken = accessToken
 
+    // noop the logger if not defined, should not polute stdout
     this.logger = logger || {
-      error: npmlog.error.bind(this, ''),
-      warn: npmlog.warn.bind(this, ''),
-      info: npmlog.info.bind(this, ''),
-      verbose: npmlog.verbose.bind(this, ''),
+      error: () => {},
+      warn: () => {},
+      info: () => {},
+      verbose: () => {},
     }
 
     this.batchSize =
