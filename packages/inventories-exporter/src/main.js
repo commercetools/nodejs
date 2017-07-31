@@ -199,7 +199,7 @@ export default class InventoryExporter {
       result.customType = customObj.type.obj.key
       const keys = Object.keys(customObj.fields)
       keys.forEach((key: string) => {
-        result[`custom.${key}`] = customObj.fields[key]
+        result[`customField.${key}`] = customObj.fields[key]
       })
     }
     return result
