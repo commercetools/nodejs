@@ -123,6 +123,7 @@ export default function createClient (options: ClientOptions): Client {
               const newLastId = last && last.id
               processPage(newLastId, accumulated)
             })
+            .catch(reject)
           })
           .catch(reject)
         }
