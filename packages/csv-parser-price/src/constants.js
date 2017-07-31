@@ -16,6 +16,7 @@ const CONSTANTS = {
   standardOption: {
     batchSize: 100,
     delimiter: ',',
+    defaultLogFile: 'csvparserprice.log',
   },
 }
 
