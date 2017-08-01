@@ -7,5 +7,5 @@ More info here: https://commercetools.github.io/nodejs/cli/price-exporter.html
 ## Install
 
 ```bash
-npm install --save @commercetools/price-exporter
+npm install @commercetools/price-exporter --global
 ```

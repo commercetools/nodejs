@@ -28,3 +28,4 @@
   * [Discount Code Exporter](/cli/discount-code-exporter.md)
   * [Discount Code Importer](/cli/discount-code-importer.md)
   * [Inventories Exporter](/cli/inventories-exporter.md)
+  * [Price Exporter](/cli/price-exporter.md)
