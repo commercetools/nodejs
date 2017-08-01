@@ -1,0 +1,68 @@
+{
+ "masterVariant": {
+  "sku": "sku-1",
+  "prices": [
+   {
+    "value": {
+     "currencyCode": "EUR",
+     "centAmount": 1500
+    },
+    "country": "DE"
+   },
+   {
+    "value": {
+     "currencyCode": "EUR",
+     "centAmount": 1500
+    },
+    "country": "IT"
+   }
+  ]
+ },
+ "variants": [
+  {
+   "sku": "sku-2",
+   "prices": [
+    {
+     "value": {
+      "currencyCode": "EUR",
+      "centAmount": 1500
+     },
+     "country": "GB"
+    }
+   ]
+  },
+  {
+   "sku": "sku-3",
+   "prices": [
+    {
+     "value": {
+      "currencyCode": "EUR",
+      "centAmount": 1875
+     },
+     "custom": {
+      "type": {
+       "typeId": "type",
+       "id": "some-custom-id"
+      },
+      "fields": {
+       "localized": {
+        "en": "cart-discount"
+       },
+       "foo": "bar"
+      }
+     }
+    },
+    {
+     "value": {
+      "currencyCode": "EUR",
+      "centAmount": 1230
+     },
+     "customerGroup": {
+      "typeId": "customer-group",
+      "id": "customer-group-id"
+     }
+    }
+   ]
+  }
+ ]
+}
