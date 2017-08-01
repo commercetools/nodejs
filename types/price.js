@@ -27,6 +27,7 @@ export type ExporterOptions = {
   exportFormat: string;
   predicate: string;
   staged: boolean;
+  csvHeaders?: Array<string>;
 }
 
 /* Logger */

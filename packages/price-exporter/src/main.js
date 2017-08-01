@@ -122,7 +122,7 @@ export default class PriceExporter {
       this.logger.info('Export operation completed successfully')
     } else {
       const flatCSVPrices = flattenDeep(retrievedPrices)
-      const headers = utils._getHeaders(flatCSVPrices)
+      const headers = this.config.csvHeaders || utils._getHeaders(flatCSVPrices)
       const csvOptions = {
         headers,
         delimiter: this.config.delimiter,

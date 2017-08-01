@@ -1,4 +1,5 @@
 import fs from 'fs'
+import readline from 'readline'
 import { getCredentials } from '@commercetools/get-credentials'
 import npmlog from 'npmlog'
 import PrettyError from 'pretty-error'
@@ -23,6 +24,17 @@ ${description}`,
   .help('help', 'Show help text.')
 
   .version()
+
+  .option('input', {
+    alias: 'i',
+    describe: 'Path to CSV template.',
+  })
+  .coerce('input', (arg) => {
+    if (fs.existsSync(arg))
+      return fs.createReadStream(String(arg))
+
+    throw new Error('Input file cannot be reached or does not exist')
+  })
 
   .option('output', {
     alias: 'o',
@@ -59,12 +71,12 @@ ${description}`,
   .option('delimiter', {
     alias: 'd',
     default: ',',
-    describe: 'Used CSV delimiter.',
+    describe: 'Used CSV delimiter for template and output.',
   })
 
   .option('where', {
     alias: 'w',
-    describe: 'where predicate for products from which to fetch prices.',
+    describe: 'Where predicate for products from which to fetch prices.',
   })
 
   .option('exportFormat', {
@@ -115,6 +127,21 @@ const errorHandler = (errors) => {
   process.exitCode = 1
 }
 
+const getHeaders = _args => (
+  new Promise((resolve, reject) => {
+    if (!_args.input)
+      resolve()
+    const rl = readline.createInterface({
+      input: _args.input,
+    })
+    rl.on('error', reject)
+    rl.on('line', (line) => {
+      rl.close()
+      resolve(line.split(_args.delimiter))
+    })
+  })
+)
+
 const resolveCredentials = (_args) => {
   if (_args.accessToken)
     return Promise.resolve({})
@@ -130,7 +157,12 @@ else
 // Register error listener
 args.output.on('error', errorHandler)
 
-resolveCredentials(args)
+let csvHeaders
+getHeaders(args)
+  .then((csvHeadersfromInput) => {
+    csvHeaders = csvHeadersfromInput
+    return resolveCredentials(args)
+  })
   .then((credentials) => {
     const apiConfig = {
       host: args.authUrl,
@@ -145,6 +177,7 @@ resolveCredentials(args)
       exportFormat: args.exportFormat,
       staged: args.staged,
       predicate: args.where,
+      csvHeaders,
     }
     const logger = {
       error: npmlog.error.bind(this, ''),
@@ -152,6 +185,7 @@ resolveCredentials(args)
       info: npmlog.info.bind(this, ''),
       verbose: npmlog.verbose.bind(this, ''),
     }
+
     return new PriceExporter(constructorOptions, logger)
   })
   .then(priceExporter => priceExporter.run(args.output))

@@ -90,5 +90,3 @@ describe('::getPrices', () => {
     expect(actual).toEqual(expected)
   })
 })
-
-// describe('::getPrices', () => {})
