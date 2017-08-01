@@ -21,12 +21,16 @@
     "email": "williams.omayuku@commercetools.de"
   },
   "main": "lib/index.js",
+  "bin": {
+    "price-exporter": "bin/price-exporter.js"
+  },
   "files": [
     "bin",
     "lib"
   ],
   "dependencies": {
     "@commercetools/api-request-builder": "^3.1.1",
+    "@commercetools/get-credentials": "^2.1.0",
     "@commercetools/sdk-client": "^1.4.1",
     "@commercetools/sdk-middleware-auth": "^3.1.0",
     "@commercetools/sdk-middleware-http": "^2.1.1",
@@ -35,7 +39,10 @@
     "bluebird": "^3.5.0",
     "fast-csv": "^2.4.0",
     "flat": "^4.0.0",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "npmlog": "^4.1.2",
+    "pretty-error": "^2.1.1",
+    "yargs": "^8.0.2"
   },
   "devDependencies": {
     "common-tags": "^1.4.0",

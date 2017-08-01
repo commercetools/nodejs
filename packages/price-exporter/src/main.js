@@ -58,8 +58,7 @@ export default class PriceExporter {
 
     const defaultOptions = {
       delimiter: ',',
-      multiValueDelimiter: ';',
-      exportFormat: 'csv',
+      exportFormat: 'json',
       staged: false,
     }
 

@@ -37,7 +37,8 @@ describe('PriceExporter', () => {
       })
       expect(priceExporter.logger).toEqual(logger)
       expect(priceExporter.config.delimiter).toBe(',')
-      expect(priceExporter.config.multiValueDelimiter).toBe(';')
+      expect(priceExporter.config.exportFormat).toBe('json')
+      expect(priceExporter.config.staged).toBe(false)
     })
   })
 
