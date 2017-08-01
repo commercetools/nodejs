@@ -77,10 +77,11 @@ export default class PriceExporter {
   }
 
   run (outputStream: stream$Writable) {
-    this.logger.verbose('Starting Export')
+    this.logger.info('Starting Export')
     const request = this._buildRequest('productProjections')
     this.client.process(request, (data) => {
       const products = data.body.results
+      this.logger.verbose(`Fetched ${products.length} products`)
       let processedBatch = []
       return Promise.map(products, product => utils._getPrices(product))
       .then((pricesArray) => {
@@ -98,6 +99,7 @@ export default class PriceExporter {
 
   _handlePrices (productPricesArray: Array<UnprocessedPriceObject>) {
     const flatPrices = utils._flattenPricesArray(productPricesArray)
+    this.logger.verbose('Processing prices from products')
     if (this.config.exportFormat === 'json')
       return Promise.resolve(flatPrices)
     return Promise.resolve(this._preparePrices(flatPrices))
@@ -133,6 +135,7 @@ export default class PriceExporter {
         csvStream.write(price)
       })
       csvStream.end()
+      this.logger.verbose(`Exported ${flatCSVPrices.length} prices`)
       this.logger.info('Export operation completed successfully')
     }
   }

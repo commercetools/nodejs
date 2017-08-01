@@ -86,7 +86,7 @@ ${description}`,
   })
 
   .option('logFile', {
-    default: 'discount-code-export.log',
+    default: 'price-exporter.log',
     describe: 'Path to file where to save logs.',
   })
 
