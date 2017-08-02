@@ -36,6 +36,10 @@ describe('StockExporter CLI', () => {
     .then(() => createData(apiConfig, 'inventory', inventories))
   , 10000)
 
+  afterAll(() => clearData(apiConfig, 'inventory')
+    .then(() => clearData(apiConfig, 'types')),
+  )
+
   describe('CLI basic functionality', () => {
     it('should print usage information given the help flag', (done) => {
       exec(`${binPath} --help`, (error, stdout, stderr) => {
