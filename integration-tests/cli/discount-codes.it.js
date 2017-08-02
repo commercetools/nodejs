@@ -11,7 +11,7 @@ import DiscountCodeImport from '../../packages/discount-code-importer/src/main'
 
 let projectKey
 if (process.env.CI === 'true')
-  projectKey = 'node-sdk-integration-tests'
+  projectKey = 'discount-codes-integration-test'
 else
   projectKey = process.env.npm_config_projectkey
 
