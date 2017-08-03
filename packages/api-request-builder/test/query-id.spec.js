@@ -30,13 +30,13 @@ describe('queryId', () => {
   })
 
   it('should set the customerId param', () => {
-    service.byCustId('myCustomer')
+    service.byCustomerId('myCustomer')
     expect(service.params.customerId).toBe('myCustomer')
   })
 
   it('should throw if customerId is missing', () => {
-    expect(() => service.byCustId()).toThrowError(
-      /Required argument for `byCustId` is missing/,
+    expect(() => service.byCustomerId()).toThrowError(
+      /Required argument for `byCustomerId` is missing/,
     )
   })
 
@@ -56,19 +56,19 @@ describe('queryId', () => {
       )
   })
 
-  it('throw if byCustId is used after byId', () => {
-    expect(() => service.byId('theId').byCustId('theCustId'))
+  it('throw if byCustomerId is used after byId', () => {
+    expect(() => service.byId('theId').byCustomerId('theCustId'))
       .toThrowError(
         'An ID for this resource has already been set. ' +
-        'You cannot use both `byId` and `byCustId`.',
+        'You cannot use both `byId` and `byCustomerId`.',
       )
   })
 
-  it('throw if byId is used after byCustId', () => {
-    expect(() => service.byCustId('foo').byId('789'))
+  it('throw if byId is used after byCustomerId', () => {
+    expect(() => service.byCustomerId('foo').byId('789'))
       .toThrowError(
         'A customerId for this resource has already been set. ' +
-        'You cannot use both `byId` and `byCustId`.',
+        'You cannot use both `byId` and `byCustomerId`.',
       )
   })
 })

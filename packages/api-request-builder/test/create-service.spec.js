@@ -20,7 +20,7 @@ const expectedServiceProperties = [
   'page',
   'perPage',
   'byId',
-  'byCustId',
+  'byCustomerId',
   'byKey',
   'expand',
   'text',
@@ -118,7 +118,7 @@ describe('createService', () => {
     })
     it('endpoint with customer id', () => {
       expect(createService(options, projectKey)
-        .byCustId('cust123').build())
+        .byCustomerId('cust123').build())
         .toBe('/my-project1/foo/?customerId=cust123')
     })
     it('endpoint with key', () => {

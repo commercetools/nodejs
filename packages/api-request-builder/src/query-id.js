@@ -17,7 +17,7 @@ export function byId (id: string): Object {
   if (this.params.customerId)
     throw new Error(
       'A customerId for this resource has already been set. ' +
-      'You cannot use both `byId` and `byCustId`.',
+      'You cannot use both `byId` and `byCustomerId`.',
     )
 
   this.params.id = id
@@ -52,13 +52,13 @@ export function byKey (key: string): Object {
  * @throws If `id` is missing.
  * @return {Object} The instance of the service, can be chained.
  */
-export function byCustId (custId: string): Object {
+export function byCustomerId (custId: string): Object {
   if (!custId)
-    throw new Error('Required argument for `byCustId` is missing')
+    throw new Error('Required argument for `byCustomerId` is missing')
   if (this.params.id)
     throw new Error(
       'An ID for this resource has already been set. ' +
-      'You cannot use both `byId` and `byCustId`.',
+      'You cannot use both `byId` and `byCustomerId`.',
     )
 
   this.params.customerId = custId
