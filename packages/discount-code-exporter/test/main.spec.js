@@ -45,9 +45,9 @@ describe('DiscountCodeExport', () => {
         apiConfig: {},
         batchSize: 501,
       }, logger))
-      .toThrow(
-        /The `batchSize` must not be more than 500/,
-      )
+        .toThrow(
+          /The `batchSize` must not be more than 500/,
+        )
     })
   })
 
@@ -147,10 +147,10 @@ describe('DiscountCodeExport', () => {
       await codeExport._fetchCodes()
       expect(processMock).toHaveBeenCalledTimes(1)
       expect(processMock.mock.calls[0][0])
-      .toEqual({
-        uri: '/test-project-key/discount-codes?limit=500',
-        method: 'GET',
-      })
+        .toEqual({
+          uri: '/test-project-key/discount-codes?limit=500',
+          method: 'GET',
+        })
     })
 
     it('should loop over discount codes and write to stream', async () => {

@@ -3,7 +3,7 @@ import type {
   LoggerOptions,
   ParseOptions,
   ParserSummary,
- } from 'types/discountCodes'
+} from 'types/discountCodes'
 import _ from 'lodash'
 import csv from 'csv-parser'
 import JSONStream from 'JSONStream'
@@ -87,7 +87,7 @@ export default class CsvParserDiscountCode {
           typeId: 'cart-discount',
           id: cartDiscount,
         }),
-      )
+        )
       return Object.assign(item, { cartDiscounts })
     }
     return item

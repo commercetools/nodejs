@@ -46,8 +46,8 @@ export default (function MapCustomFields () {
               const _result = this.mapNumber(value)
               if (_result.error)
                 result.error.push(
-                    processError(_result.error, rowIndex, customType.key),
-                  )
+                  processError(_result.error, rowIndex, customType.key),
+                )
               if (!(_result.data === undefined))
                 custom.fields[key] = _result.data
               break
@@ -56,8 +56,8 @@ export default (function MapCustomFields () {
               const _result = this.mapBoolean(value)
               if (_result.error)
                 result.error.push(
-                    processError(_result.error, rowIndex, customType.key),
-                  )
+                  processError(_result.error, rowIndex, customType.key),
+                )
               if (!(_result.data === undefined))
                 custom.fields[key] = _result.data
               break
@@ -66,8 +66,8 @@ export default (function MapCustomFields () {
               const _result = this.mapMoney(value)
               if (_result.error)
                 result.error.push(
-                    processError(_result.error, rowIndex, customType.key),
-                  )
+                  processError(_result.error, rowIndex, customType.key),
+                )
               if (!(_result.data === undefined))
                 custom.fields[key] = _result.data
               break
@@ -76,8 +76,8 @@ export default (function MapCustomFields () {
               const _result = this.mapSet(value, fieldDef.type.elementType)
               if (_result.error.length)
                 result.error.push(
-                    ...processError(_result.error, rowIndex, customType.key),
-                  )
+                  ...processError(_result.error, rowIndex, customType.key),
+                )
               if (_result.data.length)
                 custom.fields[key] = _result.data
               break
@@ -96,13 +96,13 @@ export default (function MapCustomFields () {
             }
             default: {
               const unsupportedMsg = `'${
-                  fieldDef.type.name
-                }' type is not supported! Kindly raise an issue for this`
+                fieldDef.type.name
+              }' type is not supported! Kindly raise an issue for this`
               result.error.push(
-                  new Error(
-                    `[row ${rowIndex}: ${customType.key}] - ${unsupportedMsg}`,
-                  ),
-                )
+                new Error(
+                  `[row ${rowIndex}: ${customType.key}] - ${unsupportedMsg}`,
+                ),
+              )
             }
           }
       })
@@ -179,8 +179,8 @@ export default (function MapCustomFields () {
         }
         default: {
           const unsupportedMsg = `'${
-              elementType.name
-            }' type is not supported! Kindly raise an issue for this`
+            elementType.name
+          }' type is not supported! Kindly raise an issue for this`
           return {
             error: unsupportedMsg,
           }

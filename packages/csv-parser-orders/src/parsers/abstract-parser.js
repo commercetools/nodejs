@@ -48,8 +48,7 @@ export default class AbstractParser {
       })
       .doto(data => this.logger.verbose(
         `Converted row-${rowIndex}: ${JSON.stringify(data)}`,
-        ),
-      )
+      ))
   }
 
   _getMissingHeaders (data) {

@@ -103,29 +103,29 @@ export default function createClient (options: ClientOptions): Client {
           }
 
           this.execute(enhancedRequest)
-          .then((payload: SuccessResult) => {
-            fn(payload)
-            .then((result: any) => {
-              const resultsLength = payload.body.results.length
-              let accumulated
-              if (opt.accumulate)
-                accumulated = acc.concat(result || [])
+            .then((payload: SuccessResult) => {
+              fn(payload)
+                .then((result: any) => {
+                  const resultsLength = payload.body.results.length
+                  let accumulated
+                  if (opt.accumulate)
+                    accumulated = acc.concat(result || [])
 
-              // If we get less results in a page then the limit set it means
-              // that there are no more pages and that we can finally resolve
-              // the promise.
-              if (resultsLength < query.limit) {
-                resolve(accumulated || [])
-                return
-              }
+                  // If we get less results in a page then the limit set it
+                  // means that there are no more pages and that we can finally
+                  // resolve the promise.
+                  if (resultsLength < query.limit) {
+                    resolve(accumulated || [])
+                    return
+                  }
 
-              const last = payload.body.results[resultsLength - 1]
-              const newLastId = last && last.id
-              processPage(newLastId, accumulated)
+                  const last = payload.body.results[resultsLength - 1]
+                  const newLastId = last && last.id
+                  processPage(newLastId, accumulated)
+                })
+                .catch(reject)
             })
             .catch(reject)
-          })
-          .catch(reject)
         }
 
         // Start iterating through pages

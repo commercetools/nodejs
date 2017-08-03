@@ -73,46 +73,46 @@ export default function createAuthMiddlewareForClientCredentialsFlow (
         body,
       },
     )
-    .then((res: Response): Promise<*> => {
-      if (res.ok)
-        return res.json()
-        .then((result: Object) => {
-          const token = result.access_token
-          const expiresIn = result.expires_in
-          const expirationTime = calculateExpirationTime(expiresIn)
-          // Cache new token
-          cache = { token, expirationTime }
+      .then((res: Response): Promise<*> => {
+        if (res.ok)
+          return res.json()
+            .then((result: Object) => {
+              const token = result.access_token
+              const expiresIn = result.expires_in
+              const expirationTime = calculateExpirationTime(expiresIn)
+              // Cache new token
+              cache = { token, expirationTime }
 
-          // Dispatch all pending requests
-          isFetchingToken = false
-          // Freeze and copy pending queue, reset original one for accepting
-          // new pending tasks
-          const executionQueue = pendingTasks.slice()
-          pendingTasks = []
-          executionQueue.forEach((task) => {
-            // Assign the new token in the request header
-            const requestWithAuth = mergeAuthHeader(token, task.request)
-            next(requestWithAuth, task.response)
+              // Dispatch all pending requests
+              isFetchingToken = false
+              // Freeze and copy pending queue, reset original one for accepting
+              // new pending tasks
+              const executionQueue = pendingTasks.slice()
+              pendingTasks = []
+              executionQueue.forEach((task) => {
+                // Assign the new token in the request header
+                const requestWithAuth = mergeAuthHeader(token, task.request)
+                next(requestWithAuth, task.response)
+              })
+            })
+
+        // Handle error response
+        return res.text()
+          .then((text: any) => {
+            let parsed
+            try {
+              parsed = JSON.parse(text)
+            } catch (error) {
+              /* noop */
+            }
+            const error: Object = new Error(parsed ? parsed.message : text)
+            if (parsed) error.body = parsed
+            response.reject(error)
           })
-        })
-
-      // Handle error response
-      return res.text()
-      .then((text: any) => {
-        let parsed
-        try {
-          parsed = JSON.parse(text)
-        } catch (error) {
-          /* noop */
-        }
-        const error: Object = new Error(parsed ? parsed.message : text)
-        if (parsed) error.body = parsed
+      })
+      .catch((error) => {
         response.reject(error)
       })
-    })
-    .catch((error) => {
-      response.reject(error)
-    })
   }
 }
 

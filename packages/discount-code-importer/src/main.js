@@ -11,7 +11,7 @@ import type {
 import type {
   Client,
   SyncAction,
- } from 'types/sdk'
+} from 'types/sdk'
 import npmlog from 'npmlog'
 import Promise from 'bluebird'
 import _ from 'lodash'

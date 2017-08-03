@@ -165,8 +165,8 @@ export default class DiscountCodeExport {
       return `${acc}${this.config.multiValueDelimiter}${discount.id}`
     }, '')
 
-  // This part is necessary because the API sends empty objects in these
-  // fields if empty and they are not correctly written to the CSV file
+    // This part is necessary because the API sends empty objects in these
+    // fields if empty and they are not correctly written to the CSV file
     const objKeys = [
       'attributeTypes',
       'cartFieldTypes',

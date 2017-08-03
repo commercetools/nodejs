@@ -86,13 +86,13 @@ describe('InventoryExporter', () => {
       return inventoryExporter._makeRequest().then(() => {
         expect(processMock).toHaveBeenCalledTimes(1)
         expect(processMock.mock.calls[0][0])
-        .toEqual({
+          .toEqual({
           // should expand customfields object and supplyChannel
-          uri: '/foo/inventory?expand=custom.type&expand=supplyChannel',
-          method: 'GET',
-        },
-        'first argument is request object',
-        )
+            uri: '/foo/inventory?expand=custom.type&expand=supplyChannel',
+            method: 'GET',
+          },
+          'first argument is request object',
+          )
         expect(InventoryExporter._writeEachInventory).toHaveBeenCalledTimes(1)
       })
     })
