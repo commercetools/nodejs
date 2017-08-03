@@ -7,7 +7,7 @@ import type {
   CodeOptions,
 } from 'types/discountCodes'
 
-/**
+/*
  * The discountCodeGenerator function takes 2 arguments {options} and {data}
  * The {options} will specify the semantics and quantity of discount codes
  * Will throw if no quantity `number` is specified
@@ -33,10 +33,10 @@ import type {
  *   maxApplications: 10,
  *   maxApplicationsPerCustomer: 2,
  *  }
-**/
+ */
 // eslint-disable-next-line max-len
-/**  More information about the discount codes can be found here: http://dev.commercetools.com/http-api-projects-discountCodes.html#discountcode
-**/
+/*  More information about the discount codes can be found here: http://dev.commercetools.com/http-api-projects-discountCodes.html#discountcode
+ */
 
 export default function discountCodeGenerator (
   options: CodeOptions,
