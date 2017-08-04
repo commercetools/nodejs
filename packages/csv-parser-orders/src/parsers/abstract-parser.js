@@ -4,7 +4,7 @@ import csv from 'csv-parser'
 
 import CONSTANTS from '../constants'
 
-/* eslint class-methods-use-this:["error", {"exceptMethods":["_processData"]}]*/
+/* eslint-disable class-methods-use-this */
 export default class AbstractParser {
   constructor (conf = {}, moduleName) {
     this.moduleName = moduleName
@@ -48,8 +48,7 @@ export default class AbstractParser {
       })
       .doto(data => this.logger.verbose(
         `Converted row-${rowIndex}: ${JSON.stringify(data)}`,
-        ),
-      )
+      ))
   }
 
   _getMissingHeaders (data) {

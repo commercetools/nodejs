@@ -286,41 +286,41 @@ describe('DeliveriesParser', () => {
     }
 
     return deliveriesParser._processData(mockDelivery)
-    .then((result) => {
-      const _mockResult = {
-        orderNumber: '222',
-        shippingInfo: {
-          deliveries: [{
-            id: '1',
-            items: [
-              {
-                _groupId: '1',
-                id: '123',
-                quantity: 1,
-              },
-            ],
-            parcels: [
-              {
-                id: '1',
-                measurements: {
-                  lengthInMillimeter: 100,
-                  heightInMillimeter: 200,
-                  widthInMillimeter: 200,
-                  weightInGram: 500,
+      .then((result) => {
+        const _mockResult = {
+          orderNumber: '222',
+          shippingInfo: {
+            deliveries: [{
+              id: '1',
+              items: [
+                {
+                  _groupId: '1',
+                  id: '123',
+                  quantity: 1,
                 },
-                trackingData: {
-                  trackingId: '123456789',
-                  carrier: 'DHL',
-                  provider: 'parcel provider',
-                  providerTransaction: 'parcelTransaction provider',
-                  isReturn: false,
+              ],
+              parcels: [
+                {
+                  id: '1',
+                  measurements: {
+                    lengthInMillimeter: 100,
+                    heightInMillimeter: 200,
+                    widthInMillimeter: 200,
+                    weightInGram: 500,
+                  },
+                  trackingData: {
+                    trackingId: '123456789',
+                    carrier: 'DHL',
+                    provider: 'parcel provider',
+                    providerTransaction: 'parcelTransaction provider',
+                    isReturn: false,
+                  },
                 },
-              },
-            ],
-          }],
-        },
-      }
-      expect(result).toEqual(_mockResult)
-    })
+              ],
+            }],
+          },
+        }
+        expect(result).toEqual(_mockResult)
+      })
   })
 })

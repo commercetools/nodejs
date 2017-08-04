@@ -48,9 +48,9 @@ describe('DiscountCodeImporter', () => {
         apiConfig: {},
         batchSize: 501,
       }, logger))
-      .toThrow(
-        /The `batchSize` must not be more than 500/,
-      )
+        .toThrow(
+          /The `batchSize` must not be more than 500/,
+        )
     })
   })
 

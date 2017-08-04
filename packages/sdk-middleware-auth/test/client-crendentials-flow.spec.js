@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import nock from 'nock'
 import {
@@ -189,138 +190,138 @@ describe('Client Crentials Flow', () => {
   it(
     'do not get a new token if one is already present in request headers ' +
     'but it does not match one of the cached tokens',
-  () =>
-    new Promise((resolve, reject) => {
-      const request = createTestRequest()
-      const response = createTestResponse({
-        resolve,
-        reject,
-      })
-      const middlewareOptions = createTestMiddlewareOptions()
-      const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
-        middlewareOptions,
-      )
-      let requestCount = 0
-      nock(middlewareOptions.host)
-        .persist() // <-- use the same interceptor for all requests
-        .log(() => (requestCount += 1)) // <-- keep track of the request count
-        .filteringRequestBody(/.*/, '*')
-        .post('/oauth/token', '*')
-        .reply(200, {
-          access_token: 'xxx',
-          expires_in: (Date.now() + (60 * 60 * 24)),
+    () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest()
+        const response = createTestResponse({
+          resolve,
+          reject,
         })
+        const middlewareOptions = createTestMiddlewareOptions()
+        const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
+          middlewareOptions,
+        )
+        let requestCount = 0
+        nock(middlewareOptions.host)
+          .persist() // <-- use the same interceptor for all requests
+          .log(() => (requestCount += 1)) // <-- keep track of the request count
+          .filteringRequestBody(/.*/, '*')
+          .post('/oauth/token', '*')
+          .reply(200, {
+            access_token: 'xxx',
+            expires_in: (Date.now() + (60 * 60 * 24)),
+          })
 
-      // First call:
-      // - there is no token yet
-      // - a new token is fetched
-      authMiddleware(
-        () => {
+        // First call:
+        // - there is no token yet
+        // - a new token is fetched
+        authMiddleware(
+          () => {
           // Second call:
           // - we simulate that the request has a token set in the headers
           // which does not match any of the cached tokens. In this case
           // do not refetch and keep going.
-          const requestWithHeaders = {
-            ...request,
-            headers: {
-              Authorization: 'Bearer yyy',
-            },
-          }
-          authMiddleware(
-            () => {
-              expect(requestCount).toBe(1)
-              resolve()
-            },
-          )(requestWithHeaders, response)
-        },
-      )(request, response)
-    }),
+            const requestWithHeaders = {
+              ...request,
+              headers: {
+                Authorization: 'Bearer yyy',
+              },
+            }
+            authMiddleware(
+              () => {
+                expect(requestCount).toBe(1)
+                resolve()
+              },
+            )(requestWithHeaders, response)
+          },
+        )(request, response)
+      }),
   )
 
   it(
     'ensure to fetch new token only once and keep track of pending tasks',
-  () =>
-    new Promise((resolve, reject) => {
-      const request = createTestRequest()
-      const response = createTestResponse({
-        resolve,
-        reject,
-      })
-      const middlewareOptions = createTestMiddlewareOptions()
-      const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
-        middlewareOptions,
-      )
-      let requestCount = 0
-      nock(middlewareOptions.host)
-        .persist() // <-- use the same interceptor for all requests
-        .log(() => (requestCount += 1)) // <-- keep track of the request count
-        .filteringRequestBody(/.*/, '*')
-        .post('/oauth/token', '*')
-        .reply(200, {
-          access_token: 'xxx',
-          expires_in: (Date.now() + (60 * 60 * 24)),
+    () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest()
+        const response = createTestResponse({
+          resolve,
+          reject,
         })
+        const middlewareOptions = createTestMiddlewareOptions()
+        const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
+          middlewareOptions,
+        )
+        let requestCount = 0
+        nock(middlewareOptions.host)
+          .persist() // <-- use the same interceptor for all requests
+          .log(() => (requestCount += 1)) // <-- keep track of the request count
+          .filteringRequestBody(/.*/, '*')
+          .post('/oauth/token', '*')
+          .reply(200, {
+            access_token: 'xxx',
+            expires_in: (Date.now() + (60 * 60 * 24)),
+          })
 
-      let nextCount = 0
-      const next = () => {
-        nextCount += 1
-        if (nextCount === 6) {
-          expect(requestCount).toBe(1)
-          resolve()
+        let nextCount = 0
+        const next = () => {
+          nextCount += 1
+          if (nextCount === 6) {
+            expect(requestCount).toBe(1)
+            resolve()
+          }
         }
-      }
-      // Execute multiple requests at once.
-      // This should queue all of them until the token has been fetched.
-      authMiddleware(next)(request, response)
-      authMiddleware(next)(request, response)
-      authMiddleware(next)(request, response)
-      authMiddleware(next)(request, response)
-      authMiddleware(next)(request, response)
-      authMiddleware(next)(request, response)
-    }),
+        // Execute multiple requests at once.
+        // This should queue all of them until the token has been fetched.
+        authMiddleware(next)(request, response)
+        authMiddleware(next)(request, response)
+        authMiddleware(next)(request, response)
+        authMiddleware(next)(request, response)
+        authMiddleware(next)(request, response)
+        authMiddleware(next)(request, response)
+      }),
   )
 
   it(
     'if a token has been fetched, use it for the new incoming requests',
-  () =>
-    new Promise((resolve, reject) => {
-      const request = createTestRequest()
-      const response = createTestResponse({
-        resolve,
-        reject,
-      })
-      const middlewareOptions = createTestMiddlewareOptions()
-      const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
-        middlewareOptions,
-      )
-      let requestCount = 0
-      nock(middlewareOptions.host)
-        .persist() // <-- use the same interceptor for all requests
-        .log(() => (requestCount += 1)) // <-- keep track of the request count
-        .filteringRequestBody(/.*/, '*')
-        .post('/oauth/token', '*')
-        .reply(200, {
-          access_token: 'xxx',
-          expires_in: (Date.now() + (60 * 60 * 24)),
+    () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest()
+        const response = createTestResponse({
+          resolve,
+          reject,
         })
+        const middlewareOptions = createTestMiddlewareOptions()
+        const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
+          middlewareOptions,
+        )
+        let requestCount = 0
+        nock(middlewareOptions.host)
+          .persist() // <-- use the same interceptor for all requests
+          .log(() => (requestCount += 1)) // <-- keep track of the request count
+          .filteringRequestBody(/.*/, '*')
+          .post('/oauth/token', '*')
+          .reply(200, {
+            access_token: 'xxx',
+            expires_in: (Date.now() + (60 * 60 * 24)),
+          })
 
-      // 1. Execute multiple requests at once.
-      // This should queue all of them until the token has been fetched.
-      authMiddleware(() => {
-        // 1. Got a token
-        expect(requestCount).toBe(1)
-
-        authMiddleware((rq2) => {
-          // 2. Should not get a new token
+        // 1. Execute multiple requests at once.
+        // This should queue all of them until the token has been fetched.
+        authMiddleware(() => {
+          // 1. Got a token
           expect(requestCount).toBe(1)
-          expect(rq2).toEqual(expect.objectContaining({
-            headers: expect.objectContaining({
-              Authorization: 'Bearer xxx',
-            }),
-          }))
-          resolve()
+
+          authMiddleware((rq2) => {
+            // 2. Should not get a new token
+            expect(requestCount).toBe(1)
+            expect(rq2).toEqual(expect.objectContaining({
+              headers: expect.objectContaining({
+                Authorization: 'Bearer xxx',
+              }),
+            }))
+            resolve()
+          })(request, response)
         })(request, response)
-      })(request, response)
-    }),
+      }),
   )
 })

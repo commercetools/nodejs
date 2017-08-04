@@ -310,15 +310,15 @@ function _buildVariantAttributesActions (
 
         if (setAction) actions.push(setAction)
       } else
-        if (newVariant.attributes) {
-          const setAction = _buildSetAttributeAction(
-            value.value,
-            oldVariant,
-            newVariant.attributes[key],
-            sameForAllAttributeNames,
-          )
-          if (setAction) actions.push(setAction)
-        }
+      if (newVariant.attributes) {
+        const setAction = _buildSetAttributeAction(
+          value.value,
+          oldVariant,
+          newVariant.attributes[key],
+          sameForAllAttributeNames,
+        )
+        if (setAction) actions.push(setAction)
+      }
     } else if (REGEX_UNDERSCORE_NUMBER.test(key))
       if (Array.isArray(value)) {
         // Ignore pure array moves!
@@ -403,52 +403,52 @@ function _buildSetAttributeAction (
     action.value = diffpatcher.getDeltaValue(diffedValue, oldAttribute.value)
 
   else
-    // LText: value: {en: "", de: ""}
-    // Enum: value: {key: "foo", label: "Foo"}
-    // LEnum: value: {key: "foo", label: {en: "Foo", de: "Foo"}}
-    // Money: value: {centAmount: 123, currencyCode: ""}
-    // *: value: ""
+  // LText: value: {en: "", de: ""}
+  // Enum: value: {key: "foo", label: "Foo"}
+  // LEnum: value: {key: "foo", label: {en: "Foo", de: "Foo"}}
+  // Money: value: {centAmount: 123, currencyCode: ""}
+  // *: value: ""
 
-    if (typeof diffedValue === 'string')
-      // normal
-      action.value = diffpatcher.getDeltaValue(diffedValue, oldAttribute.value)
+  if (typeof diffedValue === 'string')
+    // normal
+    action.value = diffpatcher.getDeltaValue(diffedValue, oldAttribute.value)
 
-    else if (diffedValue.centAmount || diffedValue.currencyCode)
-      // Money
-      action.value = {
-        centAmount: diffedValue.centAmount
-          ? diffpatcher.getDeltaValue(diffedValue.centAmount)
-          : attribute.value.centAmount,
-        currencyCode: diffedValue.currencyCode
-          ? diffpatcher.getDeltaValue(diffedValue.currencyCode)
-          : attribute.value.currencyCode,
-      }
+  else if (diffedValue.centAmount || diffedValue.currencyCode)
+    // Money
+    action.value = {
+      centAmount: diffedValue.centAmount
+        ? diffpatcher.getDeltaValue(diffedValue.centAmount)
+        : attribute.value.centAmount,
+      currencyCode: diffedValue.currencyCode
+        ? diffpatcher.getDeltaValue(diffedValue.currencyCode)
+        : attribute.value.currencyCode,
+    }
 
-    else if (diffedValue.key)
-      // Enum / LEnum (use only the key)
-      action.value = diffpatcher.getDeltaValue(diffedValue.key)
+  else if (diffedValue.key)
+    // Enum / LEnum (use only the key)
+    action.value = diffpatcher.getDeltaValue(diffedValue.key)
 
-    else if (typeof diffedValue === 'object')
+  else if (typeof diffedValue === 'object')
 
-      if (
-        {}.hasOwnProperty.call(diffedValue, '_t') &&
-        diffedValue['_t'] === 'a'
-      ) {
-        // set-typed attribute
-        Object.assign(action, { value: attribute.value })
-      } else {
-        // LText
+    if (
+      {}.hasOwnProperty.call(diffedValue, '_t') &&
+      diffedValue['_t'] === 'a'
+    ) {
+      // set-typed attribute
+      Object.assign(action, { value: attribute.value })
+    } else {
+      // LText
 
-        const updatedValue = Object.keys(diffedValue).reduce((acc, lang) => {
-          const patchedValue = diffpatcher.getDeltaValue(
-            diffedValue[lang],
-            acc[lang],
-          )
-          return Object.assign(acc, { [lang]: patchedValue })
-        }, Object.assign({}, oldAttribute.value))
+      const updatedValue = Object.keys(diffedValue).reduce((acc, lang) => {
+        const patchedValue = diffpatcher.getDeltaValue(
+          diffedValue[lang],
+          acc[lang],
+        )
+        return Object.assign(acc, { [lang]: patchedValue })
+      }, Object.assign({}, oldAttribute.value))
 
-        action.value = updatedValue
-      }
+      action.value = updatedValue
+    }
 
   return action
 }

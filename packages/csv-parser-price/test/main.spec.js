@@ -20,21 +20,21 @@ const apiConfig = {
 
 test(`CsvParserPrice
   should initialize default values`, () => {
-  const options = { apiConfig, accessToken: 'testingToken' }
-  const csvParserPrice = new CsvParserPrice(options)
+    const options = { apiConfig, accessToken: 'testingToken' }
+    const csvParserPrice = new CsvParserPrice(options)
 
-  // logger
-  expect(Object.keys(csvParserPrice.logger))
-    .toEqual(['error', 'warn', 'info', 'verbose'])
-  Object.keys(csvParserPrice.logger).forEach((key) => {
-    expect(typeof csvParserPrice.logger[key]).toBe('function')
+    // logger
+    expect(Object.keys(csvParserPrice.logger))
+      .toEqual(['error', 'warn', 'info', 'verbose'])
+    Object.keys(csvParserPrice.logger).forEach((key) => {
+      expect(typeof csvParserPrice.logger[key]).toBe('function')
+    })
+
+    expect(csvParserPrice.accessToken).toBe(options.accessToken)
+    // config
+    expect(csvParserPrice.delimiter).toBe(CONSTANTS.standardOption.delimiter)
+    expect(csvParserPrice.batchSize).toBe(CONSTANTS.standardOption.batchSize)
   })
-
-  expect(csvParserPrice.accessToken).toBe(options.accessToken)
-  // config
-  expect(csvParserPrice.delimiter).toBe(CONSTANTS.standardOption.delimiter)
-  expect(csvParserPrice.batchSize).toBe(CONSTANTS.standardOption.batchSize)
-})
 
 describe('CsvParserPrice::parse', () => {
   test('should accept a stream and output a stream', (done) => {
@@ -166,40 +166,40 @@ describe('CsvParserPrice::transformCustomData', () => {
 describe('CsvParserPrice::renameHeaders', () => {
   test(`should rename customerGroup.groupName to customerGroup.id
     for compatibility with product price import module`, () => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
-    const modifiedPriceSample = priceSample()
-    delete modifiedPriceSample.customType
-    delete modifiedPriceSample.customField
-    delete modifiedPriceSample.value
+      const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+      const modifiedPriceSample = priceSample()
+      delete modifiedPriceSample.customType
+      delete modifiedPriceSample.customField
+      delete modifiedPriceSample.value
 
-    const result = csvParserPrice.renameHeaders(modifiedPriceSample)
+      const result = csvParserPrice.renameHeaders(modifiedPriceSample)
 
-    expect(result.customerGroup.groupName).toBeFalsy()
-    expect(result.customerGroup.id).toBe('customer-group')
-  })
+      expect(result.customerGroup.groupName).toBeFalsy()
+      expect(result.customerGroup.id).toBe('customer-group')
+    })
 
   test(`should rename channel.key to channel.id
-      for compatibility with product price import module`, () => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
-    const modifiedPriceSample = priceSample()
-    delete modifiedPriceSample.customType
-    delete modifiedPriceSample.customField
-    delete modifiedPriceSample.value
+        for compatibility with product price import module`, () => {
+      const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+      const modifiedPriceSample = priceSample()
+      delete modifiedPriceSample.customType
+      delete modifiedPriceSample.customField
+      delete modifiedPriceSample.value
 
-    const result = csvParserPrice.renameHeaders(modifiedPriceSample)
+      const result = csvParserPrice.renameHeaders(modifiedPriceSample)
 
-    expect(result.channel.key).toBeFalsy()
-    expect(result.channel.id).toBe('my-channel')
-  })
+      expect(result.channel.key).toBeFalsy()
+      expect(result.channel.id).toBe('my-channel')
+    })
 
   test(`should return input if no price.customerGroup
-      or price.customerGroup.groupName and price.channel or
-      price.channel.key`, () => {
-    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+        or price.customerGroup.groupName and price.channel or
+        price.channel.key`, () => {
+      const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
 
-    const result = csvParserPrice.renameHeaders({ foo: 'bar' })
-    expect(result).toEqual({ foo: 'bar' })
-  })
+      const result = csvParserPrice.renameHeaders({ foo: 'bar' })
+      expect(result).toEqual({ foo: 'bar' })
+    })
 })
 
 describe('CsvParserPrice::processCustomField', () => {

@@ -169,56 +169,56 @@ describe('Actions', () => {
   })
 
   it('should build SameForAll attribute actions for a SET of object values',
-  () => {
-    const before = {
-      masterVariant: {
-        attributes: [
-          {
-            name: 'set-attribute-reference-type',
-            value: [
-              { id: '123', referenceTypeId: 'reference-example' },
-              { id: '234', referenceTypeId: 'reference-example' },
-            ],
-          },
-        ],
-      },
-    }
+    () => {
+      const before = {
+        masterVariant: {
+          attributes: [
+            {
+              name: 'set-attribute-reference-type',
+              value: [
+                { id: '123', referenceTypeId: 'reference-example' },
+                { id: '234', referenceTypeId: 'reference-example' },
+              ],
+            },
+          ],
+        },
+      }
 
-    const now = {
-      masterVariant: {
-        attributes: [
-          {
-            name: 'set-attribute-reference-type',
-            value: [
-              { id: '444', referenceTypeId: 'reference-example' },
-              // Test setting null, to test and ensure that objectHash
-              // takes this type into account when calculating a correct
-              // hash for array diff with object values
-              // github.com/benjamine/jsondiffpatch/blob/master/docs/arrays.md
-              null,
-            ],
-          },
-        ],
-      },
-    }
+      const now = {
+        masterVariant: {
+          attributes: [
+            {
+              name: 'set-attribute-reference-type',
+              value: [
+                { id: '444', referenceTypeId: 'reference-example' },
+                // Test setting null, to test and ensure that objectHash
+                // takes this type into account when calculating a correct
+                // hash for array diff with object values
+                // github.com/benjamine/jsondiffpatch/blob/master/docs/arrays.md
+                null,
+              ],
+            },
+          ],
+        },
+      }
 
-    const actions = productsSync.buildActions(now, before, {
-      sameForAllAttributeNames: ['set-attribute-reference-type'],
+      const actions = productsSync.buildActions(now, before, {
+        sameForAllAttributeNames: ['set-attribute-reference-type'],
+      })
+
+      expect(actions).toEqual([
+        {
+          action: 'setAttributeInAllVariants',
+          name: 'set-attribute-reference-type',
+          value: [
+            { id: '444', referenceTypeId: 'reference-example' },
+            // Since objectHash gives the diffpatcher an index,
+            // we expect a null to be given here
+            null,
+          ],
+        },
+      ])
     })
-
-    expect(actions).toEqual([
-      {
-        action: 'setAttributeInAllVariants',
-        name: 'set-attribute-reference-type',
-        value: [
-          { id: '444', referenceTypeId: 'reference-example' },
-          // Since objectHash gives the diffpatcher an index,
-          // we expect a null to be given here
-          null,
-        ],
-      },
-    ])
-  })
 
   it('should build `addVariant` action', () => {
     const newVariant = {
@@ -292,42 +292,42 @@ describe('Actions', () => {
   })
 
   it('should handle mapping actions for new variants without masterVariant',
-  () => {
-    const before = {
-      id: '123',
-      version: 1,
-      masterVariant: {
-        id: 1,
-        sku: 'v1',
-        attributes: [{ name: 'foo', value: 'bar' }],
-      },
-      variants: [
-        { id: 2, sku: 'v2', key: 'v2', attributes: [{ name: 'foo', value: 'qux' }] },
-        { id: 3, sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'baz' }] },
-      ],
-    }
+    () => {
+      const before = {
+        id: '123',
+        version: 1,
+        masterVariant: {
+          id: 1,
+          sku: 'v1',
+          attributes: [{ name: 'foo', value: 'bar' }],
+        },
+        variants: [
+          { id: 2, sku: 'v2', key: 'v2', attributes: [{ name: 'foo', value: 'qux' }] },
+          { id: 3, sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'baz' }] },
+        ],
+      }
 
-    const now = {
-      id: '123',
-      // <-- no masterVariant
-      variants: [
-        // changed
-        { id: 2, sku: 'v2', key: 'v2', attributes: [{ name: 'foo', value: 'another value' }] },
-        // changed
-        { id: 3, sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'i dont care' }] },
-        // new
-        { sku: 'v4', key: 'v4', attributes: [{ name: 'foo', value: 'yet another' }] },
-      ],
-    }
+      const now = {
+        id: '123',
+        // <-- no masterVariant
+        variants: [
+          // changed
+          { id: 2, sku: 'v2', key: 'v2', attributes: [{ name: 'foo', value: 'another value' }] },
+          // changed
+          { id: 3, sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'i dont care' }] },
+          // new
+          { sku: 'v4', key: 'v4', attributes: [{ name: 'foo', value: 'yet another' }] },
+        ],
+      }
 
-    const actions = productsSync.buildActions(now, before)
+      const actions = productsSync.buildActions(now, before)
 
-    expect(actions).toEqual([
-      { action: 'addVariant', sku: 'v4', key: 'v4', attributes: [{ name: 'foo', value: 'yet another' }] },
-      { action: 'setAttribute', variantId: 2, name: 'foo', value: 'another value' },
-      { action: 'setAttribute', variantId: 3, name: 'foo', value: 'i dont care' },
-    ])
-  })
+      expect(actions).toEqual([
+        { action: 'addVariant', sku: 'v4', key: 'v4', attributes: [{ name: 'foo', value: 'yet another' }] },
+        { action: 'setAttribute', variantId: 2, name: 'foo', value: 'another value' },
+        { action: 'setAttribute', variantId: 3, name: 'foo', value: 'i dont care' },
+      ])
+    })
 
   it('should handle unsetting the sku of a variant', () => {
     const before = {
@@ -523,86 +523,86 @@ describe('Actions', () => {
 
   it(
     'should build `setAttribute` action text/ltext attributes with long text',
-  () => {
-    const longText = `
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Nunc ultricies fringilla tortor eu egestas.
-    Praesent rhoncus molestie libero, eu tempor sapien placerat id.
-    Donec commodo nunc sed nulla scelerisque, eu pulvinar augue egestas.
-    Donec at leo dolor. Cras at molestie arcu.
-    Sed non fringilla quam, sit amet ultricies massa.
-    Donec luctus tempus erat, ut suscipit elit varius nec.
-    Mauris dolor enim, aliquet sed nulla et, dignissim lobortis augue.
-    Proin pharetra magna eu neque semper tristique sed.
-    `
+    () => {
+      const longText = `
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Nunc ultricies fringilla tortor eu egestas.
+      Praesent rhoncus molestie libero, eu tempor sapien placerat id.
+      Donec commodo nunc sed nulla scelerisque, eu pulvinar augue egestas.
+      Donec at leo dolor. Cras at molestie arcu.
+      Sed non fringilla quam, sit amet ultricies massa.
+      Donec luctus tempus erat, ut suscipit elit varius nec.
+      Mauris dolor enim, aliquet sed nulla et, dignissim lobortis augue.
+      Proin pharetra magna eu neque semper tristique sed.
+      `
 
-    const newLongText = `Hello, ${longText}`
+      const newLongText = `Hello, ${longText}`
 
-    /* eslint-disable max-len */
-    const before = {
-      masterVariant: {
-        id: 1,
-        attributes: [
-          {
-            name: 'text',
-            value: longText,
-          },
-        ],
-      },
-      variants: [
-        {
-          id: 2,
+      /* eslint-disable max-len */
+      const before = {
+        masterVariant: {
+          id: 1,
           attributes: [
             {
-              name: 'ltext',
-              value: {
-                en: longText,
-              },
+              name: 'text',
+              value: longText,
             },
           ],
         },
-      ],
-    }
-    const now = {
-      masterVariant: {
-        id: 1,
-        attributes: [
+        variants: [
           {
-            name: 'text',
-            value: newLongText,
+            id: 2,
+            attributes: [
+              {
+                name: 'ltext',
+                value: {
+                  en: longText,
+                },
+              },
+            ],
           },
         ],
-      },
-      variants: [
-        {
-          id: 2,
+      }
+      const now = {
+        masterVariant: {
+          id: 1,
           attributes: [
             {
-              name: 'ltext',
-              value: {
-                en: newLongText,
-              },
+              name: 'text',
+              value: newLongText,
             },
           ],
         },
-      ],
-    }
-    /* eslint-enable max-len */
-    const actions = productsSync.buildActions(now, before)
+        variants: [
+          {
+            id: 2,
+            attributes: [
+              {
+                name: 'ltext',
+                value: {
+                  en: newLongText,
+                },
+              },
+            ],
+          },
+        ],
+      }
+      /* eslint-enable max-len */
+      const actions = productsSync.buildActions(now, before)
 
-    expect(actions).toEqual([
-      {
-        action: 'setAttribute',
-        variantId: 1,
-        name: 'text',
-        value: newLongText,
-      },
-      {
-        action: 'setAttribute',
-        variantId: 2,
-        name: 'ltext',
-        value: { en: newLongText },
-      },
-    ])
-  })
+      expect(actions).toEqual([
+        {
+          action: 'setAttribute',
+          variantId: 1,
+          name: 'text',
+          value: newLongText,
+        },
+        {
+          action: 'setAttribute',
+          variantId: 2,
+          name: 'ltext',
+          value: { en: newLongText },
+        },
+      ])
+    })
 })

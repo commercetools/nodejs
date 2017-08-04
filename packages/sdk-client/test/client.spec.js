@@ -104,15 +104,15 @@ describe('execute', () => {
     })
 
     return client.execute(request)
-    .then((response) => {
-      expect(response).toEqual({
-        body: {
-          id: '123',
-          version: 1,
-        },
-        statusCode: 200,
+      .then((response) => {
+        expect(response).toEqual({
+          body: {
+            id: '123',
+            version: 1,
+          },
+          statusCode: 200,
+        })
       })
-    })
   })
 
   it('execute and reject a request', () => {
@@ -126,15 +126,15 @@ describe('execute', () => {
     })
 
     return client.execute(request)
-    .then(() =>
-      Promise.reject(
-        'This function should never be called, the response was rejected',
-      ),
-    )
-    .catch((error) => {
-      expect(error.message).toEqual('Invalid password')
-      return Promise.resolve()
-    })
+      .then(() =>
+        Promise.reject(
+          'This function should never be called, the response was rejected',
+        ),
+      )
+      .catch((error) => {
+        expect(error.message).toEqual('Invalid password')
+        return Promise.resolve()
+      })
   })
 
   describe('ensure correct functions are used to resolve the promise', () => {
@@ -155,9 +155,9 @@ describe('execute', () => {
       })
 
       return client.execute(request)
-      .then(() => {
-        expect(customResolveSpy).toHaveBeenCalled()
-      })
+        .then(() => {
+          expect(customResolveSpy).toHaveBeenCalled()
+        })
     })
 
     it('reject', () => {
@@ -178,9 +178,9 @@ describe('execute', () => {
       })
 
       return client.execute(request)
-      .catch(() => {
-        expect(customRejectSpy).toHaveBeenCalled()
-      })
+        .catch(() => {
+          expect(customRejectSpy).toHaveBeenCalled()
+        })
     })
   })
 })
@@ -269,13 +269,13 @@ describe('process', () => {
       request,
       () => Promise.resolve('OK'),
     )
-    .then((response) => {
-      expect(response).toEqual([
-        'OK',
-        'OK',
-        'OK',
-      ])
-    })
+      .then((response) => {
+        expect(response).toEqual([
+          'OK',
+          'OK',
+          'OK',
+        ])
+      })
   })
 
   it('process and resolve pagination by preserving original query', () => {
@@ -347,15 +347,15 @@ describe('process', () => {
       request,
       () => Promise.resolve('OK'),
     )
-    .then(() =>
-      Promise.reject(
-        'This function should never be called, the response was rejected',
-      ),
-    )
-    .catch((error) => {
-      expect(error.message).toEqual('Invalid password')
-      return Promise.resolve()
-    })
+      .then(() =>
+        Promise.reject(
+          'This function should never be called, the response was rejected',
+        ),
+      )
+      .catch((error) => {
+        expect(error.message).toEqual('Invalid password')
+        return Promise.resolve()
+      })
   })
 
   it('process and reject on rejection from user', () => {
@@ -371,13 +371,13 @@ describe('process', () => {
       request,
       () => Promise.reject('Rejection from user'),
     )
-    .then(() =>
-      Promise.reject(
-        'This function should never be called, the response was rejected',
-      ),
-    )
-    .catch((error) => {
-      expect(error).toEqual('Rejection from user')
-    })
+      .then(() =>
+        Promise.reject(
+          'This function should never be called, the response was rejected',
+        ),
+      )
+      .catch((error) => {
+        expect(error).toEqual('Rejection from user')
+      })
   })
 })

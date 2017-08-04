@@ -44,7 +44,7 @@ describe('createService', () => {
 
   it('should throw if project key is missing', () => {
     expect(() => createService(fakeService)).toThrowError(
-     /No project defined. Please enter a project key/,
+      /No project defined. Please enter a project key/,
     )
   })
 
@@ -56,19 +56,19 @@ describe('createService', () => {
 
   it('should throw if definition prop (type) is missing', () => {
     expect(() => createService({ endpoint: '/foo' })).toThrowError(
-     /Definition is missing required parameter type/,
+      /Definition is missing required parameter type/,
     )
   })
 
   it('should throw if definition prop (endpoint) is missing', () => {
     expect(() => createService({ type: 'foo' })).toThrowError(
-     /Definition is missing required parameter endpoint/,
+      /Definition is missing required parameter endpoint/,
     )
   })
 
   it('should throw if definition prop (features) is missing', () => {
     expect(() => createService({ type: 'foo', endpoint: '/foo' })).toThrowError(
-     /Definition is missing required parameter features/,
+      /Definition is missing required parameter features/,
     )
   })
 
@@ -76,14 +76,14 @@ describe('createService', () => {
     expect(
       () => createService({ type: 'foo', endpoint: '/foo', features: 'wrong' }),
     ).toThrowError(
-     /Definition requires `features` to be a non empty array/,
+      /Definition requires `features` to be a non empty array/,
     )
   })
   it('should throw if definition prop (features) is an empty array', () => {
     expect(
       () => createService({ type: 'foo', endpoint: '/foo', features: [] }),
     ).toThrowError(
-     /Definition requires `features` to be a non empty array/,
+      /Definition requires `features` to be a non empty array/,
     )
   })
 
@@ -133,9 +133,9 @@ describe('createService', () => {
     it('full endpoint', () => {
       expect(
         createService(options, projectKey)
-        .byId('123')
-        .expand('channel')
-        .build(),
+          .byId('123')
+          .expand('channel')
+          .build(),
       ).toBe('/my-project1/foo/123?expand=channel')
     })
   })

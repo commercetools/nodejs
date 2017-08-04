@@ -220,7 +220,7 @@ describe('mapCustomFields::mapSet', () => {
     const result = mapCustomFields.mapSet(moneySet, elementType)
     expect(result.error.length).toBe(1)
     expect(result.error[0])
-    .toEqual('The value \'abi\' is not a valid boolean value')
+      .toEqual('The value \'abi\' is not a valid boolean value')
     expect(result.data.length).toBe(3)
   })
 

@@ -4,7 +4,7 @@ export default function validate (
   funcName: string,
   request: Object,
   options: Object = { allowedMethods: METHODS },
-  ) {
+) {
   if (!request)
     // eslint-disable-next-line max-len
     throw new Error(`The "${funcName}" function requires a "Request" object as an argument. See https://commercetools.github.io/nodejs/sdk/Glossary.html#clientrequest`)
