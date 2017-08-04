@@ -6,7 +6,7 @@ import * as diffpatcher from './utils/diffpatcher'
 
 export const actionGroups = ['base']
 
-function createcustomerGroupMapActions (mapActionGroup) {
+function createCustomerGroupMapActions (mapActionGroup) {
   return function doMapActions (diff, newObj, oldObj) {
     const allActions = []
 
@@ -20,7 +20,7 @@ function createcustomerGroupMapActions (mapActionGroup) {
 
 export default (config) => {
   const mapActionGroup = createMapActionGroup(config)
-  const doMapActions = createcustomerGroupMapActions(mapActionGroup)
+  const doMapActions = createCustomerGroupMapActions(mapActionGroup)
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
   return { buildActions }
 }
