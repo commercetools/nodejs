@@ -26,7 +26,7 @@ Export prices from the commercetools platform.
 Options:
   --help, -h          Show help text.                                  [boolean]
   --version           Show version number                              [boolean]
-  --input, -i         Path to CSV template.
+  --input, -i         Path to CSV template.                           [required]
   --output, -o        Path to output file.                   [default: "stdout"]
   --apiUrl            The host URL of the HTTP API service.
                                               [default: "https://api.sphere.io"]
@@ -47,17 +47,17 @@ Options:
 ```
 
 #### Info on flags
-- The `--input` flag specifies the path to an optional CSV template file.
+- The `--input` flag specifies the path to the CSV template file.
   - Only the first line is read and subsequent lines (if present) will be ignored
   - The delimiter must match the delimiter passed in by `--delimiter` (or the default delimiter)
 - The `--output` flag specifies where to output/save the exported prices.
   - If the file specified already exists, it will be overwritten.
   - The default location for status report logging is the standard output.
   - If no output path is specified, the exported prices will be logged to the standard output.
-- The `--delimiter` flag specifies the delimiter used in the output file if CSV. Defaults to `','` if omitted.
-- The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate is on the products containing the prices and not on the prices themselves. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](http://dev.commercetools.com/http-api.html#predicates)
+- The `--delimiter` flag specifies the delimiter used in the input and output file if CSV. Defaults to `','` if omitted.
+- The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate is on the products containing the prices (`product-proections` endpoint) and not on the prices themselves. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](http://dev.commercetools.com/http-api.html#predicates)
 - The `--staged` flag specifies the projection of the products from which the prices should be fetched.
-  - If passed `true`, prices from published and unplished products are retrieved
+  - If passed `true`, prices from published and unpublished products are retrieved
   - If passed `false` (or omitted), only prices from published products are retrieved
 
 ### JS
@@ -97,7 +97,7 @@ const priceExporter = new PriceExporter(options, logger)
 // Register error listener
 outputStream.on('error', errorHandler)
 
-outputStream.on('finish', () => console.log('done with export'))
+outputStream.on('finish', () => process.stdout.write('done with export'))
 
 priceExporter.run(outputStream)
 ```

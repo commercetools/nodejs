@@ -18,6 +18,7 @@ export type Configuration = {
   exportFormat: string;
   predicate: string;
   staged: boolean;
+  csvHeaders: Array<string>;
 }
 
 export type ExporterOptions = {

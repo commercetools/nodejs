@@ -127,10 +127,15 @@ const errorHandler = (errors) => {
   process.exitCode = 1
 }
 
+// Retrieve the headers from the input file
+// Only the first line of the file is read
 const getHeaders = _args => (
   new Promise((resolve, reject) => {
     if (!_args.input)
-      resolve()
+      if (_args.exportFormat === 'json')
+        resolve()
+      else
+        reject('Input file is requred for `CSV` export type')
     const rl = readline.createInterface({
       input: _args.input,
     })
@@ -170,7 +175,7 @@ getHeaders(args)
       projectKey: args.projectKey,
       credentials,
     }
-    const constructorOptions = {
+    const priceExporterOptions = {
       apiConfig,
       accessToken: args.accessToken,
       delimiter: args.delimiter,
@@ -186,7 +191,7 @@ getHeaders(args)
       verbose: npmlog.verbose.bind(this, ''),
     }
 
-    return new PriceExporter(constructorOptions, logger)
+    return new PriceExporter(priceExporterOptions, logger)
   })
   .then(priceExporter => priceExporter.run(args.output))
   .catch(errorHandler)

@@ -1,6 +1,17 @@
 import streamtest from 'streamtest'
-import { stripIndent } from 'common-tags'
+import csv from 'fast-csv'
+import lodash from 'lodash'
 import PriceExporter from '../src/main'
+import sampleProduct from './helpers/sampleProduct.json'
+import expectedPrices from './helpers/expectedPrices.json'
+
+jest.mock('fast-csv', () => ({
+  createWriteStream: jest.fn(() => ({ pipe: jest.fn() })),
+}))
+
+jest.mock('lodash', () => ({
+  flattenDeep: jest.fn(data => data),
+}))
 
 describe('PriceExporter', () => {
   const logger = {
@@ -17,6 +28,7 @@ describe('PriceExporter', () => {
         projectKey: 'project-key',
       },
       accessToken: 'myAccessToken',
+      csvHeaders: ['sku', 'value'],
     }, logger)
   })
 
@@ -31,6 +43,19 @@ describe('PriceExporter', () => {
       )
     })
 
+    it('throw if no `headers` array in options and export is csv', () => {
+      expect(() => new PriceExporter({
+        apiConfig: 'config',
+        exportFormat: 'csv',
+      })).toThrowError(
+        /The constructor must be passed a `csvHeaders` array for CSV export/,
+      )
+    })
+
+    it('not throw if no `headers` array in options and export is json', () => {
+      expect(() => new PriceExporter({ apiConfig: 'config' })).not.toThrow()
+    })
+
     it('should set default properties', () => {
       expect(priceExporter.apiConfig).toEqual({
         projectKey: 'project-key',
@@ -42,18 +67,89 @@ describe('PriceExporter', () => {
     })
   })
 
+
   describe('::run', () => {
-    let processMock
-    const sampleResult = {
-      body: {
-        results: [],
-      },
-    }
-    beforeEach(() => {
-      processMock = jest.fn((request, processFn) => (
-        processFn(sampleResult)
-          .then(() => Promise.resolve(['foo', 'bar']))
+    it('should call `_processStream` with outputStream if json', async () => {
+      jest.mock('fast-csv', () => ({
+        createWriteStream: jest.fn(() => ({ pipe: jest.fn() })),
+      }))
+      priceExporter._getProducts = jest.fn(() => Promise.resolve())
+      const outputStream = streamtest['v2'].toText(() => {})
+      priceExporter.config.exportFormat = 'json'
+      await priceExporter.run(outputStream)
+      expect(priceExporter._getProducts).toBeCalled()
+      expect(priceExporter._getProducts.mock.calls[0][0])
+        .toEqual(outputStream)
+      expect(csv.createWriteStream).not.toBeCalled()
+    })
+
+    it('should call `_processStream` with outputStream if csv', async () => {
+      priceExporter._getProducts = jest.fn(() => Promise.resolve())
+      const outputStream = streamtest['v2'].toText(() => {})
+
+      priceExporter.config.exportFormat = 'csv'
+      await priceExporter.run(outputStream)
+      expect(priceExporter._getProducts).toBeCalled()
+      expect(priceExporter._getProducts.mock.calls[0][0])
+        .toEqual(outputStream)
+      expect(csv.createWriteStream).toBeCalled()
+    })
+  })
+
+  describe('::_writePrices', () => {
+    it('should write json output to stream', (done) => {
+      const pipeStream = { write: jest.fn(() => done()) }
+      const sample = ['price-1', 'price-2']
+      priceExporter._writePrices(sample, pipeStream)
+
+      expect(lodash.flattenDeep).not.toBeCalled()
+      expect(pipeStream.write).toHaveBeenCalledTimes(2)
+      expect(pipeStream.write.mock.calls[0][0]).toBe('price-1')
+      expect(pipeStream.write.mock.calls[1][0]).toBe('price-2')
+    })
+
+    it('should flatten csv output and write to stream', (done) => {
+      const pipeStream = { write: jest.fn(() => done()) }
+      const sample = ['price-1', 'price-2']
+      priceExporter.config.exportFormat = 'csv'
+      priceExporter._writePrices(sample, pipeStream)
+
+      expect(lodash.flattenDeep).toBeCalled()
+      expect(pipeStream.write).toHaveBeenCalledTimes(2)
+      expect(pipeStream.write.mock.calls[0][0]).toBe('price-1')
+      expect(pipeStream.write.mock.calls[1][0]).toBe('price-2')
+    })
+  })
+
+  describe('::_getProducts', () => {
+    it('should fetch products using `process` method', () => {
+      const sampleResult = {
+        body: {
+          results: [],
+        },
+      }
+      const processMock = jest.fn((request, processFn) => (
+        processFn(sampleResult).then(() => Promise.resolve())
       ))
+      priceExporter.client.process = processMock
+      const outputStream = { emit: jest.fn() }
+      priceExporter._getProducts(outputStream)
+      expect(processMock).toHaveBeenCalledTimes(1)
+      expect(processMock.mock.calls[0][0])
+      .toEqual({
+        uri: '/project-key/product-projections?staged=false',
+        method: 'GET',
+        headers: { Authorization: 'Bearer myAccessToken' },
+      })
+    })
+
+    it('should close stream after writing data', async () => {
+      priceExporter.client.process = jest.fn(() => Promise.resolve())
+      const outputStream = { emit: jest.fn() }
+      const pipeStream = { end: jest.fn() }
+      await priceExporter._getProducts(outputStream, pipeStream)
+
+      expect(pipeStream.end).toBeCalled()
     })
 
     it('should emit `error` on output stream if error occurs', (done) => {
@@ -67,38 +163,22 @@ describe('PriceExporter', () => {
         spy.mockRestore()
         done()
       })
-
-      priceExporter.run(outputStream)
-    })
-
-    it('should fetch discount codes using `process` method', async () => {
-      priceExporter.client.process = processMock
-      const outputStream = streamtest['v2'].toText(() => {})
-
-      await priceExporter.run(outputStream)
-      expect(processMock).toHaveBeenCalledTimes(1)
-      expect(processMock.mock.calls[0][0])
-        .toEqual({
-          uri: '/project-key/product-projections?staged=false',
-          method: 'GET',
-          headers: {
-            Authorization: 'Bearer myAccessToken',
-          },
-        })
+      priceExporter._getProducts(outputStream)
     })
   })
 
-  describe('::_handlePrices', () => {
+  describe('::_flattenPrices', () => {
     it(
       'should resolve price data and not resolve price references if json',
       async () => {
+        PriceExporter._flattenPricesArray = jest.fn(data => data)
         const sample = ['price1', 'price2']
         priceExporter.config.exportFormat = 'json'
-        priceExporter._preparePrices = jest.fn()
+        priceExporter._resolveReferences = jest.fn()
 
-        const actual = await priceExporter._handlePrices(sample)
+        const actual = await priceExporter._flattenPrices(sample)
         expect(actual).toEqual(['price1', 'price2'])
-        expect(priceExporter._preparePrices).not.toHaveBeenCalled()
+        expect(priceExporter._resolveReferences).not.toHaveBeenCalled()
       },
     )
 
@@ -109,62 +189,16 @@ describe('PriceExporter', () => {
         'prepared-price-2',
       ]
       priceExporter.config.exportFormat = 'csv'
-      priceExporter._preparePrices = jest.fn()
-      priceExporter._preparePrices.mockReturnValue(expected)
+      priceExporter._resolveReferences = jest.fn()
+      priceExporter._resolveReferences.mockReturnValue(expected)
 
-      const actual = await priceExporter._handlePrices(sample)
+      const actual = await priceExporter._flattenPrices(sample)
       expect(actual).toEqual(expected)
-      expect(priceExporter._preparePrices).toHaveBeenCalled()
+      expect(priceExporter._resolveReferences).toHaveBeenCalled()
     })
   })
 
-  describe('::_handleOutput', () => {
-    it('should write `JSON` output to stream', (done) => {
-      priceExporter.config.exportFormat = 'json'
-      const sample = ['price-1', 'price-2', 'price-3', 'price-4']
-      const expected = {
-        prices: ['price-1', 'price-2', 'price-3', 'price-4'],
-      }
-
-      const outputStream = streamtest['v2'].toText((error, result) => {
-        expect(error).toBeFalsy()
-        expect(result).toEqual(JSON.stringify(expected))
-        done()
-      })
-
-      priceExporter._handleOutput(sample, outputStream)
-    })
-
-    it('should write `CSV` output to stream', (done) => {
-      priceExporter.config.exportFormat = 'csv'
-      priceExporter.config.delimiter = ','
-      const sample = [
-        {
-          name: 'price-1',
-          value: 500,
-        },
-        {
-          name: 'price-2',
-          value: 700,
-        },
-      ]
-      const expected = stripIndent`
-        name,value
-        price-1,500
-        price-2,700
-      `
-
-      const outputStream = streamtest['v2'].toText((error, result) => {
-        expect(error).toBeFalsy()
-        expect(result).toEqual(expected)
-        done()
-      })
-
-      priceExporter._handleOutput(sample, outputStream)
-    })
-  })
-
-  describe('::_preparePrices', () => {
+  describe('::_resolveReferences', () => {
     const sample = [
       {
         prices: ['price-1', 'price-2'],
@@ -174,16 +208,16 @@ describe('PriceExporter', () => {
       },
     ]
     it('call `resolveReferences` on each price for each ref', async () => {
-      priceExporter._resolveReferences = jest.fn((string, price) => (
+      priceExporter._resolveEachReferenceType = jest.fn((string, price) => (
         Promise.resolve(price)
       ))
 
-      await priceExporter._preparePrices(sample)
-      expect(priceExporter._resolveReferences).toHaveBeenCalledTimes(12)
+      await priceExporter._resolveReferences(sample)
+      expect(priceExporter._resolveEachReferenceType).toHaveBeenCalledTimes(12)
     })
 
     it('should flatten arrays of nested price objects', async () => {
-      priceExporter._resolveReferences = jest.fn((string, price) => (
+      priceExporter._resolveEachReferenceType = jest.fn((string, price) => (
         Promise.resolve({ price }) // Nests by one layer on each return
       ))
       const expected = [[
@@ -197,19 +231,20 @@ describe('PriceExporter', () => {
           'price.price.price': 'price-7',
         },
         ]]
-      const actual = await priceExporter._preparePrices(sample)
+      const actual = await priceExporter._resolveReferences(sample)
       expect(actual).toEqual(expected)
     })
   })
 
-  describe('::_resolveReferences', () => {
+  describe('::_resolveEachReferenceType', () => {
     it('not modify the object if the `type` key does not exist', async () => {
       const price = { foo: 'bar' }
-      const actual = await priceExporter._resolveReferences('type', price)
+      const actual = await priceExporter
+        ._resolveEachReferenceType('type', price)
       expect(actual).toEqual({ foo: 'bar' })
     })
 
-    describe('::_resolveReferences: `custom`', () => {
+    describe('::_resolveEachReferenceType: `custom`', () => {
       let price
       beforeEach(() => {
         price = {
@@ -237,7 +272,8 @@ describe('PriceExporter', () => {
           customType: 'myCustomType',
         }
 
-        const actual = await priceExporter._resolveReferences('custom', price)
+        const actual = await priceExporter
+          ._resolveEachReferenceType('custom', price)
         expect(priceExporter.client.execute).not.toHaveBeenCalled()
         expect(actual).toEqual(expected)
       })
@@ -259,14 +295,15 @@ describe('PriceExporter', () => {
           customType: 'myCustomType2',
         }
 
-        const actual = await priceExporter._resolveReferences('custom', price)
+        const actual = await priceExporter
+          ._resolveEachReferenceType('custom', price)
         expect(priceExporter.client.execute).toHaveBeenCalled()
         expect(priceExporter._cache['custom-type-id']).toBe('myCustomType2')
         expect(actual).toEqual(expected)
       })
     })
 
-    describe('::_resolveReferences: `channel`', () => {
+    describe('::_resolveEachReferenceType: `channel`', () => {
       let price
       beforeEach(() => {
         price = {
@@ -288,7 +325,8 @@ describe('PriceExporter', () => {
           },
         }
 
-        const actual = await priceExporter._resolveReferences('channel', price)
+        const actual = await priceExporter
+          ._resolveEachReferenceType('channel', price)
         expect(priceExporter.client.execute).not.toHaveBeenCalled()
         expect(actual).toEqual(expected)
       })
@@ -309,14 +347,15 @@ describe('PriceExporter', () => {
           },
         }
 
-        const actual = await priceExporter._resolveReferences('channel', price)
+        const actual = await priceExporter
+          ._resolveEachReferenceType('channel', price)
         expect(priceExporter.client.execute).toHaveBeenCalled()
         expect(priceExporter._cache['channel-id']).toBe('myChannelKey2')
         expect(actual).toEqual(expected)
       })
     })
 
-    describe('::_resolveReferences: `customerGroup`', () => {
+    describe('::_resolveEachReferenceType: `customerGroup`', () => {
       let price
       beforeEach(() => {
         price = {
@@ -338,7 +377,7 @@ describe('PriceExporter', () => {
           },
         }
 
-        const actual = await priceExporter._resolveReferences(
+        const actual = await priceExporter._resolveEachReferenceType(
           'customerGroup',
           price,
         )
@@ -362,7 +401,7 @@ describe('PriceExporter', () => {
           },
         }
 
-        const actual = await priceExporter._resolveReferences(
+        const actual = await priceExporter._resolveEachReferenceType(
           'customerGroup',
           price,
         )
@@ -405,6 +444,14 @@ describe('PriceExporter', () => {
             Authorization: 'Bearer myAccessToken',
           },
         })
+    })
+  })
+
+  describe('_getPrices', () => {
+    it('extracts prices from product and groups by sku', () => {
+      const expected = expectedPrices
+      const actual = PriceExporter._getPrices(sampleProduct)
+      expect(actual).toEqual(expected)
     })
   })
 })

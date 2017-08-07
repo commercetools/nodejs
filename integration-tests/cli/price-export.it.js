@@ -38,27 +38,33 @@ describe('Price Exporter', () => {
       }
       return clearData(apiConfig, 'products')
     })
-    .then(() => clearData(apiConfig, 'types'))
-    .then(() => clearData(apiConfig, 'channels'))
-    .then(() => clearData(apiConfig, 'customerGroups'))
-    .then(() => clearData(apiConfig, 'productTypes'))
-    .then(() => createData(apiConfig, 'productTypes', [sampleProductType]))
-    .then((data) => {
-      productType.id = data[0].body.id
-      return createData(apiConfig, 'customerGroups', [sampleCustomerGroup])
-    })
-    .then((data) => {
-      customerGroup.id = data[0].body.id
-      return createData(apiConfig, 'channels', [sampleChannel])
-    })
-    .then((data) => {
-      channel.id = data[0].body.id
+    .then(() => (
+      Promise.all([
+        clearData(apiConfig, 'types'),
+        clearData(apiConfig, 'channels'),
+        clearData(apiConfig, 'productTypes'),
+        clearData(apiConfig, 'customerGroups'),
+      ])
+    ))
+    .then(() => (
+      Promise.all([
+        createData(apiConfig, 'types', [sampleCustomType]),
+        createData(apiConfig, 'channels', [sampleChannel]),
+        createData(apiConfig, 'productTypes', [sampleProductType]),
+        createData(apiConfig, 'customerGroups', [sampleCustomerGroup]),
+      ])
+    ))
+    .then(([
+      createdType,
+      createdChannel,
+      createdProductType,
+      createdCustomerGroup,
+      ]) => {
+      customType.id = createdType[0].body.id
+      channel.id = createdChannel[0].body.id
+      productType.id = createdProductType[0].body.id
+      customerGroup.id = createdCustomerGroup[0].body.id
 
-
-      return createData(apiConfig, 'types', [sampleCustomType])
-    })
-    .then((data) => {
-      customType.id = data[0].body.id
       const sampleProducts = createProducts(
         productType,
         customerGroup,
@@ -71,10 +77,15 @@ describe('Price Exporter', () => {
   , 10000)
 
   afterAll(() => clearData(apiConfig, 'products')
-    .then(() => clearData(apiConfig, 'types'))
-    .then(() => clearData(apiConfig, 'channels'))
-    .then(() => clearData(apiConfig, 'customerGroups'))
-    .then(() => clearData(apiConfig, 'productTypes'))
+
+    .then(() => (
+      Promise.all([
+        clearData(apiConfig, 'types'),
+        clearData(apiConfig, 'channels'),
+        clearData(apiConfig, 'productTypes'),
+        clearData(apiConfig, 'customerGroups'),
+      ])
+    ))
     .catch(process.stderr),
   )
 
@@ -137,44 +148,7 @@ describe('Price Exporter', () => {
   })
 
   describe('CSV export', () => {
-    it('should resolve refs and export all fields if no template', (done) => {
-      const csvFilePath = tmp.fileSync().name
-      exec(`${bin} -o ${csvFilePath} -p ${projectKey} -f csv --staged`,
-        (cliError, stdout, stderr) => {
-          expect(cliError).toBeFalsy()
-          expect(stderr).toBeFalsy()
-          expect(stdout).toMatch(/Export operation completed successfully/)
-
-          fs.readFile(csvFilePath, { encoding: 'utf8' }, (error, data) => {
-            expect(error).toBeFalsy()
-            const expected = [
-              'variant-sku',
-              'value.currencyCode',
-              'value.centAmount',
-              'id',
-              'country',
-              'customerGroup.groupName',
-              'channel.key',
-              'validFrom',
-              'validUntil',
-              'customField.loremIpsum',
-              'customType',
-            ]
-            csv({ flatKeys: true }).fromString(data)
-              .on('json', (jsonObj) => {
-                expect(Object.keys(jsonObj))
-                  .toEqual(expected)
-                expect(jsonObj['customerGroup.groupName'])
-                  .toBe('customerGroupName')
-                expect(jsonObj['channel.key']).toBe('my-channel-key')
-                expect(jsonObj.customType).toBe('my-custom-type-key')
-              })
-              .on('done', () => done())
-          })
-        },
-      )
-    })
-    it('should export only fields given in template', (done) => {
+    it('should resolve refs ans export only fields in template', (done) => {
       const template = path.join(
         __dirname,
         'expected-output',
@@ -200,6 +174,10 @@ describe('Price Exporter', () => {
             csv({ flatKeys: true }).fromString(data)
               .on('json', (jsonObj) => {
                 expect(Object.keys(jsonObj)).toEqual(expected)
+                expect(jsonObj['customerGroup.groupName'])
+                  .toBe('customerGroupName')
+                expect(jsonObj['channel.key']).toBe('my-channel-key')
+                expect(jsonObj.customType).toBe('my-custom-type-key')
               })
               .on('done', () => done())
           })

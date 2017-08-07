@@ -26,7 +26,6 @@ import JSONStream from 'JSONStream'
 import Promise from 'bluebird'
 import { flatten } from 'flat'
 import { flattenDeep } from 'lodash'
-import * as utils from './utils'
 import pkg from '../package.json'
 
 export default class PriceExporter {
@@ -36,7 +35,7 @@ export default class PriceExporter {
   config: Configuration;
   logger: LoggerOptions;
   _cache: Object;
-  _resolveReferences: Function;
+  _resolveEachReferenceType: Function;
 
   constructor (
     options: ExporterOptions,
@@ -44,6 +43,10 @@ export default class PriceExporter {
   ) {
     if (!options.apiConfig)
       throw new Error('The constructor must be passed an `apiConfig` object')
+    if (!options.csvHeaders && options.exportFormat === 'csv')
+      throw new Error(
+        'The constructor must be passed a `csvHeaders` array for CSV export',
+      )
     this.apiConfig = options.apiConfig
     this.client = createClient({
       middlewares: [
@@ -73,89 +76,91 @@ export default class PriceExporter {
     }
     this._cache = {}
 
-    this._resolveReferences = this._resolveReferences.bind(this)
+    this._resolveEachReferenceType = this._resolveEachReferenceType.bind(this)
   }
 
   run (outputStream: stream$Writable) {
     this.logger.info('Starting Export')
+    if (this.config.exportFormat === 'csv') {
+      const csvOptions = {
+        headers: this.config.csvHeaders,
+        delimiter: this.config.delimiter,
+      }
+      const csvStream = csv.createWriteStream(csvOptions)
+      csvStream.pipe(outputStream)
+      this._getProducts(outputStream, csvStream)
+    } else {
+      // This makes the exported data compatible with the importer
+      // Newlines make data more human-readable
+      const jsonStream = JSONStream.stringify('{"prices": [\n', ',\n', '\n]}')
+      jsonStream.pipe(outputStream)
+      this._getProducts(outputStream, jsonStream)
+    }
+  }
+
+  _getProducts (
+    outputStream: stream$Writable,
+    pipeStream: stream$Writable,
+  ) {
     const request = this._buildRequest('productProjections')
-    this.client.process(request, (data) => {
-      const products = data.body.results
+    this.client.process(request, ({ body: { results: products } }) => {
       this.logger.verbose(`Fetched ${products.length} products`)
-      let processedBatch = []
-      return Promise.map(products, product => utils._getPrices(product))
-      .then((pricesArray) => {
-        processedBatch = this._handlePrices(pricesArray)
-        return Promise.resolve(processedBatch)
+      return Promise.map(products, product => PriceExporter._getPrices(product))
+      .then(pricesArray => this._flattenPrices(pricesArray))
+      .then((allPricesBatches) => {
+        this._writePrices(allPricesBatches, pipeStream)
       })
-    }, { accumulate: true })
-    .then((allPricesBatches) => {
-      this._handleOutput(allPricesBatches, outputStream)
+    }, { accumulate: false })
+    .then(() => {
+      if (outputStream !== process.stdout)
+        pipeStream.end()
+      this.logger.info('Export operation completed successfully')
     })
     .catch((e) => {
       outputStream.emit('error', e)
     })
   }
 
-  _handlePrices (productPricesArray: Array<UnprocessedPriceObject>) {
-    const flatPrices = utils._flattenPricesArray(productPricesArray)
+  _flattenPrices (productPricesArray: Array<UnprocessedPriceObject>) {
+    const flatPrices = flattenDeep(productPricesArray)
     this.logger.verbose('Processing prices from products')
-    if (this.config.exportFormat === 'json')
-      return Promise.resolve(flatPrices)
-    return Promise.resolve(this._preparePrices(flatPrices))
+    if (this.config.exportFormat === 'csv')
+      return Promise.resolve(this._resolveReferences(flatPrices))
+    return Promise.resolve(flatPrices)
   }
 
-  _handleOutput (
-    retrievedPrices: Array<ProcessedPriceObject>,
-    outputStream: stream$Writable,
+  _writePrices (
+    retrievedPrices: Array<any>,
+    pipeStream: stream$Writable,
   ) {
-    if (this.config.exportFormat === 'json') {
-      // This makes the exported data compatible with the importer
-      const jsonPrices = { prices: retrievedPrices }
-
-      const jsonStream = JSONStream.stringify(false)
-      jsonStream.pipe(outputStream)
-
-      jsonStream.write(jsonPrices)
-      if (outputStream !== process.stdout)
-        jsonStream.end()
-      this.logger.info('Export operation completed successfully')
-    } else {
+    if (this.config.exportFormat === 'csv') {
       const flatCSVPrices = flattenDeep(retrievedPrices)
-      const headers = this.config.csvHeaders || utils._getHeaders(flatCSVPrices)
-      const csvOptions = {
-        headers,
-        delimiter: this.config.delimiter,
-      }
-
-      const csvStream = csv.createWriteStream(csvOptions)
-      csvStream.pipe(outputStream)
-
       flatCSVPrices.forEach((price) => {
-        csvStream.write(price)
+        pipeStream.write(price)
       })
-      csvStream.end()
       this.logger.verbose(`Exported ${flatCSVPrices.length} prices`)
-      this.logger.info('Export operation completed successfully')
-    }
+    } else
+        retrievedPrices.forEach((skuPriceGroup) => {
+          pipeStream.write(skuPriceGroup)
+        })
   }
 
-  _preparePrices (flatPrices: Array<UnprocessedPriceObject>) {
+  _resolveReferences (flatPrices: Array<UnprocessedPriceObject>) {
     return Promise.map(flatPrices, variantPrice => (
       Promise.map(variantPrice.prices, individualPrice => (
-        this._resolveReferences('channel', individualPrice)
-        .then(price => this._resolveReferences('customerGroup', price))
-        .then(price => this._resolveReferences('custom', price))
+        this._resolveEachReferenceType('channel', individualPrice)
+        .then(price => this._resolveEachReferenceType('customerGroup', price))
+        .then(price => this._resolveEachReferenceType('custom', price))
       ))
-      .then((prices: Array<ProcessedPriceObject>) => {
-        if (prices.length)
-          return prices.map(price => flatten(price))
-        return prices
-      })
+      .then((prices: Array<ProcessedPriceObject>) => (
+        prices.length
+          ? prices.map(flatten)
+          : prices
+      ))
     ), { concurrency: 10 }) // Add currency to maximize cache usage
   }
 
-  _resolveReferences (
+  _resolveEachReferenceType (
     type: string,
     price: Object,
   ): Promise<Object> {
@@ -266,5 +271,32 @@ export default class PriceExporter {
     }
 
     return service
+  }
+
+  // Get prices from products
+  static _getPrices (product: Object) {
+    const masterVariantPricesArray = product.masterVariant.prices
+    // Get the price array for the master variant
+    const modifiedMVP = masterVariantPricesArray.map(price => (
+      { 'variant-sku': product.masterVariant.sku, ...price }
+    ))
+    // Loop through the variants array
+    const variantPrices = product.variants.map((variant) => {
+      // Get the price array from each variant in the variant array
+      const singleVariantPrice = variant.prices.map(price => (
+        { 'variant-sku': variant.sku, ...price }
+      ))
+      return {
+        'variant-sku': variant.sku,
+        prices: singleVariantPrice,
+      }
+    })
+    const masterVariantPrices = {
+      'variant-sku': product.masterVariant.sku,
+      prices: modifiedMVP,
+    }
+    variantPrices.push(masterVariantPrices)
+
+    return variantPrices
   }
 }
