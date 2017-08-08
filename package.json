@@ -74,7 +74,7 @@
     "rimraf": "2.6.1",
     "streamtest": "1.2.2",
     "validate-commit-msg": "2.14.0",
-    "webpack": "3.4.1"
+    "webpack": "3.5.0"
   },
   "config": {
     "commitizen": {
