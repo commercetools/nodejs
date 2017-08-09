@@ -1,16 +1,11 @@
 import streamtest from 'streamtest'
 import csv from 'fast-csv'
-import lodash from 'lodash'
 import PriceExporter from '../src/main'
 import sampleProduct from './helpers/sampleProduct.json'
 import expectedPrices from './helpers/expectedPrices.json'
 
 jest.mock('fast-csv', () => ({
   createWriteStream: jest.fn(() => ({ pipe: jest.fn() })),
-}))
-
-jest.mock('lodash', () => ({
-  flattenDeep: jest.fn(data => data),
 }))
 
 describe('PriceExporter', () => {
@@ -96,31 +91,6 @@ describe('PriceExporter', () => {
     })
   })
 
-  describe('::_writePrices', () => {
-    it('should write json output to stream', (done) => {
-      const pipeStream = { write: jest.fn(() => done()) }
-      const sample = ['price-1', 'price-2']
-      priceExporter._writePrices(sample, pipeStream)
-
-      expect(lodash.flattenDeep).not.toBeCalled()
-      expect(pipeStream.write).toHaveBeenCalledTimes(2)
-      expect(pipeStream.write.mock.calls[0][0]).toBe('price-1')
-      expect(pipeStream.write.mock.calls[1][0]).toBe('price-2')
-    })
-
-    it('should flatten csv output and write to stream', (done) => {
-      const pipeStream = { write: jest.fn(() => done()) }
-      const sample = ['price-1', 'price-2']
-      priceExporter.config.exportFormat = 'csv'
-      priceExporter._writePrices(sample, pipeStream)
-
-      expect(lodash.flattenDeep).toBeCalled()
-      expect(pipeStream.write).toHaveBeenCalledTimes(2)
-      expect(pipeStream.write.mock.calls[0][0]).toBe('price-1')
-      expect(pipeStream.write.mock.calls[1][0]).toBe('price-2')
-    })
-  })
-
   describe('::_getProducts', () => {
     it('should fetch products using `process` method', () => {
       const sampleResult = {
@@ -167,291 +137,268 @@ describe('PriceExporter', () => {
     })
   })
 
-  describe('::_flattenPrices', () => {
-    it(
-      'should resolve price data and not resolve price references if json',
-      async () => {
-        PriceExporter._flattenPricesArray = jest.fn(data => data)
-        const sample = ['price1', 'price2']
-        priceExporter.config.exportFormat = 'json'
-        priceExporter._resolveReferences = jest.fn()
+  describe('::_writePrices', () => {
+    const sample = [{
+      sku: 'my-variant-sku',
+      prices: [{
+        value: {
+          centAmount: 16125,
+        },
+      }, {
+        value: {
+          centAmount: 4000,
+        },
+      }],
+    }]
 
-        const actual = await priceExporter._flattenPrices(sample)
-        expect(actual).toEqual(['price1', 'price2'])
-        expect(priceExporter._resolveReferences).not.toHaveBeenCalled()
-      },
-    )
+    it('should write json output once for each sku to stream', (done) => {
+      const pipeStream = { write: jest.fn(() => done()) }
+      priceExporter._writePrices(sample, pipeStream)
 
-    it('should resolve price data and resolve references if csv', async () => {
-      const sample = ['price1', 'price2']
-      const expected = [
-        'prepared-price-1',
-        'prepared-price-2',
-      ]
+      expect(pipeStream.write).toHaveBeenCalledTimes(1)
+      expect(pipeStream.write).toBeCalledWith(sample[0])
+    })
+
+    it('should flatten csv output and write to stream', (done) => {
+      const pipeStream = { write: jest.fn(() => done()) }
+      const firstExpected = { 'value.centAmount': 16125 }
+      const secondExpected = { 'value.centAmount': 4000 }
       priceExporter.config.exportFormat = 'csv'
-      priceExporter._resolveReferences = jest.fn()
-      priceExporter._resolveReferences.mockReturnValue(expected)
+      priceExporter._writePrices(sample, pipeStream)
 
-      const actual = await priceExporter._flattenPrices(sample)
-      expect(actual).toEqual(expected)
-      expect(priceExporter._resolveReferences).toHaveBeenCalled()
+      expect(pipeStream.write).toHaveBeenCalledTimes(2)
+      expect(pipeStream.write).toBeCalledWith(firstExpected)
+      expect(pipeStream.write).toBeCalledWith(secondExpected)
     })
   })
 
   describe('::_resolveReferences', () => {
-    const sample = [
-      {
-        prices: ['price-1', 'price-2'],
-      },
-      {
-        prices: ['price-6', 'price-7'],
-      },
-    ]
-    it('call `resolveReferences` on each price for each ref', async () => {
-      priceExporter._resolveEachReferenceType = jest.fn((string, price) => (
-        Promise.resolve(price)
+    it('returns array of prices with resolved references', async () => {
+      const resolvedChannel = { channel: { key: 'resolved-channel-key' } }
+      const resolvedCustGroup = {
+        customerGroup: { groupName: 'resolved-group-name' },
+      }
+      const resolvedCustomType = {
+        customType: { key: 'resolved-custom-type-key' },
+        customField: { foo: 'bar' },
+      }
+      const sample = [
+        {
+          sku: 'my-sku-1',
+          prices: [{
+            channel: { id: 'unresolved-channel-id-1' },
+          }, {
+            customerGroup: { id: 'unresolved-customer-group-id-1' },
+          }],
+        },
+        {
+          sku: 'my-sku-2',
+          prices: [{
+            customerGroup: { id: 'unresolved-customer-group-id-1' },
+            channel: { id: 'unresolved-channel-id-1' },
+            custom: {
+              type: { id: 'some-custom-type-id' },
+              fields: { foo: 'bar' },
+            },
+          }],
+        },
+      ]
+      priceExporter._resolveChannel = jest.fn(price => (
+        price.channel ? resolvedChannel : {}
       ))
+      priceExporter._resolveCustomerGroup = jest.fn(price => (
+        price.customerGroup ? resolvedCustGroup : {}
+      ))
+      priceExporter._resolveCustomType = jest.fn(price => (
+        price.custom ? resolvedCustomType : {}
+      ))
+      const expected = [
+        {
+          sku: 'my-sku-1',
+          prices: [{
+            ...resolvedChannel,
+          }, {
+            ...resolvedCustGroup,
+          }],
+        },
+        {
+          sku: 'my-sku-2',
+          prices: [{
+            ...resolvedCustGroup,
+            ...resolvedChannel,
+            ...resolvedCustomType,
+            custom: {
+              type: { id: 'some-custom-type-id' },
+              fields: { foo: 'bar' },
+            },
+          }],
+        },
+      ]
+      const prices = await priceExporter._resolveReferences(sample)
+      expect(prices).toEqual(expected)
+    })
+  })
 
-      await priceExporter._resolveReferences(sample)
-      expect(priceExporter._resolveEachReferenceType).toHaveBeenCalledTimes(12)
+  describe('::_resolveChannel', () => {
+    it('should return empty object if no `channel` reference', () => {
+      const samplePrice = {
+        value: { centAmount: 4300 },
+      }
+      expect(priceExporter._resolveChannel(samplePrice)).toEqual({})
     })
 
-    it('should flatten arrays of nested price objects', async () => {
-      priceExporter._resolveEachReferenceType = jest.fn((string, price) => (
-        Promise.resolve({ price }) // Nests by one layer on each return
+    it('should return channel key if CSV format', async () => {
+      priceExporter.config.exportFormat = 'csv'
+      priceExporter.fetchReferences = jest.fn(() => (
+        Promise.resolve({ body: { key: 'my-resolved-key' } })
       ))
-      const expected = [[
-        {
-          'price.price.price': 'price-1',
-        }, {
-          'price.price.price': 'price-2',
-        }], [{
-          'price.price.price': 'price-6',
-        }, {
-          'price.price.price': 'price-7',
-        },
-        ]]
-      const actual = await priceExporter._resolveReferences(sample)
+      const samplePrice = {
+        value: { centAmount: 4300 },
+        channel: { id: 'my-channel-id' },
+      }
+      const expected = { channel: { key: 'my-resolved-key' } }
+
+      const actual = await priceExporter._resolveChannel(samplePrice)
+      expect(actual).toEqual(expected)
+    })
+
+    it('should return channel key in `id` if JSON format', async () => {
+      priceExporter.fetchReferences = jest.fn(() => (
+        Promise.resolve({ body: { key: 'my-resolved-key' } })
+      ))
+      const samplePrice = {
+        value: { centAmount: 4300 },
+        channel: { id: 'my-channel-id' },
+      }
+      const expected = { channel: { id: 'my-resolved-key' } }
+
+      const actual = await priceExporter._resolveChannel(samplePrice)
       expect(actual).toEqual(expected)
     })
   })
 
-  describe('::_resolveEachReferenceType', () => {
-    it('not modify the object if the `type` key does not exist', async () => {
-      const price = { foo: 'bar' }
-      const actual = await priceExporter
-        ._resolveEachReferenceType('type', price)
-      expect(actual).toEqual({ foo: 'bar' })
+  describe('::_resolveCustomerGroup', () => {
+    it('should return empty object if no `customerGroup` reference', () => {
+      const samplePrice = {
+        value: { centAmount: 4300 },
+      }
+      expect(priceExporter._resolveCustomerGroup(samplePrice)).toEqual({})
     })
 
-    describe('::_resolveEachReferenceType: `custom`', () => {
-      let price
-      beforeEach(() => {
-        price = {
-          foo: 'bar',
-          custom: {
-            type: {
-              typeId: 'The custom type name',
-              id: 'custom-type-id',
-            },
-            fields: {
-              name: 'Will',
-            },
-          },
-        }
-      })
+    it('should return customerGroup groupName if CSV format', async () => {
+      priceExporter.config.exportFormat = 'csv'
+      priceExporter.fetchReferences = jest.fn(() => (
+        Promise.resolve({ body: { name: 'my-resolved-name' } })
+      ))
+      const samplePrice = {
+        value: { centAmount: 4300 },
+        customerGroup: { id: 'my-customer-group-id' },
+      }
+      const expected = { customerGroup: { groupName: 'my-resolved-name' } }
 
-      it('should get data from cache if present', async () => {
-        priceExporter._cache['custom-type-id'] = 'myCustomType'
-        priceExporter.client.execute = jest.fn()
-        const expected = {
-          foo: 'bar',
-          customField: {
-            name: 'Will',
-          },
-          customType: 'myCustomType',
-        }
-
-        const actual = await priceExporter
-          ._resolveEachReferenceType('custom', price)
-        expect(priceExporter.client.execute).not.toHaveBeenCalled()
-        expect(actual).toEqual(expected)
-      })
-
-      it('get data from API if not in cache and save to cache', async () => {
-        const customType = {
-          body: {
-            key: 'myCustomType2',
-          },
-        }
-        priceExporter.client.execute = jest.fn(() => (
-          Promise.resolve(customType)
-        ))
-        const expected = {
-          foo: 'bar',
-          customField: {
-            name: 'Will',
-          },
-          customType: 'myCustomType2',
-        }
-
-        const actual = await priceExporter
-          ._resolveEachReferenceType('custom', price)
-        expect(priceExporter.client.execute).toHaveBeenCalled()
-        expect(priceExporter._cache['custom-type-id']).toBe('myCustomType2')
-        expect(actual).toEqual(expected)
-      })
+      const actual = await priceExporter._resolveCustomerGroup(samplePrice)
+      expect(actual).toEqual(expected)
     })
 
-    describe('::_resolveEachReferenceType: `channel`', () => {
-      let price
-      beforeEach(() => {
-        price = {
-          foo: 'bar',
-          channel: {
-            typeId: 'channel',
-            id: 'channel-id',
-          },
-        }
-      })
+    it('should return customerGroup name in `id` if JSON format', async () => {
+      priceExporter.fetchReferences = jest.fn(() => (
+        Promise.resolve({ body: { name: 'my-resolved-name' } })
+      ))
+      const samplePrice = {
+        value: { centAmount: 4300 },
+        customerGroup: { id: 'my-customer-group-id' },
+      }
+      const expected = { customerGroup: { id: 'my-resolved-name' } }
 
-      it('should get data from cache if present', async () => {
-        priceExporter._cache['channel-id'] = 'myChannelKey'
-        priceExporter.client.execute = jest.fn()
-        const expected = {
-          foo: 'bar',
-          channel: {
-            key: 'myChannelKey',
-          },
-        }
-
-        const actual = await priceExporter
-          ._resolveEachReferenceType('channel', price)
-        expect(priceExporter.client.execute).not.toHaveBeenCalled()
-        expect(actual).toEqual(expected)
-      })
-
-      it('get data from API if not in cache and save to cache', async () => {
-        const myChannel = {
-          body: {
-            key: 'myChannelKey2',
-          },
-        }
-        priceExporter.client.execute = jest.fn(() => (
-          Promise.resolve(myChannel)
-        ))
-        const expected = {
-          foo: 'bar',
-          channel: {
-            key: 'myChannelKey2',
-          },
-        }
-
-        const actual = await priceExporter
-          ._resolveEachReferenceType('channel', price)
-        expect(priceExporter.client.execute).toHaveBeenCalled()
-        expect(priceExporter._cache['channel-id']).toBe('myChannelKey2')
-        expect(actual).toEqual(expected)
-      })
-    })
-
-    describe('::_resolveEachReferenceType: `customerGroup`', () => {
-      let price
-      beforeEach(() => {
-        price = {
-          foo: 'bar',
-          customerGroup: {
-            typeId: 'customer-group',
-            id: 'customer-group-id',
-          },
-        }
-      })
-
-      it('should get data from cache if present', async () => {
-        priceExporter._cache['customer-group-id'] = 'myCustomerGroupName'
-        priceExporter.client.execute = jest.fn()
-        const expected = {
-          foo: 'bar',
-          customerGroup: {
-            groupName: 'myCustomerGroupName',
-          },
-        }
-
-        const actual = await priceExporter._resolveEachReferenceType(
-          'customerGroup',
-          price,
-        )
-        expect(priceExporter.client.execute).not.toHaveBeenCalled()
-        expect(actual).toEqual(expected)
-      })
-
-      it('get data from API if not in cache and save to cache', async () => {
-        const customType = {
-          body: {
-            name: 'myCustomerGroupName2',
-          },
-        }
-        priceExporter.client.execute = jest.fn(() => (
-          Promise.resolve(customType)
-        ))
-        const expected = {
-          foo: 'bar',
-          customerGroup: {
-            groupName: 'myCustomerGroupName2',
-          },
-        }
-
-        const actual = await priceExporter._resolveEachReferenceType(
-          'customerGroup',
-          price,
-        )
-        expect(priceExporter.client.execute).toHaveBeenCalled()
-        expect(priceExporter._cache['customer-group-id'])
-          .toBe('myCustomerGroupName2')
-        expect(actual).toEqual(expected)
-      })
+      const actual = await priceExporter._resolveCustomerGroup(samplePrice)
+      expect(actual).toEqual(expected)
     })
   })
 
-  describe('::_buildRequest', () => {
-    it('should build requests for `references` by id', () => {
-      const sample = {
-        channel: { id: 'channel-id' },
-        customerGroup: { id: 'customer-group-id' },
+  describe('::_resolveCustomType', () => {
+    it('should return empty object if no `custom` reference', () => {
+      const samplePrice = {
+        value: { centAmount: 4300 },
+      }
+      expect(priceExporter._resolveCustomType(samplePrice)).toEqual({})
+    })
+
+    it('return customType `key` and `customField` if CSV format', async () => {
+      priceExporter.config.exportFormat = 'csv'
+      priceExporter.fetchReferences = jest.fn(() => (
+        Promise.resolve({ body: { key: 'my-custom-type-key' } })
+      ))
+      const samplePrice = {
+        value: { centAmount: 4300 },
         custom: {
-          type: { id: 'my-custom-id' },
+          type: { id: 'some-custom-type-id' },
+          fields: { foo: 'bar' },
         },
       }
+      const expected = {
+        customType: 'my-custom-type-key',
+        customField: samplePrice.custom.fields,
+      }
 
-      expect(priceExporter._buildRequest('channel', sample).uri)
-        .toBe('/project-key/channels/channel-id')
-
-      expect(priceExporter._buildRequest('customerGroup', sample).uri)
-        .toBe('/project-key/customer-groups/customer-group-id')
-
-      expect(priceExporter._buildRequest('custom', sample).uri)
-        .toBe('/project-key/types/my-custom-id')
+      const actual = await priceExporter._resolveCustomType(samplePrice)
+      expect(actual).toEqual(expected)
     })
 
-    it('should build request to fetch products', () => {
-      priceExporter.config.predicate = 'predicate'
-
-      expect(priceExporter._buildRequest('productProjections'))
-        .toEqual({
-          uri: '/project-key/product-projections?staged=false&where=predicate',
-          method: 'GET',
-          headers: {
-            Authorization: 'Bearer myAccessToken',
-          },
-        })
+    it('should return custom without `typeId` if JSON format', async () => {
+      const samplePrice = {
+        value: { centAmount: 4300 },
+        custom: {
+          type: { id: 'some-custom-type-id', typeId: 'custom-type' },
+          fields: { foo: 'bar' },
+        },
+      }
+      const expected = {
+        custom: {
+          type: { id: 'some-custom-type-id' },
+          fields: { foo: 'bar' },
+        },
+      }
+      const actual = await priceExporter._resolveCustomType(samplePrice)
+      expect(actual).toEqual(expected)
     })
   })
 
-  describe('_getPrices', () => {
-    it('extracts prices from product and groups by sku', () => {
+  describe('::_getPrices', () => {
+    it('extracts prices from array of products and groups by sku', () => {
       const expected = expectedPrices
       const actual = PriceExporter._getPrices(sampleProduct)
       expect(actual).toEqual(expected)
+    })
+  })
+
+  describe('::fetchReferences', () => {
+    it('should fetch reference from API from url', () => {
+      priceExporter.client.execute = jest.fn()
+      const uri = 'dummy-uri'
+      const expectedRequest = {
+        uri,
+        method: 'GET',
+        headers: { Authorization: 'Bearer myAccessToken' },
+      }
+
+      priceExporter.fetchReferences(uri)
+      expect(priceExporter.client.execute).toBeCalled()
+      expect(priceExporter.client.execute).toHaveBeenCalledWith(expectedRequest)
+    })
+
+    it('should fetch only once for multiple calls with same parameter', () => {
+      priceExporter.client.execute = jest.fn()
+      const uri = 'dummy-uri-2'
+      const expectedRequest = {
+        uri,
+        method: 'GET',
+        headers: { Authorization: 'Bearer myAccessToken' },
+      }
+
+      priceExporter.fetchReferences(uri)
+      priceExporter.fetchReferences(uri)
+      expect(priceExporter.client.execute).toHaveBeenCalledTimes(1)
+      expect(priceExporter.client.execute).toHaveBeenCalledWith(expectedRequest)
     })
   })
 })

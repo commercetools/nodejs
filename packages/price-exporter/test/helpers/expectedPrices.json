@@ -1,5 +1,26 @@
 [
   {
+    "variant-sku": "sku-1",
+    "prices": [
+      {
+        "variant-sku": "sku-1",
+        "value": {
+          "currencyCode": "EUR",
+          "centAmount": 1500
+        },
+        "country": "DE"
+      },
+      {
+        "variant-sku": "sku-1",
+        "value": {
+          "currencyCode": "EUR",
+          "centAmount": 1500
+        },
+        "country": "IT"
+      }
+    ]
+  },
+  {
     "variant-sku": "sku-2",
     "prices": [
       {
@@ -44,27 +65,6 @@
           "typeId": "customer-group",
           "id": "customer-group-id"
         }
-      }
-    ]
-  },
-  {
-    "variant-sku": "sku-1",
-    "prices": [
-      {
-        "variant-sku": "sku-1",
-        "value": {
-          "currencyCode": "EUR",
-          "centAmount": 1500
-        },
-        "country": "DE"
-      },
-      {
-        "variant-sku": "sku-1",
-        "value": {
-          "currencyCode": "EUR",
-          "centAmount": 1500
-        },
-        "country": "IT"
       }
     ]
   }

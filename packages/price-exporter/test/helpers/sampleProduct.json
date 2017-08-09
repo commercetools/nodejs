@@ -1,4 +1,4 @@
-{
+[{
  "masterVariant": {
   "sku": "sku-1",
   "prices": [
@@ -65,4 +65,4 @@
    ]
   }
  ]
-}
+}]

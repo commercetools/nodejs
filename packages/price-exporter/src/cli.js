@@ -135,7 +135,7 @@ const getHeaders = _args => (
       if (_args.exportFormat === 'json')
         resolve()
       else
-        reject('Input file is requred for `CSV` export type')
+        reject('Input file is required for `CSV` export type')
     const rl = readline.createInterface({
       input: _args.input,
     })

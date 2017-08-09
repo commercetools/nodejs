@@ -46,27 +46,18 @@ export type currencyValue = {
 }
 
 export type customerGroup = {
-  groupName: string;
+  groupName?: string;
+  id?: string;
 }
 
 export type channel = {
-  key: string;
-}
-
-export type ProcessedPriceObject = {
-  value: currencyValue;
-  country?: string;
+  key?: string;
   id?: string;
-  customerGroup?: customerGroup;
-  'variant-sku'?: string;
-  customType?: string;
-  customField: Object;
-  channel?: channel;
 }
 
 export type reference = {
-  typeId: string;
   id: string;
+  typeId?: string;
 }
 
 export type customReference = {
@@ -82,5 +73,17 @@ export type UnprocessedPriceObject = {
   channel?: reference;
   custom?: customReference;
   'variant-sku'?: string;
+}
+
+export type ProcessedPriceObject = {
+  value: currencyValue;
+  country?: string;
+  id?: string;
+  customerGroup?: customerGroup;
+  'variant-sku'?: string;
+  customType?: string;
+  channel?: channel;
+  custom?: customReference;
+  customField?: Object;
 }
 

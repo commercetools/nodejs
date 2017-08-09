@@ -128,10 +128,10 @@ describe('Price Exporter', () => {
                 centAmount: 2500,
               },
               customerGroup: {
-                typeId: 'customer-group',
+                id: 'customerGroupName',
               },
               channel: {
-                typeId: 'channel',
+                id: 'my-channel-key',
               },
               validFrom: '2017-11-01T08:01:19.000Z',
               validUntil: '2019-11-01T08:01:21.000Z',
