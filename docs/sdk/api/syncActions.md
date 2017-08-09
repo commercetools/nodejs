@@ -278,3 +278,43 @@ client.execute(discountCodesRequest)
 .then(result => ...)
 .catch(error => ...)
 ```
+
+## `createSyncCustomerGroup(actionGroups)`
+
+> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+
+Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _customer-groups_.
+
+#### Arguments
+
+1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+
+#### Usage example
+
+```js
+import { createSyncCustomerGroup } from '@commercetools/sync-actions'
+import { createClient } from '@commercetools/sdk-client'
+
+const syncCustomerGroups = createSyncCustomerGroup()
+const client = createClient({
+  middlewares: [...],
+})
+const before = {
+  name: 'My customer group',
+  key: 'some-old-key'
+}
+const now = {
+  name: 'My new customer group',
+  key: 'some-new-key'
+}
+const actions = syncCustomerGroups.buildActions(before, now)
+const customerGroupRequest = {
+  url: `/customer-groups/${before.id}`,
+  method: 'POST',
+  body: JSON.stringify({ version: before.version, actions }),
+}
+
+client.execute(customerGroupRequest)
+.then(result => ...)
+.catch(error => ...)
+```

@@ -17,7 +17,7 @@ import { version } from '../../packages/csv-parser-price/package.json'
 
 let projectKey
 if (process.env.CI === 'true')
-  projectKey = 'node-sdk-integration-tests'
+  projectKey = 'price-parser-integration-test'
 else
   projectKey = process.env.npm_config_projectkey
 

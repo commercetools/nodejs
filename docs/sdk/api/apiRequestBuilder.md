@@ -31,7 +31,7 @@ The `options` argument must be an object with a `projectKey` property, and optio
 A _service_ is created by defining its `features`. Features give a service specific _characteristics_ to correctly build URIs. For example, if a service can query a resource by ID you would include `queryOne`. Available features types are:
 
 - `query`: allows to use standard query capabilities (`page`, `perPage`, `sort`, `where`, `whereOperator`)
-- `queryOne`: allows to query a single resource (`byId`)
+- `queryOne`: allows to query a single resource (`byId`, `byKey`, `byCustomerId`)
 - `queryExpand`: allows to use reference expansion (`expand`)
 - `search`: allows to use search capabilities (`text`, `fuzzy`, `fuzzyLevel`, `facet`, `markMatchingVariants`, `filter`, `filterByQuery`, `filterByFacets`)
 - `projection`: allows to use projections capabilities (`staged`, `priceCurrency`, `priceCountry`, `priceCustomerGroup`, `priceChannel`)

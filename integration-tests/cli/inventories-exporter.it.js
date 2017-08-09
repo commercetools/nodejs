@@ -10,7 +10,7 @@ import { version } from '../../packages/inventories-exporter/package.json'
 
 let projectKey
 if (process.env.CI === 'true')
-  projectKey = 'node-sdk-integration-tests'
+  projectKey = 'inventories-export-integration-test'
 else
   projectKey = process.env.npm_config_projectkey
 
