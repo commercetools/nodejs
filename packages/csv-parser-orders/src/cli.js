@@ -102,8 +102,6 @@ const logError = (error) => {
 }
 
 const errorHandler = (errors) => {
-  // print errors to stderr if we use stdout for data output
-  // if we save data to output file errors are already logged by npmlog
   if (Array.isArray(errors))
     errors.forEach(logError)
   else
