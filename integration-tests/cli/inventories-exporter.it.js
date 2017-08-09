@@ -10,7 +10,7 @@ import { version } from '../../packages/inventories-exporter/package.json'
 
 let projectKey
 if (process.env.CI === 'true')
-  projectKey = 'node-sdk-integration-tests'
+  projectKey = 'inventories-export-integration-test'
 else
   projectKey = process.env.npm_config_projectkey
 
@@ -28,8 +28,9 @@ describe('StockExporter CLI', () => {
           clientSecret: credentials.clientSecret,
         },
       }
-      return clearData(apiConfig, 'inventory')
+      return clearData(apiConfig, 'orders')
     })
+    .then(() => clearData(apiConfig, 'inventory'))
     .then(() => clearData(apiConfig, 'types'))
     .then(() => createData(apiConfig, 'types', customFields))
     .then(() => createData(apiConfig, 'inventory', inventories))
@@ -97,7 +98,7 @@ describe('StockExporter CLI', () => {
           expect(cliError && stderr).toBeFalsy()
           fs.readFile(csvFilePath, { encoding: 'utf8' }, (error, data) => {
             const expectedResult = stripIndent`
-              sku,quantityOnStock,customType,custom.description
+              sku,quantityOnStock,customType,customField.description
               12345,20,inventory-custom-type,integration tests!! arrgggh
             `
             expect(data).toEqual(expectedResult)
