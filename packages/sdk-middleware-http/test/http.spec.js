@@ -278,6 +278,46 @@ describe('Http', () => {
       }),
     )
 
+    it('should toggle `exponential backoff` off', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res.error.name).toBe('NetworkError')
+          expect(res.error.headers).toBeUndefined()
+          expect(res.error.originalRequest).toBeDefined()
+          expect(res.error.retryCount).toBe(2)
+          expect(res.error.message).toBe(
+            `request to ${testHost}/foo/bar failed, reason: Connection timeout`,
+          )
+          expect(res.body).toBeUndefined()
+          expect(res.statusCode).toBe(0)
+          resolve()
+        }
+        const options = {
+          host: testHost,
+          enableRetry: true,
+          retryConfig: {
+            maxRetries: 2,
+            backoff: false,
+            retryDelay: 300,
+          },
+        }
+        const httpMiddleware = createHttpMiddleware(options)
+        nock(testHost)
+          .defaultReplyHeaders({
+            'Content-Type': 'application/json',
+          })
+          .get('/foo/bar')
+          .times(3)
+          .replyWithError('Connection timeout')
+
+        httpMiddleware(next)(request, response)
+      })
+    , 620 /* retryDelay of 300 * 2 */)
+
     it('should not retry on 404 (not found) error', () =>
       new Promise((resolve, reject) => {
         const request = createTestRequest({
