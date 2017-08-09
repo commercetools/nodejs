@@ -15,11 +15,22 @@ import getErrorByCode, {
   HttpError,
 } from './errors'
 
-export default function createHttpMiddleware (
-  options: HttpMiddlewareOptions,
-): Middleware {
+export default function createHttpMiddleware ({
+  host,
+  includeResponseHeaders,
+  includeOriginalRequest,
+  maskSensitiveHeaderData,
+  enableRetry,
+  retryConfig: {
+    // encourage exponential backoff to prevent spamming the server if down
+    maxRetries = 10,
+    backoff = true,
+    retryDelay = 200,
+    maxDelay = Infinity,
+  } = {},
+}: HttpMiddlewareOptions): Middleware {
   return next => (request: MiddlewareRequest, response: MiddlewareResponse) => {
-    const url = options.host.replace(/\/$/, '') + request.uri
+    const url = host.replace(/\/$/, '') + request.uri
     const body = typeof request.body === 'string'
       || Buffer.isBuffer(request.body)
       ? request.body
@@ -41,69 +52,107 @@ export default function createHttpMiddleware (
         ...(body ? { body } : {}),
       },
     )
-    fetch(requestObj)
-    .then(
-      (res: Response) => {
-        if (res.ok) {
-          res.json()
-          .then((result: Object) => {
-            const parsedResponse: Object = {
-              ...response,
-              body: result,
-              statusCode: res.status,
-            }
-            if (options.includeResponseHeaders)
-              parsedResponse.headers = parseHeaders(res.headers)
-            if (options.includeOriginalRequest) {
-              parsedResponse.request = {
-                ...requestObj,
-                headers: parseHeaders(requestObj.headers),
+    let retryCount = 0
+    // wrap in a fn so we can retry if error occur
+    function executeFetch () {
+      fetch(requestObj)
+      .then(
+        (res: Response) => {
+          if (res.ok) {
+            res.json()
+            .then((result: Object) => {
+              const parsedResponse: Object = {
+                ...response,
+                body: result,
+                statusCode: res.status,
               }
-              if (options.maskSensitiveHeaderData)
-                parsedResponse.request.headers.authorization = 'Bearer ********'
+              if (includeResponseHeaders)
+                parsedResponse.headers = parseHeaders(res.headers)
+              if (includeOriginalRequest) {
+                parsedResponse.request = {
+                  ...requestObj,
+                  headers: parseHeaders(requestObj.headers),
+                }
+                if (maskSensitiveHeaderData)
+                  parsedResponse
+                    .request.headers.authorization = 'Bearer ********'
+              }
+              next(request, parsedResponse)
+            })
+            return
+          }
+
+          // Server responded with an error. Try to parse it as JSON, then
+          // return a proper error type with all necessary meta information.
+          res.text()
+          .then((text: any) => {
+            // Try to parse the error response as JSON
+            let parsed
+            try {
+              parsed = JSON.parse(text)
+            } catch (error) {
+              parsed = text
+            }
+
+            const error: HttpErrorType = createError({
+              statusCode: res.status,
+              originalRequest: request,
+              headers: parseHeaders(res.headers),
+              ...(typeof parsed === 'object'
+                ? { message: parsed.message, body: parsed }
+                : { message: parsed, body: parsed }
+              ),
+            })
+            // Let the final resolver to reject the promise
+            const parsedResponse = {
+              ...response,
+              error,
+              statusCode: res.status,
             }
             next(request, parsedResponse)
           })
-          return
-        }
-
-        // Server responded with an error. Try to parse it as JSON, then return
-        // a proper error type with all necessary meta information.
-        res.text()
-        .then((text: any) => {
-          // Try to parse the error response as JSON
-          let parsed
-          try {
-            parsed = JSON.parse(text)
-          } catch (error) {
-            /* noop */
-          }
-
-          const error: HttpErrorType = createError({
-            statusCode: res.status,
-            originalRequest: request,
-            headers: parseHeaders(res.headers),
-            ...(parsed
-              ? { message: parsed.message, body: parsed }
-              : {}
-            ),
-          })
-          // Let the final resolver to reject the promise
-          const parsedResponse = {
-            ...response,
-            error,
-            statusCode: res.status,
-          }
-          next(request, parsedResponse)
-        })
-      },
-      // We know that this is a "network" error thrown by the `fetch` library
-      (e: Error) => {
-        const error = new NetworkError(e.message, { originalRequest: request })
-        next(request, { ...response, error, statusCode: 0 })
-      },
-    )
+        },
+        // We know that this is a "network" error thrown by the `fetch` library
+        (e: Error) => {
+          if (enableRetry)
+            if (retryCount < maxRetries) {
+              setTimeout(executeFetch, calcDelayDuration(
+                retryCount,
+                retryDelay,
+                maxRetries,
+                backoff,
+                maxDelay,
+              ))
+              retryCount += 1
+              return
+            }
+          const error = new NetworkError(
+            e.message, { originalRequest: request, retryCount },
+          )
+          next(request, { ...response, error, statusCode: 0 })
+        },
+      )
+    }
+    executeFetch()
   }
+}
+
+// calculates the delay duration exponentially
+// More info about the algorithm use here https://goo.gl/Xk8h5f
+function calcDelayDuration (
+  retryCount: number,
+  retryDelay: number,
+  maxRetries: number,
+  backoff: boolean,
+  maxDelay: number,
+): number {
+  if (backoff)
+    return retryCount !== 0 // do not increase if it's the first retry
+    ? Math.min(Math.round(
+        (Math.random() + 1) * retryDelay * (2 ** retryCount),
+      ), maxDelay)
+    : retryDelay
+  return retryDelay
 }
 
 function createError ({ statusCode, message, ...rest }): HttpErrorType {

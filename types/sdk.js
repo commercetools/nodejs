@@ -80,6 +80,16 @@ export type AuthMiddlewareOptions = {
 export type HttpMiddlewareOptions = {
   host: string;
   includeHeaders?: boolean;
+  includeResponseHeaders?: boolean;
+  includeOriginalRequest?: boolean;
+  maskSensitiveHeaderData?: boolean;
+  enableRetry?: boolean;
+  retryConfig?: {
+    maxRetries?: number;
+    retryDelay?: number;
+    backoff?: boolean;
+    maxDelay?: number;
+  }
 }
 export type QueueMiddlewareOptions = {
   concurrency: number;
