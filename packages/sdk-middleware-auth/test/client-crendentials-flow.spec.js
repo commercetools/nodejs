@@ -147,7 +147,7 @@ describe('Client Crentials Flow', () => {
       let requestCount = 0
       nock(middlewareOptions.host)
         .persist() // <-- use the same interceptor for all requests
-        .log(() => (requestCount += 1)) // <-- keep track of the request count
+        .log(() => { (requestCount += 1) }) // keep track of the request count
         .filteringRequestBody(/.*/, '*')
         .post('/oauth/token', '*')
         .reply(200, () => ({
@@ -203,7 +203,7 @@ describe('Client Crentials Flow', () => {
       let requestCount = 0
       nock(middlewareOptions.host)
         .persist() // <-- use the same interceptor for all requests
-        .log(() => (requestCount += 1)) // <-- keep track of the request count
+        .log(() => { (requestCount += 1) }) // keep track of the request count
         .filteringRequestBody(/.*/, '*')
         .post('/oauth/token', '*')
         .reply(200, {
@@ -253,7 +253,7 @@ describe('Client Crentials Flow', () => {
       let requestCount = 0
       nock(middlewareOptions.host)
         .persist() // <-- use the same interceptor for all requests
-        .log(() => (requestCount += 1)) // <-- keep track of the request count
+        .log(() => { (requestCount += 1) }) // keep track of the request count
         .filteringRequestBody(/.*/, '*')
         .post('/oauth/token', '*')
         .reply(200, {
@@ -296,7 +296,7 @@ describe('Client Crentials Flow', () => {
       let requestCount = 0
       nock(middlewareOptions.host)
         .persist() // <-- use the same interceptor for all requests
-        .log(() => (requestCount += 1)) // <-- keep track of the request count
+        .log(() => { (requestCount += 1) }) // keep track of the request count
         .filteringRequestBody(/.*/, '*')
         .post('/oauth/token', '*')
         .reply(200, {

@@ -55,7 +55,7 @@ describe('buildQueryString', () => {
       },
       searchKeywords: [{ lang: 'en', value: 'Foo' }],
     }
-    /* eslint-disable max-len*/
+    /* eslint-disable max-len */
     const expectedQueryString =
     'staged=false&' +
     'priceCurrency=EUR&' +
@@ -79,7 +79,7 @@ describe('buildQueryString', () => {
     `filter.facets=${encodeURIComponent('variants.attributes.color.key:"red")')}&` +
     `filter.facets=${encodeURIComponent('categories.id:"123"')}&` +
     `searchKeywords.en=${encodeURIComponent('Foo')}`
-    /* eslint-enable max-len*/
+    /* eslint-enable max-len */
 
     expect(buildQueryString(params)).toEqual(expectedQueryString)
   })
@@ -119,7 +119,7 @@ describe('buildQueryString', () => {
         text: { lang: 'en', value: 'Foo' },
       },
     }
-    /* eslint-disable max-len*/
+    /* eslint-disable max-len */
     const expectedQueryString =
     `text.en=${encodeURIComponent('Foo')}&` +
     'fuzzy=true&' +
@@ -133,7 +133,7 @@ describe('buildQueryString', () => {
     `filter.query=${encodeURIComponent('categories.id:"123"')}&` +
     `filter.facets=${encodeURIComponent('variants.attributes.color.key:"red")')}&` +
     `filter.facets=${encodeURIComponent('categories.id:"123"')}`
-    /* eslint-enable max-len*/
+    /* eslint-enable max-len */
 
     expect(buildQueryString(params)).toEqual(expectedQueryString)
   })

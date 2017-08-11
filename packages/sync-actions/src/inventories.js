@@ -14,7 +14,7 @@ export const actionGroups = [
 ]
 
 function createInventoryMapActions (mapActionGroup) {
-  return function doMapActions (diff, newObj, oldObj/* , options*/) {
+  return function doMapActions (diff, newObj, oldObj/* , options */) {
     const allActions = []
 
     allActions.push(mapActionGroup('base', () =>
