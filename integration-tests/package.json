@@ -5,8 +5,8 @@
   "dependencies": {
     "@commercetools/api-request-builder": "file:../packages/api-request-builder/commercetools-api-request-builder-3.2.0.tgz",
     "@commercetools/csv-parser-discount-code": "file:../packages/csv-parser-discount-code/commercetools-csv-parser-discount-code-1.1.2.tgz",
-    "@commercetools/csv-parser-orders": "file:../packages/csv-parser-orders/commercetools-csv-parser-orders-1.2.3.tgz",
-    "@commercetools/csv-parser-price": "file:../packages/csv-parser-price/commercetools-csv-parser-price-2.1.5.tgz",
+    "@commercetools/csv-parser-orders": "file:../packages/csv-parser-orders/commercetools-csv-parser-orders-1.2.4.tgz",
+    "@commercetools/csv-parser-price": "file:../packages/csv-parser-price/commercetools-csv-parser-price-2.1.6.tgz",
     "@commercetools/discount-code-exporter": "file:../packages/discount-code-exporter/commercetools-discount-code-exporter-1.0.0.tgz",
     "@commercetools/discount-code-generator": "file:../packages/discount-code-generator/commercetools-discount-code-generator-1.1.1.tgz",
     "@commercetools/discount-code-importer": "file:../packages/discount-code-importer/commercetools-discount-code-importer-1.0.0.tgz",
