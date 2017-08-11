@@ -4,7 +4,7 @@ import csv from 'csv-parser'
 
 import CONSTANTS from '../constants'
 
-/* eslint class-methods-use-this:["error", {"exceptMethods":["_processData"]}]*/
+/* eslint class-methods-use-this:["error",{"exceptMethods":["_processData"]}] */
 export default class AbstractParser {
   constructor (conf = {}, moduleName) {
     this.moduleName = moduleName

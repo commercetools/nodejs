@@ -2,10 +2,10 @@
 
 Export [commercetools price](https://dev.commercetools.com/http-api-projects-products.html#price) from the commercetools platform.
 
-more info here: https://commercetools.github.io/nodejs/cli/price-exporter.html
+More info here: https://commercetools.github.io/nodejs/cli/price-exporter.html
 
 ## Install
 
 ```bash
-npm install --save @commercetools/price-exporter
+npm install @commercetools/price-exporter --global
 ```

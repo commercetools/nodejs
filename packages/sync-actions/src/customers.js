@@ -14,7 +14,7 @@ export const actionGroups = [
 ]
 
 function createCustomerMapActions (mapActionGroup) {
-  return function doMapActions (diff, newObj, oldObj/* , options*/) {
+  return function doMapActions (diff, newObj, oldObj/* , options */) {
     const allActions = []
 
     allActions.push(mapActionGroup('base', () =>
