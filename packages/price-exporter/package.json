@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/price-exporter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Export prices from the commercetools platform",
   "keywords": [
     "commercetools",
