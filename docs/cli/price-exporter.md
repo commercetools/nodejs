@@ -33,7 +33,7 @@ Options:
   --authUrl           The host URL of the OAuth API service.
                                              [default: "https://auth.sphere.io"]
   --projectKey, -p    API project key.                                [required]
-  --accessToken       CTP client access token.
+  --accessToken       CTP client access token. Required scopes: ['view_products', 'view_customers']
   --delimiter, -d     Used CSV delimiter for template and output. [default: ","]
   --where, -w         Where predicate for products from which to fetch prices.
   --exportFormat, -f  Format for export.
