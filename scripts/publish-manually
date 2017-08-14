@@ -1,10 +1,14 @@
 #!/bin/bash -e
 
+
 # Ensure we are running in root directory
 if [ "$(basename $(pwd))" != 'nodejs' ]; then
   echo "Error: Run script in monorepo root directory with folder name 'nodejs'"
   exit 1
 fi
+
+# Build to ensure we publish the latest code
+npm run build
 
 packages=()
 for dir in packages/*; do
