@@ -47,7 +47,7 @@ Options:
 ```
 
 #### Info on flags
-- The `--input` flag specifies the path to the CSV template file.
+- The `--input` flag specifies the path to the [CSV template file](#csv-headers).
   - Only the first line is read and subsequent lines (if present) will be ignored
   - The delimiter must match the delimiter passed in by `--delimiter` (or the default delimiter)
 - The `--output` flag specifies where to output/save the exported prices.
@@ -59,6 +59,44 @@ Options:
 - The `--staged` flag specifies the projection of the products from which the prices should be fetched.
   - If passed `true`, prices from published and unpublished products are retrieved
   - If passed `false` (or omitted), only prices from published products are retrieved
+
+#### CSV headers
+To export price in CSV format, the header file is required. This file should contain the desired headers that will be exported. The [price-exporter](https://commercetools.github.io/nodejs/cli/price-exporter.html) writes data to the CSV file base on the header. This can also be used as a means to filter out undesired data in the CSV file.
+
+Example of the content of a header file
+```
+variant-sku,value.currencyCode,value.centAmount,country,customerGroup.groupName,channel.key,validFrom,validUntil,customType,customField.foo,customField.bar,customField.current,customField.name.nl,customField.name.de,customField.status,customField.price,customField.priceset
+```
+
+The `variant-sku` header is required. It contains the `sku` of the variant where the price belongs to.
+
+For custom fields, the `customType` header is required, it contains the key of the custom type. It is important if you want to parse the csv file via the [csv-parser-price](https://commercetools.github.io/nodejs/cli/csv-parser-price.html) module. Also to export any field in the custom object, the format is like this => `customField.[key of field]`
+
+So if you have a price object like below
+```js
+{
+  ...
+  custom: {
+    type: {
+      key: "my-type"
+    }
+    fields: {
+      foo: "bar",
+      localized: {
+        de: "Hundefutter",
+        en: "dog food"
+      }
+    }
+  }
+}
+```
+
+You can export the custom field by passing in a header file like below
+```
+customType,customField.foo,customField.localized.de,customField.localized.en
+```
+
+The CSV exported is compatible with the [csv-parser-price](https://commercetools.github.io/nodejs/cli/csv-parser-price.html) module, and can be used to import exported prices to the CTP platform.
 
 ### JS
 For more direct usage, it is possible to use this module directly:
