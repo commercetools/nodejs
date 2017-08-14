@@ -77,6 +77,23 @@ export type AuthMiddlewareOptions = {
   // For internal usage only
   oauthUri: string;
 }
+
+export type PasswordAuthMiddlewareOptions = {
+  host: string;
+  projectKey: string;
+  credentials: {
+    clientId: string;
+    clientSecret: string;
+    user: {
+      username: string;
+      password: string;
+    };
+  };
+  scopes: Array<string>;
+  // For internal usage only
+  oauthUri: string;
+}
+
 export type HttpMiddlewareOptions = {
   host: string;
   includeHeaders?: boolean;
