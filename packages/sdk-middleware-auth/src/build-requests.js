@@ -78,7 +78,6 @@ export function buildRequestForPasswordFlow (
   const scope = (options.scopes || []).join(' ')
   const scopeStr = scope ? `&scope=${scope}` : ''
 
-
   const basicAuth = new Buffer(`${clientId}:${clientSecret}`).toString('base64')
   // This is mostly useful for internal testing purposes to be able to check
   // other oauth endpoints.
