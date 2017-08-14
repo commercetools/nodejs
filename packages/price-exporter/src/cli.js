@@ -65,7 +65,8 @@ ${description}`,
   })
 
   .option('accessToken', {
-    describe: 'CTP client access token.',
+    describe: `CTP client access token.
+Required scopes: ['view_products', 'view_customers', 'view_types']`,
   })
 
   .option('delimiter', {
