@@ -9,7 +9,6 @@ import type {
 /* global fetch */
 import 'isomorphic-fetch'
 
-
 export default function authMiddlewareBase ({
     request,
     response,

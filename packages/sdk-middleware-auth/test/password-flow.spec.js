@@ -4,6 +4,11 @@ import {
 
 import authMiddlewareBase from '../src/base-auth-flow'
 
+// required to be at the root because Jest hoists it avoid all requires,
+// if in any method like `beforeAll`,
+// it will be hoisted within the scope of that method
+jest.mock('../src/base-auth-flow')
+
 function createTestRequest (options) {
   return {
     url: '',
@@ -30,10 +35,8 @@ function createTestMiddlewareOptions (options) {
   }
 }
 
+
 describe('Password Flow', () => {
-  beforeAll(() => {
-    jest.mock('../src/base-auth-flow')
-  })
   afterAll(() => {
     jest.unmock('../src/base-auth-flow')
   })
