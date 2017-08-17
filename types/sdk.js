@@ -118,6 +118,14 @@ export type UserAgentMiddlewareOptions = {
   contactEmail?: string;
 }
 
+export type Next = (
+  request: MiddlewareRequest, response: MiddlewareResponse
+) => mixed
+
+export type Task = {
+  request: MiddlewareRequest;
+  response: MiddlewareResponse;
+}
 
 /* API Request Builder */
 export type ServiceBuilderDefaultParams = {
