@@ -93,6 +93,16 @@ export function buildRequestForRefreshTokenFlow () {
   // TODO
 }
 
-export function buildRequestForAnonymousSessionFlow () {
-  // TODO
+export function buildRequestForAnonymousSessionFlow (
+  options: AuthMiddlewareOptions = {},
+): BuiltRequestParams {
+  const pKey = options.projectKey
+  // eslint-disable-next-line no-param-reassign
+  options.oauthUri = options.oauthUri || `/oauth/${pKey}/anonymous/token`
+  const result = buildRequestForClientCredentialsFlow(options)
+
+  if (options.credentials.anonymousId)
+    result.body += `&anonymous_id=${options.credentials.anonymousId}`
+
+  return { ...result }
 }

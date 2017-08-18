@@ -66,12 +66,14 @@ export type Middleware = (next: Dispatch) => Dispatch;
 export type ClientOptions = {
   middlewares: Array<Middleware>;
 }
+
 export type AuthMiddlewareOptions = {
   host: string;
   projectKey: string;
   credentials: {
     clientId: string;
     clientSecret: string;
+    anonymousId?: string;
   };
   scopes: Array<string>;
   // For internal usage only
