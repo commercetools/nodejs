@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { oneLineTrim } from 'common-tags'
 import {
   buildRequestForClientCredentialsFlow,
   buildRequestForPasswordFlow,
@@ -26,8 +28,10 @@ function createTestOptions (options) {
 }
 
 describe('buildRequestForPasswordFlow', () => {
-  const body = `grant_type=password&scope=${allScopes.join(' ')}\
-&username=foobar&password=verysecurepassword`
+  const body = oneLineTrim`grant_type=password&
+    scope=${allScopes.join(' ')}&
+    username=foobar&password=verysecurepassword
+  `
   it('build request values with all the given options', () => {
     const options = createTestOptions()
     expect(buildRequestForPasswordFlow(options)).toEqual({

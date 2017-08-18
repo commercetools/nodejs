@@ -44,13 +44,12 @@ describe('Password Flow', () => {
         reject,
       }
       const next = (actualParams) => {
-        expect(request).toEqual(actualParams.request)
-        expect(response).toEqual(actualParams.response)
-        expect(response).toEqual(actualParams.response)
-        expect([]).toEqual(actualParams.pendingTasks)
-        expect(
+        expect(actualParams.request).toEqual(actualParams.request)
+        expect(actualParams.response).toEqual(actualParams.response)
+        expect(actualParams.pendingTasks).toEqual([])
+        expect(actualParams.url).toBe(
           'https://auth.commercetools.co/oauth/foo/token/customers/token',
-        ).toBe(actualParams.url)
+        )
         expect('MTIzOnNlY3JldA==').toBe(actualParams.basicAuth)
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)
         resolve()
