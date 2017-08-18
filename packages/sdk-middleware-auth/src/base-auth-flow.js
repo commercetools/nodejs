@@ -31,7 +31,7 @@ type AuthMiddlewareBaseOptions = {
   }
 }
 
-export default function createAuthMiddlewareBase ({
+export default function authMiddlewareBase ({
     request,
     response,
     url,

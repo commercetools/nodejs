@@ -9,7 +9,7 @@ import type {
 } from 'types/sdk'
 
 import { buildRequestForPasswordFlow } from './build-requests'
-import createAuthMiddlewareBase from './base-auth-flow'
+import authMiddlewareBase from './base-auth-flow'
 import store from './utils'
 
 export default function createAuthMiddlewareForPasswordFlow (
@@ -31,6 +31,6 @@ export default function createAuthMiddlewareForPasswordFlow (
       requestState,
       tokenCache,
     }
-    createAuthMiddlewareBase(params, next)
+    authMiddlewareBase(params, next)
   }
 }
