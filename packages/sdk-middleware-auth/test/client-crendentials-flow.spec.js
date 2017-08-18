@@ -51,6 +51,7 @@ describe('Client Crentials Flow', () => {
         })
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)
         resolve()
+        resolve()
       }
       const middlewareOptions = createTestMiddlewareOptions()
       const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
