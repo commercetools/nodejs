@@ -183,10 +183,16 @@ describe('Base Auth Flow', () => {
       }
       const tokenCache = store({})
       const requestState = store(false)
+      // Third call:
+      // - we simulate that the request has a token set in the headers
+      // - the previous token is still valid, no more requests
       const call3 = () => {
         expect(requestCount).toBe(2)
         createBaseMiddleware({ requestState, tokenCache }, next)
       }
+      // Second call:
+      // - we simulate that the request has a token set in the headers
+      // - the previous token was expired though, so we need to refetch it
       const call2 = () => {
         expect(requestCount).toBe(1)
         createBaseMiddleware({ requestState, tokenCache }, call3)
