@@ -40,6 +40,10 @@ const client = createClient({
       credentials: {
         clientId: '123',
         clientSecret: 'secret',
+        user: {
+          username: string;
+          password: string;
+        }
       },
       scopes: [
         'view_products:test',
