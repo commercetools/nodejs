@@ -52,6 +52,7 @@ describe('Password Flow', () => {
         )
         expect('MTIzOnNlY3JldA==').toBe(actualParams.basicAuth)
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)
+        jest.unmock('../src/base-auth-flow')
         resolve()
       }
       const middlewareOptions = createTestMiddlewareOptions()

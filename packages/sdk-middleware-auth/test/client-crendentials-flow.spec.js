@@ -48,7 +48,7 @@ describe('Client Crentials Flow', () => {
         expect('MTIzOnNlY3JldA==').toBe(actualParams.basicAuth)
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)
         resolve()
-        resolve()
+        jest.unmock('../src/base-auth-flow')
       }
       const middlewareOptions = createTestMiddlewareOptions()
       const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
