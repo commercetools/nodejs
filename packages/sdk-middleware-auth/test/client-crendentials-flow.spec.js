@@ -28,6 +28,9 @@ function createTestMiddlewareOptions (options) {
 }
 
 describe('Client Crentials Flow', () => {
+  afterAll(() => {
+    jest.unmock('../src/base-auth-flow')
+  })
   it('should call the base-auth-flow method with the right params', () =>
     new Promise((resolve, reject) => {
       authMiddlewareBase.mockImplementation((params, next) => {
@@ -48,7 +51,6 @@ describe('Client Crentials Flow', () => {
         })
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)
         resolve()
-        jest.unmock('../src/base-auth-flow')
       }
       const middlewareOptions = createTestMiddlewareOptions()
       const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
