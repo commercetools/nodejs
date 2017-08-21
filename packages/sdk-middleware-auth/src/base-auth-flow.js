@@ -1,35 +1,14 @@
 /* @flow */
 import type {
   MiddlewareRequest,
-  MiddlewareResponse,
   Next,
   Task,
+  AuthMiddlewareBaseOptions,
 } from 'types/sdk'
 
 /* global fetch */
 import 'isomorphic-fetch'
 
-type RequestState = boolean
-type TokenStore = {
-  token: string;
-  expirationTime: number;
-}
-type AuthMiddlewareBaseOptions = {
-  request: MiddlewareRequest;
-  response: MiddlewareResponse;
-  url: string;
-  body: string;
-  basicAuth: string;
-  pendingTasks: Array<Task>;
-  requestState: {
-    get: () => RequestState;
-    set: (requestState: RequestState) => RequestState;
-  };
-  tokenCache: {
-    get: () => TokenStore;
-    set: (cache: TokenStore) => TokenStore;
-  }
-}
 
 export default function authMiddlewareBase ({
     request,

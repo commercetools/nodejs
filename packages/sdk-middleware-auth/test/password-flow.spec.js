@@ -44,13 +44,13 @@ describe('Password Flow', () => {
         reject,
       }
       const next = (actualParams) => {
-        expect(actualParams.request).toEqual(actualParams.request)
-        expect(actualParams.response).toEqual(actualParams.response)
+        expect(actualParams.request).toEqual(request)
+        expect(actualParams.response).toEqual(response)
         expect(actualParams.pendingTasks).toEqual([])
         expect(actualParams.url).toBe(
           'https://auth.commercetools.co/oauth/foo/customers/token',
         )
-        expect('MTIzOnNlY3JldA==').toBe(actualParams.basicAuth)
+        expect(actualParams.basicAuth).toBe('MTIzOnNlY3JldA==')
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)
         jest.unmock('../src/base-auth-flow')
         resolve()

@@ -78,6 +78,34 @@ export type AuthMiddlewareOptions = {
   oauthUri: string;
 }
 
+export type Task = {
+  request: MiddlewareRequest;
+  response: MiddlewareResponse;
+}
+
+export type RequestState = boolean
+export type TokenStore = {
+  token: string;
+  expirationTime: number;
+}
+
+export type AuthMiddlewareBaseOptions = {
+  request: MiddlewareRequest;
+  response: MiddlewareResponse;
+  url: string;
+  body: string;
+  basicAuth: string;
+  pendingTasks: Array<Task>;
+  requestState: {
+    get: () => RequestState;
+    set: (requestState: RequestState) => RequestState;
+  };
+  tokenCache: {
+    get: () => TokenStore;
+    set: (cache: TokenStore) => TokenStore;
+  }
+}
+
 export type PasswordAuthMiddlewareOptions = {
   host: string;
   projectKey: string;
@@ -121,11 +149,6 @@ export type UserAgentMiddlewareOptions = {
 export type Next = (
   request: MiddlewareRequest, response: MiddlewareResponse
 ) => mixed
-
-export type Task = {
-  request: MiddlewareRequest;
-  response: MiddlewareResponse;
-}
 
 /* API Request Builder */
 export type ServiceBuilderDefaultParams = {
