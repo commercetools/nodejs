@@ -40,6 +40,7 @@ describe('Customer Login', () => {
     }])),
   )
   afterAll(() => clearData(apiConfig, 'customers'))
+
   it('should log customer and fetch customer profile', () => {
     const userConfig = {
       ...apiConfig,
