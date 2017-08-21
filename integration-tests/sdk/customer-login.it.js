@@ -64,7 +64,7 @@ describe('Customer Login', () => {
       method: 'GET',
     }).then((response) => {
       const user = response.body
-      expect(user.email).toBe(userEmail)
+      expect(user).toHaveProperty('email', userEmail)
     })
   })
 })

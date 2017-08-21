@@ -54,15 +54,8 @@ describe('Base Auth Flow', () => {
 
   it('get a new auth token if not present in request headers', () =>
     new Promise((resolve) => {
-      const request = createTestRequest()
-      const next = (req /* , res */) => {
-        expect(req).toEqual({
-          ...request,
-          headers: {
-            ...request.headers,
-            Authorization: 'Bearer xxx',
-          },
-        })
+      const next = (req) => {
+        expect(req).toHaveProperty('headers.Authorization', 'Bearer xxx')
         resolve()
       }
       const middlewareOptions = createTestMiddlewareOptions()
