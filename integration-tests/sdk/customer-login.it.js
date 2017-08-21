@@ -10,7 +10,7 @@ import { clearData, createData } from './../cli/helpers/utils'
 
 let projectKey
 if (process.env.CI === 'true')
-  projectKey = 'customers-login-integration-tests'
+  projectKey = 'customers-login-integration-test'
 else
   projectKey = process.env.npm_config_projectkey
 
