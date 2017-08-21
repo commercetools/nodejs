@@ -94,8 +94,13 @@ export function buildRequestForRefreshTokenFlow () {
 }
 
 export function buildRequestForAnonymousSessionFlow (
-  options: AuthMiddlewareOptions = {},
+  options: AuthMiddlewareOptions,
 ): BuiltRequestParams {
+  if (!options)
+    throw new Error('Missing required options')
+
+  if (!options.projectKey)
+    throw new Error('Missing required option (projectKey)')
   const pKey = options.projectKey
   // eslint-disable-next-line no-param-reassign
   options.oauthUri = options.oauthUri || `/oauth/${pKey}/anonymous/token`
