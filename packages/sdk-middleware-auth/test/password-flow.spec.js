@@ -48,7 +48,7 @@ describe('Password Flow', () => {
         expect(actualParams.response).toEqual(actualParams.response)
         expect(actualParams.pendingTasks).toEqual([])
         expect(actualParams.url).toBe(
-          'https://auth.commercetools.co/oauth/foo/token/customers/token',
+          'https://auth.commercetools.co/oauth/foo/customers/token',
         )
         expect('MTIzOnNlY3JldA==').toBe(actualParams.basicAuth)
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)

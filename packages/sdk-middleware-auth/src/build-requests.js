@@ -75,16 +75,17 @@ export function buildRequestForPasswordFlow (
   if (!(username && password))
     throw new Error('Missing required user credentials (username, password)')
 
-  const defaultScope = `${authScopes.MANAGE_PROJECT}:${pKey}`
-  const scope = (options.scopes || [defaultScope]).join(' ')
+  const scope = (options.scopes || []).join(' ')
+  const scopeStr = scope ? `&scope=${scope}` : ''
+
 
   const basicAuth = new Buffer(`${clientId}:${clientSecret}`).toString('base64')
   // This is mostly useful for internal testing purposes to be able to check
   // other oauth endpoints.
-  const oauthUri = options.oauthUri || `/oauth/${pKey}/token/customers/token`
+  const oauthUri = options.oauthUri || `/oauth/${pKey}/customers/token`
   const url = options.host.replace(/\/$/, '') + oauthUri
   // eslint-disable-next-line max-len
-  const body = `grant_type=password&scope=${scope}&username=${username}&password=${password}`
+  const body = `grant_type=password&username=${username}&password=${password}${scopeStr}`
 
   return { basicAuth, url, body }
 }

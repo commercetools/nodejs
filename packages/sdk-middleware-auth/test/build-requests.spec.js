@@ -29,14 +29,14 @@ function createTestOptions (options) {
 
 describe('buildRequestForPasswordFlow', () => {
   const body = oneLineTrim`grant_type=password&
-    scope=${allScopes.join(' ')}&
-    username=foobar&password=verysecurepassword
+    username=foobar&password=verysecurepassword&
+    scope=${allScopes.join(' ')}
   `
   it('build request values with all the given options', () => {
     const options = createTestOptions()
     expect(buildRequestForPasswordFlow(options)).toEqual({
       basicAuth: 'MTIzOnNlY3JldA==',
-      url: 'http://localhost:8080/oauth/test/token/customers/token',
+      url: 'http://localhost:8080/oauth/test/customers/token',
       body,
     })
   })
@@ -56,7 +56,7 @@ describe('buildRequestForPasswordFlow', () => {
     })
     expect(buildRequestForPasswordFlow(options)).toEqual({
       basicAuth: 'MTIzOnNlY3JldA==',
-      url: 'http://localhost:8080/oauth/test/token/customers/token',
+      url: 'http://localhost:8080/oauth/test/customers/token',
       body,
     })
   })
@@ -67,7 +67,7 @@ describe('buildRequestForPasswordFlow', () => {
     })
     expect(buildRequestForPasswordFlow(options)).toEqual({
       basicAuth: 'MTIzOnNlY3JldA==',
-      url: 'http://localhost:8080/oauth/test/token/customers/token',
+      url: 'http://localhost:8080/oauth/test/customers/token',
       body,
     })
   })

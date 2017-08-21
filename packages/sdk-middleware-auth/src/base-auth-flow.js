@@ -87,29 +87,29 @@ export default function authMiddlewareBase ({
   .then((res: Response): Promise<*> => {
     if (res.ok)
       return res.json()
-      .then((result: Object) => {
-        const token = result.access_token
-        const expiresIn = result.expires_in
-        const expirationTime = calculateExpirationTime(expiresIn)
+        .then((result: Object) => {
+          const token = result.access_token
+          const expiresIn = result.expires_in
+          const expirationTime = calculateExpirationTime(expiresIn)
 
-        // Cache new token
-        tokenCache.set({ token, expirationTime })
+          // Cache new token
+          tokenCache.set({ token, expirationTime })
 
-        // Dispatch all pending requests
-        requestState.set(false)
+          // Dispatch all pending requests
+          requestState.set(false)
 
-        // Freeze and copy pending queue, reset original one for accepting
-        // new pending tasks
-        const executionQueue = pendingTasks.slice()
-        // eslint-disable-next-line no-param-reassign
-        pendingTasks = []
-        executionQueue.forEach((task: Task) => {
-          // Assign the new token in the request header
-          const requestWithAuth = mergeAuthHeader(token, task.request)
-          // console.log('test', cache, pendingTasks)
-          next(requestWithAuth, task.response)
+          // Freeze and copy pending queue, reset original one for accepting
+          // new pending tasks
+          const executionQueue = pendingTasks.slice()
+          // eslint-disable-next-line no-param-reassign
+          pendingTasks = []
+          executionQueue.forEach((task: Task) => {
+            // Assign the new token in the request header
+            const requestWithAuth = mergeAuthHeader(token, task.request)
+            // console.log('test', cache, pendingTasks)
+            next(requestWithAuth, task.response)
+          })
         })
-      })
 
     // Handle error response
     return res.text()
