@@ -29,7 +29,8 @@ function createTestOptions (options) {
 
 describe('buildRequestForPasswordFlow', () => {
   const body = oneLineTrim`grant_type=password&
-    username=foobar&password=verysecurepassword&
+    username=foobar&
+    password=verysecurepassword&
     scope=${allScopes.join(' ')}
   `
   it('build request values with all the given options', () => {
@@ -116,8 +117,8 @@ describe('buildRequestForPasswordFlow', () => {
   it('validate required option (username, password)', () => {
     const options = createTestOptions({
       credentials: {
-        clientId: 'yeah',
-        clientSecret: 'yo',
+        clientId: 'foo',
+        clientSecret: 'baz',
         user: {
           username: 'bar',
         },
@@ -240,6 +241,21 @@ describe('buildRequestForAnonymousSessionFlow', () => {
       url: 'http://localhost:8080/oauth/test/anonymous/token',
       body: `grant_type=client_credentials&scope=${allScopes.join(' ')}`,
     })
+  })
+
+  it('validate required options', () => {
+    expect(
+      () => buildRequestForAnonymousSessionFlow(),
+    ).toThrowError('Missing required options')
+  })
+
+  it('validate required option (projectKey)', () => {
+    const options = createTestOptions({
+      projectKey: undefined,
+    })
+    expect(
+      () => buildRequestForAnonymousSessionFlow(options),
+    ).toThrowError('Missing required option (projectKey)')
   })
 
   it('should add anonymousId if passed in', () => {
