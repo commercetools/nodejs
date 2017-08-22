@@ -40,6 +40,10 @@ const client = createClient({
       credentials: {
         clientId: '123',
         clientSecret: 'secret',
+        user: {
+          username: string;
+          password: string;
+        }
       },
       scopes: [
         'view_products:test',
@@ -58,6 +62,7 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 
 1. `host` *(String)*: the host of the OAuth API service
 2. `projectKey` *(String)*: the key of the project to assign the default scope to
+   - The user field is an object containining `username` and `password`. [Sample below](#usage-example)
 3. `credentials` *(Object)*: the client credentials for authentication (`clientId`, `clientSecret`)
 4. `scopes` *(Array)*: a list of [scopes](http://dev.commercetools.com/http-api-authorization.html#scopes) to assign to the OAuth token. _No default scope is sent_
 
@@ -80,6 +85,43 @@ const client = createClient({
           username: string;
           password: string;
         }
+      },
+      scopes: [
+        'view_products:test',
+        'manage_orders:test',
+      ],
+    }),
+  ],
+})
+```
+
+## `createAuthMiddlewareForAnonymousSessionFlow(options)`
+
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Anonymous Session Flow](http://dev.commercetools.com/http-api-authorization.html#tokens-for-anonymous-sessions) of the commercetools platform API.
+
+#### Named arguments (options)
+
+1. `host` *(String)*: the host of the OAuth API service
+2. `projectKey` *(String)*: the key of the project to assign the default scope to
+3. `credentials` *(Object)*: the client credentials for authentication (`clientId`, `clientSecret`, `anonymousId`)
+4. `scopes` *(Array)*: a list of [scopes](http://dev.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
+
+
+#### Usage example
+
+```js
+import { createClient } from '@commercetools/sdk-client'
+import { createAuthMiddlewareForAnonymousSessionFlow } from '@commercetools/sdk-middleware-auth'
+
+const client = createClient({
+  middlewares: [
+    createAuthMiddlewareForAnonymousSessionFlow({
+      host: 'https://auth.commercetools.com',
+      projectKey: 'test',
+      credentials: {
+        clientId: '123',
+        clientSecret: 'secret',
+        anonymousId: 'unique-id-of-customer-not-required',
       },
       scopes: [
         'view_products:test',

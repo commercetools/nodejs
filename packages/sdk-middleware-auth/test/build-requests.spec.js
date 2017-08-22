@@ -4,7 +4,7 @@ import {
   buildRequestForClientCredentialsFlow,
   buildRequestForPasswordFlow,
   // buildRequestForRefreshTokenFlow,
-  // buildRequestForAnonymousSessionFlow,
+  buildRequestForAnonymousSessionFlow,
 } from '../src/build-requests'
 import { scopes } from '../src'
 
@@ -28,8 +28,10 @@ function createTestOptions (options) {
 }
 
 describe('buildRequestForPasswordFlow', () => {
-  const body = oneLineTrim`grant_type=password&
-    username=foobar&password=verysecurepassword&
+  const body = oneLineTrim`
+    grant_type=password&
+    username=foobar&
+    password=verysecurepassword&
     scope=${allScopes.join(' ')}
   `
   it('build request values with all the given options', () => {
@@ -116,8 +118,8 @@ describe('buildRequestForPasswordFlow', () => {
   it('validate required option (username, password)', () => {
     const options = createTestOptions({
       credentials: {
-        clientId: 'yeah',
-        clientSecret: 'yo',
+        clientId: 'foo',
+        clientSecret: 'baz',
         user: {
           username: 'bar',
         },
@@ -229,5 +231,49 @@ describe('buildRequestForClientCredentialsFlow', () => {
     expect(
       () => buildRequestForClientCredentialsFlow(options),
     ).toThrowError('Missing required credentials (clientId, clientSecret)')
+  })
+})
+
+describe('buildRequestForAnonymousSessionFlow', () => {
+  it('build request values with all the given options', () => {
+    const options = createTestOptions()
+    expect(buildRequestForAnonymousSessionFlow(options)).toEqual({
+      basicAuth: 'MTIzOnNlY3JldA==',
+      url: 'http://localhost:8080/oauth/test/anonymous/token',
+      body: `grant_type=client_credentials&scope=${allScopes.join(' ')}`,
+    })
+  })
+
+  it('validate required options', () => {
+    expect(
+      () => buildRequestForAnonymousSessionFlow(),
+    ).toThrowError('Missing required options')
+  })
+
+  it('validate required option (projectKey)', () => {
+    const options = createTestOptions({
+      projectKey: undefined,
+    })
+    expect(
+      () => buildRequestForAnonymousSessionFlow(options),
+    ).toThrowError('Missing required option (projectKey)')
+  })
+
+  it('should add anonymousId if passed in', () => {
+    const mockCred = {
+      clientId: '123',
+      clientSecret: 'secret',
+      anonymousId: 'youdontknowme',
+    }
+    const options = createTestOptions({ credentials: mockCred })
+    expect(buildRequestForAnonymousSessionFlow(options)).toEqual({
+      basicAuth: 'MTIzOnNlY3JldA==',
+      url: 'http://localhost:8080/oauth/test/anonymous/token',
+      body: oneLineTrim`
+        grant_type=client_credentials&
+        scope=${allScopes.join(' ')}&
+        anonymous_id=youdontknowme
+      `,
+    })
   })
 })

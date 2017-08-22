@@ -4,6 +4,9 @@ import {
 
 import authMiddlewareBase from '../src/base-auth-flow'
 
+// required to be at the root because Jest hoists it above all requires,
+// if in any method like `beforeAll`,
+// it will be hoisted within the scope of that method
 jest.mock('../src/base-auth-flow')
 
 function createTestRequest (options) {
@@ -32,7 +35,11 @@ function createTestMiddlewareOptions (options) {
   }
 }
 
+
 describe('Password Flow', () => {
+  afterAll(() => {
+    jest.unmock('../src/base-auth-flow')
+  })
   it('should call the base-auth-flow method with the right params', () =>
     new Promise((resolve, reject) => {
       authMiddlewareBase.mockImplementation((params, next) => {

@@ -78,7 +78,6 @@ export function buildRequestForPasswordFlow (
   const scope = (options.scopes || []).join(' ')
   const scopeStr = scope ? `&scope=${scope}` : ''
 
-
   const basicAuth = new Buffer(`${clientId}:${clientSecret}`).toString('base64')
   // This is mostly useful for internal testing purposes to be able to check
   // other oauth endpoints.
@@ -94,6 +93,21 @@ export function buildRequestForRefreshTokenFlow () {
   // TODO
 }
 
-export function buildRequestForAnonymousSessionFlow () {
-  // TODO
+export function buildRequestForAnonymousSessionFlow (
+  options: AuthMiddlewareOptions,
+): BuiltRequestParams {
+  if (!options)
+    throw new Error('Missing required options')
+
+  if (!options.projectKey)
+    throw new Error('Missing required option (projectKey)')
+  const pKey = options.projectKey
+  // eslint-disable-next-line no-param-reassign
+  options.oauthUri = options.oauthUri || `/oauth/${pKey}/anonymous/token`
+  const result = buildRequestForClientCredentialsFlow(options)
+
+  if (options.credentials.anonymousId)
+    result.body += `&anonymous_id=${options.credentials.anonymousId}`
+
+  return { ...result }
 }

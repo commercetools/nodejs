@@ -5,10 +5,8 @@ import type {
   Task,
   AuthMiddlewareBaseOptions,
 } from 'types/sdk'
-
 /* global fetch */
 import 'isomorphic-fetch'
-
 
 export default function authMiddlewareBase ({
     request,
