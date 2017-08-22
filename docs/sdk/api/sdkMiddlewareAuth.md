@@ -49,3 +49,43 @@ const client = createClient({
   ],
 })
 ```
+
+## `createAuthMiddlewareForPasswordFlow(options)`
+
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Password Flow](http://dev.commercetools.com/http-api-authorization.html#password-flow) of the commercetools platform API.
+
+#### Named arguments (options)
+
+1. `host` *(String)*: the host of the OAuth API service
+2. `projectKey` *(String)*: the key of the project to assign the default scope to
+3. `credentials` *(Object)*: the client credentials for authentication (`clientId`, `clientSecret`)
+4. `scopes` *(Array)*: a list of [scopes](http://dev.commercetools.com/http-api-authorization.html#scopes) to assign to the OAuth token. _No default scope is sent_
+
+
+#### Usage example
+
+```js
+import { createClient } from '@commercetools/sdk-client'
+import { createAuthMiddlewareForPasswordFlow } from '@commercetools/sdk-middleware-auth'
+
+const client = createClient({
+  middlewares: [
+    createAuthMiddlewareForPasswordFlow({
+      host: 'https://auth.commercetools.com',
+      projectKey: 'test',
+      credentials: {
+        clientId: '123',
+        clientSecret: 'secret',
+        user: {
+          username: string;
+          password: string;
+        }
+      },
+      scopes: [
+        'view_products:test',
+        'manage_orders:test',
+      ],
+    }),
+  ],
+})
+```

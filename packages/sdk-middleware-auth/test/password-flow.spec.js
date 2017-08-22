@@ -1,6 +1,7 @@
 import {
-  createAuthMiddlewareForClientCredentialsFlow,
+  createAuthMiddlewareForPasswordFlow,
 } from '../src'
+
 import authMiddlewareBase from '../src/base-auth-flow'
 
 jest.mock('../src/base-auth-flow')
@@ -22,12 +23,16 @@ function createTestMiddlewareOptions (options) {
     credentials: {
       clientId: '123',
       clientSecret: 'secret',
+      user: {
+        username: 'foobar',
+        password: 'verysecurepassword',
+      },
     },
     ...options,
   }
 }
 
-describe('Client Crentials Flow', () => {
+describe('Password Flow', () => {
   it('should call the base-auth-flow method with the right params', () =>
     new Promise((resolve, reject) => {
       authMiddlewareBase.mockImplementation((params, next) => {
@@ -43,15 +48,15 @@ describe('Client Crentials Flow', () => {
           request,
           response,
           pendingTasks: [],
-          url: 'https://auth.commercetools.co/oauth/token',
+          url: 'https://auth.commercetools.co/oauth/foo/customers/token',
           basicAuth: 'MTIzOnNlY3JldA==',
         })
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)
-        resolve()
         jest.unmock('../src/base-auth-flow')
+        resolve()
       }
       const middlewareOptions = createTestMiddlewareOptions()
-      const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
+      const authMiddleware = createAuthMiddlewareForPasswordFlow(
         middlewareOptions,
       )
 

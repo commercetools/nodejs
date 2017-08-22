@@ -77,6 +77,51 @@ export type AuthMiddlewareOptions = {
   // For internal usage only
   oauthUri: string;
 }
+
+export type Task = {
+  request: MiddlewareRequest;
+  response: MiddlewareResponse;
+}
+
+export type RequestState = boolean
+export type TokenStore = {
+  token: string;
+  expirationTime: number;
+}
+
+export type AuthMiddlewareBaseOptions = {
+  request: MiddlewareRequest;
+  response: MiddlewareResponse;
+  url: string;
+  body: string;
+  basicAuth: string;
+  pendingTasks: Array<Task>;
+  requestState: {
+    get: () => RequestState;
+    set: (requestState: RequestState) => RequestState;
+  };
+  tokenCache: {
+    get: () => TokenStore;
+    set: (cache: TokenStore) => TokenStore;
+  }
+}
+
+export type PasswordAuthMiddlewareOptions = {
+  host: string;
+  projectKey: string;
+  credentials: {
+    clientId: string;
+    clientSecret: string;
+    user: {
+      username: string;
+      password: string;
+    };
+  };
+  scopes: Array<string>;
+  // For internal usage only
+  oauthUri: string;
+}
+
 export type HttpMiddlewareOptions = {
   host: string;
   includeHeaders?: boolean;
@@ -101,6 +146,9 @@ export type UserAgentMiddlewareOptions = {
   contactEmail?: string;
 }
 
+export type Next = (
+  request: MiddlewareRequest, response: MiddlewareResponse
+) => mixed
 
 /* API Request Builder */
 export type ServiceBuilderDefaultParams = {
