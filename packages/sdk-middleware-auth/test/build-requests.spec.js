@@ -28,7 +28,8 @@ function createTestOptions (options) {
 }
 
 describe('buildRequestForPasswordFlow', () => {
-  const body = oneLineTrim`grant_type=password&
+  const body = oneLineTrim`
+    grant_type=password&
     username=foobar&
     password=verysecurepassword&
     scope=${allScopes.join(' ')}
@@ -268,7 +269,8 @@ describe('buildRequestForAnonymousSessionFlow', () => {
     expect(buildRequestForAnonymousSessionFlow(options)).toEqual({
       basicAuth: 'MTIzOnNlY3JldA==',
       url: 'http://localhost:8080/oauth/test/anonymous/token',
-      body: oneLineTrim`grant_type=client_credentials&
+      body: oneLineTrim`
+        grant_type=client_credentials&
         scope=${allScopes.join(' ')}&
         anonymous_id=youdontknowme
       `,
