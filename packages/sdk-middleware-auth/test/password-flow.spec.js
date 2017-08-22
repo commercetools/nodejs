@@ -4,7 +4,7 @@ import {
 
 import authMiddlewareBase from '../src/base-auth-flow'
 
-// required to be at the root because Jest hoists it avoid all requires,
+// required to be at the root because Jest hoists it above all requires,
 // if in any method like `beforeAll`,
 // it will be hoisted within the scope of that method
 jest.mock('../src/base-auth-flow')
