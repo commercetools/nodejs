@@ -80,6 +80,18 @@ export type AuthMiddlewareOptions = {
   oauthUri: string;
 }
 
+export type RefreshAuthMiddlewareOptions = {
+  host: string;
+  projectKey: string;
+  credentials: {
+    clientId: string;
+    clientSecret: string;
+    refreshToken: string;
+  };
+  // For internal usage only
+  oauthUri: string;
+}
+
 export type Task = {
   request: MiddlewareRequest;
   response: MiddlewareResponse;
