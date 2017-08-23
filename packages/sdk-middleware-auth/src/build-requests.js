@@ -105,11 +105,14 @@ export function buildRequestForRefreshTokenFlow (
   if (!options.credentials)
     throw new Error('Missing required option (credentials)')
 
-  const { clientId, clientSecret, refreshToken } = options.credentials
+  if (!options.refreshToken)
+    throw new Error('Missing required option (refreshToken)')
 
-  if (!(clientId && clientSecret && refreshToken))
+  const { clientId, clientSecret } = options.credentials
+
+  if (!(clientId && clientSecret))
     throw new Error(
-      'Missing required credentials (clientId, clientSecret, refreshToken)',
+      'Missing required credentials (clientId, clientSecret)',
     )
 
   const basicAuth = new Buffer(`${clientId}:${clientSecret}`).toString('base64')
@@ -117,7 +120,7 @@ export function buildRequestForRefreshTokenFlow (
   // other oauth endpoints.
   const oauthUri = options.oauthUri || '/oauth/token'
   const url = options.host.replace(/\/$/, '') + oauthUri
-  const body = `grant_type=refresh_token&refresh_token=${refreshToken}`
+  const body = `grant_type=refresh_token&refresh_token=${options.refreshToken}`
 
   return { basicAuth, url, body }
 }

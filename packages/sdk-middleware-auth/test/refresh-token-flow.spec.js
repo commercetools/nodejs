@@ -22,13 +22,13 @@ function createTestMiddlewareOptions (options) {
     credentials: {
       clientId: '123',
       clientSecret: 'secret',
-      refreshToken: 'foobar123',
     },
+    refreshToken: 'foobar123',
     ...options,
   }
 }
 
-describe('Client Crentials Flow', () => {
+describe('Refresh Token Flow', () => {
   afterAll(() => {
     jest.unmock('../src/base-auth-flow')
   })

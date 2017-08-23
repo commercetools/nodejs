@@ -86,8 +86,8 @@ export type RefreshAuthMiddlewareOptions = {
   credentials: {
     clientId: string;
     clientSecret: string;
-    refreshToken: string;
   };
+  refreshToken: string;
   // For internal usage only
   oauthUri: string;
 }

@@ -239,8 +239,8 @@ describe('buildRequestForRefreshTokenFlow', () => {
     credentials: {
       clientId: '123',
       clientSecret: 'secret',
-      refreshToken: 'foobar123',
     },
+    refreshToken: 'foobar123',
     scopes: undefined,
   }
   it('build request values with all the given options', () => {
@@ -315,25 +315,27 @@ describe('buildRequestForRefreshTokenFlow', () => {
     ).toThrowError('Missing required option (credentials)')
   })
 
-  it('validate required option (clientId, clientSecret, refreshToken)', () => {
+  it('validate required option (clientId, clientSecret)', () => {
     const options = createTestOptions({
+      ...mockCred,
       credentials: {},
     })
     expect(
       () => buildRequestForRefreshTokenFlow(options),
     ).toThrowError(
-      'Missing required credentials (clientId, clientSecret, refreshToken)',
+      'Missing required credentials (clientId, clientSecret)',
     )
   })
 
-  it('validate both credentials and refreshToken are required', () => {
+  it('validate both credentials are required', () => {
     const options = createTestOptions({
+      ...mockCred,
       credentials: { clientId: '123' },
     })
     expect(
       () => buildRequestForRefreshTokenFlow(options),
     ).toThrowError(
-      'Missing required credentials (clientId, clientSecret, refreshToken)',
+      'Missing required credentials (clientId, clientSecret)',
     )
   })
 })
