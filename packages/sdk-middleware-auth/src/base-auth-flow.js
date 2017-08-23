@@ -20,7 +20,7 @@ export default function authMiddlewareBase ({
     tokenCache,
   }: AuthMiddlewareBaseOptions,
   next: Next,
-  authOptions,
+  refreshTokenOptions: any,
 ) {
   // Check if there is already a `Authorization` header in the request.
   // If so, then go directly to the next middleware.
@@ -54,14 +54,14 @@ export default function authMiddlewareBase ({
   if (tokenObj && tokenObj.refreshToken
     && (!(tokenObj.token)
     || (tokenObj.token && Date.now() > tokenObj.expirationTime))) {
-    console.log('test...', authOptions)
     executeRequest({
       ...buildRequestForRefreshTokenFlow({
         refreshToken: tokenObj.refreshToken,
-        ...authOptions,
+        ...refreshTokenOptions,
       }),
       tokenCache,
       requestState,
+      pendingTasks,
       next,
       response,
     })
@@ -135,7 +135,6 @@ function executeRequest ({
     // Handle error response
     return res.text()
     .then((text: any) => {
-      console.log('error2', text);
       let parsed
       try {
         parsed = JSON.parse(text)
@@ -148,7 +147,6 @@ function executeRequest ({
     })
   })
   .catch((error: Error) => {
-    console.log('error1', error);
     response.reject(error)
   })
 }
