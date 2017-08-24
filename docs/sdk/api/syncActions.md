@@ -318,3 +318,41 @@ client.execute(customerGroupRequest)
 .then(result => ...)
 .catch(error => ...)
 ```
+
+## `createSyncCartDiscounts(actionGroups)`
+
+> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+
+Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _cart-discounts_.
+
+#### Arguments
+
+1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+
+#### Usage example
+
+```js
+import { createSyncCartDiscounts } from '@commercetools/sync-actions'
+import { createClient } from '@commercetools/sdk-client'
+
+const syncCartDiscounts = createSyncCartDiscounts()
+const client = createClient({
+  middlewares: [...],
+})
+const before = {
+  name: { en: 'My Cart Discount' }
+}
+const now = {
+  name: { en: 'My Cart Discount', de: 'Mein Warenkorbrabatt' }
+}
+const actions = syncCartDiscounts.buildActions(before, now)
+const cartDiscountsRequests = {
+  url: `/cart-discounts/${before.id}`,
+  method: 'POST',
+  body: JSON.stringify({ version: before.version, actions }),
+}
+
+client.execute(cartDiscountsRequests)
+.then(result => ...)
+.catch(error => ...)
+```
