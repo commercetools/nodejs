@@ -315,6 +315,16 @@ describe('buildRequestForRefreshTokenFlow', () => {
     ).toThrowError('Missing required option (credentials)')
   })
 
+  it('validate required option (refreshToken)', () => {
+    const options = createTestOptions({
+      ...mockCred,
+      refreshToken: undefined,
+    })
+    expect(
+      () => buildRequestForRefreshTokenFlow(options),
+    ).toThrowError('Missing required option (refreshToken)')
+  })
+
   it('validate required option (clientId, clientSecret)', () => {
     const options = createTestOptions({
       ...mockCred,
