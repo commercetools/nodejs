@@ -3,7 +3,7 @@ import { oneLineTrim } from 'common-tags'
 import {
   buildRequestForClientCredentialsFlow,
   buildRequestForPasswordFlow,
-  // buildRequestForRefreshTokenFlow,
+  buildRequestForRefreshTokenFlow,
   buildRequestForAnonymousSessionFlow,
 } from '../src/build-requests'
 import { scopes } from '../src'
@@ -231,6 +231,122 @@ describe('buildRequestForClientCredentialsFlow', () => {
     expect(
       () => buildRequestForClientCredentialsFlow(options),
     ).toThrowError('Missing required credentials (clientId, clientSecret)')
+  })
+})
+
+describe('buildRequestForRefreshTokenFlow', () => {
+  const mockCred = {
+    credentials: {
+      clientId: '123',
+      clientSecret: 'secret',
+    },
+    refreshToken: 'foobar123',
+    scopes: undefined,
+  }
+  it('build request values with all the given options', () => {
+    const options = createTestOptions(mockCred)
+    expect(buildRequestForRefreshTokenFlow(options)).toEqual({
+      basicAuth: 'MTIzOnNlY3JldA==',
+      url: 'http://localhost:8080/oauth/token',
+      body: 'grant_type=refresh_token&refresh_token=foobar123',
+    })
+  })
+
+  it('uses custom oauth uri, if given', () => {
+    const options = createTestOptions({ oauthUri: '/foo/bar', ...mockCred })
+    expect(buildRequestForRefreshTokenFlow(options)).toEqual({
+      basicAuth: 'MTIzOnNlY3JldA==',
+      url: 'http://localhost:8080/foo/bar',
+      body: 'grant_type=refresh_token&refresh_token=foobar123',
+    })
+  })
+
+  it('parses a host that ends with slash', () => {
+    const options = createTestOptions({
+      host: 'http://localhost:8080/',
+      ...mockCred,
+    })
+    expect(buildRequestForRefreshTokenFlow(options)).toEqual({
+      basicAuth: 'MTIzOnNlY3JldA==',
+      url: 'http://localhost:8080/oauth/token',
+      body: 'grant_type=refresh_token&refresh_token=foobar123',
+    })
+  })
+
+  it('parses a host that ends without slash', () => {
+    const options = createTestOptions({
+      host: 'http://localhost:8080',
+      ...mockCred,
+    })
+    expect(buildRequestForRefreshTokenFlow(options)).toEqual({
+      basicAuth: 'MTIzOnNlY3JldA==',
+      url: 'http://localhost:8080/oauth/token',
+      body: 'grant_type=refresh_token&refresh_token=foobar123',
+    })
+  })
+
+  it('validate required options', () => {
+    expect(
+      () => buildRequestForRefreshTokenFlow(),
+    ).toThrowError('Missing required options')
+  })
+
+  it('validate required option (host)', () => {
+    expect(
+      () => buildRequestForRefreshTokenFlow({}),
+    ).toThrowError('Missing required option (host)')
+  })
+
+  it('validate required option (projectKey)', () => {
+    const options = createTestOptions({
+      projectKey: undefined,
+    })
+    expect(
+      () => buildRequestForRefreshTokenFlow(options),
+    ).toThrowError('Missing required option (projectKey)')
+  })
+
+  it('validate required option (credentials)', () => {
+    const options = createTestOptions({
+      credentials: undefined,
+    })
+    expect(
+      () => buildRequestForRefreshTokenFlow(options),
+    ).toThrowError('Missing required option (credentials)')
+  })
+
+  it('validate required option (refreshToken)', () => {
+    const options = createTestOptions({
+      ...mockCred,
+      refreshToken: undefined,
+    })
+    expect(
+      () => buildRequestForRefreshTokenFlow(options),
+    ).toThrowError('Missing required option (refreshToken)')
+  })
+
+  it('validate required option (clientId, clientSecret)', () => {
+    const options = createTestOptions({
+      ...mockCred,
+      credentials: {},
+    })
+    expect(
+      () => buildRequestForRefreshTokenFlow(options),
+    ).toThrowError(
+      'Missing required credentials (clientId, clientSecret)',
+    )
+  })
+
+  it('validate both credentials are required', () => {
+    const options = createTestOptions({
+      ...mockCred,
+      credentials: { clientId: '123' },
+    })
+    expect(
+      () => buildRequestForRefreshTokenFlow(options),
+    ).toThrowError(
+      'Missing required credentials (clientId, clientSecret)',
+    )
   })
 })
 

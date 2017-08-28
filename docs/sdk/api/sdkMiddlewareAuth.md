@@ -131,3 +131,36 @@ const client = createClient({
   ],
 })
 ```
+
+## `createAuthMiddlewareForRefreshTokenFlow(options)`
+
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Refresh Token Flow](http://dev.commercetools.com/http-api-authorization.html#refresh-token-flow) of the commercetools platform API.
+
+#### Named arguments (options)
+
+1. `host` *(String)*: the host of the OAuth API service
+2. `projectKey` *(String)*: the key of the project to assign the default scope to
+3. `credentials` *(Object)*: the client credentials for authentication (`clientId`, `clientSecret`)
+4. `refreshToken` *(String)*: refreshToken from the API to use to fetch new token.
+
+
+#### Usage example
+
+```js
+import { createClient } from '@commercetools/sdk-client'
+import { createAuthMiddlewareForRefreshTokenFlow } from '@commercetools/sdk-middleware-auth'
+
+const client = createClient({
+  middlewares: [
+    createAuthMiddlewareForRefreshTokenFlow({
+      host: 'https://auth.commercetools.com',
+      projectKey: 'test',
+      credentials: {
+        clientId: '123',
+        clientSecret: 'secret',
+      },
+      refreshToken: 'foobar123'
+    }),
+  ],
+})
+```

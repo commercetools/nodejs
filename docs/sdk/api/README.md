@@ -41,9 +41,9 @@ It's up to you to pick whatever middleware fits your needs: you can compose them
 Middelware to authenticate the [request](/sdk/Glossary.md#clientrequest) using one of the supported _auth flows_.
 
 * [createAuthMiddlewareForClientCredentialsFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforclientcredentialsflowoptions)
-* createAuthMiddlewareForPasswordFlow(options)
-* createAuthMiddlewareForRefreshTokenFlow(options)
-* createAuthMiddlewareForAnonymousSessionFlow(options)
+* [createAuthMiddlewareForPasswordFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforpasswordflow)
+* [createAuthMiddlewareForRefreshTokenFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforrefreshtokenflow)
+* [createAuthMiddlewareForAnonymousSessionFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforanonymoussessionflow)
 
 ### `sdk-middleware-http`
 Middelware to send the actual HTTP [request](/sdk/Glossary.md#clientrequest).

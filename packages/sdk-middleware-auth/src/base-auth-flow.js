@@ -4,9 +4,12 @@ import type {
   Next,
   Task,
   AuthMiddlewareBaseOptions,
+  PasswordAuthMiddlewareOptions,
+  AuthMiddlewareOptions,
 } from 'types/sdk'
 /* global fetch */
 import 'isomorphic-fetch'
+import { buildRequestForRefreshTokenFlow } from './build-requests'
 
 export default function authMiddlewareBase ({
     request,
@@ -19,6 +22,7 @@ export default function authMiddlewareBase ({
     tokenCache,
   }: AuthMiddlewareBaseOptions,
   next: Next,
+  userOptions?: AuthMiddlewareOptions | PasswordAuthMiddlewareOptions,
 ) {
   // Check if there is already a `Authorization` header in the request.
   // If so, then go directly to the next middleware.
@@ -38,8 +42,6 @@ export default function authMiddlewareBase ({
     next(requestWithAuth, response)
     return
   }
-  // Token is not present or is invalid. Request a new token...
-
   // Keep pending tasks until a token is fetched
   pendingTasks.push({ request, response })
 
@@ -49,6 +51,45 @@ export default function authMiddlewareBase ({
   // Mark that a token is being fetched
   requestState.set(true)
 
+  // If there was a refreshToken in the tokenCache, and there was an expired
+  // token or no token in the tokenCache, use the refreshToken flow
+  if (tokenObj && tokenObj.refreshToken
+    && (!(tokenObj.token)
+    || (tokenObj.token && Date.now() > tokenObj.expirationTime))) {
+    executeRequest({
+      ...buildRequestForRefreshTokenFlow({
+        ...userOptions,
+        refreshToken: tokenObj.refreshToken,
+      }),
+      tokenCache,
+      requestState,
+      pendingTasks,
+      response,
+    }, next)
+    return
+  }
+
+  // Token and refreshToken are not present or invalid. Request a new token...
+  executeRequest({
+    url,
+    basicAuth,
+    body,
+    tokenCache,
+    requestState,
+    pendingTasks,
+    response,
+  }, next)
+}
+
+function executeRequest ({
+  url,
+  basicAuth,
+  body,
+  tokenCache,
+  requestState,
+  pendingTasks,
+  response,
+}, next: Next) {
   fetch(
     url,
     {
@@ -64,13 +105,15 @@ export default function authMiddlewareBase ({
   .then((res: Response): Promise<*> => {
     if (res.ok)
       return res.json()
-        .then((result: Object) => {
-          const token = result.access_token
-          const expiresIn = result.expires_in
+        .then(({
+          access_token: token,
+          expires_in: expiresIn,
+          refresh_token: refreshToken,
+        }: Object) => {
           const expirationTime = calculateExpirationTime(expiresIn)
 
           // Cache new token
-          tokenCache.set({ token, expirationTime })
+          tokenCache.set({ token, expirationTime, refreshToken })
 
           // Dispatch all pending requests
           requestState.set(false)
@@ -106,7 +149,6 @@ export default function authMiddlewareBase ({
     response.reject(error)
   })
 }
-
 function mergeAuthHeader (
   token: string,
   req: MiddlewareRequest,

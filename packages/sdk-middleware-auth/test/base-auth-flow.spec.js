@@ -1,9 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import nock from 'nock'
 import createAuthMiddlewareBase from '../src/base-auth-flow'
-import {
-  buildRequestForClientCredentialsFlow,
-} from '../src/build-requests'
+import * as buildRequests from '../src/build-requests'
 import store from '../src/utils'
 
 function createTestRequest (options) {
@@ -22,17 +20,19 @@ function createTestResponse (options) {
   }
 }
 
-function createBaseMiddleware (options, next) {
+function createBaseMiddleware (options, next, refreshOptions) {
   const params = {
     request: createTestRequest(),
     response: createTestResponse(),
     pendingTasks: [],
-    ...buildRequestForClientCredentialsFlow(createTestMiddlewareOptions()),
+    ...buildRequests.buildRequestForClientCredentialsFlow(
+      createTestMiddlewareOptions(),
+    ),
     requestState: store(false),
     tokenCache: store({}),
     ...options,
   }
-  return createAuthMiddlewareBase(params, next)
+  return createAuthMiddlewareBase(params, next, refreshOptions)
 }
 
 function createTestMiddlewareOptions (options) {
@@ -197,6 +197,65 @@ describe('Base Auth Flow', () => {
     }),
   )
 
+  it('use refresh token to fetch a new token if no token or is expired', () =>
+    new Promise((resolve) => {
+      const spy = jest.spyOn(buildRequests, 'buildRequestForRefreshTokenFlow')
+      const middlewareOptions = createTestMiddlewareOptions()
+      let requestCount = 0
+      nock(middlewareOptions.host)
+        .persist() // <-- use the same interceptor for all requests
+        .log(() => { (requestCount += 1) }) // keep track of the request count
+        .filteringRequestBody(/.*/, '*')
+        .post('/oauth/token', '*')
+        .reply(200, () => ({
+          access_token: 'xxx',
+          refresh_token: 'foobar123',
+          // Return the first request with an expired token
+          expires_in: requestCount < 2
+            ? 1 // <-- to ensure it expires
+            : (Date.now() + (60 * 60 * 24)),
+        }))
+
+      const next = () => {
+        expect(requestCount).toBe(2)
+        expect(spy).toHaveBeenCalledTimes(2)
+        spy.mockReset()
+        spy.mockRestore()
+        resolve()
+      }
+      const tokenCache = store({ refreshToken: 'foobar123' })
+      const requestState = store(false)
+      // Third call:
+      // - we simulate that the request has a token set in the headers
+      // - the previous token is still valid, no more requests
+      const call3 = () => {
+        expect(requestCount).toBe(2)
+        expect(spy).toHaveBeenCalledTimes(2)
+        createBaseMiddleware({ requestState, tokenCache }, next)
+      }
+      // Second call:
+      // - we simulate that the request has an expired token set in the headers
+      // - the previous token was expired though, so we need to refetch it
+      const call2 = () => {
+        expect(requestCount).toBe(1)
+        expect(spy).toHaveBeenCalledTimes(1)
+        createBaseMiddleware(
+          { requestState, tokenCache },
+          call3,
+          middlewareOptions,
+        )
+      }
+      // First call:
+      // - there is no token
+      // - a new token is fetched with refreshToken
+      createBaseMiddleware(
+        { requestState, tokenCache },
+        call2,
+        middlewareOptions,
+      )
+    }),
+  )
+
   it(
     'do not get a new token if one is already present in request headers ' +
     'but it does not match one of the cached tokens',
@@ -240,7 +299,9 @@ describe('Base Auth Flow', () => {
           request: requestWithHeaders,
           response,
           pendingTasks: [],
-          ...buildRequestForClientCredentialsFlow(middlewareOptions),
+          ...buildRequests.buildRequestForClientCredentialsFlow(
+            middlewareOptions,
+          ),
           requestState,
           tokenCache,
         }, next)

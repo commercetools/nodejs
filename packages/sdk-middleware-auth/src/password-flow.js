@@ -31,6 +31,6 @@ export default function createAuthMiddlewareForPasswordFlow (
       requestState,
       tokenCache,
     }
-    authMiddlewareBase(params, next)
+    authMiddlewareBase(params, next, options)
   }
 }

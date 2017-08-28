@@ -2,6 +2,7 @@
 import type {
   AuthMiddlewareOptions,
   PasswordAuthMiddlewareOptions,
+  RefreshAuthMiddlewareOptions,
 } from 'types/sdk'
 import * as authScopes from './scopes'
 
@@ -89,8 +90,39 @@ export function buildRequestForPasswordFlow (
   return { basicAuth, url, body }
 }
 
-export function buildRequestForRefreshTokenFlow () {
-  // TODO
+export function buildRequestForRefreshTokenFlow (
+  options: RefreshAuthMiddlewareOptions,
+): BuiltRequestParams {
+  if (!options)
+    throw new Error('Missing required options')
+
+  if (!options.host)
+    throw new Error('Missing required option (host)')
+
+  if (!options.projectKey)
+    throw new Error('Missing required option (projectKey)')
+
+  if (!options.credentials)
+    throw new Error('Missing required option (credentials)')
+
+  if (!options.refreshToken)
+    throw new Error('Missing required option (refreshToken)')
+
+  const { clientId, clientSecret } = options.credentials
+
+  if (!(clientId && clientSecret))
+    throw new Error(
+      'Missing required credentials (clientId, clientSecret)',
+    )
+
+  const basicAuth = new Buffer(`${clientId}:${clientSecret}`).toString('base64')
+  // This is mostly useful for internal testing purposes to be able to check
+  // other oauth endpoints.
+  const oauthUri = options.oauthUri || '/oauth/token'
+  const url = options.host.replace(/\/$/, '') + oauthUri
+  const body = `grant_type=refresh_token&refresh_token=${options.refreshToken}`
+
+  return { basicAuth, url, body }
 }
 
 export function buildRequestForAnonymousSessionFlow (
