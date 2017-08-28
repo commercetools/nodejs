@@ -140,7 +140,8 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 
 1. `host` *(String)*: the host of the OAuth API service
 2. `projectKey` *(String)*: the key of the project to assign the default scope to
-3. `credentials` *(Object)*: the client credentials for authentication (`clientId`, `clientSecret`, `refreshToken`)
+3. `credentials` *(Object)*: the client credentials for authentication (`clientId`, `clientSecret`)
+4. `refreshToken` *(String)*: refreshToken from the API to use to fetch new token.
 
 
 #### Usage example
@@ -157,8 +158,8 @@ const client = createClient({
       credentials: {
         clientId: '123',
         clientSecret: 'secret',
-        refreshToken: 'foobar123'
       },
+      refreshToken: 'foobar123'
     }),
   ],
 })
