@@ -31,6 +31,6 @@ export default function createAuthMiddlewareForRefreshTokenFlow (
       requestState,
       tokenCache,
     }
-    authMiddlewareBase(params, next, options)
+    authMiddlewareBase(params, next)
   }
 }

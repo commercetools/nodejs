@@ -4,6 +4,8 @@ import type {
   Next,
   Task,
   AuthMiddlewareBaseOptions,
+  PasswordAuthMiddlewareOptions,
+  AuthMiddlewareOptions,
 } from 'types/sdk'
 /* global fetch */
 import 'isomorphic-fetch'
@@ -20,7 +22,7 @@ export default function authMiddlewareBase ({
     tokenCache,
   }: AuthMiddlewareBaseOptions,
   next: Next,
-  refreshTokenOptions: any,
+  userOptions?: AuthMiddlewareOptions | PasswordAuthMiddlewareOptions,
 ) {
   // Check if there is already a `Authorization` header in the request.
   // If so, then go directly to the next middleware.
@@ -56,15 +58,14 @@ export default function authMiddlewareBase ({
     || (tokenObj.token && Date.now() > tokenObj.expirationTime))) {
     executeRequest({
       ...buildRequestForRefreshTokenFlow({
+        ...userOptions,
         refreshToken: tokenObj.refreshToken,
-        ...refreshTokenOptions,
       }),
       tokenCache,
       requestState,
       pendingTasks,
-      next,
       response,
-    })
+    }, next)
     return
   }
 
@@ -76,9 +77,8 @@ export default function authMiddlewareBase ({
     tokenCache,
     requestState,
     pendingTasks,
-    next,
     response,
-  })
+  }, next)
 }
 
 function executeRequest ({
@@ -88,9 +88,8 @@ function executeRequest ({
   tokenCache,
   requestState,
   pendingTasks,
-  next,
   response,
-}) {
+}, next: Next) {
   fetch(
     url,
     {

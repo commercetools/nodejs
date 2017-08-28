@@ -101,6 +101,7 @@ export type RequestState = boolean
 export type TokenStore = {
   token: string;
   expirationTime: number;
+  refreshToken?: string;
 }
 
 export type AuthMiddlewareBaseOptions = {

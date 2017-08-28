@@ -139,7 +139,9 @@ describe('Auth Flows', () => {
       const body = `grant_type=client_credentials&anonymous_id=${anonymousId}`
 
       let tokenObject
-
+      // manually fetch a token outside the scope of the sdk-client
+      // this returns a refresh_token and we can use in the
+      // createAuthMiddlewareForRefreshTokenFlow to fetch a new token.
       return fetch(
         url,
         {
@@ -154,7 +156,7 @@ describe('Auth Flows', () => {
       )
       .then(res => res.json())
       .then((jsonResponse) => {
-        tokenObject = jsonResponse
+        tokenObject = { ...jsonResponse }
 
         const client = createClient({
           middlewares: [ httpMiddleware ],
@@ -189,7 +191,7 @@ describe('Auth Flows', () => {
         })
         return client.execute({
           // fetch all carts tied to the anonymous token, if cart is present,
-          // then the cart was tied to the token
+          // then the cart belongs to the same anonymousId
           uri: `/${projectKey}/me/carts`,
           method: 'GET',
         })
