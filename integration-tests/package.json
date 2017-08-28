@@ -20,7 +20,7 @@
     "@commercetools/sdk-middleware-logger": "file:../packages/sdk-middleware-logger/commercetools-sdk-middleware-logger-1.0.0.tgz",
     "@commercetools/sdk-middleware-queue": "file:../packages/sdk-middleware-queue/commercetools-sdk-middleware-queue-1.1.0.tgz",
     "@commercetools/sdk-middleware-user-agent": "file:../packages/sdk-middleware-user-agent/commercetools-sdk-middleware-user-agent-1.2.0.tgz",
-    "@commercetools/sync-actions": "file:../packages/sync-actions/commercetools-sync-actions-1.8.0.tgz",
+    "@commercetools/sync-actions": "file:../packages/sync-actions/commercetools-sync-actions-1.9.0.tgz",
     "bluebird": "^3.5.0",
     "common-tags": "^1.4.0",
     "csvtojson": "^1.1.7",
