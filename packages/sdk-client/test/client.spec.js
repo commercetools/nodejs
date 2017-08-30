@@ -278,6 +278,54 @@ describe('process', () => {
     })
   })
 
+  it('process and resolve paginating once if limit is passed in', () => {
+    const limitRequest = { ...request, uri: '/test/produ?limit=26' }
+    const createPayloadResult = tot => ({
+      results: Array.from(
+        Array(tot),
+        (val, index) => ({ id: String(index + 1) }),
+      ),
+    })
+    let reqCount = 0
+    const reqStubs = {
+      0: {
+        body: createPayloadResult(20),
+      },
+      1: {
+        body: createPayloadResult(20),
+      },
+      2: {
+        body: createPayloadResult(10),
+      },
+    }
+
+    const client = createClient({
+      middlewares: [
+        next => (req, res) => {
+          const body = reqStubs[reqCount].body
+
+          reqCount += 1
+          next(req, { ...res, body, statusCode: 200 })
+        },
+      ],
+    })
+
+    const spy = jest.spyOn(client, 'execute')
+    return client.process(
+      limitRequest,
+      () => Promise.resolve('OK'),
+    )
+    .then((response) => {
+      expect(response).toEqual([
+        'OK',
+      ])
+      // client.execute is always called n + 1 times
+      expect(client.execute).toHaveBeenCalledTimes(2)
+      spy.mockReset()
+      spy.mockRestore()
+    })
+  })
+
   it('process and resolve pagination by preserving original query', () => {
     const createPayloadResult = tot => ({
       results: Array.from(

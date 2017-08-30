@@ -82,11 +82,12 @@ export default function createClient (options: ClientOptions): Client {
 
       return new Promise((resolve, reject) => {
         const [path, queryString] = request.uri.split('?')
+        const requestQuery = qs.parse(queryString)
         const query = {
           // defaults
           limit: 20,
           // merge given query params
-          ...qs.parse(queryString),
+          ...requestQuery,
         }
         const originalQueryString = qs.stringify(query)
 
@@ -111,13 +112,13 @@ export default function createClient (options: ClientOptions): Client {
               if (opt.accumulate)
                 accumulated = acc.concat(result || [])
 
-              // If we get less results in a page then the limit set it means
-              // that there are no more pages and that we can finally resolve
-              // the promise.
-              if (resultsLength < query.limit) {
+              // If a limit was specified in the original request, fetch the
+              // limit and resolve.
+              // Also, if we get less results in a page then the limit set it
+              // means that there are no more pages and that we can finally
+              // resolve the promise.
+              if ((resultsLength < query.limit) || requestQuery.limit)
                 resolve(accumulated || [])
-                return
-              }
 
               const last = payload.body.results[resultsLength - 1]
               const newLastId = last && last.id
