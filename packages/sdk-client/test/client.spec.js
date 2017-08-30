@@ -319,8 +319,7 @@ describe('process', () => {
       expect(response).toEqual([
         'OK',
       ])
-      // client.execute is always called n + 1 times
-      expect(client.execute).toHaveBeenCalledTimes(2)
+      expect(client.execute).toHaveBeenCalledTimes(1)
       spy.mockReset()
       spy.mockRestore()
     })

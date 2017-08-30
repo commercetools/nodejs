@@ -82,7 +82,7 @@ export default function createClient (options: ClientOptions): Client {
 
       return new Promise((resolve, reject) => {
         const [path, queryString] = request.uri.split('?')
-        const requestQuery = qs.parse(queryString)
+        const requestQuery = { ...qs.parse(queryString) }
         const query = {
           // defaults
           limit: 20,
@@ -117,8 +117,10 @@ export default function createClient (options: ClientOptions): Client {
               // Also, if we get less results in a page then the limit set it
               // means that there are no more pages and that we can finally
               // resolve the promise.
-              if ((resultsLength < query.limit) || requestQuery.limit)
+              if ((resultsLength < query.limit) || requestQuery.limit) {
                 resolve(accumulated || [])
+                return
+              }
 
               const last = payload.body.results[resultsLength - 1]
               const newLastId = last && last.id
