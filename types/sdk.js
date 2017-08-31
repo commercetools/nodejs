@@ -47,6 +47,7 @@ export type Client = {
 export type ProcessFn = (result: SuccessResult) => Promise<any>;
 export type ProcessOptions = {
   accumulate?: boolean;
+  total?: number;
 }
 
 /* Middlewares */

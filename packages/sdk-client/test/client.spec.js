@@ -278,8 +278,7 @@ describe('process', () => {
     })
   })
 
-  it('process and resolve paginating once if limit is passed in', () => {
-    const limitRequest = { ...request, uri: '/test/produ?limit=26' }
+  it('return only the required number of items', () => {
     const createPayloadResult = tot => ({
       results: Array.from(
         Array(tot),
@@ -290,12 +289,29 @@ describe('process', () => {
     const reqStubs = {
       0: {
         body: createPayloadResult(20),
+        query: {
+          sort: 'id asc',
+          withTotal: 'false',
+          limit: '20',
+        },
       },
       1: {
         body: createPayloadResult(20),
+        query: {
+          sort: 'id asc',
+          withTotal: 'false',
+          where: 'id > "20"',
+          limit: '20',
+        },
       },
       2: {
-        body: createPayloadResult(10),
+        body: createPayloadResult(6),
+        query: {
+          sort: 'id asc',
+          withTotal: 'false',
+          where: 'id > "20"',
+          limit: '6',
+        },
       },
     }
 
@@ -303,6 +319,8 @@ describe('process', () => {
       middlewares: [
         next => (req, res) => {
           const body = reqStubs[reqCount].body
+          expect(qs.parse(req.uri.split('?')[1]))
+            .toEqual(reqStubs[reqCount].query)
 
           reqCount += 1
           next(req, { ...res, body, statusCode: 200 })
@@ -310,18 +328,17 @@ describe('process', () => {
       ],
     })
 
-    const spy = jest.spyOn(client, 'execute')
     return client.process(
-      limitRequest,
+      request,
       () => Promise.resolve('OK'),
+      { total: 46 },
     )
     .then((response) => {
       expect(response).toEqual([
         'OK',
+        'OK',
+        'OK',
       ])
-      expect(client.execute).toHaveBeenCalledTimes(1)
-      spy.mockReset()
-      spy.mockRestore()
     })
   })
 

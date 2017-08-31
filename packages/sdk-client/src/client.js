@@ -72,7 +72,7 @@ export default function createClient (options: ClientOptions): Client {
     process (
       request: ClientRequest,
       fn: ProcessFn,
-      opt: ProcessOptions = { accumulate: true },
+      processOpt: ProcessOptions,
     ): Promise<Array<Object>> {
       validate('process', request, { allowedMethods: ['GET'] })
 
@@ -80,6 +80,12 @@ export default function createClient (options: ClientOptions): Client {
       // eslint-disable-next-line max-len
         throw new Error('The "process" function accepts a "Function" as a second argument that returns a Promise. See https://commercetools.github.io/nodejs/sdk/api/sdkClient.html#processrequest-processfn-options')
 
+      // Set default process options
+      const opt = {
+        total: Number.POSITIVE_INFINITY,
+        accumulate: true,
+        ...processOpt,
+      }
       return new Promise((resolve, reject) => {
         const [path, queryString] = request.uri.split('?')
         const requestQuery = { ...qs.parse(queryString) }
@@ -89,9 +95,13 @@ export default function createClient (options: ClientOptions): Client {
           // merge given query params
           ...requestQuery,
         }
-        const originalQueryString = qs.stringify(query)
 
+        let itemsToGet = opt.total
         const processPage = (lastId?: string, acc?: Array<any> = []) => {
+          // Use the lesser value between limit and itemsToGet in query
+          const limit = query.limit < itemsToGet ? query.limit : itemsToGet
+          const originalQueryString = qs.stringify({ ...query, limit })
+
           const enhancedQuery = {
             sort: 'id asc',
             withTotal: false,
@@ -112,12 +122,14 @@ export default function createClient (options: ClientOptions): Client {
               if (opt.accumulate)
                 accumulated = acc.concat(result || [])
 
-              // If a limit was specified in the original request, fetch the
-              // limit and resolve.
+              itemsToGet -= resultsLength
+              // If there are no more items to get, it means the total number
+              // of items in the original request have been fetched so we
+              // resolve the promise.
               // Also, if we get less results in a page then the limit set it
               // means that there are no more pages and that we can finally
               // resolve the promise.
-              if ((resultsLength < query.limit) || requestQuery.limit) {
+              if ((resultsLength < query.limit) || !(itemsToGet)) {
                 resolve(accumulated || [])
                 return
               }
