@@ -278,6 +278,70 @@ describe('process', () => {
     })
   })
 
+  it('return only the required number of items', () => {
+    const createPayloadResult = tot => ({
+      results: Array.from(
+        Array(tot),
+        (val, index) => ({ id: String(index + 1) }),
+      ),
+    })
+    let reqCount = 0
+    const reqStubs = {
+      0: {
+        body: createPayloadResult(20),
+        query: {
+          sort: 'id asc',
+          withTotal: 'false',
+          limit: '20',
+        },
+      },
+      1: {
+        body: createPayloadResult(20),
+        query: {
+          sort: 'id asc',
+          withTotal: 'false',
+          where: 'id > "20"',
+          limit: '20',
+        },
+      },
+      2: {
+        body: createPayloadResult(6),
+        query: {
+          sort: 'id asc',
+          withTotal: 'false',
+          where: 'id > "20"',
+          limit: '6',
+        },
+      },
+    }
+
+    const client = createClient({
+      middlewares: [
+        next => (req, res) => {
+          const body = reqStubs[reqCount].body
+          expect(qs.parse(req.uri.split('?')[1]))
+            .toEqual(reqStubs[reqCount].query)
+
+          reqCount += 1
+          next(req, { ...res, body, statusCode: 200 })
+        },
+      ],
+    })
+
+    return client.process(
+      request,
+      () => Promise.resolve('OK'),
+      { total: 46 },
+    )
+    .then((response) => {
+      expect(response).toEqual([
+        'OK',
+        'OK',
+        'OK',
+      ])
+    })
+  })
+
   it('process and resolve pagination by preserving original query', () => {
     const createPayloadResult = tot => ({
       results: Array.from(
