@@ -46,7 +46,7 @@ export default class ProductExporter {
       ],
     })
 
-    const defaultConfig = { staged: false }
+    const defaultConfig = { staged: false, exportFormat: 'json' }
 
     this.exportConfig = { ...defaultConfig, ...exportConfig }
     this.logger = {
@@ -61,7 +61,12 @@ export default class ProductExporter {
 
   run (outputStream: stream$Writable) {
     this.logger.info('Starting Export')
-    const jsonStream = JSONStream.stringify('{"products": [\n', ',\n', '\n]}')
+    // if the exportFormat is json, prepare the stream for json data if
+    // csv, also create a json stream because it needs to pass text to
+    // the stdout, but the json  format preparation is irrelevant this time
+    const jsonStream = this.exportConfig.exportFormat === 'json'
+      ? JSONStream.stringify('{"products": [\n', ',\n', '\n]}')
+      : JSONStream.stringify(false)
     jsonStream.pipe(outputStream)
     return this._getProducts(jsonStream)
     .catch((e) => {
@@ -75,17 +80,16 @@ export default class ProductExporter {
       uri: service.build(),
       method: 'GET',
     }
+    const total = this.exportConfig.limit
     if (this.accessToken)
       request.headers = {
         Authorization: `Bearer ${this.accessToken}`,
       }
     return this.client.process(request, ({ body: { results: products } }) => {
       this.logger.verbose(`Fetched ${products.length} products`)
-      // TODO: implement parser
-      // If the output is csv, the parser will be called here
-      products.forEach(product => outputStream.write(product))
+      ProductExporter._writeEachProduct(outputStream, products)
       return Promise.resolve()
-    }, { accumulate: false })
+    }, { accumulate: false, total })
     .then(() => {
       outputStream.end()
       this.logger.info('Export operation completed successfully')
@@ -98,13 +102,20 @@ export default class ProductExporter {
     }).productProjections
     service.staged(this.exportConfig.staged)
 
-    if (this.exportConfig.limit)
-      service.perPage(this.exportConfig.limit)
+    if (this.exportConfig.batch)
+      service.perPage(this.exportConfig.batch)
     if (this.exportConfig.predicate)
       service.where(this.exportConfig.predicate)
     if (this.exportConfig.expand)
       service.expand(this.exportConfig.expand)
 
     return service
+  }
+
+  static _writeEachProduct (
+    outputStream: stream$Writable,
+    products: Array<Object>,
+  ) {
+    products.forEach((product: Object) => outputStream.write(product))
   }
 }
