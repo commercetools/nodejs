@@ -11,9 +11,9 @@ import path from 'path'
 import streamtest from 'streamtest'
 import tmp from 'tmp'
 import isuuid from 'isuuid'
-import CONSTANTS from '../../packages/csv-parser-price/src/constants'
-import CsvParserPrice from '../../packages/csv-parser-price/src/main'
-import { version } from '../../packages/csv-parser-price/package.json'
+import CONSTANTS from '@commercetools/csv-parser-price/lib/constants'
+import CsvParserPrice from '@commercetools/csv-parser-price'
+import { version } from '@commercetools/csv-parser-price/package.json'
 
 let projectKey
 if (process.env.CI === 'true')

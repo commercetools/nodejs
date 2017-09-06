@@ -3,10 +3,10 @@ import { exec } from 'child_process'
 import fs from 'fs'
 import { stripIndent } from 'common-tags'
 import tmp from 'tmp'
-import CONSTANTS from '../../packages/inventories-exporter/src/constants'
+import CONSTANTS from '@commercetools/inventories-exporter/lib/constants'
+import { version } from '@commercetools/inventories-exporter/package.json'
 import { inventories, customFields } from './helpers/inventories.data'
 import { clearData, createData } from './helpers/utils'
-import { version } from '../../packages/inventories-exporter/package.json'
 
 let projectKey
 if (process.env.CI === 'true')
