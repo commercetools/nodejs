@@ -5,9 +5,9 @@ import isuuid from 'isuuid'
 import csv from 'csvtojson'
 import { oneLine } from 'common-tags'
 import { exec } from 'child_process'
+import DiscountCodeImport from '@commercetools/discount-code-importer'
 import { getCredentials } from '@commercetools/get-credentials'
 import { createData, clearData } from './helpers/utils'
-import DiscountCodeImport from '../../packages/discount-code-importer/src/main'
 
 let projectKey
 if (process.env.CI === 'true')

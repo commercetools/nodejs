@@ -6,8 +6,8 @@ import tmp from 'tmp'
 import {
   AddReturnInfoCsvParser,
   LineItemStateCsvParser,
-} from '../../packages/csv-parser-orders/src/index'
-import { version } from '../../packages/csv-parser-orders/package.json'
+} from '@commercetools/csv-parser-orders'
+import { version } from '@commercetools/csv-parser-orders/package.json'
 
 describe('CSV and CLI Tests', () => {
   const binPath = './integration-tests/node_modules/.bin/csvparserorder'

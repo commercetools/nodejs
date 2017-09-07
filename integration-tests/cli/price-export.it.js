@@ -4,6 +4,7 @@ import path from 'path'
 import csv from 'csvtojson'
 import { getCredentials } from '@commercetools/get-credentials'
 import { exec } from 'child_process'
+import { version } from '@commercetools/price-exporter/package.json'
 import {
   sampleProductType,
   sampleCustomerGroup,
@@ -12,7 +13,6 @@ import {
   createProducts,
 } from './helpers/prices.data'
 import { createData, clearData } from './helpers/utils'
-import { version } from '../../packages/price-exporter/package.json'
 
 let projectKey
 if (process.env.CI === 'true')

@@ -316,7 +316,7 @@ describe('Http', () => {
 
         httpMiddleware(next)(request, response)
       })
-    , 620 /* retryDelay of 300 * 2 */)
+    , 700 /* retryDelay of 300 * 2 */)
 
     it('should not retry on 404 (not found) error', () =>
       new Promise((resolve, reject) => {
