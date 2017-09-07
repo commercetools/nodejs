@@ -46,7 +46,7 @@ export default class ProductExporter {
       ],
     })
 
-    const defaultConfig = { staged: false, exportFormat: 'json' }
+    const defaultConfig = { staged: false, json: true }
 
     this.exportConfig = { ...defaultConfig, ...exportConfig }
     this.logger = {
@@ -64,8 +64,8 @@ export default class ProductExporter {
     // if the exportFormat is json, prepare the stream for json data if
     // csv, also create a json stream because it needs to pass text to
     // the stdout, but the json  format preparation is irrelevant this time
-    const jsonStream = this.exportConfig.exportFormat === 'json'
-      ? JSONStream.stringify('{"products": [\n', ',\n', '\n]}')
+    const jsonStream = this.exportConfig.json
+      ? JSONStream.stringify('[\n', ',\n', '\n]')
       : JSONStream.stringify(false)
     jsonStream.pipe(outputStream)
     return this._getProducts(jsonStream)
@@ -80,7 +80,7 @@ export default class ProductExporter {
       uri: service.build(),
       method: 'GET',
     }
-    const total = this.exportConfig.limit
+    const total = this.exportConfig.total
     if (this.accessToken)
       request.headers = {
         Authorization: `Bearer ${this.accessToken}`,

@@ -23,8 +23,8 @@ export type LoggerOptions = {
 export type ExportConfigOptions = {
   batch: number;
   expand: string;
-  limit: number;
+  json: boolean;
   predicate: string;
   staged: boolean;
-  exportFormat: 'json' | 'csv';
+  total: number;
 }
