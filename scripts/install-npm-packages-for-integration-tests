@@ -13,7 +13,7 @@ done
 
 echo "--> Install dependencies and packages for integration-tests:"
 pushd "./integration-tests" > /dev/null
-npm i ${tars[@]}
+npm i ${tars[@]} --no-save
 npm i
 popd > /dev/null
 
