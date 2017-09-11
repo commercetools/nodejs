@@ -80,16 +80,20 @@ export default class ProductExporter {
       uri: service.build(),
       method: 'GET',
     }
-    const total = this.exportConfig.total
     if (this.accessToken)
       request.headers = {
         Authorization: `Bearer ${this.accessToken}`,
       }
+
+    const processConfig: Object = { accumulate: false }
+    if (this.exportConfig.total)
+      processConfig.total = this.exportConfig.total
+
     return this.client.process(request, ({ body: { results: products } }) => {
       this.logger.verbose(`Fetched ${products.length} products`)
       ProductExporter._writeEachProduct(outputStream, products)
       return Promise.resolve()
-    }, { accumulate: false, total })
+    }, processConfig)
     .then(() => {
       outputStream.end()
       this.logger.info('Export operation completed successfully')
