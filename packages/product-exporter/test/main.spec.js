@@ -3,24 +3,30 @@ import { oneLineTrim } from 'common-tags'
 import ProductExporter from '../src/main'
 
 describe('ProductExporter', () => {
-  const logger = {
-    error: () => {},
-    warn: () => {},
-    info: () => {},
-    verbose: () => {},
-  }
-
   let productExporter
   beforeEach(() => {
+    const logger = {
+      error: () => {},
+      warn: () => {},
+      info: () => {},
+      verbose: () => {},
+    }
+    const exportConfig = {
+      staged: true,
+      batch: 5,
+      predicate: 'foo=bar',
+      expand: 'something',
+      total: 20,
+    }
     productExporter = new ProductExporter(
       { projectKey: 'project-key' },
-      { staged: true, batch: 5, predicate: 'foo=bar', expand: 'something' },
+      exportConfig,
       logger,
       'myAccessToken',
       )
   })
 
-  describe('constructor', () => {
+  describe('::constructor', () => {
     it('should initialize with defaults', () => {
       const apiConfig = {
         projectKey: 'foo',
@@ -111,6 +117,24 @@ describe('ProductExporter', () => {
       }
       ProductExporter._writeEachProduct(outputStream, [1, 2, 3])
       expect(writeMock).toHaveBeenCalledTimes(3)
+    })
+  })
+
+  describe('::_createService', () => {
+    it('builds service with query options', () => {
+      const serviceParams = productExporter._createService().params
+      expect(serviceParams.expand).toEqual(['something'])
+      expect(serviceParams.pagination.perPage).toBe(5)
+      expect(serviceParams.query.where).toEqual(['foo%3Dbar'])
+    })
+
+    it('builds service with no query options', () => {
+      productExporter = new ProductExporter({ projectKey: 'project-key' })
+
+      const serviceParams = productExporter._createService().params
+      expect(serviceParams.expand).toEqual([])
+      expect(serviceParams.pagination.perPage).toBe(null)
+      expect(serviceParams.query.where).toEqual([])
     })
   })
 })
