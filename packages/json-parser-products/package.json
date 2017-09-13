@@ -1,0 +1,30 @@
+{
+  "name": "@commercetools/json-parser-products",
+  "version": "1.0.0-development",
+  "description": "Convert commercetools products from JSON to CSV",
+  "keywords": [
+    "commercetools",
+    "products",
+    "projections",
+    "parser",
+    "export",
+    "csv",
+    "json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs/tree/master/packages/json-parser-products"
+  },
+  "homepage": "https://commercetools.github.io/nodejs/cli/json-parser-products.html",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "author": {
+    "name": "Williams Omayuku",
+    "email": "williams.omayuku@commercetools.de"
+  },
+  "main": "lib/index.js",
+  "files": [
+    "bin",
+    "lib"
+  ]
+}
