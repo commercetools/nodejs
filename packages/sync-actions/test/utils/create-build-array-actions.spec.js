@@ -24,7 +24,15 @@ describe('createBuildArrayActions', () => {
 
     handler(diff(before, now), before, now)
 
-    expect(addActionSpy).toHaveBeenCalledWith({ name: 'a new object' })
+    expect(addActionSpy).toHaveBeenCalledWith(
+      { name: 'a new object' },
+      expect.any(Number),
+    )
+
+    expect(addActionSpy).toHaveBeenCalledWith(
+      expect.any(Object),
+      0,
+    )
   })
 
   it('correctly detects change actions', () => {
@@ -41,6 +49,13 @@ describe('createBuildArrayActions', () => {
     expect(changeActionSpy).toHaveBeenCalledWith(
       { name: 'a new object' },
       { name: 'a changed object' },
+      expect.any(Number),
+    )
+
+    expect(changeActionSpy).toHaveBeenCalledWith(
+      expect.any(Object),
+      expect.any(Object),
+      0,
     )
   })
 
@@ -55,6 +70,14 @@ describe('createBuildArrayActions', () => {
 
     handler(diff(before, now), before, now)
 
-    expect(removeActionSpy).toHaveBeenCalledWith({ name: 'an object' })
+    expect(removeActionSpy).toHaveBeenCalledWith(
+      { name: 'an object' },
+      expect.any(Number),
+    )
+
+    expect(removeActionSpy).toHaveBeenCalledWith(
+      expect.any(Object),
+      0,
+    )
   })
 })

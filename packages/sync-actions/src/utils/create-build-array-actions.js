@@ -23,26 +23,42 @@ export default function createBuildArrayActions (key, config) {
 
     if (diff[key]) {
       const arrayDelta = diff[key]
+
       Object.keys(arrayDelta).forEach((index) => {
-        if (config[ADD_ACTIONS] && isCreateAction(arrayDelta, index))
-          addActions.push(
-            // When adding a new element you don't need the oldObj
-            config[ADD_ACTIONS](newObj[key][index]),
+        if (config[ADD_ACTIONS] && isCreateAction(arrayDelta, index)) {
+          const actionGenerator = config[ADD_ACTIONS]
+          // When adding a new element you don't need the oldObj
+          const action = actionGenerator(
+            newObj[key][index],
+            parseInt(index, 10),
           )
-        else if (config[CHANGE_ACTIONS] && isChangeAction(arrayDelta, index))
-          changeActions.push(
-            // When changing an existing element you need both old + new
-            config[CHANGE_ACTIONS](oldObj[key][index], newObj[key][index]),
+
+          if (action) addActions.push(action)
+        } else if (
+          config[CHANGE_ACTIONS] && isChangeAction(arrayDelta, index)
+        ) {
+          const actionGenerator = config[CHANGE_ACTIONS]
+          // When changing an existing element you need both old + new
+          const action = actionGenerator(
+            oldObj[key][index],
+            newObj[key][index],
+            parseInt(index, 10),
           )
-        else if (
+
+          if (action) changeActions.push(action)
+        } else if (
           config[REMOVE_ACTIONS] &&
           isRemoveAction(arrayDelta, index)
         ) {
           const realIndex = index.replace('_', '')
-          removeActions.push(
-            // When removing an existing element you don't need the newObj
-            config[REMOVE_ACTIONS](oldObj[key][realIndex]),
+          const actionGenerator = config[REMOVE_ACTIONS]
+          // When removing an existing element you don't need the newObj
+          const action = actionGenerator(
+            oldObj[key][realIndex],
+            parseInt(realIndex, 10),
           )
+
+          if (action) removeActions.push(action)
         }
       })
     }

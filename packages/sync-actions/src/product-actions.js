@@ -61,10 +61,15 @@ export function actionsMapVariants (diff, oldObj, newObj) {
       ...newObject,
       action: 'addVariant',
     }),
-    [REMOVE_ACTIONS]: objectToRemove => ({
-      action: 'removeVariant',
-      id: objectToRemove.id,
-    }),
+    [REMOVE_ACTIONS]: ({ id }, index) => {
+      // The master variant can not be removed
+      if (index <= 0) return null
+
+      return {
+        action: 'removeVariant',
+        id,
+      }
+    },
   })
 
   return handler(diff, oldObj, newObj)
@@ -137,29 +142,7 @@ export function actionsMapAttributes (
   sameForAllAttributeNames = [],
 ) {
   let actions = []
-  const { masterVariant, variants } = diff
-
-  if (masterVariant) {
-    const skuAction = _buildSkuActions(
-      masterVariant,
-      oldObj.masterVariant,
-    )
-    const keyAction = _buildKeyActions(
-      masterVariant,
-      oldObj.masterVariant,
-    )
-    if (skuAction) actions.push(skuAction)
-    if (keyAction) actions.push(keyAction)
-
-    const { attributes } = masterVariant
-    const attrActions = _buildVariantAttributesActions(
-      attributes,
-      oldObj.masterVariant,
-      newObj.masterVariant,
-      sameForAllAttributeNames,
-    )
-    actions = actions.concat(attrActions)
-  }
+  const { variants } = diff
 
   if (variants)
     forEach(variants, (variant, key) => {
@@ -172,6 +155,7 @@ export function actionsMapAttributes (
         if (keyAction) actions.push(keyAction)
 
         const { attributes } = variant
+
         const attrActions = _buildVariantAttributesActions(
           attributes,
           oldObj.variants[key],
@@ -196,16 +180,7 @@ export function actionsMapAttributes (
 
 export function actionsMapImages (diff, oldObj, newObj) {
   let actions = []
-  const { masterVariant, variants } = diff
-
-  if (masterVariant) {
-    const mActions = _buildVariantImagesAction(
-      masterVariant.images,
-      oldObj.masterVariant,
-      newObj.masterVariant,
-    )
-    actions = actions.concat(mActions)
-  }
+  const { variants } = diff
 
   if (variants)
     forEach(variants, (variant, key) => {
@@ -225,18 +200,7 @@ export function actionsMapPrices (diff, oldObj, newObj) {
   let changePriceActions = []
   let removePriceActions = []
 
-  const { masterVariant, variants } = diff
-
-  if (masterVariant) {
-    const [ a, c, r ] = _buildVariantPricesAction(
-      masterVariant.prices,
-      oldObj.masterVariant,
-      newObj.masterVariant,
-    )
-    addPriceActions = addPriceActions.concat(a)
-    changePriceActions = changePriceActions.concat(c)
-    removePriceActions = removePriceActions.concat(r)
-  }
+  const { variants } = diff
 
   if (variants)
     forEach(variants, (variant, key) => {
@@ -254,6 +218,30 @@ export function actionsMapPrices (diff, oldObj, newObj) {
   return changePriceActions
     .concat(removePriceActions)
     .concat(addPriceActions)
+}
+
+export function generateChangeMasterVariantAction (oldObj, newObj) {
+  const createChangeMasterVariantAction = variantId => ({
+    action: 'changeMasterVariant',
+    variantId,
+  })
+  const extractMasterVariantId = (fromObj) => {
+    const variants = Array.isArray(fromObj.variants) ? fromObj.variants : []
+
+    return variants[0] ? variants[0].id : undefined
+  }
+
+  const newMasterVariantId = extractMasterVariantId(newObj)
+  const oldMasterVariantId = extractMasterVariantId(oldObj)
+
+  // Previosuly no master variant existed
+  if (!oldMasterVariantId && newMasterVariantId)
+    return createChangeMasterVariantAction(newMasterVariantId)
+  // Old and new master master variant differ and a new master variant id exists
+  if (newMasterVariantId && oldMasterVariantId !== newMasterVariantId)
+    return createChangeMasterVariantAction(newMasterVariantId)
+
+  return null
 }
 
 
@@ -542,7 +530,6 @@ function _buildVariantPricesAction (diffedPrices, oldVariant, newVariant) {
       }
     } else if (REGEX_UNDERSCORE_NUMBER.test(key)) {
       const index = key.substring(1)
-
       removePriceActions.push({
         action: 'removePrice', priceId: oldVariant.prices[index].id,
       })
