@@ -11,13 +11,13 @@ export default function createBuildActions (
         'in order to build update actions')
 
     const [
-      proccedBefore, processedNow,
+      processedBefore, processedNow,
     ] = applyOnBeforeDiff(before, now, onBeforeDiff)
 
-    const diffed = differ(proccedBefore, processedNow)
+    const diffed = differ(processedBefore, processedNow)
 
     if (!diffed) return []
 
-    return doMapActions(diffed, processedNow, proccedBefore, options)
+    return doMapActions(diffed, processedNow, processedBefore, options)
   }
 }
