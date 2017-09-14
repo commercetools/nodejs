@@ -3,6 +3,8 @@ import type {
   ApiConfigOptions,
   ExportConfigOptions,
   LoggerOptions,
+  ProductProjection,
+  ProcessFnResponse,
 } from 'types/product'
 import type {
   Client,
@@ -59,7 +61,7 @@ export default class ProductExporter {
     this.accessToken = accessToken
   }
 
-  run (outputStream: stream$Writable) {
+  run (outputStream: stream$Writable): Promise<*> {
     this.logger.info('Starting Export')
     // if the exportFormat is json, prepare the stream for json data if
     // csv, also create a json stream because it needs to pass text to
@@ -69,12 +71,12 @@ export default class ProductExporter {
       : JSONStream.stringify(false)
     jsonStream.pipe(outputStream)
     return this._getProducts(jsonStream)
-    .catch((e) => {
+    .catch((e: Error) => {
       outputStream.emit('error', e)
     })
   }
 
-  _getProducts (outputStream: stream$Writable) {
+  _getProducts (outputStream: stream$Writable): Promise<*> {
     const service = this._createService()
     const request: Object = {
       uri: service.build(),
@@ -89,7 +91,13 @@ export default class ProductExporter {
     if (this.exportConfig.total)
       processConfig.total = this.exportConfig.total
 
-    return this.client.process(request, ({ body: { results: products } }) => {
+    return this.client.process(request, (
+      {
+        body: {
+          results: products,
+        },
+      }: ProcessFnResponse,
+    ): Promise<*> => {
       this.logger.verbose(`Fetched ${products.length} products`)
       ProductExporter._writeEachProduct(outputStream, products)
       return Promise.resolve()
@@ -116,10 +124,16 @@ export default class ProductExporter {
     return service
   }
 
+  /* the `any` hack is necessary to  make flow work because there is no
+  JSONStream type definition at the moment and this is not a regular
+  stream hence the type "stream$Writable" is not fully compatible.
+  */
   static _writeEachProduct (
     outputStream: stream$Writable,
-    products: Array<Object>,
+    products: Array<ProductProjection>,
   ) {
-    products.forEach((product: Object) => outputStream.write(product))
+    products.forEach((product: ProductProjection) => {
+      (outputStream: any).write(product)
+    })
   }
 }
