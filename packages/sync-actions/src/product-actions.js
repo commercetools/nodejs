@@ -234,9 +234,6 @@ export function generateChangeMasterVariantAction (oldObj, newObj) {
   const newMasterVariantId = extractMasterVariantId(newObj)
   const oldMasterVariantId = extractMasterVariantId(oldObj)
 
-  // Previosuly no master variant existed
-  if (!oldMasterVariantId && newMasterVariantId)
-    return createChangeMasterVariantAction(newMasterVariantId)
   // Old and new master master variant differ and a new master variant id exists
   if (newMasterVariantId && oldMasterVariantId !== newMasterVariantId)
     return createChangeMasterVariantAction(newMasterVariantId)
