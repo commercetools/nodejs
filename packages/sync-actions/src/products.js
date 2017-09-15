@@ -38,9 +38,10 @@ function createProductMapActions (mapActionGroup) {
     allActions.push(mapActionGroup('variants', () =>
       productActions.actionsMapVariants(diff, oldObj, newObj)))
 
-    const changeMasterVariantAction =
-      productActions.generateChangeMasterVariantAction(oldObj, newObj)
-    if (changeMasterVariantAction) allActions.push(changeMasterVariantAction)
+    const changeMasterVariantActions =
+      productActions.actionsMapMasterVariant(oldObj, newObj)
+    if (changeMasterVariantActions.length > 0)
+      allActions.push(changeMasterVariantActions)
 
     allActions.push(mapActionGroup('attributes', () =>
       productActions.actionsMapAttributes(diff, oldObj, newObj,

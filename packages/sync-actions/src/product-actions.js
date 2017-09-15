@@ -220,7 +220,7 @@ export function actionsMapPrices (diff, oldObj, newObj) {
     .concat(addPriceActions)
 }
 
-export function generateChangeMasterVariantAction (oldObj, newObj) {
+export function actionsMapMasterVariant (oldObj, newObj) {
   const createChangeMasterVariantAction = variantId => ({
     action: 'changeMasterVariant',
     variantId,
@@ -236,9 +236,9 @@ export function generateChangeMasterVariantAction (oldObj, newObj) {
 
   // Old and new master master variant differ and a new master variant id exists
   if (newMasterVariantId && oldMasterVariantId !== newMasterVariantId)
-    return createChangeMasterVariantAction(newMasterVariantId)
+    return [createChangeMasterVariantAction(newMasterVariantId)]
 
-  return null
+  return []
 }
 
 
