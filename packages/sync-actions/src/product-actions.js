@@ -61,15 +61,10 @@ export function actionsMapVariants (diff, oldObj, newObj) {
       ...newObject,
       action: 'addVariant',
     }),
-    [REMOVE_ACTIONS]: ({ id }, index) => {
-      // The master variant can not be removed
-      if (index <= 0) return null
-
-      return {
-        action: 'removeVariant',
-        id,
-      }
-    },
+    [REMOVE_ACTIONS]: ({ id }) => ({
+      action: 'removeVariant',
+      id,
+    }),
   })
 
   return handler(diff, oldObj, newObj)

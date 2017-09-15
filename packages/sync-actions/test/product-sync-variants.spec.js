@@ -310,10 +310,10 @@ describe('Actions', () => {
         variants: [],
       }
 
-      it('should not generate update action to remove master variant',
+      it('should generate update action to remove variant',
       () => {
         const actions = productsSync.buildActions(now, before)
-        expect(actions).toEqual([])
+        expect(actions).toEqual([{ action: 'removeVariant', id: 1 }])
       })
     })
 
@@ -351,8 +351,46 @@ describe('Actions', () => {
       })
     })
 
-    describe('with changed non master variant in `now`', () => {
-      describe('with non existing variant', () => {
+    describe('when changing master variant', () => {
+      describe('when moving master variant to variants', () => {
+        const before = {
+          id: '123',
+          version: 1,
+          masterVariant: {
+            id: 1,
+            sku: 'v1',
+            attributes: [{ name: 'foo', value: 'bar' }],
+          },
+          variants: [],
+        }
+
+        const now = {
+          id: '123',
+          version: 1,
+          masterVariant: {
+            id: 2,
+            sku: 'v1',
+            attributes: [{ name: 'foo', value: 'bar' }],
+          },
+          variants: [{
+            id: 1,
+            sku: 'v1',
+            attributes: [{ name: 'foo', value: 'bar' }],
+          }],
+        }
+
+        it('should generate `changeMasterVariant` and `addVariant` action',
+        () => {
+          const actions = productsSync.buildActions(now, before)
+
+          expect(actions).toEqual([
+            { action: 'addVariant', attributes: [{ name: 'foo', value: 'bar' }], id: 2, sku: 'v1' },
+            { action: 'changeMasterVariant', variantId: 2 },
+          ])
+        })
+      })
+
+      describe('when adding new master variant (without moving)', () => {
         const before = {
           id: '123',
           version: 1,
@@ -375,18 +413,19 @@ describe('Actions', () => {
           variants: [],
         }
 
-        it('should generate `changeMasterVariant` and `addVariant` action',
+        it('should generate `changeMasterVariant`, `addVariant` and `removeVariant` action',
         () => {
           const actions = productsSync.buildActions(now, before)
 
           expect(actions).toEqual([
+            { action: 'removeVariant', id: 1 },
             { action: 'addVariant', attributes: [{ name: 'foo', value: 'bar' }], id: 2, sku: 'v1' },
             { action: 'changeMasterVariant', variantId: 2 },
           ])
         })
       })
 
-      describe('with existing variant', () => {
+      describe('with existing variant in `now` and `before`', () => {
         describe('without changes to attributes', () => {
           const before = {
             id: '123',
