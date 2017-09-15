@@ -1,6 +1,6 @@
 import createMapActionGroup from '../../src/utils/create-map-action-group'
 
-describe('', () => {
+describe('createMapActionGroup', () => {
   describe('without actionGroups', () => {
     const fn = jest.fn()
     let mapActionGroup
