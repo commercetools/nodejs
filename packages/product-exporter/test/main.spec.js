@@ -1,3 +1,4 @@
+import JSONStream from 'JSONStream'
 import streamtest from 'streamtest'
 import { oneLineTrim } from 'common-tags'
 import ProductExporter from '../src/main'
@@ -15,7 +16,7 @@ describe('ProductExporter', () => {
       staged: true,
       batch: 5,
       predicate: 'foo=bar',
-      expand: 'something',
+      expand: ['something'],
       total: 20,
     }
     productExporter = new ProductExporter(
@@ -39,7 +40,7 @@ describe('ProductExporter', () => {
   })
 
   describe('::run', () => {
-    it('should call `_getProducts`', async() => {
+    it('prepare the output stream and pass to `_getProducts`', async() => {
       productExporter._getProducts = jest.fn(() => Promise.resolve())
       const outputStream = streamtest['v2'].toText(() => {})
       await productExporter.run(outputStream)
@@ -94,7 +95,7 @@ describe('ProductExporter', () => {
         })
     })
 
-    it('should call `_writeEachProduct` method', () => {
+    it('should pass the products and the stream to the writer method', () => {
       const spy = jest.spyOn(ProductExporter, '_writeEachProduct')
 
       productExporter._getProducts(outputStream)
@@ -109,6 +110,50 @@ describe('ProductExporter', () => {
     })
   })
 
+  describe('::_buildProductProjectionsUri', () => {
+    const projectKey = 'my-project-key'
+    const exportConfig = {
+      staged: true,
+      batch: 5,
+      predicate: 'foo=bar',
+      expand: ['someReference', 'anotherReference'],
+    }
+
+    it('should build uri with query options', () => {
+      const expectedUri = oneLineTrim`
+        /my-project-key/product-projections?staged=true&expand=someReference
+        &expand=anotherReference&where=foo%3Dbar&limit=5
+      `
+      const actualUri = ProductExporter._buildProductProjectionsUri(
+        projectKey,
+        exportConfig,
+      )
+      expect(actualUri).toEqual(expectedUri)
+    })
+
+    it('should build uri with no query options if none', () => {
+      const expectedUri = '/my-project-key/product-projections?staged=false'
+      const actualUri = ProductExporter._buildProductProjectionsUri(
+        projectKey,
+        { staged: false },
+      )
+      expect(actualUri).toEqual(expectedUri)
+    })
+  })
+
+  describe('::_decideStream', () => {
+    it('should prepare the json stream with the right arguments', () => {
+      // Mock the JSONStream
+      const spy = jest.spyOn(JSONStream, 'stringify')
+
+      ProductExporter._decideStream('json')
+      expect(spy).lastCalledWith('[\n', ',\n', '\n]')
+      ProductExporter._decideStream('chunk')
+      expect(spy).lastCalledWith(false)
+      spy.mockRestore()
+    })
+  })
+
   describe('::_writeEachProduct', () => {
     it('should write each product to the output stream', () => {
       const writeMock = jest.fn()
@@ -117,24 +162,6 @@ describe('ProductExporter', () => {
       }
       ProductExporter._writeEachProduct(outputStream, [1, 2, 3])
       expect(writeMock).toHaveBeenCalledTimes(3)
-    })
-  })
-
-  describe('::_createService', () => {
-    it('builds service with query options', () => {
-      const serviceParams = productExporter._createService().params
-      expect(serviceParams.expand).toEqual(['something'])
-      expect(serviceParams.pagination.perPage).toBe(5)
-      expect(serviceParams.query.where).toEqual(['foo%3Dbar'])
-    })
-
-    it('builds service with no query options', () => {
-      productExporter = new ProductExporter({ projectKey: 'project-key' })
-
-      const serviceParams = productExporter._createService().params
-      expect(serviceParams.expand).toEqual([])
-      expect(serviceParams.pagination.perPage).toBe(null)
-      expect(serviceParams.query.where).toEqual([])
     })
   })
 })

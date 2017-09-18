@@ -22,8 +22,8 @@ export type LoggerOptions = {
 
 export type ExportConfigOptions = {
   batch: number;
-  expand: string;
-  json: boolean;
+  expand: Array<string>;
+  exportType: 'json' | 'chunk';
   predicate: string;
   staged: boolean;
   total: number;

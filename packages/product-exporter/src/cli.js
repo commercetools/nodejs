@@ -79,16 +79,16 @@ Required scopes: ['view_products', 'view_customers']`,
   })
 
   .option('expand', {
-    alias: 'e',
-    describe: 'Refrence field or fields to expand in the returned products',
-    type: 'string',
+    describe: 'Reference field or fields to expand in the returned products',
+    type: 'array',
   })
 
-  .option('json', {
-    alias: 'j',
-    default: true,
+  .option('exportType', {
+    alias: 'e',
+    choices: ['json', 'chunk'],
+    default: 'json',
     describe: 'Flag if products should be exported as `JSON` strings or chunks',
-    type: 'boolean',
+    type: 'string',
   })
 
   .option('predicate', {
@@ -170,7 +170,7 @@ resolveCredentials(args)
     const productExportConfigOptions = {
       batch: args.batchSize,
       expand: args.expand,
-      json: args.json,
+      exportType: args.exportType,
       predicate: args.predicate,
       staged: args.staged,
       total: args.total,

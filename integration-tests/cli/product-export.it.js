@@ -19,57 +19,54 @@ else
 
 describe('Product Exporter', () => {
   let apiConfig
-  const productType = { typeId: 'product-type' }
-  const taxCategory = { typeId: 'tax-category' }
   const bin = './integration-tests/node_modules/.bin/product-exporter'
 
-  beforeAll(() => getCredentials(projectKey)
-    .then((credentials) => {
-      apiConfig = {
-        host: 'https://auth.sphere.io',
-        apiUrl: 'https://api.sphere.io',
-        projectKey,
-        credentials,
-      }
-      return clearData(apiConfig, 'products')
-    })
-    .then(() => (
-      Promise.all([
-        clearData(apiConfig, 'productTypes'),
-        clearData(apiConfig, 'taxCategories'),
-      ])
-    ))
-    .then(() => (
-      Promise.all([
-        createData(apiConfig, 'productTypes', [sampleProductType]),
-        createData(apiConfig, 'taxCategories', [sampleTaxCategory]),
-      ])
-    ))
-    .then(([
-      createdProductType,
-      createdTaxCategory,
-      ]) => {
-      productType.id = createdProductType[0].body.id
-      taxCategory.id = createdTaxCategory[0].body.id
+  beforeAll(async () => {
+    const credentials = await getCredentials(projectKey)
+    apiConfig = {
+      host: 'https://auth.sphere.io',
+      apiUrl: 'https://api.sphere.io',
+      projectKey,
+      credentials,
+    }
+    await clearData(apiConfig, 'products')
 
-      const sampleProducts = createProducts(
-        productType,
-        taxCategory,
-      )
-      return createData(apiConfig, 'products', sampleProducts)
-    })
-    .catch(process.stderr.write)
-  , 10000)
+    await Promise.all([
+      clearData(apiConfig, 'productTypes'),
+      clearData(apiConfig, 'taxCategories'),
+    ])
 
-  afterAll(() => clearData(apiConfig, 'products')
-    .then(() => (
-      Promise.all([
-        clearData(apiConfig, 'productTypes'),
-        clearData(apiConfig, 'taxCategories'),
-      ])
-    ))
-    .catch(process.stderr.write),
-  )
+    const createdProductType = await createData(
+      apiConfig, 'productTypes', [sampleProductType],
+    )
+    const createdTaxCategory = await createData(
+      apiConfig, 'taxCategories', [sampleTaxCategory],
+    )
+
+    const productType = {
+      typeId: 'product-type',
+      id: createdProductType[0].body.id,
+    }
+    const taxCategory = {
+      typeId: 'tax-category',
+      id: createdTaxCategory[0].body.id,
+    }
+
+    const sampleProducts = createProducts(
+      productType,
+      taxCategory,
+    )
+
+    await createData(apiConfig, 'products', sampleProducts)
+  }, 10000)
+
+  afterAll(async () => {
+    await clearData(apiConfig, 'products')
+    await Promise.all([
+      clearData(apiConfig, 'productTypes'),
+      clearData(apiConfig, 'taxCategories'),
+    ])
+  })
 
   describe('CLI basic functionality', () => {
     it('should print usage information given the help flag', (done) => {

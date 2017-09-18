@@ -8,6 +8,7 @@ import type {
 } from 'types/product'
 import type {
   Client,
+  ClientRequest,
 } from 'types/sdk'
 
 import { createClient } from '@commercetools/sdk-client'
@@ -62,24 +63,27 @@ export default class ProductExporter {
   }
 
   run (outputStream: stream$Writable): Promise<*> {
-    this.logger.info('Starting Export')
-    // if the exportFormat is json, prepare the stream for json data if
-    // csv, also create a json stream because it needs to pass text to
-    // the stdout, but the json  format preparation is irrelevant this time
-    const jsonStream = this.exportConfig.json
-      ? JSONStream.stringify('[\n', ',\n', '\n]')
-      : JSONStream.stringify(false)
-    jsonStream.pipe(outputStream)
-    return this._getProducts(jsonStream)
+    this.logger.verbose('Starting Export')
+    const formattedStream = ProductExporter._decideStream(
+      this.exportConfig.exportType,
+    )
+    this.logger.verbose('Preparing outputStream')
+    formattedStream.pipe(outputStream)
+    return this._getProducts(formattedStream)
     .catch((e: Error) => {
+      this.logger.error('Oops. Something went wrong', e.toString())
       outputStream.emit('error', e)
     })
   }
 
   _getProducts (outputStream: stream$Writable): Promise<*> {
-    const service = this._createService()
-    const request: Object = {
-      uri: service.build(),
+    this.logger.verbose('Building request')
+    const uri = ProductExporter._buildProductProjectionsUri(
+      this.apiConfig.projectKey,
+      this.exportConfig,
+    )
+    const request: ClientRequest = {
+      uri,
       method: 'GET',
     }
     if (this.accessToken)
@@ -91,6 +95,7 @@ export default class ProductExporter {
     if (this.exportConfig.total)
       processConfig.total = this.exportConfig.total
 
+    this.logger.verbose('Dispatching request')
     return this.client.process(request, (
       {
         body: {
@@ -100,6 +105,7 @@ export default class ProductExporter {
     ): Promise<*> => {
       this.logger.verbose(`Fetched ${products.length} products`)
       ProductExporter._writeEachProduct(outputStream, products)
+      this.logger.verbose(`${products.length} products written to outputStream`)
       return Promise.resolve()
     }, processConfig)
     .then(() => {
@@ -108,20 +114,36 @@ export default class ProductExporter {
     })
   }
 
-  _createService (): Object {
+  static _buildProductProjectionsUri (
+    projectKey: string,
+    exportConfig: ExportConfigOptions,
+  ): string {
     const service = createRequestBuilder({
-      projectKey: this.apiConfig.projectKey,
+      projectKey,
     }).productProjections
-    service.staged(this.exportConfig.staged)
+    service.staged(exportConfig.staged)
 
-    if (this.exportConfig.batch)
-      service.perPage(this.exportConfig.batch)
-    if (this.exportConfig.predicate)
-      service.where(this.exportConfig.predicate)
-    if (this.exportConfig.expand)
-      service.expand(this.exportConfig.expand)
+    if (exportConfig.batch)
+      service.perPage(exportConfig.batch)
+    if (exportConfig.predicate)
+      service.where(exportConfig.predicate)
+    // Handle `expand` separately because it's an array
+    if (exportConfig.expand)
+      exportConfig.expand.forEach((reference: string) => {
+        service.expand(reference)
+      })
 
-    return service
+    return service.build()
+  }
+
+  /* if the exportFormat is json, prepare the stream for json data. If
+  csv, also create a json stream because it needs to pass text to
+  the stdout, but the json format preparation is irrelevant this time
+  */
+  static _decideStream (exportType: 'json' | 'chunk') {
+    return exportType === 'json'
+      ? JSONStream.stringify('[\n', ',\n', '\n]')
+      : JSONStream.stringify(false)
   }
 
   /* the `any` hack is necessary to  make flow work because there is no
