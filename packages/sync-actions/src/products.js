@@ -38,6 +38,8 @@ function createProductMapActions (mapActionGroup) {
     allActions.push(mapActionGroup('variants', () =>
       productActions.actionsMapVariants(diff, oldObj, newObj)))
 
+    allActions.push(productActions.actionsMapMasterVariant(oldObj, newObj))
+
     allActions.push(mapActionGroup('attributes', () =>
       productActions.actionsMapAttributes(diff, oldObj, newObj,
         sameForAllAttributeNames || [])))
@@ -58,10 +60,32 @@ function createProductMapActions (mapActionGroup) {
   }
 }
 
+function moveMasterVariantsIntoVariants (before, now) {
+  const move = obj => ({
+    ...obj,
+    masterVariant: undefined,
+    variants: [
+      obj.masterVariant,
+      ...obj.variants || [],
+    ],
+  })
+  const hasMasterVariant = obj => obj && obj.masterVariant
+
+  return [
+    hasMasterVariant(before) ? move(before) : before,
+    hasMasterVariant(now) ? move(now) : now,
+  ]
+}
+
 export default (config: Array<ActionGroup>): SyncAction => {
   const mapActionGroup = createMapActionGroup(config)
   const doMapActions = createProductMapActions(mapActionGroup)
-  const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
+
+  const buildActions = createBuildActions(
+    diffpatcher.diff,
+    doMapActions,
+    moveMasterVariantsIntoVariants,
+  )
 
   return { buildActions }
 }
