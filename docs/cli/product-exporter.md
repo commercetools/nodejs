@@ -14,7 +14,7 @@ The constructor accepts four arguments:
   - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](http://dev.commercetools.com/http-api.html#predicates) (Optional)
   - `staged` (Boolean): Specify if prices should be fetched from all products (true) or only published products (false) (Optional. Default: false)
   - `total` (Number): The total number of products to fetch
-- An optional logger object having four methods (`info`, `warn`, `error` and `verbose`)
+- An optional logger object having four methods (`info`, `warn`, `error` and `debug`)
 - `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_products`, `view_customers`]
 
 
@@ -48,8 +48,9 @@ Options:
   --staged, -s      Specify if all or published products should be fetched
                                                                        [boolean]
   --total, -t       Total number of products to fetch                   [number]
-  --logLevel        Logging level: error, warn, info or verbose
+  --logLevel        Logging level: error, warn, info or debug
                                                       [string] [default: "info"]
+  --prettyLogs      Pretty print logs to the terminal                  [boolean]
   --logFile         Path to file where logs should be saved
                                       [string] [default: "product-exporter.log"]
 ```
@@ -94,7 +95,7 @@ const logger = {
   error: console.error,
   warn: console.warn,
   info: console.log,
-  verbose: console.debug,
+  debug: console.debug,
 }
 const accessToken = 'my-unique-access-token'
 

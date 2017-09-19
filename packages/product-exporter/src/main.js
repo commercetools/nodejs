@@ -56,28 +56,28 @@ export default class ProductExporter {
       error: () => {},
       warn: () => {},
       info: () => {},
-      verbose: () => {},
+      debug: () => {},
       ...logger,
     }
     this.accessToken = accessToken
   }
 
   run (outputStream: stream$Writable): Promise<*> {
-    this.logger.verbose('Starting Export')
+    this.logger.debug('Starting Export')
     const formattedStream = ProductExporter._decideStream(
       this.exportConfig.exportType,
     )
-    this.logger.verbose('Preparing outputStream')
+    this.logger.debug('Preparing outputStream')
     formattedStream.pipe(outputStream)
     return this._getProducts(formattedStream)
     .catch((e: Error) => {
-      this.logger.error('Oops. Something went wrong', e.toString())
+      this.logger.debug(e, 'Oops. Something went wrong')
       outputStream.emit('error', e)
     })
   }
 
   _getProducts (outputStream: stream$Writable): Promise<*> {
-    this.logger.verbose('Building request')
+    this.logger.debug('Building request')
     const uri = ProductExporter._buildProductProjectionsUri(
       this.apiConfig.projectKey,
       this.exportConfig,
@@ -95,7 +95,7 @@ export default class ProductExporter {
     if (this.exportConfig.total)
       processConfig.total = this.exportConfig.total
 
-    this.logger.verbose('Dispatching request')
+    this.logger.debug('Dispatching request')
     return this.client.process(request, (
       {
         body: {
@@ -103,9 +103,9 @@ export default class ProductExporter {
         },
       }: ProcessFnResponse,
     ): Promise<*> => {
-      this.logger.verbose(`Fetched ${products.length} products`)
+      this.logger.debug(`Fetched ${products.length} products`)
       ProductExporter._writeEachProduct(outputStream, products)
-      this.logger.verbose(`${products.length} products written to outputStream`)
+      this.logger.debug(`${products.length} products written to outputStream`)
       return Promise.resolve()
     }, processConfig)
     .then(() => {

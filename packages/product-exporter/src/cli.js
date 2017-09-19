@@ -1,6 +1,6 @@
 import fs from 'fs'
 import { getCredentials } from '@commercetools/get-credentials'
-import npmlog from 'npmlog'
+import pino from 'pino'
 import PrettyError from 'pretty-error'
 import yargs from 'yargs'
 
@@ -110,8 +110,13 @@ Required scopes: ['view_products', 'view_customers']`,
 
   .option('logLevel', {
     default: 'info',
-    describe: 'Logging level: error, warn, info or verbose',
+    describe: 'Logging level: error, warn, info or debug',
     type: 'string',
+  })
+
+  .option('prettyLogs', {
+    describe: 'Pretty print logs to the terminal',
+    type: 'boolean',
   })
 
   .option('logFile', {
@@ -119,22 +124,27 @@ Required scopes: ['view_products', 'view_customers']`,
     describe: 'Path to file where logs should be saved',
     type: 'string',
   })
-  .coerce('logLevel', (arg) => {
-    npmlog.level = arg
-  })
   .argv
 
+// instantiate logger
+const loggerConfig = {
+  level: args.logLevel,
+  prettyPrint: args.prettyLogs,
+}
+const logger = pino(loggerConfig)
+
+
+// print errors to stderr if we use stdout for data output
+// if we save data to output file errors are already logged by pino
 const logError = (error) => {
   const errorFormatter = new PrettyError()
 
-  if (npmlog.level === 'verbose')
+  if (logger.level === 'debug')
     process.stderr.write(`ERR: ${errorFormatter.render(error)}`)
   else
     process.stderr.write(`ERR: ${error.message || error}`)
 }
 
-// print errors to stderr if we use stdout for data output
-// if we save data to output file errors are already logged by npmlog
 const errorHandler = (errors) => {
   if (Array.isArray(errors))
     errors.forEach(logError)
@@ -151,10 +161,9 @@ const resolveCredentials = (_args) => {
 }
 
 // If the stdout is used for a data output, save all logs to a log file.
+// pino writes logs to stdout by default
 if (args.output === process.stdout)
-  npmlog.stream = fs.createWriteStream(args.logFile)
-else
-  npmlog.stream = process.stdout
+  logger.stream = fs.createWriteStream(args.logFile)
 
 // Register error listener
 args.output.on('error', errorHandler)
@@ -175,18 +184,18 @@ resolveCredentials(args)
       staged: args.staged,
       total: args.total,
     }
-    const logger = {
-      error: npmlog.error.bind(this, ''),
-      warn: npmlog.warn.bind(this, ''),
-      info: npmlog.info.bind(this, ''),
-      verbose: npmlog.verbose.bind(this, ''),
+    const myLogger = {
+      error: logger.error.bind(logger),
+      warn: logger.warn.bind(logger),
+      info: logger.info.bind(logger),
+      debug: logger.debug.bind(logger),
     }
     const accessToken = args.accessToken
 
     return new ProductExporter(
       apiConfig,
       productExportConfigOptions,
-      logger,
+      myLogger,
       accessToken,
     )
   })
