@@ -143,7 +143,7 @@ export default class ProductExporter {
   static _decideStream (exportType: 'json' | 'chunk') {
     return exportType === 'json'
       ? JSONStream.stringify('[\n', ',\n', '\n]')
-      : JSONStream.stringify(false)
+      : JSONStream.stringify('', '\n\n\n', '\n\n')
   }
 
   /* the `any` hack is necessary to  make flow work because there is no
