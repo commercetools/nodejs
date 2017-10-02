@@ -38,7 +38,7 @@ export type ExportConfigOptions = {
 
 /* From API */
 
-type TypeReference = {
+export type TypeReference = {
   typeId: string;
   id: string;
 }
@@ -155,14 +155,35 @@ export type ProductProjection = {
   name: Object;
   description?: Object;
   slug: Object;
-  categories: Array<?TypeReference>;
+  categories: Array<TypeReference>;
   categoryOrderHints: Object;
   masterVariant: Variant;
   variants: Array<Variant>;
   hasStagedChanges: boolean;
   published: boolean;
-  taxCategory?: TypeReference;
-  state?: TypeReference;
+  taxCategory: TypeReference;
+  state: TypeReference;
+  reviewRatingStatistics?: Object;
+}
+
+export type ResolvedProductProjection = {
+  id: string;
+  key?: string;
+  version: number;
+  createdAt: string;
+  lastModifiedAt: string;
+  productType: TypeReference;
+  name: Object;
+  description?: Object;
+  slug: Object;
+  categories: Array<string>;
+  categoryOrderHints: Object;
+  masterVariant: Variant;
+  variants: Array<Variant>;
+  hasStagedChanges: boolean;
+  published: boolean;
+  taxCategory: string;
+  state: string;
   reviewRatingStatistics?: Object;
 }
 

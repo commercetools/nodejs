@@ -1,10 +1,16 @@
 /* @flow */
 import type {
   ApiConfigOptions,
+  LoggerOptions,
   ParserConfigOptions,
   ProductProjection,
-  LoggerOptions,
+  ResolvedProductProjection,
+  TypeReference,
 } from 'types/product'
+import type {
+  Client,
+  ClientRequest,
+} from 'types/sdk'
 
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
@@ -26,6 +32,7 @@ export default class JSONParserProduct {
   client: Client;
   parserConfig: ParserConfigOptions;
   logger: LoggerOptions;
+  fetchReferences: Function;
   _resolveReferences: Function;
 
   constructor (
@@ -96,8 +103,12 @@ export default class JSONParserProduct {
 
         // Run this only if the array contains products
         if (productsJsonArray.length) {
-          // TODO: Wrap in try/catch
-          productsArray = productsJsonArray.map(product => JSON.parse(product))
+          try {
+            productsArray = productsJsonArray.map(
+              (product: string): ProductProjection => JSON.parse(product))
+          } catch (error) {
+            input.emit('error', error)
+          }
           this._resolveReferences(productsArray)
         // .then(resolvedProducts => this._formatProducts(resolvedProduct))
         // .then(formattedProduct => this._writePtoducts(formattedProduct))
@@ -114,7 +125,9 @@ export default class JSONParserProduct {
     })
   }
 
-  _resolveReferences (productsArray) {
+  _resolveReferences (
+    productsArray: Array<ProductProjection>,
+    ): Array<ResolvedProductProjection> {
     // ReferenceTypes that need to be resolved:
     // PRODUCT LEVEL
     // **ProductType
@@ -123,22 +136,36 @@ export default class JSONParserProduct {
     // **State
     // **CategoryOrderHints
 
-    return Promise.map(productsArray, (product) => {
-      const productToResolve = Object.assign({}, product)
-      return Promise.all([
-        this._resolveProductType(productToResolve),
-        this._resolveTaxCategory(productToResolve),
-        this._resolveState(productToResolve),
-        this._resolveCategories(productToResolve),
-        this._resolveCategoryOrderHints(productToResolve),
-      ])
-      .then(([productType, taxCategory, state, categories, categoryOrderHints]) => (
-        { ...productToResolve, ...productType, ...taxCategory, ...state, ...categories, ...categoryOrderHints }
-      ))
-    })
+    return Promise.map(productsArray,
+      (product: ProductProjection): Array<ResolvedProductProjection> => {
+        const productToResolve = Object.assign({}, product)
+        return Promise.all([
+          this._resolveProductType(productToResolve),
+          this._resolveTaxCategory(productToResolve),
+          this._resolveState(productToResolve),
+          this._resolveCategories(productToResolve),
+          this._resolveCategoryOrderHints(productToResolve),
+        ])
+        .then(([
+          productType,
+          taxCategory,
+          state,
+          categories,
+          categoryOrderHints,
+        ]: Array<Object>): ResolvedProductProjection => (
+          {
+            ...productToResolve,
+            ...productType,
+            ...taxCategory,
+            ...state,
+            ...categories,
+            ...categoryOrderHints,
+          }
+        ))
+      })
   }
 
-  _resolveProductType (product) {
+  _resolveProductType (product: ProductProjection): Object {
     if (!product.productType)
       return {}
 
@@ -151,7 +178,7 @@ export default class JSONParserProduct {
       })
   }
 
-  _resolveTaxCategory (product) {
+  _resolveTaxCategory (product: ProductProjection): Object {
     if (!product.taxCategory)
       return {}
 
@@ -164,7 +191,7 @@ export default class JSONParserProduct {
       })
   }
 
-  _resolveState (product) {
+  _resolveState (product: ProductProjection): Object {
     if (!product.state)
       return {}
 
@@ -177,44 +204,45 @@ export default class JSONParserProduct {
       })
   }
 
-  _resolveCategories (product) {
+  _resolveCategories (product: ProductProjection): Object {
     if (!product.categories || !product.categories.length)
       return {}
 
-    const predicateArray = product.categories.map(category => category.id)
+    const predicateArray = product.categories.map(
+      (category: TypeReference): string => category.id)
     const predicate = `id in ("${predicateArray.join('", "')}")`
     const categoriesService = this._createService('categories')
     const uri = categoriesService.where(predicate).build()
     return this.fetchReferences(uri)
       .then(({ body: { results } }) => {
         const categories = results.map(result => (
-          result.key || result.externalId || result.name
+          result.key || result.externalId
         ))
         return { categories }
       })
   }
 
-  _resolveCategoryOrderHints (product) {
-    if (!product.categoryOrderHints || !Object.keys(product.categoryOrderHints).length)
+  _resolveCategoryOrderHints (product: ProductProjection): Object {
+    if (!product.categoryOrderHints
+      || !Object.keys(product.categoryOrderHints).length)
       return {}
 
     const predicateArray = Object.keys(product.categoryOrderHints)
     const predicate = `id in ("${predicateArray.join('", "')}")`
-    console.log(predicate)
     const categoriesService = this._createService('categories')
     const uri = categoriesService.where(predicate).build()
     return this.fetchReferences(uri)
       .then(({ body: { results } }) => {
         const categoryOrderHints = {}
         results.forEach((result) => {
-          const categoryRef = result.key || result.externalId || result.name
-          categoryOrderHints[categoryRef] = product.categoryOrderHints[result.id]
+          const catRef = result.key || result.externalId
+          categoryOrderHints[catRef] = product.categoryOrderHints[result.id]
         })
         return { categoryOrderHints }
       })
   }
 
-  _createService (serviceType) {
+  _createService (serviceType: string): Object {
     const service = createRequestBuilder({
       projectKey: this.apiConfig.projectKey,
     })[serviceType]
@@ -222,16 +250,16 @@ export default class JSONParserProduct {
     return service
   }
 
-  _formatProducts () {
+  // _formatProducts () {
     // TODO: DO NOT FORGET TO PARSE BOOLEANS AND NUMBERS
     // TODO: IF FILL ALL ROWS, DUPLICATE ACROSS ALL CELLS
     // TODO: HANDLE ATTRIBUTES
-  }
+  // }
 }
 
 JSONParserProduct.prototype.fetchReferences = memoize(
-  function _fetchReferences (uri) {
-    const request = {
+  function _fetchReferences (uri: string): Promise<Object> {
+    const request: ClientRequest = {
       uri,
       method: 'GET',
     }
