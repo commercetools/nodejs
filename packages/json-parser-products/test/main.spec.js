@@ -285,8 +285,8 @@ describe('JSONParserProduct', () => {
 
     describe('::_resolveCategories', () => {
       beforeEach(() => {
-        jsonParserProduct.fetchReferences = jest.fn(() => (
-          Promise.resolve({ body: { results: [] } })
+        jsonParserProduct._manageCategories = jest.fn(() => (
+          Promise.resolve([])
         ))
       })
 
@@ -295,23 +295,12 @@ describe('JSONParserProduct', () => {
         expect(jsonParserProduct._resolveCategories(sampleProduct)).toEqual({})
       })
 
-      it('build correct request uri for categories', async () => {
-        const expected = /project-key\/categories/
-        await jsonParserProduct._resolveCategories(sampleProduct)
-        expect(jsonParserProduct.fetchReferences)
-          .toBeCalledWith(expect.stringMatching(expected))
-      })
-
       it('return category keys if array of `categories`', async () => {
-        const resolvedCategories = {
-          body: {
-            results: [
-              { key: 'res-cat-key-1' },
-              { key: 'res-cat-key-2' },
-            ],
-          },
-        }
-        jsonParserProduct.fetchReferences
+        const resolvedCategories = [
+          { key: 'res-cat-key-1' },
+          { key: 'res-cat-key-2' },
+        ]
+        jsonParserProduct._manageCategories
           .mockReturnValue(Promise.resolve(resolvedCategories))
         const expected = { categories: ['res-cat-key-1', 'res-cat-key-2'] }
         const actual = await jsonParserProduct
@@ -320,15 +309,11 @@ describe('JSONParserProduct', () => {
       })
 
       it('return externalIds if no keys in categories', async () => {
-        const resolvedCategories = {
-          body: {
-            results: [
-              { externalId: 'res-cat-extId-1' },
-              { externalId: 'res-cat-extId-2' },
-            ],
-          },
-        }
-        jsonParserProduct.fetchReferences
+        const resolvedCategories = [
+          { externalId: 'res-cat-extId-1' },
+          { externalId: 'res-cat-extId-2' },
+        ]
+        jsonParserProduct._manageCategories
           .mockReturnValue(Promise.resolve(resolvedCategories))
         const expected = { categories: ['res-cat-extId-1', 'res-cat-extId-2'] }
         const actual = await jsonParserProduct
@@ -339,8 +324,8 @@ describe('JSONParserProduct', () => {
 
     describe('::_resolveCategoryOrderHints', () => {
       beforeEach(() => {
-        jsonParserProduct.fetchReferences = jest.fn(() => (
-          Promise.resolve({ body: { results: [] } })
+        jsonParserProduct._manageCategories = jest.fn(() => (
+          Promise.resolve([])
         ))
       })
 
@@ -356,23 +341,12 @@ describe('JSONParserProduct', () => {
           .toEqual({})
       })
 
-      it('build correct request uri for categories', async () => {
-        const expected = /project-key\/categories/
-        await jsonParserProduct._resolveCategoryOrderHints(sampleProduct)
-        expect(jsonParserProduct.fetchReferences)
-          .toBeCalledWith(expect.stringMatching(expected))
-      })
-
       it('return category keys for `categoryOrderHints`', async () => {
-        const resolvedCategories = {
-          body: {
-            results: [
-              { id: 'fake-cat-1', key: 'res-cat-key-1' },
-              { id: 'fake-cat-2', key: 'res-cat-key-2' },
-            ],
-          },
-        }
-        jsonParserProduct.fetchReferences
+        const resolvedCategories = [
+          { id: 'fake-cat-1', key: 'res-cat-key-1' },
+          { id: 'fake-cat-2', key: 'res-cat-key-2' },
+        ]
+        jsonParserProduct._manageCategories
           .mockReturnValue(Promise.resolve(resolvedCategories))
         const expected = {
           categoryOrderHints: {
@@ -386,15 +360,11 @@ describe('JSONParserProduct', () => {
       })
 
       it('return externalIds if no keys in categories', async () => {
-        const resolvedCategories = {
-          body: {
-            results: [
-              { id: 'fake-cat-1', externalId: 'res-cat-extId-1' },
-              { id: 'fake-cat-2', externalId: 'res-cat-extId-2' },
-            ],
-          },
-        }
-        jsonParserProduct.fetchReferences
+        const resolvedCategories = [
+          { id: 'fake-cat-1', externalId: 'res-cat-extId-1' },
+          { id: 'fake-cat-2', externalId: 'res-cat-extId-2' },
+        ]
+        jsonParserProduct._manageCategories
           .mockReturnValue(Promise.resolve(resolvedCategories))
         const expected = {
           categoryOrderHints: {
@@ -405,6 +375,58 @@ describe('JSONParserProduct', () => {
         const actual = await jsonParserProduct
           ._resolveCategoryOrderHints(sampleProduct)
         expect(actual).toEqual(expected)
+      })
+    })
+
+    describe('::_manageCategories', () => {
+      beforeEach(() => {
+        jsonParserProduct.categoriesCache = {
+          'cat-id-1': {
+            id: 'cat-id-1',
+            key: 'cat-key-1-in-cache',
+          },
+        }
+        const results = [{ id: 'cat-id-2', key: 'cat-key-2-new-in-cache' }]
+
+        jsonParserProduct.fetchReferences = jest.fn(() => (
+          Promise.resolve({ body: { results } })
+        ))
+      })
+
+      it('return category from cache if it exists', async () => {
+        const expected = [{ id: 'cat-id-1', key: 'cat-key-1-in-cache' }]
+        const categoryId = ['cat-id-1']
+        const actual = await jsonParserProduct._manageCategories(categoryId)
+        expect(jsonParserProduct.fetchReferences).not.toBeCalled()
+        expect(actual).toEqual(expected)
+      })
+
+      it('fetch only data not in cache from API', async () => {
+        const expectedCategories = [{
+          id: 'cat-id-1', key: 'cat-key-1-in-cache',
+        }, {
+          id: 'cat-id-2', key: 'cat-key-2-new-in-cache',
+        }]
+        const expectedUri = /categories\?where=id%20in%20\(%22cat-id-2%22\)/
+        const categoryIds = ['cat-id-1', 'cat-id-2']
+        const actual = await jsonParserProduct._manageCategories(categoryIds)
+        expect(jsonParserProduct.fetchReferences)
+          .toBeCalledWith(expect.stringMatching(expectedUri))
+        expect(actual).toEqual(expectedCategories)
+      })
+
+      it('save fetched categories in cache', async () => {
+        const expectedCache = {
+          'cat-id-1': {
+            id: 'cat-id-1', key: 'cat-key-1-in-cache',
+          },
+          'cat-id-2': {
+            id: 'cat-id-2', key: 'cat-key-2-new-in-cache',
+          },
+        }
+        const categoryIds = ['cat-id-2']
+        await jsonParserProduct._manageCategories(categoryIds)
+        expect(jsonParserProduct.categoriesCache).toEqual(expectedCache)
       })
     })
   })

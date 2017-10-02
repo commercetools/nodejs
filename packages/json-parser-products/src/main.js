@@ -29,6 +29,7 @@ export default class JSONParserProduct {
   // Set flowtype annotations
   accessToken: string;
   apiConfig: ApiConfigOptions;
+  categoriesCache: Object;
   client: Client;
   parserConfig: ParserConfigOptions;
   logger: LoggerOptions;
@@ -68,6 +69,7 @@ export default class JSONParserProduct {
       verbose: () => {},
       ...logger,
     }
+    this.categoriesCache = {}
     this.accessToken = accessToken
   }
 
@@ -208,15 +210,12 @@ export default class JSONParserProduct {
     if (!product.categories || !product.categories.length)
       return {}
 
-    const predicateArray = product.categories.map(
+    const categoryIds = product.categories.map(
       (category: TypeReference): string => category.id)
-    const predicate = `id in ("${predicateArray.join('", "')}")`
-    const categoriesService = this._createService('categories')
-    const uri = categoriesService.where(predicate).build()
-    return this.fetchReferences(uri)
-      .then(({ body: { results } }) => {
-        const categories = results.map(result => (
-          result.key || result.externalId
+    return this._manageCategories(categoryIds)
+      .then((resolvedCategories) => {
+        const categories = resolvedCategories.map(category => (
+          category.key || category.externalId
         ))
         return { categories }
       })
@@ -227,18 +226,41 @@ export default class JSONParserProduct {
       || !Object.keys(product.categoryOrderHints).length)
       return {}
 
-    const predicateArray = Object.keys(product.categoryOrderHints)
-    const predicate = `id in ("${predicateArray.join('", "')}")`
+    const categoryIds = Object.keys(product.categoryOrderHints)
+    return this._manageCategories(categoryIds)
+      .then((resolvedCategories) => {
+        const categoryOrderHints = {}
+        resolvedCategories.forEach((category) => {
+          const catRef = category.key || category.externalId
+          categoryOrderHints[catRef] = product.categoryOrderHints[category.id]
+        })
+        return { categoryOrderHints }
+      })
+  }
+
+  // This method decides if to resolve the categories from cache or API
+  _manageCategories (ids: Array<string>): Promise<Array<Object>> {
+    const notCachedIds = []
+    const cachedCategories = []
+    ids.forEach((id: string) => {
+      if (this.categoriesCache[id])
+        cachedCategories.push(this.categoriesCache[id])
+      else
+        notCachedIds.push(id)
+    })
+    if (!notCachedIds.length)
+      return Promise.resolve(cachedCategories)
+
+    const predicate = `id in ("${notCachedIds.join('", "')}")`
     const categoriesService = this._createService('categories')
     const uri = categoriesService.where(predicate).build()
     return this.fetchReferences(uri)
       .then(({ body: { results } }) => {
-        const categoryOrderHints = {}
         results.forEach((result) => {
-          const catRef = result.key || result.externalId
-          categoryOrderHints[catRef] = product.categoryOrderHints[result.id]
+          cachedCategories.push(result)
+          this.categoriesCache[result.id] = result
         })
-        return { categoryOrderHints }
+        return cachedCategories
       })
   }
 
