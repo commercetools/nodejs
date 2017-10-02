@@ -33,7 +33,6 @@ export default function authMiddlewareBase ({
     next(request, response)
     return
   }
-
   // If there was a token in the tokenCache, and it's not expired, append
   // the token in the `Authorization` header.
   const tokenObj = tokenCache.get()
