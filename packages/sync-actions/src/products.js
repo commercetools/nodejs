@@ -8,6 +8,7 @@ import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import * as productActions from './product-actions'
 import * as diffpatcher from './utils/diffpatcher'
+import findMatchingPairs from './utils/find-matching-pairs'
 
 const actionGroups = [
   'base',
@@ -25,6 +26,13 @@ function createProductMapActions (mapActionGroup) {
   return function doMapActions (diff, newObj, oldObj, options) {
     const allActions = []
     const { sameForAllAttributeNames } = options
+
+    const variantHashMap = findMatchingPairs(
+      diff.variants,
+      oldObj.variants,
+      newObj.variants,
+      'id',
+    )
 
     allActions.push(mapActionGroup('base', () =>
       productActions.actionsMapBase(diff, oldObj, newObj)))
@@ -45,7 +53,7 @@ function createProductMapActions (mapActionGroup) {
         sameForAllAttributeNames || [])))
 
     allActions.push(mapActionGroup('images', () =>
-      productActions.actionsMapImages(diff, oldObj, newObj)))
+      productActions.actionsMapImages(diff, oldObj, newObj, variantHashMap)))
 
     allActions.push(mapActionGroup('prices', () =>
       productActions.actionsMapPrices(diff, oldObj, newObj)))

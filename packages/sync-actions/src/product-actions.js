@@ -174,12 +174,10 @@ export function actionsMapAttributes (
   )
 }
 
-export function actionsMapImages (diff, oldObj, newObj) {
+export function actionsMapImages (diff, oldObj, newObj, variantHashMap) {
   let actions = []
   const { variants } = diff
-
-  if (variants) {
-    const variantHashMap = findMatchingPairs(variants, oldObj.variants, newObj.variants, 'id')
+  if (variants)
     forEach(variants, (variant, key) => {
       if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
         const vActions = _buildVariantImagesAction(
@@ -190,7 +188,6 @@ export function actionsMapImages (diff, oldObj, newObj) {
         actions = actions.concat(vActions)
       }
     })
-  }
 
   return actions
 }
@@ -438,7 +435,7 @@ function _buildSetAttributeAction (
   return action
 }
 
-function _buildVariantImagesAction (diffedImages, oldVariant, newVariant) {
+function _buildVariantImagesAction (diffedImages, oldVariant = {}, newVariant = {}) {
   const actions = []
   // generate a hashMap to be able to reference the right image from both ends
   const imagesHashMap = findMatchingPairs(diffedImages, oldVariant.images, newVariant.images, 'url')
