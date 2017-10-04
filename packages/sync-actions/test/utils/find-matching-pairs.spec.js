@@ -76,6 +76,7 @@ describe('findMatchingPairs', () => {
         assets: [],
         images: [
           {
+            // eslint-disable-next-line max-len
             url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/Screen+Shot+2017-04--LOx1OrZZ.png',
             dimensions: {
               w: 1456,
@@ -83,6 +84,7 @@ describe('findMatchingPairs', () => {
             },
           },
           {
+            // eslint-disable-next-line max-len
             url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/cactus-with-surfboar-BmOeVZEZ.jpg',
             label: 'cactus',
             dimensions: {
