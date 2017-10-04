@@ -10,6 +10,7 @@ import createBuildArrayActions, {
   ADD_ACTIONS,
   REMOVE_ACTIONS,
 } from './utils/create-build-array-actions'
+import findMatchingPairs from './utils/find-matching-pairs'
 
 const REGEX_NUMBER = new RegExp(/^\d+$/)
 const REGEX_UNDERSCORE_NUMBER = new RegExp(/^_\d+$/)
@@ -177,15 +178,19 @@ export function actionsMapImages (diff, oldObj, newObj) {
   let actions = []
   const { variants } = diff
 
-  if (variants)
+  if (variants) {
+    const variantHashMap = findMatchingPairs(variants, oldObj.variants, newObj.variants, 'id')
     forEach(variants, (variant, key) => {
-      const vActions = _buildVariantImagesAction(
-        variant.images,
-        oldObj.variants[key],
-        newObj.variants[key],
-      )
-      actions = actions.concat(vActions)
+      if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
+        const vActions = _buildVariantImagesAction(
+          variant.images,
+          oldObj.variants[variantHashMap[key][0]],
+          newObj.variants[variantHashMap[key][1]],
+        )
+        actions = actions.concat(vActions)
+      }
     })
+  }
 
   return actions
 }
@@ -435,7 +440,8 @@ function _buildSetAttributeAction (
 
 function _buildVariantImagesAction (diffedImages, oldVariant, newVariant) {
   const actions = []
-
+  // generate a hashMap to be able to reference the right image from both ends
+  const imagesHashMap = findMatchingPairs(diffedImages, oldVariant.images, newVariant.images, 'url')
   forEach(diffedImages, (image, key) => {
     if (REGEX_NUMBER.test(key)) {
       // New image
@@ -453,31 +459,38 @@ function _buildVariantImagesAction (diffedImages, oldVariant, newVariant) {
           actions.push({
             action: 'removeImage',
             variantId: oldVariant.id,
-            imageUrl: oldVariant.images[key].url,
+            imageUrl: oldVariant.images[imagesHashMap[key][0]].url,
           })
           actions.push({
             action: 'addExternalImage',
             variantId: oldVariant.id,
-            image: newVariant.images[key],
+            image: newVariant.images[imagesHashMap[key][1]],
           })
         } else if ({}.hasOwnProperty.call(image, 'label') &&
           (image.label.length === 1 || image.label.length === 2))
           actions.push({
             action: 'changeImageLabel',
             variantId: oldVariant.id,
-            imageUrl: oldVariant.images[key].url,
+            imageUrl: oldVariant.images[imagesHashMap[key][0]].url,
             label: diffpatcher.getDeltaValue(image.label),
           })
-    } else if (REGEX_UNDERSCORE_NUMBER.test(key)) {
-      const index = key.substring(1)
-
-      if (Array.isArray(image))
-        actions.push({
-          action: 'removeImage',
-          variantId: oldVariant.id,
-          imageUrl: oldVariant.images[index].url,
-        })
-    }
+    } else if (REGEX_UNDERSCORE_NUMBER.test(key))
+      if (Array.isArray(image) && image.length === 3)
+        if (Number(image[2]) === 3)
+          // image position changed
+          actions.push({
+            action: 'moveImagetoPosition',
+            variantId: oldVariant.id,
+            imageUrl: oldVariant.images[imagesHashMap[key][0]].url,
+            position: Number(image[1]),
+          })
+        else if (Number(image[2] === 0))
+          // image removed
+          actions.push({
+            action: 'removeImage',
+            variantId: oldVariant.id,
+            imageUrl: oldVariant.images[imagesHashMap[key][0]].url,
+          })
   })
 
   return actions
