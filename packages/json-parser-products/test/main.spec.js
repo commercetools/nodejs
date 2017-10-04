@@ -35,7 +35,7 @@ describe('JSONParserProduct', () => {
       const defaultConfig = {
         delimiter: ',',
         multiValueDelimiter: ';',
-        continueOnProblems: false,
+        fillAllRows: false,
         categoryOrderHintBy: 'id',
       }
 
@@ -48,7 +48,7 @@ describe('JSONParserProduct', () => {
 
   describe('::parse', () => {
     beforeEach(() => {
-      jsonParserProduct._resolveReferences = jest.fn(() => {})
+      jsonParserProduct._resolveReferences = jest.fn(() => Promise.resolve())
     })
 
     afterEach(() => {
@@ -302,7 +302,7 @@ describe('JSONParserProduct', () => {
         ]
         jsonParserProduct._manageCategories
           .mockReturnValue(Promise.resolve(resolvedCategories))
-        const expected = { categories: ['res-cat-key-1', 'res-cat-key-2'] }
+        const expected = { categories: 'res-cat-key-1;res-cat-key-2' }
         const actual = await jsonParserProduct
           ._resolveCategories(sampleProduct)
         expect(actual).toEqual(expected)
@@ -315,7 +315,7 @@ describe('JSONParserProduct', () => {
         ]
         jsonParserProduct._manageCategories
           .mockReturnValue(Promise.resolve(resolvedCategories))
-        const expected = { categories: ['res-cat-extId-1', 'res-cat-extId-2'] }
+        const expected = { categories: 'res-cat-extId-1;res-cat-extId-2' }
         const actual = await jsonParserProduct
           ._resolveCategories(sampleProduct)
         expect(actual).toEqual(expected)
@@ -349,10 +349,7 @@ describe('JSONParserProduct', () => {
         jsonParserProduct._manageCategories
           .mockReturnValue(Promise.resolve(resolvedCategories))
         const expected = {
-          categoryOrderHints: {
-            'res-cat-key-1': '0.012',
-            'res-cat-key-2': '0.987',
-          },
+          categoryOrderHints: 'res-cat-key-1:0.012;res-cat-key-2:0.987',
         }
         const actual = await jsonParserProduct
           ._resolveCategoryOrderHints(sampleProduct)
@@ -367,10 +364,7 @@ describe('JSONParserProduct', () => {
         jsonParserProduct._manageCategories
           .mockReturnValue(Promise.resolve(resolvedCategories))
         const expected = {
-          categoryOrderHints: {
-            'res-cat-extId-1': '0.012',
-            'res-cat-extId-2': '0.987',
-          },
+          categoryOrderHints: 'res-cat-extId-1:0.012;res-cat-extId-2:0.987',
         }
         const actual = await jsonParserProduct
           ._resolveCategoryOrderHints(sampleProduct)
@@ -460,6 +454,121 @@ describe('JSONParserProduct', () => {
       jsonParserProduct.fetchReferences(uri)
       expect(jsonParserProduct.client.execute).toHaveBeenCalledTimes(1)
       expect(jsonParserProduct.client.execute).toBeCalledWith(expectedRequest)
+    })
+  })
+
+  describe('Product structure', () => {
+    describe('::_mergeVariants', () => {
+      it('should merge all variants in a product into one property', () => {
+        const sampleProduct = {
+          masterVariant: { id: 1 },
+          variants: [{ id: 2 }, { id: 3 }],
+        }
+        const expected = {
+          variant: [{ id: 1 }, { id: 2 }, { id: 3 }],
+        }
+        const actual = JSONParserProduct._mergeVariants(sampleProduct)
+        expect(actual).toEqual(expected)
+      })
+    })
+
+    describe('::_stringFromImage', () => {
+      let sampleProduct
+      beforeEach(() => {
+        sampleProduct = {
+          name: { en: 'my-fresh-product' },
+          variant: [{
+            id: 1,
+            images: [{
+              url: 'image1/master',
+              dimensions: { w: 10, h: 15 },
+              label: 'masterVariant',
+            }],
+          }, {
+            id: 2,
+            images: [{
+              url: 'image1/var2',
+              dimensions: { w: 5, h: 5 },
+              label: 'foo',
+            }, {
+              url: 'image2/var2',
+              dimensions: { w: 10, h: 5 },
+              label: 'foo-2',
+            }],
+          }],
+        }
+      })
+
+      it('should extract a csv-ready string from image object', () => {
+        const expected = {
+          name: { en: 'my-fresh-product' },
+          variant: [{
+            id: 1, images: 'image1/master|10|15|masterVariant',
+          }, {
+            id: 2, images: 'image1/var2|5|5|foo;image2/var2|10|5|foo-2',
+          }],
+        }
+        const actual = JSONParserProduct._stringFromImages(sampleProduct, ';')
+        expect(actual).toEqual(expected)
+      })
+
+      it('should not display `undefined` if label is empty', () => {
+        const expected = {
+          name: { en: 'my-fresh-product' },
+          variant: [{
+            id: 1, images: 'image1/master|10|15|',
+          }, {
+            id: 2, images: 'image1/var2|5|5|foo;image2/var2|10|5|foo-2',
+          }],
+        }
+        delete sampleProduct.variant[0].images[0].label
+        const actual = JSONParserProduct._stringFromImages(sampleProduct, ';')
+        expect(actual).toEqual(expected)
+      })
+    })
+
+    describe('::_variantToProduct', () => {
+      const sampleProduct = {
+        name: { en: 'my-fresh-product' },
+        description: { en: 'sample product object' },
+        variant: [
+          { id: 'masterVariant' },
+          { id: 'variant-2' },
+          { id: 'variant-3' },
+        ],
+      }
+
+      it('multiply product data for each variant if `fillAllRows`', () => {
+        const expected = [{
+          name: { en: 'my-fresh-product' },
+          description: { en: 'sample product object' },
+          variant: { id: 'masterVariant' },
+        }, {
+          name: { en: 'my-fresh-product' },
+          description: { en: 'sample product object' },
+          variant: { id: 'variant-2' },
+        }, {
+          name: { en: 'my-fresh-product' },
+          description: { en: 'sample product object' },
+          variant: { id: 'variant-3' },
+        }]
+        const actual = JSONParserProduct._variantToProduct(sampleProduct, true)
+        expect(actual).toEqual(expected)
+      })
+
+      it('not multiply product data for each variant if no fillAllRows', () => {
+        const expected = [{
+          name: { en: 'my-fresh-product' },
+          description: { en: 'sample product object' },
+          variant: { id: 'masterVariant' },
+        }, {
+          variant: { id: 'variant-2' },
+        }, {
+          variant: { id: 'variant-3' },
+        }]
+        const actual = JSONParserProduct._variantToProduct(sampleProduct, false)
+        expect(actual).toEqual(expected)
+      })
     })
   })
 })

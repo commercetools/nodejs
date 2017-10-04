@@ -21,10 +21,10 @@ export type LoggerOptions = {
 }
 
 export type ParserConfigOptions = {
-  delimiter: string;
-  multiValueDelimiter: string;
-  continueOnProblems: boolean;
   categoryOrderHintBy: string;
+  delimiter: string;
+  fillAllRows: boolean;
+  multiValueDelimiter: string;
 }
 
 export type ExportConfigOptions = {
@@ -133,7 +133,7 @@ type Variant = {
   sku?: string;
   key?: string;
   prices: Array<?Price>;
-  images: Array<?Image>;
+  images: Array<Image>;
   attributes: Array<?Attribute>;
   assets: Array<?Asset>;
   price?: Price;

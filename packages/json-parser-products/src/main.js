@@ -55,10 +55,10 @@ export default class JSONParserProduct {
     })
 
     const defaultConfig = {
-      delimiter: ',',
-      multiValueDelimiter: ';',
-      continueOnProblems: false,
       categoryOrderHintBy: 'id',
+      delimiter: ',',
+      fillAllRows: false,
+      multiValueDelimiter: ';',
     }
 
     this.parserConfig = { ...defaultConfig, ...parserConfig }
@@ -66,7 +66,7 @@ export default class JSONParserProduct {
       error: () => {},
       warn: () => {},
       info: () => {},
-      verbose: () => {},
+      debug: () => {},
       ...logger,
     }
     this.categoriesCache = {}
@@ -112,7 +112,7 @@ export default class JSONParserProduct {
             input.emit('error', error)
           }
           this._resolveReferences(productsArray)
-        // .then(resolvedProducts => this._formatProducts(resolvedProduct))
+            .then(resolvedProducts => this._formatProducts(resolvedProducts))
         // .then(formattedProduct => this._writePtoducts(formattedProduct))
         }
       }
@@ -216,7 +216,7 @@ export default class JSONParserProduct {
       .then((resolvedCategories) => {
         const categories = resolvedCategories.map(category => (
           category.key || category.externalId
-        ))
+        )).join(this.parserConfig.multiValueDelimiter)
         return { categories }
       })
   }
@@ -229,11 +229,10 @@ export default class JSONParserProduct {
     const categoryIds = Object.keys(product.categoryOrderHints)
     return this._manageCategories(categoryIds)
       .then((resolvedCategories) => {
-        const categoryOrderHints = {}
-        resolvedCategories.forEach((category) => {
+        const categoryOrderHints = resolvedCategories.map((category) => {
           const catRef = category.key || category.externalId
-          categoryOrderHints[catRef] = product.categoryOrderHints[category.id]
-        })
+          return `${catRef}:${product.categoryOrderHints[category.id]}`
+        }).join(this.parserConfig.multiValueDelimiter)
         return { categoryOrderHints }
       })
   }
@@ -272,11 +271,67 @@ export default class JSONParserProduct {
     return service
   }
 
-  // _formatProducts () {
-    // TODO: DO NOT FORGET TO PARSE BOOLEANS AND NUMBERS
-    // TODO: IF FILL ALL ROWS, DUPLICATE ACROSS ALL CELLS
+  // Modify the structure of the product object to be ready for output
+  _formatProducts (products) {
+    const { multiValueDelimiter, fillAllRows } = this.parserConfig
+    return products.map(product => (
+      JSONParserProduct._mergeVariants(product)
+    )).map(product => (
+      JSONParserProduct._stringFromImages(product, multiValueDelimiter)
+    )).map(product => (
+      JSONParserProduct._variantToProduct(product, fillAllRows)
+    ))
+
+    // const csvStream = csv.createWriteStream({ headers: true })
+    // csvStream.pipe(output)
+    // pppp.forEach((produ) => {
+    //   produ.forEach(pro => csvStream.write(flatten(pro)))
+    // })
+
     // TODO: HANDLE ATTRIBUTES
-  // }
+  }
+
+  // This method merges the masterVariants and other variant into a single array
+  static _mergeVariants (product) {
+    const merged = Object.assign({}, product)
+    merged.variant = [product.masterVariant, ...product.variants]
+    delete merged.masterVariant
+    delete merged.variants
+    return merged
+  }
+
+  // This method returns a stringified version of variant images
+  static _stringFromImages (product, multiValueDelimiter) {
+    const variantArray = product.variant.map((eachVariant) => {
+      let images
+      if (eachVariant.images)
+        images = eachVariant.images.reduce((acc, image) => {
+          const { url, dimensions, label = '' } = image
+          const imageString = `${url}|${dimensions.w}|${dimensions.h}|${label}`
+          if (!acc) return imageString
+          return `${acc}${multiValueDelimiter}${imageString}`
+        }, '')
+      return { ...eachVariant, images }
+    })
+    return { ...product, variant: variantArray }
+  }
+
+  // This method returns one product object per variant in an array
+  // This is necessary to bring all variants to the object root level
+  // This also duplicates the object properties across all objects if
+  // necessary in order to fill all rows
+  static _variantToProduct (product, fillAllRows) {
+    if (fillAllRows)
+      return product.variant.map(eachVariant => (
+        { ...product, variant: eachVariant }
+      ))
+
+    const productWithVariants = product.variant.map(eachVariant => (
+      { variant: eachVariant }
+    ))
+    productWithVariants[0] = { ...product, ...productWithVariants[0] }
+    return productWithVariants
+  }
 }
 
 JSONParserProduct.prototype.fetchReferences = memoize(
