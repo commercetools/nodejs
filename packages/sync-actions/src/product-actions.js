@@ -136,6 +136,7 @@ export function actionsMapAttributes (
   oldObj,
   newObj,
   sameForAllAttributeNames = [],
+  variantHashMap,
 ) {
   let actions = []
   const { variants } = diff
@@ -143,10 +144,14 @@ export function actionsMapAttributes (
   if (variants)
     forEach(variants, (variant, key) => {
       if (REGEX_NUMBER.test(key) && !Array.isArray(variant)) {
+        const oldVariantPos = variantHashMap[key][0]
+        const newVariantPos = variantHashMap[key][1]
+        const oldVariant = oldObj.variants[oldVariantPos]
+        const newVariant = newObj.variants[newVariantPos]
         const skuAction =
-          _buildSkuActions(variant, oldObj.variants[key])
+          _buildSkuActions(variant, oldVariant)
         const keyAction =
-          _buildKeyActions(variant, oldObj.variants[key])
+          _buildKeyActions(variant, oldVariant)
         if (skuAction) actions.push(skuAction)
         if (keyAction) actions.push(keyAction)
 
@@ -154,8 +159,8 @@ export function actionsMapAttributes (
 
         const attrActions = _buildVariantAttributesActions(
           attributes,
-          oldObj.variants[key],
-          newObj.variants[key],
+          oldVariant,
+          newVariant,
           sameForAllAttributeNames,
         )
         actions = actions.concat(attrActions)

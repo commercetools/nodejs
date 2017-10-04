@@ -21,6 +21,7 @@ describe('Actions', () => {
         ],
       },
       variants: [
+        { id: 3, attributes: [] },
         {
           id: 2,
           attributes: [
@@ -31,7 +32,6 @@ describe('Actions', () => {
             { name: 'ean', value: '20063672' },
           ],
         },
-        { id: 3, attributes: [] },
         {
           id: 4,
           attributes: [
@@ -504,7 +504,7 @@ describe('Actions', () => {
 
             expect(actions).toEqual([
               { action: 'changeMasterVariant', variantId: 1 },
-              { action: 'setAttribute', name: 'foo-2', value: 'bar-3', variantId: 2 },
+              { action: 'setAttribute', name: 'foo-2', value: 'bar-3', variantId: 1 },
             ])
           })
         })

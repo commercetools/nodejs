@@ -50,7 +50,7 @@ function createProductMapActions (mapActionGroup) {
 
     allActions.push(mapActionGroup('attributes', () =>
       productActions.actionsMapAttributes(diff, oldObj, newObj,
-        sameForAllAttributeNames || [])))
+        sameForAllAttributeNames || [], variantHashMap)))
 
     allActions.push(mapActionGroup('images', () =>
       productActions.actionsMapImages(diff, oldObj, newObj, variantHashMap)))

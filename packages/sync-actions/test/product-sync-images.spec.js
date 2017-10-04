@@ -189,6 +189,7 @@ describe('Actions', () => {
           {
             id: 2,
             sku: 'secondary-variant',
+            key: 'test',
             prices: [],
             images: [],
             assets: [],
@@ -326,6 +327,7 @@ describe('Actions', () => {
           {
             id: 2,
             sku: 'secondary-variant',
+            key: 'test',
             prices: [],
             images: [],
             assets: [],
