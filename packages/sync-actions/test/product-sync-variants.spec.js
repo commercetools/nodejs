@@ -112,6 +112,7 @@ describe('Actions', () => {
         ],
       },
       variants: [
+        { id: 3, attributes: [] },
         {
           id: 2,
           attributes: [
@@ -152,6 +153,7 @@ describe('Actions', () => {
             { name: 'weigth', value: '4' },
           ],
         },
+        { id: 3, attributes: [] },
       ],
     }
 
@@ -273,8 +275,8 @@ describe('Actions', () => {
         id: 1, sku: 'v1', key: 'v2', attributes: [{ name: 'foo', value: 'new value' }],
       },
       variants: [
-        { id: 2, sku: 'v2', key: 'v2', attributes: [{ name: 'foo', value: 'another value' }] },
         { id: 3, sku: 'v4', key: 'v4', attributes: [{ name: 'foo', value: 'i dont care' }] },
+        { id: 2, sku: 'v2', key: 'v2', attributes: [{ name: 'foo', value: 'another value' }] },
         { sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'yet another' }] },
       ],
     }
@@ -284,10 +286,10 @@ describe('Actions', () => {
       { action: 'addVariant', sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'yet another' }] },
       { action: 'setProductVariantKey', key: 'v2', variantId: 1 },
       { action: 'setAttribute', variantId: 1, name: 'foo', value: 'new value' },
-      { action: 'setAttribute', variantId: 2, name: 'foo', value: 'another value' },
       { action: 'setSku', sku: 'v4', variantId: 3 },
       { action: 'setProductVariantKey', key: 'v4', variantId: 3 },
       { action: 'setAttribute', variantId: 3, name: 'foo', value: 'i dont care' },
+      { action: 'setAttribute', variantId: 2, name: 'foo', value: 'another value' },
     ])
   })
 

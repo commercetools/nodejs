@@ -56,7 +56,7 @@ function createProductMapActions (mapActionGroup) {
       productActions.actionsMapImages(diff, oldObj, newObj, variantHashMap)))
 
     allActions.push(mapActionGroup('prices', () =>
-      productActions.actionsMapPrices(diff, oldObj, newObj)))
+      productActions.actionsMapPrices(diff, oldObj, newObj, variantHashMap)))
 
     allActions.push(mapActionGroup('categories', () =>
       productActions.actionsMapCategories(diff)))

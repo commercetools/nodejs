@@ -21,14 +21,14 @@ describe('Actions', () => {
       },
       variants: [
         {
+          id: 3,
+          prices: [],
+        },
+        {
           id: 2,
           prices: [
             { id: '222', value: { currencyCode: 'EUR', centAmount: 1000 }, customerGroup: { typeId: 'customer-group', id: 'cg1' }, discounted },
           ],
-        },
-        {
-          id: 3,
-          prices: [],
         },
         {
           id: 4,

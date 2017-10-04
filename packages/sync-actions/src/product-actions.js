@@ -197,7 +197,7 @@ export function actionsMapImages (diff, oldObj, newObj, variantHashMap) {
   return actions
 }
 
-export function actionsMapPrices (diff, oldObj, newObj) {
+export function actionsMapPrices (diff, oldObj, newObj, variantHashMap) {
   let addPriceActions = []
   let changePriceActions = []
   let removePriceActions = []
@@ -206,15 +206,21 @@ export function actionsMapPrices (diff, oldObj, newObj) {
 
   if (variants)
     forEach(variants, (variant, key) => {
-      const [ a, c, r ] = _buildVariantPricesAction(
-        variant.prices,
-        oldObj.variants[key],
-        newObj.variants[key],
-      )
+      if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
+        const oldVariantPos = variantHashMap[key][0]
+        const newVariantPos = variantHashMap[key][1]
+        const oldVariant = oldObj.variants[oldVariantPos]
+        const newVariant = newObj.variants[newVariantPos]
+        const [ a, c, r ] = _buildVariantPricesAction(
+          variant.prices,
+          oldVariant,
+          newVariant,
+        )
 
-      addPriceActions = addPriceActions.concat(a)
-      changePriceActions = changePriceActions.concat(c)
-      removePriceActions = removePriceActions.concat(r)
+        addPriceActions = addPriceActions.concat(a)
+        changePriceActions = changePriceActions.concat(c)
+        removePriceActions = removePriceActions.concat(r)
+      }
     })
 
   return changePriceActions
