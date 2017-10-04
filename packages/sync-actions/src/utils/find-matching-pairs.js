@@ -3,12 +3,12 @@ import forEach from 'lodash.foreach'
 const REGEX_NUMBER = new RegExp(/^\d+$/)
 const REGEX_UNDERSCORE_NUMBER = new RegExp(/^_\d+$/)
 
-function preProcessCollection (variants, identifier) {
+function preProcessCollection (collection, identifier) {
   const refByIndex = {}
   const refByIdentifier = {}
-  forEach(variants, (variant, index) => {
-    refByIndex[String(index)] = variant[identifier]
-    refByIdentifier[variant[identifier]] = String(index)
+  forEach(collection, (item, index) => {
+    refByIndex[String(index)] = item[identifier]
+    refByIdentifier[item[identifier]] = String(index)
   })
   return { refByIndex, refByIdentifier }
 }
