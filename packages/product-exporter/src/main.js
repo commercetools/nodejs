@@ -71,7 +71,7 @@ export default class ProductExporter {
     formattedStream.pipe(outputStream)
     return this._getProducts(formattedStream)
     .catch((e: Error) => {
-      this.logger.debug(e, 'Oops. Something went wrong')
+      this.logger.error(e, 'Oops. Something went wrong')
       outputStream.emit('error', e)
     })
   }
@@ -128,7 +128,7 @@ export default class ProductExporter {
     if (exportConfig.predicate)
       service.where(exportConfig.predicate)
     // Handle `expand` separately because it's an array
-    if (exportConfig.expand)
+    if (exportConfig.expand && exportConfig.expand.length)
       exportConfig.expand.forEach((reference: string) => {
         service.expand(reference)
       })
@@ -138,7 +138,11 @@ export default class ProductExporter {
 
   /* if the exportFormat is json, prepare the stream for json data. If
   csv, also create a json stream because it needs to pass text to
-  the stdout, but the json format preparation is irrelevant this time
+  the stdout.
+  Also append newline markers in between products and at the end of the
+  stream. The markers are needed to enable the parser accurately recognize
+  when a product ends in the situation that a product gets split across
+  multiple data events.
   */
   static _decideStream (exportType: 'json' | 'chunk') {
     return exportType === 'json'

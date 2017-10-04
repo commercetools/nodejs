@@ -149,7 +149,7 @@ describe('ProductExporter', () => {
       ProductExporter._decideStream('json')
       expect(spy).lastCalledWith('[\n', ',\n', '\n]')
       ProductExporter._decideStream('chunk')
-      expect(spy).lastCalledWith(false)
+      expect(spy).lastCalledWith('', '\n\n\n', '\n\n')
       spy.mockRestore()
     })
   })

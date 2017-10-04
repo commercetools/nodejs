@@ -31,9 +31,9 @@ Options:
   --version, -v     Show version number                                [boolean]
   --projectKey, -p  API project key                          [string] [required]
   --apiUrl          The host URL of the HTTP API service
-                                     [string] [default: "https://api.sphere.io"]
+                              [string] [default: "https://api.sphere.io"]
   --authUrl         The host URL of the OAuth API service
-                                    [string] [default: "https://auth.sphere.io"]
+                             [string] [default: "https://auth.sphere.io"]
   --accessToken     CTP client access token
                     Required scopes: ['view_products', 'view_customers'][string]
   --output, -o      Path to output                  [string] [default: "stdout"]
@@ -75,7 +75,7 @@ import ProductExporter from '@commercetools/product-exporter'
 import fs from 'fs'
 
 const apiConfig = {
-  host: 'https://api.sphere.io',
+  host: 'https://auth.sphere.io',
   apiUrl: 'https://api.sphere.io',
   projectKey: 'node-test-project',
   credentials: {
