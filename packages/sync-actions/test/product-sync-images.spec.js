@@ -266,6 +266,7 @@ describe('Actions', () => {
           },
           {
             assets: [],
+            prices: [],
             images: [
               {
                 url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/Screen+Shot+2017-04--LOx1OrZZ.png',
@@ -299,6 +300,7 @@ describe('Actions', () => {
               availableQuantity: 5678,
             },
             assets: [],
+            prices: [],
             images: [],
             key: 'test',
             sku: 'secondary-variant',
@@ -311,6 +313,7 @@ describe('Actions', () => {
         masterVariant: {
           id: 1,
           sku: '89978FRU',
+          prices: [],
           images: [
             {
               url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/cactus-with-surfboar-BmOeVZEZ.jpg',
