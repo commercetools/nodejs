@@ -31,7 +31,6 @@ function createProductMapActions (mapActionGroup) {
       diff.variants,
       oldObj.variants,
       newObj.variants,
-      'id',
     )
 
     allActions.push(mapActionGroup('base', () =>

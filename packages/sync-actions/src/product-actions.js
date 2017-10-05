@@ -557,7 +557,6 @@ function _buildVariantPricesAction (
     diffedPrices,
     oldVariant.prices,
     newVariant.prices,
-    'id',
   )
   forEach(diffedPrices, (price, key) => {
     const { oldObj, newObj } = _extractHashMap(
