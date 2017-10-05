@@ -78,6 +78,7 @@ describe('Common actions', () => {
       { action: 'setCustomerGroup', key: 'customerGroup' },
       { action: 'setSupplyChannel', key: 'supplyChannel' },
       { action: 'setProductType', key: 'productType' },
+      { action: 'transitionState', key: 'state' },
     ]
 
     it('should build reference actions', () => {
@@ -87,6 +88,9 @@ describe('Common actions', () => {
         supplyChannel: { id: 'sc-1', typeId: 'channel' },
         productType: {
           id: 'pt-1', typeId: 'product-type', obj: { id: 'pt-1' },
+        },
+        state: {
+          id: 's-1', typeId: 'state', obj: { id: 's-1' },
         },
       }
       const now = {
@@ -99,6 +103,10 @@ describe('Common actions', () => {
         // ignore update
         productType: {
           id: 'pt-1', typeId: 'product-type',
+        },
+        // transition state
+        state: {
+          id: 's-2', typeId: 'state',
         },
       }
 
@@ -113,6 +121,7 @@ describe('Common actions', () => {
         { action: 'setTaxCategory', taxCategory: now.taxCategory },
         { action: 'setCustomerGroup', customerGroup: now.customerGroup },
         { action: 'setSupplyChannel' },
+        { action: 'transitionState', state: now.state },
       ])
     })
   })

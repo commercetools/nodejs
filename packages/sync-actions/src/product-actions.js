@@ -31,6 +31,7 @@ export const metaActionsList = [
 
 export const referenceActionsList = [
   { action: 'setTaxCategory', key: 'taxCategory' },
+  { action: 'transitionState', key: 'state' },
 ]
 
 
