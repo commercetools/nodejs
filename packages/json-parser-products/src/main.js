@@ -21,7 +21,10 @@ import {
 import {
   createUserAgentMiddleware,
 } from '@commercetools/sdk-middleware-user-agent'
+import csv from 'fast-csv'
+import highland from 'highland'
 import Promise from 'bluebird'
+import { flatten } from 'flat'
 import { memoize } from 'lodash'
 import pkg from '../package.json'
 
@@ -58,6 +61,7 @@ export default class JSONParserProduct {
       categoryOrderHintBy: 'id',
       delimiter: ',',
       fillAllRows: false,
+      headers: true,
       multiValueDelimiter: ';',
     }
 
@@ -73,58 +77,28 @@ export default class JSONParserProduct {
     this.accessToken = accessToken
   }
 
-  // I am using any because flow does not seem to know the difference between
+  // `any` is used because flow does not seem to know the difference between
   // a buffer and a stream! When it does, life would be easier
-  parse (input: any) {
+  parse (input: any, output) {
     this.logger.info('Starting conversion')
-
-    let products = ''
-    let incompleteProduct = ''
     input.setEncoding('utf8') // TODO: Move to CLI
 
-    input.on('readable', () => {
-      let productsArray = []
-      products = input.read()
-      // The input.read() will return null when all data has been read
-      if (products) {
-        // products = decoder.write(productsBuffer)
-        // Split by the product marker set in the exporter
-        const productsJsonArray = products.split('\n\n\n')
-        // Concatenate the incomplete product of the last buffer to the first
-        // product of the present buffer. This is an empty string initially
-        if (incompleteProduct) {
-          productsJsonArray[0] = `${incompleteProduct}${productsJsonArray[0]}`
-          incompleteProduct = ''
-        }
-
-        // Check if the last product in this batch is complete. If it isn't,
-        // remove it from the products array and save to the `incompleteProduct`
-        // We check for the intermediate marker and the end marker
-        if (!(products.endsWith('\n\n\n') || products.endsWith('\n\n')))
-          incompleteProduct = productsJsonArray.pop()
-
-        // Run this only if the array contains products
-        if (productsJsonArray.length) {
-          try {
-            productsArray = productsJsonArray.map(
-              (product: string): ProductProjection => JSON.parse(product))
-          } catch (error) {
-            input.emit('error', error)
-          }
-          this._resolveReferences(productsArray)
-            .then(resolvedProducts => this._formatProducts(resolvedProducts))
-        // .then(formattedProduct => this._writePtoducts(formattedProduct))
-        }
-      }
+    const csvStream = csv.createWriteStream({
+      headers: this.parserConfig.headers,
     })
 
-    input.on('error', () => {
-      // TODO: implement error handler
-    })
-
-    input.on('end', () => {
-      // TODO: implement success handler
-    })
+    highland(input)
+      .splitBy('\n')
+      .map(JSON.parse)
+      .batch(5) // TODO: Change to variable
+      .flatMap(products => highland(this._resolveReferences(products)))
+      .map(products => this._formatProducts(products))
+      .errors(highland.log)
+      .flatten()
+      .map(JSONParserProduct._removePrices)
+      .map(flatten)
+      .pipe(csvStream)
+      .pipe(output)
   }
 
   _resolveReferences (
@@ -282,12 +256,6 @@ export default class JSONParserProduct {
       JSONParserProduct._variantToProduct(product, fillAllRows)
     ))
 
-    // const csvStream = csv.createWriteStream({ headers: true })
-    // csvStream.pipe(output)
-    // pppp.forEach((produ) => {
-    //   produ.forEach(pro => csvStream.write(flatten(pro)))
-    // })
-
     // TODO: HANDLE ATTRIBUTES
   }
 
@@ -331,6 +299,13 @@ export default class JSONParserProduct {
     ))
     productWithVariants[0] = { ...product, ...productWithVariants[0] }
     return productWithVariants
+  }
+
+  // This method removes price data from product variants
+  static _removePrices (product) {
+    const newProduct = Object.assign({}, product)
+    delete newProduct.variant.prices
+    return newProduct
   }
 }
 

@@ -36,6 +36,7 @@ describe('JSONParserProduct', () => {
         delimiter: ',',
         multiValueDelimiter: ';',
         fillAllRows: false,
+        headers: true,
         categoryOrderHintBy: 'id',
       }
 
@@ -46,7 +47,7 @@ describe('JSONParserProduct', () => {
     })
   })
 
-  describe('::parse', () => {
+  xdescribe('::parse', () => {
     beforeEach(() => {
       jsonParserProduct._resolveReferences = jest.fn(() => Promise.resolve())
     })

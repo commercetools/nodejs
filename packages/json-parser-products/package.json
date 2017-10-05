@@ -38,6 +38,9 @@
     "@commercetools/sdk-middleware-http": "^2.2.0",
     "@commercetools/sdk-middleware-user-agent": "^1.2.0",
     "bluebird": "^3.5.0",
+    "fast-csv": "^2.4.1",
+    "flat": "^4.0.0",
+    "highland": "^2.11.1",
     "lodash": "^4.17.4",
     "yargs": "^9.0.1"
   },
