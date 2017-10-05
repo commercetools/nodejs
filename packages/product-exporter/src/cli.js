@@ -33,13 +33,13 @@ ${description}`,
   })
 
   .option('apiUrl', {
-    default: 'https://api.sphere.io',
+    default: 'https://api.commercetool.com',
     describe: 'The host URL of the HTTP API service',
     type: 'string',
   })
 
   .option('authUrl', {
-    default: 'https://auth.sphere.io',
+    default: 'https://auth.commercetool.com',
     describe: 'The host URL of the OAuth API service',
     type: 'string',
   })

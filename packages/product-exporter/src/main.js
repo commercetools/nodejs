@@ -139,15 +139,11 @@ export default class ProductExporter {
   /* if the exportFormat is json, prepare the stream for json data. If
   csv, also create a json stream because it needs to pass text to
   the stdout.
-  Also append newline markers in between products and at the end of the
-  stream. The markers are needed to enable the parser accurately recognize
-  when a product ends in the situation that a product gets split across
-  multiple data events.
   */
   static _decideStream (exportType: 'json' | 'chunk') {
     return exportType === 'json'
       ? JSONStream.stringify('[\n', ',\n', '\n]')
-      : JSONStream.stringify('', '\n\n\n', '\n\n')
+      : JSONStream.stringify(false)
   }
 
   /* the `any` hack is necessary to  make flow work because there is no
