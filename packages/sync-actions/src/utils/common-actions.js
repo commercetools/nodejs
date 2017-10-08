@@ -84,7 +84,13 @@ export function buildReferenceActions ({
 
         return {
           action,
-          [key]: newValue,
+          // We only need to pass a reference to the object.
+          // This prevents accidentally sending the expanded (`obj`)
+          // over the wire.
+          [key]: {
+            typeId: newValue.typeId,
+            id: newValue.id,
+          },
         }
       }
 
