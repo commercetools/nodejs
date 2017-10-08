@@ -147,7 +147,7 @@ export function actionsMapAttributes (
       const {
         oldObj: oldVariant,
         newObj: newVariant,
-      } = _extractHashMap(variantHashMap, key, oldObj.variants, newObj.variants)
+      } = _extractMatchingNewAndOld(variantHashMap, key, oldObj.variants, newObj.variants)
       if (REGEX_NUMBER.test(key) && !Array.isArray(variant)) {
         const skuAction =
           _buildSkuActions(variant, oldVariant)
@@ -188,7 +188,7 @@ export function actionsMapImages (diff, oldObj, newObj, variantHashMap) {
       const {
         oldObj: oldVariant,
         newObj: newVariant,
-      } = _extractHashMap(variantHashMap, key, oldObj.variants, newObj.variants)
+      } = _extractMatchingNewAndOld(variantHashMap, key, oldObj.variants, newObj.variants)
       if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
         const vActions = _buildVariantImagesAction(
           variant.images,
@@ -214,7 +214,7 @@ export function actionsMapPrices (diff, oldObj, newObj, variantHashMap) {
       const {
         oldObj: oldVariant,
         newObj: newVariant,
-      } = _extractHashMap(variantHashMap, key, oldObj.variants, newObj.variants)
+      } = _extractMatchingNewAndOld(variantHashMap, key, oldObj.variants, newObj.variants)
       if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
         const [ a, c, r ] = _buildVariantPricesAction(
           variant.prices,
@@ -458,15 +458,15 @@ function _buildVariantImagesAction (
 ) {
   const actions = []
   // generate a hashMap to be able to reference the right image from both ends
-  const imagesHashMap = findMatchingPairs(
+  const matchingImagePairs = findMatchingPairs(
     diffedImages,
     oldVariant.images,
     newVariant.images,
     'url',
   )
   forEach(diffedImages, (image, key) => {
-    const { oldObj, newObj } = _extractHashMap(
-      imagesHashMap,
+    const { oldObj, newObj } = _extractMatchingNewAndOld(
+      matchingImagePairs,
       key,
       oldVariant.images,
       newVariant.images,
@@ -526,7 +526,7 @@ function _buildVariantImagesAction (
 }
 
 // safely extract oldObj and newObj
-function _extractHashMap (hashMap, key, before, now) {
+function _extractMatchingNewAndOld (hashMap, key, before, now) {
   let oldObjPos
   let newObjPos
   let oldObj
@@ -554,14 +554,14 @@ function _buildVariantPricesAction (
   const removePriceActions = []
 
   // generate a hashMap to be able to reference the right image from both ends
-  const pricesHashMap = findMatchingPairs(
+  const matchingPricePairs = findMatchingPairs(
     diffedPrices,
     oldVariant.prices,
     newVariant.prices,
   )
   forEach(diffedPrices, (price, key) => {
-    const { oldObj, newObj } = _extractHashMap(
-      pricesHashMap,
+    const { oldObj, newObj } = _extractMatchingNewAndOld(
+      matchingPricePairs,
       key,
       oldVariant.prices,
       newVariant.prices,
