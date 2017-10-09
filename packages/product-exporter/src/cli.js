@@ -33,13 +33,13 @@ ${description}`,
   })
 
   .option('apiUrl', {
-    default: 'https://api.commercetool.com',
+    default: 'https://api.commercetools.com',
     describe: 'The host URL of the HTTP API service',
     type: 'string',
   })
 
   .option('authUrl', {
-    default: 'https://auth.commercetool.com',
+    default: 'https://auth.commercetools.com',
     describe: 'The host URL of the OAuth API service',
     type: 'string',
   })
@@ -78,6 +78,8 @@ Required scopes: ['view_products', 'view_customers']`,
     return batchSize
   })
 
+  // http://dev.commercetools.com/http-api.html#reference-expansion for further
+  // explanation about reference field expansion
   .option('expand', {
     describe: 'Reference field or fields to expand in the returned products',
     type: 'array',

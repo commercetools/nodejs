@@ -86,8 +86,11 @@ describe('ProductExporter', () => {
       expect(processMock.mock.calls[0][0])
         .toEqual({
           uri: oneLineTrim`
-            /project-key/product-projections?staged=true
-            &expand=something&where=foo%3Dbar&limit=5`,
+            /project-key/product-projections
+            ?staged=true
+            &expand=something
+            &where=foo%3Dbar
+            &limit=5`,
           method: 'GET',
           headers: {
             Authorization: 'Bearer myAccessToken',
@@ -121,8 +124,12 @@ describe('ProductExporter', () => {
 
     it('should build uri with query options', () => {
       const expectedUri = oneLineTrim`
-        /my-project-key/product-projections?staged=true&expand=someReference
-        &expand=anotherReference&where=foo%3Dbar&limit=5
+        /my-project-key/product-projections
+        ?staged=true
+        &expand=someReference
+        &expand=anotherReference
+        &where=foo%3Dbar
+        &limit=5
       `
       const actualUri = ProductExporter._buildProductProjectionsUri(
         projectKey,
@@ -141,14 +148,14 @@ describe('ProductExporter', () => {
     })
   })
 
-  describe('::_decideStream', () => {
+  describe('::_getStream', () => {
     it('should prepare the json stream with the right arguments', () => {
       // Mock the JSONStream
       const spy = jest.spyOn(JSONStream, 'stringify')
 
-      ProductExporter._decideStream('json')
+      ProductExporter._getStream('json')
       expect(spy).lastCalledWith('[\n', ',\n', '\n]')
-      ProductExporter._decideStream('chunk')
+      ProductExporter._getStream('chunk')
       expect(spy).lastCalledWith(false)
       spy.mockRestore()
     })

@@ -64,7 +64,7 @@ export default class ProductExporter {
 
   run (outputStream: stream$Writable): Promise<*> {
     this.logger.debug('Starting Export')
-    const formattedStream = ProductExporter._decideStream(
+    const formattedStream = ProductExporter._getStream(
       this.exportConfig.exportType,
     )
     this.logger.debug('Preparing outputStream')
@@ -140,7 +140,7 @@ export default class ProductExporter {
   csv, also create a json stream because it needs to pass text to
   the stdout.
   */
-  static _decideStream (exportType: 'json' | 'chunk') {
+  static _getStream (exportType: 'json' | 'chunk') {
     return exportType === 'json'
       ? JSONStream.stringify('[\n', ',\n', '\n]')
       : JSONStream.stringify(false)
