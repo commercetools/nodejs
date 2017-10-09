@@ -21,18 +21,19 @@ describe('Actions', () => {
       },
       variants: [
         {
+          id: 3,
+          prices: [],
+        },
+        {
           id: 2,
           prices: [
             { id: '222', value: { currencyCode: 'EUR', centAmount: 1000 }, customerGroup: { typeId: 'customer-group', id: 'cg1' }, discounted },
           ],
         },
         {
-          id: 3,
-          prices: [],
-        },
-        {
           id: 4,
           prices: [
+            { id: '223', value: { currencyCode: 'USD', centAmount: 1200 }, customerGroup: { typeId: 'customer-group', id: 'cg1' }, discounted },
             { id: '444', value: { currencyCode: 'EUR', centAmount: 1000 }, country: 'DE', customerGroup: { typeId: 'customer-group', id: 'cg1' }, channel: { typeId: 'channel', id: 'ch1' }, discounted },
           ],
         },
@@ -72,6 +73,7 @@ describe('Actions', () => {
           prices: [
             // No change
             { id: '444', value: { currencyCode: 'EUR', centAmount: 1000 }, country: 'DE', customerGroup: { typeId: 'customer-group', id: 'cg1' }, channel: { typeId: 'channel', id: 'ch1' } },
+            { id: '223', value: { currencyCode: 'USD', centAmount: 1200 }, customerGroup: { typeId: 'customer-group', id: 'cg1' }, discounted },
           ],
         },
       ],
@@ -96,7 +98,7 @@ describe('Actions', () => {
     }
     const now = {
       id: '456-def',
-      masterVariant: { id: 1 },
+      masterVariant: { id: 1, prices: [] },
       variants: [],
     }
 
