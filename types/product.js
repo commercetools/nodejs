@@ -21,6 +21,7 @@ export type LoggerOptions = {
 }
 
 export type ParserConfigOptions = {
+  batchSize: number;
   categoryOrderHintBy: string;
   delimiter: string;
   fillAllRows: boolean;

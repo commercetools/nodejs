@@ -58,6 +58,7 @@ export default class JSONParserProduct {
     })
 
     const defaultConfig = {
+      batchSize: 5,
       categoryOrderHintBy: 'id',
       delimiter: ',',
       fillAllRows: false,
@@ -81,6 +82,7 @@ export default class JSONParserProduct {
   // a buffer and a stream! When it does, life would be easier
   parse (input: any, output) {
     this.logger.info('Starting conversion')
+    let productCount = 0
     input.setEncoding('utf8') // TODO: Move to CLI
 
     const csvStream = csv.createWriteStream({
@@ -88,15 +90,30 @@ export default class JSONParserProduct {
     })
 
     highland(input)
+      // parse chunk and split into JSON object strings
       .splitBy('\n')
+      // convert the JSON object strings to JS objects
       .map(JSON.parse)
-      .batch(5) // TODO: Change to variable
+      // handle a fixed amount of products concurrently
+      .batch(this.parserConfig.batchSize)
       .flatMap(products => highland(this._resolveReferences(products)))
+      .doto((data) => {
+        productCount += data.length
+        this.logger.debug(`Resolved references of ${productCount} products`)
+      })
+      // prepare the product objects for csv format
       .map(products => this._formatProducts(products))
-      .errors(highland.log)
       .flatten()
+      // remove price information from each product
       .map(JSONParserProduct._removePrices)
       .map(flatten)
+      .stopOnError((err) => {
+        this.logger.error(err)
+        output.emit('error', err)
+      })
+      .doto(() => {
+        this.logger.info(`Done with conversion of ${productCount} products`)
+      })
       .pipe(csvStream)
       .pipe(output)
   }
@@ -303,6 +320,7 @@ export default class JSONParserProduct {
 
   // This method removes price data from product variants
   static _removePrices (product) {
+    if (!product.variant || !product.variant.prices) return product
     const newProduct = Object.assign({}, product)
     delete newProduct.variant.prices
     return newProduct

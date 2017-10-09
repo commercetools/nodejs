@@ -33,6 +33,7 @@ describe('JSONParserProduct', () => {
         projectKey: 'foo',
       }
       const defaultConfig = {
+        batchSize: 5,
         delimiter: ',',
         multiValueDelimiter: ';',
         fillAllRows: false,
@@ -47,88 +48,47 @@ describe('JSONParserProduct', () => {
     })
   })
 
-  xdescribe('::parse', () => {
+  describe('::parse', () => {
     beforeEach(() => {
-      jsonParserProduct._resolveReferences = jest.fn(() => Promise.resolve())
+      jsonParserProduct._resolveReferences = jest.fn(
+        data => Promise.resolve(data),
+      )
+      jsonParserProduct._formatProducts = jest.fn(data => data)
+      jsonParserProduct.logger.error = jest.fn()
     })
 
-    afterEach(() => {
-      jsonParserProduct._resolveReferences.mockRestore()
+    it('should accept 2 streams and write to output stream', (done) => {
+      const product1 = '{"id": "product-1-id", "slug": {"en": "my-slug-1"}}'
+      const product2 = '{"id": "product-2-id", "slug": {"en": "my-slug-2"}}'
+      const myChunk = `${product1}\n${product2}`
+      const inputStream = streamTest.fromChunks([myChunk])
+
+      const outputStream = streamTest.toChunks((error, result) => {
+        const actualCsv = result.map(row => row.toString())
+        expect(actualCsv[0]).toMatch(/id,slug.en/)
+        expect(actualCsv[1]).toMatch(/product-1-id,my-slug-1/)
+        expect(actualCsv[2]).toMatch(/product-2-id,my-slug-2/)
+        done()
+      })
+      jsonParserProduct.parse(inputStream, outputStream)
     })
 
-    describe('::onReadable', () => {
-      const midMarker = '\n\n\n'
-      const endMarker = '\n\n'
-
-      it('do nothing if an empty chunk is passed as product', (done) => {
-        const inputStream = streamTest.fromChunks([])
-        inputStream.on('end', () => {
-          expect(jsonParserProduct._resolveReferences).not.toBeCalled()
-          done()
-        })
-        jsonParserProduct.parse(inputStream)
+    it('should log error and exit on errors', (done) => {
+      const product1 = '{"id": "product-1-id", "slug": {"en": "my-slug-1"}}'
+      // invalid json to generate error
+      const product2 = '{"id": "product-2-id", "slug": {en: "my-slug-2}}'
+      const myChunk = `${product1}\n${product2}`
+      const inputStream = streamTest.fromChunks([myChunk])
+      const expectedError = /Unexpected token e in JSON/
+      const outputStream = streamTest.toText((error, result) => {
+        expect(jsonParserProduct.logger.error).toBeCalledWith(
+          expect.objectContaining(error),
+        )
+        expect(error.message).toMatch(expectedError)
+        expect(result).toBeFalsy()
+        done()
       })
-
-      it('process chunk that end with product delimiters', (done) => {
-        const product1 = '{"product": "my-great-hoodie"}'
-        const product2 = '{"anotherProduct": "comfortable-shoes"}'
-        const myChunk = `${product1}${midMarker}${product2}${endMarker}`
-        const expected = [JSON.parse(product1), JSON.parse(product2)]
-        const inputStream = streamTest.fromChunks([myChunk])
-
-        inputStream.on('end', () => {
-          expect(jsonParserProduct._resolveReferences).toHaveBeenCalledTimes(1)
-          expect(jsonParserProduct._resolveReferences).toBeCalledWith(expected)
-          done()
-        })
-        jsonParserProduct.parse(inputStream)
-      })
-
-      it('process only products followed by end or middle marker', (done) => {
-        const product1 = '{"product": "my-great-hoodie"}'
-        const product2 = '{"anotherProduct": "comfortable-shoes"}'
-        const myChunk = `${product1}${midMarker}${product2}`
-        const expected = [JSON.parse(product1)]
-        const inputStream = streamTest.fromChunks([myChunk])
-
-        inputStream.on('end', () => {
-          expect(jsonParserProduct._resolveReferences).toHaveBeenCalledTimes(1)
-          expect(jsonParserProduct._resolveReferences).toBeCalledWith(expected)
-          done()
-        })
-        jsonParserProduct.parse(inputStream)
-      })
-
-      it('do not process if chunk only contains incomplete product', (done) => {
-        const incompleteProduct = '{"product": "my-gre'
-        const inputStream = streamTest.fromChunks([incompleteProduct])
-
-        inputStream.on('end', () => {
-          expect(jsonParserProduct._resolveReferences).not.toBeCalled()
-          done()
-        })
-        jsonParserProduct.parse(inputStream)
-      })
-
-      it('join incomplete product from one chunk to the next', (done) => {
-        const product1 = '{"product": "my-great-hoodie"}'
-        const halfProduct = '{"first": "brok'
-        const anotherHalf = 'en-product"}'
-        const product3 = '{"anotherProduct": "comfortable-shoes"}'
-        const myChunk1 = `${product1}${midMarker}${halfProduct}`
-        const myChunk2 = `${anotherHalf}${midMarker}${product3}${endMarker}`
-        const expected1 = [JSON.parse(product1)]
-        const expected2 = [ { first: 'broken-product' }, JSON.parse(product3)]
-        const inputStream = streamTest.fromChunks([myChunk1, myChunk2])
-
-        inputStream.on('end', () => {
-          expect(jsonParserProduct._resolveReferences).toHaveBeenCalledTimes(2)
-          expect(jsonParserProduct._resolveReferences).toBeCalledWith(expected1)
-          expect(jsonParserProduct._resolveReferences).toBeCalledWith(expected2)
-          done()
-        })
-        jsonParserProduct.parse(inputStream)
-      })
+      jsonParserProduct.parse(inputStream, outputStream)
     })
   })
 
@@ -459,6 +419,51 @@ describe('JSONParserProduct', () => {
   })
 
   describe('Product structure', () => {
+    describe('::_formatProducts', () => {
+      const p1 = { id: 'product-1-id', slug: { en: 'my-slug-1' } }
+      const p2 = { id: 'product-2-id', slug: { en: 'my-slug-2' } }
+      const products = [p1, p2]
+      beforeAll(() => {
+        jest.spyOn(JSONParserProduct, '_mergeVariants')
+          .mockImplementation(data => ({ ...data, mergedVariants: true }))
+        jest.spyOn(JSONParserProduct, '_stringFromImages')
+          .mockImplementation(data => ({ ...data, imageAsString: true }))
+        jest.spyOn(JSONParserProduct, '_variantToProduct')
+          .mockImplementation(data => ({ ...data, variantAtTopLevel: true }))
+      })
+
+      afterAll(() => {
+        JSONParserProduct._mergeVariants.mockRestore()
+        JSONParserProduct._stringFromImages.mockRestore()
+        JSONParserProduct._variantToProduct.mockRestore()
+      })
+
+      it('should pass the products to all formatting functions', () => {
+        jsonParserProduct._formatProducts(products)
+        expect(JSONParserProduct._mergeVariants).toHaveBeenCalledTimes(2)
+        expect(JSONParserProduct._stringFromImages).toHaveBeenCalledTimes(2)
+        expect(JSONParserProduct._variantToProduct).toHaveBeenCalledTimes(2)
+      })
+
+      it('should return processed products from all methods', () => {
+        const expected = [{
+          id: 'product-1-id',
+          slug: { en: 'my-slug-1' },
+          mergedVariants: true,
+          imageAsString: true,
+          variantAtTopLevel: true,
+        }, {
+          id: 'product-2-id',
+          slug: { en: 'my-slug-2' },
+          mergedVariants: true,
+          imageAsString: true,
+          variantAtTopLevel: true,
+        }]
+        const actual = jsonParserProduct._formatProducts(products)
+
+        expect(actual).toEqual(expected)
+      })
+    })
     describe('::_mergeVariants', () => {
       it('should merge all variants in a product into one property', () => {
         const sampleProduct = {
@@ -568,6 +573,28 @@ describe('JSONParserProduct', () => {
           variant: { id: 'variant-3' },
         }]
         const actual = JSONParserProduct._variantToProduct(sampleProduct, false)
+        expect(actual).toEqual(expected)
+      })
+    })
+
+    describe('::_removePrices', () => {
+      it('should return original object if no prices in variant object', () => {
+        const product = { id: 'product-1-id', slug: { en: 'my-slug-1' } }
+        const actual = JSONParserProduct._removePrices(product)
+        expect(actual).toBe(product)
+      })
+
+      it('should return object without variant prices', () => {
+        const product = {
+          id: 'product-1-id',
+          variant: { prices: ['price-1', 'price-2'] },
+        }
+        const expected = {
+          id: 'product-1-id',
+          variant: {},
+        }
+        const actual = JSONParserProduct._removePrices(product)
+        expect(actual).not.toBe(product)
         expect(actual).toEqual(expected)
       })
     })
