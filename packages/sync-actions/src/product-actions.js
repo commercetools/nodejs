@@ -10,6 +10,7 @@ import createBuildArrayActions, {
   ADD_ACTIONS,
   REMOVE_ACTIONS,
 } from './utils/create-build-array-actions'
+import findMatchingPairs from './utils/find-matching-pairs'
 
 const REGEX_NUMBER = new RegExp(/^\d+$/)
 const REGEX_UNDERSCORE_NUMBER = new RegExp(/^_\d+$/)
@@ -136,17 +137,22 @@ export function actionsMapAttributes (
   oldObj,
   newObj,
   sameForAllAttributeNames = [],
+  variantHashMap,
 ) {
   let actions = []
   const { variants } = diff
 
   if (variants)
     forEach(variants, (variant, key) => {
+      const {
+        oldObj: oldVariant,
+        newObj: newVariant,
+      } = _extractMatchingNewAndOld(variantHashMap, key, oldObj.variants, newObj.variants)
       if (REGEX_NUMBER.test(key) && !Array.isArray(variant)) {
         const skuAction =
-          _buildSkuActions(variant, oldObj.variants[key])
+          _buildSkuActions(variant, oldVariant)
         const keyAction =
-          _buildKeyActions(variant, oldObj.variants[key])
+          _buildKeyActions(variant, oldVariant)
         if (skuAction) actions.push(skuAction)
         if (keyAction) actions.push(keyAction)
 
@@ -154,8 +160,8 @@ export function actionsMapAttributes (
 
         const attrActions = _buildVariantAttributesActions(
           attributes,
-          oldObj.variants[key],
-          newObj.variants[key],
+          oldVariant,
+          newVariant,
           sameForAllAttributeNames,
         )
         actions = actions.concat(attrActions)
@@ -174,24 +180,29 @@ export function actionsMapAttributes (
   )
 }
 
-export function actionsMapImages (diff, oldObj, newObj) {
+export function actionsMapImages (diff, oldObj, newObj, variantHashMap) {
   let actions = []
   const { variants } = diff
-
   if (variants)
     forEach(variants, (variant, key) => {
-      const vActions = _buildVariantImagesAction(
-        variant.images,
-        oldObj.variants[key],
-        newObj.variants[key],
-      )
-      actions = actions.concat(vActions)
+      const {
+        oldObj: oldVariant,
+        newObj: newVariant,
+      } = _extractMatchingNewAndOld(variantHashMap, key, oldObj.variants, newObj.variants)
+      if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
+        const vActions = _buildVariantImagesAction(
+          variant.images,
+          oldVariant,
+          newVariant,
+        )
+        actions = actions.concat(vActions)
+      }
     })
 
   return actions
 }
 
-export function actionsMapPrices (diff, oldObj, newObj) {
+export function actionsMapPrices (diff, oldObj, newObj, variantHashMap) {
   let addPriceActions = []
   let changePriceActions = []
   let removePriceActions = []
@@ -200,15 +211,21 @@ export function actionsMapPrices (diff, oldObj, newObj) {
 
   if (variants)
     forEach(variants, (variant, key) => {
-      const [ a, c, r ] = _buildVariantPricesAction(
-        variant.prices,
-        oldObj.variants[key],
-        newObj.variants[key],
-      )
+      const {
+        oldObj: oldVariant,
+        newObj: newVariant,
+      } = _extractMatchingNewAndOld(variantHashMap, key, oldObj.variants, newObj.variants)
+      if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
+        const [ a, c, r ] = _buildVariantPricesAction(
+          variant.prices,
+          oldVariant,
+          newVariant,
+        )
 
-      addPriceActions = addPriceActions.concat(a)
-      changePriceActions = changePriceActions.concat(c)
-      removePriceActions = removePriceActions.concat(r)
+        addPriceActions = addPriceActions.concat(a)
+        changePriceActions = changePriceActions.concat(c)
+        removePriceActions = removePriceActions.concat(r)
+      }
     })
 
   return changePriceActions
@@ -434,10 +451,26 @@ function _buildSetAttributeAction (
   return action
 }
 
-function _buildVariantImagesAction (diffedImages, oldVariant, newVariant) {
+function _buildVariantImagesAction (
+  diffedImages,
+  oldVariant = {},
+  newVariant = {},
+) {
   const actions = []
-
+  // generate a hashMap to be able to reference the right image from both ends
+  const matchingImagePairs = findMatchingPairs(
+    diffedImages,
+    oldVariant.images,
+    newVariant.images,
+    'url',
+  )
   forEach(diffedImages, (image, key) => {
+    const { oldObj, newObj } = _extractMatchingNewAndOld(
+      matchingImagePairs,
+      key,
+      oldVariant.images,
+      newVariant.images,
+    )
     if (REGEX_NUMBER.test(key)) {
       // New image
       if (Array.isArray(image) && image.length)
@@ -454,42 +487,85 @@ function _buildVariantImagesAction (diffedImages, oldVariant, newVariant) {
           actions.push({
             action: 'removeImage',
             variantId: oldVariant.id,
-            imageUrl: oldVariant.images[key].url,
+            imageUrl: oldObj.url,
           })
           actions.push({
             action: 'addExternalImage',
             variantId: oldVariant.id,
-            image: newVariant.images[key],
+            image: newObj,
           })
         } else if ({}.hasOwnProperty.call(image, 'label') &&
           (image.label.length === 1 || image.label.length === 2))
           actions.push({
             action: 'changeImageLabel',
             variantId: oldVariant.id,
-            imageUrl: oldVariant.images[key].url,
+            imageUrl: oldObj.url,
             label: diffpatcher.getDeltaValue(image.label),
           })
-    } else if (REGEX_UNDERSCORE_NUMBER.test(key)) {
-      const index = key.substring(1)
-
-      if (Array.isArray(image))
-        actions.push({
-          action: 'removeImage',
-          variantId: oldVariant.id,
-          imageUrl: oldVariant.images[index].url,
-        })
-    }
+    } else if (REGEX_UNDERSCORE_NUMBER.test(key))
+      if (Array.isArray(image) && image.length === 3) {
+        if (Number(image[2]) === 3)
+          // image position changed
+          actions.push({
+            action: 'moveImagetoPosition',
+            variantId: oldVariant.id,
+            imageUrl: oldObj.url,
+            position: Number(image[1]),
+          })
+        else if (Number(image[2]) === 0)
+          // image removed
+          actions.push({
+            action: 'removeImage',
+            variantId: oldVariant.id,
+            imageUrl: oldObj.url,
+          })
+      }
   })
 
   return actions
 }
 
-function _buildVariantPricesAction (diffedPrices, oldVariant, newVariant) {
+// safely extract oldObj and newObj
+function _extractMatchingNewAndOld (hashMap, key, before, now) {
+  let oldObjPos
+  let newObjPos
+  let oldObj
+  let newObj
+
+  if (hashMap[key]) {
+    oldObjPos = hashMap[key][0]
+    newObjPos = hashMap[key][1]
+    if (before && before[oldObjPos])
+      oldObj = before[oldObjPos]
+
+    if (now && now[newObjPos])
+      newObj = now[newObjPos]
+  }
+  return { oldObj, newObj }
+}
+
+function _buildVariantPricesAction (
+  diffedPrices,
+  oldVariant = {},
+  newVariant = {},
+) {
   const addPriceActions = []
   const changePriceActions = []
   const removePriceActions = []
 
+  // generate a hashMap to be able to reference the right image from both ends
+  const matchingPricePairs = findMatchingPairs(
+    diffedPrices,
+    oldVariant.prices,
+    newVariant.prices,
+  )
   forEach(diffedPrices, (price, key) => {
+    const { oldObj, newObj } = _extractMatchingNewAndOld(
+      matchingPricePairs,
+      key,
+      oldVariant.prices,
+      newVariant.prices,
+    )
     if (REGEX_NUMBER.test(key)) {
       if (Array.isArray(price) && price.length) {
         // Remove read-only fields
@@ -511,22 +587,22 @@ function _buildVariantPricesAction (diffedPrices, oldVariant, newVariant) {
         delete filteredPrice.discounted
         if (Object.keys(filteredPrice).length) {
           // At this point price should have changed, simply pick the new one
-          const newPrice = Object.assign({}, newVariant.prices[key])
+          const newPrice = Object.assign({}, newObj)
           delete newPrice.discounted
 
           changePriceActions.push({
             action: 'changePrice',
-            priceId: oldVariant.prices[key].id,
+            priceId: oldObj.id,
             price: newPrice,
           })
         }
       }
-    } else if (REGEX_UNDERSCORE_NUMBER.test(key)) {
-      const index = key.substring(1)
-      removePriceActions.push({
-        action: 'removePrice', priceId: oldVariant.prices[index].id,
-      })
-    }
+    } else if (REGEX_UNDERSCORE_NUMBER.test(key))
+      if (Number(price[2]) === 0) { // price removed
+        removePriceActions.push({
+          action: 'removePrice', priceId: oldObj.id,
+        })
+      }
   })
 
   return [ addPriceActions, changePriceActions, removePriceActions ]
