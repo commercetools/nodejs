@@ -38,7 +38,9 @@ describe('JSONParserProduct', () => {
         multiValueDelimiter: ';',
         fillAllRows: false,
         headers: true,
-        categoryOrderHintBy: 'id',
+        categoryBy: 'namedPath',
+        categoryOrderHintBy: 'name',
+        language: 'en',
       }
 
       jsonParserProduct = new JSONParserProduct(apiConfig)
@@ -128,15 +130,15 @@ describe('JSONParserProduct', () => {
         await jsonParserProduct._resolveReferences([sampleProduct])
 
         expect(jsonParserProduct._resolveProductType)
-          .toBeCalledWith(sampleProduct)
+          .toBeCalledWith(sampleProduct.productType)
         expect(jsonParserProduct._resolveTaxCategory)
-          .toBeCalledWith(sampleProduct)
+          .toBeCalledWith(sampleProduct.taxCategory)
         expect(jsonParserProduct._resolveState)
-          .toBeCalledWith(sampleProduct)
+          .toBeCalledWith(sampleProduct.state)
         expect(jsonParserProduct._resolveCategories)
-          .toBeCalledWith(sampleProduct)
+          .toBeCalledWith(sampleProduct.categories)
         expect(jsonParserProduct._resolveCategoryOrderHints)
-          .toBeCalledWith(sampleProduct)
+          .toBeCalledWith(sampleProduct.categoryOrderHints)
       })
 
       it('should return object with resolved refeences', async () => {
@@ -163,12 +165,13 @@ describe('JSONParserProduct', () => {
 
       it('return empty object if no `productType` reference', () => {
         delete sampleProduct.productType
-        expect(jsonParserProduct._resolveProductType(sampleProduct)).toEqual({})
+        expect(jsonParserProduct._resolveProductType(sampleProduct.productType))
+          .toEqual({})
       })
 
       it('build correct request uri for productType', async () => {
         const expected = /project-key\/product-types\/fake-product-type/
-        await jsonParserProduct._resolveProductType(sampleProduct)
+        await jsonParserProduct._resolveProductType(sampleProduct.productType)
         expect(jsonParserProduct.fetchReferences)
           .toBeCalledWith(expect.stringMatching(expected))
       })
@@ -176,7 +179,7 @@ describe('JSONParserProduct', () => {
       it('return productType name if `productType` reference', async () => {
         const expected = { productType: 'resolved-name' }
         const actual = await jsonParserProduct
-          ._resolveProductType(sampleProduct)
+          ._resolveProductType(sampleProduct.productType)
         expect(actual).toEqual(expected)
       })
     })
@@ -190,12 +193,13 @@ describe('JSONParserProduct', () => {
 
       it('return empty object if no `taxCategory` reference', () => {
         delete sampleProduct.taxCategory
-        expect(jsonParserProduct._resolveTaxCategory(sampleProduct)).toEqual({})
+        expect(jsonParserProduct._resolveTaxCategory(sampleProduct.taxCategory))
+          .toEqual({})
       })
 
       it('build correct request uri for taxCategory', async () => {
         const expected = /project-key\/tax-categories\/fake-tax-category/
-        await jsonParserProduct._resolveTaxCategory(sampleProduct)
+        await jsonParserProduct._resolveTaxCategory(sampleProduct.taxCategory)
         expect(jsonParserProduct.fetchReferences)
           .toBeCalledWith(expect.stringMatching(expected))
       })
@@ -203,7 +207,7 @@ describe('JSONParserProduct', () => {
       it('return taxCategory key if `taxCategory` reference', async () => {
         const expected = { taxCategory: 'resolved-key' }
         const actual = await jsonParserProduct
-          ._resolveTaxCategory(sampleProduct)
+          ._resolveTaxCategory(sampleProduct.taxCategory)
         expect(actual).toEqual(expected)
       })
 
@@ -212,7 +216,7 @@ describe('JSONParserProduct', () => {
           .mockReturnValue(Promise.resolve({ body: { name: 'resolved-name' } }))
         const expected = { taxCategory: 'resolved-name' }
         const actual = await jsonParserProduct
-          ._resolveTaxCategory(sampleProduct)
+          ._resolveTaxCategory(sampleProduct.taxCategory)
         expect(actual).toEqual(expected)
       })
     })
@@ -226,12 +230,13 @@ describe('JSONParserProduct', () => {
 
       it('return empty object if no `state` reference', () => {
         delete sampleProduct.state
-        expect(jsonParserProduct._resolveState(sampleProduct)).toEqual({})
+        expect(jsonParserProduct._resolveState(sampleProduct.state))
+          .toEqual({})
       })
 
       it('build correct request uri for state', async () => {
         const expected = /project-key\/states\/fake-state/
-        await jsonParserProduct._resolveState(sampleProduct)
+        await jsonParserProduct._resolveState(sampleProduct.state)
         expect(jsonParserProduct.fetchReferences)
           .toBeCalledWith(expect.stringMatching(expected))
       })
@@ -239,101 +244,134 @@ describe('JSONParserProduct', () => {
       it('return state key if `state` reference', async () => {
         const expected = { state: 'resolved-key' }
         const actual = await jsonParserProduct
-          ._resolveState(sampleProduct)
+          ._resolveState(sampleProduct.state)
         expect(actual).toEqual(expected)
       })
     })
 
     describe('::_resolveCategories', () => {
       beforeEach(() => {
-        jsonParserProduct._manageCategories = jest.fn(() => (
+        jsonParserProduct._getCategories = jest.fn(() => (
           Promise.resolve([])
         ))
       })
 
       it('return empty object if no array of `categories`', () => {
         delete sampleProduct.categories
-        expect(jsonParserProduct._resolveCategories(sampleProduct)).toEqual({})
+        expect(jsonParserProduct._resolveCategories(sampleProduct.categories))
+          .toEqual({})
       })
 
-      it('return category keys if array of `categories`', async () => {
+      it('return category name if array of `categories`', async () => {
+        const resolvedCategories = [
+          { name: { en: 'res-cat-name-1' } },
+          { name: { en: 'res-cat-name-2' } },
+        ]
+        jsonParserProduct._getCategories
+          .mockReturnValue(Promise.resolve(resolvedCategories))
+        const expected = { categories: 'res-cat-name-1;res-cat-name-2' }
+        const actual = await jsonParserProduct
+          ._resolveCategories(sampleProduct.categories)
+        expect(actual).toEqual(expected)
+      })
+
+      it('return category keys if specified', async () => {
+        jsonParserProduct.parserConfig.categoryBy = 'key'
         const resolvedCategories = [
           { key: 'res-cat-key-1' },
           { key: 'res-cat-key-2' },
         ]
-        jsonParserProduct._manageCategories
+        jsonParserProduct._getCategories
           .mockReturnValue(Promise.resolve(resolvedCategories))
         const expected = { categories: 'res-cat-key-1;res-cat-key-2' }
         const actual = await jsonParserProduct
-          ._resolveCategories(sampleProduct)
+          ._resolveCategories(sampleProduct.categories)
         expect(actual).toEqual(expected)
       })
 
-      it('return externalIds if no keys in categories', async () => {
+      it('return externalIds if specified', async () => {
+        jsonParserProduct.parserConfig.categoryBy = 'externalId'
         const resolvedCategories = [
           { externalId: 'res-cat-extId-1' },
           { externalId: 'res-cat-extId-2' },
         ]
-        jsonParserProduct._manageCategories
+        jsonParserProduct._getCategories
           .mockReturnValue(Promise.resolve(resolvedCategories))
         const expected = { categories: 'res-cat-extId-1;res-cat-extId-2' }
         const actual = await jsonParserProduct
-          ._resolveCategories(sampleProduct)
+          ._resolveCategories(sampleProduct.categories)
         expect(actual).toEqual(expected)
       })
     })
 
     describe('::_resolveCategoryOrderHints', () => {
       beforeEach(() => {
-        jsonParserProduct._manageCategories = jest.fn(() => (
+        jsonParserProduct._getCategories = jest.fn(() => (
           Promise.resolve([])
         ))
       })
 
       it('return empty object if no `categoryOrderHints`', () => {
         delete sampleProduct.categoryOrderHints
-        expect(jsonParserProduct._resolveCategoryOrderHints(sampleProduct))
-          .toEqual({})
+        expect(jsonParserProduct._resolveCategoryOrderHints(
+          sampleProduct.categoryOrderHints)).toEqual({})
       })
 
       it('return empty object if `categoryOrderHints` is empty', () => {
         sampleProduct.categoryOrderHints = {}
-        expect(jsonParserProduct._resolveCategoryOrderHints(sampleProduct))
-          .toEqual({})
+        expect(jsonParserProduct._resolveCategoryOrderHints(
+          sampleProduct.categoryOrderHints)).toEqual({})
       })
 
-      it('return category keys for `categoryOrderHints`', async () => {
+      it('return category name for `categoryOrderHints`', async () => {
+        const resolvedCategories = [
+          { id: 'fake-cat-1', name: { en: 'res-cat-name-1' } },
+          { id: 'fake-cat-2', name: { en: 'res-cat-name-2' } },
+        ]
+        jsonParserProduct._getCategories
+          .mockReturnValue(Promise.resolve(resolvedCategories))
+        const expected = {
+          categoryOrderHints: 'res-cat-name-1:0.012;res-cat-name-2:0.987',
+        }
+        const actual = await jsonParserProduct
+          ._resolveCategoryOrderHints(sampleProduct.categoryOrderHints)
+        expect(actual).toEqual(expected)
+      })
+
+      it('return category keys if specified', async () => {
+        jsonParserProduct.parserConfig.categoryOrderHintBy = 'key'
         const resolvedCategories = [
           { id: 'fake-cat-1', key: 'res-cat-key-1' },
           { id: 'fake-cat-2', key: 'res-cat-key-2' },
         ]
-        jsonParserProduct._manageCategories
+        jsonParserProduct._getCategories
           .mockReturnValue(Promise.resolve(resolvedCategories))
         const expected = {
           categoryOrderHints: 'res-cat-key-1:0.012;res-cat-key-2:0.987',
         }
         const actual = await jsonParserProduct
-          ._resolveCategoryOrderHints(sampleProduct)
+          ._resolveCategoryOrderHints(sampleProduct.categoryOrderHints)
         expect(actual).toEqual(expected)
       })
 
-      it('return externalIds if no keys in categories', async () => {
+      it('return externalIds if specified', async () => {
+        jsonParserProduct.parserConfig.categoryOrderHintBy = 'externalId'
         const resolvedCategories = [
           { id: 'fake-cat-1', externalId: 'res-cat-extId-1' },
           { id: 'fake-cat-2', externalId: 'res-cat-extId-2' },
         ]
-        jsonParserProduct._manageCategories
+        jsonParserProduct._getCategories
           .mockReturnValue(Promise.resolve(resolvedCategories))
         const expected = {
           categoryOrderHints: 'res-cat-extId-1:0.012;res-cat-extId-2:0.987',
         }
         const actual = await jsonParserProduct
-          ._resolveCategoryOrderHints(sampleProduct)
+          ._resolveCategoryOrderHints(sampleProduct.categoryOrderHints)
         expect(actual).toEqual(expected)
       })
     })
 
-    describe('::_manageCategories', () => {
+    describe('::_getCategories', () => {
       beforeEach(() => {
         jsonParserProduct.categoriesCache = {
           'cat-id-1': {
@@ -351,7 +389,7 @@ describe('JSONParserProduct', () => {
       it('return category from cache if it exists', async () => {
         const expected = [{ id: 'cat-id-1', key: 'cat-key-1-in-cache' }]
         const categoryId = ['cat-id-1']
-        const actual = await jsonParserProduct._manageCategories(categoryId)
+        const actual = await jsonParserProduct._getCategories(categoryId)
         expect(jsonParserProduct.fetchReferences).not.toBeCalled()
         expect(actual).toEqual(expected)
       })
@@ -364,7 +402,7 @@ describe('JSONParserProduct', () => {
         }]
         const expectedUri = /categories\?where=id%20in%20\(%22cat-id-2%22\)/
         const categoryIds = ['cat-id-1', 'cat-id-2']
-        const actual = await jsonParserProduct._manageCategories(categoryIds)
+        const actual = await jsonParserProduct._getCategories(categoryIds)
         expect(jsonParserProduct.fetchReferences)
           .toBeCalledWith(expect.stringMatching(expectedUri))
         expect(actual).toEqual(expectedCategories)
@@ -380,8 +418,32 @@ describe('JSONParserProduct', () => {
           },
         }
         const categoryIds = ['cat-id-2']
-        await jsonParserProduct._manageCategories(categoryIds)
+        await jsonParserProduct._getCategories(categoryIds)
         expect(jsonParserProduct.categoriesCache).toEqual(expectedCache)
+      })
+    })
+
+    describe('::_retrieveNamedPath', () => {
+      const child = {
+        id: 'child-cat-id',
+        name: { en: 'child-cat-name' },
+        parent: { typeId: 'category', id: 'parent-cat-id' } }
+      const parent = {
+        id: 'parent-cat-id',
+        name: { en: 'parent-cat-name' },
+        parent: { typeId: 'category', id: 'grand-parent-cat-id' } }
+      const grandParent = {
+        id: 'grand-parent-cat-id',
+        name: { en: 'grand-parent-cat-name' } }
+
+      it('resolves all ancestors for a category', async () => {
+        jsonParserProduct._getCategories = jest.fn()
+          .mockReturnValueOnce(Promise.resolve([parent]))
+          .mockReturnValueOnce(Promise.resolve([grandParent]))
+        const expected = 'grand-parent-cat-name>parent-cat-name>child-cat-name'
+        const actual = await jsonParserProduct._retrieveNamedPath(child)
+        expect(jsonParserProduct._getCategories).toHaveBeenCalledTimes(2)
+        expect(actual).toMatch(expected)
       })
     })
   })
@@ -595,6 +657,25 @@ describe('JSONParserProduct', () => {
         }
         const actual = JSONParserProduct._removePrices(product)
         expect(actual).not.toBe(product)
+        expect(actual).toEqual(expected)
+      })
+    })
+
+    describe('::_removeEmptyObjects', () => {
+      it('set empty objects to empty string from object properties', () => {
+        const sampleProduct = {
+          id: 'I should remain',
+          key: 'me too',
+          categoryOrderHints: {},
+          attributes: {},
+        }
+        const expected = {
+          id: 'I should remain',
+          key: 'me too',
+          categoryOrderHints: '',
+          attributes: '',
+        }
+        const actual = JSONParserProduct._removeEmptyObjects(sampleProduct)
         expect(actual).toEqual(expected)
       })
     })

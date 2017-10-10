@@ -22,9 +22,12 @@ export type LoggerOptions = {
 
 export type ParserConfigOptions = {
   batchSize: number;
+  categoryBy: string;
   categoryOrderHintBy: string;
   delimiter: string;
   fillAllRows: boolean;
+  headers: Array<string> | boolean;
+  language: string;
   multiValueDelimiter: string;
 }
 

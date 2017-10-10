@@ -1,4 +1,5 @@
 /* @flow */
+import fs from 'fs'
 import type {
   ApiConfigOptions,
   LoggerOptions,
@@ -59,10 +60,12 @@ export default class JSONParserProduct {
 
     const defaultConfig = {
       batchSize: 5,
-      categoryOrderHintBy: 'id',
+      categoryBy: 'namedPath', // key, externalId or name supported
+      categoryOrderHintBy: 'name', // key, externalId or name supported
       delimiter: ',',
       fillAllRows: false,
       headers: true,
+      language: 'en',
       multiValueDelimiter: ';',
     }
 
@@ -80,7 +83,7 @@ export default class JSONParserProduct {
 
   // `any` is used because flow does not seem to know the difference between
   // a buffer and a stream! When it does, life would be easier
-  parse (input: any, output) {
+  parse (input: stream$Readable, output: stream$Writable) {
     this.logger.info('Starting conversion')
     let productCount = 0
     input.setEncoding('utf8') // TODO: Move to CLI
@@ -107,6 +110,7 @@ export default class JSONParserProduct {
       // remove price information from each product
       .map(JSONParserProduct._removePrices)
       .map(flatten)
+      .map(JSONParserProduct._removeEmptyObjects)
       .stopOnError((err) => {
         this.logger.error(err)
         output.emit('error', err)
@@ -130,14 +134,13 @@ export default class JSONParserProduct {
     // **CategoryOrderHints
 
     return Promise.map(productsArray,
-      (product: ProductProjection): Array<ResolvedProductProjection> => {
-        const productToResolve = Object.assign({}, product)
-        return Promise.all([
-          this._resolveProductType(productToResolve),
-          this._resolveTaxCategory(productToResolve),
-          this._resolveState(productToResolve),
-          this._resolveCategories(productToResolve),
-          this._resolveCategoryOrderHints(productToResolve),
+      (product: ProductProjection): Array<ResolvedProductProjection> => (
+        Promise.all([
+          this._resolveProductType(product.productType),
+          this._resolveTaxCategory(product.taxCategory),
+          this._resolveState(product.state),
+          this._resolveCategories(product.categories),
+          this._resolveCategoryOrderHints(product.categoryOrderHints),
         ])
         .then(([
           productType,
@@ -147,7 +150,7 @@ export default class JSONParserProduct {
           categoryOrderHints,
         ]: Array<Object>): ResolvedProductProjection => (
           {
-            ...productToResolve,
+            ...product,
             ...productType,
             ...taxCategory,
             ...state,
@@ -155,81 +158,115 @@ export default class JSONParserProduct {
             ...categoryOrderHints,
           }
         ))
-      })
+      ))
   }
 
-  _resolveProductType (product: ProductProjection): Object {
-    if (!product.productType)
+  _resolveProductType (productTypeReference: TypeReference): Object {
+    if (!productTypeReference)
       return {}
 
     const productTypeService = this._createService('productTypes')
-    const uri = productTypeService.byId(product.productType.id).build()
+    const uri = productTypeService.byId(productTypeReference.id).build()
     return this.fetchReferences(uri)
-      .then(({ body: { name } }) => {
-        const resolvedProductType = { productType: name }
-        return resolvedProductType
-      })
+      .then(({ body: { name } }) => (
+        { productType: name }
+      ))
   }
 
-  _resolveTaxCategory (product: ProductProjection): Object {
-    if (!product.taxCategory)
+  _resolveTaxCategory (taxCategoryReference: TypeReference): Object {
+    if (!taxCategoryReference)
       return {}
 
     const taxCategoryService = this._createService('taxCategories')
-    const uri = taxCategoryService.byId(product.taxCategory.id).build()
+    const uri = taxCategoryService.byId(taxCategoryReference.id).build()
     return this.fetchReferences(uri)
-      .then(({ body: { name, key } }) => {
-        const resolvedTaxCategory = { taxCategory: key || name }
-        return resolvedTaxCategory
-      })
+      .then(({ body: { name, key } }) => (
+        { taxCategory: key || name }
+      ))
   }
 
-  _resolveState (product: ProductProjection): Object {
-    if (!product.state)
+  _resolveState (stateReference: TypeReference): Object {
+    if (!stateReference)
       return {}
 
     const stateService = this._createService('states')
-    const uri = stateService.byId(product.state.id).build()
+    const uri = stateService.byId(stateReference.id).build()
     return this.fetchReferences(uri)
-      .then(({ body: { key } }) => {
-        const resolvedState = { state: key }
-        return resolvedState
-      })
+      .then(({ body: { key } }) => (
+        { state: key }
+      ))
   }
 
-  _resolveCategories (product: ProductProjection): Object {
-    if (!product.categories || !product.categories.length)
+  _resolveCategories (categoriesReference: Array<TypeReference>): Object {
+    if (!categoriesReference || !categoriesReference.length)
       return {}
 
-    const categoryIds = product.categories.map(
+    const catIdentifier = this.parserConfig.categoryBy
+    const lang = this.parserConfig.language
+    const multiValueDelimiter = this.parserConfig.multiValueDelimiter
+    const categoryIds = categoriesReference.map(
       (category: TypeReference): string => category.id)
-    return this._manageCategories(categoryIds)
-      .then((resolvedCategories) => {
-        const categories = resolvedCategories.map(category => (
-          category.key || category.externalId
-        )).join(this.parserConfig.multiValueDelimiter)
-        return { categories }
-      })
+    return this._getCategories(categoryIds)
+      .then(resolvedCategories => (
+        Promise.map(resolvedCategories, (category) => {
+          if (this.parserConfig.categoryBy === 'namedPath')
+            return this._retrieveNamedPath(category)
+
+          return catIdentifier === 'name'
+            ? category[catIdentifier][lang]
+            : category[catIdentifier]
+        })
+        .then((categoriesArray) => {
+          const categories = categoriesArray.join(multiValueDelimiter)
+          return { categories }
+        })
+      ))
   }
 
-  _resolveCategoryOrderHints (product: ProductProjection): Object {
-    if (!product.categoryOrderHints
-      || !Object.keys(product.categoryOrderHints).length)
+  _resolveCategoryOrderHints (categoryOrderHintsReference): Object {
+    if (
+      !categoryOrderHintsReference
+      || !Object.keys(categoryOrderHintsReference).length
+    )
       return {}
 
-    const categoryIds = Object.keys(product.categoryOrderHints)
-    return this._manageCategories(categoryIds)
+    const catIdentifier = this.parserConfig.categoryOrderHintBy
+    const lang = this.parserConfig.language
+    const categoryIds = Object.keys(categoryOrderHintsReference)
+    return this._getCategories(categoryIds)
       .then((resolvedCategories) => {
         const categoryOrderHints = resolvedCategories.map((category) => {
-          const catRef = category.key || category.externalId
-          return `${catRef}:${product.categoryOrderHints[category.id]}`
+          const catRef = catIdentifier === 'name'
+            ? category[catIdentifier][lang]
+            : category[catIdentifier]
+          return `${catRef}:${categoryOrderHintsReference[category.id]}`
         }).join(this.parserConfig.multiValueDelimiter)
         return { categoryOrderHints }
       })
   }
 
-  // This method decides if to resolve the categories from cache or API
-  _manageCategories (ids: Array<string>): Promise<Array<Object>> {
+  _retrieveNamedPath (category) {
+    return new Promise((resolve, reject) => {
+      const lang = this.parserConfig.language
+      const categoryTree = []
+
+      // define recursive function
+      const getParent = (cat) => {
+        categoryTree.unshift(cat.name[lang])
+        if (!cat.parent) resolve(categoryTree.join('>'))
+
+        return this._getCategories([cat.parent.id])
+          .then(resolvedCategory => (
+            getParent(resolvedCategory[0])
+          ))
+          .catch(reject)
+      }
+      getParent(category)
+    })
+  }
+
+  // This method decides if to get the categories from cache or API
+  _getCategories (ids: Array<string>): Promise<Array<Object>> {
     const notCachedIds = []
     const cachedCategories = []
     ids.forEach((id: string) => {
@@ -324,6 +361,22 @@ export default class JSONParserProduct {
     const newProduct = Object.assign({}, product)
     delete newProduct.variant.prices
     return newProduct
+  }
+
+  // This method removes empty objects from flattened price objects
+  // This is necessary so the empty prices son't show up as [object Object]
+  static _removeEmptyObjects (product) {
+    const modifiedProduct = Object.assign({}, product)
+    const keys = Object.keys(product)
+    keys.forEach((key) => {
+      if (
+        product[key] !== null
+        && typeof product[key] === 'object'
+        && !Object.keys(product[key]).length
+      )
+        modifiedProduct[key] = ''
+    })
+    return modifiedProduct
   }
 }
 
