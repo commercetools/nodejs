@@ -7,7 +7,7 @@ describe('Actions', () => {
     productsSync = productsSyncFn()
   })
 
-  it('should build actions for prices', () => {
+  describe('build actions', () => {
     const validFrom = new Date().toISOString()
     const discounted = { value: { centAmount: 4000, currencyCode: 'EUR' }, discount: { typeId: 'product-discount', id: 'pd1' } }
 
@@ -79,12 +79,14 @@ describe('Actions', () => {
       ],
     }
 
-    const actions = productsSync.buildActions(now, before)
-    expect(actions).toEqual([
-      { action: 'changePrice', priceId: '111', price: { id: '111', value: { currencyCode: 'EUR', centAmount: 2000 }, country: 'US' } },
-      { action: 'removePrice', priceId: '222' },
-      { action: 'addPrice', variantId: 3, price: { value: { currencyCode: 'USD', centAmount: 5000 }, country: 'US', customerGroup: { typeId: 'customer-group', id: 'cg1' }, channel: { typeId: 'channel', id: 'ch1' }, validFrom } },
-    ])
+    it('should build actions for prices', () => {
+      const actions = productsSync.buildActions(now, before)
+      expect(actions).toEqual([
+        { action: 'changePrice', priceId: '111', price: { id: '111', value: { currencyCode: 'EUR', centAmount: 2000 }, country: 'US' } },
+        { action: 'removePrice', priceId: '222' },
+        { action: 'addPrice', variantId: 3, price: { value: { currencyCode: 'USD', centAmount: 5000 }, country: 'US', customerGroup: { typeId: 'customer-group', id: 'cg1' }, channel: { typeId: 'channel', id: 'ch1' }, validFrom } },
+      ])
+    })
 
     it('should not delete the discounted field from the original object', () => {
       expect('discounted' in before.masterVariant.prices[0]).toBeTruthy()
