@@ -70,7 +70,7 @@
     "lerna": "2.0.0",
     "lerna-semantic-release": "9.1.0",
     "npm-check-updates": "2.11.3",
-    "npm-run-all": "4.0.2",
+    "npm-run-all": "4.1.0",
     "rimraf": "2.6.1",
     "streamtest": "1.2.2",
     "validate-commit-msg": "2.14.0",
