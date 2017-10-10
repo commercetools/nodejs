@@ -71,7 +71,7 @@
     "lerna-semantic-release": "9.1.0",
     "npm-check-updates": "2.11.3",
     "npm-run-all": "4.0.2",
-    "rimraf": "2.6.1",
+    "rimraf": "2.6.2",
     "streamtest": "1.2.2",
     "validate-commit-msg": "2.14.0",
     "webpack": "3.4.1"
