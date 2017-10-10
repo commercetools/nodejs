@@ -67,7 +67,7 @@
     "gitbook-plugin-prism": "^2.2.0",
     "husky": "0.14.0",
     "jest": "20.0.4",
-    "lerna": "2.0.0",
+    "lerna": "2.1.0",
     "lerna-semantic-release": "9.1.0",
     "npm-check-updates": "2.11.3",
     "npm-run-all": "4.0.2",
