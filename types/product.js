@@ -132,7 +132,7 @@ type ProductVariantAvailability = {
   channels?: Array<Object>;
 }
 
-type Variant = {
+export type Variant = {
   id: number;
   sku?: string;
   key?: string;
@@ -145,8 +145,80 @@ type Variant = {
   isMatchingVariant?: boolean;
   scopedPrice?: ScopedPrice;
   scopedPriceDiscounted?: boolean;
+}
 
+type SubRate = {
+  name: string;
+  amount: number;
+}
 
+type TaxRate = {
+  id: string;
+  name: string;
+  amount: number;
+  country: string;
+  state: string;
+  subRates: Array<SubRate>;
+}
+
+type AttributeType = {
+  name: string;
+  values?: Array<*>;
+  elementType?: AttributeType;
+  referenceTypeId?: string;
+}
+
+type AttributeDefinition = {
+  type: AttributeType;
+  name: string;
+  label: Object;
+  isRequired: boolean;
+  attributeConstraint: 'None' | 'Unique' | 'CombinationUnique' | 'SameForAll';
+  inputTip: Object;
+  inputHint: 'SingleLine' | 'MultiLine';
+  isSearchable: boolean;
+}
+
+export type TaxCategory = {
+  id: string;
+  key?: string;
+  version: number;
+  createdAt: string;
+  lastModifiedAt: string;
+  name: string;
+  description?: string;
+  rates: Array<TaxRate>
+}
+
+export type ProductType = {
+  id: string;
+  version: number;
+  createdAt: string;
+  lastModifiedAt: string;
+  key?: string;
+  name: string;
+  description: name;
+  attributes: Array<AttributeDefinition>;
+}
+
+export type Category = {
+  id: string;
+  key?: string;
+  version: number;
+  createdAt: string;
+  lastModifiedAt: string;
+  name: Object;
+  slug: Object;
+  description: Object;
+  ancestors: Array<?TypeReference>;
+  parent?: TypeReference;
+  orderHint: string;
+  externalId?: string;
+  metaTitle?: Object;
+  metaDescription?: Object;
+  metaKeywords?: Object;
+  custom?: CustomField;
+  assets: Array<Asset>
 }
 
 export type ProductProjection = {
@@ -176,18 +248,75 @@ export type ResolvedProductProjection = {
   version: number;
   createdAt: string;
   lastModifiedAt: string;
-  productType: TypeReference;
+  productType: ProductType;
   name: Object;
   description?: Object;
   slug: Object;
-  categories: Array<string>;
+  categories: Array<Category>;
   categoryOrderHints: Object;
   masterVariant: Variant;
   variants: Array<Variant>;
   hasStagedChanges: boolean;
   published: boolean;
-  taxCategory: string;
-  state: string;
+  taxCategory: TaxCategory;
+  reviewRatingStatistics?: Object;
+}
+
+export type ProductWithSingleVariantArray = {
+  id: string;
+  key?: string;
+  version: number;
+  createdAt: string;
+  lastModifiedAt: string;
+  productType: ProductType;
+  name: Object;
+  description?: Object;
+  slug: Object;
+  categories: Array<Category>;
+  categoryOrderHints: Object;
+  variant: Array<Variant>;
+  hasStagedChanges: boolean;
+  published: boolean;
+  taxCategory: TaxCategory;
+  reviewRatingStatistics?: Object;
+}
+
+export type SingleVariantPerProduct = {
+  id?: string;
+  key?: string;
+  version?: number;
+  createdAt?: string;
+  lastModifiedAt?: string;
+  productType?: ProductType;
+  name?: Object;
+  description?: Object;
+  slug?: Object;
+  categories?: Array<Category>;
+  categoryOrderHints?: Object;
+  variant: Variant;
+  hasStagedChanges?: boolean;
+  published?: boolean;
+  taxCategory?: TaxCategory;
+  reviewRatingStatistics?: Object;
+}
+
+export type MappedProduct = {
+  id?: string;
+  key?: string;
+  version?: number;
+  createdAt?: string;
+  lastModifiedAt?: string;
+  productType?: string;
+  name?: Object;
+  description?: Object;
+  slug?: Object;
+  categories?: string;
+  categoryOrderHints?: string;
+  variant: Variant;
+  hasStagedChanges?: boolean;
+  published?: string;
+  state?: string;
+  taxCategory?: string;
   reviewRatingStatistics?: Object;
 }
 

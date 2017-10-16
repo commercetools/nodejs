@@ -45,6 +45,7 @@
     "yargs": "^9.0.1"
   },
   "devDependencies": {
+    "common-tags": "^1.4.0",
     "streamtest": "^1.2.2"
   }
 }

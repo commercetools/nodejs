@@ -60,7 +60,7 @@ export default class JSONParserProduct {
 
     const defaultConfig = {
       batchSize: 5,
-      categoryBy: 'namedPath', // key, externalId or name supported
+      categoryBy: 'name', // key, externalId or namedPath supported
       categoryOrderHintBy: 'name', // key, externalId or name supported
       delimiter: ',',
       fillAllRows: false,
@@ -168,8 +168,8 @@ export default class JSONParserProduct {
     const productTypeService = this._createService('productTypes')
     const uri = productTypeService.byId(productTypeReference.id).build()
     return this.fetchReferences(uri)
-      .then(({ body: { name } }) => (
-        { productType: name }
+      .then(({ body }) => (
+        { productType: body }
       ))
   }
 
@@ -180,8 +180,8 @@ export default class JSONParserProduct {
     const taxCategoryService = this._createService('taxCategories')
     const uri = taxCategoryService.byId(taxCategoryReference.id).build()
     return this.fetchReferences(uri)
-      .then(({ body: { name, key } }) => (
-        { taxCategory: key || name }
+      .then(({ body }) => (
+        { taxCategory: body }
       ))
   }
 
@@ -217,7 +217,7 @@ export default class JSONParserProduct {
             : category[catIdentifier]
         })
         .then((categoriesArray) => {
-          const categories = categoriesArray.join(multiValueDelimiter)
+          const categories = categoriesArray.join(multiValueDelimiter) // Todo separate methods
           return { categories }
         })
       ))
@@ -253,13 +253,14 @@ export default class JSONParserProduct {
       // define recursive function
       const getParent = (cat) => {
         categoryTree.unshift(cat.name[lang])
-        if (!cat.parent) resolve(categoryTree.join('>'))
+        if (!cat.parent)
+          return resolve(categoryTree.join('>'))
 
+        console.log('test')
         return this._getCategories([cat.parent.id])
           .then(resolvedCategory => (
             getParent(resolvedCategory[0])
           ))
-          .catch(reject)
       }
       getParent(category)
     })

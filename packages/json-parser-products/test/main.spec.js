@@ -141,7 +141,7 @@ describe('JSONParserProduct', () => {
           .toBeCalledWith(sampleProduct.categoryOrderHints)
       })
 
-      it('should return object with resolved refeences', async () => {
+      it('should return object with resolved references', async () => {
         const expected = [{
           id: 'myProduct-1',
           productType: 'resolved-product-type',
@@ -423,7 +423,7 @@ describe('JSONParserProduct', () => {
       })
     })
 
-    describe('::_retrieveNamedPath', () => {
+    fdescribe('::_retrieveNamedPath', () => {
       const child = {
         id: 'child-cat-id',
         name: { en: 'child-cat-name' },
@@ -436,10 +436,11 @@ describe('JSONParserProduct', () => {
         id: 'grand-parent-cat-id',
         name: { en: 'grand-parent-cat-name' } }
 
-      it('resolves all ancestors for a category', async () => {
+      fit('resolves all ancestors for a category', async () => {
         jsonParserProduct._getCategories = jest.fn()
-          .mockReturnValueOnce(Promise.resolve([parent]))
-          .mockReturnValueOnce(Promise.resolve([grandParent]))
+          .mockImplementationOnce(() => Promise.resolve([parent]))
+          .mockImplementationOnce(() => Promise.resolve([grandParent]))
+          .mockImplementation(() => Promise.reject('I should not be called'))
         const expected = 'grand-parent-cat-name>parent-cat-name>child-cat-name'
         const actual = await jsonParserProduct._retrieveNamedPath(child)
         expect(jsonParserProduct._getCategories).toHaveBeenCalledTimes(2)
