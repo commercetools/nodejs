@@ -42,6 +42,7 @@ describe('Exports', () => {
   it('correctly define reference actions list', () => {
     expect(referenceActionsList).toEqual([
       { action: 'setTaxCategory', key: 'taxCategory' },
+      { action: 'transitionState', key: 'state' },
     ])
   })
 })

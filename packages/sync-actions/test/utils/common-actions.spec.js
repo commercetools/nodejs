@@ -78,42 +78,182 @@ describe('Common actions', () => {
       { action: 'setCustomerGroup', key: 'customerGroup' },
       { action: 'setSupplyChannel', key: 'supplyChannel' },
       { action: 'setProductType', key: 'productType' },
+      { action: 'transitionState', key: 'state' },
     ]
 
-    it('should build reference actions', () => {
-      const before = {
-        taxCategory: { id: 'tc-1', typeId: 'tax-category' },
-        customerGroup: undefined,
-        supplyChannel: { id: 'sc-1', typeId: 'channel' },
-        productType: {
-          id: 'pt-1', typeId: 'product-type', obj: { id: 'pt-1' },
-        },
-      }
-      const now = {
-        // id changed
-        taxCategory: { id: 'tc-2', typeId: 'tax-category' },
-        // new ref
-        customerGroup: { id: 'cg-1', typeId: 'customer-group' },
-        // unset
-        supplyChannel: null,
-        // ignore update
-        productType: {
-          id: 'pt-1', typeId: 'product-type',
-        },
-      }
+    describe('without expanded references', () => {
+      describe('taxCategory', () => {
+        let actions
+        const before = {
+          taxCategory: { id: 'tc-1', typeId: 'tax-category' },
+        }
+        const now = {
+          // id changed
+          taxCategory: { id: 'tc-2', typeId: 'tax-category' },
+        }
 
-      const actions = buildReferenceActions({
-        actions: testActions,
-        diff: diffpatcher.diff(before, now),
-        oldObj: before,
-        newObj: now,
+        beforeEach(() => {
+          actions = buildReferenceActions({
+            actions: testActions,
+            diff: diffpatcher.diff(before, now),
+            oldObj: before,
+            newObj: now,
+          })
+        })
+
+        it('should build reference action', () => {
+          expect(actions).toContainEqual(
+            { action: 'setTaxCategory', taxCategory: now.taxCategory },
+          )
+        })
       })
 
-      expect(actions).toEqual([
-        { action: 'setTaxCategory', taxCategory: now.taxCategory },
-        { action: 'setCustomerGroup', customerGroup: now.customerGroup },
-        { action: 'setSupplyChannel' },
-      ])
+      describe('customerGroup', () => {
+        let actions
+        const before = {
+          customerGroup: undefined,
+        }
+        const now = {
+          // new ref
+          customerGroup: { id: 'cg-1', typeId: 'customer-group' },
+        }
+
+        beforeEach(() => {
+          actions = buildReferenceActions({
+            actions: testActions,
+            diff: diffpatcher.diff(before, now),
+            oldObj: before,
+            newObj: now,
+          })
+        })
+
+        it('should build reference action', () => {
+          expect(actions).toContainEqual(
+            { action: 'setCustomerGroup', customerGroup: now.customerGroup },
+          )
+        })
+      })
+
+      describe('supplyChannel', () => {
+        let actions
+        const before = {
+          supplyChannel: { id: 'sc-1', typeId: 'channel' },
+        }
+        const now = {
+          // unset
+          supplyChannel: null,
+        }
+
+        beforeEach(() => {
+          actions = buildReferenceActions({
+            actions: testActions,
+            diff: diffpatcher.diff(before, now),
+            oldObj: before,
+            newObj: now,
+          })
+        })
+
+        it('should build reference action', () => {
+          expect(actions).toContainEqual(
+            { action: 'setSupplyChannel' },
+          )
+        })
+      })
+
+      describe('productType', () => {
+        let actions
+        const before = {
+          productType: {
+            id: 'pt-1', typeId: 'product-type', obj: { id: 'pt-1' },
+          },
+        }
+        const now = {
+          // ignore update
+          productType: {
+            id: 'pt-1', typeId: 'product-type',
+          },
+        }
+        beforeEach(() => {
+          actions = buildReferenceActions({
+            actions: testActions,
+            diff: diffpatcher.diff(before, now),
+            oldObj: before,
+            newObj: now,
+          })
+        })
+
+        it('should not build reference action', () => {
+          expect(actions).not.toContainEqual(
+            { action: 'productType' },
+          )
+        })
+      })
+
+      describe('state', () => {
+        let actions
+        const before = {
+          state: {
+            id: 's-1', typeId: 'state', obj: { id: 's-1' },
+          },
+        }
+        const now = {
+          // new ref: transition state
+          state: {
+            id: 's-2', typeId: 'state',
+          },
+        }
+
+        beforeEach(() => {
+          actions = buildReferenceActions({
+            actions: testActions,
+            diff: diffpatcher.diff(before, now),
+            oldObj: before,
+            newObj: now,
+          })
+        })
+
+        it('should build reference action', () => {
+          expect(actions).toContainEqual(
+            { action: 'transitionState', state: now.state },
+          )
+        })
+      })
+    })
+
+    describe('with expanded references', () => {
+      describe('state', () => {
+        let actions
+        const before = {
+          state: {
+            id: 's-1', typeId: 'state', obj: { id: 's-1' },
+          },
+        }
+        const now = {
+          // new ref: transition state
+          state: {
+            id: 's-2', typeId: 'state', obj: { id: 's-1' },
+          },
+        }
+
+        beforeEach(() => {
+          actions = buildReferenceActions({
+            actions: testActions,
+            diff: diffpatcher.diff(before, now),
+            oldObj: before,
+            newObj: now,
+          })
+        })
+
+        it('should build reference action without expansion in action', () => {
+          expect(actions).toContainEqual(
+            { action: 'transitionState',
+              state: {
+                typeId: now.state.typeId,
+                id: now.state.id,
+              } },
+          )
+        })
+      })
     })
   })
 })
