@@ -197,7 +197,7 @@ export type ProductType = {
   lastModifiedAt: string;
   key?: string;
   name: string;
-  description: name;
+  description: string;
   attributes: Array<AttributeDefinition>;
 }
 
@@ -210,8 +210,8 @@ export type Category = {
   name: Object;
   slug: Object;
   description: Object;
-  ancestors: Array<?TypeReference>;
-  parent?: TypeReference;
+  ancestors: Array<?Category>;
+  parent?: Category;
   orderHint: string;
   externalId?: string;
   metaTitle?: Object;
@@ -242,7 +242,7 @@ export type ProductProjection = {
   reviewRatingStatistics?: Object;
 }
 
-export type ResolvedProductProjection = {
+export type ResolvedProdProj = {
   id: string;
   key?: string;
   version: number;
@@ -262,7 +262,7 @@ export type ResolvedProductProjection = {
   reviewRatingStatistics?: Object;
 }
 
-export type ProductWithSingleVariantArray = {
+export type ProdWithMergedVariants = {
   id: string;
   key?: string;
   version: number;

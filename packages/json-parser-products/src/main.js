@@ -1,11 +1,10 @@
 /* @flow */
-import fs from 'fs'
 import type {
   ApiConfigOptions,
   LoggerOptions,
   ParserConfigOptions,
   ProductProjection,
-  ResolvedProductProjection,
+  ResolvedProdProj,
   TypeReference,
 } from 'types/product'
 import type {
@@ -124,7 +123,7 @@ export default class JSONParserProduct {
 
   _resolveReferences (
     productsArray: Array<ProductProjection>,
-    ): Array<ResolvedProductProjection> {
+    ): Array<ResolvedProdProj> {
     // ReferenceTypes that need to be resolved:
     // PRODUCT LEVEL
     // **ProductType
@@ -134,7 +133,7 @@ export default class JSONParserProduct {
     // **CategoryOrderHints
 
     return Promise.map(productsArray,
-      (product: ProductProjection): Array<ResolvedProductProjection> => (
+      (product: ProductProjection): Array<ResolvedProdProj> => (
         Promise.all([
           this._resolveProductType(product.productType),
           this._resolveTaxCategory(product.taxCategory),
@@ -148,7 +147,7 @@ export default class JSONParserProduct {
           state,
           categories,
           categoryOrderHints,
-        ]: Array<Object>): ResolvedProductProjection => (
+        ]: Array<Object>): ResolvedProdProj => (
           {
             ...product,
             ...productType,
@@ -192,8 +191,8 @@ export default class JSONParserProduct {
     const stateService = this._createService('states')
     const uri = stateService.byId(stateReference.id).build()
     return this.fetchReferences(uri)
-      .then(({ body: { key } }) => (
-        { state: key }
+      .then(({ body }) => (
+        { state: body }
       ))
   }
 
@@ -223,7 +222,7 @@ export default class JSONParserProduct {
       ))
   }
 
-  _resolveCategoryOrderHints (categoryOrderHintsReference): Object {
+  _resolveCategoryOrderHints (categoryOrderHintsReference: Object): Object {
     if (
       !categoryOrderHintsReference
       || !Object.keys(categoryOrderHintsReference).length
@@ -235,18 +234,19 @@ export default class JSONParserProduct {
     const categoryIds = Object.keys(categoryOrderHintsReference)
     return this._getCategories(categoryIds)
       .then((resolvedCategories) => {
-        const categoryOrderHints = resolvedCategories.map((category) => {
+        const categoryOrderHints = {}
+        resolvedCategories.forEach((category) => {
           const catRef = catIdentifier === 'name'
             ? category[catIdentifier][lang]
             : category[catIdentifier]
-          return `${catRef}:${categoryOrderHintsReference[category.id]}`
-        }).join(this.parserConfig.multiValueDelimiter)
+          categoryOrderHints[catRef] = categoryOrderHintsReference[category.id]
+        })
         return { categoryOrderHints }
       })
   }
 
   _retrieveNamedPath (category) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       const lang = this.parserConfig.language
       const categoryTree = []
 

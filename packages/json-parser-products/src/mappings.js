@@ -1,24 +1,41 @@
 /* @flow */
 import type {
-  ResolvedProductProjection,
-  ProductWithSingleVariantArray,
+  ResolvedProdProj,
+  ProdWithMergedVariants,
   SingleVariantPerProduct,
   MappedProduct,
   Variant,
+  Category,
 } from 'types/product'
 
+import { isEmpty, assignWith } from 'lodash'
+
 export default class ProductMapping {
-  constructor (fillAllRows: boolean = false, categoryBy: string = 'name') {
+  // Set flowtype annotations
+  fillAllRows: boolean;
+  categoryBy: 'name' | 'key' | 'externalId' | 'namedPath';
+  lang: string;
+  multiValDel: string;
+
+  constructor ({
+    fillAllRows = false,
+    categoryBy = 'name',
+    lang = 'en',
+    multiValueDelimiter = ';',
+  }: Object = {}) {
     this.fillAllRows = fillAllRows
     this.categoryBy = categoryBy
-  }
-  run (product: ResolvedProductProjection) {
-    const productWithMergedVariants = ProductMapping._mergeVariants(product)
-    const variantsWithProductInfo = ProductMapping._spreadProductInfoOnvariants(productWithMergedVariants, this.fillAllRows)
-    const a = variantsWithProductInfo.map((variant: SingleVariantPerProduct) => this._mapResolvedTypes(variant))
+    this.lang = lang
+    this.multiValDel = multiValueDelimiter
   }
 
-  static _mergeVariants (product: ResolvedProductProjection): ProductWithSingleVariantArray {
+  run (product: ResolvedProdProj) {
+    const mergedVarProducts = ProductMapping._mergeVariants(product)
+    const variantsWithProductInfo = ProductMapping._spreadProdOnVariants(mergedVarProducts, this.fillAllRows)
+    const a = variantsWithProductInfo.map((variant: SingleVariantPerProduct) => this._mapProperties(variant))
+  }
+
+  static _mergeVariants (product: ResolvedProdProj): ProdWithMergedVariants {
     const variant = [product.masterVariant, ...product.variants]
     const mergedVariants = { ...product, variant }
     delete mergedVariants.masterVariant
@@ -26,39 +43,87 @@ export default class ProductMapping {
     return mergedVariants
   }
 
-  static _spreadProductInfoOnvariants (product: ProductWithSingleVariantArray, fillAllRows: boolean): Array<SingleVariantPerProduct> {
+  static _spreadProdOnVariants (
+    product: ProdWithMergedVariants,
+    fillAllRows: boolean,
+  ): Array<SingleVariantPerProduct> {
     if (fillAllRows)
-      return product.variant.map(eachVariant: Variant => (
-        { ...product, variant: eachVariant }
-      ))
+      return product.variant.map((eachVariant: Variant) => {
+        const newProduct: Object = { ...product, variant: eachVariant }
+        return newProduct
+      })
 
-    const productWithVariants = product.variant.map(eachVariant: Variant => (
+    const productWithVariants: Array<Object> = product.variant.map((
+      eachVariant: Variant,
+    ): SingleVariantPerProduct => (
       { variant: eachVariant }
     ))
     productWithVariants[0] = { ...product, ...productWithVariants[0] }
     return productWithVariants
   }
 
-  _mapResolvedTypes(variantWithProductInfo: SingleVariantPerProduct): MappedProduct {
-    const mappedProduct = Object.assign({}, variantWithProductInfo)
-    Object.keys(variantWithProductInfo).forEach((property: string) => {
+  _mapProperties (product: SingleVariantPerProduct): MappedProduct {
+    return assignWith({}, product, (
+      objVal: Object,
+      value: any,
+      property: string,
+      originalProduct: Object,
+    ) => {
       switch (property) {
         case 'productType':
-          mappedProduct.productType = variantWithProductInfo.productType.name
-          break
+          return value.name
         case 'state':
-          mappedProduct.state = variantWithProductInfo.state.key
-          break
+          return value.key
         case 'taxCategory':
-          mappedProduct.taxCategory = variantWithProductInfo.taxCategory.key || variantWithProductInfo.taxCategory.name
-          break
+          return value.key || value.name
         case 'categories':
-
+          return ProductMapping
+            ._mapCategories(value, this.categoryBy, this.multiValDel, this.lang)
+        case 'categoryOrderHints':
+          if (!isEmpty(value))
+            return Object.keys(value).map((key: string) => (
+              `${key}:${value[key]}`
+            )).join(this.multiValDel)
+          return ''
+        case 'variant':
+          if (!isEmpty(value.attributes)) {
+            /* eslint-disable no-param-reassign */
+            originalProduct.attr = {}
+            value.attributes.forEach((attr) => {
+              originalProduct.attr[attr.name] = attr.value.key || attr.value
+            })
+          }
+          delete value.attributes
+          /* eslint-enable no-param-reassign */
+          return value
+        default:
+          return value
       }
     })
   }
 
-  _mapCategoriesToString (categories: Array<*>): string {
-    return
+  static _mapCategories (
+    categories: Array<Category>,
+    categoryBy: string,
+    multiValDel: string,
+    lang: string,
+  ): string {
+    if (categoryBy === 'name') // name is localized
+      return categories.map(cat => (
+        cat[categoryBy][lang])).join(multiValDel)
+    else if (categoryBy === 'externalId' || categoryBy === 'key')
+      return categories.map(cat => cat[categoryBy]).join(multiValDel)
+    return categories.map(cat => (
+      ProductMapping._retrieveNamedPath(cat, lang))).join(multiValDel)
+  }
+
+  static _retrieveNamedPath (category, lang) {
+    // console.log(category);
+    const getParent = (cat) => {
+      if (!cat.parent)
+        return cat.name[lang]
+      return `${getParent(cat.parent)}>${cat.name[lang]}`
+    }
+    return getParent(category)
   }
 }

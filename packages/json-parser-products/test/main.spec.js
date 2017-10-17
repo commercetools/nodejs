@@ -249,7 +249,7 @@ describe('JSONParserProduct', () => {
       })
     })
 
-    describe('::_resolveCategories', () => {
+    fdescribe('::_resolveCategories', () => {
       beforeEach(() => {
         jsonParserProduct._getCategories = jest.fn(() => (
           Promise.resolve([])
@@ -423,7 +423,7 @@ describe('JSONParserProduct', () => {
       })
     })
 
-    fdescribe('::_retrieveNamedPath', () => {
+    describe('::_retrieveNamedPath', () => {
       const child = {
         id: 'child-cat-id',
         name: { en: 'child-cat-name' },
@@ -436,7 +436,7 @@ describe('JSONParserProduct', () => {
         id: 'grand-parent-cat-id',
         name: { en: 'grand-parent-cat-name' } }
 
-      fit('resolves all ancestors for a category', async () => {
+      it('resolves all ancestors for a category', async () => {
         jsonParserProduct._getCategories = jest.fn()
           .mockImplementationOnce(() => Promise.resolve([parent]))
           .mockImplementationOnce(() => Promise.resolve([grandParent]))
