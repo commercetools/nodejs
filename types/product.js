@@ -21,7 +21,6 @@ export type LoggerOptions = {
 }
 
 export type ParserConfigOptions = {
-  batchSize: number;
   categoryBy: string;
   categoryOrderHintBy: string;
   delimiter: string;
@@ -57,10 +56,10 @@ type AssetDimensions = {
   h: number;
 }
 
-type Image = {
+export type Image = {
   url: string;
   dimensions: AssetDimensions;
-  label: string;
+  label?: string;
 }
 
 type Attribute = {
@@ -208,17 +207,33 @@ export type Category = {
   createdAt: string;
   lastModifiedAt: string;
   name: Object;
-  slug: Object;
-  description: Object;
-  ancestors: Array<?Category>;
-  parent?: Category;
-  orderHint: string;
+  slug?: Object;
+  description?: Object;
+  ancestors?: Array<?Category> | Array<?TypeReference>;
+  parent?: Category | TypeReference;
+  orderHint?: string;
   externalId?: string;
   metaTitle?: Object;
   metaDescription?: Object;
   metaKeywords?: Object;
   custom?: CustomField;
-  assets: Array<Asset>
+  assets?: Array<Asset>
+}
+
+export type State = {
+  id: string;
+  version: number;
+  key: string;
+  createdAt: string;
+  lastModifiedAt: string;
+  type: string;
+
+  name: Object;
+  description: Object;
+  initial: boolean;
+  builtin: boolean;
+  roles: Array<?string>;
+  transitions?: Array<TypeReference>
 }
 
 export type ProductProjection = {
@@ -259,6 +274,7 @@ export type ResolvedProdProj = {
   hasStagedChanges: boolean;
   published: boolean;
   taxCategory: TaxCategory;
+  state: State;
   reviewRatingStatistics?: Object;
 }
 

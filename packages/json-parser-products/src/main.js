@@ -1,15 +1,20 @@
 /* @flow */
 import type {
   ApiConfigOptions,
+  Category,
   LoggerOptions,
   ParserConfigOptions,
   ProductProjection,
+  ProductType,
   ResolvedProdProj,
+  State,
+  TaxCategory,
   TypeReference,
 } from 'types/product'
 import type {
   Client,
   ClientRequest,
+  SuccessResult,
 } from 'types/sdk'
 
 import { createClient } from '@commercetools/sdk-client'
@@ -26,6 +31,7 @@ import highland from 'highland'
 import Promise from 'bluebird'
 import { flatten } from 'flat'
 import { memoize } from 'lodash'
+import ProductMapping from './mappings'
 import pkg from '../package.json'
 
 export default class JSONParserProduct {
@@ -38,6 +44,7 @@ export default class JSONParserProduct {
   logger: LoggerOptions;
   fetchReferences: Function;
   _resolveReferences: Function;
+  _productMapping: Object;
 
   constructor (
     apiConfig: ApiConfigOptions,
@@ -58,7 +65,6 @@ export default class JSONParserProduct {
     })
 
     const defaultConfig = {
-      batchSize: 5,
       categoryBy: 'name', // key, externalId or namedPath supported
       categoryOrderHintBy: 'name', // key, externalId or name supported
       delimiter: ',',
@@ -78,6 +84,14 @@ export default class JSONParserProduct {
     }
     this.categoriesCache = {}
     this.accessToken = accessToken
+
+    const mappingParams = {
+      fillAllRows: this.parserConfig.fillAllRows,
+      categoryBy: this.parserConfig.categoryBy,
+      lang: this.parserConfig.lang,
+      multiValueDelimiter: this.parserConfig.multiValueDelimiter,
+    }
+    this._productMapping = new ProductMapping(mappingParams)
   }
 
   // `any` is used because flow does not seem to know the difference between
@@ -96,21 +110,16 @@ export default class JSONParserProduct {
       .splitBy('\n')
       // convert the JSON object strings to JS objects
       .map(JSON.parse)
-      // handle a fixed amount of products concurrently
-      .batch(this.parserConfig.batchSize)
-      .flatMap(products => highland(this._resolveReferences(products)))
-      .doto((data) => {
-        productCount += data.length
+      .flatMap((product: ProductProjection) => (
+        highland(this._resolveReferences(product))))
+      .doto(() => {
+        productCount += 1
         this.logger.debug(`Resolved references of ${productCount} products`)
       })
       // prepare the product objects for csv format
-      .map(products => this._formatProducts(products))
+      .map((product: ResolvedProdProj) => this._productMapping.run(product))
       .flatten()
-      // remove price information from each product
-      .map(JSONParserProduct._removePrices)
-      .map(flatten)
-      .map(JSONParserProduct._removeEmptyObjects)
-      .stopOnError((err) => {
+      .stopOnError((err: Error) => {
         this.logger.error(err)
         output.emit('error', err)
       })
@@ -122,42 +131,38 @@ export default class JSONParserProduct {
   }
 
   _resolveReferences (
-    productsArray: Array<ProductProjection>,
-    ): Array<ResolvedProdProj> {
+    product: ProductProjection,
+    ): ResolvedProdProj {
     // ReferenceTypes that need to be resolved:
-    // PRODUCT LEVEL
     // **ProductType
     // **Categories [array]
     // **TaxCategory
     // **State
     // **CategoryOrderHints
 
-    return Promise.map(productsArray,
-      (product: ProductProjection): Array<ResolvedProdProj> => (
-        Promise.all([
-          this._resolveProductType(product.productType),
-          this._resolveTaxCategory(product.taxCategory),
-          this._resolveState(product.state),
-          this._resolveCategories(product.categories),
-          this._resolveCategoryOrderHints(product.categoryOrderHints),
-        ])
-        .then(([
-          productType,
-          taxCategory,
-          state,
-          categories,
-          categoryOrderHints,
-        ]: Array<Object>): ResolvedProdProj => (
-          {
-            ...product,
-            ...productType,
-            ...taxCategory,
-            ...state,
-            ...categories,
-            ...categoryOrderHints,
-          }
-        ))
-      ))
+    return Promise.all([
+      this._resolveProductType(product.productType),
+      this._resolveTaxCategory(product.taxCategory),
+      this._resolveState(product.state),
+      this._resolveCategories(product.categories),
+      this._resolveCategoryOrderHints(product.categoryOrderHints),
+    ])
+    .then(([
+      productType,
+      taxCategory,
+      state,
+      categories,
+      categoryOrderHints,
+    ]: Array<Object>): ResolvedProdProj => (
+      {
+        ...product,
+        ...productType,
+        ...taxCategory,
+        ...state,
+        ...categories,
+        ...categoryOrderHints,
+      }
+    ))
   }
 
   _resolveProductType (productTypeReference: TypeReference): Object {
@@ -167,7 +172,7 @@ export default class JSONParserProduct {
     const productTypeService = this._createService('productTypes')
     const uri = productTypeService.byId(productTypeReference.id).build()
     return this.fetchReferences(uri)
-      .then(({ body }) => (
+      .then(({ body }: SuccessResult): { productType: ProductType } => (
         { productType: body }
       ))
   }
@@ -179,7 +184,7 @@ export default class JSONParserProduct {
     const taxCategoryService = this._createService('taxCategories')
     const uri = taxCategoryService.byId(taxCategoryReference.id).build()
     return this.fetchReferences(uri)
-      .then(({ body }) => (
+      .then(({ body }: SuccessResult): { taxCategory: TaxCategory } => (
         { taxCategory: body }
       ))
   }
@@ -191,35 +196,28 @@ export default class JSONParserProduct {
     const stateService = this._createService('states')
     const uri = stateService.byId(stateReference.id).build()
     return this.fetchReferences(uri)
-      .then(({ body }) => (
+      .then(({ body }: SuccessResult): { state: State } => (
         { state: body }
       ))
   }
 
-  _resolveCategories (categoriesReference: Array<TypeReference>): Object {
+  _resolveCategories (categoriesReference: Array<TypeReference>): Array<Category> | {} {
     if (!categoriesReference || !categoriesReference.length)
       return {}
 
-    const catIdentifier = this.parserConfig.categoryBy
-    const lang = this.parserConfig.language
-    const multiValueDelimiter = this.parserConfig.multiValueDelimiter
     const categoryIds = categoriesReference.map(
       (category: TypeReference): string => category.id)
     return this._getCategories(categoryIds)
-      .then(resolvedCategories => (
-        Promise.map(resolvedCategories, (category) => {
-          if (this.parserConfig.categoryBy === 'namedPath')
-            return this._retrieveNamedPath(category)
-
-          return catIdentifier === 'name'
-            ? category[catIdentifier][lang]
-            : category[catIdentifier]
-        })
-        .then((categoriesArray) => {
-          const categories = categoriesArray.join(multiValueDelimiter) // Todo separate methods
+      .then((categories: Array<Category>): { categories: Array<Category> } => {
+        if (this.parserConfig.categoryBy !== 'namedPath')
           return { categories }
-        })
-      ))
+        return Promise.map(categories, (category: Category): Array<Category> => (
+          this._resolveAncestors(category)
+        ))
+        .then((categoriesWithParents: Array<Category>): Object => (
+          { categories: categoriesWithParents }
+        ))
+      })
   }
 
   _resolveCategoryOrderHints (categoryOrderHintsReference: Object): Object {
@@ -233,9 +231,9 @@ export default class JSONParserProduct {
     const lang = this.parserConfig.language
     const categoryIds = Object.keys(categoryOrderHintsReference)
     return this._getCategories(categoryIds)
-      .then((resolvedCategories) => {
+      .then((resolvedCategories: Array<Category>): Object => {
         const categoryOrderHints = {}
-        resolvedCategories.forEach((category) => {
+        resolvedCategories.forEach((category: Category) => {
           const catRef = catIdentifier === 'name'
             ? category[catIdentifier][lang]
             : category[catIdentifier]
@@ -245,25 +243,16 @@ export default class JSONParserProduct {
       })
   }
 
-  _retrieveNamedPath (category) {
-    return new Promise((resolve) => {
-      const lang = this.parserConfig.language
-      const categoryTree = []
+  _resolveAncestors (category: Category): Promise<Category> {
+    // define recursive function
+    const getParent = async (cat: Category): Promise<Category> => {
+      if (!cat.parent)
+        return cat
 
-      // define recursive function
-      const getParent = (cat) => {
-        categoryTree.unshift(cat.name[lang])
-        if (!cat.parent)
-          return resolve(categoryTree.join('>'))
-
-        console.log('test')
-        return this._getCategories([cat.parent.id])
-          .then(resolvedCategory => (
-            getParent(resolvedCategory[0])
-          ))
-      }
-      getParent(category)
-    })
+      const resolvedCategory = await this._getCategories([cat.parent.id])
+      return { ...cat, parent: await getParent(resolvedCategory[0]) }
+    }
+    return getParent(category)
   }
 
   // This method decides if to get the categories from cache or API
@@ -283,8 +272,8 @@ export default class JSONParserProduct {
     const categoriesService = this._createService('categories')
     const uri = categoriesService.where(predicate).build()
     return this.fetchReferences(uri)
-      .then(({ body: { results } }) => {
-        results.forEach((result) => {
+      .then(({ body: { results } }: SuccessResult): Array<Category> => {
+        results.forEach((result: Category) => {
           cachedCategories.push(result)
           this.categoriesCache[result.id] = result
         })
@@ -299,90 +288,10 @@ export default class JSONParserProduct {
 
     return service
   }
-
-  // Modify the structure of the product object to be ready for output
-  _formatProducts (products) {
-    const { multiValueDelimiter, fillAllRows } = this.parserConfig
-    return products.map(product => (
-      JSONParserProduct._mergeVariants(product)
-    )).map(product => (
-      JSONParserProduct._stringFromImages(product, multiValueDelimiter)
-    )).map(product => (
-      JSONParserProduct._variantToProduct(product, fillAllRows)
-    ))
-
-    // TODO: HANDLE ATTRIBUTES
-  }
-
-  // This method merges the masterVariants and other variant into a single array
-  static _mergeVariants (product) {
-    const merged = Object.assign({}, product)
-    merged.variant = [product.masterVariant, ...product.variants]
-    delete merged.masterVariant
-    delete merged.variants
-    return merged
-  }
-
-  // This method returns a stringified version of variant images
-  static _stringFromImages (product, multiValueDelimiter) {
-    const variantArray = product.variant.map((eachVariant) => {
-      let images
-      if (eachVariant.images)
-        images = eachVariant.images.reduce((acc, image) => {
-          const { url, dimensions, label = '' } = image
-          const imageString = `${url}|${dimensions.w}|${dimensions.h}|${label}`
-          if (!acc) return imageString
-          return `${acc}${multiValueDelimiter}${imageString}`
-        }, '')
-      return { ...eachVariant, images }
-    })
-    return { ...product, variant: variantArray }
-  }
-
-  // This method returns one product object per variant in an array
-  // This is necessary to bring all variants to the object root level
-  // This also duplicates the object properties across all objects if
-  // necessary in order to fill all rows
-  static _variantToProduct (product, fillAllRows) {
-    if (fillAllRows)
-      return product.variant.map(eachVariant => (
-        { ...product, variant: eachVariant }
-      ))
-
-    const productWithVariants = product.variant.map(eachVariant => (
-      { variant: eachVariant }
-    ))
-    productWithVariants[0] = { ...product, ...productWithVariants[0] }
-    return productWithVariants
-  }
-
-  // This method removes price data from product variants
-  static _removePrices (product) {
-    if (!product.variant || !product.variant.prices) return product
-    const newProduct = Object.assign({}, product)
-    delete newProduct.variant.prices
-    return newProduct
-  }
-
-  // This method removes empty objects from flattened price objects
-  // This is necessary so the empty prices son't show up as [object Object]
-  static _removeEmptyObjects (product) {
-    const modifiedProduct = Object.assign({}, product)
-    const keys = Object.keys(product)
-    keys.forEach((key) => {
-      if (
-        product[key] !== null
-        && typeof product[key] === 'object'
-        && !Object.keys(product[key]).length
-      )
-        modifiedProduct[key] = ''
-    })
-    return modifiedProduct
-  }
 }
 
 JSONParserProduct.prototype.fetchReferences = memoize(
-  function _fetchReferences (uri: string): Promise<Object> {
+  function _fetchReferences (uri: string): Promise<SuccessResult> {
     const request: ClientRequest = {
       uri,
       method: 'GET',

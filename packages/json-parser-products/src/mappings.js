@@ -6,9 +6,11 @@ import type {
   MappedProduct,
   Variant,
   Category,
+  Image,
 } from 'types/product'
 
-import { isEmpty, assignWith } from 'lodash'
+import { flatten } from 'flat'
+import { isEmpty, reduce, pickBy } from 'lodash'
 
 export default class ProductMapping {
   // Set flowtype annotations
@@ -31,8 +33,11 @@ export default class ProductMapping {
 
   run (product: ResolvedProdProj) {
     const mergedVarProducts = ProductMapping._mergeVariants(product)
-    const variantsWithProductInfo = ProductMapping._spreadProdOnVariants(mergedVarProducts, this.fillAllRows)
+    const variantsWithProductInfo = ProductMapping._spreadProdOnVariants(
+      mergedVarProducts, this.fillAllRows)
     const a = variantsWithProductInfo.map((variant: SingleVariantPerProduct) => this._mapProperties(variant))
+    const flatProducts = a.map(flatten)
+    return flatProducts
   }
 
   static _mergeVariants (product: ResolvedProdProj): ProdWithMergedVariants {
@@ -48,10 +53,9 @@ export default class ProductMapping {
     fillAllRows: boolean,
   ): Array<SingleVariantPerProduct> {
     if (fillAllRows)
-      return product.variant.map((eachVariant: Variant) => {
-        const newProduct: Object = { ...product, variant: eachVariant }
-        return newProduct
-      })
+      return product.variant.map((eachVariant: Variant): Object => (
+        { ...product, variant: eachVariant }
+      ))
 
     const productWithVariants: Array<Object> = product.variant.map((
       eachVariant: Variant,
@@ -63,43 +67,67 @@ export default class ProductMapping {
   }
 
   _mapProperties (product: SingleVariantPerProduct): MappedProduct {
-    return assignWith({}, product, (
-      objVal: Object,
+    return reduce(product, (
+      acc: Object,
       value: any,
       property: string,
-      originalProduct: Object,
-    ) => {
+    ): Object => {
       switch (property) {
-        case 'productType':
-          return value.name
-        case 'state':
-          return value.key
-        case 'taxCategory':
-          return value.key || value.name
-        case 'categories':
-          return ProductMapping
-            ._mapCategories(value, this.categoryBy, this.multiValDel, this.lang)
-        case 'categoryOrderHints':
+        case 'productType': {
+          acc[property] = value.name
+          break
+        }
+        case 'state': {
+          acc[property] = value.key
+          break
+        }
+        case 'taxCategory': {
+          acc[property] = value.key || value.name
+          break
+        }
+        case 'categories': {
+          acc[property] = ProductMapping._mapCategories(
+            value, this.categoryBy, this.multiValDel, this.lang)
+          break
+        }
+        case 'categoryOrderHints': {
           if (!isEmpty(value))
-            return Object.keys(value).map((key: string) => (
+            acc[property] = Object.keys(value).map((key: string): string => (
               `${key}:${value[key]}`
             )).join(this.multiValDel)
-          return ''
-        case 'variant':
+          break
+        }
+        case 'searchKeywords': {
+          // TODO: Handle the searchKeywords
+          break
+        }
+        case 'variant': {
           if (!isEmpty(value.attributes)) {
-            /* eslint-disable no-param-reassign */
-            originalProduct.attr = {}
-            value.attributes.forEach((attr) => {
-              originalProduct.attr[attr.name] = attr.value.key || attr.value
+            acc.attr = {}
+            value.attributes.forEach((attr: Object) => {
+              acc.attr[attr.name] = attr.value.key || attr.value
             })
           }
-          delete value.attributes
-          /* eslint-enable no-param-reassign */
-          return value
-        default:
-          return value
+          let images
+          if (!isEmpty(value.images))
+            images = value.images.map((image: Image): string => {
+              const { url, dimensions, label } = image
+              let imageString = `${url}|${dimensions.w}|${dimensions.h}`
+              imageString += label ? `|${label}` : ''
+              return imageString
+            }).join(';')
+
+          const { id, sku, key } = value
+          acc[property] = pickBy({ id, sku, key, images }, Boolean)
+          break
+        }
+        default: {
+          if (!isEmpty(property))
+            acc[property] = value
+        }
       }
-    })
+      return acc
+    }, {})
   }
 
   static _mapCategories (
@@ -109,17 +137,17 @@ export default class ProductMapping {
     lang: string,
   ): string {
     if (categoryBy === 'name') // name is localized
-      return categories.map(cat => (
+      return categories.map((cat: Category): string => (
         cat[categoryBy][lang])).join(multiValDel)
     else if (categoryBy === 'externalId' || categoryBy === 'key')
-      return categories.map(cat => cat[categoryBy]).join(multiValDel)
-    return categories.map(cat => (
+      return categories.map((cat: Category): string => (
+        cat[categoryBy])).join(multiValDel)
+    return categories.map((cat: Category): string => (
       ProductMapping._retrieveNamedPath(cat, lang))).join(multiValDel)
   }
 
-  static _retrieveNamedPath (category, lang) {
-    // console.log(category);
-    const getParent = (cat) => {
+  static _retrieveNamedPath (category: Category, lang: string): string {
+    const getParent = (cat: Category): string => {
       if (!cat.parent)
         return cat.name[lang]
       return `${getParent(cat.parent)}>${cat.name[lang]}`

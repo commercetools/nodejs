@@ -10,18 +10,30 @@ describe('::ProductMapping', () => {
     expect(ProductMapping).toBeDefined()
   })
 
-  xdescribe('::constructor', () => {
+  describe('::constructor', () => {
     it('should be defined', () => {
       expect(productMapping.constructor).toBeDefined()
     })
 
     it('should initialize with default values', () => {
       expect(productMapping.fillAllRows).toBe(false)
+      expect(productMapping.categoryBy).toBe('name')
+      expect(productMapping.lang).toBe('en')
+      expect(productMapping.multiValDel).toBe(';')
     })
 
     it('should initialize with passed in values', () => {
-      productMapping = new ProductMapping(true)
+      const args = {
+        fillAllRows: true,
+        categoryBy: 'namedPath',
+        lang: 'it',
+        multiValueDelimiter: '|',
+      }
+      productMapping = new ProductMapping(args)
       expect(productMapping.fillAllRows).toBe(true)
+      expect(productMapping.categoryBy).toBe('namedPath')
+      expect(productMapping.lang).toBe('it')
+      expect(productMapping.multiValDel).toBe('|')
     })
   })
 
@@ -39,7 +51,10 @@ describe('::ProductMapping', () => {
           en: 'Phone cover',
           de: 'Handyhülle',
         },
-        categories: [{ name: 'res-cat-name-1' }, { name: 'res-cat-name-2' }],
+        categories: [
+          { name: { en: 'res-cat-name-1' } },
+          { name: { en: 'res-cat-name-2' } },
+        ],
         categoryOrderHints: {
           'res-cat-name-1': '0.015',
           'res-cat-name-2': '0.987',
@@ -99,7 +114,6 @@ describe('::ProductMapping', () => {
               },
             },
           ],
-          assets: [],
         },
         variants: [{
           id: 2,
@@ -151,7 +165,6 @@ describe('::ProductMapping', () => {
               },
             },
           ],
-          assets: [],
         }],
         searchKeywords: {},
         hasStagedChanges: false,
@@ -176,8 +189,9 @@ describe('::ProductMapping', () => {
         taxCategory: 'resolved-tax-key',
         published: false,
         hasStagedChanges: false,
+        createdAt: '2017-01-06T10:54:51.395Z',
+        lastModifiedAt: '2017-01-06T10:54:51.395Z',
         'variant.id': 1,
-        'variant.key': '',
         'variant.sku': 'A0E200000001YKI',
         'variant.images': oneLineTrim`
           https://example.com/foobar/commer.jpg|3|4;
@@ -186,9 +200,9 @@ describe('::ProductMapping', () => {
         'attr.color': 'white',
         'attr.colorFreeDefinition.en': 'black-white',
         'attr.colorFreeDefinition.de': 'schwarz-weiß',
+        'attr.designer': 'michaelkors',
       }, {
         'variant.id': 2,
-        'variant.key': '',
         'variant.sku': 'A0E200001YKI123',
         'variant.images': oneLineTrim`
           https://example.com/foobar/commer234.jpg|3|3;
@@ -197,6 +211,7 @@ describe('::ProductMapping', () => {
         'attr.color': 'white',
         'attr.colorFreeDefinition.en': 'black-white',
         'attr.colorFreeDefinition.de': 'schwarz-weiß',
+        'attr.designer': 'michaelkors',
       }]
 
 
@@ -291,29 +306,10 @@ describe('::ProductMapping', () => {
         variant: {
           id: 1,
           sku: 'A0E200000001YKI',
-          images: [
-            {
-              url: 'https://example.com/foobar/commer.jpg',
-              dimensions: {
-                w: 3,
-                h: 4,
-              },
-            },
-            {
-              url: 'https://example-2.com/demo/tools.jpg',
-              dimensions: {
-                w: 1,
-                h: 5,
-              },
-              label: 'image-label',
-            },
-          ],
-          assets: [],
         },
         state: {
           key: 'my-resolved-state',
         },
-        searchKeywords: {},
         hasStagedChanges: false,
         published: false,
         taxCategory: {
@@ -340,27 +336,8 @@ describe('::ProductMapping', () => {
         variant: {
           id: 1,
           sku: 'A0E200000001YKI',
-          images: [
-            {
-              url: 'https://example.com/foobar/commer.jpg',
-              dimensions: {
-                w: 3,
-                h: 4,
-              },
-            },
-            {
-              url: 'https://example-2.com/demo/tools.jpg',
-              dimensions: {
-                w: 1,
-                h: 5,
-              },
-              label: 'image-label',
-            },
-          ],
-          assets: [],
         },
         state: 'my-resolved-state',
-        searchKeywords: {},
         hasStagedChanges: false,
         published: false,
         taxCategory: 'resolved-tax-key',
@@ -377,23 +354,6 @@ describe('::ProductMapping', () => {
         variant: {
           id: 1,
           sku: 'A0E200000001YKI',
-          images: [
-            {
-              url: 'https://example.com/foobar/commer.jpg',
-              dimensions: {
-                w: 3,
-                h: 4,
-              },
-            },
-            {
-              url: 'https://example-2.com/demo/tools.jpg',
-              dimensions: {
-                w: 1,
-                h: 5,
-              },
-              label: 'image-label',
-            },
-          ],
           attributes: [
             {
               name: 'article',
@@ -425,15 +385,36 @@ describe('::ProductMapping', () => {
               },
             },
           ],
-          assets: [],
         },
         state: {
           key: 'my-resolved-state',
         },
-        searchKeywords: {},
         hasStagedChanges: false,
       }
       const expected = {
+        id: '12345ab-id',
+        key: 'product-key',
+        variant: {
+          id: 1,
+          sku: 'A0E200000001YKI',
+        },
+        attr: {
+          article: 'sample 089 WHT',
+          designer: 'michaelkors',
+          color: 'white',
+          colorFreeDefinition: {
+            en: 'black-white',
+            de: 'schwarz-weiß',
+          },
+        },
+        state: 'my-resolved-state',
+        hasStagedChanges: false,
+      }
+      expect(productMapping._mapProperties(sample)).toEqual(expected)
+    })
+
+    it('converts variant image array to strings', () => {
+      const sample = {
         id: '12345ab-id',
         key: 'product-key',
         variant: {
@@ -456,19 +437,41 @@ describe('::ProductMapping', () => {
               label: 'image-label',
             },
           ],
-          assets: [],
         },
-        attr: {
-          article: 'sample 089 WHT',
-          designer: 'michaelkors',
-          color: 'white',
-          colorFreeDefinition: {
-            en: 'black-white',
-            de: 'schwarz-weiß',
-          },
+        state: {
+          key: 'my-resolved-state',
+        },
+        hasStagedChanges: false,
+      }
+      const expected = {
+        id: '12345ab-id',
+        key: 'product-key',
+        variant: {
+          id: 1,
+          sku: 'A0E200000001YKI',
+          images: oneLineTrim`
+            https://example.com/foobar/commer.jpg|3|4;
+            https://example-2.com/demo/tools.jpg|1|5|image-label`,
         },
         state: 'my-resolved-state',
-        searchKeywords: {},
+        hasStagedChanges: false,
+      }
+      expect(productMapping._mapProperties(sample)).toEqual(expected)
+    })
+
+    it('support standard and whiteSpace `searchKeywords` ', () => {
+      const sample = {
+        id: '12345ab-id',
+        key: 'product-key',
+        state: {
+          key: 'my-resolved-state',
+        },
+        hasStagedChanges: false,
+      }
+      const expected = {
+        id: '12345ab-id',
+        key: 'product-key',
+        state: 'my-resolved-state',
         hasStagedChanges: false,
       }
       expect(productMapping._mapProperties(sample)).toEqual(expected)
