@@ -101,12 +101,24 @@ export default class ProductMapping {
           // TODO: Handle the searchKeywords
           break
         }
+        case 'version': {
+          // Remove version number
+          break
+        }
         case 'variant': {
           if (!isEmpty(value.attributes)) {
             acc.attr = {}
-            value.attributes.forEach((attr: Object) => {
-              acc.attr[attr.name] = attr.value.key || attr.value
+
+            value.attributes.forEach((attribute: Object) => {
+              acc.attr[attribute.name] = attribute.value.key || attribute.value
             })
+
+            // check if product is masterVariant
+            if (product.productType)
+              product.productType.attributes.forEach((attribute: Object) => {
+                if (!acc.attr[attribute.name])
+                  acc.attr[attribute.name] = ''
+              })
           }
           let images
           if (!isEmpty(value.images))

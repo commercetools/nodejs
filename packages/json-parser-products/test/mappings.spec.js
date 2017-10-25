@@ -37,7 +37,7 @@ describe('::ProductMapping', () => {
     })
   })
 
-  xdescribe('::run', () => {
+  describe('::run', () => {
     it('should accept a product and return a formatted csv string', () => {
       const sample = {
         id: '12345ab-id',
@@ -45,7 +45,14 @@ describe('::ProductMapping', () => {
         version: 1,
         productType: {
           name: 'resolved-product-type',
-          attributes: [{}],
+          attributes: [
+            { name: 'article' },
+            { name: 'designer' },
+            { name: 'color' },
+            { name: 'colorFreeDefinition' },
+            { name: 'addedAttr' },
+            { name: 'anotherAddedAttr' },
+          ],
         },
         name: {
           en: 'Phone cover',
@@ -196,6 +203,8 @@ describe('::ProductMapping', () => {
         'variant.images': oneLineTrim`
           https://example.com/foobar/commer.jpg|3|4;
           https://example-2.com/demo/tools.jpg|1|5|image-label`,
+        'attr.addedAttr': '',
+        'attr.anotherAddedAttr': '',
         'attr.article': 'sample 089 WHT',
         'attr.color': 'white',
         'attr.colorFreeDefinition.en': 'black-white',
@@ -213,7 +222,6 @@ describe('::ProductMapping', () => {
         'attr.colorFreeDefinition.de': 'schwarz-weiß',
         'attr.designer': 'michaelkors',
       }]
-
 
       expect(productMapping.run(sample)).toEqual(expected)
     })
@@ -321,7 +329,6 @@ describe('::ProductMapping', () => {
       const expected = {
         id: '12345ab-id',
         key: 'product-key',
-        version: 1,
         productType: 'resolved-product-type',
         name: {
           en: 'Phone cover',
@@ -347,10 +354,21 @@ describe('::ProductMapping', () => {
       expect(productMapping._mapProperties(sample)).toEqual(expected)
     })
 
-    it('flattens attributes to top level', () => {
+    it('add all attributes from productType to top level', () => {
       const sample = {
         id: '12345ab-id',
         key: 'product-key',
+        productType: {
+          name: 'resolved-product-type',
+          attributes: [
+            { name: 'article' },
+            { name: 'designer' },
+            { name: 'color' },
+            { name: 'colorFreeDefinition' },
+            { name: 'addedAttr' },
+            { name: 'anotherAddedAttr' },
+          ],
+        },
         variant: {
           id: 1,
           sku: 'A0E200000001YKI',
@@ -394,6 +412,7 @@ describe('::ProductMapping', () => {
       const expected = {
         id: '12345ab-id',
         key: 'product-key',
+        productType: 'resolved-product-type',
         variant: {
           id: 1,
           sku: 'A0E200000001YKI',
@@ -406,6 +425,8 @@ describe('::ProductMapping', () => {
             en: 'black-white',
             de: 'schwarz-weiß',
           },
+          addedAttr: '',
+          anotherAddedAttr: '',
         },
         state: 'my-resolved-state',
         hasStagedChanges: false,
@@ -453,24 +474,6 @@ describe('::ProductMapping', () => {
             https://example.com/foobar/commer.jpg|3|4;
             https://example-2.com/demo/tools.jpg|1|5|image-label`,
         },
-        state: 'my-resolved-state',
-        hasStagedChanges: false,
-      }
-      expect(productMapping._mapProperties(sample)).toEqual(expected)
-    })
-
-    it('support standard and whiteSpace `searchKeywords` ', () => {
-      const sample = {
-        id: '12345ab-id',
-        key: 'product-key',
-        state: {
-          key: 'my-resolved-state',
-        },
-        hasStagedChanges: false,
-      }
-      const expected = {
-        id: '12345ab-id',
-        key: 'product-key',
         state: 'my-resolved-state',
         hasStagedChanges: false,
       }

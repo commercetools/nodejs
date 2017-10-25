@@ -37,15 +37,18 @@
     "@commercetools/sdk-middleware-auth": "^3.4.0",
     "@commercetools/sdk-middleware-http": "^2.2.0",
     "@commercetools/sdk-middleware-user-agent": "^1.2.0",
+    "archiver": "^2.1.0",
     "bluebird": "^3.5.0",
-    "fast-csv": "^2.4.1",
     "flat": "^4.0.0",
     "highland": "^2.11.1",
+    "json2csv": "^3.11.5",
     "lodash": "^4.17.4",
+    "tmp": "0.0.33",
     "yargs": "^9.0.1"
   },
   "devDependencies": {
     "common-tags": "^1.4.0",
-    "streamtest": "^1.2.2"
+    "streamtest": "^1.2.2",
+    "unzip": "^0.1.11"
   }
 }

@@ -26,10 +26,8 @@ import {
 import {
   createUserAgentMiddleware,
 } from '@commercetools/sdk-middleware-user-agent'
-import csv from 'fast-csv'
 import highland from 'highland'
 import Promise from 'bluebird'
-import { flatten } from 'flat'
 import { memoize } from 'lodash'
 import ProductMapping from './mappings'
 import pkg from '../package.json'
@@ -69,7 +67,6 @@ export default class JSONParserProduct {
       categoryOrderHintBy: 'name', // key, externalId or name supported
       delimiter: ',',
       fillAllRows: false,
-      headers: true,
       language: 'en',
       multiValueDelimiter: ';',
     }
@@ -83,6 +80,7 @@ export default class JSONParserProduct {
       ...logger,
     }
     this.categoriesCache = {}
+    this.attributes = {}
     this.accessToken = accessToken
 
     const mappingParams = {
@@ -94,18 +92,21 @@ export default class JSONParserProduct {
     this._productMapping = new ProductMapping(mappingParams)
   }
 
-  // `any` is used because flow does not seem to know the difference between
-  // a buffer and a stream! When it does, life would be easier
+  run (input, output) {
+    const productStream = this.parse(input)
+
+    if (this.parserConfig.headers)
+      this._writeToSingleFile(productStream, output, this.parserConfig.headers)
+    else
+      this._writeToManyFiles(productStream, output)
+  }
+
   parse (input: stream$Readable, output: stream$Writable) {
     this.logger.info('Starting conversion')
     let productCount = 0
     input.setEncoding('utf8') // TODO: Move to CLI
 
-    const csvStream = csv.createWriteStream({
-      headers: this.parserConfig.headers,
-    })
-
-    highland(input)
+    return highland(input)
       // parse chunk and split into JSON object strings
       .splitBy('\n')
       // convert the JSON object strings to JS objects
@@ -119,15 +120,13 @@ export default class JSONParserProduct {
       // prepare the product objects for csv format
       .map((product: ResolvedProdProj) => this._productMapping.run(product))
       .flatten()
+      .doto(() => {
+        this.logger.info(`Done with conversion of ${productCount} products`)
+      })
       .stopOnError((err: Error) => {
         this.logger.error(err)
         output.emit('error', err)
       })
-      .doto(() => {
-        this.logger.info(`Done with conversion of ${productCount} products`)
-      })
-      .pipe(csvStream)
-      .pipe(output)
   }
 
   _resolveReferences (
