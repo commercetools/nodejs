@@ -8,11 +8,8 @@ const filesize = require('rollup-plugin-filesize');
 
 const env = process.env.NODE_ENV;
 const version = process.env.npm_package_version;
-const name = process.env.npm_package_name;
 
 const config = {
-  input: 'modules/index.js',
-  name,
   sourcemap: true,
   plugins: [
     commonjs(),
