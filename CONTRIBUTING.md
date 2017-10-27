@@ -37,6 +37,18 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 
 6. Linting and static checks are done by `npm run lint`. We follow lint rules defined in our [eslint-config](https://github.com/commercetools/eslint-config) which is based on [Airbnb eslint config](https://www.npmjs.com/package/eslint-config-airbnb). Static checks are done using [Flow](https://flowtype.org/) and can be included / adopted incrementally. Commiting also runs a git hook to lint the changed files.
 
+## Formatting (Prettier)
+
+We use [prettier](https://github.com/jlongster/prettier) to format our code, so we don't ever have to argue over code-style.
+
+Prettier is integrated into ESLint, so all code is checked. The rules are only enabled when running `yarn run lint` from the command-line.
+The rules are disabled in Atom so we don't get the annoying warnings while developing.
+
+### Setup
+
+Since prettier is integrated into ESLint it should run for the exact same files that are being linted.
+We run prettier as part of ESLint using `eslint-plugin-prettier`. We disable all rules that `prettier` takes care of using `eslint-config-prettier`.
+
 ## Upgrading dependencies
 
 We use [Greenkeeper](https://greenkeeper.io/) to get notified whenever there is a new version of a dependency, in form of a Pull Request. It's recommended to check the changes of the new versions before merging the PR. If necessary the PR should be updated with necessary code changes / migrations.
