@@ -1,8 +1,8 @@
 import {
   buildBaseAttributesActions,
   buildReferenceActions,
-} from '../../src/utils/common-actions'
-import * as diffpatcher from '../../src/utils/diffpatcher'
+} from '../../src/utils/common-actions';
+import * as diffpatcher from '../../src/utils/diffpatcher';
 
 describe('Common actions', () => {
   describe('::buildBaseAttributesActions', () => {
@@ -36,7 +36,7 @@ describe('Common actions', () => {
         key: 'quantityOnStock',
         actionKey: 'quantity',
       },
-    ]
+    ];
 
     it('should build base actions', () => {
       const before = {
@@ -46,7 +46,7 @@ describe('Common actions', () => {
         slug: { en: 'foo' },
         customerNumber: undefined,
         quantityOnStock: 1,
-      }
+      };
       const now = {
         name: { en: 'Foo1', de: 'Foo2' },
         description: { en: 'foo bar' },
@@ -54,23 +54,23 @@ describe('Common actions', () => {
         slug: { en: 'foo' },
         customerNumber: null,
         quantityOnStock: 0,
-      }
+      };
 
       const actions = buildBaseAttributesActions({
         actions: testActions,
         diff: diffpatcher.diff(before, now),
         oldObj: before,
         newObj: now,
-      })
+      });
 
       expect(actions).toEqual([
         { action: 'changeName', name: now.name },
         { action: 'setDescription', description: now.description },
         { action: 'setExternalId' },
         { action: 'changeQuantity', quantity: now.quantityOnStock },
-      ])
-    })
-  })
+      ]);
+    });
+  });
 
   describe('::buildReferenceActions', () => {
     const testActions = [
@@ -79,18 +79,18 @@ describe('Common actions', () => {
       { action: 'setSupplyChannel', key: 'supplyChannel' },
       { action: 'setProductType', key: 'productType' },
       { action: 'transitionState', key: 'state' },
-    ]
+    ];
 
     describe('without expanded references', () => {
       describe('taxCategory', () => {
-        let actions
+        let actions;
         const before = {
           taxCategory: { id: 'tc-1', typeId: 'tax-category' },
-        }
+        };
         const now = {
           // id changed
           taxCategory: { id: 'tc-2', typeId: 'tax-category' },
-        }
+        };
 
         beforeEach(() => {
           actions = buildReferenceActions({
@@ -98,25 +98,26 @@ describe('Common actions', () => {
             diff: diffpatcher.diff(before, now),
             oldObj: before,
             newObj: now,
-          })
-        })
+          });
+        });
 
         it('should build reference action', () => {
-          expect(actions).toContainEqual(
-            { action: 'setTaxCategory', taxCategory: now.taxCategory },
-          )
-        })
-      })
+          expect(actions).toContainEqual({
+            action: 'setTaxCategory',
+            taxCategory: now.taxCategory,
+          });
+        });
+      });
 
       describe('customerGroup', () => {
-        let actions
+        let actions;
         const before = {
           customerGroup: undefined,
-        }
+        };
         const now = {
           // new ref
           customerGroup: { id: 'cg-1', typeId: 'customer-group' },
-        }
+        };
 
         beforeEach(() => {
           actions = buildReferenceActions({
@@ -124,25 +125,26 @@ describe('Common actions', () => {
             diff: diffpatcher.diff(before, now),
             oldObj: before,
             newObj: now,
-          })
-        })
+          });
+        });
 
         it('should build reference action', () => {
-          expect(actions).toContainEqual(
-            { action: 'setCustomerGroup', customerGroup: now.customerGroup },
-          )
-        })
-      })
+          expect(actions).toContainEqual({
+            action: 'setCustomerGroup',
+            customerGroup: now.customerGroup,
+          });
+        });
+      });
 
       describe('supplyChannel', () => {
-        let actions
+        let actions;
         const before = {
           supplyChannel: { id: 'sc-1', typeId: 'channel' },
-        }
+        };
         const now = {
           // unset
           supplyChannel: null,
-        }
+        };
 
         beforeEach(() => {
           actions = buildReferenceActions({
@@ -150,58 +152,60 @@ describe('Common actions', () => {
             diff: diffpatcher.diff(before, now),
             oldObj: before,
             newObj: now,
-          })
-        })
+          });
+        });
 
         it('should build reference action', () => {
-          expect(actions).toContainEqual(
-            { action: 'setSupplyChannel' },
-          )
-        })
-      })
+          expect(actions).toContainEqual({ action: 'setSupplyChannel' });
+        });
+      });
 
       describe('productType', () => {
-        let actions
+        let actions;
         const before = {
           productType: {
-            id: 'pt-1', typeId: 'product-type', obj: { id: 'pt-1' },
+            id: 'pt-1',
+            typeId: 'product-type',
+            obj: { id: 'pt-1' },
           },
-        }
+        };
         const now = {
           // ignore update
           productType: {
-            id: 'pt-1', typeId: 'product-type',
+            id: 'pt-1',
+            typeId: 'product-type',
           },
-        }
+        };
         beforeEach(() => {
           actions = buildReferenceActions({
             actions: testActions,
             diff: diffpatcher.diff(before, now),
             oldObj: before,
             newObj: now,
-          })
-        })
+          });
+        });
 
         it('should not build reference action', () => {
-          expect(actions).not.toContainEqual(
-            { action: 'productType' },
-          )
-        })
-      })
+          expect(actions).not.toContainEqual({ action: 'productType' });
+        });
+      });
 
       describe('state', () => {
-        let actions
+        let actions;
         const before = {
           state: {
-            id: 's-1', typeId: 'state', obj: { id: 's-1' },
+            id: 's-1',
+            typeId: 'state',
+            obj: { id: 's-1' },
           },
-        }
+        };
         const now = {
           // new ref: transition state
           state: {
-            id: 's-2', typeId: 'state',
+            id: 's-2',
+            typeId: 'state',
           },
-        }
+        };
 
         beforeEach(() => {
           actions = buildReferenceActions({
@@ -209,31 +213,36 @@ describe('Common actions', () => {
             diff: diffpatcher.diff(before, now),
             oldObj: before,
             newObj: now,
-          })
-        })
+          });
+        });
 
         it('should build reference action', () => {
-          expect(actions).toContainEqual(
-            { action: 'transitionState', state: now.state },
-          )
-        })
-      })
-    })
+          expect(actions).toContainEqual({
+            action: 'transitionState',
+            state: now.state,
+          });
+        });
+      });
+    });
 
     describe('with expanded references', () => {
       describe('state', () => {
-        let actions
+        let actions;
         const before = {
           state: {
-            id: 's-1', typeId: 'state', obj: { id: 's-1' },
+            id: 's-1',
+            typeId: 'state',
+            obj: { id: 's-1' },
           },
-        }
+        };
         const now = {
           // new ref: transition state
           state: {
-            id: 's-2', typeId: 'state', obj: { id: 's-1' },
+            id: 's-2',
+            typeId: 'state',
+            obj: { id: 's-1' },
           },
-        }
+        };
 
         beforeEach(() => {
           actions = buildReferenceActions({
@@ -241,19 +250,19 @@ describe('Common actions', () => {
             diff: diffpatcher.diff(before, now),
             oldObj: before,
             newObj: now,
-          })
-        })
+          });
+        });
 
         it('should build reference action without expansion in action', () => {
-          expect(actions).toContainEqual(
-            { action: 'transitionState',
-              state: {
-                typeId: now.state.typeId,
-                id: now.state.id,
-              } },
-          )
-        })
-      })
-    })
-  })
-})
+          expect(actions).toContainEqual({
+            action: 'transitionState',
+            state: {
+              typeId: now.state.typeId,
+              id: now.state.id,
+            },
+          });
+        });
+      });
+    });
+  });
+});

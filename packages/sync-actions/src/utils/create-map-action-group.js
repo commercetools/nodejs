@@ -5,18 +5,18 @@
 //   { type: 'prices', group: 'white' },
 //   { type: 'variants', group: 'black' },
 // ]
-export default function createMapActionGroup (actionGroups = []) {
-  return function mapActionGroup (type, fn) {
-    if (!Object.keys(actionGroups).length) return fn()
+export default function createMapActionGroup(actionGroups = []) {
+  return function mapActionGroup(type, fn) {
+    if (!Object.keys(actionGroups).length) return fn();
 
-    const found = actionGroups.find(c => c.type === type)
-    if (!found) return []
+    const found = actionGroups.find(c => c.type === type);
+    if (!found) return [];
 
-    if (found.group === 'black') return []
-    if (found.group === 'white') return fn()
+    if (found.group === 'black') return [];
+    if (found.group === 'white') return fn();
 
     throw new Error(
-      `Action group '${found.group}' not supported. Please use black or white.`,
-    )
-  }
+      `Action group '${found.group}' not supported. Please use black or white.`
+    );
+  };
 }

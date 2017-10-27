@@ -12,14 +12,13 @@
  * @throws If `sortPath` is missing.
  * @return {Object} The instance of the service, can be chained.
  */
-export function sort (sortPath: string, ascending: boolean = true): Object {
-  if (!sortPath)
-    throw new Error('Required argument for `sort` is missing')
+export function sort(sortPath: string, ascending: boolean = true): Object {
+  if (!sortPath) throw new Error('Required argument for `sort` is missing');
 
-  const direction = ascending ? 'asc' : 'desc'
-  const encodedSort = encodeURIComponent(`${sortPath} ${direction}`)
-  this.params.pagination.sort.push(encodedSort)
-  return this
+  const direction = ascending ? 'asc' : 'desc';
+  const encodedSort = encodeURIComponent(`${sortPath} ${direction}`);
+  this.params.pagination.sort.push(encodedSort);
+  return this;
 }
 
 /**
@@ -30,15 +29,15 @@ export function sort (sortPath: string, ascending: boolean = true): Object {
  * @throws If `value` is missing or is a number lesser then one.
  * @return {Object} The instance of the service, can be chained.
  */
-export function page (value: number): Object {
+export function page(value: number): Object {
   if (typeof value !== 'number' && !value)
-    throw new Error('Required argument for `page` is missing or invalid')
+    throw new Error('Required argument for `page` is missing or invalid');
 
   if (typeof value !== 'number' || value < 1)
-    throw new Error('Required argument for `page` must be a number >= 1')
+    throw new Error('Required argument for `page` must be a number >= 1');
 
-  this.params.pagination.page = value
-  return this
+  this.params.pagination.page = value;
+  return this;
 }
 
 /**
@@ -50,13 +49,13 @@ export function page (value: number): Object {
  * @throws If `value` is missing or is a number lesser then zero.
  * @return {Object} The instance of the service, can be chained.
  */
-export function perPage (value: number): Object {
+export function perPage(value: number): Object {
   if (typeof value !== 'number' && !value)
-    throw new Error('Required argument for `perPage` is missing or invalid')
+    throw new Error('Required argument for `perPage` is missing or invalid');
 
   if (typeof value !== 'number' || value < 0)
-    throw new Error('Required argument for `perPage` must be a number >= 0')
+    throw new Error('Required argument for `perPage` must be a number >= 0');
 
-  this.params.pagination.perPage = value
-  return this
+  this.params.pagination.perPage = value;
+  return this;
 }

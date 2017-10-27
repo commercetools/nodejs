@@ -1,49 +1,43 @@
 /* @flow */
-import type { HttpUserAgentOptions } from 'types/sdk'
+import type { HttpUserAgentOptions } from 'types/sdk';
 /* global window */
 
-export default function createUserAgent (
-  options: HttpUserAgentOptions,
-): string {
+export default function createUserAgent(options: HttpUserAgentOptions): string {
   if (
     !options ||
     Object.keys(options).length === 0 ||
     !{}.hasOwnProperty.call(options, 'name')
   )
-    throw new Error('Missing required option `name`')
+    throw new Error('Missing required option `name`');
 
   // Main info
   const baseInfo = options.version
     ? `${options.name}/${options.version}`
-    : options.name
+    : options.name;
 
   // Library info
-  let libraryInfo
+  let libraryInfo;
   if (options.libraryName && !options.libraryVersion)
-    libraryInfo = options.libraryName
+    libraryInfo = options.libraryName;
   else if (options.libraryName && options.libraryVersion)
-    libraryInfo = `${options.libraryName}/${options.libraryVersion}`
+    libraryInfo = `${options.libraryName}/${options.libraryVersion}`;
 
   // Contact info
-  let contactInfo
+  let contactInfo;
   if (options.contactUrl && !options.contactEmail)
-    contactInfo = `(+${options.contactUrl})`
+    contactInfo = `(+${options.contactUrl})`;
   else if (!options.contactUrl && options.contactEmail)
-    contactInfo = `(+${options.contactEmail})`
+    contactInfo = `(+${options.contactEmail})`;
   else if (options.contactUrl && options.contactEmail)
-    contactInfo = `(+${options.contactUrl}; +${options.contactEmail})`
+    contactInfo = `(+${options.contactUrl}; +${options.contactEmail})`;
 
   // System info
-  const systemInfo = getSystemInfo()
+  const systemInfo = getSystemInfo();
 
-  return [
-    baseInfo,
-    systemInfo,
-    libraryInfo,
-    contactInfo,
-  ].filter((x: ?string): boolean => Boolean(x)).join(' ')
+  return [baseInfo, systemInfo, libraryInfo, contactInfo]
+    .filter((x: ?string): boolean => Boolean(x))
+    .join(' ');
 }
-
 
 /*
   This is the easiest way, for this use case, to detect if we're running in
@@ -61,14 +55,13 @@ export default function createUserAgent (
 */
 // eslint-disable-next-line no-new-func
 const isBrowser = new Function(
-  'try { return typeof window === "object" } catch (e) { return false }',
-)
+  'try { return typeof window === "object" } catch (e) { return false }'
+);
 
-function getSystemInfo (): string {
-  if (isBrowser())
-    return window.navigator.userAgent
+function getSystemInfo(): string {
+  if (isBrowser()) return window.navigator.userAgent;
 
-  const nodeVersion = process.version.slice(1)
-  const platformInfo = `(${process.platform}; ${process.arch})`
-  return `Node.js/${nodeVersion} ${platformInfo}`
+  const nodeVersion = process.version.slice(1);
+  const platformInfo = `(${process.platform}; ${process.arch})`;
+  return `Node.js/${nodeVersion} ${platformInfo}`;
 }

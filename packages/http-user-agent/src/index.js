@@ -1,1 +1,1 @@
-export default from './create-user-agent'
+export default from './create-user-agent';

@@ -1,4 +1,4 @@
-import prepareInput from '../src/utils'
+import prepareInput from '../src/utils';
 
 describe('prepareInput', () => {
   test('should properly cast object types', () => {
@@ -13,7 +13,7 @@ describe('prepareInput', () => {
       isActive: 'false',
       maxApplications: '10',
       maxApplicationsPerCustomer: '2',
-    }
+    };
 
     const expected = {
       name: {
@@ -26,11 +26,11 @@ describe('prepareInput', () => {
       isActive: false,
       maxApplications: 10,
       maxApplicationsPerCustomer: 2,
-    }
+    };
 
-    const actual = prepareInput(sample)
-    expect(actual).toEqual(expected)
-  })
+    const actual = prepareInput(sample);
+    expect(actual).toEqual(expected);
+  });
 
   test('should properly hadle `cartDiscounts`', () => {
     const sample = {
@@ -39,7 +39,7 @@ describe('prepareInput', () => {
       isActive: 'false',
       maxApplications: '10',
       maxApplicationsPerCustomer: '2',
-    }
+    };
 
     const expected = {
       cartDiscounts: [
@@ -60,11 +60,11 @@ describe('prepareInput', () => {
       isActive: false,
       maxApplications: 10,
       maxApplicationsPerCustomer: 2,
-    }
+    };
 
-    const actual = prepareInput(sample, ';')
-    expect(actual).toEqual(expected)
-  })
+    const actual = prepareInput(sample, ';');
+    expect(actual).toEqual(expected);
+  });
 
   test('should not mutate object if no field to cast or mutate', () => {
     const newSample = {
@@ -75,7 +75,7 @@ describe('prepareInput', () => {
         en: 'greatest promo',
       },
       cartPredicate: 'value more than 20',
-    }
+    };
     const newExpected = {
       name: {
         de: 'Valerian',
@@ -84,9 +84,9 @@ describe('prepareInput', () => {
         en: 'greatest promo',
       },
       cartPredicate: 'value more than 20',
-    }
+    };
 
-    const actual = prepareInput(newSample)
-    expect(actual).toEqual(newExpected)
-  })
-})
+    const actual = prepareInput(newSample);
+    expect(actual).toEqual(newExpected);
+  });
+});

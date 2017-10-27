@@ -13,11 +13,11 @@
  * @throws If `value` or `lang` is missing.
  * @return {Object} The instance of the service, can be chained.
  */
- // eslint-disable-next-line import/prefer-default-export
-export function searchKeywords (value: string, lang: string): Object {
+// eslint-disable-next-line import/prefer-default-export
+export function searchKeywords(value: string, lang: string): Object {
   if (!value || !lang)
-    throw new Error('Required arguments for `searchKeywords` are missing')
+    throw new Error('Required arguments for `searchKeywords` are missing');
 
-  this.params.searchKeywords.push({ lang, value: encodeURIComponent(value) })
-  return this
+  this.params.searchKeywords.push({ lang, value: encodeURIComponent(value) });
+  return this;
 }

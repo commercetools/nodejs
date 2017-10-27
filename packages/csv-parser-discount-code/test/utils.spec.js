@@ -1,4 +1,4 @@
-import castTypes from '../src/utils'
+import castTypes from '../src/utils';
 
 describe('castTypes', () => {
   it('should properly cast object types', () => {
@@ -13,7 +13,7 @@ describe('castTypes', () => {
       isActive: 'false',
       maxApplications: '10',
       maxApplicationsPerCustomer: '2',
-    }
+    };
 
     const expected = {
       name: {
@@ -26,11 +26,11 @@ describe('castTypes', () => {
       isActive: false,
       maxApplications: 10,
       maxApplicationsPerCustomer: 2,
-    }
+    };
 
-    const actual = castTypes(sample, ';')
-    expect(actual).toEqual(expected)
-  })
+    const actual = castTypes(sample, ';');
+    expect(actual).toEqual(expected);
+  });
 
   it('should not mutate object if no field to cast or mutate', () => {
     const newSample = {
@@ -41,7 +41,7 @@ describe('castTypes', () => {
         en: 'greatest promo',
       },
       cartPredicate: 'value more than 20',
-    }
+    };
     const newExpected = {
       name: {
         de: 'Valerian',
@@ -50,9 +50,9 @@ describe('castTypes', () => {
         en: 'greatest promo',
       },
       cartPredicate: 'value more than 20',
-    }
+    };
 
-    const actual = castTypes(newSample)
-    expect(actual).toEqual(newExpected)
-  })
-})
+    const actual = castTypes(newSample);
+    expect(actual).toEqual(newExpected);
+  });
+});

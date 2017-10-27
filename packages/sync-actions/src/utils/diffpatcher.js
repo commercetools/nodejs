@@ -2,7 +2,7 @@
 // while bundling with webpack because of dynamic requires.
 // To get around this issue, simply require the `Diffpatcher` directly.
 // https://github.com/benjamine/jsondiffpatch/issues/76#issuecomment-270207970
-import { DiffPatcher } from 'jsondiffpatch/src/diffpatcher'
+import { DiffPatcher } from 'jsondiffpatch/src/diffpatcher';
 
 const diffpatcher = new DiffPatcher({
   objectHash,
@@ -20,47 +20,49 @@ const diffpatcher = new DiffPatcher({
     // blob/master/docs/deltas.md#text-diffs
     minLength: 300,
   },
-})
+});
 
-export function objectHash (obj, index) {
-  const objIndex = `$$index:${index}`
-  return (typeof obj === 'object' && obj !== null)
-    ? (obj.id || obj.name || obj.url || objIndex)
-    : objIndex
+export function objectHash(obj, index) {
+  const objIndex = `$$index:${index}`;
+  return typeof obj === 'object' && obj !== null
+    ? obj.id || obj.name || obj.url || objIndex
+    : objIndex;
 }
 
-export function diff (oldObj, newObj) {
-  return diffpatcher.diff(oldObj, newObj)
+export function diff(oldObj, newObj) {
+  return diffpatcher.diff(oldObj, newObj);
 }
 
-export function patch (obj, delta) {
-  return diffpatcher.patch(obj, delta)
+export function patch(obj, delta) {
+  return diffpatcher.patch(obj, delta);
 }
 
-export function getDeltaValue (arr, originalObject) {
+export function getDeltaValue(arr, originalObject) {
   if (!Array.isArray(arr))
-    throw new Error('Expected array to extract delta value')
+    throw new Error('Expected array to extract delta value');
 
-  if (arr.length === 1) return arr[0] // new
+  if (arr.length === 1) return arr[0]; // new
 
-  if (arr.length === 2) return arr[1] // update
+  if (arr.length === 2) return arr[1]; // update
 
-  if (arr.length === 3 && arr[2] === 0) return undefined // delete
+  if (arr.length === 3 && arr[2] === 0) return undefined; // delete
 
-  if (arr.length === 3 && arr[2] === 2) { // text diff
+  if (arr.length === 3 && arr[2] === 2) {
+    // text diff
     if (!originalObject)
       throw new Error(
-        'Cannot apply patch to long text diff. Missing original object.',
-      )
+        'Cannot apply patch to long text diff. Missing original object.'
+      );
     // try to apply patch to given object based on delta value
-    return patch(originalObject, arr)
+    return patch(originalObject, arr);
   }
 
-  if (arr.length === 3 && arr[2] === 3) // array move
+  if (arr.length === 3 && arr[2] === 3)
+    // array move
     throw new Error(
       'Detected an array move, it should not happen as ' +
-      '`includeValueOnMove` should be set to false',
-    )
+        '`includeValueOnMove` should be set to false'
+    );
 
-  throw new Error(`Got unsupported number ${arr[2]} in delta value`)
+  throw new Error(`Got unsupported number ${arr[2]} in delta value`);
 }

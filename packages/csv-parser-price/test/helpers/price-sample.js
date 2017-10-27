@@ -1,4 +1,4 @@
-export default function () {
+export default function() {
   return {
     'variant-sku': 'my-price',
     value: { currencyCode: 'EUR', centAmount: '4200' },
@@ -17,5 +17,5 @@ export default function () {
       moneytype: 'EUR 1200',
       settype: '1,2,3,5',
     },
-  }
+  };
 }

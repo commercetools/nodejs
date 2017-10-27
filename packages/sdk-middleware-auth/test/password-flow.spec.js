@@ -1,25 +1,23 @@
-import {
-  createAuthMiddlewareForPasswordFlow,
-} from '../src'
+import { createAuthMiddlewareForPasswordFlow } from '../src';
 
-import authMiddlewareBase from '../src/base-auth-flow'
+import authMiddlewareBase from '../src/base-auth-flow';
 
 // required to be at the root because Jest hoists it above all requires,
 // if in any method like `beforeAll`,
 // it will be hoisted within the scope of that method
-jest.mock('../src/base-auth-flow')
+jest.mock('../src/base-auth-flow');
 
-function createTestRequest (options) {
+function createTestRequest(options) {
   return {
     url: '',
     method: 'GET',
     body: null,
     headers: {},
     ...options,
-  }
+  };
 }
 
-function createTestMiddlewareOptions (options) {
+function createTestMiddlewareOptions(options) {
   return {
     host: 'https://auth.commercetools.co',
     projectKey: 'foo',
@@ -32,42 +30,40 @@ function createTestMiddlewareOptions (options) {
       },
     },
     ...options,
-  }
+  };
 }
-
 
 describe('Password Flow', () => {
   afterAll(() => {
-    jest.unmock('../src/base-auth-flow')
-  })
+    jest.unmock('../src/base-auth-flow');
+  });
   it('should call the base-auth-flow method with the right params', () =>
     new Promise((resolve, reject) => {
       authMiddlewareBase.mockImplementation((params, next) => {
-        next(params) // makes it easy to test what was passed in
-      })
-      const request = createTestRequest()
+        next(params); // makes it easy to test what was passed in
+      });
+      const request = createTestRequest();
       const response = {
         resolve,
         reject,
-      }
-      const next = (actualParams) => {
+      };
+      const next = actualParams => {
         expect(actualParams).toMatchObject({
           request,
           response,
           pendingTasks: [],
           url: 'https://auth.commercetools.co/oauth/foo/customers/token',
           basicAuth: 'MTIzOnNlY3JldA==',
-        })
-        expect(authMiddlewareBase).toHaveBeenCalledTimes(1)
-        jest.unmock('../src/base-auth-flow')
-        resolve()
-      }
-      const middlewareOptions = createTestMiddlewareOptions()
+        });
+        expect(authMiddlewareBase).toHaveBeenCalledTimes(1);
+        jest.unmock('../src/base-auth-flow');
+        resolve();
+      };
+      const middlewareOptions = createTestMiddlewareOptions();
       const authMiddleware = createAuthMiddlewareForPasswordFlow(
-        middlewareOptions,
-      )
+        middlewareOptions
+      );
 
-      authMiddleware(next)(request, response)
-    }),
-  )
-})
+      authMiddleware(next)(request, response);
+    }));
+});

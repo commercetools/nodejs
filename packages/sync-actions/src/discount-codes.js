@@ -1,23 +1,23 @@
-import flatten from 'lodash.flatten'
-import createBuildActions from './utils/create-build-actions'
-import createMapActionGroup from './utils/create-map-action-group'
-import { actionsMapBase } from './discount-codes-actions'
-import * as diffpatcher from './utils/diffpatcher'
+import flatten from 'lodash.flatten';
+import createBuildActions from './utils/create-build-actions';
+import createMapActionGroup from './utils/create-map-action-group';
+import { actionsMapBase } from './discount-codes-actions';
+import * as diffpatcher from './utils/diffpatcher';
 
-export const actionGroups = ['base', 'references']
+export const actionGroups = ['base', 'references'];
 
-function createDiscountCodesMapActions (mapActionGroup) {
-  return function doMapActions (diff, newObj, oldObj) {
-    const allActions = []
+function createDiscountCodesMapActions(mapActionGroup) {
+  return function doMapActions(diff, newObj, oldObj) {
+    const allActions = [];
 
-    allActions.push(mapActionGroup('base', () => (
-      actionsMapBase(diff, oldObj, newObj)
-    )))
-    return flatten(allActions)
-  }
+    allActions.push(
+      mapActionGroup('base', () => actionsMapBase(diff, oldObj, newObj))
+    );
+    return flatten(allActions);
+  };
 }
 
-export default (config) => {
+export default config => {
   // config contains information about which action groups
   // are white/black listed
 
@@ -29,8 +29,8 @@ export default (config) => {
   // this resulting function mapActionGroup will call the callback function
   // for whitelisted action groups and return the return value of the callback
   // It will return an empty array for blacklisted action groups
-  const mapActionGroup = createMapActionGroup(config)
-  const doMapActions = createDiscountCodesMapActions(mapActionGroup)
-  const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
-  return { buildActions }
-}
+  const mapActionGroup = createMapActionGroup(config);
+  const doMapActions = createDiscountCodesMapActions(mapActionGroup);
+  const buildActions = createBuildActions(diffpatcher.diff, doMapActions);
+  return { buildActions };
+};

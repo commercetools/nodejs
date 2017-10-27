@@ -1,9 +1,9 @@
-const REGEX_NUMBER = new RegExp(/^\d+$/)
-const REGEX_UNDERSCORE_NUMBER = new RegExp(/^_\d+$/)
+const REGEX_NUMBER = new RegExp(/^\d+$/);
+const REGEX_UNDERSCORE_NUMBER = new RegExp(/^_\d+$/);
 
-export const ADD_ACTIONS = 'create'
-export const REMOVE_ACTIONS = 'remove'
-export const CHANGE_ACTIONS = 'change'
+export const ADD_ACTIONS = 'create';
+export const REMOVE_ACTIONS = 'remove';
+export const CHANGE_ACTIONS = 'change';
 
 /**
  * Generate + configure a function to build actions for nested objects
@@ -15,56 +15,57 @@ export const CHANGE_ACTIONS = 'change'
  *   return an action object.
  * @return {Array}        The generated array of actions
  */
-export default function createBuildArrayActions (key, config) {
-  return function buildArrayActions (diff, oldObj, newObj) {
-    const addActions = []
-    const removeActions = []
-    const changeActions = []
+export default function createBuildArrayActions(key, config) {
+  return function buildArrayActions(diff, oldObj, newObj) {
+    const addActions = [];
+    const removeActions = [];
+    const changeActions = [];
 
     if (diff[key]) {
-      const arrayDelta = diff[key]
+      const arrayDelta = diff[key];
 
-      Object.keys(arrayDelta).forEach((index) => {
+      Object.keys(arrayDelta).forEach(index => {
         if (config[ADD_ACTIONS] && isCreateAction(arrayDelta, index)) {
-          const actionGenerator = config[ADD_ACTIONS]
+          const actionGenerator = config[ADD_ACTIONS];
           // When adding a new element you don't need the oldObj
           const action = actionGenerator(
             newObj[key][index],
-            parseInt(index, 10),
-          )
+            parseInt(index, 10)
+          );
 
-          if (action) addActions.push(action)
+          if (action) addActions.push(action);
         } else if (
-          config[CHANGE_ACTIONS] && isChangeAction(arrayDelta, index)
+          config[CHANGE_ACTIONS] &&
+          isChangeAction(arrayDelta, index)
         ) {
-          const actionGenerator = config[CHANGE_ACTIONS]
+          const actionGenerator = config[CHANGE_ACTIONS];
           // When changing an existing element you need both old + new
           const action = actionGenerator(
             oldObj[key][index],
             newObj[key][index],
-            parseInt(index, 10),
-          )
+            parseInt(index, 10)
+          );
 
-          if (action) changeActions.push(action)
+          if (action) changeActions.push(action);
         } else if (
           config[REMOVE_ACTIONS] &&
           isRemoveAction(arrayDelta, index)
         ) {
-          const realIndex = index.replace('_', '')
-          const actionGenerator = config[REMOVE_ACTIONS]
+          const realIndex = index.replace('_', '');
+          const actionGenerator = config[REMOVE_ACTIONS];
           // When removing an existing element you don't need the newObj
           const action = actionGenerator(
             oldObj[key][realIndex],
-            parseInt(realIndex, 10),
-          )
+            parseInt(realIndex, 10)
+          );
 
-          if (action) removeActions.push(action)
+          if (action) removeActions.push(action);
         }
-      })
+      });
     }
 
-    return changeActions.concat(removeActions, addActions)
-  }
+    return changeActions.concat(removeActions, addActions);
+  };
 }
 
 /**
@@ -79,10 +80,10 @@ export default function createBuildArrayActions (key, config) {
  * @return {Boolean}     Returns true if delta represents a create action,
  *   false otherwise
  */
-function isCreateAction (obj, key) {
-  return REGEX_NUMBER.test(key) &&
-    Array.isArray(obj[key]) &&
-    obj[key].length === 1
+function isCreateAction(obj, key) {
+  return (
+    REGEX_NUMBER.test(key) && Array.isArray(obj[key]) && obj[key].length === 1
+  );
 }
 
 /**
@@ -99,9 +100,8 @@ function isCreateAction (obj, key) {
  * @return {Boolean}     Returns true if delta represents a change action,
  *   false otherwise
  */
-function isChangeAction (obj, key) {
-  return REGEX_NUMBER.test(key) &&
-    typeof obj[key] === 'object'
+function isChangeAction(obj, key) {
+  return REGEX_NUMBER.test(key) && typeof obj[key] === 'object';
 }
 
 /**
@@ -116,11 +116,13 @@ function isChangeAction (obj, key) {
  * @return {Boolean}     Returns true if delta represents a remove action,
  *   false otherwise
  */
-function isRemoveAction (obj, key) {
-  return REGEX_UNDERSCORE_NUMBER.test(key) &&
+function isRemoveAction(obj, key) {
+  return (
+    REGEX_UNDERSCORE_NUMBER.test(key) &&
     Array.isArray(obj[key]) &&
     obj[key].length === 3 &&
     typeof obj[key][0] === 'object' &&
     obj[key][1] === 0 &&
     obj[key][2] === 0
+  );
 }

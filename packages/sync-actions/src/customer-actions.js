@@ -1,12 +1,12 @@
 import {
   buildBaseAttributesActions,
   buildReferenceActions,
-} from './utils/common-actions'
+} from './utils/common-actions';
 import createBuildArrayActions, {
   ADD_ACTIONS,
   REMOVE_ACTIONS,
   CHANGE_ACTIONS,
-} from './utils/create-build-array-actions'
+} from './utils/create-build-array-actions';
 
 export const baseActionsList = [
   { action: 'changeEmail', key: 'email' },
@@ -29,35 +29,35 @@ export const baseActionsList = [
     key: 'defaultShippingAddressId',
     actionKey: 'addressId',
   },
-]
+];
 
 export const referenceActionsList = [
   { action: 'setCustomerGroup', key: 'customerGroup' },
-]
+];
 
 /**
  * SYNC FUNCTIONS
  */
 
-export function actionsMapBase (diff, oldObj, newObj) {
+export function actionsMapBase(diff, oldObj, newObj) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
     diff,
     oldObj,
     newObj,
-  })
+  });
 }
 
-export function actionsMapReferences (diff, oldObj, newObj) {
+export function actionsMapReferences(diff, oldObj, newObj) {
   return buildReferenceActions({
     actions: referenceActionsList,
     diff,
     oldObj,
     newObj,
-  })
+  });
 }
 
-export function actionsMapAddresses (diff, oldObj, newObj) {
+export function actionsMapAddresses(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('addresses', {
     [ADD_ACTIONS]: newObject => ({
       action: 'addAddress',
@@ -72,7 +72,7 @@ export function actionsMapAddresses (diff, oldObj, newObj) {
       addressId: oldObject.id,
       address: updatedObject,
     }),
-  })
+  });
 
-  return handler(diff, oldObj, newObj)
+  return handler(diff, oldObj, newObj);
 }

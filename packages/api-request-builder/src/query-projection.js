@@ -6,9 +6,9 @@
  * (for current / published)
  * @return {Object} The instance of the service, can be chained.
  */
-export function staged (isStaged: boolean = true): Object {
-  this.params.staged = isStaged
-  return this
+export function staged(isStaged: boolean = true): Object {
+  this.params.staged = isStaged;
+  return this;
 }
 
 /**
@@ -18,9 +18,9 @@ export function staged (isStaged: boolean = true): Object {
  * @param  {string} value - The currency code compliant to ISO 4217
  * @return {Object} The instance of the service, can be chained.
  */
-export function priceCurrency (value: string): Object {
-  this.params.priceCurrency = value
-  return this
+export function priceCurrency(value: string): Object {
+  this.params.priceCurrency = value;
+  return this;
 }
 
 /**
@@ -31,9 +31,9 @@ export function priceCurrency (value: string): Object {
  * Can only be used with priceCurrency parameter
  * @return {Object} The instance of the service, can be chained.
  */
-export function priceCountry (value: string): Object {
-  this.params.priceCountry = value
-  return this
+export function priceCountry(value: string): Object {
+  this.params.priceCountry = value;
+  return this;
 }
 
 /**
@@ -44,9 +44,9 @@ export function priceCountry (value: string): Object {
  * Can only be used with priceCurrency parameter
  * @return {Object} The instance of the service, can be chained.
  */
-export function priceCustomerGroup (value: string): Object {
-  this.params.priceCustomerGroup = value
-  return this
+export function priceCustomerGroup(value: string): Object {
+  this.params.priceCustomerGroup = value;
+  return this;
 }
 
 /**
@@ -57,7 +57,7 @@ export function priceCustomerGroup (value: string): Object {
  * Can only be used with priceCurrency parameter
  * @return {Object} The instance of the service, can be chained.
  */
-export function priceChannel (value: string): Object {
-  this.params.priceChannel = value
-  return this
+export function priceChannel(value: string): Object {
+  this.params.priceChannel = value;
+  return this;
 }

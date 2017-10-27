@@ -1,24 +1,22 @@
-import csv from 'csv-parser'
-import highland from 'highland'
-import JSONStream from 'JSONStream'
-import mapValues from 'lodash.mapvalues'
-import memoize from 'lodash.memoize'
-import { unflatten } from 'flat'
+import csv from 'csv-parser';
+import highland from 'highland';
+import JSONStream from 'JSONStream';
+import mapValues from 'lodash.mapvalues';
+import memoize from 'lodash.memoize';
+import { unflatten } from 'flat';
 
-import { createAuthMiddlewareForClientCredentialsFlow }
-  from '@commercetools/sdk-middleware-auth'
-import { createClient } from '@commercetools/sdk-client'
-import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
-import { createRequestBuilder } from '@commercetools/api-request-builder'
-import { createUserAgentMiddleware }
-  from '@commercetools/sdk-middleware-user-agent'
+import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth';
+import { createClient } from '@commercetools/sdk-client';
+import { createHttpMiddleware } from '@commercetools/sdk-middleware-http';
+import { createRequestBuilder } from '@commercetools/api-request-builder';
+import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent';
 
-import CONSTANTS from './constants'
-import mapCustomFields from './map-custom-fields'
-import { version } from '../package.json'
+import CONSTANTS from './constants';
+import mapCustomFields from './map-custom-fields';
+import { version } from '../package.json';
 
 export default class CsvParserPrice {
-  constructor ({ apiConfig, logger, csvConfig = {}, accessToken }) {
+  constructor({ apiConfig, logger, csvConfig = {}, accessToken }) {
     this.client = createClient({
       middlewares: [
         createAuthMiddlewareForClientCredentialsFlow(apiConfig),
@@ -30,10 +28,10 @@ export default class CsvParserPrice {
           host: apiConfig.apiUrl,
         }),
       ],
-    })
+    });
 
-    this.apiConfig = apiConfig
-    this.accessToken = accessToken
+    this.apiConfig = apiConfig;
+    this.accessToken = accessToken;
 
     // noop the logger if not defined, should not polute stdout
     this.logger = logger || {
@@ -41,31 +39,31 @@ export default class CsvParserPrice {
       warn: () => {},
       info: () => {},
       verbose: () => {},
-    }
+    };
 
-    this.batchSize =
-      csvConfig.batchSize || CONSTANTS.standardOption.batchSize
-    this.delimiter =
-      csvConfig.delimiter || CONSTANTS.standardOption.delimiter
+    this.batchSize = csvConfig.batchSize || CONSTANTS.standardOption.batchSize;
+    this.delimiter = csvConfig.delimiter || CONSTANTS.standardOption.delimiter;
   }
 
-  parse (input, output) {
-    this.logger.info('Starting conversion')
-    let rowIndex = 2
+  parse(input, output) {
+    this.logger.info('Starting conversion');
+    let rowIndex = 2;
 
     highland(input)
       // Parse CSV return each row as object
-      .through(csv({
-        separator: this.delimiter,
-        strict: true,
-      }))
+      .through(
+        csv({
+          separator: this.delimiter,
+          strict: true,
+        })
+      )
       // Sort by SKU so later when reducing prices we can easily group by SKU
       .sortBy((a, b) => a['variant-sku'].localeCompare(b['variant-sku']))
       // Limit amount of rows to be handled at the same time
       .batch(this.batchSize)
-      .stopOnError((err) => {
-        this.logger.error(err)
-        output.emit('error', err)
+      .stopOnError(err => {
+        this.logger.error(err);
+        output.emit('error', err);
       })
       .flatMap(highland)
       // Unflatten object keys with a dot to nested values
@@ -75,142 +73,143 @@ export default class CsvParserPrice {
       .flatMap(data => highland(this.transformCustomData(data, rowIndex)))
       .map(this.deleteMovedData)
       .doto(() => {
-        this.logger.verbose(`Processed row ${rowIndex}`)
-        rowIndex += 1
+        this.logger.verbose(`Processed row ${rowIndex}`);
+        rowIndex += 1;
       })
-      .stopOnError((err) => {
-        this.logger.error(err)
-        output.emit('error', err)
+      .stopOnError(err => {
+        this.logger.error(err);
+        output.emit('error', err);
       })
       .reduce({ prices: [] }, this.mergeBySku)
-      .doto((data) => {
-        const numberOfPrices = Number(JSON.stringify(data.length)) + 1
-        this.logger.info(`Done with conversion of ${numberOfPrices} prices`)
+      .doto(data => {
+        const numberOfPrices = Number(JSON.stringify(data.length)) + 1;
+        this.logger.info(`Done with conversion of ${numberOfPrices} prices`);
       })
       .pipe(JSONStream.stringify(false))
-      .pipe(output)
+      .pipe(output);
   }
 
   // Transform price values to the type the API expects
   // eslint-disable-next-line class-methods-use-this
-  transformPriceData (price) {
-    return mapValues(price, (value) => {
+  transformPriceData(price) {
+    return mapValues(price, value => {
       if (value.centAmount)
         return {
           centAmount: Number(value.centAmount),
           currencyCode: value.currencyCode,
-        }
+        };
 
-      return value
-    })
+      return value;
+    });
   }
 
-  transformCustomData (price, rowIndex) {
+  transformCustomData(price, rowIndex) {
     if (price.customType) {
       this.logger.verbose(
-        `Found custom type ${price.customType}, row ${rowIndex}`,
-      )
+        `Found custom type ${price.customType}, row ${rowIndex}`
+      );
 
-      return this.processCustomField(price, rowIndex)
-        // Using arrow without body trips up babel transform-object-rest-spread
-        // eslint-disable-next-line arrow-body-style
-        .then((customTypeObj) => {
-          return {
-            ...price,
-            custom: customTypeObj,
-          }
-        })
+      return (
+        this.processCustomField(price, rowIndex)
+          // Using arrow without body trips up babel transform-object-rest-spread
+          // eslint-disable-next-line arrow-body-style
+          .then(customTypeObj => {
+            return {
+              ...price,
+              custom: customTypeObj,
+            };
+          })
+      );
     }
 
-    return Promise.resolve(price)
+    return Promise.resolve(price);
   }
 
   // Rename for compatibility with price import module
   // eslint-disable-next-line class-methods-use-this
-  renameHeaders (price) {
-    const newPrice = { ...price }
+  renameHeaders(price) {
+    const newPrice = { ...price };
 
     if (newPrice.customerGroup && newPrice.customerGroup.groupName) {
-      newPrice.customerGroup.id = newPrice.customerGroup.groupName
-      delete newPrice.customerGroup.groupName
+      newPrice.customerGroup.id = newPrice.customerGroup.groupName;
+      delete newPrice.customerGroup.groupName;
     }
 
     if (newPrice.channel && newPrice.channel.key) {
-      newPrice.channel.id = newPrice.channel.key
-      delete newPrice.channel.key
+      newPrice.channel.id = newPrice.channel.key;
+      delete newPrice.channel.key;
     }
 
-    return newPrice
+    return newPrice;
   }
 
   // eslint-disable-next-line class-methods-use-this
-  mergeBySku (data, currentPrice) {
-    const previousPrice = data.prices[data.prices.length - 1]
-    const sku = CONSTANTS.header.sku
+  mergeBySku(data, currentPrice) {
+    const previousPrice = data.prices[data.prices.length - 1];
+    const sku = CONSTANTS.header.sku;
     if (previousPrice && previousPrice.sku === currentPrice[sku])
-      previousPrice.prices.push(currentPrice)
+      previousPrice.prices.push(currentPrice);
     else
       data.prices.push({
         sku: currentPrice[sku],
         prices: [currentPrice],
-      })
+      });
 
-    return data
+    return data;
   }
 
   // eslint-disable-next-line class-methods-use-this
-  deleteMovedData (price) {
-    const newPrice = { ...price }
+  deleteMovedData(price) {
+    const newPrice = { ...price };
 
-    if (newPrice.customType)
-      delete newPrice.customType
-    if (newPrice.customField)
-      delete newPrice.customField
+    if (newPrice.customType) delete newPrice.customType;
+    if (newPrice.customField) delete newPrice.customField;
 
-    return newPrice
+    return newPrice;
   }
 
   // Convert custom type value to the expected native type
-  processCustomField (data, rowIndex) {
-    return this.getCustomTypeDefinition(data.customType).then((customType) => {
-      this.logger.info(`Fetched custom type ${customType.key} definition`)
+  processCustomField(data, rowIndex) {
+    return this.getCustomTypeDefinition(data.customType).then(customType => {
+      this.logger.info(`Fetched custom type ${customType.key} definition`);
 
       const customTypeObj = mapCustomFields.parse(
-        data.customField, customType, rowIndex,
-      )
+        data.customField,
+        customType,
+        rowIndex
+      );
       if (customTypeObj.error.length)
-        return Promise.reject(customTypeObj.error)
+        return Promise.reject(customTypeObj.error);
 
-      return customTypeObj.data
-    })
+      return customTypeObj.data;
+    });
   }
 }
 
 // Easiest way to wrap the getCustomTypeDefinition in the memoize method
 CsvParserPrice.prototype.getCustomTypeDefinition = memoize(
-  function _getCustomTypeDefinition (customTypeKey) {
+  function _getCustomTypeDefinition(customTypeKey) {
     const getTypeByKeyUri = createRequestBuilder({
       projectKey: this.apiConfig.projectKey,
-    }).types
-      .where(`key="${customTypeKey}"`)
-      .build()
+    })
+      .types.where(`key="${customTypeKey}"`)
+      .build();
     const execObj = {
       uri: getTypeByKeyUri,
       method: 'GET',
-    }
+    };
     if (this.accessToken)
       execObj.headers = {
         Authorization: `Bearer ${this.accessToken}`,
-      }
+      };
 
-    return this.client.execute(execObj)
-      .then((response) => {
-        if (response.body.count === 0)
-          return Promise.reject(
-            new Error(`No type with key '${customTypeKey}' found`),
-          )
+    return this.client.execute(execObj).then(response => {
+      if (response.body.count === 0)
+        return Promise.reject(
+          new Error(`No type with key '${customTypeKey}' found`)
+        );
 
-        return response.body.results[0]
-      })
-  },
-)
+      return response.body.results[0];
+    });
+  }
+);
