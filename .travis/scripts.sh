@@ -17,6 +17,3 @@ if [ "$TRAVIS_SECURE_ENV_VARS" == "true" ]; then
 else
   echo "Build does not have secure env variables, skipping integration tests!"
 fi
-
-# 4. run build tasks
-npm run build
