@@ -8,9 +8,9 @@
   "scripts": {
     "postinstall": "check-node-version --package && lerna bootstrap && npm run build",
     "check-updates": "./scripts/check-updates",
-    "clean": "rm -rf coverage; lerna run -- rimraf lib dist",
+    "clean": "rm -rf coverage; lerna exec -- rimraf lib dist",
     "commit": "git-cz",
-    "build": "lerna run -- babel src --out-dir lib",
+    "build": "lerna exec -- babel src --out-dir lib",
     "dist": "lerna run dist",
     "lint": "flow check && ./scripts/lint packages",
     "test": "npm run build && jest --config .jestrc.json",
@@ -79,56 +79,6 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
-    }
-  },
-  "eslintConfig": {
-    "extends": "commercetools",
-    "plugins": [
-      "flowtype"
-    ],
-    "env": {
-      "es6": true,
-      "jest": true,
-      "node": true
-    },
-    "rules": {
-      "flowtype/define-flow-type": 1,
-      "flowtype/require-parameter-type": 1,
-      "flowtype/require-return-type": [
-        1,
-        "always",
-        {
-          "annotateUndefined": "never"
-        }
-      ],
-      "flowtype/semi": 0,
-      "flowtype/space-after-type-colon": [
-        1,
-        "always"
-      ],
-      "flowtype/space-before-type-colon": [
-        1,
-        "never"
-      ],
-      "flowtype/type-id-match": 0,
-      "flowtype/use-flow-type": 1,
-      "flowtype/valid-syntax": 1,
-      "import/no-extraneous-dependencies": [
-        "error",
-        {
-          "devDependencies": [
-            "**/test/**/*.js"
-          ]
-        }
-      ]
-    },
-    "settings": {
-      "flowtype": {
-        "onlyFilesWithFlowAnnotation": true
-      },
-      "import/resolver": {
-        "babel-module": {}
-      }
     }
   }
 }
