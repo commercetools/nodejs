@@ -22,14 +22,17 @@
     "Selwyn Versteeg <selwyn.versteeg@commercetools.com> (https://selwyn.cc/)",
     "Jan Juna <jan.juna@commercetools.com> (https://janjuna.cz/)"
   ],
-  "main": "./lib/index.js",
+  "main": "dist/index.js",
   "bin": {
     "csvparserorder": "bin/csvparserorder.js"
   },
   "files": [
     "bin",
-    "lib"
+    "dist"
   ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=cli babel src --out-dir dist"
+  },
   "dependencies": {
     "JSONStream": "^1.3.1",
     "csv-parser": "^1.11.0",

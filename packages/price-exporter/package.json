@@ -20,14 +20,17 @@
     "name": "Williams Omayuku",
     "email": "williams.omayuku@commercetools.de"
   },
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "bin": {
     "price-exporter": "bin/price-exporter.js"
   },
   "files": [
     "bin",
-    "lib"
+    "dist"
   ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=cli babel src --out-dir dist"
+  },
   "dependencies": {
     "@commercetools/api-request-builder": "^3.1.1",
     "@commercetools/get-credentials": "^2.1.0",

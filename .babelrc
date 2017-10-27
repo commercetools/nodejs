@@ -1,5 +1,34 @@
 {
   "env": {
+    "cli": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "node": "current"
+            },
+            "modules": "commonjs"
+          }
+        ],
+        "stage-0"
+      ],
+      "plugins": [
+        "array-includes",
+        "transform-export-extensions",
+        "transform-flow-strip-types",
+        "transform-object-rest-spread",
+        [
+          "module-resolver",
+          {
+            "cwd": "./",
+            "alias": {
+              "types": "./types"
+            }
+          }
+        ]
+      ]
+    },
     "test": {
       "presets": [
         [

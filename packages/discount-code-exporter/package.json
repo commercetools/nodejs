@@ -19,14 +19,17 @@
   "contributors": [
     "Williams Omayuku <williams.omayuku@commercetools.com>"
   ],
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "bin": {
     "discount-code-exporter": "bin/discount-code-exporter.js"
   },
   "files": [
     "bin",
-    "lib"
+    "dist"
   ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=cli babel src --out-dir dist"
+  },
   "dependencies": {
     "@commercetools/api-request-builder": "^3.0.0",
     "@commercetools/get-credentials": "^2.1.0",

@@ -12,6 +12,10 @@ const version = process.env.npm_package_version;
 const config = {
   sourcemap: true,
   plugins: [
+    replace({
+      'process.env.NODE_ENV': JSON.stringify(env),
+      VERSION: `'${version}'`,
+    }),
     babel({
       babelrc: true,
       exclude: 'node_modules/**',
@@ -20,10 +24,6 @@ const config = {
     commonjs(),
     resolve({
       module: true,
-    }),
-    replace({
-      'process.env.NODE_ENV': JSON.stringify(env),
-      VERSION: `'${version}'`,
     }),
     builtins(),
     filesize(),

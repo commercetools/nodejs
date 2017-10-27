@@ -20,10 +20,13 @@
   "contributors": [
     "Williams Omayuku <williams.omayuku@commercetools.com>"
   ],
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "files": [
-    "lib"
+    "dist"
   ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=cli babel src --out-dir dist"
+  },
   "dependencies": {
     "@commercetools/api-request-builder": "^3.0.0",
     "@commercetools/sdk-client": "^1.4.0",
