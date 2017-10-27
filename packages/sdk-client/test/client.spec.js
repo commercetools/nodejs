@@ -420,7 +420,7 @@ describe('process', () => {
         )
       )
       .catch(error => {
-        expect(error).toEqual('Rejection from user');
+        expect(error).toEqual(new Error('Rejection from user'));
       });
   });
 });

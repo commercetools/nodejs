@@ -107,9 +107,11 @@ describe('AddReturnInfoParser', () => {
       const outputStream = StreamTest.v2.toText((err, res) => {
         expect(res).toBeUndefined();
         expect(mockErrorLog.mock.calls[0][0]).toEqual(
-          "Required headers missing: 'orderNumber'"
+          new Error("Required headers missing: 'orderNumber'")
         );
-        expect(err).toEqual("Required headers missing: 'orderNumber'");
+        expect(err).toEqual(
+          new Error("Required headers missing: 'orderNumber'")
+        );
         done();
       });
 
@@ -190,7 +192,9 @@ describe('AddReturnInfoParser', () => {
         ._processData(mockOrder)
         .then(done.fail)
         .catch(err => {
-          expect(err).toBe("Required headers missing: 'orderNumber'");
+          expect(err).toEqual(
+            new Error("Required headers missing: 'orderNumber'")
+          );
           done();
         });
     });

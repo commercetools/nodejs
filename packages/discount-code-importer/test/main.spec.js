@@ -122,7 +122,7 @@ describe('DiscountCodeImporter', () => {
     });
 
     it('should reject on error', async () => {
-      const errorSummary = {
+      const errorSummary = new Error({
         error: 'some random error',
         summary: {
           created: 0,
@@ -132,7 +132,7 @@ describe('DiscountCodeImporter', () => {
           updateErrorCount: 0,
           errors: [],
         },
-      };
+      });
       codeImport.client.execute = jest.fn(() =>
         Promise.reject(new Error('some random error'))
       );
@@ -213,7 +213,7 @@ describe('DiscountCodeImporter', () => {
         expect(codeImport._summary.updateErrorCount).toBe(2);
         expect(codeImport._summary.errors.length).toBe(2);
         expect(codeImport._summary.errors[0]).toBe('Invalid code');
-        expect(error).toMatch('Invalid code');
+        expect(error).toEqual(new Error('Invalid code'));
       }
     });
 
@@ -264,7 +264,7 @@ describe('DiscountCodeImporter', () => {
         expect(codeImport._summary.createErrorCount).toBe(3);
         expect(codeImport._summary.errors.length).toBe(3);
         expect(codeImport._summary.errors[0]).toBe('Invalid new code');
-        expect(error).toMatch('Invalid new code');
+        expect(error).toEqual(new Error('Invalid new code'));
       }
     });
   });

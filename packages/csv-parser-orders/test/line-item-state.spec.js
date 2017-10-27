@@ -60,7 +60,9 @@ describe('LineItemStateParser', () => {
           done.fail('Should throw an error because of a missing headers.')
         )
         .catch(error => {
-          expect(error).toBe("Required headers missing: 'orderNumber'");
+          expect(error).toEqual(
+            new Error("Required headers missing: 'orderNumber'")
+          );
           done();
         });
     });
