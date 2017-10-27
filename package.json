@@ -12,7 +12,7 @@
     "commit": "git-cz",
     "build": "lerna run --parallel build",
     "lint": "flow check && ./scripts/lint packages",
-    "test": "cross-env NODE_ENV=test npm run build && jest --config .jestrc.json",
+    "test": "cross-env NODE_ENV=test jest --config .jestrc.json",
     "test:package": "cross-env NODE_ENV=test npm run build && ./scripts/test-package",
     "it": "npm run it:install && npm run it:run",
     "it:install": "npm run build && ./scripts/install-npm-packages-for-integration-tests",
