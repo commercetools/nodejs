@@ -12,18 +12,18 @@ const version = process.env.npm_package_version;
 const config = {
   sourcemap: true,
   plugins: [
-    commonjs(),
     babel({
       babelrc: true,
       exclude: 'node_modules/**',
       runtimeHelpers: true,
     }),
+    commonjs(),
+    resolve({
+      module: true,
+    }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
       VERSION: `'${version}'`,
-    }),
-    resolve({
-      module: true,
     }),
     builtins(),
     filesize(),
