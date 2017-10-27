@@ -23,3 +23,5 @@ if [[ "$TRAVIS_BRANCH" == "master" ]]; then
   git fetch --tags
   git branch -u origin/${TRAVIS_BRANCH}
 fi
+
+curl -o- -L https://yarnpkg.com/install.sh | bash -s

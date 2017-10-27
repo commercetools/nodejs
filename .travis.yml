@@ -1,3 +1,7 @@
+env:
+  global:
+    - PATH=$HOME/.yarn/bin:$PATH
+
 sudo: false
 
 language: node_js
@@ -7,13 +11,13 @@ node_js:
   - 6
   - 8
 
-cache: 'yarn'
-
 notifications:
   email: false
 
 before_install:
   - .travis/before_install.sh
+
+cache: 'yarn'
 
 script:
   - .travis/scripts.sh
