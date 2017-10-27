@@ -18,5 +18,5 @@ else
   echo "Build does not have secure env variables, skipping integration tests!"
 fi
 
-# 4. run dist tasks where necessary
-npm run dist
+# 4. run build tasks
+npm run build
