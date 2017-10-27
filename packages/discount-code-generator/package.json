@@ -18,16 +18,16 @@
   "contributors": [
     "Williams Omayuku <williams.omayuku@commercetools.com>"
   ],
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "bin": {
     "discount-code-gen": "bin/discountcodegen.js"
   },
   "files": [
     "bin",
-    "dist"
+    "lib"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=cli babel src --out-dir dist"
+    "build": "cross-env NODE_ENV=cli babel src --out-dir lib"
   },
   "dependencies": {
     "csv-parser": "^1.11.0",

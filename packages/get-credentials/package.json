@@ -16,12 +16,12 @@
   "contributors": [
     "Selwyn Versteeg <selwyn.versteeg@commercetools.com> (https://selwyn.cc/)"
   ],
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "files": [
-    "dist"
+    "lib"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=cli babel src --out-dir dist"
+    "build": "cross-env NODE_ENV=cli babel src --out-dir lib"
   },
   "devDependencies": {
     "sinon": "^1.17.7"

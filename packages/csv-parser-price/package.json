@@ -20,16 +20,16 @@
     "Abimbola Idowu <abimbola.idowu@commercetools.com>",
     "Selwyn Versteeg <selwyn.versteeg@commercetools.com> (https://selwyn.cc/)"
   ],
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "bin": {
     "csvparserprice": "bin/csvparserprice.js"
   },
   "files": [
     "bin",
-    "dist"
+    "lib"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=cli babel src --out-dir dist"
+    "build": "cross-env NODE_ENV=cli babel src --out-dir lib"
   },
   "dependencies": {
     "@commercetools/api-request-builder": "^2.0.0",

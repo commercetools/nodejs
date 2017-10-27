@@ -25,13 +25,13 @@
   "bin": {
     "inventoriesexporter": "bin/inventories-exporter.js"
   },
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "files": [
-    "dist",
+    "lib",
     "bin"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=cli babel src --out-dir dist"
+    "build": "cross-env NODE_ENV=cli babel src --out-dir lib"
   },
   "dependencies": {
     "@commercetools/api-request-builder": "^3.1.1",
