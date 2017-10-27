@@ -113,7 +113,7 @@ const getHeaders = _args =>
   new Promise((resolve, reject) => {
     if (!_args.input)
       if (_args.exportFormat === 'json') resolve();
-      else reject('Input file is required for `CSV` export type');
+      else reject(new Error('Input file is required for `CSV` export type'));
     const rl = readline.createInterface({
       input: _args.input,
     });

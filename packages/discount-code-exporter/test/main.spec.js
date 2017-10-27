@@ -69,7 +69,7 @@ describe('DiscountCodeExport', () => {
         csvStream.write(sampleCode);
         return Promise.resolve();
       });
-      const outputStream = streamtest['v2'].toText((error, result) => {
+      const outputStream = streamtest.v2.toText((error, result) => {
         const expectedResult = stripIndent`
           code,name.en,cartDiscounts
           discount-code,some-discount-name,cart-discount-1;cart-discount-2
@@ -90,7 +90,7 @@ describe('DiscountCodeExport', () => {
         jsonStream.write(sampleCode);
         return Promise.resolve();
       });
-      const outputStream = streamtest['v2'].toText((error, result) => {
+      const outputStream = streamtest.v2.toText((error, result) => {
         const expectedResult = [sampleCode];
         expect(JSON.parse(result)).toEqual(expectedResult);
         done();
@@ -103,7 +103,7 @@ describe('DiscountCodeExport', () => {
       codeExport._fetchCodes = jest
         .fn()
         .mockImplementation(() => Promise.reject(new Error('error occured')));
-      const outputStream = streamtest['v2'].toText((error, result) => {
+      const outputStream = streamtest.v2.toText((error, result) => {
         expect(error.message).toBe('error occured');
         expect(result).toBeUndefined();
         done();
@@ -115,7 +115,7 @@ describe('DiscountCodeExport', () => {
       codeExport._fetchCodes = jest
         .fn()
         .mockImplementation(() => Promise.reject(new Error('error occured')));
-      const outputStream = streamtest['v2'].toText((error, result) => {
+      const outputStream = streamtest.v2.toText((error, result) => {
         expect(error.message).toBe('error occured');
         expect(result).toBeUndefined();
         done();

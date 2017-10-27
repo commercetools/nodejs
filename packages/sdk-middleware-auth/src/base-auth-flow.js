@@ -11,82 +11,25 @@ import type {
 import 'isomorphic-fetch';
 import { buildRequestForRefreshTokenFlow } from './build-requests';
 
-export default function authMiddlewareBase(
-  {
-    request,
-    response,
-    url,
-    basicAuth,
-    body,
-    pendingTasks,
-    requestState,
-    tokenCache,
-  }: AuthMiddlewareBaseOptions,
-  next: Next,
-  userOptions?: AuthMiddlewareOptions | PasswordAuthMiddlewareOptions
-) {
-  // Check if there is already a `Authorization` header in the request.
-  // If so, then go directly to the next middleware.
-  if (
-    (request.headers && request.headers['authorization']) ||
-    (request.headers && request.headers['Authorization'])
-  ) {
-    next(request, response);
-    return;
-  }
-  // If there was a token in the tokenCache, and it's not expired, append
-  // the token in the `Authorization` header.
-  const tokenObj = tokenCache.get();
-  if (tokenObj && tokenObj.token && Date.now() < tokenObj.expirationTime) {
-    const requestWithAuth = mergeAuthHeader(tokenObj.token, request);
-    next(requestWithAuth, response);
-    return;
-  }
-  // Keep pending tasks until a token is fetched
-  pendingTasks.push({ request, response });
-
-  // If a token is currently being fetched, just wait ;)
-  if (requestState.get()) return;
-
-  // Mark that a token is being fetched
-  requestState.set(true);
-
-  // If there was a refreshToken in the tokenCache, and there was an expired
-  // token or no token in the tokenCache, use the refreshToken flow
-  if (
-    tokenObj &&
-    tokenObj.refreshToken &&
-    (!tokenObj.token ||
-      (tokenObj.token && Date.now() > tokenObj.expirationTime))
-  ) {
-    executeRequest(
-      {
-        ...buildRequestForRefreshTokenFlow({
-          ...userOptions,
-          refreshToken: tokenObj.refreshToken,
-        }),
-        tokenCache,
-        requestState,
-        pendingTasks,
-        response,
-      },
-      next
-    );
-    return;
-  }
-
-  // Token and refreshToken are not present or invalid. Request a new token...
-  executeRequest(
-    {
-      url,
-      basicAuth,
-      body,
-      tokenCache,
-      requestState,
-      pendingTasks,
-      response,
+function mergeAuthHeader(
+  token: string,
+  req: MiddlewareRequest
+): MiddlewareRequest {
+  return {
+    ...req,
+    headers: {
+      ...req.headers,
+      Authorization: `Bearer ${token}`,
     },
-    next
+  };
+}
+
+function calculateExpirationTime(expiresIn: number): number {
+  return (
+    Date.now() +
+    expiresIn * 1000 -
+    // Add a gap of 2 hours before expiration time.
+    2 * 60 * 60 * 1000
   );
 }
 
@@ -152,24 +95,82 @@ function executeRequest(
       response.reject(error);
     });
 }
-function mergeAuthHeader(
-  token: string,
-  req: MiddlewareRequest
-): MiddlewareRequest {
-  return {
-    ...req,
-    headers: {
-      ...req.headers,
-      Authorization: `Bearer ${token}`,
-    },
-  };
-}
 
-function calculateExpirationTime(expiresIn: number): number {
-  return (
-    Date.now() +
-    expiresIn * 1000 -
-    // Add a gap of 2 hours before expiration time.
-    2 * 60 * 60 * 1000
+export default function authMiddlewareBase(
+  {
+    request,
+    response,
+    url,
+    basicAuth,
+    body,
+    pendingTasks,
+    requestState,
+    tokenCache,
+  }: AuthMiddlewareBaseOptions,
+  next: Next,
+  userOptions?: AuthMiddlewareOptions | PasswordAuthMiddlewareOptions
+) {
+  // Check if there is already a `Authorization` header in the request.
+  // If so, then go directly to the next middleware.
+  if (
+    (request.headers && request.headers.authorization) ||
+    (request.headers && request.headers.Authorization)
+  ) {
+    next(request, response);
+    return;
+  }
+  // If there was a token in the tokenCache, and it's not expired, append
+  // the token in the `Authorization` header.
+  const tokenObj = tokenCache.get();
+  if (tokenObj && tokenObj.token && Date.now() < tokenObj.expirationTime) {
+    const requestWithAuth = mergeAuthHeader(tokenObj.token, request);
+    next(requestWithAuth, response);
+    return;
+  }
+  // Keep pending tasks until a token is fetched
+  pendingTasks.push({ request, response });
+
+  // If a token is currently being fetched, just wait ;)
+  if (requestState.get()) return;
+
+  // Mark that a token is being fetched
+  requestState.set(true);
+
+  // If there was a refreshToken in the tokenCache, and there was an expired
+  // token or no token in the tokenCache, use the refreshToken flow
+  if (
+    tokenObj &&
+    tokenObj.refreshToken &&
+    (!tokenObj.token ||
+      (tokenObj.token && Date.now() > tokenObj.expirationTime))
+  ) {
+    executeRequest(
+      {
+        ...buildRequestForRefreshTokenFlow({
+          ...userOptions,
+          refreshToken: tokenObj.refreshToken,
+        }),
+        tokenCache,
+        requestState,
+        pendingTasks,
+        response,
+      },
+      next
+    );
+    return;
+  }
+
+  // Token and refreshToken are not present or invalid. Request a new token...
+  executeRequest(
+    {
+      url,
+      basicAuth,
+      body,
+      tokenCache,
+      requestState,
+      pendingTasks,
+      response,
+    },
+    next
   );
 }

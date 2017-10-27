@@ -20,6 +20,18 @@ function createTestResponse(options) {
   };
 }
 
+function createTestMiddlewareOptions(options) {
+  return {
+    host: 'https://auth.commercetools.co',
+    projectKey: 'foo',
+    credentials: {
+      clientId: '123',
+      clientSecret: 'secret',
+    },
+    ...options,
+  };
+}
+
 function createBaseMiddleware(options, next, refreshOptions) {
   const params = {
     request: createTestRequest(),
@@ -33,18 +45,6 @@ function createBaseMiddleware(options, next, refreshOptions) {
     ...options,
   };
   return createAuthMiddlewareBase(params, next, refreshOptions);
-}
-
-function createTestMiddlewareOptions(options) {
-  return {
-    host: 'https://auth.commercetools.co',
-    projectKey: 'foo',
-    credentials: {
-      clientId: '123',
-      clientSecret: 'secret',
-    },
-    ...options,
-  };
 }
 
 describe('Base Auth Flow', () => {
@@ -113,7 +113,9 @@ describe('Base Auth Flow', () => {
       });
       const next = () => {
         reject(
-          'This function should never be called, the response was rejected'
+          new Error(
+            'This function should never be called, the response was rejected'
+          )
         );
       };
       const middlewareOptions = createTestMiddlewareOptions();
@@ -137,7 +139,9 @@ describe('Base Auth Flow', () => {
       });
       const next = () => {
         reject(
-          'This function should never be called, the response was rejected'
+          new Error(
+            'This function should never be called, the response was rejected'
+          )
         );
       };
       const middlewareOptions = createTestMiddlewareOptions();

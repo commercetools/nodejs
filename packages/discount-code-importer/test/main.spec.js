@@ -134,7 +134,7 @@ describe('DiscountCodeImporter', () => {
         },
       };
       codeImport.client.execute = jest.fn(() =>
-        Promise.reject('some random error')
+        Promise.reject(new Error('some random error'))
       );
 
       try {
@@ -186,10 +186,10 @@ describe('DiscountCodeImporter', () => {
     it('should continue update on errors if `continueOnProblems`', async () => {
       codeImport.continueOnProblems = true;
       codeImport._update.mockImplementationOnce(() =>
-        Promise.reject('First invalid code')
+        Promise.reject(new Error('First invalid code'))
       );
       codeImport._update.mockImplementationOnce(() =>
-        Promise.reject('Second invalid code')
+        Promise.reject(new Error('Second invalid code'))
       );
       await codeImport._createOrUpdate(codes, existingCodes);
       expect(codeImport._update).toHaveBeenCalledTimes(2);
@@ -202,7 +202,7 @@ describe('DiscountCodeImporter', () => {
 
     it('should reject by default and stop on update error', async () => {
       codeImport._update.mockImplementation(() =>
-        Promise.reject('Invalid code')
+        Promise.reject(new Error('Invalid code'))
       );
       try {
         await codeImport._createOrUpdate(codes, existingCodes);
@@ -233,13 +233,13 @@ describe('DiscountCodeImporter', () => {
     it('should continue create on errors if `continueOnProblems`', async () => {
       codeImport.continueOnProblems = true;
       codeImport._create.mockImplementationOnce(() =>
-        Promise.reject('First invalid code')
+        Promise.reject(new Error('First invalid code'))
       );
       codeImport._create.mockImplementationOnce(() =>
-        Promise.reject('Second invalid code')
+        Promise.reject(new Error('Second invalid code'))
       );
       codeImport._create.mockImplementationOnce(() =>
-        Promise.reject('Third invalid code')
+        Promise.reject(new Error('Third invalid code'))
       );
       await codeImport._createOrUpdate(codes, existingCodes);
       expect(codeImport._create).toHaveBeenCalledTimes(3);
@@ -253,7 +253,7 @@ describe('DiscountCodeImporter', () => {
 
     it('should reject by default and stop on create error', async () => {
       codeImport._create.mockImplementation(() =>
-        Promise.reject('Invalid new code')
+        Promise.reject(new Error('Invalid new code'))
       );
       try {
         await codeImport._createOrUpdate(codes, existingCodes);

@@ -26,7 +26,7 @@ describe('DeliveriesParser', () => {
     it('should accept a stream and output a stream', done => {
       const deliveriesParser = new DeliveriesParser();
       const readStream = streamTestFile('delivery.csv');
-      const outputStream = StreamTest['v2'].toText((err, result) => {
+      const outputStream = StreamTest.v2.toText((err, result) => {
         expect(err).toBe(null);
         expect(JSON.parse(result).length).toEqual(2);
         done();
@@ -40,7 +40,7 @@ describe('DeliveriesParser', () => {
       const spy = sinon.stub(deliveriesParser.logger, 'error');
       const readStream = streamTestFile('delivery-error-row-length.csv');
 
-      const outputStream = StreamTest['v2'].toText(err => {
+      const outputStream = StreamTest.v2.toText(err => {
         expect(err.toString()).toMatch(expectedError);
         expect(spy.args[0][0].toString()).toMatch(expectedError);
         done();
@@ -56,7 +56,7 @@ describe('DeliveriesParser', () => {
       const spy = sinon.stub(deliveriesParser.logger, 'error');
       const readStream = streamTestFile('delivery-error-missing-headers.csv');
 
-      const outputStream = StreamTest['v2'].toText(err => {
+      const outputStream = StreamTest.v2.toText(err => {
         expect(err.toString()).toMatch(expectedError);
         expect(spy.args[0][0].toString()).toMatch(expectedError);
         done();
@@ -69,7 +69,7 @@ describe('DeliveriesParser', () => {
       const deliveriesParser = new DeliveriesParser();
       const readStream = streamTestFile('delivery.csv');
 
-      const outputStream = StreamTest['v2'].toText((err, _result) => {
+      const outputStream = StreamTest.v2.toText((err, _result) => {
         const orders = JSON.parse(_result);
         expect(orders.length).toBe(2);
 
@@ -105,7 +105,7 @@ describe('DeliveriesParser', () => {
       const deliveriesParser = new DeliveriesParser();
       const readStream = streamTestFile('delivery-with-parcel.csv');
 
-      const outputStream = StreamTest['v2'].toText((err, _result) => {
+      const outputStream = StreamTest.v2.toText((err, _result) => {
         const orders = JSON.parse(_result);
 
         expect(orders.length).toBe(2);
@@ -142,7 +142,7 @@ describe('DeliveriesParser', () => {
       const deliveriesParser = new DeliveriesParser();
       const readStream = streamTestFile('parcel-without-measurements.csv');
 
-      const outputStream = StreamTest['v2'].toText((err, _result) => {
+      const outputStream = StreamTest.v2.toText((err, _result) => {
         const result = JSON.parse(_result);
 
         const _mockResultDeliveries = [
@@ -226,7 +226,7 @@ describe('DeliveriesParser', () => {
       const spy = sinon.stub(deliveriesParser.logger, 'error');
       const readStream = streamTestFile('delivery-error-measurements.csv');
 
-      const outputStream = StreamTest['v2'].toText(err => {
+      const outputStream = StreamTest.v2.toText(err => {
         expect(err.toString()).toMatch(expectedError);
         expect(spy.args[0][0].toString()).toMatch(expectedError);
         done();
@@ -241,7 +241,7 @@ describe('DeliveriesParser', () => {
       const csvParserOrder = new DeliveriesParser();
 
       csvParserOrder.logger.error = () => {};
-      const outputStream = StreamTest['v2'].toText(err => {
+      const outputStream = StreamTest.v2.toText(err => {
         expect(err.toString()).toMatch(expectedError);
         done();
       });
@@ -255,7 +255,7 @@ describe('DeliveriesParser', () => {
       const csvParserOrder = new DeliveriesParser();
 
       csvParserOrder.logger.error = () => {};
-      const outputStream = StreamTest['v2'].toText(err => {
+      const outputStream = StreamTest.v2.toText(err => {
         expect(err.toString()).toMatch(expectedError);
         done();
       });

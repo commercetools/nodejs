@@ -51,7 +51,7 @@ describe('CsvParserPrice::parse', () => {
       .stub(csvParserPrice, 'getCustomTypeDefinition')
       .returns(Promise.resolve(customTypeSample));
 
-    const outputStream = streamtest['v2'].toText((error, result) => {
+    const outputStream = streamtest.v2.toText((error, result) => {
       const prices = JSON.parse(result).prices;
       const price = prices[0].prices[0];
       expect(prices.length).toBe(2);
@@ -73,7 +73,7 @@ describe('CsvParserPrice::parse', () => {
       .stub(csvParserPrice, 'getCustomTypeDefinition')
       .returns(Promise.resolve(customTypeSample));
 
-    const outputStream = streamtest['v2'].toText((error, result) => {
+    const outputStream = streamtest.v2.toText((error, result) => {
       const prices = JSON.parse(result).prices;
       expect(prices.length).toBe(2);
       expect(prices[0].prices.length).toBe(2);
@@ -92,7 +92,7 @@ describe('CsvParserPrice::parse', () => {
 
     const spy = sinon.spy(csvParserPrice.logger, 'error');
 
-    const outputStream = streamtest['v2'].toText(() => {
+    const outputStream = streamtest.v2.toText(() => {
       const errorString = spy.args[0][0].toString();
       expect(spy.calledOnce).toBeTruthy();
       expect(errorString).toMatch('Row length does not match headers');
@@ -110,7 +110,7 @@ describe('CsvParserPrice::parse', () => {
 
     const spy = sinon.spy(csvParserPrice.logger, 'error');
 
-    const outputStream = streamtest['v2'].toText(() => {
+    const outputStream = streamtest.v2.toText(() => {
       const errorString = spy.args[0][0].toString();
       expect(spy.calledOnce).toBeTruthy();
       expect(errorString).toMatch('Missing required option');
@@ -296,7 +296,7 @@ describe('CsvParserPrice::getCustomTypeDefinition', () => {
     csvParserPrice
       .getCustomTypeDefinition()
       .then(result => {
-        expect(stub.args[0][0].headers['Authorization']).toBe(
+        expect(stub.args[0][0].headers.Authorization).toBe(
           `Bearer ${options.accessToken}`
         );
         expect(result).toBe('Welcome');

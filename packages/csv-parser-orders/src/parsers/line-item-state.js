@@ -23,7 +23,7 @@ export default class LineItemStateParser extends AbstractParser {
     const missingHeaders = this._getMissingHeaders(data);
     if (missingHeaders.length)
       return Promise.reject(
-        `Required headers missing: '${missingHeaders.join(',')}'`
+        new Error(`Required headers missing: '${missingHeaders.join(',')}'`)
       );
 
     const state = {

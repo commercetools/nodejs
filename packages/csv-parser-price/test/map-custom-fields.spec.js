@@ -188,36 +188,40 @@ describe('mapCustomFields::mapNumber', () => {
 });
 
 describe('mapCustomFields::mapSet', () => {
-  test('should format all values to money', () => {
-    const elementType = { name: 'Number' };
-    const result = mapCustomFields.mapSet('1,2,3,4', elementType);
+  describe('without set', () => {
+    test('should format all values to money', () => {
+      const elementType = { name: 'Number' };
+      const result = mapCustomFields.mapSet('1,2,3,4', elementType);
 
-    expect(result.error.length).toBe(0);
-    const expected = [1, 2, 3, 4];
-    expect(result.data).toEqual(expected);
+      expect(result.error.length).toBe(0);
+      const expected = [1, 2, 3, 4];
+      expect(result.data).toEqual(expected);
+    });
   });
 
-  test('should format all values to money', () => {
-    const elementType = { name: 'Money' };
-    const moneySet = 'EUR 1200,USD 40,NGN 200';
-    const result = mapCustomFields.mapSet(moneySet, elementType);
+  describe('with set', () => {
+    test('should format all values to money', () => {
+      const elementType = { name: 'Money' };
+      const moneySet = 'EUR 1200,USD 40,NGN 200';
+      const result = mapCustomFields.mapSet(moneySet, elementType);
 
-    expect(result.error.length).toBe(0);
-    const expected = [
-      {
-        currencyCode: 'EUR',
-        centAmount: 1200,
-      },
-      {
-        currencyCode: 'USD',
-        centAmount: 40,
-      },
-      {
-        currencyCode: 'NGN',
-        centAmount: 200,
-      },
-    ];
-    expect(result.data).toEqual(expected);
+      expect(result.error.length).toBe(0);
+      const expected = [
+        {
+          currencyCode: 'EUR',
+          centAmount: 1200,
+        },
+        {
+          currencyCode: 'USD',
+          centAmount: 40,
+        },
+        {
+          currencyCode: 'NGN',
+          centAmount: 200,
+        },
+      ];
+      expect(result.data).toEqual(expected);
+    });
   });
 
   test('should return error if values in set is invalid', () => {

@@ -46,6 +46,7 @@ rules:
   jest/no-identical-title: error
   jest/valid-expect: error
   no-underscore-dangle: 0
+  prefer-destructuring: 0
 settings:
   flowtype:
     onlyFilesWithFlowAnnotation: true

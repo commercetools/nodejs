@@ -80,7 +80,7 @@ describe('CsvParserDiscountCode', () => {
         path.join(__dirname, 'helpers/sampleCodes.csv')
       );
 
-      const outputStream = streamtest['v2'].toText((err, data) => {
+      const outputStream = streamtest.v2.toText((err, data) => {
         const result = JSON.parse(data);
         expect(result).toBeInstanceOf(Array);
         expect(result.length).toBe(5);
@@ -94,7 +94,7 @@ describe('CsvParserDiscountCode', () => {
         path.join(__dirname, 'helpers/faultyCsv.csv')
       );
       const expectedError = 'Row length does not match headers';
-      const outputStream = streamtest['v2'].toText((err, data) => {
+      const outputStream = streamtest.v2.toText((err, data) => {
         expect(err.message).toMatch(expectedError);
         expect(data).toBeFalsy();
         done();
@@ -110,7 +110,7 @@ describe('CsvParserDiscountCode', () => {
         path.join(__dirname, 'helpers/faultyCsv.csv')
       );
 
-      const outputStream = streamtest['v2'].toText((err, data) => {
+      const outputStream = streamtest.v2.toText((err, data) => {
         const result = JSON.parse(data);
         expect(result).toBeInstanceOf(Array);
         expect(result.length).toBe(3);

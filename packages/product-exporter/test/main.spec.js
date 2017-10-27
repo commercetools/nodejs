@@ -42,7 +42,7 @@ describe('ProductExporter', () => {
   describe('::run', () => {
     it('prepare the output stream and pass to `_getProducts`', async () => {
       productExporter._getProducts = jest.fn(() => Promise.resolve());
-      const outputStream = streamtest['v2'].toText(() => {});
+      const outputStream = streamtest.v2.toText(() => {});
       await productExporter.run(outputStream);
       expect(productExporter._getProducts).toBeCalled();
       expect(productExporter._getProducts).not.toBeCalledWith(outputStream);
@@ -53,7 +53,7 @@ describe('ProductExporter', () => {
         Promise.reject(new Error('error occured'))
       );
 
-      const outputStream = streamtest['v2'].toText((error, result) => {
+      const outputStream = streamtest.v2.toText((error, result) => {
         expect(error.message).toBe('error occured');
         expect(result).toBeUndefined();
         done();

@@ -72,7 +72,7 @@ describe('LineItemStateParser', () => {
       path.join(__dirname, 'data/lineitemstate-sample.csv')
     );
 
-    const output = StreamTest['v2'].toText((err, result) => {
+    const output = StreamTest.v2.toText((err, result) => {
       expect(err).toBe(null);
 
       expect(JSON.parse(result)).toEqual([

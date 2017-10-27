@@ -3,13 +3,18 @@ import path from 'path';
 
 import { homepage } from '../package.json';
 
-export default function getCredentials(projectKey) {
-  if (!projectKey)
-    return Promise.reject(new Error('Missing "projectKey" argument'));
+export function setCredentialsFromEnvFile() {
+  const currentDirectoryResult = dotenv.config({
+    path: path.resolve('.ct-credentials.env'),
+  });
+  const etcDirectoryResult = dotenv.config({
+    path: path.resolve(path.join('/etc', '.ct-credentials.env')),
+  });
 
-  return Promise.resolve(setCredentialsFromEnvFile())
-    .then(() => getCredentialsFromEnvironment(projectKey))
-    .catch(environmentError => Promise.reject(environmentError));
+  return {
+    ...currentDirectoryResult.parsed,
+    ...etcDirectoryResult.parsed,
+  };
 }
 
 export function getCredentialsFromEnvironment(projectKey) {
@@ -42,16 +47,11 @@ export function getCredentialsFromEnvironment(projectKey) {
   });
 }
 
-export function setCredentialsFromEnvFile() {
-  const currentDirectoryResult = dotenv.config({
-    path: path.resolve('.ct-credentials.env'),
-  });
-  const etcDirectoryResult = dotenv.config({
-    path: path.resolve(path.join('/etc', '.ct-credentials.env')),
-  });
+export default function getCredentials(projectKey) {
+  if (!projectKey)
+    return Promise.reject(new Error('Missing "projectKey" argument'));
 
-  return {
-    ...currentDirectoryResult.parsed,
-    ...etcDirectoryResult.parsed,
-  };
+  return Promise.resolve(setCredentialsFromEnvFile())
+    .then(() => getCredentialsFromEnvironment(projectKey))
+    .catch(environmentError => Promise.reject(environmentError));
 }

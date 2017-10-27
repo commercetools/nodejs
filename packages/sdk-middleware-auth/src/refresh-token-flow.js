@@ -26,8 +26,8 @@ export default function createAuthMiddlewareForRefreshTokenFlow(
     // Check if there is already a `Authorization` header in the request.
     // If so, then go directly to the next middleware.
     if (
-      (request.headers && request.headers['authorization']) ||
-      (request.headers && request.headers['Authorization'])
+      (request.headers && request.headers.authorization) ||
+      (request.headers && request.headers.Authorization)
     ) {
       next(request, response);
       return;

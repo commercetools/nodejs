@@ -12,6 +12,35 @@ import 'isomorphic-fetch';
 import parseHeaders from './parse-headers';
 import getErrorByCode, { NetworkError, HttpError } from './errors';
 
+function createError({ statusCode, message, ...rest }): HttpErrorType {
+  let errorMessage = message || 'Unexpected non-JSON error response';
+  if (statusCode === 404)
+    errorMessage = `URI not found: ${rest.originalRequest.uri}`;
+
+  const ResponseError = getErrorByCode(statusCode);
+  if (ResponseError) return new ResponseError(errorMessage, rest);
+  return new HttpError(statusCode, errorMessage, rest);
+}
+
+// calculates the delay duration exponentially
+// More info about the algorithm use here https://goo.gl/Xk8h5f
+function calcDelayDuration(
+  retryCount: number,
+  retryDelay: number,
+  maxRetries: number,
+  backoff: boolean,
+  maxDelay: number
+): number {
+  if (backoff)
+    return retryCount !== 0 // do not increase if it's the first retry
+      ? Math.min(
+          Math.round((Math.random() + 1) * retryDelay * 2 ** retryCount),
+          maxDelay
+        )
+      : retryDelay;
+  return retryDelay;
+}
+
 export default function createHttpMiddleware({
   host,
   includeResponseHeaders,
@@ -125,33 +154,4 @@ export default function createHttpMiddleware({
     }
     executeFetch();
   };
-}
-
-// calculates the delay duration exponentially
-// More info about the algorithm use here https://goo.gl/Xk8h5f
-function calcDelayDuration(
-  retryCount: number,
-  retryDelay: number,
-  maxRetries: number,
-  backoff: boolean,
-  maxDelay: number
-): number {
-  if (backoff)
-    return retryCount !== 0 // do not increase if it's the first retry
-      ? Math.min(
-          Math.round((Math.random() + 1) * retryDelay * 2 ** retryCount),
-          maxDelay
-        )
-      : retryDelay;
-  return retryDelay;
-}
-
-function createError({ statusCode, message, ...rest }): HttpErrorType {
-  let errorMessage = message || 'Unexpected non-JSON error response';
-  if (statusCode === 404)
-    errorMessage = `URI not found: ${rest.originalRequest.uri}`;
-
-  const ResponseError = getErrorByCode(statusCode);
-  if (ResponseError) return new ResponseError(errorMessage, rest);
-  return new HttpError(statusCode, errorMessage, rest);
 }

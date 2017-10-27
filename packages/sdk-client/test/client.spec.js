@@ -119,7 +119,9 @@ describe('execute', () => {
       .execute(request)
       .then(() =>
         Promise.reject(
-          'This function should never be called, the response was rejected'
+          new Error(
+            'This function should never be called, the response was rejected'
+          )
         )
       )
       .catch(error => {
@@ -388,7 +390,9 @@ describe('process', () => {
       .process(request, () => Promise.resolve('OK'))
       .then(() =>
         Promise.reject(
-          'This function should never be called, the response was rejected'
+          new Error(
+            'This function should never be called, the response was rejected'
+          )
         )
       )
       .catch(error => {
@@ -407,10 +411,12 @@ describe('process', () => {
     });
 
     return client
-      .process(request, () => Promise.reject('Rejection from user'))
+      .process(request, () => Promise.reject(new Error('Rejection from user')))
       .then(() =>
         Promise.reject(
-          'This function should never be called, the response was rejected'
+          new Error(
+            'This function should never be called, the response was rejected'
+          )
         )
       )
       .catch(error => {

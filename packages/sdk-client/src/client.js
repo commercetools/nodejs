@@ -13,6 +13,15 @@ import type {
 import qs from 'querystring';
 import validate from './validate';
 
+function compose(...funcs: Array<Function>): Function {
+  // eslint-disable-next-line no-param-reassign
+  funcs = funcs.filter(func => typeof func === 'function');
+
+  if (funcs.length === 1) return funcs[0];
+
+  return funcs.reduce((a, b) => (...args) => a(b(...args)));
+}
+
 export default function createClient(options: ClientOptions): Client {
   if (!options) throw new Error('Missing required options');
 
@@ -145,13 +154,4 @@ export default function createClient(options: ClientOptions): Client {
       });
     },
   };
-}
-
-function compose(...funcs: Array<Function>): Function {
-  // eslint-disable-next-line no-param-reassign
-  funcs = funcs.filter(func => typeof func === 'function');
-
-  if (funcs.length === 1) return funcs[0];
-
-  return funcs.reduce((a, b) => (...args) => a(b(...args)));
 }

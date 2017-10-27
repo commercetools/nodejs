@@ -99,11 +99,13 @@ export default class DiscountCodeImport {
         );
     })
       .then(() => Promise.resolve())
-      .catch(error =>
-        Promise.reject({
-          error: error.message || error,
-          summary: this._summary,
-        })
+      .catch(caughtError =>
+        Promise.reject(
+          new Error({
+            error: caughtError.message || caughtError,
+            summary: this._summary,
+          })
+        )
       );
   }
 

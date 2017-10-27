@@ -89,7 +89,7 @@ export default class DeliveriesParser extends AbstractParser {
         {
           // there can be multiple delivery items with same item.id and
           // item.quantity therefore we use unique identifier _itemGroupId
-          _groupId: data['_itemGroupId'],
+          _groupId: data._itemGroupId,
           id: data['item.id'],
           quantity: parseInt(data['item.quantity'], 10),
         },
@@ -109,7 +109,7 @@ export default class DeliveriesParser extends AbstractParser {
     }
 
     const order = {
-      orderNumber: data['orderNumber'],
+      orderNumber: data.orderNumber,
       shippingInfo: {
         deliveries: [delivery],
       },

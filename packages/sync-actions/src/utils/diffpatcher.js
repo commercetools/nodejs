@@ -4,6 +4,13 @@
 // https://github.com/benjamine/jsondiffpatch/issues/76#issuecomment-270207970
 import { DiffPatcher } from 'jsondiffpatch/src/diffpatcher';
 
+export function objectHash(obj, index) {
+  const objIndex = `$$index:${index}`;
+  return typeof obj === 'object' && obj !== null
+    ? obj.id || obj.name || obj.url || objIndex
+    : objIndex;
+}
+
 const diffpatcher = new DiffPatcher({
   objectHash,
   arrays: {
@@ -21,13 +28,6 @@ const diffpatcher = new DiffPatcher({
     minLength: 300,
   },
 });
-
-export function objectHash(obj, index) {
-  const objIndex = `$$index:${index}`;
-  return typeof obj === 'object' && obj !== null
-    ? obj.id || obj.name || obj.url || objIndex
-    : objIndex;
-}
 
 export function diff(oldObj, newObj) {
   return diffpatcher.diff(oldObj, newObj);

@@ -1,15 +1,6 @@
 import CONSTANTS from './constants';
 
 export default (function MapCustomFields() {
-  // Public methods
-  return {
-    parse,
-    mapBoolean,
-    mapMoney,
-    mapSet,
-    mapNumber,
-  };
-
   function isValidValue(value) {
     return typeof value === 'string' && value.length > 0;
   }
@@ -192,11 +183,20 @@ export default (function MapCustomFields() {
     const result = {};
     if (!isValidValue(rawNo)) return result;
 
-    if (isNaN(Number(rawNo))) {
+    if (Number.isNaN(Number(rawNo))) {
       result.error = `The number ${rawNo} isn't valid`;
       return result;
     }
     result.data = Number(rawNo);
     return result;
   }
+
+  // Public methods
+  return {
+    parse,
+    mapBoolean,
+    mapMoney,
+    mapSet,
+    mapNumber,
+  };
 })();

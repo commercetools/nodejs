@@ -23,6 +23,13 @@ type UseKey = {
 
 const requiredDefinitionProps = ['type', 'endpoint', 'features'];
 
+function getIdOrKey(params: Object): string {
+  if (params.id) return `/${params.id}`;
+  else if (params.key) return `/key=${params.key}`;
+  else if (params.customerId) return `/?customerId=${params.customerId}`;
+  return '';
+}
+
 export default function createService(
   definition: ServiceBuilderDefinition,
   options: string = ''
@@ -114,11 +121,4 @@ export default function createService(
       return uri;
     },
   });
-}
-
-function getIdOrKey(params: Object): string {
-  if (params.id) return `/${params.id}`;
-  else if (params.key) return `/key=${params.key}`;
-  else if (params.customerId) return `/?customerId=${params.customerId}`;
-  return '';
 }

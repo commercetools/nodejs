@@ -1,3 +1,7 @@
+function _parseBool(value) {
+  return value === 'true' || value === true;
+}
+
 // Implement a function to correctly cast boolean and number types in the CSV
 // This is necessary because the csv-parser parses all fields as strings
 export default function castTypes(item) {
@@ -11,8 +15,4 @@ export default function castTypes(item) {
       10
     );
   return casted;
-}
-
-function _parseBool(value) {
-  return value === 'true' || value === true;
 }

@@ -25,7 +25,7 @@ describe('AddReturnInfoParser', () => {
         path.join(__dirname, 'data/return-info-sample.csv')
       );
 
-      const outputStream = StreamTest['v2'].toText((err, result) => {
+      const outputStream = StreamTest.v2.toText((err, result) => {
         expect(err).toBe(null);
 
         const res = JSON.parse(result);
@@ -104,7 +104,7 @@ describe('AddReturnInfoParser', () => {
         path.join(__dirname, 'data/return-info-error2-sample.csv')
       );
 
-      const outputStream = StreamTest['v2'].toText((err, res) => {
+      const outputStream = StreamTest.v2.toText((err, res) => {
         expect(res).toBeUndefined();
         expect(mockErrorLog.mock.calls[0][0]).toEqual(
           "Required headers missing: 'orderNumber'"
@@ -128,7 +128,7 @@ describe('AddReturnInfoParser', () => {
         path.join(__dirname, 'data/return-info-error-sample.csv')
       );
 
-      const outputStream = StreamTest['v2'].toText(err => {
+      const outputStream = StreamTest.v2.toText(err => {
         expect(err.toString()).toEqual(
           'Error: Row length does not match headers'
         );

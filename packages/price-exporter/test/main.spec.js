@@ -74,7 +74,7 @@ describe('PriceExporter', () => {
         createWriteStream: jest.fn(() => ({ pipe: jest.fn() })),
       }));
       priceExporter._getProducts = jest.fn(() => Promise.resolve());
-      const outputStream = streamtest['v2'].toText(() => {});
+      const outputStream = streamtest.v2.toText(() => {});
       priceExporter.config.exportFormat = 'json';
       await priceExporter.run(outputStream);
       expect(priceExporter._getProducts).toBeCalled();
@@ -84,7 +84,7 @@ describe('PriceExporter', () => {
 
     it('should call `_processStream` with outputStream if csv', async () => {
       priceExporter._getProducts = jest.fn(() => Promise.resolve());
-      const outputStream = streamtest['v2'].toText(() => {});
+      const outputStream = streamtest.v2.toText(() => {});
 
       priceExporter.config.exportFormat = 'csv';
       await priceExporter.run(outputStream);
@@ -129,7 +129,7 @@ describe('PriceExporter', () => {
         .spyOn(priceExporter.client, 'process')
         .mockImplementation(() => Promise.reject(new Error('error occured')));
 
-      const outputStream = streamtest['v2'].toText((error, result) => {
+      const outputStream = streamtest.v2.toText((error, result) => {
         expect(error.message).toBe('error occured');
         expect(result).toBeUndefined();
         spy.mockRestore();

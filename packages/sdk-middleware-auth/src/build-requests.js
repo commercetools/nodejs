@@ -35,7 +35,7 @@ export function buildRequestForClientCredentialsFlow(
   const defaultScope = `${authScopes.MANAGE_PROJECT}:${options.projectKey}`;
   const scope = (options.scopes || [defaultScope]).join(' ');
 
-  const basicAuth = new Buffer(`${clientId}:${clientSecret}`).toString(
+  const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString(
     'base64'
   );
   // This is mostly useful for internal testing purposes to be able to check
@@ -73,7 +73,7 @@ export function buildRequestForPasswordFlow(
   const scope = (options.scopes || []).join(' ');
   const scopeStr = scope ? `&scope=${scope}` : '';
 
-  const basicAuth = new Buffer(`${clientId}:${clientSecret}`).toString(
+  const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString(
     'base64'
   );
   // This is mostly useful for internal testing purposes to be able to check
@@ -107,7 +107,7 @@ export function buildRequestForRefreshTokenFlow(
   if (!(clientId && clientSecret))
     throw new Error('Missing required credentials (clientId, clientSecret)');
 
-  const basicAuth = new Buffer(`${clientId}:${clientSecret}`).toString(
+  const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString(
     'base64'
   );
   // This is mostly useful for internal testing purposes to be able to check

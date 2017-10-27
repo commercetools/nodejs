@@ -34,6 +34,12 @@ import type { CodeData, CodeDataArray, CodeOptions } from 'types/discountCodes';
 /*  More information about the discount codes can be found here: http://dev.commercetools.com/http-api-projects-discountCodes.html#discountcode
  */
 
+function _prepareCode(code: string, length: number, prefix: string): string {
+  if (!prefix.length) return code;
+
+  return `${prefix}${code.slice(-(length - prefix.length))}`;
+}
+
 export default function discountCodeGenerator(
   options: CodeOptions,
   data: CodeData
@@ -52,10 +58,4 @@ export default function discountCodeGenerator(
     codes.push(codeObject);
   }
   return codes;
-}
-
-function _prepareCode(code: string, length: number, prefix: string): string {
-  if (!prefix.length) return code;
-
-  return `${prefix}${code.slice(-(length - prefix.length))}`;
 }

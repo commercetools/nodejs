@@ -178,7 +178,7 @@ const resolveOutput = (_args, outputData) => {
 
 // Build discount code options
 const buildOptions = _args => ({
-  quantity: _args['quantity'],
+  quantity: _args.quantity,
   length: _args['code-length'],
   prefix: _args['code-prefix'],
 });

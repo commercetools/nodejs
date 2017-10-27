@@ -148,7 +148,7 @@ describe('InventoryExporter', () => {
           csvStream.write(sampleInventory);
           return Promise.resolve();
         });
-      const outputStream = streamtest['v2'].toText((error, result) => {
+      const outputStream = streamtest.v2.toText((error, result) => {
         const expectedResult = stripIndent`
           sku,quantityOnStock,restockableInDays
           hello,me,4
@@ -166,7 +166,7 @@ describe('InventoryExporter', () => {
       const spy = jest
         .spyOn(inventoryExporter, '_fetchInventories')
         .mockImplementation(() => Promise.reject(new Error('error occured')));
-      const outputStream = streamtest['v2'].toText((error, result) => {
+      const outputStream = streamtest.v2.toText((error, result) => {
         expect(error.message).toBe('error occured');
         expect(result).toBeUndefined();
         spy.mockRestore();
@@ -181,7 +181,7 @@ describe('InventoryExporter', () => {
       const spy = jest
         .spyOn(inventoryExporter, '_fetchInventories')
         .mockImplementation(() => Promise.reject(new Error('error occured')));
-      const outputStream = streamtest['v2'].toText((error, result) => {
+      const outputStream = streamtest.v2.toText((error, result) => {
         expect(error.message).toBe('error occured');
         expect(result).toBeUndefined();
         spy.mockRestore();
@@ -203,7 +203,7 @@ describe('InventoryExporter', () => {
           csvStream.write(sampleInventory);
           return Promise.resolve();
         });
-      const outputStream = streamtest['v2'].toText((error, result) => {
+      const outputStream = streamtest.v2.toText((error, result) => {
         const expectedResult = [{ ...sampleInventory }];
         expect(JSON.parse(result)).toEqual(expectedResult);
         spy.mockRestore();
