@@ -13,6 +13,7 @@ node_modules
 .released-packages
 
 # Integration tests dependencies cache
+*.tgz
 integration-tests/package-lock.json
 
 # Build artifacts
