@@ -13,7 +13,7 @@ npm run coverage:ci
 # Note: PRs coming from forks do not have access to encrypted variables,
 # thus tasks that rely on that should not run.
 if [ "$TRAVIS_SECURE_ENV_VARS" == "true" ]; then
-  npm run it
+  npm run test:integration
 else
   echo "Build does not have secure env variables, skipping integration tests!"
 fi

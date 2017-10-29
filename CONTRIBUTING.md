@@ -31,7 +31,7 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 
 5. Integration tests are separated out in another folder "/integration-tests". To run the integration test, you need to create a env file as specified [here](https://commercetools.github.io/nodejs/sdk/api/getCredentials.html). Then run integration test with
   ```
-  npm run it -- --projectkey=testing-project --runInBand
+  npm run test:integration -- --projectkey=testing-project --runInBand
   ```
   replace "testing-project" with your project
 
