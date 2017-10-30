@@ -30,6 +30,7 @@ import highland from 'highland'
 import Promise from 'bluebird'
 import { memoize } from 'lodash'
 import ProductMapping from './mappings'
+import { writeToSingleCsvFile, writeToZipFile } from './writer'
 import pkg from '../package.json'
 
 export default class JSONParserProduct {
@@ -80,7 +81,6 @@ export default class JSONParserProduct {
       ...logger,
     }
     this.categoriesCache = {}
-    this.attributes = {}
     this.accessToken = accessToken
 
     const mappingParams = {
@@ -92,13 +92,14 @@ export default class JSONParserProduct {
     this._productMapping = new ProductMapping(mappingParams)
   }
 
-  run (input, output) {
-    const productStream = this.parse(input)
+  run (input: stream$Readable, output: stream$Writable) {
+    const productStream = this.parse(input, output)
+    const headers = this.parserConfig.headers
 
-    if (this.parserConfig.headers)
-      this._writeToSingleFile(productStream, output, this.parserConfig.headers)
+    if (headers)
+      writeToSingleCsvFile(productStream, output, this.logger, headers)
     else
-      this._writeToManyFiles(productStream, output)
+      writeToZipFile(productStream, output, this.logger)
   }
 
   parse (input: stream$Readable, output: stream$Writable) {
@@ -121,7 +122,7 @@ export default class JSONParserProduct {
       .map((product: ResolvedProdProj) => this._productMapping.run(product))
       .flatten()
       .doto(() => {
-        this.logger.info(`Done with conversion of ${productCount} products`)
+        this.logger.debug(`Done with conversion of ${productCount} products`)
       })
       .stopOnError((err: Error) => {
         this.logger.error(err)
@@ -200,7 +201,9 @@ export default class JSONParserProduct {
       ))
   }
 
-  _resolveCategories (categoriesReference: Array<TypeReference>): Array<Category> | {} {
+  _resolveCategories (
+    categoriesReference: Array<TypeReference>,
+  ): Array<Category> | {} {
     if (!categoriesReference || !categoriesReference.length)
       return {}
 
@@ -210,8 +213,8 @@ export default class JSONParserProduct {
       .then((categories: Array<Category>): { categories: Array<Category> } => {
         if (this.parserConfig.categoryBy !== 'namedPath')
           return { categories }
-        return Promise.map(categories, (category: Category): Array<Category> => (
-          this._resolveAncestors(category)
+        return Promise.map(categories, (cat: Category): Array<Category> => (
+          this._resolveAncestors(cat)
         ))
         .then((categoriesWithParents: Array<Category>): Object => (
           { categories: categoriesWithParents }

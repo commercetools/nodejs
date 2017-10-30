@@ -1,6 +1,7 @@
 import StreamTest from 'streamtest'
 import { oneLineTrim } from 'common-tags'
 import JSONParserProduct from '../src/main'
+import * as writer from '../src/writer'
 
 const streamTest = StreamTest['v2']
 
@@ -50,7 +51,34 @@ describe('JSONParserProduct', () => {
   })
 
   describe('::run', () => {
-    it('should write outto multiple')
+    let zipSpy
+    let csvSpy
+    beforeEach(() => {
+      zipSpy = jest.spyOn(writer, 'writeToZipFile')
+        .mockImplementation(() => {})
+      csvSpy = jest.spyOn(writer, 'writeToSingleCsvFile')
+        .mockImplementation(() => {})
+    })
+    afterEach(() => {
+      jest.resetAllMocks()
+    })
+
+    it('should write data to single `csv` file if headers', () => {
+      jsonParserProduct.parse = jest.fn(() => 'foo')
+      jsonParserProduct.parserConfig.headers = []
+
+      jsonParserProduct.run()
+      expect(csvSpy).toBeCalled()
+      expect(zipSpy).not.toBeCalled()
+    })
+
+    it('should write data to `zip` file if no headers', () => {
+      jsonParserProduct.parse = jest.fn(() => 'bar')
+
+      jsonParserProduct.run()
+      expect(csvSpy).not.toBeCalled()
+      expect(zipSpy).toBeCalled()
+    })
   })
 
   describe('::parse', () => {
@@ -77,47 +105,6 @@ describe('JSONParserProduct', () => {
       const inputStream = streamTest.fromChunks([product])
       const productStream = jsonParserProduct.parse(inputStream)
       expect(productStream.source.__HighlandStream__).toBeTruthy()
-    })
-
-    xit('should log error and exit on errors', (done) => {
-      const product1 = oneLineTrim`
-        {
-          "id": "product-1-id",
-          "slug": {
-            "en": "my-slug-1"
-          },
-          "masterVariant": {
-            "id": "mv-id",
-            "key": "mv-key"
-          },
-          "variants": []
-        }`
-      // invalid json to generate error
-      const product2 = oneLineTrim`
-        {
-          "id": "product-2-id",
-          "slug": {
-            en: "my-slug-2
-          },
-          "masterVariant": {
-            "id": "mv-id-2",
-            "key": "mv-key-2"
-          },
-          "variants": []
-        }`
-
-      const myChunk = `${product1}\n${product2}`
-      const inputStream = streamTest.fromChunks([myChunk])
-      const expectedError = /Unexpected token e in JSON/
-      const outputStream = streamTest.toText((error, result) => {
-        expect(jsonParserProduct.logger.error).toBeCalledWith(
-          expect.objectContaining(error),
-        )
-        expect(error.message).toMatch(expectedError)
-        expect(result).toBeFalsy()
-        done()
-      })
-      jsonParserProduct.parse(inputStream, outputStream)
     })
   })
 

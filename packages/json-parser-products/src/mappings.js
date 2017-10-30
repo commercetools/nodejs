@@ -35,7 +35,10 @@ export default class ProductMapping {
     const mergedVarProducts = ProductMapping._mergeVariants(product)
     const variantsWithProductInfo = ProductMapping._spreadProdOnVariants(
       mergedVarProducts, this.fillAllRows)
-    const a = variantsWithProductInfo.map((variant: SingleVariantPerProduct) => this._mapProperties(variant))
+    const a = variantsWithProductInfo.map(
+      (variant: SingleVariantPerProduct) => (
+        this._mapProperties(variant)
+      ))
     const flatProducts = a.map(flatten)
     return flatProducts
   }
@@ -159,7 +162,7 @@ export default class ProductMapping {
   }
 
   static _retrieveNamedPath (category: Category, lang: string): string {
-    const getParent = (cat: Category): string => {
+    const getParent = (cat: Object): string => {
       if (!cat.parent)
         return cat.name[lang]
       return `${getParent(cat.parent)}>${cat.name[lang]}`
