@@ -39,7 +39,7 @@
     "highland": "^2.11.1",
     "json2csv": "^3.11.5",
     "lodash": "^4.17.4",
-    "single-emit": "0.0.1",
+    "single-emit": "0.0.2",
     "tmp": "0.0.33"
   },
   "devDependencies": {
