@@ -497,7 +497,7 @@ function _buildVariantImagesAction (
         } else if ({}.hasOwnProperty.call(image, 'label') &&
           (image.label.length === 1 || image.label.length === 2))
           actions.push({
-            action: 'changeImageLabel',
+            action: 'setImageLabel',
             variantId: oldVariant.id,
             imageUrl: oldObj.url,
             label: diffpatcher.getDeltaValue(image.label),
