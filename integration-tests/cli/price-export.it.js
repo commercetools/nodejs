@@ -86,7 +86,7 @@ describe('Price Exporter', () => {
         clearData(apiConfig, 'customerGroups'),
       ])
     ))
-    .catch(process.stderr),
+    .catch(process.stderr.write),
   )
 
   describe('CLI basic functionality', () => {

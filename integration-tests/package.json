@@ -14,6 +14,7 @@
     "@commercetools/http-user-agent": "*",
     "@commercetools/inventories-exporter": "*",
     "@commercetools/price-exporter": "*",
+    "@commercetools/product-exporter": "*",
     "@commercetools/sdk-client": "*",
     "@commercetools/sdk-middleware-auth": "*",
     "@commercetools/sdk-middleware-http": "*",
