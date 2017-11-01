@@ -20,6 +20,24 @@ import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-ag
 import { createSyncDiscountCodes } from '@commercetools/sync-actions';
 import pkg from '../package.json';
 
+class DiscountCodeImportError extends Error {
+  error: any;
+  summary: string;
+  message: string;
+
+  constructor(
+    message: string,
+    summary: string = 'No summary provided.',
+    error: any = null
+  ) {
+    super(message);
+
+    this.message = message;
+    this.summary = summary;
+    this.error = error;
+  }
+}
+
 export default class DiscountCodeImport {
   // Set flowtype annotations
   accessToken: string;
@@ -33,9 +51,13 @@ export default class DiscountCodeImport {
 
   constructor(options: ConstructorOptions, logger: LoggerOptions) {
     if (!options.apiConfig)
-      throw new Error('The contructor must be passed an `apiConfig` object');
+      throw new DiscountCodeImportError(
+        'The contructor must be passed an `apiConfig` object'
+      );
     if (options.batchSize > 500)
-      throw new Error('The `batchSize` must not be more than 500');
+      throw new DiscountCodeImportError(
+        'The `batchSize` must not be more than 500'
+      );
     this.apiConfig = options.apiConfig;
     this.accessToken = options.accessToken;
     this.batchSize = options.batchSize || 50;
@@ -99,13 +121,13 @@ export default class DiscountCodeImport {
         );
     })
       .then(() => Promise.resolve())
-      .catch(caughtError =>
-        Promise.reject(
-          new Error({
-            error: caughtError.message || caughtError,
-            summary: this._summary,
-          })
-        )
+      .catch(
+        caughtError =>
+          new DiscountCodeImportError(
+            'Processing batches failed',
+            caughtError.message || caughtError,
+            this._summary
+          )
       );
   }
 
