@@ -16,7 +16,7 @@
     "test:package": "cross-env NODE_ENV=test npm run build && ./scripts/test-package",
     "pretest:integration": "./scripts/install-npm-packages-for-integration-tests",
     "test:integration": "cross-env NODE_ENV=test jest --config integration-tests/.jestrc.json",
-    "format": "prettier --write 'packages/**/*.js'",
+    "format": "prettier --write '{packages,integration-tests,types}/**/*.js'",
     "coverage": "npm run build && npm test -- --no-watchman --coverage",
     "coverage:ci": "npm test -- --no-watchman --coverage && codecov",
     "semantic-release": "lerna-semantic-release pre && lerna-semantic-release post && lerna-semantic-release perform",
