@@ -46,17 +46,17 @@ describe('DiscountCodeImporter', () => {
       )
     })
 
-    it('should throw if `batchSize` is more than 500', () => {
+    it('should throw if `batchSize` is more than 200', () => {
       expect(
         () =>
           new DiscountCodeImport(
             {
               apiConfig: {},
-              batchSize: 501,
+              batchSize: 205,
             },
             logger
           )
-      ).toThrow(/The `batchSize` must not be more than 500/)
+      ).toThrow(/The `batchSize` must not be more than 200/)
     })
   })
 

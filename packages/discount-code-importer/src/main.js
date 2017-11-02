@@ -54,9 +54,9 @@ export default class DiscountCodeImport {
       throw new DiscountCodeImportError(
         'The contructor must be passed an `apiConfig` object'
       )
-    if (options.batchSize > 500)
+    if (options.batchSize > 200)
       throw new DiscountCodeImportError(
-        'The `batchSize` must not be more than 500'
+        'The `batchSize` must not be more than 200'
       )
     this.apiConfig = options.apiConfig
     this.accessToken = options.accessToken
@@ -92,7 +92,7 @@ export default class DiscountCodeImport {
 
   // Wrapper function for compatibility with CLI
   processStream(chunk: ChunkOptions, cb: () => mixed) {
-    this.logger.info('Starting conversion')
+    this.logger.verbose(`Starting conversion of ${chunk.length} discount codes`)
     return this._processBatches(chunk).then(cb)
     // No catch block as errors will be caught in the CLI
   }
