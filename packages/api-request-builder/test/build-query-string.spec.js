@@ -1,11 +1,11 @@
-import buildQueryString from '../src/build-query-string';
+import buildQueryString from '../src/build-query-string'
 
 describe('buildQueryString', () => {
   it('should throw if no argument is passed', () => {
     expect(() => buildQueryString()).toThrowError(
       /Missing options object to build query string/
-    );
-  });
+    )
+  })
 
   it('should build fully encoded query string', () => {
     const params = {
@@ -54,7 +54,7 @@ describe('buildQueryString', () => {
         text: { lang: 'en', value: 'Foo' },
       },
       searchKeywords: [{ lang: 'en', value: 'Foo' }],
-    };
+    }
     /* eslint-disable max-len */
     const expectedQueryString =
       'staged=false&' +
@@ -84,21 +84,21 @@ describe('buildQueryString', () => {
         'variants.attributes.color.key:"red")'
       )}&` +
       `filter.facets=${encodeURIComponent('categories.id:"123"')}&` +
-      `searchKeywords.en=${encodeURIComponent('Foo')}`;
+      `searchKeywords.en=${encodeURIComponent('Foo')}`
     /* eslint-enable max-len */
 
-    expect(buildQueryString(params)).toEqual(expectedQueryString);
-  });
+    expect(buildQueryString(params)).toEqual(expectedQueryString)
+  })
 
   it('should build perPage with zero value', () => {
     const params = {
       pagination: {
         perPage: 0,
       },
-    };
-    const expectedQueryString = 'limit=0';
-    expect(buildQueryString(params)).toEqual(expectedQueryString);
-  });
+    }
+    const expectedQueryString = 'limit=0'
+    expect(buildQueryString(params)).toEqual(expectedQueryString)
+  })
 
   it('should disable markMatchingVariants by default', () => {
     const params = {
@@ -124,7 +124,7 @@ describe('buildQueryString', () => {
         markMatchingVariants: false,
         text: { lang: 'en', value: 'Foo' },
       },
-    };
+    }
     /* eslint-disable max-len */
     const expectedQueryString =
       `text.en=${encodeURIComponent('Foo')}&` +
@@ -142,9 +142,9 @@ describe('buildQueryString', () => {
       `filter.facets=${encodeURIComponent(
         'variants.attributes.color.key:"red")'
       )}&` +
-      `filter.facets=${encodeURIComponent('categories.id:"123"')}`;
+      `filter.facets=${encodeURIComponent('categories.id:"123"')}`
     /* eslint-enable max-len */
 
-    expect(buildQueryString(params)).toEqual(expectedQueryString);
-  });
-});
+    expect(buildQueryString(params)).toEqual(expectedQueryString)
+  })
+})

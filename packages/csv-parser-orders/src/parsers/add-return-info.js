@@ -1,32 +1,32 @@
-import JSONStream from 'JSONStream';
-import { filter, find } from 'lodash';
-import AbstractParser from './abstract-parser';
+import JSONStream from 'JSONStream'
+import { filter, find } from 'lodash'
+import AbstractParser from './abstract-parser'
 
 export default class AddReturnInfoParser extends AbstractParser {
   constructor(config) {
-    super(config, 'returnInfo');
+    super(config, 'returnInfo')
   }
 
   parse(input, output) {
-    this.logger.info('Starting Return Info CSV conversion');
+    this.logger.info('Starting Return Info CSV conversion')
     this._streamInput(input, output)
       .reduce([], AddReturnInfoParser._reduceOrders)
       .stopOnError(err => {
-        this.logger.error(err);
-        return output.emit('error', err);
+        this.logger.error(err)
+        return output.emit('error', err)
       })
       .pipe(JSONStream.stringify(false))
-      .pipe(output);
+      .pipe(output)
   }
 
   _processData(data) {
-    this.logger.verbose('Processing data to CTP format');
+    this.logger.verbose('Processing data to CTP format')
 
-    const missingHeaders = this._getMissingHeaders(data);
+    const missingHeaders = this._getMissingHeaders(data)
     if (missingHeaders.length)
       return Promise.reject(
         new Error(`Required headers missing: '${missingHeaders.join(',')}'`)
-      );
+      )
 
     /**
      * Sample returnInfo object that the API supports:
@@ -60,8 +60,8 @@ export default class AddReturnInfoParser extends AbstractParser {
           ],
         },
       ],
-    };
-    return Promise.resolve(result);
+    }
+    return Promise.resolve(result)
   }
 
   static _reduceOrders(allOrders, currentOrder) {
@@ -72,34 +72,34 @@ export default class AddReturnInfoParser extends AbstractParser {
      */
 
     // push first order into final array
-    if (!allOrders.length) return allOrders.concat(currentOrder);
+    if (!allOrders.length) return allOrders.concat(currentOrder)
 
     // find order in final array with this orderNumber
     const existingOrder = find(allOrders, [
       'orderNumber',
       currentOrder.orderNumber,
-    ]);
+    ])
 
     // if currentOrder (with this orderNumber) haven't been inserted yet
     // push it directly into final array
-    if (!existingOrder) return allOrders.concat(currentOrder);
+    if (!existingOrder) return allOrders.concat(currentOrder)
 
     // if there is already an order with this orderNumber
     // get all returnInfos with same returnId
     const existingReturnInfos = filter(existingOrder.returnInfo, [
       '_returnId',
       currentOrder.returnInfo[0]._returnId,
-    ]);
+    ])
 
     // if there is no returnInfo with this returnId push those from currentOrder
     if (!existingReturnInfos.length)
-      existingOrder.returnInfo.push(...currentOrder.returnInfo);
+      existingOrder.returnInfo.push(...currentOrder.returnInfo)
     else
       // else concat items from currentOrder
       existingReturnInfos.forEach(returnInfo => {
-        returnInfo.items.push(...currentOrder.returnInfo[0].items);
-      });
+        returnInfo.items.push(...currentOrder.returnInfo[0].items)
+      })
 
-    return allOrders;
+    return allOrders
   }
 }

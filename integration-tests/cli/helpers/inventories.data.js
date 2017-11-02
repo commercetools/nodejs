@@ -11,7 +11,7 @@ export const inventories = [
       },
     },
   },
-];
+]
 
 export const customFields = [
   {
@@ -37,4 +37,4 @@ export const customFields = [
       },
     ],
   },
-];
+]

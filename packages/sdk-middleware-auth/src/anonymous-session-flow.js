@@ -6,19 +6,19 @@ import type {
   MiddlewareResponse,
   Next,
   Task,
-} from 'types/sdk';
+} from 'types/sdk'
 
-import { buildRequestForAnonymousSessionFlow } from './build-requests';
-import authMiddlewareBase from './base-auth-flow';
-import store from './utils';
+import { buildRequestForAnonymousSessionFlow } from './build-requests'
+import authMiddlewareBase from './base-auth-flow'
+import store from './utils'
 
 export default function createAuthMiddlewareForAnonymousSessionFlow(
   options: AuthMiddlewareOptions
 ): Middleware {
-  const tokenCache = store({});
-  const pendingTasks: Array<Task> = [];
+  const tokenCache = store({})
+  const pendingTasks: Array<Task> = []
 
-  const requestState = store(false);
+  const requestState = store(false)
   return (next: Next) => (
     request: MiddlewareRequest,
     response: MiddlewareResponse
@@ -29,8 +29,8 @@ export default function createAuthMiddlewareForAnonymousSessionFlow(
       (request.headers && request.headers.authorization) ||
       (request.headers && request.headers.Authorization)
     ) {
-      next(request, response);
-      return;
+      next(request, response)
+      return
     }
     const params = {
       request,
@@ -39,7 +39,7 @@ export default function createAuthMiddlewareForAnonymousSessionFlow(
       pendingTasks,
       requestState,
       tokenCache,
-    };
-    authMiddlewareBase(params, next, options);
-  };
+    }
+    authMiddlewareBase(params, next, options)
+  }
 }

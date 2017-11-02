@@ -1,7 +1,7 @@
 /* @flow */
-import TokenGenerator from 'tokgen';
+import TokenGenerator from 'tokgen'
 
-import type { CodeData, CodeDataArray, CodeOptions } from 'types/discountCodes';
+import type { CodeData, CodeDataArray, CodeOptions } from 'types/discountCodes'
 
 /*
  * The discountCodeGenerator function takes 2 arguments {options} and {data}
@@ -35,9 +35,9 @@ import type { CodeData, CodeDataArray, CodeOptions } from 'types/discountCodes';
  */
 
 function _prepareCode(code: string, length: number, prefix: string): string {
-  if (!prefix.length) return code;
+  if (!prefix.length) return code
 
-  return `${prefix}${code.slice(-(length - prefix.length))}`;
+  return `${prefix}${code.slice(-(length - prefix.length))}`
 }
 
 export default function discountCodeGenerator(
@@ -45,17 +45,17 @@ export default function discountCodeGenerator(
   data: CodeData
 ): CodeDataArray {
   if (typeof options !== 'object' || !options.quantity)
-    throw new Error('The generator requires valid parameters. See the docs');
+    throw new Error('The generator requires valid parameters. See the docs')
   if (typeof data !== 'object')
-    throw new Error('The generator requires discount data');
-  const { length, prefix, quantity } = { length: 11, prefix: '', ...options };
-  const codes = [];
-  const chars = '0-9a-zA-Z';
-  const generator = new TokenGenerator({ chars, length });
+    throw new Error('The generator requires discount data')
+  const { length, prefix, quantity } = { length: 11, prefix: '', ...options }
+  const codes = []
+  const chars = '0-9a-zA-Z'
+  const generator = new TokenGenerator({ chars, length })
   for (let i = 0; i < quantity; i += 1) {
-    const codeObject = Object.assign({}, data);
-    codeObject.code = _prepareCode(generator.generate(), length, prefix);
-    codes.push(codeObject);
+    const codeObject = Object.assign({}, data)
+    codeObject.code = _prepareCode(generator.generate(), length, prefix)
+    codes.push(codeObject)
   }
-  return codes;
+  return codes
 }

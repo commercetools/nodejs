@@ -1,9 +1,9 @@
-const REGEX_NUMBER = new RegExp(/^\d+$/);
-const REGEX_UNDERSCORE_NUMBER = new RegExp(/^_\d+$/);
+const REGEX_NUMBER = new RegExp(/^\d+$/)
+const REGEX_UNDERSCORE_NUMBER = new RegExp(/^_\d+$/)
 
-export const ADD_ACTIONS = 'create';
-export const REMOVE_ACTIONS = 'remove';
-export const CHANGE_ACTIONS = 'change';
+export const ADD_ACTIONS = 'create'
+export const REMOVE_ACTIONS = 'remove'
+export const CHANGE_ACTIONS = 'change'
 
 /**
  * Tests a delta to see if it represents a create action.
@@ -20,7 +20,7 @@ export const CHANGE_ACTIONS = 'change';
 function isCreateAction(obj, key) {
   return (
     REGEX_NUMBER.test(key) && Array.isArray(obj[key]) && obj[key].length === 1
-  );
+  )
 }
 
 /**
@@ -38,7 +38,7 @@ function isCreateAction(obj, key) {
  *   false otherwise
  */
 function isChangeAction(obj, key) {
-  return REGEX_NUMBER.test(key) && typeof obj[key] === 'object';
+  return REGEX_NUMBER.test(key) && typeof obj[key] === 'object'
 }
 
 /**
@@ -61,7 +61,7 @@ function isRemoveAction(obj, key) {
     typeof obj[key][0] === 'object' &&
     obj[key][1] === 0 &&
     obj[key][2] === 0
-  );
+  )
 }
 
 /**
@@ -76,53 +76,53 @@ function isRemoveAction(obj, key) {
  */
 export default function createBuildArrayActions(key, config) {
   return function buildArrayActions(diff, oldObj, newObj) {
-    const addActions = [];
-    const removeActions = [];
-    const changeActions = [];
+    const addActions = []
+    const removeActions = []
+    const changeActions = []
 
     if (diff[key]) {
-      const arrayDelta = diff[key];
+      const arrayDelta = diff[key]
 
       Object.keys(arrayDelta).forEach(index => {
         if (config[ADD_ACTIONS] && isCreateAction(arrayDelta, index)) {
-          const actionGenerator = config[ADD_ACTIONS];
+          const actionGenerator = config[ADD_ACTIONS]
           // When adding a new element you don't need the oldObj
           const action = actionGenerator(
             newObj[key][index],
             parseInt(index, 10)
-          );
+          )
 
-          if (action) addActions.push(action);
+          if (action) addActions.push(action)
         } else if (
           config[CHANGE_ACTIONS] &&
           isChangeAction(arrayDelta, index)
         ) {
-          const actionGenerator = config[CHANGE_ACTIONS];
+          const actionGenerator = config[CHANGE_ACTIONS]
           // When changing an existing element you need both old + new
           const action = actionGenerator(
             oldObj[key][index],
             newObj[key][index],
             parseInt(index, 10)
-          );
+          )
 
-          if (action) changeActions.push(action);
+          if (action) changeActions.push(action)
         } else if (
           config[REMOVE_ACTIONS] &&
           isRemoveAction(arrayDelta, index)
         ) {
-          const realIndex = index.replace('_', '');
-          const actionGenerator = config[REMOVE_ACTIONS];
+          const realIndex = index.replace('_', '')
+          const actionGenerator = config[REMOVE_ACTIONS]
           // When removing an existing element you don't need the newObj
           const action = actionGenerator(
             oldObj[key][realIndex],
             parseInt(realIndex, 10)
-          );
+          )
 
-          if (action) removeActions.push(action);
+          if (action) removeActions.push(action)
         }
-      });
+      })
     }
 
-    return changeActions.concat(removeActions, addActions);
-  };
+    return changeActions.concat(removeActions, addActions)
+  }
 }

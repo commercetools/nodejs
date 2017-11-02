@@ -1,7 +1,7 @@
 /* @flow */
-import type { ApiRequestBuilder } from 'types/sdk';
-import services from './default-services';
-import createService from './create-service';
+import type { ApiRequestBuilder } from 'types/sdk'
+import services from './default-services'
+import createService from './create-service'
 
 // pass an options argument of type object containing
 // the `projectkey` (string) and `customServices` (object)
@@ -23,7 +23,7 @@ import createService from './create-service';
 export default function createRequestBuilder(
   options: Object = {}
 ): ApiRequestBuilder {
-  const allServices = { ...services, ...options.customServices };
+  const allServices = { ...services, ...options.customServices }
 
   return Object.keys(allServices).reduce(
     (acc, key) => ({
@@ -31,5 +31,5 @@ export default function createRequestBuilder(
       [key]: createService(allServices[key], options.projectKey),
     }),
     {}
-  );
+  )
 }

@@ -1,26 +1,26 @@
-import dotenv from 'dotenv';
-import path from 'path';
+import dotenv from 'dotenv'
+import path from 'path'
 
-import { homepage } from '../package.json';
+import { homepage } from '../package.json'
 
 export function setCredentialsFromEnvFile() {
   const currentDirectoryResult = dotenv.config({
     path: path.resolve('.ct-credentials.env'),
-  });
+  })
   const etcDirectoryResult = dotenv.config({
     path: path.resolve(path.join('/etc', '.ct-credentials.env')),
-  });
+  })
 
   return {
     ...currentDirectoryResult.parsed,
     ...etcDirectoryResult.parsed,
-  };
+  }
 }
 
 export function getCredentialsFromEnvironment(projectKey) {
   return new Promise((resolve, reject) => {
-    const envKey = `CT_${projectKey.toUpperCase().replace(/-/g, '_')}`;
-    const envValue = process.env[envKey] || '';
+    const envKey = `CT_${projectKey.toUpperCase().replace(/-/g, '_')}`
+    const envValue = process.env[envKey] || ''
 
     if (!envValue)
       return reject(
@@ -28,7 +28,7 @@ export function getCredentialsFromEnvironment(projectKey) {
           `Could not find environment variable ${envKey}
         see ${homepage}#usage`
         )
-      );
+      )
 
     if (!envValue.match(/\w+:\w+/))
       return reject(
@@ -36,22 +36,22 @@ export function getCredentialsFromEnvironment(projectKey) {
           `Could not get credentials from value '${envValue}' in ${envKey}
         see ${homepage}#usage`
         )
-      );
+      )
 
-    const [clientId, clientSecret] = envValue.split(':');
+    const [clientId, clientSecret] = envValue.split(':')
 
     return resolve({
       clientId,
       clientSecret,
-    });
-  });
+    })
+  })
 }
 
 export default function getCredentials(projectKey) {
   if (!projectKey)
-    return Promise.reject(new Error('Missing "projectKey" argument'));
+    return Promise.reject(new Error('Missing "projectKey" argument'))
 
   return Promise.resolve(setCredentialsFromEnvFile())
     .then(() => getCredentialsFromEnvironment(projectKey))
-    .catch(environmentError => Promise.reject(environmentError));
+    .catch(environmentError => Promise.reject(environmentError))
 }

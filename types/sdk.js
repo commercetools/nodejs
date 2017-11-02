@@ -9,7 +9,7 @@ export type MethodType =
   | 'OPTIONS'
   | 'PUT'
   | 'PATCH'
-  | 'TRACE';
+  | 'TRACE'
 
 /* Client */
 export type ClientRequest = {
@@ -19,7 +19,7 @@ export type ClientRequest = {
   headers?: {
     [key: string]: string,
   },
-};
+}
 export type HttpErrorType = {
   name: string,
   message: string,
@@ -31,21 +31,21 @@ export type HttpErrorType = {
   headers?: {
     [key: string]: string,
   },
-};
+}
 export type ClientResponse = {
   body?: Object,
   error?: HttpErrorType,
   statusCode: number,
   headers?: Object,
   request?: Object,
-};
+}
 
 export type SuccessResult = {
   body: Object,
   statusCode: number,
   headers?: Object,
-};
-export type ClientResult = SuccessResult | HttpErrorType;
+}
+export type ClientResult = SuccessResult | HttpErrorType
 export type Client = {
   execute: (request: ClientRequest) => Promise<ClientResult>,
   process: (
@@ -53,15 +53,15 @@ export type Client = {
     processFn: Function,
     Object
   ) => Promise<any>,
-};
-export type ProcessFn = (result: SuccessResult) => Promise<any>;
+}
+export type ProcessFn = (result: SuccessResult) => Promise<any>
 export type ProcessOptions = {
   accumulate?: boolean,
   total?: number,
-};
+}
 
 /* Middlewares */
-export type MiddlewareRequest = ClientRequest;
+export type MiddlewareRequest = ClientRequest
 export type MiddlewareResponse = {
   resolve(response: Object): void,
   reject(error: Object): void,
@@ -70,16 +70,16 @@ export type MiddlewareResponse = {
   statusCode: number,
   headers?: Object,
   request?: Object,
-};
+}
 // eslint-disable-next-line max-len
 export type Dispatch = (
   request: MiddlewareRequest,
   response: MiddlewareResponse
-) => any;
-export type Middleware = (next: Dispatch) => Dispatch;
+) => any
+export type Middleware = (next: Dispatch) => Dispatch
 export type ClientOptions = {
   middlewares: Array<Middleware>,
-};
+}
 
 export type AuthMiddlewareOptions = {
   host: string,
@@ -92,7 +92,7 @@ export type AuthMiddlewareOptions = {
   scopes: Array<string>,
   // For internal usage only
   oauthUri: string,
-};
+}
 
 export type RefreshAuthMiddlewareOptions = {
   host: string,
@@ -104,19 +104,19 @@ export type RefreshAuthMiddlewareOptions = {
   refreshToken: string,
   // For internal usage only
   oauthUri: string,
-};
+}
 
 export type Task = {
   request: MiddlewareRequest,
   response: MiddlewareResponse,
-};
+}
 
-export type RequestState = boolean;
+export type RequestState = boolean
 export type TokenStore = {
   token: string,
   expirationTime: number,
   refreshToken?: string,
-};
+}
 
 export type AuthMiddlewareBaseOptions = {
   request: MiddlewareRequest,
@@ -133,7 +133,7 @@ export type AuthMiddlewareBaseOptions = {
     get: () => TokenStore,
     set: (cache: TokenStore) => TokenStore,
   },
-};
+}
 
 export type PasswordAuthMiddlewareOptions = {
   host: string,
@@ -149,7 +149,7 @@ export type PasswordAuthMiddlewareOptions = {
   scopes: Array<string>,
   // For internal usage only
   oauthUri: string,
-};
+}
 
 export type HttpMiddlewareOptions = {
   host: string,
@@ -164,21 +164,21 @@ export type HttpMiddlewareOptions = {
     backoff?: boolean,
     maxDelay?: number,
   },
-};
+}
 export type QueueMiddlewareOptions = {
   concurrency: number,
-};
+}
 export type UserAgentMiddlewareOptions = {
   libraryName?: string,
   libraryVersion?: string,
   contactUrl?: string,
   contactEmail?: string,
-};
+}
 
 export type Next = (
   request: MiddlewareRequest,
   response: MiddlewareResponse
-) => mixed;
+) => mixed
 
 /* API Request Builder */
 export type ServiceBuilderDefaultParams = {
@@ -212,21 +212,21 @@ export type ServiceBuilderDefaultParams = {
       value: string,
     },
   },
-};
+}
 export type ServiceBuilder = {
   type: string,
   features: Array<string>,
   params: ServiceBuilderDefaultParams,
   build(): string,
-};
+}
 export type ServiceBuilderDefinition = {
   type: string,
   endpoint: string,
   features: Array<string>,
-};
+}
 export type ApiRequestBuilder = {
   [key: string]: ServiceBuilder,
-};
+}
 
 /* HTTP User Agent */
 export type HttpUserAgentOptions = {
@@ -236,17 +236,17 @@ export type HttpUserAgentOptions = {
   libraryVersion?: string,
   contactUrl?: string,
   contactEmail?: string,
-};
+}
 
 /* Sync Actions */
 export type UpdateAction = {
   action: string,
   [key: string]: any,
-};
+}
 export type SyncAction = {
   buildActions: (before: Object, now: Object) => Array<UpdateAction>,
-};
+}
 export type ActionGroup = {
   type: string,
   group: 'black' | 'white',
-};
+}

@@ -5,30 +5,30 @@ import type {
   Middleware,
   MiddlewareRequest,
   MiddlewareResponse,
-} from 'types/sdk';
+} from 'types/sdk'
 
 type Task = {
   request: MiddlewareRequest,
   response: MiddlewareResponse,
-};
+}
 
 export default function createQueueMiddleware(
   { concurrency = 20 }: QueueMiddlewareOptions = {}
 ): Middleware {
-  const queue: Array<Task> = [];
-  let runningCount = 0;
+  const queue: Array<Task> = []
+  let runningCount = 0
 
   const dequeue = (next: Dispatch) => {
     // We assume here that this task has been completed
-    runningCount -= 1;
+    runningCount -= 1
 
     // Check if there are any other pending tasks and execute them
     if (queue.length && runningCount <= concurrency) {
-      const nextTask = queue.shift();
-      runningCount += 1;
-      next(nextTask.request, nextTask.response);
+      const nextTask = queue.shift()
+      runningCount += 1
+      next(nextTask.request, nextTask.response)
     }
-  };
+  }
 
   return next => (request: MiddlewareRequest, response: MiddlewareResponse) => {
     // Override response `resolve` and `reject` to know when the request has
@@ -37,25 +37,25 @@ export default function createQueueMiddleware(
       ...response,
       resolve(data: any) {
         // Resolve original promise
-        response.resolve(data);
-        dequeue(next);
+        response.resolve(data)
+        dequeue(next)
       },
       reject(error: any) {
         // Reject original promise
-        response.reject(error);
-        dequeue(next);
+        response.reject(error)
+        dequeue(next)
       },
-    };
+    }
 
     // Add task to the queue
-    queue.push({ request, response: patchedResponse });
+    queue.push({ request, response: patchedResponse })
 
     // If possible, run the task straight away
     if (runningCount < concurrency) {
-      const nextTask = queue.shift();
-      runningCount += 1;
+      const nextTask = queue.shift()
+      runningCount += 1
 
-      next(nextTask.request, nextTask.response);
+      next(nextTask.request, nextTask.response)
     }
-  };
+  }
 }

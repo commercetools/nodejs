@@ -18,11 +18,11 @@ const CONSTANTS = {
     delimiter: ',',
     defaultLogFile: 'csvparserprice.log',
   },
-};
+}
 
 // Go through object because `freeze` works shallow
 Object.keys(CONSTANTS).forEach(key => {
-  Object.freeze(CONSTANTS[key]);
-});
+  Object.freeze(CONSTANTS[key])
+})
 
-export default CONSTANTS;
+export default CONSTANTS

@@ -15,14 +15,14 @@ export type Inventory = {
     type: Object,
     fields: Object,
   },
-};
+}
 
 export type ExportConfig = {
   format: string,
   delimiter: string,
   channelKey?: string,
   queryString?: string,
-};
+}
 
 export type CsvInventoryMapping = {
   sku: string,
@@ -36,4 +36,4 @@ export type CsvInventoryMapping = {
     type: Object,
     fields: Object,
   },
-};
+}

@@ -2,7 +2,7 @@ export const sampleProductType = {
   name: 'productTypeForProductExport',
   description: 'bla bla bla',
   key: `productTypeKey${Date.now()}`,
-};
+}
 
 export const sampleTaxCategory = {
   name: 'new-sample-tax-category',
@@ -22,7 +22,7 @@ export const sampleTaxCategory = {
       country: 'US',
     },
   ],
-};
+}
 
 export const createProducts = (productType, taxCategory) => [
   {
@@ -96,7 +96,7 @@ export const createProducts = (productType, taxCategory) => [
     productType,
     taxCategory,
   },
-];
+]
 
 export const expectedProducts = [
   {
@@ -194,4 +194,4 @@ export const expectedProducts = [
     productType: { typeId: 'product-type', id: expect.any(String) },
     taxCategory: { typeId: 'tax-category', id: expect.any(String) },
   },
-];
+]

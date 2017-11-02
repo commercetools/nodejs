@@ -21,15 +21,15 @@ export type CodeData = {
   customLineItemFieldTypes?: Object,
   createdAt?: string,
   lastModifiedAt?: string,
-};
+}
 
-export type CodeDataArray = Array<CodeData>;
+export type CodeDataArray = Array<CodeData>
 
 export type CodeOptions = {
   quantity: number,
   length?: number,
   prefix?: string,
-};
+}
 
 export type Summary = {
   created: number,
@@ -38,7 +38,7 @@ export type Summary = {
   createErrorCount: number,
   updateErrorCount: number,
   errors: Array<any>,
-};
+}
 
 /* Logger */
 export type LoggerOptions = {
@@ -46,7 +46,7 @@ export type LoggerOptions = {
   info: Function,
   warn: Function,
   verbose: Function,
-};
+}
 
 /* Config */
 export type ApiConfigOptions = {
@@ -58,14 +58,14 @@ export type ApiConfigOptions = {
   },
   scopes: Array<string>,
   apiUrl?: string,
-};
+}
 
 export type ConstructorOptions = {
   apiConfig: ApiConfigOptions,
   batchSize: number,
   accessToken: string,
   continueOnProblems?: boolean,
-};
+}
 
 export type ImporterOptions = {
   apiConfig: ApiConfigOptions,
@@ -75,21 +75,21 @@ export type ImporterOptions = {
   exportFormat: string,
   predicate: string,
   multiValueDelimiter: string,
-};
+}
 
-export type ExporterOptions = ImporterOptions;
+export type ExporterOptions = ImporterOptions
 
-export type ChunkOptions = Array<Object>;
+export type ChunkOptions = Array<Object>
 
 export type ParseOptions = {
   continueOnProblems?: boolean,
   delimiter?: string,
   multiValueDelimiter?: string,
-};
+}
 
 export type ParserSummary = {
   total: number,
   parsed: number,
   notParsed: number,
   errors: Array<string>,
-};
+}

@@ -1,12 +1,12 @@
-import streamtest from 'streamtest';
-import csv from 'fast-csv';
-import PriceExporter from '../src/main';
-import sampleProduct from './helpers/sampleProduct.json';
-import expectedPrices from './helpers/expectedPrices.json';
+import streamtest from 'streamtest'
+import csv from 'fast-csv'
+import PriceExporter from '../src/main'
+import sampleProduct from './helpers/sampleProduct.json'
+import expectedPrices from './helpers/expectedPrices.json'
 
 jest.mock('fast-csv', () => ({
   createWriteStream: jest.fn(() => ({ pipe: jest.fn() })),
-}));
+}))
 
 describe('PriceExporter', () => {
   const logger = {
@@ -14,9 +14,9 @@ describe('PriceExporter', () => {
     warn: () => {},
     info: () => {},
     verbose: () => {},
-  };
+  }
 
-  let priceExporter;
+  let priceExporter
   beforeEach(() => {
     priceExporter = new PriceExporter(
       {
@@ -27,19 +27,19 @@ describe('PriceExporter', () => {
         csvHeaders: ['sku', 'value'],
       },
       logger
-    );
-  });
+    )
+  })
 
   describe('constructor', () => {
     it('should be a function', () => {
-      expect(typeof PriceExporter).toBe('function');
-    });
+      expect(typeof PriceExporter).toBe('function')
+    })
 
     it('should throw if no `apiConfig` in `options` parameter', () => {
       expect(() => new PriceExporter({ foo: 'bar' })).toThrowError(
         /The constructor must be passed an `apiConfig` object/
-      );
-    });
+      )
+    })
 
     it('throw if no `headers` array in options and export is csv', () => {
       expect(
@@ -50,49 +50,49 @@ describe('PriceExporter', () => {
           })
       ).toThrowError(
         /The constructor must be passed a `csvHeaders` array for CSV export/
-      );
-    });
+      )
+    })
 
     it('not throw if no `headers` array in options and export is json', () => {
-      expect(() => new PriceExporter({ apiConfig: 'config' })).not.toThrow();
-    });
+      expect(() => new PriceExporter({ apiConfig: 'config' })).not.toThrow()
+    })
 
     it('should set default properties', () => {
       expect(priceExporter.apiConfig).toEqual({
         projectKey: 'project-key',
-      });
-      expect(priceExporter.logger).toEqual(logger);
-      expect(priceExporter.config.delimiter).toBe(',');
-      expect(priceExporter.config.exportFormat).toBe('json');
-      expect(priceExporter.config.staged).toBe(false);
-    });
-  });
+      })
+      expect(priceExporter.logger).toEqual(logger)
+      expect(priceExporter.config.delimiter).toBe(',')
+      expect(priceExporter.config.exportFormat).toBe('json')
+      expect(priceExporter.config.staged).toBe(false)
+    })
+  })
 
   describe('::run', () => {
     it('should call `_processStream` with outputStream if json', async () => {
       jest.mock('fast-csv', () => ({
         createWriteStream: jest.fn(() => ({ pipe: jest.fn() })),
-      }));
-      priceExporter._getProducts = jest.fn(() => Promise.resolve());
-      const outputStream = streamtest.v2.toText(() => {});
-      priceExporter.config.exportFormat = 'json';
-      await priceExporter.run(outputStream);
-      expect(priceExporter._getProducts).toBeCalled();
-      expect(priceExporter._getProducts.mock.calls[0][0]).toEqual(outputStream);
-      expect(csv.createWriteStream).not.toBeCalled();
-    });
+      }))
+      priceExporter._getProducts = jest.fn(() => Promise.resolve())
+      const outputStream = streamtest.v2.toText(() => {})
+      priceExporter.config.exportFormat = 'json'
+      await priceExporter.run(outputStream)
+      expect(priceExporter._getProducts).toBeCalled()
+      expect(priceExporter._getProducts.mock.calls[0][0]).toEqual(outputStream)
+      expect(csv.createWriteStream).not.toBeCalled()
+    })
 
     it('should call `_processStream` with outputStream if csv', async () => {
-      priceExporter._getProducts = jest.fn(() => Promise.resolve());
-      const outputStream = streamtest.v2.toText(() => {});
+      priceExporter._getProducts = jest.fn(() => Promise.resolve())
+      const outputStream = streamtest.v2.toText(() => {})
 
-      priceExporter.config.exportFormat = 'csv';
-      await priceExporter.run(outputStream);
-      expect(priceExporter._getProducts).toBeCalled();
-      expect(priceExporter._getProducts.mock.calls[0][0]).toEqual(outputStream);
-      expect(csv.createWriteStream).toBeCalled();
-    });
-  });
+      priceExporter.config.exportFormat = 'csv'
+      await priceExporter.run(outputStream)
+      expect(priceExporter._getProducts).toBeCalled()
+      expect(priceExporter._getProducts.mock.calls[0][0]).toEqual(outputStream)
+      expect(csv.createWriteStream).toBeCalled()
+    })
+  })
 
   describe('::_getProducts', () => {
     it('should fetch products using `process` method', () => {
@@ -100,44 +100,44 @@ describe('PriceExporter', () => {
         body: {
           results: [],
         },
-      };
+      }
       const processMock = jest.fn((request, processFn) =>
         processFn(sampleResult).then(() => Promise.resolve())
-      );
-      priceExporter.client.process = processMock;
-      const outputStream = { emit: jest.fn() };
-      priceExporter._getProducts(outputStream);
-      expect(processMock).toHaveBeenCalledTimes(1);
+      )
+      priceExporter.client.process = processMock
+      const outputStream = { emit: jest.fn() }
+      priceExporter._getProducts(outputStream)
+      expect(processMock).toHaveBeenCalledTimes(1)
       expect(processMock.mock.calls[0][0]).toEqual({
         uri: '/project-key/product-projections?staged=false',
         method: 'GET',
         headers: { Authorization: 'Bearer myAccessToken' },
-      });
-    });
+      })
+    })
 
     it('should close stream after writing data', async () => {
-      priceExporter.client.process = jest.fn(() => Promise.resolve());
-      const outputStream = { emit: jest.fn() };
-      const pipeStream = { end: jest.fn() };
-      await priceExporter._getProducts(outputStream, pipeStream);
+      priceExporter.client.process = jest.fn(() => Promise.resolve())
+      const outputStream = { emit: jest.fn() }
+      const pipeStream = { end: jest.fn() }
+      await priceExporter._getProducts(outputStream, pipeStream)
 
-      expect(pipeStream.end).toBeCalled();
-    });
+      expect(pipeStream.end).toBeCalled()
+    })
 
     it('should emit `error` on output stream if error occurs', done => {
       const spy = jest
         .spyOn(priceExporter.client, 'process')
-        .mockImplementation(() => Promise.reject(new Error('error occured')));
+        .mockImplementation(() => Promise.reject(new Error('error occured')))
 
       const outputStream = streamtest.v2.toText((error, result) => {
-        expect(error.message).toBe('error occured');
-        expect(result).toBeUndefined();
-        spy.mockRestore();
-        done();
-      });
-      priceExporter._getProducts(outputStream);
-    });
-  });
+        expect(error.message).toBe('error occured')
+        expect(result).toBeUndefined()
+        spy.mockRestore()
+        done()
+      })
+      priceExporter._getProducts(outputStream)
+    })
+  })
 
   describe('::_writePrices', () => {
     const sample = [
@@ -156,39 +156,39 @@ describe('PriceExporter', () => {
           },
         ],
       },
-    ];
+    ]
 
     it('should write json output once for each sku to stream', done => {
-      const pipeStream = { write: jest.fn(() => done()) };
-      priceExporter._writePrices(sample, pipeStream);
+      const pipeStream = { write: jest.fn(() => done()) }
+      priceExporter._writePrices(sample, pipeStream)
 
-      expect(pipeStream.write).toHaveBeenCalledTimes(1);
-      expect(pipeStream.write).toBeCalledWith(sample[0]);
-    });
+      expect(pipeStream.write).toHaveBeenCalledTimes(1)
+      expect(pipeStream.write).toBeCalledWith(sample[0])
+    })
 
     it('should flatten csv output and write to stream', done => {
-      const pipeStream = { write: jest.fn(() => done()) };
-      const firstExpected = { 'value.centAmount': 16125 };
-      const secondExpected = { 'value.centAmount': 4000 };
-      priceExporter.config.exportFormat = 'csv';
-      priceExporter._writePrices(sample, pipeStream);
+      const pipeStream = { write: jest.fn(() => done()) }
+      const firstExpected = { 'value.centAmount': 16125 }
+      const secondExpected = { 'value.centAmount': 4000 }
+      priceExporter.config.exportFormat = 'csv'
+      priceExporter._writePrices(sample, pipeStream)
 
-      expect(pipeStream.write).toHaveBeenCalledTimes(2);
-      expect(pipeStream.write).toBeCalledWith(firstExpected);
-      expect(pipeStream.write).toBeCalledWith(secondExpected);
-    });
-  });
+      expect(pipeStream.write).toHaveBeenCalledTimes(2)
+      expect(pipeStream.write).toBeCalledWith(firstExpected)
+      expect(pipeStream.write).toBeCalledWith(secondExpected)
+    })
+  })
 
   describe('::_resolveReferences', () => {
     it('returns array of prices with resolved references', async () => {
-      const resolvedChannel = { channel: { key: 'resolved-channel-key' } };
+      const resolvedChannel = { channel: { key: 'resolved-channel-key' } }
       const resolvedCustGroup = {
         customerGroup: { groupName: 'resolved-group-name' },
-      };
+      }
       const resolvedCustomType = {
         customType: { key: 'resolved-custom-type-key' },
         customField: { foo: 'bar' },
-      };
+      }
       const sample = [
         {
           sku: 'my-sku-1',
@@ -214,16 +214,16 @@ describe('PriceExporter', () => {
             },
           ],
         },
-      ];
+      ]
       priceExporter._resolveChannel = jest.fn(
         price => (price.channel ? resolvedChannel : {})
-      );
+      )
       priceExporter._resolveCustomerGroup = jest.fn(
         price => (price.customerGroup ? resolvedCustGroup : {})
-      );
+      )
       priceExporter._resolveCustomType = jest.fn(
         price => (price.custom ? resolvedCustomType : {})
-      );
+      )
       const expected = [
         {
           sku: 'my-sku-1',
@@ -250,116 +250,116 @@ describe('PriceExporter', () => {
             },
           ],
         },
-      ];
-      const prices = await priceExporter._resolveReferences(sample);
-      expect(prices).toEqual(expected);
-    });
-  });
+      ]
+      const prices = await priceExporter._resolveReferences(sample)
+      expect(prices).toEqual(expected)
+    })
+  })
 
   describe('::_resolveChannel', () => {
     it('should return empty object if no `channel` reference', () => {
       const samplePrice = {
         value: { centAmount: 4300 },
-      };
-      expect(priceExporter._resolveChannel(samplePrice)).toEqual({});
-    });
+      }
+      expect(priceExporter._resolveChannel(samplePrice)).toEqual({})
+    })
 
     it('should return channel key if CSV format', async () => {
-      priceExporter.config.exportFormat = 'csv';
+      priceExporter.config.exportFormat = 'csv'
       priceExporter.fetchReferences = jest.fn(() =>
         Promise.resolve({ body: { key: 'my-resolved-key' } })
-      );
+      )
       const samplePrice = {
         value: { centAmount: 4300 },
         channel: { id: 'my-channel-id' },
-      };
-      const expected = { channel: { key: 'my-resolved-key' } };
+      }
+      const expected = { channel: { key: 'my-resolved-key' } }
 
-      const actual = await priceExporter._resolveChannel(samplePrice);
-      expect(actual).toEqual(expected);
-    });
+      const actual = await priceExporter._resolveChannel(samplePrice)
+      expect(actual).toEqual(expected)
+    })
 
     it('should return channel key in `id` if JSON format', async () => {
       priceExporter.fetchReferences = jest.fn(() =>
         Promise.resolve({ body: { key: 'my-resolved-key' } })
-      );
+      )
       const samplePrice = {
         value: { centAmount: 4300 },
         channel: { id: 'my-channel-id' },
-      };
-      const expected = { channel: { id: 'my-resolved-key' } };
+      }
+      const expected = { channel: { id: 'my-resolved-key' } }
 
-      const actual = await priceExporter._resolveChannel(samplePrice);
-      expect(actual).toEqual(expected);
-    });
-  });
+      const actual = await priceExporter._resolveChannel(samplePrice)
+      expect(actual).toEqual(expected)
+    })
+  })
 
   describe('::_resolveCustomerGroup', () => {
     it('should return empty object if no `customerGroup` reference', () => {
       const samplePrice = {
         value: { centAmount: 4300 },
-      };
-      expect(priceExporter._resolveCustomerGroup(samplePrice)).toEqual({});
-    });
+      }
+      expect(priceExporter._resolveCustomerGroup(samplePrice)).toEqual({})
+    })
 
     it('should return customerGroup groupName if CSV format', async () => {
-      priceExporter.config.exportFormat = 'csv';
+      priceExporter.config.exportFormat = 'csv'
       priceExporter.fetchReferences = jest.fn(() =>
         Promise.resolve({ body: { name: 'my-resolved-name' } })
-      );
+      )
       const samplePrice = {
         value: { centAmount: 4300 },
         customerGroup: { id: 'my-customer-group-id' },
-      };
-      const expected = { customerGroup: { groupName: 'my-resolved-name' } };
+      }
+      const expected = { customerGroup: { groupName: 'my-resolved-name' } }
 
-      const actual = await priceExporter._resolveCustomerGroup(samplePrice);
-      expect(actual).toEqual(expected);
-    });
+      const actual = await priceExporter._resolveCustomerGroup(samplePrice)
+      expect(actual).toEqual(expected)
+    })
 
     it('should return customerGroup name in `id` if JSON format', async () => {
       priceExporter.fetchReferences = jest.fn(() =>
         Promise.resolve({ body: { name: 'my-resolved-name' } })
-      );
+      )
       const samplePrice = {
         value: { centAmount: 4300 },
         customerGroup: { id: 'my-customer-group-id' },
-      };
-      const expected = { customerGroup: { id: 'my-resolved-name' } };
+      }
+      const expected = { customerGroup: { id: 'my-resolved-name' } }
 
-      const actual = await priceExporter._resolveCustomerGroup(samplePrice);
-      expect(actual).toEqual(expected);
-    });
-  });
+      const actual = await priceExporter._resolveCustomerGroup(samplePrice)
+      expect(actual).toEqual(expected)
+    })
+  })
 
   describe('::_resolveCustomType', () => {
     it('should return empty object if no `custom` reference', () => {
       const samplePrice = {
         value: { centAmount: 4300 },
-      };
-      expect(priceExporter._resolveCustomType(samplePrice)).toEqual({});
-    });
+      }
+      expect(priceExporter._resolveCustomType(samplePrice)).toEqual({})
+    })
 
     it('return customType `key` and `customField` if CSV format', async () => {
-      priceExporter.config.exportFormat = 'csv';
+      priceExporter.config.exportFormat = 'csv'
       priceExporter.fetchReferences = jest.fn(() =>
         Promise.resolve({ body: { key: 'my-custom-type-key' } })
-      );
+      )
       const samplePrice = {
         value: { centAmount: 4300 },
         custom: {
           type: { id: 'some-custom-type-id' },
           fields: { foo: 'bar' },
         },
-      };
+      }
       const expected = {
         customType: 'my-custom-type-key',
         customField: samplePrice.custom.fields,
-      };
+      }
 
-      const actual = await priceExporter._resolveCustomType(samplePrice);
-      expect(actual).toEqual(expected);
-    });
+      const actual = await priceExporter._resolveCustomType(samplePrice)
+      expect(actual).toEqual(expected)
+    })
 
     it('should return custom without `typeId` if JSON format', async () => {
       const samplePrice = {
@@ -368,58 +368,54 @@ describe('PriceExporter', () => {
           type: { id: 'some-custom-type-id', typeId: 'custom-type' },
           fields: { foo: 'bar' },
         },
-      };
+      }
       const expected = {
         custom: {
           type: { id: 'some-custom-type-id' },
           fields: { foo: 'bar' },
         },
-      };
-      const actual = await priceExporter._resolveCustomType(samplePrice);
-      expect(actual).toEqual(expected);
-    });
-  });
+      }
+      const actual = await priceExporter._resolveCustomType(samplePrice)
+      expect(actual).toEqual(expected)
+    })
+  })
 
   describe('::_getPrices', () => {
     it('extracts prices from array of products and groups by sku', () => {
-      const expected = expectedPrices;
-      const actual = PriceExporter._getPrices(sampleProduct);
-      expect(actual).toEqual(expected);
-    });
-  });
+      const expected = expectedPrices
+      const actual = PriceExporter._getPrices(sampleProduct)
+      expect(actual).toEqual(expected)
+    })
+  })
 
   describe('::fetchReferences', () => {
     it('should fetch reference from API from url', () => {
-      priceExporter.client.execute = jest.fn();
-      const uri = 'dummy-uri';
+      priceExporter.client.execute = jest.fn()
+      const uri = 'dummy-uri'
       const expectedRequest = {
         uri,
         method: 'GET',
         headers: { Authorization: 'Bearer myAccessToken' },
-      };
+      }
 
-      priceExporter.fetchReferences(uri);
-      expect(priceExporter.client.execute).toBeCalled();
-      expect(priceExporter.client.execute).toHaveBeenCalledWith(
-        expectedRequest
-      );
-    });
+      priceExporter.fetchReferences(uri)
+      expect(priceExporter.client.execute).toBeCalled()
+      expect(priceExporter.client.execute).toHaveBeenCalledWith(expectedRequest)
+    })
 
     it('should fetch only once for multiple calls with same parameter', () => {
-      priceExporter.client.execute = jest.fn();
-      const uri = 'dummy-uri-2';
+      priceExporter.client.execute = jest.fn()
+      const uri = 'dummy-uri-2'
       const expectedRequest = {
         uri,
         method: 'GET',
         headers: { Authorization: 'Bearer myAccessToken' },
-      };
+      }
 
-      priceExporter.fetchReferences(uri);
-      priceExporter.fetchReferences(uri);
-      expect(priceExporter.client.execute).toHaveBeenCalledTimes(1);
-      expect(priceExporter.client.execute).toHaveBeenCalledWith(
-        expectedRequest
-      );
-    });
-  });
-});
+      priceExporter.fetchReferences(uri)
+      priceExporter.fetchReferences(uri)
+      expect(priceExporter.client.execute).toHaveBeenCalledTimes(1)
+      expect(priceExporter.client.execute).toHaveBeenCalledWith(expectedRequest)
+    })
+  })
+})

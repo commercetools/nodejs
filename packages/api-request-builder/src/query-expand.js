@@ -12,11 +12,11 @@
  */
 // eslint-disable-next-line import/prefer-default-export
 export function expand(value: string): Object {
-  if (!value) throw new Error('Required argument for `expand` is missing');
+  if (!value) throw new Error('Required argument for `expand` is missing')
 
-  const encodedPath = encodeURIComponent(value);
+  const encodedPath = encodeURIComponent(value)
   // Note: this goes to base `params`, not `params.query`
   // to be compatible with search.
-  this.params.expand.push(encodedPath);
-  return this;
+  this.params.expand.push(encodedPath)
+  return this
 }

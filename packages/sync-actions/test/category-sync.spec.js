@@ -1,14 +1,14 @@
-import categorySyncFn, { actionGroups } from '../src/categories';
+import categorySyncFn, { actionGroups } from '../src/categories'
 import {
   baseActionsList,
   metaActionsList,
   referenceActionsList,
-} from '../src/category-actions';
+} from '../src/category-actions'
 
 describe('Exports', () => {
   it('action group list', () => {
-    expect(actionGroups).toEqual(['base', 'references', 'meta', 'custom']);
-  });
+    expect(actionGroups).toEqual(['base', 'references', 'meta', 'custom'])
+  })
 
   it('correctly define base actions list', () => {
     expect(baseActionsList).toEqual([
@@ -18,29 +18,29 @@ describe('Exports', () => {
       { action: 'changeOrderHint', key: 'orderHint' },
       { action: 'setExternalId', key: 'externalId' },
       { action: 'setKey', key: 'key' },
-    ]);
-  });
+    ])
+  })
 
   it('correctly define meta actions list', () => {
     expect(metaActionsList).toEqual([
       { action: 'setMetaTitle', key: 'metaTitle' },
       { action: 'setMetaKeywords', key: 'metaKeywords' },
       { action: 'setMetaDescription', key: 'metaDescription' },
-    ]);
-  });
+    ])
+  })
 
   it('correctly define reference actions list', () => {
     expect(referenceActionsList).toEqual([
       { action: 'changeParent', key: 'parent' },
-    ]);
-  });
-});
+    ])
+  })
+})
 
 describe('Actions', () => {
-  let categorySync;
+  let categorySync
   beforeEach(() => {
-    categorySync = categorySyncFn();
-  });
+    categorySync = categorySyncFn()
+  })
 
   it('should build `setCustomType` action', () => {
     const before = {
@@ -53,7 +53,7 @@ describe('Actions', () => {
           customField1: true,
         },
       },
-    };
+    }
     const now = {
       custom: {
         type: {
@@ -64,11 +64,11 @@ describe('Actions', () => {
           customField1: true,
         },
       },
-    };
-    const actual = categorySync.buildActions(now, before);
-    const expected = [{ action: 'setCustomType', ...now.custom }];
-    expect(actual).toEqual(expected);
-  });
+    }
+    const actual = categorySync.buildActions(now, before)
+    const expected = [{ action: 'setCustomType', ...now.custom }]
+    expect(actual).toEqual(expected)
+  })
 
   it('should build `setCustomField` action', () => {
     const before = {
@@ -83,7 +83,7 @@ describe('Actions', () => {
           customField3: false, // will be removed
         },
       },
-    };
+    }
     const now = {
       custom: {
         type: {
@@ -96,8 +96,8 @@ describe('Actions', () => {
           customField4: true, // was added
         },
       },
-    };
-    const actual = categorySync.buildActions(now, before);
+    }
+    const actual = categorySync.buildActions(now, before)
     const expected = [
       {
         action: 'setCustomField',
@@ -114,7 +114,7 @@ describe('Actions', () => {
         name: 'customField4',
         value: true,
       },
-    ];
-    expect(actual).toEqual(expected);
-  });
-});
+    ]
+    expect(actual).toEqual(expected)
+  })
+})

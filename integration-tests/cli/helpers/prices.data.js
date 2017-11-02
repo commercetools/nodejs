@@ -2,16 +2,16 @@ export const sampleProductType = {
   name: 'productTypeForPriceExport',
   description: 'bla bla bla',
   key: 'productTypeKey',
-};
+}
 
 export const sampleCustomerGroup = {
   key: 'customer-group-key',
   groupName: 'customerGroupName',
-};
+}
 
 export const sampleChannel = {
   key: 'my-channel-key',
-};
+}
 
 export const sampleCustomType = {
   key: 'my-custom-type-key',
@@ -32,7 +32,7 @@ export const sampleCustomType = {
       inputHint: 'SingleLine',
     },
   ],
-};
+}
 
 export const createProducts = (
   productType,
@@ -150,4 +150,4 @@ export const createProducts = (
       },
     ],
   },
-];
+]

@@ -10,7 +10,7 @@ export type ApiConfigOptions = {
   },
   scopes: Array<string>,
   apiUrl?: string,
-};
+}
 
 export type Configuration = {
   accessToken: string,
@@ -19,7 +19,7 @@ export type Configuration = {
   predicate: string,
   staged: boolean,
   csvHeaders: Array<string>,
-};
+}
 
 export type ExporterOptions = {
   apiConfig: ApiConfigOptions,
@@ -29,7 +29,7 @@ export type ExporterOptions = {
   predicate: string,
   staged: boolean,
   csvHeaders?: Array<string>,
-};
+}
 
 /* Logger */
 export type LoggerOptions = {
@@ -37,33 +37,33 @@ export type LoggerOptions = {
   info: Function,
   warn: Function,
   verbose: Function,
-};
+}
 
 /* Price */
 export type currencyValue = {
   currencyCode: string,
   centAmount: number,
-};
+}
 
 export type customerGroup = {
   groupName?: string,
   id?: string,
-};
+}
 
 export type channel = {
   key?: string,
   id?: string,
-};
+}
 
 export type reference = {
   id: string,
   typeId?: string,
-};
+}
 
 export type customReference = {
   type: reference,
   fields: Object,
-};
+}
 
 export type UnprocessedPriceObject = {
   value: currencyValue,
@@ -73,7 +73,7 @@ export type UnprocessedPriceObject = {
   channel?: reference,
   custom?: customReference,
   'variant-sku'?: string,
-};
+}
 
 export type ProcessedPriceObject = {
   value: currencyValue,
@@ -85,4 +85,4 @@ export type ProcessedPriceObject = {
   channel?: channel,
   custom?: customReference,
   customField?: Object,
-};
+}

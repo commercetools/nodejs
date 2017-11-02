@@ -1,8 +1,8 @@
-import { createAuthMiddlewareForAnonymousSessionFlow } from '../src';
+import { createAuthMiddlewareForAnonymousSessionFlow } from '../src'
 
-import authMiddlewareBase from '../src/base-auth-flow';
+import authMiddlewareBase from '../src/base-auth-flow'
 
-jest.mock('../src/base-auth-flow');
+jest.mock('../src/base-auth-flow')
 
 function createTestRequest(options) {
   return {
@@ -11,7 +11,7 @@ function createTestRequest(options) {
     body: null,
     headers: {},
     ...options,
-  };
+  }
 }
 
 function createTestMiddlewareOptions(options) {
@@ -24,37 +24,37 @@ function createTestMiddlewareOptions(options) {
       anonymousId: 'secretme',
     },
     ...options,
-  };
+  }
 }
 
 describe('Anonymous Session Flow', () => {
   it('should call the base-auth-flow method with the right params', () =>
     new Promise((resolve, reject) => {
       authMiddlewareBase.mockImplementation((params, next) => {
-        next(params); // makes it easy to test what was passed in
-      });
-      const request = createTestRequest();
+        next(params) // makes it easy to test what was passed in
+      })
+      const request = createTestRequest()
       const response = {
         resolve,
         reject,
-      };
+      }
       const next = actualParams => {
-        expect(actualParams.request).toEqual(request);
-        expect(actualParams.response).toEqual(response);
-        expect(actualParams.pendingTasks).toEqual([]);
+        expect(actualParams.request).toEqual(request)
+        expect(actualParams.response).toEqual(response)
+        expect(actualParams.pendingTasks).toEqual([])
         expect(actualParams.url).toBe(
           'https://auth.commercetools.co/oauth/foo/anonymous/token'
-        );
-        expect(actualParams.basicAuth).toBe('MTIzOnNlY3JldA==');
-        expect(authMiddlewareBase).toHaveBeenCalledTimes(1);
-        jest.unmock('../src/base-auth-flow');
-        resolve();
-      };
-      const middlewareOptions = createTestMiddlewareOptions();
+        )
+        expect(actualParams.basicAuth).toBe('MTIzOnNlY3JldA==')
+        expect(authMiddlewareBase).toHaveBeenCalledTimes(1)
+        jest.unmock('../src/base-auth-flow')
+        resolve()
+      }
+      const middlewareOptions = createTestMiddlewareOptions()
       const authMiddleware = createAuthMiddlewareForAnonymousSessionFlow(
         middlewareOptions
-      );
+      )
 
-      authMiddleware(next)(request, response);
-    }));
-});
+      authMiddleware(next)(request, response)
+    }))
+})

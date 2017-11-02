@@ -5,24 +5,24 @@ import type {
   LoggerOptions,
   ProductProjection,
   ProcessFnResponse,
-} from 'types/product';
-import type { Client, ClientRequest } from 'types/sdk';
+} from 'types/product'
+import type { Client, ClientRequest } from 'types/sdk'
 
-import { createClient } from '@commercetools/sdk-client';
-import { createRequestBuilder } from '@commercetools/api-request-builder';
-import { createHttpMiddleware } from '@commercetools/sdk-middleware-http';
-import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth';
-import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent';
-import JSONStream from 'JSONStream';
-import pkg from '../package.json';
+import { createClient } from '@commercetools/sdk-client'
+import { createRequestBuilder } from '@commercetools/api-request-builder'
+import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
+import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
+import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
+import JSONStream from 'JSONStream'
+import pkg from '../package.json'
 
 export default class ProductExporter {
   // Set flowtype annotations
-  accessToken: string;
-  apiConfig: ApiConfigOptions;
-  client: Client;
-  exportConfig: ExportConfigOptions;
-  logger: LoggerOptions;
+  accessToken: string
+  apiConfig: ApiConfigOptions
+  client: Client
+  exportConfig: ExportConfigOptions
+  logger: LoggerOptions
 
   constructor(
     apiConfig: ApiConfigOptions,
@@ -30,7 +30,7 @@ export default class ProductExporter {
     logger: LoggerOptions,
     accessToken: string
   ) {
-    this.apiConfig = apiConfig;
+    this.apiConfig = apiConfig
     this.client = createClient({
       middlewares: [
         createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
@@ -40,70 +40,70 @@ export default class ProductExporter {
         }),
         createHttpMiddleware({ host: this.apiConfig.apiUrl }),
       ],
-    });
+    })
 
-    const defaultConfig = { staged: false, json: true };
+    const defaultConfig = { staged: false, json: true }
 
-    this.exportConfig = { ...defaultConfig, ...exportConfig };
+    this.exportConfig = { ...defaultConfig, ...exportConfig }
     this.logger = {
       error: () => {},
       warn: () => {},
       info: () => {},
       debug: () => {},
       ...logger,
-    };
-    this.accessToken = accessToken;
+    }
+    this.accessToken = accessToken
   }
 
   run(outputStream: stream$Writable): Promise<*> {
-    this.logger.debug('Starting Export');
+    this.logger.debug('Starting Export')
     const formattedStream = ProductExporter._getStream(
       this.exportConfig.exportType
-    );
-    this.logger.debug('Preparing outputStream');
-    formattedStream.pipe(outputStream);
+    )
+    this.logger.debug('Preparing outputStream')
+    formattedStream.pipe(outputStream)
     return this._getProducts(formattedStream).catch((e: Error) => {
-      this.logger.error(e, 'Oops. Something went wrong');
-      outputStream.emit('error', e);
-    });
+      this.logger.error(e, 'Oops. Something went wrong')
+      outputStream.emit('error', e)
+    })
   }
 
   _getProducts(outputStream: stream$Writable): Promise<*> {
-    this.logger.debug('Building request');
+    this.logger.debug('Building request')
     const uri = ProductExporter._buildProductProjectionsUri(
       this.apiConfig.projectKey,
       this.exportConfig
-    );
+    )
     const request: ClientRequest = {
       uri,
       method: 'GET',
-    };
+    }
     if (this.accessToken)
       request.headers = {
         Authorization: `Bearer ${this.accessToken}`,
-      };
+      }
 
-    const processConfig: Object = { accumulate: false };
-    if (this.exportConfig.total) processConfig.total = this.exportConfig.total;
+    const processConfig: Object = { accumulate: false }
+    if (this.exportConfig.total) processConfig.total = this.exportConfig.total
 
-    this.logger.debug('Dispatching request');
+    this.logger.debug('Dispatching request')
     return this.client
       .process(
         request,
         ({ body: { results: products } }: ProcessFnResponse): Promise<*> => {
-          this.logger.debug(`Fetched ${products.length} products`);
-          ProductExporter._writeEachProduct(outputStream, products);
+          this.logger.debug(`Fetched ${products.length} products`)
+          ProductExporter._writeEachProduct(outputStream, products)
           this.logger.debug(
             `${products.length} products written to outputStream`
-          );
-          return Promise.resolve();
+          )
+          return Promise.resolve()
         },
         processConfig
       )
       .then(() => {
-        outputStream.end();
-        this.logger.info('Export operation completed successfully');
-      });
+        outputStream.end()
+        this.logger.info('Export operation completed successfully')
+      })
   }
 
   static _buildProductProjectionsUri(
@@ -112,18 +112,18 @@ export default class ProductExporter {
   ): string {
     const service = createRequestBuilder({
       projectKey,
-    }).productProjections;
-    service.staged(exportConfig.staged);
+    }).productProjections
+    service.staged(exportConfig.staged)
 
-    if (exportConfig.batch) service.perPage(exportConfig.batch);
-    if (exportConfig.predicate) service.where(exportConfig.predicate);
+    if (exportConfig.batch) service.perPage(exportConfig.batch)
+    if (exportConfig.predicate) service.where(exportConfig.predicate)
     // Handle `expand` separately because it's an array
     if (exportConfig.expand && exportConfig.expand.length)
       exportConfig.expand.forEach((reference: string) => {
-        service.expand(reference);
-      });
+        service.expand(reference)
+      })
 
-    return service.build();
+    return service.build()
   }
 
   /* if the exportFormat is json, prepare the stream for json data. If
@@ -133,7 +133,7 @@ export default class ProductExporter {
   static _getStream(exportType: 'json' | 'chunk') {
     return exportType === 'json'
       ? JSONStream.stringify('[\n', ',\n', '\n]')
-      : JSONStream.stringify(false);
+      : JSONStream.stringify(false)
   }
 
   /* the `any` hack is necessary to  make flow work because there is no
@@ -145,7 +145,7 @@ export default class ProductExporter {
     products: Array<ProductProjection>
   ) {
     products.forEach((product: ProductProjection) => {
-      (outputStream: any).write(product);
-    });
+      ;(outputStream: any).write(product)
+    })
   }
 }

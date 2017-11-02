@@ -7,8 +7,8 @@
  * @return {Object} The instance of the service, can be chained.
  */
 export function staged(isStaged: boolean = true): Object {
-  this.params.staged = isStaged;
-  return this;
+  this.params.staged = isStaged
+  return this
 }
 
 /**
@@ -19,8 +19,8 @@ export function staged(isStaged: boolean = true): Object {
  * @return {Object} The instance of the service, can be chained.
  */
 export function priceCurrency(value: string): Object {
-  this.params.priceCurrency = value;
-  return this;
+  this.params.priceCurrency = value
+  return this
 }
 
 /**
@@ -32,8 +32,8 @@ export function priceCurrency(value: string): Object {
  * @return {Object} The instance of the service, can be chained.
  */
 export function priceCountry(value: string): Object {
-  this.params.priceCountry = value;
-  return this;
+  this.params.priceCountry = value
+  return this
 }
 
 /**
@@ -45,8 +45,8 @@ export function priceCountry(value: string): Object {
  * @return {Object} The instance of the service, can be chained.
  */
 export function priceCustomerGroup(value: string): Object {
-  this.params.priceCustomerGroup = value;
-  return this;
+  this.params.priceCustomerGroup = value
+  return this
 }
 
 /**
@@ -58,6 +58,6 @@ export function priceCustomerGroup(value: string): Object {
  * @return {Object} The instance of the service, can be chained.
  */
 export function priceChannel(value: string): Object {
-  this.params.priceChannel = value;
-  return this;
+  this.params.priceChannel = value
+  return this
 }

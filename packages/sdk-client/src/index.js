@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/prefer-default-export
-export { default as createClient } from './client';
+export { default as createClient } from './client'

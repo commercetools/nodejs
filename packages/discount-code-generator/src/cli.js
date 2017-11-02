@@ -1,16 +1,16 @@
-import fs from 'fs';
-import npmlog from 'npmlog';
-import PrettyError from 'pretty-error';
-import yargs from 'yargs';
-import json2csv from 'json2csv';
-import csv from 'csv-parser';
-import flatten, { unflatten } from 'flat';
+import fs from 'fs'
+import npmlog from 'npmlog'
+import PrettyError from 'pretty-error'
+import yargs from 'yargs'
+import json2csv from 'json2csv'
+import csv from 'csv-parser'
+import flatten, { unflatten } from 'flat'
 
-import discountCodeGenerator from './main';
-import { version } from '../package.json';
-import prepareInput from './utils';
+import discountCodeGenerator from './main'
+import { version } from '../package.json'
+import prepareInput from './utils'
 
-process.title = 'discountCodeGenerator';
+process.title = 'discountCodeGenerator'
 
 const args = yargs
   .usage(
@@ -34,14 +34,12 @@ Generate multiple discount codes to import to the commercetools platform.`
     demandOption: true,
   })
   .coerce('quantity', arg => {
-    const quantity = parseInt(arg, 10);
+    const quantity = parseInt(arg, 10)
     // Limit quantity to 500000 to avoid `out-of-memory` error
     if (quantity <= 0 || quantity > 500000)
-      throw new Error(
-        'Invalid quantity, must be a number between 1 and 500000'
-      );
+      throw new Error('Invalid quantity, must be a number between 1 and 500000')
 
-    return quantity;
+    return quantity
   })
   .option('code-length', {
     alias: 'l',
@@ -60,11 +58,11 @@ Generate multiple discount codes to import to the commercetools platform.`
   })
   .coerce('input', arg => {
     if (fs.existsSync(arg)) {
-      if (arg.match(/\.json$/i) || arg.match(/\.csv$/i)) return String(arg);
+      if (arg.match(/\.json$/i) || arg.match(/\.csv$/i)) return String(arg)
 
-      throw new Error('Invalid input file format. Must be CSV or JSON');
+      throw new Error('Invalid input file format. Must be CSV or JSON')
     }
-    throw new Error('Input file cannot be reached or does not exist');
+    throw new Error('Input file cannot be reached or does not exist')
   })
   .option('output', {
     alias: 'o',
@@ -73,13 +71,13 @@ Generate multiple discount codes to import to the commercetools platform.`
   })
   .coerce('output', arg => {
     if (arg === 'stdout') {
-      npmlog.stream = fs.createWriteStream('discountCodeGenerator.log');
-      return process.stdout;
+      npmlog.stream = fs.createWriteStream('discountCodeGenerator.log')
+      return process.stdout
     }
     if (arg.match(/\.json$/i) || arg.match(/\.csv$/i))
-      return fs.createWriteStream(String(arg));
+      return fs.createWriteStream(String(arg))
 
-    throw new Error('Invalid output file format. Must be CSV or JSON');
+    throw new Error('Invalid output file format. Must be CSV or JSON')
   })
   .option('delimiter', {
     alias: 'd',
@@ -96,18 +94,18 @@ Generate multiple discount codes to import to the commercetools platform.`
     describe: 'Logging level: error, warn, info or verbose.',
   })
   .coerce('logLevel', arg => {
-    npmlog.level = arg;
-  }).argv;
+    npmlog.level = arg
+  }).argv
 
 // Resolve stream input to javascript object
 const resolveInput = _args => {
-  const input = _args.input;
+  const input = _args.input
   return new Promise((resolve, reject) => {
-    if (input === undefined) resolve({});
+    if (input === undefined) resolve({})
     else if (input.match(/\.json$/i))
-      resolve(JSON.parse(fs.readFileSync(input)));
+      resolve(JSON.parse(fs.readFileSync(input)))
     else if (input.match(/\.csv$/i)) {
-      const _attributes = [];
+      const _attributes = []
       fs
         .createReadStream(input)
         .pipe(
@@ -117,94 +115,94 @@ const resolveInput = _args => {
           })
         )
         .on('error', error => {
-          reject(error);
+          reject(error)
         })
         .on('data', data => {
-          const arrayDelim = _args.multiValueDelimiter;
+          const arrayDelim = _args.multiValueDelimiter
           // pass to `prepareInput` to handle object formatting
-          _attributes.push(prepareInput(data, arrayDelim));
+          _attributes.push(prepareInput(data, arrayDelim))
         })
         .on('end', () => {
-          resolve(unflatten(_attributes[0]));
-        });
+          resolve(unflatten(_attributes[0]))
+        })
     }
-  });
-};
+  })
+}
 
 // Resove output to file or stdout
 const resolveOutput = (_args, outputData) => {
-  const outputStream = _args.output;
-  const total = outputData.length;
+  const outputStream = _args.output
+  const total = outputData.length
   return new Promise((resolve, reject) => {
     if (outputStream === process.stdout) {
       // Write to stdout
-      process.stdout.write(JSON.stringify(outputData, null, 1));
-      resolve(total);
+      process.stdout.write(JSON.stringify(outputData, null, 1))
+      resolve(total)
     } else if (outputStream.path.match(/\.json$/i)) {
       // Write to json file
       outputStream.on('error', error => {
-        reject(error);
-      });
-      outputStream.end(JSON.stringify(outputData, null, 1));
+        reject(error)
+      })
+      outputStream.end(JSON.stringify(outputData, null, 1))
       outputStream.on('finish', () => {
-        resolve(total);
-      });
+        resolve(total)
+      })
     } else if (outputStream.path.match(/\.csv$/i)) {
       // Convert to csv and write to file
-      const arrayDelim = _args.multiValueDelimiter;
+      const arrayDelim = _args.multiValueDelimiter
       const flatObjects = outputData.map(obj => {
         // Add condition so module doesn't fail if there are no cartDiscounts
         if (obj.cartDiscounts)
           // eslint-disable-next-line no-param-reassign
           obj.cartDiscounts = obj.cartDiscounts
             .map(cartDiscountObj => cartDiscountObj.id)
-            .join(arrayDelim);
-        return flatten(obj);
-      });
+            .join(arrayDelim)
+        return flatten(obj)
+      })
       const csvOutput = json2csv({
         data: flatObjects,
         del: _args.delimiter,
-      });
+      })
       outputStream.on('error', error => {
-        reject(error);
-      });
-      outputStream.end(csvOutput);
+        reject(error)
+      })
+      outputStream.end(csvOutput)
       outputStream.on('finish', () => {
-        resolve(total);
-      });
+        resolve(total)
+      })
     }
-  });
-};
+  })
+}
 
 // Build discount code options
 const buildOptions = _args => ({
   quantity: _args.quantity,
   length: _args['code-length'],
   prefix: _args['code-prefix'],
-});
+})
 
 const logError = error => {
-  const errorFormatter = new PrettyError();
+  const errorFormatter = new PrettyError()
 
   if (npmlog.level === 'verbose')
-    process.stderr.write(errorFormatter.render(error));
-  else npmlog.error('', error.message);
-};
+    process.stderr.write(errorFormatter.render(error))
+  else npmlog.error('', error.message)
+}
 
 const errorHandler = errors => {
-  if (Array.isArray(errors)) errors.forEach(logError);
-  else logError(errors);
+  if (Array.isArray(errors)) errors.forEach(logError)
+  else logError(errors)
 
-  process.exit(1);
-};
+  process.exit(1)
+}
 
 resolveInput(args)
   .then(attributes => {
-    const options = buildOptions(args);
-    const codes = discountCodeGenerator(options, attributes);
-    return resolveOutput(args, codes);
+    const options = buildOptions(args)
+    const codes = discountCodeGenerator(options, attributes)
+    return resolveOutput(args, codes)
   })
   .then(total => {
-    npmlog.info(`Successfully generated ${total} discount codes\n`);
+    npmlog.info(`Successfully generated ${total} discount codes\n`)
   })
-  .catch(errorHandler);
+  .catch(errorHandler)

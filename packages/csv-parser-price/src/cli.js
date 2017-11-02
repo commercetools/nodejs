@@ -1,14 +1,14 @@
-import fs from 'fs';
-import { getCredentials } from '@commercetools/get-credentials';
-import npmlog from 'npmlog';
-import PrettyError from 'pretty-error';
-import yargs from 'yargs';
+import fs from 'fs'
+import { getCredentials } from '@commercetools/get-credentials'
+import npmlog from 'npmlog'
+import PrettyError from 'pretty-error'
+import yargs from 'yargs'
 
-import CONSTANTS from './constants';
-import CsvParserPrice from './main';
-import { version } from '../package.json';
+import CONSTANTS from './constants'
+import CsvParserPrice from './main'
+import { version } from '../package.json'
 
-process.title = 'csvparserprice';
+process.title = 'csvparserprice'
 
 const args = yargs
   .usage(
@@ -32,9 +32,9 @@ Convert commercetools price CSV data to JSON.`
     describe: 'Path to input CSV file.',
   })
   .coerce('inputFile', arg => {
-    if (arg !== 'stdin') return fs.createReadStream(String(arg));
+    if (arg !== 'stdin') return fs.createReadStream(String(arg))
 
-    return process.stdin;
+    return process.stdin
   })
   .option('outputFile', {
     alias: 'o',
@@ -42,9 +42,9 @@ Convert commercetools price CSV data to JSON.`
     describe: 'Path to output JSON file.',
   })
   .coerce('outputFile', arg => {
-    if (arg !== 'stdout') return fs.createWriteStream(String(arg));
+    if (arg !== 'stdout') return fs.createWriteStream(String(arg))
 
-    return process.stdout;
+    return process.stdout
   })
   .option('apiUrl', {
     default: CONSTANTS.host.api,
@@ -81,37 +81,37 @@ Convert commercetools price CSV data to JSON.`
     describe: 'Path to file where to save logs.',
   })
   .coerce('logLevel', arg => {
-    npmlog.level = arg;
-  }).argv;
+    npmlog.level = arg
+  }).argv
 
 const logError = error => {
-  const errorFormatter = new PrettyError();
+  const errorFormatter = new PrettyError()
 
   if (npmlog.level === 'verbose')
-    process.stderr.write(`ERR: ${errorFormatter.render(error)}`);
-  else process.stderr.write(`ERR: ${error.message || error}`);
-};
+    process.stderr.write(`ERR: ${errorFormatter.render(error)}`)
+  else process.stderr.write(`ERR: ${error.message || error}`)
+}
 
 const errorHandler = errors => {
   // print errors to stderr if we use stdout for data output
   // if we save data to output file errors are already logged by npmlog
-  if (Array.isArray(errors)) errors.forEach(logError);
-  else logError(errors);
+  if (Array.isArray(errors)) errors.forEach(logError)
+  else logError(errors)
 
-  process.exitCode = 1;
-};
+  process.exitCode = 1
+}
 
 const resolveCredentials = _args => {
-  if (_args.accessToken) return Promise.resolve({});
-  return getCredentials(_args.projectKey);
-};
+  if (_args.accessToken) return Promise.resolve({})
+  return getCredentials(_args.projectKey)
+}
 
 // If the stdout is used for a data output, save all logs to a log file.
 if (args.outputFile === process.stdout)
-  npmlog.stream = fs.createWriteStream(args.logFile);
+  npmlog.stream = fs.createWriteStream(args.logFile)
 
 // Register error listener
-args.outputFile.on('error', errorHandler);
+args.outputFile.on('error', errorHandler)
 
 resolveCredentials(args)
   .then(
@@ -136,6 +136,4 @@ resolveCredentials(args)
         },
       })
   )
-  .then(csvParserPrice =>
-    csvParserPrice.parse(args.inputFile, args.outputFile)
-  );
+  .then(csvParserPrice => csvParserPrice.parse(args.inputFile, args.outputFile))

@@ -11,10 +11,10 @@
  */
 export function text(value: string, lang: string): Object {
   if (!value || !lang)
-    throw new Error('Required arguments for `text` are missing');
+    throw new Error('Required arguments for `text` are missing')
 
-  this.params.search.text = { lang, value: encodeURIComponent(value) };
-  return this;
+  this.params.search.text = { lang, value: encodeURIComponent(value) }
+  return this
 }
 
 /**
@@ -23,8 +23,8 @@ export function text(value: string, lang: string): Object {
  * @return {Object} The instance of the service, can be chained.
  */
 export function fuzzy(): Object {
-  this.params.search.fuzzy = true;
-  return this;
+  this.params.search.fuzzy = true
+  return this
 }
 
 /**
@@ -35,9 +35,9 @@ export function fuzzy(): Object {
  * @return {Object} The instance of the service, can be chained.
  */
 export function fuzzyLevel(value: number): Object {
-  if (!value) throw new Error('Required argument for `fuzzyLevel` is missing');
-  this.params.search.fuzzyLevel = value;
-  return this;
+  if (!value) throw new Error('Required argument for `fuzzyLevel` is missing')
+  this.params.search.fuzzyLevel = value
+  return this
 }
 
 /**
@@ -46,8 +46,8 @@ export function fuzzyLevel(value: number): Object {
  * @return {Object} The instance of the service, can be chained.
  */
 export function markMatchingVariants(): Object {
-  this.params.search.markMatchingVariants = true;
-  return this;
+  this.params.search.markMatchingVariants = true
+  return this
 }
 
 /**
@@ -59,11 +59,11 @@ export function markMatchingVariants(): Object {
  * @return {Object} The instance of the service, can be chained.
  */
 export function facet(value: string): Object {
-  if (!value) throw new Error('Required argument for `facet` is missing');
+  if (!value) throw new Error('Required argument for `facet` is missing')
 
-  const encodedFacet = encodeURIComponent(value);
-  this.params.search.facet.push(encodedFacet);
-  return this;
+  const encodedFacet = encodeURIComponent(value)
+  this.params.search.facet.push(encodedFacet)
+  return this
 }
 
 /**
@@ -75,11 +75,11 @@ export function facet(value: string): Object {
  * @return {Object} The instance of the service, can be chained.
  */
 export function filter(value: string): Object {
-  if (!value) throw new Error('Required argument for `filter` is missing');
+  if (!value) throw new Error('Required argument for `filter` is missing')
 
-  const encodedFilter = encodeURIComponent(value);
-  this.params.search.filter.push(encodedFilter);
-  return this;
+  const encodedFilter = encodeURIComponent(value)
+  this.params.search.filter.push(encodedFilter)
+  return this
 }
 
 /**
@@ -92,11 +92,11 @@ export function filter(value: string): Object {
  */
 export function filterByQuery(value: string): Object {
   if (!value)
-    throw new Error('Required argument for `filterByQuery` is missing');
+    throw new Error('Required argument for `filterByQuery` is missing')
 
-  const encodedFilter = encodeURIComponent(value);
-  this.params.search.filterByQuery.push(encodedFilter);
-  return this;
+  const encodedFilter = encodeURIComponent(value)
+  this.params.search.filterByQuery.push(encodedFilter)
+  return this
 }
 
 /**
@@ -109,9 +109,9 @@ export function filterByQuery(value: string): Object {
  */
 export function filterByFacets(value: string): Object {
   if (!value)
-    throw new Error('Required argument for `filterByFacets` is missing');
+    throw new Error('Required argument for `filterByFacets` is missing')
 
-  const encodedFilter = encodeURIComponent(value);
-  this.params.search.filterByFacets.push(encodedFilter);
-  return this;
+  const encodedFilter = encodeURIComponent(value)
+  this.params.search.filterByFacets.push(encodedFilter)
+  return this
 }

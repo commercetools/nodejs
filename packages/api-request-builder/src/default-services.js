@@ -1,4 +1,4 @@
-import * as features from './features';
+import * as features from './features'
 
 export default {
   cartDiscounts: {
@@ -166,4 +166,4 @@ export default {
     endpoint: '/zones',
     features: [features.query, features.queryOne, features.queryExpand],
   },
-};
+}

@@ -1,13 +1,13 @@
-import fs from 'fs';
-import { getCredentials } from '@commercetools/get-credentials';
-import pino from 'pino';
-import PrettyError from 'pretty-error';
-import yargs from 'yargs';
+import fs from 'fs'
+import { getCredentials } from '@commercetools/get-credentials'
+import pino from 'pino'
+import PrettyError from 'pretty-error'
+import yargs from 'yargs'
 
-import ProductExporter from './main';
-import { description } from '../package.json';
+import ProductExporter from './main'
+import { description } from '../package.json'
 
-process.title = 'product-exporter';
+process.title = 'product-exporter'
 
 const args = yargs
   .usage(
@@ -50,9 +50,9 @@ Required scopes: ['view_products', 'view_customers']`,
     type: 'string',
   })
   .coerce('output', arg => {
-    if (arg !== 'stdout') return fs.createWriteStream(String(arg));
+    if (arg !== 'stdout') return fs.createWriteStream(String(arg))
 
-    return process.stdout;
+    return process.stdout
   })
   .option('batchSize', {
     alias: 'b',
@@ -62,11 +62,11 @@ Required scopes: ['view_products', 'view_customers']`,
   })
   // Limit batchSize to 500 in accord with the API
   .coerce('batchSize', arg => {
-    const batchSize = parseInt(arg, 10);
+    const batchSize = parseInt(arg, 10)
     if (batchSize <= 0 || batchSize > 500)
-      throw new Error('Invalid batchSize, must be a number between 1 and 500');
+      throw new Error('Invalid batchSize, must be a number between 1 and 500')
 
-    return batchSize;
+    return batchSize
   })
   // http://dev.commercetools.com/http-api.html#reference-expansion for further
   // explanation about reference field expansion
@@ -108,44 +108,44 @@ Required scopes: ['view_products', 'view_customers']`,
     default: 'product-exporter.log',
     describe: 'Path to file where logs should be saved',
     type: 'string',
-  }).argv;
+  }).argv
 
 // instantiate logger
 const loggerConfig = {
   level: args.logLevel,
   prettyPrint: args.prettyLogs,
-};
-const logger = pino(loggerConfig);
+}
+const logger = pino(loggerConfig)
 
 // print errors to stderr if we use stdout for data output
 // if we save data to output file errors are already logged by pino
 const logError = error => {
-  const errorFormatter = new PrettyError();
+  const errorFormatter = new PrettyError()
 
   if (logger.level === 'debug')
-    process.stderr.write(`ERR: ${errorFormatter.render(error)}`);
-  else process.stderr.write(`ERR: ${error.message || error}`);
-};
+    process.stderr.write(`ERR: ${errorFormatter.render(error)}`)
+  else process.stderr.write(`ERR: ${error.message || error}`)
+}
 
 const errorHandler = errors => {
-  if (Array.isArray(errors)) errors.forEach(logError);
-  else logError(errors);
+  if (Array.isArray(errors)) errors.forEach(logError)
+  else logError(errors)
 
-  process.exitCode = 1;
-};
+  process.exitCode = 1
+}
 
 const resolveCredentials = _args => {
-  if (_args.accessToken) return Promise.resolve({});
-  return getCredentials(_args.projectKey);
-};
+  if (_args.accessToken) return Promise.resolve({})
+  return getCredentials(_args.projectKey)
+}
 
 // If the stdout is used for a data output, save all logs to a log file.
 // pino writes logs to stdout by default
 if (args.output === process.stdout)
-  logger.stream = fs.createWriteStream(args.logFile);
+  logger.stream = fs.createWriteStream(args.logFile)
 
 // Register error listener
-args.output.on('error', errorHandler);
+args.output.on('error', errorHandler)
 
 resolveCredentials(args)
   .then(credentials => {
@@ -154,7 +154,7 @@ resolveCredentials(args)
       apiUrl: args.apiUrl,
       projectKey: args.projectKey,
       credentials,
-    };
+    }
     const productExportConfigOptions = {
       batch: args.batchSize,
       expand: args.expand,
@@ -162,21 +162,21 @@ resolveCredentials(args)
       predicate: args.predicate,
       staged: args.staged,
       total: args.total,
-    };
+    }
     const myLogger = {
       error: logger.error.bind(logger),
       warn: logger.warn.bind(logger),
       info: logger.info.bind(logger),
       debug: logger.debug.bind(logger),
-    };
-    const accessToken = args.accessToken;
+    }
+    const accessToken = args.accessToken
 
     return new ProductExporter(
       apiConfig,
       productExportConfigOptions,
       myLogger,
       accessToken
-    );
+    )
   })
   .then(productExporter => productExporter.run(args.output))
-  .catch(errorHandler);
+  .catch(errorHandler)

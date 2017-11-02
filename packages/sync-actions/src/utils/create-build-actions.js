@@ -1,5 +1,5 @@
 function applyOnBeforeDiff(before, now, fn) {
-  return fn && typeof fn === 'function' ? fn(before, now) : [before, now];
+  return fn && typeof fn === 'function' ? fn(before, now) : [before, now]
 }
 
 export default function createBuildActions(differ, doMapActions, onBeforeDiff) {
@@ -8,18 +8,18 @@ export default function createBuildActions(differ, doMapActions, onBeforeDiff) {
       throw new Error(
         'Missing either `newObj` or `oldObj` ' +
           'in order to build update actions'
-      );
+      )
 
     const [processedBefore, processedNow] = applyOnBeforeDiff(
       before,
       now,
       onBeforeDiff
-    );
+    )
 
-    const diffed = differ(processedBefore, processedNow);
+    const diffed = differ(processedBefore, processedNow)
 
-    if (!diffed) return [];
+    if (!diffed) return []
 
-    return doMapActions(diffed, processedNow, processedBefore, options);
-  };
+    return doMapActions(diffed, processedNow, processedBefore, options)
+  }
 }

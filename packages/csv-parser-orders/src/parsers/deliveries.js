@@ -1,41 +1,38 @@
-import _ from 'lodash';
-import objectPath from 'object-path';
-import highland from 'highland';
-import JSONStream from 'JSONStream';
-import CONS from '../constants';
-import AbstractParser from './abstract-parser';
+import _ from 'lodash'
+import objectPath from 'object-path'
+import highland from 'highland'
+import JSONStream from 'JSONStream'
+import CONS from '../constants'
+import AbstractParser from './abstract-parser'
 
 export default class DeliveriesParser extends AbstractParser {
   constructor(config) {
-    super(config, 'deliveries');
+    super(config, 'deliveries')
   }
 
   parse(input, output) {
-    this.logger.info('Starting Deliveries CSV conversion');
+    this.logger.info('Starting Deliveries CSV conversion')
     this._streamInput(input, output)
       .reduce([], DeliveriesParser._groupByDeliveryId)
       .stopOnError(err => {
-        this.logger.error(err);
-        return output.emit('error', err);
+        this.logger.error(err)
+        return output.emit('error', err)
       })
       .flatMap(data => highland(DeliveriesParser._cleanOrders(data)))
       .pipe(JSONStream.stringify(false))
-      .pipe(output);
+      .pipe(output)
   }
 
   // Take objectized CSV row and create an order object from it
   _processData(data) {
-    this.logger.verbose('Processing data to CTP format');
-    const csvHeaders = Object.keys(data);
-    const headerDiff = _.difference(
-      CONS.requiredHeaders.deliveries,
-      csvHeaders
-    );
+    this.logger.verbose('Processing data to CTP format')
+    const csvHeaders = Object.keys(data)
+    const headerDiff = _.difference(CONS.requiredHeaders.deliveries, csvHeaders)
 
     if (headerDiff.length)
       return Promise.reject(
         new Error(`Required headers missing: '${headerDiff.join(',')}'`)
-      );
+      )
 
     /**
      * Sample delivery object that the API supports
@@ -94,18 +91,16 @@ export default class DeliveriesParser extends AbstractParser {
           quantity: parseInt(data['item.quantity'], 10),
         },
       ],
-    };
+    }
 
     // Add parcel info if it is present
     if (data['parcel.id']) {
-      const parcel = DeliveriesParser._parseParcelInfo(data);
+      const parcel = DeliveriesParser._parseParcelInfo(data)
 
       if (parcel.measurements && Object.keys(parcel.measurements).length !== 4)
-        return Promise.reject(
-          new Error('All measurement fields are mandatory')
-        );
+        return Promise.reject(new Error('All measurement fields are mandatory'))
 
-      delivery.parcels = [parcel];
+      delivery.parcels = [parcel]
     }
 
     const order = {
@@ -113,8 +108,8 @@ export default class DeliveriesParser extends AbstractParser {
       shippingInfo: {
         deliveries: [delivery],
       },
-    };
-    return Promise.resolve(order);
+    }
+    return Promise.resolve(order)
   }
 
   // remove internal properties
@@ -123,11 +118,11 @@ export default class DeliveriesParser extends AbstractParser {
       order.shippingInfo.deliveries.forEach(delivery =>
         delivery.items.forEach(item => {
           // eslint-disable-next-line no-param-reassign
-          delete item._groupId;
+          delete item._groupId
         })
       )
-    );
-    return [orders];
+    )
+    return [orders]
   }
 
   // Will merge newOrder with orders in results array
@@ -140,31 +135,31 @@ export default class DeliveriesParser extends AbstractParser {
      */
 
     // if newOrder is the first record, just push it to the results
-    if (!results.length) return [newOrder];
+    if (!results.length) return [newOrder]
 
     // find newOrder in results using its orderNumber
     const existingOrder = results.find(
       order => order.orderNumber === newOrder.orderNumber
-    );
+    )
 
-    if (!existingOrder) results.push(newOrder);
+    if (!existingOrder) results.push(newOrder)
     else {
-      const oldDeliveries = existingOrder.shippingInfo.deliveries;
-      const newDelivery = newOrder.shippingInfo.deliveries[0];
+      const oldDeliveries = existingOrder.shippingInfo.deliveries
+      const newDelivery = newOrder.shippingInfo.deliveries[0]
 
       // find newDelivery in results using its id
       const existingDelivery = oldDeliveries.find(
         delivery => delivery.id === newDelivery.id
-      );
+      )
 
       // if this delivery is not yet in results array, insert it
-      if (!existingDelivery) oldDeliveries.push(newDelivery);
+      if (!existingDelivery) oldDeliveries.push(newDelivery)
       else {
         DeliveriesParser._mergeDeliveryItems(
           existingDelivery.items,
           newDelivery.items[0],
           existingDelivery
-        );
+        )
 
         // if delivery have parcels, merge them
         if (newDelivery.parcels)
@@ -172,22 +167,20 @@ export default class DeliveriesParser extends AbstractParser {
             existingDelivery.parcels,
             newDelivery.parcels[0],
             existingDelivery
-          );
+          )
       }
     }
 
-    return results;
+    return results
   }
 
   // merge delivery parcels to one array based on parcel.id field
   static _mergeDeliveryParcels(allParcels, newParcel, delivery) {
     // try to find this parcel in array using parcel id
-    const duplicitParcel = allParcels.find(
-      parcel => parcel.id === newParcel.id
-    );
+    const duplicitParcel = allParcels.find(parcel => parcel.id === newParcel.id)
 
     // if this parcel item is not yet in array, insert it
-    if (!duplicitParcel) return allParcels.push(newParcel);
+    if (!duplicitParcel) return allParcels.push(newParcel)
 
     // if this parcel is already in array, check if parcels are equal
     if (!_.isEqual(duplicitParcel, newParcel))
@@ -197,19 +190,19 @@ export default class DeliveriesParser extends AbstractParser {
           ` values across multiple rows.
         Original parcel: '${JSON.stringify(duplicitParcel)}'
         Invalid parcel: '${JSON.stringify(newParcel)}'`
-      );
+      )
 
-    return allParcels;
+    return allParcels
   }
 
   // merge delivery items to one array based on _groupId field
   static _mergeDeliveryItems(allItems, newItem, delivery) {
     const duplicitItem = allItems.find(
       item => item._groupId === newItem._groupId
-    );
+    )
 
     // if an item is not yet in array, insert it
-    if (!duplicitItem) return allItems.push(newItem);
+    if (!duplicitItem) return allItems.push(newItem)
 
     // if this item is already in array, check if items are equal
     if (!_.isEqual(duplicitItem, newItem))
@@ -219,9 +212,9 @@ export default class DeliveriesParser extends AbstractParser {
           ` values across multiple rows.
         Original row: '${JSON.stringify(duplicitItem)}'
         Invalid row: '${JSON.stringify(newItem)}'`
-      );
+      )
 
-    return allItems;
+    return allItems
   }
 
   static _parseParcelInfo(data) {
@@ -235,33 +228,33 @@ export default class DeliveriesParser extends AbstractParser {
       'parcel.provider': 'trackingData.provider',
       'parcel.carrier': 'trackingData.carrier',
       'parcel.isReturn': 'trackingData.isReturn',
-    };
+    }
 
     const parcel = {
       id: data['parcel.id'],
-    };
+    }
 
     // Build parcel object
     Object.keys(data).forEach(fieldName => {
-      if (!transitionMap[fieldName]) return;
+      if (!transitionMap[fieldName]) return
 
       // All values are loaded as a string
-      let fieldValue = data[fieldName];
+      let fieldValue = data[fieldName]
 
       // do not set empty values
-      if (fieldValue === '') return;
+      if (fieldValue === '') return
 
       // Cast measurements to Number
       if (/^measurements/.test(transitionMap[fieldName]))
-        fieldValue = Number(fieldValue);
+        fieldValue = Number(fieldValue)
 
       // Cast isReturn field to Boolean
       if (fieldName === 'parcel.isReturn')
-        fieldValue = fieldValue === '1' || fieldValue.toLowerCase() === 'true';
+        fieldValue = fieldValue === '1' || fieldValue.toLowerCase() === 'true'
 
-      objectPath.set(parcel, transitionMap[fieldName], fieldValue);
-    });
+      objectPath.set(parcel, transitionMap[fieldName], fieldValue)
+    })
 
-    return parcel;
+    return parcel
   }
 }

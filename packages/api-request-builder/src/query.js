@@ -7,11 +7,11 @@
  * @return {Object} The instance of the service, can be chained.
  */
 export function where(predicate: string): Object {
-  if (!predicate) throw new Error('Required argument for `where` is missing');
+  if (!predicate) throw new Error('Required argument for `where` is missing')
 
-  const encodedPredicate = encodeURIComponent(predicate);
-  this.params.query.where.push(encodedPredicate);
-  return this;
+  const encodedPredicate = encodeURIComponent(predicate)
+  this.params.query.where.push(encodedPredicate)
+  return this
 }
 
 /**
@@ -24,13 +24,13 @@ export function where(predicate: string): Object {
  */
 export function whereOperator(operator: 'and' | 'or'): Object {
   if (!operator)
-    throw new Error('Required argument for `whereOperator` is missing');
+    throw new Error('Required argument for `whereOperator` is missing')
   if (!(operator === 'and' || operator === 'or'))
     throw new Error(
       'Required argument for `whereOperator` is invalid, ' +
         'allowed values are (`and`, `or`)'
-    );
+    )
 
-  this.params.query.operator = operator;
-  return this;
+  this.params.query.operator = operator
+  return this
 }

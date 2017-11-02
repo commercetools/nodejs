@@ -1,18 +1,18 @@
-import productsSyncFn from '../src/products';
+import productsSyncFn from '../src/products'
 
 /* eslint-disable max-len */
 describe('Actions', () => {
-  let productsSync;
+  let productsSync
   beforeEach(() => {
-    productsSync = productsSyncFn();
-  });
+    productsSync = productsSyncFn()
+  })
 
   describe('build actions', () => {
-    const validFrom = new Date().toISOString();
+    const validFrom = new Date().toISOString()
     const discounted = {
       value: { centAmount: 4000, currencyCode: 'EUR' },
       discount: { typeId: 'product-discount', id: 'pd1' },
-    };
+    }
 
     const before = {
       id: '123',
@@ -62,7 +62,7 @@ describe('Actions', () => {
           ],
         },
       ],
-    };
+    }
 
     const now = {
       id: '123',
@@ -117,10 +117,10 @@ describe('Actions', () => {
           ],
         },
       ],
-    };
+    }
 
     it('should build actions for prices', () => {
-      const actions = productsSync.buildActions(now, before);
+      const actions = productsSync.buildActions(now, before)
       expect(actions).toEqual([
         {
           action: 'changePrice',
@@ -143,28 +143,28 @@ describe('Actions', () => {
             validFrom,
           },
         },
-      ]);
-    });
+      ])
+    })
 
     it('should not delete the discounted field from the original object', () => {
-      expect('discounted' in before.masterVariant.prices[0]).toBeTruthy();
-      expect('discounted' in now.masterVariant.prices[0]).toBeTruthy();
-    });
-  });
+      expect('discounted' in before.masterVariant.prices[0]).toBeTruthy()
+      expect('discounted' in now.masterVariant.prices[0]).toBeTruthy()
+    })
+  })
 
   it('should not build actions if prices are not set', () => {
     const before = {
       id: '123-abc',
       masterVariant: { id: 1, prices: [] },
       variants: [],
-    };
+    }
     const now = {
       id: '456-def',
       masterVariant: { id: 1, prices: [] },
       variants: [],
-    };
+    }
 
-    const actions = productsSync.buildActions(now, before);
-    expect(actions).toEqual([]);
-  });
-});
+    const actions = productsSync.buildActions(now, before)
+    expect(actions).toEqual([])
+  })
+})

@@ -10,7 +10,7 @@ export type ApiConfigOptions = {
   },
   scopes: Array<string>,
   apiUrl?: string,
-};
+}
 
 /* Logger */
 export type LoggerOptions = {
@@ -18,7 +18,7 @@ export type LoggerOptions = {
   info: Function,
   warn: Function,
   debug: Function,
-};
+}
 
 export type ExportConfigOptions = {
   batch: number,
@@ -27,42 +27,42 @@ export type ExportConfigOptions = {
   predicate: string,
   staged: boolean,
   total: number,
-};
+}
 
 /* From API */
 
 type TypeReference = {
   typeId: string,
   id: string,
-};
+}
 
 type CustomField = {
   type: TypeReference,
   fields: Object,
-};
+}
 
 type AssetDimensions = {
   w: number,
   h: number,
-};
+}
 
 type Image = {
   url: string,
   dimensions: AssetDimensions,
   label: string,
-};
+}
 
 type Attribute = {
   name: string,
   value: Object,
-};
+}
 
 type AssetSource = {
   uri: string,
   key?: string,
   dimensions?: AssetDimensions,
   contentType?: string,
-};
+}
 
 type Asset = {
   id: string,
@@ -71,22 +71,22 @@ type Asset = {
   description?: Object,
   tags?: Array<string>,
   custom: CustomField,
-};
+}
 
 type Money = {
   currencyCode: string,
   centAmount: number,
-};
+}
 
 type DiscountedPrice = {
   value: Money,
   discount: TypeReference,
-};
+}
 
 type PriceTier = {
   minimumQuantity: number,
   value: Money,
-};
+}
 
 type Price = {
   id: string,
@@ -99,7 +99,7 @@ type Price = {
   tiers?: Array<PriceTier>,
   discounted?: DiscountedPrice,
   custom?: CustomField,
-};
+}
 
 type ScopedPrice = {
   id: string,
@@ -112,14 +112,14 @@ type ScopedPrice = {
   validUntil?: string,
   discounted?: DiscountedPrice,
   custom?: CustomField,
-};
+}
 
 type ProductVariantAvailability = {
   isOnStock?: boolean,
   restockableInDays?: number,
   availableQuantity?: number,
   channels?: Array<Object>,
-};
+}
 
 type Variant = {
   id: number,
@@ -134,7 +134,7 @@ type Variant = {
   isMatchingVariant?: boolean,
   scopedPrice?: ScopedPrice,
   scopedPriceDiscounted?: boolean,
-};
+}
 
 export type ProductProjection = {
   id: string,
@@ -155,15 +155,15 @@ export type ProductProjection = {
   taxCategory?: TypeReference,
   state?: TypeReference,
   reviewRatingStatistics?: Object,
-};
+}
 
 type ProcessFnResponseBody = {
   offset: number,
   count: number,
   results: Array<ProductProjection>,
-};
+}
 
 export type ProcessFnResponse = {
   body: ProcessFnResponseBody,
   statusCode: number,
-};
+}

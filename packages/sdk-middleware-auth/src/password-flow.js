@@ -6,18 +6,18 @@ import type {
   MiddlewareResponse,
   Next,
   Task,
-} from 'types/sdk';
+} from 'types/sdk'
 
-import { buildRequestForPasswordFlow } from './build-requests';
-import authMiddlewareBase from './base-auth-flow';
-import store from './utils';
+import { buildRequestForPasswordFlow } from './build-requests'
+import authMiddlewareBase from './base-auth-flow'
+import store from './utils'
 
 export default function createAuthMiddlewareForPasswordFlow(
   options: PasswordAuthMiddlewareOptions
 ): Middleware {
-  const tokenCache = store({});
-  const pendingTasks: Array<Task> = [];
-  const requestState = store(false);
+  const tokenCache = store({})
+  const pendingTasks: Array<Task> = []
+  const requestState = store(false)
 
   return (next: Next) => (
     request: MiddlewareRequest,
@@ -29,8 +29,8 @@ export default function createAuthMiddlewareForPasswordFlow(
       (request.headers && request.headers.authorization) ||
       (request.headers && request.headers.Authorization)
     ) {
-      next(request, response);
-      return;
+      next(request, response)
+      return
     }
     const params = {
       request,
@@ -39,7 +39,7 @@ export default function createAuthMiddlewareForPasswordFlow(
       pendingTasks,
       requestState,
       tokenCache,
-    };
-    authMiddlewareBase(params, next, options);
-  };
+    }
+    authMiddlewareBase(params, next, options)
+  }
 }

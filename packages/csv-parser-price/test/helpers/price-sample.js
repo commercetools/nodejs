@@ -17,5 +17,5 @@ export default function() {
       moneytype: 'EUR 1200',
       settype: '1,2,3,5',
     },
-  };
+  }
 }

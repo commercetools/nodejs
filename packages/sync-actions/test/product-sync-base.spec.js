@@ -1,10 +1,10 @@
-import clone from '../src/utils/clone';
-import productsSyncFn, { actionGroups } from '../src/products';
+import clone from '../src/utils/clone'
+import productsSyncFn, { actionGroups } from '../src/products'
 import {
   baseActionsList,
   metaActionsList,
   referenceActionsList,
-} from '../src/product-actions';
+} from '../src/product-actions'
 
 describe('Exports', () => {
   it('action group list', () => {
@@ -18,8 +18,8 @@ describe('Exports', () => {
       'variants',
       'categories',
       'categoryOrderHints',
-    ]);
-  });
+    ])
+  })
 
   it('correctly define base actions list', () => {
     expect(baseActionsList).toEqual([
@@ -28,30 +28,30 @@ describe('Exports', () => {
       { action: 'setDescription', key: 'description' },
       { action: 'setSearchKeywords', key: 'searchKeywords' },
       { action: 'setKey', key: 'key' },
-    ]);
-  });
+    ])
+  })
 
   it('correctly define meta actions list', () => {
     expect(metaActionsList).toEqual([
       { action: 'setMetaTitle', key: 'metaTitle' },
       { action: 'setMetaDescription', key: 'metaDescription' },
       { action: 'setMetaKeywords', key: 'metaKeywords' },
-    ]);
-  });
+    ])
+  })
 
   it('correctly define reference actions list', () => {
     expect(referenceActionsList).toEqual([
       { action: 'setTaxCategory', key: 'taxCategory' },
       { action: 'transitionState', key: 'state' },
-    ]);
-  });
-});
+    ])
+  })
+})
 
 describe('Actions', () => {
-  let productsSync;
+  let productsSync
   beforeEach(() => {
-    productsSync = productsSyncFn();
-  });
+    productsSync = productsSyncFn()
+  })
 
   it('should ensure given objects are not mutated', () => {
     const before = {
@@ -66,7 +66,7 @@ describe('Actions', () => {
         { id: 2, sku: '002', attributes: [{ name: 'a2', value: 2 }] },
         { id: 3, sku: '003', attributes: [{ name: 'a3', value: 3 }] },
       ],
-    };
+    }
     const now = {
       name: { en: 'Sport car' },
       key: 'unique-key-2',
@@ -79,27 +79,27 @@ describe('Actions', () => {
         { id: 2, sku: '200', attributes: [{ name: 'a2', value: 200 }] },
         { id: 3, sku: '300', attributes: [{ name: 'a3', value: 300 }] },
       ],
-    };
-    productsSync.buildActions(now, before);
-    expect(before).toEqual(clone(before));
-    expect(now).toEqual(clone(now));
-  });
+    }
+    productsSync.buildActions(now, before)
+    expect(before).toEqual(clone(before))
+    expect(now).toEqual(clone(now))
+  })
 
   it('should build `setKey` action', () => {
-    const before = { key: 'unique-key-1' };
-    const now = { key: 'unique-key-2' };
-    const actions = productsSync.buildActions(now, before);
+    const before = { key: 'unique-key-1' }
+    const now = { key: 'unique-key-2' }
+    const actions = productsSync.buildActions(now, before)
 
-    expect(actions).toEqual([{ action: 'setKey', ...now }]);
-  });
+    expect(actions).toEqual([{ action: 'setKey', ...now }])
+  })
 
   it('should build `changeName` action', () => {
-    const before = { name: { en: 'Car', de: 'Auto' } };
-    const now = { name: { en: 'Sport car' } };
-    const actions = productsSync.buildActions(now, before);
+    const before = { name: { en: 'Car', de: 'Auto' } }
+    const now = { name: { en: 'Sport car' } }
+    const actions = productsSync.buildActions(now, before)
 
-    expect(actions).toEqual([{ action: 'changeName', ...now }]);
-  });
+    expect(actions).toEqual([{ action: 'changeName', ...now }])
+  })
 
   it('should build `setSearchKeywords` action', () => {
     /* eslint-disable max-len */
@@ -122,7 +122,7 @@ describe('Actions', () => {
           },
         ],
       },
-    };
+    }
     const now = {
       searchKeywords: {
         en: [
@@ -147,11 +147,11 @@ describe('Actions', () => {
         ],
         it: [{ text: 'Coltello svizzero' }],
       },
-    };
+    }
     /* eslint-enable max-len */
-    const actions = productsSync.buildActions(now, before);
-    expect(actions).toEqual([{ action: 'setSearchKeywords', ...now }]);
-  });
+    const actions = productsSync.buildActions(now, before)
+    expect(actions).toEqual([{ action: 'setSearchKeywords', ...now }])
+  })
 
   it('should build no actions if searchKeywords did not change', () => {
     /* eslint-disable max-len */
@@ -175,11 +175,11 @@ describe('Actions', () => {
           },
         ],
       },
-    };
+    }
     /* eslint-enable max-len */
-    const actions = productsSync.buildActions(before, before);
-    expect(actions).toEqual([]);
-  });
+    const actions = productsSync.buildActions(before, before)
+    expect(actions).toEqual([])
+  })
 
   it('should build `add/remove Category` actions', () => {
     const before = {
@@ -187,15 +187,15 @@ describe('Actions', () => {
         { id: 'aebe844e-0616-420a-8397-a22c48d5e99f' },
         { id: '34cae6ad-5898-4f94-973b-ae9ceb7464ce' },
       ],
-    };
+    }
     const now = {
       categories: [
         { id: 'aebe844e-0616-420a-8397-a22c48d5e99f' },
         { id: '4f278964-48c0-4f2c-8b61-09310d1de60a' },
         { id: 'cca7a250-d8cf-4b8a-9d47-60fcc093b86b' },
       ],
-    };
-    const actions = productsSync.buildActions(now, before);
+    }
+    const actions = productsSync.buildActions(now, before)
 
     expect(actions).toEqual([
       {
@@ -210,8 +210,8 @@ describe('Actions', () => {
         action: 'addToCategory',
         category: { id: 'cca7a250-d8cf-4b8a-9d47-60fcc093b86b' },
       },
-    ]);
-  });
+    ])
+  })
 
   it('should add/remove category and categoryOrderHints', () => {
     const before = {
@@ -225,7 +225,7 @@ describe('Actions', () => {
         'aebe844e-0616-420a-8397-a22c48d5e99f': '0.2', // will be changed to 0.5
         '34cae6ad-5898-4f94-973b-ae9ceb7464ce': '0.5', // will be removed
       },
-    };
+    }
 
     const now = {
       categories: [
@@ -238,8 +238,8 @@ describe('Actions', () => {
         'aebe844e-0616-420a-8397-a22c48d5e99f': '0.5',
         'cca7a250-d8cf-4b8a-9d47-60fcc093b86b': '0.999',
       },
-    };
-    const actions = productsSync.buildActions(now, before);
+    }
+    const actions = productsSync.buildActions(now, before)
 
     expect(actions).toEqual([
       {
@@ -264,8 +264,8 @@ describe('Actions', () => {
         categoryId: 'cca7a250-d8cf-4b8a-9d47-60fcc093b86b',
         orderHint: '0.999',
       },
-    ]);
-  });
+    ])
+  })
 
   it('should build base actions for long diff text', () => {
     const longText = `
@@ -278,7 +278,7 @@ describe('Actions', () => {
     Donec luctus tempus erat, ut suscipit elit varius nec.
     Mauris dolor enim, aliquet sed nulla et, dignissim lobortis augue.
     Proin pharetra magna eu neque semper tristique sed.
-    `;
+    `
 
     /* eslint-disable max-len */
     const before = {
@@ -291,7 +291,7 @@ describe('Actions', () => {
       description: {
         en: longText,
       },
-    };
+    }
     const now = {
       name: {
         en: `Hello, ${longText}`,
@@ -302,9 +302,9 @@ describe('Actions', () => {
       description: {
         en: `Hello, ${longText}`,
       },
-    };
+    }
     /* eslint-enable max-len */
-    const actions = productsSync.buildActions(now, before);
+    const actions = productsSync.buildActions(now, before)
     expect(actions).toEqual([
       {
         action: 'changeName',
@@ -318,6 +318,6 @@ describe('Actions', () => {
         action: 'setDescription',
         description: now.description,
       },
-    ]);
-  });
-});
+    ])
+  })
+})

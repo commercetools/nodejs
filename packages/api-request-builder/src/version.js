@@ -11,7 +11,7 @@
 
 export default function withVersion(version: number): Object {
   if (typeof version !== 'number')
-    throw new Error('A resource version is missing or invalid');
-  this.params.version = version;
-  return this;
+    throw new Error('A resource version is missing or invalid')
+  this.params.version = version
+  return this
 }

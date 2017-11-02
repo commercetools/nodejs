@@ -1,4 +1,4 @@
-import { buildBaseAttributesActions } from './utils/common-actions';
+import { buildBaseAttributesActions } from './utils/common-actions'
 
 export const baseActionsList = [
   { action: 'changeIsActive', key: 'isActive' },
@@ -11,7 +11,7 @@ export const baseActionsList = [
     key: 'maxApplicationsPerCustomer',
   },
   { action: 'changeCartDiscounts', key: 'cartDiscounts' },
-];
+]
 
 export function actionsMapBase(diff, oldObj, newObj) {
   return buildBaseAttributesActions({
@@ -19,5 +19,5 @@ export function actionsMapBase(diff, oldObj, newObj) {
     diff,
     oldObj,
     newObj,
-  });
+  })
 }

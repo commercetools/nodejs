@@ -1,11 +1,11 @@
-import productsSyncFn from '../src/products';
+import productsSyncFn from '../src/products'
 
 /* eslint-disable max-len */
 describe('Actions', () => {
-  let productsSync;
+  let productsSync
   beforeEach(() => {
-    productsSync = productsSyncFn();
-  });
+    productsSync = productsSyncFn()
+  })
 
   describe('with matching variant order', () => {
     it('should build actions for images', () => {
@@ -60,7 +60,7 @@ describe('Actions', () => {
             ],
           },
         ],
-      };
+      }
 
       const now = {
         id: '123',
@@ -117,9 +117,9 @@ describe('Actions', () => {
             ],
           },
         ],
-      };
+      }
 
-      const actions = productsSync.buildActions(now, before);
+      const actions = productsSync.buildActions(now, before)
       expect(actions).toEqual([
         {
           action: 'addExternalImage',
@@ -163,9 +163,9 @@ describe('Actions', () => {
           variantId: 4,
           imageUrl: '//example.com/old-remove.png',
         },
-      ]);
-    });
-  });
+      ])
+    })
+  })
 
   describe('with non-matching variant order', () => {
     it('should detect image movement', () => {
@@ -237,7 +237,7 @@ describe('Actions', () => {
             id: 2,
           },
         ],
-      };
+      }
 
       const now = {
         masterVariant: {
@@ -301,8 +301,8 @@ describe('Actions', () => {
         hasStagedChanges: true,
         published: true,
         key: 'foo-key',
-      };
-      const actions = productsSync.buildActions(now, before);
+      }
+      const actions = productsSync.buildActions(now, before)
       expect(actions).toEqual([
         {
           action: 'removeVariant',
@@ -319,8 +319,8 @@ describe('Actions', () => {
             'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/cactus-with-surfboar-BmOeVZEZ.jpg',
           position: 0,
         },
-      ]);
-    });
+      ])
+    })
 
     it('should build actions for image removal', () => {
       const before = {
@@ -393,7 +393,7 @@ describe('Actions', () => {
             id: 2,
           },
         ],
-      };
+      }
 
       const now = {
         masterVariant: {
@@ -450,9 +450,9 @@ describe('Actions', () => {
         hasStagedChanges: true,
         published: true,
         key: 'foo-key',
-      };
+      }
 
-      const actions = productsSync.buildActions(now, before);
+      const actions = productsSync.buildActions(now, before)
       expect(actions).toEqual([
         {
           action: 'removeVariant',
@@ -468,9 +468,9 @@ describe('Actions', () => {
             'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/Screen+Shot+2017-04--LOx1OrZZ.png',
           variantId: 1,
         },
-      ]);
-    });
-  });
+      ])
+    })
+  })
 
   describe('without images', () => {
     it('should not build actions if images are not set', () => {
@@ -478,15 +478,15 @@ describe('Actions', () => {
         id: '123-abc',
         masterVariant: { id: 1, images: [] },
         variants: [],
-      };
+      }
       const now = {
         id: '456-def',
         masterVariant: { id: 1 },
         variants: [],
-      };
+      }
 
-      const actions = productsSync.buildActions(now, before);
-      expect(actions).toEqual([]);
-    });
-  });
-});
+      const actions = productsSync.buildActions(now, before)
+      expect(actions).toEqual([])
+    })
+  })
+})

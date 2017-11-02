@@ -1,14 +1,14 @@
-import fs from 'fs';
-import readline from 'readline';
-import { getCredentials } from '@commercetools/get-credentials';
-import npmlog from 'npmlog';
-import PrettyError from 'pretty-error';
-import yargs from 'yargs';
+import fs from 'fs'
+import readline from 'readline'
+import { getCredentials } from '@commercetools/get-credentials'
+import npmlog from 'npmlog'
+import PrettyError from 'pretty-error'
+import yargs from 'yargs'
 
-import PriceExporter from './main';
-import { description } from '../package.json';
+import PriceExporter from './main'
+import { description } from '../package.json'
 
-process.title = 'price-exporter';
+process.title = 'price-exporter'
 
 const args = yargs
   .usage(
@@ -27,9 +27,9 @@ ${description}`
     describe: 'Path to CSV template.',
   })
   .coerce('input', arg => {
-    if (fs.existsSync(arg)) return fs.createReadStream(String(arg));
+    if (fs.existsSync(arg)) return fs.createReadStream(String(arg))
 
-    throw new Error('Input file cannot be reached or does not exist');
+    throw new Error('Input file cannot be reached or does not exist')
   })
   .option('output', {
     alias: 'o',
@@ -37,9 +37,9 @@ ${description}`
     describe: 'Path to output file.',
   })
   .coerce('output', arg => {
-    if (arg !== 'stdout') return fs.createWriteStream(String(arg));
+    if (arg !== 'stdout') return fs.createWriteStream(String(arg))
 
-    return process.stdout;
+    return process.stdout
   })
   .option('apiUrl', {
     default: 'https://api.sphere.io',
@@ -87,61 +87,61 @@ Required scopes: ['view_products', 'view_customers', 'view_types']`,
     describe: 'Path to file where to save logs.',
   })
   .coerce('logLevel', arg => {
-    npmlog.level = arg;
-  }).argv;
+    npmlog.level = arg
+  }).argv
 
 const logError = error => {
-  const errorFormatter = new PrettyError();
+  const errorFormatter = new PrettyError()
 
   if (npmlog.level === 'verbose')
-    process.stderr.write(`ERR: ${errorFormatter.render(error)}`);
-  else process.stderr.write(`ERR: ${error.message || error}`);
-};
+    process.stderr.write(`ERR: ${errorFormatter.render(error)}`)
+  else process.stderr.write(`ERR: ${error.message || error}`)
+}
 
 // print errors to stderr if we use stdout for data output
 // if we save data to output file errors are already logged by npmlog
 const errorHandler = errors => {
-  if (Array.isArray(errors)) errors.forEach(logError);
-  else logError(errors);
+  if (Array.isArray(errors)) errors.forEach(logError)
+  else logError(errors)
 
-  process.exitCode = 1;
-};
+  process.exitCode = 1
+}
 
 // Retrieve the headers from the input file
 // Only the first line of the file is read
 const getHeaders = _args =>
   new Promise((resolve, reject) => {
     if (!_args.input)
-      if (_args.exportFormat === 'json') resolve();
-      else reject(new Error('Input file is required for `CSV` export type'));
+      if (_args.exportFormat === 'json') resolve()
+      else reject(new Error('Input file is required for `CSV` export type'))
     const rl = readline.createInterface({
       input: _args.input,
-    });
-    rl.on('error', reject);
+    })
+    rl.on('error', reject)
     rl.on('line', line => {
-      rl.close();
-      resolve(line.split(_args.delimiter));
-    });
-  });
+      rl.close()
+      resolve(line.split(_args.delimiter))
+    })
+  })
 
 const resolveCredentials = _args => {
-  if (_args.accessToken) return Promise.resolve({});
-  return getCredentials(_args.projectKey);
-};
+  if (_args.accessToken) return Promise.resolve({})
+  return getCredentials(_args.projectKey)
+}
 
 // If the stdout is used for a data output, save all logs to a log file.
 if (args.output === process.stdout)
-  npmlog.stream = fs.createWriteStream(args.logFile);
-else npmlog.stream = process.stdout;
+  npmlog.stream = fs.createWriteStream(args.logFile)
+else npmlog.stream = process.stdout
 
 // Register error listener
-args.output.on('error', errorHandler);
+args.output.on('error', errorHandler)
 
-let csvHeaders;
+let csvHeaders
 getHeaders(args)
   .then(csvHeadersfromInput => {
-    csvHeaders = csvHeadersfromInput;
-    return resolveCredentials(args);
+    csvHeaders = csvHeadersfromInput
+    return resolveCredentials(args)
   })
   .then(credentials => {
     const apiConfig = {
@@ -149,7 +149,7 @@ getHeaders(args)
       apiUrl: args.apiUrl,
       projectKey: args.projectKey,
       credentials,
-    };
+    }
     const priceExporterOptions = {
       apiConfig,
       accessToken: args.accessToken,
@@ -158,15 +158,15 @@ getHeaders(args)
       staged: args.staged,
       predicate: args.where,
       csvHeaders,
-    };
+    }
     const logger = {
       error: npmlog.error.bind(this, ''),
       warn: npmlog.warn.bind(this, ''),
       info: npmlog.info.bind(this, ''),
       verbose: npmlog.verbose.bind(this, ''),
-    };
+    }
 
-    return new PriceExporter(priceExporterOptions, logger);
+    return new PriceExporter(priceExporterOptions, logger)
   })
   .then(priceExporter => priceExporter.run(args.output))
-  .catch(errorHandler);
+  .catch(errorHandler)
