@@ -2,6 +2,7 @@
 import type {
   ServiceBuilder,
   ServiceBuilderDefinition,
+  ServiceBuilderDefaultParams,
 } from 'types/sdk'
 import {
   getDefaultQueryParams,
@@ -122,6 +123,29 @@ export default function createService (
 
       setDefaultParams.call(this)
       return uri
+    },
+
+    // Call this method to parse an object as params
+    parse (params: ServiceBuilderDefaultParams): Object {
+      return {
+        // Call this method to get the built request URI
+        // Pass some options to further configure the URI:
+        // - `withProjectKey: false`: will omit the projectKey from the URI
+        build (uriOptions: UseKey = { withProjectKey: true }): string {
+          const { withProjectKey } = uriOptions
+
+          const queryParams = buildQueryString(params)
+          const version = params.version
+
+          return (
+            (withProjectKey ? `/${options}` : '') +
+            endpoint +
+            getIdOrKey(params) +
+            (queryParams ? `?${queryParams}` : '') +
+            (version ? `?version=${version}` : '')
+          )
+        },
+      }
     },
   })
 }

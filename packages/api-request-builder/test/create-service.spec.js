@@ -88,6 +88,81 @@ describe('createService', () => {
     )
   })
 
+  describe('parse', () => {
+    const options = {
+      type: 'foo',
+      endpoint: '/foo',
+      features: ['queryOne', 'queryExpand'],
+    }
+
+    it('should parse the object', () => {
+      expect(createService(options, projectKey)
+        .parse({ id: 'some-id' }).build())
+        .toBe('/my-project1/foo/some-id')
+    })
+
+    it('include projectkey in uri by default', () => {
+      expect(createService(options, projectKey)
+        .parse({})
+        .build())
+        .toBe('/my-project1/foo')
+    })
+
+    it('exclude projectkey from uri using flag', () => {
+      const excludeProjectKey = { withProjectKey: false }
+      expect(createService(options, projectKey)
+        .parse({})
+        .build(excludeProjectKey))
+        .toBe('/foo')
+    })
+    it('only base endpoint', () => {
+      expect(createService(options, projectKey)
+        .parse({})
+        .build())
+        .toBe('/my-project1/foo')
+    })
+    it('endpoint with id', () => {
+      expect(createService(options, projectKey)
+        .parse({ id: '123' })
+        .build())
+        .toBe('/my-project1/foo/123')
+    })
+    it('endpoint with customer id', () => {
+      expect(createService(options, projectKey)
+        .parse({ customerId: 'cust123' })
+        .build())
+        .toBe('/my-project1/foo/?customerId=cust123')
+    })
+    it('endpoint with key', () => {
+      expect(createService(options, projectKey)
+        .parse({ key: 'bar' })
+        .build())
+        .toBe('/my-project1/foo/key=bar')
+    })
+    it('endpoint with query params', () => {
+      expect(createService(options, projectKey)
+        .parse({ expand: ['channel'] })
+        .build())
+        .toBe('/my-project1/foo?expand=channel')
+    })
+    it('include version in uri', () => {
+      expect(createService(options, projectKey)
+        .parse({ version: 2 })
+        .build())
+        .toBe('/my-project1/foo?version=2')
+    })
+    it('full endpoint', () => {
+      expect(
+        createService(options, projectKey)
+        .parse({
+          id: '123',
+          expand: ['channel'],
+        })
+        .build(),
+      ).toBe('/my-project1/foo/123?expand=channel')
+    })
+  })
+
   describe('build', () => {
     const options = {
       type: 'foo',
