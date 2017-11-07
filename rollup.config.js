@@ -21,6 +21,11 @@ const config = {
       'process.env.NODE_ENV': JSON.stringify(env),
       VERSION: `'${version}'`,
     }),
+    babel({
+      babelrc: true,
+      exclude: 'node_modules/**',
+      runtimeHelpers: true,
+    }),
     globals(),
     builtins(),
     resolve({
@@ -30,11 +35,6 @@ const config = {
       preferBuiltins: true,
     }),
     commonjs(),
-    babel({
-      babelrc: true,
-      exclude: 'node_modules/**',
-      runtimeHelpers: true,
-    }),
     filesize(),
   ],
 }
