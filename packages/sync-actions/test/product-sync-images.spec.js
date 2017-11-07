@@ -82,8 +82,8 @@ describe('Actions', () => {
       const actions = productsSync.buildActions(now, before)
       expect(actions).toEqual([
         { action: 'addExternalImage', variantId: 1, image: { url: 'http://cat.com', label: 'A cat' } },
-        { action: 'changeImageLabel', variantId: 3, imageUrl: '//example.com/image4.png', label: 'ADDED' },
-        { action: 'changeImageLabel', variantId: 3, imageUrl: '//example.com/image3.png', label: 'CHANGED' },
+        { action: 'setImageLabel', variantId: 3, imageUrl: '//example.com/image4.png', label: 'ADDED' },
+        { action: 'setImageLabel', variantId: 3, imageUrl: '//example.com/image3.png', label: 'CHANGED' },
         { action: 'addExternalImage', variantId: 3, image: { url: '//example.com/CHANGED.jpg', label: 'foo', dimensions: { h: 400, w: 300 } } },
         { action: 'moveImagetoPosition', variantId: 3, imageUrl: '//example.com/image4.png', position: 0 },
         { action: 'removeImage', variantId: 3, imageUrl: '//example.com/image5.png' },
