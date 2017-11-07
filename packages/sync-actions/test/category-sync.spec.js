@@ -75,6 +75,49 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
+  it('build `setCustomType` action on category with no `custom` object', () => {
+    const before = {
+      key: 'category-key',
+    }
+    const now = {
+      key: 'category-key',
+      custom: {
+        type: {
+          typeId: 'type',
+          id: 'customType2',
+        },
+        fields: {
+          customField1: true,
+        },
+      },
+    }
+    const actual = categorySync.buildActions(now, before)
+    const expected = [{ action: 'setCustomType', ...now.custom }]
+    expect(actual).toEqual(expected)
+  })
+
+  it('build `setCustomType` action on cat with empty `custom` object', () => {
+    const before = {
+      key: 'category-key',
+      custom: {},
+    }
+    const now = {
+      key: 'category-key',
+      custom: {
+        type: {
+          typeId: 'type',
+          id: 'customType2',
+        },
+        fields: {
+          customField1: true,
+        },
+      },
+    }
+    const actual = categorySync.buildActions(now, before)
+    const expected = [{ action: 'setCustomType', ...now.custom }]
+    expect(actual).toEqual(expected)
+  })
+
   it('should build `setCustomField` action', () => {
     const before = {
       custom: {
