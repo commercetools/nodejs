@@ -73,7 +73,6 @@
     "lerna": "2.5.1",
     "lerna-semantic-release": "9.1.0",
     "npm-check-updates": "2.13.0",
-    "npm-run-all": "4.1.1",
     "prettier": "^1.7.4",
     "rimraf": "2.6.2",
     "rollup": "^0.50.0",
