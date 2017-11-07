@@ -127,13 +127,13 @@ describe('Actions', () => {
           image: { url: 'http://cat.com', label: 'A cat' },
         },
         {
-          action: 'changeImageLabel',
+          action: 'setImageLabel',
           variantId: 3,
           imageUrl: '//example.com/image4.png',
           label: 'ADDED',
         },
         {
-          action: 'changeImageLabel',
+          action: 'setImageLabel',
           variantId: 3,
           imageUrl: '//example.com/image3.png',
           label: 'CHANGED',
