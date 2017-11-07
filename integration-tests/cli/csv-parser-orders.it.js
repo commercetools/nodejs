@@ -259,7 +259,9 @@ describe('CSV and CLI Tests', () => {
       )
       // eslint-disable-next-line max-len
       exec(
-        `${binPath} -t deliveries --inputFile ${csvFilePath} --logFile ${tmpFile.name}`,
+        `${binPath} -t deliveries --inputFile ${csvFilePath} --logFile ${
+          tmpFile.name
+        }`,
         () => {
           fs.readFile(tmpFile.name, { encoding: 'utf8' }, (error, data) => {
             expect(data).toMatch(/info Starting Deliveries CSV conversion/)
@@ -276,7 +278,9 @@ describe('CSV and CLI Tests', () => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
       // eslint-disable-next-line max-len
       exec(
-        `${binPath} -t deliveries --inputFile ${csvFilePath} --logFile ${tmpFile.name}`,
+        `${binPath} -t deliveries --inputFile ${csvFilePath} --logFile ${
+          tmpFile.name
+        }`,
         (error, stdout, stderr) => {
           expect(error).toBeTruthy()
           expect(stderr).toMatch(expectedError)

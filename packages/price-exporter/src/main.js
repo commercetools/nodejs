@@ -155,14 +155,14 @@ export default class PriceExporter {
 
     const channelService = this._createService('channels')
     const uri = channelService.byId(price.channel.id).build()
-    return this.fetchReferences(
-      uri
-    ).then(({ body: { key } }: Object): Object => {
-      const channel = {}
-      if (this.config.exportFormat === 'csv') channel.key = key
-      else channel.id = key
-      return { channel }
-    })
+    return this.fetchReferences(uri).then(
+      ({ body: { key } }: Object): Object => {
+        const channel = {}
+        if (this.config.exportFormat === 'csv') channel.key = key
+        else channel.id = key
+        return { channel }
+      }
+    )
   }
 
   _resolveCustomerGroup(price: Object): Object {
@@ -170,14 +170,14 @@ export default class PriceExporter {
 
     const customerGroupService = this._createService('customerGroups')
     const uri = customerGroupService.byId(price.customerGroup.id).build()
-    return this.fetchReferences(
-      uri
-    ).then(({ body: { name } }: Object): Object => {
-      const customerGroup = {}
-      if (this.config.exportFormat === 'csv') customerGroup.groupName = name
-      else customerGroup.id = name
-      return { customerGroup }
-    })
+    return this.fetchReferences(uri).then(
+      ({ body: { name } }: Object): Object => {
+        const customerGroup = {}
+        if (this.config.exportFormat === 'csv') customerGroup.groupName = name
+        else customerGroup.id = name
+        return { customerGroup }
+      }
+    )
   }
 
   _resolveCustomType(price: Object): Object {
@@ -190,12 +190,12 @@ export default class PriceExporter {
     }
     const customTypeService = this._createService('types')
     const uri = customTypeService.byId(price.custom.type.id).build()
-    return this.fetchReferences(
-      uri
-    ).then(({ body: { key } }: Object): Object => ({
-      customType: key,
-      customField: price.custom.fields,
-    }))
+    return this.fetchReferences(uri).then(
+      ({ body: { key } }: Object): Object => ({
+        customType: key,
+        customField: price.custom.fields,
+      })
+    )
   }
 
   _createService(serviceType: string): Object {

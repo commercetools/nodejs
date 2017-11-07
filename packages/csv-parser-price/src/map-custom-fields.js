@@ -84,8 +84,9 @@ export default (function MapCustomFields() {
               break
             }
             default: {
-              const unsupportedMsg = `'${fieldDef.type
-                .name}' type is not supported! Kindly raise an issue for this`
+              const unsupportedMsg = `'${
+                fieldDef.type.name
+              }' type is not supported! Kindly raise an issue for this`
               result.error.push(
                 new Error(
                   `[row ${rowIndex}: ${customType.key}] - ${unsupportedMsg}`
@@ -164,7 +165,9 @@ export default (function MapCustomFields() {
           }
         }
         default: {
-          const unsupportedMsg = `'${elementType.name}' type is not supported! Kindly raise an issue for this`
+          const unsupportedMsg = `'${
+            elementType.name
+          }' type is not supported! Kindly raise an issue for this`
           return {
             error: unsupportedMsg,
           }

@@ -126,7 +126,9 @@ describe('CSV and CLI Tests', () => {
 
       // eslint-disable-next-line max-len
       exec(
-        `${binPath} -p ${projectKey}  -i ${csvFilePath} --logFile ${tmpFile.name}`,
+        `${binPath} -p ${projectKey}  -i ${csvFilePath} --logFile ${
+          tmpFile.name
+        }`,
         (error, stdout, stderr) => {
           expect(error).toBeTruthy()
           expect(stderr).toMatch(expectedError)

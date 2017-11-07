@@ -93,9 +93,9 @@ describe('optional information', () => {
     })
     // eslint-disable-next-line max-len
     expect(userAgent).toBe(
-      `commercetools-node-sdk Node.js/${process.version.slice(
-        1
-      )} (${process.platform}; ${process.arch}) my-awesome-library`
+      `commercetools-node-sdk Node.js/${process.version.slice(1)} (${
+        process.platform
+      }; ${process.arch}) my-awesome-library`
     )
   })
   it('create user agent with library name and version', () => {
@@ -106,9 +106,9 @@ describe('optional information', () => {
     })
     // eslint-disable-next-line max-len
     expect(userAgent).toBe(
-      `commercetools-node-sdk Node.js/${process.version.slice(
-        1
-      )} (${process.platform}; ${process.arch}) my-awesome-library/1.0.0`
+      `commercetools-node-sdk Node.js/${process.version.slice(1)} (${
+        process.platform
+      }; ${process.arch}) my-awesome-library/1.0.0`
     )
   })
   it('create user agent with contact url', () => {
@@ -118,9 +118,9 @@ describe('optional information', () => {
     })
     // eslint-disable-next-line max-len
     expect(userAgent).toBe(
-      `commercetools-node-sdk Node.js/${process.version.slice(
-        1
-      )} (${process.platform}; ${process.arch}) (+https://commercetools.com)`
+      `commercetools-node-sdk Node.js/${process.version.slice(1)} (${
+        process.platform
+      }; ${process.arch}) (+https://commercetools.com)`
     )
   })
   it('create user agent with contact email', () => {
@@ -130,9 +130,9 @@ describe('optional information', () => {
     })
     // eslint-disable-next-line max-len
     expect(userAgent).toBe(
-      `commercetools-node-sdk Node.js/${process.version.slice(
-        1
-      )} (${process.platform}; ${process.arch}) (+helpdesk@commercetools.com)`
+      `commercetools-node-sdk Node.js/${process.version.slice(1)} (${
+        process.platform
+      }; ${process.arch}) (+helpdesk@commercetools.com)`
     )
   })
   it('create user agent with full contact info', () => {
@@ -143,9 +143,11 @@ describe('optional information', () => {
     })
     // eslint-disable-next-line max-len
     expect(userAgent).toBe(
-      `commercetools-node-sdk Node.js/${process.version.slice(
-        1
-      )} (${process.platform}; ${process.arch}) (+https://commercetools.com; +helpdesk@commercetools.com)`
+      `commercetools-node-sdk Node.js/${process.version.slice(1)} (${
+        process.platform
+      }; ${
+        process.arch
+      }) (+https://commercetools.com; +helpdesk@commercetools.com)`
     )
   })
 })

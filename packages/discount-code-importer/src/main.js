@@ -254,11 +254,16 @@ export default class DiscountCodeImport {
     else
       // eslint-disable-next-line max-len
       message = `Summary: there were ${created +
-        updated} successfully imported discount codes (${created} were newly created, ${updated} were updated and ${unchanged} were unchanged).`
+        updated} successfully imported discount codes (${
+        created
+      } were newly created, ${updated} were updated and ${
+        unchanged
+      } were unchanged).`
     if (createErrorCount || updateErrorCount)
       // eslint-disable-next-line max-len
-      message += ` ${createErrorCount +
-        updateErrorCount} errors occured (${createErrorCount} create errors and ${updateErrorCount} update errors.)`
+      message += ` ${createErrorCount + updateErrorCount} errors occured (${
+        createErrorCount
+      } create errors and ${updateErrorCount} update errors.)`
     return {
       reportMessage: message,
       detailedSummary: this._summary,

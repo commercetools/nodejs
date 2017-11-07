@@ -107,9 +107,9 @@ export default class InventoryExporter {
 
   _fetchInventories(outputStream: stream$Writable): Promise<any> {
     if (this.exportConfig.channelKey)
-      return this._resolveChannelKey(
-        this.exportConfig.channelKey
-      ).then(channelId => this._makeRequest(outputStream, channelId))
+      return this._resolveChannelKey(this.exportConfig.channelKey).then(
+        channelId => this._makeRequest(outputStream, channelId)
+      )
     return this._makeRequest(outputStream)
   }
 
