@@ -61,16 +61,14 @@ export function actionsMapCustom (diff, oldObj, newObj) {
   if (Array.isArray(diff.custom)) {
     const custom = diffpatcher.getDeltaValue(diff.custom, oldObj)
     actions.push({ action: 'setCustomType', ...custom })
-  }
-
-  if (diff.custom.type) {
+  } else if (diff.custom.type) {
     const type = Array.isArray(diff.custom.type)
       ? diffpatcher.getDeltaValue(diff.custom.type, oldObj)
       : diff.custom.type
 
     if (!type)
       actions.push({ action: 'setCustomType' })
-    else
+    else if (type.id)
       actions.push({
         action: 'setCustomType',
         type: {

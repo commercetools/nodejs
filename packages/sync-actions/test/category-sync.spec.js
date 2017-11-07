@@ -118,6 +118,29 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
+  it('build `setCustomType` action on cat to unset `custom` object', () => {
+    const before = {
+      key: 'category-key',
+      custom: {
+        type: {
+          typeId: 'type',
+          id: 'customType2',
+        },
+        fields: {
+          customField1: true,
+        },
+      },
+    }
+    const now = {
+      key: 'category-key',
+      custom: {},
+    }
+    const actual = categorySync.buildActions(now, before)
+    const expected = [{ action: 'setCustomType' }]
+    expect(actual).toEqual(expected)
+  })
+
+
   it('should build `setCustomField` action', () => {
     const before = {
       custom: {
