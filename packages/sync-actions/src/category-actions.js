@@ -55,13 +55,15 @@ export function actionsMapMeta (diff, oldObj, newObj) {
 }
 
 export function actionsMapCustom (diff, oldObj, newObj) {
-  let actions = []
+  const actions = []
   if (!diff.custom) return actions
 
   if (Array.isArray(diff.custom)) {
+    // If custom is not defined on the new or old category
     const custom = diffpatcher.getDeltaValue(diff.custom, oldObj)
     actions.push({ action: 'setCustomType', ...custom })
   } else if (diff.custom.type) {
+    // If custom is set to an empty object on the new or old category
     const type = Array.isArray(diff.custom.type)
       ? diffpatcher.getDeltaValue(diff.custom.type, oldObj)
       : diff.custom.type
@@ -88,7 +90,7 @@ export function actionsMapCustom (diff, oldObj, newObj) {
         ? diffpatcher.getDeltaValue(diff.custom.fields[name])
         : newObj.custom.fields[name],
     }))
-    actions = actions.concat(customFieldsActions)
+    actions.push(...customFieldsActions)
   }
 
   return actions
