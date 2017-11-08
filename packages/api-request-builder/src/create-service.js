@@ -129,7 +129,5 @@ function getIdOrKey (params: Object): string {
     return `/${params.id}`
   else if (params.key)
     return `/key=${params.key}`
-  else if (params.customerId)
-    return '/'
   return ''
 }

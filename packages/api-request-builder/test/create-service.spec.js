@@ -106,12 +106,12 @@ describe('createService', () => {
       })
       it('should mix customerId and queryParams', () => {
         expect(service.byCustomerId('foo').expand('baz').build())
-        .toBe('/my-project1/test/?customerId=foo&expand=baz')
+        .toBe('/my-project1/test?customerId=foo&expand=baz')
       })
 
       it('should mix customerId and version', () => {
         expect(service.byCustomerId('foo').withVersion(3).build())
-        .toBe('/my-project1/test/?customerId=foo&version=3')
+        .toBe('/my-project1/test?customerId=foo&version=3')
       })
 
       it('should mix queryParams and version', () => {
@@ -144,7 +144,7 @@ describe('createService', () => {
     it('endpoint with customer id', () => {
       expect(createService(options, projectKey)
         .byCustomerId('cust123').build())
-        .toBe('/my-project1/foo/?customerId=cust123')
+        .toBe('/my-project1/foo?customerId=cust123')
     })
     it('endpoint with key', () => {
       expect(createService(options, projectKey)
