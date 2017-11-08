@@ -28,8 +28,12 @@ export default function buildQueryString (
     priceChannel,
     searchKeywords,
     version,
+    customerId,
   } = params
   let queryString = []
+
+  if (customerId)
+    queryString.push(`customerId=${customerId}`)
 
   if (typeof staged === 'boolean')
     queryString.push(`staged=${staged.toString()}`)
@@ -96,5 +100,6 @@ export default function buildQueryString (
 
   if (version)
     queryString.push(`version=${version}`)
+
   return queryString.join('&')
 }

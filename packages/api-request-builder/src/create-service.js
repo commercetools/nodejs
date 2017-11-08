@@ -109,26 +109,27 @@ export default function createService (
     // - `withProjectKey: false`: will omit the projectKey from the URI
     build (uriOptions: UseKey = { withProjectKey: true }): string {
       const { withProjectKey } = uriOptions
+
       const queryParams = buildQueryString(this.params)
 
-      let uri = withProjectKey ? `/${options}` : ''
-      if (this.params.id)
-        uri += `${endpoint}/${this.params.id}` +
-          `${queryParams ? `?${queryParams}` : ''}`
-
-      else if (this.params.key)
-        uri += `${endpoint}/key=${this.params.key}` +
-          `${queryParams ? `?${queryParams}` : ''}`
-
-      else if (this.params.customerId)
-        uri += `${endpoint}/?customerId=${this.params.customerId}` +
-          `${queryParams ? `&${queryParams}` : ''}`
-
-      else
-        uri += `${endpoint}${queryParams ? `?${queryParams}` : ''}`
+      const uri =
+        (withProjectKey ? `/${options}` : '') +
+        endpoint +
+        getIdOrKey(this.params) +
+        (queryParams ? `?${queryParams}` : '')
 
       setDefaultParams.call(this)
       return uri
     },
   })
+}
+
+function getIdOrKey (params: Object): string {
+  if (params.id)
+    return `/${params.id}`
+  else if (params.key)
+    return `/key=${params.key}`
+  else if (params.customerId)
+    return '/'
+  return ''
 }
