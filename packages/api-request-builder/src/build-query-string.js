@@ -27,6 +27,7 @@ export default function buildQueryString (
     priceCustomerGroup,
     priceChannel,
     searchKeywords,
+    version,
   } = params
   let queryString = []
 
@@ -87,10 +88,13 @@ export default function buildQueryString (
     filterByQuery.forEach(f => queryString.push(`filter.query=${f}`))
     filterByFacets.forEach(f => queryString.push(`filter.facets=${f}`))
   }
+
   if (searchKeywords)
     searchKeywords.forEach(f =>
       queryString.push(`searchKeywords.${f.lang}=${f.value}`),
     )
 
+  if (version)
+    queryString.push(`version=${version}`)
   return queryString.join('&')
 }
