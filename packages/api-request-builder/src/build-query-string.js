@@ -24,6 +24,7 @@ export default function buildQueryString(
     priceCustomerGroup,
     priceChannel,
     searchKeywords,
+    onlyIds,
   } = params
   let queryString = []
 
@@ -86,6 +87,9 @@ export default function buildQueryString(
     searchKeywords.forEach(f =>
       queryString.push(`searchKeywords.${f.lang}=${f.value}`)
     )
+
+  if (onlyIds)
+    queryString.push('onlyIds=true')
 
   return queryString.join('&')
 }

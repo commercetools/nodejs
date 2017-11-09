@@ -54,6 +54,7 @@ describe('buildQueryString', () => {
         text: { lang: 'en', value: 'Foo' },
       },
       searchKeywords: [{ lang: 'en', value: 'Foo' }],
+      onlyIds: true,
     }
     /* eslint-disable max-len */
     const expectedQueryString =
@@ -84,7 +85,8 @@ describe('buildQueryString', () => {
         'variants.attributes.color.key:"red")'
       )}&` +
       `filter.facets=${encodeURIComponent('categories.id:"123"')}&` +
-      `searchKeywords.en=${encodeURIComponent('Foo')}`
+      `searchKeywords.en=${encodeURIComponent('Foo')}&` +
+      'onlyIds=true'
     /* eslint-enable max-len */
 
     expect(buildQueryString(params)).toEqual(expectedQueryString)

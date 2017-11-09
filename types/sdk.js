@@ -212,6 +212,7 @@ export type ServiceBuilderDefaultParams = {
       value: string,
     },
   },
+  onlyIds?: boolean,
 }
 export type ServiceBuilderParams = {
   // query-expand

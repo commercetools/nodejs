@@ -11,6 +11,7 @@ const fakeService = {
     'search',
     'projection',
     'suggest',
+    'restrictResult',
   ],
 }
 
@@ -32,6 +33,7 @@ const expectedServiceProperties = [
   'staged',
   'searchKeywords',
   'build',
+  'onlyIds',
 ]
 const projectKey = 'my-project1'
 
@@ -344,7 +346,7 @@ describe('createService', () => {
       const options = {
         type: 'foo',
         endpoint: '/foo',
-        features: ['queryOne', 'queryExpand'],
+        features: ['queryOne', 'queryExpand', 'restrictResult'],
       }
       service = createService(options, projectKey)
     })
@@ -374,6 +376,10 @@ describe('createService', () => {
       expect(service.expand('channel').build()).toBe(
         '/my-project1/foo?expand=channel'
       )
+    })
+    it('endpoint with restricted to ids only', () => {
+      expect(service.onlyIds().build())
+        .toBe('/my-project1/foo?onlyIds=true')
     })
     it('include version in uri', () => {
       expect(service.withVersion(2).build()).toBe('/my-project1/foo?version=2')
