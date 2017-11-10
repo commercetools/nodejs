@@ -7,7 +7,11 @@ node_js:
   - 6
   - 8
 
-cache: 'yarn'
+# Reason why we are caching .npm and not node_modules
+# https://stackoverflow.com/a/42523517/4151025
+cache:
+  directories:
+    - $HOME/.npm
 
 notifications:
   email: false
