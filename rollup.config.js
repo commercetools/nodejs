@@ -30,7 +30,7 @@ const config = {
       preferBuiltins: true,
     }),
     commonjs({
-      exclude: ['packages/**/src/**'],
+      include: ['node_modules/**'],
     }),
     babel({
       babelrc: true,
