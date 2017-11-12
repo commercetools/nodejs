@@ -5,7 +5,6 @@ const json = require('rollup-plugin-json')
 const babel = require('rollup-plugin-babel')
 const replace = require('rollup-plugin-replace')
 const uglify = require('rollup-plugin-uglify')
-const globals = require('rollup-plugin-node-globals')
 const flow = require('rollup-plugin-flow')
 const filesize = require('rollup-plugin-filesize')
 /* eslint-enable */
@@ -36,7 +35,6 @@ const config = {
       exclude: ['node_modules/**'],
       runtimeHelpers: true,
     }),
-    globals(),
     filesize(),
   ],
 }
