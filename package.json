@@ -79,6 +79,7 @@
     "rollup-plugin-babel": "^3.0.2",
     "rollup-plugin-commonjs": "8.2.3",
     "rollup-plugin-filesize": "^1.4.2",
+    "rollup-plugin-flow": "^1.1.1",
     "rollup-plugin-includepaths": "^0.2.2",
     "rollup-plugin-json": "^2.3.0",
     "rollup-plugin-node-builtins": "^2.1.2",

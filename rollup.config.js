@@ -7,6 +7,7 @@ const replace = require('rollup-plugin-replace')
 const uglify = require('rollup-plugin-uglify')
 const builtins = require('rollup-plugin-node-builtins')
 const globals = require('rollup-plugin-node-globals')
+const flow = require('rollup-plugin-flow')
 const filesize = require('rollup-plugin-filesize')
 /* eslint-enable */
 
@@ -16,18 +17,12 @@ const version = process.env.npm_package_version
 const config = {
   sourcemap: true,
   plugins: [
+    flow({ all: true }),
     json(),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
       VERSION: `'${version}'`,
     }),
-    babel({
-      babelrc: true,
-      exclude: 'node_modules/**',
-      runtimeHelpers: true,
-    }),
-    globals(),
-    builtins(),
     resolve({
       module: true,
       jsnext: true,
@@ -35,6 +30,13 @@ const config = {
       preferBuiltins: true,
     }),
     commonjs(),
+    babel({
+      babelrc: true,
+      exclude: 'node_modules/**',
+      runtimeHelpers: true,
+    }),
+    globals(),
+    builtins(),
     filesize(),
   ],
 }
