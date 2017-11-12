@@ -17,8 +17,8 @@ const version = process.env.npm_package_version
 const config = {
   sourcemap: true,
   plugins: [
-    flow({ all: true }),
     json(),
+    flow({ all: true }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
       VERSION: `'${version}'`,
@@ -29,7 +29,9 @@ const config = {
       main: true,
       preferBuiltins: true,
     }),
-    commonjs(),
+    commonjs({
+      exclude: '**/src/**',
+    }),
     babel({
       babelrc: true,
       exclude: 'node_modules/**',
