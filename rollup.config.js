@@ -5,7 +5,6 @@ const json = require('rollup-plugin-json')
 const babel = require('rollup-plugin-babel')
 const replace = require('rollup-plugin-replace')
 const uglify = require('rollup-plugin-uglify')
-const builtins = require('rollup-plugin-node-builtins')
 const globals = require('rollup-plugin-node-globals')
 const flow = require('rollup-plugin-flow')
 const filesize = require('rollup-plugin-filesize')
@@ -38,7 +37,6 @@ const config = {
       runtimeHelpers: true,
     }),
     globals(),
-    builtins(),
     filesize(),
   ],
 }
