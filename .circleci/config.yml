@@ -64,28 +64,31 @@ workflows:
   unit_testing:
     jobs:
       - test_unit
-      requires:
-        - install
+          requires:
+            - install
   integration_testing:
     jobs:
       - test_integration
+          context: org-global
           filters:
             branches:
               only:
                 - master
-      requires:
-        - install
-        - lint
-        - test_unit
+          requires:
+            - install
+            - lint
+            - test_unit
   releasing:
     jobs:
       - prepare_release
-        requires:
-          - integration_testing
+          context: org-global
+          requires:
+            - integration_testing
           filters:
             branches:
               only:
                 - master
       - perform_release
-        requires:
-          - prepare_release
+          context: org-global
+          requires:
+            - prepare_release
