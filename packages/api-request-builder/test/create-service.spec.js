@@ -97,6 +97,7 @@ describe('createService', () => {
           defaultFeatures.queryOne,
           defaultFeatures.queryExpand,
           defaultFeatures.projection,
+          defaultFeatures.restrictResult,
         ],
       }
       service = createService(options, projectKey)
@@ -149,6 +150,18 @@ describe('createService', () => {
             })
             .build()
         ).toBe('/my-project1/foo?sort=foo%20asc&sort=bar%20desc')
+      })
+
+      // query-restrict-result
+      it('should support `onlyIds` being truthy', () => {
+        expect(
+          service.parse({ onlyIds: true }).build(),
+        ).toBe('/my-project1/foo?onlyIds=true')
+      })
+      it('should support `onlyIds` being falsy', () => {
+        expect(
+          service.parse({ onlyIds: false }).build(),
+        ).toBe('/my-project1/foo')
       })
     })
     it('should support `page`', () => {

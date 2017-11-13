@@ -255,6 +255,9 @@ export type ServiceBuilderParams = {
   where?: Array<string>,
   whereOperator?: 'and' | 'or',
 
+  // query-restirct-result
+  onlyIds?: boolean;
+
   // version
   version?: string,
 }
