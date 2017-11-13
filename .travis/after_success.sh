@@ -21,8 +21,6 @@ if [[ "$TRAVIS_BRANCH" == "master" ]]; then
   git config --global push.default simple
 
   npm config set //registry.npmjs.org/:_authToken=${NPM_TOKEN} -q
-  echo "Running npm prune"
-  npm prune
 
   echo "Running npm run semantic-release"
   npm run semantic-release
