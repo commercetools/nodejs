@@ -7,8 +7,8 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
   exit 0
 fi
 
-if [ "$TRAVIS_NODE_VERSION" != "6" ]; then
-  echo "We should run the release task only once in the node 6 build, not releasing"
+if [ "$TRAVIS_NODE_VERSION" != "8" ]; then
+  echo "We should run the release task only once in the node 8 build, not releasing"
   exit 0
 fi
 
@@ -21,13 +21,9 @@ if [[ "$TRAVIS_BRANCH" == "master" ]]; then
   git config --global push.default simple
 
   npm config set //registry.npmjs.org/:_authToken=${NPM_TOKEN} -q
+
   echo "Running npm prune"
   npm prune
-
-  # Without this releasing is broken as the dependency is not installed
-  # with yarn. Switching to npm does not seem to be a sane alternative.
-  echo "Installing buffer-shims"
-  npm install buffer-shims@1.0.0
 
   echo "Running npm run semantic-release"
   npm run semantic-release
