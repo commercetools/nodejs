@@ -199,6 +199,50 @@ export type ServiceBuilderDefaultParams = {
     };
   };
 }
+export type ServiceBuilderParams = {
+  // query-expand
+  expand?: Array<string>;
+
+  // query-id
+  id?: ?string;
+  key?: ?string;
+  customerId?: ?string;
+
+  // query-page
+  sort: Array<{ by: string, direction: 'asc' | 'desc' }>;
+  page: ?number;
+  perPage: ?number;
+
+  // query-projection
+  staged?: boolean;
+  priceCurrency?: string;
+  priceCountry?: string;
+  priceCustomerGroup?: string;
+  priceChannel?: string;
+
+  // query-search
+  text?: ?{
+    language?: string;
+    value?: string;
+  };
+  fuzzy?: boolean;
+  fuzzyLevel?: number;
+  markMatchingVariants?: boolean;
+  facet?: Array<string>;
+  filter?: Array<string>;
+  filterByQuery?: Array<string>;
+  filterByFacets?: Array<string>;
+
+  // query-suggest
+  searchKeywords?: Array<{language: string; value: string;}>;
+
+  // query
+  where?: Array<string>;
+  whereOperator?: 'and' | 'or';
+
+  // version
+  version?: string;
+}
 export type ServiceBuilder = {
   type: string;
   features: Array<string>;
