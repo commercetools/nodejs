@@ -27,7 +27,7 @@ if [[ "$TRAVIS_BRANCH" == "master" ]]; then
   # Without this releasing is broken as the dependency is not installed
   # with yarn. Switching to npm does not seem to be a sane alternative.
   echo "Installing buffer-shims"
-  npm install buffer-shims
+  npm install buffer-shims@1.0.0
 
   echo "Running npm run semantic-release"
   npm run semantic-release
