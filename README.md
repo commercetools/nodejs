@@ -6,8 +6,8 @@
 </p>
 
 <p align="center">
-  <a href="https://travis-ci.org/commercetools/nodejs">
-    <img alt="Travis CI Status" src="https://img.shields.io/travis/commercetools/nodejs/master.svg?style=flat-square&label=travis">
+  <a href="https://circleci.com/gh/commercetools/nodejs">
+    <img alt="Travis CI Status" src="hhttps://circleci.com/gh/commercetools/nodejs.svg?style=shield&circle-token=abc">
   </a>
   <a href="https://codecov.io/gh/commercetools/nodejs">
     <img alt="Codecov Coverage Status" src="https://img.shields.io/codecov/c/github/commercetools/nodejs.svg?style=flat-square">
