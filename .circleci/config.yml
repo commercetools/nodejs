@@ -1,0 +1,91 @@
+version: 2
+defaults: &defaults
+  docker:
+    - image: circleci/node:8
+  working_directory: ~/nodejs
+
+jobs:
+  install:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-yarn-cache-{{ checksum "yarn.lock" }}
+          - v1-yarn-cache-
+      - run:
+          name: Install greenkeeper-lockfile-update
+          command: yarn global add greenkeeper-lockfile@1 --prefix ~/.yarn
+      - run:
+          name: Install dependencies
+          command: yarn install --pure-lockfile
+      - save_cache:
+          key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run:
+          name: Update greenkeeper-lockfile
+          command: ~/.yarn/bin/greenkeeper-lockfile-update
+      - run:
+          name: Upload greenkeeper-lockfile
+          command: ~/.yarn/bin/greenkeeper-lockfile-upload
+  lint:
+    <<: *defaults
+      - run:
+          name: Run linters
+          command: yarn lint
+  test_unit:
+    <<: *defaults
+      - run:
+          name: Run tests
+          command: yarn test:coverage:ci --maxWorkers=10
+  test_integration:
+    <<: *defaults
+      - run:
+          name: Run integration tests
+          command: yarn test:integration
+  prepare_release:
+    <<: *defaults
+      - run:
+          name: Run prepare release
+          command: ./.circleci/prepare-release-packages.sh
+  perform_release:
+    <<: *defaults
+      - run:
+          name: Run perform release
+          command: ./.circleci/perform-release-packages.sh
+
+workflows:
+  version: 2
+  linting:
+    jobs:
+      - install
+      - lint
+  unit_testing:
+    jobs:
+      - test_unit
+      requires:
+        - install
+  integration_testing:
+    jobs:
+      - test_integration
+          filters:
+            branches:
+              only:
+                - master
+      requires:
+        - install
+        - lint
+        - test_unit
+  releasing:
+    jobs:
+      - prepare_release
+        requires:
+          - integration_testing
+          filters:
+            branches:
+              only:
+                - master
+      - perform_release
+        requires:
+          - prepare_release

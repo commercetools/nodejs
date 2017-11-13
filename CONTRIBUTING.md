@@ -62,7 +62,7 @@ To ensure the lock file is up-to-date with the new versions, it's recommended to
 We use [semantic release](https://github.com/semantic-release/semantic-release) to automatically do releases based on the commit message.
 Since we are using [lerna](https://github.com/lerna/lerna) we need to specify in the commit description which packages might be affected by the release.
 
-If for some reason you have to release a module manually, please run `npm run manual-release` to publish the module. The reason for this are well stated [here](https://github.com/commercetools/nodejs/issues/223)
+If for some reason you have to release a module manually, please run `npm run release:manual` to publish the module. The reason for this are well stated [here](https://github.com/commercetools/nodejs/issues/223)
 
 #### Commit message
 Make sure your commit messages follow [Angular's commit message format](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines). To make this easy run `npm run commit` from the root.
