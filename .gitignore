@@ -14,7 +14,7 @@ node_modules
 
 # Integration tests dependencies cache
 *.tgz
-integration-tests/package-lock.json
+package-lock.json
 
 # Build artifacts
 _book
