@@ -10,7 +10,7 @@ import * as features from './features'
  *
  * @return {Object}
  */
-export function getDefaultQueryParams (): ServiceBuilderDefaultParams {
+export function getDefaultQueryParams(): ServiceBuilderDefaultParams {
   return {
     id: null,
     expand: [],
@@ -32,7 +32,7 @@ export function getDefaultQueryParams (): ServiceBuilderDefaultParams {
  *
  * @return {Object}
  */
-export function getDefaultSearchParams (): ServiceBuilderDefaultParams {
+export function getDefaultSearchParams(): ServiceBuilderDefaultParams {
   return {
     expand: [],
     searchKeywords: [],
@@ -60,7 +60,7 @@ export function getDefaultSearchParams (): ServiceBuilderDefaultParams {
  *
  * @return {void}
  */
-export function setDefaultParams () {
+export function setDefaultParams() {
   this.params.expand = getDefaultQueryParams().expand
 
   if (this.features.includes(features.queryOne))
@@ -77,11 +77,9 @@ export function setDefaultParams () {
     this.params.search = getDefaultSearchParams().search
   }
 
-  if (this.features.includes(features.projection))
-    this.params.staged = true
+  if (this.features.includes(features.projection)) this.params.staged = true
 
-  if (this.features.includes(features.suggest))
-    this.params.searchKeywords = []
+  if (this.features.includes(features.suggest)) this.params.searchKeywords = []
 }
 
 const hasKey = (obj: {}, key: string): boolean =>
@@ -92,13 +90,32 @@ const hasKey = (obj: {}, key: string): boolean =>
  *
  * @return {void}
  */
-export function setParams (params: ServiceBuilderParams) {
+export function setParams(params: ServiceBuilderParams) {
   // verify params
   const knownKeys = [
-    'expand', 'id', 'key', 'customerId', 'sort', 'page', 'perPage', 'staged',
-    'priceCurrency', 'priceCountry', 'priceCustomerGroup', 'priceChannel',
-    'text', 'fuzzy', 'fuzzyLevel', 'markMatchingVariants', 'facet', 'filter',
-    'filterByQuery', 'filterByFacets', 'searchKeywords', 'where', 'version',
+    'expand',
+    'id',
+    'key',
+    'customerId',
+    'sort',
+    'page',
+    'perPage',
+    'staged',
+    'priceCurrency',
+    'priceCountry',
+    'priceCustomerGroup',
+    'priceChannel',
+    'text',
+    'fuzzy',
+    'fuzzyLevel',
+    'markMatchingVariants',
+    'facet',
+    'filter',
+    'filterByQuery',
+    'filterByFacets',
+    'searchKeywords',
+    'where',
+    'version',
   ]
   Object.keys(params).forEach((key: string) => {
     if (!knownKeys.includes(key)) throw new Error(`Unknown key "${key}"`)
@@ -106,7 +123,9 @@ export function setParams (params: ServiceBuilderParams) {
 
   // query-expand
   if (params.expand)
-    params.expand.forEach((expansion: string) => { this.expand(expansion) })
+    params.expand.forEach((expansion: string) => {
+      this.expand(expansion)
+    })
 
   // query-id
   if (hasKey(params, 'id')) this.byId(params.id)
@@ -114,11 +133,12 @@ export function setParams (params: ServiceBuilderParams) {
   if (hasKey(params, 'customerId')) this.byCustomerId(params.customerId)
 
   // query-page
-  if (params.sort) params.sort.forEach(
-    (sortDesc: { by: string, direction: 'asc' | 'desc' }) => {
-      this.sort(sortDesc.by, sortDesc.direction === 'asc')
-    },
-  )
+  if (params.sort)
+    params.sort.forEach(
+      (sortDesc: { by: string, direction: 'asc' | 'desc' }) => {
+        this.sort(sortDesc.by, sortDesc.direction === 'asc')
+      }
+    )
   if (hasKey(params, 'page')) this.page(params.page)
   if (hasKey(params, 'perPage')) this.perPage(params.perPage)
 
@@ -136,29 +156,35 @@ export function setParams (params: ServiceBuilderParams) {
   if (hasKey(params, 'fuzzyLevel')) this.fuzzyLevel(params.fuzzyLevel)
   if (params.markMatchingVariants) this.markMatchingVariants() // boolean switch
   if (params.facet)
-    params.facet.forEach((facet: string) => { this.facet(facet) })
+    params.facet.forEach((facet: string) => {
+      this.facet(facet)
+    })
   if (params.filter)
-    params.filter.forEach((filter: string) => { this.filter(filter) })
+    params.filter.forEach((filter: string) => {
+      this.filter(filter)
+    })
   if (params.filterByQuery)
-    params.filterByQuery.forEach(
-      (query: string) => { this.filterByQuery(query) },
-    )
+    params.filterByQuery.forEach((query: string) => {
+      this.filterByQuery(query)
+    })
   if (params.filterByFacets)
-    params.filterByFacets.forEach(
-      (facet: string) => { this.filterByFacets(facet) },
-    )
+    params.filterByFacets.forEach((facet: string) => {
+      this.filterByFacets(facet)
+    })
 
   // query-suggest
   if (params.searchKeywords)
     params.searchKeywords.forEach(
-      (searchKeyword: {value: string, language: string }) => {
+      (searchKeyword: { value: string, language: string }) => {
         this.searchKeywords(searchKeyword.value, searchKeyword.language)
-      },
+      }
     )
 
   // query
   if (params.where)
-    params.where.forEach((predicate: string) => { this.where(predicate) })
+    params.where.forEach((predicate: string) => {
+      this.where(predicate)
+    })
   if (hasKey(params, 'whereOperator')) this.whereOperator(params.whereOperator)
 
   // version

@@ -19,15 +19,13 @@ export const metaActionsList = [
   { action: 'setMetaDescription', key: 'metaDescription' },
 ]
 
-export const referenceActionsList = [
-  { action: 'changeParent', key: 'parent' },
-]
+export const referenceActionsList = [{ action: 'changeParent', key: 'parent' }]
 
 /**
  * SYNC FUNCTIONS
  */
 
-export function actionsMapBase (diff, oldObj, newObj) {
+export function actionsMapBase(diff, oldObj, newObj) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
     diff,
@@ -36,7 +34,7 @@ export function actionsMapBase (diff, oldObj, newObj) {
   })
 }
 
-export function actionsMapReferences (diff, oldObj, newObj) {
+export function actionsMapReferences(diff, oldObj, newObj) {
   return buildReferenceActions({
     actions: referenceActionsList,
     diff,
@@ -45,7 +43,7 @@ export function actionsMapReferences (diff, oldObj, newObj) {
   })
 }
 
-export function actionsMapMeta (diff, oldObj, newObj) {
+export function actionsMapMeta(diff, oldObj, newObj) {
   return buildBaseAttributesActions({
     actions: metaActionsList,
     diff,
@@ -54,7 +52,7 @@ export function actionsMapMeta (diff, oldObj, newObj) {
   })
 }
 
-export function actionsMapCustom (diff, oldObj, newObj) {
+export function actionsMapCustom(diff, oldObj, newObj) {
   let actions = []
   if (!diff.custom) return actions
 
@@ -67,8 +65,9 @@ export function actionsMapCustom (diff, oldObj, newObj) {
           ? diffpatcher.getDeltaValue(diff.custom.type.id)
           : newObj.custom.type.id,
       },
-      fields: Array.isArray(diff.custom.fields) ?
-        diffpatcher.getDeltaValue(diff.custom.fields) : newObj.custom.fields,
+      fields: Array.isArray(diff.custom.fields)
+        ? diffpatcher.getDeltaValue(diff.custom.fields)
+        : newObj.custom.fields,
     })
   else if (diff.custom.fields) {
     const customFieldsActions = Object.keys(diff.custom.fields).map(name => ({

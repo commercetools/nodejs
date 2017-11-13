@@ -66,7 +66,7 @@ describe('createMapActionGroup', () => {
           mapActionGroup(actionGroups[0].type, fn)
         }).toThrowError(
           `Action group '${actionGroups[0].group}' ` +
-          'not supported. Please use black or white.',
+            'not supported. Please use black or white.'
         )
       })
     })

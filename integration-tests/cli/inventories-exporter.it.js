@@ -11,37 +11,39 @@ import { clearData, createData } from './helpers/utils'
 let projectKey
 if (process.env.CI === 'true')
   projectKey = 'inventories-export-integration-test'
-else
-  projectKey = process.env.npm_config_projectkey
+else projectKey = process.env.npm_config_projectkey
 
 describe('StockExporter CLI', () => {
   const binPath = './integration-tests/node_modules/.bin/inventoriesexporter'
   let apiConfig
-  beforeAll(() => getCredentials(projectKey)
-    .then((credentials) => {
-      apiConfig = {
-        host: CONSTANTS.host.auth,
-        apiUrl: CONSTANTS.host.api,
-        projectKey,
-        credentials: {
-          clientId: credentials.clientId,
-          clientSecret: credentials.clientSecret,
-        },
-      }
-      return clearData(apiConfig, 'orders')
-    })
-    .then(() => clearData(apiConfig, 'inventory'))
-    .then(() => clearData(apiConfig, 'types'))
-    .then(() => createData(apiConfig, 'types', customFields))
-    .then(() => createData(apiConfig, 'inventory', inventories))
-  , 10000)
+  beforeAll(
+    () =>
+      getCredentials(projectKey)
+        .then(credentials => {
+          apiConfig = {
+            host: CONSTANTS.host.auth,
+            apiUrl: CONSTANTS.host.api,
+            projectKey,
+            credentials: {
+              clientId: credentials.clientId,
+              clientSecret: credentials.clientSecret,
+            },
+          }
+          return clearData(apiConfig, 'orders')
+        })
+        .then(() => clearData(apiConfig, 'inventory'))
+        .then(() => clearData(apiConfig, 'types'))
+        .then(() => createData(apiConfig, 'types', customFields))
+        .then(() => createData(apiConfig, 'inventory', inventories)),
+    10000
+  )
 
-  afterAll(() => clearData(apiConfig, 'inventory')
-    .then(() => clearData(apiConfig, 'types')),
+  afterAll(() =>
+    clearData(apiConfig, 'inventory').then(() => clearData(apiConfig, 'types'))
   )
 
   describe('CLI basic functionality', () => {
-    it('should print usage information given the help flag', (done) => {
+    it('should print usage information given the help flag', done => {
       exec(`${binPath} --help`, (error, stdout, stderr) => {
         expect(String(stdout)).toMatch(/help/)
         expect(error).toBeFalsy()
@@ -50,7 +52,7 @@ describe('StockExporter CLI', () => {
       })
     })
 
-    it('should print the module version given the version flag', (done) => {
+    it('should print the module version given the version flag', done => {
       exec(`${binPath} --version`, (error, stdout, stderr) => {
         expect(stdout).toBe(`${version}\n`)
         expect(error).toBeFalsy()
@@ -59,10 +61,11 @@ describe('StockExporter CLI', () => {
       })
     })
 
-    it('should export inventories to file as json', (done) => {
+    it('should export inventories to file as json', done => {
       const jsonFilePath = tmp.fileSync().name
 
-      exec(`${binPath} -p ${projectKey} -o ${jsonFilePath}`,
+      exec(
+        `${binPath} -p ${projectKey} -o ${jsonFilePath}`,
         (cliError, stdout, stderr) => {
           expect(cliError).toBeFalsy()
           expect(stderr).toBeFalsy()
@@ -74,14 +77,15 @@ describe('StockExporter CLI', () => {
             expect(error).toBeFalsy()
             done()
           })
-        },
+        }
       )
     })
 
-    it('should accept query', (done) => {
+    it('should accept query', done => {
       const jsonFilePath = tmp.fileSync().name
       const queryFlag = '-q "sku=\\"invalid\\""'
-      exec(`${binPath} -p ${projectKey} -o ${jsonFilePath} ${queryFlag}`,
+      exec(
+        `${binPath} -p ${projectKey} -o ${jsonFilePath} ${queryFlag}`,
         (cliError, stdout, stderr) => {
           expect(cliError).toBeFalsy()
           expect(stderr).toBeFalsy()
@@ -90,14 +94,15 @@ describe('StockExporter CLI', () => {
             expect(JSON.parse(data)).toEqual([])
             done()
           })
-        },
+        }
       )
     })
 
-    it('should export inventories to file as csv', (done) => {
+    it('should export inventories to file as csv', done => {
       const csvFilePath = tmp.fileSync().name
 
-      exec(`${binPath} -p ${projectKey} -o ${csvFilePath} -f csv`,
+      exec(
+        `${binPath} -p ${projectKey} -o ${csvFilePath} -f csv`,
         (cliError, stdout, stderr) => {
           expect(cliError && stderr).toBeFalsy()
           fs.readFile(csvFilePath, { encoding: 'utf8' }, (error, data) => {
@@ -109,7 +114,7 @@ describe('StockExporter CLI', () => {
             expect(error).toBeFalsy()
             done()
           })
-        },
+        }
       )
     })
   })

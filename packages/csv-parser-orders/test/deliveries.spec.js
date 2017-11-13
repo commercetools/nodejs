@@ -5,9 +5,8 @@ import fs from 'fs'
 import DeliveriesParser from '../src/parsers/deliveries'
 
 const deliveriesTestFolder = path.join(__dirname, 'data/deliveries/')
-const streamTestFile = fileName => fs.createReadStream(
-  path.join(deliveriesTestFolder, fileName),
-)
+const streamTestFile = fileName =>
+  fs.createReadStream(path.join(deliveriesTestFolder, fileName))
 
 describe('DeliveriesParser', () => {
   describe('::constructor', () => {
@@ -24,10 +23,10 @@ describe('DeliveriesParser', () => {
   })
 
   describe('::parse', () => {
-    it('should accept a stream and output a stream', (done) => {
+    it('should accept a stream and output a stream', done => {
       const deliveriesParser = new DeliveriesParser()
       const readStream = streamTestFile('delivery.csv')
-      const outputStream = StreamTest['v2'].toText((err, result) => {
+      const outputStream = StreamTest.v2.toText((err, result) => {
         expect(err).toBe(null)
         expect(JSON.parse(result).length).toEqual(2)
         done()
@@ -35,13 +34,13 @@ describe('DeliveriesParser', () => {
       deliveriesParser.parse(readStream, outputStream)
     })
 
-    it('should return an error with invalid csv', (done) => {
+    it('should return an error with invalid csv', done => {
       const expectedError = /Row length does not match headers/
       const deliveriesParser = new DeliveriesParser()
       const spy = sinon.stub(deliveriesParser.logger, 'error')
       const readStream = streamTestFile('delivery-error-row-length.csv')
 
-      const outputStream = StreamTest['v2'].toText((err) => {
+      const outputStream = StreamTest.v2.toText(err => {
         expect(err.toString()).toMatch(expectedError)
         expect(spy.args[0][0].toString()).toMatch(expectedError)
         done()
@@ -50,14 +49,14 @@ describe('DeliveriesParser', () => {
       deliveriesParser.parse(readStream, outputStream)
     })
 
-    it('should return an error with missing headers', (done) => {
+    it('should return an error with missing headers', done => {
       // eslint-disable-next-line max-len
       const expectedError = /Required headers missing: 'orderNumber,item\.quantity'/
       const deliveriesParser = new DeliveriesParser()
       const spy = sinon.stub(deliveriesParser.logger, 'error')
       const readStream = streamTestFile('delivery-error-missing-headers.csv')
 
-      const outputStream = StreamTest['v2'].toText((err) => {
+      const outputStream = StreamTest.v2.toText(err => {
         expect(err.toString()).toMatch(expectedError)
         expect(spy.args[0][0].toString()).toMatch(expectedError)
         done()
@@ -66,11 +65,11 @@ describe('DeliveriesParser', () => {
       return deliveriesParser.parse(readStream, outputStream)
     })
 
-    it('should parse a CSV with multiple items', (done) => {
+    it('should parse a CSV with multiple items', done => {
       const deliveriesParser = new DeliveriesParser()
       const readStream = streamTestFile('delivery.csv')
 
-      const outputStream = StreamTest['v2'].toText((err, _result) => {
+      const outputStream = StreamTest.v2.toText((err, _result) => {
         const orders = JSON.parse(_result)
         expect(orders.length).toBe(2)
 
@@ -102,11 +101,11 @@ describe('DeliveriesParser', () => {
       deliveriesParser.parse(readStream, outputStream)
     })
 
-    it('should parse a CSV with multiple parcels', (done) => {
+    it('should parse a CSV with multiple parcels', done => {
       const deliveriesParser = new DeliveriesParser()
       const readStream = streamTestFile('delivery-with-parcel.csv')
 
-      const outputStream = StreamTest['v2'].toText((err, _result) => {
+      const outputStream = StreamTest.v2.toText((err, _result) => {
         const orders = JSON.parse(_result)
 
         expect(orders.length).toBe(2)
@@ -139,11 +138,11 @@ describe('DeliveriesParser', () => {
       deliveriesParser.parse(readStream, outputStream)
     })
 
-    it('should parse a CSV with parcels without measurements', (done) => {
+    it('should parse a CSV with parcels without measurements', done => {
       const deliveriesParser = new DeliveriesParser()
       const readStream = streamTestFile('parcel-without-measurements.csv')
 
-      const outputStream = StreamTest['v2'].toText((err, _result) => {
+      const outputStream = StreamTest.v2.toText((err, _result) => {
         const result = JSON.parse(_result)
 
         const _mockResultDeliveries = [
@@ -190,9 +189,7 @@ describe('DeliveriesParser', () => {
           },
           {
             id: '2',
-            items: [
-              { id: '345', quantity: 10 },
-            ],
+            items: [{ id: '345', quantity: 10 }],
             parcels: [
               {
                 id: '2',
@@ -208,12 +205,14 @@ describe('DeliveriesParser', () => {
           },
         ]
 
-        const _mockResult = [{
-          orderNumber: '222',
-          shippingInfo: {
-            deliveries: _mockResultDeliveries,
+        const _mockResult = [
+          {
+            orderNumber: '222',
+            shippingInfo: {
+              deliveries: _mockResultDeliveries,
+            },
           },
-        }]
+        ]
 
         expect(result).toEqual(_mockResult)
         done()
@@ -221,13 +220,13 @@ describe('DeliveriesParser', () => {
       deliveriesParser.parse(readStream, outputStream)
     })
 
-    it('should return an error when some measurements are provided', (done) => {
+    it('should return an error when some measurements are provided', done => {
       const expectedError = /All measurement fields are mandatory/
       const deliveriesParser = new DeliveriesParser()
       const spy = sinon.stub(deliveriesParser.logger, 'error')
       const readStream = streamTestFile('delivery-error-measurements.csv')
 
-      const outputStream = StreamTest['v2'].toText((err) => {
+      const outputStream = StreamTest.v2.toText(err => {
         expect(err.toString()).toMatch(expectedError)
         expect(spy.args[0][0].toString()).toMatch(expectedError)
         done()
@@ -236,13 +235,13 @@ describe('DeliveriesParser', () => {
       deliveriesParser.parse(readStream, outputStream)
     })
 
-    it('returns an error when invalid item row is present', (done) => {
+    it('returns an error when invalid item row is present', done => {
       const inputStream = streamTestFile('delivery-error-invalid-item.csv')
       const expectedError = /which has different values across multiple rows/
       const csvParserOrder = new DeliveriesParser()
 
       csvParserOrder.logger.error = () => {}
-      const outputStream = StreamTest['v2'].toText((err) => {
+      const outputStream = StreamTest.v2.toText(err => {
         expect(err.toString()).toMatch(expectedError)
         done()
       })
@@ -250,13 +249,13 @@ describe('DeliveriesParser', () => {
       csvParserOrder.parse(inputStream, outputStream)
     })
 
-    it('returns an error when invalid parcel row is present', (done) => {
+    it('returns an error when invalid parcel row is present', done => {
       const inputStream = streamTestFile('parcel-error-invalid-item.csv')
       const expectedError = /which has different values across multiple rows/
       const csvParserOrder = new DeliveriesParser()
 
       csvParserOrder.logger.error = () => {}
-      const outputStream = StreamTest['v2'].toText((err) => {
+      const outputStream = StreamTest.v2.toText(err => {
         expect(err.toString()).toMatch(expectedError)
         done()
       })
@@ -285,39 +284,40 @@ describe('DeliveriesParser', () => {
       'parcel.isReturn': '0',
     }
 
-    return deliveriesParser._processData(mockDelivery)
-    .then((result) => {
+    return deliveriesParser._processData(mockDelivery).then(result => {
       const _mockResult = {
         orderNumber: '222',
         shippingInfo: {
-          deliveries: [{
-            id: '1',
-            items: [
-              {
-                _groupId: '1',
-                id: '123',
-                quantity: 1,
-              },
-            ],
-            parcels: [
-              {
-                id: '1',
-                measurements: {
-                  lengthInMillimeter: 100,
-                  heightInMillimeter: 200,
-                  widthInMillimeter: 200,
-                  weightInGram: 500,
+          deliveries: [
+            {
+              id: '1',
+              items: [
+                {
+                  _groupId: '1',
+                  id: '123',
+                  quantity: 1,
                 },
-                trackingData: {
-                  trackingId: '123456789',
-                  carrier: 'DHL',
-                  provider: 'parcel provider',
-                  providerTransaction: 'parcelTransaction provider',
-                  isReturn: false,
+              ],
+              parcels: [
+                {
+                  id: '1',
+                  measurements: {
+                    lengthInMillimeter: 100,
+                    heightInMillimeter: 200,
+                    widthInMillimeter: 200,
+                    weightInGram: 500,
+                  },
+                  trackingData: {
+                    trackingId: '123456789',
+                    carrier: 'DHL',
+                    provider: 'parcel provider',
+                    providerTransaction: 'parcelTransaction provider',
+                    isReturn: false,
+                  },
                 },
-              },
-            ],
-          }],
+              ],
+            },
+          ],
         },
       }
       expect(result).toEqual(_mockResult)

@@ -3,7 +3,7 @@ import type {
   LoggerOptions,
   ParseOptions,
   ParserSummary,
- } from 'types/discountCodes'
+} from 'types/discountCodes'
 import _ from 'lodash'
 import csv from 'csv-parser'
 import JSONStream from 'JSONStream'
@@ -14,21 +14,17 @@ import castTypes from './utils'
 
 export default class CsvParserDiscountCode {
   // set flowtype annotations
-  delimiter: string;
-  multiValueDelimiter: string;
-  continueOnProblems: boolean;
-  logger: LoggerOptions;
-  _summary: ParserSummary;
-  _cartDiscountsToArray: Function;
-  _handleErrors: Function;
-  _rowIndex: number;
-
+  delimiter: string
+  multiValueDelimiter: string
+  continueOnProblems: boolean
+  logger: LoggerOptions
+  _summary: ParserSummary
+  _cartDiscountsToArray: Function
+  _handleErrors: Function
+  _rowIndex: number
 
   // should take in optional parameters: a logger and a configuration object
-  constructor (
-    logger: LoggerOptions,
-    options: ParseOptions = {},
-  ) {
+  constructor(logger: LoggerOptions, options: ParseOptions = {}) {
     const defaultOptions = {
       delimiter: ',',
       multiValueDelimiter: ';',
@@ -50,23 +46,26 @@ export default class CsvParserDiscountCode {
   }
 
   // Remove fields with empty values from the code objects
-  static _removeEmptyFields (item: Object) {
+  static _removeEmptyFields(item: Object) {
     return _.omitBy(item, val => val === '')
   }
 
-  parse (input: stream$Readable, output: stream$Writable) {
+  parse(input: stream$Readable, output: stream$Writable) {
     this.logger.info('Starting conversion')
     highland(input, output)
-      .through(csv({
-        separator: this.delimiter,
-        strict: true,
-      }))
+      .through(
+        csv({
+          separator: this.delimiter,
+          strict: true,
+        })
+      )
       .map(CsvParserDiscountCode._removeEmptyFields)
       .map(unflatten)
       .map(this._cartDiscountsToArray)
       .map(castTypes)
       .errors(this._handleErrors) // <- Pass errors to errorHandler
-      .stopOnError((error) => { // <- Emit error and close stream if needed
+      .stopOnError(error => {
+        // <- Emit error and close stream if needed
         output.emit('error', error)
       })
       .doto(() => {
@@ -79,24 +78,24 @@ export default class CsvParserDiscountCode {
 
   // Convert the cartDiscounts field to an array of references to commercetools
   // cartDiscounts
-  _cartDiscountsToArray (item: Object) {
+  _cartDiscountsToArray(item: Object) {
     if (item.cartDiscounts) {
       const cartDiscounts = item.cartDiscounts
         .split(this.multiValueDelimiter)
         .map(cartDiscount => ({
           typeId: 'cart-discount',
           id: cartDiscount,
-        }),
-      )
+        }))
       return Object.assign(item, { cartDiscounts })
     }
     return item
   }
 
-  _handleErrors (error: any, cb: Function) {
+  _handleErrors(error: any, cb: Function) {
     this._rowIndex += 1
     this.logger.error(`At row: ${this._rowIndex}, ${error}`)
-    if (!this.continueOnProblems) // <- Rethrow the error to `.stopOnError()`
+    if (!this.continueOnProblems)
+      // <- Rethrow the error to `.stopOnError()`
       cb(error)
   }
 }

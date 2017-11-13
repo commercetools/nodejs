@@ -15,7 +15,7 @@ describe('createBuildArrayActions', () => {
 
   it('correctly detects add actions', () => {
     const before = getTestObj()
-    const now = getTestObj([ { name: 'a new object' } ])
+    const now = getTestObj([{ name: 'a new object' }])
     const addActionSpy = jest.fn()
 
     const handler = createBuildArrayActions(testObjKey, {
@@ -26,18 +26,15 @@ describe('createBuildArrayActions', () => {
 
     expect(addActionSpy).toHaveBeenCalledWith(
       { name: 'a new object' },
-      expect.any(Number),
+      expect.any(Number)
     )
 
-    expect(addActionSpy).toHaveBeenCalledWith(
-      expect.any(Object),
-      0,
-    )
+    expect(addActionSpy).toHaveBeenCalledWith(expect.any(Object), 0)
   })
 
   it('correctly detects change actions', () => {
-    const before = getTestObj([ { name: 'a new object' } ])
-    const now = getTestObj([ { name: 'a changed object' } ])
+    const before = getTestObj([{ name: 'a new object' }])
+    const now = getTestObj([{ name: 'a changed object' }])
     const changeActionSpy = jest.fn()
 
     const handler = createBuildArrayActions(testObjKey, {
@@ -49,18 +46,18 @@ describe('createBuildArrayActions', () => {
     expect(changeActionSpy).toHaveBeenCalledWith(
       { name: 'a new object' },
       { name: 'a changed object' },
-      expect.any(Number),
+      expect.any(Number)
     )
 
     expect(changeActionSpy).toHaveBeenCalledWith(
       expect.any(Object),
       expect.any(Object),
-      0,
+      0
     )
   })
 
   it('correctly detects remove actions', () => {
-    const before = getTestObj([ { name: 'an object' } ])
+    const before = getTestObj([{ name: 'an object' }])
     const now = getTestObj()
     const removeActionSpy = jest.fn()
 
@@ -72,12 +69,9 @@ describe('createBuildArrayActions', () => {
 
     expect(removeActionSpy).toHaveBeenCalledWith(
       { name: 'an object' },
-      expect.any(Number),
+      expect.any(Number)
     )
 
-    expect(removeActionSpy).toHaveBeenCalledWith(
-      expect.any(Object),
-      0,
-    )
+    expect(removeActionSpy).toHaveBeenCalledWith(expect.any(Object), 0)
   })
 })

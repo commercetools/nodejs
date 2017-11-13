@@ -19,13 +19,13 @@ describe('AddReturnInfoParser', () => {
   })
 
   describe('::parse', () => {
-    it('should accept a stream and output a stream', (done) => {
+    it('should accept a stream and output a stream', done => {
       const parser = new AddReturnInfoParser()
       const readStream = fs.createReadStream(
-        path.join(__dirname, 'data/return-info-sample.csv'),
+        path.join(__dirname, 'data/return-info-sample.csv')
       )
 
-      const outputStream = StreamTest['v2'].toText((err, result) => {
+      const outputStream = StreamTest.v2.toText((err, result) => {
         expect(err).toBe(null)
 
         const res = JSON.parse(result)
@@ -57,28 +57,34 @@ describe('AddReturnInfoParser', () => {
                 returnTrackingId: 'aefa34fe',
                 _returnId: '2',
                 returnDate: '2016-11-01T08:01:19+0000',
-                items: [{
-                  quantity: 4,
-                  lineItemId: '12ae',
-                  comment: 'yeah',
-                  shipmentState: 'Unusable',
-                }],
+                items: [
+                  {
+                    quantity: 4,
+                    lineItemId: '12ae',
+                    comment: 'yeah',
+                    shipmentState: 'Unusable',
+                  },
+                ],
               },
             ],
           },
           {
             orderNumber: '124',
-            returnInfo: [{
-              returnTrackingId: 'aefa34fe',
-              _returnId: '2',
-              returnDate: '2016-11-01T08:01:19+0000',
-              items: [{
-                quantity: 4,
-                lineItemId: '12ae',
-                comment: 'yeah',
-                shipmentState: 'Unusable',
-              }],
-            }],
+            returnInfo: [
+              {
+                returnTrackingId: 'aefa34fe',
+                _returnId: '2',
+                returnDate: '2016-11-01T08:01:19+0000',
+                items: [
+                  {
+                    quantity: 4,
+                    lineItemId: '12ae',
+                    comment: 'yeah',
+                    shipmentState: 'Unusable',
+                  },
+                ],
+              },
+            ],
           },
         ])
         done()
@@ -87,7 +93,7 @@ describe('AddReturnInfoParser', () => {
       parser.parse(readStream, outputStream)
     })
 
-    it('should return error with missing headers', (done) => {
+    it('should return error with missing headers', done => {
       const mockErrorLog = jest.fn()
       const parser = new AddReturnInfoParser({
         logger: {
@@ -95,22 +101,24 @@ describe('AddReturnInfoParser', () => {
         },
       })
       const readStream = fs.createReadStream(
-        path.join(__dirname, 'data/return-info-error2-sample.csv'),
+        path.join(__dirname, 'data/return-info-error2-sample.csv')
       )
 
-      const outputStream = StreamTest['v2'].toText((err, res) => {
+      const outputStream = StreamTest.v2.toText((err, res) => {
         expect(res).toBeUndefined()
         expect(mockErrorLog.mock.calls[0][0]).toEqual(
-          'Required headers missing: \'orderNumber\'',
+          new Error("Required headers missing: 'orderNumber'")
         )
-        expect(err).toEqual('Required headers missing: \'orderNumber\'')
+        expect(err).toEqual(
+          new Error("Required headers missing: 'orderNumber'")
+        )
         done()
       })
 
       parser.parse(readStream, outputStream)
     })
 
-    it('should return error with invalid csv', (done) => {
+    it('should return error with invalid csv', done => {
       const mockErrorLog = jest.fn()
       const parser = new AddReturnInfoParser({
         logger: {
@@ -119,12 +127,13 @@ describe('AddReturnInfoParser', () => {
       })
 
       const readStream = fs.createReadStream(
-        path.join(__dirname, 'data/return-info-error-sample.csv'),
+        path.join(__dirname, 'data/return-info-error-sample.csv')
       )
 
-      const outputStream = StreamTest['v2'].toText((err) => {
-        expect(err.toString())
-          .toEqual('Error: Row length does not match headers')
+      const outputStream = StreamTest.v2.toText(err => {
+        expect(err.toString()).toEqual(
+          'Error: Row length does not match headers'
+        )
         done()
       })
       parser.parse(readStream, outputStream)
@@ -132,7 +141,7 @@ describe('AddReturnInfoParser', () => {
   })
 
   describe('::_processData', () => {
-    it('should accept CSV object and output an order', (done) => {
+    it('should accept CSV object and output an order', done => {
       const parser = new AddReturnInfoParser()
       const mockOrder = {
         orderNumber: '123',
@@ -142,8 +151,9 @@ describe('AddReturnInfoParser', () => {
         _returnId: '2',
       }
 
-      parser._processData(mockOrder)
-        .then((result) => {
+      parser
+        ._processData(mockOrder)
+        .then(result => {
           expect(result.orderNumber).toBe(mockOrder.orderNumber)
           const expectedResult = {
             orderNumber: '123',
@@ -169,7 +179,7 @@ describe('AddReturnInfoParser', () => {
         .catch(done.fail)
     })
 
-    it('should return error because of missing headers', (done) => {
+    it('should return error because of missing headers', done => {
       const parser = new AddReturnInfoParser()
       const mockOrder = {
         quantity: '234',
@@ -178,10 +188,13 @@ describe('AddReturnInfoParser', () => {
         _returnId: '2',
       }
 
-      parser._processData(mockOrder)
+      parser
+        ._processData(mockOrder)
         .then(done.fail)
-        .catch((err) => {
-          expect(err).toBe('Required headers missing: \'orderNumber\'')
+        .catch(err => {
+          expect(err).toEqual(
+            new Error("Required headers missing: 'orderNumber'")
+          )
           done()
         })
     })

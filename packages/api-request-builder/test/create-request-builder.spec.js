@@ -1,7 +1,4 @@
-import {
-  createRequestBuilder,
-  features,
-} from '../src'
+import { createRequestBuilder, features } from '../src'
 
 // order matters!
 const expectedServiceKeys = [
@@ -37,7 +34,6 @@ const expectedServiceKeys = [
   'zones',
 ].sort()
 
-
 describe('createRequestBuilder', () => {
   it('export initialized services when passed only projectKey', () => {
     const requestBuilder = createRequestBuilder({ projectKey: 'foo' })
@@ -51,14 +47,12 @@ describe('createRequestBuilder', () => {
         foo: {
           type: 'foo',
           endpoint: '/foo',
-          features: [
-            features.query,
-          ],
+          features: [features.query],
         },
       },
     })
     expect(Object.keys(requestBuilder).sort()).toEqual(
-      expectedServiceKeys.concat('foo').sort(),
+      expectedServiceKeys.concat('foo').sort()
     )
   })
 })

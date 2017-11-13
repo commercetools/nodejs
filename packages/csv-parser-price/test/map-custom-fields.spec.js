@@ -44,7 +44,7 @@ describe('mapCustomFields::parse', () => {
           currencyCode: 'EUR',
         },
         numbertype: 123,
-        settype: [ 1, 2, 3, 5 ],
+        settype: [1, 2, 3, 5],
         stringtype: 'nac',
       },
       type: {
@@ -66,7 +66,7 @@ describe('mapCustomFields::parse', () => {
       },
       enumtype: 'Ready',
       moneytype: 'ABI',
-      settype: 'qw,\'2\',v,t',
+      settype: "qw,'2',v,t",
     }
 
     const result = mapCustomFields.parse(data, customTypeSample, 1)
@@ -85,16 +85,16 @@ describe('mapCustomFields::parse', () => {
       },
     }
     const expectedErrorArray = [
-      '[row 1: liqui 63 69 ty] - The number invalid isn\'t valid',
+      "[row 1: liqui 63 69 ty] - The number invalid isn't valid",
       // eslint-disable-next-line max-len
-      '[row 1: liqui 63 69 ty] - \'unsupported\' type is not supported! Kindly raise an issue for this',
+      "[row 1: liqui 63 69 ty] - 'unsupported' type is not supported! Kindly raise an issue for this",
       // eslint-disable-next-line max-len
-      '[row 1: liqui 63 69 ty] - The value \'abi§\' is not a valid boolean value',
+      "[row 1: liqui 63 69 ty] - The value 'abi§' is not a valid boolean value",
       '[row 1: liqui 63 69 ty] - Invalid money - Cannot parse money ABI',
-      '[row 1: liqui 63 69 ty] - The number qw isn\'t valid',
-      '[row 1: liqui 63 69 ty] - The number \'2\' isn\'t valid',
-      '[row 1: liqui 63 69 ty] - The number v isn\'t valid',
-      '[row 1: liqui 63 69 ty] - The number t isn\'t valid',
+      "[row 1: liqui 63 69 ty] - The number qw isn't valid",
+      "[row 1: liqui 63 69 ty] - The number '2' isn't valid",
+      "[row 1: liqui 63 69 ty] - The number v isn't valid",
+      "[row 1: liqui 63 69 ty] - The number t isn't valid",
     ]
     expect(result.data).toEqual(expected)
     expect(result.error.map(error => error.message)).toEqual(expectedErrorArray)
@@ -186,32 +186,40 @@ describe('mapCustomFields::mapNumber', () => {
 })
 
 describe('mapCustomFields::mapSet', () => {
-  test('should format all values to money', () => {
-    const elementType = { name: 'Number' }
-    const result = mapCustomFields.mapSet('1,2,3,4', elementType)
+  describe('without set', () => {
+    test('should format all values to money', () => {
+      const elementType = { name: 'Number' }
+      const result = mapCustomFields.mapSet('1,2,3,4', elementType)
 
-    expect(result.error.length).toBe(0)
-    const expected = [1, 2, 3, 4]
-    expect(result.data).toEqual(expected)
+      expect(result.error.length).toBe(0)
+      const expected = [1, 2, 3, 4]
+      expect(result.data).toEqual(expected)
+    })
   })
 
-  test('should format all values to money', () => {
-    const elementType = { name: 'Money' }
-    const moneySet = 'EUR 1200,USD 40,NGN 200'
-    const result = mapCustomFields.mapSet(moneySet, elementType)
+  describe('with set', () => {
+    test('should format all values to money', () => {
+      const elementType = { name: 'Money' }
+      const moneySet = 'EUR 1200,USD 40,NGN 200'
+      const result = mapCustomFields.mapSet(moneySet, elementType)
 
-    expect(result.error.length).toBe(0)
-    const expected = [{
-      currencyCode: 'EUR',
-      centAmount: 1200,
-    }, {
-      currencyCode: 'USD',
-      centAmount: 40,
-    }, {
-      currencyCode: 'NGN',
-      centAmount: 200,
-    }]
-    expect(result.data).toEqual(expected)
+      expect(result.error.length).toBe(0)
+      const expected = [
+        {
+          currencyCode: 'EUR',
+          centAmount: 1200,
+        },
+        {
+          currencyCode: 'USD',
+          centAmount: 40,
+        },
+        {
+          currencyCode: 'NGN',
+          centAmount: 200,
+        },
+      ]
+      expect(result.data).toEqual(expected)
+    })
   })
 
   test('should return error if values in set is invalid', () => {
@@ -219,8 +227,9 @@ describe('mapCustomFields::mapSet', () => {
     const moneySet = 'true, false, false, abi'
     const result = mapCustomFields.mapSet(moneySet, elementType)
     expect(result.error.length).toBe(1)
-    expect(result.error[0])
-    .toEqual('The value \'abi\' is not a valid boolean value')
+    expect(result.error[0]).toEqual(
+      "The value 'abi' is not a valid boolean value"
+    )
     expect(result.data.length).toBe(3)
   })
 
@@ -232,7 +241,7 @@ describe('mapCustomFields::mapSet', () => {
     expect(result.error.length).toBe(4)
     expect(result.error[0]).toEqual(
       // eslint-disable-next-line max-len
-      '\'unsupportedType\' type is not supported! Kindly raise an issue for this',
+      "'unsupportedType' type is not supported! Kindly raise an issue for this"
     )
   })
 

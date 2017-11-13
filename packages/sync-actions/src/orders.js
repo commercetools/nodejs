@@ -1,28 +1,28 @@
 /* @flow */
-import type {
-  SyncAction,
-  ActionGroup,
-} from 'types/sdk'
+import type { SyncAction, ActionGroup } from 'types/sdk'
 import flatten from 'lodash.flatten'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import * as orderActions from './order-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
-export const actionGroups = [
-  'base',
-  'deliveries',
-]
+export const actionGroups = ['base', 'deliveries']
 
-function createOrderMapActions (mapActionGroup) {
-  return function doMapActions (diff, newObj, oldObj/* , options */) {
+function createOrderMapActions(mapActionGroup) {
+  return function doMapActions(diff, newObj, oldObj /* , options */) {
     const allActions = []
 
-    allActions.push(mapActionGroup('base', () =>
-      orderActions.actionsMapBase(diff, oldObj, newObj)))
+    allActions.push(
+      mapActionGroup('base', () =>
+        orderActions.actionsMapBase(diff, oldObj, newObj)
+      )
+    )
 
-    allActions.push(mapActionGroup('deliveries', () =>
-      orderActions.actionsMapDeliveries(diff, oldObj, newObj)))
+    allActions.push(
+      mapActionGroup('deliveries', () =>
+        orderActions.actionsMapDeliveries(diff, oldObj, newObj)
+      )
+    )
 
     return flatten(allActions)
   }

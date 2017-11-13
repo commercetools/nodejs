@@ -5,10 +5,14 @@ describe('classify', () => {
     const composed = classify({
       foo: 'bar',
       bar: { a: 1, b: 2 },
-      getFoo () { return this.foo },
-      getBar () { return this.bar },
+      getFoo() {
+        return this.foo
+      },
+      getBar() {
+        return this.bar
+      },
     })
-    Object.keys(composed).forEach((key) => {
+    Object.keys(composed).forEach(key => {
       expect(typeof composed[key]).toBe('function')
     })
     expect(Object.keys(composed)).toHaveLength(2)
