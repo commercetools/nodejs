@@ -1,9 +1,14 @@
 /* @flow */
-import type { ServiceBuilder, ServiceBuilderDefinition } from 'types/sdk'
+import type {
+  ServiceBuilder,
+  ServiceBuilderDefinition,
+  ServiceBuilderParams,
+} from 'types/sdk'
 import {
   getDefaultQueryParams,
   getDefaultSearchParams,
   setDefaultParams,
+  setParams,
 } from './default-params'
 import classify from './classify'
 import buildQueryString from './build-query-string'
@@ -113,12 +118,21 @@ export default function createService(
       const uri =
         (withProjectKey ? `/${options}` : '') +
         endpoint +
+        // TODO this can lead to invalid URIs as getIdOrKey can return
+        //   "/?customerId", so there can be multiple questionmarks,
+        // same for when `queryParams` and `version` are present
         getIdOrKey(this.params) +
         (queryParams ? `?${queryParams}` : '') +
         (version ? `?version=${version}` : '')
 
       setDefaultParams.call(this)
       return uri
+    },
+
+    // Call this method to parse an object as params
+    parse(params: ServiceBuilderParams): Object {
+      setParams.call(this, params)
+      return this
     },
   })
 }

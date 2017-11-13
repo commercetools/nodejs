@@ -93,3 +93,78 @@ client.execute(channelsRequest)
 .then(result => ...)
 .catch(error => ...)
 ```
+
+#### Declarative Usage
+
+A declarative API exists as an alternative to the imperative API (shown in the example above).
+
+```js
+// same imports and instantiation as above
+const channelsUri = requestBuilder.channels
+  .parse({
+    where: ['key = "foo"'],
+    perPage: 1,
+    version: 3,
+  })
+  .build()
+```
+
+**Type of Params**
+This declarative `parse` API accepts an object of the following shape:
+
+```js
+{
+  // query-expand
+  expand?: Array<string>;
+
+  // query-id
+  id?: ?string;
+  key?: ?string;
+  customerId?: ?string;
+
+  // query-page
+  sort: Array<{ by: string, direction: 'asc' | 'desc' }>;
+  page: ?number;
+  perPage: ?number;
+
+  // query-projection
+  staged?: boolean;
+  priceCurrency?: string;
+  priceCountry?: string;
+  priceCustomerGroup?: string;
+  priceChannel?: string;
+
+  // query-search
+  text?: ?{
+    language?: string;
+    value?: string;
+  };
+  fuzzy?: boolean;
+  fuzzyLevel?: number;
+  markMatchingVariants?: boolean;
+  facet?: Array<string>;
+  filter?: Array<string>;
+  filterByQuery?: Array<string>;
+  filterByFacets?: Array<string>;
+
+  // query-suggest
+  searchKeywords?: Array<{language: string; value: string;}>;
+
+  // query
+  where?: Array<string>;
+  whereOperator?: 'and' | 'or';
+
+  // version
+  version?: string;
+}
+```
+
+**Mixed usage**
+
+The imperative API can be mixed with the declarative one.
+
+```js
+// these both lead to the same result
+requestBuilder.channels.parse({ page: 5 }).perPage(10).build()
+requestBuilder.channels.perPage(10).parse({ page: 5 }).build()
+```
