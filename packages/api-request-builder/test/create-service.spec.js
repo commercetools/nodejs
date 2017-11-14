@@ -126,7 +126,7 @@ describe('createService', () => {
       })
       it('should support `customerId`', () => {
         expect(service.parse({ customerId: 'bar' }).build()).toBe(
-          '/my-project1/foo/?customerId=bar'
+          '/my-project1/foo?customerId=bar'
         )
       })
 
@@ -349,6 +349,46 @@ describe('createService', () => {
       service = createService(options, projectKey)
     })
 
+    describe('with additional services', () => {
+      // let service
+      beforeEach(() => {
+        service = createService(
+          {
+            type: 'test',
+            endpoint: '/test',
+            features: ['queryOne', 'queryExpand'],
+          },
+          projectKey
+        )
+      })
+      it('should mix customerId and queryParams', () => {
+        expect(
+          service
+            .byCustomerId('foo')
+            .expand('baz')
+            .build()
+        ).toBe('/my-project1/test?customerId=foo&expand=baz')
+      })
+
+      it('should mix customerId and version', () => {
+        expect(
+          service
+            .byCustomerId('foo')
+            .withVersion(3)
+            .build()
+        ).toBe('/my-project1/test?customerId=foo&version=3')
+      })
+
+      it('should mix queryParams and version', () => {
+        expect(
+          service
+            .withVersion(3)
+            .expand('baz')
+            .build()
+        ).toBe('/my-project1/test?expand=baz&version=3')
+      })
+    })
+
     it('include projectkey in uri by default', () => {
       expect(service.build()).toBe('/my-project1/foo')
     })
@@ -364,7 +404,7 @@ describe('createService', () => {
     })
     it('endpoint with customer id', () => {
       expect(service.byCustomerId('cust123').build()).toBe(
-        '/my-project1/foo/?customerId=cust123'
+        '/my-project1/foo?customerId=cust123'
       )
     })
     it('endpoint with key', () => {

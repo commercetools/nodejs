@@ -31,7 +31,6 @@ const requiredDefinitionProps = ['type', 'endpoint', 'features']
 function getIdOrKey(params: Object): string {
   if (params.id) return `/${params.id}`
   else if (params.key) return `/key=${params.key}`
-  else if (params.customerId) return `/?customerId=${params.customerId}`
   return ''
 }
 
@@ -113,7 +112,6 @@ export default function createService(
       const { withProjectKey } = uriOptions
 
       const queryParams = buildQueryString(this.params)
-      const version = this.params.version
 
       const uri =
         (withProjectKey ? `/${options}` : '') +
@@ -122,8 +120,7 @@ export default function createService(
         //   "/?customerId", so there can be multiple questionmarks,
         // same for when `queryParams` and `version` are present
         getIdOrKey(this.params) +
-        (queryParams ? `?${queryParams}` : '') +
-        (version ? `?version=${version}` : '')
+        (queryParams ? `?${queryParams}` : '')
 
       setDefaultParams.call(this)
       return uri
