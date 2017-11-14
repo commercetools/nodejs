@@ -52,7 +52,7 @@ export function actionsMapMeta(diff, oldObj, newObj) {
   })
 }
 
-export function actionsMapCustom (diff, oldObj, newObj) {
+export function actionsMapCustom(diff, oldObj, newObj) {
   const actions = []
   if (!diff.custom) return actions
 
@@ -66,8 +66,7 @@ export function actionsMapCustom (diff, oldObj, newObj) {
       ? diffpatcher.getDeltaValue(diff.custom.type, oldObj)
       : diff.custom.type
 
-    if (!type)
-      actions.push({ action: 'setCustomType' })
+    if (!type) actions.push({ action: 'setCustomType' })
     else if (type.id)
       actions.push({
         action: 'setCustomType',
@@ -77,8 +76,9 @@ export function actionsMapCustom (diff, oldObj, newObj) {
             ? diffpatcher.getDeltaValue(type.id)
             : newObj.custom.type.id,
         },
-        fields: Array.isArray(diff.custom.fields) ?
-          diffpatcher.getDeltaValue(diff.custom.fields) : newObj.custom.fields,
+        fields: Array.isArray(diff.custom.fields)
+          ? diffpatcher.getDeltaValue(diff.custom.fields)
+          : newObj.custom.fields,
       })
   } else if (diff.custom.fields) {
     const customFieldsActions = Object.keys(diff.custom.fields).map(name => ({
