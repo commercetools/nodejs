@@ -29,8 +29,7 @@ export default function buildQueryString(
   } = params
   let queryString = []
 
-  if (customerId)
-    queryString.push(`customerId=${customerId}`)
+  if (customerId) queryString.push(`customerId=${customerId}`)
 
   if (typeof staged === 'boolean')
     queryString.push(`staged=${staged.toString()}`)
@@ -93,8 +92,7 @@ export default function buildQueryString(
       queryString.push(`searchKeywords.${f.lang}=${f.value}`)
     )
 
-  if (version)
-    queryString.push(`version=${version}`)
+  if (version) queryString.push(`version=${version}`)
 
   return queryString.join('&')
 }

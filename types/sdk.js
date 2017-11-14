@@ -212,6 +212,8 @@ export type ServiceBuilderDefaultParams = {
       value: string,
     },
   },
+  version?: number,
+  customerId?: string,
 }
 export type ServiceBuilderParams = {
   // query-expand
