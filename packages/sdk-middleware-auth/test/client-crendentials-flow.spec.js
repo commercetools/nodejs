@@ -1,11 +1,9 @@
-import {
-  createAuthMiddlewareForClientCredentialsFlow,
-} from '../src'
+import { createAuthMiddlewareForClientCredentialsFlow } from '../src'
 import authMiddlewareBase from '../src/base-auth-flow'
 
 jest.mock('../src/base-auth-flow')
 
-function createTestRequest (options) {
+function createTestRequest(options) {
   return {
     url: '',
     method: 'GET',
@@ -15,7 +13,7 @@ function createTestRequest (options) {
   }
 }
 
-function createTestMiddlewareOptions (options) {
+function createTestMiddlewareOptions(options) {
   return {
     host: 'https://auth.commercetools.co',
     projectKey: 'foo',
@@ -41,7 +39,7 @@ describe('Client Crentials Flow', () => {
         resolve,
         reject,
       }
-      const next = (actualParams) => {
+      const next = actualParams => {
         expect(actualParams).toMatchObject({
           request,
           response,
@@ -55,10 +53,9 @@ describe('Client Crentials Flow', () => {
       }
       const middlewareOptions = createTestMiddlewareOptions()
       const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
-        middlewareOptions,
+        middlewareOptions
       )
 
       authMiddleware(next)(request, response)
-    }),
-  )
+    }))
 })

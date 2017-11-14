@@ -20,7 +20,7 @@ describe('LineItemStateParser', () => {
   })
 
   describe('::_processData', () => {
-    it('should transform CSV object into order', (done) => {
+    it('should transform CSV object into order', done => {
       const parser = new LineItemStateParser()
       const mockOrder = {
         orderNumber: '123',
@@ -30,21 +30,19 @@ describe('LineItemStateParser', () => {
         lineItemId: '123',
       }
 
-      parser._processData(mockOrder)
-        .then((result) => {
-          expect(result.orderNumber).toBe(mockOrder.orderNumber)
+      parser._processData(mockOrder).then(result => {
+        expect(result.orderNumber).toBe(mockOrder.orderNumber)
 
-          expect(result.lineItems[0].state[0].quantity)
-            .toBe(parseInt(mockOrder.quantity, 10))
-          expect(result.lineItems[0].state[0].fromState)
-            .toBe(mockOrder.fromState)
-          expect(result.lineItems[0].state[0].toState)
-            .toBe(mockOrder.toState)
-          done()
-        })
+        expect(result.lineItems[0].state[0].quantity).toBe(
+          parseInt(mockOrder.quantity, 10)
+        )
+        expect(result.lineItems[0].state[0].fromState).toBe(mockOrder.fromState)
+        expect(result.lineItems[0].state[0].toState).toBe(mockOrder.toState)
+        done()
+      })
     })
 
-    it('should return an error if required headers are missing', (done) => {
+    it('should return an error if required headers are missing', done => {
       const parser = new LineItemStateParser()
 
       const mockOrder = {
@@ -54,38 +52,47 @@ describe('LineItemStateParser', () => {
         lineItemId: '123',
       }
 
-      parser._processData(mockOrder)
+      parser
+        ._processData(mockOrder)
         .then(() =>
-          done.fail('Should throw an error because of a missing headers.'),
+          done.fail('Should throw an error because of a missing headers.')
         )
-        .catch((error) => {
-          expect(error).toBe('Required headers missing: \'orderNumber\'')
+        .catch(error => {
+          expect(error).toEqual(
+            new Error("Required headers missing: 'orderNumber'")
+          )
           done()
         })
     })
   })
 
-  it('::parse should accept a stream and output a stream', (done) => {
+  it('::parse should accept a stream and output a stream', done => {
     const parser = new LineItemStateParser()
     const readStream = fs.createReadStream(
-      path.join(__dirname, 'data/lineitemstate-sample.csv'),
+      path.join(__dirname, 'data/lineitemstate-sample.csv')
     )
 
-    const output = StreamTest['v2'].toText((err, result) => {
+    const output = StreamTest.v2.toText((err, result) => {
       expect(err).toBe(null)
 
-      expect(JSON.parse(result)).toEqual([{
-        orderNumber: '234',
-        lineItems: [{
-          id: '123',
-          state: [{
-            quantity: 10,
-            fromState: 'order',
-            toState: 'shipped',
-            _fromStateQty: 100,
-          }],
-        }],
-      }])
+      expect(JSON.parse(result)).toEqual([
+        {
+          orderNumber: '234',
+          lineItems: [
+            {
+              id: '123',
+              state: [
+                {
+                  quantity: 10,
+                  fromState: 'order',
+                  toState: 'shipped',
+                  _fromStateQty: 100,
+                },
+              ],
+            },
+          ],
+        },
+      ])
 
       done()
     })

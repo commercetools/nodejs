@@ -68,7 +68,8 @@ describe('Actions', () => {
         },
         {
           id: 3,
-          attributes: [ // new
+          attributes: [
+            // new
             { name: 'uid', value: '00001' },
             { name: 'length', value: 500 },
             { name: 'bulkygoods', value: 'SI' },
@@ -88,15 +89,30 @@ describe('Actions', () => {
       { action: 'setAttribute', variantId: 2, name: 'uid', value: '20055572' },
       { action: 'setAttribute', variantId: 2, name: 'length', value: 333 },
       { action: 'setAttribute', variantId: 2, name: 'wide', value: 33 },
-      { action: 'setAttribute', variantId: 2, name: 'bulkygoods', value: 'YES' },
+      {
+        action: 'setAttribute',
+        variantId: 2,
+        name: 'bulkygoods',
+        value: 'YES',
+      },
 
       { action: 'setAttribute', variantId: 3, name: 'uid', value: '00001' },
       { action: 'setAttribute', variantId: 3, name: 'length', value: 500 },
       { action: 'setAttribute', variantId: 3, name: 'bulkygoods', value: 'SI' },
 
       { action: 'setAttribute', variantId: 4, name: 'uid', value: undefined },
-      { action: 'setAttribute', variantId: 4, name: 'length', value: undefined },
-      { action: 'setAttribute', variantId: 4, name: 'bulkygoods', value: undefined },
+      {
+        action: 'setAttribute',
+        variantId: 4,
+        name: 'length',
+        value: undefined,
+      },
+      {
+        action: 'setAttribute',
+        variantId: 4,
+        name: 'bulkygoods',
+        value: undefined,
+      },
     ])
   })
 
@@ -170,8 +186,7 @@ describe('Actions', () => {
     ])
   })
 
-  it('should build SameForAll attribute actions for a SET of object values',
-  () => {
+  it('should build SameForAll attribute actions for a SET of object values', () => {
     const before = {
       masterVariant: {
         attributes: [
@@ -231,22 +246,24 @@ describe('Actions', () => {
       prices: [{ value: { centAmount: 300, currencyCode: 'USD' } }],
     }
 
-    const before = { variants: [
-      {
-        id: 2,
-        key: 'eee',
-        sku: 'aaa',
-        attributes: [{ name: 'color', value: 'green' }],
-        prices: [{ value: { centAmount: 100, currencyCode: 'EUR' } }],
-      },
-      {
-        id: 3,
-        key: 'fff',
-        sku: 'bbb',
-        attributes: [{ name: 'color', value: 'yellow' }],
-        prices: [{ value: { centAmount: 200, currencyCode: 'GBP' } }],
-      },
-    ] }
+    const before = {
+      variants: [
+        {
+          id: 2,
+          key: 'eee',
+          sku: 'aaa',
+          attributes: [{ name: 'color', value: 'green' }],
+          prices: [{ value: { centAmount: 100, currencyCode: 'EUR' } }],
+        },
+        {
+          id: 3,
+          key: 'fff',
+          sku: 'bbb',
+          attributes: [{ name: 'color', value: 'yellow' }],
+          prices: [{ value: { centAmount: 200, currencyCode: 'GBP' } }],
+        },
+      ],
+    }
     const now = { variants: before.variants.slice(0, 1).concat(newVariant) }
 
     const actions = productsSync.buildActions(now, before)
@@ -261,35 +278,80 @@ describe('Actions', () => {
     const before = {
       id: '123',
       masterVariant: {
-        id: 1, sku: 'v1', key: 'v1', attributes: [{ name: 'foo', value: 'bar' }],
+        id: 1,
+        sku: 'v1',
+        key: 'v1',
+        attributes: [{ name: 'foo', value: 'bar' }],
       },
       variants: [
-        { id: 2, sku: 'v2', key: 'v2', attributes: [{ name: 'foo', value: 'qux' }] },
-        { id: 3, sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'baz' }] },
+        {
+          id: 2,
+          sku: 'v2',
+          key: 'v2',
+          attributes: [{ name: 'foo', value: 'qux' }],
+        },
+        {
+          id: 3,
+          sku: 'v3',
+          key: 'v3',
+          attributes: [{ name: 'foo', value: 'baz' }],
+        },
       ],
     }
 
     const now = {
       id: '123',
       masterVariant: {
-        id: 1, sku: 'v1', key: 'v2', attributes: [{ name: 'foo', value: 'new value' }],
+        id: 1,
+        sku: 'v1',
+        key: 'v2',
+        attributes: [{ name: 'foo', value: 'new value' }],
       },
       variants: [
-        { id: 3, sku: 'v4', key: 'v4', attributes: [{ name: 'foo', value: 'i dont care' }] },
-        { id: 2, sku: 'v2', key: 'v2', attributes: [{ name: 'foo', value: 'another value' }] },
-        { sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'yet another' }] },
+        {
+          id: 3,
+          sku: 'v4',
+          key: 'v4',
+          attributes: [{ name: 'foo', value: 'i dont care' }],
+        },
+        {
+          id: 2,
+          sku: 'v2',
+          key: 'v2',
+          attributes: [{ name: 'foo', value: 'another value' }],
+        },
+        {
+          sku: 'v3',
+          key: 'v3',
+          attributes: [{ name: 'foo', value: 'yet another' }],
+        },
       ],
     }
 
     const actions = productsSync.buildActions(now, before)
     expect(actions).toEqual([
-      { action: 'addVariant', sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'yet another' }] },
+      {
+        action: 'addVariant',
+        sku: 'v3',
+        key: 'v3',
+        attributes: [{ name: 'foo', value: 'yet another' }],
+      },
       { action: 'setProductVariantKey', key: 'v2', variantId: 1 },
       { action: 'setAttribute', variantId: 1, name: 'foo', value: 'new value' },
       { action: 'setSku', sku: 'v4', variantId: 3 },
       { action: 'setProductVariantKey', key: 'v4', variantId: 3 },
-      { action: 'setAttribute', variantId: 3, name: 'foo', value: 'i dont care' },
-      { action: 'setAttribute', variantId: 2, name: 'foo', value: 'another value' },
+      {
+        action: 'setAttribute',
+        variantId: 3,
+        name: 'foo',
+        value: 'i dont care',
+      },
+      {
+        action: 'setAttribute',
+        variantId: 2,
+        name: 'foo',
+        value: 'another value',
+      },
     ])
   })
 
@@ -312,8 +374,7 @@ describe('Actions', () => {
         variants: [],
       }
 
-      it('should generate update action to remove variant',
-      () => {
+      it('should generate update action to remove variant', () => {
         const actions = productsSync.buildActions(now, before)
         expect(actions).toEqual([{ action: 'removeVariant', id: 1 }])
       })
@@ -324,8 +385,18 @@ describe('Actions', () => {
         id: '123',
         version: 1,
         variants: [
-          { id: 2, sku: 'v2', key: 'v2', attributes: [{ name: 'foo', value: 'qux' }] },
-          { id: 3, sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'baz' }] },
+          {
+            id: 2,
+            sku: 'v2',
+            key: 'v2',
+            attributes: [{ name: 'foo', value: 'qux' }],
+          },
+          {
+            id: 3,
+            sku: 'v3',
+            key: 'v3',
+            attributes: [{ name: 'foo', value: 'baz' }],
+          },
         ],
       }
 
@@ -333,22 +404,50 @@ describe('Actions', () => {
         id: '123',
         variants: [
           // changed
-          { id: 2, sku: 'v2', key: 'v2', attributes: [{ name: 'foo', value: 'another value' }] },
+          {
+            id: 2,
+            sku: 'v2',
+            key: 'v2',
+            attributes: [{ name: 'foo', value: 'another value' }],
+          },
           // changed
-          { id: 3, sku: 'v3', key: 'v3', attributes: [{ name: 'foo', value: 'i dont care' }] },
+          {
+            id: 3,
+            sku: 'v3',
+            key: 'v3',
+            attributes: [{ name: 'foo', value: 'i dont care' }],
+          },
           // new
-          { sku: 'v4', key: 'v4', attributes: [{ name: 'foo', value: 'yet another' }] },
+          {
+            sku: 'v4',
+            key: 'v4',
+            attributes: [{ name: 'foo', value: 'yet another' }],
+          },
         ],
       }
 
-      it('should generate `addVariant` and `setAttribute` actions',
-      () => {
+      it('should generate `addVariant` and `setAttribute` actions', () => {
         const actions = productsSync.buildActions(now, before)
 
         expect(actions).toEqual([
-          { action: 'addVariant', sku: 'v4', key: 'v4', attributes: [{ name: 'foo', value: 'yet another' }] },
-          { action: 'setAttribute', variantId: 2, name: 'foo', value: 'another value' },
-          { action: 'setAttribute', variantId: 3, name: 'foo', value: 'i dont care' },
+          {
+            action: 'addVariant',
+            sku: 'v4',
+            key: 'v4',
+            attributes: [{ name: 'foo', value: 'yet another' }],
+          },
+          {
+            action: 'setAttribute',
+            variantId: 2,
+            name: 'foo',
+            value: 'another value',
+          },
+          {
+            action: 'setAttribute',
+            variantId: 3,
+            name: 'foo',
+            value: 'i dont care',
+          },
         ])
       })
     })
@@ -374,19 +473,25 @@ describe('Actions', () => {
             sku: 'v1',
             attributes: [{ name: 'foo', value: 'bar' }],
           },
-          variants: [{
-            id: 1,
-            sku: 'v1',
-            attributes: [{ name: 'foo', value: 'bar' }],
-          }],
+          variants: [
+            {
+              id: 1,
+              sku: 'v1',
+              attributes: [{ name: 'foo', value: 'bar' }],
+            },
+          ],
         }
 
-        it('should generate `changeMasterVariant` and `addVariant` action',
-        () => {
+        it('should generate `changeMasterVariant` and `addVariant` action', () => {
           const actions = productsSync.buildActions(now, before)
 
           expect(actions).toEqual([
-            { action: 'addVariant', attributes: [{ name: 'foo', value: 'bar' }], id: 2, sku: 'v1' },
+            {
+              action: 'addVariant',
+              attributes: [{ name: 'foo', value: 'bar' }],
+              id: 2,
+              sku: 'v1',
+            },
             { action: 'changeMasterVariant', variantId: 2 },
           ])
         })
@@ -415,13 +520,17 @@ describe('Actions', () => {
           variants: [],
         }
 
-        it('should generate `changeMasterVariant`, `addVariant` and `removeVariant` action',
-        () => {
+        it('should generate `changeMasterVariant`, `addVariant` and `removeVariant` action', () => {
           const actions = productsSync.buildActions(now, before)
 
           expect(actions).toEqual([
             { action: 'removeVariant', id: 1 },
-            { action: 'addVariant', attributes: [{ name: 'foo', value: 'bar' }], id: 2, sku: 'v1' },
+            {
+              action: 'addVariant',
+              attributes: [{ name: 'foo', value: 'bar' }],
+              id: 2,
+              sku: 'v1',
+            },
             { action: 'changeMasterVariant', variantId: 2 },
           ])
         })
@@ -437,11 +546,13 @@ describe('Actions', () => {
               sku: 'v1',
               attributes: [{ name: 'foo', value: 'bar' }],
             },
-            variants: [{
-              id: 1,
-              sku: 'v1',
-              attributes: [{ name: 'foo-2', value: 'bar-2' }],
-            }],
+            variants: [
+              {
+                id: 1,
+                sku: 'v1',
+                attributes: [{ name: 'foo-2', value: 'bar-2' }],
+              },
+            ],
           }
 
           const now = {
@@ -452,15 +563,16 @@ describe('Actions', () => {
               sku: 'v1',
               attributes: [{ name: 'foo-2', value: 'bar-2' }],
             },
-            variants: [{
-              id: 2,
-              sku: 'v1',
-              attributes: [{ name: 'foo', value: 'bar' }],
-            }],
+            variants: [
+              {
+                id: 2,
+                sku: 'v1',
+                attributes: [{ name: 'foo', value: 'bar' }],
+              },
+            ],
           }
 
-          it('should generate `changeMasterVariant` action',
-          () => {
+          it('should generate `changeMasterVariant` action', () => {
             const actions = productsSync.buildActions(now, before)
 
             expect(actions).toEqual([
@@ -478,11 +590,13 @@ describe('Actions', () => {
               sku: 'v1',
               attributes: [{ name: 'foo', value: 'bar' }],
             },
-            variants: [{
-              id: 1,
-              sku: 'v1',
-              attributes: [{ name: 'foo-2', value: 'bar-2' }],
-            }],
+            variants: [
+              {
+                id: 1,
+                sku: 'v1',
+                attributes: [{ name: 'foo-2', value: 'bar-2' }],
+              },
+            ],
           }
 
           const now = {
@@ -493,20 +607,26 @@ describe('Actions', () => {
               sku: 'v1',
               attributes: [{ name: 'foo-2', value: 'bar-3' }],
             },
-            variants: [{
-              id: 2,
-              sku: 'v1',
-              attributes: [{ name: 'foo', value: 'bar' }],
-            }],
+            variants: [
+              {
+                id: 2,
+                sku: 'v1',
+                attributes: [{ name: 'foo', value: 'bar' }],
+              },
+            ],
           }
 
-          it('should generate `changeMasterVariant` and `setAttribute` actions',
-          () => {
+          it('should generate `changeMasterVariant` and `setAttribute` actions', () => {
             const actions = productsSync.buildActions(now, before)
 
             expect(actions).toEqual([
               { action: 'changeMasterVariant', variantId: 1 },
-              { action: 'setAttribute', name: 'foo-2', value: 'bar-3', variantId: 1 },
+              {
+                action: 'setAttribute',
+                name: 'foo-2',
+                value: 'bar-3',
+                variantId: 1,
+              },
             ])
           })
         })
@@ -518,35 +638,41 @@ describe('Actions', () => {
     const before = {
       id: '123',
       masterVariant: {
-        id: 1, sku: 'v1', attributes: [{ name: 'foo', value: 'bar' }],
+        id: 1,
+        sku: 'v1',
+        attributes: [{ name: 'foo', value: 'bar' }],
       },
     }
 
     const now = {
       id: '123',
       masterVariant: {
-        id: 1, sku: '', attributes: [{ name: 'foo', value: 'bar' }],
+        id: 1,
+        sku: '',
+        attributes: [{ name: 'foo', value: 'bar' }],
       },
     }
 
     const actions = productsSync.buildActions(now, before)
-    expect(actions).toEqual([
-      { action: 'setSku', sku: null, variantId: 1 },
-    ])
+    expect(actions).toEqual([{ action: 'setSku', sku: null, variantId: 1 }])
   })
 
   it('should handle unsetting the key of a variant', () => {
     const before = {
       id: '123',
       masterVariant: {
-        id: 1, key: 'v1', attributes: [{ name: 'foo', value: 'bar' }],
+        id: 1,
+        key: 'v1',
+        attributes: [{ name: 'foo', value: 'bar' }],
       },
     }
 
     const now = {
       id: '123',
       masterVariant: {
-        id: 1, key: '', attributes: [{ name: 'foo', value: 'bar' }],
+        id: 1,
+        key: '',
+        attributes: [{ name: 'foo', value: 'bar' }],
       },
     }
 
@@ -570,10 +696,16 @@ describe('Actions', () => {
           { name: 'color', value: { label: { en: 'Color' }, key: 'red' } }, // lenum
           { name: 'cost', value: { centAmount: 990, currencyCode: 'EUR' } }, // money
           { name: 'reference', value: { typeId: 'product', id: '111' } }, // reference
-          { name: 'welcome', value: [ 'hello', 'world' ] }, // set text
-          { name: 'welcome2', value: [ { en: 'hello', it: 'ciao' }, { en: 'world', it: 'mondo' } ] }, // set ltext
-          { name: 'multicolor', value: [ 'red' ] }, // set enum
-          { name: 'multicolor2', value: [{ key: 'red', label: { en: 'red', it: 'rosso' } }] }, // set lenum
+          { name: 'welcome', value: ['hello', 'world'] }, // set text
+          {
+            name: 'welcome2',
+            value: [{ en: 'hello', it: 'ciao' }, { en: 'world', it: 'mondo' }],
+          }, // set ltext
+          { name: 'multicolor', value: ['red'] }, // set enum
+          {
+            name: 'multicolor2',
+            value: [{ key: 'red', label: { en: 'red', it: 'rosso' } }],
+          }, // set lenum
         ],
       },
     }
@@ -593,9 +725,18 @@ describe('Actions', () => {
           { name: 'reference', value: { typeId: 'category', id: '222' } }, // reference
           { name: 'welcome', value: ['hello'] }, // set text
           { name: 'welcome2', value: [{ en: 'hello', it: 'ciao' }] }, // set ltext
-          { name: 'multicolor', value: [ 'red', 'yellow' ] }, // set enum
-          { name: 'multicolor2', value: [ { key: 'red', label: { en: 'red', it: 'rosso' } }, { key: 'yellow', label: { en: 'yellow', it: 'giallo' } } ] }, // set lenum
-          { name: 'listWithEmptyValues', value: [ '', '', null, { id: '123', typeId: 'products' }] }, // set reference
+          { name: 'multicolor', value: ['red', 'yellow'] }, // set enum
+          {
+            name: 'multicolor2',
+            value: [
+              { key: 'red', label: { en: 'red', it: 'rosso' } },
+              { key: 'yellow', label: { en: 'yellow', it: 'giallo' } },
+            ],
+          }, // set lenum
+          {
+            name: 'listWithEmptyValues',
+            value: ['', '', null, { id: '123', typeId: 'products' }],
+          }, // set reference
         ],
       },
     }
@@ -603,18 +744,61 @@ describe('Actions', () => {
     const actions = productsSync.buildActions(now, before)
     expect(actions).toEqual([
       { action: 'setAttribute', variantId: 1, name: 'foo', value: 'qux' },
-      { action: 'setAttribute', variantId: 1, name: 'dog', value: { en: 'Doggy', it: 'Cane', de: undefined, es: 'perro' } },
+      {
+        action: 'setAttribute',
+        variantId: 1,
+        name: 'dog',
+        value: { en: 'Doggy', it: 'Cane', de: undefined, es: 'perro' },
+      },
       { action: 'setAttribute', variantId: 1, name: 'num', value: 100 },
       { action: 'setAttribute', variantId: 1, name: 'count', value: 'two' },
       { action: 'setAttribute', variantId: 1, name: 'size', value: 'small' },
       { action: 'setAttribute', variantId: 1, name: 'color', value: 'blue' },
-      { action: 'setAttribute', variantId: 1, name: 'cost', value: { centAmount: 550, currencyCode: 'EUR' } },
-      { action: 'setAttribute', variantId: 1, name: 'reference', value: { typeId: 'category', id: '222' } },
-      { action: 'setAttribute', variantId: 1, name: 'welcome', value: ['hello'] },
-      { action: 'setAttribute', variantId: 1, name: 'welcome2', value: [{ en: 'hello', it: 'ciao' }] },
-      { action: 'setAttribute', variantId: 1, name: 'multicolor', value: [ 'red', 'yellow' ] },
-      { action: 'setAttribute', variantId: 1, name: 'multicolor2', value: [ { key: 'red', label: { en: 'red', it: 'rosso' } }, { key: 'yellow', label: { en: 'yellow', it: 'giallo' } } ] }, // set lenum
-      { action: 'setAttribute', variantId: 1, name: 'listWithEmptyValues', value: [ '', '', null, { id: '123', typeId: 'products' }] }, // set reference
+      {
+        action: 'setAttribute',
+        variantId: 1,
+        name: 'cost',
+        value: { centAmount: 550, currencyCode: 'EUR' },
+      },
+      {
+        action: 'setAttribute',
+        variantId: 1,
+        name: 'reference',
+        value: { typeId: 'category', id: '222' },
+      },
+      {
+        action: 'setAttribute',
+        variantId: 1,
+        name: 'welcome',
+        value: ['hello'],
+      },
+      {
+        action: 'setAttribute',
+        variantId: 1,
+        name: 'welcome2',
+        value: [{ en: 'hello', it: 'ciao' }],
+      },
+      {
+        action: 'setAttribute',
+        variantId: 1,
+        name: 'multicolor',
+        value: ['red', 'yellow'],
+      },
+      {
+        action: 'setAttribute',
+        variantId: 1,
+        name: 'multicolor2',
+        value: [
+          { key: 'red', label: { en: 'red', it: 'rosso' } },
+          { key: 'yellow', label: { en: 'yellow', it: 'giallo' } },
+        ],
+      }, // set lenum
+      {
+        action: 'setAttribute',
+        variantId: 1,
+        name: 'listWithEmptyValues',
+        value: ['', '', null, { id: '123', typeId: 'products' }],
+      }, // set reference
     ])
   })
 
@@ -631,7 +815,8 @@ describe('Actions', () => {
     const now = {
       id: '123',
       masterVariant: {
-        id: 1, sku: '',
+        id: 1,
+        sku: '',
       },
       variants: [{ id: 2, sku: null }],
     }
@@ -653,7 +838,8 @@ describe('Actions', () => {
     const now = {
       id: '123',
       masterVariant: {
-        id: 1, key: '',
+        id: 1,
+        key: '',
       },
       variants: [{ id: 2, key: null }],
     }
@@ -667,7 +853,8 @@ describe('Actions', () => {
     const before = {
       id: '123',
       masterVariant: {
-        id: 1, sku: '',
+        id: 1,
+        sku: '',
       },
       variants: [{ id: 2 }],
     }
@@ -675,7 +862,8 @@ describe('Actions', () => {
     const now = {
       id: '123',
       masterVariant: {
-        id: 1, sku: '',
+        id: 1,
+        sku: '',
       },
       variants: [{ id: 2, sku: null }],
     }
@@ -689,7 +877,8 @@ describe('Actions', () => {
     const before = {
       id: '123',
       masterVariant: {
-        id: 1, key: '',
+        id: 1,
+        key: '',
       },
       variants: [{ id: 2 }],
     }
@@ -697,7 +886,8 @@ describe('Actions', () => {
     const now = {
       id: '123',
       masterVariant: {
-        id: 1, key: '',
+        id: 1,
+        key: '',
       },
       variants: [{ id: 2, key: null }],
     }
@@ -706,9 +896,7 @@ describe('Actions', () => {
     expect(actions).toEqual([])
   })
 
-  it(
-    'should build `setAttribute` action text/ltext attributes with long text',
-  () => {
+  it('should build `setAttribute` action text/ltext attributes with long text', () => {
     const longText = `
     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     Nunc ultricies fringilla tortor eu egestas.

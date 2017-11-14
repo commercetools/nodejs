@@ -3,23 +3,26 @@ import forEach from 'lodash.foreach'
 const REGEX_NUMBER = new RegExp(/^\d+$/)
 const REGEX_UNDERSCORE_NUMBER = new RegExp(/^_\d+$/)
 
-function preProcessCollection (collection = [], identifier = 'id') {
-  return collection.reduce((acc, currentValue, currentIndex) => {
-    acc.refByIndex[String(currentIndex)] = currentValue[identifier]
-    acc.refByIdentifier[currentValue[identifier]] = String(currentIndex)
-    return acc
-  }, {
-    refByIndex: {},
-    refByIdentifier: {},
-  })
+function preProcessCollection(collection = [], identifier = 'id') {
+  return collection.reduce(
+    (acc, currentValue, currentIndex) => {
+      acc.refByIndex[String(currentIndex)] = currentValue[identifier]
+      acc.refByIdentifier[currentValue[identifier]] = String(currentIndex)
+      return acc
+    },
+    {
+      refByIndex: {},
+      refByIdentifier: {},
+    }
+  )
 }
 
 // creates a hash of a location of an item in collection1 and collection2
-export default function findMatchingPairs (
+export default function findMatchingPairs(
   diff,
   before = [],
   now = [],
-  identifier = 'id',
+  identifier = 'id'
 ) {
   const result = {}
   const {

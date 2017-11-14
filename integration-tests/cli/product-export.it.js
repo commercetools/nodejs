@@ -12,10 +12,8 @@ import {
 import { createData, clearData } from './helpers/utils'
 
 let projectKey
-if (process.env.CI === 'true')
-  projectKey = 'product-export-integration-test'
-else
-  projectKey = process.env.npm_config_projectkey
+if (process.env.CI === 'true') projectKey = 'product-export-integration-test'
+else projectKey = process.env.npm_config_projectkey
 
 describe('Product Exporter', () => {
   let apiConfig
@@ -36,12 +34,12 @@ describe('Product Exporter', () => {
       clearData(apiConfig, 'taxCategories'),
     ])
 
-    const createdProductType = await createData(
-      apiConfig, 'productTypes', [sampleProductType],
-    )
-    const createdTaxCategory = await createData(
-      apiConfig, 'taxCategories', [sampleTaxCategory],
-    )
+    const createdProductType = await createData(apiConfig, 'productTypes', [
+      sampleProductType,
+    ])
+    const createdTaxCategory = await createData(apiConfig, 'taxCategories', [
+      sampleTaxCategory,
+    ])
 
     const productType = {
       typeId: 'product-type',
@@ -52,10 +50,7 @@ describe('Product Exporter', () => {
       id: createdTaxCategory[0].body.id,
     }
 
-    const sampleProducts = createProducts(
-      productType,
-      taxCategory,
-    )
+    const sampleProducts = createProducts(productType, taxCategory)
 
     await createData(apiConfig, 'products', sampleProducts)
   }, 10000)
@@ -69,7 +64,7 @@ describe('Product Exporter', () => {
   })
 
   describe('CLI basic functionality', () => {
-    it('should print usage information given the help flag', (done) => {
+    it('should print usage information given the help flag', done => {
       exec(`${bin} --help`, (error, stdout, stderr) => {
         expect(error).toBeFalsy()
         expect(stderr).toBeFalsy()
@@ -78,7 +73,7 @@ describe('Product Exporter', () => {
       })
     })
 
-    it('should print the module version given the version flag', (done) => {
+    it('should print the module version given the version flag', done => {
       exec(`${bin} --version`, (error, stdout, stderr) => {
         expect(error).toBeFalsy()
         expect(stderr).toBeFalsy()
@@ -89,9 +84,10 @@ describe('Product Exporter', () => {
   })
 
   describe('export function', () => {
-    it('should export products from the CTP', (done) => {
+    it('should export products from the CTP', done => {
       const filePath = tmp.fileSync().name
-      exec(`${bin} -o ${filePath} -p ${projectKey} --staged`,
+      exec(
+        `${bin} -o ${filePath} -p ${projectKey} --staged`,
         (cliError, stdout, stderr) => {
           expect(cliError).toBeFalsy()
           expect(stderr).toBeFalsy()
@@ -103,14 +99,14 @@ describe('Product Exporter', () => {
             expect(actual.length).toBe(2)
             // Assert that the 2 created products are the products returned
             expect(actual).toContainEqual(
-              expect.objectContaining(expectedProducts[0]),
+              expect.objectContaining(expectedProducts[0])
             )
             expect(actual).toContainEqual(
-              expect.objectContaining(expectedProducts[1]),
+              expect.objectContaining(expectedProducts[1])
             )
             done()
           })
-        },
+        }
       )
     })
   })

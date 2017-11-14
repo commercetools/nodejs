@@ -1,25 +1,123 @@
 {
-  "presets": [
-    ["env", {
-      "targets": {
-        "node": "current",
-        "browsers": "last 2 versions"
-      }
-    }]
-  ],
-  "plugins": [
-    "array-includes",
-    "transform-export-extensions",
-    "transform-flow-strip-types",
-    "transform-object-rest-spread",
-    [
-      "module-resolver",
-      {
-        "cwd": "./",
-        "alias": {
-          "types": "./types"
-        }
-      }
-    ]
-  ]
+  "env": {
+    "cli": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "node": "current"
+            },
+            "modules": "commonjs"
+          }
+        ],
+        "stage-0"
+      ],
+      "plugins": [
+        "array-includes",
+        "transform-export-extensions",
+        "transform-flow-strip-types",
+        "transform-object-rest-spread",
+        [
+          "module-resolver",
+          {
+            "cwd": "./",
+            "alias": {
+              "types": "./types"
+            }
+          }
+        ]
+      ]
+    },
+    "test": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "browsers": ["last 1 versions"]
+            }
+          }
+        ],
+        "stage-0"
+      ],
+      "plugins": [
+        "array-includes",
+        "transform-export-extensions",
+        "transform-flow-strip-types",
+        "transform-object-rest-spread",
+        [
+          "module-resolver",
+          {
+            "cwd": "./",
+            "alias": {
+              "types": "./types"
+            }
+          }
+        ]
+      ]
+    },
+    "development": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "browsers": ["last 2 versions"],
+              "node": "current"
+            },
+            "modules": false
+          }
+        ],
+        "stage-0"
+      ],
+      "plugins": [
+        "external-helpers",
+        "array-includes",
+        "transform-export-extensions",
+        "transform-flow-strip-types",
+        "transform-object-rest-spread",
+        [
+          "module-resolver",
+          {
+            "cwd": "./",
+            "alias": {
+              "types": "./types"
+            }
+          }
+        ]
+      ]
+    },
+    "production": {
+      "presets": [
+        [
+          "env",
+          {
+            "targets": {
+              "browsers": ["last 2 versions"],
+              "node": "current"
+            },
+            "modules": false
+          }
+        ],
+        "stage-0"
+      ],
+      "plugins": [
+        "external-helpers",
+        "array-includes",
+        "transform-export-extensions",
+        "transform-flow-strip-types",
+        "transform-object-rest-spread",
+        [
+          "module-resolver",
+          {
+            "cwd": "./",
+            "alias": {
+              "types": "./types"
+            }
+          }
+        ]
+      ]
+    }
+  }
 }

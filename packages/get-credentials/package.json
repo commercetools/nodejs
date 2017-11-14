@@ -20,6 +20,9 @@
   "files": [
     "lib"
   ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=cli babel src --out-dir lib"
+  },
   "devDependencies": {
     "sinon": "^1.17.7"
   },

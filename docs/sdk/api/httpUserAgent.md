@@ -10,7 +10,7 @@ npm install --save @commercetools/http-user-agent
 
 #### Browser
 ```html
-<script src="https://unpkg.com/@commercetools/http-user-agent/dist/commercetools-http-user-agent.min.js"></script>
+<script src="https://unpkg.com/@commercetools/http-user-agent/dist/commercetools-http-user-agent.umd.min.js"></script>
 <script>// global: CommercetoolsHttpUserAgent</script>
 ```
 

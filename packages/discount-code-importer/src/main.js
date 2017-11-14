@@ -8,42 +8,56 @@ import type {
   ConstructorOptions,
   Summary,
 } from 'types/discountCodes'
-import type {
-  Client,
-  SyncAction,
- } from 'types/sdk'
+import type { Client, SyncAction } from 'types/sdk'
 import npmlog from 'npmlog'
 import Promise from 'bluebird'
 import _ from 'lodash'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
-import { createAuthMiddlewareForClientCredentialsFlow }
-  from '@commercetools/sdk-middleware-auth'
+import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
-import { createUserAgentMiddleware }
-  from '@commercetools/sdk-middleware-user-agent'
+import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import { createSyncDiscountCodes } from '@commercetools/sync-actions'
 import pkg from '../package.json'
 
+class DiscountCodeImportError extends Error {
+  error: any
+  summary: string
+  message: string
+
+  constructor(
+    message: string,
+    summary: string = 'No summary provided.',
+    error: any = null
+  ) {
+    super(message)
+
+    this.message = message
+    this.summary = summary
+    this.error = error
+  }
+}
+
 export default class DiscountCodeImport {
   // Set flowtype annotations
-  accessToken: string;
-  batchSize: number;
-  continueOnProblems: boolean;
-  client: Client;
-  apiConfig: ApiConfigOptions;
-  logger: LoggerOptions;
-  _summary: Summary;
-  syncDiscountCodes: SyncAction;
+  accessToken: string
+  batchSize: number
+  continueOnProblems: boolean
+  client: Client
+  apiConfig: ApiConfigOptions
+  logger: LoggerOptions
+  _summary: Summary
+  syncDiscountCodes: SyncAction
 
-  constructor (
-    options: ConstructorOptions,
-    logger: LoggerOptions,
-  ) {
+  constructor(options: ConstructorOptions, logger: LoggerOptions) {
     if (!options.apiConfig)
-      throw new Error('The contructor must be passed an `apiConfig` object')
+      throw new DiscountCodeImportError(
+        'The contructor must be passed an `apiConfig` object'
+      )
     if (options.batchSize > 200)
-      throw new Error('The `batchSize` must not be more than 200')
+      throw new DiscountCodeImportError(
+        'The `batchSize` must not be more than 200'
+      )
     this.apiConfig = options.apiConfig
     this.accessToken = options.accessToken
     this.batchSize = options.batchSize || 50
@@ -71,25 +85,24 @@ export default class DiscountCodeImport {
   }
 
   // Use static method because this is not called on any instance
-  static _buildPredicate (codeObjects: CodeDataArray): string {
+  static _buildPredicate(codeObjects: CodeDataArray): string {
     const predicateArray = _.map(codeObjects, 'code')
     return `code in ("${predicateArray.join('", "')}")`
   }
 
   // Wrapper function for compatibility with CLI
-  processStream (chunk: ChunkOptions, cb: () => mixed) {
+  processStream(chunk: ChunkOptions, cb: () => mixed) {
     this.logger.verbose(`Starting conversion of ${chunk.length} discount codes`)
-    return this._processBatches(chunk)
-      .then(cb)
-      // No catch block as errors will be caught in the CLI
+    return this._processBatches(chunk).then(cb)
+    // No catch block as errors will be caught in the CLI
   }
 
   // Public function for direct module usage
-  run (codes: CodeDataArray) {
+  run(codes: CodeDataArray) {
     return this._processBatches(codes)
   }
 
-  _processBatches (codes: CodeDataArray) {
+  _processBatches(codes: CodeDataArray) {
     // Batch to `batchSize` to reduce necessary fetch API calls
     const batchedList = _.chunk(codes, this.batchSize)
     return Promise.mapSeries(batchedList, (codeObjects: CodeDataArray) => {
@@ -101,49 +114,50 @@ export default class DiscountCodeImport {
         .perPage(this.batchSize)
         .build()
       const req = this._buildRequest(uri, 'GET')
-      return this.client.execute(req)
-        .then(({ body: { results: existingCodes } }: Object) => (
+      return this.client
+        .execute(req)
+        .then(({ body: { results: existingCodes } }: Object) =>
           this._createOrUpdate(codeObjects, existingCodes)
-        ))
+        )
     })
       .then(() => Promise.resolve())
-      .catch(error => Promise.reject({
-        error: error.message || error,
-        summary: this._summary,
-      }),
+      .catch(
+        caughtError =>
+          new DiscountCodeImportError(
+            'Processing batches failed',
+            caughtError.message || caughtError,
+            this._summary
+          )
       )
   }
 
-  _createOrUpdate (newCodes: CodeDataArray, existingCodes: CodeDataArray) {
+  _createOrUpdate(newCodes: CodeDataArray, existingCodes: CodeDataArray) {
     return Promise.map(newCodes, (newCode: CodeData) => {
       const existingCode = _.find(existingCodes, ['code', newCode.code])
       if (existingCode)
         return this._update(newCode, existingCode)
-          .then((response) => {
+          .then(response => {
             if (response && response.statusCode === 304)
               this._summary.unchanged += 1
-            else
-              this._summary.updated += 1
+            else this._summary.updated += 1
             return Promise.resolve()
           })
-          .catch((error) => {
+          .catch(error => {
             if (this.continueOnProblems) {
               this._summary.updateErrorCount += 1
-              this._summary.errors.push(
-                error.message || error,
-              )
+              this._summary.errors.push(error.message || error)
               // eslint-disable-next-line max-len
-              const msg = 'Update error occured but ignored. See summary for details'
+              const msg =
+                'Update error occured but ignored. See summary for details'
               this.logger.error(msg)
               return Promise.resolve()
             }
             // eslint-disable-next-line max-len
-            const msg = 'Process stopped due to error while creating discount code. See summary for details'
+            const msg =
+              'Process stopped due to error while creating discount code. See summary for details'
             this.logger.error(msg)
             this._summary.updateErrorCount += 1
-            this._summary.errors.push(
-              error.message || error,
-            )
+            this._summary.errors.push(error.message || error)
             return Promise.reject(error)
           })
       return this._create(newCode)
@@ -151,30 +165,28 @@ export default class DiscountCodeImport {
           this._summary.created += 1
           return Promise.resolve()
         })
-        .catch((error) => {
+        .catch(error => {
           if (this.continueOnProblems) {
             this._summary.createErrorCount += 1
-            this._summary.errors.push(
-              error.message || error,
-            )
+            this._summary.errors.push(error.message || error)
             // eslint-disable-next-line max-len
-            const msg = 'Create error occured but ignored. See summary for details'
+            const msg =
+              'Create error occured but ignored. See summary for details'
             this.logger.error(msg)
             return Promise.resolve()
           }
           // eslint-disable-next-line max-len
-          const msg = 'Process stopped due to error while creating discount code. See summary for details'
+          const msg =
+            'Process stopped due to error while creating discount code. See summary for details'
           this.logger.error(msg)
           this._summary.createErrorCount += 1
-          this._summary.errors.push(
-            error.message || error,
-          )
+          this._summary.errors.push(error.message || error)
           return Promise.reject(error)
         })
     })
   }
 
-  _update (newCode: CodeData, existingCode: CodeData) {
+  _update(newCode: CodeData, existingCode: CodeData) {
     const actions = this.syncDiscountCodes.buildActions(newCode, existingCode)
     // don't call API if there's no update action
     if (!actions.length) return Promise.resolve({ statusCode: 304 })
@@ -189,7 +201,7 @@ export default class DiscountCodeImport {
     return this.client.execute(req)
   }
 
-  _create (code: CodeData) {
+  _create(code: CodeData) {
     const service = this._createService()
     const uri = service.build()
     const req = this._buildRequest(uri, 'POST', code)
@@ -197,13 +209,13 @@ export default class DiscountCodeImport {
     return this.client.execute(req)
   }
 
-  _createService () {
+  _createService() {
     return createRequestBuilder({
       projectKey: this.apiConfig.projectKey,
     }).discountCodes
   }
 
-  _resetSummary () {
+  _resetSummary() {
     this._summary = {
       created: 0,
       updated: 0,
@@ -215,17 +227,12 @@ export default class DiscountCodeImport {
     return this._summary
   }
 
-  _buildRequest (
-    uri: string,
-    method: string,
-    body?: Object,
-  ) {
+  _buildRequest(uri: string, method: string, body?: Object) {
     const request: Object = {
       uri,
       method,
     }
-    if (body)
-      request.body = body
+    if (body) request.body = body
     if (this.accessToken)
       request.headers = {
         Authorization: `Bearer ${this.accessToken}`,
@@ -233,7 +240,7 @@ export default class DiscountCodeImport {
     return request
   }
 
-  summaryReport () {
+  summaryReport() {
     const {
       created,
       updated,
@@ -246,10 +253,17 @@ export default class DiscountCodeImport {
       message = 'Summary: nothing to do, everything is fine'
     else
       // eslint-disable-next-line max-len
-      message = `Summary: there were ${created + updated} successfully imported discount codes (${created} were newly created, ${updated} were updated and ${unchanged} were unchanged).`
+      message = `Summary: there were ${created +
+        updated} successfully imported discount codes (${
+        created
+      } were newly created, ${updated} were updated and ${
+        unchanged
+      } were unchanged).`
     if (createErrorCount || updateErrorCount)
       // eslint-disable-next-line max-len
-      message += ` ${createErrorCount + updateErrorCount} errors occured (${createErrorCount} create errors and ${updateErrorCount} update errors.)`
+      message += ` ${createErrorCount + updateErrorCount} errors occured (${
+        createErrorCount
+      } create errors and ${updateErrorCount} update errors.)`
     return {
       reportMessage: message,
       detailedSummary: this._summary,
