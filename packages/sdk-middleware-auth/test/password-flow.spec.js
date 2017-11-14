@@ -1,6 +1,4 @@
-import {
-  createAuthMiddlewareForPasswordFlow,
-} from '../src'
+import { createAuthMiddlewareForPasswordFlow } from '../src'
 
 import authMiddlewareBase from '../src/base-auth-flow'
 
@@ -9,7 +7,7 @@ import authMiddlewareBase from '../src/base-auth-flow'
 // it will be hoisted within the scope of that method
 jest.mock('../src/base-auth-flow')
 
-function createTestRequest (options) {
+function createTestRequest(options) {
   return {
     url: '',
     method: 'GET',
@@ -19,7 +17,7 @@ function createTestRequest (options) {
   }
 }
 
-function createTestMiddlewareOptions (options) {
+function createTestMiddlewareOptions(options) {
   return {
     host: 'https://auth.commercetools.co',
     projectKey: 'foo',
@@ -35,7 +33,6 @@ function createTestMiddlewareOptions (options) {
   }
 }
 
-
 describe('Password Flow', () => {
   afterAll(() => {
     jest.unmock('../src/base-auth-flow')
@@ -50,7 +47,7 @@ describe('Password Flow', () => {
         resolve,
         reject,
       }
-      const next = (actualParams) => {
+      const next = actualParams => {
         expect(actualParams).toMatchObject({
           request,
           response,
@@ -64,10 +61,9 @@ describe('Password Flow', () => {
       }
       const middlewareOptions = createTestMiddlewareOptions()
       const authMiddleware = createAuthMiddlewareForPasswordFlow(
-        middlewareOptions,
+        middlewareOptions
       )
 
       authMiddleware(next)(request, response)
-    }),
-  )
+    }))
 })

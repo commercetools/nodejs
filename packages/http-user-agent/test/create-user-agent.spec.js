@@ -1,7 +1,8 @@
 import createHttpUserAgent from '../src'
 
 // eslint-disable-next-line max-len
-const userAgentBrowser = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36'
+const userAgentBrowser =
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36'
 
 describe('for browser', () => {
   const originalWindow = global.window
@@ -68,16 +69,19 @@ describe('for node', () => {
 
 describe('validation', () => {
   it('throws if options is undefined', () => {
-    expect(() => createHttpUserAgent())
-      .toThrowError('Missing required option `name`')
+    expect(() => createHttpUserAgent()).toThrowError(
+      'Missing required option `name`'
+    )
   })
   it('throws if options is empty', () => {
-    expect(() => createHttpUserAgent({}))
-      .toThrowError('Missing required option `name`')
+    expect(() => createHttpUserAgent({})).toThrowError(
+      'Missing required option `name`'
+    )
   })
   it('throws if options is missing name', () => {
-    expect(() => createHttpUserAgent({ foo: 'bar' }))
-      .toThrowError('Missing required option `name`')
+    expect(() => createHttpUserAgent({ foo: 'bar' })).toThrowError(
+      'Missing required option `name`'
+    )
   })
 })
 
@@ -88,7 +92,11 @@ describe('optional information', () => {
       libraryName: 'my-awesome-library',
     })
     // eslint-disable-next-line max-len
-    expect(userAgent).toBe(`commercetools-node-sdk Node.js/${process.version.slice(1)} (${process.platform}; ${process.arch}) my-awesome-library`)
+    expect(userAgent).toBe(
+      `commercetools-node-sdk Node.js/${process.version.slice(1)} (${
+        process.platform
+      }; ${process.arch}) my-awesome-library`
+    )
   })
   it('create user agent with library name and version', () => {
     const userAgent = createHttpUserAgent({
@@ -97,7 +105,11 @@ describe('optional information', () => {
       libraryVersion: '1.0.0',
     })
     // eslint-disable-next-line max-len
-    expect(userAgent).toBe(`commercetools-node-sdk Node.js/${process.version.slice(1)} (${process.platform}; ${process.arch}) my-awesome-library/1.0.0`)
+    expect(userAgent).toBe(
+      `commercetools-node-sdk Node.js/${process.version.slice(1)} (${
+        process.platform
+      }; ${process.arch}) my-awesome-library/1.0.0`
+    )
   })
   it('create user agent with contact url', () => {
     const userAgent = createHttpUserAgent({
@@ -105,7 +117,11 @@ describe('optional information', () => {
       contactUrl: 'https://commercetools.com',
     })
     // eslint-disable-next-line max-len
-    expect(userAgent).toBe(`commercetools-node-sdk Node.js/${process.version.slice(1)} (${process.platform}; ${process.arch}) (+https://commercetools.com)`)
+    expect(userAgent).toBe(
+      `commercetools-node-sdk Node.js/${process.version.slice(1)} (${
+        process.platform
+      }; ${process.arch}) (+https://commercetools.com)`
+    )
   })
   it('create user agent with contact email', () => {
     const userAgent = createHttpUserAgent({
@@ -113,7 +129,11 @@ describe('optional information', () => {
       contactEmail: 'helpdesk@commercetools.com',
     })
     // eslint-disable-next-line max-len
-    expect(userAgent).toBe(`commercetools-node-sdk Node.js/${process.version.slice(1)} (${process.platform}; ${process.arch}) (+helpdesk@commercetools.com)`)
+    expect(userAgent).toBe(
+      `commercetools-node-sdk Node.js/${process.version.slice(1)} (${
+        process.platform
+      }; ${process.arch}) (+helpdesk@commercetools.com)`
+    )
   })
   it('create user agent with full contact info', () => {
     const userAgent = createHttpUserAgent({
@@ -122,6 +142,12 @@ describe('optional information', () => {
       contactEmail: 'helpdesk@commercetools.com',
     })
     // eslint-disable-next-line max-len
-    expect(userAgent).toBe(`commercetools-node-sdk Node.js/${process.version.slice(1)} (${process.platform}; ${process.arch}) (+https://commercetools.com; +helpdesk@commercetools.com)`)
+    expect(userAgent).toBe(
+      `commercetools-node-sdk Node.js/${process.version.slice(1)} (${
+        process.platform
+      }; ${
+        process.arch
+      }) (+https://commercetools.com; +helpdesk@commercetools.com)`
+    )
   })
 })

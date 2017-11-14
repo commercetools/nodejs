@@ -58,7 +58,10 @@ describe('Actions', () => {
       name: { en: 'Car', de: 'Auto' },
       key: 'unique-key',
       masterVariant: {
-        id: 1, sku: '001', attributes: [{ name: 'a1', value: 1 }] },
+        id: 1,
+        sku: '001',
+        attributes: [{ name: 'a1', value: 1 }],
+      },
       variants: [
         { id: 2, sku: '002', attributes: [{ name: 'a2', value: 2 }] },
         { id: 3, sku: '003', attributes: [{ name: 'a3', value: 3 }] },
@@ -68,7 +71,10 @@ describe('Actions', () => {
       name: { en: 'Sport car' },
       key: 'unique-key-2',
       masterVariant: {
-        id: 1, sku: '100', attributes: [{ name: 'a1', value: 100 }] },
+        id: 1,
+        sku: '100',
+        attributes: [{ name: 'a1', value: 100 }],
+      },
       variants: [
         { id: 2, sku: '200', attributes: [{ name: 'a2', value: 200 }] },
         { id: 3, sku: '300', attributes: [{ name: 'a3', value: 300 }] },
@@ -101,24 +107,45 @@ describe('Actions', () => {
       searchKeywords: {
         en: [
           { text: 'Multi tool' },
-          { text: 'Swiss Army Knife', suggestTokenizer: { type: 'whitespace' } },
+          {
+            text: 'Swiss Army Knife',
+            suggestTokenizer: { type: 'whitespace' },
+          },
         ],
         de: [
-          { text: 'Schweizer Messer', suggestTokenizer: { type: 'custom', inputs: [ 'schweizer messer', 'offiziersmesser', 'sackmesser' ] } },
+          {
+            text: 'Schweizer Messer',
+            suggestTokenizer: {
+              type: 'custom',
+              inputs: ['schweizer messer', 'offiziersmesser', 'sackmesser'],
+            },
+          },
         ],
       },
     }
     const now = {
       searchKeywords: {
         en: [
-          { text: 'Swiss Army Knife', suggestTokenizer: { type: 'whitespace' } },
+          {
+            text: 'Swiss Army Knife',
+            suggestTokenizer: { type: 'whitespace' },
+          },
         ],
         de: [
-          { text: 'Schweizer Messer', suggestTokenizer: { type: 'custom', inputs: [ 'schweizer messer', 'offiziersmesser', 'sackmesser', 'messer' ] } },
+          {
+            text: 'Schweizer Messer',
+            suggestTokenizer: {
+              type: 'custom',
+              inputs: [
+                'schweizer messer',
+                'offiziersmesser',
+                'sackmesser',
+                'messer',
+              ],
+            },
+          },
         ],
-        it: [
-          { text: 'Coltello svizzero' },
-        ],
+        it: [{ text: 'Coltello svizzero' }],
       },
     }
     /* eslint-enable max-len */
@@ -133,10 +160,19 @@ describe('Actions', () => {
       searchKeywords: {
         en: [
           { text: 'Multi tool' },
-          { text: 'Swiss Army Knife', suggestTokenizer: { type: 'whitespace' } },
+          {
+            text: 'Swiss Army Knife',
+            suggestTokenizer: { type: 'whitespace' },
+          },
         ],
         de: [
-          { text: 'Schweizer Messer', suggestTokenizer: { type: 'custom', inputs: [ 'schweizer messer', 'offiziersmesser', 'sackmesser' ] } },
+          {
+            text: 'Schweizer Messer',
+            suggestTokenizer: {
+              type: 'custom',
+              inputs: ['schweizer messer', 'offiziersmesser', 'sackmesser'],
+            },
+          },
         ],
       },
     }
@@ -151,7 +187,6 @@ describe('Actions', () => {
         { id: 'aebe844e-0616-420a-8397-a22c48d5e99f' },
         { id: '34cae6ad-5898-4f94-973b-ae9ceb7464ce' },
       ],
-
     }
     const now = {
       categories: [

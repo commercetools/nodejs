@@ -30,6 +30,9 @@
     "lib",
     "bin"
   ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=cli babel src --out-dir lib"
+  },
   "dependencies": {
     "@commercetools/api-request-builder": "^3.1.1",
     "@commercetools/get-credentials": "^2.1.0",

@@ -19,7 +19,7 @@
   "contributors": [
     "Williams Omayuku <williams.omayuku@commercetools.com>"
   ],
-  "main": "./lib/index.js",
+  "main": "lib/index.js",
   "bin": {
     "csvparserdiscountcode": "bin/csvparserdiscountcode.js"
   },
@@ -27,6 +27,9 @@
     "bin",
     "lib"
   ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=cli babel src --out-dir lib"
+  },
   "dependencies": {
     "JSONStream": "^1.3.1",
     "csv-parser": "^1.11.0",

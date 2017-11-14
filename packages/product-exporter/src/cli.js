@@ -13,56 +13,47 @@ const args = yargs
   .usage(
     `
 Usage: $0 [options]
-${description}`,
+${description}`
   )
   .showHelpOnFail(false)
-
   .option('help', {
     alias: 'h',
   })
   .help('help', 'Show help text.')
-
   .version()
   .alias('version', 'v')
-
   .option('projectKey', {
     alias: 'p',
     describe: 'API project key',
     demandOption: true,
     type: 'string',
   })
-
   .option('apiUrl', {
     default: 'https://api.commercetools.com',
     describe: 'The host URL of the HTTP API service',
     type: 'string',
   })
-
   .option('authUrl', {
     default: 'https://auth.commercetools.com',
     describe: 'The host URL of the OAuth API service',
     type: 'string',
   })
-
   .option('accessToken', {
     describe: `CTP client access token
 Required scopes: ['view_products', 'view_customers']`,
     type: 'string',
   })
-
   .option('output', {
     alias: 'o',
     default: 'stdout',
     describe: 'Path to output',
     type: 'string',
   })
-  .coerce('output', (arg) => {
-    if (arg !== 'stdout')
-      return fs.createWriteStream(String(arg))
+  .coerce('output', arg => {
+    if (arg !== 'stdout') return fs.createWriteStream(String(arg))
 
     return process.stdout
   })
-
   .option('batchSize', {
     alias: 'b',
     default: 20,
@@ -70,21 +61,19 @@ Required scopes: ['view_products', 'view_customers']`,
     type: 'number',
   })
   // Limit batchSize to 500 in accord with the API
-  .coerce('batchSize', (arg) => {
+  .coerce('batchSize', arg => {
     const batchSize = parseInt(arg, 10)
     if (batchSize <= 0 || batchSize > 500)
       throw new Error('Invalid batchSize, must be a number between 1 and 500')
 
     return batchSize
   })
-
   // http://dev.commercetools.com/http-api.html#reference-expansion for further
   // explanation about reference field expansion
   .option('expand', {
     describe: 'Reference field or fields to expand in the returned products',
     type: 'array',
   })
-
   .option('exportType', {
     alias: 'e',
     choices: ['json', 'chunk'],
@@ -92,41 +81,34 @@ Required scopes: ['view_products', 'view_customers']`,
     describe: 'Flag if products should be exported as `JSON` strings or chunks',
     type: 'string',
   })
-
   .option('predicate', {
     describe: '`Predicate` specifying characteristics of products to fetch',
     type: 'string',
   })
-
   .option('staged', {
     alias: 's',
     describe: 'Specify if all or published products should be fetched',
     type: 'boolean',
   })
-
   .option('total', {
     alias: 't',
     describe: 'Total number of products to fetch',
     type: 'number',
   })
-
   .option('logLevel', {
     default: 'info',
     describe: 'Logging level: error, warn, info or debug',
     type: 'string',
   })
-
   .option('prettyLogs', {
     describe: 'Pretty print logs to the terminal',
     type: 'boolean',
   })
-
   .option('logFile', {
     default: 'product-exporter.log',
     describe: 'Path to file where logs should be saved',
     type: 'string',
-  })
-  .argv
+  }).argv
 
 // instantiate logger
 const loggerConfig = {
@@ -135,30 +117,25 @@ const loggerConfig = {
 }
 const logger = pino(loggerConfig)
 
-
 // print errors to stderr if we use stdout for data output
 // if we save data to output file errors are already logged by pino
-const logError = (error) => {
+const logError = error => {
   const errorFormatter = new PrettyError()
 
   if (logger.level === 'debug')
     process.stderr.write(`ERR: ${errorFormatter.render(error)}`)
-  else
-    process.stderr.write(`ERR: ${error.message || error}`)
+  else process.stderr.write(`ERR: ${error.message || error}`)
 }
 
-const errorHandler = (errors) => {
-  if (Array.isArray(errors))
-    errors.forEach(logError)
-  else
-    logError(errors)
+const errorHandler = errors => {
+  if (Array.isArray(errors)) errors.forEach(logError)
+  else logError(errors)
 
   process.exitCode = 1
 }
 
-const resolveCredentials = (_args) => {
-  if (_args.accessToken)
-    return Promise.resolve({})
+const resolveCredentials = _args => {
+  if (_args.accessToken) return Promise.resolve({})
   return getCredentials(_args.projectKey)
 }
 
@@ -171,7 +148,7 @@ if (args.output === process.stdout)
 args.output.on('error', errorHandler)
 
 resolveCredentials(args)
-  .then((credentials) => {
+  .then(credentials => {
     const apiConfig = {
       host: args.authUrl,
       apiUrl: args.apiUrl,
@@ -198,7 +175,7 @@ resolveCredentials(args)
       apiConfig,
       productExportConfigOptions,
       myLogger,
-      accessToken,
+      accessToken
     )
   })
   .then(productExporter => productExporter.run(args.output))

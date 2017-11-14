@@ -17,7 +17,7 @@ export const referenceActionsList = [
  * SYNC FUNCTIONS
  */
 
-export function actionsMapBase (diff, oldObj, newObj) {
+export function actionsMapBase(diff, oldObj, newObj) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
     diff,
@@ -26,7 +26,7 @@ export function actionsMapBase (diff, oldObj, newObj) {
   })
 }
 
-export function actionsMapReferences (diff, oldObj, newObj) {
+export function actionsMapReferences(diff, oldObj, newObj) {
   return buildReferenceActions({
     actions: referenceActionsList,
     diff,

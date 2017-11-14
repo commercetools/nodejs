@@ -1,30 +1,27 @@
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createClient } from '@commercetools/sdk-client'
 import { getCredentials } from '@commercetools/get-credentials'
-import {
-  createAuthMiddlewareForClientCredentialsFlow,
-} from '@commercetools/sdk-middleware-auth'
-import {
-  createHttpMiddleware,
-} from '@commercetools/sdk-middleware-http'
-import {
-  createQueueMiddleware,
-} from '@commercetools/sdk-middleware-queue'
-import {
-  createUserAgentMiddleware,
-} from '@commercetools/sdk-middleware-user-agent'
+import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
+import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
+import { createQueueMiddleware } from '@commercetools/sdk-middleware-queue'
+import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import omit from 'lodash.omit'
 import { clearData } from './../cli/helpers/utils'
 import pkg from '../package.json'
 
 let projectKey
-if (process.env.CI === 'true')
-  projectKey = 'node-sdk-integration-tests'
-else
-  projectKey = process.env.npm_config_projectkey
+if (process.env.CI === 'true') projectKey = 'node-sdk-integration-tests'
+else projectKey = process.env.npm_config_projectkey
+
+let uniqueIdCounter = 0
+function uniqueId(prefix) {
+  const id = `${Date.now()}_${uniqueIdCounter}`
+  uniqueIdCounter += 1
+  return prefix ? prefix + id : id
+}
 
 describe('Channels', () => {
-  const ignoredResponseKeys = [ 'id', 'createdAt', 'lastModifiedAt' ]
+  const ignoredResponseKeys = ['id', 'createdAt', 'lastModifiedAt']
   const service = createRequestBuilder({ projectKey }).channels
   const httpMiddleware = createHttpMiddleware({
     host: 'https://api.sphere.io',
@@ -43,30 +40,31 @@ describe('Channels', () => {
   let client
   let apiConfig
 
-  beforeAll(() => getCredentials(projectKey)
-    .then((credentials) => {
-      apiConfig = {
-        host: 'https://auth.sphere.io',
-        apiUrl: 'https://api.sphere.io',
-        projectKey,
-        credentials: {
-          clientId: credentials.clientId,
-          clientSecret: credentials.clientSecret,
-        },
-      }
-      const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
-        apiConfig,
-      )
-      client = createClient({
-        middlewares: [
-          authMiddleware,
-          queueMiddleware,
-          userAgentMiddleware,
-          httpMiddleware,
-        ],
+  beforeAll(() =>
+    getCredentials(projectKey)
+      .then(credentials => {
+        apiConfig = {
+          host: 'https://auth.sphere.io',
+          apiUrl: 'https://api.sphere.io',
+          projectKey,
+          credentials: {
+            clientId: credentials.clientId,
+            clientSecret: credentials.clientSecret,
+          },
+        }
+        const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
+          apiConfig
+        )
+        client = createClient({
+          middlewares: [
+            authMiddleware,
+            queueMiddleware,
+            userAgentMiddleware,
+            httpMiddleware,
+          ],
+        })
       })
-    })
-    .then(() => clearData(apiConfig, 'channels')),
+      .then(() => clearData(apiConfig, 'channels'))
   )
 
   it('create', () => {
@@ -84,8 +82,7 @@ describe('Channels', () => {
       },
     }
 
-    return client.execute(createRequest)
-    .then((response) => {
+    return client.execute(createRequest).then(response => {
       channelResponse = response.body
       expect(omit(response.body, ignoredResponseKeys)).toEqual({
         ...body,
@@ -106,8 +103,7 @@ describe('Channels', () => {
       },
     }
 
-    return client.execute(fetchRequest)
-    .then((response) => {
+    return client.execute(fetchRequest).then(response => {
       expect(response.body.results).toHaveLength(1)
       expect(response.statusCode).toBe(200)
     })
@@ -119,9 +115,7 @@ describe('Channels', () => {
       method: 'POST',
       body: {
         version: channelResponse.version,
-        actions: [
-          { action: 'addRoles', roles: ['OrderImport'] },
-        ],
+        actions: [{ action: 'addRoles', roles: ['OrderImport'] }],
       },
       headers: {
         Accept: 'application/json',
@@ -129,8 +123,7 @@ describe('Channels', () => {
       },
     }
 
-    return client.execute(updateRequest)
-    .then((response) => {
+    return client.execute(updateRequest).then(response => {
       channelResponse = response.body
       expect(omit(response.body, ignoredResponseKeys)).toEqual({
         key,
@@ -153,16 +146,14 @@ describe('Channels', () => {
     }
 
     let resultCount = 0
-    return client.process(
-      processRequest,
-      (payload) => {
+    return client
+      .process(processRequest, payload => {
         resultCount += payload.body.results.length
         return Promise.resolve(payload.body.results.map(c => c.id))
-      },
-    )
-    .then((response) => {
-      expect(response).toHaveLength(resultCount)
-    })
+      })
+      .then(response => {
+        expect(response).toHaveLength(resultCount)
+      })
   })
 
   it('delete', () => {
@@ -180,16 +171,8 @@ describe('Channels', () => {
       },
     }
 
-    return client.execute(deleteRequest)
-    .then((response) => {
+    return client.execute(deleteRequest).then(response => {
       expect(response.statusCode).toBe(200)
     })
   })
 })
-
-let uniqueIdCounter = 0
-function uniqueId (prefix) {
-  const id = `${Date.now()}_${uniqueIdCounter}`
-  uniqueIdCounter += 1
-  return prefix ? prefix + id : id
-}

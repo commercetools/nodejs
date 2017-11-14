@@ -11,17 +11,20 @@ describe('DiscountCodeImporter', () => {
   }
 
   const codes = JSON.parse(
-    fs.readFileSync(path.join(__dirname, 'helpers/sampleCodes.json')),
+    fs.readFileSync(path.join(__dirname, 'helpers/sampleCodes.json'))
   )
 
   let codeImport
   beforeEach(() => {
-    codeImport = new DiscountCodeImport({
-      apiConfig: {
-        projectKey: 'myProjectKey',
+    codeImport = new DiscountCodeImport(
+      {
+        apiConfig: {
+          projectKey: 'myProjectKey',
+        },
+        accessToken: 'myAccessToken',
       },
-      accessToken: 'myAccessToken',
-    }, logger)
+      logger
+    )
   })
 
   describe('::constructor', () => {
@@ -39,18 +42,21 @@ describe('DiscountCodeImporter', () => {
 
     it('should throw if no `apiConfig` in `options` parameter', () => {
       expect(() => new DiscountCodeImport({ foo: 'bar' })).toThrow(
-        /The contructor must be passed an `apiConfig` object/,
+        /The contructor must be passed an `apiConfig` object/
       )
     })
 
-    it('should throw if `batchSize` is more than 500', () => {
-      expect(() => new DiscountCodeImport({
-        apiConfig: {},
-        batchSize: 501,
-      }, logger))
-      .toThrow(
-        /The `batchSize` must not be more than 500/,
-      )
+    it('should throw if `batchSize` is more than 200', () => {
+      expect(
+        () =>
+          new DiscountCodeImport(
+            {
+              apiConfig: {},
+              batchSize: 205,
+            },
+            logger
+          )
+      ).toThrow(/The `batchSize` must not be more than 200/)
     })
   })
 
@@ -59,7 +65,7 @@ describe('DiscountCodeImporter', () => {
       expect(codeImport.processStream).toBeDefined()
     })
 
-    it('should call callback when done', (done) => {
+    it('should call callback when done', done => {
       codeImport._processBatches = jest.fn()
       codeImport._processBatches.mockReturnValue(Promise.resolve())
       const myMockCallback = jest.fn(() => {
@@ -93,7 +99,7 @@ describe('DiscountCodeImporter', () => {
       const predicate = DiscountCodeImport._buildPredicate(codes)
       expect(predicate).toMatch(
         // eslint-disable-next-line max-len
-        'code in ("WILzALjj417", "WILBZ2UYol8", "WIL1EEWHOnY", "WIopQm5d789", "WIopSEF55789")',
+        'code in ("WILzALjj417", "WILBZ2UYol8", "WIL1EEWHOnY", "WIopQm5d789", "WIopSEF55789")'
       )
     })
   })
@@ -111,12 +117,12 @@ describe('DiscountCodeImporter', () => {
       expect(codeImport._createOrUpdate).toHaveBeenCalledTimes(1)
       expect(codeImport._createOrUpdate).toHaveBeenCalledWith(
         codes,
-        response.body.results,
+        response.body.results
       )
     })
 
     it('should reject on error', async () => {
-      const errorSummary = {
+      const errorSummary = new Error({
         error: 'some random error',
         summary: {
           created: 0,
@@ -126,9 +132,9 @@ describe('DiscountCodeImporter', () => {
           updateErrorCount: 0,
           errors: [],
         },
-      }
-      codeImport.client.execute = jest.fn(
-        () => Promise.reject('some random error'),
+      })
+      codeImport.client.execute = jest.fn(() =>
+        Promise.reject(new Error('some random error'))
       )
 
       try {
@@ -155,11 +161,11 @@ describe('DiscountCodeImporter', () => {
       expect(codeImport._update).toHaveBeenCalledTimes(2)
       expect(codeImport._update).toHaveBeenCalledWith(
         codes[0],
-        existingCodes[0],
+        existingCodes[0]
       )
       expect(codeImport._update).toHaveBeenLastCalledWith(
         codes[1],
-        existingCodes[1],
+        existingCodes[1]
       )
     })
 
@@ -169,8 +175,8 @@ describe('DiscountCodeImporter', () => {
     })
 
     it('should resolve and do nothing when no update actions', async () => {
-      codeImport._update.mockImplementation(
-        () => Promise.resolve({ statusCode: 304 }),
+      codeImport._update.mockImplementation(() =>
+        Promise.resolve({ statusCode: 304 })
       )
       await codeImport._createOrUpdate(codes, existingCodes)
       expect(codeImport._summary.unchanged).toBe(2)
@@ -179,11 +185,11 @@ describe('DiscountCodeImporter', () => {
 
     it('should continue update on errors if `continueOnProblems`', async () => {
       codeImport.continueOnProblems = true
-      codeImport._update.mockImplementationOnce(
-        () => Promise.reject('First invalid code'),
+      codeImport._update.mockImplementationOnce(() =>
+        Promise.reject(new Error('First invalid code'))
       )
-      codeImport._update.mockImplementationOnce(
-        () => Promise.reject('Second invalid code'),
+      codeImport._update.mockImplementationOnce(() =>
+        Promise.reject(new Error('Second invalid code'))
       )
       await codeImport._createOrUpdate(codes, existingCodes)
       expect(codeImport._update).toHaveBeenCalledTimes(2)
@@ -195,8 +201,8 @@ describe('DiscountCodeImporter', () => {
     })
 
     it('should reject by default and stop on update error', async () => {
-      codeImport._update.mockImplementation(
-        () => Promise.reject('Invalid code'),
+      codeImport._update.mockImplementation(() =>
+        Promise.reject(new Error('Invalid code'))
       )
       try {
         await codeImport._createOrUpdate(codes, existingCodes)
@@ -207,7 +213,7 @@ describe('DiscountCodeImporter', () => {
         expect(codeImport._summary.updateErrorCount).toBe(2)
         expect(codeImport._summary.errors.length).toBe(2)
         expect(codeImport._summary.errors[0]).toBe('Invalid code')
-        expect(error).toMatch('Invalid code')
+        expect(error).toEqual(new Error('Invalid code'))
       }
     })
 
@@ -226,14 +232,14 @@ describe('DiscountCodeImporter', () => {
 
     it('should continue create on errors if `continueOnProblems`', async () => {
       codeImport.continueOnProblems = true
-      codeImport._create.mockImplementationOnce(
-        () => Promise.reject('First invalid code'),
+      codeImport._create.mockImplementationOnce(() =>
+        Promise.reject(new Error('First invalid code'))
       )
-      codeImport._create.mockImplementationOnce(
-        () => Promise.reject('Second invalid code'),
+      codeImport._create.mockImplementationOnce(() =>
+        Promise.reject(new Error('Second invalid code'))
       )
-      codeImport._create.mockImplementationOnce(
-        () => Promise.reject('Third invalid code'),
+      codeImport._create.mockImplementationOnce(() =>
+        Promise.reject(new Error('Third invalid code'))
       )
       await codeImport._createOrUpdate(codes, existingCodes)
       expect(codeImport._create).toHaveBeenCalledTimes(3)
@@ -246,8 +252,8 @@ describe('DiscountCodeImporter', () => {
     })
 
     it('should reject by default and stop on create error', async () => {
-      codeImport._create.mockImplementation(
-        () => Promise.reject('Invalid new code'),
+      codeImport._create.mockImplementation(() =>
+        Promise.reject(new Error('Invalid new code'))
       )
       try {
         await codeImport._createOrUpdate(codes, existingCodes)
@@ -258,7 +264,7 @@ describe('DiscountCodeImporter', () => {
         expect(codeImport._summary.createErrorCount).toBe(3)
         expect(codeImport._summary.errors.length).toBe(3)
         expect(codeImport._summary.errors[0]).toBe('Invalid new code')
-        expect(error).toMatch('Invalid new code')
+        expect(error).toEqual(new Error('Invalid new code'))
       }
     })
   })
@@ -340,7 +346,7 @@ describe('DiscountCodeImporter', () => {
       let report
       report = codeImport.summaryReport()
       expect(report.reportMessage).toMatch(
-        'Summary: nothing to do, everything is fine',
+        'Summary: nothing to do, everything is fine'
       )
 
       codeImport._summary.created = 3
@@ -349,7 +355,7 @@ describe('DiscountCodeImporter', () => {
       report = codeImport.summaryReport()
       expect(report.reportMessage).toMatch(
         // eslint-disable-next-line max-len
-        'Summary: there were 5 successfully imported discount codes (3 were newly created, 2 were updated and 4 were unchanged).',
+        'Summary: there were 5 successfully imported discount codes (3 were newly created, 2 were updated and 4 were unchanged).'
       )
 
       codeImport._summary.createErrorCount = 5
@@ -357,7 +363,7 @@ describe('DiscountCodeImporter', () => {
       report = codeImport.summaryReport()
       expect(report.reportMessage).toMatch(
         // eslint-disable-next-line max-len
-        'Summary: there were 5 successfully imported discount codes (3 were newly created, 2 were updated and 4 were unchanged). 12 errors occured (5 create errors and 7 update errors.)',
+        'Summary: there were 5 successfully imported discount codes (3 were newly created, 2 were updated and 4 were unchanged). 12 errors occured (5 create errors and 7 update errors.)'
       )
     })
   })

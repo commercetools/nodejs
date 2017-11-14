@@ -1,8 +1,5 @@
 /* @flow */
-import type {
-  SyncAction,
-  ActionGroup,
-} from 'types/sdk'
+import type { SyncAction, ActionGroup } from 'types/sdk'
 import flatten from 'lodash.flatten'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
@@ -22,59 +19,88 @@ const actionGroups = [
   'categoryOrderHints',
 ]
 
-function createProductMapActions (mapActionGroup) {
-  return function doMapActions (diff, newObj, oldObj, options) {
+function createProductMapActions(mapActionGroup) {
+  return function doMapActions(diff, newObj, oldObj, options) {
     const allActions = []
     const { sameForAllAttributeNames } = options
 
     const variantHashMap = findMatchingPairs(
       diff.variants,
       oldObj.variants,
-      newObj.variants,
+      newObj.variants
     )
 
-    allActions.push(mapActionGroup('base', () =>
-      productActions.actionsMapBase(diff, oldObj, newObj)))
+    allActions.push(
+      mapActionGroup('base', () =>
+        productActions.actionsMapBase(diff, oldObj, newObj)
+      )
+    )
 
-    allActions.push(mapActionGroup('meta', () =>
-      productActions.actionsMapMeta(diff, oldObj, newObj)))
+    allActions.push(
+      mapActionGroup('meta', () =>
+        productActions.actionsMapMeta(diff, oldObj, newObj)
+      )
+    )
 
-    allActions.push(mapActionGroup('references', () =>
-      productActions.actionsMapReferences(diff, oldObj, newObj)))
+    allActions.push(
+      mapActionGroup('references', () =>
+        productActions.actionsMapReferences(diff, oldObj, newObj)
+      )
+    )
 
-    allActions.push(mapActionGroup('variants', () =>
-      productActions.actionsMapVariants(diff, oldObj, newObj)))
+    allActions.push(
+      mapActionGroup('variants', () =>
+        productActions.actionsMapVariants(diff, oldObj, newObj)
+      )
+    )
 
     allActions.push(productActions.actionsMapMasterVariant(oldObj, newObj))
 
-    allActions.push(mapActionGroup('attributes', () =>
-      productActions.actionsMapAttributes(diff, oldObj, newObj,
-        sameForAllAttributeNames || [], variantHashMap)))
+    allActions.push(
+      mapActionGroup('attributes', () =>
+        productActions.actionsMapAttributes(
+          diff,
+          oldObj,
+          newObj,
+          sameForAllAttributeNames || [],
+          variantHashMap
+        )
+      )
+    )
 
-    allActions.push(mapActionGroup('images', () =>
-      productActions.actionsMapImages(diff, oldObj, newObj, variantHashMap)))
+    allActions.push(
+      mapActionGroup('images', () =>
+        productActions.actionsMapImages(diff, oldObj, newObj, variantHashMap)
+      )
+    )
 
-    allActions.push(mapActionGroup('prices', () =>
-      productActions.actionsMapPrices(diff, oldObj, newObj, variantHashMap)))
+    allActions.push(
+      mapActionGroup('prices', () =>
+        productActions.actionsMapPrices(diff, oldObj, newObj, variantHashMap)
+      )
+    )
 
-    allActions.push(mapActionGroup('categories', () =>
-      productActions.actionsMapCategories(diff)))
+    allActions.push(
+      mapActionGroup('categories', () =>
+        productActions.actionsMapCategories(diff)
+      )
+    )
 
-    allActions.push(mapActionGroup('categories', () =>
-      productActions.actionsMapCategoryOrderHints(diff, oldObj)))
+    allActions.push(
+      mapActionGroup('categories', () =>
+        productActions.actionsMapCategoryOrderHints(diff, oldObj)
+      )
+    )
 
     return flatten(allActions)
   }
 }
 
-function moveMasterVariantsIntoVariants (before, now) {
+function moveMasterVariantsIntoVariants(before, now) {
   const move = obj => ({
     ...obj,
     masterVariant: undefined,
-    variants: [
-      obj.masterVariant,
-      ...obj.variants || [],
-    ],
+    variants: [obj.masterVariant, ...(obj.variants || [])],
   })
   const hasMasterVariant = obj => obj && obj.masterVariant
 
@@ -91,7 +117,7 @@ export default (config: Array<ActionGroup>): SyncAction => {
   const buildActions = createBuildActions(
     diffpatcher.diff,
     doMapActions,
-    moveMasterVariantsIntoVariants,
+    moveMasterVariantsIntoVariants
   )
 
   return { buildActions }

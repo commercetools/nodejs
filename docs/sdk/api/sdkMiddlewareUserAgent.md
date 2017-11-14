@@ -10,7 +10,7 @@ npm install --save @commercetools/sdk-middleware-user-agent
 
 #### Browser
 ```html
-<script src="https://unpkg.com/@commercetools/sdk-middleware-user-agent/dist/commercetools-sdk-middleware-user-agent.min.js"></script>
+<script src="https://unpkg.com/@commercetools/sdk-middleware-user-agent/dist/commercetools-sdk-middleware-user-agent.umd.min.js"></script>
 <script>// global: CommercetoolsSdkMiddlewareUserAgent</script>
 ```
 
