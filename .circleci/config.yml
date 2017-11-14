@@ -32,7 +32,7 @@ aliases:
 
   - &unit_test_with_coverage
     name: Run tests
-    command: yarn test:coverage:ci --maxWorkers=10
+    command: yarn test:coverage:ci
 
 version: 2
 jobs:
