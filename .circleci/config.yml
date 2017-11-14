@@ -57,10 +57,14 @@ jobs:
 
 workflows:
   version: 2
-  linting:
+  installing:
     jobs:
       - install
+  linting:
+    jobs:
       - lint
+          requires:
+            - install
   unit_testing:
     jobs:
       - test_unit
@@ -75,7 +79,6 @@ workflows:
               only:
                 - master
           requires:
-            - install
             - lint
             - test_unit
   releasing:
@@ -83,7 +86,7 @@ workflows:
       - prepare_release
           context: org-global
           requires:
-            - integration_testing
+            - integration_test
           filters:
             branches:
               only:
