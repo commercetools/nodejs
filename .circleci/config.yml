@@ -77,8 +77,7 @@ jobs:
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
       - run: *yarn_bootstrap
-      # Not building yet to keep linting speedy
-      # building happens on each environment later.
+      - run: *yarn_build
       - save_cache: *save_yarn_cache
       - run:
           name: Run linters
