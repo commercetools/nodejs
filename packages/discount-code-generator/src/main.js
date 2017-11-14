@@ -1,11 +1,7 @@
 /* @flow */
 import TokenGenerator from 'tokgen'
 
-import type {
-  CodeData,
-  CodeDataArray,
-  CodeOptions,
-} from 'types/discountCodes'
+import type { CodeData, CodeDataArray, CodeOptions } from 'types/discountCodes'
 
 /*
  * The discountCodeGenerator function takes 2 arguments {options} and {data}
@@ -38,9 +34,15 @@ import type {
 /*  More information about the discount codes can be found here: http://dev.commercetools.com/http-api-projects-discountCodes.html#discountcode
  */
 
-export default function discountCodeGenerator (
+function _prepareCode(code: string, length: number, prefix: string): string {
+  if (!prefix.length) return code
+
+  return `${prefix}${code.slice(-(length - prefix.length))}`
+}
+
+export default function discountCodeGenerator(
   options: CodeOptions,
-  data: CodeData,
+  data: CodeData
 ): CodeDataArray {
   if (typeof options !== 'object' || !options.quantity)
     throw new Error('The generator requires valid parameters. See the docs')
@@ -56,11 +58,4 @@ export default function discountCodeGenerator (
     codes.push(codeObject)
   }
   return codes
-}
-
-function _prepareCode (code: string, length: number, prefix: string): string {
-  if (!prefix.length)
-    return code
-
-  return `${prefix}${code.slice(-(length - prefix.length))}`
 }

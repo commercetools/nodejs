@@ -44,18 +44,14 @@ describe('AbstractParser', () => {
       lineItemId: 213,
     })
 
-    expect(headers).toEqual([
-      'quantity',
-      'fromState',
-      'toState',
-    ])
+    expect(headers).toEqual(['quantity', 'fromState', 'toState'])
   })
 
   it('::_processData should throw an error when called', () => {
     const parser = new AbstractParser()
 
     expect(parser._processData).toThrowError(
-      'Method AbstractParser._processData has to be overridden!',
+      'Method AbstractParser._processData has to be overridden!'
     )
   })
 

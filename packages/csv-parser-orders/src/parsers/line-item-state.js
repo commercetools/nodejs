@@ -2,14 +2,14 @@ import JSONStream from 'JSONStream'
 import AbstractParser from './abstract-parser'
 
 export default class LineItemStateParser extends AbstractParser {
-  constructor (config) {
+  constructor(config) {
     super(config, 'lineItemState')
   }
 
-  parse (input, output) {
+  parse(input, output) {
     this.logger.info('Starting LineItemState CSV conversion')
     this._streamInput(input, output)
-      .stopOnError((err) => {
+      .stopOnError(err => {
         this.logger.error(err)
         return output.emit('error', err)
       })
@@ -17,13 +17,14 @@ export default class LineItemStateParser extends AbstractParser {
       .pipe(output)
   }
 
-  _processData (data) {
+  _processData(data) {
     this.logger.verbose('Processing data to CTP format')
 
     const missingHeaders = this._getMissingHeaders(data)
     if (missingHeaders.length)
       return Promise.reject(
-        `Required headers missing: '${missingHeaders.join(',')}'`)
+        new Error(`Required headers missing: '${missingHeaders.join(',')}'`)
+      )
 
     const state = {
       quantity: parseInt(data.quantity, 10),
@@ -36,10 +37,12 @@ export default class LineItemStateParser extends AbstractParser {
 
     const result = {
       orderNumber: data.orderNumber,
-      lineItems: [{
-        id: data.lineItemId,
-        state: [state],
-      }],
+      lineItems: [
+        {
+          id: data.lineItemId,
+          state: [state],
+        },
+      ],
     }
     return Promise.resolve(result)
   }

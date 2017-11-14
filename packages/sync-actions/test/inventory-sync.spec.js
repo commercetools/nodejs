@@ -1,15 +1,9 @@
 import inventorySyncFn, { actionGroups } from '../src/inventories'
-import {
-  baseActionsList,
-  referenceActionsList,
-} from '../src/inventory-actions'
+import { baseActionsList, referenceActionsList } from '../src/inventory-actions'
 
 describe('Exports', () => {
   it('action group list', () => {
-    expect(actionGroups).toEqual([
-      'base',
-      'references',
-    ])
+    expect(actionGroups).toEqual(['base', 'references'])
   })
 
   it('correctly define base actions list', () => {

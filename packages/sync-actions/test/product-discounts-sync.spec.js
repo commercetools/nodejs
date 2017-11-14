@@ -1,6 +1,4 @@
-import productDiscountsSyncFn, {
-  actionGroups,
-} from '../src/product-discounts'
+import productDiscountsSyncFn, { actionGroups } from '../src/product-discounts'
 import { baseActionsList } from '../src/product-discounts-actions'
 
 describe('Exports', () => {
@@ -22,7 +20,9 @@ describe('Exports', () => {
 
 describe('Actions', () => {
   let productDiscountsSync
-  beforeEach(() => { productDiscountsSync = productDiscountsSyncFn() })
+  beforeEach(() => {
+    productDiscountsSync = productDiscountsSyncFn()
+  })
 
   it('should build "changeName" action', () => {
     const before = {

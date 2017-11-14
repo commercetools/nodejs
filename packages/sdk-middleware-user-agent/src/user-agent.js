@@ -7,8 +7,8 @@ import type {
 } from 'types/sdk'
 import createHttpUserAgent from '@commercetools/http-user-agent'
 
-export default function createUserAgentMiddleware (
-  options: UserAgentMiddlewareOptions,
+export default function createUserAgentMiddleware(
+  options: UserAgentMiddlewareOptions
 ): Middleware {
   const userAgent = createHttpUserAgent({
     name: 'commercetools-js-sdk',

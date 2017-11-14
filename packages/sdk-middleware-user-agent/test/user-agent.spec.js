@@ -1,6 +1,4 @@
-import {
-  createUserAgentMiddleware,
-} from '../src'
+import { createUserAgentMiddleware } from '../src'
 
 describe('UserAgent', () => {
   const userAgentMiddleware = createUserAgentMiddleware({
@@ -17,7 +15,7 @@ describe('UserAgent', () => {
 
   const next = (req, res) => {
     it('has the same given header', () => {
-      expect(req.headers['Authorization']).toBe('123')
+      expect(req.headers.Authorization).toBe('123')
     })
     it('has sdk info', () => {
       expect(req.headers['User-Agent']).toMatch('commercetools-js-sdk')

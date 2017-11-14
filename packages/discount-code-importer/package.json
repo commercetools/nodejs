@@ -24,6 +24,9 @@
   "files": [
     "lib"
   ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=cli babel src --out-dir lib"
+  },
   "dependencies": {
     "@commercetools/api-request-builder": "^3.0.0",
     "@commercetools/sdk-client": "^1.4.0",

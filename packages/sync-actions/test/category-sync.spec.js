@@ -7,12 +7,7 @@ import {
 
 describe('Exports', () => {
   it('action group list', () => {
-    expect(actionGroups).toEqual([
-      'base',
-      'references',
-      'meta',
-      'custom',
-    ])
+    expect(actionGroups).toEqual(['base', 'references', 'meta', 'custom'])
   })
 
   it('correctly define base actions list', () => {

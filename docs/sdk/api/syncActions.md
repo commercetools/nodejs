@@ -10,7 +10,7 @@ npm install --save @commercetools/sync-actions
 
 #### Browser
 ```html
-<script src="https://unpkg.com/@commercetools/sync-actions/dist/commercetools-sync-actions.min.js"></script>
+<script src="https://unpkg.com/@commercetools/sync-actions/dist/commercetools-sync-actions.umd.min.js"></script>
 <script>// global: CommercetoolsSyncActions</script>
 ```
 

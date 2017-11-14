@@ -1,14 +1,9 @@
 import orderSyncFn, { actionGroups } from '../src/orders'
-import {
-  baseActionsList,
-} from '../src/order-actions'
+import { baseActionsList } from '../src/order-actions'
 
 describe('Exports', () => {
   it('action group list', () => {
-    expect(actionGroups).toEqual([
-      'base',
-      'deliveries',
-    ])
+    expect(actionGroups).toEqual(['base', 'deliveries'])
   })
 
   it('correctly define base actions list', () => {
@@ -57,32 +52,33 @@ describe('Actions', () => {
       shippingInfo: {
         deliveries: [
           {
-            items: [
-              { id: 'li-1', qty: 1 },
-              { id: 'li-2', qty: 2 },
+            items: [{ id: 'li-1', qty: 1 }, { id: 'li-2', qty: 2 }],
+            parcels: [
+              {
+                measurements: {
+                  heightInMillimeter: 1,
+                  lengthInMillimeter: 1,
+                  widthInMillimeter: 1,
+                  weightInGram: 1,
+                },
+                trackingData: {
+                  trackingId: '111',
+                },
+              },
             ],
-            parcels: [{
-              measurements: {
-                heightInMillimeter: 1,
-                lengthInMillimeter: 1,
-                widthInMillimeter: 1,
-                weightInGram: 1,
-              },
-              trackingData: {
-                trackingId: '111',
-              },
-            }],
           },
         ],
       },
     }
 
     const actual = orderSync.buildActions(now, before)
-    const expected = [{
-      action: 'addDelivery',
-      items: now.shippingInfo.deliveries[0].items,
-      parcels: now.shippingInfo.deliveries[0].parcels,
-    }]
+    const expected = [
+      {
+        action: 'addDelivery',
+        items: now.shippingInfo.deliveries[0].items,
+        parcels: now.shippingInfo.deliveries[0].parcels,
+      },
+    ]
     expect(actual).toEqual(expected)
   })
 })

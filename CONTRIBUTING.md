@@ -31,11 +31,23 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 
 5. Integration tests are separated out in another folder "/integration-tests". To run the integration test, you need to create a env file as specified [here](https://commercetools.github.io/nodejs/sdk/api/getCredentials.html). Then run integration test with
   ```
-  npm run it -- --projectkey=testing-project --runInBand
+  npm run test:integration -- --projectkey=testing-project --runInBand
   ```
   replace "testing-project" with your project
 
-6. Linting and static checks are done by `npm run lint`. We follow lint rules defined in our [eslint-config](https://github.com/commercetools/eslint-config) which is based on [Airbnb eslint config](https://www.npmjs.com/package/eslint-config-airbnb). Static checks are done using [Flow](https://flowtype.org/) and can be included / adopted incrementally. Commiting also runs a git hook to lint the changed files.
+6. Linting and static checks are done by `npm run lint`. We the [Airbnb eslint config](https://www.npmjs.com/package/eslint-config-airbnb). Static checks are done using [Flow](https://flowtype.org/) and can be included / adopted incrementally. Committing also runs a git hook to lint the changed files.
+
+## Formatting (Prettier)
+
+We use [prettier](https://github.com/jlongster/prettier) to format our code, so we don't ever have to argue over code-style.
+
+Prettier is integrated into ESLint, so all code is checked. The rules are only enabled when running `yarn run lint` from the command-line.
+The rules are disabled in Atom so we don't get the annoying warnings while developing.
+
+### Setup
+
+Since prettier is integrated into ESLint it should run for the exact same files that are being linted.
+We run prettier as part of ESLint using `eslint-plugin-prettier`. We disable all rules that `prettier` takes care of using `eslint-config-prettier`.
 
 ## Upgrading dependencies
 

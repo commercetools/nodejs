@@ -10,7 +10,7 @@ npm install --save @commercetools/sdk-client
 
 #### Browser
 ```html
-<script src="https://unpkg.com/@commercetools/sdk-client/dist/commercetools-sdk-client.min.js"></script>
+<script src="https://unpkg.com/@commercetools/sdk-client/dist/commercetools-sdk-client.umd.min.js"></script>
 <script>// global: CommercetoolsSdkClient</script>
 ```
 

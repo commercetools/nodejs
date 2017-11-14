@@ -3,7 +3,7 @@ import { setDefaultParams } from '../src/default-params'
 
 describe('defaultParams', () => {
   it('should set default params for a normal endpoint', () => {
-    const serviceFeatures = [ features.query, features.queryOne ]
+    const serviceFeatures = [features.query, features.queryOne]
     const params = {}
     setDefaultParams.call({ features: serviceFeatures, params })
     expect(params).toEqual({
@@ -23,7 +23,9 @@ describe('defaultParams', () => {
 
   it('should set default params for product-projections', () => {
     const serviceFeatures = [
-      features.query, features.queryOne, features.projection,
+      features.query,
+      features.queryOne,
+      features.projection,
     ]
     const params = {}
     setDefaultParams.call({ features: serviceFeatures, params })
@@ -45,7 +47,10 @@ describe('defaultParams', () => {
 
   it('should set default params for product-projections-suggest', () => {
     const serviceFeatures = [
-      features.query, features.queryOne, features.projection, features.suggest,
+      features.query,
+      features.queryOne,
+      features.projection,
+      features.suggest,
     ]
     const params = {}
     setDefaultParams.call({ features: serviceFeatures, params })
@@ -67,7 +72,7 @@ describe('defaultParams', () => {
   })
 
   it('should set default params for product-projections-search', () => {
-    const serviceFeatures = [ features.search, features.projection ]
+    const serviceFeatures = [features.search, features.projection]
     const params = {}
     setDefaultParams.call({ features: serviceFeatures, params })
     expect(params).toEqual({

@@ -12,9 +12,8 @@
  * @throws If `sortPath` is missing.
  * @return {Object} The instance of the service, can be chained.
  */
-export function sort (sortPath: string, ascending: boolean = true): Object {
-  if (!sortPath)
-    throw new Error('Required argument for `sort` is missing')
+export function sort(sortPath: string, ascending: boolean = true): Object {
+  if (!sortPath) throw new Error('Required argument for `sort` is missing')
 
   const direction = ascending ? 'asc' : 'desc'
   const encodedSort = encodeURIComponent(`${sortPath} ${direction}`)
@@ -30,7 +29,7 @@ export function sort (sortPath: string, ascending: boolean = true): Object {
  * @throws If `value` is missing or is a number lesser then one.
  * @return {Object} The instance of the service, can be chained.
  */
-export function page (value: number): Object {
+export function page(value: number): Object {
   if (typeof value !== 'number' && !value)
     throw new Error('Required argument for `page` is missing or invalid')
 
@@ -50,7 +49,7 @@ export function page (value: number): Object {
  * @throws If `value` is missing or is a number lesser then zero.
  * @return {Object} The instance of the service, can be chained.
  */
-export function perPage (value: number): Object {
+export function perPage(value: number): Object {
   if (typeof value !== 'number' && !value)
     throw new Error('Required argument for `perPage` is missing or invalid')
 

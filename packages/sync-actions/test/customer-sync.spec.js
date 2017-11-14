@@ -1,16 +1,9 @@
 import customerSyncFn, { actionGroups } from '../src/customers'
-import {
-  baseActionsList,
-  referenceActionsList,
-} from '../src/customer-actions'
+import { baseActionsList, referenceActionsList } from '../src/customer-actions'
 
 describe('Exports', () => {
   it('action group list', () => {
-    expect(actionGroups).toEqual([
-      'base',
-      'references',
-      'addresses',
-    ])
+    expect(actionGroups).toEqual(['base', 'references', 'addresses'])
   })
 
   it('correctly define base actions list', () => {
@@ -103,9 +96,7 @@ describe('Actions', () => {
   it('should build `addAddress` action', () => {
     const before = { addresses: [] }
     const now = {
-      addresses: [
-        { streetName: 'some name', streetNumber: '5' },
-      ],
+      addresses: [{ streetName: 'some name', streetNumber: '5' }],
     }
 
     const actual = customerSync.buildActions(now, before)
@@ -146,9 +137,7 @@ describe('Actions', () => {
 
   it('should build `removeAddress` action', () => {
     const before = {
-      addresses: [
-        { id: 'somelongidgoeshere199191' },
-      ],
+      addresses: [{ id: 'somelongidgoeshere199191' }],
     }
     const now = { addresses: [] }
 
@@ -194,13 +183,15 @@ describe('Actions', () => {
           postalCode: 'postal code 1',
         },
         // REMOVED ADDRESS 2
-        { // UNCHANGED ADDRESS 4
+        {
+          // UNCHANGED ADDRESS 4
           id: 'addressId4',
           title: 'mr',
           streetName: 'address 4 street',
           postalCode: 'postal code 4',
         },
-        { // ADD NEW ADDRESS
+        {
+          // ADD NEW ADDRESS
           id: 'addressId3',
           title: 'mr',
           streetName: 'address 3 street',
@@ -211,16 +202,19 @@ describe('Actions', () => {
 
     const actual = customerSync.buildActions(now, before)
     const expected = [
-      { // CHANGE ACTIONS FIRST
+      {
+        // CHANGE ACTIONS FIRST
         action: 'changeAddress',
         addressId: 'addressId1',
         address: now.addresses[0],
       },
-      { // REMOVE ACTIONS NEXT
+      {
+        // REMOVE ACTIONS NEXT
         action: 'removeAddress',
         addressId: 'addressId2',
       },
-      { // CREATE ACTIONS LAST
+      {
+        // CREATE ACTIONS LAST
         action: 'addAddress',
         address: now.addresses[2],
       },

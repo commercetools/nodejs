@@ -1,7 +1,5 @@
 /* @flow */
-import type {
-  ServiceBuilderDefaultParams,
-} from 'types/sdk'
+import type { ServiceBuilderDefaultParams } from 'types/sdk'
 
 /**
  * Build the query string with the given parameters.
@@ -10,11 +8,10 @@ import type {
  * @throws If argument is missing.
  * @return {string} The fully encoded query string.
  */
-export default function buildQueryString (
-  params: ServiceBuilderDefaultParams,
+export default function buildQueryString(
+  params: ServiceBuilderDefaultParams
 ): string {
-  if (!params)
-    throw new Error('Missing options object to build query string.')
+  if (!params) throw new Error('Missing options object to build query string.')
 
   const {
     query,
@@ -33,17 +30,14 @@ export default function buildQueryString (
   if (typeof staged === 'boolean')
     queryString.push(`staged=${staged.toString()}`)
 
-  if (priceCurrency)
-    queryString.push(`priceCurrency=${priceCurrency}`)
+  if (priceCurrency) queryString.push(`priceCurrency=${priceCurrency}`)
 
-  if (priceCountry)
-    queryString.push(`priceCountry=${priceCountry}`)
+  if (priceCountry) queryString.push(`priceCountry=${priceCountry}`)
 
   if (priceCustomerGroup)
     queryString.push(`priceCustomerGroup=${priceCustomerGroup}`)
 
-  if (priceChannel)
-    queryString.push(`priceChannel=${priceChannel}`)
+  if (priceChannel) queryString.push(`priceChannel=${priceChannel}`)
 
   if (expand && expand.length)
     queryString = queryString.concat(expand.map(e => `expand=${e}`))
@@ -51,14 +45,12 @@ export default function buildQueryString (
   if (query) {
     const { operator, where } = query
     const whereParams = where.join(encodeURIComponent(` ${operator} `))
-    if (whereParams)
-      queryString.push(`where=${whereParams}`)
+    if (whereParams) queryString.push(`where=${whereParams}`)
   }
 
   if (pagination) {
     const { page, perPage, sort } = pagination
-    if (typeof perPage === 'number')
-      queryString.push(`limit=${perPage}`)
+    if (typeof perPage === 'number') queryString.push(`limit=${perPage}`)
     if (page) {
       const limitParam = perPage || 20
       const offsetParam = limitParam * (page - 1)
@@ -70,16 +62,19 @@ export default function buildQueryString (
 
   if (search) {
     const {
-      text, fuzzy, fuzzyLevel, markMatchingVariants, facet,
-      filter, filterByQuery, filterByFacets,
+      text,
+      fuzzy,
+      fuzzyLevel,
+      markMatchingVariants,
+      facet,
+      filter,
+      filterByQuery,
+      filterByFacets,
     } = search
 
-    if (text)
-      queryString.push(`text.${text.lang}=${text.value}`)
-    if (fuzzy)
-      queryString.push('fuzzy=true')
-    if (fuzzyLevel)
-      queryString.push(`fuzzyLevel=${fuzzyLevel}`)
+    if (text) queryString.push(`text.${text.lang}=${text.value}`)
+    if (fuzzy) queryString.push('fuzzy=true')
+    if (fuzzyLevel) queryString.push(`fuzzyLevel=${fuzzyLevel}`)
     queryString.push(`markMatchingVariants=${markMatchingVariants.toString()}`)
 
     facet.forEach(f => queryString.push(`facet=${f}`))
@@ -89,7 +84,7 @@ export default function buildQueryString (
   }
   if (searchKeywords)
     searchKeywords.forEach(f =>
-      queryString.push(`searchKeywords.${f.lang}=${f.value}`),
+      queryString.push(`searchKeywords.${f.lang}=${f.value}`)
     )
 
   return queryString.join('&')
