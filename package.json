@@ -6,7 +6,8 @@
     "npm": ">=2"
   },
   "scripts": {
-    "postinstall": "check-node-version --package && lerna bootstrap && npm run build",
+    "postinstall": "check-node-version --package && npm run boostrap && npm run build",
+    "bootstrap": "lerna bootstrap",
     "check-updates": "./scripts/check-updates",
     "clean": "rm -rf coverage; lerna exec -- rimraf lib dist",
     "commit": "git-cz",

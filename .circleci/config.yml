@@ -24,7 +24,25 @@ aliases:
 
   - &yarn_install
     name: Install dependencies
-    command: yarn install --pure-lockfile
+    # Ignoring scripts (e.g. post-install) to gain more control
+    # in the jobs to only e.g. build when explicitely needed.
+    command: yarn install --pure-lockfile --ignore-scripts
+
+  - &yarn_bootstrap
+    name: Run bootstrap
+    # Limiting the default concurrency (4) of lerna to 2
+    # as the build otherwise dies due to resouce restrictions.
+    command: yarn bootstrap --concurrency=2
+
+  - &yarn_build
+    name: Run build
+    command: yarn build
+
+  - &unit_test
+    name: Run tests
+    # Limiting the workers of Jest to 10
+    # as the build otherwise dies due to resouce restrictions.
+    command: yarn test:ci --maxWorkers=10
 
   - &unit_test
     name: Run tests
@@ -58,6 +76,9 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
+      - run: *yarn_bootstrap
+      # Not building yet to keep linting speedy
+      # building happens on each environment later.
       - save_cache: *save_yarn_cache
       - run:
           name: Run linters
@@ -68,6 +89,8 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
+      - run: *yarn_bootstrap
+      - run: *yarn_build
       - save_cache: *save_yarn_cache
       - run: *unit_test
   test_unit_node_6:
@@ -76,6 +99,8 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
+      - run: *yarn_bootstrap
+      - run: *yarn_build
       - save_cache: *save_yarn_cache
       - run: *unit_test
   test_unit_node_8:
@@ -84,6 +109,8 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
+      - run: *yarn_bootstrap
+      - run: *yarn_build
       - save_cache: *save_yarn_cache
       - run: *unit_test_with_coverage
   test_integration:
@@ -92,6 +119,8 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
+      - run: *yarn_bootstrap
+      - run: *yarn_build
       - save_cache: *save_yarn_cache
       - run:
           name: Run integration tests
@@ -100,9 +129,6 @@ jobs:
     <<: *node8Defaults
     steps:
       - checkout
-      - restore-cache: *restore_yarn_cache
-      - run: *yarn_install
-      - save_cache: *save_yarn_cache
       - run:
           name: Run prepare release
           command: ./.circleci/prepare-release-packages.sh
@@ -112,6 +138,8 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
+      - run: *yarn_bootstrap
+      - run: *yarn_build
       - save_cache: *save_yarn_cache
       - run:
           name: Run perform release
