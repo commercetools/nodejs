@@ -1,28 +1,51 @@
-version: 2
-defaults: &defaults
+node4Defaults: &node4Defaults
+  docker:
+    - image: circleci/node:4
+  working_directory: ~/nodejs
+node6Defaults: &node6Defaults
+  docker:
+    - image: circleci/node:6
+  working_directory: ~/nodejs
+node8Defaults: &node8Defaults
   docker:
     - image: circleci/node:8
   working_directory: ~/nodejs
 
+aliases:
+  - &restore_yarn_cache
+    keys:
+      - v1-yarn-cache-{{ checksum "yarn.lock" }}
+      - v1-yarn-cache-
+
+  - &save_yarn_cache
+    key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+    paths:
+      - node_modules
+
+  - &yarn_install
+    name: Install dependencies
+    command: yarn install --pure-lockfile
+
+  - &unit_test
+    name: Run tests
+    command: yarn test:ci --maxWorkers=10
+
+  - &unit_test_with_coverage
+    name: Run tests
+    command: yarn test:coverage:ci --maxWorkers=10
+
+version: 2
 jobs:
-  install:
-    <<: *defaults
+  greenkeeper_lockfile:
+    <<: *node8Defaults
     steps:
       - checkout
-      - restore_cache:
-          keys:
-          - v1-yarn-cache-{{ checksum "yarn.lock" }}
-          - v1-yarn-cache-
+      - restore-cache: *restore_yarn_cache
       - run:
           name: Install greenkeeper-lockfile-update
           command: yarn global add greenkeeper-lockfile@1 --prefix ~/.yarn
-      - run:
-          name: Install dependencies
-          command: yarn install --pure-lockfile
-      - save_cache:
-          key: v1-yarn-cache-{{ checksum "yarn.lock" }}
-          paths:
-            - node_modules
+      - *yarn_install
+      - save_cache: *save_yarn_cache
       - run:
           name: Update greenkeeper-lockfile
           command: ~/.yarn/bin/greenkeeper-lockfile-update
@@ -30,68 +53,113 @@ jobs:
           name: Upload greenkeeper-lockfile
           command: ~/.yarn/bin/greenkeeper-lockfile-upload
   lint:
-    <<: *defaults
+    <<: *node8Defaults
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - *yarn_install
+      - save_cache: *save_yarn_cache
       - run:
           name: Run linters
           command: yarn lint
-  test_unit:
-    <<: *defaults
-      - run:
-          name: Run tests
-          command: yarn test:coverage:ci --maxWorkers=10
+  test_unit_node_4:
+    <<: *node4Defaults
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - *yarn_install
+      - save_cache: *save_yarn_cache
+      - *unit_test
+  test_unit_node_6:
+    <<: *node6Defaults
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - *yarn_install
+      - save_cache: *save_yarn_cache
+      - *unit_test
+  test_unit_node_8:
+    <<: *node8Defaults
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - *yarn_install
+      - save_cache: *save_yarn_cache
+      - *unit_test_with_coverage
   test_integration:
-    <<: *defaults
+    <<: *node8Defaults
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - *yarn_install
+      - save_cache: *save_yarn_cache
       - run:
           name: Run integration tests
           command: yarn test:integration
   prepare_release:
-    <<: *defaults
+    <<: *node8Defaults
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - *yarn_install
+      - save_cache: *save_yarn_cache
       - run:
           name: Run prepare release
           command: ./.circleci/prepare-release-packages.sh
   perform_release:
-    <<: *defaults
+    <<: *node8Defaults
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - *yarn_install
+      - save_cache: *save_yarn_cache
       - run:
           name: Run perform release
           command: ./.circleci/perform-release-packages.sh
 
 workflows:
   version: 2
-  installing:
+  greenkeeper_lockfile_updating:
     jobs:
-      - install
+      - greenkeeper_lockfile
   linting:
     jobs:
       - lint
-          requires:
-            - install
   unit_testing:
     jobs:
-      - test_unit
-          requires:
-            - install
-  integration_testing:
-    jobs:
-      - test_integration
-          context: org-global
-          filters:
-            branches:
-              only:
-                - master
+      - test_unit_node_4:
           requires:
             - lint
-            - test_unit
-  releasing:
-    jobs:
-      - prepare_release
-          context: org-global
+      - test_unit_node_6:
           requires:
-            - integration_test
+            - lint
+      - test_unit_node_8:
+          requires:
+            - lint
+  integration_testing:
+    jobs:
+      - test_integration:
+          context: org-global
           filters:
             branches:
               only:
                 - master
-      - perform_release
+          requires:
+            # Only depending on one unit testing
+            # job will speed up the build by starting
+            # the integration testing early (in confidence).
+            - test_unit_node_8
+  releasing:
+    jobs:
+      - prepare_release:
+          context: org-global
+          requires:
+            - test_integration
+          filters:
+            branches:
+              only:
+                - master
+      - perform_release:
           context: org-global
           requires:
             - prepare_release

@@ -18,6 +18,7 @@
     "test:integration": "cross-env NODE_ENV=test jest --config integration-tests/.jestrc.json",
     "format": "prettier --write '{packages,integration-tests,types}/**/*.js'",
     "test:coverage": "npm run build && npm test -- --no-watchman --coverage",
+    "test:ci": "npm test -- --no-watchman",
     "test:coverage:ci": "npm test -- --no-watchman --coverage && codecov",
     "release:semantic": "lerna-semantic-release pre && lerna-semantic-release post && lerna-semantic-release perform",
     "release:manual": "./scripts/publish-manually",
