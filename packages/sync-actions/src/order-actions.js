@@ -1,6 +1,4 @@
-import {
-  buildBaseAttributesActions,
-} from './utils/common-actions'
+import { buildBaseAttributesActions } from './utils/common-actions'
 import createBuildArrayActions, {
   ADD_ACTIONS,
 } from './utils/create-build-array-actions'
@@ -11,12 +9,11 @@ export const baseActionsList = [
   { action: 'changeShipmentState', key: 'shipmentState' },
 ]
 
-
 /**
  * SYNC FUNCTIONS
  */
 
-export function actionsMapBase (diff, oldObj, newObj) {
+export function actionsMapBase(diff, oldObj, newObj) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
     diff,
@@ -25,10 +22,9 @@ export function actionsMapBase (diff, oldObj, newObj) {
   })
 }
 
-export function actionsMapDeliveries (diff, oldObj, newObj) {
+export function actionsMapDeliveries(diff, oldObj, newObj) {
   const deliveriesDiff = diff.shippingInfo
-  if (!deliveriesDiff)
-    return []
+  if (!deliveriesDiff) return []
 
   const handler = createBuildArrayActions('deliveries', {
     [ADD_ACTIONS]: newObject => ({

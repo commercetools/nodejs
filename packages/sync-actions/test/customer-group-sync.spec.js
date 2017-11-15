@@ -16,7 +16,9 @@ describe('Exports', () => {
 
 describe('Actions', () => {
   let customerGroupSync
-  beforeEach(() => { customerGroupSync = customerGroupSyncFn() })
+  beforeEach(() => {
+    customerGroupSync = customerGroupSyncFn()
+  })
 
   it('should build `changeName` action', () => {
     const before = { name: 'the-greatest-name-before' }

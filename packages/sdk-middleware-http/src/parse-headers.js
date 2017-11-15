@@ -1,4 +1,4 @@
-export default function parseHeaders (headers) {
+export default function parseHeaders(headers) {
   if (headers.raw)
     // node-fetch
     return headers.raw()

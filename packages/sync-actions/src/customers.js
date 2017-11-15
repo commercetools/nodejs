@@ -1,30 +1,34 @@
 /* @flow */
-import type {
-  SyncAction,
-  ActionGroup,
-} from 'types/sdk'
+import type { SyncAction, ActionGroup } from 'types/sdk'
 import flatten from 'lodash.flatten'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import * as customerActions from './customer-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
-export const actionGroups = [
-  'base', 'references', 'addresses',
-]
+export const actionGroups = ['base', 'references', 'addresses']
 
-function createCustomerMapActions (mapActionGroup) {
-  return function doMapActions (diff, newObj, oldObj/* , options */) {
+function createCustomerMapActions(mapActionGroup) {
+  return function doMapActions(diff, newObj, oldObj /* , options */) {
     const allActions = []
 
-    allActions.push(mapActionGroup('base', () =>
-      customerActions.actionsMapBase(diff, oldObj, newObj)))
+    allActions.push(
+      mapActionGroup('base', () =>
+        customerActions.actionsMapBase(diff, oldObj, newObj)
+      )
+    )
 
-    allActions.push(mapActionGroup('references', () =>
-      customerActions.actionsMapReferences(diff, oldObj, newObj)))
+    allActions.push(
+      mapActionGroup('references', () =>
+        customerActions.actionsMapReferences(diff, oldObj, newObj)
+      )
+    )
 
-    allActions.push(mapActionGroup('addresses', () =>
-      customerActions.actionsMapAddresses(diff, oldObj, newObj)))
+    allActions.push(
+      mapActionGroup('addresses', () =>
+        customerActions.actionsMapAddresses(diff, oldObj, newObj)
+      )
+    )
 
     return flatten(allActions)
   }

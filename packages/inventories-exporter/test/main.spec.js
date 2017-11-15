@@ -50,8 +50,9 @@ describe('InventoryExporter', () => {
       return inventoryExporter._fetchInventories().then(() => {
         expect(inventoryExporter._resolveChannelKey).toHaveBeenCalledTimes(1)
         expect(inventoryExporter._makeRequest).toHaveBeenCalledTimes(1)
-        expect(inventoryExporter._resolveChannelKey.mock.calls[0][0])
-          .toEqual(channelKey)
+        expect(inventoryExporter._resolveChannelKey.mock.calls[0][0]).toEqual(
+          channelKey
+        )
       })
     })
 
@@ -85,13 +86,13 @@ describe('InventoryExporter', () => {
       inventoryExporter.client.process = processMock
       return inventoryExporter._makeRequest().then(() => {
         expect(processMock).toHaveBeenCalledTimes(1)
-        expect(processMock.mock.calls[0][0])
-        .toEqual({
-          // should expand customfields object and supplyChannel
-          uri: '/foo/inventory?expand=custom.type&expand=supplyChannel',
-          method: 'GET',
-        },
-        'first argument is request object',
+        expect(processMock.mock.calls[0][0]).toEqual(
+          {
+            // should expand customfields object and supplyChannel
+            uri: '/foo/inventory?expand=custom.type&expand=supplyChannel',
+            method: 'GET',
+          },
+          'first argument is request object'
         )
         expect(InventoryExporter._writeEachInventory).toHaveBeenCalledTimes(1)
       })
@@ -101,15 +102,13 @@ describe('InventoryExporter', () => {
       inventoryExporter.client.process = processMock
       return inventoryExporter._makeRequest().then(() => {
         expect(processMock).toHaveBeenCalledTimes(1)
-        expect(processMock.mock.calls[0][0])
-          .toEqual({
-            uri: '/foo/inventory?expand=custom.type&expand=supplyChannel',
-            method: 'GET',
-            headers: {
-              Authorization: 'Bearer 12345',
-            },
+        expect(processMock.mock.calls[0][0]).toEqual({
+          uri: '/foo/inventory?expand=custom.type&expand=supplyChannel',
+          method: 'GET',
+          headers: {
+            Authorization: 'Bearer 12345',
           },
-          )
+        })
         expect(InventoryExporter._writeEachInventory).toHaveBeenCalledTimes(1)
       })
     })
@@ -120,16 +119,15 @@ describe('InventoryExporter', () => {
       inventoryExporter.client.process = processMock
       return inventoryExporter._makeRequest(null, channelId).then(() => {
         expect(processMock).toHaveBeenCalledTimes(1)
-        expect(processMock.mock.calls[0][0])
-          .toEqual({
-            // eslint-disable-next-line max-len
-            uri: '/foo/inventory?expand=custom.type&expand=supplyChannel&where=descript%3D%22lovely%22%20and%20supplyChannel(id%3D%221234567qwertyuxcv%22)',
-            method: 'GET',
-            headers: {
-              Authorization: 'Bearer 12345',
-            },
+        expect(processMock.mock.calls[0][0]).toEqual({
+          // eslint-disable-next-line max-len
+          uri:
+            '/foo/inventory?expand=custom.type&expand=supplyChannel&where=descript%3D%22lovely%22%20and%20supplyChannel(id%3D%221234567qwertyuxcv%22)',
+          method: 'GET',
+          headers: {
+            Authorization: 'Bearer 12345',
           },
-          )
+        })
         expect(InventoryExporter._writeEachInventory).toHaveBeenCalledTimes(1)
       })
     })
@@ -137,7 +135,7 @@ describe('InventoryExporter', () => {
 
   describe('::run', () => {
     beforeEach(() => {})
-    it('should fetch inventories and output csv to stream', (done) => {
+    it('should fetch inventories and output csv to stream', done => {
       inventoryExporter.exportConfig.format = 'csv'
       const sampleInventory = {
         sku: 'hello',
@@ -146,11 +144,11 @@ describe('InventoryExporter', () => {
       }
       const spy = jest
         .spyOn(inventoryExporter, '_fetchInventories')
-        .mockImplementation((csvStream) => {
+        .mockImplementation(csvStream => {
           csvStream.write(sampleInventory)
           return Promise.resolve()
         })
-      const outputStream = streamtest['v2'].toText((error, result) => {
+      const outputStream = streamtest.v2.toText((error, result) => {
         const expectedResult = stripIndent`
           sku,quantityOnStock,restockableInDays
           hello,me,4
@@ -163,12 +161,12 @@ describe('InventoryExporter', () => {
       inventoryExporter.run(outputStream)
     })
 
-    it('should emit error if it occurs when streaming to csv', (done) => {
+    it('should emit error if it occurs when streaming to csv', done => {
       inventoryExporter.exportConfig.format = 'csv'
       const spy = jest
         .spyOn(inventoryExporter, '_fetchInventories')
         .mockImplementation(() => Promise.reject(new Error('error occured')))
-      const outputStream = streamtest['v2'].toText((error, result) => {
+      const outputStream = streamtest.v2.toText((error, result) => {
         expect(error.message).toBe('error occured')
         expect(result).toBeUndefined()
         spy.mockRestore()
@@ -178,12 +176,12 @@ describe('InventoryExporter', () => {
       inventoryExporter.run(outputStream)
     })
 
-    it('should emit error if it occurs when streaming to json', (done) => {
+    it('should emit error if it occurs when streaming to json', done => {
       inventoryExporter.exportConfig.format = 'json'
       const spy = jest
         .spyOn(inventoryExporter, '_fetchInventories')
         .mockImplementation(() => Promise.reject(new Error('error occured')))
-      const outputStream = streamtest['v2'].toText((error, result) => {
+      const outputStream = streamtest.v2.toText((error, result) => {
         expect(error.message).toBe('error occured')
         expect(result).toBeUndefined()
         spy.mockRestore()
@@ -193,7 +191,7 @@ describe('InventoryExporter', () => {
       inventoryExporter.run(outputStream)
     })
 
-    it('should fetch inventories and output json as default', (done) => {
+    it('should fetch inventories and output json as default', done => {
       const sampleInventory = {
         sku: 'hello',
         quantityOnStock: 'me',
@@ -201,11 +199,11 @@ describe('InventoryExporter', () => {
       }
       const spy = jest
         .spyOn(inventoryExporter, '_fetchInventories')
-        .mockImplementation((csvStream) => {
+        .mockImplementation(csvStream => {
           csvStream.write(sampleInventory)
           return Promise.resolve()
         })
-      const outputStream = streamtest['v2'].toText((error, result) => {
+      const outputStream = streamtest.v2.toText((error, result) => {
         const expectedResult = [{ ...sampleInventory }]
         expect(JSON.parse(result)).toEqual(expectedResult)
         spy.mockRestore()
@@ -297,18 +295,19 @@ describe('InventoryExporter', () => {
       const expectedChannelId = '12345678sdfghj'
       const mockResult = {
         body: {
-          results: [{
-            id: expectedChannelId,
-          }],
+          results: [
+            {
+              id: expectedChannelId,
+            },
+          ],
         },
       }
       const executeMock = jest.fn(() => Promise.resolve(mockResult))
       inventoryExporter.client.execute = executeMock
-      return inventoryExporter._resolveChannelKey(channelKey)
-        .then((id) => {
-          expect(executeMock).toHaveBeenCalled()
-          expect(id).toBe(expectedChannelId)
-        })
+      return inventoryExporter._resolveChannelKey(channelKey).then(id => {
+        expect(executeMock).toHaveBeenCalled()
+        expect(id).toBe(expectedChannelId)
+      })
     })
 
     it('should resolve channel key from the API using token', () => {
@@ -316,26 +315,27 @@ describe('InventoryExporter', () => {
       const expectedChannelId = '12345678sdfghj'
       const mockResult = {
         body: {
-          results: [{
-            id: expectedChannelId,
-          }],
+          results: [
+            {
+              id: expectedChannelId,
+            },
+          ],
         },
       }
       const executeMock = jest.fn(() => Promise.resolve(mockResult))
       inventoryExporter.client.execute = executeMock
       inventoryExporter.accessToken = '12345'
-      return inventoryExporter._resolveChannelKey(channelKey)
-        .then((id) => {
-          expect(executeMock.mock.calls[0][0]).toEqual({
-            uri: '/foo/channels?where=key%3D%22foobar%22',
-            method: 'GET',
-            headers: {
-              Authorization: 'Bearer 12345',
-            },
-          })
-          expect(executeMock).toHaveBeenCalled()
-          expect(id).toBe(expectedChannelId)
+      return inventoryExporter._resolveChannelKey(channelKey).then(id => {
+        expect(executeMock.mock.calls[0][0]).toEqual({
+          uri: '/foo/channels?where=key%3D%22foobar%22',
+          method: 'GET',
+          headers: {
+            Authorization: 'Bearer 12345',
+          },
         })
+        expect(executeMock).toHaveBeenCalled()
+        expect(id).toBe(expectedChannelId)
+      })
     })
 
     it('should reject if channel key is not found', () => {
@@ -347,10 +347,9 @@ describe('InventoryExporter', () => {
       }
       const executeMock = jest.fn(() => Promise.resolve(mockResult))
       inventoryExporter.client.execute = executeMock
-      return inventoryExporter._resolveChannelKey(channelKey)
-        .catch((err) => {
-          expect(err.message).toBe('No data with channel key in CTP Platform')
-        })
+      return inventoryExporter._resolveChannelKey(channelKey).catch(err => {
+        expect(err.message).toBe('No data with channel key in CTP Platform')
+      })
     })
   })
 })

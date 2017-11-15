@@ -1,10 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import nock from 'nock'
-import {
-  createHttpMiddleware,
-} from '../src'
+import { createHttpMiddleware } from '../src'
 
-function createTestRequest (options) {
+function createTestRequest(options) {
   return {
     uri: '',
     method: 'GET',
@@ -45,8 +43,7 @@ describe('Http', () => {
         .reply(200, { foo: 'bar' })
 
       httpMiddleware(next)(request, response)
-    }),
-  )
+    }))
 
   it('should return the headers in the response when enabled', () =>
     new Promise((resolve, reject) => {
@@ -76,8 +73,7 @@ describe('Http', () => {
         .reply(200, { foo: 'bar' })
 
       httpMiddleware(next)(request, response)
-    }),
-  )
+    }))
 
   it('should return the request in the response when enabled', () =>
     new Promise((resolve, reject) => {
@@ -106,8 +102,7 @@ describe('Http', () => {
         .reply(200, { foo: 'bar' })
 
       httpMiddleware(next)(request, response)
-    }),
-  )
+    }))
 
   it('should maskSensitiveHeaderData in the response when enabled', () =>
     new Promise((resolve, reject) => {
@@ -144,8 +139,7 @@ describe('Http', () => {
         .reply(200, { foo: 'bar' })
 
       httpMiddleware(next)(request, response)
-    }),
-  )
+    }))
 
   it('execute a post request (success)', () =>
     new Promise((resolve, reject) => {
@@ -174,8 +168,7 @@ describe('Http', () => {
         .reply(200, { foo: 'bar' })
 
       httpMiddleware(next)(request, response)
-    }),
-  )
+    }))
 
   it('should accept a Buffer body', () =>
     new Promise((resolve, reject) => {
@@ -206,8 +199,7 @@ describe('Http', () => {
         .reply(200, { foo: 'bar' })
 
       httpMiddleware(next)(request, response)
-    }),
-  )
+    }))
 
   it('handle failed response (network error)', () =>
     new Promise((resolve, reject) => {
@@ -220,7 +212,7 @@ describe('Http', () => {
         expect(res.error.headers).toBeUndefined()
         expect(res.error.originalRequest).toBeDefined()
         expect(res.error.message).toBe(
-          `request to ${testHost}/foo/bar failed, reason: Connection timeout`,
+          `request to ${testHost}/foo/bar failed, reason: Connection timeout`
         )
         expect(res.body).toBeUndefined()
         expect(res.statusCode).toBe(0)
@@ -235,8 +227,7 @@ describe('Http', () => {
         .replyWithError('Connection timeout')
 
       httpMiddleware(next)(request, response)
-    }),
-  )
+    }))
 
   describe('::repeater', () => {
     it('should retry on network error(503) if enabled', () =>
@@ -251,7 +242,7 @@ describe('Http', () => {
           expect(res.error.originalRequest).toBeDefined()
           expect(res.error.retryCount).toBe(2)
           expect(res.error.message).toBe(
-            `request to ${testHost}/foo/bar failed, reason: Connection timeout`,
+            `request to ${testHost}/foo/bar failed, reason: Connection timeout`
           )
           expect(res.body).toBeUndefined()
           expect(res.statusCode).toBe(0)
@@ -275,48 +266,52 @@ describe('Http', () => {
           .replyWithError('Connection timeout')
 
         httpMiddleware(next)(request, response)
-      }),
+      }))
+
+    it(
+      'should toggle `exponential backoff` off',
+      () =>
+        new Promise((resolve, reject) => {
+          const request = createTestRequest({
+            uri: '/foo/bar',
+          })
+          const response = { resolve, reject }
+          const next = (req, res) => {
+            expect(res.error.name).toBe('NetworkError')
+            expect(res.error.headers).toBeUndefined()
+            expect(res.error.originalRequest).toBeDefined()
+            expect(res.error.retryCount).toBe(2)
+            expect(res.error.message).toBe(
+              `request to ${
+                testHost
+              }/foo/bar failed, reason: Connection timeout`
+            )
+            expect(res.body).toBeUndefined()
+            expect(res.statusCode).toBe(0)
+            resolve()
+          }
+          const options = {
+            host: testHost,
+            enableRetry: true,
+            retryConfig: {
+              maxRetries: 2,
+              backoff: false,
+              retryDelay: 300,
+            },
+          }
+          const httpMiddleware = createHttpMiddleware(options)
+          nock(testHost)
+            .defaultReplyHeaders({
+              'Content-Type': 'application/json',
+            })
+            .get('/foo/bar')
+            .times(3)
+            .replyWithError('Connection timeout')
+
+          httpMiddleware(next)(request, response)
+        }),
+      700 /* retryDelay of 300 * 2 */
     )
-
-    it('should toggle `exponential backoff` off', () =>
-      new Promise((resolve, reject) => {
-        const request = createTestRequest({
-          uri: '/foo/bar',
-        })
-        const response = { resolve, reject }
-        const next = (req, res) => {
-          expect(res.error.name).toBe('NetworkError')
-          expect(res.error.headers).toBeUndefined()
-          expect(res.error.originalRequest).toBeDefined()
-          expect(res.error.retryCount).toBe(2)
-          expect(res.error.message).toBe(
-            `request to ${testHost}/foo/bar failed, reason: Connection timeout`,
-          )
-          expect(res.body).toBeUndefined()
-          expect(res.statusCode).toBe(0)
-          resolve()
-        }
-        const options = {
-          host: testHost,
-          enableRetry: true,
-          retryConfig: {
-            maxRetries: 2,
-            backoff: false,
-            retryDelay: 300,
-          },
-        }
-        const httpMiddleware = createHttpMiddleware(options)
-        nock(testHost)
-          .defaultReplyHeaders({
-            'Content-Type': 'application/json',
-          })
-          .get('/foo/bar')
-          .times(3)
-          .replyWithError('Connection timeout')
-
-        httpMiddleware(next)(request, response)
-      })
-    , 700 /* retryDelay of 300 * 2 */)
 
     it('should not retry on 404 (not found) error', () =>
       new Promise((resolve, reject) => {
@@ -348,8 +343,7 @@ describe('Http', () => {
           .reply(404)
 
         httpMiddleware(next)(request, response)
-      }),
-    )
+      }))
   })
 
   it('handle failed response (api error)', () =>
@@ -388,8 +382,7 @@ describe('Http', () => {
         })
 
       httpMiddleware(next)(request, response)
-    }),
-  )
+    }))
 
   it('return non-JSON error to user', () =>
     new Promise((resolve, reject) => {
@@ -424,8 +417,7 @@ describe('Http', () => {
         .reply(500, 'non json error occured')
 
       httpMiddleware(next)(request, response)
-    }),
-  )
+    }))
 
   it('handle failed response (not found)', () =>
     new Promise((resolve, reject) => {
@@ -449,8 +441,7 @@ describe('Http', () => {
         .reply(404)
 
       httpMiddleware(next)(request, response)
-    }),
-  )
+    }))
 
   it('handle failed response (unmapped error code)', () =>
     new Promise((resolve, reject) => {
@@ -477,8 +468,7 @@ describe('Http', () => {
         })
 
       httpMiddleware(next)(request, response)
-    }),
-  )
+    }))
 
   it('parses a host that ends with slash', () =>
     new Promise((resolve, reject) => {
@@ -500,8 +490,7 @@ describe('Http', () => {
         .reply(200, { foo: 'bar' })
 
       httpMiddleware(next)(request, response)
-    }),
-  )
+    }))
 
   it('parses a host that ends without slash', () =>
     new Promise((resolve, reject) => {
@@ -523,6 +512,5 @@ describe('Http', () => {
         .reply(200, { foo: 'bar' })
 
       httpMiddleware(next)(request, response)
-    }),
-  )
+    }))
 })

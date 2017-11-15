@@ -23,8 +23,8 @@ describe('ProductExporter', () => {
       { projectKey: 'project-key' },
       exportConfig,
       logger,
-      'myAccessToken',
-      )
+      'myAccessToken'
+    )
   })
 
   describe('::constructor', () => {
@@ -40,20 +40,20 @@ describe('ProductExporter', () => {
   })
 
   describe('::run', () => {
-    it('prepare the output stream and pass to `_getProducts`', async() => {
+    it('prepare the output stream and pass to `_getProducts`', async () => {
       productExporter._getProducts = jest.fn(() => Promise.resolve())
-      const outputStream = streamtest['v2'].toText(() => {})
+      const outputStream = streamtest.v2.toText(() => {})
       await productExporter.run(outputStream)
       expect(productExporter._getProducts).toBeCalled()
       expect(productExporter._getProducts).not.toBeCalledWith(outputStream)
     })
 
-    it('should emit `error` on output stream if error occurs', (done) => {
+    it('should emit `error` on output stream if error occurs', done => {
       productExporter._getProducts = jest.fn(() =>
-        Promise.reject(new Error('error occured')),
+        Promise.reject(new Error('error occured'))
       )
 
-      const outputStream = streamtest['v2'].toText((error, result) => {
+      const outputStream = streamtest.v2.toText((error, result) => {
         expect(error.message).toBe('error occured')
         expect(result).toBeUndefined()
         done()
@@ -74,28 +74,27 @@ describe('ProductExporter', () => {
           results: [],
         },
       }
-      processMock = jest.fn((request, processFn) => (
+      processMock = jest.fn((request, processFn) =>
         processFn(sampleResult).then(() => Promise.resolve())
-      ))
+      )
       productExporter.client.process = processMock
     })
 
     it('should fetch products using `process` method', () => {
       productExporter._getProducts(outputStream)
       expect(processMock).toHaveBeenCalledTimes(1)
-      expect(processMock.mock.calls[0][0])
-        .toEqual({
-          uri: oneLineTrim`
+      expect(processMock.mock.calls[0][0]).toEqual({
+        uri: oneLineTrim`
             /project-key/product-projections
             ?staged=true
             &expand=something
             &where=foo%3Dbar
             &limit=5`,
-          method: 'GET',
-          headers: {
-            Authorization: 'Bearer myAccessToken',
-          },
-        })
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer myAccessToken',
+        },
+      })
     })
 
     it('should pass the products and the stream to the writer method', () => {
@@ -106,7 +105,7 @@ describe('ProductExporter', () => {
       spy.mockRestore()
     })
 
-    it('should close stream after writing data', async() => {
+    it('should close stream after writing data', async () => {
       productExporter.client.process = jest.fn(() => Promise.resolve())
       await productExporter._getProducts(outputStream)
       expect(outputStream.end).toBeCalled()
@@ -133,7 +132,7 @@ describe('ProductExporter', () => {
       `
       const actualUri = ProductExporter._buildProductProjectionsUri(
         projectKey,
-        exportConfig,
+        exportConfig
       )
       expect(actualUri).toEqual(expectedUri)
     })
@@ -142,7 +141,7 @@ describe('ProductExporter', () => {
       const expectedUri = '/my-project-key/product-projections?staged=false'
       const actualUri = ProductExporter._buildProductProjectionsUri(
         projectKey,
-        { staged: false },
+        { staged: false }
       )
       expect(actualUri).toEqual(expectedUri)
     })

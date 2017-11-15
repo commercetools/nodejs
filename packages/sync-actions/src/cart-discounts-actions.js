@@ -13,7 +13,7 @@ export const baseActionsList = [
   { action: 'setValidUntil', key: 'validUntil' },
 ]
 
-export function actionsMapBase (diff, oldObj, newObj) {
+export function actionsMapBase(diff, oldObj, newObj) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
     diff,

@@ -9,7 +9,7 @@
  * @return {Object} The instance of the service, can be chained.
  */
 
-export default function withVersion (version: number): Object {
+export default function withVersion(version: number): Object {
   if (typeof version !== 'number')
     throw new Error('A resource version is missing or invalid')
   this.params.version = version

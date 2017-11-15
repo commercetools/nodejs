@@ -8,14 +8,12 @@ import type {
 } from 'types/sdk'
 
 type Task = {
-  request: MiddlewareRequest;
-  response: MiddlewareResponse;
+  request: MiddlewareRequest,
+  response: MiddlewareResponse,
 }
 
-export default function createQueueMiddleware (
-  {
-    concurrency = 20,
-  }: QueueMiddlewareOptions = {},
+export default function createQueueMiddleware(
+  { concurrency = 20 }: QueueMiddlewareOptions = {}
 ): Middleware {
   const queue: Array<Task> = []
   let runningCount = 0
@@ -37,12 +35,12 @@ export default function createQueueMiddleware (
     // been completed and therefore trigger a pending task in the queue.
     const patchedResponse = {
       ...response,
-      resolve (data: any) {
+      resolve(data: any) {
         // Resolve original promise
         response.resolve(data)
         dequeue(next)
       },
-      reject (error: any) {
+      reject(error: any) {
         // Reject original promise
         response.reject(error)
         dequeue(next)

@@ -12,14 +12,9 @@ import * as diffpatcher from './diffpatcher'
  * @param  {Object} options.oldObj - the object that needs to be updated
  * @param  {Object} options.newObj - the new representation of the object
  */
-export function buildBaseAttributesActions ({
-  actions,
-  diff,
-  oldObj,
-  newObj,
-}) {
+export function buildBaseAttributesActions({ actions, diff, oldObj, newObj }) {
   return actions
-    .map((item) => {
+    .map(item => {
       const key = item.key // e.g.: name, description, ...
       const actionKey = item.actionKey || item.key
       const delta = diff[key]
@@ -31,14 +26,16 @@ export function buildBaseAttributesActions ({
 
       if (isNotDefinedNow && isNotDefinedBefore) return undefined
 
-      if (!isNotDefinedNow && isNotDefinedBefore) // no value previously set
+      if (!isNotDefinedNow && isNotDefinedBefore)
+        // no value previously set
         return { action: item.action, [actionKey]: now }
 
       /* no new value */
       if (isNotDefinedNow && !{}.hasOwnProperty.call(newObj, key))
         return undefined
 
-      if (isNotDefinedNow && {}.hasOwnProperty.call(newObj, key)) // value unset
+      if (isNotDefinedNow && {}.hasOwnProperty.call(newObj, key))
+        // value unset
         return { action: item.action }
 
       // We need to clone `before` as `patch` will mutate it
@@ -58,29 +55,29 @@ export function buildBaseAttributesActions ({
  * @param  {Object} options.oldObj - the object that needs to be updated
  * @param  {Object} options.newObj - the new representation of the object
  */
-export function buildReferenceActions ({
+export function buildReferenceActions({
   actions,
   diff,
   // oldObj,
   newObj,
 }) {
   return actions
-    .map((item) => {
+    .map(item => {
       const action = item.action
       const key = item.key
 
-      if (diff[key] && (
+      if (
+        diff[key] &&
         // The `key` value was added or removed
-        Array.isArray(diff[key]) ||
-        // The `key` value id changed
-        diff[key].id
-      )) {
+        (Array.isArray(diff[key]) ||
+          // The `key` value id changed
+          diff[key].id)
+      ) {
         const newValue = Array.isArray(diff[key])
           ? diffpatcher.getDeltaValue(diff[key])
           : newObj[key]
 
-        if (!newValue)
-          return { action }
+        if (!newValue) return { action }
 
         return {
           action,

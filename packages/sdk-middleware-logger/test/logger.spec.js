@@ -1,8 +1,6 @@
-import {
-  createLoggerMiddleware,
-} from '../src'
+import { createLoggerMiddleware } from '../src'
 
-function createTestRequest (options) {
+function createTestRequest(options) {
   return {
     uri: '',
     method: 'GET',
@@ -12,7 +10,7 @@ function createTestRequest (options) {
   }
 }
 
-function createTestResponse (options) {
+function createTestResponse(options) {
   return {
     ...options,
   }
@@ -49,18 +47,12 @@ describe('Logger', () => {
 
     const next = () => {
       expect(console.log).toHaveBeenCalledTimes(2)
-      expect(console.log).toHaveBeenCalledWith(
-        'Request: ',
-        request,
-      )
-      expect(console.log).toHaveBeenCalledWith(
-        'Response: ',
-        {
-          statusCode: response.statusCode,
-          body: response.body,
-          error: response.error,
-        },
-      )
+      expect(console.log).toHaveBeenCalledWith('Request: ', request)
+      expect(console.log).toHaveBeenCalledWith('Response: ', {
+        statusCode: response.statusCode,
+        body: response.body,
+        error: response.error,
+      })
     }
     loggerMiddleware(next)(request, response)
   })

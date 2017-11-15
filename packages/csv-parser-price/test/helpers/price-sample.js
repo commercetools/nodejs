@@ -1,4 +1,4 @@
-export default function () {
+export default function() {
   return {
     'variant-sku': 'my-price',
     value: { currencyCode: 'EUR', centAmount: '4200' },

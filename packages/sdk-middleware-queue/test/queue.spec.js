@@ -1,8 +1,6 @@
-import {
-  createQueueMiddleware,
-} from '../src'
+import { createQueueMiddleware } from '../src'
 
-function createTestRequest (options) {
+function createTestRequest(options) {
   return {
     uri: '',
     method: 'GET',
@@ -12,13 +10,13 @@ function createTestRequest (options) {
   }
 }
 
-function createTestResponse (options) {
+function createTestResponse(options) {
   return {
     ...options,
   }
 }
 
-function createTestMiddlewareOptions (options) {
+function createTestMiddlewareOptions(options) {
   return {
     ...options,
   }
@@ -26,7 +24,7 @@ function createTestMiddlewareOptions (options) {
 
 describe('Queue', () => {
   it('correctly enqueue / resolve tasks based on concurrency', () =>
-    new Promise((resolve) => {
+    new Promise(resolve => {
       const request = createTestRequest({
         uri: '/foo/bar',
       })
@@ -37,16 +35,13 @@ describe('Queue', () => {
         reject: rejectSpy,
       })
       const middlewareOptions = createTestMiddlewareOptions({ concurrency: 2 })
-      const queueMiddleware = createQueueMiddleware(
-        middlewareOptions,
-      )
+      const queueMiddleware = createQueueMiddleware(middlewareOptions)
       let count = 0
       const responseArgs = []
       const nextCount = (req, res) => {
         count += 1
         responseArgs.push(res)
       }
-
 
       // Trigger multiple concurrent dispatches (with max concurrency 2)
       queueMiddleware(nextCount)(request, response)
@@ -73,19 +68,16 @@ describe('Queue', () => {
       expect(rejectSpy).toHaveBeenCalledTimes(2)
       // All good, end the test
       resolve()
-    }),
-  )
+    }))
 
   it('dispatch incoming tasks with default concurrency', () =>
-    new Promise((resolve) => {
+    new Promise(resolve => {
       const request = createTestRequest({
         uri: '/foo/bar',
       })
       const response = createTestResponse()
       const middlewareOptions = createTestMiddlewareOptions()
-      const queueMiddleware = createQueueMiddleware(
-        middlewareOptions,
-      )
+      const queueMiddleware = createQueueMiddleware(middlewareOptions)
       const nextSpy = jest.fn()
 
       // Trigger multiple concurrent dispatches (default 20)
@@ -119,6 +111,5 @@ describe('Queue', () => {
 
       // All good, end the test
       resolve()
-    }),
-  )
+    }))
 })

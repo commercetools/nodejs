@@ -19,15 +19,13 @@ export const metaActionsList = [
   { action: 'setMetaDescription', key: 'metaDescription' },
 ]
 
-export const referenceActionsList = [
-  { action: 'changeParent', key: 'parent' },
-]
+export const referenceActionsList = [{ action: 'changeParent', key: 'parent' }]
 
 /**
  * SYNC FUNCTIONS
  */
 
-export function actionsMapBase (diff, oldObj, newObj) {
+export function actionsMapBase(diff, oldObj, newObj) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
     diff,
@@ -36,7 +34,7 @@ export function actionsMapBase (diff, oldObj, newObj) {
   })
 }
 
-export function actionsMapReferences (diff, oldObj, newObj) {
+export function actionsMapReferences(diff, oldObj, newObj) {
   return buildReferenceActions({
     actions: referenceActionsList,
     diff,
@@ -45,7 +43,7 @@ export function actionsMapReferences (diff, oldObj, newObj) {
   })
 }
 
-export function actionsMapMeta (diff, oldObj, newObj) {
+export function actionsMapMeta(diff, oldObj, newObj) {
   return buildBaseAttributesActions({
     actions: metaActionsList,
     diff,
@@ -54,23 +52,35 @@ export function actionsMapMeta (diff, oldObj, newObj) {
   })
 }
 
-export function actionsMapCustom (diff, oldObj, newObj) {
-  let actions = []
+export function actionsMapCustom(diff, oldObj, newObj) {
+  const actions = []
   if (!diff.custom) return actions
 
-  if (diff.custom.type && diff.custom.type.id)
-    actions.push({
-      action: 'setCustomType',
-      type: {
-        typeId: 'type',
-        id: Array.isArray(diff.custom.type.id)
-          ? diffpatcher.getDeltaValue(diff.custom.type.id)
-          : newObj.custom.type.id,
-      },
-      fields: Array.isArray(diff.custom.fields) ?
-        diffpatcher.getDeltaValue(diff.custom.fields) : newObj.custom.fields,
-    })
-  else if (diff.custom.fields) {
+  if (Array.isArray(diff.custom)) {
+    // If custom is not defined on the new or old category
+    const custom = diffpatcher.getDeltaValue(diff.custom, oldObj)
+    actions.push({ action: 'setCustomType', ...custom })
+  } else if (diff.custom.type) {
+    // If custom is set to an empty object on the new or old category
+    const type = Array.isArray(diff.custom.type)
+      ? diffpatcher.getDeltaValue(diff.custom.type, oldObj)
+      : diff.custom.type
+
+    if (!type) actions.push({ action: 'setCustomType' })
+    else if (type.id)
+      actions.push({
+        action: 'setCustomType',
+        type: {
+          typeId: 'type',
+          id: Array.isArray(type.id)
+            ? diffpatcher.getDeltaValue(type.id)
+            : newObj.custom.type.id,
+        },
+        fields: Array.isArray(diff.custom.fields)
+          ? diffpatcher.getDeltaValue(diff.custom.fields)
+          : newObj.custom.fields,
+      })
+  } else if (diff.custom.fields) {
     const customFieldsActions = Object.keys(diff.custom.fields).map(name => ({
       action: 'setCustomField',
       name,
@@ -78,7 +88,7 @@ export function actionsMapCustom (diff, oldObj, newObj) {
         ? diffpatcher.getDeltaValue(diff.custom.fields[name])
         : newObj.custom.fields[name],
     }))
-    actions = actions.concat(customFieldsActions)
+    actions.push(...customFieldsActions)
   }
 
   return actions

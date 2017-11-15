@@ -19,19 +19,19 @@ describe('getCredentials', () => {
 
   afterEach(() => sandbox.restore())
 
-  test('should reject error when missing project key argument', (done) => {
+  test('should reject error when missing project key argument', done => {
     getCredentials()
       .then(done.fail)
-      .catch((error) => {
+      .catch(error => {
         expect(error.message).toBe('Missing "projectKey" argument')
         done()
       })
   })
 
-  test('should reject when project credentials are not found', (done) => {
+  test('should reject when project credentials are not found', done => {
     getCredentials('forgery')
       .then(done.fail)
-      .catch((error) => {
+      .catch(error => {
         expect(error.message).toMatch(expectedErrorText.undefinedEnv)
         done()
       })
@@ -46,31 +46,30 @@ describe('getCredentialsFromEnvironment', () => {
   test('should resolve credentials from environment variables', () => {
     sandbox.stub(process, 'env', { CT_STROOPWAFEL: 'nyw:les' })
 
-    return getCredentialsFromEnvironment('stroopwafel')
-      .then(credentials =>
-        expect(credentials).toEqual({
-          clientId: 'nyw',
-          clientSecret: 'les',
-        }),
-      )
+    return getCredentialsFromEnvironment('stroopwafel').then(credentials =>
+      expect(credentials).toEqual({
+        clientId: 'nyw',
+        clientSecret: 'les',
+      })
+    )
   })
 
-  test('should reject on incorrect environment variable value', (done) => {
+  test('should reject on incorrect environment variable value', done => {
     sandbox.stub(process, 'env', { CT_STROOPWAFEL: 'nywles' })
 
     getCredentialsFromEnvironment('stroopwafel')
       .then(done.fail)
-      .catch((error) => {
+      .catch(error => {
         expect(error.message).toMatch(expectedErrorText.invalidEnvFormat)
         expect(error.message).toMatch(new RegExp(homepage))
         done()
       })
   })
 
-  test('should reject on absent environment variable key', (done) => {
+  test('should reject on absent environment variable key', done => {
     getCredentialsFromEnvironment('pepernoten')
       .then(done.fail)
-      .catch((error) => {
+      .catch(error => {
         expect(error.message).toMatch(expectedErrorText.undefinedEnv)
         expect(error.message).toMatch(new RegExp(homepage))
         done()
@@ -84,8 +83,7 @@ describe('setCredentialsFromEnvFile', () => {
   afterEach(() => sandbox.restore())
 
   test('should set environment variables', () => {
-    sandbox.stub(fs, 'readFileSync')
-      .returns(`
+    sandbox.stub(fs, 'readFileSync').returns(`
         CT_STROOPWAFEL=dev:null
         CT_PANNENKOEK=dev:urandom
       `)

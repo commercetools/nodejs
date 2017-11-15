@@ -13,12 +13,14 @@ describe('withVersion', () => {
   })
 
   it('should throw if not passed any value', () => {
-    expect(() => service.withVersion())
-      .toThrow(/A resource version is missing or invalid/)
+    expect(() => service.withVersion()).toThrow(
+      /A resource version is missing or invalid/
+    )
   })
 
   it('should throw if not passed a number', () => {
-    expect(() => service.withVersion('foo'))
-      .toThrow(/A resource version is missing or invalid/)
+    expect(() => service.withVersion('foo')).toThrow(
+      /A resource version is missing or invalid/
+    )
   })
 })

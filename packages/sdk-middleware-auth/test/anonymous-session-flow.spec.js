@@ -1,12 +1,10 @@
-import {
-  createAuthMiddlewareForAnonymousSessionFlow,
-} from '../src'
+import { createAuthMiddlewareForAnonymousSessionFlow } from '../src'
 
 import authMiddlewareBase from '../src/base-auth-flow'
 
 jest.mock('../src/base-auth-flow')
 
-function createTestRequest (options) {
+function createTestRequest(options) {
   return {
     url: '',
     method: 'GET',
@@ -16,7 +14,7 @@ function createTestRequest (options) {
   }
 }
 
-function createTestMiddlewareOptions (options) {
+function createTestMiddlewareOptions(options) {
   return {
     host: 'https://auth.commercetools.co',
     projectKey: 'foo',
@@ -40,12 +38,12 @@ describe('Anonymous Session Flow', () => {
         resolve,
         reject,
       }
-      const next = (actualParams) => {
+      const next = actualParams => {
         expect(actualParams.request).toEqual(request)
         expect(actualParams.response).toEqual(response)
         expect(actualParams.pendingTasks).toEqual([])
         expect(actualParams.url).toBe(
-          'https://auth.commercetools.co/oauth/foo/anonymous/token',
+          'https://auth.commercetools.co/oauth/foo/anonymous/token'
         )
         expect(actualParams.basicAuth).toBe('MTIzOnNlY3JldA==')
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)
@@ -54,10 +52,9 @@ describe('Anonymous Session Flow', () => {
       }
       const middlewareOptions = createTestMiddlewareOptions()
       const authMiddleware = createAuthMiddlewareForAnonymousSessionFlow(
-        middlewareOptions,
+        middlewareOptions
       )
 
       authMiddleware(next)(request, response)
-    }),
-  )
+    }))
 })

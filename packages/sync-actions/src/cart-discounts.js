@@ -6,19 +6,19 @@ import * as diffpatcher from './utils/diffpatcher'
 
 export const actionGroups = ['base']
 
-function createCartDiscountsMapActions (mapActionGroup) {
-  return function doMapActions (diff, newObj, oldObj) {
+function createCartDiscountsMapActions(mapActionGroup) {
+  return function doMapActions(diff, newObj, oldObj) {
     const allActions = []
 
     allActions.push(
-      mapActionGroup('base', () => actionsMapBase(diff, oldObj, newObj)),
+      mapActionGroup('base', () => actionsMapBase(diff, oldObj, newObj))
     )
 
     return flatten(allActions)
   }
 }
 
-export default (config) => {
+export default config => {
   const mapActionGroup = createMapActionGroup(config)
   const doMapActions = createCartDiscountsMapActions(mapActionGroup)
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)

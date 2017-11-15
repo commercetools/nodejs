@@ -1,6 +1,4 @@
-import cartDiscountsSyncFn, {
-  actionGroups,
-} from '../src/cart-discounts'
+import cartDiscountsSyncFn, { actionGroups } from '../src/cart-discounts'
 import { baseActionsList } from '../src/cart-discounts-actions'
 
 describe('Cart Discounts Exports', () => {
@@ -26,7 +24,9 @@ describe('Cart Discounts Exports', () => {
 
 describe('Cart Discounts Actions', () => {
   let cartDiscountsSync
-  beforeEach(() => { cartDiscountsSync = cartDiscountsSyncFn() })
+  beforeEach(() => {
+    cartDiscountsSync = cartDiscountsSyncFn()
+  })
 
   it('should build the `changeIsActive` action', () => {
     const before = {
