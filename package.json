@@ -6,7 +6,7 @@
     "npm": ">=2"
   },
   "scripts": {
-    "postinstall": "check-node-version --package && npm run boostrap && npm run build",
+    "postinstall": "check-node-version --package && npm run bootstrap && npm run build",
     "bootstrap": "lerna bootstrap",
     "check-updates": "./scripts/check-updates",
     "clean": "rm -rf coverage; lerna exec -- rimraf lib dist",
@@ -21,8 +21,7 @@
     "test:coverage": "npm run build && npm test -- --no-watchman --coverage",
     "test:ci": "npm run test -- --no-watchman --maxWorkers=10",
     "test:coverage:ci": "npm run test:ci -- --coverage && codecov",
-    "release:semantic": "lerna-semantic-release pre && lerna-semantic-release post && lerna-semantic-release perform",
-    "release:manual": "./scripts/publish-manually",
+    "release": "npm run build && lerna publish --registry=https://registry.npmjs.org/ --conventional-commits",
     "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
     "docs:build": "npm run docs:prepare && gitbook build && cp logo/apple-touch-icon.png _book/gitbook/images/apple-touch-icon-precomposed-152.png && cp logo/favicon.ico _book/gitbook/images",
@@ -73,7 +72,6 @@
     "husky": "0.14.3",
     "jest": "21.2.1",
     "lerna": "2.5.1",
-    "lerna-semantic-release": "9.1.0",
     "npm-check-updates": "2.13.0",
     "prettier": "^1.8.0",
     "rimraf": "2.6.2",
