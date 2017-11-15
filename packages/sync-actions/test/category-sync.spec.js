@@ -117,4 +117,103 @@ describe('Actions', () => {
     ]
     expect(actual).toEqual(expected)
   })
+
+  describe('changing the custom type of a category', () => {
+    describe('existing category has no `custom` object', () => {
+      it('should build `setCustomType` action with the new type', () => {
+        const before = {
+          key: 'category-key',
+        }
+        const now = {
+          key: 'category-key',
+          custom: {
+            type: {
+              typeId: 'type',
+              id: 'customType2',
+            },
+            fields: {
+              customField1: true,
+            },
+          },
+        }
+        const actual = categorySync.buildActions(now, before)
+        const expected = [{ action: 'setCustomType', ...now.custom }]
+        expect(actual).toEqual(expected)
+      })
+    })
+
+    describe('existing category has an empty `custom` object', () => {
+      it('should build `setCustomType` action with the new type', () => {
+        const before = {
+          key: 'category-key',
+          custom: {},
+        }
+        const now = {
+          key: 'category-key',
+          custom: {
+            type: {
+              typeId: 'type',
+              id: 'customType2',
+            },
+            fields: {
+              customField1: true,
+            },
+          },
+        }
+        const actual = categorySync.buildActions(now, before)
+        const expected = [{ action: 'setCustomType', ...now.custom }]
+        expect(actual).toEqual(expected)
+      })
+    })
+
+    describe('existing category has a `custom` object', () => {
+      describe('new category has no `custom` object', () => {
+        it('build `setCustomType` action to unset the `custom` type', () => {
+          const before = {
+            key: 'category-key',
+            custom: {
+              type: {
+                typeId: 'type',
+                id: 'customType2',
+              },
+              fields: {
+                customField1: true,
+              },
+            },
+          }
+          const now = {
+            key: 'category-key',
+            custom: {},
+          }
+          const actual = categorySync.buildActions(now, before)
+          const expected = [{ action: 'setCustomType' }]
+          expect(actual).toEqual(expected)
+        })
+      })
+
+      describe('new category has an empty `custom` object', () => {
+        it('build `setCustomType` action to unset the `custom` type', () => {
+          const before = {
+            key: 'category-key',
+            custom: {
+              type: {
+                typeId: 'type',
+                id: 'customType2',
+              },
+              fields: {
+                customField1: true,
+              },
+            },
+          }
+          const now = {
+            key: 'category-key',
+            // no custom object
+          }
+          const actual = categorySync.buildActions(now, before)
+          const expected = [{ action: 'setCustomType' }]
+          expect(actual).toEqual(expected)
+        })
+      })
+    })
+  })
 })

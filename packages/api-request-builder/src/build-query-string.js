@@ -25,8 +25,12 @@ export default function buildQueryString(
     priceChannel,
     searchKeywords,
     onlyIds,
+    version,
+    customerId,
   } = params
   let queryString = []
+
+  if (customerId) queryString.push(`customerId=${customerId}`)
 
   if (typeof staged === 'boolean')
     queryString.push(`staged=${staged.toString()}`)
@@ -83,13 +87,14 @@ export default function buildQueryString(
     filterByQuery.forEach(f => queryString.push(`filter.query=${f}`))
     filterByFacets.forEach(f => queryString.push(`filter.facets=${f}`))
   }
+
   if (searchKeywords)
     searchKeywords.forEach(f =>
       queryString.push(`searchKeywords.${f.lang}=${f.value}`)
     )
 
-  if (onlyIds)
-    queryString.push('onlyIds=true')
+  if (onlyIds) queryString.push('onlyIds=true')
+  if (version) queryString.push(`version=${version}`)
 
   return queryString.join('&')
 }

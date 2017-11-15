@@ -213,6 +213,8 @@ export type ServiceBuilderDefaultParams = {
     },
   },
   onlyIds?: boolean,
+  version?: number,
+  customerId?: string,
 }
 export type ServiceBuilderParams = {
   // query-expand
@@ -256,7 +258,7 @@ export type ServiceBuilderParams = {
   whereOperator?: 'and' | 'or',
 
   // query-restirct-result
-  onlyIds?: boolean;
+  onlyIds?: boolean,
 
   // version
   version?: string,

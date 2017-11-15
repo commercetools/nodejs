@@ -129,7 +129,7 @@ describe('createService', () => {
       })
       it('should support `customerId`', () => {
         expect(service.parse({ customerId: 'bar' }).build()).toBe(
-          '/my-project1/foo/?customerId=bar'
+          '/my-project1/foo?customerId=bar'
         )
       })
 
@@ -154,14 +154,14 @@ describe('createService', () => {
 
       // query-restrict-result
       it('should support `onlyIds` being truthy', () => {
-        expect(
-          service.parse({ onlyIds: true }).build(),
-        ).toBe('/my-project1/foo?onlyIds=true')
+        expect(service.parse({ onlyIds: true }).build()).toBe(
+          '/my-project1/foo?onlyIds=true'
+        )
       })
       it('should support `onlyIds` being falsy', () => {
-        expect(
-          service.parse({ onlyIds: false }).build(),
-        ).toBe('/my-project1/foo')
+        expect(service.parse({ onlyIds: false }).build()).toBe(
+          '/my-project1/foo'
+        )
       })
     })
     it('should support `page`', () => {
@@ -364,6 +364,46 @@ describe('createService', () => {
       service = createService(options, projectKey)
     })
 
+    describe('with additional services', () => {
+      // let service
+      beforeEach(() => {
+        service = createService(
+          {
+            type: 'test',
+            endpoint: '/test',
+            features: ['queryOne', 'queryExpand'],
+          },
+          projectKey
+        )
+      })
+      it('should mix customerId and queryParams', () => {
+        expect(
+          service
+            .byCustomerId('foo')
+            .expand('baz')
+            .build()
+        ).toBe('/my-project1/test?customerId=foo&expand=baz')
+      })
+
+      it('should mix customerId and version', () => {
+        expect(
+          service
+            .byCustomerId('foo')
+            .withVersion(3)
+            .build()
+        ).toBe('/my-project1/test?customerId=foo&version=3')
+      })
+
+      it('should mix queryParams and version', () => {
+        expect(
+          service
+            .withVersion(3)
+            .expand('baz')
+            .build()
+        ).toBe('/my-project1/test?expand=baz&version=3')
+      })
+    })
+
     it('include projectkey in uri by default', () => {
       expect(service.build()).toBe('/my-project1/foo')
     })
@@ -379,7 +419,7 @@ describe('createService', () => {
     })
     it('endpoint with customer id', () => {
       expect(service.byCustomerId('cust123').build()).toBe(
-        '/my-project1/foo/?customerId=cust123'
+        '/my-project1/foo?customerId=cust123'
       )
     })
     it('endpoint with key', () => {
@@ -391,8 +431,7 @@ describe('createService', () => {
       )
     })
     it('endpoint with restricted to ids only', () => {
-      expect(service.onlyIds().build())
-        .toBe('/my-project1/foo?onlyIds=true')
+      expect(service.onlyIds().build()).toBe('/my-project1/foo?onlyIds=true')
     })
     it('include version in uri', () => {
       expect(service.withVersion(2).build()).toBe('/my-project1/foo?version=2')
