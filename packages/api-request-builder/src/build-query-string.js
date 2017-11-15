@@ -24,6 +24,7 @@ export default function buildQueryString(
     priceCustomerGroup,
     priceChannel,
     searchKeywords,
+    onlyIds,
     version,
     customerId,
   } = params
@@ -92,6 +93,7 @@ export default function buildQueryString(
       queryString.push(`searchKeywords.${f.lang}=${f.value}`)
     )
 
+  if (onlyIds) queryString.push('onlyIds=true')
   if (version) queryString.push(`version=${version}`)
 
   return queryString.join('&')

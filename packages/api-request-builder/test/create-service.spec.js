@@ -11,6 +11,7 @@ const fakeService = {
     'search',
     'projection',
     'suggest',
+    'restrictResult',
   ],
 }
 
@@ -32,6 +33,7 @@ const expectedServiceProperties = [
   'staged',
   'searchKeywords',
   'build',
+  'onlyIds',
 ]
 const projectKey = 'my-project1'
 
@@ -95,6 +97,7 @@ describe('createService', () => {
           defaultFeatures.queryOne,
           defaultFeatures.queryExpand,
           defaultFeatures.projection,
+          defaultFeatures.restrictResult,
         ],
       }
       service = createService(options, projectKey)
@@ -147,6 +150,18 @@ describe('createService', () => {
             })
             .build()
         ).toBe('/my-project1/foo?sort=foo%20asc&sort=bar%20desc')
+      })
+
+      // query-restrict-result
+      it('should support `onlyIds` being truthy', () => {
+        expect(service.parse({ onlyIds: true }).build()).toBe(
+          '/my-project1/foo?onlyIds=true'
+        )
+      })
+      it('should support `onlyIds` being falsy', () => {
+        expect(service.parse({ onlyIds: false }).build()).toBe(
+          '/my-project1/foo'
+        )
       })
     })
     it('should support `page`', () => {
@@ -344,7 +359,7 @@ describe('createService', () => {
       const options = {
         type: 'foo',
         endpoint: '/foo',
-        features: ['queryOne', 'queryExpand'],
+        features: ['queryOne', 'queryExpand', 'restrictResult'],
       }
       service = createService(options, projectKey)
     })
@@ -414,6 +429,9 @@ describe('createService', () => {
       expect(service.expand('channel').build()).toBe(
         '/my-project1/foo?expand=channel'
       )
+    })
+    it('endpoint with restricted to ids only', () => {
+      expect(service.onlyIds().build()).toBe('/my-project1/foo?onlyIds=true')
     })
     it('include version in uri', () => {
       expect(service.withVersion(2).build()).toBe('/my-project1/foo?version=2')

@@ -21,6 +21,7 @@ import * as queryPage from './query-page'
 import * as queryProjection from './query-projection'
 import * as querySuggest from './query-suggest'
 import * as querySearch from './query-search'
+import * as queryRestrictResult from './query-restrict-result'
 
 type UseKey = {
   withProjectKey: boolean,
@@ -100,6 +101,12 @@ export default function createService(
         return {
           ...acc,
           ...queryProjection,
+        }
+
+      if (feature === defaultFeatures.restrictResult)
+        return {
+          ...acc,
+          ...queryRestrictResult,
         }
 
       return acc
