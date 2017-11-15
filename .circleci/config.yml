@@ -161,10 +161,6 @@ workflows:
             - lint
       - test_integration:
           context: org-global
-          filters:
-            branches:
-              only:
-                - master
           requires:
             # Only depending on one unit testing
             # job will speed up the build by starting
