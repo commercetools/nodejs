@@ -45,7 +45,7 @@ aliases:
     command: yarn test:ci --maxWorkers=10
 
   - &unit_test_with_coverage
-    name: Integration testing
+    name: Unit testing (with coverage report)
     command: yarn test:coverage:ci
 
 version: 2
@@ -76,7 +76,7 @@ jobs:
       - run: *yarn_build
       - save_cache: *save_yarn_cache
       - run:
-          name: Run linters
+          name: Linting
           command: yarn lint
   test_unit_node_4:
     <<: *node4Environment
@@ -118,14 +118,14 @@ jobs:
       - run: *yarn_build
       - save_cache: *save_yarn_cache
       - run:
-          name: Run integration tests
+          name: Integration testing
           command: yarn test:integration
   prepare_release:
     <<: *node8Environment
     steps:
       - checkout
       - run:
-          name: Run prepare release
+          name: Preparing release
           command: ./.circleci/prepare-release-packages.sh
   perform_release:
     <<: *node8Environment
@@ -137,7 +137,7 @@ jobs:
       - run: *yarn_build
       - save_cache: *save_yarn_cache
       - run:
-          name: Run perform release
+          name: Performing release
           command: ./.circleci/perform-release-packages.sh
 
 workflows:
