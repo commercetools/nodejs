@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 git config credential.helper "store --file=.git/credentials"
-echo "https://$RELEASE_GH_TOKEN:@github.com/$TRAVIS_REPO_SLUG.git" > .git/credentials
+echo "https://$RELEASE_GH_TOKEN:@github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git" > .git/credentials
 
 git config --global user.email "npmjs@commercetools.com"
 git config --global user.name "CT Release Bot"

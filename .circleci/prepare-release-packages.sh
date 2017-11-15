@@ -3,7 +3,7 @@
 rm -rf .git
 git init
 git clean -dfx
-git remote add origin ${CIRCLE_REPOSITORY_URL}.git
+git remote add origin ${CIRCLE_REPOSITORY_URL}
 git fetch origin
 git checkout ${CIRCLE_BRANCH}
 
