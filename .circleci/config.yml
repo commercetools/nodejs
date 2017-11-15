@@ -165,7 +165,13 @@ workflows:
       - prepare_release:
           context: org-global
           requires:
+            # Requiring test_integration implicitly
+            # requires test_unit_node_8 but waits for
+            # the integration tests. However, also
+            # all other unit tests should pass.
             - test_integration
+            - test_unit_node_4
+            - test_unit_node_6
           filters:
             branches:
               only:
