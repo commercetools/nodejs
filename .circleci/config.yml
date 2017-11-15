@@ -15,7 +15,7 @@ aliases:
   - &restore_yarn_cache
     keys:
       - v1-yarn-cache-{{ checksum "yarn.lock" }}
-      - v1-yarn-cache-
+      - v1-yarn-cache
 
   - &save_yarn_cache
     key: v1-yarn-cache-{{ checksum "yarn.lock" }}
@@ -23,33 +23,29 @@ aliases:
       - node_modules
 
   - &yarn_install
-    name: Install dependencies
+    name: Installing
     # Ignoring scripts (e.g. post-install) to gain more control
     # in the jobs to only e.g. build when explicitely needed.
     command: yarn install --pure-lockfile --ignore-scripts
 
   - &yarn_bootstrap
-    name: Run bootstrap
+    name: Bootstraping
     # Limiting the default concurrency (4) of lerna to 2
     # as the build otherwise dies due to resouce restrictions.
     command: yarn bootstrap --concurrency=2
 
   - &yarn_build
-    name: Run build
+    name: Building
     command: yarn build
 
   - &unit_test
-    name: Run tests
+    name: Unit testing
     # Limiting the workers of Jest to 10
     # as the build otherwise dies due to resouce restrictions.
     command: yarn test:ci --maxWorkers=10
 
-  - &unit_test
-    name: Run tests
-    command: yarn test:ci --maxWorkers=10
-
   - &unit_test_with_coverage
-    name: Run tests
+    name: Integration testing
     command: yarn test:coverage:ci
 
 version: 2
@@ -60,15 +56,15 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run:
-          name: Install greenkeeper-lockfile-update
+          name: Installing greenkeeper-lockfile-update
           command: yarn global add greenkeeper-lockfile@1 --prefix ~/.yarn
       - run: *yarn_install
       - save_cache: *save_yarn_cache
       - run:
-          name: Update greenkeeper-lockfile
+          name: Updating greenkeeper-lockfile
           command: ~/.yarn/bin/greenkeeper-lockfile-update
       - run:
-          name: Upload greenkeeper-lockfile
+          name: Uploading greenkeeper-lockfile
           command: ~/.yarn/bin/greenkeeper-lockfile-upload
   lint:
     <<: *node8Environment
