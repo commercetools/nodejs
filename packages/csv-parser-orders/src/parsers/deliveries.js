@@ -49,6 +49,12 @@ export default class DeliveriesParser extends AbstractParser {
      *     {
      *       "id": String,
      *       "createdAt": DateTime,
+     *       "items": [
+     *         {
+     *           "id": String",
+     *           "quantity": Number
+     *         }
+     *       ]
      *       "measurements": {
      *         "heightInMillimeter": Number,
      *         "lengthInMillimeter": Number,
@@ -228,6 +234,7 @@ export default class DeliveriesParser extends AbstractParser {
       'parcel.provider': 'trackingData.provider',
       'parcel.carrier': 'trackingData.carrier',
       'parcel.isReturn': 'trackingData.isReturn',
+      'parcel.items': 'items',
     }
 
     const parcel = {
@@ -252,9 +259,24 @@ export default class DeliveriesParser extends AbstractParser {
       if (fieldName === 'parcel.isReturn')
         fieldValue = fieldValue === '1' || fieldValue.toLowerCase() === 'true'
 
+      if (fieldName === 'parcel.items')
+        fieldValue = DeliveriesParser._parseParcelItems(fieldValue)
+
       objectPath.set(parcel, transitionMap[fieldName], fieldValue)
     })
 
     return parcel
+  }
+
+  static _parseParcelItems(itemsString) {
+    if (!itemsString) return []
+
+    return itemsString.split(';').map(itemString => {
+      const item = itemString.split(':')
+      return {
+        id: item[0],
+        quantity: Number(item[1]),
+      }
+    })
   }
 }
