@@ -21,7 +21,7 @@
     "test:coverage": "npm run build && npm test -- --no-watchman --coverage",
     "test:ci": "npm run test -- --no-watchman --maxWorkers=10",
     "test:coverage:ci": "npm run test:ci -- --coverage && codecov",
-    "release": "npm run build && lerna publish --registry=https://registry.npmjs.org/ --conventional-commits",
+    "release": "npm run build && lerna publish --registry=https://registry.npmjs.org/ --conventional-commits && npm run docs:publish",
     "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
     "docs:build": "npm run docs:prepare && gitbook build && cp logo/apple-touch-icon.png _book/gitbook/images/apple-touch-icon-precomposed-152.png && cp logo/favicon.ico _book/gitbook/images",
