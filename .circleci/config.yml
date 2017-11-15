@@ -120,29 +120,10 @@ jobs:
       - run:
           name: Integration testing
           command: yarn test:integration
-  prepare_release:
-    <<: *node8Environment
-    steps:
-      - checkout
-      - run:
-          name: Preparing release
-          command: ./.circleci/prepare-release-packages.sh
-  perform_release:
-    <<: *node8Environment
-    steps:
-      - checkout
-      - restore-cache: *restore_yarn_cache
-      - run: *yarn_install
-      - run: *yarn_bootstrap
-      - run: *yarn_build
-      - save_cache: *save_yarn_cache
-      - run:
-          name: Performing release
-          command: ./.circleci/perform-release-packages.sh
 
 workflows:
   version: 2
-  build_and_test_and_maybe_release:
+  build_and_test:
     jobs:
       - greenkeeper_lockfile
       - lint
@@ -162,15 +143,3 @@ workflows:
             # job will speed up the build by starting
             # the integration testing early (in confidence).
             - test_unit_node_8
-      - prepare_release:
-          context: org-global
-          requires:
-            - test_integration
-          filters:
-            branches:
-              only:
-                - master
-      - perform_release:
-          context: org-global
-          requires:
-            - prepare_release
