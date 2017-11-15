@@ -2,22 +2,22 @@
 
 /* Config */
 export type ApiConfigOptions = {
-  host: string;
-  projectKey: string;
+  host: string,
+  projectKey: string,
   credentials: {
-    clientId: string;
-    clientSecret: string;
-  };
-  scopes: Array<string>;
-  apiUrl?: string;
+    clientId: string,
+    clientSecret: string,
+  },
+  scopes: Array<string>,
+  apiUrl?: string,
 }
 
 /* Logger */
 export type LoggerOptions = {
-  error: Function;
-  info: Function;
-  warn: Function;
-  debug: Function;
+  error: Function,
+  info: Function,
+  warn: Function,
+  debug: Function,
 }
 
 export type ParserConfigOptions = {
@@ -31,12 +31,12 @@ export type ParserConfigOptions = {
 }
 
 export type ExportConfigOptions = {
-  batch: number;
-  expand: Array<string>;
-  exportType: 'json' | 'chunk';
-  predicate: string;
-  staged: boolean;
-  total: number;
+  batch: number,
+  expand: Array<string>,
+  exportType: 'json' | 'chunk',
+  predicate: string,
+  staged: boolean,
+  total: number,
 }
 
 /* From API */
@@ -47,13 +47,13 @@ export type TypeReference = {
 }
 
 type CustomField = {
-  type: TypeReference;
-  fields: Object;
+  type: TypeReference,
+  fields: Object,
 }
 
 type AssetDimensions = {
-  w: number;
-  h: number;
+  w: number,
+  h: number,
 }
 
 export type Image = {
@@ -63,72 +63,72 @@ export type Image = {
 }
 
 type Attribute = {
-  name: string;
-  value: Object;
+  name: string,
+  value: Object,
 }
 
 type AssetSource = {
-  uri: string;
-  key?: string;
-  dimensions?: AssetDimensions;
-  contentType?: string;
+  uri: string,
+  key?: string,
+  dimensions?: AssetDimensions,
+  contentType?: string,
 }
 
 type Asset = {
-  id: string;
-  sources: Array<AssetSource>;
-  name: Object;
-  description?: Object;
-  tags?: Array<string>;
-  custom: CustomField;
+  id: string,
+  sources: Array<AssetSource>,
+  name: Object,
+  description?: Object,
+  tags?: Array<string>,
+  custom: CustomField,
 }
 
 type Money = {
-  currencyCode: string;
-  centAmount: number;
+  currencyCode: string,
+  centAmount: number,
 }
 
 type DiscountedPrice = {
-  value: Money;
-  discount: TypeReference;
+  value: Money,
+  discount: TypeReference,
 }
 
 type PriceTier = {
-  minimumQuantity: number;
-  value: Money;
+  minimumQuantity: number,
+  value: Money,
 }
 
 type Price = {
-  id: string;
-  value: Money;
-  country?: string;
-  customerGroup?: TypeReference;
-  channel?: TypeReference;
-  validFrom?: string;
-  validUntil?: string;
-  tiers?: Array<PriceTier>;
-  discounted?: DiscountedPrice;
-  custom?: CustomField;
+  id: string,
+  value: Money,
+  country?: string,
+  customerGroup?: TypeReference,
+  channel?: TypeReference,
+  validFrom?: string,
+  validUntil?: string,
+  tiers?: Array<PriceTier>,
+  discounted?: DiscountedPrice,
+  custom?: CustomField,
 }
 
 type ScopedPrice = {
-  id: string;
-  value: Money;
-  currentValue: Money;
-  country?: string;
-  customerGroup?: TypeReference;
-  channel?: TypeReference;
-  validFrom?: string;
-  validUntil?: string;
-  discounted?: DiscountedPrice;
-  custom?: CustomField;
+  id: string,
+  value: Money,
+  currentValue: Money,
+  country?: string,
+  customerGroup?: TypeReference,
+  channel?: TypeReference,
+  validFrom?: string,
+  validUntil?: string,
+  discounted?: DiscountedPrice,
+  custom?: CustomField,
 }
 
 type ProductVariantAvailability = {
-  isOnStock?: boolean;
-  restockableInDays?: number;
-  availableQuantity?: number;
-  channels?: Array<Object>;
+  isOnStock?: boolean,
+  restockableInDays?: number,
+  availableQuantity?: number,
+  channels?: Array<Object>,
 }
 
 export type Variant = {
@@ -337,12 +337,12 @@ export type MappedProduct = {
 }
 
 type ProcessFnResponseBody = {
-  offset: number;
-  count: number;
-  results: Array<ProductProjection>;
+  offset: number,
+  count: number,
+  results: Array<ProductProjection>,
 }
 
 export type ProcessFnResponse = {
-  body: ProcessFnResponseBody;
-  statusCode: number;
+  body: ProcessFnResponseBody,
+  statusCode: number,
 }

@@ -31,11 +31,23 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 
 5. Integration tests are separated out in another folder "/integration-tests". To run the integration test, you need to create a env file as specified [here](https://commercetools.github.io/nodejs/sdk/api/getCredentials.html). Then run integration test with
   ```
-  npm run it -- --projectkey=testing-project --runInBand
+  npm run test:integration -- --projectkey=testing-project --runInBand
   ```
   replace "testing-project" with your project
 
-6. Linting and static checks are done by `npm run lint`. We follow lint rules defined in our [eslint-config](https://github.com/commercetools/eslint-config) which is based on [Airbnb eslint config](https://www.npmjs.com/package/eslint-config-airbnb). Static checks are done using [Flow](https://flowtype.org/) and can be included / adopted incrementally. Commiting also runs a git hook to lint the changed files.
+6. Linting and static checks are done by `npm run lint`. We the [Airbnb eslint config](https://www.npmjs.com/package/eslint-config-airbnb). Static checks are done using [Flow](https://flowtype.org/) and can be included / adopted incrementally. Committing also runs a git hook to lint the changed files.
+
+## Formatting (Prettier)
+
+We use [prettier](https://github.com/jlongster/prettier) to format our code, so we don't ever have to argue over code-style.
+
+Prettier is integrated into ESLint, so all code is checked. The rules are only enabled when running `yarn run lint` from the command-line.
+The rules are disabled in Atom so we don't get the annoying warnings while developing.
+
+### Setup
+
+Since prettier is integrated into ESLint it should run for the exact same files that are being linted.
+We run prettier as part of ESLint using `eslint-plugin-prettier`. We disable all rules that `prettier` takes care of using `eslint-config-prettier`.
 
 ## Upgrading dependencies
 
@@ -47,17 +59,12 @@ To ensure the lock file is up-to-date with the new versions, it's recommended to
 
 ## Releases
 
-We use [semantic release](https://github.com/semantic-release/semantic-release) to automatically do releases based on the commit message.
-Since we are using [lerna](https://github.com/lerna/lerna) we need to specify in the commit description which packages might be affected by the release.
-
-If for some reason you have to release a module manually, please run `npm run manual-release` to publish the module. The reason for this are well stated [here](https://github.com/commercetools/nodejs/issues/223)
+We use lerna for releasing packages. Just run `npm run release` from `master` (after pulling in the latest merges) to publish a single or a set of modules. Lerna will check changes on packages providing semver bumps according to the commit messages used for each package.
 
 #### Commit message
 Make sure your commit messages follow [Angular's commit message format](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines). To make this easy run `npm run commit` from the root.
 ````
     docs(contributing): add example of a full commit message
-
-    affects: @commercetools/readers
 
     The example commit message in the contributing.md document is not a concrete example. This is a problem because the
     contributor is left to imagine what the commit message should look like based on a description rather than an example. Fix the
@@ -67,15 +74,13 @@ Make sure your commit messages follow [Angular's commit message format](https://
     BREAKING CHANGE: imagination no longer works
 ````
 
-#### Release triggers
+#### Semver version triggers
 
 Based on the semantic release conventions, there are 3 triggers to control the semver version plus a trigger for releasing the actual packages.
 
 - `fix` *(commit type)*: commits with this type will [bump a `patch` version](https://github.com/semantic-release/semantic-release#patch-release)
 - `feat` *(commit type)*: commits with this type will [bump a `minor` version](https://github.com/semantic-release/semantic-release#minor-feature-release)
 - `BREAKING CHANGE` *(commit description)*: commits with this keywords in the description will [bump a `major` version](https://github.com/semantic-release/semantic-release#major-breaking-release)
-
-- `affects: <package-1>,<package-2>,...` *(release targets)*: commits with this sentence in the description will target the release of the listed packages with the version based on the triggers above
 
 #### Merging Pull Requests
 

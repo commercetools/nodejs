@@ -5,44 +5,34 @@ import type {
   ExporterOptions,
   LoggerOptions,
 } from 'types/discountCodes'
-import type {
-  Client,
-  ClientRequest,
-} from 'types/sdk'
+import type { Client, ClientRequest } from 'types/sdk'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
-import {
-  createAuthMiddlewareForClientCredentialsFlow,
-} from '@commercetools/sdk-middleware-auth'
-import {
-  createUserAgentMiddleware,
-} from '@commercetools/sdk-middleware-user-agent'
+import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
+import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import csv from 'fast-csv'
 import JSONStream from 'JSONStream'
 import { flatten } from 'flat'
 import pkg from '../package.json'
 
 type ConfigType = {
-  batchSize: number;
-  accessToken: string;
-  delimiter: string;
-  exportFormat: string;
-  predicate: string;
-  multiValueDelimiter: string
+  batchSize: number,
+  accessToken: string,
+  delimiter: string,
+  exportFormat: string,
+  predicate: string,
+  multiValueDelimiter: string,
 }
 export default class DiscountCodeExport {
   // Set flowtype annotations
-  apiConfig: ApiConfigOptions;
-  client: Client;
-  config: ConfigType;
-  logger: LoggerOptions;
-  _processCode: Function;
+  apiConfig: ApiConfigOptions
+  client: Client
+  config: ConfigType
+  logger: LoggerOptions
+  _processCode: Function
 
-  constructor (
-    options: ExporterOptions,
-    logger: LoggerOptions,
-  ) {
+  constructor(options: ExporterOptions, logger: LoggerOptions) {
     if (!options.apiConfig)
       throw new Error('The contructor must be passed an `apiConfig` object')
     if (options.batchSize > 500)
@@ -79,7 +69,7 @@ export default class DiscountCodeExport {
     this._processCode = this._processCode.bind(this)
   }
 
-  run (outputStream: stream$Writable) {
+  run(outputStream: stream$Writable) {
     this.logger.info('Starting Export')
     if (this.config.exportFormat === 'csv') {
       const csvOptions = {
@@ -98,27 +88,23 @@ export default class DiscountCodeExport {
     }
   }
 
-  _handleOutput (
-    outputStream: stream$Writable,
-    pipeStream: stream$Writable,
-  ) {
+  _handleOutput(outputStream: stream$Writable, pipeStream: stream$Writable) {
     this._fetchCodes(pipeStream)
       .then(() => {
         this.logger.info('Export operation completed successfully')
-        if (outputStream !== process.stdout)
-          pipeStream.end()
+        if (outputStream !== process.stdout) pipeStream.end()
       })
       .catch((e: Error) => {
         outputStream.emit('error', e)
       })
   }
 
-  _fetchCodes (output: stream$Writable): Promise<any> {
+  _fetchCodes(output: stream$Writable): Promise<any> {
     const request = this._buildRequest()
-    return this.client.process(request,
+    return this.client.process(
+      request,
       (data: Object): Promise<any> => {
-        if (data.statusCode !== 200)
-          return Promise.reject(data)
+        if (data.statusCode !== 200) return Promise.reject(data)
         this.logger.verbose(`Successfully exported ${data.body.count} codes`)
         data.body.results.forEach((codeObj: string) => {
           output.write(codeObj)
@@ -127,14 +113,13 @@ export default class DiscountCodeExport {
       },
       {
         accumulate: false,
-      })
+      }
+    )
   }
 
-  _buildRequest (): ClientRequest {
-    const service = this._createService()
-      .perPage(this.config.batchSize)
-    if (this.config.predicate)
-      service.where(this.config.predicate)
+  _buildRequest(): ClientRequest {
+    const service = this._createService().perPage(this.config.batchSize)
+    if (this.config.predicate) service.where(this.config.predicate)
     const request: Object = {
       uri: service.build(),
       method: 'GET',
@@ -146,7 +131,7 @@ export default class DiscountCodeExport {
     return request
   }
 
-  _createService (): Object {
+  _createService(): Object {
     return createRequestBuilder({
       projectKey: this.apiConfig.projectKey,
     }).discountCodes
@@ -154,19 +139,18 @@ export default class DiscountCodeExport {
 
   // Use this method to make the `cartDiscounts`
   // field compatible with the importer
-  _processCode (data: CodeData): Object {
+  _processCode(data: CodeData): Object {
     const newCodeObj = data
-    const cartDiscounts = newCodeObj.cartDiscounts.reduce((
-      acc: string,
-      discount: Object,
-    ): string => {
-      if (!acc)
-        return discount.id
-      return `${acc}${this.config.multiValueDelimiter}${discount.id}`
-    }, '')
+    const cartDiscounts = newCodeObj.cartDiscounts.reduce(
+      (acc: string, discount: Object): string => {
+        if (!acc) return discount.id
+        return `${acc}${this.config.multiValueDelimiter}${discount.id}`
+      },
+      ''
+    )
 
-  // This part is necessary because the API sends empty objects in these
-  // fields if empty and they are not correctly written to the CSV file
+    // This part is necessary because the API sends empty objects in these
+    // fields if empty and they are not correctly written to the CSV file
     const objKeys = [
       'attributeTypes',
       'cartFieldTypes',

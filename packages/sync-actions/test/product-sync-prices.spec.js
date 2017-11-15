@@ -9,14 +9,21 @@ describe('Actions', () => {
 
   describe('build actions', () => {
     const validFrom = new Date().toISOString()
-    const discounted = { value: { centAmount: 4000, currencyCode: 'EUR' }, discount: { typeId: 'product-discount', id: 'pd1' } }
+    const discounted = {
+      value: { centAmount: 4000, currencyCode: 'EUR' },
+      discount: { typeId: 'product-discount', id: 'pd1' },
+    }
 
     const before = {
       id: '123',
       masterVariant: {
         id: 1,
         prices: [
-          { id: '111', value: { currencyCode: 'EUR', centAmount: 1000 }, discounted },
+          {
+            id: '111',
+            value: { currencyCode: 'EUR', centAmount: 1000 },
+            discounted,
+          },
         ],
       },
       variants: [
@@ -27,14 +34,31 @@ describe('Actions', () => {
         {
           id: 2,
           prices: [
-            { id: '222', value: { currencyCode: 'EUR', centAmount: 1000 }, customerGroup: { typeId: 'customer-group', id: 'cg1' }, discounted },
+            {
+              id: '222',
+              value: { currencyCode: 'EUR', centAmount: 1000 },
+              customerGroup: { typeId: 'customer-group', id: 'cg1' },
+              discounted,
+            },
           ],
         },
         {
           id: 4,
           prices: [
-            { id: '223', value: { currencyCode: 'USD', centAmount: 1200 }, customerGroup: { typeId: 'customer-group', id: 'cg1' }, discounted },
-            { id: '444', value: { currencyCode: 'EUR', centAmount: 1000 }, country: 'DE', customerGroup: { typeId: 'customer-group', id: 'cg1' }, channel: { typeId: 'channel', id: 'ch1' }, discounted },
+            {
+              id: '223',
+              value: { currencyCode: 'USD', centAmount: 1200 },
+              customerGroup: { typeId: 'customer-group', id: 'cg1' },
+              discounted,
+            },
+            {
+              id: '444',
+              value: { currencyCode: 'EUR', centAmount: 1000 },
+              country: 'DE',
+              customerGroup: { typeId: 'customer-group', id: 'cg1' },
+              channel: { typeId: 'channel', id: 'ch1' },
+              discounted,
+            },
           ],
         },
       ],
@@ -46,7 +70,12 @@ describe('Actions', () => {
         id: 1,
         prices: [
           // Changed
-          { id: '111', value: { currencyCode: 'EUR', centAmount: 2000 }, country: 'US', discounted },
+          {
+            id: '111',
+            value: { currencyCode: 'EUR', centAmount: 2000 },
+            country: 'US',
+            discounted,
+          },
         ],
       },
       variants: [
@@ -72,8 +101,19 @@ describe('Actions', () => {
           id: 4,
           prices: [
             // No change
-            { id: '444', value: { currencyCode: 'EUR', centAmount: 1000 }, country: 'DE', customerGroup: { typeId: 'customer-group', id: 'cg1' }, channel: { typeId: 'channel', id: 'ch1' } },
-            { id: '223', value: { currencyCode: 'USD', centAmount: 1200 }, customerGroup: { typeId: 'customer-group', id: 'cg1' }, discounted },
+            {
+              id: '444',
+              value: { currencyCode: 'EUR', centAmount: 1000 },
+              country: 'DE',
+              customerGroup: { typeId: 'customer-group', id: 'cg1' },
+              channel: { typeId: 'channel', id: 'ch1' },
+            },
+            {
+              id: '223',
+              value: { currencyCode: 'USD', centAmount: 1200 },
+              customerGroup: { typeId: 'customer-group', id: 'cg1' },
+              discounted,
+            },
           ],
         },
       ],
@@ -82,9 +122,27 @@ describe('Actions', () => {
     it('should build actions for prices', () => {
       const actions = productsSync.buildActions(now, before)
       expect(actions).toEqual([
-        { action: 'changePrice', priceId: '111', price: { id: '111', value: { currencyCode: 'EUR', centAmount: 2000 }, country: 'US' } },
+        {
+          action: 'changePrice',
+          priceId: '111',
+          price: {
+            id: '111',
+            value: { currencyCode: 'EUR', centAmount: 2000 },
+            country: 'US',
+          },
+        },
         { action: 'removePrice', priceId: '222' },
-        { action: 'addPrice', variantId: 3, price: { value: { currencyCode: 'USD', centAmount: 5000 }, country: 'US', customerGroup: { typeId: 'customer-group', id: 'cg1' }, channel: { typeId: 'channel', id: 'ch1' }, validFrom } },
+        {
+          action: 'addPrice',
+          variantId: 3,
+          price: {
+            value: { currencyCode: 'USD', centAmount: 5000 },
+            country: 'US',
+            customerGroup: { typeId: 'customer-group', id: 'cg1' },
+            channel: { typeId: 'channel', id: 'ch1' },
+            validFrom,
+          },
+        },
       ])
     })
 

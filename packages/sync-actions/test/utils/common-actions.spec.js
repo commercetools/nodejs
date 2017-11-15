@@ -102,9 +102,10 @@ describe('Common actions', () => {
         })
 
         it('should build reference action', () => {
-          expect(actions).toContainEqual(
-            { action: 'setTaxCategory', taxCategory: now.taxCategory },
-          )
+          expect(actions).toContainEqual({
+            action: 'setTaxCategory',
+            taxCategory: now.taxCategory,
+          })
         })
       })
 
@@ -128,9 +129,10 @@ describe('Common actions', () => {
         })
 
         it('should build reference action', () => {
-          expect(actions).toContainEqual(
-            { action: 'setCustomerGroup', customerGroup: now.customerGroup },
-          )
+          expect(actions).toContainEqual({
+            action: 'setCustomerGroup',
+            customerGroup: now.customerGroup,
+          })
         })
       })
 
@@ -154,9 +156,7 @@ describe('Common actions', () => {
         })
 
         it('should build reference action', () => {
-          expect(actions).toContainEqual(
-            { action: 'setSupplyChannel' },
-          )
+          expect(actions).toContainEqual({ action: 'setSupplyChannel' })
         })
       })
 
@@ -164,13 +164,16 @@ describe('Common actions', () => {
         let actions
         const before = {
           productType: {
-            id: 'pt-1', typeId: 'product-type', obj: { id: 'pt-1' },
+            id: 'pt-1',
+            typeId: 'product-type',
+            obj: { id: 'pt-1' },
           },
         }
         const now = {
           // ignore update
           productType: {
-            id: 'pt-1', typeId: 'product-type',
+            id: 'pt-1',
+            typeId: 'product-type',
           },
         }
         beforeEach(() => {
@@ -183,9 +186,7 @@ describe('Common actions', () => {
         })
 
         it('should not build reference action', () => {
-          expect(actions).not.toContainEqual(
-            { action: 'productType' },
-          )
+          expect(actions).not.toContainEqual({ action: 'productType' })
         })
       })
 
@@ -193,13 +194,16 @@ describe('Common actions', () => {
         let actions
         const before = {
           state: {
-            id: 's-1', typeId: 'state', obj: { id: 's-1' },
+            id: 's-1',
+            typeId: 'state',
+            obj: { id: 's-1' },
           },
         }
         const now = {
           // new ref: transition state
           state: {
-            id: 's-2', typeId: 'state',
+            id: 's-2',
+            typeId: 'state',
           },
         }
 
@@ -213,9 +217,10 @@ describe('Common actions', () => {
         })
 
         it('should build reference action', () => {
-          expect(actions).toContainEqual(
-            { action: 'transitionState', state: now.state },
-          )
+          expect(actions).toContainEqual({
+            action: 'transitionState',
+            state: now.state,
+          })
         })
       })
     })
@@ -225,13 +230,17 @@ describe('Common actions', () => {
         let actions
         const before = {
           state: {
-            id: 's-1', typeId: 'state', obj: { id: 's-1' },
+            id: 's-1',
+            typeId: 'state',
+            obj: { id: 's-1' },
           },
         }
         const now = {
           // new ref: transition state
           state: {
-            id: 's-2', typeId: 'state', obj: { id: 's-1' },
+            id: 's-2',
+            typeId: 'state',
+            obj: { id: 's-1' },
           },
         }
 
@@ -245,13 +254,13 @@ describe('Common actions', () => {
         })
 
         it('should build reference action without expansion in action', () => {
-          expect(actions).toContainEqual(
-            { action: 'transitionState',
-              state: {
-                typeId: now.state.typeId,
-                id: now.state.id,
-              } },
-          )
+          expect(actions).toContainEqual({
+            action: 'transitionState',
+            state: {
+              typeId: now.state.typeId,
+              id: now.state.id,
+            },
+          })
         })
       })
     })

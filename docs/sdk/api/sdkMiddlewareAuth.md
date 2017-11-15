@@ -10,7 +10,7 @@ npm install --save @commercetools/sdk-middleware-auth
 
 #### Browser
 ```html
-<script src="https://unpkg.com/@commercetools/sdk-middleware-auth/dist/commercetools-sdk-middleware-auth.min.js"></script>
+<script src="https://unpkg.com/@commercetools/sdk-middleware-auth/dist/commercetools-sdk-middleware-auth.umd.min.js"></script>
 <script>// global: CommercetoolsSdkMiddlewareAuth</script>
 ```
 

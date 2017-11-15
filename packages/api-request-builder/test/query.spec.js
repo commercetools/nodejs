@@ -17,7 +17,7 @@ describe('query', () => {
 
   it('should throw if predicate is missing', () => {
     expect(() => service.where()).toThrowError(
-      /Required argument for `where` is missing/,
+      /Required argument for `where` is missing/
     )
   })
 
@@ -31,14 +31,14 @@ describe('query', () => {
 
   it('should throw if whereOperator is missing', () => {
     expect(() => service.whereOperator()).toThrowError(
-      /Required argument for `whereOperator` is missing/,
+      /Required argument for `whereOperator` is missing/
     )
   })
 
   it('should throw if whereOperator is wrong', () => {
     expect(() => service.whereOperator('foo')).toThrowError(
       // eslint-disable-next-line max-len
-      /Required argument for `whereOperator` is invalid, allowed values are \(`and`, `or`\)/,
+      /Required argument for `whereOperator` is invalid, allowed values are \(`and`, `or`\)/
     )
   })
 })

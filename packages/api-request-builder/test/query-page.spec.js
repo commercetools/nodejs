@@ -24,7 +24,7 @@ describe('queryPage', () => {
 
   it('should throw if sortPath is missing', () => {
     expect(() => service.sort()).toThrowError(
-      /Required argument for `sort` is missing/,
+      /Required argument for `sort` is missing/
     )
   })
 
@@ -35,13 +35,13 @@ describe('queryPage', () => {
 
   it('should throw if page is missing', () => {
     expect(() => service.page()).toThrowError(
-      /Required argument for `page` is missing/,
+      /Required argument for `page` is missing/
     )
   })
 
   it('should throw if page is a number < 1', () => {
     expect(() => service.page(0)).toThrowError(
-      /Required argument for `page` must be a number >= 1/,
+      /Required argument for `page` must be a number >= 1/
     )
   })
 
@@ -55,13 +55,13 @@ describe('queryPage', () => {
 
   it('should throw if perPage is missing', () => {
     expect(() => service.perPage()).toThrowError(
-      /Required argument for `perPage` is missing/,
+      /Required argument for `perPage` is missing/
     )
   })
 
   it('should throw if perPage is a number < 1', () => {
     expect(() => service.perPage(-1)).toThrowError(
-      /Required argument for `perPage` must be a number >= 0/,
+      /Required argument for `perPage` must be a number >= 0/
     )
   })
 })

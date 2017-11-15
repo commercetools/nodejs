@@ -5,7 +5,7 @@ import type {
   MiddlewareResponse,
 } from 'types/sdk'
 
-export default function createLoggerMiddleware (): Middleware {
+export default function createLoggerMiddleware(): Middleware {
   return next => (request: MiddlewareRequest, response: MiddlewareResponse) => {
     const { error, body, statusCode } = response
     console.log('Request: ', request)

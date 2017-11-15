@@ -1,11 +1,9 @@
-import {
-  createAuthMiddlewareForRefreshTokenFlow,
-} from '../src'
+import { createAuthMiddlewareForRefreshTokenFlow } from '../src'
 import authMiddlewareBase from '../src/base-auth-flow'
 
 jest.mock('../src/base-auth-flow')
 
-function createTestRequest (options) {
+function createTestRequest(options) {
   return {
     url: '',
     method: 'GET',
@@ -15,7 +13,7 @@ function createTestRequest (options) {
   }
 }
 
-function createTestMiddlewareOptions (options) {
+function createTestMiddlewareOptions(options) {
   return {
     host: 'https://auth.commercetools.co',
     projectKey: 'foo',
@@ -42,7 +40,7 @@ describe('Refresh Token Flow', () => {
         resolve,
         reject,
       }
-      const next = (actualParams) => {
+      const next = actualParams => {
         expect(actualParams).toMatchObject({
           request,
           response,
@@ -57,10 +55,9 @@ describe('Refresh Token Flow', () => {
       }
       const middlewareOptions = createTestMiddlewareOptions()
       const authMiddleware = createAuthMiddlewareForRefreshTokenFlow(
-        middlewareOptions,
+        middlewareOptions
       )
 
       authMiddleware(next)(request, response)
-    }),
-  )
+    }))
 })

@@ -11,9 +11,8 @@
  * @return {Object} The instance of the service, can be chained.
  */
 // eslint-disable-next-line import/prefer-default-export
-export function expand (value: string): Object {
-  if (!value)
-    throw new Error('Required argument for `expand` is missing')
+export function expand(value: string): Object {
+  if (!value) throw new Error('Required argument for `expand` is missing')
 
   const encodedPath = encodeURIComponent(value)
   // Note: this goes to base `params`, not `params.query`

@@ -9,7 +9,7 @@ export const baseActionsList = [
   { action: 'setDescription', key: 'description' },
 ]
 
-export function actionsMapBase (diff, oldObj, newObj) {
+export function actionsMapBase(diff, oldObj, newObj) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
     diff,

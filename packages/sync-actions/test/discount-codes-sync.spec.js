@@ -18,7 +18,6 @@ describe('Exports', () => {
         key: 'maxApplicationsPerCustomer',
       },
       { action: 'changeCartDiscounts', key: 'cartDiscounts' },
-
     ])
   })
 })

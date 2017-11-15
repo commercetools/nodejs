@@ -6,18 +6,18 @@ import * as diffpatcher from './utils/diffpatcher'
 
 export const actionGroups = ['base', 'references']
 
-function createDiscountCodesMapActions (mapActionGroup) {
-  return function doMapActions (diff, newObj, oldObj) {
+function createDiscountCodesMapActions(mapActionGroup) {
+  return function doMapActions(diff, newObj, oldObj) {
     const allActions = []
 
-    allActions.push(mapActionGroup('base', () => (
-      actionsMapBase(diff, oldObj, newObj)
-    )))
+    allActions.push(
+      mapActionGroup('base', () => actionsMapBase(diff, oldObj, newObj))
+    )
     return flatten(allActions)
   }
 }
 
-export default (config) => {
+export default config => {
   // config contains information about which action groups
   // are white/black listed
 

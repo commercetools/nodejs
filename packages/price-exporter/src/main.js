@@ -7,19 +7,13 @@ import type {
   ProcessedPriceObject,
   UnprocessedPriceObject,
 } from 'types/price'
-import type {
-  Client,
-} from 'types/sdk'
+import type { Client } from 'types/sdk'
 
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
-import {
-  createAuthMiddlewareForClientCredentialsFlow,
-} from '@commercetools/sdk-middleware-auth'
-import {
-  createUserAgentMiddleware,
-} from '@commercetools/sdk-middleware-user-agent'
+import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
+import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import csv from 'fast-csv'
 import JSONStream from 'JSONStream'
 import Promise from 'bluebird'
@@ -29,21 +23,18 @@ import pkg from '../package.json'
 
 export default class PriceExporter {
   // Set flowtype annotations
-  apiConfig: ApiConfigOptions;
-  client: Client;
-  config: Configuration;
-  logger: LoggerOptions;
-  fetchReferences: Function;
+  apiConfig: ApiConfigOptions
+  client: Client
+  config: Configuration
+  logger: LoggerOptions
+  fetchReferences: Function
 
-  constructor (
-    options: ExporterOptions,
-    logger: LoggerOptions,
-  ) {
+  constructor(options: ExporterOptions, logger: LoggerOptions) {
     if (!options.apiConfig)
       throw new Error('The constructor must be passed an `apiConfig` object')
     if (!options.csvHeaders && options.exportFormat === 'csv')
       throw new Error(
-        'The constructor must be passed a `csvHeaders` array for CSV export',
+        'The constructor must be passed a `csvHeaders` array for CSV export'
       )
     this.apiConfig = options.apiConfig
     this.client = createClient({
@@ -74,7 +65,7 @@ export default class PriceExporter {
     }
   }
 
-  run (outputStream: stream$Writable) {
+  run(outputStream: stream$Writable) {
     this.logger.info('Starting Export')
     if (this.config.exportFormat === 'csv') {
       const csvOptions = {
@@ -93,10 +84,7 @@ export default class PriceExporter {
     }
   }
 
-  _getProducts (
-    outputStream: stream$Writable,
-    pipeStream: stream$Writable,
-  ) {
+  _getProducts(outputStream: stream$Writable, pipeStream: stream$Writable) {
     const service = this._createService('productProjections')
     const request: Object = {
       uri: service.build(),
@@ -106,97 +94,94 @@ export default class PriceExporter {
       request.headers = {
         Authorization: `Bearer ${this.config.accessToken}`,
       }
-    this.client.process(request, ({ body: { results: products } }) => {
-      this.logger.verbose(`Fetched ${products.length} products`)
+    this.client
+      .process(
+        request,
+        ({ body: { results: products } }) => {
+          this.logger.verbose(`Fetched ${products.length} products`)
 
-      const prices = PriceExporter._getPrices(products)
-      return this._resolveReferences(prices)
-      .then((resolvedPrices) => {
-        this._writePrices(resolvedPrices, pipeStream)
+          const prices = PriceExporter._getPrices(products)
+          return this._resolveReferences(prices).then(resolvedPrices => {
+            this._writePrices(resolvedPrices, pipeStream)
+          })
+        },
+        { accumulate: false }
+      )
+      .then(() => {
+        pipeStream.end()
+        this.logger.info('Export operation completed successfully')
       })
-    }, { accumulate: false })
-    .then(() => {
-      pipeStream.end()
-      this.logger.info('Export operation completed successfully')
-    })
-    .catch((e) => {
-      outputStream.emit('error', e)
-    })
+      .catch(e => {
+        outputStream.emit('error', e)
+      })
   }
 
-  _writePrices (
-    retrievedPrices: Array<any>,
-    pipeStream: stream$Writable,
-  ) {
+  _writePrices(retrievedPrices: Array<any>, pipeStream: stream$Writable) {
     if (this.config.exportFormat === 'csv')
-      retrievedPrices.forEach((pricesArray) => {
-        pricesArray.prices.forEach((price) => {
+      retrievedPrices.forEach(pricesArray => {
+        pricesArray.prices.forEach(price => {
           pipeStream.write(flatten(price))
         })
       })
     else
-      retrievedPrices.forEach((skuPriceGroup) => {
+      retrievedPrices.forEach(skuPriceGroup => {
         pipeStream.write(skuPriceGroup)
       })
 
     this.logger.verbose(
-      `Exported prices from ${retrievedPrices.length} product variants`,
+      `Exported prices from ${retrievedPrices.length} product variants`
     )
   }
 
-  _resolveReferences (flatPrices: Array<Object>) {
-    return Promise.map(flatPrices, variantPrice => (
-      Promise.map(variantPrice.prices, individualPrice => (
+  _resolveReferences(flatPrices: Array<Object>) {
+    return Promise.map(flatPrices, variantPrice =>
+      Promise.map(variantPrice.prices, individualPrice =>
         Promise.all([
           this._resolveChannel(individualPrice),
           this._resolveCustomerGroup(individualPrice),
           this._resolveCustomType(individualPrice),
-        ])
-        .then(([channel, customerGroup, custom]): ProcessedPriceObject => (
-          { ...individualPrice, ...channel, ...customerGroup, ...custom }
-        ))
-      ))
-      .then(prices => ({ ...variantPrice, prices }))
-    ))
+        ]).then(([channel, customerGroup, custom]): ProcessedPriceObject => ({
+          ...individualPrice,
+          ...channel,
+          ...customerGroup,
+          ...custom,
+        }))
+      ).then(prices => ({ ...variantPrice, prices }))
+    )
   }
 
-  _resolveChannel (price: Object): Object {
-    if (!price.channel)
-      return {}
+  _resolveChannel(price: Object): Object {
+    if (!price.channel) return {}
 
     const channelService = this._createService('channels')
     const uri = channelService.byId(price.channel.id).build()
-    return this.fetchReferences(uri)
-      .then(({ body: { key } }: Object): Object => {
+    return this.fetchReferences(uri).then(
+      ({ body: { key } }: Object): Object => {
         const channel = {}
-        if (this.config.exportFormat === 'csv')
-          channel.key = key
-        else
-          channel.id = key
+        if (this.config.exportFormat === 'csv') channel.key = key
+        else channel.id = key
         return { channel }
-      })
+      }
+    )
   }
 
-  _resolveCustomerGroup (price: Object): Object {
-    if (!price.customerGroup)
-      return {}
+  _resolveCustomerGroup(price: Object): Object {
+    if (!price.customerGroup) return {}
 
     const customerGroupService = this._createService('customerGroups')
     const uri = customerGroupService.byId(price.customerGroup.id).build()
-    return this.fetchReferences(uri)
-      .then(({ body: { name } }: Object): Object => {
+    return this.fetchReferences(uri).then(
+      ({ body: { name } }: Object): Object => {
         const customerGroup = {}
-        if (this.config.exportFormat === 'csv')
-          customerGroup.groupName = name
-        else
-          customerGroup.id = name
+        if (this.config.exportFormat === 'csv') customerGroup.groupName = name
+        else customerGroup.id = name
         return { customerGroup }
-      })
+      }
+    )
   }
 
-  _resolveCustomType (price: Object): Object {
-    if (!price.custom)
-      return {}
+  _resolveCustomType(price: Object): Object {
+    if (!price.custom) return {}
 
     if (this.config.exportFormat === 'json') {
       const modPrice = Object.assign({}, price)
@@ -205,31 +190,29 @@ export default class PriceExporter {
     }
     const customTypeService = this._createService('types')
     const uri = customTypeService.byId(price.custom.type.id).build()
-    return this.fetchReferences(uri)
-      .then(({ body: { key } }: Object): Object => (
-        {
-          customType: key,
-          customField: price.custom.fields,
-        }
-      ))
+    return this.fetchReferences(uri).then(
+      ({ body: { key } }: Object): Object => ({
+        customType: key,
+        customField: price.custom.fields,
+      })
+    )
   }
 
-  _createService (serviceType: string): Object {
+  _createService(serviceType: string): Object {
     const service = createRequestBuilder({
       projectKey: this.apiConfig.projectKey,
     })[serviceType]
 
     if (serviceType === 'productProjections') {
       service.staged(this.config.staged)
-      if (this.config.predicate)
-        service.where(this.config.predicate)
+      if (this.config.predicate) service.where(this.config.predicate)
     }
 
     return service
   }
 
   // Get prices from products
-  static _getPrices (products: Array<Object>): Array<Object> {
+  static _getPrices(products: Array<Object>): Array<Object> {
     const allPrices = []
     products.forEach((product: Object) => {
       const masterPrices = []
@@ -256,16 +239,16 @@ export default class PriceExporter {
   }
 }
 
-PriceExporter.prototype.fetchReferences = memoize(
-  function _fetchReferences (uri: string): Promise<Object> {
-    const request: Object = {
-      uri,
-      method: 'GET',
+PriceExporter.prototype.fetchReferences = memoize(function _fetchReferences(
+  uri: string
+): Promise<Object> {
+  const request: Object = {
+    uri,
+    method: 'GET',
+  }
+  if (this.config.accessToken)
+    request.headers = {
+      Authorization: `Bearer ${this.config.accessToken}`,
     }
-    if (this.config.accessToken)
-      request.headers = {
-        Authorization: `Bearer ${this.config.accessToken}`,
-      }
-    return this.client.execute(request)
-  },
-)
+  return this.client.execute(request)
+})
