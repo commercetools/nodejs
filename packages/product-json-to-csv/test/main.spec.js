@@ -15,11 +15,13 @@ describe('JSONParserProduct', () => {
       verbose: () => {},
     }
     const parserConfig = {
-      staged: true,
-      batch: 5,
-      predicate: 'foo=bar',
-      expand: 'something',
-      total: 20,
+      categoryBy: 'name',
+      categoryOrderHintBy: 'name',
+      delimiter: ',',
+      fillAllRows: false,
+      language: 'en',
+      multiValueDelimiter: ';',
+      productSeparator: '\n',
     }
     jsonParserProduct = new JSONParserProduct(
       { projectKey: 'project-key' },
@@ -41,6 +43,7 @@ describe('JSONParserProduct', () => {
         categoryBy: 'name',
         categoryOrderHintBy: 'name',
         language: 'en',
+        productSeparator: '\n',
       }
 
       jsonParserProduct = new JSONParserProduct(apiConfig)
@@ -63,7 +66,7 @@ describe('JSONParserProduct', () => {
       jest.resetAllMocks()
     })
 
-    it('should write data to single `csv` file if headers', () => {
+    it('should write data to single `csv` file if headers are set', () => {
       jsonParserProduct.parse = jest.fn(() => 'foo')
       jsonParserProduct.parserConfig.headers = []
 
@@ -72,7 +75,7 @@ describe('JSONParserProduct', () => {
       expect(zipSpy).not.toBeCalled()
     })
 
-    it('should write data to `zip` file if no headers', () => {
+    it('should write data to `zip` file if headers are not set', () => {
       jsonParserProduct.parse = jest.fn(() => 'bar')
 
       jsonParserProduct.run()

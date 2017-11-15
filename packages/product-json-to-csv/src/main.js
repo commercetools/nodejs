@@ -70,6 +70,7 @@ export default class JSONParserProduct {
       fillAllRows: false,
       language: 'en',
       multiValueDelimiter: ';',
+      productSeparator: '\n',
     }
 
     this.parserConfig = { ...defaultConfig, ...parserConfig }
@@ -94,7 +95,7 @@ export default class JSONParserProduct {
 
   run (input: stream$Readable, output: stream$Writable) {
     const productStream = this.parse(input, output)
-    const headers = this.parserConfig.headers
+    const { headers } = this.parserConfig
 
     if (headers)
       writeToSingleCsvFile(productStream, output, this.logger, headers)
@@ -105,11 +106,10 @@ export default class JSONParserProduct {
   parse (input: stream$Readable, output: stream$Writable) {
     this.logger.info('Starting conversion')
     let productCount = 0
-    input.setEncoding('utf8') // TODO: Move to CLI
 
     return highland(input)
       // parse chunk and split into JSON object strings
-      .splitBy('\n')
+      .splitBy(this.productSeparator)
       // convert the JSON object strings to JS objects
       .map(JSON.parse)
       .flatMap((product: ProductProjection) => (
@@ -227,7 +227,7 @@ export default class JSONParserProduct {
       !categoryOrderHintsReference
       || !Object.keys(categoryOrderHintsReference).length
     )
-      return {}
+      return { categoryOrderHints: undefined }
 
     const catIdentifier = this.parserConfig.categoryOrderHintBy
     const lang = this.parserConfig.language
@@ -246,7 +246,6 @@ export default class JSONParserProduct {
   }
 
   _resolveAncestors (category: Category): Promise<Category> {
-    // define recursive function
     const getParent = async (cat: Category): Promise<Category> => {
       if (!cat.parent)
         return cat

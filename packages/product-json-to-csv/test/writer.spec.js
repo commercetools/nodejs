@@ -162,6 +162,7 @@ describe('Writer', () => {
       outputStream.on('finish', () => {
         expect(logger.info).toBeCalledWith(
           expect.stringMatching(/written to ZIP file/))
+        tempFile.removeCallback()
         done()
       })
 

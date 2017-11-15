@@ -6,9 +6,6 @@ describe('::ProductMapping', () => {
   beforeEach(() => {
     productMapping = new ProductMapping()
   })
-  it('should be defined', () => {
-    expect(ProductMapping).toBeDefined()
-  })
 
   describe('::constructor', () => {
     it('should be defined', () => {
@@ -177,7 +174,7 @@ describe('::ProductMapping', () => {
         hasStagedChanges: false,
         published: false,
         taxCategory: {
-          key: 'resolved-tax-key',
+          name: 'resolved-tax-name',
         },
         createdAt: '2017-01-06T10:54:51.395Z',
         lastModifiedAt: '2017-01-06T10:54:51.395Z',
@@ -193,7 +190,7 @@ describe('::ProductMapping', () => {
         categoryOrderHints: 'res-cat-name-1:0.015;res-cat-name-2:0.987',
         'slug.en': 'michaelkors-phonecover',
         'slug.de': 'michaelkors-handyhuelle',
-        taxCategory: 'resolved-tax-key',
+        taxCategory: 'resolved-tax-name',
         published: false,
         hasStagedChanges: false,
         createdAt: '2017-01-06T10:54:51.395Z',
@@ -307,6 +304,18 @@ describe('::ProductMapping', () => {
           'res-cat-name-1': '0.015',
           'res-cat-name-2': '0.987',
         },
+        searchKeywords: {
+          en: [{
+            text: 'Multi tool',
+          }, {
+            text: 'Swiss Army Knife',
+            suggestTokenizer: {
+              type: 'whitespace',
+            },
+          }, {
+            text: 'Schweizer Messer',
+          }],
+        },
         slug: {
           en: 'michaelkors-phonecover',
           de: 'michaelkors-handyhuelle',
@@ -321,7 +330,7 @@ describe('::ProductMapping', () => {
         hasStagedChanges: false,
         published: false,
         taxCategory: {
-          key: 'resolved-tax-key',
+          name: 'resolved-tax-name',
         },
         createdAt: '2017-01-06T10:54:51.395Z',
         lastModifiedAt: '2017-01-06T10:54:51.395Z',
@@ -336,6 +345,9 @@ describe('::ProductMapping', () => {
         },
         categories: 'res-cat-name-1;res-cat-name-2',
         categoryOrderHints: 'res-cat-name-1:0.015;res-cat-name-2:0.987',
+        searchKeywords: {
+          en: 'Multi tool;Schweizer Messer;Swiss | Army | Knife',
+        },
         slug: {
           en: 'michaelkors-phonecover',
           de: 'michaelkors-handyhuelle',
@@ -347,7 +359,7 @@ describe('::ProductMapping', () => {
         state: 'my-resolved-state',
         hasStagedChanges: false,
         published: false,
-        taxCategory: 'resolved-tax-key',
+        taxCategory: 'resolved-tax-name',
         createdAt: '2017-01-06T10:54:51.395Z',
         lastModifiedAt: '2017-01-06T10:54:51.395Z',
       }
@@ -578,43 +590,6 @@ describe('::ProductMapping', () => {
         greatgrandparent>grandparent>parent>cat-in-en
         ;another-parent>cat-foo-en`
       expect(ProductMapping._mapCategories(sampleCat, ...args)).toBe(expected)
-    })
-
-    describe('::retrieveNamedPath', () => {
-      let sampleCategory
-      let actual
-      let expected
-      let lang
-      beforeEach(() => {
-        lang = 'en'
-        sampleCategory = {
-          name: {
-            en: 'cat-in-en',
-            de: 'cat-in-de',
-          },
-          parent: {
-            name: {
-              en: 'parent',
-            },
-            parent: {
-              name: {
-                en: 'grandparent',
-              },
-              parent: {
-                name: {
-                  en: 'greatgrandparent',
-                },
-              },
-            },
-          },
-          key: 'cat-key',
-        }
-        expected = 'greatgrandparent>grandparent>parent>cat-in-en'
-      })
-      it('should recursively generate namedPath', () => {
-        actual = ProductMapping._retrieveNamedPath(sampleCategory, lang)
-        expect(actual).toBe(expected)
-      })
     })
   })
 })

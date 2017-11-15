@@ -3,8 +3,8 @@ import EmitOnce from 'single-emit'
 import fs from 'fs'
 import json2csv from 'json2csv'
 import path from 'path'
+import slugify from 'slugify'
 import tmp from 'tmp'
-import slugify from './utils'
 
 // Accept a highland stream and write the output to a single file
 export function writeToSingleCsvFile (productStream, output, logger, headers) {
@@ -30,14 +30,12 @@ export function writeToSingleCsvFile (productStream, output, logger, headers) {
 // product type, then compress all files to a zip file
 export function writeToZipFile (productStream, output, logger) {
   const tmpDir = tmp.dirSync({ unsafeCleanup: true }).name
+  tmp.setGracefulCleanup()
   let currentProductType
-  let fileName
-  let filePath
   let fileStream
   let headers
   const headersCache = {}
   const streamCache = {}
-  const myset = new Set()
   productStream
     .each((product) => {
       let hasCSVColumnTitle = false
@@ -51,21 +49,20 @@ export function writeToZipFile (productStream, output, logger) {
         else {
           hasCSVColumnTitle = true
           headers = Object.keys(product)
-          headersCache[product.productType] = Object.keys(product)
+          headersCache[product.productType] = headers
         }
         currentProductType = product.productType
-        fileName = `${slugify(product.productType)}.csv`
-        filePath = path.join(tmpDir, fileName)
+        const fileName = `${slugify(product.productType)}.csv`
+        const filePath = path.join(tmpDir, fileName)
         // use a stream cache for switching back and forth between file
         // streams and reusing the same write stream
         if (streamCache[currentProductType])
           fileStream = streamCache[currentProductType]
         else {
-          fileStream = fs.createWriteStream(filePath, { flags: 'a' })
+          fileStream = fs.createWriteStream(filePath)
           streamCache[currentProductType] = fileStream
         }
       }
-      myset.add(fileStream)
       const csvData = json2csv({
         data: product,
         fields: headers,

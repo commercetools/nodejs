@@ -32,9 +32,9 @@ export default class ProductMapping {
   }
 
   run (product: ResolvedProdProj) {
-    const mergedVarProducts = ProductMapping._mergeVariants(product)
+    const mergedVarProduct = ProductMapping._mergeVariants(product)
     const variantsWithProductInfo = ProductMapping._spreadProdOnVariants(
-      mergedVarProducts, this.fillAllRows)
+      mergedVarProduct, this.fillAllRows)
     const a = variantsWithProductInfo.map(
       (variant: SingleVariantPerProduct) => (
         this._mapProperties(variant)
@@ -85,7 +85,7 @@ export default class ProductMapping {
           break
         }
         case 'taxCategory': {
-          acc[property] = value.key || value.name
+          acc[property] = value.name
           break
         }
         case 'categories': {
@@ -101,7 +101,19 @@ export default class ProductMapping {
           break
         }
         case 'searchKeywords': {
-          // TODO: Handle the searchKeywords
+          if (!isEmpty(value)) {
+            acc[property] = {}
+            Object.keys(value).forEach((language) => {
+              const standard = []
+              const whitespace = []
+              value[language].forEach((keyWord) => {
+                if (!keyWord.suggestTokenizer) standard.push(keyWord.text)
+                else if (keyWord.suggestTokenizer.type === 'whitespace')
+                  whitespace.push(keyWord.text.replace(/ /g, ' | '))
+              })
+              acc[property][language] = [...standard, ...whitespace].join(';')
+            })
+          }
           break
         }
         case 'version': {
@@ -137,8 +149,7 @@ export default class ProductMapping {
           break
         }
         default: {
-          if (!isEmpty(property))
-            acc[property] = value
+          acc[property] = value
         }
       }
       return acc
