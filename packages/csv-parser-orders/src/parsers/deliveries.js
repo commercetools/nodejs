@@ -273,7 +273,10 @@ export default class DeliveriesParser extends AbstractParser {
 
     return itemsString.split(';').map(itemString => {
       const [id, quantity] = itemString.split(':')
-      return { id, quantity }
+      return {
+        id,
+        quantity: Number(quantity),
+      }
     })
   }
 }
