@@ -1,0 +1,3 @@
+orderNumber,lineItemId,quantity,fromState,toState,actualTransitionDate,_fromStateQty
+B-QCG-JPG-CKF,8caec80a-4e62-4d54-8b6a-b53b2d388499,1,picking,picked,2017-11-14T14:17:18+01:00,1
+B-QCG-JPG-CKF,a6a20f73-2f45-403c-99d2-4632425321a8,1,open,picking,2017-11-14T14:17:18+01:00,1

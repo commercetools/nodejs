@@ -9,12 +9,26 @@ export default class LineItemStateParser extends AbstractParser {
   parse(input, output) {
     this.logger.info('Starting LineItemState CSV conversion')
     this._streamInput(input, output)
+      .reduce([], LineItemStateParser._groupByOrderNumber)
       .stopOnError(err => {
         this.logger.error(err)
         return output.emit('error', err)
       })
+      .flatMap(data => data)
       .pipe(JSONStream.stringify())
       .pipe(output)
+  }
+
+  // Will merge newLineItemState with lineItems in results array
+  static _groupByOrderNumber(results, newLineItemState) {
+    const existingItem = results.find(
+      lineItem => lineItem.orderNumber === newLineItemState.orderNumber
+    )
+
+    if (existingItem) existingItem.lineItems.push(...newLineItemState.lineItems)
+    else results.push(newLineItemState)
+
+    return results
   }
 
   _processData(data) {

@@ -5,7 +5,7 @@ import StreamTest from 'streamtest'
 import LineItemStateParser from '../src/parsers/line-item-state'
 
 describe('LineItemStateParser', () => {
-  describe('::constructor', () => {
+  describe('constructor', () => {
     it('should initialize default values', () => {
       const parser = new LineItemStateParser()
 
@@ -19,7 +19,7 @@ describe('LineItemStateParser', () => {
     })
   })
 
-  describe('::_processData', () => {
+  describe('_processData', () => {
     it('should transform CSV object into order', done => {
       const parser = new LineItemStateParser()
       const mockOrder = {
@@ -66,7 +66,7 @@ describe('LineItemStateParser', () => {
     })
   })
 
-  it('::parse should accept a stream and output a stream', done => {
+  it('should accept a stream and output a stream', done => {
     const parser = new LineItemStateParser()
     const readStream = fs.createReadStream(
       path.join(__dirname, 'data/lineitemstate-sample.csv')
@@ -94,6 +94,50 @@ describe('LineItemStateParser', () => {
         },
       ])
 
+      done()
+    })
+
+    parser.parse(readStream, output)
+  })
+
+  it('should parse CSV with two lineItemStates from one order', done => {
+    const parser = new LineItemStateParser()
+    const readStream = fs.createReadStream(
+      path.join(__dirname, 'data/lineitemstate-duplicate-ordernumber.csv')
+    )
+
+    const output = StreamTest.v2.toText((err, result) => {
+      expect(err).toBe(null)
+
+      expect(JSON.parse(result)).toEqual([
+        {
+          lineItems: [
+            {
+              id: '8caec80a-4e62-4d54-8b6a-b53b2d388499',
+              state: [
+                {
+                  _fromStateQty: 1,
+                  fromState: 'picking',
+                  quantity: 1,
+                  toState: 'picked',
+                },
+              ],
+            },
+            {
+              id: 'a6a20f73-2f45-403c-99d2-4632425321a8',
+              state: [
+                {
+                  _fromStateQty: 1,
+                  fromState: 'open',
+                  quantity: 1,
+                  toState: 'picking',
+                },
+              ],
+            },
+          ],
+          orderNumber: 'B-QCG-JPG-CKF',
+        },
+      ])
       done()
     })
 
