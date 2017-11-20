@@ -268,11 +268,11 @@ export default class DeliveriesParser extends AbstractParser {
     return parcel
   }
 
-  static _parseParcelItems(itemsString) {
-    if (!itemsString) return []
+  static _parseParcelItems(parcelItemsAsString) {
+    if (!parcelItemsAsString) return []
 
-    return itemsString.split(';').map(itemString => {
-      const [id, quantity] = itemString.split(':')
+    return parcelItemsAsString.split(';').map(parcelItemString => {
+      const [id, quantity] = parcelItemString.split(':')
       return {
         id,
         quantity: Number(quantity),
