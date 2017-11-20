@@ -99,7 +99,6 @@ export default {
       features.queryOne,
       features.queryExpand,
       features.projection,
-      features.restrictResult,
     ],
   },
   productProjectionsSuggest: {
