@@ -116,7 +116,6 @@ export function setParams(params: ServiceBuilderParams) {
     'searchKeywords',
     'where',
     'version',
-    'onlyIds',
   ]
   Object.keys(params).forEach((key: string) => {
     if (!knownKeys.includes(key)) throw new Error(`Unknown key "${key}"`)
@@ -187,9 +186,6 @@ export function setParams(params: ServiceBuilderParams) {
       this.where(predicate)
     })
   if (hasKey(params, 'whereOperator')) this.whereOperator(params.whereOperator)
-
-  // query-restrict-result
-  if (params.onlyIds) this.onlyIds()
 
   // version
   if (hasKey(params, 'version')) this.withVersion(params.version)

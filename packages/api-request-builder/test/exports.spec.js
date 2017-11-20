@@ -13,7 +13,6 @@ describe('exports', () => {
       'search',
       'projection',
       'suggest',
-      'restrictResult',
     ])
   })
 })

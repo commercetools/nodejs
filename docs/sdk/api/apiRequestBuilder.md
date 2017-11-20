@@ -36,7 +36,6 @@ A _service_ is created by defining its `features`. Features give a service speci
 - `search`: allows to use search capabilities (`text`, `fuzzy`, `fuzzyLevel`, `facet`, `markMatchingVariants`, `filter`, `filterByQuery`, `filterByFacets`)
 - `projection`: allows to use projections capabilities (`staged`, `priceCurrency`, `priceCountry`, `priceCustomerGroup`, `priceChannel`)
 - `suggest`: allows to use suggest capabilities (`searchKeywords`)
-- `restrictResult`: allows to reduce returned data (`onlyIds`)
 
 ```js
 import {
