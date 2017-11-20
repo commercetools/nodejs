@@ -107,9 +107,7 @@ describe('DeliveriesParser', () => {
 
       const outputStream = StreamTest.v2.toText((err, _result) => {
         const orders = JSON.parse(_result)
-
         expect(orders.length).toBe(2)
-
         // First order
         expect(orders[0].orderNumber).toBe('222')
         expect(orders[0].shippingInfo.deliveries.length).toBe(1)
@@ -122,15 +120,22 @@ describe('DeliveriesParser', () => {
 
         let parcel = deliveryParcels.find(p => p.id === '1')
         expect(parcel.trackingData.trackingId).toBe('123456789')
+        expect(parcel.items).toEqual([
+          { id: '1', quantity: 70 },
+          { id: '2', quantity: 40 },
+        ])
 
         parcel = deliveryParcels.find(p => p.id === '2')
         expect(parcel.trackingData.trackingId).toBe('2222222')
         expect(parcel.trackingData.carrier).toBe(undefined)
         expect(parcel.trackingData.isReturn).toBe(true)
+        expect(parcel.items).toEqual([
+          { id: '1', quantity: 30 },
+          { id: '2', quantity: 60 },
+        ])
 
         // Second order
         expect(orders[1].orderNumber).toBe('111')
-
         expect(orders[1].shippingInfo.deliveries.length).toBe(1)
 
         done()

@@ -288,10 +288,10 @@ JSON object returned from the conversion of the CSV file above
 ### Deliveries
 CSV file with deliveries have the following format:
 ```csv
-orderNumber,delivery.id,_itemGroupId,item.id,item.quantity,parcel.id,parcel.length,parcel.height,parcel.width,parcel.weight,parcel.trackingId,parcel.carrier,parcel.provider,parcel.providerTransaction,parcel.isReturn
-111,1,1,123,1,1,100,200,200,500,123456789,DHL,provider,transaction provider,0
-111,1,2,222,3,1,100,200,200,500,123456789,DHL,provider,transaction provider,0
-111,1,1,123,1,2,100,200,200,500,2222222,,abcd,dcba,true
+orderNumber,delivery.id,_itemGroupId,item.id,item.quantity,parcel.id,parcel.length,parcel.height,parcel.width,parcel.weight,parcel.trackingId,parcel.carrier,parcel.provider,parcel.providerTransaction,parcel.isReturn,parcel.items
+111,1,1,123,1,1,100,200,200,500,123456789,DHL,provider,transaction provider,0,123:1;222:1
+111,1,2,222,3,1,100,200,200,500,123456789,DHL,provider,transaction provider,0,123:1;222:1
+111,1,1,123,1,2,100,200,200,500,2222222,,abcd,dcba,true,222:2
 ```
 Where CSV fields `orderNumber, delivery.id, _itemGroupId, item.id, item.quantity` are mandatory because every delivery has to have at least one delivery item.
 
@@ -328,7 +328,14 @@ Example provided above will be parsed into following JSON:
                     "provider": "provider",
                     "providerTransaction": "transaction provider",
                     "trackingId": "123456789"
-                }
+                },
+                "items": [{
+                    "id": "123",
+                    "quantity": 1
+                }, {
+                    "id": "222",
+                    "quantity": 1
+                }]
             },
             {
                 "id": "2",
@@ -343,7 +350,11 @@ Example provided above will be parsed into following JSON:
                     "provider": "abcd",
                     "providerTransaction": "dcba",
                     "trackingId": "2222222"
-                }
+                },
+                "items": [{
+                    "id": "222",
+                    "quantity": 2
+                }]
             }]
         }]
     }
