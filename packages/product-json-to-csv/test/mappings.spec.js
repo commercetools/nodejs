@@ -119,57 +119,59 @@ describe('::ProductMapping', () => {
             },
           ],
         },
-        variants: [{
-          id: 2,
-          sku: 'A0E200001YKI123',
-          images: [
-            {
-              url: 'https://example.com/foobar/commer234.jpg',
-              dimensions: {
-                w: 3,
-                h: 3,
-              },
-            },
-            {
-              url: 'https://example-2.com/demo/tools67.jpg',
-              dimensions: {
-                w: 1,
-                h: 1,
-              },
-            },
-          ],
-          attributes: [
-            {
-              name: 'article',
-              value: 'sample 089 WHT',
-            },
-            {
-              name: 'designer',
-              value: {
-                label: 'Michael Kors',
-                key: 'michaelkors',
-              },
-            },
-            {
-              name: 'color',
-              value: {
-                label: {
-                  it: 'blanco',
-                  de: 'weiss',
-                  en: 'white',
+        variants: [
+          {
+            id: 2,
+            sku: 'A0E200001YKI123',
+            images: [
+              {
+                url: 'https://example.com/foobar/commer234.jpg',
+                dimensions: {
+                  w: 3,
+                  h: 3,
                 },
-                key: 'white',
               },
-            },
-            {
-              name: 'colorFreeDefinition',
-              value: {
-                en: 'black-white',
-                de: 'schwarz-weiß',
+              {
+                url: 'https://example-2.com/demo/tools67.jpg',
+                dimensions: {
+                  w: 1,
+                  h: 1,
+                },
               },
-            },
-          ],
-        }],
+            ],
+            attributes: [
+              {
+                name: 'article',
+                value: 'sample 089 WHT',
+              },
+              {
+                name: 'designer',
+                value: {
+                  label: 'Michael Kors',
+                  key: 'michaelkors',
+                },
+              },
+              {
+                name: 'color',
+                value: {
+                  label: {
+                    it: 'blanco',
+                    de: 'weiss',
+                    en: 'white',
+                  },
+                  key: 'white',
+                },
+              },
+              {
+                name: 'colorFreeDefinition',
+                value: {
+                  en: 'black-white',
+                  de: 'schwarz-weiß',
+                },
+              },
+            ],
+          },
+        ],
         searchKeywords: {},
         hasStagedChanges: false,
         published: false,
@@ -180,45 +182,48 @@ describe('::ProductMapping', () => {
         lastModifiedAt: '2017-01-06T10:54:51.395Z',
       }
 
-      const expected = [{
-        id: '12345ab-id',
-        key: 'product-key',
-        productType: 'resolved-product-type',
-        'name.en': 'Phone cover',
-        'name.de': 'Handyhülle',
-        categories: 'res-cat-name-1;res-cat-name-2',
-        categoryOrderHints: 'res-cat-name-1:0.015;res-cat-name-2:0.987',
-        'slug.en': 'michaelkors-phonecover',
-        'slug.de': 'michaelkors-handyhuelle',
-        taxCategory: 'resolved-tax-name',
-        published: false,
-        hasStagedChanges: false,
-        createdAt: '2017-01-06T10:54:51.395Z',
-        lastModifiedAt: '2017-01-06T10:54:51.395Z',
-        'variant.id': 1,
-        'variant.sku': 'A0E200000001YKI',
-        'variant.images': oneLineTrim`
+      const expected = [
+        {
+          id: '12345ab-id',
+          key: 'product-key',
+          productType: 'resolved-product-type',
+          'name.en': 'Phone cover',
+          'name.de': 'Handyhülle',
+          categories: 'res-cat-name-1;res-cat-name-2',
+          categoryOrderHints: 'res-cat-name-1:0.015;res-cat-name-2:0.987',
+          'slug.en': 'michaelkors-phonecover',
+          'slug.de': 'michaelkors-handyhuelle',
+          taxCategory: 'resolved-tax-name',
+          published: false,
+          hasStagedChanges: false,
+          createdAt: '2017-01-06T10:54:51.395Z',
+          lastModifiedAt: '2017-01-06T10:54:51.395Z',
+          'variant.id': 1,
+          'variant.sku': 'A0E200000001YKI',
+          'variant.images': oneLineTrim`
           https://example.com/foobar/commer.jpg|3|4;
           https://example-2.com/demo/tools.jpg|1|5|image-label`,
-        'attr.addedAttr': '',
-        'attr.anotherAddedAttr': '',
-        'attr.article': 'sample 089 WHT',
-        'attr.color': 'white',
-        'attr.colorFreeDefinition.en': 'black-white',
-        'attr.colorFreeDefinition.de': 'schwarz-weiß',
-        'attr.designer': 'michaelkors',
-      }, {
-        'variant.id': 2,
-        'variant.sku': 'A0E200001YKI123',
-        'variant.images': oneLineTrim`
+          'attr.addedAttr': '',
+          'attr.anotherAddedAttr': '',
+          'attr.article': 'sample 089 WHT',
+          'attr.color': 'white',
+          'attr.colorFreeDefinition.en': 'black-white',
+          'attr.colorFreeDefinition.de': 'schwarz-weiß',
+          'attr.designer': 'michaelkors',
+        },
+        {
+          'variant.id': 2,
+          'variant.sku': 'A0E200001YKI123',
+          'variant.images': oneLineTrim`
           https://example.com/foobar/commer234.jpg|3|3;
           https://example-2.com/demo/tools67.jpg|1|1`,
-        'attr.article': 'sample 089 WHT',
-        'attr.color': 'white',
-        'attr.colorFreeDefinition.en': 'black-white',
-        'attr.colorFreeDefinition.de': 'schwarz-weiß',
-        'attr.designer': 'michaelkors',
-      }]
+          'attr.article': 'sample 089 WHT',
+          'attr.color': 'white',
+          'attr.colorFreeDefinition.en': 'black-white',
+          'attr.colorFreeDefinition.de': 'schwarz-weiß',
+          'attr.designer': 'michaelkors',
+        },
+      ]
 
       expect(productMapping.run(sample)).toEqual(expected)
     })
@@ -250,33 +255,41 @@ describe('::ProductMapping', () => {
     }
 
     it('spread product data for each variant if `fillAllRows`', () => {
-      const expected = [{
-        name: { en: 'my-fresh-product' },
-        description: { en: 'sample product object' },
-        variant: { id: 'masterVariant' },
-      }, {
-        name: { en: 'my-fresh-product' },
-        description: { en: 'sample product object' },
-        variant: { id: 'variant-2' },
-      }, {
-        name: { en: 'my-fresh-product' },
-        description: { en: 'sample product object' },
-        variant: { id: 'variant-3' },
-      }]
+      const expected = [
+        {
+          name: { en: 'my-fresh-product' },
+          description: { en: 'sample product object' },
+          variant: { id: 'masterVariant' },
+        },
+        {
+          name: { en: 'my-fresh-product' },
+          description: { en: 'sample product object' },
+          variant: { id: 'variant-2' },
+        },
+        {
+          name: { en: 'my-fresh-product' },
+          description: { en: 'sample product object' },
+          variant: { id: 'variant-3' },
+        },
+      ]
       const actual = ProductMapping._spreadProdOnVariants(sampleProduct, true)
       expect(actual).toEqual(expected)
     })
 
     it('spread product data for only one variant if no fillAllRows', () => {
-      const expected = [{
-        name: { en: 'my-fresh-product' },
-        description: { en: 'sample product object' },
-        variant: { id: 'masterVariant' },
-      }, {
-        variant: { id: 'variant-2' },
-      }, {
-        variant: { id: 'variant-3' },
-      }]
+      const expected = [
+        {
+          name: { en: 'my-fresh-product' },
+          description: { en: 'sample product object' },
+          variant: { id: 'masterVariant' },
+        },
+        {
+          variant: { id: 'variant-2' },
+        },
+        {
+          variant: { id: 'variant-3' },
+        },
+      ]
       const actual = ProductMapping._spreadProdOnVariants(sampleProduct, false)
       expect(actual).toEqual(expected)
     })
@@ -305,16 +318,20 @@ describe('::ProductMapping', () => {
           'res-cat-name-2': '0.987',
         },
         searchKeywords: {
-          en: [{
-            text: 'Multi tool',
-          }, {
-            text: 'Swiss Army Knife',
-            suggestTokenizer: {
-              type: 'whitespace',
+          en: [
+            {
+              text: 'Multi tool',
             },
-          }, {
-            text: 'Schweizer Messer',
-          }],
+            {
+              text: 'Swiss Army Knife',
+              suggestTokenizer: {
+                type: 'whitespace',
+              },
+            },
+            {
+              text: 'Schweizer Messer',
+            },
+          ],
         },
         slug: {
           en: 'michaelkors-phonecover',
@@ -495,96 +512,108 @@ describe('::ProductMapping', () => {
 
   describe('::mapCategories', () => {
     it('resolves categories to string by name', () => {
-      const sampleCat = [{
-        name: {
-          en: 'cat-in-en',
-          de: 'cat-in-de',
+      const sampleCat = [
+        {
+          name: {
+            en: 'cat-in-en',
+            de: 'cat-in-de',
+          },
+          externalId: 'cat-ext-id',
         },
-        externalId: 'cat-ext-id',
-      }, {
-        name: {
-          en: 'cat-foo-en',
-          de: 'cat-foo-de',
+        {
+          name: {
+            en: 'cat-foo-en',
+            de: 'cat-foo-de',
+          },
+          externalId: 'cat-foo-id',
         },
-        externalId: 'cat-foo-id',
-      }]
+      ]
       const expected = 'cat-in-en;cat-foo-en'
       const args = ['name', ';', 'en']
       expect(ProductMapping._mapCategories(sampleCat, ...args)).toBe(expected)
     })
 
     it('resolves categories to string by externalId', () => {
-      const sampleCat = [{
-        name: {
-          en: 'cat-in-en',
-          de: 'cat-in-de',
+      const sampleCat = [
+        {
+          name: {
+            en: 'cat-in-en',
+            de: 'cat-in-de',
+          },
+          externalId: 'cat-ext-id',
         },
-        externalId: 'cat-ext-id',
-      }, {
-        name: {
-          en: 'cat-foo-en',
-          de: 'cat-foo-de',
+        {
+          name: {
+            en: 'cat-foo-en',
+            de: 'cat-foo-de',
+          },
+          externalId: 'cat-foo-id',
         },
-        externalId: 'cat-foo-id',
-      }]
+      ]
       const expected = 'cat-ext-id;cat-foo-id'
       const args = ['externalId', ';']
       expect(ProductMapping._mapCategories(sampleCat, ...args)).toBe(expected)
     })
 
     it('resolves categories to string by key', () => {
-      const sampleCat = [{
-        name: {
-          en: 'cat-in-en',
-          de: 'cat-in-de',
+      const sampleCat = [
+        {
+          name: {
+            en: 'cat-in-en',
+            de: 'cat-in-de',
+          },
+          key: 'cat-key',
         },
-        key: 'cat-key',
-      }, {
-        name: {
-          en: 'cat-foo-en',
-          de: 'cat-foo-de',
+        {
+          name: {
+            en: 'cat-foo-en',
+            de: 'cat-foo-de',
+          },
+          key: 'cat-keysss',
         },
-        key: 'cat-keysss',
-      }]
+      ]
       const expected = 'cat-key;cat-keysss'
       const args = ['key', ';']
       expect(ProductMapping._mapCategories(sampleCat, ...args)).toBe(expected)
     })
 
     it('resolves categories to string by `namedPath`', () => {
-      const sampleCat = [{
-        name: {
-          en: 'cat-in-en',
-          de: 'cat-in-de',
-        },
-        parent: {
+      const sampleCat = [
+        {
           name: {
-            en: 'parent',
+            en: 'cat-in-en',
+            de: 'cat-in-de',
           },
           parent: {
             name: {
-              en: 'grandparent',
+              en: 'parent',
             },
             parent: {
               name: {
-                en: 'greatgrandparent',
+                en: 'grandparent',
+              },
+              parent: {
+                name: {
+                  en: 'greatgrandparent',
+                },
               },
             },
           },
+          key: 'cat-key',
         },
-        key: 'cat-key',
-      }, {
-        name: {
-          en: 'cat-foo-en',
-          de: 'cat-foo-de',
-        },
-        parent: {
+        {
           name: {
-            en: 'another-parent',
+            en: 'cat-foo-en',
+            de: 'cat-foo-de',
           },
+          parent: {
+            name: {
+              en: 'another-parent',
+            },
+          },
+          key: 'cat-keysss',
         },
-        key: 'cat-keysss',
-      }]
+      ]
       const args = ['namedPath', ';', 'en']
       const expected = oneLineTrim`
         greatgrandparent>grandparent>parent>cat-in-en

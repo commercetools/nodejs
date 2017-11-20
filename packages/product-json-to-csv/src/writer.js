@@ -7,11 +7,11 @@ import slugify from 'slugify'
 import tmp from 'tmp'
 
 // Accept a highland stream and write the output to a single file
-export function writeToSingleCsvFile (productStream, output, logger, headers) {
+export function writeToSingleCsvFile(productStream, output, logger, headers) {
   const headersString = headers.map(header => `"${header.trim()}"`).join(',')
   output.write(`${headersString}\n`) // Write headers first
   productStream
-    .each((product) => {
+    .each(product => {
       const csvData = json2csv({
         data: product,
         fields: headers,
@@ -28,7 +28,7 @@ export function writeToSingleCsvFile (productStream, output, logger, headers) {
 
 // Accept a highland stream and write the output to multiple files per
 // product type, then compress all files to a zip file
-export function writeToZipFile (productStream, output, logger) {
+export function writeToZipFile(productStream, output, logger) {
   const tmpDir = tmp.dirSync({ unsafeCleanup: true }).name
   tmp.setGracefulCleanup()
   let currentProductType
@@ -37,7 +37,7 @@ export function writeToZipFile (productStream, output, logger) {
   const headersCache = {}
   const streamCache = {}
   productStream
-    .each((product) => {
+    .each(product => {
       let hasCSVColumnTitle = false
       // Process this block only if item is a masterVariant and was
       // not the last processed item
@@ -73,17 +73,17 @@ export function writeToZipFile (productStream, output, logger) {
     .done(() => {
       const emitOnce = new EmitOnce(streamCache, 'finish')
       const archive = archiver('zip')
-      archive.on('error', (err) => {
+      archive.on('error', err => {
         logger.error(err)
         output.emit('error', err)
       })
-      emitOnce.on('error', (err) => {
+      emitOnce.on('error', err => {
         logger.error(err)
         output.emit('error', err)
       })
       // close all open file streams
       const streams = Object.keys(streamCache)
-      streams.forEach((key) => {
+      streams.forEach(key => {
         streamCache[key].end()
       })
       // zip files when all file writes have completed
