@@ -18,6 +18,7 @@ describe('Cart Discounts Exports', () => {
       { action: 'setDescription', key: 'description' },
       { action: 'setValidFrom', key: 'validFrom' },
       { action: 'setValidUntil', key: 'validUntil' },
+      { action: 'changeStackingMode', key: 'stackingMode' },
     ])
   })
 })
@@ -233,6 +234,25 @@ describe('Cart Discounts Actions', () => {
       {
         action: 'setValidUntil',
         validUntil: 'date2',
+      },
+    ]
+    const actual = cartDiscountsSync.buildActions(now, before)
+    expect(actual).toEqual(expected)
+  })
+
+  it('should build the `changeStackingMode` action', () => {
+    const before = {
+      stackingMode: 'Stacking',
+    }
+
+    const now = {
+      stackingMode: 'StopAfterThisDiscount',
+    }
+
+    const expected = [
+      {
+        action: 'changeStackingMode',
+        stackingMode: 'StopAfterThisDiscount',
       },
     ]
     const actual = cartDiscountsSync.buildActions(now, before)
