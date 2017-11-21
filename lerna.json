@@ -14,5 +14,10 @@
     },
     "cacheDir": ".changelog",
     "ignoreCommitters": ["greenkeeper"]
+  },
+  "command": {
+    "publish": {
+      "message": "chore(release): releasing component"
+    }
   }
 }
