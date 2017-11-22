@@ -27,7 +27,7 @@
     "lib"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=cli babel src --out-dir lib"
+    "build": "babel src --out-dir lib"
   },
   "dependencies": {
     "csv-parser": "^1.11.0",
