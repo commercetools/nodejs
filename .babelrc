@@ -1,6 +1,6 @@
 {
   "env": {
-    "test": {
+    "development": {
       "presets": [
         [
           "env",
@@ -30,7 +30,7 @@
         ]
       ]
     },
-    "development": {
+    "rollup": {
       "presets": [
         [
           "env",
@@ -92,7 +92,7 @@
         ]
       ]
     },
-    "cli-production": {
+    "cli": {
       "presets": [
         [
           "env",
