@@ -44,7 +44,7 @@
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "babel-preset-env": "1.6.1",
     "babel-preset-stage-0": "^6.24.1",
-    "check-node-version": "2.1.0",
+    "check-node-version": "3.0.0",
     "codecov": "3.0.0",
     "commitizen": "2.9.6",
     "common-tags": "^1.4.0",
