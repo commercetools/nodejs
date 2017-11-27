@@ -1,5 +1,5 @@
 import { oneLineTrim } from 'common-tags'
-import ProductMapping from '../src/mappings'
+import ProductMapping from '../src/map-product-data'
 
 describe('::ProductMapping', () => {
   let productMapping
@@ -203,13 +203,13 @@ describe('::ProductMapping', () => {
           'variant.images': oneLineTrim`
           https://example.com/foobar/commer.jpg|3|4;
           https://example-2.com/demo/tools.jpg|1|5|image-label`,
-          'attr.addedAttr': '',
-          'attr.anotherAddedAttr': '',
-          'attr.article': 'sample 089 WHT',
-          'attr.color': 'white',
-          'attr.colorFreeDefinition.en': 'black-white',
-          'attr.colorFreeDefinition.de': 'schwarz-weiß',
-          'attr.designer': 'michaelkors',
+          addedAttr: '',
+          anotherAddedAttr: '',
+          article: 'sample 089 WHT',
+          color: 'white',
+          'colorFreeDefinition.en': 'black-white',
+          'colorFreeDefinition.de': 'schwarz-weiß',
+          designer: 'michaelkors',
         },
         {
           'variant.id': 2,
@@ -217,11 +217,11 @@ describe('::ProductMapping', () => {
           'variant.images': oneLineTrim`
           https://example.com/foobar/commer234.jpg|3|3;
           https://example-2.com/demo/tools67.jpg|1|1`,
-          'attr.article': 'sample 089 WHT',
-          'attr.color': 'white',
-          'attr.colorFreeDefinition.en': 'black-white',
-          'attr.colorFreeDefinition.de': 'schwarz-weiß',
-          'attr.designer': 'michaelkors',
+          article: 'sample 089 WHT',
+          color: 'white',
+          'colorFreeDefinition.en': 'black-white',
+          'colorFreeDefinition.de': 'schwarz-weiß',
+          designer: 'michaelkors',
         },
       ]
 
@@ -446,17 +446,15 @@ describe('::ProductMapping', () => {
           id: 1,
           sku: 'A0E200000001YKI',
         },
-        attr: {
-          article: 'sample 089 WHT',
-          designer: 'michaelkors',
-          color: 'white',
-          colorFreeDefinition: {
-            en: 'black-white',
-            de: 'schwarz-weiß',
-          },
-          addedAttr: '',
-          anotherAddedAttr: '',
+        article: 'sample 089 WHT',
+        designer: 'michaelkors',
+        color: 'white',
+        colorFreeDefinition: {
+          en: 'black-white',
+          de: 'schwarz-weiß',
         },
+        addedAttr: '',
+        anotherAddedAttr: '',
         state: 'my-resolved-state',
         hasStagedChanges: false,
       }

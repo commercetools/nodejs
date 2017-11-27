@@ -128,17 +128,14 @@ export default class ProductMapping {
           }
           case 'variant': {
             if (!isEmpty(value.attributes)) {
-              acc.attr = {}
-
               value.attributes.forEach((attribute: Object) => {
-                acc.attr[attribute.name] =
-                  attribute.value.key || attribute.value
+                acc[attribute.name] = attribute.value.key || attribute.value
               })
 
               // check if product is masterVariant
               if (product.productType)
                 product.productType.attributes.forEach((attribute: Object) => {
-                  if (!acc.attr[attribute.name]) acc.attr[attribute.name] = ''
+                  if (!acc[attribute.name]) acc[attribute.name] = ''
                 })
             }
             let images

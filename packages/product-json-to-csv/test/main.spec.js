@@ -1,12 +1,12 @@
 import StreamTest from 'streamtest'
 import { oneLineTrim } from 'common-tags'
-import JSONParserProduct from '../src/main'
+import ProductJsonToCsv from '../src/main'
 import * as writer from '../src/writer'
 
 const streamTest = StreamTest.v2
 
-describe('JSONParserProduct', () => {
-  let jsonParserProduct
+describe('ProductJsonToCsv', () => {
+  let productJsonToCsv
   beforeEach(() => {
     const logger = {
       error: () => {},
@@ -23,7 +23,7 @@ describe('JSONParserProduct', () => {
       multiValueDelimiter: ';',
       productSeparator: '\n',
     }
-    jsonParserProduct = new JSONParserProduct(
+    productJsonToCsv = new ProductJsonToCsv(
       { projectKey: 'project-key' },
       parserConfig,
       logger,
@@ -46,10 +46,10 @@ describe('JSONParserProduct', () => {
         productSeparator: '\n',
       }
 
-      jsonParserProduct = new JSONParserProduct(apiConfig)
-      expect(jsonParserProduct.logger).toBeDefined()
-      expect(jsonParserProduct.client).toBeDefined()
-      expect(jsonParserProduct.parserConfig).toEqual(defaultConfig)
+      productJsonToCsv = new ProductJsonToCsv(apiConfig)
+      expect(productJsonToCsv.logger).toBeDefined()
+      expect(productJsonToCsv.client).toBeDefined()
+      expect(productJsonToCsv.parserConfig).toEqual(defaultConfig)
     })
   })
 
@@ -67,18 +67,18 @@ describe('JSONParserProduct', () => {
     })
 
     it('should write data to single `csv` file if headers are set', () => {
-      jsonParserProduct.parse = jest.fn(() => 'foo')
-      jsonParserProduct.parserConfig.headers = []
+      productJsonToCsv.parse = jest.fn(() => 'foo')
+      productJsonToCsv.parserConfig.headers = []
 
-      jsonParserProduct.run()
+      productJsonToCsv.run()
       expect(csvSpy).toBeCalled()
       expect(zipSpy).not.toBeCalled()
     })
 
     it('should write data to `zip` file if headers are not set', () => {
-      jsonParserProduct.parse = jest.fn(() => 'bar')
+      productJsonToCsv.parse = jest.fn(() => 'bar')
 
-      jsonParserProduct.run()
+      productJsonToCsv.run()
       expect(csvSpy).not.toBeCalled()
       expect(zipSpy).toBeCalled()
     })
@@ -86,10 +86,10 @@ describe('JSONParserProduct', () => {
 
   describe('::parse', () => {
     beforeEach(() => {
-      jsonParserProduct._resolveReferences = jest.fn(data =>
+      productJsonToCsv._resolveReferences = jest.fn(data =>
         Promise.resolve(data)
       )
-      jsonParserProduct.logger.error = jest.fn()
+      productJsonToCsv.logger.error = jest.fn()
     })
 
     it('should take an inputStream and output highland stream', () => {
@@ -106,7 +106,7 @@ describe('JSONParserProduct', () => {
           "variants": []
         }`
       const inputStream = streamTest.fromChunks([product])
-      const productStream = jsonParserProduct.parse(inputStream)
+      const productStream = productJsonToCsv.parse(inputStream)
       expect(productStream.source.__HighlandStream__).toBeTruthy()
     })
   })
@@ -148,31 +148,31 @@ describe('JSONParserProduct', () => {
           'res-cat-name-2': '0.987',
         }
 
-        jsonParserProduct._resolveProductType = jest.fn(() => ({ productType }))
-        jsonParserProduct._resolveTaxCategory = jest.fn(() => ({ taxCategory }))
-        jsonParserProduct._resolveState = jest.fn(() => ({ state }))
-        jsonParserProduct._resolveCategories = jest.fn(() => ({ categories }))
-        jsonParserProduct._resolveCategoryOrderHints = jest.fn(() => ({
+        productJsonToCsv._resolveProductType = jest.fn(() => ({ productType }))
+        productJsonToCsv._resolveTaxCategory = jest.fn(() => ({ taxCategory }))
+        productJsonToCsv._resolveState = jest.fn(() => ({ state }))
+        productJsonToCsv._resolveCategories = jest.fn(() => ({ categories }))
+        productJsonToCsv._resolveCategoryOrderHints = jest.fn(() => ({
           categoryOrderHints,
         }))
       })
 
       it('should pass the products to all resolver functions', async () => {
-        await jsonParserProduct._resolveReferences(sampleProduct)
+        await productJsonToCsv._resolveReferences(sampleProduct)
 
-        expect(jsonParserProduct._resolveProductType).toBeCalledWith(
+        expect(productJsonToCsv._resolveProductType).toBeCalledWith(
           sampleProduct.productType
         )
-        expect(jsonParserProduct._resolveTaxCategory).toBeCalledWith(
+        expect(productJsonToCsv._resolveTaxCategory).toBeCalledWith(
           sampleProduct.taxCategory
         )
-        expect(jsonParserProduct._resolveState).toBeCalledWith(
+        expect(productJsonToCsv._resolveState).toBeCalledWith(
           sampleProduct.state
         )
-        expect(jsonParserProduct._resolveCategories).toBeCalledWith(
+        expect(productJsonToCsv._resolveCategories).toBeCalledWith(
           sampleProduct.categories
         )
-        expect(jsonParserProduct._resolveCategoryOrderHints).toBeCalledWith(
+        expect(productJsonToCsv._resolveCategoryOrderHints).toBeCalledWith(
           sampleProduct.categoryOrderHints
         )
       })
@@ -202,14 +202,14 @@ describe('JSONParserProduct', () => {
             'res-cat-name-2': '0.987',
           },
         }
-        const actual = await jsonParserProduct._resolveReferences(sampleProduct)
+        const actual = await productJsonToCsv._resolveReferences(sampleProduct)
         expect(actual).toEqual(expected)
       })
     })
 
     describe('::_resolveProductType', () => {
       beforeEach(() => {
-        jsonParserProduct.fetchReferences = jest.fn(() =>
+        productJsonToCsv.fetchReferences = jest.fn(() =>
           Promise.resolve({
             body: {
               id: 'product-type-id',
@@ -223,14 +223,14 @@ describe('JSONParserProduct', () => {
       it('return empty object if no `productType` reference', () => {
         delete sampleProduct.productType
         expect(
-          jsonParserProduct._resolveProductType(sampleProduct.productType)
+          productJsonToCsv._resolveProductType(sampleProduct.productType)
         ).toEqual({})
       })
 
       it('build correct request uri for productType', async () => {
         const expected = /project-key\/product-types\/product-type-id/
-        await jsonParserProduct._resolveProductType(sampleProduct.productType)
-        expect(jsonParserProduct.fetchReferences).toBeCalledWith(
+        await productJsonToCsv._resolveProductType(sampleProduct.productType)
+        expect(productJsonToCsv.fetchReferences).toBeCalledWith(
           expect.stringMatching(expected)
         )
       })
@@ -243,7 +243,7 @@ describe('JSONParserProduct', () => {
             attributes: [{}],
           },
         }
-        const actual = await jsonParserProduct._resolveProductType(
+        const actual = await productJsonToCsv._resolveProductType(
           sampleProduct.productType
         )
         expect(actual).toEqual(expected)
@@ -252,7 +252,7 @@ describe('JSONParserProduct', () => {
 
     describe('::_resolveTaxCategory', () => {
       beforeEach(() => {
-        jsonParserProduct.fetchReferences = jest.fn(() =>
+        productJsonToCsv.fetchReferences = jest.fn(() =>
           Promise.resolve({
             body: {
               id: 'tax-cat-id',
@@ -265,14 +265,14 @@ describe('JSONParserProduct', () => {
       it('return empty object if no `taxCategory` reference', () => {
         delete sampleProduct.taxCategory
         expect(
-          jsonParserProduct._resolveTaxCategory(sampleProduct.taxCategory)
+          productJsonToCsv._resolveTaxCategory(sampleProduct.taxCategory)
         ).toEqual({})
       })
 
       it('build correct request uri for taxCategory', async () => {
         const expected = /project-key\/tax-categories\/tax-cat-id/
-        await jsonParserProduct._resolveTaxCategory(sampleProduct.taxCategory)
-        expect(jsonParserProduct.fetchReferences).toBeCalledWith(
+        await productJsonToCsv._resolveTaxCategory(sampleProduct.taxCategory)
+        expect(productJsonToCsv.fetchReferences).toBeCalledWith(
           expect.stringMatching(expected)
         )
       })
@@ -284,7 +284,7 @@ describe('JSONParserProduct', () => {
             key: 'resolved-tax-cat-key',
           },
         }
-        const actual = await jsonParserProduct._resolveTaxCategory(
+        const actual = await productJsonToCsv._resolveTaxCategory(
           sampleProduct.taxCategory
         )
         expect(actual).toEqual(expected)
@@ -293,7 +293,7 @@ describe('JSONParserProduct', () => {
 
     describe('::_resolveState', () => {
       beforeEach(() => {
-        jsonParserProduct.fetchReferences = jest.fn(() =>
+        productJsonToCsv.fetchReferences = jest.fn(() =>
           Promise.resolve({
             body: {
               id: 'state-id',
@@ -305,13 +305,13 @@ describe('JSONParserProduct', () => {
 
       it('return empty object if no `state` reference', () => {
         delete sampleProduct.state
-        expect(jsonParserProduct._resolveState(sampleProduct.state)).toEqual({})
+        expect(productJsonToCsv._resolveState(sampleProduct.state)).toEqual({})
       })
 
       it('build correct request uri for state', async () => {
         const expected = /project-key\/states\/state-id/
-        await jsonParserProduct._resolveState(sampleProduct.state)
-        expect(jsonParserProduct.fetchReferences).toBeCalledWith(
+        await productJsonToCsv._resolveState(sampleProduct.state)
+        expect(productJsonToCsv.fetchReferences).toBeCalledWith(
           expect.stringMatching(expected)
         )
       })
@@ -323,22 +323,20 @@ describe('JSONParserProduct', () => {
             key: 'res-state-key',
           },
         }
-        const actual = await jsonParserProduct._resolveState(
-          sampleProduct.state
-        )
+        const actual = await productJsonToCsv._resolveState(sampleProduct.state)
         expect(actual).toEqual(expected)
       })
     })
 
     describe('::_resolveCategories', () => {
       beforeEach(() => {
-        jsonParserProduct._getCategories = jest.fn(() => Promise.resolve([]))
+        productJsonToCsv._getCategories = jest.fn(() => Promise.resolve([]))
       })
 
       it('return empty object if no array of `categories`', () => {
         delete sampleProduct.categories
         expect(
-          jsonParserProduct._resolveCategories(sampleProduct.categories)
+          productJsonToCsv._resolveCategories(sampleProduct.categories)
         ).toEqual({})
       })
 
@@ -347,7 +345,7 @@ describe('JSONParserProduct', () => {
           { id: 'cat-id-1', name: { en: 'res-cat-name-1' } },
           { id: 'cat-id-2', name: { en: 'res-cat-name-2' } },
         ]
-        jsonParserProduct._getCategories.mockReturnValue(
+        productJsonToCsv._getCategories.mockReturnValue(
           Promise.resolve(resolvedCategories)
         )
         const expected = {
@@ -356,7 +354,7 @@ describe('JSONParserProduct', () => {
             { id: 'cat-id-2', name: { en: 'res-cat-name-2' } },
           ],
         }
-        const actual = await jsonParserProduct._resolveCategories(
+        const actual = await productJsonToCsv._resolveCategories(
           sampleProduct.categories
         )
         expect(actual).toEqual(expected)
@@ -365,13 +363,13 @@ describe('JSONParserProduct', () => {
 
     describe('::_resolveCategoryOrderHints', () => {
       beforeEach(() => {
-        jsonParserProduct._getCategories = jest.fn(() => Promise.resolve([]))
+        productJsonToCsv._getCategories = jest.fn(() => Promise.resolve([]))
       })
 
       it('return empty object if no `categoryOrderHints`', () => {
         delete sampleProduct.categoryOrderHints
         expect(
-          jsonParserProduct._resolveCategoryOrderHints(
+          productJsonToCsv._resolveCategoryOrderHints(
             sampleProduct.categoryOrderHints
           )
         ).toEqual({})
@@ -380,7 +378,7 @@ describe('JSONParserProduct', () => {
       it('return empty object if `categoryOrderHints` is empty', () => {
         sampleProduct.categoryOrderHints = {}
         expect(
-          jsonParserProduct._resolveCategoryOrderHints(
+          productJsonToCsv._resolveCategoryOrderHints(
             sampleProduct.categoryOrderHints
           )
         ).toEqual({})
@@ -391,7 +389,7 @@ describe('JSONParserProduct', () => {
           { id: 'cat-id-1', name: { en: 'res-cat-name-1' } },
           { id: 'cat-id-2', name: { en: 'res-cat-name-2' } },
         ]
-        jsonParserProduct._getCategories.mockReturnValue(
+        productJsonToCsv._getCategories.mockReturnValue(
           Promise.resolve(resolvedCategories)
         )
         const expected = {
@@ -400,19 +398,19 @@ describe('JSONParserProduct', () => {
             'res-cat-name-2': '0.987',
           },
         }
-        const actual = await jsonParserProduct._resolveCategoryOrderHints(
+        const actual = await productJsonToCsv._resolveCategoryOrderHints(
           sampleProduct.categoryOrderHints
         )
         expect(actual).toEqual(expected)
       })
 
       it('return category keys if specified', async () => {
-        jsonParserProduct.parserConfig.categoryOrderHintBy = 'key'
+        productJsonToCsv.parserConfig.categoryOrderHintBy = 'key'
         const resolvedCategories = [
           { id: 'cat-id-1', key: 'res-cat-key-1' },
           { id: 'cat-id-2', key: 'res-cat-key-2' },
         ]
-        jsonParserProduct._getCategories.mockReturnValue(
+        productJsonToCsv._getCategories.mockReturnValue(
           Promise.resolve(resolvedCategories)
         )
         const expected = {
@@ -421,19 +419,19 @@ describe('JSONParserProduct', () => {
             'res-cat-key-2': '0.987',
           },
         }
-        const actual = await jsonParserProduct._resolveCategoryOrderHints(
+        const actual = await productJsonToCsv._resolveCategoryOrderHints(
           sampleProduct.categoryOrderHints
         )
         expect(actual).toEqual(expected)
       })
 
       it('return externalIds if specified', async () => {
-        jsonParserProduct.parserConfig.categoryOrderHintBy = 'externalId'
+        productJsonToCsv.parserConfig.categoryOrderHintBy = 'externalId'
         const resolvedCategories = [
           { id: 'cat-id-1', externalId: 'res-cat-extId-1' },
           { id: 'cat-id-2', externalId: 'res-cat-extId-2' },
         ]
-        jsonParserProduct._getCategories.mockReturnValue(
+        productJsonToCsv._getCategories.mockReturnValue(
           Promise.resolve(resolvedCategories)
         )
         const expected = {
@@ -442,7 +440,7 @@ describe('JSONParserProduct', () => {
             'res-cat-extId-2': '0.987',
           },
         }
-        const actual = await jsonParserProduct._resolveCategoryOrderHints(
+        const actual = await productJsonToCsv._resolveCategoryOrderHints(
           sampleProduct.categoryOrderHints
         )
         expect(actual).toEqual(expected)
@@ -451,7 +449,7 @@ describe('JSONParserProduct', () => {
 
     describe('::_getCategories', () => {
       beforeEach(() => {
-        jsonParserProduct.categoriesCache = {
+        productJsonToCsv.categoriesCache = {
           'cat-id-1': {
             id: 'cat-id-1',
             key: 'cat-key-1-in-cache',
@@ -459,7 +457,7 @@ describe('JSONParserProduct', () => {
         }
         const results = [{ id: 'cat-id-2', key: 'cat-key-2-new-in-cache' }]
 
-        jsonParserProduct.fetchReferences = jest.fn(() =>
+        productJsonToCsv.fetchReferences = jest.fn(() =>
           Promise.resolve({ body: { results } })
         )
       })
@@ -467,8 +465,8 @@ describe('JSONParserProduct', () => {
       it('return category from cache if it exists', async () => {
         const expected = [{ id: 'cat-id-1', key: 'cat-key-1-in-cache' }]
         const categoryId = ['cat-id-1']
-        const actual = await jsonParserProduct._getCategories(categoryId)
-        expect(jsonParserProduct.fetchReferences).not.toBeCalled()
+        const actual = await productJsonToCsv._getCategories(categoryId)
+        expect(productJsonToCsv.fetchReferences).not.toBeCalled()
         expect(actual).toEqual(expected)
       })
 
@@ -485,8 +483,8 @@ describe('JSONParserProduct', () => {
         ]
         const expectedUri = /categories\?where=id%20in%20\(%22cat-id-2%22\)/
         const categoryIds = ['cat-id-1', 'cat-id-2']
-        const actual = await jsonParserProduct._getCategories(categoryIds)
-        expect(jsonParserProduct.fetchReferences).toBeCalledWith(
+        const actual = await productJsonToCsv._getCategories(categoryIds)
+        expect(productJsonToCsv.fetchReferences).toBeCalledWith(
           expect.stringMatching(expectedUri)
         )
         expect(actual).toEqual(expectedCategories)
@@ -504,8 +502,8 @@ describe('JSONParserProduct', () => {
           },
         }
         const categoryIds = ['cat-id-2']
-        await jsonParserProduct._getCategories(categoryIds)
-        expect(jsonParserProduct.categoriesCache).toEqual(expectedCache)
+        await productJsonToCsv._getCategories(categoryIds)
+        expect(productJsonToCsv.categoriesCache).toEqual(expectedCache)
       })
     })
 
@@ -526,7 +524,7 @@ describe('JSONParserProduct', () => {
       }
 
       it('resolves all ancestors for a category', async () => {
-        jsonParserProduct._getCategories = jest
+        productJsonToCsv._getCategories = jest
           .fn()
           .mockImplementationOnce(() => Promise.resolve([parent]))
           .mockImplementationOnce(() => Promise.resolve([grandParent]))
@@ -549,8 +547,8 @@ describe('JSONParserProduct', () => {
             },
           },
         }
-        const actual = await jsonParserProduct._resolveAncestors(child)
-        expect(jsonParserProduct._getCategories).toHaveBeenCalledTimes(2)
+        const actual = await productJsonToCsv._resolveAncestors(child)
+        expect(productJsonToCsv._getCategories).toHaveBeenCalledTimes(2)
         expect(actual).toEqual(expected)
       })
     })
@@ -558,7 +556,7 @@ describe('JSONParserProduct', () => {
 
   describe('::fetchReferences', () => {
     beforeEach(() => {
-      jsonParserProduct.client.execute = jest.fn()
+      productJsonToCsv.client.execute = jest.fn()
     })
     it('should fetch reference from API from url', () => {
       const uri = 'dummy-uri'
@@ -568,9 +566,9 @@ describe('JSONParserProduct', () => {
         headers: { Authorization: 'Bearer myAccessToken' },
       }
 
-      jsonParserProduct.fetchReferences(uri)
-      expect(jsonParserProduct.client.execute).toBeCalled()
-      expect(jsonParserProduct.client.execute).toBeCalledWith(expectedRequest)
+      productJsonToCsv.fetchReferences(uri)
+      expect(productJsonToCsv.client.execute).toBeCalled()
+      expect(productJsonToCsv.client.execute).toBeCalledWith(expectedRequest)
     })
 
     it('should fetch only once for multiple calls with same parameter', () => {
@@ -581,10 +579,10 @@ describe('JSONParserProduct', () => {
         headers: { Authorization: 'Bearer myAccessToken' },
       }
 
-      jsonParserProduct.fetchReferences(uri)
-      jsonParserProduct.fetchReferences(uri)
-      expect(jsonParserProduct.client.execute).toHaveBeenCalledTimes(1)
-      expect(jsonParserProduct.client.execute).toBeCalledWith(expectedRequest)
+      productJsonToCsv.fetchReferences(uri)
+      productJsonToCsv.fetchReferences(uri)
+      expect(productJsonToCsv.client.execute).toHaveBeenCalledTimes(1)
+      expect(productJsonToCsv.client.execute).toBeCalledWith(expectedRequest)
     })
   })
 })

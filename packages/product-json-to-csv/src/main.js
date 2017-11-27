@@ -21,11 +21,11 @@ import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-ag
 import highland from 'highland'
 import Promise from 'bluebird'
 import { memoize } from 'lodash'
-import ProductMapping from './mappings'
+import ProductMapping from './map-product-data'
 import { writeToSingleCsvFile, writeToZipFile } from './writer'
 import pkg from '../package.json'
 
-export default class JSONParserProduct {
+export default class ProductJsonToCsv {
   // Set flowtype annotations
   accessToken: string
   apiConfig: ApiConfigOptions
@@ -278,7 +278,7 @@ export default class JSONParserProduct {
   }
 }
 
-JSONParserProduct.prototype.fetchReferences = memoize(function _fetchReferences(
+ProductJsonToCsv.prototype.fetchReferences = memoize(function _fetchReferences(
   uri: string
 ): Promise<SuccessResult> {
   const request: ClientRequest = {
