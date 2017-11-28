@@ -115,6 +115,7 @@ export function setParams(params: ServiceBuilderParams) {
     'filterByFacets',
     'searchKeywords',
     'where',
+    'whereOperator',
     'version',
   ]
   Object.keys(params).forEach((key: string) => {
