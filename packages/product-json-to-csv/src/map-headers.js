@@ -1,5 +1,12 @@
-export default function mapHeaders(headers) {
-  return headers.map(header => {
+/* @flow */
+
+type HeaderObj = {
+  label: string,
+  value: string,
+}
+
+export default function mapHeaders(headers: Array<string>): Array<HeaderObj> {
+  return headers.map((header: string): HeaderObj => {
     if (header === '_published' || header === 'publish')
       return {
         label: '_published',

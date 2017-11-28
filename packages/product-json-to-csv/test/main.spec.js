@@ -31,6 +31,10 @@ describe('ProductJsonToCsv', () => {
     )
   })
 
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
+
   describe('::constructor', () => {
     it('should initialize with defaults', () => {
       const apiConfig = {
@@ -62,9 +66,6 @@ describe('ProductJsonToCsv', () => {
         .spyOn(writer, 'writeToSingleCsvFile')
         .mockImplementation(() => {})
     })
-    afterEach(() => {
-      jest.resetAllMocks()
-    })
 
     it('should write data to single `csv` file if headers are set', () => {
       productJsonToCsv.parse = jest.fn(() => 'foo')
@@ -85,15 +86,14 @@ describe('ProductJsonToCsv', () => {
   })
 
   describe('::parse', () => {
+    let product
+    let inputStream
     beforeEach(() => {
       productJsonToCsv._resolveReferences = jest.fn(data =>
         Promise.resolve(data)
       )
       productJsonToCsv.logger.error = jest.fn()
-    })
-
-    it('should take an inputStream and output highland stream', () => {
-      const product = oneLineTrim`
+      product = oneLineTrim`
         {
           "id": "product-1-id",
           "slug": {
@@ -105,9 +105,46 @@ describe('ProductJsonToCsv', () => {
           },
           "variants": []
         }`
-      const inputStream = streamTest.fromChunks([product])
+      inputStream = streamTest.fromChunks([product])
+    })
+
+    it('should take an inputStream and output highland stream', () => {
       const productStream = productJsonToCsv.parse(inputStream)
       expect(productStream.source.__HighlandStream__).toBeTruthy()
+    })
+
+    it('should return a flattened product object', done => {
+      const productStream = productJsonToCsv.parse(inputStream)
+      const expected = [
+        {
+          id: 'product-1-id',
+          'slug.en': 'my-slug-1',
+          'variant.id': 'mv-id',
+          'variant.key': 'mv-key',
+        },
+      ]
+      productStream.toArray(actual => {
+        expect(actual).toEqual(expect.arrayContaining(expected))
+        done()
+      })
+    })
+
+    it('should log and emit error if error occurs', done => {
+      const fakeError = new Error('fake error')
+      productJsonToCsv._resolveReferences = jest.fn(() =>
+        Promise.reject(fakeError)
+      )
+      const outputStream = {
+        emit: jest.fn(),
+      }
+      const productStream = productJsonToCsv.parse(inputStream, outputStream)
+
+      // Stream is lazy and has to be consumed
+      productStream.done(() => {
+        expect(productJsonToCsv.logger.error).toBeCalledWith(fakeError)
+        expect(outputStream.emit).toBeCalledWith('error', fakeError)
+        done()
+      })
     })
   })
 

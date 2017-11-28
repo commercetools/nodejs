@@ -34,7 +34,6 @@ export default class ProductJsonToCsv {
   parserConfig: ParserConfigOptions
   logger: LoggerOptions
   fetchReferences: Function
-  productSeparator: string
   _resolveReferences: Function
   _productMapping: Object
 
@@ -102,7 +101,7 @@ export default class ProductJsonToCsv {
     return (
       highland(input)
         // parse chunk and split into JSON object strings
-        .splitBy(this.productSeparator)
+        .splitBy(this.parserConfig.productSeparator)
         // convert the JSON object strings to JS objects
         .map(JSON.parse)
         .flatMap((product: ProductProjection) =>

@@ -28,6 +28,7 @@ export type ParserConfigOptions = {
   headers?: Array<string>,
   language: string,
   multiValueDelimiter: string,
+  productSeparator: string,
 }
 
 export type ExportConfigOptions = {
@@ -297,7 +298,7 @@ export type ProdWithMergedVariants = {
   reviewRatingStatistics?: Object,
 }
 
-export type SingleVariantPerProduct = {
+export type SingleVarPerProduct = {
   id?: string,
   key?: string,
   version?: number,

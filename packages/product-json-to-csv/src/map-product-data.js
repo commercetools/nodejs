@@ -2,7 +2,7 @@
 import type {
   ResolvedProdProj,
   ProdWithMergedVariants,
-  SingleVariantPerProduct,
+  SingleVarPerProduct,
   MappedProduct,
   Variant,
   Category,
@@ -35,14 +35,14 @@ export default class ProductMapping {
 
   run(product: ResolvedProdProj) {
     const mergedVarProduct = ProductMapping._mergeVariants(product)
-    const variantsWithProductInfo = ProductMapping._spreadProdOnVariants(
+    const varWithProductInfo = ProductMapping._spreadProdOnVariants(
       mergedVarProduct,
       this.fillAllRows
     )
-    const a = variantsWithProductInfo.map((variant: SingleVariantPerProduct) =>
-      this._mapProperties(variant)
+    const mappedProduct = varWithProductInfo.map(
+      (variant: SingleVarPerProduct) => this._mapProperties(variant)
     )
-    const flatProducts = a.map(flatten)
+    const flatProducts = mappedProduct.map(flatten)
     return flatProducts
   }
 
@@ -57,7 +57,7 @@ export default class ProductMapping {
   static _spreadProdOnVariants(
     product: ProdWithMergedVariants,
     fillAllRows: boolean
-  ): Array<SingleVariantPerProduct> {
+  ): Array<SingleVarPerProduct> {
     if (fillAllRows)
       return product.variant.map((eachVariant: Variant): Object => ({
         ...product,
@@ -65,7 +65,7 @@ export default class ProductMapping {
       }))
 
     const productWithVariants: Array<Object> = product.variant.map(
-      (eachVariant: Variant): SingleVariantPerProduct => ({
+      (eachVariant: Variant): SingleVarPerProduct => ({
         variant: eachVariant,
       })
     )
@@ -73,7 +73,7 @@ export default class ProductMapping {
     return productWithVariants
   }
 
-  _mapProperties(product: SingleVariantPerProduct): MappedProduct {
+  _mapProperties(product: SingleVarPerProduct): MappedProduct {
     return reduce(
       product,
       (acc: Object, value: any, property: string): Object => {
