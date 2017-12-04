@@ -26,10 +26,13 @@ export default function buildQueryString(
     searchKeywords,
     version,
     customerId,
+    cartId,
   } = params
   let queryString = []
 
   if (customerId) queryString.push(`customerId=${customerId}`)
+
+  if (cartId) queryString.push(`cartId=${cartId}`)
 
   if (typeof staged === 'boolean')
     queryString.push(`staged=${staged.toString()}`)
