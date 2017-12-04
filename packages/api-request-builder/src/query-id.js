@@ -19,6 +19,12 @@ export function byId(id: string): Object {
         'You cannot use both `byId` and `byCustomerId`.'
     )
 
+  if (this.params.cartId)
+    throw new Error(
+      'A cartId for this resource has already been set. ' +
+        'You cannot use both `byId` and `byCartId`.'
+    )
+
   this.params.id = id
   return this
 }
@@ -60,5 +66,25 @@ export function byCustomerId(custId: string): Object {
     )
 
   this.params.customerId = custId
+  return this
+}
+
+/**
+ * Set the given `id` to the `cartId` internal state of the service instance.
+ * For querying shipping methods by cart id
+ *
+ * @param  {string} id - A resource `UUID`
+ * @throws If `id` is missing.
+ * @return {Object} The instance of the service, can be chained.
+ */
+export function byCartId(cartId: string): Object {
+  if (!cartId) throw new Error('Required argument for `byCartId` is missing')
+  if (this.params.id)
+    throw new Error(
+      'An ID for this resource has already been set. ' +
+        'You cannot use both `byId` and `byCartId`.'
+    )
+
+  this.params.cartId = cartId
   return this
 }

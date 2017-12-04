@@ -22,6 +22,7 @@ const expectedServiceProperties = [
   'perPage',
   'byId',
   'byCustomerId',
+  'byCartId',
   'byKey',
   'expand',
   'text',
@@ -379,6 +380,24 @@ describe('createService', () => {
         ).toBe('/my-project1/test?customerId=foo&version=3')
       })
 
+      it('should mix cartId and queryParams', () => {
+        expect(
+          service
+            .byCartId('foo')
+            .expand('baz')
+            .build()
+        ).toBe('/my-project1/test?cartId=foo&expand=baz')
+      })
+
+      it('should mix cartId and version', () => {
+        expect(
+          service
+            .byCartId('foo')
+            .withVersion(3)
+            .build()
+        ).toBe('/my-project1/test?cartId=foo&version=3')
+      })
+
       it('should mix queryParams and version', () => {
         expect(
           service
@@ -405,6 +424,11 @@ describe('createService', () => {
     it('endpoint with customer id', () => {
       expect(service.byCustomerId('cust123').build()).toBe(
         '/my-project1/foo?customerId=cust123'
+      )
+    })
+    it('endpoint with cart id', () => {
+      expect(service.byCartId('cart123').build()).toBe(
+        '/my-project1/foo?cartId=cart123'
       )
     })
     it('endpoint with key', () => {
