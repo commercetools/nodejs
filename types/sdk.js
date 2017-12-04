@@ -214,6 +214,7 @@ export type ServiceBuilderDefaultParams = {
   },
   version?: number,
   customerId?: string,
+  cartId?: string,
 }
 export type ServiceBuilderParams = {
   // query-expand
@@ -223,6 +224,7 @@ export type ServiceBuilderParams = {
   id?: ?string,
   key?: ?string,
   customerId?: ?string,
+  cartId?: ?string,
 
   // query-page
   sort: Array<{ by: string, direction: 'asc' | 'desc' }>,
