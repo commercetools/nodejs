@@ -292,7 +292,7 @@ export type UpdateAction = {
   [key: string]: any,
 }
 export type SyncAction = {
-  buildActions: (before: Object, now: Object) => Array<UpdateAction>,
+  buildActions: (now: Object, before: Object) => Array<UpdateAction>,
 }
 export type ActionGroup = {
   type: string,

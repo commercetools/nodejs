@@ -38,7 +38,7 @@ const before = {
 const now = {
   name: { en: 'My Category', de: 'Meine Kategorie' }
 }
-const actions = syncCategories.buildActions(before, now)
+const actions = syncCategories.buildActions(now, before)
 const categoriesRequest = {
   url: `/categories/${before.id}`,
   method: 'POST',
@@ -77,7 +77,7 @@ const now = {
   firstName: 'John',
   lastName: 'Doe'
 }
-const actions = syncCustomers.buildActions(before, now)
+const actions = syncCustomers.buildActions(now, before)
 const customersRequest = {
   url: `/customers/${before.id}`,
   method: 'POST',
@@ -115,7 +115,7 @@ const before = {
 const now = {
   quantityOnStock: 5
 }
-const actions = syncInventories.buildActions(before, now)
+const actions = syncInventories.buildActions(now, before)
 const inventoriesRequest = {
   url: `/inventory/${before.id}`,
   method: 'POST',
@@ -153,7 +153,7 @@ const before = {
 const now = {
   orderState: 'Complete'
 }
-const actions = syncOrders.buildActions(before, now)
+const actions = syncOrders.buildActions(now, before)
 const ordersRequest = {
   url: `/orders/${before.id}`,
   method: 'POST',
@@ -191,7 +191,7 @@ const before = {
 const now = {
   name: { en: 'My Product', de: 'Mein Produkt' }
 }
-const actions = syncProducts.buildActions(before, now)
+const actions = syncProducts.buildActions(now, before)
 const productsRequest = {
   url: `/products/${before.id}`,
   method: 'POST',
@@ -229,7 +229,7 @@ const before = {
 const now = {
   name: { en: 'My Product Discount', de: 'Mein Produkt Rabatt' }
 }
-const actions = syncProductDiscounts.buildActions(before, now)
+const actions = syncProductDiscounts.buildActions(now, before)
 const productDiscountsRequests = {
   url: `/product-discounts/${before.id}`,
   method: 'POST',
@@ -267,7 +267,7 @@ const before = {
 const now = {
   name: { en: 'My Discount Code', de: 'Mein Rabatt Code' }
 }
-const actions = syncDiscountCodes.buildActions(before, now)
+const actions = syncDiscountCodes.buildActions(now, before)
 const discountCodesRequest = {
   url: `/discount-codes/${before.id}`,
   method: 'POST',
@@ -307,7 +307,7 @@ const now = {
   name: 'My new customer group',
   key: 'some-new-key'
 }
-const actions = syncCustomerGroups.buildActions(before, now)
+const actions = syncCustomerGroups.buildActions(now, before)
 const customerGroupRequest = {
   url: `/customer-groups/${before.id}`,
   method: 'POST',
@@ -345,7 +345,7 @@ const before = {
 const now = {
   name: { en: 'My Cart Discount', de: 'Mein Warenkorbrabatt' }
 }
-const actions = syncCartDiscounts.buildActions(before, now)
+const actions = syncCartDiscounts.buildActions(now, before)
 const cartDiscountsRequests = {
   url: `/cart-discounts/${before.id}`,
   method: 'POST',
