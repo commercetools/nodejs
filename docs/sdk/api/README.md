@@ -89,3 +89,6 @@ Provides an API to construct update actions. Useful for building [request](/sdk/
 * [createSyncProducts(actionGroups)](/sdk/api/syncActions.md#createsyncproductsactiongroups)
 * [createSyncOrders(actionGroups)](/sdk/api/syncActions.md#createsyncordersactiongroups)
 * [createSyncDiscountCodes(actionGroups)](/sdk/api/syncActions.md#createsyncdiscountcodesactiongroups)
+* [createSyncProductDiscounts(actionGroups)](/sdk/api/syncActions.md#createsyncproductdiscountsactiongroups)
+* [createSyncCustomerGroup(actionGroups)](/sdk/api/syncActions.md#createsynccustomergroupactiongroups)
+* [createSyncCartDiscounts(actionGroups)](/sdk/api/syncActions.md#createsynccartdiscountsactiongroups)
