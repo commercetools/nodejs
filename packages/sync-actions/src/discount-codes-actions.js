@@ -11,6 +11,8 @@ export const baseActionsList = [
     key: 'maxApplicationsPerCustomer',
   },
   { action: 'changeCartDiscounts', key: 'cartDiscounts' },
+  { action: 'setValidFrom', key: 'validFrom' },
+  { action: 'setValidUntil', key: 'validUntil' },
 ]
 
 export function actionsMapBase(diff, oldObj, newObj) {
