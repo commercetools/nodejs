@@ -6,19 +6,74 @@ describe('Exports', () => {
     expect(actionGroups).toEqual(['base', 'references'])
   })
 
-  it('correctly defines base actions list', () => {
-    expect(baseActionsList).toEqual([
-      { action: 'changeIsActive', key: 'isActive' },
-      { action: 'setName', key: 'name' },
-      { action: 'setDescription', key: 'description' },
-      { action: 'setCartPredicate', key: 'cartPredicate' },
-      { action: 'setMaxApplications', key: 'maxApplications' },
-      {
-        action: 'setMaxApplicationsPerCustomer',
-        key: 'maxApplicationsPerCustomer',
-      },
-      { action: 'changeCartDiscounts', key: 'cartDiscounts' },
-    ])
+  describe('action list', () => {
+    it('should contain `changeIsActive` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([{ action: 'changeIsActive', key: 'isActive' }])
+      )
+    })
+
+    it('should contain `setName` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([{ action: 'setName', key: 'name' }])
+      )
+    })
+
+    it('should contain `setDescription` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setDescription',
+            key: 'description',
+          },
+        ])
+      )
+    })
+
+    it('should contain `setMaxApplications` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setMaxApplications',
+            key: 'maxApplications',
+          },
+        ])
+      )
+    })
+
+    it('should contain `setMaxApplicationsPerCustomer` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setMaxApplicationsPerCustomer',
+            key: 'maxApplicationsPerCustomer',
+          },
+        ])
+      )
+    })
+
+    it('should contain `changeCartDiscounts` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'changeCartDiscounts',
+            key: 'cartDiscounts',
+          },
+        ])
+      )
+    })
+
+    it('should contain `setValidFrom` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([{ action: 'setValidFrom', key: 'validFrom' }])
+      )
+    })
+
+    it('should contain `setValidUntil` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([{ action: 'setValidUntil', key: 'validUntil' }])
+      )
+    })
   })
 })
 
@@ -40,6 +95,7 @@ describe('Actions', () => {
     ]
     expect(actual).toEqual(expected)
   })
+
   it('should build `setName` action', () => {
     const before = {
       name: { en: 'previous-en-name', de: 'previous-de-name' },
@@ -173,6 +229,44 @@ describe('Actions', () => {
         ],
       },
     ]
+    expect(actual).toEqual(expected)
+  })
+
+  it('should build the `setValidFrom` action', () => {
+    const before = {
+      validFrom: 'date1',
+    }
+
+    const now = {
+      validFrom: 'date2',
+    }
+
+    const expected = [
+      {
+        action: 'setValidFrom',
+        validFrom: 'date2',
+      },
+    ]
+    const actual = discountCodesSync.buildActions(now, before)
+    expect(actual).toEqual(expected)
+  })
+
+  it('should build the `setValidUntil` action', () => {
+    const before = {
+      validUntil: 'date1',
+    }
+
+    const now = {
+      validUntil: 'date2',
+    }
+
+    const expected = [
+      {
+        action: 'setValidUntil',
+        validUntil: 'date2',
+      },
+    ]
+    const actual = discountCodesSync.buildActions(now, before)
     expect(actual).toEqual(expected)
   })
 })

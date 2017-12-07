@@ -40,6 +40,17 @@ describe('queryId', () => {
     )
   })
 
+  it('should set the cartId param', () => {
+    service.byCartId('myCart')
+    expect(service.params.cartId).toBe('myCart')
+  })
+
+  it('should throw if cartId is missing', () => {
+    expect(() => service.byCartId()).toThrowError(
+      /Required argument for `byCartId` is missing/
+    )
+  })
+
   it('throw if byId is used after byKey', () => {
     expect(() => service.byKey('bar').byId('123')).toThrowError(
       'A key for this resource has already been set. ' +
@@ -65,6 +76,20 @@ describe('queryId', () => {
     expect(() => service.byCustomerId('foo').byId('789')).toThrowError(
       'A customerId for this resource has already been set. ' +
         'You cannot use both `byId` and `byCustomerId`.'
+    )
+  })
+
+  it('throw if byCartId is used after byId', () => {
+    expect(() => service.byId('theId').byCartId('theCartId')).toThrowError(
+      'An ID for this resource has already been set. ' +
+        'You cannot use both `byId` and `byCartId`.'
+    )
+  })
+
+  it('throw if byId is used after byCartId', () => {
+    expect(() => service.byCartId('foo').byId('789')).toThrowError(
+      'A cartId for this resource has already been set. ' +
+        'You cannot use both `byId` and `byCartId`.'
     )
   })
 })

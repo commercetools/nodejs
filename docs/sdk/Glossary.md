@@ -99,7 +99,7 @@ type UpdateAction = {
   [key: string]: any;
 }
 type SyncAction = {
-  buildActions: (before: Object, now: Object) => Array<UpdateAction>;
+  buildActions: (now: Object, before: Object) => Array<UpdateAction>;
 }
 
 type ActionGroup = {
