@@ -7,6 +7,6 @@ git checkout -b gh-pages
 touch .nojekyll
 git add .
 git commit -am 'update book'
-git remote add origin-pages https://$RELEASE_GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git > /dev/null 2>&1
+git remote add origin-pages git@github.com:commercetools/nodejs.git > /dev/null 2>&1
 git push --quiet --set-upstream origin-pages gh-pages --force
 popd

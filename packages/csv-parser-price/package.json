@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/csv-parser-price",
-  "version": "2.1.6",
+  "version": "2.1.8",
   "description": "Module that parses price csv to json",
   "keywords": [
     "commercetools",
@@ -29,15 +29,15 @@
     "lib"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=cli babel src --out-dir lib"
+    "build": "babel src --out-dir lib"
   },
   "dependencies": {
     "@commercetools/api-request-builder": "^2.0.0",
-    "@commercetools/get-credentials": "^2.0.0",
-    "@commercetools/sdk-client": "^1.2.0",
-    "@commercetools/sdk-middleware-auth": "^3.0.0",
-    "@commercetools/sdk-middleware-http": "^2.0.0",
-    "@commercetools/sdk-middleware-user-agent": "^1.2.0",
+    "@commercetools/get-credentials": "^2.1.2",
+    "@commercetools/sdk-client": "^1.5.2",
+    "@commercetools/sdk-middleware-auth": "^3.4.3",
+    "@commercetools/sdk-middleware-http": "^2.2.2",
+    "@commercetools/sdk-middleware-user-agent": "^1.2.2",
     "JSONStream": "^1.2.1",
     "bluebird": "^3.4.6",
     "csv-parser": "^1.11.0",

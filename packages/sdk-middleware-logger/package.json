@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-middleware-logger",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Middleware for logging request and response being executed, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
@@ -29,9 +29,9 @@
   ],
   "scripts": {
     "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
-    "build:umd": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f umd -n CommercetoolsSdkMiddlewareLogger -i src/index.js -o dist/commercetools-sdk-middleware-logger.umd.js",
+    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n CommercetoolsSdkMiddlewareLogger -i src/index.js -o dist/commercetools-sdk-middleware-logger.umd.js",
     "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n CommercetoolsSdkMiddlewareLogger -i src/index.js -o dist/commercetools-sdk-middleware-logger.umd.min.js",
-    "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -n CommercetoolsSdkMiddlewareLogger -i src/index.js -o dist/commercetools-sdk-middleware-logger.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSdkMiddlewareLogger -i src/index.js -o dist/commercetools-sdk-middleware-logger.cjs.js"
+    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n CommercetoolsSdkMiddlewareLogger -i src/index.js -o dist/commercetools-sdk-middleware-logger.es.js",
+    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSdkMiddlewareLogger -i src/index.js -o dist/commercetools-sdk-middleware-logger.cjs.js"
   }
 }

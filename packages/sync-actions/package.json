@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sync-actions",
-  "version": "1.11.7",
+  "version": "1.14.0",
   "description": "Build API update actions for the commercetools platform.",
   "keywords": [
     "commercetools",
@@ -28,10 +28,10 @@
   ],
   "scripts": {
     "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
-    "build:umd": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f umd -n CommercetoolsSyncActions -i src/index.js -o dist/commercetools-sync-actions.umd.js",
+    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n CommercetoolsSyncActions -i src/index.js -o dist/commercetools-sync-actions.umd.js",
     "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n CommercetoolsSyncActions -i src/index.js -o dist/commercetools-sync-actions.umd.min.js",
-    "build:es": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f es -n CommercetoolsSyncActions -i src/index.js -o dist/commercetools-sync-actions.es.js",
-    "build:cjs": "cross-env NODE_ENV=development rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSyncActions -i src/index.js -o dist/commercetools-sync-actions.cjs.js"
+    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n CommercetoolsSyncActions -i src/index.js -o dist/commercetools-sync-actions.es.js",
+    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSyncActions -i src/index.js -o dist/commercetools-sync-actions.cjs.js"
   },
   "dependencies": {
     "jsondiffpatch": "0.2.4",

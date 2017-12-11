@@ -7,6 +7,8 @@ export const baseActionsList = [
   { action: 'changeSortOrder', key: 'sortOrder' },
   { action: 'changeValue', key: 'value' },
   { action: 'setDescription', key: 'description' },
+  { action: 'setValidFrom', key: 'validFrom' },
+  { action: 'setValidUntil', key: 'validUntil' },
 ]
 
 export function actionsMapBase(diff, oldObj, newObj) {

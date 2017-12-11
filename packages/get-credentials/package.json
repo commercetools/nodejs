@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/get-credentials",
-  "version": "2.1.0",
+  "version": "2.1.2",
   "description": "Get CT credentials from the system environment.",
   "keywords": [
     "commercetools",
@@ -21,7 +21,7 @@
     "lib"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=cli babel src --out-dir lib"
+    "build": "babel src --out-dir lib"
   },
   "devDependencies": {
     "sinon": "^1.17.7"

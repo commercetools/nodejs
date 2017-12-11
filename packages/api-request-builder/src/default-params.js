@@ -97,6 +97,7 @@ export function setParams(params: ServiceBuilderParams) {
     'id',
     'key',
     'customerId',
+    'cartId',
     'sort',
     'page',
     'perPage',
@@ -115,6 +116,7 @@ export function setParams(params: ServiceBuilderParams) {
     'filterByFacets',
     'searchKeywords',
     'where',
+    'whereOperator',
     'version',
   ]
   Object.keys(params).forEach((key: string) => {
@@ -131,6 +133,7 @@ export function setParams(params: ServiceBuilderParams) {
   if (hasKey(params, 'id')) this.byId(params.id)
   if (hasKey(params, 'key')) this.byKey(params.key)
   if (hasKey(params, 'customerId')) this.byCustomerId(params.customerId)
+  if (hasKey(params, 'cartId')) this.byCartId(params.cartId)
 
   // query-page
   if (params.sort)

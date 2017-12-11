@@ -6,19 +6,94 @@ describe('Cart Discounts Exports', () => {
     expect(actionGroups).toEqual(['base'])
   })
 
-  it('correctly defined base actions list', () => {
-    expect(baseActionsList).toEqual([
-      { action: 'changeIsActive', key: 'isActive' },
-      { action: 'changeName', key: 'name' },
-      { action: 'changeCartPredicate', key: 'cartPredicate' },
-      { action: 'changeSortOrder', key: 'sortOrder' },
-      { action: 'changeValue', key: 'value' },
-      { action: 'changeRequiresDiscountCode', key: 'requiresDiscountCode' },
-      { action: 'changeTarget', key: 'target' },
-      { action: 'setDescription', key: 'description' },
-      { action: 'setValidFrom', key: 'validFrom' },
-      { action: 'setValidUntil', key: 'validUntil' },
-    ])
+  describe('action list', () => {
+    it('should contain `changeIsActive` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([{ action: 'changeIsActive', key: 'isActive' }])
+      )
+    })
+
+    it('should contain `changeName` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([{ action: 'changeName', key: 'name' }])
+      )
+    })
+
+    it('should contain `changeCartPredicate` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'changeCartPredicate',
+            key: 'cartPredicate',
+          },
+        ])
+      )
+    })
+
+    it('should contain `changeSortOrder` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([
+          { action: 'changeSortOrder', key: 'sortOrder' },
+        ])
+      )
+    })
+
+    it('should contain `changeValue` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([{ action: 'changeValue', key: 'value' }])
+      )
+    })
+
+    it('should contain `changeRequiresDiscountCode` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'changeRequiresDiscountCode',
+            key: 'requiresDiscountCode',
+          },
+        ])
+      )
+    })
+
+    it('should contain `changeTarget` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([{ action: 'changeTarget', key: 'target' }])
+      )
+    })
+
+    it('should contain `setDescription` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setDescription',
+            key: 'description',
+          },
+        ])
+      )
+    })
+
+    it('should contain `setValidFrom` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([{ action: 'setValidFrom', key: 'validFrom' }])
+      )
+    })
+
+    it('should contain `setValidUntil` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([{ action: 'setValidUntil', key: 'validUntil' }])
+      )
+    })
+
+    it('should contain `changeStackingMode` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'changeStackingMode',
+            key: 'stackingMode',
+          },
+        ])
+      )
+    })
   })
 })
 
@@ -233,6 +308,25 @@ describe('Cart Discounts Actions', () => {
       {
         action: 'setValidUntil',
         validUntil: 'date2',
+      },
+    ]
+    const actual = cartDiscountsSync.buildActions(now, before)
+    expect(actual).toEqual(expected)
+  })
+
+  it('should build the `changeStackingMode` action', () => {
+    const before = {
+      stackingMode: 'Stacking',
+    }
+
+    const now = {
+      stackingMode: 'StopAfterThisDiscount',
+    }
+
+    const expected = [
+      {
+        action: 'changeStackingMode',
+        stackingMode: 'StopAfterThisDiscount',
       },
     ]
     const actual = cartDiscountsSync.buildActions(now, before)
