@@ -1,0 +1,54 @@
+{
+  "name": "@commercetools/product-json-to-csv",
+  "version": "1.0.0-development",
+  "description": "Convert commercetools products from JSON to CSV",
+  "keywords": [
+    "commercetools",
+    "products",
+    "projections",
+    "parser",
+    "export",
+    "csv",
+    "json"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs/tree/master/packages/json-parser-products"
+  },
+  "homepage": "https://commercetools.github.io/nodejs/cli/json-parser-products.html",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "author": {
+    "name": "Williams Omayuku",
+    "email": "williams.omayuku@commercetools.de"
+  },
+  "main": "lib/main.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=cli babel src --out-dir lib"
+  },
+  "dependencies": {
+    "@commercetools/api-request-builder": "^3.2.0",
+    "@commercetools/get-credentials": "^2.1.0",
+    "@commercetools/sdk-client": "^1.5.0",
+    "@commercetools/sdk-middleware-auth": "^3.4.0",
+    "@commercetools/sdk-middleware-http": "^2.2.0",
+    "@commercetools/sdk-middleware-user-agent": "^1.2.0",
+    "archiver": "^2.1.0",
+    "bluebird": "^3.5.0",
+    "flat": "^4.0.0",
+    "highland": "^2.11.1",
+    "json2csv": "^3.11.5",
+    "lodash": "^4.17.4",
+    "single-emit": "0.0.2",
+    "slugify": "^1.2.4",
+    "tmp": "0.0.33"
+  },
+  "devDependencies": {
+    "common-tags": "^1.4.0",
+    "streamtest": "^1.2.2",
+    "unzip": "^0.1.11"
+  }
+}
