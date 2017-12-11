@@ -22,10 +22,13 @@
     "name": "Williams Omayuku",
     "email": "williams.omayuku@commercetools.de"
   },
-  "main": "lib/index.js",
+  "main": "lib/main.js",
   "files": [
     "lib"
   ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=cli babel src --out-dir lib"
+  },
   "dependencies": {
     "@commercetools/api-request-builder": "^3.2.0",
     "@commercetools/get-credentials": "^2.1.0",
