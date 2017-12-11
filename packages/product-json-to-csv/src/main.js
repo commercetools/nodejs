@@ -6,7 +6,7 @@ import type {
   ParserConfigOptions,
   ProductProjection,
   ProductType,
-  ResolvedProdProj,
+  ResolvedProductProjection,
   State,
   TaxCategory,
   TypeReference,
@@ -87,10 +87,10 @@ export default class ProductJsonToCsv {
 
   run(input: stream$Readable, output: stream$Writable) {
     const productStream = this.parse(input, output)
-    const { headers } = this.parserConfig
+    const { headerFields } = this.parserConfig
 
-    if (headers)
-      writeToSingleCsvFile(productStream, output, this.logger, headers)
+    if (headerFields)
+      writeToSingleCsvFile(productStream, output, this.logger, headerFields)
     else writeToZipFile(productStream, output, this.logger)
   }
 
@@ -112,7 +112,9 @@ export default class ProductJsonToCsv {
           this.logger.debug(`Resolved references of ${productCount} products`)
         })
         // prepare the product objects for csv format
-        .map((product: ResolvedProdProj) => this._productMapping.run(product))
+        .map((product: ResolvedProductProjection) =>
+          this._productMapping.run(product)
+        )
         .flatten()
         .doto(() => {
           this.logger.debug(`Done with conversion of ${productCount} products`)
@@ -124,7 +126,7 @@ export default class ProductJsonToCsv {
     )
   }
 
-  _resolveReferences(product: ProductProjection): ResolvedProdProj {
+  _resolveReferences(product: ProductProjection): ResolvedProductProjection {
     // ReferenceTypes that need to be resolved:
     // **ProductType
     // **Categories [array]
@@ -147,7 +149,7 @@ export default class ProductJsonToCsv {
           categories,
           categoryOrderHints,
         ]: Array<Object>
-      ): ResolvedProdProj => ({
+      ): ResolvedProductProjection => ({
         ...product,
         ...productType,
         ...taxCategory,

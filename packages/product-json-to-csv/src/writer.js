@@ -8,8 +8,13 @@ import tmp from 'tmp'
 import mapHeaders from './map-headers'
 
 // Accept a highland stream and write the output to a single file
-export function writeToSingleCsvFile(productStream, output, logger, headers) {
-  const trimmedHeaders = headers.map(header => header.trim())
+export function writeToSingleCsvFile(
+  productStream,
+  output,
+  logger,
+  headerFields
+) {
+  const trimmedHeaders = headerFields.map(header => header.trim())
   output.write(`${trimmedHeaders.join(',')}\n`) // Write headers first
   const columnNames = mapHeaders(trimmedHeaders)
   productStream

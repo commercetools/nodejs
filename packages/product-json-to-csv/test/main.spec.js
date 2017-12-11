@@ -3,16 +3,18 @@ import { oneLineTrim } from 'common-tags'
 import ProductJsonToCsv from '../src/main'
 import * as writer from '../src/writer'
 
+jest.mock('../src/writer')
+
 const streamTest = StreamTest.v2
 
 describe('ProductJsonToCsv', () => {
   let productJsonToCsv
   beforeEach(() => {
     const logger = {
-      error: () => {},
-      warn: () => {},
-      info: () => {},
-      verbose: () => {},
+      error: jest.fn(),
+      warn: jest.fn(),
+      info: jest.fn(),
+      verbose: jest.fn(),
     }
     const parserConfig = {
       categoryBy: 'name',
@@ -58,42 +60,35 @@ describe('ProductJsonToCsv', () => {
   })
 
   describe('::run', () => {
-    let zipSpy
-    let csvSpy
-    beforeEach(() => {
-      zipSpy = jest.spyOn(writer, 'writeToZipFile').mockImplementation(() => {})
-      csvSpy = jest
-        .spyOn(writer, 'writeToSingleCsvFile')
-        .mockImplementation(() => {})
-    })
-
     it('should write data to single `csv` file if headers are set', () => {
+      productJsonToCsv = new ProductJsonToCsv(
+        { projectKey: 'project-key' },
+        { headerFields: ['header1, header2'] }
+      )
       productJsonToCsv.parse = jest.fn(() => 'foo')
-      productJsonToCsv.parserConfig.headers = []
 
       productJsonToCsv.run()
-      expect(csvSpy).toBeCalled()
-      expect(zipSpy).not.toBeCalled()
+      expect(writer.writeToSingleCsvFile).toBeCalled()
+      expect(writer.writeToZipFile).not.toBeCalled()
     })
 
     it('should write data to `zip` file if headers are not set', () => {
       productJsonToCsv.parse = jest.fn(() => 'bar')
 
       productJsonToCsv.run()
-      expect(csvSpy).not.toBeCalled()
-      expect(zipSpy).toBeCalled()
+      expect(writer.writeToSingleCsvFile).not.toBeCalled()
+      expect(writer.writeToZipFile).toBeCalled()
     })
   })
 
   describe('::parse', () => {
-    let product
-    let inputStream
+    let outputStream
+    let productStream
     beforeEach(() => {
       productJsonToCsv._resolveReferences = jest.fn(data =>
         Promise.resolve(data)
       )
-      productJsonToCsv.logger.error = jest.fn()
-      product = oneLineTrim`
+      const product = oneLineTrim`
         {
           "id": "product-1-id",
           "slug": {
@@ -105,46 +100,42 @@ describe('ProductJsonToCsv', () => {
           },
           "variants": []
         }`
-      inputStream = streamTest.fromChunks([product])
+      const inputStream = streamTest.fromChunks([product])
+
+      outputStream = {
+        emit: jest.fn(),
+      }
+      productStream = productJsonToCsv.parse(inputStream, outputStream)
     })
 
     it('should take an inputStream and output highland stream', () => {
-      const productStream = productJsonToCsv.parse(inputStream)
       expect(productStream.source.__HighlandStream__).toBeTruthy()
     })
 
-    it('should return a flattened product object', done => {
-      const productStream = productJsonToCsv.parse(inputStream)
-      const expected = [
-        {
-          id: 'product-1-id',
-          'slug.en': 'my-slug-1',
-          'variant.id': 'mv-id',
-          'variant.key': 'mv-key',
-        },
-      ]
-      productStream.toArray(actual => {
-        expect(actual).toEqual(expect.arrayContaining(expected))
-        done()
-      })
+    it('should return a flattened product object', async () => {
+      const expected = {
+        id: 'product-1-id',
+        'slug.en': 'my-slug-1',
+        'variant.id': 'mv-id',
+        'variant.key': 'mv-key',
+      }
+
+      await expect(productStream.toPromise(Promise)).resolves.toEqual(
+        expect.objectContaining(expected)
+      )
     })
 
-    it('should log and emit error if error occurs', done => {
+    it('should log and emit error if error occurs', async () => {
       const fakeError = new Error('fake error')
       productJsonToCsv._resolveReferences = jest.fn(() =>
         Promise.reject(fakeError)
       )
-      const outputStream = {
-        emit: jest.fn(),
-      }
-      const productStream = productJsonToCsv.parse(inputStream, outputStream)
 
-      // Stream is lazy and has to be consumed
-      productStream.done(() => {
-        expect(productJsonToCsv.logger.error).toBeCalledWith(fakeError)
-        expect(outputStream.emit).toBeCalledWith('error', fakeError)
-        done()
-      })
+      // We expect the method to resolve to undefined as a rejected promise
+      // indicates the error is not handled
+      await expect(productStream.toPromise(Promise)).resolves.toBeUndefined()
+      expect(productJsonToCsv.logger.error).toBeCalledWith(fakeError)
+      expect(outputStream.emit).toBeCalledWith('error', fakeError)
     })
   })
 
@@ -239,8 +230,9 @@ describe('ProductJsonToCsv', () => {
             'res-cat-name-2': '0.987',
           },
         }
-        const actual = await productJsonToCsv._resolveReferences(sampleProduct)
-        expect(actual).toEqual(expected)
+        await expect(
+          productJsonToCsv._resolveReferences(sampleProduct)
+        ).resolves.toEqual(expected)
       })
     })
 
@@ -280,10 +272,9 @@ describe('ProductJsonToCsv', () => {
             attributes: [{}],
           },
         }
-        const actual = await productJsonToCsv._resolveProductType(
-          sampleProduct.productType
-        )
-        expect(actual).toEqual(expected)
+        await expect(
+          productJsonToCsv._resolveProductType(sampleProduct.productType)
+        ).resolves.toEqual(expected)
       })
     })
 
@@ -321,10 +312,9 @@ describe('ProductJsonToCsv', () => {
             key: 'resolved-tax-cat-key',
           },
         }
-        const actual = await productJsonToCsv._resolveTaxCategory(
-          sampleProduct.taxCategory
-        )
-        expect(actual).toEqual(expected)
+        await expect(
+          productJsonToCsv._resolveTaxCategory(sampleProduct.taxCategory)
+        ).resolves.toEqual(expected)
       })
     })
 
@@ -360,8 +350,9 @@ describe('ProductJsonToCsv', () => {
             key: 'res-state-key',
           },
         }
-        const actual = await productJsonToCsv._resolveState(sampleProduct.state)
-        expect(actual).toEqual(expected)
+        await expect(
+          productJsonToCsv._resolveState(sampleProduct.state)
+        ).resolves.toEqual(expected)
       })
     })
 
@@ -391,10 +382,9 @@ describe('ProductJsonToCsv', () => {
             { id: 'cat-id-2', name: { en: 'res-cat-name-2' } },
           ],
         }
-        const actual = await productJsonToCsv._resolveCategories(
-          sampleProduct.categories
-        )
-        expect(actual).toEqual(expected)
+        await expect(
+          productJsonToCsv._resolveCategories(sampleProduct.categories)
+        ).resolves.toEqual(expected)
       })
     })
 
@@ -435,10 +425,11 @@ describe('ProductJsonToCsv', () => {
             'res-cat-name-2': '0.987',
           },
         }
-        const actual = await productJsonToCsv._resolveCategoryOrderHints(
-          sampleProduct.categoryOrderHints
-        )
-        expect(actual).toEqual(expected)
+        await expect(
+          productJsonToCsv._resolveCategoryOrderHints(
+            sampleProduct.categoryOrderHints
+          )
+        ).resolves.toEqual(expected)
       })
 
       it('return category keys if specified', async () => {
@@ -456,10 +447,11 @@ describe('ProductJsonToCsv', () => {
             'res-cat-key-2': '0.987',
           },
         }
-        const actual = await productJsonToCsv._resolveCategoryOrderHints(
-          sampleProduct.categoryOrderHints
-        )
-        expect(actual).toEqual(expected)
+        await expect(
+          productJsonToCsv._resolveCategoryOrderHints(
+            sampleProduct.categoryOrderHints
+          )
+        ).resolves.toEqual(expected)
       })
 
       it('return externalIds if specified', async () => {
@@ -477,10 +469,11 @@ describe('ProductJsonToCsv', () => {
             'res-cat-extId-2': '0.987',
           },
         }
-        const actual = await productJsonToCsv._resolveCategoryOrderHints(
-          sampleProduct.categoryOrderHints
-        )
-        expect(actual).toEqual(expected)
+        await expect(
+          productJsonToCsv._resolveCategoryOrderHints(
+            sampleProduct.categoryOrderHints
+          )
+        ).resolves.toEqual(expected)
       })
     })
 
@@ -502,9 +495,10 @@ describe('ProductJsonToCsv', () => {
       it('return category from cache if it exists', async () => {
         const expected = [{ id: 'cat-id-1', key: 'cat-key-1-in-cache' }]
         const categoryId = ['cat-id-1']
-        const actual = await productJsonToCsv._getCategories(categoryId)
+        await expect(
+          productJsonToCsv._getCategories(categoryId)
+        ).resolves.toEqual(expected)
         expect(productJsonToCsv.fetchReferences).not.toBeCalled()
-        expect(actual).toEqual(expected)
       })
 
       it('fetch only data not in cache from API', async () => {
@@ -520,11 +514,12 @@ describe('ProductJsonToCsv', () => {
         ]
         const expectedUri = /categories\?where=id%20in%20\(%22cat-id-2%22\)/
         const categoryIds = ['cat-id-1', 'cat-id-2']
-        const actual = await productJsonToCsv._getCategories(categoryIds)
+        await expect(
+          productJsonToCsv._getCategories(categoryIds)
+        ).resolves.toEqual(expectedCategories)
         expect(productJsonToCsv.fetchReferences).toBeCalledWith(
           expect.stringMatching(expectedUri)
         )
-        expect(actual).toEqual(expectedCategories)
       })
 
       it('save fetched categories in cache', async () => {
@@ -584,9 +579,10 @@ describe('ProductJsonToCsv', () => {
             },
           },
         }
-        const actual = await productJsonToCsv._resolveAncestors(child)
+        await expect(
+          productJsonToCsv._resolveAncestors(child)
+        ).resolves.toEqual(expected)
         expect(productJsonToCsv._getCategories).toHaveBeenCalledTimes(2)
-        expect(actual).toEqual(expected)
       })
     })
   })

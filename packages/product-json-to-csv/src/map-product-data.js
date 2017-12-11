@@ -1,6 +1,6 @@
 /* @flow */
 import type {
-  ResolvedProdProj,
+  ResolvedProductProjection,
   ProdWithMergedVariants,
   SingleVarPerProduct,
   MappedProduct,
@@ -33,7 +33,7 @@ export default class ProductMapping {
     this.multiValDel = multiValueDelimiter
   }
 
-  run(product: ResolvedProdProj) {
+  run(product: ResolvedProductProjection) {
     const mergedVarProduct = ProductMapping._mergeVariants(product)
     const varWithProductInfo = ProductMapping._spreadProdOnVariants(
       mergedVarProduct,
@@ -46,12 +46,14 @@ export default class ProductMapping {
     return flatProducts
   }
 
-  static _mergeVariants(product: ResolvedProdProj): ProdWithMergedVariants {
+  // merge all variants into a `variant` property and remove
+  // `masterVariant` and `variants` fields from product
+  static _mergeVariants(
+    product: ResolvedProductProjection
+  ): ProdWithMergedVariants {
     const variant = [product.masterVariant, ...product.variants]
-    const mergedVariants = { ...product, variant }
-    delete mergedVariants.masterVariant
-    delete mergedVariants.variants
-    return mergedVariants
+    const { masterVariant, variants, ...restProduct } = product
+    return { ...restProduct, variant }
   }
 
   static _spreadProdOnVariants(

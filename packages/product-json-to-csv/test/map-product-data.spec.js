@@ -20,13 +20,13 @@ describe('::ProductMapping', () => {
     })
 
     it('should initialize with passed in values', () => {
-      const args = {
+      const options = {
         fillAllRows: true,
         categoryBy: 'namedPath',
         lang: 'it',
         multiValueDelimiter: '|',
       }
-      productMapping = new ProductMapping(args)
+      productMapping = new ProductMapping(options)
       expect(productMapping.fillAllRows).toBe(true)
       expect(productMapping.categoryBy).toBe('namedPath')
       expect(productMapping.lang).toBe('it')
@@ -527,8 +527,10 @@ describe('::ProductMapping', () => {
         },
       ]
       const expected = 'cat-in-en;cat-foo-en'
-      const args = ['name', ';', 'en']
-      expect(ProductMapping._mapCategories(sampleCat, ...args)).toBe(expected)
+      const options = ['name', ';', 'en']
+      expect(ProductMapping._mapCategories(sampleCat, ...options)).toBe(
+        expected
+      )
     })
 
     it('resolves categories to string by externalId', () => {
@@ -549,8 +551,10 @@ describe('::ProductMapping', () => {
         },
       ]
       const expected = 'cat-ext-id;cat-foo-id'
-      const args = ['externalId', ';']
-      expect(ProductMapping._mapCategories(sampleCat, ...args)).toBe(expected)
+      const options = ['externalId', ';']
+      expect(ProductMapping._mapCategories(sampleCat, ...options)).toBe(
+        expected
+      )
     })
 
     it('resolves categories to string by key', () => {
@@ -571,8 +575,10 @@ describe('::ProductMapping', () => {
         },
       ]
       const expected = 'cat-key;cat-keysss'
-      const args = ['key', ';']
-      expect(ProductMapping._mapCategories(sampleCat, ...args)).toBe(expected)
+      const options = ['key', ';']
+      expect(ProductMapping._mapCategories(sampleCat, ...options)).toBe(
+        expected
+      )
     })
 
     it('resolves categories to string by `namedPath`', () => {
@@ -612,11 +618,13 @@ describe('::ProductMapping', () => {
           key: 'cat-keysss',
         },
       ]
-      const args = ['namedPath', ';', 'en']
+      const options = ['namedPath', ';', 'en']
       const expected = oneLineTrim`
         greatgrandparent>grandparent>parent>cat-in-en
         ;another-parent>cat-foo-en`
-      expect(ProductMapping._mapCategories(sampleCat, ...args)).toBe(expected)
+      expect(ProductMapping._mapCategories(sampleCat, ...options)).toBe(
+        expected
+      )
     })
   })
 })

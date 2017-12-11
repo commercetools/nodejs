@@ -25,7 +25,7 @@ export type ParserConfigOptions = {
   categoryOrderHintBy: string,
   delimiter: string,
   fillAllRows: boolean,
-  headers?: Array<string>,
+  headerFields?: Array<string>,
   language: string,
   multiValueDelimiter: string,
   productSeparator: string,
@@ -258,7 +258,7 @@ export type ProductProjection = {
   reviewRatingStatistics?: Object,
 }
 
-export type ResolvedProdProj = {
+export type ResolvedProductProjection = {
   id: string,
   key?: string,
   version: number,
