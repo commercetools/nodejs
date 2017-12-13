@@ -16,6 +16,7 @@ import withVersion from './version'
 import * as defaultFeatures from './features'
 import * as query from './query'
 import * as queryId from './query-id'
+import * as queryLocation from './query-location'
 import * as queryExpand from './query-expand'
 import * as queryPage from './query-page'
 import * as queryProjection from './query-projection'
@@ -66,12 +67,20 @@ export default function createService(
           ...acc,
           ...query,
           ...queryPage,
+          ...queryLocation,
         }
 
       if (feature === defaultFeatures.queryOne)
         return {
           ...acc,
           ...queryId,
+        }
+
+      if (feature === defaultFeatures.queryLocation)
+        return {
+          ...acc,
+          ...queryLocation,
+          ...queryExpand,
         }
 
       if (feature === defaultFeatures.queryExpand)
@@ -117,7 +126,7 @@ export default function createService(
         (withProjectKey ? `/${options}` : '') +
         endpoint +
         // TODO this can lead to invalid URIs as getIdOrKey can return
-        //   "/?customerId", so there can be multiple questionmarks,
+        //   "/?customerId", so there can be multiple question marks,
         // same for when `queryParams` and `version` are present
         getIdOrKey(this.params) +
         (queryParams ? `?${queryParams}` : '')

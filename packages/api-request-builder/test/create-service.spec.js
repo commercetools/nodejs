@@ -8,6 +8,7 @@ const fakeService = {
     'query',
     'queryOne',
     'queryExpand',
+    'queryLocation',
     'search',
     'projection',
     'suggest',
@@ -33,6 +34,9 @@ const expectedServiceProperties = [
   'staged',
   'searchKeywords',
   'build',
+  'byCurrency',
+  'byCountry',
+  'byState',
 ]
 const projectKey = 'my-project1'
 
@@ -129,6 +133,27 @@ describe('createService', () => {
         expect(service.parse({ customerId: 'bar' }).build()).toBe(
           '/my-project1/foo?customerId=bar'
         )
+      })
+
+      // query-location
+      it('should support `country`', () => {
+        expect(service.parse({ location: { country: 'DE' } }).build()).toBe(
+          '/my-project1/foo?country=DE'
+        )
+      })
+      it('should support `currency`', () => {
+        expect(
+          service
+            .parse({ location: { country: 'DE', currency: 'EUR' } })
+            .build()
+        ).toBe('/my-project1/foo?country=DE&currency=EUR')
+      })
+      it('should support `state`', () => {
+        expect(
+          service
+            .parse({ location: { country: 'DE', state: 'Germany' } })
+            .build()
+        ).toBe('/my-project1/foo?country=DE&state=Germany')
       })
 
       // query-page

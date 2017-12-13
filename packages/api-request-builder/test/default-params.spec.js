@@ -3,7 +3,11 @@ import { setDefaultParams } from '../src/default-params'
 
 describe('defaultParams', () => {
   it('should set default params for a normal endpoint', () => {
-    const serviceFeatures = [features.query, features.queryOne]
+    const serviceFeatures = [
+      features.query,
+      features.queryOne,
+      features.queryLocation,
+    ]
     const params = {}
     setDefaultParams.call({ features: serviceFeatures, params })
     expect(params).toEqual({
@@ -13,6 +17,11 @@ describe('defaultParams', () => {
         page: null,
         perPage: null,
         sort: [],
+      },
+      location: {
+        country: null,
+        currency: null,
+        state: null,
       },
       query: {
         operator: 'and',

@@ -19,6 +19,11 @@ export function getDefaultQueryParams(): ServiceBuilderDefaultParams {
       perPage: null,
       sort: [],
     },
+    location: {
+      currency: null,
+      country: null,
+      state: null,
+    },
     query: {
       operator: 'and',
       where: [],
@@ -77,6 +82,9 @@ export function setDefaultParams() {
     this.params.search = getDefaultSearchParams().search
   }
 
+  if (this.features.includes(features.queryLocation))
+    this.params.location = getDefaultQueryParams().location
+
   if (this.features.includes(features.projection)) this.params.staged = true
 
   if (this.features.includes(features.suggest)) this.params.searchKeywords = []
@@ -118,6 +126,7 @@ export function setParams(params: ServiceBuilderParams) {
     'where',
     'whereOperator',
     'version',
+    'location',
   ]
   Object.keys(params).forEach((key: string) => {
     if (!knownKeys.includes(key)) throw new Error(`Unknown key "${key}"`)
@@ -134,6 +143,15 @@ export function setParams(params: ServiceBuilderParams) {
   if (hasKey(params, 'key')) this.byKey(params.key)
   if (hasKey(params, 'customerId')) this.byCustomerId(params.customerId)
   if (hasKey(params, 'cartId')) this.byCartId(params.cartId)
+
+  // query-location
+  if (params.location) {
+    const location = params.location
+
+    if (hasKey(location, 'country')) this.byCountry(location.country)
+    if (hasKey(location, 'currency')) this.byCurrency(location.currency)
+    if (hasKey(location, 'state')) this.byState(location.state)
+  }
 
   // query-page
   if (params.sort)

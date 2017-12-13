@@ -123,6 +123,11 @@ This declarative `parse` API accepts an object of the following shape:
   customerId?: ?string;
   cartId?: ?string;
 
+  // query-location
+  country?: ?string;
+  currency?: ?string;
+  state?: ?string;
+
   // query-page
   sort: Array<{ by: string, direction: 'asc' | 'desc' }>;
   page: ?number;
