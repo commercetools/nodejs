@@ -1,0 +1,100 @@
+{
+  "id": "product-id-1",
+  "productType": { "obj": { "id": "product-type-id-1" } },
+  "masterData": {
+    "current": {
+      "categories": [
+        { "obj": { "id": "category-id-1" } },
+        { "obj": { "id": "category-id-2" } }
+      ],
+      "masterVariant": {
+        "prices": [
+          {
+            "customerGroup": {
+              "obj": { "id": "customer-group-id-1" }
+            },
+            "channel": {
+              "obj": {
+                "id": "channel-id-2",
+                "custom": {
+                  "type": { "obj": { "id": "custom-id-1" } }
+                }
+              }
+            },
+            "discounted": {
+              "discount": {
+                "obj": { "id": "product-discount-id-1" }
+              }
+            },
+            "custom": {
+              "type": { "obj": { "id": "custom-id-2" } }
+            }
+          }
+        ],
+        "assets": [
+          {
+            "custom": { "type": { "obj": { "id": "custom-id-2" } } }
+          }
+        ],
+        "scopedPrice": {
+          "customerGroup": { "obj": { "id": "customer-group-id-2" } },
+          "channel": {
+            "obj": {
+              "id": "channel-id-1",
+              "custom": { "type": { "obj": { "id": "custom-id-2" } } }
+            }
+          },
+          "discounted": {
+            "discount": { "obj": { "id": "product-discount-id-1" } }
+          },
+          "custom": { "type": { "obj": { "id": "custom-id-3" } } }
+        }
+      },
+      "variants": [
+        {
+          "prices": [
+            {
+              "customerGroup": {
+                "obj": { "id": "customer-group-id-1" }
+              },
+              "channel": {
+                "obj": {
+                  "id": "channel-id-1",
+                  "custom": {
+                    "type": { "obj": { "id": "custom-id-1" } }
+                  }
+                }
+              },
+              "discounted": {
+                "discount": {
+                  "obj": { "id": "product-discount-id-1" }
+                }
+              },
+              "custom": {
+                "type": { "obj": { "id": "custom-id-2" } }
+              }
+            }
+          ],
+          "assets": [
+            {
+              "custom": { "type": { "obj": { "id": "custom-id-2" } } }
+            }
+          ],
+          "scopedPrice": {
+            "customerGroup": { "obj": { "id": "customer-group-id-2" } },
+            "channel": {
+              "obj": {
+                "id": "channel-id-2",
+                "custom": { "type": { "obj": { "id": "custom-id-2" } } }
+              }
+            },
+            "discounted": {
+              "discount": { "obj": { "id": "product-discount-id-1" } }
+            },
+            "custom": { "type": { "obj": { "id": "custom-id-3" } } }
+          }
+        }
+      ]
+    }
+  }
+}

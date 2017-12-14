@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when the response is from \`/product/:id\` should normalize tiny response 1`] = `
+Object {
+  "entities": Object {
+    "categories": Object {
+      "category-id-1": Object {
+        "id": "category-id-1",
+      },
+      "category-id-2": Object {
+        "id": "category-id-2",
+      },
+    },
+    "channels": Object {
+      "channel-id-1": Object {
+        "custom": Object {
+          "type": Object {
+            "obj": "custom-id-1",
+          },
+        },
+        "id": "channel-id-1",
+      },
+      "channel-id-2": Object {
+        "custom": Object {
+          "type": Object {
+            "obj": "custom-id-2",
+          },
+        },
+        "id": "channel-id-2",
+      },
+    },
+    "customerGroups": Object {
+      "customer-group-id-1": Object {
+        "id": "customer-group-id-1",
+      },
+      "customer-group-id-2": Object {
+        "id": "customer-group-id-2",
+      },
+    },
+    "productDiscounts": Object {
+      "product-discount-id-1": Object {
+        "id": "product-discount-id-1",
+      },
+    },
+    "productTypes": Object {
+      "product-type-id-1": Object {
+        "id": "product-type-id-1",
+      },
+    },
+    "products": Object {
+      "product-id-1": Object {
+        "id": "product-id-1",
+        "masterData": Object {
+          "current": Object {
+            "categories": Array [
+              Object {
+                "obj": "category-id-1",
+              },
+              Object {
+                "obj": "category-id-2",
+              },
+            ],
+            "masterVariant": Object {
+              "assets": Array [
+                Object {
+                  "custom": Object {
+                    "type": Object {
+                      "obj": "custom-id-2",
+                    },
+                  },
+                },
+              ],
+              "prices": Array [
+                Object {
+                  "channel": Object {
+                    "obj": "channel-id-2",
+                  },
+                  "custom": Object {
+                    "type": Object {
+                      "obj": "custom-id-2",
+                    },
+                  },
+                  "customerGroup": Object {
+                    "obj": "customer-group-id-1",
+                  },
+                  "discounted": Object {
+                    "discount": Object {
+                      "obj": "product-discount-id-1",
+                    },
+                  },
+                },
+              ],
+              "scopedPrice": Object {
+                "channel": Object {
+                  "obj": "channel-id-1",
+                },
+                "custom": Object {
+                  "type": Object {
+                    "obj": "custom-id-3",
+                  },
+                },
+                "customerGroup": Object {
+                  "obj": "customer-group-id-2",
+                },
+                "discounted": Object {
+                  "discount": Object {
+                    "obj": "product-discount-id-1",
+                  },
+                },
+              },
+            },
+            "variants": Array [
+              Object {
+                "assets": Array [
+                  Object {
+                    "custom": Object {
+                      "type": Object {
+                        "obj": "custom-id-2",
+                      },
+                    },
+                  },
+                ],
+                "prices": Array [
+                  Object {
+                    "channel": Object {
+                      "obj": "channel-id-1",
+                    },
+                    "custom": Object {
+                      "type": Object {
+                        "obj": "custom-id-2",
+                      },
+                    },
+                    "customerGroup": Object {
+                      "obj": "customer-group-id-1",
+                    },
+                    "discounted": Object {
+                      "discount": Object {
+                        "obj": "product-discount-id-1",
+                      },
+                    },
+                  },
+                ],
+                "scopedPrice": Object {
+                  "channel": Object {
+                    "obj": "channel-id-2",
+                  },
+                  "custom": Object {
+                    "type": Object {
+                      "obj": "custom-id-3",
+                    },
+                  },
+                  "customerGroup": Object {
+                    "obj": "customer-group-id-2",
+                  },
+                  "discounted": Object {
+                    "discount": Object {
+                      "obj": "product-discount-id-1",
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        },
+        "productType": Object {
+          "obj": "product-type-id-1",
+        },
+      },
+    },
+    "types": Object {
+      "custom-id-1": Object {
+        "id": "custom-id-1",
+      },
+      "custom-id-2": Object {
+        "id": "custom-id-2",
+      },
+      "custom-id-3": Object {
+        "id": "custom-id-3",
+      },
+    },
+  },
+  "result": "product-id-1",
+}
+`;
