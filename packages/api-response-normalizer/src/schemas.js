@@ -1,6 +1,5 @@
 import { schema } from 'normalizr'
 
-// helpers
 const ref = type => ({ obj: type })
 
 const typeEntity = new schema.Entity('types')
