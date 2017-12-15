@@ -46,14 +46,14 @@ describe('queryLocation', () => {
   it('should throw while using byCurrency if country was not set', () => {
     expect(() => service.byCurrency('EUR')).toThrowError(
       // eslint-disable-next-line max-len
-      /A `country` for this resource has not been set. You must set the country in order to use the `byCurrency` method./
+      /A `country` for this resource has not been set.*./
     )
   })
 
   it('should throw while using byState if country was not set', () => {
     expect(() => service.byState('Germany')).toThrowError(
       // eslint-disable-next-line max-len
-      /A `country` for this resource has not been set. You must set the country in order to use the `byState` method./
+      /A `country` for this resource has not been set.*/
     )
   })
 })

@@ -67,7 +67,6 @@ export default function createService(
           ...acc,
           ...query,
           ...queryPage,
-          ...queryLocation,
         }
 
       if (feature === defaultFeatures.queryOne)

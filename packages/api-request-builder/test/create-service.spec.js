@@ -99,6 +99,7 @@ describe('createService', () => {
           defaultFeatures.query,
           defaultFeatures.queryOne,
           defaultFeatures.queryExpand,
+          defaultFeatures.queryLocation,
           defaultFeatures.projection,
         ],
       }
@@ -137,23 +138,19 @@ describe('createService', () => {
 
       // query-location
       it('should support `country`', () => {
-        expect(service.parse({ location: { country: 'DE' } }).build()).toBe(
+        expect(service.parse({ country: 'DE' }).build()).toBe(
           '/my-project1/foo?country=DE'
         )
       })
       it('should support `currency`', () => {
-        expect(
-          service
-            .parse({ location: { country: 'DE', currency: 'EUR' } })
-            .build()
-        ).toBe('/my-project1/foo?country=DE&currency=EUR')
+        expect(service.parse({ country: 'DE', currency: 'EUR' }).build()).toBe(
+          '/my-project1/foo?country=DE&currency=EUR'
+        )
       })
       it('should support `state`', () => {
-        expect(
-          service
-            .parse({ location: { country: 'DE', state: 'Germany' } })
-            .build()
-        ).toBe('/my-project1/foo?country=DE&state=Germany')
+        expect(service.parse({ country: 'DE', state: 'Germany' }).build()).toBe(
+          '/my-project1/foo?country=DE&state=Germany'
+        )
       })
 
       // query-page

@@ -32,6 +32,7 @@ A _service_ is created by defining its `features`. Features give a service speci
 
 - `query`: allows to use standard query capabilities (`page`, `perPage`, `sort`, `where`, `whereOperator`)
 - `queryOne`: allows to query a single resource (`byId`, `byKey`, `byCustomerId`, `byCartId`)
+- `queryLocation`: allows to query resources by location (`byCountry`, `byCurrency`, `byState`)
 - `queryExpand`: allows to use reference expansion (`expand`)
 - `search`: allows to use search capabilities (`text`, `fuzzy`, `fuzzyLevel`, `facet`, `markMatchingVariants`, `filter`, `filterByQuery`, `filterByFacets`)
 - `projection`: allows to use projections capabilities (`staged`, `priceCurrency`, `priceCountry`, `priceCustomerGroup`, `priceChannel`)
