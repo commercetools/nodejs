@@ -2,6 +2,7 @@ import { schema } from 'normalizr'
 
 const ref = type => ({ obj: type })
 
+// product
 const typeEntity = new schema.Entity('types')
 
 const customField = {
@@ -73,4 +74,11 @@ export const productEntity = new schema.Entity('products', {
   masterData: productCatalogData,
   taxCategory: ref(taxCategoryEntity),
   state: ref(stateEntity),
+})
+
+// customer
+
+export const customerEntity = new schema.Entity('customers', {
+  customerGroup: ref(customerGroupEntity),
+  custom: customField,
 })

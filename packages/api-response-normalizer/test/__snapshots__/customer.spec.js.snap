@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when the response is from \`/customers/:id\` should normalize the results 1`] = `
+Object {
+  "entities": Object {
+    "customerGroups": Object {
+      "0060effa-ee62-4adb-a455-5893dfb5c617": Object {
+        "createdAt": "2016-08-29T16:25:09.690Z",
+        "id": "0060effa-ee62-4adb-a455-5893dfb5c617",
+        "lastModifiedAt": "2016-08-29T16:25:09.690Z",
+        "name": "B2C",
+        "version": 1,
+      },
+    },
+    "customers": Object {
+      "9199f748-9d75-448a-8d06-d60a6c126ce6": Object {
+        "addresses": Array [
+          Object {
+            "apartment": "ccc",
+            "building": "c",
+            "city": "ccccc",
+            "company": "sfdf",
+            "country": "AD",
+            "firstName": "svb",
+            "id": "fD2hQNpd",
+            "lastName": "sfsf",
+            "pOBox": "cccc",
+            "postalCode": "ccc",
+            "salutation": "ds",
+            "streetName": "ccccc",
+            "streetNumber": "2",
+            "title": "fsdfs",
+          },
+        ],
+        "billingAddressIds": Array [],
+        "companyName": "example",
+        "createdAt": "2016-09-09T16:08:11.846Z",
+        "customerGroup": Object {
+          "id": "0060effa-ee62-4adb-a455-5893dfb5c617",
+          "obj": "0060effa-ee62-4adb-a455-5893dfb5c617",
+          "typeId": "customer-group",
+        },
+        "customerNumber": "123456",
+        "email": "alicia.williams31@example.com",
+        "externalId": "aaa111",
+        "firstName": "Alicia",
+        "id": "9199f748-9d75-448a-8d06-d60a6c126ce6",
+        "isEmailVerified": false,
+        "lastMessageSequenceNumber": 1,
+        "lastModifiedAt": "2016-11-17T09:45:24.962Z",
+        "lastName": "Williams",
+        "password": "foo",
+        "shippingAddressIds": Array [],
+        "title": "Mrs",
+        "version": 2,
+      },
+    },
+  },
+  "result": "9199f748-9d75-448a-8d06-d60a6c126ce6",
+}
+`;

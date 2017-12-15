@@ -1,0 +1,116 @@
+{
+  "limit": 5,
+  "offset": 0,
+  "count": 5,
+  "total": 105,
+  "results": [
+    {
+      "id": "9199f748-9d75-448a-8d06-d60a6c126ce6",
+      "version": 2,
+      "customerNumber": "123456",
+      "email": "alicia.williams31@example.com",
+      "firstName": "Alicia",
+      "lastName": "Williams",
+      "title": "Mrs",
+      "password": "foo",
+      "addresses": [
+        {
+          "id": "fD2hQNpd",
+          "title": "fsdfs",
+          "salutation": "ds",
+          "firstName": "svb",
+          "lastName": "sfsf",
+          "streetName": "ccccc",
+          "streetNumber": "2",
+          "postalCode": "ccc",
+          "city": "ccccc",
+          "country": "AD",
+          "company": "sfdf",
+          "building": "c",
+          "apartment": "ccc",
+          "pOBox": "cccc"
+        }
+      ],
+      "shippingAddressIds": [],
+      "billingAddressIds": [],
+      "isEmailVerified": false,
+      "customerGroup": {
+        "typeId": "customer-group",
+        "id": "0060effa-ee62-4adb-a455-5893dfb5c617",
+        "obj": {
+          "id": "0060effa-ee62-4adb-a455-5893dfb5c617",
+          "version": 1,
+          "name": "B2C",
+          "createdAt": "2016-08-29T16:25:09.690Z",
+          "lastModifiedAt": "2016-08-29T16:25:09.690Z"
+        }
+      },
+      "externalId": "aaa111",
+      "companyName": "example",
+      "createdAt": "2016-09-09T16:08:11.846Z",
+      "lastModifiedAt": "2016-11-17T09:45:24.962Z",
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "0db6f3c1-c82c-4398-942a-4eaaf2b99907",
+      "version": 2,
+      "email": "foo+1@bar.com",
+      "firstName": "fsdgdfg",
+      "password": "foo",
+      "addresses": [],
+      "shippingAddressIds": [],
+      "billingAddressIds": [],
+      "isEmailVerified": false,
+      "externalId": "f123",
+      "companyName": "sgsdfgd",
+      "createdAt": "2016-09-09T15:49:42.216Z",
+      "lastModifiedAt": "2016-11-23T19:50:42.794Z",
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "1c310cc9-25d9-4b38-bf09-75afa6d75295",
+      "version": 1,
+      "email": "john@doe.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "title": "Mr",
+      "password": "foo",
+      "addresses": [],
+      "shippingAddressIds": [],
+      "billingAddressIds": [],
+      "isEmailVerified": false,
+      "createdAt": "2016-09-09T15:32:33.593Z",
+      "lastModifiedAt": "2016-09-09T15:32:33.593Z",
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "9e0de50f-90d7-4f6f-bded-a0731a8caa3e",
+      "version": 1,
+      "email": "aaa@bbb.com",
+      "firstName": "aaa",
+      "lastName": "bbb",
+      "title": "Mr",
+      "password": "foo",
+      "addresses": [],
+      "shippingAddressIds": [],
+      "billingAddressIds": [],
+      "isEmailVerified": false,
+      "createdAt": "2016-09-09T15:42:47.902Z",
+      "lastModifiedAt": "2016-09-09T15:42:47.902Z",
+      "lastMessageSequenceNumber": 1
+    },
+    {
+      "id": "599f176f-d6e1-4e44-b5b0-edf668d1c57e",
+      "version": 1,
+      "email": "foo@bar.com",
+      "password": "foo",
+      "addresses": [],
+      "shippingAddressIds": [],
+      "billingAddressIds": [],
+      "isEmailVerified": false,
+      "createdAt": "2016-09-09T15:46:11.472Z",
+      "lastModifiedAt": "2016-09-09T15:46:11.472Z",
+      "lastMessageSequenceNumber": 1
+    }
+  ]
+}

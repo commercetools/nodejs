@@ -27,3 +27,5 @@ npm install --save @commercetools/api-response-normalizer
 * ✅ Channel
 * ✅ Asset
 * ✅ Type
+* ✅ Customer
+* ✅ Address
