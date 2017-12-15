@@ -1,0 +1,1428 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`normalizeCartDiscountsResponse when querying \`/cart-discounts/:id\` should normalize response 1`] = `
+Object {
+  "entities": Object {
+    "cartDiscounts": Object {
+      "c0b1ddba-bb3e-463f-9511-a3fa743794ac": Object {
+        "attributeTypes": Object {},
+        "cartFieldTypes": Object {},
+        "cartPredicate": "country in (\\"DE\\",\\"ES\\",\\"GB\\",\\"IT\\",\\"US\\")",
+        "createdAt": "2016-11-10T11:15:03.830Z",
+        "customLineItemFieldTypes": Object {},
+        "description": Object {
+          "de": "Ji fojalso weuzto pa wetib ovi okasi mucu epibabi uthauh ejicuup linob nukogov ofwur paom tub.",
+          "en": "Tecpo capojmis ho lugib ezkize cehesci id hul af ge oto ru ho.",
+          "es": "Iba tov mol fu upinamah mafufa wicadi nad kitboetu vobadbud wov veudu kejriaj.",
+          "fr": "Toscem ol lo dizum ugedizel sizadpom rugjap sula sib nifsakov op halzi nilpe serlisaf ti.",
+          "it": "Iwbe ke wanuhoja kap rob wa mi ejaokejor mena mogulehu jan jilnor ziwoose ibaal.",
+        },
+        "id": "c0b1ddba-bb3e-463f-9511-a3fa743794ac",
+        "isActive": true,
+        "lastModifiedAt": "2017-09-04T15:58:20.698Z",
+        "lineItemFieldTypes": Object {},
+        "name": Object {
+          "de": "bodcida",
+          "en": "packoci",
+          "es": "biswufe",
+          "fr": "zaw",
+          "it": "ocoeg",
+        },
+        "references": Array [],
+        "requiresDiscountCode": true,
+        "sortOrder": "0.6583458916",
+        "stackingMode": "Stacking",
+        "target": Object {
+          "type": "shipping",
+        },
+        "value": Object {
+          "money": Array [
+            Object {
+              "centAmount": 2300,
+              "currencyCode": "EUR",
+            },
+            Object {
+              "centAmount": 8900,
+              "currencyCode": "USD",
+            },
+            Object {
+              "centAmount": 800,
+              "currencyCode": "GBP",
+            },
+          ],
+          "type": "absolute",
+        },
+        "version": 3,
+      },
+    },
+  },
+  "result": "c0b1ddba-bb3e-463f-9511-a3fa743794ac",
+}
+`;
+
+exports[`normalizeCartDiscountsResponse when querying \`/cart-discounts\` should normalize response 1`] = `
+Object {
+  "entities": Object {
+    "cartDiscounts": Object {
+      "1561382c-19f7-4720-b618-ecdf005de2a8": Object {
+        "attributeTypes": Object {},
+        "cartFieldTypes": Object {},
+        "cartPredicate": "1=1",
+        "createdAt": "2017-12-11T19:26:18.191Z",
+        "customLineItemFieldTypes": Object {},
+        "id": "1561382c-19f7-4720-b618-ecdf005de2a8",
+        "isActive": false,
+        "lastModifiedAt": "2017-12-11T19:26:18.191Z",
+        "lineItemFieldTypes": Object {},
+        "name": Object {
+          "en": "test",
+        },
+        "references": Array [],
+        "requiresDiscountCode": false,
+        "sortOrder": "0.212312312412",
+        "stackingMode": "Stacking",
+        "target": Object {
+          "predicate": "1=1",
+          "type": "lineItems",
+        },
+        "value": Object {
+          "permyriad": 2000,
+          "type": "relative",
+        },
+        "version": 1,
+      },
+      "163d37b2-de8d-4d9d-9362-c5f3b9c59afe": Object {
+        "attributeTypes": Object {},
+        "cartFieldTypes": Object {},
+        "cartPredicate": "1=1",
+        "createdAt": "2017-11-29T11:21:20.988Z",
+        "customLineItemFieldTypes": Object {},
+        "description": Object {
+          "en": "baraaaaa",
+        },
+        "id": "163d37b2-de8d-4d9d-9362-c5f3b9c59afe",
+        "isActive": false,
+        "lastModifiedAt": "2017-11-29T11:21:20.988Z",
+        "lineItemFieldTypes": Object {},
+        "name": Object {
+          "en": "baraaaaa",
+        },
+        "references": Array [],
+        "requiresDiscountCode": false,
+        "sortOrder": "0.433",
+        "stackingMode": "Stacking",
+        "value": Object {
+          "distributionChannel": Object {
+            "id": "452c663b-9f12-4fa6-b9b7-4baa190f9c17",
+            "typeId": "channel",
+          },
+          "product": Object {
+            "id": "0682fb03-cc46-429c-9e8e-a5ce7e0e698b",
+            "typeId": "product",
+          },
+          "supplyChannel": Object {
+            "id": "93d58d70-8ca6-435b-8564-3f3e4258651c",
+            "typeId": "channel",
+          },
+          "type": "giftLineItem",
+          "variantId": 2,
+        },
+        "version": 1,
+      },
+      "86ba193b-6a94-4007-828c-9e4bb26dfdac": Object {
+        "attributeTypes": Object {},
+        "cartFieldTypes": Object {},
+        "cartPredicate": "1=1",
+        "createdAt": "2017-11-29T11:19:58.319Z",
+        "customLineItemFieldTypes": Object {},
+        "description": Object {
+          "en": "foo cart discount",
+        },
+        "id": "86ba193b-6a94-4007-828c-9e4bb26dfdac",
+        "isActive": false,
+        "lastModifiedAt": "2017-11-29T11:19:58.319Z",
+        "lineItemFieldTypes": Object {},
+        "name": Object {
+          "en": "foo cart discount",
+        },
+        "references": Array [],
+        "requiresDiscountCode": false,
+        "sortOrder": "0.2",
+        "stackingMode": "Stacking",
+        "value": Object {
+          "distributionChannel": Object {
+            "id": "452c663b-9f12-4fa6-b9b7-4baa190f9c17",
+            "typeId": "channel",
+          },
+          "product": Object {
+            "id": "0682fb03-cc46-429c-9e8e-a5ce7e0e698b",
+            "typeId": "product",
+          },
+          "supplyChannel": Object {
+            "id": "8c1bae77-be3b-470a-a48e-ee7ddf49f9d7",
+            "typeId": "channel",
+          },
+          "type": "giftLineItem",
+          "variantId": 1,
+        },
+        "version": 1,
+      },
+      "88e4025d-444d-4dfd-a8c5-0d23b994b47e": Object {
+        "attributeTypes": Object {},
+        "cartFieldTypes": Object {},
+        "cartPredicate": "1=1",
+        "createdAt": "2017-11-28T12:59:06.925Z",
+        "customLineItemFieldTypes": Object {},
+        "id": "88e4025d-444d-4dfd-a8c5-0d23b994b47e",
+        "isActive": false,
+        "lastModifiedAt": "2017-11-28T12:59:06.925Z",
+        "lineItemFieldTypes": Object {},
+        "name": Object {
+          "en": "foo bar",
+        },
+        "references": Array [],
+        "requiresDiscountCode": false,
+        "sortOrder": "0.11",
+        "stackingMode": "Stacking",
+        "target": Object {
+          "predicate": "1=1",
+          "type": "lineItems",
+        },
+        "validFrom": "2017-11-08T00:00:00.000Z",
+        "validUntil": "2017-11-19T00:00:00.000Z",
+        "value": Object {
+          "permyriad": 2000,
+          "type": "relative",
+        },
+        "version": 1,
+      },
+      "c0b1ddba-bb3e-463f-9511-a3fa743794ac": Object {
+        "attributeTypes": Object {},
+        "cartFieldTypes": Object {},
+        "cartPredicate": "country in (\\"DE\\",\\"ES\\",\\"GB\\",\\"IT\\",\\"US\\")",
+        "createdAt": "2016-11-10T11:15:03.830Z",
+        "customLineItemFieldTypes": Object {},
+        "description": Object {
+          "de": "Ji fojalso weuzto pa wetib ovi okasi mucu epibabi uthauh ejicuup linob nukogov ofwur paom tub.",
+          "en": "Tecpo capojmis ho lugib ezkize cehesci id hul af ge oto ru ho.",
+          "es": "Iba tov mol fu upinamah mafufa wicadi nad kitboetu vobadbud wov veudu kejriaj.",
+          "fr": "Toscem ol lo dizum ugedizel sizadpom rugjap sula sib nifsakov op halzi nilpe serlisaf ti.",
+          "it": "Iwbe ke wanuhoja kap rob wa mi ejaokejor mena mogulehu jan jilnor ziwoose ibaal.",
+        },
+        "id": "c0b1ddba-bb3e-463f-9511-a3fa743794ac",
+        "isActive": true,
+        "lastModifiedAt": "2017-09-04T15:58:20.698Z",
+        "lineItemFieldTypes": Object {},
+        "name": Object {
+          "de": "bodcida",
+          "en": "packoci",
+          "es": "biswufe",
+          "fr": "zaw",
+          "it": "ocoeg",
+        },
+        "references": Array [],
+        "requiresDiscountCode": true,
+        "sortOrder": "0.6583458916",
+        "stackingMode": "Stacking",
+        "target": Object {
+          "type": "shipping",
+        },
+        "value": Object {
+          "money": Array [
+            Object {
+              "centAmount": 2300,
+              "currencyCode": "EUR",
+            },
+            Object {
+              "centAmount": 8900,
+              "currencyCode": "USD",
+            },
+            Object {
+              "centAmount": 800,
+              "currencyCode": "GBP",
+            },
+          ],
+          "type": "absolute",
+        },
+        "version": 3,
+      },
+    },
+  },
+  "result": Object {
+    "count": 5,
+    "limit": 5,
+    "offset": 0,
+    "results": Array [
+      "c0b1ddba-bb3e-463f-9511-a3fa743794ac",
+      "88e4025d-444d-4dfd-a8c5-0d23b994b47e",
+      "86ba193b-6a94-4007-828c-9e4bb26dfdac",
+      "163d37b2-de8d-4d9d-9362-c5f3b9c59afe",
+      "1561382c-19f7-4720-b618-ecdf005de2a8",
+    ],
+    "total": 20,
+  },
+}
+`;
+
+exports[`normalizeCustomersResponse when querying \`/customers/:id\` should normalize response 1`] = `
+Object {
+  "entities": Object {
+    "customerGroups": Object {
+      "0060effa-ee62-4adb-a455-5893dfb5c617": Object {
+        "createdAt": "2016-08-29T16:25:09.690Z",
+        "id": "0060effa-ee62-4adb-a455-5893dfb5c617",
+        "lastModifiedAt": "2016-08-29T16:25:09.690Z",
+        "name": "B2C",
+        "version": 1,
+      },
+    },
+    "customers": Object {
+      "9199f748-9d75-448a-8d06-d60a6c126ce6": Object {
+        "addresses": Array [
+          Object {
+            "apartment": "ccc",
+            "building": "c",
+            "city": "ccccc",
+            "company": "sfdf",
+            "country": "AD",
+            "firstName": "svb",
+            "id": "fD2hQNpd",
+            "lastName": "sfsf",
+            "pOBox": "cccc",
+            "postalCode": "ccc",
+            "salutation": "ds",
+            "streetName": "ccccc",
+            "streetNumber": "2",
+            "title": "fsdfs",
+          },
+        ],
+        "billingAddressIds": Array [],
+        "companyName": "example",
+        "createdAt": "2016-09-09T16:08:11.846Z",
+        "customerGroup": Object {
+          "id": "0060effa-ee62-4adb-a455-5893dfb5c617",
+          "obj": "0060effa-ee62-4adb-a455-5893dfb5c617",
+          "typeId": "customer-group",
+        },
+        "customerNumber": "123456",
+        "email": "alicia.williams31@example.com",
+        "externalId": "aaa111",
+        "firstName": "Alicia",
+        "id": "9199f748-9d75-448a-8d06-d60a6c126ce6",
+        "isEmailVerified": false,
+        "lastMessageSequenceNumber": 1,
+        "lastModifiedAt": "2016-11-17T09:45:24.962Z",
+        "lastName": "Williams",
+        "password": "foo",
+        "shippingAddressIds": Array [],
+        "title": "Mrs",
+        "version": 2,
+      },
+    },
+  },
+  "result": "9199f748-9d75-448a-8d06-d60a6c126ce6",
+}
+`;
+
+exports[`normalizeCustomersResponse when querying \`/customers\` should normalize response 1`] = `
+Object {
+  "entities": Object {
+    "customerGroups": Object {
+      "0060effa-ee62-4adb-a455-5893dfb5c617": Object {
+        "createdAt": "2016-08-29T16:25:09.690Z",
+        "id": "0060effa-ee62-4adb-a455-5893dfb5c617",
+        "lastModifiedAt": "2016-08-29T16:25:09.690Z",
+        "name": "B2C",
+        "version": 1,
+      },
+    },
+    "customers": Object {
+      "0db6f3c1-c82c-4398-942a-4eaaf2b99907": Object {
+        "addresses": Array [],
+        "billingAddressIds": Array [],
+        "companyName": "sgsdfgd",
+        "createdAt": "2016-09-09T15:49:42.216Z",
+        "email": "foo+1@bar.com",
+        "externalId": "f123",
+        "firstName": "fsdgdfg",
+        "id": "0db6f3c1-c82c-4398-942a-4eaaf2b99907",
+        "isEmailVerified": false,
+        "lastMessageSequenceNumber": 1,
+        "lastModifiedAt": "2016-11-23T19:50:42.794Z",
+        "password": "foo",
+        "shippingAddressIds": Array [],
+        "version": 2,
+      },
+      "1c310cc9-25d9-4b38-bf09-75afa6d75295": Object {
+        "addresses": Array [],
+        "billingAddressIds": Array [],
+        "createdAt": "2016-09-09T15:32:33.593Z",
+        "email": "john@doe.com",
+        "firstName": "John",
+        "id": "1c310cc9-25d9-4b38-bf09-75afa6d75295",
+        "isEmailVerified": false,
+        "lastMessageSequenceNumber": 1,
+        "lastModifiedAt": "2016-09-09T15:32:33.593Z",
+        "lastName": "Doe",
+        "password": "foo",
+        "shippingAddressIds": Array [],
+        "title": "Mr",
+        "version": 1,
+      },
+      "599f176f-d6e1-4e44-b5b0-edf668d1c57e": Object {
+        "addresses": Array [],
+        "billingAddressIds": Array [],
+        "createdAt": "2016-09-09T15:46:11.472Z",
+        "email": "foo@bar.com",
+        "id": "599f176f-d6e1-4e44-b5b0-edf668d1c57e",
+        "isEmailVerified": false,
+        "lastMessageSequenceNumber": 1,
+        "lastModifiedAt": "2016-09-09T15:46:11.472Z",
+        "password": "foo",
+        "shippingAddressIds": Array [],
+        "version": 1,
+      },
+      "9199f748-9d75-448a-8d06-d60a6c126ce6": Object {
+        "addresses": Array [
+          Object {
+            "apartment": "ccc",
+            "building": "c",
+            "city": "ccccc",
+            "company": "sfdf",
+            "country": "AD",
+            "firstName": "svb",
+            "id": "fD2hQNpd",
+            "lastName": "sfsf",
+            "pOBox": "cccc",
+            "postalCode": "ccc",
+            "salutation": "ds",
+            "streetName": "ccccc",
+            "streetNumber": "2",
+            "title": "fsdfs",
+          },
+        ],
+        "billingAddressIds": Array [],
+        "companyName": "example",
+        "createdAt": "2016-09-09T16:08:11.846Z",
+        "customerGroup": Object {
+          "id": "0060effa-ee62-4adb-a455-5893dfb5c617",
+          "obj": "0060effa-ee62-4adb-a455-5893dfb5c617",
+          "typeId": "customer-group",
+        },
+        "customerNumber": "123456",
+        "email": "alicia.williams31@example.com",
+        "externalId": "aaa111",
+        "firstName": "Alicia",
+        "id": "9199f748-9d75-448a-8d06-d60a6c126ce6",
+        "isEmailVerified": false,
+        "lastMessageSequenceNumber": 1,
+        "lastModifiedAt": "2016-11-17T09:45:24.962Z",
+        "lastName": "Williams",
+        "password": "foo",
+        "shippingAddressIds": Array [],
+        "title": "Mrs",
+        "version": 2,
+      },
+      "9e0de50f-90d7-4f6f-bded-a0731a8caa3e": Object {
+        "addresses": Array [],
+        "billingAddressIds": Array [],
+        "createdAt": "2016-09-09T15:42:47.902Z",
+        "email": "aaa@bbb.com",
+        "firstName": "aaa",
+        "id": "9e0de50f-90d7-4f6f-bded-a0731a8caa3e",
+        "isEmailVerified": false,
+        "lastMessageSequenceNumber": 1,
+        "lastModifiedAt": "2016-09-09T15:42:47.902Z",
+        "lastName": "bbb",
+        "password": "foo",
+        "shippingAddressIds": Array [],
+        "title": "Mr",
+        "version": 1,
+      },
+    },
+  },
+  "result": Object {
+    "count": 5,
+    "limit": 5,
+    "offset": 0,
+    "results": Array [
+      "9199f748-9d75-448a-8d06-d60a6c126ce6",
+      "0db6f3c1-c82c-4398-942a-4eaaf2b99907",
+      "1c310cc9-25d9-4b38-bf09-75afa6d75295",
+      "9e0de50f-90d7-4f6f-bded-a0731a8caa3e",
+      "599f176f-d6e1-4e44-b5b0-edf668d1c57e",
+    ],
+    "total": 105,
+  },
+}
+`;
+
+exports[`normalizeProductDiscountsResponse when querying \`/product-discounts/:id\` should normalize response 1`] = `
+Object {
+  "entities": Object {
+    "productDiscounts": Object {
+      "00801b20-b114-4ef5-9382-5082f1be834f": Object {
+        "attributeTypes": Object {},
+        "createdAt": "2017-01-12T10:41:06.441Z",
+        "description": Object {
+          "en": "<p>1 Euro Discount on chicken!</p>",
+        },
+        "id": "00801b20-b114-4ef5-9382-5082f1be834f",
+        "isActive": false,
+        "lastModifiedAt": "2017-02-28T10:48:17.503Z",
+        "name": Object {
+          "en": "1 Euro Discount",
+        },
+        "predicate": "product.id = \\"6490b586-6576-4429-b75f-95f0c3b1ab2f\\" and variant.id = 1",
+        "references": Array [
+          Object {
+            "id": "6490b586-6576-4429-b75f-95f0c3b1ab2f",
+            "typeId": "product",
+          },
+        ],
+        "sortOrder": "0.8",
+        "value": Object {
+          "money": Array [
+            Object {
+              "centAmount": 112,
+              "currencyCode": "EUR",
+            },
+          ],
+          "type": "absolute",
+        },
+        "version": 8,
+      },
+    },
+  },
+  "result": "00801b20-b114-4ef5-9382-5082f1be834f",
+}
+`;
+
+exports[`normalizeProductDiscountsResponse when querying \`/product-discounts\` should normalize response 1`] = `
+Object {
+  "entities": Object {
+    "productDiscounts": Object {
+      "00801b20-b114-4ef5-9382-5082f1be834f": Object {
+        "attributeTypes": Object {},
+        "createdAt": "2017-01-12T10:41:06.441Z",
+        "description": Object {
+          "en": "<p>1 Euro Discount on chicken!</p>",
+        },
+        "id": "00801b20-b114-4ef5-9382-5082f1be834f",
+        "isActive": false,
+        "lastModifiedAt": "2017-02-28T10:48:17.503Z",
+        "name": Object {
+          "en": "1 Euro Discount",
+        },
+        "predicate": "product.id = \\"6490b586-6576-4429-b75f-95f0c3b1ab2f\\" and variant.id = 1",
+        "references": Array [
+          Object {
+            "id": "6490b586-6576-4429-b75f-95f0c3b1ab2f",
+            "typeId": "product",
+          },
+        ],
+        "sortOrder": "0.8",
+        "value": Object {
+          "money": Array [
+            Object {
+              "centAmount": 112,
+              "currencyCode": "EUR",
+            },
+          ],
+          "type": "absolute",
+        },
+        "version": 8,
+      },
+      "32f00816-b01d-49f6-899c-af08bbfec994": Object {
+        "attributeTypes": Object {},
+        "createdAt": "2017-02-20T14:17:16.714Z",
+        "id": "32f00816-b01d-49f6-899c-af08bbfec994",
+        "isActive": true,
+        "lastModifiedAt": "2017-03-10T10:15:53.445Z",
+        "name": Object {
+          "en": "Product Discount Sample 10",
+        },
+        "predicate": "categories.id = (\\"eb8edd13-1728-4628-bf07-8241c21cf3ee\\") and sku = \\"13\\" or centAmount > 1200",
+        "references": Array [
+          Object {
+            "id": "eb8edd13-1728-4628-bf07-8241c21cf3ee",
+            "typeId": "category",
+          },
+        ],
+        "sortOrder": "0.81",
+        "value": Object {
+          "permyriad": 1000,
+          "type": "relative",
+        },
+        "version": 4,
+      },
+      "beb58b2e-29c2-42c8-b319-738f13a0cdf6": Object {
+        "attributeTypes": Object {},
+        "createdAt": "2017-02-20T14:11:03.902Z",
+        "id": "beb58b2e-29c2-42c8-b319-738f13a0cdf6",
+        "isActive": true,
+        "lastModifiedAt": "2017-06-08T14:27:44.629Z",
+        "name": Object {
+          "en": "Product Discount Sample 2",
+        },
+        "predicate": "categories.id = (\\"eb8edd13-1728-4628-bf07-8241c21cf3ee\\")",
+        "references": Array [
+          Object {
+            "id": "eb8edd13-1728-4628-bf07-8241c21cf3ee",
+            "typeId": "category",
+          },
+        ],
+        "sortOrder": "0.92",
+        "value": Object {
+          "money": Array [
+            Object {
+              "centAmount": 500,
+              "currencyCode": "EUR",
+            },
+          ],
+          "type": "absolute",
+        },
+        "version": 6,
+      },
+      "ca94ae8c-f5e9-4a20-b638-e9903ba0e1a5": Object {
+        "attributeTypes": Object {},
+        "createdAt": "2017-02-20T14:14:45.823Z",
+        "description": Object {
+          "en": "2",
+        },
+        "id": "ca94ae8c-f5e9-4a20-b638-e9903ba0e1a5",
+        "isActive": true,
+        "lastModifiedAt": "2017-05-30T06:19:54.492Z",
+        "name": Object {
+          "en": "Product Discount Sample ",
+        },
+        "predicate": "categories.id = (\\"eb8edd13-1728-4628-bf07-8241c21cf3ee\\")",
+        "references": Array [
+          Object {
+            "id": "eb8edd13-1728-4628-bf07-8241c21cf3ee",
+            "typeId": "category",
+          },
+        ],
+        "sortOrder": "0.02",
+        "value": Object {
+          "money": Array [
+            Object {
+              "centAmount": 400,
+              "currencyCode": "EUR",
+            },
+          ],
+          "type": "absolute",
+        },
+        "version": 11,
+      },
+      "ef13d59e-f725-48a6-8a17-a19ecb7f43ca": Object {
+        "attributeTypes": Object {},
+        "createdAt": "2017-02-20T14:08:50.084Z",
+        "description": Object {
+          "en": "<p>Product Discount Sample 1<br></p>",
+        },
+        "id": "ef13d59e-f725-48a6-8a17-a19ecb7f43ca",
+        "isActive": true,
+        "lastModifiedAt": "2017-09-19T13:18:05.467Z",
+        "name": Object {
+          "en": "Product Discount Sample 1",
+        },
+        "predicate": "customerGroup.id = \\"a551209b-e331-44de-84e3-b79b08731001\\"",
+        "references": Array [
+          Object {
+            "id": "a551209b-e331-44de-84e3-b79b08731001",
+            "typeId": "customer-group",
+          },
+        ],
+        "sortOrder": "0.91",
+        "value": Object {
+          "money": Array [
+            Object {
+              "centAmount": 500,
+              "currencyCode": "EUR",
+            },
+          ],
+          "type": "absolute",
+        },
+        "version": 8,
+      },
+    },
+  },
+  "result": Object {
+    "count": 5,
+    "limit": 5,
+    "offset": 0,
+    "results": Array [
+      "00801b20-b114-4ef5-9382-5082f1be834f",
+      "ef13d59e-f725-48a6-8a17-a19ecb7f43ca",
+      "beb58b2e-29c2-42c8-b319-738f13a0cdf6",
+      "ca94ae8c-f5e9-4a20-b638-e9903ba0e1a5",
+      "32f00816-b01d-49f6-899c-af08bbfec994",
+    ],
+    "total": 57,
+  },
+}
+`;
+
+exports[`normalizeProductTypesResponse when querying \`/product-types/:id\` should normalize response 1`] = `
+Object {
+  "entities": Object {
+    "productTypes": Object {
+      "10ce62c7-3809-493b-ace4-1d640bec4ce4": Object {
+        "attributes": Array [
+          Object {
+            "attributeConstraint": "None",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": true,
+            "isSearchable": true,
+            "label": Object {
+              "en": "Foo",
+            },
+            "name": "foo",
+            "type": Object {
+              "name": "text",
+            },
+          },
+          Object {
+            "attributeConstraint": "SameForAll",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "en": "Count",
+            },
+            "name": "count",
+            "type": Object {
+              "name": "enum",
+              "values": Array [
+                Object {
+                  "key": "one",
+                  "label": "One",
+                },
+                Object {
+                  "key": "two",
+                  "label": "Two",
+                },
+              ],
+            },
+          },
+          Object {
+            "attributeConstraint": "None",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "de": "Attribute TEXT None Single (de)",
+              "en": "Attribute TEXT None Single (en)",
+              "es": "Attribute TEXT None Single (es)",
+              "fr": "Attribute TEXT None Single (fr)",
+              "it": "Attribute TEXT None Single (it)",
+            },
+            "name": "attr-text-n-s",
+            "type": Object {
+              "name": "text",
+            },
+          },
+          Object {
+            "attributeConstraint": "SameForAll",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "de": "Attribute TEXT SameForAll Single (de)",
+              "en": "Attribute TEXT SameForAll Single (en)",
+              "es": "Attribute TEXT SameForAll Single (es)",
+              "fr": "Attribute TEXT SameForAll Single (fr)",
+              "it": "Attribute TEXT SameForAll Single (it)",
+            },
+            "name": "attr-text-sfa-s",
+            "type": Object {
+              "name": "text",
+            },
+          },
+          Object {
+            "attributeConstraint": "None",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "en": "test en",
+            },
+            "name": "testing_attribute_name",
+            "type": Object {
+              "name": "number",
+            },
+          },
+        ],
+        "classifier": "Complex",
+        "createdAt": "2016-05-11T15:01:13.663Z",
+        "description": "asdkjasdkj",
+        "id": "10ce62c7-3809-493b-ace4-1d640bec4ce4",
+        "lastModifiedAt": "2017-09-27T13:26:31.278Z",
+        "name": "Second product type",
+        "version": 4,
+      },
+    },
+  },
+  "result": "10ce62c7-3809-493b-ace4-1d640bec4ce4",
+}
+`;
+
+exports[`normalizeProductTypesResponse when querying \`/product-types\` should normalize response 1`] = `
+Object {
+  "entities": Object {
+    "productTypes": Object {
+      "10ce62c7-3809-493b-ace4-1d640bec4ce4": Object {
+        "attributes": Array [
+          Object {
+            "attributeConstraint": "None",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": true,
+            "isSearchable": true,
+            "label": Object {
+              "en": "Foo",
+            },
+            "name": "foo",
+            "type": Object {
+              "name": "text",
+            },
+          },
+          Object {
+            "attributeConstraint": "SameForAll",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "en": "Count",
+            },
+            "name": "count",
+            "type": Object {
+              "name": "enum",
+              "values": Array [
+                Object {
+                  "key": "one",
+                  "label": "One",
+                },
+                Object {
+                  "key": "two",
+                  "label": "Two",
+                },
+              ],
+            },
+          },
+          Object {
+            "attributeConstraint": "None",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "de": "Attribute TEXT None Single (de)",
+              "en": "Attribute TEXT None Single (en)",
+              "es": "Attribute TEXT None Single (es)",
+              "fr": "Attribute TEXT None Single (fr)",
+              "it": "Attribute TEXT None Single (it)",
+            },
+            "name": "attr-text-n-s",
+            "type": Object {
+              "name": "text",
+            },
+          },
+          Object {
+            "attributeConstraint": "SameForAll",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "de": "Attribute TEXT SameForAll Single (de)",
+              "en": "Attribute TEXT SameForAll Single (en)",
+              "es": "Attribute TEXT SameForAll Single (es)",
+              "fr": "Attribute TEXT SameForAll Single (fr)",
+              "it": "Attribute TEXT SameForAll Single (it)",
+            },
+            "name": "attr-text-sfa-s",
+            "type": Object {
+              "name": "text",
+            },
+          },
+          Object {
+            "attributeConstraint": "None",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "en": "test en",
+            },
+            "name": "testing_attribute_name",
+            "type": Object {
+              "name": "number",
+            },
+          },
+        ],
+        "classifier": "Complex",
+        "createdAt": "2016-05-11T15:01:13.663Z",
+        "description": "asdkjasdkj",
+        "id": "10ce62c7-3809-493b-ace4-1d640bec4ce4",
+        "lastModifiedAt": "2017-09-27T13:26:31.278Z",
+        "name": "Second product type",
+        "version": 4,
+      },
+      "67ac9918-e474-4abd-9017-a0ca64444d6d": Object {
+        "attributes": Array [],
+        "classifier": "Complex",
+        "createdAt": "2016-05-11T18:19:24.674Z",
+        "description": "GGG",
+        "id": "67ac9918-e474-4abd-9017-a0ca64444d6d",
+        "lastModifiedAt": "2016-05-11T18:19:24.674Z",
+        "name": "GGG",
+        "version": 1,
+      },
+      "6dd09d55-0a8d-4c2f-8c86-b1cddf1e6ffe": Object {
+        "attributes": Array [],
+        "classifier": "Complex",
+        "createdAt": "2016-05-11T18:19:07.345Z",
+        "description": "DDD",
+        "id": "6dd09d55-0a8d-4c2f-8c86-b1cddf1e6ffe",
+        "lastModifiedAt": "2016-05-11T18:19:07.345Z",
+        "name": "DDD",
+        "version": 1,
+      },
+      "a785f361-bbde-4411-b0f5-31d17c2031a1": Object {
+        "attributes": Array [],
+        "classifier": "Complex",
+        "createdAt": "2016-05-11T18:19:02.181Z",
+        "description": "CCC",
+        "id": "a785f361-bbde-4411-b0f5-31d17c2031a1",
+        "lastModifiedAt": "2016-05-11T18:19:02.181Z",
+        "name": "CCC",
+        "version": 1,
+      },
+      "c6ab9d71-5054-40ea-ad30-92b7b66d5bb6": Object {
+        "attributes": Array [],
+        "classifier": "Complex",
+        "createdAt": "2016-05-11T18:19:11.639Z",
+        "description": "EEE",
+        "id": "c6ab9d71-5054-40ea-ad30-92b7b66d5bb6",
+        "lastModifiedAt": "2016-05-11T18:19:11.639Z",
+        "name": "EEE",
+        "version": 1,
+      },
+    },
+  },
+  "result": Object {
+    "count": 5,
+    "limit": 5,
+    "offset": 0,
+    "results": Array [
+      "10ce62c7-3809-493b-ace4-1d640bec4ce4",
+      "a785f361-bbde-4411-b0f5-31d17c2031a1",
+      "6dd09d55-0a8d-4c2f-8c86-b1cddf1e6ffe",
+      "c6ab9d71-5054-40ea-ad30-92b7b66d5bb6",
+      "67ac9918-e474-4abd-9017-a0ca64444d6d",
+    ],
+    "total": 18,
+  },
+}
+`;
+
+exports[`normalizeProductsResponse when querying \`/product/:id\` should normalize response 1`] = `
+Object {
+  "entities": Object {
+    "categories": Object {
+      "category-id-1": Object {
+        "id": "category-id-1",
+      },
+      "category-id-2": Object {
+        "id": "category-id-2",
+      },
+    },
+    "channels": Object {
+      "channel-id-1": Object {
+        "custom": Object {
+          "type": Object {
+            "obj": "custom-id-1",
+          },
+        },
+        "id": "channel-id-1",
+      },
+      "channel-id-2": Object {
+        "custom": Object {
+          "type": Object {
+            "obj": "custom-id-2",
+          },
+        },
+        "id": "channel-id-2",
+      },
+    },
+    "customerGroups": Object {
+      "customer-group-id-1": Object {
+        "id": "customer-group-id-1",
+      },
+      "customer-group-id-2": Object {
+        "id": "customer-group-id-2",
+      },
+    },
+    "productDiscounts": Object {
+      "product-discount-id-1": Object {
+        "id": "product-discount-id-1",
+      },
+    },
+    "productTypes": Object {
+      "product-type-id-1": Object {
+        "id": "product-type-id-1",
+      },
+    },
+    "products": Object {
+      "product-id-1": Object {
+        "id": "product-id-1",
+        "masterData": Object {
+          "current": Object {
+            "categories": Array [
+              Object {
+                "obj": "category-id-1",
+              },
+              Object {
+                "obj": "category-id-2",
+              },
+            ],
+            "masterVariant": Object {
+              "assets": Array [
+                Object {
+                  "custom": Object {
+                    "type": Object {
+                      "obj": "custom-id-2",
+                    },
+                  },
+                },
+              ],
+              "prices": Array [
+                Object {
+                  "channel": Object {
+                    "obj": "channel-id-2",
+                  },
+                  "custom": Object {
+                    "type": Object {
+                      "obj": "custom-id-2",
+                    },
+                  },
+                  "customerGroup": Object {
+                    "obj": "customer-group-id-1",
+                  },
+                  "discounted": Object {
+                    "discount": Object {
+                      "obj": "product-discount-id-1",
+                    },
+                  },
+                },
+              ],
+              "scopedPrice": Object {
+                "channel": Object {
+                  "obj": "channel-id-1",
+                },
+                "custom": Object {
+                  "type": Object {
+                    "obj": "custom-id-3",
+                  },
+                },
+                "customerGroup": Object {
+                  "obj": "customer-group-id-2",
+                },
+                "discounted": Object {
+                  "discount": Object {
+                    "obj": "product-discount-id-1",
+                  },
+                },
+              },
+            },
+            "variants": Array [
+              Object {
+                "assets": Array [
+                  Object {
+                    "custom": Object {
+                      "type": Object {
+                        "obj": "custom-id-2",
+                      },
+                    },
+                  },
+                ],
+                "prices": Array [
+                  Object {
+                    "channel": Object {
+                      "obj": "channel-id-1",
+                    },
+                    "custom": Object {
+                      "type": Object {
+                        "obj": "custom-id-2",
+                      },
+                    },
+                    "customerGroup": Object {
+                      "obj": "customer-group-id-1",
+                    },
+                    "discounted": Object {
+                      "discount": Object {
+                        "obj": "product-discount-id-1",
+                      },
+                    },
+                  },
+                ],
+                "scopedPrice": Object {
+                  "channel": Object {
+                    "obj": "channel-id-2",
+                  },
+                  "custom": Object {
+                    "type": Object {
+                      "obj": "custom-id-3",
+                    },
+                  },
+                  "customerGroup": Object {
+                    "obj": "customer-group-id-2",
+                  },
+                  "discounted": Object {
+                    "discount": Object {
+                      "obj": "product-discount-id-1",
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        },
+        "productType": Object {
+          "obj": "product-type-id-1",
+        },
+      },
+    },
+    "types": Object {
+      "custom-id-1": Object {
+        "id": "custom-id-1",
+      },
+      "custom-id-2": Object {
+        "id": "custom-id-2",
+      },
+      "custom-id-3": Object {
+        "id": "custom-id-3",
+      },
+    },
+  },
+  "result": "product-id-1",
+}
+`;
+
+exports[`normalizeProductsResponse when querying \`/products\` should normalize response 1`] = `
+Object {
+  "entities": Object {
+    "categories": Object {
+      "category-id-1": Object {
+        "id": "category-id-1",
+      },
+      "category-id-2": Object {
+        "id": "category-id-2",
+      },
+    },
+    "channels": Object {
+      "channel-id-1": Object {
+        "custom": Object {
+          "type": Object {
+            "obj": "custom-id-1",
+          },
+        },
+        "id": "channel-id-1",
+      },
+      "channel-id-2": Object {
+        "custom": Object {
+          "type": Object {
+            "obj": "custom-id-2",
+          },
+        },
+        "id": "channel-id-2",
+      },
+    },
+    "customerGroups": Object {
+      "customer-group-id-1": Object {
+        "id": "customer-group-id-1",
+      },
+      "customer-group-id-2": Object {
+        "id": "customer-group-id-2",
+      },
+    },
+    "productDiscounts": Object {
+      "product-discount-id-1": Object {
+        "id": "product-discount-id-1",
+      },
+    },
+    "productTypes": Object {
+      "product-type-id-1": Object {
+        "id": "product-type-id-1",
+      },
+    },
+    "products": Object {
+      "product-id-1": Object {
+        "id": "product-id-1",
+        "masterData": Object {
+          "current": Object {
+            "categories": Array [
+              Object {
+                "obj": "category-id-1",
+              },
+              Object {
+                "obj": "category-id-2",
+              },
+            ],
+            "masterVariant": Object {
+              "assets": Array [
+                Object {
+                  "custom": Object {
+                    "type": Object {
+                      "obj": "custom-id-2",
+                    },
+                  },
+                },
+              ],
+              "prices": Array [
+                Object {
+                  "channel": Object {
+                    "obj": "channel-id-2",
+                  },
+                  "custom": Object {
+                    "type": Object {
+                      "obj": "custom-id-2",
+                    },
+                  },
+                  "customerGroup": Object {
+                    "obj": "customer-group-id-1",
+                  },
+                  "discounted": Object {
+                    "discount": Object {
+                      "obj": "product-discount-id-1",
+                    },
+                  },
+                },
+              ],
+              "scopedPrice": Object {
+                "channel": Object {
+                  "obj": "channel-id-1",
+                },
+                "custom": Object {
+                  "type": Object {
+                    "obj": "custom-id-3",
+                  },
+                },
+                "customerGroup": Object {
+                  "obj": "customer-group-id-2",
+                },
+                "discounted": Object {
+                  "discount": Object {
+                    "obj": "product-discount-id-1",
+                  },
+                },
+              },
+            },
+            "variants": Array [
+              Object {
+                "assets": Array [
+                  Object {
+                    "custom": Object {
+                      "type": Object {
+                        "obj": "custom-id-2",
+                      },
+                    },
+                  },
+                ],
+                "prices": Array [
+                  Object {
+                    "channel": Object {
+                      "obj": "channel-id-1",
+                    },
+                    "custom": Object {
+                      "type": Object {
+                        "obj": "custom-id-2",
+                      },
+                    },
+                    "customerGroup": Object {
+                      "obj": "customer-group-id-1",
+                    },
+                    "discounted": Object {
+                      "discount": Object {
+                        "obj": "product-discount-id-1",
+                      },
+                    },
+                  },
+                ],
+                "scopedPrice": Object {
+                  "channel": Object {
+                    "obj": "channel-id-2",
+                  },
+                  "custom": Object {
+                    "type": Object {
+                      "obj": "custom-id-3",
+                    },
+                  },
+                  "customerGroup": Object {
+                    "obj": "customer-group-id-2",
+                  },
+                  "discounted": Object {
+                    "discount": Object {
+                      "obj": "product-discount-id-1",
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        },
+        "productType": Object {
+          "obj": "product-type-id-1",
+        },
+      },
+      "product-id-2": Object {
+        "id": "product-id-2",
+        "masterData": Object {
+          "current": Object {
+            "categories": Array [
+              Object {
+                "obj": "category-id-1",
+              },
+              Object {
+                "obj": "category-id-2",
+              },
+            ],
+            "masterVariant": Object {
+              "assets": Array [
+                Object {
+                  "custom": Object {
+                    "type": Object {
+                      "obj": "custom-id-2",
+                    },
+                  },
+                },
+              ],
+              "prices": Array [
+                Object {
+                  "channel": Object {
+                    "obj": "channel-id-2",
+                  },
+                  "custom": Object {
+                    "type": Object {
+                      "obj": "custom-id-2",
+                    },
+                  },
+                  "customerGroup": Object {
+                    "obj": "customer-group-id-1",
+                  },
+                  "discounted": Object {
+                    "discount": Object {
+                      "obj": "product-discount-id-1",
+                    },
+                  },
+                },
+              ],
+              "scopedPrice": Object {
+                "channel": Object {
+                  "obj": "channel-id-1",
+                },
+                "custom": Object {
+                  "type": Object {
+                    "obj": "custom-id-3",
+                  },
+                },
+                "customerGroup": Object {
+                  "obj": "customer-group-id-2",
+                },
+                "discounted": Object {
+                  "discount": Object {
+                    "obj": "product-discount-id-1",
+                  },
+                },
+              },
+            },
+            "variants": Array [
+              Object {
+                "assets": Array [
+                  Object {
+                    "custom": Object {
+                      "type": Object {
+                        "obj": "custom-id-2",
+                      },
+                    },
+                  },
+                ],
+                "prices": Array [
+                  Object {
+                    "channel": Object {
+                      "obj": "channel-id-1",
+                    },
+                    "custom": Object {
+                      "type": Object {
+                        "obj": "custom-id-2",
+                      },
+                    },
+                    "customerGroup": Object {
+                      "obj": "customer-group-id-1",
+                    },
+                    "discounted": Object {
+                      "discount": Object {
+                        "obj": "product-discount-id-1",
+                      },
+                    },
+                  },
+                ],
+                "scopedPrice": Object {
+                  "channel": Object {
+                    "obj": "channel-id-2",
+                  },
+                  "custom": Object {
+                    "type": Object {
+                      "obj": "custom-id-3",
+                    },
+                  },
+                  "customerGroup": Object {
+                    "obj": "customer-group-id-2",
+                  },
+                  "discounted": Object {
+                    "discount": Object {
+                      "obj": "product-discount-id-1",
+                    },
+                  },
+                },
+              },
+            ],
+          },
+        },
+        "productType": Object {
+          "obj": "product-type-id-1",
+        },
+      },
+    },
+    "types": Object {
+      "custom-id-1": Object {
+        "id": "custom-id-1",
+      },
+      "custom-id-2": Object {
+        "id": "custom-id-2",
+      },
+      "custom-id-3": Object {
+        "id": "custom-id-3",
+      },
+    },
+  },
+  "result": Object {
+    "count": 2,
+    "limit": 5,
+    "offset": 0,
+    "results": Array [
+      "product-id-1",
+      "product-id-2",
+    ],
+    "total": 2,
+  },
+}
+`;
