@@ -11,7 +11,11 @@ npm install --save @commercetools/api-response-normalizer
 ## Supported endpoints
 
 * `/products`
-* `/product/:id`
+* `/products/:id`
+* `/customers`
+* `/customers/:id`
+* `/product-types`
+* `/product-types/:id`
 
 ## Entities and Types
 
