@@ -1,0 +1,194 @@
+{
+  "limit": 5,
+  "offset": 0,
+  "count": 5,
+  "total": 20,
+  "results": [
+    {
+      "id": "c0b1ddba-bb3e-463f-9511-a3fa743794ac",
+      "version": 3,
+      "value": {
+        "type": "absolute",
+        "money": [
+          {
+            "currencyCode": "EUR",
+            "centAmount": 2300
+          },
+          {
+            "currencyCode": "USD",
+            "centAmount": 8900
+          },
+          {
+            "currencyCode": "GBP",
+            "centAmount": 800
+          }
+        ]
+      },
+      "cartPredicate": "country in (\"DE\",\"ES\",\"GB\",\"IT\",\"US\")",
+      "target": {
+        "type": "shipping"
+      },
+      "name": {
+        "fr": "zaw",
+        "it": "ocoeg",
+        "en": "packoci",
+        "de": "bodcida",
+        "es": "biswufe"
+      },
+      "description": {
+        "fr":
+          "Toscem ol lo dizum ugedizel sizadpom rugjap sula sib nifsakov op halzi nilpe serlisaf ti.",
+        "it":
+          "Iwbe ke wanuhoja kap rob wa mi ejaokejor mena mogulehu jan jilnor ziwoose ibaal.",
+        "en": "Tecpo capojmis ho lugib ezkize cehesci id hul af ge oto ru ho.",
+        "de":
+          "Ji fojalso weuzto pa wetib ovi okasi mucu epibabi uthauh ejicuup linob nukogov ofwur paom tub.",
+        "es":
+          "Iba tov mol fu upinamah mafufa wicadi nad kitboetu vobadbud wov veudu kejriaj."
+      },
+      "stackingMode": "Stacking",
+      "isActive": true,
+      "requiresDiscountCode": true,
+      "sortOrder": "0.6583458916",
+      "references": [],
+      "attributeTypes": {},
+      "cartFieldTypes": {},
+      "lineItemFieldTypes": {},
+      "customLineItemFieldTypes": {},
+      "createdAt": "2016-11-10T11:15:03.830Z",
+      "lastModifiedAt": "2017-09-04T15:58:20.698Z"
+    },
+    {
+      "id": "88e4025d-444d-4dfd-a8c5-0d23b994b47e",
+      "version": 1,
+      "value": {
+        "type": "relative",
+        "permyriad": 2000
+      },
+      "cartPredicate": "1=1",
+      "target": {
+        "type": "lineItems",
+        "predicate": "1=1"
+      },
+      "name": {
+        "en": "foo bar"
+      },
+      "validFrom": "2017-11-08T00:00:00.000Z",
+      "validUntil": "2017-11-19T00:00:00.000Z",
+      "stackingMode": "Stacking",
+      "isActive": false,
+      "requiresDiscountCode": false,
+      "sortOrder": "0.11",
+      "references": [],
+      "attributeTypes": {},
+      "cartFieldTypes": {},
+      "lineItemFieldTypes": {},
+      "customLineItemFieldTypes": {},
+      "createdAt": "2017-11-28T12:59:06.925Z",
+      "lastModifiedAt": "2017-11-28T12:59:06.925Z"
+    },
+    {
+      "id": "86ba193b-6a94-4007-828c-9e4bb26dfdac",
+      "version": 1,
+      "value": {
+        "type": "giftLineItem",
+        "product": {
+          "typeId": "product",
+          "id": "0682fb03-cc46-429c-9e8e-a5ce7e0e698b"
+        },
+        "variantId": 1,
+        "distributionChannel": {
+          "typeId": "channel",
+          "id": "452c663b-9f12-4fa6-b9b7-4baa190f9c17"
+        },
+        "supplyChannel": {
+          "typeId": "channel",
+          "id": "8c1bae77-be3b-470a-a48e-ee7ddf49f9d7"
+        }
+      },
+      "cartPredicate": "1=1",
+      "name": {
+        "en": "foo cart discount"
+      },
+      "description": {
+        "en": "foo cart discount"
+      },
+      "stackingMode": "Stacking",
+      "isActive": false,
+      "requiresDiscountCode": false,
+      "sortOrder": "0.2",
+      "references": [],
+      "attributeTypes": {},
+      "cartFieldTypes": {},
+      "lineItemFieldTypes": {},
+      "customLineItemFieldTypes": {},
+      "createdAt": "2017-11-29T11:19:58.319Z",
+      "lastModifiedAt": "2017-11-29T11:19:58.319Z"
+    },
+    {
+      "id": "163d37b2-de8d-4d9d-9362-c5f3b9c59afe",
+      "version": 1,
+      "value": {
+        "type": "giftLineItem",
+        "product": {
+          "typeId": "product",
+          "id": "0682fb03-cc46-429c-9e8e-a5ce7e0e698b"
+        },
+        "variantId": 2,
+        "distributionChannel": {
+          "typeId": "channel",
+          "id": "452c663b-9f12-4fa6-b9b7-4baa190f9c17"
+        },
+        "supplyChannel": {
+          "typeId": "channel",
+          "id": "93d58d70-8ca6-435b-8564-3f3e4258651c"
+        }
+      },
+      "cartPredicate": "1=1",
+      "name": {
+        "en": "baraaaaa"
+      },
+      "description": {
+        "en": "baraaaaa"
+      },
+      "stackingMode": "Stacking",
+      "isActive": false,
+      "requiresDiscountCode": false,
+      "sortOrder": "0.433",
+      "references": [],
+      "attributeTypes": {},
+      "cartFieldTypes": {},
+      "lineItemFieldTypes": {},
+      "customLineItemFieldTypes": {},
+      "createdAt": "2017-11-29T11:21:20.988Z",
+      "lastModifiedAt": "2017-11-29T11:21:20.988Z"
+    },
+    {
+      "id": "1561382c-19f7-4720-b618-ecdf005de2a8",
+      "version": 1,
+      "value": {
+        "type": "relative",
+        "permyriad": 2000
+      },
+      "cartPredicate": "1=1",
+      "target": {
+        "type": "lineItems",
+        "predicate": "1=1"
+      },
+      "name": {
+        "en": "test"
+      },
+      "stackingMode": "Stacking",
+      "isActive": false,
+      "requiresDiscountCode": false,
+      "sortOrder": "0.212312312412",
+      "references": [],
+      "attributeTypes": {},
+      "cartFieldTypes": {},
+      "lineItemFieldTypes": {},
+      "customLineItemFieldTypes": {},
+      "createdAt": "2017-12-11T19:26:18.191Z",
+      "lastModifiedAt": "2017-12-11T19:26:18.191Z"
+    }
+  ]
+}

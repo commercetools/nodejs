@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when the response is from \`/cart-discount/:id\` should normalize the results 1`] = `
+Object {
+  "entities": Object {
+    "cartDiscounts": Object {
+      "c0b1ddba-bb3e-463f-9511-a3fa743794ac": Object {
+        "attributeTypes": Object {},
+        "cartFieldTypes": Object {},
+        "cartPredicate": "country in (\\"DE\\",\\"ES\\",\\"GB\\",\\"IT\\",\\"US\\")",
+        "createdAt": "2016-11-10T11:15:03.830Z",
+        "customLineItemFieldTypes": Object {},
+        "description": Object {
+          "de": "Ji fojalso weuzto pa wetib ovi okasi mucu epibabi uthauh ejicuup linob nukogov ofwur paom tub.",
+          "en": "Tecpo capojmis ho lugib ezkize cehesci id hul af ge oto ru ho.",
+          "es": "Iba tov mol fu upinamah mafufa wicadi nad kitboetu vobadbud wov veudu kejriaj.",
+          "fr": "Toscem ol lo dizum ugedizel sizadpom rugjap sula sib nifsakov op halzi nilpe serlisaf ti.",
+          "it": "Iwbe ke wanuhoja kap rob wa mi ejaokejor mena mogulehu jan jilnor ziwoose ibaal.",
+        },
+        "id": "c0b1ddba-bb3e-463f-9511-a3fa743794ac",
+        "isActive": true,
+        "lastModifiedAt": "2017-09-04T15:58:20.698Z",
+        "lineItemFieldTypes": Object {},
+        "name": Object {
+          "de": "bodcida",
+          "en": "packoci",
+          "es": "biswufe",
+          "fr": "zaw",
+          "it": "ocoeg",
+        },
+        "references": Array [],
+        "requiresDiscountCode": true,
+        "sortOrder": "0.6583458916",
+        "stackingMode": "Stacking",
+        "target": Object {
+          "type": "shipping",
+        },
+        "value": Object {
+          "money": Array [
+            Object {
+              "centAmount": 2300,
+              "currencyCode": "EUR",
+            },
+            Object {
+              "centAmount": 8900,
+              "currencyCode": "USD",
+            },
+            Object {
+              "centAmount": 800,
+              "currencyCode": "GBP",
+            },
+          ],
+          "type": "absolute",
+        },
+        "version": 3,
+      },
+    },
+  },
+  "result": "c0b1ddba-bb3e-463f-9511-a3fa743794ac",
+}
+`;

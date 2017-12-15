@@ -1,0 +1,50 @@
+{
+  "id": "c0b1ddba-bb3e-463f-9511-a3fa743794ac",
+  "version": 3,
+  "value": {
+    "type": "absolute",
+    "money": [
+      {
+        "currencyCode": "EUR",
+        "centAmount": 2300
+      },
+      {
+        "currencyCode": "USD",
+        "centAmount": 8900
+      },
+      {
+        "currencyCode": "GBP",
+        "centAmount": 800
+      }
+    ]
+  },
+  "cartPredicate": "country in (\"DE\",\"ES\",\"GB\",\"IT\",\"US\")",
+  "target": {
+    "type": "shipping"
+  },
+  "name": {
+    "fr": "zaw",
+    "it": "ocoeg",
+    "en": "packoci",
+    "de": "bodcida",
+    "es": "biswufe"
+  },
+  "description": {
+    "fr": "Toscem ol lo dizum ugedizel sizadpom rugjap sula sib nifsakov op halzi nilpe serlisaf ti.",
+    "it": "Iwbe ke wanuhoja kap rob wa mi ejaokejor mena mogulehu jan jilnor ziwoose ibaal.",
+    "en": "Tecpo capojmis ho lugib ezkize cehesci id hul af ge oto ru ho.",
+    "de": "Ji fojalso weuzto pa wetib ovi okasi mucu epibabi uthauh ejicuup linob nukogov ofwur paom tub.",
+    "es": "Iba tov mol fu upinamah mafufa wicadi nad kitboetu vobadbud wov veudu kejriaj."
+  },
+  "stackingMode": "Stacking",
+  "isActive": true,
+  "requiresDiscountCode": true,
+  "sortOrder": "0.6583458916",
+  "references": [],
+  "attributeTypes": {},
+  "cartFieldTypes": {},
+  "lineItemFieldTypes": {},
+  "customLineItemFieldTypes": {},
+  "createdAt": "2016-11-10T11:15:03.830Z",
+  "lastModifiedAt": "2017-09-04T15:58:20.698Z"
+}
