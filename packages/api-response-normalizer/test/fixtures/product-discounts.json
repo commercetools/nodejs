@@ -1,0 +1,155 @@
+{
+  "limit": 5,
+  "offset": 0,
+  "count": 5,
+  "total": 57,
+  "results": [
+    {
+      "id": "00801b20-b114-4ef5-9382-5082f1be834f",
+      "version": 8,
+      "value": {
+        "type": "absolute",
+        "money": [
+          {
+            "currencyCode": "EUR",
+            "centAmount": 112
+          }
+        ]
+      },
+      "predicate":
+        "product.id = \"6490b586-6576-4429-b75f-95f0c3b1ab2f\" and variant.id = 1",
+      "name": {
+        "en": "1 Euro Discount"
+      },
+      "description": {
+        "en": "<p>1 Euro Discount on chicken!</p>"
+      },
+      "isActive": false,
+      "sortOrder": "0.8",
+      "references": [
+        {
+          "typeId": "product",
+          "id": "6490b586-6576-4429-b75f-95f0c3b1ab2f"
+        }
+      ],
+      "attributeTypes": {},
+      "createdAt": "2017-01-12T10:41:06.441Z",
+      "lastModifiedAt": "2017-02-28T10:48:17.503Z"
+    },
+    {
+      "id": "ef13d59e-f725-48a6-8a17-a19ecb7f43ca",
+      "version": 8,
+      "value": {
+        "type": "absolute",
+        "money": [
+          {
+            "currencyCode": "EUR",
+            "centAmount": 500
+          }
+        ]
+      },
+      "predicate":
+        "customerGroup.id = \"a551209b-e331-44de-84e3-b79b08731001\"",
+      "name": {
+        "en": "Product Discount Sample 1"
+      },
+      "description": {
+        "en": "<p>Product Discount Sample 1<br></p>"
+      },
+      "isActive": true,
+      "sortOrder": "0.91",
+      "references": [
+        {
+          "typeId": "customer-group",
+          "id": "a551209b-e331-44de-84e3-b79b08731001"
+        }
+      ],
+      "attributeTypes": {},
+      "createdAt": "2017-02-20T14:08:50.084Z",
+      "lastModifiedAt": "2017-09-19T13:18:05.467Z"
+    },
+    {
+      "id": "beb58b2e-29c2-42c8-b319-738f13a0cdf6",
+      "version": 6,
+      "value": {
+        "type": "absolute",
+        "money": [
+          {
+            "currencyCode": "EUR",
+            "centAmount": 500
+          }
+        ]
+      },
+      "predicate": "categories.id = (\"eb8edd13-1728-4628-bf07-8241c21cf3ee\")",
+      "name": {
+        "en": "Product Discount Sample 2"
+      },
+      "isActive": true,
+      "sortOrder": "0.92",
+      "references": [
+        {
+          "typeId": "category",
+          "id": "eb8edd13-1728-4628-bf07-8241c21cf3ee"
+        }
+      ],
+      "attributeTypes": {},
+      "createdAt": "2017-02-20T14:11:03.902Z",
+      "lastModifiedAt": "2017-06-08T14:27:44.629Z"
+    },
+    {
+      "id": "ca94ae8c-f5e9-4a20-b638-e9903ba0e1a5",
+      "version": 11,
+      "value": {
+        "type": "absolute",
+        "money": [
+          {
+            "currencyCode": "EUR",
+            "centAmount": 400
+          }
+        ]
+      },
+      "predicate": "categories.id = (\"eb8edd13-1728-4628-bf07-8241c21cf3ee\")",
+      "name": {
+        "en": "Product Discount Sample "
+      },
+      "description": {
+        "en": "2"
+      },
+      "isActive": true,
+      "sortOrder": "0.02",
+      "references": [
+        {
+          "typeId": "category",
+          "id": "eb8edd13-1728-4628-bf07-8241c21cf3ee"
+        }
+      ],
+      "attributeTypes": {},
+      "createdAt": "2017-02-20T14:14:45.823Z",
+      "lastModifiedAt": "2017-05-30T06:19:54.492Z"
+    },
+    {
+      "id": "32f00816-b01d-49f6-899c-af08bbfec994",
+      "version": 4,
+      "value": {
+        "type": "relative",
+        "permyriad": 1000
+      },
+      "predicate":
+        "categories.id = (\"eb8edd13-1728-4628-bf07-8241c21cf3ee\") and sku = \"13\" or centAmount > 1200",
+      "name": {
+        "en": "Product Discount Sample 10"
+      },
+      "isActive": true,
+      "sortOrder": "0.81",
+      "references": [
+        {
+          "typeId": "category",
+          "id": "eb8edd13-1728-4628-bf07-8241c21cf3ee"
+        }
+      ],
+      "attributeTypes": {},
+      "createdAt": "2017-02-20T14:17:16.714Z",
+      "lastModifiedAt": "2017-03-10T10:15:53.445Z"
+    }
+  ]
+}

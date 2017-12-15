@@ -18,6 +18,8 @@ npm install --save @commercetools/api-response-normalizer
 * `/product-types/:id`
 * `/cart-discounts`
 * `/cart-discounts/:id`
+* `/product-discounts`
+* `/product-discounts/:id`
 
 ## Entities and Types
 
@@ -37,3 +39,4 @@ npm install --save @commercetools/api-response-normalizer
 * ✅ Address
 * ✅ ProductType
 * ✅ CartDiscount
+* ✅ ProductDiscount
