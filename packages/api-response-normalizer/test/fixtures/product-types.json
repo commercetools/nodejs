@@ -1,0 +1,147 @@
+{
+  "limit": 5,
+  "offset": 0,
+  "count": 5,
+  "total": 18,
+  "results": [
+    {
+      "id": "10ce62c7-3809-493b-ace4-1d640bec4ce4",
+      "version": 4,
+      "name": "Second product type",
+      "description": "asdkjasdkj",
+      "classifier": "Complex",
+      "attributes": [
+        {
+          "name": "foo",
+          "label": {
+            "en": "Foo"
+          },
+          "isRequired": true,
+          "type": {
+            "name": "text"
+          },
+          "attributeConstraint": "None",
+          "isSearchable": true,
+          "inputHint": "SingleLine",
+          "displayGroup": "Other"
+        },
+        {
+          "name": "count",
+          "label": {
+            "en": "Count"
+          },
+          "isRequired": false,
+          "type": {
+            "name": "enum",
+            "values": [
+              {
+                "key": "one",
+                "label": "One"
+              },
+              {
+                "key": "two",
+                "label": "Two"
+              }
+            ]
+          },
+          "attributeConstraint": "SameForAll",
+          "isSearchable": true,
+          "inputHint": "SingleLine",
+          "displayGroup": "Other"
+        },
+        {
+          "name": "attr-text-n-s",
+          "label": {
+            "fr": "Attribute TEXT None Single (fr)",
+            "it": "Attribute TEXT None Single (it)",
+            "en": "Attribute TEXT None Single (en)",
+            "de": "Attribute TEXT None Single (de)",
+            "es": "Attribute TEXT None Single (es)"
+          },
+          "isRequired": false,
+          "type": {
+            "name": "text"
+          },
+          "attributeConstraint": "None",
+          "isSearchable": true,
+          "inputHint": "SingleLine",
+          "displayGroup": "Other"
+        },
+        {
+          "name": "attr-text-sfa-s",
+          "label": {
+            "fr": "Attribute TEXT SameForAll Single (fr)",
+            "it": "Attribute TEXT SameForAll Single (it)",
+            "en": "Attribute TEXT SameForAll Single (en)",
+            "de": "Attribute TEXT SameForAll Single (de)",
+            "es": "Attribute TEXT SameForAll Single (es)"
+          },
+          "isRequired": false,
+          "type": {
+            "name": "text"
+          },
+          "attributeConstraint": "SameForAll",
+          "isSearchable": true,
+          "inputHint": "SingleLine",
+          "displayGroup": "Other"
+        },
+        {
+          "name": "testing_attribute_name",
+          "label": {
+            "en": "test en"
+          },
+          "isRequired": false,
+          "type": {
+            "name": "number"
+          },
+          "attributeConstraint": "None",
+          "isSearchable": true,
+          "inputHint": "SingleLine",
+          "displayGroup": "Other"
+        }
+      ],
+      "createdAt": "2016-05-11T15:01:13.663Z",
+      "lastModifiedAt": "2017-09-27T13:26:31.278Z"
+    },
+    {
+      "id": "a785f361-bbde-4411-b0f5-31d17c2031a1",
+      "version": 1,
+      "name": "CCC",
+      "description": "CCC",
+      "classifier": "Complex",
+      "attributes": [],
+      "createdAt": "2016-05-11T18:19:02.181Z",
+      "lastModifiedAt": "2016-05-11T18:19:02.181Z"
+    },
+    {
+      "id": "6dd09d55-0a8d-4c2f-8c86-b1cddf1e6ffe",
+      "version": 1,
+      "name": "DDD",
+      "description": "DDD",
+      "classifier": "Complex",
+      "attributes": [],
+      "createdAt": "2016-05-11T18:19:07.345Z",
+      "lastModifiedAt": "2016-05-11T18:19:07.345Z"
+    },
+    {
+      "id": "c6ab9d71-5054-40ea-ad30-92b7b66d5bb6",
+      "version": 1,
+      "name": "EEE",
+      "description": "EEE",
+      "classifier": "Complex",
+      "attributes": [],
+      "createdAt": "2016-05-11T18:19:11.639Z",
+      "lastModifiedAt": "2016-05-11T18:19:11.639Z"
+    },
+    {
+      "id": "67ac9918-e474-4abd-9017-a0ca64444d6d",
+      "version": 1,
+      "name": "GGG",
+      "description": "GGG",
+      "classifier": "Complex",
+      "attributes": [],
+      "createdAt": "2016-05-11T18:19:24.674Z",
+      "lastModifiedAt": "2016-05-11T18:19:24.674Z"
+    }
+  ]
+}

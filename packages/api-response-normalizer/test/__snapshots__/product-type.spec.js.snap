@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when the response is from \`/product-type/:id\` should normalize response 1`] = `
+Object {
+  "entities": Object {
+    "productTypes": Object {
+      "10ce62c7-3809-493b-ace4-1d640bec4ce4": Object {
+        "attributes": Array [
+          Object {
+            "attributeConstraint": "None",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": true,
+            "isSearchable": true,
+            "label": Object {
+              "en": "Foo",
+            },
+            "name": "foo",
+            "type": Object {
+              "name": "text",
+            },
+          },
+          Object {
+            "attributeConstraint": "SameForAll",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "en": "Count",
+            },
+            "name": "count",
+            "type": Object {
+              "name": "enum",
+              "values": Array [
+                Object {
+                  "key": "one",
+                  "label": "One",
+                },
+                Object {
+                  "key": "two",
+                  "label": "Two",
+                },
+              ],
+            },
+          },
+          Object {
+            "attributeConstraint": "None",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "de": "Attribute TEXT None Single (de)",
+              "en": "Attribute TEXT None Single (en)",
+              "es": "Attribute TEXT None Single (es)",
+              "fr": "Attribute TEXT None Single (fr)",
+              "it": "Attribute TEXT None Single (it)",
+            },
+            "name": "attr-text-n-s",
+            "type": Object {
+              "name": "text",
+            },
+          },
+          Object {
+            "attributeConstraint": "SameForAll",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "de": "Attribute TEXT SameForAll Single (de)",
+              "en": "Attribute TEXT SameForAll Single (en)",
+              "es": "Attribute TEXT SameForAll Single (es)",
+              "fr": "Attribute TEXT SameForAll Single (fr)",
+              "it": "Attribute TEXT SameForAll Single (it)",
+            },
+            "name": "attr-text-sfa-s",
+            "type": Object {
+              "name": "text",
+            },
+          },
+          Object {
+            "attributeConstraint": "None",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "en": "test en",
+            },
+            "name": "testing_attribute_name",
+            "type": Object {
+              "name": "number",
+            },
+          },
+        ],
+        "classifier": "Complex",
+        "createdAt": "2016-05-11T15:01:13.663Z",
+        "description": "asdkjasdkj",
+        "id": "10ce62c7-3809-493b-ace4-1d640bec4ce4",
+        "lastModifiedAt": "2017-09-27T13:26:31.278Z",
+        "name": "Second product type",
+        "version": 4,
+      },
+    },
+  },
+  "result": "10ce62c7-3809-493b-ace4-1d640bec4ce4",
+}
+`;

@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when the response is from \`/product-type\` should normalize response 1`] = `
+Object {
+  "entities": Object {
+    "productTypes": Object {
+      "10ce62c7-3809-493b-ace4-1d640bec4ce4": Object {
+        "attributes": Array [
+          Object {
+            "attributeConstraint": "None",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": true,
+            "isSearchable": true,
+            "label": Object {
+              "en": "Foo",
+            },
+            "name": "foo",
+            "type": Object {
+              "name": "text",
+            },
+          },
+          Object {
+            "attributeConstraint": "SameForAll",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "en": "Count",
+            },
+            "name": "count",
+            "type": Object {
+              "name": "enum",
+              "values": Array [
+                Object {
+                  "key": "one",
+                  "label": "One",
+                },
+                Object {
+                  "key": "two",
+                  "label": "Two",
+                },
+              ],
+            },
+          },
+          Object {
+            "attributeConstraint": "None",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "de": "Attribute TEXT None Single (de)",
+              "en": "Attribute TEXT None Single (en)",
+              "es": "Attribute TEXT None Single (es)",
+              "fr": "Attribute TEXT None Single (fr)",
+              "it": "Attribute TEXT None Single (it)",
+            },
+            "name": "attr-text-n-s",
+            "type": Object {
+              "name": "text",
+            },
+          },
+          Object {
+            "attributeConstraint": "SameForAll",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "de": "Attribute TEXT SameForAll Single (de)",
+              "en": "Attribute TEXT SameForAll Single (en)",
+              "es": "Attribute TEXT SameForAll Single (es)",
+              "fr": "Attribute TEXT SameForAll Single (fr)",
+              "it": "Attribute TEXT SameForAll Single (it)",
+            },
+            "name": "attr-text-sfa-s",
+            "type": Object {
+              "name": "text",
+            },
+          },
+          Object {
+            "attributeConstraint": "None",
+            "displayGroup": "Other",
+            "inputHint": "SingleLine",
+            "isRequired": false,
+            "isSearchable": true,
+            "label": Object {
+              "en": "test en",
+            },
+            "name": "testing_attribute_name",
+            "type": Object {
+              "name": "number",
+            },
+          },
+        ],
+        "classifier": "Complex",
+        "createdAt": "2016-05-11T15:01:13.663Z",
+        "description": "asdkjasdkj",
+        "id": "10ce62c7-3809-493b-ace4-1d640bec4ce4",
+        "lastModifiedAt": "2017-09-27T13:26:31.278Z",
+        "name": "Second product type",
+        "version": 4,
+      },
+      "67ac9918-e474-4abd-9017-a0ca64444d6d": Object {
+        "attributes": Array [],
+        "classifier": "Complex",
+        "createdAt": "2016-05-11T18:19:24.674Z",
+        "description": "GGG",
+        "id": "67ac9918-e474-4abd-9017-a0ca64444d6d",
+        "lastModifiedAt": "2016-05-11T18:19:24.674Z",
+        "name": "GGG",
+        "version": 1,
+      },
+      "6dd09d55-0a8d-4c2f-8c86-b1cddf1e6ffe": Object {
+        "attributes": Array [],
+        "classifier": "Complex",
+        "createdAt": "2016-05-11T18:19:07.345Z",
+        "description": "DDD",
+        "id": "6dd09d55-0a8d-4c2f-8c86-b1cddf1e6ffe",
+        "lastModifiedAt": "2016-05-11T18:19:07.345Z",
+        "name": "DDD",
+        "version": 1,
+      },
+      "a785f361-bbde-4411-b0f5-31d17c2031a1": Object {
+        "attributes": Array [],
+        "classifier": "Complex",
+        "createdAt": "2016-05-11T18:19:02.181Z",
+        "description": "CCC",
+        "id": "a785f361-bbde-4411-b0f5-31d17c2031a1",
+        "lastModifiedAt": "2016-05-11T18:19:02.181Z",
+        "name": "CCC",
+        "version": 1,
+      },
+      "c6ab9d71-5054-40ea-ad30-92b7b66d5bb6": Object {
+        "attributes": Array [],
+        "classifier": "Complex",
+        "createdAt": "2016-05-11T18:19:11.639Z",
+        "description": "EEE",
+        "id": "c6ab9d71-5054-40ea-ad30-92b7b66d5bb6",
+        "lastModifiedAt": "2016-05-11T18:19:11.639Z",
+        "name": "EEE",
+        "version": 1,
+      },
+    },
+  },
+  "result": Object {
+    "count": 5,
+    "limit": 5,
+    "offset": 0,
+    "results": Array [
+      "10ce62c7-3809-493b-ace4-1d640bec4ce4",
+      "a785f361-bbde-4411-b0f5-31d17c2031a1",
+      "6dd09d55-0a8d-4c2f-8c86-b1cddf1e6ffe",
+      "c6ab9d71-5054-40ea-ad30-92b7b66d5bb6",
+      "67ac9918-e474-4abd-9017-a0ca64444d6d",
+    ],
+    "total": 18,
+  },
+}
+`;

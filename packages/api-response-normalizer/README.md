@@ -29,3 +29,4 @@ npm install --save @commercetools/api-response-normalizer
 * ✅ Type
 * ✅ Customer
 * ✅ Address
+* ✅ ProductType

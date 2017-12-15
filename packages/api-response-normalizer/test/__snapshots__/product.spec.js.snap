@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`when the response is from \`/product/:id\` should normalize tiny response 1`] = `
+exports[`when the response is from \`/product/:id\` should normalize response 1`] = `
 Object {
   "entities": Object {
     "categories": Object {

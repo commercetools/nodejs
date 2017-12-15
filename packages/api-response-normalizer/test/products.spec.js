@@ -3,7 +3,7 @@ import productAResponse from './fixtures/product-1.json'
 import productBResponse from './fixtures/product-2.json'
 
 describe('when the response is from `/products`', () => {
-  it('should normalize reduced response', () => {
+  it('should normalize response', () => {
     expect(
       normalizeProducts({
         limit: 5,
