@@ -269,4 +269,68 @@ describe('Actions', () => {
     const actual = discountCodesSync.buildActions(now, before)
     expect(actual).toEqual(expected)
   })
+
+  describe('custom fields', () => {
+    it('should build `setCustomType` action', () => {
+      const before = {
+        custom: {
+          type: {
+            typeId: 'type',
+            id: 'customType1',
+          },
+          fields: {
+            customField1: true,
+          },
+        },
+      }
+      const now = {
+        custom: {
+          type: {
+            typeId: 'type',
+            id: 'customType2',
+          },
+          fields: {
+            customField1: true,
+          },
+        },
+      }
+      const actual = discountCodesSync.buildActions(now, before)
+      const expected = [{ action: 'setCustomType', ...now.custom }]
+      expect(actual).toEqual(expected)
+    })
+  })
+
+  it('should build `setCustomField` action', () => {
+    const before = {
+      custom: {
+        type: {
+          typeId: 'type',
+          id: 'customType1',
+        },
+        fields: {
+          customField1: false,
+        },
+      },
+    }
+    const now = {
+      custom: {
+        type: {
+          typeId: 'type',
+          id: 'customType1',
+        },
+        fields: {
+          customField1: true,
+        },
+      },
+    }
+    const actual = discountCodesSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'setCustomField',
+        name: 'customField1',
+        value: true,
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
 })
