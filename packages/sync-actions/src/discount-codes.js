@@ -1,6 +1,7 @@
 import flatten from 'lodash.flatten'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
+import actionsMapCustom from './utils/action-map-custom'
 import { actionsMapBase } from './discount-codes-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
@@ -13,6 +14,11 @@ function createDiscountCodesMapActions(mapActionGroup) {
     allActions.push(
       mapActionGroup('base', () => actionsMapBase(diff, oldObj, newObj))
     )
+
+    allActions.push(
+      mapActionGroup('custom', () => actionsMapCustom(diff, newObj, oldObj))
+    )
+
     return flatten(allActions)
   }
 }

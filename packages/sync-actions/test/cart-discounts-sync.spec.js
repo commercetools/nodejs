@@ -3,7 +3,7 @@ import { baseActionsList } from '../src/cart-discounts-actions'
 
 describe('Cart Discounts Exports', () => {
   it('action group list', () => {
-    expect(actionGroups).toEqual(['base'])
+    expect(actionGroups).toEqual(['base', 'custom'])
   })
 
   describe('action list', () => {
@@ -330,6 +330,70 @@ describe('Cart Discounts Actions', () => {
       },
     ]
     const actual = cartDiscountsSync.buildActions(now, before)
+    expect(actual).toEqual(expected)
+  })
+
+  describe('custom fields', () => {
+    it('should build `setCustomType` action', () => {
+      const before = {
+        custom: {
+          type: {
+            typeId: 'type',
+            id: 'customType1',
+          },
+          fields: {
+            customField1: true,
+          },
+        },
+      }
+      const now = {
+        custom: {
+          type: {
+            typeId: 'type',
+            id: 'customType2',
+          },
+          fields: {
+            customField1: true,
+          },
+        },
+      }
+      const actual = cartDiscountsSync.buildActions(now, before)
+      const expected = [{ action: 'setCustomType', ...now.custom }]
+      expect(actual).toEqual(expected)
+    })
+  })
+
+  it('should build `setCustomField` action', () => {
+    const before = {
+      custom: {
+        type: {
+          typeId: 'type',
+          id: 'customType1',
+        },
+        fields: {
+          customField1: false,
+        },
+      },
+    }
+    const now = {
+      custom: {
+        type: {
+          typeId: 'type',
+          id: 'customType1',
+        },
+        fields: {
+          customField1: true,
+        },
+      },
+    }
+    const actual = cartDiscountsSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'setCustomField',
+        name: 'customField1',
+        value: true,
+      },
+    ]
     expect(actual).toEqual(expected)
   })
 })
