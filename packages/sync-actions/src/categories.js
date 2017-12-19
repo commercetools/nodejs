@@ -3,6 +3,7 @@ import type { SyncAction, ActionGroup } from 'types/sdk'
 import flatten from 'lodash.flatten'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
+import actionsMapCustom from './utils/create-map-action-custom'
 import * as categoryActions from './category-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
@@ -31,9 +32,7 @@ function createCategoryMapActions(mapActionGroup) {
     )
 
     allActions.push(
-      mapActionGroup('custom', () =>
-        categoryActions.actionsMapCustom(diff, oldObj, newObj)
-      )
+      mapActionGroup('custom', () => actionsMapCustom(diff, oldObj, newObj))
     )
 
     return flatten(allActions)
