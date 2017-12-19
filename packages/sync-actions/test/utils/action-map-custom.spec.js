@@ -1,6 +1,6 @@
 import * as diffpatcher from '../../src/utils/diffpatcher'
 import createBuildActions from '../../src/utils/create-build-actions'
-import doMapActions from '../../src/utils/create-map-action-custom'
+import doMapActions from '../../src/utils/action-map-custom'
 
 describe('buildActions', () => {
   let buildActions
