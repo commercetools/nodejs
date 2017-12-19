@@ -5,8 +5,9 @@ const Actions = {
   setCustomField: 'setCustomField',
 }
 
-const hasCustomFields = diff => Array.isArray(diff.custom)
-const hasCustomType = diff => Boolean(diff.custom.type)
+const hasSingleCustomFieldChanged = diff => Array.isArray(diff.custom)
+const haveMultipleCustomFieldsChanged = diff => Boolean(diff.custom.fields)
+const hasCustomTypeChanged = diff => Boolean(diff.custom.type)
 const extractCustomType = (diff, previousObject) =>
   Array.isArray(diff.custom.type)
     ? diffpatcher.getDeltaValue(diff.custom.type, previousObject)
@@ -27,11 +28,11 @@ const extractFieldValue = (diffedFields, nextFields, fieldName) =>
 export default function actionsMapCustom(diff, nextObject, previousObject) {
   const actions = []
   if (!diff.custom) return actions
-  if (hasCustomFields(diff)) {
+  if (hasSingleCustomFieldChanged(diff)) {
     // If custom is not defined on the new or old category
     const custom = diffpatcher.getDeltaValue(diff.custom, previousObject)
     actions.push({ action: Actions.setCustomType, ...custom })
-  } else if (hasCustomType(diff)) {
+  } else if (hasCustomTypeChanged(diff)) {
     // If custom is set to an empty object on the new or old category
     const type = extractCustomType(diff, previousObject)
 
@@ -45,7 +46,7 @@ export default function actionsMapCustom(diff, nextObject, previousObject) {
         },
         fields: extractTypeFields(diff.custom.fields, nextObject.custom.fields),
       })
-  } else if (diff.custom.fields) {
+  } else if (haveMultipleCustomFieldsChanged(diff)) {
     const customFieldsActions = Object.keys(diff.custom.fields).map(name => ({
       action: Actions.setCustomField,
       name,
