@@ -590,14 +590,7 @@ babel-helpers@^6.24.1:
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
 
-babel-jest@22.0.1:
-  version "22.0.1"
-  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-22.0.1.tgz#4232ded3a11ff8cad2d4417c5f75eaecdb2a73a5"
-  dependencies:
-    babel-plugin-istanbul "^4.1.5"
-    babel-preset-jest "^22.0.1"
-
-babel-jest@^22.0.2:
+babel-jest@22.0.2, babel-jest@^22.0.2:
   version "22.0.2"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-22.0.2.tgz#7d9fbc60fb4ff4415df4a16c884683904daf30a8"
   dependencies:
@@ -1010,7 +1003,7 @@ babel-preset-env@1.6.1:
     invariant "^2.2.2"
     semver "^5.3.0"
 
-babel-preset-jest@^22.0.1, babel-preset-jest@^22.0.2:
+babel-preset-jest@^22.0.2:
   version "22.0.2"
   resolved "https://registry.yarnpkg.com/babel-preset-jest/-/babel-preset-jest-22.0.2.tgz#d4a80171d0ea4b4ac39ac7272a033d59ffa9a6f1"
   dependencies:
@@ -1633,11 +1626,11 @@ commitizen@2.9.6:
     shelljs "0.7.6"
     strip-json-comments "2.0.1"
 
-common-tags@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/common-tags/-/common-tags-1.4.0.tgz#1187be4f3d4cf0c0427d43f74eef1f73501614c0"
+common-tags@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/common-tags/-/common-tags-1.5.1.tgz#e2e39931a013cd02253defeed89a1ad615a27f07"
   dependencies:
-    babel-runtime "^6.18.0"
+    babel-runtime "^6.26.0"
 
 compare-func@^1.3.1:
   version "1.3.2"
@@ -1907,9 +1900,9 @@ create-error-class@^3.0.0, create-error-class@^3.0.1:
   dependencies:
     capture-stack-trace "^1.0.0"
 
-cross-env@5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.1.0.tgz#1f12d6b3777d5847dcf9cf39fbee3c6a76dd5058"
+cross-env@5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.1.1.tgz#b6d8ab97f304c0f71dae7277b75fe424c08dfa74"
   dependencies:
     cross-spawn "^5.1.0"
     is-windows "^1.0.0"
@@ -2391,9 +2384,9 @@ eslint-config-airbnb@16.1.0:
   dependencies:
     eslint-config-airbnb-base "^12.1.0"
 
-eslint-config-prettier@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-2.7.0.tgz#7bbfef66ad783277836f4ea556e68b9bcc9da4d0"
+eslint-config-prettier@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-2.9.0.tgz#5ecd65174d486c22dff389fe036febf502d468a3"
   dependencies:
     get-stdin "^5.0.1"
 
@@ -2449,9 +2442,9 @@ eslint-plugin-import@2.8.0:
     minimatch "^3.0.3"
     read-pkg-up "^2.0.0"
 
-eslint-plugin-jest@^21.2.0:
-  version "21.3.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.3.2.tgz#b1cefc05f0fed700eb40185a94d16f6d575d1ef9"
+eslint-plugin-jest@^21.5.0:
+  version "21.5.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.5.0.tgz#c7a3bd2ee9d1c832b4e31dec89f6ad93e08d4853"
 
 eslint-plugin-jsx-a11y@6.0.3:
   version "6.0.3"
@@ -2465,9 +2458,9 @@ eslint-plugin-jsx-a11y@6.0.3:
     emoji-regex "^6.1.0"
     jsx-ast-utils "^2.0.0"
 
-eslint-plugin-prettier@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-2.3.1.tgz#e7a746c67e716f335274b88295a9ead9f544e44d"
+eslint-plugin-prettier@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-2.4.0.tgz#85cab0775c6d5e3344ef01e78d960f166fb93aae"
   dependencies:
     fast-diff "^1.1.1"
     jest-docblock "^21.0.0"
@@ -4080,7 +4073,7 @@ jest-changed-files@^22.0.2:
   dependencies:
     throat "^4.0.0"
 
-jest-cli@^22.0.1:
+jest-cli@^22.0.2:
   version "22.0.2"
   resolved "https://registry.yarnpkg.com/jest-cli/-/jest-cli-22.0.2.tgz#8a7478388fb1c9d35d36006924c36732a7e27986"
   dependencies:
@@ -4318,11 +4311,11 @@ jest-worker@^22.0.2:
   dependencies:
     merge-stream "^1.0.1"
 
-jest@22.0.1:
-  version "22.0.1"
-  resolved "https://registry.yarnpkg.com/jest/-/jest-22.0.1.tgz#79047f5d133b8e31fa0a4c0afe5a2b5e06bd9e86"
+jest@22.0.2:
+  version "22.0.2"
+  resolved "https://registry.yarnpkg.com/jest/-/jest-22.0.2.tgz#36ea804dc595ba6d6db9f0588477e30e877e9e03"
   dependencies:
-    jest-cli "^22.0.1"
+    jest-cli "^22.0.2"
 
 jju@^1.1.0:
   version "1.3.0"
@@ -5978,9 +5971,9 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-prettier@^1.8.0:
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.8.2.tgz#bff83e7fd573933c607875e5ba3abbdffb96aeb8"
+prettier@^1.9.2:
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.9.2.tgz#96bc2132f7a32338e6078aeb29727178c6335827"
 
 pretty-format@^22.0.2:
   version "22.0.2"
@@ -6583,9 +6576,9 @@ rimraf@~2.5.4:
   dependencies:
     glob "^7.0.5"
 
-rollup-plugin-babel@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-babel/-/rollup-plugin-babel-3.0.2.tgz#a2765dea0eaa8aece351c983573300d17497495b"
+rollup-plugin-babel@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-babel/-/rollup-plugin-babel-3.0.3.tgz#63adedc863130327512a4a9006efc2241c5b7c15"
   dependencies:
     rollup-pluginutils "^1.5.0"
 
@@ -6599,9 +6592,9 @@ rollup-plugin-commonjs@8.2.6:
     resolve "^1.4.0"
     rollup-pluginutils "^2.0.1"
 
-rollup-plugin-filesize@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-filesize/-/rollup-plugin-filesize-1.4.2.tgz#eebdf571217e2fe14ab14a6534bf21f771a053b1"
+rollup-plugin-filesize@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-filesize/-/rollup-plugin-filesize-1.5.0.tgz#bb5841242d88be57f231c9e8a3a541925392178b"
   dependencies:
     boxen "^1.1.0"
     colors "^1.1.2"
