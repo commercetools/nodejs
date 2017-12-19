@@ -3,10 +3,11 @@ import flatten from 'lodash.flatten'
 import type { SyncAction, ActionGroup } from '../../../types/sdk'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
+import actionsMapCustom from './utils/action-map-custom'
 import * as customerActions from './customer-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
-export const actionGroups = ['base', 'references', 'addresses']
+export const actionGroups = ['base', 'references', 'addresses', 'custom']
 
 function createCustomerMapActions(mapActionGroup) {
   return function doMapActions(diff, newObj, oldObj /* , options */) {
@@ -28,6 +29,10 @@ function createCustomerMapActions(mapActionGroup) {
       mapActionGroup('addresses', () =>
         customerActions.actionsMapAddresses(diff, oldObj, newObj)
       )
+    )
+
+    allActions.push(
+      mapActionGroup('custom', () => actionsMapCustom(diff, newObj, oldObj))
     )
 
     return flatten(allActions)
