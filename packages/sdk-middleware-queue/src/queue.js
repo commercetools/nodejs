@@ -12,9 +12,9 @@ type Task = {
   response: MiddlewareResponse,
 }
 
-export default function createQueueMiddleware(
-  { concurrency = 20 }: QueueMiddlewareOptions = {}
-): Middleware {
+export default function createQueueMiddleware({
+  concurrency = 20,
+}: QueueMiddlewareOptions = {}): Middleware {
   const queue: Array<Task> = []
   let runningCount = 0
 
