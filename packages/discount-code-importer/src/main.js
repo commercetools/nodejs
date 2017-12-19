@@ -1,14 +1,4 @@
 /* @flow */
-import type {
-  ApiConfigOptions,
-  LoggerOptions,
-  ChunkOptions,
-  CodeDataArray,
-  CodeData,
-  ConstructorOptions,
-  Summary,
-} from 'types/discountCodes'
-import type { Client, SyncAction } from 'types/sdk'
 import npmlog from 'npmlog'
 import Promise from 'bluebird'
 import _ from 'lodash'
@@ -18,6 +8,16 @@ import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import { createSyncDiscountCodes } from '@commercetools/sync-actions'
+import type {
+  ApiConfigOptions,
+  LoggerOptions,
+  ChunkOptions,
+  CodeDataArray,
+  CodeData,
+  ConstructorOptions,
+  Summary,
+} from '../../../types/discountCodes'
+import type { Client, SyncAction } from '../../../types/sdk'
 import pkg from '../package.json'
 
 class DiscountCodeImportError extends Error {

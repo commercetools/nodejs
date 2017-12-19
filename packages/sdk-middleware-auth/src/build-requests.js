@@ -1,10 +1,10 @@
 /* @flow */
+import * as authScopes from './scopes'
 import type {
   AuthMiddlewareOptions,
   PasswordAuthMiddlewareOptions,
   RefreshAuthMiddlewareOptions,
-} from 'types/sdk'
-import * as authScopes from './scopes'
+} from '../../../types/sdk'
 
 type BuiltRequestParams = {
   basicAuth: string,

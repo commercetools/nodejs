@@ -5,7 +5,7 @@ import type {
   Middleware,
   MiddlewareRequest,
   MiddlewareResponse,
-} from 'types/sdk'
+} from '../../../types/sdk'
 
 type Task = {
   request: MiddlewareRequest,
