@@ -24,10 +24,9 @@ const extractFieldValue = (diffedFields, nextFields, fieldName) =>
     ? diffpatcher.getDeltaValue(diffedFields[fieldName])
     : nextFields[fieldName]
 
-export default function actionsMapCustom(diff, previousObject, nextObject) {
+export default function actionsMapCustom(diff, nextObject, previousObject) {
   const actions = []
   if (!diff.custom) return actions
-
   if (hasCustomFields(diff)) {
     // If custom is not defined on the new or old category
     const custom = diffpatcher.getDeltaValue(diff.custom, previousObject)

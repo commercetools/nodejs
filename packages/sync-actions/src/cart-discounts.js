@@ -16,7 +16,7 @@ function createCartDiscountsMapActions(mapActionGroup) {
     )
 
     allActions.push(
-      mapActionGroup('custom', () => actionsMapCustom(diff, oldObj, newObj))
+      mapActionGroup('custom', () => actionsMapCustom(diff, newObj, oldObj))
     )
 
     return flatten(allActions)
