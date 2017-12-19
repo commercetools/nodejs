@@ -1,19 +1,18 @@
 /* @flow */
-import type {
-  ApiConfigOptions,
-  ExportConfigOptions,
-  LoggerOptions,
-  ProductProjection,
-  ProcessFnResponse,
-} from 'types/product'
-import type { Client, ClientRequest } from 'types/sdk'
-
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import JSONStream from 'JSONStream'
+import type {
+  ApiConfigOptions,
+  ExportConfigOptions,
+  LoggerOptions,
+  ProductProjection,
+  ProcessFnResponse,
+} from '../../../types/product'
+import type { Client, ClientRequest } from '../../../types/sdk'
 import pkg from '../package.json'
 
 export default class ProductExporter {

@@ -1,15 +1,15 @@
 /* @flow */
-import type {
-  LoggerOptions,
-  ParseOptions,
-  ParserSummary,
-} from 'types/discountCodes'
 import _ from 'lodash'
 import csv from 'csv-parser'
 import JSONStream from 'JSONStream'
 import highland from 'highland'
 import npmlog from 'npmlog'
 import { unflatten } from 'flat'
+import type {
+  LoggerOptions,
+  ParseOptions,
+  ParserSummary,
+} from '../../../types/discountCodes'
 import castTypes from './utils'
 
 export default class CsvParserDiscountCode {

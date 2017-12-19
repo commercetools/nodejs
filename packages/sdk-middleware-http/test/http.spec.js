@@ -282,9 +282,7 @@ describe('Http', () => {
             expect(res.error.originalRequest).toBeDefined()
             expect(res.error.retryCount).toBe(2)
             expect(res.error.message).toBe(
-              `request to ${
-                testHost
-              }/foo/bar failed, reason: Connection timeout`
+              `request to ${testHost}/foo/bar failed, reason: Connection timeout`
             )
             expect(res.body).toBeUndefined()
             expect(res.statusCode).toBe(0)

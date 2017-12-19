@@ -1,4 +1,6 @@
 /* @flow */
+/* global fetch */
+import 'isomorphic-fetch'
 import type {
   MiddlewareRequest,
   Next,
@@ -6,9 +8,7 @@ import type {
   AuthMiddlewareBaseOptions,
   PasswordAuthMiddlewareOptions,
   AuthMiddlewareOptions,
-} from 'types/sdk'
-/* global fetch */
-import 'isomorphic-fetch'
+} from '../../../types/sdk'
 import { buildRequestForRefreshTokenFlow } from './build-requests'
 
 function mergeAuthHeader(
