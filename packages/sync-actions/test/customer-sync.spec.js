@@ -3,7 +3,7 @@ import { baseActionsList, referenceActionsList } from '../src/customer-actions'
 
 describe('Exports', () => {
   it('action group list', () => {
-    expect(actionGroups).toEqual(['base', 'references', 'addresses'])
+    expect(actionGroups).toEqual(['base', 'references', 'addresses', 'custom'])
   })
 
   it('correctly define base actions list', () => {
@@ -217,6 +217,70 @@ describe('Actions', () => {
         // CREATE ACTIONS LAST
         action: 'addAddress',
         address: now.addresses[2],
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
+
+  describe('custom fields', () => {
+    it('should build `setCustomType` action', () => {
+      const before = {
+        custom: {
+          type: {
+            typeId: 'type',
+            id: 'customType1',
+          },
+          fields: {
+            customField1: true,
+          },
+        },
+      }
+      const now = {
+        custom: {
+          type: {
+            typeId: 'type',
+            id: 'customType2',
+          },
+          fields: {
+            customField1: true,
+          },
+        },
+      }
+      const actual = customerSync.buildActions(now, before)
+      const expected = [{ action: 'setCustomType', ...now.custom }]
+      expect(actual).toEqual(expected)
+    })
+  })
+
+  it('should build `setCustomField` action', () => {
+    const before = {
+      custom: {
+        type: {
+          typeId: 'type',
+          id: 'customType1',
+        },
+        fields: {
+          customField1: false,
+        },
+      },
+    }
+    const now = {
+      custom: {
+        type: {
+          typeId: 'type',
+          id: 'customType1',
+        },
+        fields: {
+          customField1: true,
+        },
+      },
+    }
+    const actual = customerSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'setCustomField',
+        name: 'customField1',
+        value: true,
       },
     ]
     expect(actual).toEqual(expected)
