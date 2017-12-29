@@ -79,7 +79,6 @@ export default function createService(
         return {
           ...acc,
           ...queryLocation,
-          ...queryExpand,
         }
 
       if (feature === defaultFeatures.queryExpand)
