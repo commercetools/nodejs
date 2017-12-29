@@ -1,4 +1,5 @@
 /* @flow */
+import qs from 'querystring'
 import type {
   Client,
   ClientOptions,
@@ -9,8 +10,7 @@ import type {
   ProcessFn,
   ProcessOptions,
   SuccessResult,
-} from 'types/sdk'
-import qs from 'querystring'
+} from '../../../types/sdk'
 import validate from './validate'
 
 function compose(...funcs: Array<Function>): Function {

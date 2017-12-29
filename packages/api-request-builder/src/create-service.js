@@ -1,9 +1,4 @@
 /* @flow */
-import type {
-  ServiceBuilder,
-  ServiceBuilderDefinition,
-  ServiceBuilderParams,
-} from 'types/sdk'
 import {
   getDefaultQueryParams,
   getDefaultSearchParams,
@@ -22,6 +17,11 @@ import * as queryPage from './query-page'
 import * as queryProjection from './query-projection'
 import * as querySuggest from './query-suggest'
 import * as querySearch from './query-search'
+import type {
+  ServiceBuilder,
+  ServiceBuilderDefinition,
+  ServiceBuilderParams,
+} from '../../../types/sdk'
 
 type UseKey = {
   withProjectKey: boolean,

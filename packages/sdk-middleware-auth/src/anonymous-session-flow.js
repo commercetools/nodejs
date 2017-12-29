@@ -6,7 +6,7 @@ import type {
   MiddlewareResponse,
   Next,
   Task,
-} from 'types/sdk'
+} from '../../../types/sdk'
 
 import { buildRequestForAnonymousSessionFlow } from './build-requests'
 import authMiddlewareBase from './base-auth-flow'

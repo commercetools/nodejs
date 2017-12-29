@@ -1,16 +1,15 @@
 /* @flow */
+/* global fetch Request Headers */
+import 'isomorphic-fetch'
+import parseHeaders from './parse-headers'
+import getErrorByCode, { NetworkError, HttpError } from './errors'
 import type {
   HttpErrorType,
   HttpMiddlewareOptions,
   Middleware,
   MiddlewareRequest,
   MiddlewareResponse,
-} from 'types/sdk'
-
-/* global fetch Request Headers */
-import 'isomorphic-fetch'
-import parseHeaders from './parse-headers'
-import getErrorByCode, { NetworkError, HttpError } from './errors'
+} from '../../../types/sdk'
 
 function createError({ statusCode, message, ...rest }): HttpErrorType {
   let errorMessage = message || 'Unexpected non-JSON error response'
