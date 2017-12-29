@@ -96,7 +96,7 @@ describe('defaultParams', () => {
     })
   })
 
-  it('should set default params for shipping-methods', () => {
+  describe('shipping methods', () => {
     const serviceFeatures = [
       features.query,
       features.queryOne,
@@ -105,11 +105,21 @@ describe('defaultParams', () => {
     ]
     const params = {}
     setDefaultParams.call({ features: serviceFeatures, params })
-    expect(params.location).toBeDefined()
-    expect(params.location).toEqual({
-      country: '',
-      currency: '',
-      state: '',
+
+    it('should set a default location object', () => {
+      expect(params.location).toBeDefined()
+    })
+
+    it('should set country in locations', () => {
+      expect(params.location.country).toEqual('')
+    })
+
+    it('should set currency in locations', () => {
+      expect(params.location.currency).toEqual('')
+    })
+
+    it('should set state in locations', () => {
+      expect(params.location.state).toEqual('')
     })
   })
 })
