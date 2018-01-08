@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/inventories-exporter",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Export inventories from the commercetools platform.",
   "keywords": [
     "commercetools",
@@ -34,7 +34,7 @@
     "build": "babel src --out-dir lib"
   },
   "dependencies": {
-    "@commercetools/api-request-builder": "^3.4.1",
+    "@commercetools/api-request-builder": "^3.5.0",
     "@commercetools/get-credentials": "^2.1.2",
     "@commercetools/sdk-client": "^1.5.3",
     "@commercetools/sdk-middleware-auth": "^3.4.4",
