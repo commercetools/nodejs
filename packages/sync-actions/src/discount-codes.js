@@ -5,7 +5,7 @@ import actionsMapCustom from './utils/action-map-custom'
 import { actionsMapBase } from './discount-codes-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
-export const actionGroups = ['base', 'references']
+export const actionGroups = ['base', 'custom']
 
 function createDiscountCodesMapActions(mapActionGroup) {
   return function doMapActions(diff, newObj, oldObj) {
