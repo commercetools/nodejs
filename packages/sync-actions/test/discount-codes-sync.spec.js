@@ -74,6 +74,12 @@ describe('Exports', () => {
         expect.arrayContaining([{ action: 'setValidUntil', key: 'validUntil' }])
       )
     })
+
+    it('should contain `changeGroups` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([{ action: 'changeGroups', key: 'groups' }])
+      )
+    })
   })
 })
 
@@ -264,6 +270,25 @@ describe('Actions', () => {
       {
         action: 'setValidUntil',
         validUntil: 'date2',
+      },
+    ]
+    const actual = discountCodesSync.buildActions(now, before)
+    expect(actual).toEqual(expected)
+  })
+
+  it('should build the `changeGroups` action', () => {
+    const before = {
+      groups: ['A'],
+    }
+
+    const now = {
+      groups: ['A', 'B'],
+    }
+
+    const expected = [
+      {
+        action: 'changeGroups',
+        groups: ['A', 'B'],
       },
     ]
     const actual = discountCodesSync.buildActions(now, before)
