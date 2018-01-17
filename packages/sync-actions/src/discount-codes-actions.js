@@ -13,6 +13,7 @@ export const baseActionsList = [
   { action: 'changeCartDiscounts', key: 'cartDiscounts' },
   { action: 'setValidFrom', key: 'validFrom' },
   { action: 'setValidUntil', key: 'validUntil' },
+  { action: 'changeGroups', key: 'groups' },
 ]
 
 export function actionsMapBase(diff, oldObj, newObj) {
