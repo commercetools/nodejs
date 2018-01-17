@@ -3,7 +3,7 @@ import { baseActionsList } from '../src/discount-codes-actions'
 
 describe('Exports', () => {
   it('action group list', () => {
-    expect(actionGroups).toEqual(['base', 'references'])
+    expect(actionGroups).toEqual(['base', 'custom'])
   })
 
   describe('action list', () => {
