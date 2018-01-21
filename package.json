@@ -69,7 +69,7 @@
     "gitbook-plugin-ga": "^1.0.1",
     "gitbook-plugin-github": "^2.0.0",
     "gitbook-plugin-prism": "^2.2.0",
-    "husky": "0.14.3",
+    "husky": "0.15.0-rc.2",
     "jest": "22.1.2",
     "npm-check-updates": "2.14.0",
     "lerna": "2.7.1",
