@@ -13,7 +13,7 @@
       "Type: Maintenance": ":house: Maintenance"
     },
     "cacheDir": ".changelog",
-    "ignoreCommitters": ["renovate"]
+    "ignoreCommitters": ["renovate", "renovate-bot"]
   },
   "command": {
     "publish": {
