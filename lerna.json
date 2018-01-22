@@ -13,7 +13,7 @@
       "Type: Maintenance": ":house: Maintenance"
     },
     "cacheDir": ".changelog",
-    "ignoreCommitters": ["greenkeeper"]
+    "ignoreCommitters": ["renovate"]
   },
   "command": {
     "publish": {
