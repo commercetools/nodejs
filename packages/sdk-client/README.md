@@ -2,7 +2,7 @@
 
 SDK Client for usage of commercetools platform API
 
-https://commercetools.github.io/nodejs/docs/sdk/api/#sdk-client
+https://commercetools.github.io/nodejs/sdk/api/sdkClient.html
 
 ## Install
 

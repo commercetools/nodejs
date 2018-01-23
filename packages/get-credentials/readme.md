@@ -2,7 +2,7 @@
 
 Retrieve commercetools platform credentials from environment variables or file system.
 
-https://commercetools.github.io/nodejs/api/get-credentials/
+https://commercetools.github.io/nodejs/sdk/api/getCredentials.html
 
 ## Install
 
