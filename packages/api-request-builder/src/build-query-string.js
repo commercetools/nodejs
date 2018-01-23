@@ -1,5 +1,5 @@
 /* @flow */
-import type { ServiceBuilderDefaultParams } from 'types/sdk'
+import type { ServiceBuilderDefaultParams } from '../../../types/sdk'
 
 /**
  * Build the query string with the given parameters.
@@ -27,6 +27,7 @@ export default function buildQueryString(
     version,
     customerId,
     cartId,
+    location,
   } = params
   let queryString = []
 
@@ -53,6 +54,13 @@ export default function buildQueryString(
     const { operator, where } = query
     const whereParams = where.join(encodeURIComponent(` ${operator} `))
     if (whereParams) queryString.push(`where=${whereParams}`)
+  }
+
+  if (location) {
+    const { country, currency, state } = location
+    if (country) queryString.push(`country=${country}`)
+    if (currency) queryString.push(`currency=${currency}`)
+    if (state) queryString.push(`state=${state}`)
   }
 
   if (pagination) {

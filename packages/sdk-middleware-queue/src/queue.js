@@ -5,16 +5,16 @@ import type {
   Middleware,
   MiddlewareRequest,
   MiddlewareResponse,
-} from 'types/sdk'
+} from '../../../types/sdk'
 
 type Task = {
   request: MiddlewareRequest,
   response: MiddlewareResponse,
 }
 
-export default function createQueueMiddleware(
-  { concurrency = 20 }: QueueMiddlewareOptions = {}
-): Middleware {
+export default function createQueueMiddleware({
+  concurrency = 20,
+}: QueueMiddlewareOptions = {}): Middleware {
   const queue: Array<Task> = []
   let runningCount = 0
 

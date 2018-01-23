@@ -1,9 +1,4 @@
 /* @flow */
-import type {
-  ServiceBuilder,
-  ServiceBuilderDefinition,
-  ServiceBuilderParams,
-} from 'types/sdk'
 import {
   getDefaultQueryParams,
   getDefaultSearchParams,
@@ -16,11 +11,17 @@ import withVersion from './version'
 import * as defaultFeatures from './features'
 import * as query from './query'
 import * as queryId from './query-id'
+import * as queryLocation from './query-location'
 import * as queryExpand from './query-expand'
 import * as queryPage from './query-page'
 import * as queryProjection from './query-projection'
 import * as querySuggest from './query-suggest'
 import * as querySearch from './query-search'
+import type {
+  ServiceBuilder,
+  ServiceBuilderDefinition,
+  ServiceBuilderParams,
+} from '../../../types/sdk'
 
 type UseKey = {
   withProjectKey: boolean,
@@ -74,6 +75,12 @@ export default function createService(
           ...queryId,
         }
 
+      if (feature === defaultFeatures.queryLocation)
+        return {
+          ...acc,
+          ...queryLocation,
+        }
+
       if (feature === defaultFeatures.queryExpand)
         return {
           ...acc,
@@ -117,7 +124,7 @@ export default function createService(
         (withProjectKey ? `/${options}` : '') +
         endpoint +
         // TODO this can lead to invalid URIs as getIdOrKey can return
-        //   "/?customerId", so there can be multiple questionmarks,
+        //   "/?customerId", so there can be multiple question marks,
         // same for when `queryParams` and `version` are present
         getIdOrKey(this.params) +
         (queryParams ? `?${queryParams}` : '')

@@ -31,6 +31,11 @@ describe('buildQueryString', () => {
           encodeURIComponent('name(en = "Bar") and categories(id = "123")'),
         ],
       },
+      location: {
+        country: 'DE',
+        currency: 'EUR',
+        state: 'Germany',
+      },
       search: {
         facet: [
           encodeURIComponent('variants.attributes.foo:"bar")'),
@@ -65,6 +70,7 @@ describe('buildQueryString', () => {
       `where=${encodeURIComponent(
         'name(en = "Foo") or name(en = "Bar") and categories(id = "123")'
       )}&` +
+      'country=DE&currency=EUR&state=Germany&' +
       'limit=10&offset=20&' +
       `sort=${encodeURIComponent('name.en desc')}&` +
       `sort=${encodeURIComponent('createdAt asc')}&` +

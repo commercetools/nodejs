@@ -1,11 +1,11 @@
 /* @flow */
+import createHttpUserAgent from '@commercetools/http-user-agent'
 import type {
   Middleware,
   MiddlewareRequest,
   MiddlewareResponse,
   UserAgentMiddlewareOptions,
-} from 'types/sdk'
-import createHttpUserAgent from '@commercetools/http-user-agent'
+} from '../../../types/sdk'
 
 export default function createUserAgentMiddleware(
   options: UserAgentMiddlewareOptions

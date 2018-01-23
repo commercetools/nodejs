@@ -134,7 +134,12 @@ export default {
   shippingMethods: {
     type: 'shipping-methods',
     endpoint: '/shipping-methods',
-    features: [features.query, features.queryOne, features.queryExpand],
+    features: [
+      features.query,
+      features.queryOne,
+      features.queryExpand,
+      features.queryLocation,
+    ],
   },
   shoppingLists: {
     type: 'shopping-lists',

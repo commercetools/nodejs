@@ -1,5 +1,5 @@
 /* @flow */
-import type { HttpUserAgentOptions } from 'types/sdk'
+import type { HttpUserAgentOptions } from '../../../types/sdk'
 /* global window */
 
 /*

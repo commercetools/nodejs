@@ -3,7 +3,7 @@ import type {
   Middleware,
   MiddlewareRequest,
   MiddlewareResponse,
-} from 'types/sdk'
+} from '../../../types/sdk'
 
 export default function createLoggerMiddleware(): Middleware {
   return next => (request: MiddlewareRequest, response: MiddlewareResponse) => {
