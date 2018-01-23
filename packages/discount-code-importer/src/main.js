@@ -1,14 +1,4 @@
 /* @flow */
-import type {
-  ApiConfigOptions,
-  LoggerOptions,
-  ChunkOptions,
-  CodeDataArray,
-  CodeData,
-  ConstructorOptions,
-  Summary,
-} from 'types/discountCodes'
-import type { Client, SyncAction } from 'types/sdk'
 import npmlog from 'npmlog'
 import Promise from 'bluebird'
 import _ from 'lodash'
@@ -18,6 +8,16 @@ import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import { createSyncDiscountCodes } from '@commercetools/sync-actions'
+import type {
+  ApiConfigOptions,
+  LoggerOptions,
+  ChunkOptions,
+  CodeDataArray,
+  CodeData,
+  ConstructorOptions,
+  Summary,
+} from '../../../types/discountCodes'
+import type { Client, SyncAction } from '../../../types/sdk'
 import pkg from '../package.json'
 
 class DiscountCodeImportError extends Error {
@@ -254,16 +254,11 @@ export default class DiscountCodeImport {
     else
       // eslint-disable-next-line max-len
       message = `Summary: there were ${created +
-        updated} successfully imported discount codes (${
-        created
-      } were newly created, ${updated} were updated and ${
-        unchanged
-      } were unchanged).`
+        updated} successfully imported discount codes (${created} were newly created, ${updated} were updated and ${unchanged} were unchanged).`
     if (createErrorCount || updateErrorCount)
       // eslint-disable-next-line max-len
-      message += ` ${createErrorCount + updateErrorCount} errors occured (${
-        createErrorCount
-      } create errors and ${updateErrorCount} update errors.)`
+      message += ` ${createErrorCount +
+        updateErrorCount} errors occured (${createErrorCount} create errors and ${updateErrorCount} update errors.)`
     return {
       reportMessage: message,
       detailedSummary: this._summary,

@@ -1,11 +1,4 @@
 /* @flow */
-import type {
-  ApiConfigOptions,
-  CodeData,
-  ExporterOptions,
-  LoggerOptions,
-} from 'types/discountCodes'
-import type { Client, ClientRequest } from 'types/sdk'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
@@ -14,6 +7,13 @@ import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-ag
 import csv from 'fast-csv'
 import JSONStream from 'JSONStream'
 import { flatten } from 'flat'
+import type {
+  ApiConfigOptions,
+  CodeData,
+  ExporterOptions,
+  LoggerOptions,
+} from '../../../types/discountCodes'
+import type { Client, ClientRequest } from '../../../types/sdk'
 import pkg from '../package.json'
 
 type ConfigType = {

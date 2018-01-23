@@ -51,7 +51,7 @@ We run prettier as part of ESLint using `eslint-plugin-prettier`. We disable all
 
 ## Upgrading dependencies
 
-We use [Greenkeeper](https://greenkeeper.io/) to get notified whenever there is a new version of a dependency, in form of a Pull Request. It's recommended to check the changes of the new versions before merging the PR. If necessary the PR should be updated with necessary code changes / migrations.
+We use [Renovate](https://renovateapp.com/) to get notified whenever there is a new version of a dependency, in form of a Pull Request. It's recommended to check the changes of the new versions before merging the PR. If necessary the PR should be updated with necessary code changes / migrations.
 
 #### Update `yarn.lock` file
 

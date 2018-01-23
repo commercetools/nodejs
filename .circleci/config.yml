@@ -1,7 +1,3 @@
-node4Environment: &node4Environment
-  docker:
-    - image: circleci/node:4
-  working_directory: ~/nodejs
 node6Environment: &node6Environment
   docker:
     - image: circleci/node:6
@@ -50,22 +46,6 @@ aliases:
 
 version: 2
 jobs:
-  greenkeeper_lockfile:
-    <<: *node8Environment
-    steps:
-      - checkout
-      - restore-cache: *restore_yarn_cache
-      - run:
-          name: Installing greenkeeper-lockfile-update
-          command: yarn global add greenkeeper-lockfile@1 --prefix ~/.yarn
-      - run: *yarn_install
-      - save_cache: *save_yarn_cache
-      - run:
-          name: Updating greenkeeper-lockfile
-          command: ~/.yarn/bin/greenkeeper-lockfile-update
-      - run:
-          name: Uploading greenkeeper-lockfile
-          command: ~/.yarn/bin/greenkeeper-lockfile-upload
   lint:
     <<: *node8Environment
     steps:
@@ -78,16 +58,6 @@ jobs:
       - run:
           name: Linting
           command: yarn lint
-  test_unit_node_4:
-    <<: *node4Environment
-    steps:
-      - checkout
-      - restore-cache: *restore_yarn_cache
-      - run: *yarn_install
-      - run: *yarn_bootstrap
-      - run: *yarn_build
-      - save_cache: *save_yarn_cache
-      - run: *unit_test
   test_unit_node_6:
     <<: *node6Environment
     steps:
@@ -125,11 +95,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - greenkeeper_lockfile
       - lint
-      - test_unit_node_4:
-          requires:
-            - lint
       - test_unit_node_6:
           requires:
             - lint

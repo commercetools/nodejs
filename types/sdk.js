@@ -199,6 +199,11 @@ export type ServiceBuilderDefaultParams = {
     operator: 'and' | 'or',
     where: Array<string>,
   },
+  location?: {
+    country?: string,
+    currency?: string,
+    state?: string,
+  },
   search?: {
     facet: Array<string>,
     filter: Array<string>,
@@ -257,6 +262,11 @@ export type ServiceBuilderParams = {
   // query
   where?: Array<string>,
   whereOperator?: 'and' | 'or',
+
+  // query-location
+  country?: string,
+  currency?: string,
+  state?: string,
 
   // version
   version?: string,

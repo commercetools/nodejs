@@ -3,36 +3,25 @@ import flatten from 'lodash.flatten'
 import type { SyncAction, ActionGroup } from '../../../types/sdk'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
-import actionsMapCustom from './utils/action-map-custom'
-import * as categoryActions from './category-actions'
+import * as taxCategoriesActions from './tax-categories-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
-export const actionGroups = ['base', 'references', 'meta', 'custom']
+export const actionGroups = ['base', 'rates']
 
-function createCategoryMapActions(mapActionGroup) {
+function createTaxCategoriesMapActions(mapActionGroup) {
   return function doMapActions(diff, newObj, oldObj /* , options */) {
     const allActions = []
 
     allActions.push(
       mapActionGroup('base', () =>
-        categoryActions.actionsMapBase(diff, oldObj, newObj)
+        taxCategoriesActions.actionsMapBase(diff, oldObj, newObj)
       )
     )
 
     allActions.push(
-      mapActionGroup('references', () =>
-        categoryActions.actionsMapReferences(diff, oldObj, newObj)
+      mapActionGroup('rates', () =>
+        taxCategoriesActions.actionsMapRates(diff, oldObj, newObj)
       )
-    )
-
-    allActions.push(
-      mapActionGroup('meta', () =>
-        categoryActions.actionsMapMeta(diff, oldObj, newObj)
-      )
-    )
-
-    allActions.push(
-      mapActionGroup('custom', () => actionsMapCustom(diff, newObj, oldObj))
     )
 
     return flatten(allActions)
@@ -52,7 +41,7 @@ export default (config: Array<ActionGroup>): SyncAction => {
   // for whitelisted action groups and return the return value of the callback
   // It will return an empty array for blacklisted action groups
   const mapActionGroup = createMapActionGroup(config)
-  const doMapActions = createCategoryMapActions(mapActionGroup)
+  const doMapActions = createTaxCategoriesMapActions(mapActionGroup)
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
   return { buildActions }
 }

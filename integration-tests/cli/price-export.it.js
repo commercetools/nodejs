@@ -55,14 +55,12 @@ describe('Price Exporter', () => {
           ])
         )
         .then(
-          (
-            [
-              createdType,
-              createdChannel,
-              createdProductType,
-              createdCustomerGroup,
-            ]
-          ) => {
+          ([
+            createdType,
+            createdChannel,
+            createdProductType,
+            createdCustomerGroup,
+          ]) => {
             customType.id = createdType[0].body.id
             channel.id = createdChannel[0].body.id
             productType.id = createdProductType[0].body.id

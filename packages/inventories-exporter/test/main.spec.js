@@ -77,7 +77,7 @@ describe('InventoryExporter', () => {
         }
         return processFn(sampleResult).then(() => Promise.resolve())
       })
-      jest.spyOn(InventoryExporter, '_writeEachInventory', jest.fn)
+      jest.spyOn(InventoryExporter, '_writeEachInventory')
     })
     afterEach(() => {
       InventoryExporter._writeEachInventory.mockRestore()

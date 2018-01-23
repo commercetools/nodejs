@@ -10,6 +10,7 @@ describe('exports', () => {
       'query',
       'queryOne',
       'queryExpand',
+      'queryLocation',
       'search',
       'projection',
       'suggest',
