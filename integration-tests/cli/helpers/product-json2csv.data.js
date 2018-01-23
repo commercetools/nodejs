@@ -68,14 +68,14 @@ export const sampleParentCategory = {
 }
 
 // function because we need the parent ref and it's not know until runtime
-export const createChildCategory = parent => ({
+export const sampleCategory = {
   key: 'childCatKey',
   name: { en: 'child Category' },
   description: { en: 'This will be the child category' },
   slug: { en: 'child-category-slug' },
   externalId: 'child-external-id',
-  parent,
-})
+  parent: { typeId: 'category', key: 'parentCatKey' },
+}
 
 export const createProducts = (state, taxCategory) => [
   {

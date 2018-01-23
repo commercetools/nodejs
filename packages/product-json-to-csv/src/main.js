@@ -141,15 +141,9 @@ export default class ProductJsonToCsv {
       this._resolveCategories(product.categories),
       this._resolveCategoryOrderHints(product.categoryOrderHints),
     ]).then(
-      (
-        [
-          productType,
-          taxCategory,
-          state,
-          categories,
-          categoryOrderHints,
-        ]: Array<Object>
-      ): ResolvedProductProjection => ({
+      ([productType, taxCategory, state, categories, categoryOrderHints]: Array<
+        Object
+      >): ResolvedProductProjection => ({
         ...product,
         ...productType,
         ...taxCategory,

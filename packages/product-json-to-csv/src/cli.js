@@ -44,7 +44,6 @@ Required scopes: ['view_products']`,
   })
   .option('template', {
     alias: 't',
-    default: 'stdin',
     describe:
       'CSV file containing your header that defines what you want to export.',
   })
