@@ -2,7 +2,7 @@
 
 Creates a proper HTTP User-Agent
 
-https://commercetools.github.io/nodejs/docs/sdk/api/#http-user-agent
+https://commercetools.github.io/nodejs/sdk/api/httpUserAgent.html
 
 ## Install
 

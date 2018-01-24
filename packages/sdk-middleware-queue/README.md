@@ -2,7 +2,7 @@
 
 Middleware for queueing requests for usage with `@commercetools/sdk-client`
 
-https://commercetools.github.io/nodejs/docs/sdk/api/#sdk-middleware-queue
+https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareQueue.html
 
 ## Install
 

@@ -2,7 +2,7 @@
 
 Construct API update actions, for usage with `@commercetools/sdk-client`.
 
-https://commercetools.github.io/nodejs/docs/sdk/api/#sync-actions
+https://commercetools.github.io/nodejs/sdk/api/syncActions.html
 
 ## Install
 
