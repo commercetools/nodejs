@@ -27,7 +27,7 @@ describe('mapHeaders', () => {
     it('contains `_published`', () => {
       expect(mapHeaders(headerFields)[0]).toEqual({
         label: '_published',
-        value: 'publish',
+        value: 'published',
       })
     })
 
@@ -141,7 +141,7 @@ describe('mapHeaders', () => {
     let headerFields
     beforeEach(() => {
       headerFields = [
-        'publish',
+        'published',
         'hasStagedChanges',
         'productType',
         'variant.id',
@@ -163,7 +163,7 @@ describe('mapHeaders', () => {
     it('contains `published`', () => {
       expect(mapHeaders(headerFields)[0]).toEqual({
         label: '_published',
-        value: 'publish',
+        value: 'published',
       })
     })
 

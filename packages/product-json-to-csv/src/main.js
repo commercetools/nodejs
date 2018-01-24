@@ -20,6 +20,7 @@ import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import highland from 'highland'
 import Promise from 'bluebird'
+import JSONStream from 'JSONStream'
 import { memoize } from 'lodash'
 import ProductMapping from './map-product-data'
 import { writeToSingleCsvFile, writeToZipFile } from './writer'
@@ -100,10 +101,7 @@ export default class ProductJsonToCsv {
 
     return (
       highland(input)
-        // parse chunk and split into JSON object strings
-        .splitBy(this.parserConfig.productSeparator)
-        // convert the JSON object strings to JS objects
-        .map(JSON.parse)
+        .through(JSONStream.parse('*'))
         .flatMap((product: ProductProjection) =>
           highland(this._resolveReferences(product))
         )
