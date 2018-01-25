@@ -17,7 +17,8 @@ import {
 import { createData, clearData } from './helpers/utils'
 
 let projectKey
-if (process.env.CI === 'true') projectKey = 'product-export-integration-test'
+if (process.env.CI === 'true')
+  projectKey = 'product-json2csv-integration-test-26'
 else projectKey = process.env.npm_config_projectkey
 
 describe('CSV and CLI Tests', () => {
