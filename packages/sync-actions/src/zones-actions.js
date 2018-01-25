@@ -20,13 +20,13 @@ export function actionsMapBase(diff, oldObj, newObj) {
 
 export function actionsMapLocations(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('locations', {
-    [ADD_ACTIONS]: newObject => ({
+    [ADD_ACTIONS]: newLocation => ({
       action: 'addLocation',
-      location: newObject,
+      location: newLocation,
     }),
-    [REMOVE_ACTIONS]: objectToRemove => ({
+    [REMOVE_ACTIONS]: removedLocation => ({
       action: 'removeLocation',
-      location: objectToRemove,
+      location: removedLocation,
     }),
   })
 
