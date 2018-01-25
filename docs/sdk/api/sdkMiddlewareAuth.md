@@ -57,8 +57,8 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 
 1. `host` _(String)_: the host of the OAuth API service
 2. `projectKey` _(String)_: the key of the project to assign the default scope to
-   * The user field is an object containining `username` and `password`. [Sample below](#usage-example)
-3. `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
+3. `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`, `user`)
+  * The `user` field is an object containing `username` and `password`. [Sample below](#usage-example-1)
 4. `scopes` _(Array)_: a list of [scopes](http://dev.commercetools.com/http-api-authorization.html#scopes) to assign to the OAuth token. _No default scope is sent_
 
 #### Usage example
