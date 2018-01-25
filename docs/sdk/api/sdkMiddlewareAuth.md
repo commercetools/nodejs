@@ -75,9 +75,9 @@ const client = createClient({
         clientId: '123',
         clientSecret: 'secret',
         user: {
-          username: string;
-          password: string;
-        }
+          username: string,
+          password: string,
+        },
       },
       scopes: [
         'view_products:test',
