@@ -41,6 +41,11 @@ export default {
     endpoint: '/discount-codes',
     features: [features.query, features.queryOne, features.queryExpand],
   },
+  extensions: {
+    type: 'extensions',
+    endpoint: '/extensions',
+    features: [features.query, features.queryOne, features.queryExpand],
+  },
   inventory: {
     type: 'inventory',
     endpoint: '/inventory',
