@@ -10,6 +10,7 @@ const expectedServiceKeys = [
   'customers',
   'customObjects',
   'discountCodes',
+  'extensions',
   'inventory',
   'messages',
   'myCarts',
