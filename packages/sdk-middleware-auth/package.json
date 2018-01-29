@@ -39,6 +39,6 @@
     "isomorphic-fetch": "2.2.1"
   },
   "devDependencies": {
-    "nock": "~9.0.2"
+    "nock": "9.0.28"
   }
 }
