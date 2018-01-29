@@ -108,7 +108,7 @@ describe('CSV and CLI Tests', () => {
         const fileNames = []
 
         beforeAll(done => {
-          const zipFile = tmp.fileSync({ postfix: '.zip', keep: true }).name
+          const zipFile = tmp.fileSync({ postfix: '.zip' }).name
           exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --categoryBy namedPath --fillAllRows -o ${zipFile}`,
             (error, stdout, stderr) => {
@@ -377,7 +377,7 @@ describe('CSV and CLI Tests', () => {
         const templateFile = `${__dirname}/helpers/product-headers.csv`
 
         beforeAll(done => {
-          csvFile = tmp.fileSync({ postfix: '.csv', keep: true }).name
+          csvFile = tmp.fileSync({ postfix: '.csv' }).name
           exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --categoryBy name -o ${csvFile}`,
             (error, stdout, stderr) => {
@@ -482,7 +482,7 @@ describe('CSV and CLI Tests', () => {
     describe('From JSON file', () => {
       let productsJsonFile
       beforeAll(done => {
-        productsJsonFile = tmp.fileSync({ postfix: '.json', keep: true }).name
+        productsJsonFile = tmp.fileSync({ postfix: '.json' }).name
         exec(
           `${exporter} -p ${projectKey} -s -o ${productsJsonFile}`,
           (error, stdout, stderr) => {
@@ -499,7 +499,7 @@ describe('CSV and CLI Tests', () => {
         const fileNames = []
 
         beforeAll(done => {
-          const zipFile = tmp.fileSync({ postfix: '.zip', keep: true }).name
+          const zipFile = tmp.fileSync({ postfix: '.zip' }).name
 
           // Send request from with JSON file to parser
           exec(
@@ -770,7 +770,7 @@ describe('CSV and CLI Tests', () => {
         const templateFile = `${__dirname}/helpers/product-headers.csv`
 
         beforeAll(done => {
-          csvFile = tmp.fileSync({ postfix: '.csv', keep: true }).name
+          csvFile = tmp.fileSync({ postfix: '.csv' }).name
           exec(
             `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --categoryBy name -o ${csvFile}`,
             (error, stdout, stderr) => {
