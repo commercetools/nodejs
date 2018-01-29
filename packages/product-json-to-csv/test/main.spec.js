@@ -23,7 +23,6 @@ describe('ProductJsonToCsv', () => {
       fillAllRows: false,
       language: 'en',
       multiValueDelimiter: ';',
-      productSeparator: '\n',
     }
     productJsonToCsv = new ProductJsonToCsv(
       { projectKey: 'project-key' },
@@ -49,7 +48,6 @@ describe('ProductJsonToCsv', () => {
         categoryBy: 'name',
         categoryOrderHintBy: 'name',
         language: 'en',
-        productSeparator: '\n',
       }
 
       productJsonToCsv = new ProductJsonToCsv(apiConfig)

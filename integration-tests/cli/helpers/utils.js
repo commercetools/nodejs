@@ -2,7 +2,6 @@ import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
-import filter from 'lodash.filter'
 
 export function clearData(apiConfig, entityName) {
   const client = createClient({
@@ -24,7 +23,7 @@ export function clearData(apiConfig, entityName) {
     // Built-in states cannot be deleted
     const results =
       entityName === 'states'
-        ? filter(payload.body.results, { builtIn: false })
+        ? payload.body.results.filter(state => state.builtIn === false)
         : payload.body.results
     return Promise.all(
       results.map(result =>

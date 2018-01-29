@@ -63,7 +63,6 @@ export default class ProductJsonToCsv {
       fillAllRows: false,
       language: 'en',
       multiValueDelimiter: ';',
-      productSeparator: '\n',
     }
 
     this.parserConfig = { ...defaultConfig, ...parserConfig }

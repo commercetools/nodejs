@@ -29,7 +29,6 @@
     "isomorphic-fetch": "^2.2.1",
     "isuuid": "^0.1.0",
     "lodash.omit": "^4.5.0",
-    "lodash.filter": "^4.5.0",
     "streamtest": "^1.2.2",
     "tmp": "^0.0.31",
     "unzip": "^0.1.11"

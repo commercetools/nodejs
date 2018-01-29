@@ -90,11 +90,12 @@ Required scopes: ['view_products']`,
   .option('categoryOrderHintBy', {
     choices: ['name', 'key', 'externalId', 'namedPath'],
     default: 'name',
-    describe: 'Used CSV delimiter.',
+    describe:
+      'Define which identifier should be used for the categoryOrderHints column.',
   })
   .option('fillAllRows', {
     describe:
-      'Define which identifier should be used for the categoryOrderHints column.',
+      'Define if product attributes like name should be added to each variant row.',
     type: 'boolean',
   })
   .option('language', {
@@ -112,12 +113,6 @@ Required scopes: ['view_products']`,
     alias: 'm',
     default: ';',
     describe: 'Used CSV delimiter in multiValue fields.',
-  })
-  .option('productSeparator', {
-    alias: 'ps',
-    default: '\n',
-    describe: 'Marker separating product chunks',
-    type: 'string',
   })
   .option('encoding', {
     alias: 'e',
@@ -194,13 +189,8 @@ if (args.output === process.stdout)
 // Register error listener
 args.output.on('error', errorHandler)
 
-let headerFields
-getHeaders(args)
-  .then(headerFieldsfromTemplate => {
-    headerFields = headerFieldsfromTemplate
-    return resolveCredentials(args)
-  })
-  .then(credentials => {
+Promise.all([getHeaders(args), resolveCredentials(args)])
+  .then(([headerFields, credentials]) => {
     const apiConfig = {
       host: args.authUrl,
       apiUrl: args.apiUrl,
@@ -214,10 +204,9 @@ getHeaders(args)
       fillAllRows: args.fillAllRows,
       language: args.language,
       multiValueDelimiter: args.multiValueDelimiter,
-      productSeparator: args.productSeparator,
       headerFields,
     }
-    const myLogger = {
+    const parserLogger = {
       error: logger.error.bind(logger),
       warn: logger.warn.bind(logger),
       info: logger.info.bind(logger),
@@ -228,7 +217,7 @@ getHeaders(args)
     return new ProductJsonToCsv(
       apiConfig,
       productJsonToCsvConfigOptions,
-      myLogger,
+      parserLogger,
       accessToken
     )
   })

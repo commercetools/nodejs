@@ -28,7 +28,6 @@ export type ParserConfigOptions = {
   headerFields?: Array<string>,
   language: string,
   multiValueDelimiter: string,
-  productSeparator: string,
 }
 
 export type ExportConfigOptions = {
