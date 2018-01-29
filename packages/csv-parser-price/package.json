@@ -50,8 +50,8 @@
     "yargs": "^6.4.0"
   },
   "devDependencies": {
-    "sinon": "^1.17.6",
-    "streamtest": "^1.2.2",
-    "tmp": "^0.0.31"
+    "sinon": "1.17.7",
+    "streamtest": "1.2.3",
+    "tmp": "0.0.31"
   }
 }

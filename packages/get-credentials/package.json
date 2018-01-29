@@ -24,7 +24,7 @@
     "build": "babel src --out-dir lib"
   },
   "devDependencies": {
-    "sinon": "^1.17.7"
+    "sinon": "1.17.7"
   },
   "dependencies": {
     "dotenv": "^4.0.0"
