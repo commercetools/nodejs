@@ -81,13 +81,13 @@ Required scopes: ['view_products']`,
 
     return process.stdout
   })
-  .option('categoryBy', {
+  .option('referenceCategoryBy', {
     choices: ['name', 'key', 'externalId', 'namedPath'],
     default: 'name',
     describe:
       'Define which identifier should be used for the categories column.',
   })
-  .option('categoryOrderHintBy', {
+  .option('referenceCategoryOrderHintBy', {
     choices: ['name', 'key', 'externalId', 'namedPath'],
     default: 'name',
     describe:
@@ -147,7 +147,7 @@ const logger = pino(loggerConfig)
 const logError = error => {
   const errorFormatter = new PrettyError()
 
-  if (logger.level === 'debug')
+  if (args.logLevel === 'debug')
     process.stderr.write(`ERR: ${errorFormatter.render(error)}`)
   else process.stderr.write(`ERR: ${error.message || error}`)
 }
@@ -198,8 +198,8 @@ Promise.all([getHeaders(args), resolveCredentials(args)])
       credentials,
     }
     const productJsonToCsvConfigOptions = {
-      categoryBy: args.categoryBy,
-      categoryOrderHintBy: args.categoryOrderHintBy,
+      categoryBy: args.referenceCategoryBy,
+      categoryOrderHintBy: args.referenceCategoryOrderHintBy,
       delimiter: args.delimiter,
       fillAllRows: args.fillAllRows,
       language: args.language,

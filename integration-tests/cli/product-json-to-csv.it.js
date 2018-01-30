@@ -110,7 +110,7 @@ describe('CSV and CLI Tests', () => {
         beforeAll(done => {
           const zipFile = tmp.fileSync({ postfix: '.zip' }).name
           exec(
-            `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --categoryBy namedPath --fillAllRows -o ${zipFile}`,
+            `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`,
             (error, stdout, stderr) => {
               expect(error).toBeFalsy()
               expect(stderr).toBeFalsy()
@@ -379,7 +379,7 @@ describe('CSV and CLI Tests', () => {
         beforeAll(done => {
           csvFile = tmp.fileSync({ postfix: '.csv' }).name
           exec(
-            `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --categoryBy name -o ${csvFile}`,
+            `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`,
             (error, stdout, stderr) => {
               expect(error).toBeFalsy()
               expect(stderr).toBeFalsy()
@@ -503,7 +503,7 @@ describe('CSV and CLI Tests', () => {
 
           // Send request from with JSON file to parser
           exec(
-            `${binPath} -p ${projectKey} -i ${productsJsonFile} --categoryBy namedPath --fillAllRows -o ${zipFile}`,
+            `${binPath} -p ${projectKey} -i ${productsJsonFile} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`,
             (parseError, parseStdout, parseStderr) => {
               expect(parseError).toBeFalsy()
               expect(parseStderr).toBeFalsy()
@@ -772,7 +772,7 @@ describe('CSV and CLI Tests', () => {
         beforeAll(done => {
           csvFile = tmp.fileSync({ postfix: '.csv' }).name
           exec(
-            `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --categoryBy name -o ${csvFile}`,
+            `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`,
             (error, stdout, stderr) => {
               expect(error).toBeFalsy()
               expect(stderr).toBeFalsy()
