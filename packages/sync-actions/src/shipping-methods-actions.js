@@ -1,9 +1,5 @@
 import forEach from 'lodash.foreach'
 import { buildBaseAttributesActions } from './utils/common-actions'
-import createBuildArrayActions, {
-  ADD_ACTIONS,
-  REMOVE_ACTIONS,
-} from './utils/create-build-array-actions'
 
 export const baseActionsList = [
   { action: 'setKey', key: 'key' },
@@ -21,42 +17,6 @@ export function actionsMapBase(diff, oldObj, newObj) {
     oldObj,
     newObj,
   })
-}
-
-export function actionsMapZone(diff, oldObj, newObj) {
-  const handler = createBuildArrayActions('zoneRates', {
-    [ADD_ACTIONS]: newObject =>
-      // console.log(newObject)
-      ({
-        action: 'addZone',
-        zone: newObject.zone,
-      }),
-    [REMOVE_ACTIONS]: removedObject => ({
-      action: 'removeZone',
-      zone: removedObject.zone,
-    }),
-  })
-
-  return handler(diff, oldObj, newObj)
-}
-
-export function actionsMapShippingRate(diff, oldObj, newObj) {
-  const handler = createBuildArrayActions('zoneRates.shippingRates', {
-    [ADD_ACTIONS]: newObject =>
-      // console.log(newObject)
-      ({
-        action: 'addShippingRate',
-        zone: newObject.zone,
-        shippingRate: newObject.shippingRates,
-      }),
-    [REMOVE_ACTIONS]: removedObject => ({
-      action: 'removeShippingRate',
-      zone: removedObject.zone,
-      shippingRate: removedObject.shippingRates,
-    }),
-  })
-
-  return handler(diff, oldObj, newObj)
 }
 
 export function actionsMapZoneRates(diff, oldObj, newObj) {
