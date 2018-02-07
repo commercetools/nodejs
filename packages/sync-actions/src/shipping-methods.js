@@ -24,12 +24,6 @@ function createShippingMethodsMapActions(mapActionGroup) {
       )
     )
 
-    // allActions.push(
-    //   mapActionGroup('zoneRates', () =>
-    //     shippingMethodsActions.actionsMapShippingRates(diff)
-    //   )
-    // )
-
     return flatten(allActions)
   }
 }
