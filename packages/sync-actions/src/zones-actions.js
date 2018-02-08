@@ -1,8 +1,5 @@
+import forEach from 'lodash.foreach'
 import { buildBaseAttributesActions } from './utils/common-actions'
-import createBuildArrayActions, {
-  ADD_ACTIONS,
-  REMOVE_ACTIONS,
-} from './utils/create-build-array-actions'
 
 export const baseActionsList = [
   { action: 'changeName', key: 'name' },
@@ -19,16 +16,40 @@ export function actionsMapBase(diff, oldObj, newObj) {
 }
 
 export function actionsMapLocations(diff, oldObj, newObj) {
-  const handler = createBuildArrayActions('locations', {
-    [ADD_ACTIONS]: newLocation => ({
-      action: 'addLocation',
-      location: newLocation,
-    }),
-    [REMOVE_ACTIONS]: removedLocation => ({
-      action: 'removeLocation',
-      location: removedLocation,
-    }),
+  const actions = []
+  if (!diff.locations) return actions
+
+  const deleteActions = []
+  const addActions = []
+
+  forEach(diff.locations, (location, index) => {
+    if (Array.isArray(location)) {
+      if (location.length === 3) {
+        if (location[2] !== 3) {
+          deleteActions.push({
+            action: 'removeLocation',
+            location: location[0],
+          })
+        }
+      } else if (location.length === 1) {
+        addActions.push({
+          action: 'addLocation',
+          location: location[0],
+        })
+      }
+    } else if (location.country) {
+      if (Array.isArray(location.country)) {
+        deleteActions.push({
+          action: 'removeLocation',
+          location: oldObj.locations[index],
+        })
+        addActions.push({
+          action: 'addLocation',
+          location: newObj.locations[index],
+        })
+      }
+    }
   })
 
-  return handler(diff, oldObj, newObj)
+  return addActions.concat(deleteActions)
 }
