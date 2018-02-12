@@ -62,7 +62,7 @@
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-prettier": "2.6.0",
     "eslint-plugin-react": "7.6.1",
-    "flow-bin": "0.64.0",
+    "flow-bin": "0.65.0",
     "gitbook-cli": "2.3.2",
     "gitbook-plugin-anchorjs": "1.1.1",
     "gitbook-plugin-edit-link": "2.0.2",
