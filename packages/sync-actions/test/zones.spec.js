@@ -104,8 +104,8 @@ describe('Actions', () => {
 
       const actual = zonesSync.buildActions(now, before)
       const expected = [
-        { action: 'addLocation', location: now.locations[0] },
         { action: 'removeLocation', location: before.locations[0] },
+        { action: 'addLocation', location: now.locations[0] },
       ]
       expect(actual).toEqual(expected)
     })
@@ -126,9 +126,9 @@ describe('Actions', () => {
 
       const actual = zonesSync.buildActions(now, before)
       const expected = [
+        { action: 'removeLocation', location: before.locations[0] },
         { action: 'addLocation', location: now.locations[0] },
         { action: 'addLocation', location: now.locations[2] },
-        { action: 'removeLocation', location: before.locations[0] },
       ]
       expect(actual).toEqual(expected)
     })
