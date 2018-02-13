@@ -19,8 +19,10 @@ function createZonesMapActions(mapActionGroup) {
     )
 
     allActions.push(
-      mapActionGroup('locations', () =>
-        zonesActions.actionsMapLocations(diff, oldObj, newObj)
+      flatten(
+        mapActionGroup('locations', () =>
+          zonesActions.actionsMapLocations(diff, oldObj, newObj)
+        )
       )
     )
 
