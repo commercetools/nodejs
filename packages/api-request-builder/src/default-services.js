@@ -1,6 +1,11 @@
 import * as features from './features'
 
 export default {
+  login: {
+    type: 'login',
+    endpoint: '/login',
+    features: [features.create],
+  },
   cartDiscounts: {
     type: 'cart-discounts',
     endpoint: '/cart-discounts',
