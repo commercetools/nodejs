@@ -96,4 +96,41 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
   })
+
+  describe('Swap locations (create one + delete one)', () => {
+    it('should build `removeLocation` and `addLocation`', () => {
+      const before = { locations: [{ country: 'Spain' }] }
+      const now = { locations: [{ country: 'Italy' }] }
+
+      const actual = zonesSync.buildActions(now, before)
+      const expected = [
+        { action: 'removeLocation', location: before.locations[0] },
+        { action: 'addLocation', location: now.locations[0] },
+      ]
+      expect(actual).toEqual(expected)
+    })
+  })
+
+  describe('Multiple actions', () => {
+    it('should build multiple actions for required changes', () => {
+      const before = {
+        locations: [{ country: 'Spain' }, { country: 'France' }],
+      }
+      const now = {
+        locations: [
+          { country: 'Italy' },
+          { country: 'France' },
+          { country: 'Germany' },
+        ],
+      }
+
+      const actual = zonesSync.buildActions(now, before)
+      const expected = [
+        { action: 'removeLocation', location: before.locations[0] },
+        { action: 'addLocation', location: now.locations[0] },
+        { action: 'addLocation', location: now.locations[2] },
+      ]
+      expect(actual).toEqual(expected)
+    })
+  })
 })
