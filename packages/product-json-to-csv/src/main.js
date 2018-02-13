@@ -20,6 +20,7 @@ import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import highland from 'highland'
 import Promise from 'bluebird'
+import JSONStream from 'JSONStream'
 import { memoize } from 'lodash'
 import ProductMapping from './map-product-data'
 import { writeToSingleCsvFile, writeToZipFile } from './writer'
@@ -62,7 +63,6 @@ export default class ProductJsonToCsv {
       fillAllRows: false,
       language: 'en',
       multiValueDelimiter: ';',
-      productSeparator: '\n',
     }
 
     this.parserConfig = { ...defaultConfig, ...parserConfig }
@@ -100,10 +100,7 @@ export default class ProductJsonToCsv {
 
     return (
       highland(input)
-        // parse chunk and split into JSON object strings
-        .splitBy(this.parserConfig.productSeparator)
-        // convert the JSON object strings to JS objects
-        .map(JSON.parse)
+        .through(JSONStream.parse('*'))
         .flatMap((product: ProductProjection) =>
           highland(this._resolveReferences(product))
         )
@@ -141,15 +138,9 @@ export default class ProductJsonToCsv {
       this._resolveCategories(product.categories),
       this._resolveCategoryOrderHints(product.categoryOrderHints),
     ]).then(
-      (
-        [
-          productType,
-          taxCategory,
-          state,
-          categories,
-          categoryOrderHints,
-        ]: Array<Object>
-      ): ResolvedProductProjection => ({
+      ([productType, taxCategory, state, categories, categoryOrderHints]: Array<
+        Object
+      >): ResolvedProductProjection => ({
         ...product,
         ...productType,
         ...taxCategory,

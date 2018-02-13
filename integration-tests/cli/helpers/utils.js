@@ -20,7 +20,11 @@ export function clearData(apiConfig, entityName) {
     method: 'GET',
   }
   return client.process(request, payload => {
-    const results = payload.body.results
+    // Built-in states cannot be deleted
+    const results =
+      entityName === 'states'
+        ? payload.body.results.filter(state => state.builtIn === false)
+        : payload.body.results
     return Promise.all(
       results.map(result =>
         client.execute({

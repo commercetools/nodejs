@@ -19,14 +19,12 @@ export default class ProductMapping {
   lang: string
   multiValDel: string
 
-  constructor(
-    {
-      fillAllRows = false,
-      categoryBy = 'name',
-      lang = 'en',
-      multiValueDelimiter = ';',
-    }: Object = {}
-  ) {
+  constructor({
+    fillAllRows = false,
+    categoryBy = 'name',
+    lang = 'en',
+    multiValueDelimiter = ';',
+  }: Object = {}) {
     this.fillAllRows = fillAllRows
     this.categoryBy = categoryBy
     this.lang = lang

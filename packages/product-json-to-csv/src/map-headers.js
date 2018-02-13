@@ -7,10 +7,10 @@ type HeaderObj = {
 
 export default function mapHeaders(headers: Array<string>): Array<HeaderObj> {
   return headers.map((header: string): HeaderObj => {
-    if (header === '_published' || header === 'publish')
+    if (header === '_published' || header === 'published')
       return {
         label: '_published',
-        value: 'publish',
+        value: 'published',
       }
     if (header === '_hasStagedChanges' || header === 'hasStagedChanges')
       return {

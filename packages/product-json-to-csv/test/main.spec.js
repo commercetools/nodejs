@@ -23,7 +23,6 @@ describe('ProductJsonToCsv', () => {
       fillAllRows: false,
       language: 'en',
       multiValueDelimiter: ';',
-      productSeparator: '\n',
     }
     productJsonToCsv = new ProductJsonToCsv(
       { projectKey: 'project-key' },
@@ -49,7 +48,6 @@ describe('ProductJsonToCsv', () => {
         categoryBy: 'name',
         categoryOrderHintBy: 'name',
         language: 'en',
-        productSeparator: '\n',
       }
 
       productJsonToCsv = new ProductJsonToCsv(apiConfig)
@@ -110,19 +108,6 @@ describe('ProductJsonToCsv', () => {
 
     it('should take an inputStream and output highland stream', () => {
       expect(productStream.source.__HighlandStream__).toBeTruthy()
-    })
-
-    it('should return a flattened product object', async () => {
-      const expected = {
-        id: 'product-1-id',
-        'slug.en': 'my-slug-1',
-        'variant.id': 'mv-id',
-        'variant.key': 'mv-key',
-      }
-
-      await expect(productStream.toPromise(Promise)).resolves.toEqual(
-        expect.objectContaining(expected)
-      )
     })
 
     it('should log and emit error if error occurs', async () => {
