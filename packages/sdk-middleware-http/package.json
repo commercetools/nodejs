@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-middleware-http",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "Middleware for http requests, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
@@ -38,6 +38,6 @@
     "isomorphic-fetch": "2.2.1"
   },
   "devDependencies": {
-    "nock": "9.0.28"
+    "nock": "9.1.6"
   }
 }

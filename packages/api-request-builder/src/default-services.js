@@ -31,6 +31,16 @@ export default {
     endpoint: '/customers',
     features: [features.query, features.queryOne, features.queryExpand],
   },
+  customersPasswordToken: {
+    type: 'customers-password-token',
+    endpoint: '/customers/password-token',
+    features: [features.create],
+  },
+  customersPasswordReset: {
+    type: 'customers-password-reset',
+    endpoint: '/customers/password/reset',
+    features: [features.create],
+  },
   customObjects: {
     type: 'custom-objects',
     endpoint: '/custom-objects',

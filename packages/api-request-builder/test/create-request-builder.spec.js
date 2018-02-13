@@ -8,6 +8,8 @@ const expectedServiceKeys = [
   'channels',
   'customerGroups',
   'customers',
+  'customersPasswordToken',
+  'customersPasswordReset',
   'customObjects',
   'discountCodes',
   'extensions',
