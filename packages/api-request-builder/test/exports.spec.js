@@ -7,6 +7,9 @@ describe('exports', () => {
 
   it('features', () => {
     expect(Object.keys(features)).toEqual([
+      'create',
+      'update',
+      'del',
       'query',
       'queryOne',
       'queryExpand',
