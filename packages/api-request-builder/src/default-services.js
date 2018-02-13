@@ -73,14 +73,29 @@ export default {
       features.queryExpand,
     ],
   },
+  customersPassword: {
+    type: 'customers-password',
+    endpoint: '/customers/password',
+    features: [features.create],
+  },
   customersPasswordToken: {
     type: 'customers-password-token',
     endpoint: '/customers/password-token',
-    features: [features.create],
+    features: [features.create, features.queryOne],
   },
   customersPasswordReset: {
     type: 'customers-password-reset',
     endpoint: '/customers/password/reset',
+    features: [features.create],
+  },
+  customersEmailVerificationToken: {
+    type: 'customers-email-verification-token',
+    endpoint: '/customers/customers/email-token',
+    features: [features.create, features.queryOne],
+  },
+  customersEmailVerification: {
+    type: 'customers-email-verification',
+    endpoint: '/customers/customers/email/confirm',
     features: [features.create],
   },
   customObjects: {
