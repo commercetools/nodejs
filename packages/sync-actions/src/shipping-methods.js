@@ -19,8 +19,10 @@ function createShippingMethodsMapActions(mapActionGroup) {
     )
 
     allActions.push(
-      mapActionGroup('zoneRates', () =>
-        shippingMethodsActions.actionsMapZoneRates(diff, oldObj, newObj)
+      flatten(
+        mapActionGroup('zoneRates', () =>
+          shippingMethodsActions.actionsMapZoneRates(diff, oldObj, newObj)
+        )
       )
     )
 

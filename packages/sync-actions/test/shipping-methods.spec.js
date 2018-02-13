@@ -206,7 +206,12 @@ describe('Actions', () => {
   describe('`addShippingRate`', () => {
     it('should build `addShippingRate` action with one shipping rate', () => {
       const before = {
-        zoneRates: [{ zone: { typeId: 'zone', id: 'z1' } }],
+        zoneRates: [
+          {
+            zone: { typeId: 'zone', id: 'z1' },
+            shippingRates: [],
+          },
+        ],
       }
       const now = {
         zoneRates: [
@@ -259,6 +264,7 @@ describe('Actions', () => {
           shippingRate: now.zoneRates[0].shippingRates[1],
         },
       ]
+
       expect(actual).toEqual(expected)
     })
   })
@@ -419,20 +425,6 @@ describe('Actions', () => {
               { price: { currencyCode: 'USD', centAmount: 1000 } },
             ],
           },
-          {
-            zone: { typeId: 'zone', id: 'z2' },
-            shippingRates: [
-              { price: { currencyCode: 'EUR', centAmount: 2000 } },
-              { price: { currencyCode: 'USD', centAmount: 2000 } },
-            ],
-          },
-          {
-            zone: { typeId: 'zone', id: 'z3' },
-            shippingRates: [
-              { price: { currencyCode: 'EUR', centAmount: 3000 } },
-              { price: { currencyCode: 'USD', centAmount: 3000 } },
-            ],
-          },
         ],
       }
       const now = {
@@ -443,20 +435,13 @@ describe('Actions', () => {
           },
           {
             zone: { typeId: 'zone', id: 'z2' },
-            shippingRates: [
-              { price: { currencyCode: 'EUR', centAmount: 2000 } },
-              { price: { currencyCode: 'USD', centAmount: 3000 } },
-            ],
+            shippingRates: [],
           },
         ],
       }
 
       const actual = shippingMethodsSync.buildActions(now, before)
       const expected = [
-        {
-          action: 'removeZone',
-          zone: before.zoneRates[2].zone,
-        },
         {
           action: 'removeShippingRate',
           shippingRate: before.zoneRates[0].shippingRates[0],
@@ -467,16 +452,7 @@ describe('Actions', () => {
           shippingRate: before.zoneRates[0].shippingRates[1],
           zone: before.zoneRates[0].zone,
         },
-        {
-          action: 'removeShippingRate',
-          shippingRate: before.zoneRates[1].shippingRates[1],
-          zone: before.zoneRates[1].zone,
-        },
-        {
-          action: 'addShippingRate',
-          shippingRate: now.zoneRates[1].shippingRates[1],
-          zone: now.zoneRates[1].zone,
-        },
+        { action: 'addZone', zone: now.zoneRates[1].zone },
       ]
       expect(actual).toEqual(expected)
     })

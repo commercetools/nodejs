@@ -1,4 +1,9 @@
-import forEach from 'lodash.foreach'
+import flatten from 'lodash.flatten'
+import createBuildArrayActions, {
+  ADD_ACTIONS,
+  REMOVE_ACTIONS,
+  CHANGE_ACTIONS,
+} from './utils/create-build-array-actions'
 import { buildBaseAttributesActions } from './utils/common-actions'
 
 export const baseActionsList = [
@@ -19,73 +24,79 @@ export function actionsMapBase(diff, oldObj, newObj) {
   })
 }
 
-export function actionsMapZoneRates(diff, oldObj, newObj) {
-  const actions = []
-  if (!diff.zoneRates) return actions
-
-  const zoneActions = []
-  const shippingRateActions = []
-
-  forEach(diff.zoneRates, (zoneRate, index) => {
-    // updating zones
-    if (Array.isArray(zoneRate)) {
-      if (zoneRate.length === 3) {
-        if (zoneRate[2] !== 3) {
-          zoneActions.push({
-            action: 'removeZone',
-            zone: zoneRate[0].zone,
-          })
-        }
-      } else if (zoneRate.length === 1) {
-        zoneActions.push({
-          action: 'addZone',
-          zone: zoneRate[0].zone,
-        })
-      }
-    } else if (zoneRate.zone) {
-      if (Array.isArray(zoneRate.zone.id)) {
-        zoneActions.push({
-          action: 'removeZone',
-          zone: oldObj.zoneRates[index].zone,
-        })
-        zoneActions.push({
-          action: 'addZone',
-          zone: newObj.zoneRates[index].zone,
-        })
-      }
-      // updating shippingRates
-    } else if (zoneRate.shippingRates) {
-      forEach(zoneRate.shippingRates, (shippingRate, subIndex) => {
-        if (shippingRate.length === 3) {
-          // Ignore pure array moves!
-          if (shippingRate[2] !== 3) {
-            shippingRateActions.push({
-              action: 'removeShippingRate',
-              zone: oldObj.zoneRates[index].zone,
-              shippingRate: shippingRate[0],
-            })
-          }
-        } else if (shippingRate.length === 1 && shippingRate[0].price) {
-          shippingRateActions.push({
-            action: 'addShippingRate',
-            zone: oldObj.zoneRates[index].zone,
-            shippingRate: shippingRate[0],
-          })
-        } else if (shippingRate.price) {
-          shippingRateActions.push({
-            action: 'removeShippingRate',
-            zone: oldObj.zoneRates[index].zone,
-            shippingRate: oldObj.zoneRates[index].shippingRates[subIndex],
-          })
-          shippingRateActions.push({
-            action: 'addShippingRate',
-            zone: oldObj.zoneRates[index].zone,
-            shippingRate: newObj.zoneRates[index].shippingRates[subIndex],
-          })
-        }
-      })
-    }
+function actionsMapZoneRatesShippingRates(diff, oldObj, newObj) {
+  const handler = createBuildArrayActions('shippingRates', {
+    [ADD_ACTIONS]: newShippingRate => ({
+      action: 'addShippingRate',
+      zone: newObj.zone,
+      shippingRate: newShippingRate,
+    }),
+    [REMOVE_ACTIONS]: oldShippingRate => ({
+      action: 'removeShippingRate',
+      zone: oldObj.zone,
+      shippingRate: oldShippingRate,
+    }),
+    [CHANGE_ACTIONS]: (oldShippingRate, newShippingRate) => [
+      {
+        action: 'removeShippingRate',
+        zone: oldObj.zone,
+        shippingRate: oldShippingRate,
+      },
+      {
+        action: 'addShippingRate',
+        zone: newObj.zone,
+        shippingRate: newShippingRate,
+      },
+    ],
   })
 
-  return zoneActions.concat(shippingRateActions)
+  return handler(diff, oldObj, newObj)
+}
+
+export function actionsMapZoneRates(diff, oldObj, newObj) {
+  const handler = createBuildArrayActions('zoneRates', {
+    [ADD_ACTIONS]: newZoneRate => ({
+      action: 'addZone',
+      zone: newZoneRate.zone,
+    }),
+    [REMOVE_ACTIONS]: oldZoneRate => ({
+      action: 'removeZone',
+      zone: oldZoneRate.zone,
+    }),
+    [CHANGE_ACTIONS]: (oldZoneRate, newZoneRate) => {
+      let hasZoneActions = false
+      let shippingRateActions = []
+      Object.values(diff.zoneRates).forEach(zoneRate => {
+        // We set a flag to true for adding the zone actions later
+        if (zoneRate.zone) hasZoneActions = true
+
+        if (zoneRate.shippingRates)
+          shippingRateActions = actionsMapZoneRatesShippingRates(
+            zoneRate,
+            oldZoneRate,
+            newZoneRate
+          )
+      })
+
+      return flatten(
+        hasZoneActions
+          ? [
+              ...shippingRateActions,
+              ...[
+                {
+                  action: 'removeZone',
+                  zone: oldZoneRate.zone,
+                },
+                {
+                  action: 'addZone',
+                  zone: newZoneRate.zone,
+                },
+              ],
+            ]
+          : shippingRateActions
+      )
+    },
+  })
+
+  return handler(diff, oldObj, newObj)
 }
