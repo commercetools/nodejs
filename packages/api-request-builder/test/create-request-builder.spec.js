@@ -17,6 +17,7 @@ const expectedServiceKeys = [
   'discountCodes',
   'extensions',
   'inventory',
+  'login',
   'messages',
   'myCarts',
   'myOrders',
