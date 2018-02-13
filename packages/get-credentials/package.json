@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/get-credentials",
-  "version": "2.1.2",
+  "version": "2.1.4",
   "description": "Get CT credentials from the system environment.",
   "keywords": [
     "commercetools",
@@ -24,7 +24,7 @@
     "build": "babel src --out-dir lib"
   },
   "devDependencies": {
-    "sinon": "^1.17.7"
+    "sinon": "1.17.7"
   },
   "dependencies": {
     "dotenv": "^4.0.0"

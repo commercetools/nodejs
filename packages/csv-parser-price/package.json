@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/csv-parser-price",
-  "version": "2.1.9",
+  "version": "2.1.12",
   "description": "Module that parses price csv to json",
   "keywords": [
     "commercetools",
@@ -33,11 +33,11 @@
   },
   "dependencies": {
     "@commercetools/api-request-builder": "^2.0.0",
-    "@commercetools/get-credentials": "^2.1.2",
-    "@commercetools/sdk-client": "^1.5.3",
-    "@commercetools/sdk-middleware-auth": "^3.4.4",
-    "@commercetools/sdk-middleware-http": "^2.2.3",
-    "@commercetools/sdk-middleware-user-agent": "^1.2.3",
+    "@commercetools/get-credentials": "^2.1.4",
+    "@commercetools/sdk-client": "^1.5.4",
+    "@commercetools/sdk-middleware-auth": "^3.4.7",
+    "@commercetools/sdk-middleware-http": "^2.2.6",
+    "@commercetools/sdk-middleware-user-agent": "^1.2.4",
     "JSONStream": "^1.2.1",
     "bluebird": "^3.4.6",
     "csv-parser": "^1.11.0",
@@ -50,8 +50,8 @@
     "yargs": "^6.4.0"
   },
   "devDependencies": {
-    "sinon": "^1.17.6",
-    "streamtest": "^1.2.2",
-    "tmp": "^0.0.31"
+    "sinon": "1.17.7",
+    "streamtest": "1.2.3",
+    "tmp": "0.0.31"
   }
 }

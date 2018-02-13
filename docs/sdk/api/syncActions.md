@@ -356,3 +356,79 @@ client.execute(cartDiscountsRequests)
 .then(result => ...)
 .catch(error => ...)
 ```
+
+## `createSyncTaxCategories(actionGroups)`
+
+> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+
+Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _tax-categories_.
+
+#### Arguments
+
+1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+
+#### Usage example
+
+```js
+import { createSyncTaxCategories } from '@commercetools/sync-actions'
+import { createClient } from '@commercetools/sdk-client'
+
+const syncTaxCategories = createSyncTaxCategories()
+const client = createClient({
+  middlewares: [...],
+})
+const before = {
+  name: 'My Tax Category'
+}
+const now = {
+  name: 'My Updated Tax Category'
+}
+const actions = syncTaxCategories.buildActions(now, before)
+const taxCategoriesRequests = {
+  url: `/tax-categories/${before.id}`,
+  method: 'POST',
+  body: JSON.stringify({ version: before.version, actions }),
+}
+
+client.execute(taxCategoriesRequests)
+.then(result => ...)
+.catch(error => ...)
+```
+
+## `createSyncZones(actionGroups)`
+
+> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+
+Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _zones_.
+
+#### Arguments
+
+1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+
+#### Usage example
+
+```js
+import { createSyncZones } from '@commercetools/sync-actions'
+import { createClient } from '@commercetools/sdk-client'
+
+const syncZones = createSyncZones()
+const client = createClient({
+  middlewares: [...],
+})
+const before = {
+  name: 'My Zone'
+}
+const now = {
+  name: 'My Other Zone'
+}
+const actions = syncZones.buildActions(now, before)
+const zonesRequests = {
+  url: `/zones/${before.id}`,
+  method: 'POST',
+  body: JSON.stringify({ version: before.version, actions }),
+}
+
+client.execute(zonesRequests)
+.then(result => ...)
+.catch(error => ...)
+```
