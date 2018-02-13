@@ -72,7 +72,7 @@ https://commercetools.github.io/nodejs/
 | [`inventories-exporter`](/packages/inventories-exporter) | [![inventories-exporter Version][inventories-exporter-icon]][inventories-exporter-version] | [![inventories-exporter Dependencies Status][inventories-exporter-dependencies-icon]][inventories-exporter-dependencies] |
 | [`price-exporter`](/packages/price-exporter) | [![price-exporter Version][price-exporter-icon]][price-exporter-version] | [![price-exporter Dependencies Status][price-exporter-dependencies-icon]][discount-code-importer-dependencies] |
 | [`product-exporter`](/packages/product-exporter) | [![product-exporter Version][product-exporter-icon]][product-exporter-version] | [![product-exporter Dependencies Status][product-exporter-dependencies-icon]][product-exporter-dependencies] |
-| [`product-json-to-csv`](/packages/product-json-to-csv) | [![product-json-to-csv Version][product-json-to-csv-icon]][product-json-to-csv] | [![product-json-to-csv Dependencies Status][product-json-to-csv-icon]][product-json-to-csv-dependencies] |
+| [`product-json-to-csv`](/packages/product-json-to-csv) | [![product-json-to-csv Version][product-json-to-csv-icon]][product-json-to-csv-version] | [![product-json-to-csv Dependencies Status][product-json-to-csv-dependencies-icon]][product-json-to-csv-dependencies] |
 
 
 

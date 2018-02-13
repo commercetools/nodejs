@@ -30,3 +30,4 @@
   * [Inventories Exporter](/cli/inventories-exporter.md)
   * [Price Exporter](/cli/price-exporter.md)
   * [Product Exporter](/cli/product-exporter.md)
+  * [Product JSON to CSV](/cli/product-json-to-csv.md)
