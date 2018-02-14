@@ -1,9 +1,7 @@
 # Product JSON to CSV Parser
 
-Convert [commercetools Products](http://dev.commercetools.com/http-api-projects-discountCodes.html) CSV data to JSON. See example below for CSV format, sample response and usage.
-
 A package that parses [commercetools products](https://docs.commercetools.com/http-api-projects-products.html#product) JSON data to CSV.
-The products to be parsed can either be read from a `.json` file or directly [piped in](http://www.gnu.org/software/bash/manual/bash.html#Pipelines) from the [product exporter](https://commercetools.github.io/nodejs/cli/product-exporter.html). exported in JSON format, or as chunks that can be piped to a parser for more export formats.
+The products to be parsed can either be read from a `.json` file or directly [piped in](http://www.gnu.org/software/bash/manual/bash.html#Pipelines) from the [product exporter](https://commercetools.github.io/nodejs/cli/product-exporter.html).
 
 ## Usage
 `npm install @commercetools/product-json-to-csv --global`
