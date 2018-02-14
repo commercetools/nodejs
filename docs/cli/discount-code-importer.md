@@ -1,6 +1,6 @@
 # Discount Code Importer
 
-A package that helps with importing [commercetools discount codes](http://dev.commercetools.com/http-api-projects-discountCodes.html) in JSON format to the [commercetools platform](http://dev.commercetools.com/).
+A package that helps with importing [commercetools discount codes](https://docs.commercetools.com/http-api-projects-discountCodes.html) in JSON format to the [commercetools platform](https://docs.commercetools.com/).
 This package is built to be used in conjunction with [sphere-node-cli](https://github.com/sphereio/sphere-node-cli)
 
 ## Configuration

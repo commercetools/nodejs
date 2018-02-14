@@ -1,6 +1,6 @@
 # Discount Code Exporter
 
-A package that helps with exporting [commercetools discount codes](http://dev.commercetools.com/http-api-projects-discountCodes.html) in `JSON` or `CSV` format from the [commercetools platform](http://dev.commercetools.com/).
+A package that helps with exporting [commercetools discount codes](https://docs.commercetools.com/http-api-projects-discountCodes.html) in `JSON` or `CSV` format from the [commercetools platform](https://docs.commercetools.com/).
 
 ## Configuration
 
@@ -12,7 +12,7 @@ The constructor accepts two arguments:
   - `delimiter` (String): CSV delimiter (Optional. Default: `','`)
   - `multiValueDelimiter` (String): CSV delimiter used in multivalue fields (Optional. Default: `';'`)
   - `exportFormat` (String): Export format ['csv', 'json'] (Optional. Default: 'json')
-  - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](http://dev.commercetools.com/http-api.html#predicates) (Optional)
+  - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates) (Optional)
 - An optional logger object having four functions (`info`, `warn`, `error` and `verbose`)
 
 ## Usage
@@ -53,7 +53,7 @@ Options:
   - If no output path is specified, the exported codes will be logged to the standard output as a result, status reports will be logged to a `discount-code-export.log` file in the current directory.
 - The `--delimiter` flag specifies the delimiter used in the output file if CSV. Defaults to `','` if omitted.
 - The `--multiValueDelimiter` flag specifies the delimiter for multiValue cells in the output file if CSV. Defaults to `';'` if omitted.
-- The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](http://dev.commercetools.com/http-api.html#predicates)
+- The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates)
 
 ### JS
 For more direct usage, it is possible to use this module directly:

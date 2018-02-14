@@ -5,7 +5,7 @@
 [![David Dependencies Status][david-icon]][david]
 [![David devDependencies Status][david-dev-icon]][david-dev]
 
-Convert [commercetools order](https://dev.commercetools.com/http-api-projects-orders.html) CSV data to JSON. See examples below for supported CSV format and sample responses.
+Convert [commercetools order](https://docs.commercetools.com/http-api-projects-orders.html) CSV data to JSON. See examples below for supported CSV format and sample responses.
 
 ## Usage
 `npm install @commercetools/csv-parser-orders --global`
