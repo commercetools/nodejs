@@ -82,6 +82,39 @@ describe('Actions', () => {
       )
     })
   })
+  describe('with changing order of attributes', () => {
+    beforeEach(() => {
+      before = createTestProductType({
+        attributes: [
+          {
+            name: '1',
+          },
+          {
+            name: '2',
+          },
+        ],
+      })
+      now = createTestProductType({
+        attributes: [
+          {
+            name: '2',
+          },
+          {
+            name: '1',
+          },
+        ],
+      })
+      updateActions = productTypesSync.buildActions(now, before)
+    })
+    it('should return `changeAttributeOrder` action', () => {
+      expect(updateActions).toEqual([
+        {
+          action: 'changeAttributeOrder',
+          attributes: [{ name: '2' }, { name: '1' }],
+        },
+      ])
+    })
+  })
   describe('with attributes replaced', () => {
     beforeEach(() => {
       before = createTestProductType({

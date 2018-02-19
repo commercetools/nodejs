@@ -79,12 +79,21 @@ export function actionsMapAttributes(
         )
       }
     } else if (getIsRemovedOperation(diffKey)) {
-      const deltaValue = diffpatcher.getDeltaValue(diffValue)
-      if (deltaValue === undefined && diffValue[0].name)
-        actions.push({
-          action: 'removeAttributeDefinition',
-          name: diffValue[0].name,
-        })
+      if (Array.isArray(diffValue)) {
+        if (diffValue.length === 3 && diffValue[2] === 3) {
+          actions.push({
+            action: 'changeAttributeOrder',
+            attributes: next,
+          })
+        } else {
+          const deltaValue = diffpatcher.getDeltaValue(diffValue)
+          if (deltaValue === undefined && diffValue[0].name)
+            actions.push({
+              action: 'removeAttributeDefinition',
+              name: diffValue[0].name,
+            })
+        }
+      }
     }
   })
   return actions
