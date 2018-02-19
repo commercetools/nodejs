@@ -24,26 +24,14 @@ export function actionsMapBase(diff, previous, next) {
 }
 
 const attributeDefinitionsActionsList = [
-  {
-    action: 'changeLabel',
-    key: 'label',
-  },
-  {
-    action: 'setInputTip',
-    key: 'inputTip',
-  },
-  {
-    action: 'changeInputHint',
-    key: 'inputHint',
-  },
+  { action: 'changeLabel', key: 'label' },
+  { action: 'setInputTip', key: 'inputTip' },
+  { action: 'changeInputHint', key: 'inputHint' },
+  { action: 'changeIsSearchable', key: 'isSearchable' },
   {
     actionKey: 'newValue',
     action: 'changeAttributeConstraint',
     key: 'attributeConstraint',
-  },
-  {
-    action: 'changeIsSearchable',
-    key: 'isSearchable',
   },
 ]
 
@@ -51,7 +39,6 @@ const getIsAnAttributeDefinitionBaseFieldChange = diff =>
   diff.label ||
   diff.inputHint ||
   diff.inputTip ||
-  diff.label ||
   diff.attributeConstraint ||
   diff.isSearchable
 
