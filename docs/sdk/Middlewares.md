@@ -31,4 +31,24 @@ const loggerMiddleware = next => (request, response) => {
 }
 ```
 
+---
+
+
+## Example
+
+We could implement a *Middleware* which when given an `accessToken` attaches it to the request headers.
+
+```js
+
+const accessToken = "123"; // My super-encrypted access token
+
+const authHeaderWithExistingTokenMiddleware = next => (request, response) => {
+  const requestWithAuth = {
+    ...request,
+    headers: { ...request.headers, Authorization: `Bearer: ${accessToken}` }
+  };
+  next(request, response);
+};
+```
+
 See [official middlewares](/sdk/api/README.md#middlewares) for more advanced examples.
