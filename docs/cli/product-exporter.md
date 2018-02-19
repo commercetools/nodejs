@@ -1,6 +1,6 @@
 # Product Exporter
 
-A package that helps with exporting [commercetools products](https://dev.commercetools.com/http-api-projects-products.html) from the [commercetools platform](http://dev.commercetools.com/).
+A package that helps with exporting [commercetools products](https://docs.commercetools.com/http-api-projects-products.html) from the [commercetools platform](https://docs.commercetools.com/).
 The products can be exported in JSON format, or as chunks that can be piped to a parser for more export formats.
 
 ## Configuration
@@ -11,7 +11,7 @@ The constructor accepts four arguments:
   - `batch` (Number): Amount of products to fetch for each API call
   - `expand` (Array): An array of strings signifying reference fields to expand in the returned product
   - `json` (Boolean): Specify if products returned should be in JSON file format. If set to false, the products will be output in chunks (Default: true)
-  - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](http://dev.commercetools.com/http-api.html#predicates) (Optional)
+  - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates) (Optional)
   - `staged` (Boolean): Specify if prices should be fetched from all products (true) or only published products (false) (Optional. Default: false)
   - `total` (Number): The total number of products to fetch
 - An optional logger object having four methods (`info`, `warn`, `error` and `debug`)
@@ -60,10 +60,9 @@ Options:
   - If the file specified already exists, it will be overwritten.
   - The default location for status report logging is the standard output.
   - If no output path is specified, the exported products will be logged to the standard output.
-- The `predicate` flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](http://dev.commercetools.com/http-api.html#predicates)
-- The `--expand` flag specifies the Reference or References to expand in the returned products. The required references for expansion should be passed in as normal strings separated by a space. More information about reference expansion can be found [here](https://dev.commercetools.com/http-api.html#reference-expansion)
+- The `predicate` flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates)
+- The `--expand` flag specifies the Reference or References to expand in the returned products. The required references for expansion should be passed in as normal strings separated by a space. More information about reference expansion can be found [here](https://docs.commercetools.com/http-api.html#reference-expansion)
 - The `--exportType` flag specifies if products returned should be in JSON file format or chunks. The chunk output is particularly useful if a different output format is desired (such as CSV), in which case, the chunks can be piped to a parser to get the desired format.
-- The `--predicate` flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](http://dev.commercetools.com/http-api.html#predicates)
 - The `--staged` flag specifies the projection of the products to be fetched.
   - If passed `true`, published and unpublished products are retrieved
   - If passed `false` (or omitted), only published products are retrieved

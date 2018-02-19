@@ -1,6 +1,6 @@
 # Discount Code Generator
 
-Generate unique discount codes to be imported to the [commercetools platform](https://dev.commercetools.com/). See usage below
+Generate unique discount codes to be imported to the [commercetools platform](https://docs.commercetools.com/). See usage below
 
 ## Usage
 `npm install @commercetools/discount-code-generator --global`
