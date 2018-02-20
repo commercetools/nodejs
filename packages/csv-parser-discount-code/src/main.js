@@ -1,5 +1,4 @@
 /* @flow */
-import _ from 'lodash'
 import csv from 'csv-parser'
 import JSONStream from 'JSONStream'
 import highland from 'highland'
@@ -21,6 +20,7 @@ export default class CsvParserDiscountCode {
   _summary: ParserSummary
   _cartDiscountsToArray: Function
   _handleErrors: Function
+  _groupsToArray: Function
   _rowIndex: number
 
   // should take in optional parameters: a logger and a configuration object
@@ -40,6 +40,7 @@ export default class CsvParserDiscountCode {
     }
 
     this._cartDiscountsToArray = this._cartDiscountsToArray.bind(this)
+    this._groupsToArray = this._groupsToArray.bind(this)
     this._handleErrors = this._handleErrors.bind(this)
 
     this._rowIndex = 0
@@ -47,7 +48,10 @@ export default class CsvParserDiscountCode {
 
   // Remove fields with empty values from the code objects
   static _removeEmptyFields(item: Object) {
-    return _.omitBy(item, val => val === '')
+    return Object.keys(item).reduce((acc, key) => {
+      if (item[key] !== '') acc[key] = item[key]
+      return acc
+    }, {})
   }
 
   parse(input: stream$Readable, output: stream$Writable) {
@@ -62,6 +66,7 @@ export default class CsvParserDiscountCode {
       .map(CsvParserDiscountCode._removeEmptyFields)
       .map(unflatten)
       .map(this._cartDiscountsToArray)
+      .map(this._groupsToArray)
       .map(castTypes)
       .errors(this._handleErrors) // <- Pass errors to errorHandler
       .stopOnError(error => {
@@ -79,16 +84,25 @@ export default class CsvParserDiscountCode {
   // Convert the cartDiscounts field to an array of references to commercetools
   // cartDiscounts
   _cartDiscountsToArray(item: Object) {
-    if (item.cartDiscounts) {
-      const cartDiscounts = item.cartDiscounts
-        .split(this.multiValueDelimiter)
-        .map(cartDiscount => ({
-          typeId: 'cart-discount',
-          id: cartDiscount,
-        }))
-      return Object.assign(item, { cartDiscounts })
-    }
-    return item
+    const { cartDiscounts, ...rest } = item
+
+    return cartDiscounts
+      ? Object.assign(rest, {
+          cartDiscounts: cartDiscounts
+            .split(this.multiValueDelimiter)
+            .map(cartDiscountId => ({
+              typeId: 'cart-discount',
+              id: cartDiscountId,
+            })),
+        })
+      : rest
+  }
+
+  _groupsToArray(item: Object) {
+    const { groups, ...rest } = item
+    return groups
+      ? Object.assign(rest, { groups: groups.split(this.multiValueDelimiter) })
+      : rest
   }
 
   _handleErrors(error: any, cb: Function) {
