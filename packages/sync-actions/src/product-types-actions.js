@@ -1,4 +1,11 @@
 import forEach from 'lodash.foreach'
+import flatten from 'lodash.flatten'
+import { deepEqual } from 'fast-equals'
+import createBuildArrayActions, {
+  ADD_ACTIONS,
+  REMOVE_ACTIONS,
+  CHANGE_ACTIONS,
+} from './utils/create-build-array-actions'
 import { buildBaseAttributesActions } from './utils/common-actions'
 import * as diffpatcher from './utils/diffpatcher'
 import extractMatchingPairs from './utils/extract-matching-pairs'
@@ -42,6 +49,82 @@ const getIsAnAttributeDefinitionBaseFieldChange = diff =>
   diff.attributeConstraint ||
   diff.isSearchable
 
+function actionsMapEnums(attributeDiff, previous, next) {
+  const handler = createBuildArrayActions('values', {
+    [ADD_ACTIONS]: newEnum => ({
+      attributeName: next.name,
+      action: 'addPlainEnumValue',
+      value: newEnum,
+    }),
+    [CHANGE_ACTIONS]: (oldEnum, newEnum) => {
+      const oldEnumInNext = next.values.find(_enum => _enum.key === oldEnum.key)
+      const changeActions = []
+      if (oldEnumInNext) {
+        if (!deepEqual(oldEnum.label, oldEnumInNext.label)) {
+          changeActions.push({
+            attributeName: next.name,
+            action: 'changePlainEnumValueLabel',
+            newValue: newEnum,
+          })
+        } else {
+          changeActions.push({
+            attributeName: next.name,
+            action: 'changePlainEnumValueOrder',
+            value: newEnum,
+          })
+        }
+      } else {
+        changeActions.push({
+          attributeName: next.name,
+          action: 'removeEnumValue',
+          value: oldEnum,
+        })
+        changeActions.push({
+          attributeName: next.name,
+          action: 'addPlainEnumValue',
+          value: newEnum,
+        })
+      }
+      return changeActions
+    },
+    [REMOVE_ACTIONS]: deletedEnum => ({
+      attributeName: next.name,
+      action: 'removeEnumValue',
+      value: deletedEnum,
+    }),
+  })
+  const actions = []
+  const removedKeys = []
+  const newEnumValuesOrder = []
+  flatten(handler(attributeDiff, previous, next)).forEach(action => {
+    if (action.action === 'removeEnumValue') removedKeys.push(action.value.key)
+    else if (action.action === 'changePlainEnumValueOrder') {
+      newEnumValuesOrder.push(action.value)
+    } else actions.push(action)
+  })
+  return [
+    ...actions,
+    ...(newEnumValuesOrder.length > 0
+      ? [
+          {
+            attributeName: next.name,
+            action: 'changePlainEnumValueOrder',
+            values: newEnumValuesOrder,
+          },
+        ]
+      : []),
+    ...(removedKeys.length > 0
+      ? [
+          {
+            attributeName: next.name,
+            action: 'removeEnumValues',
+            keys: removedKeys,
+          },
+        ]
+      : []),
+  ]
+}
+
 export function actionsMapAttributes(
   attributesDiff,
   previous,
@@ -76,6 +159,14 @@ export function actionsMapAttributes(
             ...action,
             attributeName: extractedPairs.oldObj.name,
           }))
+        )
+      } else if (diffValue.values) {
+        actions.push(
+          ...actionsMapEnums(
+            diffValue,
+            extractedPairs.oldObj,
+            extractedPairs.newObj
+          )
         )
       }
     } else if (getIsRemovedOperation(diffKey)) {
