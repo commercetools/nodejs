@@ -19,7 +19,7 @@
   "contributors": [
     "Williams Omayuku <williams.omayuku@commercetools.com>"
   ],
-  "main": "lib/index.js",
+  "main": "lib/main.js",
   "bin": {
     "csvparserdiscountcode": "bin/csvparserdiscountcode.js"
   },
@@ -35,7 +35,6 @@
     "csv-parser": "^1.11.0",
     "flat": "^2.0.1",
     "highland": "^2.10.5",
-    "lodash": "^4.17.4",
     "npmlog": "^4.1.0",
     "pretty-error": "^2.1.0",
     "tmp": "0.0.31",
