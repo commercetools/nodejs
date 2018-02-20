@@ -140,19 +140,12 @@ export default class DiscountCodeExport {
   // Use this method to make the `cartDiscounts` and `groups`
   // field compatible with the importer
   _processCode(data: CodeData): Object {
-    const { cartDiscounts, groups, ...restCodeData } = data
-    const cartDiscountsString = cartDiscounts.reduce(
-      (acc: string, discount: Object): string => {
-        if (!acc) return discount.id
-        return `${acc}${this.config.multiValueDelimiter}${discount.id}`
-      },
-      ''
-    )
+    const { cartDiscounts, groups, ...restDiscountCodeData } = data
+    const cartDiscountsString = cartDiscounts
+      .map(cartDiscount => cartDiscount.id)
+      .join(this.config.multiValueDelimiter)
     const groupsString = groups
-      ? groups.reduce((acc: string, group: string): string => {
-          if (!acc) return group
-          return `${acc}${this.config.multiValueDelimiter}${group}`
-        }, '')
+      ? groups.join(this.config.multiValueDelimiter)
       : ''
 
     // This part is necessary because the API sends empty objects in these
@@ -164,12 +157,15 @@ export default class DiscountCodeExport {
       'customLineItemFieldTypes',
     ]
     objKeys.forEach((key: string) => {
-      if (restCodeData[key] && !Object.keys(restCodeData[key]).length)
-        delete restCodeData[key]
+      if (
+        restDiscountCodeData[key] &&
+        !Object.keys(restDiscountCodeData[key]).length
+      )
+        delete restDiscountCodeData[key]
     })
     return flatten(
       Object.assign(
-        { ...restCodeData },
+        { ...restDiscountCodeData },
         { cartDiscounts: cartDiscountsString },
         { groups: groupsString }
       )
