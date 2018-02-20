@@ -71,8 +71,8 @@ describe('DiscountCodeExport', () => {
       })
       const outputStream = streamtest.v2.toText((error, result) => {
         const expectedResult = stripIndent`
-          code,name.en,cartDiscounts
-          discount-code,some-discount-name,cart-discount-1;cart-discount-2
+          code,name.en,cartDiscounts,groups
+          discount-code,some-discount-name,cart-discount-1;cart-discount-2,
           `
         expect(result).toEqual(expectedResult)
         done()
@@ -199,19 +199,26 @@ describe('DiscountCodeExport', () => {
         cartFieldTypes: {},
         lineItemFieldTypes: {},
         customLineItemFieldTypes: {},
+        groups: ['group-1', 'group-2', 'group-3'],
       }
     })
 
-    it('deletes empty objects and ignores non-empty objects', () => {
+    it('deletes empty objects', () => {
       sampleCodeObj.attributeTypes = { foo: 'bar' }
-      const expected = {
-        'name.en': 'English',
-        'name.de': 'German',
-        cartDiscounts: 'discount-id-1',
-        'attributeTypes.foo': 'bar',
-      }
       const actual = codeExport._processCode(sampleCodeObj)
-      expect(actual).toEqual(expected)
+      expect(actual.attributeTypes).toBeUndefined()
+      expect(actual.cartFieldTypes).toBeUndefined()
+      expect(actual.lineItemFieldTypes).toBeUndefined()
+      expect(actual.customLineItemFieldTypes).toBeUndefined()
+    })
+
+    it('does not delete non-empty objects', () => {
+      const newSample = Object.assign({}, sampleCodeObj, {
+        attributeTypes: { foo: 'bar' },
+      })
+      const actual = codeExport._processCode(newSample)
+      expect(actual.cartDiscounts).toBeTruthy()
+      expect(actual['attributeTypes.foo']).toBeTruthy()
     })
 
     it('flatten object and return the `cartDiscounts` id as a string', () => {
@@ -221,7 +228,7 @@ describe('DiscountCodeExport', () => {
         cartDiscounts: 'discount-id-1',
       }
       const actual = codeExport._processCode(sampleCodeObj)
-      expect(actual).toEqual(expected)
+      expect(actual).toEqual(expect.objectContaining(expected))
     })
 
     it('should concatenate multiple `cartDiscounts` ids', () => {
@@ -235,7 +242,17 @@ describe('DiscountCodeExport', () => {
         cartDiscounts: 'discount-id-1;discount-id-2',
       }
       const actual = codeExport._processCode(sampleCodeObj)
-      expect(actual).toEqual(expected)
+      expect(actual).toEqual(expect.objectContaining(expected))
+    })
+
+    it('flatten `groups` and return array items as a string', () => {
+      const expected = {
+        'name.en': 'English',
+        'name.de': 'German',
+        groups: 'group-1;group-2;group-3',
+      }
+      const actual = codeExport._processCode(sampleCodeObj)
+      expect(actual).toEqual(expect.objectContaining(expected))
     })
   })
 })
