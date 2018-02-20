@@ -2,6 +2,7 @@
 import forEach from 'lodash.foreach'
 import uniqWith from 'lodash.uniqwith'
 import * as diffpatcher from './utils/diffpatcher'
+import extractMatchingPairs from './utils/extract-matching-pairs'
 import {
   buildBaseAttributesActions,
   buildReferenceActions,
@@ -153,23 +154,6 @@ function _buildSetAttributeAction(
   return action
 }
 
-// safely extract oldObj and newObj
-function _extractMatchingNewAndOld(hashMap, key, before, now) {
-  let oldObjPos
-  let newObjPos
-  let oldObj
-  let newObj
-
-  if (hashMap[key]) {
-    oldObjPos = hashMap[key][0]
-    newObjPos = hashMap[key][1]
-    if (before && before[oldObjPos]) oldObj = before[oldObjPos]
-
-    if (now && now[newObjPos]) newObj = now[newObjPos]
-  }
-  return { oldObj, newObj }
-}
-
 function _buildVariantImagesAction(
   diffedImages,
   oldVariant = {},
@@ -184,7 +168,7 @@ function _buildVariantImagesAction(
     'url'
   )
   forEach(diffedImages, (image, key) => {
-    const { oldObj, newObj } = _extractMatchingNewAndOld(
+    const { oldObj, newObj } = extractMatchingPairs(
       matchingImagePairs,
       key,
       oldVariant.images,
@@ -260,7 +244,7 @@ function _buildVariantPricesAction(
     newVariant.prices
   )
   forEach(diffedPrices, (price, key) => {
-    const { oldObj, newObj } = _extractMatchingNewAndOld(
+    const { oldObj, newObj } = extractMatchingPairs(
       matchingPricePairs,
       key,
       oldVariant.prices,
@@ -489,10 +473,7 @@ export function actionsMapAttributes(
 
   if (variants)
     forEach(variants, (variant, key) => {
-      const {
-        oldObj: oldVariant,
-        newObj: newVariant,
-      } = _extractMatchingNewAndOld(
+      const { oldObj: oldVariant, newObj: newVariant } = extractMatchingPairs(
         variantHashMap,
         key,
         oldObj.variants,
@@ -530,10 +511,7 @@ export function actionsMapImages(diff, oldObj, newObj, variantHashMap) {
   const { variants } = diff
   if (variants)
     forEach(variants, (variant, key) => {
-      const {
-        oldObj: oldVariant,
-        newObj: newVariant,
-      } = _extractMatchingNewAndOld(
+      const { oldObj: oldVariant, newObj: newVariant } = extractMatchingPairs(
         variantHashMap,
         key,
         oldObj.variants,
@@ -561,10 +539,7 @@ export function actionsMapPrices(diff, oldObj, newObj, variantHashMap) {
 
   if (variants)
     forEach(variants, (variant, key) => {
-      const {
-        oldObj: oldVariant,
-        newObj: newVariant,
-      } = _extractMatchingNewAndOld(
+      const { oldObj: oldVariant, newObj: newVariant } = extractMatchingPairs(
         variantHashMap,
         key,
         oldObj.variants,
