@@ -48,11 +48,10 @@ export default class CsvParserDiscountCode {
 
   // Remove fields with empty values from the code objects
   static _removeEmptyFields(item: Object) {
-    const fileredObj = {}
-    Object.keys(item).forEach(key => {
-      if (item[key] !== '') fileredObj[key] = item[key]
-    })
-    return fileredObj
+    return Object.keys(item).reduce((acc, key) => {
+      if (item[key] !== '') acc[key] = item[key]
+      return acc
+    }, {})
   }
 
   parse(input: stream$Readable, output: stream$Writable) {
@@ -91,9 +90,9 @@ export default class CsvParserDiscountCode {
       ? Object.assign(rest, {
           cartDiscounts: cartDiscounts
             .split(this.multiValueDelimiter)
-            .map(cartDiscount => ({
+            .map(cartDiscountId => ({
               typeId: 'cart-discount',
-              id: cartDiscount,
+              id: cartDiscountId,
             })),
         })
       : rest
