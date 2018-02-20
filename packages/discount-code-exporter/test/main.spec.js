@@ -204,7 +204,6 @@ describe('DiscountCodeExport', () => {
     })
 
     it('deletes empty objects', () => {
-      sampleCodeObj.attributeTypes = { foo: 'bar' }
       const actual = codeExport._processCode(sampleCodeObj)
       expect(actual.attributeTypes).toBeUndefined()
       expect(actual.cartFieldTypes).toBeUndefined()

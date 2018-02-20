@@ -156,19 +156,18 @@ export default class DiscountCodeExport {
       'lineItemFieldTypes',
       'customLineItemFieldTypes',
     ]
-    objKeys.forEach((key: string) => {
-      if (
-        restDiscountCodeData[key] &&
-        !Object.keys(restDiscountCodeData[key]).length
-      )
-        delete restDiscountCodeData[key]
-    })
-    return flatten(
-      Object.assign(
-        { ...restDiscountCodeData },
-        { cartDiscounts: cartDiscountsString },
-        { groups: groupsString }
-      )
+
+    const discountCodeData = Object.entries(restDiscountCodeData).reduce(
+      (discountCode, [discountCodeKey, value]) =>
+        objKeys.includes(discountCodeKey) && !Object.keys(value).length
+          ? discountCode
+          : { ...discountCode, [discountCodeKey]: value },
+      {}
     )
+    return flatten({
+      ...discountCodeData,
+      cartDiscounts: cartDiscountsString,
+      groups: groupsString,
+    })
   }
 }
