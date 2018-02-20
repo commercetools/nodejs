@@ -18,6 +18,7 @@
         "array-includes",
         "transform-export-extensions",
         "transform-flow-strip-types",
+        "transform-object-entries",
         "transform-object-rest-spread",
         [
           "module-resolver",
@@ -49,6 +50,7 @@
         "array-includes",
         "transform-export-extensions",
         "transform-flow-strip-types",
+        "transform-object-entries",
         "transform-object-rest-spread",
         [
           "module-resolver",
@@ -80,6 +82,7 @@
         "array-includes",
         "transform-export-extensions",
         "transform-flow-strip-types",
+        "transform-object-entries",
         "transform-object-rest-spread",
         [
           "module-resolver",
@@ -109,6 +112,7 @@
         "array-includes",
         "transform-export-extensions",
         "transform-flow-strip-types",
+        "transform-object-entries",
         "transform-object-rest-spread",
         [
           "module-resolver",
