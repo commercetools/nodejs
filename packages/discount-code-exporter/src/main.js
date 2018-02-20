@@ -158,8 +158,8 @@ export default class DiscountCodeExport {
     ]
 
     const discountCodeData = Object.entries(restDiscountCodeData).reduce(
-      (discountCode, [discountCodeKey, value]) =>
-        objKeys.includes(discountCodeKey) && !Object.keys(value).length
+      (discountCode, [discountCodeKey, value: Object]) =>
+        objKeys.includes(discountCodeKey) && !Object.values(value).length
           ? discountCode
           : { ...discountCode, [discountCodeKey]: value },
       {}
