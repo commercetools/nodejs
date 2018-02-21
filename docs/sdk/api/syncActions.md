@@ -440,7 +440,7 @@ client.execute(zonesRequests)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _zones_.
+Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for [_productTypes_](https://docs.commercetools.com/http-api-projects-productTypes.html).
 
 #### Arguments
 
@@ -452,7 +452,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 import { createSyncProductTypes } from '@commercetools/sync-actions'
 import { createClient } from '@commercetools/sdk-client'
 
-const syncZones = createSyncProductTypes()
+const syncProductTypes = createSyncProductTypes()
 const client = createClient({
   middlewares: [...],
 })
@@ -469,9 +469,7 @@ const now = {
   version: 1,
 }
 
-// Documentation on which update actions are supported are available here:
-// https://docs.commercetools.com/http-api-projects-productTypes.html
-const actions = syncZones.buildActions(now, before)
+const actions = syncProductTypes.buildActions(now, before)
 const productTypesRequest = {
   url: `/product-types/${before.id}`,
   method: 'POST',
