@@ -1,0 +1,28 @@
+{
+  "name": "@commercetools/state-importer",
+  "version": "1.0.0-development",
+  "description": "Import states to the commercetools platform",
+  "main": "lib/main.js",
+  "scripts": {
+    "build": "babel src --out-dir lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs/tree/master/packages/state-importer"
+  },
+  "homepage": "https://commercetools.github.io/nodejs/cli/state-importer.html",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "keywords": [
+    "commercetools",
+    "state",
+    "states",
+    "json",
+    "import",
+    "transition"
+  ],
+  "author": {
+    "name": "Williams Omayuku",
+    "email": "williams.omayuku@commercetools.de"
+  },
+  "license": "MIT"
+}
