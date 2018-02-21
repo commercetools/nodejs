@@ -68,7 +68,9 @@ function actionsMapEnums(attributeType, attributeDiff, previous, next) {
       value: newEnum,
     }),
     [CHANGE_ACTIONS]: (oldEnum, newEnum) => {
-      const oldEnumInNext = next.values.find(_enum => _enum.key === oldEnum.key)
+      const oldEnumInNext = next.values.find(
+        nextEnum => nextEnum.key === oldEnum.key
+      )
       const changeActions = []
       if (oldEnumInNext) {
         if (!deepEqual(oldEnum.label, oldEnumInNext.label)) {
