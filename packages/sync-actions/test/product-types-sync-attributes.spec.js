@@ -380,7 +380,7 @@ describe('Actions', () => {
         {
           action: 'changeInputHint',
           attributeName: 'name-text-field-definition',
-          inputHint: 'MultiLine',
+          newValue: 'MultiLine',
         },
       ])
     })

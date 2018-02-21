@@ -33,7 +33,7 @@ export function actionsMapBase(diff, previous, next) {
 const attributeDefinitionsActionsList = [
   { action: 'changeLabel', key: 'label' },
   { action: 'setInputTip', key: 'inputTip' },
-  { action: 'changeInputHint', key: 'inputHint' },
+  { actionKey: 'newValue', action: 'changeInputHint', key: 'inputHint' },
   { action: 'changeIsSearchable', key: 'isSearchable' },
   {
     actionKey: 'newValue',
