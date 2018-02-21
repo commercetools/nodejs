@@ -109,11 +109,14 @@ function actionsMapEnums(attributeType, attributeDiff, previous, next) {
   const actions = []
   const removedKeys = []
   const newEnumValuesOrder = []
-  flatten(handler(attributeDiff, previous, next)).forEach(action => {
-    if (action.action === 'removeEnumValue') removedKeys.push(action.value.key)
-    else if (action.action === getChangeEnumOrderActionName(attributeType)) {
-      newEnumValuesOrder.push(action.value)
-    } else actions.push(action)
+  flatten(handler(attributeDiff, previous, next)).forEach(updateAction => {
+    if (updateAction.action === 'removeEnumValue')
+      removedKeys.push(updateAction.value.key)
+    else if (
+      updateAction.action === getChangeEnumOrderActionName(attributeType)
+    ) {
+      newEnumValuesOrder.push(updateAction.value)
+    } else actions.push(updateAction)
   })
   return [
     ...actions,
