@@ -10,14 +10,17 @@ import findMatchingPairs from './utils/find-matching-pairs'
 const actionGroups = ['base', 'attributes']
 
 function createProductTypeMapActions(
-  mapActionGroup: () => Array
-): Array<UpdateAction> {
+  mapActionGroup: (
+    type: string,
+    fn: () => Array<UpdateAction>
+  ) => Array<UpdateAction>
+): (diff: Object, next: Object, previous: Object) => Array<UpdateAction> {
   return function doMapActions(
     diff: Object,
     next: Object,
     previous: Object
-  ): Array {
-    const allActions: Array<UpdateAction> = []
+  ): Array<UpdateAction> {
+    const allActions = []
     allActions.push(
       mapActionGroup('base', (): Array<UpdateAction> =>
         productTypeActions.actionsMapBase(diff, previous, next)
