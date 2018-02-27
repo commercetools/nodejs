@@ -1,6 +1,6 @@
 # Product Exporter
 
-A package that helps with exporting [commercetools products](https://docs.commercetools.com/http-api-projects-products.html) from the [commercetools platform](https://docs.commercetools.com/).
+A package that helps with exporting [commercetools products](https://docs.commercetools.com/http-api-projects-productProjections.html#productprojection) from the [commercetools platform](http://dev.commercetools.com/).
 The products can be exported in JSON format, or as chunks that can be piped to a parser for more export formats.
 
 ## Configuration

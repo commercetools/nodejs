@@ -1,0 +1,164 @@
+[{
+    "id": "71b80466-7eb7-4a8d-a7cb-641b59d5161f",
+    "version": 1,
+    "productType": {
+      "typeId": "product-type",
+      "id": "90007a3a-6cc0-4450-a367-ecdc4367db2e"
+    },
+    "name": {
+      "en": "Second Sample Duck-jacket",
+      "de": "Zwite Beispiel Entejacke"
+    },
+    "description": {
+      "en": "Golom Jacop Caesar Icarve the Duck keep us cozy warm. The slight",
+      "de": "Lorem Ipsum Text von Save the Duck halten uns wohlig"
+    },
+    "categories": [{
+      "typeId": "category",
+      "id": "ea96b29d-85be-4dc1-a404-9c51d93c045c"
+    }],
+    "categoryOrderHints": {},
+    "slug": {
+      "en": "sample-sluggy-duck-jacke-456789",
+      "de": "beispiel-sluggy-ente-jacke-456789"
+    },
+    "metaTitle": {
+      "en": "Beauitful Jackets-2",
+      "de": "Schoene Jacken-2"
+    },
+    "masterVariant": {
+      "id": 1,
+      "sku": "M00F56YSS",
+      "key": "master-var-111",
+      "prices": [],
+      "images": [],
+      "attributes": [{
+        "name": "another-text-attribute",
+        "value": "Another Master Var attr"
+      }],
+      "assets": []
+    },
+    "variants": [{
+      "id": 2,
+      "sku": "M00F56YSS-11",
+      "key": "normal-var-222",
+      "prices": [],
+      "images": [],
+      "attributes": [{
+        "name": "another-text-attribute",
+        "value": "Another First Var attr"
+      }],
+      "assets": []
+    }],
+    "searchKeywords": {
+      "en": [{
+        "text": "Multi Tool"
+      }, {
+        "text": "Swiss Army Knife",
+        "suggestTokenizer": {
+          "type": "whitespace"
+        }
+      }]
+    },
+    "hasStagedChanges": false,
+    "published": false,
+    "key": "productKey-2",
+    "taxCategory": {
+      "typeId": "tax-category",
+      "id": "02e308fd-cf3e-405b-9e85-d23dabeda3f8"
+    },
+    "state": {
+      "typeId": "state",
+      "id": "3ef04ffd-c5a4-4c09-94d7-f9ba0b9dcff4"
+    },
+    "createdAt": "2018-01-24T16:11:08.301Z",
+    "lastModifiedAt": "2018-01-24T16:11:08.301Z"
+  },
+  {
+    "id": "47829e8d-9168-44fd-92dd-7f0241e84521",
+    "version": 1,
+    "productType": {
+      "typeId": "product-type",
+      "id": "1d55aba1-36f2-42e5-bc9c-3ce1fd935ddb"
+    },
+    "name": {
+      "en": "Sample Duck-jacket",
+      "de": "Beispiel Entejacke"
+    },
+    "description": {
+      "en": "The light jackets of Save the Duck keep us cozy warm. The slight",
+      "de": "Die leichten Freizeitjacken von Save the Duck halten uns wohlig"
+    },
+    "categories": [{
+      "typeId": "category",
+      "id": "ea96b29d-85be-4dc1-a404-9c51d93c045c"
+    }],
+    "categoryOrderHints": {},
+    "slug": {
+      "en": "sample-sluggy-duck-jacke-123",
+      "de": "beispiel-sluggy-ente-jacke-123"
+    },
+    "metaTitle": {
+      "en": "Beauitful Jackets",
+      "de": "Schoene Jacken"
+    },
+    "masterVariant": {
+      "id": 1,
+      "sku": "M00FCKV",
+      "key": "master-var-1",
+      "prices": [],
+      "images": [],
+      "attributes": [{
+        "name": "text-attribute",
+        "value": "Master Var attr"
+      }],
+      "assets": []
+    },
+    "variants": [{
+      "id": 2,
+      "sku": "M00FCKV-11",
+      "key": "normal-var-1",
+      "prices": [],
+      "images": [],
+      "attributes": [{
+        "name": "text-attribute",
+        "value": "First Var attr"
+      }],
+      "assets": []
+    }, {
+      "id": 3,
+      "sku": "M00FCKV-22",
+      "key": "normal-var-2",
+      "prices": [],
+      "images": [],
+      "attributes": [{
+        "name": "text-attribute",
+        "value": "Second Var attr"
+      }],
+      "assets": []
+    }],
+    "searchKeywords": {
+      "en": [{
+        "text": "Standard Keyword"
+      }, {
+        "text": "German White Space",
+        "suggestTokenizer": {
+          "type": "whitespace"
+        }
+      }]
+    },
+    "hasStagedChanges": false,
+    "published": false,
+    "key": "productKey-1",
+    "taxCategory": {
+      "typeId": "tax-category",
+      "id": "02e308fd-cf3e-405b-9e85-d23dabeda3f8"
+    },
+    "state": {
+      "typeId": "state",
+      "id": "3ef04ffd-c5a4-4c09-94d7-f9ba0b9dcff4"
+    },
+    "createdAt": "2018-01-24T16:11:08.301Z",
+    "lastModifiedAt": "2018-01-24T16:11:08.301Z"
+  }
+]
