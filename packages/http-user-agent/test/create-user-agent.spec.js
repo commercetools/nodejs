@@ -7,6 +7,9 @@ const userAgentBrowser =
 describe('for browser', () => {
   const originalWindow = global.window
   global.window = {
+    document: {
+      nodeType: 9,
+    },
     navigator: {
       userAgent: userAgentBrowser,
     },
