@@ -1,14 +1,17 @@
 # `sync-actions`
+
 Provides an API to construct update actions. Useful for building [request](/sdk/Glossary.md#clientrequest) `body` for updates.
 
 ## Install
 
 #### Node.js
+
 ```bash
 npm install --save @commercetools/sync-actions
 ```
 
 #### Browser
+
 ```html
 <script src="https://unpkg.com/@commercetools/sync-actions/dist/commercetools-sync-actions.umd.min.js"></script>
 <script>// global: CommercetoolsSyncActions</script>
@@ -20,7 +23,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -58,7 +61,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -97,7 +100,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -135,7 +138,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -173,7 +176,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -211,7 +214,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -249,7 +252,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -287,7 +290,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -327,7 +330,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -365,7 +368,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -403,7 +406,7 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 
 #### Arguments
 
-1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1. `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -429,6 +432,51 @@ const zonesRequests = {
 }
 
 client.execute(zonesRequests)
+.then(result => ...)
+.catch(error => ...)
+```
+
+## `createSyncProductTypes(actionGroups)`
+
+> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+
+Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for [_productTypes_](https://docs.commercetools.com/http-api-projects-productTypes.html).
+
+#### Arguments
+
+1. `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+
+#### Usage example
+
+```js
+import { createSyncProductTypes } from '@commercetools/sync-actions'
+import { createClient } from '@commercetools/sdk-client'
+
+const syncProductTypes = createSyncProductTypes()
+const client = createClient({
+  middlewares: [...],
+})
+
+const before = {
+  id: 'product-type-id',
+  name: 'Product Type',
+  version: 1,
+}
+
+const now = {
+  id: 'product-type-id',
+  name: 'Other Product Type',
+  version: 1,
+}
+
+const actions = syncProductTypes.buildActions(now, before)
+const productTypesRequest = {
+  url: `/product-types/${before.id}`,
+  method: 'POST',
+  body: JSON.stringify({ version: before.version, actions }),
+}
+
+client.execute(productTypesRequest)
 .then(result => ...)
 .catch(error => ...)
 ```
