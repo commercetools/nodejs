@@ -14,7 +14,7 @@ describe('ProductJsonToCsv', () => {
       error: jest.fn(),
       warn: jest.fn(),
       info: jest.fn(),
-      verbose: jest.fn(),
+      debug: jest.fn(),
     }
     const parserConfig = {
       categoryBy: 'name',
@@ -121,6 +121,25 @@ describe('ProductJsonToCsv', () => {
       await expect(productStream.toPromise(Promise)).resolves.toBeUndefined()
       expect(productJsonToCsv.logger.error).toBeCalledWith(fakeError)
       expect(outputStream.emit).toBeCalledWith('error', fakeError)
+    })
+
+    it('should process data through stream if no error occurs', async () => {
+      productJsonToCsv._resolveReferences = jest.fn(data =>
+        Promise.resolve(data)
+      )
+      productJsonToCsv._productMapping.run = jest.fn(data => data)
+      // No headers in expected
+      const expected = [
+        'product-1-id',
+        { en: 'my-slug-1' },
+        { id: 'mv-id', key: 'mv-key' },
+      ]
+      await expect(productStream.collect().toPromise(Promise)).resolves.toEqual(
+        expected
+      )
+      expect(productJsonToCsv.logger.debug).toBeCalledWith(
+        expect.stringMatching('Done with conversion')
+      )
     })
   })
 
