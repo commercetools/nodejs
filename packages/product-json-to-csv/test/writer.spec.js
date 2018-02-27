@@ -94,7 +94,6 @@ describe('Writer', () => {
         'color',
       ]
       const outputStream = streamTest.toText((error, actual) => {
-        expect(true).toBeTruthy()
         expect(error).toBeFalsy()
         const expectedCsvFile = `${__dirname}/helpers/csvFileWithHeaders.csv`
         const expectedCsv = fs.readFileSync(expectedCsvFile, 'utf8')
