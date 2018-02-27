@@ -28,7 +28,7 @@ describe('DeliveriesParser', () => {
       const readStream = streamTestFile('delivery.csv')
       const outputStream = StreamTest.v2.toText((err, result) => {
         expect(err).toBe(null)
-        expect(JSON.parse(result).length).toEqual(2)
+        expect(JSON.parse(result)).toHaveLength(2)
         done()
       })
       deliveriesParser.parse(readStream, outputStream)
@@ -71,28 +71,28 @@ describe('DeliveriesParser', () => {
 
       const outputStream = StreamTest.v2.toText((err, _result) => {
         const orders = JSON.parse(_result)
-        expect(orders.length).toBe(2)
+        expect(orders).toHaveLength(2)
 
         // First order
         expect(orders[0].orderNumber).toBe('222')
 
         let deliveries = orders[0].shippingInfo.deliveries
-        expect(deliveries.length).toBe(3)
+        expect(deliveries).toHaveLength(3)
 
         let delivery = deliveries.find(d => d.id === '1')
-        expect(delivery.items.length).toBe(3)
+        expect(delivery.items).toHaveLength(3)
 
         delivery = deliveries.find(d => d.id === '2')
-        expect(delivery.items.length).toBe(1)
+        expect(delivery.items).toHaveLength(1)
 
         delivery = deliveries.find(d => d.id === '3')
-        expect(delivery.items.length).toBe(4)
+        expect(delivery.items).toHaveLength(4)
 
         // Second order
         expect(orders[1].orderNumber).toBe('100')
 
         deliveries = orders[1].shippingInfo.deliveries
-        expect(deliveries.length).toBe(1)
+        expect(deliveries).toHaveLength(1)
 
         expect(deliveries[0].id).toBe('1')
 
@@ -107,16 +107,16 @@ describe('DeliveriesParser', () => {
 
       const outputStream = StreamTest.v2.toText((err, _result) => {
         const orders = JSON.parse(_result)
-        expect(orders.length).toBe(2)
+        expect(orders).toHaveLength(2)
         // First order
         expect(orders[0].orderNumber).toBe('222')
-        expect(orders[0].shippingInfo.deliveries.length).toBe(1)
+        expect(orders[0].shippingInfo.deliveries).toHaveLength(1)
 
         const deliveries = orders[0].shippingInfo.deliveries
-        expect(deliveries.length).toBe(1)
+        expect(deliveries).toHaveLength(1)
 
         const deliveryParcels = deliveries[0].parcels
-        expect(deliveryParcels.length).toBe(2)
+        expect(deliveryParcels).toHaveLength(2)
 
         let parcel = deliveryParcels.find(p => p.id === '1')
         expect(parcel.trackingData.trackingId).toBe('123456789')
@@ -136,7 +136,7 @@ describe('DeliveriesParser', () => {
 
         // Second order
         expect(orders[1].orderNumber).toBe('111')
-        expect(orders[1].shippingInfo.deliveries.length).toBe(1)
+        expect(orders[1].shippingInfo.deliveries).toHaveLength(1)
 
         done()
       })
