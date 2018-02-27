@@ -5,21 +5,16 @@ import type { HttpUserAgentOptions } from '../../../types/sdk'
 /*
   This is the easiest way, for this use case, to detect if we're running in
   Node.js or in a browser environment. In other cases, this won't be even a
-  problem as webpack will provide the correct polyfill in the bundle.
+  problem as Rollup will provide the correct polyfill in the bundle.
   The main advantage by doing it this way is that it allows to easily test
   the code running in both environments, by overriding `global.window` in
   the specific test.
-  If we were to use checks at compile time (e.g. `webpack.DefinePlugin`) it
-  would not be possible / easy to test such cases.
-  Same thing for defining different entry points.
-
-  The code below, on runtime, will evaluate the function expression, returning
-  `true` or `false` if `window` is a global object.
 */
-// eslint-disable-next-line no-new-func
-const isBrowser = new Function(
-  'try { return typeof window === "object" } catch (e) { return false }'
-)
+
+const isBrowser = () =>
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.nodeType === 9
 
 function getSystemInfo(): string {
   if (isBrowser()) return window.navigator.userAgent

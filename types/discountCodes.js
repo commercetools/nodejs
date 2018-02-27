@@ -21,6 +21,7 @@ export type CodeData = {
   customLineItemFieldTypes?: Object,
   createdAt?: string,
   lastModifiedAt?: string,
+  groups: Array<string>,
 }
 
 export type CodeDataArray = Array<CodeData>

@@ -72,6 +72,25 @@ describe('CsvParserDiscountCode', () => {
     })
   })
 
+  describe('::_groupsToArray', () => {
+    it('should convert `groups` property to an Array', () => {
+      const actual = {
+        foo: 'bar',
+        groups: 'my-group-1;my-group-2',
+      }
+      const expected = {
+        foo: 'bar',
+        groups: ['my-group-1', 'my-group-2'],
+      }
+      expect(csvParser._groupsToArray(actual)).toEqual(expected)
+    })
+
+    it('should do nothing if there is no `groups` property', () => {
+      const sample = { foo: 'bar' }
+      expect(csvParser._cartDiscountsToArray(sample)).toEqual({ foo: 'bar' })
+    })
+  })
+
   describe(':: parse', () => {
     it('should successfully parse CSV to JSON', done => {
       const inputStream = fs.createReadStream(
@@ -81,7 +100,7 @@ describe('CsvParserDiscountCode', () => {
       const outputStream = streamtest.v2.toText((err, data) => {
         const result = JSON.parse(data)
         expect(result).toBeInstanceOf(Array)
-        expect(result.length).toBe(5)
+        expect(result).toHaveLength(5)
         done()
       })
       csvParser.parse(inputStream, outputStream)
@@ -111,7 +130,7 @@ describe('CsvParserDiscountCode', () => {
       const outputStream = streamtest.v2.toText((err, data) => {
         const result = JSON.parse(data)
         expect(result).toBeInstanceOf(Array)
-        expect(result.length).toBe(3)
+        expect(result).toHaveLength(3)
         done()
       })
       csvParser.parse(inputStream, outputStream)
