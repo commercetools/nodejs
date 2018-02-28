@@ -6,7 +6,6 @@
           "env",
           {
             "targets": {
-              "browsers": ["last 1 versions"],
               "node": "current"
             },
             "modules": "commonjs"

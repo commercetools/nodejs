@@ -100,7 +100,7 @@ describe('CsvParserDiscountCode', () => {
       const outputStream = streamtest.v2.toText((err, data) => {
         const result = JSON.parse(data)
         expect(result).toBeInstanceOf(Array)
-        expect(result.length).toBe(5)
+        expect(result).toHaveLength(5)
         done()
       })
       csvParser.parse(inputStream, outputStream)
@@ -130,7 +130,7 @@ describe('CsvParserDiscountCode', () => {
       const outputStream = streamtest.v2.toText((err, data) => {
         const result = JSON.parse(data)
         expect(result).toBeInstanceOf(Array)
-        expect(result.length).toBe(3)
+        expect(result).toHaveLength(3)
         done()
       })
       csvParser.parse(inputStream, outputStream)
