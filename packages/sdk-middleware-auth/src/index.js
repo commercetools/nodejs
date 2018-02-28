@@ -9,4 +9,7 @@ export {
 export {
   default as createAuthMiddlewareForAnonymousSessionFlow,
 } from './anonymous-session-flow'
+export {
+  default as createAuthMiddlewareForExistingToken,
+} from './existing-token'
 export * as scopes from './scopes'
