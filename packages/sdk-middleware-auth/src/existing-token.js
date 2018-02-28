@@ -31,7 +31,8 @@ export default function createAuthMiddlewareForExistingToken(
      *  3. force is false and authorization header exists
      */
     if (
-      config === null || !config.token ||
+      config === null ||
+      !config.token ||
       (((request.headers && request.headers.authorization) ||
         (request.headers && request.headers.Authorization)) &&
         config.force === false)
