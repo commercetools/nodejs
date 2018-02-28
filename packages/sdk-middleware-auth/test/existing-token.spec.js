@@ -30,13 +30,22 @@ describe('Existing Token', () => {
     }
   }
 
-  describe('No ardument', () => {
+  describe('No token', () => {
     it('should not modify request if no argument passed', () => {
       const request = createRequest()
       const next = req => {
         expect(req).toBe(request)
       }
       const authMiddleware = createAuthMiddlewareForExistingToken()
+      authMiddleware(next)(request, response)
+    })
+
+    it('should not modify request if argument has no token', () => {
+      const request = createRequest()
+      const next = req => {
+        expect(req).toBe(request)
+      }
+      const authMiddleware = createAuthMiddlewareForExistingToken({})
       authMiddleware(next)(request, response)
     })
   })

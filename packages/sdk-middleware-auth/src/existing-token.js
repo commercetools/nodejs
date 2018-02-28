@@ -25,8 +25,13 @@ export default function createAuthMiddlewareForExistingToken(
         }
       : null
 
+    /** The request will not be modified if:
+     *  1. no argument is passed
+     *  2. an object is passed that doesn't contain a `token`
+     *  3. force is false and authorization header exists
+     */
     if (
-      config === null ||
+      config === null || !config.token ||
       (((request.headers && request.headers.authorization) ||
         (request.headers && request.headers.Authorization)) &&
         config.force === false)
