@@ -60,7 +60,7 @@ Options:
   - If the file specified already exists, it will be overwritten.
   - The default location for status report logging is the standard output.
   - If no output path is specified, the exported products will be logged to the standard output.
-- The `predicate` flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates)
+- The `--predicate` flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates)
 - The `--expand` flag specifies the Reference or References to expand in the returned products. The required references for expansion should be passed in as normal strings separated by a space. More information about reference expansion can be found [here](https://docs.commercetools.com/http-api.html#reference-expansion)
 - The `--exportType` flag specifies if products returned should be in JSON file format or chunks. The chunk output is particularly useful if a different output format is desired (such as CSV), in which case, the chunks can be piped to a parser to get the desired format.
 - The `--staged` flag specifies the projection of the products to be fetched.
