@@ -153,11 +153,11 @@ const client = createClient({
 
 ## `createAuthMiddlewareWithExistingToken(authorization, options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) that attaches a known access token `Authorization` header.
+Creates a [middleware](/sdk/Glossary.md#middleware) that attaches a provided access token `Authorization` header.
 
 #### Named arguments (authorization, options)
 
-`authorization` _(String)_: the Authorization to attach to the request header. Can be in the format `"Bearer myAccessToken"`
+`authorization` _(String)_: the value for the `Authorization` header. For example, you may pass the scheme `"Bearer"` (`"Bearer 1234"`) or `"Basic"` (`"Basic 134"`) and so on, depending on your authentication mechanism.
 
 `options` is an optional _(Object)_, having the following properties:
 
