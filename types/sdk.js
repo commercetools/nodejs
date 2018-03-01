@@ -310,7 +310,5 @@ export type ActionGroup = {
 }
 
 export type ExistingTokenMiddlewareOptions = {
-  token: string,
-  tokenType?: string,
   force?: boolean,
 }

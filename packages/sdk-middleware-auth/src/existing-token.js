@@ -7,35 +7,27 @@ import type {
   Next,
 } from '../../../types/sdk'
 
-export default function createAuthMiddlewareForExistingToken(
-  options: ExistingTokenMiddlewareOptions | string
+export default function createAuthMiddlewareWithExistingToken(
+  authorization: string = '',
+  options: ExistingTokenMiddlewareOptions = {}
 ): Middleware {
   return (next: Next) => (
     request: MiddlewareRequest,
     response: MiddlewareResponse
   ) => {
-    const config = options
-      ? {
-          tokenType:
-            typeof options === 'object' && options !== null && options.tokenType
-              ? options.tokenType
-              : 'Bearer',
-          token: typeof options === 'string' ? options : options.token,
-          force: options.force !== undefined ? options.force : true,
-        }
-      : null
+    if (typeof authorization !== 'string')
+      throw new Error('authorization must be a string')
+    const force = options.force === undefined ? true : options.force
 
     /** The request will not be modified if:
      *  1. no argument is passed
-     *  2. an object is passed that doesn't contain a `token`
-     *  3. force is false and authorization header exists
+     *  2. force is false and authorization header exists
      */
     if (
-      config === null ||
-      !config.token ||
+      !authorization ||
       (((request.headers && request.headers.authorization) ||
         (request.headers && request.headers.Authorization)) &&
-        config.force === false)
+        force === false)
     ) {
       return next(request, response)
     }
@@ -43,7 +35,7 @@ export default function createAuthMiddlewareForExistingToken(
       ...request,
       headers: {
         ...request.headers,
-        Authorization: `${config.tokenType} ${config.token}`,
+        Authorization: authorization,
       },
     }
     return next(requestWithAuth, response)

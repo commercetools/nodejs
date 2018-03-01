@@ -1,4 +1,4 @@
-import { createAuthMiddlewareForExistingToken } from '../src'
+import { createAuthMiddlewareWithExistingToken } from '../src'
 
 describe('Existing Token', () => {
   const response = {
@@ -21,37 +21,26 @@ describe('Existing Token', () => {
       ...options,
     }
   }
-  function createTestMiddlewareOptions(options) {
-    return {
-      token: 'my-optimized-access-token',
-      tokenType: 'Bearer',
-      force: true,
-      ...options,
-    }
-  }
 
-  describe('No token', () => {
+  describe('Basics', () => {
     it('should not modify request if no argument passed', () => {
       const request = createRequest()
       const next = req => {
         expect(req).toBe(request)
       }
-      const authMiddleware = createAuthMiddlewareForExistingToken()
+      const authMiddleware = createAuthMiddlewareWithExistingToken()
       authMiddleware(next)(request, response)
     })
 
-    it('should not modify request if argument has no token', () => {
-      const request = createRequest()
-      const next = req => {
-        expect(req).toBe(request)
-      }
-      const authMiddleware = createAuthMiddlewareForExistingToken({})
-      authMiddleware(next)(request, response)
+    it('should throw if `authorization` is not a string', () => {
+      expect(createAuthMiddlewareWithExistingToken({})()).toThrowError(
+        /authorization must be a string/
+      )
     })
   })
 
-  describe('with argument as object', () => {
-    it('should configure request header with options passed in', () => {
+  describe('with only authorization argument', () => {
+    it('should configure request header with authorization', () => {
       const next = req => {
         expect(req).toEqual(expect.objectContaining(restOfRequest))
         expect(req).toEqual(
@@ -61,14 +50,13 @@ describe('Existing Token', () => {
         )
       }
       const request = createRequest()
-      const middlewareOptions = createTestMiddlewareOptions()
-      const authMiddleware = createAuthMiddlewareForExistingToken(
-        middlewareOptions
+      const authMiddleware = createAuthMiddlewareWithExistingToken(
+        'Bearer my-optimized-access-token'
       )
       authMiddleware(next)(request, response)
     })
 
-    it('should overide authorization if force is true', () => {
+    it('should overide existing authorization', () => {
       const next = req => {
         expect(req).toEqual(expect.objectContaining(restOfRequest))
         expect(req).toEqual(
@@ -80,9 +68,29 @@ describe('Existing Token', () => {
       const request = createRequest({
         headers: { Authorization: 'Basic old-access-token' },
       })
-      const middlewareOptions = createTestMiddlewareOptions()
-      const authMiddleware = createAuthMiddlewareForExistingToken(
-        middlewareOptions
+      const authMiddleware = createAuthMiddlewareWithExistingToken(
+        'Bearer my-optimized-access-token'
+      )
+      authMiddleware(next)(request, response)
+    })
+  })
+
+  describe('with two arguments', () => {
+    it('should overide existing authorization if false is true', () => {
+      const next = req => {
+        expect(req).toEqual(expect.objectContaining(restOfRequest))
+        expect(req).toEqual(
+          expect.objectContaining({
+            headers: { Authorization: 'Bearer my-optimized-access-token' },
+          })
+        )
+      }
+      const request = createRequest({
+        headers: { Authorization: 'Basic old-access-token' },
+      })
+      const authMiddleware = createAuthMiddlewareWithExistingToken(
+        'Bearer my-optimized-access-token',
+        { force: true }
       )
       authMiddleware(next)(request, response)
     })
@@ -99,26 +107,10 @@ describe('Existing Token', () => {
       const request = createRequest({
         headers: { Authorization: 'Basic old-access-token' },
       })
-      const middlewareOptions = createTestMiddlewareOptions({ force: false })
-      const authMiddleware = createAuthMiddlewareForExistingToken(
-        middlewareOptions
+      const authMiddleware = createAuthMiddlewareWithExistingToken(
+        'Bearer my-optimized-access-token',
+        { force: false }
       )
-      authMiddleware(next)(request, response)
-    })
-  })
-
-  describe('with argument as string', () => {
-    it('should configure request header with default options and token', () => {
-      const next = req => {
-        expect(req).toEqual(expect.objectContaining(restOfRequest))
-        expect(req).toEqual(
-          expect.objectContaining({
-            headers: { Authorization: 'Bearer my-token' },
-          })
-        )
-      }
-      const request = createRequest()
-      const authMiddleware = createAuthMiddlewareForExistingToken('my-token')
       authMiddleware(next)(request, response)
     })
   })

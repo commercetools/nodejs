@@ -10,6 +10,6 @@ export {
   default as createAuthMiddlewareForAnonymousSessionFlow,
 } from './anonymous-session-flow'
 export {
-  default as createAuthMiddlewareForExistingToken,
+  default as createAuthMiddlewareWithExistingToken,
 } from './existing-token'
 export * as scopes from './scopes'

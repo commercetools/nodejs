@@ -151,9 +151,9 @@ const client = createClient({
 })
 ```
 
-## `createAuthMiddlewareForExistingToken(options)`
+## `createAuthMiddlewareWithExistingToken(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) that attaches a known access token a request header.
+Creates a [middleware](/sdk/Glossary.md#middleware) that attaches a known access token `Authorization` header.
 
 #### Named arguments (options)
 
@@ -165,11 +165,11 @@ Creates a [middleware](/sdk/Glossary.md#middleware) that attaches a known access
 
 ```js
 import { createClient } from '@commercetools/sdk-client'
-import { createAuthMiddlewareForExistingToken } from '@commercetools/sdk-middleware-auth'
+import { createAuthMiddlewareWithExistingToken } from '@commercetools/sdk-middleware-auth'
 
 const client = createClient({
   middlewares: [
-    createAuthMiddlewareForExistingToken({
+    createAuthMiddlewareWithExistingToken({
       token: 'my-access-token',
       tokenType: 'Bearer',
       force: true,
