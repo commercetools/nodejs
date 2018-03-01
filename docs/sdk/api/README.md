@@ -44,7 +44,7 @@ Middelware to authenticate the [request](/sdk/Glossary.md#clientrequest) using o
 * [createAuthMiddlewareForPasswordFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforpasswordflow)
 * [createAuthMiddlewareForRefreshTokenFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforrefreshtokenflow)
 * [createAuthMiddlewareForAnonymousSessionFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforanonymoussessionflow)
-* [createAuthMiddlewareWithExistingToken(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewarewithexistingtoken)
+* [createAuthMiddlewareWithExistingToken(authorization, options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewarewithexistingtoken)
 
 ### `sdk-middleware-http`
 Middelware to send the actual HTTP [request](/sdk/Glossary.md#clientrequest).

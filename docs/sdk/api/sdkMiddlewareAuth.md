@@ -151,7 +151,7 @@ const client = createClient({
 })
 ```
 
-## `createAuthMiddlewareWithExistingToken(options)`
+## `createAuthMiddlewareWithExistingToken(authorization, options)`
 
 Creates a [middleware](/sdk/Glossary.md#middleware) that attaches a known access token `Authorization` header.
 
