@@ -55,8 +55,8 @@
     "yargs": "^10.0.3"
   },
   "devDependencies": {
-    "common-tags": "^1.4.0",
-    "streamtest": "^1.2.2",
-    "unzip": "^0.1.11"
+    "common-tags": "1.7.2",
+    "streamtest": "1.2.3",
+    "unzip": "0.1.11"
   }
 }
