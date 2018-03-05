@@ -1,0 +1,50 @@
+[
+    {
+      "key": "Initial",
+      "type": "LineItemState",
+      "roles": [],
+      "name": {
+        "en": "Initial"
+      },
+      "description": {
+        "en": "Initial is the first that (custom) line item gets after it's creation"
+      },
+      "builtIn": true,
+      "initial": true
+    },
+    {
+      "key": "Wubalubadubdub",
+      "type": "LineItemState",
+      "roles": [],
+      "name": {
+        "en": "science"
+      },
+      "builtIn": false,
+      "initial": true
+    },
+    {
+      "key": "Meeseeks",
+      "type": "LineItemState",
+      "roles": [],
+      "name": {
+        "en": "can do!"
+      },
+      "builtIn": false,
+      "initial": true
+    },
+    {
+      "key": "new-product-state",
+      "type": "ProductState",
+      "roles": [],
+      "name": {
+        "en": "new-sample-product-state",
+        "de": "neue-beispiele-product-state"
+      },
+      "description": {
+        "en": "john and jane doe",
+        "de": "angela merkel"
+      },
+      "builtIn": false,
+      "initial": true
+    }
+  ]
