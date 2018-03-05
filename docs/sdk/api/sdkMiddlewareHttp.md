@@ -21,6 +21,7 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle HTTP requests for 
 #### Named arguments (options)
 
 1. `host` *(String)*: the host of the HTTP API service
+2. `credentialsMode` *(String)*: one of the supported `credentials` modes (`omit`, `same-origin`, `include`), useful when working with HTTP Cookies. (Default: undefined)
 2. `includeResponseHeaders` *(Boolean)*: flag whether to include the response headers in the response, if omitted headers is omitted from response
 3. `includeOriginalRequest` *(Boolean)*: flag whether to include the original request sent in the response. Can be useful if you want to see the final request being sent.
 4. `maskSensitiveHeaderData` *(Boolean)*: flag to mask sensitie data in the header. e.g. Authorization token
