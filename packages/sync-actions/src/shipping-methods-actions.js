@@ -65,18 +65,24 @@ export function actionsMapZoneRates(diff, oldObj, newObj) {
     }),
     [CHANGE_ACTIONS]: (oldZoneRate, newZoneRate) => {
       let hasZoneActions = false
-      let shippingRateActions = []
-      Object.keys(diff.zoneRates).forEach(key => {
-        // We set a flag to true for adding the zone actions later
-        if (diff.zoneRates[key].zone) hasZoneActions = true
 
-        if (diff.zoneRates[key].shippingRates)
-          shippingRateActions = actionsMapZoneRatesShippingRates(
-            diff.zoneRates[key],
-            oldZoneRate,
-            newZoneRate
-          )
-      })
+      const shippingRateActions = Object.keys(diff.zoneRates).reduce(
+        (actions, key) => {
+          if (diff.zoneRates[key].zone) hasZoneActions = true
+
+          if (diff.zoneRates[key].shippingRates)
+            return [
+              ...actions,
+              ...actionsMapZoneRatesShippingRates(
+                diff.zoneRates[key],
+                oldZoneRate,
+                newZoneRate
+              ),
+            ]
+          return actions
+        },
+        []
+      )
 
       return flatten(
         hasZoneActions
