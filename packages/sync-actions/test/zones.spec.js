@@ -133,4 +133,58 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
   })
+
+  describe('Delete first locations', () => {
+    it('should build multiple actions for required changes', () => {
+      const before = {
+        locations: [
+          { country: 'Spain' },
+          { country: 'Italy' },
+          { country: 'France' },
+        ],
+      }
+      const now = {
+        locations: [{ country: 'France' }],
+      }
+
+      const actual = zonesSync.buildActions(now, before)
+      const expected = [
+        { action: 'removeLocation', location: before.locations[0] },
+        { action: 'removeLocation', location: before.locations[1] },
+      ]
+      expect(actual).toEqual(expected)
+    })
+  })
+
+  describe('Delete multiple locations', () => {
+    it('should build multiple actions for required changes', () => {
+      const before = {
+        locations: [
+          { country: 'Spain' },
+          { country: 'Italy' },
+          { country: 'Poland' },
+          { country: 'France' },
+          { country: 'Portugal' },
+          { country: 'Germany' },
+        ],
+      }
+      const now = {
+        locations: [
+          { country: 'Italy' },
+          { country: 'Poland' },
+          { country: 'Portugal' },
+          { country: 'Russia' },
+        ],
+      }
+
+      const actual = zonesSync.buildActions(now, before)
+      const expected = [
+        { action: 'removeLocation', location: before.locations[0] },
+        { action: 'removeLocation', location: before.locations[3] },
+        { action: 'addLocation', location: now.locations[3] },
+        { action: 'removeLocation', location: before.locations[5] },
+      ]
+      expect(actual).toEqual(expected)
+    })
+  })
 })
