@@ -54,7 +54,7 @@ describe('CsvParserPrice::parse', () => {
     const outputStream = streamtest.v2.toText((error, result) => {
       const prices = JSON.parse(result).prices
       const price = prices[0].prices[0]
-      expect(prices.length).toBe(2)
+      expect(prices).toHaveLength(2)
       expect(prices[0].sku).toBeTruthy()
       expect(price.value.centAmount).toBeTruthy()
       expect(price.value.currencyCode).toBeTruthy()
@@ -75,9 +75,9 @@ describe('CsvParserPrice::parse', () => {
 
     const outputStream = streamtest.v2.toText((error, result) => {
       const prices = JSON.parse(result).prices
-      expect(prices.length).toBe(2)
-      expect(prices[0].prices.length).toBe(2)
-      expect(prices[1].prices.length).toBe(1)
+      expect(prices).toHaveLength(2)
+      expect(prices[0].prices).toHaveLength(2)
+      expect(prices[1].prices).toHaveLength(1)
       expect(prices[0].sku).toBeTruthy()
       done()
     })
@@ -252,7 +252,7 @@ describe('CsvParserPrice::processCustomField', () => {
         done()
       })
       .catch(error => {
-        expect(error.length).toBe(1)
+        expect(error).toHaveLength(1)
         expect(error[0].message).toBe(
           "[row 2: liqui 63 69 ty] - The number '2' isn't valid"
         )

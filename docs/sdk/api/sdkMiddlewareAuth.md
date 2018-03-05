@@ -19,14 +19,14 @@ npm install --save @commercetools/sdk-middleware-auth
 
 ## `createAuthMiddlewareForClientCredentialsFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Client Credentials Flow](http://dev.commercetools.com/http-api-authorization.html#client-credentials-flow) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Client Credentials Flow](https://docs.commercetools.com/http-api-authorization.html#client-credentials-flow) of the commercetools platform API.
 
 #### Named arguments (options)
 
 1. `host` _(String)_: the host of the OAuth API service
 2. `projectKey` _(String)_: the key of the project to assign the default scope to
 3. `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
-4. `scopes` _(Array)_: a list of [scopes](http://dev.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
+4. `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
 
 #### Usage example
 
@@ -51,7 +51,7 @@ const client = createClient({
 
 ## `createAuthMiddlewareForPasswordFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Password Flow](http://dev.commercetools.com/http-api-authorization.html#password-flow) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Password Flow](https://docs.commercetools.com/http-api-authorization.html#password-flow) of the commercetools platform API.
 
 #### Named arguments (options)
 
@@ -59,7 +59,7 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 2. `projectKey` _(String)_: the key of the project to assign the default scope to
 3. `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`, `user`)
   * The `user` field is an object containing `username` and `password`. [Sample below](#usage-example-1)
-4. `scopes` _(Array)_: a list of [scopes](http://dev.commercetools.com/http-api-authorization.html#scopes) to assign to the OAuth token. _No default scope is sent_
+4. `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) to assign to the OAuth token. _No default scope is sent_
 
 #### Usage example
 
@@ -88,14 +88,14 @@ const client = createClient({
 
 ## `createAuthMiddlewareForAnonymousSessionFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Anonymous Session Flow](http://dev.commercetools.com/http-api-authorization.html#tokens-for-anonymous-sessions) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Anonymous Session Flow](https://docs.commercetools.com/http-api-authorization.html#tokens-for-anonymous-sessions) of the commercetools platform API.
 
 #### Named arguments (options)
 
 1. `host` _(String)_: the host of the OAuth API service
 2. `projectKey` _(String)_: the key of the project to assign the default scope to
 3. `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`, `anonymousId`)
-4. `scopes` _(Array)_: a list of [scopes](http://dev.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
+4. `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
 
 #### Usage example
 
@@ -121,7 +121,7 @@ const client = createClient({
 
 ## `createAuthMiddlewareForRefreshTokenFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Refresh Token Flow](http://dev.commercetools.com/http-api-authorization.html#refresh-token-flow) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Refresh Token Flow](https://docs.commercetools.com/http-api-authorization.html#refresh-token-flow) of the commercetools platform API.
 
 #### Named arguments (options)
 
@@ -147,6 +147,34 @@ const client = createClient({
       },
       refreshToken: 'foobar123',
     }),
+  ],
+})
+```
+
+## `createAuthMiddlewareWithExistingToken(authorization, options)`
+
+Creates a [middleware](/sdk/Glossary.md#middleware) that attaches a provided access token `Authorization` header.
+
+#### Named arguments (authorization, options)
+
+`authorization` _(String)_: the value for the `Authorization` header. For example, you may pass the scheme `"Bearer"` (`"Bearer 1234"`) or `"Basic"` (`"Basic 134"`) and so on, depending on your authentication mechanism.
+
+`options` is an optional _(Object)_, having the following properties:
+
+1. `force` _(Boolean)_: if set to true, existing Authorization header (if any) in the request will be overridden with the supplied access token (Default: `true`)
+
+```js
+import { createClient } from '@commercetools/sdk-client'
+import { createAuthMiddlewareWithExistingToken } from '@commercetools/sdk-middleware-auth'
+
+const accessToken = 'my-access-token'
+
+const client = createClient({
+  middlewares: [
+    createAuthMiddlewareWithExistingToken(
+      `Bearer ${accessToken}`,
+      { force: true }
+    ),
   ],
 })
 ```

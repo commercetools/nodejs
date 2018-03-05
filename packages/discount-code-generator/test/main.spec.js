@@ -45,11 +45,11 @@ describe('discountCodeGenerator', () => {
   test('should generate codes according to required specifications', () => {
     const codes = discountCodeGenerator(options, data)
     expect(Array.isArray(codes)).toBeTruthy()
-    expect(codes.length).toBe(100)
+    expect(codes).toHaveLength(100)
 
     codes.forEach(codeObject => {
       expect(codeObject).toMatchObject(data)
-      expect(codeObject.code.length).toBe(15)
+      expect(codeObject.code).toHaveLength(15)
       expect(codeObject.code).toMatch(/^CT/)
     })
   })
@@ -58,7 +58,7 @@ describe('discountCodeGenerator', () => {
     const codes = discountCodeGenerator({ quantity: 2 }, data)
     codes.forEach(codeObject => {
       expect(codeObject).toMatchObject(data)
-      expect(codeObject.code.length).toBe(11)
+      expect(codeObject.code).toHaveLength(11)
     })
   })
 })

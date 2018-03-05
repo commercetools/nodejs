@@ -30,7 +30,7 @@ describe('mapCustomFields::parse', () => {
 
     const result = mapCustomFields.parse(data, customTypeSample, 1)
 
-    expect(result.error.length).toBe(0)
+    expect(result.error).toHaveLength(0)
     const expected = {
       fields: {
         booleantype: true,
@@ -71,7 +71,7 @@ describe('mapCustomFields::parse', () => {
 
     const result = mapCustomFields.parse(data, customTypeSample, 1)
 
-    expect(result.error.length).toBe(8)
+    expect(result.error).toHaveLength(8)
     const expected = {
       fields: {
         enumtype: 'Ready',
@@ -191,7 +191,7 @@ describe('mapCustomFields::mapSet', () => {
       const elementType = { name: 'Number' }
       const result = mapCustomFields.mapSet('1,2,3,4', elementType)
 
-      expect(result.error.length).toBe(0)
+      expect(result.error).toHaveLength(0)
       const expected = [1, 2, 3, 4]
       expect(result.data).toEqual(expected)
     })
@@ -203,7 +203,7 @@ describe('mapCustomFields::mapSet', () => {
       const moneySet = 'EUR 1200,USD 40,NGN 200'
       const result = mapCustomFields.mapSet(moneySet, elementType)
 
-      expect(result.error.length).toBe(0)
+      expect(result.error).toHaveLength(0)
       const expected = [
         {
           currencyCode: 'EUR',
@@ -226,11 +226,11 @@ describe('mapCustomFields::mapSet', () => {
     const elementType = { name: 'Boolean' }
     const moneySet = 'true, false, false, abi'
     const result = mapCustomFields.mapSet(moneySet, elementType)
-    expect(result.error.length).toBe(1)
+    expect(result.error).toHaveLength(1)
     expect(result.error[0]).toEqual(
       "The value 'abi' is not a valid boolean value"
     )
-    expect(result.data.length).toBe(3)
+    expect(result.data).toHaveLength(3)
   })
 
   test('should return error if elementType in set is not supported', () => {
@@ -238,7 +238,7 @@ describe('mapCustomFields::mapSet', () => {
     const moneySet = 'true, false, false, abi'
     const result = mapCustomFields.mapSet(moneySet, elementType)
 
-    expect(result.error.length).toBe(4)
+    expect(result.error).toHaveLength(4)
     expect(result.error[0]).toEqual(
       // eslint-disable-next-line max-len
       "'unsupportedType' type is not supported! Kindly raise an issue for this"

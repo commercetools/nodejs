@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sync-actions",
-  "version": "1.19.0",
+  "version": "1.20.1",
   "description": "Build API update actions for the commercetools platform.",
   "keywords": [
     "commercetools",
@@ -34,6 +34,7 @@
     "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSyncActions -i src/index.js -o dist/commercetools-sync-actions.cjs.js"
   },
   "dependencies": {
+    "fast-equals": "1.0.6",
     "jsondiffpatch": "0.2.4",
     "lodash.flatten": "4.4.0",
     "lodash.foreach": "4.5.0",

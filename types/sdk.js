@@ -308,3 +308,7 @@ export type ActionGroup = {
   type: string,
   group: 'black' | 'white',
 }
+
+export type ExistingTokenMiddlewareOptions = {
+  force?: boolean,
+}

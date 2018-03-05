@@ -3,6 +3,7 @@
 * [Read Me](/README.md)
 * [SDK](/sdk/README.md)
   * [Middlewares](/sdk/Middlewares.md)
+    * [Example](/sdk/Middlewares.md#example)
   * [Upgrading from sphere-node-sdk](/sdk/upgrading-from-sphere-node-sdk.md)
   * [Testing](/sdk/Testing.md)
   * [Glossary](/sdk/Glossary.md)
@@ -30,3 +31,4 @@
   * [Inventories Exporter](/cli/inventories-exporter.md)
   * [Price Exporter](/cli/price-exporter.md)
   * [Product Exporter](/cli/product-exporter.md)
+  * [Product JSON to CSV](/cli/product-json-to-csv.md)

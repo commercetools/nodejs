@@ -15,6 +15,7 @@
     "@commercetools/inventories-exporter": "*",
     "@commercetools/price-exporter": "*",
     "@commercetools/product-exporter": "*",
+    "@commercetools/product-json-to-csv": "*",
     "@commercetools/sdk-client": "*",
     "@commercetools/sdk-middleware-auth": "*",
     "@commercetools/sdk-middleware-http": "*",
@@ -29,6 +30,7 @@
     "isuuid": "^0.1.0",
     "lodash.omit": "^4.5.0",
     "streamtest": "^1.2.2",
-    "tmp": "^0.0.31"
+    "tmp": "^0.0.31",
+    "unzip": "^0.1.11"
   }
 }

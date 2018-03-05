@@ -137,17 +137,16 @@ export default class DiscountCodeExport {
     }).discountCodes
   }
 
-  // Use this method to make the `cartDiscounts`
+  // Use this method to make the `cartDiscounts` and `groups`
   // field compatible with the importer
   _processCode(data: CodeData): Object {
-    const newCodeObj = data
-    const cartDiscounts = newCodeObj.cartDiscounts.reduce(
-      (acc: string, discount: Object): string => {
-        if (!acc) return discount.id
-        return `${acc}${this.config.multiValueDelimiter}${discount.id}`
-      },
-      ''
-    )
+    const { cartDiscounts, groups, ...restDiscountCodeData } = data
+    const cartDiscountsString = cartDiscounts
+      .map(cartDiscount => cartDiscount.id)
+      .join(this.config.multiValueDelimiter)
+    const groupsString = groups
+      ? groups.join(this.config.multiValueDelimiter)
+      : ''
 
     // This part is necessary because the API sends empty objects in these
     // fields if empty and they are not correctly written to the CSV file
@@ -157,10 +156,18 @@ export default class DiscountCodeExport {
       'lineItemFieldTypes',
       'customLineItemFieldTypes',
     ]
-    objKeys.forEach((key: string) => {
-      if (newCodeObj[key] && !Object.keys(newCodeObj[key]).length)
-        delete newCodeObj[key]
+
+    const discountCodeData = Object.entries(restDiscountCodeData).reduce(
+      (discountCode, [discountCodeKey, value: Object]) =>
+        objKeys.includes(discountCodeKey) && !Object.entries(value).length
+          ? discountCode
+          : { ...discountCode, [discountCodeKey]: value },
+      {}
+    )
+    return flatten({
+      ...discountCodeData,
+      cartDiscounts: cartDiscountsString,
+      groups: groupsString,
     })
-    return flatten(Object.assign({ ...newCodeObj, cartDiscounts }))
   }
 }
