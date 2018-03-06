@@ -18,7 +18,7 @@ const getIsRemovedOperation = key => REGEX_UNDERSCORE_NUMBER.test(key)
 export const baseActionsList = [
   { action: 'changeName', key: 'name' },
   { action: 'setKey', key: 'key' },
-  { action: 'setDescription', key: 'description' },
+  { action: 'changeDescription', key: 'description' },
 ]
 
 export function actionsMapBase(diff, previous, next) {
