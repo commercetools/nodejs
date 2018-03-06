@@ -42,6 +42,7 @@ function calcDelayDuration(
 
 export default function createHttpMiddleware({
   host,
+  credentialsMode,
   includeResponseHeaders,
   includeOriginalRequest,
   maskSensitiveHeaderData,
@@ -68,6 +69,7 @@ export default function createHttpMiddleware({
     const requestObj: Object = new Request(url, {
       method: request.method,
       headers: new Headers(requestHeader),
+      ...(credentialsMode ? { credentials: credentialsMode } : {}),
       ...(body ? { body } : {}),
     })
     let retryCount = 0
