@@ -480,3 +480,41 @@ client.execute(productTypesRequest)
 .then(result => ...)
 .catch(error => ...)
 ```
+## `createSyncShippingMethods(actionGroups)`
+
+> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+
+Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _zones_.
+
+#### Arguments
+
+1. `actionGroups` *(Array)*: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+
+#### Usage example
+
+```js
+import { createSyncShippingMethods } from '@commercetools/sync-actions'
+import { createClient } from '@commercetools/sdk-client'
+
+const syncShippingMethods = createSyncShippingMethods()
+const client = createClient({
+  middlewares: [...],
+})
+
+const before = {
+  key: 'Key 1'
+}
+
+const now = {
+  name: 'Key 2'
+}
+
+const actions = syncShippingMethods.buildActions(now, before)
+const shippingMethodsRequests = {
+  url: `/shipping-methods/${before.id}`,
+
+
+client.execute(shippingMethodsRequests)
+.then(result => ...)
+.catch(error => ...)
+```

@@ -153,6 +153,7 @@ export type PasswordAuthMiddlewareOptions = {
 
 export type HttpMiddlewareOptions = {
   host: string,
+  credentialsMode?: 'omit' | 'same-origin' | 'include',
   includeHeaders?: boolean,
   includeResponseHeaders?: boolean,
   includeOriginalRequest?: boolean,
@@ -307,4 +308,8 @@ export type SyncAction = {
 export type ActionGroup = {
   type: string,
   group: 'black' | 'white',
+}
+
+export type ExistingTokenMiddlewareOptions = {
+  force?: boolean,
 }

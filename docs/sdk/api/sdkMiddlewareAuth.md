@@ -150,3 +150,31 @@ const client = createClient({
   ],
 })
 ```
+
+## `createAuthMiddlewareWithExistingToken(authorization, options)`
+
+Creates a [middleware](/sdk/Glossary.md#middleware) that attaches a provided access token `Authorization` header.
+
+#### Named arguments (authorization, options)
+
+`authorization` _(String)_: the value for the `Authorization` header. For example, you may pass the scheme `"Bearer"` (`"Bearer 1234"`) or `"Basic"` (`"Basic 134"`) and so on, depending on your authentication mechanism.
+
+`options` is an optional _(Object)_, having the following properties:
+
+1. `force` _(Boolean)_: if set to true, existing Authorization header (if any) in the request will be overridden with the supplied access token (Default: `true`)
+
+```js
+import { createClient } from '@commercetools/sdk-client'
+import { createAuthMiddlewareWithExistingToken } from '@commercetools/sdk-middleware-auth'
+
+const accessToken = 'my-access-token'
+
+const client = createClient({
+  middlewares: [
+    createAuthMiddlewareWithExistingToken(
+      `Bearer ${accessToken}`,
+      { force: true }
+    ),
+  ],
+})
+```
