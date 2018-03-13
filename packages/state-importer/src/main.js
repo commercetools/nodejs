@@ -1,4 +1,5 @@
 /* @flow */
+import Promise from 'bluebird'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import {
@@ -103,8 +104,72 @@ export default class StateImport {
       )
   }
 
-  _createOrUpdate() {
-    // TODO
+  _createOrUpdate(
+    newStates: Array<StateData>,
+    existingStates: Array<StateData>
+  ) {
+    return Promise.map(newStates, newState => {
+      const existingState = existingStates.find(
+        state => state.key === newState.key
+      )
+      if (existingState)
+        return this._update(newState, existingState)
+          .then(response => {
+            if (response && response.statusCode === 304)
+              this._summary.unchanged += 1
+            else this._summary.updated += 1
+            return Promise.resolve()
+          })
+          .catch(error => {
+            if (this.continueOnProblems) {
+              this._summary.updateErrorCount += 1
+              this._summary.errors.push(error.message || error)
+              this.logger.error(
+                'Update error occured but ignored. See summary for details'
+              )
+              return Promise.resolve()
+            }
+            this.logger.error(
+              'Process stopped due to error while updating state. See summary for details'
+            )
+            this._summary.updateErrorCount += 1
+            this._summary.errors.push(error.message || error)
+            return Promise.reject(error)
+          })
+      return this._create(newState)
+        .then(() => {
+          this._summary.created += 1
+          return Promise.resolve()
+        })
+        .catch(error => {
+          if (this.continueOnProblems) {
+            this._summary.createErrorCount += 1
+            this._summary.errors.push(error.message || error)
+            this.logger.error(
+              'Create error occured but ignored. See summary for details'
+            )
+            return Promise.resolve()
+          }
+          this.logger.error(
+            'Process stopped due to error while creating discount code. See summary for details'
+          )
+          this._summary.createErrorCount += 1
+          this._summary.errors.push(error.message || error)
+          return Promise.reject(error)
+        })
+    })
+  }
+
+  _update(/* newState: StateData, existingState: StateData */) {
+    // TODO: Implement state update actions
+  }
+
+  _create(state: StateData) {
+    const service = this._createService()
+    const uri = service.build()
+    const req = { uri, method: 'POST', body: state }
+    this.logger.verbose('Creating new state entry')
+    return this.client.execute(req)
   }
 
   _createService() {

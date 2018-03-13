@@ -31,7 +31,8 @@
     "@commercetools/sdk-middleware-auth": "^3.5.0",
     "@commercetools/sdk-middleware-http": "^2.2.8",
     "@commercetools/sdk-middleware-user-agent": "^1.2.6",
-    "@commercetools/sync-actions": "^1.20.1"
+    "@commercetools/sync-actions": "^1.20.1",
+    "bluebird": "^3.5.1"
   },
   "devDependencies": {
     "common-tags": "1.7.2"

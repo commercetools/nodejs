@@ -81,9 +81,145 @@ describe('StateImport', () => {
       stateImport._createOrUpdate = jest.fn()
       await stateImport._processBatches(states)
       expect(stateImport._createOrUpdate).toHaveBeenCalledTimes(1)
-      expect(stateImport._createOrUpdate).toHaveBeenCalledWith(
+      expect(stateImport._createOrUpdate).toBeCalledWith(
         states,
         response.body.results
+      )
+    })
+  })
+
+  describe('::_createOrUpdate', () => {
+    const existingStates = states.slice(0, 2)
+    beforeEach(() => {
+      stateImport._create = jest.fn(() => Promise.resolve())
+      stateImport._update = jest.fn(() => Promise.resolve())
+    })
+
+    it('should be defined', () => {
+      expect(stateImport._createOrUpdate).toBeDefined()
+    })
+
+    it('should call `_update` if state already exists', async () => {
+      await stateImport._createOrUpdate(states, existingStates)
+      expect(stateImport._update).toHaveBeenCalledTimes(2)
+      expect(stateImport._update).toBeCalledWith(states[0], existingStates[0])
+      expect(stateImport._update).toHaveBeenLastCalledWith(
+        states[1],
+        existingStates[1]
+      )
+    })
+
+    it('should resolve if state is updated', async () => {
+      await stateImport._createOrUpdate(states, existingStates)
+      expect(stateImport._summary.updated).toBe(2)
+    })
+
+    it('should resolve and do nothing when no update actions', async () => {
+      stateImport._update.mockImplementation(() =>
+        Promise.resolve({ statusCode: 304 })
+      )
+      await stateImport._createOrUpdate(states, existingStates)
+      expect(stateImport._summary.unchanged).toBe(2)
+      expect(stateImport._summary.updated).toBe(0)
+    })
+
+    it('should continue update on errors if `continueOnProblems`', async () => {
+      stateImport.continueOnProblems = true
+      stateImport._update.mockImplementationOnce(() =>
+        Promise.reject(new Error('First invalid state'))
+      )
+      stateImport._update.mockImplementationOnce(() =>
+        Promise.reject(new Error('Second invalid state'))
+      )
+      await stateImport._createOrUpdate(states, existingStates)
+      expect(stateImport._update).toHaveBeenCalledTimes(2)
+      expect(stateImport._summary.updated).toBe(0)
+      expect(stateImport._summary.updateErrorCount).toBe(2)
+      expect(stateImport._summary.errors).toHaveLength(2)
+      expect(stateImport._summary.errors[0]).toBe('First invalid state')
+      expect(stateImport._summary.errors[1]).toBe('Second invalid state')
+    })
+
+    it('should reject by default and stop on update error', async () => {
+      stateImport._update.mockImplementation(() =>
+        Promise.reject(new Error('Invalid state'))
+      )
+      try {
+        await stateImport._createOrUpdate(states, existingStates)
+      } catch (error) {
+        // Put assertions in catch block because we expect promises to fail
+        expect(stateImport._update).toBeCalled()
+        expect(stateImport._summary.updated).toBe(0)
+        expect(stateImport._summary.updateErrorCount).toBe(2)
+        expect(stateImport._summary.errors).toHaveLength(2)
+        expect(stateImport._summary.errors[0]).toBe('Invalid state')
+        expect(error).toEqual(new Error('Invalid state'))
+      }
+    })
+
+    it('should call `_create` if state is unique', async () => {
+      await stateImport._createOrUpdate(states, existingStates)
+      expect(stateImport._create).toHaveBeenCalledTimes(2)
+      expect(stateImport._create).toBeCalledWith(states[2])
+      expect(stateImport._create).toBeCalledWith(states[3])
+    })
+
+    it('should resolve if state is created and imported', async () => {
+      await stateImport._createOrUpdate(states, existingStates)
+      expect(stateImport._summary.created).toBe(2)
+    })
+
+    it('should continue create on errors if `continueOnProblems`', async () => {
+      stateImport.continueOnProblems = true
+      stateImport._create.mockImplementationOnce(() =>
+        Promise.reject(new Error('First invalid state'))
+      )
+      stateImport._create.mockImplementationOnce(() =>
+        Promise.reject(new Error('Second invalid state'))
+      )
+      await stateImport._createOrUpdate(states, existingStates)
+      expect(stateImport._create).toHaveBeenCalledTimes(2)
+      expect(stateImport._summary.created).toBe(0)
+      expect(stateImport._summary.createErrorCount).toBe(2)
+      expect(stateImport._summary.errors).toHaveLength(2)
+      expect(stateImport._summary.errors[0]).toBe('First invalid state')
+      expect(stateImport._summary.errors[1]).toBe('Second invalid state')
+    })
+
+    it('should reject by default and stop on create error', async () => {
+      stateImport._create.mockImplementation(() =>
+        Promise.reject(new Error('Invalid new state'))
+      )
+      try {
+        await stateImport._createOrUpdate(states, existingStates)
+      } catch (error) {
+        // Put assertions in catch block because we expect promises to fail
+        expect(stateImport._create).toBeCalled()
+        expect(stateImport._summary.created).toBe(0)
+        expect(stateImport._summary.createErrorCount).toBe(2)
+        expect(stateImport._summary.errors).toHaveLength(2)
+        expect(stateImport._summary.errors[0]).toBe('Invalid new state')
+        expect(error).toEqual(new Error('Invalid new state'))
+      }
+    })
+  })
+
+  describe('::_update', () => {
+    it('should be defined', () => {
+      expect(stateImport._update).toBeDefined()
+    })
+  })
+
+  describe('::_create', () => {
+    it('should be defined', () => {
+      expect(stateImport._create).toBeDefined()
+    })
+
+    it('should POST a new state', async () => {
+      stateImport.client.execute = jest.fn(() => Promise.resolve())
+      await stateImport._create(states[0])
+      expect(stateImport.client.execute).toBeCalledWith(
+        expect.objectContaining({ body: states[0] })
       )
     })
   })
