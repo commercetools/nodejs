@@ -36,7 +36,6 @@ export function actionsMapLocations(diff, oldObj, newObj) {
             location: oldLocation,
           }
         : null,
-
     [CHANGE_ACTIONS]: (oldLocation, newLocation) => {
       const result = []
 

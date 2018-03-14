@@ -236,21 +236,21 @@ describe('Actions', () => {
     // simply replace the roles that need to be replaced with add and remove
     const before = {
       key: 'state-1',
-      roles: ['Return', 'Another'],
+      roles: ['Return', 'Another', 'Baz'],
     }
     const now = {
       key: 'state-1',
-      roles: ['Another', 'ReviewIncludedInStatistics'],
+      roles: ['Another', 'ReviewIncludedInStatistics', 'Foo'],
     }
     const actual = statesSync.buildActions(now, before)
     const expected = [
       {
         action: 'removeRoles',
-        roles: ['Return'],
+        roles: ['Return', 'Baz'],
       },
       {
         action: 'addRoles',
-        roles: ['ReviewIncludedInStatistics'],
+        roles: ['ReviewIncludedInStatistics', 'Foo'],
       },
     ]
     expect(actual).toEqual(expected)

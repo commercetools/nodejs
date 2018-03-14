@@ -2,7 +2,6 @@ import { buildBaseAttributesActions } from './utils/common-actions'
 import createBuildArrayActions, {
   ADD_ACTIONS,
   REMOVE_ACTIONS,
-  CHANGE_ACTIONS,
 } from './utils/create-build-array-actions'
 
 export const baseActionsList = [
@@ -33,16 +32,6 @@ export function actionsMapRoles(diff, oldObj, newObj) {
       action: 'removeRoles',
       roles: oldRole,
     }),
-    [CHANGE_ACTIONS]: (oldRole, newRole) => [
-      {
-        action: 'removeRoles',
-        roles: oldRole,
-      },
-      {
-        action: 'addRoles',
-        roles: newRole,
-      },
-    ],
   })
 
   return handler(diff, oldObj, newObj)
