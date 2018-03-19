@@ -57,6 +57,21 @@ describe('StateImport', () => {
     })
   })
 
+  describe('::run', () => {
+    it('should be defined', () => {
+      expect(stateImport.run).toBeDefined()
+    })
+    it('should return `_processBatches` and pass it the argument', async () => {
+      stateImport._processBatches = jest.fn()
+      stateImport._processBatches.mockReturnValue(Promise.resolve('imported'))
+
+      const response = await stateImport.run('state')
+      expect(response).toBe('imported')
+      expect(stateImport._processBatches).toHaveBeenCalledTimes(1)
+      expect(stateImport._processBatches).toBeCalledWith('state')
+    })
+  })
+
   describe('::_buildPredicate', () => {
     it('should be defined', () => {
       expect(StateImport._buildPredicate).toBeDefined()
@@ -205,8 +220,23 @@ describe('StateImport', () => {
   })
 
   describe('::_update', () => {
+    const currentState = { ...states[1], id: 'some_Id' }
+
     it('should be defined', () => {
       expect(stateImport._update).toBeDefined()
+    })
+
+    it('should not call API if no update actions', async () => {
+      stateImport.client.execute = jest.fn(() => Promise.resolve())
+      const result = await stateImport._update(states[1], currentState)
+      expect(result).toEqual({ statusCode: 304 })
+      expect(stateImport.client.execute).not.toHaveBeenCalled()
+    })
+
+    it('should POST a state update', async () => {
+      stateImport.client.execute = jest.fn(() => Promise.resolve())
+      await stateImport._update(states[2], currentState)
+      expect(stateImport.client.execute).toHaveBeenCalled()
     })
   })
 

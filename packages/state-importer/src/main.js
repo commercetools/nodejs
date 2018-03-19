@@ -8,6 +8,7 @@ import {
 } from '@commercetools/sdk-middleware-auth'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
+import { createSyncStates } from '@commercetools/sync-actions'
 import pkg from '../package.json'
 import type {
   ApiConfigOptions,
@@ -16,7 +17,7 @@ import type {
   StateData,
   Summary,
 } from '../../../types/state'
-import type { Client } from '../../../types/sdk'
+import type { Client, SyncAction } from '../../../types/sdk'
 
 class StateImportError extends Error {
   error: any
@@ -44,6 +45,7 @@ export default class StateImport {
   apiConfig: ApiConfigOptions
   logger: LoggerOptions
   _summary: Summary
+  syncStates: SyncAction
 
   constructor(options: ConstructorOptions, logger: LoggerOptions) {
     if (!options.apiConfig)
@@ -64,6 +66,8 @@ export default class StateImport {
       ],
     })
 
+    this.syncStates = createSyncStates()
+
     this.logger = logger || {
       error: () => {},
       warn: () => {},
@@ -79,9 +83,14 @@ export default class StateImport {
 
   // Wrapper function for compatibility with CLI
   processStream(chunk: Array<StateData>, cb: () => mixed) {
-    this.logger.verbose(`Starting conversion of ${chunk.length} discount codes`)
+    this.logger.verbose(`Starting conversion of ${chunk.length} states`)
     return this._processBatches(chunk).then(cb)
     // No catch block as errors will be caught in the CLI
+  }
+
+  // Public function for direct module usage
+  run(states: Array<StateData>) {
+    return this._processBatches(states)
   }
 
   _processBatches(states: Array<StateData>) {
@@ -160,8 +169,19 @@ export default class StateImport {
     })
   }
 
-  _update(/* newState: StateData, existingState: StateData */) {
-    // TODO: Implement state update actions
+  _update(newState: StateData, existingState: StateData) {
+    const actions = this.syncStates.buildActions(newState, existingState)
+    // don't call API if there's no update action
+    if (!actions.length) return Promise.resolve({ statusCode: 304 })
+    const service = this._createService()
+    const uri = service.byId(existingState.id).build()
+    const body = {
+      version: existingState.version,
+      actions,
+    }
+    const req = { uri, method: 'POST', body }
+    this.logger.verbose('Updating existing code entry')
+    return this.client.execute(req)
   }
 
   _create(state: StateData) {
