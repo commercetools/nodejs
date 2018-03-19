@@ -1,5 +1,6 @@
-import qs from 'querystring'
 import { createClient } from '../src'
+
+const identityMiddleware = (/* dispatch */) => next => request => next(request)
 
 describe('validate options', () => {
   it('middlewares (required)', () => {
@@ -18,20 +19,19 @@ describe('validate options', () => {
 })
 
 describe('api', () => {
-  const middlewares = [next => (...args) => next(...args)]
+  const middlewares = [identityMiddleware]
   const client = createClient({ middlewares })
   const request = {
     uri: '/foo',
     method: 'POST',
   }
 
-  it('expose "execute" function', () => {
+  it('exposes "execute" function', () => {
     expect(typeof client.execute).toBe('function')
   })
 
-  it('execute should return a promise', () => {
-    const promise = client.execute(request)
-    expect(promise.then).toBeDefined()
+  it('execute should return the request', () => {
+    expect(client.execute(request)).toBe(request)
   })
 })
 
@@ -43,384 +43,58 @@ describe('execute', () => {
     headers: {},
   }
 
-  it('should throw if request is missing', () => {
-    const middlewares = [next => (...args) => next(...args)]
-    const client = createClient({ middlewares })
-    expect(() => client.execute()).toThrowError(
-      /The "exec" function requires a "Request" object/
-    )
-  })
-
-  it('should throw if request uri is invalid', () => {
-    const middlewares = [next => (...args) => next(...args)]
-    const client = createClient({ middlewares })
-    const badRequest = {
-      ...request,
-      uri: 24,
-    }
-    expect(() => client.execute(badRequest)).toThrowError(
-      /The "exec" Request object requires a valid uri/
-    )
-  })
-
-  it('should throw if request method is invalid', () => {
-    const middlewares = [next => (...args) => next(...args)]
-    const client = createClient({ middlewares })
-    const badRequest = {
-      ...request,
-      method: 'INVALID_METHOD',
-    }
-    expect(() => client.execute(badRequest)).toThrowError(
-      /The "exec" Request object requires a valid method./
-    )
-  })
-
-  it('execute and resolve a simple request', () => {
-    const client = createClient({
-      middlewares: [
-        next => (req, res) => {
-          const headers = {
-            Authorization: 'Bearer 123',
-          }
-          next({ ...req, headers }, res)
-        },
-        next => (req, res) => {
-          const body = {
-            id: '123',
-            version: 1,
-          }
-          next(req, { ...res, body, statusCode: 200 })
-        },
-      ],
+  describe('when request is invalid', () => {
+    let client
+    beforeEach(() => {
+      const middlewares = [identityMiddleware]
+      client = createClient({ middlewares })
     })
 
-    return client.execute(request).then(response => {
-      expect(response).toEqual({
-        body: {
-          id: '123',
-          version: 1,
-        },
-        statusCode: 200,
-      })
-    })
-  })
-
-  it('execute and reject a request', () => {
-    const client = createClient({
-      middlewares: [
-        next => (req, res) => {
-          const error = new Error('Invalid password')
-          next(req, { ...res, error, statusCode: 400 })
-        },
-      ],
-    })
-
-    return client
-      .execute(request)
-      .then(() =>
-        Promise.reject(
-          new Error(
-            'This function should never be called, the response was rejected'
-          )
+    describe('when request is missing', () => {
+      it('should throw', () => {
+        expect(() => client.execute()).toThrowError(
+          /The "exec" function requires a "Request" object/
         )
-      )
-      .catch(error => {
-        expect(error.message).toEqual('Invalid password')
-        return Promise.resolve()
-      })
-  })
-
-  describe('ensure correct functions are used to resolve the promise', () => {
-    it('resolve', () => {
-      const customResolveSpy = jest.fn()
-      const client = createClient({
-        middlewares: [
-          next => (req, res) => {
-            const responseWithCustomResolver = {
-              resolve() {
-                customResolveSpy()
-                res.resolve()
-              },
-            }
-            next(req, responseWithCustomResolver)
-          },
-        ],
-      })
-
-      return client.execute(request).then(() => {
-        expect(customResolveSpy).toHaveBeenCalled()
       })
     })
 
-    it('reject', () => {
-      const customRejectSpy = jest.fn()
-      const client = createClient({
-        middlewares: [
-          next => (req, res) => {
-            const responseWithCustomResolver = {
-              reject() {
-                customRejectSpy()
-                res.reject()
-              },
-              error: new Error('Oops'),
-            }
-            next(req, responseWithCustomResolver)
-          },
-        ],
-      })
-
-      return client.execute(request).catch(() => {
-        expect(customRejectSpy).toHaveBeenCalled()
-      })
-    })
-  })
-})
-
-describe('process', () => {
-  const request = {
-    uri: '/test/products',
-    method: 'GET',
-    body: null,
-    headers: {},
-  }
-
-  describe('validate arguments', () => {
-    const middlewares = [next => (...args) => next(...args)]
-    const client = createClient({ middlewares })
-
-    it('should throw if second argument missing', () => {
-      expect(() => client.process(request)).toThrow(
-        /The "process" function accepts a "Function"/
-      )
-    })
-
-    it('should throw if second argument is not a function', () => {
-      expect(() => client.process(request, 'foo')).toThrow(
-        /The "process" function accepts a "Function"/
-      )
-    })
-
-    it('should throw if request method is not `GET`', () => {
-      expect(() =>
-        client.process({ uri: 'foo', method: 'POST' }, () => {})
-      ).toThrowError(/The "process" Request object requires a valid method/)
-    })
-  })
-
-  it('process and resolve paginating 3 times', () => {
-    const createPayloadResult = tot => ({
-      results: Array.from(Array(tot), (val, index) => ({
-        id: String(index + 1),
-      })),
-    })
-    let reqCount = 0
-    const reqStubs = {
-      0: {
-        body: createPayloadResult(20),
-        query: {
-          sort: 'id asc',
-          withTotal: 'false',
-          limit: '20',
-        },
-      },
-      1: {
-        body: createPayloadResult(20),
-        query: {
-          sort: 'id asc',
-          withTotal: 'false',
-          where: 'id > "20"',
-          limit: '20',
-        },
-      },
-      2: {
-        body: createPayloadResult(10),
-        query: {
-          sort: 'id asc',
-          withTotal: 'false',
-          where: 'id > "20"',
-          limit: '20',
-        },
-      },
-    }
-
-    const client = createClient({
-      middlewares: [
-        next => (req, res) => {
-          const body = reqStubs[reqCount].body
-          expect(qs.parse(req.uri.split('?')[1])).toEqual(
-            reqStubs[reqCount].query
-          )
-
-          reqCount += 1
-          next(req, { ...res, body, statusCode: 200 })
-        },
-      ],
-    })
-
-    return client
-      .process(request, () => Promise.resolve('OK'))
-      .then(response => {
-        expect(response).toEqual(['OK', 'OK', 'OK'])
-      })
-  })
-
-  it('return only the required number of items', () => {
-    const createPayloadResult = tot => ({
-      results: Array.from(Array(tot), (val, index) => ({
-        id: String(index + 1),
-      })),
-    })
-    let reqCount = 0
-    const reqStubs = {
-      0: {
-        body: createPayloadResult(20),
-        query: {
-          sort: 'id asc',
-          withTotal: 'false',
-          limit: '20',
-        },
-      },
-      1: {
-        body: createPayloadResult(20),
-        query: {
-          sort: 'id asc',
-          withTotal: 'false',
-          where: 'id > "20"',
-          limit: '20',
-        },
-      },
-      2: {
-        body: createPayloadResult(6),
-        query: {
-          sort: 'id asc',
-          withTotal: 'false',
-          where: 'id > "20"',
-          limit: '6',
-        },
-      },
-    }
-
-    const client = createClient({
-      middlewares: [
-        next => (req, res) => {
-          const body = reqStubs[reqCount].body
-          expect(qs.parse(req.uri.split('?')[1])).toEqual(
-            reqStubs[reqCount].query
-          )
-
-          reqCount += 1
-          next(req, { ...res, body, statusCode: 200 })
-        },
-      ],
-    })
-
-    return client
-      .process(request, () => Promise.resolve('OK'), { total: 46 })
-      .then(response => {
-        expect(response).toEqual(['OK', 'OK', 'OK'])
-      })
-  })
-
-  it('process and resolve pagination by preserving original query', () => {
-    const createPayloadResult = tot => ({
-      results: Array.from(Array(tot), (val, index) => ({
-        id: String(index + 1),
-      })),
-    })
-    let reqCount = 0
-    const reqStubs = {
-      0: {
-        body: createPayloadResult(5),
-        query: {
-          sort: ['id asc', 'createdAt desc'],
-          withTotal: 'false',
-          where: 'name (en = "Foo")',
-          limit: '5',
-        },
-      },
-      1: {
-        body: createPayloadResult(2),
-        query: {
-          sort: ['id asc', 'createdAt desc'],
-          withTotal: 'false',
-          where: ['id > "5"', 'name (en = "Foo")'],
-          limit: '5',
-        },
-      },
-    }
-
-    const client = createClient({
-      middlewares: [
-        next => (req, res) => {
-          const body = reqStubs[reqCount].body
-          expect(qs.parse(req.uri.split('?')[1])).toEqual(
-            reqStubs[reqCount].query
-          )
-
-          reqCount += 1
-          next(req, { ...res, body, statusCode: 200 })
-        },
-      ],
-    })
-
-    return client.process(
-      {
-        ...request,
-        uri: `${request.uri}?${qs.stringify({
-          sort: 'createdAt desc',
-          where: 'name (en = "Foo")',
-          limit: 5,
-        })}`,
-      },
-      () => Promise.resolve('OK')
-    )
-  })
-
-  it('process and reject a request', () => {
-    const client = createClient({
-      middlewares: [
-        next => (req, res) => {
-          const error = new Error('Invalid password')
-          next(req, { ...res, error, statusCode: 400 })
-        },
-      ],
-    })
-
-    return client
-      .process(request, () => Promise.resolve('OK'))
-      .then(() =>
-        Promise.reject(
-          new Error(
-            'This function should never be called, the response was rejected'
-          )
+    describe('when request uri is invalid', () => {
+      it('should throw', () => {
+        const badRequest = { ...request, uri: 24 }
+        expect(() => client.execute(badRequest)).toThrowError(
+          /The "exec" Request object requires a valid uri/
         )
-      )
-      .catch(error => {
-        expect(error.message).toEqual('Invalid password')
-        return Promise.resolve()
       })
-  })
-
-  it('process and reject on rejection from user', () => {
-    const client = createClient({
-      middlewares: [
-        next => (req, res) => {
-          next(req, { ...res, statusCode: 200 })
-        },
-      ],
     })
 
-    return client
-      .process(request, () => Promise.reject(new Error('Rejection from user')))
-      .then(() =>
-        Promise.reject(
-          new Error(
-            'This function should never be called, the response was rejected'
-          )
+    describe('when request method is invalid', () => {
+      it('should throw', () => {
+        const badRequest = { ...request, method: 'INVALID_METHOD' }
+        expect(() => client.execute(badRequest)).toThrowError(
+          /The "exec" Request object requires a valid method./
         )
-      )
-      .catch(error => {
-        expect(error).toEqual(new Error('Rejection from user'))
       })
+    })
+  })
+
+  describe('when request is valid', () => {
+    let firstMiddleware
+    let secondMiddleware
+    let client
+    let result
+    beforeEach(() => {
+      firstMiddleware = jest.fn(next => rq => next(rq))
+      secondMiddleware = jest.fn(next => rq => next(rq))
+      const middlewares = [() => firstMiddleware, () => secondMiddleware]
+      client = createClient({ middlewares })
+      result = client.execute(request)
+    })
+    it('should invoke every middleware', () => {
+      expect(firstMiddleware).toHaveBeenCalledTimes(1)
+      expect(secondMiddleware).toHaveBeenCalledTimes(1)
+    })
+    it('should pass the result of the latest middleware (the request)', () => {
+      expect(result).toBe(request)
+    })
   })
 })
