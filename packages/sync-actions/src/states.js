@@ -6,10 +6,15 @@ import createMapActionGroup from './utils/create-map-action-group'
 import * as stateActions from './state-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
+type RoleUpdate = {
+  action: string,
+  roles: string,
+}
+
 export const actionGroups = ['base']
 
 // This function groups `addRoles` and `removeRoles` actions to one array
-function groupRoleActions([actions]) {
+function groupRoleActions([actions: Array<RoleUpdate>]) {
   const addActionRoles = []
   const removeActionRoles = []
   actions.forEach(action => {
@@ -22,7 +27,7 @@ function groupRoleActions([actions]) {
   ].filter(action => action.roles.length)
 }
 
-function createStatesMapActions(mapActionGroup) {
+function createStatesMapActions(mapActionGroup: Function) {
   return function doMapActions(diff, newObj, oldObj) {
     const baseActions = []
     const roleActions = []

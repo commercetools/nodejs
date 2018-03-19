@@ -23,7 +23,7 @@ export function actionsMapBase(diff, oldObj, newObj) {
 }
 
 export function actionsMapRoles(diff, oldObj, newObj) {
-  const handler = createBuildArrayActions('roles', {
+  const buildArrayActions = createBuildArrayActions('roles', {
     [ADD_ACTIONS]: newRole => ({
       action: 'addRoles',
       roles: newRole,
@@ -34,5 +34,5 @@ export function actionsMapRoles(diff, oldObj, newObj) {
     }),
   })
 
-  return handler(diff, oldObj, newObj)
+  return buildArrayActions(diff, oldObj, newObj)
 }
