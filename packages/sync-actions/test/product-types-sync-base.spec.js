@@ -11,7 +11,7 @@ describe('Exports', () => {
     expect(baseActionsList).toEqual([
       { action: 'changeName', key: 'name' },
       { action: 'setKey', key: 'key' },
-      { action: 'setDescription', key: 'description' },
+      { action: 'changeDescription', key: 'description' },
     ])
   })
   it('correctly define attribute definitions actions list', () => {})
@@ -91,7 +91,7 @@ describe('Actions', () => {
     it('should return `changeKey` update-action', () => {
       expect(updateActions).toEqual([
         {
-          action: 'setDescription',
+          action: 'changeDescription',
           description: 'kicks-description',
         },
       ])
