@@ -1,42 +1,42 @@
 [
-    {
-      "key": "angela",
-      "type": "ReviewState",
-      "name": {
-        "en": "chancellor"
-      },
-      "description": {
-        "en": "Some state used for reviews"
-      },
-      "initial": false
+  {
+    "key": "angela",
+    "type": "ReviewState",
+    "name": {
+      "en": "chancellor"
     },
-    {
-      "key": "Wubalubadubdub",
-      "type": "LineItemState",
-      "name": {
-        "en": "science"
-      },
-      "initial": true
+    "description": {
+      "en": "Some state used for reviews"
     },
-    {
-      "key": "Meeseeks",
-      "type": "LineItemState",
-      "name": {
-        "en": "can do!"
-      },
-      "initial": true
+    "initial": false
+  },
+  {
+    "key": "Wubalubadubdub",
+    "type": "LineItemState",
+    "name": {
+      "en": "science"
     },
-    {
-      "key": "new-product-state",
-      "type": "ProductState",
-      "name": {
-        "en": "new-sample-product-state",
-        "de": "neue-beispiele-product-state"
-      },
-      "description": {
-        "en": "john and jane doe",
-        "de": "angela merkel"
-      },
-      "initial": true
-    }
-  ]
+    "initial": true
+  },
+  {
+    "key": "Meeseeks",
+    "type": "LineItemState",
+    "name": {
+      "en": "can do!"
+    },
+    "initial": true
+  },
+  {
+    "key": "new-product-state",
+    "type": "ProductState",
+    "name": {
+      "en": "new-sample-product-state",
+      "de": "neue-beispiele-product-state"
+    },
+    "description": {
+      "en": "john and jane doe",
+      "de": "angela merkel"
+    },
+    "initial": true
+  }
+]
