@@ -34,7 +34,7 @@ export type LoggerOptions = {
   error: Function,
   info: Function,
   warn: Function,
-  verbose: Function,
+  debug: Function,
 }
 
 /* Config */
