@@ -4,9 +4,9 @@ function applyOnBeforeDiff(before, now, fn) {
   return fn && typeof fn === 'function' ? fn(before, now) : [before, now]
 }
 
-function setPriceId(newPrice, oldVariantArray) {
+function getPriceId(newPrice, oldVariantArray) {
   let newPriceId = ''
-  const comparisonNewPrice = {
+  const newPriceComparison = {
     value: { currencyCode: newPrice.value.currencyCode },
     channel: newPrice.channel,
     country: newPrice.country,
@@ -17,27 +17,18 @@ function setPriceId(newPrice, oldVariantArray) {
 
   oldVariantArray.map(oldVariant =>
     oldVariant.prices.find(oldPrice => {
-      const {
-        value,
-        channel,
-        country,
-        customerGroup,
-        validFrom,
-        validUntil,
-      } = oldPrice
-
-      const comparisonOldPrice = {
+      const oldPriceComparison = {
         value: {
-          currencyCode: value.currencyCode,
+          currencyCode: oldPrice.value.currencyCode,
         },
-        channel,
-        country,
-        customerGroup,
-        validFrom,
-        validUntil,
+        channel: oldPrice.channel,
+        country: oldPrice.country,
+        customerGroup: oldPrice.customerGroup,
+        validFrom: oldPrice.validFrom,
+        validUntil: oldPrice.validUntil,
       }
 
-      if (isEqual(comparisonNewPrice, comparisonOldPrice)) {
+      if (isEqual(newPriceComparison, oldPriceComparison)) {
         newPriceId = oldPrice.id
         return true
       }
@@ -55,7 +46,7 @@ function updateMissingPriceIds(newVariantArray, oldVariantArray) {
     return newVariant.prices.map(price => {
       const priceWithId = price
       if (!priceWithId.id) {
-        const id = setPriceId(price, oldVariantArray)
+        const id = getPriceId(price, oldVariantArray)
         // reference original price entry and add id to it
         if (id) priceWithId.id = id
       }
