@@ -49,14 +49,18 @@ export default class StateImport {
 
   constructor(options: ConstructorOptions, logger: LoggerOptions) {
     if (!options.apiConfig)
-      throw new Error('The constructor must be passed an `apiConfig` object')
+      throw new StateImportError(
+        'The constructor must be passed an `apiConfig` object'
+      )
 
     this.apiConfig = options.apiConfig
     this.accessToken = options.accessToken
     this.continueOnProblems = options.continueOnProblems || false
     this.client = createClient({
       middlewares: [
-        createAuthMiddlewareWithExistingToken(`Bearer ${this.accessToken}`),
+        createAuthMiddlewareWithExistingToken(
+          this.accessToken ? `Bearer ${this.accessToken}` : ''
+        ),
         createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
         createUserAgentMiddleware({
           libraryName: pkg.name,
