@@ -168,7 +168,7 @@ describe('Actions', () => {
     expect(actions).toEqual([])
   })
 
-  describe('build actions for scope without ID', () => {
+  describe('build actions for prices without ID', () => {
     const shuffleArray = array =>
       array.reduce(
         (agg, val) =>
@@ -200,6 +200,11 @@ describe('Actions', () => {
             country: 'US',
             channel: { typeId: 'channel', id: 'ch1' },
           },
+          {
+            id: '444',
+            value: { currencyCode: 'SEK', centAmount: 25000 },
+            country: 'SE',
+          },
         ],
       },
     }
@@ -224,11 +229,16 @@ describe('Actions', () => {
         value: { currencyCode: 'EUR', centAmount: 1000 },
         country: 'DE',
       },
+      {
+        value: { currencyCode: 'SEK', centAmount: 30000 },
+        country: 'SE',
+      },
     ]
     const now = {
       id: '456-def',
       masterVariant: {
         id: 1,
+        // shuffle prices array to test for unorganized entries
         prices: shuffleArray(pricesWithoutId),
       },
     }
@@ -237,6 +247,7 @@ describe('Actions', () => {
       const actions = productsSync.buildActions(now, before)
 
       expect(actions).toEqual(
+        // expect array containing entries since we do not know which order actions will be in
         expect.arrayContaining([
           {
             action: 'changePrice',
@@ -266,8 +277,16 @@ describe('Actions', () => {
               id: '333',
               value: { currencyCode: 'SEK', centAmount: 15000 },
               country: 'US',
-
               channel: { typeId: 'channel', id: 'ch1' },
+            },
+          },
+          {
+            action: 'changePrice',
+            priceId: '444',
+            price: {
+              id: '444',
+              value: { currencyCode: 'SEK', centAmount: 30000 },
+              country: 'SE',
             },
           },
           {

@@ -4,8 +4,8 @@ function applyOnBeforeDiff(before, now, fn) {
   return fn && typeof fn === 'function' ? fn(before, now) : [before, now]
 }
 
-function addPriceId(newPrice, beforeVariantArray) {
-  let getId = ''
+function setPriceId(newPrice, oldVariantArray) {
+  let newPriceId = ''
   const comparisonNewPrice = {
     value: { currencyCode: newPrice.value.currencyCode },
     channel: newPrice.channel,
@@ -13,34 +13,38 @@ function addPriceId(newPrice, beforeVariantArray) {
     customerGroup: newPrice.customerGroup,
   }
 
-  beforeVariantArray.map(variant =>
-    variant.prices.find(oldPrice => {
+  oldVariantArray.map(oldVariant =>
+    oldVariant.prices.find(oldPrice => {
       const { value, channel, country, customerGroup } = oldPrice
 
       const comparisonOldPrice = {
-        value: { currencyCode: value.currencyCode },
+        value: {
+          currencyCode: value.currencyCode,
+        },
         channel,
         country,
         customerGroup,
       }
       if (isEqual(comparisonNewPrice, comparisonOldPrice)) {
-        getId = oldPrice.id
+        newPriceId = oldPrice.id
         return true
       }
       return false
     })
   )
 
-  return getId
+  return newPriceId
 }
 
-function isThereAMissingPriceId(nowVariantArray, beforeVariantArray) {
-  nowVariantArray.map(variant => {
-    if (!variant.prices) return variant
-    return variant.prices.map(price => {
+function updateMissingPriceIds(newVariantArray, oldVariantArray) {
+  // loop over and mutate newVariant price entry
+  newVariantArray.map(newVariant => {
+    if (!newVariant.prices) return newVariant
+    return newVariant.prices.map(price => {
       const priceWithId = price
       if (!priceWithId.id) {
-        const id = addPriceId(price, beforeVariantArray)
+        const id = setPriceId(price, oldVariantArray)
+        // reference original price entry and add id to it
         if (id) priceWithId.id = id
       }
       return priceWithId
@@ -62,8 +66,9 @@ export default function createBuildActions(differ, doMapActions, onBeforeDiff) {
       onBeforeDiff
     )
 
-    if (processedNow.variants)
-      isThereAMissingPriceId(processedNow.variants, processedBefore.variants)
+    if (processedNow.variants && processedBefore.variants)
+      // run updateMissingPriceIds function to mutate processedNow data
+      updateMissingPriceIds(processedNow.variants, processedBefore.variants)
 
     const diffed = differ(processedBefore, processedNow)
 
