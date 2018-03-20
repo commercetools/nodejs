@@ -11,11 +11,20 @@ function setPriceId(newPrice, oldVariantArray) {
     channel: newPrice.channel,
     country: newPrice.country,
     customerGroup: newPrice.customerGroup,
+    validFrom: newPrice.validFrom,
+    validUntil: newPrice.validUntil,
   }
 
   oldVariantArray.map(oldVariant =>
     oldVariant.prices.find(oldPrice => {
-      const { value, channel, country, customerGroup } = oldPrice
+      const {
+        value,
+        channel,
+        country,
+        customerGroup,
+        validFrom,
+        validUntil,
+      } = oldPrice
 
       const comparisonOldPrice = {
         value: {
@@ -24,7 +33,10 @@ function setPriceId(newPrice, oldVariantArray) {
         channel,
         country,
         customerGroup,
+        validFrom,
+        validUntil,
       }
+
       if (isEqual(comparisonNewPrice, comparisonOldPrice)) {
         newPriceId = oldPrice.id
         return true

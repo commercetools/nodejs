@@ -169,12 +169,11 @@ describe('Actions', () => {
   })
 
   describe('build actions for prices without ID', () => {
-    const shuffleArray = array =>
-      array.reduce(
-        (agg, val) =>
-          agg.splice(Math.floor(Math.random() * agg.length), 0, val) && agg,
-        []
-      )
+    const validFrom = new Date()
+    const validUntil = new Date(Date.now() + 12096e5) // two weeks from now
+
+    const validFromThreeWeeksFromNow = new Date(Date.now() + 12096e5 * 1.5)
+    const validUntilFourWeeksFromNow = new Date(Date.now() + 12096e5 * 2)
 
     const before = {
       id: '123-abc',
@@ -205,100 +204,163 @@ describe('Actions', () => {
             value: { currencyCode: 'SEK', centAmount: 25000 },
             country: 'SE',
           },
+          {
+            id: '555',
+            value: { currencyCode: 'EUR', centAmount: 1000 },
+            country: 'DE',
+            validFrom,
+            validUntil,
+          },
+          {
+            id: '666',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom,
+            validUntil,
+          },
+          {
+            id: '777',
+            value: { currencyCode: 'GBP', centAmount: 1250 },
+            country: 'US',
+            validFrom,
+            validUntil,
+          },
         ],
       },
     }
-    const pricesWithoutId = [
-      {
-        value: { currencyCode: 'EUR', centAmount: 4000 },
-        country: 'US',
-        customerGroup: { typeId: 'customer-group', id: 'cg1' },
-        channel: { typeId: 'channel', id: 'ch1' },
-      },
-      {
-        value: { currencyCode: 'USD', centAmount: 6000 },
-        country: 'US',
-        customerGroup: { typeId: 'customer-group', id: 'cg1' },
-      },
-      {
-        value: { currencyCode: 'SEK', centAmount: 15000 },
-        country: 'US',
-        channel: { typeId: 'channel', id: 'ch1' },
-      },
-      {
-        value: { currencyCode: 'EUR', centAmount: 1000 },
-        country: 'DE',
-      },
-      {
-        value: { currencyCode: 'SEK', centAmount: 30000 },
-        country: 'SE',
-      },
-    ]
+
     const now = {
       id: '456-def',
       masterVariant: {
         id: 1,
-        // shuffle prices array to test for unorganized entries
-        prices: shuffleArray(pricesWithoutId),
+        prices: [
+          {
+            value: { currencyCode: 'EUR', centAmount: 4000 },
+            country: 'US',
+            customerGroup: { typeId: 'customer-group', id: 'cg1' },
+            channel: { typeId: 'channel', id: 'ch1' },
+          },
+          {
+            value: { currencyCode: 'USD', centAmount: 6000 },
+            country: 'US',
+            customerGroup: { typeId: 'customer-group', id: 'cg1' },
+          },
+          {
+            value: { currencyCode: 'SEK', centAmount: 15000 },
+            country: 'US',
+            channel: { typeId: 'channel', id: 'ch1' },
+          },
+          {
+            value: { currencyCode: 'EUR', centAmount: 1000 },
+            country: 'DE',
+            validFrom,
+            validUntil,
+          },
+          { value: { currencyCode: 'SEK', centAmount: 25000 }, country: 'SE' },
+          {
+            value: { currencyCode: 'SEK', centAmount: 25000 },
+            country: 'SE',
+            validFrom,
+            validUntil,
+          },
+          { value: { currencyCode: 'EUR', centAmount: 1000 }, country: 'DE' },
+          {
+            value: { currencyCode: 'GBP', centAmount: 10000 },
+            country: 'UK',
+            validFrom,
+            validUntil,
+          },
+          {
+            value: { currencyCode: 'GBP', centAmount: 1250 },
+            country: 'US',
+            validFrom,
+            validUntil,
+          },
+          {
+            value: { currencyCode: 'GBP', centAmount: 1250 },
+            country: 'US',
+            validFrom: validFromThreeWeeksFromNow,
+            validUntil: validUntilFourWeeksFromNow,
+          },
+        ],
       },
     }
 
     it('should build actions even if id is not supplied', () => {
       const actions = productsSync.buildActions(now, before)
 
-      expect(actions).toEqual(
-        // expect array containing entries since we do not know which order actions will be in
-        expect.arrayContaining([
-          {
-            action: 'changePrice',
-            priceId: '111',
-            price: {
-              id: '111',
-              value: { currencyCode: 'EUR', centAmount: 4000 },
-              country: 'US',
-              customerGroup: { typeId: 'customer-group', id: 'cg1' },
-              channel: { typeId: 'channel', id: 'ch1' },
-            },
+      expect(actions).toEqual([
+        {
+          action: 'changePrice',
+          priceId: '111',
+          price: {
+            id: '111',
+            value: { currencyCode: 'EUR', centAmount: 4000 },
+            country: 'US',
+            customerGroup: { typeId: 'customer-group', id: 'cg1' },
+            channel: { typeId: 'channel', id: 'ch1' },
           },
-          {
-            action: 'changePrice',
-            priceId: '222',
-            price: {
-              id: '222',
-              value: { currencyCode: 'USD', centAmount: 6000 },
-              country: 'US',
-              customerGroup: { typeId: 'customer-group', id: 'cg1' },
-            },
+        },
+        {
+          action: 'changePrice',
+          priceId: '222',
+          price: {
+            id: '222',
+            value: { currencyCode: 'USD', centAmount: 6000 },
+            country: 'US',
+            customerGroup: { typeId: 'customer-group', id: 'cg1' },
           },
-          {
-            action: 'changePrice',
-            priceId: '333',
-            price: {
-              id: '333',
-              value: { currencyCode: 'SEK', centAmount: 15000 },
-              country: 'US',
-              channel: { typeId: 'channel', id: 'ch1' },
-            },
+        },
+        {
+          action: 'changePrice',
+          priceId: '333',
+          price: {
+            id: '333',
+            value: { currencyCode: 'SEK', centAmount: 15000 },
+            country: 'US',
+            channel: { typeId: 'channel', id: 'ch1' },
           },
-          {
-            action: 'changePrice',
-            priceId: '444',
-            price: {
-              id: '444',
-              value: { currencyCode: 'SEK', centAmount: 30000 },
-              country: 'SE',
-            },
+        },
+        {
+          action: 'changePrice',
+          priceId: '666',
+          price: {
+            id: '666',
+            value: { currencyCode: 'GBP', centAmount: 10000 },
+            country: 'UK',
+            validFrom,
+            validUntil,
           },
-          {
-            action: 'addPrice',
-            price: {
-              country: 'DE',
-              value: { centAmount: 1000, currencyCode: 'EUR' },
-            },
-            variantId: 1,
+        },
+        {
+          action: 'addPrice',
+          price: {
+            value: { currencyCode: 'SEK', centAmount: 25000 },
+            country: 'SE',
+            validFrom,
+            validUntil,
           },
-        ])
-      )
+          variantId: 1,
+        },
+        {
+          action: 'addPrice',
+          price: {
+            country: 'DE',
+            value: { centAmount: 1000, currencyCode: 'EUR' },
+          },
+          variantId: 1,
+        },
+        {
+          action: 'addPrice',
+          price: {
+            value: { currencyCode: 'GBP', centAmount: 1250 },
+            country: 'US',
+            validFrom: validFromThreeWeeksFromNow,
+            validUntil: validUntilFourWeeksFromNow,
+          },
+          variantId: 1,
+        },
+      ])
     })
   })
 })
