@@ -72,7 +72,7 @@ export default class StateImport {
       error: () => {},
       warn: () => {},
       info: () => {},
-      verbose: () => {},
+      debug: () => {},
     }
     this._resetSummary()
   }
@@ -83,7 +83,7 @@ export default class StateImport {
 
   // Wrapper function for compatibility with CLI
   processStream(chunk: Array<StateData>, cb: () => mixed) {
-    this.logger.verbose(`Starting conversion of ${chunk.length} states`)
+    this.logger.debug(`Starting conversion of ${chunk.length} states`)
     return this._processBatches(chunk).then(cb)
     // No catch block as errors will be caught in the CLI
   }
@@ -103,14 +103,14 @@ export default class StateImport {
       .then(({ body: { results: existingStates } }: Object) =>
         this._createOrUpdate(states, existingStates)
       )
-      .catch(
-        error =>
-          new StateImportError(
-            'Processing batch failed',
-            error.message || error,
-            this._summary
-          )
-      )
+      .catch(error => {
+        // format error and throw to CLI error handler
+        throw new StateImportError(
+          'Processing batch failed',
+          error.message || error,
+          this._summary
+        )
+      })
   }
 
   _createOrUpdate(
@@ -143,7 +143,7 @@ export default class StateImport {
             )
             this._summary.updateErrorCount += 1
             this._summary.errors.push(error.message || error)
-            return Promise.reject(error)
+            throw error
           })
       return this._create(newState)
         .then(() => {
@@ -164,7 +164,7 @@ export default class StateImport {
           )
           this._summary.createErrorCount += 1
           this._summary.errors.push(error.message || error)
-          return Promise.reject(error)
+          throw error
         })
     })
   }
@@ -180,7 +180,7 @@ export default class StateImport {
       actions,
     }
     const req = { uri, method: 'POST', body }
-    this.logger.verbose('Updating existing code entry')
+    this.logger.debug('Updating existing code entry')
     return this.client.execute(req)
   }
 
@@ -188,7 +188,7 @@ export default class StateImport {
     const service = this._createService()
     const uri = service.build()
     const req = { uri, method: 'POST', body: state }
-    this.logger.verbose('Creating new state entry')
+    this.logger.debug('Creating new state entry')
     return this.client.execute(req)
   }
 

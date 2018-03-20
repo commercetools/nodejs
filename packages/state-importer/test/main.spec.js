@@ -7,7 +7,7 @@ describe('StateImport', () => {
     error: () => {},
     warn: () => {},
     info: () => {},
-    verbose: () => {},
+    debug: () => {},
   }
 
   let stateImport
@@ -80,7 +80,7 @@ describe('StateImport', () => {
     it('should build predicate with states from array of states', () => {
       const predicate = StateImport._buildPredicate(states)
       expect(predicate).toMatch(
-        'key in ("Initial", "Wubalubadubdub", "Meeseeks", "new-product-state")'
+        'key in ("angela", "Wubalubadubdub", "Meeseeks", "new-product-state")'
       )
     })
   })
