@@ -4,6 +4,17 @@ function applyOnBeforeDiff(before, now, fn) {
   return fn && typeof fn === 'function' ? fn(before, now) : [before, now]
 }
 
+function isDateOverlap(
+  oldValidFrom,
+  oldValidUntil,
+  newValidFrom,
+  newValidUntil
+) {
+  if (newValidFrom > oldValidFrom && newValidFrom < oldValidUntil) return true
+  if (newValidUntil < oldValidUntil && newValidUntil > oldValidFrom) return true
+  return false
+}
+
 function getPriceId(newPrice, oldVariantArray) {
   let newPriceId = ''
   const newPriceComparison = {
@@ -23,6 +34,7 @@ function getPriceId(newPrice, oldVariantArray) {
         country: oldPrice.country,
         customerGroup: oldPrice.customerGroup,
       }
+
       if (
         isEqual(
           { ...newPriceComparison, validFrom: newPrice.validFrom },
@@ -31,7 +43,14 @@ function getPriceId(newPrice, oldVariantArray) {
         isEqual(
           { ...newPriceComparison, validUntil: newPrice.validUntil },
           { ...oldPriceComparison, validUntil: oldPrice.validUntil }
-        )
+        ) ||
+        (isEqual(newPriceComparison, oldPriceComparison) &&
+          isDateOverlap(
+            oldPrice.validFrom,
+            oldPrice.validUntil,
+            newPrice.validFrom,
+            newPrice.validUntil
+          ))
       ) {
         newPriceId = oldPrice.id
         return true
