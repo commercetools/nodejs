@@ -11,8 +11,6 @@ function getPriceId(newPrice, oldVariantArray) {
     channel: newPrice.channel,
     country: newPrice.country,
     customerGroup: newPrice.customerGroup,
-    validFrom: newPrice.validFrom,
-    validUntil: newPrice.validUntil,
   }
 
   oldVariantArray.map(oldVariant =>
@@ -24,14 +22,21 @@ function getPriceId(newPrice, oldVariantArray) {
         channel: oldPrice.channel,
         country: oldPrice.country,
         customerGroup: oldPrice.customerGroup,
-        validFrom: oldPrice.validFrom,
-        validUntil: oldPrice.validUntil,
       }
-
-      if (isEqual(newPriceComparison, oldPriceComparison)) {
+      if (
+        isEqual(
+          { ...newPriceComparison, validFrom: newPrice.validFrom },
+          { ...oldPriceComparison, validFrom: oldPrice.validFrom }
+        ) ||
+        isEqual(
+          { ...newPriceComparison, validUntil: newPrice.validUntil },
+          { ...oldPriceComparison, validUntil: oldPrice.validUntil }
+        )
+      ) {
         newPriceId = oldPrice.id
         return true
       }
+
       return false
     })
   )

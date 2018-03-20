@@ -179,114 +179,70 @@ describe('Actions', () => {
       id: '123-abc',
       masterVariant: {
         id: 1,
-        prices: [
-          {
-            id: '111',
-            value: { currencyCode: 'EUR', centAmount: 3000 },
-            country: 'US',
-            customerGroup: { typeId: 'customer-group', id: 'cg1' },
-            channel: { typeId: 'channel', id: 'ch1' },
-          },
-          {
-            id: '222',
-            value: { currencyCode: 'USD', centAmount: 5000 },
-            country: 'US',
-            customerGroup: { typeId: 'customer-group', id: 'cg1' },
-          },
-          {
-            id: '333',
-            value: { currencyCode: 'SEK', centAmount: 10000 },
-            country: 'US',
-            channel: { typeId: 'channel', id: 'ch1' },
-          },
-          {
-            id: '444',
-            value: { currencyCode: 'SEK', centAmount: 25000 },
-            country: 'SE',
-          },
-          {
-            id: '555',
-            value: { currencyCode: 'EUR', centAmount: 1000 },
-            country: 'DE',
-            validFrom,
-            validUntil,
-          },
-          {
-            id: '666',
-            value: { currencyCode: 'GBP', centAmount: 1000 },
-            country: 'UK',
-            validFrom,
-            validUntil,
-          },
-          {
-            id: '777',
-            value: { currencyCode: 'GBP', centAmount: 1250 },
-            country: 'US',
-            validFrom,
-            validUntil,
-          },
-        ],
       },
     }
-
     const now = {
       id: '456-def',
       masterVariant: {
         id: 1,
-        prices: [
-          {
-            value: { currencyCode: 'EUR', centAmount: 4000 },
-            country: 'US',
-            customerGroup: { typeId: 'customer-group', id: 'cg1' },
-            channel: { typeId: 'channel', id: 'ch1' },
-          },
-          {
-            value: { currencyCode: 'USD', centAmount: 6000 },
-            country: 'US',
-            customerGroup: { typeId: 'customer-group', id: 'cg1' },
-          },
-          {
-            value: { currencyCode: 'SEK', centAmount: 15000 },
-            country: 'US',
-            channel: { typeId: 'channel', id: 'ch1' },
-          },
-          {
-            value: { currencyCode: 'EUR', centAmount: 1000 },
-            country: 'DE',
-            validFrom,
-            validUntil,
-          },
-          { value: { currencyCode: 'SEK', centAmount: 25000 }, country: 'SE' },
-          {
-            value: { currencyCode: 'SEK', centAmount: 25000 },
-            country: 'SE',
-            validFrom,
-            validUntil,
-          },
-          { value: { currencyCode: 'EUR', centAmount: 1000 }, country: 'DE' },
-          {
-            value: { currencyCode: 'GBP', centAmount: 10000 },
-            country: 'UK',
-            validFrom,
-            validUntil,
-          },
-          {
-            value: { currencyCode: 'GBP', centAmount: 1250 },
-            country: 'US',
-            validFrom,
-            validUntil,
-          },
-          {
-            value: { currencyCode: 'GBP', centAmount: 1250 },
-            country: 'US',
-            validFrom: validFromThreeWeeksFromNow,
-            validUntil: validUntilFourWeeksFromNow,
-          },
-        ],
       },
     }
 
-    it('should build actions even if id is not supplied', () => {
+    it('should build changePrice actions to update centAmount through priceSelection if there is no priceId', () => {
+      before.masterVariant.prices = [
+        {
+          id: '111',
+          value: { currencyCode: 'EUR', centAmount: 3000 },
+          country: 'US',
+          customerGroup: { typeId: 'customer-group', id: 'cg1' },
+          channel: { typeId: 'channel', id: 'ch1' },
+        },
+        {
+          id: '222',
+          value: { currencyCode: 'USD', centAmount: 5000 },
+          country: 'US',
+          customerGroup: { typeId: 'customer-group', id: 'cg1' },
+        },
+        {
+          id: '333',
+          value: { currencyCode: 'SEK', centAmount: 10000 },
+          country: 'US',
+          channel: { typeId: 'channel', id: 'ch1' },
+        },
+        {
+          id: '666',
+          value: { currencyCode: 'GBP', centAmount: 1000 },
+          country: 'UK',
+          validFrom,
+          validUntil,
+        },
+      ]
+
+      now.masterVariant.prices = [
+        {
+          value: { currencyCode: 'EUR', centAmount: 4000 },
+          country: 'US',
+          customerGroup: { typeId: 'customer-group', id: 'cg1' },
+          channel: { typeId: 'channel', id: 'ch1' },
+        },
+        {
+          value: { currencyCode: 'USD', centAmount: 6000 },
+          country: 'US',
+          customerGroup: { typeId: 'customer-group', id: 'cg1' },
+        },
+        {
+          value: { currencyCode: 'SEK', centAmount: 15000 },
+          country: 'US',
+          channel: { typeId: 'channel', id: 'ch1' },
+        },
+        {
+          value: { currencyCode: 'GBP', centAmount: 10000 },
+          country: 'UK',
+          validFrom,
+          validUntil,
+        },
+      ]
+
       const actions = productsSync.buildActions(now, before)
 
       expect(actions).toEqual([
@@ -332,6 +288,126 @@ describe('Actions', () => {
             validUntil,
           },
         },
+      ])
+    })
+
+    it('should build changePrice actions to update dates when validFrom or validUntil priceSelection matches and there is no priceId', () => {
+      before.masterVariant.prices = [
+        {
+          value: { currencyCode: 'GBP', centAmount: 123 },
+          id: '888',
+          country: 'UK',
+          validFrom: '2018-01-01T00:00:00.000Z',
+          validUntil: '2018-01-31T00:00:00.000Z',
+        },
+        {
+          value: { currencyCode: 'GBP', centAmount: 123 },
+          id: '999',
+          country: 'UK',
+          validFrom: '2018-02-01T00:00:00.000Z',
+          validUntil: '2018-02-28T00:00:00.000Z',
+        },
+      ]
+      now.masterVariant.prices = [
+        {
+          value: { currencyCode: 'GBP', centAmount: 123 },
+          country: 'UK',
+          validFrom: '2018-01-01T00:00:00.000Z',
+          validUntil: '2018-01-15T00:00:00.000Z',
+        },
+        {
+          value: { currencyCode: 'GBP', centAmount: 123 },
+          country: 'UK',
+          validFrom: '2018-02-15T00:00:00.000Z',
+          validUntil: '2018-02-28T00:00:00.000Z',
+        },
+      ]
+      const actions = productsSync.buildActions(now, before)
+
+      expect(actions).toEqual([
+        {
+          action: 'changePrice',
+          priceId: '888',
+          price: {
+            id: '888',
+            value: { currencyCode: 'GBP', centAmount: 123 },
+            country: 'UK',
+            validFrom: '2018-01-01T00:00:00.000Z',
+            validUntil: '2018-01-15T00:00:00.000Z',
+          },
+        },
+        {
+          action: 'changePrice',
+          priceId: '999',
+          price: {
+            id: '999',
+            value: { currencyCode: 'GBP', centAmount: 123 },
+            country: 'UK',
+            validFrom: '2018-02-15T00:00:00.000Z',
+            validUntil: '2018-02-28T00:00:00.000Z',
+          },
+        },
+      ])
+    })
+
+    it('should not delete entries found with priceSelection and build addPrice actions for entries outside of priceSelection scope', () => {
+      before.masterVariant.prices = [
+        {
+          id: '444',
+          value: { currencyCode: 'SEK', centAmount: 25000 },
+          country: 'SE',
+        },
+        {
+          id: '555',
+          value: { currencyCode: 'EUR', centAmount: 1000 },
+          country: 'DE',
+          validFrom,
+          validUntil,
+        },
+        {
+          id: '777',
+          value: { currencyCode: 'GBP', centAmount: 1250 },
+          country: 'US',
+          validFrom,
+          validUntil,
+        },
+      ]
+
+      now.masterVariant.prices = [
+        {
+          value: { currencyCode: 'EUR', centAmount: 1000 },
+          country: 'DE',
+          validFrom,
+          validUntil,
+        },
+        {
+          value: { currencyCode: 'SEK', centAmount: 25000 },
+          country: 'SE',
+        },
+        {
+          value: { currencyCode: 'SEK', centAmount: 25000 },
+          country: 'SE',
+          validFrom,
+          validUntil,
+        },
+        { value: { currencyCode: 'EUR', centAmount: 1000 }, country: 'DE' },
+        {
+          value: { currencyCode: 'GBP', centAmount: 1250 },
+          country: 'US',
+          validFrom,
+          validUntil,
+        },
+        {
+          value: { currencyCode: 'GBP', centAmount: 1250 },
+          country: 'US',
+          validFrom: validFromThreeWeeksFromNow,
+          validUntil: validUntilFourWeeksFromNow,
+        },
+      ]
+
+      const actions = productsSync.buildActions(now, before)
+
+      expect(actions).toEqual([
         {
           action: 'addPrice',
           price: {
