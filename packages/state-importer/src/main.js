@@ -56,7 +56,7 @@ export default class StateImport {
     this.continueOnProblems = options.continueOnProblems || false
     this.client = createClient({
       middlewares: [
-        createAuthMiddlewareWithExistingToken(this.accessToken),
+        createAuthMiddlewareWithExistingToken(`Bearer ${this.accessToken}`),
         createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
         createUserAgentMiddleware({
           libraryName: pkg.name,
@@ -103,6 +103,7 @@ export default class StateImport {
       .then(({ body: { results: existingStates } }: Object) =>
         this._createOrUpdate(states, existingStates)
       )
+      .then(() => Promise.resolve())
       .catch(error => {
         // format error and throw to CLI error handler
         throw new StateImportError(

@@ -71,7 +71,7 @@ const states = [
 const options = {
     apiConfig: {
       host: 'https://auth.commercetools.com'
-      project_key: <PROJECT_KEY>,
+      projectKey: <PROJECT_KEY>,
       credentials: {
         clientId: '*********',
         clientSecret: '*********'
