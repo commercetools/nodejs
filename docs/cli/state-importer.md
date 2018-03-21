@@ -13,18 +13,9 @@ The constructor accepts three arguments:
 - An optional logger object having four functions (`info`, `warn`, `error` and `verbose`)
 
 ## Usage with `sphere-node-cli`
-### TODO: Not yet implemented
-
-## Direct Usage
-If you would like to have more control, you can also use this module directly in Javascript. To do this, you need to install it:
-```bash
-npm install @commercetools/state-importer
-```
-Then you can use it to import states:
-```js
-import StateImport from '@commercetools/state-importer'
-
-const states = [
+You can use this package from the [`sphere-node-cli`](https://github.com/sphereio/sphere-node-cli). In order for the cli to import states, the file to import from must be a valid JSON and follow this structure:
+```json
+[
   {
     "key": "foobar",
     "type": "ReviewState",
@@ -67,6 +58,65 @@ const states = [
   },
   ...
 ]
+```
+Then you can import this file using the cli:
+```bash
+sphere import -t state -p my-project-key --host 'https://api.sphere.io' --authHost 'https://auth.sphere.io' -f /path/to/file.json -c
+ '{"continueOnProblems": true}'
+```
+
+## Direct Usage
+If you would like to have more control, you can also use this module directly in Javascript. To do this, you need to install it:
+```bash
+npm install @commercetools/state-importer
+```
+Then you can use it to import states:
+```js
+import StateImport from '@commercetools/state-importer'
+
+const states = [
+  {
+    key: 'foobar',
+    type: 'ReviewState',
+    name: {
+      en: 'chancellor'
+    },
+    description: {
+      en: 'Some state used for reviews'
+    },
+    initial: false
+  },
+  {
+    key: 'Wubalubadubdub',
+    type: 'LineItemState',
+    name:{
+      en: 'science'
+    },
+    initial: true
+  },
+  {
+    key: 'Meeseeks',
+    type: 'LineItemState',
+    name: {
+      en: 'can do!'
+    },
+    initial: true
+  },
+  {
+    key: 'new-product-state',
+    type: 'ProductState',
+    name: {
+      en: 'new-sample-product-state',
+      de: 'neue-beispiele-product-state'
+    },
+    description: {
+      en: 'john and jane doe',
+      de: 'Denkt euch daran'
+    },
+    initial: true
+  },
+  ...
+]
 
 const options = {
     apiConfig: {
@@ -78,7 +128,7 @@ const options = {
       }
     },
     accessToken: '123456yuhgfdwegh675412wefb3rgb',
-    continueOnProblems: true
+    continueOnProblems: false
   }
 }
 
