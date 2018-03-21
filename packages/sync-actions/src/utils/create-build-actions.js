@@ -44,13 +44,12 @@ function getPriceId(newPrice, oldVariantArray) {
           { ...newPriceComparison, validUntil: newPrice.validUntil },
           { ...oldPriceComparison, validUntil: oldPrice.validUntil }
         ) ||
-        (isEqual(newPriceComparison, oldPriceComparison) &&
-          isDateOverlap(
-            oldPrice.validFrom,
-            oldPrice.validUntil,
-            newPrice.validFrom,
-            newPrice.validUntil
-          ))
+        isDateOverlap(
+          oldPrice.validFrom,
+          oldPrice.validUntil,
+          newPrice.validFrom,
+          newPrice.validUntil
+        )
       ) {
         newPriceId = oldPrice.id
         return true

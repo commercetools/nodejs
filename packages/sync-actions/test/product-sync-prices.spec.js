@@ -169,11 +169,10 @@ describe('Actions', () => {
   })
 
   describe('build actions for prices without ID', () => {
-    const validFrom = new Date()
-    const validUntil = new Date(Date.now() + 12096e5) // two weeks from now
-
-    const validFromThreeWeeksFromNow = new Date(Date.now() + 12096e5 * 1.5)
-    const validUntilFourWeeksFromNow = new Date(Date.now() + 12096e5 * 2)
+    const dateNow = new Date()
+    const twoWeeksFromNow = new Date(Date.now() + 12096e5) // two weeks from now
+    const threeWeeksFromNow = new Date(Date.now() + 12096e5 * 1.5)
+    const fourWeeksFromNow = new Date(Date.now() + 12096e5 * 2)
 
     const before = {
       id: '123-abc',
@@ -213,8 +212,8 @@ describe('Actions', () => {
           id: '666',
           value: { currencyCode: 'GBP', centAmount: 1000 },
           country: 'UK',
-          validFrom,
-          validUntil,
+          validFrom: dateNow,
+          validUntil: twoWeeksFromNow,
         },
       ]
 
@@ -238,8 +237,8 @@ describe('Actions', () => {
         {
           value: { currencyCode: 'GBP', centAmount: 10000 },
           country: 'UK',
-          validFrom,
-          validUntil,
+          validFrom: dateNow,
+          validUntil: twoWeeksFromNow,
         },
       ]
 
@@ -284,8 +283,8 @@ describe('Actions', () => {
             id: '666',
             value: { currencyCode: 'GBP', centAmount: 10000 },
             country: 'UK',
-            validFrom,
-            validUntil,
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
           },
         },
       ])
@@ -361,15 +360,15 @@ describe('Actions', () => {
           id: '555',
           value: { currencyCode: 'EUR', centAmount: 1000 },
           country: 'DE',
-          validFrom,
-          validUntil,
+          validFrom: dateNow,
+          validUntil: twoWeeksFromNow,
         },
         {
           id: '777',
           value: { currencyCode: 'GBP', centAmount: 1250 },
           country: 'US',
-          validFrom,
-          validUntil,
+          validFrom: dateNow,
+          validUntil: twoWeeksFromNow,
         },
       ]
 
@@ -377,8 +376,8 @@ describe('Actions', () => {
         {
           value: { currencyCode: 'EUR', centAmount: 1000 },
           country: 'DE',
-          validFrom,
-          validUntil,
+          validFrom: dateNow,
+          validUntil: twoWeeksFromNow,
         },
         {
           value: { currencyCode: 'SEK', centAmount: 25000 },
@@ -387,21 +386,21 @@ describe('Actions', () => {
         {
           value: { currencyCode: 'SEK', centAmount: 25000 },
           country: 'SE',
-          validFrom,
-          validUntil,
+          validFrom: dateNow,
+          validUntil: twoWeeksFromNow,
         },
         { value: { currencyCode: 'EUR', centAmount: 1000 }, country: 'DE' },
         {
           value: { currencyCode: 'GBP', centAmount: 1250 },
           country: 'US',
-          validFrom,
-          validUntil,
+          validFrom: dateNow,
+          validUntil: twoWeeksFromNow,
         },
         {
           value: { currencyCode: 'GBP', centAmount: 1250 },
           country: 'US',
-          validFrom: validFromThreeWeeksFromNow,
-          validUntil: validUntilFourWeeksFromNow,
+          validFrom: threeWeeksFromNow,
+          validUntil: fourWeeksFromNow,
         },
       ]
 
@@ -413,8 +412,8 @@ describe('Actions', () => {
           price: {
             value: { currencyCode: 'SEK', centAmount: 25000 },
             country: 'SE',
-            validFrom,
-            validUntil,
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
           },
           variantId: 1,
         },
@@ -431,43 +430,43 @@ describe('Actions', () => {
           price: {
             value: { currencyCode: 'GBP', centAmount: 1250 },
             country: 'US',
-            validFrom: validFromThreeWeeksFromNow,
-            validUntil: validUntilFourWeeksFromNow,
+            validFrom: threeWeeksFromNow,
+            validUntil: fourWeeksFromNow,
           },
           variantId: 1,
         },
       ])
     })
 
-    it('should build changePrice actions if validFrom/Until dates are overlapping and the rest of priceSelection scope is equal', () => {
+    it('should build changePrice actions if validFrom/Until dates are overlapping', () => {
       before.masterVariant.prices = [
         {
           id: '666',
           value: { currencyCode: 'GBP', centAmount: 1000 },
           country: 'UK',
-          validFrom, // from now
-          validUntil: validFromThreeWeeksFromNow,
+          validFrom: dateNow,
+          validUntil: threeWeeksFromNow,
         },
         {
           id: '777',
           value: { currencyCode: 'USD', centAmount: 2000 },
           country: 'US',
-          validFrom: validUntil, // two weeks from now
-          validUntil: validUntilFourWeeksFromNow,
+          validFrom: twoWeeksFromNow,
+          validUntil: fourWeeksFromNow,
         },
       ]
       now.masterVariant.prices = [
         {
           value: { currencyCode: 'GBP', centAmount: 1000 },
           country: 'UK',
-          validFrom: validUntil, // two weeks from now
-          validUntil: validUntilFourWeeksFromNow,
+          validFrom: twoWeeksFromNow,
+          validUntil: fourWeeksFromNow,
         },
         {
           value: { currencyCode: 'USD', centAmount: 2000 },
           country: 'US',
-          validFrom, // from now
-          validUntil: validFromThreeWeeksFromNow,
+          validFrom: dateNow,
+          validUntil: threeWeeksFromNow,
         },
       ]
       const actions = productsSync.buildActions(now, before)
@@ -479,8 +478,8 @@ describe('Actions', () => {
             id: '666',
             value: { currencyCode: 'GBP', centAmount: 1000 },
             country: 'UK',
-            validFrom: validUntil,
-            validUntil: validUntilFourWeeksFromNow,
+            validFrom: twoWeeksFromNow,
+            validUntil: fourWeeksFromNow,
           },
         },
         {
@@ -490,8 +489,8 @@ describe('Actions', () => {
             id: '777',
             value: { currencyCode: 'USD', centAmount: 2000 },
             country: 'US',
-            validFrom,
-            validUntil: validFromThreeWeeksFromNow,
+            validFrom: dateNow,
+            validUntil: threeWeeksFromNow,
           },
         },
       ])
@@ -503,16 +502,16 @@ describe('Actions', () => {
           id: '666',
           value: { currencyCode: 'GBP', centAmount: 1000 },
           country: 'UK',
-          validFrom, // from now
-          validUntil, // two weeks from now
+          validFrom: dateNow,
+          validUntil: twoWeeksFromNow,
         },
       ]
       now.masterVariant.prices = [
         {
           value: { currencyCode: 'GBP', centAmount: 1000 },
           country: 'UK',
-          validFrom: validFromThreeWeeksFromNow,
-          validUntil: validUntilFourWeeksFromNow,
+          validFrom: threeWeeksFromNow,
+          validUntil: fourWeeksFromNow,
         },
       ]
       const actions = productsSync.buildActions(now, before)
@@ -526,8 +525,8 @@ describe('Actions', () => {
           price: {
             value: { currencyCode: 'GBP', centAmount: 1000 },
             country: 'UK',
-            validFrom: validFromThreeWeeksFromNow,
-            validUntil: validUntilFourWeeksFromNow,
+            validFrom: threeWeeksFromNow,
+            validUntil: fourWeeksFromNow,
           },
           variantId: 1,
         },
