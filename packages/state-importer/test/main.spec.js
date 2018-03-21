@@ -101,6 +101,23 @@ describe('StateImport', () => {
         response.body.results
       )
     })
+
+    it('should throw Stateimport error to outer scope (CLI)', async () => {
+      const myError = new Error('fake error')
+      stateImport.client.execute = jest.fn(() => Promise.reject(myError))
+      try {
+        await stateImport._processBatches(states)
+      } catch ({ message, summary, error }) {
+        expect(message).toMatch(/Processing batch failed/)
+        expect(summary).toMatch(/fake error/)
+        expect(Object.keys(error)).toEqual([
+          'created',
+          'updated',
+          'unchanged',
+          'errors',
+        ])
+      }
+    })
   })
 
   describe('::_createOrUpdate', () => {
@@ -149,10 +166,9 @@ describe('StateImport', () => {
       await stateImport._createOrUpdate(states, existingStates)
       expect(stateImport._update).toHaveBeenCalledTimes(2)
       expect(stateImport._summary.updated).toBe(0)
-      expect(stateImport._summary.updateErrorCount).toBe(2)
-      expect(stateImport._summary.errors).toHaveLength(2)
-      expect(stateImport._summary.errors[0]).toBe('First invalid state')
-      expect(stateImport._summary.errors[1]).toBe('Second invalid state')
+      expect(stateImport._summary.errors.update).toHaveLength(2)
+      expect(stateImport._summary.errors.update[0]).toBe('First invalid state')
+      expect(stateImport._summary.errors.update[1]).toBe('Second invalid state')
     })
 
     it('should reject by default and stop on update error', async () => {
@@ -165,9 +181,8 @@ describe('StateImport', () => {
         // Put assertions in catch block because we expect promises to fail
         expect(stateImport._update).toBeCalled()
         expect(stateImport._summary.updated).toBe(0)
-        expect(stateImport._summary.updateErrorCount).toBe(2)
-        expect(stateImport._summary.errors).toHaveLength(2)
-        expect(stateImport._summary.errors[0]).toBe('Invalid state')
+        expect(stateImport._summary.errors.update).toHaveLength(2)
+        expect(stateImport._summary.errors.update[0]).toBe('Invalid state')
         expect(error).toEqual(new Error('Invalid state'))
       }
     })
@@ -195,10 +210,9 @@ describe('StateImport', () => {
       await stateImport._createOrUpdate(states, existingStates)
       expect(stateImport._create).toHaveBeenCalledTimes(2)
       expect(stateImport._summary.created).toBe(0)
-      expect(stateImport._summary.createErrorCount).toBe(2)
-      expect(stateImport._summary.errors).toHaveLength(2)
-      expect(stateImport._summary.errors[0]).toBe('First invalid state')
-      expect(stateImport._summary.errors[1]).toBe('Second invalid state')
+      expect(stateImport._summary.errors.create).toHaveLength(2)
+      expect(stateImport._summary.errors.create[0]).toBe('First invalid state')
+      expect(stateImport._summary.errors.create[1]).toBe('Second invalid state')
     })
 
     it('should reject by default and stop on create error', async () => {
@@ -211,9 +225,8 @@ describe('StateImport', () => {
         // Put assertions in catch block because we expect promises to fail
         expect(stateImport._create).toBeCalled()
         expect(stateImport._summary.created).toBe(0)
-        expect(stateImport._summary.createErrorCount).toBe(2)
-        expect(stateImport._summary.errors).toHaveLength(2)
-        expect(stateImport._summary.errors[0]).toBe('Invalid new state')
+        expect(stateImport._summary.errors.create).toHaveLength(2)
+        expect(stateImport._summary.errors.create[0]).toBe('Invalid new state')
         expect(error).toEqual(new Error('Invalid new state'))
       }
     })
@@ -260,6 +273,23 @@ describe('StateImport', () => {
     })
   })
 
+  describe('::_buildRequest', () => {
+    it('should build a request without body', () => {
+      const actual = StateImport._buildRequest('myUri/', 'GET')
+      expect(actual).toEqual({ uri: 'myUri/', method: 'GET' })
+    })
+
+    it('should build a request with body', () => {
+      const actual = StateImport._buildRequest('myUri/', 'POST', { foo: 'bar' })
+
+      expect(actual).toEqual({
+        uri: 'myUri/',
+        method: 'POST',
+        body: { foo: 'bar' },
+      })
+    })
+  })
+
   describe('::summaryReport', () => {
     it('should be defined', () => {
       expect(stateImport.summaryReport).toBeDefined()
@@ -284,13 +314,13 @@ describe('StateImport', () => {
         Summary: there were 5 successfully imported states
         (3 were newly created, 2 were updated and 4 were unchanged).`)
 
-      stateImport._summary.createErrorCount = 5
-      stateImport._summary.updateErrorCount = 7
+      stateImport._summary.errors.create = ['create error 1', 'create error 2']
+      stateImport._summary.errors.update = ['update error 1', 'update error 2']
       report = stateImport.summaryReport()
       expect(report.reportMessage).toMatch(oneLine`
         Summary: there were 5 successfully imported states
         (3 were newly created, 2 were updated and 4 were unchanged).
-        12 errors occured (5 create errors and 7 update errors.)`)
+        4 errors occured (2 create errors and 2 update errors.)`)
     })
   })
 })

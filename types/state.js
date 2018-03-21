@@ -59,7 +59,8 @@ export type Summary = {
   created: number,
   updated: number,
   unchanged: number,
-  createErrorCount: number,
-  updateErrorCount: number,
-  errors: Array<any>,
+  errors: {
+    create: Array<any>,
+    update: Array<any>,
+  },
 }

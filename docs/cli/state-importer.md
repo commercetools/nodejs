@@ -143,11 +143,11 @@ const stateImport = new StateImport(options, logger)
 
 stateImport.run(states)
   .then(() => {
-  stateImport.summaryReport()
-  // handle successful import
+    stateImport.summaryReport()
+    // handle successful import
   })
   .catch((error) => {
-  // handle error
+    // handle error
   })
 ```
 
@@ -159,9 +159,10 @@ On successful completion, a call to the `.summaryReport()` method returns a repo
     created: 3,
     updated: 2,
     unchanged: 0,
-    createErrorCount: 0,
-    updateErrorCount: 0,
-    errors: []
+    errors: {
+      create: []
+      update: []
+    }
   }
 }
 ```

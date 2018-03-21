@@ -38,94 +38,104 @@ describe('State importer', () => {
     stateImport = new StateImport({ apiConfig }, logger)
   })
 
-  test('should create states on the CTP', async () => {
-    const reportMessage = oneLine`
-        Summary: there were 4 successfully imported states
-        (4 were newly created, 0 were updated and 0 were unchanged).`
-    const expected = {
-      reportMessage,
-      detailedSummary: {
-        created: 4,
-        updated: 0,
-        unchanged: 0,
-        createErrorCount: 0,
-        updateErrorCount: 0,
-        errors: [],
-      },
-    }
-    await stateImport.run(states)
-    expect(stateImport.summaryReport()).toEqual(
-      expect.objectContaining(expected)
-    )
+  describe('normal usage', () => {
+    it('should create states on the CTP', async () => {
+      const reportMessage = oneLine`
+          Summary: there were 4 successfully imported states
+          (4 were newly created, 0 were updated and 0 were unchanged).`
+      const expected = {
+        reportMessage,
+        detailedSummary: {
+          created: 4,
+          updated: 0,
+          unchanged: 0,
+          errors: { create: [], update: [] },
+        },
+      }
+      await stateImport.run(states)
+      expect(stateImport.summaryReport()).toEqual(
+        expect.objectContaining(expected)
+      )
+    })
+
+    it('should update states on the CTP', async () => {
+      const statesToUpdate = states.map(state => ({ ...state, initial: false }))
+      const reportMessage = oneLine`
+          Summary: there were 3 successfully imported states
+          (0 were newly created, 3 were updated and 1 were unchanged).`
+      const expected = {
+        reportMessage,
+        detailedSummary: {
+          created: 0,
+          updated: 3,
+          unchanged: 1,
+          errors: { create: [], update: [] },
+        },
+      }
+      await stateImport.run(statesToUpdate)
+      expect(stateImport.summaryReport()).toEqual(
+        expect.objectContaining(expected)
+      )
+    })
   })
 
-  test('should update states on the CTP', async () => {
-    const statesToUpdate = states.map(state => ({ ...state, initial: false }))
-    const reportMessage = oneLine`
-        Summary: there were 3 successfully imported states
-        (0 were newly created, 3 were updated and 1 were unchanged).`
-    const expected = {
-      reportMessage,
-      detailedSummary: {
-        created: 0,
-        updated: 3,
-        unchanged: 1,
-        createErrorCount: 0,
-        updateErrorCount: 0,
-        errors: [],
-      },
-    }
-    await stateImport.run(statesToUpdate)
-    expect(stateImport.summaryReport()).toEqual(
-      expect.objectContaining(expected)
-    )
-  })
+  describe('Error handling', () => {
+    let invalidStates
+    beforeEach(() => {
+      invalidStates = states.map(state => ({ ...state, key: '' }))
+    })
+    describe('without `continueOnProblems', () => {
+      it('should stop import on first error', async () => {
+        try {
+          await stateImport.run(invalidStates)
+        } catch (caughtError) {
+          // Because import is done in batches, we cannot guarantee
+          // how many will be successful before the failure, but the
+          // errors array must be only one
+          expect(caughtError.message).toMatch(/Processing batch failed/)
+          expect(caughtError.error.errors.create).toHaveLength(1)
+          expect(caughtError.error.errors.create[0]).toMatch(
+            /'key' should not be empty/
+          )
+        }
+      })
+    })
 
-  test('should stop import on first error by default', async () => {
-    // Make states invalid
-    const statesToImport = states.map(state => ({ ...state, key: '' }))
+    describe('with `continueOnProblems', () => {
+      beforeEach(() => {
+        stateImport = new StateImport(
+          { apiConfig, continueOnProblems: true },
+          logger
+        )
+      })
 
-    try {
-      await stateImport.run(statesToImport)
-    } catch (caughtError) {
-      // Because import is done in batches, we cannot guarantee how many will
-      // be successful before the failure, but the errors array must be only one
-      expect(caughtError.message).toMatch(/Processing batch failed/)
-      expect(caughtError.error.errors).toHaveLength(1)
-      expect(caughtError.error.errors[0]).toMatch(/'key' should not be empty/)
-    }
-  })
-
-  test('should continueOnProblems if `continueOnProblems`', async () => {
-    // Make states invalid
-    const statesToImport = states.map(state => ({ ...state, key: '' }))
-    stateImport = new StateImport(
-      { apiConfig, continueOnProblems: true },
-      logger
-    )
-    const reportMessage = oneLine`
-        Summary: there were 0 successfully imported states
-        (0 were newly created, 0 were updated and 0 were unchanged).
-        4 errors occured (4 create errors and 0 update errors.)`
-    const expected = {
-      reportMessage,
-      detailedSummary: {
-        created: 0,
-        updated: 0,
-        unchanged: 0,
-        createErrorCount: 4,
-        updateErrorCount: 0,
-        errors: [
-          `'key' should not be empty.`,
-          `'key' should not be empty.`,
-          `'key' should not be empty.`,
-          `'key' should not be empty.`,
-        ],
-      },
-    }
-    await stateImport.run(statesToImport)
-    expect(stateImport.summaryReport()).toEqual(
-      expect.objectContaining(expected)
-    )
+      it('should not stop on errors', async () => {
+        const reportMessage = oneLine`
+            Summary: there were 0 successfully imported states
+            (0 were newly created, 0 were updated and 0 were unchanged).
+            4 errors occured (4 create errors and 0 update errors.)`
+        const expected = {
+          reportMessage,
+          detailedSummary: {
+            created: 0,
+            updated: 0,
+            unchanged: 0,
+            errors: {
+              create: [
+                `'key' should not be empty.`,
+                `'key' should not be empty.`,
+                `'key' should not be empty.`,
+                `'key' should not be empty.`,
+              ],
+              update: [],
+            },
+          },
+        }
+        await stateImport.run(invalidStates)
+        expect(stateImport.summaryReport()).toEqual(
+          expect.objectContaining(expected)
+        )
+      })
+    })
   })
 })

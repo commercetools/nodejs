@@ -17,7 +17,12 @@ import type {
   StateData,
   Summary,
 } from '../../../types/state'
-import type { Client, SyncAction } from '../../../types/sdk'
+import type {
+  Client,
+  ClientRequest,
+  MethodType,
+  SyncAction,
+} from '../../../types/sdk'
 
 class StateImportError extends Error {
   error: any
@@ -46,6 +51,14 @@ export default class StateImport {
   logger: LoggerOptions
   _summary: Summary
   syncStates: SyncAction
+
+  static _buildRequest(
+    uri: string,
+    method: MethodType,
+    body?: Object
+  ): ClientRequest {
+    return body ? { uri, method, body } : { uri, method }
+  }
 
   constructor(options: ConstructorOptions, logger: LoggerOptions) {
     if (!options.apiConfig)
@@ -101,7 +114,7 @@ export default class StateImport {
     const predicate = StateImport._buildPredicate(states)
     const service = this._createService()
     const uri = service.where(predicate).build()
-    const existingStatesRequest = { uri, method: 'GET' }
+    const existingStatesRequest = StateImport._buildRequest(uri, 'GET')
     return this.client
       .execute(existingStatesRequest)
       .then(({ body: { results: existingStates } }: Object) =>
@@ -136,9 +149,8 @@ export default class StateImport {
           })
           .catch(error => {
             if (this.continueOnProblems) {
-              this._summary.updateErrorCount += 1
-              this._summary.errors.push(error.message || error)
-              this.logger.error(
+              this._summary.errors.update.push(error.message || error)
+              this.logger.warn(
                 'Update error occured but ignored. See summary for details'
               )
               return Promise.resolve()
@@ -146,8 +158,7 @@ export default class StateImport {
             this.logger.error(
               'Process stopped due to error while updating state. See summary for details'
             )
-            this._summary.updateErrorCount += 1
-            this._summary.errors.push(error.message || error)
+            this._summary.errors.update.push(error.message || error)
             throw error
           })
       return this._create(newState)
@@ -157,9 +168,8 @@ export default class StateImport {
         })
         .catch(error => {
           if (this.continueOnProblems) {
-            this._summary.createErrorCount += 1
-            this._summary.errors.push(error.message || error)
-            this.logger.error(
+            this._summary.errors.create.push(error.message || error)
+            this.logger.warn(
               'Create error occured but ignored. See summary for details'
             )
             return Promise.resolve()
@@ -167,8 +177,7 @@ export default class StateImport {
           this.logger.error(
             'Process stopped due to error while creating discount code. See summary for details'
           )
-          this._summary.createErrorCount += 1
-          this._summary.errors.push(error.message || error)
+          this._summary.errors.create.push(error.message || error)
           throw error
         })
     })
@@ -180,11 +189,11 @@ export default class StateImport {
     if (!actions.length) return Promise.resolve({ statusCode: 304 })
     const service = this._createService()
     const uri = service.byId(existingState.id).build()
-    const body = {
+    const updateActions = {
       version: existingState.version,
       actions,
     }
-    const req = { uri, method: 'POST', body }
+    const req = StateImport._buildRequest(uri, 'POST', updateActions)
     this.logger.debug('Updating existing code entry')
     return this.client.execute(req)
   }
@@ -192,7 +201,7 @@ export default class StateImport {
   _create(state: StateData) {
     const service = this._createService()
     const uri = service.build()
-    const req = { uri, method: 'POST', body: state }
+    const req = StateImport._buildRequest(uri, 'POST', state)
     this.logger.debug('Creating new state entry')
     return this.client.execute(req)
   }
@@ -208,30 +217,25 @@ export default class StateImport {
       created: 0,
       updated: 0,
       unchanged: 0,
-      createErrorCount: 0,
-      updateErrorCount: 0,
-      errors: [],
+      errors: { create: [], update: [] },
     }
     return this._summary
   }
 
   summaryReport() {
-    const {
-      created,
-      updated,
-      unchanged,
-      createErrorCount,
-      updateErrorCount,
-    } = this._summary
+    const { created, updated, unchanged, errors } = this._summary
+
     let message = ''
-    if (created + updated + createErrorCount + updateErrorCount === 0)
+    if (created + updated + errors.create.length + errors.update.length === 0)
       message = 'Summary: nothing to do, everything is fine'
     else
       message = `Summary: there were ${created +
         updated} successfully imported states (${created} were newly created, ${updated} were updated and ${unchanged} were unchanged).`
-    if (createErrorCount || updateErrorCount)
-      message += ` ${createErrorCount +
-        updateErrorCount} errors occured (${createErrorCount} create errors and ${updateErrorCount} update errors.)`
+    if (errors.create.length || errors.update.length)
+      message += ` ${errors.create.length +
+        errors.update.length} errors occured (${
+        errors.create.length
+      } create errors and ${errors.update.length} update errors.)`
     return {
       reportMessage: message,
       detailedSummary: this._summary,
