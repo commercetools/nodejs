@@ -170,6 +170,7 @@ describe('Actions', () => {
 
   describe('build actions for prices without ID', () => {
     const dateNow = new Date()
+    const oneWeekFromNow = new Date(Date.now() + 12096e5 / 2)
     const twoWeeksFromNow = new Date(Date.now() + 12096e5) // two weeks from now
     const threeWeeksFromNow = new Date(Date.now() + 12096e5 * 1.5)
     const fourWeeksFromNow = new Date(Date.now() + 12096e5 * 2)
@@ -492,6 +493,186 @@ describe('Actions', () => {
             validFrom: dateNow,
             validUntil: threeWeeksFromNow,
           },
+        },
+      ])
+    })
+
+    it('should build change- and addPrice actions if two or more validFrom/Until dates are overlapping inside one old', () => {
+      before.masterVariant.prices = [
+        {
+          id: '666',
+          value: { currencyCode: 'GBP', centAmount: 1000 },
+          country: 'UK',
+          validFrom: dateNow,
+          validUntil: fourWeeksFromNow,
+        },
+      ]
+      now.masterVariant.prices = [
+        {
+          value: { currencyCode: 'GBP', centAmount: 1000 },
+          country: 'UK',
+          validFrom: dateNow,
+          validUntil: twoWeeksFromNow,
+        },
+        {
+          value: { currencyCode: 'GBP', centAmount: 2000 },
+          country: 'UK',
+          validFrom: twoWeeksFromNow,
+          validUntil: threeWeeksFromNow,
+        },
+        {
+          value: { currencyCode: 'GBP', centAmount: 1000 },
+          country: 'UK',
+          validFrom: threeWeeksFromNow,
+          validUntil: fourWeeksFromNow,
+        },
+      ]
+      const actions = productsSync.buildActions(now, before)
+      expect(actions).toEqual([
+        {
+          action: 'changePrice',
+          priceId: '666',
+          price: {
+            id: '666',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+          },
+        },
+        {
+          action: 'addPrice',
+          price: {
+            value: { currencyCode: 'GBP', centAmount: 2000 },
+            country: 'UK',
+            validFrom: twoWeeksFromNow,
+            validUntil: threeWeeksFromNow,
+          },
+          variantId: 1,
+        },
+        {
+          action: 'addPrice',
+          price: {
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: threeWeeksFromNow,
+            validUntil: fourWeeksFromNow,
+          },
+          variantId: 1,
+        },
+      ])
+    })
+
+    it('should build change- and removePrice actions if two or more validFrom/Until dates are overlapping inside one new', () => {
+      before.masterVariant.prices = [
+        {
+          id: '666',
+          value: { currencyCode: 'GBP', centAmount: 1000 },
+          country: 'UK',
+          validFrom: dateNow,
+          validUntil: twoWeeksFromNow,
+        },
+        {
+          id: '777',
+          value: { currencyCode: 'GBP', centAmount: 2000 },
+          country: 'UK',
+          validFrom: twoWeeksFromNow,
+          validUntil: threeWeeksFromNow,
+        },
+        {
+          id: '888',
+          value: { currencyCode: 'GBP', centAmount: 1000 },
+          country: 'UK',
+          validFrom: threeWeeksFromNow,
+          validUntil: fourWeeksFromNow,
+        },
+      ]
+      now.masterVariant.prices = [
+        {
+          value: { currencyCode: 'GBP', centAmount: 2000 },
+          country: 'UK',
+          validFrom: dateNow,
+          validUntil: fourWeeksFromNow,
+        },
+      ]
+      const actions = productsSync.buildActions(now, before)
+      expect(actions).toEqual([
+        {
+          action: 'changePrice',
+          priceId: '666',
+          price: {
+            id: '666',
+            value: { currencyCode: 'GBP', centAmount: 2000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: fourWeeksFromNow,
+          },
+        },
+        {
+          action: 'removePrice',
+          priceId: '777',
+        },
+        {
+          action: 'removePrice',
+          priceId: '888',
+        },
+      ])
+    })
+
+    it('should build remove- and addPrice actions if two or more validFrom/Until dates are overlapping inside one new which goes to infinity', () => {
+      before.masterVariant.prices = [
+        {
+          id: '666',
+          value: { currencyCode: 'GBP', centAmount: 1000 },
+          country: 'UK',
+          validFrom: oneWeekFromNow,
+          validUntil: twoWeeksFromNow,
+        },
+        {
+          id: '777',
+          value: { currencyCode: 'GBP', centAmount: 1000 },
+          country: 'UK',
+          validFrom: twoWeeksFromNow,
+          validUntil: threeWeeksFromNow,
+        },
+        {
+          id: '888',
+          value: { currencyCode: 'GBP', centAmount: 1000 },
+          country: 'UK',
+          validFrom: threeWeeksFromNow,
+          validUntil: fourWeeksFromNow,
+        },
+      ]
+      now.masterVariant.prices = [
+        {
+          value: { currencyCode: 'GBP', centAmount: 1000 },
+          country: 'UK',
+          validFrom: dateNow,
+        },
+      ]
+      const actions = productsSync.buildActions(now, before)
+      expect(actions).toEqual([
+        {
+          action: 'removePrice',
+          priceId: '666',
+        },
+        {
+          action: 'removePrice',
+          priceId: '777',
+        },
+        {
+          action: 'removePrice',
+          priceId: '888',
+        },
+        {
+          action: 'addPrice',
+
+          price: {
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+          },
+          variantId: 1,
         },
       ])
     })

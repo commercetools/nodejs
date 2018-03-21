@@ -16,7 +16,8 @@ function isDateOverlap(
 }
 
 function getPriceId(newPrice, oldVariantArray) {
-  let newPriceId = ''
+  let newPriceId
+
   const newPriceComparison = {
     value: { currencyCode: newPrice.value.currencyCode },
     channel: newPrice.channel,
@@ -64,6 +65,7 @@ function getPriceId(newPrice, oldVariantArray) {
 
 function updateMissingPriceIds(newVariantArray, oldVariantArray) {
   // loop over and mutate newVariant price entry
+  const addedIdsArray = []
   newVariantArray.map(newVariant => {
     if (!newVariant.prices) return newVariant
     return newVariant.prices.map(price => {
@@ -71,7 +73,10 @@ function updateMissingPriceIds(newVariantArray, oldVariantArray) {
       if (!priceWithId.id) {
         const id = getPriceId(price, oldVariantArray)
         // reference original price entry and add id to it
-        if (id) priceWithId.id = id
+        if (id && addedIdsArray.indexOf(id) < 0) {
+          priceWithId.id = id
+          addedIdsArray.push(id)
+        }
       }
       return priceWithId
     })
