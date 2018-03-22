@@ -2,24 +2,24 @@ import discountCodesSyncFn, { actionGroups } from '../src/discount-codes'
 import { baseActionsList } from '../src/discount-codes-actions'
 
 describe('Exports', () => {
-  it('action group list', () => {
+  test('action group list', () => {
     expect(actionGroups).toEqual(['base', 'custom'])
   })
 
   describe('action list', () => {
-    it('should contain `changeIsActive` action', () => {
+    test('should contain `changeIsActive` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'changeIsActive', key: 'isActive' }])
       )
     })
 
-    it('should contain `setName` action', () => {
+    test('should contain `setName` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'setName', key: 'name' }])
       )
     })
 
-    it('should contain `setDescription` action', () => {
+    test('should contain `setDescription` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           {
@@ -30,7 +30,7 @@ describe('Exports', () => {
       )
     })
 
-    it('should contain `setMaxApplications` action', () => {
+    test('should contain `setMaxApplications` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           {
@@ -41,7 +41,7 @@ describe('Exports', () => {
       )
     })
 
-    it('should contain `setMaxApplicationsPerCustomer` action', () => {
+    test('should contain `setMaxApplicationsPerCustomer` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           {
@@ -52,7 +52,7 @@ describe('Exports', () => {
       )
     })
 
-    it('should contain `changeCartDiscounts` action', () => {
+    test('should contain `changeCartDiscounts` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           {
@@ -63,19 +63,19 @@ describe('Exports', () => {
       )
     })
 
-    it('should contain `setValidFrom` action', () => {
+    test('should contain `setValidFrom` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'setValidFrom', key: 'validFrom' }])
       )
     })
 
-    it('should contain `setValidUntil` action', () => {
+    test('should contain `setValidUntil` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'setValidUntil', key: 'validUntil' }])
       )
     })
 
-    it('should contain `changeGroups` action', () => {
+    test('should contain `changeGroups` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'changeGroups', key: 'groups' }])
       )
@@ -89,7 +89,7 @@ describe('Actions', () => {
     discountCodesSync = discountCodesSyncFn()
   })
 
-  it('should build `changeIsActive` action', () => {
+  test('should build `changeIsActive` action', () => {
     const before = { isActive: false }
     const now = { isActive: true }
     const actual = discountCodesSync.buildActions(now, before)
@@ -102,7 +102,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `setName` action', () => {
+  test('should build `setName` action', () => {
     const before = {
       name: { en: 'previous-en-name', de: 'previous-de-name' },
     }
@@ -120,7 +120,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `setDescription` action', () => {
+  test('should build `setDescription` action', () => {
     const before = {
       description: { en: 'old-en-description', de: 'old-de-description' },
     }
@@ -138,7 +138,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `setCartPredicate` action', () => {
+  test('should build `setCartPredicate` action', () => {
     const before = { cartPredicate: 'old-cart-predicate' }
     const now = { cartPredicate: 'new-cart-predicate' }
     const actual = discountCodesSync.buildActions(now, before)
@@ -151,7 +151,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `setMaxApplications` action', () => {
+  test('should build `setMaxApplications` action', () => {
     const before = { maxApplications: 5 }
     const now = { maxApplications: 10 }
     const actual = discountCodesSync.buildActions(now, before)
@@ -164,7 +164,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `setMaxApplicationsPerCustomer` action', () => {
+  test('should build `setMaxApplicationsPerCustomer` action', () => {
     const before = { maxApplicationsPerCustomer: 1 }
     const now = { maxApplicationsPerCustomer: 3 }
     const actual = discountCodesSync.buildActions(now, before)
@@ -177,7 +177,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `changeCartDiscounts` action', () => {
+  test('should build `changeCartDiscounts` action', () => {
     const before = {
       cartDiscounts: [
         {
@@ -238,7 +238,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `setValidFrom` action', () => {
+  test('should build the `setValidFrom` action', () => {
     const before = {
       validFrom: 'date1',
     }
@@ -257,7 +257,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `setValidUntil` action', () => {
+  test('should build the `setValidUntil` action', () => {
     const before = {
       validUntil: 'date1',
     }
@@ -276,7 +276,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `changeGroups` action', () => {
+  test('should build the `changeGroups` action', () => {
     const before = {
       groups: ['A'],
     }
@@ -296,7 +296,7 @@ describe('Actions', () => {
   })
 
   describe('custom fields', () => {
-    it('should build `setCustomType` action', () => {
+    test('should build `setCustomType` action', () => {
       const before = {
         custom: {
           type: {
@@ -325,7 +325,7 @@ describe('Actions', () => {
     })
   })
 
-  it('should build `setCustomField` action', () => {
+  test('should build `setCustomField` action', () => {
     const before = {
       custom: {
         type: {

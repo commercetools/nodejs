@@ -2,11 +2,11 @@ import taxCategorySyncFn, { actionGroups } from '../src/tax-categories'
 import { baseActionsList } from '../src/tax-categories-actions'
 
 describe('Exports', () => {
-  it('action group list', () => {
+  test('action group list', () => {
     expect(actionGroups).toEqual(['base', 'rates'])
   })
 
-  it('correctly define base actions list', () => {
+  test('correctly define base actions list', () => {
     expect(baseActionsList).toEqual([
       { action: 'changeName', key: 'name' },
       { action: 'setKey', key: 'key' },
@@ -21,7 +21,7 @@ describe('Actions', () => {
     taxCategorySync = taxCategorySyncFn()
   })
 
-  it('should build `changeName` action', () => {
+  test('should build `changeName` action', () => {
     const before = {
       name: 'John',
     }
@@ -34,7 +34,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `setKey` action', () => {
+  test('should build `setKey` action', () => {
     const before = {
       key: '1234',
     }
@@ -52,7 +52,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `setDescription` action', () => {
+  test('should build `setDescription` action', () => {
     const before = {
       description: 'some description',
     }
@@ -70,7 +70,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `addTaxRate` action', () => {
+  test('should build `addTaxRate` action', () => {
     const before = { addresses: [] }
     const now = {
       rates: [{ name: '5% US', amount: '0.05' }],
@@ -81,7 +81,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `replaceTaxRate` action', () => {
+  test('should build `replaceTaxRate` action', () => {
     const before = {
       rates: [
         {
@@ -112,7 +112,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `removeTaxRate` action', () => {
+  test('should build `removeTaxRate` action', () => {
     const before = {
       rates: [{ id: 'taxRate-1' }],
     }
@@ -128,7 +128,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build complex mixed actions', () => {
+  test('should build complex mixed actions', () => {
     const before = {
       rates: [
         {

@@ -2,11 +2,11 @@ import customerSyncFn, { actionGroups } from '../src/customers'
 import { baseActionsList, referenceActionsList } from '../src/customer-actions'
 
 describe('Exports', () => {
-  it('action group list', () => {
+  test('action group list', () => {
     expect(actionGroups).toEqual(['base', 'references', 'addresses', 'custom'])
   })
 
-  it('correctly define base actions list', () => {
+  test('correctly define base actions list', () => {
     expect(baseActionsList).toEqual([
       { action: 'changeEmail', key: 'email' },
       { action: 'setFirstName', key: 'firstName' },
@@ -31,7 +31,7 @@ describe('Exports', () => {
     ])
   })
 
-  it('correctly define reference actions list', () => {
+  test('correctly define reference actions list', () => {
     expect(referenceActionsList).toEqual([
       { action: 'setCustomerGroup', key: 'customerGroup' },
     ])
@@ -44,7 +44,7 @@ describe('Actions', () => {
     customerSync = customerSyncFn()
   })
 
-  it('should build `changeEmail` action', () => {
+  test('should build `changeEmail` action', () => {
     const before = {
       email: 'john@doe.com',
     }
@@ -57,7 +57,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `setDefaultBillingAddress` action', () => {
+  test('should build `setDefaultBillingAddress` action', () => {
     const before = {
       defaultBillingAddressId: 'abc123',
     }
@@ -75,7 +75,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `setDefaultShippingAddress` action', () => {
+  test('should build `setDefaultShippingAddress` action', () => {
     const before = {
       defaultShippingAddressId: 'abc123',
     }
@@ -93,7 +93,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `addAddress` action', () => {
+  test('should build `addAddress` action', () => {
     const before = { addresses: [] }
     const now = {
       addresses: [{ streetName: 'some name', streetNumber: '5' }],
@@ -104,7 +104,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `changeAddress` action', () => {
+  test('should build `changeAddress` action', () => {
     const before = {
       addresses: [
         {
@@ -135,7 +135,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `removeAddress` action', () => {
+  test('should build `removeAddress` action', () => {
     const before = {
       addresses: [{ id: 'somelongidgoeshere199191' }],
     }
@@ -151,7 +151,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build complex mixed actions', () => {
+  test('should build complex mixed actions', () => {
     const before = {
       addresses: [
         {
@@ -223,7 +223,7 @@ describe('Actions', () => {
   })
 
   describe('custom fields', () => {
-    it('should build `setCustomType` action', () => {
+    test('should build `setCustomType` action', () => {
       const before = {
         custom: {
           type: {
@@ -252,7 +252,7 @@ describe('Actions', () => {
     })
   })
 
-  it('should build `setCustomField` action', () => {
+  test('should build `setCustomField` action', () => {
     const before = {
       custom: {
         type: {

@@ -2,24 +2,24 @@ import statesSyncFn, { actionGroups } from '../src/states'
 import { baseActionsList } from '../src/state-actions'
 
 describe('Exports', () => {
-  it('action group list', () => {
+  test('action group list', () => {
     expect(actionGroups).toEqual(['base'])
   })
 
   describe('action list', () => {
-    it('should contain `changeIsActive` action', () => {
+    test('should contain `changeIsActive` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'changeKey', key: 'key' }])
       )
     })
 
-    it('should contain `setName` action', () => {
+    test('should contain `setName` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'setName', key: 'name' }])
       )
     })
 
-    it('should contain `setDescription` action', () => {
+    test('should contain `setDescription` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           {
@@ -30,7 +30,7 @@ describe('Exports', () => {
       )
     })
 
-    it('should contain `changeType` action', () => {
+    test('should contain `changeType` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           {
@@ -41,7 +41,7 @@ describe('Exports', () => {
       )
     })
 
-    it('should contain `changeInitial` action', () => {
+    test('should contain `changeInitial` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           {
@@ -52,7 +52,7 @@ describe('Exports', () => {
       )
     })
 
-    it('should contain `setTransitions` action', () => {
+    test('should contain `setTransitions` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           {
@@ -71,7 +71,7 @@ describe('Actions', () => {
     statesSync = statesSyncFn()
   })
 
-  it('should build `changeKey` action', () => {
+  test('should build `changeKey` action', () => {
     const before = { key: 'oldKey' }
     const now = { key: 'newKey' }
     const actual = statesSync.buildActions(now, before)
@@ -84,7 +84,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `setName` action', () => {
+  test('should build `setName` action', () => {
     const before = {
       name: { en: 'previous-en-name', de: 'previous-de-name' },
     }
@@ -102,7 +102,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `setDescription` action', () => {
+  test('should build `setDescription` action', () => {
     const before = {
       description: { en: 'old-en-description', de: 'old-de-description' },
     }
@@ -120,7 +120,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `changeType` action', () => {
+  test('should build `changeType` action', () => {
     const before = { key: 'state-1', type: 'ReviewState' }
     const now = { key: 'state-1', type: 'ProductState' }
     const actual = statesSync.buildActions(now, before)
@@ -133,7 +133,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `changeInitial` action', () => {
+  test('should build `changeInitial` action', () => {
     const before = { key: 'state-1', initial: true }
     const now = { key: 'state-1', initial: false }
     const actual = statesSync.buildActions(now, before)
@@ -146,7 +146,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `setTransitions` action', () => {
+  test('should build `setTransitions` action', () => {
     const before = {
       key: 'state-1',
       transitions: [
@@ -192,7 +192,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `addRoles` action', () => {
+  test('should build `addRoles` action', () => {
     const before = {
       key: 'state-1',
       roles: ['ReviewIncludedInStatistics'],
@@ -211,7 +211,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `removeRoles` action', () => {
+  test('should build `removeRoles` action', () => {
     const before = {
       key: 'state-1',
       roles: ['Return', 'Another', 'ReviewIncludedInStatistics'],
@@ -230,7 +230,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `removeRoles` and `addRoles` actions', () => {
+  test('should build the `removeRoles` and `addRoles` actions', () => {
     // This is necessary because there is currently no way to differentiate
     // between `setRoles` action and `addRoles || removeRoles` actions so we
     // simply replace the roles that need to be replaced with add and remove

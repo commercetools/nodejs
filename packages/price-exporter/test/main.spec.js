@@ -31,17 +31,17 @@ describe('PriceExporter', () => {
   })
 
   describe('constructor', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(typeof PriceExporter).toBe('function')
     })
 
-    it('should throw if no `apiConfig` in `options` parameter', () => {
+    test('should throw if no `apiConfig` in `options` parameter', () => {
       expect(() => new PriceExporter({ foo: 'bar' })).toThrowError(
         /The constructor must be passed an `apiConfig` object/
       )
     })
 
-    it('throw if no `headers` array in options and export is csv', () => {
+    test('throw if no `headers` array in options and export is csv', () => {
       expect(
         () =>
           new PriceExporter({
@@ -53,11 +53,11 @@ describe('PriceExporter', () => {
       )
     })
 
-    it('not throw if no `headers` array in options and export is json', () => {
+    test('not throw if no `headers` array in options and export is json', () => {
       expect(() => new PriceExporter({ apiConfig: 'config' })).not.toThrow()
     })
 
-    it('should set default properties', () => {
+    test('should set default properties', () => {
       expect(priceExporter.apiConfig).toEqual({
         projectKey: 'project-key',
       })
@@ -69,7 +69,7 @@ describe('PriceExporter', () => {
   })
 
   describe('::run', () => {
-    it('should call `_processStream` with outputStream if json', async () => {
+    test('should call `_processStream` with outputStream if json', async () => {
       jest.mock('fast-csv', () => ({
         createWriteStream: jest.fn(() => ({ pipe: jest.fn() })),
       }))
@@ -82,7 +82,7 @@ describe('PriceExporter', () => {
       expect(csv.createWriteStream).not.toBeCalled()
     })
 
-    it('should call `_processStream` with outputStream if csv', async () => {
+    test('should call `_processStream` with outputStream if csv', async () => {
       priceExporter._getProducts = jest.fn(() => Promise.resolve())
       const outputStream = streamtest.v2.toText(() => {})
 
@@ -95,7 +95,7 @@ describe('PriceExporter', () => {
   })
 
   describe('::_getProducts', () => {
-    it('should fetch products using `process` method', () => {
+    test('should fetch products using `process` method', () => {
       const sampleResult = {
         body: {
           results: [],
@@ -115,7 +115,7 @@ describe('PriceExporter', () => {
       })
     })
 
-    it('should close stream after writing data', async () => {
+    test('should close stream after writing data', async () => {
       priceExporter.client.process = jest.fn(() => Promise.resolve())
       const outputStream = { emit: jest.fn() }
       const pipeStream = { end: jest.fn() }
@@ -124,7 +124,7 @@ describe('PriceExporter', () => {
       expect(pipeStream.end).toBeCalled()
     })
 
-    it('should emit `error` on output stream if error occurs', done => {
+    test('should emit `error` on output stream if error occurs', done => {
       const spy = jest
         .spyOn(priceExporter.client, 'process')
         .mockImplementation(() => Promise.reject(new Error('error occured')))
@@ -158,7 +158,7 @@ describe('PriceExporter', () => {
       },
     ]
 
-    it('should write json output once for each sku to stream', done => {
+    test('should write json output once for each sku to stream', done => {
       const pipeStream = { write: jest.fn(() => done()) }
       priceExporter._writePrices(sample, pipeStream)
 
@@ -166,7 +166,7 @@ describe('PriceExporter', () => {
       expect(pipeStream.write).toBeCalledWith(sample[0])
     })
 
-    it('should flatten csv output and write to stream', done => {
+    test('should flatten csv output and write to stream', done => {
       const pipeStream = { write: jest.fn(() => done()) }
       const firstExpected = { 'value.centAmount': 16125 }
       const secondExpected = { 'value.centAmount': 4000 }
@@ -180,7 +180,7 @@ describe('PriceExporter', () => {
   })
 
   describe('::_resolveReferences', () => {
-    it('returns array of prices with resolved references', async () => {
+    test('returns array of prices with resolved references', async () => {
       const resolvedChannel = { channel: { key: 'resolved-channel-key' } }
       const resolvedCustGroup = {
         customerGroup: { groupName: 'resolved-group-name' },
@@ -257,14 +257,14 @@ describe('PriceExporter', () => {
   })
 
   describe('::_resolveChannel', () => {
-    it('should return empty object if no `channel` reference', () => {
+    test('should return empty object if no `channel` reference', () => {
       const samplePrice = {
         value: { centAmount: 4300 },
       }
       expect(priceExporter._resolveChannel(samplePrice)).toEqual({})
     })
 
-    it('should return channel key if CSV format', async () => {
+    test('should return channel key if CSV format', async () => {
       priceExporter.config.exportFormat = 'csv'
       priceExporter.fetchReferences = jest.fn(() =>
         Promise.resolve({ body: { key: 'my-resolved-key' } })
@@ -279,7 +279,7 @@ describe('PriceExporter', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('should return channel key in `id` if JSON format', async () => {
+    test('should return channel key in `id` if JSON format', async () => {
       priceExporter.fetchReferences = jest.fn(() =>
         Promise.resolve({ body: { key: 'my-resolved-key' } })
       )
@@ -295,14 +295,14 @@ describe('PriceExporter', () => {
   })
 
   describe('::_resolveCustomerGroup', () => {
-    it('should return empty object if no `customerGroup` reference', () => {
+    test('should return empty object if no `customerGroup` reference', () => {
       const samplePrice = {
         value: { centAmount: 4300 },
       }
       expect(priceExporter._resolveCustomerGroup(samplePrice)).toEqual({})
     })
 
-    it('should return customerGroup groupName if CSV format', async () => {
+    test('should return customerGroup groupName if CSV format', async () => {
       priceExporter.config.exportFormat = 'csv'
       priceExporter.fetchReferences = jest.fn(() =>
         Promise.resolve({ body: { name: 'my-resolved-name' } })
@@ -317,7 +317,7 @@ describe('PriceExporter', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('should return customerGroup name in `id` if JSON format', async () => {
+    test('should return customerGroup name in `id` if JSON format', async () => {
       priceExporter.fetchReferences = jest.fn(() =>
         Promise.resolve({ body: { name: 'my-resolved-name' } })
       )
@@ -333,14 +333,14 @@ describe('PriceExporter', () => {
   })
 
   describe('::_resolveCustomType', () => {
-    it('should return empty object if no `custom` reference', () => {
+    test('should return empty object if no `custom` reference', () => {
       const samplePrice = {
         value: { centAmount: 4300 },
       }
       expect(priceExporter._resolveCustomType(samplePrice)).toEqual({})
     })
 
-    it('return customType `key` and `customField` if CSV format', async () => {
+    test('return customType `key` and `customField` if CSV format', async () => {
       priceExporter.config.exportFormat = 'csv'
       priceExporter.fetchReferences = jest.fn(() =>
         Promise.resolve({ body: { key: 'my-custom-type-key' } })
@@ -361,7 +361,7 @@ describe('PriceExporter', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('should return custom without `typeId` if JSON format', async () => {
+    test('should return custom without `typeId` if JSON format', async () => {
       const samplePrice = {
         value: { centAmount: 4300 },
         custom: {
@@ -381,7 +381,7 @@ describe('PriceExporter', () => {
   })
 
   describe('::_getPrices', () => {
-    it('extracts prices from array of products and groups by sku', () => {
+    test('extracts prices from array of products and groups by sku', () => {
       const expected = expectedPrices
       const actual = PriceExporter._getPrices(sampleProduct)
       expect(actual).toEqual(expected)
@@ -389,7 +389,7 @@ describe('PriceExporter', () => {
   })
 
   describe('::fetchReferences', () => {
-    it('should fetch reference from API from url', () => {
+    test('should fetch reference from API from url', () => {
       priceExporter.client.execute = jest.fn()
       const uri = 'dummy-uri'
       const expectedRequest = {
@@ -403,7 +403,7 @@ describe('PriceExporter', () => {
       expect(priceExporter.client.execute).toHaveBeenCalledWith(expectedRequest)
     })
 
-    it('should fetch only once for multiple calls with same parameter', () => {
+    test('should fetch only once for multiple calls with same parameter', () => {
       priceExporter.client.execute = jest.fn()
       const uri = 'dummy-uri-2'
       const expectedRequest = {

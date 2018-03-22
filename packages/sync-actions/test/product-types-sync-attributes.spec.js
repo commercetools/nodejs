@@ -39,7 +39,7 @@ describe('Actions', () => {
       })
       updateActions = productTypesSync.buildActions(now, before)
     })
-    it('should return `addAttributeDefinition` actions', () => {
+    test('should return `addAttributeDefinition` actions', () => {
       expect(updateActions).toEqual(
         now.attributes.map(attribute => ({
           action: 'addAttributeDefinition',
@@ -73,7 +73,7 @@ describe('Actions', () => {
       })
       updateActions = productTypesSync.buildActions(now, before)
     })
-    it('should return `removeAttributeDefinition` actions', () => {
+    test('should return `removeAttributeDefinition` actions', () => {
       expect(updateActions).toEqual(
         before.attributes.map(fieldDefinition => ({
           action: 'removeAttributeDefinition',
@@ -106,7 +106,7 @@ describe('Actions', () => {
       })
       updateActions = productTypesSync.buildActions(now, before)
     })
-    it('should return `changeAttributeOrder` action', () => {
+    test('should return `changeAttributeOrder` action', () => {
       expect(updateActions).toEqual([
         {
           action: 'changeAttributeOrder',
@@ -141,7 +141,7 @@ describe('Actions', () => {
       })
       updateActions = productTypesSync.buildActions(now, before)
     })
-    it('should return `removeAttributeDefinition` and `addAttributeDefinition` actions', () => {
+    test('should return `removeAttributeDefinition` and `addAttributeDefinition` actions', () => {
       expect(updateActions).toEqual([
         {
           action: 'addAttributeDefinition',
@@ -187,7 +187,7 @@ describe('Actions', () => {
         })
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `changeLabel` action', () => {
+      test('should return `changeLabel` action', () => {
         expect(updateActions).toEqual([
           {
             action: 'changeLabel',
@@ -227,7 +227,7 @@ describe('Actions', () => {
         })
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `changeLabel` action', () => {
+      test('should return `changeLabel` action', () => {
         expect(updateActions).toEqual([
           {
             action: 'changeLabel',
@@ -265,7 +265,7 @@ describe('Actions', () => {
         })
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `changeLabel` action', () => {
+      test('should return `changeLabel` action', () => {
         expect(updateActions).toEqual([
           {
             action: 'changeLabel',
@@ -303,7 +303,7 @@ describe('Actions', () => {
         }
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `setInputTip` action', () => {
+      test('should return `setInputTip` action', () => {
         expect(updateActions).toEqual([
           {
             action: 'setInputTip',
@@ -341,7 +341,7 @@ describe('Actions', () => {
         })
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `setInputTip` action', () => {
+      test('should return `setInputTip` action', () => {
         expect(updateActions).toEqual([
           {
             action: 'setInputTip',
@@ -375,7 +375,7 @@ describe('Actions', () => {
       }
       updateActions = productTypesSync.buildActions(now, before)
     })
-    it('should return `changeInputHint` action', () => {
+    test('should return `changeInputHint` action', () => {
       expect(updateActions).toEqual([
         {
           action: 'changeInputHint',
@@ -405,7 +405,7 @@ describe('Actions', () => {
       }
       updateActions = productTypesSync.buildActions(now, before)
     })
-    it('should return `changeAttributeConstraint` action', () => {
+    test('should return `changeAttributeConstraint` action', () => {
       expect(updateActions).toEqual([
         {
           action: 'changeAttributeConstraint',
@@ -435,7 +435,7 @@ describe('Actions', () => {
       }
       updateActions = productTypesSync.buildActions(now, before)
     })
-    it('should return `changeIsSearchable` action', () => {
+    test('should return `changeIsSearchable` action', () => {
       expect(updateActions).toEqual([
         {
           action: 'changeIsSearchable',

@@ -2,24 +2,24 @@ import cartDiscountsSyncFn, { actionGroups } from '../src/cart-discounts'
 import { baseActionsList } from '../src/cart-discounts-actions'
 
 describe('Cart Discounts Exports', () => {
-  it('action group list', () => {
+  test('action group list', () => {
     expect(actionGroups).toEqual(['base', 'custom'])
   })
 
   describe('action list', () => {
-    it('should contain `changeIsActive` action', () => {
+    test('should contain `changeIsActive` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'changeIsActive', key: 'isActive' }])
       )
     })
 
-    it('should contain `changeName` action', () => {
+    test('should contain `changeName` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'changeName', key: 'name' }])
       )
     })
 
-    it('should contain `changeCartPredicate` action', () => {
+    test('should contain `changeCartPredicate` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           {
@@ -30,7 +30,7 @@ describe('Cart Discounts Exports', () => {
       )
     })
 
-    it('should contain `changeSortOrder` action', () => {
+    test('should contain `changeSortOrder` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           { action: 'changeSortOrder', key: 'sortOrder' },
@@ -38,13 +38,13 @@ describe('Cart Discounts Exports', () => {
       )
     })
 
-    it('should contain `changeValue` action', () => {
+    test('should contain `changeValue` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'changeValue', key: 'value' }])
       )
     })
 
-    it('should contain `changeRequiresDiscountCode` action', () => {
+    test('should contain `changeRequiresDiscountCode` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           {
@@ -55,13 +55,13 @@ describe('Cart Discounts Exports', () => {
       )
     })
 
-    it('should contain `changeTarget` action', () => {
+    test('should contain `changeTarget` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'changeTarget', key: 'target' }])
       )
     })
 
-    it('should contain `setDescription` action', () => {
+    test('should contain `setDescription` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           {
@@ -72,19 +72,19 @@ describe('Cart Discounts Exports', () => {
       )
     })
 
-    it('should contain `setValidFrom` action', () => {
+    test('should contain `setValidFrom` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'setValidFrom', key: 'validFrom' }])
       )
     })
 
-    it('should contain `setValidUntil` action', () => {
+    test('should contain `setValidUntil` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'setValidUntil', key: 'validUntil' }])
       )
     })
 
-    it('should contain `changeStackingMode` action', () => {
+    test('should contain `changeStackingMode` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           {
@@ -103,7 +103,7 @@ describe('Cart Discounts Actions', () => {
     cartDiscountsSync = cartDiscountsSyncFn()
   })
 
-  it('should build the `changeIsActive` action', () => {
+  test('should build the `changeIsActive` action', () => {
     const before = {
       isActive: false,
     }
@@ -122,7 +122,7 @@ describe('Cart Discounts Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `changeName` action', () => {
+  test('should build the `changeName` action', () => {
     const before = {
       name: { en: 'en-name-before', de: 'de-name-before' },
     }
@@ -141,7 +141,7 @@ describe('Cart Discounts Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `changeCartPredicate` action', () => {
+  test('should build the `changeCartPredicate` action', () => {
     const before = {
       cartPredicate: '1=1',
     }
@@ -160,7 +160,7 @@ describe('Cart Discounts Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `changeSortOrder` action', () => {
+  test('should build the `changeSortOrder` action', () => {
     const before = {
       sortOrder: '0.1',
     }
@@ -179,7 +179,7 @@ describe('Cart Discounts Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `changeValue` action', () => {
+  test('should build the `changeValue` action', () => {
     const before = {
       value: {
         type: 'relative',
@@ -207,7 +207,7 @@ describe('Cart Discounts Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `changeRequiresDiscountCode` action', () => {
+  test('should build the `changeRequiresDiscountCode` action', () => {
     const before = {
       requiresDiscountCode: false,
     }
@@ -226,7 +226,7 @@ describe('Cart Discounts Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `changeTarget` action', () => {
+  test('should build the `changeTarget` action', () => {
     const before = {
       target: {
         type: 'customLineItems',
@@ -254,7 +254,7 @@ describe('Cart Discounts Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `setDescription` action', () => {
+  test('should build the `setDescription` action', () => {
     const before = {
       description: {
         en: 'en-description-before',
@@ -276,7 +276,7 @@ describe('Cart Discounts Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `setValidFrom` action', () => {
+  test('should build the `setValidFrom` action', () => {
     const before = {
       validFrom: 'date1',
     }
@@ -295,7 +295,7 @@ describe('Cart Discounts Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `setValidUntil` action', () => {
+  test('should build the `setValidUntil` action', () => {
     const before = {
       validUntil: 'date1',
     }
@@ -314,7 +314,7 @@ describe('Cart Discounts Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `changeStackingMode` action', () => {
+  test('should build the `changeStackingMode` action', () => {
     const before = {
       stackingMode: 'Stacking',
     }
@@ -334,7 +334,7 @@ describe('Cart Discounts Actions', () => {
   })
 
   describe('custom fields', () => {
-    it('should build `setCustomType` action', () => {
+    test('should build `setCustomType` action', () => {
       const before = {
         custom: {
           type: {
@@ -363,7 +363,7 @@ describe('Cart Discounts Actions', () => {
     })
   })
 
-  it('should build `setCustomField` action', () => {
+  test('should build `setCustomField` action', () => {
     const before = {
       custom: {
         type: {

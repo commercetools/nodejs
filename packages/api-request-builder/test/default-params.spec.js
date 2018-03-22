@@ -2,7 +2,7 @@ import * as features from '../src/features'
 import { setDefaultParams } from '../src/default-params'
 
 describe('defaultParams', () => {
-  it('should set default params for a normal endpoint', () => {
+  test('should set default params for a normal endpoint', () => {
     const serviceFeatures = [features.query, features.queryOne]
     const params = {}
     setDefaultParams.call({ features: serviceFeatures, params })
@@ -21,7 +21,7 @@ describe('defaultParams', () => {
     })
   })
 
-  it('should set default params for product-projections', () => {
+  test('should set default params for product-projections', () => {
     const serviceFeatures = [
       features.query,
       features.queryOne,
@@ -45,7 +45,7 @@ describe('defaultParams', () => {
     })
   })
 
-  it('should set default params for product-projections-suggest', () => {
+  test('should set default params for product-projections-suggest', () => {
     const serviceFeatures = [
       features.query,
       features.queryOne,
@@ -71,7 +71,7 @@ describe('defaultParams', () => {
     })
   })
 
-  it('should set default params for product-projections-search', () => {
+  test('should set default params for product-projections-search', () => {
     const serviceFeatures = [features.search, features.projection]
     const params = {}
     setDefaultParams.call({ features: serviceFeatures, params })
@@ -106,19 +106,19 @@ describe('defaultParams', () => {
     const params = {}
     setDefaultParams.call({ features: serviceFeatures, params })
 
-    it('should set a default location object', () => {
+    test('should set a default location object', () => {
       expect(params.location).toBeDefined()
     })
 
-    it('should set country in locations', () => {
+    test('should set country in locations', () => {
       expect(params.location.country).toEqual('')
     })
 
-    it('should set currency in locations', () => {
+    test('should set currency in locations', () => {
       expect(params.location.currency).toEqual('')
     })
 
-    it('should set state in locations', () => {
+    test('should set state in locations', () => {
       expect(params.location.state).toEqual('')
     })
   })

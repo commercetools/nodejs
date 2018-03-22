@@ -18,11 +18,11 @@ describe('CsvParserDiscountCode', () => {
   })
 
   describe('::constructor', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(typeof CsvParserDiscountCode).toBe('function')
     })
 
-    it('should set default properties', () => {
+    test('should set default properties', () => {
       expect(csvParser.delimiter).toBe(',')
       expect(csvParser.multiValueDelimiter).toBe(';')
       expect(csvParser.continueOnProblems).toBeFalsy()
@@ -30,7 +30,7 @@ describe('CsvParserDiscountCode', () => {
   })
 
   describe('::_removeEmptyFields', () => {
-    it('should remove empty fields from code objects', () => {
+    test('should remove empty fields from code objects', () => {
       const actual = {
         foo: 'bar',
         empty: '',
@@ -45,7 +45,7 @@ describe('CsvParserDiscountCode', () => {
   })
 
   describe('::_cartDiscountsToArray', () => {
-    it('should convert `cartDiscounts` property to an Array', () => {
+    test('should convert `cartDiscounts` property to an Array', () => {
       const actual = {
         foo: 'bar',
         cartDiscounts: 'high quality;low price',
@@ -66,14 +66,14 @@ describe('CsvParserDiscountCode', () => {
       expect(csvParser._cartDiscountsToArray(actual)).toEqual(expected)
     })
 
-    it('should do nothing if there is no `cartDiscounts` property', () => {
+    test('should do nothing if there is no `cartDiscounts` property', () => {
       const sample = { foo: 'bar' }
       expect(csvParser._cartDiscountsToArray(sample)).toEqual({ foo: 'bar' })
     })
   })
 
   describe('::_groupsToArray', () => {
-    it('should convert `groups` property to an Array', () => {
+    test('should convert `groups` property to an Array', () => {
       const actual = {
         foo: 'bar',
         groups: 'my-group-1;my-group-2',
@@ -85,14 +85,14 @@ describe('CsvParserDiscountCode', () => {
       expect(csvParser._groupsToArray(actual)).toEqual(expected)
     })
 
-    it('should do nothing if there is no `groups` property', () => {
+    test('should do nothing if there is no `groups` property', () => {
       const sample = { foo: 'bar' }
       expect(csvParser._cartDiscountsToArray(sample)).toEqual({ foo: 'bar' })
     })
   })
 
   describe(':: parse', () => {
-    it('should successfully parse CSV to JSON', done => {
+    test('should successfully parse CSV to JSON', done => {
       const inputStream = fs.createReadStream(
         path.join(__dirname, 'helpers/sampleCodes.csv')
       )
@@ -106,7 +106,7 @@ describe('CsvParserDiscountCode', () => {
       csvParser.parse(inputStream, outputStream)
     })
 
-    it('should stop parsing by default on error', done => {
+    test('should stop parsing by default on error', done => {
       const inputStream = fs.createReadStream(
         path.join(__dirname, 'helpers/faultyCsv.csv')
       )
@@ -119,7 +119,7 @@ describe('CsvParserDiscountCode', () => {
       csvParser.parse(inputStream, outputStream)
     })
 
-    it('should skip rows with error if `continueOnProblems`', done => {
+    test('should skip rows with error if `continueOnProblems`', done => {
       csvParser = new CsvParserDiscountCode(logger, {
         continueOnProblems: true,
       })

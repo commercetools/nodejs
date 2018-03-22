@@ -10,20 +10,20 @@ const streamTestFile = fileName =>
 
 describe('DeliveriesParser', () => {
   describe('::constructor', () => {
-    it('should initialize default values', () => {
+    test('should initialize default values', () => {
       const parser = new DeliveriesParser()
       // more of this test is in abstract-parser.spec.js
       expect(parser.moduleName).toEqual('deliveries')
     })
 
-    it('should throw when options is invalid', () => {
+    test('should throw when options is invalid', () => {
       const initFunction = () => new DeliveriesParser(null)
       expect(initFunction).toThrow()
     })
   })
 
   describe('::parse', () => {
-    it('should accept a stream and output a stream', done => {
+    test('should accept a stream and output a stream', done => {
       const deliveriesParser = new DeliveriesParser()
       const readStream = streamTestFile('delivery.csv')
       const outputStream = StreamTest.v2.toText((err, result) => {
@@ -34,7 +34,7 @@ describe('DeliveriesParser', () => {
       deliveriesParser.parse(readStream, outputStream)
     })
 
-    it('should return an error with invalid csv', done => {
+    test('should return an error with invalid csv', done => {
       const expectedError = /Row length does not match headers/
       const deliveriesParser = new DeliveriesParser()
       const spy = sinon.stub(deliveriesParser.logger, 'error')
@@ -49,7 +49,7 @@ describe('DeliveriesParser', () => {
       deliveriesParser.parse(readStream, outputStream)
     })
 
-    it('should return an error with missing headers', done => {
+    test('should return an error with missing headers', done => {
       // eslint-disable-next-line max-len
       const expectedError = /Required headers missing: 'orderNumber,item\.quantity'/
       const deliveriesParser = new DeliveriesParser()
@@ -65,7 +65,7 @@ describe('DeliveriesParser', () => {
       return deliveriesParser.parse(readStream, outputStream)
     })
 
-    it('should parse a CSV with multiple items', done => {
+    test('should parse a CSV with multiple items', done => {
       const deliveriesParser = new DeliveriesParser()
       const readStream = streamTestFile('delivery.csv')
 
@@ -101,7 +101,7 @@ describe('DeliveriesParser', () => {
       deliveriesParser.parse(readStream, outputStream)
     })
 
-    it('should parse a CSV with multiple parcels', done => {
+    test('should parse a CSV with multiple parcels', done => {
       const deliveriesParser = new DeliveriesParser()
       const readStream = streamTestFile('delivery-with-parcel.csv')
 
@@ -143,7 +143,7 @@ describe('DeliveriesParser', () => {
       deliveriesParser.parse(readStream, outputStream)
     })
 
-    it('should parse a CSV with parcels without measurements', done => {
+    test('should parse a CSV with parcels without measurements', done => {
       const deliveriesParser = new DeliveriesParser()
       const readStream = streamTestFile('parcel-without-measurements.csv')
 
@@ -225,7 +225,7 @@ describe('DeliveriesParser', () => {
       deliveriesParser.parse(readStream, outputStream)
     })
 
-    it('should return an error when some measurements are provided', done => {
+    test('should return an error when some measurements are provided', done => {
       const expectedError = /All measurement fields are mandatory/
       const deliveriesParser = new DeliveriesParser()
       const spy = sinon.stub(deliveriesParser.logger, 'error')
@@ -240,7 +240,7 @@ describe('DeliveriesParser', () => {
       deliveriesParser.parse(readStream, outputStream)
     })
 
-    it('returns an error when invalid item row is present', done => {
+    test('returns an error when invalid item row is present', done => {
       const inputStream = streamTestFile('delivery-error-invalid-item.csv')
       const expectedError = /which has different values across multiple rows/
       const csvParserOrder = new DeliveriesParser()
@@ -254,7 +254,7 @@ describe('DeliveriesParser', () => {
       csvParserOrder.parse(inputStream, outputStream)
     })
 
-    it('returns an error when invalid parcel row is present', done => {
+    test('returns an error when invalid parcel row is present', done => {
       const inputStream = streamTestFile('parcel-error-invalid-item.csv')
       const expectedError = /which has different values across multiple rows/
       const csvParserOrder = new DeliveriesParser()
@@ -269,7 +269,7 @@ describe('DeliveriesParser', () => {
     })
   })
 
-  it('::_processData should accept a stream and output a stream', () => {
+  test('::_processData should accept a stream and output a stream', () => {
     const deliveriesParser = new DeliveriesParser()
     const mockDelivery = {
       orderNumber: '222',

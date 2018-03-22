@@ -2,11 +2,11 @@ import orderSyncFn, { actionGroups } from '../src/orders'
 import { baseActionsList } from '../src/order-actions'
 
 describe('Exports', () => {
-  it('action group list', () => {
+  test('action group list', () => {
     expect(actionGroups).toEqual(['base', 'deliveries'])
   })
 
-  it('correctly define base actions list', () => {
+  test('correctly define base actions list', () => {
     expect(baseActionsList).toEqual([
       { action: 'changeOrderState', key: 'orderState' },
       { action: 'changePaymentState', key: 'paymentState' },
@@ -21,7 +21,7 @@ describe('Actions', () => {
     orderSync = orderSyncFn()
   })
 
-  it('should build *state actions', () => {
+  test('should build *state actions', () => {
     const before = {
       orderState: 'Open',
       paymentState: 'Pending',
@@ -42,7 +42,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `addDelivery` action', () => {
+  test('should build `addDelivery` action', () => {
     const before = {
       shippingInfo: {
         deliveries: [],
