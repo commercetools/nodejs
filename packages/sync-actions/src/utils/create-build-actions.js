@@ -4,82 +4,53 @@ function applyOnBeforeDiff(before, now, fn) {
   return fn && typeof fn === 'function' ? fn(before, now) : [before, now]
 }
 
-function isDateOverlap(
-  oldValidFrom,
-  oldValidUntil,
-  newValidFrom,
-  newValidUntil
-) {
-  if (newValidFrom > oldValidFrom && newValidFrom < oldValidUntil) return true
-  if (newValidUntil < oldValidUntil && newValidUntil > oldValidFrom) return true
-  return false
+const createPriceComparator = price => ({
+  value: { currencyCode: price.value.currencyCode },
+  channel: price.channel,
+  country: price.country,
+  customerGroup: price.customerGroup,
+  validFrom: price.validFrom,
+  validUntil: price.validUntil,
+})
+
+function arePricesStructurallyEqual(oldPrice, newPrice) {
+  const oldPriceComparison = createPriceComparator(oldPrice)
+  const newPriceComparison = createPriceComparator(newPrice)
+  return isEqual(newPriceComparison, oldPriceComparison)
 }
 
-function getPriceId(newPrice, oldVariantArray) {
+function getPriceId(newPrice, previousVariants) {
   let newPriceId
 
-  const newPriceComparison = {
-    value: { currencyCode: newPrice.value.currencyCode },
-    channel: newPrice.channel,
-    country: newPrice.country,
-    customerGroup: newPrice.customerGroup,
-  }
-
-  oldVariantArray.map(oldVariant =>
-    oldVariant.prices.find(oldPrice => {
-      const oldPriceComparison = {
-        value: {
-          currencyCode: oldPrice.value.currencyCode,
-        },
-        channel: oldPrice.channel,
-        country: oldPrice.country,
-        customerGroup: oldPrice.customerGroup,
-      }
-
-      if (
-        isEqual(
-          { ...newPriceComparison, validFrom: newPrice.validFrom },
-          { ...oldPriceComparison, validFrom: oldPrice.validFrom }
-        ) ||
-        isEqual(
-          { ...newPriceComparison, validUntil: newPrice.validUntil },
-          { ...oldPriceComparison, validUntil: oldPrice.validUntil }
-        ) ||
-        isDateOverlap(
-          oldPrice.validFrom,
-          oldPrice.validUntil,
-          newPrice.validFrom,
-          newPrice.validUntil
-        )
-      ) {
+  previousVariants.forEach(variant => {
+    variant.prices.find(oldPrice => {
+      if (arePricesStructurallyEqual(oldPrice, newPrice)) {
         newPriceId = oldPrice.id
         return true
       }
-
       return false
     })
-  )
+  })
 
   return newPriceId
 }
 
-function updateMissingPriceIds(newVariantArray, oldVariantArray) {
-  // loop over and mutate newVariant price entry
-  const addedIdsArray = []
-  newVariantArray.map(newVariant => {
-    if (!newVariant.prices) return newVariant
-    return newVariant.prices.map(price => {
-      const priceWithId = price
-      if (!priceWithId.id) {
-        const id = getPriceId(price, oldVariantArray)
-        // reference original price entry and add id to it
-        if (id && addedIdsArray.indexOf(id) < 0) {
-          priceWithId.id = id
-          addedIdsArray.push(id)
+function updateMissingPriceIds(nextVariants, previousVariants) {
+  return nextVariants.map(newVariant => {
+    const { prices, ...restOfVariant } = newVariant
+
+    if (!prices) return restOfVariant
+
+    return {
+      ...restOfVariant,
+      prices: prices.map(price => {
+        if (!price.id) {
+          const id = getPriceId(price, previousVariants)
+          if (id) return { ...price, id }
         }
-      }
-      return priceWithId
-    })
+        return price
+      }),
+    }
   })
 }
 
@@ -98,8 +69,10 @@ export default function createBuildActions(differ, doMapActions, onBeforeDiff) {
     )
 
     if (processedNow.variants && processedBefore.variants)
-      // run updateMissingPriceIds function to mutate processedNow data
-      updateMissingPriceIds(processedNow.variants, processedBefore.variants)
+      processedNow.variants = updateMissingPriceIds(
+        processedNow.variants,
+        processedBefore.variants
+      )
 
     const diffed = differ(processedBefore, processedNow)
 
