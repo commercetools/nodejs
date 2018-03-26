@@ -23,7 +23,7 @@ describe('Existing Token', () => {
   }
 
   describe('Basics', () => {
-    it('should not modify request if no argument passed', () => {
+    test('should not modify request if no argument passed', () => {
       const request = createRequest()
       const next = req => {
         expect(req).toBe(request)
@@ -32,7 +32,7 @@ describe('Existing Token', () => {
       authMiddleware(next)(request, response)
     })
 
-    it('should throw if `authorization` is not a string', () => {
+    test('should throw if `authorization` is not a string', () => {
       expect(createAuthMiddlewareWithExistingToken({})()).toThrowError(
         /authorization must be a string/
       )
@@ -40,7 +40,7 @@ describe('Existing Token', () => {
   })
 
   describe('with only authorization argument', () => {
-    it('should configure request header with authorization', () => {
+    test('should configure request header with authorization', () => {
       const next = req => {
         expect(req).toEqual(expect.objectContaining(restOfRequest))
         expect(req).toEqual(
@@ -56,7 +56,7 @@ describe('Existing Token', () => {
       authMiddleware(next)(request, response)
     })
 
-    it('should overide existing authorization', () => {
+    test('should overide existing authorization', () => {
       const next = req => {
         expect(req).toEqual(expect.objectContaining(restOfRequest))
         expect(req).toEqual(
@@ -76,7 +76,7 @@ describe('Existing Token', () => {
   })
 
   describe('with two arguments', () => {
-    it('should overide existing authorization if false is true', () => {
+    test('should overide existing authorization if false is true', () => {
       const next = req => {
         expect(req).toEqual(expect.objectContaining(restOfRequest))
         expect(req).toEqual(
@@ -95,7 +95,7 @@ describe('Existing Token', () => {
       authMiddleware(next)(request, response)
     })
 
-    it('should not overide authorization if force is false', () => {
+    test('should not overide authorization if force is false', () => {
       const next = req => {
         expect(req).toEqual(expect.objectContaining(restOfRequest))
         expect(req).toEqual(

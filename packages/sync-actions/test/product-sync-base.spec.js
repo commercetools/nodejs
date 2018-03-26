@@ -7,7 +7,7 @@ import {
 } from '../src/product-actions'
 
 describe('Exports', () => {
-  it('action group list', () => {
+  test('action group list', () => {
     expect(actionGroups).toEqual([
       'base',
       'meta',
@@ -21,7 +21,7 @@ describe('Exports', () => {
     ])
   })
 
-  it('correctly define base actions list', () => {
+  test('correctly define base actions list', () => {
     expect(baseActionsList).toEqual([
       { action: 'changeName', key: 'name' },
       { action: 'changeSlug', key: 'slug' },
@@ -31,7 +31,7 @@ describe('Exports', () => {
     ])
   })
 
-  it('correctly define meta actions list', () => {
+  test('correctly define meta actions list', () => {
     expect(metaActionsList).toEqual([
       { action: 'setMetaTitle', key: 'metaTitle' },
       { action: 'setMetaDescription', key: 'metaDescription' },
@@ -39,7 +39,7 @@ describe('Exports', () => {
     ])
   })
 
-  it('correctly define reference actions list', () => {
+  test('correctly define reference actions list', () => {
     expect(referenceActionsList).toEqual([
       { action: 'setTaxCategory', key: 'taxCategory' },
       { action: 'transitionState', key: 'state' },
@@ -53,7 +53,7 @@ describe('Actions', () => {
     productsSync = productsSyncFn()
   })
 
-  it('should ensure given objects are not mutated', () => {
+  test('should ensure given objects are not mutated', () => {
     const before = {
       name: { en: 'Car', de: 'Auto' },
       key: 'unique-key',
@@ -85,7 +85,7 @@ describe('Actions', () => {
     expect(now).toEqual(clone(now))
   })
 
-  it('should build `setKey` action', () => {
+  test('should build `setKey` action', () => {
     const before = { key: 'unique-key-1' }
     const now = { key: 'unique-key-2' }
     const actions = productsSync.buildActions(now, before)
@@ -93,7 +93,7 @@ describe('Actions', () => {
     expect(actions).toEqual([{ action: 'setKey', ...now }])
   })
 
-  it('should build `changeName` action', () => {
+  test('should build `changeName` action', () => {
     const before = { name: { en: 'Car', de: 'Auto' } }
     const now = { name: { en: 'Sport car' } }
     const actions = productsSync.buildActions(now, before)
@@ -101,7 +101,7 @@ describe('Actions', () => {
     expect(actions).toEqual([{ action: 'changeName', ...now }])
   })
 
-  it('should build `setSearchKeywords` action', () => {
+  test('should build `setSearchKeywords` action', () => {
     /* eslint-disable max-len */
     const before = {
       searchKeywords: {
@@ -153,7 +153,7 @@ describe('Actions', () => {
     expect(actions).toEqual([{ action: 'setSearchKeywords', ...now }])
   })
 
-  it('should build no actions if searchKeywords did not change', () => {
+  test('should build no actions if searchKeywords did not change', () => {
     /* eslint-disable max-len */
     const before = {
       name: { en: 'Car', de: 'Auto' },
@@ -181,7 +181,7 @@ describe('Actions', () => {
     expect(actions).toEqual([])
   })
 
-  it('should build `add/remove Category` actions', () => {
+  test('should build `add/remove Category` actions', () => {
     const before = {
       categories: [
         { id: 'aebe844e-0616-420a-8397-a22c48d5e99f' },
@@ -213,7 +213,7 @@ describe('Actions', () => {
     ])
   })
 
-  it('should add/remove category and categoryOrderHints', () => {
+  test('should add/remove category and categoryOrderHints', () => {
     const before = {
       categories: [
         { id: '123e844e-0616-420a-8397-a22c48d5e99f' },
@@ -267,7 +267,7 @@ describe('Actions', () => {
     ])
   })
 
-  it('should build base actions for long diff text', () => {
+  test('should build base actions for long diff text', () => {
     const longText = `
     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     Nunc ultricies fringilla tortor eu egestas.

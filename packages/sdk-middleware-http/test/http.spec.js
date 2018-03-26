@@ -19,7 +19,7 @@ describe('Http', () => {
     nock.cleanAll()
   })
 
-  it('execute a get request (success)', () =>
+  test('execute a get request (success)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
@@ -45,7 +45,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  it('should return the headers in the response when enabled', () =>
+  test('should return the headers in the response when enabled', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
@@ -75,7 +75,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  it('should return the request in the response when enabled', () =>
+  test('should return the request in the response when enabled', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
@@ -104,7 +104,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  it('should maskSensitiveHeaderData in the response when enabled', () =>
+  test('should maskSensitiveHeaderData in the response when enabled', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
@@ -141,7 +141,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  it('execute a post request (success)', () =>
+  test('execute a post request (success)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
@@ -170,7 +170,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  it('should accept a Buffer body', () =>
+  test('should accept a Buffer body', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
@@ -201,7 +201,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  it('handle failed response (network error)', () =>
+  test('handle failed response (network error)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
@@ -230,7 +230,7 @@ describe('Http', () => {
     }))
 
   describe('::repeater', () => {
-    it('should retry on network error(503) if enabled', () =>
+    test('should retry on network error(503) if enabled', () =>
       new Promise((resolve, reject) => {
         const request = createTestRequest({
           uri: '/foo/bar',
@@ -268,7 +268,7 @@ describe('Http', () => {
         httpMiddleware(next)(request, response)
       }))
 
-    it(
+    test(
       'should toggle `exponential backoff` off',
       () =>
         new Promise((resolve, reject) => {
@@ -311,7 +311,7 @@ describe('Http', () => {
       700 /* retryDelay of 300 * 2 */
     )
 
-    it('should not retry on 404 (not found) error', () =>
+    test('should not retry on 404 (not found) error', () =>
       new Promise((resolve, reject) => {
         const request = createTestRequest({
           uri: '/foo/bar',
@@ -344,7 +344,7 @@ describe('Http', () => {
       }))
   })
 
-  it('handle failed response (api error)', () =>
+  test('handle failed response (api error)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
@@ -382,7 +382,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  it('return non-JSON error to user', () =>
+  test('return non-JSON error to user', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
@@ -417,7 +417,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  it('handle failed response (not found)', () =>
+  test('handle failed response (not found)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
@@ -441,7 +441,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  it('handle failed response (unmapped error code)', () =>
+  test('handle failed response (unmapped error code)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
@@ -468,7 +468,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  it('parses a host that ends with slash', () =>
+  test('parses a host that ends with slash', () =>
     new Promise((resolve, reject) => {
       const sampleHost = 'https://api.commercetools.com/'
       const request = createTestRequest({
@@ -490,7 +490,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  it('parses a host that ends without slash', () =>
+  test('parses a host that ends without slash', () =>
     new Promise((resolve, reject) => {
       const sampleHost = 'https://api.commercetools.com'
       const request = createTestRequest({

@@ -34,7 +34,7 @@ describe('buildRequestForPasswordFlow', () => {
     password=verysecurepassword&
     scope=${allScopes.join(' ')}
   `
-  it('build request values with all the given options', () => {
+  test('build request values with all the given options', () => {
     const options = createTestOptions()
     expect(buildRequestForPasswordFlow(options)).toEqual({
       basicAuth: 'MTIzOnNlY3JldA==',
@@ -43,7 +43,7 @@ describe('buildRequestForPasswordFlow', () => {
     })
   })
 
-  it('uses custom oauth uri, if given', () => {
+  test('uses custom oauth uri, if given', () => {
     const options = createTestOptions({ oauthUri: '/foo/bar' })
     expect(buildRequestForPasswordFlow(options)).toEqual({
       basicAuth: 'MTIzOnNlY3JldA==',
@@ -52,7 +52,7 @@ describe('buildRequestForPasswordFlow', () => {
     })
   })
 
-  it('parses a host that ends with slash', () => {
+  test('parses a host that ends with slash', () => {
     const options = createTestOptions({
       host: 'http://localhost:8080/',
     })
@@ -63,7 +63,7 @@ describe('buildRequestForPasswordFlow', () => {
     })
   })
 
-  it('parses a host that ends without slash', () => {
+  test('parses a host that ends without slash', () => {
     const options = createTestOptions({
       host: 'http://localhost:8080',
     })
@@ -74,19 +74,19 @@ describe('buildRequestForPasswordFlow', () => {
     })
   })
 
-  it('validate required options', () => {
+  test('validate required options', () => {
     expect(() => buildRequestForPasswordFlow()).toThrowError(
       'Missing required options'
     )
   })
 
-  it('validate required option (host)', () => {
+  test('validate required option (host)', () => {
     expect(() => buildRequestForPasswordFlow({})).toThrowError(
       'Missing required option (host)'
     )
   })
 
-  it('validate required option (projectKey)', () => {
+  test('validate required option (projectKey)', () => {
     const options = createTestOptions({
       projectKey: undefined,
     })
@@ -95,7 +95,7 @@ describe('buildRequestForPasswordFlow', () => {
     )
   })
 
-  it('validate required option (credentials)', () => {
+  test('validate required option (credentials)', () => {
     const options = createTestOptions({
       credentials: undefined,
     })
@@ -104,7 +104,7 @@ describe('buildRequestForPasswordFlow', () => {
     )
   })
 
-  it('validate required option (clientId, clientSecret)', () => {
+  test('validate required option (clientId, clientSecret)', () => {
     const options = createTestOptions({
       credentials: {},
     })
@@ -113,7 +113,7 @@ describe('buildRequestForPasswordFlow', () => {
     )
   })
 
-  it('validate required option (username, password)', () => {
+  test('validate required option (username, password)', () => {
     const options = createTestOptions({
       credentials: {
         clientId: 'foo',
@@ -128,7 +128,7 @@ describe('buildRequestForPasswordFlow', () => {
     )
   })
 
-  it('validate both credentials are required', () => {
+  test('validate both credentials are required', () => {
     const options = createTestOptions({
       credentials: { clientId: '123' },
     })
@@ -139,7 +139,7 @@ describe('buildRequestForPasswordFlow', () => {
 })
 
 describe('buildRequestForClientCredentialsFlow', () => {
-  it('build request values with all the given options', () => {
+  test('build request values with all the given options', () => {
     const options = createTestOptions()
     expect(buildRequestForClientCredentialsFlow(options)).toEqual({
       basicAuth: 'MTIzOnNlY3JldA==',
@@ -148,7 +148,7 @@ describe('buildRequestForClientCredentialsFlow', () => {
     })
   })
 
-  it('uses custom oauth uri, if given', () => {
+  test('uses custom oauth uri, if given', () => {
     const options = createTestOptions({ oauthUri: '/foo/bar' })
     expect(buildRequestForClientCredentialsFlow(options)).toEqual({
       basicAuth: 'MTIzOnNlY3JldA==',
@@ -157,7 +157,7 @@ describe('buildRequestForClientCredentialsFlow', () => {
     })
   })
 
-  it('parses a host that ends with slash', () => {
+  test('parses a host that ends with slash', () => {
     const options = createTestOptions({
       host: 'http://localhost:8080/',
     })
@@ -168,7 +168,7 @@ describe('buildRequestForClientCredentialsFlow', () => {
     })
   })
 
-  it('parses a host that ends without slash', () => {
+  test('parses a host that ends without slash', () => {
     const options = createTestOptions({
       host: 'http://localhost:8080',
     })
@@ -179,19 +179,19 @@ describe('buildRequestForClientCredentialsFlow', () => {
     })
   })
 
-  it('validate required options', () => {
+  test('validate required options', () => {
     expect(() => buildRequestForClientCredentialsFlow()).toThrowError(
       'Missing required options'
     )
   })
 
-  it('validate required option (host)', () => {
+  test('validate required option (host)', () => {
     expect(() => buildRequestForClientCredentialsFlow({})).toThrowError(
       'Missing required option (host)'
     )
   })
 
-  it('validate required option (projectKey)', () => {
+  test('validate required option (projectKey)', () => {
     const options = createTestOptions({
       projectKey: undefined,
     })
@@ -200,7 +200,7 @@ describe('buildRequestForClientCredentialsFlow', () => {
     )
   })
 
-  it('validate required option (credentials)', () => {
+  test('validate required option (credentials)', () => {
     const options = createTestOptions({
       credentials: undefined,
     })
@@ -209,7 +209,7 @@ describe('buildRequestForClientCredentialsFlow', () => {
     )
   })
 
-  it('validate required option (clientId, clientSecret)', () => {
+  test('validate required option (clientId, clientSecret)', () => {
     const options = createTestOptions({
       credentials: {},
     })
@@ -218,7 +218,7 @@ describe('buildRequestForClientCredentialsFlow', () => {
     )
   })
 
-  it('validate both credentials are required', () => {
+  test('validate both credentials are required', () => {
     const options = createTestOptions({
       credentials: { clientId: '123' },
     })
@@ -237,7 +237,7 @@ describe('buildRequestForRefreshTokenFlow', () => {
     refreshToken: 'foobar123',
     scopes: undefined,
   }
-  it('build request values with all the given options', () => {
+  test('build request values with all the given options', () => {
     const options = createTestOptions(mockCred)
     expect(buildRequestForRefreshTokenFlow(options)).toEqual({
       basicAuth: 'MTIzOnNlY3JldA==',
@@ -246,7 +246,7 @@ describe('buildRequestForRefreshTokenFlow', () => {
     })
   })
 
-  it('uses custom oauth uri, if given', () => {
+  test('uses custom oauth uri, if given', () => {
     const options = createTestOptions({ oauthUri: '/foo/bar', ...mockCred })
     expect(buildRequestForRefreshTokenFlow(options)).toEqual({
       basicAuth: 'MTIzOnNlY3JldA==',
@@ -255,7 +255,7 @@ describe('buildRequestForRefreshTokenFlow', () => {
     })
   })
 
-  it('parses a host that ends with slash', () => {
+  test('parses a host that ends with slash', () => {
     const options = createTestOptions({
       host: 'http://localhost:8080/',
       ...mockCred,
@@ -267,7 +267,7 @@ describe('buildRequestForRefreshTokenFlow', () => {
     })
   })
 
-  it('parses a host that ends without slash', () => {
+  test('parses a host that ends without slash', () => {
     const options = createTestOptions({
       host: 'http://localhost:8080',
       ...mockCred,
@@ -279,19 +279,19 @@ describe('buildRequestForRefreshTokenFlow', () => {
     })
   })
 
-  it('validate required options', () => {
+  test('validate required options', () => {
     expect(() => buildRequestForRefreshTokenFlow()).toThrowError(
       'Missing required options'
     )
   })
 
-  it('validate required option (host)', () => {
+  test('validate required option (host)', () => {
     expect(() => buildRequestForRefreshTokenFlow({})).toThrowError(
       'Missing required option (host)'
     )
   })
 
-  it('validate required option (projectKey)', () => {
+  test('validate required option (projectKey)', () => {
     const options = createTestOptions({
       projectKey: undefined,
     })
@@ -300,7 +300,7 @@ describe('buildRequestForRefreshTokenFlow', () => {
     )
   })
 
-  it('validate required option (credentials)', () => {
+  test('validate required option (credentials)', () => {
     const options = createTestOptions({
       credentials: undefined,
     })
@@ -309,7 +309,7 @@ describe('buildRequestForRefreshTokenFlow', () => {
     )
   })
 
-  it('validate required option (refreshToken)', () => {
+  test('validate required option (refreshToken)', () => {
     const options = createTestOptions({
       ...mockCred,
       refreshToken: undefined,
@@ -319,7 +319,7 @@ describe('buildRequestForRefreshTokenFlow', () => {
     )
   })
 
-  it('validate required option (clientId, clientSecret)', () => {
+  test('validate required option (clientId, clientSecret)', () => {
     const options = createTestOptions({
       ...mockCred,
       credentials: {},
@@ -329,7 +329,7 @@ describe('buildRequestForRefreshTokenFlow', () => {
     )
   })
 
-  it('validate both credentials are required', () => {
+  test('validate both credentials are required', () => {
     const options = createTestOptions({
       ...mockCred,
       credentials: { clientId: '123' },
@@ -341,7 +341,7 @@ describe('buildRequestForRefreshTokenFlow', () => {
 })
 
 describe('buildRequestForAnonymousSessionFlow', () => {
-  it('build request values with all the given options', () => {
+  test('build request values with all the given options', () => {
     const options = createTestOptions()
     expect(buildRequestForAnonymousSessionFlow(options)).toEqual({
       basicAuth: 'MTIzOnNlY3JldA==',
@@ -350,13 +350,13 @@ describe('buildRequestForAnonymousSessionFlow', () => {
     })
   })
 
-  it('validate required options', () => {
+  test('validate required options', () => {
     expect(() => buildRequestForAnonymousSessionFlow()).toThrowError(
       'Missing required options'
     )
   })
 
-  it('validate required option (projectKey)', () => {
+  test('validate required option (projectKey)', () => {
     const options = createTestOptions({
       projectKey: undefined,
     })
@@ -365,7 +365,7 @@ describe('buildRequestForAnonymousSessionFlow', () => {
     )
   })
 
-  it('should add anonymousId if passed in', () => {
+  test('should add anonymousId if passed in', () => {
     const mockCred = {
       clientId: '123',
       clientSecret: 'secret',

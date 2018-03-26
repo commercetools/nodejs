@@ -10,7 +10,7 @@ describe('createMapActionGroup', () => {
       mapActionGroup('foo-type', fn)
     })
 
-    it('should invoke the `fn` (callback)', () => {
+    test('should invoke the `fn` (callback)', () => {
       expect(fn).toHaveBeenCalled()
     })
   })
@@ -26,7 +26,7 @@ describe('createMapActionGroup', () => {
         mapActionGroup(actionGroups[0].type, fn)
       })
 
-      it('should invoke the `fn` (callback)', () => {
+      test('should invoke the `fn` (callback)', () => {
         expect(fn).toHaveBeenCalled()
       })
     })
@@ -41,7 +41,7 @@ describe('createMapActionGroup', () => {
         mapActionGroup(actionGroups[0].type, fn)
       })
 
-      it('should not invoke the `fn` (callback)', () => {
+      test('should not invoke the `fn` (callback)', () => {
         expect(fn).not.toHaveBeenCalled()
       })
     })
@@ -55,13 +55,13 @@ describe('createMapActionGroup', () => {
         mapActionGroup = createMapActionGroup(actionGroups)
       })
 
-      it('should throw an error', () => {
+      test('should throw an error', () => {
         expect(() => {
           mapActionGroup(actionGroups[0].type, fn)
         }).toThrow()
       })
 
-      it('should throw an error with message', () => {
+      test('should throw an error with message', () => {
         expect(() => {
           mapActionGroup(actionGroups[0].type, fn)
         }).toThrowError(
@@ -82,7 +82,7 @@ describe('createMapActionGroup', () => {
       mapActionGroup('foo-non-existent-type', fn)
     })
 
-    it('should not invoke the `fn` (callback)', () => {
+    test('should not invoke the `fn` (callback)', () => {
       expect(fn).not.toHaveBeenCalled()
     })
   })

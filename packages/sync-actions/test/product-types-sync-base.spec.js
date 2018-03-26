@@ -3,18 +3,18 @@ import productTypesSyncFn, { actionGroups } from '../src/product-types'
 import { baseActionsList } from '../src/product-types-actions'
 
 describe('Exports', () => {
-  it('action group list', () => {
+  test('action group list', () => {
     expect(actionGroups).toEqual(['base', 'attributes'])
   })
 
-  it('correctly define base actions list', () => {
+  test('correctly define base actions list', () => {
     expect(baseActionsList).toEqual([
       { action: 'changeName', key: 'name' },
       { action: 'setKey', key: 'key' },
       { action: 'changeDescription', key: 'description' },
     ])
   })
-  it('correctly define attribute definitions actions list', () => {})
+  test('correctly define attribute definitions actions list', () => {})
 })
 
 describe('Actions', () => {
@@ -26,7 +26,7 @@ describe('Actions', () => {
     productTypesSync = productTypesSyncFn()
   })
   describe('mutation', () => {
-    it('should ensure given objects are not mutated', () => {
+    test('should ensure given objects are not mutated', () => {
       before = {
         name: 'Sneakers',
         key: 'unique-key',
@@ -50,7 +50,7 @@ describe('Actions', () => {
       }
       updateActions = productTypesSync.buildActions(now, before)
     })
-    it('should return `changeName` update-action', () => {
+    test('should return `changeName` update-action', () => {
       expect(updateActions).toEqual([
         {
           action: 'changeName',
@@ -69,7 +69,7 @@ describe('Actions', () => {
       }
       updateActions = productTypesSync.buildActions(now, before)
     })
-    it('should return `setKey` update-action', () => {
+    test('should return `setKey` update-action', () => {
       expect(updateActions).toEqual([
         {
           action: 'setKey',
@@ -88,7 +88,7 @@ describe('Actions', () => {
       }
       updateActions = productTypesSync.buildActions(now, before)
     })
-    it('should return `changeKey` update-action', () => {
+    test('should return `changeKey` update-action', () => {
       expect(updateActions).toEqual([
         {
           action: 'changeDescription',

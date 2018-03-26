@@ -2,18 +2,18 @@ import customerGroupSyncFn, { actionGroups } from '../src/customer-group'
 import { baseActionsList } from '../src/customer-group-actions'
 
 describe('Customer Groups Exports', () => {
-  it('action group list', () => {
+  test('action group list', () => {
     expect(actionGroups).toEqual(['base', 'custom'])
   })
 
   describe('action list', () => {
-    it('should contain `changeName` action', () => {
+    test('should contain `changeName` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'changeName', key: 'name' }])
       )
     })
 
-    it('should contain `setKey` action', () => {
+    test('should contain `setKey` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           {
@@ -32,7 +32,7 @@ describe('Customer Groups Actions', () => {
     customerGroupSync = customerGroupSyncFn()
   })
 
-  it('should build the `changeName` action', () => {
+  test('should build the `changeName` action', () => {
     const before = {
       name: { en: 'en-name-before', de: 'de-name-before' },
     }
@@ -51,7 +51,7 @@ describe('Customer Groups Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `setKey` action', () => {
+  test('should build the `setKey` action', () => {
     const before = {
       key: 'foo-key',
     }
@@ -71,7 +71,7 @@ describe('Customer Groups Actions', () => {
   })
 
   describe('custom fields', () => {
-    it('should build `setCustomType` action', () => {
+    test('should build `setCustomType` action', () => {
       const before = {
         custom: {
           type: {
@@ -100,7 +100,7 @@ describe('Customer Groups Actions', () => {
     })
   })
 
-  it('should build `setCustomField` action', () => {
+  test('should build `setCustomField` action', () => {
     const before = {
       custom: {
         type: {

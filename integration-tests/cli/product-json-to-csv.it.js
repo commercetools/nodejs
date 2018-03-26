@@ -82,7 +82,7 @@ describe('CSV and CLI Tests', () => {
   })
 
   describe('CLI basic functionality', () => {
-    test('should print usage information given the help flag', done => {
+    it('should print usage information given the help flag', done => {
       exec(`${binPath} --help`, (error, stdout, stderr) => {
         expect(String(stdout)).toMatch(/help/)
         expect(error && stderr).toBeFalsy()
@@ -90,7 +90,7 @@ describe('CSV and CLI Tests', () => {
       })
     })
 
-    test('should print the module version given the version flag', done => {
+    it('should print the module version given the version flag', done => {
       exec(`${binPath} --version`, (error, stdout, stderr) => {
         expect(stdout).toBe(`${version}\n`)
         expect(error && stderr).toBeFalsy()
@@ -149,23 +149,23 @@ describe('CSV and CLI Tests', () => {
               .on('done', () => done())
           })
 
-          test('zip folder contains file named `productType`', () => {
+          it('zip folder contains file named `productType`', () => {
             const fileName = ['products/productTypeForProductParse.csv']
             expect(fileNames).toEqual(expect.arrayContaining(fileName))
           })
 
-          test('product contains 3 variants', () => {
+          it('product contains 3 variants', () => {
             expect(product).toHaveLength(3)
           })
 
-          test('contains `name`', () => {
+          it('contains `name`', () => {
             const name = { en: 'Sample Duck-jacket', de: 'Beispiel Entejacke' }
             expect(product[0]).toEqual(expect.objectContaining({ name }))
             expect(product[1]).toEqual(expect.objectContaining({ name }))
             expect(product[2]).toEqual(expect.objectContaining({ name }))
           })
 
-          test('contains `description`', () => {
+          it('contains `description`', () => {
             const description = {
               en:
                 'The light jackets of Save the Duck keep us cozy warm. The slight',
@@ -177,7 +177,7 @@ describe('CSV and CLI Tests', () => {
             expect(product[2]).toEqual(expect.objectContaining({ description }))
           })
 
-          test('contains `slug`', () => {
+          it('contains `slug`', () => {
             const slug = {
               en: 'sample-sluggy-duck-jacke-123',
               de: 'beispiel-sluggy-ente-jacke-123',
@@ -187,7 +187,7 @@ describe('CSV and CLI Tests', () => {
             expect(product[2]).toEqual(expect.objectContaining({ slug }))
           })
 
-          test('contains `searchKeywords`', () => {
+          it('contains `searchKeywords`', () => {
             const searchKeywords = {
               en: 'Standard Keyword;German | White | Space',
             }
@@ -202,28 +202,28 @@ describe('CSV and CLI Tests', () => {
             )
           })
 
-          test('contains resolved namedPath of `categories`', () => {
+          it('contains resolved namedPath of `categories`', () => {
             const categories = 'Parent Category>child Category'
             expect(product[0]).toEqual(expect.objectContaining({ categories }))
             expect(product[1]).toEqual(expect.objectContaining({ categories }))
             expect(product[2]).toEqual(expect.objectContaining({ categories }))
           })
 
-          test('contains resolved `state`', () => {
+          it('contains resolved `state`', () => {
             const state = 'stateKey'
             expect(product[0]).toEqual(expect.objectContaining({ state }))
             expect(product[1]).toEqual(expect.objectContaining({ state }))
             expect(product[2]).toEqual(expect.objectContaining({ state }))
           })
 
-          test('contains resolved `taxCategory`', () => {
+          it('contains resolved `taxCategory`', () => {
             const tax = 'new-tax-category'
             expect(product[0]).toEqual(expect.objectContaining({ tax }))
             expect(product[1]).toEqual(expect.objectContaining({ tax }))
             expect(product[2]).toEqual(expect.objectContaining({ tax }))
           })
 
-          test('contains variants `SKUs`', () => {
+          it('contains variants `SKUs`', () => {
             expect(product[0]).toEqual(
               expect.objectContaining({ sku: 'M00FCKV' })
             )
@@ -235,7 +235,7 @@ describe('CSV and CLI Tests', () => {
             )
           })
 
-          test('contains variants `keys`', () => {
+          it('contains variants `keys`', () => {
             expect(product[0]).toEqual(
               expect.objectContaining({ variantKey: 'master-var-1' })
             )
@@ -248,7 +248,7 @@ describe('CSV and CLI Tests', () => {
           })
 
           // Test for custom attributes
-          test('contains variants custom attributes', () => {
+          it('contains variants custom attributes', () => {
             expect(product[0]).toEqual(
               expect.objectContaining({ 'text-attribute': 'Master Var attr' })
             )
@@ -272,16 +272,16 @@ describe('CSV and CLI Tests', () => {
               .on('done', () => done())
           })
 
-          test('zip folder contains file named `anotherProductType`', () => {
+          it('zip folder contains file named `anotherProductType`', () => {
             const fileName = ['products/anotherProductTypeForProductParse.csv']
             expect(fileNames).toEqual(expect.arrayContaining(fileName))
           })
 
-          test('product contains 2 variants', () => {
+          it('product contains 2 variants', () => {
             expect(product).toHaveLength(2)
           })
 
-          test('contains `name`', () => {
+          it('contains `name`', () => {
             const name = {
               en: 'Second Sample Duck-jacket',
               de: 'Zwite Beispiel Entejacke',
@@ -290,7 +290,7 @@ describe('CSV and CLI Tests', () => {
             expect(product[1]).toEqual(expect.objectContaining({ name }))
           })
 
-          test('contains `description`', () => {
+          it('contains `description`', () => {
             const description = {
               en:
                 'Golom Jacop Caesar Icarve the Duck keep us cozy warm. The slight',
@@ -300,7 +300,7 @@ describe('CSV and CLI Tests', () => {
             expect(product[1]).toEqual(expect.objectContaining({ description }))
           })
 
-          test('contains `slug`', () => {
+          it('contains `slug`', () => {
             const slug = {
               en: 'sample-sluggy-duck-jacke-456789',
               de: 'beispiel-sluggy-ente-jacke-456789',
@@ -309,7 +309,7 @@ describe('CSV and CLI Tests', () => {
             expect(product[1]).toEqual(expect.objectContaining({ slug }))
           })
 
-          test('contains `searchKeywords`', () => {
+          it('contains `searchKeywords`', () => {
             const searchKeywords = { en: 'Multi Tool;Swiss | Army | Knife' }
             expect(product[0]).toEqual(
               expect.objectContaining({ searchKeywords })
@@ -319,25 +319,25 @@ describe('CSV and CLI Tests', () => {
             )
           })
 
-          test('contains resolved namedPath of `categories`', () => {
+          it('contains resolved namedPath of `categories`', () => {
             const categories = 'Parent Category>child Category'
             expect(product[0]).toEqual(expect.objectContaining({ categories }))
             expect(product[1]).toEqual(expect.objectContaining({ categories }))
           })
 
-          test('contains resolved `state`', () => {
+          it('contains resolved `state`', () => {
             const state = 'stateKey'
             expect(product[0]).toEqual(expect.objectContaining({ state }))
             expect(product[1]).toEqual(expect.objectContaining({ state }))
           })
 
-          test('contains resolved `taxCategory`', () => {
+          it('contains resolved `taxCategory`', () => {
             const tax = 'new-tax-category'
             expect(product[0]).toEqual(expect.objectContaining({ tax }))
             expect(product[1]).toEqual(expect.objectContaining({ tax }))
           })
 
-          test('contains variants `SKUs`', () => {
+          it('contains variants `SKUs`', () => {
             expect(product[0]).toEqual(
               expect.objectContaining({ sku: 'M00F56YSS' })
             )
@@ -346,7 +346,7 @@ describe('CSV and CLI Tests', () => {
             )
           })
 
-          test('contains variants `keys`', () => {
+          it('contains variants `keys`', () => {
             expect(product[0]).toEqual(
               expect.objectContaining({ variantKey: 'master-var-111' })
             )
@@ -356,7 +356,7 @@ describe('CSV and CLI Tests', () => {
           })
 
           // Test for custom attributes
-          test('contains variants custom attributes', () => {
+          it('contains variants custom attributes', () => {
             expect(product[0]).toEqual(
               expect.objectContaining({
                 'another-text-attribute': 'Another Master Var attr',
@@ -401,11 +401,11 @@ describe('CSV and CLI Tests', () => {
           )
         }, 10000)
 
-        test('should contain five variants', () => {
+        it('should contain five variants', () => {
           expect(products).toHaveLength(5)
         })
 
-        test('should have two products', () => {
+        it('should have two products', () => {
           // Check Master variants
           expect(products[0]).toEqual(
             expect.objectContaining({ key: 'productKey-1' })
@@ -420,7 +420,7 @@ describe('CSV and CLI Tests', () => {
           expect(products[4]).toEqual(expect.objectContaining({ key: '' }))
         })
 
-        test('should include only columns from template', () => {
+        it('should include only columns from template', () => {
           const columns = [
             '_published',
             '_hasStagedChanges',
@@ -437,7 +437,7 @@ describe('CSV and CLI Tests', () => {
           })
         })
 
-        test('should contain variants custom attributes', () => {
+        it('should contain variants custom attributes', () => {
           // From first product
           expect(products[0]).toEqual(
             expect.objectContaining({ 'text-attribute': 'Master Var attr' })
@@ -542,23 +542,23 @@ describe('CSV and CLI Tests', () => {
               .on('done', () => done())
           })
 
-          test('zip folder contains file named `productType`', () => {
+          it('zip folder contains file named `productType`', () => {
             const fileName = ['products/productTypeForProductParse.csv']
             expect(fileNames).toEqual(expect.arrayContaining(fileName))
           })
 
-          test('product contains 3 variants', () => {
+          it('product contains 3 variants', () => {
             expect(product).toHaveLength(3)
           })
 
-          test('contains `name`', () => {
+          it('contains `name`', () => {
             const name = { en: 'Sample Duck-jacket', de: 'Beispiel Entejacke' }
             expect(product[0]).toEqual(expect.objectContaining({ name }))
             expect(product[1]).toEqual(expect.objectContaining({ name }))
             expect(product[2]).toEqual(expect.objectContaining({ name }))
           })
 
-          test('contains `description`', () => {
+          it('contains `description`', () => {
             const description = {
               en:
                 'The light jackets of Save the Duck keep us cozy warm. The slight',
@@ -570,7 +570,7 @@ describe('CSV and CLI Tests', () => {
             expect(product[2]).toEqual(expect.objectContaining({ description }))
           })
 
-          test('contains `slug`', () => {
+          it('contains `slug`', () => {
             const slug = {
               en: 'sample-sluggy-duck-jacke-123',
               de: 'beispiel-sluggy-ente-jacke-123',
@@ -580,7 +580,7 @@ describe('CSV and CLI Tests', () => {
             expect(product[2]).toEqual(expect.objectContaining({ slug }))
           })
 
-          test('contains `searchKeywords`', () => {
+          it('contains `searchKeywords`', () => {
             const searchKeywords = {
               en: 'Standard Keyword;German | White | Space',
             }
@@ -595,28 +595,28 @@ describe('CSV and CLI Tests', () => {
             )
           })
 
-          test('contains resolved namedPath of `categories`', () => {
+          it('contains resolved namedPath of `categories`', () => {
             const categories = 'Parent Category>child Category'
             expect(product[0]).toEqual(expect.objectContaining({ categories }))
             expect(product[1]).toEqual(expect.objectContaining({ categories }))
             expect(product[2]).toEqual(expect.objectContaining({ categories }))
           })
 
-          test('contains resolved `state`', () => {
+          it('contains resolved `state`', () => {
             const state = 'stateKey'
             expect(product[0]).toEqual(expect.objectContaining({ state }))
             expect(product[1]).toEqual(expect.objectContaining({ state }))
             expect(product[2]).toEqual(expect.objectContaining({ state }))
           })
 
-          test('contains resolved `taxCategory`', () => {
+          it('contains resolved `taxCategory`', () => {
             const tax = 'new-tax-category'
             expect(product[0]).toEqual(expect.objectContaining({ tax }))
             expect(product[1]).toEqual(expect.objectContaining({ tax }))
             expect(product[2]).toEqual(expect.objectContaining({ tax }))
           })
 
-          test('contains variants `SKUs`', () => {
+          it('contains variants `SKUs`', () => {
             expect(product[0]).toEqual(
               expect.objectContaining({ sku: 'M00FCKV' })
             )
@@ -628,7 +628,7 @@ describe('CSV and CLI Tests', () => {
             )
           })
 
-          test('contains variants `keys`', () => {
+          it('contains variants `keys`', () => {
             expect(product[0]).toEqual(
               expect.objectContaining({ variantKey: 'master-var-1' })
             )
@@ -641,7 +641,7 @@ describe('CSV and CLI Tests', () => {
           })
 
           // Test for custom attributes
-          test('contains variants custom attributes', () => {
+          it('contains variants custom attributes', () => {
             expect(product[0]).toEqual(
               expect.objectContaining({ 'text-attribute': 'Master Var attr' })
             )
@@ -665,16 +665,16 @@ describe('CSV and CLI Tests', () => {
               .on('done', () => done())
           })
 
-          test('zip folder contains file named `anotherProductType`', () => {
+          it('zip folder contains file named `anotherProductType`', () => {
             const fileName = ['products/anotherProductTypeForProductParse.csv']
             expect(fileNames).toEqual(expect.arrayContaining(fileName))
           })
 
-          test('product contains 2 variants', () => {
+          it('product contains 2 variants', () => {
             expect(product).toHaveLength(2)
           })
 
-          test('contains `name`', () => {
+          it('contains `name`', () => {
             const name = {
               en: 'Second Sample Duck-jacket',
               de: 'Zwite Beispiel Entejacke',
@@ -683,7 +683,7 @@ describe('CSV and CLI Tests', () => {
             expect(product[1]).toEqual(expect.objectContaining({ name }))
           })
 
-          test('contains `description`', () => {
+          it('contains `description`', () => {
             const description = {
               en:
                 'Golom Jacop Caesar Icarve the Duck keep us cozy warm. The slight',
@@ -693,7 +693,7 @@ describe('CSV and CLI Tests', () => {
             expect(product[1]).toEqual(expect.objectContaining({ description }))
           })
 
-          test('contains `slug`', () => {
+          it('contains `slug`', () => {
             const slug = {
               en: 'sample-sluggy-duck-jacke-456789',
               de: 'beispiel-sluggy-ente-jacke-456789',
@@ -702,7 +702,7 @@ describe('CSV and CLI Tests', () => {
             expect(product[1]).toEqual(expect.objectContaining({ slug }))
           })
 
-          test('contains `searchKeywords`', () => {
+          it('contains `searchKeywords`', () => {
             const searchKeywords = { en: 'Multi Tool;Swiss | Army | Knife' }
             expect(product[0]).toEqual(
               expect.objectContaining({ searchKeywords })
@@ -712,25 +712,25 @@ describe('CSV and CLI Tests', () => {
             )
           })
 
-          test('contains resolved namedPath of `categories`', () => {
+          it('contains resolved namedPath of `categories`', () => {
             const categories = 'Parent Category>child Category'
             expect(product[0]).toEqual(expect.objectContaining({ categories }))
             expect(product[1]).toEqual(expect.objectContaining({ categories }))
           })
 
-          test('contains resolved `state`', () => {
+          it('contains resolved `state`', () => {
             const state = 'stateKey'
             expect(product[0]).toEqual(expect.objectContaining({ state }))
             expect(product[1]).toEqual(expect.objectContaining({ state }))
           })
 
-          test('contains resolved `taxCategory`', () => {
+          it('contains resolved `taxCategory`', () => {
             const tax = 'new-tax-category'
             expect(product[0]).toEqual(expect.objectContaining({ tax }))
             expect(product[1]).toEqual(expect.objectContaining({ tax }))
           })
 
-          test('contains variants `SKUs`', () => {
+          it('contains variants `SKUs`', () => {
             expect(product[0]).toEqual(
               expect.objectContaining({ sku: 'M00F56YSS' })
             )
@@ -739,7 +739,7 @@ describe('CSV and CLI Tests', () => {
             )
           })
 
-          test('contains variants `keys`', () => {
+          it('contains variants `keys`', () => {
             expect(product[0]).toEqual(
               expect.objectContaining({ variantKey: 'master-var-111' })
             )
@@ -749,7 +749,7 @@ describe('CSV and CLI Tests', () => {
           })
 
           // Test for custom attributes
-          test('contains variants custom attributes', () => {
+          it('contains variants custom attributes', () => {
             expect(product[0]).toEqual(
               expect.objectContaining({
                 'another-text-attribute': 'Another Master Var attr',
@@ -794,11 +794,11 @@ describe('CSV and CLI Tests', () => {
           )
         }, 15000)
 
-        test('should contain five variants', () => {
+        it('should contain five variants', () => {
           expect(products).toHaveLength(5)
         })
 
-        test('should have two products', () => {
+        it('should have two products', () => {
           // Check Master variants
           expect(products[0]).toEqual(
             expect.objectContaining({ key: 'productKey-1' })
@@ -813,7 +813,7 @@ describe('CSV and CLI Tests', () => {
           expect(products[4]).toEqual(expect.objectContaining({ key: '' }))
         })
 
-        test('should include only columns from template', () => {
+        it('should include only columns from template', () => {
           const columns = [
             '_published',
             '_hasStagedChanges',
@@ -830,7 +830,7 @@ describe('CSV and CLI Tests', () => {
           })
         })
 
-        test('should contain variants custom attributes', () => {
+        it('should contain variants custom attributes', () => {
           // From first product
           expect(products[0]).toEqual(
             expect.objectContaining({ 'text-attribute': 'Master Var attr' })

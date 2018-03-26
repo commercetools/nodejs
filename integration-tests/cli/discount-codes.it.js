@@ -70,7 +70,7 @@ describe('DiscountCode tests', () => {
       fs.unlinkSync('discountCodeGenerator.log', 'utf8')
     })
 
-    test('should generate required codes according to template', done => {
+    it('should generate required codes according to template', done => {
       const expected = {
         name: {
           en: 'Sammy',
@@ -134,7 +134,7 @@ describe('DiscountCode tests', () => {
       clearData(apiConfig, 'discountCodes').catch(process.stderr.write)
     )
 
-    test('should create discount codes on CTP', async () => {
+    it('should create discount codes on CTP', async () => {
       const reportMessage = oneLine`
         Summary: there were 10 successfully imported discount codes
         (10 were newly created, 0 were updated and 0 were unchanged).
@@ -155,7 +155,7 @@ describe('DiscountCode tests', () => {
       expect(summary).toEqual(expected)
     })
 
-    test('should update discount codes on the CTP', async () => {
+    it('should update discount codes on the CTP', async () => {
       // First, import the codes that need to be updated
       const oldCodesToUpdate = preparedDiscountCodes.map(codeObj => {
         const uniqueCode = codeObj.code
@@ -189,7 +189,7 @@ describe('DiscountCode tests', () => {
       expect(summary).toEqual(expected)
     })
 
-    test('should stop import on first errors by default', async () => {
+    it('should stop import on first errors by default', async () => {
       // Set batchSize to 1 so it executes serially
       codeImport = new DiscountCodeImport({ apiConfig, batchSize: 1 }, logger)
       // Make codes unique
@@ -211,7 +211,7 @@ describe('DiscountCode tests', () => {
       }
     })
 
-    test('should continueOnProblems if `continueOnProblems`', async () => {
+    it('should continueOnProblems if `continueOnProblems`', async () => {
       codeImport = new DiscountCodeImport(
         {
           apiConfig,
@@ -285,7 +285,7 @@ describe('DiscountCode tests', () => {
       ).catch(process.stderr.write)
     })
 
-    test('should write json output to file by default', done => {
+    it('should write json output to file by default', done => {
       const jsonFilePath = tmp.fileSync().name
       const expected = {
         version: 1,
@@ -332,7 +332,7 @@ describe('DiscountCode tests', () => {
       )
     })
 
-    test('should write csv output to file when passed the option', done => {
+    it('should write csv output to file when passed the option', done => {
       const csvFilePath = tmp.fileSync().name
       const expected = {
         version: '1',

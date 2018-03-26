@@ -6,7 +6,7 @@ const sampleImportFile = 'data/lineitemstate-sample.csv'
 
 describe('AbstractParser', () => {
   describe('::constructor', () => {
-    it('should set default settings', () => {
+    test('should set default settings', () => {
       const parser = new AbstractParser()
 
       expect(parser.csvConfig).toEqual({
@@ -22,7 +22,7 @@ describe('AbstractParser', () => {
       expect(parser.logger.warn).toBeInstanceOf(Function)
     })
 
-    it('should accept input options', () => {
+    test('should accept input options', () => {
       const parser = new AbstractParser({
         csvConfig: {
           delimiter: ';',
@@ -37,7 +37,7 @@ describe('AbstractParser', () => {
     })
   })
 
-  it('::_getMissingHeaders should return missing headers', () => {
+  test('::_getMissingHeaders should return missing headers', () => {
     const parser = new AbstractParser({}, 'lineItemState')
     const headers = parser._getMissingHeaders({
       orderNumber: 123,
@@ -47,7 +47,7 @@ describe('AbstractParser', () => {
     expect(headers).toEqual(['quantity', 'fromState', 'toState'])
   })
 
-  it('::_processData should throw an error when called', () => {
+  test('::_processData should throw an error when called', () => {
     const parser = new AbstractParser()
 
     expect(parser._processData).toThrowError(
@@ -55,7 +55,7 @@ describe('AbstractParser', () => {
     )
   })
 
-  it('::_streamInput should return a highland stream', () => {
+  test('::_streamInput should return a highland stream', () => {
     const parser = new AbstractParser()
 
     const output = parser._streamInput(fs.createReadStream(sampleImportFile))

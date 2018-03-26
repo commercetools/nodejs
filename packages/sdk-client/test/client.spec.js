@@ -2,15 +2,15 @@ import qs from 'querystring'
 import { createClient } from '../src'
 
 describe('validate options', () => {
-  it('middlewares (required)', () => {
+  test('middlewares (required)', () => {
     expect(() => createClient()).toThrowError('Missing required options')
   })
-  it('middlewares (array)', () => {
+  test('middlewares (array)', () => {
     expect(() => createClient({ middlewares: {} })).toThrowError(
       'Middlewares should be an array'
     )
   })
-  it('middlewares (empty)', () => {
+  test('middlewares (empty)', () => {
     expect(() => createClient({ middlewares: [] })).toThrowError(
       'You need to provide at least one middleware'
     )
@@ -25,11 +25,11 @@ describe('api', () => {
     method: 'POST',
   }
 
-  it('expose "execute" function', () => {
+  test('expose "execute" function', () => {
     expect(typeof client.execute).toBe('function')
   })
 
-  it('execute should return a promise', () => {
+  test('execute should return a promise', () => {
     const promise = client.execute(request)
     expect(promise.then).toBeDefined()
   })
@@ -43,7 +43,7 @@ describe('execute', () => {
     headers: {},
   }
 
-  it('should throw if request is missing', () => {
+  test('should throw if request is missing', () => {
     const middlewares = [next => (...args) => next(...args)]
     const client = createClient({ middlewares })
     expect(() => client.execute()).toThrowError(
@@ -51,7 +51,7 @@ describe('execute', () => {
     )
   })
 
-  it('should throw if request uri is invalid', () => {
+  test('should throw if request uri is invalid', () => {
     const middlewares = [next => (...args) => next(...args)]
     const client = createClient({ middlewares })
     const badRequest = {
@@ -63,7 +63,7 @@ describe('execute', () => {
     )
   })
 
-  it('should throw if request method is invalid', () => {
+  test('should throw if request method is invalid', () => {
     const middlewares = [next => (...args) => next(...args)]
     const client = createClient({ middlewares })
     const badRequest = {
@@ -75,7 +75,7 @@ describe('execute', () => {
     )
   })
 
-  it('execute and resolve a simple request', () => {
+  test('execute and resolve a simple request', () => {
     const client = createClient({
       middlewares: [
         next => (req, res) => {
@@ -105,7 +105,7 @@ describe('execute', () => {
     })
   })
 
-  it('execute and reject a request', () => {
+  test('execute and reject a request', () => {
     const client = createClient({
       middlewares: [
         next => (req, res) => {
@@ -131,7 +131,7 @@ describe('execute', () => {
   })
 
   describe('ensure correct functions are used to resolve the promise', () => {
-    it('resolve', () => {
+    test('resolve', () => {
       const customResolveSpy = jest.fn()
       const client = createClient({
         middlewares: [
@@ -152,7 +152,7 @@ describe('execute', () => {
       })
     })
 
-    it('reject', () => {
+    test('reject', () => {
       const customRejectSpy = jest.fn()
       const client = createClient({
         middlewares: [
@@ -188,26 +188,26 @@ describe('process', () => {
     const middlewares = [next => (...args) => next(...args)]
     const client = createClient({ middlewares })
 
-    it('should throw if second argument missing', () => {
+    test('should throw if second argument missing', () => {
       expect(() => client.process(request)).toThrow(
         /The "process" function accepts a "Function"/
       )
     })
 
-    it('should throw if second argument is not a function', () => {
+    test('should throw if second argument is not a function', () => {
       expect(() => client.process(request, 'foo')).toThrow(
         /The "process" function accepts a "Function"/
       )
     })
 
-    it('should throw if request method is not `GET`', () => {
+    test('should throw if request method is not `GET`', () => {
       expect(() =>
         client.process({ uri: 'foo', method: 'POST' }, () => {})
       ).toThrowError(/The "process" Request object requires a valid method/)
     })
   })
 
-  it('process and resolve paginating 3 times', () => {
+  test('process and resolve paginating 3 times', () => {
     const createPayloadResult = tot => ({
       results: Array.from(Array(tot), (val, index) => ({
         id: String(index + 1),
@@ -264,7 +264,7 @@ describe('process', () => {
       })
   })
 
-  it('return only the required number of items', () => {
+  test('return only the required number of items', () => {
     const createPayloadResult = tot => ({
       results: Array.from(Array(tot), (val, index) => ({
         id: String(index + 1),
@@ -321,7 +321,7 @@ describe('process', () => {
       })
   })
 
-  it('process and resolve pagination by preserving original query', () => {
+  test('process and resolve pagination by preserving original query', () => {
     const createPayloadResult = tot => ({
       results: Array.from(Array(tot), (val, index) => ({
         id: String(index + 1),
@@ -376,7 +376,7 @@ describe('process', () => {
     )
   })
 
-  it('process and reject a request', () => {
+  test('process and reject a request', () => {
     const client = createClient({
       middlewares: [
         next => (req, res) => {
@@ -401,7 +401,7 @@ describe('process', () => {
       })
   })
 
-  it('process and reject on rejection from user', () => {
+  test('process and reject on rejection from user', () => {
     const client = createClient({
       middlewares: [
         next => (req, res) => {
