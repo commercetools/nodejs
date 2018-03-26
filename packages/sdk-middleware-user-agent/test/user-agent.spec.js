@@ -14,30 +14,30 @@ describe('UserAgent', () => {
   }
 
   const next = (req, res) => {
-    it('has the same given header', () => {
+    test('has the same given header', () => {
       expect(req.headers.Authorization).toBe('123')
     })
-    it('has sdk info', () => {
+    test('has sdk info', () => {
       expect(req.headers['User-Agent']).toMatch('commercetools-js-sdk')
     })
-    it('has browser info', () => {
+    test('has browser info', () => {
       // because we use jsdom
       expect(req.headers['User-Agent']).toMatch('Node.js')
     })
-    it('has browser version', () => {
+    test('has browser version', () => {
       // because we use jsdom
       expect(req.headers['User-Agent']).toMatch(process.version.slice(1))
     })
-    it('has library info', () => {
+    test('has library info', () => {
       expect(req.headers['User-Agent']).toMatch('my-awesome-library/1.0.0')
     })
-    it('has library url', () => {
+    test('has library url', () => {
       expect(req.headers['User-Agent']).toMatch('https://commercetools.com')
     })
-    it('has contact info', () => {
+    test('has contact info', () => {
       expect(req.headers['User-Agent']).toMatch('helpdesk@commercetools.com')
     })
-    it('do not change response object', () => {
+    test('do not change response object', () => {
       expect(res).toEqual({})
     })
   }

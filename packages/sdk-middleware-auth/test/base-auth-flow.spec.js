@@ -52,7 +52,7 @@ describe('Base Auth Flow', () => {
     nock.cleanAll()
   })
 
-  it('get a new auth token if not present in request headers', () =>
+  test('get a new auth token if not present in request headers', () =>
     new Promise(resolve => {
       const next = req => {
         expect(req).toHaveProperty('headers.Authorization', 'Bearer xxx')
@@ -75,7 +75,7 @@ describe('Base Auth Flow', () => {
       createBaseMiddleware({}, next)
     }))
 
-  it('reject if network error occur while fetching token', () =>
+  test('reject if network error occur while fetching token', () =>
     new Promise((resolve, reject) => {
       const response = createTestResponse({
         resolve,
@@ -101,7 +101,7 @@ describe('Base Auth Flow', () => {
       createBaseMiddleware({ response }, next)
     }))
 
-  it('reject if auth request fails (JSON error response)', () =>
+  test('reject if auth request fails (JSON error response)', () =>
     new Promise((resolve, reject) => {
       const response = createTestResponse({
         resolve,
@@ -127,7 +127,7 @@ describe('Base Auth Flow', () => {
       createBaseMiddleware({ response }, next)
     }))
 
-  it('reject if auth request fails (non JSON error response)', () =>
+  test('reject if auth request fails (non JSON error response)', () =>
     new Promise((resolve, reject) => {
       const response = createTestResponse({
         resolve,
@@ -153,7 +153,7 @@ describe('Base Auth Flow', () => {
       createBaseMiddleware({ response }, next)
     }))
 
-  it('retrieve a new token if previous one expired', () =>
+  test('retrieve a new token if previous one expired', () =>
     new Promise(resolve => {
       const middlewareOptions = createTestMiddlewareOptions()
       let requestCount = 0
@@ -199,7 +199,7 @@ describe('Base Auth Flow', () => {
       createBaseMiddleware({ requestState, tokenCache }, call2)
     }))
 
-  it('use refresh token to fetch a new token if no token or is expired', () =>
+  test('use refresh token to fetch a new token if no token or is expired', () =>
     new Promise(resolve => {
       const spy = jest.spyOn(buildRequests, 'buildRequestForRefreshTokenFlow')
       const middlewareOptions = createTestMiddlewareOptions()
@@ -260,7 +260,7 @@ describe('Base Auth Flow', () => {
       )
     }))
 
-  it(
+  test(
     'do not get a new token if one is already present in request headers ' +
       'but it does not match one of the cached tokens',
     () =>
@@ -322,7 +322,7 @@ describe('Base Auth Flow', () => {
       })
   )
 
-  it('ensure to fetch new token only once and keep track of pending tasks', () =>
+  test('ensure to fetch new token only once and keep track of pending tasks', () =>
     new Promise(resolve => {
       const middlewareOptions = createTestMiddlewareOptions()
       let requestCount = 0
@@ -360,7 +360,7 @@ describe('Base Auth Flow', () => {
       createBaseMiddleware({ pendingTasks, tokenCache, requestState }, next)
     }))
 
-  it('if a token has been fetched, use it for the new incoming requests', () =>
+  test('if a token has been fetched, use it for the new incoming requests', () =>
     new Promise(resolve => {
       const middlewareOptions = createTestMiddlewareOptions()
       let requestCount = 0

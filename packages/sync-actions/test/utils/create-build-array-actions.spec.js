@@ -9,11 +9,11 @@ const testObjKey = 'someNestedObjects'
 const getTestObj = list => ({ [testObjKey]: list || [] })
 
 describe('createBuildArrayActions', () => {
-  it('returns function', () => {
+  test('returns function', () => {
     expect(typeof createBuildArrayActions('test', {})).toBe('function')
   })
 
-  it('correctly detects add actions', () => {
+  test('correctly detects add actions', () => {
     const before = getTestObj()
     const now = getTestObj([{ name: 'a new object' }])
     const addActionSpy = jest.fn()
@@ -32,7 +32,7 @@ describe('createBuildArrayActions', () => {
     expect(addActionSpy).toHaveBeenCalledWith(expect.any(Object), 0)
   })
 
-  it('correctly detects change actions', () => {
+  test('correctly detects change actions', () => {
     const before = getTestObj([{ name: 'a new object' }])
     const now = getTestObj([{ name: 'a changed object' }])
     const changeActionSpy = jest.fn()
@@ -56,7 +56,7 @@ describe('createBuildArrayActions', () => {
     )
   })
 
-  it('correctly detects remove actions', () => {
+  test('correctly detects remove actions', () => {
     const before = getTestObj([{ name: 'an object' }])
     const now = getTestObj()
     const removeActionSpy = jest.fn()

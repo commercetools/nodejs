@@ -79,7 +79,7 @@ describe('Writer', () => {
   })
 
   describe('::writeToSingleCsvFile', () => {
-    it('write products to a single file with specified headers', done => {
+    test('write products to a single file with specified headers', done => {
       const sampleStream = highland(sampleProducts)
       const headers = [
         'id',
@@ -104,7 +104,7 @@ describe('Writer', () => {
       writer.writeToSingleCsvFile(sampleStream, outputStream, logger, headers)
     })
 
-    it('log success info on completion', done => {
+    test('log success info on completion', done => {
       const sampleStream = highland(sampleProducts)
       const headers = []
       const outputStream = streamTest.toText(() => {})
@@ -120,7 +120,7 @@ describe('Writer', () => {
   })
 
   describe('::writeToZipFile', () => {
-    it('write products to multiple files based on productTypes', done => {
+    test('write products to multiple files based on productTypes', done => {
       const sampleStream = highland(sampleProducts)
       const verifyCsv1 = streamTest.toText((error, actual) => {
         expect(error).toBeFalsy()
@@ -159,7 +159,7 @@ describe('Writer', () => {
       writer.writeToZipFile(sampleStream, outputStream, logger)
     })
 
-    it('log success info on completion', done => {
+    test('log success info on completion', done => {
       const sampleStream = highland(sampleProducts)
 
       const tempFile = tmp.fileSync({ postfix: '.zip' })

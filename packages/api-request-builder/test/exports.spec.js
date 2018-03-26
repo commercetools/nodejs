@@ -1,11 +1,11 @@
 import { createRequestBuilder, features } from '../src'
 
 describe('exports', () => {
-  it('default', () => {
+  test('default', () => {
     expect(typeof createRequestBuilder).toBe('function')
   })
 
-  it('features', () => {
+  test('features', () => {
     expect(Object.keys(features)).toEqual([
       'create',
       'update',

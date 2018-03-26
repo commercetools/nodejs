@@ -1,7 +1,7 @@
 import castTypes from '../src/utils'
 
 describe('castTypes', () => {
-  it('should properly cast object types', () => {
+  test('should properly cast object types', () => {
     const sample = {
       name: {
         de: 'Valerian',
@@ -32,7 +32,7 @@ describe('castTypes', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should not mutate object if no field to cast or mutate', () => {
+  test('should not mutate object if no field to cast or mutate', () => {
     const newSample = {
       name: {
         de: 'Valerian',
