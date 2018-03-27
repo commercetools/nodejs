@@ -19,7 +19,7 @@ function arePricesStructurallyEqual(oldPrice, newPrice) {
   return isEqual(newPriceComparison, oldPriceComparison)
 }
 
-function getPriceId(newPrice, previousVariants) {
+function extractPriceIdFromPreviousVariant(newPrice, previousVariants) {
   let newPriceId
 
   previousVariants.forEach(variant => {
@@ -35,7 +35,7 @@ function getPriceId(newPrice, previousVariants) {
   return newPriceId
 }
 
-function updateMissingPriceIds(nextVariants, previousVariants) {
+function injectMissingPriceIds(nextVariants, previousVariants) {
   return nextVariants.map(newVariant => {
     const { prices, ...restOfVariant } = newVariant
 
@@ -45,7 +45,7 @@ function updateMissingPriceIds(nextVariants, previousVariants) {
       ...restOfVariant,
       prices: prices.map(price => {
         if (!price.id) {
-          const id = getPriceId(price, previousVariants)
+          const id = extractPriceIdFromPreviousVariant(price, previousVariants)
           if (id) return { ...price, id }
         }
         return price
@@ -69,7 +69,7 @@ export default function createBuildActions(differ, doMapActions, onBeforeDiff) {
     )
 
     if (processedNow.variants && processedBefore.variants)
-      processedNow.variants = updateMissingPriceIds(
+      processedNow.variants = injectMissingPriceIds(
         processedNow.variants,
         processedBefore.variants
       )

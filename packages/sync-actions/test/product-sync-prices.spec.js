@@ -1,3 +1,4 @@
+import shuffle from 'lodash.shuffle'
 import productsSyncFn from '../src/products'
 
 /* eslint-disable max-len */
@@ -260,15 +261,8 @@ describe('Actions', () => {
       },
     }
 
-    const shufflePrices = array =>
-      array.reduce(
-        (agg, val) =>
-          agg.splice(Math.floor(Math.random() * agg.length), 0, val) && agg,
-        []
-      )
-
     beforeEach(() => {
-      now.masterVariant.prices = shufflePrices(now.masterVariant.prices)
+      now.masterVariant.prices = shuffle(now.masterVariant.prices)
       actions = productsSync.buildActions(now, before)
     })
 
