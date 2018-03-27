@@ -23,5 +23,15 @@
     "name": "Williams Omayuku",
     "email": "williams.omayuku@commercetools.de"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "streamtest": "^1.2.3"
+  },
+  "dependencies": {
+    "@commercetools/api-request-builder": "^3.7.0",
+    "@commercetools/sdk-client": "^1.5.4",
+    "@commercetools/sdk-middleware-auth": "^3.5.1",
+    "@commercetools/sdk-middleware-http": "^2.3.1",
+    "@commercetools/sdk-middleware-user-agent": "^1.2.6",
+  }
 }
