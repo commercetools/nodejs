@@ -24,7 +24,7 @@ describe('extractMatchingPairs', () => {
       ]
       pairs = extractMatchingPairs(path, key, oldObj, newObj)
     })
-    it('should return `newObj` and `oldObj`', () => {
+    test('should return `newObj` and `oldObj`', () => {
       expect(pairs).toEqual({
         oldObj: { name: 'foo' },
         newObj: { name: 'bar' },
@@ -45,7 +45,7 @@ describe('extractMatchingPairs', () => {
       newObj = []
       pairs = extractMatchingPairs(path, key, oldObj, newObj)
     })
-    it('should return `oldObj` and empty `newObj`', () => {
+    test('should return `oldObj` and empty `newObj`', () => {
       expect(pairs).toEqual({
         oldObj: { name: 'foo' },
         newObj: undefined,

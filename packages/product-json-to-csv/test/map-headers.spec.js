@@ -24,112 +24,112 @@ describe('mapHeaders', () => {
       ]
     })
 
-    it('contains `_published`', () => {
+    test('contains `_published`', () => {
       expect(mapHeaders(headerFields)[0]).toEqual({
         label: '_published',
         value: 'published',
       })
     })
 
-    it('contains `_hasStagedChanges`', () => {
+    test('contains `_hasStagedChanges`', () => {
       expect(mapHeaders(headerFields)[1]).toEqual({
         label: '_hasStagedChanges',
         value: 'hasStagedChanges',
       })
     })
 
-    it('contains `productType`', () => {
+    test('contains `productType`', () => {
       expect(mapHeaders(headerFields)[2]).toEqual({
         label: 'productType',
         value: 'productType',
       })
     })
 
-    it('contains `variantId`', () => {
+    test('contains `variantId`', () => {
       expect(mapHeaders(headerFields)[3]).toEqual({
         label: 'variantId',
         value: 'variant.id',
       })
     })
 
-    it('contains `variantKey`', () => {
+    test('contains `variantKey`', () => {
       expect(mapHeaders(headerFields)[4]).toEqual({
         label: 'variantKey',
         value: 'variant.key',
       })
     })
 
-    it('contains `id`', () => {
+    test('contains `id`', () => {
       expect(mapHeaders(headerFields)[5]).toEqual({
         label: 'id',
         value: 'id',
       })
     })
 
-    it('contains `key`', () => {
+    test('contains `key`', () => {
       expect(mapHeaders(headerFields)[6]).toEqual({
         label: 'key',
         value: 'key',
       })
     })
 
-    it('contains `sku`', () => {
+    test('contains `sku`', () => {
       expect(mapHeaders(headerFields)[7]).toEqual({
         label: 'sku',
         value: 'variant.sku',
       })
     })
 
-    it('contains `tax`', () => {
+    test('contains `tax`', () => {
       expect(mapHeaders(headerFields)[8]).toEqual({
         label: 'tax',
         value: 'taxCategory',
       })
     })
 
-    it('contains `categories`', () => {
+    test('contains `categories`', () => {
       expect(mapHeaders(headerFields)[9]).toEqual({
         label: 'categories',
         value: 'categories',
       })
     })
 
-    it('contains `images`', () => {
+    test('contains `images`', () => {
       expect(mapHeaders(headerFields)[10]).toEqual({
         label: 'images',
         value: 'variant.images',
       })
     })
 
-    it('contains `name.en`', () => {
+    test('contains `name.en`', () => {
       expect(mapHeaders(headerFields)[11]).toEqual({
         label: 'name.en',
         value: 'name.en',
       })
     })
 
-    it('contains `description.en`', () => {
+    test('contains `description.en`', () => {
       expect(mapHeaders(headerFields)[12]).toEqual({
         label: 'description.en',
         value: 'description.en',
       })
     })
 
-    it('contains `slug.en`', () => {
+    test('contains `slug.en`', () => {
       expect(mapHeaders(headerFields)[13]).toEqual({
         label: 'slug.en',
         value: 'slug.en',
       })
     })
 
-    it('contains `attribute`', () => {
+    test('contains `attribute`', () => {
       expect(mapHeaders(headerFields)[14]).toEqual({
         label: 'attribute',
         value: 'attribute',
       })
     })
 
-    it('contains `customAttribute`', () => {
+    test('contains `customAttribute`', () => {
       expect(mapHeaders(headerFields)[15]).toEqual({
         label: 'customAttribute',
         value: 'customAttribute',
@@ -160,112 +160,112 @@ describe('mapHeaders', () => {
       ]
     })
 
-    it('contains `published`', () => {
+    test('contains `published`', () => {
       expect(mapHeaders(headerFields)[0]).toEqual({
         label: '_published',
         value: 'published',
       })
     })
 
-    it('contains `hasStagedChanges`', () => {
+    test('contains `hasStagedChanges`', () => {
       expect(mapHeaders(headerFields)[1]).toEqual({
         label: '_hasStagedChanges',
         value: 'hasStagedChanges',
       })
     })
 
-    it('contains `productType`', () => {
+    test('contains `productType`', () => {
       expect(mapHeaders(headerFields)[2]).toEqual({
         label: 'productType',
         value: 'productType',
       })
     })
 
-    it('contains `variant.id`', () => {
+    test('contains `variant.id`', () => {
       expect(mapHeaders(headerFields)[3]).toEqual({
         label: 'variantId',
         value: 'variant.id',
       })
     })
 
-    it('contains `variant.key`', () => {
+    test('contains `variant.key`', () => {
       expect(mapHeaders(headerFields)[4]).toEqual({
         label: 'variantKey',
         value: 'variant.key',
       })
     })
 
-    it('contains `id`', () => {
+    test('contains `id`', () => {
       expect(mapHeaders(headerFields)[5]).toEqual({
         label: 'id',
         value: 'id',
       })
     })
 
-    it('contains `key`', () => {
+    test('contains `key`', () => {
       expect(mapHeaders(headerFields)[6]).toEqual({
         label: 'key',
         value: 'key',
       })
     })
 
-    it('contains `variant.sku`', () => {
+    test('contains `variant.sku`', () => {
       expect(mapHeaders(headerFields)[7]).toEqual({
         label: 'sku',
         value: 'variant.sku',
       })
     })
 
-    it('contains `taxCategory`', () => {
+    test('contains `taxCategory`', () => {
       expect(mapHeaders(headerFields)[8]).toEqual({
         label: 'tax',
         value: 'taxCategory',
       })
     })
 
-    it('contains `categories`', () => {
+    test('contains `categories`', () => {
       expect(mapHeaders(headerFields)[9]).toEqual({
         label: 'categories',
         value: 'categories',
       })
     })
 
-    it('contains `variant.images`', () => {
+    test('contains `variant.images`', () => {
       expect(mapHeaders(headerFields)[10]).toEqual({
         label: 'images',
         value: 'variant.images',
       })
     })
 
-    it('contains `name.en`', () => {
+    test('contains `name.en`', () => {
       expect(mapHeaders(headerFields)[11]).toEqual({
         label: 'name.en',
         value: 'name.en',
       })
     })
 
-    it('contains `description.en`', () => {
+    test('contains `description.en`', () => {
       expect(mapHeaders(headerFields)[12]).toEqual({
         label: 'description.en',
         value: 'description.en',
       })
     })
 
-    it('contains `slug.en`', () => {
+    test('contains `slug.en`', () => {
       expect(mapHeaders(headerFields)[13]).toEqual({
         label: 'slug.en',
         value: 'slug.en',
       })
     })
 
-    it('contains `attribute`', () => {
+    test('contains `attribute`', () => {
       expect(mapHeaders(headerFields)[14]).toEqual({
         label: 'attribute',
         value: 'attribute',
       })
     })
 
-    it('contains `customAttribute`', () => {
+    test('contains `customAttribute`', () => {
       expect(mapHeaders(headerFields)[15]).toEqual({
         label: 'customAttribute',
         value: 'customAttribute',

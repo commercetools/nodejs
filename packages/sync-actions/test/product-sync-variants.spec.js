@@ -7,7 +7,7 @@ describe('Actions', () => {
     productsSync = productsSyncFn()
   })
 
-  it('should build attribute actions', () => {
+  test('should build attribute actions', () => {
     const before = {
       id: '123',
       masterVariant: {
@@ -116,7 +116,7 @@ describe('Actions', () => {
     ])
   })
 
-  it('should build SameForAll attribute actions', () => {
+  test('should build SameForAll attribute actions', () => {
     const before = {
       id: '123',
       masterVariant: {
@@ -186,7 +186,7 @@ describe('Actions', () => {
     ])
   })
 
-  it('should build SameForAll attribute actions for a SET of object values', () => {
+  test('should build SameForAll attribute actions for a SET of object values', () => {
     const before = {
       masterVariant: {
         attributes: [
@@ -237,7 +237,7 @@ describe('Actions', () => {
     ])
   })
 
-  it('should build `addVariant` action', () => {
+  test('should build `addVariant` action', () => {
     const newVariant = {
       key: 'ddd',
       sku: 'ccc',
@@ -274,7 +274,7 @@ describe('Actions', () => {
     ])
   })
 
-  it('should handle mapping actions for new variants without ids', () => {
+  test('should handle mapping actions for new variants without ids', () => {
     const before = {
       id: '123',
       masterVariant: {
@@ -374,7 +374,7 @@ describe('Actions', () => {
         variants: [],
       }
 
-      it('should generate update action to remove variant', () => {
+      test('should generate update action to remove variant', () => {
         const actions = productsSync.buildActions(now, before)
         expect(actions).toEqual([{ action: 'removeVariant', id: 1 }])
       })
@@ -426,7 +426,7 @@ describe('Actions', () => {
         ],
       }
 
-      it('should generate `addVariant` and `setAttribute` actions', () => {
+      test('should generate `addVariant` and `setAttribute` actions', () => {
         const actions = productsSync.buildActions(now, before)
 
         expect(actions).toEqual([
@@ -482,7 +482,7 @@ describe('Actions', () => {
           ],
         }
 
-        it('should generate `changeMasterVariant` and `addVariant` action', () => {
+        test('should generate `changeMasterVariant` and `addVariant` action', () => {
           const actions = productsSync.buildActions(now, before)
 
           expect(actions).toEqual([
@@ -520,7 +520,7 @@ describe('Actions', () => {
           variants: [],
         }
 
-        it('should generate `changeMasterVariant`, `addVariant` and `removeVariant` action', () => {
+        test('should generate `changeMasterVariant`, `addVariant` and `removeVariant` action', () => {
           const actions = productsSync.buildActions(now, before)
 
           expect(actions).toEqual([
@@ -572,7 +572,7 @@ describe('Actions', () => {
             ],
           }
 
-          it('should generate `changeMasterVariant` action', () => {
+          test('should generate `changeMasterVariant` action', () => {
             const actions = productsSync.buildActions(now, before)
 
             expect(actions).toEqual([
@@ -616,7 +616,7 @@ describe('Actions', () => {
             ],
           }
 
-          it('should generate `changeMasterVariant` and `setAttribute` actions', () => {
+          test('should generate `changeMasterVariant` and `setAttribute` actions', () => {
             const actions = productsSync.buildActions(now, before)
 
             expect(actions).toEqual([
@@ -634,7 +634,7 @@ describe('Actions', () => {
     })
   })
 
-  it('should handle unsetting the sku of a variant', () => {
+  test('should handle unsetting the sku of a variant', () => {
     const before = {
       id: '123',
       masterVariant: {
@@ -657,7 +657,7 @@ describe('Actions', () => {
     expect(actions).toEqual([{ action: 'setSku', sku: null, variantId: 1 }])
   })
 
-  it('should handle unsetting the key of a variant', () => {
+  test('should handle unsetting the key of a variant', () => {
     const before = {
       id: '123',
       masterVariant: {
@@ -682,7 +682,7 @@ describe('Actions', () => {
     ])
   })
 
-  it('should build attribute actions for all types', () => {
+  test('should build attribute actions for all types', () => {
     const before = {
       id: '123',
       masterVariant: {
@@ -802,7 +802,7 @@ describe('Actions', () => {
     ])
   })
 
-  it('should ignore set sku', () => {
+  test('should ignore set sku', () => {
     // Case when sku is not set, and the new value is empty or null
     const before = {
       id: '123',
@@ -825,7 +825,7 @@ describe('Actions', () => {
     expect(actions).toEqual([])
   })
 
-  it('should ignore set key', () => {
+  test('should ignore set key', () => {
     // Case when key is not set, and the new value is empty or null
     const before = {
       id: '123',
@@ -848,7 +848,7 @@ describe('Actions', () => {
     expect(actions).toEqual([])
   })
 
-  it('should ignore set sku if the sku was and still is empty', () => {
+  test('should ignore set sku if the sku was and still is empty', () => {
     // Case when sku is not set, and the new value is empty or null
     const before = {
       id: '123',
@@ -872,7 +872,7 @@ describe('Actions', () => {
     expect(actions).toEqual([])
   })
 
-  it('should ignore set key if the key was and still is empty', () => {
+  test('should ignore set key if the key was and still is empty', () => {
     // Case when key is not set, and the new value is empty or null
     const before = {
       id: '123',
@@ -896,7 +896,7 @@ describe('Actions', () => {
     expect(actions).toEqual([])
   })
 
-  it('should build `setAttribute` action text/ltext attributes with long text', () => {
+  test('should build `setAttribute` action text/ltext attributes with long text', () => {
     const longText = `
     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     Nunc ultricies fringilla tortor eu egestas.

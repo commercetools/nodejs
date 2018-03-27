@@ -23,11 +23,11 @@ describe('DiscountCodeExport', () => {
   })
 
   describe('::constructor', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(typeof DiscountCodeExport).toBe('function')
     })
 
-    it('should set default properties', () => {
+    test('should set default properties', () => {
       expect(codeExport.apiConfig).toEqual({
         projectKey: 'test-project-key',
       })
@@ -37,13 +37,13 @@ describe('DiscountCodeExport', () => {
       expect(codeExport.config.multiValueDelimiter).toBe(';')
     })
 
-    it('should throw if no `apiConfig` in `options` parameter', () => {
+    test('should throw if no `apiConfig` in `options` parameter', () => {
       expect(() => new DiscountCodeExport({ foo: 'bar' })).toThrow(
         /The contructor must be passed an `apiConfig` object/
       )
     })
 
-    it('should throw if `batchSize` is more than 500', () => {
+    test('should throw if `batchSize` is more than 500', () => {
       expect(
         () =>
           new DiscountCodeExport(
@@ -58,7 +58,7 @@ describe('DiscountCodeExport', () => {
   })
 
   describe('::run', () => {
-    it('should fetch discount codes and output csv to stream', done => {
+    test('should fetch discount codes and output csv to stream', done => {
       codeExport.config.exportFormat = 'csv'
       const sampleCode = {
         code: 'discount-code',
@@ -80,7 +80,7 @@ describe('DiscountCodeExport', () => {
       codeExport.run(outputStream)
     })
 
-    it('should fetch codes and output json to stream by default', done => {
+    test('should fetch codes and output json to stream by default', done => {
       const sampleCode = {
         code: 'discount-code',
         name: { en: 'some-discount-name' },
@@ -98,7 +98,7 @@ describe('DiscountCodeExport', () => {
       codeExport.run(outputStream)
     })
 
-    it('should emit error if it occurs when streaming to csv', done => {
+    test('should emit error if it occurs when streaming to csv', done => {
       codeExport.exportFormat = 'csv'
       codeExport._fetchCodes = jest
         .fn()
@@ -111,7 +111,7 @@ describe('DiscountCodeExport', () => {
       codeExport.run(outputStream)
     })
 
-    it('should emit error if it occurs when streaming to json', done => {
+    test('should emit error if it occurs when streaming to json', done => {
       codeExport._fetchCodes = jest
         .fn()
         .mockImplementation(() => Promise.reject(new Error('error occured')))
@@ -137,7 +137,7 @@ describe('DiscountCodeExport', () => {
       )
     })
 
-    it('should fail if status code is not 200', async () => {
+    test('should fail if status code is not 200', async () => {
       codeExport.client.process = processMock
       sampleResult.message = 'Error occured'
       try {
@@ -147,7 +147,7 @@ describe('DiscountCodeExport', () => {
       }
     })
 
-    it('should fetch discount codes using `process` method', async () => {
+    test('should fetch discount codes using `process` method', async () => {
       codeExport.client.process = processMock
       sampleResult.statusCode = 200
       await codeExport._fetchCodes()
@@ -158,7 +158,7 @@ describe('DiscountCodeExport', () => {
       })
     })
 
-    it('should loop over discount codes and write to stream', async () => {
+    test('should loop over discount codes and write to stream', async () => {
       codeExport.client.process = processMock
       sampleResult.statusCode = 200
       sampleResult.body.results = ['code1', 'code2', 'code3']
@@ -169,7 +169,7 @@ describe('DiscountCodeExport', () => {
   })
 
   describe('::_buildRequest', () => {
-    it('should build request according to query', () => {
+    test('should build request according to query', () => {
       codeExport.config.predicate = 'code-predicate'
       codeExport.config.accessToken = 'myAccessToken'
       const expected = {
@@ -203,7 +203,7 @@ describe('DiscountCodeExport', () => {
       }
     })
 
-    it('deletes empty objects', () => {
+    test('deletes empty objects', () => {
       const actual = codeExport._processCode(sampleCodeObj)
       expect(actual.attributeTypes).toBeUndefined()
       expect(actual.cartFieldTypes).toBeUndefined()
@@ -211,7 +211,7 @@ describe('DiscountCodeExport', () => {
       expect(actual.customLineItemFieldTypes).toBeUndefined()
     })
 
-    it('does not delete non-empty objects', () => {
+    test('does not delete non-empty objects', () => {
       const newSample = Object.assign({}, sampleCodeObj, {
         attributeTypes: { foo: 'bar' },
       })
@@ -220,7 +220,7 @@ describe('DiscountCodeExport', () => {
       expect(actual['attributeTypes.foo']).toBeTruthy()
     })
 
-    it('flatten object and return the `cartDiscounts` id as a string', () => {
+    test('flatten object and return the `cartDiscounts` id as a string', () => {
       const expected = {
         'name.en': 'English',
         'name.de': 'German',
@@ -230,7 +230,7 @@ describe('DiscountCodeExport', () => {
       expect(actual).toEqual(expect.objectContaining(expected))
     })
 
-    it('should concatenate multiple `cartDiscounts` ids', () => {
+    test('should concatenate multiple `cartDiscounts` ids', () => {
       sampleCodeObj.cartDiscounts.push({
         typeId: 'cart-discount',
         id: 'discount-id-2',
@@ -244,7 +244,7 @@ describe('DiscountCodeExport', () => {
       expect(actual).toEqual(expect.objectContaining(expected))
     })
 
-    it('flatten `groups` and return array items as a string', () => {
+    test('flatten `groups` and return array items as a string', () => {
       const expected = {
         'name.en': 'English',
         'name.de': 'German',

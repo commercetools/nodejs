@@ -6,11 +6,11 @@ import {
 } from '../src/category-actions'
 
 describe('Exports', () => {
-  it('action group list', () => {
+  test('action group list', () => {
     expect(actionGroups).toEqual(['base', 'references', 'meta', 'custom'])
   })
 
-  it('correctly define base actions list', () => {
+  test('correctly define base actions list', () => {
     expect(baseActionsList).toEqual([
       { action: 'changeName', key: 'name' },
       { action: 'changeSlug', key: 'slug' },
@@ -21,7 +21,7 @@ describe('Exports', () => {
     ])
   })
 
-  it('correctly define meta actions list', () => {
+  test('correctly define meta actions list', () => {
     expect(metaActionsList).toEqual([
       { action: 'setMetaTitle', key: 'metaTitle' },
       { action: 'setMetaKeywords', key: 'metaKeywords' },
@@ -29,7 +29,7 @@ describe('Exports', () => {
     ])
   })
 
-  it('correctly define reference actions list', () => {
+  test('correctly define reference actions list', () => {
     expect(referenceActionsList).toEqual([
       { action: 'changeParent', key: 'parent' },
     ])
@@ -43,7 +43,7 @@ describe('Actions', () => {
   })
 
   describe('custom fields', () => {
-    it('should build `setCustomType` action', () => {
+    test('should build `setCustomType` action', () => {
       const before = {
         custom: {
           type: {
@@ -72,7 +72,7 @@ describe('Actions', () => {
     })
   })
 
-  it('should build `setCustomField` action', () => {
+  test('should build `setCustomField` action', () => {
     const before = {
       custom: {
         type: {

@@ -28,7 +28,7 @@ describe('ProductExporter', () => {
   })
 
   describe('::constructor', () => {
-    it('should initialize with defaults', () => {
+    test('should initialize with defaults', () => {
       const apiConfig = {
         projectKey: 'foo',
       }
@@ -40,7 +40,7 @@ describe('ProductExporter', () => {
   })
 
   describe('::run', () => {
-    it('prepare the output stream and pass to `_getProducts`', async () => {
+    test('prepare the output stream and pass to `_getProducts`', async () => {
       productExporter._getProducts = jest.fn(() => Promise.resolve())
       const outputStream = streamtest.v2.toText(() => {})
       await productExporter.run(outputStream)
@@ -48,7 +48,7 @@ describe('ProductExporter', () => {
       expect(productExporter._getProducts).not.toBeCalledWith(outputStream)
     })
 
-    it('should emit `error` on output stream if error occurs', done => {
+    test('should emit `error` on output stream if error occurs', done => {
       productExporter._getProducts = jest.fn(() =>
         Promise.reject(new Error('error occured'))
       )
@@ -80,7 +80,7 @@ describe('ProductExporter', () => {
       productExporter.client.process = processMock
     })
 
-    it('should fetch products using `process` method', () => {
+    test('should fetch products using `process` method', () => {
       productExporter._getProducts(outputStream)
       expect(processMock).toHaveBeenCalledTimes(1)
       expect(processMock.mock.calls[0][0]).toEqual({
@@ -97,7 +97,7 @@ describe('ProductExporter', () => {
       })
     })
 
-    it('should pass the products and the stream to the writer method', () => {
+    test('should pass the products and the stream to the writer method', () => {
       const spy = jest.spyOn(ProductExporter, '_writeEachProduct')
 
       productExporter._getProducts(outputStream)
@@ -105,7 +105,7 @@ describe('ProductExporter', () => {
       spy.mockRestore()
     })
 
-    it('should close stream after writing data', async () => {
+    test('should close stream after writing data', async () => {
       productExporter.client.process = jest.fn(() => Promise.resolve())
       await productExporter._getProducts(outputStream)
       expect(outputStream.end).toBeCalled()
@@ -121,7 +121,7 @@ describe('ProductExporter', () => {
       expand: ['someReference', 'anotherReference'],
     }
 
-    it('should build uri with query options', () => {
+    test('should build uri with query options', () => {
       const expectedUri = oneLineTrim`
         /my-project-key/product-projections
         ?staged=true
@@ -137,7 +137,7 @@ describe('ProductExporter', () => {
       expect(actualUri).toEqual(expectedUri)
     })
 
-    it('should build uri with no query options if none', () => {
+    test('should build uri with no query options if none', () => {
       const expectedUri = '/my-project-key/product-projections?staged=false'
       const actualUri = ProductExporter._buildProductProjectionsUri(
         projectKey,
@@ -148,7 +148,7 @@ describe('ProductExporter', () => {
   })
 
   describe('::_getStream', () => {
-    it('should prepare the json stream with the right arguments', () => {
+    test('should prepare the json stream with the right arguments', () => {
       // Mock the JSONStream
       const spy = jest.spyOn(JSONStream, 'stringify')
 
@@ -161,7 +161,7 @@ describe('ProductExporter', () => {
   })
 
   describe('::_writeEachProduct', () => {
-    it('should write each product to the output stream', () => {
+    test('should write each product to the output stream', () => {
       const writeMock = jest.fn()
       const outputStream = {
         write: writeMock,

@@ -37,7 +37,7 @@ describe('ProductJsonToCsv', () => {
   })
 
   describe('::constructor', () => {
-    it('should initialize with defaults', () => {
+    test('should initialize with defaults', () => {
       const apiConfig = {
         projectKey: 'foo',
       }
@@ -58,7 +58,7 @@ describe('ProductJsonToCsv', () => {
   })
 
   describe('::run', () => {
-    it('should write data to single `csv` file if headers are set', () => {
+    test('should write data to single `csv` file if headers are set', () => {
       productJsonToCsv = new ProductJsonToCsv(
         { projectKey: 'project-key' },
         { headerFields: ['header1, header2'] }
@@ -70,7 +70,7 @@ describe('ProductJsonToCsv', () => {
       expect(writer.writeToZipFile).not.toBeCalled()
     })
 
-    it('should write data to `zip` file if headers are not set', () => {
+    test('should write data to `zip` file if headers are not set', () => {
       productJsonToCsv.parse = jest.fn(() => 'bar')
 
       productJsonToCsv.run()
@@ -106,11 +106,11 @@ describe('ProductJsonToCsv', () => {
       productStream = productJsonToCsv.parse(inputStream, outputStream)
     })
 
-    it('should take an inputStream and output highland stream', () => {
+    test('should take an inputStream and output highland stream', () => {
       expect(productStream.source.__HighlandStream__).toBeTruthy()
     })
 
-    it('should log and emit error if error occurs', async () => {
+    test('should log and emit error if error occurs', async () => {
       const fakeError = new Error('fake error')
       productJsonToCsv._resolveReferences = jest.fn(() =>
         Promise.reject(fakeError)
@@ -123,7 +123,7 @@ describe('ProductJsonToCsv', () => {
       expect(outputStream.emit).toBeCalledWith('error', fakeError)
     })
 
-    it('should process data through stream if no error occurs', async () => {
+    test('should process data through stream if no error occurs', async () => {
       productJsonToCsv._resolveReferences = jest.fn(data =>
         Promise.resolve(data)
       )
@@ -189,7 +189,7 @@ describe('ProductJsonToCsv', () => {
         }))
       })
 
-      it('should pass the products to all resolver functions', async () => {
+      test('should pass the products to all resolver functions', async () => {
         await productJsonToCsv._resolveReferences(sampleProduct)
 
         expect(productJsonToCsv._resolveProductType).toBeCalledWith(
@@ -209,7 +209,7 @@ describe('ProductJsonToCsv', () => {
         )
       })
 
-      it('should return object with resolved references', async () => {
+      test('should return object with resolved references', async () => {
         const expected = {
           id: 'myProduct-1',
           productType: {
@@ -253,14 +253,14 @@ describe('ProductJsonToCsv', () => {
         )
       })
 
-      it('return empty object if no `productType` reference', () => {
+      test('return empty object if no `productType` reference', () => {
         delete sampleProduct.productType
         expect(
           productJsonToCsv._resolveProductType(sampleProduct.productType)
         ).toEqual({})
       })
 
-      it('build correct request uri for productType', async () => {
+      test('build correct request uri for productType', async () => {
         const expected = /project-key\/product-types\/product-type-id/
         await productJsonToCsv._resolveProductType(sampleProduct.productType)
         expect(productJsonToCsv.fetchReferences).toBeCalledWith(
@@ -268,7 +268,7 @@ describe('ProductJsonToCsv', () => {
         )
       })
 
-      it('return productType object', async () => {
+      test('return productType object', async () => {
         const expected = {
           productType: {
             id: 'product-type-id',
@@ -294,14 +294,14 @@ describe('ProductJsonToCsv', () => {
         )
       })
 
-      it('return empty object if no `taxCategory` reference', () => {
+      test('return empty object if no `taxCategory` reference', () => {
         delete sampleProduct.taxCategory
         expect(
           productJsonToCsv._resolveTaxCategory(sampleProduct.taxCategory)
         ).toEqual({})
       })
 
-      it('build correct request uri for taxCategory', async () => {
+      test('build correct request uri for taxCategory', async () => {
         const expected = /project-key\/tax-categories\/tax-cat-id/
         await productJsonToCsv._resolveTaxCategory(sampleProduct.taxCategory)
         expect(productJsonToCsv.fetchReferences).toBeCalledWith(
@@ -309,7 +309,7 @@ describe('ProductJsonToCsv', () => {
         )
       })
 
-      it('return resolved taxCategory object', async () => {
+      test('return resolved taxCategory object', async () => {
         const expected = {
           taxCategory: {
             id: 'tax-cat-id',
@@ -334,12 +334,12 @@ describe('ProductJsonToCsv', () => {
         )
       })
 
-      it('return empty object if no `state` reference', () => {
+      test('return empty object if no `state` reference', () => {
         delete sampleProduct.state
         expect(productJsonToCsv._resolveState(sampleProduct.state)).toEqual({})
       })
 
-      it('build correct request uri for state', async () => {
+      test('build correct request uri for state', async () => {
         const expected = /project-key\/states\/state-id/
         await productJsonToCsv._resolveState(sampleProduct.state)
         expect(productJsonToCsv.fetchReferences).toBeCalledWith(
@@ -347,7 +347,7 @@ describe('ProductJsonToCsv', () => {
         )
       })
 
-      it('return resolved state object', async () => {
+      test('return resolved state object', async () => {
         const expected = {
           state: {
             id: 'state-id',
@@ -365,14 +365,14 @@ describe('ProductJsonToCsv', () => {
         productJsonToCsv._getCategories = jest.fn(() => Promise.resolve([]))
       })
 
-      it('return empty object if no array of `categories`', () => {
+      test('return empty object if no array of `categories`', () => {
         delete sampleProduct.categories
         expect(
           productJsonToCsv._resolveCategories(sampleProduct.categories)
         ).toEqual({})
       })
 
-      it('return resolved category objects as array', async () => {
+      test('return resolved category objects as array', async () => {
         const resolvedCategories = [
           { id: 'cat-id-1', name: { en: 'res-cat-name-1' } },
           { id: 'cat-id-2', name: { en: 'res-cat-name-2' } },
@@ -397,7 +397,7 @@ describe('ProductJsonToCsv', () => {
         productJsonToCsv._getCategories = jest.fn(() => Promise.resolve([]))
       })
 
-      it('return empty object if no `categoryOrderHints`', () => {
+      test('return empty object if no `categoryOrderHints`', () => {
         delete sampleProduct.categoryOrderHints
         expect(
           productJsonToCsv._resolveCategoryOrderHints(
@@ -406,7 +406,7 @@ describe('ProductJsonToCsv', () => {
         ).toEqual({})
       })
 
-      it('return empty object if `categoryOrderHints` is empty', () => {
+      test('return empty object if `categoryOrderHints` is empty', () => {
         sampleProduct.categoryOrderHints = {}
         expect(
           productJsonToCsv._resolveCategoryOrderHints(
@@ -415,7 +415,7 @@ describe('ProductJsonToCsv', () => {
         ).toEqual({})
       })
 
-      it('return category name for `categoryOrderHints`', async () => {
+      test('return category name for `categoryOrderHints`', async () => {
         const resolvedCategories = [
           { id: 'cat-id-1', name: { en: 'res-cat-name-1' } },
           { id: 'cat-id-2', name: { en: 'res-cat-name-2' } },
@@ -436,7 +436,7 @@ describe('ProductJsonToCsv', () => {
         ).resolves.toEqual(expected)
       })
 
-      it('return category keys if specified', async () => {
+      test('return category keys if specified', async () => {
         productJsonToCsv.parserConfig.categoryOrderHintBy = 'key'
         const resolvedCategories = [
           { id: 'cat-id-1', key: 'res-cat-key-1' },
@@ -458,7 +458,7 @@ describe('ProductJsonToCsv', () => {
         ).resolves.toEqual(expected)
       })
 
-      it('return externalIds if specified', async () => {
+      test('return externalIds if specified', async () => {
         productJsonToCsv.parserConfig.categoryOrderHintBy = 'externalId'
         const resolvedCategories = [
           { id: 'cat-id-1', externalId: 'res-cat-extId-1' },
@@ -496,7 +496,7 @@ describe('ProductJsonToCsv', () => {
         )
       })
 
-      it('return category from cache if it exists', async () => {
+      test('return category from cache if it exists', async () => {
         const expected = [{ id: 'cat-id-1', key: 'cat-key-1-in-cache' }]
         const categoryId = ['cat-id-1']
         await expect(
@@ -505,7 +505,7 @@ describe('ProductJsonToCsv', () => {
         expect(productJsonToCsv.fetchReferences).not.toBeCalled()
       })
 
-      it('fetch only data not in cache from API', async () => {
+      test('fetch only data not in cache from API', async () => {
         const expectedCategories = [
           {
             id: 'cat-id-1',
@@ -526,7 +526,7 @@ describe('ProductJsonToCsv', () => {
         )
       })
 
-      it('save fetched categories in cache', async () => {
+      test('save fetched categories in cache', async () => {
         const expectedCache = {
           'cat-id-1': {
             id: 'cat-id-1',
@@ -559,7 +559,7 @@ describe('ProductJsonToCsv', () => {
         name: { en: 'grand-parent-cat-name' },
       }
 
-      it('resolves all ancestors for a category', async () => {
+      test('resolves all ancestors for a category', async () => {
         productJsonToCsv._getCategories = jest
           .fn()
           .mockImplementationOnce(() => Promise.resolve([parent]))
@@ -595,7 +595,7 @@ describe('ProductJsonToCsv', () => {
     beforeEach(() => {
       productJsonToCsv.client.execute = jest.fn()
     })
-    it('should fetch reference from API from url', () => {
+    test('should fetch reference from API from url', () => {
       const uri = 'dummy-uri'
       const expectedRequest = {
         uri,
@@ -608,7 +608,7 @@ describe('ProductJsonToCsv', () => {
       expect(productJsonToCsv.client.execute).toBeCalledWith(expectedRequest)
     })
 
-    it('should fetch only once for multiple calls with same parameter', () => {
+    test('should fetch only once for multiple calls with same parameter', () => {
       const uri = 'dummy-uri-2'
       const expectedRequest = {
         uri,

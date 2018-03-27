@@ -3,7 +3,7 @@ import { stripIndent } from 'common-tags'
 import InventoryExporter from '../src/main'
 
 describe('InventoryExporter', () => {
-  it('should initialize with defaults', () => {
+  test('should initialize with defaults', () => {
     const apiConfig = {
       projectKey: 'foo',
     }
@@ -12,7 +12,7 @@ describe('InventoryExporter', () => {
     expect(inventoryExporter.client).toBeDefined()
     expect(inventoryExporter.exportConfig).toBeDefined()
   })
-  it('should extend logger object', () => {
+  test('should extend logger object', () => {
     const apiConfig = {
       projectKey: 'foo',
     }
@@ -42,7 +42,7 @@ describe('InventoryExporter', () => {
     inventoryExporter = new InventoryExporter(apiConfig, logger)
   })
   describe('::_fetchInventories', () => {
-    it('should resolve channel key if present', () => {
+    test('should resolve channel key if present', () => {
       const channelKey = 'qw84'
       inventoryExporter.exportConfig.channelKey = channelKey
       inventoryExporter._resolveChannelKey = jest.fn(() => Promise.resolve())
@@ -56,7 +56,7 @@ describe('InventoryExporter', () => {
       })
     })
 
-    it('should not resolve channel key if not present', () => {
+    test('should not resolve channel key if not present', () => {
       inventoryExporter._resolveChannelKey = jest.fn(() => Promise.resolve())
       inventoryExporter._makeRequest = jest.fn(() => Promise.resolve())
       return inventoryExporter._fetchInventories().then(() => {
@@ -82,7 +82,7 @@ describe('InventoryExporter', () => {
     afterEach(() => {
       InventoryExporter._writeEachInventory.mockRestore()
     })
-    it('should fetch inventories using the process method', () => {
+    test('should fetch inventories using the process method', () => {
       inventoryExporter.client.process = processMock
       return inventoryExporter._makeRequest().then(() => {
         expect(processMock).toHaveBeenCalledTimes(1)
@@ -97,7 +97,7 @@ describe('InventoryExporter', () => {
         expect(InventoryExporter._writeEachInventory).toHaveBeenCalledTimes(1)
       })
     })
-    it('should add accessToken to request if present', () => {
+    test('should add accessToken to request if present', () => {
       inventoryExporter.accessToken = '12345'
       inventoryExporter.client.process = processMock
       return inventoryExporter._makeRequest().then(() => {
@@ -112,7 +112,7 @@ describe('InventoryExporter', () => {
         expect(InventoryExporter._writeEachInventory).toHaveBeenCalledTimes(1)
       })
     })
-    it('should add channelid and queryString to request if present', () => {
+    test('should add channelid and queryString to request if present', () => {
       inventoryExporter.accessToken = '12345'
       const channelId = '1234567qwertyuxcv'
       inventoryExporter.exportConfig.queryString = 'descript="lovely"'
@@ -135,7 +135,7 @@ describe('InventoryExporter', () => {
 
   describe('::run', () => {
     beforeEach(() => {})
-    it('should fetch inventories and output csv to stream', done => {
+    test('should fetch inventories and output csv to stream', done => {
       inventoryExporter.exportConfig.format = 'csv'
       const sampleInventory = {
         sku: 'hello',
@@ -161,7 +161,7 @@ describe('InventoryExporter', () => {
       inventoryExporter.run(outputStream)
     })
 
-    it('should emit error if it occurs when streaming to csv', done => {
+    test('should emit error if it occurs when streaming to csv', done => {
       inventoryExporter.exportConfig.format = 'csv'
       const spy = jest
         .spyOn(inventoryExporter, '_fetchInventories')
@@ -176,7 +176,7 @@ describe('InventoryExporter', () => {
       inventoryExporter.run(outputStream)
     })
 
-    it('should emit error if it occurs when streaming to json', done => {
+    test('should emit error if it occurs when streaming to json', done => {
       inventoryExporter.exportConfig.format = 'json'
       const spy = jest
         .spyOn(inventoryExporter, '_fetchInventories')
@@ -191,7 +191,7 @@ describe('InventoryExporter', () => {
       inventoryExporter.run(outputStream)
     })
 
-    it('should fetch inventories and output json as default', done => {
+    test('should fetch inventories and output json as default', done => {
       const sampleInventory = {
         sku: 'hello',
         quantityOnStock: 'me',
@@ -214,7 +214,7 @@ describe('InventoryExporter', () => {
     })
   })
   describe('::_writeEachInventory', () => {
-    it('should loop over inventories and write to stream', () => {
+    test('should loop over inventories and write to stream', () => {
       const csvWriteMock = jest.fn()
       const csvStreamMock = {
         write: csvWriteMock,
@@ -224,7 +224,7 @@ describe('InventoryExporter', () => {
     })
   })
   describe('::inventoryMappings', () => {
-    it('should export basic inventory object', () => {
+    test('should export basic inventory object', () => {
       const inventory = {
         sku: 'qwert',
         quantityOnStock: 30,
@@ -234,7 +234,7 @@ describe('InventoryExporter', () => {
       expect(result).toEqual(expectedResult)
     })
 
-    it('should add other fields if present', () => {
+    test('should add other fields if present', () => {
       const inventory = {
         sku: 'qwert',
         quantityOnStock: 30,
@@ -254,7 +254,7 @@ describe('InventoryExporter', () => {
       expect(result).toEqual(expectedResult)
     })
 
-    it('should add customFields if present', () => {
+    test('should add customFields if present', () => {
       const inventory = {
         sku: 'qwert',
         quantityOnStock: 30,
@@ -290,7 +290,7 @@ describe('InventoryExporter', () => {
     })
   })
   describe('::resolveChannelKey', () => {
-    it('should resolve channel key from the API and return id', () => {
+    test('should resolve channel key from the API and return id', () => {
       const channelKey = 'foobar'
       const expectedChannelId = '12345678sdfghj'
       const mockResult = {
@@ -310,7 +310,7 @@ describe('InventoryExporter', () => {
       })
     })
 
-    it('should resolve channel key from the API using token', () => {
+    test('should resolve channel key from the API using token', () => {
       const channelKey = 'foobar'
       const expectedChannelId = '12345678sdfghj'
       const mockResult = {
@@ -338,7 +338,7 @@ describe('InventoryExporter', () => {
       })
     })
 
-    it('should reject if channel key is not found', () => {
+    test('should reject if channel key is not found', () => {
       const channelKey = 'foobar'
       const mockResult = {
         body: {

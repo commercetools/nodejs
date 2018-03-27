@@ -38,7 +38,10 @@ function isCreateAction(obj, key) {
  *   false otherwise
  */
 function isChangeAction(obj, key) {
-  return REGEX_NUMBER.test(key) && typeof obj[key] === 'object'
+  return (
+    REGEX_NUMBER.test(key) &&
+    (typeof obj[key] === 'object' || typeof obj[key] === 'string')
+  )
 }
 
 /**
@@ -58,7 +61,7 @@ function isRemoveAction(obj, key) {
     REGEX_UNDERSCORE_NUMBER.test(key) &&
     Array.isArray(obj[key]) &&
     obj[key].length === 3 &&
-    typeof obj[key][0] === 'object' &&
+    (typeof obj[key][0] === 'object' || typeof obj[key][0] === 'string') &&
     obj[key][1] === 0 &&
     obj[key][2] === 0
   )
