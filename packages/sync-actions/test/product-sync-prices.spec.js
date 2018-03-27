@@ -260,92 +260,90 @@ describe('Actions', () => {
       },
     }
 
-    describe('build actions', () => {
-      const shufflePrices = array =>
-        array.reduce(
-          (agg, val) =>
-            agg.splice(Math.floor(Math.random() * agg.length), 0, val) && agg,
-          []
-        )
+    const shufflePrices = array =>
+      array.reduce(
+        (agg, val) =>
+          agg.splice(Math.floor(Math.random() * agg.length), 0, val) && agg,
+        []
+      )
 
-      beforeEach(() => {
-        now.masterVariant.prices = shufflePrices(now.masterVariant.prices)
-        actions = productsSync.buildActions(now, before)
-      })
+    beforeEach(() => {
+      now.masterVariant.prices = shufflePrices(now.masterVariant.prices)
+      actions = productsSync.buildActions(now, before)
+    })
 
-      test('should build five update actions', () => {
-        expect(actions).toHaveLength(5)
-      })
+    test('should build five update actions', () => {
+      expect(actions).toHaveLength(5)
+    })
 
-      test('should build `changePrice` actions', () => {
-        expect(actions).toEqual(
-          expect.arrayContaining([
-            {
-              action: 'changePrice',
-              priceId: '111',
-              price: {
-                id: '111',
-                value: { currencyCode: 'EUR', centAmount: 4000 },
-                country: 'US',
-                customerGroup: { typeId: 'customer-group', id: 'cg1' },
-                channel: { typeId: 'channel', id: 'ch1' },
+    test('should build `changePrice` actions', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'changePrice',
+            priceId: '111',
+            price: {
+              id: '111',
+              value: { currencyCode: 'EUR', centAmount: 4000 },
+              country: 'US',
+              customerGroup: { typeId: 'customer-group', id: 'cg1' },
+              channel: { typeId: 'channel', id: 'ch1' },
+            },
+          },
+          {
+            action: 'changePrice',
+            priceId: '333',
+            price: {
+              id: '333',
+              value: { currencyCode: 'SEK', centAmount: 15000 },
+              country: 'US',
+              channel: { typeId: 'channel', id: 'ch1' },
+            },
+          },
+          {
+            action: 'changePrice',
+            priceId: '777',
+            price: {
+              id: '777',
+              value: { currencyCode: 'GBP', centAmount: 10000 },
+              country: 'UK',
+              validFrom: dateNow,
+              validUntil: twoWeeksFromNow,
+            },
+          },
+        ])
+      )
+    })
+
+    test('should build `removePrice` action', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'removePrice',
+            priceId: '666',
+          },
+        ])
+      )
+    })
+
+    test('should build `addPrice` action', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'addPrice',
+            price: {
+              value: {
+                currencyCode: 'GBP',
+                centAmount: 1000,
               },
+              country: 'US',
+              validFrom: twoWeeksFromNow,
+              validUntil: threeWeeksFromNow,
             },
-            {
-              action: 'changePrice',
-              priceId: '333',
-              price: {
-                id: '333',
-                value: { currencyCode: 'SEK', centAmount: 15000 },
-                country: 'US',
-                channel: { typeId: 'channel', id: 'ch1' },
-              },
-            },
-            {
-              action: 'changePrice',
-              priceId: '777',
-              price: {
-                id: '777',
-                value: { currencyCode: 'GBP', centAmount: 10000 },
-                country: 'UK',
-                validFrom: dateNow,
-                validUntil: twoWeeksFromNow,
-              },
-            },
-          ])
-        )
-      })
-
-      test('should build `removePrice` action', () => {
-        expect(actions).toEqual(
-          expect.arrayContaining([
-            {
-              action: 'removePrice',
-              priceId: '666',
-            },
-          ])
-        )
-      })
-
-      test('should build `addPrice` action', () => {
-        expect(actions).toEqual(
-          expect.arrayContaining([
-            {
-              action: 'addPrice',
-              price: {
-                value: {
-                  currencyCode: 'GBP',
-                  centAmount: 1000,
-                },
-                country: 'US',
-                validFrom: twoWeeksFromNow,
-                validUntil: threeWeeksFromNow,
-              },
-              variantId: 1,
-            },
-          ])
-        )
-      })
+            variantId: 1,
+          },
+        ])
+      )
     })
   })
 })
