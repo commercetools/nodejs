@@ -1,5 +1,5 @@
-import { exec } from 'child_process'
-import fs from 'fs'
+import { exec } from 'mz/child_process'
+import fs from 'mz/fs'
 import path from 'path'
 import streamtest from 'streamtest'
 import tmp from 'tmp'
@@ -14,166 +14,87 @@ describe('CSV and CLI Tests', () => {
   const samplesFolder = './packages/csv-parser-orders/test/data'
 
   describe('CLI basic functionality', () => {
-    test('should print usage information given the help flag', done => {
-      exec(`${binPath} --help`, (error, stdout, stderr) => {
-        expect(String(stdout)).toMatch(/help/)
-        expect(error && stderr).toBeFalsy()
-        done()
-      })
+    it('should print usage information given the help flag', async () => {
+      const stdout = await exec(`${binPath} --help`)
+      expect(stdout).toMatchSnapshot()
     })
 
-    test('should print the module version given the version flag', done => {
-      exec(`${binPath} --version`, (error, stdout, stderr) => {
-        expect(stdout).toBe(`${version}\n`)
-        expect(error && stderr).toBeFalsy()
-        done()
-      })
+    it('should print the module version given the version flag', async () => {
+      const [stdout] = await exec(`${binPath} --version`)
+      expect(stdout).toBe(`${version}\n`)
     })
 
-    test('should write output to file', done => {
+    it('should write output to file', async () => {
       const csvFilePath = path.join(samplesFolder, 'return-info-sample.csv')
       const jsonFilePath = tmp.fileSync().name
-      const expectedResult = [
-        {
-          orderNumber: '123',
-          returnInfo: [
-            {
-              returnTrackingId: 'aefa34fe',
-              _returnId: '1',
-              returnDate: '2016-11-01T08:01:19+0000',
-              items: [
-                {
-                  quantity: 4,
-                  lineItemId: '12ae',
-                  comment: 'yeah',
-                  shipmentState: 'Returned',
-                },
-                {
-                  quantity: 4,
-                  lineItemId: '12ae',
-                  comment: 'yeah',
-                  shipmentState: 'Returned',
-                },
-              ],
-            },
-            {
-              returnTrackingId: 'aefa34fe',
-              _returnId: '2',
-              returnDate: '2016-11-01T08:01:19+0000',
-              items: [
-                {
-                  quantity: 4,
-                  lineItemId: '12ae',
-                  comment: 'yeah',
-                  shipmentState: 'Unusable',
-                },
-              ],
-            },
-          ],
-        },
-        {
-          orderNumber: '124',
-          returnInfo: [
-            {
-              returnTrackingId: 'aefa34fe',
-              _returnId: '2',
-              returnDate: '2016-11-01T08:01:19+0000',
-              items: [
-                {
-                  quantity: 4,
-                  lineItemId: '12ae',
-                  comment: 'yeah',
-                  shipmentState: 'Unusable',
-                },
-              ],
-            },
-          ],
-        },
-      ]
 
-      exec(
-        `${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t returninfo`,
-        (cliError, stdout, stderr) => {
-          expect(cliError && stderr).toBeFalsy()
-
-          fs.readFile(jsonFilePath, { encoding: 'utf8' }, (error, data) => {
-            expect(error).toBeFalsy()
-            expect(JSON.parse(data)).toEqual(expectedResult)
-            done()
-          })
-        }
+      await exec(
+        `${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t returninfo`
       )
+
+      fs.readFile(jsonFilePath, { encoding: 'utf8' }).then(data => {
+        expect(JSON.parse(data)).toMatchSnapshot()
+      })
     })
   })
 
   describe('CLI logs specific errors', () => {
-    test('on faulty CSV format', done => {
+    it('on faulty CSV format', async () => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
       const jsonFilePath = tmp.fileSync().name
-
-      exec(
-        `${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t returninfo`,
-        (error, stdout, stderr) => {
-          expect(error.code).toBe(1)
-          expect(stdout).toBeFalsy()
-          expect(stderr.match(/Row length does not match headers/)).toBeTruthy()
-          done()
-        }
-      )
+      try {
+        await exec(
+          `${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t returninfo`
+        )
+      } catch (error) {
+        expect(error.code).toBe(1)
+        expect(String(error)).toMatch(/Row length does not match headers/)
+      }
     })
 
-    test('on missing return-info headers', done => {
+    it('on missing return-info headers', async () => {
       const csvFilePath = path.join(
         samplesFolder,
         'return-info-error2-sample.csv'
       )
       const jsonFilePath = tmp.fileSync().name
 
-      exec(
-        `${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t returninfo`,
-        (error, stdout, stderr) => {
-          expect(error.code).toBe(1)
-          expect(stdout).toBeFalsy()
-          expect(stderr).toMatch(/Required headers missing: 'orderNumber'/)
-          done()
-        }
-      )
+      try {
+        await exec(
+          `${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t returninfo`
+        )
+      } catch (error) {
+        expect(error.code).toBe(1)
+        expect(String(error)).toMatch(/Required headers missing: 'orderNumber'/)
+      }
     })
 
-    test('on missing line-item-state headers', done => {
+    it('on missing line-item-state headers', async () => {
       const csvFilePath = path.join(samplesFolder, 'return-info-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
-      exec(
-        `${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t lineitemstate`,
-        (error, stdout, stderr) => {
-          expect(error.code).toBe(1)
-          expect(stdout).toBeFalsy()
-          expect(stderr).toMatch(
-            /Required headers missing: 'fromState,toState'/
-          )
-          done()
-        }
-      )
+      try {
+        await exec(
+          `${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t lineitemstate`
+        )
+      } catch (error) {
+        expect(error.code).toBe(1)
+        expect(String(error)).toMatch(
+          /Required headers missing: 'fromState,toState'/
+        )
+      }
     })
 
-    test('stack trace on verbose level', done => {
+    it('stack trace on verbose level', async () => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
-
-      exec(
-        `${binPath} -i ${csvFilePath} --logLevel verbose -t returninfo`,
-        (error, stdout, stderr) => {
-          expect(error.code).toBe(1)
-          expect(stdout).toMatch('')
-          expect(stderr).toMatch(/ERR: Row length does not match headers/)
-          done()
-        }
-      )
+      expect(
+        exec(`${binPath} -i ${csvFilePath} --logLevel verbose -t returninfo`)
+      ).rejects.toThrowErrorMatchingSnapshot()
     })
   })
 
   describe('parses CSV to JSON', () => {
-    test('should parse return-info CSV into JSON', done => {
+    it('should parse return-info CSV into JSON', done => {
       const csvFilePath = path.join(samplesFolder, 'return-info-sample.csv')
       const csvParserOrder = new AddReturnInfoCsvParser()
       const inputStream = fs.createReadStream(csvFilePath)
@@ -195,7 +116,7 @@ describe('CSV and CLI Tests', () => {
       csvParserOrder.parse(inputStream, outputStream)
     })
 
-    test('should parse line-item-state CSV into JSON', done => {
+    it('should parse line-item-state CSV into JSON', done => {
       const csvFilePath = path.join(samplesFolder, 'lineitemstate-sample.csv')
       const csvParserOrder = new LineItemStateCsvParser()
       const inputStream = fs.createReadStream(csvFilePath)
@@ -217,81 +138,52 @@ describe('CSV and CLI Tests', () => {
       csvParserOrder.parse(inputStream, outputStream)
     })
 
-    test('CLI accepts deliveries csv type', done => {
+    it('CLI accepts deliveries csv type', async () => {
       const csvFilePath = path.join(
         samplesFolder,
         'deliveries/delivery-simple.csv'
       )
-      exec(
-        `${binPath} -t deliveries --inputFile ${csvFilePath}`,
-        (error, stdout, stderr) => {
-          const expectedOutput = [
-            {
-              orderNumber: '222',
-              shippingInfo: {
-                deliveries: [
-                  {
-                    id: '1',
-                    items: [
-                      {
-                        id: '1',
-                        quantity: 100,
-                      },
-                    ],
-                  },
-                ],
-              },
-            },
-          ]
-
-          expect(error && stderr).toBeFalsy()
-          expect(JSON.parse(stdout)).toEqual(expectedOutput)
-          done()
-        }
+      const stdout = await exec(
+        `${binPath} -t deliveries --inputFile ${csvFilePath}`
       )
+      expect(stdout).toMatchSnapshot()
     })
 
-    test('CLI should log to file when using stdout for data output', done => {
+    it('CLI should log to file when using stdout for data output', async () => {
       const tmpFile = tmp.fileSync()
       const csvFilePath = path.join(
         samplesFolder,
         'deliveries/delivery-simple.csv'
       )
-      // eslint-disable-next-line max-len
-      exec(
+
+      await exec(
         `${binPath} -t deliveries --inputFile ${csvFilePath} --logFile ${
           tmpFile.name
-        }`,
-        () => {
-          fs.readFile(tmpFile.name, { encoding: 'utf8' }, (error, data) => {
-            expect(data).toMatch(/info Starting Deliveries CSV conversion/)
-            tmpFile.removeCallback()
-            done()
-          })
-        }
+        }`
       )
+
+      fs.readFile(tmpFile.name, { encoding: 'utf8' }).then(data => {
+        expect(data).toMatchSnapshot()
+        tmpFile.removeCallback()
+      })
     })
 
-    test('CLI should log errors to stderr and log file', done => {
+    it('CLI should log errors to stderr and log file', async () => {
       const tmpFile = tmp.fileSync()
       const expectedError = 'Row length does not match headers'
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
-      // eslint-disable-next-line max-len
-      exec(
-        `${binPath} -t deliveries --inputFile ${csvFilePath} --logFile ${
-          tmpFile.name
-        }`,
-        (error, stdout, stderr) => {
-          expect(error).toBeTruthy()
-          expect(stderr).toMatch(expectedError)
 
-          fs.readFile(tmpFile.name, { encoding: 'utf8' }, (err, data) => {
-            expect(data).toContain(expectedError)
-            tmpFile.removeCallback()
-            done()
-          })
-        }
-      )
+      try {
+        await exec(
+          `${binPath} -t deliveries --inputFile ${csvFilePath} --logFile ${
+            tmpFile.name
+          }`
+        )
+      } catch (error) {
+        expect(error).toBeTruthy()
+        expect(String(error)).toMatch(expectedError)
+        tmpFile.removeCallback()
+      }
     })
   })
 })
