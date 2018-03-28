@@ -155,7 +155,7 @@ describe('StateImport', () => {
         })
       })
 
-      describe('when error occurs', () => {
+      describe('when rejects', () => {
         beforeEach(() => {
           stateImport._update.mockImplementationOnce(() =>
             Promise.reject(new Error('Invalid state'))
@@ -274,7 +274,7 @@ describe('StateImport', () => {
       expect(stateImport.client.execute).toHaveBeenCalled()
     })
 
-    describe('when no update actions', () => {
+    describe('without update actions', () => {
       test('should not call API', async () => {
         const result = await stateImport._update(states[1], currentState)
         expect(result).toEqual({ statusCode: 304 })
@@ -360,9 +360,9 @@ describe('StateImport', () => {
         test('should display correct report messages', () => {
           const report = stateImport.summaryReport()
           expect(report.reportMessage).toMatch(oneLine`
-              Summary: there were 5 successfully imported states
-              (3 were newly created, 2 were updated and 4 were unchanged).
-              4 errors occured (2 create errors and 2 update errors.)`)
+            Summary: there were 5 successfully imported states
+            (3 were newly created, 2 were updated and 4 were unchanged).
+            4 errors occured (2 create errors and 2 update errors.)`)
         })
       })
     })
