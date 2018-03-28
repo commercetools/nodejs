@@ -119,7 +119,7 @@ describe('Actions', () => {
       ],
     }
 
-    it('should build actions for prices', () => {
+    test('should build actions for prices', () => {
       const actions = productsSync.buildActions(now, before)
       expect(actions).toEqual([
         {
@@ -146,13 +146,13 @@ describe('Actions', () => {
       ])
     })
 
-    it('should not delete the discounted field from the original object', () => {
+    test('should not delete the discounted field from the original object', () => {
       expect('discounted' in before.masterVariant.prices[0]).toBeTruthy()
       expect('discounted' in now.masterVariant.prices[0]).toBeTruthy()
     })
   })
 
-  it('should not build actions if prices are not set', () => {
+  test('should not build actions if prices are not set', () => {
     const before = {
       id: '123-abc',
       masterVariant: { id: 1, prices: [] },

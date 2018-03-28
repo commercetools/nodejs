@@ -2,11 +2,11 @@ import inventorySyncFn, { actionGroups } from '../src/inventories'
 import { baseActionsList, referenceActionsList } from '../src/inventory-actions'
 
 describe('Exports', () => {
-  it('action group list', () => {
+  test('action group list', () => {
     expect(actionGroups).toEqual(['base', 'references'])
   })
 
-  it('correctly define base actions list', () => {
+  test('correctly define base actions list', () => {
     expect(baseActionsList).toEqual([
       {
         action: 'changeQuantity',
@@ -18,7 +18,7 @@ describe('Exports', () => {
     ])
   })
 
-  it('correctly define reference actions list', () => {
+  test('correctly define reference actions list', () => {
     expect(referenceActionsList).toEqual([
       { action: 'setSupplyChannel', key: 'supplyChannel' },
     ])
@@ -31,7 +31,7 @@ describe('Actions', () => {
     inventorySync = inventorySyncFn()
   })
 
-  it('should build `changeQuantity` action', () => {
+  test('should build `changeQuantity` action', () => {
     const before = {
       quantityOnStock: 1,
     }

@@ -8,7 +8,7 @@ describe('buildActions', () => {
     buildActions = createBuildActions(diffpatcher.diff, doMapActions)
   })
 
-  it('should build `setCustomType` action', () => {
+  test('should build `setCustomType` action', () => {
     const before = {
       custom: {
         type: {
@@ -36,7 +36,7 @@ describe('buildActions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `setCustomField` action', () => {
+  test('should build `setCustomField` action', () => {
     const before = {
       custom: {
         type: {
@@ -86,7 +86,7 @@ describe('buildActions', () => {
 
   describe('changing the custom type of a category', () => {
     describe('existing category has no `custom` object', () => {
-      it('should build `setCustomType` action with the new type', () => {
+      test('should build `setCustomType` action with the new type', () => {
         const before = {
           key: 'category-key',
         }
@@ -109,7 +109,7 @@ describe('buildActions', () => {
     })
 
     describe('existing category has an empty `custom` object', () => {
-      it('should build `setCustomType` action with the new type', () => {
+      test('should build `setCustomType` action with the new type', () => {
         const before = {
           key: 'category-key',
           custom: {},
@@ -134,7 +134,7 @@ describe('buildActions', () => {
 
     describe('existing category has a `custom` object', () => {
       describe('new category has no `custom` object', () => {
-        it('build `setCustomType` action to unset the `custom` type', () => {
+        test('build `setCustomType` action to unset the `custom` type', () => {
           const before = {
             key: 'category-key',
             custom: {
@@ -158,7 +158,7 @@ describe('buildActions', () => {
       })
 
       describe('new category has an empty `custom` object', () => {
-        it('build `setCustomType` action to unset the `custom` type', () => {
+        test('build `setCustomType` action to unset the `custom` type', () => {
           const before = {
             key: 'category-key',
             custom: {

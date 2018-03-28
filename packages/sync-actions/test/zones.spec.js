@@ -2,11 +2,11 @@ import zonesSyncFn, { actionGroups } from '../src/zones'
 import { baseActionsList } from '../src/zones-actions'
 
 describe('Exports', () => {
-  it('action group list', () => {
+  test('action group list', () => {
     expect(actionGroups).toEqual(['base', 'locations'])
   })
 
-  it('correctly define base actions list', () => {
+  test('correctly define base actions list', () => {
     expect(baseActionsList).toEqual([
       { action: 'changeName', key: 'name' },
       { action: 'setDescription', key: 'description' },
@@ -20,7 +20,7 @@ describe('Actions', () => {
     zonesSync = zonesSyncFn()
   })
 
-  it('should build `changeName` action', () => {
+  test('should build `changeName` action', () => {
     const before = {
       name: 'Europe',
     }
@@ -33,7 +33,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build `setDescription` action', () => {
+  test('should build `setDescription` action', () => {
     const before = {
       description: 'Zone for Europe',
     }
@@ -52,7 +52,7 @@ describe('Actions', () => {
   })
 
   describe('`addLocation`', () => {
-    it('should build `addLocation` action with one location', () => {
+    test('should build `addLocation` action with one location', () => {
       const before = { locations: [] }
       const now = { locations: [{ country: 'Spain' }] }
 
@@ -60,7 +60,7 @@ describe('Actions', () => {
       const expected = [{ action: 'addLocation', location: now.locations[0] }]
       expect(actual).toEqual(expected)
     })
-    it('should build `addLocation` action with two locations', () => {
+    test('should build `addLocation` action with two locations', () => {
       const before = { locations: [] }
       const now = { locations: [{ country: 'Spain' }, { country: 'Italy' }] }
 
@@ -74,7 +74,7 @@ describe('Actions', () => {
   })
 
   describe('`removeLocation`', () => {
-    it('should build `removeLocation` action removing one location', () => {
+    test('should build `removeLocation` action removing one location', () => {
       const before = { locations: [{ country: 'Spain' }, { country: 'Italy' }] }
       const now = { locations: [{ country: 'Spain' }] }
 
@@ -84,7 +84,7 @@ describe('Actions', () => {
       ]
       expect(actual).toEqual(expected)
     })
-    it('should build `removeLocation` action removing two locations', () => {
+    test('should build `removeLocation` action removing two locations', () => {
       const before = { locations: [{ country: 'Spain' }, { country: 'Italy' }] }
       const now = { locations: [] }
 
@@ -98,7 +98,7 @@ describe('Actions', () => {
   })
 
   describe('Swap locations (create one + delete one)', () => {
-    it('should build `removeLocation` and `addLocation`', () => {
+    test('should build `removeLocation` and `addLocation`', () => {
       const before = { locations: [{ country: 'Spain' }] }
       const now = { locations: [{ country: 'Italy' }] }
 
@@ -112,7 +112,7 @@ describe('Actions', () => {
   })
 
   describe('Multiple actions', () => {
-    it('should build multiple actions for required changes', () => {
+    test('should build multiple actions for required changes', () => {
       const before = {
         locations: [{ country: 'Spain' }, { country: 'France' }],
       }
@@ -135,7 +135,7 @@ describe('Actions', () => {
   })
 
   describe('Delete first locations', () => {
-    it('should build multiple actions for required changes', () => {
+    test('should build multiple actions for required changes', () => {
       const before = {
         locations: [
           { country: 'Spain' },
@@ -157,7 +157,7 @@ describe('Actions', () => {
   })
 
   describe('Delete multiple locations', () => {
-    it('should build multiple actions for required changes', () => {
+    test('should build multiple actions for required changes', () => {
       const before = {
         locations: [
           { country: 'Spain' },

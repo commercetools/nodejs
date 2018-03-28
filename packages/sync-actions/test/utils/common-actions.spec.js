@@ -38,7 +38,7 @@ describe('Common actions', () => {
       },
     ]
 
-    it('should build base actions', () => {
+    test('should build base actions', () => {
       const before = {
         name: { en: 'Foo' },
         description: undefined,
@@ -101,7 +101,7 @@ describe('Common actions', () => {
           })
         })
 
-        it('should build reference action', () => {
+        test('should build reference action', () => {
           expect(actions).toContainEqual({
             action: 'setTaxCategory',
             taxCategory: now.taxCategory,
@@ -128,7 +128,7 @@ describe('Common actions', () => {
           })
         })
 
-        it('should build reference action', () => {
+        test('should build reference action', () => {
           expect(actions).toContainEqual({
             action: 'setCustomerGroup',
             customerGroup: now.customerGroup,
@@ -155,7 +155,7 @@ describe('Common actions', () => {
           })
         })
 
-        it('should build reference action', () => {
+        test('should build reference action', () => {
           expect(actions).toContainEqual({ action: 'setSupplyChannel' })
         })
       })
@@ -185,7 +185,7 @@ describe('Common actions', () => {
           })
         })
 
-        it('should not build reference action', () => {
+        test('should not build reference action', () => {
           expect(actions).not.toContainEqual({ action: 'productType' })
         })
       })
@@ -216,7 +216,7 @@ describe('Common actions', () => {
           })
         })
 
-        it('should build reference action', () => {
+        test('should build reference action', () => {
           expect(actions).toContainEqual({
             action: 'transitionState',
             state: now.state,
@@ -253,7 +253,7 @@ describe('Common actions', () => {
           })
         })
 
-        it('should build reference action without expansion in action', () => {
+        test('should build reference action without expansion in action', () => {
           expect(actions).toContainEqual({
             action: 'transitionState',
             state: {

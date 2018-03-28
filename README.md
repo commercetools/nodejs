@@ -73,6 +73,7 @@ https://commercetools.github.io/nodejs/
 | [`price-exporter`](/packages/price-exporter) | [![price-exporter Version][price-exporter-icon]][price-exporter-version] | [![price-exporter Dependencies Status][price-exporter-dependencies-icon]][discount-code-importer-dependencies] |
 | [`product-exporter`](/packages/product-exporter) | [![product-exporter Version][product-exporter-icon]][product-exporter-version] | [![product-exporter Dependencies Status][product-exporter-dependencies-icon]][product-exporter-dependencies] |
 | [`product-json-to-csv`](/packages/product-json-to-csv) | [![product-json-to-csv Version][product-json-to-csv-icon]][product-json-to-csv-version] | [![product-json-to-csv Dependencies Status][product-json-to-csv-dependencies-icon]][product-json-to-csv-dependencies] |
+| [`state-importer`](/packages/state-importer) | [![state-importer Version][state-importer-icon]][state-importer-version] | [![state-importer Dependencies Status][state-importer-dependencies-icon]][state-importer-dependencies] |
 
 
 
@@ -126,6 +127,10 @@ https://commercetools.github.io/nodejs/
 [product-json-to-csv-icon]: https://img.shields.io/npm/v/@commercetools/product-json-to-csv.svg?style=flat-square
 [product-json-to-csv-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/product-json-to-csv
 [product-json-to-csv-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/product-json-to-csv&style=flat-square
+[state-importer-version]: https://www.npmjs.com/package/@commercetools/state-importer
+[state-importer-icon]: https://img.shields.io/npm/v/@commercetools/state-importer.svg?style=flat-square
+[state-importer-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/state-importer
+[state-importer-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/state-importer&style=flat-square
 [sync-actions-version]: https://www.npmjs.com/package/@commercetools/sync-actions
 [sync-actions-icon]: https://img.shields.io/npm/v/@commercetools/sync-actions.svg?style=flat-square
 [sync-actions-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/sync-actions

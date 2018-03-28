@@ -28,11 +28,11 @@ describe('DiscountCodeImporter', () => {
   })
 
   describe('::constructor', () => {
-    it('should be a function', () => {
+    test('should be a function', () => {
       expect(typeof DiscountCodeImport).toBe('function')
     })
 
-    it('should set default properties', () => {
+    test('should set default properties', () => {
       expect(codeImport.logger).toEqual(logger)
       expect(codeImport.client).toBeDefined()
       expect(codeImport.apiConfig).toBeDefined()
@@ -40,13 +40,13 @@ describe('DiscountCodeImporter', () => {
       expect(codeImport._summary).toBeDefined()
     })
 
-    it('should throw if no `apiConfig` in `options` parameter', () => {
+    test('should throw if no `apiConfig` in `options` parameter', () => {
       expect(() => new DiscountCodeImport({ foo: 'bar' })).toThrow(
         /The contructor must be passed an `apiConfig` object/
       )
     })
 
-    it('should throw if `batchSize` is more than 200', () => {
+    test('should throw if `batchSize` is more than 200', () => {
       expect(
         () =>
           new DiscountCodeImport(
@@ -61,11 +61,11 @@ describe('DiscountCodeImporter', () => {
   })
 
   describe('::processStream', () => {
-    it('should be defined', () => {
+    test('should be defined', () => {
       expect(codeImport.processStream).toBeDefined()
     })
 
-    it('should call callback when done', done => {
+    test('should call callback when done', done => {
       codeImport._processBatches = jest.fn()
       codeImport._processBatches.mockReturnValue(Promise.resolve())
       const myMockCallback = jest.fn(() => {
@@ -76,10 +76,10 @@ describe('DiscountCodeImporter', () => {
   })
 
   describe('::run', () => {
-    it('should be defined', () => {
+    test('should be defined', () => {
       expect(codeImport.run).toBeDefined()
     })
-    it('should return `_processBatches` and pass it the argument', async () => {
+    test('should return `_processBatches` and pass it the argument', async () => {
       codeImport._processBatches = jest.fn()
       codeImport._processBatches.mockReturnValue(Promise.resolve('bar'))
 
@@ -91,11 +91,11 @@ describe('DiscountCodeImporter', () => {
   })
 
   describe('::_buildPredicate', () => {
-    it('should be defined', () => {
+    test('should be defined', () => {
       expect(DiscountCodeImport._buildPredicate).toBeDefined()
     })
 
-    it('should build predicate with codes from array of code objects', () => {
+    test('should build predicate with codes from array of code objects', () => {
       const predicate = DiscountCodeImport._buildPredicate(codes)
       expect(predicate).toMatch(
         // eslint-disable-next-line max-len
@@ -105,11 +105,11 @@ describe('DiscountCodeImporter', () => {
   })
 
   describe('::_processBatches', () => {
-    it('should be defined', () => {
+    test('should be defined', () => {
       expect(codeImport._processBatches).toBeDefined()
     })
 
-    it('should process list of codes and call `_createOrUpdate`', async () => {
+    test('should process list of codes and call `_createOrUpdate`', async () => {
       const response = { body: { results: [codes[0]] } }
       codeImport.client.execute = jest.fn(() => Promise.resolve(response))
       codeImport._createOrUpdate = jest.fn()
@@ -121,7 +121,7 @@ describe('DiscountCodeImporter', () => {
       )
     })
 
-    it('should reject on error', async () => {
+    test('should reject on error', async () => {
       const errorSummary = new Error({
         error: 'some random error',
         summary: {
@@ -152,11 +152,11 @@ describe('DiscountCodeImporter', () => {
       codeImport._update = jest.fn(() => Promise.resolve())
     })
 
-    it('should be defined', () => {
+    test('should be defined', () => {
       expect(codeImport._createOrUpdate).toBeDefined()
     })
 
-    it('should call `_update` if code already exists', async () => {
+    test('should call `_update` if code already exists', async () => {
       await codeImport._createOrUpdate(codes, existingCodes)
       expect(codeImport._update).toHaveBeenCalledTimes(2)
       expect(codeImport._update).toHaveBeenCalledWith(
@@ -169,12 +169,12 @@ describe('DiscountCodeImporter', () => {
       )
     })
 
-    it('should resolve if code is updated', async () => {
+    test('should resolve if code is updated', async () => {
       await codeImport._createOrUpdate(codes, existingCodes)
       expect(codeImport._summary.updated).toBe(2)
     })
 
-    it('should resolve and do nothing when no update actions', async () => {
+    test('should resolve and do nothing when no update actions', async () => {
       codeImport._update.mockImplementation(() =>
         Promise.resolve({ statusCode: 304 })
       )
@@ -183,7 +183,7 @@ describe('DiscountCodeImporter', () => {
       expect(codeImport._summary.updated).toBe(0)
     })
 
-    it('should continue update on errors if `continueOnProblems`', async () => {
+    test('should continue update on errors if `continueOnProblems`', async () => {
       codeImport.continueOnProblems = true
       codeImport._update.mockImplementationOnce(() =>
         Promise.reject(new Error('First invalid code'))
@@ -200,7 +200,7 @@ describe('DiscountCodeImporter', () => {
       expect(codeImport._summary.errors[1]).toBe('Second invalid code')
     })
 
-    it('should reject by default and stop on update error', async () => {
+    test('should reject by default and stop on update error', async () => {
       codeImport._update.mockImplementation(() =>
         Promise.reject(new Error('Invalid code'))
       )
@@ -217,7 +217,7 @@ describe('DiscountCodeImporter', () => {
       }
     })
 
-    it('should call `_create` if code is unique', async () => {
+    test('should call `_create` if code is unique', async () => {
       await codeImport._createOrUpdate(codes, existingCodes)
       expect(codeImport._create).toHaveBeenCalledTimes(3)
       expect(codeImport._create).toHaveBeenCalledWith(codes[2])
@@ -225,12 +225,12 @@ describe('DiscountCodeImporter', () => {
       expect(codeImport._create).toHaveBeenCalledWith(codes[4])
     })
 
-    it('should resolve if code is created and imported', async () => {
+    test('should resolve if code is created and imported', async () => {
       await codeImport._createOrUpdate(codes, existingCodes)
       expect(codeImport._summary.created).toBe(3)
     })
 
-    it('should continue create on errors if `continueOnProblems`', async () => {
+    test('should continue create on errors if `continueOnProblems`', async () => {
       codeImport.continueOnProblems = true
       codeImport._create.mockImplementationOnce(() =>
         Promise.reject(new Error('First invalid code'))
@@ -251,7 +251,7 @@ describe('DiscountCodeImporter', () => {
       expect(codeImport._summary.errors[2]).toBe('Third invalid code')
     })
 
-    it('should reject by default and stop on create error', async () => {
+    test('should reject by default and stop on create error', async () => {
       codeImport._create.mockImplementation(() =>
         Promise.reject(new Error('Invalid new code'))
       )
@@ -272,18 +272,18 @@ describe('DiscountCodeImporter', () => {
   describe('::_update', () => {
     const currentCode = { ...codes[1], id: 'some_Id' }
 
-    it('should be defined', () => {
+    test('should be defined', () => {
       expect(codeImport._update).toBeDefined()
     })
 
-    it('should not call API if no update actions', async () => {
+    test('should not call API if no update actions', async () => {
       codeImport.client.execute = jest.fn(() => Promise.resolve())
       const result = await codeImport._update(codes[1], currentCode)
       expect(result).toEqual({ statusCode: 304 })
       expect(codeImport.client.execute).not.toHaveBeenCalled()
     })
 
-    it('should POST a discount code update', async () => {
+    test('should POST a discount code update', async () => {
       codeImport.client.execute = jest.fn(() => Promise.resolve())
       await codeImport._update(codes[2], currentCode)
       expect(codeImport.client.execute).toHaveBeenCalled()
@@ -291,11 +291,11 @@ describe('DiscountCodeImporter', () => {
   })
 
   describe('::_create', () => {
-    it('should be defined', () => {
+    test('should be defined', () => {
       expect(codeImport._create).toBeDefined()
     })
 
-    it('should POST a new discount code', async () => {
+    test('should POST a new discount code', async () => {
       codeImport.client.execute = jest.fn(() => Promise.resolve())
       await codeImport._create(codes[0], codes[1])
       expect(codeImport.client.execute).toHaveBeenCalled()
@@ -303,13 +303,13 @@ describe('DiscountCodeImporter', () => {
   })
 
   describe('::_createService', () => {
-    it('should be defined', () => {
+    test('should be defined', () => {
       expect(codeImport._createService).toBeDefined()
     })
   })
 
   describe('::_buildRequest', () => {
-    it('should build a `GET` request', () => {
+    test('should build a `GET` request', () => {
       const actual = codeImport._buildRequest('myUri/', 'GET')
       const expected = {
         uri: 'myUri/',
@@ -321,7 +321,7 @@ describe('DiscountCodeImporter', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('should build a `POST` request with body', () => {
+    test('should build a `POST` request with body', () => {
       const actual = codeImport._buildRequest('myUri/', 'GET', { foo: 'bar' })
       const expected = {
         uri: 'myUri/',
@@ -336,13 +336,13 @@ describe('DiscountCodeImporter', () => {
   })
 
   describe('::summaryReport', () => {
-    it('should be defined', () => {
+    test('should be defined', () => {
       const report = codeImport.summaryReport()
       expect(codeImport.summaryReport).toBeDefined()
       expect(Object.keys(report)).toEqual(['reportMessage', 'detailedSummary'])
     })
 
-    it('should display correct report messages', () => {
+    test('should display correct report messages', () => {
       let report
       report = codeImport.summaryReport()
       expect(report.reportMessage).toMatch(

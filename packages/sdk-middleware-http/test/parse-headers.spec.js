@@ -1,13 +1,13 @@
 import parseHeaders from '../src/parse-headers'
 
 describe('Parse headers', () => {
-  it('return headers for polyfill (node-fetch)', () => {
+  test('return headers for polyfill (node-fetch)', () => {
     const spy = jest.fn()
     parseHeaders({ raw: spy })
     expect(spy).toHaveBeenCalledTimes(1)
   })
 
-  it('return headers for polyfill (whatwg-fetch)', () => {
+  test('return headers for polyfill (whatwg-fetch)', () => {
     const spy = jest
       .fn()
       .mockImplementation(cb => cb(['application/json'], 'content-type'))
@@ -16,7 +16,7 @@ describe('Parse headers', () => {
     })
   })
 
-  it('patch fix for firefox', () => {
+  test('patch fix for firefox', () => {
     expect(parseHeaders({})).toEqual({})
   })
 })

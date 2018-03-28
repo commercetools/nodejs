@@ -29,7 +29,7 @@ describe('Logger', () => {
     console.log = originalConsoleLog
   })
 
-  it('log request / response', () => {
+  test('log request / response', () => {
     const request = createTestRequest({
       uri: '/foo/bar',
       headers: {

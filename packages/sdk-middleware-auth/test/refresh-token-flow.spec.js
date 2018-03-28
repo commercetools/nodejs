@@ -30,7 +30,7 @@ describe('Refresh Token Flow', () => {
   afterAll(() => {
     jest.unmock('../src/base-auth-flow')
   })
-  it('should call the base-auth-flow method with the right params', () =>
+  test('should call the base-auth-flow method with the right params', () =>
     new Promise((resolve, reject) => {
       authMiddlewareBase.mockImplementation((params, next) => {
         next(params) // makes it easy to test what was passed in

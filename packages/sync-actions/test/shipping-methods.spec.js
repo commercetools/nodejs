@@ -2,11 +2,11 @@ import shippingMethodsSyncFn, { actionGroups } from '../src/shipping-methods'
 import { baseActionsList } from '../src/shipping-methods-actions'
 
 describe('Exports', () => {
-  it('action group list', () => {
+  test('action group list', () => {
     expect(actionGroups).toEqual(['base', 'zoneRates'])
   })
 
-  it('correctly define base actions list', () => {
+  test('correctly define base actions list', () => {
     expect(baseActionsList).toEqual([
       { action: 'setKey', key: 'key' },
       { action: 'changeName', key: 'name' },
@@ -25,7 +25,7 @@ describe('Actions', () => {
   })
 
   describe('base', () => {
-    it('should build `setKey` action', () => {
+    test('should build `setKey` action', () => {
       const before = {
         key: 'Key 1',
       }
@@ -38,7 +38,7 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('should build `changeName` action', () => {
+    test('should build `changeName` action', () => {
       const before = {
         name: 'Shipping Method 1',
       }
@@ -56,7 +56,7 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('should build `setDescription` action', () => {
+    test('should build `setDescription` action', () => {
       const before = {
         description: 'Custom description',
       }
@@ -74,7 +74,7 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('should build `changeIsDefault` action', () => {
+    test('should build `changeIsDefault` action', () => {
       const before = {
         isDefault: true,
       }
@@ -92,7 +92,7 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('should build `setPredicate` action', () => {
+    test('should build `setPredicate` action', () => {
       const before = {
         predicate: 'id is defined',
       }
@@ -110,7 +110,7 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('should build `changeTaxCategory` action', () => {
+    test('should build `changeTaxCategory` action', () => {
       const before = { taxCategory: { typeId: 'taxCategory', id: 'id1' } }
       const now = { taxCategory: { typeId: 'taxCategory', id: 'id2' } }
 
@@ -123,7 +123,7 @@ describe('Actions', () => {
   })
 
   describe('`addZone`', () => {
-    it('should build `addZone` action with one zone', () => {
+    test('should build `addZone` action with one zone', () => {
       const before = {
         zoneRates: [{ zone: { typeId: 'zone', id: 'z1' } }],
       }
@@ -139,7 +139,7 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('should build `addZone` action with multiple zones', () => {
+    test('should build `addZone` action with multiple zones', () => {
       const before = {
         zoneRates: [{ zone: { typeId: 'zone', id: 'z1' } }],
       }
@@ -163,7 +163,7 @@ describe('Actions', () => {
   })
 
   describe('`removeZone`', () => {
-    it('should build `removeZone` removing the last zone item', () => {
+    test('should build `removeZone` removing the last zone item', () => {
       const before = {
         zoneRates: [
           { zone: { typeId: 'zone', id: 'z1' } },
@@ -181,7 +181,7 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('should build `removeZone` removing all existing zones', () => {
+    test('should build `removeZone` removing all existing zones', () => {
       const before = {
         zoneRates: [
           { zone: { typeId: 'zone', id: 'z1' } },
@@ -204,7 +204,7 @@ describe('Actions', () => {
   })
 
   describe('`addShippingRate`', () => {
-    it('should build `addShippingRate` action with one shipping rate', () => {
+    test('should build `addShippingRate` action with one shipping rate', () => {
       const before = {
         zoneRates: [
           {
@@ -235,7 +235,7 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('should build `addShippingRate` action with multiple shipping rate', () => {
+    test('should build `addShippingRate` action with multiple shipping rate', () => {
       const before = {
         zoneRates: [{ zone: { typeId: 'zone', id: 'z1' }, shippingRates: [] }],
       }
@@ -270,7 +270,7 @@ describe('Actions', () => {
   })
 
   describe('`removeShippingRate`', () => {
-    it('should build `removeShippingRate` removing one shippingRate', () => {
+    test('should build `removeShippingRate` removing one shippingRate', () => {
       const before = {
         zoneRates: [
           {
@@ -304,7 +304,7 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('should build `removeShippingRate` removing all existing zones', () => {
+    test('should build `removeShippingRate` removing all existing zones', () => {
       const before = {
         zoneRates: [
           {
@@ -343,7 +343,7 @@ describe('Actions', () => {
   })
 
   describe('Swap zones (create one + delete one)', () => {
-    it('should build `removeZone` and `addZone` when swaping zones', () => {
+    test('should build `removeZone` and `addZone` when swaping zones', () => {
       const before = {
         zoneRates: [
           { zone: { typeId: 'zone', id: 'z1' } },
@@ -373,7 +373,7 @@ describe('Actions', () => {
   })
 
   describe('Swap shippingRates (create one + delete one)', () => {
-    it('should build `removeShippingRate` and `addShippingRate` when swaping zones', () => {
+    test('should build `removeShippingRate` and `addShippingRate` when swaping zones', () => {
       const before = {
         zoneRates: [
           {
@@ -415,7 +415,7 @@ describe('Actions', () => {
   })
 
   describe('Multiple actions between zones and shippingRates', () => {
-    it('should build different actions for updating zones and shippingRates', () => {
+    test('should build different actions for updating zones and shippingRates', () => {
       const before = {
         zoneRates: [
           {
@@ -453,6 +453,56 @@ describe('Actions', () => {
           zone: before.zoneRates[0].zone,
         },
         { action: 'addZone', zone: now.zoneRates[1].zone },
+      ]
+      expect(actual).toEqual(expected)
+    })
+  })
+
+  describe('When adding a new zoneRate with zone and shippingRates (fixed rates)', () => {
+    it('should build different actions for adding zone and shippingRates', () => {
+      const before = {
+        zoneRates: [
+          {
+            zone: { typeId: 'zone', id: 'z1' },
+            shippingRates: [
+              { price: { currencyCode: 'EUR', centAmount: 1000 } },
+              { price: { currencyCode: 'USD', centAmount: 1000 } },
+            ],
+          },
+        ],
+      }
+      const now = {
+        zoneRates: [
+          {
+            zone: { typeId: 'zone', id: 'z1' },
+            shippingRates: [
+              { price: { currencyCode: 'EUR', centAmount: 1000 } },
+              { price: { currencyCode: 'USD', centAmount: 1000 } },
+            ],
+          },
+          {
+            zone: { typeId: 'zone 2', id: 'z2' },
+            shippingRates: [
+              { price: { currencyCode: 'EUR', centAmount: 1000 } },
+              { price: { currencyCode: 'USD', centAmount: 1000 } },
+            ],
+          },
+        ],
+      }
+
+      const actual = shippingMethodsSync.buildActions(now, before)
+      const expected = [
+        { action: 'addZone', zone: now.zoneRates[1].zone },
+        {
+          action: 'addShippingRate',
+          shippingRate: now.zoneRates[1].shippingRates[0],
+          zone: now.zoneRates[1].zone,
+        },
+        {
+          action: 'addShippingRate',
+          shippingRate: now.zoneRates[1].shippingRates[1],
+          zone: now.zoneRates[1].zone,
+        },
       ]
       expect(actual).toEqual(expected)
     })

@@ -42,12 +42,12 @@ const expectedServiceKeys = [
 ].sort()
 
 describe('createRequestBuilder', () => {
-  it('export initialized services when passed only projectKey', () => {
+  test('export initialized services when passed only projectKey', () => {
     const requestBuilder = createRequestBuilder({ projectKey: 'foo' })
     expect(Object.keys(requestBuilder).sort()).toEqual(expectedServiceKeys)
   })
 
-  it('export initialized services with custom services', () => {
+  test('export initialized services with custom services', () => {
     const requestBuilder = createRequestBuilder({
       projectKey: 'foo',
       customServices: {

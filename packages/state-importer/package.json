@@ -1,0 +1,40 @@
+{
+  "name": "@commercetools/state-importer",
+  "version": "1.0.0",
+  "description": "Import states to the commercetools platform",
+  "main": "lib/main.js",
+  "scripts": {
+    "build": "babel src --out-dir lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs/tree/master/packages/state-importer"
+  },
+  "homepage": "https://commercetools.github.io/nodejs/cli/state-importer.html",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "keywords": [
+    "commercetools",
+    "state",
+    "states",
+    "json",
+    "import",
+    "transition"
+  ],
+  "author": {
+    "name": "Williams Omayuku",
+    "email": "williams.omayuku@commercetools.de"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@commercetools/api-request-builder": "^3.7.1",
+    "@commercetools/sdk-client": "^1.5.5",
+    "@commercetools/sdk-middleware-auth": "^3.5.2",
+    "@commercetools/sdk-middleware-http": "^2.3.2",
+    "@commercetools/sdk-middleware-user-agent": "^1.2.7",
+    "@commercetools/sync-actions": "^1.22.1",
+    "bluebird": "^3.5.1"
+  },
+  "devDependencies": {
+    "common-tags": "1.7.2"
+  }
+}

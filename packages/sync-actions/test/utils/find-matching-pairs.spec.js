@@ -22,7 +22,7 @@ describe('findMatchingPairs', () => {
     newVariants = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }]
   })
 
-  it('should find matching pairs', () => {
+  test('should find matching pairs', () => {
     const actualResult = findMatchingPairs(diff, oldVariants, newVariants)
     const expectedResult = {
       _3: ['3', '0'],

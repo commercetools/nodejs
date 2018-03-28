@@ -6,20 +6,20 @@ import AddReturnInfoParser from '../src/parsers/add-return-info'
 
 describe('AddReturnInfoParser', () => {
   describe('::constructor', () => {
-    it('should initialize default values', () => {
+    test('should initialize default values', () => {
       const parser = new AddReturnInfoParser()
       // more of this test is in abstract-parser.spec.js
       expect(parser.moduleName).toEqual('returnInfo')
     })
 
-    it('should throw when options is invalid', () => {
+    test('should throw when options is invalid', () => {
       const initFunction = () => new AddReturnInfoParser(null)
       expect(initFunction).toThrow()
     })
   })
 
   describe('::parse', () => {
-    it('should accept a stream and output a stream', done => {
+    test('should accept a stream and output a stream', done => {
       const parser = new AddReturnInfoParser()
       const readStream = fs.createReadStream(
         path.join(__dirname, 'data/return-info-sample.csv')
@@ -93,7 +93,7 @@ describe('AddReturnInfoParser', () => {
       parser.parse(readStream, outputStream)
     })
 
-    it('should return error with missing headers', done => {
+    test('should return error with missing headers', done => {
       const mockErrorLog = jest.fn()
       const parser = new AddReturnInfoParser({
         logger: {
@@ -118,7 +118,7 @@ describe('AddReturnInfoParser', () => {
       parser.parse(readStream, outputStream)
     })
 
-    it('should return error with invalid csv', done => {
+    test('should return error with invalid csv', done => {
       const mockErrorLog = jest.fn()
       const parser = new AddReturnInfoParser({
         logger: {
@@ -141,7 +141,7 @@ describe('AddReturnInfoParser', () => {
   })
 
   describe('::_processData', () => {
-    it('should accept CSV object and output an order', done => {
+    test('should accept CSV object and output an order', done => {
       const parser = new AddReturnInfoParser()
       const mockOrder = {
         orderNumber: '123',
@@ -179,7 +179,7 @@ describe('AddReturnInfoParser', () => {
         .catch(done.fail)
     })
 
-    it('should return error because of missing headers', done => {
+    test('should return error because of missing headers', done => {
       const parser = new AddReturnInfoParser()
       const mockOrder = {
         quantity: '234',

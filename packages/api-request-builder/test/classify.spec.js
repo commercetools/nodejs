@@ -1,7 +1,7 @@
 import classify from '../src/classify'
 
 describe('classify', () => {
-  it('should freeze non-function property and make it non-enumerable', () => {
+  test('should freeze non-function property and make it non-enumerable', () => {
     const composed = classify({
       foo: 'bar',
       bar: { a: 1, b: 2 },

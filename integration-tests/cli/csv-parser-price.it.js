@@ -37,7 +37,7 @@ describe('CSV and CLI Tests', () => {
   )
 
   describe('CLI basic functionality', () => {
-    test('should print usage information given the help flag', done => {
+    it('should print usage information given the help flag', done => {
       exec(`${binPath} --help`, (error, stdout, stderr) => {
         expect(String(stdout)).toMatch(/help/)
         expect(error && stderr).toBeFalsy()
@@ -45,7 +45,7 @@ describe('CSV and CLI Tests', () => {
       })
     })
 
-    test('should print the module version given the version flag', done => {
+    it('should print the module version given the version flag', done => {
       exec(`${binPath} --version`, (error, stdout, stderr) => {
         expect(stdout).toBe(`${version}\n`)
         expect(error && stderr).toBeFalsy()
@@ -53,7 +53,7 @@ describe('CSV and CLI Tests', () => {
       })
     })
 
-    test('should write output to file', done => {
+    it('should write output to file', done => {
       const csvFilePath = path.join(samplesFolder, 'simple-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
@@ -74,7 +74,7 @@ describe('CSV and CLI Tests', () => {
   })
 
   describe('CLI logs specific errors', () => {
-    test('on faulty CSV format', done => {
+    it('on faulty CSV format', done => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
@@ -89,7 +89,7 @@ describe('CSV and CLI Tests', () => {
       )
     })
 
-    test('on parsing errors', done => {
+    it('on parsing errors', done => {
       const csvFilePath = path.join(samplesFolder, 'missing-type-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
@@ -104,7 +104,7 @@ describe('CSV and CLI Tests', () => {
       )
     })
 
-    test('stack trace on verbose level', done => {
+    it('stack trace on verbose level', done => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
 
       exec(
@@ -119,7 +119,7 @@ describe('CSV and CLI Tests', () => {
     })
 
     // eslint-disable-next-line max-len
-    test('should log messages to a log file and print a final error to stderr', done => {
+    it('should log messages to a log file and print a final error to stderr', done => {
       const tmpFile = tmp.fileSync()
       const expectedError = 'Row length does not match headers'
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
@@ -186,7 +186,7 @@ describe('CSV and CLI Tests', () => {
       )
     })
 
-    test('should take input from file', done => {
+    it('should take input from file', done => {
       const csvFilePath = path.join(samplesFolder, 'sample.csv')
       exec(
         `${binPath} -p ${projectKey} --inputFile ${csvFilePath}`,
@@ -198,7 +198,7 @@ describe('CSV and CLI Tests', () => {
       )
     })
 
-    test('CLI exits on type mapping errors', done => {
+    it('CLI exits on type mapping errors', done => {
       const csvFilePath = path.join(samplesFolder, 'wrong-type-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
@@ -213,7 +213,7 @@ describe('CSV and CLI Tests', () => {
       )
     })
 
-    test('should parse CSV into JSON with array of prices', done => {
+    it('should parse CSV into JSON with array of prices', done => {
       const csvFilePath = path.join(samplesFolder, 'sample.csv')
       const csvParserPrice = new CsvParserPrice({ apiConfig })
       const inputStream = fs.createReadStream(csvFilePath)

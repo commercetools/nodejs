@@ -14,7 +14,7 @@ describe('CSV and CLI Tests', () => {
   const samplesFolder = './packages/csv-parser-orders/test/data'
 
   describe('CLI basic functionality', () => {
-    test('should print usage information given the help flag', done => {
+    it('should print usage information given the help flag', done => {
       exec(`${binPath} --help`, (error, stdout, stderr) => {
         expect(String(stdout)).toMatch(/help/)
         expect(error && stderr).toBeFalsy()
@@ -22,7 +22,7 @@ describe('CSV and CLI Tests', () => {
       })
     })
 
-    test('should print the module version given the version flag', done => {
+    it('should print the module version given the version flag', done => {
       exec(`${binPath} --version`, (error, stdout, stderr) => {
         expect(stdout).toBe(`${version}\n`)
         expect(error && stderr).toBeFalsy()
@@ -30,7 +30,7 @@ describe('CSV and CLI Tests', () => {
       })
     })
 
-    test('should write output to file', done => {
+    it('should write output to file', done => {
       const csvFilePath = path.join(samplesFolder, 'return-info-sample.csv')
       const jsonFilePath = tmp.fileSync().name
       const expectedResult = [
@@ -107,7 +107,7 @@ describe('CSV and CLI Tests', () => {
   })
 
   describe('CLI logs specific errors', () => {
-    test('on faulty CSV format', done => {
+    it('on faulty CSV format', done => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
@@ -122,7 +122,7 @@ describe('CSV and CLI Tests', () => {
       )
     })
 
-    test('on missing return-info headers', done => {
+    it('on missing return-info headers', done => {
       const csvFilePath = path.join(
         samplesFolder,
         'return-info-error2-sample.csv'
@@ -140,7 +140,7 @@ describe('CSV and CLI Tests', () => {
       )
     })
 
-    test('on missing line-item-state headers', done => {
+    it('on missing line-item-state headers', done => {
       const csvFilePath = path.join(samplesFolder, 'return-info-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
@@ -157,7 +157,7 @@ describe('CSV and CLI Tests', () => {
       )
     })
 
-    test('stack trace on verbose level', done => {
+    it('stack trace on verbose level', done => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
 
       exec(
@@ -173,7 +173,7 @@ describe('CSV and CLI Tests', () => {
   })
 
   describe('parses CSV to JSON', () => {
-    test('should parse return-info CSV into JSON', done => {
+    it('should parse return-info CSV into JSON', done => {
       const csvFilePath = path.join(samplesFolder, 'return-info-sample.csv')
       const csvParserOrder = new AddReturnInfoCsvParser()
       const inputStream = fs.createReadStream(csvFilePath)
@@ -195,7 +195,7 @@ describe('CSV and CLI Tests', () => {
       csvParserOrder.parse(inputStream, outputStream)
     })
 
-    test('should parse line-item-state CSV into JSON', done => {
+    it('should parse line-item-state CSV into JSON', done => {
       const csvFilePath = path.join(samplesFolder, 'lineitemstate-sample.csv')
       const csvParserOrder = new LineItemStateCsvParser()
       const inputStream = fs.createReadStream(csvFilePath)
@@ -217,7 +217,7 @@ describe('CSV and CLI Tests', () => {
       csvParserOrder.parse(inputStream, outputStream)
     })
 
-    test('CLI accepts deliveries csv type', done => {
+    it('CLI accepts deliveries csv type', done => {
       const csvFilePath = path.join(
         samplesFolder,
         'deliveries/delivery-simple.csv'
@@ -251,7 +251,7 @@ describe('CSV and CLI Tests', () => {
       )
     })
 
-    test('CLI should log to file when using stdout for data output', done => {
+    it('CLI should log to file when using stdout for data output', done => {
       const tmpFile = tmp.fileSync()
       const csvFilePath = path.join(
         samplesFolder,
@@ -272,7 +272,7 @@ describe('CSV and CLI Tests', () => {
       )
     })
 
-    test('CLI should log errors to stderr and log file', done => {
+    it('CLI should log errors to stderr and log file', done => {
       const tmpFile = tmp.fileSync()
       const expectedError = 'Row length does not match headers'
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
