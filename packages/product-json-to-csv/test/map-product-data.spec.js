@@ -8,18 +8,18 @@ describe('::ProductMapping', () => {
   })
 
   describe('::constructor', () => {
-    it('should be defined', () => {
+    test('should be defined', () => {
       expect(productMapping.constructor).toBeDefined()
     })
 
-    it('should initialize with default values', () => {
+    test('should initialize with default values', () => {
       expect(productMapping.fillAllRows).toBe(false)
       expect(productMapping.categoryBy).toBe('name')
       expect(productMapping.lang).toBe('en')
       expect(productMapping.multiValDel).toBe(';')
     })
 
-    it('should initialize with passed in values', () => {
+    test('should initialize with passed in values', () => {
       const options = {
         fillAllRows: true,
         categoryBy: 'namedPath',
@@ -35,7 +35,7 @@ describe('::ProductMapping', () => {
   })
 
   describe('::run', () => {
-    it('should accept a product and return a formatted csv string', () => {
+    test('should accept a product and return a formatted csv string', () => {
       const sample = {
         id: '12345ab-id',
         key: 'product-key',
@@ -230,7 +230,7 @@ describe('::ProductMapping', () => {
   })
 
   describe('::mergeVariants', () => {
-    it('merge all variants in a product into one array', () => {
+    test('merge all variants in a product into one array', () => {
       const sampleProduct = {
         masterVariant: { id: 1 },
         variants: [{ id: 2 }, { id: 3 }],
@@ -254,7 +254,7 @@ describe('::ProductMapping', () => {
       ],
     }
 
-    it('spread product data for each variant if `fillAllRows`', () => {
+    test('spread product data for each variant if `fillAllRows`', () => {
       const expected = [
         {
           name: { en: 'my-fresh-product' },
@@ -276,7 +276,7 @@ describe('::ProductMapping', () => {
       expect(actual).toEqual(expected)
     })
 
-    it('spread product data for only one variant if no fillAllRows', () => {
+    test('spread product data for only one variant if no fillAllRows', () => {
       const expected = [
         {
           name: { en: 'my-fresh-product' },
@@ -296,7 +296,7 @@ describe('::ProductMapping', () => {
   })
 
   describe('::mapProperties', () => {
-    it('replaces resolved objects with strings', () => {
+    test('replaces resolved objects with strings', () => {
       const sample = {
         id: '12345ab-id',
         key: 'product-key',
@@ -383,7 +383,7 @@ describe('::ProductMapping', () => {
       expect(productMapping._mapProperties(sample)).toEqual(expected)
     })
 
-    it('add all attributes from productType to top level', () => {
+    test('add all attributes from productType to top level', () => {
       const sample = {
         id: '12345ab-id',
         key: 'product-key',
@@ -461,7 +461,7 @@ describe('::ProductMapping', () => {
       expect(productMapping._mapProperties(sample)).toEqual(expected)
     })
 
-    it('converts variant image array to strings', () => {
+    test('converts variant image array to strings', () => {
       const sample = {
         id: '12345ab-id',
         key: 'product-key',
@@ -509,7 +509,7 @@ describe('::ProductMapping', () => {
   })
 
   describe('::mapCategories', () => {
-    it('resolves categories to string by name', () => {
+    test('resolves categories to string by name', () => {
       const sampleCat = [
         {
           name: {
@@ -533,7 +533,7 @@ describe('::ProductMapping', () => {
       )
     })
 
-    it('resolves categories to string by externalId', () => {
+    test('resolves categories to string by externalId', () => {
       const sampleCat = [
         {
           name: {
@@ -557,7 +557,7 @@ describe('::ProductMapping', () => {
       )
     })
 
-    it('resolves categories to string by key', () => {
+    test('resolves categories to string by key', () => {
       const sampleCat = [
         {
           name: {
@@ -581,7 +581,7 @@ describe('::ProductMapping', () => {
       )
     })
 
-    it('resolves categories to string by `namedPath`', () => {
+    test('resolves categories to string by `namedPath`', () => {
       const sampleCat = [
         {
           name: {

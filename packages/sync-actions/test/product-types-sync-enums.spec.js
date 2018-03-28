@@ -48,7 +48,7 @@ describe('Actions', () => {
         // we get a change operation only here.
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `addPlainEnumValue` updateAction', () => {
+      test('should return `addPlainEnumValue` updateAction', () => {
         expect(updateActions).toEqual([
           {
             action: 'addPlainEnumValue',
@@ -94,7 +94,7 @@ describe('Actions', () => {
         })
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `removeEnumValues` updateAction', () => {
+      test('should return `removeEnumValues` updateAction', () => {
         expect(updateActions).toEqual([
           {
             action: 'removeEnumValues',
@@ -132,7 +132,7 @@ describe('Actions', () => {
         })
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `removeEnumValues` and `addPlainEnumValue` updateAction', () => {
+      test('should return `removeEnumValues` and `addPlainEnumValue` updateAction', () => {
         expect(updateActions).toEqual([
           {
             action: 'addPlainEnumValue',
@@ -185,7 +185,7 @@ describe('Actions', () => {
 
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `removeEnumValues` and `addPlainEnumValue` updateAction', () => {
+      test('should return `removeEnumValues` and `addPlainEnumValue` updateAction', () => {
         expect(updateActions).toEqual([
           {
             attributeName: 'enum',
@@ -231,7 +231,7 @@ describe('Actions', () => {
         })
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `changePlainEnumValueOrder` updateAction', () => {
+      test('should return `changePlainEnumValueOrder` updateAction', () => {
         expect(updateActions).toEqual([
           {
             action: 'changePlainEnumValueOrder',
@@ -265,7 +265,7 @@ describe('Actions', () => {
         })
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `changePlainEnumValueLabel` updateAction', () => {
+      test('should return `changePlainEnumValueLabel` updateAction', () => {
         expect(updateActions).toEqual([
           {
             action: 'changePlainEnumValueLabel',
@@ -306,7 +306,7 @@ describe('Actions', () => {
         // we get a change operation only here.
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `addLocalizedEnumValue` updateAction', () => {
+      test('should return `addLocalizedEnumValue` updateAction', () => {
         expect(updateActions).toEqual([
           {
             action: 'addLocalizedEnumValue',
@@ -361,7 +361,7 @@ describe('Actions', () => {
         })
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `removeEnumValues` updateAction', () => {
+      test('should return `removeEnumValues` updateAction', () => {
         expect(updateActions).toEqual([
           {
             action: 'removeEnumValues',
@@ -399,7 +399,7 @@ describe('Actions', () => {
         })
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `removeEnumValues` and `addLocalizedEnumValue` updateAction', () => {
+      test('should return `removeEnumValues` and `addLocalizedEnumValue` updateAction', () => {
         expect(updateActions).toEqual([
           {
             action: 'addLocalizedEnumValue',
@@ -452,7 +452,7 @@ describe('Actions', () => {
 
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `removeEnumValues` and `addLocalizedEnumValue` updateAction', () => {
+      test('should return `removeEnumValues` and `addLocalizedEnumValue` updateAction', () => {
         expect(updateActions).toEqual([
           {
             attributeName: 'lenum',
@@ -498,7 +498,7 @@ describe('Actions', () => {
         })
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `changeLocalizedEnumValueOrder` updateAction', () => {
+      test('should return `changeLocalizedEnumValueOrder` updateAction', () => {
         expect(updateActions).toEqual([
           {
             action: 'changeLocalizedEnumValueOrder',
@@ -532,7 +532,7 @@ describe('Actions', () => {
         })
         updateActions = productTypesSync.buildActions(now, before)
       })
-      it('should return `changeLocalizedEnumValueLabel` updateAction', () => {
+      test('should return `changeLocalizedEnumValueLabel` updateAction', () => {
         expect(updateActions).toEqual([
           {
             action: 'changeLocalizedEnumValueLabel',

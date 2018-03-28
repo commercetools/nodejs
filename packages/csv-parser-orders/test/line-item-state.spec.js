@@ -12,19 +12,19 @@ describe('LineItemStateParser', () => {
   })
 
   describe('constructor', () => {
-    it('should initialize default values', () => {
+    test('should initialize default values', () => {
       // more of this test is in abstract-parser.spec.js
       expect(parser.moduleName).toEqual('lineItemState')
     })
 
-    it('should throw when options is invalid', () => {
+    test('should throw when options is invalid', () => {
       const initFunction = () => new LineItemStateParser(null)
       expect(initFunction).toThrow()
     })
   })
 
   describe('_processData', () => {
-    it('should transform CSV object into order', done => {
+    test('should transform CSV object into order', done => {
       const mockOrder = {
         orderNumber: '123',
         fromState: 'ordered',
@@ -45,7 +45,7 @@ describe('LineItemStateParser', () => {
       })
     })
 
-    it('should return an error if required headers are missing', done => {
+    test('should return an error if required headers are missing', done => {
       const mockOrder = {
         fromState: 'okay',
         toState: 'yeah',
@@ -67,7 +67,7 @@ describe('LineItemStateParser', () => {
     })
   })
 
-  it('should accept a stream and output a stream', done => {
+  test('should accept a stream and output a stream', done => {
     const readStream = fs.createReadStream(
       path.join(__dirname, 'data/lineitemstate-sample.csv')
     )
@@ -100,7 +100,7 @@ describe('LineItemStateParser', () => {
     parser.parse(readStream, output)
   })
 
-  it('should parse CSV with two lineItemStates from one order', done => {
+  test('should parse CSV with two lineItemStates from one order', done => {
     const readStream = fs.createReadStream(
       path.join(__dirname, 'data/lineitemstate-duplicate-ordernumber.csv')
     )

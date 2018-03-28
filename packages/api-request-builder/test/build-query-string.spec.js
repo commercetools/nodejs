@@ -1,13 +1,13 @@
 import buildQueryString from '../src/build-query-string'
 
 describe('buildQueryString', () => {
-  it('should throw if no argument is passed', () => {
+  test('should throw if no argument is passed', () => {
     expect(() => buildQueryString()).toThrowError(
       /Missing options object to build query string/
     )
   })
 
-  it('should build fully encoded query string', () => {
+  test('should build fully encoded query string', () => {
     const params = {
       expand: [
         encodeURIComponent('productType'),
@@ -96,7 +96,7 @@ describe('buildQueryString', () => {
     expect(buildQueryString(params)).toEqual(expectedQueryString)
   })
 
-  it('should build perPage with zero value', () => {
+  test('should build perPage with zero value', () => {
     const params = {
       pagination: {
         perPage: 0,
@@ -106,7 +106,7 @@ describe('buildQueryString', () => {
     expect(buildQueryString(params)).toEqual(expectedQueryString)
   })
 
-  it('should disable markMatchingVariants by default', () => {
+  test('should disable markMatchingVariants by default', () => {
     const params = {
       search: {
         facet: [

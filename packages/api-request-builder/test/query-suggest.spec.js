@@ -7,7 +7,7 @@ describe('querySuggest', () => {
     service = { params: { searchKeywords: [] }, ...querySuggest }
   })
 
-  it('should set the searchKeywords param', () => {
+  test('should set the searchKeywords param', () => {
     service.searchKeywords('Foo Bar', 'en')
     service.searchKeywords('Wir laufen', 'de')
     expect(service.params.searchKeywords).toEqual([
@@ -22,7 +22,7 @@ describe('querySuggest', () => {
     ])
   })
 
-  it('should throw if searchKeywords params are missing', () => {
+  test('should throw if searchKeywords params are missing', () => {
     expect(() => service.searchKeywords()).toThrowError(
       /Required arguments for `searchKeywords` are missing/
     )

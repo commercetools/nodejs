@@ -2,24 +2,24 @@ import productDiscountsSyncFn, { actionGroups } from '../src/product-discounts'
 import { baseActionsList } from '../src/product-discounts-actions'
 
 describe('Exports', () => {
-  it('action group list', () => {
+  test('action group list', () => {
     expect(actionGroups).toEqual(['base'])
   })
 
   describe('Exports', () => {
-    it('should contain `changeIsActive` action', () => {
+    test('should contain `changeIsActive` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'changeIsActive', key: 'isActive' }])
       )
     })
 
-    it('should contain `changeName` action', () => {
+    test('should contain `changeName` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'changeName', key: 'name' }])
       )
     })
 
-    it('should contain `changePredicate` action', () => {
+    test('should contain `changePredicate` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           {
@@ -30,7 +30,7 @@ describe('Exports', () => {
       )
     })
 
-    it('should contain `changeSortOrder` action', () => {
+    test('should contain `changeSortOrder` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           { action: 'changeSortOrder', key: 'sortOrder' },
@@ -38,13 +38,13 @@ describe('Exports', () => {
       )
     })
 
-    it('should contain `changeValue` action', () => {
+    test('should contain `changeValue` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'changeValue', key: 'value' }])
       )
     })
 
-    it('should contain `setDescription` action', () => {
+    test('should contain `setDescription` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
           {
@@ -55,13 +55,13 @@ describe('Exports', () => {
       )
     })
 
-    it('should contain `setValidFrom` action', () => {
+    test('should contain `setValidFrom` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'setValidFrom', key: 'validFrom' }])
       )
     })
 
-    it('should contain `setValidUntil` action', () => {
+    test('should contain `setValidUntil` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([{ action: 'setValidUntil', key: 'validUntil' }])
       )
@@ -75,7 +75,7 @@ describe('Actions', () => {
     productDiscountsSync = productDiscountsSyncFn()
   })
 
-  it('should build the `changeIsActive` action', () => {
+  test('should build the `changeIsActive` action', () => {
     const before = {
       isActive: false,
     }
@@ -94,7 +94,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build "changeName" action', () => {
+  test('should build "changeName" action', () => {
     const before = {
       name: { en: 'en-name-before', de: 'de-name-before' },
     }
@@ -113,7 +113,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `changePredicate` action', () => {
+  test('should build the `changePredicate` action', () => {
     const before = {
       predicate: '1=1',
     }
@@ -132,7 +132,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `changeSortOrder` action', () => {
+  test('should build the `changeSortOrder` action', () => {
     const before = {
       sortOrder: '0.1',
     }
@@ -151,7 +151,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `changeValue` action', () => {
+  test('should build the `changeValue` action', () => {
     const before = {
       value: {
         type: 'relative',
@@ -179,7 +179,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `setDescription` action', () => {
+  test('should build the `setDescription` action', () => {
     const before = {
       description: {
         en: 'en-description-before',
@@ -201,7 +201,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `setValidFrom` action', () => {
+  test('should build the `setValidFrom` action', () => {
     const before = {
       validFrom: 'date1',
     }
@@ -220,7 +220,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  it('should build the `setValidUntil` action', () => {
+  test('should build the `setValidUntil` action', () => {
     const before = {
       validUntil: 'date1',
     }

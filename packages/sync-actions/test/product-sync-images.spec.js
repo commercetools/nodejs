@@ -8,7 +8,7 @@ describe('Actions', () => {
   })
 
   describe('with matching variant order', () => {
-    it('should build actions for images', () => {
+    test('should build actions for images', () => {
       const before = {
         id: '123',
         masterVariant: {
@@ -168,7 +168,7 @@ describe('Actions', () => {
   })
 
   describe('with non-matching variant order', () => {
-    it('should detect image movement', () => {
+    test('should detect image movement', () => {
       const before = {
         key: 'foo-key',
         published: true,
@@ -322,7 +322,7 @@ describe('Actions', () => {
       ])
     })
 
-    it('should build actions for image removal', () => {
+    test('should build actions for image removal', () => {
       const before = {
         key: 'foo-key',
         published: true,
@@ -473,7 +473,7 @@ describe('Actions', () => {
   })
 
   describe('without images', () => {
-    it('should not build actions if images are not set', () => {
+    test('should not build actions if images are not set', () => {
       const before = {
         id: '123-abc',
         masterVariant: { id: 1, images: [] },
