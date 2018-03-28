@@ -457,4 +457,54 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
   })
+
+  describe('When adding a new zoneRate with zone and shippingRates (fixed rates)', () => {
+    it('should build different actions for adding zone and shippingRates', () => {
+      const before = {
+        zoneRates: [
+          {
+            zone: { typeId: 'zone', id: 'z1' },
+            shippingRates: [
+              { price: { currencyCode: 'EUR', centAmount: 1000 } },
+              { price: { currencyCode: 'USD', centAmount: 1000 } },
+            ],
+          },
+        ],
+      }
+      const now = {
+        zoneRates: [
+          {
+            zone: { typeId: 'zone', id: 'z1' },
+            shippingRates: [
+              { price: { currencyCode: 'EUR', centAmount: 1000 } },
+              { price: { currencyCode: 'USD', centAmount: 1000 } },
+            ],
+          },
+          {
+            zone: { typeId: 'zone 2', id: 'z2' },
+            shippingRates: [
+              { price: { currencyCode: 'EUR', centAmount: 1000 } },
+              { price: { currencyCode: 'USD', centAmount: 1000 } },
+            ],
+          },
+        ],
+      }
+
+      const actual = shippingMethodsSync.buildActions(now, before)
+      const expected = [
+        { action: 'addZone', zone: now.zoneRates[1].zone },
+        {
+          action: 'addShippingRate',
+          shippingRate: now.zoneRates[1].shippingRates[0],
+          zone: now.zoneRates[1].zone,
+        },
+        {
+          action: 'addShippingRate',
+          shippingRate: now.zoneRates[1].shippingRates[1],
+          zone: now.zoneRates[1].zone,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+  })
 })
