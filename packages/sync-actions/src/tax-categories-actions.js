@@ -30,18 +30,12 @@ export function actionsMapRates(diff, oldObj, newObj) {
       action: 'removeTaxRate',
       taxRateId: objectToRemove.id,
     }),
-    [CHANGE_ACTIONS]: (oldObject, updatedObject) =>
-      oldObject.id === updatedObject.id
-        ? {
-            action: 'replaceTaxRate',
-            taxRateId: oldObject.id,
-            taxRate: updatedObject,
-          }
-        : {
-            action: 'replaceTaxRate',
-            taxRateId: updatedObject.id,
-            taxRate: updatedObject,
-          },
+    [CHANGE_ACTIONS]: (oldObject, updatedObject) => ({
+      action: 'replaceTaxRate',
+      taxRateId:
+        oldObject.id === updatedObject.id ? oldObject.id : updatedObject.id,
+      taxRate: updatedObject,
+    }),
   })
 
   return handler(diff, oldObj, newObj)
