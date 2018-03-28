@@ -55,10 +55,19 @@ function actionsMapZoneRatesShippingRates(diff, oldObj, newObj) {
 
 export function actionsMapZoneRates(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('zoneRates', {
-    [ADD_ACTIONS]: newZoneRate => ({
-      action: 'addZone',
-      zone: newZoneRate.zone,
-    }),
+    [ADD_ACTIONS]: newZoneRate => [
+      {
+        action: 'addZone',
+        zone: newZoneRate.zone,
+      },
+      ...(newZoneRate.shippingRates
+        ? newZoneRate.shippingRates.map(shippingRate => ({
+            action: 'addShippingRate',
+            zone: newZoneRate.zone,
+            shippingRate,
+          }))
+        : []),
+    ],
     [REMOVE_ACTIONS]: oldZoneRate => ({
       action: 'removeZone',
       zone: oldZoneRate.zone,
