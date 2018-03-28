@@ -164,7 +164,6 @@ describe('CSV and CLI Tests', () => {
 
       fs.readFile(tmpFile.name, { encoding: 'utf8' }).then(data => {
         expect(data).toMatchSnapshot()
-        tmpFile.removeCallback()
       })
     })
 
@@ -182,7 +181,6 @@ describe('CSV and CLI Tests', () => {
       } catch (error) {
         expect(error).toBeTruthy()
         expect(String(error)).toMatch(expectedError)
-        tmpFile.removeCallback()
       }
     })
   })
