@@ -19,7 +19,7 @@
     "test:integration": "cross-env NODE_ENV=development jest --config integration-tests/.jestrc.json",
     "format": "prettier --write '{packages,integration-tests,types}/**/*.js'",
     "test:coverage": "npm run build && npm test -- --no-watchman --coverage",
-    "test:ci": "npm run test -- --no-watchman --maxWorkers=10",
+    "test:ci": "npm run test -- --ci --no-watchman --maxWorkers=10",
     "test:coverage:ci": "npm run test:ci -- --coverage && codecov",
     "release": "cross-env NODE_ENV=cli npm run build && lerna publish --registry=https://registry.npmjs.org/ && npm run docs:publish",
     "docs:clean": "rimraf _book",

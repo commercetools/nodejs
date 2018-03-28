@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CsvParserState ::parse when errors occur when continueOnProblems is true should skip rows with error 1`] = `
+Array [
+  Object {
+    "description": Object {
+      "en": "beschreibung",
+    },
+    "initial": "true",
+    "key": "state-key-1",
+    "name": Object {
+      "en": "Will's state",
+    },
+    "type": "OrderState",
+  },
+  Object {
+    "description": Object {
+      "en": "only used when some state is complete",
+    },
+    "initial": "false",
+    "key": "state-key-3",
+    "name": Object {
+      "en": "completion",
+    },
+    "type": "LineItemState",
+  },
+  Object {
+    "description": Object {
+      "en": "this state should be auto generated",
+    },
+    "initial": "true",
+    "key": "state-key-4",
+    "name": Object {
+      "en": "auto gen",
+    },
+    "type": "PaymentState",
+  },
+]
+`;
+
+exports[`CsvParserState ::parse when parsing is successful should output states as JSON 1`] = `
+Array [
+  Object {
+    "description": Object {
+      "en": "beschreibung",
+    },
+    "initial": "true",
+    "key": "state-key-1",
+    "name": Object {
+      "en": "Will's state",
+    },
+    "transitions": "",
+    "type": "OrderState",
+  },
+  Object {
+    "description": Object {
+      "en": "uniqueness of states",
+    },
+    "initial": "false",
+    "key": "state-key-2",
+    "name": Object {
+      "en": "tester",
+    },
+    "transitions": "some-other-state",
+    "type": "ProductState",
+  },
+  Object {
+    "description": Object {
+      "en": "only used when some state is complete",
+    },
+    "initial": "false",
+    "key": "state-key-3",
+    "name": Object {
+      "en": "completion",
+    },
+    "transitions": "",
+    "type": "LineItemState",
+  },
+  Object {
+    "description": Object {
+      "en": "this state should be auto generated",
+    },
+    "initial": "true",
+    "key": "state-key-4",
+    "name": Object {
+      "en": "auto gen",
+    },
+    "transitions": "",
+    "type": "PaymentState",
+  },
+]
+`;
+
+exports[`CsvParserState _transformTransitions with state transitions when execute resolves should resolve with modified state 1`] = `
+Object {
+  "key": "state-key",
+  "transitions": Array [
+    Object {
+      "id": "state-id-1",
+      "typeId": "state",
+    },
+    Object {
+      "id": "state-id-2",
+      "typeId": "state",
+    },
+  ],
+}
+`;

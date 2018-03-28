@@ -38,7 +38,11 @@ describe('CsvParserState', () => {
   })
 
   describe('::parse', () => {
+    let inputStream
     beforeEach(() => {
+      inputStream = fs.createReadStream(
+        path.join(__dirname, 'helpers/sampleStates.csv')
+      )
       jest
         .spyOn(CsvParserState, '_removeEmptyFields')
         .mockImplementation(data => data)
@@ -48,10 +52,6 @@ describe('CsvParserState', () => {
 
     describe('when parsing is successful', () => {
       test('should output states as JSON', done => {
-        const inputStream = fs.createReadStream(
-          path.join(__dirname, 'helpers/sampleStates.csv')
-        )
-
         const outputStream = streamtest.v2.toText((err, data) => {
           expect(csvParser.logger.info).toBeCalledWith('Starting conversion')
           expect(csvParser.logger.debug).toBeCalledWith(
@@ -61,7 +61,7 @@ describe('CsvParserState', () => {
           const result = JSON.parse(data)
           expect(result).toBeInstanceOf(Array)
           expect(result).toHaveLength(4)
-          // expect(result).toMatchSnapshot()
+          expect(result).toMatchSnapshot()
           done()
         })
         csvParser.parse(inputStream, outputStream)
@@ -80,10 +80,6 @@ describe('CsvParserState', () => {
         })
 
         test('should stop parsing on first error', done => {
-          const inputStream = fs.createReadStream(
-            path.join(__dirname, 'helpers/sampleStates.csv')
-          )
-
           const outputStream = streamtest.v2.toText((err, data) => {
             expect(data).toBeFalsy()
             expect(err).toEqual(myError)
@@ -108,10 +104,6 @@ describe('CsvParserState', () => {
         })
 
         test('should skip rows with error', done => {
-          const inputStream = fs.createReadStream(
-            path.join(__dirname, 'helpers/sampleStates.csv')
-          )
-
           const outputStream = streamtest.v2.toText((err, data) => {
             expect(err).toBeFalsy()
             const result = JSON.parse(data)
@@ -120,7 +112,7 @@ describe('CsvParserState', () => {
             expect(csvParser.logger.warn).toBeCalledWith(
               expect.stringMatching(/Ignoring error at row: 2/)
             )
-            // expect(result).toMatchSnapshot()
+            expect(result).toMatchSnapshot()
             done()
           })
           csvParser.parse(inputStream, outputStream)
@@ -130,7 +122,7 @@ describe('CsvParserState', () => {
   })
 
   describe('_transformTransitions', () => {
-    describe('without transitions', () => {
+    describe('without state transitions', () => {
       test('should not mutate state', async () => {
         const actual = {
           foo: 'bar',
@@ -140,7 +132,7 @@ describe('CsvParserState', () => {
       })
     })
 
-    describe('with transitions', () => {
+    describe('with state transitions', () => {
       const state = { key: 'state-key', transitions: ['state-1', 'state-2'] }
       describe('when execute resolves', () => {
         beforeEach(() => {
@@ -166,19 +158,9 @@ describe('CsvParserState', () => {
         })
 
         test('should resolve with modified state', () => {
-          expect(csvParser._transformTransitions(state)).resolves.toEqual({
-            key: 'state-key',
-            transitions: [
-              {
-                id: 'state-id-1',
-                typeId: 'state',
-              },
-              {
-                id: 'state-id-2',
-                typeId: 'state',
-              },
-            ],
-          })
+          expect(
+            csvParser._transformTransitions(state)
+          ).resolves.toMatchSnapshot()
         })
       })
 
