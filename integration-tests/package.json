@@ -22,6 +22,7 @@
     "@commercetools/sdk-middleware-logger": "*",
     "@commercetools/sdk-middleware-queue": "*",
     "@commercetools/sdk-middleware-user-agent": "*",
+    "@commercetools/state-importer": "*",
     "@commercetools/sync-actions": "*",
     "bluebird": "^3.5.0",
     "common-tags": "^1.4.0",
