@@ -5,10 +5,10 @@ import CsvParserState from '../src/main'
 
 describe('CsvParserState', () => {
   const logger = {
-    error: () => {},
-    warn: () => {},
-    info: () => {},
-    debug: () => {},
+    error: jest.fn(),
+    warn: jest.fn(),
+    info: jest.fn(),
+    debug: jest.fn(),
   }
 
   let csvParser
@@ -24,6 +24,11 @@ describe('CsvParserState', () => {
     )
   })
 
+  afterEach(() => {
+    jest.clearAllMocks()
+    jest.restoreAllMocks()
+  })
+
   describe('::constructor', () => {
     test('should set default properties', () => {
       expect(csvParser.csvConfig.delimiter).toBe(',')
@@ -32,20 +37,95 @@ describe('CsvParserState', () => {
     })
   })
 
-  xdescribe('::parse', () => {
-    test('should successfully parse CSV to JSON', done => {
-      const inputStream = fs.createReadStream(
-        path.join(__dirname, 'helpers/sampleStates.csv')
-      )
+  describe('::parse', () => {
+    beforeEach(() => {
+      jest
+        .spyOn(CsvParserState, '_removeEmptyFields')
+        .mockImplementation(data => data)
+      csvParser._mapTransitionsToArray = jest.fn(data => data)
+      csvParser._transformTransitions = jest.fn(data => Promise.resolve(data))
+    })
 
-      const outputStream = streamtest.v2.toText((err, data) => {
-        const result = JSON.parse(data)
-        expect(result).toBeInstanceOf(Array)
-        expect(result).toHaveLength(4)
-        console.log(data)
-        done()
+    describe('when parsing is successful', () => {
+      test('should output states as JSON', done => {
+        const inputStream = fs.createReadStream(
+          path.join(__dirname, 'helpers/sampleStates.csv')
+        )
+
+        const outputStream = streamtest.v2.toText((err, data) => {
+          expect(csvParser.logger.info).toBeCalledWith('Starting conversion')
+          expect(csvParser.logger.debug).toBeCalledWith(
+            expect.stringMatching(/Successfully parsed/)
+          )
+          expect(err).toBeFalsy()
+          const result = JSON.parse(data)
+          expect(result).toBeInstanceOf(Array)
+          expect(result).toHaveLength(4)
+          // expect(result).toMatchSnapshot()
+          done()
+        })
+        csvParser.parse(inputStream, outputStream)
       })
-      csvParser.parse(inputStream, outputStream)
+    })
+
+    describe('when errors occur', () => {
+      const myError = new Error('parse error')
+      describe('when continueOnProblems is false', () => {
+        beforeEach(() => {
+          // Fail on parsing of second state
+          csvParser._transformTransitions = jest
+            .fn()
+            .mockImplementationOnce(data => Promise.resolve(data))
+            .mockImplementationOnce(() => Promise.reject(myError))
+        })
+
+        test('should stop parsing on first error', done => {
+          const inputStream = fs.createReadStream(
+            path.join(__dirname, 'helpers/sampleStates.csv')
+          )
+
+          const outputStream = streamtest.v2.toText((err, data) => {
+            expect(data).toBeFalsy()
+            expect(err).toEqual(myError)
+            expect(csvParser.logger.error).toBeCalledWith(
+              expect.stringMatching(/At row: 2, Error/)
+            )
+            done()
+          })
+          csvParser.parse(inputStream, outputStream)
+        })
+      })
+
+      describe('when continueOnProblems is true', () => {
+        beforeEach(() => {
+          csvParser = new CsvParserState({ continueOnProblems: true }, logger)
+          // Fail on parsing of second state
+          csvParser._transformTransitions = jest
+            .fn()
+            .mockImplementationOnce(data => Promise.resolve(data))
+            .mockImplementationOnce(() => Promise.reject(myError))
+            .mockImplementation(data => Promise.resolve(data))
+        })
+
+        test('should skip rows with error', done => {
+          const inputStream = fs.createReadStream(
+            path.join(__dirname, 'helpers/sampleStates.csv')
+          )
+
+          const outputStream = streamtest.v2.toText((err, data) => {
+            expect(err).toBeFalsy()
+            const result = JSON.parse(data)
+            expect(result).toBeInstanceOf(Array)
+            expect(result).toHaveLength(3)
+            expect(csvParser.logger.warn).toBeCalledWith(
+              expect.stringMatching(/Ignoring error at row: 2/)
+            )
+            // expect(result).toMatchSnapshot()
+            done()
+          })
+          csvParser.parse(inputStream, outputStream)
+        })
+      })
     })
   })
 
@@ -61,34 +141,7 @@ describe('CsvParserState', () => {
     })
 
     describe('with transitions', () => {
-      let setupClientSpy
       const state = { key: 'state-key', transitions: ['state-1', 'state-2'] }
-      beforeEach(() => {
-        setupClientSpy = jest.spyOn(csvParser, '_setupClient')
-        csvParser._buildStateRequest = jest.fn(() =>
-          Promise.resolve({
-            body: {
-              results: [
-                {
-                  id: 'state-id-1',
-                  key: 'state-key-1',
-                },
-              ],
-            },
-          })
-        )
-      })
-
-      afterEach(() => {
-        setupClientSpy.mockReset()
-        setupClientSpy.mockRestore()
-      })
-
-      test('should setup client', () => {
-        csvParser._transformTransitions(state)
-        expect(setupClientSpy).toBeCalled()
-      })
-
       describe('when execute resolves', () => {
         beforeEach(() => {
           // First transition exists but second does not
@@ -246,6 +299,66 @@ describe('CsvParserState', () => {
         some: 'all',
       }
       expect(CsvParserState._removeEmptyFields(actual)).toEqual(expected)
+    })
+  })
+
+  describe('::_handleErrors', () => {
+    const fakeError = new Error('General error')
+    const callback = jest.fn()
+    describe('when continueOnProblems is false (Default)', () => {
+      beforeEach(() => {
+        csvParser = new CsvParserState({ continueOnProblems: false }, logger)
+      })
+
+      test('should pass error to callback', () => {
+        csvParser._handleErrors(fakeError, callback)
+        expect(callback).toBeCalledWith(fakeError)
+      })
+    })
+
+    describe('when continueOnProblems is true', () => {
+      beforeEach(() => {
+        csvParser = new CsvParserState({ continueOnProblems: true }, logger)
+      })
+
+      test('should log error', () => {
+        csvParser._handleErrors(fakeError, callback)
+        expect(csvParser.logger.warn).toBeCalledWith(
+          expect.stringMatching(/Ignoring error at/)
+        )
+      })
+
+      test('should not pass error to callback', () => {
+        csvParser._handleErrors(fakeError, callback)
+        expect(callback).not.toBeCalled()
+      })
+    })
+  })
+
+  describe('::_fetchStates', () => {
+    beforeEach(() => {
+      csvParser.client = { execute: jest.fn() }
+    })
+
+    it('should fetch reference from API from url', () => {
+      const uri = 'dummy-uri'
+      const expectedRequest = { uri, method: 'GET' }
+
+      csvParser._fetchStates(uri)
+      expect(csvParser.client.execute).toBeCalled()
+      expect(csvParser.client.execute).toHaveBeenCalledWith(expectedRequest)
+    })
+
+    describe('when multiple calls with same parameter', () => {
+      it('should fetch only once', () => {
+        const uri = 'dummy-uri-2'
+        const expectedRequest = { uri, method: 'GET' }
+
+        csvParser._fetchStates(uri)
+        csvParser._fetchStates(uri)
+        expect(csvParser.client.execute).toHaveBeenCalledTimes(1)
+        expect(csvParser.client.execute).toHaveBeenCalledWith(expectedRequest)
+      })
     })
   })
 })
