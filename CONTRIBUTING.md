@@ -35,6 +35,8 @@ accurate comments, etc.) and any other requirements (such as test coverage).
   ```
   replace "testing-project" with your project
 
+**Note: Due to the setup/teardown nature of the integration tests, there is the risk of potential data loss in your project**
+
 6. Linting and static checks are done by `npm run lint`. We the [Airbnb eslint config](https://www.npmjs.com/package/eslint-config-airbnb). Static checks are done using [Flow](https://flowtype.org/) and can be included / adopted incrementally. Committing also runs a git hook to lint the changed files.
 
 ## Formatting (Prettier)
