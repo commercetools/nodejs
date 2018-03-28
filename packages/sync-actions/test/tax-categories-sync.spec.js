@@ -128,7 +128,7 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  test('should build complex mixed actions', () => {
+  test('should build complex mixed actions (1)', () => {
     const before = {
       rates: [
         {
@@ -190,6 +190,69 @@ describe('Actions', () => {
         taxRate: { amount: '0.15', id: 'taxRate-4', name: '15% FR' }, // adds new tax rate
       },
     ]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build complex mixed actions (2)', () => {
+    const before = {
+      rates: [
+        {
+          id: 'taxRate-1',
+          name: '11% US',
+          amount: '0.11',
+        },
+        {
+          id: 'taxRate-2',
+          name: '8% DE',
+          amount: '0.08',
+        },
+        {
+          id: 'taxRate-3',
+          name: '21% ES',
+          amount: '0.21',
+        },
+      ],
+    }
+    const now = {
+      rates: [
+        // REMOVED RATE 1
+        // REMOVED RATE 2
+        {
+          // CHANGED RATE 3
+          id: 'taxRate-3',
+          name: '21% ES',
+          state: 'NY',
+          amount: '0.21',
+        },
+        {
+          // ADD NEW RATE
+          id: 'taxRate-4',
+          name: '15% FR',
+          amount: '0.15',
+        },
+      ],
+    }
+
+    const actual = taxCategorySync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'replaceTaxRate',
+        taxRate: {
+          amount: '0.21',
+          id: 'taxRate-3',
+          name: '21% ES',
+          state: 'NY',
+        },
+        taxRateId: 'taxRate-3',
+      },
+      { action: 'removeTaxRate', taxRateId: 'taxRate-1' }, // removed first tax rate
+      { action: 'removeTaxRate', taxRateId: 'taxRate-2' }, // removed second tax rate
+      {
+        action: 'addTaxRate',
+        taxRate: { amount: '0.15', id: 'taxRate-4', name: '15% FR' }, // adds new tax rate
+      },
+    ]
+
     expect(actual).toEqual(expected)
   })
 })
