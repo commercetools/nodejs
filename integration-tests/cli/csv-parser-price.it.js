@@ -93,12 +93,16 @@ describe('CSV and CLI Tests', () => {
 
     it('stack trace on verbose level', async () => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
-      expect(
-        exec(`${binPath} -p ${projectKey} -i ${csvFilePath} --logLevel verbose`)
-      ).rejects.toThrowErrorMatchingSnapshot()
+      try {
+        await exec(
+          `${binPath} -p ${projectKey} -i ${csvFilePath} --logLevel verbose`
+        )
+      } catch (error) {
+        expect(error.code).toBe(1)
+        expect(String(error)).toMatch(/\.js:\d+:\d+/)
+      }
     })
 
-    // eslint-disable-next-line max-len
     it('should log messages to a log file and print a final error to stderr', async () => {
       const tmpFile = tmp.fileSync()
       const expectedError = 'Row length does not match headers'

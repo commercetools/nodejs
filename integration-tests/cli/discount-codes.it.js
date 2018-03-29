@@ -132,11 +132,15 @@ describe('DiscountCode tests', () => {
       clearData(apiConfig, 'discountCodes').catch(process.stderr.write)
     )
 
-    it('should create discount codes on CTP', async () => {
-      await codeImport.run(preparedDiscountCodes)
-      const summary = codeImport.summaryReport()
-      expect(summary).toMatchSnapshot()
-    })
+    it(
+      'should create discount codes on CTP',
+      async () => {
+        await codeImport.run(preparedDiscountCodes)
+        const summary = codeImport.summaryReport()
+        expect(summary).toMatchSnapshot()
+      },
+      15000
+    )
 
     it('should update discount codes on the CTP', async () => {
       // First, import the codes that need to be updated
