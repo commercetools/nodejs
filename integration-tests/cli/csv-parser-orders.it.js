@@ -87,9 +87,14 @@ describe('CSV and CLI Tests', () => {
 
     it('stack trace on verbose level', async () => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
-      expect(
-        exec(`${binPath} -i ${csvFilePath} --logLevel verbose -t returninfo`)
-      ).rejects.toThrowErrorMatchingSnapshot()
+      try {
+        await exec(
+          `${binPath} -i ${csvFilePath} --logLevel verbose -t returninfo`
+        )
+      } catch (error) {
+        expect(error.code).toBe(1)
+        expect(String(error)).toMatch(/ERR: Row length does not match headers/)
+      }
     })
   })
 

@@ -85,11 +85,6 @@ Array [
 `;
 
 exports[`CSV and CLI Tests parses CSV to JSON CLI accepts deliveries csv type 1`] = `
-"Command failed: ./integration-tests/node_modules/.bin/csvparserorder -i packages/csv-parser-orders/test/data/faulty-sample.csv --logLevel verbose -t returninfo
-ERR: Row length does not match headers"
-`;
-
-exports[`CSV and CLI Tests parses CSV to JSON CLI accepts deliveries csv type 2`] = `
 Array [
   "[{\\"orderNumber\\":\\"222\\",\\"shippingInfo\\":{\\"deliveries\\":[{\\"id\\":\\"1\\",\\"items\\":[{\\"id\\":\\"1\\",\\"quantity\\":100}]}]}}]",
   "",
