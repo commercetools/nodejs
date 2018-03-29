@@ -34,7 +34,8 @@ describe('CSV and CLI Tests', () => {
 
   describe('CLI basic functionality', () => {
     it('should print usage information given the help flag', async () => {
-      const stdout = await exec(`${binPath} --help`)
+      const [stdout, stderr] = await exec(`${binPath} --help`)
+      expect(stderr).toBeFalsy()
       expect(stdout).toMatchSnapshot()
     })
 
@@ -72,19 +73,23 @@ describe('CSV and CLI Tests', () => {
       }
     })
 
-    it('on parsing errors', async () => {
-      const csvFilePath = path.join(samplesFolder, 'missing-type-sample.csv')
-      const jsonFilePath = tmp.fileSync().name
+    it(
+      'on parsing errors',
+      async () => {
+        const csvFilePath = path.join(samplesFolder, 'missing-type-sample.csv')
+        const jsonFilePath = tmp.fileSync().name
 
-      try {
-        await exec(
-          `${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`
-        )
-      } catch (error) {
-        expect(error.code).toBe(1)
-        expect(String(error)).toMatch(/No type with key .+ found/)
-      }
-    })
+        try {
+          await exec(
+            `${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`
+          )
+        } catch (error) {
+          expect(error.code).toBe(1)
+          expect(String(error)).toMatch(/No type with key .+ found/)
+        }
+      },
+      15000
+    )
 
     it('stack trace on verbose level', async () => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')

@@ -121,7 +121,7 @@ describe('DiscountCode tests', () => {
           ],
         })
       )
-    })
+    }, 20000)
 
     // Delete Discount codes
     afterAll(() =>

@@ -42,7 +42,7 @@ describe('Auth Flows', () => {
             },
           ])
         ),
-    10000
+    20000
   )
   afterAll(() => {
     clearData(apiConfig, 'customers').then(() => clearData(apiConfig, 'carts'))
@@ -52,37 +52,41 @@ describe('Auth Flows', () => {
       host: 'https://api.sphere.io',
     })
 
-    it('should log customer and fetch customer profile', () => {
-      const userConfig = {
-        ...apiConfig,
-        ...{ scopes: [`manage_project:${projectKey}`] },
-        ...{
-          credentials: {
-            clientId: apiConfig.credentials.clientId,
-            clientSecret: apiConfig.credentials.clientSecret,
-            user: {
-              username: userEmail,
-              password: userPassword,
+    it(
+      'should log customer and fetch customer profile',
+      () => {
+        const userConfig = {
+          ...apiConfig,
+          ...{ scopes: [`manage_project:${projectKey}`] },
+          ...{
+            credentials: {
+              clientId: apiConfig.credentials.clientId,
+              clientSecret: apiConfig.credentials.clientSecret,
+              user: {
+                username: userEmail,
+                password: userPassword,
+              },
             },
           },
-        },
-      }
-      const client = createClient({
-        middlewares: [
-          createAuthMiddlewareForPasswordFlow(userConfig),
-          httpMiddleware,
-        ],
-      })
-      return client
-        .execute({
-          uri: `/${projectKey}/me`,
-          method: 'GET',
+        }
+        const client = createClient({
+          middlewares: [
+            createAuthMiddlewareForPasswordFlow(userConfig),
+            httpMiddleware,
+          ],
         })
-        .then(response => {
-          const user = response.body
-          expect(user).toHaveProperty('email', userEmail)
-        })
-    })
+        return client
+          .execute({
+            uri: `/${projectKey}/me`,
+            method: 'GET',
+          })
+          .then(response => {
+            const user = response.body
+            expect(user).toHaveProperty('email', userEmail)
+          })
+      },
+      15000
+    )
   })
 
   describe('Anonymous Session Flow', () => {
@@ -135,7 +139,7 @@ describe('Auth Flows', () => {
             expect(carts[0]).toHaveProperty('anonymousId', anonymousId)
           })
       },
-      7000
+      15000
     )
   })
 
@@ -226,7 +230,7 @@ describe('Auth Flows', () => {
             }
           )
       },
-      7000
+      15000
     )
   })
 })

@@ -1,11 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DiscountCode tests Discount Code Exporter should write csv output to file when passed the option 1`] = `
-"info Starting Export
-info Export operation completed successfully
-"
-`;
-
 exports[`DiscountCode tests Discount Code Exporter should write json output to file by default 1`] = `
 "info Starting Export
 info Export operation completed successfully

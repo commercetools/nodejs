@@ -1,38 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CSV and CLI Tests CLI basic functionality should print the module version given the version flag 1`] = `
-Array [
-  "
-
-Usage: integration-tests/node_modules/.bin/csvparserprice [options]
-Convert commercetools price CSV data to JSON.
-
-Options:
-  --help, -h        Show help text.                                    [boolean]
-  --version, -v     Show version number.                               [boolean]
-  --inputFile, -i   Path to input CSV file.                   [default: \\"stdin\\"]
-  --outputFile, -o  Path to output JSON file.                [default: \\"stdout\\"]
-  --apiUrl          The host URL of the HTTP API service.
-                                              [default: \\"https://api.sphere.io\\"]
-  --authUrl         The host URL of the OAuth API service.
-                                             [default: \\"https://auth.sphere.io\\"]
-  --batchSize, -b   Number of CSV rows to handle simultaneously.  [default: 100]
-  --delimiter, -d   Used CSV delimiter.                           [default: \\",\\"]
-  --accessToken     CTP client access token
-  --projectKey, -p  API project key.                                  [required]
-  --logLevel        Logging level: error, warn, info or verbose.
-                                                               [default: \\"info\\"]
-  --logFile         Path to file where to save logs.
-                                                 [default: \\"csvparserprice.log\\"]
-
-",
-  "",
-]
-`;
-
 exports[`CSV and CLI Tests CLI basic functionality should print usage information given the help flag 1`] = `
-Array [
-  "
+"
 
 Usage: integration-tests/node_modules/.bin/csvparserprice [options]
 Convert commercetools price CSV data to JSON.
@@ -55,9 +24,7 @@ Options:
   --logFile         Path to file where to save logs.
                                                  [default: \\"csvparserprice.log\\"]
 
-",
-  "",
-]
+"
 `;
 
 exports[`CSV and CLI Tests CLI basic functionality should write output to file 1`] = `"{\\"prices\\":[{\\"sku\\":\\"123\\",\\"prices\\":[{\\"variant-sku\\":\\"123\\",\\"value\\":{\\"centAmount\\":4200,\\"currencyCode\\":\\"EUR\\"}},{\\"variant-sku\\":\\"123\\",\\"value\\":{\\"centAmount\\":4200,\\"currencyCode\\":\\"EUR\\"}}]}]}"`;

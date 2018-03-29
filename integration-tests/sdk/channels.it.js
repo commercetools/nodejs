@@ -40,139 +40,161 @@ describe('Channels', () => {
   let client
   let apiConfig
 
-  beforeAll(() =>
-    getCredentials(projectKey)
-      .then(credentials => {
-        apiConfig = {
-          host: 'https://auth.sphere.io',
-          apiUrl: 'https://api.sphere.io',
-          projectKey,
-          credentials: {
-            clientId: credentials.clientId,
-            clientSecret: credentials.clientSecret,
-          },
-        }
-        const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
-          apiConfig
-        )
-        client = createClient({
-          middlewares: [
-            authMiddleware,
-            queueMiddleware,
-            userAgentMiddleware,
-            httpMiddleware,
-          ],
+  beforeAll(
+    () =>
+      getCredentials(projectKey)
+        .then(credentials => {
+          apiConfig = {
+            host: 'https://auth.sphere.io',
+            apiUrl: 'https://api.sphere.io',
+            projectKey,
+            credentials: {
+              clientId: credentials.clientId,
+              clientSecret: credentials.clientSecret,
+            },
+          }
+          const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
+            apiConfig
+          )
+          client = createClient({
+            middlewares: [
+              authMiddleware,
+              queueMiddleware,
+              userAgentMiddleware,
+              httpMiddleware,
+            ],
+          })
         })
-      })
-      .then(() => clearData(apiConfig, 'channels'))
+        .then(() => clearData(apiConfig, 'channels')),
+    15000
   )
 
-  it('create', () => {
-    const body = {
-      key,
-      name: { en: key },
-    }
-    const createRequest = {
-      uri: service.build(),
-      method: 'POST',
-      body,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    }
-
-    return client.execute(createRequest).then(response => {
-      channelResponse = response.body
-      expect(omit(response.body, ignoredResponseKeys)).toEqual({
-        ...body,
-        roles: ['InventorySupply'],
-        version: 1,
-      })
-      expect(response.statusCode).toBe(201)
-    })
-  })
-
-  it('fetch', () => {
-    const fetchRequest = {
-      uri: service.where(`key = "${key}"`).build(),
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    }
-
-    return client.execute(fetchRequest).then(response => {
-      expect(response.body.results).toHaveLength(1)
-      expect(response.statusCode).toBe(200)
-    })
-  })
-
-  it('update', () => {
-    const updateRequest = {
-      uri: service.byId(channelResponse.id).build(),
-      method: 'POST',
-      body: {
-        version: channelResponse.version,
-        actions: [{ action: 'addRoles', roles: ['OrderImport'] }],
-      },
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    }
-
-    return client.execute(updateRequest).then(response => {
-      channelResponse = response.body
-      expect(omit(response.body, ignoredResponseKeys)).toEqual({
+  it(
+    'create',
+    () => {
+      const body = {
         key,
         name: { en: key },
-        roles: ['InventorySupply', 'OrderImport'],
-        version: 2,
+      }
+      const createRequest = {
+        uri: service.build(),
+        method: 'POST',
+        body,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      }
+
+      return client.execute(createRequest).then(response => {
+        channelResponse = response.body
+        expect(omit(response.body, ignoredResponseKeys)).toEqual({
+          ...body,
+          roles: ['InventorySupply'],
+          version: 1,
+        })
+        expect(response.statusCode).toBe(201)
       })
-      expect(response.statusCode).toBe(200)
-    })
-  })
+    },
+    15000
+  )
 
-  it('process', () => {
-    const processRequest = {
-      uri: service.perPage(3).build(),
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    }
+  it(
+    'fetch',
+    () => {
+      const fetchRequest = {
+        uri: service.where(`key = "${key}"`).build(),
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      }
 
-    let resultCount = 0
-    return client
-      .process(processRequest, payload => {
-        resultCount += payload.body.results.length
-        return Promise.resolve(payload.body.results.map(c => c.id))
+      return client.execute(fetchRequest).then(response => {
+        expect(response.body.results).toHaveLength(1)
+        expect(response.statusCode).toBe(200)
       })
-      .then(response => {
-        expect(response).toHaveLength(resultCount)
+    },
+    15000
+  )
+
+  it(
+    'update',
+    () => {
+      const updateRequest = {
+        uri: service.byId(channelResponse.id).build(),
+        method: 'POST',
+        body: {
+          version: channelResponse.version,
+          actions: [{ action: 'addRoles', roles: ['OrderImport'] }],
+        },
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      }
+
+      return client.execute(updateRequest).then(response => {
+        channelResponse = response.body
+        expect(omit(response.body, ignoredResponseKeys)).toEqual({
+          key,
+          name: { en: key },
+          roles: ['InventorySupply', 'OrderImport'],
+          version: 2,
+        })
+        expect(response.statusCode).toBe(200)
       })
-  })
+    },
+    15000
+  )
 
-  it('delete', () => {
-    const uri = service
-      .byId(channelResponse.id)
-      .withVersion(channelResponse.version)
-      .build()
+  it(
+    'process',
+    () => {
+      const processRequest = {
+        uri: service.perPage(3).build(),
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      }
 
-    const deleteRequest = {
-      uri,
-      method: 'DELETE',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    }
+      let resultCount = 0
+      return client
+        .process(processRequest, payload => {
+          resultCount += payload.body.results.length
+          return Promise.resolve(payload.body.results.map(c => c.id))
+        })
+        .then(response => {
+          expect(response).toHaveLength(resultCount)
+        })
+    },
+    15000
+  )
 
-    return client.execute(deleteRequest).then(response => {
-      expect(response.statusCode).toBe(200)
-    })
-  })
+  it(
+    'delete',
+    () => {
+      const uri = service
+        .byId(channelResponse.id)
+        .withVersion(channelResponse.version)
+        .build()
+
+      const deleteRequest = {
+        uri,
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      }
+
+      return client.execute(deleteRequest).then(response => {
+        expect(response.statusCode).toBe(200)
+      })
+    },
+    15000
+  )
 })

@@ -15,7 +15,8 @@ describe('CSV and CLI Tests', () => {
 
   describe('CLI basic functionality', () => {
     it('should print usage information given the help flag', async () => {
-      const stdout = await exec(`${binPath} --help`)
+      const [stdout, stderr] = await exec(`${binPath} --help`)
+      expect(stderr).toBeFalsy()
       expect(stdout).toMatchSnapshot()
     })
 

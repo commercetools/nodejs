@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CSV and CLI Tests CLI basic functionality should print usage information given the help flag 1`] = `
-Array [
-  "
+"
 
 Usage: integration-tests/node_modules/.bin/csvparserorder [options]
 Convert commercetools order CSV data to JSON.
@@ -22,9 +21,7 @@ Options:
   --logFile         Path to file where to save logs.
                                                  [default: \\"csvparserorder.log\\"]
 
-",
-  "",
-]
+"
 `;
 
 exports[`CSV and CLI Tests CLI basic functionality should write output to file 1`] = `

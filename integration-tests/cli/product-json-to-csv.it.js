@@ -69,7 +69,7 @@ describe('CSV and CLI Tests', () => {
 
     const sampleProducts = createProducts(stateRef, taxCategoryRef)
     await createData(apiConfig, 'products', sampleProducts)
-  }, 10000)
+  }, 20000)
 
   afterAll(async () => {
     await clearData(apiConfig, 'products')
@@ -397,7 +397,7 @@ describe('CSV and CLI Tests', () => {
               }
               done()
             })
-        }, 10000)
+        }, 20000)
 
         it('should contain five variants', () => {
           expect(products).toHaveLength(5)
