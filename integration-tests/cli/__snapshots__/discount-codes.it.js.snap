@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DiscountCode tests Discount Code Exporter should write csv output to file when passed the option 1`] = `
+"info Starting Export
+info Export operation completed successfully
+"
+`;
+
+exports[`DiscountCode tests Discount Code Exporter should write json output to file by default 1`] = `
+"info Starting Export
+info Export operation completed successfully
+"
+`;
+
+exports[`DiscountCode tests Discount code Importer should continueOnProblems if \`continueOnProblems\` 1`] = `
+Object {
+  "detailedSummary": Object {
+    "createErrorCount": 2,
+    "created": 8,
+    "errors": Array [
+      "'code' should not be empty.",
+      "Request body does not contain valid JSON.",
+    ],
+    "unchanged": 0,
+    "updateErrorCount": 0,
+    "updated": 0,
+  },
+  "reportMessage": "Summary: there were 8 successfully imported discount codes (8 were newly created, 0 were updated and 0 were unchanged). 2 errors occured (2 create errors and 0 update errors.)",
+}
+`;
+
+exports[`DiscountCode tests Discount code Importer should continueOnProblems if \`continueOnProblems\` 2`] = `
+Array [
+  "'code' should not be empty.",
+  "Request body does not contain valid JSON.",
+]
+`;
+
+exports[`DiscountCode tests Discount code Importer should create discount codes on CTP 1`] = `
+Object {
+  "detailedSummary": Object {
+    "createErrorCount": 0,
+    "created": 10,
+    "errors": Array [],
+    "unchanged": 0,
+    "updateErrorCount": 0,
+    "updated": 0,
+  },
+  "reportMessage": "Summary: there were 10 successfully imported discount codes (10 were newly created, 0 were updated and 0 were unchanged).",
+}
+`;
+
+exports[`DiscountCode tests Discount code Importer should update discount codes on the CTP 1`] = `
+Object {
+  "detailedSummary": Object {
+    "createErrorCount": 0,
+    "created": 0,
+    "errors": Array [],
+    "unchanged": 0,
+    "updateErrorCount": 0,
+    "updated": 10,
+  },
+  "reportMessage": "Summary: there were 10 successfully imported discount codes (0 were newly created, 10 were updated and 0 were unchanged).",
+}
+`;

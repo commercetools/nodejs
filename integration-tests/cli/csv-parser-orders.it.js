@@ -20,7 +20,8 @@ describe('CSV and CLI Tests', () => {
     })
 
     it('should print the module version given the version flag', async () => {
-      const [stdout] = await exec(`${binPath} --version`)
+      const [stdout, stderr] = await exec(`${binPath} --version`)
+      expect(stderr).toBeFalsy()
       expect(stdout).toBe(`${version}\n`)
     })
 
@@ -31,10 +32,8 @@ describe('CSV and CLI Tests', () => {
       await exec(
         `${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t returninfo`
       )
-
-      fs.readFile(jsonFilePath, { encoding: 'utf8' }).then(data => {
-        expect(JSON.parse(data)).toMatchSnapshot()
-      })
+      const data = await fs.readFile(jsonFilePath, { encoding: 'utf8' })
+      expect(JSON.parse(data)).toMatchSnapshot()
     })
   })
 
@@ -161,10 +160,8 @@ describe('CSV and CLI Tests', () => {
           tmpFile.name
         }`
       )
-
-      fs.readFile(tmpFile.name, { encoding: 'utf8' }).then(data => {
-        expect(data).toMatchSnapshot()
-      })
+      const data = await fs.readFile(tmpFile.name, { encoding: 'utf8' })
+      expect(data).toMatchSnapshot()
     })
 
     it('CLI should log errors to stderr and log file', async () => {

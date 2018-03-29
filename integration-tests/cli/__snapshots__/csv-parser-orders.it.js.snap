@@ -27,7 +27,7 @@ Options:
 ]
 `;
 
-exports[`CSV and CLI Tests CLI logs specific errors on faulty CSV format 1`] = `
+exports[`CSV and CLI Tests CLI basic functionality should write output to file 1`] = `
 Array [
   Object {
     "orderNumber": "123",
@@ -99,7 +99,7 @@ Array [
 ]
 `;
 
-exports[`CSV and CLI Tests parses CSV to JSON CLI should log errors to stderr and log file 1`] = `
+exports[`CSV and CLI Tests parses CSV to JSON CLI should log to file when using stdout for data output 1`] = `
 "info Starting Deliveries CSV conversion
 "
 `;

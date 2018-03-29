@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StockExporter CLI CLI basic functionality should accept query 1`] = `
+"info Done exporting inventories.
+"
+`;
+
+exports[`StockExporter CLI CLI basic functionality should export inventories to file as csv 1`] = `
+"sku,quantityOnStock,customType,customField.description
+12345,20,inventory-custom-type,integration tests!! arrgggh"
+`;
+
+exports[`StockExporter CLI CLI basic functionality should export inventories to file as json 1`] = `
+"info Done exporting inventories.
+"
+`;
+
+exports[`StockExporter CLI CLI basic functionality should print usage information given the help flag 1`] = `
+"
+
+Usage: integration-tests/node_modules/.bin/inventoriesexporter [options]
+Export inventories from the commercetools platform.
+
+Options:
+  --help, -h        Show help text.                                    [boolean]
+  --version         Show version number                                [boolean]
+  --outputFile, -o  Path to output file.                     [default: \\"stdout\\"]
+  --apiUrl          The host URL of the HTTP API service.
+                                              [default: \\"https://api.sphere.io\\"]
+  --authUrl         The host URL of the OAuth API service.
+                                             [default: \\"https://auth.sphere.io\\"]
+  --delimiter, -d   Used CSV delimiter.                           [default: \\",\\"]
+  --accessToken     CTP client access token
+  --projectKey, -p  API project key.                                  [required]
+  --channelKey, -c  Channel key to use as filter for result to export.
+                    Useful if you only have channel key but not id.
+                    Can be used with the query flag
+
+  --query, -q       Filter query for inventories:
+                    dev.commercetools.com/http-api-projects-inventory.html#quer
+                    y-inventory
+                    can be used with channelKey flag
+
+  --format, -f      Format for export [choices: \\"csv\\", \\"json\\"] [default: \\"json\\"]
+  --logLevel        Logging level: error, warn, info or verbose.
+                                                               [default: \\"info\\"]
+  --logFile         Path to file where to save logs.
+                                           [default: \\"inventories-exporter.log\\"]
+
+"
+`;

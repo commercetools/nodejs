@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CSV and CLI Tests CLI basic functionality should print the module version given the version flag 1`] = `
+Array [
+  "
+
+Usage: integration-tests/node_modules/.bin/csvparserprice [options]
+Convert commercetools price CSV data to JSON.
+
+Options:
+  --help, -h        Show help text.                                    [boolean]
+  --version, -v     Show version number.                               [boolean]
+  --inputFile, -i   Path to input CSV file.                   [default: \\"stdin\\"]
+  --outputFile, -o  Path to output JSON file.                [default: \\"stdout\\"]
+  --apiUrl          The host URL of the HTTP API service.
+                                              [default: \\"https://api.sphere.io\\"]
+  --authUrl         The host URL of the OAuth API service.
+                                             [default: \\"https://auth.sphere.io\\"]
+  --batchSize, -b   Number of CSV rows to handle simultaneously.  [default: 100]
+  --delimiter, -d   Used CSV delimiter.                           [default: \\",\\"]
+  --accessToken     CTP client access token
+  --projectKey, -p  API project key.                                  [required]
+  --logLevel        Logging level: error, warn, info or verbose.
+                                                               [default: \\"info\\"]
+  --logFile         Path to file where to save logs.
+                                                 [default: \\"csvparserprice.log\\"]
+
+",
+  "",
+]
+`;
+
+exports[`CSV and CLI Tests CLI basic functionality should print usage information given the help flag 1`] = `
+Array [
+  "
+
+Usage: integration-tests/node_modules/.bin/csvparserprice [options]
+Convert commercetools price CSV data to JSON.
+
+Options:
+  --help, -h        Show help text.                                    [boolean]
+  --version, -v     Show version number.                               [boolean]
+  --inputFile, -i   Path to input CSV file.                   [default: \\"stdin\\"]
+  --outputFile, -o  Path to output JSON file.                [default: \\"stdout\\"]
+  --apiUrl          The host URL of the HTTP API service.
+                                              [default: \\"https://api.sphere.io\\"]
+  --authUrl         The host URL of the OAuth API service.
+                                             [default: \\"https://auth.sphere.io\\"]
+  --batchSize, -b   Number of CSV rows to handle simultaneously.  [default: 100]
+  --delimiter, -d   Used CSV delimiter.                           [default: \\",\\"]
+  --accessToken     CTP client access token
+  --projectKey, -p  API project key.                                  [required]
+  --logLevel        Logging level: error, warn, info or verbose.
+                                                               [default: \\"info\\"]
+  --logFile         Path to file where to save logs.
+                                                 [default: \\"csvparserprice.log\\"]
+
+",
+  "",
+]
+`;
+
+exports[`CSV and CLI Tests CLI basic functionality should write output to file 1`] = `"{\\"prices\\":[{\\"sku\\":\\"123\\",\\"prices\\":[{\\"variant-sku\\":\\"123\\",\\"value\\":{\\"centAmount\\":4200,\\"currencyCode\\":\\"EUR\\"}},{\\"variant-sku\\":\\"123\\",\\"value\\":{\\"centAmount\\":4200,\\"currencyCode\\":\\"EUR\\"}}]}]}"`;
+
+exports[`CSV and CLI Tests CLI logs specific errors stack trace on verbose level 1`] = `
+[Error: Command failed: ./integration-tests/node_modules/.bin/csvparserprice -p auth-integration-test -i packages/csv-parser-price/test/helpers/faulty-sample.csv --logLevel verbose
+ERR:   [0m[97m[41mError[0m[90m:[0m[37m [0m[97mRow length does not match headers[0m
+[0m  [0m
+[0m  [0m[90m-[0m [0m[93mindex.js[0m[90m:[0m[93m162[0m[37m [0m[37mParser._online[0m
+[0m  [0m  [0m[90m[integration-tests]/[csv-parser]/index.js:162:24[0m
+[0m  [0m
+[0m  [0m[90m-[0m [0m[93mindex.js[0m[90m:[0m[93m95[0m[37m [0m[37mParser._transform[0m
+[0m  [0m  [0m[90m[integration-tests]/[csv-parser]/index.js:95:14[0m
+[0m  [0m
+[0m  [0m[90m-[0m [0m[93m_stream_transform.js[0m[90m:[0m[93m185[0m[37m [0m[37mParser.Transform._read[0m
+[0m  [0m  [0m[90m_stream_transform.js:185:10[0m
+[0m  [0m
+[0m  [0m[90m-[0m [0m[93m_stream_transform.js[0m[90m:[0m[93m173[0m[37m [0m[37mParser.Transform._write[0m
+[0m  [0m  [0m[90m_stream_transform.js:173:12[0m
+[0m  [0m
+[0m  [0m[90m-[0m [0m[93m_stream_writable.js[0m[90m:[0m[93m406[0m[37m [0m[37mdoWrite[0m
+[0m  [0m  [0m[90m_stream_writable.js:406:12[0m
+[0m  [0m
+[0m  [0m[90m-[0m [0m[93m_stream_writable.js[0m[90m:[0m[93m392[0m[37m [0m[37mwriteOrBuffer[0m
+[0m  [0m  [0m[90m_stream_writable.js:392:5[0m
+[0m  [0m
+[0m  [0m[90m-[0m [0m[93m_stream_writable.js[0m[90m:[0m[93m290[0m[37m [0m[37mParser.Writable.write[0m
+[0m  [0m  [0m[90m_stream_writable.js:290:11[0m
+[0m  [0m
+[0m  [0m[90m-[0m [0m[93mindex.js[0m[90m:[0m[93m640[0m[37m [0m
+[0m  [0m  [0m[90m[integration-tests]/[highland]/lib/index.js:640:33[0m
+[0m  [0m
+[0m  [0m[90m-[0m [0m[93mindex.js[0m[90m:[0m[93m1549[0m[37m [0m[37mStream.s._send[0m
+[0m  [0m  [0m[90m[integration-tests]/[highland]/lib/index.js:1549:9[0m
+[0m  [0m
+[0m  [0m[90m-[0m [0m[93mindex.js[0m[90m:[0m[93m1650[0m[37m [0m[37mStream.write[0m
+[0m  [0m  [0m[90m[integration-tests]/[highland]/lib/index.js:1650:18[0m
+[0m  [0m
+[0m]
+`;

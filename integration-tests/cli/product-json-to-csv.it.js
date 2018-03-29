@@ -1,8 +1,8 @@
-import fs from 'fs'
+import fs from 'mz/fs'
 import tmp from 'tmp'
 import unzip from 'unzip'
 import csvToJson from 'csvtojson'
-import { exec } from 'child_process'
+import { exec } from 'mz/child_process'
 import { getCredentials } from '@commercetools/get-credentials'
 import { version } from '@commercetools/product-json-to-csv/package.json'
 import {
@@ -82,20 +82,16 @@ describe('CSV and CLI Tests', () => {
   })
 
   describe('CLI basic functionality', () => {
-    it('should print usage information given the help flag', done => {
-      exec(`${binPath} --help`, (error, stdout, stderr) => {
-        expect(String(stdout)).toMatch(/help/)
-        expect(error && stderr).toBeFalsy()
-        done()
-      })
+    it('should print usage information given the help flag', async () => {
+      const [stdout, stderr] = await exec(`${binPath} --help`)
+      expect(stdout).toMatchSnapshot()
+      expect(stderr).toBeFalsy()
     })
 
-    it('should print the module version given the version flag', done => {
-      exec(`${binPath} --version`, (error, stdout, stderr) => {
-        expect(stdout).toBe(`${version}\n`)
-        expect(error && stderr).toBeFalsy()
-        done()
-      })
+    it('should print the module version given the version flag', async () => {
+      const [stdout, stderr] = await exec(`${binPath} --version`)
+      expect(stdout).toBe(`${version}\n`)
+      expect(stderr).toBeFalsy()
     })
   })
 
@@ -107,35 +103,36 @@ describe('CSV and CLI Tests', () => {
         let csvContents2 = ''
         const fileNames = []
 
-        beforeAll(done => {
+        beforeAll(async done => {
           const zipFile = tmp.fileSync({ postfix: '.zip' }).name
-          exec(
-            `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`,
-            (error, stdout, stderr) => {
-              expect(error).toBeFalsy()
-              expect(stderr).toBeFalsy()
-
-              fs
-                .createReadStream(zipFile)
-                .pipe(unzip.Parse())
-                .on('entry', entry => {
-                  if (entry.path.includes('anotherProductType')) {
-                    entry.on('data', data => {
-                      fileNames.push(entry.path)
-                      csvContents2 += data.toString()
-                    })
-                  } else {
-                    entry.on('data', data => {
-                      fileNames.push(entry.path)
-                      csvContents1 += data.toString()
-                    })
-                  }
+          try {
+            const [stdout, stderr] = await exec(
+              `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
+            )
+            expect(stdout).toBeTruthy()
+            expect(stderr).toBeFalsy()
+          } catch (error) {
+            process.stderr.write(error)
+          }
+          fs
+            .createReadStream(zipFile)
+            .pipe(unzip.Parse())
+            .on('entry', entry => {
+              if (entry.path.includes('anotherProductType')) {
+                entry.on('data', data => {
+                  fileNames.push(entry.path)
+                  csvContents2 += data.toString()
                 })
-                .on('close', () => {
-                  done()
+              } else {
+                entry.on('data', data => {
+                  fileNames.push(entry.path)
+                  csvContents1 += data.toString()
                 })
-            }
-          )
+              }
+            })
+            .on('close', () => {
+              done()
+            })
         }, 15000)
 
         describe('File 1', () => {
@@ -376,29 +373,30 @@ describe('CSV and CLI Tests', () => {
         let products = []
         const templateFile = `${__dirname}/helpers/product-headers.csv`
 
-        beforeAll(done => {
+        beforeAll(async done => {
           csvFile = tmp.fileSync({ postfix: '.csv' }).name
-          exec(
-            `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`,
-            (error, stdout, stderr) => {
-              expect(error).toBeFalsy()
-              expect(stderr).toBeFalsy()
-
-              csvToJson()
-                .fromFile(csvFile)
-                .on('json', jsonObj => {
-                  products.push(jsonObj)
-                })
-                .on('done', () => {
-                  // Format the products array for easier testing because we
-                  // cannot guarantee the sort order from the API
-                  if (products[0].key === 'productKey-2') {
-                    products = products.concat(products.splice(0, 2))
-                  }
-                  done()
-                })
-            }
-          )
+          try {
+            const [stdout, stderr] = await exec(
+              `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
+            )
+            expect(stdout).toBeTruthy()
+            expect(stderr).toBeFalsy()
+          } catch (error) {
+            process.stderr.write(error)
+          }
+          csvToJson()
+            .fromFile(csvFile)
+            .on('json', jsonObj => {
+              products.push(jsonObj)
+            })
+            .on('done', () => {
+              // Format the products array for easier testing because we
+              // cannot guarantee the sort order from the API
+              if (products[0].key === 'productKey-2') {
+                products = products.concat(products.splice(0, 2))
+              }
+              done()
+            })
         }, 10000)
 
         it('should contain five variants', () => {
@@ -481,16 +479,13 @@ describe('CSV and CLI Tests', () => {
 
     describe('From JSON file', () => {
       let productsJsonFile
-      beforeAll(done => {
+      beforeAll(async () => {
         productsJsonFile = tmp.fileSync({ postfix: '.json' }).name
-        exec(
-          `${exporter} -p ${projectKey} -s -o ${productsJsonFile}`,
-          (error, stdout, stderr) => {
-            expect(error).toBeFalsy()
-            expect(stderr).toBeFalsy()
-            done()
-          }
+        const [stdout, stderr] = await exec(
+          `${exporter} -p ${projectKey} -s -o ${productsJsonFile}`
         )
+        expect(stdout).toBeTruthy()
+        expect(stderr).toBeFalsy()
       }, 15000)
 
       describe('WITHOUT HEADERS::should write products to `zip` file', () => {
@@ -498,37 +493,38 @@ describe('CSV and CLI Tests', () => {
         let csvContents2 = ''
         const fileNames = []
 
-        beforeAll(done => {
+        beforeAll(async done => {
           const zipFile = tmp.fileSync({ postfix: '.zip' }).name
 
           // Send request from with JSON file to parser
-          exec(
-            `${binPath} -p ${projectKey} -i ${productsJsonFile} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`,
-            (parseError, parseStdout, parseStderr) => {
-              expect(parseError).toBeFalsy()
-              expect(parseStderr).toBeFalsy()
-
-              fs
-                .createReadStream(zipFile)
-                .pipe(unzip.Parse())
-                .on('entry', entry => {
-                  if (entry.path.includes('anotherProductType')) {
-                    entry.on('data', data => {
-                      fileNames.push(entry.path)
-                      csvContents2 += data.toString()
-                    })
-                  } else {
-                    entry.on('data', data => {
-                      fileNames.push(entry.path)
-                      csvContents1 += data.toString()
-                    })
-                  }
+          try {
+            const [parseStdout, parseStderr] = await exec(
+              `${binPath} -p ${projectKey} -i ${productsJsonFile} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
+            )
+            expect(parseStdout).toBeTruthy()
+            expect(parseStderr).toBeFalsy()
+          } catch (error) {
+            process.stderr.write(error)
+          }
+          fs
+            .createReadStream(zipFile)
+            .pipe(unzip.Parse())
+            .on('entry', entry => {
+              if (entry.path.includes('anotherProductType')) {
+                entry.on('data', data => {
+                  fileNames.push(entry.path)
+                  csvContents2 += data.toString()
                 })
-                .on('close', () => {
-                  done()
+              } else {
+                entry.on('data', data => {
+                  fileNames.push(entry.path)
+                  csvContents1 += data.toString()
                 })
-            }
-          )
+              }
+            })
+            .on('close', () => {
+              done()
+            })
         }, 30000)
 
         describe('File 1', () => {
@@ -769,29 +765,30 @@ describe('CSV and CLI Tests', () => {
         let products = []
         const templateFile = `${__dirname}/helpers/product-headers.csv`
 
-        beforeAll(done => {
+        beforeAll(async done => {
           csvFile = tmp.fileSync({ postfix: '.csv' }).name
-          exec(
-            `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`,
-            (error, stdout, stderr) => {
-              expect(error).toBeFalsy()
-              expect(stderr).toBeFalsy()
-
-              csvToJson()
-                .fromFile(csvFile)
-                .on('json', jsonObj => {
-                  products.push(jsonObj)
-                })
-                .on('done', () => {
-                  // Format the products array for easier testing because we
-                  // cannot guarantee the sort order from the API
-                  if (products[0].key === 'productKey-2') {
-                    products = products.concat(products.splice(0, 2))
-                  }
-                  done()
-                })
-            }
-          )
+          try {
+            const [stdout, stderr] = await exec(
+              `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
+            )
+            expect(stdout).toBeTruthy()
+            expect(stderr).toBeFalsy()
+          } catch (error) {
+            process.stderr.write(error)
+          }
+          csvToJson()
+            .fromFile(csvFile)
+            .on('json', jsonObj => {
+              products.push(jsonObj)
+            })
+            .on('done', () => {
+              // Format the products array for easier testing because we
+              // cannot guarantee the sort order from the API
+              if (products[0].key === 'productKey-2') {
+                products = products.concat(products.splice(0, 2))
+              }
+              done()
+            })
         }, 15000)
 
         it('should contain five variants', () => {
