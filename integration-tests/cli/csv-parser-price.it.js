@@ -4,8 +4,8 @@ import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { getCredentials } from '@commercetools/get-credentials'
 
-import { exec } from 'child_process'
-import fs from 'fs'
+import { exec } from 'mz/child_process'
+import fs from 'mz/fs'
 import path from 'path'
 import streamtest from 'streamtest'
 import tmp from 'tmp'
@@ -22,123 +22,105 @@ describe('CSV and CLI Tests', () => {
   const samplesFolder = './packages/csv-parser-price/test/helpers/'
   const binPath = './integration-tests/node_modules/.bin/csvparserprice'
   let apiConfig
-  beforeAll(() =>
-    getCredentials(projectKey).then(credentials => {
-      apiConfig = {
-        host: CONSTANTS.host.auth,
-        apiUrl: CONSTANTS.host.api,
-        projectKey,
-        credentials: {
-          clientId: credentials.clientId,
-          clientSecret: credentials.clientSecret,
-        },
-      }
-    })
-  )
+  beforeAll(async () => {
+    const credentials = await getCredentials(projectKey)
+    apiConfig = {
+      host: 'https://auth.sphere.io',
+      apiUrl: 'https://api.sphere.io',
+      projectKey,
+      credentials,
+    }
+  }, 10000)
 
   describe('CLI basic functionality', () => {
-    it('should print usage information given the help flag', done => {
-      exec(`${binPath} --help`, (error, stdout, stderr) => {
-        expect(String(stdout)).toMatch(/help/)
-        expect(error && stderr).toBeFalsy()
-        done()
-      })
+    it('should print usage information given the help flag', async () => {
+      const [stdout, stderr] = await exec(`${binPath} --help`)
+      expect(stderr).toBeFalsy()
+      expect(stdout).toMatchSnapshot()
     })
 
-    it('should print the module version given the version flag', done => {
-      exec(`${binPath} --version`, (error, stdout, stderr) => {
-        expect(stdout).toBe(`${version}\n`)
-        expect(error && stderr).toBeFalsy()
-        done()
-      })
+    it('should print the module version given the version flag', async () => {
+      const [stdout, stderr] = await exec(`${binPath} --version`)
+      expect(stderr).toBeFalsy()
+      expect(stdout).toBe(`${version}\n`)
     })
 
-    it('should write output to file', done => {
+    it('should write output to file', async () => {
       const csvFilePath = path.join(samplesFolder, 'simple-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
-      // eslint-disable-next-line max-len
-      exec(
-        `${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
-        (cliError, stdout, stderr) => {
-          expect(cliError && stderr).toBeFalsy()
-
-          fs.readFile(jsonFilePath, { encoding: 'utf8' }, (error, data) => {
-            expect(data.match(/prices/)).toBeTruthy()
-            expect(error).toBeFalsy()
-            done()
-          })
-        }
+      await exec(
+        `${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`
       )
+
+      const data = await fs.readFile(jsonFilePath, { encoding: 'utf8' })
+      expect(data).toMatchSnapshot()
     })
   })
 
   describe('CLI logs specific errors', () => {
-    it('on faulty CSV format', done => {
+    it('on faulty CSV format', async () => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
-      exec(
-        `${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
-        (error, stdout, stderr) => {
-          expect(error.code).toBe(1)
-          expect(stdout).toBeFalsy()
-          expect(stderr.match(/Row length does not match headers/)).toBeTruthy()
-          done()
-        }
-      )
+      try {
+        await exec(
+          `${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`
+        )
+      } catch (error) {
+        expect(error.code).toBe(1)
+        expect(String(error)).toMatch(/Row length does not match headers/)
+      }
     })
 
-    it('on parsing errors', done => {
-      const csvFilePath = path.join(samplesFolder, 'missing-type-sample.csv')
-      const jsonFilePath = tmp.fileSync().name
+    it(
+      'on parsing errors',
+      async () => {
+        const csvFilePath = path.join(samplesFolder, 'missing-type-sample.csv')
+        const jsonFilePath = tmp.fileSync().name
 
-      exec(
-        `${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
-        (error, stdout, stderr) => {
+        try {
+          await exec(
+            `${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`
+          )
+        } catch (error) {
           expect(error.code).toBe(1)
-          expect(stdout).toBeFalsy()
-          expect(stderr).toMatch(/No type with key .+ found/)
-          done()
+          expect(String(error)).toMatch(/No type with key .+ found/)
         }
-      )
-    })
+      },
+      15000
+    )
 
-    it('stack trace on verbose level', done => {
+    it('stack trace on verbose level', async () => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
-
-      exec(
-        `${binPath} -p ${projectKey} -i ${csvFilePath} --logLevel verbose`,
-        (error, stdout, stderr) => {
-          expect(error.code).toBe(1)
-          expect(stdout).toBeFalsy()
-          expect(stderr).toMatch(/\.js:\d+:\d+/)
-          done()
-        }
-      )
+      try {
+        await exec(
+          `${binPath} -p ${projectKey} -i ${csvFilePath} --logLevel verbose`
+        )
+      } catch (error) {
+        expect(error.code).toBe(1)
+        expect(String(error)).toMatch(/\.js:\d+:\d+/)
+      }
     })
 
-    // eslint-disable-next-line max-len
-    it('should log messages to a log file and print a final error to stderr', done => {
+    it('should log messages to a log file and print a final error to stderr', async () => {
       const tmpFile = tmp.fileSync()
       const expectedError = 'Row length does not match headers'
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
 
-      // eslint-disable-next-line max-len
-      exec(
-        `${binPath} -p ${projectKey}  -i ${csvFilePath} --logFile ${
-          tmpFile.name
-        }`,
-        (error, stdout, stderr) => {
-          expect(error).toBeTruthy()
-          expect(stderr).toMatch(expectedError)
+      try {
+        await exec(
+          `${binPath} -p ${projectKey}  -i ${csvFilePath} --logFile ${
+            tmpFile.name
+          }`
+        )
+      } catch (error) {
+        expect(error).toBeTruthy()
+        expect(String(error)).toMatch(expectedError)
+      }
 
-          fs.readFile(tmpFile.name, { encoding: 'utf8' }, (err, data) => {
-            expect(data).toContain(expectedError)
-            done()
-          })
-        }
-      )
+      const data = await fs.readFile(tmpFile.name, { encoding: 'utf8' })
+      expect(data).toContain(expectedError)
     })
   })
 
@@ -186,32 +168,30 @@ describe('CSV and CLI Tests', () => {
       )
     })
 
-    it('should take input from file', done => {
+    it('should take input from file', async () => {
       const csvFilePath = path.join(samplesFolder, 'sample.csv')
-      exec(
-        `${binPath} -p ${projectKey} --inputFile ${csvFilePath}`,
-        (error, stdout, stderr) => {
-          expect(error && stderr).toBeFalsy()
-          expect(stdout.match(/prices/)).toBeTruthy()
-          done()
-        }
+      const stdout = await exec(
+        `${binPath} -p ${projectKey} --inputFile ${csvFilePath}`
       )
+      expect(String(stdout)).toMatch(/prices/)
     })
 
-    it('CLI exits on type mapping errors', done => {
-      const csvFilePath = path.join(samplesFolder, 'wrong-type-sample.csv')
-      const jsonFilePath = tmp.fileSync().name
-
-      exec(
-        `${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`,
-        (error, stdout, stderr) => {
+    it(
+      'CLI exits on type mapping errors',
+      async () => {
+        const csvFilePath = path.join(samplesFolder, 'wrong-type-sample.csv')
+        const jsonFilePath = tmp.fileSync().name
+        try {
+          await exec(
+            `${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`
+          )
+        } catch (error) {
           expect(error.code).toBe(1)
-          expect(stdout).toBeFalsy()
-          expect(stderr).toMatch(/row 2: custom-type.+ valid/)
-          done()
+          expect(String(error)).toMatch(/row 2: custom-type.+ valid/)
         }
-      )
-    })
+      },
+      10000
+    )
 
     it('should parse CSV into JSON with array of prices', done => {
       const csvFilePath = path.join(samplesFolder, 'sample.csv')

@@ -1,10 +1,9 @@
-import fs from 'fs'
+import fs from 'mz/fs'
 import tmp from 'tmp'
 import path from 'path'
 import isuuid from 'isuuid'
 import csv from 'csvtojson'
-import { oneLine } from 'common-tags'
-import { exec } from 'child_process'
+import { exec } from 'mz/child_process'
 import DiscountCodeImport from '@commercetools/discount-code-importer'
 import { getCredentials } from '@commercetools/get-credentials'
 import { createData, clearData } from './helpers/utils'
@@ -24,43 +23,48 @@ describe('DiscountCode tests', () => {
     verbose: () => {},
   }
 
-  beforeAll(() =>
-    getCredentials(projectKey)
+  beforeAll(async () => {
+    try {
+      const credentials = await getCredentials(projectKey)
       // Get test credentials
-      .then(credentials => {
-        apiConfig = {
-          host: 'https://auth.sphere.io',
-          apiUrl: 'https://api.sphere.io',
-          projectKey,
-          credentials,
-        }
-        // Clear all discount codes
-        return clearData(apiConfig, 'discountCodes')
-      })
-      // Clear all cart discounts
-      .then(() => clearData(apiConfig, 'cartDiscounts'))
-      .then(() => {
-        // Create cart-discount
-        const cartDiscountDraft = fs.readFileSync(
-          path.join(__dirname, './helpers/cartDiscountDraft.json'),
-          'utf8'
-        )
-        // Wrap in an array because the util function expects an array
-        return createData(apiConfig, 'cartDiscounts', [cartDiscountDraft])
-      })
-      .then(data => {
-        cartDiscount = data[0].body
-      })
-      .catch(process.stderr.write)
-  )
 
-  // Delete Discount codes
-  afterAll(() =>
-    clearData(apiConfig, 'discountCodes')
+      apiConfig = {
+        host: 'https://auth.sphere.io',
+        apiUrl: 'https://api.sphere.io',
+        projectKey,
+        credentials,
+      }
+
+      // Clear all discount codes
+      await clearData(apiConfig, 'discountCodes')
+      // Clear all cart discounts
+      await clearData(apiConfig, 'cartDiscounts')
+
+      // Create cart-discount
+      const cartDiscountDraft = await fs.readFileSync(
+        path.join(__dirname, './helpers/cartDiscountDraft.json'),
+        'utf8'
+      )
+      // Wrap in an array because the util function expects an array
+      const data = await createData(apiConfig, 'cartDiscounts', [
+        cartDiscountDraft,
+      ])
+      cartDiscount = data[0].body
+    } catch (error) {
+      process.stderr.write(error)
+    }
+  }, 15000)
+
+  afterAll(async () => {
+    try {
+      // Delete discount codes
+      await clearData(apiConfig, 'discountCodes')
       // Delete cart discounts
-      .then(() => clearData(apiConfig, 'cartDiscounts'))
-      .catch(process.stderr.write)
-  )
+      await clearData(apiConfig, 'cartDiscounts')
+    } catch (error) {
+      process.stderr.write(error)
+    }
+  })
 
   describe('Discount code generator', () => {
     const binPath = './integration-tests/node_modules/.bin/discount-code-gen'
@@ -70,39 +74,33 @@ describe('DiscountCode tests', () => {
       fs.unlinkSync('discountCodeGenerator.log', 'utf8')
     })
 
-    it('should generate required codes according to template', done => {
-      const expected = {
-        name: {
-          en: 'Sammy',
-          de: 'Valerian',
-        },
-        description: {
-          en: 'greatest promo',
-          de: 'super angebot',
-        },
-        cartPredicate: 'some cart predicate',
-        isActive: true,
-        maxApplications: 9,
-        maxApplicationsPerCustomer: 4,
-      }
-      const filePath = path.join(__dirname, './helpers/generatorTemplate.csv')
-
-      exec(
-        `${binPath} -q 10 -p IT -l 8 -i ${filePath}`,
-        (error, stdout, stderr) => {
-          expect(error).toBeFalsy()
-          expect(stderr).toBeFalsy()
-          const generatedCodes = JSON.parse(stdout)
-          expect(generatedCodes.length).toBe(10)
-          generatedCodes.forEach(codeObj => {
-            expect(codeObj).toMatchObject(expected)
-            expect(codeObj.code).toMatch(/^IT/)
-            expect(codeObj.code.length).toBe(8)
-          })
-          done()
+    it(
+      'should generate required codes according to template',
+      async () => {
+        const expected = {
+          name: { en: 'Sammy', de: 'Valerian' },
+          description: { en: 'greatest promo', de: 'super angebot' },
+          cartPredicate: 'some cart predicate',
+          isActive: true,
+          maxApplications: 9,
+          maxApplicationsPerCustomer: 4,
         }
-      )
-    })
+        const filePath = path.join(__dirname, './helpers/generatorTemplate.csv')
+
+        const [stdout, stderr] = await exec(
+          `${binPath} -q 10 -p IT -l 8 -i ${filePath}`
+        )
+        expect(stderr).toBeFalsy()
+        const generatedCodes = JSON.parse(stdout)
+        expect(generatedCodes).toHaveLength(10)
+        generatedCodes.forEach(codeObj => {
+          expect(codeObj).toMatchObject(expected)
+          expect(codeObj.code).toMatch(/^IT/)
+          expect(codeObj.code).toHaveLength(8)
+        })
+      },
+      15000
+    )
   })
 
   describe('Discount code Importer', () => {
@@ -127,33 +125,22 @@ describe('DiscountCode tests', () => {
           ],
         })
       )
-    })
+    }, 20000)
 
     // Delete Discount codes
     afterAll(() =>
       clearData(apiConfig, 'discountCodes').catch(process.stderr.write)
     )
 
-    it('should create discount codes on CTP', async () => {
-      const reportMessage = oneLine`
-        Summary: there were 10 successfully imported discount codes
-        (10 were newly created, 0 were updated and 0 were unchanged).
-      `
-      const expected = {
-        reportMessage,
-        detailedSummary: {
-          created: 10,
-          updated: 0,
-          unchanged: 0,
-          createErrorCount: 0,
-          updateErrorCount: 0,
-          errors: [],
-        },
-      }
-      await codeImport.run(preparedDiscountCodes)
-      const summary = codeImport.summaryReport()
-      expect(summary).toEqual(expected)
-    })
+    it(
+      'should create discount codes on CTP',
+      async () => {
+        await codeImport.run(preparedDiscountCodes)
+        const summary = codeImport.summaryReport()
+        expect(summary).toMatchSnapshot()
+      },
+      15000
+    )
 
     it('should update discount codes on the CTP', async () => {
       // First, import the codes that need to be updated
@@ -165,28 +152,14 @@ describe('DiscountCode tests', () => {
 
       // Call a new `codeImport` instance so we reset the summary
       codeImport = new DiscountCodeImport({ apiConfig }, logger)
-      const reportMessage = oneLine`
-        Summary: there were 10 successfully imported discount codes
-        (0 were newly created, 10 were updated and 0 were unchanged).
-      `
-      const expected = {
-        reportMessage,
-        detailedSummary: {
-          created: 0,
-          updated: 10,
-          unchanged: 0,
-          createErrorCount: 0,
-          updateErrorCount: 0,
-          errors: [],
-        },
-      }
+
       const newCodesToUpdate = oldCodesToUpdate.map(codeObj =>
         Object.assign({}, codeObj, { maxApplications: 20 })
       )
 
       await codeImport.run(newCodesToUpdate)
       const summary = codeImport.summaryReport()
-      expect(summary).toEqual(expected)
+      expect(summary).toMatchSnapshot()
     })
 
     it('should stop import on first errors by default', async () => {
@@ -206,7 +179,7 @@ describe('DiscountCode tests', () => {
         await codeImport.run(discountCodesSample)
       } catch (e) {
         expect(e.summary.created).toBe(1)
-        expect(e.summary.errors.length).toBe(1)
+        expect(e.summary.errors).toHaveLength(1)
         expect(e.summary.errors[0]).toMatch(/'code' should not be empty/)
       }
     })
@@ -225,32 +198,15 @@ describe('DiscountCode tests', () => {
         const uniqueCode = codeObj.code
         return Object.assign({}, codeObj, { code: `${uniqueCode}foobar` })
       })
-      const reportMessage = oneLine`
-        Summary: there were 8 successfully imported discount codes
-        (8 were newly created, 0 were updated and 0 were unchanged).
-        2 errors occured (2 create errors and 0 update errors.)
-      `
-      const expected = {
-        reportMessage,
-        detailedSummary: {
-          created: 8,
-          updated: 0,
-          unchanged: 0,
-          createErrorCount: 2,
-          updateErrorCount: 0,
-        },
-      }
-
       // Make code invalid
       discountCodesSample[1].code = ''
       discountCodesSample[7].cartDiscounts = 'INVALID-CART-DISCOUNT'
 
       await codeImport.run(discountCodesSample)
       const summary = codeImport.summaryReport()
-      expect(summary).toMatchObject(expected)
+      expect(summary).toMatchSnapshot()
       const errors = summary.detailedSummary.errors
-      expect(errors[0]).toMatch(/'code' should not be empty/)
-      expect(errors[1]).toMatch(/Request body does not contain valid JSON/)
+      expect(errors).toMatchSnapshot()
     })
   })
 
@@ -283,9 +239,10 @@ describe('DiscountCode tests', () => {
         'discountCodes',
         preparedDiscountCodes
       ).catch(process.stderr.write)
-    })
+    }, 15000)
 
-    it('should write json output to file by default', done => {
+    it('should write json output to file by default', async () => {
+      let data
       const jsonFilePath = tmp.fileSync().name
       const expected = {
         version: 1,
@@ -308,31 +265,27 @@ describe('DiscountCode tests', () => {
         maxApplications: 10,
         maxApplicationsPerCustomer: 2,
       }
+      try {
+        const [stdout, stderr] = await exec(
+          `${bin} -o ${jsonFilePath} -p ${projectKey}`
+        )
+        expect(stderr).toBeFalsy()
+        expect(stdout).toMatchSnapshot()
 
-      exec(
-        `${bin} -o ${jsonFilePath} -p ${projectKey}`,
-        (cliError, stdout, stderr) => {
-          expect(cliError).toBeFalsy()
-          expect(stderr).toBeFalsy()
-          expect(stdout).toMatch(/Export operation completed successfully/)
-
-          fs.readFile(jsonFilePath, { encoding: 'utf8' }, (error, data) => {
-            expect(error).toBeFalsy()
-            const actual = JSON.parse(data)
-            actual.forEach(codeObj => {
-              expect(codeObj).toMatchObject(expected)
-              expect(isuuid(codeObj.id)).toBe(true)
-              expect(codeObj.createdAt).toMatch(UTCDateTimeRegex)
-              expect(codeObj.lastModifiedAt).toMatch(UTCDateTimeRegex)
-            })
-
-            done()
-          })
-        }
-      )
+        data = await fs.readFile(jsonFilePath, { encoding: 'utf8' })
+      } catch (error) {
+        process.stderr.write(error)
+      }
+      const actual = JSON.parse(data)
+      actual.forEach(codeObj => {
+        expect(codeObj).toMatchObject(expected)
+        expect(isuuid(codeObj.id)).toBe(true)
+        expect(codeObj.createdAt).toMatch(UTCDateTimeRegex)
+        expect(codeObj.lastModifiedAt).toMatch(UTCDateTimeRegex)
+      })
     })
 
-    it('should write csv output to file when passed the option', done => {
+    it('should write csv output to file when passed the option', async () => {
       const csvFilePath = tmp.fileSync().name
       const expected = {
         version: '1',
@@ -350,28 +303,22 @@ describe('DiscountCode tests', () => {
         maxApplications: '10',
         maxApplicationsPerCustomer: '2',
       }
-
-      exec(
-        `${bin} -o ${csvFilePath} -p ${projectKey} -f csv`,
-        (cliError, stdout, stderr) => {
-          expect(cliError).toBeFalsy()
-          expect(stderr).toBeFalsy()
-          expect(stdout).toMatch(/Export operation completed successfully/)
-
-          fs.readFile(csvFilePath, { encoding: 'utf8' }, (error, data) => {
-            expect(error).toBeFalsy()
-            csv()
-              .fromString(data)
-              .on('json', jsonObj => {
-                expect(jsonObj).toMatchObject(expected)
-                expect(isuuid(jsonObj.id)).toBe(true)
-                expect(jsonObj.createdAt).toMatch(UTCDateTimeRegex)
-                expect(jsonObj.lastModifiedAt).toMatch(UTCDateTimeRegex)
-              })
-              .on('done', () => done())
-          })
-        }
+      const [stdout, stderr] = await exec(
+        `${bin} -o ${csvFilePath} -p ${projectKey} -f csv`
       )
+      expect(stderr).toBeFalsy()
+      expect(stdout).toMatch(/Export operation completed successfully/)
+
+      const data = await fs.readFile(csvFilePath, { encoding: 'utf8' })
+
+      csv()
+        .fromString(data)
+        .on('json', jsonObj => {
+          expect(jsonObj).toMatchObject(expected)
+          expect(isuuid(jsonObj.id)).toBe(true)
+          expect(jsonObj.createdAt).toMatch(UTCDateTimeRegex)
+          expect(jsonObj.lastModifiedAt).toMatch(UTCDateTimeRegex)
+        })
     })
   })
 })

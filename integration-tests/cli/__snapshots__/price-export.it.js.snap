@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Price Exporter CLI basic functionality should print usage information given the help flag 1`] = `
+"
+Usage: integration-tests/node_modules/.bin/price-exporter [options]
+Export prices from the commercetools platform
+
+Options:
+  --help, -h          Show help text.                                  [boolean]
+  --version           Show version number                              [boolean]
+  --input, -i         Path to CSV template.
+  --output, -o        Path to output file.                   [default: \\"stdout\\"]
+  --apiUrl            The host URL of the HTTP API service.
+                                              [default: \\"https://api.sphere.io\\"]
+  --authUrl           The host URL of the OAuth API service.
+                                             [default: \\"https://auth.sphere.io\\"]
+  --projectKey, -p    API project key.                                [required]
+  --accessToken       CTP client access token.
+                      Required scopes: ['view_products', 'view_customers',
+                      'view_types']
+  --delimiter, -d     Used CSV delimiter for template and output. [default: \\",\\"]
+  --where, -w         Where predicate for products from which to fetch prices.
+  --exportFormat, -f  Format for export.
+                                      [choices: \\"csv\\", \\"json\\"] [default: \\"json\\"]
+  --staged, -s        Specify if prices should be from all or published
+                      products.                                        [boolean]
+  --logLevel          Logging level: error, warn, info or verbose.
+                                                               [default: \\"info\\"]
+  --logFile           Path to file where to save logs.
+                                                 [default: \\"price-exporter.log\\"]
+
+"
+`;
+
+exports[`Price Exporter CSV export should resolve refs ans export only fields in template 1`] = `
+"info Starting Export
+info Export operation completed successfully
+"
+`;
+
+exports[`Price Exporter JSON export should not resolve refs and export prices to file as json 1`] = `
+"info Starting Export
+info Export operation completed successfully
+"
+`;

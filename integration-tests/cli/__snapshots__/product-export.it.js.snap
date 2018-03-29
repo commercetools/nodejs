@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Product Exporter CLI basic functionality should print usage information given the help flag 1`] = `
+"
+Usage: integration-tests/node_modules/.bin/product-exporter [options]
+Export products from the commercetools platform
+
+Options:
+  --help, -h        Show help text.                                    [boolean]
+  --version, -v     Show version number                                [boolean]
+  --projectKey, -p  API project key                          [string] [required]
+  --apiUrl          The host URL of the HTTP API service
+                             [string] [default: \\"https://api.commercetools.com\\"]
+  --authUrl         The host URL of the OAuth API service
+                            [string] [default: \\"https://auth.commercetools.com\\"]
+  --accessToken     CTP client access token
+                    Required scopes: ['view_products', 'view_customers'][string]
+  --output, -o      Path to output                  [string] [default: \\"stdout\\"]
+  --batchSize, -b   Amount of products to fetch for each API call (max: 500)
+                                                          [number] [default: 20]
+  --expand          Reference field or fields to expand in the returned products
+                                                                         [array]
+  --exportType, -e  Flag if products should be exported as \`JSON\` strings or
+                    chunks [string] [choices: \\"json\\", \\"chunk\\"] [default: \\"json\\"]
+  --predicate       \`Predicate\` specifying characteristics of products to fetch
+                                                                        [string]
+  --staged, -s      Specify if all or published products should be fetched
+                                                                       [boolean]
+  --total, -t       Total number of products to fetch                   [number]
+  --logLevel        Logging level: error, warn, info or debug
+                                                      [string] [default: \\"info\\"]
+  --prettyLogs      Pretty print logs to the terminal                  [boolean]
+  --logFile         Path to file where logs should be saved
+                                      [string] [default: \\"product-exporter.log\\"]
+
+"
+`;
