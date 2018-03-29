@@ -39,17 +39,17 @@ ERR:   [0m[97m[41mError[0m[90m:[0m[37m [0m[97mRow length does not match
 [0m  [0m[90m-[0m [0m[93mindex.js[0m[90m:[0m[93m95[0m[37m [0m[37mParser._transform[0m
 [0m  [0m  [0m[90m[integration-tests]/[csv-parser]/index.js:95:14[0m
 [0m  [0m
-[0m  [0m[90m-[0m [0m[93m_stream_transform.js[0m[90m:[0m[93m185[0m[37m [0m[37mParser.Transform._read[0m
-[0m  [0m  [0m[90m_stream_transform.js:185:10[0m
+[0m  [0m[90m-[0m [0m[93m_stream_transform.js[0m[90m:[0m[93m186[0m[37m [0m[37mParser.Transform._read[0m
+[0m  [0m  [0m[90m_stream_transform.js:186:10[0m
 [0m  [0m
-[0m  [0m[90m-[0m [0m[93m_stream_transform.js[0m[90m:[0m[93m173[0m[37m [0m[37mParser.Transform._write[0m
-[0m  [0m  [0m[90m_stream_transform.js:173:12[0m
+[0m  [0m[90m-[0m [0m[93m_stream_transform.js[0m[90m:[0m[93m174[0m[37m [0m[37mParser.Transform._write[0m
+[0m  [0m  [0m[90m_stream_transform.js:174:12[0m
 [0m  [0m
-[0m  [0m[90m-[0m [0m[93m_stream_writable.js[0m[90m:[0m[93m406[0m[37m [0m[37mdoWrite[0m
-[0m  [0m  [0m[90m_stream_writable.js:406:12[0m
+[0m  [0m[90m-[0m [0m[93m_stream_writable.js[0m[90m:[0m[93m387[0m[37m [0m[37mdoWrite[0m
+[0m  [0m  [0m[90m_stream_writable.js:387:12[0m
 [0m  [0m
-[0m  [0m[90m-[0m [0m[93m_stream_writable.js[0m[90m:[0m[93m392[0m[37m [0m[37mwriteOrBuffer[0m
-[0m  [0m  [0m[90m_stream_writable.js:392:5[0m
+[0m  [0m[90m-[0m [0m[93m_stream_writable.js[0m[90m:[0m[93m373[0m[37m [0m[37mwriteOrBuffer[0m
+[0m  [0m  [0m[90m_stream_writable.js:373:5[0m
 [0m  [0m
 [0m  [0m[90m-[0m [0m[93m_stream_writable.js[0m[90m:[0m[93m290[0m[37m [0m[37mParser.Writable.write[0m
 [0m  [0m  [0m[90m_stream_writable.js:290:11[0m
