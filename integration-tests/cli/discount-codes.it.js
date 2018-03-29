@@ -24,27 +24,27 @@ describe('DiscountCode tests', () => {
   }
 
   beforeAll(async () => {
-    const credentials = await getCredentials(projectKey)
-    // Get test credentials
-
-    apiConfig = {
-      host: 'https://auth.sphere.io',
-      apiUrl: 'https://api.sphere.io',
-      projectKey,
-      credentials,
-    }
-
-    // Clear all discount codes
-    await clearData(apiConfig, 'discountCodes')
-    // Clear all cart discounts
-    await clearData(apiConfig, 'cartDiscounts')
-
-    // Create cart-discount
-    const cartDiscountDraft = await fs.readFileSync(
-      path.join(__dirname, './helpers/cartDiscountDraft.json'),
-      'utf8'
-    )
     try {
+      const credentials = await getCredentials(projectKey)
+      // Get test credentials
+
+      apiConfig = {
+        host: 'https://auth.sphere.io',
+        apiUrl: 'https://api.sphere.io',
+        projectKey,
+        credentials,
+      }
+
+      // Clear all discount codes
+      await clearData(apiConfig, 'discountCodes')
+      // Clear all cart discounts
+      await clearData(apiConfig, 'cartDiscounts')
+
+      // Create cart-discount
+      const cartDiscountDraft = await fs.readFileSync(
+        path.join(__dirname, './helpers/cartDiscountDraft.json'),
+        'utf8'
+      )
       // Wrap in an array because the util function expects an array
       const data = await createData(apiConfig, 'cartDiscounts', [
         cartDiscountDraft,
@@ -53,7 +53,7 @@ describe('DiscountCode tests', () => {
     } catch (error) {
       process.stderr.write(error)
     }
-  })
+  }, 15000)
 
   afterAll(async () => {
     try {
@@ -74,29 +74,33 @@ describe('DiscountCode tests', () => {
       fs.unlinkSync('discountCodeGenerator.log', 'utf8')
     })
 
-    it('should generate required codes according to template', async () => {
-      const expected = {
-        name: { en: 'Sammy', de: 'Valerian' },
-        description: { en: 'greatest promo', de: 'super angebot' },
-        cartPredicate: 'some cart predicate',
-        isActive: true,
-        maxApplications: 9,
-        maxApplicationsPerCustomer: 4,
-      }
-      const filePath = path.join(__dirname, './helpers/generatorTemplate.csv')
+    it(
+      'should generate required codes according to template',
+      async () => {
+        const expected = {
+          name: { en: 'Sammy', de: 'Valerian' },
+          description: { en: 'greatest promo', de: 'super angebot' },
+          cartPredicate: 'some cart predicate',
+          isActive: true,
+          maxApplications: 9,
+          maxApplicationsPerCustomer: 4,
+        }
+        const filePath = path.join(__dirname, './helpers/generatorTemplate.csv')
 
-      const [stdout, stderr] = await exec(
-        `${binPath} -q 10 -p IT -l 8 -i ${filePath}`
-      )
-      expect(stderr).toBeFalsy()
-      const generatedCodes = JSON.parse(stdout)
-      expect(generatedCodes).toHaveLength(10)
-      generatedCodes.forEach(codeObj => {
-        expect(codeObj).toMatchObject(expected)
-        expect(codeObj.code).toMatch(/^IT/)
-        expect(codeObj.code).toHaveLength(8)
-      })
-    })
+        const [stdout, stderr] = await exec(
+          `${binPath} -q 10 -p IT -l 8 -i ${filePath}`
+        )
+        expect(stderr).toBeFalsy()
+        const generatedCodes = JSON.parse(stdout)
+        expect(generatedCodes).toHaveLength(10)
+        generatedCodes.forEach(codeObj => {
+          expect(codeObj).toMatchObject(expected)
+          expect(codeObj.code).toMatch(/^IT/)
+          expect(codeObj.code).toHaveLength(8)
+        })
+      },
+      15000
+    )
   })
 
   describe('Discount code Importer', () => {
@@ -231,9 +235,10 @@ describe('DiscountCode tests', () => {
         'discountCodes',
         preparedDiscountCodes
       ).catch(process.stderr.write)
-    })
+    }, 15000)
 
     it('should write json output to file by default', async () => {
+      let data
       const jsonFilePath = tmp.fileSync().name
       const expected = {
         version: 1,
@@ -256,15 +261,17 @@ describe('DiscountCode tests', () => {
         maxApplications: 10,
         maxApplicationsPerCustomer: 2,
       }
+      try {
+        const [stdout, stderr] = await exec(
+          `${bin} -o ${jsonFilePath} -p ${projectKey}`
+        )
+        expect(stderr).toBeFalsy()
+        expect(stdout).toMatchSnapshot()
 
-      const [stdout, stderr] = await exec(
-        `${bin} -o ${jsonFilePath} -p ${projectKey}`
-      )
-      expect(stderr).toBeFalsy()
-      expect(stdout).toMatchSnapshot()
-
-      const data = await fs.readFile(jsonFilePath, { encoding: 'utf8' })
-
+        data = await fs.readFile(jsonFilePath, { encoding: 'utf8' })
+      } catch (error) {
+        process.stderr.write(error)
+      }
       const actual = JSON.parse(data)
       actual.forEach(codeObj => {
         expect(codeObj).toMatchObject(expected)

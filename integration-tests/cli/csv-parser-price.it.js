@@ -93,14 +93,9 @@ describe('CSV and CLI Tests', () => {
 
     it('stack trace on verbose level', async () => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
-      try {
-        await exec(
-          `${binPath} -p ${projectKey} -i ${csvFilePath} --logLevel verbose`
-        )
-      } catch (error) {
-        expect(error.code).toBe(1)
-        expect(error).toMatchSnapshot()
-      }
+      expect(
+        exec(`${binPath} -p ${projectKey} -i ${csvFilePath} --logLevel verbose`)
+      ).rejects.toThrowErrorMatchingSnapshot()
     })
 
     // eslint-disable-next-line max-len
