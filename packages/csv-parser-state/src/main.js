@@ -1,3 +1,4 @@
+/* @flow */
 import csv from 'csv-parser'
 import highland from 'highland'
 import JSONStream from 'JSONStream'
@@ -11,17 +12,36 @@ import {
   createAuthMiddlewareWithExistingToken,
 } from '@commercetools/sdk-middleware-auth'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
+import type {
+  ApiConfigOptions,
+  ConstructorOptions,
+  CsvOptions,
+  LoggerOptions,
+  StateWithStringTransitions,
+  StateWithUnresolvedTransitions,
+} from 'types/state'
+import type { Client, SuccessResult } from 'types/sdk'
 import pkg from '../package.json'
 
 export default class CsvParserState {
+  // Set flowtype annotations
+  accessToken: string
+  apiConfig: ApiConfigOptions
+  client: Client
+  continueOnProblems: boolean
+  csvConfig: CsvOptions
+  logger: LoggerOptions
+  _rowIndex: number
+  _fetchStates: Function
+
   constructor(
     {
-      apiConfig = null,
-      csvConfig = {},
+      apiConfig,
+      csvConfig,
       continueOnProblems = false,
-      accessToken = '',
-    },
-    logger
+      accessToken,
+    }: ConstructorOptions,
+    logger: LoggerOptions
   ) {
     this.apiConfig = apiConfig
     this.accessToken = accessToken
@@ -42,7 +62,7 @@ export default class CsvParserState {
     this._rowIndex = 0
   }
 
-  parse(input, output) {
+  parse(input: stream$Readable, output: stream$Writable) {
     this.logger.info('Starting conversion')
     highland(input)
       .through(csv({ separator: this.csvConfig.delimiter, strict: true }))
@@ -64,7 +84,10 @@ export default class CsvParserState {
       .pipe(output)
   }
 
-  async _transformTransitions({ transitions, ...restOfState }) {
+  async _transformTransitions({
+    transitions,
+    ...restOfState
+  }: StateWithUnresolvedTransitions) {
     if (!transitions) return restOfState
     // We setup the client here because it is unnecessary
     // if there are no transitions
@@ -80,7 +103,7 @@ export default class CsvParserState {
     return { ...restOfState, transitions: stateReferences }
   }
 
-  _buildStateRequest(stateKey) {
+  _buildStateRequest(stateKey: string): Promise<SuccessResult> {
     const stateService = this._createStateService()
     const uri = stateService.byKey(stateKey).build()
     return this._fetchStates(uri)
@@ -110,7 +133,10 @@ export default class CsvParserState {
     }).states
   }
 
-  _mapTransitionsToArray({ transitions, ...restOfState }) {
+  _mapTransitionsToArray({
+    transitions,
+    ...restOfState
+  }: StateWithStringTransitions) {
     return transitions
       ? {
           ...restOfState,
@@ -120,7 +146,7 @@ export default class CsvParserState {
   }
 
   // Highlang signature for custom error handling
-  _handleErrors(error, callback) {
+  _handleErrors(error: any, callback: Function) {
     this._rowIndex += 1
     if (this.continueOnProblems)
       // Log warning and continue
@@ -131,7 +157,7 @@ export default class CsvParserState {
   }
 
   // Remove fields with empty values from the state objects
-  static _removeEmptyFields(item) {
+  static _removeEmptyFields(item: Object): Object {
     // "acc" is "state" but lint doesn't like mutations
     return Object.entries(item).reduce((acc, entry) => {
       if (entry[1] !== '') acc[entry[0]] = entry[1]
@@ -140,7 +166,9 @@ export default class CsvParserState {
   }
 }
 
-CsvParserState.prototype._fetchStates = memoize(function(uri) {
+CsvParserState.prototype._fetchStates = memoize(function(
+  uri: string
+): Promise<SuccessResult> {
   return this.client.execute({
     uri,
     method: 'GET',
