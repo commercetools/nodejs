@@ -24,11 +24,19 @@
     "email": "williams.omayuku@commercetools.de"
   },
   "license": "MIT",
+  "bin": {
+    "csv-parser-state": "bin/csv-parser-state.js"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ],
   "devDependencies": {
     "streamtest": "^1.2.3"
   },
   "dependencies": {
     "@commercetools/api-request-builder": "^3.7.0",
+    "@commercetools/get-credentials": "^2.1.4",
     "@commercetools/sdk-client": "^1.5.4",
     "@commercetools/sdk-middleware-auth": "^3.5.1",
     "@commercetools/sdk-middleware-http": "^2.3.1",
@@ -37,6 +45,9 @@
     "csv-parser": "^1.12.1",
     "flat": "^4.0.0",
     "highland": "^2.13.0",
-    "lodash.memoize": "^4.1.2"
+    "lodash.memoize": "^4.1.2",
+    "pino": "^4.15.3",
+    "pretty-error": "^2.1.1",
+    "yargs": "^11.0.0"
   }
 }
