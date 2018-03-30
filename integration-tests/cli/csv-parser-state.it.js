@@ -1,4 +1,5 @@
 import path from 'path'
+import isuuid from 'isuuid'
 import { exec } from 'mz/child_process'
 import { version } from '@commercetools/csv-parser-state/package.json'
 
@@ -70,8 +71,13 @@ describe('CSV and CLI Tests', () => {
             `${binPath} -p ${projectKey} --input ${statesCsv}`
           )
           expect(stderr).toBeFalsy()
-          expect(JSON.parse(stdout)).toHaveLength(4)
-          expect(stdout).toMatchSnapshot()
+          const parsedStates = JSON.parse(stdout)
+          expect(parsedStates).toHaveLength(4)
+          // ids cannot be verified with snapshots as they are dynamic,
+          // so verify separately and remove
+          expect(isuuid(parsedStates[1].transitions[0].id)).toBe(true)
+          delete parsedStates[1].transitions[0].id
+          expect(parsedStates).toMatchSnapshot()
         })
       })
     })

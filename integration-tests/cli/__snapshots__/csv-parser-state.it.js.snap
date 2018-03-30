@@ -33,16 +33,57 @@ Options:
 `;
 
 exports[`CSV and CLI Tests Parse with transitions with \`projectKey\` should resolve transition and parse states 1`] = `
-"[
-{\\"key\\":\\"state-key-1\\",\\"type\\":\\"OrderState\\",\\"name\\":{\\"en\\":\\"Will's state\\"},\\"initial\\":\\"true\\",\\"description\\":{\\"en\\":\\"beschreibung\\"}}
-,
-{\\"key\\":\\"state-key-2\\",\\"type\\":\\"ProductState\\",\\"name\\":{\\"en\\":\\"tester\\"},\\"initial\\":\\"false\\",\\"description\\":{\\"en\\":\\"uniqueness of states\\"},\\"transitions\\":[{\\"typeId\\":\\"state\\",\\"id\\":\\"bdfc6a63-efa1-4048-bd69-238fee116dd8\\"}]}
-,
-{\\"key\\":\\"state-key-3\\",\\"type\\":\\"LineItemState\\",\\"name\\":{\\"en\\":\\"completion\\"},\\"initial\\":\\"false\\",\\"description\\":{\\"en\\":\\"only used when some state is complete\\"}}
-,
-{\\"key\\":\\"state-key-4\\",\\"type\\":\\"PaymentState\\",\\"name\\":{\\"en\\":\\"auto gen\\"},\\"initial\\":\\"true\\",\\"description\\":{\\"en\\":\\"this state should be auto generated\\"}}
+Array [
+  Object {
+    "description": Object {
+      "en": "beschreibung",
+    },
+    "initial": "true",
+    "key": "state-key-1",
+    "name": Object {
+      "en": "Will's state",
+    },
+    "type": "OrderState",
+  },
+  Object {
+    "description": Object {
+      "en": "uniqueness of states",
+    },
+    "initial": "false",
+    "key": "state-key-2",
+    "name": Object {
+      "en": "tester",
+    },
+    "transitions": Array [
+      Object {
+        "typeId": "state",
+      },
+    ],
+    "type": "ProductState",
+  },
+  Object {
+    "description": Object {
+      "en": "only used when some state is complete",
+    },
+    "initial": "false",
+    "key": "state-key-3",
+    "name": Object {
+      "en": "completion",
+    },
+    "type": "LineItemState",
+  },
+  Object {
+    "description": Object {
+      "en": "this state should be auto generated",
+    },
+    "initial": "true",
+    "key": "state-key-4",
+    "name": Object {
+      "en": "auto gen",
+    },
+    "type": "PaymentState",
+  },
 ]
-"
 `;
 
 exports[`CSV and CLI Tests Parse with transitions without \`projectkey\` with \`continueOnProblems\` should skip rows having transition 1`] = `
