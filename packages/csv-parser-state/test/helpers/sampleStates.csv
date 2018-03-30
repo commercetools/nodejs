@@ -1,5 +1,5 @@
 name.en,key,description.en,type,initial,transitions
 Will's state,state-key-1,beschreibung,OrderState,true,
-tester,state-key-2,uniqueness of states,ProductState,false,some-other-state
+tester,state-key-2,uniqueness of states,ProductState,false,Initial
 completion,state-key-3,only used when some state is complete,LineItemState,false,
 auto gen,state-key-4,this state should be auto generated,PaymentState,true,

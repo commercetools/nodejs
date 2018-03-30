@@ -61,7 +61,7 @@ Array [
     "name": Object {
       "en": "tester",
     },
-    "transitions": "some-other-state",
+    "transitions": "Initial",
     "type": "ProductState",
   },
   Object {
