@@ -37,7 +37,7 @@ ${description}`
   })
   .option('accessToken', {
     describe: `CTP client access token
-Required scopes: ['view_products']`,
+Required scopes: ['view_orders']`,
     type: 'string',
   })
   .option('input', {
@@ -92,7 +92,7 @@ Required scopes: ['view_products']`,
     type: 'boolean',
   })
   .option('logFile', {
-    default: 'product-json-to-csv.log',
+    default: 'csv-parser-state.log',
     describe: 'Path to file where logs should be saved',
     type: 'string',
   }).argv
