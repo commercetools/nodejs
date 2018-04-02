@@ -14,7 +14,7 @@ Options:
   --authUrl                  The host URL of the OAuth API service
                             [string] [default: \\"https://auth.commercetools.com\\"]
   --accessToken              CTP client access token
-                             Required scopes: ['view_products']         [string]
+                             Required scopes: ['view_orders']           [string]
   --input, -i                Path to CSV file.                [default: \\"stdin\\"]
   --output, -o               Path to output JSON file
                                                     [string] [default: \\"stdout\\"]
@@ -27,7 +27,7 @@ Options:
                                                       [string] [default: \\"info\\"]
   --prettyLogs               Pretty print logs to the terminal         [boolean]
   --logFile                  Path to file where logs should be saved
-                                   [string] [default: \\"product-json-to-csv.log\\"]
+                                      [string] [default: \\"csv-parser-state.log\\"]
 
 "
 `;
@@ -38,7 +38,7 @@ Array [
     "description": Object {
       "en": "beschreibung",
     },
-    "initial": "true",
+    "initial": true,
     "key": "state-key-1",
     "name": Object {
       "en": "Will's state",
@@ -49,7 +49,7 @@ Array [
     "description": Object {
       "en": "uniqueness of states",
     },
-    "initial": "false",
+    "initial": false,
     "key": "state-key-2",
     "name": Object {
       "en": "tester",
@@ -65,7 +65,7 @@ Array [
     "description": Object {
       "en": "only used when some state is complete",
     },
-    "initial": "false",
+    "initial": false,
     "key": "state-key-3",
     "name": Object {
       "en": "completion",
@@ -76,7 +76,7 @@ Array [
     "description": Object {
       "en": "this state should be auto generated",
     },
-    "initial": "true",
+    "initial": true,
     "key": "state-key-4",
     "name": Object {
       "en": "auto gen",
@@ -88,20 +88,20 @@ Array [
 
 exports[`CSV and CLI Tests Parse with transitions without \`projectkey\` with \`continueOnProblems\` should skip rows having transition 1`] = `
 "[
-{\\"key\\":\\"state-key-1\\",\\"type\\":\\"OrderState\\",\\"name\\":{\\"en\\":\\"Will's state\\"},\\"initial\\":\\"true\\",\\"description\\":{\\"en\\":\\"beschreibung\\"}}
+{\\"key\\":\\"state-key-1\\",\\"type\\":\\"OrderState\\",\\"name\\":{\\"en\\":\\"Will's state\\"},\\"initial\\":true,\\"description\\":{\\"en\\":\\"beschreibung\\"}}
 ,
-{\\"key\\":\\"state-key-3\\",\\"type\\":\\"LineItemState\\",\\"name\\":{\\"en\\":\\"completion\\"},\\"initial\\":\\"false\\",\\"description\\":{\\"en\\":\\"only used when some state is complete\\"}}
+{\\"key\\":\\"state-key-3\\",\\"type\\":\\"LineItemState\\",\\"name\\":{\\"en\\":\\"completion\\"},\\"initial\\":false,\\"description\\":{\\"en\\":\\"only used when some state is complete\\"}}
 ,
-{\\"key\\":\\"state-key-4\\",\\"type\\":\\"PaymentState\\",\\"name\\":{\\"en\\":\\"auto gen\\"},\\"initial\\":\\"true\\",\\"description\\":{\\"en\\":\\"this state should be auto generated\\"}}
+{\\"key\\":\\"state-key-4\\",\\"type\\":\\"PaymentState\\",\\"name\\":{\\"en\\":\\"auto gen\\"},\\"initial\\":true,\\"description\\":{\\"en\\":\\"this state should be auto generated\\"}}
 ]
 "
 `;
 
 exports[`CSV and CLI Tests Parse without transitions should parse states without projectKey 1`] = `
 "[
-{\\"key\\":\\"state-key-1\\",\\"type\\":\\"OrderState\\",\\"name\\":{\\"en\\":\\"Will's state\\"},\\"initial\\":\\"true\\",\\"description\\":{\\"en\\":\\"beschreibung\\"}}
+{\\"key\\":\\"state-key-1\\",\\"type\\":\\"OrderState\\",\\"name\\":{\\"en\\":\\"Will's state\\"},\\"initial\\":true,\\"description\\":{\\"en\\":\\"beschreibung\\"}}
 ,
-{\\"key\\":\\"state-key-2\\",\\"type\\":\\"ProductState\\",\\"name\\":{\\"en\\":\\"tester\\"},\\"initial\\":\\"false\\",\\"description\\":{\\"en\\":\\"uniqueness of states\\"}}
+{\\"key\\":\\"state-key-2\\",\\"type\\":\\"ProductState\\",\\"name\\":{\\"en\\":\\"tester\\"},\\"initial\\":false,\\"description\\":{\\"en\\":\\"uniqueness of states\\"}}
 ]
 "
 `;

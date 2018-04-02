@@ -243,28 +243,68 @@ describe('CsvParserState', () => {
     })
   })
 
-  describe('::_mapTransitionsToArray', () => {
+  describe('::_mapMultiValueFieldsToArray', () => {
     describe('with transitions', () => {
-      test('should convert `transitions` property to an Array', () => {
-        const actual = {
-          foo: 'bar',
-          transitions: 'my-state-1;my-state-2',
-        }
-        const expected = {
-          foo: 'bar',
-          transitions: ['my-state-1', 'my-state-2'],
-        }
-        expect(csvParser._mapTransitionsToArray(actual)).toEqual(expected)
+      describe('with roles', () => {
+        test('should convert `transitions` and roles property to an Array', () => {
+          const actual = {
+            foo: 'bar',
+            transitions: 'my-state-1;my-state-2',
+            roles: 'ReviewIncludedInStatistics;Return',
+          }
+          const expected = {
+            foo: 'bar',
+            transitions: ['my-state-1', 'my-state-2'],
+            roles: ['ReviewIncludedInStatistics', 'Return'],
+          }
+          expect(csvParser._mapMultiValueFieldsToArray(actual)).toEqual(
+            expected
+          )
+        })
+      })
+
+      describe('without roles', () => {
+        test('should convert `transitions` and roles property to an Array', () => {
+          const actual = {
+            foo: 'bar',
+            transitions: 'my-state-1;my-state-2',
+          }
+          const expected = {
+            foo: 'bar',
+            transitions: ['my-state-1', 'my-state-2'],
+          }
+          expect(csvParser._mapMultiValueFieldsToArray(actual)).toEqual(
+            expected
+          )
+        })
       })
     })
 
     describe('without transitions', () => {
-      test('should not mutate state', () => {
-        const actual = {
-          foo: 'bar',
-          key: 'my-state',
-        }
-        expect(csvParser._mapTransitionsToArray(actual)).toEqual(actual)
+      describe('with roles', () => {
+        test('should convert `transitions` and roles property to an Array', () => {
+          const actual = {
+            foo: 'bar',
+            roles: 'ReviewIncludedInStatistics;Return',
+          }
+          const expected = {
+            foo: 'bar',
+            roles: ['ReviewIncludedInStatistics', 'Return'],
+          }
+          expect(csvParser._mapMultiValueFieldsToArray(actual)).toEqual(
+            expected
+          )
+        })
+      })
+
+      describe('without roles', () => {
+        test('should not mutate state', () => {
+          const actual = {
+            foo: 'bar',
+            key: 'my-state',
+          }
+          expect(csvParser._mapMultiValueFieldsToArray(actual)).toEqual(actual)
+        })
       })
     })
   })
@@ -281,6 +321,43 @@ describe('CsvParserState', () => {
         some: 'all',
       }
       expect(CsvParserState._removeEmptyFields(actual)).toEqual(expected)
+    })
+  })
+
+  describe('::_parseInitialToBoolean', () => {
+    describe('with `initial` field', () => {
+      test('should return boolean value from true string', () => {
+        const actual = {
+          foo: 'bar',
+          initial: 'true',
+        }
+        const expected = {
+          foo: 'bar',
+          initial: true,
+        }
+        expect(CsvParserState._parseInitialToBoolean(actual)).toEqual(expected)
+      })
+
+      test('should return boolean value from false string', () => {
+        const actual = {
+          foo: 'bar',
+          initial: 'false',
+        }
+        const expected = {
+          foo: 'bar',
+          initial: false,
+        }
+        expect(CsvParserState._parseInitialToBoolean(actual)).toEqual(expected)
+      })
+    })
+
+    describe('without `initial` field', () => {
+      test('should not mutate state', () => {
+        const actual = {
+          foo: 'bar',
+        }
+        expect(CsvParserState._parseInitialToBoolean(actual)).toEqual(actual)
+      })
     })
   })
 

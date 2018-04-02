@@ -37,7 +37,7 @@ export type StateWithStringTransitions = {
   description?: Object,
   initial?: boolean,
   builtIn?: boolean,
-  roles?: Array<StateRole>,
+  roles?: string,
   transitions?: string,
 }
 

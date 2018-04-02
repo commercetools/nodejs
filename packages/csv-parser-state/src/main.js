@@ -67,8 +67,9 @@ export default class CsvParserState {
     highland(input)
       .through(csv({ separator: this.csvConfig.delimiter, strict: true }))
       .map(CsvParserState._removeEmptyFields)
+      .map(CsvParserState._parseInitialToBoolean)
       .map(unflatten)
-      .map(state => this._mapTransitionsToArray(state))
+      .map(state => this._mapMultiValueFieldsToArray(state))
       .flatMap(state => highland(this._transformTransitions(state)))
       .errors((error, cb) => this._handleErrors(error, cb))
       .stopOnError(error => {
@@ -133,16 +134,20 @@ export default class CsvParserState {
     }).states
   }
 
-  _mapTransitionsToArray({
+  _mapMultiValueFieldsToArray({
+    roles,
     transitions,
     ...restOfState
   }: StateWithStringTransitions) {
-    return transitions
-      ? {
-          ...restOfState,
-          transitions: transitions.split(this.csvConfig.multiValueDelimiter),
-        }
-      : restOfState
+    const mappedObject = {}
+    if (transitions)
+      mappedObject.transitions = this._mapStringToArray(transitions)
+    if (roles) mappedObject.roles = this._mapStringToArray(roles)
+    return { ...mappedObject, ...restOfState }
+  }
+
+  _mapStringToArray(value: string): Array<string> {
+    return value.split(this.csvConfig.multiValueDelimiter)
   }
 
   // Highlang signature for custom error handling
@@ -163,6 +168,15 @@ export default class CsvParserState {
       if (entry[1] !== '') acc[entry[0]] = entry[1]
       return acc
     }, {})
+  }
+
+  static _parseInitialToBoolean(state: Object): Object {
+    return Object.prototype.hasOwnProperty.call(state, 'initial')
+      ? {
+          ...state,
+          initial: state.initial === 'true' || state.initial === true,
+        }
+      : state
   }
 }
 

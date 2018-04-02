@@ -6,7 +6,7 @@ Array [
     "description": Object {
       "en": "beschreibung",
     },
-    "initial": "true",
+    "initial": true,
     "key": "state-key-1",
     "name": Object {
       "en": "Will's state",
@@ -17,7 +17,7 @@ Array [
     "description": Object {
       "en": "only used when some state is complete",
     },
-    "initial": "false",
+    "initial": false,
     "key": "state-key-3",
     "name": Object {
       "en": "completion",
@@ -28,7 +28,7 @@ Array [
     "description": Object {
       "en": "this state should be auto generated",
     },
-    "initial": "true",
+    "initial": true,
     "key": "state-key-4",
     "name": Object {
       "en": "auto gen",
@@ -44,48 +44,47 @@ Array [
     "description": Object {
       "en": "beschreibung",
     },
-    "initial": "true",
+    "initial": true,
     "key": "state-key-1",
     "name": Object {
       "en": "Will's state",
     },
-    "transitions": "",
     "type": "OrderState",
   },
   Object {
     "description": Object {
       "en": "uniqueness of states",
     },
-    "initial": "false",
+    "initial": false,
     "key": "state-key-2",
     "name": Object {
       "en": "tester",
     },
-    "transitions": "Initial",
+    "transitions": Array [
+      "Initial",
+    ],
     "type": "ProductState",
   },
   Object {
     "description": Object {
       "en": "only used when some state is complete",
     },
-    "initial": "false",
+    "initial": false,
     "key": "state-key-3",
     "name": Object {
       "en": "completion",
     },
-    "transitions": "",
     "type": "LineItemState",
   },
   Object {
     "description": Object {
       "en": "this state should be auto generated",
     },
-    "initial": "true",
+    "initial": true,
     "key": "state-key-4",
     "name": Object {
       "en": "auto gen",
     },
-    "transitions": "",
     "type": "PaymentState",
   },
 ]
