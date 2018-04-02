@@ -32,7 +32,8 @@ export function actionsMapRates(diff, oldObj, newObj) {
     }),
     [CHANGE_ACTIONS]: (oldObject, updatedObject) => ({
       action: 'replaceTaxRate',
-      taxRateId: oldObject.id,
+      taxRateId:
+        oldObject.id === updatedObject.id ? oldObject.id : updatedObject.id,
       taxRate: updatedObject,
     }),
   })

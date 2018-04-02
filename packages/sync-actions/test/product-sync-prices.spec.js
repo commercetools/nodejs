@@ -1,3 +1,4 @@
+import shuffle from 'lodash.shuffle'
 import productsSyncFn from '../src/products'
 
 /* eslint-disable max-len */
@@ -7,7 +8,7 @@ describe('Actions', () => {
     productsSync = productsSyncFn()
   })
 
-  describe('build actions', () => {
+  describe('with `priceID`', () => {
     const validFrom = new Date().toISOString()
     const discounted = {
       value: { centAmount: 4000, currencyCode: 'EUR' },
@@ -166,5 +167,177 @@ describe('Actions', () => {
 
     const actions = productsSync.buildActions(now, before)
     expect(actions).toEqual([])
+  })
+
+  describe('without `priceID`', () => {
+    let actions
+    const dateNow = new Date()
+    const twoWeeksFromNow = new Date(Date.now() + 12096e5) // two weeks from now
+    const threeWeeksFromNow = new Date(Date.now() + 12096e5 * 1.5)
+
+    const before = {
+      id: '123-abc',
+      masterVariant: {
+        id: 1,
+        prices: [
+          {
+            // change
+            id: '111',
+            value: { currencyCode: 'EUR', centAmount: 3000 },
+            country: 'US',
+            customerGroup: { typeId: 'customer-group', id: 'cg1' },
+            channel: { typeId: 'channel', id: 'ch1' },
+          },
+          {
+            // change
+            id: '333',
+            value: { currencyCode: 'SEK', centAmount: 10000 },
+            country: 'US',
+            channel: { typeId: 'channel', id: 'ch1' },
+          },
+          {
+            // keep
+            id: '444',
+            value: { currencyCode: 'SEK', centAmount: 25000 },
+            country: 'SE',
+          },
+          {
+            // remove
+            id: '666',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: twoWeeksFromNow,
+            validUntil: threeWeeksFromNow,
+          },
+          {
+            // change
+            id: '777',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+          },
+        ],
+      },
+    }
+    const now = {
+      id: '456-def',
+      masterVariant: {
+        id: 1,
+        prices: [
+          {
+            // change
+            value: { currencyCode: 'EUR', centAmount: 4000 },
+            country: 'US',
+            customerGroup: { typeId: 'customer-group', id: 'cg1' },
+            channel: { typeId: 'channel', id: 'ch1' },
+          },
+          {
+            // change
+            value: { currencyCode: 'SEK', centAmount: 15000 },
+            country: 'US',
+            channel: { typeId: 'channel', id: 'ch1' },
+          },
+          {
+            // change
+            value: { currencyCode: 'GBP', centAmount: 10000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+          },
+          {
+            // keep
+            value: { currencyCode: 'SEK', centAmount: 25000 },
+            country: 'SE',
+          },
+          {
+            // add
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'US',
+            validFrom: twoWeeksFromNow,
+            validUntil: threeWeeksFromNow,
+          },
+        ],
+      },
+    }
+
+    beforeEach(() => {
+      now.masterVariant.prices = shuffle(now.masterVariant.prices)
+      actions = productsSync.buildActions(now, before)
+    })
+
+    test('should build five update actions', () => {
+      expect(actions).toHaveLength(5)
+    })
+
+    test('should build `changePrice` actions', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'changePrice',
+            priceId: '111',
+            price: {
+              id: '111',
+              value: { currencyCode: 'EUR', centAmount: 4000 },
+              country: 'US',
+              customerGroup: { typeId: 'customer-group', id: 'cg1' },
+              channel: { typeId: 'channel', id: 'ch1' },
+            },
+          },
+          {
+            action: 'changePrice',
+            priceId: '333',
+            price: {
+              id: '333',
+              value: { currencyCode: 'SEK', centAmount: 15000 },
+              country: 'US',
+              channel: { typeId: 'channel', id: 'ch1' },
+            },
+          },
+          {
+            action: 'changePrice',
+            priceId: '777',
+            price: {
+              id: '777',
+              value: { currencyCode: 'GBP', centAmount: 10000 },
+              country: 'UK',
+              validFrom: dateNow,
+              validUntil: twoWeeksFromNow,
+            },
+          },
+        ])
+      )
+    })
+
+    test('should build `removePrice` action', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'removePrice',
+            priceId: '666',
+          },
+        ])
+      )
+    })
+
+    test('should build `addPrice` action', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'addPrice',
+            price: {
+              value: {
+                currencyCode: 'GBP',
+                centAmount: 1000,
+              },
+              country: 'US',
+              validFrom: twoWeeksFromNow,
+              validUntil: threeWeeksFromNow,
+            },
+            variantId: 1,
+          },
+        ])
+      )
+    })
   })
 })
