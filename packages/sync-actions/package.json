@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sync-actions",
-  "version": "1.22.1",
+  "version": "1.22.2",
   "description": "Build API update actions for the commercetools platform.",
   "keywords": [
     "commercetools",
@@ -38,7 +38,9 @@
     "jsondiffpatch": "0.2.4",
     "lodash.flatten": "4.4.0",
     "lodash.foreach": "4.5.0",
+    "lodash.isequal": "4.5.0",
     "lodash.isnil": "4.0.0",
+    "lodash.shuffle": "4.2.0",
     "lodash.uniqwith": "4.5.0"
   }
 }
