@@ -16,25 +16,21 @@ describe('StockExporter CLI', () => {
   const binPath = './integration-tests/node_modules/.bin/inventoriesexporter'
   let apiConfig
   beforeAll(async () => {
-    try {
-      const credentials = await getCredentials(projectKey)
-      apiConfig = {
-        host: CONSTANTS.host.auth,
-        apiUrl: CONSTANTS.host.api,
-        projectKey,
-        credentials: {
-          clientId: credentials.clientId,
-          clientSecret: credentials.clientSecret,
-        },
-      }
-      await clearData(apiConfig, 'orders')
-      await clearData(apiConfig, 'inventory')
-      await clearData(apiConfig, 'types')
-      await createData(apiConfig, 'types', customFields)
-      await createData(apiConfig, 'inventory', inventories)
-    } catch (error) {
-      process.stderr.write(error)
+    const credentials = await getCredentials(projectKey)
+    apiConfig = {
+      host: CONSTANTS.host.auth,
+      apiUrl: CONSTANTS.host.api,
+      projectKey,
+      credentials: {
+        clientId: credentials.clientId,
+        clientSecret: credentials.clientSecret,
+      },
     }
+    await clearData(apiConfig, 'orders')
+    await clearData(apiConfig, 'inventory')
+    await clearData(apiConfig, 'types')
+    await createData(apiConfig, 'types', customFields)
+    await createData(apiConfig, 'inventory', inventories)
   }, 30000)
 
   afterAll(() =>

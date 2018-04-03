@@ -63,14 +63,9 @@ describe('CSV and CLI Tests', () => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
-      try {
-        await exec(
-          `${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`
-        )
-      } catch (error) {
-        expect(error.code).toBe(1)
-        expect(String(error)).toMatch(/Row length does not match headers/)
-      }
+      expect(
+        exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`)
+      ).rejects.toThrowError(/Row length does not match headers/)
     })
 
     it(
@@ -108,16 +103,13 @@ describe('CSV and CLI Tests', () => {
       const expectedError = 'Row length does not match headers'
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
 
-      try {
-        await exec(
+      await expect(
+        exec(
           `${binPath} -p ${projectKey}  -i ${csvFilePath} --logFile ${
             tmpFile.name
           }`
         )
-      } catch (error) {
-        expect(error).toBeTruthy()
-        expect(String(error)).toMatch(expectedError)
-      }
+      ).rejects.toThrowError(expectedError)
 
       const data = await fs.readFile(tmpFile.name, { encoding: 'utf8' })
       expect(data).toContain(expectedError)

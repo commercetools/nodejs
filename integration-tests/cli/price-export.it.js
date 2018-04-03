@@ -59,17 +59,13 @@ describe('Price Exporter', () => {
     productType.id = createdProductType[0].body.id
     customerGroup.id = createdCustomerGroup[0].body.id
 
-    try {
-      const sampleProducts = await createProducts(
-        productType,
-        customerGroup,
-        channel,
-        customType
-      )
-      await createData(apiConfig, 'products', sampleProducts)
-    } catch (error) {
-      process.stderr.write(error)
-    }
+    const sampleProducts = await createProducts(
+      productType,
+      customerGroup,
+      channel,
+      customType
+    )
+    await createData(apiConfig, 'products', sampleProducts)
   }, 10000)
 
   afterAll(async () => {

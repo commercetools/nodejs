@@ -24,46 +24,39 @@ describe('DiscountCode tests', () => {
   }
 
   beforeAll(async () => {
-    try {
-      const credentials = await getCredentials(projectKey)
-      // Get test credentials
+    const credentials = await getCredentials(projectKey)
+    // Get test credentials
 
-      apiConfig = {
-        host: 'https://auth.sphere.io',
-        apiUrl: 'https://api.sphere.io',
-        projectKey,
-        credentials,
-      }
-
-      // Clear all discount codes
-      await clearData(apiConfig, 'discountCodes')
-      // Clear all cart discounts
-      await clearData(apiConfig, 'cartDiscounts')
-
-      // Create cart-discount
-      const cartDiscountDraft = await fs.readFileSync(
-        path.join(__dirname, './helpers/cartDiscountDraft.json'),
-        'utf8'
-      )
-      // Wrap in an array because the util function expects an array
-      const data = await createData(apiConfig, 'cartDiscounts', [
-        cartDiscountDraft,
-      ])
-      cartDiscount = data[0].body
-    } catch (error) {
-      process.stderr.write(error)
+    apiConfig = {
+      host: 'https://auth.sphere.io',
+      apiUrl: 'https://api.sphere.io',
+      projectKey,
+      credentials,
     }
+
+    // Clear all discount codes
+    await clearData(apiConfig, 'discountCodes')
+    // Clear all cart discounts
+    await clearData(apiConfig, 'cartDiscounts')
+
+    // Create cart-discount
+    const cartDiscountDraft = await fs.readFileSync(
+      path.join(__dirname, './helpers/cartDiscountDraft.json'),
+      'utf8'
+    )
+    // Wrap in an array because the util function expects an array
+    const data = await createData(apiConfig, 'cartDiscounts', [
+      cartDiscountDraft,
+    ])
+
+    cartDiscount = data[0].body
   }, 15000)
 
   afterAll(async () => {
-    try {
-      // Delete discount codes
-      await clearData(apiConfig, 'discountCodes')
-      // Delete cart discounts
-      await clearData(apiConfig, 'cartDiscounts')
-    } catch (error) {
-      process.stderr.write(error)
-    }
+    // Delete discount codes
+    await clearData(apiConfig, 'discountCodes')
+    // Delete cart discounts
+    await clearData(apiConfig, 'cartDiscounts')
   })
 
   describe('Discount code generator', () => {
@@ -128,9 +121,7 @@ describe('DiscountCode tests', () => {
     }, 20000)
 
     // Delete Discount codes
-    afterAll(() =>
-      clearData(apiConfig, 'discountCodes').catch(process.stderr.write)
-    )
+    afterAll(() => clearData(apiConfig, 'discountCodes'))
 
     it(
       'should create discount codes on CTP',
@@ -242,7 +233,6 @@ describe('DiscountCode tests', () => {
     }, 15000)
 
     it('should write json output to file by default', async () => {
-      let data
       const jsonFilePath = tmp.fileSync().name
       const expected = {
         version: 1,
@@ -265,17 +255,15 @@ describe('DiscountCode tests', () => {
         maxApplications: 10,
         maxApplicationsPerCustomer: 2,
       }
-      try {
-        const [stdout, stderr] = await exec(
-          `${bin} -o ${jsonFilePath} -p ${projectKey}`
-        )
-        expect(stderr).toBeFalsy()
-        expect(stdout).toMatchSnapshot()
 
-        data = await fs.readFile(jsonFilePath, { encoding: 'utf8' })
-      } catch (error) {
-        process.stderr.write(error)
-      }
+      const [stdout, stderr] = await exec(
+        `${bin} -o ${jsonFilePath} -p ${projectKey}`
+      )
+      expect(stderr).toBeFalsy()
+      expect(stdout).toMatchSnapshot()
+
+      const data = await fs.readFile(jsonFilePath, { encoding: 'utf8' })
+
       const actual = JSON.parse(data)
       actual.forEach(codeObj => {
         expect(codeObj).toMatchObject(expected)

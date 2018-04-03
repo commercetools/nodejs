@@ -105,15 +105,12 @@ describe('CSV and CLI Tests', () => {
 
         beforeAll(async done => {
           const zipFile = tmp.fileSync({ postfix: '.zip' }).name
-          try {
-            const [stdout, stderr] = await exec(
-              `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
-            )
-            expect(stdout).toBeTruthy()
-            expect(stderr).toBeFalsy()
-          } catch (error) {
-            process.stderr.write(error)
-          }
+          const [stdout, stderr] = await exec(
+            `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
+          )
+          expect(stdout).toBeTruthy()
+          expect(stderr).toBeFalsy()
+
           fs
             .createReadStream(zipFile)
             .pipe(unzip.Parse())
@@ -375,15 +372,12 @@ describe('CSV and CLI Tests', () => {
 
         beforeAll(async done => {
           csvFile = tmp.fileSync({ postfix: '.csv' }).name
-          try {
-            const [stdout, stderr] = await exec(
-              `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
-            )
-            expect(stdout).toBeTruthy()
-            expect(stderr).toBeFalsy()
-          } catch (error) {
-            process.stderr.write(error)
-          }
+          const [stdout, stderr] = await exec(
+            `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
+          )
+          expect(stdout).toBeTruthy()
+          expect(stderr).toBeFalsy()
+
           csvToJson()
             .fromFile(csvFile)
             .on('json', jsonObj => {
@@ -497,15 +491,12 @@ describe('CSV and CLI Tests', () => {
           const zipFile = tmp.fileSync({ postfix: '.zip' }).name
 
           // Send request from with JSON file to parser
-          try {
-            const [parseStdout, parseStderr] = await exec(
-              `${binPath} -p ${projectKey} -i ${productsJsonFile} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
-            )
-            expect(parseStdout).toBeTruthy()
-            expect(parseStderr).toBeFalsy()
-          } catch (error) {
-            process.stderr.write(error)
-          }
+          const [parseStdout, parseStderr] = await exec(
+            `${binPath} -p ${projectKey} -i ${productsJsonFile} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
+          )
+          expect(parseStdout).toBeTruthy()
+          expect(parseStderr).toBeFalsy()
+
           fs
             .createReadStream(zipFile)
             .pipe(unzip.Parse())
@@ -767,15 +758,12 @@ describe('CSV and CLI Tests', () => {
 
         beforeAll(async done => {
           csvFile = tmp.fileSync({ postfix: '.csv' }).name
-          try {
-            const [stdout, stderr] = await exec(
-              `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
-            )
-            expect(stdout).toBeTruthy()
-            expect(stderr).toBeFalsy()
-          } catch (error) {
-            process.stderr.write(error)
-          }
+          const [stdout, stderr] = await exec(
+            `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
+          )
+          expect(stdout).toBeTruthy()
+          expect(stderr).toBeFalsy()
+
           csvToJson()
             .fromFile(csvFile)
             .on('json', jsonObj => {

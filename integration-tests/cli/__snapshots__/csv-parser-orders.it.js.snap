@@ -24,65 +24,7 @@ Options:
 "
 `;
 
-exports[`CSV and CLI Tests CLI basic functionality should write output to file 1`] = `
-Array [
-  Object {
-    "orderNumber": "123",
-    "returnInfo": Array [
-      Object {
-        "_returnId": "1",
-        "items": Array [
-          Object {
-            "comment": "yeah",
-            "lineItemId": "12ae",
-            "quantity": 4,
-            "shipmentState": "Returned",
-          },
-          Object {
-            "comment": "yeah",
-            "lineItemId": "12ae",
-            "quantity": 4,
-            "shipmentState": "Returned",
-          },
-        ],
-        "returnDate": "2016-11-01T08:01:19+0000",
-        "returnTrackingId": "aefa34fe",
-      },
-      Object {
-        "_returnId": "2",
-        "items": Array [
-          Object {
-            "comment": "yeah",
-            "lineItemId": "12ae",
-            "quantity": 4,
-            "shipmentState": "Unusable",
-          },
-        ],
-        "returnDate": "2016-11-01T08:01:19+0000",
-        "returnTrackingId": "aefa34fe",
-      },
-    ],
-  },
-  Object {
-    "orderNumber": "124",
-    "returnInfo": Array [
-      Object {
-        "_returnId": "2",
-        "items": Array [
-          Object {
-            "comment": "yeah",
-            "lineItemId": "12ae",
-            "quantity": 4,
-            "shipmentState": "Unusable",
-          },
-        ],
-        "returnDate": "2016-11-01T08:01:19+0000",
-        "returnTrackingId": "aefa34fe",
-      },
-    ],
-  },
-]
-`;
+exports[`CSV and CLI Tests CLI basic functionality should write output to file 1`] = `"[{\\"orderNumber\\":\\"123\\",\\"returnInfo\\":[{\\"returnTrackingId\\":\\"aefa34fe\\",\\"_returnId\\":\\"1\\",\\"returnDate\\":\\"2016-11-01T08:01:19+0000\\",\\"items\\":[{\\"quantity\\":4,\\"lineItemId\\":\\"12ae\\",\\"comment\\":\\"yeah\\",\\"shipmentState\\":\\"Returned\\"},{\\"quantity\\":4,\\"lineItemId\\":\\"12ae\\",\\"comment\\":\\"yeah\\",\\"shipmentState\\":\\"Returned\\"}]},{\\"returnTrackingId\\":\\"aefa34fe\\",\\"_returnId\\":\\"2\\",\\"returnDate\\":\\"2016-11-01T08:01:19+0000\\",\\"items\\":[{\\"quantity\\":4,\\"lineItemId\\":\\"12ae\\",\\"comment\\":\\"yeah\\",\\"shipmentState\\":\\"Unusable\\"}]}]},{\\"orderNumber\\":\\"124\\",\\"returnInfo\\":[{\\"returnTrackingId\\":\\"aefa34fe\\",\\"_returnId\\":\\"2\\",\\"returnDate\\":\\"2016-11-01T08:01:19+0000\\",\\"items\\":[{\\"quantity\\":4,\\"lineItemId\\":\\"12ae\\",\\"comment\\":\\"yeah\\",\\"shipmentState\\":\\"Unusable\\"}]}]}]"`;
 
 exports[`CSV and CLI Tests parses CSV to JSON CLI accepts deliveries csv type 1`] = `
 Array [
