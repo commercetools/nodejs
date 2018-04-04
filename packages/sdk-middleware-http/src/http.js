@@ -146,7 +146,7 @@ export default function createHttpMiddleware({
               return
             }
           if (maskSensitiveHeaderData) {
-            request.headers.Authorization = 'Bearer ********'
+            request.headers.authorization = 'Bearer ********'
           }
           const error = new NetworkError(e.message, {
             originalRequest: request,

@@ -473,7 +473,7 @@ describe('Http', () => {
       const request = createTestRequest({
         uri: '/foo/bar',
         headers: {
-          Authorization: 'Bearer 123',
+          authorization: 'Bearer 123',
         },
       })
       const response = { resolve, reject }
@@ -484,7 +484,7 @@ describe('Http', () => {
           method: 'GET',
           uri: '/foo/bar',
           headers: {
-            Authorization: 'Bearer ********',
+            authorization: 'Bearer ********',
           },
         })
         resolve()
