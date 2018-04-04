@@ -468,6 +468,42 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
+  test('should maskSensitiveHeaderData in error response when enabled', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+        headers: {
+          Authorization: 'Bearer 123',
+        },
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res.error.name).toBe('NetworkError')
+        expect(res.error.originalRequest).toMatchObject({
+          body: null,
+          method: 'GET',
+          uri: '/foo/bar',
+          headers: {
+            Authorization: 'Bearer ********',
+          },
+        })
+        resolve()
+      }
+      // Use default options
+      const httpOptions = {
+        host: testHost,
+        includeOriginalRequest: true,
+        maskSensitiveHeaderData: true,
+      }
+      const httpMiddleware = createHttpMiddleware(httpOptions)
+      nock(testHost)
+        .defaultReplyHeaders({ 'Content-Type': 'application/json' })
+        .get('/foo/bar')
+        .replyWithError({ code: 'ENOTFOUND' })
+
+      httpMiddleware(next)(request, response)
+    }))
+
   test('parses a host that ends with slash', () =>
     new Promise((resolve, reject) => {
       const sampleHost = 'https://api.commercetools.com/'
