@@ -145,13 +145,17 @@ export default function createHttpMiddleware({
               retryCount += 1
               return
             }
-          if (maskSensitiveHeaderData) {
-            request.headers.authorization = 'Bearer ********'
-          }
+
           const error = new NetworkError(e.message, {
             originalRequest: request,
             retryCount,
           })
+          if (
+            maskSensitiveHeaderData &&
+            error.originalRequest.headers.authorization
+          ) {
+            error.originalRequest.headers.authorization = 'Bearer ********'
+          }
           next(request, { ...response, error, statusCode: 0 })
         }
       )
