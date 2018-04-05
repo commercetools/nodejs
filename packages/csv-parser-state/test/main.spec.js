@@ -121,7 +121,7 @@ describe('CsvParserState', () => {
     })
   })
 
-  describe('_transformTransitions', () => {
+  describe('::_transformTransitions', () => {
     describe('without state transitions', () => {
       test('should not mutate state', async () => {
         const actual = {
@@ -137,7 +137,7 @@ describe('CsvParserState', () => {
       describe('when execute resolves', () => {
         beforeEach(() => {
           // First transition exists but second does not
-          csvParser._buildStateRequest = jest
+          csvParser._fetchStates = jest
             .fn()
             .mockImplementationOnce(() =>
               Promise.resolve({
@@ -166,7 +166,7 @@ describe('CsvParserState', () => {
 
       describe('when execute rejects', () => {
         beforeEach(() => {
-          csvParser._buildStateRequest = jest.fn(() =>
+          csvParser._fetchStates = jest.fn(() =>
             Promise.reject(new Error('Invalid Request'))
           )
         })
@@ -180,47 +180,60 @@ describe('CsvParserState', () => {
     })
   })
 
-  describe('_buildStateRequest', () => {
-    beforeEach(() => {
-      csvParser.client = { execute: jest.fn() }
+  describe('::_handleErrors', () => {
+    const fakeError = new Error('General error')
+    const callback = jest.fn()
+    describe('when continueOnProblems is false (Default)', () => {
+      beforeEach(() => {
+        csvParser = new CsvParserState({ continueOnProblems: false }, logger)
+      })
+
+      test('should pass error to callback', () => {
+        csvParser._handleErrors(fakeError, callback)
+        expect(callback).toBeCalledWith(fakeError)
+      })
     })
 
-    test('should create a state service', done => {
-      // We also ensure the `.build()` method is called
-      csvParser._createStateService = jest.fn(() => ({
-        byKey: () => ({
-          build: () => done(),
-        }),
-      }))
-      csvParser._buildStateRequest('state-key')
-      expect(csvParser._createStateService).toBeCalled()
-      expect(csvParser.client.execute).toBeCalledWith(
-        expect.objectContaining({ method: 'GET' })
-      )
+    describe('when continueOnProblems is true', () => {
+      beforeEach(() => {
+        csvParser = new CsvParserState({ continueOnProblems: true }, logger)
+      })
+
+      test('should log error', () => {
+        csvParser._handleErrors(fakeError, callback)
+        expect(csvParser.logger.warn).toBeCalledWith(
+          expect.stringMatching(/Ignoring error at/)
+        )
+      })
+
+      test('should not pass error to callback', () => {
+        csvParser._handleErrors(fakeError, callback)
+        expect(callback).not.toBeCalled()
+      })
     })
   })
 
-  describe('_setupClient', () => {
-    describe('without `apiConfig`', () => {
-      beforeEach(() => {
-        csvParser = new CsvParserState({ foo: 'bar' }, logger)
-      })
+  describe('::_buildStateRequestUri', () => {
+    test('should create a state request URI', () => {
+      expect(
+        CsvParserState._buildStateRequestUri('my-project-key', 'state-key')
+      ).toMatch(/\/my-project-key\/states\/key=state-key/)
+    })
+  })
 
+  describe('::_setupClient', () => {
+    describe('without `apiConfig`', () => {
       test('should throw error', () => {
-        expect(() => csvParser._setupClient()).toThrowError(
+        expect(() => CsvParserState._setupClient()).toThrowError(
           /The constructor must be passed an `apiConfig` object/
         )
       })
     })
 
     describe('with `apiConfig`', () => {
-      test('should build client', () => {
-        // Before executing the function
-        expect(csvParser.client).not.toBeDefined()
-        // After executing the function
-        csvParser._setupClient()
-        expect(csvParser.client).toBeDefined()
-        expect(csvParser.client).toEqual(
+      test('should return client', () => {
+        const client = CsvParserState._setupClient({ foo: 'bar' })
+        expect(client).toEqual(
           expect.objectContaining({
             execute: expect.any(Function),
             process: expect.any(Function),
@@ -232,8 +245,8 @@ describe('CsvParserState', () => {
 
   describe('::_createStateService', () => {
     test('should be defined', () => {
-      expect(csvParser._createStateService).toBeDefined()
-      expect(csvParser._createStateService()).toEqual(
+      expect(CsvParserState._createStateService).toBeDefined()
+      expect(CsvParserState._createStateService('project-key')).toEqual(
         expect.objectContaining({
           byKey: expect.any(Function),
           build: expect.any(Function),
@@ -257,9 +270,9 @@ describe('CsvParserState', () => {
             transitions: ['my-state-1', 'my-state-2'],
             roles: ['ReviewIncludedInStatistics', 'Return'],
           }
-          expect(csvParser._mapMultiValueFieldsToArray(actual)).toEqual(
-            expected
-          )
+          expect(
+            CsvParserState._mapMultiValueFieldsToArray(actual, ';')
+          ).toEqual(expected)
         })
       })
 
@@ -273,9 +286,9 @@ describe('CsvParserState', () => {
             foo: 'bar',
             transitions: ['my-state-1', 'my-state-2'],
           }
-          expect(csvParser._mapMultiValueFieldsToArray(actual)).toEqual(
-            expected
-          )
+          expect(
+            CsvParserState._mapMultiValueFieldsToArray(actual, ';')
+          ).toEqual(expected)
         })
       })
     })
@@ -291,9 +304,9 @@ describe('CsvParserState', () => {
             foo: 'bar',
             roles: ['ReviewIncludedInStatistics', 'Return'],
           }
-          expect(csvParser._mapMultiValueFieldsToArray(actual)).toEqual(
-            expected
-          )
+          expect(
+            CsvParserState._mapMultiValueFieldsToArray(actual, ';')
+          ).toEqual(expected)
         })
       })
 
@@ -303,7 +316,9 @@ describe('CsvParserState', () => {
             foo: 'bar',
             key: 'my-state',
           }
-          expect(csvParser._mapMultiValueFieldsToArray(actual)).toEqual(actual)
+          expect(
+            CsvParserState._mapMultiValueFieldsToArray(actual, ';')
+          ).toEqual(actual)
         })
       })
     })
@@ -357,39 +372,6 @@ describe('CsvParserState', () => {
           foo: 'bar',
         }
         expect(CsvParserState._parseInitialToBoolean(actual)).toEqual(actual)
-      })
-    })
-  })
-
-  describe('::_handleErrors', () => {
-    const fakeError = new Error('General error')
-    const callback = jest.fn()
-    describe('when continueOnProblems is false (Default)', () => {
-      beforeEach(() => {
-        csvParser = new CsvParserState({ continueOnProblems: false }, logger)
-      })
-
-      test('should pass error to callback', () => {
-        csvParser._handleErrors(fakeError, callback)
-        expect(callback).toBeCalledWith(fakeError)
-      })
-    })
-
-    describe('when continueOnProblems is true', () => {
-      beforeEach(() => {
-        csvParser = new CsvParserState({ continueOnProblems: true }, logger)
-      })
-
-      test('should log error', () => {
-        csvParser._handleErrors(fakeError, callback)
-        expect(csvParser.logger.warn).toBeCalledWith(
-          expect.stringMatching(/Ignoring error at/)
-        )
-      })
-
-      test('should not pass error to callback', () => {
-        csvParser._handleErrors(fakeError, callback)
-        expect(callback).not.toBeCalled()
       })
     })
   })

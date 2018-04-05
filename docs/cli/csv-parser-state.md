@@ -40,8 +40,7 @@ Options:
 - The `--input` flag specifies the path to the states CSV file. If this flag is omitted, the module will attempt to read the data from the `standard input`.
 - The `--output` flag specifies where to output/save the parsed states as JSON file. Several notes on this flag:
   - If the file specified already exists, it will be overwritten.
-  - The default location for status report logging is the standard output.
-  - If no output path is specified, the parsed states will be written to the standard output as a result, status reports will be logged to a `csv-parser-state.log` file in the current directory.
+  - If no output path is specified, the parsed states will be written to the standard output. As a result, status reports will be logged to a `csv-parser-state.log` file in the current directory.
 - The `--delimiter` flag specifies the delimiter used in the input file. Defaults to `','` if omitted.
 - The `--multiValueDelimiter` flag specifies the delimiter for multiValue cells in CSV. Note that only the `transitions` and `roles` fields if present should contain multiple values. Defaults to `';'` if omitted.
 - The `--continueOnProblems` flag specifies if the module should continue parsing states if it encounters an error. Defaults to `false` if omitted.

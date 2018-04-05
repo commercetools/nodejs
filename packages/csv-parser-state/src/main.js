@@ -69,7 +69,12 @@ export default class CsvParserState {
       .map(CsvParserState._removeEmptyFields)
       .map(CsvParserState._parseInitialToBoolean)
       .map(unflatten)
-      .map(state => this._mapMultiValueFieldsToArray(state))
+      .map(state =>
+        CsvParserState._mapMultiValueFieldsToArray(
+          state,
+          this.csvConfig.multiValueDelimiter
+        )
+      )
       .flatMap(state => highland(this._transformTransitions(state)))
       .errors((error, cb) => this._handleErrors(error, cb))
       .stopOnError(error => {
@@ -87,67 +92,26 @@ export default class CsvParserState {
 
   async _transformTransitions({
     transitions,
-    ...restOfState
+    ...remainingState
   }: StateWithUnresolvedTransitions) {
-    if (!transitions) return restOfState
+    if (!transitions) return remainingState
     // We setup the client here because it is unnecessary
     // if there are no transitions
-    this._setupClient()
-    const stateRequests = transitions.map(transitionState =>
-      this._buildStateRequest(transitionState)
+    this.client = CsvParserState._setupClient(this.apiConfig, this.accessToken)
+    const stateRequests = transitions.map(transitionStateKey =>
+      this._fetchStates(
+        CsvParserState._buildStateRequestUri(
+          this.apiConfig.projectKey,
+          transitionStateKey
+        )
+      )
     )
     const resolvedStates = await Promise.all(stateRequests)
     const stateReferences = resolvedStates.map(response => ({
       typeId: 'state',
       id: response.body.id,
     }))
-    return { ...restOfState, transitions: stateReferences }
-  }
-
-  _buildStateRequest(stateKey: string): Promise<SuccessResult> {
-    const stateService = this._createStateService()
-    const uri = stateService.byKey(stateKey).build()
-    return this._fetchStates(uri)
-  }
-
-  _setupClient() {
-    if (!this.apiConfig)
-      throw new Error('The constructor must be passed an `apiConfig` object')
-    this.client = createClient({
-      middlewares: [
-        createAuthMiddlewareWithExistingToken(
-          this.accessToken ? `Bearer ${this.accessToken}` : ''
-        ),
-        createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
-        createUserAgentMiddleware({
-          libraryName: pkg.name,
-          libraryVersion: pkg.version,
-        }),
-        createHttpMiddleware({ host: this.apiConfig.apiUrl }),
-      ],
-    })
-  }
-
-  _createStateService() {
-    return createRequestBuilder({
-      projectKey: this.apiConfig.projectKey,
-    }).states
-  }
-
-  _mapMultiValueFieldsToArray({
-    roles,
-    transitions,
-    ...restOfState
-  }: StateWithStringTransitions) {
-    const mappedObject = {}
-    if (transitions)
-      mappedObject.transitions = this._mapStringToArray(transitions)
-    if (roles) mappedObject.roles = this._mapStringToArray(roles)
-    return { ...mappedObject, ...restOfState }
-  }
-
-  _mapStringToArray(value: string): Array<string> {
-    return value.split(this.csvConfig.multiValueDelimiter)
+    return { ...remainingState, transitions: stateReferences }
   }
 
   // Highlang signature for custom error handling
@@ -161,11 +125,63 @@ export default class CsvParserState {
       callback(error)
   }
 
+  static _buildStateRequestUri(projectKey: string, stateKey: string): string {
+    const stateService = CsvParserState._createStateService(projectKey)
+    return stateService.byKey(stateKey).build()
+  }
+
+  static _setupClient(apiConfig: ApiConfigOptions, accessToken: string) {
+    if (!apiConfig)
+      throw new Error('The constructor must be passed an `apiConfig` object')
+    return createClient({
+      middlewares: [
+        createAuthMiddlewareWithExistingToken(
+          accessToken ? `Bearer ${accessToken}` : ''
+        ),
+        createAuthMiddlewareForClientCredentialsFlow(apiConfig),
+        createUserAgentMiddleware({
+          libraryName: pkg.name,
+          libraryVersion: pkg.version,
+        }),
+        createHttpMiddleware({ host: apiConfig.apiUrl }),
+      ],
+    })
+  }
+
+  static _createStateService(projectKey: string) {
+    return createRequestBuilder({ projectKey }).states
+  }
+
+  static _mapMultiValueFieldsToArray(
+    { roles, transitions, ...remainingState }: StateWithStringTransitions,
+    multiValueDelimiter: string
+  ) {
+    const mappedObject = {}
+    if (transitions)
+      mappedObject.transitions = CsvParserState._mapStringToArray(
+        transitions,
+        multiValueDelimiter
+      )
+    if (roles)
+      mappedObject.roles = CsvParserState._mapStringToArray(
+        roles,
+        multiValueDelimiter
+      )
+    return { ...mappedObject, ...remainingState }
+  }
+
+  static _mapStringToArray(
+    value: string,
+    multiValueDelimiter: string
+  ): Array<string> {
+    return value.split(multiValueDelimiter)
+  }
+
   // Remove fields with empty values from the state objects
   static _removeEmptyFields(item: Object): Object {
     // "acc" is "state" but lint doesn't like mutations
-    return Object.entries(item).reduce((acc, entry) => {
-      if (entry[1] !== '') acc[entry[0]] = entry[1]
+    return Object.entries(item).reduce((acc, [property, value]) => {
+      if (value !== '') acc[property] = value
       return acc
     }, {})
   }

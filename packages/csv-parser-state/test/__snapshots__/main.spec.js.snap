@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CsvParserState ::_transformTransitions with state transitions when execute resolves should resolve with modified state 1`] = `
+Object {
+  "key": "state-key",
+  "transitions": Array [
+    Object {
+      "id": "state-id-1",
+      "typeId": "state",
+    },
+    Object {
+      "id": "state-id-2",
+      "typeId": "state",
+    },
+  ],
+}
+`;
+
 exports[`CsvParserState ::parse when errors occur when continueOnProblems is true should skip rows with error 1`] = `
 Array [
   Object {
@@ -88,20 +104,4 @@ Array [
     "type": "PaymentState",
   },
 ]
-`;
-
-exports[`CsvParserState _transformTransitions with state transitions when execute resolves should resolve with modified state 1`] = `
-Object {
-  "key": "state-key",
-  "transitions": Array [
-    Object {
-      "id": "state-id-1",
-      "typeId": "state",
-    },
-    Object {
-      "id": "state-id-2",
-      "typeId": "state",
-    },
-  ],
-}
 `;
