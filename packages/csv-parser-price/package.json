@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/csv-parser-price",
-  "version": "2.1.17",
+  "version": "2.1.18",
   "description": "Module that parses price csv to json",
   "keywords": [
     "commercetools",
@@ -36,7 +36,7 @@
     "@commercetools/get-credentials": "^2.1.4",
     "@commercetools/sdk-client": "^1.5.5",
     "@commercetools/sdk-middleware-auth": "^3.5.2",
-    "@commercetools/sdk-middleware-http": "^2.3.2",
+    "@commercetools/sdk-middleware-http": "^2.3.3",
     "@commercetools/sdk-middleware-user-agent": "^1.2.7",
     "JSONStream": "^1.2.1",
     "bluebird": "^3.4.6",
