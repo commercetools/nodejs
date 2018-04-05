@@ -1,0 +1,3 @@
+name.en,key,description.en,type,initial
+Will's state,state-key-1,beschreibung,OrderState,true
+tester,state-key-2,uniqueness of states,ProductState,false

@@ -7,6 +7,7 @@
     "@commercetools/csv-parser-discount-code": "*",
     "@commercetools/csv-parser-orders": "*",
     "@commercetools/csv-parser-price": "*",
+    "@commercetools/csv-parser-state": "*",
     "@commercetools/discount-code-exporter": "*",
     "@commercetools/discount-code-generator": "*",
     "@commercetools/discount-code-importer": "*",
@@ -30,6 +31,7 @@
     "isomorphic-fetch": "^2.2.1",
     "isuuid": "^0.1.0",
     "lodash.omit": "^4.5.0",
+    "mz": "2.7.0",
     "streamtest": "^1.2.2",
     "tmp": "^0.0.33",
     "unzip": "^0.1.11"

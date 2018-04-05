@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CSV and CLI Tests CLI basic functionality should print usage information given the help flag 1`] = `
+"
+Usage: csv-parser-state [options]
+Package to parse states from CSV to JSON
+
+Options:
+  --help, -h                 Show help                                 [boolean]
+  --version, -v              Show version number                       [boolean]
+  --projectKey, -p           API project key                            [string]
+  --apiUrl                   The host URL of the HTTP API service
+                             [string] [default: \\"https://api.commercetools.com\\"]
+  --authUrl                  The host URL of the OAuth API service
+                            [string] [default: \\"https://auth.commercetools.com\\"]
+  --accessToken              CTP client access token
+                             Required scopes: ['view_orders']           [string]
+  --input, -i                Path to CSV file.                [default: \\"stdin\\"]
+  --output, -o               Path to output JSON file
+                                                    [string] [default: \\"stdout\\"]
+  --delimiter, -d            Used CSV delimiter.                  [default: \\",\\"]
+  --multiValueDelimiter, -m  Used CSV delimiter in multiValue fields.
+                                                                  [default: \\";\\"]
+  --continueOnProblems, -c   Flag if parsing should continue if module
+                             encounters an error.     [boolean] [default: false]
+  --logLevel                 Logging level: error, warn, info or debug
+                                                      [string] [default: \\"info\\"]
+  --prettyLogs               Pretty print logs to the terminal         [boolean]
+  --logFile                  Path to file where logs should be saved
+                                      [string] [default: \\"csv-parser-state.log\\"]
+
+"
+`;
+
+exports[`CSV and CLI Tests Parse with transitions with \`projectKey\` should resolve transition and parse states 1`] = `
+Array [
+  Object {
+    "description": Object {
+      "en": "beschreibung",
+    },
+    "initial": true,
+    "key": "state-key-1",
+    "name": Object {
+      "en": "Will's state",
+    },
+    "type": "OrderState",
+  },
+  Object {
+    "description": Object {
+      "en": "uniqueness of states",
+    },
+    "initial": false,
+    "key": "state-key-2",
+    "name": Object {
+      "en": "tester",
+    },
+    "transitions": Array [
+      Object {
+        "typeId": "state",
+      },
+    ],
+    "type": "ProductState",
+  },
+  Object {
+    "description": Object {
+      "en": "only used when some state is complete",
+    },
+    "initial": false,
+    "key": "state-key-3",
+    "name": Object {
+      "en": "completion",
+    },
+    "type": "LineItemState",
+  },
+  Object {
+    "description": Object {
+      "en": "this state should be auto generated",
+    },
+    "initial": true,
+    "key": "state-key-4",
+    "name": Object {
+      "en": "auto gen",
+    },
+    "type": "PaymentState",
+  },
+]
+`;
+
+exports[`CSV and CLI Tests Parse with transitions without \`projectkey\` with \`continueOnProblems\` should skip rows having transition 1`] = `
+"[
+{\\"key\\":\\"state-key-1\\",\\"type\\":\\"OrderState\\",\\"name\\":{\\"en\\":\\"Will's state\\"},\\"initial\\":true,\\"description\\":{\\"en\\":\\"beschreibung\\"}}
+,
+{\\"key\\":\\"state-key-3\\",\\"type\\":\\"LineItemState\\",\\"name\\":{\\"en\\":\\"completion\\"},\\"initial\\":false,\\"description\\":{\\"en\\":\\"only used when some state is complete\\"}}
+,
+{\\"key\\":\\"state-key-4\\",\\"type\\":\\"PaymentState\\",\\"name\\":{\\"en\\":\\"auto gen\\"},\\"initial\\":true,\\"description\\":{\\"en\\":\\"this state should be auto generated\\"}}
+]
+"
+`;
+
+exports[`CSV and CLI Tests Parse without transitions should parse states without projectKey 1`] = `
+"[
+{\\"key\\":\\"state-key-1\\",\\"type\\":\\"OrderState\\",\\"name\\":{\\"en\\":\\"Will's state\\"},\\"initial\\":true,\\"description\\":{\\"en\\":\\"beschreibung\\"}}
+,
+{\\"key\\":\\"state-key-2\\",\\"type\\":\\"ProductState\\",\\"name\\":{\\"en\\":\\"tester\\"},\\"initial\\":false,\\"description\\":{\\"en\\":\\"uniqueness of states\\"}}
+]
+"
+`;
