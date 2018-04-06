@@ -32,7 +32,7 @@ Options:
 "
 `;
 
-exports[`Price Exporter CSV export should resolve refs ans export only fields in template 1`] = `
+exports[`Price Exporter CSV export should resolve refs and export only fields in template 1`] = `
 "info Starting Export
 info Export operation completed successfully
 "
