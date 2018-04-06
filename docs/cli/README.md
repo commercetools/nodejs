@@ -8,6 +8,7 @@ Our CLI tools perform various functions from importing and exporting to syncing 
   * [CSV Discount Code Parser](/cli/csv-parser-discount-code.md)
   * [CSV Price Parser](/cli/csv-parser-price.md)
   * [CSV Order Parser](/cli/csv-parser-orders.md)
+  * [CSV State Parser](/cli/csv-parser-state.md)
   * [Discount Code Generator](/cli/discount-code-generator.md)
   * [Discount Code Exporter](/cli/discount-code-exporter.md)
   * [Discount Code Importer](/cli/discount-code-importer.md)
@@ -16,4 +17,3 @@ Our CLI tools perform various functions from importing and exporting to syncing 
   * [Product Exporter](/cli/product-exporter.md)
   * [Product JSON to CSV](/cli/product-json-to-csv.md)
   * [State importer](/cli/state-importer.md)
-
