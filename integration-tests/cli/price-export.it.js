@@ -129,7 +129,7 @@ describe('Price Exporter', () => {
   })
 
   describe('CSV export', () => {
-    it('should resolve refs ans export only fields in template', async () => {
+    it('should resolve refs and export only fields in template', async () => {
       const template = path.join(
         __dirname,
         'expected-output',
