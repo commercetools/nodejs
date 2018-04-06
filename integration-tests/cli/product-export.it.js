@@ -1,7 +1,7 @@
-import fs from 'fs'
+import fs from 'mz/fs'
 import tmp from 'tmp'
 import { getCredentials } from '@commercetools/get-credentials'
-import { exec } from 'child_process'
+import { exec } from 'mz/child_process'
 import { version } from '@commercetools/product-exporter/package.json'
 import {
   sampleProductType,
@@ -53,7 +53,7 @@ describe('Product Exporter', () => {
     const sampleProducts = createProducts(productType, taxCategory)
 
     await createData(apiConfig, 'products', sampleProducts)
-  }, 10000)
+  }, 30000)
 
   afterAll(async () => {
     await clearData(apiConfig, 'products')
@@ -64,50 +64,43 @@ describe('Product Exporter', () => {
   })
 
   describe('CLI basic functionality', () => {
-    it('should print usage information given the help flag', done => {
-      exec(`${bin} --help`, (error, stdout, stderr) => {
-        expect(error).toBeFalsy()
-        expect(stderr).toBeFalsy()
-        expect(String(stdout)).toMatch(/help/)
-        done()
-      })
+    it('should print usage information given the help flag', async () => {
+      const [stdout, stderr] = await exec(`${bin} --help`)
+      expect(stderr).toBeFalsy()
+      expect(stdout).toMatchSnapshot()
     })
 
-    it('should print the module version given the version flag', done => {
-      exec(`${bin} --version`, (error, stdout, stderr) => {
-        expect(error).toBeFalsy()
-        expect(stderr).toBeFalsy()
-        expect(stdout).toBe(`${version}\n`)
-        done()
-      })
+    it('should print the module version given the version flag', async () => {
+      const [stdout, stderr] = await exec(`${bin} --version`)
+      expect(stderr).toBeFalsy()
+      expect(stdout).toBe(`${version}\n`)
     })
   })
 
   describe('export function', () => {
-    it('should export products from the CTP', done => {
-      const filePath = tmp.fileSync().name
-      exec(
-        `${bin} -o ${filePath} -p ${projectKey} --staged`,
-        (cliError, stdout, stderr) => {
-          expect(cliError).toBeFalsy()
-          expect(stderr).toBeFalsy()
-          expect(stdout).toMatch(/Export operation completed successfully/)
-          fs.readFile(filePath, { encoding: 'utf8' }, (error, data) => {
-            expect(error).toBeFalsy()
-            const actual = JSON.parse(data)
-            expect(actual).toBeInstanceOf(Array)
-            expect(actual.length).toBe(2)
-            // Assert that the 2 created products are the products returned
-            expect(actual).toContainEqual(
-              expect.objectContaining(expectedProducts[0])
-            )
-            expect(actual).toContainEqual(
-              expect.objectContaining(expectedProducts[1])
-            )
-            done()
-          })
-        }
-      )
-    })
+    it(
+      'should export products from the CTP',
+      async () => {
+        const filePath = tmp.fileSync().name
+        const [stdout, stderr] = await exec(
+          `${bin} -o ${filePath} -p ${projectKey} --staged`
+        )
+        expect(stderr).toBeFalsy()
+        expect(stdout).toMatch(/Export operation completed successfully/)
+
+        const data = await fs.readFile(filePath, { encoding: 'utf8' })
+        const actual = JSON.parse(data)
+        expect(actual).toBeInstanceOf(Array)
+        expect(actual).toHaveLength(2)
+        // Assert that the 2 created products are the products returned
+        expect(actual).toContainEqual(
+          expect.objectContaining(expectedProducts[0])
+        )
+        expect(actual).toContainEqual(
+          expect.objectContaining(expectedProducts[1])
+        )
+      },
+      15000
+    )
   })
 })
