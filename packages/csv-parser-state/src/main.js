@@ -90,28 +90,34 @@ export default class CsvParserState {
       .pipe(output)
   }
 
-  async _transformTransitions({
+  _transformTransitions({
     transitions,
     ...remainingState
   }: StateWithUnresolvedTransitions) {
-    if (!transitions) return remainingState
-    // We setup the client here because it is unnecessary
-    // if there are no transitions
-    this.client = CsvParserState._setupClient(this.apiConfig, this.accessToken)
-    const stateRequests = transitions.map(transitionStateKey =>
-      this._fetchStates(
-        CsvParserState._buildStateRequestUri(
-          this.apiConfig.projectKey,
-          transitionStateKey
+    return new Promise(resolve => {
+      if (!transitions) resolve(remainingState)
+      // We setup the client here because it is unnecessary
+      // if there are no transitions
+      this.client = CsvParserState._setupClient(
+        this.apiConfig,
+        this.accessToken
+      )
+      const stateRequests = transitions.map(transitionStateKey =>
+        this._fetchStates(
+          CsvParserState._buildStateRequestUri(
+            this.apiConfig.projectKey,
+            transitionStateKey
+          )
         )
       )
-    )
-    const resolvedStates = await Promise.all(stateRequests)
-    const stateReferences = resolvedStates.map(response => ({
-      typeId: 'state',
-      id: response.body.id,
-    }))
-    return { ...remainingState, transitions: stateReferences }
+      Promise.all(stateRequests).then(resolvedStates => {
+        const stateReferences = resolvedStates.map(response => ({
+          typeId: 'state',
+          id: response.body.id,
+        }))
+        resolve({ ...remainingState, transitions: stateReferences })
+      })
+    })
   }
 
   // Highlang signature for custom error handling
