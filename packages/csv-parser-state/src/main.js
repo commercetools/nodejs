@@ -93,7 +93,7 @@ export default class CsvParserState {
   _transformTransitions({
     transitions,
     ...remainingState
-  }: StateWithUnresolvedTransitions) {
+  }: StateWithUnresolvedTransitions): Promise<Object> {
     return new Promise(resolve => {
       if (!transitions) resolve(remainingState)
       // We setup the client here because it is unnecessary
