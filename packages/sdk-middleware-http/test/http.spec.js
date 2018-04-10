@@ -389,9 +389,9 @@ describe('Http', () => {
       })
       const response = { resolve, reject }
       const next = (req, res) => {
-        const expectedError = new Error('non json error occured')
+        const expectedError = new Error('non json error occurred')
         expectedError.body = {
-          message: 'non json error occured',
+          message: 'non json error occurred',
           error: [{ code: 'InvalidField' }],
         }
         expectedError.code = 500
@@ -412,7 +412,61 @@ describe('Http', () => {
           'Content-Type': 'application/json',
         })
         .get('/foo/bar')
-        .reply(500, 'non json error occured')
+        .reply(500, 'non json error occurred')
+
+      httpMiddleware(next)(request, response)
+    }))
+
+  test('should maskSensitiveHeaderData in non-JSON error', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+        headers: {
+          authorization: 'Bearer 123',
+          Authorization: 'Bearer 123',
+        },
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        const expectedError = new Error('non json error occurred')
+        expectedError.body = {
+          message: 'non json error occurred',
+          error: [{ code: 'InvalidField' }],
+        }
+        expectedError.code = 500
+        expectedError.statusCode = 500
+        expectedError.headers = {
+          'content-type': ['application/json'],
+        }
+        expect(res).toEqual({
+          ...response,
+          statusCode: 500,
+          error: expectedError,
+        })
+        expect(res.error.originalRequest).toMatchObject({
+          body: null,
+          method: 'GET',
+          uri: '/foo/bar',
+          headers: {
+            authorization: 'Bearer ********',
+            Authorization: 'Bearer ********',
+          },
+        })
+        resolve()
+      }
+      // Use default options
+      const httpOptions = {
+        host: testHost,
+        includeOriginalRequest: true,
+        maskSensitiveHeaderData: true,
+      }
+      const httpMiddleware = createHttpMiddleware(httpOptions)
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(500, 'non json error occurred')
 
       httpMiddleware(next)(request, response)
     }))
@@ -474,6 +528,7 @@ describe('Http', () => {
         uri: '/foo/bar',
         headers: {
           authorization: 'Bearer 123',
+          Authorization: 'Bearer 123',
         },
       })
       const response = { resolve, reject }
@@ -485,6 +540,7 @@ describe('Http', () => {
           uri: '/foo/bar',
           headers: {
             authorization: 'Bearer ********',
+            Authorization: 'Bearer ********',
           },
         })
         resolve()

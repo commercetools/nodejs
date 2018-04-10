@@ -40,6 +40,15 @@ function calcDelayDuration(
   return retryDelay
 }
 
+function maskAuthData(request: Object, maskSensitiveHeaderData: ?boolean) {
+  if (maskSensitiveHeaderData) {
+    if (request.headers.authorization)
+      request.headers.authorization = 'Bearer ********'
+    if (request.headers.Authorization)
+      request.headers.Authorization = 'Bearer ********'
+  }
+}
+
 export default function createHttpMiddleware({
   host,
   credentialsMode,
@@ -91,9 +100,7 @@ export default function createHttpMiddleware({
                   ...requestObj,
                   headers: parseHeaders(requestObj.headers),
                 }
-                if (maskSensitiveHeaderData)
-                  parsedResponse.request.headers.authorization =
-                    'Bearer ********'
+                maskAuthData(parsedResponse.request, maskSensitiveHeaderData)
               }
               next(request, parsedResponse)
             })
@@ -119,6 +126,7 @@ export default function createHttpMiddleware({
                 ? { message: parsed.message, body: parsed }
                 : { message: parsed, body: parsed }),
             })
+            maskAuthData(error.originalRequest, maskSensitiveHeaderData)
             // Let the final resolver to reject the promise
             const parsedResponse = {
               ...response,
@@ -150,12 +158,7 @@ export default function createHttpMiddleware({
             originalRequest: request,
             retryCount,
           })
-          if (
-            maskSensitiveHeaderData &&
-            error.originalRequest.headers.authorization
-          ) {
-            error.originalRequest.headers.authorization = 'Bearer ********'
-          }
+          maskAuthData(error.originalRequest, maskSensitiveHeaderData)
           next(request, { ...response, error, statusCode: 0 })
         }
       )
