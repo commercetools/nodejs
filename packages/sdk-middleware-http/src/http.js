@@ -40,7 +40,7 @@ function calcDelayDuration(
   return retryDelay
 }
 
-function maskAuthData(request) {
+function maskAuthData(request: Object) {
   if (request.headers.authorization)
     request.headers.authorization = 'Bearer ********'
   if (request.headers.Authorization)
