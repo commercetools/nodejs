@@ -13,10 +13,10 @@ export function writeToSingleCsvFile(
   output,
   logger,
   headerFields,
-  delimiter
+  del
 ) {
   const trimmedHeaders = headerFields.map(header => header.trim())
-  output.write(`${trimmedHeaders.join(delimiter)}\n`) // Write headers first
+  output.write(`${trimmedHeaders.join(del)}\n`) // Write headers first
   const columnNames = mapHeaders(trimmedHeaders)
   productStream
     .each(product => {
@@ -25,7 +25,7 @@ export function writeToSingleCsvFile(
         fields: columnNames,
         hasCSVColumnTitle: false,
         quotes: '',
-        del: delimiter,
+        del,
       })
       output.write(`${csvData}\n`)
     })
@@ -38,7 +38,7 @@ export function writeToSingleCsvFile(
 
 // Accept a highland stream and write the output to multiple files per
 // product type, then compress all files to a zip file
-export function writeToZipFile(productStream, output, logger, delimiter) {
+export function writeToZipFile(productStream, output, logger, del) {
   const tmpDir = tmp.dirSync({ unsafeCleanup: true }).name
   tmp.setGracefulCleanup()
   let currentProductType
@@ -78,7 +78,7 @@ export function writeToZipFile(productStream, output, logger, delimiter) {
         fields: columnNames,
         hasCSVColumnTitle,
         quotes: '',
-        delimiter,
+        del,
       })
       fileStream.write(`${csvData}\n`)
     })
