@@ -97,11 +97,43 @@ describe('Writer', () => {
         expect(error).toBeFalsy()
         const expectedCsvFile = `${__dirname}/helpers/csvFileWithHeaders.csv`
         const expectedCsv = fs.readFileSync(expectedCsvFile, 'utf8')
-        expect(expectedCsv).toMatch(actual)
+        expect(actual).toMatch(expectedCsv)
         done()
       })
 
       writer.writeToSingleCsvFile(sampleStream, outputStream, logger, headers)
+    })
+
+    test('write products to a single file with specified delimiter', done => {
+      const sampleStream = highland(sampleProducts)
+      const headers = [
+        'id',
+        'key',
+        'productType',
+        'variantId',
+        'sku',
+        'images',
+        'anotherAddedAttr',
+        'article',
+        'designer',
+        'color',
+      ]
+      const delimiter = ';'
+      const outputStream = streamTest.toText((error, actual) => {
+        expect(error).toBeFalsy()
+        const expectedCsvFile = `${__dirname}/helpers/csvFileWithDelimiter.csv`
+        const expectedCsv = fs.readFileSync(expectedCsvFile, 'utf8')
+        expect(actual).toMatch(expectedCsv)
+        done()
+      })
+
+      writer.writeToSingleCsvFile(
+        sampleStream,
+        outputStream,
+        logger,
+        headers,
+        delimiter
+      )
     })
 
     test('log success info on completion', done => {

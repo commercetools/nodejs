@@ -90,8 +90,20 @@ export default class ProductJsonToCsv {
     const { headerFields } = this.parserConfig
 
     if (headerFields)
-      writeToSingleCsvFile(productStream, output, this.logger, headerFields)
-    else writeToZipFile(productStream, output, this.logger)
+      writeToSingleCsvFile(
+        productStream,
+        output,
+        this.logger,
+        headerFields,
+        this.parserConfig.delimiter
+      )
+    else
+      writeToZipFile(
+        productStream,
+        output,
+        this.logger,
+        this.parserConfig.delimiter
+      )
   }
 
   parse(input: stream$Readable, output: stream$Writable) {
