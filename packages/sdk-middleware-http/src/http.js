@@ -54,7 +54,7 @@ export default function createHttpMiddleware({
   credentialsMode,
   includeResponseHeaders,
   includeOriginalRequest,
-  maskSensitiveHeaderData,
+  maskSensitiveHeaderData = true,
   enableRetry,
   retryConfig: {
     // encourage exponential backoff to prevent spamming the server if down
