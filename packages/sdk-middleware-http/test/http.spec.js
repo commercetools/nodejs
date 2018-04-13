@@ -119,7 +119,7 @@ describe('Http', () => {
           path: '/foo/bar',
           headers: {
             'content-type': ['application/json'],
-            authorization: 'Bearer ********',
+            authorization: ['Bearer ********'],
           },
         })
         resolve()
@@ -484,8 +484,8 @@ describe('Http', () => {
           method: 'GET',
           uri: '/foo/bar',
           headers: {
-            authorization: 'Bearer ********',
-            Authorization: 'Bearer ********',
+            authorization: ['Bearer ********'],
+            Authorization: ['Bearer ********'],
           },
         })
         resolve()
@@ -628,8 +628,8 @@ describe('Http', () => {
           method: 'GET',
           uri: '/foo/bar',
           headers: {
-            authorization: 'Bearer ********',
-            Authorization: 'Bearer ********',
+            authorization: ['Bearer ********'],
+            Authorization: ['Bearer ********'],
           },
         })
         resolve()
