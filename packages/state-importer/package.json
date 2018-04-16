@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/state-importer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Import states to the commercetools platform",
   "main": "lib/main.js",
   "scripts": {
@@ -29,7 +29,7 @@
     "@commercetools/api-request-builder": "^3.7.1",
     "@commercetools/sdk-client": "^1.5.5",
     "@commercetools/sdk-middleware-auth": "^3.5.2",
-    "@commercetools/sdk-middleware-http": "^2.3.4",
+    "@commercetools/sdk-middleware-http": "^3.0.0",
     "@commercetools/sdk-middleware-user-agent": "^1.2.7",
     "@commercetools/sync-actions": "^1.22.2",
     "bluebird": "^3.5.1"
