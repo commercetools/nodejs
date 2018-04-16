@@ -15,6 +15,7 @@ Options:
   --outputFile, -o  Path to output JSON file.                [default: \\"stdout\\"]
   --batchSize, -b   Number of CSV rows to handle simultaneously.  [default: 100]
   --delimiter, -d   Used CSV delimiter.                           [default: \\",\\"]
+  --encoding, -e    Used CSV encoding.                         [default: \\"utf8\\"]
   --strictMode, -s  Parse CSV strictly.                          [default: true]
   --logLevel, -l    Logging level: error, warn, info or verbose.
                                                                [default: \\"info\\"]

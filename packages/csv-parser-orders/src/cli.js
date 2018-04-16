@@ -64,6 +64,11 @@ Convert commercetools order CSV data to JSON.`
     default: CONSTANTS.standardOption.delimiter,
     describe: 'Used CSV delimiter.',
   })
+  .option('encoding', {
+    alias: 'e',
+    default: CONSTANTS.standardOption.encoding,
+    describe: 'Used CSV encoding.',
+  })
   .option('strictMode', {
     alias: 's',
     default: CONSTANTS.standardOption.strictMode,
@@ -119,7 +124,7 @@ const methodMapping = {
 
 // Register error listener
 args.outputFile.on('error', errorHandler)
-
+args.inputFile.setEncoding(args.encoding)
 methodMapping[args.type](getModuleConfig()).parse(
   args.inputFile,
   args.outputFile

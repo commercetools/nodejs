@@ -31,6 +31,7 @@ const CONSTANTS = {
     defaultLogLevel: 'info',
     batchSize: 100,
     delimiter: ',',
+    encoding: 'utf8',
     strictMode: true,
   },
 }
