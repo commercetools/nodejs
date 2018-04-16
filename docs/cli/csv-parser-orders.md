@@ -23,6 +23,7 @@ Options:
   --outputFile, -o  Path to output JSON file.                    [default: "stdout"]
   --batchSize, -b   Number of CSV rows to handle simultaneously. [default: 100]
   --delimiter, -d   Used CSV delimiter.                          [default: ","]
+  --encoding, -e    Encoding used in the CSV.                    [default: "utf8"]
   --strictMode, -s  Parse CSV strictly.                          [default: true]
   --logLevel, -l    Logging level: error, warn, info or verbose. [default: "info"]
   --logFile         Path to file where to save logs.             [default: "csvparserorder.log"]
