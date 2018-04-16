@@ -104,7 +104,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  test('should maskSensitiveHeaderData in the response when enabled', () =>
+  test('should maskSensitiveHeaderData in response by default', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
@@ -119,7 +119,7 @@ describe('Http', () => {
           path: '/foo/bar',
           headers: {
             'content-type': ['application/json'],
-            authorization: 'Bearer ********',
+            authorization: ['Bearer ********'],
           },
         })
         resolve()
@@ -128,7 +128,43 @@ describe('Http', () => {
       const httpOptions = {
         host: testHost,
         includeOriginalRequest: true,
-        maskSensitiveHeaderData: true,
+      }
+      const httpMiddleware = createHttpMiddleware(httpOptions)
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    }))
+
+  test('should not maskSensitiveHeaderData in the response when disabled', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+        headers: {
+          authorization: 'Bearer 123',
+        },
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res.request).toMatchObject({
+          method: 'GET',
+          path: '/foo/bar',
+          headers: {
+            'content-type': ['application/json'],
+            authorization: ['Bearer 123'],
+          },
+        })
+        resolve()
+      }
+      // Use custom options
+      const httpOptions = {
+        host: testHost,
+        includeOriginalRequest: true,
+        maskSensitiveHeaderData: false,
       }
       const httpMiddleware = createHttpMiddleware(httpOptions)
       nock(testHost)
@@ -417,7 +453,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  test('should maskSensitiveHeaderData in non-JSON error', () =>
+  test('should maskSensitiveHeaderData in non-JSON error by default', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
@@ -448,8 +484,8 @@ describe('Http', () => {
           method: 'GET',
           uri: '/foo/bar',
           headers: {
-            authorization: 'Bearer ********',
-            Authorization: 'Bearer ********',
+            authorization: ['Bearer ********'],
+            Authorization: ['Bearer ********'],
           },
         })
         resolve()
@@ -458,7 +494,60 @@ describe('Http', () => {
       const httpOptions = {
         host: testHost,
         includeOriginalRequest: true,
-        maskSensitiveHeaderData: true,
+      }
+      const httpMiddleware = createHttpMiddleware(httpOptions)
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(500, 'non json error occurred')
+
+      httpMiddleware(next)(request, response)
+    }))
+
+  test('should not maskSensitiveHeaderData in non-JSON error when disabled', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+        headers: {
+          authorization: 'Bearer 123',
+          Authorization: 'Bearer 123',
+        },
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        const expectedError = new Error('non json error occurred')
+        expectedError.body = {
+          message: 'non json error occurred',
+          error: [{ code: 'InvalidField' }],
+        }
+        expectedError.code = 500
+        expectedError.statusCode = 500
+        expectedError.headers = {
+          'content-type': ['application/json'],
+        }
+        expect(res).toEqual({
+          ...response,
+          statusCode: 500,
+          error: expectedError,
+        })
+        expect(res.error.originalRequest).toMatchObject({
+          body: null,
+          method: 'GET',
+          uri: '/foo/bar',
+          headers: {
+            authorization: 'Bearer 123',
+            Authorization: 'Bearer 123',
+          },
+        })
+        resolve()
+      }
+      // Use custom options
+      const httpOptions = {
+        host: testHost,
+        includeOriginalRequest: true,
+        maskSensitiveHeaderData: false,
       }
       const httpMiddleware = createHttpMiddleware(httpOptions)
       nock(testHost)
@@ -522,7 +611,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  test('should maskSensitiveHeaderData in error response when enabled', () =>
+  test('should maskSensitiveHeaderData in error response by default', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
@@ -539,8 +628,8 @@ describe('Http', () => {
           method: 'GET',
           uri: '/foo/bar',
           headers: {
-            authorization: 'Bearer ********',
-            Authorization: 'Bearer ********',
+            authorization: ['Bearer ********'],
+            Authorization: ['Bearer ********'],
           },
         })
         resolve()
@@ -549,7 +638,44 @@ describe('Http', () => {
       const httpOptions = {
         host: testHost,
         includeOriginalRequest: true,
-        maskSensitiveHeaderData: true,
+      }
+      const httpMiddleware = createHttpMiddleware(httpOptions)
+      nock(testHost)
+        .defaultReplyHeaders({ 'Content-Type': 'application/json' })
+        .get('/foo/bar')
+        .replyWithError({ code: 'ENOTFOUND' })
+
+      httpMiddleware(next)(request, response)
+    }))
+
+  test('should not maskSensitiveHeaderData in error response when disabled', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+        headers: {
+          authorization: 'Bearer 123',
+          Authorization: 'Bearer 123',
+        },
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res.error.name).toBe('NetworkError')
+        expect(res.error.originalRequest).toMatchObject({
+          body: null,
+          method: 'GET',
+          uri: '/foo/bar',
+          headers: {
+            authorization: 'Bearer 123',
+            Authorization: 'Bearer 123',
+          },
+        })
+        resolve()
+      }
+      // Use custom options
+      const httpOptions = {
+        host: testHost,
+        includeOriginalRequest: true,
+        maskSensitiveHeaderData: false,
       }
       const httpMiddleware = createHttpMiddleware(httpOptions)
       nock(testHost)

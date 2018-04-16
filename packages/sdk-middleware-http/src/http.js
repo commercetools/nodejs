@@ -43,9 +43,9 @@ function calcDelayDuration(
 function maskAuthData(request: Object, maskSensitiveHeaderData: ?boolean) {
   if (maskSensitiveHeaderData) {
     if (request.headers.authorization)
-      request.headers.authorization = 'Bearer ********'
+      request.headers.authorization = ['Bearer ********']
     if (request.headers.Authorization)
-      request.headers.Authorization = 'Bearer ********'
+      request.headers.Authorization = ['Bearer ********']
   }
 }
 
@@ -54,7 +54,7 @@ export default function createHttpMiddleware({
   credentialsMode,
   includeResponseHeaders,
   includeOriginalRequest,
-  maskSensitiveHeaderData,
+  maskSensitiveHeaderData = true,
   enableRetry,
   retryConfig: {
     // encourage exponential backoff to prevent spamming the server if down
