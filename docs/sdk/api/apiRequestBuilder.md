@@ -86,7 +86,7 @@ const channelsUri = requestBuilder.channels
   .withVersion(3)
   .build()
 const channelsRequest = {
-  url: channelsUri,
+  uri: channelsUri,
   method: 'GET',
 }
 
