@@ -1,6 +1,6 @@
 import clone from '../src/utils/clone'
 import productTypesSyncFn, { actionGroups } from '../src/product-types'
-import { baseActionsList } from '../src/product-types-actions'
+import { updateActionsDefinitions } from '../src/product-types-actions'
 
 describe('Exports', () => {
   test('action group list', () => {
@@ -8,10 +8,10 @@ describe('Exports', () => {
   })
 
   test('correctly define base actions list', () => {
-    expect(baseActionsList).toEqual([
+    expect(updateActionsDefinitions).toEqual([
       { action: 'changeName', key: 'name' },
-      { action: 'setKey', key: 'key' },
       { action: 'changeDescription', key: 'description' },
+      { action: 'setKey', key: 'key' },
     ])
   })
   test('correctly define attribute definitions actions list', () => {})
@@ -60,22 +60,178 @@ describe('Actions', () => {
     })
   })
   describe('with key change', () => {
-    beforeEach(() => {
-      before = {
-        key: 'sneakers-key',
-      }
-      now = {
-        key: 'kicks-key',
-      }
-      updateActions = productTypesSync.buildActions(now, before)
+    describe('when there is a previous value', () => {
+      describe('when there is a next value', () => {
+        beforeEach(() => {
+          before = {
+            key: 'sneakers-key',
+          }
+          now = {
+            key: 'kicks-key',
+          }
+          updateActions = productTypesSync.buildActions(now, before)
+        })
+        test('should return `setKey` update-action', () => {
+          expect(updateActions).toEqual([
+            {
+              action: 'setKey',
+              key: 'kicks-key',
+            },
+          ])
+        })
+      })
+      describe('when next value is an empty string', () => {
+        beforeEach(() => {
+          before = {
+            key: 'sneakers-key',
+          }
+          now = {
+            key: '',
+          }
+          updateActions = productTypesSync.buildActions(now, before)
+        })
+        it('should return `setKey` update-action', () => {
+          expect(updateActions).toEqual([
+            {
+              action: 'setKey',
+            },
+          ])
+        })
+      })
+      describe('when next value is `undefined`', () => {
+        beforeEach(() => {
+          before = {
+            key: 'sneakers-key',
+          }
+          now = {
+            key: undefined,
+          }
+          updateActions = productTypesSync.buildActions(now, before)
+        })
+        it('should return `setKey` update-action', () => {
+          expect(updateActions).toEqual([
+            {
+              action: 'setKey',
+            },
+          ])
+        })
+      })
+      describe('when next value is `null`', () => {
+        beforeEach(() => {
+          before = {
+            key: 'sneakers-key',
+          }
+          now = {
+            key: null,
+          }
+          updateActions = productTypesSync.buildActions(now, before)
+        })
+        it('should return `setKey` update-action', () => {
+          expect(updateActions).toEqual([
+            {
+              action: 'setKey',
+            },
+          ])
+        })
+      })
     })
-    test('should return `setKey` update-action', () => {
-      expect(updateActions).toEqual([
-        {
-          action: 'setKey',
-          key: 'kicks-key',
-        },
-      ])
+    describe('when previous value is an empty string', () => {
+      describe('when there is a next value', () => {
+        beforeEach(() => {
+          before = {
+            key: '',
+          }
+          now = {
+            key: 'kicks-key',
+          }
+          updateActions = productTypesSync.buildActions(now, before)
+        })
+        it('should not return `setKey` update-action', () => {
+          expect(updateActions).toEqual([
+            {
+              action: 'setKey',
+              key: 'kicks-key',
+            },
+          ])
+        })
+      })
+      describe('when next value is `undefined`', () => {
+        beforeEach(() => {
+          before = {
+            key: '',
+          }
+          now = {
+            key: undefined,
+          }
+          updateActions = productTypesSync.buildActions(now, before)
+        })
+        it('should not return `setKey` update-action', () => {
+          expect(updateActions).toEqual([])
+        })
+      })
+      describe('when next value is `null`', () => {
+        beforeEach(() => {
+          before = {
+            key: '',
+          }
+          now = {
+            key: null,
+          }
+          updateActions = productTypesSync.buildActions(now, before)
+        })
+        it('should not return `setKey` update-action', () => {
+          expect(updateActions).toEqual([])
+        })
+      })
+    })
+    describe('when previous value is `null`', () => {
+      describe('when there is a next value', () => {
+        beforeEach(() => {
+          before = {
+            key: null,
+          }
+          now = {
+            key: 'kicks-key',
+          }
+          updateActions = productTypesSync.buildActions(now, before)
+        })
+        it('should return `setKey` update-action', () => {
+          expect(updateActions).toEqual([
+            {
+              action: 'setKey',
+              key: 'kicks-key',
+            },
+          ])
+        })
+      })
+      describe('when next value is `undefined`', () => {
+        beforeEach(() => {
+          before = {
+            key: null,
+          }
+          now = {
+            key: undefined,
+          }
+          updateActions = productTypesSync.buildActions(now, before)
+        })
+        it('should not return `setKey` update-action', () => {
+          expect(updateActions).toEqual([])
+        })
+      })
+      describe('when next value is an empty string', () => {
+        beforeEach(() => {
+          before = {
+            key: null,
+          }
+          now = {
+            key: '',
+          }
+          updateActions = productTypesSync.buildActions(now, before)
+        })
+        it('should not return `setKey` update-action', () => {
+          expect(updateActions).toEqual([])
+        })
+      })
     })
   })
   describe('with description change', () => {

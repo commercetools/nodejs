@@ -20,8 +20,8 @@ export function buildBaseAttributesActions({ actions, diff, oldObj, newObj }) {
       const delta = diff[key]
       const before = oldObj[key]
       const now = newObj[key]
-      const isNotDefinedBefore = isNil(oldObj[key])
-      const isNotDefinedNow = isNil(newObj[key])
+      const isNotDefinedBefore = isNil(oldObj[key]) || oldObj[key] === ''
+      const isNotDefinedNow = isNil(newObj[key]) || newObj[key] === ''
       if (!delta) return undefined
 
       if (isNotDefinedNow && isNotDefinedBefore) return undefined
