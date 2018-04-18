@@ -1,16 +1,16 @@
 {
     "name": "@commercetools/custom-objects-exporter",
     "version": "1.0.0-development",
-    "description": "Import states to the commercetools platform",
+    "description": "Export custom objects from the commercetools platform",
     "main": "lib/main.js",
     "scripts": {
         "build": "babel src --out-dir lib"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/commercetools/nodejs/tree/master/packages/state-importer"
+        "url": "https://github.com/commercetools/nodejs/tree/master/packages/custom-objects-exporter"
     },
-    "homepage": "https://commercetools.github.io/nodejs/cli/state-importer.html",
+    "homepage": "https://commercetools.github.io/nodejs/cli/custom-objects-exporter.html",
     "bugs": "https://github.com/commercetools/nodejs/issues",
     "keywords": [
         "commercetools",
@@ -24,5 +24,16 @@
         "name": "Daniel Eriksson",
         "email": "daniel.eriksson@commercetools.de"
     },
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "@commercetools/api-request-builder": "^3.7.1",
+        "@commercetools/sdk-client": "^1.5.5",
+        "@commercetools/sdk-middleware-auth": "^3.5.2",
+        "@commercetools/sdk-middleware-http": "^3.0.0",
+        "@commercetools/sdk-middleware-user-agent": "^1.2.7",
+        "yargs": "^11.0.0"
+    },
+    "devDependencies": {
+        "streamtest": "^1.2.3"
+    }
 }
