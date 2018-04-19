@@ -3,6 +3,9 @@
     "version": "1.0.0-development",
     "description": "Export custom objects from the commercetools platform",
     "main": "lib/main.js",
+    "bin": {
+        "custom-objects-exporter": "bin/custom-objects-exporter.js"
+    },
     "scripts": {
         "build": "babel src --out-dir lib"
     },
@@ -27,10 +30,13 @@
     "license": "MIT",
     "dependencies": {
         "@commercetools/api-request-builder": "^3.7.1",
+        "@commercetools/get-credentials": "^2.1.4",
         "@commercetools/sdk-client": "^1.5.5",
         "@commercetools/sdk-middleware-auth": "^3.5.2",
         "@commercetools/sdk-middleware-http": "^3.0.0",
         "@commercetools/sdk-middleware-user-agent": "^1.2.7",
+        "npmlog": "^4.1.2",
+        "pretty-error": "^2.1.1",
         "yargs": "^11.0.0"
     },
     "devDependencies": {
