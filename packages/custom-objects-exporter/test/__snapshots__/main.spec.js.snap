@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomObjectsExporter ::run should write to outputStream 1`] = `
+"[
+{\\"foo1\\":\\"bar1\\",\\"key\\":\\"copperKey\\"}
+,
+{\\"foo2\\":\\"bar2\\"}
+,
+{\\"foo3\\":\\"bar3\\"}
+]
+"
+`;

@@ -25,5 +25,13 @@ export type ApiConfigOptions = {
 export type ExporterOptions = {
   apiConfig: ApiConfigOptions,
   accessToken?: string,
-  predicate: string,
+  predicate?: string,
+}
+
+/* Logger */
+export type LoggerOptions = {
+  error: Function,
+  info: Function,
+  warn: Function,
+  verbose: Function,
 }
