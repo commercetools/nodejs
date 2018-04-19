@@ -7,10 +7,15 @@ import {
   createAuthMiddlewareWithExistingToken,
 } from '@commercetools/sdk-middleware-auth'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
-// import CustomObject from 'types/customObjects'
+import JSONStream from 'JSONStream'
+// import type {
+//   CustomObject,
+//   ApiConfigOptions,
+// } from '../../../types/customObjects'
 import pkg from '../package.json'
 
 export default class CustomObjectsExporter {
+  // Set flowtype annotations
   constructor(options, logger) {
     if (!options.apiConfig)
       throw new Error('The constructor must be passed an `apiConfig` object')
@@ -35,46 +40,72 @@ export default class CustomObjectsExporter {
       error: () => {},
       warn: () => {},
       info: () => {},
-      debug: () => {},
+      verbose: () => {},
       ...logger,
     }
   }
 
-  run(outputStream) {
-    const request = CustomObjectsExporter.buildRequest(
+  run(outputStream: stream$Writable) {
+    this.logger.info('Starting Export')
+    const jsonStream = JSONStream.stringify()
+    jsonStream.pipe(outputStream)
+    CustomObjectsExporter.handleOutput(
+      outputStream,
+      jsonStream,
       this.apiConfig.projectKey,
-      this.predicate
+      this.predicate,
+      this.client
     )
-    let first = true
-    outputStream.write('[')
-    return this.client
-      .process(
-        request,
-        payload => {
-          const results = payload.body.results
-          results.forEach(customObject => {
-            if (first) {
-              outputStream.write(`${JSON.stringify(customObject)}`)
-              first = false
-            } else {
-              outputStream.write(`,${JSON.stringify(customObject)}`)
-            }
-          })
-          // return 'Promise.resolve()'
-        },
-        { accumulate: false }
-      )
+  }
+
+  static handleOutput(
+    outputStream: stream$Writable,
+    pipeStream: stream$Writable,
+    projectKey,
+    predicate,
+    client
+  ) {
+    CustomObjectsExporter.fetchObjects(
+      pipeStream,
+      projectKey,
+      predicate,
+      client
+    )
       .then(() => {
-        outputStream.write(']')
-        if (outputStream !== process.stdout) {
-          outputStream.end()
-        }
+        // this.logger.info('Export operation completed successfully')
+        if (outputStream !== process.stdout) pipeStream.end()
       })
+      .catch((e: Error) => {
+        outputStream.emit('error', e)
+      })
+  }
+
+  static fetchObjects(
+    output: stream$Writable,
+    projectKey,
+    predicate,
+    client
+  ): Promise<any> {
+    const request = CustomObjectsExporter.buildRequest(projectKey, predicate)
+    return client.process(
+      request,
+      (data: Object): Promise<any> => {
+        if (data.statusCode !== 200) return Promise.reject(data)
+        // this.logger.verbose(`Successfully exported ${data.body.count} codes`)
+        data.body.results.forEach((object: string) => {
+          output.write(object)
+        })
+        return Promise.resolve()
+      },
+      {
+        accumulate: false,
+      }
+    )
   }
 
   static buildUri(projectKey, predicate) {
     const service = createRequestBuilder({
-      projectKey: projectKey,
+      projectKey,
     }).customObjects
     if (predicate) service.where(predicate)
     return service.build()
@@ -82,6 +113,14 @@ export default class CustomObjectsExporter {
 
   static buildRequest(projectKey, predicate) {
     const uri = CustomObjectsExporter.buildUri(projectKey, predicate)
-    return { uri, method: 'GET' }
+    const request: Object = {
+      uri,
+      method: 'GET',
+    }
+    // if (this.config.accessToken)
+    //   request.headers = {
+    //     Authorization: `Bearer ${this.config.accessToken}`,
+    //   }
+    return request
   }
 }

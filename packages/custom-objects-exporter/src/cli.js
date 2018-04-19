@@ -53,10 +53,10 @@ ${description}`
   })
   .option('logLevel', {
     default: 'info',
-    describe: 'Logging level: error, warn, info or debug.',
+    describe: 'Logging level: error, warn, info or verbose.',
   })
   .option('logFile', {
-    default: 'discount-code-export.log',
+    default: 'custom-objects-export.log',
     describe: 'Path to file where to save logs.',
   })
   .coerce('logLevel', arg => {
@@ -66,7 +66,7 @@ ${description}`
 const logError = error => {
   const errorFormatter = new PrettyError()
 
-  if (npmlog.level === 'debug')
+  if (npmlog.level === 'verbose')
     process.stderr.write(`ERR: ${errorFormatter.render(error)}`)
   else process.stderr.write(`ERR: ${error.message || error}`)
 }
@@ -110,7 +110,7 @@ resolveCredentials(args)
       error: npmlog.error.bind(this, ''),
       warn: npmlog.warn.bind(this, ''),
       info: npmlog.info.bind(this, ''),
-      debug: npmlog.debug.bind(this, ''),
+      verbose: npmlog.verbose.bind(this, ''),
     }
     return new CustomObjectsExporter(constructorOptions, logger)
   })
