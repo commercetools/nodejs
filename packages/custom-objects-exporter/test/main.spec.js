@@ -34,22 +34,9 @@ describe('CustomObjectsExporter', () => {
     })
 
     test('should throw error if no `apiConfig` in `options` parameter', () => {
-      expect(() => new CustomObjectsExporter({ foo: 'bar' })).toThrowError(
-        'The constructor must be passed an `apiConfig` object'
-      )
-    })
-
-    test('should use createAuthMiddlewareWithExistingToken()', () => {
-      const withToken = new CustomObjectsExporter(
-        {
-          apiConfig: {
-            projectKey: 'test-project-key',
-          },
-          accessToken: '12345',
-        },
-        logger
-      )
-      expect(withToken.accessToken).toEqual('12345')
+      expect(
+        () => new CustomObjectsExporter({ foo: 'bar' })
+      ).toThrowErrorMatchingSnapshot()
     })
   })
 
@@ -59,11 +46,7 @@ describe('CustomObjectsExporter', () => {
       payload = {
         statusCode: 200,
         body: {
-          results: [
-            { foo1: 'bar1', key: 'copperKey' },
-            { foo2: 'bar2' },
-            { foo3: 'bar3' },
-          ],
+          results: [{ foo1: 'bar1', key: 'copperKey' }, { foo2: 'bar2' }],
         },
       }
       objectsExport.client.process = jest.fn(async (request, callback) => {
@@ -93,38 +76,23 @@ describe('CustomObjectsExporter', () => {
   })
 
   describe('::buildRequest', () => {
-    test('should build default request', () => {
-      expect(CustomObjectsExporter.buildRequest('test-project-key')).toEqual({
-        uri: '/test-project-key/custom-objects',
-        method: 'GET',
-      })
-    })
-
-    test('should build request with auth token', () => {
+    test('should build request', () => {
       expect(
-        CustomObjectsExporter.buildRequest(
-          'test-project-key',
-          undefined,
-          'superSafeToken'
-        )
-      ).toEqual({
-        uri: '/test-project-key/custom-objects',
-        method: 'GET',
-        headers: { Authorization: 'Bearer superSafeToken' },
-      })
+        CustomObjectsExporter.buildRequest('test-project-key')
+      ).toMatchSnapshot()
     })
   })
 
   describe('::buildUri', () => {
     test('should build default uri', () => {
-      expect(CustomObjectsExporter.buildUri('test-project-key')).toMatch(
-        '/test-project-key/custom-objects'
-      )
+      expect(
+        CustomObjectsExporter.buildUri('test-project-key')
+      ).toMatchSnapshot()
     })
     test('should build where/predicate uri', () => {
       expect(
         CustomObjectsExporter.buildUri('test-project-key', 'key=copperKey')
-      ).toMatch('/test-project-key/custom-objects?where=key%3DcopperKey')
+      ).toMatchSnapshot()
     })
   })
 })
