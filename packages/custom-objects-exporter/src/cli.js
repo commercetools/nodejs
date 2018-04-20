@@ -16,9 +16,6 @@ Usage: $0 [options]
 ${description}`
   )
   .showHelpOnFail(false)
-  .option('help', {
-    alias: 'h',
-  })
   .help('help', 'Show help text.')
   .version()
   .option('output', {

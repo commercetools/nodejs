@@ -25,6 +25,7 @@
     "@commercetools/sdk-middleware-user-agent": "*",
     "@commercetools/state-importer": "*",
     "@commercetools/sync-actions": "*",
+    "@commercetools/custom-objects-exporter": "*",
     "bluebird": "^3.5.0",
     "common-tags": "^1.4.0",
     "csvtojson": "^1.1.7",
