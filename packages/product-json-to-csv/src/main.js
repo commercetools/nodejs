@@ -79,7 +79,7 @@ export default class ProductJsonToCsv {
     const mappingParams = {
       fillAllRows: this.parserConfig.fillAllRows,
       categoryBy: this.parserConfig.categoryBy,
-      lang: this.parserConfig.lang,
+      lang: this.parserConfig.language,
       multiValueDelimiter: this.parserConfig.multiValueDelimiter,
     }
     this._productMapping = new ProductMapping(mappingParams)
