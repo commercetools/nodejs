@@ -31,7 +31,7 @@ export default class ProductMapping {
     this.multiValDel = multiValueDelimiter
   }
 
-  run(product: ResolvedProductProjection) {
+  run(product: ResolvedProductProjection): Array<MappedProduct> {
     const mergedVarProduct = ProductMapping._mergeVariants(product)
     const varWithProductInfo = ProductMapping._spreadProdOnVariants(
       mergedVarProduct,
