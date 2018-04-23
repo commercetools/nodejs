@@ -1,6 +1,6 @@
 import fs from 'fs'
 import { getCredentials } from '@commercetools/get-credentials'
-import npmlog from 'npmlog'
+import pino from 'pino'
 import PrettyError from 'pretty-error'
 import yargs from 'yargs'
 
@@ -50,26 +50,35 @@ ${description}`
   })
   .option('logLevel', {
     default: 'info',
-    describe: 'Logging level: error, warn, info or verbose.',
+    describe: 'Logging level: error, warn, info or debug.',
+  })
+  .option('prettyLogs ', {
+    describe: 'Pretty print logs to the terminal',
+    type: 'boolean',
   })
   .option('logFile', {
     default: 'custom-objects-export.log',
-    describe: 'Path to file where to save logs.',
-  })
-  .coerce('logLevel', arg => {
-    npmlog.level = arg
+    describe: 'Path to where to save logs file.',
+    type: 'string',
   }).argv
 
+// instantiate logger
+const loggerConfig = {
+  level: args.logLevel,
+  prettyPrint: args.prettyLogs,
+}
+const logger = pino(loggerConfig)
+
+// print errors to stderr if we use stdout for data output
+// if we save data to output file errors are already logged by pino
 const logError = error => {
   const errorFormatter = new PrettyError()
 
-  if (npmlog.level === 'verbose')
+  if (args.logLevel === 'debug')
     process.stderr.write(`ERR: ${errorFormatter.render(error)}`)
   else process.stderr.write(`ERR: ${error.message || error}`)
 }
 
-// print errors to stderr if we use stdout for data output
-// if we save data to output file errors are already logged by npmlog
 const errorHandler = errors => {
   if (Array.isArray(errors)) errors.forEach(logError)
   else logError(errors)
@@ -83,9 +92,9 @@ const resolveCredentials = _args => {
 }
 
 // If the stdout is used for a data output, save all logs to a log file.
+// pino writes logs to stdout by default
 if (args.output === process.stdout)
-  npmlog.stream = fs.createWriteStream(args.logFile)
-else npmlog.stream = process.stdout
+  logger.stream = fs.createWriteStream(args.logFile)
 
 // Register error listener
 args.output.on('error', errorHandler)
@@ -98,18 +107,18 @@ resolveCredentials(args)
       projectKey: args.projectKey,
       credentials,
     }
-    const constructorOptions = {
+    const exporterOptions = {
       apiConfig,
       accessToken: args.accessToken,
       predicate: args.where,
+      logger: {
+        error: logger.error.bind(logger),
+        warn: logger.warn.bind(logger),
+        info: logger.info.bind(logger),
+        debug: logger.debug.bind(logger),
+      },
     }
-    const logger = {
-      error: npmlog.error.bind(this, ''),
-      warn: npmlog.warn.bind(this, ''),
-      info: npmlog.info.bind(this, ''),
-      verbose: npmlog.verbose.bind(this, ''),
-    }
-    return new CustomObjectsExporter(constructorOptions, logger)
+    return new CustomObjectsExporter(exporterOptions)
   })
   .then(customObjectsExporter => customObjectsExporter.run(args.output))
   .catch(errorHandler)

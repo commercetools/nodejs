@@ -1,5 +1,13 @@
 /* @flow */
 
+/* Logger */
+export type LoggerOptions = {
+  error: Function,
+  info: Function,
+  warn: Function,
+  debug: Function,
+}
+
 /* Config */
 export type ApiConfigOptions = {
   host: string,
@@ -16,12 +24,5 @@ export type ExporterOptions = {
   apiConfig: ApiConfigOptions,
   accessToken?: string,
   predicate?: string,
-}
-
-/* Logger */
-export type LoggerOptions = {
-  error: Function,
-  info: Function,
-  warn: Function,
-  verbose: Function,
+  logger: LoggerOptions,
 }

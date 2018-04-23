@@ -1,6 +1,6 @@
 # Custom Objects Exporter
 
-A package that helps with exporting [commercetools custom objects](https://docs.commercetools.com/http-api-projects-custom-objects.html) in `JSON` format from the [commercetools platform](https://docs.commercetools.com/).
+A package which exports [commercetools custom objects](https://docs.commercetools.com/http-api-projects-custom-objects.html) in `JSON` format from the [commercetools platform](https://docs.commercetools.com/).
 
 ## Configuration
 
@@ -8,9 +8,9 @@ The constructor accepts two arguments:
 
 * A required object containing the following values:
   * `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
-  * `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_products`], [`view_orders`], [`view_customers`]
+  * `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`view_products`, `view_orders`, `view_customers`]. More info on how to get the access token [here](https://docs.commercetools.com/http-api-authorization.html#authorization-flows)
   * `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates) (Optional)
-* An optional logger object having four functions (`info`, `warn`, `error` and `verbose`)
+* An optional logger object having four functions (`info`, `warn`, `error` and `debug`)
 
 ## Usage
 
@@ -33,8 +33,9 @@ Options:
   --accessToken              CTP client access token
   --projectKey, -p           API project key.                         [required]
   --where, -w                specify where predicate
-  --logLevel                 Logging level: error, warn, info or verbose.
+  --logLevel                 Logging level: error, warn, info or debug.
                                                                [default: "info"]
+  --prettyLogs               Pretty print logs to the terminal         [boolean]
   --logFile                  Path to file where to save logs.
                                            [default: "custom-objects-export.log"]
 ```
@@ -73,7 +74,7 @@ const logger = {
   error: console.error,
   warn: console.warn,
   info: console.log,
-  verbose: console.debug,
+  debug: console.debug,
 }
 
 const CustomObjectsExport = new CustomObjectsExport(options, logger)

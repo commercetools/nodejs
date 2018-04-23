@@ -13,6 +13,7 @@ import type {
   ExporterOptions,
   LoggerOptions,
 } from '../../../types/customObjects'
+import silentLogger from './utils/silent-logger'
 import type { Client, ClientRequest } from '../../../types/sdk'
 import pkg from '../package.json'
 
@@ -23,7 +24,7 @@ export default class CustomObjectsExporter {
   logger: LoggerOptions
   predicate: ?string
 
-  constructor(options: ExporterOptions, logger: LoggerOptions) {
+  constructor(options: ExporterOptions) {
     if (!options.apiConfig)
       throw new Error('The constructor must be passed an `apiConfig` object')
     this.apiConfig = options.apiConfig
@@ -44,11 +45,8 @@ export default class CustomObjectsExporter {
     this.predicate = options.predicate
 
     this.logger = {
-      error: () => {},
-      warn: () => {},
-      info: () => {},
-      verbose: () => {},
-      ...logger,
+      ...silentLogger,
+      ...options.logger,
     }
   }
 
@@ -56,17 +54,33 @@ export default class CustomObjectsExporter {
     this.logger.info('Starting Export')
     const jsonStream = JSONStream.stringify()
     jsonStream.pipe(outputStream)
-    CustomObjectsExporter.handleOutput(outputStream, jsonStream, this)
+    CustomObjectsExporter.handleOutput(
+      outputStream,
+      jsonStream,
+      this.client,
+      this.apiConfig.projectKey,
+      this.predicate,
+      this.logger
+    )
   }
 
   static handleOutput(
     outputStream: stream$Writable,
     pipeStream: stream$Writable,
-    instance: Object
+    client: Object,
+    projectKey: string,
+    predicate: ?string,
+    logger: LoggerOptions
   ) {
-    CustomObjectsExporter.fetchObjects(pipeStream, instance)
+    CustomObjectsExporter.fetchObjects(
+      pipeStream,
+      client,
+      projectKey,
+      predicate,
+      logger
+    )
       .then(() => {
-        instance.logger.info('Export operation completed successfully')
+        logger.info('Export operation completed successfully')
         if (outputStream !== process.stdout) pipeStream.end()
       })
       .catch((e: Error) => {
@@ -74,23 +88,27 @@ export default class CustomObjectsExporter {
       })
   }
 
-  static fetchObjects(output: stream$Writable, instance: Object): Promise<any> {
-    const request = CustomObjectsExporter.buildRequest(
-      instance.apiConfig.projectKey,
-      instance.predicate
-    )
-    return instance.client.process(
+  static fetchObjects(
+    output: stream$Writable,
+    client: Object,
+    projectKey: string,
+    predicate: ?string,
+    logger: LoggerOptions
+  ): Promise<any> {
+    const request = CustomObjectsExporter.buildRequest(projectKey, predicate)
+
+    return client.process(
       request,
-      (data: Object): Promise<any> => {
-        if (data.statusCode !== 200)
+      ({ statusCode, body }: Object): Promise<any> => {
+        if (statusCode !== 200)
           return Promise.reject(
-            new Error(`Request returned error ${data.statusCode}`)
+            new Error(`Request returned error ${statusCode}`)
           )
-        data.body.results.forEach((object: Buffer) => {
+        body.results.forEach((object: Buffer) => {
           output.write(object)
         })
-        const success = `Successfully exported ${data.body.count} custom object`
-        instance.logger.verbose(data.body.count > 1 ? `${success}s` : success)
+        const successMsg = `Successfully exported ${body.count} custom object`
+        logger.debug(body.count > 1 ? `${successMsg}s` : successMsg)
         return Promise.resolve()
       },
       {
@@ -99,7 +117,7 @@ export default class CustomObjectsExporter {
     )
   }
 
-  static buildRequest(projectKey: string, predicate: string): ClientRequest {
+  static buildRequest(projectKey: string, predicate: ?string): ClientRequest {
     const uri = CustomObjectsExporter.buildUri(projectKey, predicate)
     return {
       uri,
@@ -107,7 +125,7 @@ export default class CustomObjectsExporter {
     }
   }
 
-  static buildUri(projectKey: string, predicate: string): string {
+  static buildUri(projectKey: string, predicate: ?string): string {
     const service = createRequestBuilder({
       projectKey,
     }).customObjects

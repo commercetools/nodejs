@@ -1,12 +1,10 @@
 import streamtest from 'streamtest'
+import silentLogger from '../src/utils/silent-logger'
 import CustomObjectsExporter from '../src/main'
 
 describe('CustomObjectsExporter', () => {
   const logger = {
-    error: () => {},
-    warn: () => {},
-    info: () => {},
-    verbose: () => {},
+    ...silentLogger,
   }
 
   let objectsExport

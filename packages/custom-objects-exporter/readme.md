@@ -7,5 +7,5 @@ More info here: https://commercetools.github.io/nodejs/cli/custom-objects-export
 ## Install
 
 ```bash
-npm i @commercetools/custom-objects-exporter -g
+npm install @commercetools/custom-objects-exporter --global
 ```
