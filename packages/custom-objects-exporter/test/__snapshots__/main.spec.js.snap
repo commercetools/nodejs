@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomObjectsExporter ::buildRequest should build request 1`] = `
+Object {
+  "method": "GET",
+  "uri": "/test-project-key/custom-objects",
+}
+`;
+
+exports[`CustomObjectsExporter ::buildUri should build default uri 1`] = `"/test-project-key/custom-objects"`;
+
+exports[`CustomObjectsExporter ::buildUri should build where/predicate uri 1`] = `"/test-project-key/custom-objects?where=key%3DcopperKey"`;
+
+exports[`CustomObjectsExporter ::constructor should throw error if no \`apiConfig\` in \`options\` parameter 1`] = `"The constructor must be passed an \`apiConfig\` object"`;
+
+exports[`CustomObjectsExporter ::run should write to outputStream 1`] = `
+"[
+{\\"foo1\\":\\"bar1\\",\\"key\\":\\"copperKey\\"}
+,
+{\\"foo2\\":\\"bar2\\"}
+]
+"
+`;

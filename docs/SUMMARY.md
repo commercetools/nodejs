@@ -26,6 +26,7 @@
   * [CSV Price Parser](/cli/csv-parser-price.md)
   * [CSV Order Parser](/cli/csv-parser-orders.md)
   * [CSV State Parser](/cli/csv-parser-state.md)
+  * [Custom Objects Exporter](/cli/custom-objects-exporter.md)
   * [Discount Code Generator](/cli/discount-code-generator.md)
   * [Discount Code Exporter](/cli/discount-code-exporter.md)
   * [Discount Code Importer](/cli/discount-code-importer.md)
