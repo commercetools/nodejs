@@ -107,8 +107,10 @@ export default class CustomObjectsExporter {
         body.results.forEach((object: Buffer) => {
           output.write(object)
         })
-        const successMsg = `Successfully exported ${body.count} custom object`
-        logger.debug(body.count > 1 ? `${successMsg}s` : successMsg)
+        logger.debug(
+          `Successfully exported ${body.count} custom %s`,
+          body.count > 1 ? 'objects' : 'object'
+        )
         return Promise.resolve()
       },
       {
