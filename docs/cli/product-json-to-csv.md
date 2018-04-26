@@ -4,9 +4,11 @@ A package that parses [commercetools products](https://docs.commercetools.com/ht
 The products to be parsed can either be read from a `.json` file or directly [piped in](http://www.gnu.org/software/bash/manual/bash.html#Pipelines) from the [product exporter](https://commercetools.github.io/nodejs/cli/product-exporter.html).
 
 ## Usage
+
 `npm install @commercetools/product-json-to-csv --global`
 
 ### CLI
+
 ```
 Usage: product-json-to-csv [options]
 Convert commercetools products from JSON to CSV
@@ -48,40 +50,49 @@ Options:
 ```
 
 The products to be parsed from JSON to CSV can be passed to this module in one of two ways:
-- From a pipe
-- From a file
+
+* From a pipe
+* From a file
 
 #### Pass products through a pipe
+
 Piping products in JSON to be parsed. This ideally works with the commercetools product exporter. In this scenario, the products are parsed directly after export. More information on pipe streams can be found [here](http://www.gnu.org/software/bash/manual/bash.html#Pipelines)
 
 ##### Example
+
 ```
 $ @commercetools/product-exporter --projectKey <project_key> | @commercetools/product-json-to-csv \
 --projectKey <project_key> --template <path_to_template_file> --output <path_to_output_file>
 ```
 
 #### Pass products from a file
+
 This module also accepts products to be read from a JSON file. This can be done by specifying the `--input` flag
 
-
 ##### Example
+
 ```
 $ @commercetools@commercetools/product-json-to-csv --projectKey <project_key> --input <path_to_JSON_file> --template <path_to_template_file> --output <path_to_output_file>
 ```
 
 #### CSV Parser Template
+
 A parser template defines the content of the resulting parsed CSV file, by listing wanted product attribute names as header row. The header column values will be parsed and the resulting CSV file will contain corresponding attribute values of the exported products.
+
 ```
 # only productType.name, the variant id and localized name (english) will be exported
 productType,name.en,variantId
 ```
+
 For more information about the template, and how to generate a template for products, see [here](https://github.com/sphereio/sphere-node-product-csv-sync#template)
 
 #### Parse without CSV template
+
 Products can however be parsed to CSV without the need to provide a template. In this situation, a zip archive should be passed to the `--output` flag.
 If no template file is passed in, one CSV file will be created for each product type.
 
 ##### Example
+
 ```
 $ @commercetools@commercetools/product-json-to-csv --projectKey <project_key> --input <path_to_JSON_file> --output <path_to_zip_archive>.zip
 ```
@@ -89,24 +100,27 @@ $ @commercetools@commercetools/product-json-to-csv --projectKey <project_key> --
 ---
 
 ### JS
+
 For more direct usage, it is possible to use this module directly
 
 #### Configuration
 
 The constructor accepts four arguments:
-- `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
-- `parserConfig` (Object): Internal Parse configurations
-  - `categoryBy` (String): Specify which identifier should be used to reference the categories (Options: `name`, `key`, `externalId` and `namedPath`. Default: `name`)
-  - `categoryOrderHintBy` (String): Specify which identifier should be used to reference the categoryOrderHints (Options: `name`, `key`, `externalId` and `namedPath`. Default: `name`)
-  - `delimiter` (String): Delimiter used to separate cells in the output file (Default: `;`)
-  - `fillAllRows` (Boolean): Specify if product attributes like name should be added to each variant row (Default: `false`)
-  - `headerFields` (Array<String>): An array of header fields to be passed to CSV. This headerFields array should contain the required columns of the CSV file(Optional. If omitted, a `.zip` file containing one csv file per product type will be created. This is synonymous with the `--template` flag in the CLI)
-  - `language` (String): Default language used in resolving localised attributes (except lenums) and category names (Default: `en`)
-- `multiValueDelimiter` (String): Delimiter used to separate multivalue items in cells in the output file (Default: `;`)
-- An optional logger object having four methods (`info`, `warn`, `error` and `debug`)
-- `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_products`, `view_customers`]
+
+* `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+* `parserConfig` (Object): Internal Parse configurations
+  * `categoryBy` (String): Specify which identifier should be used to reference the categories (Options: `name`, `key`, `externalId` and `namedPath`. Default: `name`)
+  * `categoryOrderHintBy` (String): Specify which identifier should be used to reference the categoryOrderHints (Options: `name`, `key`, `externalId` and `namedPath`. Default: `name`)
+  * `delimiter` (String): Delimiter used to separate cells in the output file (Default: `;`)
+  * `fillAllRows` (Boolean): Specify if product attributes like name should be added to each variant row (Default: `false`)
+  * `headerFields` (Array<String>): An array of header fields to be passed to CSV. This headerFields array should contain the required columns of the CSV file(Optional. If omitted, a `.zip` file containing one csv file per product type will be created. This is synonymous with the `--template` flag in the CLI)
+  * `language` (String): Default language used in resolving localised attributes (except lenums) and category names (Default: `en`)
+* `multiValueDelimiter` (String): Delimiter used to separate multivalue items in cells in the output file (Default: `;`)
+* An optional logger object having four methods (`info`, `warn`, `error` and `debug`)
+* `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_products`, `view_customers`]
 
 #### Example
+
 ```js
 import ProductJsonToCsv from '@commercetools/product-exporter'
 import fs from 'fs'
@@ -124,7 +138,7 @@ const apiConfig = {
   },
 }
 
-const headerFields = [ 'name.en', 'key', 'sku' ]
+const headerFields = ['name.en', 'key', 'sku']
 
 const parserConfig = {
   headerFields,
@@ -147,7 +161,7 @@ const parser = new ProductJsonToCsv(
   apiConfig,
   exportConfig,
   logger,
-  accessToken,
+  accessToken
 )
 
 // Register error listener

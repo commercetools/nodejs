@@ -32,7 +32,9 @@ import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 const client = createClient({
   middlewares: [
     createAuthMiddleware({...}),
-    createCorrelationIdMiddleware(),
+    createCorrelationIdMiddleware({
+      generate: () => `prefix/${uuid()}/postifx`
+    }),
     createHttpMiddleware({...}),
   ],
 })

@@ -1,14 +1,17 @@
 # `sdk-middleware-logger`
+
 Middelware to log incoming [request](/sdk/Glossary.md#clientrequest) and [response](/sdk/Glossary.md#clientrequest) objects.
 
 ## Install
 
 #### Node.js
+
 ```bash
 npm install --save @commercetools/sdk-middleware-logger
 ```
 
 #### Browser
+
 ```html
 <script src="https://unpkg.com/@commercetools/sdk-middleware-logger/dist/commercetools-sdk-middleware-logger.umd.min.js"></script>
 <script>// global: CommercetoolsSdkMiddlewareLogger</script>

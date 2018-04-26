@@ -5,20 +5,23 @@ A package that helps with exporting [commercetools price](https://docs.commercet
 ## Configuration
 
 The constructor accepts two arguments:
-- A required object containing the following values:
-  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
-  - `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_orders`]
-  - `delimiter` (String): CSV delimiter (Optional. Default: `','`)
-  - `exportFormat` (String): Export format ['csv', 'json'] (Optional. Default: 'json')
-  - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates) (Optional)
-  - `staged` (Boolean): Specify if prices should be fetched from all products (true) or only published products (false) (Optional. Default: false)
-  - `csvHeaders` (Array<String>): Array containing headers for the returned CSV price data. If omitted, all headers will be turned. (Optional)
-- An optional logger object having four functions (`info`, `warn`, `error` and `verbose`)
+
+* A required object containing the following values:
+  * `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  * `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_orders`]
+  * `delimiter` (String): CSV delimiter (Optional. Default: `','`)
+  * `exportFormat` (String): Export format ['csv', 'json'] (Optional. Default: 'json')
+  * `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates) (Optional)
+  * `staged` (Boolean): Specify if prices should be fetched from all products (true) or only published products (false) (Optional. Default: false)
+  * `csvHeaders` (Array<String>): Array containing headers for the returned CSV price data. If omitted, all headers will be turned. (Optional)
+* An optional logger object having four functions (`info`, `warn`, `error` and `verbose`)
 
 ## Usage
+
 `npm install @commercetools/price-exporter --global`
 
 ### CLI
+
 ```
 Usage: price-exporter [options]
 Export prices from the commercetools platform.
@@ -47,23 +50,26 @@ Options:
 ```
 
 #### Info on flags
-- The `--input` flag specifies the path to the [CSV template file](#csv-headers).
-  - Only the first line is read and subsequent lines (if present) will be ignored
-  - The delimiter must match the delimiter passed in by `--delimiter` (or the default delimiter)
-- The `--output` flag specifies where to output/save the exported prices.
-  - If the file specified already exists, it will be overwritten.
-  - The default location for status report logging is the standard output.
-  - If no output path is specified, the exported prices will be logged to the standard output.
-- The `--delimiter` flag specifies the delimiter used in the input and output file if CSV. Defaults to `','` if omitted.
-- The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate is on the products containing the prices (`product-proections` endpoint) and not on the prices themselves. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates)
-- The `--staged` flag specifies the projection of the products from which the prices should be fetched.
-  - If passed `true`, prices from published and unpublished products are retrieved
-  - If passed `false` (or omitted), only prices from published products are retrieved
+
+* The `--input` flag specifies the path to the [CSV template file](#csv-headers).
+  * Only the first line is read and subsequent lines (if present) will be ignored
+  * The delimiter must match the delimiter passed in by `--delimiter` (or the default delimiter)
+* The `--output` flag specifies where to output/save the exported prices.
+  * If the file specified already exists, it will be overwritten.
+  * The default location for status report logging is the standard output.
+  * If no output path is specified, the exported prices will be logged to the standard output.
+* The `--delimiter` flag specifies the delimiter used in the input and output file if CSV. Defaults to `','` if omitted.
+* The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate is on the products containing the prices (`product-proections` endpoint) and not on the prices themselves. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates)
+* The `--staged` flag specifies the projection of the products from which the prices should be fetched.
+  * If passed `true`, prices from published and unpublished products are retrieved
+  * If passed `false` (or omitted), only prices from published products are retrieved
 
 #### CSV headers
+
 To export price in CSV format, the header file is required. This file should contain the desired headers that will be exported. The [price-exporter](https://commercetools.github.io/nodejs/cli/price-exporter.html) writes data to the CSV file base on the header. This can also be used as a means to filter out undesired data in the CSV file.
 
 Example of the content of a header file
+
 ```
 variant-sku,value.currencyCode,value.centAmount,country,customerGroup.groupName,channel.key,validFrom,validUntil,customType,customField.foo,customField.bar,customField.current,customField.name.nl,customField.name.de,customField.status,customField.price,customField.priceset
 ```
@@ -73,6 +79,7 @@ The `variant-sku` header is required. It contains the `sku` of the variant where
 For custom fields, the `customType` header is required, it contains the key of the custom type. It is important if you want to parse the csv file via the [csv-parser-price](https://commercetools.github.io/nodejs/cli/csv-parser-price.html) module. Also to export any field in the custom object, the format is like this => `customField.[key of field]`
 
 So if you have a price object like below
+
 ```js
 {
   ...
@@ -92,6 +99,7 @@ So if you have a price object like below
 ```
 
 You can export the custom field by passing in a header file like below
+
 ```
 customType,customField.foo,customField.localized.de,customField.localized.en
 ```
@@ -99,7 +107,9 @@ customType,customField.foo,customField.localized.de,customField.localized.en
 The CSV exported is compatible with the [csv-parser-price](https://commercetools.github.io/nodejs/cli/csv-parser-price.html) module, and can be used to import exported prices to the CTP platform.
 
 ### JS
+
 For more direct usage, it is possible to use this module directly:
+
 ```js
 import PriceExporter from '@commercetools/price-exporter'
 import fs from 'fs'

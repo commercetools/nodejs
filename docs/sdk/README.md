@@ -4,21 +4,20 @@ This section contains all information about the sdk-related packages.
 
 > If you are looking to migrate from the `sphere-node-sdk` package, please read the [migration guide](/sdk/upgrading-from-sphere-node-sdk.md).
 
-
 ## Design architecture
 
-The SDK is now split into multiple little packages, think about it as a *microservice* architecture. This is by choice and it provides several different advantages:
-- flexibility: choose the packages that fits best your use case
-- extensibility: developers can potentially build their own packages to extend / replace pieces of the SDK packages (e.g. custom [middlewares](/sdk/Middlewares.md))
-- maintainability: easier to maintain each single little package instead of one big library. This is also one of the reasons to use a [monorepo](https://github.com/lerna/lerna)
+The SDK is now split into multiple little packages, think about it as a _microservice_ architecture. This is by choice and it provides several different advantages:
+
+* flexibility: choose the packages that fits best your use case
+* extensibility: developers can potentially build their own packages to extend / replace pieces of the SDK packages (e.g. custom [middlewares](/sdk/Middlewares.md))
+* maintainability: easier to maintain each single little package instead of one big library. This is also one of the reasons to use a [monorepo](https://github.com/lerna/lerna)
 
 The core of the SDK lies within its [middlewares](/sdk/Middlewares.md) implementation.
 Middlewares do specific things and can be replaced by other middlewares depending on the use case, allowing many possible combinations.
 
-The [SDK *client*](/sdk/api/README.md#sdk-client) itself is in fact really simple and somehow even agnostic of the specific commercetools platform API that can be used as a generic HTTP client.
+The [SDK _client_](/sdk/api/README.md#sdk-client) itself is in fact really simple and somehow even agnostic of the specific commercetools platform API that can be used as a generic HTTP client.
 
-If we take a step back and look at the general requirement, at the end we simply want to **execute a request**. It just happens to be that we want to make specific requests to the commercetools platform API but it might be as well any other API. That's where the [middlewares](/sdk/Middlewares.md) come in, which provide the *side effects* of the given request.
-
+If we take a step back and look at the general requirement, at the end we simply want to **execute a request**. It just happens to be that we want to make specific requests to the commercetools platform API but it might be as well any other API. That's where the [middlewares](/sdk/Middlewares.md) come in, which provide the _side effects_ of the given request.
 
 ## Usage example
 
@@ -31,18 +30,12 @@ The `api-request-builder` package comes in handy to easily construct the request
 ```js
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createClient } from '@commercetools/sdk-client'
-import {
-  createAuthMiddlewareForClientCredentialsFlow,
-} from '@commercetools/sdk-middleware-auth'
-import {
-  createHttpMiddleware,
-} from '@commercetools/sdk-middleware-http'
-import {
-  createQueueMiddleware,
-} from '@commercetools/sdk-middleware-queue'
+import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
+import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
+import { createQueueMiddleware } from '@commercetools/sdk-middleware-queue'
 import omit from 'lodash.omit'
 
-const ignoredResponseKeys = [ 'id', 'createdAt', 'lastModifiedAt' ]
+const ignoredResponseKeys = ['id', 'createdAt', 'lastModifiedAt']
 
 const service = createRequestBuilder({ projectKey }).channels
 
@@ -61,11 +54,7 @@ const queueMiddleware = createQueueMiddleware({
   concurrency: 5,
 })
 const client = createClient({
-  middlewares: [
-    authMiddleware,
-    httpMiddleware,
-    queueMiddleware,
-  ],
+  middlewares: [authMiddleware, httpMiddleware, queueMiddleware],
 })
 
 describe('Channels', () => {
@@ -87,8 +76,7 @@ describe('Channels', () => {
       },
     }
 
-    return client.execute(createRequest)
-    .then((response) => {
+    return client.execute(createRequest).then(response => {
       channelResponse = response.body
       expect(omit(response.body, ignoredResponseKeys)).toEqual({
         ...body,
@@ -109,8 +97,7 @@ describe('Channels', () => {
       },
     }
 
-    return client.execute(fetchRequest)
-    .then((response) => {
+    return client.execute(fetchRequest).then(response => {
       expect(response.body.results).toHaveLength(1)
       expect(response.statusCode).toBe(200)
     })
@@ -122,9 +109,7 @@ describe('Channels', () => {
       method: 'POST',
       body: {
         version: channelResponse.version,
-        actions: [
-          { action: 'addRoles', roles: ['OrderImport'] },
-        ],
+        actions: [{ action: 'addRoles', roles: ['OrderImport'] }],
       },
       headers: {
         Accept: 'application/json',
@@ -132,8 +117,7 @@ describe('Channels', () => {
       },
     }
 
-    return client.execute(updateRequest)
-    .then((response) => {
+    return client.execute(updateRequest).then(response => {
       channelResponse = response.body
       expect(omit(response.body, ignoredResponseKeys)).toEqual({
         key,
@@ -160,15 +144,14 @@ describe('Channels', () => {
       },
     }
 
-    return client.execute(deleteRequest)
-    .then((response) => {
+    return client.execute(deleteRequest).then(response => {
       expect(response.statusCode).toBe(200)
     })
   })
 })
 
 let uniqueIdCounter = 0
-function uniqueId (prefix) {
+function uniqueId(prefix) {
   const id = `${Date.now()}_${uniqueIdCounter}`
   uniqueIdCounter += 1
   return prefix ? prefix + id : id

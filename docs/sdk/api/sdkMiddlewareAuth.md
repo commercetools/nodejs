@@ -23,10 +23,10 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 
 #### Named arguments (options)
 
-1. `host` _(String)_: the host of the OAuth API service
-2. `projectKey` _(String)_: the key of the project to assign the default scope to
-3. `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
-4. `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
+1.  `host` _(String)_: the host of the OAuth API service
+2.  `projectKey` _(String)_: the key of the project to assign the default scope to
+3.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
+4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
 
 #### Usage example
 
@@ -55,11 +55,13 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 
 #### Named arguments (options)
 
-1. `host` _(String)_: the host of the OAuth API service
-2. `projectKey` _(String)_: the key of the project to assign the default scope to
-3. `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`, `user`)
-  * The `user` field is an object containing `username` and `password`. [Sample below](#usage-example-1)
-4. `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) to assign to the OAuth token. _No default scope is sent_
+1.  `host` _(String)_: the host of the OAuth API service
+2.  `projectKey` _(String)_: the key of the project to assign the default scope to
+3.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`, `user`)
+
+* The `user` field is an object containing `username` and `password`. [Sample below](#usage-example-1)
+
+4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) to assign to the OAuth token. _No default scope is sent_
 
 #### Usage example
 
@@ -92,10 +94,10 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 
 #### Named arguments (options)
 
-1. `host` _(String)_: the host of the OAuth API service
-2. `projectKey` _(String)_: the key of the project to assign the default scope to
-3. `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`, `anonymousId`)
-4. `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
+1.  `host` _(String)_: the host of the OAuth API service
+2.  `projectKey` _(String)_: the key of the project to assign the default scope to
+3.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`, `anonymousId`)
+4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
 
 #### Usage example
 
@@ -125,10 +127,10 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 
 #### Named arguments (options)
 
-1. `host` _(String)_: the host of the OAuth API service
-2. `projectKey` _(String)_: the key of the project to assign the default scope to
-3. `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
-4. `refreshToken` _(String)_: refreshToken from the API to use to fetch new token.
+1.  `host` _(String)_: the host of the OAuth API service
+2.  `projectKey` _(String)_: the key of the project to assign the default scope to
+3.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
+4.  `refreshToken` _(String)_: refreshToken from the API to use to fetch new token.
 
 #### Usage example
 
@@ -161,7 +163,7 @@ Creates a [middleware](/sdk/Glossary.md#middleware) that attaches a provided acc
 
 `options` is an optional _(Object)_, having the following properties:
 
-1. `force` _(Boolean)_: if set to true, existing Authorization header (if any) in the request will be overridden with the supplied access token (Default: `true`)
+1.  `force` _(Boolean)_: if set to true, existing Authorization header (if any) in the request will be overridden with the supplied access token (Default: `true`)
 
 ```js
 import { createClient } from '@commercetools/sdk-client'
@@ -171,10 +173,9 @@ const accessToken = 'my-access-token'
 
 const client = createClient({
   middlewares: [
-    createAuthMiddlewareWithExistingToken(
-      `Bearer ${accessToken}`,
-      { force: true }
-    ),
+    createAuthMiddlewareWithExistingToken(`Bearer ${accessToken}`, {
+      force: true,
+    }),
   ],
 })
 ```

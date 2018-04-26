@@ -1,14 +1,17 @@
 # `sdk-middleware-http`
+
 Middelware to send the actual HTTP [request](/sdk/Glossary.md#clientrequest).
 
 ## Install
 
 #### Node.js
+
 ```bash
 npm install --save @commercetools/sdk-middleware-http
 ```
 
 #### Browser
+
 ```html
 <script src="https://unpkg.com/@commercetools/sdk-middleware-http/dist/commercetools-sdk-middleware-http.umd.min.js"></script>
 <script>// global: CommercetoolsSdkMiddlewareHttp</script>
@@ -20,19 +23,20 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle HTTP requests for 
 
 #### Named arguments (options)
 
-1. `host` *(String)*: the host of the HTTP API service
-2. `credentialsMode` *(String)*: one of the supported `credentials` modes (`omit`, `same-origin`, `include`), useful when working with HTTP Cookies. (optional)
-2. `includeResponseHeaders` *(Boolean)*: flag whether to include the response headers in the response, if omitted headers is omitted from response
-3. `includeOriginalRequest` *(Boolean)*: flag whether to include the original request sent in the response. Can be useful if you want to see the final request being sent.
-4. `maskSensitiveHeaderData` *(Boolean)*: flag to mask sensitie data in the header. e.g. Authorization token
-5. `enableRetry` *(Boolean)*: flag to enable retry on network errors and `500` response. (Default: false)
-6. `retryConfig` *(Object)*: Field required in the object listed below
-  1. `maxRetries` *(Number)*: number of times to retry the request before failing the request. (Default: 50)
-  2. `retryDelay` *(Number)*: amount of milliseconds to wait before retrying the next request. (Default: 200)
-  3. `backoff` *(Boolean)*: activates exponential backoff. Recommended to prevent spamming of the server. (Default: true)
-  4. `maxDelay` *(Number)*: The maximum duration (milliseconds) to wait before retrying, useful if the delay time grew exponentially more than reasonable
+1.  `host` _(String)_: the host of the HTTP API service
+2.  `credentialsMode` _(String)_: one of the supported `credentials` modes (`omit`, `same-origin`, `include`), useful when working with HTTP Cookies. (optional)
+3.  `includeResponseHeaders` _(Boolean)_: flag whether to include the response headers in the response, if omitted headers is omitted from response
+4.  `includeOriginalRequest` _(Boolean)_: flag whether to include the original request sent in the response. Can be useful if you want to see the final request being sent.
+5.  `maskSensitiveHeaderData` _(Boolean)_: flag to mask sensitie data in the header. e.g. Authorization token
+6.  `enableRetry` _(Boolean)_: flag to enable retry on network errors and `500` response. (Default: false)
+7.  `retryConfig` _(Object)_: Field required in the object listed below
+8.  `maxRetries` _(Number)_: number of times to retry the request before failing the request. (Default: 50)
+9.  `retryDelay` _(Number)_: amount of milliseconds to wait before retrying the next request. (Default: 200)
+10. `backoff` _(Boolean)_: activates exponential backoff. Recommended to prevent spamming of the server. (Default: true)
+11. `maxDelay` _(Number)_: The maximum duration (milliseconds) to wait before retrying, useful if the delay time grew exponentially more than reasonable
 
 #### Retrying requests
+
 This modules have a retrying ability incase of network failures or 503 response errors. To enable this behavior, pass the `enableRetry` flag in the options and also set the maximum number of retries (`maxRetries`) and amount of milliseconds to wait before retrying a request (`retryDelay`).
 
 The repeater implements an exponential delay, meaning the wait time is not constant and it grows on every retry.
@@ -54,8 +58,8 @@ const client = createClient({
       retryConfig: {
         maxRetries: 2,
         retryDelay: 300, //milliseconds
-        maxDelay: 5000 //milliseconds
-      }
+        maxDelay: 5000, //milliseconds
+      },
     }),
   ],
 })
@@ -63,15 +67,15 @@ const client = createClient({
 
 ## `getErrorByCode(code)`
 
-Returns a [custom error type](/sdk/Glossary.md#httperrortype) given its status *code*.
+Returns a [custom error type](/sdk/Glossary.md#httperrortype) given its status _code_.
 
 #### Arguments
 
-1. `code` *(Number)*: the HTTP status code
+1.  `code` _(Number)_: the HTTP status code
 
 #### Returns
 
-(*Error* or *undefined*): A custom error type (e.g. `BadRequest`, `Unauthorized`) if the *code* matches, otherwise `undefined`.
+(_Error_ or _undefined_): A custom error type (e.g. `BadRequest`, `Unauthorized`) if the _code_ matches, otherwise `undefined`.
 
 #### Usage example
 
