@@ -1,4 +1,4 @@
-# `sdk-middleware-logger`
+# `sdk-middleware-correlation-id`
 
 Middelware add a correlation id to [requests](/sdk/Glossary.md#clientrequest).
 
@@ -13,7 +13,7 @@ npm install --save @commercetools/sdk-middleware-correlation-id
 #### Browser
 
 ```html
-<script src="https://unpkg.com/@commercetools/sdk-middleware-logger/dist/commercetools-sdk-middleware-correlation-id.umd.min.js"></script>
+<script src="https://unpkg.com/@commercetools/sdk-middleware-correlation-id/dist/commercetools-sdk-middleware-correlation-id.umd.min.js"></script>
 <script>// global: CommercetoolsSdkMiddlewareCorrelationId</script>
 ```
 
