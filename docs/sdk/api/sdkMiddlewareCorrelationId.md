@@ -1,6 +1,6 @@
 # `sdk-middleware-correlation-id`
 
-Middelware add a correlation id to [requests](/sdk/Glossary.md#clientrequest).
+Middleware add a correlation id to [requests](/sdk/Glossary.md#clientrequest).
 
 ## Install
 
