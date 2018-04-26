@@ -313,3 +313,7 @@ export type ActionGroup = {
 export type ExistingTokenMiddlewareOptions = {
   force?: boolean,
 }
+
+export type CorrelationIdMiddlewareOptions = {
+  generate: () => string,
+}
