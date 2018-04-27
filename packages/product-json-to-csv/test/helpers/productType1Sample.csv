@@ -1,5 +1,0 @@
-id,key,productType,variantId,sku,images,addedAttr,anotherAddedAttr,article,color,colorFreeDefinition.en
-12345ab-id,product-key,product-type-1,1,A0E200000001YKI,image-url1,,,sample 089 WHT,white,black-white
-,,,6,A0E200001YKI123,https://image1.de;myImage.com,,,sample 089 WHT,white,black-white
-another5ab-id,product-key,product-type-1,1,A0E200001YKI,,,,sample 777 WHT,grune,grey-white
-,,,21,PPP0001YKI123,https://eg993,,,,blau,schwarz-weiß

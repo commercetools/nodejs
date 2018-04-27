@@ -1,7 +1,0 @@
-id;key;productType;variantId;sku;images;anotherAddedAttr;article;designer;color
-12345ab-id;product-key;product-type-1;1;A0E200000001YKI;image-url1;;sample 089 WHT;;white
-;;;6;A0E200001YKI123;https://image1.de;myImage.com;;sample 089 WHT;;white
-75345ab-id;product-key-2;product-type-2;1;A0E200000001YKI;https://example.com/foobar/commer.jpg|3|4;;sample 089 WHT;michaelkors;white
-;;;3;A0E200001YKI123;https://example.com/foobar/commer234.jpg|3|3;;;michaelkors;
-another5ab-id;product-key;product-type-1;1;A0E200001YKI;;;sample 777 WHT;;grune
-;;;21;PPP0001YKI123;https://eg993;;;;blau
