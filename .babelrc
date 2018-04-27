@@ -18,16 +18,7 @@
         "transform-export-extensions",
         "transform-flow-strip-types",
         "transform-object-entries",
-        "transform-object-rest-spread",
-        [
-          "module-resolver",
-          {
-            "cwd": "./",
-            "alias": {
-              "types": "./types"
-            }
-          }
-        ]
+        "transform-object-rest-spread"
       ]
     },
     "rollup": {
@@ -50,16 +41,7 @@
         "transform-export-extensions",
         "transform-flow-strip-types",
         "transform-object-entries",
-        "transform-object-rest-spread",
-        [
-          "module-resolver",
-          {
-            "cwd": "./",
-            "alias": {
-              "types": "./types"
-            }
-          }
-        ]
+        "transform-object-rest-spread"
       ]
     },
     "production": {
@@ -82,16 +64,7 @@
         "transform-export-extensions",
         "transform-flow-strip-types",
         "transform-object-entries",
-        "transform-object-rest-spread",
-        [
-          "module-resolver",
-          {
-            "cwd": "./",
-            "alias": {
-              "types": "./types"
-            }
-          }
-        ]
+        "transform-object-rest-spread"
       ]
     },
     "cli": {
@@ -112,16 +85,7 @@
         "transform-export-extensions",
         "transform-flow-strip-types",
         "transform-object-entries",
-        "transform-object-rest-spread",
-        [
-          "module-resolver",
-          {
-            "cwd": "./",
-            "alias": {
-              "types": "./types"
-            }
-          }
-        ]
+        "transform-object-rest-spread"
       ]
     }
   }
