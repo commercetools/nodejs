@@ -11,8 +11,8 @@ import type {
   LoggerOptions,
   ProductProjection,
   ProcessFnResponse,
-} from '../../../types/product'
-import type { Client, ClientRequest } from '../../../types/sdk'
+} from 'types/product'
+import type { Client, ClientRequest } from 'types/sdk'
 import pkg from '../package.json'
 
 export default class ProductExporter {

@@ -16,8 +16,8 @@ import type {
   CodeData,
   ConstructorOptions,
   Summary,
-} from '../../../types/discountCodes'
-import type { Client, SyncAction } from '../../../types/sdk'
+} from 'types/discountCodes'
+import type { Client, SyncAction } from 'types/sdk'
 import pkg from '../package.json'
 
 class DiscountCodeImportError extends Error {

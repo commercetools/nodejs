@@ -1,4 +1,13 @@
 /* @flow */
+import type {
+  ApiConfigOptions,
+  ConstructorOptions,
+  LoggerOptions,
+  StateData,
+  Summary,
+} from 'types/state'
+import type { Client, ClientRequest, MethodType, SyncAction } from 'types/sdk'
+
 import Promise from 'bluebird'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
@@ -10,19 +19,6 @@ import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import { createSyncStates } from '@commercetools/sync-actions'
 import pkg from '../package.json'
-import type {
-  ApiConfigOptions,
-  ConstructorOptions,
-  LoggerOptions,
-  StateData,
-  Summary,
-} from '../../../types/state'
-import type {
-  Client,
-  ClientRequest,
-  MethodType,
-  SyncAction,
-} from '../../../types/sdk'
 
 class StateImportError extends Error {
   error: any

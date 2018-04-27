@@ -1,6 +1,6 @@
 /* @flow */
 import flatten from 'lodash.flatten'
-import type { SyncAction, UpdateAction, ActionGroup } from '../../../types/sdk'
+import type { SyncAction, UpdateAction, ActionGroup } from 'types/sdk'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import * as productTypeActions from './product-types-actions'

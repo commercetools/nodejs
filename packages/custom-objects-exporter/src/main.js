@@ -12,9 +12,9 @@ import type {
   ApiConfigOptions,
   ExporterOptions,
   LoggerOptions,
-} from '../../../types/customObjects'
+} from 'types/customObjects'
+import type { Client, ClientRequest } from 'types/sdk'
 import silentLogger from './utils/silent-logger'
-import type { Client, ClientRequest } from '../../../types/sdk'
 import pkg from '../package.json'
 
 export default class CustomObjectsExporter {

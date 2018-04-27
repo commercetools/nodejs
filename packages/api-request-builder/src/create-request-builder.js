@@ -1,7 +1,8 @@
 /* @flow */
+import type { ApiRequestBuilder } from 'types/sdk'
+
 import services from './default-services'
 import createService from './create-service'
-import type { ApiRequestBuilder } from '../../../types/sdk'
 
 // pass an options argument of type object containing
 // the `projectkey` (string) and `customServices` (object)
