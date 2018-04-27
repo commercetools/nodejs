@@ -1,4 +1,12 @@
 /* @flow */
+import type { Client, ClientRequest } from 'types/sdk'
+import type { LoggerOptions, ApiConfigOptions } from 'types/discountCodes'
+import type {
+  Inventory,
+  ExportConfig,
+  CsvInventoryMapping,
+} from 'types/inventory'
+
 import csv from 'fast-csv'
 import JSONStream from 'JSONStream'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
@@ -8,16 +16,6 @@ import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import { version, name } from '../package.json'
 import CONS from './constants'
-import type { Client, ClientRequest } from '../../../types/sdk'
-import type {
-  LoggerOptions,
-  ApiConfigOptions,
-} from '../../../types/discountCodes'
-import type {
-  Inventory,
-  ExportConfig,
-  CsvInventoryMapping,
-} from '../../../types/inventory'
 
 export default class InventoryExporter {
   logger: LoggerOptions

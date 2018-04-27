@@ -62,19 +62,19 @@ Middelware to throttle concurrent [request](/sdk/Glossary.md#clientrequest) to a
 
 ### `sdk-middleware-logger`
 
-Middelware to log incoming [request](/sdk/Glossary.md#clientrequest) and [response](/sdk/Glossary.md#clientresponse) objects.
+Middleware to log incoming [request](/sdk/Glossary.md#clientrequest) and [response](/sdk/Glossary.md#clientresponse) objects.
 
 * [createLoggerMiddleware(options)](/sdk/api/sdkMiddlewareLogger.md#createloggermiddlewareoptions)
 
 ### `sdk-middleware-user-agent`
 
-Middelware to automatically set the `User-Agent` to the [request](/sdk/Glossary.md#clientresponse).
+Middleware to automatically set the `User-Agent` to the [request](/sdk/Glossary.md#clientrequest).
 
 * [createUserAgentMiddleware(options)](/sdk/api/sdkMiddlewareUserAgent.md#createuseragentmiddlewareoptions)
 
 ### `sdk-middleware-correlation-id`
 
-Middelware to add a correlation id to [requests](/sdk/Glossary.md#clientrequest).
+Middleware to add a correlation id to [requests](/sdk/Glossary.md#clientrequest).
 
 * [createCorrelationIdMiddleware(options)](/sdk/api/sdkMiddlewareCorrelationId.md)
 

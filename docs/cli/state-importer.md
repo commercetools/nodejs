@@ -6,14 +6,17 @@ This package is built to be used in conjunction with [sphere-node-cli](https://g
 ## Configuration
 
 The constructor accepts three arguments:
-- A required object containing the following values:
-  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
-  - `continueOnProblems` (Boolean): Flag whether to continue processing if an error occurs (Optional. Default: false)
-- `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`manage_project`] to create and/or update states or [`manage_orders`] to update states
-- An optional logger object having four functions (`info`, `warn`, `error` and `verbose`)
+
+* A required object containing the following values:
+  * `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  * `continueOnProblems` (Boolean): Flag whether to continue processing if an error occurs (Optional. Default: false)
+* `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`manage_project`] to create and/or update states or [`manage_orders`] to update states
+* An optional logger object having four functions (`info`, `warn`, `error` and `verbose`)
 
 ## Usage with `sphere-node-cli`
+
 You can use this package from the [`sphere-node-cli`](https://github.com/sphereio/sphere-node-cli). In order for the cli to import states, the file to import from must be a valid JSON and follow this structure:
+
 ```json
 [
   {
@@ -59,18 +62,24 @@ You can use this package from the [`sphere-node-cli`](https://github.com/spherei
   ...
 ]
 ```
+
 Then you can import this file using the cli:
+
 ```bash
 sphere import -t state -p my-project-key --host 'https://api.sphere.io' --authHost 'https://auth.sphere.io' -f /path/to/file.json -c
  '{"continueOnProblems": true}'
 ```
 
 ## Direct Usage
+
 If you would like to have more control, you can also use this module directly in Javascript. To do this, you need to install it:
+
 ```bash
 npm install @commercetools/state-importer
 ```
+
 Then you can use it to import states:
+
 ```js
 import StateImport from '@commercetools/state-importer'
 
@@ -152,6 +161,7 @@ stateImport.run(states)
 ```
 
 On successful completion, a call to the `.summaryReport()` method returns a report in the following format:
+
 ```js
 {
   reportMessage: 'Summary: there were 5 successfully states (3 were newly created, 2 were updated and 0 were unchanged).',
@@ -166,4 +176,5 @@ On successful completion, a call to the `.summaryReport()` method returns a repo
   }
 }
 ```
+
 **Note:** By default, if a state exists, the module tries to build update actions for it, and if no update actions can be built, the states will be ignored

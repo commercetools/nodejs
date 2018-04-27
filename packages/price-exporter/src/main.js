@@ -1,4 +1,14 @@
 /* @flow */
+import type {
+  ApiConfigOptions,
+  Configuration,
+  ExporterOptions,
+  LoggerOptions,
+  ProcessedPriceObject,
+  UnprocessedPriceObject,
+} from 'types/price'
+import type { Client } from 'types/sdk'
+
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
@@ -10,15 +20,6 @@ import Promise from 'bluebird'
 import { flatten } from 'flat'
 import { memoize } from 'lodash'
 import pkg from '../package.json'
-import type {
-  ApiConfigOptions,
-  Configuration,
-  ExporterOptions,
-  LoggerOptions,
-  ProcessedPriceObject,
-  UnprocessedPriceObject,
-} from '../../../types/price'
-import type { Client } from '../../../types/sdk'
 
 export default class PriceExporter {
   // Set flowtype annotations

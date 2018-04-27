@@ -5,7 +5,7 @@ import type {
   MiddlewareRequest,
   MiddlewareResponse,
   UserAgentMiddlewareOptions,
-} from '../../../types/sdk'
+} from 'types/sdk'
 
 export default function createUserAgentMiddleware(
   options: UserAgentMiddlewareOptions

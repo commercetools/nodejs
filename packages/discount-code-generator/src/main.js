@@ -1,11 +1,7 @@
 /* @flow */
-import TokenGenerator from 'tokgen'
+import type { CodeData, CodeDataArray, CodeOptions } from 'types/discountCodes'
 
-import type {
-  CodeData,
-  CodeDataArray,
-  CodeOptions,
-} from '../../../types/discountCodes'
+import TokenGenerator from 'tokgen'
 
 /*
  * The discountCodeGenerator function takes 2 arguments {options} and {data}

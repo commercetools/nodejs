@@ -12,8 +12,8 @@ import type {
   CodeData,
   ExporterOptions,
   LoggerOptions,
-} from '../../../types/discountCodes'
-import type { Client, ClientRequest } from '../../../types/sdk'
+} from 'types/discountCodes'
+import type { Client, ClientRequest } from 'types/sdk'
 import pkg from '../package.json'
 
 type ConfigType = {

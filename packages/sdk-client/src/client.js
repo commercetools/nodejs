@@ -10,7 +10,7 @@ import type {
   ProcessFn,
   ProcessOptions,
   SuccessResult,
-} from '../../../types/sdk'
+} from 'types/sdk'
 import validate from './validate'
 
 function compose(...funcs: Array<Function>): Function {
