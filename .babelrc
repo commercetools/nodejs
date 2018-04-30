@@ -51,7 +51,7 @@
           {
             "targets": {
               "browsers": ["last 2 versions"],
-              "node": "4"
+              "node": "6"
             },
             "modules": false
           }
@@ -73,7 +73,7 @@
           "env",
           {
             "targets": {
-              "node": "4"
+              "node": "6"
             },
             "modules": "commonjs"
           }
