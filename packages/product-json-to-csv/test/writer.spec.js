@@ -95,9 +95,7 @@ describe('Writer', () => {
       ]
       const outputStream = streamTest.toText((error, actual) => {
         expect(error).toBeFalsy()
-        const expectedCsvFile = `${__dirname}/helpers/csvFileWithHeaders.csv`
-        const expectedCsv = fs.readFileSync(expectedCsvFile, 'utf8')
-        expect(actual).toMatch(expectedCsv)
+        expect(actual).toMatchSnapshot()
         done()
       })
 
@@ -121,9 +119,7 @@ describe('Writer', () => {
       const delimiter = ';'
       const outputStream = streamTest.toText((error, actual) => {
         expect(error).toBeFalsy()
-        const expectedCsvFile = `${__dirname}/helpers/csvFileWithDelimiter.csv`
-        const expectedCsv = fs.readFileSync(expectedCsvFile, 'utf8')
-        expect(actual).toMatch(expectedCsv)
+        expect(actual).toMatchSnapshot()
         done()
       })
 
@@ -156,15 +152,11 @@ describe('Writer', () => {
       const sampleStream = highland(sampleProducts)
       const verifyCsv1 = streamTest.toText((error, actual) => {
         expect(error).toBeFalsy()
-        const type1 = `${__dirname}/helpers/productType1Sample.csv`
-        const expectedCsv = fs.readFileSync(type1, 'utf8')
-        expect(expectedCsv).toMatch(actual)
+        expect(actual).toMatchSnapshot()
       })
       const verifyCsv2 = streamTest.toText((error, actual) => {
         expect(error).toBeFalsy()
-        const type2 = `${__dirname}/helpers/productType2Sample.csv`
-        const expectedCsv = fs.readFileSync(type2, 'utf8')
-        expect(expectedCsv).toMatch(actual)
+        expect(actual).toMatchSnapshot()
       })
 
       const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })

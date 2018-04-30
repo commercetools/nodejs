@@ -24,7 +24,6 @@ export function writeToSingleCsvFile(
         data: product,
         fields: columnNames,
         hasCSVColumnTitle: false,
-        quotes: '',
         del,
       })
       output.write(`${csvData}\n`)
@@ -77,7 +76,6 @@ export function writeToZipFile(productStream, output, logger, del) {
         data: product,
         fields: columnNames,
         hasCSVColumnTitle,
-        quotes: '',
         del,
       })
       fileStream.write(`${csvData}\n`)
