@@ -239,11 +239,14 @@ export default class ProductJsonToCsv {
   }
 
   _resolveAncestors(category: Category): Promise<Category> {
-    const getParent = async (cat: Category): Promise<Category> => {
+    const getParent = (cat: Category): Promise<Category> => {
       if (!cat.parent) return cat
 
-      const resolvedCategory = await this._getCategories([cat.parent.id])
-      return { ...cat, parent: await getParent(resolvedCategory[0]) }
+      return this._getCategories([cat.parent.id])
+        .then((resolvedCategory: Object): Promise =>
+          getParent(resolvedCategory[0])
+        )
+        .then((result: Object): Promise => ({ ...cat, parent: result }))
     }
     return getParent(category)
   }
