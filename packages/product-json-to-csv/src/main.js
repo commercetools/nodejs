@@ -246,7 +246,7 @@ export default class ProductJsonToCsv {
         .then((resolvedCategory: Object): Promise =>
           getParent(resolvedCategory[0])
         )
-        .then((result: Object): Promise => ({ ...cat, parent: result }))
+        .then((parent: Object): Promise => ({ ...cat, parent }))
     }
     return getParent(category)
   }
