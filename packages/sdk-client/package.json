@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-client",
-  "version": "1.5.5",
+  "version": "1.5.6",
   "description": "SDK Client for usage of commercetools platform API",
   "keywords": [
     "commercetools",
