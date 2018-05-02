@@ -143,9 +143,9 @@ export default class ProductMapping {
               images = value.images
                 .map((image: Image): string => {
                   const { url, label } = image
-                  return label ? `${url}${this.multiValDel}${label}` : url
+                  return label ? `${url}|${label}` : url
                 })
-                .join(';')
+                .join(this.multiValDel)
 
             const { id, sku, key } = value
             acc[property] = pickBy({ id, sku, key, images }, Boolean)

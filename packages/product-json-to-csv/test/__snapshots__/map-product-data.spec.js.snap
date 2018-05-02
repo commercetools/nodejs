@@ -8,7 +8,7 @@ Object {
   "state": "my-resolved-state",
   "variant": Object {
     "id": 1,
-    "images": "https://example.com/foobar/commer.jpg;https://example-2.com/demo/tools.jpg;image-label",
+    "images": "https://example.com/foobar/commer.jpg;https://example-2.com/demo/tools.jpg|image-label",
     "sku": "A0E200000001YKI",
   },
 }
@@ -39,7 +39,7 @@ Array [
     "slug.en": "michaelkors-phonecover",
     "taxCategory": "resolved-tax-name",
     "variant.id": 1,
-    "variant.images": "https://example.com/foobar/commer.jpg;https://example-2.com/demo/tools.jpg;image-label",
+    "variant.images": "https://example.com/foobar/commer.jpg;https://example-2.com/demo/tools.jpg|image-label",
     "variant.sku": "A0E200000001YKI",
   },
   Object {
