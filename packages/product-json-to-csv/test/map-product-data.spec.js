@@ -181,51 +181,7 @@ describe('::ProductMapping', () => {
         createdAt: '2017-01-06T10:54:51.395Z',
         lastModifiedAt: '2017-01-06T10:54:51.395Z',
       }
-
-      const expected = [
-        {
-          id: '12345ab-id',
-          key: 'product-key',
-          productType: 'resolved-product-type',
-          'name.en': 'Phone cover',
-          'name.de': 'Handyhülle',
-          categories: 'res-cat-name-1;res-cat-name-2',
-          categoryOrderHints: 'res-cat-name-1:0.015;res-cat-name-2:0.987',
-          'slug.en': 'michaelkors-phonecover',
-          'slug.de': 'michaelkors-handyhuelle',
-          taxCategory: 'resolved-tax-name',
-          published: false,
-          hasStagedChanges: false,
-          createdAt: '2017-01-06T10:54:51.395Z',
-          lastModifiedAt: '2017-01-06T10:54:51.395Z',
-          'variant.id': 1,
-          'variant.sku': 'A0E200000001YKI',
-          'variant.images': oneLineTrim`
-          https://example.com/foobar/commer.jpg|3|4;
-          https://example-2.com/demo/tools.jpg|1|5|image-label`,
-          addedAttr: '',
-          anotherAddedAttr: '',
-          article: 'sample 089 WHT',
-          color: 'white',
-          'colorFreeDefinition.en': 'black-white',
-          'colorFreeDefinition.de': 'schwarz-weiß',
-          designer: 'michaelkors',
-        },
-        {
-          'variant.id': 2,
-          'variant.sku': 'A0E200001YKI123',
-          'variant.images': oneLineTrim`
-          https://example.com/foobar/commer234.jpg|3|3;
-          https://example-2.com/demo/tools67.jpg|1|1`,
-          article: 'sample 089 WHT',
-          color: 'white',
-          'colorFreeDefinition.en': 'black-white',
-          'colorFreeDefinition.de': 'schwarz-weiß',
-          designer: 'michaelkors',
-        },
-      ]
-
-      expect(productMapping.run(sample)).toEqual(expected)
+      expect(productMapping.run(sample)).toMatchSnapshot()
     })
   })
 
@@ -491,20 +447,7 @@ describe('::ProductMapping', () => {
         },
         hasStagedChanges: false,
       }
-      const expected = {
-        id: '12345ab-id',
-        key: 'product-key',
-        variant: {
-          id: 1,
-          sku: 'A0E200000001YKI',
-          images: oneLineTrim`
-            https://example.com/foobar/commer.jpg|3|4;
-            https://example-2.com/demo/tools.jpg|1|5|image-label`,
-        },
-        state: 'my-resolved-state',
-        hasStagedChanges: false,
-      }
-      expect(productMapping._mapProperties(sample)).toEqual(expected)
+      expect(productMapping._mapProperties(sample)).toMatchSnapshot()
     })
   })
 

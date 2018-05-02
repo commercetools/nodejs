@@ -142,10 +142,8 @@ export default class ProductMapping {
             if (!isEmpty(value.images))
               images = value.images
                 .map((image: Image): string => {
-                  const { url, dimensions, label } = image
-                  let imageString = `${url}|${dimensions.w}|${dimensions.h}`
-                  imageString += label ? `|${label}` : ''
-                  return imageString
+                  const { url, label } = image
+                  return label ? `${url}${this.multiValDel}${label}` : url
                 })
                 .join(';')
 
