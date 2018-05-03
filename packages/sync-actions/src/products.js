@@ -9,7 +9,6 @@ import findMatchingPairs from './utils/find-matching-pairs'
 
 const actionGroups = [
   'base',
-  'meta',
   'references',
   'prices',
   'attributes',
@@ -33,12 +32,6 @@ function createProductMapActions(mapActionGroup) {
     allActions.push(
       mapActionGroup('base', () =>
         productActions.actionsMapBase(diff, oldObj, newObj)
-      )
-    )
-
-    allActions.push(
-      mapActionGroup('meta', () =>
-        productActions.actionsMapMeta(diff, oldObj, newObj)
       )
     )
 

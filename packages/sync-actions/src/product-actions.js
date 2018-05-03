@@ -22,9 +22,6 @@ export const baseActionsList = [
   { action: 'setDescription', key: 'description' },
   { action: 'setSearchKeywords', key: 'searchKeywords' },
   { action: 'setKey', key: 'key' },
-]
-
-export const metaActionsList = [
   { action: 'setMetaTitle', key: 'metaTitle' },
   { action: 'setMetaDescription', key: 'metaDescription' },
   { action: 'setMetaKeywords', key: 'metaKeywords' },
@@ -370,15 +367,6 @@ function _buildVariantAttributesActions(
 export function actionsMapBase(diff, oldObj, newObj) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
-    diff,
-    oldObj,
-    newObj,
-  })
-}
-
-export function actionsMapMeta(diff, oldObj, newObj) {
-  return buildBaseAttributesActions({
-    actions: metaActionsList,
     diff,
     oldObj,
     newObj,

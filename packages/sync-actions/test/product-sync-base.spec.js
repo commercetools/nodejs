@@ -1,16 +1,11 @@
 import clone from '../src/utils/clone'
 import productsSyncFn, { actionGroups } from '../src/products'
-import {
-  baseActionsList,
-  metaActionsList,
-  referenceActionsList,
-} from '../src/product-actions'
+import { baseActionsList, referenceActionsList } from '../src/product-actions'
 
 describe('Exports', () => {
   test('action group list', () => {
     expect(actionGroups).toEqual([
       'base',
-      'meta',
       'references',
       'prices',
       'attributes',
@@ -28,11 +23,6 @@ describe('Exports', () => {
       { action: 'setDescription', key: 'description' },
       { action: 'setSearchKeywords', key: 'searchKeywords' },
       { action: 'setKey', key: 'key' },
-    ])
-  })
-
-  test('correctly define meta actions list', () => {
-    expect(metaActionsList).toEqual([
       { action: 'setMetaTitle', key: 'metaTitle' },
       { action: 'setMetaDescription', key: 'metaDescription' },
       { action: 'setMetaKeywords', key: 'metaKeywords' },
