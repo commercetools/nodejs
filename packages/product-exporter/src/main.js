@@ -95,6 +95,9 @@ export default class ProductExporter {
           this.logger.debug(
             `${products.length} products written to outputStream`
           )
+          if (products.length < 1) {
+            return Promise.reject(Error('No products found'))
+          }
           return Promise.resolve()
         },
         processConfig
