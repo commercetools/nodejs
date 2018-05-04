@@ -129,7 +129,11 @@ export default class ProductMapping {
           case 'variant': {
             if (!isEmpty(value.attributes)) {
               value.attributes.forEach((attribute: Object) => {
-                acc[attribute.name] = attribute.value.key || attribute.value
+                acc[attribute.name] = Array.isArray(attribute.value)
+                  ? attribute.value
+                      .map(attrValue => attrValue.key)
+                      .join(this.multiValDel)
+                  : attribute.value.key || attribute.value
               })
 
               // check if product is masterVariant
