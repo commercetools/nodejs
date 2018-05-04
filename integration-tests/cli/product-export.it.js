@@ -33,7 +33,7 @@ describe('Product Exporter', () => {
     })
   })
 
-  describe('When no products exist', () => {
+  describe('when no products exist', () => {
     it('should throw error', async () => {
       const filePath = tmp.fileSync().name
 
@@ -43,7 +43,7 @@ describe('Product Exporter', () => {
     })
   })
 
-  describe('Export function', () => {
+  describe('export function', () => {
     beforeAll(async () => {
       const credentials = await getCredentials(projectKey)
       apiConfig = {
