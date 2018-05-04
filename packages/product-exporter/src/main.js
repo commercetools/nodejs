@@ -90,6 +90,9 @@ export default class ProductExporter {
       .process(
         request,
         ({ body: { results: products } }: ProcessFnResponse): Promise<*> => {
+          if (products.length < 1) {
+            return Promise.reject(Error('No products found'))
+          }
           this.logger.debug(`Fetched ${products.length} products`)
           ProductExporter._writeEachProduct(outputStream, products)
           this.logger.debug(
