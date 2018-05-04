@@ -93,6 +93,19 @@ describe('::ProductMapping', () => {
               value: 'sample 089 WHT',
             },
             {
+              name: 'setLenums',
+              value: [
+                {
+                  key: 'myLenums',
+                  label: {
+                    en: 'myLenums-en',
+                    es: 'myLenums-es',
+                    de: 'myLenums-de',
+                  },
+                },
+              ],
+            },
+            {
               name: 'designer',
               value: {
                 label: 'Michael Kors',
@@ -143,6 +156,19 @@ describe('::ProductMapping', () => {
               {
                 name: 'article',
                 value: 'sample 089 WHT',
+              },
+              {
+                name: 'setLenums-2',
+                value: [
+                  {
+                    key: 'myLenums-2',
+                    label: {
+                      en: 'myLenums-2-en',
+                      es: 'myLenums-2-es',
+                      de: 'myLenums-2-de',
+                    },
+                  },
+                ],
               },
               {
                 name: 'designer',
