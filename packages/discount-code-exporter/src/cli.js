@@ -1,4 +1,5 @@
 import fs from 'fs'
+import readline from 'readline'
 import { getCredentials } from '@commercetools/get-credentials'
 import npmlog from 'npmlog'
 import PrettyError from 'pretty-error'
@@ -21,6 +22,21 @@ ${description}`
   })
   .help('help', 'Show help text.')
   .version()
+  .option('template', {
+    alias: 't',
+    describe: 'Path to CSV template.',
+  })
+  .option('language', {
+    alias: 'l',
+    default: 'en',
+    describe:
+      'Language used for localised fields (such as `name` and `description`) when exporting without template. This field is ignored for exports with template',
+  })
+  .coerce('template', arg => {
+    if (fs.existsSync(arg)) return fs.createReadStream(String(arg))
+
+    throw new Error('Input file cannot be reached or does not exist')
+  })
   .option('output', {
     alias: 'o',
     default: 'stdout',
@@ -101,6 +117,23 @@ const errorHandler = errors => {
   process.exitCode = 1
 }
 
+// Retrieve the headers from the template file
+// Only the first line of the file is read
+const getHeaders = _args =>
+  new Promise((resolve, reject) => {
+    if (!_args.template) resolve(null)
+    else {
+      const rl = readline.createInterface({
+        input: _args.template,
+      })
+      rl.on('error', reject)
+      rl.on('line', line => {
+        rl.close()
+        resolve(line.split(_args.delimiter))
+      })
+    }
+  })
+
 const resolveCredentials = _args => {
   if (_args.accessToken) return Promise.resolve({})
   return getCredentials(_args.projectKey)
@@ -114,8 +147,10 @@ else npmlog.stream = process.stdout
 // Register error listener
 args.output.on('error', errorHandler)
 
-resolveCredentials(args)
-  .then(credentials => {
+Promise.all([resolveCredentials(args), getHeaders(args)])
+  .then(([credentials, headerFields]) => {
+    // resolveCredentials(args)
+    // .then(credentials => {
     const apiConfig = {
       host: args.authUrl,
       apiUrl: args.apiUrl,
@@ -128,8 +163,10 @@ resolveCredentials(args)
       batchSize: args.batchSize,
       delimiter: args.delimiter,
       exportFormat: args.exportFormat,
+      language: args.language,
       multiValueDelimiter: args.multiValueDelimiter,
       predicate: args.where,
+      headerFields,
     }
     const logger = {
       error: npmlog.error.bind(this, ''),

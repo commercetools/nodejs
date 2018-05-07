@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DiscountCodeExport ::setupHeaders without passed headers when empty array should return return passed headers 1`] = `
+Array [
+  "name.de",
+  "description.de",
+  "code",
+  "cartDiscounts",
+  "cartPredicate",
+  "groups",
+  "isActive",
+  "validFrom",
+  "validUntil",
+  "references",
+  "maxApplications",
+  "maxApplicationsPerCustomer",
+]
+`;
+
+exports[`DiscountCodeExport ::setupHeaders without passed headers when null should return return passed headers 1`] = `
+Array [
+  "name.de",
+  "description.de",
+  "code",
+  "cartDiscounts",
+  "cartPredicate",
+  "groups",
+  "isActive",
+  "validFrom",
+  "validUntil",
+  "references",
+  "maxApplications",
+  "maxApplicationsPerCustomer",
+]
+`;

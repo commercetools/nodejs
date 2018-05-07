@@ -57,70 +57,146 @@ describe('DiscountCodeExport', () => {
     })
   })
 
+  describe('::setupHeaders', () => {
+    describe('with passed headers', () => {
+      test('should return return passed headers', () => {
+        expect(DiscountCodeExport.setupHeaders(['foo', 'bar'], 'de')).toEqual([
+          'foo',
+          'bar',
+        ])
+      })
+    })
+
+    describe('without passed headers', () => {
+      describe('when empty array', () => {
+        test('should return return passed headers', () => {
+          expect(DiscountCodeExport.setupHeaders([], 'de')).toMatchSnapshot()
+        })
+      })
+
+      describe('when null', () => {
+        test('should return return passed headers', () => {
+          expect(DiscountCodeExport.setupHeaders(null, 'de')).toMatchSnapshot()
+        })
+      })
+    })
+  })
+
   describe('::run', () => {
-    test('should fetch discount codes and output csv to stream', done => {
-      codeExport.config.exportFormat = 'csv'
-      const sampleCode = {
-        code: 'discount-code',
-        name: { en: 'some-discount-name' },
-        cartDiscounts: [{ id: 'cart-discount-1' }, { id: 'cart-discount-2' }],
-      }
-      codeExport._fetchCodes = jest.fn().mockImplementation(csvStream => {
-        csvStream.write(sampleCode)
-        return Promise.resolve()
+    describe('successful export', () => {
+      let sampleCode
+      beforeEach(() => {
+        sampleCode = {
+          code: 'discount-code',
+          name: { en: 'some-discount-name' },
+          cartDiscounts: [{ id: 'cart-discount-1' }, { id: 'cart-discount-2' }],
+        }
+        codeExport._fetchCodes = jest.fn().mockImplementation(csvStream => {
+          csvStream.write(sampleCode)
+          return Promise.resolve()
+        })
       })
-      const outputStream = streamtest.v2.toText((error, result) => {
-        const expectedResult = stripIndent`
-          code,name.en,cartDiscounts,groups
-          discount-code,some-discount-name,cart-discount-1;cart-discount-2,
-          `
-        expect(result).toEqual(expectedResult)
-        done()
+
+      describe('CSV export', () => {
+        describe('with template', () => {
+          beforeEach(() => {
+            codeExport = new DiscountCodeExport(
+              {
+                apiConfig: {
+                  projectKey: 'test-project-key',
+                },
+                exportFormat: 'csv',
+                headerFields: ['code', 'name.en', 'cartDiscounts', 'groups'],
+              },
+              logger
+            )
+            codeExport._fetchCodes = jest.fn().mockImplementation(csvStream => {
+              csvStream.write(sampleCode)
+              return Promise.resolve()
+            })
+          })
+
+          test('should export with template headers', done => {
+            const outputStream = streamtest.v2.toText((error, result) => {
+              const expectedResult = stripIndent`
+              code,name.en,cartDiscounts,groups
+              discount-code,some-discount-name,cart-discount-1;cart-discount-2,
+              `
+              expect(result).toEqual(expectedResult)
+              done()
+            })
+            codeExport.run(outputStream)
+          })
+        })
+
+        describe('without template', () => {
+          beforeEach(() => {
+            codeExport = new DiscountCodeExport(
+              {
+                apiConfig: {
+                  projectKey: 'test-project-key',
+                },
+                exportFormat: 'csv',
+              },
+              logger
+            )
+            codeExport._fetchCodes = jest.fn().mockImplementation(csvStream => {
+              csvStream.write(sampleCode)
+              return Promise.resolve()
+            })
+          })
+
+          test('should export with default headers', done => {
+            const outputStream = streamtest.v2.toText((error, result) => {
+              const expectedResult = stripIndent`
+              name.en,description.en,code,cartDiscounts,cartPredicate,groups,isActive,validFrom,validUntil,references,maxApplications,maxApplicationsPerCustomer
+              some-discount-name,,discount-code,cart-discount-1;cart-discount-2,,,,,,,,
+              `
+              expect(result).toEqual(expectedResult)
+              done()
+            })
+            codeExport.run(outputStream)
+          })
+        })
       })
-      codeExport.run(outputStream)
+
+      describe('JSON export', () => {
+        test('should fetch codes and output json to stream by default', done => {
+          const outputStream = streamtest.v2.toText((error, result) => {
+            const expectedResult = [sampleCode]
+            expect(JSON.parse(result)).toEqual(expectedResult)
+            done()
+          })
+          codeExport.run(outputStream)
+        })
+      })
     })
 
-    test('should fetch codes and output json to stream by default', done => {
-      const sampleCode = {
-        code: 'discount-code',
-        name: { en: 'some-discount-name' },
-        cartDiscounts: [{ id: 'cart-discount-1' }, { id: 'cart-discount-2' }],
-      }
-      codeExport._fetchCodes = jest.fn().mockImplementation(jsonStream => {
-        jsonStream.write(sampleCode)
-        return Promise.resolve()
+    describe('with error', () => {
+      beforeEach(() => {
+        codeExport._fetchCodes = jest
+          .fn()
+          .mockImplementation(() => Promise.reject(new Error('error occured')))
       })
-      const outputStream = streamtest.v2.toText((error, result) => {
-        const expectedResult = [sampleCode]
-        expect(JSON.parse(result)).toEqual(expectedResult)
-        done()
-      })
-      codeExport.run(outputStream)
-    })
 
-    test('should emit error if it occurs when streaming to csv', done => {
-      codeExport.exportFormat = 'csv'
-      codeExport._fetchCodes = jest
-        .fn()
-        .mockImplementation(() => Promise.reject(new Error('error occured')))
-      const outputStream = streamtest.v2.toText((error, result) => {
-        expect(error.message).toBe('error occured')
-        expect(result).toBeUndefined()
-        done()
+      test('should emit error if it occurs when streaming to csv', done => {
+        codeExport.exportFormat = 'csv'
+        const outputStream = streamtest.v2.toText((error, result) => {
+          expect(error.message).toBe('error occured')
+          expect(result).toBeUndefined()
+          done()
+        })
+        codeExport.run(outputStream)
       })
-      codeExport.run(outputStream)
-    })
 
-    test('should emit error if it occurs when streaming to json', done => {
-      codeExport._fetchCodes = jest
-        .fn()
-        .mockImplementation(() => Promise.reject(new Error('error occured')))
-      const outputStream = streamtest.v2.toText((error, result) => {
-        expect(error.message).toBe('error occured')
-        expect(result).toBeUndefined()
-        done()
+      test('should emit error if it occurs when streaming to json', done => {
+        const outputStream = streamtest.v2.toText((error, result) => {
+          expect(error.message).toBe('error occured')
+          expect(result).toBeUndefined()
+          done()
+        })
+        codeExport.run(outputStream)
       })
-      codeExport.run(outputStream)
     })
   })
 
