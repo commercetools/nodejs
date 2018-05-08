@@ -2,6 +2,7 @@
 import npmlog from 'npmlog'
 import Promise from 'bluebird'
 import _ from 'lodash'
+import fetch, { Request, Headers } from 'node-fetch'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
@@ -64,12 +65,20 @@ export default class DiscountCodeImport {
     this.continueOnProblems = options.continueOnProblems || false
     this.client = createClient({
       middlewares: [
-        createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
+        createAuthMiddlewareForClientCredentialsFlow({
+          ...this.apiConfig,
+          fetch,
+        }),
         createUserAgentMiddleware({
           libraryName: pkg.name,
           libraryVersion: pkg.version,
         }),
-        createHttpMiddleware({ host: this.apiConfig.apiUrl }),
+        createHttpMiddleware({
+          host: this.apiConfig.apiUrl,
+          fetch,
+          Request,
+          Headers,
+        }),
       ],
     })
 
