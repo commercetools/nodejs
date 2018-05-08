@@ -4,7 +4,7 @@ import highland from 'highland'
 import JSONStream from 'JSONStream'
 import memoize from 'lodash.memoize'
 import { unflatten } from 'flat'
-import fetch, { Request, Headers } from 'node-fetch'
+import fetch from 'node-fetch'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
@@ -153,8 +153,6 @@ export default class CsvParserState {
         createHttpMiddleware({
           host: apiConfig.apiUrl,
           fetch,
-          Request,
-          Headers,
         }),
       ],
     })

@@ -4,7 +4,7 @@ import JSONStream from 'JSONStream'
 import mapValues from 'lodash.mapvalues'
 import memoize from 'lodash.memoize'
 import { unflatten } from 'flat'
-import fetch, { Request, Headers } from 'node-fetch'
+import fetch from 'node-fetch'
 
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createClient } from '@commercetools/sdk-client'
@@ -28,8 +28,6 @@ export default class CsvParserPrice {
         createHttpMiddleware({
           host: apiConfig.apiUrl,
           fetch,
-          Request,
-          Headers,
         }),
       ],
     })

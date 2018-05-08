@@ -5,7 +5,7 @@ import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import JSONStream from 'JSONStream'
-import fetch, { Request, Headers } from 'node-fetch'
+import fetch from 'node-fetch'
 import type {
   ApiConfigOptions,
   ExportConfigOptions,
@@ -44,8 +44,6 @@ export default class ProductExporter {
         createHttpMiddleware({
           host: this.apiConfig.apiUrl,
           fetch,
-          Request,
-          Headers,
         }),
       ],
     })

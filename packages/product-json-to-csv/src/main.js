@@ -19,7 +19,7 @@ import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import highland from 'highland'
-import fetch, { Request, Headers } from 'node-fetch'
+import fetch from 'node-fetch'
 import Promise from 'bluebird'
 import JSONStream from 'JSONStream'
 import { memoize } from 'lodash'
@@ -59,8 +59,6 @@ export default class ProductJsonToCsv {
         createHttpMiddleware({
           host: this.apiConfig.apiUrl,
           fetch,
-          Request,
-          Headers,
         }),
       ],
     })

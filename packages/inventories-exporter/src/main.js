@@ -8,7 +8,7 @@ import type {
 } from 'types/inventory'
 
 import csv from 'fast-csv'
-import fetch, { Request, Headers } from 'node-fetch'
+import fetch from 'node-fetch'
 import JSONStream from 'JSONStream'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createClient } from '@commercetools/sdk-client'
@@ -58,8 +58,6 @@ export default class InventoryExporter {
         createHttpMiddleware({
           host: apiConfig.apiUrl,
           fetch,
-          Request,
-          Headers,
         }),
       ],
     })

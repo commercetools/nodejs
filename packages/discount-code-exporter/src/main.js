@@ -4,7 +4,7 @@ import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
-import fetch, { Request, Headers } from 'node-fetch'
+import fetch from 'node-fetch'
 import csv from 'fast-csv'
 import JSONStream from 'JSONStream'
 import { flatten } from 'flat'
@@ -54,8 +54,6 @@ export default class DiscountCodeExport {
         createHttpMiddleware({
           host: this.apiConfig.apiUrl,
           fetch,
-          Request,
-          Headers,
         }),
       ],
     })

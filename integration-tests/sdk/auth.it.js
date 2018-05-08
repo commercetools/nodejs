@@ -6,7 +6,7 @@ import {
   createAuthMiddlewareForAnonymousSessionFlow,
 } from '@commercetools/sdk-middleware-auth'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
-import fetch, { Request, Headers } from 'node-fetch'
+import fetch from 'node-fetch'
 import { clearData, createData } from './../cli/helpers/utils'
 
 let projectKey
@@ -50,8 +50,6 @@ describe('Auth Flows', () => {
     const httpMiddleware = createHttpMiddleware({
       host: 'https://api.sphere.io',
       fetch,
-      Request,
-      Headers,
     })
 
     it('should log customer and fetch customer profile', () => {

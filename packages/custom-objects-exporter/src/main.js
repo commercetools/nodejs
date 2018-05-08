@@ -1,5 +1,5 @@
 /* @flow */
-import fetch, { Request, Headers } from 'node-fetch'
+import fetch from 'node-fetch'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
@@ -45,8 +45,6 @@ export default class CustomObjectsExporter {
         createHttpMiddleware({
           host: this.apiConfig.apiUrl,
           fetch,
-          Request,
-          Headers,
         }),
       ],
     })

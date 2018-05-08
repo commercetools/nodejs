@@ -9,7 +9,7 @@ import type {
 } from 'types/price'
 import type { Client } from 'types/sdk'
 
-import fetch, { Request, Headers } from 'node-fetch'
+import fetch from 'node-fetch'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
@@ -51,8 +51,6 @@ export default class PriceExporter {
         createHttpMiddleware({
           host: this.apiConfig.apiUrl,
           fetch,
-          Request,
-          Headers,
         }),
       ],
     })

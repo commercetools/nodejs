@@ -9,7 +9,7 @@ import type {
 import type { Client, ClientRequest, MethodType, SyncAction } from 'types/sdk'
 
 import Promise from 'bluebird'
-import fetch, { Request, Headers } from 'node-fetch'
+import fetch from 'node-fetch'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import {
@@ -82,8 +82,6 @@ export default class StateImport {
         createHttpMiddleware({
           host: this.apiConfig.apiUrl,
           fetch,
-          Request,
-          Headers,
         }),
       ],
     })
