@@ -35,7 +35,7 @@
     "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSdkMiddlewareAuth -i src/index.js -o dist/commercetools-sdk-middleware-auth.cjs.js"
   },
   "dependencies": {
-    "isomorphic-fetch": "2.2.1"
+    "node-fetch": "2.1.2"
   },
   "devDependencies": {
     "nock": "9.2.3"

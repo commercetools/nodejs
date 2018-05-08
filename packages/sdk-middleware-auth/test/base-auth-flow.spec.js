@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import nock from 'nock'
+import fetch from 'node-fetch'
 import createAuthMiddlewareBase from '../src/base-auth-flow'
 import * as buildRequests from '../src/build-requests'
 import store from '../src/utils'
@@ -28,6 +29,7 @@ function createTestMiddlewareOptions(options) {
       clientId: '123',
       clientSecret: 'secret',
     },
+    fetch,
     ...options,
   }
 }
@@ -42,6 +44,7 @@ function createBaseMiddleware(options, next, refreshOptions) {
     ),
     requestState: store(false),
     tokenCache: store({}),
+    fetch,
     ...options,
   }
   return createAuthMiddlewareBase(params, next, refreshOptions)
@@ -50,6 +53,18 @@ function createBaseMiddleware(options, next, refreshOptions) {
 describe('Base Auth Flow', () => {
   beforeEach(() => {
     nock.cleanAll()
+  })
+
+  test('throw without `fetch` passed and globally available', () => {
+    const middlewareOptions = createTestMiddlewareOptions({ fetch: undefined })
+
+    expect(() => {
+      createBaseMiddleware(middlewareOptions, () => {})
+    }).toThrow(
+      new Error(
+        '`fetch` is not available. Please pass in `fetch` as an option or have it globally available.'
+      )
+    )
   })
 
   test('get a new auth token if not present in request headers', () =>

@@ -39,6 +39,7 @@ export default function createAuthMiddlewareForPasswordFlow(
       pendingTasks,
       requestState,
       tokenCache,
+      fetch: options.fetch,
     }
     authMiddlewareBase(params, next, options)
   }
