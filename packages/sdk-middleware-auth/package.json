@@ -19,6 +19,7 @@
   "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
   "main": "dist/commercetools-sdk-middleware-auth.cjs.js",
   "module": "dist/commercetools-sdk-middleware-auth.es.js",
+  "browser": "dist/commercetools-sdk-middleware-auth.umd.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"

@@ -24,15 +24,8 @@ const config = {
       VERSION: `'${version}'`,
     }),
     resolve({
-      /**
-       * NOTE:
-       *   The is a cascade performed by rollup-plugin-node-resolve. It first
-       *   attempts to find a browser, then module and then main build in the pkg.
-       *
-       *   https://github.com/rollup/rollup-plugin-node-resolve/blob/7846a19da76e84f81f349162e6cf281550f6a67d/src/index.js#L136-L144
-       */
       module: true,
-      browser: true,
+      jsnext: true,
       main: true,
       preferBuiltins: true,
     }),
