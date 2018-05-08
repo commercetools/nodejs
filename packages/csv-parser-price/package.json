@@ -47,7 +47,8 @@
     "lodash.memoize": "^4.1.2",
     "npmlog": "^4.0.1",
     "pretty-error": "^2.0.2",
-    "yargs": "^6.4.0"
+    "yargs": "^6.4.0",
+    "node-fetch": "2.1.2"
   },
   "devDependencies": {
     "sinon": "1.17.7",
