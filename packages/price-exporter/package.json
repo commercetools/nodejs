@@ -45,7 +45,8 @@
     "lodash": "^4.17.4",
     "npmlog": "^4.1.2",
     "pretty-error": "^2.1.1",
-    "yargs": "^8.0.2"
+    "yargs": "^8.0.2",
+    "node-fetch": "2.1.2"
   },
   "devDependencies": {
     "streamtest": "1.2.3"

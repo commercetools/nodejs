@@ -9,6 +9,7 @@ import type {
 } from 'types/price'
 import type { Client } from 'types/sdk'
 
+import fetch, { Request, Headers } from 'node-fetch'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
@@ -39,12 +40,20 @@ export default class PriceExporter {
     this.apiConfig = options.apiConfig
     this.client = createClient({
       middlewares: [
-        createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
+        createAuthMiddlewareForClientCredentialsFlow({
+          ...this.apiConfig,
+          fetch,
+        }),
         createUserAgentMiddleware({
           libraryName: pkg.name,
           libraryVersion: pkg.version,
         }),
-        createHttpMiddleware({ host: this.apiConfig.apiUrl }),
+        createHttpMiddleware({
+          host: this.apiConfig.apiUrl,
+          fetch,
+          Request,
+          Headers,
+        }),
       ],
     })
 
