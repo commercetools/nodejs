@@ -19,6 +19,7 @@ import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import highland from 'highland'
+import fetch, { Request, Headers } from 'node-fetch'
 import Promise from 'bluebird'
 import JSONStream from 'JSONStream'
 import { memoize } from 'lodash'
@@ -47,12 +48,20 @@ export default class ProductJsonToCsv {
     this.apiConfig = apiConfig
     this.client = createClient({
       middlewares: [
-        createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
+        createAuthMiddlewareForClientCredentialsFlow({
+          ...this.apiConfig,
+          fetch,
+        }),
         createUserAgentMiddleware({
           libraryName: pkg.name,
           libraryVersion: pkg.version,
         }),
-        createHttpMiddleware({ host: this.apiConfig.apiUrl }),
+        createHttpMiddleware({
+          host: this.apiConfig.apiUrl,
+          fetch,
+          Request,
+          Headers,
+        }),
       ],
     })
 
