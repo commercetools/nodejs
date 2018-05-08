@@ -4,6 +4,7 @@ import highland from 'highland'
 import JSONStream from 'JSONStream'
 import memoize from 'lodash.memoize'
 import { unflatten } from 'flat'
+import fetch, { Request, Headers } from 'node-fetch'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
@@ -144,12 +145,17 @@ export default class CsvParserState {
         createAuthMiddlewareWithExistingToken(
           accessToken ? `Bearer ${accessToken}` : ''
         ),
-        createAuthMiddlewareForClientCredentialsFlow(apiConfig),
+        createAuthMiddlewareForClientCredentialsFlow({ ...apiConfig, fetch }),
         createUserAgentMiddleware({
           libraryName: pkg.name,
           libraryVersion: pkg.version,
         }),
-        createHttpMiddleware({ host: apiConfig.apiUrl }),
+        createHttpMiddleware({
+          host: apiConfig.apiUrl,
+          fetch,
+          Request,
+          Headers,
+        }),
       ],
     })
   }
