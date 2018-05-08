@@ -15,7 +15,7 @@ The constructor accepts two arguments:
   * `multiValueDelimiter` (String): CSV delimiter used in multivalue fields (Optional. Default: `';'`)
   * `exportFormat` (String): Export format ['csv', 'json'] (Optional. Default: 'json')
   * `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates) (Optional)
-  * `headerFields` (Array<String>): An array of column names the exported CSV file should contain. This headerFields array should contain the required columns of the CSV file(Optional. If omitted, a default set of column fields is used. Currently, these fields are: `name`, `description`, `code`, `cartDiscounts`,`cartPredicate`,`groups`,`isActive`,`validFrom`,`validUntil`,`references`,`maxApplications`,`maxApplicationsPerCustomer`.
+  * `fields` (Array<String>): An array of column names the exported CSV file should contain. This fields array should contain the required columns of the CSV file (Optional. If omitted, a default set of column fields is used. Currently, these fields are: `name`, `description`, `code`, `cartDiscounts`,`cartPredicate`,`groups`,`isActive`,`validFrom`,`validUntil`,`references`,`maxApplications`,`maxApplicationsPerCustomer`.
     The localised fields (`name` and `description` default to the language specified in the `language` value above.
     This is synonymous with the `--template` flag in the CLI)
 * An optional logger object having four functions (`info`, `warn`, `error` and `verbose`)
@@ -91,7 +91,8 @@ const options = {
     delimiter: ',',
     multiValueDelimiter: ';',
     exportFormat: 'csv',
-    predicate: 'cartDiscounts(id="desired-cart-discount-id")'
+    predicate: 'cartDiscounts(id="desired-cart-discount-id")',
+    fields: ['code', 'name.en', 'name.de', 'cartDiscounts']
   }
 }
 const logger = {

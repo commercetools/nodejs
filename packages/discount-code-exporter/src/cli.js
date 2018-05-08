@@ -119,7 +119,7 @@ const errorHandler = errors => {
 
 // Retrieve the headers from the template file
 // Only the first line of the file is read
-const getHeaders = _args =>
+const getFields = _args =>
   new Promise((resolve, reject) => {
     if (!_args.template) resolve(null)
     else {
@@ -147,10 +147,8 @@ else npmlog.stream = process.stdout
 // Register error listener
 args.output.on('error', errorHandler)
 
-Promise.all([resolveCredentials(args), getHeaders(args)])
-  .then(([credentials, headerFields]) => {
-    // resolveCredentials(args)
-    // .then(credentials => {
+Promise.all([resolveCredentials(args), getFields(args)])
+  .then(([credentials, fields]) => {
     const apiConfig = {
       host: args.authUrl,
       apiUrl: args.apiUrl,
@@ -166,7 +164,7 @@ Promise.all([resolveCredentials(args), getHeaders(args)])
       language: args.language,
       multiValueDelimiter: args.multiValueDelimiter,
       predicate: args.where,
-      headerFields,
+      fields,
     }
     const logger = {
       error: npmlog.error.bind(this, ''),

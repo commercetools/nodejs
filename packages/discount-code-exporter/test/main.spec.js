@@ -68,15 +68,33 @@ describe('DiscountCodeExport', () => {
     })
 
     describe('without passed headers', () => {
+      const defaultHeaders = [
+        'name.de',
+        'description.de',
+        'code',
+        'cartDiscounts',
+        'cartPredicate',
+        'groups',
+        'isActive',
+        'validFrom',
+        'validUntil',
+        'references',
+        'maxApplications',
+        'maxApplicationsPerCustomer',
+      ]
       describe('when empty array', () => {
-        test('should return return passed headers', () => {
-          expect(DiscountCodeExport.setupHeaders([], 'de')).toMatchSnapshot()
+        test('should return default headers', () => {
+          expect(DiscountCodeExport.setupHeaders([], 'de')).toEqual(
+            defaultHeaders
+          )
         })
       })
 
       describe('when null', () => {
-        test('should return return passed headers', () => {
-          expect(DiscountCodeExport.setupHeaders(null, 'de')).toMatchSnapshot()
+        test('should return default headers', () => {
+          expect(DiscountCodeExport.setupHeaders(null, 'de')).toEqual(
+            defaultHeaders
+          )
         })
       })
     })
@@ -91,7 +109,7 @@ describe('DiscountCodeExport', () => {
           name: { en: 'some-discount-name' },
           cartDiscounts: [{ id: 'cart-discount-1' }, { id: 'cart-discount-2' }],
         }
-        codeExport._fetchCodes = jest.fn().mockImplementation(csvStream => {
+        codeExport._fetchCodes = jest.fn(csvStream => {
           csvStream.write(sampleCode)
           return Promise.resolve()
         })
@@ -106,11 +124,11 @@ describe('DiscountCodeExport', () => {
                   projectKey: 'test-project-key',
                 },
                 exportFormat: 'csv',
-                headerFields: ['code', 'name.en', 'cartDiscounts', 'groups'],
+                fields: ['code', 'name.en', 'cartDiscounts', 'groups'],
               },
               logger
             )
-            codeExport._fetchCodes = jest.fn().mockImplementation(csvStream => {
+            codeExport._fetchCodes = jest.fn(csvStream => {
               csvStream.write(sampleCode)
               return Promise.resolve()
             })
@@ -140,7 +158,7 @@ describe('DiscountCodeExport', () => {
               },
               logger
             )
-            codeExport._fetchCodes = jest.fn().mockImplementation(csvStream => {
+            codeExport._fetchCodes = jest.fn(csvStream => {
               csvStream.write(sampleCode)
               return Promise.resolve()
             })

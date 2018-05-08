@@ -77,7 +77,7 @@ export type ImporterOptions = {
   predicate: string,
   multiValueDelimiter: string,
   language?: string,
-  headerFields?: Array<string> | null,
+  fields?: Array<string> | null,
 }
 
 export type ExporterOptions = ImporterOptions

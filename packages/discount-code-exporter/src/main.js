@@ -14,6 +14,7 @@ import type {
   LoggerOptions,
 } from 'types/discountCodes'
 import type { Client, ClientRequest } from 'types/sdk'
+import { defaultHeaders } from './headers'
 import pkg from '../package.json'
 
 type ConfigType = {
@@ -56,7 +57,7 @@ export default class DiscountCodeExport {
       batchSize: 500,
       exportFormat: 'json',
       language: 'en',
-      headerFields: [],
+      fields: [],
     }
 
     this.config = { ...defaultOptions, ...options }
@@ -70,32 +71,17 @@ export default class DiscountCodeExport {
     }
 
     this.headers = DiscountCodeExport.setupHeaders(
-      this.config.headerFields,
+      this.config.fields,
       this.config.language
     )
     this._processCode = this._processCode.bind(this)
   }
 
   static setupHeaders(
-    headerFields: Array<string> | null,
+    fields: Array<string> | null,
     language: string
   ): Array<string> {
-    return headerFields && headerFields.length
-      ? headerFields
-      : [
-          `name.${language}`,
-          `description.${language}`,
-          'code',
-          'cartDiscounts',
-          'cartPredicate',
-          'groups',
-          'isActive',
-          'validFrom',
-          'validUntil',
-          'references',
-          'maxApplications',
-          'maxApplicationsPerCustomer',
-        ]
+    return fields && fields.length ? fields : defaultHeaders(language)
   }
 
   run(outputStream: stream$Writable) {
