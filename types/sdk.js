@@ -92,6 +92,7 @@ export type AuthMiddlewareOptions = {
   scopes: Array<string>,
   // For internal usage only
   oauthUri: string,
+  fetch?: (url: string, args?: Object) => Promise<any>,
 }
 
 export type RefreshAuthMiddlewareOptions = {
@@ -104,6 +105,7 @@ export type RefreshAuthMiddlewareOptions = {
   refreshToken: string,
   // For internal usage only
   oauthUri: string,
+  fetch?: (url: string, args?: Object) => Promise<any>,
 }
 
 export type Task = {
@@ -133,6 +135,7 @@ export type AuthMiddlewareBaseOptions = {
     get: () => TokenStore,
     set: (cache: TokenStore) => TokenStore,
   },
+  fetch?: (url: string, args?: Object) => Promise<any>,
 }
 
 export type PasswordAuthMiddlewareOptions = {
@@ -149,6 +152,7 @@ export type PasswordAuthMiddlewareOptions = {
   scopes: Array<string>,
   // For internal usage only
   oauthUri: string,
+  fetch?: (url: string, args?: Object) => Promise<any>,
 }
 
 export type HttpMiddlewareOptions = {
@@ -165,6 +169,7 @@ export type HttpMiddlewareOptions = {
     backoff?: boolean,
     maxDelay?: number,
   },
+  fetch?: (url: string, options?: Object) => Promise<any>,
 }
 export type QueueMiddlewareOptions = {
   concurrency: number,
