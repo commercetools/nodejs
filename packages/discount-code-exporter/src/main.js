@@ -14,6 +14,7 @@ import type {
   LoggerOptions,
 } from 'types/discountCodes'
 import type { Client, ClientRequest } from 'types/sdk'
+import { defaultHeaders } from './headers'
 import pkg from '../package.json'
 
 type ConfigType = {
@@ -31,6 +32,7 @@ export default class DiscountCodeExport {
   config: ConfigType
   logger: LoggerOptions
   _processCode: Function
+  headers: Array<string>
 
   constructor(options: ExporterOptions, logger: LoggerOptions) {
     if (!options.apiConfig)
@@ -54,6 +56,8 @@ export default class DiscountCodeExport {
       multiValueDelimiter: ';',
       batchSize: 500,
       exportFormat: 'json',
+      language: 'en',
+      fields: [],
     }
 
     this.config = { ...defaultOptions, ...options }
@@ -66,14 +70,25 @@ export default class DiscountCodeExport {
       ...logger,
     }
 
+    this.headers = DiscountCodeExport.setupHeaders(
+      this.config.fields,
+      this.config.language
+    )
     this._processCode = this._processCode.bind(this)
+  }
+
+  static setupHeaders(
+    fields: Array<string> | null,
+    language: string
+  ): Array<string> {
+    return fields && fields.length ? fields : defaultHeaders(language)
   }
 
   run(outputStream: stream$Writable) {
     this.logger.info('Starting Export')
     if (this.config.exportFormat === 'csv') {
       const csvOptions = {
-        headers: true,
+        headers: this.headers,
         delimiter: this.config.delimiter,
       }
       const csvStream = csv
