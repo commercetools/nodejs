@@ -66,6 +66,7 @@ describe('Auth Flows', () => {
             },
           },
         },
+        fetch,
       }
       const client = createClient({
         middlewares: [
@@ -104,6 +105,7 @@ describe('Auth Flows', () => {
               anonymousId,
             },
           },
+          fetch,
         }
         const client = createClient({
           middlewares: [
@@ -146,6 +148,7 @@ describe('Auth Flows', () => {
         const httpMiddleware = createHttpMiddleware({
           host: 'https://api.sphere.io',
           includeOriginalRequest: true,
+          fetch,
         })
         const anonymousId = `${Date.now()}-fooo`
         const cred = apiConfig.credentials
@@ -196,6 +199,7 @@ describe('Auth Flows', () => {
             const userConfig = {
               ...apiConfig,
               refreshToken: tokenObject.refresh_token,
+              fetch,
             }
             const client = createClient({
               middlewares: [
