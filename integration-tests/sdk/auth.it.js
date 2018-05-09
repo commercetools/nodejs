@@ -89,6 +89,7 @@ describe('Auth Flows', () => {
   describe('Anonymous Session Flow', () => {
     const httpMiddleware = createHttpMiddleware({
       host: 'https://api.sphere.io',
+      fetch,
     })
 
     it(
