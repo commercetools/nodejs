@@ -218,7 +218,7 @@ describe('Auth Flows', () => {
           .then(
             ({
               body: { results: carts },
-              request: { headers: { authorization: [token] } },
+              request: { headers: { Authorization: [token] } },
             }) => {
               // Assert that a different token was used to fetch the carts
               expect(token).toMatch(/Bearer .*/)
