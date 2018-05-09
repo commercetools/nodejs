@@ -1,3 +1,15 @@
+## @commercetools/sdk-middleware-auth@4.0.0 (2018-05-10)
+
+#### :boom: Breaking Change
+
+The package is not bundled anymore with `isomorphic-fetch`. Whenever no global `fetch` implementation is availble you will have to pass in a `fetch` implementation as an argument to `createAuthMiddlewareForClientCredentialsFlow`, `createAuthMiddlewareForPasswordFlow`, `createAuthMiddlewareForRefreshTokenFlow`, `createAuthMiddlewareForAnonymousSessionFlow`. More information is also available in the [docs](https://github.com/commercetools/nodejs/blob/master/docs/sdk/api/sdkMiddlewareAuth.md).
+
+## @commercetools/sdk-middleware-http@4.0.0 (2018-05-10)
+
+#### :boom: Breaking Change
+
+The package is not bundled anymore with `isomorphic-fetch`. Whenever no global `fetch` implementation is availble you will have to pass in a `fetch` implementation as an argument to `createHttpMiddleware`. More information is also available in the [docs](https://github.com/commercetools/nodejs/blob/master/docs/sdk/api/sdkMiddlewareHttp.md).
+
 ## @commercetools/http-user-agent@1.0.1 (2017-01-29)
 
 #### :bug: Bug Fix

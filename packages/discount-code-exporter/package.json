@@ -42,7 +42,8 @@
     "flat": "^2.0.1",
     "npmlog": "^4.1.0",
     "pretty-error": "^2.1.1",
-    "yargs": "^8.0.2"
+    "yargs": "^8.0.2",
+    "node-fetch": "2.1.2"
   },
   "devDependencies": {
     "common-tags": "1.7.2",

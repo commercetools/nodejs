@@ -32,7 +32,8 @@
     "@commercetools/sdk-middleware-http": "^3.0.1",
     "@commercetools/sdk-middleware-user-agent": "^1.2.8",
     "@commercetools/sync-actions": "^1.22.3",
-    "bluebird": "^3.5.1"
+    "bluebird": "^3.5.1",
+    "node-fetch": "2.1.2"
   },
   "devDependencies": {
     "common-tags": "1.7.2"

@@ -9,6 +9,7 @@ import type {
 import type { Client, ClientRequest, MethodType, SyncAction } from 'types/sdk'
 
 import Promise from 'bluebird'
+import fetch from 'node-fetch'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import {
@@ -70,12 +71,18 @@ export default class StateImport {
         createAuthMiddlewareWithExistingToken(
           this.accessToken ? `Bearer ${this.accessToken}` : ''
         ),
-        createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
+        createAuthMiddlewareForClientCredentialsFlow({
+          ...this.apiConfig,
+          fetch,
+        }),
         createUserAgentMiddleware({
           libraryName: pkg.name,
           libraryVersion: pkg.version,
         }),
-        createHttpMiddleware({ host: this.apiConfig.apiUrl }),
+        createHttpMiddleware({
+          host: this.apiConfig.apiUrl,
+          fetch,
+        }),
       ],
     })
 

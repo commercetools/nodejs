@@ -39,6 +39,7 @@ export default function createAuthMiddlewareForRefreshTokenFlow(
       pendingTasks,
       requestState,
       tokenCache,
+      fetch: options.fetch,
     }
     authMiddlewareBase(params, next)
   }

@@ -4,6 +4,7 @@ import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
+import fetch from 'node-fetch'
 import csv from 'fast-csv'
 import JSONStream from 'JSONStream'
 import { flatten } from 'flat'
@@ -42,12 +43,18 @@ export default class DiscountCodeExport {
     this.apiConfig = options.apiConfig
     this.client = createClient({
       middlewares: [
-        createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
+        createAuthMiddlewareForClientCredentialsFlow({
+          ...this.apiConfig,
+          fetch,
+        }),
         createUserAgentMiddleware({
           libraryName: pkg.name,
           libraryVersion: pkg.version,
         }),
-        createHttpMiddleware({ host: this.apiConfig.apiUrl }),
+        createHttpMiddleware({
+          host: this.apiConfig.apiUrl,
+          fetch,
+        }),
       ],
     })
 

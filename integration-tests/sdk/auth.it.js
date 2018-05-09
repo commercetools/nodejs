@@ -6,8 +6,7 @@ import {
   createAuthMiddlewareForAnonymousSessionFlow,
 } from '@commercetools/sdk-middleware-auth'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
-/* global fetch */
-import 'isomorphic-fetch'
+import fetch from 'node-fetch'
 import { clearData, createData } from './../cli/helpers/utils'
 
 let projectKey
@@ -50,6 +49,7 @@ describe('Auth Flows', () => {
   describe('Password Session Flow', () => {
     const httpMiddleware = createHttpMiddleware({
       host: 'https://api.sphere.io',
+      fetch,
     })
 
     it('should log customer and fetch customer profile', () => {
@@ -66,6 +66,7 @@ describe('Auth Flows', () => {
             },
           },
         },
+        fetch,
       }
       const client = createClient({
         middlewares: [
@@ -88,6 +89,7 @@ describe('Auth Flows', () => {
   describe('Anonymous Session Flow', () => {
     const httpMiddleware = createHttpMiddleware({
       host: 'https://api.sphere.io',
+      fetch,
     })
 
     it(
@@ -104,6 +106,7 @@ describe('Auth Flows', () => {
               anonymousId,
             },
           },
+          fetch,
         }
         const client = createClient({
           middlewares: [
@@ -146,6 +149,7 @@ describe('Auth Flows', () => {
         const httpMiddleware = createHttpMiddleware({
           host: 'https://api.sphere.io',
           includeOriginalRequest: true,
+          fetch,
         })
         const anonymousId = `${Date.now()}-fooo`
         const cred = apiConfig.credentials
@@ -196,6 +200,7 @@ describe('Auth Flows', () => {
             const userConfig = {
               ...apiConfig,
               refreshToken: tokenObject.refresh_token,
+              fetch,
             }
             const client = createClient({
               middlewares: [
@@ -213,7 +218,7 @@ describe('Auth Flows', () => {
           .then(
             ({
               body: { results: carts },
-              request: { headers: { authorization: [token] } },
+              request: { headers: { Authorization: [token] } },
             }) => {
               // Assert that a different token was used to fetch the carts
               expect(token).toMatch(/Bearer .*/)

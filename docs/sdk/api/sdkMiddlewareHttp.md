@@ -21,6 +21,8 @@ npm install --save @commercetools/sdk-middleware-http
 
 Creates a [middleware](/sdk/Glossary.md#middleware) to handle HTTP requests for the commercetools platform API.
 
+The HTTP middleware can run in either a browser or Node.js environment. For Node.js environments it is important to either have a `fetch` implementation either globally available via e.g. [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) or to pass it in as an argument (see below) via e.g. [node-fetch](https://github.com/bitinn/node-fetch). In browsers without a native `fetch` implementation any well known `fetch` polyfill should be compatible with the middleware such as [whatwg-fetch](https://github.com/whatwg/fetch) or [unfetch](https://github.com/developit/unfetch).
+
 #### Named arguments (options)
 
 1.  `host` _(String)_: the host of the HTTP API service
@@ -34,6 +36,7 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle HTTP requests for 
 9.  `retryDelay` _(Number)_: amount of milliseconds to wait before retrying the next request. (Default: 200)
 10. `backoff` _(Boolean)_: activates exponential backoff. Recommended to prevent spamming of the server. (Default: true)
 11. `maxDelay` _(Number)_: The maximum duration (milliseconds) to wait before retrying, useful if the delay time grew exponentially more than reasonable
+12. `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function
 
 #### Retrying requests
 
@@ -60,6 +63,9 @@ const client = createClient({
         retryDelay: 300, //milliseconds
         maxDelay: 5000, //milliseconds
       },
+
+      // Optional if not globally available
+      fetch,
     }),
   ],
 })

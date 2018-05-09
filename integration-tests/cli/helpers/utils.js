@@ -2,12 +2,13 @@ import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
+import fetch from 'node-fetch'
 
 export function clearData(apiConfig, entityName) {
   const client = createClient({
     middlewares: [
-      createAuthMiddlewareForClientCredentialsFlow(apiConfig),
-      createHttpMiddleware({ host: apiConfig.apiUrl }),
+      createAuthMiddlewareForClientCredentialsFlow({ ...apiConfig, fetch }),
+      createHttpMiddleware({ host: apiConfig.apiUrl, fetch }),
     ],
   })
 
@@ -42,8 +43,8 @@ export function clearData(apiConfig, entityName) {
 export function createData(apiConfig, entityName, data) {
   const client = createClient({
     middlewares: [
-      createAuthMiddlewareForClientCredentialsFlow(apiConfig),
-      createHttpMiddleware({ host: apiConfig.apiUrl }),
+      createAuthMiddlewareForClientCredentialsFlow({ ...apiConfig, fetch }),
+      createHttpMiddleware({ host: apiConfig.apiUrl, fetch }),
     ],
   })
   const requestOption = { projectKey: apiConfig.projectKey }

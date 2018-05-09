@@ -4,6 +4,7 @@ import path from 'path'
 import isuuid from 'isuuid'
 import csv from 'csvtojson'
 import { exec } from 'mz/child_process'
+import fetch from 'node-fetch'
 import DiscountCodeImport from '@commercetools/discount-code-importer'
 import { getCredentials } from '@commercetools/get-credentials'
 import { createData, clearData } from './helpers/utils'
@@ -121,7 +122,7 @@ describe('DiscountCode tests', () => {
     }, 20000)
 
     // Delete Discount codes
-    afterAll(() => clearData(apiConfig, 'discountCodes'))
+    afterAll(() => clearData(apiConfig, 'discountCodes', fetch))
 
     it(
       'should create discount codes on CTP',

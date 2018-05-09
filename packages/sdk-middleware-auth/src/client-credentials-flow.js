@@ -39,6 +39,7 @@ export default function createAuthMiddlewareForClientCredentialsFlow(
       pendingTasks,
       requestState,
       tokenCache,
+      fetch: options.fetch,
     }
     authMiddlewareBase(params, next)
   }

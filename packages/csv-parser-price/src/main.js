@@ -4,6 +4,7 @@ import JSONStream from 'JSONStream'
 import mapValues from 'lodash.mapvalues'
 import memoize from 'lodash.memoize'
 import { unflatten } from 'flat'
+import fetch from 'node-fetch'
 
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createClient } from '@commercetools/sdk-client'
@@ -19,13 +20,14 @@ export default class CsvParserPrice {
   constructor({ apiConfig, logger, csvConfig = {}, accessToken }) {
     this.client = createClient({
       middlewares: [
-        createAuthMiddlewareForClientCredentialsFlow(apiConfig),
+        createAuthMiddlewareForClientCredentialsFlow({ ...apiConfig, fetch }),
         createUserAgentMiddleware({
           libraryName: 'csv-parser-price',
           libraryVersion: version,
         }),
         createHttpMiddleware({
           host: apiConfig.apiUrl,
+          fetch,
         }),
       ],
     })

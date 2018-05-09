@@ -8,9 +8,8 @@ import type {
   MiddlewareResponse,
 } from 'types/sdk'
 
-import 'isomorphic-fetch'
-import parseHeaders from './parse-headers'
 import getErrorByCode, { NetworkError, HttpError } from './errors'
+import parseHeaders from '../src/parse-headers'
 
 function createError({ statusCode, message, ...rest }): HttpErrorType {
   let errorMessage = message || 'Unexpected non-JSON error response'
@@ -64,28 +63,46 @@ export default function createHttpMiddleware({
     retryDelay = 200,
     maxDelay = Infinity,
   } = {},
+  fetch: fetcher,
 }: HttpMiddlewareOptions): Middleware {
+  if (!fetcher && typeof fetch === 'undefined')
+    throw new Error(
+      '`fetch` is not available. Please pass in `fetch` as an option or have it globally available.'
+    )
+
+  if (!fetcher)
+    // `fetcher` is set here rather than the destructuring to ensure fetch is
+    // declared before referencing it otherwise it would cause a `ReferenceError`.
+    // For reference of this pattern: https://github.com/apollographql/apollo-link/blob/498b413a5b5199b0758ce898b3bb55451f57a2fa/packages/apollo-link-http/src/httpLink.ts#L49
+
+    // eslint-disable-next-line
+    fetcher = fetch
+
   return next => (request: MiddlewareRequest, response: MiddlewareResponse) => {
     const url = host.replace(/\/$/, '') + request.uri
     const body =
       typeof request.body === 'string' || Buffer.isBuffer(request.body)
         ? request.body
-        : JSON.stringify(request.body)
+        : // NOTE: `stringify` of `null` gives the String('null')
+          JSON.stringify(request.body || undefined)
     const requestHeader = {
-      'Content-Type': 'application/json',
+      'Content-Type': ['application/json'],
       ...request.headers,
-      ...(body ? { 'Content-Length': Buffer.byteLength(body).toString() } : {}),
+      ...(body
+        ? { 'Content-Length': Buffer.byteLength(body).toString() }
+        : null),
     }
-    const requestObj: Object = new Request(url, {
+    const fetchOptions: Object = {
       method: request.method,
-      headers: new Headers(requestHeader),
+      headers: requestHeader,
       ...(credentialsMode ? { credentials: credentialsMode } : {}),
-      ...(body ? { body } : {}),
-    })
+      ...(body ? { body } : null),
+    }
     let retryCount = 0
     // wrap in a fn so we can retry if error occur
     function executeFetch() {
-      fetch(requestObj).then(
+      // $FlowFixMe
+      fetcher(url, fetchOptions).then(
         (res: Response) => {
           if (res.ok) {
             res.json().then((result: Object) => {
@@ -96,10 +113,10 @@ export default function createHttpMiddleware({
               }
               if (includeResponseHeaders)
                 parsedResponse.headers = parseHeaders(res.headers)
+
               if (includeOriginalRequest) {
                 parsedResponse.request = {
-                  ...requestObj,
-                  headers: parseHeaders(requestObj.headers),
+                  ...fetchOptions,
                 }
                 maskAuthData(parsedResponse.request, maskSensitiveHeaderData)
               }

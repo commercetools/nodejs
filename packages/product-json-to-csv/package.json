@@ -52,7 +52,8 @@
     "single-emit": "0.0.2",
     "slugify": "^1.2.4",
     "tmp": "0.0.33",
-    "yargs": "^10.0.3"
+    "yargs": "^10.0.3",
+    "node-fetch": "2.1.2"
   },
   "devDependencies": {
     "common-tags": "1.7.2",
