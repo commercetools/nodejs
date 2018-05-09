@@ -13,7 +13,9 @@ const env = process.env.NODE_ENV
 const version = process.env.npm_package_version
 
 const config = {
-  sourcemap: true,
+  output: {
+    sourcemap: true,
+  },
   plugins: [
     json(),
     flow({ all: true }),

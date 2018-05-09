@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`::ProductMapping ::mapProperties converts variant image array to strings 1`] = `
+Object {
+  "hasStagedChanges": false,
+  "id": "12345ab-id",
+  "key": "product-key",
+  "state": "my-resolved-state",
+  "variant": Object {
+    "id": 1,
+    "images": "https://example.com/foobar/commer.jpg;https://example-2.com/demo/tools.jpg|image-label",
+    "sku": "A0E200000001YKI",
+  },
+}
+`;
+
+exports[`::ProductMapping ::run should accept a product and return a formatted csv string 1`] = `
+Array [
+  Object {
+    "addedAttr": "",
+    "anotherAddedAttr": "",
+    "article": "sample 089 WHT",
+    "categories": "res-cat-name-1;res-cat-name-2",
+    "categoryOrderHints": "res-cat-name-1:0.015;res-cat-name-2:0.987",
+    "color": "white",
+    "colorFreeDefinition.de": "schwarz-weiß",
+    "colorFreeDefinition.en": "black-white",
+    "createdAt": "2017-01-06T10:54:51.395Z",
+    "designer": "michaelkors",
+    "hasStagedChanges": false,
+    "id": "12345ab-id",
+    "key": "product-key",
+    "lastModifiedAt": "2017-01-06T10:54:51.395Z",
+    "name.de": "Handyhülle",
+    "name.en": "Phone cover",
+    "productType": "resolved-product-type",
+    "published": false,
+    "setLenums": "myLenums",
+    "slug.de": "michaelkors-handyhuelle",
+    "slug.en": "michaelkors-phonecover",
+    "taxCategory": "resolved-tax-name",
+    "variant.id": 1,
+    "variant.images": "https://example.com/foobar/commer.jpg;https://example-2.com/demo/tools.jpg|image-label",
+    "variant.sku": "A0E200000001YKI",
+  },
+  Object {
+    "article": "sample 089 WHT",
+    "color": "white",
+    "colorFreeDefinition.de": "schwarz-weiß",
+    "colorFreeDefinition.en": "black-white",
+    "designer": "michaelkors",
+    "setLenums-2": "myLenums-2",
+    "variant.id": 2,
+    "variant.images": "https://example.com/foobar/commer234.jpg;https://example-2.com/demo/tools67.jpg",
+    "variant.sku": "A0E200001YKI123",
+  },
+]
+`;

@@ -8,7 +8,7 @@ import type {
   LoggerOptions,
   ParseOptions,
   ParserSummary,
-} from '../../../types/discountCodes'
+} from 'types/discountCodes'
 import castTypes from './utils'
 
 export default class CsvParserDiscountCode {

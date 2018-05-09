@@ -8,9 +8,11 @@
 Convert [commercetools price](https://docs.commercetools.com/http-api-projects-products.html#price) CSV data to JSON. See example below for CSV format and sample response
 
 ## Usage
+
 `npm install @commercetools/csv-parser-price --global`
 
 ### CLI
+
 ```
 Usage: csvparserprice [options]
 Convert commercetools price CSV data to JSON.
@@ -37,9 +39,10 @@ Options:
 Note that when the stdout is used as an output stream all log messages are written by default to `csvparserprice.log` log file.
 
 ### JS
+
 ```js
-const fs = require('fs');
-const CsvParserPrice = require('@commercetools/csv-parser-price');
+const fs = require('fs')
+const CsvParserPrice = require('@commercetools/csv-parser-price')
 
 const csvParserPrice = new CsvParserPrice(
   {
@@ -47,8 +50,8 @@ const csvParserPrice = new CsvParserPrice(
     credentials: {
       clientId: process.env.CT_CLIENT_ID,
       clientSecret: process.env.CT_CLIENT_SECRET,
-      },
-    accessToken: '<tokenfromapi>'
+    },
+    accessToken: '<tokenfromapi>',
   },
   {
     error: console.error,
@@ -59,31 +62,31 @@ const csvParserPrice = new CsvParserPrice(
   {
     delimiter: '^',
   }
-);
+)
 
 const outputStream = fs.createWriteStream('./output.json')
 
-outputStream.on('error', (err) => {
+outputStream.on('error', err => {
   // handle error event
 })
 
-csvParserPrice.parse(
-  fs.createReadStream('./input.csv'),
-  outputStream
-);
+csvParserPrice.parse(fs.createReadStream('./input.csv'), outputStream)
 ```
+
 Errors on the level `error` come from events that are fatal and thus stop the stream of data.
 
 ## Configuration
-`CsvParserPrice` accepts three objects as arguments:
-- API client credentials for the [authentication middleware](https://commercetools.github.io/nodejs/docs/sdk/api/createAuthMiddlewareForClientCredentialsFlow.html) (_required_)
-- Logger takes object with four functions (_optional_)
-- Config (_optional_)
-  - `batchSize`: number of CSV rows to handle simultaneously. (_default_: `100`)
-  - `delimiter`: the used CSV delimiter (_default_: `,`)
 
+`CsvParserPrice` accepts three objects as arguments:
+
+* API client credentials for the [authentication middleware](https://commercetools.github.io/nodejs/docs/sdk/api/createAuthMiddlewareForClientCredentialsFlow.html) (_required_)
+* Logger takes object with four functions (_optional_)
+* Config (_optional_)
+  * `batchSize`: number of CSV rows to handle simultaneously. (_default_: `100`)
+  * `delimiter`: the used CSV delimiter (_default_: `,`)
 
 Sample CSV file
+
 ```csv
 variant-sku,value.currencyCode,value.centAmount,country,customerGroup.groupName,channel.key,validFrom,validUntil,customType,customField.foo,customField.bar,customField.current,customField.name.nl,customField.name.de,customField.status,customField.price,customField.priceset
 my-price,EUR,4200,DE,customer-group,my-channel,2016-11-01T08:01:19+0000,2016-12-01T08:03:10+0000,custom-type,12,nac,true,Selwyn,Merkel,Ready,EUR 1200,"1,2,3,5"
@@ -92,6 +95,7 @@ my-price,EUR,4200,DE,customer-group,my-channel,2016-11-01T08:01:19+0000,2016-12-
 ```
 
 JSON object returned from the conversion of the CSV file above
+
 ```json
 {
   "prices": [

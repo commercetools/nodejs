@@ -15,6 +15,7 @@
       * [sdk-middleware-http](/sdk/api/sdkMiddlewareHttp.md)
       * [sdk-middleware-queue](/sdk/api/sdkMiddlewareQueue.md)
       * [sdk-middleware-logger](/sdk/api/sdkMiddlewareLogger.md)
+      * [sdk-middleware-correlation-id](/sdk/api/sdkMiddlewareCorrelationId.md)
       * [sdk-middleware-user-agent](/sdk/api/sdkMiddlewareUserAgent.md)
     * [helpers](/sdk/api/README.md#helpers)
       * [api-request-builder](/sdk/api/apiRequestBuilder.md)

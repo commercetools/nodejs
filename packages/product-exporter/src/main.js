@@ -11,8 +11,8 @@ import type {
   LoggerOptions,
   ProductProjection,
   ProcessFnResponse,
-} from '../../../types/product'
-import type { Client, ClientRequest } from '../../../types/sdk'
+} from 'types/product'
+import type { Client, ClientRequest } from 'types/sdk'
 import pkg from '../package.json'
 
 export default class ProductExporter {
@@ -95,6 +95,9 @@ export default class ProductExporter {
           this.logger.debug(
             `${products.length} products written to outputStream`
           )
+          if (products.length < 1) {
+            return Promise.reject(Error('No products found'))
+          }
           return Promise.resolve()
         },
         processConfig

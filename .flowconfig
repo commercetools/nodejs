@@ -55,3 +55,8 @@ packages/*/src
 
 [options]
 module.name_mapper='^types/\(.*\)$' -> '<PROJECT_ROOT>/types/\1.js'
+include_warnings=true
+emoji=true
+
+[version]
+^0.70.0

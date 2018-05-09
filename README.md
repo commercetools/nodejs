@@ -20,19 +20,20 @@
 The **commercetools nodejs** repo is managed as a [monorepo](https://github.com/lerna/lerna) and contains different npm packages.
 
 ## Documentation
+
 https://commercetools.github.io/nodejs/
 
 ## Packages
 
 ### SDK
 
-| Package | Version | Dependencies |
-|--------|-------|------------|
-| [`sdk-client`](/packages/sdk-client) | [![sdk-client Version][sdk-client-icon]][sdk-client-version] | [![sdk-client Dependencies Status][sdk-client-dependencies-icon]][sdk-client-dependencies] |
-| [`sdk-middleware-auth`](/packages/sdk-middleware-auth) | [![sdk-middleware-auth Version][sdk-middleware-auth-icon]][sdk-middleware-auth-version] | [![sdk-middleware-auth Dependencies Status][sdk-middleware-auth-dependencies-icon]][sdk-middleware-auth-dependencies] |
-| [`sdk-middleware-http`](/packages/sdk-middleware-http) | [![sdk-middleware-http Version][sdk-middleware-http-icon]][sdk-middleware-http-version] | [![sdk-middleware-http Dependencies Status][sdk-middleware-http-dependencies-icon]][sdk-middleware-http-dependencies] |
-| [`sdk-middleware-logger`](/packages/sdk-middleware-logger) | [![sdk-middleware-logger Version][sdk-middleware-logger-icon]][sdk-middleware-logger-version] | [![sdk-middleware-logger Dependencies Status][sdk-middleware-logger-dependencies-icon]][sdk-middleware-logger-dependencies] |
-| [`sdk-middleware-queue`](/packages/sdk-middleware-queue) | [![sdk-middleware-queue Version][sdk-middleware-queue-icon]][sdk-middleware-queue-version] | [![sdk-middleware-queue Dependencies Status][sdk-middleware-queue-dependencies-icon]][sdk-middleware-queue-dependencies] |
+| Package                                                            | Version                                                                                                   | Dependencies                                                                                                                            |
+| ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| [`sdk-client`](/packages/sdk-client)                               | [![sdk-client Version][sdk-client-icon]][sdk-client-version]                                              | [![sdk-client Dependencies Status][sdk-client-dependencies-icon]][sdk-client-dependencies]                                              |
+| [`sdk-middleware-auth`](/packages/sdk-middleware-auth)             | [![sdk-middleware-auth Version][sdk-middleware-auth-icon]][sdk-middleware-auth-version]                   | [![sdk-middleware-auth Dependencies Status][sdk-middleware-auth-dependencies-icon]][sdk-middleware-auth-dependencies]                   |
+| [`sdk-middleware-http`](/packages/sdk-middleware-http)             | [![sdk-middleware-http Version][sdk-middleware-http-icon]][sdk-middleware-http-version]                   | [![sdk-middleware-http Dependencies Status][sdk-middleware-http-dependencies-icon]][sdk-middleware-http-dependencies]                   |
+| [`sdk-middleware-logger`](/packages/sdk-middleware-logger)         | [![sdk-middleware-logger Version][sdk-middleware-logger-icon]][sdk-middleware-logger-version]             | [![sdk-middleware-logger Dependencies Status][sdk-middleware-logger-dependencies-icon]][sdk-middleware-logger-dependencies]             |
+| [`sdk-middleware-queue`](/packages/sdk-middleware-queue)           | [![sdk-middleware-queue Version][sdk-middleware-queue-icon]][sdk-middleware-queue-version]                | [![sdk-middleware-queue Dependencies Status][sdk-middleware-queue-dependencies-icon]][sdk-middleware-queue-dependencies]                |
 | [`sdk-middleware-user-agent`](/packages/sdk-middleware-user-agent) | [![sdk-middleware-user-agent Version][sdk-middleware-user-agent-icon]][sdk-middleware-user-agent-version] | [![sdk-middleware-user-agent Dependencies Status][sdk-middleware-user-agent-dependencies-icon]][sdk-middleware-user-agent-dependencies] |
 
 [sdk-client-version]: https://www.npmjs.com/package/@commercetools/sdk-client
@@ -61,29 +62,29 @@ https://commercetools.github.io/nodejs/
 [sdk-middleware-user-agent-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/sdk-middleware-user-agent&style=flat-square
 
 ### CLI tools
-| Package | Version | Dependencies |
-|--------|-------|------------|
+
+| Package                                                          | Version                                                                                                | Dependencies                                                                                                                         |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
 | [`csv-parser-discount-code`](/packages/csv-parser-discount-code) | [![csv-parser-discount-code Version][csv-parser-discount-code-icon]][csv-parser-discount-code-version] | [![csv-parser-discount-code Dependencies Status][csv-parser-discount-code-dependencies-icon]][csv-parser-discount-code-dependencies] |
-| [`csv-parser-orders`](/packages/csv-parser-orders) | [![csv-parser-orders Version][csv-parser-orders-icon]][csv-parser-orders-version] | [![csv-parser-orders Dependencies Status][csv-parser-orders-dependencies-icon]][csv-parser-orders-dependencies] |
-| [`csv-parser-price`](/packages/csv-parser-price) | [![csv-parser-price Version][csv-parser-price-icon]][csv-parser-price-version] | [![csv-parser-price Dependencies Status][csv-parser-price-dependencies-icon]][csv-parser-price-dependencies] |
-| [`csv-parser-state`](/packages/csv-parser-state) | [![csv-parser-state Version][csv-parser-state-icon]][csv-parser-state-version] | [![csv-parser-state Dependencies Status][csv-parser-state-dependencies-icon]][csv-parser-state-dependencies] |
-| [`custom-objects-exporter`](/packages/custom-objects-exporter) | [![custom-objects-exporter Version][custom-objects-exporter-icon]][custom-objects-exporter-version] | [![custom-objects-exporter Dependencies Status][custom-objects-exporter-dependencies-icon]][custom-objects-exporter-dependencies] |
-| [`discount-code-exporter`](/packages/discount-code-exporter) | [![discount-code-exporter Version][discount-code-exporter-icon]][discount-code-exporter-version] | [![discount-code-exporter Dependencies Status][discount-code-exporter-dependencies-icon]][discount-code-exporter-dependencies] |
-| [`discount-code-generator`](/packages/discount-code-generator) | [![discount-code-generator Version][discount-code-generator-icon]][discount-code-generator-version] | [![discount-code-generator Dependencies Status][discount-code-generator-dependencies-icon]][discount-code-generator-dependencies] |
-| [`discount-code-importer`](/packages/discount-code-importer) | [![discount-code-importer Version][discount-code-importer-icon]][discount-code-importer-version] | [![discount-code-importer Dependencies Status][discount-code-importer-dependencies-icon]][discount-code-importer-dependencies] |
-| [`inventories-exporter`](/packages/inventories-exporter) | [![inventories-exporter Version][inventories-exporter-icon]][inventories-exporter-version] | [![inventories-exporter Dependencies Status][inventories-exporter-dependencies-icon]][inventories-exporter-dependencies] |
-| [`price-exporter`](/packages/price-exporter) | [![price-exporter Version][price-exporter-icon]][price-exporter-version] | [![price-exporter Dependencies Status][price-exporter-dependencies-icon]][discount-code-importer-dependencies] |
-| [`product-exporter`](/packages/product-exporter) | [![product-exporter Version][product-exporter-icon]][product-exporter-version] | [![product-exporter Dependencies Status][product-exporter-dependencies-icon]][product-exporter-dependencies] |
-| [`product-json-to-csv`](/packages/product-json-to-csv) | [![product-json-to-csv Version][product-json-to-csv-icon]][product-json-to-csv-version] | [![product-json-to-csv Dependencies Status][product-json-to-csv-dependencies-icon]][product-json-to-csv-dependencies] |
-| [`state-importer`](/packages/state-importer) | [![state-importer Version][state-importer-icon]][state-importer-version] | [![state-importer Dependencies Status][state-importer-dependencies-icon]][state-importer-dependencies] |
-
-
+| [`csv-parser-orders`](/packages/csv-parser-orders)               | [![csv-parser-orders Version][csv-parser-orders-icon]][csv-parser-orders-version]                      | [![csv-parser-orders Dependencies Status][csv-parser-orders-dependencies-icon]][csv-parser-orders-dependencies]                      |
+| [`csv-parser-price`](/packages/csv-parser-price)                 | [![csv-parser-price Version][csv-parser-price-icon]][csv-parser-price-version]                         | [![csv-parser-price Dependencies Status][csv-parser-price-dependencies-icon]][csv-parser-price-dependencies]                         |
+| [`csv-parser-state`](/packages/csv-parser-state)                 | [![csv-parser-state Version][csv-parser-state-icon]][csv-parser-state-version]                         | [![csv-parser-state Dependencies Status][csv-parser-state-dependencies-icon]][csv-parser-state-dependencies]                         |
+| [`custom-objects-exporter`](/packages/custom-objects-exporter)   | [![custom-objects-exporter Version][custom-objects-exporter-icon]][custom-objects-exporter-version]    | [![custom-objects-exporter Dependencies Status][custom-objects-exporter-dependencies-icon]][custom-objects-exporter-dependencies]    |
+| [`discount-code-exporter`](/packages/discount-code-exporter)     | [![discount-code-exporter Version][discount-code-exporter-icon]][discount-code-exporter-version]       | [![discount-code-exporter Dependencies Status][discount-code-exporter-dependencies-icon]][discount-code-exporter-dependencies]       |
+| [`discount-code-generator`](/packages/discount-code-generator)   | [![discount-code-generator Version][discount-code-generator-icon]][discount-code-generator-version]    | [![discount-code-generator Dependencies Status][discount-code-generator-dependencies-icon]][discount-code-generator-dependencies]    |
+| [`discount-code-importer`](/packages/discount-code-importer)     | [![discount-code-importer Version][discount-code-importer-icon]][discount-code-importer-version]       | [![discount-code-importer Dependencies Status][discount-code-importer-dependencies-icon]][discount-code-importer-dependencies]       |
+| [`inventories-exporter`](/packages/inventories-exporter)         | [![inventories-exporter Version][inventories-exporter-icon]][inventories-exporter-version]             | [![inventories-exporter Dependencies Status][inventories-exporter-dependencies-icon]][inventories-exporter-dependencies]             |
+| [`price-exporter`](/packages/price-exporter)                     | [![price-exporter Version][price-exporter-icon]][price-exporter-version]                               | [![price-exporter Dependencies Status][price-exporter-dependencies-icon]][discount-code-importer-dependencies]                       |
+| [`product-exporter`](/packages/product-exporter)                 | [![product-exporter Version][product-exporter-icon]][product-exporter-version]                         | [![product-exporter Dependencies Status][product-exporter-dependencies-icon]][product-exporter-dependencies]                         |
+| [`product-json-to-csv`](/packages/product-json-to-csv)           | [![product-json-to-csv Version][product-json-to-csv-icon]][product-json-to-csv-version]                | [![product-json-to-csv Dependencies Status][product-json-to-csv-dependencies-icon]][product-json-to-csv-dependencies]                |
+| [`state-importer`](/packages/state-importer)                     | [![state-importer Version][state-importer-icon]][state-importer-version]                               | [![state-importer Dependencies Status][state-importer-dependencies-icon]][state-importer-dependencies]                               |
 
 ### Other
-| Package | Version | Dependencies |
-|--------|-------|------------|
+
+| Package                                                | Version                                                                                 | Dependencies                                                                                                          |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | [`api-request-builder`](/packages/api-request-builder) | [![api-request-builder Version][api-request-builder-icon]][api-request-builder-version] | [![api-request-builder Dependencies Status][api-request-builder-dependencies-icon]][api-request-builder-dependencies] |
-| [`sync-actions`](/packages/sync-actions) | [![sync-actions Version][sync-actions-icon]][sync-actions-version] | [![sync-actions Dependencies Status][sync-actions-dependencies-icon]][sync-actions-dependencies] |
+| [`sync-actions`](/packages/sync-actions)               | [![sync-actions Version][sync-actions-icon]][sync-actions-version]                      | [![sync-actions Dependencies Status][sync-actions-dependencies-icon]][sync-actions-dependencies]                      |
 
 [api-request-builder-version]: https://www.npmjs.com/package/@commercetools/api-request-builder
 [api-request-builder-icon]: https://img.shields.io/npm/v/@commercetools/api-request-builder.svg?style=flat-square

@@ -1,4 +1,5 @@
 # `get-credentials`
+
 Retrieve commercetools project credentials from environment variables or file system.
 
 ## Install
@@ -18,10 +19,12 @@ Read the credentials from an environment variable named after the project key li
 ### From a file
 
 Read the credentials from a [`dotenv`](https://github.com/motdotla/dotenv) file in the following locations, descending priority:
-- `./.ct-credentials.env` *Current directory*
-- `/etc/.ct-credentials.env`
+
+* `./.ct-credentials.env` _Current directory_
+* `/etc/.ct-credentials.env`
 
 Example `ct-credentials.env` file:
+
 ```dosini
 CT_MY_PROJECTKEY=myclientid:mysecret
 CT_OTHER_PROJECTKEY=myclientid:mysecret
@@ -33,13 +36,14 @@ Set environment variables from a [`dotenv`](https://github.com/motdotla/dotenv) 
 
 ### Arguments
 
-1. `projectKey` *(String)*: The project key to retrieve the associated client credentials for.
+1.  `projectKey` _(String)_: The project key to retrieve the associated client credentials for.
 
 ### Returns
 
 Returns a `Promise` which resolves to `{ clientId, clientSecret }`. When no credentials are found for the given project key an error is rejected.
 
 ### Usage example
+
 ```js
 import { getCredentials } from '@commercetools/get-credentials'
 

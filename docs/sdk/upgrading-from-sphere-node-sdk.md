@@ -3,7 +3,7 @@
 If you're still using the [sphere-node-sdk](https://github.com/sphereio/sphere-node-sdk), this guide will help you migrating to the new SDK. Overall it's a completely new _library_, although some of APIs didn't change much.
 
 > The SDK officially supports `node --version` starting from `4`.
-Older versions might still work but we don't support them. Use them at your own risk or _upgrade_ node version as well.
+> Older versions might still work but we don't support them. Use them at your own risk or _upgrade_ node version as well.
 
 ## Table of Contents
 
@@ -27,14 +27,15 @@ It's up to you to _pick only the packages that you need_, many of them are optio
 The _core_ package is the `@commercetools/sdk-client`. **Using it alone is useless**, you need to provide at least a [middleware](/sdk/api/README.md#middlewares) (e.g. `@commercetools/sdk-middleware-http`).
 
 If you aim to have all the functionalities of the `sphere-node-sdk`, you probably need the following packages:
-- `@commercetools/sdk-client`
-- `@commercetools/sdk-middleware-auth`
-- `@commercetools/sdk-middleware-http`
-- `@commercetools/sdk-middleware-queue`
-- `@commercetools/sdk-middleware-logger`
-- `@commercetools/sdk-middleware-user-agent`
-- `@commercetools/api-request-builder`
-- `@commercetools/sync-actions`
+
+* `@commercetools/sdk-client`
+* `@commercetools/sdk-middleware-auth`
+* `@commercetools/sdk-middleware-http`
+* `@commercetools/sdk-middleware-queue`
+* `@commercetools/sdk-middleware-logger`
+* `@commercetools/sdk-middleware-user-agent`
+* `@commercetools/api-request-builder`
+* `@commercetools/sync-actions`
 
 #### Example migration
 
@@ -61,7 +62,6 @@ client.products
   .update({ version: 1, actions: updateActions })
   .then(/* result */)
   .catch(/* error */)
-
 
 // after
 import { createClient } from '@commercetools/sdk-client'
@@ -105,7 +105,8 @@ const updateRequest = {
   method: 'POST',
   body: { version: 1, actions: updateActions },
 }
-client.execute(updateRequest)
+client
+  .execute(updateRequest)
   .then(/* result */)
   .catch(/* error */)
 ```
@@ -113,6 +114,7 @@ client.execute(updateRequest)
 ### API differences
 
 #### Sync actions
+
 In the `sphere-node-sdk` the sync utils were exported within the same package.<br/>
 In the new SDK they are scoped in their own module and they implement only 1 main function: `buildActions`.
 
@@ -130,6 +132,7 @@ const payload = { version: 1, actions }
 ```
 
 #### Request builder
+
 In the `sphere-node-sdk` you were building the request for each service by chaining different commands and executing `fetch`, `update`, etc at the end.<br/>
 In the new SDK, we saw that the [`sdk-client`](/sdk/api/README.md#sdk-client) simply accepts a [request object](/sdk/Glossary.md#clientrequest). The `uri` parameter can be simply defined manually or can be generated using the _request builder_. This has basically the same API as the `sphere-node-sdk`.
 
@@ -170,28 +173,30 @@ const customServices = {
   users: {
     type: 'users',
     endpoint: '/users',
-    features: [
-      features.query,
-      features.queryOne,
-    ],
+    features: [features.query, features.queryOne],
   },
 }
-const requestBuilder = createRequestBuilder({ projectKey: 'my-project' }, customServices)
+const requestBuilder = createRequestBuilder(
+  { projectKey: 'my-project' },
+  customServices
+)
 requestBuilder.users.byId('1').build()
 ```
 
 #### SphereClient options
+
 In the `sphere-node-sdk` all sorts of configuration options were passed as a big object to the `SphereClient` contructor.<br/>
 In the new SDK all those options are split across the [middlewares](/sdk/api/README.md#middlewares). See [example](#example-migration) above.
-
 
 ### Implicit benefits
 
 #### Auth flows
+
 In the `sphere-node-sdk` the way of getting an _access_token_ was restricted to the **client credentials flow** and it wasn't possible to define the **scopes** for the token.<br/>
 In the new SDK, because of the flexibility that the [middlewares](/sdk/Middlewares.md) provide, it's possible to have [all sorts of different auth flows](/sdk/api/sdkMiddlewareAuth.md).
 
 #### Always 100% compatibility with new API features
+
 In the `sphere-node-sdk` requests for a service had to be defined using the methods that the service provided. If the commercetools HTTP API would release new endpoints or new request options, the SDK had to be adjusted in order to support those new features.<br/>
 In the new SDK _this problem becomes obsolete_ because the [request](/sdk/Glossary.md#clientrequest) URI can simply be provided manually. The [request builder](/sdk/api/apiRequestBuilder.md) is just a helper to construct the URI for a given service but the URI can be typed manually as well.
 

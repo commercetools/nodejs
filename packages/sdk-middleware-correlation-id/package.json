@@ -1,0 +1,38 @@
+{
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "name": "@commercetools/sdk-middleware-correlation-id",
+  "version": "1.0.0",
+  "description": "Middleware for adding a correlation id to requests being executed, to use with @commercetools/sdk-client",
+  "keywords": [
+    "commercetools",
+    "sdk",
+    "middleware",
+    "correlation-id",
+    "request tracing"
+  ],
+  "homepage": "https://commercetools.github.io/nodejs/",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "author": "Tobias Deekens <tobias.deekens@commercetools.com> (https://github.com/tdeekens)",
+  "main": "dist/commercetools-sdk-middleware-correlation-id.cjs.js",
+  "module": "dist/commercetools-sdk-middleware-correlation-id.es.js",
+  "browser": "dist/commercetools-sdk-middleware-correlation-id.umd.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs.git"
+  },
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "scripts": {
+    "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
+    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n CommercetoolsSdkMiddlewareCorrelationId -i src/index.js -o dist/commercetools-sdk-middleware-correlation-id.umd.js",
+    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n CommercetoolsSdkMiddlewareCorrelationId -i src/index.js -o dist/commercetools-sdk-middleware-correlation-id.umd.min.js",
+    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n CommercetoolsSdkMiddlewareCorrelationId -i src/index.js -o dist/commercetools-sdk-middleware-correlation-id.es.js",
+    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSdkMiddlewareCorrelationId -i src/index.js -o dist/commercetools-sdk-middleware-correlation-id.cjs.js"
+  }
+}

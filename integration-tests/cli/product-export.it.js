@@ -19,50 +19,6 @@ describe('Product Exporter', () => {
   let apiConfig
   const bin = './integration-tests/node_modules/.bin/product-exporter'
 
-  beforeAll(async () => {
-    const credentials = await getCredentials(projectKey)
-    apiConfig = {
-      host: 'https://auth.sphere.io',
-      apiUrl: 'https://api.sphere.io',
-      projectKey,
-      credentials,
-    }
-    await clearData(apiConfig, 'products')
-
-    await Promise.all([
-      clearData(apiConfig, 'productTypes'),
-      clearData(apiConfig, 'taxCategories'),
-    ])
-
-    const createdProductType = await createData(apiConfig, 'productTypes', [
-      sampleProductType,
-    ])
-    const createdTaxCategory = await createData(apiConfig, 'taxCategories', [
-      sampleTaxCategory,
-    ])
-
-    const productType = {
-      typeId: 'product-type',
-      id: createdProductType[0].body.id,
-    }
-    const taxCategory = {
-      typeId: 'tax-category',
-      id: createdTaxCategory[0].body.id,
-    }
-
-    const sampleProducts = createProducts(productType, taxCategory)
-
-    await createData(apiConfig, 'products', sampleProducts)
-  }, 30000)
-
-  afterAll(async () => {
-    await clearData(apiConfig, 'products')
-    await Promise.all([
-      clearData(apiConfig, 'productTypes'),
-      clearData(apiConfig, 'taxCategories'),
-    ])
-  })
-
   describe('CLI basic functionality', () => {
     it('should print usage information given the help flag', async () => {
       const [stdout, stderr] = await exec(`${bin} --help`)
@@ -77,7 +33,60 @@ describe('Product Exporter', () => {
     })
   })
 
+  describe('when no products exist', () => {
+    it('should throw error', async () => {
+      const filePath = tmp.fileSync().name
+
+      await expect(
+        exec(`${bin} -o ${filePath} -p ${projectKey} --staged`)
+      ).rejects.toThrowError('No products found')
+    })
+  })
+
   describe('export function', () => {
+    beforeAll(async () => {
+      const credentials = await getCredentials(projectKey)
+      apiConfig = {
+        host: 'https://auth.sphere.io',
+        apiUrl: 'https://api.sphere.io',
+        projectKey,
+        credentials,
+      }
+      await clearData(apiConfig, 'products')
+
+      await Promise.all([
+        clearData(apiConfig, 'productTypes'),
+        clearData(apiConfig, 'taxCategories'),
+      ])
+
+      const createdProductType = await createData(apiConfig, 'productTypes', [
+        sampleProductType,
+      ])
+      const createdTaxCategory = await createData(apiConfig, 'taxCategories', [
+        sampleTaxCategory,
+      ])
+
+      const productType = {
+        typeId: 'product-type',
+        id: createdProductType[0].body.id,
+      }
+      const taxCategory = {
+        typeId: 'tax-category',
+        id: createdTaxCategory[0].body.id,
+      }
+
+      const sampleProducts = createProducts(productType, taxCategory)
+
+      await createData(apiConfig, 'products', sampleProducts)
+    }, 30000)
+
+    afterAll(async () => {
+      await clearData(apiConfig, 'products')
+      await Promise.all([
+        clearData(apiConfig, 'productTypes'),
+        clearData(apiConfig, 'taxCategories'),
+      ])
+    })
     it(
       'should export products from the CTP',
       async () => {

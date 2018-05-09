@@ -1,14 +1,17 @@
 # `http-user-agent`
+
 Creates a proper HTTP User-Agent. Can be used everywhere.
 
 ## Install
 
 #### Node.js
+
 ```bash
 npm install --save @commercetools/http-user-agent
 ```
 
 #### Browser
+
 ```html
 <script src="https://unpkg.com/@commercetools/http-user-agent/dist/commercetools-http-user-agent.umd.min.js"></script>
 <script>// global: CommercetoolsHttpUserAgent</script>
@@ -20,13 +23,12 @@ Creates a proper HTTP `User-Agent`.
 
 #### Named arguments (options)
 
-1. `name` *(String)*: the name of the client sending the request (required)
-2. `version` *(String)*: the version of the client sending the request (optional)
-3. `libraryName` *(String)*: the name of the library / package / application using the SDK (optional)
-4. `libraryVersion` *(String)*: the version of the library / package / application using the SDK (optional)
-5. `contactUrl` *(String)*: the contact URL of the library / package / application using the SDK (optional)
-6. `contactEmail` *(String)*: the contact email of the library / package / application using the SDK (optional)
-
+1.  `name` _(String)_: the name of the client sending the request (required)
+2.  `version` _(String)_: the version of the client sending the request (optional)
+3.  `libraryName` _(String)_: the name of the library / package / application using the SDK (optional)
+4.  `libraryVersion` _(String)_: the version of the library / package / application using the SDK (optional)
+5.  `contactUrl` _(String)_: the contact URL of the library / package / application using the SDK (optional)
+6.  `contactEmail` _(String)_: the contact email of the library / package / application using the SDK (optional)
 
 #### Usage example
 

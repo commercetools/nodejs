@@ -1,14 +1,17 @@
 # `api-request-builder`
+
 Provides an API to construct a URI for the HTTP API endpoints in a declarative way. Useful for building [request](/sdk/Glossary.md#clientrequest) `uri` for requests.
 
 ## Install
 
 #### Node.js
+
 ```bash
 npm install --save @commercetools/api-request-builder
 ```
 
 #### Browser
+
 ```html
 <script src="https://unpkg.com/@commercetools/api-request-builder/dist/commercetools-api-request-builder.umd.min.js"></script>
 <script>// global: CommercetoolsApiRequestBuilder</script>
@@ -16,27 +19,28 @@ npm install --save @commercetools/api-request-builder
 
 ## `createRequestBuilder(options)`
 
-Creates a *request builder* that allows to declaratively build a HTTP API request URI for the commercetools platform.
+Creates a _request builder_ that allows to declaratively build a HTTP API request URI for the commercetools platform.
 
 #### Arguments
 
 The `options` argument must be an object with a `projectKey` property, and optionally a `customServices` property
+
 ```js
     options -> { projectKey, customServices }
 ```
 
-1. `projectKey` *(String)*: A required string specifying the project key to use for the request. Even though this is required, the project key can be omitted from the URI by passing `{withProjectKey: false}` to `.build()`
-2. `customServices` *(Object)*: A map of custom services that are not provided by default. This might be useful to build a request for a different API with similar query parameters.
+1.  `projectKey` _(String)_: A required string specifying the project key to use for the request. Even though this is required, the project key can be omitted from the URI by passing `{withProjectKey: false}` to `.build()`
+2.  `customServices` _(Object)_: A map of custom services that are not provided by default. This might be useful to build a request for a different API with similar query parameters.
 
 A _service_ is created by defining its `features`. Features give a service specific _characteristics_ to correctly build URIs. For example, if a service can query a resource by ID you would include `queryOne`. Available features types are:
 
-- `query`: allows to use standard query capabilities (`page`, `perPage`, `sort`, `where`, `whereOperator`)
-- `queryOne`: allows to query a single resource (`byId`, `byKey`, `byCustomerId`, `byCartId`)
-- `queryLocation`: allows to query resources by location (`byCountry`, `byCurrency`, `byState`)
-- `queryExpand`: allows to use reference expansion (`expand`)
-- `search`: allows to use search capabilities (`text`, `fuzzy`, `fuzzyLevel`, `facet`, `markMatchingVariants`, `filter`, `filterByQuery`, `filterByFacets`)
-- `projection`: allows to use projections capabilities (`staged`, `priceCurrency`, `priceCountry`, `priceCustomerGroup`, `priceChannel`)
-- `suggest`: allows to use suggest capabilities (`searchKeywords`)
+* `query`: allows to use standard query capabilities (`page`, `perPage`, `sort`, `where`, `whereOperator`)
+* `queryOne`: allows to query a single resource (`byId`, `byKey`, `byCustomerId`, `byCartId`)
+* `queryLocation`: allows to query resources by location (`byCountry`, `byCurrency`, `byState`)
+* `queryExpand`: allows to use reference expansion (`expand`)
+* `search`: allows to use search capabilities (`text`, `fuzzy`, `fuzzyLevel`, `facet`, `markMatchingVariants`, `filter`, `filterByQuery`, `filterByFacets`)
+* `projection`: allows to use projections capabilities (`staged`, `priceCurrency`, `priceCountry`, `priceCustomerGroup`, `priceChannel`)
+* `suggest`: allows to use suggest capabilities (`searchKeywords`)
 
 ```js
 import {
@@ -49,10 +53,7 @@ const options = {
     users: {
       type: 'users',
       endpoint: '/users',
-      features: [
-        features.query,
-        features.queryOne,
-      ],
+      features: [features.query, features.queryOne],
     },
   },
 }
@@ -172,6 +173,12 @@ The imperative API can be mixed with the declarative one.
 
 ```js
 // these both lead to the same result
-requestBuilder.channels.parse({ page: 5 }).perPage(10).build()
-requestBuilder.channels.perPage(10).parse({ page: 5 }).build()
+requestBuilder.channels
+  .parse({ page: 5 })
+  .perPage(10)
+  .build()
+requestBuilder.channels
+  .perPage(10)
+  .parse({ page: 5 })
+  .build()
 ```

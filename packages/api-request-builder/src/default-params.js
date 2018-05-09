@@ -2,7 +2,7 @@
 import type {
   ServiceBuilderDefaultParams,
   ServiceBuilderParams,
-} from '../../../types/sdk'
+} from 'types/sdk'
 import * as features from './features'
 
 /**

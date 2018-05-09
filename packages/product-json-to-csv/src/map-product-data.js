@@ -129,7 +129,11 @@ export default class ProductMapping {
           case 'variant': {
             if (!isEmpty(value.attributes)) {
               value.attributes.forEach((attribute: Object) => {
-                acc[attribute.name] = attribute.value.key || attribute.value
+                acc[attribute.name] = Array.isArray(attribute.value)
+                  ? attribute.value
+                      .map(attrValue => attrValue.key)
+                      .join(this.multiValDel)
+                  : attribute.value.key || attribute.value
               })
 
               // check if product is masterVariant
@@ -142,12 +146,10 @@ export default class ProductMapping {
             if (!isEmpty(value.images))
               images = value.images
                 .map((image: Image): string => {
-                  const { url, dimensions, label } = image
-                  let imageString = `${url}|${dimensions.w}|${dimensions.h}`
-                  imageString += label ? `|${label}` : ''
-                  return imageString
+                  const { url, label } = image
+                  return label ? `${url}|${label}` : url
                 })
-                .join(';')
+                .join(this.multiValDel)
 
             const { id, sku, key } = value
             acc[property] = pickBy({ id, sku, key, images }, Boolean)
