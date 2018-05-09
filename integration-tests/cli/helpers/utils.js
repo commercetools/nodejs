@@ -43,8 +43,8 @@ export function clearData(apiConfig, entityName) {
 export function createData(apiConfig, entityName, data) {
   const client = createClient({
     middlewares: [
-      createAuthMiddlewareForClientCredentialsFlow(apiConfig),
-      createHttpMiddleware({ host: apiConfig.apiUrl }),
+      createAuthMiddlewareForClientCredentialsFlow({ ...apiConfig, fetch }),
+      createHttpMiddleware({ host: apiConfig.apiUrl, fetch }),
     ],
   })
   const requestOption = { projectKey: apiConfig.projectKey }
