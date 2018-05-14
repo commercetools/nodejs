@@ -31,6 +31,24 @@ function createProductMapActions(mapActionGroup) {
     )
 
     allActions.push(
+      mapActionGroup('attributes', () =>
+        productActions.actionsMapAttributes(
+          diff,
+          oldObj,
+          newObj,
+          sameForAllAttributeNames || [],
+          variantHashMap
+        )
+      )
+    )
+
+    allActions.push(
+      mapActionGroup('variants', () =>
+        productActions.actionsMapVariants(diff, oldObj, newObj)
+      )
+    )
+
+    allActions.push(
       mapActionGroup('base', () =>
         productActions.actionsMapBase(diff, oldObj, newObj)
       )
@@ -48,25 +66,7 @@ function createProductMapActions(mapActionGroup) {
       )
     )
 
-    allActions.push(
-      mapActionGroup('variants', () =>
-        productActions.actionsMapVariants(diff, oldObj, newObj)
-      )
-    )
-
     allActions.push(productActions.actionsMapMasterVariant(oldObj, newObj))
-
-    allActions.push(
-      mapActionGroup('attributes', () =>
-        productActions.actionsMapAttributes(
-          diff,
-          oldObj,
-          newObj,
-          sameForAllAttributeNames || [],
-          variantHashMap
-        )
-      )
-    )
 
     allActions.push(
       mapActionGroup('images', () =>
