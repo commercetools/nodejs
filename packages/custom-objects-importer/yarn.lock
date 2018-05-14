@@ -3,34 +3,40 @@
 
 
 "@commercetools/api-request-builder@^3.7.1":
-  version "3.7.1"
-  resolved "https://registry.yarnpkg.com/@commercetools/api-request-builder/-/api-request-builder-3.7.1.tgz#477c92f166fe9592912d6457b42656fcd2286a09"
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/@commercetools/api-request-builder/-/api-request-builder-3.7.2.tgz#c2392c234a95f37d1475ac8a741e94aa848f9c7f"
 
-"@commercetools/http-user-agent@^1.1.7":
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/@commercetools/http-user-agent/-/http-user-agent-1.1.7.tgz#37a8a2d85192cdc01421ece8bb31fbf077f21486"
+"@commercetools/get-credentials@^2.1.4":
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/@commercetools/get-credentials/-/get-credentials-2.1.4.tgz#803505a6bbb092634b3829dc9f15135388db051d"
+  dependencies:
+    dotenv "^4.0.0"
+
+"@commercetools/http-user-agent@^1.1.8":
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/@commercetools/http-user-agent/-/http-user-agent-1.1.8.tgz#dfc9ff0e4be49686a9e0984ac82c01d9c6d975c5"
 
 "@commercetools/sdk-client@^1.5.5":
-  version "1.5.5"
-  resolved "https://registry.yarnpkg.com/@commercetools/sdk-client/-/sdk-client-1.5.5.tgz#6186521a28d00aac10b1c3caf0c9237a7fba97b3"
+  version "1.5.6"
+  resolved "https://registry.yarnpkg.com/@commercetools/sdk-client/-/sdk-client-1.5.6.tgz#dee49e825d13eda6646de325444490f3116c0a2a"
 
 "@commercetools/sdk-middleware-auth@^3.5.2":
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/@commercetools/sdk-middleware-auth/-/sdk-middleware-auth-3.5.2.tgz#b104df34f962f83802534d15c1ef25d18e88b417"
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/@commercetools/sdk-middleware-auth/-/sdk-middleware-auth-3.5.3.tgz#856adcc4157602fee8d41eef0ac0763d652aa4d6"
   dependencies:
     isomorphic-fetch "2.2.1"
 
 "@commercetools/sdk-middleware-http@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@commercetools/sdk-middleware-http/-/sdk-middleware-http-3.0.0.tgz#9791c6443c9c9e3a8e3c2ff29ea1664c3db268cb"
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@commercetools/sdk-middleware-http/-/sdk-middleware-http-3.0.1.tgz#5f7bfb81f7bf8ffda6afb64f8cf8e2e903e1b379"
   dependencies:
     isomorphic-fetch "2.2.1"
 
 "@commercetools/sdk-middleware-user-agent@^1.2.7":
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/@commercetools/sdk-middleware-user-agent/-/sdk-middleware-user-agent-1.2.7.tgz#f9687b168aac3e64bba594b735b413dd6d8b8e0a"
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@commercetools/sdk-middleware-user-agent/-/sdk-middleware-user-agent-1.2.8.tgz#d22015b33e983c18eaf6919aed124f401417753a"
   dependencies:
-    "@commercetools/http-user-agent" "^1.1.7"
+    "@commercetools/http-user-agent" "^1.1.8"
 
 JSONStream@^1.3.2:
   version "1.3.2"
@@ -43,6 +49,10 @@ core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
+dotenv@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
+
 encoding@^0.1.11:
   version "0.1.12"
   resolved "https://registry.yarnpkg.com/encoding/-/encoding-0.1.12.tgz#538b66f3ee62cd1ab51ec323829d1f9480c74beb"
@@ -50,10 +60,10 @@ encoding@^0.1.11:
     iconv-lite "~0.4.13"
 
 iconv-lite@~0.4.13:
-  version "0.4.21"
-  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.21.tgz#c47f8733d02171189ebc4a400f3218d348094798"
+  version "0.4.23"
+  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.23.tgz#297871f63be507adcfbfca715d0cd0eed84e9a63"
   dependencies:
-    safer-buffer "^2.1.0"
+    safer-buffer ">= 2.1.2 < 3"
 
 inherits@~2.0.3:
   version "2.0.3"
@@ -102,10 +112,10 @@ readable-stream@^2.0.5:
     util-deprecate "~1.0.1"
 
 safe-buffer@~5.1.0, safe-buffer@~5.1.1:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
 
-safer-buffer@^2.1.0:
+"safer-buffer@>= 2.1.2 < 3":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 

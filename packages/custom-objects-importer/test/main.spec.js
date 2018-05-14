@@ -1,3 +1,4 @@
+import { getCredentials } from '@commercetools/get-credentials'
 import silentLogger from '../src/utils/silent-logger'
 import CustomObjectsImporter from '../src/main'
 
@@ -7,18 +8,25 @@ describe('CustomObjectsImporter', () => {
   }
 
   let objectsImport
-  beforeEach(() => {
+  beforeEach(async () => {
+    const credentials = await getCredentials('custom-objects-import-int-tests')
     objectsImport = new CustomObjectsImporter(
       {
+        // apiConfig: {
+        //   projectKey: 'test-project-key',
+        // },
         apiConfig: {
-          projectKey: 'test-project-key',
+          host: 'https://auth.sphere.io',
+          apiUrl: 'https://api.sphere.io',
+          projectKey: 'custom-objects-import-int-tests',
+          credentials,
         },
       },
       logger
     )
   })
 
-  describe('::constructor', () => {
+  xdescribe('::constructor', () => {
     test('should be a function', () => {
       expect(typeof CustomObjectsImporter).toBe('function')
     })
@@ -37,5 +45,31 @@ describe('CustomObjectsImporter', () => {
     })
   })
 
-  describe('::run', () => {})
+  describe('::run', () => {
+    xtest('should be defined', () => {
+      expect(objectsImport.run).toBeDefined()
+    })
+
+    test('int test for testing', () => {
+      const objects = [
+        {
+          container: 'checkoutInfo',
+          key: 'copperKey',
+          value: {
+            paymentID: '7',
+            paymentMethod: 'Cash',
+          },
+        },
+        {
+          container: 'info',
+          key: 'jadeKey',
+          value: {
+            we: 'as',
+            asdf: 'asdf',
+          },
+        },
+      ]
+      objectsImport.run(objects)
+    })
+  })
 })
