@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/discount-code-importer",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "description": "Import discount codes to the commercetools platform.",
   "keywords": [
     "commercetools",
@@ -34,7 +34,7 @@
     "@commercetools/sdk-middleware-http": "^4.0.0",
     "@commercetools/sdk-middleware-queue": "^1.1.6",
     "@commercetools/sdk-middleware-user-agent": "^1.2.8",
-    "@commercetools/sync-actions": "^1.22.3",
+    "@commercetools/sync-actions": "^1.22.4",
     "bluebird": "^3.5.0",
     "lodash": "^4.17.4",
     "node-fetch": "2.1.2",
