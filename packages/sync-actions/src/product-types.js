@@ -46,7 +46,7 @@ function createProductTypeMapActions(
 
 export default (
   actionGroupConfig: Array<ActionGroup>,
-  config: Object
+  config: Object = {}
 ): SyncAction => {
   const mapActionGroup = createMapActionGroup(actionGroupConfig)
   const doMapActions = createProductTypeMapActions(mapActionGroup, config)
