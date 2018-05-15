@@ -436,7 +436,7 @@ client.execute(zonesRequests)
 .catch(error => ...)
 ```
 
-## `createSyncProductTypes(actionGroups)`
+## `createSyncProductTypes(actionGroups, config)`
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
@@ -445,6 +445,11 @@ Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API u
 #### Arguments
 
 1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+2.  `config` _(Object)_: A configuration object to which has one of the following options:
+
+| Key                     | Type      | Required             | Description                                                                                                            |
+| ----------------------- | --------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `shouldOmitEmptyString` | `Boolean` | - (default: `false`) | a flag which determines whether we should treat empty strings as **NOT A VALUE** in addition to `undefined` and `null` |
 
 #### Usage example
 
@@ -557,4 +562,41 @@ const statesRequests = {
 client.execute(statesRequests)
 .then(result => ...)
 .catch(error => ...)
+```
+
+---
+
+### With `shouldOmitEmptyString=true`
+
+Given that `shouldOmitEmptyString` is provided, we won't generate any `updateAction` in the following cases:
+
+| Before      | Now         | Will generate update action? | Value for the action    |
+| ----------- | ----------- | ---------------------------- | ----------------------- |
+| `""`        | `null`      | no                           |                         |
+| `""`        | `undefined` | no                           |                         |
+| `""`        | `"foo"`     | yes                          | `"foo"`                 |
+| `null`      | `""`        | no                           |                         |
+| `null`      | `undefined` | no                           |                         |
+| `null`      | `"foo"`     | yes                          | `"foo"`                 |
+| `undefined` | `""`        | no                           |                         |
+| `undefined` | `null`      | no                           |                         |
+| `undefined` | `"foo"`     | yes                          | `"foo"`                 |
+| `"foo"`     | `""`        | yes                          | omitted from the action |
+| `"foo"`     | `null`      | yes                          | omitted from the action |
+| `"foo"`     | `undefined` | yes                          | omitted from the action |
+
+The final value of the action as displayed above will be given, _regardless if the value of the action is required or not_.
+
+See example below.
+
+```js
+const productTypeSync = createSyncProductTypes([], {
+  shouldOmitEmptyString: true,
+})
+const before = { key: '' }
+const now = { key: null }
+const actions = sync.buildActions(now, before)
+
+// outputs:
+// []
 ```

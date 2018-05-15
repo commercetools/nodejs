@@ -13,7 +13,8 @@ function createProductTypeMapActions(
   mapActionGroup: (
     type: string,
     fn: () => Array<UpdateAction>
-  ) => Array<UpdateAction>
+  ) => Array<UpdateAction>,
+  config: Object
 ): (diff: Object, next: Object, previous: Object) => Array<UpdateAction> {
   return function doMapActions(
     diff: Object,
@@ -23,7 +24,7 @@ function createProductTypeMapActions(
     const allActions = []
     allActions.push(
       mapActionGroup('base', (): Array<UpdateAction> =>
-        productTypeActions.actionsMapBase(diff, previous, next)
+        productTypeActions.actionsMapBase(diff, previous, next, config)
       ),
       mapActionGroup('attributes', (): Array<UpdateAction> =>
         productTypeActions.actionsMapAttributes(
@@ -43,9 +44,12 @@ function createProductTypeMapActions(
   }
 }
 
-export default (config: Array<ActionGroup>): SyncAction => {
-  const mapActionGroup = createMapActionGroup(config)
-  const doMapActions = createProductTypeMapActions(mapActionGroup)
+export default (
+  actionGroupConfig: Array<ActionGroup>,
+  config: Object
+): SyncAction => {
+  const mapActionGroup = createMapActionGroup(actionGroupConfig)
+  const doMapActions = createProductTypeMapActions(mapActionGroup, config)
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
   return { buildActions }
 }
