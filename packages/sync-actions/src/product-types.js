@@ -1,6 +1,11 @@
 /* @flow */
 import flatten from 'lodash.flatten'
-import type { SyncAction, UpdateAction, ActionGroup } from 'types/sdk'
+import type {
+  SyncAction,
+  UpdateAction,
+  ActionGroup,
+  SyncActionConfig,
+} from 'types/sdk'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import * as productTypeActions from './product-types-actions'
@@ -14,7 +19,7 @@ function createProductTypeMapActions(
     type: string,
     fn: () => Array<UpdateAction>
   ) => Array<UpdateAction>,
-  config: Object
+  config: SyncActionConfig
 ): (diff: Object, next: Object, previous: Object) => Array<UpdateAction> {
   return function doMapActions(
     diff: Object,
@@ -46,7 +51,7 @@ function createProductTypeMapActions(
 
 export default (
   actionGroupConfig: Array<ActionGroup>,
-  config: Object = {}
+  config: SyncActionConfig
 ): SyncAction => {
   const mapActionGroup = createMapActionGroup(actionGroupConfig)
   const doMapActions = createProductTypeMapActions(mapActionGroup, config)
