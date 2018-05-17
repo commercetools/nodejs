@@ -50,21 +50,20 @@ const getIsAnAttributeDefinitionBaseFieldChange = diff =>
   diff.isSearchable
 
 function actionsMapEnums(attributeType, attributeDiff, previous, next) {
-  const getAddActionName = type =>
-    type === 'enum' ? 'addPlainEnumValue' : 'addLocalizedEnumValue'
-  const getChangeEnumOrderActionName = type =>
-    type === 'enum'
+  const addEnumActionName =
+    attributeType === 'enum' ? 'addPlainEnumValue' : 'addLocalizedEnumValue'
+  const changeEnumOrderActionName =
+    attributeType === 'enum'
       ? 'changePlainEnumValueOrder'
       : 'changeLocalizedEnumValueOrder'
-  const getChangeEnumLabelActionName = type =>
-    type === 'enum'
+  const changeEnumLabelActionName =
+    attributeType === 'enum'
       ? 'changePlainEnumValueLabel'
       : 'changeLocalizedEnumValueLabel'
-
   const buildArrayActions = createBuildArrayActions('values', {
     [ADD_ACTIONS]: newEnum => ({
       attributeName: next.name,
-      action: getAddActionName(attributeType),
+      action: addEnumActionName,
       value: newEnum,
     }),
     [CHANGE_ACTIONS]: (oldEnum, newEnum) => {
@@ -81,13 +80,13 @@ function actionsMapEnums(attributeType, attributeDiff, previous, next) {
         if (!deepEqual(oldEnum.label, oldEnumInNext.label)) {
           changeActions.push({
             attributeName: next.name,
-            action: getChangeEnumLabelActionName(attributeType),
+            action: changeEnumLabelActionName,
             newValue: newEnum,
           })
         } else {
           changeActions.push({
             attributeName: next.name,
-            action: getChangeEnumOrderActionName(attributeType),
+            action: changeEnumOrderActionName,
             value: newEnum,
           })
         }
@@ -99,7 +98,7 @@ function actionsMapEnums(attributeType, attributeDiff, previous, next) {
         })
         changeActions.push({
           attributeName: next.name,
-          action: getAddActionName(attributeType),
+          action: addEnumActionName,
           value: newEnum,
         })
       }
@@ -122,9 +121,7 @@ function actionsMapEnums(attributeType, attributeDiff, previous, next) {
     updateAction => {
       if (updateAction.action === 'removeEnumValue')
         removedKeys.push(updateAction.value.key)
-      else if (
-        updateAction.action === getChangeEnumOrderActionName(attributeType)
-      ) {
+      else if (updateAction.action === changeEnumOrderActionName) {
         newEnumValuesOrder.push(updateAction.value)
       } else actions.push(updateAction)
     }
@@ -136,7 +133,7 @@ function actionsMapEnums(attributeType, attributeDiff, previous, next) {
       ? [
           {
             attributeName: next.name,
-            action: getChangeEnumOrderActionName(attributeType),
+            action: changeEnumOrderActionName,
             values: newEnumValuesOrder,
           },
         ]
