@@ -2,11 +2,11 @@ import isNil from 'lodash.isnil'
 import clone from './clone'
 import * as diffpatcher from './diffpatcher'
 
-export function getIsAnEmptyValue(value, shouldOmitEmptyString) {
-  const isEmptyString = v => Boolean(typeof v === 'string' && v.trim() === '')
-  const validators = shouldOmitEmptyString ? [isNil, isEmptyString] : [isNil]
-  return validators.some(validator => validator(value))
-}
+const normalizeValue = value =>
+  typeof value === 'string' ? value.trim() : value
+
+const createIsEmptyValue = emptyValues => value =>
+  emptyValues.some(emptyValue => emptyValue === normalizeValue(value))
 
 /**
  * Builds actions for simple object properties, given a list of actions
@@ -26,6 +26,9 @@ export function buildBaseAttributesActions({
   newObj,
   shouldOmitEmptyString,
 }) {
+  const isEmptyValue = createIsEmptyValue(
+    shouldOmitEmptyString ? [undefined, null, ''] : [undefined, null]
+  )
   return actions
     .map(item => {
       const key = item.key // e.g.: name, description, ...
@@ -33,14 +36,8 @@ export function buildBaseAttributesActions({
       const delta = diff[key]
       const before = oldObj[key]
       const now = newObj[key]
-      const isNotDefinedBefore = getIsAnEmptyValue(
-        oldObj[key],
-        shouldOmitEmptyString
-      )
-      const isNotDefinedNow = getIsAnEmptyValue(
-        newObj[key],
-        shouldOmitEmptyString
-      )
+      const isNotDefinedBefore = isEmptyValue(oldObj[key])
+      const isNotDefinedNow = isEmptyValue(newObj[key])
       if (!delta) return undefined
 
       if (isNotDefinedNow && isNotDefinedBefore) return undefined
