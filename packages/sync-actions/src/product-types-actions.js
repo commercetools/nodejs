@@ -21,12 +21,13 @@ export const baseActionsList = [
   { action: 'changeDescription', key: 'description' },
 ]
 
-export function actionsMapBase(diff, previous, next) {
+export function actionsMapBase(diff, previous, next, config = {}) {
   return buildBaseAttributesActions({
     diff,
     actions: baseActionsList,
     oldObj: previous,
     newObj: next,
+    shouldOmitEmptyString: config.shouldOmitEmptyString,
   })
 }
 

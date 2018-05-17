@@ -310,6 +310,9 @@ export type UpdateAction = {
 export type SyncAction = {
   buildActions: (now: Object, before: Object) => Array<UpdateAction>,
 }
+export type SyncActionConfig = {
+  shouldOmitEmptyString: boolean,
+}
 export type ActionGroup = {
   type: string,
   group: 'black' | 'white',
