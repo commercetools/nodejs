@@ -6,11 +6,8 @@ const createTestProductType = custom => ({
   ...custom,
 })
 
-const createAttributeDefinition = custom => ({
-  type: {
-    name: custom.name,
-  },
-  ...custom,
+const createAttributeDefinition = type => ({
+  type,
 })
 
 describe('Actions', () => {

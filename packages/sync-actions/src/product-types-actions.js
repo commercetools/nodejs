@@ -167,6 +167,7 @@ export function actionsMapAttributes(
       previous,
       next
     )
+
     if (getIsChangedOperation(diffKey)) {
       if (Array.isArray(diffValue)) {
         const deltaValue = diffpatcher.getDeltaValue(diffValue)
@@ -188,13 +189,13 @@ export function actionsMapAttributes(
             attributeName: extractedPairs.oldObj.name,
           }))
         )
-      } else if (diffValue.values) {
+      } else if (diffValue.type.values) {
         actions.push(
           ...actionsMapEnums(
             extractedPairs.oldObj.type.name,
-            diffValue,
-            extractedPairs.oldObj,
-            extractedPairs.newObj
+            diffValue.type,
+            extractedPairs.oldObj.type,
+            extractedPairs.newObj.type
           )
         )
       }
