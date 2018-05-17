@@ -21,7 +21,7 @@ export const baseActionsList = [
   { action: 'changeDescription', key: 'description' },
 ]
 
-export function actionsMapBase(diff, previous, next, config) {
+export function actionsMapBase(diff, previous, next, config = {}) {
   return buildBaseAttributesActions({
     diff,
     actions: baseActionsList,
