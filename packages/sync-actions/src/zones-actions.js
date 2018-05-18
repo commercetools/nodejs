@@ -13,12 +13,13 @@ export const baseActionsList = [
 const hasLocation = (locations, otherLocation) =>
   locations.some(location => location.country === otherLocation.country)
 
-export function actionsMapBase(diff, oldObj, newObj) {
+export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
     diff,
     oldObj,
     newObj,
+    shouldOmitEmptyString: config.shouldOmitEmptyString,
   })
 }
 
