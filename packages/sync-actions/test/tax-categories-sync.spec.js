@@ -34,24 +34,6 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  test('should build `setKey` action', () => {
-    const before = {
-      key: '1234',
-    }
-    const now = {
-      key: '4321',
-    }
-
-    const actual = taxCategorySync.buildActions(now, before)
-    const expected = [
-      {
-        action: 'setKey',
-        key: now.key,
-      },
-    ]
-    expect(actual).toEqual(expected)
-  })
-
   test('should build `setDescription` action', () => {
     const before = {
       description: 'some description',
@@ -254,5 +236,145 @@ describe('Actions', () => {
     ]
 
     expect(actual).toEqual(expected)
+  })
+
+  describe('setKey', () => {
+    test('should build `setKey` action', () => {
+      const before = {
+        key: '1234',
+      }
+      const now = {
+        key: '4321',
+      }
+      const actual = taxCategorySync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'setKey',
+          key: now.key,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+    describe('with `shouldOmitEmptyString`', () => {
+      let before
+      let now
+      let updateActions
+      beforeEach(() => {
+        taxCategorySync = taxCategorySyncFn([], {
+          shouldOmitEmptyString: true,
+        })
+      })
+      describe('when old key is `null`', () => {
+        beforeEach(() => {
+          before = { key: null }
+        })
+        describe('when new key is `undefined`', () => {
+          beforeEach(() => {
+            now = { key: undefined }
+            updateActions = taxCategorySync.buildActions(now, before)
+          })
+          it('should not generate `setKey`', () => {
+            expect(updateActions).toEqual([])
+          })
+        })
+        describe('when new key is empty string', () => {
+          beforeEach(() => {
+            now = { key: '' }
+            updateActions = taxCategorySync.buildActions(now, before)
+          })
+          it('should not generate `setKey`', () => {
+            expect(updateActions).toEqual([])
+          })
+        })
+        describe('when new key is not an empty string', () => {
+          beforeEach(() => {
+            now = { key: 'foo' }
+            updateActions = taxCategorySync.buildActions(now, before)
+          })
+          it('should generate `setKey`', () => {
+            expect(updateActions).toEqual([
+              {
+                action: 'setKey',
+                key: 'foo',
+              },
+            ])
+          })
+        })
+      })
+      describe('when old key is `undefined`', () => {
+        beforeEach(() => {
+          before = { key: undefined }
+        })
+        describe('when new key is `null`', () => {
+          beforeEach(() => {
+            now = { key: null }
+            updateActions = taxCategorySync.buildActions(now, before)
+          })
+          it('should not generate `setKey`', () => {
+            expect(updateActions).toEqual([])
+          })
+        })
+        describe('when new key is empty string', () => {
+          beforeEach(() => {
+            now = { key: '' }
+            updateActions = taxCategorySync.buildActions(now, before)
+          })
+          it('should not generate `setKey`', () => {
+            expect(updateActions).toEqual([])
+          })
+        })
+        describe('when new key is not an empty string', () => {
+          beforeEach(() => {
+            now = { key: 'foo' }
+            updateActions = taxCategorySync.buildActions(now, before)
+          })
+          it('should generate `setKey`', () => {
+            expect(updateActions).toEqual([
+              {
+                action: 'setKey',
+                key: 'foo',
+              },
+            ])
+          })
+        })
+      })
+      describe('when old key is an empty string', () => {
+        beforeEach(() => {
+          before = { key: '' }
+        })
+        describe('when new key is `null`', () => {
+          beforeEach(() => {
+            now = { key: null }
+            updateActions = taxCategorySync.buildActions(now, before)
+          })
+          it('should not generate `setKey`', () => {
+            expect(updateActions).toEqual([])
+          })
+        })
+        describe('when new key is `undefined`', () => {
+          beforeEach(() => {
+            now = { key: undefined }
+            updateActions = taxCategorySync.buildActions(now, before)
+          })
+          it('should not generate `setKey`', () => {
+            expect(updateActions).toEqual([])
+          })
+        })
+        describe('when new key is not an empty string', () => {
+          beforeEach(() => {
+            now = { key: 'foo' }
+            updateActions = taxCategorySync.buildActions(now, before)
+          })
+          it('should generate `setKey`', () => {
+            expect(updateActions).toEqual([
+              {
+                action: 'setKey',
+                key: 'foo',
+              },
+            ])
+          })
+        })
+      })
+    })
   })
 })

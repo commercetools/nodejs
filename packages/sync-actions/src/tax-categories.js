@@ -1,6 +1,11 @@
 /* @flow */
 import flatten from 'lodash.flatten'
-import type { SyncAction, ActionGroup } from 'types/sdk'
+import type {
+  SyncAction,
+  ActionGroup,
+  UpdateAction,
+  SyncActionConfig,
+} from 'types/sdk'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import * as taxCategoriesActions from './tax-categories-actions'
@@ -8,27 +13,37 @@ import * as diffpatcher from './utils/diffpatcher'
 
 export const actionGroups = ['base', 'rates']
 
-function createTaxCategoriesMapActions(mapActionGroup) {
-  return function doMapActions(diff, newObj, oldObj /* , options */) {
+function createTaxCategoriesMapActions(
+  mapActionGroup: (
+    type: string,
+    fn: () => Array<UpdateAction>
+  ) => Array<UpdateAction>,
+  config: SyncActionConfig
+): (diff: Object, newObj: Object, oldObj: Object) => Array<UpdateAction> {
+  return function doMapActions(
+    diff: Object,
+    newObj: Object,
+    oldObj: Object
+  ): Array<UpdateAction> {
     const allActions = []
-
     allActions.push(
-      mapActionGroup('base', () =>
-        taxCategoriesActions.actionsMapBase(diff, oldObj, newObj)
+      mapActionGroup('base', (): Array<UpdateAction> =>
+        taxCategoriesActions.actionsMapBase(diff, oldObj, newObj, config)
       )
     )
-
     allActions.push(
-      mapActionGroup('rates', () =>
+      mapActionGroup('rates', (): Array<UpdateAction> =>
         taxCategoriesActions.actionsMapRates(diff, oldObj, newObj)
       )
     )
-
     return flatten(allActions)
   }
 }
 
-export default (config: Array<ActionGroup>): SyncAction => {
+export default (
+  actionGroupConfig: Array<ActionGroup>,
+  config: SyncActionConfig
+): SyncAction => {
   // config contains information about which action groups
   // are white/black listed
 
@@ -40,8 +55,8 @@ export default (config: Array<ActionGroup>): SyncAction => {
   // this resulting function mapActionGroup will call the callback function
   // for whitelisted action groups and return the return value of the callback
   // It will return an empty array for blacklisted action groups
-  const mapActionGroup = createMapActionGroup(config)
-  const doMapActions = createTaxCategoriesMapActions(mapActionGroup)
+  const mapActionGroup = createMapActionGroup(actionGroupConfig)
+  const doMapActions = createTaxCategoriesMapActions(mapActionGroup, config)
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
   return { buildActions }
 }
