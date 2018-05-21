@@ -1,7 +1,7 @@
 {
     "name": "@commercetools/gdpr-tool",
     "version": "1.0.0-development",
-    "description": "Get and delete all data related to a single customer",
+    "description": "Export and delete all data related to a single customer",
     "main": "lib/main.js",
     "scripts": {
         "build": "babel src --out-dir lib"
