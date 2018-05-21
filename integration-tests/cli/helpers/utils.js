@@ -40,7 +40,7 @@ export function clearData(apiConfig, entityName) {
   })
 }
 
-export function createData(apiConfig, entityName, data) {
+export function createData(apiConfig, entityName, data, id) {
   const client = createClient({
     middlewares: [
       createAuthMiddlewareForClientCredentialsFlow({ ...apiConfig, fetch }),
@@ -51,6 +51,7 @@ export function createData(apiConfig, entityName, data) {
   const service = createRequestBuilder(requestOption)[entityName]
   return Promise.all(
     data.map(_data => {
+      if (id) service.byId(id)
       const request = {
         uri: service.build(),
         method: 'POST',
@@ -59,4 +60,24 @@ export function createData(apiConfig, entityName, data) {
       return client.execute(request)
     })
   )
+}
+
+export function getId(apiConfig, entityName) {
+  const client = createClient({
+    middlewares: [
+      createAuthMiddlewareForClientCredentialsFlow({ ...apiConfig, fetch }),
+      createHttpMiddleware({ host: apiConfig.apiUrl, fetch }),
+    ],
+  })
+
+  const service = createRequestBuilder({
+    projectKey: apiConfig.projectKey,
+  })[entityName]
+
+  const request = {
+    uri: service.build(),
+    method: 'GET',
+  }
+
+  return client.execute(request)
 }

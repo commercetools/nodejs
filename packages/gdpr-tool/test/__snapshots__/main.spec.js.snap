@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GDPRTool ::buildReference should build reference 1`] = `"resource(id in (\\"id1\\", \\"id2\\", \\"id3\\"))"`;
+
+exports[`GDPRTool ::buildRequest should build request 1`] = `
+Object {
+  "method": "GET",
+  "uri": "example.com",
+}
+`;
+
+exports[`GDPRTool ::constructor should throw error if no \`apiConfig\` in \`options\` parameter 1`] = `"The constructor must be passed an \`apiConfig\` object"`;
+
+exports[`GDPRTool ::deleteData should throw error if no customerID is passed 1`] = `"missing \`customerId\` argument"`;
+
+exports[`GDPRTool ::getData should fetch data 1`] = `
+Array [
+  Object {
+    "id": "id1",
+  },
+  Object {
+    "id": "id2",
+  },
+  Object {
+    "id": "id1",
+  },
+  Object {
+    "id": "id2",
+  },
+  Object {
+    "id": "id1",
+  },
+  Object {
+    "id": "id2",
+  },
+  Object {
+    "id": "id1",
+  },
+  Object {
+    "id": "id2",
+  },
+  Object {
+    "id": "id1",
+  },
+  Object {
+    "id": "id2",
+  },
+  Object {
+    "id": "id1",
+  },
+  Object {
+    "id": "id2",
+  },
+  Object {
+    "id": "id1",
+  },
+  Object {
+    "id": "id2",
+  },
+]
+`;
+
+exports[`GDPRTool ::getData should throw error if no customerID is passed 1`] = `"missing \`customerId\` argument"`;

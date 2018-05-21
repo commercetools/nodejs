@@ -1,0 +1,36 @@
+{
+    "name": "@commercetools/gdpr-tool",
+    "version": "1.0.0-development",
+    "description": "Get and delete all data related to a single customer",
+    "main": "lib/main.js",
+    "scripts": {
+        "build": "babel src --out-dir lib"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/commercetools/nodejs/tree/master/packages/gdpr-tool"
+    },
+    "homepage": "https://commercetools.github.io/nodejs/cli/gdpr-tool.html",
+    "bugs": "https://github.com/commercetools/nodejs/issues",
+    "keywords": [
+        "commercetools",
+        "gdpr",
+        "get",
+        "delete",
+        "json",
+        "personal-data"
+    ],
+    "author": {
+        "name": "Daniel Eriksson",
+        "email": "daniel.eriksson@commercetools.de"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "@commercetools/api-request-builder": "^3.7.1",
+        "@commercetools/sdk-client": "^1.5.5",
+        "@commercetools/sdk-middleware-auth": "^3.5.2",
+        "@commercetools/sdk-middleware-http": "^3.0.0",
+        "@commercetools/sdk-middleware-user-agent": "^1.2.7",
+        "lodash.flatten": "^4.4.0"
+    }
+}
