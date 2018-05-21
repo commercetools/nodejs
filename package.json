@@ -80,7 +80,7 @@
     "jest-runner-eslint": "emmenko/jest-runner-eslint#nm-fix-rules-cli-option-built",
     "jest-runner-flowtype": "0.0.3",
     "jest-silent-reporter": "0.0.4",
-    "lerna": "2.10.2",
+    "lerna": "2.11.0",
     "lint-staged": "7.0.4",
     "npm-check-updates": "2.14.1",
     "prettier": "1.11.1",
