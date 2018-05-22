@@ -1,6 +1,11 @@
 /* @flow */
 import flatten from 'lodash.flatten'
-import type { SyncAction, ActionGroup } from 'types/sdk'
+import type {
+  SyncAction,
+  SyncActionConfig,
+  ActionGroup,
+  UpdateAction,
+} from 'types/sdk'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import * as orderActions from './order-actions'
@@ -8,18 +13,25 @@ import * as diffpatcher from './utils/diffpatcher'
 
 export const actionGroups = ['base', 'deliveries']
 
-function createOrderMapActions(mapActionGroup) {
-  return function doMapActions(diff, newObj, oldObj /* , options */) {
+function createOrderMapActions(
+  mapActionGroup: Function,
+  config: SyncActionConfig
+): (diff: Object, newObj: Object, oldObj: Object) => Array<UpdateAction> {
+  return function doMapActions(
+    diff: Object,
+    newObj: Object,
+    oldObj: Object /* , options */
+  ): Array<UpdateAction> {
     const allActions = []
 
     allActions.push(
-      mapActionGroup('base', () =>
-        orderActions.actionsMapBase(diff, oldObj, newObj)
+      mapActionGroup('base', (): Array<UpdateAction> =>
+        orderActions.actionsMapBase(diff, oldObj, newObj, config)
       )
     )
 
     allActions.push(
-      mapActionGroup('deliveries', () =>
+      mapActionGroup('deliveries', (): Array<UpdateAction> =>
         orderActions.actionsMapDeliveries(diff, oldObj, newObj)
       )
     )
@@ -28,8 +40,11 @@ function createOrderMapActions(mapActionGroup) {
   }
 }
 
-export default (config: Array<ActionGroup>): SyncAction => {
-  // config contains information about which action groups
+export default (
+  actionGroupsConfig: Array<ActionGroup>,
+  config: SyncActionConfig
+): SyncAction => {
+  // actionGroupsConfig contains information about which action groups
   // are white/black listed
 
   // createMapActionGroup returns function 'mapActionGroup' that takes params:
@@ -40,8 +55,8 @@ export default (config: Array<ActionGroup>): SyncAction => {
   // this resulting function mapActionGroup will call the callback function
   // for whitelisted action groups and return the return value of the callback
   // It will return an empty array for blacklisted action groups
-  const mapActionGroup = createMapActionGroup(config)
-  const doMapActions = createOrderMapActions(mapActionGroup)
+  const mapActionGroup = createMapActionGroup(actionGroupsConfig)
+  const doMapActions = createOrderMapActions(mapActionGroup, config)
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
   return { buildActions }
 }
