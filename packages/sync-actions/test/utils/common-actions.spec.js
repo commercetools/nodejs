@@ -6,6 +6,9 @@ import * as diffpatcher from '../../src/utils/diffpatcher'
 
 describe('Common actions', () => {
   describe('::buildBaseAttributesActions', () => {
+    let actions
+    let before
+    let now
     const testActions = [
       {
         action: 'changeName',
@@ -14,6 +17,10 @@ describe('Common actions', () => {
       {
         action: 'setDescription',
         key: 'description',
+      },
+      {
+        action: 'setKey',
+        key: 'key',
       },
       {
         action: 'setExternalId',
@@ -39,7 +46,7 @@ describe('Common actions', () => {
     ]
 
     test('should build base actions', () => {
-      const before = {
+      before = {
         name: { en: 'Foo' },
         description: undefined,
         externalId: '123',
@@ -47,7 +54,7 @@ describe('Common actions', () => {
         customerNumber: undefined,
         quantityOnStock: 1,
       }
-      const now = {
+      now = {
         name: { en: 'Foo1', de: 'Foo2' },
         description: { en: 'foo bar' },
         externalId: null,
@@ -56,7 +63,7 @@ describe('Common actions', () => {
         quantityOnStock: 0,
       }
 
-      const actions = buildBaseAttributesActions({
+      actions = buildBaseAttributesActions({
         actions: testActions,
         diff: diffpatcher.diff(before, now),
         oldObj: before,
@@ -70,6 +77,45 @@ describe('Common actions', () => {
         { action: 'changeQuantity', quantity: now.quantityOnStock },
       ])
     })
+
+    describe('with `shouldOmitEmptyString`', () => {
+      beforeEach(() => {
+        before = { key: undefined }
+        now = { key: '' }
+        actions = buildBaseAttributesActions({
+          actions: testActions,
+          diff: diffpatcher.diff(before, now),
+          oldObj: before,
+          newObj: now,
+          shouldOmitEmptyString: true,
+        })
+      })
+      it('should not return `setKey` action', () => {
+        expect(actions).toEqual([])
+      })
+    })
+
+    describe('without `shouldOmitEmptyString`', () => {
+      beforeEach(() => {
+        before = { key: undefined }
+        now = { key: '' }
+        actions = buildBaseAttributesActions({
+          actions: testActions,
+          diff: diffpatcher.diff(before, now),
+          oldObj: before,
+          newObj: now,
+          shouldOmitEmptyString: false,
+        })
+      })
+      it('should not return `setKey` action', () => {
+        expect(actions).toEqual([
+          {
+            action: 'setKey',
+            key: '',
+          },
+        ])
+      })
+    })
   })
 
   describe('::buildReferenceActions', () => {
@@ -79,6 +125,7 @@ describe('Common actions', () => {
       { action: 'setSupplyChannel', key: 'supplyChannel' },
       { action: 'setProductType', key: 'productType' },
       { action: 'transitionState', key: 'state' },
+      { action: 'setKey', key: 'key' },
     ]
 
     describe('without expanded references', () => {
