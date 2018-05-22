@@ -35,45 +35,45 @@ describe('GDPRTool', () => {
     })
   })
 
-  describe('::getData', () => {
+  describe('::getCustomerData', () => {
     let payload
     beforeEach(() => {
       payload = {
         statusCode: 200,
         body: {
-          results: [{ id: 'id1' }, { id: 'id2' }],
+          results: [{ version: 1, id: 'id1' }, { version: 1, id: 'id2' }],
         },
       }
       gdprTool.client.execute = jest.fn(() => Promise.resolve(payload))
     })
 
     test('should fetch data', async () => {
-      const data = await gdprTool.getData('customerId')
+      const data = await gdprTool.getCustomerData('customerId')
       expect(data).toMatchSnapshot()
     })
     test('should throw error if no customerID is passed', () => {
-      expect(() => gdprTool.getData()).toThrowErrorMatchingSnapshot()
+      expect(() => gdprTool.getCustomerData()).toThrowErrorMatchingSnapshot()
     })
   })
 
-  describe('::deleteData', () => {
+  describe('::deleteAll', () => {
     let payload
     beforeEach(() => {
       payload = {
         statusCode: 200,
         body: {
-          results: [{ id: 'id1' }, { id: 'id2' }],
+          results: [{ version: 1, id: 'id1' }, { version: 1, id: 'id2' }],
         },
       }
       gdprTool.client.execute = jest.fn(() => Promise.resolve(payload))
     })
     test('should delete data', async () => {
-      const data = await gdprTool.getData('customerId')
+      const data = await gdprTool.getCustomerData('customerId')
       expect(data).toBeTruthy()
-      await gdprTool.deleteData('customerId')
+      await gdprTool.deleteAll('customerId')
     })
     test('should throw error if no customerID is passed', () => {
-      expect(() => gdprTool.deleteData()).toThrowErrorMatchingSnapshot()
+      expect(() => gdprTool.deleteAll()).toThrowErrorMatchingSnapshot()
     })
   })
 

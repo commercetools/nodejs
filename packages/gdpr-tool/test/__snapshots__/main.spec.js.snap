@@ -11,53 +11,67 @@ Object {
 
 exports[`GDPRTool ::constructor should throw error if no \`apiConfig\` in \`options\` parameter 1`] = `"The constructor must be passed an \`apiConfig\` object"`;
 
-exports[`GDPRTool ::deleteData should throw error if no customerID is passed 1`] = `"missing \`customerId\` argument"`;
+exports[`GDPRTool ::deleteAll should throw error if no customerID is passed 1`] = `"missing \`customerId\` argument"`;
 
-exports[`GDPRTool ::getData should fetch data 1`] = `
+exports[`GDPRTool ::getCustomerData should fetch data 1`] = `
 Array [
   Object {
     "id": "id1",
+    "version": 1,
   },
   Object {
     "id": "id2",
+    "version": 1,
   },
   Object {
     "id": "id1",
+    "version": 1,
   },
   Object {
     "id": "id2",
+    "version": 1,
   },
   Object {
     "id": "id1",
+    "version": 1,
   },
   Object {
     "id": "id2",
+    "version": 1,
   },
   Object {
     "id": "id1",
+    "version": 1,
   },
   Object {
     "id": "id2",
+    "version": 1,
   },
   Object {
     "id": "id1",
+    "version": 1,
   },
   Object {
     "id": "id2",
+    "version": 1,
   },
   Object {
     "id": "id1",
+    "version": 1,
   },
   Object {
     "id": "id2",
+    "version": 1,
   },
   Object {
     "id": "id1",
+    "version": 1,
   },
   Object {
     "id": "id2",
+    "version": 1,
   },
 ]
 `;
 
-exports[`GDPRTool ::getData should throw error if no customerID is passed 1`] = `"missing \`customerId\` argument"`;
+exports[`GDPRTool ::getCustomerData should throw error if no customerID is passed 1`] = `"missing \`customerId\` argument"`;

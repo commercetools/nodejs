@@ -18,7 +18,7 @@
         "get",
         "delete",
         "json",
-        "personal-data"
+        "customer-data"
     ],
     "author": {
         "name": "Daniel Eriksson",

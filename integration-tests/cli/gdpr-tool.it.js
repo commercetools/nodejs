@@ -49,11 +49,9 @@ describe('gdpr tool', () => {
 
     await createData(apiConfig, 'customers', customer)
     customerId = await getId(apiConfig, 'customers')
-    customerId = customerId.body.results[0].id
-
     await createData(apiConfig, 'carts', [{ ...cart[0], customerId }])
     cartId = await getId(apiConfig, 'carts')
-    cartId = cartId.body.results[0].id
+
     await createData(apiConfig, 'carts', customLineItem, cartId)
 
     await Promise.all([
@@ -90,16 +88,17 @@ describe('gdpr tool', () => {
 
   describe('normal usage', () => {
     it('should get data on the CTP', async () => {
-      const data = await gdprTool.getData(customerId)
+      const data = await gdprTool.getCustomerData(customerId)
+
       expect(data).toHaveLength(10)
     })
 
     it('should delete data on the CTP', async () => {
-      await gdprTool.deleteData(customerId)
+      await gdprTool.deleteAll(customerId)
 
       // wait 1s for DB to finish deletion
       setTimeout(async () => {
-        const data = await gdprTool.getData(customerId)
+        const data = await gdprTool.getCustomerData(customerId)
         expect(data).toHaveLength(0)
       }, 1000)
     })

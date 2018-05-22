@@ -36,7 +36,7 @@ export default class GDPRTool {
     }
   }
 
-  getData(customerId) {
+  getCustomerData(customerId) {
     if (!customerId) throw Error('missing `customerId` argument')
 
     this.logger.info('Starting fetch data')
@@ -46,30 +46,24 @@ export default class GDPRTool {
     })
     const customersUri = requestBuilder.customers
       .where(`id = "${customerId}"`)
-      .perPage(500)
       .build()
     const ordersUri = requestBuilder.orders
       .where(`customerId = "${customerId}"`)
-      .perPage(500)
       .build()
     const cartsUri = requestBuilder.carts
       .where(`customerId = "${customerId}"`)
-      .perPage(500)
       .build()
     const paymentsUri = requestBuilder.payments
       .where(`customer(id = "${customerId}")`)
-      .perPage(500)
       .build()
     const shoppingsListsUri = requestBuilder.shoppingLists
       .where(`customer(id = "${customerId}")`)
-      .perPage(500)
       .build()
     const reviewsUri = requestBuilder.reviews
       .where(`customer(id = "${customerId}")`)
-      .perPage(500)
       .build()
 
-    const getUris = [
+    const urisOfResourcesToDelete = [
       customersUri,
       ordersUri,
       cartsUri,
@@ -78,38 +72,43 @@ export default class GDPRTool {
       reviewsUri,
     ]
 
-    // todo change to process instead of execute
-    // in case of more than 500 results
     return Promise.all(
-      getUris.map(uri => {
+      urisOfResourcesToDelete.map(uri => {
         const request = GDPRTool.buildRequest(uri, 'GET')
+        return this.client.process(request, payload => {
+          if (payload.statusCode !== 200 && payload.statusCode !== 404)
+            return Promise.reject(payload)
 
-        return this.client.execute(request)
+          return Promise.resolve(payload)
+        })
       })
-    )
-      .then(async data => {
-        let results = flatten(data.map(response => response.body.results))
-        const ids = results.map(result => result.id)
+    ).then(async data => {
+      const allData = flatten(data)
 
-        if (ids.length > 0) {
-          const reference = GDPRTool.buildReference(ids)
+      let results = flatten(allData.map(response => response.body.results))
+      const ids = results.map(result => result.id)
 
-          const messagesUri = requestBuilder.messages
-            .where(reference)
-            .perPage(500)
-            .build()
+      if (ids.length > 0) {
+        const reference = GDPRTool.buildReference(ids)
 
-          const request = GDPRTool.buildRequest(messagesUri, 'GET')
-          const messages = await this.client.execute(request)
+        const messagesUri = requestBuilder.messages.where(reference).build()
+        const request = GDPRTool.buildRequest(messagesUri, 'GET')
 
-          results = [...messages.body.results, ...results]
-        }
-        return Promise.resolve(results)
-      })
-      .catch(error => Promise.reject(error))
+        const messages = await this.client.process(request, payload => {
+          if (payload.statusCode !== 200 && payload.statusCode !== 404)
+            return Promise.reject(payload)
+
+          return Promise.resolve(payload)
+        })
+        const allMessages = flatten(messages.map(result => result.body.results))
+
+        results = [...allMessages, ...results]
+      }
+      return Promise.resolve(results)
+    })
   }
 
-  deleteData(customerId) {
+  deleteAll(customerId) {
     if (!customerId) throw Error('missing `customerId` argument')
     this.logger.info('Starting deletion')
 
@@ -117,49 +116,37 @@ export default class GDPRTool {
       projectKey: this.apiConfig.projectKey,
     })
     const customersUri = {
-      uri: requestBuilder.customers
-        .where(`id = "${customerId}"`)
-        .perPage(500)
-        .build(),
+      uri: requestBuilder.customers.where(`id = "${customerId}"`).build(),
       builder: requestBuilder.customers,
     }
     const ordersUri = {
-      uri: requestBuilder.orders
-        .where(`customerId = "${customerId}"`)
-        .perPage(500)
-        .build(),
+      uri: requestBuilder.orders.where(`customerId = "${customerId}"`).build(),
       builder: requestBuilder.orders,
     }
     const cartsUri = {
-      uri: requestBuilder.carts
-        .where(`customerId = "${customerId}"`)
-        .perPage(500)
-        .build(),
+      uri: requestBuilder.carts.where(`customerId = "${customerId}"`).build(),
       builder: requestBuilder.carts,
     }
     const paymentsUri = {
       uri: requestBuilder.payments
         .where(`customer(id = "${customerId}")`)
-        .perPage(500)
         .build(),
       builder: requestBuilder.payments,
     }
     const shoppingsListsUri = {
       uri: requestBuilder.shoppingLists
         .where(`customer(id = "${customerId}")`)
-        .perPage(500)
         .build(),
       builder: requestBuilder.shoppingLists,
     }
     const reviewsUri = {
       uri: requestBuilder.reviews
         .where(`customer(id = "${customerId}")`)
-        .perPage(500)
         .build(),
       builder: requestBuilder.reviews,
     }
 
-    const getUris = [
+    const urisOfResourcesToDelete = [
       customersUri,
       ordersUri,
       cartsUri,
@@ -168,32 +155,30 @@ export default class GDPRTool {
       reviewsUri,
     ]
 
-    // todo change to process instead of execute
-    // in case of more than 500 results
-    getUris.forEach(uri => {
+    urisOfResourcesToDelete.forEach(uri => {
       const request = GDPRTool.buildRequest(uri.uri, 'GET')
 
-      this.client
-        .execute(request)
-        .then(async payload => {
-          if (payload.statusCode !== 200) return Promise.reject(payload)
-          GDPRTool.delete(payload, uri.builder)
+      this.client.process(request, payload => {
+        if (payload.statusCode !== 200 && payload.statusCode !== 404)
+          return Promise.reject(payload)
 
-          return Promise.resolve()
-        })
-        .catch(error => Promise.reject(error))
+        this._deleteOne(payload, uri.builder)
+        return Promise.resolve()
+      })
     })
   }
-  static delete(payload, builder) {
+
+  _deleteOne(payload, builder) {
     const results = payload.body.results
     if (results.length > 0) {
       results.forEach(async result => {
+        if (!result) return
         const deleteRequest = GDPRTool.buildDeleteRequests(result, builder)
-
-        return this.client.execute(deleteRequest)
+        this.client.execute(deleteRequest)
       })
     }
   }
+
   static buildDeleteRequests(result, builder) {
     let deleteUri = builder
       .byId(result.id)

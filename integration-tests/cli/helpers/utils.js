@@ -79,5 +79,7 @@ export function getId(apiConfig, entityName) {
     method: 'GET',
   }
 
-  return client.execute(request)
+  return client
+    .execute(request)
+    .then(result => Promise.resolve(result.body.results[0].id))
 }
