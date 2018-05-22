@@ -179,26 +179,148 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  test('should build the `setDescription` action', () => {
-    const before = {
-      description: {
-        en: 'en-description-before',
-        de: 'de-description-before',
-      },
-    }
-
-    const now = {
-      description: { en: 'en-description-now', de: 'de-description-now' },
-    }
-
-    const expected = [
-      {
-        action: 'setDescription',
+  describe('setDescription', () => {
+    let before
+    let now
+    let updateActions
+    beforeEach(() => {
+      before = {
+        description: {
+          en: 'en-description-before',
+          de: 'de-description-before',
+        },
+      }
+      now = {
         description: { en: 'en-description-now', de: 'de-description-now' },
-      },
-    ]
-    const actual = productDiscountsSync.buildActions(now, before)
-    expect(actual).toEqual(expected)
+      }
+      updateActions = productDiscountsSync.buildActions(now, before)
+    })
+    it('should build the `setDescription` action', () => {
+      expect(updateActions).toEqual([
+        {
+          action: 'setDescription',
+          description: { en: 'en-description-now', de: 'de-description-now' },
+        },
+      ])
+    })
+    describe('with `shouldOmitEmptyString`', () => {
+      beforeEach(() => {
+        productDiscountsSync = productDiscountsSyncFn([], {
+          shouldOmitEmptyString: true,
+        })
+      })
+      describe('when old description is `null`', () => {
+        beforeEach(() => {
+          before = { description: null }
+        })
+        describe('when new description is `undefined`', () => {
+          beforeEach(() => {
+            now = { description: undefined }
+            updateActions = productDiscountsSync.buildActions(now, before)
+          })
+          it('should not generate `setDescription`', () => {
+            expect(updateActions).toEqual([])
+          })
+        })
+        describe('when new desccription is empty string', () => {
+          beforeEach(() => {
+            now = { desccription: '' }
+            updateActions = productDiscountsSync.buildActions(now, before)
+          })
+          it('should not generate `setDescription`', () => {
+            expect(updateActions).toEqual([])
+          })
+        })
+        describe('when new description is not an empty string', () => {
+          beforeEach(() => {
+            now = { description: 'foo' }
+            updateActions = productDiscountsSync.buildActions(now, before)
+          })
+          it('should generate `setDescription`', () => {
+            expect(updateActions).toEqual([
+              {
+                action: 'setDescription',
+                description: 'foo',
+              },
+            ])
+          })
+        })
+      })
+      describe('when old description is `undefined`', () => {
+        beforeEach(() => {
+          before = { description: undefined }
+        })
+        describe('when new description is `null`', () => {
+          beforeEach(() => {
+            now = { description: null }
+            updateActions = productDiscountsSync.buildActions(now, before)
+          })
+          it('should not generate `setDescription`', () => {
+            expect(updateActions).toEqual([])
+          })
+        })
+        describe('when new description is empty string', () => {
+          beforeEach(() => {
+            now = { description: '' }
+            updateActions = productDiscountsSync.buildActions(now, before)
+          })
+          it('should not generate `setDescription`', () => {
+            expect(updateActions).toEqual([])
+          })
+        })
+        describe('when new description is not an empty string', () => {
+          beforeEach(() => {
+            now = { description: 'foo' }
+            updateActions = productDiscountsSync.buildActions(now, before)
+          })
+          it('should generate `setDescription`', () => {
+            expect(updateActions).toEqual([
+              {
+                action: 'setDescription',
+                description: 'foo',
+              },
+            ])
+          })
+        })
+      })
+      describe('when old description is an empty string', () => {
+        beforeEach(() => {
+          before = { description: '' }
+        })
+        describe('when new description is `null`', () => {
+          beforeEach(() => {
+            now = { description: null }
+            updateActions = productDiscountsSync.buildActions(now, before)
+          })
+          it('should not generate `setDescription`', () => {
+            expect(updateActions).toEqual([])
+          })
+        })
+        describe('when new description is `undefined`', () => {
+          beforeEach(() => {
+            now = { description: undefined }
+            updateActions = productDiscountsSync.buildActions(now, before)
+          })
+          it('should not generate `setDescription`', () => {
+            expect(updateActions).toEqual([])
+          })
+        })
+        describe('when new description is not an empty string', () => {
+          beforeEach(() => {
+            now = { description: 'foo' }
+            updateActions = productDiscountsSync.buildActions(now, before)
+          })
+          it('should generate `setDescription`', () => {
+            expect(updateActions).toEqual([
+              {
+                action: 'setDescription',
+                description: 'foo',
+              },
+            ])
+          })
+        })
+      })
+    })
   })
 
   test('should build the `setValidFrom` action', () => {
