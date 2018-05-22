@@ -25,143 +25,18 @@ describe('Actions', () => {
   })
 
   describe('base', () => {
-    describe('setKey', () => {
-      test('should build `setKey` action', () => {
-        const before = {
-          key: 'Key 1',
-        }
-        const now = {
-          key: 'Key 2',
-        }
+    test('should build `setKey` action', () => {
+      const before = {
+        key: 'Key 1',
+      }
+      const now = {
+        key: 'Key 2',
+      }
 
-        const actual = shippingMethodsSync.buildActions(now, before)
-        const expected = [{ action: 'setKey', key: now.key }]
-        expect(actual).toEqual(expected)
-      })
-
-      describe('with `shouldOmitEmptyString`', () => {
-        let before
-        let now
-        let updateActions
-        beforeEach(() => {
-          shippingMethodsSync = shippingMethodsSyncFn([], {
-            shouldOmitEmptyString: true,
-          })
-        })
-        describe('when old key is `null`', () => {
-          beforeEach(() => {
-            before = { key: null }
-          })
-          describe('when new key is `undefined`', () => {
-            beforeEach(() => {
-              now = { key: undefined }
-              updateActions = shippingMethodsSync.buildActions(now, before)
-            })
-            it('should not generate `setKey`', () => {
-              expect(updateActions).toEqual([])
-            })
-          })
-          describe('when new key is empty string', () => {
-            beforeEach(() => {
-              now = { key: '' }
-              updateActions = shippingMethodsSync.buildActions(now, before)
-            })
-            it('should not generate `setKey`', () => {
-              expect(updateActions).toEqual([])
-            })
-          })
-          describe('when new key is not an empty string', () => {
-            beforeEach(() => {
-              now = { key: 'foo' }
-              updateActions = shippingMethodsSync.buildActions(now, before)
-            })
-            it('should generate `setKey`', () => {
-              expect(updateActions).toEqual([
-                {
-                  action: 'setKey',
-                  key: 'foo',
-                },
-              ])
-            })
-          })
-        })
-        describe('when old key is `undefined`', () => {
-          beforeEach(() => {
-            before = { key: undefined }
-          })
-          describe('when new key is `null`', () => {
-            beforeEach(() => {
-              now = { key: null }
-              updateActions = shippingMethodsSync.buildActions(now, before)
-            })
-            it('should not generate `setKey`', () => {
-              expect(updateActions).toEqual([])
-            })
-          })
-          describe('when new key is empty string', () => {
-            beforeEach(() => {
-              now = { key: '' }
-              updateActions = shippingMethodsSync.buildActions(now, before)
-            })
-            it('should not generate `setKey`', () => {
-              expect(updateActions).toEqual([])
-            })
-          })
-          describe('when new key is not an empty string', () => {
-            beforeEach(() => {
-              now = { key: 'foo' }
-              updateActions = shippingMethodsSync.buildActions(now, before)
-            })
-            it('should generate `setKey`', () => {
-              expect(updateActions).toEqual([
-                {
-                  action: 'setKey',
-                  key: 'foo',
-                },
-              ])
-            })
-          })
-        })
-        describe('when old key is an empty string', () => {
-          beforeEach(() => {
-            before = { key: '' }
-          })
-          describe('when new key is `null`', () => {
-            beforeEach(() => {
-              now = { key: null }
-              updateActions = shippingMethodsSync.buildActions(now, before)
-            })
-            it('should not generate `setKey`', () => {
-              expect(updateActions).toEqual([])
-            })
-          })
-          describe('when new key is `undefined`', () => {
-            beforeEach(() => {
-              now = { key: undefined }
-              updateActions = shippingMethodsSync.buildActions(now, before)
-            })
-            it('should not generate `setKey`', () => {
-              expect(updateActions).toEqual([])
-            })
-          })
-          describe('when new key is not an empty string', () => {
-            beforeEach(() => {
-              now = { key: 'foo' }
-              updateActions = shippingMethodsSync.buildActions(now, before)
-            })
-            it('should generate `setKey`', () => {
-              expect(updateActions).toEqual([
-                {
-                  action: 'setKey',
-                  key: 'foo',
-                },
-              ])
-            })
-          })
-        })
-      })
+      const actual = shippingMethodsSync.buildActions(now, before)
+      const expected = [{ action: 'setKey', key: now.key }]
+      expect(actual).toEqual(expected)
     })
-
     test('should build `changeName` action', () => {
       const before = {
         name: 'Shipping Method 1',

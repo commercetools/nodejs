@@ -71,145 +71,22 @@ describe('Actions', () => {
     statesSync = statesSyncFn()
   })
 
-  describe('setName', () => {
-    test('should build `setName` action', () => {
-      const before = {
-        name: { en: 'previous-en-name', de: 'previous-de-name' },
-      }
-      const now = {
-        name: { en: 'current-en-name', de: 'current-de-name' },
-      }
+  test('should build `setName` action', () => {
+    const before = {
+      name: { en: 'previous-en-name', de: 'previous-de-name' },
+    }
+    const now = {
+      name: { en: 'current-en-name', de: 'current-de-name' },
+    }
 
-      const actual = statesSync.buildActions(now, before)
-      const expected = [
-        {
-          action: 'setName',
-          name: { en: 'current-en-name', de: 'current-de-name' },
-        },
-      ]
-      expect(actual).toEqual(expected)
-    })
-    describe('with `shouldOmitEmptyString`', () => {
-      let before
-      let now
-      let updateActions
-      beforeEach(() => {
-        statesSync = statesSyncFn([], {
-          shouldOmitEmptyString: true,
-        })
-      })
-      describe('when old name is `null`', () => {
-        beforeEach(() => {
-          before = { name: null }
-        })
-        describe('when new key is `undefined`', () => {
-          beforeEach(() => {
-            now = { name: undefined }
-            updateActions = statesSync.buildActions(now, before)
-          })
-          it('should not generate `setName`', () => {
-            expect(updateActions).toEqual([])
-          })
-        })
-        describe('when new name is empty string', () => {
-          beforeEach(() => {
-            now = { name: '' }
-            updateActions = statesSync.buildActions(now, before)
-          })
-          it('should not generate `setName`', () => {
-            expect(updateActions).toEqual([])
-          })
-        })
-        describe('when new name is not an empty string', () => {
-          beforeEach(() => {
-            now = { name: 'foo' }
-            updateActions = statesSync.buildActions(now, before)
-          })
-          it('should generate `setName`', () => {
-            expect(updateActions).toEqual([
-              {
-                action: 'setName',
-                name: 'foo',
-              },
-            ])
-          })
-        })
-      })
-      describe('when old name is `undefined`', () => {
-        beforeEach(() => {
-          before = { name: undefined }
-        })
-        describe('when new name is `null`', () => {
-          beforeEach(() => {
-            now = { name: null }
-            updateActions = statesSync.buildActions(now, before)
-          })
-          it('should not generate `setName`', () => {
-            expect(updateActions).toEqual([])
-          })
-        })
-        describe('when new name is empty string', () => {
-          beforeEach(() => {
-            now = { name: '' }
-            updateActions = statesSync.buildActions(now, before)
-          })
-          it('should not generate `setName`', () => {
-            expect(updateActions).toEqual([])
-          })
-        })
-        describe('when new name is not an empty string', () => {
-          beforeEach(() => {
-            now = { name: 'foo' }
-            updateActions = statesSync.buildActions(now, before)
-          })
-          it('should generate `setName`', () => {
-            expect(updateActions).toEqual([
-              {
-                action: 'setName',
-                name: 'foo',
-              },
-            ])
-          })
-        })
-      })
-      describe('when old key is an empty string', () => {
-        beforeEach(() => {
-          before = { key: '' }
-        })
-        describe('when new key is `null`', () => {
-          beforeEach(() => {
-            now = { key: null }
-            updateActions = statesSync.buildActions(now, before)
-          })
-          it('should not generate `setName`', () => {
-            expect(updateActions).toEqual([])
-          })
-        })
-        describe('when new key is `undefined`', () => {
-          beforeEach(() => {
-            now = { key: undefined }
-            updateActions = statesSync.buildActions(now, before)
-          })
-          it('should not generate `setName`', () => {
-            expect(updateActions).toEqual([])
-          })
-        })
-        describe('when new name is not an empty string', () => {
-          beforeEach(() => {
-            now = { name: 'foo' }
-            updateActions = statesSync.buildActions(now, before)
-          })
-          it('should generate `setName`', () => {
-            expect(updateActions).toEqual([
-              {
-                action: 'setName',
-                name: 'foo',
-              },
-            ])
-          })
-        })
-      })
-    })
+    const actual = statesSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'setName',
+        name: { en: 'current-en-name', de: 'current-de-name' },
+      },
+    ]
+    expect(actual).toEqual(expected)
   })
 
   test('should build `setDescription` action', () => {

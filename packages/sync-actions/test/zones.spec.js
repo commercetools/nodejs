@@ -33,145 +33,22 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  describe('setDescription', () => {
-    test('should build `setDescription` action', () => {
-      const before = {
-        description: 'Zone for Europe',
-      }
-      const now = {
-        description: 'Zone for Asia',
-      }
+  test('should build `setDescription` action', () => {
+    const before = {
+      description: 'Zone for Europe',
+    }
+    const now = {
+      description: 'Zone for Asia',
+    }
 
-      const actual = zonesSync.buildActions(now, before)
-      const expected = [
-        {
-          action: 'setDescription',
-          description: now.description,
-        },
-      ]
-      expect(actual).toEqual(expected)
-    })
-    describe('with `shouldOmitEmptyString`', () => {
-      let before
-      let now
-      let updateActions
-      beforeEach(() => {
-        zonesSync = zonesSyncFn([], {
-          shouldOmitEmptyString: true,
-        })
-      })
-      describe('when old key is `null`', () => {
-        beforeEach(() => {
-          before = { description: null }
-        })
-        describe('when new key is `undefined`', () => {
-          beforeEach(() => {
-            now = { description: undefined }
-            updateActions = zonesSync.buildActions(now, before)
-          })
-          it('should not generate `setDescription`', () => {
-            expect(updateActions).toEqual([])
-          })
-        })
-        describe('when new key is empty string', () => {
-          beforeEach(() => {
-            now = { description: '' }
-            updateActions = zonesSync.buildActions(now, before)
-          })
-          it('should not generate `setDescription`', () => {
-            expect(updateActions).toEqual([])
-          })
-        })
-        describe('when new key is not an empty string', () => {
-          beforeEach(() => {
-            now = { description: 'foo' }
-            updateActions = zonesSync.buildActions(now, before)
-          })
-          it('should generate `setDescription`', () => {
-            expect(updateActions).toEqual([
-              {
-                action: 'setDescription',
-                description: 'foo',
-              },
-            ])
-          })
-        })
-      })
-      describe('when old key is `undefined`', () => {
-        beforeEach(() => {
-          before = { description: undefined }
-        })
-        describe('when new key is `null`', () => {
-          beforeEach(() => {
-            now = { description: null }
-            updateActions = zonesSync.buildActions(now, before)
-          })
-          it('should not generate `setDescription`', () => {
-            expect(updateActions).toEqual([])
-          })
-        })
-        describe('when new key is empty string', () => {
-          beforeEach(() => {
-            now = { description: '' }
-            updateActions = zonesSync.buildActions(now, before)
-          })
-          it('should not generate `setDescription`', () => {
-            expect(updateActions).toEqual([])
-          })
-        })
-        describe('when new key is not an empty string', () => {
-          beforeEach(() => {
-            now = { description: 'foo' }
-            updateActions = zonesSync.buildActions(now, before)
-          })
-          it('should generate `setDescription`', () => {
-            expect(updateActions).toEqual([
-              {
-                action: 'setDescription',
-                description: 'foo',
-              },
-            ])
-          })
-        })
-      })
-      describe('when old key is an empty string', () => {
-        beforeEach(() => {
-          before = { description: '' }
-        })
-        describe('when new key is `null`', () => {
-          beforeEach(() => {
-            now = { description: null }
-            updateActions = zonesSync.buildActions(now, before)
-          })
-          it('should not generate `setDescription`', () => {
-            expect(updateActions).toEqual([])
-          })
-        })
-        describe('when new key is `undefined`', () => {
-          beforeEach(() => {
-            now = { description: undefined }
-            updateActions = zonesSync.buildActions(now, before)
-          })
-          it('should not generate `setDescription`', () => {
-            expect(updateActions).toEqual([])
-          })
-        })
-        describe('when new key is not an empty string', () => {
-          beforeEach(() => {
-            now = { description: 'foo' }
-            updateActions = zonesSync.buildActions(now, before)
-          })
-          it('should generate `setDescription`', () => {
-            expect(updateActions).toEqual([
-              {
-                action: 'setDescription',
-                description: 'foo',
-              },
-            ])
-          })
-        })
-      })
-    })
+    const actual = zonesSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'setDescription',
+        description: now.description,
+      },
+    ]
+    expect(actual).toEqual(expected)
   })
 
   describe('`addLocation`', () => {
