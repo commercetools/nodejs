@@ -1,6 +1,11 @@
 /* @flow */
 import flatten from 'lodash.flatten'
-import type { SyncAction, ActionGroup } from 'types/sdk'
+import type {
+  SyncAction,
+  SyncActionConfig,
+  ActionGroup,
+  UpdateAction,
+} from 'types/sdk'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import * as productActions from './product-actions'
@@ -19,8 +24,21 @@ const actionGroups = [
   'categoryOrderHints',
 ]
 
-function createProductMapActions(mapActionGroup) {
-  return function doMapActions(diff, newObj, oldObj, options) {
+function createProductMapActions(
+  mapActionGroup: Function,
+  config: SyncActionConfig
+): (
+  diff: Object,
+  newObj: Object,
+  oldObj: Object,
+  options: Object
+) => Array<UpdateAction> {
+  return function doMapActions(
+    diff: Object,
+    newObj: Object,
+    oldObj: Object,
+    options: Object = {}
+  ): Array<UpdateAction> {
     const allActions = []
     const { sameForAllAttributeNames } = options
 
@@ -31,7 +49,7 @@ function createProductMapActions(mapActionGroup) {
     )
 
     allActions.push(
-      mapActionGroup('attributes', () =>
+      mapActionGroup('attributes', (): Array<UpdateAction> =>
         productActions.actionsMapAttributes(
           diff,
           oldObj,
@@ -43,25 +61,25 @@ function createProductMapActions(mapActionGroup) {
     )
 
     allActions.push(
-      mapActionGroup('variants', () =>
+      mapActionGroup('variants', (): Array<UpdateAction> =>
         productActions.actionsMapVariants(diff, oldObj, newObj)
       )
     )
 
     allActions.push(
-      mapActionGroup('base', () =>
-        productActions.actionsMapBase(diff, oldObj, newObj)
+      mapActionGroup('base', (): Array<UpdateAction> =>
+        productActions.actionsMapBase(diff, oldObj, newObj, config)
       )
     )
 
     allActions.push(
-      mapActionGroup('meta', () =>
+      mapActionGroup('meta', (): Array<UpdateAction> =>
         productActions.actionsMapMeta(diff, oldObj, newObj)
       )
     )
 
     allActions.push(
-      mapActionGroup('references', () =>
+      mapActionGroup('references', (): Array<UpdateAction> =>
         productActions.actionsMapReferences(diff, oldObj, newObj)
       )
     )
@@ -69,25 +87,25 @@ function createProductMapActions(mapActionGroup) {
     allActions.push(productActions.actionsMapMasterVariant(oldObj, newObj))
 
     allActions.push(
-      mapActionGroup('images', () =>
+      mapActionGroup('images', (): Array<UpdateAction> =>
         productActions.actionsMapImages(diff, oldObj, newObj, variantHashMap)
       )
     )
 
     allActions.push(
-      mapActionGroup('prices', () =>
+      mapActionGroup('prices', (): Array<UpdateAction> =>
         productActions.actionsMapPrices(diff, oldObj, newObj, variantHashMap)
       )
     )
 
     allActions.push(
-      mapActionGroup('categories', () =>
+      mapActionGroup('categories', (): Array<UpdateAction> =>
         productActions.actionsMapCategories(diff)
       )
     )
 
     allActions.push(
-      mapActionGroup('categories', () =>
+      mapActionGroup('categories', (): Array<UpdateAction> =>
         productActions.actionsMapCategoryOrderHints(diff, oldObj)
       )
     )
@@ -96,13 +114,16 @@ function createProductMapActions(mapActionGroup) {
   }
 }
 
-function moveMasterVariantsIntoVariants(before, now) {
-  const move = obj => ({
+function moveMasterVariantsIntoVariants(
+  before: Object,
+  now: Object
+): Array<Object> {
+  const move = (obj: Object): Object => ({
     ...obj,
     masterVariant: undefined,
     variants: [obj.masterVariant, ...(obj.variants || [])],
   })
-  const hasMasterVariant = obj => obj && obj.masterVariant
+  const hasMasterVariant = (obj: Object): Object => obj && obj.masterVariant
 
   return [
     hasMasterVariant(before) ? move(before) : before,
@@ -110,9 +131,12 @@ function moveMasterVariantsIntoVariants(before, now) {
   ]
 }
 
-export default (config: Array<ActionGroup>): SyncAction => {
-  const mapActionGroup = createMapActionGroup(config)
-  const doMapActions = createProductMapActions(mapActionGroup)
+export default (
+  actionGroupsConfig: Array<ActionGroup>,
+  config: SyncActionConfig
+): SyncAction => {
+  const mapActionGroup = createMapActionGroup(actionGroupsConfig)
+  const doMapActions = createProductMapActions(mapActionGroup, config)
 
   const buildActions = createBuildActions(
     diffpatcher.diff,
