@@ -62,7 +62,6 @@ For more direct usage, it is possible to use this module directly:
 
 ```js
 import CustomerErasure from '@commercetools/customer-erasure'
-import fs from 'fs'
 
 const options = {
     apiConfig: {

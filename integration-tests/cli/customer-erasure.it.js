@@ -15,7 +15,7 @@ import {
 } from './helpers/customer-erasure.data'
 
 let projectKey
-if (process.env.CI === 'true') projectKey = 'customer-erasure-integration-test'
+if (process.env.CI === 'true') projectKey = 'custom-objects-import-int-tests'
 else projectKey = process.env.npm_config_projectkey
 
 describe('customer erasure', () => {
