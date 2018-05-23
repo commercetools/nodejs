@@ -43,7 +43,7 @@ export default class CustomerErasure {
   getCustomerData(customerId) {
     if (!customerId) throw Error('missing `customerId` argument')
 
-    this.logger.info('Starting fetch data')
+    this.logger.info('Starting to fetch data')
 
     const requestBuilder = createRequestBuilder({
       projectKey: this.apiConfig.projectKey,
@@ -108,6 +108,7 @@ export default class CustomerErasure {
 
         results = [...allMessages, ...results]
       }
+      this.logger.info('Export operation completed successfully')
       return Promise.resolve(results)
     })
   }

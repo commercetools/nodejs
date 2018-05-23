@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`customer erasure CLI basic functionality should print usage information given the help flag 1`] = `
+"
+Usage: customer-erasure [options]
+Export and delete all data related to a single customer
+
+Options:
+  --help            Show help text.                                    [boolean]
+  --version         Show version number                                [boolean]
+  --output, -o      Path to output file.                     [default: \\"stdout\\"]
+  --customerId, -c  Customer to fetch or delete.                      [required]
+  --apiUrl          The host URL of the HTTP API service.
+                                              [default: \\"https://api.sphere.io\\"]
+  --authUrl         The host URL of the OAuth API service.
+                                             [default: \\"https://auth.sphere.io\\"]
+  --accessToken     CTP client access token.
+  --projectKey, -p  API project key.                                  [required]
+  --deleteAll, -D   Delete all data related to customer.               [boolean]
+  --logLevel        Logging level: error, warn, info or debug. [default: \\"info\\"]
+  --prettyLogs      Pretty print logs to the terminal                  [boolean]
+  --logFile         Path to where to save logs file.
+                                      [string] [default: \\"customer-erasure.log\\"]
+
+"
+`;
