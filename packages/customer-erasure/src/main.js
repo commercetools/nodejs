@@ -96,25 +96,28 @@ export default class CustomerErasure {
 
       if (ids.length > 0) {
         const reference = CustomerErasure.buildReference(ids)
-
         const messagesUri = requestBuilder.messages.where(reference).build()
         const request = CustomerErasure.buildRequest(messagesUri, 'GET')
 
-        const messages = await this.client.process(request, payload => {
-          if (payload.statusCode !== 200 && payload.statusCode !== 404)
-            return Promise.reject(
-              Error(`Request returned status code ${payload.statusCode}`)
-            )
+        const messages = await this._getAllMessages(request)
 
-          return Promise.resolve(payload)
-        })
-        const allMessages = flatten(messages.map(result => result.body.results))
-
-        results = [...allMessages, ...results]
+        results = [...messages, ...results]
       }
       this.logger.info('Export operation completed successfully')
       return Promise.resolve(results)
     })
+  }
+
+  async _getAllMessages(request) {
+    const messages = await this.client.process(request, payload => {
+      if (payload.statusCode !== 200 && payload.statusCode !== 404)
+        return Promise.reject(
+          Error(`Request returned status code ${payload.statusCode}`)
+        )
+
+      return Promise.resolve(payload)
+    })
+    return flatten(messages.map(result => result.body.results))
   }
 
   deleteAll(customerId) {

@@ -99,28 +99,36 @@ describe('CustomerErasure', () => {
   })
 
   describe('::deleteAll', () => {
-    let payload1
-    let payload2
-    beforeEach(() => {
-      payload1 = {
-        statusCode: 200,
-        body: {
-          results: [{ version: 1, id: 'id1' }, { version: 1, id: 'id2' }],
-        },
-      }
-      payload2 = {
-        statusCode: 404,
-        body: {
-          results: [],
-        },
-      }
-
-      customerErasure.client.process = jest
-        .fn((request, callback) => callback(payload1))
-        .mockImplementationOnce((request, callback) => callback(payload2))
+    describe('with status code 200', () => {
+      let payload
+      beforeEach(() => {
+        payload = {
+          statusCode: 200,
+          body: {
+            results: [{ version: 1, id: 'id1' }, { version: 1, id: 'id2' }],
+          },
+        }
+        customerErasure.client.execute = jest.fn(() => Promise.resolve(payload))
+      })
+      test('should delete data', async () => {
+        await customerErasure.deleteAll('customerId')
+      })
     })
-    test('should delete data', async () => {
-      await customerErasure.deleteAll('customerId')
+
+    describe('with status code 404', () => {
+      let payload
+      beforeEach(() => {
+        payload = {
+          statusCode: 404,
+          body: {
+            results: [],
+          },
+        }
+        customerErasure.client.execute = jest.fn(() => Promise.resolve(payload))
+      })
+      test('should delete data', async () => {
+        await customerErasure.deleteAll('customerId')
+      })
     })
     test('should throw error if no customerID is passed', () => {
       expect(() => customerErasure.deleteAll()).toThrowErrorMatchingSnapshot()
@@ -140,6 +148,25 @@ describe('CustomerErasure', () => {
       expect(
         CustomerErasure.buildRequest('example.com', 'GET')
       ).toMatchSnapshot()
+    })
+  })
+
+  describe('::_getAllMessages', () => {
+    describe('with status code 404', () => {
+      beforeEach(() => {
+        const payload = {
+          statusCode: 404,
+          body: {
+            results: [],
+          },
+        }
+        customerErasure.client.execute = jest.fn(() => Promise.resolve(payload))
+      })
+      test('should fetch empty data', async () => {
+        const request = CustomerErasure.buildRequest('example.com', 'GET')
+        const data = await customerErasure._getAllMessages(request)
+        expect(data).toHaveLength(0)
+      })
     })
   })
 })
