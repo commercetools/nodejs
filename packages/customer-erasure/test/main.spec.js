@@ -99,19 +99,27 @@ describe('CustomerErasure', () => {
   })
 
   describe('::deleteAll', () => {
-    let payload
+    let payload1
+    let payload2
     beforeEach(() => {
-      payload = {
+      payload1 = {
         statusCode: 200,
         body: {
           results: [{ version: 1, id: 'id1' }, { version: 1, id: 'id2' }],
         },
       }
-      customerErasure.client.execute = jest.fn(() => Promise.resolve(payload))
+      payload2 = {
+        statusCode: 404,
+        body: {
+          results: [],
+        },
+      }
+
+      customerErasure.client.process = jest
+        .fn((request, callback) => callback(payload1))
+        .mockImplementationOnce((request, callback) => callback(payload2))
     })
     test('should delete data', async () => {
-      const data = await customerErasure.getCustomerData('customerId')
-      expect(data).toBeTruthy()
       await customerErasure.deleteAll('customerId')
     })
     test('should throw error if no customerID is passed', () => {
