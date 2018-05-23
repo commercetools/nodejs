@@ -1,14 +1,14 @@
 import silentLogger from '../src/utils/silent-logger'
-import GDPRTool from '../src/main'
+import CustomerErasure from '../src/main'
 
-describe('GDPRTool', () => {
+describe('CustomerErasure', () => {
   const logger = {
     ...silentLogger,
   }
 
-  let gdprTool
+  let customerErasure
   beforeEach(async () => {
-    gdprTool = new GDPRTool(
+    customerErasure = new CustomerErasure(
       {
         apiConfig: {
           projectKey: 'test-project-key',
@@ -20,18 +20,20 @@ describe('GDPRTool', () => {
 
   describe('::constructor', () => {
     test('should be a function', () => {
-      expect(typeof GDPRTool).toBe('function')
+      expect(typeof CustomerErasure).toBe('function')
     })
 
     test('should set default properties', () => {
-      expect(gdprTool.apiConfig).toEqual({
+      expect(customerErasure.apiConfig).toEqual({
         projectKey: 'test-project-key',
       })
-      expect(gdprTool.logger).toEqual(logger)
+      expect(customerErasure.logger).toEqual(logger)
     })
 
     test('should throw error if no `apiConfig` in `options` parameter', () => {
-      expect(() => new GDPRTool({ foo: 'bar' })).toThrowErrorMatchingSnapshot()
+      expect(
+        () => new CustomerErasure({ foo: 'bar' })
+      ).toThrowErrorMatchingSnapshot()
     })
   })
 
@@ -44,15 +46,17 @@ describe('GDPRTool', () => {
           results: [{ version: 1, id: 'id1' }, { version: 1, id: 'id2' }],
         },
       }
-      gdprTool.client.execute = jest.fn(() => Promise.resolve(payload))
+      customerErasure.client.execute = jest.fn(() => Promise.resolve(payload))
     })
 
     test('should fetch data', async () => {
-      const data = await gdprTool.getCustomerData('customerId')
+      const data = await customerErasure.getCustomerData('customerId')
       expect(data).toMatchSnapshot()
     })
     test('should throw error if no customerID is passed', () => {
-      expect(() => gdprTool.getCustomerData()).toThrowErrorMatchingSnapshot()
+      expect(() =>
+        customerErasure.getCustomerData()
+      ).toThrowErrorMatchingSnapshot()
     })
   })
 
@@ -65,27 +69,31 @@ describe('GDPRTool', () => {
           results: [{ version: 1, id: 'id1' }, { version: 1, id: 'id2' }],
         },
       }
-      gdprTool.client.execute = jest.fn(() => Promise.resolve(payload))
+      customerErasure.client.execute = jest.fn(() => Promise.resolve(payload))
     })
     test('should delete data', async () => {
-      const data = await gdprTool.getCustomerData('customerId')
+      const data = await customerErasure.getCustomerData('customerId')
       expect(data).toBeTruthy()
-      await gdprTool.deleteAll('customerId')
+      await customerErasure.deleteAll('customerId')
     })
     test('should throw error if no customerID is passed', () => {
-      expect(() => gdprTool.deleteAll()).toThrowErrorMatchingSnapshot()
+      expect(() => customerErasure.deleteAll()).toThrowErrorMatchingSnapshot()
     })
   })
 
   describe('::buildReference', () => {
     test('should build reference', () => {
-      expect(GDPRTool.buildReference(['id1', 'id2', 'id3'])).toMatchSnapshot()
+      expect(
+        CustomerErasure.buildReference(['id1', 'id2', 'id3'])
+      ).toMatchSnapshot()
     })
   })
 
   describe('::buildRequest', () => {
     test('should build request', () => {
-      expect(GDPRTool.buildRequest('example.com', 'GET')).toMatchSnapshot()
+      expect(
+        CustomerErasure.buildRequest('example.com', 'GET')
+      ).toMatchSnapshot()
     })
   })
 })

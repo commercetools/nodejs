@@ -4,10 +4,10 @@ import pino from 'pino'
 import PrettyError from 'pretty-error'
 import yargs from 'yargs'
 
-import GDPRTool from './main'
+import CustomerErasure from './main'
 import { description } from '../package.json'
 
-process.title = 'gdpr-tool'
+process.title = 'customer-erasure'
 
 const args = yargs
   .usage(
@@ -58,7 +58,7 @@ ${description}`
     type: 'boolean',
   })
   .option('logFile', {
-    default: 'gdpr-tool.log',
+    default: 'customer-erasure.log',
     describe: 'Path to where to save logs file.',
     type: 'string',
   }).argv
@@ -116,18 +116,18 @@ resolveCredentials(args)
         debug: logger.debug.bind(logger),
       },
     }
-    return new GDPRTool(exporterOptions)
+    return new CustomerErasure(exporterOptions)
   })
-  .then(gdprTool => {
+  .then(customerErasure => {
     if (args.deleteAll) {
-      gdprTool.deleteAll(args.customerId)
+      customerErasure.deleteAll(args.customerId)
       console.log(
         `All data related to customer with id ${
           args.customerId
         } has successfully been deleted.`
       )
     } else {
-      gdprTool.getCustomerData(args.customerId).then(result => {
+      customerErasure.getCustomerData(args.customerId).then(result => {
         if (args.output === 'stdout') {
           console.log(result)
         } else {

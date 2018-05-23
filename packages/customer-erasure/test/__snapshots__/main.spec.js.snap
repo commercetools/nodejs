@@ -1,19 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GDPRTool ::buildReference should build reference 1`] = `"resource(id in (\\"id1\\", \\"id2\\", \\"id3\\"))"`;
+exports[`CustomerErasure ::buildReference should build reference 1`] = `"resource(id in (\\"id1\\", \\"id2\\", \\"id3\\"))"`;
 
-exports[`GDPRTool ::buildRequest should build request 1`] = `
+exports[`CustomerErasure ::buildRequest should build request 1`] = `
 Object {
   "method": "GET",
   "uri": "example.com",
 }
 `;
 
-exports[`GDPRTool ::constructor should throw error if no \`apiConfig\` in \`options\` parameter 1`] = `"The constructor must be passed an \`apiConfig\` object"`;
+exports[`CustomerErasure ::constructor should throw error if no \`apiConfig\` in \`options\` parameter 1`] = `"The constructor must be passed an \`apiConfig\` object"`;
 
-exports[`GDPRTool ::deleteAll should throw error if no customerID is passed 1`] = `"missing \`customerId\` argument"`;
+exports[`CustomerErasure ::deleteAll should throw error if no customerID is passed 1`] = `"missing \`customerId\` argument"`;
 
-exports[`GDPRTool ::getCustomerData should fetch data 1`] = `
+exports[`CustomerErasure ::getCustomerData should fetch data 1`] = `
 Array [
   Object {
     "id": "id1",
@@ -74,4 +74,4 @@ Array [
 ]
 `;
 
-exports[`GDPRTool ::getCustomerData should throw error if no customerID is passed 1`] = `"missing \`customerId\` argument"`;
+exports[`CustomerErasure ::getCustomerData should throw error if no customerID is passed 1`] = `"missing \`customerId\` argument"`;

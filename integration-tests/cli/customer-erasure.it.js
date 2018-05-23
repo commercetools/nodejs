@@ -1,4 +1,4 @@
-import GDPRTool from '@commercetools/gdpr-tool'
+import CustomerErasure from '@commercetools/customer-erasure'
 import { getCredentials } from '@commercetools/get-credentials'
 import { createData, clearData, getId } from './helpers/utils'
 import {
@@ -9,16 +9,16 @@ import {
   shoppingList,
   review,
   customLineItem,
-} from './helpers/gdpr-tool.data'
+} from './helpers/customer-erasure.data'
 
 let projectKey
 if (process.env.CI === 'true') projectKey = 'custom-objects-import-int-tests'
 else projectKey = process.env.npm_config_projectkey
 projectKey = 'custom-objects-import-int-tests'
 
-describe('gdpr tool', () => {
+describe('customer erasure', () => {
   let apiConfig
-  let gdprTool
+  let customerErasure
   let customerId
   let cartId
 
@@ -83,22 +83,22 @@ describe('gdpr tool', () => {
   })
 
   beforeEach(() => {
-    gdprTool = new GDPRTool({ apiConfig }, logger)
+    customerErasure = new CustomerErasure({ apiConfig }, logger)
   })
 
   describe('normal usage', () => {
     it('should get data on the CTP', async () => {
-      const data = await gdprTool.getCustomerData(customerId)
+      const data = await customerErasure.getCustomerData(customerId)
 
       expect(data).toHaveLength(10)
     })
 
     it('should delete data on the CTP', async () => {
-      await gdprTool.deleteAll(customerId)
+      await customerErasure.deleteAll(customerId)
 
       // wait 1s for DB to finish deletion
       setTimeout(async () => {
-        const data = await gdprTool.getCustomerData(customerId)
+        const data = await customerErasure.getCustomerData(customerId)
         expect(data).toHaveLength(0)
       }, 1000)
     })

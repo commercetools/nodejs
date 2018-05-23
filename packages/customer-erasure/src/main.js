@@ -12,7 +12,7 @@ import silentLogger from './utils/silent-logger'
 import pkg from '../package.json'
 
 // todo add flow types
-export default class GDPRTool {
+export default class CustomerErasure {
   constructor(options) {
     if (!options.apiConfig)
       throw new Error('The constructor must be passed an `apiConfig` object')
@@ -78,7 +78,7 @@ export default class GDPRTool {
 
     return Promise.all(
       urisOfResourcesToDelete.map(uri => {
-        const request = GDPRTool.buildRequest(uri, 'GET')
+        const request = CustomerErasure.buildRequest(uri, 'GET')
         return this.client.process(request, payload => {
           if (payload.statusCode !== 200 && payload.statusCode !== 404)
             return Promise.reject(payload)
@@ -93,10 +93,10 @@ export default class GDPRTool {
       const ids = results.map(result => result.id)
 
       if (ids.length > 0) {
-        const reference = GDPRTool.buildReference(ids)
+        const reference = CustomerErasure.buildReference(ids)
 
         const messagesUri = requestBuilder.messages.where(reference).build()
-        const request = GDPRTool.buildRequest(messagesUri, 'GET')
+        const request = CustomerErasure.buildRequest(messagesUri, 'GET')
 
         const messages = await this.client.process(request, payload => {
           if (payload.statusCode !== 200 && payload.statusCode !== 404)
@@ -160,7 +160,7 @@ export default class GDPRTool {
     ]
 
     urisOfResourcesToDelete.forEach(uri => {
-      const request = GDPRTool.buildRequest(uri.uri, 'GET')
+      const request = CustomerErasure.buildRequest(uri.uri, 'GET')
 
       this.client.process(request, payload => {
         if (payload.statusCode !== 200 && payload.statusCode !== 404)
@@ -177,7 +177,10 @@ export default class GDPRTool {
     if (results.length > 0) {
       results.forEach(async result => {
         if (!result) return
-        const deleteRequest = GDPRTool.buildDeleteRequests(result, builder)
+        const deleteRequest = CustomerErasure.buildDeleteRequests(
+          result,
+          builder
+        )
         this.client.execute(deleteRequest)
       })
     }
@@ -191,7 +194,7 @@ export default class GDPRTool {
 
     // todo add config option to URI builder
     deleteUri += '&dataErasure=true'
-    return GDPRTool.buildRequest(deleteUri, 'DELETE')
+    return CustomerErasure.buildRequest(deleteUri, 'DELETE')
   }
 
   static buildReference(references) {
