@@ -3,6 +3,9 @@
     "version": "1.0.0-development",
     "description": "Export and delete all data related to a single customer",
     "main": "lib/main.js",
+    "bin": {
+        "gdpr-tool": "bin/gdpr-tool.js"
+    },
     "scripts": {
         "build": "babel src --out-dir lib"
     },
@@ -27,10 +30,15 @@
     "license": "MIT",
     "dependencies": {
         "@commercetools/api-request-builder": "^3.7.1",
+        "@commercetools/get-credentials": "^2.1.4",
         "@commercetools/sdk-client": "^1.5.5",
         "@commercetools/sdk-middleware-auth": "^3.5.2",
         "@commercetools/sdk-middleware-http": "^3.0.0",
         "@commercetools/sdk-middleware-user-agent": "^1.2.7",
-        "lodash.flatten": "^4.4.0"
+        "lodash.flatten": "^4.4.0",
+        "node-fetch": "^2.1.2",
+        "pino": "^4.16.1",
+        "pretty-error": "^2.1.1",
+        "yargs": "^11.0.0"
     }
 }
