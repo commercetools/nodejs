@@ -130,6 +130,26 @@ describe('CustomerErasure', () => {
         await customerErasure.deleteAll('customerId')
       })
     })
+
+    describe('with status code 500', () => {
+      beforeEach(() => {
+        const payload = {
+          statusCode: 500,
+          body: {
+            results: [],
+          },
+        }
+        customerErasure.client.process = jest.fn(async (request, callback) => {
+          await callback(payload)
+        })
+      })
+
+      test('should throw internal server error', async () => {
+        expect(
+          customerErasure.deleteAll('customerId')
+        ).rejects.toThrowErrorMatchingSnapshot()
+      })
+    })
     test('should throw error if no customerID is passed', () => {
       expect(() => customerErasure.deleteAll()).toThrowErrorMatchingSnapshot()
     })
@@ -167,6 +187,37 @@ describe('CustomerErasure', () => {
         const data = await customerErasure._getAllMessages(request)
         expect(data).toHaveLength(0)
       })
+    })
+    describe('with status code 500', () => {
+      beforeEach(() => {
+        const payload = {
+          statusCode: 500,
+          body: {
+            results: [],
+          },
+        }
+        customerErasure.client.process = jest.fn(async (request, callback) => {
+          await callback(payload)
+        })
+      })
+
+      test('should throw internal server error', async () => {
+        const request = CustomerErasure.buildRequest('example.com', 'GET')
+        expect(
+          customerErasure._getAllMessages(request)
+        ).rejects.toThrowErrorMatchingSnapshot()
+      })
+    })
+  })
+  describe('::_deleteOne', () => {
+    test('should return if no results are passed', () => {
+      const payload = {
+        statusCode: 404,
+        body: {
+          results: [],
+        },
+      }
+      expect(customerErasure._deleteOne(payload)).toBeFalsy()
     })
   })
 })

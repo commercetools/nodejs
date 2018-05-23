@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CustomerErasure ::_getAllMessages with status code 500 should throw internal server error 1`] = `"Request returned status code 500"`;
+
 exports[`CustomerErasure ::buildReference should build reference 1`] = `"resource(id in (\\"id1\\", \\"id2\\", \\"id3\\"))"`;
 
 exports[`CustomerErasure ::buildRequest should build request 1`] = `
@@ -12,6 +14,8 @@ Object {
 exports[`CustomerErasure ::constructor should throw error if no \`apiConfig\` in \`options\` parameter 1`] = `"The constructor must be passed an \`apiConfig\` object"`;
 
 exports[`CustomerErasure ::deleteAll should throw error if no customerID is passed 1`] = `"missing \`customerId\` argument"`;
+
+exports[`CustomerErasure ::deleteAll with status code 500 should throw internal server error 1`] = `"Request returned status code 500"`;
 
 exports[`CustomerErasure ::getCustomerData should throw error if no customerID is passed 1`] = `"missing \`customerId\` argument"`;
 

@@ -167,25 +167,26 @@ export default class CustomerErasure {
       reviewsUri,
     ]
 
-    urisOfResourcesToDelete.forEach(uri => {
-      const request = CustomerErasure.buildRequest(uri.uri, 'GET')
+    return Promise.all(
+      urisOfResourcesToDelete.map(uri => {
+        const request = CustomerErasure.buildRequest(uri.uri, 'GET')
 
-      this.client.process(request, payload => {
-        if (payload.statusCode !== 200 && payload.statusCode !== 404)
-          return Promise.reject(
-            Error(`Request returned status code ${payload.statusCode}`)
-          )
-        if (payload.statusCode === 200) this._deleteOne(payload, uri.builder)
-        return Promise.resolve()
+        return this.client.process(request, payload => {
+          if (payload.statusCode !== 200 && payload.statusCode !== 404)
+            return Promise.reject(
+              Error(`Request returned status code ${payload.statusCode}`)
+            )
+          if (payload.statusCode === 200) this._deleteOne(payload, uri.builder)
+          return Promise.resolve()
+        })
       })
-    })
+    )
   }
 
   _deleteOne(payload, builder) {
     const results = payload.body.results
     if (results.length > 0) {
       results.forEach(async result => {
-        if (!result) return
         const deleteRequest = CustomerErasure.buildDeleteRequests(
           result,
           builder
