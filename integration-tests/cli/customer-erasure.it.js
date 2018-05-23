@@ -1,5 +1,4 @@
 import CustomerErasure from '@commercetools/customer-erasure'
-import fs from 'mz/fs'
 import tmp from 'tmp'
 import { getCredentials } from '@commercetools/get-credentials'
 import { exec } from 'mz/child_process'
@@ -16,7 +15,7 @@ import {
 } from './helpers/customer-erasure.data'
 
 let projectKey
-if (process.env.CI === 'true') projectKey = 'custom-objects-import-int-tests'
+if (process.env.CI === 'true') projectKey = 'customer-erasure-integration-test'
 else projectKey = process.env.npm_config_projectkey
 
 describe('customer erasure', () => {

@@ -39,19 +39,57 @@ describe('CustomerErasure', () => {
 
   describe('::getCustomerData', () => {
     let payload
-    beforeEach(() => {
-      payload = {
-        statusCode: 200,
-        body: {
-          results: [{ version: 1, id: 'id1' }, { version: 1, id: 'id2' }],
-        },
-      }
-      customerErasure.client.execute = jest.fn(() => Promise.resolve(payload))
+    describe('with status code 200', () => {
+      beforeEach(() => {
+        payload = {
+          statusCode: 200,
+          body: {
+            results: [{ version: 1, id: 'id1' }, { version: 1, id: 'id2' }],
+          },
+        }
+        customerErasure.client.execute = jest.fn(() => Promise.resolve(payload))
+      })
+
+      test('should fetch data', async () => {
+        const data = await customerErasure.getCustomerData('customerId')
+        expect(data).toMatchSnapshot()
+      })
     })
 
-    test('should fetch data', async () => {
-      const data = await customerErasure.getCustomerData('customerId')
-      expect(data).toMatchSnapshot()
+    describe('with status code 500', () => {
+      beforeEach(() => {
+        payload = {
+          statusCode: 500,
+          body: {
+            results: [],
+          },
+        }
+        customerErasure.client.process = jest.fn(async (request, callback) => {
+          await callback(payload)
+        })
+      })
+
+      test('should throw internal server error', async () => {
+        expect(
+          customerErasure.getCustomerData('customerId')
+        ).rejects.toThrowErrorMatchingSnapshot()
+      })
+    })
+
+    describe('with status code 404', () => {
+      beforeEach(() => {
+        payload = {
+          statusCode: 404,
+          body: {
+            results: [],
+          },
+        }
+        customerErasure.client.execute = jest.fn(() => Promise.resolve(payload))
+      })
+      test('should fetch empty data', async () => {
+        const data = await customerErasure.getCustomerData('customerId')
+        expect(data).toHaveLength(0)
+      })
     })
     test('should throw error if no customerID is passed', () => {
       expect(() =>

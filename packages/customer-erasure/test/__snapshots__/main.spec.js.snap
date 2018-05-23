@@ -13,7 +13,9 @@ exports[`CustomerErasure ::constructor should throw error if no \`apiConfig\` in
 
 exports[`CustomerErasure ::deleteAll should throw error if no customerID is passed 1`] = `"missing \`customerId\` argument"`;
 
-exports[`CustomerErasure ::getCustomerData should fetch data 1`] = `
+exports[`CustomerErasure ::getCustomerData should throw error if no customerID is passed 1`] = `"missing \`customerId\` argument"`;
+
+exports[`CustomerErasure ::getCustomerData with status code 200 should fetch data 1`] = `
 Array [
   Object {
     "id": "id1",
@@ -74,4 +76,4 @@ Array [
 ]
 `;
 
-exports[`CustomerErasure ::getCustomerData should throw error if no customerID is passed 1`] = `"missing \`customerId\` argument"`;
+exports[`CustomerErasure ::getCustomerData with status code 500 should throw internal server error 1`] = `"Request returned status code 500"`;

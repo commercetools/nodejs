@@ -81,7 +81,9 @@ export default class CustomerErasure {
         const request = CustomerErasure.buildRequest(uri, 'GET')
         return this.client.process(request, payload => {
           if (payload.statusCode !== 200 && payload.statusCode !== 404)
-            return Promise.reject(payload)
+            return Promise.reject(
+              Error(`Request returned status code ${payload.statusCode}`)
+            )
 
           return Promise.resolve(payload)
         })
@@ -100,7 +102,9 @@ export default class CustomerErasure {
 
         const messages = await this.client.process(request, payload => {
           if (payload.statusCode !== 200 && payload.statusCode !== 404)
-            return Promise.reject(payload)
+            return Promise.reject(
+              Error(`Request returned status code ${payload.statusCode}`)
+            )
 
           return Promise.resolve(payload)
         })
@@ -165,9 +169,10 @@ export default class CustomerErasure {
 
       this.client.process(request, payload => {
         if (payload.statusCode !== 200 && payload.statusCode !== 404)
-          return Promise.reject(payload)
-
-        this._deleteOne(payload, uri.builder)
+          return Promise.reject(
+            Error(`Request returned status code ${payload.statusCode}`)
+          )
+        if (payload.statusCode === 200) this._deleteOne(payload, uri.builder)
         return Promise.resolve()
       })
     })
