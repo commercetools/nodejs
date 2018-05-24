@@ -40,7 +40,7 @@ export default class CustomerErasure {
     }
   }
 
-  async getCustomerData(customerId) {
+  getCustomerData(customerId) {
     if (!customerId) throw Error('missing `customerId` argument')
 
     this.logger.info('Starting to fetch data')
@@ -76,7 +76,7 @@ export default class CustomerErasure {
       reviewsUri,
     ]
 
-    const allData = await Promise.all(
+    return Promise.all(
       urisOfResourcesToDelete.map(uri => {
         const request = CustomerErasure.buildRequest(uri, 'GET')
         return this.client.process(request, response => {
@@ -108,8 +108,6 @@ export default class CustomerErasure {
       this.logger.info('Export operation completed successfully')
       return Promise.resolve(results)
     })
-
-    return allData
   }
 
   async _getAllMessages(request) {
