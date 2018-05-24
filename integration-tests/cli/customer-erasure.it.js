@@ -120,9 +120,7 @@ describe('customer erasure', () => {
         expect(stderr).toBeFalsy()
         expect(stdout).toMatch(/Starting to fetch data/)
         expect(stdout).toMatch(/Export operation completed successfully/)
-        expect(stdout).toMatch(
-          /entities has been successfully exported to file/
-        )
+        expect(stdout).toMatch(/entities has been successfully written to file/)
       })
     })
 
@@ -140,12 +138,12 @@ describe('customer erasure', () => {
       it('should log success messages', async () => {
         const filePath = tmp.fileSync().name
         const [stdout, stderr] = await exec(
-          `${bin} -o ${filePath} -p ${projectKey} -c ${customerId} -D`
+          `${bin} -o ${filePath} -p ${projectKey} -c ${customerId} -D  --force`
         )
         expect(stderr).toBeFalsy()
         expect(stdout).toMatch(/Starting deletion/)
         expect(stdout).toMatch(
-          `All data related to customer with id ${customerId} has successfully been deleted.`
+          `All data related to customer with id '${customerId}' has successfully been deleted.`
         )
       })
     })

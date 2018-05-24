@@ -40,7 +40,7 @@ export default class CustomerErasure {
     }
   }
 
-  getCustomerData(customerId) {
+  async getCustomerData(customerId) {
     if (!customerId) throw Error('missing `customerId` argument')
 
     this.logger.info('Starting to fetch data')
@@ -76,22 +76,24 @@ export default class CustomerErasure {
       reviewsUri,
     ]
 
-    return Promise.all(
+    const allData = await Promise.all(
       urisOfResourcesToDelete.map(uri => {
         const request = CustomerErasure.buildRequest(uri, 'GET')
-        return this.client.process(request, payload => {
-          if (payload.statusCode !== 200 && payload.statusCode !== 404)
+        return this.client.process(request, response => {
+          if (response.statusCode !== 200 && response.statusCode !== 404)
             return Promise.reject(
-              Error(`Request returned status code ${payload.statusCode}`)
+              Error(`Request returned status code ${response.statusCode}`)
             )
 
-          return Promise.resolve(payload)
+          return Promise.resolve(response)
         })
       })
-    ).then(async data => {
-      const allData = flatten(data)
+    ).then(async responses => {
+      const flattenedResponses = flatten(responses)
 
-      let results = flatten(allData.map(response => response.body.results))
+      let results = flatten(
+        flattenedResponses.map(response => response.body.results)
+      )
       const ids = results.map(result => result.id)
 
       if (ids.length > 0) {
@@ -106,16 +108,18 @@ export default class CustomerErasure {
       this.logger.info('Export operation completed successfully')
       return Promise.resolve(results)
     })
+
+    return allData
   }
 
   async _getAllMessages(request) {
-    const messages = await this.client.process(request, payload => {
-      if (payload.statusCode !== 200 && payload.statusCode !== 404)
+    const messages = await this.client.process(request, response => {
+      if (response.statusCode !== 200 && response.statusCode !== 404)
         return Promise.reject(
-          Error(`Request returned status code ${payload.statusCode}`)
+          Error(`Request returned status code ${response.statusCode}`)
         )
 
-      return Promise.resolve(payload)
+      return Promise.resolve(response)
     })
     return flatten(messages.map(result => result.body.results))
   }
@@ -171,28 +175,31 @@ export default class CustomerErasure {
       urisOfResourcesToDelete.map(uri => {
         const request = CustomerErasure.buildRequest(uri.uri, 'GET')
 
-        return this.client.process(request, payload => {
-          if (payload.statusCode !== 200 && payload.statusCode !== 404)
+        return this.client.process(request, response => {
+          if (response.statusCode !== 200 && response.statusCode !== 404)
             return Promise.reject(
-              Error(`Request returned status code ${payload.statusCode}`)
+              Error(`Request returned status code ${response.statusCode}`)
             )
-          if (payload.statusCode === 200) this._deleteOne(payload, uri.builder)
+          if (response.statusCode === 200)
+            this._deleteOne(response, uri.builder)
           return Promise.resolve()
         })
       })
     )
   }
 
-  _deleteOne(payload, builder) {
-    const results = payload.body.results
+  _deleteOne(response, builder) {
+    const results = response.body.results
     if (results.length > 0) {
-      results.forEach(async result => {
-        const deleteRequest = CustomerErasure.buildDeleteRequests(
-          result,
-          builder
-        )
-        this.client.execute(deleteRequest)
-      })
+      Promise.all(
+        results.map(result => {
+          const deleteRequest = CustomerErasure.buildDeleteRequests(
+            result,
+            builder
+          )
+          return this.client.execute(deleteRequest)
+        })
+      )
     }
   }
 

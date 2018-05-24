@@ -17,6 +17,8 @@ Options:
   --accessToken     CTP client access token.
   --projectKey, -p  API project key.                                  [required]
   --deleteAll, -D   Delete all data related to customer.               [boolean]
+  --force           Continue without confirmation when combined with
+                    --deleteAll.                                       [boolean]
   --logLevel        Logging level: error, warn, info or debug. [default: \\"info\\"]
   --prettyLogs      Pretty print logs to the terminal                  [boolean]
   --logFile         Path to where to save logs file.

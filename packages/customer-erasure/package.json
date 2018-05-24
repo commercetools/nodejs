@@ -39,6 +39,7 @@
         "node-fetch": "^2.1.2",
         "pino": "^4.16.1",
         "pretty-error": "^2.1.1",
+        "prompt-confirm": "^1.2.0",
         "yargs": "^11.0.0"
     }
 }

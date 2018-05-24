@@ -3,6 +3,7 @@ import { getCredentials } from '@commercetools/get-credentials'
 import pino from 'pino'
 import PrettyError from 'pretty-error'
 import yargs from 'yargs'
+import Confirm from 'prompt-confirm'
 
 import CustomerErasure from './main'
 import { description } from '../package.json'
@@ -49,6 +50,10 @@ ${description}`
     alias: 'D',
     describe: 'Delete all data related to customer.',
   })
+  .option('force', {
+    type: 'boolean',
+    describe: 'Continue without confirmation when combined with --deleteAll.',
+  })
   .option('logLevel', {
     default: 'info',
     describe: 'Logging level: error, warn, info or debug.',
@@ -87,9 +92,22 @@ const errorHandler = errors => {
   process.exitCode = 1
 }
 
-const resolveCredentials = _args => {
-  if (_args.accessToken) return Promise.resolve({})
-  return getCredentials(_args.projectKey)
+const resolveCredentials = options => {
+  if (options.accessToken) return Promise.resolve({})
+  return getCredentials(options.projectKey)
+}
+
+const deleteOrNot = (customerEraser, answer) => {
+  if (answer === true) {
+    customerEraser.deleteAll(args.customerId)
+    logger.info(
+      `All data related to customer with id '${
+        args.customerId
+      }' has successfully been deleted.`
+    )
+  } else {
+    logger.info('No data was deleted.')
+  }
 }
 
 // If the stdout is used for a data output, save all logs to a log file.
@@ -118,27 +136,30 @@ resolveCredentials(args)
     }
     return new CustomerErasure(exporterOptions)
   })
-  .then(customerErasure => {
+  .then(customerEraser => {
     if (args.deleteAll) {
-      customerErasure.deleteAll(args.customerId)
-      console.log(
-        `All data related to customer with id ${
-          args.customerId
-        } has successfully been deleted.`
-      )
+      if (args.force) deleteOrNot(customerEraser, args.force)
+      else {
+        const confirm = new Confirm(
+          `Are you sure you want to delete all data related to customer with \nid: "${
+            args.customerId
+          }"?`
+        )
+        confirm.run().then(answer => {
+          deleteOrNot(customerEraser, answer)
+        })
+      }
     } else {
-      customerErasure.getCustomerData(args.customerId).then(result => {
+      customerEraser.getCustomerData(args.customerId).then(result => {
         if (args.output === 'stdout') {
           console.log(result)
         } else {
           fs.writeFile(args.output, JSON.stringify(result, null, 2), err => {
             if (err) throw err
-            console.log(
+            logger.info(
               `${
                 result.length
-              } entities has been successfully exported to file "${
-                args.output
-              }"`
+              } entities has been successfully written to file '${args.output}'`
             )
           })
         }
