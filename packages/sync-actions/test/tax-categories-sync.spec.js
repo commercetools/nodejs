@@ -34,24 +34,6 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  test('should build `setKey` action', () => {
-    const before = {
-      key: '1234',
-    }
-    const now = {
-      key: '4321',
-    }
-
-    const actual = taxCategorySync.buildActions(now, before)
-    const expected = [
-      {
-        action: 'setKey',
-        key: now.key,
-      },
-    ]
-    expect(actual).toEqual(expected)
-  })
-
   test('should build `setDescription` action', () => {
     const before = {
       description: 'some description',
@@ -253,6 +235,23 @@ describe('Actions', () => {
       },
     ]
 
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build `setKey` action', () => {
+    const before = {
+      key: '1234',
+    }
+    const now = {
+      key: '4321',
+    }
+    const actual = taxCategorySync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'setKey',
+        key: now.key,
+      },
+    ]
     expect(actual).toEqual(expected)
   })
 })
