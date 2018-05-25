@@ -147,3 +147,7 @@ https://commercetools.github.io/nodejs/
 [sync-actions-icon]: https://img.shields.io/npm/v/@commercetools/sync-actions.svg?style=flat-square
 [sync-actions-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/sync-actions
 [sync-actions-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/sync-actions&style=flat-square
+[personal-data-erasure-version]: https://www.npmjs.com/package/@commercetools/personal-data-erasure
+[personal-data-erasure-icon]: https://img.shields.io/npm/v/@commercetools/personal-data-erasure.svg?style=flat-square
+[personal-data-erasure-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/personal-data-erasure
+[personal-data-erasure-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/personal-data-erasure&style=flat-square
