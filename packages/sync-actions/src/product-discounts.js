@@ -6,21 +6,26 @@ import * as diffpatcher from './utils/diffpatcher'
 
 export const actionGroups = ['base']
 
-function createProductDiscountsMapActions(mapActionGroup, config) {
+function createProductDiscountsMapActions(mapActionGroup, syncActionConfig) {
   return function doMapActions(diff, newObj, oldObj) {
     const allActions = []
 
     allActions.push(
-      mapActionGroup('base', () => actionsMapBase(diff, oldObj, newObj, config))
+      mapActionGroup('base', () =>
+        actionsMapBase(diff, oldObj, newObj, syncActionConfig)
+      )
     )
 
     return flatten(allActions)
   }
 }
 
-export default (actionGroupsConfig, config) => {
+export default (actionGroupsConfig, syncActionConfig = {}) => {
   const mapActionGroup = createMapActionGroup(actionGroupsConfig)
-  const doMapActions = createProductDiscountsMapActions(mapActionGroup, config)
+  const doMapActions = createProductDiscountsMapActions(
+    mapActionGroup,
+    syncActionConfig
+  )
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
   return { buildActions }
 }

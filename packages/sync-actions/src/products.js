@@ -26,7 +26,7 @@ const actionGroups = [
 
 function createProductMapActions(
   mapActionGroup: Function,
-  config: SyncActionConfig
+  syncActionConfig: SyncActionConfig
 ): (
   diff: Object,
   newObj: Object,
@@ -68,7 +68,7 @@ function createProductMapActions(
 
     allActions.push(
       mapActionGroup('base', (): Array<UpdateAction> =>
-        productActions.actionsMapBase(diff, oldObj, newObj, config)
+        productActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
       )
     )
 
@@ -133,10 +133,10 @@ function moveMasterVariantsIntoVariants(
 
 export default (
   actionGroupsConfig: Array<ActionGroup>,
-  config: SyncActionConfig
+  syncActionConfig: SyncActionConfig
 ): SyncAction => {
   const mapActionGroup = createMapActionGroup(actionGroupsConfig)
-  const doMapActions = createProductMapActions(mapActionGroup, config)
+  const doMapActions = createProductMapActions(mapActionGroup, syncActionConfig)
 
   const buildActions = createBuildActions(
     diffpatcher.diff,

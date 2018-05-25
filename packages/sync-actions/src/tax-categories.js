@@ -18,7 +18,7 @@ function createTaxCategoriesMapActions(
     type: string,
     fn: () => Array<UpdateAction>
   ) => Array<UpdateAction>,
-  config: SyncActionConfig
+  syncActionConfig: SyncActionConfig
 ): (diff: Object, newObj: Object, oldObj: Object) => Array<UpdateAction> {
   return function doMapActions(
     diff: Object,
@@ -28,7 +28,12 @@ function createTaxCategoriesMapActions(
     const allActions = []
     allActions.push(
       mapActionGroup('base', (): Array<UpdateAction> =>
-        taxCategoriesActions.actionsMapBase(diff, oldObj, newObj, config)
+        taxCategoriesActions.actionsMapBase(
+          diff,
+          oldObj,
+          newObj,
+          syncActionConfig
+        )
       )
     )
     allActions.push(
@@ -42,7 +47,7 @@ function createTaxCategoriesMapActions(
 
 export default (
   actionGroupConfig: Array<ActionGroup>,
-  config: SyncActionConfig
+  syncActionConfig: SyncActionConfig
 ): SyncAction => {
   // config contains information about which action groups
   // are white/black listed
@@ -56,7 +61,10 @@ export default (
   // for whitelisted action groups and return the return value of the callback
   // It will return an empty array for blacklisted action groups
   const mapActionGroup = createMapActionGroup(actionGroupConfig)
-  const doMapActions = createTaxCategoriesMapActions(mapActionGroup, config)
+  const doMapActions = createTaxCategoriesMapActions(
+    mapActionGroup,
+    syncActionConfig
+  )
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
   return { buildActions }
 }

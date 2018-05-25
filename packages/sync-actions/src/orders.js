@@ -15,7 +15,7 @@ export const actionGroups = ['base', 'deliveries']
 
 function createOrderMapActions(
   mapActionGroup: Function,
-  config: SyncActionConfig
+  syncActionConfig: SyncActionConfig
 ): (diff: Object, newObj: Object, oldObj: Object) => Array<UpdateAction> {
   return function doMapActions(
     diff: Object,
@@ -26,7 +26,7 @@ function createOrderMapActions(
 
     allActions.push(
       mapActionGroup('base', (): Array<UpdateAction> =>
-        orderActions.actionsMapBase(diff, oldObj, newObj, config)
+        orderActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
       )
     )
 
@@ -42,7 +42,7 @@ function createOrderMapActions(
 
 export default (
   actionGroupsConfig: Array<ActionGroup>,
-  config: SyncActionConfig
+  syncActionConfig: SyncActionConfig
 ): SyncAction => {
   // actionGroupsConfig contains information about which action groups
   // are white/black listed
@@ -56,7 +56,7 @@ export default (
   // for whitelisted action groups and return the return value of the callback
   // It will return an empty array for blacklisted action groups
   const mapActionGroup = createMapActionGroup(actionGroupsConfig)
-  const doMapActions = createOrderMapActions(mapActionGroup, config)
+  const doMapActions = createOrderMapActions(mapActionGroup, syncActionConfig)
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
   return { buildActions }
 }

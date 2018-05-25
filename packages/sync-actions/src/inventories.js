@@ -15,7 +15,7 @@ export const actionGroups = ['base', 'references']
 
 function createInventoryMapActions(
   mapActionGroup: Function,
-  config: SyncActionConfig
+  syncActionConfig: SyncActionConfig
 ): (diff: Object, newObj: Object, oldObj: Object) => Array<UpdateAction> {
   return function doMapActions(
     diff: Object,
@@ -25,7 +25,7 @@ function createInventoryMapActions(
     const allActions = []
     allActions.push(
       mapActionGroup('base', (): Array<UpdateAction> =>
-        inventoryActions.actionsMapBase(diff, oldObj, newObj, config)
+        inventoryActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
       )
     )
     allActions.push(
@@ -39,7 +39,7 @@ function createInventoryMapActions(
 
 export default (
   actionGroupsConfig: Array<ActionGroup>,
-  config: SyncActionConfig
+  syncActionConfig: SyncActionConfig
 ): SyncAction => {
   // actionGroupsConfig contains information about which action groups
   // are white/black listed
@@ -53,7 +53,10 @@ export default (
   // for whitelisted action groups and return the return value of the callback
   // It will return an empty array for blacklisted action groups
   const mapActionGroup = createMapActionGroup(actionGroupsConfig)
-  const doMapActions = createInventoryMapActions(mapActionGroup, config)
+  const doMapActions = createInventoryMapActions(
+    mapActionGroup,
+    syncActionConfig
+  )
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
   return { buildActions }
 }

@@ -7,11 +7,13 @@ import * as diffpatcher from './utils/diffpatcher'
 
 export const actionGroups = ['base', 'custom']
 
-function createDiscountCodesMapActions(mapActionGroup, config) {
+function createDiscountCodesMapActions(mapActionGroup, syncActionConfig) {
   return function doMapActions(diff, newObj, oldObj) {
     const allActions = []
     allActions.push(
-      mapActionGroup('base', () => actionsMapBase(diff, oldObj, newObj, config))
+      mapActionGroup('base', () =>
+        actionsMapBase(diff, oldObj, newObj, syncActionConfig)
+      )
     )
     allActions.push(
       mapActionGroup('custom', () => actionsMapCustom(diff, newObj, oldObj))
@@ -20,7 +22,7 @@ function createDiscountCodesMapActions(mapActionGroup, config) {
   }
 }
 
-export default (actionGroupsConfig, config) => {
+export default (actionGroupsConfig, syncActionConfig = {}) => {
   // actionGroupsConfig contains information about which action groups
   // are white/black listed
 
@@ -33,7 +35,10 @@ export default (actionGroupsConfig, config) => {
   // for whitelisted action groups and return the return value of the callback
   // It will return an empty array for blacklisted action groups
   const mapActionGroup = createMapActionGroup(actionGroupsConfig)
-  const doMapActions = createDiscountCodesMapActions(mapActionGroup, config)
+  const doMapActions = createDiscountCodesMapActions(
+    mapActionGroup,
+    syncActionConfig
+  )
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
   return { buildActions }
 }

@@ -16,7 +16,7 @@ export const actionGroups = ['base', 'references', 'meta', 'custom']
 
 function createCategoryMapActions(
   mapActionGroup: Function,
-  config: SyncActionConfig
+  syncActionConfig: SyncActionConfig
 ): (diff: Object, newObj: Object, oldObj: Object) => Array<UpdateAction> {
   return function doMapActions(
     diff: Object,
@@ -27,7 +27,7 @@ function createCategoryMapActions(
 
     allActions.push(
       mapActionGroup('base', (): Array<UpdateAction> =>
-        categoryActions.actionsMapBase(diff, oldObj, newObj, config)
+        categoryActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
       )
     )
 
@@ -55,7 +55,7 @@ function createCategoryMapActions(
 
 export default (
   actionGroupsConfig: Array<ActionGroup>,
-  config: SyncActionConfig
+  syncActionConfig: SyncActionConfig
 ): SyncAction => {
   // actionGroupsConfig contains information about which action groups
   // are white/black listed
@@ -69,7 +69,10 @@ export default (
   // for whitelisted action groups and return the return value of the callback
   // It will return an empty array for blacklisted action groups
   const mapActionGroup = createMapActionGroup(actionGroupsConfig)
-  const doMapActions = createCategoryMapActions(mapActionGroup, config)
+  const doMapActions = createCategoryMapActions(
+    mapActionGroup,
+    syncActionConfig
+  )
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
   return { buildActions }
 }

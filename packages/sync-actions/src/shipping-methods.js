@@ -15,7 +15,7 @@ export const actionGroups = ['base', 'zoneRates']
 
 function createShippingMethodsMapActions(
   mapActionGroup: Function,
-  config: SyncActionConfig
+  syncActionConfig: SyncActionConfig
 ): (diff: Object, newObj: Object, oldObj: Object) => Array<UpdateAction> {
   return function doMapActions(
     diff: Object,
@@ -25,7 +25,12 @@ function createShippingMethodsMapActions(
     const allActions = []
     allActions.push(
       mapActionGroup('base', (): Array<UpdateAction> =>
-        shippingMethodsActions.actionsMapBase(diff, oldObj, newObj, config)
+        shippingMethodsActions.actionsMapBase(
+          diff,
+          oldObj,
+          newObj,
+          syncActionConfig
+        )
       )
     )
     allActions.push(
@@ -41,7 +46,7 @@ function createShippingMethodsMapActions(
 
 export default (
   actionGroupConfig: Array<ActionGroup>,
-  config: SyncActionConfig
+  syncActionConfig: SyncActionConfig
 ): SyncAction => {
   // actionGroupConfig contains information about which action groups
   // are white/black listed
@@ -55,7 +60,10 @@ export default (
   // for whitelisted action groups and return the return value of the callback
   // It will return an empty array for blacklisted action groups
   const mapActionGroup = createMapActionGroup(actionGroupConfig)
-  const doMapActions = createShippingMethodsMapActions(mapActionGroup, config)
+  const doMapActions = createShippingMethodsMapActions(
+    mapActionGroup,
+    syncActionConfig
+  )
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
   return { buildActions }
 }

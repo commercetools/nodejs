@@ -34,7 +34,7 @@ function groupRoleActions([actions: Array<RoleUpdate>]): Array<UpdateAction> {
 
 function createStatesMapActions(
   mapActionGroup: Function,
-  config: SyncActionConfig
+  syncActionConfig: SyncActionConfig
 ): (diff: Object, newObj: Object, oldObj: Object) => Array<UpdateAction> {
   return function doMapActions(
     diff: Object,
@@ -45,7 +45,7 @@ function createStatesMapActions(
     const roleActions = []
     baseActions.push(
       mapActionGroup('base', (): Array<UpdateAction> =>
-        stateActions.actionsMapBase(diff, oldObj, newObj, config)
+        stateActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
       )
     )
     roleActions.push(
@@ -59,10 +59,10 @@ function createStatesMapActions(
 
 export default (
   actionGroupConfig: Array<ActionGroup>,
-  config: SyncActionConfig
+  syncActionConfig: SyncActionConfig
 ): SyncAction => {
   const mapActionGroup = createMapActionGroup(actionGroupConfig)
-  const doMapActions = createStatesMapActions(mapActionGroup, config)
+  const doMapActions = createStatesMapActions(mapActionGroup, syncActionConfig)
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
   return { buildActions }
 }
