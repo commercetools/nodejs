@@ -41,10 +41,10 @@ function createOrderMapActions(
 }
 
 export default (
-  actionGroupsConfig: Array<ActionGroup>,
+  actionGroupList: Array<ActionGroup>,
   syncActionConfig: SyncActionConfig
 ): SyncAction => {
-  // actionGroupsConfig contains information about which action groups
+  // actionGroupList contains information about which action groups
   // are white/black listed
 
   // createMapActionGroup returns function 'mapActionGroup' that takes params:
@@ -55,7 +55,7 @@ export default (
   // this resulting function mapActionGroup will call the callback function
   // for whitelisted action groups and return the return value of the callback
   // It will return an empty array for blacklisted action groups
-  const mapActionGroup = createMapActionGroup(actionGroupsConfig)
+  const mapActionGroup = createMapActionGroup(actionGroupList)
   const doMapActions = createOrderMapActions(mapActionGroup, syncActionConfig)
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
   return { buildActions }

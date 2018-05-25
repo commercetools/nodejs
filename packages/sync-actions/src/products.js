@@ -132,10 +132,10 @@ function moveMasterVariantsIntoVariants(
 }
 
 export default (
-  actionGroupsConfig: Array<ActionGroup>,
+  actionGroupList: Array<ActionGroup>,
   syncActionConfig: SyncActionConfig
 ): SyncAction => {
-  const mapActionGroup = createMapActionGroup(actionGroupsConfig)
+  const mapActionGroup = createMapActionGroup(actionGroupList)
   const doMapActions = createProductMapActions(mapActionGroup, syncActionConfig)
 
   const buildActions = createBuildActions(

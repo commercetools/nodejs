@@ -54,10 +54,10 @@ function createCustomerMapActions(
 }
 
 export default (
-  actionGroupsConfig: Array<ActionGroup>,
+  actionGroupList: Array<ActionGroup>,
   syncActionConfig: SyncActionConfig
 ): SyncAction => {
-  // actionGroupsConfig contains information about which action groups
+  // actionGroupList contains information about which action groups
   // are white/black listed
 
   // createMapActionGroup returns function 'mapActionGroup' that takes params:

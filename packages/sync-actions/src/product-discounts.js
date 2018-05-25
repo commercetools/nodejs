@@ -20,8 +20,8 @@ function createProductDiscountsMapActions(mapActionGroup, syncActionConfig) {
   }
 }
 
-export default (actionGroupsConfig, syncActionConfig = {}) => {
-  const mapActionGroup = createMapActionGroup(actionGroupsConfig)
+export default (actionGroupList, syncActionConfig = {}) => {
+  const mapActionGroup = createMapActionGroup(actionGroupList)
   const doMapActions = createProductDiscountsMapActions(
     mapActionGroup,
     syncActionConfig

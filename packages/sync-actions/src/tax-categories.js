@@ -46,7 +46,7 @@ function createTaxCategoriesMapActions(
 }
 
 export default (
-  actionGroupConfig: Array<ActionGroup>,
+  actionGroupList: Array<ActionGroup>,
   syncActionConfig: SyncActionConfig
 ): SyncAction => {
   // config contains information about which action groups
@@ -60,7 +60,7 @@ export default (
   // this resulting function mapActionGroup will call the callback function
   // for whitelisted action groups and return the return value of the callback
   // It will return an empty array for blacklisted action groups
-  const mapActionGroup = createMapActionGroup(actionGroupConfig)
+  const mapActionGroup = createMapActionGroup(actionGroupList)
   const doMapActions = createTaxCategoriesMapActions(
     mapActionGroup,
     syncActionConfig
