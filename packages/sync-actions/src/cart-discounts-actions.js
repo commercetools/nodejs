@@ -14,11 +14,12 @@ export const baseActionsList = [
   { action: 'changeStackingMode', key: 'stackingMode' },
 ]
 
-export function actionsMapBase(diff, oldObj, newObj) {
+export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
     diff,
     oldObj,
     newObj,
+    shouldOmitEmptyString: config.shouldOmitEmptyString,
   })
 }
