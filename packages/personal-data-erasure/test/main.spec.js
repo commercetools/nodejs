@@ -1,14 +1,14 @@
 import silentLogger from '../src/utils/silent-logger'
-import CustomerErasure from '../src/main'
+import PersonalDataErasure from '../src/main'
 
-describe('CustomerErasure', () => {
+describe('PersonalDataErasure', () => {
   const logger = {
     ...silentLogger,
   }
 
-  let customerErasure
+  let personalDataErasure
   beforeEach(async () => {
-    customerErasure = new CustomerErasure(
+    personalDataErasure = new PersonalDataErasure(
       {
         apiConfig: {
           projectKey: 'test-project-key',
@@ -20,19 +20,19 @@ describe('CustomerErasure', () => {
 
   describe('::constructor', () => {
     test('should be a function', () => {
-      expect(typeof CustomerErasure).toBe('function')
+      expect(typeof PersonalDataErasure).toBe('function')
     })
 
     test('should set default properties', () => {
-      expect(customerErasure.apiConfig).toEqual({
+      expect(personalDataErasure.apiConfig).toEqual({
         projectKey: 'test-project-key',
       })
-      expect(customerErasure.logger).toEqual(logger)
+      expect(personalDataErasure.logger).toEqual(logger)
     })
 
     test('should throw error if no `apiConfig` in `options` parameter', () => {
       expect(
-        () => new CustomerErasure({ foo: 'bar' })
+        () => new PersonalDataErasure({ foo: 'bar' })
       ).toThrowErrorMatchingSnapshot()
     })
   })
@@ -47,11 +47,13 @@ describe('CustomerErasure', () => {
             results: [{ version: 1, id: 'id1' }, { version: 1, id: 'id2' }],
           },
         }
-        customerErasure.client.execute = jest.fn(() => Promise.resolve(payload))
+        personalDataErasure.client.execute = jest.fn(() =>
+          Promise.resolve(payload)
+        )
       })
 
       test('should fetch data', async () => {
-        const data = await customerErasure.getCustomerData('customerId')
+        const data = await personalDataErasure.getCustomerData('customerId')
         expect(data).toMatchSnapshot()
       })
     })
@@ -64,14 +66,16 @@ describe('CustomerErasure', () => {
             results: [],
           },
         }
-        customerErasure.client.process = jest.fn(async (request, callback) => {
-          await callback(payload)
-        })
+        personalDataErasure.client.process = jest.fn(
+          async (request, callback) => {
+            await callback(payload)
+          }
+        )
       })
 
       test('should throw internal server error', async () => {
         expect(
-          customerErasure.getCustomerData('customerId')
+          personalDataErasure.getCustomerData('customerId')
         ).rejects.toThrowErrorMatchingSnapshot()
       })
     })
@@ -84,16 +88,18 @@ describe('CustomerErasure', () => {
             results: [],
           },
         }
-        customerErasure.client.execute = jest.fn(() => Promise.resolve(payload))
+        personalDataErasure.client.execute = jest.fn(() =>
+          Promise.resolve(payload)
+        )
       })
       test('should fetch empty data', async () => {
-        const data = await customerErasure.getCustomerData('customerId')
+        const data = await personalDataErasure.getCustomerData('customerId')
         expect(data).toHaveLength(0)
       })
     })
     test('should throw error if no customerID is passed', () => {
       expect(() =>
-        customerErasure.getCustomerData()
+        personalDataErasure.getCustomerData()
       ).toThrowErrorMatchingSnapshot()
     })
   })
@@ -108,10 +114,12 @@ describe('CustomerErasure', () => {
             results: [{ version: 1, id: 'id1' }, { version: 1, id: 'id2' }],
           },
         }
-        customerErasure.client.execute = jest.fn(() => Promise.resolve(payload))
+        personalDataErasure.client.execute = jest.fn(() =>
+          Promise.resolve(payload)
+        )
       })
       test('should delete data', async () => {
-        await customerErasure.deleteAll('customerId')
+        await personalDataErasure.deleteAll('customerId')
       })
     })
 
@@ -124,10 +132,12 @@ describe('CustomerErasure', () => {
             results: [],
           },
         }
-        customerErasure.client.execute = jest.fn(() => Promise.resolve(payload))
+        personalDataErasure.client.execute = jest.fn(() =>
+          Promise.resolve(payload)
+        )
       })
       test('should delete data', async () => {
-        await customerErasure.deleteAll('customerId')
+        await personalDataErasure.deleteAll('customerId')
       })
     })
 
@@ -139,26 +149,30 @@ describe('CustomerErasure', () => {
             results: [],
           },
         }
-        customerErasure.client.process = jest.fn(async (request, callback) => {
-          await callback(payload)
-        })
+        personalDataErasure.client.process = jest.fn(
+          async (request, callback) => {
+            await callback(payload)
+          }
+        )
       })
 
       test('should throw internal server error', async () => {
         expect(
-          customerErasure.deleteAll('customerId')
+          personalDataErasure.deleteAll('customerId')
         ).rejects.toThrowErrorMatchingSnapshot()
       })
     })
     test('should throw error if no customerID is passed', () => {
-      expect(() => customerErasure.deleteAll()).toThrowErrorMatchingSnapshot()
+      expect(() =>
+        personalDataErasure.deleteAll()
+      ).toThrowErrorMatchingSnapshot()
     })
   })
 
   describe('::buildReference', () => {
     test('should build reference', () => {
       expect(
-        CustomerErasure.buildReference(['id1', 'id2', 'id3'])
+        PersonalDataErasure.buildReference(['id1', 'id2', 'id3'])
       ).toMatchSnapshot()
     })
   })
@@ -166,7 +180,7 @@ describe('CustomerErasure', () => {
   describe('::buildRequest', () => {
     test('should build request', () => {
       expect(
-        CustomerErasure.buildRequest('example.com', 'GET')
+        PersonalDataErasure.buildRequest('example.com', 'GET')
       ).toMatchSnapshot()
     })
   })
@@ -180,11 +194,13 @@ describe('CustomerErasure', () => {
             results: [],
           },
         }
-        customerErasure.client.execute = jest.fn(() => Promise.resolve(payload))
+        personalDataErasure.client.execute = jest.fn(() =>
+          Promise.resolve(payload)
+        )
       })
       test('should fetch empty data', async () => {
-        const request = CustomerErasure.buildRequest('example.com', 'GET')
-        const data = await customerErasure._getAllMessages(request)
+        const request = PersonalDataErasure.buildRequest('example.com', 'GET')
+        const data = await personalDataErasure._getAllMessages(request)
         expect(data).toHaveLength(0)
       })
     })
@@ -196,15 +212,17 @@ describe('CustomerErasure', () => {
             results: [],
           },
         }
-        customerErasure.client.process = jest.fn(async (request, callback) => {
-          await callback(payload)
-        })
+        personalDataErasure.client.process = jest.fn(
+          async (request, callback) => {
+            await callback(payload)
+          }
+        )
       })
 
       test('should throw internal server error', async () => {
-        const request = CustomerErasure.buildRequest('example.com', 'GET')
+        const request = PersonalDataErasure.buildRequest('example.com', 'GET')
         expect(
-          customerErasure._getAllMessages(request)
+          personalDataErasure._getAllMessages(request)
         ).rejects.toThrowErrorMatchingSnapshot()
       })
     })
@@ -217,7 +235,7 @@ describe('CustomerErasure', () => {
           results: [],
         },
       }
-      expect(customerErasure._deleteOne(payload)).toBeFalsy()
+      expect(personalDataErasure._deleteOne(payload)).toBeFalsy()
     })
   })
 })

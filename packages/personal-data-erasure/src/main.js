@@ -12,7 +12,7 @@ import silentLogger from './utils/silent-logger'
 import pkg from '../package.json'
 
 // todo add flow types
-export default class CustomerErasure {
+export default class PersonalDataErasure {
   constructor(options) {
     if (!options.apiConfig)
       throw new Error('The constructor must be passed an `apiConfig` object')
@@ -78,7 +78,7 @@ export default class CustomerErasure {
 
     return Promise.all(
       urisOfResourcesToDelete.map(uri => {
-        const request = CustomerErasure.buildRequest(uri, 'GET')
+        const request = PersonalDataErasure.buildRequest(uri, 'GET')
         return this.client.process(request, response => {
           if (response.statusCode !== 200 && response.statusCode !== 404)
             return Promise.reject(
@@ -97,9 +97,9 @@ export default class CustomerErasure {
       const ids = results.map(result => result.id)
 
       if (ids.length > 0) {
-        const reference = CustomerErasure.buildReference(ids)
+        const reference = PersonalDataErasure.buildReference(ids)
         const messagesUri = requestBuilder.messages.where(reference).build()
-        const request = CustomerErasure.buildRequest(messagesUri, 'GET')
+        const request = PersonalDataErasure.buildRequest(messagesUri, 'GET')
 
         const messages = await this._getAllMessages(request)
 
@@ -171,7 +171,7 @@ export default class CustomerErasure {
 
     return Promise.all(
       urisOfResourcesToDelete.map(uri => {
-        const request = CustomerErasure.buildRequest(uri.uri, 'GET')
+        const request = PersonalDataErasure.buildRequest(uri.uri, 'GET')
 
         return this.client.process(request, response => {
           if (response.statusCode !== 200 && response.statusCode !== 404)
@@ -191,7 +191,7 @@ export default class CustomerErasure {
     if (results.length > 0) {
       Promise.all(
         results.map(result => {
-          const deleteRequest = CustomerErasure.buildDeleteRequests(
+          const deleteRequest = PersonalDataErasure.buildDeleteRequests(
             result,
             builder
           )
@@ -209,7 +209,7 @@ export default class CustomerErasure {
 
     // todo add config option to URI builder
     deleteUri += '&dataErasure=true'
-    return CustomerErasure.buildRequest(deleteUri, 'DELETE')
+    return PersonalDataErasure.buildRequest(deleteUri, 'DELETE')
   }
 
   static buildReference(references) {

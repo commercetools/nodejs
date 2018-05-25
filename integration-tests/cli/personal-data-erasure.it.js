@@ -1,8 +1,8 @@
-import CustomerErasure from '@commercetools/customer-erasure'
+import PersonalDataErasure from '@commercetools/personal-data-erasure'
 import tmp from 'tmp'
 import { getCredentials } from '@commercetools/get-credentials'
 import { exec } from 'mz/child_process'
-import { version } from '@commercetools/customer-erasure/package.json'
+import { version } from '@commercetools/personal-data-erasure/package.json'
 import { createData, clearData, getId } from './helpers/utils'
 import {
   customer,
@@ -12,14 +12,15 @@ import {
   shoppingList,
   review,
   customLineItem,
-} from './helpers/customer-erasure.data'
+} from './helpers/personal-data-erasure.data'
 
 let projectKey
 if (process.env.CI === 'true') projectKey = 'custom-objects-import-int-tests'
 else projectKey = process.env.npm_config_projectkey
+projectKey = 'custom-objects-import-int-tests'
 
-describe('customer erasure', () => {
-  const bin = './integration-tests/node_modules/.bin/customer-erasure'
+describe('personal data erasure', () => {
+  const bin = './integration-tests/node_modules/.bin/personal-data-erasure'
 
   describe('CLI basic functionality', () => {
     it('should print usage information given the help flag', async () => {
@@ -37,7 +38,7 @@ describe('customer erasure', () => {
 
   describe('normal usage', () => {
     let apiConfig
-    let customerErasure
+    let personalDataErasure
     let customerId
     let cartId
 
@@ -102,12 +103,12 @@ describe('customer erasure', () => {
     })
 
     beforeEach(() => {
-      customerErasure = new CustomerErasure({ apiConfig }, logger)
+      personalDataErasure = new PersonalDataErasure({ apiConfig }, logger)
     })
 
     describe('export function', () => {
       it('should get data on the CTP', async () => {
-        const data = await customerErasure.getCustomerData(customerId)
+        const data = await personalDataErasure.getCustomerData(customerId)
 
         expect(data).toHaveLength(10)
       })
@@ -126,11 +127,11 @@ describe('customer erasure', () => {
 
     describe('delete function', () => {
       it('should delete data on the CTP', async () => {
-        await customerErasure.deleteAll(customerId)
+        await personalDataErasure.deleteAll(customerId)
 
         // wait 1s for DB to finish deletion
         setTimeout(async () => {
-          const data = await customerErasure.getCustomerData(customerId)
+          const data = await personalDataErasure.getCustomerData(customerId)
           expect(data).toHaveLength(0)
         }, 1000)
       })

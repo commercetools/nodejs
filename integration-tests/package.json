@@ -26,7 +26,7 @@
     "@commercetools/state-importer": "*",
     "@commercetools/sync-actions": "*",
     "@commercetools/custom-objects-exporter": "*",
-    "@commercetools/customer-erasure": "*",
+    "@commercetools/personal-data-erasure": "*",
     "bluebird": "^3.5.0",
     "common-tags": "^1.4.0",
     "csvtojson": "^1.1.7",

@@ -5,10 +5,10 @@ import PrettyError from 'pretty-error'
 import yargs from 'yargs'
 import Confirm from 'prompt-confirm'
 
-import CustomerErasure from './main'
+import PersonalDataErasure from './main'
 import { description } from '../package.json'
 
-process.title = 'customer-erasure'
+process.title = 'personal-data-erasure'
 
 const args = yargs
   .usage(
@@ -63,7 +63,7 @@ ${description}`
     type: 'boolean',
   })
   .option('logFile', {
-    default: 'customer-erasure.log',
+    default: 'personal-data-erasure.log',
     describe: 'Path to where to save logs file.',
     type: 'string',
   }).argv
@@ -97,9 +97,9 @@ const resolveCredentials = options => {
   return getCredentials(options.projectKey)
 }
 
-const deleteOrNot = (customerEraser, answer) => {
+const deleteOrNot = (personalDataEraser, answer) => {
   if (answer === true) {
-    customerEraser.deleteAll(args.customerId)
+    personalDataEraser.deleteAll(args.customerId)
     logger.info(
       `All data related to customer with id '${
         args.customerId
@@ -134,11 +134,11 @@ resolveCredentials(args)
         debug: logger.debug.bind(logger),
       },
     }
-    return new CustomerErasure(exporterOptions)
+    return new PersonalDataErasure(exporterOptions)
   })
-  .then(customerEraser => {
+  .then(personalDataEraser => {
     if (args.deleteAll) {
-      if (args.force) deleteOrNot(customerEraser, args.force)
+      if (args.force) deleteOrNot(personalDataEraser, args.force)
       else {
         const confirm = new Confirm(
           `Are you sure you want to delete all data related to customer with \nid: "${
@@ -146,11 +146,11 @@ resolveCredentials(args)
           }"?`
         )
         confirm.run().then(answer => {
-          deleteOrNot(customerEraser, answer)
+          deleteOrNot(personalDataEraser, answer)
         })
       }
     } else {
-      customerEraser.getCustomerData(args.customerId).then(result => {
+      personalDataEraser.getCustomerData(args.customerId).then(result => {
         if (args.output === 'stdout') {
           console.log(result)
         } else {

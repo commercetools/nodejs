@@ -1,10 +1,10 @@
-# Customer Erasure
+# Personal Data Erasure
 
-A package which deletes or exports [commercetools customer data](#list-of-customer-data) in `JSON` format from the [commercetools platform](https://docs.commercetools.com/).
+A package which deletes or exports [commercetools personal data](#list-of-personal-data) in `JSON` format from the [commercetools platform](https://docs.commercetools.com/).
 
-## List of customer data
+## List of personal data
 
-* [Customers](https://docs.commercetools.com/http-api-projects-customers.html)
+* [Customer](https://docs.commercetools.com/http-api-projects-customers.html)
 * [Orders](https://docs.commercetools.com/http-api-projects-orders.html)
 * [Carts](https://docs.commercetools.com/http-api-projects-carts.html)
 * [Payments](https://docs.commercetools.com/http-api-projects-payments.html)
@@ -17,17 +17,17 @@ The constructor accepts two arguments:
 
 * A required object containing the following values:
   * `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
-  * `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`view_products`, `view_orders`, `view_customers`]. More info on how to get the access token [here](https://docs.commercetools.com/http-api-authorization.html#authorization-flows)
+  * `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`view_products`, `manage_products`, `view_orders`, `manage_orders`, `view_payments`, `manage_payments`, `view_shopping_lists`, `manage_shopping_lists`, `view_customers`, `manage_customers`]. More info on how to get the access token [here](https://docs.commercetools.com/http-api-authorization.html#authorization-flows)
 * An optional logger object having four functions (`info`, `warn`, `error` and `debug`)
 
 ## Usage
 
-`npm install @commercetools/customer-erasure --global`
+`npm install @commercetools/personal-data-erasure --global`
 
 ### CLI
 
 ```
-Usage: customer-erasure.js [options]
+Usage: personal-data-erasure.js [options]
 Export and delete all data related to a single customer
 
 Options:
@@ -47,7 +47,7 @@ Options:
   --logLevel        Logging level: error, warn, info or debug. [default: "info"]
   --prettyLogs      Pretty print logs to the terminal                  [boolean]
   --logFile         Path to where to save logs file.
-                                      [string] [default: "customer-erasure.log"]
+                                      [string] [default: "personal-data-erasure.log"]
 ```
 
 #### Info on flags
@@ -56,14 +56,14 @@ Options:
 * The `--output` flag specifies where to output/save the exported customer data. Several notes on this flag:
   * If the file specified already exists, it will be overwritten.
   * The default location for status report logging is the standard output.
-  * If no output path is specified, the exported data will be logged to the standard output as a result, status reports will be logged to a `customer-erasure.log` file in the current directory.
+  * If no output path is specified, the exported data will be logged to the standard output as a result, status reports will be logged to a `personal-data-erasure.log` file in the current directory.
 
 ### JS
 
 For more direct usage, it is possible to use this module directly:
 
 ```js
-import CustomerErasure from '@commercetools/customer-erasure'
+import PersonalDataErasure from '@commercetools/personal-data-erasure'
 
 const options = {
     apiConfig: {
@@ -85,11 +85,11 @@ const logger = {
   debug: console.debug,
 }
 
-const CustomerErasure = new CustomerErasure(options, logger)
+const PersonalDataErasure = new PersonalDataErasure(options, logger)
 
 // function to get all data related to customer
-CustomerErasure.getCustomerData(outputStream)
+PersonalDataErasure.getCustomerData(outputStream)
 
 // function to delete all data related to customer
-CustomerErasure.deleteAll(outputStream)
+PersonalDataErasure.deleteAll(outputStream)
 ```

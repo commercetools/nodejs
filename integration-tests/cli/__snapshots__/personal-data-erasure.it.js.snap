@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`customer erasure CLI basic functionality should print usage information given the help flag 1`] = `
+exports[`personal data erasure CLI basic functionality should print usage information given the help flag 1`] = `
 "
-Usage: customer-erasure [options]
+Usage: personal-data-erasure [options]
 Export and delete all data related to a single customer
 
 Options:
@@ -22,7 +22,7 @@ Options:
   --logLevel        Logging level: error, warn, info or debug. [default: \\"info\\"]
   --prettyLogs      Pretty print logs to the terminal                  [boolean]
   --logFile         Path to where to save logs file.
-                                      [string] [default: \\"customer-erasure.log\\"]
+                                 [string] [default: \\"personal-data-erasure.log\\"]
 
 "
 `;
