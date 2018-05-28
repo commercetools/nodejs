@@ -53,7 +53,7 @@
     "check-node-version": "3.2.0",
     "codecov": "3.0.2",
     "commitizen": "2.9.6",
-    "common-tags": "1.7.2",
+    "common-tags": "1.8.0",
     "cross-env": "5.1.5",
     "cz-lerna-changelog": "1.2.1",
     "debug": "3.1.0",
