@@ -52,7 +52,7 @@
     "babel-preset-stage-0": "6.24.1",
     "check-node-version": "3.2.0",
     "codecov": "3.0.2",
-    "commitizen": "2.9.6",
+    "commitizen": "2.10.1",
     "common-tags": "1.7.2",
     "cross-env": "5.1.5",
     "cz-lerna-changelog": "1.2.1",
