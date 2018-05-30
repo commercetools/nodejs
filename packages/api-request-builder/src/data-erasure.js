@@ -8,14 +8,10 @@
  *
  * More info here: https://docs.commercetools.com/release-notes#releases-2018-05-24-data-erasure
  *
- * @param  {boolean} dataErasure - The dataErasure boolean option
- * @throws if `dataErasure` is missing or not a boolean.
  * @return {Object} The instance of the service, can be chained.
  */
 
-export default function fullDataErasure(dataErasure: boolean): Object {
-  if (typeof dataErasure !== 'boolean')
-    throw new Error('Required argument for `fullDataErasure` is missing')
-  this.params.dataErasure = dataErasure
+export default function withFullDataErasure(): Object {
+  this.params.dataErasure = 'dataErasure=true'
   return this
 }

@@ -412,7 +412,7 @@ describe('createService', () => {
         expect(
           service
             .byCustomerId('foo')
-            .fullDataErasure(true)
+            .withFullDataErasure()
             .build()
         ).toBe('/my-project1/test?customerId=foo&dataErasure=true')
       })
@@ -440,7 +440,7 @@ describe('createService', () => {
           service
             .byCartId('foo')
             .withVersion(3)
-            .fullDataErasure(true)
+            .withFullDataErasure()
             .build()
         ).toBe('/my-project1/test?cartId=foo&version=3&dataErasure=true')
       })

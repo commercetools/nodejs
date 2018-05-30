@@ -1,22 +1,14 @@
-import fullDataErasure from '../src/data-erasure'
+import withFullDataErasure from '../src/data-erasure'
 
-describe('fullDataErasure', () => {
+describe('withFullDataErasure', () => {
   let service
 
   beforeEach(() => {
-    service = { params: {}, fullDataErasure }
+    service = { params: {}, withFullDataErasure }
   })
 
-  test('should set the version number of an item', () => {
-    service.fullDataErasure(true)
-    expect(service.params.dataErasure).toBe(true)
-  })
-
-  test('should throw if not passed any value', () => {
-    expect(() => service.fullDataErasure()).toThrowErrorMatchingSnapshot()
-  })
-
-  test('should throw if not passed a number', () => {
-    expect(() => service.fullDataErasure('foo')).toThrowErrorMatchingSnapshot()
+  test('should set the dataErasure option to true', () => {
+    service.withFullDataErasure()
+    expect(service.params.dataErasure).toMatchSnapshot()
   })
 })

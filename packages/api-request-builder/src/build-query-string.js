@@ -106,7 +106,7 @@ export default function buildQueryString(
 
   if (version) queryString.push(`version=${version}`)
 
-  if (dataErasure) queryString.push(`dataErasure=${String(dataErasure)}`)
+  if (dataErasure) queryString.push(dataErasure)
 
   return queryString.join('&')
 }

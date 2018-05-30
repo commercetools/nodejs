@@ -75,14 +75,14 @@ const uri = service.channels.withVersion(2).build()
 
 You can also append the `dataErasure` option to the uri when making a delete request if you want to make sure all related data is deleted. For example, regarding the GDPR, this means that all personal data related to the particular object, including invisible data, is erased. [More info here](https://docs.commercetools.com/release-notes#releases-2018-05-24-data-erasure)
 
-This can be done by passing the required `boolean` to the `.fullDataErasure()` method.
+This can be done by using the `.withFullDataErasure()` method.
 
 ```js
 const service = createRequestBuilder(options)
 const deleteUri = service.payments
   .byId(12345)
   .withVersion(3)
-  .fullDataErasure(true)
+  .withFullDataErasure()
   .build()
 ```
 

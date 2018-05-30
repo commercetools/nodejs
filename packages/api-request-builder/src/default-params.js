@@ -211,5 +211,5 @@ export function setParams(params: ServiceBuilderParams) {
   if (hasKey(params, 'version')) this.withVersion(params.version)
 
   // dataErasure
-  if (hasKey(params, 'dataErasure')) this.fullDataErasure(params.dataErasure)
+  if (hasKey(params, 'dataErasure')) this.withFullDataErasure()
 }

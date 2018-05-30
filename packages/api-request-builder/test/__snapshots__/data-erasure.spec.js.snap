@@ -1,5 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`fullDataErasure should throw if not passed a number 1`] = `"Required argument for \`fullDataErasure\` is missing"`;
-
-exports[`fullDataErasure should throw if not passed any value 1`] = `"Required argument for \`fullDataErasure\` is missing"`;
+exports[`withFullDataErasure should set the dataErasure option to true 1`] = `"dataErasure=true"`;
