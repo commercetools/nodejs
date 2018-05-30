@@ -356,6 +356,12 @@ describe('createService', () => {
       )
     })
 
+    test('should support `dataErasure`', () => {
+      expect(service.parse({ dataErasure: true }).build()).toBe(
+        '/my-project1/foo?dataErasure=true'
+      )
+    })
+
     test('should throw on unknown keys', () => {
       expect(() => service.parse({ foo: 'bar' })).toThrow('Unknown key "foo"')
     })
@@ -402,6 +408,15 @@ describe('createService', () => {
         ).toBe('/my-project1/test?customerId=foo&version=3')
       })
 
+      test('should mix customerId and dataErasure', () => {
+        expect(
+          service
+            .byCustomerId('foo')
+            .fullDataErasure(true)
+            .build()
+        ).toBe('/my-project1/test?customerId=foo&dataErasure=true')
+      })
+
       test('should mix cartId and queryParams', () => {
         expect(
           service
@@ -418,6 +433,16 @@ describe('createService', () => {
             .withVersion(3)
             .build()
         ).toBe('/my-project1/test?cartId=foo&version=3')
+      })
+
+      test('should mix cartId, version and dataErasure', () => {
+        expect(
+          service
+            .byCartId('foo')
+            .withVersion(3)
+            .fullDataErasure(true)
+            .build()
+        ).toBe('/my-project1/test?cartId=foo&version=3&dataErasure=true')
       })
 
       test('should mix queryParams and version', () => {

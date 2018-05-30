@@ -226,6 +226,7 @@ export type ServiceBuilderDefaultParams = {
   version?: number,
   customerId?: string,
   cartId?: string,
+  dataErasure?: boolean,
 }
 export type ServiceBuilderParams = {
   // query-expand
@@ -276,6 +277,7 @@ export type ServiceBuilderParams = {
 
   // version
   version?: string,
+  dataErasure?: string,
 }
 export type ServiceBuilder = {
   type: string,
