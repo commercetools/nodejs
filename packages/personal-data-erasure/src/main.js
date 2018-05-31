@@ -1,3 +1,4 @@
+/* @flow */
 import fetch from 'node-fetch'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
@@ -7,13 +8,32 @@ import {
   createAuthMiddlewareWithExistingToken,
 } from '@commercetools/sdk-middleware-auth'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
+import type {
+  ApiConfigOptions,
+  LoggerOptions,
+  ExporterOptions,
+  AllData,
+  Messages,
+} from 'types/personalDataErasure'
+import type {
+  Client,
+  ClientRequest,
+  ClientResponse,
+  ServiceBuilderInstance,
+  MethodType,
+  ClientResult,
+} from 'types/sdk'
 import flatten from 'lodash.flatten'
 import silentLogger from './utils/silent-logger'
 import pkg from '../package.json'
 
-// todo add flow types
 export default class PersonalDataErasure {
-  constructor(options) {
+  // Set type annotations
+  apiConfig: ApiConfigOptions
+  client: Client
+  logger: LoggerOptions
+
+  constructor(options: ExporterOptions) {
     if (!options.apiConfig)
       throw new Error('The constructor must be passed an `apiConfig` object')
     this.apiConfig = options.apiConfig
@@ -40,7 +60,7 @@ export default class PersonalDataErasure {
     }
   }
 
-  getCustomerData(customerId) {
+  getCustomerData(customerId: string): Promise<AllData> {
     if (!customerId) throw Error('missing `customerId` argument')
 
     this.logger.info('Starting to fetch data')
@@ -60,7 +80,7 @@ export default class PersonalDataErasure {
     const paymentsUri = requestBuilder.payments
       .where(`customer(id = "${customerId}")`)
       .build()
-    const shoppingsListsUri = requestBuilder.shoppingLists
+    const shoppingListsUri = requestBuilder.shoppingLists
       .where(`customer(id = "${customerId}")`)
       .build()
     const reviewsUri = requestBuilder.reviews
@@ -72,29 +92,37 @@ export default class PersonalDataErasure {
       ordersUri,
       cartsUri,
       paymentsUri,
-      shoppingsListsUri,
+      shoppingListsUri,
       reviewsUri,
     ]
 
     return Promise.all(
-      urisOfResourcesToDelete.map(uri => {
+      urisOfResourcesToDelete.map((uri: string): Promise<any> => {
         const request = PersonalDataErasure.buildRequest(uri, 'GET')
-        return this.client.process(request, response => {
-          if (response.statusCode !== 200 && response.statusCode !== 404)
-            return Promise.reject(
-              Error(`Request returned status code ${response.statusCode}`)
-            )
 
-          return Promise.resolve(response)
-        })
+        return this.client.process(
+          request,
+          (response: ClientResult): Promise<ClientResult> => {
+            if (response.statusCode !== 200 && response.statusCode !== 404)
+              return Promise.reject(
+                Error(`Request returned status code ${response.statusCode}`)
+              )
+
+            return Promise.resolve(response)
+          },
+          { accumulate: true }
+        )
       })
-    ).then(async responses => {
+    ).then(async (responses: Array<AllData>): Promise<AllData> => {
       const flattenedResponses = flatten(responses)
 
       let results = flatten(
-        flattenedResponses.map(response => response.body.results)
+        flattenedResponses.map(
+          (response: ClientResponse): Array<ClientResult> | void =>
+            response.body ? response.body.results : undefined
+        )
       )
-      const ids = results.map(result => result.id)
+      const ids = results.map((result: Object): Array<string> => result.id)
 
       if (ids.length > 0) {
         const reference = PersonalDataErasure.buildReference(ids)
@@ -106,92 +134,111 @@ export default class PersonalDataErasure {
         results = [...messages, ...results]
       }
       this.logger.info('Export operation completed successfully')
+
       return Promise.resolve(results)
     })
   }
 
-  async _getAllMessages(request) {
-    const messages = await this.client.process(request, response => {
-      if (response.statusCode !== 200 && response.statusCode !== 404)
-        return Promise.reject(
-          Error(`Request returned status code ${response.statusCode}`)
-        )
+  async _getAllMessages(request: ClientRequest): Promise<Messages> {
+    const messages = await this.client.process(
+      request,
+      (response: ClientResult): Promise<any> => {
+        if (response.statusCode !== 200 && response.statusCode !== 404)
+          return Promise.reject(
+            Error(`Request returned status code ${response.statusCode}`)
+          )
 
-      return Promise.resolve(response)
-    })
-    return flatten(messages.map(result => result.body.results))
+        return Promise.resolve(response)
+      },
+      { accumulate: true }
+    )
+    return flatten(
+      messages.map(
+        (response: ClientResponse): Messages | void =>
+          response.body ? response.body.results : undefined
+      )
+    )
   }
 
-  deleteAll(customerId) {
+  deleteAll(customerId: string): Promise<any> {
     if (!customerId) throw Error('missing `customerId` argument')
     this.logger.info('Starting deletion')
 
     const requestBuilder = createRequestBuilder({
       projectKey: this.apiConfig.projectKey,
     })
-    const customersUri = {
+    const customersResource = {
       uri: requestBuilder.customers.where(`id = "${customerId}"`).build(),
       builder: requestBuilder.customers,
     }
-    const ordersUri = {
+    const ordersResource = {
       uri: requestBuilder.orders.where(`customerId = "${customerId}"`).build(),
       builder: requestBuilder.orders,
     }
-    const cartsUri = {
+    const cartsResource = {
       uri: requestBuilder.carts.where(`customerId = "${customerId}"`).build(),
       builder: requestBuilder.carts,
     }
-    const paymentsUri = {
+    const paymentsResource = {
       uri: requestBuilder.payments
         .where(`customer(id = "${customerId}")`)
         .build(),
       builder: requestBuilder.payments,
     }
-    const shoppingsListsUri = {
+    const shoppingListsResource = {
       uri: requestBuilder.shoppingLists
         .where(`customer(id = "${customerId}")`)
         .build(),
       builder: requestBuilder.shoppingLists,
     }
-    const reviewsUri = {
+    const reviewsResource = {
       uri: requestBuilder.reviews
         .where(`customer(id = "${customerId}")`)
         .build(),
       builder: requestBuilder.reviews,
     }
 
-    const urisOfResourcesToDelete = [
-      customersUri,
-      ordersUri,
-      cartsUri,
-      paymentsUri,
-      shoppingsListsUri,
-      reviewsUri,
+    const resourcesToDelete = [
+      customersResource,
+      ordersResource,
+      cartsResource,
+      paymentsResource,
+      shoppingListsResource,
+      reviewsResource,
     ]
 
     return Promise.all(
-      urisOfResourcesToDelete.map(uri => {
-        const request = PersonalDataErasure.buildRequest(uri.uri, 'GET')
+      resourcesToDelete.map(
+        (resource: {
+          uri: string,
+          builder: ServiceBuilderInstance,
+        }): Promise<any> => {
+          const request = PersonalDataErasure.buildRequest(resource.uri, 'GET')
 
-        return this.client.process(request, response => {
-          if (response.statusCode !== 200 && response.statusCode !== 404)
-            return Promise.reject(
-              Error(`Request returned status code ${response.statusCode}`)
-            )
-          if (response.statusCode === 200)
-            this._deleteOne(response, uri.builder)
-          return Promise.resolve()
-        })
-      })
+          return this.client.process(
+            request,
+            (response: Object): Promise<any> => {
+              if (response.statusCode !== 200 && response.statusCode !== 404)
+                return Promise.reject(
+                  Error(`Request returned status code ${response.statusCode}`)
+                )
+              if (response.statusCode === 200)
+                this._deleteOne(response, resource.builder)
+              return Promise.resolve()
+            },
+            { accumulate: true }
+          )
+        }
+      )
     )
   }
 
-  _deleteOne(response, builder) {
-    const results = response.body.results
+  _deleteOne(response: ClientResponse, builder: ServiceBuilderInstance) {
+    const results = response.body ? response.body.results : []
     if (results.length > 0) {
       Promise.all(
-        results.map(result => {
-          const deleteRequest = PersonalDataErasure.buildDeleteRequests(
+        results.map((result: ClientResult): Promise<ClientResult> => {
+          const deleteRequest = PersonalDataErasure.buildDeleteRequest(
             result,
             builder
           )
@@ -201,22 +248,26 @@ export default class PersonalDataErasure {
     }
   }
 
-  static buildDeleteRequests(result, builder) {
-    let deleteUri = builder
+  static buildDeleteRequest(
+    result: Object,
+    builder: ServiceBuilderInstance
+  ): ClientRequest {
+    const deleteUri = builder
       .byId(result.id)
       .withVersion(result.version)
+      .withFullDataErasure()
       .build()
 
-    // todo add config option to URI builder
-    deleteUri += '&dataErasure=true'
     return PersonalDataErasure.buildRequest(deleteUri, 'DELETE')
   }
 
-  static buildReference(references) {
-    return `resource(id in ("${references.map(id => id).join('", "')}"))`
+  static buildReference(references: Array<string>): string {
+    return `resource(id in ("${references
+      .map((id: string): string => id)
+      .join('", "')}"))`
   }
 
-  static buildRequest(uri, method) {
+  static buildRequest(uri: string, method: MethodType): ClientRequest {
     return { uri, method }
   }
 }

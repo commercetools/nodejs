@@ -292,6 +292,22 @@ export type ServiceBuilderDefinition = {
   endpoint: string,
   features: Array<string>,
 }
+export type ServiceBuilderInstance = {
+  withVersion: Function,
+  withFullDataErasure: Function,
+  where: Function,
+  whereOperator: Function,
+  sort: Function,
+  page: Function,
+  perPage: Function,
+  byId: Function,
+  byKey: Function,
+  byCustomerId: Function,
+  byCartId: Function,
+  expand: Function,
+  build: Function,
+  parse: Function,
+}
 export type ApiRequestBuilder = {
   [key: string]: ServiceBuilder,
 }
