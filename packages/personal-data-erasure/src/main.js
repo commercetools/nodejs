@@ -87,7 +87,7 @@ export default class PersonalDataErasure {
       .where(`customer(id = "${customerId}")`)
       .build()
 
-    const urisOfResourcesToDelete = [
+    const urisOfResources = [
       customersUri,
       ordersUri,
       cartsUri,
@@ -97,7 +97,7 @@ export default class PersonalDataErasure {
     ]
 
     return Promise.all(
-      urisOfResourcesToDelete.map((uri: string): Promise<any> => {
+      urisOfResources.map((uri: string): Promise<AllData> => {
         const request = PersonalDataErasure.buildRequest(uri, 'GET')
 
         return this.client.process(
@@ -142,7 +142,7 @@ export default class PersonalDataErasure {
   async _getAllMessages(request: ClientRequest): Promise<Messages> {
     const messages = await this.client.process(
       request,
-      (response: ClientResult): Promise<any> => {
+      (response: ClientResult): Promise<ClientResult> => {
         if (response.statusCode !== 200 && response.statusCode !== 404)
           return Promise.reject(
             Error(`Request returned status code ${response.statusCode}`)
@@ -160,7 +160,7 @@ export default class PersonalDataErasure {
     )
   }
 
-  deleteAll(customerId: string): Promise<any> {
+  deleteAll(customerId: string): Promise<AllData> {
     if (!customerId) throw Error('missing `customerId` argument')
     this.logger.info('Starting deletion')
 
