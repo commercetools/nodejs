@@ -20,10 +20,9 @@ export type ApiConfigOptions = {
   apiUrl?: string,
 }
 
-export type ExporterOptions = {
+export type ErasureOptions = {
   apiConfig: ApiConfigOptions,
   accessToken?: string,
-  predicate?: string,
   logger: LoggerOptions,
 }
 

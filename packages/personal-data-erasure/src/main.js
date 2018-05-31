@@ -11,7 +11,7 @@ import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-ag
 import type {
   ApiConfigOptions,
   LoggerOptions,
-  ExporterOptions,
+  ErasureOptions,
   AllData,
   Messages,
 } from 'types/personalDataErasure'
@@ -33,7 +33,7 @@ export default class PersonalDataErasure {
   client: Client
   logger: LoggerOptions
 
-  constructor(options: ExporterOptions) {
+  constructor(options: ErasureOptions) {
     if (!options.apiConfig)
       throw new Error('The constructor must be passed an `apiConfig` object')
     this.apiConfig = options.apiConfig
