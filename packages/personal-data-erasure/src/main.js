@@ -60,7 +60,7 @@ export default class PersonalDataErasure {
     }
   }
 
-  getCustomerData(customerId: string): Promise<AllData> {
+  getCustomerData(customerId: string): Promise<Array<AllData>> {
     if (!customerId) throw Error('missing `customerId` argument')
 
     this.logger.info('Starting to fetch data')
@@ -97,7 +97,7 @@ export default class PersonalDataErasure {
     ]
 
     return Promise.all(
-      urisOfResources.map((uri: string): Promise<AllData> => {
+      urisOfResources.map((uri: string): Promise<Array<AllData>> => {
         const request = PersonalDataErasure.buildRequest(uri, 'GET')
 
         return this.client.process(
@@ -113,7 +113,9 @@ export default class PersonalDataErasure {
           { accumulate: true }
         )
       })
-    ).then(async (responses: Array<AllData>): Promise<AllData> => {
+    ).then(async (responses: Array<Array<AllData>>): Promise<
+      Array<AllData>
+    > => {
       const flattenedResponses = flatten(responses)
 
       let results = flatten(
@@ -122,7 +124,7 @@ export default class PersonalDataErasure {
             response.body ? response.body.results : undefined
         )
       )
-      const ids = results.map((result: Object): Array<string> => result.id)
+      const ids = results.map((result: AllData): string => result.id)
 
       if (ids.length > 0) {
         const reference = PersonalDataErasure.buildReference(ids)
@@ -160,7 +162,7 @@ export default class PersonalDataErasure {
     )
   }
 
-  deleteAll(customerId: string): Promise<AllData> {
+  deleteAll(customerId: string): Promise<Array<AllData>> {
     if (!customerId) throw Error('missing `customerId` argument')
     this.logger.info('Starting deletion')
 
@@ -212,12 +214,12 @@ export default class PersonalDataErasure {
         (resource: {
           uri: string,
           builder: ServiceBuilderInstance,
-        }): Promise<any> => {
+        }): Promise<AllData> => {
           const request = PersonalDataErasure.buildRequest(resource.uri, 'GET')
 
           return this.client.process(
             request,
-            (response: Object): Promise<any> => {
+            (response: ClientResponse): Promise<void> => {
               if (response.statusCode !== 200 && response.statusCode !== 404)
                 return Promise.reject(
                   Error(`Request returned status code ${response.statusCode}`)

@@ -2,10 +2,10 @@
 
 /* Logger */
 export type LoggerOptions = {
-  error: Function,
-  info: Function,
-  warn: Function,
-  debug: Function,
+  error: (...args: Array<any>) => void,
+  info: (...args: Array<any>) => void,
+  warn: (...args: Array<any>) => void,
+  debug: (...args: Array<any>) => void,
 }
 
 /* Config */
@@ -182,7 +182,7 @@ export type Review = {
   custom?: Object,
 }
 
-export type Messages = Array<{
+export type Message = {
   id: string,
   version: number,
   sequenceNumber: number,
@@ -192,8 +192,8 @@ export type Messages = Array<{
   customer?: Customer,
   createdAt: string,
   lastModifiedAt: string,
-}>
+}
 
-export type AllData = Array<
-  Customer | Order | Cart | Payment | ShoppingList | Review
->
+export type Messages = Array<Message>
+
+export type AllData = Customer | Order | Cart | Payment | ShoppingList | Review
