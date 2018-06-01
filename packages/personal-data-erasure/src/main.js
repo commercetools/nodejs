@@ -239,7 +239,7 @@ export default class PersonalDataErasure {
     const results = response.body ? response.body.results : []
     if (results.length > 0) {
       Promise.all(
-        results.map((result: ClientResult): Promise<ClientResult> => {
+        results.map((result: AllData): Promise<ClientResult> => {
           const deleteRequest = PersonalDataErasure.buildDeleteRequest(
             result,
             builder
@@ -251,7 +251,7 @@ export default class PersonalDataErasure {
   }
 
   static buildDeleteRequest(
-    result: Object,
+    result: AllData,
     builder: ServiceBuilderInstance
   ): ClientRequest {
     const deleteUri = builder
