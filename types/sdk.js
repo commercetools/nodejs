@@ -292,6 +292,22 @@ export type ServiceBuilderDefinition = {
   endpoint: string,
   features: Array<string>,
 }
+export type ServiceBuilderInstance = {
+  withVersion: (version: number) => Object,
+  withFullDataErasure(): Object,
+  where: (predicate: string) => Object,
+  whereOperator: (option: string) => Object,
+  sort: (option: string) => Object,
+  page: (page: number) => Object,
+  perPage: (amount: number) => Object,
+  byId: (id: string) => Object,
+  byKey: (key: string) => Object,
+  byCustomerId: (id: string) => Object,
+  byCartId: (id: string) => Object,
+  expand: (string: string) => Object,
+  build(): string,
+  parse(): string,
+}
 export type ApiRequestBuilder = {
   [key: string]: ServiceBuilder,
 }
