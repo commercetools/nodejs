@@ -1,6 +1,6 @@
 # `sdk-middleware-logger`
 
-Middelware to log incoming [request](/sdk/Glossary.md#clientrequest) and [response](/sdk/Glossary.md#clientrequest) objects.
+Middleware to log incoming [request](/sdk/Glossary.md#clientrequest) and [response](/sdk/Glossary.md#clientrequest) objects.
 
 ## Install
 

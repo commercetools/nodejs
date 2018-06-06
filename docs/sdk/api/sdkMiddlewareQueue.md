@@ -1,6 +1,6 @@
 # `sdk-middleware-queue`
 
-Middelware to throttle concurrent [request](/sdk/Glossary.md#clientrequest) to a certain limit. Useful to reduce concurrent HTTP requests.
+Middleware to throttle concurrent [request](/sdk/Glossary.md#clientrequest) to a certain limit. Useful to reduce concurrent HTTP requests.
 
 ## Install
 

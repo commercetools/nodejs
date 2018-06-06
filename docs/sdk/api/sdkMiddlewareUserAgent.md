@@ -1,6 +1,6 @@
 # `sdk-middleware-user-agent`
 
-Middelware to automatically set the `User-Agent` to the [request](/sdk/Glossary.md#clientrequest).
+Middleware to automatically set the `User-Agent` to the [request](/sdk/Glossary.md#clientrequest).
 
 ## Install
 
