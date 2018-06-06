@@ -1,6 +1,6 @@
 # `sdk-middleware-http`
 
-Middelware to send the actual HTTP [request](/sdk/Glossary.md#clientrequest).
+Middleware to send the actual HTTP [request](/sdk/Glossary.md#clientrequest).
 
 ## Install
 

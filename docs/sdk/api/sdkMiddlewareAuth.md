@@ -1,6 +1,6 @@
 # `sdk-middleware-auth`
 
-Middelware to authenticate the [request](/sdk/Glossary.md#clientrequest) using one of the supported _auth flows_.
+Middleware to authenticate the [request](/sdk/Glossary.md#clientrequest) using one of the supported _auth flows_.
 
 ## Install
 
