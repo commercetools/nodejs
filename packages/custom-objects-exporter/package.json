@@ -1,6 +1,6 @@
 {
     "name": "@commercetools/custom-objects-exporter",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Export custom objects from the commercetools platform",
     "main": "lib/main.js",
     "bin": {

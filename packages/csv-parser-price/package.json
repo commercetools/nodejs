@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/csv-parser-price",
-  "version": "2.1.22",
+  "version": "2.1.23",
   "description": "Module that parses price csv to json",
   "keywords": [
     "commercetools",
