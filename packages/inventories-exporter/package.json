@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/inventories-exporter",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "Export inventories from the commercetools platform.",
   "keywords": [
     "commercetools",
@@ -40,7 +40,7 @@
     "@commercetools/sdk-middleware-auth": "^4.0.0",
     "@commercetools/sdk-middleware-http": "^4.0.0",
     "@commercetools/sdk-middleware-user-agent": "^1.2.8",
-    "JSONStream": "^1.2.1",
+    "JSONStream": "1.3.2",
     "fast-csv": "^2.4.0",
     "node-fetch": "2.1.2",
     "npmlog": "^4.1.2",
