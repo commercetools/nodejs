@@ -1,4 +1,4 @@
-import { METHODS } from 'http'
+import METHODS from './allowed-methods'
 
 export default function validate(
   funcName: string,
