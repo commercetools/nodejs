@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/state-importer",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Import states to the commercetools platform",
   "main": "lib/main.js",
   "scripts": {
@@ -27,7 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "@commercetools/api-request-builder": "^3.8.0",
-    "@commercetools/sdk-client": "^1.5.6",
+    "@commercetools/sdk-client": "^1.5.7",
     "@commercetools/sdk-middleware-auth": "^4.0.0",
     "@commercetools/sdk-middleware-http": "^4.0.0",
     "@commercetools/sdk-middleware-user-agent": "^1.2.8",
