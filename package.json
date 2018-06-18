@@ -54,7 +54,7 @@
     "codecov": "3.0.2",
     "commitizen": "2.10.1",
     "common-tags": "1.8.0",
-    "cross-env": "5.1.6",
+    "cross-env": "5.2.0",
     "cz-lerna-changelog": "1.2.1",
     "debug": "3.1.0",
     "eslint": "4.19.1",
