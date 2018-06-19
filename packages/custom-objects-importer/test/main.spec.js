@@ -57,7 +57,7 @@ describe('CustomObjectsImporter', () => {
           key: 'copperKey',
           value: {
             paymentID: '7',
-            paymentMethod: 'Cash',
+            paymentMethod: 'Crash',
           },
         },
         {

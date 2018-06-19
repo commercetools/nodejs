@@ -6,6 +6,8 @@ import {
   createAuthMiddlewareWithExistingToken,
 } from '@commercetools/sdk-middleware-auth'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
+import isEqual from 'lodash.isequal'
+
 import silentLogger from './utils/silent-logger'
 import pkg from '../package.json'
 
@@ -28,8 +30,6 @@ export default class CustomObjectsImporter {
       ],
     })
 
-    this.predicate = options.predicate
-
     this.logger = {
       ...silentLogger,
       ...options.logger,
@@ -42,44 +42,62 @@ export default class CustomObjectsImporter {
 
   processBatches(objects) {
     this.logger.info('Starting Import')
-    const predicate = CustomObjectsImporter.buildPredicate(objects)
-    const uri = CustomObjectsImporter.buildUri(
-      this.apiConfig.projectKey,
-      predicate
-    )
+    const uri = CustomObjectsImporter.buildUri(this.apiConfig.projectKey)
 
     const existingObjectsRequest = CustomObjectsImporter.buildRequest(
       uri,
       'GET'
     )
-    console.log(existingObjectsRequest)
+
     this.client
       .execute(existingObjectsRequest)
-      .then(existingObjects => {
-        CustomObjectsImporter.execute(existingObjects.body.results, objects)
+      .then(existingObjects =>
+        this.createOrUpdateObjects(existingObjects.body.results, objects)
+      )
+      .then(requests => {
+        requests.forEach(request => {
+          console.log(request)
+
+          // this.client.execute(request)
+        })
       })
-      .then(() => Promise.resolve())
       .catch(error => {
         throw Error(error.message || 'this went downwards quickly')
       })
   }
 
-  static execute(existingObjects, newObjects) {
-    console.log(existingObjects)
-    console.log('helloooooo')
-    console.log(newObjects)
+  createOrUpdateObjects(existingObjects, newObjects) {
+    this.logger.info('Executing...')
+    const createOrUpdateObjects = newObjects.map(newObject => {
+      const existing = existingObjects.find(
+        oldObject =>
+          oldObject.key === newObject.key &&
+          oldObject.container === newObject.container
+      )
+
+      if (isEqual(newObject.value, existing.value)) {
+        return null
+      }
+
+      return newObject
+    })
+
+    return this.buildRequests(createOrUpdateObjects.filter(object => object))
   }
 
-  static buildPredicate(objects) {
-    // key in ("copperKey", "jadeKey")
-    return `key in ("${objects.map(object => object.key).join('", "')}")`
+  buildRequests(newObjects) {
+    this.logger.info('Creating requests...')
+    const uri = CustomObjectsImporter.buildUri(this.apiConfig.projectKey)
+
+    return newObjects.map(newObject =>
+      CustomObjectsImporter.buildRequest(uri, 'POST', newObject)
+    )
   }
 
-  static buildUri(projectKey, predicate) {
+  static buildUri(projectKey) {
     const service = createRequestBuilder({
       projectKey,
     }).customObjects
-    if (predicate) service.where(predicate)
     return service.build()
   }
 
