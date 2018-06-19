@@ -210,7 +210,7 @@ function _buildVariantImagesAction(
         if (Number(image[2]) === 3)
           // image position changed
           actions.push({
-            action: 'moveImagetoPosition',
+            action: 'moveImageToPosition',
             variantId: oldVariant.id,
             imageUrl: oldObj.url,
             position: Number(image[1]),

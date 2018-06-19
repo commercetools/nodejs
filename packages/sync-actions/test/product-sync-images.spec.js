@@ -148,7 +148,7 @@ describe('Actions', () => {
           },
         },
         {
-          action: 'moveImagetoPosition',
+          action: 'moveImageToPosition',
           variantId: 3,
           imageUrl: '//example.com/image4.png',
           position: 0,
@@ -313,7 +313,7 @@ describe('Actions', () => {
           variantId: 1,
         },
         {
-          action: 'moveImagetoPosition',
+          action: 'moveImageToPosition',
           variantId: 1,
           imageUrl:
             'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/cactus-with-surfboar-BmOeVZEZ.jpg',
