@@ -6,13 +6,6 @@ const createTestProductType = custom => ({
   ...custom,
 })
 
-const createAttributeDefinition = custom => ({
-  type: {
-    name: custom.name,
-  },
-  ...custom,
-})
-
 describe('Actions', () => {
   let before
   let now
@@ -26,23 +19,27 @@ describe('Actions', () => {
       beforeEach(() => {
         before = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'enum',
-              values: [],
-            }),
+            {
+              type: {
+                name: 'enum',
+                values: [],
+              },
+            },
           ],
         })
         now = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'enum',
-              values: [
-                {
-                  key: 'enum_1',
-                  label: 'enum-1',
-                },
-              ],
-            }),
+            {
+              type: {
+                name: 'enum',
+                values: [
+                  {
+                    key: 'enum_1',
+                    label: 'enum-1',
+                  },
+                ],
+              },
+            },
           ],
         })
         // we get a change operation only here.
@@ -65,31 +62,35 @@ describe('Actions', () => {
       beforeEach(() => {
         before = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'enum',
-              values: [
-                {
-                  key: 'enum_1',
-                  label: 'enum-1',
-                },
-                {
-                  key: 'enum_2',
-                  label: 'enum-2',
-                },
-                {
-                  key: 'enum_4',
-                  label: 'enum-4',
-                },
-              ],
-            }),
+            {
+              type: {
+                name: 'enum',
+                values: [
+                  {
+                    key: 'enum_1',
+                    label: 'enum-1',
+                  },
+                  {
+                    key: 'enum_2',
+                    label: 'enum-2',
+                  },
+                  {
+                    key: 'enum_4',
+                    label: 'enum-4',
+                  },
+                ],
+              },
+            },
           ],
         })
         now = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'enum',
-              values: [],
-            }),
+            {
+              type: {
+                name: 'enum',
+                values: [],
+              },
+            },
           ],
         })
         updateActions = productTypesSync.buildActions(now, before)
@@ -108,26 +109,30 @@ describe('Actions', () => {
       beforeEach(() => {
         before = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'enum',
-              values: [
-                { key: 'enum_0', label: 'enum-0' },
-                { key: 'enum_2', label: 'enum-2' },
-                { key: 'enum_4', label: 'enum-4' },
-              ],
-            }),
+            {
+              type: {
+                name: 'enum',
+                values: [
+                  { key: 'enum_0', label: 'enum-0' },
+                  { key: 'enum_2', label: 'enum-2' },
+                  { key: 'enum_4', label: 'enum-4' },
+                ],
+              },
+            },
           ],
         })
         now = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'enum',
-              values: [
-                { key: 'enum_1', label: 'enum-1' },
-                { key: 'enum_3', label: 'enum-3' },
-                { key: 'enum_5', label: 'enum-5' },
-              ],
-            }),
+            {
+              type: {
+                name: 'enum',
+                values: [
+                  { key: 'enum_1', label: 'enum-1' },
+                  { key: 'enum_3', label: 'enum-3' },
+                  { key: 'enum_5', label: 'enum-5' },
+                ],
+              },
+            },
           ],
         })
         updateActions = productTypesSync.buildActions(now, before)
@@ -161,25 +166,29 @@ describe('Actions', () => {
       beforeEach(() => {
         before = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'enum',
-              values: [
-                { key: 'enum_0', label: 'enum-0' },
-                { key: 'enum_2', label: 'enum-2' },
-                { key: 'enum_4', label: 'enum-4' },
-              ],
-            }),
+            {
+              type: {
+                name: 'enum',
+                values: [
+                  { key: 'enum_0', label: 'enum-0' },
+                  { key: 'enum_2', label: 'enum-2' },
+                  { key: 'enum_4', label: 'enum-4' },
+                ],
+              },
+            },
           ],
         })
         now = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'enum',
-              values: [
-                { key: 'enum_0', label: 'enum-0' },
-                { key: 'enum_3', label: 'enum-3' },
-              ],
-            }),
+            {
+              type: {
+                name: 'enum',
+                values: [
+                  { key: 'enum_0', label: 'enum-0' },
+                  { key: 'enum_3', label: 'enum-3' },
+                ],
+              },
+            },
           ],
         })
 
@@ -207,26 +216,30 @@ describe('Actions', () => {
       beforeEach(() => {
         before = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'enum',
-              values: [
-                { key: 'enum_1', label: 'enum-1' },
-                { key: 'enum_2', label: 'enum-2' },
-                { key: 'enum_4', label: 'enum-4' },
-              ],
-            }),
+            {
+              type: {
+                name: 'enum',
+                values: [
+                  { key: 'enum_1', label: 'enum-1' },
+                  { key: 'enum_2', label: 'enum-2' },
+                  { key: 'enum_4', label: 'enum-4' },
+                ],
+              },
+            },
           ],
         })
         now = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'enum',
-              values: [
-                { key: 'enum_4', label: 'enum-4' },
-                { key: 'enum_1', label: 'enum-1' },
-                { key: 'enum_2', label: 'enum-2' },
-              ],
-            }),
+            {
+              type: {
+                name: 'enum',
+                values: [
+                  { key: 'enum_4', label: 'enum-4' },
+                  { key: 'enum_1', label: 'enum-1' },
+                  { key: 'enum_2', label: 'enum-2' },
+                ],
+              },
+            },
           ],
         })
         updateActions = productTypesSync.buildActions(now, before)
@@ -249,18 +262,22 @@ describe('Actions', () => {
       beforeEach(() => {
         before = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'enum',
-              values: [{ key: 'enum_1', label: 'enum-1' }],
-            }),
+            {
+              type: {
+                name: 'enum',
+                values: [{ key: 'enum_1', label: 'enum-1' }],
+              },
+            },
           ],
         })
         now = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'enum',
-              values: [{ key: 'enum_1', label: 'enum-4' }],
-            }),
+            {
+              type: {
+                name: 'enum',
+                values: [{ key: 'enum_1', label: 'enum-4' }],
+              },
+            },
           ],
         })
         updateActions = productTypesSync.buildActions(now, before)
@@ -281,26 +298,30 @@ describe('Actions', () => {
       beforeEach(() => {
         before = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'lenum',
-              values: [],
-            }),
+            {
+              type: {
+                name: 'lenum',
+                values: [],
+              },
+            },
           ],
         })
         now = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'lenum',
-              values: [
-                {
-                  key: 'lenum_1',
-                  label: {
-                    en: 'lenum-en',
-                    de: 'lenum-de',
+            {
+              type: {
+                name: 'lenum',
+                values: [
+                  {
+                    key: 'lenum_1',
+                    label: {
+                      en: 'lenum-en',
+                      de: 'lenum-de',
+                    },
                   },
-                },
-              ],
-            }),
+                ],
+              },
+            },
           ],
         })
         // we get a change operation only here.
@@ -326,37 +347,41 @@ describe('Actions', () => {
       beforeEach(() => {
         before = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'lenum',
-              values: [
-                {
-                  key: 'lenum_1',
-                  label: {
-                    en: 'lenum-1',
+            {
+              type: {
+                name: 'lenum',
+                values: [
+                  {
+                    key: 'lenum_1',
+                    label: {
+                      en: 'lenum-1',
+                    },
                   },
-                },
-                {
-                  key: 'lenum_2',
-                  label: {
-                    en: 'lenum-2',
+                  {
+                    key: 'lenum_2',
+                    label: {
+                      en: 'lenum-2',
+                    },
                   },
-                },
-                {
-                  key: 'lenum_4',
-                  label: {
-                    en: 'lenum-4',
+                  {
+                    key: 'lenum_4',
+                    label: {
+                      en: 'lenum-4',
+                    },
                   },
-                },
-              ],
-            }),
+                ],
+              },
+            },
           ],
         })
         now = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'lenum',
-              values: [],
-            }),
+            {
+              type: {
+                name: 'lenum',
+                values: [],
+              },
+            },
           ],
         })
         updateActions = productTypesSync.buildActions(now, before)
@@ -375,26 +400,30 @@ describe('Actions', () => {
       beforeEach(() => {
         before = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'lenum',
-              values: [
-                { key: 'enum_0', label: { en: 'enum-0' } },
-                { key: 'enum_2', label: { en: 'enum-2' } },
-                { key: 'enum_4', label: { en: 'enum-4' } },
-              ],
-            }),
+            {
+              type: {
+                name: 'lenum',
+                values: [
+                  { key: 'enum_0', label: { en: 'enum-0' } },
+                  { key: 'enum_2', label: { en: 'enum-2' } },
+                  { key: 'enum_4', label: { en: 'enum-4' } },
+                ],
+              },
+            },
           ],
         })
         now = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'lenum',
-              values: [
-                { key: 'enum_1', label: { en: 'enum-1' } },
-                { key: 'enum_3', label: { en: 'enum-3' } },
-                { key: 'enum_5', label: { en: 'enum-5' } },
-              ],
-            }),
+            {
+              type: {
+                name: 'lenum',
+                values: [
+                  { key: 'enum_1', label: { en: 'enum-1' } },
+                  { key: 'enum_3', label: { en: 'enum-3' } },
+                  { key: 'enum_5', label: { en: 'enum-5' } },
+                ],
+              },
+            },
           ],
         })
         updateActions = productTypesSync.buildActions(now, before)
@@ -428,25 +457,29 @@ describe('Actions', () => {
       beforeEach(() => {
         before = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'lenum',
-              values: [
-                { key: 'enum_0', label: { en: 'enum-0' } },
-                { key: 'enum_2', label: { en: 'enum-2' } },
-                { key: 'enum_4', label: { en: 'enum-4' } },
-              ],
-            }),
+            {
+              type: {
+                name: 'lenum',
+                values: [
+                  { key: 'enum_0', label: { en: 'enum-0' } },
+                  { key: 'enum_2', label: { en: 'enum-2' } },
+                  { key: 'enum_4', label: { en: 'enum-4' } },
+                ],
+              },
+            },
           ],
         })
         now = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'lenum',
-              values: [
-                { key: 'enum_0', label: { en: 'enum-0' } },
-                { key: 'enum_3', label: { en: 'enum-3' } },
-              ],
-            }),
+            {
+              type: {
+                name: 'lenum',
+                values: [
+                  { key: 'enum_0', label: { en: 'enum-0' } },
+                  { key: 'enum_3', label: { en: 'enum-3' } },
+                ],
+              },
+            },
           ],
         })
 
@@ -474,26 +507,30 @@ describe('Actions', () => {
       beforeEach(() => {
         before = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'lenum',
-              values: [
-                { key: 'enum_1', label: { en: 'enum-1' } },
-                { key: 'enum_2', label: { en: 'enum-2' } },
-                { key: 'enum_4', label: { en: 'enum-4' } },
-              ],
-            }),
+            {
+              type: {
+                name: 'lenum',
+                values: [
+                  { key: 'enum_1', label: { en: 'enum-1' } },
+                  { key: 'enum_2', label: { en: 'enum-2' } },
+                  { key: 'enum_4', label: { en: 'enum-4' } },
+                ],
+              },
+            },
           ],
         })
         now = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'lenum',
-              values: [
-                { key: 'enum_4', label: { en: 'enum-4' } },
-                { key: 'enum_1', label: { en: 'enum-1' } },
-                { key: 'enum_2', label: { en: 'enum-2' } },
-              ],
-            }),
+            {
+              type: {
+                name: 'lenum',
+                values: [
+                  { key: 'enum_4', label: { en: 'enum-4' } },
+                  { key: 'enum_1', label: { en: 'enum-1' } },
+                  { key: 'enum_2', label: { en: 'enum-2' } },
+                ],
+              },
+            },
           ],
         })
         updateActions = productTypesSync.buildActions(now, before)
@@ -516,18 +553,22 @@ describe('Actions', () => {
       beforeEach(() => {
         before = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'lenum',
-              values: [{ key: 'enum_1', label: { en: 'enum-1' } }],
-            }),
+            {
+              type: {
+                name: 'lenum',
+                values: [{ key: 'enum_1', label: { en: 'enum-1' } }],
+              },
+            },
           ],
         })
         now = createTestProductType({
           attributes: [
-            createAttributeDefinition({
-              name: 'lenum',
-              values: [{ key: 'enum_1', label: { en: 'enum-4' } }],
-            }),
+            {
+              type: {
+                name: 'lenum',
+                values: [{ key: 'enum_1', label: { en: 'enum-4' } }],
+              },
+            },
           ],
         })
         updateActions = productTypesSync.buildActions(now, before)

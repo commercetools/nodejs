@@ -1,0 +1,45 @@
+{
+    "name": "@commercetools/personal-data-erasure",
+    "version": "1.0.3",
+    "description": "Export and delete all data related to a single customer",
+    "main": "lib/main.js",
+    "bin": {
+        "personal-data-erasure": "bin/personal-data-erasure.js"
+    },
+    "scripts": {
+        "build": "babel src --out-dir lib"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/commercetools/nodejs/tree/master/packages/personal-data-erasure"
+    },
+    "homepage": "https://commercetools.github.io/nodejs/cli/personal-data-erasure.html",
+    "bugs": "https://github.com/commercetools/nodejs/issues",
+    "keywords": [
+        "commercetools",
+        "customer",
+        "get",
+        "delete",
+        "json",
+        "personal-data"
+    ],
+    "author": {
+        "name": "Daniel Eriksson",
+        "email": "daniel.eriksson@commercetools.de"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "@commercetools/api-request-builder": "^3.8.0",
+        "@commercetools/get-credentials": "^2.1.4",
+        "@commercetools/sdk-client": "^1.5.7",
+        "@commercetools/sdk-middleware-auth": "^3.5.2",
+        "@commercetools/sdk-middleware-http": "^3.0.0",
+        "@commercetools/sdk-middleware-user-agent": "^1.2.7",
+        "lodash.flatten": "^4.4.0",
+        "node-fetch": "^2.1.2",
+        "pino": "^4.16.1",
+        "pretty-error": "^2.1.1",
+        "prompt-confirm": "^1.2.0",
+        "yargs": "^11.0.0"
+    }
+}

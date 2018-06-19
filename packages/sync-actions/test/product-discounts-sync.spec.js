@@ -178,7 +178,6 @@ describe('Actions', () => {
     const actual = productDiscountsSync.buildActions(now, before)
     expect(actual).toEqual(expected)
   })
-
   test('should build the `setDescription` action', () => {
     const before = {
       description: {
@@ -186,11 +185,9 @@ describe('Actions', () => {
         de: 'de-description-before',
       },
     }
-
     const now = {
       description: { en: 'en-description-now', de: 'de-description-now' },
     }
-
     const expected = [
       {
         action: 'setDescription',

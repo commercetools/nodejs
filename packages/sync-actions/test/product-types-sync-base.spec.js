@@ -1,5 +1,5 @@
 import clone from '../src/utils/clone'
-import productTypesSyncFn, { actionGroups } from '../src/product-types'
+import createSyncProductTypes, { actionGroups } from '../src/product-types'
 import { baseActionsList } from '../src/product-types-actions'
 
 describe('Exports', () => {
@@ -23,7 +23,7 @@ describe('Actions', () => {
   let before
   let now
   beforeEach(() => {
-    productTypesSync = productTypesSyncFn()
+    productTypesSync = createSyncProductTypes()
   })
   describe('mutation', () => {
     test('should ensure given objects are not mutated', () => {

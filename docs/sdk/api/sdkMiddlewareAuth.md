@@ -1,6 +1,6 @@
 # `sdk-middleware-auth`
 
-Middelware to authenticate the [request](/sdk/Glossary.md#clientrequest) using one of the supported _auth flows_.
+Middleware to authenticate the [request](/sdk/Glossary.md#clientrequest) using one of the supported _auth flows_.
 
 ## Install
 
@@ -27,6 +27,7 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 2.  `projectKey` _(String)_: the key of the project to assign the default scope to
 3.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
 4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
+5.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
 
 #### Usage example
 
@@ -44,6 +45,9 @@ const client = createClient({
         clientSecret: 'secret',
       },
       scopes: ['view_products:test', 'manage_orders:test'],
+
+      // Optional if not globally available
+      fetch,
     }),
   ],
 })
@@ -62,6 +66,7 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 * The `user` field is an object containing `username` and `password`. [Sample below](#usage-example-1)
 
 4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) to assign to the OAuth token. _No default scope is sent_
+5.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
 
 #### Usage example
 
@@ -83,6 +88,9 @@ const client = createClient({
         },
       },
       scopes: ['view_products:test', 'manage_orders:test'],
+
+      // Optional if not globally available
+      fetch,
     }),
   ],
 })
@@ -98,6 +106,7 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 2.  `projectKey` _(String)_: the key of the project to assign the default scope to
 3.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`, `anonymousId`)
 4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
+5.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
 
 #### Usage example
 
@@ -116,6 +125,9 @@ const client = createClient({
         anonymousId: 'unique-id-of-customer-not-required',
       },
       scopes: ['view_products:test', 'manage_orders:test'],
+
+      // Optional if not globally available
+      fetch,
     }),
   ],
 })
@@ -131,6 +143,7 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 2.  `projectKey` _(String)_: the key of the project to assign the default scope to
 3.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
 4.  `refreshToken` _(String)_: refreshToken from the API to use to fetch new token.
+5.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
 
 #### Usage example
 
@@ -148,6 +161,9 @@ const client = createClient({
         clientSecret: 'secret',
       },
       refreshToken: 'foobar123',
+
+      // Optional if not globally available
+      fetch,
     }),
   ],
 })

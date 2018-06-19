@@ -13,6 +13,7 @@ import isuuid from 'isuuid'
 import CONSTANTS from '@commercetools/csv-parser-price/lib/constants'
 import CsvParserPrice from '@commercetools/csv-parser-price'
 import { version } from '@commercetools/csv-parser-price/package.json'
+import fetch from 'node-fetch'
 
 let projectKey
 if (process.env.CI === 'true') projectKey = 'price-parser-integration-test'
@@ -120,9 +121,10 @@ describe('CSV and CLI Tests', () => {
     beforeAll(() => {
       const client = createClient({
         middlewares: [
-          createAuthMiddlewareForClientCredentialsFlow(apiConfig),
+          createAuthMiddlewareForClientCredentialsFlow({ ...apiConfig, fetch }),
           createHttpMiddleware({
             host: CONSTANTS.host.api,
+            fetch,
           }),
         ],
       })
@@ -200,7 +202,7 @@ describe('CSV and CLI Tests', () => {
 
         expect(prices).toBeInstanceOf(Array)
         expect(prices).toMatchObject(expectedArray.prices)
-        expect(prices.length).toBe(2)
+        expect(prices).toHaveLength(2)
 
         // Because customTypeId is dynamic, match it against uuid regex
         expect(isuuid(prices[0].prices[0].custom.type.id)).toBe(true)

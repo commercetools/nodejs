@@ -28,6 +28,7 @@ export default function buildQueryString(
     customerId,
     cartId,
     location,
+    dataErasure,
   } = params
   let queryString = []
 
@@ -104,6 +105,8 @@ export default function buildQueryString(
     )
 
   if (version) queryString.push(`version=${version}`)
+
+  if (dataErasure) queryString.push(dataErasure)
 
   return queryString.join('&')
 }

@@ -210,7 +210,7 @@ function _buildVariantImagesAction(
         if (Number(image[2]) === 3)
           // image position changed
           actions.push({
-            action: 'moveImagetoPosition',
+            action: 'moveImageToPosition',
             variantId: oldVariant.id,
             imageUrl: oldObj.url,
             position: Number(image[1]),
@@ -367,12 +367,13 @@ function _buildVariantAttributesActions(
  * SYNC FUNCTIONS
  */
 
-export function actionsMapBase(diff, oldObj, newObj) {
+export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
     diff,
     oldObj,
     newObj,
+    shouldOmitEmptyString: config.shouldOmitEmptyString,
   })
 }
 

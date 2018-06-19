@@ -39,7 +39,7 @@ It's up to you to pick whatever middleware fits your needs: you can compose them
 
 ### `sdk-middleware-auth`
 
-Middelware to authenticate the [request](/sdk/Glossary.md#clientrequest) using one of the supported _auth flows_.
+Middleware to authenticate the [request](/sdk/Glossary.md#clientrequest) using one of the supported _auth flows_.
 
 * [createAuthMiddlewareForClientCredentialsFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforclientcredentialsflowoptions)
 * [createAuthMiddlewareForPasswordFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforpasswordflow)
@@ -49,14 +49,14 @@ Middelware to authenticate the [request](/sdk/Glossary.md#clientrequest) using o
 
 ### `sdk-middleware-http`
 
-Middelware to send the actual HTTP [request](/sdk/Glossary.md#clientrequest).
+Middleware to send the actual HTTP [request](/sdk/Glossary.md#clientrequest).
 
 * [createHttpMiddleware(options)](/sdk/api/sdkMiddlewareHttp.md#createhttpmiddlewareoptions)
 * [getErrorByCode(code)](/sdk/api/sdkMiddlewareHttp.md#geterrorbycode)
 
 ### `sdk-middleware-queue`
 
-Middelware to throttle concurrent [request](/sdk/Glossary.md#clientrequest) to a certain limit. Useful to reduce concurrent HTTP requests.
+Middleware to throttle concurrent [request](/sdk/Glossary.md#clientrequest) to a certain limit. Useful to reduce concurrent HTTP requests.
 
 * [createQueueMiddleware(options)](/sdk/api/sdkMiddlewareQueue.md#createqueuemiddlewareoptions)
 

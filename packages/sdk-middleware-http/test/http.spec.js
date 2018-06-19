@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import nock from 'nock'
+import fetch from 'node-fetch'
 import { createHttpMiddleware } from '../src'
 
 function createTestRequest(options) {
@@ -19,6 +20,16 @@ describe('Http', () => {
     nock.cleanAll()
   })
 
+  test('throw without `fetch` passed and globally available', () => {
+    expect(() => {
+      createHttpMiddleware({ host: testHost })
+    }).toThrow(
+      new Error(
+        '`fetch` is not available. Please pass in `fetch` as an option or have it globally available.'
+      )
+    )
+  })
+
   test('execute a get request (success)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
@@ -34,7 +45,10 @@ describe('Http', () => {
         resolve()
       }
       // Use default options
-      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        fetch,
+      })
       nock(testHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
@@ -63,7 +77,11 @@ describe('Http', () => {
         resolve()
       }
       // Use default options
-      const httpOptions = { host: testHost, includeResponseHeaders: true }
+      const httpOptions = {
+        host: testHost,
+        includeResponseHeaders: true,
+        fetch,
+      }
       const httpMiddleware = createHttpMiddleware(httpOptions)
       nock(testHost)
         .defaultReplyHeaders({
@@ -82,17 +100,21 @@ describe('Http', () => {
       })
       const response = { resolve, reject }
       const next = (req, res) => {
-        expect(res.request).toMatchObject({
-          method: 'GET',
-          path: '/foo/bar',
-          headers: {
-            'content-type': ['application/json'],
-          },
-        })
+        expect(res.request).toEqual(
+          expect.objectContaining({
+            headers: {
+              'Content-Type': ['application/json'],
+            },
+          })
+        )
         resolve()
       }
       // Use default options
-      const httpOptions = { host: testHost, includeOriginalRequest: true }
+      const httpOptions = {
+        host: testHost,
+        includeOriginalRequest: true,
+        fetch,
+      }
       const httpMiddleware = createHttpMiddleware(httpOptions)
       nock(testHost)
         .defaultReplyHeaders({
@@ -114,25 +136,26 @@ describe('Http', () => {
       })
       const response = { resolve, reject }
       const next = (req, res) => {
-        expect(res.request).toMatchObject({
-          method: 'GET',
-          path: '/foo/bar',
-          headers: {
-            'content-type': ['application/json'],
-            authorization: ['Bearer ********'],
-          },
-        })
+        expect(res.request).toEqual(
+          expect.objectContaining({
+            headers: {
+              'Content-Type': ['application/json'],
+              Authorization: ['Bearer ********'],
+            },
+          })
+        )
         resolve()
       }
       // Use default options
       const httpOptions = {
         host: testHost,
         includeOriginalRequest: true,
+        fetch,
       }
       const httpMiddleware = createHttpMiddleware(httpOptions)
       nock(testHost)
         .defaultReplyHeaders({
-          'Content-Type': 'application/json',
+          'Content-Type': ['application/json'],
         })
         .get('/foo/bar')
         .reply(200, { foo: 'bar' })
@@ -145,19 +168,19 @@ describe('Http', () => {
       const request = createTestRequest({
         uri: '/foo/bar',
         headers: {
-          authorization: 'Bearer 123',
+          authorization: ['Bearer 123'],
         },
       })
       const response = { resolve, reject }
       const next = (req, res) => {
-        expect(res.request).toMatchObject({
-          method: 'GET',
-          path: '/foo/bar',
-          headers: {
-            'content-type': ['application/json'],
-            authorization: ['Bearer 123'],
-          },
-        })
+        expect(res.request).toEqual(
+          expect.objectContaining({
+            headers: {
+              'Content-Type': ['application/json'],
+              authorization: ['Bearer 123'],
+            },
+          })
+        )
         resolve()
       }
       // Use custom options
@@ -165,6 +188,7 @@ describe('Http', () => {
         host: testHost,
         includeOriginalRequest: true,
         maskSensitiveHeaderData: false,
+        fetch,
       }
       const httpMiddleware = createHttpMiddleware(httpOptions)
       nock(testHost)
@@ -194,7 +218,10 @@ describe('Http', () => {
         resolve()
       }
       // Use custom options
-      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        fetch,
+      })
       nock(testHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
@@ -226,7 +253,10 @@ describe('Http', () => {
         resolve()
       }
       // Use custom options
-      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        fetch,
+      })
       nock(testHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
@@ -254,7 +284,10 @@ describe('Http', () => {
         expect(res.statusCode).toBe(0)
         resolve()
       }
-      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        fetch,
+      })
       nock(testHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
@@ -291,6 +324,7 @@ describe('Http', () => {
             maxRetries: 2,
             retryDelay: 300,
           },
+          fetch,
         }
         const httpMiddleware = createHttpMiddleware(options)
         nock(testHost)
@@ -332,6 +366,7 @@ describe('Http', () => {
               backoff: false,
               retryDelay: 300,
             },
+            fetch,
           }
           const httpMiddleware = createHttpMiddleware(options)
           nock(testHost)
@@ -367,6 +402,7 @@ describe('Http', () => {
             maxRetries: 2,
             retryDelay: 300,
           },
+          fetch,
         }
         const httpMiddleware = createHttpMiddleware(options)
         nock(testHost)
@@ -404,7 +440,10 @@ describe('Http', () => {
         })
         resolve()
       }
-      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        fetch,
+      })
       nock(testHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
@@ -442,7 +481,10 @@ describe('Http', () => {
         })
         resolve()
       }
-      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        fetch,
+      })
       nock(testHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
@@ -494,6 +536,7 @@ describe('Http', () => {
       const httpOptions = {
         host: testHost,
         includeOriginalRequest: true,
+        fetch,
       }
       const httpMiddleware = createHttpMiddleware(httpOptions)
       nock(testHost)
@@ -548,6 +591,7 @@ describe('Http', () => {
         host: testHost,
         includeOriginalRequest: true,
         maskSensitiveHeaderData: false,
+        fetch,
       }
       const httpMiddleware = createHttpMiddleware(httpOptions)
       nock(testHost)
@@ -573,7 +617,10 @@ describe('Http', () => {
         expect(res.statusCode).toBe(404)
         resolve()
       }
-      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        fetch,
+      })
       nock(testHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
@@ -598,7 +645,10 @@ describe('Http', () => {
         expect(res.statusCode).toBe(415)
         resolve()
       }
-      const httpMiddleware = createHttpMiddleware({ host: testHost })
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        fetch,
+      })
       nock(testHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
@@ -638,6 +688,7 @@ describe('Http', () => {
       const httpOptions = {
         host: testHost,
         includeOriginalRequest: true,
+        fetch,
       }
       const httpMiddleware = createHttpMiddleware(httpOptions)
       nock(testHost)
@@ -676,6 +727,7 @@ describe('Http', () => {
         host: testHost,
         includeOriginalRequest: true,
         maskSensitiveHeaderData: false,
+        fetch,
       }
       const httpMiddleware = createHttpMiddleware(httpOptions)
       nock(testHost)
@@ -697,7 +749,10 @@ describe('Http', () => {
         expect(res.statusCode).toBe(200)
         resolve()
       }
-      const httpMiddleware = createHttpMiddleware({ host: sampleHost })
+      const httpMiddleware = createHttpMiddleware({
+        host: sampleHost,
+        fetch,
+      })
       nock(sampleHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
@@ -719,7 +774,10 @@ describe('Http', () => {
         expect(res.statusCode).toBe(200)
         resolve()
       }
-      const httpMiddleware = createHttpMiddleware({ host: sampleHost })
+      const httpMiddleware = createHttpMiddleware({
+        host: sampleHost,
+        fetch,
+      })
       nock(sampleHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',

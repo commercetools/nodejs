@@ -14,6 +14,7 @@ import {
 import classify from './classify'
 import buildQueryString from './build-query-string'
 import withVersion from './version'
+import withFullDataErasure from './data-erasure'
 import * as defaultFeatures from './features'
 import * as query from './query'
 import * as queryId from './query-id'
@@ -61,6 +62,7 @@ export default function createService(
     features,
     params: getDefaultQueryParams(),
     withVersion,
+    withFullDataErasure,
 
     ...features.reduce((acc, feature) => {
       if (feature === defaultFeatures.query)

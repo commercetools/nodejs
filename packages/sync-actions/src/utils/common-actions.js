@@ -2,6 +2,12 @@ import isNil from 'lodash.isnil'
 import clone from './clone'
 import * as diffpatcher from './diffpatcher'
 
+const normalizeValue = value =>
+  typeof value === 'string' ? value.trim() : value
+
+const createIsEmptyValue = emptyValues => value =>
+  emptyValues.some(emptyValue => emptyValue === normalizeValue(value))
+
 /**
  * Builds actions for simple object properties, given a list of actions
  * E.g. [{ action: `changeName`, key: 'name' }]
@@ -11,8 +17,18 @@ import * as diffpatcher from './diffpatcher'
  * @param  {Object} options.diff - the diff object
  * @param  {Object} options.oldObj - the object that needs to be updated
  * @param  {Object} options.newObj - the new representation of the object
+ * @param {Boolean} options.shouldOmitEmptyString - a flag to determine if we should treat an empty string a NON-value
  */
-export function buildBaseAttributesActions({ actions, diff, oldObj, newObj }) {
+export function buildBaseAttributesActions({
+  actions,
+  diff,
+  oldObj,
+  newObj,
+  shouldOmitEmptyString,
+}) {
+  const isEmptyValue = createIsEmptyValue(
+    shouldOmitEmptyString ? [undefined, null, ''] : [undefined, null]
+  )
   return actions
     .map(item => {
       const key = item.key // e.g.: name, description, ...
@@ -20,8 +36,8 @@ export function buildBaseAttributesActions({ actions, diff, oldObj, newObj }) {
       const delta = diff[key]
       const before = oldObj[key]
       const now = newObj[key]
-      const isNotDefinedBefore = isNil(oldObj[key])
-      const isNotDefinedNow = isNil(newObj[key])
+      const isNotDefinedBefore = isEmptyValue(oldObj[key])
+      const isNotDefinedNow = isEmptyValue(newObj[key])
       if (!delta) return undefined
 
       if (isNotDefinedNow && isNotDefinedBefore) return undefined
@@ -42,7 +58,7 @@ export function buildBaseAttributesActions({ actions, diff, oldObj, newObj }) {
       const patched = diffpatcher.patch(clone(before), delta)
       return { action: item.action, [actionKey]: patched }
     })
-    .filter(action => action)
+    .filter(action => !isNil(action))
 }
 
 /**

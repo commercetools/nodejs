@@ -37,7 +37,6 @@ describe('Actions', () => {
       const expected = [{ action: 'setKey', key: now.key }]
       expect(actual).toEqual(expected)
     })
-
     test('should build `changeName` action', () => {
       const before = {
         name: 'Shipping Method 1',

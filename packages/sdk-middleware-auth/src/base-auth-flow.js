@@ -1,6 +1,5 @@
 /* @flow */
 /* global fetch */
-import 'isomorphic-fetch'
 import type {
   MiddlewareRequest,
   Next,
@@ -34,10 +33,19 @@ function calculateExpirationTime(expiresIn: number): number {
 }
 
 function executeRequest(
-  { url, basicAuth, body, tokenCache, requestState, pendingTasks, response },
+  {
+    fetcher,
+    url,
+    basicAuth,
+    body,
+    tokenCache,
+    requestState,
+    pendingTasks,
+    response,
+  },
   next: Next
 ) {
-  fetch(url, {
+  fetcher(url, {
     method: 'POST',
     headers: {
       Authorization: `Basic ${basicAuth}`,
@@ -92,7 +100,8 @@ function executeRequest(
       })
     })
     .catch((error: Error) => {
-      response.reject(error)
+      if (response && typeof response.reject === 'function')
+        response.reject(error)
     })
 }
 
@@ -106,10 +115,18 @@ export default function authMiddlewareBase(
     pendingTasks,
     requestState,
     tokenCache,
+    fetch: fetcher,
   }: AuthMiddlewareBaseOptions,
   next: Next,
   userOptions?: AuthMiddlewareOptions | PasswordAuthMiddlewareOptions
 ) {
+  if (!fetcher && typeof fetch === 'undefined')
+    throw new Error(
+      '`fetch` is not available. Please pass in `fetch` as an option or have it globally available.'
+    )
+  if (!fetcher)
+    // eslint-disable-next-line
+    fetcher = fetch
   // Check if there is already a `Authorization` header in the request.
   // If so, then go directly to the next middleware.
   if (
@@ -146,6 +163,7 @@ export default function authMiddlewareBase(
   ) {
     executeRequest(
       {
+        fetcher,
         ...buildRequestForRefreshTokenFlow({
           ...userOptions,
           refreshToken: tokenObj.refreshToken,
@@ -163,6 +181,7 @@ export default function authMiddlewareBase(
   // Token and refreshToken are not present or invalid. Request a new token...
   executeRequest(
     {
+      fetcher,
       url,
       basicAuth,
       body,

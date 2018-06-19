@@ -2,12 +2,13 @@ import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
+import fetch from 'node-fetch'
 
 export function clearData(apiConfig, entityName) {
   const client = createClient({
     middlewares: [
-      createAuthMiddlewareForClientCredentialsFlow(apiConfig),
-      createHttpMiddleware({ host: apiConfig.apiUrl }),
+      createAuthMiddlewareForClientCredentialsFlow({ ...apiConfig, fetch }),
+      createHttpMiddleware({ host: apiConfig.apiUrl, fetch }),
     ],
   })
 
@@ -39,17 +40,18 @@ export function clearData(apiConfig, entityName) {
   })
 }
 
-export function createData(apiConfig, entityName, data) {
+export function createData(apiConfig, entityName, data, id) {
   const client = createClient({
     middlewares: [
-      createAuthMiddlewareForClientCredentialsFlow(apiConfig),
-      createHttpMiddleware({ host: apiConfig.apiUrl }),
+      createAuthMiddlewareForClientCredentialsFlow({ ...apiConfig, fetch }),
+      createHttpMiddleware({ host: apiConfig.apiUrl, fetch }),
     ],
   })
   const requestOption = { projectKey: apiConfig.projectKey }
   const service = createRequestBuilder(requestOption)[entityName]
   return Promise.all(
     data.map(_data => {
+      if (id) service.byId(id)
       const request = {
         uri: service.build(),
         method: 'POST',
@@ -58,4 +60,26 @@ export function createData(apiConfig, entityName, data) {
       return client.execute(request)
     })
   )
+}
+
+export function getId(apiConfig, entityName) {
+  const client = createClient({
+    middlewares: [
+      createAuthMiddlewareForClientCredentialsFlow({ ...apiConfig, fetch }),
+      createHttpMiddleware({ host: apiConfig.apiUrl, fetch }),
+    ],
+  })
+
+  const service = createRequestBuilder({
+    projectKey: apiConfig.projectKey,
+  })[entityName]
+
+  const request = {
+    uri: service.build(),
+    method: 'GET',
+  }
+
+  return client
+    .execute(request)
+    .then(result => Promise.resolve(result.body.results[0].id))
 }

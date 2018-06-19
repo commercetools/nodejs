@@ -92,6 +92,7 @@ export type AuthMiddlewareOptions = {
   scopes: Array<string>,
   // For internal usage only
   oauthUri: string,
+  fetch?: (url: string, args?: Object) => Promise<any>,
 }
 
 export type RefreshAuthMiddlewareOptions = {
@@ -104,6 +105,7 @@ export type RefreshAuthMiddlewareOptions = {
   refreshToken: string,
   // For internal usage only
   oauthUri: string,
+  fetch?: (url: string, args?: Object) => Promise<any>,
 }
 
 export type Task = {
@@ -133,6 +135,7 @@ export type AuthMiddlewareBaseOptions = {
     get: () => TokenStore,
     set: (cache: TokenStore) => TokenStore,
   },
+  fetch?: (url: string, args?: Object) => Promise<any>,
 }
 
 export type PasswordAuthMiddlewareOptions = {
@@ -149,6 +152,7 @@ export type PasswordAuthMiddlewareOptions = {
   scopes: Array<string>,
   // For internal usage only
   oauthUri: string,
+  fetch?: (url: string, args?: Object) => Promise<any>,
 }
 
 export type HttpMiddlewareOptions = {
@@ -165,6 +169,7 @@ export type HttpMiddlewareOptions = {
     backoff?: boolean,
     maxDelay?: number,
   },
+  fetch?: (url: string, options?: Object) => Promise<any>,
 }
 export type QueueMiddlewareOptions = {
   concurrency: number,
@@ -221,6 +226,7 @@ export type ServiceBuilderDefaultParams = {
   version?: number,
   customerId?: string,
   cartId?: string,
+  dataErasure?: string,
 }
 export type ServiceBuilderParams = {
   // query-expand
@@ -271,6 +277,9 @@ export type ServiceBuilderParams = {
 
   // version
   version?: string,
+
+  // data-erasure
+  dataErasure?: string,
 }
 export type ServiceBuilder = {
   type: string,
@@ -282,6 +291,22 @@ export type ServiceBuilderDefinition = {
   type: string,
   endpoint: string,
   features: Array<string>,
+}
+export type ServiceBuilderInstance = {
+  withVersion: (version: number) => Object,
+  withFullDataErasure(): Object,
+  where: (predicate: string) => Object,
+  whereOperator: (option: string) => Object,
+  sort: (option: string) => Object,
+  page: (page: number) => Object,
+  perPage: (amount: number) => Object,
+  byId: (id: string) => Object,
+  byKey: (key: string) => Object,
+  byCustomerId: (id: string) => Object,
+  byCartId: (id: string) => Object,
+  expand: (string: string) => Object,
+  build(): string,
+  parse(): string,
 }
 export type ApiRequestBuilder = {
   [key: string]: ServiceBuilder,
@@ -304,6 +329,9 @@ export type UpdateAction = {
 }
 export type SyncAction = {
   buildActions: (now: Object, before: Object) => Array<UpdateAction>,
+}
+export type SyncActionConfig = {
+  shouldOmitEmptyString: boolean,
 }
 export type ActionGroup = {
   type: string,

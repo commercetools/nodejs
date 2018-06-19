@@ -70,6 +70,7 @@ https://commercetools.github.io/nodejs/
 | [`csv-parser-price`](/packages/csv-parser-price)                 | [![csv-parser-price Version][csv-parser-price-icon]][csv-parser-price-version]                         | [![csv-parser-price Dependencies Status][csv-parser-price-dependencies-icon]][csv-parser-price-dependencies]                         |
 | [`csv-parser-state`](/packages/csv-parser-state)                 | [![csv-parser-state Version][csv-parser-state-icon]][csv-parser-state-version]                         | [![csv-parser-state Dependencies Status][csv-parser-state-dependencies-icon]][csv-parser-state-dependencies]                         |
 | [`custom-objects-exporter`](/packages/custom-objects-exporter)   | [![custom-objects-exporter Version][custom-objects-exporter-icon]][custom-objects-exporter-version]    | [![custom-objects-exporter Dependencies Status][custom-objects-exporter-dependencies-icon]][custom-objects-exporter-dependencies]    |
+| [`personal-data-erasure`](/packages/personal-data-erasure)       | [![personal-data-erasure Version][personal-data-erasure-icon]][personal-data-erasure-version]          | [![personal-data-erasure Dependencies Status][personal-data-erasure-dependencies-icon]][personal-data-erasure-dependencies]          |
 | [`discount-code-exporter`](/packages/discount-code-exporter)     | [![discount-code-exporter Version][discount-code-exporter-icon]][discount-code-exporter-version]       | [![discount-code-exporter Dependencies Status][discount-code-exporter-dependencies-icon]][discount-code-exporter-dependencies]       |
 | [`discount-code-generator`](/packages/discount-code-generator)   | [![discount-code-generator Version][discount-code-generator-icon]][discount-code-generator-version]    | [![discount-code-generator Dependencies Status][discount-code-generator-dependencies-icon]][discount-code-generator-dependencies]    |
 | [`discount-code-importer`](/packages/discount-code-importer)     | [![discount-code-importer Version][discount-code-importer-icon]][discount-code-importer-version]       | [![discount-code-importer Dependencies Status][discount-code-importer-dependencies-icon]][discount-code-importer-dependencies]       |
@@ -146,3 +147,7 @@ https://commercetools.github.io/nodejs/
 [sync-actions-icon]: https://img.shields.io/npm/v/@commercetools/sync-actions.svg?style=flat-square
 [sync-actions-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/sync-actions
 [sync-actions-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/sync-actions&style=flat-square
+[personal-data-erasure-version]: https://www.npmjs.com/package/@commercetools/personal-data-erasure
+[personal-data-erasure-icon]: https://img.shields.io/npm/v/@commercetools/personal-data-erasure.svg?style=flat-square
+[personal-data-erasure-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/personal-data-erasure
+[personal-data-erasure-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/personal-data-erasure&style=flat-square

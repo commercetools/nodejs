@@ -71,19 +71,6 @@ describe('Actions', () => {
     statesSync = statesSyncFn()
   })
 
-  test('should build `changeKey` action', () => {
-    const before = { key: 'oldKey' }
-    const now = { key: 'newKey' }
-    const actual = statesSync.buildActions(now, before)
-    const expected = [
-      {
-        action: 'changeKey',
-        key: 'newKey',
-      },
-    ]
-    expect(actual).toEqual(expected)
-  })
-
   test('should build `setName` action', () => {
     const before = {
       name: { en: 'previous-en-name', de: 'previous-de-name' },
@@ -115,6 +102,19 @@ describe('Actions', () => {
       {
         action: 'setDescription',
         description: { en: 'new-en-description', de: 'new-de-description' },
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build `changeKey` action', () => {
+    const before = { key: 'oldKey' }
+    const now = { key: 'newKey' }
+    const actual = statesSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'changeKey',
+        key: 'newKey',
       },
     ]
     expect(actual).toEqual(expected)
