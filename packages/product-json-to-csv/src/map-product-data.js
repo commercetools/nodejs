@@ -15,8 +15,11 @@ import { isEmpty, reduce, pickBy } from 'lodash'
 export default class ProductMapping {
   // Set flowtype annotations
   fillAllRows: boolean
+
   categoryBy: 'name' | 'key' | 'externalId' | 'namedPath'
+
   lang: string
+
   multiValDel: string
 
   constructor({
@@ -59,10 +62,12 @@ export default class ProductMapping {
     fillAllRows: boolean
   ): Array<SingleVarPerProduct> {
     if (fillAllRows)
-      return product.variant.map((eachVariant: Variant): Object => ({
-        ...product,
-        variant: eachVariant,
-      }))
+      return product.variant.map(
+        (eachVariant: Variant): Object => ({
+          ...product,
+          variant: eachVariant,
+        })
+      )
 
     const productWithVariants: Array<Object> = product.variant.map(
       (eachVariant: Variant): SingleVarPerProduct => ({
@@ -145,10 +150,12 @@ export default class ProductMapping {
             let images
             if (!isEmpty(value.images))
               images = value.images
-                .map((image: Image): string => {
-                  const { url, label } = image
-                  return label ? `${url}|${label}` : url
-                })
+                .map(
+                  (image: Image): string => {
+                    const { url, label } = image
+                    return label ? `${url}|${label}` : url
+                  }
+                )
                 .join(this.multiValDel)
 
             const { id, sku, key } = value
@@ -176,13 +183,13 @@ export default class ProductMapping {
       return categories
         .map((cat: Category): string => cat[categoryBy][lang])
         .join(multiValDel)
-    else if (categoryBy === 'externalId' || categoryBy === 'key')
+    if (categoryBy === 'externalId' || categoryBy === 'key')
       return categories
         .map((cat: Category): string => cat[categoryBy])
         .join(multiValDel)
     return categories
-      .map((cat: Category): string =>
-        ProductMapping._retrieveNamedPath(cat, lang)
+      .map(
+        (cat: Category): string => ProductMapping._retrieveNamedPath(cat, lang)
       )
       .join(multiValDel)
   }

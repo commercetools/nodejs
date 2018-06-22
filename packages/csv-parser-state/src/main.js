@@ -27,12 +27,19 @@ import pkg from '../package.json'
 export default class CsvParserState {
   // Set flowtype annotations
   accessToken: string
+
   apiConfig: ApiConfigOptions
+
   client: Client
+
   continueOnProblems: boolean
+
   csvConfig: CsvOptions
+
   logger: LoggerOptions
+
   _rowIndex: number
+
   _fetchStates: Function
 
   constructor(
@@ -127,9 +134,8 @@ export default class CsvParserState {
     if (this.continueOnProblems)
       // Log warning and continue
       this.logger.warn(`Ignoring error at row: ${this._rowIndex}, ${error}`)
-    else
-      // <- Rethrow the error to `.stopOnError()`
-      callback(error)
+    // <- Rethrow the error to `.stopOnError()`
+    else callback(error)
   }
 
   static _buildStateRequestUri(projectKey: string, stateKey: string): string {

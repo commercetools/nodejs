@@ -28,26 +28,30 @@ function createProductTypeMapActions(
   ): Array<UpdateAction> {
     const allActions = []
     allActions.push(
-      mapActionGroup('base', (): Array<UpdateAction> =>
-        productTypeActions.actionsMapBase(
-          diff,
-          previous,
-          next,
-          syncActionConfig
-        )
+      mapActionGroup(
+        'base',
+        (): Array<UpdateAction> =>
+          productTypeActions.actionsMapBase(
+            diff,
+            previous,
+            next,
+            syncActionConfig
+          )
       ),
-      mapActionGroup('attributes', (): Array<UpdateAction> =>
-        productTypeActions.actionsMapAttributes(
-          diff.attributes,
-          previous.attributes,
-          next.attributes,
-          findMatchingPairs(
+      mapActionGroup(
+        'attributes',
+        (): Array<UpdateAction> =>
+          productTypeActions.actionsMapAttributes(
             diff.attributes,
             previous.attributes,
             next.attributes,
-            'name'
+            findMatchingPairs(
+              diff.attributes,
+              previous.attributes,
+              next.attributes,
+              'name'
+            )
           )
-        )
       )
     )
     return flatten(allActions)

@@ -165,8 +165,7 @@ describe('Writer', () => {
 
       // Extract data from zip file and test
       outputStream.on('finish', () => {
-        fs
-          .createReadStream(output)
+        fs.createReadStream(output)
           .pipe(unzip.Parse())
           .on('entry', entry => {
             if (entry.path === 'products/product-type-1.csv')

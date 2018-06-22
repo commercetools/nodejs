@@ -24,13 +24,22 @@ function createInventoryMapActions(
   ): Array<UpdateAction> {
     const allActions = []
     allActions.push(
-      mapActionGroup('base', (): Array<UpdateAction> =>
-        inventoryActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
+      mapActionGroup(
+        'base',
+        (): Array<UpdateAction> =>
+          inventoryActions.actionsMapBase(
+            diff,
+            oldObj,
+            newObj,
+            syncActionConfig
+          )
       )
     )
     allActions.push(
-      mapActionGroup('references', (): Array<UpdateAction> =>
-        inventoryActions.actionsMapReferences(diff, oldObj, newObj)
+      mapActionGroup(
+        'references',
+        (): Array<UpdateAction> =>
+          inventoryActions.actionsMapReferences(diff, oldObj, newObj)
       )
     )
     return flatten(allActions)

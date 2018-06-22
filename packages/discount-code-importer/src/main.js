@@ -23,7 +23,9 @@ import pkg from '../package.json'
 
 class DiscountCodeImportError extends Error {
   error: any
+
   summary: string
+
   message: string
 
   constructor(
@@ -42,12 +44,19 @@ class DiscountCodeImportError extends Error {
 export default class DiscountCodeImport {
   // Set flowtype annotations
   accessToken: string
+
   batchSize: number
+
   continueOnProblems: boolean
+
   client: Client
+
   apiConfig: ApiConfigOptions
+
   logger: LoggerOptions
+
   _summary: Summary
+
   syncDiscountCodes: SyncAction
 
   constructor(options: ConstructorOptions, logger: LoggerOptions) {
@@ -258,8 +267,8 @@ export default class DiscountCodeImport {
     let message = ''
     if (created + updated + createErrorCount + updateErrorCount === 0)
       message = 'Summary: nothing to do, everything is fine'
+    // eslint-disable-next-line max-len
     else
-      // eslint-disable-next-line max-len
       message = `Summary: there were ${created +
         updated} successfully imported discount codes (${created} were newly created, ${updated} were updated and ${unchanged} were unchanged).`
     if (createErrorCount || updateErrorCount)
