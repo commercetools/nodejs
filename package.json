@@ -32,7 +32,7 @@
     "docs:build": "npm run docs:prepare && gitbook build && cp logo/apple-touch-icon.png _book/gitbook/images/apple-touch-icon-precomposed-152.png && cp logo/favicon.ico _book/gitbook/images",
     "docs:watch": "npm run docs:prepare && gitbook serve",
     "docs:publish": "npm run docs:clean && npm run docs:build && ./scripts/publish-docs",
-    "flow": "jest --config jest.flow.config.js",
+    "flow": "eslint packages",
     "package-readme-entry": "./scripts/package-readme-entry.sh"
   },
   "devDependencies": {
