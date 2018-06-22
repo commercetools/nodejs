@@ -6,6 +6,9 @@ module.exports = {
       NODE_ENV: 'test',
     },
   },
+  transform: {
+    '.*': 'babel-jest',
+  },
   testPathIgnorePatterns: [
     '/node_modules/',
     '/integration-tests/',

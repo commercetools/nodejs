@@ -49,64 +49,81 @@ function createProductMapActions(
     )
 
     allActions.push(
-      mapActionGroup('attributes', (): Array<UpdateAction> =>
-        productActions.actionsMapAttributes(
-          diff,
-          oldObj,
-          newObj,
-          sameForAllAttributeNames || [],
-          variantHashMap
-        )
+      mapActionGroup(
+        'attributes',
+        (): Array<UpdateAction> =>
+          productActions.actionsMapAttributes(
+            diff,
+            oldObj,
+            newObj,
+            sameForAllAttributeNames || [],
+            variantHashMap
+          )
       )
     )
 
     allActions.push(
-      mapActionGroup('variants', (): Array<UpdateAction> =>
-        productActions.actionsMapVariants(diff, oldObj, newObj)
+      mapActionGroup(
+        'variants',
+        (): Array<UpdateAction> =>
+          productActions.actionsMapVariants(diff, oldObj, newObj)
       )
     )
 
     allActions.push(
-      mapActionGroup('base', (): Array<UpdateAction> =>
-        productActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
+      mapActionGroup(
+        'base',
+        (): Array<UpdateAction> =>
+          productActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
       )
     )
 
     allActions.push(
-      mapActionGroup('meta', (): Array<UpdateAction> =>
-        productActions.actionsMapMeta(diff, oldObj, newObj)
+      mapActionGroup(
+        'meta',
+        (): Array<UpdateAction> =>
+          productActions.actionsMapMeta(diff, oldObj, newObj)
       )
     )
 
     allActions.push(
-      mapActionGroup('references', (): Array<UpdateAction> =>
-        productActions.actionsMapReferences(diff, oldObj, newObj)
+      mapActionGroup(
+        'references',
+        (): Array<UpdateAction> =>
+          productActions.actionsMapReferences(diff, oldObj, newObj)
       )
     )
 
     allActions.push(productActions.actionsMapMasterVariant(oldObj, newObj))
 
     allActions.push(
-      mapActionGroup('images', (): Array<UpdateAction> =>
-        productActions.actionsMapImages(diff, oldObj, newObj, variantHashMap)
+      mapActionGroup(
+        'images',
+        (): Array<UpdateAction> =>
+          productActions.actionsMapImages(diff, oldObj, newObj, variantHashMap)
       )
     )
 
     allActions.push(
-      mapActionGroup('prices', (): Array<UpdateAction> =>
-        productActions.actionsMapPrices(diff, oldObj, newObj, variantHashMap)
+      mapActionGroup(
+        'prices',
+        (): Array<UpdateAction> =>
+          productActions.actionsMapPrices(diff, oldObj, newObj, variantHashMap)
       )
     )
 
     allActions.push(
-      mapActionGroup('categories', (): Array<UpdateAction> =>
-        productActions.actionsMapCategories(diff)
+      mapActionGroup(
+        'categories',
+        (): Array<UpdateAction> => productActions.actionsMapCategories(diff)
       )
     )
 
     allActions.push(
-      mapActionGroup('categories', (): Array<UpdateAction> =>
-        productActions.actionsMapCategoryOrderHints(diff, oldObj)
+      mapActionGroup(
+        'categories',
+        (): Array<UpdateAction> =>
+          productActions.actionsMapCategoryOrderHints(diff, oldObj)
       )
     )
 

@@ -9,7 +9,7 @@ import type {
 } from 'types/sdk'
 
 import getErrorByCode, { NetworkError, HttpError } from './errors'
-import parseHeaders from '../src/parse-headers'
+import parseHeaders from './parse-headers'
 
 function createError({ statusCode, message, ...rest }): HttpErrorType {
   let errorMessage = message || 'Unexpected non-JSON error response'

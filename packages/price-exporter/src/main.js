@@ -25,9 +25,13 @@ import pkg from '../package.json'
 export default class PriceExporter {
   // Set flowtype annotations
   apiConfig: ApiConfigOptions
+
   client: Client
+
   config: Configuration
+
   logger: LoggerOptions
+
   fetchReferences: Function
 
   constructor(options: ExporterOptions, logger: LoggerOptions) {
@@ -147,12 +151,14 @@ export default class PriceExporter {
           this._resolveChannel(individualPrice),
           this._resolveCustomerGroup(individualPrice),
           this._resolveCustomType(individualPrice),
-        ]).then(([channel, customerGroup, custom]): ProcessedPriceObject => ({
-          ...individualPrice,
-          ...channel,
-          ...customerGroup,
-          ...custom,
-        }))
+        ]).then(
+          ([channel, customerGroup, custom]): ProcessedPriceObject => ({
+            ...individualPrice,
+            ...channel,
+            ...customerGroup,
+            ...custom,
+          })
+        )
       ).then(prices => ({ ...variantPrice, prices }))
     )
   }

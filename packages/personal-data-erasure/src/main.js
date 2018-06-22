@@ -30,7 +30,9 @@ import pkg from '../package.json'
 export default class PersonalDataErasure {
   // Set type annotations
   apiConfig: ApiConfigOptions
+
   client: Client
+
   logger: LoggerOptions
 
   constructor(options: ErasureOptions) {
@@ -97,48 +99,50 @@ export default class PersonalDataErasure {
     ]
 
     return Promise.all(
-      urisOfResources.map((uri: string): Promise<Array<AllData>> => {
-        const request = PersonalDataErasure.buildRequest(uri, 'GET')
+      urisOfResources.map(
+        (uri: string): Promise<Array<AllData>> => {
+          const request = PersonalDataErasure.buildRequest(uri, 'GET')
 
-        return this.client.process(
-          request,
-          (response: ClientResult): Promise<ClientResult> => {
-            if (response.statusCode !== 200 && response.statusCode !== 404)
-              return Promise.reject(
-                Error(`Request returned status code ${response.statusCode}`)
-              )
+          return this.client.process(
+            request,
+            (response: ClientResult): Promise<ClientResult> => {
+              if (response.statusCode !== 200 && response.statusCode !== 404)
+                return Promise.reject(
+                  Error(`Request returned status code ${response.statusCode}`)
+                )
 
-            return Promise.resolve(response)
-          },
-          { accumulate: true }
-        )
-      })
-    ).then(async (responses: Array<Array<AllData>>): Promise<
-      Array<AllData>
-    > => {
-      const flattenedResponses = flatten(responses)
-
-      let results = flatten(
-        flattenedResponses.map(
-          (response: ClientResponse): Array<ClientResult> | void =>
-            response.body ? response.body.results : undefined
-        )
+              return Promise.resolve(response)
+            },
+            { accumulate: true }
+          )
+        }
       )
-      const ids = results.map((result: AllData): string => result.id)
+    ).then(
+      async (responses: Array<Array<AllData>>): Promise<Array<AllData>> => {
+        const flattenedResponses = flatten(responses)
 
-      if (ids.length > 0) {
-        const reference = PersonalDataErasure.buildReference(ids)
-        const messagesUri = requestBuilder.messages.where(reference).build()
-        const request = PersonalDataErasure.buildRequest(messagesUri, 'GET')
+        let results = flatten(
+          flattenedResponses.map(
+            (response: ClientResponse): Array<ClientResult> | void =>
+              response.body ? response.body.results : undefined
+          )
+        )
+        const ids = results.map((result: AllData): string => result.id)
 
-        const messages = await this._getAllMessages(request)
+        if (ids.length > 0) {
+          const reference = PersonalDataErasure.buildReference(ids)
+          const messagesUri = requestBuilder.messages.where(reference).build()
+          const request = PersonalDataErasure.buildRequest(messagesUri, 'GET')
 
-        results = [...messages, ...results]
+          const messages = await this._getAllMessages(request)
+
+          results = [...messages, ...results]
+        }
+        this.logger.info('Export operation completed successfully')
+
+        return Promise.resolve(results)
       }
-      this.logger.info('Export operation completed successfully')
-
-      return Promise.resolve(results)
-    })
+    )
   }
 
   async _getAllMessages(request: ClientRequest): Promise<Messages> {
@@ -239,13 +243,15 @@ export default class PersonalDataErasure {
     const results = response.body ? response.body.results : []
     if (results.length > 0) {
       Promise.all(
-        results.map((result: AllData): Promise<ClientResult> => {
-          const deleteRequest = PersonalDataErasure.buildDeleteRequest(
-            result,
-            builder
-          )
-          return this.client.execute(deleteRequest)
-        })
+        results.map(
+          (result: AllData): Promise<ClientResult> => {
+            const deleteRequest = PersonalDataErasure.buildDeleteRequest(
+              result,
+              builder
+            )
+            return this.client.execute(deleteRequest)
+          }
+        )
       )
     }
   }

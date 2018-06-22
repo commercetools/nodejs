@@ -30,13 +30,21 @@ import pkg from '../package.json'
 export default class ProductJsonToCsv {
   // Set flowtype annotations
   accessToken: string
+
   apiConfig: ApiConfigOptions
+
   categoriesCache: Object
+
   client: Client
+
   parserConfig: ParserConfigOptions
+
   logger: LoggerOptions
+
   fetchReferences: Function
+
   _resolveReferences: Function
+
   _productMapping: Object
 
   constructor(
@@ -175,9 +183,13 @@ export default class ProductJsonToCsv {
 
     const productTypeService = this._createService('productTypes')
     const uri = productTypeService.byId(productTypeReference.id).build()
-    return this.fetchReferences(uri).then(({ body }: SuccessResult): {
-      productType: ProductType,
-    } => ({ productType: body }))
+    return this.fetchReferences(uri).then(
+      ({
+        body,
+      }: SuccessResult): {
+        productType: ProductType,
+      } => ({ productType: body })
+    )
   }
 
   _resolveTaxCategory(taxCategoryReference: TypeReference): Object {
@@ -185,9 +197,13 @@ export default class ProductJsonToCsv {
 
     const taxCategoryService = this._createService('taxCategories')
     const uri = taxCategoryService.byId(taxCategoryReference.id).build()
-    return this.fetchReferences(uri).then(({ body }: SuccessResult): {
-      taxCategory: TaxCategory,
-    } => ({ taxCategory: body }))
+    return this.fetchReferences(uri).then(
+      ({
+        body,
+      }: SuccessResult): {
+        taxCategory: TaxCategory,
+      } => ({ taxCategory: body })
+    )
   }
 
   _resolveState(stateReference: TypeReference): Object {
@@ -195,9 +211,13 @@ export default class ProductJsonToCsv {
 
     const stateService = this._createService('states')
     const uri = stateService.byId(stateReference.id).build()
-    return this.fetchReferences(uri).then(({ body }: SuccessResult): {
-      state: State,
-    } => ({ state: body }))
+    return this.fetchReferences(uri).then(
+      ({
+        body,
+      }: SuccessResult): {
+        state: State,
+      } => ({ state: body })
+    )
   }
 
   _resolveCategories(
@@ -211,11 +231,14 @@ export default class ProductJsonToCsv {
     return this._getCategories(categoryIds).then(
       (categories: Array<Category>): { categories: Array<Category> } => {
         if (this.parserConfig.categoryBy !== 'namedPath') return { categories }
-        return Promise.map(categories, (cat: Category): Array<Category> =>
-          this._resolveAncestors(cat)
-        ).then((categoriesWithParents: Array<Category>): Object => ({
-          categories: categoriesWithParents,
-        }))
+        return Promise.map(
+          categories,
+          (cat: Category): Array<Category> => this._resolveAncestors(cat)
+        ).then(
+          (categoriesWithParents: Array<Category>): Object => ({
+            categories: categoriesWithParents,
+          })
+        )
       }
     )
   }
@@ -250,8 +273,9 @@ export default class ProductJsonToCsv {
       if (!cat.parent) return Promise.resolve(cat)
 
       return this._getCategories([cat.parent.id])
-        .then((resolvedCategory: Object): Promise<Category> =>
-          getParent(resolvedCategory[0])
+        .then(
+          (resolvedCategory: Object): Promise<Category> =>
+            getParent(resolvedCategory[0])
         )
         .then((parent: Object): Promise<Category> => ({ ...cat, parent }))
     }

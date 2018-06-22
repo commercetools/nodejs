@@ -20,15 +20,20 @@ import CONS from './constants'
 
 export default class InventoryExporter {
   logger: LoggerOptions
+
   client: Client
+
   accessToken: string
+
   reqBuilder: {
     [key: string]: {
       expand: Function,
       where: Function,
     },
   }
+
   csvMappings: Function
+
   exportConfig: ExportConfig
 
   constructor(
@@ -149,13 +154,15 @@ export default class InventoryExporter {
       request.headers = {
         Authorization: `Bearer ${this.accessToken}`,
       }
-    return this.client.execute(request).then((result): Promise<any> => {
-      if (result.body && result.body.results.length)
-        return Promise.resolve(result.body.results[0].id)
-      return Promise.reject(
-        new Error('No data with channel key in CTP Platform')
-      )
-    })
+    return this.client.execute(request).then(
+      (result): Promise<any> => {
+        if (result.body && result.body.results.length)
+          return Promise.resolve(result.body.results[0].id)
+        return Promise.reject(
+          new Error('No data with channel key in CTP Platform')
+        )
+      }
+    )
   }
 
   static _processFn(
@@ -165,6 +172,7 @@ export default class InventoryExporter {
     InventoryExporter._writeEachInventory(outputStream, inventories)
     return Promise.resolve()
   }
+
   // map to format acceptable by csv especially for import
   static inventoryMappings(row: Inventory): CsvInventoryMapping {
     const result: CsvInventoryMapping = {

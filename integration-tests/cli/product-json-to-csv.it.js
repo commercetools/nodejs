@@ -111,8 +111,7 @@ describe('CSV and CLI Tests', () => {
           expect(stdout).toBeTruthy()
           expect(stderr).toBeFalsy()
 
-          fs
-            .createReadStream(zipFile)
+          fs.createReadStream(zipFile)
             .pipe(unzip.Parse())
             .on('entry', entry => {
               if (entry.path.includes('anotherProductType')) {
@@ -497,8 +496,7 @@ describe('CSV and CLI Tests', () => {
           expect(parseStdout).toBeTruthy()
           expect(parseStderr).toBeFalsy()
 
-          fs
-            .createReadStream(zipFile)
+          fs.createReadStream(zipFile)
             .pipe(unzip.Parse())
             .on('entry', entry => {
               if (entry.path.includes('anotherProductType')) {

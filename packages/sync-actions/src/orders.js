@@ -25,14 +25,18 @@ function createOrderMapActions(
     const allActions = []
 
     allActions.push(
-      mapActionGroup('base', (): Array<UpdateAction> =>
-        orderActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
+      mapActionGroup(
+        'base',
+        (): Array<UpdateAction> =>
+          orderActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
       )
     )
 
     allActions.push(
-      mapActionGroup('deliveries', (): Array<UpdateAction> =>
-        orderActions.actionsMapDeliveries(diff, oldObj, newObj)
+      mapActionGroup(
+        'deliveries',
+        (): Array<UpdateAction> =>
+          orderActions.actionsMapDeliveries(diff, oldObj, newObj)
       )
     )
 
