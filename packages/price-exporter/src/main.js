@@ -17,7 +17,6 @@ import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import csv from 'fast-csv'
 import JSONStream from 'JSONStream'
-import Promise from 'bluebird'
 import { flatten } from 'flat'
 import { memoize } from 'lodash'
 import pkg from '../package.json'
@@ -141,19 +140,25 @@ export default class PriceExporter {
   }
 
   _resolveReferences(flatPrices: Array<Object>) {
-    return Promise.map(flatPrices, variantPrice =>
-      Promise.map(variantPrice.prices, individualPrice =>
-        Promise.all([
-          this._resolveChannel(individualPrice),
-          this._resolveCustomerGroup(individualPrice),
-          this._resolveCustomType(individualPrice),
-        ]).then(([channel, customerGroup, custom]): ProcessedPriceObject => ({
-          ...individualPrice,
-          ...channel,
-          ...customerGroup,
-          ...custom,
-        }))
-      ).then(prices => ({ ...variantPrice, prices }))
+    return Promise.all(
+      flatPrices.map(variantPrice =>
+        Promise.all(
+          variantPrice.prices.map(individualPrice =>
+            Promise.all([
+              this._resolveChannel(individualPrice),
+              this._resolveCustomerGroup(individualPrice),
+              this._resolveCustomType(individualPrice),
+            ]).then(
+              ([channel, customerGroup, custom]): ProcessedPriceObject => ({
+                ...individualPrice,
+                ...channel,
+                ...customerGroup,
+                ...custom,
+              })
+            )
+          )
+        ).then(prices => ({ ...variantPrice, prices }))
+      )
     )
   }
 
