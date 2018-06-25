@@ -96,7 +96,7 @@ export default class DiscountCodeImport {
     return `code in ("${predicateArray.join('", "')}")`
   }
 
-  static promiseMapSerial(functions: Array<any>) {
+  static promiseMapSerially(functions: Array<Function>) {
     return functions.reduce(
       (promise, promiseReturningFunction) =>
         promise.then(() => promiseReturningFunction()),
@@ -134,7 +134,7 @@ export default class DiscountCodeImport {
           this._createOrUpdate(codeObjects, existingCodes)
         )
     })
-    return DiscountCodeImport.promiseMapSerial(functionsList)
+    return DiscountCodeImport.promiseMapSerially(functionsList)
       .then(() => Promise.resolve())
       .catch(
         caughtError =>
