@@ -1,6 +1,5 @@
 /* @flow */
 import npmlog from 'npmlog'
-import Promise from 'bluebird'
 import _ from 'lodash'
 import fetch from 'node-fetch'
 import { createClient } from '@commercetools/sdk-client'
@@ -97,6 +96,14 @@ export default class DiscountCodeImport {
     return `code in ("${predicateArray.join('", "')}")`
   }
 
+  static promiseMapSerially(functions: Array<Function>) {
+    return functions.reduce(
+      (promise, promiseReturningFunction) =>
+        promise.then(() => promiseReturningFunction()),
+      Promise.resolve()
+    )
+  }
+
   // Wrapper function for compatibility with CLI
   processStream(chunk: ChunkOptions, cb: () => mixed) {
     this.logger.verbose(`Starting conversion of ${chunk.length} discount codes`)
@@ -112,7 +119,7 @@ export default class DiscountCodeImport {
   _processBatches(codes: CodeDataArray) {
     // Batch to `batchSize` to reduce necessary fetch API calls
     const batchedList = _.chunk(codes, this.batchSize)
-    return Promise.mapSeries(batchedList, (codeObjects: CodeDataArray) => {
+    const functionsList = batchedList.map(codeObjects => () => {
       // Build predicate and fetch existing code
       const predicate = DiscountCodeImport._buildPredicate(codeObjects)
       const service = this._createService()
@@ -127,6 +134,7 @@ export default class DiscountCodeImport {
           this._createOrUpdate(codeObjects, existingCodes)
         )
     })
+    return DiscountCodeImport.promiseMapSerially(functionsList)
       .then(() => Promise.resolve())
       .catch(
         caughtError =>
@@ -139,23 +147,47 @@ export default class DiscountCodeImport {
   }
 
   _createOrUpdate(newCodes: CodeDataArray, existingCodes: CodeDataArray) {
-    return Promise.map(newCodes, (newCode: CodeData) => {
-      const existingCode = _.find(existingCodes, ['code', newCode.code])
-      if (existingCode)
-        return this._update(newCode, existingCode)
-          .then(response => {
-            if (response && response.statusCode === 304)
-              this._summary.unchanged += 1
-            else this._summary.updated += 1
+    return Promise.all(
+      newCodes.map((newCode: CodeData) => {
+        const existingCode = _.find(existingCodes, ['code', newCode.code])
+        if (existingCode)
+          return this._update(newCode, existingCode)
+            .then(response => {
+              if (response && response.statusCode === 304)
+                this._summary.unchanged += 1
+              else this._summary.updated += 1
+              return Promise.resolve()
+            })
+            .catch(error => {
+              if (this.continueOnProblems) {
+                this._summary.updateErrorCount += 1
+                this._summary.errors.push(error.message || error)
+                // eslint-disable-next-line max-len
+                const msg =
+                  'Update error occured but ignored. See summary for details'
+                this.logger.error(msg)
+                return Promise.resolve()
+              }
+              // eslint-disable-next-line max-len
+              const msg =
+                'Process stopped due to error while creating discount code. See summary for details'
+              this.logger.error(msg)
+              this._summary.updateErrorCount += 1
+              this._summary.errors.push(error.message || error)
+              return Promise.reject(error)
+            })
+        return this._create(newCode)
+          .then(() => {
+            this._summary.created += 1
             return Promise.resolve()
           })
           .catch(error => {
             if (this.continueOnProblems) {
-              this._summary.updateErrorCount += 1
+              this._summary.createErrorCount += 1
               this._summary.errors.push(error.message || error)
               // eslint-disable-next-line max-len
               const msg =
-                'Update error occured but ignored. See summary for details'
+                'Create error occured but ignored. See summary for details'
               this.logger.error(msg)
               return Promise.resolve()
             }
@@ -163,34 +195,12 @@ export default class DiscountCodeImport {
             const msg =
               'Process stopped due to error while creating discount code. See summary for details'
             this.logger.error(msg)
-            this._summary.updateErrorCount += 1
+            this._summary.createErrorCount += 1
             this._summary.errors.push(error.message || error)
             return Promise.reject(error)
           })
-      return this._create(newCode)
-        .then(() => {
-          this._summary.created += 1
-          return Promise.resolve()
-        })
-        .catch(error => {
-          if (this.continueOnProblems) {
-            this._summary.createErrorCount += 1
-            this._summary.errors.push(error.message || error)
-            // eslint-disable-next-line max-len
-            const msg =
-              'Create error occured but ignored. See summary for details'
-            this.logger.error(msg)
-            return Promise.resolve()
-          }
-          // eslint-disable-next-line max-len
-          const msg =
-            'Process stopped due to error while creating discount code. See summary for details'
-          this.logger.error(msg)
-          this._summary.createErrorCount += 1
-          this._summary.errors.push(error.message || error)
-          return Promise.reject(error)
-        })
-    })
+      })
+    )
   }
 
   _update(newCode: CodeData, existingCode: CodeData) {
