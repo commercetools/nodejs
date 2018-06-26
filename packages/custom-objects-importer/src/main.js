@@ -30,40 +30,69 @@ export default class CustomObjectsImporter {
       ],
     })
 
+    this.batchSize = options.batchSize || 50
+    // todo implement continueOnProblems
+    // this.continueOnProblems = options.continueOnProblems || false
+
     this.logger = {
       ...silentLogger,
       ...options.logger,
     }
+    // todo implement summary
+    // this.summary
+  }
+
+  static createBatches(arr, batchSize) {
+    const tmp = [...arr]
+    let cache = []
+    while (tmp.length) cache = [...cache, tmp.splice(0, batchSize)]
+    return cache
+  }
+
+  static promiseMapSerially(functions: Array<Function>) {
+    return functions.reduce(
+      (promise, promiseReturningFunction) =>
+        promise.then(() => promiseReturningFunction()),
+      Promise.resolve()
+    )
   }
 
   run(objects) {
     return this.processBatches(objects)
   }
 
-  processBatches(objects) {
+  async processBatches(objects) {
     this.logger.info('Starting Import')
-    const uri = CustomObjectsImporter.buildUri(this.apiConfig.projectKey)
 
+    const batches = CustomObjectsImporter.createBatches(objects, this.batchSize)
+    const uri = CustomObjectsImporter.buildUri(this.apiConfig.projectKey)
     const existingObjectsRequest = CustomObjectsImporter.buildRequest(
       uri,
       'GET'
     )
+    const { body: { results: existingObjects } } = await this.client.execute(
+      existingObjectsRequest
+    )
 
-    this.client
-      .execute(existingObjectsRequest)
-      .then(existingObjects =>
-        this.createOrUpdateObjects(existingObjects.body.results, objects)
+    const requestsList = batches.map(newObjects =>
+      this.createOrUpdateObjects(existingObjects, newObjects)
+    )
+
+    const functionsList = requestsList.map(requests => () => {
+      Promise.all(
+        requests.map(
+          request => this.client.execute(request)
+          // use for int testing instead of executing above
+          // setTimeout(() => {
+          //   console.log('works')
+          // }, 500)
+        )
       )
-      .then(requests => {
-        requests.forEach(request => {
-          console.log(request)
+    })
 
-          // this.client.execute(request)
-        })
-      })
-      .catch(error => {
-        throw Error(error.message || 'this went downwards quickly')
-      })
+    return CustomObjectsImporter.promiseMapSerially(functionsList)
+      .then(Promise.resolve())
+      .catch(error => console.log('error', error))
   }
 
   createOrUpdateObjects(existingObjects, newObjects) {
