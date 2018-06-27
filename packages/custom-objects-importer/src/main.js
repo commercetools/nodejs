@@ -31,15 +31,14 @@ export default class CustomObjectsImporter {
     })
 
     this.batchSize = options.batchSize || 50
-    // todo implement continueOnProblems
-    // this.continueOnProblems = options.continueOnProblems || false
+    this.continueOnProblems = options.continueOnProblems || false
 
     this.logger = {
       ...silentLogger,
       ...options.logger,
     }
-    // todo implement summary
-    // this.summary
+
+    this._initiateSummary()
   }
 
   static createBatches(arr, batchSize) {
@@ -58,10 +57,10 @@ export default class CustomObjectsImporter {
   }
 
   run(objects) {
-    return this.processBatches(objects)
+    return this._processBatches(objects)
   }
 
-  async processBatches(objects) {
+  async _processBatches(objects) {
     this.logger.info('Starting Import')
 
     const batches = CustomObjectsImporter.createBatches(objects, this.batchSize)
@@ -75,46 +74,84 @@ export default class CustomObjectsImporter {
     )
 
     const requestsList = batches.map(newObjects =>
-      this.createOrUpdateObjects(existingObjects, newObjects)
+      this._createOrUpdateObjects(existingObjects, newObjects)
     )
 
-    const functionsList = requestsList.map(requests => () => {
-      Promise.all(
-        requests.map(
-          request => this.client.execute(request)
-          // use for int testing instead of executing above
-          // setTimeout(() => {
-          //   console.log('works')
-          // }, 500)
-        )
+    const functionsList = requestsList.map(requests => async () => {
+      await Promise.all(
+        requests.map(request => this._executeCreateAndUpdateAction(request))
       )
     })
 
     return CustomObjectsImporter.promiseMapSerially(functionsList)
-      .then(Promise.resolve())
-      .catch(error => console.log('error', error))
   }
 
-  createOrUpdateObjects(existingObjects, newObjects) {
+  _executeCreateAndUpdateAction(request) {
+    const { body: { update } } = request
+    delete request.body.update
+
+    return this.client
+      .execute(request)
+      .then(() => {
+        if (update) {
+          this._summary.updated += 1
+        } else {
+          this._summary.created += 1
+        }
+        return Promise.resolve()
+      })
+      .catch(error => {
+        this._summary.errors.push(error.message || error)
+        let msg
+        if (this.continueOnProblems) {
+          if (update) {
+            this._summary.updateErrorCount += 1
+            msg = 'Update error occurred but ignored. See summary for details'
+          } else {
+            this._summary.createErrorCount += 1
+            msg = 'Create error occurred but ignored. See summary for details'
+          }
+          this.logger.error(msg)
+          return Promise.resolve()
+        }
+        if (update) {
+          this._summary.updateErrorCount += 1
+          msg =
+            'Process stopped due to error while updating custom object. See summary for details'
+        } else {
+          this._summary.createErrorCount += 1
+          msg =
+            'Process stopped due to error while creating custom object. See summary for details'
+        }
+        this.logger.error(msg)
+        return Promise.reject(error)
+      })
+  }
+
+  _createOrUpdateObjects(existingObjects, newObjects) {
     this.logger.info('Executing...')
+
     const createOrUpdateObjects = newObjects.map(newObject => {
       const existing = existingObjects.find(
         oldObject =>
           oldObject.key === newObject.key &&
           oldObject.container === newObject.container
       )
-
-      if (isEqual(newObject.value, existing.value)) {
-        return null
+      if (existing) {
+        if (isEqual(newObject.value, existing.value)) {
+          this._summary.unchanged += 1
+          return null
+        }
+        return { ...newObject, update: true }
       }
 
       return newObject
     })
 
-    return this.buildRequests(createOrUpdateObjects.filter(object => object))
+    return this._buildRequests(createOrUpdateObjects.filter(object => object))
   }
 
-  buildRequests(newObjects) {
+  _buildRequests(newObjects) {
     this.logger.info('Creating requests...')
     const uri = CustomObjectsImporter.buildUri(this.apiConfig.projectKey)
 
@@ -132,5 +169,40 @@ export default class CustomObjectsImporter {
 
   static buildRequest(uri, method, body) {
     return body ? { uri, method, body } : { uri, method }
+  }
+
+  _initiateSummary() {
+    this._summary = {
+      created: 0,
+      updated: 0,
+      unchanged: 0,
+      createErrorCount: 0,
+      updateErrorCount: 0,
+      errors: [],
+    }
+    return this._summary
+  }
+
+  summaryReport() {
+    const {
+      created,
+      updated,
+      unchanged,
+      createErrorCount,
+      updateErrorCount,
+    } = this._summary
+    let message = ''
+    if (created + updated + createErrorCount + updateErrorCount === 0)
+      message = 'Summary: nothing to do, everything is fine'
+    else
+      message = `Summary: there were ${created +
+        updated} successfully imported custom objects. ${created} were newly created, ${updated} were updated and ${unchanged} were unchanged.`
+    if (createErrorCount || updateErrorCount)
+      message += ` ${createErrorCount +
+        updateErrorCount} errors occurred (${createErrorCount} create errors and ${updateErrorCount} update errors.)`
+    return {
+      reportMessage: message,
+      detailedSummary: this._summary,
+    }
   }
 }

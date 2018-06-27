@@ -69,7 +69,9 @@ describe('CustomObjectsImporter', () => {
           },
         },
       ]
-      objectsImport.run(objects)
+      objectsImport
+        .run(objects)
+        .then(() => console.log(objectsImport.summaryReport()))
     })
   })
 })
