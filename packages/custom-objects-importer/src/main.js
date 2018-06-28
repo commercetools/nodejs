@@ -14,7 +14,7 @@ import pkg from '../package.json'
 export default class CustomObjectsImporter {
   constructor(options) {
     if (!options.apiConfig)
-      throw new Error('The constructor must be passed an `apiConfig` object')
+      throw Error('The constructor must be passed an `apiConfig` object')
     this.apiConfig = options.apiConfig
     this.client = createClient({
       middlewares: [
@@ -57,6 +57,10 @@ export default class CustomObjectsImporter {
   }
 
   run(objects) {
+    if (objects.length < 1 || !Array.isArray(objects))
+      throw Error(
+        'No objects found, please pass an array with custom objects to the run function'
+      )
     return this._processBatches(objects)
   }
 
@@ -79,16 +83,16 @@ export default class CustomObjectsImporter {
 
     const functionsList = requestsList.map(requests => async () => {
       await Promise.all(
-        requests.map(request => this._executeCreateAndUpdateAction(request))
+        requests.map(request => this._executeCreateOrUpdateAction(request))
       )
     })
 
     return CustomObjectsImporter.promiseMapSerially(functionsList)
   }
 
-  _executeCreateAndUpdateAction(request) {
+  _executeCreateOrUpdateAction(request) {
     const { body: { update } } = request
-    delete request.body.update
+    if (request.body.update) delete request.body.update
 
     return this.client
       .execute(request)
@@ -98,7 +102,7 @@ export default class CustomObjectsImporter {
         } else {
           this._summary.created += 1
         }
-        return Promise.resolve()
+        return Promise.resolve({ success: true })
       })
       .catch(error => {
         this._summary.errors.push(error.message || error)
@@ -112,7 +116,7 @@ export default class CustomObjectsImporter {
             msg = 'Create error occurred but ignored. See summary for details'
           }
           this.logger.error(msg)
-          return Promise.resolve()
+          return Promise.resolve({ success: true })
         }
         if (update) {
           this._summary.updateErrorCount += 1
@@ -191,9 +195,9 @@ export default class CustomObjectsImporter {
       createErrorCount,
       updateErrorCount,
     } = this._summary
-    let message = ''
-    if (created + updated + createErrorCount + updateErrorCount === 0)
-      message = 'Summary: nothing to do, everything is fine'
+    let message
+    if (!created && !updated && !createErrorCount && !updateErrorCount)
+      message = 'Summary: nothing to do, all objects are left unchanged'
     else
       message = `Summary: there were ${created +
         updated} successfully imported custom objects. ${created} were newly created, ${updated} were updated and ${unchanged} were unchanged.`

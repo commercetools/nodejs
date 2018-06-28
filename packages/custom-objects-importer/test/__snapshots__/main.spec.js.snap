@@ -1,3 +1,97 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`CustomObjectsImporter ::_buildRequests should build array of requests 1`] = `
+Array [
+  Object {
+    "body": Object {
+      "foo": "foo",
+    },
+    "method": "POST",
+    "uri": "/test-project-key/custom-objects",
+  },
+  Object {
+    "body": Object {
+      "bar": "bar",
+    },
+    "method": "POST",
+    "uri": "/test-project-key/custom-objects",
+  },
+]
+`;
+
+exports[`CustomObjectsImporter ::_createOrUpdateObjects should build array of all request objects 1`] = `
+Array [
+  Object {
+    "body": Object {
+      "container": "changedContainer",
+      "key": "changedKey",
+      "update": true,
+      "value": "newInfo",
+    },
+    "method": "POST",
+    "uri": "/test-project-key/custom-objects",
+  },
+  Object {
+    "body": Object {
+      "container": "newContainer",
+      "key": "newKey",
+      "value": "information",
+    },
+    "method": "POST",
+    "uri": "/test-project-key/custom-objects",
+  },
+]
+`;
+
+exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when error with \`continueOnProblems\` should resolve promise 1`] = `
+Object {
+  "success": true,
+}
+`;
+
+exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when error without \`continueOnProblems\` should reject promise 1`] = `"Something went wrong"`;
+
+exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when error without \`continueOnProblems\` should update summary \`createErrorCount\` 1`] = `[Error: Something went wrong]`;
+
+exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when error without \`continueOnProblems\` should update summary \`updateErrorCount\` 1`] = `[Error: Something went wrong]`;
+
+exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when successfully executed should resolve promise 1`] = `
+Object {
+  "success": true,
+}
+`;
+
+exports[`CustomObjectsImporter ::buildRequest should build request 1`] = `
+Object {
+  "method": "POST",
+  "uri": "/test",
+}
+`;
+
+exports[`CustomObjectsImporter ::buildRequest with body should build request 1`] = `
+Object {
+  "body": Object {
+    "arr": Array [
+      1,
+      2,
+      3,
+    ],
+    "obj": Object {
+      "bool": true,
+    },
+    "str": "str",
+  },
+  "method": "POST",
+  "uri": "/test",
+}
+`;
+
+exports[`CustomObjectsImporter ::buildUri should build URI 1`] = `"/project-key/custom-objects"`;
+
 exports[`CustomObjectsImporter ::constructor should throw error if no \`apiConfig\` in \`options\` parameter 1`] = `"The constructor must be passed an \`apiConfig\` object"`;
+
+exports[`CustomObjectsImporter ::run with wrong payload should throw error 1`] = `"No objects found, please pass an array with custom objects to the run function"`;
+
+exports[`CustomObjectsImporter ::run with wrong payload should throw error 2`] = `"No objects found, please pass an array with custom objects to the run function"`;
+
+exports[`CustomObjectsImporter ::run with wrong payload should throw error 3`] = `"No objects found, please pass an array with custom objects to the run function"`;
