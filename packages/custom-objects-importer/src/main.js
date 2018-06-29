@@ -1,3 +1,4 @@
+/* @flow */
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
@@ -7,14 +8,36 @@ import {
 } from '@commercetools/sdk-middleware-auth'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import isEqual from 'lodash.isequal'
+import compact from 'lodash.compact'
+
+import type {
+  ApiConfigOptions,
+  ExporterOptions,
+  LoggerOptions,
+  Summary,
+  SummaryReport,
+  CustomObjectDraft,
+  CustomObject,
+  ExecutionResult,
+} from 'types/customObjects'
+import type { Client, ClientRequest, MethodType } from 'types/sdk'
 
 import silentLogger from './utils/silent-logger'
 import pkg from '../package.json'
 
 export default class CustomObjectsImporter {
-  constructor(options) {
+  // Set type annotations
+  apiConfig: ApiConfigOptions
+  client: Client
+  logger: LoggerOptions
+  batchSize: number
+  continueOnProblems: boolean
+  _summary: Summary
+
+  constructor(options: ExporterOptions) {
     if (!options.apiConfig)
       throw Error('The constructor must be passed an `apiConfig` object')
+
     this.apiConfig = options.apiConfig
     this.client = createClient({
       middlewares: [
@@ -41,22 +64,33 @@ export default class CustomObjectsImporter {
     this._initiateSummary()
   }
 
-  static createBatches(arr, batchSize) {
+  processStream(chunk: Array<CustomObjectDraft>, cb: () => mixed): mixed {
+    this.logger.info(`Starting conversion of ${chunk.length} custom objects`)
+    return this._processBatches(chunk).then(cb)
+  }
+
+  static createBatches(
+    arr: Array<CustomObjectDraft>,
+    batchSize: number
+  ): Array<Array<CustomObjectDraft>> {
     const tmp = [...arr]
     let cache = []
     while (tmp.length) cache = [...cache, tmp.splice(0, batchSize)]
     return cache
   }
 
-  static promiseMapSerially(functions: Array<Function>) {
+  static promiseMapSerially(functions: Array<Function>): Promise<void> {
     return functions.reduce(
-      (promise, promiseReturningFunction) =>
-        promise.then(() => promiseReturningFunction()),
+      (
+        promise: Promise<void>,
+        promiseReturningFunction: Function
+      ): Promise<void> =>
+        promise.then((): Promise<void> => promiseReturningFunction()),
       Promise.resolve()
     )
   }
 
-  run(objects) {
+  run(objects: Array<CustomObjectDraft>): Promise<void> {
     if (objects.length < 1 || !Array.isArray(objects))
       throw Error(
         'No objects found, please pass an array with custom objects to the run function'
@@ -64,7 +98,7 @@ export default class CustomObjectsImporter {
     return this._processBatches(objects)
   }
 
-  async _processBatches(objects) {
+  async _processBatches(objects: Array<CustomObjectDraft>): Promise<void> {
     this.logger.info('Starting Import')
 
     const batches = CustomObjectsImporter.createBatches(objects, this.batchSize)
@@ -73,30 +107,42 @@ export default class CustomObjectsImporter {
       uri,
       'GET'
     )
+    // skip below because of flow issue with async/await
+    // https://github.com/facebook/flow/issues/5294
+    // todo: remove `FlowFixMe` when above issue is fixed
+    // $FlowFixMe
     const { body: { results: existingObjects } } = await this.client.execute(
       existingObjectsRequest
     )
 
-    const requestsList = batches.map(newObjects =>
-      this._createOrUpdateObjects(existingObjects, newObjects)
+    const requestsList = batches.map(
+      (newObjects: Array<CustomObjectDraft>): Array<ClientRequest> =>
+        this._createOrUpdateObjects(existingObjects, newObjects)
     )
 
-    const functionsList = requestsList.map(requests => async () => {
-      await Promise.all(
-        requests.map(request => this._executeCreateOrUpdateAction(request))
-      )
-    })
+    const functionsList = requestsList.map(
+      (requests: Array<ClientRequest>): Function => async (): Promise<void> => {
+        await Promise.all(
+          requests.map((request: ClientRequest): ExecutionResult =>
+            this._executeCreateOrUpdateAction(request)
+          )
+        )
+      }
+    )
 
     return CustomObjectsImporter.promiseMapSerially(functionsList)
   }
 
-  _executeCreateOrUpdateAction(request) {
-    const { body: { update } } = request
-    if (request.body.update) delete request.body.update
+  _executeCreateOrUpdateAction(request: ClientRequest): ExecutionResult {
+    let update
+    if (request.body && request.body.update) {
+      update = request.body.update
+      delete request.body.update
+    }
 
     return this.client
       .execute(request)
-      .then(() => {
+      .then((): ExecutionResult => {
         if (update) {
           this._summary.updated += 1
         } else {
@@ -104,7 +150,7 @@ export default class CustomObjectsImporter {
         }
         return Promise.resolve({ success: true })
       })
-      .catch(error => {
+      .catch((error: Error): ExecutionResult => {
         this._summary.errors.push(error.message || error)
         let msg
         if (this.continueOnProblems) {
@@ -132,50 +178,59 @@ export default class CustomObjectsImporter {
       })
   }
 
-  _createOrUpdateObjects(existingObjects, newObjects) {
+  _createOrUpdateObjects(
+    existingObjects: Array<CustomObject>,
+    newObjects: Array<CustomObjectDraft>
+  ): Array<ClientRequest> {
     this.logger.info('Executing...')
 
-    const createOrUpdateObjects = newObjects.map(newObject => {
-      const existing = existingObjects.find(
-        oldObject =>
-          oldObject.key === newObject.key &&
-          oldObject.container === newObject.container
-      )
-      if (existing) {
-        if (isEqual(newObject.value, existing.value)) {
-          this._summary.unchanged += 1
-          return null
+    const createOrUpdateObjects = newObjects.map(
+      (newObject: CustomObjectDraft): CustomObjectDraft | null => {
+        const existing = existingObjects.find(
+          (oldObject: CustomObject): boolean =>
+            oldObject.key === newObject.key &&
+            oldObject.container === newObject.container
+        )
+        if (existing) {
+          if (isEqual(newObject.value, existing.value)) {
+            this._summary.unchanged += 1
+            return null
+          }
+          return { ...newObject, update: true }
         }
-        return { ...newObject, update: true }
+
+        return newObject
       }
+    )
 
-      return newObject
-    })
-
-    return this._buildRequests(createOrUpdateObjects.filter(object => object))
+    return this._buildRequests(compact(createOrUpdateObjects))
   }
 
-  _buildRequests(newObjects) {
+  _buildRequests(newObjects: Array<CustomObjectDraft>): Array<ClientRequest> {
     this.logger.info('Creating requests...')
     const uri = CustomObjectsImporter.buildUri(this.apiConfig.projectKey)
 
-    return newObjects.map(newObject =>
+    return newObjects.map((newObject: CustomObjectDraft): ClientRequest =>
       CustomObjectsImporter.buildRequest(uri, 'POST', newObject)
     )
   }
 
-  static buildUri(projectKey) {
+  static buildUri(projectKey: string): string {
     const service = createRequestBuilder({
       projectKey,
     }).customObjects
     return service.build()
   }
 
-  static buildRequest(uri, method, body) {
+  static buildRequest(
+    uri: string,
+    method: MethodType,
+    body?: string | Object
+  ): ClientRequest {
     return body ? { uri, method, body } : { uri, method }
   }
 
-  _initiateSummary() {
+  _initiateSummary(): Summary {
     this._summary = {
       created: 0,
       updated: 0,
@@ -187,7 +242,7 @@ export default class CustomObjectsImporter {
     return this._summary
   }
 
-  summaryReport() {
+  summaryReport(): SummaryReport {
     const {
       created,
       updated,

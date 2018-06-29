@@ -53,6 +53,20 @@ describe('CustomObjectsImporter', () => {
     })
   })
 
+  describe('::processStream', () => {
+    test('should be defined', () =>
+      expect(objectsImport.processStream).toBeDefined())
+
+    test('should call callback when done', done => {
+      objectsImport._processBatches = jest.fn()
+      objectsImport._processBatches.mockReturnValue(Promise.resolve())
+      const myMockCallback = jest.fn(() => {
+        done()
+      })
+      objectsImport.processStream('foo', myMockCallback)
+    })
+  })
+
   describe('::createBatches', () => {
     test('should create array batches', () => {
       const array = [1, 2, 3, 4, 5, 6]
@@ -95,9 +109,7 @@ describe('CustomObjectsImporter', () => {
         .mockReturnValue(Promise.resolve(payload))
     })
 
-    test('should be defined', () => {
-      expect(objectsImport.run).toBeDefined()
-    })
+    test('should be defined', () => expect(objectsImport.run).toBeDefined())
 
     describe('with wrong payload', () => {
       test('should throw error', () => {
@@ -181,7 +193,7 @@ describe('CustomObjectsImporter', () => {
       })
     })
 
-    describe('when error', () => {
+    describe('when error is thrown', () => {
       beforeEach(() => {
         objectsImport.client.execute = jest
           .fn()
@@ -310,6 +322,9 @@ describe('CustomObjectsImporter', () => {
   })
 
   describe('::summaryReport', () => {
+    test('should be defined', () =>
+      expect(objectsImport.summaryReport).toBeDefined())
+
     test('should write `success` message add to `updated`-, `created`-, and both `error`-counters', () => {
       objectsImport.client.execute = jest
         .fn()
