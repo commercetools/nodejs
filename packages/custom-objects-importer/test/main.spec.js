@@ -91,10 +91,10 @@ describe('CustomObjectsImporter', () => {
     test('should throw error', () => {
       expect(
         CustomObjectsImporter.promiseMapSerially([
-          () => Promise.reject(Error('fail')),
+          () => Promise.reject(Error()),
           ...functionsList,
         ])
-      ).rejects.toThrow(Error('fail'))
+      ).rejects.toThrow(Error())
     })
   })
 
@@ -169,11 +169,31 @@ describe('CustomObjectsImporter', () => {
     })
   })
 
+  describe('::_createPromiseReturningFunction', () => {
+    let requests
+    beforeEach(() => {
+      objectsImport.client.execute = jest.fn()
+      objectsImport.client.execute.mockReturnValue(Promise.resolve())
+
+      requests = [createRequest, updateRequest]
+    })
+    test('should create anonymous function', () => {
+      expect(objectsImport._createPromiseReturningFunction(requests)).toEqual(
+        expect.any(Function)
+      )
+    })
+    test('should run anonymous function', () => {
+      const func = objectsImport._createPromiseReturningFunction(requests)
+      expect(func()).resolves.toBe(undefined)
+    })
+  })
+
   describe('::_executeCreateAndUpdateAction', () => {
     describe('when successfully executed', () => {
       beforeEach(() => {
-        objectsImport.client.execute = jest.fn()
-        objectsImport.client.execute.mockReturnValue(Promise.resolve())
+        objectsImport.client.execute = jest
+          .fn()
+          .mockReturnValue(Promise.resolve())
       })
 
       test('should update summary created counter', async () => {

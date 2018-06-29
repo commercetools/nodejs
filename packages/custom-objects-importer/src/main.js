@@ -9,6 +9,7 @@ import {
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import isEqual from 'lodash.isequal'
 import compact from 'lodash.compact'
+import fetch from 'node-fetch'
 
 import type {
   ApiConfigOptions,
@@ -44,12 +45,12 @@ export default class CustomObjectsImporter {
         createAuthMiddlewareWithExistingToken(
           options.accessToken ? `Bearer ${options.accessToken}` : ''
         ),
-        createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
+        createAuthMiddlewareForClientCredentialsFlow(this.apiConfig, fetch),
         createUserAgentMiddleware({
           libraryName: pkg.name,
           libraryVersion: pkg.version,
         }),
-        createHttpMiddleware({ host: this.apiConfig.apiUrl }),
+        createHttpMiddleware({ host: this.apiConfig.apiUrl, fetch }),
       ],
     })
 
@@ -121,16 +122,21 @@ export default class CustomObjectsImporter {
     )
 
     const functionsList = requestsList.map(
-      (requests: Array<ClientRequest>): Function => async (): Promise<void> => {
-        await Promise.all(
-          requests.map((request: ClientRequest): ExecutionResult =>
-            this._executeCreateOrUpdateAction(request)
-          )
-        )
-      }
+      (requests: Array<ClientRequest>): Function =>
+        this._createPromiseReturningFunction(requests)
     )
 
     return CustomObjectsImporter.promiseMapSerially(functionsList)
+  }
+
+  _createPromiseReturningFunction(requests: Array<ClientRequest>): Function {
+    return async (): Promise<void> => {
+      await Promise.all(
+        requests.map((request: ClientRequest): ExecutionResult =>
+          this._executeCreateOrUpdateAction(request)
+        )
+      )
+    }
   }
 
   _executeCreateOrUpdateAction(request: ClientRequest): ExecutionResult {
