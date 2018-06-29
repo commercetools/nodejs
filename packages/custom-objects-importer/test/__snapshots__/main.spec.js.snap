@@ -95,3 +95,34 @@ exports[`CustomObjectsImporter ::run with wrong payload should throw error 1`] =
 exports[`CustomObjectsImporter ::run with wrong payload should throw error 2`] = `"No objects found, please pass an array with custom objects to the run function"`;
 
 exports[`CustomObjectsImporter ::run with wrong payload should throw error 3`] = `"No objects found, please pass an array with custom objects to the run function"`;
+
+exports[`CustomObjectsImporter ::summaryReport should write \`nothing to do\` message and add to \`unchanged\`-counter 1`] = `
+Object {
+  "detailedSummary": Object {
+    "createErrorCount": 0,
+    "created": 0,
+    "errors": Array [],
+    "unchanged": 1,
+    "updateErrorCount": 0,
+    "updated": 0,
+  },
+  "reportMessage": "Summary: nothing to do, all objects are left unchanged",
+}
+`;
+
+exports[`CustomObjectsImporter ::summaryReport should write \`success\` message add to \`updated\`-, \`created\`-, and both \`error\`-counters 1`] = `
+Object {
+  "detailedSummary": Object {
+    "createErrorCount": 1,
+    "created": 1,
+    "errors": Array [
+      "Something went wrong",
+      "Something went wrong",
+    ],
+    "unchanged": 0,
+    "updateErrorCount": 1,
+    "updated": 1,
+  },
+  "reportMessage": "Summary: there were 2 successfully imported custom objects. 1 were newly created, 1 were updated and 0 were unchanged. 2 errors occurred (1 create errors and 1 update errors.)",
+}
+`;

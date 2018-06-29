@@ -1,3 +1,4 @@
+import cloneDeep from 'lodash.clonedeep'
 import CustomObjectsImporter from '../src/main'
 import silentLogger from '../src/utils/silent-logger'
 
@@ -16,10 +17,7 @@ describe('CustomObjectsImporter', () => {
       container: 'createContainer',
     },
   }
-  const updateRequest = {
-    ...createRequest,
-    body: { ...createRequest.body, key: 'updateKey', update: true },
-  }
+  let updateRequest
 
   beforeEach(() => {
     objectsImport = new CustomObjectsImporter(
@@ -30,6 +28,10 @@ describe('CustomObjectsImporter', () => {
       },
       logger
     )
+    updateRequest = {
+      ...createRequest,
+      body: { ...createRequest.body, key: 'updateKey', update: true },
+    }
   })
 
   describe('::constructor', () => {
@@ -120,8 +122,9 @@ describe('CustomObjectsImporter', () => {
       })
 
       test('should return `_processBatches` and pass it the argument', async () => {
-        objectsImport._processBatches = jest.fn()
-        objectsImport._processBatches.mockReturnValue(Promise.resolve('foo'))
+        objectsImport._processBatches = jest
+          .fn()
+          .mockReturnValue(Promise.resolve('foo'))
 
         const response = await objectsImport.run(payload)
         expect(response).toBe('foo')
@@ -131,7 +134,28 @@ describe('CustomObjectsImporter', () => {
     })
   })
 
-  describe('::_processBatches', () => {})
+  describe('::_processBatches', () => {
+    const newObjects = [
+      { key: 'key1', container: 'container1' },
+      { key: 'key2', container: 'container2' },
+    ]
+    const existingObjects = [{ key: 'key1', container: 'container1' }]
+
+    test('should return `promiseMapSerially` and pass it a functionsList', async () => {
+      objectsImport.client.execute = jest
+        .fn()
+        .mockReturnValue(
+          Promise.resolve({ body: { results: existingObjects } })
+        )
+      CustomObjectsImporter.promiseMapSerially = jest.fn()
+      await objectsImport._processBatches(newObjects)
+
+      expect(CustomObjectsImporter.promiseMapSerially).toHaveBeenCalledTimes(1)
+      expect(CustomObjectsImporter.promiseMapSerially).toHaveBeenCalledWith([
+        expect.any(Function),
+      ])
+    })
+  })
 
   describe('::_executeCreateAndUpdateAction', () => {
     describe('when successfully executed', () => {
@@ -204,7 +228,7 @@ describe('CustomObjectsImporter', () => {
             })
         })
 
-        xtest('should update summary `updateErrorCount`', () => {
+        test('should update summary `updateErrorCount`', () => {
           objectsImport
             ._executeCreateOrUpdateAction(updateRequest)
             .catch(error => {
@@ -285,5 +309,32 @@ describe('CustomObjectsImporter', () => {
     })
   })
 
-  describe('::summaryReport', () => {})
+  describe('::summaryReport', () => {
+    test('should write `success` message add to `updated`-, `created`-, and both `error`-counters', () => {
+      objectsImport.client.execute = jest
+        .fn()
+        .mockReturnValue(Promise.reject(Error('Something went wrong')))
+        .mockReturnValueOnce(Promise.resolve())
+        .mockReturnValueOnce(Promise.resolve())
+
+      Promise.all([
+        objectsImport._executeCreateOrUpdateAction(createRequest),
+
+        // clone deep since `_executeCreateOrUpdateAction` function
+        // will delete update key and value from updateRequest object
+        objectsImport._executeCreateOrUpdateAction(cloneDeep(updateRequest)),
+
+        objectsImport._executeCreateOrUpdateAction(createRequest),
+        objectsImport._executeCreateOrUpdateAction(updateRequest),
+      ]).catch(() => {
+        expect(objectsImport.summaryReport()).toMatchSnapshot()
+      })
+    })
+
+    test('should write `nothing to do` message and add to `unchanged`-counter', () => {
+      const obj = [{ key: 'key', container: 'container' }]
+      objectsImport._createOrUpdateObjects(obj, obj)
+      expect(objectsImport.summaryReport()).toMatchSnapshot()
+    })
+  })
 })

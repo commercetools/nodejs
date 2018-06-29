@@ -1,7 +1,7 @@
 {
     "name": "@commercetools/custom-objects-importer",
     "version": "1.0.0-development",
-    "description": "Import custom objects from the commercetools platform",
+    "description": "Import custom objects to the commercetools platform",
     "main": "lib/main.js",
     "scripts": {
         "build": "babel src --out-dir lib"
@@ -36,7 +36,6 @@
         "lodash.isequal": "^4.5.0"
     },
     "devDependencies": {
-        "@commercetools/get-credentials": "^2.1.4",
-        "streamtest": "^1.2.3"
+        "lodash.clonedeep": "^4.5.0"
     }
 }
