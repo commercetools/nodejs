@@ -26,6 +26,24 @@ import type { Client, ClientRequest, MethodType } from 'types/sdk'
 import silentLogger from './utils/silent-logger'
 import pkg from '../package.json'
 
+class CustomObjectImportError extends Error {
+  message: string
+  summary: Summary | string
+  error: any
+
+  constructor(
+    message: string,
+    summary: Summary | string = 'No summary provided.',
+    error: any = null
+  ) {
+    super(message)
+
+    this.message = message
+    this.summary = summary
+    this.error = error
+  }
+}
+
 export default class CustomObjectsImporter {
   // Set type annotations
   apiConfig: ApiConfigOptions
@@ -180,7 +198,14 @@ export default class CustomObjectsImporter {
             'Process stopped due to error while creating custom object. See summary for details'
         }
         this.logger.error(msg)
-        return Promise.reject(error)
+
+        return Promise.reject(
+          new CustomObjectImportError(
+            msg,
+            this._summary,
+            error.message || error
+          )
+        )
       })
   }
 

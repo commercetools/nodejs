@@ -49,11 +49,11 @@ Object {
 }
 `;
 
-exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when error is thrown without \`continueOnProblems\` should reject promise 1`] = `"Something went wrong"`;
+exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when error is thrown without \`continueOnProblems\` should reject promise 1`] = `"Process stopped due to error while creating custom object. See summary for details"`;
 
-exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when error is thrown without \`continueOnProblems\` should update summary \`createErrorCount\` 1`] = `[Error: Something went wrong]`;
+exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when error is thrown without \`continueOnProblems\` should update summary \`createErrorCount\` 1`] = `[Error: Process stopped due to error while creating custom object. See summary for details]`;
 
-exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when error is thrown without \`continueOnProblems\` should update summary \`updateErrorCount\` 1`] = `[Error: Something went wrong]`;
+exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when error is thrown without \`continueOnProblems\` should update summary \`updateErrorCount\` 1`] = `[Error: Process stopped due to error while updating custom object. See summary for details]`;
 
 exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when successfully executed should resolve promise 1`] = `
 Object {
