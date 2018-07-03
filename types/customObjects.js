@@ -21,9 +21,7 @@ export type CustomObject = {
   version: number,
 }
 
-type Execute = { success: boolean } | Error
-
-export type ExecutionResult = Promise<Execute>
+export type ExecutionResult = Promise<Error | void>
 
 /* Summary */
 
@@ -65,7 +63,7 @@ export type ExporterOptions = {
   apiConfig: ApiConfigOptions,
   accessToken?: string,
   predicate?: string,
-  logger: LoggerOptions,
+  logger?: LoggerOptions,
   batchSize?: number,
   continueOnProblems?: boolean,
 }

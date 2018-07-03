@@ -7,5 +7,5 @@ More info here: https://commercetools.github.io/nodejs/cli/custom-objects-import
 ## Install
 
 ```bash
-npm install @commercetools/custom-objects-importer --global
+npm install @commercetools/custom-objects-importer
 ```

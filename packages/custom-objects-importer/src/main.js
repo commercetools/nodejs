@@ -159,10 +159,7 @@ export default class CustomObjectsImporter {
 
   _executeCreateOrUpdateAction(request: ClientRequest): ExecutionResult {
     let update
-    if (request.body && request.body.update) {
-      update = request.body.update
-      delete request.body.update
-    }
+    if (request.body && request.body.update) update = request.body.update
 
     return this.client
       .execute(request)
@@ -172,7 +169,7 @@ export default class CustomObjectsImporter {
         } else {
           this._summary.created += 1
         }
-        return Promise.resolve({ success: true })
+        return Promise.resolve()
       })
       .catch((error: Error): ExecutionResult => {
         this._summary.errors.push(error.message || error)
@@ -186,7 +183,7 @@ export default class CustomObjectsImporter {
             msg = 'Create error occurred but ignored. See summary for details'
           }
           this.logger.error(msg)
-          return Promise.resolve({ success: true })
+          return Promise.resolve()
         }
         if (update) {
           this._summary.updateErrorCount += 1

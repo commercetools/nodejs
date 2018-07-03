@@ -209,7 +209,7 @@ describe('CustomObjectsImporter', () => {
       test('should resolve promise', () => {
         expect(
           objectsImport._executeCreateOrUpdateAction(createRequest)
-        ).resolves.toMatchSnapshot()
+        ).resolves.toBeUndefined()
       })
     })
 
@@ -246,7 +246,7 @@ describe('CustomObjectsImporter', () => {
         test('should resolve promise', () => {
           expect(
             objectsImport._executeCreateOrUpdateAction(createRequest)
-          ).resolves.toMatchSnapshot()
+          ).resolves.toBeUndefined()
         })
       })
 
