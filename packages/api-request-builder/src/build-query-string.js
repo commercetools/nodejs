@@ -97,18 +97,18 @@ export default function buildQueryString(
     if (fuzzyLevel) queryString.push(`fuzzyLevel=${fuzzyLevel}`)
     queryString.push(`markMatchingVariants=${markMatchingVariants.toString()}`)
 
-    facet.forEach((f: string): string => queryString.push(`facet=${f}`))
-    filter.forEach((f: string): string => queryString.push(`filter=${f}`))
-    filterByQuery.forEach((f: string): string =>
+    facet.forEach((f: string): number => queryString.push(`facet=${f}`))
+    filter.forEach((f: string): number => queryString.push(`filter=${f}`))
+    filterByQuery.forEach((f: string): number =>
       queryString.push(`filter.query=${f}`)
     )
-    filterByFacets.forEach((f: string): string =>
+    filterByFacets.forEach((f: string): number =>
       queryString.push(`filter.facets=${f}`)
     )
   }
 
   if (searchKeywords)
-    searchKeywords.forEach((f: string): string =>
+    searchKeywords.forEach((f: { lang: string, value: string }): number =>
       queryString.push(`searchKeywords.${f.lang}=${f.value}`)
     )
 
