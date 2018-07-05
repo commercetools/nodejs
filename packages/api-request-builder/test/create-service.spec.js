@@ -184,6 +184,14 @@ describe('createService', () => {
     })
 
     // query-projection
+    test('should return same url for every build', () => {
+      expect(service.build()).toBe('/my-project1/foo')
+      expect(service.build()).toBe('/my-project1/foo')
+      expect(service.build()).toBe('/my-project1/foo')
+      expect(service.build()).toBe('/my-project1/foo')
+      expect(service.build()).toBe('/my-project1/foo')
+    })
+
     test('should support `staged` being  `true`', () => {
       expect(service.parse({ staged: true }).build()).toBe(
         '/my-project1/foo?staged=true'
@@ -228,82 +236,75 @@ describe('createService', () => {
       test('should support `text`', () => {
         expect(
           service.parse({ text: { value: 'foo', language: 'bar' } }).build()
-        ).toBe(
-          '/my-project1/foo' +
-            '?staged=true&text.bar=foo&markMatchingVariants=false'
-        )
+        ).toBe('/my-project1/foo?text.bar=foo&markMatchingVariants=false')
       })
       test('should support `fuzzy` being `true`', () => {
         expect(service.parse({ fuzzy: true }).build()).toBe(
-          '/my-project1/foo?staged=true&fuzzy=true&markMatchingVariants=false'
+          '/my-project1/foo?fuzzy=true&markMatchingVariants=false'
         )
       })
       test('should support `fuzzy` being `false`', () => {
         expect(service.parse({ fuzzy: false }).build()).toBe(
-          '/my-project1/foo?staged=true&markMatchingVariants=false'
+          '/my-project1/foo?markMatchingVariants=false'
         )
       })
       test('should support `fuzzyLevel`', () => {
         expect(service.parse({ fuzzyLevel: 1 }).build()).toBe(
-          '/my-project1/foo' +
-            '?staged=true&fuzzyLevel=1&markMatchingVariants=false'
+          '/my-project1/foo?fuzzyLevel=1&markMatchingVariants=false'
         )
       })
       test('should support `markMatchingVariants` being `true`', () => {
         expect(service.parse({ markMatchingVariants: true }).build()).toBe(
-          '/my-project1/foo?staged=true&markMatchingVariants=true'
+          '/my-project1/foo?markMatchingVariants=true'
         )
       })
       test('should support `markMatchingVariants` being `false`', () => {
         expect(service.parse({ markMatchingVariants: false }).build()).toBe(
-          '/my-project1/foo?staged=true&markMatchingVariants=false'
+          '/my-project1/foo?markMatchingVariants=false'
         )
       })
       test('should support a single `facet`', () => {
         expect(service.parse({ facet: ['foo'] }).build()).toBe(
-          '/my-project1/foo?staged=true&markMatchingVariants=false&facet=foo'
+          '/my-project1/foo?markMatchingVariants=false&facet=foo'
         )
       })
       test('should support multiple `facet`s', () => {
         expect(service.parse({ facet: ['foo', 'bar'] }).build()).toBe(
-          '/my-project1/foo' +
-            '?staged=true&markMatchingVariants=false&facet=foo&facet=bar'
+          '/my-project1/foo?markMatchingVariants=false&facet=foo&facet=bar'
         )
       })
       test('should support a single `filter`', () => {
         expect(service.parse({ filter: ['foo'] }).build()).toBe(
-          '/my-project1/foo?staged=true&markMatchingVariants=false&filter=foo'
+          '/my-project1/foo?markMatchingVariants=false&filter=foo'
         )
       })
       test('should support multiple `filter`s', () => {
         expect(service.parse({ filter: ['foo', 'bar'] }).build()).toBe(
           '/my-project1/foo' +
-            '?staged=true&markMatchingVariants=false&filter=foo&filter=bar'
+            '?markMatchingVariants=false&filter=foo&filter=bar'
         )
       })
       test('should support a single `filterByQuery`', () => {
         expect(service.parse({ filterByQuery: ['foo'] }).build()).toBe(
-          '/my-project1/foo' +
-            '?staged=true&markMatchingVariants=false&filter.query=foo'
+          '/my-project1/foo?markMatchingVariants=false&filter.query=foo'
         )
       })
       test('should support multiple `filterByQuery`s', () => {
         expect(service.parse({ filterByQuery: ['foo', 'bar'] }).build()).toBe(
           '/my-project1/foo' +
-            '?staged=true&markMatchingVariants=false' +
+            '?markMatchingVariants=false' +
             '&filter.query=foo&filter.query=bar'
         )
       })
       test('should support a single `filterByFacets`', () => {
         expect(service.parse({ filterByFacets: ['foo'] }).build()).toBe(
-          '/my-project1/foo' +
-            '?staged=true&markMatchingVariants=false&filter.facets=foo'
+          '/my-project1/foo?markMatchingVariants=false&filter.facets=foo'
         )
       })
       test('should support multiple `filterByFacets`s', () => {
         expect(service.parse({ filterByFacets: ['foo', 'bar'] }).build()).toBe(
           '/my-project1/foo' +
-            '?staged=true&markMatchingVariants=false' +
+            '?markMatchingVariants=false' +
             '&filter.facets=foo&filter.facets=bar'
         )
       })

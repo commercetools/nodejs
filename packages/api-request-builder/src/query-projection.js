@@ -6,7 +6,7 @@
  * (for current / published)
  * @return {Object} The instance of the service, can be chained.
  */
-export function staged(isStaged: boolean = true): Object {
+export function staged(isStaged: boolean = false): Object {
   this.params.staged = isStaged
   return this
 }
