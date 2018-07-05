@@ -9,6 +9,7 @@ import type {
   ParseOptions,
   ParserSummary,
 } from 'types/discountCodes'
+import type { HttpErrorType } from 'types/sdk'
 import castTypes from './utils'
 
 export default class CsvParserDiscountCode {
@@ -47,8 +48,8 @@ export default class CsvParserDiscountCode {
   }
 
   // Remove fields with empty values from the code objects
-  static _removeEmptyFields(item: Object) {
-    return Object.keys(item).reduce((acc, key) => {
+  static _removeEmptyFields(item: Object): Object {
+    return Object.keys(item).reduce((acc: Object, key: string): Object => {
       if (item[key] !== '') acc[key] = item[key]
       return acc
     }, {})
@@ -69,7 +70,7 @@ export default class CsvParserDiscountCode {
       .map(this._groupsToArray)
       .map(castTypes)
       .errors(this._handleErrors) // <- Pass errors to errorHandler
-      .stopOnError(error => {
+      .stopOnError((error: HttpErrorType) => {
         // <- Emit error and close stream if needed
         output.emit('error', error)
       })
@@ -83,14 +84,14 @@ export default class CsvParserDiscountCode {
 
   // Convert the cartDiscounts field to an array of references to commercetools
   // cartDiscounts
-  _cartDiscountsToArray(item: Object) {
+  _cartDiscountsToArray(item: Object): Object {
     const { cartDiscounts, ...rest } = item
 
     return cartDiscounts
       ? Object.assign(rest, {
           cartDiscounts: cartDiscounts
             .split(this.multiValueDelimiter)
-            .map(cartDiscountId => ({
+            .map((cartDiscountId: string): Object => ({
               typeId: 'cart-discount',
               id: cartDiscountId,
             })),
@@ -98,7 +99,7 @@ export default class CsvParserDiscountCode {
       : rest
   }
 
-  _groupsToArray(item: Object) {
+  _groupsToArray(item: Object): Object {
     const { groups, ...rest } = item
     return groups
       ? Object.assign(rest, { groups: groups.split(this.multiValueDelimiter) })
