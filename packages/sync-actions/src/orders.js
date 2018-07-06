@@ -36,6 +36,14 @@ function createOrderMapActions(
       )
     )
 
+    allActions.push(
+      flatten(
+        mapActionGroup('returnInfo', (): Array<UpdateAction> =>
+          orderActions.actionsMapReturnsInfo(diff, oldObj, newObj)
+        )
+      )
+    )
+
     return flatten(allActions)
   }
 }

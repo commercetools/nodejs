@@ -1,6 +1,7 @@
 import { buildBaseAttributesActions } from './utils/common-actions'
 import createBuildArrayActions, {
   ADD_ACTIONS,
+  CHANGE_ACTIONS,
 } from './utils/create-build-array-actions'
 
 export const baseActionsList = [
@@ -36,4 +37,57 @@ export function actionsMapDeliveries(diff, oldObj, newObj) {
   })
 
   return handler(deliveriesDiff, oldObj.shippingInfo, newObj.shippingInfo)
+}
+
+export function actionsMapReturnsInfo(diff, oldObj, newObj) {
+  const returnInfoDiff = diff.returnInfo
+  if (!returnInfoDiff) return []
+
+  const handler = createBuildArrayActions('returnInfo', {
+    [CHANGE_ACTIONS]: (oldSReturnInfo, newReturnInfo) => {
+      const updateActions = Object.keys(diff.returnInfo).reduce(
+        (itemActions, key) => {
+          const { items = {} } = diff.returnInfo[key]
+          if (Object.keys(items).length > 0) {
+            return [
+              ...itemActions,
+              ...Object.keys(items).reduce((actions, index) => {
+                if (items[index].shipmentState) {
+                  const item = newReturnInfo.items[index]
+                  return [
+                    ...actions,
+                    {
+                      action: 'setReturnShipmentState',
+                      returnItemId: item.id,
+                      shipmentState: item.shipmentState,
+                    },
+                  ]
+                }
+                if (items[index].paymentState) {
+                  const item = newReturnInfo.items[index]
+                  return [
+                    ...actions,
+                    {
+                      action: 'setReturnPaymentState',
+                      returnItemId: item.id,
+                      paymentState: item.paymentState,
+                    },
+                  ]
+                }
+
+                return actions
+              }, []),
+            ]
+          }
+
+          return itemActions
+        },
+        []
+      )
+
+      return updateActions
+    },
+  })
+
+  return handler(diff, oldObj, newObj)
 }
