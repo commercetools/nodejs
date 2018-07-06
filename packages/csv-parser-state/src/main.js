@@ -21,7 +21,7 @@ import type {
   StateWithStringTransitions,
   StateWithUnresolvedTransitions,
 } from 'types/state'
-import type { Client, SuccessResult } from 'types/sdk'
+import type { Client, SuccessResult, HttpErrorType } from 'types/sdk'
 import pkg from '../package.json'
 
 export default class CsvParserState {
@@ -70,15 +70,19 @@ export default class CsvParserState {
       .map(CsvParserState._removeEmptyFields)
       .map(CsvParserState._parseInitialToBoolean)
       .map(unflatten)
-      .map(state =>
+      .map((state: Object): Object =>
         CsvParserState._mapMultiValueFieldsToArray(
           state,
           this.csvConfig.multiValueDelimiter
         )
       )
-      .flatMap(state => highland(this._transformTransitions(state)))
-      .errors((error, cb) => this._handleErrors(error, cb))
-      .stopOnError(error => {
+      .flatMap((state: Object): Object =>
+        highland(this._transformTransitions(state))
+      )
+      .errors((error: HttpErrorType, cb: Function): void =>
+        this._handleErrors(error, cb)
+      )
+      .stopOnError((error: string) => {
         // <- Emit error and close stream if needed
         this.logger.error(`At row: ${this._rowIndex}, ${error}`)
         output.emit('error', error)
@@ -95,7 +99,7 @@ export default class CsvParserState {
     transitions,
     ...remainingState
   }: StateWithUnresolvedTransitions): Promise<Object> {
-    return new Promise(resolve => {
+    return new Promise((resolve: Function) => {
       if (!transitions) resolve(remainingState)
       // We setup the client here because it is unnecessary
       // if there are no transitions
@@ -103,19 +107,22 @@ export default class CsvParserState {
         this.apiConfig,
         this.accessToken
       )
-      const stateRequests = transitions.map(transitionStateKey =>
-        this._fetchStates(
-          CsvParserState._buildStateRequestUri(
-            this.apiConfig.projectKey,
-            transitionStateKey
+      const stateRequests = transitions.map(
+        (transitionStateKey: string): Promise<SuccessResult> =>
+          this._fetchStates(
+            CsvParserState._buildStateRequestUri(
+              this.apiConfig.projectKey,
+              transitionStateKey
+            )
           )
-        )
       )
-      Promise.all(stateRequests).then(resolvedStates => {
-        const stateReferences = resolvedStates.map(response => ({
-          typeId: 'state',
-          id: response.body.id,
-        }))
+      Promise.all(stateRequests).then((resolvedStates: Array<Object>) => {
+        const stateReferences = resolvedStates.map(
+          (response: Object): Object => ({
+            typeId: 'state',
+            id: response.body.id,
+          })
+        )
         resolve({ ...remainingState, transitions: stateReferences })
       })
     })
@@ -137,7 +144,10 @@ export default class CsvParserState {
     return stateService.byKey(stateKey).build()
   }
 
-  static _setupClient(apiConfig: ApiConfigOptions, accessToken: string) {
+  static _setupClient(
+    apiConfig: ApiConfigOptions,
+    accessToken: string
+  ): Object {
     if (!apiConfig)
       throw new Error('The constructor must be passed an `apiConfig` object')
     return createClient({
@@ -158,14 +168,14 @@ export default class CsvParserState {
     })
   }
 
-  static _createStateService(projectKey: string) {
+  static _createStateService(projectKey: string): Object {
     return createRequestBuilder({ projectKey }).states
   }
 
   static _mapMultiValueFieldsToArray(
     { roles, transitions, ...remainingState }: StateWithStringTransitions,
     multiValueDelimiter: string
-  ) {
+  ): Object {
     const mappedObject = {}
     if (transitions)
       mappedObject.transitions = CsvParserState._mapStringToArray(
@@ -190,10 +200,13 @@ export default class CsvParserState {
   // Remove fields with empty values from the state objects
   static _removeEmptyFields(item: Object): Object {
     // "acc" is "state" but lint doesn't like mutations
-    return Object.entries(item).reduce((acc, [property, value]) => {
-      if (value !== '') acc[property] = value
-      return acc
-    }, {})
+    return Object.entries(item).reduce(
+      (acc: Object, [property, value]: [string, mixed]): Object => {
+        if (value !== '') acc[property] = value
+        return acc
+      },
+      {}
+    )
   }
 
   static _parseInitialToBoolean(state: Object): Object {
@@ -205,7 +218,7 @@ export default class CsvParserState {
       : state
   }
 }
-
+/* eslint-disable-next-line */
 CsvParserState.prototype._fetchStates = memoize(function(
   uri: string
 ): Promise<SuccessResult> {

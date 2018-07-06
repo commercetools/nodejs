@@ -27,6 +27,7 @@ export default function createRequestBuilder(
   const allServices = { ...services, ...options.customServices }
 
   return Object.keys(allServices).reduce(
+    /* eslint-disable-next-line */
     (acc: {}, key: string) => ({
       ...acc,
       [key]: createService(allServices[key], options.projectKey),
