@@ -164,7 +164,7 @@ export default class DiscountCodeExport {
   _processCode(data: CodeData): Object {
     const { cartDiscounts, groups, ...restDiscountCodeData } = data
     const cartDiscountsString = cartDiscounts
-      .map(cartDiscount => cartDiscount.id)
+      .map((cartDiscount: Object): string => cartDiscount.id)
       .join(this.config.multiValueDelimiter)
     const groupsString = groups
       ? groups.join(this.config.multiValueDelimiter)
@@ -180,7 +180,10 @@ export default class DiscountCodeExport {
     ]
 
     const discountCodeData = Object.entries(restDiscountCodeData).reduce(
-      (discountCode, [discountCodeKey, value: Object]) =>
+      (
+        discountCode: Object,
+        [discountCodeKey: string, value: Object]: [string, mixed]
+      ): Object =>
         objKeys.includes(discountCodeKey) && !Object.entries(value).length
           ? discountCode
           : { ...discountCode, [discountCodeKey]: value },
