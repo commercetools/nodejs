@@ -88,7 +88,7 @@ describe('Custom Object tests', () => {
           await objectImport.run(customObjects)
         } catch (e) {
           // should create first object
-          expect(e.summary.created).toBe(1)
+          expect(e.summary.createdCount).toBe(1)
           // should stop after first error
           expect(e.summary.errors).toHaveLength(1)
           expect(e.summary).toMatchSnapshot()

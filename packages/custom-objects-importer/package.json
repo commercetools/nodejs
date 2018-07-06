@@ -33,9 +33,11 @@
         "@commercetools/sdk-middleware-http": "^3.0.0",
         "@commercetools/sdk-middleware-user-agent": "^1.2.7",
         "@commercetools/sync-actions": "^1.24.0",
+        "common-tags": "^1.8.0",
         "lodash.compact": "^3.0.1",
         "lodash.isequal": "^4.5.0",
-        "node-fetch": "^2.1.2"
+        "node-fetch": "^2.1.2",
+        "p-series": "^1.1.0"
     },
     "devDependencies": {
         "lodash.clonedeep": "^4.5.0"

@@ -9,6 +9,8 @@ import {
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import isEqual from 'lodash.isequal'
 import compact from 'lodash.compact'
+import pSeries from 'p-series'
+import { oneLine } from 'common-tags'
 import fetch from 'node-fetch'
 
 import type {
@@ -98,17 +100,6 @@ export default class CustomObjectsImporter {
     return cache
   }
 
-  static promiseMapSerially(functions: Array<Function>): Promise<void> {
-    return functions.reduce(
-      (
-        promise: Promise<void>,
-        promiseReturningFunction: Function
-      ): Promise<void> =>
-        promise.then((): Promise<void> => promiseReturningFunction()),
-      Promise.resolve()
-    )
-  }
-
   run(objects: Array<CustomObjectDraft>): Promise<void> {
     if (objects.length < 1 || !Array.isArray(objects))
       throw Error(
@@ -144,7 +135,7 @@ export default class CustomObjectsImporter {
         this._createPromiseReturningFunction(requests)
     )
 
-    return CustomObjectsImporter.promiseMapSerially(functionsList)
+    return pSeries(functionsList)
   }
 
   _createPromiseReturningFunction(requests: Array<ClientRequest>): Function {
@@ -165,9 +156,9 @@ export default class CustomObjectsImporter {
       .execute(request)
       .then((): ExecutionResult => {
         if (update) {
-          this._summary.updated += 1
+          this._summary.updatedCount += 1
         } else {
-          this._summary.created += 1
+          this._summary.createdCount += 1
         }
         return Promise.resolve()
       })
@@ -221,7 +212,7 @@ export default class CustomObjectsImporter {
         )
         if (existing) {
           if (isEqual(newObject.value, existing.value)) {
-            this._summary.unchanged += 1
+            this._summary.unchangedCount += 1
             return null
           }
           return { ...newObject, update: true }
@@ -260,9 +251,9 @@ export default class CustomObjectsImporter {
 
   _initiateSummary(): Summary {
     this._summary = {
-      created: 0,
-      updated: 0,
-      unchanged: 0,
+      createdCount: 0,
+      updatedCount: 0,
+      unchangedCount: 0,
       createErrorCount: 0,
       updateErrorCount: 0,
       errors: [],
@@ -272,21 +263,35 @@ export default class CustomObjectsImporter {
 
   summaryReport(): SummaryReport {
     const {
-      created,
-      updated,
-      unchanged,
+      createdCount,
+      updatedCount,
+      unchangedCount,
       createErrorCount,
       updateErrorCount,
     } = this._summary
     let message
-    if (!created && !updated && !createErrorCount && !updateErrorCount)
-      message = 'Summary: nothing to do, all objects are left unchanged'
+    if (
+      !createdCount &&
+      !updatedCount &&
+      !createErrorCount &&
+      !updateErrorCount
+    )
+      message = 'Summary: nothing to do, all objects are left unchanged.'
     else
-      message = `Summary: there were ${created +
-        updated} successfully imported custom objects. ${created} were newly created, ${updated} were updated and ${unchanged} were unchanged.`
-    if (createErrorCount || updateErrorCount)
-      message += ` ${createErrorCount +
-        updateErrorCount} errors occurred (${createErrorCount} create errors and ${updateErrorCount} update errors.)`
+      message = oneLine`
+        Summary: there were ${createdCount + updatedCount}
+        successfully imported custom objects.
+        ${createdCount} were newly created,
+        ${updatedCount} were updated and
+        ${unchangedCount} were unchanged.
+        `
+    if (createErrorCount || updateErrorCount) {
+      message += ` ${oneLine`     
+        ${createErrorCount + updateErrorCount} errors occurred
+        (${createErrorCount} create errors and
+        ${updateErrorCount} update errors.)
+        `}`
+    }
     return {
       reportMessage: message,
       detailedSummary: this._summary,

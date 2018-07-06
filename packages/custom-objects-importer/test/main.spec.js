@@ -54,11 +54,13 @@ describe('CustomObjectsImporter', () => {
   })
 
   describe('::processStream', () => {
+    beforeEach(() => {
+      objectsImport._processBatches = jest.fn()
+    })
     test('should be defined', () =>
       expect(objectsImport.processStream).toBeDefined())
 
     test('should call callback when done', done => {
-      objectsImport._processBatches = jest.fn()
       objectsImport._processBatches.mockReturnValue(Promise.resolve())
       const myMockCallback = jest.fn(() => {
         done()
@@ -71,30 +73,6 @@ describe('CustomObjectsImporter', () => {
     test('should create array batches', () => {
       const array = [1, 2, 3, 4, 5, 6]
       expect(CustomObjectsImporter.createBatches(array, 2)).toHaveLength(3)
-    })
-  })
-
-  describe('::promiseMapSerially', () => {
-    const promiseReturnFunction = digit => Promise.resolve(digit)
-    const functionsList = [
-      () => promiseReturnFunction(1),
-      () => promiseReturnFunction(2),
-      () => promiseReturnFunction(3),
-    ]
-
-    test('should process promises serially', () => {
-      expect(
-        CustomObjectsImporter.promiseMapSerially(functionsList)
-      ).resolves.toBe(3)
-    })
-
-    test('should throw error', () => {
-      expect(
-        CustomObjectsImporter.promiseMapSerially([
-          () => Promise.reject(Error()),
-          ...functionsList,
-        ])
-      ).rejects.toThrow(Error())
     })
   })
 
@@ -131,12 +109,11 @@ describe('CustomObjectsImporter', () => {
             },
           },
         ]
+        objectsImport._processBatches = jest.fn()
       })
 
       test('should return `_processBatches` and pass it the argument', async () => {
-        objectsImport._processBatches = jest
-          .fn()
-          .mockReturnValue(Promise.resolve('foo'))
+        objectsImport._processBatches.mockReturnValue(Promise.resolve('foo'))
 
         const response = await objectsImport.run(payload)
         expect(response).toBe('foo')
@@ -153,19 +130,15 @@ describe('CustomObjectsImporter', () => {
     ]
     const existingObjects = [{ key: 'key1', container: 'container1' }]
 
-    test('should return `promiseMapSerially` and pass it a functionsList', async () => {
-      objectsImport.client.execute = jest
-        .fn()
-        .mockReturnValue(
-          Promise.resolve({ body: { results: existingObjects } })
-        )
-      CustomObjectsImporter.promiseMapSerially = jest.fn()
-      await objectsImport._processBatches(newObjects)
+    beforeEach(() => {
+      objectsImport.client.execute = jest.fn()
+    })
 
-      expect(CustomObjectsImporter.promiseMapSerially).toHaveBeenCalledTimes(1)
-      expect(CustomObjectsImporter.promiseMapSerially).toHaveBeenCalledWith([
-        expect.any(Function),
-      ])
+    test('should resolve to undefined', () => {
+      objectsImport.client.execute.mockReturnValue(
+        Promise.resolve({ body: { results: existingObjects } })
+      )
+      expect(objectsImport._processBatches(newObjects)).resolves.toBeUndefined()
     })
   })
 
@@ -198,12 +171,12 @@ describe('CustomObjectsImporter', () => {
 
       test('should update summary created counter', async () => {
         await objectsImport._executeCreateOrUpdateAction(createRequest)
-        expect(objectsImport._summary.created).toBe(1)
+        expect(objectsImport._summary.createdCount).toBe(1)
       })
 
       test('should update summary updated counter', async () => {
         await objectsImport._executeCreateOrUpdateAction(updateRequest)
-        expect(objectsImport._summary.updated).toBe(1)
+        expect(objectsImport._summary.updatedCount).toBe(1)
       })
 
       test('should resolve promise', () => {
@@ -342,12 +315,14 @@ describe('CustomObjectsImporter', () => {
   })
 
   describe('::summaryReport', () => {
+    beforeEach(() => {
+      objectsImport.client.execute = jest.fn()
+    })
     test('should be defined', () =>
       expect(objectsImport.summaryReport).toBeDefined())
 
     test('should write `success` message add to `updated`-, `created`-, and both `error`-counters', () => {
-      objectsImport.client.execute = jest
-        .fn()
+      objectsImport.client.execute
         .mockReturnValue(Promise.reject(Error('Something went wrong')))
         .mockReturnValueOnce(Promise.resolve())
         .mockReturnValueOnce(Promise.resolve())

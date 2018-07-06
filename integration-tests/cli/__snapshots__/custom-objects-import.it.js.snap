@@ -4,14 +4,14 @@ exports[`Custom Object tests Custom Objects Importer should continueOnProblems i
 Object {
   "detailedSummary": Object {
     "createErrorCount": 2,
-    "created": 1,
+    "createdCount": 1,
     "errors": Array [
       "key must at least have one character",
       "container must at least have one character",
     ],
-    "unchanged": 0,
+    "unchangedCount": 0,
     "updateErrorCount": 0,
-    "updated": 0,
+    "updatedCount": 0,
   },
   "reportMessage": "Summary: there were 1 successfully imported custom objects. 1 were newly created, 0 were updated and 0 were unchanged. 2 errors occurred (2 create errors and 0 update errors.)",
 }
@@ -28,11 +28,11 @@ exports[`Custom Object tests Custom Objects Importer should import custom object
 Object {
   "detailedSummary": Object {
     "createErrorCount": 0,
-    "created": 3,
+    "createdCount": 3,
     "errors": Array [],
-    "unchanged": 0,
+    "unchangedCount": 0,
     "updateErrorCount": 0,
-    "updated": 0,
+    "updatedCount": 0,
   },
   "reportMessage": "Summary: there were 3 successfully imported custom objects. 3 were newly created, 0 were updated and 0 were unchanged.",
 }
@@ -41,13 +41,13 @@ Object {
 exports[`Custom Object tests Custom Objects Importer should stop import on first errors by default 1`] = `
 Object {
   "createErrorCount": 1,
-  "created": 1,
+  "createdCount": 1,
   "errors": Array [
     "key must at least have one character",
   ],
-  "unchanged": 0,
+  "unchangedCount": 0,
   "updateErrorCount": 0,
-  "updated": 0,
+  "updatedCount": 0,
 }
 `;
 
@@ -55,11 +55,11 @@ exports[`Custom Object tests Custom Objects Importer should update custom object
 Object {
   "detailedSummary": Object {
     "createErrorCount": 0,
-    "created": 0,
+    "createdCount": 0,
     "errors": Array [],
-    "unchanged": 0,
+    "unchangedCount": 0,
     "updateErrorCount": 0,
-    "updated": 3,
+    "updatedCount": 3,
   },
   "reportMessage": "Summary: there were 3 successfully imported custom objects. 0 were newly created, 3 were updated and 0 were unchanged.",
 }

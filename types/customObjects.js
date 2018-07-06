@@ -26,9 +26,9 @@ export type ExecutionResult = Promise<Error | void>
 /* Summary */
 
 export type Summary = {
-  created: number,
-  updated: number,
-  unchanged: number,
+  createdCount: number,
+  updatedCount: number,
+  unchangedCount: number,
   createErrorCount: number,
   updateErrorCount: number,
   errors: Array<any>,

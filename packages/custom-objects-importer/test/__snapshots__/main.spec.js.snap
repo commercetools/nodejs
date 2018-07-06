@@ -88,13 +88,13 @@ exports[`CustomObjectsImporter ::summaryReport should write \`nothing to do\` me
 Object {
   "detailedSummary": Object {
     "createErrorCount": 0,
-    "created": 0,
+    "createdCount": 0,
     "errors": Array [],
-    "unchanged": 1,
+    "unchangedCount": 1,
     "updateErrorCount": 0,
-    "updated": 0,
+    "updatedCount": 0,
   },
-  "reportMessage": "Summary: nothing to do, all objects are left unchanged",
+  "reportMessage": "Summary: nothing to do, all objects are left unchanged.",
 }
 `;
 
@@ -102,14 +102,14 @@ exports[`CustomObjectsImporter ::summaryReport should write \`success\` message 
 Object {
   "detailedSummary": Object {
     "createErrorCount": 1,
-    "created": 1,
+    "createdCount": 1,
     "errors": Array [
       "Something went wrong",
       "Something went wrong",
     ],
-    "unchanged": 0,
+    "unchangedCount": 0,
     "updateErrorCount": 1,
-    "updated": 1,
+    "updatedCount": 1,
   },
   "reportMessage": "Summary: there were 2 successfully imported custom objects. 1 were newly created, 1 were updated and 0 were unchanged. 2 errors occurred (1 create errors and 1 update errors.)",
 }
