@@ -1,4 +1,3 @@
-import cloneDeep from 'lodash.clonedeep'
 import CustomObjectsImporter from '../src/main'
 import silentLogger from '../src/utils/silent-logger'
 
@@ -90,10 +89,13 @@ describe('CustomObjectsImporter', () => {
     test('should be defined', () => expect(objectsImport.run).toBeDefined())
 
     describe('with wrong payload', () => {
+      const errorMessage = Error(
+        'No objects found, please pass an array with custom objects to the run function'
+      )
       test('should throw error', () => {
-        expect(() => objectsImport.run(payload)).toThrowErrorMatchingSnapshot()
-        expect(() => objectsImport.run('foo')).toThrowErrorMatchingSnapshot()
-        expect(() => objectsImport.run({})).toThrowErrorMatchingSnapshot()
+        expect(() => objectsImport.run(payload)).toThrowError(errorMessage)
+        expect(() => objectsImport.run('foo')).toThrowError(errorMessage)
+        expect(() => objectsImport.run({})).toThrowError(errorMessage)
       })
     })
 
@@ -134,11 +136,12 @@ describe('CustomObjectsImporter', () => {
       objectsImport.client.execute = jest.fn()
     })
 
-    test('should resolve to undefined', () => {
+    test('should resolve', () => {
       objectsImport.client.execute.mockReturnValue(
         Promise.resolve({ body: { results: existingObjects } })
       )
-      expect(objectsImport._processBatches(newObjects)).resolves.toBeUndefined()
+
+      expect(objectsImport._processBatches(newObjects)).resolves.toBeTruthy()
     })
   })
 
@@ -224,22 +227,19 @@ describe('CustomObjectsImporter', () => {
       })
 
       describe('without `continueOnProblems`', () => {
-        test('should update summary `createErrorCount`', () => {
-          objectsImport
-            ._executeCreateOrUpdateAction(createRequest)
-            .catch(error => {
-              expect(error).toMatchSnapshot()
-              expect(objectsImport._summary.createErrorCount).toBe(1)
-            })
+        test('should update summary `createErrorCount`', async () => {
+          await expect(
+            objectsImport._executeCreateOrUpdateAction(createRequest)
+          ).rejects.toThrowErrorMatchingSnapshot()
+          expect(objectsImport._summary.createErrorCount).toBe(1)
         })
 
-        test('should update summary `updateErrorCount`', () => {
-          objectsImport
-            ._executeCreateOrUpdateAction(updateRequest)
-            .catch(error => {
-              expect(error).toMatchSnapshot()
-              expect(objectsImport._summary.updateErrorCount).toBe(1)
-            })
+        test('should update summary `updateErrorCount`', async () => {
+          await expect(
+            objectsImport._executeCreateOrUpdateAction(updateRequest)
+          ).rejects.toThrowErrorMatchingSnapshot()
+
+          expect(objectsImport._summary.updateErrorCount).toBe(1)
         })
 
         test('should reject promise', () => {
@@ -265,9 +265,12 @@ describe('CustomObjectsImporter', () => {
     ]
 
     test('should build array of all request objects', () => {
-      expect(
-        objectsImport._createOrUpdateObjects(oldObjects, newObjects)
-      ).toMatchSnapshot()
+      const requests = objectsImport._createOrUpdateObjects(
+        oldObjects,
+        newObjects
+      )
+      expect(requests).toHaveLength(2)
+      expect(requests).toMatchSnapshot()
     })
 
     test('should not build request for equal objects', () => {
@@ -284,67 +287,121 @@ describe('CustomObjectsImporter', () => {
     const objects = [{ foo: 'foo' }, { bar: 'bar' }]
 
     test('should build array of requests', () => {
-      expect(objectsImport._buildRequests(objects)).toMatchSnapshot()
+      const requests = objectsImport._buildRequests(objects)
+      expect(requests).toHaveLength(2)
+      expect(requests).toMatchSnapshot()
     })
   })
 
   describe('::buildUri', () => {
     test('should build URI', () => {
-      expect(CustomObjectsImporter.buildUri('project-key')).toMatchSnapshot()
+      const uri = CustomObjectsImporter.buildUri('project-key')
+      expect(uri).toEqual('/project-key/custom-objects')
     })
   })
 
   describe('::buildRequest', () => {
-    test('should build request', () => {
-      expect(
-        CustomObjectsImporter.buildRequest('/test', 'POST')
-      ).toMatchSnapshot()
+    let uri
+    let method
+    let body
+    let request
+
+    describe('without body', () => {
+      beforeEach(() => {
+        uri = '/test'
+        method = 'POST'
+        request = CustomObjectsImporter.buildRequest(uri, method)
+      })
+      test('should build request', () => {
+        expect(request.uri).toEqual(uri)
+        expect(request.method).toEqual(method)
+      })
     })
 
     describe('with body', () => {
+      beforeEach(() => {
+        uri = '/test'
+        method = 'POST'
+        body = {
+          str: 'str',
+        }
+        request = CustomObjectsImporter.buildRequest(uri, method, body)
+      })
       test('should build request', () => {
-        expect(
-          CustomObjectsImporter.buildRequest('/test', 'POST', {
-            str: 'str',
-            obj: { bool: true },
-            arr: [1, 2, 3],
-          })
-        ).toMatchSnapshot()
+        expect(request.uri).toEqual(uri)
+        expect(request.method).toEqual(method)
+        expect(request.body).toEqual(body)
       })
     })
   })
 
   describe('::summaryReport', () => {
+    const nothingToDoMessage = /nothing to do/
+    const successMessage = /successfully imported custom objects/
+    const errorOccurredMessage = /errors occurred/
+
     beforeEach(() => {
       objectsImport.client.execute = jest.fn()
     })
+
     test('should be defined', () =>
       expect(objectsImport.summaryReport).toBeDefined())
 
-    test('should write `success` message add to `updated`-, `created`-, and both `error`-counters', () => {
-      objectsImport.client.execute
-        .mockReturnValue(Promise.reject(Error('Something went wrong')))
-        .mockReturnValueOnce(Promise.resolve())
-        .mockReturnValueOnce(Promise.resolve())
+    describe('on success', () => {
+      beforeEach(() => {
+        objectsImport.client.execute.mockReturnValue(Promise.resolve())
+      })
 
-      Promise.all([
-        objectsImport._executeCreateOrUpdateAction(createRequest),
+      test('should add to `createdCount`', async () => {
+        await objectsImport._executeCreateOrUpdateAction(createRequest)
+        const summaryReport = objectsImport.summaryReport()
 
-        // clone deep since `_executeCreateOrUpdateAction` function
-        // will delete update key and value from updateRequest object
-        objectsImport._executeCreateOrUpdateAction(cloneDeep(updateRequest)),
+        expect(summaryReport.detailedSummary.createdCount).toBe(1)
+        expect(summaryReport.reportMessage).toMatch(successMessage)
+      })
 
-        objectsImport._executeCreateOrUpdateAction(createRequest),
-        objectsImport._executeCreateOrUpdateAction(updateRequest),
-      ]).catch(() => {
-        expect(objectsImport.summaryReport()).toMatchSnapshot()
+      test('should add to `updatedCount`', async () => {
+        await objectsImport._executeCreateOrUpdateAction(updateRequest)
+        const summaryReport = objectsImport.summaryReport()
+
+        expect(summaryReport.detailedSummary.updatedCount).toBe(1)
+        expect(summaryReport.reportMessage).toMatch(successMessage)
+      })
+
+      test('should add to `unchangedCount`', () => {
+        const obj = [{ key: 'key', container: 'container' }]
+        objectsImport._createOrUpdateObjects(obj, obj)
+        const summaryReport = objectsImport.summaryReport()
+
+        expect(summaryReport.detailedSummary.unchangedCount).toBe(1)
+        expect(summaryReport.reportMessage).toMatch(nothingToDoMessage)
       })
     })
 
-    test('should write `nothing to do` message and add to `unchanged`-counter', () => {
-      const obj = [{ key: 'key', container: 'container' }]
-      objectsImport._createOrUpdateObjects(obj, obj)
-      expect(objectsImport.summaryReport()).toMatchSnapshot()
+    describe('on failure', () => {
+      beforeEach(() => {
+        objectsImport.client.execute.mockReturnValue(
+          Promise.reject(Error('Something went wrong'))
+        )
+      })
+
+      test('should add to `createErrorCount`', () => {
+        objectsImport._executeCreateOrUpdateAction(createRequest).catch(() => {
+          const summaryReport = objectsImport.summaryReport()
+
+          expect(summaryReport.detailedSummary.createErrorCount).toBe(1)
+          expect(summaryReport.reportMessage).toMatch(errorOccurredMessage)
+        })
+      })
+
+      test('should add to `updateErrorCount`', () => {
+        objectsImport._executeCreateOrUpdateAction(updateRequest).catch(() => {
+          const summaryReport = objectsImport.summaryReport()
+
+          expect(summaryReport.detailedSummary.updateErrorCount).toBe(1)
+          expect(summaryReport.reportMessage).toMatch(errorOccurredMessage)
+        })
+      })
     })
   })
 })

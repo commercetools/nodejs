@@ -45,72 +45,8 @@ Array [
 
 exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when error is thrown without \`continueOnProblems\` should reject promise 1`] = `"Process stopped due to error while creating custom object. See summary for details"`;
 
-exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when error is thrown without \`continueOnProblems\` should update summary \`createErrorCount\` 1`] = `[Error: Process stopped due to error while creating custom object. See summary for details]`;
+exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when error is thrown without \`continueOnProblems\` should update summary \`createErrorCount\` 1`] = `"Process stopped due to error while creating custom object. See summary for details"`;
 
-exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when error is thrown without \`continueOnProblems\` should update summary \`updateErrorCount\` 1`] = `[Error: Process stopped due to error while updating custom object. See summary for details]`;
-
-exports[`CustomObjectsImporter ::buildRequest should build request 1`] = `
-Object {
-  "method": "POST",
-  "uri": "/test",
-}
-`;
-
-exports[`CustomObjectsImporter ::buildRequest with body should build request 1`] = `
-Object {
-  "body": Object {
-    "arr": Array [
-      1,
-      2,
-      3,
-    ],
-    "obj": Object {
-      "bool": true,
-    },
-    "str": "str",
-  },
-  "method": "POST",
-  "uri": "/test",
-}
-`;
-
-exports[`CustomObjectsImporter ::buildUri should build URI 1`] = `"/project-key/custom-objects"`;
+exports[`CustomObjectsImporter ::_executeCreateAndUpdateAction when error is thrown without \`continueOnProblems\` should update summary \`updateErrorCount\` 1`] = `"Process stopped due to error while updating custom object. See summary for details"`;
 
 exports[`CustomObjectsImporter ::constructor should throw error if no \`apiConfig\` in \`options\` parameter 1`] = `"The constructor must be passed an \`apiConfig\` object"`;
-
-exports[`CustomObjectsImporter ::run with wrong payload should throw error 1`] = `"No objects found, please pass an array with custom objects to the run function"`;
-
-exports[`CustomObjectsImporter ::run with wrong payload should throw error 2`] = `"No objects found, please pass an array with custom objects to the run function"`;
-
-exports[`CustomObjectsImporter ::run with wrong payload should throw error 3`] = `"No objects found, please pass an array with custom objects to the run function"`;
-
-exports[`CustomObjectsImporter ::summaryReport should write \`nothing to do\` message and add to \`unchanged\`-counter 1`] = `
-Object {
-  "detailedSummary": Object {
-    "createErrorCount": 0,
-    "createdCount": 0,
-    "errors": Array [],
-    "unchangedCount": 1,
-    "updateErrorCount": 0,
-    "updatedCount": 0,
-  },
-  "reportMessage": "Summary: nothing to do, all objects are left unchanged.",
-}
-`;
-
-exports[`CustomObjectsImporter ::summaryReport should write \`success\` message add to \`updated\`-, \`created\`-, and both \`error\`-counters 1`] = `
-Object {
-  "detailedSummary": Object {
-    "createErrorCount": 1,
-    "createdCount": 1,
-    "errors": Array [
-      "Something went wrong",
-      "Something went wrong",
-    ],
-    "unchangedCount": 0,
-    "updateErrorCount": 1,
-    "updatedCount": 1,
-  },
-  "reportMessage": "Summary: there were 2 successfully imported custom objects. 1 were newly created, 1 were updated and 0 were unchanged. 2 errors occurred (1 create errors and 1 update errors.)",
-}
-`;
