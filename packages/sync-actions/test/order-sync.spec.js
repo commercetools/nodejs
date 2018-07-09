@@ -250,5 +250,92 @@ describe('Actions', () => {
       ]
       expect(actual).toEqual(expected)
     })
+
+    test('should build `setReturnShipmentState` and `setReturnPaymentState` action', () => {
+      const before = {
+        returnInfo: [
+          {
+            returnTrackingId: 'touched-item',
+            items: [
+              {
+                id: 'test-1',
+                shipmentState: 'returned',
+                paymentState: 'initial',
+              },
+              {
+                id: 'test-2',
+                shipmentState: 'returned',
+                paymentState: 'initial',
+              },
+            ],
+          },
+          {
+            returnTrackingId: 'not-touched-item',
+            items: [
+              {
+                id: 'test-3',
+                shipmentState: 'returned',
+                paymentState: 'initial',
+              },
+              {
+                id: 'test-4',
+                shipmentState: 'returned',
+                paymentState: 'initial',
+              },
+            ],
+          },
+        ],
+      }
+
+      const now = {
+        returnInfo: [
+          {
+            returnTrackingId: 'touched-item',
+            items: [
+              {
+                id: 'test-1',
+                shipmentState: 'backInStock',
+                paymentState: 'refunded',
+              },
+              {
+                id: 'test-2',
+                shipmentState: 'returned',
+                paymentState: 'initial',
+              },
+            ],
+          },
+          {
+            returnTrackingId: 'not-touched-item',
+            items: [
+              {
+                id: 'test-3',
+                shipmentState: 'returned',
+                paymentState: 'initial',
+              },
+              {
+                id: 'test-4',
+                shipmentState: 'returned',
+                paymentState: 'initial',
+              },
+            ],
+          },
+        ],
+      }
+
+      const actual = orderSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'setReturnShipmentState',
+          returnItemId: now.returnInfo[0].items[0].id,
+          shipmentState: now.returnInfo[0].items[0].shipmentState,
+        },
+        {
+          action: 'setReturnPaymentState',
+          returnItemId: now.returnInfo[0].items[0].id,
+          paymentState: now.returnInfo[0].items[0].paymentState,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
   })
 })

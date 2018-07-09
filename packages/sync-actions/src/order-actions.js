@@ -45,17 +45,17 @@ export function actionsMapReturnsInfo(diff, oldObj, newObj) {
 
   const handler = createBuildArrayActions('returnInfo', {
     [CHANGE_ACTIONS]: (oldSReturnInfo, newReturnInfo) => {
-      const updateActions = Object.keys(diff.returnInfo).reduce(
+      const updateActions = Object.keys(returnInfoDiff).reduce(
         (itemActions, key) => {
           const { items = {} } = diff.returnInfo[key]
           if (Object.keys(items).length > 0) {
             return [
               ...itemActions,
               ...Object.keys(items).reduce((actions, index) => {
+                let itActions = []
                 if (items[index].shipmentState) {
                   const item = newReturnInfo.items[index]
-                  return [
-                    ...actions,
+                  itActions = [
                     {
                       action: 'setReturnShipmentState',
                       returnItemId: item.id,
@@ -65,8 +65,8 @@ export function actionsMapReturnsInfo(diff, oldObj, newObj) {
                 }
                 if (items[index].paymentState) {
                   const item = newReturnInfo.items[index]
-                  return [
-                    ...actions,
+                  itActions = [
+                    ...itActions,
                     {
                       action: 'setReturnPaymentState',
                       returnItemId: item.id,
@@ -75,7 +75,7 @@ export function actionsMapReturnsInfo(diff, oldObj, newObj) {
                   ]
                 }
 
-                return actions
+                return [...actions, ...itActions]
               }, []),
             ]
           }
