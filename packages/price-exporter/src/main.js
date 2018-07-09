@@ -103,13 +103,15 @@ export default class PriceExporter {
     this.client
       .process(
         request,
-        ({ body: { results: products } }) => {
+        ({ body: { results: products } }: Object): Object => {
           this.logger.verbose(`Fetched ${products.length} products`)
 
           const prices = PriceExporter._getPrices(products)
-          return this._resolveReferences(prices).then(resolvedPrices => {
-            this._writePrices(resolvedPrices, pipeStream)
-          })
+          return this._resolveReferences(prices).then(
+            (resolvedPrices: Array<any>) => {
+              this._writePrices(resolvedPrices, pipeStream)
+            }
+          )
         },
         { accumulate: false }
       )
@@ -117,20 +119,20 @@ export default class PriceExporter {
         pipeStream.end()
         this.logger.info('Export operation completed successfully')
       })
-      .catch(e => {
+      .catch((e: Error) => {
         outputStream.emit('error', e)
       })
   }
 
   _writePrices(retrievedPrices: Array<any>, pipeStream: stream$Writable) {
     if (this.config.exportFormat === 'csv')
-      retrievedPrices.forEach(pricesArray => {
-        pricesArray.prices.forEach(price => {
+      retrievedPrices.forEach((pricesArray: Object) => {
+        pricesArray.prices.forEach((price: ProcessedPriceObject) => {
           pipeStream.write(flatten(price))
         })
       })
     else
-      retrievedPrices.forEach(skuPriceGroup => {
+      retrievedPrices.forEach((skuPriceGroup: string) => {
         pipeStream.write(skuPriceGroup)
       })
 
@@ -139,17 +141,19 @@ export default class PriceExporter {
     )
   }
 
-  _resolveReferences(flatPrices: Array<Object>) {
+  _resolveReferences(flatPrices: Array<Object>): Object {
     return Promise.all(
-      flatPrices.map(variantPrice =>
+      flatPrices.map((variantPrice: Object): Promise<Object> =>
         Promise.all(
-          variantPrice.prices.map(individualPrice =>
+          variantPrice.prices.map((individualPrice: Object): Object =>
             Promise.all([
               this._resolveChannel(individualPrice),
               this._resolveCustomerGroup(individualPrice),
               this._resolveCustomType(individualPrice),
             ]).then(
-              ([channel, customerGroup, custom]): ProcessedPriceObject => ({
+              ([channel, customerGroup, custom]: Array<
+                Object
+              >): ProcessedPriceObject => ({
                 ...individualPrice,
                 ...channel,
                 ...customerGroup,
@@ -157,7 +161,10 @@ export default class PriceExporter {
               })
             )
           )
-        ).then(prices => ({ ...variantPrice, prices }))
+        ).then((prices: Object): Promise<Object> => ({
+          ...variantPrice,
+          prices,
+        }))
       )
     )
   }
