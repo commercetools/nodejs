@@ -15,17 +15,19 @@ function createTestResponse(options) {
     ...options,
   }
 }
-
+// eslint-disable-next-line
 const originalConsoleLog = console.log
 
 describe('Logger', () => {
   beforeEach(() => {
     // Mock `console.log`
+    // eslint-disable-next-line
     console.log = jest.fn()
   })
 
   afterEach(() => {
     // Reset original `console.log`
+    // eslint-disable-next-line
     console.log = originalConsoleLog
   })
 
@@ -46,13 +48,14 @@ describe('Logger', () => {
     const loggerMiddleware = createLoggerMiddleware()
 
     const next = () => {
+      /* eslint-disable */
       expect(console.log).toHaveBeenCalledTimes(2)
       expect(console.log).toHaveBeenCalledWith('Request: ', request)
       expect(console.log).toHaveBeenCalledWith('Response: ', {
         statusCode: response.statusCode,
         body: response.body,
         error: response.error,
-      })
+      }) /* eslint-disable */
     }
     loggerMiddleware(next)(request, response)
   })
