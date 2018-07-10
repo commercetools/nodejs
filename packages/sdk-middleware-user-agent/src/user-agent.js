@@ -5,6 +5,7 @@ import type {
   MiddlewareRequest,
   MiddlewareResponse,
   UserAgentMiddlewareOptions,
+  Next,
 } from 'types/sdk'
 
 export default function createUserAgentMiddleware(
@@ -15,7 +16,10 @@ export default function createUserAgentMiddleware(
     ...options,
   })
 
-  return next => (request: MiddlewareRequest, response: MiddlewareResponse) => {
+  return (next: Next): Next => (
+    request: MiddlewareRequest,
+    response: MiddlewareResponse
+  ) => {
     const requestWithUserAgent = {
       ...request,
       headers: {
