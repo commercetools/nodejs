@@ -47,7 +47,7 @@ export function actionsMapReturnsInfo(diff, oldObj, newObj) {
     [CHANGE_ACTIONS]: (oldSReturnInfo, newReturnInfo) => {
       const updateActions = Object.keys(returnInfoDiff).reduce(
         (itemActions, key) => {
-          const { items = {} } = diff.returnInfo[key]
+          const { items = {} } = returnInfoDiff[key]
           if (Object.keys(items).length > 0) {
             return [
               ...itemActions,
