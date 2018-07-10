@@ -15,11 +15,15 @@ import validate from './validate'
 
 function compose(...funcs: Array<Function>): Function {
   // eslint-disable-next-line no-param-reassign
-  funcs = funcs.filter(func => typeof func === 'function')
+  funcs = funcs.filter((func: Function): boolean => typeof func === 'function')
 
   if (funcs.length === 1) return funcs[0]
 
-  return funcs.reduce((a, b) => (...args) => a(b(...args)))
+  return funcs.reduce(
+    (a: Function, b: Function): Function => (
+      ...args: Array<Function>
+    ): Array<Function> => a(b(...args))
+  )
 }
 
 export default function createClient(options: ClientOptions): Client {
@@ -42,7 +46,7 @@ export default function createClient(options: ClientOptions): Client {
     execute(request: ClientRequest): Promise<ClientResult> {
       validate('exec', request)
 
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve: Function, reject: Function) => {
         const resolver = (rq: MiddlewareRequest, rs: MiddlewareResponse) => {
           // Note: pick the promise `resolve` and `reject` function from
           // the response object. This is not necessary the same function
@@ -93,7 +97,7 @@ export default function createClient(options: ClientOptions): Client {
         accumulate: true,
         ...processOpt,
       }
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve: Function, reject: Function) => {
         const [path, queryString] = request.uri.split('?')
         const requestQuery = { ...qs.parse(queryString) }
         const query = {
