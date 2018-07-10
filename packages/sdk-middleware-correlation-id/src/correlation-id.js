@@ -4,12 +4,16 @@ import type {
   MiddlewareRequest,
   MiddlewareResponse,
   CorrelationIdMiddlewareOptions,
+  Next,
 } from '../../../types/sdk'
 
 export default function createCorrelationIdMiddleware(
   options: CorrelationIdMiddlewareOptions
 ): Middleware {
-  return next => (request: MiddlewareRequest, response: MiddlewareResponse) => {
+  return (next: Next): Next => (
+    request: MiddlewareRequest,
+    response: MiddlewareResponse
+  ) => {
     const nextRequest = {
       ...request,
       headers: {
