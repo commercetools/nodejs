@@ -52,27 +52,21 @@ export function actionsMapReturnsInfo(diff, oldObj, newObj) {
             return [
               ...itemActions,
               ...Object.keys(items).reduce((actions, index) => {
-                let itActions = []
+                const itActions = []
+                const item = newReturnInfo.items[index]
                 if (items[index].shipmentState) {
-                  const item = newReturnInfo.items[index]
-                  itActions = [
-                    {
-                      action: 'setReturnShipmentState',
-                      returnItemId: item.id,
-                      shipmentState: item.shipmentState,
-                    },
-                  ]
+                  itActions.push({
+                    action: 'setReturnShipmentState',
+                    returnItemId: item.id,
+                    shipmentState: item.shipmentState,
+                  })
                 }
                 if (items[index].paymentState) {
-                  const item = newReturnInfo.items[index]
-                  itActions = [
-                    ...itActions,
-                    {
-                      action: 'setReturnPaymentState',
-                      returnItemId: item.id,
-                      paymentState: item.paymentState,
-                    },
-                  ]
+                  itActions.push({
+                    action: 'setReturnPaymentState',
+                    returnItemId: item.id,
+                    paymentState: item.paymentState,
+                  })
                 }
 
                 return [...actions, ...itActions]

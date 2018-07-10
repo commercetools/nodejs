@@ -130,6 +130,7 @@ describe('Actions', () => {
             items: [
               {
                 id: 'test-1',
+                // This have changed
                 shipmentState: 'backInStock',
                 paymentState: 'initial',
               },
@@ -218,6 +219,7 @@ describe('Actions', () => {
               {
                 id: 'test-2',
                 shipmentState: 'returned',
+                // This have changed
                 paymentState: 'refunded',
               },
             ],
@@ -294,7 +296,9 @@ describe('Actions', () => {
             items: [
               {
                 id: 'test-1',
+                // This have changed
                 shipmentState: 'backInStock',
+                // This have changed
                 paymentState: 'refunded',
               },
               {
