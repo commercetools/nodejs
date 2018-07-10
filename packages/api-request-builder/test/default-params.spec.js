@@ -32,7 +32,6 @@ describe('defaultParams', () => {
     expect(params).toEqual({
       id: null,
       expand: [],
-      staged: true,
       pagination: {
         page: null,
         perPage: null,
@@ -57,7 +56,6 @@ describe('defaultParams', () => {
     expect(params).toEqual({
       id: null,
       expand: [],
-      staged: true,
       pagination: {
         page: null,
         perPage: null,
@@ -77,7 +75,6 @@ describe('defaultParams', () => {
     setDefaultParams.call({ features: serviceFeatures, params })
     expect(params).toEqual({
       expand: [],
-      staged: true,
       pagination: {
         page: null,
         perPage: null,
