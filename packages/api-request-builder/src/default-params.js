@@ -41,7 +41,6 @@ export function getDefaultSearchParams(): ServiceBuilderDefaultParams {
   return {
     expand: [],
     searchKeywords: [],
-    staged: true,
     pagination: {
       page: null,
       perPage: null,
@@ -77,15 +76,12 @@ export function setDefaultParams() {
   }
 
   if (this.features.includes(features.search)) {
-    this.params.staged = getDefaultSearchParams().staged
     this.params.pagination = getDefaultSearchParams().pagination
     this.params.search = getDefaultSearchParams().search
   }
 
   if (this.features.includes(features.queryLocation))
     this.params.location = getDefaultQueryParams().location
-
-  if (this.features.includes(features.projection)) this.params.staged = true
 
   if (this.features.includes(features.suggest)) this.params.searchKeywords = []
 }

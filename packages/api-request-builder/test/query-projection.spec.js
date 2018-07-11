@@ -9,7 +9,7 @@ describe('queryProjection', () => {
 
   test('should set the staged param', () => {
     service.staged()
-    expect(service.params.staged).toBeTruthy()
+    expect(service.params.staged).toBeFalsy()
 
     service.staged(false)
     expect(service.params.staged).toBeFalsy()
