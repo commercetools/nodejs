@@ -62,6 +62,15 @@ const requestBuilder = createRequestBuilder(options)
 
 Note that `markMatchingVariants` is set by default to `false` which turns off this feature on the API.
 
+#### Staged
+
+It is possible to add the `staged` boolean option to the uri. This decides wether to query the `current` or `staged` projections, for example in [Product Projections](https://docs.commercetools.com/http-api-projects-productProjections.html#product-projections). (Defaults to **false**)
+
+```js
+const service = createRequestBuilder(options)
+const uri = service.productProjections.staged(true).build()
+```
+
 #### Version
 
 It is also possible to append the version of a resource to the uri when making a request that requires this (for example a `DELETE` request). This can be done by passing the required version to the `.withVersion()` method.
