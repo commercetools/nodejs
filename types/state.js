@@ -10,22 +10,31 @@ type StateType =
 
 type StateRole = 'ReviewIncludedInStatistics' | 'Return'
 
-type StateReference = {
+export type StateReference = {
   typeId: 'state',
   id: string,
 }
 
-export type StateData = {
-  id?: string,
-  version?: number,
-  createdAt?: string,
-  lastModifiedAt?: string,
+export type StateDraftData = {
   key: string,
   type: StateType,
   name?: Object,
   description?: Object,
   initial?: boolean,
-  builtIn?: boolean,
+  transitions?: Array<StateReference>,
+}
+
+export type StateData = {
+  id: string,
+  version: number,
+  createdAt: string,
+  lastModifiedAt: string,
+  key: string,
+  type: StateType,
+  name: Object,
+  description: Object,
+  initial: boolean,
+  builtIn: boolean,
   roles?: Array<StateRole>,
   transitions?: Array<StateReference>,
 }

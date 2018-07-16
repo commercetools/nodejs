@@ -55,7 +55,7 @@ describe('Logger', () => {
         statusCode: response.statusCode,
         body: response.body,
         error: response.error,
-      }) /* eslint-disable */
+      }) /* eslint-enable */
     }
     loggerMiddleware(next)(request, response)
   })

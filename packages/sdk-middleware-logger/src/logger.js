@@ -15,7 +15,7 @@ export default function createLoggerMiddleware(): Middleware {
     /* eslint-disable */
     console.log('Request: ', request)
     console.log('Response: ', { error, body, statusCode })
-    /* eslint-disable */
+    /* eslint-enable */
     next(request, response)
   }
 }

@@ -38,7 +38,8 @@ export default class ProductMapping {
       this.fillAllRows
     )
     const mappedProduct = varWithProductInfo.map(
-      (variant: SingleVarPerProduct): Object => this._mapProperties(variant)
+      (variant: SingleVarPerProduct): MappedProduct =>
+        this._mapProperties(variant)
     )
     const flatProducts = mappedProduct.map(flatten)
     return flatProducts

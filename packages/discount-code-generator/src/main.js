@@ -1,5 +1,9 @@
 /* @flow */
-import type { CodeData, CodeDataArray, CodeOptions } from 'types/discountCodes'
+import type {
+  DiscountCode,
+  CodeDataArray,
+  CodeOptions,
+} from 'types/discountCodes'
 
 import TokenGenerator from 'tokgen'
 
@@ -42,7 +46,7 @@ function _prepareCode(code: string, length: number, prefix: string): string {
 
 export default function discountCodeGenerator(
   options: CodeOptions,
-  data: CodeData
+  data: DiscountCode
 ): CodeDataArray {
   if (typeof options !== 'object' || !options.quantity)
     throw new Error('The generator requires valid parameters. See the docs')

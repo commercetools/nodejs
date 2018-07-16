@@ -6,7 +6,14 @@ import type {
   StateData,
   Summary,
 } from 'types/state'
-import type { Client, ClientRequest, MethodType, SyncAction } from 'types/sdk'
+import type {
+  Client,
+  ClientRequest,
+  ClientResult,
+  MethodType,
+  SyncAction,
+  ServiceBuilderInstance,
+} from 'types/sdk'
 
 import fetch from 'node-fetch'
 import { createClient } from '@commercetools/sdk-client'
@@ -110,22 +117,22 @@ export default class StateImport {
   }
 
   // Public function for direct module usage
-  run(states: Array<StateData>): StateData {
+  run(states: Array<StateData>): Promise<void | Error> {
     return this._processBatches(states)
   }
 
-  _processBatches(states: Array<StateData>): Object {
+  _processBatches(states: Array<StateData>): Promise<void | Error> {
     const predicate = StateImport._buildPredicate(states)
     const service = this._createService()
     const uri = service.where(predicate).build()
     const existingStatesRequest = StateImport._buildRequest(uri, 'GET')
     return this.client
       .execute(existingStatesRequest)
-      .then(({ body: { results: existingStates } }: Object): Object =>
-        this._createOrUpdate(states, existingStates)
-      )
-      .then((): Promise<any> => Promise.resolve())
-      .catch((error: any): StateImportError => {
+      .then(({ body: { results: existingStates } }: Object): Promise<
+        Array<void>
+      > => this._createOrUpdate(states, existingStates))
+      .then((): Promise<void> => Promise.resolve())
+      .catch((error: any): Error => {
         // format error and throw to CLI error handler
         throw new StateImportError(
           'Processing batch failed',
@@ -138,21 +145,21 @@ export default class StateImport {
   _createOrUpdate(
     newStates: Array<StateData>,
     existingStates: Array<StateData>
-  ): Promise<any> {
+  ): Promise<Array<void>> {
     return Promise.all(
-      newStates.map((newState: StateData): Promise<any> => {
+      newStates.map((newState: StateData): Promise<void> => {
         const existingState = existingStates.find(
           (state: StateData): boolean => state.key === newState.key
         )
         if (existingState)
           return this._update(newState, existingState)
-            .then((response: Object): Promise<any> => {
+            .then((response: Object): Promise<void> => {
               if (response && response.statusCode === 304)
                 this._summary.unchanged += 1
               else this._summary.updated += 1
               return Promise.resolve()
             })
-            .catch((error: Error): Promise<any> => {
+            .catch((error: Error): Promise<void> => {
               if (this.continueOnProblems) {
                 this._summary.errors.update.push(error.message || error)
                 this.logger.warn(
@@ -167,11 +174,11 @@ export default class StateImport {
               throw error
             })
         return this._create(newState)
-          .then((): Promise<any> => {
+          .then((): Promise<void> => {
             this._summary.created += 1
             return Promise.resolve()
           })
-          .catch((error: Error): Promise<any> => {
+          .catch((error: Error): Promise<void> => {
             if (this.continueOnProblems) {
               this._summary.errors.create.push(error.message || error)
               this.logger.warn(
@@ -189,7 +196,10 @@ export default class StateImport {
     )
   }
 
-  _update(newState: StateData, existingState: StateData): Promise<any> {
+  _update(
+    newState: StateData,
+    existingState: StateData
+  ): Promise<ClientResult | { statusCode: number }> {
     const actions = this.syncStates.buildActions(newState, existingState)
     // don't call API if there's no update action
     if (!actions.length) return Promise.resolve({ statusCode: 304 })
@@ -204,7 +214,7 @@ export default class StateImport {
     return this.client.execute(req)
   }
 
-  _create(state: StateData): Promise<any> {
+  _create(state: StateData): Promise<ClientResult> {
     const service = this._createService()
     const uri = service.build()
     const req = StateImport._buildRequest(uri, 'POST', state)
@@ -212,7 +222,7 @@ export default class StateImport {
     return this.client.execute(req)
   }
 
-  _createService(): Object {
+  _createService(): ServiceBuilderInstance {
     return createRequestBuilder({
       projectKey: this.apiConfig.projectKey,
     }).states
@@ -228,7 +238,7 @@ export default class StateImport {
     return this._summary
   }
 
-  summaryReport(): Object {
+  summaryReport(): { reportMessage: string, detailedSummary: Summary } {
     const { created, updated, unchanged, errors } = this._summary
 
     let message = ''

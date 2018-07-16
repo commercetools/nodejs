@@ -7,7 +7,7 @@ import type {
   ProcessedPriceObject,
   UnprocessedPriceObject,
 } from 'types/price'
-import type { Client } from 'types/sdk'
+import type { Client, SuccessResult } from 'types/sdk'
 
 import fetch from 'node-fetch'
 import { createClient } from '@commercetools/sdk-client'
@@ -103,7 +103,7 @@ export default class PriceExporter {
     this.client
       .process(
         request,
-        ({ body: { results: products } }: Object): Object => {
+        ({ body: { results: products } }: SuccessResult): Promise<void> => {
           this.logger.verbose(`Fetched ${products.length} products`)
 
           const prices = PriceExporter._getPrices(products)

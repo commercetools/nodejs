@@ -20,8 +20,14 @@ import type {
   LoggerOptions,
   StateWithStringTransitions,
   StateWithUnresolvedTransitions,
+  StateReference,
 } from 'types/state'
-import type { Client, SuccessResult, HttpErrorType } from 'types/sdk'
+import type {
+  Client,
+  SuccessResult,
+  HttpErrorType,
+  ServiceBuilderInstance,
+} from 'types/sdk'
 import pkg from '../package.json'
 
 export default class CsvParserState {
@@ -70,14 +76,17 @@ export default class CsvParserState {
       .map(CsvParserState._removeEmptyFields)
       .map(CsvParserState._parseInitialToBoolean)
       .map(unflatten)
-      .map((state: Object): Object =>
+      .map((state: StateWithStringTransitions): StateWithStringTransitions =>
         CsvParserState._mapMultiValueFieldsToArray(
           state,
           this.csvConfig.multiValueDelimiter
         )
       )
-      .flatMap((state: Object): Object =>
-        highland(this._transformTransitions(state))
+      .flatMap(
+        (
+          state: StateWithUnresolvedTransitions
+        ): StateWithUnresolvedTransitions =>
+          highland(this._transformTransitions(state))
       )
       .errors((error: HttpErrorType, cb: Function): void =>
         this._handleErrors(error, cb)
@@ -98,7 +107,7 @@ export default class CsvParserState {
   _transformTransitions({
     transitions,
     ...remainingState
-  }: StateWithUnresolvedTransitions): Promise<Object> {
+  }: StateWithUnresolvedTransitions): Promise<SuccessResult> {
     return new Promise((resolve: Function) => {
       if (!transitions) resolve(remainingState)
       // We setup the client here because it is unnecessary
@@ -116,15 +125,17 @@ export default class CsvParserState {
             )
           )
       )
-      Promise.all(stateRequests).then((resolvedStates: Array<Object>) => {
-        const stateReferences = resolvedStates.map(
-          (response: Object): Object => ({
-            typeId: 'state',
-            id: response.body.id,
-          })
-        )
-        resolve({ ...remainingState, transitions: stateReferences })
-      })
+      Promise.all(stateRequests).then(
+        (resolvedStates: Array<SuccessResult>) => {
+          const stateReferences = resolvedStates.map(
+            (response: SuccessResult): StateReference => ({
+              typeId: 'state',
+              id: response.body.id,
+            })
+          )
+          resolve({ ...remainingState, transitions: stateReferences })
+        }
+      )
     })
   }
 
@@ -168,7 +179,7 @@ export default class CsvParserState {
     })
   }
 
-  static _createStateService(projectKey: string): Object {
+  static _createStateService(projectKey: string): ServiceBuilderInstance {
     return createRequestBuilder({ projectKey }).states
   }
 
@@ -218,8 +229,7 @@ export default class CsvParserState {
       : state
   }
 }
-/* eslint-disable-next-line */
-CsvParserState.prototype._fetchStates = memoize(function(
+CsvParserState.prototype._fetchStates = memoize(function _execute(
   uri: string
 ): Promise<SuccessResult> {
   return this.client.execute({

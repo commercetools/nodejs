@@ -139,8 +139,7 @@ export default class ProductExporter {
   csv, also create a json stream because it needs to pass text to
   the stdout.
   */
-  // eslint-disable-next-line
-  static _getStream(exportType: 'json' | 'chunk') {
+  static _getStream(exportType: 'json' | 'chunk'): Object {
     return exportType === 'json'
       ? JSONStream.stringify('[\n', ',\n', '\n]')
       : JSONStream.stringify(false)
