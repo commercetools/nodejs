@@ -1,0 +1,42 @@
+{
+    "name": "@commercetools/custom-objects-importer",
+    "version": "1.0.0",
+    "description": "Import custom objects to the commercetools platform",
+    "main": "lib/main.js",
+    "scripts": {
+        "build": "babel src --out-dir lib"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/commercetools/nodejs/tree/master/packages/custom-objects-importer"
+    },
+    "homepage": "https://commercetools.github.io/nodejs/cli/custom-objects-importer.html",
+    "bugs": "https://github.com/commercetools/nodejs/issues",
+    "keywords": [
+        "commercetools",
+        "object",
+        "objects",
+        "json",
+        "import",
+        "custom"
+    ],
+    "author": {
+        "name": "Daniel Eriksson",
+        "email": "daniel.eriksson@commercetools.de",
+        "url": "https://github.com/daern91"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "@commercetools/api-request-builder": "^4.0.0",
+        "@commercetools/sdk-client": "^1.5.5",
+        "@commercetools/sdk-middleware-auth": "^3.5.2",
+        "@commercetools/sdk-middleware-http": "^3.0.0",
+        "@commercetools/sdk-middleware-user-agent": "^1.2.7",
+        "@commercetools/sync-actions": "^1.25.0",
+        "common-tags": "^1.8.0",
+        "lodash.compact": "^3.0.1",
+        "lodash.isequal": "^4.5.0",
+        "node-fetch": "^2.1.2",
+        "p-series": "^1.1.0"
+    }
+}
