@@ -11,7 +11,7 @@ import type { HttpUserAgentOptions } from 'types/sdk'
   the specific test.
 */
 
-const isBrowser = () =>
+const isBrowser = (): boolean =>
   typeof window !== 'undefined' &&
   window.document &&
   window.document.nodeType === 9

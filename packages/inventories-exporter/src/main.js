@@ -79,7 +79,7 @@ export default class InventoryExporter {
       }
       const csvStream = csv
         .createWriteStream(csvOptions)
-        .transform((row: Inventory) => {
+        .transform((row: Inventory): Object => {
           this.logger.verbose(`transforming row ${JSON.stringify(row)}`)
           return InventoryExporter.inventoryMappings(row)
         })
@@ -108,12 +108,16 @@ export default class InventoryExporter {
   _fetchInventories(outputStream: stream$Writable): Promise<any> {
     if (this.exportConfig.channelKey)
       return this._resolveChannelKey(this.exportConfig.channelKey).then(
-        channelId => this._makeRequest(outputStream, channelId)
+        (channelId: string): Promise<any> =>
+          this._makeRequest(outputStream, channelId)
       )
     return this._makeRequest(outputStream)
   }
 
-  _makeRequest(outputStream: stream$Writable, channelId?: string) {
+  _makeRequest(
+    outputStream: stream$Writable,
+    channelId?: string
+  ): Promise<any> {
     const query = this.reqBuilder.inventory
       .expand('custom.type')
       .expand('supplyChannel')
@@ -149,7 +153,7 @@ export default class InventoryExporter {
       request.headers = {
         Authorization: `Bearer ${this.accessToken}`,
       }
-    return this.client.execute(request).then((result): Promise<any> => {
+    return this.client.execute(request).then((result: Object): Promise<any> => {
       if (result.body && result.body.results.length)
         return Promise.resolve(result.body.results[0].id)
       return Promise.reject(

@@ -1,30 +1,70 @@
 /* @flow */
 
-/* Discount Codes */
-export type CodeData = {
-  name?: Object,
-  description?: Object,
-  cartDiscounts: Array<Object>,
-  cartPredicate?: string,
-  isActive: boolean,
-  maxApplications?: number,
-  maxApplicationsPerCustomer?: number,
-  uri: string,
-  code?: string,
-  code?: string,
-  id?: string,
-  version?: number,
-  references?: Array<Object>,
-  attributeTypes?: Object,
-  cartFieldTypes?: Object,
-  lineItemFieldTypes?: Object,
-  customLineItemFieldTypes?: Object,
-  createdAt?: string,
-  lastModifiedAt?: string,
-  groups: Array<string>,
+/* CustomField */
+type TypeReference = {
+  typeId: string,
+  id: string,
+}
+type CustomField = {
+  type: TypeReference,
+  fields: Object,
 }
 
-export type CodeDataArray = Array<CodeData>
+/* CartDiscountDraft */
+export type CartDiscountDraft = {
+  name: Object,
+  description?: Object,
+  value: mixed,
+  cartPredicate: string,
+  target?: Object,
+  sortOrder: string,
+  isActive?: boolean,
+  validFrom?: string,
+  validUntil?: string,
+  requiresDiscountCode: boolean,
+  stackingMode?: Object,
+  custom?: CustomField,
+}
+
+/* CartDiscount */
+export type CartDiscount = CartDiscountDraft & {
+  id: string,
+  version: number,
+  createdAt: string,
+  lastModifiedAt: string,
+  isActive: boolean,
+  requiresDiscountCode: boolean,
+  references: Array<Object>,
+  stackingMode: Object,
+}
+
+/* DiscountCodeDraft */
+export type DiscountCodeDraft = {
+  name?: Object,
+  description?: Object,
+  code: string,
+  cartDiscounts: Array<Object>,
+  cartPredicate?: string,
+  groups?: Array<string>,
+  isActive: boolean,
+  validFrom?: string,
+  validUntil?: string,
+  maxApplications?: number,
+  maxApplicationsPerCustomer?: number,
+  custom?: CustomField,
+}
+
+/* DiscountCode */
+export type DiscountCode = DiscountCodeDraft & {
+  id: string,
+  version: number,
+  createdAt: string,
+  lastModifiedAt: string,
+  groups: Array<string>,
+  references: Array<Object>,
+}
+
+export type CodeDataArray = Array<DiscountCode>
 
 export type CodeOptions = {
   quantity: number,

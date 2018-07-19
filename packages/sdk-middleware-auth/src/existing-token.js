@@ -11,10 +11,10 @@ export default function createAuthMiddlewareWithExistingToken(
   authorization: string = '',
   options: ExistingTokenMiddlewareOptions = {}
 ): Middleware {
-  return (next: Next) => (
+  return (next: Next): Next => (
     request: MiddlewareRequest,
     response: MiddlewareResponse
-  ) => {
+  ): mixed => {
     if (typeof authorization !== 'string')
       throw new Error('authorization must be a string')
     const force = options.force === undefined ? true : options.force
