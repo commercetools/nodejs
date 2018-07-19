@@ -156,3 +156,7 @@ https://commercetools.github.io/nodejs/
 [personal-data-erasure-icon]: https://img.shields.io/npm/v/@commercetools/personal-data-erasure.svg?style=flat-square
 [personal-data-erasure-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/personal-data-erasure
 [personal-data-erasure-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/personal-data-erasure&style=flat-square
+
+## Contributing
+
+We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information on our guidelines. We also have a [TODO list](TODO.md) that may contain various tasks in addition to the [issues list](https://github.com/commercetools/nodejs/issues).

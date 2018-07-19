@@ -118,8 +118,7 @@ export default class CustomObjectsImporter {
       'GET'
     )
     // skip below because of flow issue with async/await
-    // https://github.com/facebook/flow/issues/5294
-    // todo: remove `FlowFixMe` when above issue is fixed
+    // todo: remove `FlowFixMe` when [this](https://github.com/facebook/flow/issues/5294) issue is fixed
     // $FlowFixMe
     const { body: { results: existingObjects } } = await this.client.execute(
       existingObjectsRequest
