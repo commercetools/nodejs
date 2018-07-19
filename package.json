@@ -10,10 +10,12 @@
     "bootstrap": "lerna bootstrap",
     "check-updates": "./scripts/check-updates",
     "clean": "rm -rf coverage; lerna exec -- rimraf lib dist",
-    "precommit": "lint-staged && npm run todo-staged",
+    "precommit": "lint-staged",
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "commit": "git-cz",
     "build": "lerna run --parallel build",
+    "generate:todos": "leasot -x --reporter markdown 'packages/*/src/**.js'",
+    "build:todos": "npm run generate:todos > TODOS.md",
     "lint": "jest --projects jest.eslint.config.js jest.flow.config.js",
     "lint:js": "jest --config jest.eslint.config.js",
     "test": "cross-env NODE_ENV=development jest --config jest.test.config.js",
@@ -33,8 +35,6 @@
     "docs:watch": "npm run docs:prepare && gitbook serve",
     "docs:publish": "npm run docs:clean && npm run docs:build && ./scripts/publish-docs",
     "flow": "eslint packages",
-    "todo": "leasot 'packages/*/src/**.js'",
-    "todo-staged": "leasot -x --reporter markdown 'packages/*/src/**.js' > TODO.md && git add TODO.md",
     "package-readme-entry": "./scripts/package-readme-entry.sh"
   },
   "devDependencies": {
