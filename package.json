@@ -33,8 +33,8 @@
     "docs:watch": "npm run docs:prepare && gitbook serve",
     "docs:publish": "npm run docs:clean && npm run docs:build && ./scripts/publish-docs",
     "flow": "eslint packages",
-    "todo": "leasot 'packages/**/*.js' --ignore '**/node_modules','**/dist','**/lib'",
-    "todo-staged": "leasot -x --reporter markdown 'packages/**/*.js' --ignore '**/node_modules','**/dist','**/lib' > TODO.md && git add TODO.md",
+    "todo": "leasot 'packages/*/src/**.js'",
+    "todo-staged": "leasot -x --reporter markdown 'packages/*/src/**.js' > TODO.md && git add TODO.md",
     "package-readme-entry": "./scripts/package-readme-entry.sh"
   },
   "devDependencies": {
