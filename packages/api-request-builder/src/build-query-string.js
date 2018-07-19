@@ -49,7 +49,9 @@ export default function buildQueryString(
   if (priceChannel) queryString.push(`priceChannel=${priceChannel}`)
 
   if (expand && expand.length)
-    queryString = queryString.concat(expand.map(e => `expand=${e}`))
+    queryString = queryString.concat(
+      expand.map((e: string): string => `expand=${e}`)
+    )
 
   if (query) {
     const { operator, where } = query
@@ -73,7 +75,9 @@ export default function buildQueryString(
       queryString.push(`offset=${offsetParam}`)
     }
     if (sort && sort.length)
-      queryString = queryString.concat(sort.map(s => `sort=${s}`))
+      queryString = queryString.concat(
+        sort.map((s: string): string => `sort=${s}`)
+      )
   }
 
   if (search) {
@@ -93,14 +97,18 @@ export default function buildQueryString(
     if (fuzzyLevel) queryString.push(`fuzzyLevel=${fuzzyLevel}`)
     queryString.push(`markMatchingVariants=${markMatchingVariants.toString()}`)
 
-    facet.forEach(f => queryString.push(`facet=${f}`))
-    filter.forEach(f => queryString.push(`filter=${f}`))
-    filterByQuery.forEach(f => queryString.push(`filter.query=${f}`))
-    filterByFacets.forEach(f => queryString.push(`filter.facets=${f}`))
+    facet.forEach((f: string): number => queryString.push(`facet=${f}`))
+    filter.forEach((f: string): number => queryString.push(`filter=${f}`))
+    filterByQuery.forEach((f: string): number =>
+      queryString.push(`filter.query=${f}`)
+    )
+    filterByFacets.forEach((f: string): number =>
+      queryString.push(`filter.facets=${f}`)
+    )
   }
 
   if (searchKeywords)
-    searchKeywords.forEach(f =>
+    searchKeywords.forEach((f: { lang: string, value: string }): number =>
       queryString.push(`searchKeywords.${f.lang}=${f.value}`)
     )
 

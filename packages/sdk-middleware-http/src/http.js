@@ -6,12 +6,13 @@ import type {
   Middleware,
   MiddlewareRequest,
   MiddlewareResponse,
+  Next,
 } from 'types/sdk'
 
 import getErrorByCode, { NetworkError, HttpError } from './errors'
 import parseHeaders from '../src/parse-headers'
 
-function createError({ statusCode, message, ...rest }): HttpErrorType {
+function createError({ statusCode, message, ...rest }: Object): HttpErrorType {
   let errorMessage = message || 'Unexpected non-JSON error response'
   if (statusCode === 404)
     errorMessage = `URI not found: ${rest.originalRequest.uri}`
@@ -78,7 +79,10 @@ export default function createHttpMiddleware({
     // eslint-disable-next-line
     fetcher = fetch
 
-  return next => (request: MiddlewareRequest, response: MiddlewareResponse) => {
+  return (next: Next): Next => (
+    request: MiddlewareRequest,
+    response: MiddlewareResponse
+  ) => {
     const url = host.replace(/\/$/, '') + request.uri
     const body =
       typeof request.body === 'string' || Buffer.isBuffer(request.body)

@@ -13,11 +13,17 @@ import type {
   LoggerOptions,
   ChunkOptions,
   CodeDataArray,
-  CodeData,
+  DiscountCode,
   ConstructorOptions,
   Summary,
 } from 'types/discountCodes'
-import type { Client, SyncAction } from 'types/sdk'
+import type {
+  Client,
+  SyncAction,
+  HttpErrorType,
+  ClientResult,
+  ServiceBuilderInstance,
+} from 'types/sdk'
 import pkg from '../package.json'
 
 class DiscountCodeImportError extends Error {
@@ -96,48 +102,54 @@ export default class DiscountCodeImport {
     return `code in ("${predicateArray.join('", "')}")`
   }
 
-  static promiseMapSerially(functions: Array<Function>) {
+  static promiseMapSerially(functions: Array<Function>): Promise<void> {
     return functions.reduce(
-      (promise, promiseReturningFunction) =>
-        promise.then(() => promiseReturningFunction()),
+      (
+        promise: Promise<void>,
+        promiseReturningFunction: Function
+      ): Promise<void> =>
+        promise.then((): Function => promiseReturningFunction()),
       Promise.resolve()
     )
   }
 
   // Wrapper function for compatibility with CLI
-  processStream(chunk: ChunkOptions, cb: () => mixed) {
+  processStream(chunk: ChunkOptions, cb: () => mixed): mixed {
     this.logger.verbose(`Starting conversion of ${chunk.length} discount codes`)
     return this._processBatches(chunk).then(cb)
     // No catch block as errors will be caught in the CLI
   }
 
   // Public function for direct module usage
-  run(codes: CodeDataArray) {
+  run(codes: CodeDataArray): Promise<void> {
     return this._processBatches(codes)
   }
 
-  _processBatches(codes: CodeDataArray) {
+  _processBatches(codes: CodeDataArray): Promise<void> {
     // Batch to `batchSize` to reduce necessary fetch API calls
     const batchedList = _.chunk(codes, this.batchSize)
-    const functionsList = batchedList.map(codeObjects => () => {
-      // Build predicate and fetch existing code
-      const predicate = DiscountCodeImport._buildPredicate(codeObjects)
-      const service = this._createService()
-      const uri = service
-        .where(predicate)
-        .perPage(this.batchSize)
-        .build()
-      const req = this._buildRequest(uri, 'GET')
-      return this.client
-        .execute(req)
-        .then(({ body: { results: existingCodes } }: Object) =>
-          this._createOrUpdate(codeObjects, existingCodes)
-        )
-    })
+    const functionsList = batchedList.map(
+      (codeObjects: CodeDataArray): Function => (): Promise<void> => {
+        // Build predicate and fetch existing code
+        const predicate = DiscountCodeImport._buildPredicate(codeObjects)
+        const service = this._createService()
+        const uri = service
+          .where(predicate)
+          .perPage(this.batchSize)
+          .build()
+        const req = this._buildRequest(uri, 'GET')
+        return this.client
+          .execute(req)
+          .then(({ body: { results: existingCodes } }: Object): Promise<void> =>
+            this._createOrUpdate(codeObjects, existingCodes)
+          )
+      }
+    )
     return DiscountCodeImport.promiseMapSerially(functionsList)
-      .then(() => Promise.resolve())
+      .then((): Promise<void> => Promise.resolve())
       .catch(
-        caughtError =>
+        // eslint-disable-next-line
+        (caughtError): Object =>
           new DiscountCodeImportError(
             'Processing batches failed',
             caughtError.message || caughtError,
@@ -146,19 +158,22 @@ export default class DiscountCodeImport {
       )
   }
 
-  _createOrUpdate(newCodes: CodeDataArray, existingCodes: CodeDataArray) {
+  _createOrUpdate(
+    newCodes: CodeDataArray,
+    existingCodes: CodeDataArray
+  ): Object {
     return Promise.all(
-      newCodes.map((newCode: CodeData) => {
+      newCodes.map((newCode: DiscountCode): Promise<void> => {
         const existingCode = _.find(existingCodes, ['code', newCode.code])
         if (existingCode)
           return this._update(newCode, existingCode)
-            .then(response => {
+            .then((response: Object): Promise<void> => {
               if (response && response.statusCode === 304)
                 this._summary.unchanged += 1
               else this._summary.updated += 1
               return Promise.resolve()
             })
-            .catch(error => {
+            .catch((error: HttpErrorType): Promise<void> => {
               if (this.continueOnProblems) {
                 this._summary.updateErrorCount += 1
                 this._summary.errors.push(error.message || error)
@@ -177,11 +192,11 @@ export default class DiscountCodeImport {
               return Promise.reject(error)
             })
         return this._create(newCode)
-          .then(() => {
+          .then((): Promise<void> => {
             this._summary.created += 1
             return Promise.resolve()
           })
-          .catch(error => {
+          .catch((error: HttpErrorType): Promise<void> => {
             if (this.continueOnProblems) {
               this._summary.createErrorCount += 1
               this._summary.errors.push(error.message || error)
@@ -203,7 +218,10 @@ export default class DiscountCodeImport {
     )
   }
 
-  _update(newCode: CodeData, existingCode: CodeData) {
+  _update(
+    newCode: DiscountCode,
+    existingCode: DiscountCode
+  ): Promise<{ statusCode: number } | ClientResult> {
     const actions = this.syncDiscountCodes.buildActions(newCode, existingCode)
     // don't call API if there's no update action
     if (!actions.length) return Promise.resolve({ statusCode: 304 })
@@ -218,7 +236,7 @@ export default class DiscountCodeImport {
     return this.client.execute(req)
   }
 
-  _create(code: CodeData) {
+  _create(code: DiscountCode): Promise<ClientResult> {
     const service = this._createService()
     const uri = service.build()
     const req = this._buildRequest(uri, 'POST', code)
@@ -226,13 +244,13 @@ export default class DiscountCodeImport {
     return this.client.execute(req)
   }
 
-  _createService() {
+  _createService(): ServiceBuilderInstance {
     return createRequestBuilder({
       projectKey: this.apiConfig.projectKey,
     }).discountCodes
   }
 
-  _resetSummary() {
+  _resetSummary(): Summary {
     this._summary = {
       created: 0,
       updated: 0,
@@ -244,7 +262,7 @@ export default class DiscountCodeImport {
     return this._summary
   }
 
-  _buildRequest(uri: string, method: string, body?: Object) {
+  _buildRequest(uri: string, method: string, body?: Object): Object {
     const request: Object = {
       uri,
       method,
@@ -257,7 +275,7 @@ export default class DiscountCodeImport {
     return request
   }
 
-  summaryReport() {
+  summaryReport(): Object {
     const {
       created,
       updated,
