@@ -19,7 +19,7 @@ export default function createAuthMiddlewareForClientCredentialsFlow(
   const pendingTasks: Array<Task> = []
 
   const requestState = store(false)
-  return (next: Next) => (
+  return (next: Next): Next => (
     request: MiddlewareRequest,
     response: MiddlewareResponse
   ) => {

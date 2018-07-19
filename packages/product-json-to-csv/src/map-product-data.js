@@ -38,7 +38,8 @@ export default class ProductMapping {
       this.fillAllRows
     )
     const mappedProduct = varWithProductInfo.map(
-      (variant: SingleVarPerProduct) => this._mapProperties(variant)
+      (variant: SingleVarPerProduct): MappedProduct =>
+        this._mapProperties(variant)
     )
     const flatProducts = mappedProduct.map(flatten)
     return flatProducts
@@ -109,10 +110,10 @@ export default class ProductMapping {
           case 'searchKeywords': {
             if (!isEmpty(value)) {
               acc[property] = {}
-              Object.keys(value).forEach(language => {
+              Object.keys(value).forEach((language: string) => {
                 const standard = []
                 const whitespace = []
-                value[language].forEach(keyWord => {
+                value[language].forEach((keyWord: Object) => {
                   if (!keyWord.suggestTokenizer) standard.push(keyWord.text)
                   else if (keyWord.suggestTokenizer.type === 'whitespace')
                     whitespace.push(keyWord.text.replace(/ /g, ' | '))
@@ -131,7 +132,7 @@ export default class ProductMapping {
               value.attributes.forEach((attribute: Object) => {
                 acc[attribute.name] = Array.isArray(attribute.value)
                   ? attribute.value
-                      .map(attrValue => attrValue.key)
+                      .map((attrValue: Object): string => attrValue.key)
                       .join(this.multiValDel)
                   : attribute.value.key || attribute.value
               })

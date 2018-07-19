@@ -113,14 +113,14 @@ export default class ProductJsonToCsv {
       )
   }
 
-  parse(input: stream$Readable, output: stream$Writable) {
+  parse(input: stream$Readable, output: stream$Writable): stream$Readable {
     this.logger.info('Starting conversion')
     let productCount = 0
 
     return (
       highland(input)
         .through(JSONStream.parse('*'))
-        .flatMap((product: ProductProjection) =>
+        .flatMap((product: ProductProjection): ProductProjection =>
           highland(this._resolveReferences(product))
         )
         .doto(() => {
@@ -128,7 +128,7 @@ export default class ProductJsonToCsv {
           this.logger.debug(`Resolved references of ${productCount} products`)
         })
         // prepare the product objects for csv format
-        .map((product: ResolvedProductProjection) =>
+        .map((product: ResolvedProductProjection): ResolvedProductProjection =>
           this._productMapping.run(product)
         )
         .flatten()
@@ -142,7 +142,7 @@ export default class ProductJsonToCsv {
     )
   }
 
-  _resolveReferences(product: ProductProjection): ResolvedProductProjection {
+  _resolveReferences(product: ProductProjection): ProductProjection {
     // ReferenceTypes that need to be resolved:
     // **ProductType
     // **Categories [array]

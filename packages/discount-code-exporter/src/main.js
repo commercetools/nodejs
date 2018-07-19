@@ -10,9 +10,11 @@ import JSONStream from 'JSONStream'
 import { flatten } from 'flat'
 import type {
   ApiConfigOptions,
-  CodeData,
   ExporterOptions,
   LoggerOptions,
+  CartDiscount,
+  DiscountCode,
+  DiscountCodeDraft,
 } from 'types/discountCodes'
 import type { Client, ClientRequest } from 'types/sdk'
 import { defaultHeaders } from './headers'
@@ -161,10 +163,10 @@ export default class DiscountCodeExport {
 
   // Use this method to make the `cartDiscounts` and `groups`
   // field compatible with the importer
-  _processCode(data: CodeData): Object {
+  _processCode(data: DiscountCodeDraft): DiscountCodeDraft {
     const { cartDiscounts, groups, ...restDiscountCodeData } = data
     const cartDiscountsString = cartDiscounts
-      .map(cartDiscount => cartDiscount.id)
+      .map((cartDiscount: CartDiscount): string => cartDiscount.id)
       .join(this.config.multiValueDelimiter)
     const groupsString = groups
       ? groups.join(this.config.multiValueDelimiter)
@@ -180,7 +182,10 @@ export default class DiscountCodeExport {
     ]
 
     const discountCodeData = Object.entries(restDiscountCodeData).reduce(
-      (discountCode, [discountCodeKey, value: Object]) =>
+      (
+        discountCode: Object,
+        [discountCodeKey: string, value: DiscountCode]: [string, mixed]
+      ): Object =>
         objKeys.includes(discountCodeKey) && !Object.entries(value).length
           ? discountCode
           : { ...discountCode, [discountCodeKey]: value },

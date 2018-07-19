@@ -7,6 +7,7 @@ import type {
   AuthMiddlewareBaseOptions,
   PasswordAuthMiddlewareOptions,
   AuthMiddlewareOptions,
+  executeRequestOptions,
 } from 'types/sdk'
 import { buildRequestForRefreshTokenFlow } from './build-requests'
 
@@ -42,7 +43,7 @@ function executeRequest(
     requestState,
     pendingTasks,
     response,
-  },
+  }: executeRequestOptions,
   next: Next
 ) {
   fetcher(url, {
