@@ -159,4 +159,4 @@ https://commercetools.github.io/nodejs/
 
 ## Contributing
 
-We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information on our guidelines. We also have a [TODO list](TODO.md) that may contain various tasks in addition to the [issues list](https://github.com/commercetools/nodejs/issues).
+We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information on our guidelines. We also have a [TODO list](TODOS.md) that may contain various tasks in addition to the [issues list](https://github.com/commercetools/nodejs/issues).
