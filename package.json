@@ -33,6 +33,8 @@
     "docs:watch": "npm run docs:prepare && gitbook serve",
     "docs:publish": "npm run docs:clean && npm run docs:build && ./scripts/publish-docs",
     "flow": "eslint packages",
+    "generate:todos": "leasot -x 'packages/*/src/**.js'",
+    "build:todos": "leasot -x --reporter markdown 'packages/*/src/**.js' > TODOS.md",
     "package-readme-entry": "./scripts/package-readme-entry.sh"
   },
   "devDependencies": {
@@ -80,6 +82,7 @@
     "jest-runner-eslint": "emmenko/jest-runner-eslint#nm-fix-rules-cli-option-built",
     "jest-runner-flowtype": "0.0.5",
     "jest-silent-reporter": "0.0.4",
+    "leasot": "6.3.0",
     "lerna": "2.11.0",
     "lint-staged": "7.0.4",
     "npm-check-updates": "2.14.1",
