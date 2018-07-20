@@ -11,5 +11,7 @@ module.exports = {
     // For that reason, we move the `--onlyChanged` flag next to it.
     'npm run lint:js -- --reporters=jest-silent-reporter --onlyChanged',
     'flow focus-check',
+    'npm run publish:todos',
+    'git add TODOS.md',
   ],
 }
