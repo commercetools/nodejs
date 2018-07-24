@@ -3,6 +3,7 @@ import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import actionsMapCustom from './utils/action-map-custom'
 import { actionsMapBase } from './discount-codes-actions'
+import combineValidityActions from './utils/combine-validity-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
 export const actionGroups = ['base', 'custom']
@@ -18,7 +19,7 @@ function createDiscountCodesMapActions(mapActionGroup, syncActionConfig) {
     allActions.push(
       mapActionGroup('custom', () => actionsMapCustom(diff, newObj, oldObj))
     )
-    return flatten(allActions)
+    return combineValidityActions(flatten(allActions))
   }
 }
 
