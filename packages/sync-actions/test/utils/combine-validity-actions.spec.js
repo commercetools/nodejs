@@ -42,7 +42,7 @@ describe('combineValidityActions', () => {
     beforeEach(() => {
       combinedActions = combineValidityActions([otherAction, validFromAction])
     })
-    it('should not compine into `setValidFromAndUntil` and keep `validFromAction`', () => {
+    it('should not combine into `setValidFromAndUntil` and keep `validFromAction`', () => {
       expect(combinedActions).toMatchObject([otherAction, validFromAction])
     })
   })
@@ -50,7 +50,7 @@ describe('combineValidityActions', () => {
     beforeEach(() => {
       combinedActions = combineValidityActions([otherAction, validUntilAction])
     })
-    it('should not compine into `setValidFromAndUntil` and keep `validUntilAction`', () => {
+    it('should not combine into `setValidFromAndUntil` and keep `validUntilAction`', () => {
       expect(combinedActions).toMatchObject([otherAction, validUntilAction])
     })
   })
