@@ -33,19 +33,16 @@ function calculateExpirationTime(expiresIn: number): number {
   )
 }
 
-function executeRequest(
-  {
-    fetcher,
-    url,
-    basicAuth,
-    body,
-    tokenCache,
-    requestState,
-    pendingTasks,
-    response,
-  }: executeRequestOptions,
-  next: Next
-) {
+function executeRequest({
+  fetcher,
+  url,
+  basicAuth,
+  body,
+  tokenCache,
+  requestState,
+  pendingTasks,
+  response,
+}: executeRequestOptions) {
   fetcher(url, {
     method: 'POST',
     headers: {
@@ -82,7 +79,7 @@ function executeRequest(
                 // Assign the new token in the request header
                 const requestWithAuth = mergeAuthHeader(token, task.request)
                 // console.log('test', cache, pendingTasks)
-                next(requestWithAuth, task.response)
+                task.next(requestWithAuth, task.response)
               })
             }
           )
@@ -146,7 +143,7 @@ export default function authMiddlewareBase(
     return
   }
   // Keep pending tasks until a token is fetched
-  pendingTasks.push({ request, response })
+  pendingTasks.push({ request, response, next })
 
   // If a token is currently being fetched, just wait ;)
   if (requestState.get()) return
@@ -162,35 +159,29 @@ export default function authMiddlewareBase(
     (!tokenObj.token ||
       (tokenObj.token && Date.now() > tokenObj.expirationTime))
   ) {
-    executeRequest(
-      {
-        fetcher,
-        ...buildRequestForRefreshTokenFlow({
-          ...userOptions,
-          refreshToken: tokenObj.refreshToken,
-        }),
-        tokenCache,
-        requestState,
-        pendingTasks,
-        response,
-      },
-      next
-    )
-    return
-  }
-
-  // Token and refreshToken are not present or invalid. Request a new token...
-  executeRequest(
-    {
+    executeRequest({
       fetcher,
-      url,
-      basicAuth,
-      body,
+      ...buildRequestForRefreshTokenFlow({
+        ...userOptions,
+        refreshToken: tokenObj.refreshToken,
+      }),
       tokenCache,
       requestState,
       pendingTasks,
       response,
-    },
-    next
-  )
+    })
+    return
+  }
+
+  // Token and refreshToken are not present or invalid. Request a new token...
+  executeRequest({
+    fetcher,
+    url,
+    basicAuth,
+    body,
+    tokenCache,
+    requestState,
+    pendingTasks,
+    response,
+  })
 }
