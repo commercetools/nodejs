@@ -28,16 +28,16 @@
     "@commercetools/sdk-middleware-user-agent": "*",
     "@commercetools/state-importer": "*",
     "@commercetools/sync-actions": "*",
-    "bluebird": "^3.5.0",
-    "common-tags": "^1.4.0",
-    "csvtojson": "^1.1.7",
-    "isuuid": "^0.1.0",
-    "lodash.clonedeep": "^4.5.0",
-    "lodash.omit": "^4.5.0",
+    "bluebird": "3.5.1",
+    "common-tags": "1.8.0",
+    "csvtojson": "1.1.12",
+    "isuuid": "0.1.0",
+    "lodash.clonedeep": "4.5.0",
+    "lodash.omit": "4.5.0",
     "mz": "2.7.0",
     "node-fetch": "2.1.2",
-    "streamtest": "^1.2.2",
-    "tmp": "^0.0.33",
-    "unzip": "^0.1.11"
+    "streamtest": "1.2.4",
+    "tmp": "0.0.33",
+    "unzip": "0.1.11"
   }
 }
