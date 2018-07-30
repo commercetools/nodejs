@@ -29,17 +29,17 @@
     },
     "license": "MIT",
     "dependencies": {
-        "@commercetools/api-request-builder": "^4.0.1",
-        "@commercetools/get-credentials": "^2.1.4",
-        "@commercetools/sdk-client": "^1.5.8",
-        "@commercetools/sdk-middleware-auth": "^3.5.2",
-        "@commercetools/sdk-middleware-http": "^3.0.0",
-        "@commercetools/sdk-middleware-user-agent": "^1.2.9",
-        "lodash.flatten": "^4.4.0",
-        "node-fetch": "^2.1.2",
-        "pino": "^4.16.1",
-        "pretty-error": "^2.1.1",
-        "prompt-confirm": "^1.2.0",
-        "yargs": "^11.0.0"
+        "@commercetools/api-request-builder": "4.0.1",
+        "@commercetools/get-credentials": "2.1.4",
+        "@commercetools/sdk-client": "1.5.8",
+        "@commercetools/sdk-middleware-auth": "3.5.3",
+        "@commercetools/sdk-middleware-http": "3.0.1",
+        "@commercetools/sdk-middleware-user-agent": "1.2.9",
+        "lodash.flatten": "4.4.0",
+        "node-fetch": "2.2.0",
+        "pino": "4.17.6",
+        "pretty-error": "2.1.1",
+        "prompt-confirm": "1.2.0",
+        "yargs": "11.1.0"
     }
 }
