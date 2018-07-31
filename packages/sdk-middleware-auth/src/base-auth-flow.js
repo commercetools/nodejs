@@ -79,6 +79,7 @@ function executeRequest({
                 // Assign the new token in the request header
                 const requestWithAuth = mergeAuthHeader(token, task.request)
                 // console.log('test', cache, pendingTasks)
+                // Continue by calling the task's own next function
                 task.next(requestWithAuth, task.response)
               })
             }
@@ -143,6 +144,9 @@ export default function authMiddlewareBase(
     return
   }
   // Keep pending tasks until a token is fetched
+  // Save next function as well, to call it once the token has been fetched, which prevents
+  // unexpected behaviour in a context in which the next function uses global vars
+  // or Promises to capture the token to hand it to other libraries, e.g. Apollo
   pendingTasks.push({ request, response, next })
 
   // If a token is currently being fetched, just wait ;)
