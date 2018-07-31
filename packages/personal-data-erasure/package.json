@@ -30,11 +30,11 @@
     "license": "MIT",
     "dependencies": {
         "@commercetools/api-request-builder": "4.0.1",
-        "@commercetools/get-credentials": "^2.1.5",
+        "@commercetools/get-credentials": "2.1.5",
         "@commercetools/sdk-client": "1.5.8",
         "@commercetools/sdk-middleware-auth": "3.5.3",
         "@commercetools/sdk-middleware-http": "3.0.1",
-        "@commercetools/sdk-middleware-user-agent": "^1.2.10",
+        "@commercetools/sdk-middleware-user-agent": "1.2.10",
         "lodash.flatten": "4.4.0",
         "node-fetch": "2.2.0",
         "pino": "4.17.6",

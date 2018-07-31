@@ -28,9 +28,9 @@
   "dependencies": {
     "@commercetools/api-request-builder": "4.0.1",
     "@commercetools/sdk-client": "1.5.8",
-    "@commercetools/sdk-middleware-auth": "^4.0.2",
+    "@commercetools/sdk-middleware-auth": "4.0.2",
     "@commercetools/sdk-middleware-http": "4.0.1",
-    "@commercetools/sdk-middleware-user-agent": "^1.2.10",
+    "@commercetools/sdk-middleware-user-agent": "1.2.10",
     "@commercetools/sync-actions": "1.26.0",
     "node-fetch": "2.1.2"
   },
