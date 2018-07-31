@@ -111,6 +111,7 @@ export type RefreshAuthMiddlewareOptions = {
 export type Task = {
   request: MiddlewareRequest,
   response: MiddlewareResponse,
+  next: Next,
 }
 
 export type RequestState = boolean
