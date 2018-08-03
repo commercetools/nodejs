@@ -44,6 +44,8 @@ export type ExportConfigOptions = {
 export type TypeReference = {
   typeId: string,
   id: string,
+  key?: string,
+  name?: string,
 }
 
 type CustomField = {
@@ -98,7 +100,7 @@ type PriceTier = {
   value: Money,
 }
 
-type Price = {
+export type Price = {
   id: string,
   value: Money,
   country?: string,
@@ -334,6 +336,7 @@ export type MappedProduct = {
   state?: string,
   taxCategory?: string,
   reviewRatingStatistics?: Object,
+  prices?: string,
 }
 
 type ProcessFnResponseBody = {

@@ -70,6 +70,28 @@ describe('::ProductMapping', () => {
         masterVariant: {
           id: 1,
           sku: 'A0E200000001YKI',
+          prices: [
+            {
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 6400,
+                fractionDigits: 2,
+              },
+              id: '1f7ecb38-89b6-426e-988c-11bda90456cb',
+              country: 'DE',
+            },
+            {
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 2900,
+                fractionDigits: 2,
+              },
+              id: '7ecffab3-f980-4709-be01-04b5f0aa39eb',
+              country: 'IT',
+            },
+          ],
           images: [
             {
               url: 'https://example.com/foobar/commer.jpg',
@@ -87,6 +109,10 @@ describe('::ProductMapping', () => {
               label: 'image-label',
             },
           ],
+          availability: {
+            isOnStock: true,
+            availableQuantity: 10,
+          },
           attributes: [
             {
               name: 'article',
@@ -277,7 +303,7 @@ describe('::ProductMapping', () => {
     })
   })
 
-  describe('::mapProperties', () => {
+  describe('::_mapProduct', () => {
     test('replaces resolved objects with strings', () => {
       const sample = {
         id: '12345ab-id',
@@ -362,7 +388,7 @@ describe('::ProductMapping', () => {
         createdAt: '2017-01-06T10:54:51.395Z',
         lastModifiedAt: '2017-01-06T10:54:51.395Z',
       }
-      expect(productMapping._mapProperties(sample)).toEqual(expected)
+      expect(productMapping._mapProduct(sample)).toEqual(expected)
     })
 
     test('add all attributes from productType to top level', () => {
@@ -427,20 +453,22 @@ describe('::ProductMapping', () => {
         variant: {
           id: 1,
           sku: 'A0E200000001YKI',
+          attributes: {
+            article: 'sample 089 WHT',
+            designer: 'michaelkors',
+            color: 'white',
+            colorFreeDefinition: {
+              en: 'black-white',
+              de: 'schwarz-weiß',
+            },
+            addedAttr: '',
+            anotherAddedAttr: '',
+          },
         },
-        article: 'sample 089 WHT',
-        designer: 'michaelkors',
-        color: 'white',
-        colorFreeDefinition: {
-          en: 'black-white',
-          de: 'schwarz-weiß',
-        },
-        addedAttr: '',
-        anotherAddedAttr: '',
         state: 'my-resolved-state',
         hasStagedChanges: false,
       }
-      expect(productMapping._mapProperties(sample)).toEqual(expected)
+      expect(productMapping._mapProduct(sample)).toEqual(expected)
     })
 
     test('converts variant image array to strings', () => {
@@ -473,7 +501,7 @@ describe('::ProductMapping', () => {
         },
         hasStagedChanges: false,
       }
-      expect(productMapping._mapProperties(sample)).toMatchSnapshot()
+      expect(productMapping._mapProduct(sample)).toMatchSnapshot()
     })
   })
 

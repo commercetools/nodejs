@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`::ProductMapping ::mapProperties converts variant image array to strings 1`] = `
+exports[`::ProductMapping ::_mapProduct converts variant image array to strings 1`] = `
 Object {
   "hasStagedChanges": false,
   "id": "12345ab-id",
@@ -33,12 +33,14 @@ Array [
     "lastModifiedAt": "2017-01-06T10:54:51.395Z",
     "name.de": "Handyhülle",
     "name.en": "Phone cover",
+    "prices": "DE-EUR 6400;IT-EUR 2900",
     "productType": "resolved-product-type",
     "published": false,
     "setLenums": "myLenums",
     "slug.de": "michaelkors-handyhuelle",
     "slug.en": "michaelkors-phonecover",
     "taxCategory": "resolved-tax-name",
+    "variant.availability": 10,
     "variant.id": 1,
     "variant.images": "https://example.com/foobar/commer.jpg;https://example-2.com/demo/tools.jpg|image-label",
     "variant.sku": "A0E200000001YKI",
