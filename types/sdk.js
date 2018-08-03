@@ -111,6 +111,7 @@ export type RefreshAuthMiddlewareOptions = {
 export type Task = {
   request: MiddlewareRequest,
   response: MiddlewareResponse,
+  next: Next,
 }
 
 export type RequestState = boolean
@@ -120,8 +121,9 @@ export type TokenStore = {
   refreshToken?: string,
 }
 
-export type AuthMiddlewareBaseOptions = {
-  request: MiddlewareRequest,
+/* Request */
+
+type requestBaseOptions = {
   response: MiddlewareResponse,
   url: string,
   body: string,
@@ -135,6 +137,13 @@ export type AuthMiddlewareBaseOptions = {
     get: () => TokenStore,
     set: (cache: TokenStore) => TokenStore,
   },
+}
+export type executeRequestOptions = requestBaseOptions & {
+  fetcher: (url: string, args?: Object) => Promise<any>,
+}
+
+export type AuthMiddlewareBaseOptions = requestBaseOptions & {
+  request: MiddlewareRequest,
   fetch?: (url: string, args?: Object) => Promise<any>,
 }
 

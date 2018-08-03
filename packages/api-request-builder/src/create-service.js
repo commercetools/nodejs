@@ -64,7 +64,7 @@ export default function createService(
     withVersion,
     withFullDataErasure,
 
-    ...features.reduce((acc, feature) => {
+    ...features.reduce((acc: Object, feature: string): Object => {
       if (feature === defaultFeatures.query)
         return {
           ...acc,

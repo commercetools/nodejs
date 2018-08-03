@@ -7,6 +7,7 @@ import type {
   AuthMiddlewareBaseOptions,
   PasswordAuthMiddlewareOptions,
   AuthMiddlewareOptions,
+  executeRequestOptions,
 } from 'types/sdk'
 import { buildRequestForRefreshTokenFlow } from './build-requests'
 
@@ -32,19 +33,16 @@ function calculateExpirationTime(expiresIn: number): number {
   )
 }
 
-function executeRequest(
-  {
-    fetcher,
-    url,
-    basicAuth,
-    body,
-    tokenCache,
-    requestState,
-    pendingTasks,
-    response,
-  },
-  next: Next
-) {
+function executeRequest({
+  fetcher,
+  url,
+  basicAuth,
+  body,
+  tokenCache,
+  requestState,
+  pendingTasks,
+  response,
+}: executeRequestOptions) {
   fetcher(url, {
     method: 'POST',
     headers: {
@@ -81,7 +79,8 @@ function executeRequest(
                 // Assign the new token in the request header
                 const requestWithAuth = mergeAuthHeader(token, task.request)
                 // console.log('test', cache, pendingTasks)
-                next(requestWithAuth, task.response)
+                // Continue by calling the task's own next function
+                task.next(requestWithAuth, task.response)
               })
             }
           )
@@ -145,7 +144,10 @@ export default function authMiddlewareBase(
     return
   }
   // Keep pending tasks until a token is fetched
-  pendingTasks.push({ request, response })
+  // Save next function as well, to call it once the token has been fetched, which prevents
+  // unexpected behaviour in a context in which the next function uses global vars
+  // or Promises to capture the token to hand it to other libraries, e.g. Apollo
+  pendingTasks.push({ request, response, next })
 
   // If a token is currently being fetched, just wait ;)
   if (requestState.get()) return
@@ -161,35 +163,29 @@ export default function authMiddlewareBase(
     (!tokenObj.token ||
       (tokenObj.token && Date.now() > tokenObj.expirationTime))
   ) {
-    executeRequest(
-      {
-        fetcher,
-        ...buildRequestForRefreshTokenFlow({
-          ...userOptions,
-          refreshToken: tokenObj.refreshToken,
-        }),
-        tokenCache,
-        requestState,
-        pendingTasks,
-        response,
-      },
-      next
-    )
-    return
-  }
-
-  // Token and refreshToken are not present or invalid. Request a new token...
-  executeRequest(
-    {
+    executeRequest({
       fetcher,
-      url,
-      basicAuth,
-      body,
+      ...buildRequestForRefreshTokenFlow({
+        ...userOptions,
+        refreshToken: tokenObj.refreshToken,
+      }),
       tokenCache,
       requestState,
       pendingTasks,
       response,
-    },
-    next
-  )
+    })
+    return
+  }
+
+  // Token and refreshToken are not present or invalid. Request a new token...
+  executeRequest({
+    fetcher,
+    url,
+    basicAuth,
+    body,
+    tokenCache,
+    requestState,
+    pendingTasks,
+    response,
+  })
 }

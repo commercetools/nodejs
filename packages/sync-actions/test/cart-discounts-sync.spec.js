@@ -313,7 +313,27 @@ describe('Cart Discounts Actions', () => {
     const actual = cartDiscountsSync.buildActions(now, before)
     expect(actual).toEqual(expected)
   })
+  test('should build the `setValidFromAndUntil` action when both `validFrom` and `validUntil` exist', () => {
+    const before = {
+      validFrom: 'date-1-From',
+      validUntil: 'date-1-Until',
+    }
 
+    const now = {
+      validFrom: 'date-2-From',
+      validUntil: 'date-2-Until',
+    }
+
+    const expected = [
+      {
+        action: 'setValidFromAndUntil',
+        validFrom: 'date-2-From',
+        validUntil: 'date-2-Until',
+      },
+    ]
+    const actual = cartDiscountsSync.buildActions(now, before)
+    expect(actual).toEqual(expected)
+  })
   test('should build the `changeStackingMode` action', () => {
     const before = {
       stackingMode: 'Stacking',

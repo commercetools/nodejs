@@ -2,6 +2,7 @@ import flatten from 'lodash.flatten'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import { actionsMapBase } from './product-discounts-actions'
+import combineValidityActions from './utils/combine-validity-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
 export const actionGroups = ['base']
@@ -15,8 +16,7 @@ function createProductDiscountsMapActions(mapActionGroup, syncActionConfig) {
         actionsMapBase(diff, oldObj, newObj, syncActionConfig)
       )
     )
-
-    return flatten(allActions)
+    return combineValidityActions(flatten(allActions))
   }
 }
 

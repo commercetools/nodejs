@@ -40,7 +40,7 @@ export default class ProductMapping {
       this.fillAllRows
     )
     const mappedProduct = varWithProductInfo.map(
-      (variant: SingleVarPerProduct) =>
+      (variant: SingleVarPerProduct): MappedProduct =>
         ProductMapping._postProcessProduct(this._mapProduct(variant))
     )
 
@@ -121,7 +121,7 @@ export default class ProductMapping {
   }
 
   _mapVariantProperties(variant: Variant, productType: ?ProductType): Object {
-    const mappedVariant = _.reduce(
+    const mappedVariant: Object = _.reduce(
       variant,
       (acc: Object, value: any, property: string): Object => {
         acc[property] = this._mapVariantProperty(property, value)
@@ -155,7 +155,7 @@ export default class ProductMapping {
       case 'key':
         return value
       default:
-        return null
+        return undefined
     }
   }
 
@@ -168,7 +168,7 @@ export default class ProductMapping {
   static _mapPrice(price: Price): string {
     // Full price:
     // 'country-currencyCode centAmount|discounted.centAmount customerGroup.name#channel.key$validFrom~validUntil'
-    let priceString = ''
+    let priceString: string = ''
 
     if (price.country) priceString += `${price.country}-`
 
@@ -266,7 +266,7 @@ export default class ProductMapping {
   }
 
   _mapProduct(product: SingleVarPerProduct): MappedProduct {
-    const mappedProduct = _.reduce(
+    return _.reduce(
       product,
       (acc: Object, value: any, property: string): Object => {
         acc[property] = this._mapProductProperty(value, property, product)
@@ -274,8 +274,6 @@ export default class ProductMapping {
       },
       {}
     )
-
-    return mappedProduct
   }
 
   static _mapCategories(

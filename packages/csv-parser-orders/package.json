@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/csv-parser-orders",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Module that parses order csv to json",
   "keywords": [
     "commercetools",
@@ -35,13 +35,13 @@
   },
   "dependencies": {
     "JSONStream": "1.3.2",
-    "csv-parser": "^1.11.0",
-    "highland": "^2.10.5",
-    "lodash": "^4.17.4",
-    "npmlog": "^4.0.2",
-    "object-path": "^0.11.4",
-    "pretty-error": "^2.0.3",
-    "yargs": "^8.0.1"
+    "csv-parser": "1.12.1",
+    "highland": "2.13.0",
+    "lodash": "4.17.10",
+    "npmlog": "4.1.2",
+    "object-path": "0.11.4",
+    "pretty-error": "2.1.1",
+    "yargs": "8.0.2"
   },
   "devDependencies": {
     "sinon": "1.17.7",
