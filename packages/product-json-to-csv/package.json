@@ -47,7 +47,6 @@
     "highland": "2.13.0",
     "json2csv": "3.11.5",
     "lodash": "4.17.10",
-    "lodash.isnil": "^4.0.0",
     "node-fetch": "2.1.2",
     "pino": "4.17.6",
     "pretty-error": "2.1.1",
