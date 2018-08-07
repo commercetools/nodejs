@@ -10,7 +10,7 @@ import type {
 } from 'types/product'
 
 import { flatten } from 'flat'
-import { isEmpty, reduce, pickBy } from 'lodash'
+import { isEmpty, reduce, pickBy, isNil } from 'lodash'
 
 export default class ProductMapping {
   // Set flowtype annotations
@@ -140,7 +140,7 @@ export default class ProductMapping {
               // check if product is masterVariant
               if (product.productType)
                 product.productType.attributes.forEach((attribute: Object) => {
-                  if (!acc[attribute.name]) acc[attribute.name] = ''
+                  if (isNil(acc[attribute.name])) acc[attribute.name] = ''
                 })
             }
             let images

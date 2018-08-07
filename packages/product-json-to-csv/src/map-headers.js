@@ -42,6 +42,11 @@ export default function mapHeaders(headers: Array<string>): Array<HeaderObj> {
         label: 'images',
         value: 'variant.images',
       }
+    if (header === 'attributes' || header === 'variant.attributes')
+      return {
+        label: 'attributes',
+        value: 'variant.attributes',
+      }
     return {
       label: header,
       value: header,

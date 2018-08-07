@@ -130,6 +130,10 @@ describe('::ProductMapping', () => {
                 de: 'schwarz-weiß',
               },
             },
+            {
+              name: 'lengthOfProduct',
+              value: 0,
+            },
           ],
         },
         variants: [
@@ -181,11 +185,11 @@ describe('::ProductMapping', () => {
                 name: 'color',
                 value: {
                   label: {
-                    it: 'blanco',
-                    de: 'weiss',
-                    en: 'white',
+                    it: 0,
+                    de: 0,
+                    en: 0,
                   },
-                  key: 'white',
+                  key: 0,
                 },
               },
               {
