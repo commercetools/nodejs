@@ -185,11 +185,11 @@ describe('::ProductMapping', () => {
                 name: 'color',
                 value: {
                   label: {
-                    it: 0,
-                    de: 0,
-                    en: 0,
+                    it: 'blanco',
+                    de: 'weiss',
+                    en: 'white',
                   },
-                  key: 0,
+                  key: 'white',
                 },
               },
               {

@@ -46,10 +46,7 @@ Array [
   },
   Object {
     "article": "sample 089 WHT",
-    "color.key": 0,
-    "color.label.de": 0,
-    "color.label.en": 0,
-    "color.label.it": 0,
+    "color": "white",
     "colorFreeDefinition.de": "schwarz-weiß",
     "colorFreeDefinition.en": "black-white",
     "designer": "michaelkors",
