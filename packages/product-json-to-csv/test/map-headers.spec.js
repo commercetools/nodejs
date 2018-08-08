@@ -19,7 +19,7 @@ describe('mapHeaders', () => {
         'name.en',
         'description.en',
         'slug.en',
-        'attribute',
+        'attributes',
         'customAttribute',
       ]
     })
@@ -122,10 +122,10 @@ describe('mapHeaders', () => {
       })
     })
 
-    test('contains `attribute`', () => {
+    test('contains `attributes`', () => {
       expect(mapHeaders(headerFields)[14]).toEqual({
-        label: 'attribute',
-        value: 'attribute',
+        label: 'attributes',
+        value: 'variant.attributes',
       })
     })
 
@@ -155,7 +155,7 @@ describe('mapHeaders', () => {
         'name.en',
         'description.en',
         'slug.en',
-        'attribute',
+        'variant.attributes',
         'customAttribute',
       ]
     })
@@ -258,10 +258,10 @@ describe('mapHeaders', () => {
       })
     })
 
-    test('contains `attribute`', () => {
+    test('contains `variant.attributes`', () => {
       expect(mapHeaders(headerFields)[14]).toEqual({
-        label: 'attribute',
-        value: 'attribute',
+        label: 'attributes',
+        value: 'variant.attributes',
       })
     })
 

@@ -130,6 +130,10 @@ describe('::ProductMapping', () => {
                 de: 'schwarz-weiß',
               },
             },
+            {
+              name: 'lengthOfProduct',
+              value: 0,
+            },
           ],
         },
         variants: [

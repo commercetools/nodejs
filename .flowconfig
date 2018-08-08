@@ -59,4 +59,4 @@ include_warnings=true
 emoji=true
 
 [version]
-^0.74.0
+0.77.0
