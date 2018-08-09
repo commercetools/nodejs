@@ -134,8 +134,9 @@ export default class ProductMapping {
     // complete missing attributes
     if (productType && productType.attributes)
       productType.attributes.forEach((attribute: Object) => {
-        if (attribute.name && !mappedVariant.attributes[attribute.name])
-          mappedVariant.attributes[attribute.name] = ''
+        const mappedAttributes = mappedVariant.attributes || {}
+        if (_.isNil(mappedAttributes[attribute.name]))
+          mappedAttributes[attribute.name] = ''
       })
 
     return mappedVariant

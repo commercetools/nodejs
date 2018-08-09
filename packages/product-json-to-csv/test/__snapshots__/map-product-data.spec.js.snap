@@ -36,6 +36,7 @@ Array [
     "id": "12345ab-id",
     "key": "product-key",
     "lastModifiedAt": "2017-01-06T10:54:51.395Z",
+    "lengthOfProduct": 0,
     "name.de": "Handyhülle",
     "name.en": "Phone cover",
     "prices": "DE-EUR 6400;IT-EUR 2900",
