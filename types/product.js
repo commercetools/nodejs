@@ -64,9 +64,9 @@ export type Image = {
   label?: string,
 }
 
-type Attribute = {
+export type Attribute = {
   name: string,
-  value: Object,
+  value: any,
 }
 
 type AssetSource = {

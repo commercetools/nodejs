@@ -8,6 +8,7 @@ import type {
   Category,
   Image,
   Price,
+  Attribute,
   ProductType,
 } from 'types/product'
 
@@ -189,34 +190,119 @@ export default class ProductMapping {
     return priceString
   }
 
-  _mapAttributes(attributes: any): Object {
-    const mappedAttributes: Object = {}
-
-    attributes.forEach((attribute: Object) => {
-      let value = ''
-
-      if (_.isArray(attribute.value))
-        value = attribute.value
-          .map((attrValue: Object): string => attrValue.key)
-          .join(this.multiValDel)
-      else value = attribute.value.key || attribute.value
-
-      mappedAttributes[attribute.name] = value
+  _mapLtextAttribute(name: string, value: Object): Object {
+    // create an object with value based on selected language
+    const mappedAttribute = {
+      [name]: value[this.lang],
+    }
+    // create object with translations indexed with keys like: attributeName.en
+    const labels = flatten({
+      [name]: value, // value contains object with localized labels
     })
 
-    return mappedAttributes
-    // attributeTypeDef = @typesService.id2nameAttributeDefMap[productType.id][attribute.name].type
-    //   if attributeTypeDef.name is CONS.ATTRIBUTE_TYPE_LTEXT
-    //   row = @_mapLocalizedAttribute attribute, productType, row
-    // else if attributeTypeDef.name is CONS.ATTRIBUTE_TYPE_SET and attributeTypeDef.elementType?.name is CONS.ATTRIBUTE_TYPE_LENUM
-    //         # we need special treatment for set of lenums
-    //     row = @_mapSetOfLenum(attribute, productType, row)
-    // else if attributeTypeDef.name is CONS.ATTRIBUTE_TYPE_SET and attributeTypeDef.elementType?.name is CONS.ATTRIBUTE_TYPE_LTEXT
-    //   row = @_mapSetOfLtext(attribute, productType, row)
-    // else if attributeTypeDef.name is CONS.ATTRIBUTE_TYPE_LENUM  # we need special treatnemt for lenums
-    //     row = @_mapLenum(attribute, productType, row)
-    // else if @header.has attribute.name
-    //   row[@header.toIndex attribute.name] = @_mapAttribute(attribute, attributeTypeDef)
+    // add labels in format "attribName.en: labelEnValue" to all attributes
+    return _.merge(mappedAttribute, labels)
+  }
+
+  _mapLabelsToAllAttributes(name: string, labels: Array<Object>): Object {
+    const mappedValues: Object = {}
+    const languages: Array<string> = _(labels)
+      .map(Object.keys)
+      .flatten()
+      .uniq()
+      .value()
+
+    languages.forEach(lang => {
+      const headerKey: string = `${name}.${lang}`
+      const values = []
+
+      labels.forEach(label => {
+        values.push(label[lang] || '')
+      })
+
+      mappedValues[headerKey] = values.join(this.multiValDel)
+    })
+
+    return mappedValues
+  }
+
+  _mapSetAttribute(name: string, values: Array<any>) {
+    const [firstValue] = values
+    let mappedValue: string = ''
+
+    // empty set
+    if (values.length === 0) mappedValue = ''
+
+    // string, boolean, number
+    if (!_.isObject(firstValue)) mappedValue = values.join(this.multiValDel)
+    else if (firstValue.id && firstValue.typeId)
+      // reference
+      mappedValue = values
+        .map(value => ProductMapping._mapReference(value))
+        .join(this.multiValDel)
+    else if (firstValue.key && !_.isObject(firstValue.label))
+      // enum
+      mappedValue = _.map(values, 'key').join(this.multiValDel)
+    else if (firstValue.key && _.isObject(firstValue.label)) {
+      // lenum
+      const labels = _.map(values, 'label')
+      // map all language labels
+      const mappedValues = this._mapLabelsToAllAttributes(name, labels)
+      // add lenum keys as a main attribute value
+      mappedValues[name] = _.map(values, 'key').join(this.multiValDel)
+      return mappedValues
+    } else {
+      // ltext
+      const mappedValues = this._mapLabelsToAllAttributes(name, values)
+      // copy value from selected language as a main attribute value
+      mappedValues[name] = mappedValues[`${name}.${this.lang}`]
+      return mappedValues
+    }
+
+    return {
+      [name]: mappedValue,
+    }
+  }
+
+  /**
+   * Method will take an attribute and map it to string
+   * @param attribute Attribute which should be mapped
+   * @param allAttributes Result object with all attributes
+   * @returns {*} Mapped attribute
+   * @private
+   */
+  _mapAttribute(attribute: Attribute): Object {
+    const { name, value } = attribute
+    let mappedAttribute: Object = {}
+
+    if (_.isObject(value) && !_.isArray(value)) {
+      // ltext, enum, lenum
+      if (value.id && value.typeId)
+        // reference
+        mappedAttribute[name] = ProductMapping._mapReference(value)
+      else if (value.key && !_.isUndefined(value.label))
+        // ENUM or LENUM attribute
+        mappedAttribute = ProductMapping._mapLenumOrEnumAttribute(name, value)
+      else
+        // LTEXT attribute
+        mappedAttribute = this._mapLtextAttribute(name, value)
+    } else if (_.isArray(value)) {
+      // SET attribute
+      mappedAttribute = this._mapSetAttribute(name, value)
+    } else
+      // PLAIN attribute: boolean, string, number
+      mappedAttribute[name] = value
+
+    return mappedAttribute
+  }
+
+  _mapAttributes(attributes: any): Object {
+    return _.reduce(
+      attributes,
+      (mappedAttributes: Object, attribute: Object): Object =>
+        _.merge(mappedAttributes, this._mapAttribute(attribute)),
+      {}
+    )
   }
 
   _mapImages(images: Array<Image>): string {
@@ -308,5 +394,27 @@ export default class ProductMapping {
       return `${getParent(cat.parent)}>${cat.name[lang]}`
     }
     return getParent(category)
+  }
+
+  static _mapLenumOrEnumAttribute(name: string, value: Object) {
+    const mappedAttribute = {
+      [name]: value.key,
+    }
+
+    // if it is lenum (has label), add all languages to mappedAttribute object
+    if (value.label && _.isObject(value.label)) {
+      const labels = {
+        [name]: value.label,
+      }
+
+      // add labels in format "attribName.en: labelEnValue" to all attributes
+      _.merge(mappedAttribute, flatten(labels))
+    }
+
+    return mappedAttribute
+  }
+
+  static _mapReference(value: Object): string {
+    return _.get(value, 'obj.key') || _.get(value, 'obj.name') || value.id
   }
 }

@@ -129,6 +129,56 @@ describe('::ProductMapping', () => {
                     de: 'myLenums-de',
                   },
                 },
+                {
+                  key: 'myLenums2',
+                  label: {
+                    en: 'myLenums-en2',
+                    // es is missing - will be an empty string in output
+                    de: 'myLenums-de2',
+                  },
+                },
+                {
+                  key: 'myLenums3',
+                  label: {
+                    en: 'myLenums-en3',
+                    es: 'myLenums-es3',
+                    de: 'myLenums-de3',
+                  },
+                },
+              ],
+            },
+            {
+              name: 'setEnums',
+              value: [
+                {
+                  key: 'myEnum',
+                  label: 'myEnumLabel',
+                },
+                {
+                  key: 'myEnum2',
+                  label: 'myEnumLabel2',
+                },
+              ],
+            },
+            {
+              name: 'emptySet',
+              value: [],
+            },
+            {
+              name: 'setText',
+              value: ['text1', 'text2'],
+            },
+            {
+              name: 'setLText',
+              value: [
+                {
+                  en: 'enText1',
+                  de: 'deText1',
+                },
+                {
+                  en: 'enText2',
+                  de: 'deText2',
+                },
               ],
             },
             {
@@ -457,10 +507,12 @@ describe('::ProductMapping', () => {
             article: 'sample 089 WHT',
             designer: 'michaelkors',
             color: 'white',
-            colorFreeDefinition: {
-              en: 'black-white',
-              de: 'schwarz-weiß',
-            },
+            'color.de': 'weiss',
+            'color.en': 'white',
+            'color.it': 'blanco',
+            colorFreeDefinition: 'black-white',
+            'colorFreeDefinition.en': 'black-white',
+            'colorFreeDefinition.de': 'schwarz-weiß',
             addedAttr: '',
             anotherAddedAttr: '',
           },
