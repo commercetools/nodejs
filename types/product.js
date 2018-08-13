@@ -113,6 +113,14 @@ export type Price = {
   custom?: CustomField,
 }
 
+export type Channel = {
+  id: string,
+  version?: number,
+  key: string,
+  name: Object,
+  description: Object
+}
+
 type ScopedPrice = {
   id: string,
   value: Money,
@@ -137,11 +145,10 @@ export type Variant = {
   id: number,
   sku?: string,
   key?: string,
-  prices: Array<?Price>,
+  prices: Array<Price>,
   images: Array<Image>,
   attributes: Array<?Attribute>,
   assets: Array<?Asset>,
-  price?: Price,
   availability?: ProductVariantAvailability,
   isMatchingVariant?: boolean,
   scopedPrice?: ScopedPrice,

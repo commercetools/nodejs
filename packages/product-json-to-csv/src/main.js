@@ -8,7 +8,10 @@ import type {
   ProductType,
   ResolvedProductProjection,
   State,
+  Price,
+  Channel,
   TaxCategory,
+  Variant,
   TypeReference,
 } from 'types/product'
 import type { Client, ClientRequest, SuccessResult } from 'types/sdk'
@@ -22,7 +25,7 @@ import highland from 'highland'
 import fetch from 'node-fetch'
 import Promise from 'bluebird'
 import JSONStream from 'JSONStream'
-import { memoize } from 'lodash'
+import { memoize, map, get, pick } from 'lodash'
 import ProductMapping from './map-product-data'
 import { writeToSingleCsvFile, writeToZipFile } from './writer'
 import pkg from '../package.json'
@@ -32,6 +35,7 @@ export default class ProductJsonToCsv {
   accessToken: string
   apiConfig: ApiConfigOptions
   categoriesCache: Object
+  channelsCache: Object
   client: Client
   parserConfig: ParserConfigOptions
   logger: LoggerOptions
@@ -81,6 +85,7 @@ export default class ProductJsonToCsv {
       ...logger,
     }
     this.categoriesCache = {}
+    this.channelsCache = {}
     this.accessToken = accessToken
 
     const mappingParams = {
@@ -148,7 +153,7 @@ export default class ProductJsonToCsv {
     // **Categories [array]
     // **TaxCategory
     // **State
-    // **CategoryOrderHints
+    // **Variant prices
 
     return Promise.all([
       this._resolveProductType(product.productType),
@@ -156,18 +161,77 @@ export default class ProductJsonToCsv {
       this._resolveState(product.state),
       this._resolveCategories(product.categories),
       this._resolveCategoryOrderHints(product.categoryOrderHints),
+      this._resolveVariantReferences(product.masterVariant),
+      Promise.map(
+        product.variants,
+        (variant: Variant) => this._resolveVariantReferences(variant),
+        { concurrency: 3 }
+      ),
     ]).then(
-      ([productType, taxCategory, state, categories, categoryOrderHints]: Array<
-        Object
-      >): ResolvedProductProjection => ({
+      ([
+        productType,
+        taxCategory,
+        state,
+        categories,
+        categoryOrderHints,
+        masterVariant,
+        variants,
+      ]: Array<Object>): ResolvedProductProjection => ({
         ...product,
         ...productType,
         ...taxCategory,
         ...state,
         ...categories,
         ...categoryOrderHints,
+        masterVariant,
+        variants,
       })
     )
+  }
+
+  async _resolveVariantReferences(variant: Variant) {
+    if (!variant) return variant
+
+    return {
+      ...variant,
+      prices: await this._resolvePriceReferences(variant.prices || []),
+    }
+  }
+
+  async _resolvePriceReferences(prices: Array<Price>): Object {
+    // get channel ids from given prices and filter out undefined values
+    const channelIds: Array<string> = prices
+      .map((price: Price) => get(price, 'channel.id'))
+      .filter(Boolean)
+
+    // resolve channels by their ids
+    const channelsById: Object = await this._getChannelsById(channelIds)
+    // add channel objects to prices
+    return prices.map(
+      (price: Price): Price =>
+        price.channel && channelsById[price.channel.id]
+          ? {
+              ...price,
+              channel: channelsById[price.channel.id],
+            }
+          : price
+    )
+  }
+
+  async _getChannelsById(ids: Array<string>): Promise<Array<Object>> {
+    const notCachedIds = ids.filter((id: string) => !this.channelsCache[id])
+
+    const predicate = `id in ("${notCachedIds.join('", "')}")`
+    const channelService = this._createService('channels')
+    const uri = channelService.where(predicate).build()
+    const { body: { results } } = await this.fetchReferences(uri)
+
+    results.forEach((result: Channel) => {
+      this.channelsCache[result.id] = result
+    })
+
+    // pick only requested channels from cache
+    return pick(this.channelsCache, ids)
   }
 
   _resolveProductType(productTypeReference: TypeReference): Object {
@@ -205,9 +269,8 @@ export default class ProductJsonToCsv {
   ): Array<Category> | {} {
     if (!categoriesReference || !categoriesReference.length) return {}
 
-    const categoryIds = categoriesReference.map(
-      (category: TypeReference): string => category.id
-    )
+    const categoryIds: Array<string> = map(categoriesReference, 'id')
+
     return this._getCategories(categoryIds).then(
       (categories: Array<Category>): { categories: Array<Category> } => {
         if (this.parserConfig.categoryBy !== 'namedPath') return { categories }
