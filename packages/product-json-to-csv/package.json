@@ -22,7 +22,7 @@
     "name": "Williams Omayuku",
     "email": "williams.omayuku@commercetools.de"
   },
-  "main": "lib/main.js",
+  "main": "lib/index.js",
   "bin": {
     "product-json-to-csv": "bin/product-json-to-csv.js"
   },
