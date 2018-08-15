@@ -1,4 +1,4 @@
-import CustomObjectsImporter from '@commercetools//custom-objects-importer'
+import CustomObjectsImporter from '@commercetools/custom-objects-importer'
 import { getCredentials } from '@commercetools/get-credentials'
 import cloneDeep from 'lodash.clonedeep'
 

@@ -134,7 +134,7 @@ export default class CustomObjectsImporter {
         this._createPromiseReturningFunction(requests)
     )
 
-    return pSeries(functionsList)
+    return pSeries(functionsList).then(() => Promise.resolve())
   }
 
   _createPromiseReturningFunction(requests: Array<ClientRequest>): Function {
