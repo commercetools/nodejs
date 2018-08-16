@@ -7,9 +7,9 @@ describe('Exports', () => {
   })
 
   describe('action list', () => {
-    test('should contain `setKey` action', () => {
+    test('should contain `changeKey` action', () => {
       expect(baseActionsList).toEqual(
-        expect.arrayContaining([{ action: 'setKey', key: 'key' }])
+        expect.arrayContaining([{ action: 'changeKey', key: 'key' }])
       )
     })
 
@@ -71,13 +71,13 @@ describe('Actions', () => {
     channelsSync = createChannelsSync()
   })
 
-  test('should build `setKey` action', () => {
+  test('should build `changeKey` action', () => {
     const before = { key: 'keyBefore' }
     const now = { key: 'keyAfter' }
     const actual = channelsSync.buildActions(now, before)
     const expected = [
       {
-        action: 'setKey',
+        action: 'changeKey',
         ...now,
       },
     ]
