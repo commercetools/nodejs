@@ -377,7 +377,7 @@ export default class ProductMapping {
     switch (categoryBy) {
       case 'name':
         // name is localized
-        return cat.name[lang]
+        return cat.name[lang] || ''
       case 'externalId':
       case 'key':
         return cat[categoryBy] || ''
