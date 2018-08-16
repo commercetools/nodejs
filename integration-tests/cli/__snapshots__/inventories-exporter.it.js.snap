@@ -6,8 +6,8 @@ exports[`StockExporter CLI CLI basic functionality should accept query 1`] = `
 `;
 
 exports[`StockExporter CLI CLI basic functionality should export inventories to file as csv 1`] = `
-"sku,quantityOnStock,customType,customField.description
-12345,20,inventory-custom-type,integration tests!! arrgggh"
+"sku,quantityOnStock,customType,customField.description,createdAt,lastModifiedAt
+12345,20,inventory-custom-type,integration tests!! arrgggh,2018-08-16T15:33:05.241Z,2018-08-16T15:33:05.241Z"
 `;
 
 exports[`StockExporter CLI CLI basic functionality should export inventories to file as json 1`] = `
