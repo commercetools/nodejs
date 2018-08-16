@@ -153,6 +153,7 @@ export default class ProductJsonToCsv {
     // **Categories [array]
     // **TaxCategory
     // **State
+    // **CategoryOrderHints
     // **Variant prices
 
     return Promise.all([

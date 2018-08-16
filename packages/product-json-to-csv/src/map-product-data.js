@@ -13,7 +13,7 @@ import type {
 } from 'types/product'
 import { oneLineTrim } from 'common-tags'
 import { flatten } from 'flat'
-import _ from 'lodash'
+import { get, isObject, reduce, isEmpty, isUndefined, isNil, map } from 'lodash'
 
 export default class ProductMapping {
   // Set flowtype annotations
@@ -52,12 +52,12 @@ export default class ProductMapping {
     // move variant prices and attributes to top level
     // variant.prices => prices
     // variant.attributes.productSize => productSize
-    const prices: Array<Price> = _.get(
+    const prices: Array<Price> = get(
       originalProduct,
       'variant.prices',
       undefined
     )
-    const attributes: Object = _.get(originalProduct, 'variant.attributes', {})
+    const attributes: Object = get(originalProduct, 'variant.attributes', {})
     const cleanedProduct = { ...originalProduct, prices, ...attributes }
 
     delete cleanedProduct.variant.prices
@@ -67,7 +67,7 @@ export default class ProductMapping {
 
     // remove undefined values
     Object.entries(product).forEach(([key, val]) => {
-      if (_.isUndefined(val)) delete product[key]
+      if (isUndefined(val)) delete product[key]
     })
 
     return product
@@ -78,11 +78,7 @@ export default class ProductMapping {
   static _mergeVariants(
     product: ResolvedProductProjection
   ): ProdWithMergedVariants {
-    const variant = _([product.masterVariant])
-      .concat(product.variants)
-      .compact()
-      .value()
-
+    const variant = [product.masterVariant, ...product.variants]
     const { masterVariant, variants, ...restProduct } = product
     return { ...restProduct, variant }
   }
@@ -122,7 +118,7 @@ export default class ProductMapping {
   }
 
   _mapVariantProperties(variant: Variant, productType: ?ProductType): Object {
-    const mappedVariant: Object = _.reduce(
+    const mappedVariant: Object = reduce(
       variant,
       (acc: Object, value: any, property: string): Object => {
         acc[property] = this._mapVariantProperty(property, value)
@@ -135,7 +131,7 @@ export default class ProductMapping {
     if (productType && productType.attributes)
       productType.attributes.forEach((attribute: Object) => {
         const mappedAttributes = mappedVariant.attributes || {}
-        if (_.isNil(mappedAttributes[attribute.name]))
+        if (isNil(mappedAttributes[attribute.name]))
           mappedAttributes[attribute.name] = ''
       })
 
@@ -147,9 +143,9 @@ export default class ProductMapping {
       case 'attributes':
         return this._mapAttributes(value)
       case 'prices':
-        return this._mapPrices(value)
+        return this._mapPricesToString(value)
       case 'images':
-        return this._mapImages(value)
+        return this._mapImagesToString(value)
       case 'availability':
         return value.availableQuantity
       case 'id':
@@ -161,13 +157,13 @@ export default class ProductMapping {
     }
   }
 
-  _mapPrices(prices: Array<Price>): string {
+  _mapPricesToString(prices: Array<Price>): string {
     return prices
-      .map((price: Price) => ProductMapping._mapPrice(price))
+      .map((price: Price) => ProductMapping._mapPriceToString(price))
       .join(this.multiValDel)
   }
 
-  static _mapPrice(price: Price): string {
+  static _mapPriceToString(price: Price): string {
     // Full price:
     // 'country-currencyCode centAmount|discounted.centAmount customerGroup.name#channel.key$validFrom~validUntil'
 
@@ -197,16 +193,20 @@ export default class ProductMapping {
     })
 
     // add labels in format "attribName.en: labelEnValue" to all attributes
-    return _.merge(mappedAttribute, labels)
+    return { ...mappedAttribute, ...labels }
   }
 
   _mapLabelsToAllAttributes(name: string, labels: Array<Object>): Object {
     const mappedValues: Object = {}
-    const languages: Array<string> = _(labels)
-      .map(Object.keys)
-      .flatten()
-      .uniq()
-      .value()
+    const languages: Array<string> = labels
+      .map(Object.keys) // returns array of arrays with language keys
+      // flatten subarrays to one big array
+      .reduce((all, langKeys) => {
+        all.push(...langKeys)
+        return all
+      }, [])
+      // filter out duplicates
+      .filter((value, index, self) => self.indexOf(value) === index)
 
     languages.forEach(lang => {
       const headerKey: string = `${name}.${lang}`
@@ -230,22 +230,22 @@ export default class ProductMapping {
     if (values.length === 0) mappedValue = ''
 
     // string, boolean, number
-    if (!_.isObject(firstValue)) mappedValue = values.join(this.multiValDel)
+    if (!isObject(firstValue)) mappedValue = values.join(this.multiValDel)
     else if (firstValue.id && firstValue.typeId)
       // reference
       mappedValue = values
         .map(value => ProductMapping._mapReference(value))
         .join(this.multiValDel)
-    else if (firstValue.key && !_.isObject(firstValue.label))
+    else if (firstValue.key && !isObject(firstValue.label))
       // enum
-      mappedValue = _.map(values, 'key').join(this.multiValDel)
-    else if (firstValue.key && _.isObject(firstValue.label)) {
+      mappedValue = map(values, 'key').join(this.multiValDel)
+    else if (firstValue.key && isObject(firstValue.label)) {
       // lenum
-      const labels = _.map(values, 'label')
+      const labels = map(values, 'label')
       // map all language labels
       const mappedValues = this._mapLabelsToAllAttributes(name, labels)
       // add lenum keys as a main attribute value
-      mappedValues[name] = _.map(values, 'key').join(this.multiValDel)
+      mappedValues[name] = map(values, 'key').join(this.multiValDel)
       return mappedValues
     } else {
       // ltext
@@ -271,12 +271,12 @@ export default class ProductMapping {
     const { name, value } = attribute
     let mappedAttribute: Object = {}
 
-    if (_.isObject(value) && !Array.isArray(value)) {
+    if (isObject(value) && !Array.isArray(value)) {
       // ltext, enum, lenum
       if (value.id && value.typeId)
         // reference
         mappedAttribute[name] = ProductMapping._mapReference(value)
-      else if (value.key && !_.isUndefined(value.label))
+      else if (value.key && !isUndefined(value.label))
         // ENUM or LENUM attribute
         mappedAttribute = ProductMapping._mapLenumOrEnumAttribute(name, value)
       else
@@ -293,15 +293,17 @@ export default class ProductMapping {
   }
 
   _mapAttributes(attributes: any): Object {
-    return _.reduce(
+    return reduce(
       attributes,
-      (mappedAttributes: Object, attribute: Object): Object =>
-        _.merge(mappedAttributes, this._mapAttribute(attribute)),
+      (mappedAttributes: Object, attribute: Object): Object => ({
+        ...mappedAttributes,
+        ...this._mapAttribute(attribute),
+      }),
       {}
     )
   }
 
-  _mapImages(images: Array<Image>): string {
+  _mapImagesToString(images: Array<Image>): string {
     return images
       .map((image: Image): string => {
         const { url, label } = image
@@ -329,13 +331,13 @@ export default class ProductMapping {
           this.lang
         )
       case 'categoryOrderHints':
-        return _.isEmpty(value)
+        return isEmpty(value)
           ? undefined
           : Object.keys(value)
               .map((key: string): string => `${key}:${value[key]}`)
               .join(this.multiValDel)
       case 'searchKeywords':
-        return _.isEmpty(value)
+        return isEmpty(value)
           ? undefined
           : ProductMapping._mapSearchKeywords(value)
       case 'version':
@@ -348,7 +350,7 @@ export default class ProductMapping {
   }
 
   _mapProduct(product: SingleVarPerProduct): MappedProduct {
-    return _.reduce(
+    return reduce(
       product,
       (acc: Object, value: any, property: string): Object => {
         acc[property] = this._mapProductProperty(value, property, product)
@@ -398,19 +400,19 @@ export default class ProductMapping {
     }
 
     // if it is lenum (has label), add all languages to mappedAttribute object
-    if (value.label && _.isObject(value.label)) {
+    if (value.label && isObject(value.label)) {
       const labels = {
         [name]: value.label,
       }
 
       // add labels in format "attribName.en: labelEnValue" to all attributes
-      _.merge(mappedAttribute, flatten(labels))
+      return { ...mappedAttribute, ...flatten(labels) }
     }
 
     return mappedAttribute
   }
 
   static _mapReference(value: Object): string {
-    return _.get(value, 'obj.key') || _.get(value, 'obj.name') || value.id
+    return get(value, 'obj.key') || get(value, 'obj.name') || value.id
   }
 }
