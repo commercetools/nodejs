@@ -606,7 +606,7 @@ client.execute(channelsRequests)
 .catch(error => ...)
 ```
 
----
+Note that the channels syncer currently generaetes only `setRoles` actions and not individual `addRoles` and `removeRoles` respectively.
 
 ### With `shouldOmitEmptyString=true`
 
