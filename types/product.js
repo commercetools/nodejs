@@ -216,7 +216,7 @@ export type Category = {
   createdAt: string,
   lastModifiedAt: string,
   name: Object,
-  slug?: Object,
+  slug: Object,
   description?: Object,
   ancestors?: Array<?Category> | Array<?TypeReference>,
   parent?: Category | TypeReference,

@@ -375,6 +375,9 @@ export default class ProductMapping {
 
   static _mapCategory(cat: Category, categoryBy: string, lang: string): string {
     switch (categoryBy) {
+      case 'slug':
+        // slug is localized
+        return cat.slug[lang] || ''
       case 'name':
         // name is localized
         return cat.name[lang] || ''
