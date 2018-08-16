@@ -11,7 +11,7 @@ import type {
   Attribute,
   ProductType,
 } from 'types/product'
-
+import { oneLineTrim } from 'common-tags'
 import { flatten } from 'flat'
 import _ from 'lodash'
 
@@ -170,25 +170,20 @@ export default class ProductMapping {
   static _mapPrice(price: Price): string {
     // Full price:
     // 'country-currencyCode centAmount|discounted.centAmount customerGroup.name#channel.key$validFrom~validUntil'
-    let priceString: string = ''
 
-    if (price.country) priceString += `${price.country}-`
-
-    priceString += `${price.value.currencyCode} ${price.value.centAmount}`
-
-    if (price.discounted) priceString += `|${price.discounted.value.centAmount}`
-
-    if (price.customerGroup && price.customerGroup.name)
-      priceString += ` ${price.customerGroup.name}`
-
-    if (price.channel && price.channel.key)
-      priceString += `#${price.channel.key}`
-
-    if (price.validFrom) priceString += `$${price.validFrom}`
-
-    if (price.validUntil) priceString += `~${price.validUntil}`
-
-    return priceString
+    return oneLineTrim`
+      ${price.country ? `${price.country}-` : ''}
+      ${price.value.currencyCode} ${price.value.centAmount}
+      ${price.discounted ? `|${price.discounted.value.centAmount}` : ''}
+      ${
+        price.customerGroup && price.customerGroup.name
+          ? ` ${price.customerGroup.name}`
+          : ''
+      }
+      ${price.channel && price.channel.key ? `#${price.channel.key}` : ''}
+      ${price.validFrom ? `$${price.validFrom}` : ''}
+      ${price.validUntil ? `~${price.validUntil}` : ''}
+    `
   }
 
   _mapLtextAttribute(name: string, value: Object): Object {
@@ -276,7 +271,7 @@ export default class ProductMapping {
     const { name, value } = attribute
     let mappedAttribute: Object = {}
 
-    if (_.isObject(value) && !_.isArray(value)) {
+    if (_.isObject(value) && !Array.isArray(value)) {
       // ltext, enum, lenum
       if (value.id && value.typeId)
         // reference
@@ -287,7 +282,7 @@ export default class ProductMapping {
       else
         // LTEXT attribute
         mappedAttribute = this._mapLtextAttribute(name, value)
-    } else if (_.isArray(value)) {
+    } else if (Array.isArray(value)) {
       // SET attribute
       mappedAttribute = this._mapSetAttribute(name, value)
     } else
