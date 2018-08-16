@@ -564,7 +564,49 @@ client.execute(statesRequests)
 .catch(error => ...)
 ```
 
----
+## `createSyncChannels(actionGroups)`
+
+> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+
+Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _channels_.
+
+#### Arguments
+
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+
+#### Usage example
+
+```js
+import { createSyncChannels } from '@commercetools/sync-actions'
+import { createClient } from '@commercetools/sdk-client'
+
+const syncChannels = createSyncChannels()
+const client = createClient({
+  middlewares: [...],
+})
+
+const before = {
+  key: 'Key 1',
+  roles: ['Role 1'],
+}
+
+const now = {
+  name: 'Key 2',
+  roles: ['Role 1', 'Role 2'],
+}
+
+const actions = syncChannels.buildActions(now, before)
+const channelsRequests = {
+  url: `/channels/${before.id}`,
+}
+
+
+client.execute(channelsRequests)
+.then(result => ...)
+.catch(error => ...)
+```
+
+Note that the channels syncer currently generaetes only `setRoles` actions and not individual `addRoles` and `removeRoles` respectively.
 
 ### With `shouldOmitEmptyString=true`
 
