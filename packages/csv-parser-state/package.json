@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/csv-parser-state",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Package to parse states from CSV to JSON",
   "main": "lib/main.js",
   "scripts": {
