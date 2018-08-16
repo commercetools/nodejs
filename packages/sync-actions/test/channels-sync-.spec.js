@@ -51,6 +51,17 @@ describe('Exports', () => {
         ])
       )
     })
+
+    test('should contain `setRoles` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setRoles',
+            key: 'roles',
+          },
+        ])
+      )
+    })
   })
 })
 
@@ -125,27 +136,14 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
-  test('should build `addRoles` action', () => {
+  test('should build `setRoles` action', () => {
     const before = { roles: ['exists'] }
     const now = { roles: ['exists', 'new'] }
     const actual = channelsSync.buildActions(now, before)
     const expected = [
       {
-        action: 'addRoles',
-        roles: 'new',
-      },
-    ]
-    expect(actual).toEqual(expected)
-  })
-
-  test('should build `removeRoles` action', () => {
-    const before = { roles: ['exists'] }
-    const now = { roles: [] }
-    const actual = channelsSync.buildActions(now, before)
-    const expected = [
-      {
-        action: 'removeRoles',
-        roles: 'exists',
+        action: 'setRoles',
+        ...now,
       },
     ]
     expect(actual).toEqual(expected)
