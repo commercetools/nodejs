@@ -373,8 +373,8 @@ export default class ProductMapping {
       .join(multiValDel)
   }
 
-  static _mapCategory(cat: Category, categoryBy: string, lang: string): string {
-    switch (categoryBy) {
+  static _mapCategory(cat: Category, key: string, lang: string): string {
+    switch (key) {
       case 'slug':
         // slug is localized
         return cat.slug[lang] || ''
@@ -383,7 +383,7 @@ export default class ProductMapping {
         return cat.name[lang] || ''
       case 'externalId':
       case 'key':
-        return cat[categoryBy] || ''
+        return cat[key] || ''
       default:
         return ProductMapping._retrieveNamedPath(cat, lang)
     }
