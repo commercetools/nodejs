@@ -102,8 +102,8 @@ export default class ProductMapping {
     return productWithVariants
   }
 
-  static _mapSearchKeywords(value: Object) {
-    const keywords: any = {}
+  static _mapSearchKeywords(value: Object): Object {
+    const keywords: Object = {}
     Object.keys(value).forEach((language: string) => {
       const standard = []
       const whitespace = []
@@ -218,7 +218,7 @@ export default class ProductMapping {
     return mappedValues
   }
 
-  _mapSetAttribute(name: string, values: Array<any>) {
+  _mapSetAttribute(name: string, values: Array<any>): Object {
     const [firstValue] = values
     let mappedValue: string = ''
 
