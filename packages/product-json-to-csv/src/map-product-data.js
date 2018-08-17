@@ -210,13 +210,9 @@ export default class ProductMapping {
 
     languages.forEach(lang => {
       const headerKey: string = `${name}.${lang}`
-      const values = []
-
-      labels.forEach(label => {
-        values.push(label[lang] || '')
-      })
-
-      mappedValues[headerKey] = values.join(this.multiValDel)
+      mappedValues[headerKey] = labels
+        .map(label => label[lang] || '')
+        .join(this.multiValDel)
     })
 
     return mappedValues
