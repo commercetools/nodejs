@@ -228,6 +228,9 @@ export default class ProductJsonToCsv {
     const { body: { results } } = await this.fetchReferences(uri)
 
     results.forEach((result: Channel) => {
+      // we should keep old channels in the cache because we can resolve
+      // multiple products in parallel and we don't want to fetch same channels
+      // multiple times
       this.channelsCache[result.id] = result
     })
 
