@@ -10,7 +10,7 @@ let projectKey
 if (process.env.CI === 'true') projectKey = 'customer-groups-export-int-test'
 else projectKey = process.env.npm_config_projectkey
 
-describe('Product Exporter', () => {
+describe('Customer Groups Exporter', () => {
   let apiConfig
   const bin = './integration-tests/node_modules/.bin/customer-groups-exporter'
 
@@ -70,15 +70,15 @@ describe('Product Exporter', () => {
         expect(actual).toHaveLength(3)
 
         // Assert that the 3 created customer groups are the objects returned
-        expect(actual).toContainEqual(
-          expect.objectContaining(customerGroups[0])
-        )
-        expect(actual).toContainEqual(
-          expect.objectContaining(customerGroups[1])
-        )
-        expect(actual).toContainEqual(
-          expect.objectContaining(customerGroups[2])
-        )
+        // `groupName` is only used during creating, `name` is the key returned after that.
+        const returnGroups = customerGroups.map(group => {
+          const { groupName, ...withoutGroupName } = group
+          return { ...withoutGroupName, name: groupName }
+        })
+
+        expect(actual).toContainEqual(expect.objectContaining(returnGroups[0]))
+        expect(actual).toContainEqual(expect.objectContaining(returnGroups[1]))
+        expect(actual).toContainEqual(expect.objectContaining(returnGroups[2]))
       },
       15000
     )

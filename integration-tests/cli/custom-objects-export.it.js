@@ -10,7 +10,7 @@ let projectKey
 if (process.env.CI === 'true') projectKey = 'custom-objects-export-int-test'
 else projectKey = process.env.npm_config_projectkey
 
-describe('Product Exporter', () => {
+describe('Custom Objects Exporter', () => {
   let apiConfig
   const bin = './integration-tests/node_modules/.bin/custom-objects-exporter'
 
