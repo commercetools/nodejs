@@ -2,7 +2,7 @@
 
 exports[`Customer Groups Exporter CLI basic functionality should print usage information given the help flag 1`] = `
 "
-Usage: customer-groups-exporter.js [options]
+Usage: customer-groups-exporter [options]
 Export customer groups from the commercetools platform
 
 Options:
