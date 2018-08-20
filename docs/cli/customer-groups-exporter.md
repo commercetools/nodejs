@@ -1,6 +1,6 @@
 # Customer Groups Exporter
 
-A package which exports [commercetools customer groups](https://docs.commercetools.com/http-api-projects-customer-groups.html) in `JSON` format from the [commercetools platform](https://docs.commercetools.com/).
+A package which exports [commercetools customer groups](https://docs.commercetools.com/http-api-projects-customerGroups.html) in `JSON` format from the [commercetools platform](https://docs.commercetools.com/).
 
 ## Configuration
 
