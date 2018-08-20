@@ -1,0 +1,48 @@
+{
+    "name": "@commercetools/customer-groups-exporter",
+    "version": "0.0.1-dev",
+    "description": "Export customer groups from the commercetools platform",
+    "main": "lib/main.js",
+    "bin": {
+        "customer-groups-exporter": "bin/customer-groups-exporter.js"
+    },
+    "scripts": {
+        "build": "babel src --out-dir lib"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/commercetools/nodejs/tree/master/packages/customer-groups-exporter"
+    },
+    "homepage": "https://commercetools.github.io/nodejs/cli/customer-groups-exporter.html",
+    "bugs": "https://github.com/commercetools/nodejs/issues",
+    "keywords": [
+        "commercetools",
+        "group",
+        "groups",
+        "json",
+        "export",
+        "customer"
+    ],
+    "author": {
+        "name": "Daniel Eriksson",
+        "email": "daniel.eriksson@commercetools.de",
+        "url": "https://github.com/daern91"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "@commercetools/api-request-builder": "4.0.1",
+        "@commercetools/get-credentials": "2.1.5",
+        "@commercetools/sdk-client": "1.5.8",
+        "@commercetools/sdk-middleware-auth": "4.0.2",
+        "@commercetools/sdk-middleware-http": "4.0.1",
+        "@commercetools/sdk-middleware-user-agent": "1.2.10",
+        "JSONStream": "1.3.4",
+        "node-fetch": "2.1.2",
+        "pino": "4.17.6",
+        "pretty-error": "2.1.1",
+        "yargs": "11.1.0"
+    },
+    "devDependencies": {
+        "streamtest": "1.2.3"
+    }
+}
