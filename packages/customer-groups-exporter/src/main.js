@@ -13,7 +13,7 @@ import type {
   ApiConfigOptions,
   ExporterOptions,
   LoggerOptions,
-} from 'types/customObjects'
+} from 'types/customerGroups'
 import type { Client, ClientRequest } from 'types/sdk'
 import silentLogger from './utils/silent-logger'
 import pkg from '../package.json'
@@ -61,33 +61,17 @@ export default class CustomerGroupsExporter {
     this.logger.info('Starting Export')
     const jsonStream = JSONStream.stringify()
     jsonStream.pipe(outputStream)
-    CustomerGroupsExporter.handleOutput(
-      outputStream,
-      jsonStream,
-      this.client,
-      this.apiConfig.projectKey,
-      this.predicate,
-      this.logger
-    )
+    this.handleOutput(outputStream, jsonStream, this.apiConfig.projectKey)
   }
 
-  static handleOutput(
+  handleOutput(
     outputStream: stream$Writable,
     pipeStream: stream$Writable,
-    client: Object,
-    projectKey: string,
-    predicate: ?string,
-    logger: LoggerOptions
+    projectKey: string
   ) {
-    CustomerGroupsExporter.fetchObjects(
-      pipeStream,
-      client,
-      projectKey,
-      predicate,
-      logger
-    )
+    this.fetchGroups(pipeStream, projectKey)
       .then(() => {
-        logger.info('Export operation completed successfully')
+        this.logger.info('Export operation completed successfully')
         if (outputStream !== process.stdout) pipeStream.end()
       })
       .catch((e: Error) => {
@@ -95,16 +79,13 @@ export default class CustomerGroupsExporter {
       })
   }
 
-  static fetchObjects(
-    output: stream$Writable,
-    client: Object,
-    projectKey: string,
-    predicate: ?string,
-    logger: LoggerOptions
-  ): Promise<any> {
-    const request = CustomerGroupsExporter.buildRequest(projectKey, predicate)
+  fetchGroups(output: stream$Writable, projectKey: string): Promise<any> {
+    const request = CustomerGroupsExporter.buildRequest(
+      projectKey,
+      this.predicate
+    )
 
-    return client.process(
+    return this.client.process(
       request,
       ({ statusCode, body }: Object): Promise<any> => {
         if (statusCode !== 200)
@@ -114,9 +95,9 @@ export default class CustomerGroupsExporter {
         body.results.forEach((object: Buffer) => {
           output.write(object)
         })
-        logger.debug(
-          `Successfully exported ${body.count} custom %s`,
-          body.count > 1 ? 'objects' : 'object'
+        this.logger.debug(
+          `Successfully exported ${body.count} customer %s`,
+          body.count > 1 ? 'groups' : 'group'
         )
         return Promise.resolve()
       },
