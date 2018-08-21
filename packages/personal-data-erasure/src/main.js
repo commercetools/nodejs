@@ -177,10 +177,6 @@ export default class PersonalDataErasure {
       uri: requestBuilder.orders.where(`customerId = "${customerId}"`).build(),
       builder: requestBuilder.orders,
     }
-    const cartsResource = {
-      uri: requestBuilder.carts.where(`customerId = "${customerId}"`).build(),
-      builder: requestBuilder.carts,
-    }
     const paymentsResource = {
       uri: requestBuilder.payments
         .where(`customer(id = "${customerId}")`)
@@ -203,7 +199,6 @@ export default class PersonalDataErasure {
     const resourcesToDelete = [
       customersResource,
       ordersResource,
-      cartsResource,
       paymentsResource,
       shoppingListsResource,
       reviewsResource,
