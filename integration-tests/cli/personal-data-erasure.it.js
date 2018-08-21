@@ -17,7 +17,6 @@ import {
 let projectKey
 if (process.env.CI === 'true') projectKey = 'custom-objects-import-int-tests'
 else projectKey = process.env.npm_config_projectkey
-projectKey = 'custom-objects-import-int-tests'
 
 describe('personal data erasure', () => {
   jest.setTimeout(15000) // 15 second timeout
