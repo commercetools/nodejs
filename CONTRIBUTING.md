@@ -29,10 +29,12 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 
 4.  To run all packages tests simply do `npm test` (we use [jest](https://github.com/facebook/jest)). If you want to work on a specific package and run the tests only for that package, we recommend to use `npm run test:package`. This will prompt you to select one of the available packages. To run in _watch_ mode simply do `npm run test:package -- --watch`.
 
-5.  Integration tests are separated out in another folder "/integration-tests". To run the integration test, you need to export `npm_config_projectkey` (is equal to projectKey), `PROJECT_KEY`, `CLIENT_ID` and `CLIENT_SECRET` as environment variables as specified [here](https://commercetools.github.io/nodejs/sdk/api/getCredentials.html) into process env. Then run integration test with
+5.  Integration tests are separated out in another folder "/integration-tests". To run the integration test, you need to export the environment variables into the process env by doing the following :-
 
 ```
-npm run test:integration
+    - Export `npm_config_projectkey`=`projectKey`,
+    - Export `CT_PROJECT_KEY`=`CLIENT_ID`:`CLIENT_SECRET` as specified [here](https://commercetools.github.io/nodejs/sdk/api/getCredentials.html).
+    - Then run integration test with `npm run test:integration`
 ```
 
 **Note: Due to the setup/teardown nature of the integration tests, there is the risk of potential data loss in your project**
