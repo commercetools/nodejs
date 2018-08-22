@@ -13,7 +13,15 @@ import type {
 } from 'types/product'
 import { oneLineTrim } from 'common-tags'
 import { flatten } from 'flat'
-import { get, isObject, reduce, isEmpty, isUndefined, isNil, map } from 'lodash'
+import {
+  get,
+  isObject,
+  reduce,
+  isEmpty,
+  isUndefined,
+  isNil,
+  uniq,
+} from 'lodash'
 
 export default class ProductMapping {
   // Set flowtype annotations
@@ -218,42 +226,52 @@ export default class ProductMapping {
     return mappedValues
   }
 
+  /**
+   * Method will concatenate all objects in array to one single object.
+   * Example input and output:
+   * [{attrName: 12}, {attrName: 33}] => {attrName: '12,33'}
+   * @param setValues Array
+   * @returns Object
+   * @private
+   */
+  _joinMappedSetValues(setValues: Array<Object>) {
+    // when there is an object property missing in first N objects, we should
+    // prepend value from N+1 object with delimiters:
+    // [{attrName.en: 'AA'}, {attrName.en: 'BB'},{attrName.de: '12'}]
+    // => {attrName.en: 'AA,BB,', attrName.de: ',,12'}
+    let emptyDelim: string = ''
+
+    // reduce all mapped values to a single
+    return setValues.reduce((res: Object, setValue: Object, ind): Object => {
+      if (!ind) return setValue
+
+      // take all keys from already mapped values and new setValues
+      uniq([...Object.keys(res), ...Object.keys(setValue)]).forEach(key => {
+        // if we haven't set this key yet, prepend the given value with delimiters
+        if (isUndefined(res[key])) res[key] = emptyDelim
+
+        // if we have already some values in the res object add a delimiter
+        if (res[key] !== '') res[key] += this.multiValDel
+
+        // and append the new setValue or an empty string if it is undefined
+        res[key] += isUndefined(setValue[key]) ? '' : setValue[key]
+      })
+
+      emptyDelim += this.multiValDel
+      return res
+    }, {})
+  }
+
   _mapSetAttribute(name: string, values: Array<any>): Object {
-    const [firstValue] = values
-    let mappedValue: string = ''
+    const mappedValues: Array<any> = values.map(value =>
+      this._mapAttribute({ name, value })
+    )
 
-    // empty set
-    if (values.length === 0) mappedValue = ''
-
-    // string, boolean, number
-    if (!isObject(firstValue)) mappedValue = values.join(this.multiValDel)
-    else if (firstValue.id && firstValue.typeId)
-      // reference
-      mappedValue = values
-        .map(value => ProductMapping._mapReference(value))
-        .join(this.multiValDel)
-    else if (firstValue.key && !isObject(firstValue.label))
-      // enum
-      mappedValue = map(values, 'key').join(this.multiValDel)
-    else if (firstValue.key && isObject(firstValue.label)) {
-      // lenum
-      const labels = map(values, 'label')
-      // map all language labels
-      const mappedValues = this._mapLabelsToAllAttributes(name, labels)
-      // add lenum keys as a main attribute value
-      mappedValues[name] = map(values, 'key').join(this.multiValDel)
-      return mappedValues
-    } else {
-      // ltext
-      const mappedValues = this._mapLabelsToAllAttributes(name, values)
-      // copy value from selected language as a main attribute value
-      mappedValues[name] = mappedValues[`${name}.${this.lang}`]
-      return mappedValues
-    }
-
-    return {
-      [name]: mappedValue,
-    }
+    return mappedValues.length
+      ? this._joinMappedSetValues(mappedValues)
+      : {
+          [name]: '',
+        }
   }
 
   /**

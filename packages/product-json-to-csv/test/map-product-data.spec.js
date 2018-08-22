@@ -148,6 +148,36 @@ describe('::ProductMapping', () => {
               ],
             },
             {
+              name: 'setLenumsEmpty',
+              value: [
+                {
+                  key: 'myLenums',
+                  label: {
+                    en: 'myLenums-en',
+                    // es is missing - will be an empty string in output
+
+                    de: 'myLenums-de',
+                  },
+                },
+                {
+                  key: 'myLenums2',
+                  label: {
+                    en: 'myLenums-en2',
+                    // es is missing - will be an empty string in output
+                    de: 'myLenums-de2',
+                  },
+                },
+                {
+                  key: 'myLenums3',
+                  label: {
+                    en: 'myLenums-en3',
+                    es: 'myLenums-es3',
+                    de: 'myLenums-de3',
+                  },
+                },
+              ],
+            },
+            {
               name: 'setEnums',
               value: [
                 {
