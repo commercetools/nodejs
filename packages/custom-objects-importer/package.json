@@ -1,6 +1,6 @@
 {
     "name": "@commercetools/custom-objects-importer",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Import custom objects to the commercetools platform",
     "main": "lib/main.js",
     "scripts": {
