@@ -12,6 +12,7 @@ Our CLI tools perform various functions from importing and exporting to syncing 
 * [CSV State Parser](/cli/csv-parser-state.md)
 * [Custom Objects Exporter](/cli/custom-objects-exporter.md)
 * [Custom Objects Importer](/cli/custom-objects-importer.md)
+* [Customer Groups Exporter](/cli/customer-groups-exporter.md)
 * [Personal Data Erasure](/cli/personal-data-erasure.md)
 * [Discount Code Generator](/cli/discount-code-generator.md)
 * [Discount Code Exporter](/cli/discount-code-exporter.md)

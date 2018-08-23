@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomerGroupsExporter ::buildRequest should build request 1`] = `
+Object {
+  "method": "GET",
+  "uri": "/test-project-key/customer-groups",
+}
+`;
+
+exports[`CustomerGroupsExporter ::buildUri should build default uri 1`] = `"/test-project-key/customer-groups"`;
+
+exports[`CustomerGroupsExporter ::buildUri should build where/predicate uri 1`] = `"/test-project-key/customer-groups?where=key%3DcopperKey"`;
+
+exports[`CustomerGroupsExporter ::constructor should throw error if no \`apiConfig\` in \`options\` parameter 1`] = `"The constructor must be passed an \`apiConfig\` object"`;
+
+exports[`CustomerGroupsExporter ::run should write to outputStream 1`] = `
+"[
+{\\"foo1\\":\\"bar1\\",\\"key\\":\\"copperKey\\"}
+,
+{\\"foo2\\":\\"bar2\\"}
+]
+"
+`;
