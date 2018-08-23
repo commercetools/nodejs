@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Custom Objects Exporter CLI basic functionality should print usage information given the help flag 1`] = `
+exports[`Customer Groups Exporter CLI basic functionality should print usage information given the help flag 1`] = `
 "
-Usage: custom-objects-exporter [options]
-Export custom objects from the commercetools platform
+Usage: customer-groups-exporter [options]
+Export customer groups from the commercetools platform
 
 Options:
   --help            Show help text.                                    [boolean]
@@ -19,7 +19,7 @@ Options:
   --logLevel        Logging level: error, warn, info or debug. [default: \\"info\\"]
   --prettyLogs      Pretty print logs to the terminal                  [boolean]
   --logFile         Path to where to save logs file.
-                                 [string] [default: \\"custom-objects-export.log\\"]
+                                [string] [default: \\"customer-groups-export.log\\"]
 
 "
 `;

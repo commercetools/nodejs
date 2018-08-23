@@ -10,6 +10,7 @@
     "@commercetools/csv-parser-state": "*",
     "@commercetools/custom-objects-exporter": "*",
     "@commercetools/custom-objects-importer": "*",
+    "@commercetools/customer-groups-exporter": "*",
     "@commercetools/discount-code-exporter": "*",
     "@commercetools/discount-code-generator": "*",
     "@commercetools/discount-code-importer": "*",

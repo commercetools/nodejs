@@ -2,17 +2,17 @@ import fs from 'mz/fs'
 import tmp from 'tmp'
 import { getCredentials } from '@commercetools/get-credentials'
 import { exec } from 'mz/child_process'
-import { version } from '@commercetools/custom-objects-exporter/package.json'
-import customObjects from './helpers/custom-objects-export.data'
+import { version } from '@commercetools/customer-groups-exporter/package.json'
+import customerGroups from './helpers/customer-groups-export.data'
 import { createData, clearData } from './helpers/utils'
 
 let projectKey
-if (process.env.CI === 'true') projectKey = 'custom-objects-export-int-test'
+if (process.env.CI === 'true') projectKey = 'customer-groups-export-int-test'
 else projectKey = process.env.npm_config_projectkey
 
-describe('Custom Objects Exporter', () => {
+describe('Customer Groups Exporter', () => {
   let apiConfig
-  const bin = './integration-tests/node_modules/.bin/custom-objects-exporter'
+  const bin = './integration-tests/node_modules/.bin/customer-groups-exporter'
 
   beforeAll(async () => {
     const credentials = await getCredentials(projectKey)
@@ -22,13 +22,13 @@ describe('Custom Objects Exporter', () => {
       projectKey,
       credentials,
     }
-    await clearData(apiConfig, 'customObjects')
+    await clearData(apiConfig, 'customerGroups')
 
-    await createData(apiConfig, 'customObjects', customObjects)
+    await createData(apiConfig, 'customerGroups', customerGroups)
   }, 30000)
 
   afterAll(async () => {
-    await clearData(apiConfig, 'customObjects')
+    await clearData(apiConfig, 'customerGroups')
   })
 
   describe('CLI basic functionality', () => {
@@ -61,7 +61,7 @@ describe('Custom Objects Exporter', () => {
       expect(stdout).toMatch(/Export operation completed successfully/)
     })
     it(
-      'should export custom objects from CTP',
+      'should export customer groups from CTP',
       async () => {
         const data = await fs.readFile(filePath, { encoding: 'utf8' })
         const actual = JSON.parse(data)
@@ -69,10 +69,16 @@ describe('Custom Objects Exporter', () => {
         expect(actual).toBeInstanceOf(Array)
         expect(actual).toHaveLength(3)
 
-        // Assert that the 3 created custom objects are the objects returned
-        expect(actual).toContainEqual(expect.objectContaining(customObjects[0]))
-        expect(actual).toContainEqual(expect.objectContaining(customObjects[1]))
-        expect(actual).toContainEqual(expect.objectContaining(customObjects[2]))
+        // Assert that the 3 created customer groups are the objects returned
+        // `groupName` is only used during creating, `name` is the key returned after that.
+        const returnGroups = customerGroups.map(group => {
+          const { groupName, ...withoutGroupName } = group
+          return { ...withoutGroupName, name: groupName }
+        })
+
+        expect(actual).toContainEqual(expect.objectContaining(returnGroups[0]))
+        expect(actual).toContainEqual(expect.objectContaining(returnGroups[1]))
+        expect(actual).toContainEqual(expect.objectContaining(returnGroups[2]))
       },
       15000
     )
