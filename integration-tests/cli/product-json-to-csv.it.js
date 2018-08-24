@@ -12,6 +12,7 @@ import {
   sampleTaxCategory,
   sampleParentCategory,
   sampleCategory,
+  samplePriceChannel,
   createProducts,
 } from './helpers/product-json2csv.data'
 import { createData, clearData } from './helpers/utils'
@@ -20,6 +21,18 @@ let projectKey
 if (process.env.CI === 'true')
   projectKey = 'product-json2csv-integration-test-26'
 else projectKey = process.env.npm_config_projectkey
+
+async function cleanup (apiConfig) {
+  // Clear all data
+  await clearData(apiConfig, 'products')
+  await Promise.all([
+    clearData(apiConfig, 'productTypes'),
+    clearData(apiConfig, 'categories'),
+    clearData(apiConfig, 'states'),
+    clearData(apiConfig, 'taxCategories'),
+    clearData(apiConfig, 'channels'),
+  ])
+}
 
 describe('CSV and CLI Tests', () => {
   let apiConfig
@@ -34,15 +47,7 @@ describe('CSV and CLI Tests', () => {
       credentials,
     }
 
-    // Clear all data
-    await clearData(apiConfig, 'products')
-
-    await Promise.all([
-      clearData(apiConfig, 'productTypes'),
-      clearData(apiConfig, 'categories'),
-      clearData(apiConfig, 'states'),
-      clearData(apiConfig, 'taxCategories'),
-    ])
+    await cleanup(apiConfig)
 
     // Create data on API
     await createData(apiConfig, 'productTypes', [
@@ -53,6 +58,7 @@ describe('CSV and CLI Tests', () => {
     await createData(apiConfig, 'categories', [sampleParentCategory])
     await createData(apiConfig, 'categories', [sampleCategory])
 
+    const priceChannel = await createData(apiConfig, 'channels', [samplePriceChannel])
     const state = await createData(apiConfig, 'states', [sampleState])
     const taxCategory = await createData(apiConfig, 'taxCategories', [
       sampleTaxCategory,
@@ -68,18 +74,15 @@ describe('CSV and CLI Tests', () => {
     }
 
     const sampleProducts = createProducts(stateRef, taxCategoryRef)
-    await createData(apiConfig, 'products', sampleProducts)
+    sampleProducts[0].masterVariant.prices[0].channel = {
+      typeId: 'channel',
+      id: priceChannel[0].body.id,
+    }
+
+    const res = await createData(apiConfig, 'products', sampleProducts)
   }, 20000)
 
-  afterAll(async () => {
-    await clearData(apiConfig, 'products')
-    await Promise.all([
-      clearData(apiConfig, 'productTypes'),
-      clearData(apiConfig, 'categories'),
-      clearData(apiConfig, 'states'),
-      clearData(apiConfig, 'taxCategories'),
-    ])
-  })
+  afterAll(() => cleanup(apiConfig))
 
   describe('CLI basic functionality', () => {
     it('should print usage information given the help flag', async () => {

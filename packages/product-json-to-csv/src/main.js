@@ -205,6 +205,8 @@ export default class ProductJsonToCsv {
       .map((price: Price) => get(price, 'channel.id'))
       .filter(Boolean)
 
+    if (!channelIds.length) return prices
+
     // resolve channels by their ids
     const channelsById: Object = await this._getChannelsById(channelIds)
     // add channel objects to prices
