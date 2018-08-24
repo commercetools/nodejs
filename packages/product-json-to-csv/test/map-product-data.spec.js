@@ -70,6 +70,28 @@ describe('::ProductMapping', () => {
         masterVariant: {
           id: 1,
           sku: 'A0E200000001YKI',
+          prices: [
+            {
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 6400,
+                fractionDigits: 2,
+              },
+              id: '1f7ecb38-89b6-426e-988c-11bda90456cb',
+              country: 'DE',
+            },
+            {
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 2900,
+                fractionDigits: 2,
+              },
+              id: '7ecffab3-f980-4709-be01-04b5f0aa39eb',
+              country: 'IT',
+            },
+          ],
           images: [
             {
               url: 'https://example.com/foobar/commer.jpg',
@@ -87,10 +109,43 @@ describe('::ProductMapping', () => {
               label: 'image-label',
             },
           ],
+          availability: {
+            isOnStock: true,
+            availableQuantity: 10,
+          },
           attributes: [
             {
               name: 'article',
               value: 'sample 089 WHT',
+            },
+            {
+              name: 'reference',
+              value: {
+                id: 'uuid',
+                typeId: 'product',
+                obj: {
+                  key: 'referenceKey',
+                },
+              },
+            },
+            {
+              name: 'referenceSet',
+              value: [
+                {
+                  id: 'uuid',
+                  typeId: 'product',
+                  obj: {
+                    key: 'referenceSetKey',
+                  },
+                },
+                {
+                  id: 'uuid2',
+                  typeId: 'product',
+                  obj: {
+                    key: 'referenceSetKey2',
+                  },
+                },
+              ],
             },
             {
               name: 'setLenums',
@@ -102,6 +157,86 @@ describe('::ProductMapping', () => {
                     es: 'myLenums-es',
                     de: 'myLenums-de',
                   },
+                },
+                {
+                  key: 'myLenums2',
+                  label: {
+                    en: 'myLenums-en2',
+                    // es is missing - will be an empty string in output
+                    de: 'myLenums-de2',
+                  },
+                },
+                {
+                  key: 'myLenums3',
+                  label: {
+                    en: 'myLenums-en3',
+                    es: 'myLenums-es3',
+                    de: 'myLenums-de3',
+                  },
+                },
+              ],
+            },
+            {
+              name: 'setLenumsEmpty',
+              value: [
+                {
+                  key: 'myLenums',
+                  label: {
+                    en: 'myLenums-en',
+                    // es is missing - will be an empty string in output
+
+                    de: 'myLenums-de',
+                  },
+                },
+                {
+                  key: 'myLenums2',
+                  label: {
+                    en: 'myLenums-en2',
+                    // es is missing - will be an empty string in output
+                    de: 'myLenums-de2',
+                  },
+                },
+                {
+                  key: 'myLenums3',
+                  label: {
+                    en: 'myLenums-en3',
+                    es: 'myLenums-es3',
+                    de: 'myLenums-de3',
+                  },
+                },
+              ],
+            },
+            {
+              name: 'setEnums',
+              value: [
+                {
+                  key: 'myEnum',
+                  label: 'myEnumLabel',
+                },
+                {
+                  key: 'myEnum2',
+                  label: 'myEnumLabel2',
+                },
+              ],
+            },
+            {
+              name: 'emptySet',
+              value: [],
+            },
+            {
+              name: 'setText',
+              value: ['text1', 'text2'],
+            },
+            {
+              name: 'setLText',
+              value: [
+                {
+                  en: 'enText1',
+                  de: 'deText1',
+                },
+                {
+                  en: 'enText2',
+                  de: 'deText2',
                 },
               ],
             },
@@ -281,7 +416,7 @@ describe('::ProductMapping', () => {
     })
   })
 
-  describe('::mapProperties', () => {
+  describe('::_mapProduct', () => {
     test('replaces resolved objects with strings', () => {
       const sample = {
         id: '12345ab-id',
@@ -366,7 +501,7 @@ describe('::ProductMapping', () => {
         createdAt: '2017-01-06T10:54:51.395Z',
         lastModifiedAt: '2017-01-06T10:54:51.395Z',
       }
-      expect(productMapping._mapProperties(sample)).toEqual(expected)
+      expect(productMapping._mapProduct(sample)).toEqual(expected)
     })
 
     test('add all attributes from productType to top level', () => {
@@ -431,20 +566,24 @@ describe('::ProductMapping', () => {
         variant: {
           id: 1,
           sku: 'A0E200000001YKI',
+          attributes: {
+            article: 'sample 089 WHT',
+            designer: 'michaelkors',
+            color: 'white',
+            'color.de': 'weiss',
+            'color.en': 'white',
+            'color.it': 'blanco',
+            colorFreeDefinition: 'black-white',
+            'colorFreeDefinition.en': 'black-white',
+            'colorFreeDefinition.de': 'schwarz-weiß',
+            addedAttr: '',
+            anotherAddedAttr: '',
+          },
         },
-        article: 'sample 089 WHT',
-        designer: 'michaelkors',
-        color: 'white',
-        colorFreeDefinition: {
-          en: 'black-white',
-          de: 'schwarz-weiß',
-        },
-        addedAttr: '',
-        anotherAddedAttr: '',
         state: 'my-resolved-state',
         hasStagedChanges: false,
       }
-      expect(productMapping._mapProperties(sample)).toEqual(expected)
+      expect(productMapping._mapProduct(sample)).toEqual(expected)
     })
 
     test('converts variant image array to strings', () => {
@@ -477,7 +616,7 @@ describe('::ProductMapping', () => {
         },
         hasStagedChanges: false,
       }
-      expect(productMapping._mapProperties(sample)).toMatchSnapshot()
+      expect(productMapping._mapProduct(sample)).toMatchSnapshot()
     })
   })
 
@@ -598,6 +737,83 @@ describe('::ProductMapping', () => {
       expect(ProductMapping._mapCategories(sampleCat, ...options)).toBe(
         expected
       )
+    })
+  })
+
+  describe('::mapPriceToString', () => {
+    test('map a simple price', () => {
+      const samplePrice = {
+        value: {
+          type: 'centPrecision',
+          currencyCode: 'USD',
+          centAmount: 1230,
+          fractionDigits: 2,
+        },
+        country: 'US',
+      }
+
+      const expected = 'US-USD 1230'
+      expect(ProductMapping._mapPriceToString(samplePrice)).toBe(expected)
+    })
+
+    test('map a price with a channel', () => {
+      const samplePrice = {
+        value: {
+          type: 'centPrecision',
+          currencyCode: 'USD',
+          centAmount: 1230,
+          fractionDigits: 2,
+        },
+        country: 'US',
+        channel: {
+          typeId: 'channel',
+          id: '60e97855-d60f-4808-8399-385d67f922e1',
+          key: 'priceChannelKey',
+        },
+      }
+
+      const expected = 'US-USD 1230#priceChannelKey'
+      expect(ProductMapping._mapPriceToString(samplePrice)).toBe(expected)
+    })
+
+    test('map a price with a discount', () => {
+      const samplePrice = {
+        value: {
+          type: 'centPrecision',
+          currencyCode: 'USD',
+          centAmount: 1230,
+          fractionDigits: 2,
+        },
+        country: 'US',
+        discounted: {
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 4495,
+            fractionDigits: 2,
+          },
+        },
+      }
+
+      const expected = 'US-USD 1230|4495'
+      expect(ProductMapping._mapPriceToString(samplePrice)).toBe(expected)
+    })
+
+    test('map a price with valid period', () => {
+      const samplePrice = {
+        value: {
+          type: 'centPrecision',
+          currencyCode: 'USD',
+          centAmount: 1230,
+          fractionDigits: 2,
+        },
+        country: 'US',
+        validFrom: 'validFrom',
+        validUntil: 'validUntil',
+      }
+
+      const expected = 'US-USD 1230$validFrom~validUntil'
+      expect(ProductMapping._mapPriceToString(samplePrice)).toBe(expected)
     })
   })
 })

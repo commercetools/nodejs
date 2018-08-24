@@ -77,6 +77,17 @@ export const sampleCategory = {
   parent: { typeId: 'category', key: 'parentCatKey' },
 }
 
+export const samplePriceChannel = {
+  key: 'priceChannel',
+  roles: [
+    'ProductDistribution',
+    'Primary',
+  ],
+  name: {
+    en: 'priceChannel',
+  },
+}
+
 export const createProducts = (state, taxCategory) => [
   {
     key: 'productKey-1',
@@ -111,6 +122,13 @@ export const createProducts = (state, taxCategory) => [
       sku: 'M00FCKV',
       key: 'master-var-1',
       attributes: [{ name: 'text-attribute', value: 'Master Var attr' }],
+      prices: [{
+        value: {
+          currencyCode: 'USD',
+          centAmount: 2233,
+        },
+        country: 'US',
+      }]
     },
     variants: [
       {

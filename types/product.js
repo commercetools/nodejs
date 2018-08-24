@@ -44,6 +44,8 @@ export type ExportConfigOptions = {
 export type TypeReference = {
   typeId: string,
   id: string,
+  key?: string,
+  name?: string,
 }
 
 type CustomField = {
@@ -62,9 +64,9 @@ export type Image = {
   label?: string,
 }
 
-type Attribute = {
+export type Attribute = {
   name: string,
-  value: Object,
+  value: any,
 }
 
 type AssetSource = {
@@ -98,7 +100,7 @@ type PriceTier = {
   value: Money,
 }
 
-type Price = {
+export type Price = {
   id: string,
   value: Money,
   country?: string,
@@ -109,6 +111,14 @@ type Price = {
   tiers?: Array<PriceTier>,
   discounted?: DiscountedPrice,
   custom?: CustomField,
+}
+
+export type Channel = {
+  id: string,
+  version?: number,
+  key: string,
+  name: Object,
+  description: Object
 }
 
 type ScopedPrice = {
@@ -135,11 +145,10 @@ export type Variant = {
   id: number,
   sku?: string,
   key?: string,
-  prices: Array<?Price>,
+  prices: Array<Price>,
   images: Array<Image>,
   attributes: Array<?Attribute>,
   assets: Array<?Asset>,
-  price?: Price,
   availability?: ProductVariantAvailability,
   isMatchingVariant?: boolean,
   scopedPrice?: ScopedPrice,
@@ -207,7 +216,7 @@ export type Category = {
   createdAt: string,
   lastModifiedAt: string,
   name: Object,
-  slug?: Object,
+  slug: Object,
   description?: Object,
   ancestors?: Array<?Category> | Array<?TypeReference>,
   parent?: Category | TypeReference,
@@ -334,6 +343,7 @@ export type MappedProduct = {
   state?: string,
   taxCategory?: string,
   reviewRatingStatistics?: Object,
+  prices?: string,
 }
 
 type ProcessFnResponseBody = {
