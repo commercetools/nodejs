@@ -42,6 +42,8 @@ Array [
     "prices": "DE-EUR 6400;IT-EUR 2900",
     "productType": "resolved-product-type",
     "published": false,
+    "reference": "referenceKey",
+    "referenceSet": "referenceSetKey;referenceSetKey2",
     "setEnums": "myEnum;myEnum2",
     "setLText": "enText1;enText2",
     "setLText.de": "deText1;deText2",

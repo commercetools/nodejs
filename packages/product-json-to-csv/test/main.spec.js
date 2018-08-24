@@ -394,6 +394,112 @@ describe('ProductJsonToCsv', () => {
       })
     })
 
+    describe('::_resolveVariantReferences', () => {
+      beforeEach(() => {
+        productJsonToCsv.fetchReferences = jest.fn(() =>
+          Promise.resolve({
+            body: {
+              results: [
+                {
+                  id: 'uuid',
+                  name: 'resolved-name',
+                  key: 'resolved-key',
+                },
+              ],
+            },
+          })
+        )
+      })
+
+      test('return undefined if variant is not defined', async () => {
+        expect(await productJsonToCsv._resolveVariantReferences()).toEqual(
+          undefined
+        )
+      })
+
+      test('resolve a simple variant', async () => {
+        const sampleVariant = {
+          key: 'variantKey',
+          attributes: [],
+        }
+        expect(
+          await productJsonToCsv._resolveVariantReferences(sampleVariant)
+        ).toEqual({
+          key: 'variantKey',
+          attributes: [],
+          prices: [],
+        })
+      })
+
+      test('resolve variant with prices', async () => {
+        const sampleVariant = {
+          key: 'variantKey',
+          prices: [
+            {
+              value: {
+                currencyCode: 'EUR',
+                centAmount: 4995,
+              },
+            },
+          ],
+          attributes: [],
+        }
+        expect(
+          await productJsonToCsv._resolveVariantReferences(sampleVariant)
+        ).toEqual({
+          key: 'variantKey',
+          attributes: [],
+          prices: [
+            {
+              value: {
+                currencyCode: 'EUR',
+                centAmount: 4995,
+              },
+            },
+          ],
+        })
+      })
+
+      test('resolve variant with prices with channels', async () => {
+        const sampleVariant = {
+          key: 'variantKey',
+          prices: [
+            {
+              value: {
+                currencyCode: 'EUR',
+                centAmount: 4995,
+              },
+              channel: {
+                typeId: 'channel',
+                id: 'uuid',
+              },
+            },
+          ],
+          attributes: [],
+        }
+
+        expect(
+          await productJsonToCsv._resolveVariantReferences(sampleVariant)
+        ).toEqual({
+          key: 'variantKey',
+          attributes: [],
+          prices: [
+            {
+              value: {
+                currencyCode: 'EUR',
+                centAmount: 4995,
+              },
+              channel: {
+                id: 'uuid',
+                name: 'resolved-name',
+                key: 'resolved-key',
+              },
+            },
+          ],
+        })
+      })
+    })
+
     describe('::_resolveTaxCategory', () => {
       beforeEach(() => {
         productJsonToCsv.fetchReferences = jest.fn(() =>

@@ -204,28 +204,6 @@ export default class ProductMapping {
     return { ...mappedAttribute, ...labels }
   }
 
-  _mapLabelsToAllAttributes(name: string, labels: Array<Object>): Object {
-    const mappedValues: Object = {}
-    const languages: Array<string> = labels
-      .map(Object.keys) // returns array of arrays with language keys
-      // flatten subarrays to one big array
-      .reduce((all, langKeys) => {
-        all.push(...langKeys)
-        return all
-      }, [])
-      // filter out duplicates
-      .filter((value, index, self) => self.indexOf(value) === index)
-
-    languages.forEach(lang => {
-      const headerKey: string = `${name}.${lang}`
-      mappedValues[headerKey] = labels
-        .map(label => label[lang] || '')
-        .join(this.multiValDel)
-    })
-
-    return mappedValues
-  }
-
   /**
    * Method will concatenate all objects in array to one single object.
    * Example input and output:

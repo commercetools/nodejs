@@ -119,6 +119,35 @@ describe('::ProductMapping', () => {
               value: 'sample 089 WHT',
             },
             {
+              name: 'reference',
+              value: {
+                id: 'uuid',
+                typeId: 'product',
+                obj: {
+                  key: 'referenceKey',
+                },
+              },
+            },
+            {
+              name: 'referenceSet',
+              value: [
+                {
+                  id: 'uuid',
+                  typeId: 'product',
+                  obj: {
+                    key: 'referenceSetKey',
+                  },
+                },
+                {
+                  id: 'uuid2',
+                  typeId: 'product',
+                  obj: {
+                    key: 'referenceSetKey2',
+                  },
+                },
+              ],
+            },
+            {
               name: 'setLenums',
               value: [
                 {
@@ -708,6 +737,83 @@ describe('::ProductMapping', () => {
       expect(ProductMapping._mapCategories(sampleCat, ...options)).toBe(
         expected
       )
+    })
+  })
+
+  describe('::mapPriceToString', () => {
+    test('map a simple price', () => {
+      const samplePrice = {
+        value: {
+          type: 'centPrecision',
+          currencyCode: 'USD',
+          centAmount: 1230,
+          fractionDigits: 2,
+        },
+        country: 'US',
+      }
+
+      const expected = 'US-USD 1230'
+      expect(ProductMapping._mapPriceToString(samplePrice)).toBe(expected)
+    })
+
+    test('map a price with a channel', () => {
+      const samplePrice = {
+        value: {
+          type: 'centPrecision',
+          currencyCode: 'USD',
+          centAmount: 1230,
+          fractionDigits: 2,
+        },
+        country: 'US',
+        channel: {
+          typeId: 'channel',
+          id: '60e97855-d60f-4808-8399-385d67f922e1',
+          key: 'priceChannelKey',
+        },
+      }
+
+      const expected = 'US-USD 1230#priceChannelKey'
+      expect(ProductMapping._mapPriceToString(samplePrice)).toBe(expected)
+    })
+
+    test('map a price with a discount', () => {
+      const samplePrice = {
+        value: {
+          type: 'centPrecision',
+          currencyCode: 'USD',
+          centAmount: 1230,
+          fractionDigits: 2,
+        },
+        country: 'US',
+        discounted: {
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 4495,
+            fractionDigits: 2,
+          },
+        },
+      }
+
+      const expected = 'US-USD 1230|4495'
+      expect(ProductMapping._mapPriceToString(samplePrice)).toBe(expected)
+    })
+
+    test('map a price with valid period', () => {
+      const samplePrice = {
+        value: {
+          type: 'centPrecision',
+          currencyCode: 'USD',
+          centAmount: 1230,
+          fractionDigits: 2,
+        },
+        country: 'US',
+        validFrom: 'validFrom',
+        validUntil: 'validUntil',
+      }
+
+      const expected = 'US-USD 1230$validFrom~validUntil'
+      expect(ProductMapping._mapPriceToString(samplePrice)).toBe(expected)
     })
   })
 })
