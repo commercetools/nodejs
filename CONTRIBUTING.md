@@ -31,9 +31,9 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 
 5.  Integration tests are separated out in another folder "/integration-tests". To run the integration test, you need to export the environment variables into the process env by doing the following :-
 
-    * Export `npm_config_projectkey` = `projectKey`,
-    * Export `CT_PROJECT_KEY`=`CLIENT_ID`:`CLIENT_SECRET` as specified [here](https://commercetools.github.io/nodejs/sdk/api/getCredentials.html).
-    * Then run integration test with `npm run test:integration`
+    - Export `npm_config_projectkey` = `projectKey`,
+    - Export `CT_PROJECT_KEY`=`CLIENT_ID`:`CLIENT_SECRET` as specified [here](https://commercetools.github.io/nodejs/sdk/api/getCredentials.html).
+    - Then run integration test with `npm run test:integration`
 
 **Note: Due to the setup/teardown nature of the integration tests, there is the risk of potential data loss in your project**
 
@@ -82,9 +82,9 @@ Make sure your commit messages follow [Angular's commit message format](https://
 
 Based on the semantic release conventions, there are 3 triggers to control the semver version plus a trigger for releasing the actual packages.
 
-* `fix` _(commit type)_: commits with this type will [bump a `patch` version](https://github.com/semantic-release/semantic-release#patch-release)
-* `feat` _(commit type)_: commits with this type will [bump a `minor` version](https://github.com/semantic-release/semantic-release#minor-feature-release)
-* `BREAKING CHANGE` _(commit description)_: commits with this keywords in the description will [bump a `major` version](https://github.com/semantic-release/semantic-release#major-breaking-release)
+- `fix` _(commit type)_: commits with this type will [bump a `patch` version](https://github.com/semantic-release/semantic-release#patch-release)
+- `feat` _(commit type)_: commits with this type will [bump a `minor` version](https://github.com/semantic-release/semantic-release#minor-feature-release)
+- `BREAKING CHANGE` _(commit description)_: commits with this keywords in the description will [bump a `major` version](https://github.com/semantic-release/semantic-release#major-breaking-release)
 
 #### Merging Pull Requests
 

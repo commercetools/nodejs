@@ -63,7 +63,7 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 2.  `projectKey` _(String)_: the key of the project to assign the default scope to
 3.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`, `user`)
 
-* The `user` field is an object containing `username` and `password`. [Sample below](#usage-example-1)
+- The `user` field is an object containing `username` and `password`. [Sample below](#usage-example-1)
 
 4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) to assign to the OAuth token. _No default scope is sent_
 5.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)

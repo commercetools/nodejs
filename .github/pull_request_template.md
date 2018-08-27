@@ -8,9 +8,9 @@
 
 #### Todo
 
-* Tests
-  * [ ] Unit
-  * [ ] Integration
-  * [ ] Acceptance
-* [ ] Documentation
+- Tests
+  - [ ] Unit
+  - [ ] Integration
+  - [ ] Acceptance
+- [ ] Documentation
   <!-- Two persons should review a PR, don't forget to assign them. -->

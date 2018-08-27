@@ -51,8 +51,8 @@ Options:
 
 The products to be parsed from JSON to CSV can be passed to this module in one of two ways:
 
-* From a pipe
-* From a file
+- From a pipe
+- From a file
 
 #### Pass products through a pipe
 
@@ -107,17 +107,17 @@ For more direct usage, it is possible to use this module directly
 
 The constructor accepts four arguments:
 
-* `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
-* `parserConfig` (Object): Internal Parse configurations
-  * `categoryBy` (String): Specify which identifier should be used to reference the categories (Options: `name`, `key`, `externalId` and `namedPath`. Default: `name`)
-  * `categoryOrderHintBy` (String): Specify which identifier should be used to reference the categoryOrderHints (Options: `name`, `key`, `externalId` and `namedPath`. Default: `name`)
-  * `delimiter` (String): Delimiter used to separate cells in the output file (Default: `;`)
-  * `fillAllRows` (Boolean): Specify if product attributes like name should be added to each variant row (Default: `false`)
-  * `headerFields` (Array<String>): An array of header fields to be passed to CSV. This headerFields array should contain the required columns of the CSV file(Optional. If omitted, a `.zip` file containing one csv file per product type will be created. This is synonymous with the `--template` flag in the CLI)
-  * `language` (String): Default language used in resolving localised attributes (except lenums) and category names (Default: `en`)
-* `multiValueDelimiter` (String): Delimiter used to separate multivalue items in cells in the output file (Default: `;`)
-* An optional logger object having four methods (`info`, `warn`, `error` and `debug`)
-* `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_products`, `view_customers`]
+- `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+- `parserConfig` (Object): Internal Parse configurations
+  - `categoryBy` (String): Specify which identifier should be used to reference the categories (Options: `name`, `key`, `externalId` and `namedPath`. Default: `name`)
+  - `categoryOrderHintBy` (String): Specify which identifier should be used to reference the categoryOrderHints (Options: `name`, `key`, `externalId` and `namedPath`. Default: `name`)
+  - `delimiter` (String): Delimiter used to separate cells in the output file (Default: `;`)
+  - `fillAllRows` (Boolean): Specify if product attributes like name should be added to each variant row (Default: `false`)
+  - `headerFields` (Array<String>): An array of header fields to be passed to CSV. This headerFields array should contain the required columns of the CSV file(Optional. If omitted, a `.zip` file containing one csv file per product type will be created. This is synonymous with the `--template` flag in the CLI)
+  - `language` (String): Default language used in resolving localised attributes (except lenums) and category names (Default: `en`)
+- `multiValueDelimiter` (String): Delimiter used to separate multivalue items in cells in the output file (Default: `;`)
+- An optional logger object having four methods (`info`, `warn`, `error` and `debug`)
+- `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_products`, `view_customers`]
 
 #### Example
 

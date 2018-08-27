@@ -62,7 +62,7 @@ type Client = {
 
 A _Client_ is an object that contains functions to work with HTTP requests.
 
-* `execute(request)` is the main function to use for doing HTTP requests, using the provided middlewares.
+- `execute(request)` is the main function to use for doing HTTP requests, using the provided middlewares.
 
 ### ClientResult
 

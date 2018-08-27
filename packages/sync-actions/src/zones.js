@@ -27,14 +27,18 @@ function createZonesMapActions(
   ): Array<UpdateAction> {
     const allActions = []
     allActions.push(
-      mapActionGroup('base', (): Array<UpdateAction> =>
-        zonesActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
+      mapActionGroup(
+        'base',
+        (): Array<UpdateAction> =>
+          zonesActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
       )
     )
     allActions.push(
       flatten(
-        mapActionGroup('locations', (): Array<UpdateAction> =>
-          zonesActions.actionsMapLocations(diff, oldObj, newObj)
+        mapActionGroup(
+          'locations',
+          (): Array<UpdateAction> =>
+            zonesActions.actionsMapLocations(diff, oldObj, newObj)
         )
       )
     )

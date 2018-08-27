@@ -27,18 +27,22 @@ function createTaxCategoriesMapActions(
   ): Array<UpdateAction> {
     const allActions = []
     allActions.push(
-      mapActionGroup('base', (): Array<UpdateAction> =>
-        taxCategoriesActions.actionsMapBase(
-          diff,
-          oldObj,
-          newObj,
-          syncActionConfig
-        )
+      mapActionGroup(
+        'base',
+        (): Array<UpdateAction> =>
+          taxCategoriesActions.actionsMapBase(
+            diff,
+            oldObj,
+            newObj,
+            syncActionConfig
+          )
       )
     )
     allActions.push(
-      mapActionGroup('rates', (): Array<UpdateAction> =>
-        taxCategoriesActions.actionsMapRates(diff, oldObj, newObj)
+      mapActionGroup(
+        'rates',
+        (): Array<UpdateAction> =>
+          taxCategoriesActions.actionsMapRates(diff, oldObj, newObj)
       )
     )
     return flatten(allActions)

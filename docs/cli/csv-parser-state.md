@@ -39,16 +39,16 @@ Options:
 
 #### Info on flags
 
-* The `--projectKey` is only required if states have a `transitions` field containing one or more states that need to be resolved, otherwise it can be omitted. More info in the **Examples** below
-* The `--input` flag specifies the path to the states CSV file. If this flag is omitted, the module will attempt to read the data from the `standard input`.
-* The `--output` flag specifies where to output/save the parsed states as JSON file. Several notes on this flag:
-  * If the file specified already exists, it will be overwritten.
-  * If no output path is specified, the parsed states will be written to the standard output. As a result, status reports will be logged to a `csv-parser-state.log` file in the current directory.
-* The `--delimiter` flag specifies the delimiter used in the input file. Defaults to `','` if omitted.
-* The `--multiValueDelimiter` flag specifies the delimiter for multiValue cells in CSV. Note that only the `transitions` and `roles` fields if present should contain multiple values. Defaults to `';'` if omitted.
-* The `--continueOnProblems` flag specifies if the module should continue parsing states if it encounters an error. Defaults to `false` if omitted.
-  * If the module should continue on error, all errors are logged to the logging location (see above).
-  * If the module should not continue on error, the failing error is written to the `stderr`, regardless of the output and logging locations
+- The `--projectKey` is only required if states have a `transitions` field containing one or more states that need to be resolved, otherwise it can be omitted. More info in the **Examples** below
+- The `--input` flag specifies the path to the states CSV file. If this flag is omitted, the module will attempt to read the data from the `standard input`.
+- The `--output` flag specifies where to output/save the parsed states as JSON file. Several notes on this flag:
+  - If the file specified already exists, it will be overwritten.
+  - If no output path is specified, the parsed states will be written to the standard output. As a result, status reports will be logged to a `csv-parser-state.log` file in the current directory.
+- The `--delimiter` flag specifies the delimiter used in the input file. Defaults to `','` if omitted.
+- The `--multiValueDelimiter` flag specifies the delimiter for multiValue cells in CSV. Note that only the `transitions` and `roles` fields if present should contain multiple values. Defaults to `';'` if omitted.
+- The `--continueOnProblems` flag specifies if the module should continue parsing states if it encounters an error. Defaults to `false` if omitted.
+  - If the module should continue on error, all errors are logged to the logging location (see above).
+  - If the module should not continue on error, the failing error is written to the `stderr`, regardless of the output and logging locations
 
 ### JS
 
@@ -77,14 +77,14 @@ outputStream
 
 The constructor takes in 2 optional parameters
 
-* A configuration object containing any/all of the following values:
-  * `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (only required if states have a `transitions` field containing one or more states that need to be resolved. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
-  * `csvConfig` (Object): A configuration object for describing the CSV file:
-    * `delimiter` (String): Used delimiter in the CSV (Default: `','`)
-    * `multiValueDelimiter` (String): Used delimiter in multiValue fields in the CSV (Default: `';'`)
-  * `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_orders`]
-  * `continueOnProblems` (Boolean): Option if module should continue on errors (Default: `false`)
-* A logger object having four functions (`info`, `warn`, `error` and `debug`)
+- A configuration object containing any/all of the following values:
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (only required if states have a `transitions` field containing one or more states that need to be resolved. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  - `csvConfig` (Object): A configuration object for describing the CSV file:
+    - `delimiter` (String): Used delimiter in the CSV (Default: `','`)
+    - `multiValueDelimiter` (String): Used delimiter in multiValue fields in the CSV (Default: `';'`)
+  - `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_orders`]
+  - `continueOnProblems` (Boolean): Option if module should continue on errors (Default: `false`)
+- A logger object having four functions (`info`, `warn`, `error` and `debug`)
 
 ### CSV Notes
 

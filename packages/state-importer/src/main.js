@@ -128,18 +128,21 @@ export default class StateImport {
     const existingStatesRequest = StateImport._buildRequest(uri, 'GET')
     return this.client
       .execute(existingStatesRequest)
-      .then(({ body: { results: existingStates } }: Object): Promise<
-        Array<void>
-      > => this._createOrUpdate(states, existingStates))
+      .then(
+        ({ body: { results: existingStates } }: Object): Promise<Array<void>> =>
+          this._createOrUpdate(states, existingStates)
+      )
       .then((): Promise<void> => Promise.resolve())
-      .catch((error: any): Error => {
-        // format error and throw to CLI error handler
-        throw new StateImportError(
-          'Processing batch failed',
-          error.message || error,
-          this._summary
-        )
-      })
+      .catch(
+        (error: any): Error => {
+          // format error and throw to CLI error handler
+          throw new StateImportError(
+            'Processing batch failed',
+            error.message || error,
+            this._summary
+          )
+        }
+      )
   }
 
   _createOrUpdate(
@@ -147,52 +150,62 @@ export default class StateImport {
     existingStates: Array<StateData>
   ): Promise<Array<void>> {
     return Promise.all(
-      newStates.map((newState: StateData): Promise<void> => {
-        const existingState = existingStates.find(
-          (state: StateData): boolean => state.key === newState.key
-        )
-        if (existingState)
-          return this._update(newState, existingState)
-            .then((response: Object): Promise<void> => {
-              if (response && response.statusCode === 304)
-                this._summary.unchanged += 1
-              else this._summary.updated += 1
-              return Promise.resolve()
-            })
-            .catch((error: Error): Promise<void> => {
-              if (this.continueOnProblems) {
-                this._summary.errors.update.push(error.message || error)
-                this.logger.warn(
-                  'Update error occured but ignored. See summary for details'
-                )
+      newStates.map(
+        (newState: StateData): Promise<void> => {
+          const existingState = existingStates.find(
+            (state: StateData): boolean => state.key === newState.key
+          )
+          if (existingState)
+            return this._update(newState, existingState)
+              .then(
+                (response: Object): Promise<void> => {
+                  if (response && response.statusCode === 304)
+                    this._summary.unchanged += 1
+                  else this._summary.updated += 1
+                  return Promise.resolve()
+                }
+              )
+              .catch(
+                (error: Error): Promise<void> => {
+                  if (this.continueOnProblems) {
+                    this._summary.errors.update.push(error.message || error)
+                    this.logger.warn(
+                      'Update error occured but ignored. See summary for details'
+                    )
+                    return Promise.resolve()
+                  }
+                  this.logger.error(
+                    'Process stopped due to error while updating state. See summary for details'
+                  )
+                  this._summary.errors.update.push(error.message || error)
+                  throw error
+                }
+              )
+          return this._create(newState)
+            .then(
+              (): Promise<void> => {
+                this._summary.created += 1
                 return Promise.resolve()
               }
-              this.logger.error(
-                'Process stopped due to error while updating state. See summary for details'
-              )
-              this._summary.errors.update.push(error.message || error)
-              throw error
-            })
-        return this._create(newState)
-          .then((): Promise<void> => {
-            this._summary.created += 1
-            return Promise.resolve()
-          })
-          .catch((error: Error): Promise<void> => {
-            if (this.continueOnProblems) {
-              this._summary.errors.create.push(error.message || error)
-              this.logger.warn(
-                'Create error occured but ignored. See summary for details'
-              )
-              return Promise.resolve()
-            }
-            this.logger.error(
-              'Process stopped due to error while creating discount code. See summary for details'
             )
-            this._summary.errors.create.push(error.message || error)
-            throw error
-          })
-      })
+            .catch(
+              (error: Error): Promise<void> => {
+                if (this.continueOnProblems) {
+                  this._summary.errors.create.push(error.message || error)
+                  this.logger.warn(
+                    'Create error occured but ignored. See summary for details'
+                  )
+                  return Promise.resolve()
+                }
+                this.logger.error(
+                  'Process stopped due to error while creating discount code. See summary for details'
+                )
+                this._summary.errors.create.push(error.message || error)
+                throw error
+              }
+            )
+        }
+      )
     )
   }
 

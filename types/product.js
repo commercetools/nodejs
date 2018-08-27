@@ -118,7 +118,7 @@ export type Channel = {
   version?: number,
   key: string,
   name: Object,
-  description: Object
+  description: Object,
 }
 
 type ScopedPrice = {

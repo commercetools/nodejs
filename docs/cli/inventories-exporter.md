@@ -6,14 +6,14 @@ This package helps in exporting [inventories](https://docs.commercetools.com/htt
 
 The constructor accepts four arguments:
 
-* `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
-* An optional logger object having four methods (`info`, `warn`, `error` and `verbose`)
-* `exportConfig` (Object): Internal Export configurations
-  * `delimiter` (Object): CSV delimiter
-  * `format` (Object): Export format ['csv', 'json'](Default: 'json')
-  * `channelKey` (String): Channel key to use as filter for results to export. Useful if you have channel key but not `id` to build your queryString
-  * `queryString` (String): Predicate to use to filter inventories to export
-* `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_products`]
+- `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+- An optional logger object having four methods (`info`, `warn`, `error` and `verbose`)
+- `exportConfig` (Object): Internal Export configurations
+  - `delimiter` (Object): CSV delimiter
+  - `format` (Object): Export format ['csv', 'json'](Default: 'json')
+  - `channelKey` (String): Channel key to use as filter for results to export. Useful if you have channel key but not `id` to build your queryString
+  - `queryString` (String): Predicate to use to filter inventories to export
+- `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_products`]
 
 ## Usage
 

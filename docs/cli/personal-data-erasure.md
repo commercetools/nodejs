@@ -4,21 +4,21 @@ A package which deletes or exports [commercetools personal data](#list-of-person
 
 ## List of personal data
 
-* [Customer](https://docs.commercetools.com/http-api-projects-customers.html)
-* [Orders](https://docs.commercetools.com/http-api-projects-orders.html)
-* [Carts](https://docs.commercetools.com/http-api-projects-carts.html)
-* [Payments](https://docs.commercetools.com/http-api-projects-payments.html)
-* [ShoppingLists](https://docs.commercetools.com/http-api-projects-shoppingLists.html)
-* [Reviews](https://docs.commercetools.com/http-api-projects-reviews.html)
+- [Customer](https://docs.commercetools.com/http-api-projects-customers.html)
+- [Orders](https://docs.commercetools.com/http-api-projects-orders.html)
+- [Carts](https://docs.commercetools.com/http-api-projects-carts.html)
+- [Payments](https://docs.commercetools.com/http-api-projects-payments.html)
+- [ShoppingLists](https://docs.commercetools.com/http-api-projects-shoppingLists.html)
+- [Reviews](https://docs.commercetools.com/http-api-projects-reviews.html)
 
 ## Configuration
 
 The constructor accepts two arguments:
 
-* A required object containing the following values:
-  * `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
-  * `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`view_products`, `manage_products`, `view_orders`, `manage_orders`, `view_payments`, `manage_payments`, `view_shopping_lists`, `manage_shopping_lists`, `view_customers`, `manage_customers`]. More info on how to get the access token [here](https://docs.commercetools.com/http-api-authorization.html#authorization-flows)
-* An optional logger object having four functions (`info`, `warn`, `error` and `debug`)
+- A required object containing the following values:
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  - `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`view_products`, `manage_products`, `view_orders`, `manage_orders`, `view_payments`, `manage_payments`, `view_shopping_lists`, `manage_shopping_lists`, `view_customers`, `manage_customers`]. More info on how to get the access token [here](https://docs.commercetools.com/http-api-authorization.html#authorization-flows)
+- An optional logger object having four functions (`info`, `warn`, `error` and `debug`)
 
 ## Usage
 
@@ -52,11 +52,11 @@ Options:
 
 #### Info on flags
 
-* The `--deleteAll` flag deletes all information related to the customer and can not be undone.
-* The `--output` flag specifies where to output/save the exported customer data. Several notes on this flag:
-  * If the file specified already exists, it will be overwritten.
-  * The default location for status report logging is the standard output.
-  * If no output path is specified, the exported data will be logged to the standard output as a result, status reports will be logged to a `personal-data-erasure.log` file in the current directory.
+- The `--deleteAll` flag deletes all information related to the customer and can not be undone.
+- The `--output` flag specifies where to output/save the exported customer data. Several notes on this flag:
+  - If the file specified already exists, it will be overwritten.
+  - The default location for status report logging is the standard output.
+  - If no output path is specified, the exported data will be logged to the standard output as a result, status reports will be logged to a `personal-data-erasure.log` file in the current directory.
 
 ### JS
 

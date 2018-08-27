@@ -26,16 +26,16 @@ Options:
 
 #### Info on flags
 
-* The `--quantity` flag represents the number of codes to be generated. It must be a number between 1 and 500000
-* The `--code-length` flag is used to customise the discount codes according to individual use cases. (more info in [Examples](#examples))
-* The `--input` flag specifies the path to a CSV or JSON file containing the options the discount codes should have. If this flag is omitted, discount codes without any attributes will be generated.
-* The `--output` flag specifies where to output/save the generated codes. Several notes on this flag:
-  * The format of the generated output will depend on the format of the file specified here. It must be CSV or JSON as these are the only supported formats.
-  * If the file specified already exists, it will be overwritten.
-  * The default location for status report logging is the standard output.
-  * If no output path is specified, the generated codes will be logged to the standard output as a result, status reports will be logged to a `discountCodeGenerator.log` file
-* The `--delimiter` flag specifies the delimiter used in the input file and/or output file if any or both are CSV. Defaults to `','` if omitted and will be ignored if neither input nor output is CSV
-* The `--multiValueDelimiter` flag specifies the delimiter for multiValue cells in CSV. Note that only the `cartDiscounts` field if present should contain multiple values. Defaults to `';'` if omitted
+- The `--quantity` flag represents the number of codes to be generated. It must be a number between 1 and 500000
+- The `--code-length` flag is used to customise the discount codes according to individual use cases. (more info in [Examples](#examples))
+- The `--input` flag specifies the path to a CSV or JSON file containing the options the discount codes should have. If this flag is omitted, discount codes without any attributes will be generated.
+- The `--output` flag specifies where to output/save the generated codes. Several notes on this flag:
+  - The format of the generated output will depend on the format of the file specified here. It must be CSV or JSON as these are the only supported formats.
+  - If the file specified already exists, it will be overwritten.
+  - The default location for status report logging is the standard output.
+  - If no output path is specified, the generated codes will be logged to the standard output as a result, status reports will be logged to a `discountCodeGenerator.log` file
+- The `--delimiter` flag specifies the delimiter used in the input file and/or output file if any or both are CSV. Defaults to `','` if omitted and will be ignored if neither input nor output is CSV
+- The `--multiValueDelimiter` flag specifies the delimiter for multiValue cells in CSV. Note that only the `cartDiscounts` field if present should contain multiple values. Defaults to `';'` if omitted
 
 ### Examples
 
@@ -200,8 +200,8 @@ The following would be written to the output file:
 
 ##### Additional Info
 
-* The `cartDiscounts` field in the csv should contain only the cart-discount IDs
-* The JSON output option outputs an array of json objects
-* The input and output formats are interchangeable; that means JSON output can be requested with a CSV input and vice versa
-* All fields in the input are optional. However, the file must not be empty.
-* The input option can be left out completely if no code attributes are required
+- The `cartDiscounts` field in the csv should contain only the cart-discount IDs
+- The JSON output option outputs an array of json objects
+- The input and output formats are interchangeable; that means JSON output can be requested with a CSV input and vice versa
+- All fields in the input are optional. However, the file must not be empty.
+- The input option can be left out completely if no code attributes are required

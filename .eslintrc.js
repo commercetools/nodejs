@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path')
 
 module.exports = {
   parser: 'babel-eslint',
@@ -47,6 +47,7 @@ module.exports = {
     'jest/valid-expect': 'error',
     'no-underscore-dangle': 0,
     'prefer-destructuring': 0,
+    'lines-between-class-members': 0,
   },
   settings: {
     flowtype: {

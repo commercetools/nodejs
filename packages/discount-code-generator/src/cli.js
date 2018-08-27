@@ -106,8 +106,7 @@ const resolveInput = _args => {
       resolve(JSON.parse(fs.readFileSync(input)))
     else if (input.match(/\.csv$/i)) {
       const _attributes = []
-      fs
-        .createReadStream(input)
+      fs.createReadStream(input)
         .pipe(
           csv({
             separator: _args.delimiter,

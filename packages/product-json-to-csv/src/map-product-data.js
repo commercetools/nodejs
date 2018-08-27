@@ -96,10 +96,12 @@ export default class ProductMapping {
     fillAllRows: boolean
   ): Array<SingleVarPerProduct> {
     if (fillAllRows)
-      return product.variant.map((eachVariant: Variant): Object => ({
-        ...product,
-        variant: eachVariant,
-      }))
+      return product.variant.map(
+        (eachVariant: Variant): Object => ({
+          ...product,
+          variant: eachVariant,
+        })
+      )
 
     const productWithVariants: Array<Object> = product.variant.map(
       (eachVariant: Variant): SingleVarPerProduct => ({
@@ -271,15 +273,14 @@ export default class ProductMapping {
       else if (value.key && !isUndefined(value.label))
         // ENUM or LENUM attribute
         mappedAttribute = ProductMapping._mapLenumOrEnumAttribute(name, value)
-      else
-        // LTEXT attribute
-        mappedAttribute = this._mapLtextAttribute(name, value)
+      // LTEXT attribute
+      else mappedAttribute = this._mapLtextAttribute(name, value)
     } else if (Array.isArray(value)) {
       // SET attribute
       mappedAttribute = this._mapSetAttribute(name, value)
-    } else
-      // PLAIN attribute: boolean, string, number
-      mappedAttribute[name] = value
+    }
+    // PLAIN attribute: boolean, string, number
+    else mappedAttribute[name] = value
 
     return mappedAttribute
   }
@@ -297,10 +298,12 @@ export default class ProductMapping {
 
   _mapImagesToString(images: Array<Image>): string {
     return images
-      .map((image: Image): string => {
-        const { url, label } = image
-        return label ? `${url}|${label}` : url
-      })
+      .map(
+        (image: Image): string => {
+          const { url, label } = image
+          return label ? `${url}|${label}` : url
+        }
+      )
       .join(this.multiValDel)
   }
 
@@ -359,8 +362,9 @@ export default class ProductMapping {
     lang: string
   ): string {
     return categories
-      .map((cat: Category): string =>
-        ProductMapping._mapCategory(cat, categoryBy, lang)
+      .map(
+        (cat: Category): string =>
+          ProductMapping._mapCategory(cat, categoryBy, lang)
       )
       .join(multiValDel)
   }

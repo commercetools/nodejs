@@ -33,7 +33,7 @@ const requiredDefinitionProps = ['type', 'endpoint', 'features']
 
 function getIdOrKey(params: Object): string {
   if (params.id) return `/${params.id}`
-  else if (params.key) return `/key=${params.key}`
+  if (params.key) return `/key=${params.key}`
   return ''
 }
 
