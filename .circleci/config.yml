@@ -10,13 +10,14 @@ node8Environment: &node8Environment
 aliases:
   - &restore_yarn_cache
     keys:
-      - v1-yarn-cache-{{ checksum "yarn.lock" }}
-      - v1-yarn-cache
+      - v2-yarn-cache-{{ checksum "yarn.lock" }}
+      - v2-yarn-cache
 
   - &save_yarn_cache
-    key: v1-yarn-cache-{{ checksum "yarn.lock" }}
+    key: v2-yarn-cache-{{ checksum "yarn.lock" }}
     paths:
       - node_modules
+      - ~/.cache/yarn
 
   - &yarn_install
     name: Installing
