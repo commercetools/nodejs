@@ -125,16 +125,18 @@ export default class ProductJsonToCsv {
     return (
       highland(input)
         .through(JSONStream.parse('*'))
-        .flatMap((product: ProductProjection): ProductProjection =>
-          highland(this._resolveReferences(product))
+        .flatMap(
+          (product: ProductProjection): ProductProjection =>
+            highland(this._resolveReferences(product))
         )
         .doto(() => {
           productCount += 1
           this.logger.debug(`Resolved references of ${productCount} products`)
         })
         // prepare the product objects for csv format
-        .map((product: ResolvedProductProjection): ResolvedProductProjection =>
-          this._productMapping.run(product)
+        .map(
+          (product: ResolvedProductProjection): ResolvedProductProjection =>
+            this._productMapping.run(product)
         )
         .flatten()
         .doto(() => {
@@ -227,7 +229,9 @@ export default class ProductJsonToCsv {
     const predicate = `id in ("${notCachedIds.join('", "')}")`
     const channelService = this._createService('channels')
     const uri = channelService.where(predicate).build()
-    const { body: { results } } = await this.fetchReferences(uri)
+    const {
+      body: { results },
+    } = await this.fetchReferences(uri)
 
     results.forEach((result: Channel) => {
       // we should keep old channels in the cache because we can resolve
@@ -245,9 +249,13 @@ export default class ProductJsonToCsv {
 
     const productTypeService = this._createService('productTypes')
     const uri = productTypeService.byId(productTypeReference.id).build()
-    return this.fetchReferences(uri).then(({ body }: SuccessResult): {
-      productType: ProductType,
-    } => ({ productType: body }))
+    return this.fetchReferences(uri).then(
+      ({
+        body,
+      }: SuccessResult): {
+        productType: ProductType,
+      } => ({ productType: body })
+    )
   }
 
   _resolveTaxCategory(taxCategoryReference: TypeReference): Object {
@@ -255,9 +263,13 @@ export default class ProductJsonToCsv {
 
     const taxCategoryService = this._createService('taxCategories')
     const uri = taxCategoryService.byId(taxCategoryReference.id).build()
-    return this.fetchReferences(uri).then(({ body }: SuccessResult): {
-      taxCategory: TaxCategory,
-    } => ({ taxCategory: body }))
+    return this.fetchReferences(uri).then(
+      ({
+        body,
+      }: SuccessResult): {
+        taxCategory: TaxCategory,
+      } => ({ taxCategory: body })
+    )
   }
 
   _resolveState(stateReference: TypeReference): Object {
@@ -265,9 +277,13 @@ export default class ProductJsonToCsv {
 
     const stateService = this._createService('states')
     const uri = stateService.byId(stateReference.id).build()
-    return this.fetchReferences(uri).then(({ body }: SuccessResult): {
-      state: State,
-    } => ({ state: body }))
+    return this.fetchReferences(uri).then(
+      ({
+        body,
+      }: SuccessResult): {
+        state: State,
+      } => ({ state: body })
+    )
   }
 
   _resolveCategories(
@@ -280,11 +296,14 @@ export default class ProductJsonToCsv {
     return this._getCategories(categoryIds).then(
       (categories: Array<Category>): { categories: Array<Category> } => {
         if (this.parserConfig.categoryBy !== 'namedPath') return { categories }
-        return Promise.map(categories, (cat: Category): Array<Category> =>
-          this._resolveAncestors(cat)
-        ).then((categoriesWithParents: Array<Category>): Object => ({
-          categories: categoriesWithParents,
-        }))
+        return Promise.map(
+          categories,
+          (cat: Category): Array<Category> => this._resolveAncestors(cat)
+        ).then(
+          (categoriesWithParents: Array<Category>): Object => ({
+            categories: categoriesWithParents,
+          })
+        )
       }
     )
   }
@@ -319,8 +338,9 @@ export default class ProductJsonToCsv {
       if (!cat.parent) return Promise.resolve(cat)
 
       return this._getCategories([cat.parent.id])
-        .then((resolvedCategory: Object): Promise<Category> =>
-          getParent(resolvedCategory[0])
+        .then(
+          (resolvedCategory: Object): Promise<Category> =>
+            getParent(resolvedCategory[0])
         )
         .then((parent: Object): Promise<Category> => ({ ...cat, parent }))
     }

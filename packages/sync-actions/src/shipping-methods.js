@@ -24,19 +24,23 @@ function createShippingMethodsMapActions(
   ): Array<UpdateAction> {
     const allActions = []
     allActions.push(
-      mapActionGroup('base', (): Array<UpdateAction> =>
-        shippingMethodsActions.actionsMapBase(
-          diff,
-          oldObj,
-          newObj,
-          syncActionConfig
-        )
+      mapActionGroup(
+        'base',
+        (): Array<UpdateAction> =>
+          shippingMethodsActions.actionsMapBase(
+            diff,
+            oldObj,
+            newObj,
+            syncActionConfig
+          )
       )
     )
     allActions.push(
       flatten(
-        mapActionGroup('zoneRates', (): Array<UpdateAction> =>
-          shippingMethodsActions.actionsMapZoneRates(diff, oldObj, newObj)
+        mapActionGroup(
+          'zoneRates',
+          (): Array<UpdateAction> =>
+            shippingMethodsActions.actionsMapZoneRates(diff, oldObj, newObj)
         )
       )
     )

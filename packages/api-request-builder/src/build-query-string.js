@@ -99,17 +99,18 @@ export default function buildQueryString(
 
     facet.forEach((f: string): number => queryString.push(`facet=${f}`))
     filter.forEach((f: string): number => queryString.push(`filter=${f}`))
-    filterByQuery.forEach((f: string): number =>
-      queryString.push(`filter.query=${f}`)
+    filterByQuery.forEach(
+      (f: string): number => queryString.push(`filter.query=${f}`)
     )
-    filterByFacets.forEach((f: string): number =>
-      queryString.push(`filter.facets=${f}`)
+    filterByFacets.forEach(
+      (f: string): number => queryString.push(`filter.facets=${f}`)
     )
   }
 
   if (searchKeywords)
-    searchKeywords.forEach((f: { lang: string, value: string }): number =>
-      queryString.push(`searchKeywords.${f.lang}=${f.value}`)
+    searchKeywords.forEach(
+      (f: { lang: string, value: string }): number =>
+        queryString.push(`searchKeywords.${f.lang}=${f.value}`)
     )
 
   if (version) queryString.push(`version=${version}`)

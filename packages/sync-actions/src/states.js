@@ -46,13 +46,17 @@ function createStatesMapActions(
     const baseActions = []
     const roleActions = []
     baseActions.push(
-      mapActionGroup('base', (): Array<UpdateAction> =>
-        stateActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
+      mapActionGroup(
+        'base',
+        (): Array<UpdateAction> =>
+          stateActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
       )
     )
     roleActions.push(
-      mapActionGroup('roles', (): Array<UpdateAction> =>
-        stateActions.actionsMapRoles(diff, oldObj, newObj)
+      mapActionGroup(
+        'roles',
+        (): Array<UpdateAction> =>
+          stateActions.actionsMapRoles(diff, oldObj, newObj)
       )
     )
     return flatten([...baseActions, ...groupRoleActions(roleActions)])

@@ -7,15 +7,15 @@ If you're still using the [sphere-node-sdk](https://github.com/sphereio/sphere-n
 
 ## Table of Contents
 
-* [Dependencies](#dependencies)
-  * [Example migration](#example-migration)
-* [API differences](#api-differences)
-  * [Sync actions](#sync-actions)
-  * [Request builder](#request-builder)
-  * [SphereClient options](#sphereclient-options)
-* [Implicit benefits](#implicit-benefits)
-  * [Auth flows](#auth-flows)
-  * [Always 100% compatibility with new API features](#always-100-compatibility-with-new-api-features)
+- [Dependencies](#dependencies)
+  - [Example migration](#example-migration)
+- [API differences](#api-differences)
+  - [Sync actions](#sync-actions)
+  - [Request builder](#request-builder)
+  - [SphereClient options](#sphereclient-options)
+- [Implicit benefits](#implicit-benefits)
+  - [Auth flows](#auth-flows)
+  - [Always 100% compatibility with new API features](#always-100-compatibility-with-new-api-features)
 
 ### Dependencies
 
@@ -28,14 +28,14 @@ The _core_ package is the `@commercetools/sdk-client`. **Using it alone is usele
 
 If you aim to have all the functionalities of the `sphere-node-sdk`, you probably need the following packages:
 
-* `@commercetools/sdk-client`
-* `@commercetools/sdk-middleware-auth`
-* `@commercetools/sdk-middleware-http`
-* `@commercetools/sdk-middleware-queue`
-* `@commercetools/sdk-middleware-logger`
-* `@commercetools/sdk-middleware-user-agent`
-* `@commercetools/api-request-builder`
-* `@commercetools/sync-actions`
+- `@commercetools/sdk-client`
+- `@commercetools/sdk-middleware-auth`
+- `@commercetools/sdk-middleware-http`
+- `@commercetools/sdk-middleware-queue`
+- `@commercetools/sdk-middleware-logger`
+- `@commercetools/sdk-middleware-user-agent`
+- `@commercetools/api-request-builder`
+- `@commercetools/sync-actions`
 
 #### Example migration
 

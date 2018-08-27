@@ -143,28 +143,32 @@ export default class PriceExporter {
 
   _resolveReferences(flatPrices: Array<Object>): Object {
     return Promise.all(
-      flatPrices.map((variantPrice: Object): Promise<Object> =>
-        Promise.all(
-          variantPrice.prices.map((individualPrice: Object): Object =>
-            Promise.all([
-              this._resolveChannel(individualPrice),
-              this._resolveCustomerGroup(individualPrice),
-              this._resolveCustomType(individualPrice),
-            ]).then(
-              ([channel, customerGroup, custom]: Array<
-                Object
-              >): ProcessedPriceObject => ({
-                ...individualPrice,
-                ...channel,
-                ...customerGroup,
-                ...custom,
-              })
+      flatPrices.map(
+        (variantPrice: Object): Promise<Object> =>
+          Promise.all(
+            variantPrice.prices.map(
+              (individualPrice: Object): Object =>
+                Promise.all([
+                  this._resolveChannel(individualPrice),
+                  this._resolveCustomerGroup(individualPrice),
+                  this._resolveCustomType(individualPrice),
+                ]).then(
+                  ([channel, customerGroup, custom]: Array<
+                    Object
+                  >): ProcessedPriceObject => ({
+                    ...individualPrice,
+                    ...channel,
+                    ...customerGroup,
+                    ...custom,
+                  })
+                )
             )
+          ).then(
+            (prices: Object): Promise<Object> => ({
+              ...variantPrice,
+              prices,
+            })
           )
-        ).then((prices: Object): Promise<Object> => ({
-          ...variantPrice,
-          prices,
-        }))
       )
     )
   }

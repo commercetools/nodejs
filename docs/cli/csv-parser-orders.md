@@ -257,11 +257,11 @@ Errors on the level `error` come from events that are fatal and thus stop the st
 
 All `LineItemStateCsvParser`, `AddReturnInfoCsvParser` and `DeliveriesCsvParser` classes accept an object with two fields:
 
-* `logger` takes object with four functions (_optional_)
-* `csvConfig` takes configuration for CSV parser (_optional_)
-  * `batchSize`: number of CSV rows to handle simultaneously. (_default_: `100`)
-  * `delimiter`: the used CSV delimiter (_default_: `,`)
-  * `strictMode`: require CSV column length to match headers length (_default_: true)
+- `logger` takes object with four functions (_optional_)
+- `csvConfig` takes configuration for CSV parser (_optional_)
+  - `batchSize`: number of CSV rows to handle simultaneously. (_default_: `100`)
+  - `delimiter`: the used CSV delimiter (_default_: `,`)
+  - `strictMode`: require CSV column length to match headers length (_default_: true)
 
 ## CSV formats
 

@@ -20,8 +20,8 @@ Read the credentials from an environment variable named after the project key li
 
 Read the credentials from a [`dotenv`](https://github.com/motdotla/dotenv) file in the following locations, descending priority:
 
-* `./.ct-credentials.env` _Current directory_
-* `/etc/.ct-credentials.env`
+- `./.ct-credentials.env` _Current directory_
+- `/etc/.ct-credentials.env`
 
 Example `ct-credentials.env` file:
 

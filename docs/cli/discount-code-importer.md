@@ -7,12 +7,12 @@ This package is built to be used in conjunction with [sphere-node-cli](https://g
 
 The constructor accepts two arguments:
 
-* A required object containing the following values:
-  * `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
-  * `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`manage_orders`]
-  * `batchSize` (Number): Amount of codes not more than 500 to process concurrently (Optional. Default: 50)
-  * `continueOnProblems` (Boolean): Flag whether to continue processing if an error occurs (Optional. Default: false)
-* An optional logger object having four functions (`info`, `warn`, `error` and `verbose`)
+- A required object containing the following values:
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  - `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`manage_orders`]
+  - `batchSize` (Number): Amount of codes not more than 500 to process concurrently (Optional. Default: 50)
+  - `continueOnProblems` (Boolean): Flag whether to continue processing if an error occurs (Optional. Default: false)
+- An optional logger object having four functions (`info`, `warn`, `error` and `verbose`)
 
 ## Usage with `sphere-node-cli`
 

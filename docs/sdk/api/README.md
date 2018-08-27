@@ -31,7 +31,7 @@ var createClient = CommercetoolsSdkClient.createClient
 
 Core package to enable executing HTTP [request](/sdk/Glossary.md#clientrequest). To be used together with middlewares.
 
-* [createClient(options)](/sdk/api/sdkClient.md#createclient)
+- [createClient(options)](/sdk/api/sdkClient.md#createclient)
 
 ## Middlewares
 
@@ -41,42 +41,42 @@ It's up to you to pick whatever middleware fits your needs: you can compose them
 
 Middleware to authenticate the [request](/sdk/Glossary.md#clientrequest) using one of the supported _auth flows_.
 
-* [createAuthMiddlewareForClientCredentialsFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforclientcredentialsflowoptions)
-* [createAuthMiddlewareForPasswordFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforpasswordflow)
-* [createAuthMiddlewareForRefreshTokenFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforrefreshtokenflow)
-* [createAuthMiddlewareForAnonymousSessionFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforanonymoussessionflow)
-* [createAuthMiddlewareWithExistingToken(authorization, options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewarewithexistingtoken)
+- [createAuthMiddlewareForClientCredentialsFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforclientcredentialsflowoptions)
+- [createAuthMiddlewareForPasswordFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforpasswordflow)
+- [createAuthMiddlewareForRefreshTokenFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforrefreshtokenflow)
+- [createAuthMiddlewareForAnonymousSessionFlow(options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewareforanonymoussessionflow)
+- [createAuthMiddlewareWithExistingToken(authorization, options)](/sdk/api/sdkMiddlewareAuth.md#createauthmiddlewarewithexistingtoken)
 
 ### `sdk-middleware-http`
 
 Middleware to send the actual HTTP [request](/sdk/Glossary.md#clientrequest).
 
-* [createHttpMiddleware(options)](/sdk/api/sdkMiddlewareHttp.md#createhttpmiddlewareoptions)
-* [getErrorByCode(code)](/sdk/api/sdkMiddlewareHttp.md#geterrorbycode)
+- [createHttpMiddleware(options)](/sdk/api/sdkMiddlewareHttp.md#createhttpmiddlewareoptions)
+- [getErrorByCode(code)](/sdk/api/sdkMiddlewareHttp.md#geterrorbycode)
 
 ### `sdk-middleware-queue`
 
 Middleware to throttle concurrent [request](/sdk/Glossary.md#clientrequest) to a certain limit. Useful to reduce concurrent HTTP requests.
 
-* [createQueueMiddleware(options)](/sdk/api/sdkMiddlewareQueue.md#createqueuemiddlewareoptions)
+- [createQueueMiddleware(options)](/sdk/api/sdkMiddlewareQueue.md#createqueuemiddlewareoptions)
 
 ### `sdk-middleware-logger`
 
 Middleware to log incoming [request](/sdk/Glossary.md#clientrequest) and [response](/sdk/Glossary.md#clientresponse) objects.
 
-* [createLoggerMiddleware(options)](/sdk/api/sdkMiddlewareLogger.md#createloggermiddlewareoptions)
+- [createLoggerMiddleware(options)](/sdk/api/sdkMiddlewareLogger.md#createloggermiddlewareoptions)
 
 ### `sdk-middleware-user-agent`
 
 Middleware to automatically set the `User-Agent` to the [request](/sdk/Glossary.md#clientrequest).
 
-* [createUserAgentMiddleware(options)](/sdk/api/sdkMiddlewareUserAgent.md#createuseragentmiddlewareoptions)
+- [createUserAgentMiddleware(options)](/sdk/api/sdkMiddlewareUserAgent.md#createuseragentmiddlewareoptions)
 
 ### `sdk-middleware-correlation-id`
 
 Middleware to add a correlation id to [requests](/sdk/Glossary.md#clientrequest).
 
-* [createCorrelationIdMiddleware(options)](/sdk/api/sdkMiddlewareCorrelationId.md)
+- [createCorrelationIdMiddleware(options)](/sdk/api/sdkMiddlewareCorrelationId.md)
 
 ## Helpers
 
@@ -86,24 +86,24 @@ Those are optional packages that provides help building the final [request](/sdk
 
 Provides an API to construct a URI for the HTTP API endpoints in a declarative way. Useful for building [request](/sdk/Glossary.md#clientrequest) `uri` for requests.
 
-* [createRequestBuilder(customServices)](/sdk/api/apiRequestBuilder.md#createrequestbuildercustomservices)
+- [createRequestBuilder(customServices)](/sdk/api/apiRequestBuilder.md#createrequestbuildercustomservices)
 
 ### `http-user-agent`
 
 Creates a proper HTTP User-Agent. Can be used everywhere.
 
-* [createHttpUserAgent(options)](/sdk/api/httpUserAgent.md#createhttpuseragentoptions)
+- [createHttpUserAgent(options)](/sdk/api/httpUserAgent.md#createhttpuseragentoptions)
 
 ### `sync-actions`
 
 Provides an API to construct update actions. Useful for building [request](/sdk/Glossary.md#clientrequest) `body` for updates.
 
-* [createSyncCategories(actionGroups)](/sdk/api/syncActions.md#createsynccategoriesactiongroups)
-* [createSyncCustomers(actionGroups)](/sdk/api/syncActions.md#createsynccustomersactiongroups)
-* [createSyncInventories(actionGroups)](/sdk/api/syncActions.md#createsyncinventoriesactiongroups)
-* [createSyncProducts(actionGroups)](/sdk/api/syncActions.md#createsyncproductsactiongroups)
-* [createSyncOrders(actionGroups)](/sdk/api/syncActions.md#createsyncordersactiongroups)
-* [createSyncDiscountCodes(actionGroups)](/sdk/api/syncActions.md#createsyncdiscountcodesactiongroups)
-* [createSyncProductDiscounts(actionGroups)](/sdk/api/syncActions.md#createsyncproductdiscountsactiongroups)
-* [createSyncCustomerGroup(actionGroups)](/sdk/api/syncActions.md#createsynccustomergroupactiongroups)
-* [createSyncCartDiscounts(actionGroups)](/sdk/api/syncActions.md#createsynccartdiscountsactiongroups)
+- [createSyncCategories(actionGroups)](/sdk/api/syncActions.md#createsynccategoriesactiongroups)
+- [createSyncCustomers(actionGroups)](/sdk/api/syncActions.md#createsynccustomersactiongroups)
+- [createSyncInventories(actionGroups)](/sdk/api/syncActions.md#createsyncinventoriesactiongroups)
+- [createSyncProducts(actionGroups)](/sdk/api/syncActions.md#createsyncproductsactiongroups)
+- [createSyncOrders(actionGroups)](/sdk/api/syncActions.md#createsyncordersactiongroups)
+- [createSyncDiscountCodes(actionGroups)](/sdk/api/syncActions.md#createsyncdiscountcodesactiongroups)
+- [createSyncProductDiscounts(actionGroups)](/sdk/api/syncActions.md#createsyncproductdiscountsactiongroups)
+- [createSyncCustomerGroup(actionGroups)](/sdk/api/syncActions.md#createsynccustomergroupactiongroups)
+- [createSyncCartDiscounts(actionGroups)](/sdk/api/syncActions.md#createsynccartdiscountsactiongroups)

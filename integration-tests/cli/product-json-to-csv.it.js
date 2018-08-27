@@ -22,7 +22,7 @@ if (process.env.CI === 'true')
   projectKey = 'product-json2csv-integration-test-26'
 else projectKey = process.env.npm_config_projectkey
 
-async function cleanup (apiConfig) {
+async function cleanup(apiConfig) {
   // Clear all data
   await clearData(apiConfig, 'products')
   await Promise.all([
@@ -58,7 +58,9 @@ describe('CSV and CLI Tests', () => {
     await createData(apiConfig, 'categories', [sampleParentCategory])
     await createData(apiConfig, 'categories', [sampleCategory])
 
-    const priceChannel = await createData(apiConfig, 'channels', [samplePriceChannel])
+    const priceChannel = await createData(apiConfig, 'channels', [
+      samplePriceChannel,
+    ])
     const state = await createData(apiConfig, 'states', [sampleState])
     const taxCategory = await createData(apiConfig, 'taxCategories', [
       sampleTaxCategory,
@@ -114,8 +116,7 @@ describe('CSV and CLI Tests', () => {
           expect(stdout).toBeTruthy()
           expect(stderr).toBeFalsy()
 
-          fs
-            .createReadStream(zipFile)
+          fs.createReadStream(zipFile)
             .pipe(unzip.Parse())
             .on('entry', entry => {
               if (entry.path.includes('anotherProductType')) {
@@ -500,8 +501,7 @@ describe('CSV and CLI Tests', () => {
           expect(parseStdout).toBeTruthy()
           expect(parseStderr).toBeFalsy()
 
-          fs
-            .createReadStream(zipFile)
+          fs.createReadStream(zipFile)
             .pipe(unzip.Parse())
             .on('entry', entry => {
               if (entry.path.includes('anotherProductType')) {

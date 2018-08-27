@@ -29,8 +29,7 @@ describe('State importer', () => {
       }
       // Clear all existing states
       return clearData(apiConfig, 'states')
-    })
-  )
+    }))
 
   afterAll(() => clearData(apiConfig, 'states'))
 

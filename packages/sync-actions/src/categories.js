@@ -26,26 +26,33 @@ function createCategoryMapActions(
     const allActions = []
 
     allActions.push(
-      mapActionGroup('base', (): Array<UpdateAction> =>
-        categoryActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
+      mapActionGroup(
+        'base',
+        (): Array<UpdateAction> =>
+          categoryActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
       )
     )
 
     allActions.push(
-      mapActionGroup('references', (): Array<UpdateAction> =>
-        categoryActions.actionsMapReferences(diff, oldObj, newObj)
+      mapActionGroup(
+        'references',
+        (): Array<UpdateAction> =>
+          categoryActions.actionsMapReferences(diff, oldObj, newObj)
       )
     )
 
     allActions.push(
-      mapActionGroup('meta', (): Array<UpdateAction> =>
-        categoryActions.actionsMapMeta(diff, oldObj, newObj)
+      mapActionGroup(
+        'meta',
+        (): Array<UpdateAction> =>
+          categoryActions.actionsMapMeta(diff, oldObj, newObj)
       )
     )
 
     allActions.push(
-      mapActionGroup('custom', (): Array<UpdateAction> =>
-        actionsMapCustom(diff, newObj, oldObj)
+      mapActionGroup(
+        'custom',
+        (): Array<UpdateAction> => actionsMapCustom(diff, newObj, oldObj)
       )
     )
 

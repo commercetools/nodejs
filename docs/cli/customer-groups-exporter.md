@@ -6,11 +6,11 @@ A package which exports [commercetools customer groups](https://docs.commercetoo
 
 The constructor accepts two arguments:
 
-* A required object containing the following values:
-  * `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
-  * `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`view_customers`]. More info on how to get the access token [here](https://docs.commercetools.com/http-api-authorization.html#authorization-flows)
-  * `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates) (Optional)
-* An optional logger object having four functions (`info`, `warn`, `error` and `debug`)
+- A required object containing the following values:
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  - `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`view_customers`]. More info on how to get the access token [here](https://docs.commercetools.com/http-api-authorization.html#authorization-flows)
+  - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates) (Optional)
+- An optional logger object having four functions (`info`, `warn`, `error` and `debug`)
 
 ## Usage
 
@@ -42,11 +42,11 @@ Options:
 
 #### Info on flags
 
-* The `--output` flag specifies where to output/save the exported customer groups. Several notes on this flag:
-  * If the file specified already exists, it will be overwritten.
-  * The default location for status report logging is the standard output.
-  * If no output path is specified, the exported groups will be logged to the standard output as a result, status reports will be logged to a `customer-groups-export.log` file in the current directory.
-* The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates)
+- The `--output` flag specifies where to output/save the exported customer groups. Several notes on this flag:
+  - If the file specified already exists, it will be overwritten.
+  - The default location for status report logging is the standard output.
+  - If no output path is specified, the exported groups will be logged to the standard output as a result, status reports will be logged to a `customer-groups-export.log` file in the current directory.
+- The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates)
 
 ### JS
 

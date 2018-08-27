@@ -8,9 +8,9 @@ This section contains all information about the sdk-related packages.
 
 The SDK is now split into multiple little packages, think about it as a _microservice_ architecture. This is by choice and it provides several different advantages:
 
-* flexibility: choose the packages that fits best your use case
-* extensibility: developers can potentially build their own packages to extend / replace pieces of the SDK packages (e.g. custom [middlewares](/sdk/Middlewares.md))
-* maintainability: easier to maintain each single little package instead of one big library. This is also one of the reasons to use a [monorepo](https://github.com/lerna/lerna)
+- flexibility: choose the packages that fits best your use case
+- extensibility: developers can potentially build their own packages to extend / replace pieces of the SDK packages (e.g. custom [middlewares](/sdk/Middlewares.md))
+- maintainability: easier to maintain each single little package instead of one big library. This is also one of the reasons to use a [monorepo](https://github.com/lerna/lerna)
 
 The core of the SDK lies within its [middlewares](/sdk/Middlewares.md) implementation.
 Middlewares do specific things and can be replaced by other middlewares depending on the use case, allowing many possible combinations.

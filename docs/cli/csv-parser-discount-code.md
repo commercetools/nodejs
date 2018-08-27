@@ -27,16 +27,16 @@ Options:
 
 #### Info on flags
 
-* The `--input` flag specifies the path to the discount codes CSV file. If this flag is omitted, the module will attempt to read the data from the `standard input`.
-* The `--output` flag specifies where to output/save the parsed discount codes as JSON file. Several notes on this flag:
-  * If the file specified already exists, it will be overwritten.
-  * The default location for status report logging is the standard output.
-  * If no output path is specified, the generated codes will be logged to the standard output as a result, status reports will be logged to a `csv-parser-discount-code.log` file in the current directory.
-* The `--delimiter` flag specifies the delimiter used in the input file. Defaults to `','` if omitted.
-* The `--multiValueDelimiter` flag specifies the delimiter for multiValue cells in CSV. Note that only the `cartDiscounts` field if present should contain multiple values. Defaults to `';'` if omitted.
-* The `--continueOnProblems` flag specifies if the module should continue parsing discount codes if it encounters an error. Defaults to `false` if omitted.
-  * If the module should continue on error, all errors are logged to the logging location (see above).
-  * If the module should not continue on error, the failing error is written to the `stderr`, regardless of the output and logging locations
+- The `--input` flag specifies the path to the discount codes CSV file. If this flag is omitted, the module will attempt to read the data from the `standard input`.
+- The `--output` flag specifies where to output/save the parsed discount codes as JSON file. Several notes on this flag:
+  - If the file specified already exists, it will be overwritten.
+  - The default location for status report logging is the standard output.
+  - If no output path is specified, the generated codes will be logged to the standard output as a result, status reports will be logged to a `csv-parser-discount-code.log` file in the current directory.
+- The `--delimiter` flag specifies the delimiter used in the input file. Defaults to `','` if omitted.
+- The `--multiValueDelimiter` flag specifies the delimiter for multiValue cells in CSV. Note that only the `cartDiscounts` field if present should contain multiple values. Defaults to `';'` if omitted.
+- The `--continueOnProblems` flag specifies if the module should continue parsing discount codes if it encounters an error. Defaults to `false` if omitted.
+  - If the module should continue on error, all errors are logged to the logging location (see above).
+  - If the module should not continue on error, the failing error is written to the `stderr`, regardless of the output and logging locations
 
 ### JS
 
@@ -65,11 +65,11 @@ outputStream
 
 The constructor takes in 2 optional parameters
 
-* A logger object having four functions (`info`, `warn`, `error` and `debug`)
-* A configuration object containing any/all of the following values:
-  * `delimiter` (String): Used delimeter in the CSV (Default: `','`)
-  * `multiValueDelimiter` (String): Used delimeter in multiValue fields in the CSV (Default: `';'`)
-  * `continueOnProblems` (Boolean): Option if module should continue on errors (Default: `false`)
+- A logger object having four functions (`info`, `warn`, `error` and `debug`)
+- A configuration object containing any/all of the following values:
+  - `delimiter` (String): Used delimeter in the CSV (Default: `','`)
+  - `multiValueDelimiter` (String): Used delimeter in multiValue fields in the CSV (Default: `';'`)
+  - `continueOnProblems` (Boolean): Option if module should continue on errors (Default: `false`)
 
 ### Examples
 
@@ -184,5 +184,5 @@ And the following would be written to the JSON file
 
 #### Additional information
 
-* No field in the csv file is mandatory
-* the `cartDiscounts` field should contain a string of cart-discount IDs, delimited by the `multiValueDelimiter`
+- No field in the csv file is mandatory
+- the `cartDiscounts` field should contain a string of cart-discount IDs, delimited by the `multiValueDelimiter`

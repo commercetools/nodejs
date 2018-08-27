@@ -140,8 +140,9 @@ export default class DiscountCodeImport {
         const req = this._buildRequest(uri, 'GET')
         return this.client
           .execute(req)
-          .then(({ body: { results: existingCodes } }: Object): Promise<void> =>
-            this._createOrUpdate(codeObjects, existingCodes)
+          .then(
+            ({ body: { results: existingCodes } }: Object): Promise<void> =>
+              this._createOrUpdate(codeObjects, existingCodes)
           )
       }
     )
@@ -163,58 +164,68 @@ export default class DiscountCodeImport {
     existingCodes: CodeDataArray
   ): Object {
     return Promise.all(
-      newCodes.map((newCode: DiscountCode): Promise<void> => {
-        const existingCode = _.find(existingCodes, ['code', newCode.code])
-        if (existingCode)
-          return this._update(newCode, existingCode)
-            .then((response: Object): Promise<void> => {
-              if (response && response.statusCode === 304)
-                this._summary.unchanged += 1
-              else this._summary.updated += 1
-              return Promise.resolve()
-            })
-            .catch((error: HttpErrorType): Promise<void> => {
-              if (this.continueOnProblems) {
-                this._summary.updateErrorCount += 1
-                this._summary.errors.push(error.message || error)
-                // eslint-disable-next-line max-len
-                const msg =
-                  'Update error occured but ignored. See summary for details'
-                this.logger.error(msg)
+      newCodes.map(
+        (newCode: DiscountCode): Promise<void> => {
+          const existingCode = _.find(existingCodes, ['code', newCode.code])
+          if (existingCode)
+            return this._update(newCode, existingCode)
+              .then(
+                (response: Object): Promise<void> => {
+                  if (response && response.statusCode === 304)
+                    this._summary.unchanged += 1
+                  else this._summary.updated += 1
+                  return Promise.resolve()
+                }
+              )
+              .catch(
+                (error: HttpErrorType): Promise<void> => {
+                  if (this.continueOnProblems) {
+                    this._summary.updateErrorCount += 1
+                    this._summary.errors.push(error.message || error)
+                    // eslint-disable-next-line max-len
+                    const msg =
+                      'Update error occured but ignored. See summary for details'
+                    this.logger.error(msg)
+                    return Promise.resolve()
+                  }
+                  // eslint-disable-next-line max-len
+                  const msg =
+                    'Process stopped due to error while creating discount code. See summary for details'
+                  this.logger.error(msg)
+                  this._summary.updateErrorCount += 1
+                  this._summary.errors.push(error.message || error)
+                  return Promise.reject(error)
+                }
+              )
+          return this._create(newCode)
+            .then(
+              (): Promise<void> => {
+                this._summary.created += 1
                 return Promise.resolve()
               }
-              // eslint-disable-next-line max-len
-              const msg =
-                'Process stopped due to error while creating discount code. See summary for details'
-              this.logger.error(msg)
-              this._summary.updateErrorCount += 1
-              this._summary.errors.push(error.message || error)
-              return Promise.reject(error)
-            })
-        return this._create(newCode)
-          .then((): Promise<void> => {
-            this._summary.created += 1
-            return Promise.resolve()
-          })
-          .catch((error: HttpErrorType): Promise<void> => {
-            if (this.continueOnProblems) {
-              this._summary.createErrorCount += 1
-              this._summary.errors.push(error.message || error)
-              // eslint-disable-next-line max-len
-              const msg =
-                'Create error occured but ignored. See summary for details'
-              this.logger.error(msg)
-              return Promise.resolve()
-            }
-            // eslint-disable-next-line max-len
-            const msg =
-              'Process stopped due to error while creating discount code. See summary for details'
-            this.logger.error(msg)
-            this._summary.createErrorCount += 1
-            this._summary.errors.push(error.message || error)
-            return Promise.reject(error)
-          })
-      })
+            )
+            .catch(
+              (error: HttpErrorType): Promise<void> => {
+                if (this.continueOnProblems) {
+                  this._summary.createErrorCount += 1
+                  this._summary.errors.push(error.message || error)
+                  // eslint-disable-next-line max-len
+                  const msg =
+                    'Create error occured but ignored. See summary for details'
+                  this.logger.error(msg)
+                  return Promise.resolve()
+                }
+                // eslint-disable-next-line max-len
+                const msg =
+                  'Process stopped due to error while creating discount code. See summary for details'
+                this.logger.error(msg)
+                this._summary.createErrorCount += 1
+                this._summary.errors.push(error.message || error)
+                return Promise.reject(error)
+              }
+            )
+        }
+      )
     )
   }
 
@@ -286,8 +297,8 @@ export default class DiscountCodeImport {
     let message = ''
     if (created + updated + createErrorCount + updateErrorCount === 0)
       message = 'Summary: nothing to do, everything is fine'
+    // eslint-disable-next-line max-len
     else
-      // eslint-disable-next-line max-len
       message = `Summary: there were ${created +
         updated} successfully imported discount codes (${created} were newly created, ${updated} were updated and ${unchanged} were unchanged).`
     if (createErrorCount || updateErrorCount)

@@ -52,52 +52,54 @@ function executeRequest({
     },
     body,
   })
-    .then((res: Response): Promise<*> => {
-      if (res.ok)
-        return res
-          .json()
-          .then(
-            ({
-              access_token: token,
-              expires_in: expiresIn,
-              refresh_token: refreshToken,
-            }: Object) => {
-              const expirationTime = calculateExpirationTime(expiresIn)
+    .then(
+      (res: Response): Promise<*> => {
+        if (res.ok)
+          return res
+            .json()
+            .then(
+              ({
+                access_token: token,
+                expires_in: expiresIn,
+                refresh_token: refreshToken,
+              }: Object) => {
+                const expirationTime = calculateExpirationTime(expiresIn)
 
-              // Cache new token
-              tokenCache.set({ token, expirationTime, refreshToken })
+                // Cache new token
+                tokenCache.set({ token, expirationTime, refreshToken })
 
-              // Dispatch all pending requests
-              requestState.set(false)
+                // Dispatch all pending requests
+                requestState.set(false)
 
-              // Freeze and copy pending queue, reset original one for accepting
-              // new pending tasks
-              const executionQueue = pendingTasks.slice()
-              // eslint-disable-next-line no-param-reassign
-              pendingTasks = []
-              executionQueue.forEach((task: Task) => {
-                // Assign the new token in the request header
-                const requestWithAuth = mergeAuthHeader(token, task.request)
-                // console.log('test', cache, pendingTasks)
-                // Continue by calling the task's own next function
-                task.next(requestWithAuth, task.response)
-              })
-            }
-          )
+                // Freeze and copy pending queue, reset original one for accepting
+                // new pending tasks
+                const executionQueue = pendingTasks.slice()
+                // eslint-disable-next-line no-param-reassign
+                pendingTasks = []
+                executionQueue.forEach((task: Task) => {
+                  // Assign the new token in the request header
+                  const requestWithAuth = mergeAuthHeader(token, task.request)
+                  // console.log('test', cache, pendingTasks)
+                  // Continue by calling the task's own next function
+                  task.next(requestWithAuth, task.response)
+                })
+              }
+            )
 
-      // Handle error response
-      return res.text().then((text: any) => {
-        let parsed
-        try {
-          parsed = JSON.parse(text)
-        } catch (error) {
-          /* noop */
-        }
-        const error: Object = new Error(parsed ? parsed.message : text)
-        if (parsed) error.body = parsed
-        response.reject(error)
-      })
-    })
+        // Handle error response
+        return res.text().then((text: any) => {
+          let parsed
+          try {
+            parsed = JSON.parse(text)
+          } catch (error) {
+            /* noop */
+          }
+          const error: Object = new Error(parsed ? parsed.message : text)
+          if (parsed) error.body = parsed
+          response.reject(error)
+        })
+      }
+    )
     .catch((error: Error) => {
       if (response && typeof response.reject === 'function')
         response.reject(error)

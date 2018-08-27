@@ -94,8 +94,8 @@ export default class AddReturnInfoParser extends AbstractParser {
     // if there is no returnInfo with this returnId push those from currentOrder
     if (!existingReturnInfos.length)
       existingOrder.returnInfo.push(...currentOrder.returnInfo)
+    // else concat items from currentOrder
     else
-      // else concat items from currentOrder
       existingReturnInfos.forEach(returnInfo => {
         returnInfo.items.push(...currentOrder.returnInfo[0].items)
       })
