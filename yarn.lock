@@ -597,7 +597,7 @@ async@^1.4.0, async@^1.5.0:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
-async@^2.0.1, async@^2.1.2, async@^2.1.4:
+async@^2.0.1, async@^2.1.4, async@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.1.tgz#b245a23ca71930044ec53fa46aa00a3e87c6a610"
   dependencies:
@@ -1719,7 +1719,7 @@ chalk@2.3.1:
     escape-string-regexp "^1.0.5"
     supports-color "^5.2.0"
 
-chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.3.1, chalk@^2.4.0:
+chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0, chalk@^2.3.0, chalk@^2.3.1, chalk@^2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.4.1.tgz#18c49ab16a037b6eb0152cc83e3471338215b66e"
   dependencies:
@@ -1961,7 +1961,7 @@ commander@2.9.0:
   dependencies:
     graceful-readlink ">= 1.0.0"
 
-commander@^2.11.0, commander@^2.14.1, commander@^2.15.1, commander@^2.9.0, commander@~2.17.1:
+commander@^2.11.0, commander@^2.14.1, commander@^2.17.1, commander@^2.9.0, commander@~2.17.1:
   version "2.17.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.17.1.tgz#bd77ab7de6de94205ceacc72f1716d29f20a77bf"
 
@@ -4760,7 +4760,7 @@ jest-changed-files@^23.4.2:
   dependencies:
     throat "^4.0.0"
 
-jest-cli@^23.3.0:
+jest-cli@^23.5.0:
   version "23.5.0"
   resolved "https://registry.yarnpkg.com/jest-cli/-/jest-cli-23.5.0.tgz#d316b8e34a38a610a1efc4f0403d8ef8a55e4492"
   dependencies:
@@ -4909,16 +4909,6 @@ jest-matcher-utils@^23.5.0:
     jest-get-type "^22.1.0"
     pretty-format "^23.5.0"
 
-jest-message-util@^22.4.3:
-  version "22.4.3"
-  resolved "https://registry.yarnpkg.com/jest-message-util/-/jest-message-util-22.4.3.tgz#cf3d38aafe4befddbfc455e57d65d5239e399eb7"
-  dependencies:
-    "@babel/code-frame" "^7.0.0-beta.35"
-    chalk "^2.0.1"
-    micromatch "^2.3.11"
-    slash "^1.0.0"
-    stack-utils "^1.0.1"
-
 jest-message-util@^23.4.0:
   version "23.4.0"
   resolved "https://registry.yarnpkg.com/jest-message-util/-/jest-message-util-23.4.0.tgz#17610c50942349508d01a3d1e0bda2c079086a9f"
@@ -4963,9 +4953,9 @@ jest-runner-eslint@emmenko/jest-runner-eslint#nm-fix-rules-cli-option-built:
     throat "4.1.0"
     worker-farm "1.5.0"
 
-jest-runner-flowtype@0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/jest-runner-flowtype/-/jest-runner-flowtype-0.0.5.tgz#12e1ebc7f579b2fb07b5a3212670882ae8cd4da8"
+jest-runner-flowtype@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/jest-runner-flowtype/-/jest-runner-flowtype-0.0.6.tgz#3539d50cf4a6629d4a00d34bc1961d73398ee136"
   dependencies:
     create-jest-runner "^0.1.1"
     flow-bin "^0.63.1"
@@ -5019,12 +5009,12 @@ jest-serializer@^23.0.1:
   version "23.0.1"
   resolved "https://registry.yarnpkg.com/jest-serializer/-/jest-serializer-23.0.1.tgz#a3776aeb311e90fe83fab9e533e85102bd164165"
 
-jest-silent-reporter@0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/jest-silent-reporter/-/jest-silent-reporter-0.0.4.tgz#906f41790ee758cd1682d33263538df20d43074e"
+jest-silent-reporter@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/jest-silent-reporter/-/jest-silent-reporter-0.1.0.tgz#9628c58c7f018b26c902836de278f40a4b072570"
   dependencies:
     chalk "^2.3.1"
-    jest-util "^22.3.0"
+    jest-util "^23.0.0"
 
 jest-snapshot@^23.5.0:
   version "23.5.0"
@@ -5041,19 +5031,7 @@ jest-snapshot@^23.5.0:
     pretty-format "^23.5.0"
     semver "^5.5.0"
 
-jest-util@^22.3.0:
-  version "22.4.3"
-  resolved "https://registry.yarnpkg.com/jest-util/-/jest-util-22.4.3.tgz#c70fec8eec487c37b10b0809dc064a7ecf6aafac"
-  dependencies:
-    callsites "^2.0.0"
-    chalk "^2.0.1"
-    graceful-fs "^4.1.11"
-    is-ci "^1.0.10"
-    jest-message-util "^22.4.3"
-    mkdirp "^0.5.1"
-    source-map "^0.6.0"
-
-jest-util@^23.4.0:
+jest-util@^23.0.0, jest-util@^23.4.0:
   version "23.4.0"
   resolved "https://registry.yarnpkg.com/jest-util/-/jest-util-23.4.0.tgz#4d063cb927baf0a23831ff61bec2cbbf49793561"
   dependencies:
@@ -5095,12 +5073,12 @@ jest-worker@^23.2.0:
   dependencies:
     merge-stream "^1.0.1"
 
-jest@23.3.0:
-  version "23.3.0"
-  resolved "https://registry.yarnpkg.com/jest/-/jest-23.3.0.tgz#1355cd792f38cf20fba4da02dddb7ca14d9484b5"
+jest@23.5.0:
+  version "23.5.0"
+  resolved "https://registry.yarnpkg.com/jest/-/jest-23.5.0.tgz#80de353d156ea5ea4a7332f7962ac79135fbc62e"
   dependencies:
     import-local "^1.0.0"
-    jest-cli "^23.3.0"
+    jest-cli "^23.5.0"
 
 jju@^1.1.0:
   version "1.4.0"
@@ -5317,18 +5295,18 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-leasot@6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/leasot/-/leasot-6.3.0.tgz#e123d8d130ac16ff40082e835d3acf5331448db8"
+leasot@6.5.0:
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/leasot/-/leasot-6.5.0.tgz#d254eb81a0232cd587e32bfed38db759d402e506"
   dependencies:
-    async "^2.1.2"
-    chalk "^2.4.0"
-    commander "^2.15.1"
+    async "^2.6.1"
+    chalk "^2.4.1"
+    commander "^2.17.1"
     eol "^0.9.1"
     get-stdin "^6.0.0"
     globby "^8.0.1"
     json2xml "^0.1.2"
-    lodash "^4.17.5"
+    lodash "^4.17.10"
     log-symbols "^2.2.0"
     strip-ansi "^4.0.0"
     text-table "^0.2.0"
