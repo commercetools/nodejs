@@ -1,4 +1,5 @@
 import streamtest from 'streamtest'
+import { stripIndent } from 'common-tags'
 import InventoryExporter from '../src/main'
 
 describe('InventoryExporter', () => {
@@ -148,7 +149,11 @@ describe('InventoryExporter', () => {
           return Promise.resolve()
         })
       const outputStream = streamtest.v2.toText((error, result) => {
-        expect(result).toMatchSnapshot()
+        const expectedResult = stripIndent`	
+          sku,quantityOnStock,restockableInDays,createdAt,lastModifiedAt
+          hello,me,4,,
+        `
+        expect(result).toEqual(expectedResult)
         spy.mockRestore()
         done()
       })

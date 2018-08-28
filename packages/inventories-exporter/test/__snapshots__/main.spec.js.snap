@@ -1,6 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`InventoryExporter ::run should fetch inventories and output csv to stream 1`] = `
-"sku,quantityOnStock,restockableInDays,createdAt,lastModifiedAt
-hello,me,4,,"
-`;
