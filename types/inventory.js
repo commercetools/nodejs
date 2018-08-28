@@ -36,4 +36,6 @@ export type CsvInventoryMapping = {
     type: Object,
     fields: Object,
   },
+  createdAt?: string,
+  lastModifiedAt?: string,
 }

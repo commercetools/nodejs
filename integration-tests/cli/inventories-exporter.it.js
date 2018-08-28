@@ -81,7 +81,8 @@ describe('StockExporter CLI', () => {
       )
       expect(stdout && stderr).toBeFalsy()
       const data = await fs.readFile(csvFilePath, { encoding: 'utf8' })
-      expect(data).toMatchSnapshot()
+      const expectedData = `12345,20,inventory-custom-type,integration tests!! arrgggh,${new Date().getFullYear()}`
+      expect(data).toContain(expectedData)
     })
   })
 })

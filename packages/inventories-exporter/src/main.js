@@ -189,6 +189,8 @@ export default class InventoryExporter {
         result[`customField.${key}`] = customObj.fields[key]
       })
     }
+    result.createdAt = row.createdAt
+    result.lastModifiedAt = row.lastModifiedAt
     return result
   }
 

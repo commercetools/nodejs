@@ -149,9 +149,9 @@ describe('InventoryExporter', () => {
           return Promise.resolve()
         })
       const outputStream = streamtest.v2.toText((error, result) => {
-        const expectedResult = stripIndent`
-          sku,quantityOnStock,restockableInDays
-          hello,me,4
+        const expectedResult = stripIndent`	
+          sku,quantityOnStock,restockableInDays,createdAt,lastModifiedAt
+          hello,me,4,,
         `
         expect(result).toEqual(expectedResult)
         spy.mockRestore()
