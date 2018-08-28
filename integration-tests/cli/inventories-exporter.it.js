@@ -11,7 +11,6 @@ let projectKey
 if (process.env.CI === 'true')
   projectKey = 'inventories-export-integration-test'
 else projectKey = process.env.npm_config_projectkey
-projectKey = 'inventories-export-integration-test'
 
 describe('StockExporter CLI', () => {
   const binPath = './integration-tests/node_modules/.bin/inventoriesexporter'
