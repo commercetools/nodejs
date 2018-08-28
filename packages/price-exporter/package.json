@@ -32,11 +32,11 @@
     "build": "babel src --out-dir lib"
   },
   "dependencies": {
-    "@commercetools/api-request-builder": "^4.0.2",
+    "@commercetools/api-request-builder": "4.0.2",
     "@commercetools/get-credentials": "2.1.5",
     "@commercetools/sdk-client": "1.5.8",
-    "@commercetools/sdk-middleware-auth": "^4.0.3",
-    "@commercetools/sdk-middleware-http": "^4.0.2",
+    "@commercetools/sdk-middleware-auth": "4.0.3",
+    "@commercetools/sdk-middleware-http": "4.0.2",
     "@commercetools/sdk-middleware-user-agent": "1.2.10",
     "JSONStream": "1.3.2",
     "fast-csv": "2.4.1",
