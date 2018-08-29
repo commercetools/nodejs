@@ -226,19 +226,22 @@ export default class ProductJsonToCsv {
   async _getChannelsById(ids: Array<string>): Promise<Array<Object>> {
     const notCachedIds = ids.filter((id: string) => !this.channelsCache[id])
 
-    const predicate = `id in ("${notCachedIds.join('", "')}")`
-    const channelService = this._createService('channels')
-    const uri = channelService.where(predicate).build()
-    const {
-      body: { results },
-    } = await this.fetchReferences(uri)
+    // fetch unknown channels from API
+    if (notCachedIds.length) {
+      const predicate = `id in ("${notCachedIds.join('", "')}")`
+      const channelService = this._createService('channels')
+      const uri = channelService.where(predicate).build()
+      const {
+        body: { results },
+      } = await this.fetchReferences(uri)
 
-    results.forEach((result: Channel) => {
-      // we should keep old channels in the cache because we can resolve
-      // multiple products in parallel and we don't want to fetch same channels
-      // multiple times
-      this.channelsCache[result.id] = result
-    })
+      results.forEach((result: Channel) => {
+        // we should keep old channels in the cache because we can resolve
+        // multiple products in parallel and we don't want to fetch same channels
+        // multiple times
+        this.channelsCache[result.id] = result
+      })
+    }
 
     // pick only requested channels from cache
     return pick(this.channelsCache, ids)
