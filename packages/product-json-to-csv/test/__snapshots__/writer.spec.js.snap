@@ -22,18 +22,18 @@ exports[`Writer ::writeToSingleCsvFile write products to a single file with spec
 "
 `;
 
-exports[`Writer ::writeToZipFile should handle exporting zero products 1`] = `
-"\\"id\\",\\"key\\",\\"productType\\",\\"variantId\\",\\"sku\\",\\"images\\",\\"addedAttr\\",\\"anotherAddedAttr\\",\\"article\\",\\"color\\",\\"colorFreeDefinition.en\\",\\"colorFreeDefinition.de\\",\\"designer\\"
-\\"75345ab-id\\",\\"product-key-2\\",\\"product-type-2\\",1,\\"A0E200000001YKI\\",\\"https://example.com/foobar/commer.jpg|3|4\\",\\"\\",\\"\\",\\"sample 089 WHT\\",\\"white\\",\\"black-white\\",\\"schwarz-weiß\\",\\"michaelkors\\"
-,,,3,\\"A0E200001YKI123\\",\\"https://example.com/foobar/commer234.jpg|3|3\\",,,,,,\\"schwarz-weiß\\",\\"michaelkors\\"
-"
-`;
-
 exports[`Writer ::writeToZipFile write products to multiple files based on productTypes 1`] = `
 "\\"id\\",\\"key\\",\\"productType\\",\\"variantId\\",\\"sku\\",\\"images\\",\\"addedAttr\\",\\"anotherAddedAttr\\",\\"article\\",\\"color\\",\\"colorFreeDefinition.en\\"
 \\"12345ab-id\\",\\"product-key\\",\\"product-type-1\\",1,\\"A0E200000001YKI\\",\\"image-url1\\",\\"\\",\\"\\",\\"sample 089 WHT\\",\\"white\\",\\"black-white\\"
 ,,,6,\\"A0E200001YKI123\\",\\"https://image1.de;myImage.com\\",,,\\"sample 089 WHT\\",\\"white\\",\\"black-white\\"
 \\"another5ab-id\\",\\"product-key\\",\\"product-type-1\\",1,\\"A0E200001YKI\\",,\\"\\",\\"\\",\\"sample 777 WHT\\",\\"grune\\",\\"grey-white\\"
 ,,,21,\\"PPP0001YKI123\\",\\"https://eg993\\",,,,\\"blau\\",\\"schwarz-weiß\\"
+"
+`;
+
+exports[`Writer ::writeToZipFile write products to multiple files based on productTypes 2`] = `
+"\\"id\\",\\"key\\",\\"productType\\",\\"variantId\\",\\"sku\\",\\"images\\",\\"addedAttr\\",\\"anotherAddedAttr\\",\\"article\\",\\"color\\",\\"colorFreeDefinition.en\\",\\"colorFreeDefinition.de\\",\\"designer\\"
+\\"75345ab-id\\",\\"product-key-2\\",\\"product-type-2\\",1,\\"A0E200000001YKI\\",\\"https://example.com/foobar/commer.jpg|3|4\\",\\"\\",\\"\\",\\"sample 089 WHT\\",\\"white\\",\\"black-white\\",\\"schwarz-weiß\\",\\"michaelkors\\"
+,,,3,\\"A0E200001YKI123\\",\\"https://example.com/foobar/commer234.jpg|3|3\\",,,,,,\\"schwarz-weiß\\",\\"michaelkors\\"
 "
 `;

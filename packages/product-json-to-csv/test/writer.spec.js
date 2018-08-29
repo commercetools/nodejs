@@ -150,36 +150,48 @@ describe('Writer', () => {
   describe('::writeToZipFile', () => {
     test('write products to multiple files based on productTypes', done => {
       const sampleStream = highland(sampleProducts)
+      const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
+      const output = tempFile.name
+      const outputStream = fs.createWriteStream(output)
+      const entries = []
+
+      // we need this function to synchronize two testStreams
+      const testEndCondition = () => {
+        if (entries.length === 2) {
+          expect(entries.sort()).toEqual([
+            'products/product-type-1.csv',
+            'products/product-type-2.csv',
+          ])
+          expect(entries.length).toEqual(2)
+          tempFile.removeCallback()
+          done()
+        }
+      }
+
       const verifyCsv1 = streamTest.toText((error, actual) => {
         expect(error).toBeFalsy()
         expect(actual).toMatchSnapshot()
+
+        testEndCondition()
       })
       const verifyCsv2 = streamTest.toText((error, actual) => {
         expect(error).toBeFalsy()
         expect(actual).toMatchSnapshot()
+
+        testEndCondition()
       })
 
-      const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
-      const output = tempFile.name
-      const outputStream = fs.createWriteStream(output)
-
-      let entries = 0
       // Extract data from zip file and test
       outputStream.on('finish', () => {
         fs.createReadStream(output)
           .pipe(unzip.Parse())
           .on('entry', entry => {
-            entries += 1
+            entries.push(entry.path)
+
             if (entry.path === 'products/product-type-1.csv')
               entry.pipe(verifyCsv1)
             else if (entry.path === 'products/product-type-2.csv')
               entry.pipe(verifyCsv2)
-
-            if (entries === 2) {
-              expect(entries).toEqual(2)
-              tempFile.removeCallback()
-              done()
-            }
           })
           .on('finish', () => {
             // TODO the "unzip" package fires finish event before entry events
