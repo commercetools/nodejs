@@ -840,4 +840,45 @@ describe('ProductJsonToCsv', () => {
       expect(productJsonToCsv.client.execute).toBeCalledWith(expectedRequest)
     })
   })
+
+  describe('::fetchChannels', () => {
+    beforeEach(() => {
+      productJsonToCsv.fetchReferences = jest
+        .fn()
+        .mockImplementationOnce(() =>
+          Promise.resolve({
+            body: {
+              results: [
+                {
+                  id: 'channel-id',
+                  key: 'channel-key',
+                },
+              ],
+            },
+          })
+        )
+        .mockImplementation(() =>
+          Promise.reject(new Error('I should not be called'))
+        )
+    })
+
+    test('should fetch and cache channel from API', async () => {
+      const res = await productJsonToCsv._getChannelsById(['channel-id'])
+
+      expect(res).toEqual({
+        'channel-id': {
+          id: 'channel-id',
+          key: 'channel-key',
+        },
+      })
+      expect(productJsonToCsv.fetchReferences).toBeCalledWith(
+        '/project-key/channels?where=id%20in%20(%22channel-id%22)'
+      )
+      expect(productJsonToCsv.fetchReferences).toHaveBeenCalledTimes(1)
+
+      // should not call fetchReferences again as it was already cached
+      await productJsonToCsv._getChannelsById(['channel-id'])
+      expect(productJsonToCsv.fetchReferences).toHaveBeenCalledTimes(1)
+    })
+  })
 })
