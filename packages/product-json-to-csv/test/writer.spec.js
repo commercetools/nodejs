@@ -132,7 +132,7 @@ describe('Writer', () => {
       )
     })
 
-    test('log success info on completion', done => {
+    test('log success info on csv completion', done => {
       const sampleStream = highland(sampleProducts)
       const headers = []
       const outputStream = streamTest.toText(() => {})
@@ -163,17 +163,51 @@ describe('Writer', () => {
       const output = tempFile.name
       const outputStream = fs.createWriteStream(output)
 
+      let entries = 0
       // Extract data from zip file and test
       outputStream.on('finish', () => {
         fs.createReadStream(output)
           .pipe(unzip.Parse())
           .on('entry', entry => {
+            entries += 1
             if (entry.path === 'products/product-type-1.csv')
               entry.pipe(verifyCsv1)
             else if (entry.path === 'products/product-type-2.csv')
               entry.pipe(verifyCsv2)
+
+            if (entries === 2) {
+              expect(entries).toEqual(2)
+              tempFile.removeCallback()
+              done()
+            }
           })
           .on('finish', () => {
+            // TODO the "unzip" package fires finish event before entry events
+            // TODO so we call done() on second entry instead of calling it here
+          })
+      })
+
+      writer.writeToZipFile(sampleStream, outputStream, logger)
+    })
+
+    test('should handle exporting zero products', done => {
+      const sampleStream = highland([])
+
+      const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
+      const output = tempFile.name
+      const outputStream = fs.createWriteStream(output)
+      let entries = 0
+
+      // Extract data from zip file and test
+      outputStream.on('finish', () => {
+        fs.createReadStream(output)
+          .pipe(unzip.Parse())
+          .on('entry', () => {
+            entries += 1
+          })
+          .on('finish', () => {
+            // there should be no products in a result zip file
+            expect(entries).toEqual(0)
             tempFile.removeCallback()
             done()
           })
@@ -182,7 +216,7 @@ describe('Writer', () => {
       writer.writeToZipFile(sampleStream, outputStream, logger)
     })
 
-    test('log success info on completion', done => {
+    test('log success info on zip completion', done => {
       const sampleStream = highland(sampleProducts)
 
       const tempFile = tmp.fileSync({ postfix: '.zip' })

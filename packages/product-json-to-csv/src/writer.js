@@ -7,6 +7,17 @@ import slugify from 'slugify'
 import tmp from 'tmp'
 import mapHeaders from './map-headers'
 
+export function archiveDir(dir, output, logger) {
+  const archive = archiver('zip')
+  archive.on('error', err => {
+    logger.error(err)
+    output.emit('error', err)
+  })
+  archive.pipe(output)
+  archive.directory(dir, 'products')
+  archive.finalize()
+}
+
 // Accept a highland stream and write the output to a single file
 export function writeToSingleCsvFile(
   productStream,
@@ -81,12 +92,10 @@ export function writeToZipFile(productStream, output, logger, del) {
       fileStream.write(`${csvData}\n`)
     })
     .done(() => {
+      if (Object.keys(streamCache).length === 0)
+        return archiveDir(tmpDir, output, logger)
+
       const emitOnce = new EmitOnce(streamCache, 'finish')
-      const archive = archiver('zip')
-      archive.on('error', err => {
-        logger.error(err)
-        output.emit('error', err)
-      })
       emitOnce.on('error', err => {
         logger.error(err)
         output.emit('error', err)
@@ -97,10 +106,8 @@ export function writeToZipFile(productStream, output, logger, del) {
         streamCache[key].end()
       })
       // zip files when all file writes have completed
-      emitOnce.on('finish', () => {
-        archive.pipe(output)
-        archive.directory(tmpDir, 'products')
-        archive.finalize()
+      return emitOnce.on('finish', () => {
+        archiveDir(tmpDir, output, logger)
         logger.info('All products have been written to ZIP file')
       })
     })
