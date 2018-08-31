@@ -1,6 +1,7 @@
 {
   "lerna": "2.7.1",
   "version": "independent",
+  "exact": true,
   "changelog": {
     "rootPath": ".",
     "repo": "commercetools/nodejs",
