@@ -262,6 +262,36 @@ describe('Writer', () => {
       writer.archiveDir(null, outputStream, logger)
     })
 
+    test('throw an error when streams fail', done => {
+      const tempFile = tmp.fileSync({ postfix: '.zip' })
+      const tmpDir = tmp.dirSync({ unsafeCleanup: true })
+      const outputStream = fs.createWriteStream(tempFile.name)
+      const failedStream = fs.createWriteStream(tempFile.name)
+      // throw error while ending stream
+      failedStream.end = () => {
+        failedStream.emit('error', new Error('test error'))
+      }
+      const inputStreams = { failedStream }
+
+      tmp.setGracefulCleanup()
+
+      outputStream.on('error', err => {
+        expect(err).toBeDefined()
+        expect(err.message).toEqual('test error')
+
+        tempFile.removeCallback()
+        tmpDir.removeCallback()
+        done()
+      })
+
+      writer.finishStreamsAndArchive(
+        inputStreams,
+        tmpDir.name,
+        outputStream,
+        logger
+      )
+    })
+
     test('throw an error when a write stream in emitOnce fails', done => {
       const tempFile = tmp.fileSync({ postfix: '.tmp' })
       const output = tempFile.name

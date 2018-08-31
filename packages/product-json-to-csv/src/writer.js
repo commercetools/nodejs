@@ -25,6 +25,25 @@ export function archiveDir(dir, output, logger) {
   archive.finalize()
 }
 
+export function finishStreamsAndArchive(streams, dir, output, logger) {
+  if (Object.keys(streams).length === 0) return archiveDir(dir, output, logger)
+
+  onStreamsFinished(streams, err => {
+    if (err) {
+      logger.error(err)
+      return output.emit('error', err)
+    }
+
+    archiveDir(dir, output, logger)
+    return logger.info('All products have been written to ZIP file')
+  })
+
+  // close all open file streams
+  return Object.keys(streams).forEach(key => {
+    streams[key].end()
+  })
+}
+
 // Accept a highland stream and write the output to a single file
 export function writeToSingleCsvFile(
   productStream,
@@ -98,24 +117,5 @@ export function writeToZipFile(productStream, output, logger, del) {
       })
       fileStream.write(`${csvData}\n`)
     })
-    .done(() => {
-      if (Object.keys(streamCache).length === 0)
-        return archiveDir(tmpDir, output, logger)
-
-      onStreamsFinished(streamCache, err => {
-        if (err) {
-          logger.error(err)
-          return output.emit('error', err)
-        }
-
-        archiveDir(tmpDir, output, logger)
-        return logger.info('All products have been written to ZIP file')
-      })
-
-      // close all open file streams
-      const streams = Object.keys(streamCache)
-      return streams.forEach(key => {
-        streamCache[key].end()
-      })
-    })
+    .done(() => finishStreamsAndArchive(streamCache, tmpDir, output, logger))
 }
