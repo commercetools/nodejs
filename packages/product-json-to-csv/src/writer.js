@@ -7,6 +7,13 @@ import slugify from 'slugify'
 import tmp from 'tmp'
 import mapHeaders from './map-headers'
 
+export function onStreamsFinished(streams, cb) {
+  const emitOnce = new EmitOnce(streams, 'finish')
+  emitOnce.on('error', err => cb(err))
+  // call callback when all streams are finished
+  emitOnce.on('finish', () => cb())
+}
+
 export function archiveDir(dir, output, logger) {
   const archive = archiver('zip')
   archive.on('error', err => {
@@ -95,20 +102,20 @@ export function writeToZipFile(productStream, output, logger, del) {
       if (Object.keys(streamCache).length === 0)
         return archiveDir(tmpDir, output, logger)
 
-      const emitOnce = new EmitOnce(streamCache, 'finish')
-      emitOnce.on('error', err => {
-        logger.error(err)
-        output.emit('error', err)
+      onStreamsFinished(streamCache, err => {
+        if (err) {
+          logger.error(err)
+          return output.emit('error', err)
+        }
+
+        archiveDir(tmpDir, output, logger)
+        return logger.info('All products have been written to ZIP file')
       })
+
       // close all open file streams
       const streams = Object.keys(streamCache)
-      streams.forEach(key => {
+      return streams.forEach(key => {
         streamCache[key].end()
-      })
-      // zip files when all file writes have completed
-      return emitOnce.on('finish', () => {
-        archiveDir(tmpDir, output, logger)
-        logger.info('All products have been written to ZIP file')
       })
     })
 }
