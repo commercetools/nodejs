@@ -45,6 +45,6 @@
   },
   "devDependencies": {
     "common-tags": "1.8.0",
-    "streamtest": "1.2.3"
+    "streamtest": "1.2.4"
   }
 }
