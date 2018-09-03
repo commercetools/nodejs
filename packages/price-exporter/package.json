@@ -48,6 +48,6 @@
     "yargs": "8.0.2"
   },
   "devDependencies": {
-    "streamtest": "1.2.4"
+    "streamtest": "1.2.3"
   }
 }

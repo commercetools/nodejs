@@ -1,8 +1,4 @@
-// Requiring directily from `jsondiffpatch` entry point will cause warnings
-// while bundling with webpack because of dynamic requires.
-// To get around this issue, simply require the `Diffpatcher` directly.
-// https://github.com/benjamine/jsondiffpatch/issues/76#issuecomment-270207970
-import { DiffPatcher } from 'jsondiffpatch/src/diffpatcher'
+import DiffPatcher from 'jsondiffpatch'
 
 export function objectHash(obj, index) {
   const objIndex = `$$index:${index}`

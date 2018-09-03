@@ -58,7 +58,7 @@
     "yargs": "10.1.2"
   },
   "devDependencies": {
-    "streamtest": "1.2.4",
+    "streamtest": "1.2.3",
     "unzip": "0.1.11"
   }
 }
