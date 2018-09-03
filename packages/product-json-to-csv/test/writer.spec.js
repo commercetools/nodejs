@@ -11,7 +11,10 @@ describe('Writer', () => {
   let logger
   let sampleProducts
   beforeEach(() => {
-    logger = { info: jest.fn() }
+    logger = {
+      info: jest.fn(),
+      error: jest.fn(),
+    }
     sampleProducts = [
       {
         id: '12345ab-id',
@@ -132,7 +135,7 @@ describe('Writer', () => {
       )
     })
 
-    test('log success info on completion', done => {
+    test('log success info on csv completion', done => {
       const sampleStream = highland(sampleProducts)
       const headers = []
       const outputStream = streamTest.toText(() => {})
@@ -150,30 +153,76 @@ describe('Writer', () => {
   describe('::writeToZipFile', () => {
     test('write products to multiple files based on productTypes', done => {
       const sampleStream = highland(sampleProducts)
+      const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
+      const output = tempFile.name
+      const outputStream = fs.createWriteStream(output)
+      const entries = []
+
+      // we need this function to synchronize two testStreams
+      const testEndCondition = () => {
+        if (entries.length === 2) {
+          expect(entries.sort()).toEqual([
+            'products/product-type-1.csv',
+            'products/product-type-2.csv',
+          ])
+          expect(entries.length).toEqual(2)
+          tempFile.removeCallback()
+          done()
+        }
+      }
+
       const verifyCsv1 = streamTest.toText((error, actual) => {
         expect(error).toBeFalsy()
         expect(actual).toMatchSnapshot()
+
+        testEndCondition()
       })
       const verifyCsv2 = streamTest.toText((error, actual) => {
         expect(error).toBeFalsy()
         expect(actual).toMatchSnapshot()
-      })
 
-      const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
-      const output = tempFile.name
-      const outputStream = fs.createWriteStream(output)
+        testEndCondition()
+      })
 
       // Extract data from zip file and test
       outputStream.on('finish', () => {
         fs.createReadStream(output)
           .pipe(unzip.Parse())
           .on('entry', entry => {
+            entries.push(entry.path)
+
             if (entry.path === 'products/product-type-1.csv')
               entry.pipe(verifyCsv1)
             else if (entry.path === 'products/product-type-2.csv')
               entry.pipe(verifyCsv2)
           })
           .on('finish', () => {
+            // TODO the "unzip" package fires finish event before entry events
+            // TODO so we call done() on second entry instead of calling it here
+          })
+      })
+
+      writer.writeToZipFile(sampleStream, outputStream, logger)
+    })
+
+    test('should handle exporting zero products', done => {
+      const sampleStream = highland([])
+
+      const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
+      const output = tempFile.name
+      const outputStream = fs.createWriteStream(output)
+      let entries = 0
+
+      // Extract data from zip file and test
+      outputStream.on('finish', () => {
+        fs.createReadStream(output)
+          .pipe(unzip.Parse())
+          .on('entry', () => {
+            entries += 1
+          })
+          .on('finish', () => {
+            // there should be no products in a result zip file
+            expect(entries).toEqual(0)
             tempFile.removeCallback()
             done()
           })
@@ -182,7 +231,7 @@ describe('Writer', () => {
       writer.writeToZipFile(sampleStream, outputStream, logger)
     })
 
-    test('log success info on completion', done => {
+    test('log success info on zip completion', done => {
       const sampleStream = highland(sampleProducts)
 
       const tempFile = tmp.fileSync({ postfix: '.zip' })
@@ -198,6 +247,65 @@ describe('Writer', () => {
       })
 
       writer.writeToZipFile(sampleStream, outputStream, logger)
+    })
+
+    test('throw an error when archiver fails', done => {
+      const outputStream = streamTest.toText(() => {})
+
+      outputStream.on('error', err => {
+        expect(err).toBeDefined()
+        expect(err.code).toEqual('DIRECTORYDIRPATHREQUIRED')
+        done()
+      })
+
+      // try to archive an invalid folder
+      writer.archiveDir(null, outputStream, logger)
+    })
+
+    test('throw an error when streams fail', done => {
+      const tempFile = tmp.fileSync({ postfix: '.zip' })
+      const tmpDir = tmp.dirSync({ unsafeCleanup: true })
+      const outputStream = fs.createWriteStream(tempFile.name)
+      const failedStream = fs.createWriteStream(tempFile.name)
+      // throw error while ending stream
+      failedStream.end = () => {
+        failedStream.emit('error', new Error('test error'))
+      }
+      const inputStreams = { failedStream }
+
+      tmp.setGracefulCleanup()
+
+      outputStream.on('error', err => {
+        expect(err).toBeDefined()
+        expect(err.message).toEqual('test error')
+
+        tempFile.removeCallback()
+        tmpDir.removeCallback()
+        done()
+      })
+
+      writer.finishStreamsAndArchive(
+        inputStreams,
+        tmpDir.name,
+        outputStream,
+        logger
+      )
+    })
+
+    test('throw an error when a write stream in emitOnce fails', done => {
+      const tempFile = tmp.fileSync({ postfix: '.tmp' })
+      const output = tempFile.name
+      const failedStream = fs.createWriteStream(output)
+      const inputStreams = { failedStream }
+
+      writer.onStreamsFinished(inputStreams, err => {
+        expect(err).toBeDefined()
+        expect(err.message).toEqual('test error')
+        tempFile.removeCallback()
+        done()
+      })
+
+      failedStream.emit('error', new Error('test error'))
     })
   })
 })

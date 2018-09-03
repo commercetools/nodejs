@@ -7,6 +7,43 @@ import slugify from 'slugify'
 import tmp from 'tmp'
 import mapHeaders from './map-headers'
 
+export function onStreamsFinished(streams, cb) {
+  const emitOnce = new EmitOnce(streams, 'finish')
+  emitOnce.on('error', err => cb(err))
+  // call callback when all streams are finished
+  emitOnce.on('finish', () => cb())
+}
+
+export function archiveDir(dir, output, logger) {
+  const archive = archiver('zip')
+  archive.on('error', err => {
+    logger.error(err)
+    output.emit('error', err)
+  })
+  archive.pipe(output)
+  archive.directory(dir, 'products')
+  archive.finalize()
+}
+
+export function finishStreamsAndArchive(streams, dir, output, logger) {
+  if (Object.keys(streams).length === 0) return archiveDir(dir, output, logger)
+
+  onStreamsFinished(streams, err => {
+    if (err) {
+      logger.error(err)
+      return output.emit('error', err)
+    }
+
+    archiveDir(dir, output, logger)
+    return logger.info('All products have been written to ZIP file')
+  })
+
+  // close all open file streams
+  return Object.keys(streams).forEach(key => {
+    streams[key].end()
+  })
+}
+
 // Accept a highland stream and write the output to a single file
 export function writeToSingleCsvFile(
   productStream,
@@ -80,28 +117,5 @@ export function writeToZipFile(productStream, output, logger, del) {
       })
       fileStream.write(`${csvData}\n`)
     })
-    .done(() => {
-      const emitOnce = new EmitOnce(streamCache, 'finish')
-      const archive = archiver('zip')
-      archive.on('error', err => {
-        logger.error(err)
-        output.emit('error', err)
-      })
-      emitOnce.on('error', err => {
-        logger.error(err)
-        output.emit('error', err)
-      })
-      // close all open file streams
-      const streams = Object.keys(streamCache)
-      streams.forEach(key => {
-        streamCache[key].end()
-      })
-      // zip files when all file writes have completed
-      emitOnce.on('finish', () => {
-        archive.pipe(output)
-        archive.directory(tmpDir, 'products')
-        archive.finalize()
-        logger.info('All products have been written to ZIP file')
-      })
-    })
+    .done(() => finishStreamsAndArchive(streamCache, tmpDir, output, logger))
 }
