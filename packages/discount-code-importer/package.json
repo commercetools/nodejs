@@ -36,7 +36,7 @@
     "@commercetools/sdk-middleware-user-agent": "1.2.10",
     "@commercetools/sync-actions": "1.27.1",
     "lodash": "4.17.10",
-    "node-fetch": "2.1.2",
+    "node-fetch": "2.2.0",
     "npmlog": "4.1.2"
   }
 }
