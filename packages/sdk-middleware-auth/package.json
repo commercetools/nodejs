@@ -39,6 +39,6 @@
     "node-fetch": "2.1.2"
   },
   "devDependencies": {
-    "nock": "9.2.3"
+    "nock": "9.6.1"
   }
 }

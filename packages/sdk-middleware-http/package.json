@@ -35,7 +35,7 @@
     "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSdkMiddlewareHttp -i src/index.js -o dist/commercetools-sdk-middleware-http.cjs.js"
   },
   "devDependencies": {
-    "nock": "9.2.3",
+    "nock": "9.6.1",
     "node-fetch": "2.1.2"
   }
 }
