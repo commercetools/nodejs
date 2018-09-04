@@ -1,5 +1,6 @@
 // jsondiffpatch does not yet handle minified UMD builds
 // with es6 modules so we use require instead below
+// TODO: create an issue here https://github.com/benjamine/jsondiffpatch/issues/new
 const DiffPatcher = require('jsondiffpatch').DiffPatcher
 
 export function objectHash(obj, index) {
