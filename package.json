@@ -33,8 +33,8 @@
     "docs:watch": "npm run docs:prepare && gitbook serve",
     "docs:publish": "npm run docs:clean && npm run docs:build && ./scripts/publish-docs",
     "flow": "eslint packages",
-    "generate:todos": "leasot -x 'packages/*/src/**.js'",
-    "build:todos": "leasot -x --reporter markdown 'packages/*/src/**.js' > TODOS.md",
+    "generate:todos": "leasot -x 'packages/*/(src|test)/**/**.js'",
+    "build:todos": "leasot -x --reporter markdown 'packages/*/(src|test)/**/**.js' > TODOS.md",
     "package-readme-entry": "./scripts/package-readme-entry.sh"
   },
   "devDependencies": {
