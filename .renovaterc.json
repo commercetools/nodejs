@@ -3,6 +3,7 @@
     "config:base",
     ":pinAllExceptPeerDependencies",
     ":prHourlyLimitNone",
+    ":prConcurrentLimitNone",
     "schedule:weekly"
   ]
 }
