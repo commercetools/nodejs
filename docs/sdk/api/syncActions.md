@@ -19,11 +19,11 @@ npm install --save @commercetools/sync-actions
 
 ## `createSyncCategories(actionGroups)`
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _categories_.
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _categories_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -57,11 +57,11 @@ client.execute(categoriesRequest)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _customers_.
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _customers_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -96,11 +96,11 @@ client.execute(customersRequest)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _inventories_.
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _inventories_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -134,11 +134,11 @@ client.execute(inventoriesRequest)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _orders_.
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _orders_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -172,11 +172,11 @@ client.execute(ordersRequest)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _products_.
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _products_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -210,11 +210,11 @@ client.execute(productsRequest)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _product-discounts_.
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _product-discounts_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -248,11 +248,11 @@ client.execute(productDiscountsRequests)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _discount-codes_.
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _discount-codes_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -286,11 +286,11 @@ client.execute(discountCodesRequest)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _customer-groups_.
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _customer-groups_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -326,11 +326,11 @@ client.execute(customerGroupRequest)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _cart-discounts_.
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _cart-discounts_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -364,11 +364,11 @@ client.execute(cartDiscountsRequests)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _tax-categories_.
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _tax-categories_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -402,11 +402,11 @@ client.execute(taxCategoriesRequests)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _zones_.
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _zones_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -440,11 +440,11 @@ client.execute(zonesRequests)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for [_productTypes_](https://docs.commercetools.com/http-api-projects-productTypes.html).
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for [_productTypes_](https://docs.commercetools.com/http-api-projects-productTypes.html).
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
 2.  `config` _(Object)_: A configuration object to which has one of the following options:
 
 | Key                     | Type      | Required             | Description                                                                                                            |
@@ -490,11 +490,11 @@ client.execute(productTypesRequest)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _zones_.
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _zones_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -529,11 +529,11 @@ client.execute(shippingMethodsRequests)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _states_.
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _states_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -568,11 +568,11 @@ client.execute(statesRequests)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#sync-action) that allows to build API update actions for _channels_.
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _channels_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#sync-action) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
 
 #### Usage example
 
@@ -606,7 +606,59 @@ client.execute(channelsRequests)
 .catch(error => ...)
 ```
 
-Note that the channels syncer currently generaetes only `setRoles` actions and not individual `addRoles` and `removeRoles` respectively.
+Note that the channels syncer currently generates only `setRoles` actions and not individual `addRoles` and `removeRoles` respectively.
+
+## `createSyncTypes(actionGroups, config)`
+
+> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for [_types_](https://docs.commercetools.com/http-api-projects-types.html).
+
+**Please note** that there is no `remove action` for `enum` values. So this package will comply with the [platform](https://docs.commercetools.com/http-api-projects-types.html#add-enumvalue-to-fielddefinition) and only generate `change` and `add` actions for any `enum`.
+
+#### Arguments
+
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+2.  `config` _(Object)_: A configuration object to which has one of the following options:
+
+| Key                     | Type      | Required             | Description                                                                                                            |
+| ----------------------- | --------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `shouldOmitEmptyString` | `Boolean` | - (default: `false`) | a flag which determines whether we should treat empty strings as **NOT A VALUE** in addition to `undefined` and `null` |
+
+#### Usage example
+
+```js
+import { createSyncTypes } from '@commercetools/sync-actions'
+import { createClient } from '@commercetools/sdk-client'
+
+const syncTypes = createSyncTypes()
+const client = createClient({
+  middlewares: [...],
+})
+
+const before = {
+  id: 'type-id',
+  name: 'Type',
+  version: 1,
+}
+
+const now = {
+  id: 'type-id',
+  name: 'Other Type',
+  version: 1,
+}
+
+const actions = syncTypes.buildActions(now, before)
+const typesRequest = {
+  url: `/types/${before.id}`,
+  method: 'POST',
+  body: JSON.stringify({ version: before.version, actions }),
+}
+
+client.execute(typesRequest)
+.then(result => ...)
+.catch(error => ...)
+```
 
 ### With `shouldOmitEmptyString=true`
 
