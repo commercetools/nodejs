@@ -1,7 +1,7 @@
 import typesSyncFn from '../src/types'
 
 const createTestType = custom => ({
-  id: 'product-type-id',
+  id: 'type-id',
   fieldDefinitions: [],
   ...custom,
 })
