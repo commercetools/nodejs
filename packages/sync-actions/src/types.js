@@ -3,7 +3,7 @@ import flatten from 'lodash.flatten'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import * as typeActions from './types-actions'
-import * as diffpatcher from './utils/diffpatcher'
+import * as diffPatcher from './utils/diffpatcher'
 import findMatchingPairs from './utils/find-matching-pairs'
 
 const actionGroups = ['base', 'fieldDefinitions']
@@ -36,7 +36,7 @@ function createTypeMapActions(mapActionGroup, syncActionConfig) {
 export default (actionGroupList, syncActionConfig) => {
   const mapActionGroup = createMapActionGroup(actionGroupList)
   const doMapActions = createTypeMapActions(mapActionGroup, syncActionConfig)
-  const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
+  const buildActions = createBuildActions(diffPatcher.diff, doMapActions)
   return { buildActions }
 }
 
