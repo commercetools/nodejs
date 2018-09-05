@@ -4,8 +4,9 @@ import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import * as typeActions from './types-actions'
 import * as diffpatcher from './utils/diffpatcher'
+import findMatchingPairs from './utils/find-matching-pairs'
 
-const actionGroups = ['base', 'attributes']
+const actionGroups = ['base', 'fieldDefinitions']
 
 function createTypeMapActions(mapActionGroup, syncActionConfig) {
   return function doMapActions(diff, next, previous) {
@@ -13,6 +14,19 @@ function createTypeMapActions(mapActionGroup, syncActionConfig) {
     allActions.push(
       mapActionGroup('base', () =>
         typeActions.actionsMapBase(diff, previous, next, syncActionConfig)
+      ),
+      mapActionGroup('fieldDefinitions', () =>
+        typeActions.actionsMapFieldDefinitions(
+          diff.fieldDefinitions,
+          previous.fieldDefinitions,
+          next.fieldDefinitions,
+          findMatchingPairs(
+            diff.fieldDefinitions,
+            previous.fieldDefinitions,
+            next.fieldDefinitions,
+            'name'
+          )
+        )
       )
     )
     return flatten(allActions)

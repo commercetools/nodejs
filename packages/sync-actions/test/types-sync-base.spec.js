@@ -4,7 +4,7 @@ import { baseActionsList } from '../src/types-actions'
 
 describe('Exports', () => {
   test('action group list', () => {
-    expect(actionGroups).toEqual(['base', 'attributes'])
+    expect(actionGroups).toEqual(['base', 'fieldDefinitions'])
   })
 
   test('correctly define base actions list', () => {
