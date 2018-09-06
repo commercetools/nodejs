@@ -141,12 +141,10 @@ export function writeToZipFile(productStream, output, logger) {
       const row = mapValues(lastExport.headers, product)
       writeXlsxRow(lastExport.excel.worksheet, row)
     })
-    .done(() =>
-      finishWorksheetsAndArchive(
-        Object.values(exportByProductType),
-        tmpDir,
-        output,
-        logger
+    .done(() => {
+      const exports = Object.keys(exportByProductType).map(
+        key => exportByProductType[key]
       )
-    )
+      return finishWorksheetsAndArchive(exports, tmpDir, output, logger)
+    })
 }

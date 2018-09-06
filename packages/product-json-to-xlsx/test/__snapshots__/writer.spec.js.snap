@@ -88,6 +88,76 @@ Array [
 ]
 `;
 
+exports[`Writer ::writeToZipFile should handle exporting zero products: xlsx1 1`] = `
+Array [
+  Array [
+    "id",
+    "key",
+    "productType",
+    "variantId",
+    "sku",
+    "images",
+    "addedAttr",
+    "anotherAddedAttr",
+    "article",
+    "color",
+    "colorFreeDefinition.en",
+  ],
+  Array [
+    "12345ab-id",
+    "product-key",
+    "product-type-1",
+    1,
+    "A0E200000001YKI",
+    "image-url1",
+    undefined,
+    undefined,
+    "sample 089 WHT",
+    "white",
+    "black-white",
+  ],
+  Array [
+    undefined,
+    undefined,
+    undefined,
+    6,
+    "A0E200001YKI123",
+    "https://image1.de;myImage.com",
+    undefined,
+    undefined,
+    "sample 089 WHT",
+    "white",
+    "black-white",
+  ],
+  Array [
+    "another5ab-id",
+    "product-key",
+    "product-type-1",
+    1,
+    "A0E200001YKI",
+    undefined,
+    undefined,
+    undefined,
+    "sample 777 WHT",
+    "grune",
+    "grey-white",
+  ],
+  Array [
+    undefined,
+    undefined,
+    undefined,
+    21,
+    "PPP0001YKI123",
+    "https://eg993",
+    undefined,
+    undefined,
+    undefined,
+    "blau",
+    "schwarz-weiß",
+  ],
+]
+`;
+
 exports[`Writer ::writeToZipFile should handle exporting zero products: xlsx2 1`] = `
 Array [
   Array [
@@ -204,6 +274,56 @@ Array [
     undefined,
     "blau",
     "schwarz-weiß",
+  ],
+]
+`;
+
+exports[`Writer ::writeToZipFile write products to multiple files based on productTypes: xlsx2 1`] = `
+Array [
+  Array [
+    "id",
+    "key",
+    "productType",
+    "variantId",
+    "sku",
+    "images",
+    "addedAttr",
+    "anotherAddedAttr",
+    "article",
+    "color",
+    "colorFreeDefinition.en",
+    "colorFreeDefinition.de",
+    "designer",
+  ],
+  Array [
+    "75345ab-id",
+    "product-key-2",
+    "product-type-2",
+    1,
+    "A0E200000001YKI",
+    "https://example.com/foobar/commer.jpg|3|4",
+    undefined,
+    undefined,
+    "sample 089 WHT",
+    "white",
+    "black-white",
+    "schwarz-weiß",
+    "michaelkors",
+  ],
+  Array [
+    undefined,
+    undefined,
+    undefined,
+    3,
+    "A0E200001YKI123",
+    "https://example.com/foobar/commer234.jpg|3|3",
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    undefined,
+    "schwarz-weiß",
+    "michaelkors",
   ],
 ]
 `;
