@@ -163,8 +163,9 @@ export function actionsMapFieldDefinitions(
   // https://docs.commercetools.com/http-api-projects-types.html#change-key
   const removeActions = ['setDescription', 'removeFieldDefinition']
 
-  const sortedActions = flatten(
-    sortBy(actions, action => !removeActions.includes(action.action))
+  const sortedActions = sortBy(
+    actions,
+    action => !removeActions.includes(action.action)
   )
 
   return sortedActions
