@@ -77,6 +77,25 @@ describe('Actions', () => {
       ])
     })
   })
+  describe('with empty key change (shouldOmitEmptyString=false)', () => {
+    beforeEach(() => {
+      before = {
+        key: null,
+      }
+      now = {
+        key: '',
+      }
+      updateActions = typesSync.buildActions(now, before)
+    })
+    test('should return `changeKey` update-action', () => {
+      expect(updateActions).toEqual([
+        {
+          action: 'changeKey',
+          key: '',
+        },
+      ])
+    })
+  })
   describe('with description change', () => {
     beforeEach(() => {
       before = {
