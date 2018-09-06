@@ -276,4 +276,64 @@ describe('Actions', () => {
       })
     })
   })
+  describe('with removal and changing label of fieldDefinitions', () => {
+    beforeEach(() => {
+      before = createTestType({
+        fieldDefinitions: [
+          {
+            type: { name: 'text' },
+            name: 'should-not-change',
+            label: {
+              en: 'should-not-change',
+            },
+          },
+          {
+            type: { name: 'text' },
+            name: 'should-be-removed',
+            label: {
+              en: 'should-be-removed',
+            },
+          },
+          {
+            type: { name: 'text' },
+            name: 'should-change',
+            label: {
+              en: 'from-this',
+            },
+          },
+        ],
+      })
+      now = createTestType({
+        fieldDefinitions: [
+          {
+            type: { name: 'text' },
+            name: 'should-not-change',
+            label: {
+              en: 'should-not-change',
+            },
+          },
+          {
+            type: { name: 'text' },
+            name: 'should-change',
+            label: {
+              en: 'to-this',
+            },
+          },
+        ],
+      })
+      updateActions = typesSync.buildActions(now, before)
+    })
+    test('should return `changeLabel` and `removeFieldDefinition` action', () => {
+      expect(updateActions).toEqual([
+        {
+          action: 'changeLabel',
+          fieldName: 'should-change',
+          label: {
+            en: 'to-this',
+          },
+        },
+        { action: 'removeFieldDefinition', fieldName: 'should-be-removed' },
+      ])
+    })
+  })
 })
