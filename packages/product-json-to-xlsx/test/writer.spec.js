@@ -181,14 +181,18 @@ describe('Writer', () => {
         fs.createReadStream(output)
           .pipe(unzip.Parse())
           .on('entry', async entry => {
-            entries.push(entry.path)
             const excelInfo = await analyzeExcelStream(entry)
+            // push to entries array after we finish async operation
+            // otherwise it would push both entries while analysing first entry
+            // and the test would end prematurely
+            entries.push(entry.path)
 
             // test content of excel files
-            if (entry.path === 'products/product-type-1.xlsx')
+            if (entry.path === 'products/product-type-1.xlsx') {
               expect(excelInfo.rows).toMatchSnapshot('xlsx1')
-            else if (entry.path === 'products/product-type-2.xlsx')
+            } else if (entry.path === 'products/product-type-2.xlsx') {
               expect(excelInfo.rows).toMatchSnapshot('xlsx2')
+            }
 
             // test if both productTypes were exported
             if (entries.length === 2) {
@@ -271,12 +275,9 @@ describe('Writer', () => {
       const failedStream = fs.createWriteStream(tempFile.name)
       const excelExports = [
         {
-          stream: failedStream,
           excel: {
-            workbook: {
-              // throw error while finishing XLSX workbook
-              commit: () => failedStream.emit('error', new Error('test error')),
-            },
+            stream: failedStream,
+            finish: () => failedStream.emit('error', new Error('test error')),
           },
         },
       ]

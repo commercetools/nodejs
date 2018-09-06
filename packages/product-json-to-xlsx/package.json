@@ -22,7 +22,7 @@
     "name": "Jan Juna",
     "email": "jan.juna-ext@commercetools.de"
   },
-  "main": "lib/main.js",
+  "main": "lib/index.js",
   "bin": {
     "product-json-to-xlsx": "bin/product-json-to-xlsx.js"
   },
