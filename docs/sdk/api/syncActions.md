@@ -436,56 +436,6 @@ client.execute(zonesRequests)
 .catch(error => ...)
 ```
 
-## `createSyncProductTypes(actionGroups, config)`
-
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
-
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for [_productTypes_](https://docs.commercetools.com/http-api-projects-productTypes.html).
-
-#### Arguments
-
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
-2.  `config` _(Object)_: A configuration object to which has one of the following options:
-
-| Key                     | Type      | Required             | Description                                                                                                            |
-| ----------------------- | --------- | -------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `shouldOmitEmptyString` | `Boolean` | - (default: `false`) | a flag which determines whether we should treat empty strings as **NOT A VALUE** in addition to `undefined` and `null` |
-
-#### Usage example
-
-```js
-import { createSyncProductTypes } from '@commercetools/sync-actions'
-import { createClient } from '@commercetools/sdk-client'
-
-const syncProductTypes = createSyncProductTypes()
-const client = createClient({
-  middlewares: [...],
-})
-
-const before = {
-  id: 'product-type-id',
-  name: 'Product Type',
-  version: 1,
-}
-
-const now = {
-  id: 'product-type-id',
-  name: 'Other Product Type',
-  version: 1,
-}
-
-const actions = syncProductTypes.buildActions(now, before)
-const productTypesRequest = {
-  url: `/product-types/${before.id}`,
-  method: 'POST',
-  body: JSON.stringify({ version: before.version, actions }),
-}
-
-client.execute(productTypesRequest)
-.then(result => ...)
-.catch(error => ...)
-```
-
 ## `createSyncShippingMethods(actionGroups)`
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
@@ -684,7 +634,7 @@ The final value of the action as displayed above will be given, _regardless if t
 See example below.
 
 ```js
-const productTypeSync = createSyncProductTypes([], {
+const productSync = createSyncProducts([], {
   shouldOmitEmptyString: true,
 })
 const before = { key: '' }
