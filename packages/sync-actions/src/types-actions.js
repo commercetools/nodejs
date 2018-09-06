@@ -1,5 +1,6 @@
 import forEach from 'lodash.foreach'
 import flatten from 'lodash.flatten'
+import sortBy from 'lodash.sortby'
 
 import createBuildArrayActions, {
   ADD_ACTIONS,
@@ -162,12 +163,9 @@ export function actionsMapFieldDefinitions(
   // https://docs.commercetools.com/http-api-projects-types.html#change-key
   const removeActions = ['setDescription', 'removeFieldDefinition']
 
-  const removeActionsToExecute = actions.filter(action =>
-    removeActions.includes(action.action)
-  )
-  const otherActionsToExecute = actions.filter(
-    action => !removeActions.includes(action.action)
+  const sortedActions = flatten(
+    sortBy(actions, action => !removeActions.includes(action.action))
   )
 
-  return [...removeActionsToExecute, ...otherActionsToExecute]
+  return sortedActions
 }
