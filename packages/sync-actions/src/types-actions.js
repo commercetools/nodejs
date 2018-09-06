@@ -161,11 +161,9 @@ export function actionsMapFieldDefinitions(
   // in order to prevent any eventual removal of `addAction`.
   // List of `removeActions` can be found here
   // https://docs.commercetools.com/http-api-projects-types.html#change-key
-  const removeActions = ['setDescription', 'removeFieldDefinition']
-
   const sortedActions = sortBy(
     actions,
-    action => !removeActions.includes(action.action)
+    action => action.action !== 'removeFieldDefinition'
   )
 
   return sortedActions
