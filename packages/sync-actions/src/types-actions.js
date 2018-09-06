@@ -155,5 +155,19 @@ export function actionsMapFieldDefinitions(
       }
     }
   })
-  return actions
+
+  // Make sure to execute removeActions before creating new ones
+  // in order to prevent any eventual removal of `addAction`.
+  // List of `removeActions` can be found here
+  // https://docs.commercetools.com/http-api-projects-types.html#change-key
+  const removeActions = ['setDescription', 'removeFieldDefinition']
+
+  const removeActionsToExecute = actions.filter(action =>
+    removeActions.includes(action.action)
+  )
+  const otherActionsToExecute = actions.filter(
+    action => !removeActions.includes(action.action)
+  )
+
+  return [...removeActionsToExecute, ...otherActionsToExecute]
 }

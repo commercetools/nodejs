@@ -144,6 +144,10 @@ describe('Actions', () => {
     test('should return `removeFieldDefinition` and `addFieldDefinition` actions', () => {
       expect(updateActions).toEqual([
         {
+          action: 'removeFieldDefinition',
+          fieldName: 'number-field-definition',
+        },
+        {
           action: 'addFieldDefinition',
           fieldDefinition: {
             type: { name: 'text' },
@@ -152,10 +156,6 @@ describe('Actions', () => {
               en: 'text-en',
             },
           },
-        },
-        {
-          action: 'removeFieldDefinition',
-          fieldName: 'number-field-definition',
         },
       ])
     })
@@ -325,6 +325,7 @@ describe('Actions', () => {
     })
     test('should return `changeLabel` and `removeFieldDefinition` action', () => {
       expect(updateActions).toEqual([
+        { action: 'removeFieldDefinition', fieldName: 'should-be-removed' },
         {
           action: 'changeLabel',
           fieldName: 'should-change',
@@ -332,7 +333,6 @@ describe('Actions', () => {
             en: 'to-this',
           },
         },
-        { action: 'removeFieldDefinition', fieldName: 'should-be-removed' },
       ])
     })
   })
