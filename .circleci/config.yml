@@ -21,19 +21,7 @@ aliases:
 
   - &yarn_install
     name: Installing
-    # Ignoring scripts (e.g. post-install) to gain more control
-    # in the jobs to only e.g. build when explicitely needed.
-    command: yarn install --pure-lockfile --ignore-scripts
-
-  - &yarn_bootstrap
-    name: Bootstraping
-    # Limiting the default concurrency (4) of lerna to 2
-    # as the build otherwise dies due to resouce restrictions.
-    command: yarn bootstrap --concurrency=2
-
-  - &yarn_build
-    name: Building
-    command: yarn build
+    command: yarn install --pure-lockfile
 
   - &unit_test
     name: Unit testing
@@ -53,8 +41,6 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
-      - run: *yarn_bootstrap
-      - run: *yarn_build
       - save_cache: *save_yarn_cache
       - run:
           name: Linting
@@ -65,8 +51,6 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
-      - run: *yarn_bootstrap
-      - run: *yarn_build
       - save_cache: *save_yarn_cache
       - run: *unit_test
   test_unit_node_8:
@@ -75,8 +59,6 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
-      - run: *yarn_bootstrap
-      - run: *yarn_build
       - save_cache: *save_yarn_cache
       - run: *unit_test_with_coverage
   test_integration:
@@ -85,8 +67,6 @@ jobs:
       - checkout
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
-      - run: *yarn_bootstrap
-      - run: *yarn_build
       - save_cache: *save_yarn_cache
       - run:
           name: Integration testing

@@ -198,7 +198,7 @@ describe('Writer', () => {
           })
           .on('finish', () => {
             // TODO the "unzip" package fires finish event before entry events
-            // TODO so we call done() on second entry instead of calling it here
+            // so we call done() on second entry instead of calling it here
           })
       })
 
