@@ -146,7 +146,7 @@ describe('Writer', () => {
         expect(secondWorksheet).not.toBeDefined()
         expect(rows).toMatchSnapshot()
 
-        tempFile.removeCallback() // TODO UNCOMMENT
+        tempFile.removeCallback()
         done()
       })
 
@@ -212,7 +212,6 @@ describe('Writer', () => {
 
     test('should handle exporting zero products', done => {
       const sampleStream = highland([])
-
       const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
       const output = tempFile.name
       const outputStream = fs.createWriteStream(output)
