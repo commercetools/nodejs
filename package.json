@@ -106,8 +106,5 @@
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
     }
-  },
-  "dependencies": {
-    "exceljs": "^1.6.2"
   }
 }
