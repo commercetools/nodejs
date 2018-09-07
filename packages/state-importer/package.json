@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/state-importer",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "Import states to the commercetools platform",
   "main": "lib/main.js",
   "scripts": {
@@ -28,10 +28,10 @@
   "dependencies": {
     "@commercetools/api-request-builder": "4.0.2",
     "@commercetools/sdk-client": "1.5.8",
-    "@commercetools/sdk-middleware-auth": "4.0.3",
-    "@commercetools/sdk-middleware-http": "4.0.2",
+    "@commercetools/sdk-middleware-auth": "4.0.4",
+    "@commercetools/sdk-middleware-http": "4.0.3",
     "@commercetools/sdk-middleware-user-agent": "1.2.10",
-    "@commercetools/sync-actions": "1.27.1",
+    "@commercetools/sync-actions": "1.28.0",
     "node-fetch": "2.2.0"
   },
   "devDependencies": {
