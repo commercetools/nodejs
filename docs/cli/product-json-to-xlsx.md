@@ -38,6 +38,7 @@ Options:
                                    added to each variant row.                  [boolean]
   --language, -l                   Language used for localised attributes such as
                                    category names.              [string] [default: "en"]
+  --delimiter, -d                  Used template CSV delimiter.           [default: ","]
   --multiValueDelimiter, -m        Used CSV delimiter in multiValue fields. [default: ";"]
   --logLevel                       Logging level: error, warn, info or debug    [string]
                                                                        [default: "info"]

@@ -104,6 +104,11 @@ Required scopes: ['view_products']`,
     describe: 'Language used for localised attributes such as category names.',
     type: 'string',
   })
+  .option('delimiter', {
+    alias: 'd',
+    default: ',',
+    describe: 'Used template CSV delimiter.',
+  })
   .option('multiValueDelimiter', {
     alias: 'm',
     default: ';',
