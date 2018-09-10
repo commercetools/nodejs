@@ -3,23 +3,37 @@ const isEnv = env => env === process.env.NODE_ENV
 const getPresets = () => {
   switch (process.env.NODE_ENV) {
     case 'development':
-      return { targets: { node: 'current' }, modules: 'commonjs' }
+      return {
+        targets: { node: 'current' },
+        modules: 'commonjs',
+        useBuiltIns: 'usage',
+        include: ['es7.object.entries'],
+      }
     case 'rollup':
       return {
-        targets: { browsers: ['last 2 versions'], node: 'current' },
+        targets: {
+          browsers: ['last 2 versions'],
+          node: 'current',
+        },
         modules: false,
-        useBuiltIns: 'entry',
-        include: ['es7.object.entries'],
       }
     case 'production':
       return {
-        targets: { browsers: ['last 2 versions'], node: '6' },
+        targets: {
+          browsers: ['last 2 versions'],
+          node: '6',
+        },
         modules: false,
-        useBuiltIns: 'entry',
+        useBuiltIns: 'usage',
         include: ['es7.object.entries'],
       }
     case 'cli':
-      return { targets: { node: '6' }, modules: 'commonjs' }
+      return {
+        targets: { node: '6' },
+        modules: 'commonjs',
+        useBuiltIns: 'usage',
+        include: ['es7.object.entries'],
+      }
     default:
       break
   }
