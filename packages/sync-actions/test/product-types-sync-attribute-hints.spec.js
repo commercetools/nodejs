@@ -1,4 +1,3 @@
-// import clone from '../src/utils/clone'
 import createSyncProductTypes from '../src/product-types'
 
 const createAttributeDefinitionDraftItem = custom => ({
