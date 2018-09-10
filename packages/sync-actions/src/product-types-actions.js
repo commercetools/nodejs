@@ -1,19 +1,11 @@
 import forEach from 'lodash.foreach'
 import flatten from 'lodash.flatten'
 import { deepEqual } from 'fast-equals'
-import createBuildArrayActions, {
-  ADD_ACTIONS,
-  REMOVE_ACTIONS,
-  CHANGE_ACTIONS,
-} from './utils/create-build-array-actions'
 import { buildBaseAttributesActions } from './utils/common-actions'
-import * as diffpatcher from './utils/diffpatcher'
 import extractMatchingPairs from './utils/extract-matching-pairs'
 
 const REGEX_NUMBER = new RegExp(/^\d+$/)
-const REGEX_UNDERSCORE_NUMBER = new RegExp(/^_\d+$/)
 const getIsChangedOperation = key => REGEX_NUMBER.test(key)
-const getIsRemovedOperation = key => REGEX_UNDERSCORE_NUMBER.test(key)
 
 export const baseActionsList = [
   { action: 'changeName', key: 'name' },
@@ -22,6 +14,7 @@ export const baseActionsList = [
 ]
 
 export function actionsMapBase(diff, previous, next, config = {}) {
+  if (!diff) return []
   return buildBaseAttributesActions({
     diff,
     actions: baseActionsList,

@@ -10,9 +10,8 @@ import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import * as productTypeActions from './product-types-actions'
 import * as diffpatcher from './utils/diffpatcher'
-import findMatchingPairs from './utils/find-matching-pairs'
 
-const actionGroups = ['base', 'attributes']
+const actionGroups = ['base']
 
 function createProductTypeMapActions(
   mapActionGroup: (
