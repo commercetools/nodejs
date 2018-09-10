@@ -63,7 +63,7 @@ export default (
     diffpatcher.diff,
     doMapActions,
     onBeforeApplyingDiff,
-    syncActionConfig
+    { withHints: true }
   )
 
   return { buildActions }
