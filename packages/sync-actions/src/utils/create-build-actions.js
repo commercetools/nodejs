@@ -56,7 +56,7 @@ export default function createBuildActions(
   differ,
   doMapActions,
   onBeforeDiff,
-  syncActionConfig = {}
+  buildActionsConfig = {}
 ) {
   return function buildActions(now, before, options = {}) {
     if (!now || !before)
@@ -78,7 +78,7 @@ export default function createBuildActions(
       )
 
     const diffed = differ(processedBefore, processedNow)
-    if (!syncActionConfig.withHints && !diffed) return []
+    if (!buildActionsConfig.withHints && !diffed) return []
     return doMapActions(diffed, processedNow, processedBefore, options)
   }
 }

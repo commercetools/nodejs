@@ -15,6 +15,9 @@ export const baseActionsList = [
 ]
 
 export function actionsMapBase(diff, previous, next, config = {}) {
+  // when `diff` is undefined, then the underlying `buildActions` has returned any diff
+  // which given in product-types would mean that `buildActions` has run with `nestedValuesChanges` applied
+  // To allow continuiation of update-action generation, we let this pass..
   if (!diff) return []
   return buildBaseAttributesActions({
     diff,
