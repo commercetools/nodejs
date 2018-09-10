@@ -52,7 +52,12 @@ function injectMissingPriceIds(nextVariants, previousVariants) {
   })
 }
 
-export default function createBuildActions(differ, doMapActions, onBeforeDiff) {
+export default function createBuildActions(
+  differ,
+  doMapActions,
+  onBeforeDiff,
+  syncActionConfig = {}
+) {
   return function buildActions(now, before, options = {}) {
     if (!now || !before)
       throw new Error(
@@ -73,9 +78,7 @@ export default function createBuildActions(differ, doMapActions, onBeforeDiff) {
       )
 
     const diffed = differ(processedBefore, processedNow)
-
-    if (!diffed) return []
-
+    if (!syncActionConfig.withHints && !diffed) return []
     return doMapActions(diffed, processedNow, processedBefore, options)
   }
 }
