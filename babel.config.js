@@ -8,11 +8,15 @@ const getPresets = () => {
       return {
         targets: { browsers: ['last 2 versions'], node: 'current' },
         modules: false,
+        useBuiltIns: 'entry',
+        include: ['es7.object.entries'],
       }
     case 'production':
       return {
         targets: { browsers: ['last 2 versions'], node: '6' },
         modules: false,
+        useBuiltIns: 'entry',
+        include: ['es7.object.entries'],
       }
     case 'cli':
       return { targets: { node: '6' }, modules: 'commonjs' }

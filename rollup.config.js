@@ -33,11 +33,15 @@ const config = {
     commonjs({
       include: ['node_modules/**'],
     }),
-    babel({
-      exclude: ['node_modules/**'],
-      runtimeHelpers: true,
-      ...babelOptions,
-    }),
+    babel(
+      Object.assign(
+        {
+          exclude: ['node_modules/**'],
+          runtimeHelpers: true,
+        },
+        babelOptions
+      )
+    ),
     filesize(),
   ],
 }
