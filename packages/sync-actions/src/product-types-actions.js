@@ -277,11 +277,11 @@ const generateUpdateActionsForAttributeEnumValues = (
   ]
 }
 
-export const actionsMapForHints = (nestedEntityChanges = {}) => [
+export const actionsMapForHints = (nestedValuesChanges = {}) => [
   ...generateUpdateActionsForAttributeDefinitions(
-    nestedEntityChanges.attributeDefinitions
+    nestedValuesChanges.attributeDefinitions
   ),
   ...generateUpdateActionsForAttributeEnumValues(
-    nestedEntityChanges.attributeEnumValues
+    nestedValuesChanges.attributeEnumValues
   ),
 ]
