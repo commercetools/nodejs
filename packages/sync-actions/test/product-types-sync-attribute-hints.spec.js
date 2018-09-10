@@ -41,18 +41,7 @@ const createAttributeEnumDraftItem = custom => ({
   ...custom,
 })
 
-const createProductType = custom => ({
-  key: 'product-type-key',
-  name: 'product type name',
-  description: 'product type description',
-  attributes: [
-    /* attributeDefinitions */
-  ],
-  ...custom,
-})
-
 describe('product type hints', () => {
-  let attributeDefinitionDraftItem
   let updateActions
   let sync
   beforeEach(() => {
@@ -60,9 +49,278 @@ describe('product type hints', () => {
       withHints: true,
     })
   })
-  describe('attribute hints', () => {
+  describe('attribute enum values', () => {
+    let attributeEnumDraftItem
     describe('with previous', () => {
-      describe('with `next`', () => {
+      describe('with no changes', () => {
+        beforeEach(() => {
+          attributeEnumDraftItem = createAttributeEnumDraftItem()
+          updateActions = sync.buildActions(
+            {},
+            {},
+            {
+              nestedEntityChanges: {
+                attributeEnumValues: [attributeEnumDraftItem],
+              },
+            }
+          )
+        })
+        it('should not generate any update-actions', () => {
+          expect(updateActions).toEqual([])
+        })
+      })
+      describe('with changes', () => {
+        describe('when is not localized', () => {
+          beforeEach(() => {
+            attributeEnumDraftItem = createAttributeEnumDraftItem({
+              next: {
+                key: 'next-key',
+                label: 'next-label',
+              },
+            })
+            updateActions = sync.buildActions(
+              {},
+              {},
+              {
+                nestedEntityChanges: {
+                  attributeEnumValues: [attributeEnumDraftItem],
+                },
+              }
+            )
+          })
+          it('should match snapshot', () => {
+            expect(updateActions).toMatchSnapshot()
+          })
+          it('should generate `changeEnumKey` update-action', () => {
+            expect(updateActions).toEqual(
+              expect.arrayContaining([
+                {
+                  action: 'changeEnumKey',
+                  attributeName: attributeEnumDraftItem.hint.attributeName,
+                  key: 'enum-key',
+                  newKey: 'next-key',
+                },
+              ])
+            )
+          })
+          it('should generate `changePlainEnumLabel` update-action', () => {
+            expect(updateActions).toEqual(
+              expect.arrayContaining([
+                {
+                  action: 'changePlainEnumValueLabel',
+                  attributeName: attributeEnumDraftItem.hint.attributeName,
+                  newValue: attributeEnumDraftItem.next,
+                },
+              ])
+            )
+          })
+        })
+        describe('when is localized', () => {
+          beforeEach(() => {
+            attributeEnumDraftItem = createAttributeEnumDraftItem({
+              next: {
+                key: 'next-key',
+                label: 'next-label',
+              },
+              hint: {
+                isLocalized: true,
+                attributeName: 'attribute-name',
+              },
+            })
+            updateActions = sync.buildActions(
+              {},
+              {},
+              {
+                nestedEntityChanges: {
+                  attributeEnumValues: [attributeEnumDraftItem],
+                },
+              }
+            )
+          })
+          it('should match snapshot', () => {
+            expect(updateActions).toMatchSnapshot()
+          })
+          it('should generate `changeEnumKey` update-action', () => {
+            expect(updateActions).toEqual(
+              expect.arrayContaining([
+                {
+                  action: 'changeEnumKey',
+                  attributeName: attributeEnumDraftItem.hint.attributeName,
+                  key: 'enum-key',
+                  newKey: 'next-key',
+                },
+              ])
+            )
+          })
+          it('should generate `changeLocalizedEnumValueLabel` update-action', () => {
+            expect(updateActions).toEqual(
+              expect.arrayContaining([
+                {
+                  action: 'changeLocalizedEnumValueLabel',
+                  attributeName: attributeEnumDraftItem.hint.attributeName,
+                  newValue: attributeEnumDraftItem.next,
+                },
+              ])
+            )
+          })
+        })
+
+        describe('when removing, adding, and editing (in a single batch of actions)', () => {
+          let attributeEnumDraftItemToBeRemoved1
+          let attributeEnumDraftItemToBeRemoved2
+          let attributeEnumDraftItemToBeChanged
+          let attributeEnumDraftItemToBeAdded
+          beforeEach(() => {
+            attributeEnumDraftItemToBeRemoved1 = createAttributeEnumDraftItem({
+              previous: { key: 'enum-key-1', label: 'enum-label-1' },
+              next: undefined,
+              hint: {
+                attributeName: 'attribute-enum-with-2-enum-values-to-remove',
+                isLocalized: false,
+              },
+            })
+            attributeEnumDraftItemToBeRemoved2 = createAttributeEnumDraftItem({
+              previous: { key: 'enum-key-2', label: 'enum-label-2' },
+              next: undefined,
+              hint: {
+                attributeName: 'attribute-enum-with-2-enum-values-to-remove',
+                isLocalized: false,
+              },
+            })
+            attributeEnumDraftItemToBeChanged = createAttributeEnumDraftItem({
+              next: {
+                key: 'next-enum-draft-item',
+                label: undefined,
+              },
+            })
+            attributeEnumDraftItemToBeAdded = createAttributeEnumDraftItem({
+              previous: undefined,
+              next: {
+                key: 'new-enum-draft-item',
+                label: 'new-enum-draft-item',
+              },
+            })
+            updateActions = sync.buildActions(
+              {},
+              {},
+              {
+                nestedEntityChanges: {
+                  // we mess around with the order of changes among the hints...
+                  // we should expect that sync-actions gives us a list of changes with the following order:
+                  // [ updateActionsToRemoveEnumValues, updateActionsToUpdateEnumValues, updateActionsToAddEnumValues ]
+                  // when two enumvalues has the same attribute-name, we should also expect that they are "grouped" into a single update action as well.
+                  attributeEnumValues: [
+                    attributeEnumDraftItemToBeAdded,
+                    attributeEnumDraftItemToBeRemoved1,
+                    attributeEnumDraftItemToBeChanged,
+                    attributeEnumDraftItemToBeRemoved2,
+                  ],
+                },
+              }
+            )
+          })
+          it('should match snapshot', () => {
+            expect(updateActions).toMatchSnapshot()
+          })
+          it('should generate update-actions (with an explicit order)', () => {
+            expect(updateActions).toEqual([
+              {
+                action: 'removeEnumValues',
+                attributeName: 'attribute-enum-with-2-enum-values-to-remove',
+                keys: ['enum-key-1', 'enum-key-2'],
+              },
+              {
+                action: 'changeEnumKey',
+                attributeName: 'attribute-name',
+                key: 'enum-key',
+                newKey: 'next-enum-draft-item',
+              },
+              {
+                action: 'changePlainEnumValueLabel',
+                attributeName: 'attribute-name',
+                newValue: {
+                  key: 'next-enum-draft-item',
+                  // this is a possibility on clients. we ought to rely on the API, to return an error
+                  // ref: https://docs.commercetools.com/http-api-projects-productTypes.html#change-the-label-of-an-enumvalue
+                  label: undefined,
+                },
+              },
+              {
+                action: 'addPlainEnumValue',
+                attributeName: 'attribute-name',
+                value: attributeEnumDraftItemToBeAdded.next,
+              },
+            ])
+          })
+        })
+      })
+    })
+    describe('without previous', () => {
+      beforeEach(() => {
+        attributeEnumDraftItem = createAttributeEnumDraftItem({
+          previous: undefined,
+        })
+        updateActions = sync.buildActions(
+          {},
+          {},
+          {
+            nestedEntityChanges: {
+              attributeEnumValues: [attributeEnumDraftItem],
+            },
+          }
+        )
+      })
+      it('should match snapshot', () => {
+        expect(updateActions).toMatchSnapshot()
+      })
+      it('should generate `addPlainEnumValue`', () => {
+        expect(updateActions).toEqual([
+          {
+            action: 'addPlainEnumValue',
+            attributeName: attributeEnumDraftItem.hint.attributeName,
+            value: attributeEnumDraftItem.next,
+          },
+        ])
+      })
+      describe('when is localized', () => {
+        beforeEach(() => {
+          attributeEnumDraftItem = createAttributeEnumDraftItem({
+            previous: undefined,
+            hint: {
+              // this hint value is used as `attributeName` for enum update actions
+              attributeName: 'attribute-name',
+              isLocalized: true,
+            },
+          })
+          updateActions = sync.buildActions(
+            {},
+            {},
+            {
+              nestedEntityChanges: {
+                attributeEnumValues: [attributeEnumDraftItem],
+              },
+            }
+          )
+        })
+        it('should match snapshot', () => {
+          expect(updateActions).toMatchSnapshot()
+        })
+        it('should generate `addLocalizedEnumValue`', () => {
+          expect(updateActions).toEqual([
+            {
+              action: 'addLocalizedEnumValue',
+              attributeName: attributeEnumDraftItem.hint.attributeName,
+              value: attributeEnumDraftItem.next,
+            },
+          ])
+        })
+      })
+    })
+  })
+  describe('attribute hints', () => {
+    let attributeDefinitionDraftItem
+    describe('with previous', () => {
+      describe('with next', () => {
         describe('with no changes', () => {
           beforeEach(() => {
             attributeDefinitionDraftItem = createAttributeDefinitionDraftItem()
@@ -166,7 +424,7 @@ describe('product type hints', () => {
           )
         })
       })
-      describe('without `next`', () => {
+      describe('without next', () => {
         beforeEach(() => {
           attributeDefinitionDraftItem = createAttributeDefinitionDraftItem({
             next: undefined,

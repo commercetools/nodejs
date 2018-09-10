@@ -97,6 +97,16 @@ export const generateBaseFieldsUpdateActions = (
         return [...nextUpdateActions, actionFieldDefinition]
       if (!deepEqual(previous[field], next[field])) {
         switch (field) {
+          case 'key':
+            return [
+              ...nextUpdateActions,
+              {
+                action: actionFieldDefinition.action,
+                attributeName: actionFieldDefinition.attributeName,
+                key: previous[field],
+                newKey: next[field],
+              },
+            ]
           case 'inputHint':
             return [
               ...nextUpdateActions,
@@ -195,21 +205,25 @@ const generateUpdateActionsForAttributeEnumValues = (
   return [
     ...Object.values(
       removedAttributeEnumValues.reduce(
-        (nextEnumUpdateActions, removedAttributeEnumValue) => ({
-          [removedAttributeEnumValue.hint.attributeName]: {
-            ...nextEnumUpdateActions[
-              removedAttributeEnumValue.hint.attributeName
-            ],
+        (nextEnumUpdateActions, removedAttributeEnumValue) => {
+          const removedAttributeEnumValueOfSameAttributeName = nextEnumUpdateActions[
+            removedAttributeEnumValue.hint.attributeName
+          ] || {
+            keys: [],
+            attributeName: removedAttributeEnumValue.hint.attributeName,
             action: 'removeEnumValues',
-            keys: [
-              ...nextEnumUpdateActions[
-                removedAttributeEnumValue.hint.attributeName
-              ].keys,
-              removedAttributeEnumValue.key,
-            ],
-          },
-          ...nextEnumUpdateActions,
-        }),
+          }
+          return {
+            ...nextEnumUpdateActions,
+            [removedAttributeEnumValue.hint.attributeName]: {
+              ...removedAttributeEnumValueOfSameAttributeName,
+              keys: [
+                ...removedAttributeEnumValueOfSameAttributeName.keys,
+                removedAttributeEnumValue.previous.key,
+              ],
+            },
+          }
+        },
         {}
       )
     ),
@@ -257,7 +271,7 @@ const generateUpdateActionsForAttributeEnumValues = (
       action: addedAttributeEnumValue.hint.isLocalized
         ? 'addLocalizedEnumValue'
         : 'addPlainEnumValue',
-      attribuetName: addedAttributeEnumValue.hint.attributeName,
+      attributeName: addedAttributeEnumValue.hint.attributeName,
       value: addedAttributeEnumValue.next,
     })),
   ]
