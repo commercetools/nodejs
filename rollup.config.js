@@ -7,6 +7,7 @@ const replace = require('rollup-plugin-replace')
 const { uglify } = require('rollup-plugin-uglify')
 const flow = require('rollup-plugin-flow')
 const filesize = require('rollup-plugin-filesize')
+const babelOptions = require('./babel.config')
 /* eslint-enable */
 
 const env = process.env.NODE_ENV
@@ -33,9 +34,9 @@ const config = {
       include: ['node_modules/**'],
     }),
     babel({
-      babelrc: true,
       exclude: ['node_modules/**'],
       runtimeHelpers: true,
+      ...babelOptions,
     }),
     filesize(),
   ],

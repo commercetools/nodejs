@@ -29,7 +29,7 @@
     "lib"
   ],
   "scripts": {
-    "build": "babel src --out-dir lib"
+    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {
     "@commercetools/api-request-builder": "2.4.0",
