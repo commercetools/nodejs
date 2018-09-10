@@ -82,7 +82,7 @@ describe('XLSX and CLI Tests', () => {
   let apiConfig
   const binPath = './integration-tests/node_modules/.bin/product-json-to-xlsx'
 
-  beforeAll(async (done) => {
+  beforeAll(async () => {
     const credentials = await getCredentials(projectKey)
     apiConfig = {
       host: 'https://auth.sphere.io',
@@ -126,14 +126,12 @@ describe('XLSX and CLI Tests', () => {
     }
 
     await createData(apiConfig, 'products', sampleProducts)
-    setTimeout(() => done(), 1000)
   }, 20000)
 
   afterAll(() => cleanup(apiConfig))
 
   describe('CLI basic functionality', () => {
     it('should print usage information given the help flag', async () => {
-      process.stdout.write(`${binPath} --help`)
       const [stdout, stderr] = await exec(`${binPath} --help`)
       expect(stdout).toMatchSnapshot()
       expect(stderr).toBeFalsy()
