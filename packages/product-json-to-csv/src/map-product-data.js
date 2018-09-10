@@ -140,17 +140,18 @@ export default class ProductMapping {
       {}
     )
 
-    // complete missing attributes
+    // complete missing attributes with empty string
     if (productType && productType.attributes)
       productType.attributes.forEach((attribute: Object) => {
         const mappedAttributes = mappedVariant.attributes || {}
         const attrType = get(attribute, 'type.name')
+        const attrSetType = get(attribute, 'type.elementType.name')
 
         // By default fill attribute by empty string if it is not defined in product
-        // and for ltext create shortcut only when we have createShortcuts set to true
+        // and for ltext/setOfLtext create shortcut only when we have createShortcuts set to true
         if (
           isNil(mappedAttributes[attribute.name]) &&
-          (this.createShortcuts || attrType !== 'ltext')
+          (this.createShortcuts || ![attrType, attrSetType].includes('ltext'))
         )
           mappedAttributes[attribute.name] = ''
       })

@@ -54,6 +54,15 @@ describe('::ProductMapping', () => {
             },
             { name: 'addedAttr' },
             { name: 'anotherAddedAttr' },
+            {
+              name: 'setOfLtextAttribute',
+              type: {
+                name: 'set',
+                elementType: {
+                  name: 'ltext',
+                },
+              },
+            },
           ],
         },
         name: {
