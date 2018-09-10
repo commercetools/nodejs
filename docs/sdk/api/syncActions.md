@@ -503,7 +503,7 @@ const next = {
   name: 'next',
 }
 
-const updateActions = productTypeSync.buildActions(previous, next, {
+const updateActions = productTypeSync.buildActions(next, previous, {
   // hints
   nestedValuesChanges: {
     attributeDefinitions: [
