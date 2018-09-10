@@ -1,5 +1,3 @@
-const isEnv = env => env === process.env.NODE_ENV
-
 const getPresets = () => {
   switch (process.env.NODE_ENV) {
     case 'development':
@@ -40,18 +38,11 @@ const getPresets = () => {
   return {}
 }
 
-const getPlugins = () => {
-  const plugins = [
+module.exports = {
+  presets: [['@babel/preset-env', getPresets()], '@babel/preset-flow'],
+  plugins: [
     '@babel/plugin-proposal-export-default-from',
     '@babel/plugin-proposal-export-namespace-from',
     '@babel/plugin-proposal-object-rest-spread',
-  ]
-  return isEnv('rollup') || isEnv('production')
-    ? ['@babel/plugin-external-helpers', ...plugins]
-    : plugins
-}
-
-module.exports = {
-  presets: [['@babel/preset-env', getPresets()], '@babel/preset-flow'],
-  plugins: getPlugins(),
+  ],
 }
