@@ -59,6 +59,7 @@
   },
   "devDependencies": {
     "streamtest": "1.2.4",
+    "stream-to-string": "1.1.0",
     "unzip": "0.1.11"
   }
 }

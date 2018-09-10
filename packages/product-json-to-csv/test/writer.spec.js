@@ -3,6 +3,8 @@ import highland from 'highland'
 import tmp from 'tmp'
 import StreamTest from 'streamtest'
 import unzip from 'unzip'
+import streamToString from 'stream-to-string'
+
 import * as writer from '../src/writer'
 
 const streamTest = StreamTest.v2
@@ -158,43 +160,28 @@ describe('Writer', () => {
       const outputStream = fs.createWriteStream(output)
       const entries = []
 
-      // we need this function to synchronize two testStreams
-      const testEndCondition = () => {
-        if (entries.length === 2) {
-          expect(entries.sort()).toEqual([
-            'products/product-type-1.csv',
-            'products/product-type-2.csv',
-          ])
-          expect(entries.length).toEqual(2)
-          tempFile.removeCallback()
-          done()
-        }
-      }
-
-      const verifyCsv1 = streamTest.toText((error, actual) => {
-        expect(error).toBeFalsy()
-        expect(actual).toMatchSnapshot()
-
-        testEndCondition()
-      })
-      const verifyCsv2 = streamTest.toText((error, actual) => {
-        expect(error).toBeFalsy()
-        expect(actual).toMatchSnapshot()
-
-        testEndCondition()
-      })
-
       // Extract data from zip file and test
       outputStream.on('finish', () => {
         fs.createReadStream(output)
           .pipe(unzip.Parse())
-          .on('entry', entry => {
+          .on('entry', async entry => {
+            const csvContent = await streamToString(entry)
             entries.push(entry.path)
 
             if (entry.path === 'products/product-type-1.csv')
-              entry.pipe(verifyCsv1)
+              expect(csvContent).toMatchSnapshot('csv1')
             else if (entry.path === 'products/product-type-2.csv')
-              entry.pipe(verifyCsv2)
+              expect(csvContent).toMatchSnapshot('csv2')
+
+            if (entries.length === 2) {
+              expect(entries.sort()).toEqual([
+                'products/product-type-1.csv',
+                'products/product-type-2.csv',
+              ])
+              expect(entries.length).toEqual(2)
+              tempFile.removeCallback()
+              done()
+            }
           })
           .on('finish', () => {
             // TODO the "unzip" package fires finish event before entry events
