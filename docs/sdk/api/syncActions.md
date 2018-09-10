@@ -505,7 +505,7 @@ const next = {
 
 const updateActions = productTypeSync.buildActions(previous, next, {
   // hints
-  nestedValueChanges: {
+  nestedValuesChanges: {
     attributeDefinitions: [
       {
         // when previous and next are defined
@@ -564,7 +564,7 @@ console.log(updateActions)
 //     name: 'next-attribute-name'
 //   },
 //
-//   // these are calculated separately, only through `nestedValueChanges` hints
+//   // these are calculated separately, only through `nestedValuesChanges` hints
 //   // because hint are __explicit__, we don't worry about identifiers such as `key` (enum) or `name` (attribute).
 //   // attribute
 //   {
