@@ -58,7 +58,7 @@ describe('product type hints', () => {
             {},
             {},
             {
-              nestedValuesChangess: {
+              nestedValuesChanges: {
                 attributeEnumValues: [attributeEnumDraftItem],
               },
             }
@@ -81,7 +81,7 @@ describe('product type hints', () => {
               {},
               {},
               {
-                nestedValuesChangess: {
+                nestedValuesChanges: {
                   attributeEnumValues: [attributeEnumDraftItem],
                 },
               }
@@ -130,7 +130,7 @@ describe('product type hints', () => {
               {},
               {},
               {
-                nestedValuesChangess: {
+                nestedValuesChanges: {
                   attributeEnumValues: [attributeEnumDraftItem],
                 },
               }
@@ -203,7 +203,7 @@ describe('product type hints', () => {
               {},
               {},
               {
-                nestedValuesChangess: {
+                nestedValuesChanges: {
                   // we mess around with the order of changes among the hints...
                   // we should expect that sync-actions gives us a list of changes with the following order:
                   // [ updateActionsToRemoveEnumValues, updateActionsToUpdateEnumValues, updateActionsToAddEnumValues ]
@@ -263,7 +263,7 @@ describe('product type hints', () => {
           {},
           {},
           {
-            nestedValuesChangess: {
+            nestedValuesChanges: {
               attributeEnumValues: [attributeEnumDraftItem],
             },
           }
@@ -295,7 +295,7 @@ describe('product type hints', () => {
             {},
             {},
             {
-              nestedValuesChangess: {
+              nestedValuesChanges: {
                 attributeEnumValues: [attributeEnumDraftItem],
               },
             }
@@ -327,7 +327,7 @@ describe('product type hints', () => {
               {},
               {},
               {
-                nestedValuesChangess: {
+                nestedValuesChanges: {
                   attributeDefinitions: [attributeDefinitionDraftItem],
                 },
               }
@@ -357,7 +357,7 @@ describe('product type hints', () => {
               {},
               {},
               {
-                nestedValuesChangess: {
+                nestedValuesChanges: {
                   attributeDefinitions: [attributeDefinitionDraftItem],
                 },
               }
@@ -432,7 +432,7 @@ describe('product type hints', () => {
             {},
             {},
             {
-              nestedValuesChangess: {
+              nestedValuesChanges: {
                 attributeDefinitions: [attributeDefinitionDraftItem],
               },
             }
@@ -462,7 +462,7 @@ describe('product type hints', () => {
           {},
           {},
           {
-            nestedValuesChangess: {
+            nestedValuesChanges: {
               attributeDefinitions: [attributeDefinitionDraftItem],
             },
           }
