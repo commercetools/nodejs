@@ -46,7 +46,12 @@ describe('::ProductMapping', () => {
             { name: 'article' },
             { name: 'designer' },
             { name: 'color' },
-            { name: 'colorFreeDefinition' },
+            {
+              name: 'colorFreeDefinition',
+              type: {
+                name: 'ltext',
+              },
+            },
             { name: 'addedAttr' },
             { name: 'anotherAddedAttr' },
           ],
@@ -514,7 +519,12 @@ describe('::ProductMapping', () => {
             { name: 'article' },
             { name: 'designer' },
             { name: 'color' },
-            { name: 'colorFreeDefinition' },
+            {
+              name: 'colorFreeDefinition',
+              type: {
+                name: 'ltext',
+              },
+            },
             { name: 'addedAttr' },
             { name: 'anotherAddedAttr' },
           ],
@@ -573,7 +583,6 @@ describe('::ProductMapping', () => {
             'color.de': 'weiss',
             'color.en': 'white',
             'color.it': 'blanco',
-            colorFreeDefinition: 'black-white',
             'colorFreeDefinition.en': 'black-white',
             'colorFreeDefinition.de': 'schwarz-weiß',
             addedAttr: '',
