@@ -80,6 +80,10 @@ export function actionsMapAttributes(
   return actions
 }
 
+// this is nearly similar to `buildBaseAttributesActions`, however with a significant difference.
+// `buildBasAttributesActions` generates update-actions with help of `diff`,
+// which is an object consisting of flags which indicates different operations.
+// `generateBaseFieldsUpdateActions` only generate based on `previous` and `next`.
 export const generateBaseFieldsUpdateActions = (
   previous,
   next,
@@ -97,9 +101,36 @@ export const generateBaseFieldsUpdateActions = (
         return [...nextUpdateActions, actionFieldDefinition]
       if (!deepEqual(previous[field], next[field])) {
         switch (field) {
+          // BEWARE that this is generates update-action only for key of enum attribute value,
+          // not key of product type. If we need to re-factor `product-types` sync actions to use
+          // `generateBaseFieldsUpdateActions`, we need to extract the following logic so we could
+          // cover both entity types.
           case 'key':
             return [
               ...nextUpdateActions,
+              // Another option is to have explicit name of `field` e.g `enumKey`, which we could use to
+              // generate appropriate update-action for respective entity type.
+              // An outline of this on the top of my head:
+              // ```js
+              // case 'enumKey':
+              //   return [
+              //     ...nextUpdateActions,
+              //     {
+              //       action: actionFieldDefinition.action,
+              //       attributeName: actionFieldDefinition.attributeName,
+              //       key: previous.key,
+              //       newKey: next.key,
+              //     },
+              //   ]
+              // case 'productTypeKey':
+              //   return [
+              //     ...nextUpdateActions,
+              //     {
+              //       action: actionFieldDefinition.action,
+              //       key: next.key
+              //     },
+              //   ]
+              // ```
               {
                 action: actionFieldDefinition.action,
                 attributeName: actionFieldDefinition.attributeName,
@@ -107,6 +138,7 @@ export const generateBaseFieldsUpdateActions = (
                 newKey: next[field],
               },
             ]
+          // attribute
           case 'inputHint':
             return [
               ...nextUpdateActions,
