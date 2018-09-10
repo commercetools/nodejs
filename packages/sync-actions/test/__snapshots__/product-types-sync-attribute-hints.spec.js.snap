@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`product type hints attribute hints with previous with \`next\` with changes should match snapshot 1`] = `
+Array [
+  Object {
+    "action": "changeLabel",
+    "attributeName": "attribute-name",
+    "label": Object {
+      "en": "next-attribute-label",
+    },
+  },
+  Object {
+    "action": "setInputTip",
+    "attributeName": "attribute-name",
+    "inputTip": Object {
+      "en": "next-input-tip",
+    },
+  },
+  Object {
+    "action": "changeInputHint",
+    "attributeName": "attribute-name",
+    "newValue": "MultiLine",
+  },
+  Object {
+    "action": "changeIsSearchable",
+    "attributeName": "attribute-name",
+    "isSearchable": true,
+  },
+]
+`;
+
+exports[`product type hints attribute hints with previous with \`next\` with no changes should match snapshot 1`] = `Array []`;
+
+exports[`product type hints attribute hints with previous without \`next\` should match snapshot 1`] = `
+Array [
+  Object {
+    "action": "removeAttributeDefinition",
+    "name": "attribute-name",
+  },
+]
+`;
+
+exports[`product type hints attribute hints without previous should match snapshot 1`] = `
+Array [
+  Object {
+    "action": "addAttributeDefinition",
+    "attribute": Object {
+      "attributeConstraint": "SameForAll",
+      "inputHint": "SingleLine",
+      "inputTip": Object {
+        "en": "input-hint",
+      },
+      "isRequired": false,
+      "isSearchable": false,
+      "label": Object {
+        "en": "attribute-label",
+      },
+      "name": "attribute-name",
+      "type": Object {
+        "name": "text",
+      },
+    },
+  },
+]
+`;

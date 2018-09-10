@@ -19,14 +19,21 @@ function createProductTypeMapActions(
     fn: () => Array<UpdateAction>
   ) => Array<UpdateAction>,
   syncActionConfig: SyncActionConfig
-): (diff: Object, next: Object, previous: Object) => Array<UpdateAction> {
+): (
+  diff: Object,
+  next: Object,
+  previous: Object,
+  options: Object
+) => Array<UpdateAction> {
   return function doMapActions(
     diff: Object,
     next: Object,
-    previous: Object
+    previous: Object,
+    options: Object
   ): Array<UpdateAction> {
-    const allActions = []
-    allActions.push(
+    return flatten([
+      // we support only base fields for the product type,
+      // for attributes, applying hints would be recommended
       mapActionGroup(
         'base',
         (): Array<UpdateAction> =>
@@ -37,23 +44,8 @@ function createProductTypeMapActions(
             syncActionConfig
           )
       ),
-      mapActionGroup(
-        'attributes',
-        (): Array<UpdateAction> =>
-          productTypeActions.actionsMapAttributes(
-            diff.attributes,
-            previous.attributes,
-            next.attributes,
-            findMatchingPairs(
-              diff.attributes,
-              previous.attributes,
-              next.attributes,
-              'name'
-            )
-          )
-      )
-    )
-    return flatten(allActions)
+      productTypeActions.actionsMapForHints(options.nestedEntityChanges),
+    ])
   }
 }
 
@@ -66,7 +58,14 @@ export default (
     mapActionGroup,
     syncActionConfig
   )
-  const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
+  const onBeforeApplyingDiff = null
+  const buildActions = createBuildActions(
+    diffpatcher.diff,
+    doMapActions,
+    onBeforeApplyingDiff,
+    syncActionConfig
+  )
+
   return { buildActions }
 }
 
