@@ -6,6 +6,9 @@ module.exports = {
       NODE_ENV: 'test',
     },
   },
+  transform: {
+    '^.+\\.js$': '<rootDir>/jest.transform.js',
+  },
   testPathIgnorePatterns: [
     '/node_modules/',
     '/integration-tests/',
