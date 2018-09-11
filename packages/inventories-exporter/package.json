@@ -31,7 +31,7 @@
     "bin"
   ],
   "scripts": {
-    "build": "babel src --out-dir lib"
+    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {
     "@commercetools/api-request-builder": "4.0.2",
