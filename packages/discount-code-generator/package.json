@@ -27,7 +27,7 @@
     "lib"
   ],
   "scripts": {
-    "build": "babel src --out-dir lib"
+    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {
     "csv-parser": "1.12.1",

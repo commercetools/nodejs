@@ -4,7 +4,7 @@
   "description": "Import states to the commercetools platform",
   "main": "lib/main.js",
   "scripts": {
-    "build": "babel src --out-dir lib"
+    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "repository": {
     "type": "git",

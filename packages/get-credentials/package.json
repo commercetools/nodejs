@@ -21,7 +21,7 @@
     "lib"
   ],
   "scripts": {
-    "build": "babel src --out-dir lib"
+    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "devDependencies": {
     "sinon": "1.17.7"

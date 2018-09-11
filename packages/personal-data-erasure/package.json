@@ -7,7 +7,7 @@
         "personal-data-erasure": "bin/personal-data-erasure.js"
     },
     "scripts": {
-        "build": "babel src --out-dir lib"
+        "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
     },
     "repository": {
         "type": "git",
