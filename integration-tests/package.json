@@ -29,7 +29,7 @@
     "@commercetools/sdk-middleware-user-agent": "*",
     "@commercetools/state-importer": "*",
     "@commercetools/sync-actions": "*",
-    "bluebird": "3.5.1",
+    "bluebird": "3.5.2",
     "common-tags": "1.8.0",
     "csvtojson": "1.1.12",
     "isuuid": "0.1.0",
