@@ -93,6 +93,8 @@ export default class ProductJsonToCsv {
       categoryBy: this.parserConfig.categoryBy,
       lang: this.parserConfig.language,
       multiValueDelimiter: this.parserConfig.multiValueDelimiter,
+      // create shortcuts for ltext attributes only when not doing a full export
+      createShortcuts: !!this.parserConfig.headerFields,
     }
     this._productMapping = new ProductMapping(mappingParams)
   }
