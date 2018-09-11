@@ -1,12 +1,7 @@
-import forEach from 'lodash.foreach'
 import flatten from 'lodash.flatten'
 import isNil from 'lodash.isnil'
 import { deepEqual } from 'fast-equals'
 import { buildBaseAttributesActions } from './utils/common-actions'
-import extractMatchingPairs from './utils/extract-matching-pairs'
-
-const REGEX_NUMBER = new RegExp(/^\d+$/)
-const getIsChangedOperation = key => REGEX_NUMBER.test(key)
 
 export const baseActionsList = [
   { action: 'changeName', key: 'name' },
@@ -26,61 +21,6 @@ export function actionsMapBase(diff, previous, next, config = {}) {
     newObj: next,
     shouldOmitEmptyString: config.shouldOmitEmptyString,
   })
-}
-
-const attributeDefinitionsActionsList = [
-  { action: 'changeLabel', key: 'label' },
-  { action: 'setInputTip', key: 'inputTip' },
-  { actionKey: 'newValue', action: 'changeInputHint', key: 'inputHint' },
-  { action: 'changeIsSearchable', key: 'isSearchable' },
-  {
-    actionKey: 'newValue',
-    action: 'changeAttributeConstraint',
-    key: 'attributeConstraint',
-  },
-]
-
-const getIsAnAttributeDefinitionBaseFieldChange = diff =>
-  diff.label ||
-  diff.inputHint ||
-  diff.inputTip ||
-  diff.attributeConstraint ||
-  diff.isSearchable
-
-export function actionsMapAttributes(
-  attributesDiff,
-  previous,
-  next,
-  diffPaths
-) {
-  const actions = []
-  forEach(attributesDiff, (diffValue, diffKey) => {
-    const extractedPairs = extractMatchingPairs(
-      diffPaths,
-      diffKey,
-      previous,
-      next
-    )
-
-    if (
-      getIsChangedOperation(diffKey) &&
-      !Array.isArray(diffValue) &&
-      getIsAnAttributeDefinitionBaseFieldChange(diffValue)
-    ) {
-      actions.push(
-        ...buildBaseAttributesActions({
-          actions: attributeDefinitionsActionsList,
-          diff: diffValue,
-          oldObj: extractedPairs.oldObj,
-          newObj: extractedPairs.newObj,
-        }).map(action => ({
-          ...action,
-          attributeName: extractedPairs.oldObj.name,
-        }))
-      )
-    }
-  })
-  return actions
 }
 
 // this is nearly similar to `buildBaseAttributesActions`, however with a significant difference.
@@ -142,6 +82,7 @@ export const generateBaseFieldsUpdateActions = (
               },
             ]
           // attribute
+          case 'attributeConstraint':
           case 'inputHint':
             return [
               ...nextUpdateActions,
@@ -210,6 +151,10 @@ const generateUpdateActionsForAttributeDefinitions = (
             },
             isSearchable: {
               action: 'changeIsSearchable',
+              attributeName: updatedAttributeDefinition.previous.name,
+            },
+            attributeConstraint: {
+              action: 'changeAttributeConstraint',
               attributeName: updatedAttributeDefinition.previous.name,
             },
           }

@@ -347,7 +347,7 @@ describe('product type hints', () => {
                 type: { name: 'boolean' },
                 name: 'next-attribute-name',
                 label: { en: 'next-attribute-label' },
-                attributeConstraint: 'SameForAll',
+                attributeConstraint: 'None',
                 inputTip: { en: 'next-input-tip' },
                 inputHint: 'MultiLine',
                 isSearchable: true,
@@ -410,6 +410,14 @@ describe('product type hints', () => {
                 action: 'changeIsSearchable',
                 attributeName: 'attribute-name',
                 isSearchable: true,
+              },
+            ],
+            [
+              'attributeConstraint',
+              {
+                action: 'changeAttributeConstraint',
+                attributeName: 'attribute-name',
+                newValue: 'None',
               },
             ],
           ]

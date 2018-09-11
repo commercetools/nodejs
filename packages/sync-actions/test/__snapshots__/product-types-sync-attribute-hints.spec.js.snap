@@ -125,6 +125,11 @@ Array [
     "attributeName": "attribute-name",
     "isSearchable": true,
   },
+  Object {
+    "action": "changeAttributeConstraint",
+    "attributeName": "attribute-name",
+    "newValue": "None",
+  },
 ]
 `;
 
