@@ -488,9 +488,13 @@ client.execute(productTypesRequest)
 
 #### Difference to sync-actions for other resources
 
-Unlike other resources (e.g `createSyncProducts`), `createSyncProductTypes` requires that you apply hints to calculcate update actions for nested values such as `attributes` and `enumValues`. Since a [change in the API](https://docs.commercetools.com/release-notes.html#releases-2018-03-09-product-type-rename-name-and-enum-key), the [previous implementation was not capable for calculating appropiate update-actions](https://github.com/commercetools/nodejs/pull/760#issue-213684712) when an enum-value has changed its `key`, or when an attribute has changed its `name`. The `key` of an enum value was used as its identifier to calculate correct update-actions. When the intention of a change was `changeEnumKey`, it is discernable for `sync-actions` to appropriately calculate that for you. Same goes for attribute values.
+Unlike other resources (e.g `createSyncProducts`), `createSyncProductTypes` requires that you apply hints to calculate update actions for nested values such as `attributes` and `enumValues`.
 
-Note:`createSyncProductTypes` does not support `changeAttributeName` nor `changeEnumKey` for the moment, but this is something we will add in, in the near future.
+Since a [change in the API](https://docs.commercetools.com/release-notes.html#releases-2018-03-09-product-type-rename-name-and-enum-key), the [previous implementation was not capable for calculating appropiate update-actions](https://github.com/commercetools/nodejs/pull/760#issue-213684712) when an enum-value has changed its `key`, or when an attribute has changed its `name`.
+
+The `key` of an enum value was used as its identifier to calculate correct update-actions. When the intention of a change was `changeEnumKey`, it is discernable for `sync-actions` to appropriately calculate that for you. Same goes for attribute values.
+
+Note: `createSyncProductTypes` does not support `changeAttributeName` nor `changeEnumKey` for the moment, but this is something we will add in, in the near future.
 
 **here is how you apply hints**
 
