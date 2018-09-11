@@ -341,7 +341,6 @@ export type SyncAction = {
 }
 export type SyncActionConfig = {
   shouldOmitEmptyString: boolean,
-  withHints: boolean,
 }
 export type ActionGroup = {
   type: string,
