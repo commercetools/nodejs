@@ -72,6 +72,7 @@ export default class ProductJsonToCsv {
       categoryOrderHintBy: 'name', // key, externalId or name supported
       delimiter: ',',
       fillAllRows: false,
+      onlyMasterVariants: false,
       language: 'en',
       multiValueDelimiter: ';',
     }
@@ -88,12 +89,13 @@ export default class ProductJsonToCsv {
     this.channelsCache = {}
     this.accessToken = accessToken
 
-    const mappingParams = {
-      fillAllRows: this.parserConfig.fillAllRows,
-      categoryBy: this.parserConfig.categoryBy,
-      lang: this.parserConfig.language,
-      multiValueDelimiter: this.parserConfig.multiValueDelimiter,
-    }
+    const mappingParams = pick(this.parserConfig, [
+      'fillAllRows',
+      'categoryBy',
+      'language',
+      'multiValueDelimiter',
+      'onlyMasterVariants',
+    ])
     this._productMapping = new ProductMapping(mappingParams)
   }
 

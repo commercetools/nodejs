@@ -21,6 +21,7 @@ describe('ProductJsonToCsv', () => {
       categoryOrderHintBy: 'name',
       delimiter: ',',
       fillAllRows: false,
+      onlyMasterVariants: false,
       language: 'en',
       multiValueDelimiter: ';',
     }
@@ -45,6 +46,7 @@ describe('ProductJsonToCsv', () => {
         delimiter: ',',
         multiValueDelimiter: ';',
         fillAllRows: false,
+        onlyMasterVariants: false,
         categoryBy: 'name',
         categoryOrderHintBy: 'name',
         language: 'en',

@@ -26,24 +26,27 @@ import {
 export default class ProductMapping {
   // Set flowtype annotations
   fillAllRows: boolean
+  onlyMasterVariants: boolean
   categoryBy: 'name' | 'key' | 'externalId' | 'namedPath'
-  lang: string
+  language: string
   multiValDel: string
 
   constructor({
     fillAllRows = false,
+    onlyMasterVariants = false,
     categoryBy = 'name',
-    lang = 'en',
+    language = 'en',
     multiValueDelimiter = ';',
   }: Object = {}) {
     this.fillAllRows = fillAllRows
+    this.onlyMasterVariants = onlyMasterVariants
     this.categoryBy = categoryBy
-    this.lang = lang
+    this.language = language
     this.multiValDel = multiValueDelimiter
   }
 
   run(product: ResolvedProductProjection): Array<MappedProduct> {
-    const mergedVarProduct = ProductMapping._mergeVariants(product)
+    const mergedVarProduct = this._mergeVariants(product)
     const varWithProductInfo = ProductMapping._spreadProdOnVariants(
       mergedVarProduct,
       this.fillAllRows
@@ -81,12 +84,12 @@ export default class ProductMapping {
     return product
   }
 
-  // merge all variants into a `variant` property and remove
-  // `masterVariant` and `variants` fields from product
-  static _mergeVariants(
-    product: ResolvedProductProjection
-  ): ProdWithMergedVariants {
-    const variant = [product.masterVariant, ...product.variants]
+  // Merge all variants into a `variant` property and remove
+  // `masterVariant` and `variants` fields from product.
+  // Omit variants if we want to serialize only masterVariants
+  _mergeVariants(product: ResolvedProductProjection): ProdWithMergedVariants {
+    const variant = [product.masterVariant]
+    if (!this.onlyMasterVariants) variant.push(...product.variants)
     const { masterVariant, variants, ...restProduct } = product
     return { ...restProduct, variant }
   }
@@ -195,7 +198,7 @@ export default class ProductMapping {
   _mapLtextAttribute(name: string, value: Object): Object {
     // create an object with value based on selected language
     const mappedAttribute = {
-      [name]: value[this.lang],
+      [name]: value[this.language],
     }
     // create object with translations indexed with keys like: attributeName.en
     const labels = flatten({
@@ -323,7 +326,7 @@ export default class ProductMapping {
           value,
           this.categoryBy,
           this.multiValDel,
-          this.lang
+          this.language
         )
       case 'categoryOrderHints':
         return isEmpty(value)
