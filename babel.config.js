@@ -33,9 +33,8 @@ const getPresets = () => {
         include: ['es7.object.entries'],
       }
     default:
-      break
+      return {}
   }
-  return {}
 }
 
 module.exports = {
