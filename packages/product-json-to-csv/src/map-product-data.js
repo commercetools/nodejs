@@ -27,6 +27,7 @@ export default class ProductMapping {
   // Set flowtype annotations
   fillAllRows: boolean
   onlyMasterVariants: boolean
+  createShortcuts: boolean
   categoryBy: 'name' | 'key' | 'externalId' | 'namedPath'
   language: string
   multiValDel: string
@@ -37,12 +38,14 @@ export default class ProductMapping {
     categoryBy = 'name',
     language = 'en',
     multiValueDelimiter = ';',
+    createShortcuts = false,
   }: Object = {}) {
     this.fillAllRows = fillAllRows
     this.onlyMasterVariants = onlyMasterVariants
     this.categoryBy = categoryBy
     this.language = language
     this.multiValDel = multiValueDelimiter
+    this.createShortcuts = createShortcuts
   }
 
   run(product: ResolvedProductProjection): Array<MappedProduct> {
@@ -140,11 +143,19 @@ export default class ProductMapping {
       {}
     )
 
-    // complete missing attributes
+    // complete missing attributes with empty string
     if (productType && productType.attributes)
       productType.attributes.forEach((attribute: Object) => {
         const mappedAttributes = mappedVariant.attributes || {}
-        if (isNil(mappedAttributes[attribute.name]))
+        const attrType = get(attribute, 'type.name')
+        const attrSetType = get(attribute, 'type.elementType.name')
+
+        // By default fill attribute by empty string if it is not defined in product
+        // and for ltext/setOfLtext create shortcut only when we have createShortcuts set to true
+        if (
+          isNil(mappedAttributes[attribute.name]) &&
+          (this.createShortcuts || ![attrType, attrSetType].includes('ltext'))
+        )
           mappedAttributes[attribute.name] = ''
       })
 
@@ -196,10 +207,10 @@ export default class ProductMapping {
   }
 
   _mapLtextAttribute(name: string, value: Object): Object {
-    // create an object with value based on selected language
-    const mappedAttribute = {
-      [name]: value[this.language],
-    }
+    const mappedAttribute = {}
+
+    // create a ltext shortcut if enabled: eg. copy color[lang] to color
+    if (this.createShortcuts) mappedAttribute[name] = value[this.language]
     // create object with translations indexed with keys like: attributeName.en
     const labels = flatten({
       [name]: value, // value contains object with localized labels

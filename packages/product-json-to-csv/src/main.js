@@ -89,13 +89,17 @@ export default class ProductJsonToCsv {
     this.channelsCache = {}
     this.accessToken = accessToken
 
-    const mappingParams = pick(this.parserConfig, [
-      'fillAllRows',
-      'categoryBy',
-      'language',
-      'multiValueDelimiter',
-      'onlyMasterVariants',
-    ])
+    const mappingParams = {
+      ...pick(this.parserConfig, [
+        'fillAllRows',
+        'categoryBy',
+        'language',
+        'multiValueDelimiter',
+        'onlyMasterVariants',
+      ]),
+      // create shortcuts for ltext attributes only when not doing a full export
+      createShortcuts: !!this.parserConfig.headerFields,
+    }
     this._productMapping = new ProductMapping(mappingParams)
   }
 
