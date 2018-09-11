@@ -25,6 +25,7 @@ export type ParserConfigOptions = {
   categoryOrderHintBy: string,
   delimiter: string,
   fillAllRows: boolean,
+  onlyMasterVariants: boolean,
   headerFields?: Array<string>,
   language: string,
   multiValueDelimiter: string,

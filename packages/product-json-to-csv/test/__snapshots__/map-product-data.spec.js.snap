@@ -14,7 +14,7 @@ Object {
 }
 `;
 
-exports[`::ProductMapping ::run should accept a product and return a formatted csv string 1`] = `
+exports[`::ProductMapping ::run should accept a product and map only masterVariants 1`] = `
 Array [
   Object {
     "addedAttr": "",
@@ -26,7 +26,6 @@ Array [
     "color.de": "weiss",
     "color.en": "white",
     "color.it": "blanco",
-    "colorFreeDefinition": "black-white",
     "colorFreeDefinition.de": "schwarz-weiß",
     "colorFreeDefinition.en": "black-white",
     "createdAt": "2017-01-06T10:54:51.395Z",
@@ -45,7 +44,58 @@ Array [
     "reference": "referenceKey",
     "referenceSet": "referenceSetKey;referenceSetKey2",
     "setEnums": "myEnum;myEnum2",
-    "setLText": "enText1;enText2",
+    "setLText.de": "deText1;deText2",
+    "setLText.en": "enText1;enText2",
+    "setLenums": "myLenums;myLenums2;myLenums3",
+    "setLenums.de": "myLenums-de;myLenums-de2;myLenums-de3",
+    "setLenums.en": "myLenums-en;myLenums-en2;myLenums-en3",
+    "setLenums.es": "myLenums-es;;myLenums-es3",
+    "setLenumsEmpty": "myLenums;myLenums2;myLenums3",
+    "setLenumsEmpty.de": "myLenums-de;myLenums-de2;myLenums-de3",
+    "setLenumsEmpty.en": "myLenums-en;myLenums-en2;myLenums-en3",
+    "setLenumsEmpty.es": ";;myLenums-es3",
+    "setText": "text1;text2",
+    "slug.de": "michaelkors-handyhuelle",
+    "slug.en": "michaelkors-phonecover",
+    "taxCategory": "resolved-tax-name",
+    "variant.availability": 10,
+    "variant.id": 1,
+    "variant.images": "https://example.com/foobar/commer.jpg;https://example-2.com/demo/tools.jpg|image-label",
+    "variant.sku": "A0E200000001YKI",
+  },
+]
+`;
+
+exports[`::ProductMapping ::run should accept a product and return a formatted csv string 1`] = `
+Array [
+  Object {
+    "addedAttr": "",
+    "anotherAddedAttr": "",
+    "article": "sample 089 WHT",
+    "categories": "res-cat-name-1;res-cat-name-2",
+    "categoryOrderHints": "res-cat-name-1:0.015;res-cat-name-2:0.987",
+    "color": "white",
+    "color.de": "weiss",
+    "color.en": "white",
+    "color.it": "blanco",
+    "colorFreeDefinition.de": "schwarz-weiß",
+    "colorFreeDefinition.en": "black-white",
+    "createdAt": "2017-01-06T10:54:51.395Z",
+    "designer": "michaelkors",
+    "emptySet": "",
+    "hasStagedChanges": false,
+    "id": "12345ab-id",
+    "key": "product-key",
+    "lastModifiedAt": "2017-01-06T10:54:51.395Z",
+    "lengthOfProduct": 0,
+    "name.de": "Handyhülle",
+    "name.en": "Phone cover",
+    "prices": "DE-EUR 6400;IT-EUR 2900",
+    "productType": "resolved-product-type",
+    "published": false,
+    "reference": "referenceKey",
+    "referenceSet": "referenceSetKey;referenceSetKey2",
+    "setEnums": "myEnum;myEnum2",
     "setLText.de": "deText1;deText2",
     "setLText.en": "enText1;enText2",
     "setLenums": "myLenums;myLenums2;myLenums3",
@@ -71,7 +121,6 @@ Array [
     "color.de": "weiss",
     "color.en": "white",
     "color.it": "blanco",
-    "colorFreeDefinition": "black-white",
     "colorFreeDefinition.de": "schwarz-weiß",
     "colorFreeDefinition.en": "black-white",
     "designer": "michaelkors",

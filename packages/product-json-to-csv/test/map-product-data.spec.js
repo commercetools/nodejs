@@ -14,29 +14,34 @@ describe('::ProductMapping', () => {
 
     test('should initialize with default values', () => {
       expect(productMapping.fillAllRows).toBe(false)
+      expect(productMapping.onlyMasterVariants).toBe(false)
       expect(productMapping.categoryBy).toBe('name')
-      expect(productMapping.lang).toBe('en')
+      expect(productMapping.language).toBe('en')
       expect(productMapping.multiValDel).toBe(';')
     })
 
     test('should initialize with passed in values', () => {
       const options = {
         fillAllRows: true,
+        onlyMasterVariants: true,
         categoryBy: 'namedPath',
-        lang: 'it',
+        language: 'it',
         multiValueDelimiter: '|',
       }
       productMapping = new ProductMapping(options)
       expect(productMapping.fillAllRows).toBe(true)
+      expect(productMapping.onlyMasterVariants).toBe(true)
       expect(productMapping.categoryBy).toBe('namedPath')
-      expect(productMapping.lang).toBe('it')
+      expect(productMapping.language).toBe('it')
       expect(productMapping.multiValDel).toBe('|')
     })
   })
 
   describe('::run', () => {
-    test('should accept a product and return a formatted csv string', () => {
-      const sample = {
+    let sample
+
+    beforeAll(() => {
+      sample = {
         id: '12345ab-id',
         key: 'product-key',
         version: 1,
@@ -46,9 +51,23 @@ describe('::ProductMapping', () => {
             { name: 'article' },
             { name: 'designer' },
             { name: 'color' },
-            { name: 'colorFreeDefinition' },
+            {
+              name: 'colorFreeDefinition',
+              type: {
+                name: 'ltext',
+              },
+            },
             { name: 'addedAttr' },
             { name: 'anotherAddedAttr' },
+            {
+              name: 'setOfLtextAttribute',
+              type: {
+                name: 'set',
+                elementType: {
+                  name: 'ltext',
+                },
+              },
+            },
           ],
         },
         name: {
@@ -346,7 +365,20 @@ describe('::ProductMapping', () => {
         createdAt: '2017-01-06T10:54:51.395Z',
         lastModifiedAt: '2017-01-06T10:54:51.395Z',
       }
+    })
+
+    test('should accept a product and return a formatted csv string', () => {
       expect(productMapping.run(sample)).toMatchSnapshot()
+    })
+
+    test('should accept a product and map only masterVariants', () => {
+      const _productMapping = new ProductMapping({
+        onlyMasterVariants: true,
+      })
+      const res = _productMapping.run(sample)
+      expect(res).toHaveLength(1) // only one variant should be exported
+      expect(res[0]['variant.sku']).toEqual('A0E200000001YKI') // masterVariant
+      expect(res).toMatchSnapshot()
     })
   })
 
@@ -359,7 +391,7 @@ describe('::ProductMapping', () => {
       const expected = {
         variant: [{ id: 1 }, { id: 2 }, { id: 3 }],
       }
-      const actual = ProductMapping._mergeVariants(sampleProduct)
+      const actual = productMapping._mergeVariants(sampleProduct)
       expect(actual).toEqual(expected)
     })
   })
@@ -514,7 +546,12 @@ describe('::ProductMapping', () => {
             { name: 'article' },
             { name: 'designer' },
             { name: 'color' },
-            { name: 'colorFreeDefinition' },
+            {
+              name: 'colorFreeDefinition',
+              type: {
+                name: 'ltext',
+              },
+            },
             { name: 'addedAttr' },
             { name: 'anotherAddedAttr' },
           ],
@@ -573,7 +610,6 @@ describe('::ProductMapping', () => {
             'color.de': 'weiss',
             'color.en': 'white',
             'color.it': 'blanco',
-            colorFreeDefinition: 'black-white',
             'colorFreeDefinition.en': 'black-white',
             'colorFreeDefinition.de': 'schwarz-weiß',
             addedAttr: '',

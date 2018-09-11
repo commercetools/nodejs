@@ -7,7 +7,7 @@
         "customer-groups-exporter": "bin/customer-groups-exporter.js"
     },
     "scripts": {
-        "build": "babel src --out-dir lib"
+        "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
     },
     "repository": {
         "type": "git",
