@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "csv-parser": "1.12.1",
-    "flat": "2.0.1",
+    "flat": "4.1.0",
     "json2csv": "3.11.5",
     "npmlog": "4.1.2",
     "pretty-error": "2.1.1",
