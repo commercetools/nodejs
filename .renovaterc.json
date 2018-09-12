@@ -5,5 +5,6 @@
     ":prHourlyLimitNone",
     ":prConcurrentLimitNone",
     "schedule:weekly"
-  ]
+  ],
+  "ignoreDeps": ["lerna"]
 }
