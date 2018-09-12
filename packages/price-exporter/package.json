@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/price-exporter",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "description": "Export prices from the commercetools platform",
   "keywords": [
     "commercetools",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@commercetools/api-request-builder": "4.0.2",
-    "@commercetools/get-credentials": "2.1.5",
+    "@commercetools/get-credentials": "2.1.6",
     "@commercetools/sdk-client": "1.5.8",
     "@commercetools/sdk-middleware-auth": "4.0.4",
     "@commercetools/sdk-middleware-http": "4.0.3",

@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/state-importer",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "Import states to the commercetools platform",
   "main": "lib/main.js",
   "scripts": {
