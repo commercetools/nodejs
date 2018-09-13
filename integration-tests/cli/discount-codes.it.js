@@ -277,14 +277,11 @@ describe('DiscountCode tests', () => {
     it('should write csv output to file when passed the option', async () => {
       const csvFilePath = tmp.fileSync().name
       const expected = {
-        version: '1',
         name: {
           en: 'Sammy',
-          de: 'Valerian',
         },
         description: {
           en: 'greatest promo',
-          de: 'super angebot',
         },
         cartDiscounts: cartDiscount.id,
         cartPredicate: 'lineItemTotal(1 = 1) >  "10.00 USD"',
@@ -300,14 +297,14 @@ describe('DiscountCode tests', () => {
 
       const data = await fs.readFile(csvFilePath, { encoding: 'utf8' })
 
-      csv()
-        .fromString(data)
-        .on('json', jsonObj => {
-          expect(jsonObj).toMatchObject(expected)
-          expect(isuuid(jsonObj.id)).toBe(true)
-          expect(jsonObj.createdAt).toMatch(UTCDateTimeRegex)
-          expect(jsonObj.lastModifiedAt).toMatch(UTCDateTimeRegex)
-        })
+      await new Promise(resolve => {
+        csv()
+          .fromString(data)
+          .on('json', jsonObj => {
+            expect(jsonObj).toMatchObject(expected)
+            resolve()
+          })
+      })
     })
   })
 })
