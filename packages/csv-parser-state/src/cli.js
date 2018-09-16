@@ -102,7 +102,15 @@ const loggerConfig = {
   level: args.logLevel,
   prettyPrint: args.prettyLogs,
 }
-const logger = pino(loggerConfig)
+
+// If the stdout is used for a data output, save all logs to a log file.
+// pino writes logs to stdout by default
+const logDestination =
+  args.output === process.stdout
+    ? fs.createWriteStream(args.logFile)
+    : process.stdout
+
+const logger = pino(loggerConfig, logDestination)
 
 // print errors to stderr if we use stdout for data output
 // if we save data to output file errors are already logged by pino
@@ -125,11 +133,6 @@ const resolveCredentials = ({ accessToken, projectKey }) => {
   if (accessToken || !projectKey) return Promise.resolve({})
   return getCredentials(projectKey)
 }
-
-// If the stdout is used for a data output, save all logs to a log file.
-// pino writes logs to stdout by default
-if (args.output === process.stdout)
-  logger.stream = fs.createWriteStream(args.logFile)
 
 // Register error listener
 args.output.on('error', errorHandler)

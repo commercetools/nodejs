@@ -37,7 +37,7 @@
         "@commercetools/sdk-middleware-user-agent": "1.2.10",
         "lodash.flatten": "4.4.0",
         "node-fetch": "2.2.0",
-        "pino": "4.17.6",
+        "pino": "5.5.0",
         "pretty-error": "2.1.1",
         "prompt-confirm": "2.0.4",
         "yargs": "11.1.0"
