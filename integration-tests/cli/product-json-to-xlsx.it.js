@@ -7,7 +7,7 @@ import Excel from 'exceljs'
 import zipObject from 'lodash.zipobject'
 import { exec } from 'mz/child_process'
 import { getCredentials } from '@commercetools/get-credentials'
-import { version } from '@commercetools/product-json-to-xlsx/package.json'
+import { version } from './integration-tests/node_modules/@commercetools/product-json-to-xlsx/package.json'
 import {
   sampleProductType,
   anotherSampleProductType,
