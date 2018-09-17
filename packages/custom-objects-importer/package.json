@@ -1,6 +1,6 @@
 {
     "name": "@commercetools/custom-objects-importer",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "Import custom objects to the commercetools platform",
     "main": "lib/main.js",
     "scripts": {
@@ -29,7 +29,7 @@
     "dependencies": {
         "@commercetools/api-request-builder": "4.0.2",
         "@commercetools/sdk-client": "1.5.8",
-        "@commercetools/sdk-middleware-auth": "3.5.3",
+        "@commercetools/sdk-middleware-auth": "4.0.4",
         "@commercetools/sdk-middleware-http": "3.0.1",
         "@commercetools/sdk-middleware-user-agent": "1.2.10",
         "@commercetools/sync-actions": "1.28.0",

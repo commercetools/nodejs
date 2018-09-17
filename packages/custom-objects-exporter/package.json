@@ -1,6 +1,6 @@
 {
     "name": "@commercetools/custom-objects-exporter",
-    "version": "1.0.11",
+    "version": "1.0.12",
     "description": "Export custom objects from the commercetools platform",
     "main": "lib/main.js",
     "bin": {
@@ -30,7 +30,7 @@
     "license": "MIT",
     "dependencies": {
         "@commercetools/api-request-builder": "4.0.2",
-        "@commercetools/get-credentials": "2.1.5",
+        "@commercetools/get-credentials": "2.1.6",
         "@commercetools/sdk-client": "1.5.8",
         "@commercetools/sdk-middleware-auth": "4.0.4",
         "@commercetools/sdk-middleware-http": "4.0.3",

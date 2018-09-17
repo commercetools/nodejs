@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/discount-code-importer",
-  "version": "1.0.44",
+  "version": "1.0.45",
   "description": "Import discount codes to the commercetools platform.",
   "keywords": [
     "commercetools",

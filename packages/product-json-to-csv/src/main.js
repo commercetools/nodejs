@@ -72,6 +72,7 @@ export default class ProductJsonToCsv {
       categoryOrderHintBy: 'name', // key, externalId or name supported
       delimiter: ',',
       fillAllRows: false,
+      onlyMasterVariants: false,
       language: 'en',
       multiValueDelimiter: ';',
     }
@@ -89,10 +90,13 @@ export default class ProductJsonToCsv {
     this.accessToken = accessToken
 
     const mappingParams = {
-      fillAllRows: this.parserConfig.fillAllRows,
-      categoryBy: this.parserConfig.categoryBy,
-      lang: this.parserConfig.language,
-      multiValueDelimiter: this.parserConfig.multiValueDelimiter,
+      ...pick(this.parserConfig, [
+        'fillAllRows',
+        'categoryBy',
+        'language',
+        'multiValueDelimiter',
+        'onlyMasterVariants',
+      ]),
       // create shortcuts for ltext attributes only when not doing a full export
       createShortcuts: !!this.parserConfig.headerFields,
     }
