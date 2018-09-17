@@ -3,9 +3,11 @@ import fs from 'fs'
 import tmp from 'tmp'
 import path from 'path'
 import slugify from 'slugify'
-import archiver from 'archiver'
-import EmitOnce from 'single-emit'
-import { mapHeaders } from '@commercetools/product-json-to-csv'
+import {
+  mapHeaders,
+  onStreamsFinished,
+  archiveDir,
+} from '@commercetools/product-json-to-csv'
 import type { highlandStream } from 'types/highland'
 
 import mapValues from './map-values'
@@ -31,31 +33,6 @@ export function writeToSingleXlsxFile(
       excel.finish()
       logger.info('All products have been written to XLSX file')
     })
-}
-
-export function onStreamsFinished(
-  streams: Array<stream$Writable>,
-  cb: (err: ?Object) => void
-) {
-  const emitOnce = new EmitOnce(streams, 'finish')
-  emitOnce.on('error', err => cb(err))
-  // call callback when all streams are finished
-  emitOnce.on('finish', () => cb())
-}
-
-export function archiveDir(
-  dir: string,
-  output: stream$Writable,
-  logger: Object
-) {
-  const archive = archiver('zip')
-  archive.on('error', err => {
-    logger.error(err)
-    output.emit('error', err)
-  })
-  archive.pipe(output)
-  archive.directory(dir, 'products')
-  archive.finalize()
 }
 
 export function finishWorksheetsAndArchive(
