@@ -10,7 +10,7 @@ tmp.setGracefulCleanup()
 
 const streamTest = StreamTest.v2
 
-async function analyzeExcelWorkbook(workbook) {
+function analyzeExcelWorkbook(workbook) {
   const rows = []
   const worksheet = workbook.getWorksheet('Products')
 
@@ -31,7 +31,7 @@ async function analyzeExcelFile(path) {
   return analyzeExcelWorkbook(workbook)
 }
 
-async function analyzeExcelStream(stream) {
+function analyzeExcelStream(stream) {
   const workbook = new Excel.Workbook()
   const readStream = workbook.xlsx.createInputStream()
   stream.pipe(readStream)
