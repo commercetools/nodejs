@@ -254,19 +254,6 @@ describe('Writer', () => {
       writer.writeToZipFile(sampleStream, outputStream, logger)
     })
 
-    test('throw an error when archiver fails', done => {
-      const outputStream = streamTest.toText(() => {})
-
-      outputStream.on('error', err => {
-        expect(err).toBeDefined()
-        expect(err.code).toEqual('DIRECTORYDIRPATHREQUIRED')
-        done()
-      })
-
-      // try to archive an invalid folder
-      writer.archiveDir(null, outputStream, logger)
-    })
-
     test('throw an error when streams fail', done => {
       const tempFile = tmp.fileSync({ postfix: '.zip' })
       const tmpDir = tmp.dirSync({ unsafeCleanup: true })
@@ -296,22 +283,6 @@ describe('Writer', () => {
         outputStream,
         logger
       )
-    })
-
-    test('throw an error when a write stream in emitOnce fails', done => {
-      const tempFile = tmp.fileSync({ postfix: '.tmp' })
-      const output = tempFile.name
-      const failedStream = fs.createWriteStream(output)
-      const inputStreams = { failedStream }
-
-      writer.onStreamsFinished(inputStreams, err => {
-        expect(err).toBeDefined()
-        expect(err.message).toEqual('test error')
-        tempFile.removeCallback()
-        done()
-      })
-
-      failedStream.emit('error', new Error('test error'))
     })
   })
 })
