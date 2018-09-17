@@ -59,8 +59,8 @@ export function writeToSingleCsvFile(
     .each(product => {
       const csvData = parse(product, {
         fields: columnNames,
-        hasCSVColumnTitle: false,
-        del,
+        header: false,
+        delimiter: del,
       })
       output.write(`${csvData}\n`)
     })
@@ -83,7 +83,7 @@ export function writeToZipFile(productStream, output, logger, del) {
   const streamCache = {}
   productStream
     .each(product => {
-      let hasCSVColumnTitle = false
+      let header = false
       // Process this block only if item is a masterVariant and was
       // not the last processed item
       if (product.productType && product.productType !== currentProductType) {
@@ -92,7 +92,7 @@ export function writeToZipFile(productStream, output, logger, del) {
         if (columnNamesCache[product.productType])
           columnNames = columnNamesCache[product.productType]
         else {
-          hasCSVColumnTitle = true
+          header = true
           columnNames = mapHeaders(Object.keys(product))
           columnNamesCache[product.productType] = columnNames
         }
@@ -110,8 +110,8 @@ export function writeToZipFile(productStream, output, logger, del) {
       }
       const csvData = parse(product, {
         fields: columnNames,
-        hasCSVColumnTitle,
-        del,
+        header,
+        delimiter: del,
       })
       fileStream.write(`${csvData}\n`)
     })
