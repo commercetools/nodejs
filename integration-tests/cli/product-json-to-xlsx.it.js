@@ -150,15 +150,15 @@ describe('XLSX and CLI Tests', () => {
       describe('WITHOUT HEADERS:: write products to `zip` file', () => {
         let product1
         let product2
+        let stdout
+        let stderr
         const fileNames = []
 
         beforeAll(async done => {
           const zipFile = tmp.fileSync({ postfix: '.zip' }).name
-          const [stdout, stderr] = await exec(
+          [stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
           )
-          expect(stdout).toBeTruthy()
-          expect(stderr).toBeFalsy()
 
           fs.createReadStream(zipFile)
             .pipe(unzip.Parse())
@@ -176,6 +176,11 @@ describe('XLSX and CLI Tests', () => {
                 done()
             })
         }, 15000)
+
+        it('should successfully export and map products', () => {
+          expect(stdout).toBeTruthy()
+          expect(stderr).toBeFalsy()
+        })
 
         describe('File 1', () => {
           let product
@@ -403,15 +408,15 @@ describe('XLSX and CLI Tests', () => {
       describe('WITH HEADERS:: write products to `XLSX` file', () => {
         let xlsxFile
         let products = []
+        let stdout
+        let stderr
         const templateFile = `${__dirname}/helpers/product-headers.csv`
 
         beforeAll(async done => {
           xlsxFile = tmp.fileSync({ postfix: '.xlsx' }).name
-          const [stdout, stderr] = await exec(
+          [stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${xlsxFile}`
           )
-          expect(stdout).toBeTruthy()
-          expect(stderr).toBeFalsy()
 
           const excel = await analyzeExcelFile(xlsxFile)
           products = mapRowsToProducts(excel.rows)
@@ -423,6 +428,11 @@ describe('XLSX and CLI Tests', () => {
           }
           done()
         }, 20000)
+
+        it('should successfully export and map products', () => {
+          expect(stdout).toBeTruthy()
+          expect(stderr).toBeFalsy()
+        })
 
         it('should contain five variants', () => {
           expect(products).toHaveLength(5)
@@ -504,29 +514,34 @@ describe('XLSX and CLI Tests', () => {
 
     describe('From JSON file', () => {
       let productsJsonFile
+      let stdout
+      let stderr
       beforeAll(async () => {
         productsJsonFile = tmp.fileSync({ postfix: '.json' }).name
-        const cmd = `${exporter} -p ${projectKey} -s -o ${productsJsonFile}`
-        const [stdout, stderr] = await exec(cmd)
+        [stdout, stderr] = await exec(
+          `${exporter} -p ${projectKey} -s -o ${productsJsonFile}`
+        )
+      }, 10000)
 
+      it('should successfully map products', () => {
         expect(stdout).toBeTruthy()
         expect(stderr).toBeFalsy()
-      }, 10000)
+      })
 
       describe('WITHOUT HEADERS::should write products to `zip` file', () => {
         let product1
         let product2
+        let stdout
+        let stderr
         const fileNames = []
 
         beforeAll(async done => {
           const zipFile = tmp.fileSync({ postfix: '.zip' }).name
 
           // Map products from a JSON file to archived XLSX files
-          const [parseStdout, parseStderr] = await exec(
+          [stdout, stderr] = await exec(
             `${binPath} -p ${projectKey} -i ${productsJsonFile} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
           )
-          expect(parseStdout).toBeTruthy()
-          expect(parseStderr).toBeFalsy()
 
           fs.createReadStream(zipFile)
             .pipe(unzip.Parse())
@@ -544,6 +559,11 @@ describe('XLSX and CLI Tests', () => {
                 done()
             })
         }, 30000)
+
+        it('should successfully map products', () => {
+          expect(stdout).toBeTruthy()
+          expect(stderr).toBeFalsy()
+        })
 
         describe('File 1', () => {
           let product
@@ -769,19 +789,20 @@ describe('XLSX and CLI Tests', () => {
       })
 
       describe('WITH HEADERS::should write products to `XLSX` file', () => {
+        const templateFile = path.join(__dirname, '/helpers/product-headers.csv')
         let xlsxFile
         let excel
         let products
-        const templateFile = path.join(__dirname, '/helpers/product-headers.csv')
+        let stdout
+        let stderr
 
         beforeAll(async () => {
           xlsxFile = tmp.fileSync({ postfix: '.xlsx' }).name
-          const cmd = `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${xlsxFile}`
-          const [stdout, stderr] = await exec(cmd)
-          expect(stdout).toBeTruthy()
-          expect(stderr).toBeFalsy()
+          [stdout, stderr] = await exec(
+            `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${xlsxFile}`
+          )
+
           excel = await analyzeExcelFile(xlsxFile)
-          expect(excel.rows).toHaveLength(6)
 
           products = mapRowsToProducts(excel.rows)
           // Format the products array for easier testing because we
@@ -790,6 +811,12 @@ describe('XLSX and CLI Tests', () => {
             products = products.concat(products.splice(0, 2))
           }
         }, 15000)
+
+        it('should successfully map products', () => {
+          expect(stdout).toBeTruthy()
+          expect(stderr).toBeFalsy()
+          expect(excel.rows).toHaveLength(6)
+        })
 
         it('should contain a proper header', () => {
           expect(Object.keys(products[0])).toEqual([
