@@ -106,15 +106,15 @@ describe('CSV and CLI Tests', () => {
       describe('WITHOUT HEADERS:: write products to `zip` file', () => {
         let csvContents1 = ''
         let csvContents2 = ''
+        let stdout
+        let stderr
         const fileNames = []
 
         beforeAll(async done => {
           const zipFile = tmp.fileSync({ postfix: '.zip' }).name
-          const [stdout, stderr] = await exec(
+          [stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
           )
-          expect(stdout).toBeTruthy()
-          expect(stderr).toBeFalsy()
 
           fs.createReadStream(zipFile)
             .pipe(unzip.Parse())
@@ -135,6 +135,11 @@ describe('CSV and CLI Tests', () => {
               done()
             })
         }, 15000)
+
+        it('should successfully map products', () => {
+          expect(stdout).toBeTruthy()
+          expect(stderr).toBeFalsy()
+        })
 
         describe('File 1', () => {
           const product = []
@@ -372,15 +377,16 @@ describe('CSV and CLI Tests', () => {
       describe('WITH HEADERS:: write products to `CSV` file', () => {
         let csvFile
         let products = []
+        let stdout
+        let stderr
+
         const templateFile = `${__dirname}/helpers/product-headers.csv`
 
         beforeAll(async done => {
           csvFile = tmp.fileSync({ postfix: '.csv' }).name
-          const [stdout, stderr] = await exec(
+          [stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
           )
-          expect(stdout).toBeTruthy()
-          expect(stderr).toBeFalsy()
 
           csvToJson()
             .fromFile(csvFile)
@@ -396,6 +402,11 @@ describe('CSV and CLI Tests', () => {
               done()
             })
         }, 20000)
+
+        it('should successfully map products', () => {
+          expect(stdout).toBeTruthy()
+          expect(stderr).toBeFalsy()
+        })
 
         it('should contain five variants', () => {
           expect(products).toHaveLength(5)
@@ -477,29 +488,35 @@ describe('CSV and CLI Tests', () => {
 
     describe('From JSON file', () => {
       let productsJsonFile
+      let stdout
+      let stderr
+
       beforeAll(async () => {
         productsJsonFile = tmp.fileSync({ postfix: '.json' }).name
-        const [stdout, stderr] = await exec(
+        [stdout, stderr] = await exec(
           `${exporter} -p ${projectKey} -s -o ${productsJsonFile}`
         )
-        expect(stdout).toBeTruthy()
-        expect(stderr).toBeFalsy()
       }, 15000)
 
+      it('should successfully map products', () => {
+        expect(stdout).toBeTruthy()
+        expect(stderr).toBeFalsy()
+      })
+
       describe('WITHOUT HEADERS::should write products to `zip` file', () => {
+        const fileNames = []
         let csvContents1 = ''
         let csvContents2 = ''
-        const fileNames = []
+        let stdout
+        let stderr
 
         beforeAll(async done => {
           const zipFile = tmp.fileSync({ postfix: '.zip' }).name
 
           // Send request from with JSON file to parser
-          const [parseStdout, parseStderr] = await exec(
+          [stdout, stderr] = await exec(
             `${binPath} -p ${projectKey} -i ${productsJsonFile} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
           )
-          expect(parseStdout).toBeTruthy()
-          expect(parseStderr).toBeFalsy()
 
           fs.createReadStream(zipFile)
             .pipe(unzip.Parse())
@@ -520,6 +537,11 @@ describe('CSV and CLI Tests', () => {
               done()
             })
         }, 30000)
+
+        it('should successfully map products', () => {
+          expect(stdout).toBeTruthy()
+          expect(stderr).toBeFalsy()
+        })
 
         describe('File 1', () => {
           const product = []
@@ -755,17 +777,17 @@ describe('CSV and CLI Tests', () => {
       })
 
       describe('WITH HEADERS::should write products to `CSV` file', () => {
+        const templateFile = `${__dirname}/helpers/product-headers.csv`
         let csvFile
         let products = []
-        const templateFile = `${__dirname}/helpers/product-headers.csv`
+        let stdout
+        let stderr
 
         beforeAll(async done => {
           csvFile = tmp.fileSync({ postfix: '.csv' }).name
-          const [stdout, stderr] = await exec(
+          [stdout, stderr] = await exec(
             `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
           )
-          expect(stdout).toBeTruthy()
-          expect(stderr).toBeFalsy()
 
           csvToJson()
             .fromFile(csvFile)
@@ -781,6 +803,11 @@ describe('CSV and CLI Tests', () => {
               done()
             })
         }, 15000)
+
+        it('should successfully map products', () => {
+          expect(stdout).toBeTruthy()
+          expect(stderr).toBeFalsy()
+        })
 
         it('should contain five variants', () => {
           expect(products).toHaveLength(5)
