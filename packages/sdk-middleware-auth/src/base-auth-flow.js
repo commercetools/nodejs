@@ -130,17 +130,14 @@ export default function authMiddlewareBase(
     fetcher = fetch
   // Check if there is already a `Authorization` header in the request.
   // If so, then go directly to the next middleware.
-  if (
-    (request.headers && request.headers.authorization) ||
-    (request.headers && request.headers.Authorization)
-  ) {
+  if (request.headers?.authorization || request.headers?.Authorization) {
     next(request, response)
     return
   }
   // If there was a token in the tokenCache, and it's not expired, append
   // the token in the `Authorization` header.
   const tokenObj = tokenCache.get()
-  if (tokenObj && tokenObj.token && Date.now() < tokenObj.expirationTime) {
+  if (tokenObj?.token && Date.now() < tokenObj.expirationTime) {
     const requestWithAuth = mergeAuthHeader(tokenObj.token, request)
     next(requestWithAuth, response)
     return
@@ -160,8 +157,7 @@ export default function authMiddlewareBase(
   // If there was a refreshToken in the tokenCache, and there was an expired
   // token or no token in the tokenCache, use the refreshToken flow
   if (
-    tokenObj &&
-    tokenObj.refreshToken &&
+    tokenObj?.refreshToken &&
     (!tokenObj.token ||
       (tokenObj.token && Date.now() > tokenObj.expirationTime))
   ) {

@@ -159,8 +159,7 @@ export default class StateImport {
             return this._update(newState, existingState)
               .then(
                 (response: Object): Promise<void> => {
-                  if (response && response.statusCode === 304)
-                    this._summary.unchanged += 1
+                  if (response?.statusCode === 304) this._summary.unchanged += 1
                   else this._summary.updated += 1
                   return Promise.resolve()
                 }
