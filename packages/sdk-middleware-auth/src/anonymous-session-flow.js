@@ -25,10 +25,7 @@ export default function createAuthMiddlewareForAnonymousSessionFlow(
   ) => {
     // Check if there is already a `Authorization` header in the request.
     // If so, then go directly to the next middleware.
-    if (
-      (request.headers && request.headers.authorization) ||
-      (request.headers && request.headers.Authorization)
-    ) {
+    if (request.headers?.authorization || request.headers?.Authorization) {
       next(request, response)
       return
     }

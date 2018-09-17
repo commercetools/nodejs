@@ -12,9 +12,7 @@ import type { HttpUserAgentOptions } from 'types/sdk'
 */
 
 const isBrowser = (): boolean =>
-  typeof window !== 'undefined' &&
-  window.document &&
-  window.document.nodeType === 9
+  typeof window !== 'undefined' && window.document?.nodeType === 9
 
 function getSystemInfo(): string {
   if (isBrowser()) return window.navigator.userAgent

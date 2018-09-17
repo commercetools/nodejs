@@ -25,8 +25,7 @@ export default function createAuthMiddlewareWithExistingToken(
      */
     if (
       !authorization ||
-      (((request.headers && request.headers.authorization) ||
-        (request.headers && request.headers.Authorization)) &&
+      ((request.headers?.authorization || request.headers?.Authorization) &&
         force === false)
     ) {
       return next(request, response)

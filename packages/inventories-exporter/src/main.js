@@ -155,7 +155,7 @@ export default class InventoryExporter {
       }
     return this.client.execute(request).then(
       (result: Object): Promise<any> => {
-        if (result.body && result.body.results.length)
+        if (result.body?.results.length)
           return Promise.resolve(result.body.results[0].id)
         return Promise.reject(
           new Error('No data with channel key in CTP Platform')
@@ -177,8 +177,7 @@ export default class InventoryExporter {
       sku: row.sku,
       quantityOnStock: row.quantityOnStock,
     }
-    if (row.supplyChannel && row.supplyChannel.obj)
-      result.supplyChannel = row.supplyChannel.obj.key
+    if (row.supplyChannel?.obj) result.supplyChannel = row.supplyChannel.obj.key
     if (row.restockableInDays) result.restockableInDays = row.restockableInDays
     if (row.expectedDelivery) result.expectedDelivery = row.expectedDelivery
     if (row.custom && Object.keys(row.custom).length !== 0) {

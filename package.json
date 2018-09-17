@@ -43,6 +43,7 @@
     "@babel/plugin-proposal-export-default-from": "7.0.0",
     "@babel/plugin-proposal-export-namespace-from": "7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "7.0.0",
+    "@babel/plugin-proposal-optional-chaining": "7.0.0",
     "@babel/preset-env": "7.0.0",
     "@babel/preset-flow": "7.0.0",
     "@commitlint/cli": "7.1.2",

@@ -48,7 +48,7 @@ export default function buildQueryString(
 
   if (priceChannel) queryString.push(`priceChannel=${priceChannel}`)
 
-  if (expand && expand.length)
+  if (expand?.length)
     queryString = queryString.concat(
       expand.map((e: string): string => `expand=${e}`)
     )
@@ -74,7 +74,7 @@ export default function buildQueryString(
       const offsetParam = limitParam * (page - 1)
       queryString.push(`offset=${offsetParam}`)
     }
-    if (sort && sort.length)
+    if (sort?.length)
       queryString = queryString.concat(
         sort.map((s: string): string => `sort=${s}`)
       )
