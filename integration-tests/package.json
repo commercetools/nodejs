@@ -21,6 +21,7 @@
     "@commercetools/price-exporter": "*",
     "@commercetools/product-exporter": "*",
     "@commercetools/product-json-to-csv": "*",
+    "@commercetools/product-json-to-xlsx": "*",
     "@commercetools/sdk-client": "*",
     "@commercetools/sdk-middleware-auth": "*",
     "@commercetools/sdk-middleware-http": "*",
