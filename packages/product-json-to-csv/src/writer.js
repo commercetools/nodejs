@@ -1,7 +1,7 @@
 import archiver from 'archiver'
 import EmitOnce from 'single-emit'
 import fs from 'fs'
-import json2csv from 'json2csv'
+import { parse } from 'json2csv'
 import path from 'path'
 import slugify from 'slugify'
 import tmp from 'tmp'
@@ -57,8 +57,7 @@ export function writeToSingleCsvFile(
   const columnNames = mapHeaders(trimmedHeaders)
   productStream
     .each(product => {
-      const csvData = json2csv({
-        data: product,
+      const csvData = parse(product, {
         fields: columnNames,
         hasCSVColumnTitle: false,
         del,
@@ -109,8 +108,7 @@ export function writeToZipFile(productStream, output, logger, del) {
           streamCache[currentProductType] = fileStream
         }
       }
-      const csvData = json2csv({
-        data: product,
+      const csvData = parse(product, {
         fields: columnNames,
         hasCSVColumnTitle,
         del,

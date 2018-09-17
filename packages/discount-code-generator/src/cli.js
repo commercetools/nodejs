@@ -2,7 +2,7 @@ import fs from 'fs'
 import npmlog from 'npmlog'
 import PrettyError from 'pretty-error'
 import yargs from 'yargs'
-import json2csv from 'json2csv'
+import { parse } from 'json2csv'
 import csv from 'csv-parser'
 import flatten, { unflatten } from 'flat'
 
@@ -158,8 +158,7 @@ const resolveOutput = (_args, outputData) => {
             .join(arrayDelim)
         return flatten(obj)
       })
-      const csvOutput = json2csv({
-        data: flatObjects,
+      const csvOutput = parse(flatObjects, {
         del: _args.delimiter,
       })
       outputStream.on('error', error => {
