@@ -6,12 +6,14 @@ import slugify from 'slugify'
 import archiver from 'archiver'
 import EmitOnce from 'single-emit'
 import { mapHeaders } from '@commercetools/product-json-to-csv'
+import type { highlandStream } from 'types/highland'
+
 import mapValues from './map-values'
 import ProductExcel from './product-excel'
 
 // Accept a highland stream and write the output to a single file
 export function writeToSingleXlsxFile(
-  productStream: Object,
+  productStream: highlandStream,
   output: stream$Writable,
   logger: Object,
   headers: Array<Object>
@@ -56,7 +58,7 @@ export function archiveDir(
   archive.finalize()
 }
 
-export async function finishWorksheetsAndArchive(
+export function finishWorksheetsAndArchive(
   exports: Array<Object>,
   dir: string,
   output: stream$Writable,
