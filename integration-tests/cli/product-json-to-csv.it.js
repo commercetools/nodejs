@@ -116,7 +116,8 @@ describe('CSV and CLI Tests', () => {
           expect(stdout).toBeTruthy()
           expect(stderr).toBeFalsy()
 
-          fs.createReadStream(zipFile)
+          fs
+            .createReadStream(zipFile)
             .pipe(unzip.Parse())
             .on('entry', entry => {
               if (entry.path.includes('anotherProductType')) {
@@ -137,14 +138,10 @@ describe('CSV and CLI Tests', () => {
         }, 15000)
 
         describe('File 1', () => {
-          const product = []
-          beforeAll(done => {
-            csvToJson()
-              .fromString(csvContents1)
-              .on('json', jsonObj => {
-                product.push(jsonObj)
-              })
-              .on('done', () => done())
+          let product = []
+          beforeAll(async () => {
+            const jsonObj = await csvToJson().fromString(csvContents1)
+            product = [...product, ...jsonObj]
           })
 
           it('zip folder contains file named `productType`', () => {
@@ -260,14 +257,10 @@ describe('CSV and CLI Tests', () => {
         })
 
         describe('File 2', () => {
-          const product = []
-          beforeAll(done => {
-            csvToJson()
-              .fromString(csvContents2)
-              .on('json', jsonObj => {
-                product.push(jsonObj)
-              })
-              .on('done', () => done())
+          let product = []
+          beforeAll(async () => {
+            const jsonObj = await csvToJson().fromString(csvContents2)
+            product = [...product, ...jsonObj]
           })
 
           it('zip folder contains file named `anotherProductType`', () => {
@@ -374,7 +367,7 @@ describe('CSV and CLI Tests', () => {
         let products = []
         const templateFile = `${__dirname}/helpers/product-headers.csv`
 
-        beforeAll(async done => {
+        beforeAll(async () => {
           csvFile = tmp.fileSync({ postfix: '.csv' }).name
           const [stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
@@ -382,19 +375,14 @@ describe('CSV and CLI Tests', () => {
           expect(stdout).toBeTruthy()
           expect(stderr).toBeFalsy()
 
-          csvToJson()
-            .fromFile(csvFile)
-            .on('json', jsonObj => {
-              products.push(jsonObj)
-            })
-            .on('done', () => {
-              // Format the products array for easier testing because we
-              // cannot guarantee the sort order from the API
-              if (products[0].key === 'productKey-2') {
-                products = products.concat(products.splice(0, 2))
-              }
-              done()
-            })
+          const jsonObj = await csvToJson().fromFile(csvFile)
+          products = [...products, ...jsonObj]
+
+          // Format the products array for easier testing because we
+          //     // cannot guarantee the sort order from the API
+          if (products[0].key === 'productKey-2') {
+            products = products.concat(products.splice(0, 2))
+          }
         }, 20000)
 
         it('should contain five variants', () => {
@@ -501,7 +489,8 @@ describe('CSV and CLI Tests', () => {
           expect(parseStdout).toBeTruthy()
           expect(parseStderr).toBeFalsy()
 
-          fs.createReadStream(zipFile)
+          fs
+            .createReadStream(zipFile)
             .pipe(unzip.Parse())
             .on('entry', entry => {
               if (entry.path.includes('anotherProductType')) {
@@ -522,14 +511,10 @@ describe('CSV and CLI Tests', () => {
         }, 30000)
 
         describe('File 1', () => {
-          const product = []
-          beforeAll(done => {
-            csvToJson()
-              .fromString(csvContents1)
-              .on('json', jsonObj => {
-                product.push(jsonObj)
-              })
-              .on('done', () => done())
+          let product = []
+          beforeAll(async () => {
+            const jsonObj = await csvToJson().fromString(csvContents1)
+            product = [...product, ...jsonObj]
           })
 
           it('zip folder contains file named `productType`', () => {
@@ -645,14 +630,10 @@ describe('CSV and CLI Tests', () => {
         })
 
         describe('File 2', () => {
-          const product = []
-          beforeAll(done => {
-            csvToJson()
-              .fromString(csvContents2)
-              .on('json', jsonObj => {
-                product.push(jsonObj)
-              })
-              .on('done', () => done())
+          let product = []
+          beforeAll(async () => {
+            const jsonObj = await csvToJson().fromString(csvContents2)
+            product = [...product, ...jsonObj]
           })
 
           it('zip folder contains file named `anotherProductType`', () => {
@@ -759,7 +740,7 @@ describe('CSV and CLI Tests', () => {
         let products = []
         const templateFile = `${__dirname}/helpers/product-headers.csv`
 
-        beforeAll(async done => {
+        beforeAll(async () => {
           csvFile = tmp.fileSync({ postfix: '.csv' }).name
           const [stdout, stderr] = await exec(
             `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
@@ -767,19 +748,14 @@ describe('CSV and CLI Tests', () => {
           expect(stdout).toBeTruthy()
           expect(stderr).toBeFalsy()
 
-          csvToJson()
-            .fromFile(csvFile)
-            .on('json', jsonObj => {
-              products.push(jsonObj)
-            })
-            .on('done', () => {
-              // Format the products array for easier testing because we
-              // cannot guarantee the sort order from the API
-              if (products[0].key === 'productKey-2') {
-                products = products.concat(products.splice(0, 2))
-              }
-              done()
-            })
+          const jsonObj = await csvToJson().fromFile(csvFile)
+          products = [...products, ...jsonObj]
+
+          // Format the products array for easier testing because we
+          // cannot guarantee the sort order from the API
+          if (products[0].key === 'productKey-2') {
+            products = products.concat(products.splice(0, 2))
+          }
         }, 15000)
 
         it('should contain five variants', () => {
