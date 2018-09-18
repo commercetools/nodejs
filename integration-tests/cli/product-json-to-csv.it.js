@@ -111,7 +111,7 @@ describe('CSV and CLI Tests', () => {
         const fileNames = []
 
         beforeAll(async done => {
-          const zipFile = tmp.fileSync({ postfix: '.zip' }).name
+          const zipFile = tmp.fileSync({ postfix: '.zip' }).name;
           [stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
           )
@@ -383,7 +383,7 @@ describe('CSV and CLI Tests', () => {
         const templateFile = `${__dirname}/helpers/product-headers.csv`
 
         beforeAll(async done => {
-          csvFile = tmp.fileSync({ postfix: '.csv' }).name
+          csvFile = tmp.fileSync({ postfix: '.csv' }).name;
           [stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
           )
@@ -492,7 +492,7 @@ describe('CSV and CLI Tests', () => {
       let stderr
 
       beforeAll(async () => {
-        productsJsonFile = tmp.fileSync({ postfix: '.json' }).name
+        productsJsonFile = tmp.fileSync({ postfix: '.json' }).name;
         [stdout, stderr] = await exec(
           `${exporter} -p ${projectKey} -s -o ${productsJsonFile}`
         )
@@ -511,7 +511,7 @@ describe('CSV and CLI Tests', () => {
         let stderr
 
         beforeAll(async done => {
-          const zipFile = tmp.fileSync({ postfix: '.zip' }).name
+          const zipFile = tmp.fileSync({ postfix: '.zip' }).name;
 
           // Send request from with JSON file to parser
           [stdout, stderr] = await exec(
@@ -784,7 +784,7 @@ describe('CSV and CLI Tests', () => {
         let stderr
 
         beforeAll(async done => {
-          csvFile = tmp.fileSync({ postfix: '.csv' }).name
+          csvFile = tmp.fileSync({ postfix: '.csv' }).name;
           [stdout, stderr] = await exec(
             `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
           )

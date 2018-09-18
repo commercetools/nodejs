@@ -155,7 +155,7 @@ describe('XLSX and CLI Tests', () => {
         const fileNames = []
 
         beforeAll(async done => {
-          const zipFile = tmp.fileSync({ postfix: '.zip' }).name
+          const zipFile = tmp.fileSync({ postfix: '.zip' }).name;
           [stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
           )
@@ -413,7 +413,7 @@ describe('XLSX and CLI Tests', () => {
         const templateFile = `${__dirname}/helpers/product-headers.csv`
 
         beforeAll(async done => {
-          xlsxFile = tmp.fileSync({ postfix: '.xlsx' }).name
+          xlsxFile = tmp.fileSync({ postfix: '.xlsx' }).name;
           [stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${xlsxFile}`
           )
@@ -517,7 +517,7 @@ describe('XLSX and CLI Tests', () => {
       let stdout
       let stderr
       beforeAll(async () => {
-        productsJsonFile = tmp.fileSync({ postfix: '.json' }).name
+        productsJsonFile = tmp.fileSync({ postfix: '.json' }).name;
         [stdout, stderr] = await exec(
           `${exporter} -p ${projectKey} -s -o ${productsJsonFile}`
         )
@@ -536,7 +536,7 @@ describe('XLSX and CLI Tests', () => {
         const fileNames = []
 
         beforeAll(async done => {
-          const zipFile = tmp.fileSync({ postfix: '.zip' }).name
+          const zipFile = tmp.fileSync({ postfix: '.zip' }).name;
 
           // Map products from a JSON file to archived XLSX files
           [stdout, stderr] = await exec(
@@ -797,7 +797,7 @@ describe('XLSX and CLI Tests', () => {
         let stderr
 
         beforeAll(async () => {
-          xlsxFile = tmp.fileSync({ postfix: '.xlsx' }).name
+          xlsxFile = tmp.fileSync({ postfix: '.xlsx' }).name;
           [stdout, stderr] = await exec(
             `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${xlsxFile}`
           )
