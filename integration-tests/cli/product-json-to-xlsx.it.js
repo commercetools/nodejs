@@ -5,6 +5,7 @@ import path from 'path'
 import unzip from 'unzip'
 import Excel from 'exceljs'
 import zipObject from 'lodash.zipobject'
+import cloneDeep from 'lodash.clonedeep'
 import { exec } from 'mz/child_process'
 import { getCredentials } from '@commercetools/get-credentials'
 import { version } from '@commercetools/product-json-to-xlsx/package.json'
@@ -38,9 +39,10 @@ async function cleanup(apiConfig) {
 }
 
 function mapRowsToProducts(rows) {
+  const _rows = cloneDeep(rows)
   // first line contains header
-  const header = rows.shift()
-  return rows.map(row => zipObject(header, row))
+  const header = _rows.shift()
+  return _rows.map(row => zipObject(header, row))
 }
 
 function analyzeExcelStream(stream) {
@@ -803,7 +805,6 @@ describe('XLSX and CLI Tests', () => {
           )
 
           excel = await analyzeExcelFile(xlsxFile)
-
           products = mapRowsToProducts(excel.rows)
           // Format the products array for easier testing because we
           // cannot guarantee the sort order from the API
