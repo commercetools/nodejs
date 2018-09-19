@@ -1,0 +1,4 @@
+variant-sku,value.currencyCode,value.type,value.currencyCode,value.centAmount,value.fractionDigits,country,id
+sku12,EUR,centPrecision,EUR,12900,2,DE,id1
+sku12,EUR,centPrecision,EUR,12900,2,LT,id2
+sku12,EUR,centPrecision,EUR,12900,2,IT,id3

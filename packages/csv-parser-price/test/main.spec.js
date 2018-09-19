@@ -84,6 +84,56 @@ describe('CsvParserPrice::parse', () => {
     csvParserPrice.parse(readStream, outputStream)
   })
 
+  test('should parse a full price csv', done => {
+    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const readStream = fs.createReadStream(
+      path.join(__dirname, 'helpers/full-price.csv')
+    )
+
+    const outputStream = streamtest.v2.toText((error, result) => {
+      const prices = JSON.parse(result).prices
+      expect(prices).toEqual([
+        {
+          prices: [
+            {
+              country: 'DE',
+              id: 'id1',
+              value: {
+                type: 'centPrecision',
+                fractionDigits: 2,
+                centAmount: 12900,
+                currencyCode: 'EUR',
+              },
+            },
+            {
+              country: 'LT',
+              id: 'id2',
+              value: {
+                type: 'centPrecision',
+                fractionDigits: 2,
+                centAmount: 12900,
+                currencyCode: 'EUR',
+              },
+            },
+            {
+              country: 'IT',
+              id: 'id3',
+              value: {
+                type: 'centPrecision',
+                fractionDigits: 2,
+                centAmount: 12900,
+                currencyCode: 'EUR',
+              },
+            },
+          ],
+          sku: 'sku12',
+        },
+      ])
+      done()
+    })
+    csvParserPrice.parse(readStream, outputStream)
+  })
+
   test('should exit on faulty CSV format', done => {
     const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
     const inputStream = fs.createReadStream(
