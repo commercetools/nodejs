@@ -111,13 +111,12 @@ describe('CSV and CLI Tests', () => {
         const fileNames = []
 
         beforeAll(async done => {
-          const zipFile = tmp.fileSync({ postfix: '.zip' }).name;
-          [stdout, stderr] = await exec(
+          const zipFile = tmp.fileSync({ postfix: '.zip' }).name
+          ;[stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
           )
 
-          fs
-            .createReadStream(zipFile)
+          fs.createReadStream(zipFile)
             .pipe(unzip.Parse())
             .on('entry', entry => {
               if (entry.path.includes('anotherProductType')) {
@@ -377,7 +376,7 @@ describe('CSV and CLI Tests', () => {
 
         beforeAll(async () => {
           csvFile = tmp.fileSync({ postfix: '.csv' }).name
-          const [stdout, stderr] = await exec(
+          ;[stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
           )
 
@@ -480,8 +479,8 @@ describe('CSV and CLI Tests', () => {
       let stderr
 
       beforeAll(async () => {
-        productsJsonFile = tmp.fileSync({ postfix: '.json' }).name;
-        [stdout, stderr] = await exec(
+        productsJsonFile = tmp.fileSync({ postfix: '.json' }).name
+        ;[stdout, stderr] = await exec(
           `${exporter} -p ${projectKey} -s -o ${productsJsonFile}`
         )
       }, 15000)
@@ -499,15 +498,14 @@ describe('CSV and CLI Tests', () => {
         let stderr
 
         beforeAll(async done => {
-          const zipFile = tmp.fileSync({ postfix: '.zip' }).name;
+          const zipFile = tmp.fileSync({ postfix: '.zip' }).name
 
           // Send request from with JSON file to parser
-          [stdout, stderr] = await exec(
+          ;[stdout, stderr] = await exec(
             `${binPath} -p ${projectKey} -i ${productsJsonFile} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
           )
 
-          fs
-            .createReadStream(zipFile)
+          fs.createReadStream(zipFile)
             .pipe(unzip.Parse())
             .on('entry', entry => {
               if (entry.path.includes('anotherProductType')) {
@@ -766,7 +764,7 @@ describe('CSV and CLI Tests', () => {
 
         beforeAll(async () => {
           csvFile = tmp.fileSync({ postfix: '.csv' }).name
-          const [stdout, stderr] = await exec(
+          ;[stdout, stderr] = await exec(
             `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
           )
 
