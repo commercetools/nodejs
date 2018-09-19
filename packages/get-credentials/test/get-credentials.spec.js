@@ -37,11 +37,13 @@ describe('getCredentials', () => {
 })
 
 describe('getCredentialsFromEnvironment', () => {
-  beforeEach(() => {
+  beforeAll(() => {
     process.env.CT_STROOPWAFEL = ''
   })
 
   afterEach(() => sinon.restore())
+
+  afterAll(() => delete process.env.CT_STROOPWAFEL)
 
   test('should resolve credentials from environment variables', () => {
     sinon.stub(process.env, 'CT_STROOPWAFEL').value('nyw:les')
@@ -78,24 +80,26 @@ describe('getCredentialsFromEnvironment', () => {
 })
 
 describe('setCredentialsFromEnvFile', () => {
-  beforeEach(() => {
-    process.env.CT_STROOPWAFEL = ''
+  afterEach(() => {
+    sinon.restore()
+    delete process.env.CT_STROOPWAFEL
   })
-  afterEach(() => sinon.restore())
-  sinon.reset()
+
   test('should set environment variables', () => {
     sinon.stub(fs, 'readFileSync').returns(`
-    CT_STROOPWAFEL2=dev:null
+    CT_STROOPWAFEL=dev:null
     CT_PANNENKOEK=dev:urandom
     `)
 
     const result = setCredentialsFromEnvFile()
 
-    expect(process.env.CT_STROOPWAFEL2).toBe(result.CT_STROOPWAFEL2)
+    expect(process.env.CT_STROOPWAFEL).toBe(result.CT_STROOPWAFEL)
     expect(process.env.CT_PANNENKOEK).toBe(result.CT_PANNENKOEK)
   })
 
   test('should not override existing environment variables', () => {
+    process.env.CT_STROOPWAFEL = ''
+
     sinon.stub(process.env, 'CT_STROOPWAFEL').value('nyw:les')
     sinon.stub(fs, 'readFileSync').returns('CT_STROOPWAFEL=dev:null')
 
