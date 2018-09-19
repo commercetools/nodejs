@@ -339,5 +339,88 @@ describe('Actions', () => {
         ])
       )
     })
+
+    test('should handle price removal without id', () => {
+      const oldProduct = {
+        id: '123',
+        version: 1,
+        masterVariant: {
+          id: 1,
+          sku: 'v1',
+          prices: [
+            {
+              country: 'DE',
+              id: 'DE_PRICE',
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 1111,
+                fractionDigits: 2,
+              },
+            },
+            {
+              country: 'LT',
+              id: 'LT_PRICE',
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 2222,
+                fractionDigits: 2,
+              },
+            },
+            {
+              country: 'IT',
+              id: 'IT_PRICE',
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 3333,
+                fractionDigits: 2,
+              },
+            },
+          ],
+          attributes: [],
+        },
+        variants: [],
+      }
+      const newProduct = {
+        id: '123',
+        version: 1,
+        masterVariant: {
+          id: 1,
+          sku: 'v1',
+          prices: [
+            {
+              country: 'DE',
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 1111,
+                fractionDigits: 2,
+              },
+            },
+            {
+              country: 'IT',
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 3333,
+                fractionDigits: 2,
+              },
+            },
+          ],
+          attributes: [],
+        },
+        variants: [],
+      }
+      const updateActions = productsSync.buildActions(oldProduct, newProduct)
+      expect(updateActions).toHaveLength(1)
+      expect(updateActions).toEqual([
+        {
+          action: 'removePrice',
+          priceId: 'LT_PRICE',
+        },
+      ])
+    })
   })
 })
