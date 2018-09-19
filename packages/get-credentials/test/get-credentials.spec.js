@@ -15,9 +15,7 @@ const expectedErrorText = {
 }
 
 describe('getCredentials', () => {
-  const sandbox = sinon.sandbox.create()
-
-  afterEach(() => sandbox.restore())
+  afterEach(() => sinon.restore())
 
   test('should reject error when missing project key argument', done => {
     getCredentials()
@@ -39,12 +37,14 @@ describe('getCredentials', () => {
 })
 
 describe('getCredentialsFromEnvironment', () => {
-  const sandbox = sinon.sandbox.create()
+  beforeEach(() => {
+    process.env.CT_STROOPWAFEL = ''
+  })
 
-  afterEach(() => sandbox.restore())
+  afterEach(() => sinon.restore())
 
   test('should resolve credentials from environment variables', () => {
-    sandbox.stub(process, 'env', { CT_STROOPWAFEL: 'nyw:les' })
+    sinon.stub(process.env, 'CT_STROOPWAFEL').value('nyw:les')
 
     return getCredentialsFromEnvironment('stroopwafel').then(credentials =>
       expect(credentials).toEqual({
@@ -54,15 +54,15 @@ describe('getCredentialsFromEnvironment', () => {
     )
   })
 
-  test('should reject on incorrect environment variable value', done => {
-    sandbox.stub(process, 'env', { CT_STROOPWAFEL: 'nywles' })
+  test('should reject on incorrect environment variable value', () => {
+    sinon.stub(process.env, 'CT_STROOPWAFEL').value('nyw:les')
+    sinon.stub(process, 'env').callsFake({ CT_STROOPWAFEL: 'nywles' })
 
     getCredentialsFromEnvironment('stroopwafel')
-      .then(done.fail)
+      .then()
       .catch(error => {
         expect(error.message).toMatch(expectedErrorText.invalidEnvFormat)
         expect(error.message).toMatch(new RegExp(homepage))
-        done()
       })
   })
 
@@ -78,25 +78,26 @@ describe('getCredentialsFromEnvironment', () => {
 })
 
 describe('setCredentialsFromEnvFile', () => {
-  const sandbox = sinon.sandbox.create()
-
-  afterEach(() => sandbox.restore())
-
+  beforeEach(() => {
+    process.env.CT_STROOPWAFEL = ''
+  })
+  afterEach(() => sinon.restore())
+  sinon.reset()
   test('should set environment variables', () => {
-    sandbox.stub(fs, 'readFileSync').returns(`
-        CT_STROOPWAFEL=dev:null
-        CT_PANNENKOEK=dev:urandom
-      `)
+    sinon.stub(fs, 'readFileSync').returns(`
+    CT_STROOPWAFEL2=dev:null
+    CT_PANNENKOEK=dev:urandom
+    `)
 
     const result = setCredentialsFromEnvFile()
 
-    expect(process.env.CT_STROOPWAFEL).toBe(result.CT_STROOPWAFEL)
+    expect(process.env.CT_STROOPWAFEL2).toBe(result.CT_STROOPWAFEL2)
     expect(process.env.CT_PANNENKOEK).toBe(result.CT_PANNENKOEK)
   })
 
   test('should not override existing environment variables', () => {
-    sandbox.stub(process, 'env', { CT_STROOPWAFEL: 'nyw:les' })
-    sandbox.stub(fs, 'readFileSync').returns('CT_STROOPWAFEL=dev:null')
+    sinon.stub(process.env, 'CT_STROOPWAFEL').value('nyw:les')
+    sinon.stub(fs, 'readFileSync').returns('CT_STROOPWAFEL=dev:null')
 
     setCredentialsFromEnvFile()
 
