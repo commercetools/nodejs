@@ -1,10 +1,14 @@
 import fs from 'mz/fs'
 import tmp from 'tmp'
+import Promise from 'bluebird'
+import path from 'path'
 import unzip from 'unzip'
-import csvToJson from 'csvtojson'
+import Excel from 'exceljs'
+import zipObject from 'lodash.zipobject'
+import cloneDeep from 'lodash.clonedeep'
 import { exec } from 'mz/child_process'
 import { getCredentials } from '@commercetools/get-credentials'
-import { version } from '@commercetools/product-json-to-csv/package.json'
+import { version } from '@commercetools/product-json-to-xlsx/package.json'
 import {
   sampleProductType,
   anotherSampleProductType,
@@ -19,7 +23,7 @@ import { createData, clearData } from './helpers/utils'
 
 let projectKey
 if (process.env.CI === 'true')
-  projectKey = 'product-json2csv-integration-test-26'
+  projectKey = 'product-json2xlsx-integration-test'
 else projectKey = process.env.npm_config_projectkey
 
 async function cleanup(apiConfig) {
@@ -34,9 +38,51 @@ async function cleanup(apiConfig) {
   ])
 }
 
-describe('CSV and CLI Tests', () => {
+function mapRowsToProducts(rows) {
+  const _rows = cloneDeep(rows)
+  // first line contains header
+  const header = _rows.shift()
+  return _rows.map(row => zipObject(header, row))
+}
+
+function analyzeExcelStream(stream) {
+  const workbook = new Excel.Workbook()
+  const readStream = workbook.xlsx.createInputStream()
+  stream.pipe(readStream)
+
+  return new Promise((resolve, reject) => {
+    readStream.on('error', reject)
+    readStream.on('done', () => resolve(analyzeExcelWorkbook(workbook)))
+  })
+}
+
+function analyzeExcelWorkbook(workbook) {
+  const rows = []
+  const worksheet = workbook.getWorksheet('Products')
+
+  worksheet.eachRow(row => rows.push(row.values))
+  // remove first column containing null values
+  rows.forEach(row => row.shift())
+
+  return {
+    workbook,
+    worksheet,
+    rows,
+  }
+}
+
+async function analyzeExcelFile(path) {
+  const workbook = new Excel.Workbook()
+  await workbook.xlsx.readFile(path)
+  return {
+    path,
+    ... await analyzeExcelWorkbook(workbook),
+  }
+}
+
+describe('XLSX and CLI Tests', () => {
   let apiConfig
-  const binPath = './integration-tests/node_modules/.bin/product-json-to-csv'
+  const binPath = './integration-tests/node_modules/.bin/product-json-to-xlsx'
 
   beforeAll(async () => {
     const credentials = await getCredentials(projectKey)
@@ -104,8 +150,8 @@ describe('CSV and CLI Tests', () => {
     const exporter = './integration-tests/node_modules/.bin/product-exporter'
     describe('From product exporter', () => {
       describe('WITHOUT HEADERS:: write products to `zip` file', () => {
-        let csvContents1 = ''
-        let csvContents2 = ''
+        let product1
+        let product2
         let stdout
         let stderr
         const fileNames = []
@@ -116,41 +162,36 @@ describe('CSV and CLI Tests', () => {
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
           )
 
-          fs
-            .createReadStream(zipFile)
+          fs.createReadStream(zipFile)
             .pipe(unzip.Parse())
-            .on('entry', entry => {
-              if (entry.path.includes('anotherProductType')) {
-                entry.on('data', data => {
-                  fileNames.push(entry.path)
-                  csvContents2 += data.toString()
-                })
-              } else {
-                entry.on('data', data => {
-                  fileNames.push(entry.path)
-                  csvContents1 += data.toString()
-                })
-              }
-            })
-            .on('close', () => {
-              done()
+            .on('entry', async entry => {
+              const excelInfo = await analyzeExcelStream(entry)
+              fileNames.push(entry.path)
+
+              if (entry.path.includes('productTypeForProductParse'))
+                product1 = mapRowsToProducts(excelInfo.rows)
+              else
+                product2 = mapRowsToProducts(excelInfo.rows)
+
+              // unzip module fires done event before we finish async operations
+              if (fileNames.length === 2)
+                done()
             })
         }, 15000)
 
-        it('should successfully map products', () => {
+        it('should successfully export and map products', () => {
           expect(stdout).toBeTruthy()
           expect(stderr).toBeFalsy()
         })
 
         describe('File 1', () => {
-          let product = []
-          beforeAll(async () => {
-            const jsonObj = await csvToJson().fromString(csvContents1)
-            product = [...product, ...jsonObj]
+          let product
+          beforeAll(() => {
+            product = product1
           })
 
           it('zip folder contains file named `productType`', () => {
-            const fileName = ['products/productTypeForProductParse.csv']
+            const fileName = ['products/productTypeForProductParse.xlsx']
             expect(fileNames).toEqual(expect.arrayContaining(fileName))
           })
 
@@ -159,46 +200,46 @@ describe('CSV and CLI Tests', () => {
           })
 
           it('contains `name`', () => {
-            const name = { en: 'Sample Duck-jacket', de: 'Beispiel Entejacke' }
-            expect(product[0]).toEqual(expect.objectContaining({ name }))
-            expect(product[1]).toEqual(expect.objectContaining({ name }))
-            expect(product[2]).toEqual(expect.objectContaining({ name }))
+            const name = { 'name.en': 'Sample Duck-jacket', 'name.de': 'Beispiel Entejacke' }
+            expect(product[0]).toEqual(expect.objectContaining(name))
+            expect(product[1]).toEqual(expect.objectContaining(name))
+            expect(product[2]).toEqual(expect.objectContaining(name))
           })
 
           it('contains `description`', () => {
             const description = {
-              en:
+              'description.en':
                 'The light jackets of Save the Duck keep us cozy warm. The slight',
-              de:
+              'description.de':
                 'Die leichten Freizeitjacken von Save the Duck halten uns wohlig',
             }
-            expect(product[0]).toEqual(expect.objectContaining({ description }))
-            expect(product[1]).toEqual(expect.objectContaining({ description }))
-            expect(product[2]).toEqual(expect.objectContaining({ description }))
+            expect(product[0]).toEqual(expect.objectContaining(description))
+            expect(product[1]).toEqual(expect.objectContaining(description))
+            expect(product[2]).toEqual(expect.objectContaining(description))
           })
 
           it('contains `slug`', () => {
             const slug = {
-              en: 'sample-sluggy-duck-jacke-123',
-              de: 'beispiel-sluggy-ente-jacke-123',
+              'slug.en': 'sample-sluggy-duck-jacke-123',
+              'slug.de': 'beispiel-sluggy-ente-jacke-123',
             }
-            expect(product[0]).toEqual(expect.objectContaining({ slug }))
-            expect(product[1]).toEqual(expect.objectContaining({ slug }))
-            expect(product[2]).toEqual(expect.objectContaining({ slug }))
+            expect(product[0]).toEqual(expect.objectContaining(slug))
+            expect(product[1]).toEqual(expect.objectContaining(slug))
+            expect(product[2]).toEqual(expect.objectContaining(slug))
           })
 
           it('contains `searchKeywords`', () => {
             const searchKeywords = {
-              en: 'Standard Keyword;German | White | Space',
+              'searchKeywords.en': 'Standard Keyword;German | White | Space',
             }
             expect(product[0]).toEqual(
-              expect.objectContaining({ searchKeywords })
+              expect.objectContaining(searchKeywords)
             )
             expect(product[1]).toEqual(
-              expect.objectContaining({ searchKeywords })
+              expect.objectContaining(searchKeywords)
             )
             expect(product[2]).toEqual(
-              expect.objectContaining({ searchKeywords })
+              expect.objectContaining(searchKeywords)
             )
           })
 
@@ -262,14 +303,13 @@ describe('CSV and CLI Tests', () => {
         })
 
         describe('File 2', () => {
-          let product = []
-          beforeAll(async () => {
-            const jsonObj = await csvToJson().fromString(csvContents2)
-            product = [...product, ...jsonObj]
+          let product
+          beforeAll(() => {
+            product = product2
           })
 
           it('zip folder contains file named `anotherProductType`', () => {
-            const fileName = ['products/anotherProductTypeForProductParse.csv']
+            const fileName = ['products/anotherProductTypeForProductParse.xlsx']
             expect(fileNames).toEqual(expect.arrayContaining(fileName))
           })
 
@@ -279,39 +319,39 @@ describe('CSV and CLI Tests', () => {
 
           it('contains `name`', () => {
             const name = {
-              en: 'Second Sample Duck-jacket',
-              de: 'Zwite Beispiel Entejacke',
+              'name.en': 'Second Sample Duck-jacket',
+              'name.de': 'Zwite Beispiel Entejacke',
             }
-            expect(product[0]).toEqual(expect.objectContaining({ name }))
-            expect(product[1]).toEqual(expect.objectContaining({ name }))
+            expect(product[0]).toEqual(expect.objectContaining(name))
+            expect(product[1]).toEqual(expect.objectContaining(name))
           })
 
           it('contains `description`', () => {
             const description = {
-              en:
+              'description.en':
                 'Golom Jacop Caesar Icarve the Duck keep us cozy warm. The slight',
-              de: 'Lorem Ipsum Text von Save the Duck halten uns wohlig',
+              'description.de': 'Lorem Ipsum Text von Save the Duck halten uns wohlig',
             }
-            expect(product[0]).toEqual(expect.objectContaining({ description }))
-            expect(product[1]).toEqual(expect.objectContaining({ description }))
+            expect(product[0]).toEqual(expect.objectContaining(description))
+            expect(product[1]).toEqual(expect.objectContaining(description))
           })
 
           it('contains `slug`', () => {
             const slug = {
-              en: 'sample-sluggy-duck-jacke-456789',
-              de: 'beispiel-sluggy-ente-jacke-456789',
+              'slug.en': 'sample-sluggy-duck-jacke-456789',
+              'slug.de': 'beispiel-sluggy-ente-jacke-456789',
             }
-            expect(product[0]).toEqual(expect.objectContaining({ slug }))
-            expect(product[1]).toEqual(expect.objectContaining({ slug }))
+            expect(product[0]).toEqual(expect.objectContaining(slug))
+            expect(product[1]).toEqual(expect.objectContaining(slug))
           })
 
           it('contains `searchKeywords`', () => {
-            const searchKeywords = { en: 'Multi Tool;Swiss | Army | Knife' }
+            const searchKeywords = { 'searchKeywords.en': 'Multi Tool;Swiss | Army | Knife' }
             expect(product[0]).toEqual(
-              expect.objectContaining({ searchKeywords })
+              expect.objectContaining(searchKeywords)
             )
             expect(product[1]).toEqual(
-              expect.objectContaining({ searchKeywords })
+              expect.objectContaining(searchKeywords)
             )
           })
 
@@ -367,31 +407,31 @@ describe('CSV and CLI Tests', () => {
         })
       })
 
-      describe('WITH HEADERS:: write products to `CSV` file', () => {
-        let csvFile
+      describe('WITH HEADERS:: write products to `XLSX` file', () => {
+        let xlsxFile
         let products = []
         let stdout
         let stderr
-
         const templateFile = `${__dirname}/helpers/product-headers.csv`
 
-        beforeAll(async () => {
-          csvFile = tmp.fileSync({ postfix: '.csv' }).name
-          const [stdout, stderr] = await exec(
-            `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
+        beforeAll(async done => {
+          xlsxFile = tmp.fileSync({ postfix: '.xlsx' }).name;
+          [stdout, stderr] = await exec(
+            `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${xlsxFile}`
           )
 
-          const jsonObj = await csvToJson().fromFile(csvFile)
-          products = [...products, ...jsonObj]
+          const excel = await analyzeExcelFile(xlsxFile)
+          products = mapRowsToProducts(excel.rows)
 
           // Format the products array for easier testing because we
-          //     // cannot guarantee the sort order from the API
+          // cannot guarantee the sort order from the API
           if (products[0].key === 'productKey-2') {
             products = products.concat(products.splice(0, 2))
           }
+          done()
         }, 20000)
 
-        it('should successfully map products', () => {
+        it('should successfully export and map products', () => {
           expect(stdout).toBeTruthy()
           expect(stderr).toBeFalsy()
         })
@@ -410,9 +450,9 @@ describe('CSV and CLI Tests', () => {
           )
 
           // Check other variants
-          expect(products[1]).toEqual(expect.objectContaining({ key: '' }))
-          expect(products[2]).toEqual(expect.objectContaining({ key: '' }))
-          expect(products[4]).toEqual(expect.objectContaining({ key: '' }))
+          expect(products[1]).toEqual(expect.objectContaining({ key: undefined }))
+          expect(products[2]).toEqual(expect.objectContaining({ key: undefined }))
+          expect(products[4]).toEqual(expect.objectContaining({ key: undefined }))
         })
 
         it('should include only columns from template', () => {
@@ -438,24 +478,24 @@ describe('CSV and CLI Tests', () => {
             expect.objectContaining({ 'text-attribute': 'Master Var attr' })
           )
           expect(products[0]).toEqual(
-            expect.objectContaining({ 'another-text-attribute': '' })
+            expect.objectContaining({ 'another-text-attribute': undefined })
           )
           expect(products[1]).toEqual(
             expect.objectContaining({ 'text-attribute': 'First Var attr' })
           )
           expect(products[1]).toEqual(
-            expect.objectContaining({ 'another-text-attribute': '' })
+            expect.objectContaining({ 'another-text-attribute': undefined })
           )
           expect(products[2]).toEqual(
             expect.objectContaining({ 'text-attribute': 'Second Var attr' })
           )
           expect(products[2]).toEqual(
-            expect.objectContaining({ 'another-text-attribute': '' })
+            expect.objectContaining({ 'another-text-attribute': undefined })
           )
 
           // From second product
           expect(products[3]).toEqual(
-            expect.objectContaining({ 'text-attribute': '' })
+            expect.objectContaining({ 'text-attribute': undefined })
           )
           expect(products[3]).toEqual(
             expect.objectContaining({
@@ -463,7 +503,7 @@ describe('CSV and CLI Tests', () => {
             })
           )
           expect(products[4]).toEqual(
-            expect.objectContaining({ 'text-attribute': '' })
+            expect.objectContaining({ 'text-attribute': undefined })
           )
           expect(products[4]).toEqual(
             expect.objectContaining({
@@ -478,13 +518,12 @@ describe('CSV and CLI Tests', () => {
       let productsJsonFile
       let stdout
       let stderr
-
       beforeAll(async () => {
         productsJsonFile = tmp.fileSync({ postfix: '.json' }).name;
         [stdout, stderr] = await exec(
           `${exporter} -p ${projectKey} -s -o ${productsJsonFile}`
         )
-      }, 15000)
+      }, 10000)
 
       it('should successfully map products', () => {
         expect(stdout).toBeTruthy()
@@ -492,38 +531,34 @@ describe('CSV and CLI Tests', () => {
       })
 
       describe('WITHOUT HEADERS::should write products to `zip` file', () => {
-        const fileNames = []
-        let csvContents1 = ''
-        let csvContents2 = ''
+        let product1
+        let product2
         let stdout
         let stderr
+        const fileNames = []
 
         beforeAll(async done => {
           const zipFile = tmp.fileSync({ postfix: '.zip' }).name;
 
-          // Send request from with JSON file to parser
+          // Map products from a JSON file to archived XLSX files
           [stdout, stderr] = await exec(
             `${binPath} -p ${projectKey} -i ${productsJsonFile} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
           )
 
-          fs
-            .createReadStream(zipFile)
+          fs.createReadStream(zipFile)
             .pipe(unzip.Parse())
-            .on('entry', entry => {
-              if (entry.path.includes('anotherProductType')) {
-                entry.on('data', data => {
-                  fileNames.push(entry.path)
-                  csvContents2 += data.toString()
-                })
-              } else {
-                entry.on('data', data => {
-                  fileNames.push(entry.path)
-                  csvContents1 += data.toString()
-                })
-              }
-            })
-            .on('close', () => {
-              done()
+            .on('entry', async entry => {
+              const excelInfo = await analyzeExcelStream(entry)
+              fileNames.push(entry.path)
+
+              if (entry.path.includes('anotherProductType'))
+                product1 = mapRowsToProducts(excelInfo.rows)
+              else
+                product2 = mapRowsToProducts(excelInfo.rows)
+
+              // unzip module fires done event before we finish async operations
+              if (fileNames.length === 2)
+                done()
             })
         }, 30000)
 
@@ -533,14 +568,117 @@ describe('CSV and CLI Tests', () => {
         })
 
         describe('File 1', () => {
-          let product = []
-          beforeAll(async () => {
-            const jsonObj = await csvToJson().fromString(csvContents1)
-            product = [...product, ...jsonObj]
+          let product
+          beforeAll(() => {
+            product = product1
+          })
+
+          it('zip folder contains file named `anotherProductType`', () => {
+            const fileName = ['products/anotherProductTypeForProductParse.xlsx']
+            expect(fileNames).toEqual(expect.arrayContaining(fileName))
+          })
+
+          it('product contains 2 variants', () => {
+            expect(product).toHaveLength(2)
+          })
+
+          it('contains `name`', () => {
+            const name = {
+              'name.en': 'Second Sample Duck-jacket',
+              'name.de': 'Zwite Beispiel Entejacke',
+            }
+            expect(product[0]).toEqual(expect.objectContaining(name))
+            expect(product[1]).toEqual(expect.objectContaining(name))
+          })
+
+          it('contains `description`', () => {
+            const description = {
+              'description.en':
+                'Golom Jacop Caesar Icarve the Duck keep us cozy warm. The slight',
+              'description.de': 'Lorem Ipsum Text von Save the Duck halten uns wohlig',
+            }
+            expect(product[0]).toEqual(expect.objectContaining(description))
+            expect(product[1]).toEqual(expect.objectContaining(description))
+          })
+
+          it('contains `slug`', () => {
+            const slug = {
+              'slug.en': 'sample-sluggy-duck-jacke-456789',
+              'slug.de': 'beispiel-sluggy-ente-jacke-456789',
+            }
+            expect(product[0]).toEqual(expect.objectContaining(slug))
+            expect(product[1]).toEqual(expect.objectContaining(slug))
+          })
+
+          it('contains `searchKeywords`', () => {
+            const searchKeywords = { 'searchKeywords.en': 'Multi Tool;Swiss | Army | Knife' }
+            expect(product[0]).toEqual(
+              expect.objectContaining(searchKeywords)
+            )
+            expect(product[1]).toEqual(
+              expect.objectContaining(searchKeywords)
+            )
+          })
+
+          it('contains resolved namedPath of `categories`', () => {
+            const categories = 'Parent Category>child Category'
+            expect(product[0]).toEqual(expect.objectContaining({ categories }))
+            expect(product[1]).toEqual(expect.objectContaining({ categories }))
+          })
+
+          it('contains resolved `state`', () => {
+            const state = 'stateKey'
+            expect(product[0]).toEqual(expect.objectContaining({ state }))
+            expect(product[1]).toEqual(expect.objectContaining({ state }))
+          })
+
+          it('contains resolved `taxCategory`', () => {
+            const tax = 'new-tax-category'
+            expect(product[0]).toEqual(expect.objectContaining({ tax }))
+            expect(product[1]).toEqual(expect.objectContaining({ tax }))
+          })
+
+          it('contains variants `SKUs`', () => {
+            expect(product[0]).toEqual(
+              expect.objectContaining({ sku: 'M00F56YSS' })
+            )
+            expect(product[1]).toEqual(
+              expect.objectContaining({ sku: 'M00F56YSS-11' })
+            )
+          })
+
+          it('contains variants `keys`', () => {
+            expect(product[0]).toEqual(
+              expect.objectContaining({ variantKey: 'master-var-111' })
+            )
+            expect(product[1]).toEqual(
+              expect.objectContaining({ variantKey: 'normal-var-222' })
+            )
+          })
+
+          // Test for custom attributes
+          it('contains variants custom attributes', () => {
+            expect(product[0]).toEqual(
+              expect.objectContaining({
+                'another-text-attribute': 'Another Master Var attr',
+              })
+            )
+            expect(product[1]).toEqual(
+              expect.objectContaining({
+                'another-text-attribute': 'Another First Var attr',
+              })
+            )
+          })
+        })
+
+        describe('File 2', () => {
+          let product
+          beforeAll(() => {
+            product = product2
           })
 
           it('zip folder contains file named `productType`', () => {
-            const fileName = ['products/productTypeForProductParse.csv']
+            const fileName = ['products/productTypeForProductParse.xlsx']
             expect(fileNames).toEqual(expect.arrayContaining(fileName))
           })
 
@@ -549,46 +687,46 @@ describe('CSV and CLI Tests', () => {
           })
 
           it('contains `name`', () => {
-            const name = { en: 'Sample Duck-jacket', de: 'Beispiel Entejacke' }
-            expect(product[0]).toEqual(expect.objectContaining({ name }))
-            expect(product[1]).toEqual(expect.objectContaining({ name }))
-            expect(product[2]).toEqual(expect.objectContaining({ name }))
+            const name = { 'name.en': 'Sample Duck-jacket', 'name.de': 'Beispiel Entejacke' }
+            expect(product[0]).toEqual(expect.objectContaining(name))
+            expect(product[1]).toEqual(expect.objectContaining(name))
+            expect(product[2]).toEqual(expect.objectContaining(name))
           })
 
           it('contains `description`', () => {
             const description = {
-              en:
+              'description.en':
                 'The light jackets of Save the Duck keep us cozy warm. The slight',
-              de:
+              'description.de':
                 'Die leichten Freizeitjacken von Save the Duck halten uns wohlig',
             }
-            expect(product[0]).toEqual(expect.objectContaining({ description }))
-            expect(product[1]).toEqual(expect.objectContaining({ description }))
-            expect(product[2]).toEqual(expect.objectContaining({ description }))
+            expect(product[0]).toEqual(expect.objectContaining(description))
+            expect(product[1]).toEqual(expect.objectContaining(description))
+            expect(product[2]).toEqual(expect.objectContaining(description))
           })
 
           it('contains `slug`', () => {
             const slug = {
-              en: 'sample-sluggy-duck-jacke-123',
-              de: 'beispiel-sluggy-ente-jacke-123',
+              'slug.en': 'sample-sluggy-duck-jacke-123',
+              'slug.de': 'beispiel-sluggy-ente-jacke-123',
             }
-            expect(product[0]).toEqual(expect.objectContaining({ slug }))
-            expect(product[1]).toEqual(expect.objectContaining({ slug }))
-            expect(product[2]).toEqual(expect.objectContaining({ slug }))
+            expect(product[0]).toEqual(expect.objectContaining(slug))
+            expect(product[1]).toEqual(expect.objectContaining(slug))
+            expect(product[2]).toEqual(expect.objectContaining(slug))
           })
 
           it('contains `searchKeywords`', () => {
             const searchKeywords = {
-              en: 'Standard Keyword;German | White | Space',
+              'searchKeywords.en': 'Standard Keyword;German | White | Space',
             }
             expect(product[0]).toEqual(
-              expect.objectContaining({ searchKeywords })
+              expect.objectContaining(searchKeywords)
             )
             expect(product[1]).toEqual(
-              expect.objectContaining({ searchKeywords })
+              expect.objectContaining(searchKeywords)
             )
             expect(product[2]).toEqual(
-              expect.objectContaining({ searchKeywords })
+              expect.objectContaining(searchKeywords)
             )
           })
 
@@ -650,129 +788,24 @@ describe('CSV and CLI Tests', () => {
             )
           })
         })
-
-        describe('File 2', () => {
-          let product = []
-          beforeAll(async () => {
-            const jsonObj = await csvToJson().fromString(csvContents2)
-            product = [...product, ...jsonObj]
-          })
-
-          it('zip folder contains file named `anotherProductType`', () => {
-            const fileName = ['products/anotherProductTypeForProductParse.csv']
-            expect(fileNames).toEqual(expect.arrayContaining(fileName))
-          })
-
-          it('product contains 2 variants', () => {
-            expect(product).toHaveLength(2)
-          })
-
-          it('contains `name`', () => {
-            const name = {
-              en: 'Second Sample Duck-jacket',
-              de: 'Zwite Beispiel Entejacke',
-            }
-            expect(product[0]).toEqual(expect.objectContaining({ name }))
-            expect(product[1]).toEqual(expect.objectContaining({ name }))
-          })
-
-          it('contains `description`', () => {
-            const description = {
-              en:
-                'Golom Jacop Caesar Icarve the Duck keep us cozy warm. The slight',
-              de: 'Lorem Ipsum Text von Save the Duck halten uns wohlig',
-            }
-            expect(product[0]).toEqual(expect.objectContaining({ description }))
-            expect(product[1]).toEqual(expect.objectContaining({ description }))
-          })
-
-          it('contains `slug`', () => {
-            const slug = {
-              en: 'sample-sluggy-duck-jacke-456789',
-              de: 'beispiel-sluggy-ente-jacke-456789',
-            }
-            expect(product[0]).toEqual(expect.objectContaining({ slug }))
-            expect(product[1]).toEqual(expect.objectContaining({ slug }))
-          })
-
-          it('contains `searchKeywords`', () => {
-            const searchKeywords = { en: 'Multi Tool;Swiss | Army | Knife' }
-            expect(product[0]).toEqual(
-              expect.objectContaining({ searchKeywords })
-            )
-            expect(product[1]).toEqual(
-              expect.objectContaining({ searchKeywords })
-            )
-          })
-
-          it('contains resolved namedPath of `categories`', () => {
-            const categories = 'Parent Category>child Category'
-            expect(product[0]).toEqual(expect.objectContaining({ categories }))
-            expect(product[1]).toEqual(expect.objectContaining({ categories }))
-          })
-
-          it('contains resolved `state`', () => {
-            const state = 'stateKey'
-            expect(product[0]).toEqual(expect.objectContaining({ state }))
-            expect(product[1]).toEqual(expect.objectContaining({ state }))
-          })
-
-          it('contains resolved `taxCategory`', () => {
-            const tax = 'new-tax-category'
-            expect(product[0]).toEqual(expect.objectContaining({ tax }))
-            expect(product[1]).toEqual(expect.objectContaining({ tax }))
-          })
-
-          it('contains variants `SKUs`', () => {
-            expect(product[0]).toEqual(
-              expect.objectContaining({ sku: 'M00F56YSS' })
-            )
-            expect(product[1]).toEqual(
-              expect.objectContaining({ sku: 'M00F56YSS-11' })
-            )
-          })
-
-          it('contains variants `keys`', () => {
-            expect(product[0]).toEqual(
-              expect.objectContaining({ variantKey: 'master-var-111' })
-            )
-            expect(product[1]).toEqual(
-              expect.objectContaining({ variantKey: 'normal-var-222' })
-            )
-          })
-
-          // Test for custom attributes
-          it('contains variants custom attributes', () => {
-            expect(product[0]).toEqual(
-              expect.objectContaining({
-                'another-text-attribute': 'Another Master Var attr',
-              })
-            )
-            expect(product[1]).toEqual(
-              expect.objectContaining({
-                'another-text-attribute': 'Another First Var attr',
-              })
-            )
-          })
-        })
       })
 
-      describe('WITH HEADERS::should write products to `CSV` file', () => {
-        const templateFile = `${__dirname}/helpers/product-headers.csv`
-        let csvFile
-        let products = []
+      describe('WITH HEADERS::should write products to `XLSX` file', () => {
+        const templateFile = path.join(__dirname, '/helpers/product-headers.csv')
+        let xlsxFile
+        let excel
+        let products
         let stdout
         let stderr
 
         beforeAll(async () => {
-          csvFile = tmp.fileSync({ postfix: '.csv' }).name
-          const [stdout, stderr] = await exec(
-            `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
+          xlsxFile = tmp.fileSync({ postfix: '.xlsx' }).name;
+          [stdout, stderr] = await exec(
+            `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${xlsxFile}`
           )
 
-          const jsonObj = await csvToJson().fromFile(csvFile)
-          products = [...products, ...jsonObj]
-
+          excel = await analyzeExcelFile(xlsxFile)
+          products = mapRowsToProducts(excel.rows)
           // Format the products array for easier testing because we
           // cannot guarantee the sort order from the API
           if (products[0].key === 'productKey-2') {
@@ -783,6 +816,20 @@ describe('CSV and CLI Tests', () => {
         it('should successfully map products', () => {
           expect(stdout).toBeTruthy()
           expect(stderr).toBeFalsy()
+          expect(excel.rows).toHaveLength(6)
+        })
+
+        it('should contain a proper header', () => {
+          expect(Object.keys(products[0])).toEqual([
+            '_published',
+            '_hasStagedChanges',
+            'key',
+            'productType',
+            'variantId',
+            'sku',
+            'text-attribute',
+            'another-text-attribute',
+          ])
         })
 
         it('should contain five variants', () => {
@@ -799,9 +846,9 @@ describe('CSV and CLI Tests', () => {
           )
 
           // Check other variants
-          expect(products[1]).toEqual(expect.objectContaining({ key: '' }))
-          expect(products[2]).toEqual(expect.objectContaining({ key: '' }))
-          expect(products[4]).toEqual(expect.objectContaining({ key: '' }))
+          expect(products[1]).toEqual(expect.objectContaining({ key: undefined }))
+          expect(products[2]).toEqual(expect.objectContaining({ key: undefined }))
+          expect(products[4]).toEqual(expect.objectContaining({ key: undefined }))
         })
 
         it('should include only columns from template', () => {
@@ -827,24 +874,24 @@ describe('CSV and CLI Tests', () => {
             expect.objectContaining({ 'text-attribute': 'Master Var attr' })
           )
           expect(products[0]).toEqual(
-            expect.objectContaining({ 'another-text-attribute': '' })
+            expect.objectContaining({ 'another-text-attribute': undefined })
           )
           expect(products[1]).toEqual(
             expect.objectContaining({ 'text-attribute': 'First Var attr' })
           )
           expect(products[1]).toEqual(
-            expect.objectContaining({ 'another-text-attribute': '' })
+            expect.objectContaining({ 'another-text-attribute': undefined })
           )
           expect(products[2]).toEqual(
             expect.objectContaining({ 'text-attribute': 'Second Var attr' })
           )
           expect(products[2]).toEqual(
-            expect.objectContaining({ 'another-text-attribute': '' })
+            expect.objectContaining({ 'another-text-attribute': undefined })
           )
 
           // From second product
           expect(products[3]).toEqual(
-            expect.objectContaining({ 'text-attribute': '' })
+            expect.objectContaining({ 'text-attribute': undefined })
           )
           expect(products[3]).toEqual(
             expect.objectContaining({
@@ -852,7 +899,7 @@ describe('CSV and CLI Tests', () => {
             })
           )
           expect(products[4]).toEqual(
-            expect.objectContaining({ 'text-attribute': '' })
+            expect.objectContaining({ 'text-attribute': undefined })
           )
           expect(products[4]).toEqual(
             expect.objectContaining({

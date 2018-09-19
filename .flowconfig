@@ -40,7 +40,6 @@
 .*/node_modules/shelljs/.*
 .*/node_modules/table.*
 .*/node_modules/tar.*
-.*/node_modules/tmp.*
 .*/node_modules/travis-ci/.*
 .*/node_modules/uglify-js/.*
 .*/node_modules/watch.*

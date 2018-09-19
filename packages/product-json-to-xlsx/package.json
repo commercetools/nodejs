@@ -1,0 +1,52 @@
+{
+  "name": "@commercetools/product-json-to-xlsx",
+  "version": "0.0.1",
+  "description": "Convert commercetools products from JSON to XLSX",
+  "keywords": [
+    "commercetools",
+    "products",
+    "projections",
+    "parser",
+    "export",
+    "csv",
+    "xlsx"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs/tree/master/packages/product-json-to-xlsx"
+  },
+  "homepage": "https://commercetools.github.io/nodejs/cli/product-json-to-xlsx.html",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "author": {
+    "name": "Jan Juna",
+    "email": "jan.juna-ext@commercetools.de"
+  },
+  "main": "lib/index.js",
+  "bin": {
+    "product-json-to-xlsx": "bin/product-json-to-xlsx.js"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "scripts": {
+    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+  },
+  "dependencies": {
+    "@commercetools/get-credentials": "2.1.5",
+    "@commercetools/product-json-to-csv": "2.2.0",
+    "common-tags": "1.8.0",
+    "exceljs": "1.6.1",
+    "highland": "2.13.0",
+    "pino": "4.17.6",
+    "pretty-error": "2.1.1",
+    "slugify": "1.3.1",
+    "tmp": "0.0.33",
+    "yargs": "10.1.2"
+  },
+  "devDependencies": {
+    "streamtest": "1.2.3",
+    "unzip": "0.1.11"
+  }
+}
