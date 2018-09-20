@@ -1,13 +1,46 @@
 import fs from 'fs'
 import highland from 'highland'
+import Excel from 'exceljs'
 import tmp from 'tmp'
 import StreamTest from 'streamtest'
 import unzip from 'unzip'
-import streamToString from 'stream-to-string'
-
 import * as writer from '../src/writer'
 
+tmp.setGracefulCleanup()
+
 const streamTest = StreamTest.v2
+
+function analyzeExcelWorkbook(workbook) {
+  const rows = []
+  const worksheet = workbook.getWorksheet('Products')
+
+  worksheet.eachRow(row => rows.push(row.values))
+  // remove first column containing null values
+  rows.forEach(row => row.shift())
+
+  return {
+    workbook,
+    worksheet,
+    rows,
+  }
+}
+
+async function analyzeExcelFile(path) {
+  const workbook = new Excel.Workbook()
+  await workbook.xlsx.readFile(path)
+  return analyzeExcelWorkbook(workbook)
+}
+
+function analyzeExcelStream(stream) {
+  const workbook = new Excel.Workbook()
+  const readStream = workbook.xlsx.createInputStream()
+  stream.pipe(readStream)
+
+  return new Promise((resolve, reject) => {
+    readStream.on('error', reject)
+    readStream.on('done', () => resolve(analyzeExcelWorkbook(workbook)))
+  })
+}
 
 describe('Writer', () => {
   let logger
@@ -83,9 +116,12 @@ describe('Writer', () => {
     ]
   })
 
-  describe('::writeToSingleCsvFile', () => {
+  describe('::writeToSingleXlsxFile', () => {
     test('write products to a single file with specified headers', done => {
       const sampleStream = highland(sampleProducts)
+      const tempFile = tmp.fileSync({ postfix: '.xlsx', keep: true })
+      const output = tempFile.name
+      const outputStream = fs.createWriteStream(output)
       const headers = [
         'id',
         'key',
@@ -98,57 +134,37 @@ describe('Writer', () => {
         'designer',
         'color',
       ]
-      const outputStream = streamTest.toText((error, actual) => {
-        expect(error).toBeFalsy()
-        expect(actual).toMatchSnapshot()
+
+      outputStream.on('error', done)
+      outputStream.on('finish', async () => {
+        const { workbook, worksheet, rows } = await analyzeExcelFile(output)
+        const secondWorksheet = workbook.getWorksheet(2)
+
+        // there should be a Products worksheet
+        expect(worksheet).toBeDefined()
+        // there should be only one worksheet with index 1
+        expect(secondWorksheet).not.toBeDefined()
+        expect(rows).toMatchSnapshot()
+
+        tempFile.removeCallback()
         done()
       })
 
-      writer.writeToSingleCsvFile(sampleStream, outputStream, logger, headers)
+      writer.writeToSingleXlsxFile(sampleStream, outputStream, logger, headers)
     })
 
-    test('write products to a single file with specified delimiter', done => {
-      const sampleStream = highland(sampleProducts)
-      const headers = [
-        'id',
-        'key',
-        'productType',
-        'variantId',
-        'sku',
-        'images',
-        'anotherAddedAttr',
-        'article',
-        'designer',
-        'color',
-      ]
-      const delimiter = ';'
-      const outputStream = streamTest.toText((error, actual) => {
-        expect(error).toBeFalsy()
-        expect(actual).toMatchSnapshot()
-        done()
-      })
-
-      writer.writeToSingleCsvFile(
-        sampleStream,
-        outputStream,
-        logger,
-        headers,
-        delimiter
-      )
-    })
-
-    test('log success info on csv completion', done => {
+    test('log success info on xlsx completion', done => {
       const sampleStream = highland(sampleProducts)
       const headers = []
       const outputStream = streamTest.toText(() => {})
       outputStream.on('finish', () => {
         expect(logger.info).toBeCalledWith(
-          expect.stringMatching(/written to CSV file/)
+          expect.stringMatching(/written to XLSX file/)
         )
         done()
       })
 
-      writer.writeToSingleCsvFile(sampleStream, outputStream, logger, headers)
+      writer.writeToSingleXlsxFile(sampleStream, outputStream, logger, headers)
     })
   })
 
@@ -165,27 +181,29 @@ describe('Writer', () => {
         fs.createReadStream(output)
           .pipe(unzip.Parse())
           .on('entry', async entry => {
-            const csvContent = await streamToString(entry)
+            const excelInfo = await analyzeExcelStream(entry)
+            // push to entries array after we finish async operation
+            // otherwise it would push both entries while analysing first entry
+            // and the test would end prematurely
             entries.push(entry.path)
 
-            if (entry.path === 'products/product-type-1.csv')
-              expect(csvContent).toMatchSnapshot('csv1')
-            else if (entry.path === 'products/product-type-2.csv')
-              expect(csvContent).toMatchSnapshot('csv2')
+            // test content of excel files
+            if (entry.path === 'products/product-type-1.xlsx') {
+              expect(excelInfo.rows).toMatchSnapshot('xlsx1')
+            } else if (entry.path === 'products/product-type-2.xlsx') {
+              expect(excelInfo.rows).toMatchSnapshot('xlsx2')
+            }
 
+            // test if both productTypes were exported
             if (entries.length === 2) {
               expect(entries.sort()).toEqual([
-                'products/product-type-1.csv',
-                'products/product-type-2.csv',
+                'products/product-type-1.xlsx',
+                'products/product-type-2.xlsx',
               ])
               expect(entries.length).toEqual(2)
               tempFile.removeCallback()
               done()
             }
-          })
-          .on('finish', () => {
-            // TODO the "unzip" package fires finish event before entry events
-            // so we call done() on second entry instead of calling it here
           })
       })
 
@@ -194,7 +212,6 @@ describe('Writer', () => {
 
     test('should handle exporting zero products', done => {
       const sampleStream = highland([])
-
       const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
       const output = tempFile.name
       const outputStream = fs.createWriteStream(output)
@@ -206,6 +223,7 @@ describe('Writer', () => {
           .pipe(unzip.Parse())
           .on('entry', () => {
             entries += 1
+            throw new Error('No entries should be archived')
           })
           .on('finish', () => {
             // there should be no products in a result zip file
@@ -236,31 +254,19 @@ describe('Writer', () => {
       writer.writeToZipFile(sampleStream, outputStream, logger)
     })
 
-    test('throw an error when archiver fails', done => {
-      const outputStream = streamTest.toText(() => {})
-
-      outputStream.on('error', err => {
-        expect(err).toBeDefined()
-        expect(err.code).toEqual('DIRECTORYDIRPATHREQUIRED')
-        done()
-      })
-
-      // try to archive an invalid folder
-      writer.archiveDir(null, outputStream, logger)
-    })
-
     test('throw an error when streams fail', done => {
       const tempFile = tmp.fileSync({ postfix: '.zip' })
       const tmpDir = tmp.dirSync({ unsafeCleanup: true })
       const outputStream = fs.createWriteStream(tempFile.name)
       const failedStream = fs.createWriteStream(tempFile.name)
-      // throw error while ending stream
-      failedStream.end = () => {
-        failedStream.emit('error', new Error('test error'))
-      }
-      const inputStreams = { failedStream }
-
-      tmp.setGracefulCleanup()
+      const excelExports = [
+        {
+          excel: {
+            stream: failedStream,
+            finish: () => failedStream.emit('error', new Error('test error')),
+          },
+        },
+      ]
 
       outputStream.on('error', err => {
         expect(err).toBeDefined()
@@ -271,28 +277,12 @@ describe('Writer', () => {
         done()
       })
 
-      writer.finishStreamsAndArchive(
-        inputStreams,
+      writer.finishWorksheetsAndArchive(
+        excelExports,
         tmpDir.name,
         outputStream,
         logger
       )
-    })
-
-    test('throw an error when a write stream in emitOnce fails', done => {
-      const tempFile = tmp.fileSync({ postfix: '.tmp' })
-      const output = tempFile.name
-      const failedStream = fs.createWriteStream(output)
-      const inputStreams = { failedStream }
-
-      writer.onStreamsFinished(inputStreams, err => {
-        expect(err).toBeDefined()
-        expect(err.message).toEqual('test error')
-        tempFile.removeCallback()
-        done()
-      })
-
-      failedStream.emit('error', new Error('test error'))
     })
   })
 })
