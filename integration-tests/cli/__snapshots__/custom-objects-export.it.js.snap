@@ -20,6 +20,5 @@ Options:
   --prettyLogs      Pretty print logs to the terminal                  [boolean]
   --logFile         Path to where to save logs file.
                                  [string] [default: \\"custom-objects-export.log\\"]
-
 "
 `;

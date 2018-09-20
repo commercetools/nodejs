@@ -7,7 +7,6 @@ import csv from 'csv-parser'
 import flatten, { unflatten } from 'flat'
 
 import discountCodeGenerator from './main'
-import { version } from '../package.json'
 import prepareInput from './utils'
 
 process.title = 'discountCodeGenerator'
@@ -19,15 +18,6 @@ Usage: $0 [options]
 Generate multiple discount codes to import to the commercetools platform.`
   )
   .showHelpOnFail(false, 'Use --help to display the CLI options.\n')
-  .option('help', {
-    alias: 'h',
-  })
-  .help('help', 'Show help text.')
-  .option('version', {
-    alias: 'v',
-    type: 'boolean',
-  })
-  .version('version', 'Show version number.', version)
   .option('quantity', {
     alias: 'q',
     describe: 'Quantity of discount codes to generate. (Between 1 and 500000)',

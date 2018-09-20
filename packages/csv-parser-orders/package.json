@@ -41,7 +41,7 @@
     "npmlog": "4.1.2",
     "object-path": "0.11.4",
     "pretty-error": "2.1.1",
-    "yargs": "8.0.2"
+    "yargs": "12.0.2"
   },
   "devDependencies": {
     "sinon": "6.3.4",

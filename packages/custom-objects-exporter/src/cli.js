@@ -16,8 +16,6 @@ Usage: $0 [options]
 ${description}`
   )
   .showHelpOnFail(false)
-  .help('help', 'Show help text.')
-  .version()
   .option('output', {
     alias: 'o',
     default: 'stdout',

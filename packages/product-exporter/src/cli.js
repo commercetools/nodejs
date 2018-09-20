@@ -16,12 +16,6 @@ Usage: $0 [options]
 ${description}`
   )
   .showHelpOnFail(false)
-  .option('help', {
-    alias: 'h',
-  })
-  .help('help', 'Show help text.')
-  .version()
-  .alias('version', 'v')
   .option('projectKey', {
     alias: 'p',
     describe: 'API project key',

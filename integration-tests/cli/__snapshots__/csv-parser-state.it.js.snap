@@ -28,7 +28,6 @@ Options:
   --prettyLogs               Pretty print logs to the terminal         [boolean]
   --logFile                  Path to file where logs should be saved
                                       [string] [default: \\"csv-parser-state.log\\"]
-
 "
 `;
 

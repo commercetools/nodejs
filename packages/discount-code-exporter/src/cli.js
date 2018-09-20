@@ -17,11 +17,6 @@ Usage: $0 [options]
 ${description}`
   )
   .showHelpOnFail(false)
-  .option('help', {
-    alias: 'h',
-  })
-  .help('help', 'Show help text.')
-  .version()
   .option('template', {
     alias: 't',
     describe: 'Path to CSV template.',

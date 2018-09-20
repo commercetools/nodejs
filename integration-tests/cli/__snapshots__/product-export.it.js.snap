@@ -2,11 +2,11 @@
 
 exports[`Product Exporter CLI basic functionality should print usage information given the help flag 1`] = `
 "
-Usage: integration-tests/node_modules/.bin/product-exporter [options]
+Usage: product-exporter [options]
 Export products from the commercetools platform
 
 Options:
-  --help, -h        Show help text.                                    [boolean]
+  --help            Show help text.                                    [boolean]
   --version, -v     Show version number                                [boolean]
   --projectKey, -p  API project key                          [string] [required]
   --apiUrl          The host URL of the HTTP API service
@@ -32,6 +32,5 @@ Options:
   --prettyLogs      Pretty print logs to the terminal                  [boolean]
   --logFile         Path to file where logs should be saved
                                       [string] [default: \\"product-exporter.log\\"]
-
 "
 `;
