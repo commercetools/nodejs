@@ -44,9 +44,7 @@ describe('product type hints', () => {
   let updateActions
   let sync
   beforeEach(() => {
-    sync = createSyncProductTypes([], {
-      withHints: true,
-    })
+    sync = createSyncProductTypes([])
   })
   describe('attribute enum values', () => {
     let attributeEnumDraftItem
