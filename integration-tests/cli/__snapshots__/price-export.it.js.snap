@@ -6,7 +6,7 @@ Usage: price-exporter [options]
 Export prices from the commercetools platform
 
 Options:
-  --help              Show help text.                                  [boolean]
+  --help              Show help                                        [boolean]
   --version           Show version number                              [boolean]
   --input, -i         Path to CSV template.
   --output, -o        Path to output file.                   [default: \\"stdout\\"]

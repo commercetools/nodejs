@@ -6,8 +6,8 @@ Usage: csv-parser-state [options]
 Package to parse states from CSV to JSON
 
 Options:
-  --help, -h                 Show help                                 [boolean]
-  --version, -v              Show version number                       [boolean]
+  --help                     Show help                                 [boolean]
+  --version                  Show version number                       [boolean]
   --projectKey, -p           API project key                            [string]
   --apiUrl                   The host URL of the HTTP API service
                              [string] [default: \\"https://api.commercetools.com\\"]

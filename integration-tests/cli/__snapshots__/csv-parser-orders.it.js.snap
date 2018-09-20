@@ -7,8 +7,8 @@ Usage: csvparserorder [options]
 Convert commercetools order CSV data to JSON.
 
 Options:
-  --help            Show help text.                                    [boolean]
-  --version         Show version number.                               [boolean]
+  --help            Show help                                          [boolean]
+  --version         Show version number                                [boolean]
   --type, -t        Predefined type of csv.
                [required] [choices: \\"lineitemstate\\", \\"returninfo\\", \\"deliveries\\"]
   --inputFile, -i   Path to input CSV file.                   [default: \\"stdin\\"]

@@ -6,8 +6,8 @@ Usage: product-exporter [options]
 Export products from the commercetools platform
 
 Options:
-  --help            Show help text.                                    [boolean]
-  --version, -v     Show version number                                [boolean]
+  --help            Show help                                          [boolean]
+  --version         Show version number                                [boolean]
   --projectKey, -p  API project key                          [string] [required]
   --apiUrl          The host URL of the HTTP API service
                              [string] [default: \\"https://api.commercetools.com\\"]
