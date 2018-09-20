@@ -127,7 +127,8 @@ describe('CsvParserPrice::parse', () => {
               country: 'IT',
               id: 'id3',
               value: {
-                type: 'centPrecision',
+                type: 'highPrecision',
+                preciseAmount: 123456,
                 fractionDigits: 2,
                 centAmount: 12900,
                 currencyCode: 'EUR',

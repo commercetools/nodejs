@@ -97,14 +97,22 @@ export default class CsvParserPrice {
   transformPriceData(price) {
     return mapValues(price, value => {
       if (value.centAmount) {
-        const optionalFields = pick(value, ['type', 'fractionDigits'])
-        if (optionalFields.fractionDigits)
-          optionalFields.fractionDigits = Number(optionalFields.fractionDigits)
+        const optFields = pick(value, [
+          'type',
+          'fractionDigits',
+          'preciseAmount',
+        ])
+        if (optFields.fractionDigits)
+          optFields.fractionDigits = Number(optFields.fractionDigits)
+
+        // don't propagate preciseAmount property if it is empty
+        if (optFields.preciseAmount === '') delete optFields.preciseAmount
+        else optFields.preciseAmount = Number(optFields.preciseAmount)
 
         return {
           centAmount: Number(value.centAmount),
           currencyCode: value.currencyCode,
-          ...optionalFields,
+          ...optFields,
         }
       }
 
