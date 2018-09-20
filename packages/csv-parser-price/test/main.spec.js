@@ -58,6 +58,12 @@ describe('CsvParserPrice::parse', () => {
       expect(prices[0].sku).toBeTruthy()
       expect(price.value.centAmount).toBeTruthy()
       expect(price.value.currencyCode).toBeTruthy()
+      expect(price.value).toEqual(
+        expect.objectContaining({
+          fractionDigits: 2,
+          type: 'centPrecision',
+        })
+      )
       done()
     })
     csvParserPrice.parse(readStream, outputStream)
@@ -84,13 +90,15 @@ describe('CsvParserPrice::parse', () => {
     csvParserPrice.parse(readStream, outputStream)
   })
 
-  test('should parse a full price csv', done => {
+  test('should parse a full price.value object', done => {
     const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
     const readStream = fs.createReadStream(
       path.join(__dirname, 'helpers/full-price.csv')
     )
 
     const outputStream = streamtest.v2.toText((error, result) => {
+      expect(error).not.toBeTruthy()
+
       const prices = JSON.parse(result).prices
       expect(prices).toEqual([
         {

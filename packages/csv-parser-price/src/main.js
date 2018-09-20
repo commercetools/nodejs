@@ -1,6 +1,7 @@
 import csv from 'csv-parser'
 import highland from 'highland'
 import JSONStream from 'JSONStream'
+import pick from 'lodash.pick'
 import mapValues from 'lodash.mapvalues'
 import memoize from 'lodash.memoize'
 import { unflatten } from 'flat'
@@ -95,11 +96,17 @@ export default class CsvParserPrice {
   // eslint-disable-next-line class-methods-use-this
   transformPriceData(price) {
     return mapValues(price, value => {
-      if (value.centAmount)
+      if (value.centAmount) {
+        const optionalFields = pick(value, ['type', 'fractionDigits'])
+        if (optionalFields.fractionDigits)
+          optionalFields.fractionDigits = Number(optionalFields.fractionDigits)
+
         return {
           centAmount: Number(value.centAmount),
           currencyCode: value.currencyCode,
+          ...optionalFields,
         }
+      }
 
       return value
     })
@@ -148,13 +155,19 @@ export default class CsvParserPrice {
   // eslint-disable-next-line class-methods-use-this
   mergeBySku(data, currentPrice) {
     const previousPrice = data.prices[data.prices.length - 1]
-    const sku = CONSTANTS.header.sku
-    if (previousPrice && previousPrice.sku === currentPrice[sku])
-      previousPrice.prices.push(currentPrice)
+
+    // remove variant-sku property from price object
+    const {
+      [CONSTANTS.header.sku]: currentSku,
+      ..._currentPrice
+    } = currentPrice
+
+    if (previousPrice && previousPrice.sku === currentSku)
+      previousPrice.prices.push(_currentPrice)
     else
       data.prices.push({
-        sku: currentPrice[sku],
-        prices: [currentPrice],
+        sku: currentSku,
+        prices: [_currentPrice],
       })
 
     return data
