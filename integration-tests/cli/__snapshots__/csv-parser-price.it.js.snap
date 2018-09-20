@@ -27,4 +27,4 @@ Options:
 "
 `;
 
-exports[`CSV and CLI Tests CLI basic functionality should write output to file 1`] = `"{\\"prices\\":[{\\"sku\\":\\"123\\",\\"prices\\":[{\\"variant-sku\\":\\"123\\",\\"value\\":{\\"centAmount\\":4200,\\"currencyCode\\":\\"EUR\\"}},{\\"variant-sku\\":\\"123\\",\\"value\\":{\\"centAmount\\":4200,\\"currencyCode\\":\\"EUR\\"}}]}]}"`;
+exports[`CSV and CLI Tests CLI basic functionality should write output to file 1`] = `"{\\"prices\\":[{\\"sku\\":\\"123\\",\\"prices\\":[{\\"value\\":{\\"centAmount\\":4200,\\"currencyCode\\":\\"EUR\\"}},{\\"value\\":{\\"centAmount\\":4200,\\"currencyCode\\":\\"EUR\\"}}]}]}"`;
