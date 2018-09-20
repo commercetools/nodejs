@@ -17,7 +17,7 @@ Usage: inventoriesexporter [options]
 Export inventories from the commercetools platform.
 
 Options:
-  --help            Show help text.                                    [boolean]
+  --help            Show help                                          [boolean]
   --version         Show version number                                [boolean]
   --outputFile, -o  Path to output file.                     [default: \\"stdout\\"]
   --apiUrl          The host URL of the HTTP API service.
