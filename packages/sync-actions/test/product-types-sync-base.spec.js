@@ -1,6 +1,9 @@
 import clone from '../src/utils/clone'
 import createSyncProductTypes, { actionGroups } from '../src/product-types'
-import { baseActionsList } from '../src/product-types-actions'
+import {
+  baseActionsList,
+  generateBaseFieldsUpdateActions,
+} from '../src/product-types-actions'
 
 describe('Exports', () => {
   test('action group list', () => {
@@ -95,6 +98,68 @@ describe('Actions', () => {
           description: 'kicks-description',
         },
       ])
+    })
+  })
+})
+
+describe('generateBaseFieldsUpdateActions', () => {
+  let previous
+  let next
+  let updateActions
+  const field = 'name'
+  const actionDefinition = {
+    [field]: { action: 'changeName' },
+  }
+  describe('with change', () => {
+    beforeEach(() => {
+      previous = { [field]: 'previous' }
+      next = { [field]: 'next' }
+      updateActions = generateBaseFieldsUpdateActions(
+        previous,
+        next,
+        actionDefinition
+      )
+    })
+    it('should generate `changeName` update action', () => {
+      expect(updateActions).toEqual([
+        {
+          action: 'changeName',
+          [field]: next[field],
+        },
+      ])
+    })
+    describe('with previous and empty `next`', () => {
+      const cases = [
+        [null, { action: 'changeName' }],
+        [undefined, { action: 'changeName' }],
+        ['', { action: 'changeName' }],
+      ]
+      it.each(cases)(
+        'should generate `changeName` for %s update action with omitted field indicating removing value',
+        (nextValue, updateActionWithMissingValue) => {
+          next = { [field]: nextValue }
+          updateActions = generateBaseFieldsUpdateActions(
+            previous,
+            next,
+            actionDefinition
+          )
+          expect(updateActions).toEqual([updateActionWithMissingValue])
+        }
+      )
+    })
+  })
+  describe('without change', () => {
+    beforeEach(() => {
+      previous = { [field]: 'foo' }
+      next = { [field]: 'foo' }
+      updateActions = generateBaseFieldsUpdateActions(
+        previous,
+        next,
+        actionDefinition
+      )
+    })
+    it('should generate `changeName` update action', () => {
+      expect(updateActions).toEqual([])
     })
   })
 })
