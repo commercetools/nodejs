@@ -1,4 +1,5 @@
 import isEqual from 'lodash.isequal'
+import isNil from 'lodash.isnil'
 
 function applyOnBeforeDiff(before, now, fn) {
   return fn && typeof fn === 'function' ? fn(before, now) : [before, now]
@@ -19,12 +20,12 @@ function arePricesStructurallyEqual(oldPrice, newPrice) {
   return isEqual(newPriceComparison, oldPriceComparison)
 }
 
-function extractPriceIdFromPreviousVariant(newPrice, previousVariant) {
+function extractPriceFromPreviousVariant(newPrice, previousVariant) {
   if (!previousVariant) return null
   const price = previousVariant.prices.find(oldPrice =>
     arePricesStructurallyEqual(oldPrice, newPrice)
   )
-  return price ? price.id : null
+  return price || null
 }
 
 function injectMissingPriceIds(nextVariants, previousVariants) {
@@ -42,11 +43,21 @@ function injectMissingPriceIds(nextVariants, previousVariants) {
     return {
       ...restOfVariant,
       prices: prices.map(price => {
-        if (!price.id) {
-          const id = extractPriceIdFromPreviousVariant(price, oldVariant)
-          if (id) return { ...price, id }
+        const newPrice = { ...price }
+        const oldPrice = extractPriceFromPreviousVariant(price, oldVariant)
+
+        if (oldPrice) {
+          // copy ID if not provided
+          if (!newPrice.id) newPrice.id = oldPrice.id
+
+          if (isNil(newPrice.value.type))
+            newPrice.value.type = oldPrice.value.type
+
+          if (isNil(newPrice.value.fractionDigits))
+            newPrice.value.fractionDigits = oldPrice.value.fractionDigits
         }
-        return price
+
+        return newPrice
       }),
     }
   })
