@@ -19,20 +19,12 @@ function arePricesStructurallyEqual(oldPrice, newPrice) {
   return isEqual(newPriceComparison, oldPriceComparison)
 }
 
-function extractPriceIdFromPreviousVariant(newPrice, previousVariants) {
-  let newPriceId
-
-  previousVariants.forEach(variant => {
-    variant.prices.find(oldPrice => {
-      if (arePricesStructurallyEqual(oldPrice, newPrice)) {
-        newPriceId = oldPrice.id
-        return true
-      }
-      return false
-    })
-  })
-
-  return newPriceId
+function extractPriceIdFromPreviousVariant(newPrice, previousVariant) {
+  if (!previousVariant) return null
+  const price = previousVariant.prices.find(oldPrice =>
+    arePricesStructurallyEqual(oldPrice, newPrice)
+  )
+  return price ? price.id : null
 }
 
 function injectMissingPriceIds(nextVariants, previousVariants) {
@@ -40,12 +32,18 @@ function injectMissingPriceIds(nextVariants, previousVariants) {
     const { prices, ...restOfVariant } = newVariant
 
     if (!prices) return restOfVariant
+    const oldVariant = previousVariants.find(
+      previousVariant =>
+        previousVariant.id === newVariant.id ||
+        previousVariant.key === newVariant.key ||
+        previousVariant.sku === newVariant.sku
+    )
 
     return {
       ...restOfVariant,
       prices: prices.map(price => {
         if (!price.id) {
-          const id = extractPriceIdFromPreviousVariant(price, previousVariants)
+          const id = extractPriceIdFromPreviousVariant(price, oldVariant)
           if (id) return { ...price, id }
         }
         return price
