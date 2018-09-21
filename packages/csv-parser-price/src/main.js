@@ -1,8 +1,10 @@
 import csv from 'csv-parser'
 import highland from 'highland'
 import JSONStream from 'JSONStream'
+import pick from 'lodash.pick'
 import mapValues from 'lodash.mapvalues'
 import memoize from 'lodash.memoize'
+import isNil from 'lodash.isnil'
 import { unflatten } from 'flat'
 import fetch from 'node-fetch'
 
@@ -95,11 +97,26 @@ export default class CsvParserPrice {
   // eslint-disable-next-line class-methods-use-this
   transformPriceData(price) {
     return mapValues(price, value => {
-      if (value.centAmount)
+      if (value.centAmount) {
+        const optFields = pick(value, [
+          'type',
+          'fractionDigits',
+          'preciseAmount',
+        ])
+        if (optFields.fractionDigits)
+          optFields.fractionDigits = Number(optFields.fractionDigits)
+
+        // don't propagate preciseAmount property if it is empty
+        if (isNil(optFields.preciseAmount) || optFields.preciseAmount === '')
+          delete optFields.preciseAmount
+        else optFields.preciseAmount = Number(optFields.preciseAmount)
+
         return {
           centAmount: Number(value.centAmount),
           currencyCode: value.currencyCode,
+          ...optFields,
         }
+      }
 
       return value
     })
@@ -148,13 +165,19 @@ export default class CsvParserPrice {
   // eslint-disable-next-line class-methods-use-this
   mergeBySku(data, currentPrice) {
     const previousPrice = data.prices[data.prices.length - 1]
-    const sku = CONSTANTS.header.sku
-    if (previousPrice && previousPrice.sku === currentPrice[sku])
-      previousPrice.prices.push(currentPrice)
+
+    // remove variant-sku property from price object
+    const {
+      [CONSTANTS.header.sku]: currentSku,
+      ...restOfCurrentPrice
+    } = currentPrice
+
+    if (previousPrice && previousPrice.sku === currentSku)
+      previousPrice.prices.push(restOfCurrentPrice)
     else
       data.prices.push({
-        sku: currentPrice[sku],
-        prices: [currentPrice],
+        sku: currentSku,
+        prices: [restOfCurrentPrice],
       })
 
     return data

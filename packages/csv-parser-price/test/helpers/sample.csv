@@ -1,4 +1,4 @@
-variant-sku,value.currencyCode,value.centAmount,country,customerGroup.groupName,channel.key,validFrom,validUntil,customType,customField.foo,customField.bar,customField.current,customField.name.nl,customField.name.de,customField.status,customField.price,customField.priceset
-my-price,EUR,4200,DE,customer-group,my-channel,2016-11-01T08:01:19+0000,2016-12-01T08:03:10+0000,custom-type,12,nac,true,Selwyn,Merkel,Ready,EUR 1200,"1,2,3,5"
-my-price2,EUR,4200,DE,customer-group,my-channel,2016-11-01T08:01:19+0000,2016-12-01T08:03:10+0000,custom-type,12,nac,true,Selwyn,Merkel,Ready,EUR 1200,"1,2,3,5"
-my-price,EUR,4200,DE,customer-group,my-channel,2016-11-01T08:01:19+0000,2016-12-01T08:03:10+0000,custom-type,12,nac,true,Selwyn,Merkel,Ready,EUR 1200,"1,2,3,5"
+variant-sku,value.currencyCode,value.centAmount,country,value.type,value.fractionDigits,customerGroup.groupName,channel.key,validFrom,validUntil,customType,customField.foo,customField.bar,customField.current,customField.name.nl,customField.name.de,customField.status,customField.price,customField.priceset
+my-price,EUR,4200,DE,centPrecision,2,customer-group,my-channel,2016-11-01T08:01:19+0000,2016-12-01T08:03:10+0000,custom-type,12,nac,true,Selwyn,Merkel,Ready,EUR 1200,"1,2,3,5"
+my-price2,EUR,4200,DE,centPrecision,2,customer-group,my-channel,2016-11-01T08:01:19+0000,2016-12-01T08:03:10+0000,custom-type,12,nac,true,Selwyn,Merkel,Ready,EUR 1200,"1,2,3,5"
+my-price,EUR,4200,DE,centPrecision,2,customer-group,my-channel,2016-11-01T08:01:19+0000,2016-12-01T08:03:10+0000,custom-type,12,nac,true,Selwyn,Merkel,Ready,EUR 1200,"1,2,3,5"

@@ -100,12 +100,13 @@ JSON object returned from the conversion of the CSV file above
 {
   "prices": [
     {
-      "variant-sku": "my-price",
+      "sku": "my-price",
       "prices": [
         {
-          "variant-sku": "my-price",
           "value": {
-            "centAmount": 4200
+            "centAmount": 4200,
+            "fractionDigits": 2,
+            "type": "centPrecision"
           },
           "country": "DE",
           "customerGroup": {
@@ -124,9 +125,10 @@ JSON object returned from the conversion of the CSV file above
           }
         },
         {
-          "variant-sku": "my-price",
           "value": {
-            "centAmount": 4200
+            "centAmount": 4200,
+            "fractionDigits": 2,
+            "type": "centPrecision"
           },
           "country": "DE",
           "customerGroup": {
@@ -147,12 +149,13 @@ JSON object returned from the conversion of the CSV file above
       ]
     },
     {
-      "variant-sku": "my-price2",
+      "sku": "my-price2",
       "prices": [
         {
-          "variant-sku": "my-price2",
           "value": {
-            "centAmount": 4200
+            "centAmount": 4200,
+            "fractionDigits": 2,
+            "type": "centPrecision"
           },
           "country": "DE",
           "customerGroup": {
