@@ -89,7 +89,7 @@
     "prettier": "1.14.2",
     "resolve": "1.8.1",
     "rimraf": "2.6.2",
-    "rollup": "0.65.0",
+    "rollup": "0.66.2",
     "rollup-plugin-babel": "4.0.3",
     "rollup-plugin-commonjs": "9.1.6",
     "rollup-plugin-filesize": "4.0.1",
