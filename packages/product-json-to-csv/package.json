@@ -48,7 +48,7 @@
     "flat": "4.1.0",
     "highland": "2.13.0",
     "json2csv": "4.2.1",
-    "lodash": "4.17.10",
+    "lodash": "4.17.11",
     "node-fetch": "2.2.0",
     "pino": "5.5.0",
     "pretty-error": "2.1.1",
