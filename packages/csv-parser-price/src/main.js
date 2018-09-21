@@ -4,6 +4,7 @@ import JSONStream from 'JSONStream'
 import pick from 'lodash.pick'
 import mapValues from 'lodash.mapvalues'
 import memoize from 'lodash.memoize'
+import isNil from 'lodash.isnil'
 import { unflatten } from 'flat'
 import fetch from 'node-fetch'
 
@@ -106,7 +107,8 @@ export default class CsvParserPrice {
           optFields.fractionDigits = Number(optFields.fractionDigits)
 
         // don't propagate preciseAmount property if it is empty
-        if (optFields.preciseAmount === '') delete optFields.preciseAmount
+        if (isNil(optFields.preciseAmount) || optFields.preciseAmount === '')
+          delete optFields.preciseAmount
         else optFields.preciseAmount = Number(optFields.preciseAmount)
 
         return {
