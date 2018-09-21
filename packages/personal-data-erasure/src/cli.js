@@ -74,10 +74,9 @@ const loggerConfig = {
 
 // If the stdout is used for a data output, save all logs to a log file.
 // pino writes logs to stdout by default
-const logDestination =
-  args.output === process.stdout
-    ? fs.createWriteStream(args.logFile)
-    : process.stdout
+let logDestination
+if (args.output === process.stdout)
+  logDestination = fs.createWriteStream(args.logFile)
 
 const logger = pino(loggerConfig, logDestination)
 
