@@ -1,7 +1,9 @@
 import flatten from 'lodash.flatten'
-import isNil from 'lodash.isnil'
 import { deepEqual } from 'fast-equals'
-import { buildBaseAttributesActions } from './utils/common-actions'
+import {
+  createIsEmptyValue,
+  buildBaseAttributesActions,
+} from './utils/common-actions'
 
 export const baseActionsList = [
   { action: 'changeName', key: 'name' },
@@ -32,10 +34,7 @@ export const generateBaseFieldsUpdateActions = (
   next,
   actionDefinition
 ) => {
-  const isEmpty = value =>
-    [isNil, nextValue => nextValue === ''].some(operator =>
-      operator(typeof value === 'string' ? value.trim() : value)
-    )
+  const isEmpty = createIsEmptyValue([undefined, null, ''])
   return Object.entries(actionDefinition).reduce(
     (nextUpdateActions, [field, actionFieldDefinition]) => {
       if (isEmpty(previous[field]) && isEmpty(next[field]))
