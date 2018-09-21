@@ -9,11 +9,11 @@ describe('Actions', () => {
   })
 
   describe('with `priceID`', () => {
-    const validFrom = new Date().toISOString()
     const discounted = {
       value: { centAmount: 4000, currencyCode: 'EUR' },
       discount: { typeId: 'product-discount', id: 'pd1' },
     }
+    const validFrom = new Date().toISOString()
 
     const before = {
       id: '123',

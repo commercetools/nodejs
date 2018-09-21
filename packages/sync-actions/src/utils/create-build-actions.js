@@ -84,7 +84,6 @@ export default function createBuildActions(differ, doMapActions, onBeforeDiff) {
       )
 
     const diffed = differ(processedBefore, processedNow)
-
     if (!diffed) return []
 
     return doMapActions(diffed, processedNow, processedBefore, options)
