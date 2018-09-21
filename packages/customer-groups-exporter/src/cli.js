@@ -16,8 +16,6 @@ Usage: $0 [options]
 ${description}`
   )
   .showHelpOnFail(false)
-  .help('help', 'Show help text.')
-  .version()
   .option('output', {
     alias: 'o',
     default: 'stdout',
@@ -67,7 +65,14 @@ const loggerConfig = {
   level: args.logLevel,
   prettyPrint: args.prettyLogs,
 }
-const logger = pino(loggerConfig)
+
+// If the stdout is used for a data output, save all logs to a log file.
+// pino writes logs to stdout by default
+let logDestination
+if (args.output === process.stdout)
+  logDestination = fs.createWriteStream(args.logFile)
+
+const logger = pino(loggerConfig, logDestination)
 
 // print errors to stderr if we use stdout for data output
 // if we save data to output file errors are already logged by pino
@@ -90,11 +95,6 @@ const resolveCredentials = _args => {
   if (_args.accessToken) return Promise.resolve({})
   return getCredentials(_args.projectKey)
 }
-
-// If the stdout is used for a data output, save all logs to a log file.
-// pino writes logs to stdout by default
-if (args.output === process.stdout)
-  logger.stream = fs.createWriteStream(args.logFile)
 
 // Register error listener
 args.output.on('error', errorHandler)

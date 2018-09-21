@@ -32,10 +32,10 @@
   "dependencies": {
     "csv-parser": "1.12.1",
     "flat": "4.1.0",
-    "json2csv": "3.11.5",
+    "json2csv": "4.2.1",
     "npmlog": "4.1.2",
     "pretty-error": "2.1.1",
     "tokgen": "1.0.0",
-    "yargs": "7.1.0"
+    "yargs": "12.0.2"
   }
 }

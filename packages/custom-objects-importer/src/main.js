@@ -12,7 +12,6 @@ import compact from 'lodash.compact'
 import pSeries from 'p-series'
 import { oneLine } from 'common-tags'
 import fetch from 'node-fetch'
-
 import type {
   ApiConfigOptions,
   ExporterOptions,
@@ -24,7 +23,6 @@ import type {
   ExecutionResult,
 } from 'types/customObjects'
 import type { Client, ClientRequest, MethodType } from 'types/sdk'
-
 import silentLogger from './utils/silent-logger'
 import pkg from '../package.json'
 
@@ -65,12 +63,18 @@ export default class CustomObjectsImporter {
         createAuthMiddlewareWithExistingToken(
           options.accessToken ? `Bearer ${options.accessToken}` : ''
         ),
-        createAuthMiddlewareForClientCredentialsFlow(this.apiConfig, fetch),
+        createAuthMiddlewareForClientCredentialsFlow({
+          ...this.apiConfig,
+          fetch,
+        }),
         createUserAgentMiddleware({
           libraryName: pkg.name,
           libraryVersion: pkg.version,
         }),
-        createHttpMiddleware({ host: this.apiConfig.apiUrl, fetch }),
+        createHttpMiddleware({
+          host: this.apiConfig.apiUrl,
+          fetch,
+        }),
       ],
     })
 

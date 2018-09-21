@@ -6,7 +6,7 @@ Usage: custom-objects-exporter [options]
 Export custom objects from the commercetools platform
 
 Options:
-  --help            Show help text.                                    [boolean]
+  --help            Show help                                          [boolean]
   --version         Show version number                                [boolean]
   --output, -o      Path to output file.                     [default: \\"stdout\\"]
   --apiUrl          The host URL of the HTTP API service.
@@ -20,6 +20,5 @@ Options:
   --prettyLogs      Pretty print logs to the terminal                  [boolean]
   --logFile         Path to where to save logs file.
                                  [string] [default: \\"custom-objects-export.log\\"]
-
 "
 `;
