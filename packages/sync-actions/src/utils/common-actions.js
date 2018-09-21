@@ -5,7 +5,7 @@ import * as diffpatcher from './diffpatcher'
 const normalizeValue = value =>
   typeof value === 'string' ? value.trim() : value
 
-const createIsEmptyValue = emptyValues => value =>
+export const createIsEmptyValue = emptyValues => value =>
   emptyValues.some(emptyValue => emptyValue === normalizeValue(value))
 
 /**

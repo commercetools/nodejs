@@ -486,6 +486,109 @@ client.execute(productTypesRequest)
 .catch(error => ...)
 ```
 
+#### Difference to sync-actions for other resources
+
+Unlike other resources (e.g `createSyncProducts`), `createSyncProductTypes` requires that you apply hints to calculate update actions for nested values such as `attributes` and `enumValues`.
+
+Since a [change in the API](https://docs.commercetools.com/release-notes.html#releases-2018-03-09-product-type-rename-name-and-enum-key), the [previous implementation was not capable for calculating appropiate update-actions](https://github.com/commercetools/nodejs/pull/760#issue-213684712) when an enum-value has changed its `key`, or when an attribute has changed its `name`.
+
+The `key` of an enum value was used as its identifier to calculate correct update-actions. When the intention of a change was `changeEnumKey`, it is discernable for `sync-actions` to appropriately calculate that for you. Same goes for attribute values.
+
+Note: `createSyncProductTypes` does not support `changeAttributeName` nor `changeEnumKey` for the moment, but this is something we will add in, in the near future.
+
+**here is how you apply hints**
+
+```js
+const productTypeSync = createProductTypeSync()
+const previous = {
+  name: 'previous',
+}
+const next = {
+  name: 'next',
+}
+
+const updateActions = productTypeSync.buildActions(next, previous, {
+  // hints
+  nestedValuesChanges: {
+    attributeDefinitions: [
+      {
+        // when previous and next are defined
+        // this will generate update actions for __changes__ to an attribute
+        previous: { name: 'previous-attribute-name' },
+        next: { name: 'next-attribute-name' },
+      },
+      {
+        // when next is defined, but not previous
+        // this will generate update actions for __adding__ an attribute
+        previous: undefined,
+        next: { name: 'next-attribute-name' },
+      },
+      {
+        // when previous is defined, but not next,
+        // this will generate update actions for __removing__ an attribute
+        previous: { name: 'next-attribute-name' },
+        next: undefined,
+      },
+      // ...
+      // any other changes to another attribute...
+    ],
+    attributeEnumValues: [
+      {
+        previous: { key: 'previous-enum-key' },
+        next: { key: 'next-enum-key' },
+        hint: {
+          // note the change on attribute above.
+          attributeName: 'next-attribute-name',
+          // isLocalized is a valuable hint to `sync-actions`, since in the API,
+          // we have different update actions on an enum value depending on whether the label is localized or not.
+          // read more about `changePlainEnumValueLabel` and `changeLocalizedEnumValueLabel`
+          // https://docs.commercetools.com/http-api-projects-productTypes.html#change-the-label-of-an-enumvalue
+          isLocalized: false,
+        },
+      },
+      {
+        previous: { key: 'previous-enum-key-2' },
+        next: undefined,
+        hint: {
+          // note the change on attribute above.
+          attributeName: 'next-attribute-name',
+          isLocalized: false,
+        },
+      },
+      // ...
+      // any other changes on enum values of another attribute...
+    ],
+  },
+})
+console.log(updateActions)
+// [
+//   // product type changes..
+//   {
+//     action: 'changeName',
+//     name: 'next-attribute-name'
+//   },
+//
+//   // these are calculated separately, only through `nestedValuesChanges` hints
+//   // because hint are __explicit__, we don't worry about identifiers such as `key` (enum) or `name` (attribute).
+//   // attribute
+//   {
+//     action: 'changeAttributeName',
+//     attributeName: 'next-attribute-name'
+//   },
+//
+//   //  enums
+//   {
+//     action: 'changeEnumKey',
+//     key: 'next-enum-key'
+//   },
+//   {
+//     action: 'removeEnumValues'
+//     attributeName: 'next-attribute-name'
+//     keys: ['previous-enum-key-2'],
+//   }
+// ]
+```
+
 ## `createSyncShippingMethods(actionGroups)`
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
