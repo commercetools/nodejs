@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/csv-parser-price",
-  "version": "2.1.31",
+  "version": "2.2.0",
   "description": "Module that parses price csv to json",
   "keywords": [
     "commercetools",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@commercetools/api-request-builder": "4.0.2",
-    "@commercetools/get-credentials": "2.1.6",
+    "@commercetools/get-credentials": "2.1.7",
     "@commercetools/sdk-client": "1.5.8",
     "@commercetools/sdk-middleware-auth": "4.0.4",
     "@commercetools/sdk-middleware-http": "4.0.3",
@@ -42,8 +42,10 @@
     "csv-parser": "1.12.1",
     "flat": "4.1.0",
     "highland": "2.13.0",
+    "lodash.isnil": "4.0.0",
     "lodash.mapvalues": "4.6.0",
     "lodash.memoize": "4.1.2",
+    "lodash.pick": "4.4.0",
     "node-fetch": "2.2.0",
     "npmlog": "4.1.2",
     "pretty-error": "2.1.1",

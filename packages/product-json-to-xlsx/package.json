@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/product-json-to-xlsx",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Convert commercetools products from JSON to XLSX",
   "keywords": [
     "commercetools",
@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@commercetools/get-credentials": "2.1.5",
-    "@commercetools/product-json-to-csv": "2.2.0",
+    "@commercetools/product-json-to-csv": "2.2.1",
     "common-tags": "1.8.0",
     "exceljs": "1.6.1",
     "highland": "2.13.0",

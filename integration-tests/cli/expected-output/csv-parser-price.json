@@ -4,7 +4,6 @@
       "sku": "my-price",
       "prices": [
         {
-          "variant-sku": "my-price",
           "value": {
             "centAmount": 4200
           },
@@ -25,7 +24,6 @@
           }
         },
         {
-          "variant-sku": "my-price",
           "value": {
             "centAmount": 4200
           },
@@ -51,7 +49,6 @@
       "sku": "my-price2",
       "prices": [
         {
-          "variant-sku": "my-price2",
           "value": {
             "centAmount": 4200
           },
