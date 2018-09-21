@@ -149,17 +149,33 @@ describe('generateBaseFieldsUpdateActions', () => {
     })
   })
   describe('without change', () => {
-    beforeEach(() => {
-      previous = { [field]: 'foo' }
-      next = { [field]: 'foo' }
-      updateActions = generateBaseFieldsUpdateActions(
-        previous,
-        next,
-        actionDefinition
-      )
+    describe('with value on `previous` and `next`', () => {
+      beforeEach(() => {
+        previous = { [field]: 'foo' }
+        next = { [field]: 'foo' }
+        updateActions = generateBaseFieldsUpdateActions(
+          previous,
+          next,
+          actionDefinition
+        )
+      })
+      it('should not generate `changeName` update action', () => {
+        expect(updateActions).toEqual([])
+      })
     })
-    it('should generate `changeName` update action', () => {
-      expect(updateActions).toEqual([])
+    describe('without value on `previous` and `next`', () => {
+      beforeEach(() => {
+        previous = { [field]: '' }
+        next = { [field]: '' }
+        updateActions = generateBaseFieldsUpdateActions(
+          previous,
+          next,
+          actionDefinition
+        )
+      })
+      it('should not generate `changeName` update action', () => {
+        expect(updateActions).toEqual([])
+      })
     })
   })
 })
