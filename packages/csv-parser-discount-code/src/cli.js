@@ -15,14 +15,6 @@ Usage: $0 [options]
 Convert commercetools discount codes CSV data to JSON.`
   )
   .showHelpOnFail(false, 'Use --help to display the CLI options.\n')
-  .option('help', {
-    alias: 'h',
-  })
-  .help('help', 'Show help text.')
-  .option('version', {
-    alias: 'v',
-  })
-  .version()
   .option('input', {
     alias: 'i',
     default: 'stdin',

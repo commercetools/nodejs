@@ -300,7 +300,7 @@ describe('DiscountCode tests', () => {
       await new Promise(resolve => {
         csv()
           .fromString(data)
-          .on('json', jsonObj => {
+          .subscribe(jsonObj => {
             expect(jsonObj).toMatchObject(expected)
             resolve()
           })

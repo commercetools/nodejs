@@ -2,12 +2,11 @@ import fs from 'fs'
 import npmlog from 'npmlog'
 import PrettyError from 'pretty-error'
 import yargs from 'yargs'
-import json2csv from 'json2csv'
+import { parse } from 'json2csv'
 import csv from 'csv-parser'
 import flatten, { unflatten } from 'flat'
 
 import discountCodeGenerator from './main'
-import { version } from '../package.json'
 import prepareInput from './utils'
 
 process.title = 'discountCodeGenerator'
@@ -19,15 +18,6 @@ Usage: $0 [options]
 Generate multiple discount codes to import to the commercetools platform.`
   )
   .showHelpOnFail(false, 'Use --help to display the CLI options.\n')
-  .option('help', {
-    alias: 'h',
-  })
-  .help('help', 'Show help text.')
-  .option('version', {
-    alias: 'v',
-    type: 'boolean',
-  })
-  .version('version', 'Show version number.', version)
   .option('quantity', {
     alias: 'q',
     describe: 'Quantity of discount codes to generate. (Between 1 and 500000)',
@@ -158,8 +148,7 @@ const resolveOutput = (_args, outputData) => {
             .join(arrayDelim)
         return flatten(obj)
       })
-      const csvOutput = json2csv({
-        data: flatObjects,
+      const csvOutput = parse(flatObjects, {
         del: _args.delimiter,
       })
       outputStream.on('error', error => {

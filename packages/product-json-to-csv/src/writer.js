@@ -1,7 +1,7 @@
 import archiver from 'archiver'
 import EmitOnce from 'single-emit'
 import fs from 'fs'
-import json2csv from 'json2csv'
+import { parse } from 'json2csv'
 import path from 'path'
 import slugify from 'slugify'
 import tmp from 'tmp'
@@ -50,18 +50,17 @@ export function writeToSingleCsvFile(
   output,
   logger,
   headerFields,
-  del
+  delimiter
 ) {
   const trimmedHeaders = headerFields.map(header => header.trim())
-  output.write(`${trimmedHeaders.join(del)}\n`) // Write headers first
+  output.write(`${trimmedHeaders.join(delimiter)}\n`) // Write headers first
   const columnNames = mapHeaders(trimmedHeaders)
   productStream
     .each(product => {
-      const csvData = json2csv({
-        data: product,
+      const csvData = parse(product, {
         fields: columnNames,
-        hasCSVColumnTitle: false,
-        del,
+        header: false,
+        delimiter,
       })
       output.write(`${csvData}\n`)
     })
@@ -74,7 +73,7 @@ export function writeToSingleCsvFile(
 
 // Accept a highland stream and write the output to multiple files per
 // product type, then compress all files to a zip file
-export function writeToZipFile(productStream, output, logger, del) {
+export function writeToZipFile(productStream, output, logger, delimiter) {
   const tmpDir = tmp.dirSync({ unsafeCleanup: true }).name
   tmp.setGracefulCleanup()
   let currentProductType
@@ -84,7 +83,7 @@ export function writeToZipFile(productStream, output, logger, del) {
   const streamCache = {}
   productStream
     .each(product => {
-      let hasCSVColumnTitle = false
+      let header = false
       // Process this block only if item is a masterVariant and was
       // not the last processed item
       if (product.productType && product.productType !== currentProductType) {
@@ -93,7 +92,7 @@ export function writeToZipFile(productStream, output, logger, del) {
         if (columnNamesCache[product.productType])
           columnNames = columnNamesCache[product.productType]
         else {
-          hasCSVColumnTitle = true
+          header = true
           columnNames = mapHeaders(Object.keys(product))
           columnNamesCache[product.productType] = columnNames
         }
@@ -109,11 +108,10 @@ export function writeToZipFile(productStream, output, logger, del) {
           streamCache[currentProductType] = fileStream
         }
       }
-      const csvData = json2csv({
-        data: product,
+      const csvData = parse(product, {
         fields: columnNames,
-        hasCSVColumnTitle,
-        del,
+        header,
+        delimiter,
       })
       fileStream.write(`${csvData}\n`)
     })

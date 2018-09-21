@@ -3,12 +3,12 @@
 exports[`CSV and CLI Tests CLI basic functionality should print usage information given the help flag 1`] = `
 "
 
-Usage: integration-tests/node_modules/.bin/csvparserorder [options]
+Usage: csvparserorder [options]
 Convert commercetools order CSV data to JSON.
 
 Options:
-  --help, -h        Show help text.                                    [boolean]
-  --version, -v     Show version number.                               [boolean]
+  --help            Show help                                          [boolean]
+  --version         Show version number                                [boolean]
   --type, -t        Predefined type of csv.
                [required] [choices: \\"lineitemstate\\", \\"returninfo\\", \\"deliveries\\"]
   --inputFile, -i   Path to input CSV file.                   [default: \\"stdin\\"]
@@ -21,7 +21,6 @@ Options:
                                                                [default: \\"info\\"]
   --logFile         Path to file where to save logs.
                                                  [default: \\"csvparserorder.log\\"]
-
 "
 `;
 

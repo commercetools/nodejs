@@ -111,8 +111,8 @@ describe('CSV and CLI Tests', () => {
         const fileNames = []
 
         beforeAll(async done => {
-          const zipFile = tmp.fileSync({ postfix: '.zip' }).name;
-          [stdout, stderr] = await exec(
+          const zipFile = tmp.fileSync({ postfix: '.zip' }).name
+          ;[stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
           )
 
@@ -142,14 +142,10 @@ describe('CSV and CLI Tests', () => {
         })
 
         describe('File 1', () => {
-          const product = []
-          beforeAll(done => {
-            csvToJson()
-              .fromString(csvContents1)
-              .on('json', jsonObj => {
-                product.push(jsonObj)
-              })
-              .on('done', () => done())
+          let product = []
+          beforeAll(async () => {
+            const jsonObj = await csvToJson().fromString(csvContents1)
+            product = [...product, ...jsonObj]
           })
 
           it('zip folder contains file named `productType`', () => {
@@ -265,14 +261,10 @@ describe('CSV and CLI Tests', () => {
         })
 
         describe('File 2', () => {
-          const product = []
-          beforeAll(done => {
-            csvToJson()
-              .fromString(csvContents2)
-              .on('json', jsonObj => {
-                product.push(jsonObj)
-              })
-              .on('done', () => done())
+          let product = []
+          beforeAll(async () => {
+            const jsonObj = await csvToJson().fromString(csvContents2)
+            product = [...product, ...jsonObj]
           })
 
           it('zip folder contains file named `anotherProductType`', () => {
@@ -382,25 +374,20 @@ describe('CSV and CLI Tests', () => {
 
         const templateFile = `${__dirname}/helpers/product-headers.csv`
 
-        beforeAll(async done => {
-          csvFile = tmp.fileSync({ postfix: '.csv' }).name;
-          [stdout, stderr] = await exec(
+        beforeAll(async () => {
+          csvFile = tmp.fileSync({ postfix: '.csv' }).name
+          ;[stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
           )
 
-          csvToJson()
-            .fromFile(csvFile)
-            .on('json', jsonObj => {
-              products.push(jsonObj)
-            })
-            .on('done', () => {
-              // Format the products array for easier testing because we
-              // cannot guarantee the sort order from the API
-              if (products[0].key === 'productKey-2') {
-                products = products.concat(products.splice(0, 2))
-              }
-              done()
-            })
+          const jsonObj = await csvToJson().fromFile(csvFile)
+          products = [...products, ...jsonObj]
+
+          // Format the products array for easier testing because we
+          //     // cannot guarantee the sort order from the API
+          if (products[0].key === 'productKey-2') {
+            products = products.concat(products.splice(0, 2))
+          }
         }, 20000)
 
         it('should successfully map products', () => {
@@ -492,8 +479,8 @@ describe('CSV and CLI Tests', () => {
       let stderr
 
       beforeAll(async () => {
-        productsJsonFile = tmp.fileSync({ postfix: '.json' }).name;
-        [stdout, stderr] = await exec(
+        productsJsonFile = tmp.fileSync({ postfix: '.json' }).name
+        ;[stdout, stderr] = await exec(
           `${exporter} -p ${projectKey} -s -o ${productsJsonFile}`
         )
       }, 15000)
@@ -511,10 +498,10 @@ describe('CSV and CLI Tests', () => {
         let stderr
 
         beforeAll(async done => {
-          const zipFile = tmp.fileSync({ postfix: '.zip' }).name;
+          const zipFile = tmp.fileSync({ postfix: '.zip' }).name
 
           // Send request from with JSON file to parser
-          [stdout, stderr] = await exec(
+          ;[stdout, stderr] = await exec(
             `${binPath} -p ${projectKey} -i ${productsJsonFile} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
           )
 
@@ -544,14 +531,10 @@ describe('CSV and CLI Tests', () => {
         })
 
         describe('File 1', () => {
-          const product = []
-          beforeAll(done => {
-            csvToJson()
-              .fromString(csvContents1)
-              .on('json', jsonObj => {
-                product.push(jsonObj)
-              })
-              .on('done', () => done())
+          let product = []
+          beforeAll(async () => {
+            const jsonObj = await csvToJson().fromString(csvContents1)
+            product = [...product, ...jsonObj]
           })
 
           it('zip folder contains file named `productType`', () => {
@@ -667,14 +650,10 @@ describe('CSV and CLI Tests', () => {
         })
 
         describe('File 2', () => {
-          const product = []
-          beforeAll(done => {
-            csvToJson()
-              .fromString(csvContents2)
-              .on('json', jsonObj => {
-                product.push(jsonObj)
-              })
-              .on('done', () => done())
+          let product = []
+          beforeAll(async () => {
+            const jsonObj = await csvToJson().fromString(csvContents2)
+            product = [...product, ...jsonObj]
           })
 
           it('zip folder contains file named `anotherProductType`', () => {
@@ -783,25 +762,20 @@ describe('CSV and CLI Tests', () => {
         let stdout
         let stderr
 
-        beforeAll(async done => {
-          csvFile = tmp.fileSync({ postfix: '.csv' }).name;
-          [stdout, stderr] = await exec(
+        beforeAll(async () => {
+          csvFile = tmp.fileSync({ postfix: '.csv' }).name
+          ;[stdout, stderr] = await exec(
             `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${csvFile}`
           )
 
-          csvToJson()
-            .fromFile(csvFile)
-            .on('json', jsonObj => {
-              products.push(jsonObj)
-            })
-            .on('done', () => {
-              // Format the products array for easier testing because we
-              // cannot guarantee the sort order from the API
-              if (products[0].key === 'productKey-2') {
-                products = products.concat(products.splice(0, 2))
-              }
-              done()
-            })
+          const jsonObj = await csvToJson().fromFile(csvFile)
+          products = [...products, ...jsonObj]
+
+          // Format the products array for easier testing because we
+          // cannot guarantee the sort order from the API
+          if (products[0].key === 'productKey-2') {
+            products = products.concat(products.splice(0, 2))
+          }
         }, 15000)
 
         it('should successfully map products', () => {

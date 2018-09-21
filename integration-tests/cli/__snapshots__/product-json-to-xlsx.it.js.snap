@@ -6,8 +6,8 @@ Usage: product-json-to-xlsx [options]
 Convert commercetools products from JSON to XLSX
 
 Options:
-  --help, -h                      Show help                            [boolean]
-  --version, -v                   Show version number                  [boolean]
+  --help                          Show help                            [boolean]
+  --version                       Show version number                  [boolean]
   --projectKey, -p                API project key            [string] [required]
   --apiUrl                        The host URL of the HTTP API service
                              [string] [default: \\"https://api.commercetools.com\\"]
@@ -40,6 +40,5 @@ Options:
   --prettyLogs                    Pretty print logs to the terminal    [boolean]
   --logFile                       Path to file where logs should be saved
                                   [string] [default: \\"product-json-to-xlsx.log\\"]
-
 "
 `;
