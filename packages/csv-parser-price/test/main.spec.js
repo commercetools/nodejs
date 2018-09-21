@@ -58,6 +58,12 @@ describe('CsvParserPrice::parse', () => {
       expect(prices[0].sku).toBeTruthy()
       expect(price.value.centAmount).toBeTruthy()
       expect(price.value.currencyCode).toBeTruthy()
+      expect(price.value).toEqual(
+        expect.objectContaining({
+          fractionDigits: 2,
+          type: 'centPrecision',
+        })
+      )
       done()
     })
     csvParserPrice.parse(readStream, outputStream)
@@ -79,6 +85,59 @@ describe('CsvParserPrice::parse', () => {
       expect(prices[0].prices).toHaveLength(2)
       expect(prices[1].prices).toHaveLength(1)
       expect(prices[0].sku).toBeTruthy()
+      done()
+    })
+    csvParserPrice.parse(readStream, outputStream)
+  })
+
+  test('should parse a full price.value object', done => {
+    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const readStream = fs.createReadStream(
+      path.join(__dirname, 'helpers/full-price.csv')
+    )
+
+    const outputStream = streamtest.v2.toText((error, result) => {
+      expect(error).not.toBeTruthy()
+
+      const prices = JSON.parse(result).prices
+      expect(prices).toEqual([
+        {
+          prices: [
+            {
+              country: 'DE',
+              id: 'id1',
+              value: {
+                type: 'centPrecision',
+                fractionDigits: 2,
+                centAmount: 12900,
+                currencyCode: 'EUR',
+              },
+            },
+            {
+              country: 'LT',
+              id: 'id2',
+              value: {
+                type: 'centPrecision',
+                fractionDigits: 2,
+                centAmount: 12900,
+                currencyCode: 'EUR',
+              },
+            },
+            {
+              country: 'IT',
+              id: 'id3',
+              value: {
+                type: 'highPrecision',
+                preciseAmount: 123456,
+                fractionDigits: 2,
+                centAmount: 12900,
+                currencyCode: 'EUR',
+              },
+            },
+          ],
+          sku: 'sku12',
+        },
+      ])
       done()
     })
     csvParserPrice.parse(readStream, outputStream)
