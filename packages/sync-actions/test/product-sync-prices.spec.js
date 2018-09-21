@@ -9,11 +9,11 @@ describe('Actions', () => {
   })
 
   describe('with `priceID`', () => {
-    const validFrom = new Date().toISOString()
     const discounted = {
       value: { centAmount: 4000, currencyCode: 'EUR' },
       discount: { typeId: 'product-discount', id: 'pd1' },
     }
+    const validFrom = new Date().toISOString()
 
     const before = {
       id: '123',
@@ -338,6 +338,200 @@ describe('Actions', () => {
           },
         ])
       )
+    })
+
+    test('should remove a price without id', () => {
+      const oldProduct = {
+        id: '123',
+        version: 1,
+        masterVariant: {
+          id: 1,
+          sku: 'v1',
+          prices: [
+            {
+              country: 'DE',
+              id: 'DE_PRICE',
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 1111,
+                fractionDigits: 2,
+              },
+            },
+            {
+              country: 'LT',
+              id: 'LT_PRICE',
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 2222,
+                fractionDigits: 2,
+              },
+            },
+            {
+              country: 'IT',
+              id: 'IT_PRICE',
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 3333,
+                fractionDigits: 2,
+              },
+            },
+          ],
+          attributes: [],
+        },
+        variants: [],
+      }
+      const newProduct = {
+        id: '123',
+        version: 1,
+        masterVariant: {
+          id: 1,
+          sku: 'v1',
+          prices: [
+            {
+              country: 'DE',
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 1111,
+                fractionDigits: 2,
+              },
+            },
+            {
+              country: 'IT',
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 3333,
+                fractionDigits: 2,
+              },
+            },
+          ],
+          attributes: [],
+        },
+        variants: [],
+      }
+      const updateActions = productsSync.buildActions(newProduct, oldProduct)
+      expect(updateActions).toHaveLength(1)
+      expect(updateActions).toEqual([
+        {
+          action: 'removePrice',
+          priceId: 'LT_PRICE',
+        },
+      ])
+    })
+
+    test('should handle missing optional fields', () => {
+      const oldProduct = {
+        id: '123',
+        version: 1,
+        masterVariant: {
+          id: 1,
+          sku: 'v1',
+          prices: [
+            {
+              country: 'DE',
+              id: 'DE_PRICE',
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 1111,
+                fractionDigits: 2,
+              },
+            },
+          ],
+          attributes: [],
+        },
+        variants: [],
+      }
+      const newProduct = {
+        id: '123',
+        version: 1,
+        masterVariant: {
+          id: 1,
+          sku: 'v1',
+          prices: [
+            {
+              country: 'DE',
+              value: {
+                currencyCode: 'EUR',
+                centAmount: 1111,
+                // optional fields are missing here
+              },
+            },
+          ],
+          attributes: [],
+        },
+        variants: [],
+      }
+      const updateActions = productsSync.buildActions(newProduct, oldProduct)
+      expect(updateActions).toHaveLength(0)
+    })
+
+    test('should sync when optional fields are different', () => {
+      const oldProduct = {
+        id: '123',
+        version: 1,
+        masterVariant: {
+          id: 1,
+          sku: 'v1',
+          prices: [
+            {
+              country: 'DE',
+              id: 'DE_PRICE',
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 1111,
+                fractionDigits: 2,
+              },
+            },
+          ],
+          attributes: [],
+        },
+        variants: [],
+      }
+      const newProduct = {
+        id: '123',
+        version: 1,
+        masterVariant: {
+          id: 1,
+          sku: 'v1',
+          prices: [
+            {
+              country: 'DE',
+              value: {
+                type: 'highPrecision',
+                currencyCode: 'EUR',
+                centAmount: 1111,
+                fractionDigits: 4,
+              },
+            },
+          ],
+          attributes: [],
+        },
+        variants: [],
+      }
+      const updateActions = productsSync.buildActions(newProduct, oldProduct)
+      expect(updateActions).toHaveLength(1)
+      expect(updateActions).toEqual([
+        {
+          action: 'changePrice',
+          price: {
+            country: 'DE',
+            id: 'DE_PRICE',
+            value: {
+              centAmount: 1111,
+              currencyCode: 'EUR',
+              fractionDigits: 4,
+              type: 'highPrecision',
+            },
+          },
+          priceId: 'DE_PRICE',
+        },
+      ])
     })
   })
 })
