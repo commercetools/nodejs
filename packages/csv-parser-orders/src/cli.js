@@ -8,8 +8,6 @@ import LineItemStateCsvParser from './parsers/line-item-state'
 import AddReturnInfoCsvParser from './parsers/add-return-info'
 import DeliveriesCsvParser from './parsers/deliveries'
 
-import { version } from '../package.json'
-
 process.title = 'csvparserorder'
 
 const args = yargs
@@ -19,15 +17,6 @@ Usage: $0 [options]
 Convert commercetools order CSV data to JSON.`
   )
   .showHelpOnFail(false)
-  .option('help', {
-    alias: 'h',
-  })
-  .help('help', 'Show help text.')
-  .option('version', {
-    alias: 'v',
-    type: 'boolean',
-  })
-  .version('version', 'Show version number.', version)
   .option('type', {
     alias: 't',
     choices: ['lineitemstate', 'returninfo', 'deliveries'],
