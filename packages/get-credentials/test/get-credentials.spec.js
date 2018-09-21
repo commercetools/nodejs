@@ -56,11 +56,11 @@ describe('getCredentialsFromEnvironment', () => {
     )
   })
 
-  test('should reject on incorrect environment variable value', () => {
+  test('should reject on incorrect environment variable value', async () => {
     sinon.stub(process.env, 'CT_STROOPWAFEL').value('nyw:les')
     sinon.stub(process, 'env').callsFake({ CT_STROOPWAFEL: 'nywles' })
 
-    getCredentialsFromEnvironment('stroopwafel')
+    await getCredentialsFromEnvironment('stroopwafel')
       .then()
       .catch(error => {
         expect(error.message).toMatch(expectedErrorText.invalidEnvFormat)
