@@ -37,7 +37,7 @@
     "@commercetools/get-credentials": "2.1.5",
     "@commercetools/product-json-to-csv": "2.2.1",
     "common-tags": "1.8.0",
-    "exceljs": "1.6.1",
+    "exceljs": "1.6.2",
     "highland": "2.13.0",
     "pino": "4.17.6",
     "pretty-error": "2.1.1",
