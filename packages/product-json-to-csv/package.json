@@ -50,9 +50,9 @@
     "json2csv": "4.2.1",
     "lodash": "4.17.11",
     "node-fetch": "2.2.0",
-    "pino": "5.5.0",
+    "pino": "5.6.1",
     "pretty-error": "2.1.1",
-    "single-emit": "1.0.0",
+    "single-emit": "2.0.0",
     "slugify": "1.3.1",
     "tmp": "0.0.33",
     "yargs": "12.0.2"
