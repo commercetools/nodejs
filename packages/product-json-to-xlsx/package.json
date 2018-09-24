@@ -34,7 +34,7 @@
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {
-    "@commercetools/get-credentials": "2.1.5",
+    "@commercetools/get-credentials": "2.1.7",
     "@commercetools/product-json-to-csv": "2.2.1",
     "common-tags": "1.8.0",
     "exceljs": "1.6.1",
