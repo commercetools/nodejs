@@ -36,6 +36,8 @@ Options:
                                    "externalId", "namedPath"] [default: "name"]
   --fillAllRows                    Define if product attributes like name should be
                                    added to each variant row.                  [boolean]
+  --onlyMasterVariants            Export only masterVariants from products.
+                                                      [boolean] [default: false]
   --language, -l                   Language used for localised attributes such as
                                    category names.              [string] [default: "en"]
   --delimiter, -d                  Used template CSV delimiter.           [default: ","]

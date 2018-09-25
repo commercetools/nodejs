@@ -94,6 +94,11 @@ Required scopes: ['view_products']`,
       'Define if product attributes like name should be added to each variant row.',
     type: 'boolean',
   })
+  .option('onlyMasterVariants', {
+    describe: 'Export only masterVariants from products.',
+    type: 'boolean',
+    default: false,
+  })
   .option('language', {
     alias: 'l',
     default: 'en',
@@ -201,6 +206,7 @@ Promise.all([getHeaders(args), resolveCredentials(args)])
       fillAllRows: args.fillAllRows,
       language: args.language,
       multiValueDelimiter: args.multiValueDelimiter,
+      onlyMasterVariants: args.onlyMasterVariants,
       headerFields,
     }
     const parserLogger = {
