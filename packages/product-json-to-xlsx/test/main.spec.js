@@ -22,6 +22,7 @@ describe('ProductJsonToXlsx', () => {
       fillAllRows: false,
       language: 'en',
       multiValueDelimiter: ';',
+      onlyMasterVariants: false,
     }
     productJsonToXlsx = new ProductJsonToXlsx(
       { projectKey: 'project-key' },
@@ -42,6 +43,7 @@ describe('ProductJsonToXlsx', () => {
       }
       const defaultConfig = {
         multiValueDelimiter: ';',
+        onlyMasterVariants: false,
         fillAllRows: false,
         categoryBy: 'name',
         categoryOrderHintBy: 'name',
