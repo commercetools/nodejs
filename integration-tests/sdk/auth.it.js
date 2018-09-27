@@ -7,7 +7,7 @@ import {
 } from '@commercetools/sdk-middleware-auth'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import fetch from 'node-fetch'
-import { clearData, createData } from './../cli/helpers/utils'
+import { clearData, createData } from '../cli/helpers/utils'
 
 let projectKey
 if (process.env.CI === 'true') projectKey = 'auth-integration-test'
@@ -15,8 +15,8 @@ else projectKey = process.env.npm_config_projectkey
 
 describe('Auth Flows', () => {
   let apiConfig
-  const userEmail = `abi${Date.now()}@commercetooler.com`
-  const userPassword = 'asdifficultaspossible'
+  const userEmail = `user+date_is/\\${Date.now()}@commercetooler.com`
+  const userPassword = '4^lks*aJ@ETso+/\\HdE1!x0u4q5'
   beforeAll(
     () =>
       getCredentials(projectKey)
