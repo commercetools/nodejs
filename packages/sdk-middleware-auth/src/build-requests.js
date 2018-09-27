@@ -82,7 +82,7 @@ export function buildRequestForPasswordFlow(
   const oauthUri = options.oauthUri || `/oauth/${pKey}/customers/token`
   const url = options.host.replace(/\/$/, '') + oauthUri
   // eslint-disable-next-line max-len
-  // encode username as requested by platform
+  // encode username and password as requested by platform
   const body = `grant_type=password&username=${encodeURIComponent(
     username
   )}&password=${encodeURIComponent(password)}${scopeStr}`
