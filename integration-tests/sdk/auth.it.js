@@ -15,8 +15,8 @@ else projectKey = process.env.npm_config_projectkey
 
 describe('Auth Flows', () => {
   let apiConfig
-  const userEmail = `user+date_is/${Date.now()}@commercetooler.com`
-  const userPassword = '4^lks*aJ@ETsoHdE1!x0u4q5'
+  const userEmail = `user+date_is/\\${Date.now()}@commercetooler.com`
+  const userPassword = '4^lks*aJ@ETso+/\\HdE1!x0u4q5'
   beforeAll(
     () =>
       getCredentials(projectKey)
