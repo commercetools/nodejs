@@ -7,7 +7,7 @@ import {
 } from '@commercetools/sdk-middleware-auth'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import fetch from 'node-fetch'
-import { clearData, createData } from './../cli/helpers/utils'
+import { clearData, createData } from '../cli/helpers/utils'
 
 let projectKey
 if (process.env.CI === 'true') projectKey = 'auth-integration-test'

@@ -85,7 +85,7 @@ export function buildRequestForPasswordFlow(
   // encode username as requested by platform
   const body = `grant_type=password&username=${encodeURIComponent(
     username
-  )}&password=${password}${scopeStr}`
+  )}&password=${encodeURIComponent(password)}${scopeStr}`
 
   return { basicAuth, url, body }
 }
