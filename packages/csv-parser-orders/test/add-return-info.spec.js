@@ -132,7 +132,7 @@ describe('AddReturnInfoParser', () => {
 
       const outputStream = StreamTest.v2.toText(err => {
         expect(err.toString()).toEqual(
-          'Error: Row length does not match headers'
+          'RangeError: Row length does not match headers'
         )
         done()
       })
