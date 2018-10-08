@@ -136,10 +136,10 @@ export default class SdkAuth {
     })
   }
 
-  async anonymousFlow(anonymousId: ?string) {
+  async anonymousFlow(anonymousId: string = '') {
     const request = SdkAuth._buildRequest(this.config, this.ANONYMOUS_FLOW_URI)
-    if (anonymousId) request.body += `&anonymous_id=${anonymousId}`
 
+    if (anonymousId) request.body += `&anonymous_id=${anonymousId}`
     return this._process(request)
   }
 

@@ -4,8 +4,5 @@
   "credentials": {
     "clientId": "sampleClient",
     "clientSecret": "sampleSecret"
-  },
-  "scopes": [
-    "view_products:project-key"
-  ]
+  }
 }
