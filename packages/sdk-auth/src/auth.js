@@ -5,6 +5,7 @@ import type {
   ConfigFetch,
   HttpErrorType,
   AuthRequest,
+  UserAuthOptions,
 } from 'types/sdk'
 import nodeFetch from 'node-fetch'
 import { getErrorByCode } from '@commercetools/sdk-middleware-http'
@@ -16,6 +17,7 @@ export default class SdkAuth {
   fetcher: ConfigFetch
   ANONYMOUS_FLOW_URI: string
   BASE_AUTH_FLOW_URI: string
+  PASSWORD_FLOW_URI: string
 
   /**
    * Sample configuration object:
@@ -40,6 +42,7 @@ export default class SdkAuth {
 
     const { projectKey } = config
     this.ANONYMOUS_FLOW_URI = `/oauth/${projectKey}/anonymous/token`
+    this.PASSWORD_FLOW_URI = `/oauth/${projectKey}/customers/token`
     this.BASE_AUTH_FLOW_URI = '/oauth/token'
   }
 
@@ -73,7 +76,8 @@ export default class SdkAuth {
 
   static _buildRequest(
     config: AuthMiddlewareOptions,
-    oauthUri: string = '/oauth/token'
+    oauthUri: string = '/oauth/token',
+    grantType: string = 'client_credentials'
   ): AuthRequest {
     const { projectKey, credentials, host } = config
     const defaultScope = `${authScopes.MANAGE_PROJECT}:${projectKey}`
@@ -81,7 +85,7 @@ export default class SdkAuth {
     const basicAuth = SdkAuth._encodeClientCredentials(credentials)
 
     const uri = host.replace(/\/$/, '') + oauthUri
-    const body = `grant_type=client_credentials&scope=${scope}`
+    const body = `grant_type=${grantType}&scope=${scope}`
 
     return { basicAuth, uri, body }
   }
@@ -125,6 +129,18 @@ export default class SdkAuth {
     return jsonResponse
   }
 
+  static _appendUserCredentialsToBody(
+    body: string,
+    username: string,
+    password: string
+  ) {
+    return [
+      body,
+      `username=${encodeURIComponent(username)}`,
+      `password=${encodeURIComponent(password)}`,
+    ].join('&')
+  }
+
   async _performRequest(request: AuthRequest) {
     const { uri, body, basicAuth } = request
     return this.fetcher(uri, {
@@ -149,10 +165,26 @@ export default class SdkAuth {
     const request = SdkAuth._buildRequest(this.config, this.BASE_AUTH_FLOW_URI)
     return this._process(request)
   }
-  //
-  // async passwordFlow({ username,  password }: UserAuthOptions) {
-  // }
-  //
+
+  async passwordFlow({ username, password }: UserAuthOptions) {
+    if (!(username && password))
+      throw new Error('Missing required user credentials (username, password)')
+
+    const request = SdkAuth._buildRequest(
+      this.config,
+      this.PASSWORD_FLOW_URI,
+      'password'
+    )
+
+    request.body = SdkAuth._appendUserCredentialsToBody(
+      request.body,
+      username,
+      password
+    )
+
+    return this._process(request)
+  }
+
   // async refreshTokenFlow(token) {
   // }
   //

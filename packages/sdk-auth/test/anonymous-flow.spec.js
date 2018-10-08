@@ -1,6 +1,7 @@
 import nock from 'nock'
 import Auth from '../src/auth'
 import config from './resources/sample-config.json'
+import response from './resources/sample-response.json'
 
 describe('Anonymous flow', () => {
   const auth = new Auth(config)
@@ -8,13 +9,6 @@ describe('Anonymous flow', () => {
   beforeEach(() => nock.cleanAll())
 
   test('should authenticate without anonymousId', async () => {
-    const response = {
-      access_token: 'wohdwohfowpjf-XNe-i784rh9Zij-B',
-      expires_in: 172800,
-      scope: `manage_project:${config.projectKey}`,
-      refresh_token: 'owhdiwdiwuIhnIjW-bLnJkmFzTTUluM6iq-SVfGjkQzI',
-      token_type: 'Bearer',
-    }
     const scope = nock(config.host)
       .post(`/oauth/${config.projectKey}/anonymous/token`, {
         grant_type: 'client_credentials',
@@ -31,13 +25,6 @@ describe('Anonymous flow', () => {
   })
 
   test('should authenticate with anonymousId', async () => {
-    const response = {
-      access_token: 'wohdwohfowpjf-XNe-i784rh9Zij-B',
-      expires_in: 172800,
-      scope: `manage_project:${config.projectKey}`,
-      refresh_token: 'owhdiwdiwuIhnIjW-bLnJkmFzTTUluM6iq-SVfGjkQzI',
-      token_type: 'Bearer',
-    }
     const scope = nock(config.host)
       .post(`/oauth/${config.projectKey}/anonymous/token`, {
         grant_type: 'client_credentials',
