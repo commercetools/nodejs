@@ -1,0 +1,11 @@
+{
+  "host": "https://auth.commercetools.com",
+  "projectKey": "sample-project",
+  "credentials": {
+    "clientId": "sampleClient",
+    "clientSecret": "sampleSecret"
+  },
+  "scopes": [
+    "view_products:project-key"
+  ]
+}

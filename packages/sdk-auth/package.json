@@ -1,0 +1,44 @@
+{
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "name": "@commercetools/sdk-auth",
+  "version": "0.0.1",
+  "description": "Auth module for different authentication flows of commercetools platform API",
+  "keywords": [
+    "commercetools",
+    "sdk",
+    "auth",
+    "oauth"
+  ],
+  "homepage": "https://commercetools.github.io/nodejs/",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "author": "Jan Juna <jan.juna-ext@commercetools.com> (https://github.com/junajan)",
+  "main": "dist/commercetools-sdk-auth.cjs.js",
+  "module": "dist/commercetools-sdk-auth.es.js",
+  "browser": "dist/commercetools-sdk-auth.umd.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs.git"
+  },
+  "files": [
+    "dist",
+    "lib"
+  ],
+  "scripts": {
+    "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
+    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n CommercetoolsSdkAuth -i src/index.js -o dist/commercetools-sdk-auth.umd.js",
+    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n CommercetoolsSdkAuth -i src/index.js -o dist/commercetools-sdk-auth.umd.min.js",
+    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n CommercetoolsSdkAuth -i src/index.js -o dist/commercetools-sdk-auth.es.js",
+    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSdkAuth -i src/index.js -o dist/commercetools-sdk-auth.cjs.js"
+  },
+  "dependencies": {
+    "@commercetools/sdk-middleware-http": "^4.0.4",
+    "node-fetch": "2.2.0"
+  },
+  "devDependencies": {
+    "nock": "10.0.0"
+  }
+}
