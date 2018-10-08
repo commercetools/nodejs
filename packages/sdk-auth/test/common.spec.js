@@ -4,9 +4,13 @@ import Auth from '../src/auth'
 import config from './resources/sample-config.json'
 
 describe('Common processes', () => {
+  const { clientId, clientSecret } = config.credentials
+  const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString(
+    'base64'
+  )
   const auth = new Auth(config)
   const request = {
-    basicAuth: 'c2FtcGxlQ2xpZW50OnNhbXBsZVNlY3JldA==',
+    basicAuth,
     uri: 'https://auth.commercetools.com/api-endpoint',
     body: 'grant_type=client_credentials&scope=manage_project:project-key',
   }
@@ -175,7 +179,11 @@ describe('Common processes', () => {
         refresh_token: 'OWStLG0eaeVs7Yx3-mHcn8iAZohBohCiJSDdK1UCJ9U',
         token_type: 'Bearer',
       }
-      const scope = nock(config.host)
+      const scope = nock(config.host, {
+        reqheaders: {
+          Authorization: value => value === `Basic ${basicAuth}`,
+        },
+      })
         .post('/api-endpoint', () => true)
         .reply(200, JSON.stringify(response))
 
@@ -196,7 +204,7 @@ describe('Common processes', () => {
       const authRequest = Auth._buildRequest(_config, '/api-endpoint')
 
       expect(authRequest).toEqual({
-        basicAuth: 'c2FtcGxlQ2xpZW50OnNhbXBsZVNlY3JldA==',
+        basicAuth,
         uri: 'https://auth.commercetools.com/api-endpoint',
         body:
           'grant_type=client_credentials&scope=view_products:sample-project manage_types:sample-project',

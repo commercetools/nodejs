@@ -15,6 +15,7 @@ export default class SdkAuth {
   config: AuthMiddlewareOptions
   fetcher: ConfigFetch
   ANONYMOUS_FLOW_URI: string
+  BASE_AUTH_FLOW_URI: string
 
   /**
    * Sample configuration object:
@@ -39,6 +40,7 @@ export default class SdkAuth {
 
     const { projectKey } = config
     this.ANONYMOUS_FLOW_URI = `/oauth/${projectKey}/anonymous/token`
+    this.BASE_AUTH_FLOW_URI = '/oauth/token'
   }
 
   static _getFetcher(configFetch: ?ConfigFetch): ConfigFetch {
@@ -143,8 +145,10 @@ export default class SdkAuth {
     return this._process(request)
   }
 
-  // async clientCredentialsFlow() {
-  // }
+  async clientCredentialsFlow() {
+    const request = SdkAuth._buildRequest(this.config, this.BASE_AUTH_FLOW_URI)
+    return this._process(request)
+  }
   //
   // async passwordFlow({ username,  password }: UserAuthOptions) {
   // }
