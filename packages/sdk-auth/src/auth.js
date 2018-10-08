@@ -85,7 +85,8 @@ export default class SdkAuth {
     const basicAuth = SdkAuth._encodeClientCredentials(credentials)
 
     const uri = host.replace(/\/$/, '') + oauthUri
-    const body = `grant_type=${grantType}&scope=${scope}`
+    let body = `grant_type=${grantType}`
+    if (grantType !== 'refresh_token') body += `&scope=${scope}`
 
     return { basicAuth, uri, body }
   }
@@ -166,7 +167,8 @@ export default class SdkAuth {
     return this._process(request)
   }
 
-  async passwordFlow({ username, password }: UserAuthOptions) {
+  async passwordFlow(credentials: ?UserAuthOptions) {
+    const { username, password } = credentials || {}
     if (!(username && password))
       throw new Error('Missing required user credentials (username, password)')
 
@@ -185,9 +187,19 @@ export default class SdkAuth {
     return this._process(request)
   }
 
-  // async refreshTokenFlow(token) {
-  // }
-  //
+  async refreshTokenFlow(token: string) {
+    if (!token) throw new Error('Missing required token value')
+
+    const request = SdkAuth._buildRequest(
+      this.config,
+      this.BASE_AUTH_FLOW_URI,
+      'refresh_token'
+    )
+    request.body += `&refresh_token=${token}`
+
+    return this._process(request)
+  }
+
   // async introspectToken(token) {
   // }
 }

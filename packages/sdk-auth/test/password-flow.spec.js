@@ -47,4 +47,16 @@ describe('Password flow', () => {
     expect(scope.isDone()).toBe(true)
     expect(res).toEqual(response)
   })
+
+  test('should throw an error when credentials are not provided', async () => {
+    await expect(auth.passwordFlow()).rejects.toThrow(
+      'Missing required user credentials (username, password)'
+    )
+    await expect(auth.passwordFlow({ username: 'user' })).rejects.toThrow(
+      'Missing required user credentials (username, password)'
+    )
+    await expect(auth.passwordFlow({ password: 'password' })).rejects.toThrow(
+      'Missing required user credentials (username, password)'
+    )
+  })
 })
