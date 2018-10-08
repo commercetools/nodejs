@@ -18,6 +18,7 @@ export default class SdkAuth {
   ANONYMOUS_FLOW_URI: string
   BASE_AUTH_FLOW_URI: string
   PASSWORD_FLOW_URI: string
+  INTROSPECT_URI: string
 
   /**
    * Sample configuration object:
@@ -44,6 +45,7 @@ export default class SdkAuth {
     this.ANONYMOUS_FLOW_URI = `/oauth/${projectKey}/anonymous/token`
     this.PASSWORD_FLOW_URI = `/oauth/${projectKey}/customers/token`
     this.BASE_AUTH_FLOW_URI = '/oauth/token'
+    this.INTROSPECT_URI = '/oauth/introspect'
   }
 
   static _getFetcher(configFetch: ?ConfigFetch): ConfigFetch {
@@ -200,6 +202,12 @@ export default class SdkAuth {
     return this._process(request)
   }
 
-  // async introspectToken(token) {
-  // }
+  async introspectToken(token: string) {
+    if (!token) throw new Error('Missing required token value')
+
+    const request = SdkAuth._buildRequest(this.config, this.INTROSPECT_URI)
+    request.body = `token=${token}`
+
+    return this._process(request)
+  }
 }
