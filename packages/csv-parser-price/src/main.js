@@ -149,12 +149,12 @@ export default class CsvParserPrice {
   renameHeaders(price) {
     const newPrice = { ...price }
 
-    if (newPrice.customerGroup && newPrice.customerGroup.groupName) {
+    if (newPrice.customerGroup?.groupName) {
       newPrice.customerGroup.id = newPrice.customerGroup.groupName
       delete newPrice.customerGroup.groupName
     }
 
-    if (newPrice.channel && newPrice.channel.key) {
+    if (newPrice.channel?.key) {
       newPrice.channel.id = newPrice.channel.key
       delete newPrice.channel.key
     }
@@ -172,7 +172,7 @@ export default class CsvParserPrice {
       ...restOfCurrentPrice
     } = currentPrice
 
-    if (previousPrice && previousPrice.sku === currentSku)
+    if (previousPrice?.sku === currentSku)
       previousPrice.prices.push(restOfCurrentPrice)
     else
       data.prices.push({

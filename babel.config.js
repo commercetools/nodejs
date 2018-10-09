@@ -44,5 +44,7 @@ module.exports = {
     '@babel/plugin-proposal-export-namespace-from',
     '@babel/plugin-proposal-object-rest-spread',
     '@babel/plugin-transform-async-to-generator',
+    '@babel/plugin-proposal-optional-chaining',
+    '@babel/plugin-syntax-optional-chaining',
   ],
 }
