@@ -1,0 +1,34 @@
+{
+    "name": "@commercetools/category-exporter",
+    "version": "0.0.1",
+    "description": "Export categories from the commercetools platform",
+    "main": "lib/main.js",
+    "bin": {
+        "category-exporter": "bin/category-exporter.js"
+    },
+    "scripts": {
+        "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/commercetools/nodejs/tree/master/packages/category-exporter"
+    },
+    "homepage": "https://commercetools.github.io/nodejs/cli/category-exporter.html",
+    "bugs": "https://github.com/commercetools/nodejs/issues",
+    "keywords": [
+        "commercetools",
+        "category",
+        "categories",
+        "json",
+        "export"
+    ],
+    "author": {
+        "name": "Babajide Williams",
+        "email": "babajide.williams@commercetools.de"
+    },
+    "license": "MIT",
+    "dependencies": {    
+    },
+    "devDependencies": {
+    }
+}
