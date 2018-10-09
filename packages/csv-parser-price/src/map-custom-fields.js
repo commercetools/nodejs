@@ -186,7 +186,7 @@ export default (function MapCustomFields() {
     const result = {}
     if (!isValidValue(rawNo)) return result
 
-    if (Number.isNaN(Number(rawNo))) {
+    if (rawNo |> Number |> Number.isNaN) {
       result.error = `The number ${rawNo} isn't valid`
       return result
     }

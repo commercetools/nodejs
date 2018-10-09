@@ -46,5 +46,6 @@ module.exports = {
     '@babel/plugin-transform-async-to-generator',
     '@babel/plugin-proposal-optional-chaining',
     '@babel/plugin-syntax-optional-chaining',
+    ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
   ],
 }
