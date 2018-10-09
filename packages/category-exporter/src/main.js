@@ -7,6 +7,7 @@ import {
 } from '@commercetools/sdk-middleware-auth'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import fetch from 'node-fetch'
+import silentLogger from './utils/silent-logger'
 import pkg from '../package.json'
 
 export default class CategoryExporter {
@@ -37,6 +38,11 @@ export default class CategoryExporter {
     })
 
     this.predicate = options.predicate
+
+    this.logger = {
+      ...silentLogger,
+      ...options.logger,
+    }
   }
 
   run(outputStream) {

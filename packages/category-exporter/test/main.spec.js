@@ -1,13 +1,38 @@
 import streamtest from 'streamtest'
+import silentLogger from '../src/utils/silent-logger'
 import CategoryExporter from '../src/main'
 
 describe('CategoryExporter', () => {
+  const logger = {
+    ...silentLogger,
+  }
+
   let categoryExport
   beforeAll(() => {
     categoryExport = new CategoryExporter({
       apiConfig: {
         projectKey: 'category-export-int-test',
       },
+      logger,
+    })
+  })
+
+  describe('::constructor', () => {
+    test('should be a function', () => {
+      expect(typeof CategoryExporter).toBe('function')
+    })
+
+    test('should set default properties', () => {
+      expect(categoryExport.apiConfig).toEqual({
+        projectKey: 'category-export-int-test',
+      })
+      expect(categoryExport.logger).toEqual(logger)
+    })
+
+    test('should throw error if no `apiConfig` in `options` parameter', () => {
+      expect(() => new CategoryExporter({ froo: 'bar' })).toThrowError(
+        /The constructor must be passed an `apiConfig` object/
+      )
     })
   })
 
