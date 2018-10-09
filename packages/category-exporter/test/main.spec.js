@@ -1,3 +1,4 @@
+import streamtest from 'streamtest'
 import CategoryExporter from '../src/main'
 
 describe('CategoryExporter', () => {
@@ -11,24 +12,79 @@ describe('CategoryExporter', () => {
   })
 
   describe('::run ', () => {
-    let results
-    beforeAll(() => {
-      results = {
-        body: {
-          results: [{ id: 'id1', name: 'foo' }, { id: 'id2', name: 'bar' }],
-        },
-      }
-    })
-    test('should be a function', () => {
-      expect(typeof categoryExport.run).toBe('function')
+    describe('with status code 200', () => {
+      let payload
+      beforeAll(() => {
+        payload = {
+          statusCode: 200,
+          body: {
+            results: [{ id: 'id1', name: 'foo' }, { id: 'id2', name: 'bar' }],
+          },
+        }
+        categoryExport.client.execute = jest
+          .fn()
+          .mockReturnValue(Promise.resolve(payload))
+      })
+      test('should be a function', () => {
+        expect(typeof categoryExport.run).toBe('function')
+      })
+
+      test('should write to outputStream', done => {
+        const outputStream = streamtest.v2.toText((error, data) => {
+          expect(error).toBeFalsy()
+          expect(data).toEqual(JSON.stringify(payload.body.results))
+          done()
+        })
+        categoryExport.run(outputStream)
+      })
     })
 
-    test('should return a JSON', async () => {
-      categoryExport.client.execute = jest
-        .fn()
-        .mockReturnValue(Promise.resolve(results))
-      const result = await categoryExport.run()
-      expect(result).toEqual(JSON.stringify(results.body.results))
+    describe('with status code 404', () => {
+      let results
+      beforeAll(() => {
+        results = {
+          statusCode: 404,
+          body: {
+            results: [],
+          },
+        }
+        categoryExport.client.execute = jest
+          .fn()
+          .mockReturnValue(Promise.resolve(results))
+      })
+
+      test('should write to outputStream', done => {
+        const outputStream = streamtest.v2.toText((error, data) => {
+          expect(error).toBeTruthy()
+          expect(data).toBeFalsy()
+          done()
+        })
+        categoryExport.run(outputStream)
+      })
+    })
+
+    describe('with status code 500', () => {
+      let results
+      beforeAll(() => {
+        results = {
+          statusCode: 500,
+          body: {
+            results: [{ id: 'id1', name: 'foo' }, { id: 'id2', name: 'bar' }],
+          },
+        }
+        categoryExport.client.execute = jest
+          .fn()
+          .mockReturnValue(Promise.resolve(results))
+      })
+
+      test('should write to outputStream', done => {
+        const outputStream = streamtest.v2.toText((error, data) => {
+          expect(error).toBeTruthy()
+          expect(data).toBeFalsy()
+          done()
+        })
+        categoryExport.run(outputStream)
+      })
     })
   })
 

@@ -39,13 +39,27 @@ export default class CategoryExporter {
     this.predicate = options.predicate
   }
 
-  run() {
+  run(outputStream) {
     return this.client
-      .process({ uri: this.buildURI(), method: 'GET' }, payload => {
-        const results = JSON.stringify(payload.body.results)
-        return Promise.resolve(results)
+      .process(
+        { uri: this.buildURI(), method: 'GET' },
+        payload => {
+          if (payload.statusCode !== 200)
+            return Promise.reject(
+              new Error(`Request returned error ${payload.statusCode}`)
+            )
+          const results = JSON.stringify(payload.body.results)
+          outputStream.write(results)
+          return Promise.resolve()
+        },
+        { accumulate: false }
+      )
+      .then(() => {
+        if (outputStream !== process.stdout) outputStream.end()
       })
-      .then(res => res.join(''))
+      .catch((error: Error) => {
+        outputStream.emit('error', error)
+      })
   }
 
   buildURI() {
