@@ -72,7 +72,13 @@ export default class ProductMapping {
       undefined
     )
     const attributes: Object = get(originalProduct, 'variant.attributes', {})
-    const cleanedProduct = { ...originalProduct, prices, ...attributes }
+    const cleanedProduct = { ...originalProduct, prices }
+
+    // merge attributes to a product and prefix conflicting names if necessary
+    Object.entries(attributes).forEach(([key, val]) => {
+      const csvHeaderName = cleanedProduct[key] ? `attribute.${key}` : key
+      cleanedProduct[csvHeaderName] = val
+    })
 
     delete cleanedProduct.variant.prices
     delete cleanedProduct.variant.attributes
