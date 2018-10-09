@@ -1,11 +1,12 @@
 import { createClient } from '@commercetools/sdk-client'
-// import { createRequestBuilder } from '@commercetools/api-request-builder'
+import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import {
   createAuthMiddlewareForClientCredentialsFlow,
   createAuthMiddlewareWithExistingToken,
 } from '@commercetools/sdk-middleware-auth'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
+import fetch from 'node-fetch'
 import pkg from '../package.json'
 
 export default class CategoryExporter {
@@ -36,5 +37,22 @@ export default class CategoryExporter {
     })
 
     this.predicate = options.predicate
+  }
+
+  run() {
+    return this.client
+      .process({ uri: this.buildURI(), method: 'GET' }, payload => {
+        const results = JSON.stringify(payload.body.results)
+        return Promise.resolve(results)
+      })
+      .then(res => res.join(''))
+  }
+
+  buildURI() {
+    const request = createRequestBuilder({
+      projectKey: this.apiConfig.projectKey,
+    }).categories
+    if (this.predicate) request.where(this.predicate)
+    return request.build()
   }
 }
