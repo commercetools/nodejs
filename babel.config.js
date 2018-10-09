@@ -47,5 +47,6 @@ module.exports = {
     '@babel/plugin-proposal-optional-chaining',
     '@babel/plugin-syntax-optional-chaining',
     ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
+    '@babel/plugin-proposal-nullish-coalescing-operator',
   ],
 }
