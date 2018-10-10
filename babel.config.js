@@ -44,5 +44,9 @@ module.exports = {
     '@babel/plugin-proposal-export-namespace-from',
     '@babel/plugin-proposal-object-rest-spread',
     '@babel/plugin-transform-async-to-generator',
+    '@babel/plugin-proposal-optional-chaining',
+    '@babel/plugin-syntax-optional-chaining',
+    ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
+    '@babel/plugin-proposal-nullish-coalescing-operator',
   ],
 }

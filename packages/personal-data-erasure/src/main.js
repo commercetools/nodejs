@@ -122,7 +122,7 @@ export default class PersonalDataErasure {
         let results = flatten(
           flattenedResponses.map(
             (response: ClientResponse): Array<ClientResult> | void =>
-              response.body ? response.body.results : undefined
+              response.body?.results
           )
         )
         const ids = results.map((result: AllData): string => result.id)

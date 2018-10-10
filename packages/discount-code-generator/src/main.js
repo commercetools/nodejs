@@ -57,7 +57,7 @@ export default function discountCodeGenerator(
   const chars = '0-9a-zA-Z'
   const generator = new TokenGenerator({ chars, length })
   for (let i = 0; i < quantity; i += 1) {
-    const codeObject = Object.assign({}, data)
+    const codeObject = { ...data }
     codeObject.code = _prepareCode(generator.generate(), length, prefix)
     codes.push(codeObject)
   }

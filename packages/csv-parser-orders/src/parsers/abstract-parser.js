@@ -43,7 +43,7 @@ export default class AbstractParser {
         rowIndex += 1
       })
       .flatMap(highland)
-      .flatMap(data => highland(this._processData(data)))
+      .flatMap(data => data |> this._processData |> highland)
       .stopOnError(err => {
         this.logger.error(err)
         return output.emit('error', err)

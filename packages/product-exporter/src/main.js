@@ -127,7 +127,7 @@ export default class ProductExporter {
     if (exportConfig.batch) service.perPage(exportConfig.batch)
     if (exportConfig.predicate) service.where(exportConfig.predicate)
     // Handle `expand` separately because it's an array
-    if (exportConfig.expand && exportConfig.expand.length)
+    if (exportConfig.expand?.length)
       exportConfig.expand.forEach((reference: string) => {
         service.expand(reference)
       })

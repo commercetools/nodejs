@@ -306,9 +306,10 @@ describe('DiscountCodeExport', () => {
     })
 
     test('does not delete non-empty objects', () => {
-      const newSample = Object.assign({}, sampleCodeObj, {
+      const newSample = {
+        ...sampleCodeObj,
         attributeTypes: { foo: 'bar' },
-      })
+      }
       const actual = codeExport._processCode(newSample)
       expect(actual.cartDiscounts).toBeTruthy()
       expect(actual['attributeTypes.foo']).toBeTruthy()
