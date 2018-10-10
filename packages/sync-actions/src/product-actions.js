@@ -71,7 +71,7 @@ function _buildNewSetAttributeAction(id, el, sameForAllAttributeNames) {
   const attributeName = el && el.name
   if (!attributeName) return undefined
 
-  const action = {
+  let action = {
     action: 'setAttribute',
     variantId: id,
     name: attributeName,
@@ -79,7 +79,7 @@ function _buildNewSetAttributeAction(id, el, sameForAllAttributeNames) {
   }
 
   if (sameForAllAttributeNames.indexOf(attributeName) !== -1) {
-    Object.assign(action, { action: 'setAttributeInAllVariants' })
+    action = { ...action, action: 'setAttributeInAllVariants' }
     delete action.variantId
   }
 
@@ -94,7 +94,7 @@ function _buildSetAttributeAction(
 ) {
   if (!attribute) return undefined
 
-  const action = {
+  let action = {
     action: 'setAttribute',
     variantId: oldVariant.id,
     name: attribute.name,
@@ -105,7 +105,7 @@ function _buildSetAttributeAction(
     oldVariant.attributes.find(a => a.name === attribute.name) || {}
 
   if (sameForAllAttributeNames.indexOf(attribute.name) !== -1) {
-    Object.assign(action, { action: 'setAttributeInAllVariants' })
+    action = { ...action, action: 'setAttributeInAllVariants' }
     delete action.variantId
   }
 
@@ -136,17 +136,20 @@ function _buildSetAttributeAction(
   else if (typeof diffedValue === 'object')
     if ({}.hasOwnProperty.call(diffedValue, '_t') && diffedValue._t === 'a') {
       // set-typed attribute
-      Object.assign(action, { value: attribute.value })
+      action = { ...action, value: attribute.value }
     } else {
       // LText
 
-      const updatedValue = Object.keys(diffedValue).reduce((acc, lang) => {
-        const patchedValue = diffpatcher.getDeltaValue(
-          diffedValue[lang],
-          acc[lang]
-        )
-        return Object.assign(acc, { [lang]: patchedValue })
-      }, Object.assign({}, oldAttribute.value))
+      const updatedValue = Object.keys(diffedValue).reduce(
+        (acc, lang) => {
+          const patchedValue = diffpatcher.getDeltaValue(
+            diffedValue[lang],
+            acc[lang]
+          )
+          return Object.assign(acc, { [lang]: patchedValue })
+        },
+        { ...oldAttribute.value }
+      )
 
       action.value = updatedValue
     }
@@ -254,7 +257,7 @@ function _buildVariantPricesAction(
       if (Array.isArray(price) && price.length) {
         // Remove read-only fields
         const patchedPrice = price.map(p => {
-          const shallowClone = Object.assign({}, p)
+          const shallowClone = { ...p }
           delete shallowClone.discounted
           return shallowClone
         })
@@ -267,11 +270,11 @@ function _buildVariantPricesAction(
       } else if (Object.keys(price).length) {
         // Remove the discounted field and make sure that the price
         // still has other values, otherwise simply return
-        const filteredPrice = Object.assign({}, price)
+        const filteredPrice = { ...price }
         delete filteredPrice.discounted
         if (Object.keys(filteredPrice).length) {
           // At this point price should have changed, simply pick the new one
-          const newPrice = Object.assign({}, newObj)
+          const newPrice = { ...newObj }
           delete newPrice.discounted
 
           changePriceActions.push({

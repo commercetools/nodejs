@@ -18,7 +18,7 @@ export default class DeliveriesParser extends AbstractParser {
         this.logger.error(err)
         return output.emit('error', err)
       })
-      .flatMap(data => highland(DeliveriesParser._cleanOrders(data)))
+      .flatMap(data => data |> DeliveriesParser._cleanOrders |> highland)
       .pipe(JSONStream.stringify(false))
       .pipe(output)
   }
