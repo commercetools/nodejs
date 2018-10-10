@@ -7,7 +7,7 @@ import type {
   AuthRequest,
   UserAuthOptions,
 } from 'types/sdk'
-import nodeFetch from 'node-fetch'
+import isomorphicFetch from 'isomorphic-fetch'
 import { getErrorByCode } from '@commercetools/sdk-middleware-http'
 import * as authScopes from './scopes'
 
@@ -49,7 +49,7 @@ export default class SdkAuth {
   }
 
   static _getFetcher(configFetch: ?ConfigFetch): ConfigFetch {
-    return configFetch || global.fetch || nodeFetch
+    return configFetch || global.fetch || isomorphicFetch
   }
 
   static _checkRequiredConfiguration(config: AuthMiddlewareOptions) {
