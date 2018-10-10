@@ -66,8 +66,13 @@ export default class CategoryExporter {
             return Promise.reject(
               new Error(`Request returned error ${payload.statusCode}`)
             )
-          const results = JSON.stringify(payload.body.results)
-          outputStream.write(results)
+          const results = payload.body.results
+          const JSONResults = JSON.stringify(results)
+          outputStream.write(JSONResults)
+          this.logger.info(
+            `Successfully exported ${results.length} %s`,
+            results.length > 1 ? 'categories' : 'category'
+          )
           return Promise.resolve()
         },
         { accumulate: false }
@@ -77,7 +82,7 @@ export default class CategoryExporter {
         if (outputStream !== process.stdout) outputStream.end()
       })
       .catch((error: Error) => {
-        this.logger.info('Export operation unsuccessful')
+        this.logger.debug(error)
         outputStream.emit('error', error)
       })
   }
