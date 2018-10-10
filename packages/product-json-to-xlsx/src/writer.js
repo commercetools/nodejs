@@ -29,7 +29,7 @@ export function writeToSingleXlsxFile(
   productStream
     .each(product => {
       const row = mapValues(mappedHeaders, product)
-      if (row.join('') !== '') excel.writeRow(row)
+      if (row.join('')) excel.writeRow(row)
     })
     .done(() => {
       // finish workbook and close the stream
