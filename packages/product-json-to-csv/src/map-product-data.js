@@ -201,11 +201,7 @@ export default class ProductMapping {
       ${price.country ? `${price.country}-` : ''}
       ${price.value.currencyCode} ${price.value.centAmount}
       ${price.discounted ? `|${price.discounted.value.centAmount}` : ''}
-      ${
-        price.customerGroup && price.customerGroup.name
-          ? ` ${price.customerGroup.name}`
-          : ''
-      }
+      ${`${price.customerGroup?.name ?? ''}`}
       ${price.channel && price.channel.key ? `#${price.channel.key}` : ''}
       ${price.validFrom ? `$${price.validFrom}` : ''}
       ${price.validUntil ? `~${price.validUntil}` : ''}
