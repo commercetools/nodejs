@@ -78,7 +78,7 @@ export default class SdkAuth {
 
   static _buildRequest(
     config: AuthMiddlewareOptions,
-    oauthUri: string = '/oauth/token',
+    oauthUri: string,
     grantType: string = 'client_credentials'
   ): AuthRequest {
     const { projectKey, credentials, host } = config

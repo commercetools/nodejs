@@ -211,4 +211,59 @@ describe('Common processes', () => {
       })
     })
   })
+
+  describe('_checkRequiredConfiguration', () => {
+    test('should check presence of a configuration object', () => {
+      expect(Auth._checkRequiredConfiguration).toThrow(
+        'Missing required options'
+      )
+    })
+
+    test('should validate host property', () => {
+      const options = { ...config }
+      delete options.host
+      expect(() => Auth._checkRequiredConfiguration(options)).toThrow(
+        'Missing required option (host)'
+      )
+    })
+
+    test('should validate projectKey property', () => {
+      const options = { ...config }
+      delete options.projectKey
+      expect(() => Auth._checkRequiredConfiguration(options)).toThrow(
+        'Missing required option (projectKey)'
+      )
+    })
+
+    test('should validate credentials property', () => {
+      const options = { ...config }
+      delete options.credentials
+      expect(() => Auth._checkRequiredConfiguration(options)).toThrow(
+        'Missing required option (credentials)'
+      )
+    })
+
+    test('should validate credentials.clientId property', () => {
+      const options = { ...config }
+      options.credentials = { clientSecret: '123' } // clientId is missing
+      expect(() => Auth._checkRequiredConfiguration(options)).toThrow(
+        'Missing required credentials (clientId, clientSecret)'
+      )
+    })
+
+    test('should validate credentials.clientSecret property', () => {
+      const options = { ...config }
+      options.credentials = { clientId: '123' } // clientSecret is missing
+      expect(() => Auth._checkRequiredConfiguration(options)).toThrow(
+        'Missing required credentials (clientId, clientSecret)'
+      )
+    })
+  })
+
+  describe('_getFetcher', () => {
+    test('should return a default fetcher', () => {
+      const fetcher = auth._process({})
+      expect(typeof fetcher).toBe('object')
+    })
+  })
 })
