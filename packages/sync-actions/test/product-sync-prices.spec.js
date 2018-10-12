@@ -534,4 +534,212 @@ describe('Actions', () => {
       ])
     })
   })
+
+  describe('without `country`', () => {
+    let actions
+    const before = {
+      id: '81400c95-1de9-4431-9abd-a3eb8e0884d5',
+      version: 1,
+      productType: {
+        typeId: 'product-type',
+        id: 'c538376f-b565-4cb7-ac29-49b88b7f2acf',
+      },
+      name: {
+        de: 'abcd',
+      },
+      description: {
+        de: 'abcd',
+      },
+      categories: [],
+      categoryOrderHints: {},
+      slug: {
+        de: 'abcd',
+      },
+      masterVariant: {
+        id: 1,
+        sku: '4260231761989',
+        prices: [
+          {
+            value: {
+              type: 'centPrecision',
+              currencyCode: 'EUR',
+              centAmount: 8995,
+              fractionDigits: 2,
+            },
+            id: '7960b455-ab04-4722-a8b2-431460d60012',
+            custom: {
+              type: {
+                typeId: 'type',
+                id: 'aada6bfb-2df1-4877-90f3-6efae0fbefa8',
+              },
+              fields: {
+                promotionDiscountType: 'VerlaengerungHZArtikel',
+                promotionValidToExclusive: '2018-09-30T23:59:35.570Z',
+                promotionValidFromInclusive: '2018-09-24T00:00:35.570Z',
+                promotionRegularPrice: 9995,
+              },
+            },
+          },
+        ],
+      },
+      variants: [
+        {
+          id: 2,
+          sku: '4260231761996',
+          prices: [
+            {
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 8995,
+                fractionDigits: 2,
+              },
+              id: '38a9667a-976d-4bcc-8d2a-b04701e41f18',
+              custom: {
+                type: {
+                  typeId: 'type',
+                  id: 'aada6bfb-2df1-4877-90f3-6efae0fbefa8',
+                },
+                fields: {
+                  promotionDiscountType: 'VerlaengerungHZArtikel',
+                  promotionValidToExclusive: '2018-09-30T23:59:35.570Z',
+                  promotionValidFromInclusive: '2018-09-24T00:00:35.570Z',
+                  promotionRegularPrice: 9995,
+                },
+              },
+            },
+          ],
+        },
+        {
+          id: 3,
+          sku: '4260231762009',
+          prices: [
+            {
+              value: {
+                type: 'centPrecision',
+                currencyCode: 'EUR',
+                centAmount: 8995,
+                fractionDigits: 2,
+              },
+              id: '44711dac-727d-4386-8b15-13a8a4ad1335',
+              custom: {
+                type: {
+                  typeId: 'type',
+                  id: 'aada6bfb-2df1-4877-90f3-6efae0fbefa8',
+                },
+                fields: {
+                  promotionDiscountType: 'VerlaengerungHZArtikel',
+                  promotionValidToExclusive: '2018-09-30T23:59:35.570Z',
+                  promotionValidFromInclusive: '2018-09-24T00:00:35.570Z',
+                  promotionRegularPrice: 9995,
+                },
+              },
+            },
+          ],
+        },
+      ],
+    }
+
+    const now = {
+      id: '81400c95-1de9-4431-9abd-a3eb8e0884d5',
+      version: 1,
+      productType: {
+        typeId: 'product-type',
+        id: 'c538376f-b565-4cb7-ac29-49b88b7f2acf',
+      },
+      name: {
+        de: 'abcd',
+      },
+      description: {
+        de: 'abcd',
+      },
+      categories: [],
+      categoryOrderHints: {},
+      slug: {
+        de: 'abcd',
+      },
+      masterVariant: {
+        id: 1,
+        sku: '4260231761989',
+        prices: [
+          {
+            value: {
+              centAmount: 6495,
+              currencyCode: 'EUR',
+            },
+            custom: {
+              type: {
+                id: 'aada6bfb-2df1-4877-90f3-6efae0fbefa8',
+              },
+              fields: {
+                promotionDiscountType: 'Tiefpreis',
+                promotionRegularPrice: 8995,
+                promotionValidToExclusive: 'SKU-4260231761989',
+                promotionValidFromInclusive: '2018-10-02T00:00:35.570Z',
+              },
+            },
+          },
+        ],
+      },
+      variants: [
+        {
+          id: 2,
+          sku: '4260231761996',
+          prices: [
+            {
+              value: {
+                centAmount: 8995,
+                currencyCode: 'EUR',
+              },
+              custom: {
+                type: {
+                  id: 'aada6bfb-2df1-4877-90f3-6efae0fbefa8',
+                },
+                fields: {
+                  promotionDiscountType: 'Tiefpreis',
+                  promotionRegularPrice: 9995,
+                  promotionValidToExclusive: 'SKU-4260231761996',
+                  promotionValidFromInclusive: '2018-10-02T00:00:35.570Z',
+                },
+              },
+            },
+          ],
+        },
+        {
+          id: 3,
+          sku: '4260231762009',
+          prices: [
+            {
+              value: {
+                centAmount: 8995,
+                currencyCode: 'EUR',
+              },
+              custom: {
+                type: {
+                  id: 'aada6bfb-2df1-4877-90f3-6efae0fbefa8',
+                },
+                fields: {
+                  promotionDiscountType: 'Tiefpreis',
+                  promotionRegularPrice: 9995,
+                  promotionValidToExclusive: 'SKU-4260231762009',
+                  promotionValidFromInclusive: '2018-10-02T00:00:35.570Z',
+                },
+              },
+            },
+          ],
+        },
+      ],
+    }
+
+    beforeEach(() => {
+      actions = productsSync.buildActions(now, before)
+    })
+
+    test('should sync when optional fields are different', () => {
+      const actionNames = actions.map(action => action.action)
+
+      expect(actions).toHaveLength(3)
+      expect(actionNames).toEqual(['changePrice', 'changePrice', 'changePrice'])
+    })
+  })
 })
