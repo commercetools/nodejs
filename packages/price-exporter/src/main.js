@@ -207,7 +207,7 @@ export default class PriceExporter {
     if (!price.custom) return {}
 
     if (this.config.exportFormat === 'json') {
-      const modPrice = Object.assign({}, price)
+      const modPrice = { ...price }
       delete modPrice.custom.type.typeId
       return { custom: modPrice.custom }
     }

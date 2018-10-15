@@ -1,10 +1,10 @@
 node6Environment: &node6Environment
   docker:
-    - image: circleci/node:6@sha256:573c797807706c897172d541b90a1d67ca3f312a514df3eeef0bb5cf44f3e05c
+    - image: circleci/node:6@sha256:5f849851ea550ca089c78a097d94da2455887f350605689680f3ba8a6f85ff0e
   working_directory: ~/nodejs
 node8Environment: &node8Environment
   docker:
-    - image: circleci/node:8@sha256:dc2c2da84421fcd1d0e31a1feb156a886309e631638314e30b7da97f76eaff37
+    - image: circleci/node:8@sha256:f1cfa7965a5c49afe910ffc4fd75ce76ff5526ba167ef3424ceb435faa84fcee
   working_directory: ~/nodejs
 
 aliases:
@@ -44,7 +44,9 @@ jobs:
       - save_cache: *save_yarn_cache
       - run:
           name: Linting
-          command: yarn lint
+          # Limiting the workers of Jest to 10
+          # as the build otherwise dies due to resouce restrictions.
+          command: yarn lint --maxWorkers=10
   test_unit_node_6:
     <<: *node6Environment
     steps:
