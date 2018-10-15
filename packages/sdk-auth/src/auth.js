@@ -31,7 +31,8 @@ export default class SdkAuth {
    *   },
    *   "scopes": [
    *     "view_products:{project-key}"
-   *   ]
+   *   ],
+   *   "fetch": function // implementation of a fetch method
    * }
    * @param config
    */

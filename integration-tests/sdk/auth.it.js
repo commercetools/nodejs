@@ -175,7 +175,7 @@ describe('Auth Flows', () => {
   })
 
   describe('Error cases', () => {
-    it('should send an invalid customer credentials', async () => {
+    it('should throw invalid customer account credentials error', async () => {
       try {
         await authClient.passwordFlow({
           username: 'invalidUsername',
@@ -201,7 +201,7 @@ describe('Auth Flows', () => {
       }
     })
 
-    it('should send an invalid client credentials', async () => {
+    it('should throw invalid client credentials error', async () => {
       const _apiConfig = {
         ...apiConfig,
         credentials: {
@@ -233,7 +233,7 @@ describe('Auth Flows', () => {
       }
     })
 
-    it('should send an invalid scope', async () => {
+    it('should throw invalid scope error', async () => {
       const _apiConfig = {
         ...apiConfig,
         scopes: ['invalid_scope']
