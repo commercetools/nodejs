@@ -11,7 +11,7 @@ describe('CategoryExporter', () => {
   beforeAll(() => {
     categoryExport = new CategoryExporter({
       apiConfig: {
-        projectKey: 'category-export-int-test',
+        projectKey: 'my-test-project',
       },
       logger,
     })
@@ -24,7 +24,7 @@ describe('CategoryExporter', () => {
 
     test('should set default properties', () => {
       expect(categoryExport.apiConfig).toEqual({
-        projectKey: 'category-export-int-test',
+        projectKey: 'my-test-project',
       })
       expect(categoryExport.logger).toEqual(logger)
     })
@@ -118,7 +118,7 @@ describe('CategoryExporter', () => {
       test('should build default uri', () => {
         const request = categoryExport.buildURI()
         expect(request).toBeDefined()
-        expect(request).toBe('/category-export-int-test/categories')
+        expect(request).toBe('/my-test-project/categories')
       })
     })
 
@@ -127,7 +127,7 @@ describe('CategoryExporter', () => {
       beforeAll(() => {
         categoryExportWithPredicate = new CategoryExporter({
           apiConfig: {
-            projectKey: 'category-export-int-test',
+            projectKey: 'my-test-project',
           },
           predicate: { id: 'fooKey' },
         })
@@ -136,7 +136,7 @@ describe('CategoryExporter', () => {
         const requestWithPredicate = categoryExportWithPredicate.buildURI()
         expect(requestWithPredicate).toBeDefined()
         expect(requestWithPredicate).toBe(
-          '/category-export-int-test/categories?where=%5Bobject%20Object%5D'
+          '/my-test-project/categories?where=%5Bobject%20Object%5D'
         )
       })
     })

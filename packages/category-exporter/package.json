@@ -1,6 +1,9 @@
 {
     "name": "@commercetools/category-exporter",
-    "version": "0.0.1",
+    "version": "0.0.1-dev",
+    "publishConfig": {
+        "access": "public"
+    },
     "description": "Export categories from the commercetools platform",
     "main": "lib/main.js",
     "bin": {
