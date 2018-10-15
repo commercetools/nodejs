@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Category Exporter CLI basic functionality should print usage information given the help flag 1`] = `
+"
+Usage: category-exporter [options]
+Export categories from the commercetools platform
+
+Options:
+  --help            Show help                                          [boolean]
+  --version         Show version number                                [boolean]
+  --output, -o      Path to output file.                     [default: \\"stdout\\"]
+  --apiUrl          The host URL of the HTTP API service.
+                                              [default: \\"https://api.sphere.io\\"]
+  --authUrl         The host URL of the OAuth API service.
+                                             [default: \\"https://auth.sphere.io\\"]
+  --accessToken     CTP client access token.
+  --projectKey, -p  API project key.                                  [required]
+  --where, -w       Specify where predicate.
+  --logLevel        Logging level: error, warn, info or debug. [default: \\"info\\"]
+  --prettyLogs      Pretty print logs to the terminal                  [boolean]
+  --logFile         Path to where to save logs file.
+                                     [string] [default: \\"category-exporter.log\\"]
+"
+`;
