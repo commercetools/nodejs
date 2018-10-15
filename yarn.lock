@@ -268,7 +268,7 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-syntax-json-strings" "^7.0.0"
 
-"@babel/plugin-proposal-nullish-coalescing-operator@^7.0.0":
+"@babel/plugin-proposal-nullish-coalescing-operator@7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-nullish-coalescing-operator/-/plugin-proposal-nullish-coalescing-operator-7.0.0.tgz#b72ec31adf612d062dc0348316246127a451e45f"
   integrity sha512-QIN3UFo1ul4ruAsjIqK43PeXedo1qY74zeGrODJl1KfCGeMc6qJC4rb5Ylml/smzxibqsDeVZGH+TmWHCldRQQ==
@@ -300,7 +300,7 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-syntax-optional-chaining" "^7.0.0"
 
-"@babel/plugin-proposal-pipeline-operator@^7.0.0":
+"@babel/plugin-proposal-pipeline-operator@7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-pipeline-operator/-/plugin-proposal-pipeline-operator-7.0.0.tgz#ab60169a5c4a598292de59a14f9810d4e47b00b8"
   integrity sha512-MN189PDyTMoor/YFh9dk6HpSZLMGHCXRdAhgmzshwcalbgYh5Mkn7Ib17lOo6fmLwHdyQ4GR4yagizfeR2LwQQ==
@@ -3775,10 +3775,10 @@ eslint-module-utils@^2.2.0:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
-eslint-plugin-flowtype@2.50.3:
-  version "2.50.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.50.3.tgz#61379d6dce1d010370acd6681740fd913d68175f"
-  integrity sha512-X+AoKVOr7Re0ko/yEXyM5SSZ0tazc6ffdIOocp2fFUlWoDt7DV0Bz99mngOkAFLOAWjqRA5jPwqUCbrx13XoxQ==
+eslint-plugin-flowtype@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-3.0.0.tgz#4b72588d8a5a5c836439752fe52e8e0f4b9954df"
+  integrity sha512-84utjHfQeykSyNuhO885pp18yGKYuK2S03EFbhl/BpXR9jk0TABnDP/KhUAqDjjkB43mxK2WZjJesrhnncvR9Q==
   dependencies:
     lodash "^4.17.10"
 
