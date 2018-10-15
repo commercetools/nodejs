@@ -4,7 +4,7 @@ import { getCredentials } from '@commercetools/get-credentials'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createAuthMiddlewareWithExistingToken } from '@commercetools/sdk-middleware-auth'
 import { createClient } from '@commercetools/sdk-client'
-import SdkAuth from '../../packages/sdk-auth'
+import SdkAuth from '@commercetools/sdk-auth'
 import { clearData, createData } from '../cli/helpers/utils'
 
 let projectKey
