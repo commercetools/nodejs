@@ -44,7 +44,9 @@ jobs:
       - save_cache: *save_yarn_cache
       - run:
           name: Linting
-          command: yarn lint
+          # Limiting the workers of Jest to 10
+          # as the build otherwise dies due to resouce restrictions.
+          command: yarn lint --maxWorkers=10
   test_unit_node_6:
     <<: *node6Environment
     steps:
