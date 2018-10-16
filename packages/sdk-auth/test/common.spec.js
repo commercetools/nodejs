@@ -1,7 +1,8 @@
 import nock from 'nock'
+import fetch from 'node-fetch'
 import { getErrorByCode } from '@commercetools/sdk-middleware-http'
 import Auth from '../src/auth'
-import config from './resources/sample-config.json'
+import config from './resources/sample-config'
 
 describe('Common processes', () => {
   const { clientId, clientSecret } = config.credentials
@@ -261,9 +262,15 @@ describe('Common processes', () => {
   })
 
   describe('_getFetcher', () => {
-    test('should return a default fetcher', () => {
-      const fetcher = auth._process({})
-      expect(typeof fetcher).toBe('object')
+    test('should return a provided fetcher', () => {
+      const fetcher = Auth._getFetcher(fetch)
+      expect(typeof fetcher).toBe('function')
+    })
+
+    test('should throw when fetcher is not provided', () => {
+      expect(() => Auth._getFetcher()).toThrowError(
+        '`fetch` is not available. Please pass in `fetch` as an option or have it globally available.'
+      )
     })
   })
 })

@@ -1,4 +1,6 @@
 /* @flow */
+/* global fetch Request Headers */
+
 import type {
   AuthMiddlewareOptions,
   ClientAuthOptions,
@@ -7,7 +9,6 @@ import type {
   AuthRequest,
   UserAuthOptions,
 } from 'types/sdk'
-import isomorphicFetch from 'isomorphic-fetch'
 import { getErrorByCode } from '@commercetools/sdk-middleware-http'
 import * as constants from './constants'
 
@@ -50,7 +51,11 @@ export default class SdkAuth {
   }
 
   static _getFetcher(configFetch: ?ConfigFetch): ConfigFetch {
-    return configFetch || global.fetch || isomorphicFetch
+    if (!configFetch && typeof fetch === 'undefined')
+      throw new Error(
+        '`fetch` is not available. Please pass in `fetch` as an option or have it globally available.'
+      )
+    return configFetch || fetch
   }
 
   static _checkRequiredConfiguration(config: AuthMiddlewareOptions) {

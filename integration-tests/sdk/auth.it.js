@@ -39,6 +39,7 @@ describe('Auth Flows', () => {
         clientId: credentials.clientId,
         clientSecret: credentials.clientSecret,
       },
+      fetch,
     }
 
     await clearData(apiConfig, 'customers')

@@ -1,6 +1,6 @@
 import nock from 'nock'
 import Auth from '../src/auth'
-import config from './resources/sample-config.json'
+import config from './resources/sample-config'
 import response from './resources/sample-response.json'
 
 describe('Refresh Token flow', () => {

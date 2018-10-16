@@ -27,11 +27,13 @@ Creates an auth client to handle authorization against the commercetools platfor
 2.  `projectKey` _(String)_: the key of the project to assign the default scope to
 3.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
 4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
+5.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
 
 #### Usage example
 
 ```js
 import SdkAuth from '@commercetools/sdk-auth'
+import fetch from 'node-fetch'
 
 const authClient = new SdkAuth({
   host: 'https://auth.commercetools.com',
@@ -41,6 +43,7 @@ const authClient = new SdkAuth({
     clientSecret: 'secret',
   },
   scopes: ['view_products:test', 'manage_orders:test'],
+  fetch,
 })
 ```
 
