@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Writer ::writeToSingleCsvFile do not output empty rows 1`] = `
+"id,key,productType
+\\"12345ab-id\\",\\"product-key\\",\\"product-type-1\\"
+\\"75345ab-id\\",\\"product-key-2\\",\\"product-type-2\\"
+\\"another5ab-id\\",\\"product-key\\",\\"product-type-1\\"
+"
+`;
+
 exports[`Writer ::writeToSingleCsvFile write products to a single file with specified delimiter 1`] = `
 "id;key;productType;variantId;sku;images;anotherAddedAttr;article;designer;color
 \\"12345ab-id\\";\\"product-key\\";\\"product-type-1\\";1;\\"A0E200000001YKI\\";\\"image-url1\\";\\"\\";\\"sample 089 WHT\\";;\\"white\\"

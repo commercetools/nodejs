@@ -27,7 +27,10 @@ export function writeToSingleXlsxFile(
   excel.writeHeader(headerNames)
 
   productStream
-    .each(product => excel.writeRow(mapValues(mappedHeaders, product)))
+    .each(product => {
+      const row = mapValues(mappedHeaders, product)
+      if (row.join('')) excel.writeRow(row)
+    })
     .done(() => {
       // finish workbook and close the stream
       excel.finish()
