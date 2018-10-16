@@ -35,7 +35,8 @@ ${description}`
     describe: 'The host URL of the OAuth API service.',
   })
   .option('accessToken', {
-    describe: 'CTP client access token.',
+    describe: `CTP client access token 
+Required scopes: ['view_products', 'manage_products']`,
   })
   .option('projectKey', {
     alias: 'p',
@@ -57,7 +58,6 @@ ${description}`
   .option('logFile', {
     default: 'category-exporter.log',
     describe: 'Path to where to save logs file.',
-    type: 'string',
   }).argv
 
 // instantiate logger
