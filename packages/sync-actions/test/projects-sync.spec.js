@@ -125,6 +125,81 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
+  describe('setShippingRateInputType', () => {
+    describe('given `shippingRateInputType` is of type `CartClassification`', () => {
+      const before = {
+        shippingRateInputType: {
+          type: 'CartClassification',
+          values: [
+            { key: 'Small', label: { en: 'Small', de: 'Klein' } },
+            { key: 'Medium', label: { en: 'Medium', de: 'Mittel' } },
+            { key: 'Heavy', label: { en: 'Heavy', de: 'Schwergut' } },
+          ],
+        },
+      }
+      describe('given a value of `values` changes', () => {
+        const now = {
+          shippingRateInputType: {
+            type: 'CartClassification',
+            values: [
+              { key: 'Small', label: { en: 'Small', de: 'Klein' } },
+              { key: 'Medium', label: { en: 'Medium', de: 'Mittel' } },
+              { key: 'Big', label: { en: 'Big', de: 'Groß' } },
+            ],
+          },
+        }
+
+        test('should build `setShippingRateInputType` action', () => {
+          const actual = projectsSync.buildActions(now, before)
+          const expected = [
+            {
+              action: 'setShippingRateInputType',
+              ...now,
+            },
+          ]
+          expect(actual).toEqual(expected)
+        })
+      })
+      describe('given type changes to `CartValue`', () => {
+        let now = {
+          shippingRateInputType: {
+            type: 'CartValue',
+          },
+        }
+
+        test('should build `setShippingRateInputType` action', () => {
+          const actual = projectsSync.buildActions(now, before)
+          const expected = [
+            {
+              action: 'setShippingRateInputType',
+              ...now,
+            },
+          ]
+          expect(actual).toEqual(expected)
+        })
+
+        describe('given type changes to `CartScore`', () => {
+          now = {
+            shippingRateInputType: {
+              type: 'CartScore',
+            },
+          }
+
+          test('should build `setShippingRateInputType` action', () => {
+            const actual = projectsSync.buildActions(now, before)
+            const expected = [
+              {
+                action: 'setShippingRateInputType',
+                ...now,
+              },
+            ]
+            expect(actual).toEqual(expected)
+          })
+        })
+      })
+    })
+  })
+
   test('should build `changeMessagesConfiguration` action', () => {
     const before = { messagesConfiguration: { type: 'some-config' } }
     const now = { messagesConfiguration: { type: 'some-other-config' } }
@@ -132,19 +207,6 @@ describe('Actions', () => {
     const expected = [
       {
         action: 'changeMessagesConfiguration',
-        ...now,
-      },
-    ]
-    expect(actual).toEqual(expected)
-  })
-
-  test('should build `setShippingRateInputType` action', () => {
-    const before = { shippingRateInputType: { type: 'CartClassification' } }
-    const now = { shippingRateInputType: { type: 'CartValue' } }
-    const actual = projectsSync.buildActions(now, before)
-    const expected = [
-      {
-        action: 'setShippingRateInputType',
         ...now,
       },
     ]
