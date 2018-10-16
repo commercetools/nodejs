@@ -1,6 +1,6 @@
 # Category Exporter
 
-A package which exports [commercetools categories](https://docs.commercetools.com/http-api-projects-category.html) in `JSON` format from the [commercetools platform](https://docs.commercetools.com/).
+A package which exports [commercetools categories](https://docs.commercetools.com/http-api-projects-categories.html) in `JSON` format from the [commercetools platform](https://docs.commercetools.com/).
 
 ## Configuration
 
