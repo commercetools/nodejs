@@ -797,3 +797,46 @@ const actions = sync.buildActions(now, before)
 // outputs:
 // []
 ```
+
+## `createSyncProjects(actionGroups)`
+
+> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _projects_.
+
+#### Arguments
+
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+
+#### Usage example
+
+```js
+import { createSyncProjects } from '@commercetools/sync-actions'
+import { createClient } from '@commercetools/sdk-client'
+
+const syncProjects = createSyncProjects()
+const client = createClient({
+  middlewares: [...],
+})
+
+const before = {
+  id: 'some-project-uuid',
+  name: 'Name 1',
+  currencies: ['EUR', 'Dollar']
+}
+
+const now = {
+  name: 'Name 1',
+  currencies: ['EUR']
+}
+
+const actions = syncProjects.buildActions(now, before)
+const projectsRequests = {
+  url: `/projects/${before.id}`,
+}
+
+
+client.execute(projectsRequests)
+.then(result => ...)
+.catch(error => ...)
+```
