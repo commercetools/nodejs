@@ -456,7 +456,7 @@ describe('::ProductMapping', () => {
         version: 1,
         productType: {
           name: 'resolved-product-type',
-          attributes: [{}],
+          attributes: [],
         },
         name: {
           en: 'Phone cover',
@@ -620,6 +620,41 @@ describe('::ProductMapping', () => {
         hasStagedChanges: false,
       }
       expect(productMapping._mapProduct(sample)).toEqual(expected)
+    })
+
+    test('handle conflicting productType names', () => {
+      const sample = {
+        id: '12345ab-id',
+        key: 'product-key',
+        productType: {
+          name: 'resolved-product-type',
+          attributes: [],
+        },
+        masterVariant: {
+          id: 1,
+          sku: 'A0E200000001YKI',
+          images: [],
+          attributes: [
+            {
+              name: 'productType',
+              value: 'prodTypeattributeValue',
+            },
+            {
+              name: 'normalAttribute',
+              value: 'normalAttrValue',
+            },
+          ],
+        },
+        variants: [],
+      }
+
+      const [mappedVariant] = productMapping.run(sample)
+      expect(mappedVariant.normalAttribute).toEqual('normalAttrValue')
+      expect(mappedVariant.productType).toEqual('resolved-product-type')
+      expect(mappedVariant['attribute.productType']).toEqual(
+        'prodTypeattributeValue'
+      )
+      expect(mappedVariant).toMatchSnapshot('conflictingPropertyNames')
     })
 
     test('converts variant image array to strings', () => {

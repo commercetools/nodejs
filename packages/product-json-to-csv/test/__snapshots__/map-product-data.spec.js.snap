@@ -14,6 +14,19 @@ Object {
 }
 `;
 
+exports[`::ProductMapping ::_mapProduct handle conflicting productType names: conflictingPropertyNames 1`] = `
+Object {
+  "attribute.productType": "prodTypeattributeValue",
+  "id": "12345ab-id",
+  "key": "product-key",
+  "normalAttribute": "normalAttrValue",
+  "productType": "resolved-product-type",
+  "variant.id": 1,
+  "variant.images": "",
+  "variant.sku": "A0E200000001YKI",
+}
+`;
+
 exports[`::ProductMapping ::run should accept a product and map only masterVariants 1`] = `
 Array [
   Object {

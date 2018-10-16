@@ -137,6 +137,18 @@ describe('Writer', () => {
       )
     })
 
+    test('do not output empty rows', done => {
+      const sampleStream = highland(sampleProducts)
+      const headers = ['id', 'key', 'productType']
+      const outputStream = streamTest.toText((error, actual) => {
+        expect(error).toBeFalsy()
+        expect(actual).toMatchSnapshot()
+        done()
+      })
+
+      writer.writeToSingleCsvFile(sampleStream, outputStream, logger, headers)
+    })
+
     test('log success info on csv completion', done => {
       const sampleStream = highland(sampleProducts)
       const headers = []

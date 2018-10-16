@@ -1,5 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Writer ::writeToSingleXlsxFile handle empty rows 1`] = `
+Array [
+  Array [
+    "id",
+    "key",
+    "productType",
+  ],
+  Array [
+    "12345ab-id",
+    "product-key",
+    "product-type-1",
+  ],
+  Array [
+    "75345ab-id",
+    "product-key-2",
+    "product-type-2",
+  ],
+  Array [
+    "another5ab-id",
+    "product-key",
+    "product-type-1",
+  ],
+]
+`;
+
 exports[`Writer ::writeToSingleXlsxFile write products to a single file with specified headers 1`] = `
 Array [
   Array [
