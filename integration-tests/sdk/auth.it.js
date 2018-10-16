@@ -25,7 +25,7 @@ function getApiClient (token) {
 
 describe('Auth Flows', () => {
   const userEmail = `user+date_is/\\${Date.now()}@commercetooler.com`
-  const userPassword = '4^lks*aJ@ETso+/\\HdE1!x0u4q5'
+  const userPassword = 'testing4^lks*aJ@ETso+/\\HdE1!x0u4q5'
   let apiConfig
   let authClient
 

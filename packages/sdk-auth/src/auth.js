@@ -9,7 +9,7 @@ import type {
 } from 'types/sdk'
 import isomorphicFetch from 'isomorphic-fetch'
 import { getErrorByCode } from '@commercetools/sdk-middleware-http'
-import * as authScopes from './scopes'
+import * as constants from './constants'
 
 export default class SdkAuth {
   // Set flowtype annotations
@@ -83,7 +83,7 @@ export default class SdkAuth {
     grantType: string = 'client_credentials'
   ): AuthRequest {
     const { projectKey, credentials, host } = config
-    const defaultScope = `${authScopes.MANAGE_PROJECT}:${projectKey}`
+    const defaultScope = `${constants.MANAGE_PROJECT}:${projectKey}`
     const scope = (config.scopes || [defaultScope]).join(' ')
     const basicAuth = SdkAuth._encodeClientCredentials(credentials)
 
