@@ -153,6 +153,27 @@ describe('Writer', () => {
       writer.writeToSingleXlsxFile(sampleStream, outputStream, logger, headers)
     })
 
+    test('handle empty rows', done => {
+      const sampleStream = highland(sampleProducts)
+      const tempFile = tmp.fileSync({ postfix: '.xlsx', keep: true })
+      const output = tempFile.name
+      const outputStream = fs.createWriteStream(output)
+      const headers = ['id', 'key', 'productType']
+
+      outputStream.on('error', done)
+      outputStream.on('finish', async () => {
+        const { rows } = await analyzeExcelFile(output)
+
+        expect(rows).toHaveLength(4) // header + 3 products
+        expect(rows).toMatchSnapshot()
+
+        tempFile.removeCallback()
+        done()
+      })
+
+      writer.writeToSingleXlsxFile(sampleStream, outputStream, logger, headers)
+    })
+
     test('log success info on xlsx completion', done => {
       const sampleStream = highland(sampleProducts)
       const headers = []
