@@ -62,7 +62,8 @@ export function writeToSingleCsvFile(
         header: false,
         delimiter,
       })
-      output.write(`${csvData}\n`)
+
+      if (!csvData.match(/^,*$/)) output.write(`${csvData}\n`)
     })
     .done(() => {
       if (output !== process.stdout) output.end()

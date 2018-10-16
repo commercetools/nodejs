@@ -35,9 +35,10 @@ function injectMissingPriceIds(nextVariants, previousVariants) {
     if (!prices) return restOfVariant
     const oldVariant = previousVariants.find(
       previousVariant =>
-        previousVariant.id === newVariant.id ||
-        previousVariant.key === newVariant.key ||
-        previousVariant.sku === newVariant.sku
+        (!isNil(previousVariant.id) && previousVariant.id === newVariant.id) ||
+        (!isNil(previousVariant.key) &&
+          previousVariant.key === newVariant.key) ||
+        (!isNil(previousVariant.sku) && previousVariant.sku === newVariant.sku)
     )
 
     return {
