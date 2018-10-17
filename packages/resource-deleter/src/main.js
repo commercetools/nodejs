@@ -55,7 +55,7 @@ export default class ResourceDeleter {
     this.resource = options.resource
   }
 
-  deleteResourceData(): Promise<any> {
+  run(): Promise<any> {
     this.logger.info('Starting to delete fetched resources')
 
     const uri = this.buildUri(this.apiConfig.projectKey, this.predicate)

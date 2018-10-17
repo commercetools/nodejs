@@ -35,7 +35,7 @@ describe('::ResourceDeleter', () => {
     })
   })
 
-  describe('::deleteResourceData', () => {
+  describe('::run', () => {
     let payload
     describe('with status code 200', () => {
       beforeEach(() => {
@@ -54,10 +54,7 @@ describe('::ResourceDeleter', () => {
       })
 
       test('should delete fetched resource', async () => {
-        const data = await resourceDeleter.deleteResourceData(
-          'sample-test-project'
-        )
-
+        const data = await resourceDeleter.run('sample-test-project')
         expect(data).toBeDefined()
         expect(data).toBeTruthy()
         expect(data).toHaveLength(0)
@@ -76,9 +73,7 @@ describe('::ResourceDeleter', () => {
       })
 
       test('should throw internal server error', async () => {
-        const data = await resourceDeleter.deleteResourceData(
-          'sample-test-project'
-        )
+        const data = await resourceDeleter.run('sample-test-project')
 
         expect(data).toBeDefined()
         expect(data).toBeTruthy()
@@ -100,9 +95,9 @@ describe('::ResourceDeleter', () => {
 
       test('should throw internal server error', async () => {
         const request = ResourceDeleter.buildRequest('example.com', 'GET')
-        expect(
-          resourceDeleter.deleteResourceData(request)
-        ).rejects.toThrowError(/Request returned status code 500/)
+        expect(resourceDeleter.run(request)).rejects.toThrowError(
+          /Request returned status code 500/
+        )
       })
     })
   })
