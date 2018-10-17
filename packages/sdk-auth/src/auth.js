@@ -43,9 +43,8 @@ export default class SdkAuth {
     this.config = config
     this.fetcher = SdkAuth._getFetcher(config.fetch)
 
-    const { projectKey } = config
-    this.ANONYMOUS_FLOW_URI = `/oauth/${projectKey}/anonymous/token`
-    this.PASSWORD_FLOW_URI = `/oauth/${projectKey}/customers/token`
+    this.ANONYMOUS_FLOW_URI = `/oauth/${config.projectKey}/anonymous/token`
+    this.PASSWORD_FLOW_URI = `/oauth/${config.projectKey}/customers/token`
     this.BASE_AUTH_FLOW_URI = '/oauth/token'
     this.INTROSPECT_URI = '/oauth/introspect'
   }
@@ -105,12 +104,11 @@ export default class SdkAuth {
   }
 
   static _createResponseError(
-    { message, ...rest }: Object,
+    { message = 'Unexpected non-JSON error response', ...rest }: Object,
     uri: string,
     statusCode: number
   ): HttpErrorType {
-    let errorMessage = message || 'Unexpected non-JSON error response'
-    if (statusCode === 404) errorMessage = `URI not found: ${uri}`
+    const errorMessage = statusCode === 404 ? `URI not found: ${uri}` : message
 
     let ResponseError = getErrorByCode(statusCode)
     if (!ResponseError) ResponseError = getErrorByCode(0)
