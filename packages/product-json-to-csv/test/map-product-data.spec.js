@@ -358,7 +358,7 @@ describe('::ProductMapping', () => {
         ],
         searchKeywords: {},
         hasStagedChanges: false,
-        published: false,
+        published: true,
         taxCategory: {
           name: 'resolved-tax-name',
         },
@@ -498,7 +498,7 @@ describe('::ProductMapping', () => {
           key: 'my-resolved-state',
         },
         hasStagedChanges: false,
-        published: false,
+        published: true,
         taxCategory: {
           name: 'resolved-tax-name',
         },
@@ -527,8 +527,8 @@ describe('::ProductMapping', () => {
           sku: 'A0E200000001YKI',
         },
         state: 'my-resolved-state',
-        hasStagedChanges: false,
-        published: false,
+        hasStagedChanges: 'false',
+        published: 'true',
         taxCategory: 'resolved-tax-name',
         createdAt: '2017-01-06T10:54:51.395Z',
         lastModifiedAt: '2017-01-06T10:54:51.395Z',
@@ -617,7 +617,7 @@ describe('::ProductMapping', () => {
           },
         },
         state: 'my-resolved-state',
-        hasStagedChanges: false,
+        hasStagedChanges: 'false',
       }
       expect(productMapping._mapProduct(sample)).toEqual(expected)
     })
@@ -642,6 +642,10 @@ describe('::ProductMapping', () => {
             {
               name: 'normalAttribute',
               value: 'normalAttrValue',
+            },
+            {
+              name: 'booleanAttribute',
+              value: true,
             },
           ],
         },
