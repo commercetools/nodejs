@@ -2,7 +2,7 @@
 
 exports[`::ProductMapping ::_mapProduct converts variant image array to strings 1`] = `
 Object {
-  "hasStagedChanges": false,
+  "hasStagedChanges": "false",
   "id": "12345ab-id",
   "key": "product-key",
   "state": "my-resolved-state",
@@ -17,6 +17,7 @@ Object {
 exports[`::ProductMapping ::_mapProduct handle conflicting productType names: conflictingPropertyNames 1`] = `
 Object {
   "attribute.productType": "prodTypeattributeValue",
+  "booleanAttribute": "true",
   "id": "12345ab-id",
   "key": "product-key",
   "normalAttribute": "normalAttrValue",
@@ -44,7 +45,7 @@ Array [
     "createdAt": "2017-01-06T10:54:51.395Z",
     "designer": "michaelkors",
     "emptySet": "",
-    "hasStagedChanges": false,
+    "hasStagedChanges": "false",
     "id": "12345ab-id",
     "key": "product-key",
     "lastModifiedAt": "2017-01-06T10:54:51.395Z",
@@ -53,7 +54,7 @@ Array [
     "name.en": "Phone cover",
     "prices": "DE-EUR 6400;IT-EUR 2900",
     "productType": "resolved-product-type",
-    "published": false,
+    "published": "true",
     "reference": "referenceKey",
     "referenceSet": "referenceSetKey;referenceSetKey2",
     "setEnums": "myEnum;myEnum2",
@@ -96,7 +97,7 @@ Array [
     "createdAt": "2017-01-06T10:54:51.395Z",
     "designer": "michaelkors",
     "emptySet": "",
-    "hasStagedChanges": false,
+    "hasStagedChanges": "false",
     "id": "12345ab-id",
     "key": "product-key",
     "lastModifiedAt": "2017-01-06T10:54:51.395Z",
@@ -105,7 +106,7 @@ Array [
     "name.en": "Phone cover",
     "prices": "DE-EUR 6400;IT-EUR 2900",
     "productType": "resolved-product-type",
-    "published": false,
+    "published": "true",
     "reference": "referenceKey",
     "referenceSet": "referenceSetKey;referenceSetKey2",
     "setEnums": "myEnum;myEnum2",
