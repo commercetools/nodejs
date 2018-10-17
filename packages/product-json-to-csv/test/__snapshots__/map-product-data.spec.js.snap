@@ -17,6 +17,7 @@ Object {
 exports[`::ProductMapping ::_mapProduct handle conflicting productType names: conflictingPropertyNames 1`] = `
 Object {
   "attribute.productType": "prodTypeattributeValue",
+  "booleanAttribute": "true",
   "id": "12345ab-id",
   "key": "product-key",
   "normalAttribute": "normalAttrValue",

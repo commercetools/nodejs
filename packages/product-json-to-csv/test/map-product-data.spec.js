@@ -643,6 +643,10 @@ describe('::ProductMapping', () => {
               name: 'normalAttribute',
               value: 'normalAttrValue',
             },
+            {
+              name: 'booleanAttribute',
+              value: true,
+            },
           ],
         },
         variants: [],
