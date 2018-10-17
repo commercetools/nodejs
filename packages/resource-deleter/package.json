@@ -1,0 +1,34 @@
+{
+    "name": "@commercetools/category-exporter",
+    "version": "0.0.1-dev",
+    "description": "Delete resources from the commercetools platform",
+    "main": "lib/main.js",
+    "bin": {
+        "category-exporter": "bin/resource-deleter.js"
+    },
+    "scripts": {
+        "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/commercetools/nodejs/tree/master/packages/resource-deleter"
+    },
+    "homepage": "https://commercetools.github.io/nodejs/cli/resource-deleter.html",
+    "bugs": "https://github.com/commercetools/nodejs/issues",
+    "keywords": [
+        "commercetools",
+        "resource",
+        "resources",
+        "delete",
+        "json"
+    ],
+    "author": {
+        "name": "Babajide Williams",
+        "email": "babajide.williams@commercetools.de"
+    },
+    "license": "MIT",
+    "dependencies": {    
+    },
+    "devDependencies": {
+    }
+}
