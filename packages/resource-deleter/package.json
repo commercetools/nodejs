@@ -1,10 +1,10 @@
 {
-    "name": "@commercetools/category-exporter",
+    "name": "@commercetools/resource-deleter",
     "version": "0.0.1-dev",
     "description": "Delete resources from the commercetools platform",
     "main": "lib/main.js",
     "bin": {
-        "category-exporter": "bin/resource-deleter.js"
+        "resource-deleter": "bin/resource-deleter.js"
     },
     "scripts": {
         "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
