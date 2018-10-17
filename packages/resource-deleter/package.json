@@ -27,8 +27,13 @@
         "email": "babajide.williams@commercetools.de"
     },
     "license": "MIT",
-    "dependencies": {    
+    "dependencies": {
+        "@commercetools/api-request-builder": "4.0.2",
+        "@commercetools/sdk-client": "1.5.8",
+        "@commercetools/sdk-middleware-auth": "4.0.7",
+        "@commercetools/sdk-middleware-http": "4.0.5",
+        "@commercetools/sdk-middleware-user-agent": "1.2.10",
+        "node-fetch": "2.2.0"
     },
-    "devDependencies": {
-    }
+    "devDependencies": {}
 }
