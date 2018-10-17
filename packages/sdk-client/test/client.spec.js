@@ -1,6 +1,13 @@
 import qs from 'querystring'
 import { createClient } from '../src'
 
+const createPayloadResult = (tot, startingId = 0) => ({
+  count: tot,
+  results: Array.from(Array(tot), (val, index) => ({
+    id: String(index + 1 + startingId),
+  })),
+})
+
 describe('validate options', () => {
   test('middlewares (required)', () => {
     expect(() => createClient()).toThrowError('Missing required options')
@@ -208,11 +215,6 @@ describe('process', () => {
   })
 
   test('process and resolve paginating 3 times', () => {
-    const createPayloadResult = tot => ({
-      results: Array.from(Array(tot), (val, index) => ({
-        id: String(index + 1),
-      })),
-    })
     let reqCount = 0
     const reqStubs = {
       0: {
@@ -265,11 +267,6 @@ describe('process', () => {
   })
 
   test('return only the required number of items', () => {
-    const createPayloadResult = tot => ({
-      results: Array.from(Array(tot), (val, index) => ({
-        id: String(index + 1),
-      })),
-    })
     let reqCount = 0
     const reqStubs = {
       0: {
@@ -322,11 +319,6 @@ describe('process', () => {
   })
 
   test('process and resolve pagination by preserving original query', () => {
-    const createPayloadResult = tot => ({
-      results: Array.from(Array(tot), (val, index) => ({
-        id: String(index + 1),
-      })),
-    })
     let reqCount = 0
     const reqStubs = {
       0: {
@@ -374,6 +366,79 @@ describe('process', () => {
       },
       () => Promise.resolve('OK')
     )
+  })
+
+  test('process should not call fn when last page is empty', async () => {
+    let reqCount = 0
+    const reqStubs = {
+      0: {
+        body: createPayloadResult(5),
+        query: {
+          sort: ['id asc', 'createdAt desc'],
+          withTotal: 'false',
+          where: 'name (en = "Foo")',
+          limit: '5',
+        },
+      },
+      1: {
+        body: createPayloadResult(5, 5),
+        query: {
+          sort: ['id asc', 'createdAt desc'],
+          withTotal: 'false',
+          where: ['id > "5"', 'name (en = "Foo")'],
+          limit: '5',
+        },
+      },
+      2: {
+        body: createPayloadResult(0),
+        query: {
+          sort: ['id asc', 'createdAt desc'],
+          withTotal: 'false',
+          where: ['id > "10"', 'name (en = "Foo")'],
+          limit: '5',
+        },
+      },
+    }
+
+    const client = createClient({
+      middlewares: [
+        next => (req, res) => {
+          const body = reqStubs[reqCount].body
+          expect(qs.parse(req.uri.split('?')[1])).toEqual(
+            reqStubs[reqCount].query
+          )
+
+          reqCount += 1
+          next(req, { ...res, body, statusCode: 200 })
+        },
+      ],
+    })
+
+    let fnCall = 0
+    const processRes = await client.process(
+      {
+        ...request,
+        uri: `${request.uri}?${qs.stringify({
+          sort: 'createdAt desc',
+          where: 'name (en = "Foo")',
+          limit: 5,
+        })}`,
+      },
+      res => {
+        expect(res.body.results).toEqual(reqStubs[fnCall].body.results)
+        expect(fnCall).toBeLessThan(2) // should not call fn if the last page is empty
+
+        fnCall += 1
+
+        return `OK${fnCall}`
+      },
+      {
+        accumulate: true,
+      }
+    )
+
+    expect(processRes).toEqual(['OK1', 'OK2']) // results from fn calls
+    expect(fnCall).toBe(2) // fn was called two times
   })
 
   test('process and reject a request', () => {
