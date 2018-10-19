@@ -78,7 +78,7 @@ describe('CategoryExporter', () => {
           .mockReturnValue(Promise.resolve(results))
       })
 
-      test('should write to outputStream', done => {
+      test('should throw error', done => {
         const outputStream = streamtest.v2.toText((error, data) => {
           expect(error).toBeTruthy()
           expect(data).toBeFalsy()
@@ -102,7 +102,7 @@ describe('CategoryExporter', () => {
           .mockReturnValue(Promise.resolve(results))
       })
 
-      test('should write to outputStream', done => {
+      test('should throw error', done => {
         const outputStream = streamtest.v2.toText((error, data) => {
           expect(error).toBeTruthy()
           expect(data).toBeFalsy()
@@ -113,7 +113,7 @@ describe('CategoryExporter', () => {
     })
   })
 
-  describe('::buildURI', () => {
+  describe('::build uri', () => {
     describe('without predicate', () => {
       test('should build default uri', () => {
         const request = categoryExport.buildURI()

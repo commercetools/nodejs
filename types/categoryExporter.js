@@ -25,6 +25,4 @@ export type CategoryExporterOptions = {
   accessToken?: string,
   predicate?: string,
   logger?: LoggerOptions,
-  batchSize?: number,
-  continueOnProblems?: boolean,
 }

@@ -58,6 +58,9 @@ export default class CategoryExporter {
 
   run(outputStream: stream$Writable): Promise<any> {
     this.logger.info('Starting Category Export')
+    // Open up the array
+    outputStream.write('[')
+    let hasFirstPageBeenProcessed = false
     return this.client
       .process(
         { uri: this.buildURI(), method: 'GET' },
@@ -67,7 +70,11 @@ export default class CategoryExporter {
               new Error(`Request returned error ${payload.statusCode}`)
             )
           const results = payload.body.results
-          const JSONResults = JSON.stringify(results)
+          const JSONResults = JSON.stringify(...results)
+
+          if (hasFirstPageBeenProcessed) outputStream.write(',')
+          else hasFirstPageBeenProcessed = true
+
           outputStream.write(JSONResults)
           this.logger.info(
             `Successfully exported ${results.length} %s`,
@@ -78,6 +85,8 @@ export default class CategoryExporter {
         { accumulate: false }
       )
       .then(() => {
+        // Close the array
+        outputStream.write(']')
         this.logger.info('Export operation completed successfully')
         if (outputStream !== process.stdout) outputStream.end()
       })
