@@ -43,7 +43,7 @@ describe('CategoryExporter', () => {
         payload = {
           statusCode: 200,
           body: {
-            results: [{ id: 'id1', name: 'foo' }, { id: 'id2', name: 'bar' }],
+            results: [{ id: 'id1', name: 'foo' }],
           },
         }
         categoryExport.client.execute = jest
