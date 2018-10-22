@@ -3,6 +3,7 @@
   "name": "@commercetools/integration-tests",
   "version": "1.0.0",
   "dependencies": {
+    "@commercetools/sdk-auth": "*",
     "@commercetools/api-request-builder": "*",
     "@commercetools/csv-parser-discount-code": "*",
     "@commercetools/csv-parser-orders": "*",
