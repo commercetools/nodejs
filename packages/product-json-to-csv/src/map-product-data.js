@@ -298,7 +298,7 @@ export default class ProductMapping {
       // BOOLEAN attribute
       mappedAttribute[name] = ProductMapping._mapBooleanToString(value)
     }
-    // PLAIN attribute: boolean, string, number
+    // PLAIN attribute: string, number
     else mappedAttribute[name] = value
 
     return mappedAttribute
