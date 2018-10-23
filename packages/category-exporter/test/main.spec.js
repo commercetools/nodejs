@@ -56,7 +56,6 @@ describe('CategoryExporter', () => {
 
       test('should write to outputStream', done => {
         const outputStream = streamtest.v2.toText((error, data) => {
-          console.log('object')
           expect(error).toBeFalsy()
           expect(data).toEqual(JSON.stringify(payload.body.results))
           done()
