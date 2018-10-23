@@ -26,6 +26,7 @@ function getApiClient (token) {
 describe('Auth Flows', () => {
   const userEmail = `user+date_is/\\${Date.now()}@commercetooler.com`
   const userPassword = 'testing4^lks*aJ@ETso+/\\HdE1!x0u4q5'
+  const customerPredicate = `email="${encodeURIComponent(userEmail)}"`
   let apiConfig
   let authClient
 
@@ -52,7 +53,7 @@ describe('Auth Flows', () => {
   }, 5000)
 
   afterAll(async () => {
-    await clearData(apiConfig, 'customers')
+    await clearData(apiConfig, 'customers', customerPredicate)
   })
 
   beforeEach(() => {
@@ -75,7 +76,7 @@ describe('Auth Flows', () => {
       const client = getApiClient(`${tokenInfo.token_type} ${tokenInfo.access_token}`)
       const response = await client
         .execute({
-          uri: `/${projectKey}/customers`,
+          uri: `/${projectKey}/customers?where=${customerPredicate}`,
           method: 'GET',
         })
 
@@ -124,7 +125,7 @@ describe('Auth Flows', () => {
       const client = getApiClient(`${tokenInfo.token_type} ${tokenInfo.access_token}`)
       const response = await client
         .execute({
-          uri: `/${projectKey}/customers`,
+          uri: `/${projectKey}/customers?where=${customerPredicate}`,
           method: 'GET',
         })
 

@@ -4,8 +4,8 @@ import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import fetch from 'node-fetch'
 
-export function clearData(apiConfig, entityName) {
-  const client = createClient({
+export function clearData(apiConfig, entityName, predicate = null) {
+  let client = createClient({
     middlewares: [
       createAuthMiddlewareForClientCredentialsFlow({ ...apiConfig, fetch }),
       createHttpMiddleware({ host: apiConfig.apiUrl, fetch }),
@@ -20,6 +20,10 @@ export function clearData(apiConfig, entityName) {
     uri: service.build(),
     method: 'GET',
   }
+
+  if (predicate)
+    client = client.where(predicate)
+
   return client.process(request, payload => {
     // Built-in states cannot be deleted
     const results =

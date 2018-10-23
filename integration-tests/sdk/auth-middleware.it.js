@@ -44,8 +44,9 @@ describe('Auth Middleware Flows', () => {
     10000
   )
 
-  afterAll(() => {
-    clearData(apiConfig, 'customers').then(() => clearData(apiConfig, 'carts'))
+  afterAll(async () => {
+    await clearData(apiConfig, 'customers', `email="${userEmail}"`)
+    await clearData(apiConfig, 'carts')
   })
 
   describe('Password Session Flow', () => {
