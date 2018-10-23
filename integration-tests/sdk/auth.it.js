@@ -49,7 +49,7 @@ describe('Auth Flows', () => {
         password: userPassword,
       },
     ])
-  }, 10000)
+  }, 5000)
 
   afterAll(async () => {
     await clearData(apiConfig, 'customers')
