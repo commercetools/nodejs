@@ -43,7 +43,7 @@ describe('Auth Flows', () => {
       fetch,
     }
 
-    await clearData(apiConfig, 'customers')
+    await clearData(apiConfig, 'customers', customerPredicate)
     await createData(apiConfig, 'customers', [
       {
         email: userEmail,

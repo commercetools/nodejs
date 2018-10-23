@@ -17,6 +17,7 @@ describe('Auth Middleware Flows', () => {
   let apiConfig
   const userEmail = `user+date_is/\\${Date.now()}@commercetooler.com`
   const userPassword = '4^lks*aJ@ETso+/\\HdE1!x0u4q5'
+  const customerPredicate = `email="${encodeURIComponent(userEmail)}"`
   beforeAll(
     () =>
       getCredentials(projectKey)
@@ -31,7 +32,7 @@ describe('Auth Middleware Flows', () => {
             },
           }
         })
-        .then(() => clearData(apiConfig, 'customers'))
+        .then(() => clearData(apiConfig, 'customers', customerPredicate))
         .then(() => clearData(apiConfig, 'carts'))
         .then(() =>
           createData(apiConfig, 'customers', [
@@ -45,7 +46,7 @@ describe('Auth Middleware Flows', () => {
   )
 
   afterAll(async () => {
-    await clearData(apiConfig, 'customers', `email="${userEmail}"`)
+    await clearData(apiConfig, 'customers', customerPredicate)
     await clearData(apiConfig, 'carts')
   })
 
