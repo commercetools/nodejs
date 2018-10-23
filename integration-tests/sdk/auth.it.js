@@ -43,13 +43,11 @@ describe('Auth Flows', () => {
     }
 
     await clearData(apiConfig, 'customers')
-    await Promise.all([
-      createData(apiConfig, 'customers', [
-        {
-          email: userEmail,
-          password: userPassword,
-        },
-      ])
+    await createData(apiConfig, 'customers', [
+      {
+        email: userEmail,
+        password: userPassword,
+      },
     ])
   }, 10000)
 
