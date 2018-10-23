@@ -5,6 +5,7 @@
   "dependencies": {
     "@commercetools/sdk-auth": "*",
     "@commercetools/api-request-builder": "*",
+    "@commercetools/category-exporter": "*",
     "@commercetools/csv-parser-discount-code": "*",
     "@commercetools/csv-parser-orders": "*",
     "@commercetools/csv-parser-price": "*",
