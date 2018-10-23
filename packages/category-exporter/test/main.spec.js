@@ -43,7 +43,7 @@ describe('CategoryExporter', () => {
         payload = {
           statusCode: 200,
           body: {
-            results: [{ id: 'id1', name: 'foo' }],
+            results: [{ id: 'id1', name: 'foo' }, { id: 'id2', name: 'bar' }],
           },
         }
         categoryExport.client.execute = jest
@@ -56,6 +56,7 @@ describe('CategoryExporter', () => {
 
       test('should write to outputStream', done => {
         const outputStream = streamtest.v2.toText((error, data) => {
+          console.log('object')
           expect(error).toBeFalsy()
           expect(data).toEqual(JSON.stringify(payload.body.results))
           done()

@@ -70,8 +70,9 @@ export default class CategoryExporter {
               new Error(`Request returned error ${payload.statusCode}`)
             )
           const results = payload.body.results
-          const JSONResults = JSON.stringify(...results)
-
+          const JSONResults = results
+            .map(result => JSON.stringify(result))
+            .join(',')
           if (hasFirstPageBeenProcessed) outputStream.write(',')
           else hasFirstPageBeenProcessed = true
 
