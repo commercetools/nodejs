@@ -294,8 +294,11 @@ export default class ProductMapping {
     } else if (Array.isArray(value)) {
       // SET attribute
       mappedAttribute = this._mapSetAttribute(name, value)
+    } else if (typeof value === 'boolean') {
+      // BOOLEAN attribute
+      mappedAttribute[name] = ProductMapping._mapBooleanToString(value)
     }
-    // PLAIN attribute: boolean, string, number
+    // PLAIN attribute: string, number
     else mappedAttribute[name] = value
 
     return mappedAttribute
@@ -356,6 +359,8 @@ export default class ProductMapping {
       case 'variant':
         return this._mapVariantProperties(value, product.productType)
       default:
+        if (typeof value === 'boolean')
+          return ProductMapping._mapBooleanToString(value)
         return value
     }
   }
@@ -369,6 +374,10 @@ export default class ProductMapping {
       },
       {}
     )
+  }
+
+  static _mapBooleanToString(value: boolean): string {
+    return value.toString()
   }
 
   static _mapCategories(

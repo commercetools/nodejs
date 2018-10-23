@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/product-json-to-csv",
-  "version": "2.2.4",
+  "version": "2.2.6",
   "description": "Convert commercetools products from JSON to CSV",
   "keywords": [
     "commercetools",
@@ -36,7 +36,7 @@
   "dependencies": {
     "@commercetools/api-request-builder": "4.0.2",
     "@commercetools/get-credentials": "2.1.8",
-    "@commercetools/sdk-client": "1.5.8",
+    "@commercetools/sdk-client": "1.5.9",
     "@commercetools/sdk-middleware-auth": "4.0.7",
     "@commercetools/sdk-middleware-http": "4.0.5",
     "@commercetools/sdk-middleware-user-agent": "1.2.10",

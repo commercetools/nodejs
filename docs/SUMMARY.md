@@ -23,6 +23,7 @@
       - [http-user-agent](/sdk/api/httpUserAgent.md)
       - [sync-actions](/sdk/api/syncActions.md)
 - [CLI](/cli/README.md)
+  - [Category Exporter](/cli/category-exporter.md)
   - [CSV Discount Code Parser](/cli/csv-parser-discount-code.md)
   - [CSV Price Parser](/cli/csv-parser-price.md)
   - [CSV Order Parser](/cli/csv-parser-orders.md)

@@ -107,6 +107,7 @@ export default function createClient(options: ClientOptions): Client {
           ...requestQuery,
         }
 
+        let hasFirstPageBeenProcessed = false
         let itemsToGet = opt.total
         const processPage = (lastId?: string, acc?: Array<any> = []) => {
           // Use the lesser value between limit and itemsToGet in query
@@ -126,9 +127,16 @@ export default function createClient(options: ClientOptions): Client {
 
           this.execute(enhancedRequest)
             .then((payload: SuccessResult) => {
-              fn(payload)
+              const { results, count: resultsLength } = payload.body
+
+              if (!resultsLength && hasFirstPageBeenProcessed) {
+                resolve(acc || [])
+                return
+              }
+
+              Promise.resolve(fn(payload))
                 .then((result: any) => {
-                  const resultsLength = payload.body.results.length
+                  hasFirstPageBeenProcessed = true
                   let accumulated
                   if (opt.accumulate) accumulated = acc.concat(result || [])
 
@@ -144,7 +152,7 @@ export default function createClient(options: ClientOptions): Client {
                     return
                   }
 
-                  const last = payload.body.results[resultsLength - 1]
+                  const last = results[resultsLength - 1]
                   const newLastId = last && last.id
                   processPage(newLastId, accumulated)
                 })

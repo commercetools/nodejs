@@ -1,6 +1,6 @@
 {
     "name": "@commercetools/customer-groups-exporter",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "Export customer groups from the commercetools platform",
     "main": "lib/main.js",
     "bin": {
@@ -32,7 +32,7 @@
     "dependencies": {
         "@commercetools/api-request-builder": "4.0.2",
         "@commercetools/get-credentials": "2.1.8",
-        "@commercetools/sdk-client": "1.5.8",
+        "@commercetools/sdk-client": "1.5.9",
         "@commercetools/sdk-middleware-auth": "4.0.7",
         "@commercetools/sdk-middleware-http": "4.0.5",
         "@commercetools/sdk-middleware-user-agent": "1.2.10",
