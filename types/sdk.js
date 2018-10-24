@@ -20,6 +20,11 @@ export type ClientRequest = {
     [key: string]: string,
   },
 }
+export type AuthRequest = {
+  uri: string,
+  body: string,
+  basicAuth: string,
+}
 export type HttpErrorType = {
   name: string,
   message: string,
@@ -81,6 +86,7 @@ export type ClientOptions = {
   middlewares: Array<Middleware>,
 }
 
+export type ConfigFetch = (url: string, args?: Object) => Promise<any>
 export type AuthMiddlewareOptions = {
   host: string,
   projectKey: string,
@@ -92,7 +98,7 @@ export type AuthMiddlewareOptions = {
   scopes: Array<string>,
   // For internal usage only
   oauthUri: string,
-  fetch?: (url: string, args?: Object) => Promise<any>,
+  fetch?: ConfigFetch,
 }
 
 export type RefreshAuthMiddlewareOptions = {
@@ -147,16 +153,23 @@ export type AuthMiddlewareBaseOptions = requestBaseOptions & {
   fetch?: (url: string, args?: Object) => Promise<any>,
 }
 
+export type UserAuthOptions = {
+  username: string,
+  password: string,
+}
+
+export type ClientAuthOptions = {
+  clientId: string,
+  clientSecret: string,
+}
+
 export type PasswordAuthMiddlewareOptions = {
   host: string,
   projectKey: string,
   credentials: {
     clientId: string,
     clientSecret: string,
-    user: {
-      username: string,
-      password: string,
-    },
+    user: UserAuthOptions,
   },
   scopes: Array<string>,
   // For internal usage only
