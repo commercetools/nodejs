@@ -9,6 +9,7 @@
   - [Glossary](/sdk/Glossary.md)
   - [API Reference](/sdk/api/README.md)
     - [core](/sdk/api/README.md#core)
+      - [sdk-auth](/sdk/api/sdkAuth.md)
       - [sdk-client](/sdk/api/sdkClient.md)
     - [middlewares](/sdk/api/README.md#middlewares)
       - [sdk-middleware-auth](/sdk/api/sdkMiddlewareAuth.md)
