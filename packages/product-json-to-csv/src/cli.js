@@ -104,7 +104,7 @@ Required scopes: ['view_products']`,
     default: 'en',
     describe:
       'Language(s) used for localised attributes such as category names.' +
-      'Can contain multiple languages delimited by comma ","',
+      ' Can contain multiple languages delimited by comma ","',
     type: 'string',
   })
   .option('delimiter', {
