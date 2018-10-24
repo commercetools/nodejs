@@ -74,6 +74,7 @@ export default class ProductJsonToCsv {
       fillAllRows: false,
       onlyMasterVariants: false,
       language: 'en',
+      languages: ['en'],
       multiValueDelimiter: ';',
     }
 
@@ -94,6 +95,7 @@ export default class ProductJsonToCsv {
         'fillAllRows',
         'categoryBy',
         'language',
+        'languages',
         'multiValueDelimiter',
         'onlyMasterVariants',
       ]),

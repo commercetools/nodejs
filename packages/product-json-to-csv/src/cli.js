@@ -102,7 +102,9 @@ Required scopes: ['view_products']`,
   .option('language', {
     alias: 'l',
     default: 'en',
-    describe: 'Language used for localised attributes such as category names.',
+    describe:
+      'Language(s) used for localised attributes such as category names.' +
+      'Can contain multiple languages delimited by comma ","',
     type: 'string',
   })
   .option('delimiter', {
@@ -205,7 +207,8 @@ Promise.all([getHeaders(args), resolveCredentials(args)])
       categoryOrderHintBy: args.referenceCategoryOrderHintBy,
       delimiter: args.delimiter,
       fillAllRows: args.fillAllRows,
-      language: args.language,
+      language: args.language.split(',')[0], // take first language as primary
+      languages: args.language.split(','), // allow export to multiple languages
       multiValueDelimiter: args.multiValueDelimiter,
       onlyMasterVariants: args.onlyMasterVariants,
       headerFields,

@@ -16,7 +16,8 @@ describe('::ProductMapping', () => {
       expect(productMapping.fillAllRows).toBe(false)
       expect(productMapping.onlyMasterVariants).toBe(false)
       expect(productMapping.categoryBy).toBe('name')
-      expect(productMapping.language).toBe('en')
+      expect(productMapping.mainLanguage).toBe('en')
+      expect(productMapping.languages).toEqual(['en'])
       expect(productMapping.multiValDel).toBe(';')
     })
 
@@ -26,13 +27,15 @@ describe('::ProductMapping', () => {
         onlyMasterVariants: true,
         categoryBy: 'namedPath',
         language: 'it',
+        languages: ['en', 'it'],
         multiValueDelimiter: '|',
       }
       productMapping = new ProductMapping(options)
       expect(productMapping.fillAllRows).toBe(true)
       expect(productMapping.onlyMasterVariants).toBe(true)
       expect(productMapping.categoryBy).toBe('namedPath')
-      expect(productMapping.language).toBe('it')
+      expect(productMapping.mainLanguage).toBe('it')
+      expect(productMapping.languages).toEqual(['en', 'it'])
       expect(productMapping.multiValDel).toBe('|')
     })
   })
@@ -374,6 +377,7 @@ describe('::ProductMapping', () => {
     test('should accept a product and map only masterVariants', () => {
       const _productMapping = new ProductMapping({
         onlyMasterVariants: true,
+        languages: ['en', 'fr'],
       })
       const res = _productMapping.run(sample)
       expect(res).toHaveLength(1) // only one variant should be exported
@@ -537,6 +541,10 @@ describe('::ProductMapping', () => {
     })
 
     test('add all attributes from productType to top level', () => {
+      productMapping = new ProductMapping({
+        languages: ['it', 'en', 'de'],
+      })
+
       const sample = {
         id: '12345ab-id',
         key: 'product-key',
@@ -548,6 +556,12 @@ describe('::ProductMapping', () => {
             { name: 'color' },
             {
               name: 'colorFreeDefinition',
+              type: {
+                name: 'ltext',
+              },
+            },
+            {
+              name: 'missingLtextValue',
               type: {
                 name: 'ltext',
               },
@@ -612,6 +626,10 @@ describe('::ProductMapping', () => {
             'color.it': 'blanco',
             'colorFreeDefinition.en': 'black-white',
             'colorFreeDefinition.de': 'schwarz-weiß',
+            'colorFreeDefinition.it': '',
+            'missingLtextValue.en': '',
+            'missingLtextValue.de': '',
+            'missingLtextValue.it': '',
             addedAttr: '',
             anotherAddedAttr: '',
           },
