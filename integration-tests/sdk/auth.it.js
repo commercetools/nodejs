@@ -1,7 +1,7 @@
-import Promise from 'bluebird'
 import fetch from 'node-fetch'
 import { getCredentials } from '@commercetools/get-credentials'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
+import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createAuthMiddlewareWithExistingToken } from '@commercetools/sdk-middleware-auth'
 import { createClient } from '@commercetools/sdk-client'
 import SdkAuth from '@commercetools/sdk-auth'
@@ -24,9 +24,13 @@ function getApiClient (token) {
 }
 
 describe('Auth Flows', () => {
-  const userEmail = `user+date_is/\\${Date.now()}@commercetooler.com`
+  const userEmail = `user+date_is/${Date.now()}@commercetooler.com`
   const userPassword = 'testing4^lks*aJ@ETso+/\\HdE1!x0u4q5'
-  const customerPredicate = `email="${encodeURIComponent(userEmail)}"`
+  const customerPredicate = `email="${userEmail}"`
+  const customerUrl = createRequestBuilder({ projectKey })
+    .customers
+    .where(customerPredicate)
+    .build()
   let apiConfig
   let authClient
 
@@ -76,11 +80,11 @@ describe('Auth Flows', () => {
       const client = getApiClient(`${tokenInfo.token_type} ${tokenInfo.access_token}`)
       const response = await client
         .execute({
-          uri: `/${projectKey}/customers?where=${customerPredicate}`,
+          uri: customerUrl,
           method: 'GET',
         })
 
-        expect(response).toHaveProperty('body.count', 1)
+      expect(response).toHaveProperty('body.count', 1)
     })
   })
 
@@ -125,7 +129,7 @@ describe('Auth Flows', () => {
       const client = getApiClient(`${tokenInfo.token_type} ${tokenInfo.access_token}`)
       const response = await client
         .execute({
-          uri: `/${projectKey}/customers?where=${customerPredicate}`,
+          uri: customerUrl,
           method: 'GET',
         })
 
