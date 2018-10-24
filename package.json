@@ -7,7 +7,7 @@
   },
   "scripts": {
     "postinstall": "check-node-version --package --print && npm run bootstrap && cross-env NODE_ENV=development npm run build",
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap --no-ci",
     "check-updates": "./scripts/check-updates",
     "clean": "rm -rf coverage; lerna exec -- rimraf lib dist",
     "precommit": "lint-staged",
