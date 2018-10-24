@@ -29,6 +29,7 @@ https://commercetools.github.io/nodejs/
 
 | Package                                                            | Version                                                                                                   | Dependencies                                                                                                                            |
 | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| [`sdk-auth`](/packages/sdk-auth)                                   | [![sdk-auth Version][sdk-auth-icon]][sdk-auth-version]                                                    | [![sdk-auth Dependencies Status][sdk-auth-dependencies-icon]][sdk-auth-dependencies]                                                    |
 | [`sdk-client`](/packages/sdk-client)                               | [![sdk-client Version][sdk-client-icon]][sdk-client-version]                                              | [![sdk-client Dependencies Status][sdk-client-dependencies-icon]][sdk-client-dependencies]                                              |
 | [`sdk-middleware-auth`](/packages/sdk-middleware-auth)             | [![sdk-middleware-auth Version][sdk-middleware-auth-icon]][sdk-middleware-auth-version]                   | [![sdk-middleware-auth Dependencies Status][sdk-middleware-auth-dependencies-icon]][sdk-middleware-auth-dependencies]                   |
 | [`sdk-middleware-http`](/packages/sdk-middleware-http)             | [![sdk-middleware-http Version][sdk-middleware-http-icon]][sdk-middleware-http-version]                   | [![sdk-middleware-http Dependencies Status][sdk-middleware-http-dependencies-icon]][sdk-middleware-http-dependencies]                   |
@@ -36,6 +37,10 @@ https://commercetools.github.io/nodejs/
 | [`sdk-middleware-queue`](/packages/sdk-middleware-queue)           | [![sdk-middleware-queue Version][sdk-middleware-queue-icon]][sdk-middleware-queue-version]                | [![sdk-middleware-queue Dependencies Status][sdk-middleware-queue-dependencies-icon]][sdk-middleware-queue-dependencies]                |
 | [`sdk-middleware-user-agent`](/packages/sdk-middleware-user-agent) | [![sdk-middleware-user-agent Version][sdk-middleware-user-agent-icon]][sdk-middleware-user-agent-version] | [![sdk-middleware-user-agent Dependencies Status][sdk-middleware-user-agent-dependencies-icon]][sdk-middleware-user-agent-dependencies] |
 
+[sdk-auth-version]: https://www.npmjs.com/package/@commercetools/sdk-auth
+[sdk-auth-icon]: https://img.shields.io/npm/v/@commercetools/sdk-auth.svg?style=flat-square
+[sdk-auth-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/sdk-auth
+[sdk-auth-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/sdk-auth&style=flat-square
 [sdk-client-version]: https://www.npmjs.com/package/@commercetools/sdk-client
 [sdk-client-icon]: https://img.shields.io/npm/v/@commercetools/sdk-client.svg?style=flat-square
 [sdk-client-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/sdk-client

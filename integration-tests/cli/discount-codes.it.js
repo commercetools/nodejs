@@ -13,6 +13,7 @@ let projectKey
 if (process.env.CI === 'true') projectKey = 'discount-codes-integration-test'
 else projectKey = process.env.npm_config_projectkey
 
+
 describe('DiscountCode tests', () => {
   let apiConfig
   let cartDiscount
@@ -154,7 +155,7 @@ describe('DiscountCode tests', () => {
       expect(summary).toMatchSnapshot()
     })
 
-    it('should stop import on first errors by default', async () => {
+    it('should stop import on first error by default', async () => {
       // Set batchSize to 1 so it executes serially
       codeImport = new DiscountCodeImport({ apiConfig, batchSize: 1 }, logger)
       // Make codes unique
@@ -209,7 +210,9 @@ describe('DiscountCode tests', () => {
     let preparedDiscountCodes
     const bin = './integration-tests/node_modules/.bin/discount-code-exporter'
 
-    beforeAll(() => {
+    beforeAll(async () => {
+      await clearData(apiConfig, 'discountCodes')
+
       // Get the sample discount codes and add cartDiscounts
       preparedDiscountCodes = JSON.parse(
         fs.readFileSync(
@@ -226,7 +229,7 @@ describe('DiscountCode tests', () => {
           ],
         })
       )
-      return createData(
+      await createData(
         apiConfig,
         'discountCodes',
         preparedDiscountCodes
