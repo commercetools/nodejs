@@ -31,7 +31,7 @@ Options:
   --onlyMasterVariants            Export only masterVariants from products.
                                                       [boolean] [default: false]
   --language, -l                  Language(s) used for localised attributes such
-                                  as category names.Can contain multiple
+                                  as category names. Can contain multiple
                                   languages delimited by comma \\",\\"
                                                         [string] [default: \\"en\\"]
   --delimiter, -d                 Used CSV delimiter.             [default: \\",\\"]
