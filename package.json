@@ -106,6 +106,10 @@
     "rollup-watch": "4.3.1",
     "streamtest": "1.2.4"
   },
+  "resolutions": {
+    "gitbook-cli/**/npm": "5.10.0",
+    "npmi/**/npm": "2.1.12"
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
