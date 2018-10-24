@@ -3,7 +3,7 @@
   "license": "MIT",
   "engines": {
     "node": ">=6",
-    "npm": ">=2"
+    "npm": ">=5.6"
   },
   "scripts": {
     "postinstall": "check-node-version --package --print && npm run bootstrap && cross-env NODE_ENV=development npm run build",
@@ -89,6 +89,7 @@
     "leasot": "6.6.2",
     "lerna": "3.4.3",
     "lint-staged": "7.3.0",
+    "npm": "6.4.1",
     "npm-check-updates": "2.14.2",
     "prettier": "1.14.3",
     "resolve": "1.8.1",
@@ -105,10 +106,6 @@
     "rollup-plugin-uglify": "6.0.0",
     "rollup-watch": "4.3.1",
     "streamtest": "1.2.4"
-  },
-  "resolutions": {
-    "gitbook-cli/**/npm": "5.10.0",
-    "npmi/**/npm": "2.1.12"
   },
   "config": {
     "commitizen": {
