@@ -48,14 +48,14 @@ describe('Password flow', () => {
     expect(res).toEqual(response)
   })
 
-  test('should throw an error when credentials are not provided', async () => {
-    await expect(auth.passwordFlow()).rejects.toThrow(
+  test('should throw an error when credentials are not provided', () => {
+    expect(() => auth.passwordFlow()).toThrow(
       'Missing required user credentials (username, password)'
     )
-    await expect(auth.passwordFlow({ username: 'user' })).rejects.toThrow(
+    expect(() => auth.passwordFlow({ username: 'user' })).toThrow(
       'Missing required user credentials (username, password)'
     )
-    await expect(auth.passwordFlow({ password: 'password' })).rejects.toThrow(
+    expect(() => auth.passwordFlow({ password: 'password' })).toThrow(
       'Missing required user credentials (username, password)'
     )
   })
