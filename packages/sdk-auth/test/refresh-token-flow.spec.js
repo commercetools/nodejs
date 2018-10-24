@@ -23,7 +23,7 @@ describe('Refresh Token flow', () => {
   })
 
   test('should throw an error when token is not provided', async () => {
-    await expect(auth.refreshTokenFlow()).rejects.toThrow(
+    expect(() => auth.refreshTokenFlow()).toThrow(
       'Missing required token value'
     )
   })
