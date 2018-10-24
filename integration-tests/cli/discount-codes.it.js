@@ -13,7 +13,6 @@ let projectKey
 if (process.env.CI === 'true') projectKey = 'discount-codes-integration-test'
 else projectKey = process.env.npm_config_projectkey
 
-
 describe('DiscountCode tests', () => {
   let apiConfig
   let cartDiscount
