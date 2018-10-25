@@ -228,11 +228,9 @@ describe('DiscountCode tests', () => {
           ],
         })
       )
-      await createData(
-        apiConfig,
-        'discountCodes',
-        preparedDiscountCodes
-      ).catch(process.stderr.write)
+      await createData(apiConfig, 'discountCodes', preparedDiscountCodes).catch(
+        process.stderr.write
+      )
     }, 15000)
 
     it('should write json output to file by default', async () => {
