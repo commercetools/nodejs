@@ -24,10 +24,11 @@ Creates an auth client to handle authorization against the commercetools platfor
 #### Named arguments (options)
 
 1.  `host` _(String)_: the host of the OAuth API service
-2.  `projectKey` _(String)_: the key of the project to assign the default scope to
-3.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
-4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
-5.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
+2.  `projectKey` _(String)_: the key of the project to assign the default scope to (optional).
+3.  `disableRefreshToken` _(boolean)_: whether the API should generate a refresh token
+4.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
+5.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
+6.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
 
 #### Usage example
 
@@ -38,12 +39,23 @@ import fetch from 'node-fetch'
 const authClient = new SdkAuth({
   host: 'https://auth.commercetools.com',
   projectKey: 'test',
+  disableRefreshToken: false,
   credentials: {
     clientId: '123',
     clientSecret: 'secret',
   },
   scopes: ['view_products:test', 'manage_orders:test'],
   fetch,
+})
+
+const token = await authClient.clientCredentialsFlow()
+```
+
+**NOTE:** All auth flow methods can accept also an additional configuration for overriding config properties which were set during object creation.
+
+```js
+const token = await authClient.clientCredentialsFlow({
+  scopes: ['view_products:test', 'manage_orders:test'],
 })
 ```
 
@@ -52,6 +64,10 @@ const authClient = new SdkAuth({
 ### Client Credentials Flow
 
 Fetches access token using [Client Credentials Flow](https://docs.commercetools.com/http-api-authorization.html#client-credentials-flow) from the commercetools platform API.
+
+#### Argument
+
+1.  `config` _(Object)_: Optional configuration which can override config properties given when building `authClient` object.
 
 #### Usage example
 
@@ -65,19 +81,55 @@ await authClient.clientCredentialsFlow()
 // }
 ```
 
-### Password Flow
+### Customer Password Flow
 
 Fetches access token using [Password Flow](https://docs.commercetools.com/http-api-authorization.html#password-flow) from the commercetools platform API.
 
-#### Named arguments (options)
+#### Argument
 
-1.  `username` _(String)_: customer email
-2.  `password` _(String)_: customer password
+1.  `credentials` _(Object)_: Object with named arguments containing user credentials
+    - `username` _(String)_: customer email
+    - `password` _(String)_: customer password
+2.  `config` _(Object)_: Optional configuration which can override config properties given when building `authClient` object.
 
 #### Usage example
 
 ```js
-await authClient.passwordFlow({
+await authClient.customerPasswordFlow(
+  {
+    username: '...',
+    password: '...',
+  },
+  {
+    disableRefreshToken: false,
+  }
+)
+// {
+// 	 "access_token": "...",
+// 	 "expires_in": 172800,
+// 	 "scope": "manage_project:{projectKey}",
+// 	 "token_type": "Bearer",
+//
+// 	 "refresh_token" is missing because it was disabled in configuration
+//
+// }
+```
+
+### Client Password Flow
+
+Same as `customerPasswordFlow` but performs auth request against `/oauth/token` endpoint instead.
+
+#### Argument
+
+1.  `credentials` _(Object)_: Object with named arguments containing user credentials
+    - `username` _(String)_: client email
+    - `password` _(String)_: client password
+2.  `config` _(Object)_: Optional configuration which can override config properties given when building `authClient` object.
+
+#### Usage example
+
+```js
+await authClient.clientPasswordFlow({
   username: '...',
   password: '...',
 })
@@ -97,6 +149,7 @@ Fetches a new access token using [Refresh Token Flow](https://docs.commercetools
 #### Argument
 
 1.  `token` _(String)_: `refresh_token` obtained from previous authorization process
+2.  `config` _(Object)_: Optional configuration which can override config properties given when building `authClient` object.
 
 #### Usage example
 
@@ -117,6 +170,7 @@ Fetches access token using [Anonymous Session Flow](https://docs.commercetools.c
 #### Argument
 
 1.  `anonymousId` _(Number)_: Id parameter which will be associated with generated access token. If not provided, API will autogenerate its own id.
+2.  `config` _(Object)_: Optional configuration which can override config properties given when building `authClient` object.
 
 #### Usage example
 
@@ -131,6 +185,30 @@ await authClient.anonymousFlow(1)
 // }
 ```
 
+### Custom Flow
+
+Runs a custom request based on given configuration.
+
+#### Argument
+
+1.  `host` _(String)_: the host of the OAuth API service
+2.  `uri` _(String)_: path to login endpoint
+3.  `credentials` _(Object)_: Optional object containing username and password for password authentication
+4.  `body` _(String)_: request body formatted as `application/x-www-form-urlencoded` content type, see example [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST#Example).
+
+#### Usage example
+
+```js
+await authClient.customFlow({
+  host: 'https://custom.url',
+  uri: '/login',
+  body: 'user=username&password=password',
+})
+// {
+// 	 ...API response
+// }
+```
+
 ### Token Introspection
 
 Fetches info about `access_token` using [Token Introspection](https://docs.commercetools.com/http-api-authorization.html#oauth2-token-introspection) from the commercetools platform API.
@@ -138,6 +216,7 @@ Fetches info about `access_token` using [Token Introspection](https://docs.comme
 #### Argument
 
 1.  `token` _(Number)_: access token which should be introspected.
+2.  `config` _(Object)_: Optional configuration which can override config properties given when building `authClient` object.
 
 #### Usage example
 

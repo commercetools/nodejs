@@ -183,7 +183,13 @@ export default class SdkAuth {
   }
 
   _getRequestConfig(config: CustomAuthOptions = {}): AuthOptions {
-    return defaultsDeep({}, config, this.config)
+    const mergedConfig = defaultsDeep({}, config, this.config)
+
+    // handle scopes array - defaultsDeep would merge arrays together
+    // instead of taking its first occurrence
+    if (config.scopes) mergedConfig.scopes = config.scopes
+
+    return mergedConfig
   }
 
   anonymousFlow(anonymousId: string = '', config: CustomAuthOptions = {}) {
