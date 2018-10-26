@@ -28,6 +28,7 @@ export type ParserConfigOptions = {
   onlyMasterVariants: boolean,
   headerFields?: Array<string>,
   language: string,
+  languages?: Array<string>,
   multiValueDelimiter: string,
 }
 

@@ -50,6 +50,7 @@ describe('ProductJsonToCsv', () => {
         categoryBy: 'name',
         categoryOrderHintBy: 'name',
         language: 'en',
+        languages: ['en'],
       }
 
       productJsonToCsv = new ProductJsonToCsv(apiConfig)
