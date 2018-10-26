@@ -2,23 +2,25 @@
 /* global fetch Request Headers */
 
 import type {
-  AuthMiddlewareOptions,
+  AuthOptions,
+  CustomAuthOptions,
   ClientAuthOptions,
   ConfigFetch,
   HttpErrorType,
   AuthRequest,
   UserAuthOptions,
 } from 'types/sdk'
+import defaultsDeep from 'lodash.defaultsdeep'
 import { getErrorByCode } from '@commercetools/sdk-middleware-http'
 import * as constants from './constants'
 
 export default class SdkAuth {
   // Set flowtype annotations
-  config: AuthMiddlewareOptions
+  config: AuthOptions
   fetcher: ConfigFetch
   ANONYMOUS_FLOW_URI: string
   BASE_AUTH_FLOW_URI: string
-  PASSWORD_FLOW_URI: string
+  CUSTOMER_PASSWORD_FLOW_URI: string
   INTROSPECT_URI: string
 
   /**
@@ -26,6 +28,7 @@ export default class SdkAuth {
    * {
    *   "host": "https://auth.commercetools.com",
    *   "projectKey": "sample-project",
+   *   "disableRefreshToken": false,
    *   "credentials": {
    *     "clientId": "sampleClient",
    *     "clientSecret": "sampleSecret"
@@ -37,14 +40,14 @@ export default class SdkAuth {
    * }
    * @param config
    */
-  constructor(config: AuthMiddlewareOptions) {
+  constructor(config: AuthOptions) {
     // validate config properties
     SdkAuth._checkRequiredConfiguration(config)
     this.config = config
     this.fetcher = SdkAuth._getFetcher(config.fetch)
 
-    this.ANONYMOUS_FLOW_URI = `/oauth/${config.projectKey}/anonymous/token`
-    this.PASSWORD_FLOW_URI = `/oauth/${config.projectKey}/customers/token`
+    this.ANONYMOUS_FLOW_URI = `/oauth/--projectKey--/anonymous/token`
+    this.CUSTOMER_PASSWORD_FLOW_URI = `/oauth/--projectKey--/customers/token`
     this.BASE_AUTH_FLOW_URI = '/oauth/token'
     this.INTROSPECT_URI = '/oauth/introspect'
   }
@@ -57,13 +60,10 @@ export default class SdkAuth {
     return configFetch || fetch
   }
 
-  static _checkRequiredConfiguration(config: AuthMiddlewareOptions) {
+  static _checkRequiredConfiguration(config: AuthOptions) {
     if (!config) throw new Error('Missing required options')
 
     if (!config.host) throw new Error('Missing required option (host)')
-
-    if (!config.projectKey)
-      throw new Error('Missing required option (projectKey)')
 
     if (!config.credentials)
       throw new Error('Missing required option (credentials)')
@@ -81,19 +81,31 @@ export default class SdkAuth {
     return Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
   }
 
+  static _getScopes(scopes: ?Array<string>, projectKey: ?string) {
+    return scopes
+      ? scopes.join(' ')
+      : [constants.MANAGE_PROJECT, projectKey].filter(Boolean).join(':') // generate a default scope manage_project:projectKey
+  }
+
   static _buildRequest(
-    config: AuthMiddlewareOptions,
+    config: AuthOptions,
     oauthUri: string,
     grantType: string = 'client_credentials'
   ): AuthRequest {
-    const { projectKey, credentials, host } = config
-    const defaultScope = `${constants.MANAGE_PROJECT}:${projectKey}`
-    const scope = (config.scopes || [defaultScope]).join(' ')
+    const {
+      projectKey,
+      credentials,
+      host,
+      disableRefreshToken,
+      scopes,
+    } = config
+    const scope = SdkAuth._getScopes(scopes, projectKey)
     const basicAuth = SdkAuth._encodeClientCredentials(credentials)
-
     const uri = host.replace(/\/$/, '') + oauthUri
+
     let body = `grant_type=${grantType}`
     if (grantType !== 'refresh_token') body += `&scope=${scope}`
+    if (disableRefreshToken === true) body += '&refresh_token=false'
 
     return { basicAuth, uri, body }
   }
@@ -118,10 +130,7 @@ export default class SdkAuth {
   }
 
   static _parseResponseJson(response: Object): Object {
-    return response.json().catch(() => {
-      const err = { statusCode: response.status }
-      return err
-    })
+    return response.json().catch(() => ({ statusCode: response.status }))
   }
 
   static _isErrorResponse(response: Object): boolean {
@@ -140,17 +149,29 @@ export default class SdkAuth {
     body: string,
     username: string,
     password: string
-  ) {
+  ): string {
+    if (!(username && password))
+      throw new Error('Missing required user credentials (username, password)')
+
     return [
       body,
       `username=${encodeURIComponent(username)}`,
       `password=${encodeURIComponent(password)}`,
-    ].join('&')
+    ]
+      .filter(Boolean)
+      .join('&')
+  }
+
+  static _enrichUriWithProjectKey(uri: string, projectKey: ?string): string {
+    if (!projectKey) throw new Error('Missing required option (projectKey)')
+    return uri.replace('--projectKey--', projectKey)
   }
 
   _performRequest(request: AuthRequest) {
     const { uri, body, basicAuth } = request
-    return this.fetcher(uri, {
+    // use .call as a workaround for `TypeError: Failed to execute 'fetch' on 'Window': Illegal invocation`
+    // error which occures in browser when using this class loaded by webpack and installed by yarn
+    return this.fetcher.call(null, uri, {
       method: 'POST',
       headers: {
         Authorization: `Basic ${basicAuth}`,
@@ -161,28 +182,37 @@ export default class SdkAuth {
     })
   }
 
-  anonymousFlow(anonymousId: string = '') {
-    const request = SdkAuth._buildRequest(this.config, this.ANONYMOUS_FLOW_URI)
+  _getRequestConfig(config: CustomAuthOptions = {}): AuthOptions {
+    return defaultsDeep({}, config, this.config)
+  }
+
+  anonymousFlow(anonymousId: string = '', config: CustomAuthOptions = {}) {
+    const _config = this._getRequestConfig(config)
+    const request = SdkAuth._buildRequest(
+      _config,
+      SdkAuth._enrichUriWithProjectKey(
+        this.ANONYMOUS_FLOW_URI,
+        _config.projectKey
+      )
+    )
 
     if (anonymousId) request.body += `&anonymous_id=${anonymousId}`
     return this._process(request)
   }
 
-  clientCredentialsFlow() {
-    const request = SdkAuth._buildRequest(this.config, this.BASE_AUTH_FLOW_URI)
+  clientCredentialsFlow(config: CustomAuthOptions = {}) {
+    const _config = this._getRequestConfig(config)
+    const request = SdkAuth._buildRequest(_config, this.BASE_AUTH_FLOW_URI)
     return this._process(request)
   }
 
-  passwordFlow(credentials: ?UserAuthOptions) {
+  _passwordFlow(
+    credentials: UserAuthOptions,
+    config: AuthOptions,
+    url: string
+  ) {
     const { username, password } = credentials || {}
-    if (!(username && password))
-      throw new Error('Missing required user credentials (username, password)')
-
-    const request = SdkAuth._buildRequest(
-      this.config,
-      this.PASSWORD_FLOW_URI,
-      'password'
-    )
+    const request = SdkAuth._buildRequest(config, url, 'password')
 
     request.body = SdkAuth._appendUserCredentialsToBody(
       request.body,
@@ -193,11 +223,33 @@ export default class SdkAuth {
     return this._process(request)
   }
 
-  refreshTokenFlow(token: string) {
+  customerPasswordFlow(
+    credentials: UserAuthOptions,
+    config: CustomAuthOptions = {}
+  ) {
+    const _config = this._getRequestConfig(config)
+    const url = SdkAuth._enrichUriWithProjectKey(
+      this.CUSTOMER_PASSWORD_FLOW_URI,
+      _config.projectKey
+    )
+
+    return this._passwordFlow(credentials, _config, url)
+  }
+
+  clientPasswordFlow(
+    credentials: UserAuthOptions,
+    config: CustomAuthOptions = {}
+  ) {
+    const _config = this._getRequestConfig(config)
+    return this._passwordFlow(credentials, _config, this.BASE_AUTH_FLOW_URI)
+  }
+
+  refreshTokenFlow(token: string, config: CustomAuthOptions = {}) {
     if (!token) throw new Error('Missing required token value')
+    const _config = this._getRequestConfig(config)
 
     const request = SdkAuth._buildRequest(
-      this.config,
+      _config,
       this.BASE_AUTH_FLOW_URI,
       'refresh_token'
     )
@@ -206,11 +258,31 @@ export default class SdkAuth {
     return this._process(request)
   }
 
-  introspectToken(token: string) {
+  introspectToken(token: string, config: CustomAuthOptions = {}) {
+    const _config = this._getRequestConfig(config)
     if (!token) throw new Error('Missing required token value')
 
-    const request = SdkAuth._buildRequest(this.config, this.INTROSPECT_URI)
+    const request = SdkAuth._buildRequest(_config, this.INTROSPECT_URI)
     request.body = `token=${token}`
+
+    return this._process(request)
+  }
+
+  customFlow(requestConfig: Object) {
+    const { credentials, host, uri, body } = requestConfig
+    const _config = this._getRequestConfig({
+      host,
+    })
+
+    const request = SdkAuth._buildRequest(_config, uri)
+    request.body = body || '' // let user to build their own body
+
+    if (credentials)
+      request.body = SdkAuth._appendUserCredentialsToBody(
+        request.body,
+        credentials.username,
+        credentials.password
+      )
 
     return this._process(request)
   }
