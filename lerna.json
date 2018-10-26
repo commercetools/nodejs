@@ -20,6 +20,9 @@
   "command": {
     "publish": {
       "message": "chore(release): releasing component"
+    },
+    "bootstrap": {
+      "npmClientArgs": ["--no-package-lock"]
     }
   }
 }

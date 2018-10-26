@@ -25,9 +25,7 @@ describe('Token Introspection', () => {
     expect(res).toEqual(response)
   })
 
-  test('should throw an error when token is not provided', async () => {
-    await expect(auth.introspectToken()).rejects.toThrow(
-      'Missing required token value'
-    )
+  test('should throw an error when token is not provided', () => {
+    expect(() => auth.introspectToken()).toThrow('Missing required token value')
   })
 })

@@ -11,7 +11,7 @@ let projectKey
 if (process.env.CI === 'true') projectKey = 'auth-integration-test'
 else projectKey = process.env.npm_config_projectkey
 
-function getApiClient (token) {
+function getApiClient(token) {
   return createClient({
     middlewares: [
       createAuthMiddlewareWithExistingToken(token),
@@ -28,8 +28,7 @@ describe('Auth Flows', () => {
   const userPassword = 'testing4^lks*aJ@ETso+/\\HdE1!x0u4q5'
   const customerPredicate = `email="${userEmail}"`
   const customerUrl = createRequestBuilder({ projectKey })
-    .customers
-    .where(customerPredicate)
+    .customers.where(customerPredicate)
     .build()
   let apiConfig
   let authClient
@@ -77,12 +76,13 @@ describe('Auth Flows', () => {
       expect(tokenInfo).toHaveProperty('token_type', 'Bearer')
 
       // use client to do a test request
-      const client = getApiClient(`${tokenInfo.token_type} ${tokenInfo.access_token}`)
-      const response = await client
-        .execute({
-          uri: customerUrl,
-          method: 'GET',
-        })
+      const client = getApiClient(
+        `${tokenInfo.token_type} ${tokenInfo.access_token}`
+      )
+      const response = await client.execute({
+        uri: customerUrl,
+        method: 'GET',
+      })
 
       expect(response).toHaveProperty('body.count', 1)
     })
@@ -104,12 +104,13 @@ describe('Auth Flows', () => {
       expect(tokenInfo).toHaveProperty('token_type', 'Bearer')
 
       // use client to do a test request
-      const client = getApiClient(`${tokenInfo.token_type} ${tokenInfo.access_token}`)
-      const response = await client
-        .execute({
-          uri: `/${projectKey}/me`,
-          method: 'GET',
-        })
+      const client = getApiClient(
+        `${tokenInfo.token_type} ${tokenInfo.access_token}`
+      )
+      const response = await client.execute({
+        uri: `/${projectKey}/me`,
+        method: 'GET',
+      })
 
       expect(response).toHaveProperty('body.email', userEmail)
     })
@@ -126,12 +127,13 @@ describe('Auth Flows', () => {
       expect(tokenInfo).toHaveProperty('token_type', 'Bearer')
 
       // use client to do a test request
-      const client = getApiClient(`${tokenInfo.token_type} ${tokenInfo.access_token}`)
-      const response = await client
-        .execute({
-          uri: customerUrl,
-          method: 'GET',
-        })
+      const client = getApiClient(
+        `${tokenInfo.token_type} ${tokenInfo.access_token}`
+      )
+      const response = await client.execute({
+        uri: customerUrl,
+        method: 'GET',
+      })
 
       expect(response).toHaveProperty('body.count', 1)
     })
@@ -146,16 +148,19 @@ describe('Auth Flows', () => {
 
       expect(tokenInfo).toHaveProperty('refresh_token')
 
-      const refreshTokenInfo = await authClient.refreshTokenFlow(tokenInfo.refresh_token)
+      const refreshTokenInfo = await authClient.refreshTokenFlow(
+        tokenInfo.refresh_token
+      )
       expect(tokenInfo.scope).toEqual(refreshTokenInfo.scope)
 
       // use client to do a test request
-      const client = getApiClient(`${refreshTokenInfo.token_type} ${refreshTokenInfo.access_token}`)
-      const response = await client
-        .execute({
-          uri: `/${projectKey}/me`,
-          method: 'GET',
-        })
+      const client = getApiClient(
+        `${refreshTokenInfo.token_type} ${refreshTokenInfo.access_token}`
+      )
+      const response = await client.execute({
+        uri: `/${projectKey}/me`,
+        method: 'GET',
+      })
 
       expect(response).toHaveProperty('body.email', userEmail)
     })
@@ -165,11 +170,16 @@ describe('Auth Flows', () => {
     it('should introspect a valid token', async () => {
       // get access token with anonymous flow
       const tokenInfo = await authClient.clientCredentialsFlow()
-      const introspection = await authClient.introspectToken(tokenInfo.access_token)
+      const introspection = await authClient.introspectToken(
+        tokenInfo.access_token
+      )
 
       expect(introspection).toHaveProperty('exp')
       expect(introspection).toHaveProperty('active', true)
-      expect(introspection).toHaveProperty('scope', `manage_project:${projectKey}`)
+      expect(introspection).toHaveProperty(
+        'scope',
+        `manage_project:${projectKey}`
+      )
     })
 
     it('should introspect an invalid token', async () => {
@@ -199,7 +209,8 @@ describe('Auth Flows', () => {
             },
           ],
           error: 'invalid_customer_account_credentials',
-          error_description: 'Customer account with the given credentials not found.',
+          error_description:
+            'Customer account with the given credentials not found.',
           name: 'BadRequest',
         })
       }
@@ -223,15 +234,18 @@ describe('Auth Flows', () => {
           code: 401,
           statusCode: 401,
           status: 401,
-          message: 'Please provide valid client credentials using HTTP Basic Authentication.',
+          message:
+            'Please provide valid client credentials using HTTP Basic Authentication.',
           errors: [
             {
               code: 'invalid_client',
-              message: 'Please provide valid client credentials using HTTP Basic Authentication.',
+              message:
+                'Please provide valid client credentials using HTTP Basic Authentication.',
             },
           ],
           error: 'invalid_client',
-          error_description: 'Please provide valid client credentials using HTTP Basic Authentication.',
+          error_description:
+            'Please provide valid client credentials using HTTP Basic Authentication.',
           name: 'Unauthorized',
         })
       }
@@ -240,7 +254,7 @@ describe('Auth Flows', () => {
     it('should throw invalid scope error', async () => {
       const _apiConfig = {
         ...apiConfig,
-        scopes: ['invalid_scope']
+        scopes: ['invalid_scope'],
       }
       const _authClient = new SdkAuth(_apiConfig)
 

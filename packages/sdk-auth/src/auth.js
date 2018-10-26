@@ -98,9 +98,10 @@ export default class SdkAuth {
     return { basicAuth, uri, body }
   }
 
-  async _process(request: AuthRequest) {
-    const response = await this._performRequest(request)
-    return SdkAuth._handleResponse(request.uri, response)
+  _process(request: AuthRequest) {
+    return this._performRequest(request).then(response =>
+      SdkAuth._handleResponse(request.uri, response)
+    )
   }
 
   static _createResponseError(
@@ -116,24 +117,23 @@ export default class SdkAuth {
     return new ResponseError(errorMessage, rest)
   }
 
-  static async _parseResponseJson(response: Object): Object {
-    try {
-      return await response.json()
-    } catch (err) {
-      return { statusCode: response.status }
-    }
+  static _parseResponseJson(response: Object): Object {
+    return response.json().catch(() => {
+      const err = { statusCode: response.status }
+      return err
+    })
   }
 
   static _isErrorResponse(response: Object): boolean {
     return !response.status || response.status >= 400
   }
 
-  static async _handleResponse(uri: string, response: Object) {
-    const jsonResponse = await SdkAuth._parseResponseJson(response)
-
-    if (SdkAuth._isErrorResponse(response))
-      throw SdkAuth._createResponseError(jsonResponse, uri, response.status)
-    return jsonResponse
+  static _handleResponse(uri: string, response: Object) {
+    return SdkAuth._parseResponseJson(response).then(jsonResponse => {
+      if (SdkAuth._isErrorResponse(response))
+        throw SdkAuth._createResponseError(jsonResponse, uri, response.status)
+      return jsonResponse
+    })
   }
 
   static _appendUserCredentialsToBody(
@@ -148,7 +148,7 @@ export default class SdkAuth {
     ].join('&')
   }
 
-  async _performRequest(request: AuthRequest) {
+  _performRequest(request: AuthRequest) {
     const { uri, body, basicAuth } = request
     return this.fetcher(uri, {
       method: 'POST',
@@ -161,19 +161,19 @@ export default class SdkAuth {
     })
   }
 
-  async anonymousFlow(anonymousId: string = '') {
+  anonymousFlow(anonymousId: string = '') {
     const request = SdkAuth._buildRequest(this.config, this.ANONYMOUS_FLOW_URI)
 
     if (anonymousId) request.body += `&anonymous_id=${anonymousId}`
     return this._process(request)
   }
 
-  async clientCredentialsFlow() {
+  clientCredentialsFlow() {
     const request = SdkAuth._buildRequest(this.config, this.BASE_AUTH_FLOW_URI)
     return this._process(request)
   }
 
-  async passwordFlow(credentials: ?UserAuthOptions) {
+  passwordFlow(credentials: ?UserAuthOptions) {
     const { username, password } = credentials || {}
     if (!(username && password))
       throw new Error('Missing required user credentials (username, password)')
@@ -193,7 +193,7 @@ export default class SdkAuth {
     return this._process(request)
   }
 
-  async refreshTokenFlow(token: string) {
+  refreshTokenFlow(token: string) {
     if (!token) throw new Error('Missing required token value')
 
     const request = SdkAuth._buildRequest(
@@ -206,7 +206,7 @@ export default class SdkAuth {
     return this._process(request)
   }
 
-  async introspectToken(token: string) {
+  introspectToken(token: string) {
     if (!token) throw new Error('Missing required token value')
 
     const request = SdkAuth._buildRequest(this.config, this.INTROSPECT_URI)
