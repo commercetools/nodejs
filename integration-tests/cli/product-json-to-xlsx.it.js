@@ -22,8 +22,7 @@ import {
 import { createData, clearData } from './helpers/utils'
 
 let projectKey
-if (process.env.CI === 'true')
-  projectKey = 'product-json2xlsx-integration-test'
+if (process.env.CI === 'true') projectKey = 'product-json2xlsx-integration-test'
 else projectKey = process.env.npm_config_projectkey
 
 async function cleanup(apiConfig) {
@@ -76,7 +75,7 @@ async function analyzeExcelFile(path) {
   await workbook.xlsx.readFile(path)
   return {
     path,
-    ... await analyzeExcelWorkbook(workbook),
+    ...(await analyzeExcelWorkbook(workbook)),
   }
 }
 
@@ -157,8 +156,8 @@ describe('XLSX and CLI Tests', () => {
         const fileNames = []
 
         beforeAll(async done => {
-          const zipFile = tmp.fileSync({ postfix: '.zip' }).name;
-          [stdout, stderr] = await exec(
+          const zipFile = tmp.fileSync({ postfix: '.zip' }).name
+          ;[stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
           )
 
@@ -170,12 +169,10 @@ describe('XLSX and CLI Tests', () => {
 
               if (entry.path.includes('productTypeForProductParse'))
                 product1 = mapRowsToProducts(excelInfo.rows)
-              else
-                product2 = mapRowsToProducts(excelInfo.rows)
+              else product2 = mapRowsToProducts(excelInfo.rows)
 
               // unzip module fires done event before we finish async operations
-              if (fileNames.length === 2)
-                done()
+              if (fileNames.length === 2) done()
             })
         }, 15000)
 
@@ -200,7 +197,10 @@ describe('XLSX and CLI Tests', () => {
           })
 
           it('contains `name`', () => {
-            const name = { 'name.en': 'Sample Duck-jacket', 'name.de': 'Beispiel Entejacke' }
+            const name = {
+              'name.en': 'Sample Duck-jacket',
+              'name.de': 'Beispiel Entejacke',
+            }
             expect(product[0]).toEqual(expect.objectContaining(name))
             expect(product[1]).toEqual(expect.objectContaining(name))
             expect(product[2]).toEqual(expect.objectContaining(name))
@@ -232,15 +232,9 @@ describe('XLSX and CLI Tests', () => {
             const searchKeywords = {
               'searchKeywords.en': 'Standard Keyword;German | White | Space',
             }
-            expect(product[0]).toEqual(
-              expect.objectContaining(searchKeywords)
-            )
-            expect(product[1]).toEqual(
-              expect.objectContaining(searchKeywords)
-            )
-            expect(product[2]).toEqual(
-              expect.objectContaining(searchKeywords)
-            )
+            expect(product[0]).toEqual(expect.objectContaining(searchKeywords))
+            expect(product[1]).toEqual(expect.objectContaining(searchKeywords))
+            expect(product[2]).toEqual(expect.objectContaining(searchKeywords))
           })
 
           it('contains resolved namedPath of `categories`', () => {
@@ -330,7 +324,8 @@ describe('XLSX and CLI Tests', () => {
             const description = {
               'description.en':
                 'Golom Jacop Caesar Icarve the Duck keep us cozy warm. The slight',
-              'description.de': 'Lorem Ipsum Text von Save the Duck halten uns wohlig',
+              'description.de':
+                'Lorem Ipsum Text von Save the Duck halten uns wohlig',
             }
             expect(product[0]).toEqual(expect.objectContaining(description))
             expect(product[1]).toEqual(expect.objectContaining(description))
@@ -346,13 +341,11 @@ describe('XLSX and CLI Tests', () => {
           })
 
           it('contains `searchKeywords`', () => {
-            const searchKeywords = { 'searchKeywords.en': 'Multi Tool;Swiss | Army | Knife' }
-            expect(product[0]).toEqual(
-              expect.objectContaining(searchKeywords)
-            )
-            expect(product[1]).toEqual(
-              expect.objectContaining(searchKeywords)
-            )
+            const searchKeywords = {
+              'searchKeywords.en': 'Multi Tool;Swiss | Army | Knife',
+            }
+            expect(product[0]).toEqual(expect.objectContaining(searchKeywords))
+            expect(product[1]).toEqual(expect.objectContaining(searchKeywords))
           })
 
           it('contains resolved namedPath of `categories`', () => {
@@ -415,8 +408,8 @@ describe('XLSX and CLI Tests', () => {
         const templateFile = `${__dirname}/helpers/product-headers.csv`
 
         beforeAll(async done => {
-          xlsxFile = tmp.fileSync({ postfix: '.xlsx' }).name;
-          [stdout, stderr] = await exec(
+          xlsxFile = tmp.fileSync({ postfix: '.xlsx' }).name
+          ;[stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${xlsxFile}`
           )
 
@@ -450,9 +443,15 @@ describe('XLSX and CLI Tests', () => {
           )
 
           // Check other variants
-          expect(products[1]).toEqual(expect.objectContaining({ key: undefined }))
-          expect(products[2]).toEqual(expect.objectContaining({ key: undefined }))
-          expect(products[4]).toEqual(expect.objectContaining({ key: undefined }))
+          expect(products[1]).toEqual(
+            expect.objectContaining({ key: undefined })
+          )
+          expect(products[2]).toEqual(
+            expect.objectContaining({ key: undefined })
+          )
+          expect(products[4]).toEqual(
+            expect.objectContaining({ key: undefined })
+          )
         })
 
         it('should include only columns from template', () => {
@@ -519,8 +518,8 @@ describe('XLSX and CLI Tests', () => {
       let stdout
       let stderr
       beforeAll(async () => {
-        productsJsonFile = tmp.fileSync({ postfix: '.json' }).name;
-        [stdout, stderr] = await exec(
+        productsJsonFile = tmp.fileSync({ postfix: '.json' }).name
+        ;[stdout, stderr] = await exec(
           `${exporter} -p ${projectKey} -s -o ${productsJsonFile}`
         )
       }, 10000)
@@ -538,10 +537,10 @@ describe('XLSX and CLI Tests', () => {
         const fileNames = []
 
         beforeAll(async done => {
-          const zipFile = tmp.fileSync({ postfix: '.zip' }).name;
+          const zipFile = tmp.fileSync({ postfix: '.zip' }).name
 
           // Map products from a JSON file to archived XLSX files
-          [stdout, stderr] = await exec(
+          ;[stdout, stderr] = await exec(
             `${binPath} -p ${projectKey} -i ${productsJsonFile} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
           )
 
@@ -553,12 +552,10 @@ describe('XLSX and CLI Tests', () => {
 
               if (entry.path.includes('anotherProductType'))
                 product1 = mapRowsToProducts(excelInfo.rows)
-              else
-                product2 = mapRowsToProducts(excelInfo.rows)
+              else product2 = mapRowsToProducts(excelInfo.rows)
 
               // unzip module fires done event before we finish async operations
-              if (fileNames.length === 2)
-                done()
+              if (fileNames.length === 2) done()
             })
         }, 30000)
 
@@ -595,7 +592,8 @@ describe('XLSX and CLI Tests', () => {
             const description = {
               'description.en':
                 'Golom Jacop Caesar Icarve the Duck keep us cozy warm. The slight',
-              'description.de': 'Lorem Ipsum Text von Save the Duck halten uns wohlig',
+              'description.de':
+                'Lorem Ipsum Text von Save the Duck halten uns wohlig',
             }
             expect(product[0]).toEqual(expect.objectContaining(description))
             expect(product[1]).toEqual(expect.objectContaining(description))
@@ -611,13 +609,11 @@ describe('XLSX and CLI Tests', () => {
           })
 
           it('contains `searchKeywords`', () => {
-            const searchKeywords = { 'searchKeywords.en': 'Multi Tool;Swiss | Army | Knife' }
-            expect(product[0]).toEqual(
-              expect.objectContaining(searchKeywords)
-            )
-            expect(product[1]).toEqual(
-              expect.objectContaining(searchKeywords)
-            )
+            const searchKeywords = {
+              'searchKeywords.en': 'Multi Tool;Swiss | Army | Knife',
+            }
+            expect(product[0]).toEqual(expect.objectContaining(searchKeywords))
+            expect(product[1]).toEqual(expect.objectContaining(searchKeywords))
           })
 
           it('contains resolved namedPath of `categories`', () => {
@@ -687,7 +683,10 @@ describe('XLSX and CLI Tests', () => {
           })
 
           it('contains `name`', () => {
-            const name = { 'name.en': 'Sample Duck-jacket', 'name.de': 'Beispiel Entejacke' }
+            const name = {
+              'name.en': 'Sample Duck-jacket',
+              'name.de': 'Beispiel Entejacke',
+            }
             expect(product[0]).toEqual(expect.objectContaining(name))
             expect(product[1]).toEqual(expect.objectContaining(name))
             expect(product[2]).toEqual(expect.objectContaining(name))
@@ -719,15 +718,9 @@ describe('XLSX and CLI Tests', () => {
             const searchKeywords = {
               'searchKeywords.en': 'Standard Keyword;German | White | Space',
             }
-            expect(product[0]).toEqual(
-              expect.objectContaining(searchKeywords)
-            )
-            expect(product[1]).toEqual(
-              expect.objectContaining(searchKeywords)
-            )
-            expect(product[2]).toEqual(
-              expect.objectContaining(searchKeywords)
-            )
+            expect(product[0]).toEqual(expect.objectContaining(searchKeywords))
+            expect(product[1]).toEqual(expect.objectContaining(searchKeywords))
+            expect(product[2]).toEqual(expect.objectContaining(searchKeywords))
           })
 
           it('contains resolved namedPath of `categories`', () => {
@@ -791,7 +784,10 @@ describe('XLSX and CLI Tests', () => {
       })
 
       describe('WITH HEADERS::should write products to `XLSX` file', () => {
-        const templateFile = path.join(__dirname, '/helpers/product-headers.csv')
+        const templateFile = path.join(
+          __dirname,
+          '/helpers/product-headers.csv'
+        )
         let xlsxFile
         let excel
         let products
@@ -799,8 +795,8 @@ describe('XLSX and CLI Tests', () => {
         let stderr
 
         beforeAll(async () => {
-          xlsxFile = tmp.fileSync({ postfix: '.xlsx' }).name;
-          [stdout, stderr] = await exec(
+          xlsxFile = tmp.fileSync({ postfix: '.xlsx' }).name
+          ;[stdout, stderr] = await exec(
             `${binPath} -p ${projectKey} -i ${productsJsonFile} -t ${templateFile} --referenceCategoryBy name -o ${xlsxFile}`
           )
 
@@ -846,9 +842,15 @@ describe('XLSX and CLI Tests', () => {
           )
 
           // Check other variants
-          expect(products[1]).toEqual(expect.objectContaining({ key: undefined }))
-          expect(products[2]).toEqual(expect.objectContaining({ key: undefined }))
-          expect(products[4]).toEqual(expect.objectContaining({ key: undefined }))
+          expect(products[1]).toEqual(
+            expect.objectContaining({ key: undefined })
+          )
+          expect(products[2]).toEqual(
+            expect.objectContaining({ key: undefined })
+          )
+          expect(products[4]).toEqual(
+            expect.objectContaining({ key: undefined })
+          )
         })
 
         it('should include only columns from template', () => {

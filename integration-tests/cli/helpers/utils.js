@@ -16,9 +16,7 @@ export function clearData(apiConfig, entityName, predicate = null) {
     projectKey: apiConfig.projectKey,
   })[entityName]
 
-
-  if (predicate)
-    service = service.where(predicate)
+  if (predicate) service = service.where(predicate)
 
   const request = {
     uri: service.build(),
