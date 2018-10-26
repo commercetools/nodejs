@@ -369,6 +369,13 @@ export default class ProductMapping {
         return value.name
       case 'state':
         return value.key
+      case 'name':
+      case 'slug':
+      case 'description':
+        return {
+          ...ProductMapping._createDefaultLanguageValues(this.languages),
+          ...value,
+        }
       case 'categories':
         return ProductMapping._mapCategories(
           value,

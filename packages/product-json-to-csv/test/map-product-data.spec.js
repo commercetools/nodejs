@@ -547,6 +547,10 @@ describe('::ProductMapping', () => {
 
       const sample = {
         id: '12345ab-id',
+        name: {
+          en: 'nameEn',
+          de: 'nameDe',
+        },
         key: 'product-key',
         productType: {
           name: 'resolved-product-type',
@@ -612,6 +616,11 @@ describe('::ProductMapping', () => {
       }
       const expected = {
         id: '12345ab-id',
+        name: {
+          en: 'nameEn',
+          de: 'nameDe',
+          it: '',
+        },
         key: 'product-key',
         productType: 'resolved-product-type',
         variant: {
