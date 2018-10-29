@@ -53,7 +53,7 @@
     "pino": "5.7.0",
     "pretty-error": "2.1.1",
     "single-emit": "2.0.0",
-    "slugify": "1.3.1",
+    "slugify": "1.3.2",
     "tmp": "0.0.33",
     "yargs": "12.0.2"
   },
