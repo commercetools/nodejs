@@ -39,9 +39,9 @@
     "common-tags": "1.8.0",
     "exceljs": "1.6.2",
     "highland": "2.13.0",
-    "pino": "5.7.0",
+    "pino": "5.8.0",
     "pretty-error": "2.1.1",
-    "slugify": "1.3.1",
+    "slugify": "1.3.2",
     "tmp": "0.0.33",
     "yargs": "12.0.2"
   },
