@@ -39,7 +39,7 @@
     "@commercetools/sdk-middleware-http": "4.0.5",
     "@commercetools/sdk-middleware-user-agent": "1.2.10",
     "JSONStream": "1.3.5",
-    "csv-parser": "2.0.0",
+    "csv-parser": "2.1.0",
     "flat": "4.1.0",
     "highland": "2.13.0",
     "lodash.isnil": "4.0.0",
