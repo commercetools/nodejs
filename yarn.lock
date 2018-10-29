@@ -6218,10 +6218,10 @@ jest-runner-eslint@0.6.0:
     eslint "^4.5.0"
     find-up "^2.1.0"
 
-jest-runner-flowtype@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/jest-runner-flowtype/-/jest-runner-flowtype-0.0.6.tgz#3539d50cf4a6629d4a00d34bc1961d73398ee136"
-  integrity sha512-134w7bq2NnRQz7cKMUWUHeSgqspXZAGqLXlabO3+QsNBEjTunyuy8TNHG0ZMBO+wrPgGcpQrgva+F8nI6U8GCg==
+jest-runner-flowtype@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/jest-runner-flowtype/-/jest-runner-flowtype-0.0.7.tgz#07fc3ac1a226c0caaa98bb35d85e51a3d4ae9c4b"
+  integrity sha512-seUheYpvwS20zmFATfhaXubYvO2PuO4PZWpxu8XPSKVkiVk4wUXqsg1cZF2wgQEzYkmu8enWcBdwru8ZNzI7eA==
   dependencies:
     create-jest-runner "^0.1.1"
     flow-bin "^0.63.1"

@@ -84,7 +84,7 @@
     "jest": "23.6.0",
     "jest-each": "23.6.0",
     "jest-runner-eslint": "0.6.0",
-    "jest-runner-flowtype": "0.0.6",
+    "jest-runner-flowtype": "0.0.7",
     "jest-silent-reporter": "0.1.1",
     "leasot": "6.6.2",
     "lerna": "3.4.3",
