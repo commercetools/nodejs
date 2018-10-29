@@ -88,14 +88,14 @@ describe('Auth Flows', () => {
     })
   })
 
-  describe('Password Flow', () => {
+  describe('Customer Password Flow', () => {
     it('should authorize with customer credentials', async () => {
       // get access token with a password flow
       const tokenInfo = await authClient.customerPasswordFlow({
         username: userEmail,
         password: userPassword,
       }, {
-        disableRefreshToken: false
+        disableRefreshToken: true
       })
 
       // check returned properties
