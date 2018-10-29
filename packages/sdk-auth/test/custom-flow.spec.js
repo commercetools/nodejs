@@ -27,4 +27,26 @@ describe('Custom flow', () => {
     expect(scope.isDone()).toBe(true)
     expect(res).toEqual(response)
   })
+
+  test('should authenticate with a custom flow and user credentials', async () => {
+    const scope = nock(customHost)
+      .post('/custom-endpoint', {
+        username: 'user',
+        password: 'pass',
+      })
+      .reply(200, JSON.stringify(response))
+
+    expect(scope.isDone()).toBe(false)
+    const res = await auth.customFlow({
+      uri: '/custom-endpoint',
+      host: customHost,
+      credentials: {
+        username: 'user',
+        password: 'pass',
+      },
+    })
+
+    expect(scope.isDone()).toBe(true)
+    expect(res).toEqual(response)
+  })
 })
