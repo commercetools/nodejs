@@ -3,7 +3,7 @@ import Auth from '../src/auth'
 import config from './resources/sample-config'
 import response from './resources/sample-response.json'
 
-describe('Password flow', () => {
+describe('Customer Password flow', () => {
   const auth = new Auth(config)
 
   beforeEach(() => nock.cleanAll())
@@ -19,7 +19,7 @@ describe('Password flow', () => {
       .reply(200, JSON.stringify(response))
 
     expect(scope.isDone()).toBe(false)
-    const res = await auth.passwordFlow({
+    const res = await auth.customerPasswordFlow({
       username: 'user123',
       password: 'pass123',
     })
@@ -43,19 +43,19 @@ describe('Password flow', () => {
       .reply(200, JSON.stringify(response))
 
     expect(scope.isDone()).toBe(false)
-    const res = await auth.passwordFlow(userCredentials)
+    const res = await auth.customerPasswordFlow(userCredentials)
     expect(scope.isDone()).toBe(true)
     expect(res).toEqual(response)
   })
 
   test('should throw an error when credentials are not provided', () => {
-    expect(() => auth.passwordFlow()).toThrow(
+    expect(() => auth.customerPasswordFlow()).toThrow(
       'Missing required user credentials (username, password)'
     )
-    expect(() => auth.passwordFlow({ username: 'user' })).toThrow(
+    expect(() => auth.customerPasswordFlow({ username: 'user' })).toThrow(
       'Missing required user credentials (username, password)'
     )
-    expect(() => auth.passwordFlow({ password: 'password' })).toThrow(
+    expect(() => auth.customerPasswordFlow({ password: 'password' })).toThrow(
       'Missing required user credentials (username, password)'
     )
   })
