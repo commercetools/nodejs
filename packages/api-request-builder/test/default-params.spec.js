@@ -13,6 +13,7 @@ describe('defaultParams', () => {
         page: null,
         perPage: null,
         sort: [],
+        withTotal: null,
       },
       query: {
         operator: 'and',
@@ -36,6 +37,7 @@ describe('defaultParams', () => {
         page: null,
         perPage: null,
         sort: [],
+        withTotal: null,
       },
       query: {
         operator: 'and',
@@ -60,6 +62,7 @@ describe('defaultParams', () => {
         page: null,
         perPage: null,
         sort: [],
+        withTotal: null,
       },
       query: {
         operator: 'and',
@@ -79,6 +82,7 @@ describe('defaultParams', () => {
         page: null,
         perPage: null,
         sort: [],
+        withTotal: null,
       },
       search: {
         facet: [],

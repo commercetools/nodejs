@@ -242,6 +242,7 @@ export type ServiceBuilderDefaultParams = {
     page: ?number,
     perPage: ?number,
     sort: Array<string>,
+    withTotal: ?boolean,
   },
   id?: ?string,
   staged?: boolean,
@@ -290,6 +291,7 @@ export type ServiceBuilderParams = {
   sort: Array<{ by: string, direction: 'asc' | 'desc' }>,
   page: ?number,
   perPage: ?number,
+  withTotal: ?boolean,
 
   // query-projection
   staged?: boolean,
@@ -348,6 +350,7 @@ export type ServiceBuilderInstance = {
   sort: (option: string) => Object,
   page: (page: number) => Object,
   perPage: (amount: number) => Object,
+  withTotal(shouldIncludeTotal: boolean): Object,
   byId: (id: string) => Object,
   byKey: (key: string) => Object,
   byCustomerId: (id: string) => Object,
