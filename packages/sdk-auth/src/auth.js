@@ -46,6 +46,7 @@ export default class SdkAuth {
     this.config = config
     this.fetcher = SdkAuth._getFetcher(config.fetch)
 
+    // auth endpoints
     this.ANONYMOUS_FLOW_URI = `/oauth/--projectKey--/anonymous/token`
     this.CUSTOMER_PASSWORD_FLOW_URI = `/oauth/--projectKey--/customers/token`
     this.BASE_AUTH_FLOW_URI = '/oauth/token'
@@ -100,14 +101,16 @@ export default class SdkAuth {
       scopes,
     } = config
     const scope = SdkAuth._getScopes(scopes, projectKey)
-    const basicAuth = SdkAuth._encodeClientCredentials(credentials)
     const uri = host.replace(/\/$/, '') + oauthUri
+    const basicAuth =
+      config.token || SdkAuth._encodeClientCredentials(credentials)
+    const authType = config.authType || constants.DEFAULT_AUTH_TYPE
 
     let body = `grant_type=${grantType}`
     if (grantType !== 'refresh_token') body += `&scope=${scope}`
     if (disableRefreshToken === true) body += '&refresh_token=false'
 
-    return { basicAuth, uri, body }
+    return { basicAuth, authType, uri, body }
   }
 
   _process(request: AuthRequest) {
@@ -168,13 +171,14 @@ export default class SdkAuth {
   }
 
   _performRequest(request: AuthRequest) {
-    const { uri, body, basicAuth } = request
+    const { uri, body, basicAuth, authType } = request
+    const authHeader = `${authType || constants.DEFAULT_AUTH_TYPE} ${basicAuth}`
     // use .call as a workaround for `TypeError: Failed to execute 'fetch' on 'Window': Illegal invocation`
     // error which occures in browser when using this class loaded by webpack and installed by yarn
     return this.fetcher.call(null, uri, {
       method: 'POST',
       headers: {
-        Authorization: `Basic ${basicAuth}`,
+        Authorization: authHeader,
         'Content-Length': Buffer.byteLength(body).toString(),
         'Content-Type': 'application/x-www-form-urlencoded',
       },
@@ -275,9 +279,11 @@ export default class SdkAuth {
   }
 
   customFlow(requestConfig: Object) {
-    const { credentials, host, uri, body } = requestConfig
+    const { credentials, host, uri, body, token, authType } = requestConfig
     const _config = this._getRequestConfig({
       host,
+      token,
+      authType,
     })
 
     const request = SdkAuth._buildRequest(_config, uri)

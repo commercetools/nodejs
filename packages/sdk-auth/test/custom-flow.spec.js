@@ -29,7 +29,11 @@ describe('Custom flow', () => {
   })
 
   test('should authenticate with a custom flow and user credentials', async () => {
-    const scope = nock(customHost)
+    const scope = nock(customHost, {
+      reqheaders: {
+        Authorization: 'Bearer 123',
+      },
+    })
       .post('/custom-endpoint', {
         username: 'user',
         password: 'pass',
@@ -38,6 +42,8 @@ describe('Custom flow', () => {
 
     expect(scope.isDone()).toBe(false)
     const res = await auth.customFlow({
+      authType: 'Bearer',
+      token: '123',
       uri: '/custom-endpoint',
       host: customHost,
       credentials: {

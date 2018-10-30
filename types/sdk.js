@@ -24,6 +24,7 @@ export type AuthRequest = {
   uri: string,
   body: string,
   basicAuth: string,
+  authType: string,
 }
 export type HttpErrorType = {
   name: string,
@@ -103,6 +104,8 @@ export type AuthMiddlewareOptions = {
 
 export type AuthOptions = {
   host: string,
+  token?: string,
+  authType?: string,
   projectKey?: string,
   disableRefreshToken?: boolean,
   credentials: {
@@ -116,6 +119,8 @@ export type AuthOptions = {
 
 export type CustomAuthOptions = {
   host?: string,
+  token?: string,
+  authType?: string,
   projectKey?: string,
   disableRefreshToken?: boolean,
   credentials?: {
