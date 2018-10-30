@@ -25,10 +25,12 @@ Creates an auth client to handle authorization against the commercetools platfor
 
 1.  `host` _(String)_: the host of the OAuth API service
 2.  `projectKey` _(String)_: the key of the project to assign the default scope to (optional).
-3.  `disableRefreshToken` _(boolean)_: whether the API should generate a refresh token
-4.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
-5.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
-6.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
+3.  `authType` _(String)_: Auth type performed in the auth request (default `Basic`).
+4.  `token` _(String)_: A `token` which will be sent in `Authorization` header. If not provided, we calculate it from credentials.
+5.  `disableRefreshToken` _(boolean)_: whether the API should generate a refresh token
+6.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
+7.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
+8.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
 
 #### Usage example
 
@@ -195,6 +197,8 @@ Runs a custom request based on given configuration.
 2.  `uri` _(String)_: path to login endpoint
 3.  `credentials` _(Object)_: Optional object containing username and password for password authentication
 4.  `body` _(String)_: request body formatted as `application/x-www-form-urlencoded` content type, see example [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST#Example).
+5.  `authType` _(String)_: Auth type performed in the auth request (default `Basic`).
+6.  `token` _(String)_: A `token` which will be sent in `Authorization` header. If not provided, we calculate it from credentials.
 
 #### Usage example
 
