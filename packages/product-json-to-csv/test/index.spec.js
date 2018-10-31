@@ -17,8 +17,8 @@ describe('Index', () => {
     test('should have access to MapProductData class', () => {
       const mapProductData = new MapProductData()
 
-      expect(mapProductData.language).toBeDefined()
-      expect(mapProductData.language).toEqual('en')
+      expect(mapProductData.mainLanguage).toBeDefined()
+      expect(mapProductData.mainLanguage).toEqual('en')
       expect(mapProductData.run).toBeDefined()
       expect(mapProductData._mapAttributes).toBeDefined()
     })

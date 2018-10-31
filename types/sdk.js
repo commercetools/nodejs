@@ -24,6 +24,7 @@ export type AuthRequest = {
   uri: string,
   body: string,
   basicAuth: string,
+  authType: string,
 }
 export type HttpErrorType = {
   name: string,
@@ -98,6 +99,36 @@ export type AuthMiddlewareOptions = {
   scopes: Array<string>,
   // For internal usage only
   oauthUri: string,
+  fetch?: ConfigFetch,
+}
+
+export type AuthOptions = {
+  host: string,
+  token?: string,
+  authType?: string,
+  projectKey?: string,
+  disableRefreshToken?: boolean,
+  credentials: {
+    clientId: string,
+    clientSecret: string,
+  },
+  scopes?: Array<string>,
+  // For internal usage only
+  fetch?: ConfigFetch,
+}
+
+export type CustomAuthOptions = {
+  host?: string,
+  token?: string,
+  authType?: string,
+  projectKey?: string,
+  disableRefreshToken?: boolean,
+  credentials?: {
+    clientId: string,
+    clientSecret: string,
+  },
+  scopes?: Array<string>,
+  // For internal usage only
   fetch?: ConfigFetch,
 }
 
