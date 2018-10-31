@@ -182,7 +182,7 @@ describe('Common processes', () => {
       }
       const scope = nock(config.host, {
         reqheaders: {
-          Authorization: value => value === `Basic ${basicAuth}`,
+          Authorization: `Basic ${basicAuth}`,
         },
       })
         .post('/api-endpoint', () => true)
@@ -206,6 +206,7 @@ describe('Common processes', () => {
 
       expect(authRequest).toEqual({
         basicAuth,
+        authType: 'Basic',
         uri: 'https://auth.commercetools.com/api-endpoint',
         body:
           'grant_type=client_credentials&scope=view_products:sample-project manage_types:sample-project',
