@@ -128,6 +128,21 @@ export default function createHttpMiddleware({
             })
             return
           }
+          if (res.status === 503 && enableRetry)
+            if (retryCount < maxRetries) {
+              setTimeout(
+                executeFetch,
+                calcDelayDuration(
+                  retryCount,
+                  retryDelay,
+                  maxRetries,
+                  backoff,
+                  maxDelay
+                )
+              )
+              retryCount += 1
+              return
+            }
 
           // Server responded with an error. Try to parse it as JSON, then
           // return a proper error type with all necessary meta information.
@@ -143,6 +158,7 @@ export default function createHttpMiddleware({
             const error: HttpErrorType = createError({
               statusCode: res.status,
               originalRequest: request,
+              retryCount,
               headers: parseHeaders(res.headers),
               ...(typeof parsed === 'object'
                 ? { message: parsed.message, body: parsed }

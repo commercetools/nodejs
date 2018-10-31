@@ -299,7 +299,7 @@ describe('Http', () => {
     }))
 
   describe('::repeater', () => {
-    test('should retry on network error(503) if enabled', () =>
+    test('should retry on network error if enabled', () =>
       new Promise((resolve, reject) => {
         const request = createTestRequest({
           uri: '/foo/bar',
@@ -334,6 +334,38 @@ describe('Http', () => {
           .get('/foo/bar')
           .times(3)
           .replyWithError('Connection timeout')
+
+        httpMiddleware(next)(request, response)
+      }))
+
+    test('should retry on 503 (Service Unavailable) if enabled', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res.error.name).toBe('ServiceUnavailable')
+          expect(res.error.originalRequest).toBeDefined()
+          expect(res.body).toBeUndefined()
+          expect(res.statusCode).toBe(503)
+          expect(res.error.retryCount).toBe(2)
+          resolve()
+        }
+        const options = {
+          host: testHost,
+          enableRetry: true,
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+          },
+          fetch,
+        }
+        const httpMiddleware = createHttpMiddleware(options)
+        nock(testHost)
+          .get('/foo/bar')
+          .times(3)
+          .reply(503)
 
         httpMiddleware(next)(request, response)
       }))
