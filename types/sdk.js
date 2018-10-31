@@ -350,7 +350,7 @@ export type ServiceBuilderInstance = {
   sort: (option: string) => Object,
   page: (page: number) => Object,
   perPage: (amount: number) => Object,
-  withTotal(shouldIncludeTotal: boolean): Object,
+  withTotal(value: boolean): Object,
   byId: (id: string) => Object,
   byKey: (key: string) => Object,
   byCustomerId: (id: string) => Object,

@@ -97,7 +97,7 @@ const deleteUri = service.payments
 
 #### withTotal
 
-You can also append the `withTotal` option to the uri when making a get request if you want to do not need tht total when for instance fetching orders. [More info here](https://docs.commercetools.com/release-notes#releases-2018-05-24-data-erasure)
+You can also append the `withTotal` option to the uri when making a query. [More info here](https://docs.commercetools.com/http-api#pagedqueryresult).
 
 This can be done by using the `.withTotal(false)` method.
 
