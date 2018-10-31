@@ -67,7 +67,7 @@ export function perPage(value: number): Object {
  * @param {boolean} value - indicating if the total should be included or not
  */
 export function withTotal(value: boolean = true): Object {
-  if (typeof value !== 'boolean' && !value)
+  if (typeof value !== 'boolean')
     throw new Error('Required argument for `withTotal` is missing or invalid')
 
   this.params.pagination.withTotal = value
