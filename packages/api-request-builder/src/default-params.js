@@ -18,6 +18,7 @@ export function getDefaultQueryParams(): ServiceBuilderDefaultParams {
       page: null,
       perPage: null,
       sort: [],
+      withTotal: null,
     },
     location: {
       currency: '',
@@ -45,6 +46,7 @@ export function getDefaultSearchParams(): ServiceBuilderDefaultParams {
       page: null,
       perPage: null,
       sort: [],
+      withTotal: null,
     },
     search: {
       facet: [],
@@ -126,6 +128,7 @@ export function setParams(params: ServiceBuilderParams) {
     'currency',
     'state',
     'dataErasure',
+    'withTotal',
   ]
   Object.keys(params).forEach((key: string) => {
     if (!knownKeys.includes(key)) throw new Error(`Unknown key "${key}"`)
@@ -208,4 +211,7 @@ export function setParams(params: ServiceBuilderParams) {
 
   // dataErasure
   if (hasKey(params, 'dataErasure')) this.withFullDataErasure()
+
+  // withTotal
+  if (hasKey(params, 'withTotal')) this.withTotal(params.withTotal)
 }

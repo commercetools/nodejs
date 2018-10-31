@@ -67,7 +67,7 @@ export default function buildQueryString(
   }
 
   if (pagination) {
-    const { page, perPage, sort } = pagination
+    const { page, perPage, sort, withTotal } = pagination
     if (typeof perPage === 'number') queryString.push(`limit=${perPage}`)
     if (page) {
       const limitParam = perPage || 20
@@ -78,6 +78,9 @@ export default function buildQueryString(
       queryString = queryString.concat(
         sort.map((s: string): string => `sort=${s}`)
       )
+
+    if (typeof withTotal === 'boolean')
+      queryString.push(`withTotal=${String(withTotal)}`)
   }
 
   if (search) {
