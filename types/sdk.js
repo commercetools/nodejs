@@ -101,6 +101,32 @@ export type AuthMiddlewareOptions = {
   fetch?: ConfigFetch,
 }
 
+export type AuthOptions = {
+  host: string,
+  projectKey?: string,
+  disableRefreshToken?: boolean,
+  credentials: {
+    clientId: string,
+    clientSecret: string,
+  },
+  scopes?: Array<string>,
+  // For internal usage only
+  fetch?: ConfigFetch,
+}
+
+export type CustomAuthOptions = {
+  host?: string,
+  projectKey?: string,
+  disableRefreshToken?: boolean,
+  credentials?: {
+    clientId: string,
+    clientSecret: string,
+  },
+  scopes?: Array<string>,
+  // For internal usage only
+  fetch?: ConfigFetch,
+}
+
 export type RefreshAuthMiddlewareOptions = {
   host: string,
   projectKey: string,

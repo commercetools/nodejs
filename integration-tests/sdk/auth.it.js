@@ -88,19 +88,21 @@ describe('Auth Flows', () => {
     })
   })
 
-  describe('Password Flow', () => {
+  describe('Customer Password Flow', () => {
     it('should authorize with customer credentials', async () => {
       // get access token with a password flow
-      const tokenInfo = await authClient.passwordFlow({
+      const tokenInfo = await authClient.customerPasswordFlow({
         username: userEmail,
         password: userPassword,
+      }, {
+        disableRefreshToken: true
       })
 
       // check returned properties
       expect(tokenInfo).toHaveProperty('access_token')
       expect(tokenInfo).toHaveProperty('scope', `manage_project:${projectKey}`)
       expect(tokenInfo).toHaveProperty('expires_in')
-      expect(tokenInfo).toHaveProperty('refresh_token')
+      expect(tokenInfo).not.toHaveProperty('refresh_token')
       expect(tokenInfo).toHaveProperty('token_type', 'Bearer')
 
       // use client to do a test request
@@ -141,7 +143,7 @@ describe('Auth Flows', () => {
 
   describe('Refresh Token Flow', () => {
     it('should refresh token', async () => {
-      const tokenInfo = await authClient.passwordFlow({
+      const tokenInfo = await authClient.customerPasswordFlow({
         username: userEmail,
         password: userPassword,
       })
@@ -191,7 +193,7 @@ describe('Auth Flows', () => {
   describe('Error cases', () => {
     it('should throw invalid customer account credentials error', async () => {
       try {
-        await authClient.passwordFlow({
+        await authClient.customerPasswordFlow({
           username: 'invalidUsername',
           password: 'invalidPassword',
         })

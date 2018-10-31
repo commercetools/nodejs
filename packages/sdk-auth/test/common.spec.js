@@ -228,10 +228,8 @@ describe('Common processes', () => {
       )
     })
 
-    test('should validate projectKey property', () => {
-      const options = { ...config }
-      delete options.projectKey
-      expect(() => Auth._checkRequiredConfiguration(options)).toThrow(
+    test('should validate projectKey property when building request URI', () => {
+      expect(() => Auth._enrichUriWithProjectKey('some uri')).toThrow(
         'Missing required option (projectKey)'
       )
     })
@@ -258,6 +256,12 @@ describe('Common processes', () => {
       expect(() => Auth._checkRequiredConfiguration(options)).toThrow(
         'Missing required credentials (clientId, clientSecret)'
       )
+    })
+
+    test('should validate username/password property', () => {
+      expect(() =>
+        Auth._appendUserCredentialsToBody('body' /* missing user and pass */)
+      ).toThrow('Missing required user credentials (username, password)')
     })
   })
 
