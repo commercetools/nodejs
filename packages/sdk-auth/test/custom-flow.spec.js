@@ -55,4 +55,34 @@ describe('Custom flow', () => {
     expect(scope.isDone()).toBe(true)
     expect(res).toEqual(response)
   })
+
+  test('should set custom headers', async () => {
+    const scope = nock(customHost, {
+      reqheaders: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .post(
+        '/custom-endpoint',
+        JSON.stringify({
+          a: 'b',
+        })
+      )
+      .reply(200, JSON.stringify(response))
+
+    expect(scope.isDone()).toBe(false)
+    const res = await auth.customFlow({
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      uri: '/custom-endpoint',
+      host: customHost,
+      body: JSON.stringify({
+        a: 'b',
+      }),
+    })
+
+    expect(scope.isDone()).toBe(true)
+    expect(res).toEqual(response)
+  })
 })
