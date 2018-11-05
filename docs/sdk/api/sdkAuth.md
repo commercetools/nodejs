@@ -199,6 +199,7 @@ Runs a custom request based on given configuration.
 4.  `body` _(String)_: request body formatted as `application/x-www-form-urlencoded` content type, see example [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST#Example).
 5.  `authType` _(String)_: Auth type performed in the auth request (default `Basic`).
 6.  `token` _(String)_: A `token` which will be sent in `Authorization` header. If not provided, we calculate it from credentials.
+7.  `headers` _(Object)_: Optional object containing headers which should be sent in auth request.
 
 #### Usage example
 
@@ -206,7 +207,13 @@ Runs a custom request based on given configuration.
 await authClient.customFlow({
   host: 'https://custom.url',
   uri: '/login',
-  body: 'user=username&password=password',
+  body: JSON.stringify({
+    username: 'username',
+    password: 'password',
+  }),
+  headers: {
+    'Content-Type': 'application/json',
+  },
 })
 // {
 // 	 ...API response

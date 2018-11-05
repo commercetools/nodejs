@@ -25,6 +25,7 @@ export type AuthRequest = {
   body: string,
   basicAuth: string,
   authType: string,
+  headers?: Object,
 }
 export type HttpErrorType = {
   name: string,
