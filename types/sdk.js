@@ -25,6 +25,7 @@ export type AuthRequest = {
   body: string,
   basicAuth: string,
   authType: string,
+  headers?: Object,
 }
 export type HttpErrorType = {
   name: string,
@@ -112,6 +113,7 @@ export type AuthOptions = {
     clientId: string,
     clientSecret: string,
   },
+  headers?: Object,
   scopes?: Array<string>,
   // For internal usage only
   fetch?: ConfigFetch,
@@ -127,6 +129,7 @@ export type CustomAuthOptions = {
     clientId: string,
     clientSecret: string,
   },
+  headers?: Object,
   scopes?: Array<string>,
   // For internal usage only
   fetch?: ConfigFetch,
