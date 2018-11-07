@@ -1,3 +1,5 @@
+import pick from 'lodash.pick'
+import mapValues from 'lodash.mapvalues'
 import CONSTANTS from './constants'
 
 export default (function MapCustomFields() {
@@ -118,8 +120,30 @@ export default (function MapCustomFields() {
     }
   }
 
+  /**
+   * Takes a value and returns a CTP money object
+   * @param value String "USD 123" or object {centAmount: '123', currencyCode: 'USD'}
+   * @returns {{ data: CTP price object, error: Error message if any }}
+   */
   function mapMoney(value) {
     const result = {}
+
+    // handle money value provided as an object
+    if (typeof value === 'object' && value.centAmount && value.currencyCode) {
+      const numberKeys = ['centAmount', 'fractionDigits']
+      const data = mapValues(
+        // pick only Money properties
+        pick(value, ['currencyCode', 'type', ...numberKeys]),
+        // map Number properties to integer
+        (val, key) => (numberKeys.includes(key) ? parseInt(val, 10) : val)
+      )
+
+      return {
+        data,
+      }
+    }
+
+    // handle money value provided as a string
     if (!isValidValue(value)) return result
 
     const matchedMoney = CONSTANTS.field.money.exec(value)
