@@ -39,7 +39,10 @@ export default class ResourceDeleter {
         createAuthMiddlewareWithExistingToken(
           options.accessToken ? `Bearer ${options.accessToken}` : ''
         ),
-        createAuthMiddlewareForClientCredentialsFlow(this.apiConfig),
+        createAuthMiddlewareForClientCredentialsFlow({
+          ...this.apiConfig,
+          fetch,
+        }),
         createUserAgentMiddleware({
           libraryName: pkg.name,
           libraryVersion: pkg.version,
