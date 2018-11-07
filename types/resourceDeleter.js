@@ -27,5 +27,5 @@ export type resourceDeleterOptions = {
   predicate?: string,
   logger?: LoggerOptions,
   resource: string,
-  continueOnProblems?: boolean,
+  deleteHours?: number,
 }
