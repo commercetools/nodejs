@@ -154,7 +154,7 @@ describe('DiscountCode tests', () => {
       expect(summary).toMatchSnapshot()
     })
 
-    it('should stop import on first errors by default', async () => {
+    it('should stop import on first error by default', async () => {
       // Set batchSize to 1 so it executes serially
       codeImport = new DiscountCodeImport({ apiConfig, batchSize: 1 }, logger)
       // Make codes unique
@@ -209,7 +209,9 @@ describe('DiscountCode tests', () => {
     let preparedDiscountCodes
     const bin = './integration-tests/node_modules/.bin/discount-code-exporter'
 
-    beforeAll(() => {
+    beforeAll(async () => {
+      await clearData(apiConfig, 'discountCodes')
+
       // Get the sample discount codes and add cartDiscounts
       preparedDiscountCodes = JSON.parse(
         fs.readFileSync(
@@ -226,11 +228,9 @@ describe('DiscountCode tests', () => {
           ],
         })
       )
-      return createData(
-        apiConfig,
-        'discountCodes',
-        preparedDiscountCodes
-      ).catch(process.stderr.write)
+      await createData(apiConfig, 'discountCodes', preparedDiscountCodes).catch(
+        process.stderr.write
+      )
     }, 15000)
 
     it('should write json output to file by default', async () => {

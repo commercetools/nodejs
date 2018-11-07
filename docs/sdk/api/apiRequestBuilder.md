@@ -95,6 +95,17 @@ const deleteUri = service.payments
   .build()
 ```
 
+#### withTotal
+
+You can also append the `withTotal` option to the uri when making a query. [More info here](https://docs.commercetools.com/http-api#pagedqueryresult).
+
+This can be done by using the `.withTotal(false)` method.
+
+```js
+const service = createRequestBuilder(options)
+const getUri = service.orders.withTotal(false).build()
+```
+
 #### Usage example
 
 ```js

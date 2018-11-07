@@ -64,4 +64,15 @@ describe('queryPage', () => {
       /Required argument for `perPage` must be a number >= 0/
     )
   })
+
+  test('should set the withTotal param', () => {
+    service.withTotal(false)
+    expect(service.params.pagination.withTotal).toBe(false)
+  })
+
+  test('should throw if withTotal is not a boolean', () => {
+    expect(() => service.withTotal('foo')).toThrowError(
+      /Required argument for `withTotal` is missing or invalid/
+    )
+  })
 })

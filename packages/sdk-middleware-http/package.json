@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-middleware-http",
-  "version": "4.0.5",
+  "version": "4.0.7",
   "description": "Middleware for http requests, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
@@ -35,7 +35,7 @@
     "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSdkMiddlewareHttp -i src/index.js -o dist/commercetools-sdk-middleware-http.cjs.js"
   },
   "devDependencies": {
-    "nock": "10.0.1",
+    "nock": "10.0.2",
     "node-fetch": "2.2.0"
   }
 }

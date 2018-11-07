@@ -20,6 +20,13 @@ export type ClientRequest = {
     [key: string]: string,
   },
 }
+export type AuthRequest = {
+  uri: string,
+  body: string,
+  basicAuth: string,
+  authType: string,
+  headers?: Object,
+}
 export type HttpErrorType = {
   name: string,
   message: string,
@@ -81,6 +88,7 @@ export type ClientOptions = {
   middlewares: Array<Middleware>,
 }
 
+export type ConfigFetch = (url: string, args?: Object) => Promise<any>
 export type AuthMiddlewareOptions = {
   host: string,
   projectKey: string,
@@ -92,7 +100,39 @@ export type AuthMiddlewareOptions = {
   scopes: Array<string>,
   // For internal usage only
   oauthUri: string,
-  fetch?: (url: string, args?: Object) => Promise<any>,
+  fetch?: ConfigFetch,
+}
+
+export type AuthOptions = {
+  host: string,
+  token?: string,
+  authType?: string,
+  projectKey?: string,
+  disableRefreshToken?: boolean,
+  credentials: {
+    clientId: string,
+    clientSecret: string,
+  },
+  headers?: Object,
+  scopes?: Array<string>,
+  // For internal usage only
+  fetch?: ConfigFetch,
+}
+
+export type CustomAuthOptions = {
+  host?: string,
+  token?: string,
+  authType?: string,
+  projectKey?: string,
+  disableRefreshToken?: boolean,
+  credentials?: {
+    clientId: string,
+    clientSecret: string,
+  },
+  headers?: Object,
+  scopes?: Array<string>,
+  // For internal usage only
+  fetch?: ConfigFetch,
 }
 
 export type RefreshAuthMiddlewareOptions = {
@@ -147,16 +187,23 @@ export type AuthMiddlewareBaseOptions = requestBaseOptions & {
   fetch?: (url: string, args?: Object) => Promise<any>,
 }
 
+export type UserAuthOptions = {
+  username: string,
+  password: string,
+}
+
+export type ClientAuthOptions = {
+  clientId: string,
+  clientSecret: string,
+}
+
 export type PasswordAuthMiddlewareOptions = {
   host: string,
   projectKey: string,
   credentials: {
     clientId: string,
     clientSecret: string,
-    user: {
-      username: string,
-      password: string,
-    },
+    user: UserAuthOptions,
   },
   scopes: Array<string>,
   // For internal usage only
@@ -203,6 +250,7 @@ export type ServiceBuilderDefaultParams = {
     page: ?number,
     perPage: ?number,
     sort: Array<string>,
+    withTotal: ?boolean,
   },
   id?: ?string,
   staged?: boolean,
@@ -251,6 +299,7 @@ export type ServiceBuilderParams = {
   sort: Array<{ by: string, direction: 'asc' | 'desc' }>,
   page: ?number,
   perPage: ?number,
+  withTotal: ?boolean,
 
   // query-projection
   staged?: boolean,
@@ -309,6 +358,7 @@ export type ServiceBuilderInstance = {
   sort: (option: string) => Object,
   page: (page: number) => Object,
   perPage: (amount: number) => Object,
+  withTotal(value: boolean): Object,
   byId: (id: string) => Object,
   byKey: (key: string) => Object,
   byCustomerId: (id: string) => Object,

@@ -38,8 +38,9 @@ Options:
                                    added to each variant row.                  [boolean]
   --onlyMasterVariants            Export only masterVariants from products.
                                                       [boolean] [default: false]
-  --language, -l                   Language used for localised attributes such as
-                                   category names.              [string] [default: "en"]
+  --language, -l                   Language(s) used for localised attributes such as
+                                   category names. Can contain multiple languages
+                                   delimited by comma ","       [string] [default: "en"]
   --delimiter, -d                  Used template CSV delimiter.           [default: ","]
   --multiValueDelimiter, -m        Used CSV delimiter in multiValue fields. [default: ";"]
   --logLevel                       Logging level: error, warn, info or debug    [string]
@@ -72,7 +73,7 @@ This module also accepts products to be read from a JSON file. This can be done 
 ##### Example
 
 ```
-$ @commercetools@commercetools/product-json-to-xlsx --projectKey <project_key> --input <path_to_JSON_file> --template <path_to_template_file> --output <path_to_output_file>
+$ @commercetools@commercetools/product-json-to-xlsx --language "en,de,fr" --projectKey <project_key> --input <path_to_JSON_file> --template <path_to_template_file> --output <path_to_output_file>
 ```
 
 #### CSV Parser Template
@@ -113,7 +114,8 @@ The constructor accepts four arguments:
   - `categoryOrderHintBy` (String): Specify which identifier should be used to reference the categoryOrderHints (Options: `name`, `key`, `externalId` and `namedPath`. Default: `name`)
   - `fillAllRows` (Boolean): Specify if product attributes like name should be added to each variant row (Default: `false`)
   - `headerFields` (Array<String>): An array of header fields to be passed to XLSX. This headerFields array should contain the required columns of the XLSX file (Optional. If omitted, a `.zip` file containing one XLSX file per product type will be created. This is synonymous with the `--template` flag in the CLI)
-  - `language` (String): Default language used in resolving localised attributes (except lenums) and category names (Default: `en`)
+  - `language` (String): Default language used when resolving localised attributes (except lenums) and category names (Default: `en`)
+  - `languages` (Array<String>): List of languages which should be exported from `ltext/lenum` attributes (Default: `["en"]`)
 - `multiValueDelimiter` (String): Delimiter used to separate multivalue items in cells in the output file (Default: `;`)
 - An optional logger object having four methods (`info`, `warn`, `error` and `debug`)
 - `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_products`, `view_customers`]
@@ -145,6 +147,7 @@ const parserConfig = {
   categoryOrderHintBy: key,
   fillAllRows: true,
   language: 'en',
+  languages: ['en', 'de'],
   multiValueDelimiter: ';',
 }
 const logger = {

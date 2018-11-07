@@ -21,6 +21,7 @@ import {
   isUndefined,
   isNil,
   uniq,
+  defaults,
 } from 'lodash'
 
 export default class ProductMapping {
@@ -29,7 +30,8 @@ export default class ProductMapping {
   onlyMasterVariants: boolean
   createShortcuts: boolean
   categoryBy: 'name' | 'key' | 'externalId' | 'namedPath'
-  language: string
+  mainLanguage: string
+  languages: Array<string>
   multiValDel: string
 
   constructor({
@@ -39,11 +41,13 @@ export default class ProductMapping {
     language = 'en',
     multiValueDelimiter = ';',
     createShortcuts = false,
+    languages,
   }: Object = {}) {
     this.fillAllRows = fillAllRows
     this.onlyMasterVariants = onlyMasterVariants
     this.categoryBy = categoryBy
-    this.language = language
+    this.mainLanguage = language
+    this.languages = languages || [language]
     this.multiValDel = multiValueDelimiter
     this.createShortcuts = createShortcuts
   }
@@ -139,6 +143,16 @@ export default class ProductMapping {
     return keywords
   }
 
+  static _createDefaultLanguageValues(languages: Array<string>): Object {
+    return languages.reduce(
+      (res: Object, lang: string) => ({
+        ...res,
+        [lang]: '',
+      }),
+      {}
+    )
+  }
+
   _mapVariantProperties(variant: Variant, productType: ?ProductType): Object {
     const mappedVariant: Object = reduce(
       variant,
@@ -153,16 +167,26 @@ export default class ProductMapping {
     if (productType && productType.attributes)
       productType.attributes.forEach((attribute: Object) => {
         const mappedAttributes = mappedVariant.attributes || {}
-        const attrType = get(attribute, 'type.name')
-        const attrSetType = get(attribute, 'type.elementType.name')
+        const attrType =
+          get(attribute, 'type.elementType.name') || get(attribute, 'type.name')
 
-        // By default fill attribute by empty string if it is not defined in product
-        // and for ltext/setOfLtext create shortcut only when we have createShortcuts set to true
+        // add default value to attribute (but not in case of ltext when createShortcuts is off)
         if (
           isNil(mappedAttributes[attribute.name]) &&
-          (this.createShortcuts || ![attrType, attrSetType].includes('ltext'))
+          (this.createShortcuts || attrType !== 'ltext')
         )
           mappedAttributes[attribute.name] = ''
+
+        // add default language values (eg: {attrName.en: '', attrName.de: ''})
+        if (['ltext', 'lenum'].includes(attrType))
+          defaults(
+            mappedVariant.attributes,
+            flatten({
+              [attribute.name]: ProductMapping._createDefaultLanguageValues(
+                this.languages
+              ),
+            })
+          )
       })
 
     return mappedVariant
@@ -211,11 +235,19 @@ export default class ProductMapping {
   _mapLtextAttribute(name: string, value: Object): Object {
     const mappedAttribute = {}
 
+    // generate default ltext value with empty strings for all predefined languages
+    const defaultValue = ProductMapping._createDefaultLanguageValues(
+      this.languages
+    )
+
     // create a ltext shortcut if enabled: eg. copy color[lang] to color
-    if (this.createShortcuts) mappedAttribute[name] = value[this.language]
+    if (this.createShortcuts) mappedAttribute[name] = value[this.mainLanguage]
     // create object with translations indexed with keys like: attributeName.en
     const labels = flatten({
-      [name]: value, // value contains object with localized labels
+      [name]: {
+        ...defaultValue,
+        ...value,
+      }, // value contains object with localized labels
     })
 
     // add labels in format "attribName.en: labelEnValue" to all attributes
@@ -337,12 +369,19 @@ export default class ProductMapping {
         return value.name
       case 'state':
         return value.key
+      case 'name':
+      case 'slug':
+      case 'description':
+        return {
+          ...ProductMapping._createDefaultLanguageValues(this.languages),
+          ...value,
+        }
       case 'categories':
         return ProductMapping._mapCategories(
           value,
           this.categoryBy,
           this.multiValDel,
-          this.language
+          this.mainLanguage
         )
       case 'categoryOrderHints':
         return isEmpty(value)

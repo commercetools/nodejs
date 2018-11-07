@@ -59,3 +59,17 @@ export function perPage(value: number): Object {
   this.params.pagination.perPage = value
   return this
 }
+
+/**
+ * Set whether or not the total should be calculated (and included) in the result
+ * of a paginated query result.
+ *
+ * @param {boolean} value - indicating if the total should be included or not
+ */
+export function withTotal(value: boolean = true): Object {
+  if (typeof value !== 'boolean')
+    throw new Error('Required argument for `withTotal` is missing or invalid')
+
+  this.params.pagination.withTotal = value
+  return this
+}

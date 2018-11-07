@@ -23,6 +23,7 @@ describe('buildQueryString', () => {
           encodeURIComponent('name.en desc'),
           encodeURIComponent('createdAt asc'),
         ],
+        withTotal: false,
       },
       query: {
         operator: 'or',
@@ -74,6 +75,7 @@ describe('buildQueryString', () => {
       'limit=10&offset=20&' +
       `sort=${encodeURIComponent('name.en desc')}&` +
       `sort=${encodeURIComponent('createdAt asc')}&` +
+      `withTotal=false&` +
       `text.en=${encodeURIComponent('Foo')}&` +
       'fuzzy=true&' +
       'fuzzyLevel=2&' +
