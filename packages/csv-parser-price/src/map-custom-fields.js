@@ -130,7 +130,7 @@ export default (function MapCustomFields() {
 
     // handle money value provided as an object
     if (typeof value === 'object' && value.centAmount && value.currencyCode) {
-      const numberKeys = ['centAmount', 'fractionDigits']
+      const numberKeys = ['centAmount', 'fractionDigits', 'preciseAmount']
       const data = mapValues(
         // pick only Money properties
         pick(value, ['currencyCode', 'type', ...numberKeys]),

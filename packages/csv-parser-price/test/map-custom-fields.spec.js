@@ -150,6 +150,24 @@ describe('mapCustomFields::mapMoney', () => {
     expect(result.data).toEqual(expected)
   })
 
+  test('should return highPrecision money object when passed as object', () => {
+    const result = mapCustomFields.mapMoney({
+      type: 'highPrecision',
+      preciseAmount: '3',
+      centAmount: '34567',
+      currencyCode: 'GBP',
+    })
+
+    expect(result.error).toBeFalsy()
+    const expected = {
+      type: 'highPrecision',
+      preciseAmount: 3,
+      centAmount: 34567,
+      currencyCode: 'GBP',
+    }
+    expect(result.data).toEqual(expected)
+  })
+
   test('should return error when invalid value is passed in', () => {
     const result = mapCustomFields.mapMoney('abi')
 
