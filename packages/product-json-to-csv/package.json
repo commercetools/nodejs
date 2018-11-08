@@ -47,7 +47,7 @@
     "common-tags": "1.8.0",
     "flat": "4.1.0",
     "highland": "2.13.0",
-    "iconv-lite": "^0.4.24",
+    "iconv-lite": "0.4.24",
     "json2csv": "4.2.1",
     "lodash": "4.17.11",
     "node-fetch": "2.2.0",
