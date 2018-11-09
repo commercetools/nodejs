@@ -27,6 +27,7 @@ export type ParserConfigOptions = {
   fillAllRows: boolean,
   onlyMasterVariants: boolean,
   headerFields?: Array<string>,
+  encoding?: string,
   language: string,
   languages?: Array<string>,
   multiValueDelimiter: string,

@@ -76,6 +76,7 @@ export default class ProductJsonToCsv {
       language: 'en',
       languages: ['en'],
       multiValueDelimiter: ';',
+      encoding: 'utf8',
     }
 
     this.parserConfig = { ...defaultConfig, ...parserConfig }
@@ -108,6 +109,7 @@ export default class ProductJsonToCsv {
   run(input: stream$Readable, output: stream$Writable) {
     const productStream = this.parse(input, output)
     const { headerFields } = this.parserConfig
+    const config = pick(this.parserConfig, ['delimiter', 'encoding'])
 
     if (headerFields)
       writeToSingleCsvFile(
@@ -115,15 +117,9 @@ export default class ProductJsonToCsv {
         output,
         this.logger,
         headerFields,
-        this.parserConfig.delimiter
+        config
       )
-    else
-      writeToZipFile(
-        productStream,
-        output,
-        this.logger,
-        this.parserConfig.delimiter
-      )
+    else writeToZipFile(productStream, output, this.logger, config)
   }
 
   parse(input: stream$Readable, output: stream$Writable): stream$Readable {

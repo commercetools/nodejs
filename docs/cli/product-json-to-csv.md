@@ -97,7 +97,17 @@ If no template file is passed in, one CSV file will be created for each product 
 ##### Example
 
 ```
-$ @commercetools@commercetools/product-json-to-csv --projectKey <project_key> --input <path_to_JSON_file> --output <path_to_zip_archive>.zip
+$ @commercetools/product-json-to-csv --projectKey <project_key> --input <path_to_JSON_file> --output <path_to_zip_archive>.zip
+```
+
+#### Support for different encodings
+
+Parser can save products in a different encoding (than the default `utf8`) using `--encoding "encodingName"` parameter. Supported encodings are listed [here](https://github.com/ashtuchkin/iconv-lite/#supported-encodings) in the `iconv-lite` module github page.
+
+##### Example
+
+```
+$ @commercetools/product-json-to-csv --projectKey <project_key> --input <path_to_JSON_file> --output <path_to_zip_archive>.zip --encoding win1252
 ```
 
 ---
@@ -119,6 +129,7 @@ The constructor accepts four arguments:
   - `headerFields` (Array<String>): An array of header fields to be passed to CSV. This headerFields array should contain the required columns of the CSV file(Optional. If omitted, a `.zip` file containing one csv file per product type will be created. This is synonymous with the `--template` flag in the CLI)
   - `language` (String): Default language used when resolving localised attributes (except lenums) and category names (Default: `en`)
   - `languages` (Array<String>): List of languages which should be exported from `ltext/lenum` attributes (Default: `["en"]`)
+  - `encoding` (String): Encoding used when saving products to output stream (Default: `utf8`)
 - `multiValueDelimiter` (String): Delimiter used to separate multivalue items in cells in the output file (Default: `;`)
 - An optional logger object having four methods (`info`, `warn`, `error` and `debug`)
 - `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_products`, `view_customers`]
