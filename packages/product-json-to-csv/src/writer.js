@@ -5,7 +5,23 @@ import { parse } from 'json2csv'
 import path from 'path'
 import slugify from 'slugify'
 import tmp from 'tmp'
+import iconv from 'iconv-lite'
 import mapHeaders from './map-headers'
+
+/**
+ * Takes string in UTF8 and returns buffer with encoded text
+ * @param string String in UTF8
+ * @param encoding Target encoding (eg: win1250)
+ * @returns {*} Buffer
+ */
+export function encode(string, encoding = 'utf8') {
+  if (encoding === 'utf8') return Buffer.from(string, 'utf8')
+
+  if (!iconv.encodingExists(encoding))
+    throw new Error(`Encoding does not exist: "${encoding}"`)
+
+  return iconv.encode(string, encoding)
+}
 
 export function onStreamsFinished(streams, cb) {
   const emitOnce = new EmitOnce(streams, 'finish')
@@ -50,40 +66,57 @@ export function writeToSingleCsvFile(
   output,
   logger,
   headerFields,
-  delimiter
+  config = { delimiter: ',', encoding: 'utf8' }
 ) {
   const trimmedHeaders = headerFields.map(header => header.trim())
-  output.write(`${trimmedHeaders.join(delimiter)}\n`) // Write headers first
+  output.write(`${trimmedHeaders.join(config.delimiter)}\n`) // Write headers first
   const columnNames = mapHeaders(trimmedHeaders)
+  let error = null
+
   productStream
-    .each(product => {
+    .map(product => {
       const csvData = parse(product, {
         fields: columnNames,
         header: false,
-        delimiter,
+        delimiter: config.delimiter,
       })
 
-      if (!csvData.match(/^,*$/)) output.write(`${csvData}\n`)
+      // ignore empty rows (containing only delimiters)
+      if (csvData.split(config.delimiter).join('') !== '') {
+        output.write(encode(csvData, config.encoding))
+        output.write('\n')
+      }
+      return true
+    })
+    .stopOnError(err => {
+      error = err
     })
     .done(() => {
-      if (output !== process.stdout) output.end()
+      if (error) output.emit('error', error)
+      else logger.info('All products have been written to CSV file')
 
-      logger.info('All products have been written to CSV file')
+      if (output !== process.stdout) output.end()
     })
 }
 
 // Accept a highland stream and write the output to multiple files per
 // product type, then compress all files to a zip file
-export function writeToZipFile(productStream, output, logger, delimiter) {
+export function writeToZipFile(
+  productStream,
+  output,
+  logger,
+  config = { delimiter: ',', encoding: 'utf8' }
+) {
   const tmpDir = tmp.dirSync({ unsafeCleanup: true }).name
   tmp.setGracefulCleanup()
   let currentProductType
   let fileStream
   let columnNames
+  let error
   const columnNamesCache = {}
   const streamCache = {}
   productStream
-    .each(product => {
+    .map(product => {
       let header = false
       // Process this block only if item is a masterVariant and was
       // not the last processed item
@@ -112,9 +145,18 @@ export function writeToZipFile(productStream, output, logger, delimiter) {
       const csvData = parse(product, {
         fields: columnNames,
         header,
-        delimiter,
+        delimiter: config.delimiter,
       })
-      fileStream.write(`${csvData}\n`)
+
+      fileStream.write(encode(csvData, config.encoding))
+      fileStream.write('\n')
+      return true
     })
-    .done(() => finishStreamsAndArchive(streamCache, tmpDir, output, logger))
+    .stopOnError(err => {
+      error = err
+    })
+    .done(() => {
+      if (error) output.emit('error', error)
+      else finishStreamsAndArchive(streamCache, tmpDir, output, logger)
+    })
 }

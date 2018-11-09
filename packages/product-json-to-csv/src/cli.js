@@ -211,6 +211,7 @@ Promise.all([getHeaders(args), resolveCredentials(args)])
       languages: args.language.split(','), // allow export to multiple languages
       multiValueDelimiter: args.multiValueDelimiter,
       onlyMasterVariants: args.onlyMasterVariants,
+      encoding: args.encoding,
       headerFields,
     }
     const parserLogger = {
@@ -229,7 +230,6 @@ Promise.all([getHeaders(args), resolveCredentials(args)])
     )
   })
   .then(productJsonToCsv => {
-    args.input.setEncoding(args.encoding)
     productJsonToCsv.run(args.input, args.output)
   })
   .catch(errorHandler)

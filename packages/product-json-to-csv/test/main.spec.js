@@ -44,6 +44,7 @@ describe('ProductJsonToCsv', () => {
       }
       const defaultConfig = {
         delimiter: ',',
+        encoding: 'utf8',
         multiValueDelimiter: ';',
         fillAllRows: false,
         onlyMasterVariants: false,
@@ -64,21 +65,37 @@ describe('ProductJsonToCsv', () => {
     test('should write data to single `csv` file if headers are set', () => {
       productJsonToCsv = new ProductJsonToCsv(
         { projectKey: 'project-key' },
-        { headerFields: ['header1, header2'] }
+        {
+          headerFields: ['header1, header2'],
+          delimiter: ';',
+          encoding: 'win1250',
+        }
       )
       productJsonToCsv.parse = jest.fn(() => 'foo')
 
       productJsonToCsv.run()
       expect(writer.writeToSingleCsvFile).toBeCalled()
       expect(writer.writeToZipFile).not.toBeCalled()
+      expect(writer.writeToSingleCsvFile.mock.calls[0][4]).toEqual({
+        delimiter: ';',
+        encoding: 'win1250',
+      })
     })
 
     test('should write data to `zip` file if headers are not set', () => {
+      productJsonToCsv = new ProductJsonToCsv(
+        { projectKey: 'project-key' },
+        { delimiter: ';', encoding: 'win1250' }
+      )
       productJsonToCsv.parse = jest.fn(() => 'bar')
 
       productJsonToCsv.run()
       expect(writer.writeToSingleCsvFile).not.toBeCalled()
       expect(writer.writeToZipFile).toBeCalled()
+      expect(writer.writeToZipFile.mock.calls[0][3]).toEqual({
+        delimiter: ';',
+        encoding: 'win1250',
+      })
     })
   })
 
