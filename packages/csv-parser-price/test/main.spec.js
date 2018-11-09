@@ -143,6 +143,75 @@ describe('CsvParserPrice::parse', () => {
     csvParserPrice.parse(readStream, outputStream)
   })
 
+  test('should parse a highPrecision fields in price and custom fields money object', done => {
+    const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+    const readStream = fs.createReadStream(
+      path.join(__dirname, 'helpers/high-precision-price.csv')
+    )
+
+    const customType = {
+      id: '123',
+      key: 'custom-type',
+      name: {
+        en: 'name',
+      },
+      resourceTypeIds: ['product-price'],
+      fieldDefinitions: [
+        {
+          name: 'kiloPrice',
+          label: {
+            de: 'Kilopreis',
+          },
+          type: {
+            name: 'Money',
+          },
+        },
+      ],
+    }
+
+    sinon
+      .stub(csvParserPrice, 'getCustomTypeDefinition')
+      .returns(Promise.resolve(customType))
+
+    const outputStream = streamtest.v2.toText((error, result) => {
+      expect(error).not.toBeTruthy()
+
+      const prices = JSON.parse(result).prices
+      expect(prices).toEqual([
+        {
+          prices: [
+            {
+              custom: {
+                fields: {
+                  kiloPrice: {
+                    centAmount: 56789,
+                    currencyCode: 'GBP',
+                    fractionDigits: 2,
+                    preciseAmount: 5,
+                    type: 'highPrecision',
+                  },
+                },
+                type: {
+                  id: '123',
+                },
+              },
+              value: {
+                centAmount: 123.5,
+                currencyCode: 'EUR',
+                fractionDigits: 3,
+                preciseAmount: 12345,
+                type: 'highPrecision',
+              },
+            },
+          ],
+          sku: 'variant-SKU',
+        },
+      ])
+      done()
+    })
+    csvParserPrice.parse(readStream, outputStream)
+  })
+
   test('should exit on faulty CSV format', done => {
     const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
     const inputStream = fs.createReadStream(

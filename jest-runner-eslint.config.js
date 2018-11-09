@@ -1,6 +1,7 @@
 module.exports = {
   cliOptions: {
     format: 'node_modules/eslint-formatter-pretty',
+    fix: true,
     rules: {
       'import/no-unresolved': 2,
       'prettier/prettier': [
