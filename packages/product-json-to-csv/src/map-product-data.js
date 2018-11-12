@@ -153,6 +153,16 @@ export default class ProductMapping {
     )
   }
 
+  /**
+   * Check if the attribute has required fields for Money format
+   * @param value Attribute value
+   * @returns {boolean} Is attribute in a Money format?
+   * @private
+   */
+  static _isMoneyAttribute(value: Object): boolean {
+    return ['centPrecision', 'highPrecision'].includes(value.type)
+  }
+
   _mapVariantProperties(variant: Variant, productType: ?ProductType): Object {
     const mappedVariant: Object = reduce(
       variant,
@@ -316,8 +326,14 @@ export default class ProductMapping {
     if (isObject(value) && !Array.isArray(value)) {
       // ltext, enum, lenum
       if (value.id && value.typeId)
-        // reference
-        mappedAttribute[name] = ProductMapping._mapReference(value)
+        // reference by id
+        mappedAttribute[name] = ProductMapping._mapReferenceById(value)
+      else if (value.key && value.typeId)
+        // reference by key
+        mappedAttribute[name] = ProductMapping._mapReferenceByKey(value)
+      else if (ProductMapping._isMoneyAttribute(value))
+        // Money or HighPrecisionMoney
+        mappedAttribute[name] = ProductMapping._mapPriceToString({ value })
       else if (value.key && !isUndefined(value.label))
         // ENUM or LENUM attribute
         mappedAttribute = ProductMapping._mapLenumOrEnumAttribute(name, value)
@@ -475,7 +491,11 @@ export default class ProductMapping {
     return mappedAttribute
   }
 
-  static _mapReference(value: Object): string {
+  static _mapReferenceById(value: Object): string {
     return get(value, 'obj.key') || get(value, 'obj.name') || value.id
+  }
+
+  static _mapReferenceByKey(value: Object): string {
+    return value.key
   }
 }
