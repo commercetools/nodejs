@@ -104,7 +104,7 @@ type PriceTier = {
 }
 
 export type Price = {
-  id: string,
+  id?: string,
   value: Money,
   country?: string,
   customerGroup?: TypeReference,
