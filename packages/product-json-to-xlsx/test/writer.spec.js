@@ -221,7 +221,7 @@ describe('Writer', () => {
                 'products/product-type-1.xlsx',
                 'products/product-type-2.xlsx',
               ])
-              expect(entries.length).toEqual(2)
+              expect(entries).toHaveLength(2)
               tempFile.removeCallback()
               done()
             }
