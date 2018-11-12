@@ -19,9 +19,9 @@ type RoleUpdate = {
 export const actionGroups = ['base']
 
 // This function groups `addRoles` and `removeRoles` actions to one array
-function groupRoleActions([actions: Array<RoleUpdate>]: Array<
-  UpdateAction
->): Array<UpdateAction> {
+function groupRoleActions([
+  actions: Array<RoleUpdate>,
+]: Array<UpdateAction>): Array<UpdateAction> {
   const addActionRoles = []
   const removeActionRoles = []
   actions.forEach((action: UpdateAction) => {

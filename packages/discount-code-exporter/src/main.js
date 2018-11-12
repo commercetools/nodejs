@@ -13,7 +13,6 @@ import type {
   ExporterOptions,
   LoggerOptions,
   CartDiscount,
-  DiscountCode,
   DiscountCodeDraft,
 } from 'types/discountCodes'
 import type { Client, ClientRequest } from 'types/sdk'
@@ -184,7 +183,7 @@ export default class DiscountCodeExport {
     const discountCodeData = Object.entries(restDiscountCodeData).reduce(
       (
         discountCode: Object,
-        [discountCodeKey: string, value: DiscountCode]: [string, mixed]
+        [discountCodeKey, value]: [string, mixed]
       ): Object =>
         objKeys.includes(discountCodeKey) && !Object.entries(value).length
           ? discountCode

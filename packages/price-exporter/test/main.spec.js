@@ -215,14 +215,14 @@ describe('PriceExporter', () => {
           ],
         },
       ]
-      priceExporter._resolveChannel = jest.fn(
-        price => (price.channel ? resolvedChannel : {})
+      priceExporter._resolveChannel = jest.fn(price =>
+        price.channel ? resolvedChannel : {}
       )
-      priceExporter._resolveCustomerGroup = jest.fn(
-        price => (price.customerGroup ? resolvedCustGroup : {})
+      priceExporter._resolveCustomerGroup = jest.fn(price =>
+        price.customerGroup ? resolvedCustGroup : {}
       )
-      priceExporter._resolveCustomType = jest.fn(
-        price => (price.custom ? resolvedCustomType : {})
+      priceExporter._resolveCustomType = jest.fn(price =>
+        price.custom ? resolvedCustomType : {}
       )
       const expected = [
         {
