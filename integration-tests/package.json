@@ -32,7 +32,7 @@
     "@commercetools/sdk-middleware-user-agent": "*",
     "@commercetools/state-importer": "*",
     "@commercetools/sync-actions": "*",
-    "bluebird": "3.5.2",
+    "bluebird": "3.5.3",
     "common-tags": "1.8.0",
     "csvtojson": "2.0.8",
     "dotenv": "6.1.0",

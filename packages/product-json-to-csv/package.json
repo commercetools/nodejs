@@ -43,7 +43,7 @@
     "JSONStream": "1.3.5",
     "archiver": "3.0.0",
     "babel-runtime": "6.26.0",
-    "bluebird": "3.5.2",
+    "bluebird": "3.5.3",
     "common-tags": "1.8.0",
     "flat": "4.1.0",
     "highland": "2.13.0",
