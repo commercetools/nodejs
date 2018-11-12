@@ -13,7 +13,7 @@ describe('queryExpand', () => {
   })
 
   test('should throw if expansionPath is missing', () => {
-    expect(() => service.expand()).toThrowError(
+    expect(() => service.expand()).toThrow(
       /Required argument for `expand` is missing/
     )
   })

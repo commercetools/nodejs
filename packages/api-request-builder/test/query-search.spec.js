@@ -17,10 +17,10 @@ describe('querySearch', () => {
   })
 
   test('should throw if text params are missing', () => {
-    expect(() => service.text()).toThrowError(
+    expect(() => service.text()).toThrow(
       /Required arguments for `text` are missing/
     )
-    expect(() => service.text('Foo Bar')).toThrowError(
+    expect(() => service.text('Foo Bar')).toThrow(
       /Required arguments for `text` are missing/
     )
   })
@@ -36,7 +36,7 @@ describe('querySearch', () => {
   })
 
   test('should throw if fuzzy level is missing', () => {
-    expect(() => service.fuzzyLevel()).toThrowError(
+    expect(() => service.fuzzyLevel()).toThrow(
       /Required argument for `fuzzyLevel` is missing/
     )
   })
@@ -54,7 +54,7 @@ describe('querySearch', () => {
   })
 
   test('should throw if facet is missing', () => {
-    expect(() => service.facet()).toThrowError(
+    expect(() => service.facet()).toThrow(
       /Required argument for `facet` is missing/
     )
   })
@@ -67,7 +67,7 @@ describe('querySearch', () => {
   })
 
   test('should throw if filter is missing', () => {
-    expect(() => service.filter()).toThrowError(
+    expect(() => service.filter()).toThrow(
       /Required argument for `filter` is missing/
     )
   })
@@ -80,7 +80,7 @@ describe('querySearch', () => {
   })
 
   test('should throw if filterByQuery is missing', () => {
-    expect(() => service.filterByQuery()).toThrowError(
+    expect(() => service.filterByQuery()).toThrow(
       /Required argument for `filterByQuery` is missing/
     )
   })
@@ -93,7 +93,7 @@ describe('querySearch', () => {
   })
 
   test('should throw if filterByFacets is missing', () => {
-    expect(() => service.filterByFacets()).toThrowError(
+    expect(() => service.filterByFacets()).toThrow(
       /Required argument for `filterByFacets` is missing/
     )
   })

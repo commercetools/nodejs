@@ -30,7 +30,7 @@ describe('CategoryExporter', () => {
     })
 
     test('should throw error if no `apiConfig` in `options` parameter', () => {
-      expect(() => new CategoryExporter({ froo: 'bar' })).toThrowError(
+      expect(() => new CategoryExporter({ froo: 'bar' })).toThrow(
         /The constructor must be passed an `apiConfig` object/
       )
     })

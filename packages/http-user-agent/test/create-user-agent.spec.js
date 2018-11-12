@@ -72,17 +72,17 @@ describe('for node', () => {
 
 describe('validation', () => {
   test('throws if options is undefined', () => {
-    expect(() => createHttpUserAgent()).toThrowError(
+    expect(() => createHttpUserAgent()).toThrow(
       'Missing required option `name`'
     )
   })
   test('throws if options is empty', () => {
-    expect(() => createHttpUserAgent({})).toThrowError(
+    expect(() => createHttpUserAgent({})).toThrow(
       'Missing required option `name`'
     )
   })
   test('throws if options is missing name', () => {
-    expect(() => createHttpUserAgent({ foo: 'bar' })).toThrowError(
+    expect(() => createHttpUserAgent({ foo: 'bar' })).toThrow(
       'Missing required option `name`'
     )
   })

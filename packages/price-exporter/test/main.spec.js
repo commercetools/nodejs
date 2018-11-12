@@ -36,7 +36,7 @@ describe('PriceExporter', () => {
     })
 
     test('should throw if no `apiConfig` in `options` parameter', () => {
-      expect(() => new PriceExporter({ foo: 'bar' })).toThrowError(
+      expect(() => new PriceExporter({ foo: 'bar' })).toThrow(
         /The constructor must be passed an `apiConfig` object/
       )
     })
@@ -48,7 +48,7 @@ describe('PriceExporter', () => {
             apiConfig: 'config',
             exportFormat: 'csv',
           })
-      ).toThrowError(
+      ).toThrow(
         /The constructor must be passed a `csvHeaders` array for CSV export/
       )
     })
@@ -77,7 +77,7 @@ describe('PriceExporter', () => {
       const outputStream = streamtest.v2.toText(() => {})
       priceExporter.config.exportFormat = 'json'
       await priceExporter.run(outputStream)
-      expect(priceExporter._getProducts).toBeCalled()
+      expect(priceExporter._getProducts).toHaveBeenCalled()
       expect(priceExporter._getProducts.mock.calls[0][0]).toEqual(outputStream)
       expect(csv.createWriteStream).not.toBeCalled()
     })
@@ -88,9 +88,9 @@ describe('PriceExporter', () => {
 
       priceExporter.config.exportFormat = 'csv'
       await priceExporter.run(outputStream)
-      expect(priceExporter._getProducts).toBeCalled()
+      expect(priceExporter._getProducts).toHaveBeenCalled()
       expect(priceExporter._getProducts.mock.calls[0][0]).toEqual(outputStream)
-      expect(csv.createWriteStream).toBeCalled()
+      expect(csv.createWriteStream).toHaveBeenCalled()
     })
   })
 
@@ -121,7 +121,7 @@ describe('PriceExporter', () => {
       const pipeStream = { end: jest.fn() }
       await priceExporter._getProducts(outputStream, pipeStream)
 
-      expect(pipeStream.end).toBeCalled()
+      expect(pipeStream.end).toHaveBeenCalled()
     })
 
     test('should emit `error` on output stream if error occurs', done => {
@@ -163,7 +163,7 @@ describe('PriceExporter', () => {
       priceExporter._writePrices(sample, pipeStream)
 
       expect(pipeStream.write).toHaveBeenCalledTimes(1)
-      expect(pipeStream.write).toBeCalledWith(sample[0])
+      expect(pipeStream.write).toHaveBeenCalledWith(sample[0])
     })
 
     test('should flatten csv output and write to stream', done => {
@@ -174,8 +174,8 @@ describe('PriceExporter', () => {
       priceExporter._writePrices(sample, pipeStream)
 
       expect(pipeStream.write).toHaveBeenCalledTimes(2)
-      expect(pipeStream.write).toBeCalledWith(firstExpected)
-      expect(pipeStream.write).toBeCalledWith(secondExpected)
+      expect(pipeStream.write).toHaveBeenCalledWith(firstExpected)
+      expect(pipeStream.write).toHaveBeenCalledWith(secondExpected)
     })
   })
 
@@ -399,7 +399,7 @@ describe('PriceExporter', () => {
       }
 
       priceExporter.fetchReferences(uri)
-      expect(priceExporter.client.execute).toBeCalled()
+      expect(priceExporter.client.execute).toHaveBeenCalled()
       expect(priceExporter.client.execute).toHaveBeenCalledWith(expectedRequest)
     })
 

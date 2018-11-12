@@ -26,32 +26,32 @@ describe('queryLocation', () => {
   })
 
   test('should throw if country is missing', () => {
-    expect(() => service.byCountry()).toThrowError(
+    expect(() => service.byCountry()).toThrow(
       /Required argument for `byCountry` is missing/
     )
   })
 
   test('should throw if currency is missing', () => {
-    expect(() => service.byCurrency()).toThrowError(
+    expect(() => service.byCurrency()).toThrow(
       /Required argument for `byCurrency` is missing/
     )
   })
 
   test('should throw if state is missing', () => {
-    expect(() => service.byState()).toThrowError(
+    expect(() => service.byState()).toThrow(
       /Required argument for `byState` is missing/
     )
   })
 
   test('should throw while using byCurrency if country was not set', () => {
-    expect(() => service.byCurrency('EUR')).toThrowError(
+    expect(() => service.byCurrency('EUR')).toThrow(
       // eslint-disable-next-line max-len
       /A `country` for this resource has not been set.*./
     )
   })
 
   test('should throw while using byState if country was not set', () => {
-    expect(() => service.byState('Germany')).toThrowError(
+    expect(() => service.byState('Germany')).toThrow(
       // eslint-disable-next-line max-len
       /A `country` for this resource has not been set.*/
     )

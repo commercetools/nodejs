@@ -74,7 +74,7 @@ describe('ProductJsonToCsv', () => {
       productJsonToCsv.parse = jest.fn(() => 'foo')
 
       productJsonToCsv.run()
-      expect(writer.writeToSingleCsvFile).toBeCalled()
+      expect(writer.writeToSingleCsvFile).toHaveBeenCalled()
       expect(writer.writeToZipFile).not.toBeCalled()
       expect(writer.writeToSingleCsvFile.mock.calls[0][4]).toEqual({
         delimiter: ';',
@@ -91,7 +91,7 @@ describe('ProductJsonToCsv', () => {
 
       productJsonToCsv.run()
       expect(writer.writeToSingleCsvFile).not.toBeCalled()
-      expect(writer.writeToZipFile).toBeCalled()
+      expect(writer.writeToZipFile).toHaveBeenCalled()
       expect(writer.writeToZipFile.mock.calls[0][3]).toEqual({
         delimiter: ';',
         encoding: 'win1250',
@@ -139,8 +139,8 @@ describe('ProductJsonToCsv', () => {
       // We expect the method to resolve to undefined as a rejected promise
       // indicates the error is not handled
       await expect(productStream.toPromise(Promise)).resolves.toBeUndefined()
-      expect(productJsonToCsv.logger.error).toBeCalledWith(fakeError)
-      expect(outputStream.emit).toBeCalledWith('error', fakeError)
+      expect(productJsonToCsv.logger.error).toHaveBeenCalledWith(fakeError)
+      expect(outputStream.emit).toHaveBeenCalledWith('error', fakeError)
     })
 
     test('should process data through stream if no error occurs', async () => {
@@ -157,7 +157,7 @@ describe('ProductJsonToCsv', () => {
       await expect(productStream.collect().toPromise(Promise)).resolves.toEqual(
         expected
       )
-      expect(productJsonToCsv.logger.debug).toBeCalledWith(
+      expect(productJsonToCsv.logger.debug).toHaveBeenCalledWith(
         expect.stringMatching('Done with conversion')
       )
     })
@@ -269,28 +269,28 @@ describe('ProductJsonToCsv', () => {
 
         await productJsonToCsv._resolveReferences(sampleProduct)
 
-        expect(productJsonToCsv._resolveProductType).toBeCalledWith(
+        expect(productJsonToCsv._resolveProductType).toHaveBeenCalledWith(
           sampleProduct.productType
         )
-        expect(productJsonToCsv._resolveTaxCategory).toBeCalledWith(
+        expect(productJsonToCsv._resolveTaxCategory).toHaveBeenCalledWith(
           sampleProduct.taxCategory
         )
-        expect(productJsonToCsv._resolveState).toBeCalledWith(
+        expect(productJsonToCsv._resolveState).toHaveBeenCalledWith(
           sampleProduct.state
         )
-        expect(productJsonToCsv._resolveCategories).toBeCalledWith(
+        expect(productJsonToCsv._resolveCategories).toHaveBeenCalledWith(
           sampleProduct.categories
         )
-        expect(productJsonToCsv._resolveCategoryOrderHints).toBeCalledWith(
-          sampleProduct.categoryOrderHints
-        )
-        expect(resolveVariantReferencesSpy).toBeCalledWith(
+        expect(
+          productJsonToCsv._resolveCategoryOrderHints
+        ).toHaveBeenCalledWith(sampleProduct.categoryOrderHints)
+        expect(resolveVariantReferencesSpy).toHaveBeenCalledWith(
           sampleProduct.masterVariant
         )
-        expect(resolvePriceReferencesSpy).toBeCalledWith(
+        expect(resolvePriceReferencesSpy).toHaveBeenCalledWith(
           sampleProduct.masterVariant.prices
         )
-        expect(productJsonToCsv._getChannelsById).toBeCalledWith([
+        expect(productJsonToCsv._getChannelsById).toHaveBeenCalledWith([
           '123',
           '456',
           'unknown',
@@ -395,7 +395,7 @@ describe('ProductJsonToCsv', () => {
       test('build correct request uri for productType', async () => {
         const expected = /project-key\/product-types\/product-type-id/
         await productJsonToCsv._resolveProductType(sampleProduct.productType)
-        expect(productJsonToCsv.fetchReferences).toBeCalledWith(
+        expect(productJsonToCsv.fetchReferences).toHaveBeenCalledWith(
           expect.stringMatching(expected)
         )
       })
@@ -542,7 +542,7 @@ describe('ProductJsonToCsv', () => {
       test('build correct request uri for taxCategory', async () => {
         const expected = /project-key\/tax-categories\/tax-cat-id/
         await productJsonToCsv._resolveTaxCategory(sampleProduct.taxCategory)
-        expect(productJsonToCsv.fetchReferences).toBeCalledWith(
+        expect(productJsonToCsv.fetchReferences).toHaveBeenCalledWith(
           expect.stringMatching(expected)
         )
       })
@@ -580,7 +580,7 @@ describe('ProductJsonToCsv', () => {
       test('build correct request uri for state', async () => {
         const expected = /project-key\/states\/state-id/
         await productJsonToCsv._resolveState(sampleProduct.state)
-        expect(productJsonToCsv.fetchReferences).toBeCalledWith(
+        expect(productJsonToCsv.fetchReferences).toHaveBeenCalledWith(
           expect.stringMatching(expected)
         )
       })
@@ -759,7 +759,7 @@ describe('ProductJsonToCsv', () => {
         await expect(
           productJsonToCsv._getCategories(categoryIds)
         ).resolves.toEqual(expectedCategories)
-        expect(productJsonToCsv.fetchReferences).toBeCalledWith(
+        expect(productJsonToCsv.fetchReferences).toHaveBeenCalledWith(
           expect.stringMatching(expectedUri)
         )
       })
@@ -842,8 +842,10 @@ describe('ProductJsonToCsv', () => {
       }
 
       productJsonToCsv.fetchReferences(uri)
-      expect(productJsonToCsv.client.execute).toBeCalled()
-      expect(productJsonToCsv.client.execute).toBeCalledWith(expectedRequest)
+      expect(productJsonToCsv.client.execute).toHaveBeenCalled()
+      expect(productJsonToCsv.client.execute).toHaveBeenCalledWith(
+        expectedRequest
+      )
     })
 
     test('should fetch only once for multiple calls with same parameter', () => {
@@ -857,7 +859,9 @@ describe('ProductJsonToCsv', () => {
       productJsonToCsv.fetchReferences(uri)
       productJsonToCsv.fetchReferences(uri)
       expect(productJsonToCsv.client.execute).toHaveBeenCalledTimes(1)
-      expect(productJsonToCsv.client.execute).toBeCalledWith(expectedRequest)
+      expect(productJsonToCsv.client.execute).toHaveBeenCalledWith(
+        expectedRequest
+      )
     })
   })
 
@@ -891,7 +895,7 @@ describe('ProductJsonToCsv', () => {
           key: 'channel-key',
         },
       })
-      expect(productJsonToCsv.fetchReferences).toBeCalledWith(
+      expect(productJsonToCsv.fetchReferences).toHaveBeenCalledWith(
         '/project-key/channels?where=id%20in%20(%22channel-id%22)'
       )
       expect(productJsonToCsv.fetchReferences).toHaveBeenCalledTimes(1)

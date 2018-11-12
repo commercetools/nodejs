@@ -93,9 +93,9 @@ describe('CustomObjectsImporter', () => {
         'No objects found, please pass an array with custom objects to the run function'
       )
       test('should throw error', () => {
-        expect(() => objectsImport.run(payload)).toThrowError(errorMessage)
-        expect(() => objectsImport.run('foo')).toThrowError(errorMessage)
-        expect(() => objectsImport.run({})).toThrowError(errorMessage)
+        expect(() => objectsImport.run(payload)).toThrow(errorMessage)
+        expect(() => objectsImport.run('foo')).toThrow(errorMessage)
+        expect(() => objectsImport.run({})).toThrow(errorMessage)
       })
     })
 
@@ -201,23 +201,21 @@ describe('CustomObjectsImporter', () => {
           objectsImport.continueOnProblems = true
         })
 
-        test('should update summary `createErrorCount`', () => {
+        test('should update summary `createErrorCount`', () =>
           objectsImport
             ._executeCreateOrUpdateAction(createRequest)
             .catch(error => {
               expect(error).toMatchSnapshot()
               expect(objectsImport._summary.createErrorCount).toBe(1)
-            })
-        })
+            }))
 
-        test('should update summary `updateErrorCount`', () => {
+        test('should update summary `updateErrorCount`', () =>
           objectsImport
             ._executeCreateOrUpdateAction(updateRequest)
             .catch(error => {
               expect(error).toMatchSnapshot()
               expect(objectsImport._summary.updateErrorCount).toBe(1)
-            })
-        })
+            }))
 
         test('should resolve promise', () => {
           expect(
@@ -385,23 +383,21 @@ describe('CustomObjectsImporter', () => {
         )
       })
 
-      test('should add to `createErrorCount`', () => {
+      test('should add to `createErrorCount`', () =>
         objectsImport._executeCreateOrUpdateAction(createRequest).catch(() => {
           const summaryReport = objectsImport.summaryReport()
 
           expect(summaryReport.detailedSummary.createErrorCount).toBe(1)
           expect(summaryReport.reportMessage).toMatch(errorOccurredMessage)
-        })
-      })
+        }))
 
-      test('should add to `updateErrorCount`', () => {
+      test('should add to `updateErrorCount`', () =>
         objectsImport._executeCreateOrUpdateAction(updateRequest).catch(() => {
           const summaryReport = objectsImport.summaryReport()
 
           expect(summaryReport.detailedSummary.updateErrorCount).toBe(1)
           expect(summaryReport.reportMessage).toMatch(errorOccurredMessage)
-        })
-      })
+        }))
     })
   })
 })

@@ -49,31 +49,31 @@ describe('createService', () => {
   })
 
   test('should throw if project key is missing', () => {
-    expect(() => createService(fakeService)).toThrowError(
+    expect(() => createService(fakeService)).toThrow(
       /No project defined. Please enter a project key/
     )
   })
 
   test('should throw if definition is missing', () => {
-    expect(() => createService()).toThrowError(
+    expect(() => createService()).toThrow(
       /Cannot create a service without its definition/
     )
   })
 
   test('should throw if definition prop (type) is missing', () => {
-    expect(() => createService({ endpoint: '/foo' })).toThrowError(
+    expect(() => createService({ endpoint: '/foo' })).toThrow(
       /Definition is missing required parameter type/
     )
   })
 
   test('should throw if definition prop (endpoint) is missing', () => {
-    expect(() => createService({ type: 'foo' })).toThrowError(
+    expect(() => createService({ type: 'foo' })).toThrow(
       /Definition is missing required parameter endpoint/
     )
   })
 
   test('should throw if definition prop (features) is missing', () => {
-    expect(() => createService({ type: 'foo', endpoint: '/foo' })).toThrowError(
+    expect(() => createService({ type: 'foo', endpoint: '/foo' })).toThrow(
       /Definition is missing required parameter features/
     )
   })
@@ -81,12 +81,12 @@ describe('createService', () => {
   test('should throw if definition prop (features) is not an array', () => {
     expect(() =>
       createService({ type: 'foo', endpoint: '/foo', features: 'wrong' })
-    ).toThrowError(/Definition requires `features` to be a non empty array/)
+    ).toThrow(/Definition requires `features` to be a non empty array/)
   })
   test('should throw if definition prop (features) is an empty array', () => {
     expect(() =>
       createService({ type: 'foo', endpoint: '/foo', features: [] })
-    ).toThrowError(/Definition requires `features` to be a non empty array/)
+    ).toThrow(/Definition requires `features` to be a non empty array/)
   })
 
   describe('parse', () => {

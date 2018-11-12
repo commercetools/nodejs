@@ -50,7 +50,7 @@ describe('AbstractParser', () => {
   test('::_processData should throw an error when called', () => {
     const parser = new AbstractParser()
 
-    expect(parser._processData).toThrowError(
+    expect(parser._processData).toThrow(
       'Method AbstractParser._processData has to be overridden!'
     )
   })

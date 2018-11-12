@@ -64,7 +64,7 @@ describe('createMapActionGroup', () => {
       test('should throw an error with message', () => {
         expect(() => {
           mapActionGroup(actionGroups[0].type, fn)
-        }).toThrowError(
+        }).toThrow(
           `Action group '${actionGroups[0].group}' ` +
             'not supported. Please use black or white.'
         )
