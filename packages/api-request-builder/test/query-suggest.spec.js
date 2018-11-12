@@ -23,10 +23,10 @@ describe('querySuggest', () => {
   })
 
   test('should throw if searchKeywords params are missing', () => {
-    expect(() => service.searchKeywords()).toThrowError(
+    expect(() => service.searchKeywords()).toThrow(
       /Required arguments for `searchKeywords` are missing/
     )
-    expect(() => service.searchKeywords('Foo Bar')).toThrowError(
+    expect(() => service.searchKeywords('Foo Bar')).toThrow(
       /Required arguments for `searchKeywords` are missing/
     )
   })

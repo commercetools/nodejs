@@ -25,7 +25,7 @@ describe('StateImport', () => {
 
   describe('::constructor', () => {
     test('should throw if no `apiConfig` in `options` parameter', () => {
-      expect(() => new StateImport({ foo: 'bar' })).toThrowError(
+      expect(() => new StateImport({ foo: 'bar' })).toThrow(
         /The constructor must be passed an `apiConfig` object/
       )
     })
@@ -62,7 +62,7 @@ describe('StateImport', () => {
       const response = await stateImport.run('state')
       expect(response).toBe('imported')
       expect(stateImport._processBatches).toHaveBeenCalledTimes(1)
-      expect(stateImport._processBatches).toBeCalledWith('state')
+      expect(stateImport._processBatches).toHaveBeenCalledWith('state')
     })
   })
 
@@ -88,7 +88,7 @@ describe('StateImport', () => {
       test('should process states and call `_createOrUpdate`', async () => {
         await stateImport._processBatches(states)
         expect(stateImport._createOrUpdate).toHaveBeenCalledTimes(1)
-        expect(stateImport._createOrUpdate).toBeCalledWith(
+        expect(stateImport._createOrUpdate).toHaveBeenCalledWith(
           states,
           response.body.results
         )
@@ -129,7 +129,10 @@ describe('StateImport', () => {
       test('should call `_update`', async () => {
         await stateImport._createOrUpdate(states, existingStates)
         expect(stateImport._update).toHaveBeenCalledTimes(2)
-        expect(stateImport._update).toBeCalledWith(states[0], existingStates[0])
+        expect(stateImport._update).toHaveBeenCalledWith(
+          states[0],
+          existingStates[0]
+        )
         expect(stateImport._update).toHaveBeenLastCalledWith(
           states[1],
           existingStates[1]
@@ -188,7 +191,7 @@ describe('StateImport', () => {
               await stateImport._createOrUpdate(states, existingStates)
             } catch (error) {
               // Assertions in catch block because we expect promises to fail
-              expect(stateImport._update).toBeCalled()
+              expect(stateImport._update).toHaveBeenCalled()
               expect(stateImport._summary.updated).toBe(0)
               expect(stateImport._summary.errors.update).toHaveLength(2)
               expect(stateImport._summary.errors.update[0]).toBe(
@@ -205,8 +208,8 @@ describe('StateImport', () => {
       test('should call `_create` if state is unique', async () => {
         await stateImport._createOrUpdate(states, existingStates)
         expect(stateImport._create).toHaveBeenCalledTimes(2)
-        expect(stateImport._create).toBeCalledWith(states[2])
-        expect(stateImport._create).toBeCalledWith(states[3])
+        expect(stateImport._create).toHaveBeenCalledWith(states[2])
+        expect(stateImport._create).toHaveBeenCalledWith(states[3])
       })
 
       describe('when state is successfully created', () => {
@@ -248,7 +251,7 @@ describe('StateImport', () => {
               await stateImport._createOrUpdate(states, existingStates)
             } catch (error) {
               // Put assertions in catch block because we expect promises to fail
-              expect(stateImport._create).toBeCalled()
+              expect(stateImport._create).toHaveBeenCalled()
               expect(stateImport._summary.created).toBe(0)
               expect(stateImport._summary.errors.create).toHaveLength(2)
               expect(stateImport._summary.errors.create[0]).toBe(
@@ -287,7 +290,7 @@ describe('StateImport', () => {
     test('should POST a new state', async () => {
       stateImport.client.execute = jest.fn(() => Promise.resolve())
       await stateImport._create(states[0])
-      expect(stateImport.client.execute).toBeCalledWith(
+      expect(stateImport.client.execute).toHaveBeenCalledWith(
         expect.objectContaining({ body: states[0] })
       )
     })

@@ -53,8 +53,10 @@ describe('CsvParserState', () => {
     describe('when parsing is successful', () => {
       test('should output states as JSON', done => {
         const outputStream = streamtest.v2.toText((err, data) => {
-          expect(csvParser.logger.info).toBeCalledWith('Starting conversion')
-          expect(csvParser.logger.debug).toBeCalledWith(
+          expect(csvParser.logger.info).toHaveBeenCalledWith(
+            'Starting conversion'
+          )
+          expect(csvParser.logger.debug).toHaveBeenCalledWith(
             expect.stringMatching(/Successfully parsed/)
           )
           expect(err).toBeFalsy()
@@ -83,7 +85,7 @@ describe('CsvParserState', () => {
           const outputStream = streamtest.v2.toText((err, data) => {
             expect(data).toBeFalsy()
             expect(err).toEqual(myError)
-            expect(csvParser.logger.error).toBeCalledWith(
+            expect(csvParser.logger.error).toHaveBeenCalledWith(
               expect.stringMatching(/At row: 2, Error/)
             )
             done()
@@ -109,7 +111,7 @@ describe('CsvParserState', () => {
             const result = JSON.parse(data)
             expect(result).toBeInstanceOf(Array)
             expect(result).toHaveLength(3)
-            expect(csvParser.logger.warn).toBeCalledWith(
+            expect(csvParser.logger.warn).toHaveBeenCalledWith(
               expect.stringMatching(/Ignoring error at row: 2/)
             )
             expect(result).toMatchSnapshot()
@@ -190,7 +192,7 @@ describe('CsvParserState', () => {
 
       test('should pass error to callback', () => {
         csvParser._handleErrors(fakeError, callback)
-        expect(callback).toBeCalledWith(fakeError)
+        expect(callback).toHaveBeenCalledWith(fakeError)
       })
     })
 
@@ -201,7 +203,7 @@ describe('CsvParserState', () => {
 
       test('should log error', () => {
         csvParser._handleErrors(fakeError, callback)
-        expect(csvParser.logger.warn).toBeCalledWith(
+        expect(csvParser.logger.warn).toHaveBeenCalledWith(
           expect.stringMatching(/Ignoring error at/)
         )
       })
@@ -224,7 +226,7 @@ describe('CsvParserState', () => {
   describe('::_setupClient', () => {
     describe('without `apiConfig`', () => {
       test('should throw error', () => {
-        expect(() => CsvParserState._setupClient()).toThrowError(
+        expect(() => CsvParserState._setupClient()).toThrow(
           /The constructor must be passed an `apiConfig` object/
         )
       })
@@ -386,7 +388,7 @@ describe('CsvParserState', () => {
       const expectedRequest = { uri, method: 'GET' }
 
       csvParser._fetchStates(uri)
-      expect(csvParser.client.execute).toBeCalled()
+      expect(csvParser.client.execute).toHaveBeenCalled()
       expect(csvParser.client.execute).toHaveBeenCalledWith(expectedRequest)
     })
 

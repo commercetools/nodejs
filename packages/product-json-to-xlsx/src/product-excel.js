@@ -31,8 +31,8 @@ export default class ProductExcel {
    * @param row Array of values
    */
   static _cleanRow(row: Array<any>): Array<any> {
-    return row.map(
-      (item: any) => (typeof item === 'undefined' || item === '' ? null : item)
+    return row.map((item: any) =>
+      typeof item === 'undefined' || item === '' ? null : item
     )
   }
 

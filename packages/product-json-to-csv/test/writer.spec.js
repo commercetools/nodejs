@@ -152,7 +152,7 @@ describe('Writer', () => {
       const headers = []
       const outputStream = streamTest.toText(() => {})
       outputStream.on('finish', () => {
-        expect(logger.info).toBeCalledWith(
+        expect(logger.info).toHaveBeenCalledWith(
           expect.stringMatching(/written to CSV file/)
         )
         done()
@@ -351,7 +351,7 @@ describe('Writer', () => {
       const outputStream = fs.createWriteStream(output)
 
       outputStream.on('finish', () => {
-        expect(logger.info).toBeCalledWith(
+        expect(logger.info).toHaveBeenCalledWith(
           expect.stringMatching(/written to ZIP file/)
         )
         tempFile.removeCallback()

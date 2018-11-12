@@ -75,13 +75,13 @@ describe('buildRequestForPasswordFlow', () => {
   })
 
   test('validate required options', () => {
-    expect(() => buildRequestForPasswordFlow()).toThrowError(
+    expect(() => buildRequestForPasswordFlow()).toThrow(
       'Missing required options'
     )
   })
 
   test('validate required option (host)', () => {
-    expect(() => buildRequestForPasswordFlow({})).toThrowError(
+    expect(() => buildRequestForPasswordFlow({})).toThrow(
       'Missing required option (host)'
     )
   })
@@ -90,7 +90,7 @@ describe('buildRequestForPasswordFlow', () => {
     const options = createTestOptions({
       projectKey: undefined,
     })
-    expect(() => buildRequestForPasswordFlow(options)).toThrowError(
+    expect(() => buildRequestForPasswordFlow(options)).toThrow(
       'Missing required option (projectKey)'
     )
   })
@@ -99,7 +99,7 @@ describe('buildRequestForPasswordFlow', () => {
     const options = createTestOptions({
       credentials: undefined,
     })
-    expect(() => buildRequestForPasswordFlow(options)).toThrowError(
+    expect(() => buildRequestForPasswordFlow(options)).toThrow(
       'Missing required option (credentials)'
     )
   })
@@ -108,7 +108,7 @@ describe('buildRequestForPasswordFlow', () => {
     const options = createTestOptions({
       credentials: {},
     })
-    expect(() => buildRequestForPasswordFlow(options)).toThrowError(
+    expect(() => buildRequestForPasswordFlow(options)).toThrow(
       'Missing required credentials (clientId, clientSecret, user)'
     )
   })
@@ -123,7 +123,7 @@ describe('buildRequestForPasswordFlow', () => {
         },
       },
     })
-    expect(() => buildRequestForPasswordFlow(options)).toThrowError(
+    expect(() => buildRequestForPasswordFlow(options)).toThrow(
       'Missing required user credentials (username, password)'
     )
   })
@@ -132,7 +132,7 @@ describe('buildRequestForPasswordFlow', () => {
     const options = createTestOptions({
       credentials: { clientId: '123' },
     })
-    expect(() => buildRequestForPasswordFlow(options)).toThrowError(
+    expect(() => buildRequestForPasswordFlow(options)).toThrow(
       'Missing required credentials (clientId, clientSecret, user)'
     )
   })
@@ -180,13 +180,13 @@ describe('buildRequestForClientCredentialsFlow', () => {
   })
 
   test('validate required options', () => {
-    expect(() => buildRequestForClientCredentialsFlow()).toThrowError(
+    expect(() => buildRequestForClientCredentialsFlow()).toThrow(
       'Missing required options'
     )
   })
 
   test('validate required option (host)', () => {
-    expect(() => buildRequestForClientCredentialsFlow({})).toThrowError(
+    expect(() => buildRequestForClientCredentialsFlow({})).toThrow(
       'Missing required option (host)'
     )
   })
@@ -195,7 +195,7 @@ describe('buildRequestForClientCredentialsFlow', () => {
     const options = createTestOptions({
       projectKey: undefined,
     })
-    expect(() => buildRequestForClientCredentialsFlow(options)).toThrowError(
+    expect(() => buildRequestForClientCredentialsFlow(options)).toThrow(
       'Missing required option (projectKey)'
     )
   })
@@ -204,7 +204,7 @@ describe('buildRequestForClientCredentialsFlow', () => {
     const options = createTestOptions({
       credentials: undefined,
     })
-    expect(() => buildRequestForClientCredentialsFlow(options)).toThrowError(
+    expect(() => buildRequestForClientCredentialsFlow(options)).toThrow(
       'Missing required option (credentials)'
     )
   })
@@ -213,7 +213,7 @@ describe('buildRequestForClientCredentialsFlow', () => {
     const options = createTestOptions({
       credentials: {},
     })
-    expect(() => buildRequestForClientCredentialsFlow(options)).toThrowError(
+    expect(() => buildRequestForClientCredentialsFlow(options)).toThrow(
       'Missing required credentials (clientId, clientSecret)'
     )
   })
@@ -222,7 +222,7 @@ describe('buildRequestForClientCredentialsFlow', () => {
     const options = createTestOptions({
       credentials: { clientId: '123' },
     })
-    expect(() => buildRequestForClientCredentialsFlow(options)).toThrowError(
+    expect(() => buildRequestForClientCredentialsFlow(options)).toThrow(
       'Missing required credentials (clientId, clientSecret)'
     )
   })
@@ -280,13 +280,13 @@ describe('buildRequestForRefreshTokenFlow', () => {
   })
 
   test('validate required options', () => {
-    expect(() => buildRequestForRefreshTokenFlow()).toThrowError(
+    expect(() => buildRequestForRefreshTokenFlow()).toThrow(
       'Missing required options'
     )
   })
 
   test('validate required option (host)', () => {
-    expect(() => buildRequestForRefreshTokenFlow({})).toThrowError(
+    expect(() => buildRequestForRefreshTokenFlow({})).toThrow(
       'Missing required option (host)'
     )
   })
@@ -295,7 +295,7 @@ describe('buildRequestForRefreshTokenFlow', () => {
     const options = createTestOptions({
       projectKey: undefined,
     })
-    expect(() => buildRequestForRefreshTokenFlow(options)).toThrowError(
+    expect(() => buildRequestForRefreshTokenFlow(options)).toThrow(
       'Missing required option (projectKey)'
     )
   })
@@ -304,7 +304,7 @@ describe('buildRequestForRefreshTokenFlow', () => {
     const options = createTestOptions({
       credentials: undefined,
     })
-    expect(() => buildRequestForRefreshTokenFlow(options)).toThrowError(
+    expect(() => buildRequestForRefreshTokenFlow(options)).toThrow(
       'Missing required option (credentials)'
     )
   })
@@ -314,7 +314,7 @@ describe('buildRequestForRefreshTokenFlow', () => {
       ...mockCred,
       refreshToken: undefined,
     })
-    expect(() => buildRequestForRefreshTokenFlow(options)).toThrowError(
+    expect(() => buildRequestForRefreshTokenFlow(options)).toThrow(
       'Missing required option (refreshToken)'
     )
   })
@@ -324,7 +324,7 @@ describe('buildRequestForRefreshTokenFlow', () => {
       ...mockCred,
       credentials: {},
     })
-    expect(() => buildRequestForRefreshTokenFlow(options)).toThrowError(
+    expect(() => buildRequestForRefreshTokenFlow(options)).toThrow(
       'Missing required credentials (clientId, clientSecret)'
     )
   })
@@ -334,7 +334,7 @@ describe('buildRequestForRefreshTokenFlow', () => {
       ...mockCred,
       credentials: { clientId: '123' },
     })
-    expect(() => buildRequestForRefreshTokenFlow(options)).toThrowError(
+    expect(() => buildRequestForRefreshTokenFlow(options)).toThrow(
       'Missing required credentials (clientId, clientSecret)'
     )
   })
@@ -351,7 +351,7 @@ describe('buildRequestForAnonymousSessionFlow', () => {
   })
 
   test('validate required options', () => {
-    expect(() => buildRequestForAnonymousSessionFlow()).toThrowError(
+    expect(() => buildRequestForAnonymousSessionFlow()).toThrow(
       'Missing required options'
     )
   })
@@ -360,7 +360,7 @@ describe('buildRequestForAnonymousSessionFlow', () => {
     const options = createTestOptions({
       projectKey: undefined,
     })
-    expect(() => buildRequestForAnonymousSessionFlow(options)).toThrowError(
+    expect(() => buildRequestForAnonymousSessionFlow(options)).toThrow(
       'Missing required option (projectKey)'
     )
   })

@@ -67,7 +67,7 @@ describe('ProductJsonToXlsx', () => {
       productJsonToXlsx.parse = jest.fn(() => 'foo')
 
       productJsonToXlsx.run()
-      expect(writer.writeToSingleXlsxFile).toBeCalled()
+      expect(writer.writeToSingleXlsxFile).toHaveBeenCalled()
       expect(writer.writeToZipFile).not.toBeCalled()
     })
 
@@ -76,7 +76,7 @@ describe('ProductJsonToXlsx', () => {
 
       productJsonToXlsx.run()
       expect(writer.writeToSingleXlsxFile).not.toBeCalled()
-      expect(writer.writeToZipFile).toBeCalled()
+      expect(writer.writeToZipFile).toHaveBeenCalled()
     })
   })
 
@@ -120,8 +120,8 @@ describe('ProductJsonToXlsx', () => {
       // We expect the method to resolve to undefined as a rejected promise
       // indicates the error is not handled
       await expect(productStream.toPromise(Promise)).resolves.toBeUndefined()
-      expect(productJsonToXlsx.logger.error).toBeCalledWith(fakeError)
-      expect(outputStream.emit).toBeCalledWith('error', fakeError)
+      expect(productJsonToXlsx.logger.error).toHaveBeenCalledWith(fakeError)
+      expect(outputStream.emit).toHaveBeenCalledWith('error', fakeError)
     })
 
     test('should process data through stream if no error occurs', async () => {
@@ -138,7 +138,7 @@ describe('ProductJsonToXlsx', () => {
       await expect(productStream.collect().toPromise(Promise)).resolves.toEqual(
         expected
       )
-      expect(productJsonToXlsx.logger.debug).toBeCalledWith(
+      expect(productJsonToXlsx.logger.debug).toHaveBeenCalledWith(
         expect.stringMatching('Done with conversion')
       )
     })
@@ -250,28 +250,28 @@ describe('ProductJsonToXlsx', () => {
 
         await productJsonToXlsx._resolveReferences(sampleProduct)
 
-        expect(productJsonToXlsx._resolveProductType).toBeCalledWith(
+        expect(productJsonToXlsx._resolveProductType).toHaveBeenCalledWith(
           sampleProduct.productType
         )
-        expect(productJsonToXlsx._resolveTaxCategory).toBeCalledWith(
+        expect(productJsonToXlsx._resolveTaxCategory).toHaveBeenCalledWith(
           sampleProduct.taxCategory
         )
-        expect(productJsonToXlsx._resolveState).toBeCalledWith(
+        expect(productJsonToXlsx._resolveState).toHaveBeenCalledWith(
           sampleProduct.state
         )
-        expect(productJsonToXlsx._resolveCategories).toBeCalledWith(
+        expect(productJsonToXlsx._resolveCategories).toHaveBeenCalledWith(
           sampleProduct.categories
         )
-        expect(productJsonToXlsx._resolveCategoryOrderHints).toBeCalledWith(
-          sampleProduct.categoryOrderHints
-        )
-        expect(resolveVariantReferencesSpy).toBeCalledWith(
+        expect(
+          productJsonToXlsx._resolveCategoryOrderHints
+        ).toHaveBeenCalledWith(sampleProduct.categoryOrderHints)
+        expect(resolveVariantReferencesSpy).toHaveBeenCalledWith(
           sampleProduct.masterVariant
         )
-        expect(resolvePriceReferencesSpy).toBeCalledWith(
+        expect(resolvePriceReferencesSpy).toHaveBeenCalledWith(
           sampleProduct.masterVariant.prices
         )
-        expect(productJsonToXlsx._getChannelsById).toBeCalledWith([
+        expect(productJsonToXlsx._getChannelsById).toHaveBeenCalledWith([
           '123',
           '456',
           'unknown',
@@ -376,7 +376,7 @@ describe('ProductJsonToXlsx', () => {
       test('build correct request uri for productType', async () => {
         const expected = /project-key\/product-types\/product-type-id/
         await productJsonToXlsx._resolveProductType(sampleProduct.productType)
-        expect(productJsonToXlsx.fetchReferences).toBeCalledWith(
+        expect(productJsonToXlsx.fetchReferences).toHaveBeenCalledWith(
           expect.stringMatching(expected)
         )
       })
@@ -523,7 +523,7 @@ describe('ProductJsonToXlsx', () => {
       test('build correct request uri for taxCategory', async () => {
         const expected = /project-key\/tax-categories\/tax-cat-id/
         await productJsonToXlsx._resolveTaxCategory(sampleProduct.taxCategory)
-        expect(productJsonToXlsx.fetchReferences).toBeCalledWith(
+        expect(productJsonToXlsx.fetchReferences).toHaveBeenCalledWith(
           expect.stringMatching(expected)
         )
       })
@@ -561,7 +561,7 @@ describe('ProductJsonToXlsx', () => {
       test('build correct request uri for state', async () => {
         const expected = /project-key\/states\/state-id/
         await productJsonToXlsx._resolveState(sampleProduct.state)
-        expect(productJsonToXlsx.fetchReferences).toBeCalledWith(
+        expect(productJsonToXlsx.fetchReferences).toHaveBeenCalledWith(
           expect.stringMatching(expected)
         )
       })
@@ -740,7 +740,7 @@ describe('ProductJsonToXlsx', () => {
         await expect(
           productJsonToXlsx._getCategories(categoryIds)
         ).resolves.toEqual(expectedCategories)
-        expect(productJsonToXlsx.fetchReferences).toBeCalledWith(
+        expect(productJsonToXlsx.fetchReferences).toHaveBeenCalledWith(
           expect.stringMatching(expectedUri)
         )
       })
@@ -823,8 +823,10 @@ describe('ProductJsonToXlsx', () => {
       }
 
       productJsonToXlsx.fetchReferences(uri)
-      expect(productJsonToXlsx.client.execute).toBeCalled()
-      expect(productJsonToXlsx.client.execute).toBeCalledWith(expectedRequest)
+      expect(productJsonToXlsx.client.execute).toHaveBeenCalled()
+      expect(productJsonToXlsx.client.execute).toHaveBeenCalledWith(
+        expectedRequest
+      )
     })
 
     test('should fetch only once for multiple calls with same parameter', () => {
@@ -838,7 +840,9 @@ describe('ProductJsonToXlsx', () => {
       productJsonToXlsx.fetchReferences(uri)
       productJsonToXlsx.fetchReferences(uri)
       expect(productJsonToXlsx.client.execute).toHaveBeenCalledTimes(1)
-      expect(productJsonToXlsx.client.execute).toBeCalledWith(expectedRequest)
+      expect(productJsonToXlsx.client.execute).toHaveBeenCalledWith(
+        expectedRequest
+      )
     })
   })
 
@@ -872,7 +876,7 @@ describe('ProductJsonToXlsx', () => {
           key: 'channel-key',
         },
       })
-      expect(productJsonToXlsx.fetchReferences).toBeCalledWith(
+      expect(productJsonToXlsx.fetchReferences).toHaveBeenCalledWith(
         '/project-key/channels?where=id%20in%20(%22channel-id%22)'
       )
       expect(productJsonToXlsx.fetchReferences).toHaveBeenCalledTimes(1)

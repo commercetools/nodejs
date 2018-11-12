@@ -10,15 +10,15 @@ const createPayloadResult = (tot, startingId = 0) => ({
 
 describe('validate options', () => {
   test('middlewares (required)', () => {
-    expect(() => createClient()).toThrowError('Missing required options')
+    expect(() => createClient()).toThrow('Missing required options')
   })
   test('middlewares (array)', () => {
-    expect(() => createClient({ middlewares: {} })).toThrowError(
+    expect(() => createClient({ middlewares: {} })).toThrow(
       'Middlewares should be an array'
     )
   })
   test('middlewares (empty)', () => {
-    expect(() => createClient({ middlewares: [] })).toThrowError(
+    expect(() => createClient({ middlewares: [] })).toThrow(
       'You need to provide at least one middleware'
     )
   })
@@ -53,7 +53,7 @@ describe('execute', () => {
   test('should throw if request is missing', () => {
     const middlewares = [next => (...args) => next(...args)]
     const client = createClient({ middlewares })
-    expect(() => client.execute()).toThrowError(
+    expect(() => client.execute()).toThrow(
       /The "exec" function requires a "Request" object/
     )
   })
@@ -65,7 +65,7 @@ describe('execute', () => {
       ...request,
       uri: 24,
     }
-    expect(() => client.execute(badRequest)).toThrowError(
+    expect(() => client.execute(badRequest)).toThrow(
       /The "exec" Request object requires a valid uri/
     )
   })
@@ -77,7 +77,7 @@ describe('execute', () => {
       ...request,
       method: 'INVALID_METHOD',
     }
-    expect(() => client.execute(badRequest)).toThrowError(
+    expect(() => client.execute(badRequest)).toThrow(
       /The "exec" Request object requires a valid method./
     )
   })
@@ -210,7 +210,7 @@ describe('process', () => {
     test('should throw if request method is not `GET`', () => {
       expect(() =>
         client.process({ uri: 'foo', method: 'POST' }, () => {})
-      ).toThrowError(/The "process" Request object requires a valid method/)
+      ).toThrow(/The "process" Request object requires a valid method/)
     })
   })
 
