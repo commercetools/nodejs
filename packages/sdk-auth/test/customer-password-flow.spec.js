@@ -5,6 +5,7 @@ import response from './resources/sample-response.json'
 
 describe('Customer Password flow', () => {
   const auth = new Auth(config)
+  jest.spyOn(Auth, '_calculateExpirationTime').mockImplementation(() => 123)
 
   beforeEach(() => nock.cleanAll())
 
@@ -24,7 +25,10 @@ describe('Customer Password flow', () => {
       password: 'pass123',
     })
     expect(scope.isDone()).toBe(true)
-    expect(res).toEqual(response)
+    expect(res).toEqual({
+      ...response,
+      expires_at: 123,
+    })
   })
 
   test('should encode username and password', async () => {
@@ -45,7 +49,10 @@ describe('Customer Password flow', () => {
     expect(scope.isDone()).toBe(false)
     const res = await auth.customerPasswordFlow(userCredentials)
     expect(scope.isDone()).toBe(true)
-    expect(res).toEqual(response)
+    expect(res).toEqual({
+      ...response,
+      expires_at: 123,
+    })
   })
 
   test('should throw an error when credentials are not provided', () => {

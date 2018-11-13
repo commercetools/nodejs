@@ -10,6 +10,10 @@ describe('Common processes', () => {
     'base64'
   )
   const auth = new Auth(config)
+  const timeSpy = jest
+    .spyOn(Auth, '_calculateExpirationTime')
+    .mockImplementation(() => 123)
+
   const request = {
     basicAuth,
     uri: 'https://auth.commercetools.com/api-endpoint',
@@ -191,7 +195,12 @@ describe('Common processes', () => {
       expect(scope.isDone()).toBe(false)
       const res = await auth._process(request)
       expect(scope.isDone()).toBe(true)
-      expect(res).toEqual(response)
+      expect(res).toEqual({
+        ...response,
+        expires_at: 123,
+      })
+      expect(timeSpy).toHaveBeenCalled()
+      expect(timeSpy).toHaveBeenLastCalledWith(response.expires_in)
     })
 
     test('should use custom scopes when provided', async () => {
