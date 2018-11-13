@@ -2,7 +2,7 @@ import buildQueryString from '../src/build-query-string'
 
 describe('buildQueryString', () => {
   test('should throw if no argument is passed', () => {
-    expect(() => buildQueryString()).toThrowError(
+    expect(() => buildQueryString()).toThrow(
       /Missing options object to build query string/
     )
   })

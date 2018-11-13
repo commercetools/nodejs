@@ -33,7 +33,7 @@ describe('Existing Token', () => {
     })
 
     test('should throw if `authorization` is not a string', () => {
-      expect(createAuthMiddlewareWithExistingToken({})()).toThrowError(
+      expect(createAuthMiddlewareWithExistingToken({})()).toThrow(
         /authorization must be a string/
       )
     })

@@ -44,7 +44,7 @@ describe('ProductExporter', () => {
       productExporter._getProducts = jest.fn(() => Promise.resolve())
       const outputStream = streamtest.v2.toText(() => {})
       await productExporter.run(outputStream)
-      expect(productExporter._getProducts).toBeCalled()
+      expect(productExporter._getProducts).toHaveBeenCalled()
       expect(productExporter._getProducts).not.toBeCalledWith(outputStream)
     })
 
@@ -101,14 +101,14 @@ describe('ProductExporter', () => {
       const spy = jest.spyOn(ProductExporter, '_writeEachProduct')
 
       productExporter._getProducts(outputStream)
-      expect(spy).toBeCalled()
+      expect(spy).toHaveBeenCalled()
       spy.mockRestore()
     })
 
     test('should close stream after writing data', async () => {
       productExporter.client.process = jest.fn(() => Promise.resolve())
       await productExporter._getProducts(outputStream)
-      expect(outputStream.end).toBeCalled()
+      expect(outputStream.end).toHaveBeenCalled()
     })
   })
 
@@ -153,9 +153,9 @@ describe('ProductExporter', () => {
       const spy = jest.spyOn(JSONStream, 'stringify')
 
       ProductExporter._getStream('json')
-      expect(spy).lastCalledWith('[\n', ',\n', '\n]')
+      expect(spy).toHaveBeenLastCalledWith('[\n', ',\n', '\n]')
       ProductExporter._getStream('chunk')
-      expect(spy).lastCalledWith(false)
+      expect(spy).toHaveBeenLastCalledWith(false)
       spy.mockRestore()
     })
   })

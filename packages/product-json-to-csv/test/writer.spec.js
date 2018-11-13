@@ -4,6 +4,7 @@ import tmp from 'tmp'
 import StreamTest from 'streamtest'
 import unzip from 'unzip'
 import streamToString from 'stream-to-string'
+import iconv from 'iconv-lite'
 
 import * as writer from '../src/writer'
 
@@ -128,13 +129,10 @@ describe('Writer', () => {
         done()
       })
 
-      writer.writeToSingleCsvFile(
-        sampleStream,
-        outputStream,
-        logger,
-        headers,
-        delimiter
-      )
+      writer.writeToSingleCsvFile(sampleStream, outputStream, logger, headers, {
+        delimiter,
+        encoding: 'utf8',
+      })
     })
 
     test('do not output empty rows', done => {
@@ -154,13 +152,79 @@ describe('Writer', () => {
       const headers = []
       const outputStream = streamTest.toText(() => {})
       outputStream.on('finish', () => {
-        expect(logger.info).toBeCalledWith(
+        expect(logger.info).toHaveBeenCalledWith(
           expect.stringMatching(/written to CSV file/)
         )
         done()
       })
 
       writer.writeToSingleCsvFile(sampleStream, outputStream, logger, headers)
+    })
+
+    describe('::encoding', () => {
+      const headers = ['id', 'key']
+      const product = {
+        id: '1',
+        productType: 'pt-1',
+        key: 'Příliš žluťoučký kůň úpěl ďábelské ódy', // special characters
+      }
+      const expected = `id,key\n"${product.id}","${product.key}"\n`
+      let sampleStream
+
+      beforeEach(() => {
+        sampleStream = highland([product])
+      })
+
+      test('write products in a different encoding', done => {
+        const config = {
+          encoding: 'win1250',
+        }
+
+        const outputStream = streamTest.toChunks((error, chunks) => {
+          expect(error).toBeFalsy()
+
+          // buffer containing text encoded in win1250
+          const res = Buffer.concat(chunks)
+
+          // decode back to utf8
+          const decoded = iconv.decode(res, 'win1250')
+
+          expect(decoded).toBe(expected)
+          expect(res).toMatchSnapshot()
+          done()
+        })
+
+        writer.writeToSingleCsvFile(
+          sampleStream,
+          outputStream,
+          logger,
+          headers,
+          config
+        )
+      })
+
+      test('throw error while using unknown encoding', done => {
+        const config = {
+          encoding: 'invalid',
+        }
+        const outputStream = streamTest.toText(() => {})
+
+        outputStream.on('error', error => {
+          expect(error).toBeDefined()
+          expect(error.toString()).toContain(
+            'Encoding does not exist: "invalid"'
+          )
+          done()
+        })
+
+        writer.writeToSingleCsvFile(
+          sampleStream,
+          outputStream,
+          logger,
+          headers,
+          config
+        )
+      })
     })
   })
 
@@ -190,7 +254,7 @@ describe('Writer', () => {
                 'products/product-type-1.csv',
                 'products/product-type-2.csv',
               ])
-              expect(entries.length).toEqual(2)
+              expect(entries).toHaveLength(2)
               tempFile.removeCallback()
               done()
             }
@@ -202,6 +266,55 @@ describe('Writer', () => {
       })
 
       writer.writeToZipFile(sampleStream, outputStream, logger)
+    })
+
+    test('write products in different encoding to zip file', done => {
+      const product = {
+        id: '1',
+        productType: 'pt-1',
+        key: 'Příliš žluťoučký kůň úpěl ďábelské ódy', // special characters
+      }
+      const expected = `"id","productType","key"\n"${product.id}","${
+        product.productType
+      }","${product.key}"\n`
+
+      const sampleStream = highland([product])
+      const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
+      const output = tempFile.name
+      const outputStream = fs.createWriteStream(output)
+
+      // Extract data from zip file and test
+      outputStream.on('finish', () => {
+        fs.createReadStream(output)
+          .pipe(unzip.Parse())
+          .on('entry', async entry => {
+            expect(entry.path).toEqual('products/pt-1.csv')
+
+            const entryStream = streamTest.toChunks((error, chunks) => {
+              expect(error).toBeFalsy()
+
+              // buffer containing text encoded in win1250
+              const res = Buffer.concat(chunks)
+
+              // decode back to utf8
+              const decoded = iconv.decode(res, 'win1250')
+              expect(decoded).toBe(expected)
+
+              tempFile.removeCallback()
+              done()
+            })
+
+            entry.pipe(entryStream)
+          })
+          .on('finish', () => {
+            // TODO the "unzip" package fires finish event before entry events
+            // so we call done() on second entry instead of calling it here
+          })
+      })
+
+      writer.writeToZipFile(sampleStream, outputStream, logger, {
+        encoding: 'win1250',
+      })
     })
 
     test('should handle exporting zero products', done => {
@@ -238,7 +351,7 @@ describe('Writer', () => {
       const outputStream = fs.createWriteStream(output)
 
       outputStream.on('finish', () => {
-        expect(logger.info).toBeCalledWith(
+        expect(logger.info).toHaveBeenCalledWith(
           expect.stringMatching(/written to ZIP file/)
         )
         tempFile.removeCallback()
@@ -259,6 +372,22 @@ describe('Writer', () => {
 
       // try to archive an invalid folder
       writer.archiveDir(null, outputStream, logger)
+    })
+
+    test('throw an error when using an invalid encoding fails', done => {
+      const sampleStream = highland(sampleProducts)
+      const outputStream = streamTest.toChunks(() => {})
+
+      outputStream.on('error', err => {
+        expect(err).toBeDefined()
+        expect(err.toString()).toContain('Encoding does not exist: "invalid"')
+        done()
+      })
+
+      // try to archive an invalid folder
+      writer.writeToZipFile(sampleStream, outputStream, logger, {
+        encoding: 'invalid',
+      })
     })
 
     test('throw an error when streams fail', done => {

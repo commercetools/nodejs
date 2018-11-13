@@ -1,0 +1,2 @@
+variant-sku,value.type,value.currencyCode,value.preciseAmount,value.centAmount,value.fractionDigits,customType,customField.kiloPrice.centAmount,customField.kiloPrice.currencyCode,customField.kiloPrice.type,customField.kiloPrice.preciseAmount,customField.kiloPrice.fractionDigits
+variant-SKU,highPrecision,EUR,12345,123.5,3,custom-type,56789,GBP,highPrecision,5,2

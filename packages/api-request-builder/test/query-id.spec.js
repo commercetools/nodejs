@@ -13,7 +13,7 @@ describe('queryId', () => {
   })
 
   test('should throw if id is missing', () => {
-    expect(() => service.byId()).toThrowError(
+    expect(() => service.byId()).toThrow(
       /Required argument for `byId` is missing/
     )
   })
@@ -24,7 +24,7 @@ describe('queryId', () => {
   })
 
   test('should throw if key is missing', () => {
-    expect(() => service.byKey()).toThrowError(
+    expect(() => service.byKey()).toThrow(
       /Required argument for `byKey` is missing/
     )
   })
@@ -35,7 +35,7 @@ describe('queryId', () => {
   })
 
   test('should throw if customerId is missing', () => {
-    expect(() => service.byCustomerId()).toThrowError(
+    expect(() => service.byCustomerId()).toThrow(
       /Required argument for `byCustomerId` is missing/
     )
   })
@@ -46,48 +46,48 @@ describe('queryId', () => {
   })
 
   test('should throw if cartId is missing', () => {
-    expect(() => service.byCartId()).toThrowError(
+    expect(() => service.byCartId()).toThrow(
       /Required argument for `byCartId` is missing/
     )
   })
 
   test('throw if byId is used after byKey', () => {
-    expect(() => service.byKey('bar').byId('123')).toThrowError(
+    expect(() => service.byKey('bar').byId('123')).toThrow(
       'A key for this resource has already been set. ' +
         'You cannot use both `byKey` and `byId`.'
     )
   })
 
   test('throw if byKey is used after byId', () => {
-    expect(() => service.byId('123').byKey('bar')).toThrowError(
+    expect(() => service.byId('123').byKey('bar')).toThrow(
       'An ID for this resource has already been set. ' +
         'You cannot use both `byId` and `byKey`.'
     )
   })
 
   test('throw if byCustomerId is used after byId', () => {
-    expect(() => service.byId('theId').byCustomerId('theCustId')).toThrowError(
+    expect(() => service.byId('theId').byCustomerId('theCustId')).toThrow(
       'An ID for this resource has already been set. ' +
         'You cannot use both `byId` and `byCustomerId`.'
     )
   })
 
   test('throw if byId is used after byCustomerId', () => {
-    expect(() => service.byCustomerId('foo').byId('789')).toThrowError(
+    expect(() => service.byCustomerId('foo').byId('789')).toThrow(
       'A customerId for this resource has already been set. ' +
         'You cannot use both `byId` and `byCustomerId`.'
     )
   })
 
   test('throw if byCartId is used after byId', () => {
-    expect(() => service.byId('theId').byCartId('theCartId')).toThrowError(
+    expect(() => service.byId('theId').byCartId('theCartId')).toThrow(
       'An ID for this resource has already been set. ' +
         'You cannot use both `byId` and `byCartId`.'
     )
   })
 
   test('throw if byId is used after byCartId', () => {
-    expect(() => service.byCartId('foo').byId('789')).toThrowError(
+    expect(() => service.byCartId('foo').byId('789')).toThrow(
       'A cartId for this resource has already been set. ' +
         'You cannot use both `byId` and `byCartId`.'
     )

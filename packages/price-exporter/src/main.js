@@ -153,9 +153,11 @@ export default class PriceExporter {
                   this._resolveCustomerGroup(individualPrice),
                   this._resolveCustomType(individualPrice),
                 ]).then(
-                  ([channel, customerGroup, custom]: Array<
-                    Object
-                  >): ProcessedPriceObject => ({
+                  ([
+                    channel,
+                    customerGroup,
+                    custom,
+                  ]: Array<Object>): ProcessedPriceObject => ({
                     ...individualPrice,
                     ...channel,
                     ...customerGroup,

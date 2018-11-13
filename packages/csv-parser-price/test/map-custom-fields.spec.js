@@ -1,5 +1,4 @@
 import mapCustomFields from '../src/map-custom-fields'
-
 import customTypeSample from './helpers/custom-type-sample.json'
 
 test('mapCustomFields should have methods', () => {
@@ -137,6 +136,35 @@ describe('mapCustomFields::mapMoney', () => {
 
     expect(result.error).toBeFalsy()
     const expected = { centAmount: 1400, currencyCode: 'EUR' }
+    expect(result.data).toEqual(expected)
+  })
+
+  test('should return money object when passed as object', () => {
+    const result = mapCustomFields.mapMoney({
+      centAmount: '3000',
+      currencyCode: 'GBP',
+    })
+
+    expect(result.error).toBeFalsy()
+    const expected = { centAmount: 3000, currencyCode: 'GBP' }
+    expect(result.data).toEqual(expected)
+  })
+
+  test('should return highPrecision money object when passed as object', () => {
+    const result = mapCustomFields.mapMoney({
+      type: 'highPrecision',
+      preciseAmount: '3',
+      centAmount: '34567',
+      currencyCode: 'GBP',
+    })
+
+    expect(result.error).toBeFalsy()
+    const expected = {
+      type: 'highPrecision',
+      preciseAmount: 3,
+      centAmount: 34567,
+      currencyCode: 'GBP',
+    }
     expect(result.data).toEqual(expected)
   })
 

@@ -273,7 +273,7 @@ describe('Common processes', () => {
     })
 
     test('should throw when fetcher is not provided', () => {
-      expect(() => Auth._getFetcher()).toThrowError(
+      expect(() => Auth._getFetcher()).toThrow(
         '`fetch` is not available. Please pass in `fetch` as an option or have it globally available.'
       )
     })

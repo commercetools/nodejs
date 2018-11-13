@@ -27,6 +27,7 @@ export type ParserConfigOptions = {
   fillAllRows: boolean,
   onlyMasterVariants: boolean,
   headerFields?: Array<string>,
+  encoding?: string,
   language: string,
   languages?: Array<string>,
   multiValueDelimiter: string,
@@ -103,7 +104,7 @@ type PriceTier = {
 }
 
 export type Price = {
-  id: string,
+  id?: string,
   value: Money,
   country?: string,
   customerGroup?: TypeReference,

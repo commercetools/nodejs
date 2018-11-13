@@ -23,7 +23,7 @@ describe('queryPage', () => {
   })
 
   test('should throw if sortPath is missing', () => {
-    expect(() => service.sort()).toThrowError(
+    expect(() => service.sort()).toThrow(
       /Required argument for `sort` is missing/
     )
   })
@@ -34,13 +34,13 @@ describe('queryPage', () => {
   })
 
   test('should throw if page is missing', () => {
-    expect(() => service.page()).toThrowError(
+    expect(() => service.page()).toThrow(
       /Required argument for `page` is missing/
     )
   })
 
   test('should throw if page is a number < 1', () => {
-    expect(() => service.page(0)).toThrowError(
+    expect(() => service.page(0)).toThrow(
       /Required argument for `page` must be a number >= 1/
     )
   })
@@ -54,13 +54,13 @@ describe('queryPage', () => {
   })
 
   test('should throw if perPage is missing', () => {
-    expect(() => service.perPage()).toThrowError(
+    expect(() => service.perPage()).toThrow(
       /Required argument for `perPage` is missing/
     )
   })
 
   test('should throw if perPage is a number < 1', () => {
-    expect(() => service.perPage(-1)).toThrowError(
+    expect(() => service.perPage(-1)).toThrow(
       /Required argument for `perPage` must be a number >= 0/
     )
   })
@@ -71,7 +71,7 @@ describe('queryPage', () => {
   })
 
   test('should throw if withTotal is not a boolean', () => {
-    expect(() => service.withTotal('foo')).toThrowError(
+    expect(() => service.withTotal('foo')).toThrow(
       /Required argument for `withTotal` is missing or invalid/
     )
   })
