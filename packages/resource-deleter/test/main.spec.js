@@ -29,7 +29,7 @@ describe('::ResourceDeleter', () => {
       expect(resourceDeleter.logger).toEqual(logger)
     })
     test('should throw error if no `apiConfig` in `options` parameter', () => {
-      expect(() => new ResourceDeleter({})).toThrowError(
+      expect(() => new ResourceDeleter({})).toThrow(
         /The constructor must passed an `apiConfig` object/
       )
     })
