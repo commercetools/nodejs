@@ -170,6 +170,15 @@ describe('::ProductMapping', () => {
               ],
             },
             {
+              name: 'moneyAttr',
+              value: {
+                fractionDigits: 2,
+                centAmount: 1234,
+                currencyCode: 'EUR',
+                type: 'centPrecision',
+              },
+            },
+            {
               name: 'setLenums',
               value: [
                 {
@@ -290,6 +299,20 @@ describe('::ProductMapping', () => {
             {
               name: 'lengthOfProduct',
               value: 0,
+            },
+            {
+              name: 'referenceById',
+              value: {
+                typeId: 'product',
+                id: 'id123',
+              },
+            },
+            {
+              name: 'referenceByKey',
+              value: {
+                typeId: 'product',
+                key: 'key123',
+              },
             },
           ],
         },
