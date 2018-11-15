@@ -27,10 +27,8 @@ describe('Token Provider', () => {
 
     test('should throw an error when using undefined token info', async () => {
       const _tokenProvider = new TokenProvider({ sdkAuth })
-      const getTokenPromise = _tokenProvider.getToken()
-
-      expect(getTokenPromise).rejects.toEqual(
-        new Error('Property "tokenInfo" was not set')
+      expect(() => _tokenProvider.getToken()).toThrow(
+        'Property "tokenInfo" was not set'
       )
     })
 
@@ -68,14 +66,17 @@ describe('Token Provider', () => {
       })
     })
 
-    test('should call onTokenRefreshed method', async () => {
-      const onTokenRefreshed = jest.fn()
+    test('should call onTokenInfoRefreshed method', async () => {
+      const onTokenInfoRefreshed = jest.fn()
       const oldTokenInfo = {
         refresh_token: 'refresh-token',
         access_token: 'old-access-token',
         expires_at: 123,
       }
-      const _tokenProvider = new TokenProvider({ sdkAuth, onTokenRefreshed })
+      const _tokenProvider = new TokenProvider({
+        sdkAuth,
+        onTokenInfoRefreshed,
+      })
 
       jest
         .spyOn(_tokenProvider, '_performRefreshedTokenFlow')
@@ -85,8 +86,8 @@ describe('Token Provider', () => {
 
       await _tokenProvider._refreshToken(oldTokenInfo)
 
-      expect(onTokenRefreshed).toHaveBeenCalled()
-      expect(onTokenRefreshed).toHaveBeenCalledWith(
+      expect(onTokenInfoRefreshed).toHaveBeenCalled()
+      expect(onTokenInfoRefreshed).toHaveBeenCalledWith(
         {
           // new tokenInfo
           access_token: 'new-access-token',

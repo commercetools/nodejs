@@ -135,6 +135,15 @@ export type CustomAuthOptions = {
   fetch?: ConfigFetch,
 }
 
+export type TokenInfo = {
+  expires_in?: number,
+  expires_at?: number,
+  refresh_token?: string,
+  access_token?: string,
+  scope?: string,
+  token_type?: string,
+}
+
 export type RefreshAuthMiddlewareOptions = {
   host: string,
   projectKey: string,
