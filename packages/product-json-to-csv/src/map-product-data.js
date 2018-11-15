@@ -77,10 +77,15 @@ export default class ProductMapping {
     )
     const attributes: Object = get(originalProduct, 'variant.attributes', {})
     const cleanedProduct = { ...originalProduct, prices }
+    const productLevelKeys = Object.keys(cleanedProduct)
 
     // merge attributes to a product and prefix conflicting names if necessary
     Object.entries(attributes).forEach(([key, val]) => {
-      const csvHeaderName = cleanedProduct[key] ? `attribute.${key}` : key
+      // if attribute name is already in productLevelKeys, prefix it with "attribute." string
+      // for example ltext value "productType.en" will become "attribute.productType.en"
+      const csvHeaderName = productLevelKeys.includes(key.split('.')[0])
+        ? `attribute.${key}`
+        : key
       cleanedProduct[csvHeaderName] = val
     })
 
@@ -336,7 +341,7 @@ export default class ProductMapping {
         mappedAttribute[name] = ProductMapping._mapPriceToString({ value })
       else if (value.key && !isUndefined(value.label))
         // ENUM or LENUM attribute
-        mappedAttribute = ProductMapping._mapLenumOrEnumAttribute(name, value)
+        mappedAttribute = this._mapLenumOrEnumAttribute(name, value)
       // LTEXT attribute
       else mappedAttribute = this._mapLtextAttribute(name, value)
     } else if (Array.isArray(value)) {
@@ -431,6 +436,27 @@ export default class ProductMapping {
     )
   }
 
+  _mapLenumOrEnumAttribute(name: string, value: Object): Object {
+    const mappedAttribute = {
+      [name]: value.key,
+    }
+
+    // if it is lenum (has label), add all languages to mappedAttribute object
+    if (value.label && isObject(value.label)) {
+      const labels = {
+        [name]: {
+          ...ProductMapping._createDefaultLanguageValues(this.languages),
+          ...value.label,
+        },
+      }
+
+      // add labels in format "attribName.en: labelEnValue" to all attributes
+      return { ...mappedAttribute, ...flatten(labels) }
+    }
+
+    return mappedAttribute
+  }
+
   static _mapBooleanToString(value: boolean): string {
     return value.toString()
   }
@@ -471,24 +497,6 @@ export default class ProductMapping {
       return `${getParent(cat.parent)}>${cat.name[lang]}`
     }
     return getParent(category)
-  }
-
-  static _mapLenumOrEnumAttribute(name: string, value: Object) {
-    const mappedAttribute = {
-      [name]: value.key,
-    }
-
-    // if it is lenum (has label), add all languages to mappedAttribute object
-    if (value.label && isObject(value.label)) {
-      const labels = {
-        [name]: value.label,
-      }
-
-      // add labels in format "attribName.en: labelEnValue" to all attributes
-      return { ...mappedAttribute, ...flatten(labels) }
-    }
-
-    return mappedAttribute
   }
 
   static _mapReferenceById(value: Object): string {

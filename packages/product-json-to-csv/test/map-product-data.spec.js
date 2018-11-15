@@ -407,6 +407,67 @@ describe('::ProductMapping', () => {
       expect(res[0]['variant.sku']).toEqual('A0E200000001YKI') // masterVariant
       expect(res).toMatchSnapshot()
     })
+
+    test('should handle conflicting attribute names', () => {
+      const _productMapping = new ProductMapping({
+        languages: ['en', 'de', 'fr'],
+      })
+      const _sample = {
+        id: 'a8ca7cba-cfd7-404e-b52b-2150cfa103e3',
+        version: 1,
+        productType: {
+          name: 'resolved-product-type',
+        },
+        name: {
+          en: 'conflictAttributeTest',
+        },
+        description: {
+          en: 'Conflict attribute test',
+        },
+        categories: [],
+        categoryOrderHints: {},
+        slug: {
+          en: 'conflict-attr-test',
+        },
+        masterVariant: {
+          id: 1,
+          sku: 'SKU1',
+          key: 'KEY1',
+          prices: [],
+          images: [],
+          attributes: [
+            {
+              name: 'productType',
+              value: {
+                label: {
+                  de: 'label-de',
+                  en: 'label-en',
+                },
+                key: 'lenum-key-1',
+              },
+            },
+            {
+              name: 'description',
+              value: {
+                de: 'description de',
+                en: 'description en',
+              },
+            },
+          ],
+          assets: [],
+        },
+        variants: [],
+        searchKeywords: {},
+        hasStagedChanges: false,
+        published: false,
+        key: 'conflict-attr-test',
+        createdAt: '2018-11-13T09:43:13.304Z',
+        lastModifiedAt: '2018-11-13T09:43:13.304Z',
+      }
+      const res = _productMapping.run(_sample)
+      expect(res).toHaveLength(1)
+      expect(res).toMatchSnapshot()
+    })
   })
 
   describe('::mergeVariants', () => {
