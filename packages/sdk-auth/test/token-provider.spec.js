@@ -172,4 +172,21 @@ describe('Token Provider', () => {
       expect(resToken).toEqual('old-access-token')
     })
   })
+
+  describe('_performRefreshedTokenFlow', () => {
+    test('should call sdkAuth refreshToken auth flow', async () => {
+      const _tokenProvider = new TokenProvider({ sdkAuth }, tokenInfo)
+      _tokenProvider.sdkAuth.refreshTokenFlow = jest
+        .fn()
+        .mockImplementation(() => 'refreshedInfo')
+
+      const refreshedInfo = await _tokenProvider._performRefreshedTokenFlow(
+        'refreshToken'
+      )
+      expect(_tokenProvider.sdkAuth.refreshTokenFlow).toHaveBeenCalledWith(
+        'refreshToken'
+      )
+      expect(refreshedInfo).toEqual('refreshedInfo')
+    })
+  })
 })

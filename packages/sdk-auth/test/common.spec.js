@@ -10,9 +10,6 @@ describe('Common processes', () => {
     'base64'
   )
   const auth = new Auth(config)
-  const timeSpy = jest
-    .spyOn(Auth, '_calculateExpirationTime')
-    .mockImplementation(() => 123)
 
   const request = {
     basicAuth,
@@ -176,6 +173,10 @@ describe('Common processes', () => {
 
   describe('Successful response', () => {
     test('should return a 200 ok response', async () => {
+      const timeSpy = jest
+        .spyOn(Auth, '_calculateExpirationTime')
+        .mockImplementation(() => 123)
+
       const response = {
         access_token: 'v-dZ10ZCpvbGfwcFniXqfkAj0vq1yZVI',
         expires_in: 172800,
@@ -201,6 +202,8 @@ describe('Common processes', () => {
       })
       expect(timeSpy).toHaveBeenCalled()
       expect(timeSpy).toHaveBeenLastCalledWith(response.expires_in)
+
+      timeSpy.mockRestore()
     })
 
     test('should use custom scopes when provided', async () => {
@@ -285,6 +288,33 @@ describe('Common processes', () => {
       expect(() => Auth._getFetcher()).toThrow(
         '`fetch` is not available. Please pass in `fetch` as an option or have it globally available.'
       )
+    })
+  })
+
+  describe('_enrichTokenResponse', () => {
+    test('should return original tokenInfo if it does not contain expires_in property', () => {
+      const originalInfo = {
+        access_token: '123',
+        refresh_token: '123',
+      }
+      const enrichedInfo = Auth._enrichTokenResponse(originalInfo)
+      expect(enrichedInfo).toEqual(originalInfo)
+    })
+
+    test('should enrich tokenInfo with expires_at property', () => {
+      const originalInfo = {
+        access_token: '123',
+        expires_in: 1000,
+        refresh_token: '123',
+      }
+      const enrichedInfo = Auth._enrichTokenResponse(originalInfo)
+      expect(enrichedInfo).toEqual(
+        expect.objectContaining({
+          ...originalInfo,
+          expires_at: expect.any(Number),
+        })
+      )
+      expect(enrichedInfo.expires_at).toBeGreaterThan(Date.now())
     })
   })
 })
