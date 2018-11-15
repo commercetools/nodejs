@@ -14,7 +14,9 @@ npm install --save @commercetools/sdk-middleware-queue
 
 ```html
 <script src="https://unpkg.com/@commercetools/sdk-middleware-queue/dist/commercetools-sdk-middleware-queue.umd.min.js"></script>
-<script>// global: CommercetoolsSdkMiddlewareQueue</script>
+<script>
+  // global: CommercetoolsSdkMiddlewareQueue
+</script>
 ```
 
 ## `createQueueMiddleware(options)`

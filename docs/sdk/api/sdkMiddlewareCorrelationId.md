@@ -14,7 +14,9 @@ npm install --save @commercetools/sdk-middleware-correlation-id
 
 ```html
 <script src="https://unpkg.com/@commercetools/sdk-middleware-correlation-id/dist/commercetools-sdk-middleware-correlation-id.umd.min.js"></script>
-<script>// global: CommercetoolsSdkMiddlewareCorrelationId</script>
+<script>
+  // global: CommercetoolsSdkMiddlewareCorrelationId
+</script>
 ```
 
 ## `createCorrelationIdMiddleware(options)`

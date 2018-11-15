@@ -14,7 +14,9 @@ npm install --save @commercetools/sdk-middleware-http
 
 ```html
 <script src="https://unpkg.com/@commercetools/sdk-middleware-http/dist/commercetools-sdk-middleware-http.umd.min.js"></script>
-<script>// global: CommercetoolsSdkMiddlewareHttp</script>
+<script>
+  // global: CommercetoolsSdkMiddlewareHttp
+</script>
 ```
 
 ## `createHttpMiddleware(options)`

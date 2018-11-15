@@ -4,7 +4,7 @@ import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createAuthMiddlewareWithExistingToken } from '@commercetools/sdk-middleware-auth'
 import { createClient } from '@commercetools/sdk-client'
-import SdkAuth from '@commercetools/sdk-auth'
+import SdkAuth, { TokenProvider } from '@commercetools/sdk-auth'
 import { clearData, createData } from '../cli/helpers/utils'
 
 let projectKey
@@ -72,6 +72,7 @@ describe('Auth Flows', () => {
       expect(tokenInfo).toHaveProperty('access_token')
       expect(tokenInfo).toHaveProperty('scope', `manage_project:${projectKey}`)
       expect(tokenInfo).toHaveProperty('expires_in')
+      expect(tokenInfo).toHaveProperty('expires_at')
       expect(tokenInfo).toHaveProperty('refresh_token')
       expect(tokenInfo).toHaveProperty('token_type', 'Bearer')
 
@@ -187,6 +188,58 @@ describe('Auth Flows', () => {
     it('should introspect an invalid token', async () => {
       const introspection = await authClient.introspectToken('invalid_token')
       expect(introspection).toHaveProperty('active', false)
+    })
+  })
+
+  describe('Token Provider', () => {
+    it('should return access_token from provided tokenInfo', async () => {
+      const tokenInfo = await authClient.anonymousFlow()
+      const tokenProvider = new TokenProvider({ sdkAuth: authClient }, tokenInfo)
+
+      const accessToken = await tokenProvider.getToken()
+      expect(accessToken).toEqual(tokenInfo.access_token)
+    })
+
+    it('should refresh expired access_token', async () => {
+      const onTokenInfoRefreshedMock = jest.fn()
+      const tokenInfo = await authClient.anonymousFlow()
+      tokenInfo.expires_at = 0 // emulate expired access_token
+
+      const tokenProvider = new TokenProvider({
+        sdkAuth: authClient,
+        onTokenInfoRefreshed: onTokenInfoRefreshedMock
+      }, tokenInfo)
+
+      const accessToken = await tokenProvider.getToken()
+      expect(accessToken).not.toEqual(tokenInfo.access_token)
+      expect(onTokenInfoRefreshedMock).toHaveBeenCalledTimes(1)
+      expect(accessToken).not.toEqual(onTokenInfoRefreshedMock.mock.calls[0][0].refresh_token)
+
+      const newTokenInfo = await tokenProvider.getTokenInfo()
+      expect(newTokenInfo.expires_at).not.toEqual(0)
+      expect(newTokenInfo.access_token).not.toEqual(tokenInfo.access_token)
+      expect(newTokenInfo.refresh_token).toEqual(tokenInfo.refresh_token)
+    })
+
+    it('should throw an error when refresh token flow fails', async () => {
+      const onTokenInfoRefreshedMock = jest.fn()
+      const tokenInfo = await authClient.anonymousFlow()
+      tokenInfo.expires_at = 0 // emulate expired access_token
+      tokenInfo.refresh_token = 'invalid' // emulate broken refresh_token
+
+      const tokenProvider = new TokenProvider({
+        sdkAuth: authClient,
+        onTokenInfoRefreshed: onTokenInfoRefreshedMock
+      }, tokenInfo)
+
+      try {
+        await tokenProvider.getToken()
+        throw new Error('Should throw an error')
+      } catch (err) {
+        expect(err.toString()).toEqual(expect.stringContaining(
+          'BadRequest: The refresh token was not found. It may have expired.'
+        ))
+      }
     })
   })
 
