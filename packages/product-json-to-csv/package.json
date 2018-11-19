@@ -50,7 +50,7 @@
     "iconv-lite": "0.4.24",
     "json2csv": "4.3.0",
     "lodash": "4.17.11",
-    "node-fetch": "2.2.1",
+    "node-fetch": "2.3.0",
     "pino": "5.8.1",
     "pretty-error": "2.1.1",
     "single-emit": "2.0.0",
