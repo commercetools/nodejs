@@ -1,11 +1,12 @@
 /* @flow */
 import type { TokenInfo } from 'types/sdk'
 import { EXPIRATION_OFFSET } from './constants'
+import SdkAuth from './auth'
 
 export default class TokenProvider {
   // Set flowtype annotations
   tokenInfo: ?TokenInfo
-  sdkAuth: Object
+  sdkAuth: SdkAuth
   onTokenInfoChanged: (tokenInfo: TokenInfo) => void
   onTokenInfoRefreshed: (
     newTokenInfo: TokenInfo,
@@ -52,11 +53,11 @@ export default class TokenProvider {
     return Date.now() >= (tokenInfo.expires_at || 0) - EXPIRATION_OFFSET
   }
 
-  _performRefreshTokenFlow(refreshToken: ?string): Promise<any> {
+  _performRefreshTokenFlow(refreshToken: string): Promise<TokenInfo> {
     return this.sdkAuth.refreshTokenFlow(refreshToken)
   }
 
-  _refreshToken(oldTokenInfo: TokenInfo): Promise<any> {
+  _refreshToken(oldTokenInfo: TokenInfo): Promise<TokenInfo> {
     if (!oldTokenInfo.refresh_token)
       throw new Error('Property "refresh_token" is missing')
 
@@ -88,7 +89,7 @@ export default class TokenProvider {
     )
   }
 
-  getToken(): Promise<any> {
+  getToken(): Promise<string> {
     return Promise.resolve(this.getTokenInfo())
       .then(
         (oldTokenInfo: TokenInfo): ?Promise<TokenInfo> =>
@@ -96,6 +97,6 @@ export default class TokenProvider {
             ? this._refreshToken(oldTokenInfo)
             : undefined
       )
-      .then((): ?string => this.getTokenInfo().access_token)
+      .then((): string => this.getTokenInfo().access_token)
   }
 }

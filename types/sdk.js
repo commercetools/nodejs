@@ -136,10 +136,10 @@ export type CustomAuthOptions = {
 }
 
 export type TokenInfo = {
+  refresh_token: string,
+  access_token: string,
+  expires_at: number,
   expires_in?: number,
-  expires_at?: number,
-  refresh_token?: string,
-  access_token?: string,
   scope?: string,
   token_type?: string,
 }
