@@ -1,6 +1,6 @@
 /* @flow */
 import type { TokenInfo } from 'types/sdk'
-import * as constants from './constants'
+import { EXPIRATION_OFFSET } from './constants'
 
 export default class TokenProvider {
   // Set flowtype annotations
@@ -49,12 +49,10 @@ export default class TokenProvider {
 
     // token is expired if current time is bigger than expiration time minus some offset
     // NOTE: all timezones use same place of unix timestamp origin
-    return (
-      Date.now() >= (tokenInfo.expires_at || 0) - constants.EXPIRATION_OFFSET
-    )
+    return Date.now() >= (tokenInfo.expires_at || 0) - EXPIRATION_OFFSET
   }
 
-  _performRefreshedTokenFlow(refreshToken: ?string): Promise<any> {
+  _performRefreshTokenFlow(refreshToken: ?string): Promise<any> {
     return this.sdkAuth.refreshTokenFlow(refreshToken)
   }
 
@@ -66,7 +64,7 @@ export default class TokenProvider {
     return Promise.resolve()
       .then(
         (): Promise<any> =>
-          this._performRefreshedTokenFlow(oldTokenInfo.refresh_token)
+          this._performRefreshTokenFlow(oldTokenInfo.refresh_token)
       )
       .then(
         (tokenInfo: TokenInfo): void => {

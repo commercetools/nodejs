@@ -79,7 +79,7 @@ describe('Token Provider', () => {
       })
 
       jest
-        .spyOn(_tokenProvider, '_performRefreshedTokenFlow')
+        .spyOn(_tokenProvider, '_performRefreshTokenFlow')
         .mockImplementation(() => ({
           access_token: 'new-access-token',
         }))
@@ -133,7 +133,7 @@ describe('Token Provider', () => {
         .spyOn(TokenProvider, '_isTokenExpired')
         .mockImplementation(() => true)
       jest
-        .spyOn(_tokenProvider, '_performRefreshedTokenFlow')
+        .spyOn(_tokenProvider, '_performRefreshTokenFlow')
         .mockImplementation(() => ({
           access_token: 'new-access-token',
           expires_in: 123,
@@ -173,14 +173,14 @@ describe('Token Provider', () => {
     })
   })
 
-  describe('_performRefreshedTokenFlow', () => {
+  describe('_performRefreshTokenFlow', () => {
     test('should call sdkAuth refreshToken auth flow', async () => {
       const _tokenProvider = new TokenProvider({ sdkAuth }, tokenInfo)
       _tokenProvider.sdkAuth.refreshTokenFlow = jest
         .fn()
         .mockImplementation(() => 'refreshedInfo')
 
-      const refreshedInfo = await _tokenProvider._performRefreshedTokenFlow(
+      const refreshedInfo = await _tokenProvider._performRefreshTokenFlow(
         'refreshToken'
       )
       expect(_tokenProvider.sdkAuth.refreshTokenFlow).toHaveBeenCalledWith(

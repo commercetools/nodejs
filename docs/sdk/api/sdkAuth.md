@@ -254,7 +254,7 @@ await authClient.introspectToken('invalid_token')
 
 ### Token Provider
 
-Token provider is a special class which watches over `access_token` and refreshes it using `sdkAuth.refreshTokenFlow()` method if it got expired.
+Token provider is a special class which watches over `access_token` and refreshes it using `sdkAuth.refreshTokenFlow()` method if it is expired.
 
 #### Constructor argument
 
