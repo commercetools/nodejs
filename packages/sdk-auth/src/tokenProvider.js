@@ -30,8 +30,8 @@ export default class TokenProvider {
     if (!sdkAuth) throw new Error('Property "sdkAuth" was not provided')
 
     if (tokenInfo) TokenProvider._validateTokenInfo(tokenInfo)
-    this.onTokenInfoChanged = onTokenInfoChanged || (() => {})
-    this.onTokenInfoRefreshed = onTokenInfoRefreshed || (() => {})
+    this.onTokenInfoChanged = onTokenInfoChanged
+    this.onTokenInfoRefreshed = onTokenInfoRefreshed
 
     this.sdkAuth = sdkAuth
     this.tokenInfo = tokenInfo
@@ -61,17 +61,13 @@ export default class TokenProvider {
       throw new Error('Property "refresh_token" is missing')
 
     let newTokenInfo
-    return Promise.resolve()
-      .then(
-        (): Promise<any> =>
-          this._performRefreshTokenFlow(oldTokenInfo.refresh_token)
-      )
+    return this._performRefreshTokenFlow(oldTokenInfo.refresh_token)
       .then(
         (tokenInfo: TokenInfo): void => {
           newTokenInfo = tokenInfo
           newTokenInfo.refresh_token = oldTokenInfo.refresh_token
-
-          return this.onTokenInfoRefreshed(newTokenInfo, oldTokenInfo)
+          // $FlowFixMe
+          return this.onTokenInfoRefreshed?.(newTokenInfo, oldTokenInfo)
         }
       )
       .then((): Promise<TokenInfo> => this.setTokenInfo(newTokenInfo))
@@ -86,7 +82,8 @@ export default class TokenProvider {
     TokenProvider._validateTokenInfo(tokenInfo)
 
     this.tokenInfo = tokenInfo
-    return Promise.resolve(this.onTokenInfoChanged(tokenInfo)).then(
+    // $FlowFixMe
+    return Promise.resolve(this.onTokenInfoChanged?.(tokenInfo)).then(
       (): TokenInfo => tokenInfo
     )
   }

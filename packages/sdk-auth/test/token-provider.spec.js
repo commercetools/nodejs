@@ -80,9 +80,11 @@ describe('Token Provider', () => {
 
       jest
         .spyOn(_tokenProvider, '_performRefreshTokenFlow')
-        .mockImplementation(() => ({
-          access_token: 'new-access-token',
-        }))
+        .mockImplementation(() =>
+          Promise.resolve({
+            access_token: 'new-access-token',
+          })
+        )
 
       await _tokenProvider._refreshToken(oldTokenInfo)
 
@@ -134,11 +136,13 @@ describe('Token Provider', () => {
         .mockImplementation(() => true)
       jest
         .spyOn(_tokenProvider, '_performRefreshTokenFlow')
-        .mockImplementation(() => ({
-          access_token: 'new-access-token',
-          expires_in: 123,
-          token_type: 'Bearer',
-        }))
+        .mockImplementation(() =>
+          Promise.resolve({
+            access_token: 'new-access-token',
+            expires_in: 123,
+            token_type: 'Bearer',
+          })
+        )
 
       const resToken = await _tokenProvider.getToken()
       expect(resToken).toEqual('new-access-token')
@@ -178,7 +182,7 @@ describe('Token Provider', () => {
       const _tokenProvider = new TokenProvider({ sdkAuth }, tokenInfo)
       _tokenProvider.sdkAuth.refreshTokenFlow = jest
         .fn()
-        .mockImplementation(() => 'refreshedInfo')
+        .mockImplementation(() => Promise.resolve('refreshedInfo'))
 
       const refreshedInfo = await _tokenProvider._performRefreshTokenFlow(
         'refreshToken'
