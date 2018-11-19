@@ -5,7 +5,6 @@ const json = require('rollup-plugin-json')
 const babel = require('rollup-plugin-babel')
 const replace = require('rollup-plugin-replace')
 const { uglify } = require('rollup-plugin-uglify')
-const flow = require('rollup-plugin-flow')
 const filesize = require('rollup-plugin-filesize')
 const babelConfig = require('./babel.config')
 /* eslint-enable */
@@ -19,7 +18,6 @@ const config = {
   },
   plugins: [
     json(),
-    flow({ all: true }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(env),
       VERSION: `'${version}'`,
