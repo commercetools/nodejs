@@ -14,7 +14,9 @@ npm install --save @commercetools/sdk-auth
 
 ```html
 <script src="https://unpkg.com/@commercetools/sdk-auth/dist/commercetools-sdk-auth.umd.min.js"></script>
-<script>// global: CommercetoolsSdkAuth</script>
+<script>
+  // global: CommercetoolsSdkAuth
+</script>
 ```
 
 ## Initialization
@@ -77,7 +79,8 @@ Fetches access token using [Client Credentials Flow](https://docs.commercetools.
 await authClient.clientCredentialsFlow()
 // {
 // 	 "access_token": "...",
-// 	 "expires_in": 172800,
+// 	 "expires_in": 172800, // lifetime of access_token in seconds
+// 	 "expires_at": 1542287072875, // UTC datetime in unix timestamp format when the token expires
 // 	 "scope": "manage_project:{projectKey}",
 // 	 "token_type": "Bearer",
 // }
@@ -109,6 +112,7 @@ await authClient.customerPasswordFlow(
 // {
 // 	 "access_token": "...",
 // 	 "expires_in": 172800,
+// 	 "expires_at": 1542287072875,
 // 	 "scope": "manage_project:{projectKey}",
 // 	 "token_type": "Bearer",
 //
@@ -138,6 +142,7 @@ await authClient.clientPasswordFlow({
 // {
 // 	 "access_token": "...",
 // 	 "expires_in": 172800,
+// 	 "expires_at": 1542287072875,
 // 	 "scope": "manage_project:{projectKey}",
 // 	 "refresh_token": "...",
 // 	 "token_type": "Bearer",
@@ -161,6 +166,7 @@ await authClient.refreshTokenFlow('refreshToken')
 // 	 "access_token": "...",
 // 	 "token_type": "Bearer",
 //   "expires_in": 172800,
+// 	 "expires_at": 1542287072875,
 // 	 "scope": "manage_project:{projectKey}",
 // }
 ```
@@ -181,6 +187,7 @@ await authClient.anonymousFlow(1)
 // {
 // 	 "access_token": "...",
 // 	 "expires_in": 172800,
+// 	 "expires_at": 1542287072875,
 // 	 "scope": "manage_project:{projectKey}",
 // 	 "refresh_token": "...",
 // 	 "token_type": "Bearer"
@@ -243,4 +250,74 @@ await authClient.introspectToken('invalid_token')
 // {
 //   "active":false
 // }
+```
+
+### Token Provider
+
+Token provider is a special class which watches over `access_token` and refreshes it using `sdkAuth.refreshTokenFlow()` method if it is expired.
+
+#### Constructor argument
+
+1.  `options` _(Object)_: Configuration object
+    - `sdkAuth` - SdkAuth object initialized with project credentials
+    - `fetchTokenInfo` - Optional function which will be called for retrieving `access_token` if the `tokenInfo` or `refresh_token` were not provided.
+    - `onTokenInfoChanged` - Optional function which is being called when the tokenInfo gets changed (manually or by refresh process)
+    - `onTokenInfoRefreshed` - Optional function which is being called when the tokenInfo gets refreshed
+2.  `tokenInfo` _(Object)_: Optional parameter containing token information loaded from one of auth flows (`{ access_token, refresh_token, expires_at }`)
+
+#### Usage example
+
+Minimal example:
+
+```js
+import SdkAuth, { TokenProvider } from '@commercetools/sdk-auth'
+
+// initiate TokenProvider
+const tokenProvider = new TokenProvider({
+  sdkAuth: new SdkAuth({
+    // .. init SdkAuth
+  }),
+  fetchTokenInfo: sdkAuth => sdkAuth.clientCredentialsFlow(),
+})
+
+// get access token
+const accessToken = await tokenProvider.getAccessToken()
+
+// get whole tokenInfo object
+const accessToken = await tokenProvider.getTokenInfo()
+```
+
+Another example:
+
+```js
+import SdkAuth, { TokenProvider } from '@commercetools/sdk-auth'
+
+const authClient = new SdkAuth({
+  // .. init SdkAuth
+})
+
+// get tokenInfo from authorization flow
+const tokenInfo = await authClient.clientPasswordFlow({
+  username: '...',
+  password: '...',
+})
+
+// initiate TokenProvider
+const tokenProvider = new TokenProvider(
+  {
+    sdkAuth,
+    onTokenInfoChanged: newTokenInfo =>
+      console.log('Token info was changed', newTokenInfo),
+  },
+  tokenInfo
+)
+
+// tokenInfo can be provided also later using "setTokenInfo()" function
+// tokenProvider.setTokenInfo(tokenInfo)
+
+// get currently used token info
+// const usedTokenInfo = tokenProvider.getTokenInfo()
+
+// check access_token validity, refresh if needed and return it
+const accessToken = await tokenProvider.getAccessToken()
 ```

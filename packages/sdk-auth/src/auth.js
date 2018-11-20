@@ -141,11 +141,26 @@ export default class SdkAuth {
     return !response.status || response.status >= 400
   }
 
+  static _calculateExpirationTime(expiresIn: number): number {
+    return Date.now() + expiresIn * 1000
+  }
+
+  static _enrichTokenResponse(response: Object): Object {
+    if (response.expires_in) {
+      return {
+        ...response,
+        // add a new property with expiration time in unixTimestamp format
+        expires_at: SdkAuth._calculateExpirationTime(response.expires_in),
+      }
+    }
+    return response
+  }
+
   static _handleResponse(uri: string, response: Object) {
     return SdkAuth._parseResponseJson(response).then(jsonResponse => {
       if (SdkAuth._isErrorResponse(response))
         throw SdkAuth._createResponseError(jsonResponse, uri, response.status)
-      return jsonResponse
+      return SdkAuth._enrichTokenResponse(jsonResponse)
     })
   }
 

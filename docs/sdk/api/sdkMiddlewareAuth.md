@@ -14,7 +14,9 @@ npm install --save @commercetools/sdk-middleware-auth
 
 ```html
 <script src="https://unpkg.com/@commercetools/sdk-middleware-auth/dist/commercetools-sdk-middleware-auth.umd.min.js"></script>
-<script>// global: CommercetoolsSdkMiddlewareAuth</script>
+<script>
+  // global: CommercetoolsSdkMiddlewareAuth
+</script>
 ```
 
 ## `createAuthMiddlewareForClientCredentialsFlow(options)`

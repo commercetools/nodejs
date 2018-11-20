@@ -14,7 +14,9 @@ npm install --save @commercetools/sdk-client
 
 ```html
 <script src="https://unpkg.com/@commercetools/sdk-client/dist/commercetools-sdk-client.umd.min.js"></script>
-<script>// global: CommercetoolsSdkClient</script>
+<script>
+  // global: CommercetoolsSdkClient
+</script>
 ```
 
 ## `createClient(options)`

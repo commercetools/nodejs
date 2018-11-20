@@ -5,6 +5,7 @@ import response from './resources/sample-response.json'
 
 describe('Client Credentials flow', () => {
   const auth = new Auth(config)
+  jest.spyOn(Auth, '_calculateExpirationTime').mockImplementation(() => 123)
 
   beforeEach(() => nock.cleanAll())
 
@@ -19,6 +20,9 @@ describe('Client Credentials flow', () => {
     expect(scope.isDone()).toBe(false)
     const res = await auth.clientCredentialsFlow()
     expect(scope.isDone()).toBe(true)
-    expect(res).toEqual(response)
+    expect(res).toEqual({
+      ...response,
+      expires_at: 123,
+    })
   })
 })

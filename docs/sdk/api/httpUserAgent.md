@@ -14,7 +14,9 @@ npm install --save @commercetools/http-user-agent
 
 ```html
 <script src="https://unpkg.com/@commercetools/http-user-agent/dist/commercetools-http-user-agent.umd.min.js"></script>
-<script>// global: CommercetoolsHttpUserAgent</script>
+<script>
+  // global: CommercetoolsHttpUserAgent
+</script>
 ```
 
 ## `createHttpUserAgent(options)`

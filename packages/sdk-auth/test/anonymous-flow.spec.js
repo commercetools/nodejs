@@ -5,6 +5,7 @@ import response from './resources/sample-response.json'
 
 describe('Anonymous flow', () => {
   const auth = new Auth(config)
+  jest.spyOn(Auth, '_calculateExpirationTime').mockImplementation(() => 123)
 
   beforeEach(() => nock.cleanAll())
 
@@ -21,7 +22,10 @@ describe('Anonymous flow', () => {
     const res = await auth.anonymousFlow()
 
     expect(scope.isDone()).toBe(true)
-    expect(res).toEqual(response)
+    expect(res).toEqual({
+      ...response,
+      expires_at: 123,
+    })
   })
 
   test('should authenticate with anonymousId', async () => {
@@ -37,6 +41,9 @@ describe('Anonymous flow', () => {
     const res = await auth.anonymousFlow(123)
 
     expect(scope.isDone()).toBe(true)
-    expect(res).toEqual(response)
+    expect(res).toEqual({
+      ...response,
+      expires_at: 123,
+    })
   })
 })
