@@ -28,7 +28,7 @@ describe('Token Provider', () => {
     test('should throw an error when using undefined token info', async () => {
       const _tokenProvider = new TokenProvider({ sdkAuth })
       expect(() => _tokenProvider.getToken()).toThrow(
-        'Property "tokenInfo" was not set'
+        'Neither "tokenInfo" property nor "fetchTokenInfo" method was provided'
       )
     })
 
@@ -46,7 +46,9 @@ describe('Token Provider', () => {
 
       const getTokenPromise = _tokenProvider.getToken()
       expect(getTokenPromise).rejects.toEqual(
-        new Error('Property "refresh_token" is missing')
+        new Error(
+          'Property "refresh_token" and "fetchTokenInfo" method are missing'
+        )
       )
     })
   })
@@ -147,6 +149,29 @@ describe('Token Provider', () => {
       const resToken = await _tokenProvider.getToken()
       expect(resToken).toEqual('new-access-token')
     })
+
+    test('should call fetchTokenInfo method when refresh_token is not provided', async () => {
+      const _tokenProvider = new TokenProvider(
+        {
+          sdkAuth,
+          fetchTokenInfo: () => ({
+            access_token: 'new-access-token',
+            expires_in: 123,
+          }),
+        },
+        {
+          access_token: 'old-access-token',
+          expires_at: 123,
+          // missing refresh token
+        }
+      )
+      jest
+        .spyOn(TokenProvider, '_isTokenExpired')
+        .mockImplementation(() => true)
+
+      const resToken = await _tokenProvider.getToken()
+      expect(resToken).toEqual('new-access-token')
+    })
   })
 
   describe('Valid token', () => {
@@ -168,6 +193,27 @@ describe('Token Provider', () => {
           expires_at: 123,
         }
       )
+      jest
+        .spyOn(TokenProvider, '_isTokenExpired')
+        .mockImplementation(() => false)
+
+      const resToken = await _tokenProvider.getToken()
+      expect(resToken).toEqual('old-access-token')
+    })
+
+    test('should retrieve tokenInfo from fetchTokenInfo method', async () => {
+      const _sdkAuth = new Auth(config)
+      jest.spyOn(_sdkAuth, 'clientCredentialsFlow').mockImplementation(() =>
+        Promise.resolve({
+          access_token: 'old-access-token',
+          expires_at: 123,
+        })
+      )
+
+      const _tokenProvider = new TokenProvider({
+        sdkAuth: _sdkAuth,
+        fetchTokenInfo: __sdkAuth => __sdkAuth.clientCredentialsFlow(),
+      })
       jest
         .spyOn(TokenProvider, '_isTokenExpired')
         .mockImplementation(() => false)

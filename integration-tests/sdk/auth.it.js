@@ -221,6 +221,31 @@ describe('Auth Flows', () => {
       expect(newTokenInfo.refresh_token).toEqual(tokenInfo.refresh_token)
     })
 
+    it('should retrieve automatically tokenInfo', async () => {
+      const tokenProvider = new TokenProvider({
+        sdkAuth: authClient,
+        fetchTokenInfo: sdkAuth => sdkAuth.clientCredentialsFlow()
+      })
+
+      const tokenInfo = tokenProvider.getTokenInfo()
+      // check returned properties
+      expect(tokenInfo).toHaveProperty('access_token')
+      expect(tokenInfo).toHaveProperty('scope', `manage_project:${projectKey}`)
+      expect(tokenInfo).toHaveProperty('expires_in')
+      expect(tokenInfo).toHaveProperty('token_type', 'Bearer')
+
+      // use client to do a test request
+      const client = getApiClient(
+        `${tokenInfo.token_type} ${tokenInfo.access_token}`
+      )
+      const response = await client.execute({
+        uri: customerUrl,
+        method: 'GET',
+      })
+
+      expect(response).toHaveProperty('body.count', 1)
+    })
+
     it('should throw an error when refresh token flow fails', async () => {
       const onTokenInfoRefreshedMock = jest.fn()
       const tokenInfo = await authClient.anonymousFlow()

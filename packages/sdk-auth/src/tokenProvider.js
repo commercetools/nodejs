@@ -8,6 +8,7 @@ export default class TokenProvider {
   tokenInfo: ?TokenInfo
   sdkAuth: SdkAuth
   onTokenInfoChanged: (tokenInfo: TokenInfo) => void
+  fetchTokenInfo: (sdkAuth: SdkAuth) => Promise<TokenInfo>
   onTokenInfoRefreshed: (
     newTokenInfo: TokenInfo,
     oldTokenInfo: TokenInfo
@@ -16,11 +17,13 @@ export default class TokenProvider {
   constructor(
     {
       sdkAuth,
+      fetchTokenInfo,
       onTokenInfoChanged,
       onTokenInfoRefreshed,
     }: {
       sdkAuth: Object,
       onTokenInfoChanged: (tokenInfo: TokenInfo) => void,
+      fetchTokenInfo: (sdkAuth: SdkAuth) => Promise<TokenInfo>,
       onTokenInfoRefreshed: (
         newTokenInfo: TokenInfo,
         oldTokenInfo: TokenInfo
@@ -33,6 +36,7 @@ export default class TokenProvider {
     if (tokenInfo) TokenProvider._validateTokenInfo(tokenInfo)
     this.onTokenInfoChanged = onTokenInfoChanged
     this.onTokenInfoRefreshed = onTokenInfoRefreshed
+    this.fetchTokenInfo = fetchTokenInfo
 
     this.sdkAuth = sdkAuth
     this.tokenInfo = tokenInfo
@@ -53,16 +57,31 @@ export default class TokenProvider {
     return Date.now() >= (tokenInfo.expires_at || 0) - EXPIRATION_OFFSET
   }
 
+  _performFetchTokenInfo(): Promise<TokenInfo> {
+    if (!this.fetchTokenInfo)
+      throw new Error('Method "fetchTokenInfo" was not provided')
+
+    return Promise.resolve(this.fetchTokenInfo(this.sdkAuth))
+  }
+
   _performRefreshTokenFlow(refreshToken: string): Promise<TokenInfo> {
     return this.sdkAuth.refreshTokenFlow(refreshToken)
   }
 
   _refreshToken(oldTokenInfo: TokenInfo): Promise<TokenInfo> {
-    if (!oldTokenInfo.refresh_token)
-      throw new Error('Property "refresh_token" is missing')
-
     let newTokenInfo
-    return this._performRefreshTokenFlow(oldTokenInfo.refresh_token)
+
+    if (!oldTokenInfo.refresh_token && !this.fetchTokenInfo)
+      throw new Error(
+        'Property "refresh_token" and "fetchTokenInfo" method are missing'
+      )
+
+    // perform refreshTokenFlow if we have refresh token otherwise call getTokenInfo method
+    const newTokenPromise = oldTokenInfo.refresh_token
+      ? this._performRefreshTokenFlow(oldTokenInfo.refresh_token)
+      : this._performFetchTokenInfo()
+
+    return newTokenPromise
       .then(
         (tokenInfo: TokenInfo): void => {
           newTokenInfo = tokenInfo
@@ -74,9 +93,22 @@ export default class TokenProvider {
       .then((): Promise<TokenInfo> => this.setTokenInfo(newTokenInfo))
   }
 
-  getTokenInfo(): TokenInfo {
-    if (!this.tokenInfo) throw new Error('Property "tokenInfo" was not set')
-    return this.tokenInfo
+  /**
+   * Method will return tokenInfo or if it is not provided it will call fetchTokenInfo() method
+   * for retrieving the first tokenInfo
+   * @returns {Promise.<TokenInfo>}
+   */
+  getTokenInfo(): Promise<TokenInfo> {
+    if (this.tokenInfo) return Promise.resolve(this.tokenInfo)
+
+    if (!this.fetchTokenInfo)
+      throw new Error(
+        'Neither "tokenInfo" property nor "fetchTokenInfo" method was provided'
+      )
+
+    return this._performFetchTokenInfo().then((tokenInfo: TokenInfo) =>
+      this.setTokenInfo(tokenInfo)
+    )
   }
 
   setTokenInfo(tokenInfo: TokenInfo): Promise<TokenInfo> {
@@ -90,13 +122,14 @@ export default class TokenProvider {
   }
 
   getToken(): Promise<string> {
-    return Promise.resolve(this.getTokenInfo())
+    return this.getTokenInfo()
       .then(
         (oldTokenInfo: TokenInfo): ?Promise<TokenInfo> =>
           TokenProvider._isTokenExpired(oldTokenInfo)
             ? this._refreshToken(oldTokenInfo)
             : undefined
       )
-      .then((): string => this.getTokenInfo().access_token)
+      .then((): Promise<TokenInfo> => this.getTokenInfo())
+      .then((tokenInfo: TokenInfo): string => tokenInfo.access_token)
   }
 }
