@@ -227,7 +227,7 @@ describe('Auth Flows', () => {
         fetchTokenInfo: sdkAuth => sdkAuth.clientCredentialsFlow()
       })
 
-      const tokenInfo = tokenProvider.getTokenInfo()
+      const tokenInfo = await tokenProvider.getTokenInfo()
       // check returned properties
       expect(tokenInfo).toHaveProperty('access_token')
       expect(tokenInfo).toHaveProperty('scope', `manage_project:${projectKey}`)
