@@ -32,6 +32,13 @@ describe('Token Provider', () => {
       )
     })
 
+    test('should throw an error when calling an undefined fetchTokenInfo method', async () => {
+      const _tokenProvider = new TokenProvider({ sdkAuth })
+      expect(() => _tokenProvider._performFetchTokenInfo()).toThrow(
+        'Method "fetchTokenInfo" was not provided'
+      )
+    })
+
     test('should throw an error when refreshing without "refresh_token" property', async () => {
       const _tokenProvider = new TokenProvider(
         { sdkAuth },
