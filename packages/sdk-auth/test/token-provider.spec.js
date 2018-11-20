@@ -133,6 +133,25 @@ describe('Token Provider', () => {
       expect(res).toEqual(true)
     })
 
+    test('should handle missing access_token', () => {
+      const res = TokenProvider._isTokenExpired({
+        expires_at: 123,
+      })
+      expect(res).toEqual(true)
+    })
+
+    test('should handle missing expires_at', () => {
+      const res = TokenProvider._isTokenExpired({
+        access_token: 'token',
+      })
+      expect(res).toEqual(true)
+    })
+
+    test('should handle missing tokenInfo', () => {
+      const res = TokenProvider._isTokenExpired()
+      expect(res).toEqual(true)
+    })
+
     test('should refresh token when expired', async () => {
       const _tokenProvider = new TokenProvider(
         { sdkAuth },
