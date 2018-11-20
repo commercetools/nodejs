@@ -50,7 +50,8 @@ export default class TokenProvider {
   }
 
   static _isTokenExpired(tokenInfo: TokenInfo): boolean {
-    if (!tokenInfo.access_token || !tokenInfo.expires_at) return true
+    if (!tokenInfo || !tokenInfo.access_token || !tokenInfo.expires_at)
+      return true
 
     // token is expired if current time is bigger than expiration time minus some offset
     // NOTE: all timezones use same place of unix timestamp origin
@@ -59,7 +60,9 @@ export default class TokenProvider {
 
   _performFetchTokenInfo(): Promise<TokenInfo> {
     if (!this.fetchTokenInfo)
-      throw new Error('Method "fetchTokenInfo" was not provided')
+      return Promise.reject(
+        new Error('Method "fetchTokenInfo" was not provided')
+      )
 
     return Promise.resolve(this.fetchTokenInfo(this.sdkAuth))
   }
@@ -71,13 +74,15 @@ export default class TokenProvider {
   _refreshToken(oldTokenInfo: TokenInfo): Promise<TokenInfo> {
     let newTokenInfo
 
-    if (!oldTokenInfo.refresh_token && !this.fetchTokenInfo)
-      throw new Error(
-        'Property "refresh_token" and "fetchTokenInfo" method are missing'
+    if (!oldTokenInfo?.['refresh_token'] && !this.fetchTokenInfo)
+      return Promise.reject(
+        new Error(
+          'Property "refresh_token" and "fetchTokenInfo" method are missing'
+        )
       )
 
     // perform refreshTokenFlow if we have refresh token otherwise call getTokenInfo method
-    const newTokenPromise = oldTokenInfo.refresh_token
+    const newTokenPromise = oldTokenInfo?.['refresh_token']
       ? this._performRefreshTokenFlow(oldTokenInfo.refresh_token)
       : this._performFetchTokenInfo()
 
@@ -85,7 +90,7 @@ export default class TokenProvider {
       .then(
         (tokenInfo: TokenInfo): void => {
           newTokenInfo = tokenInfo
-          newTokenInfo.refresh_token = oldTokenInfo.refresh_token
+          newTokenInfo.refresh_token = oldTokenInfo?.['refresh_token']
           // $FlowFixMe
           return this.onTokenInfoRefreshed?.(newTokenInfo, oldTokenInfo)
         }
@@ -99,16 +104,11 @@ export default class TokenProvider {
    * @returns {Promise.<TokenInfo>}
    */
   getTokenInfo(): Promise<TokenInfo> {
-    if (this.tokenInfo) return Promise.resolve(this.tokenInfo)
+    if (this.tokenInfo && !TokenProvider._isTokenExpired(this.tokenInfo))
+      return Promise.resolve(this.tokenInfo)
 
-    if (!this.fetchTokenInfo)
-      throw new Error(
-        'Neither "tokenInfo" property nor "fetchTokenInfo" method was provided'
-      )
-
-    return this._performFetchTokenInfo().then((tokenInfo: TokenInfo) =>
-      this.setTokenInfo(tokenInfo)
-    )
+    // $FlowFixMe - _refreshToken method will fetch new tokenInfo if not provided
+    return this._refreshToken(this.tokenInfo)
   }
 
   setTokenInfo(tokenInfo: TokenInfo): Promise<TokenInfo> {
@@ -121,15 +121,9 @@ export default class TokenProvider {
     )
   }
 
-  getToken(): Promise<string> {
-    return this.getTokenInfo()
-      .then(
-        (oldTokenInfo: TokenInfo): ?Promise<TokenInfo> =>
-          TokenProvider._isTokenExpired(oldTokenInfo)
-            ? this._refreshToken(oldTokenInfo)
-            : undefined
-      )
-      .then((): Promise<TokenInfo> => this.getTokenInfo())
-      .then((tokenInfo: TokenInfo): string => tokenInfo.access_token)
+  getAccessToken(): Promise<string> {
+    return this.getTokenInfo().then(
+      (tokenInfo: TokenInfo): string => tokenInfo.access_token
+    )
   }
 }

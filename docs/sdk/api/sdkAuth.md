@@ -260,7 +260,7 @@ Token provider is a special class which watches over `access_token` and refreshe
 
 1.  `options` _(Object)_: Configuration object
     - `sdkAuth` - SdkAuth object initialized with project credentials
-    - `getTokenInfo` - Optional function which will be called for retrieving `access_token` if the `tokenInfo` or `refresh_token` were not provided.
+    - `fetchTokenInfo` - Optional function which will be called for retrieving `access_token` if the `tokenInfo` or `refresh_token` were not provided.
     - `onTokenInfoChanged` - Optional function which is being called when the tokenInfo gets changed (manually or by refresh process)
     - `onTokenInfoRefreshed` - Optional function which is being called when the tokenInfo gets refreshed
 2.  `tokenInfo` _(Object)_: Optional parameter containing token information loaded from one of auth flows (`{ access_token, refresh_token, expires_at }`)
@@ -277,10 +277,14 @@ const tokenProvider = new TokenProvider({
   sdkAuth: new SdkAuth({
     // .. init SdkAuth
   }),
-  getTokenInfo: sdkAuth => sdkAuth.clientCredentialsFlow(),
+  fetchTokenInfo: sdkAuth => sdkAuth.clientCredentialsFlow(),
 })
 
-const accessToken = await tokenProvider.getToken()
+// get access token
+const accessToken = await tokenProvider.getAccessToken()
+
+// get whole tokenInfo object
+const accessToken = await tokenProvider.getTokenInfo()
 ```
 
 Another example:
@@ -315,5 +319,5 @@ const tokenProvider = new TokenProvider(
 // const usedTokenInfo = tokenProvider.getTokenInfo()
 
 // check access_token validity, refresh if needed and return it
-const accessToken = await tokenProvider.getToken()
+const accessToken = await tokenProvider.getAccessToken()
 ```

@@ -25,17 +25,19 @@ describe('Token Provider', () => {
       )
     })
 
-    test('should throw an error when using undefined token info', () => {
+    test('should throw an error when using undefined token info', async () => {
       const _tokenProvider = new TokenProvider({ sdkAuth })
-      expect(() => _tokenProvider.getToken()).toThrow(
-        'Neither "tokenInfo" property nor "fetchTokenInfo" method was provided'
+      await expect(_tokenProvider.getAccessToken()).rejects.toEqual(
+        new Error(
+          'Property "refresh_token" and "fetchTokenInfo" method are missing'
+        )
       )
     })
 
-    test('should throw an error when calling an undefined fetchTokenInfo method', () => {
+    test('should throw an error when calling an undefined fetchTokenInfo method', async () => {
       const _tokenProvider = new TokenProvider({ sdkAuth })
-      expect(() => _tokenProvider._performFetchTokenInfo()).toThrow(
-        'Method "fetchTokenInfo" was not provided'
+      await expect(_tokenProvider._performFetchTokenInfo()).rejects.toEqual(
+        new Error('Method "fetchTokenInfo" was not provided')
       )
     })
 
@@ -51,8 +53,8 @@ describe('Token Provider', () => {
         .spyOn(TokenProvider, '_isTokenExpired')
         .mockImplementation(() => true)
 
-      const getTokenPromise = _tokenProvider.getToken()
-      expect(getTokenPromise).rejects.toEqual(
+      const getTokenPromise = _tokenProvider.getAccessToken()
+      await expect(getTokenPromise).rejects.toEqual(
         new Error(
           'Property "refresh_token" and "fetchTokenInfo" method are missing'
         )
@@ -153,7 +155,7 @@ describe('Token Provider', () => {
           })
         )
 
-      const resToken = await _tokenProvider.getToken()
+      const resToken = await _tokenProvider.getAccessToken()
       expect(resToken).toEqual('new-access-token')
     })
 
@@ -176,7 +178,7 @@ describe('Token Provider', () => {
         .spyOn(TokenProvider, '_isTokenExpired')
         .mockImplementation(() => true)
 
-      const resToken = await _tokenProvider.getToken()
+      const resToken = await _tokenProvider.getAccessToken()
       expect(resToken).toEqual('new-access-token')
     })
   })
@@ -188,7 +190,7 @@ describe('Token Provider', () => {
         .spyOn(TokenProvider, '_isTokenExpired')
         .mockImplementation(() => false)
 
-      const resToken = await _tokenProvider.getToken()
+      const resToken = await _tokenProvider.getAccessToken()
       expect(resToken).toEqual('old-access-token')
     })
 
@@ -204,7 +206,7 @@ describe('Token Provider', () => {
         .spyOn(TokenProvider, '_isTokenExpired')
         .mockImplementation(() => false)
 
-      const resToken = await _tokenProvider.getToken()
+      const resToken = await _tokenProvider.getAccessToken()
       expect(resToken).toEqual('old-access-token')
     })
 
@@ -225,7 +227,7 @@ describe('Token Provider', () => {
         .spyOn(TokenProvider, '_isTokenExpired')
         .mockImplementation(() => false)
 
-      const resToken = await _tokenProvider.getToken()
+      const resToken = await _tokenProvider.getAccessToken()
       expect(resToken).toEqual('old-access-token')
     })
   })

@@ -196,7 +196,7 @@ describe('Auth Flows', () => {
       const tokenInfo = await authClient.anonymousFlow()
       const tokenProvider = new TokenProvider({ sdkAuth: authClient }, tokenInfo)
 
-      const accessToken = await tokenProvider.getToken()
+      const accessToken = await tokenProvider.getAccessToken()
       expect(accessToken).toEqual(tokenInfo.access_token)
     })
 
@@ -210,7 +210,7 @@ describe('Auth Flows', () => {
         onTokenInfoRefreshed: onTokenInfoRefreshedMock
       }, tokenInfo)
 
-      const accessToken = await tokenProvider.getToken()
+      const accessToken = await tokenProvider.getAccessToken()
       expect(accessToken).not.toEqual(tokenInfo.access_token)
       expect(onTokenInfoRefreshedMock).toHaveBeenCalledTimes(1)
       expect(accessToken).not.toEqual(onTokenInfoRefreshedMock.mock.calls[0][0].refresh_token)
@@ -258,7 +258,7 @@ describe('Auth Flows', () => {
       }, tokenInfo)
 
       try {
-        await tokenProvider.getToken()
+        await tokenProvider.getAccessToken()
         throw new Error('Should throw an error')
       } catch (err) {
         expect(err.toString()).toEqual(expect.stringContaining(
