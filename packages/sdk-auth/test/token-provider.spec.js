@@ -16,7 +16,7 @@ describe('Token Provider', () => {
   beforeEach(() => nock.cleanAll())
 
   describe('Validation', () => {
-    test('should throw an error when refresh_token and access_token is not provided', async () => {
+    test('should throw an error when refresh_token and access_token is not provided', () => {
       const _tokenInfo = {
         // missing tokens
       }
@@ -25,14 +25,14 @@ describe('Token Provider', () => {
       )
     })
 
-    test('should throw an error when using undefined token info', async () => {
+    test('should throw an error when using undefined token info', () => {
       const _tokenProvider = new TokenProvider({ sdkAuth })
       expect(() => _tokenProvider.getToken()).toThrow(
         'Neither "tokenInfo" property nor "fetchTokenInfo" method was provided'
       )
     })
 
-    test('should throw an error when calling an undefined fetchTokenInfo method', async () => {
+    test('should throw an error when calling an undefined fetchTokenInfo method', () => {
       const _tokenProvider = new TokenProvider({ sdkAuth })
       expect(() => _tokenProvider._performFetchTokenInfo()).toThrow(
         'Method "fetchTokenInfo" was not provided'
@@ -115,7 +115,7 @@ describe('Token Provider', () => {
   })
 
   describe('Expired token', () => {
-    test('should recognize a valid token expiration', async () => {
+    test('should recognize a valid token expiration', () => {
       const res = TokenProvider._isTokenExpired({
         access_token: 'token',
         expires_at: Date.now() + 10 * 60 * 60 * 1000, // Now + 10 hours
@@ -123,7 +123,7 @@ describe('Token Provider', () => {
       expect(res).toEqual(false)
     })
 
-    test('should recognize an invalid token expiration', async () => {
+    test('should recognize an invalid token expiration', () => {
       const res = TokenProvider._isTokenExpired({
         access_token: 'token',
         expires_at: Date.now() - 10 * 60 * 60 * 1000, // Now - 10 hours
