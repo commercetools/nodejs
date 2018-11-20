@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/csv-parser-orders",
-  "version": "1.4.11",
+  "version": "1.4.12",
   "description": "Module that parses order csv to json",
   "keywords": [
     "commercetools",
