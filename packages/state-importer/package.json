@@ -32,7 +32,7 @@
     "@commercetools/sdk-middleware-http": "4.0.8",
     "@commercetools/sdk-middleware-user-agent": "1.2.11",
     "@commercetools/sync-actions": "2.2.1",
-    "node-fetch": "2.2.1"
+    "node-fetch": "2.3.0"
   },
   "devDependencies": {
     "common-tags": "1.8.0"
