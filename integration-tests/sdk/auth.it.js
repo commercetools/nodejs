@@ -221,7 +221,7 @@ describe('Auth Flows', () => {
       expect(newTokenInfo.refresh_token).toEqual(tokenInfo.refresh_token)
     })
 
-    it('should retrieve automatically tokenInfo', async () => {
+    it('should automatically retrieve tokenInfo', async () => {
       const tokenProvider = new TokenProvider({
         sdkAuth: authClient,
         fetchTokenInfo: sdkAuth => sdkAuth.clientCredentialsFlow()
