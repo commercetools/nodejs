@@ -41,4 +41,5 @@
   - [Product Exporter](/cli/product-exporter.md)
   - [Product JSON to CSV](/cli/product-json-to-csv.md)
   - [Product JSON to XLSX](/cli/product-json-to-xlsx.md)
+  - [Resource Deleter](/cli/resource-deleter.md)
   - [State importer](/cli/state-importer.md)
