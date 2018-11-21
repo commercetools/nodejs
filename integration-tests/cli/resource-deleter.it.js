@@ -65,4 +65,42 @@ describe('Resource Deleter', () => {
       expect(stdout).toBe(`${version}\n`)
     })
   })
+
+  describe('resource-deleter function', () => {
+    let filePath
+    let stdout
+    let stderr
+    const resources = ['carts', 'categories', 'customers', 'productTypes']
+    const results = []
+
+    beforeEach(async () => {
+      filePath = tmp.fileSync().name
+
+      await Promise.all(
+        resources.map(async resource => {
+          ;[stdout, stderr] = await exec(
+            `${bin} -o ${filePath} -p ${projectKey} -r ${resource}`
+          )
+          results.push({ stdout, stderr })
+        })
+      )
+    })
+
+    it('should log success messages', async () => {
+      results.forEach(result => {
+        stderr = result.stderr
+        stdout = result.stdout
+        expect(stderr).toBeFalsy()
+        expect(stdout).toMatch(/Starting to delete fetched resource/)
+        expect(stdout).toMatch(/All deleted/)
+      })
+    })
+
+    it('should delete resource', async () => {
+      const data = await fs.readFile(filePath, { encoding: 'utf8' })
+      expect(data).toBeDefined()
+      expect(data).toEqual('')
+      expect(data).toHaveLength(0)
+    })
+  })
 })
