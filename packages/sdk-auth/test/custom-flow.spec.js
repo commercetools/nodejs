@@ -6,6 +6,7 @@ import response from './resources/sample-response.json'
 describe('Custom flow', () => {
   const customHost = 'http://custom.uri'
   const auth = new Auth(config)
+  jest.spyOn(Auth, '_calculateExpirationTime').mockImplementation(() => 123)
 
   beforeEach(() => nock.cleanAll())
 
@@ -25,7 +26,10 @@ describe('Custom flow', () => {
     })
 
     expect(scope.isDone()).toBe(true)
-    expect(res).toEqual(response)
+    expect(res).toEqual({
+      ...response,
+      expires_at: 123,
+    })
   })
 
   test('should authenticate with a custom flow and user credentials', async () => {
@@ -53,7 +57,10 @@ describe('Custom flow', () => {
     })
 
     expect(scope.isDone()).toBe(true)
-    expect(res).toEqual(response)
+    expect(res).toEqual({
+      ...response,
+      expires_at: 123,
+    })
   })
 
   test('should set custom headers', async () => {
@@ -83,6 +90,9 @@ describe('Custom flow', () => {
     })
 
     expect(scope.isDone()).toBe(true)
-    expect(res).toEqual(response)
+    expect(res).toEqual({
+      ...response,
+      expires_at: 123,
+    })
   })
 })

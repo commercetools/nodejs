@@ -5,6 +5,7 @@ import response from './resources/sample-response.json'
 
 describe('Refresh Token flow', () => {
   const auth = new Auth(config)
+  jest.spyOn(Auth, '_calculateExpirationTime').mockImplementation(() => 123)
 
   beforeEach(() => nock.cleanAll())
 
@@ -19,7 +20,10 @@ describe('Refresh Token flow', () => {
     expect(scope.isDone()).toBe(false)
     const res = await auth.refreshTokenFlow('refreshTokenValue')
     expect(scope.isDone()).toBe(true)
-    expect(res).toEqual(response)
+    expect(res).toEqual({
+      ...response,
+      expires_at: 123,
+    })
   })
 
   test('should throw an error when token is not provided', async () => {

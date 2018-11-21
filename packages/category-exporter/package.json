@@ -1,6 +1,6 @@
 {
     "name": "@commercetools/category-exporter",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "publishConfig": {
         "access": "public"
     },
@@ -34,8 +34,8 @@
         "@commercetools/api-request-builder": "4.1.1",
         "@commercetools/get-credentials": "2.1.10",
         "@commercetools/sdk-client": "1.5.10",
-        "@commercetools/sdk-middleware-auth": "4.0.9",
-        "@commercetools/sdk-middleware-http": "4.0.8",
+        "@commercetools/sdk-middleware-auth": "4.0.10",
+        "@commercetools/sdk-middleware-http": "4.0.9",
         "@commercetools/sdk-middleware-user-agent": "1.2.11",
         "node-fetch": "2.3.0",
         "pino": "5.8.1",

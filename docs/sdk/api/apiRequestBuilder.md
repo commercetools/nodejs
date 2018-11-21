@@ -14,7 +14,9 @@ npm install --save @commercetools/api-request-builder
 
 ```html
 <script src="https://unpkg.com/@commercetools/api-request-builder/dist/commercetools-api-request-builder.umd.min.js"></script>
-<script>// global: CommercetoolsApiRequestBuilder</script>
+<script>
+  // global: CommercetoolsApiRequestBuilder
+</script>
 ```
 
 ## `createRequestBuilder(options)`

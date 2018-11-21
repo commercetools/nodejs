@@ -14,7 +14,9 @@ npm install --save @commercetools/sdk-middleware-logger
 
 ```html
 <script src="https://unpkg.com/@commercetools/sdk-middleware-logger/dist/commercetools-sdk-middleware-logger.umd.min.js"></script>
-<script>// global: CommercetoolsSdkMiddlewareLogger</script>
+<script>
+  // global: CommercetoolsSdkMiddlewareLogger
+</script>
 ```
 
 ## `createLoggerMiddleware(options)`

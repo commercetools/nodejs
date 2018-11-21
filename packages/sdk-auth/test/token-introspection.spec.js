@@ -6,9 +6,10 @@ describe('Token Introspection', () => {
   const response = {
     active: true,
     scope: `manage_project:${config.projectKey}`,
-    exp: 1501158800852,
+    expires_in: 12345,
   }
   const auth = new Auth(config)
+  jest.spyOn(Auth, '_calculateExpirationTime').mockImplementation(() => 123)
 
   beforeEach(() => nock.cleanAll())
 
@@ -22,7 +23,10 @@ describe('Token Introspection', () => {
     expect(scope.isDone()).toBe(false)
     const res = await auth.introspectToken('tokenValue')
     expect(scope.isDone()).toBe(true)
-    expect(res).toEqual(response)
+    expect(res).toEqual({
+      ...response,
+      expires_at: 123,
+    })
   })
 
   test('should throw an error when token is not provided', () => {
