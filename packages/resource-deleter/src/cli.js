@@ -48,10 +48,6 @@ Required scopes: ['manage_products', 'manage_customers', 'manage_types']`,
     describe: 'Resource that need to be deleted.',
     demand: true,
   })
-  .option('deleteHours', {
-    alias: 'h',
-    describe: 'Number of hours used to delete resources (lastModifiedAt).',
-  })
   .option('where', {
     alias: 'w',
     describe: 'Specify where predicate.',

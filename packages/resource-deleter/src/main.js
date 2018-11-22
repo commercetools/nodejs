@@ -29,7 +29,6 @@ export default class ResourceDeleter {
   logger: LoggerOptions
   predicate: ?string
   resource: string
-  deleteHours: ?number
 
   constructor(options: resourceDeleterOptions) {
     if (!options.apiConfig)
@@ -57,7 +56,6 @@ export default class ResourceDeleter {
     }
     this.predicate = options.predicate
     this.resource = options.resource
-    this.deleteHours = options.deleteHours
   }
 
   run(): Promise<any> {

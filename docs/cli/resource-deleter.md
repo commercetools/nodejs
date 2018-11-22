@@ -34,9 +34,7 @@ The constructor accepts two arguments:
   - `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`manage_products`, `manage_customers`, `manage_types`]. More info on how to get the access token [here](https://docs.commercetools.com/http-api-authorization.html#authorization-flows)
   - `resource` (Object): [resource] that need to be deleted.
   - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates) (Optional)
-- An optional object containing the following values:
-  - deleteHours (Number): Amount of time to delete a resource (lastModified)
-  - logger object having four functions (`info`, `warn`, `error` and `debug`)
+- An optional logger object having four functions (`info`, `warn`, `error` and `debug`)
 
 ## Usage
 
@@ -61,7 +59,6 @@ Options:
   --projectKey, -p           API project key.                         [required]
 
   --resource, -r             Resource that need to be deleted.        [required]
-  --deleteHours, -h          Number of hours used to delete resources (lastModifiedAt).
   --where, -w                specify where predicate
   --logLevel                 Logging level: error, warn, info or debug.
                                                                [default: "info"]
@@ -97,7 +94,6 @@ const options = {
     },
     accessToken: '123456yuhgfdwegh675412wefb4rgb',
     resource: 'my-resource'
-    deleteHours: 1
     predicate: 'key="my-desired-key"'
     logger: {
         error: console.error,

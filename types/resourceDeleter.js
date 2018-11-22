@@ -27,5 +27,4 @@ export type resourceDeleterOptions = {
   predicate?: string,
   logger?: LoggerOptions,
   resource: string,
-  deleteHours?: number,
 }
