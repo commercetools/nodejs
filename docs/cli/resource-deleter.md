@@ -6,9 +6,9 @@ commercetools resource like
 - [carts](https://docs.commercetools.com/http-api-projects-carts#delete-cart)
 - [categories](https://docs.commercetools.com/http-api-projects-categories#delete-category)
 - [channels](https://docs.commercetools.com/http-api-projects-channels#delete-channel)
+- [customergroups](https://docs.commercetools.com/http-api-projects-customerGroups#delete-customergroup)
 - [customers](https://docs.commercetools.com/http-api-projects-customers#delete-customer)
 - [customobjects](https://docs.commercetools.com/http-api-projects-custom-objects#delete-customobject-by-id)
-- [customergroups](https://docs.commercetools.com/http-api-projects-customerGroups#delete-customergroup)
 - [discountcodes](https://docs.commercetools.com/http-api-projects-discountCodes#delete-discountcode)
 - [inventoryentries](https://docs.commercetools.com/http-api-projects-inventory#delete-an-inventoryentry)
 - [orders](https://docs.commercetools.com/http-api-projects-orders#delete-order),
