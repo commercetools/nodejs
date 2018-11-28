@@ -238,16 +238,19 @@ export const productTypes = [
     name: 'DefaultProductType1',
     key: 'defaultProductType1',
     description: 'Product Type',
+    version: 1,
   },
   {
     name: 'FooProductType',
     key: 'fooProductTypeKey',
     description: 'Product Type',
+    version: 1,
   },
   {
     name: 'BarProductType',
     key: 'barProductTypeKey',
     description: 'Product Type',
+    version: 1,
   },
 ]
 
@@ -329,10 +332,12 @@ export const states = [
   {
     key: 'fooStateKey',
     type: 'OrderState',
+    version: 1,
   },
   {
     key: 'barStateKey',
     type: 'OrderState',
+    version: 1,
   },
 ]
 
