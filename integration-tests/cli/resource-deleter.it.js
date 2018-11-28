@@ -68,6 +68,7 @@ describe('Resource Deleter', () => {
     ])
   }, 30000)
 
+  // clear resources on API
   afterAll(async () => {
     await Promise.all([
       clearData(apiConfig, 'productDiscounts'),
