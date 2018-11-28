@@ -59,7 +59,7 @@ export default class ResourceDeleter {
   }
 
   run(): Promise<any> {
-    this.logger.info('Starting to delete fetched resources')
+    this.logger.info(`Starting to delete fetched ${this.resource}`)
 
     const uri = this.buildUri(this.apiConfig.projectKey, this.predicate)
     const request = ResourceDeleter.buildRequest(uri, 'GET')
