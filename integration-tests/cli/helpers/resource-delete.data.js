@@ -160,16 +160,6 @@ export const customObjects = [
   },
 ]
 
-export const discountCodes = [
-  {
-    code: 'IT8MKKZXA',
-    cartDiscounts: [
-      { typeId: 'cart-discount', id: '88e64aaf-2c9e-4ed2-8672-957ef1f544bc' },
-    ],
-    isActive: true,
-  },
-]
-
 export const inventoryEntries = [
   {
     sku: 'mySKU',
@@ -325,19 +315,6 @@ export const shippingMethods = [
     taxCategory: {
       key: 'barTaxCategoryKey',
     },
-  },
-]
-
-export const states = [
-  {
-    key: 'fooStateKey',
-    type: 'OrderState',
-    version: 1,
-  },
-  {
-    key: 'barStateKey',
-    type: 'OrderState',
-    version: 1,
   },
 ]
 

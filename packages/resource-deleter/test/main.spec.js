@@ -33,6 +33,18 @@ describe('::ResourceDeleter', () => {
         /The constructor must passed an `apiConfig` object/
       )
     })
+
+    test('should throw error if no `resource` in `options` parameter', () => {
+      expect(
+        () =>
+          new ResourceDeleter({
+            apiConfig: {
+              projectKey: 'sample-test-project',
+            },
+            logger,
+          })
+      ).toThrow(/A `resource` object must be passed/)
+    })
   })
 
   describe('::run', () => {
@@ -61,25 +73,49 @@ describe('::ResourceDeleter', () => {
       })
     })
 
-    describe('with status code 404', () => {
+    describe('should throw error when resource is empty with status code 200', () => {
       beforeEach(() => {
         payload = {
-          statusCode: 404,
+          statusCode: 200,
           body: {
             results: [],
           },
         }
+
         resourceDeleter.client.execute = jest.fn(() => Promise.resolve(payload))
       })
 
-      test('should throw internal server error', async () => {
-        const data = await resourceDeleter.run('sample-test-project')
-
-        expect(data).toBeDefined()
-        expect(data).toBeTruthy()
-        expect(data).toHaveLength(0)
+      test('should throw error for empty resource', () => {
+        expect(resourceDeleter.run('sample-test-project')).rejects.toThrow(
+          /Nothing to delete/
+        )
       })
     })
+
+    describe('should throw error when requires parameters are not passed with status code 200', () => {
+      beforeEach(() => {
+        payload = {
+          statusCode: 200,
+          body: {
+            results: [
+              { id: 'foo1', key: 'fooKey', version: 1 },
+              { id: 'boo2', key: 'booKey', version: 2 },
+              { id: 'fooboo3', key: 'foboKey', version: 3 },
+            ],
+          },
+        }
+
+        resourceDeleter.client.execute = jest
+          .fn(() => Promise.reject(Error('error during `resource` deletion')))
+          .mockImplementationOnce(() => Promise.resolve(payload))
+      })
+      test('should throw error if required parameter are missing with the resource during deletion', () => {
+        expect(resourceDeleter.run('sample-test-project')).rejects.toThrow(
+          /error during `resource` deletion/
+        )
+      })
+    })
+
     describe('with status code 500', () => {
       beforeEach(() => {
         payload = {

@@ -33,6 +33,8 @@ export default class ResourceDeleter {
   constructor(options: resourceDeleterOptions) {
     if (!options.apiConfig)
       throw new Error('The constructor must passed an `apiConfig` object')
+
+    if (!options.resource) throw new Error('A `resource` object must be passed')
     this.apiConfig = options.apiConfig
     this.client = createClient({
       middlewares: [
@@ -70,14 +72,14 @@ export default class ResourceDeleter {
     return this.client.process(
       request,
       (response: ClientResponse): Promise<any> => {
-        if (response.statusCode !== 200 && response.statusCode !== 404) {
+        if (response.statusCode !== 200) {
           return Promise.reject(
             new Error(`Request returned status code ${response.statusCode}`)
           )
         }
         const results = response.body?.results
-        if (!results) return Promise.reject(new Error(`No resource found`))
-
+        if (!results || !results.length)
+          return Promise.reject(new Error(`Nothing to delete`))
         return Promise.all(
           results.map(
             (result: Object): Promise<any> =>
@@ -91,7 +93,12 @@ export default class ResourceDeleter {
           )
         )
           .then((): void => this.logger.info('All deleted'))
-          .catch((error: Error): void => this.logger.info(error))
+          .catch(
+            (error: Error): Promise<Error> => {
+              this.logger.info(error)
+              return Promise.reject(error)
+            }
+          )
       },
       { accumulate: false }
     )

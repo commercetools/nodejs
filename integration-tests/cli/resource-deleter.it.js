@@ -10,7 +10,6 @@ import {
   customerGroups,
   customers,
   customObjects,
-  discountCodes,
   inventoryEntries,
   payments,
   productDiscounts,
@@ -18,7 +17,6 @@ import {
   productTypes,
   reviews,
   shippingMethods,
-  states,
   taxCategories,
   types,
   zones,
@@ -53,7 +51,6 @@ describe('Resource Deleter', () => {
         createData(apiConfig, 'customers', customers),
         createData(apiConfig, 'inventory', inventoryEntries),
         createData(apiConfig, 'customObjects', customObjects),
-        createData(apiConfig, 'discountCodes', discountCodes),
         createData(apiConfig, 'payments', payments),
         createData(apiConfig, 'customerGroups', customerGroups),
         createData(apiConfig, 'reviews', reviews),
@@ -63,7 +60,6 @@ describe('Resource Deleter', () => {
       ]),
       createData(apiConfig, 'products', products),
       createData(apiConfig, 'shippingMethods', shippingMethods),
-      createData(apiConfig, 'states', states),
       createData(apiConfig, 'carts', carts),
     ])
   }, 30000)
@@ -74,7 +70,6 @@ describe('Resource Deleter', () => {
       clearData(apiConfig, 'productDiscounts'),
       clearData(apiConfig, 'reviews'),
       clearData(apiConfig, 'shippingMethods'),
-      clearData(apiConfig, 'states'),
       clearData(apiConfig, 'taxCategories'),
       clearData(apiConfig, 'types'),
       clearData(apiConfig, 'zones'),
@@ -86,7 +81,6 @@ describe('Resource Deleter', () => {
       clearData(apiConfig, 'customerGroups'),
       clearData(apiConfig, 'customers'),
       clearData(apiConfig, 'customObjects'),
-      clearData(apiConfig, 'discountCodes'),
       clearData(apiConfig, 'inventory'),
       clearData(apiConfig, 'payments'),
     ])
@@ -272,35 +266,6 @@ describe('Resource Deleter', () => {
     })
 
     it('should delete customObjects', async () => {
-      const data = await fs.readFile(filePath, { encoding: 'utf8' })
-      expect(data)
-        .toBeDefined()
-        .toEqual('')
-        .toHaveLength(0)
-    })
-  })
-
-  describe('when deleting discountCodes', () => {
-    let filePath
-    let stdout
-    let stderr
-    const resource = 'discountCodes'
-
-    beforeAll(async () => {
-      filePath = tmp.fileSync().name
-      ;[stdout, stderr] = await exec(
-        `${bin} -o ${filePath} -p ${projectKey} -r ${resource}`
-      )
-    })
-
-    it('should log success messages', async () => {
-      expect(stderr).toBeFalsy()
-      expect(stdout)
-        .toMatch(/Starting to delete fetched discountCodes/)
-        .toMatch(/All deleted/)
-    })
-
-    it('should delete discountCodes', async () => {
       const data = await fs.readFile(filePath, { encoding: 'utf8' })
       expect(data)
         .toBeDefined()
@@ -504,33 +469,6 @@ describe('Resource Deleter', () => {
     })
 
     it('should delete shippingMethods', async () => {
-      const data = await fs.readFile(filePath, { encoding: 'utf8' })
-      expect(data)
-        .toBeDefined()
-        .toEqual('')
-        .toHaveLength(0)
-    })
-  })
-
-  describe('when deleting states', () => {
-    let filePath
-    let stdout
-    let stderr
-    const resource = 'states'
-
-    beforeAll(async () => {
-      filePath = tmp.fileSync().name
-      ;[stdout, stderr] = await exec(
-        `${bin} -o ${filePath} -p ${projectKey} -r ${resource}`
-      )
-    })
-
-    it('should log success messages', async () => {
-      expect(stderr).toBeFalsy()
-      expect(stdout).toMatch(/Starting to delete fetched states/)
-    })
-
-    it('should delete states', async () => {
       const data = await fs.readFile(filePath, { encoding: 'utf8' })
       expect(data)
         .toBeDefined()
