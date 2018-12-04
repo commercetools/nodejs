@@ -34,7 +34,8 @@ describe('StockExporter CLI', () => {
   }, 30000)
 
   afterAll(() =>
-    clearData(apiConfig, 'inventory').then(() => clearData(apiConfig, 'types')))
+    clearData(apiConfig, 'inventory').then(() => clearData(apiConfig, 'types'))
+  )
 
   describe('CLI basic functionality', () => {
     it('should print usage information given the help flag', async () => {

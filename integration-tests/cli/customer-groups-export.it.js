@@ -60,27 +60,23 @@ describe('Customer Groups Exporter', () => {
       expect(stdout).toMatch(/Starting Export/)
       expect(stdout).toMatch(/Export operation completed successfully/)
     })
-    it(
-      'should export customer groups from CTP',
-      async () => {
-        const data = await fs.readFile(filePath, { encoding: 'utf8' })
-        const actual = JSON.parse(data)
+    it('should export customer groups from CTP', async () => {
+      const data = await fs.readFile(filePath, { encoding: 'utf8' })
+      const actual = JSON.parse(data)
 
-        expect(actual).toBeInstanceOf(Array)
-        expect(actual).toHaveLength(3)
+      expect(actual).toBeInstanceOf(Array)
+      expect(actual).toHaveLength(3)
 
-        // Assert that the 3 created customer groups are the objects returned
-        // `groupName` is only used during creating, `name` is the key returned after that.
-        const returnGroups = customerGroups.map(group => {
-          const { groupName, ...withoutGroupName } = group
-          return { ...withoutGroupName, name: groupName }
-        })
+      // Assert that the 3 created customer groups are the objects returned
+      // `groupName` is only used during creating, `name` is the key returned after that.
+      const returnGroups = customerGroups.map(group => {
+        const { groupName, ...withoutGroupName } = group
+        return { ...withoutGroupName, name: groupName }
+      })
 
-        expect(actual).toContainEqual(expect.objectContaining(returnGroups[0]))
-        expect(actual).toContainEqual(expect.objectContaining(returnGroups[1]))
-        expect(actual).toContainEqual(expect.objectContaining(returnGroups[2]))
-      },
-      15000
-    )
+      expect(actual).toContainEqual(expect.objectContaining(returnGroups[0]))
+      expect(actual).toContainEqual(expect.objectContaining(returnGroups[1]))
+      expect(actual).toContainEqual(expect.objectContaining(returnGroups[2]))
+    }, 15000)
   })
 })

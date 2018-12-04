@@ -79,7 +79,7 @@ describe('PriceExporter', () => {
       await priceExporter.run(outputStream)
       expect(priceExporter._getProducts).toHaveBeenCalled()
       expect(priceExporter._getProducts.mock.calls[0][0]).toEqual(outputStream)
-      expect(csv.createWriteStream).not.toBeCalled()
+      expect(csv.createWriteStream).not.toHaveBeenCalled()
     })
 
     test('should call `_processStream` with outputStream if csv', async () => {

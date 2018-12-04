@@ -210,7 +210,7 @@ describe('CsvParserState', () => {
 
       test('should not pass error to callback', () => {
         csvParser._handleErrors(fakeError, callback)
-        expect(callback).not.toBeCalled()
+        expect(callback).not.toHaveBeenCalled()
       })
     })
   })

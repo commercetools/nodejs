@@ -42,85 +42,69 @@ describe('Custom Object tests', () => {
       await clearData(apiConfig, 'customObjects')
     }, 15000)
 
-    it(
-      'should import custom objects to CTP',
-      async () => {
+    it('should import custom objects to CTP', async () => {
+      await objectImport.run(customObjects)
+      const summary = objectImport.summaryReport()
+      expect(summary).toMatchSnapshot()
+    }, 15000)
+
+    it('should update custom objects on the CTP', async () => {
+      const oldCustomObjectsToUpdate = customObjects.map(object => ({
+        ...object,
+        value: { paymentMethod: 'gold' },
+      }))
+      await objectImport.run(oldCustomObjectsToUpdate)
+
+      // Reset the summary
+      objectImport._initiateSummary()
+
+      await objectImport.run(customObjects)
+      const summary = objectImport.summaryReport()
+      expect(summary).toMatchSnapshot()
+    }, 15000)
+
+    it('should stop import on first errors by default', async () => {
+      // Set batchSize to 1 so it executes serially
+      objectImport = new CustomObjectsImporter(
+        { apiConfig, batchSize: 1 },
+        logger
+      )
+
+      // Make last two objects invalid
+      customObjects[1].key = ''
+      customObjects[2].container = ''
+
+      try {
         await objectImport.run(customObjects)
-        const summary = objectImport.summaryReport()
-        expect(summary).toMatchSnapshot()
-      },
-      15000
-    )
+      } catch (e) {
+        // should create first object
+        expect(e.summary.createdCount).toBe(1)
+        // should stop after first error
+        expect(e.summary.errors).toHaveLength(1)
+        expect(e.summary).toMatchSnapshot()
+      }
+    }, 15000)
 
-    it(
-      'should update custom objects on the CTP',
-      async () => {
-        const oldCustomObjectsToUpdate = customObjects.map(object => ({
-          ...object,
-          value: { paymentMethod: 'gold' },
-        }))
-        await objectImport.run(oldCustomObjectsToUpdate)
+    it('should continueOnProblems if `continueOnProblems`', async () => {
+      // Set batchSize to 1 so it executes serially
+      objectImport = new CustomObjectsImporter(
+        {
+          apiConfig,
+          batchSize: 1,
+          continueOnProblems: true,
+        },
+        logger
+      )
 
-        // Reset the summary
-        objectImport._initiateSummary()
+      // Make two objects invalid
+      customObjects[0].key = ''
+      customObjects[1].container = ''
 
-        await objectImport.run(customObjects)
-        const summary = objectImport.summaryReport()
-        expect(summary).toMatchSnapshot()
-      },
-      15000
-    )
-
-    it(
-      'should stop import on first errors by default',
-      async () => {
-        // Set batchSize to 1 so it executes serially
-        objectImport = new CustomObjectsImporter(
-          { apiConfig, batchSize: 1 },
-          logger
-        )
-
-        // Make last two objects invalid
-        customObjects[1].key = ''
-        customObjects[2].container = ''
-
-        try {
-          await objectImport.run(customObjects)
-        } catch (e) {
-          // should create first object
-          expect(e.summary.createdCount).toBe(1)
-          // should stop after first error
-          expect(e.summary.errors).toHaveLength(1)
-          expect(e.summary).toMatchSnapshot()
-        }
-      },
-      15000
-    )
-
-    it(
-      'should continueOnProblems if `continueOnProblems`',
-      async () => {
-        // Set batchSize to 1 so it executes serially
-        objectImport = new CustomObjectsImporter(
-          {
-            apiConfig,
-            batchSize: 1,
-            continueOnProblems: true,
-          },
-          logger
-        )
-
-        // Make two objects invalid
-        customObjects[0].key = ''
-        customObjects[1].container = ''
-
-        await objectImport.run(customObjects)
-        const summary = objectImport.summaryReport()
-        expect(summary).toMatchSnapshot()
-        const errors = summary.detailedSummary.errors
-        expect(errors).toMatchSnapshot()
-      },
-      15000
-    )
+      await objectImport.run(customObjects)
+      const summary = objectImport.summaryReport()
+      expect(summary).toMatchSnapshot()
+      const errors = summary.detailedSummary.errors
+      expect(errors).toMatchSnapshot()
+    }, 15000)
   })
 })
