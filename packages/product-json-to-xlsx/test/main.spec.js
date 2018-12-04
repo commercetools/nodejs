@@ -68,14 +68,14 @@ describe('ProductJsonToXlsx', () => {
 
       productJsonToXlsx.run()
       expect(writer.writeToSingleXlsxFile).toHaveBeenCalled()
-      expect(writer.writeToZipFile).not.toBeCalled()
+      expect(writer.writeToZipFile).not.toHaveBeenCalled()
     })
 
     test('should write data to `zip` file if headers are not set', () => {
       productJsonToXlsx.parse = jest.fn(() => 'bar')
 
       productJsonToXlsx.run()
-      expect(writer.writeToSingleXlsxFile).not.toBeCalled()
+      expect(writer.writeToSingleXlsxFile).not.toHaveBeenCalled()
       expect(writer.writeToZipFile).toHaveBeenCalled()
     })
   })
@@ -721,7 +721,7 @@ describe('ProductJsonToXlsx', () => {
         await expect(
           productJsonToXlsx._getCategories(categoryId)
         ).resolves.toEqual(expected)
-        expect(productJsonToXlsx.fetchReferences).not.toBeCalled()
+        expect(productJsonToXlsx.fetchReferences).not.toHaveBeenCalled()
       })
 
       test('fetch only data not in cache from API', async () => {

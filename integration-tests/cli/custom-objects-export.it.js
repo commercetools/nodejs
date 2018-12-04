@@ -60,21 +60,17 @@ describe('Custom Objects Exporter', () => {
       expect(stdout).toMatch(/Starting Export/)
       expect(stdout).toMatch(/Export operation completed successfully/)
     })
-    it(
-      'should export custom objects from CTP',
-      async () => {
-        const data = await fs.readFile(filePath, { encoding: 'utf8' })
-        const actual = JSON.parse(data)
+    it('should export custom objects from CTP', async () => {
+      const data = await fs.readFile(filePath, { encoding: 'utf8' })
+      const actual = JSON.parse(data)
 
-        expect(actual).toBeInstanceOf(Array)
-        expect(actual).toHaveLength(3)
+      expect(actual).toBeInstanceOf(Array)
+      expect(actual).toHaveLength(3)
 
-        // Assert that the 3 created custom objects are the objects returned
-        expect(actual).toContainEqual(expect.objectContaining(customObjects[0]))
-        expect(actual).toContainEqual(expect.objectContaining(customObjects[1]))
-        expect(actual).toContainEqual(expect.objectContaining(customObjects[2]))
-      },
-      15000
-    )
+      // Assert that the 3 created custom objects are the objects returned
+      expect(actual).toContainEqual(expect.objectContaining(customObjects[0]))
+      expect(actual).toContainEqual(expect.objectContaining(customObjects[1]))
+      expect(actual).toContainEqual(expect.objectContaining(customObjects[2]))
+    }, 15000)
   })
 })

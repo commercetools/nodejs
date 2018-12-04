@@ -69,23 +69,19 @@ describe('CSV and CLI Tests', () => {
       ).rejects.toThrowError(/Row length does not match headers/)
     })
 
-    it(
-      'on parsing errors',
-      async () => {
-        const csvFilePath = path.join(samplesFolder, 'missing-type-sample.csv')
-        const jsonFilePath = tmp.fileSync().name
+    it('on parsing errors', async () => {
+      const csvFilePath = path.join(samplesFolder, 'missing-type-sample.csv')
+      const jsonFilePath = tmp.fileSync().name
 
-        try {
-          await exec(
-            `${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`
-          )
-        } catch (error) {
-          expect(error.code).toBe(1)
-          expect(String(error)).toMatch(/No type with key .+ found/)
-        }
-      },
-      15000
-    )
+      try {
+        await exec(
+          `${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`
+        )
+      } catch (error) {
+        expect(error.code).toBe(1)
+        expect(String(error)).toMatch(/No type with key .+ found/)
+      }
+    }, 15000)
 
     it('stack trace on verbose level', async () => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
@@ -170,22 +166,18 @@ describe('CSV and CLI Tests', () => {
       expect(String(stdout)).toMatch(/prices/)
     })
 
-    it(
-      'CLI exits on type mapping errors',
-      async () => {
-        const csvFilePath = path.join(samplesFolder, 'wrong-type-sample.csv')
-        const jsonFilePath = tmp.fileSync().name
-        try {
-          await exec(
-            `${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`
-          )
-        } catch (error) {
-          expect(error.code).toBe(1)
-          expect(String(error)).toMatch(/row 2: custom-type.+ valid/)
-        }
-      },
-      10000
-    )
+    it('CLI exits on type mapping errors', async () => {
+      const csvFilePath = path.join(samplesFolder, 'wrong-type-sample.csv')
+      const jsonFilePath = tmp.fileSync().name
+      try {
+        await exec(
+          `${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`
+        )
+      } catch (error) {
+        expect(error.code).toBe(1)
+        expect(String(error)).toMatch(/row 2: custom-type.+ valid/)
+      }
+    }, 10000)
 
     it('should parse CSV into JSON with array of prices', done => {
       const csvFilePath = path.join(samplesFolder, 'sample.csv')

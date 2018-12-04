@@ -75,7 +75,7 @@ describe('ProductJsonToCsv', () => {
 
       productJsonToCsv.run()
       expect(writer.writeToSingleCsvFile).toHaveBeenCalled()
-      expect(writer.writeToZipFile).not.toBeCalled()
+      expect(writer.writeToZipFile).not.toHaveBeenCalled()
       expect(writer.writeToSingleCsvFile.mock.calls[0][4]).toEqual({
         delimiter: ';',
         encoding: 'win1250',
@@ -90,7 +90,7 @@ describe('ProductJsonToCsv', () => {
       productJsonToCsv.parse = jest.fn(() => 'bar')
 
       productJsonToCsv.run()
-      expect(writer.writeToSingleCsvFile).not.toBeCalled()
+      expect(writer.writeToSingleCsvFile).not.toHaveBeenCalled()
       expect(writer.writeToZipFile).toHaveBeenCalled()
       expect(writer.writeToZipFile.mock.calls[0][3]).toEqual({
         delimiter: ';',
@@ -740,7 +740,7 @@ describe('ProductJsonToCsv', () => {
         await expect(
           productJsonToCsv._getCategories(categoryId)
         ).resolves.toEqual(expected)
-        expect(productJsonToCsv.fetchReferences).not.toBeCalled()
+        expect(productJsonToCsv.fetchReferences).not.toHaveBeenCalled()
       })
 
       test('fetch only data not in cache from API', async () => {
