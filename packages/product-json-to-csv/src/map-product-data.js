@@ -52,6 +52,8 @@ export default class ProductMapping {
     this.multiValDel = multiValueDelimiter
     this.createShortcuts = createShortcuts
 
+    // this list was created from a list of productProjection properties:
+    // https://docs.commercetools.com/http-api-projects-productProjections.html#productprojection
     this.productLevelProperties = [
       'id',
       'key',
