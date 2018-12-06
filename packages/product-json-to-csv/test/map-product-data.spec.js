@@ -772,6 +772,68 @@ describe('::ProductMapping', () => {
       expect(mappedVariant).toMatchSnapshot('conflictingPropertyNames')
     })
 
+    test('handle conflicting attribute names which are missing in main product info', () => {
+      const sample = {
+        id: '12345ab-id',
+        key: 'product-key',
+        // missing description
+        productType: {
+          name: 'resolved-product-type',
+          attributes: [],
+        },
+        published: true,
+        masterVariant: {
+          id: 1,
+          sku: 'A0E200000001YKI',
+          images: [],
+          attributes: [
+            {
+              name: 'description',
+              value: {
+                en: 'descAttrEn',
+                de: 'descAttrDe',
+              },
+            },
+            {
+              name: 'id',
+              value: 1,
+            },
+            {
+              name: 'name',
+              value: 'nameAttr',
+            },
+            {
+              name: 'slug',
+              value: 1234,
+            },
+            {
+              // set of numbers
+              name: 'categories',
+              value: [1, 2, 3],
+            },
+            {
+              name: 'published',
+              value: false,
+            },
+            {
+              name: 'booleanAttribute',
+              value: false,
+            },
+          ],
+        },
+        variants: [],
+      }
+
+      const [mappedVariant] = productMapping.run(sample)
+      expect(mappedVariant.booleanAttribute).toEqual('false')
+      expect(mappedVariant.description).toEqual(undefined)
+      expect(mappedVariant['attribute.description.en']).toEqual('descAttrEn')
+      expect(mappedVariant['attribute.description.de']).toEqual('descAttrDe')
+      expect(mappedVariant).toMatchSnapshot(
+        'conflictingDescriptionAttributeName'
+      )
+    })
+
     test('converts variant image array to strings', () => {
       const sample = {
         id: '12345ab-id',

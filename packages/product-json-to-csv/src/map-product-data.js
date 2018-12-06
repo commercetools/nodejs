@@ -32,6 +32,7 @@ export default class ProductMapping {
   categoryBy: 'name' | 'key' | 'externalId' | 'namedPath'
   mainLanguage: string
   languages: Array<string>
+  productLevelProperties: Array<string>
   multiValDel: string
 
   constructor({
@@ -50,6 +51,31 @@ export default class ProductMapping {
     this.languages = languages || [language]
     this.multiValDel = multiValueDelimiter
     this.createShortcuts = createShortcuts
+
+    this.productLevelProperties = [
+      'id',
+      'key',
+      'version',
+      'createdAt',
+      'lastModifiedAt',
+      'productType',
+      'name',
+      'description',
+      'slug',
+      'categories',
+      'categoryOrderHints',
+      'metaTitle',
+      'metaDescription',
+      'metaKeywords',
+      'searchKeywords',
+      'hasStagedChanges',
+      'published',
+      'masterVariant',
+      'variants',
+      'taxCategory',
+      'state',
+      'reviewRatingStatistics',
+    ]
   }
 
   run(product: ResolvedProductProjection): Array<MappedProduct> {
@@ -60,13 +86,13 @@ export default class ProductMapping {
     )
     const mappedProduct = varWithProductInfo.map(
       (variant: SingleVarPerProduct): MappedProduct =>
-        ProductMapping._postProcessProduct(this._mapProduct(variant))
+        this._postProcessProduct(this._mapProduct(variant))
     )
 
     return mappedProduct
   }
 
-  static _postProcessProduct(originalProduct: MappedProduct): MappedProduct {
+  _postProcessProduct(originalProduct: MappedProduct): MappedProduct {
     // move variant prices and attributes to top level
     // variant.prices => prices
     // variant.attributes.productSize => productSize
@@ -77,13 +103,14 @@ export default class ProductMapping {
     )
     const attributes: Object = get(originalProduct, 'variant.attributes', {})
     const cleanedProduct = { ...originalProduct, prices }
-    const productLevelKeys = Object.keys(cleanedProduct)
 
     // merge attributes to a product and prefix conflicting names if necessary
     Object.entries(attributes).forEach(([key, val]) => {
-      // if attribute name is already in productLevelKeys, prefix it with "attribute." string
-      // for example ltext value "productType.en" will become "attribute.productType.en"
-      const csvHeaderName = productLevelKeys.includes(key.split('.')[0])
+      // if attribute name have a conflict with some product level property, prefix it with
+      // "attribute." string - eg. "productType.en" attribute will become "attribute.productType.en"
+      const csvHeaderName = this.productLevelProperties.includes(
+        key.split('.')[0]
+      )
         ? `attribute.${key}`
         : key
       cleanedProduct[csvHeaderName] = val
