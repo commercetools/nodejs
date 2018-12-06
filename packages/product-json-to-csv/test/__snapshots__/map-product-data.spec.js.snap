@@ -14,6 +14,26 @@ Object {
 }
 `;
 
+exports[`::ProductMapping ::_mapProduct handle conflicting attribute names which are missing in main product info: conflictingDescriptionAttributeName 1`] = `
+Object {
+  "attribute.categories": "1;2;3",
+  "attribute.description.de": "descAttrDe",
+  "attribute.description.en": "descAttrEn",
+  "attribute.id": 1,
+  "attribute.name": "nameAttr",
+  "attribute.published": "false",
+  "attribute.slug": 1234,
+  "booleanAttribute": "false",
+  "id": "12345ab-id",
+  "key": "product-key",
+  "productType": "resolved-product-type",
+  "published": "true",
+  "variant.id": 1,
+  "variant.images": "",
+  "variant.sku": "A0E200000001YKI",
+}
+`;
+
 exports[`::ProductMapping ::_mapProduct handle conflicting productType names: conflictingPropertyNames 1`] = `
 Object {
   "attribute.productType": "prodTypeattributeValue",
