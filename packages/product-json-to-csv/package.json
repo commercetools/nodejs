@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/product-json-to-csv",
-  "version": "2.4.2",
+  "version": "2.4.3",
   "description": "Convert commercetools products from JSON to CSV",
   "keywords": [
     "commercetools",
