@@ -3,6 +3,7 @@ import { getCredentials } from '@commercetools/get-credentials'
 import pino from 'pino'
 import PrettyError from 'pretty-error'
 import yargs from 'yargs'
+import prompts from 'prompts'
 
 import ResourceDeleter from './main'
 import { description } from '../package.json'
@@ -105,8 +106,9 @@ const resolveCredentials = _args => {
 // Register error listener
 args.output.on('error', errorHandler)
 
-resolveCredentials(args)
-  .then(credentials => {
+async function execute() {
+  try {
+    const credentials = await resolveCredentials(args)
     const apiConfig = {
       host: args.authUrl,
       apiUrl: args.apiUrl,
@@ -126,7 +128,20 @@ resolveCredentials(args)
         debug: logger.debug.bind(logger),
       },
     }
-    return new ResourceDeleter(deleterOptions)
-  })
-  .then(resourceDeleter => resourceDeleter.run())
-  .catch(errorHandler)
+    const resourceDeleter = new ResourceDeleter(deleterOptions)
+    const response = await prompts({
+      type: 'confirm',
+      name: 'value',
+      message: `You are about to delete all ${
+        args.resource
+      } for this project. Are you sure about this?`,
+      initial: false,
+    })
+    if (response.value) await resourceDeleter.run()
+    process.exit()
+  } catch (error) {
+    errorHandler(error)
+  }
+}
+
+execute()
