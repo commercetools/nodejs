@@ -48,7 +48,7 @@
     "flat": "4.1.0",
     "highland": "2.13.0",
     "iconv-lite": "0.4.24",
-    "json2csv": "4.3.1",
+    "json2csv": "4.3.2",
     "lodash": "4.17.11",
     "node-fetch": "2.3.0",
     "pino": "5.9.0",
