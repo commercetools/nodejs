@@ -93,8 +93,8 @@ const options = {
       }
     },
     accessToken: '123456yuhgfdwegh675412wefb4rgb',
-    resource: 'my-resource'
-    predicate: 'key="my-desired-key"'
+    resource: 'my-resource',
+    predicate: 'key="my-desired-key"',
     logger: {
         error: console.error,
         warn: console.warn,
