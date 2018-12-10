@@ -12,15 +12,15 @@ Examples of the resources are :-
 - [customobjects](https://docs.commercetools.com/http-api-projects-custom-objects#delete-customobject-by-id)
 - [discountcodes](https://docs.commercetools.com/http-api-projects-discountCodes#delete-discountcode)
 - [inventoryentries](https://docs.commercetools.com/http-api-projects-inventory#delete-an-inventoryentry)
-- [orders](https://docs.commercetools.com/http-api-projects-orders#delete-order),
-- [payments](https://docs.commercetools.com/http-api-projects-payments#delete-payment),
+- [orders](https://docs.commercetools.com/http-api-projects-orders#delete-order)
+- [payments](https://docs.commercetools.com/http-api-projects-payments#delete-payment)
 - [productdiscounts](https://docs.commercetools.com/http-api-projects-productDiscounts#delete-productdiscount)
 - [products](https://docs.commercetools.com/http-api-projects-products#delete-product)
 - [producttypes](https://docs.commercetools.com/http-api-projects-productTypes#delete-producttype)
 - [reviews](https://docs.commercetools.com/http-api-projects-reviews#delete-review)
 - [shippingmethods](https://docs.commercetools.com/http-api-projects-shippingMethods#delete-shippingmethod)
 - [states](https://docs.commercetools.com/http-api-projects-states#delete-state)
-- [taxcategories](https://docs.commercetools.com/http-api-projects-taxCategories#delete-taxcategory),
+- [taxcategories](https://docs.commercetools.com/http-api-projects-taxCategories#delete-taxcategory)
 - [types](https://docs.commercetools.com/http-api-projects-types#delete-type)
 - [zones](https://docs.commercetools.com/http-api-projects-zones#delete-zone)
 
@@ -83,12 +83,12 @@ import fs from 'fs'
 
 const options = {
     apiConfig: {
-      apiUrl: 'https://api.sphere.io'
-      host: 'https://auth.sphere.com'
+      apiUrl: 'https://api.sphere.io',
+      host: 'https://auth.sphere.com',
       project_key: 'PROJECT_KEY',
       credentials: {
         clientId: '*********',
-        clientSecret: '*********'
+        clientSecret: '*********',
       }
     },
     accessToken: '123456yuhgfdwegh675412wefb4rgb',

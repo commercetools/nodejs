@@ -119,7 +119,6 @@ async function execute() {
       apiConfig,
       accessToken: args.accessToken,
       resource: args.resource,
-      deleteHours: args.deleteHours,
       predicate: args.where,
       logger: {
         error: logger.error.bind(logger),
@@ -132,9 +131,9 @@ async function execute() {
     const response = await prompts({
       type: 'confirm',
       name: 'value',
-      message: `You are about to delete all ${
-        args.resource
-      } for this project. Are you sure about this?`,
+      message: `You are about to delete all ${args.resource} from this project.
+      WARNING: This operation is final and is not reversible. 
+      Are you sure about this?`,
       initial: false,
     })
     if (response.value) await resourceDeleter.run()

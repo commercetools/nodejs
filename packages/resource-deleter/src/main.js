@@ -81,9 +81,9 @@ export default class ResourceDeleter {
         if (!results || !results.length)
           return Promise.reject(
             new Error(
-              `No ${this.resource} found in the project ${
+              `No ${this.resource} is found in the project ${
                 this.apiConfig.projectKey
-              }, nothing to delete.`
+              }, therefore nothing to delete.`
             )
           )
         return Promise.all(
