@@ -1,7 +1,8 @@
 # Resource Deleter
 
-A package which delete
-commercetools resource like
+A package which deletes resources from the [commercetools platform](https://docs.commercetools.com/).
+
+Examples of the resources are :-
 
 - [carts](https://docs.commercetools.com/http-api-projects-carts#delete-cart)
 - [categories](https://docs.commercetools.com/http-api-projects-categories#delete-category)
@@ -22,8 +23,6 @@ commercetools resource like
 - [taxcategories](https://docs.commercetools.com/http-api-projects-taxCategories#delete-taxcategory),
 - [types](https://docs.commercetools.com/http-api-projects-types#delete-type)
 - [zones](https://docs.commercetools.com/http-api-projects-zones#delete-zone)
-
-from the [commercetools platform](https://docs.commercetools.com/).
 
 ## Configuration
 
