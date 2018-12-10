@@ -4782,10 +4782,10 @@ gitbook-cli@daern91/gitbook-cli:
     tmp "0.0.33"
     user-home "2.0.0"
 
-gitbook-plugin-anchorjs@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/gitbook-plugin-anchorjs/-/gitbook-plugin-anchorjs-2.0.1.tgz#11c530ec13f50d3480f385f0571b25149d494a19"
-  integrity sha512-+y1Uen6MSV/GQm6pY6FWaoBrbURxW3E+6hs6/9X84k8dT+Bu5Ko+zQW2pPEN9+GytR8IaOCiw+4DXPyGmc8kwA==
+gitbook-plugin-anchorjs@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/gitbook-plugin-anchorjs/-/gitbook-plugin-anchorjs-2.1.0.tgz#c2b95a931121649011da834f7b153e78c19e110b"
+  integrity sha512-K4XzUxV6BwBANFDzl2w6/suKKcU0LuyR1nLTL5iB1dDpbsiI63c+HTiWoyJN3l6Wwp4waofDXvGVEyvh8uAGdQ==
 
 gitbook-plugin-edit-link@2.0.2:
   version "2.0.2"

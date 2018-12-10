@@ -75,7 +75,7 @@
     "eslint-plugin-react": "7.11.1",
     "flow-bin": "0.87.0",
     "gitbook-cli": "daern91/gitbook-cli",
-    "gitbook-plugin-anchorjs": "2.0.1",
+    "gitbook-plugin-anchorjs": "2.1.0",
     "gitbook-plugin-edit-link": "2.0.2",
     "gitbook-plugin-ga": "2.0.0",
     "gitbook-plugin-github": "3.0.0",
