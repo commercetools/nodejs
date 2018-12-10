@@ -79,7 +79,13 @@ export default class ResourceDeleter {
         }
         const results = response.body?.results
         if (!results || !results.length)
-          return Promise.reject(new Error(`Nothing to delete`))
+          return Promise.reject(
+            new Error(
+              `No ${this.resource} found in the project ${
+                this.apiConfig.projectKey
+              }, nothing to delete.`
+            )
+          )
         return Promise.all(
           results.map(
             (result: Object): Promise<any> =>
