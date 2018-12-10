@@ -67,7 +67,8 @@ describe('Channels', () => {
           ],
         })
       })
-      .then(() => clearData(apiConfig, 'channels')))
+      .then(() => clearData(apiConfig, 'channels'))
+  )
 
   it('create', () => {
     const body = {

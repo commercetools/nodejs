@@ -92,12 +92,15 @@ describe('Auth Flows', () => {
   describe('Customer Password Flow', () => {
     it('should authorize with customer credentials', async () => {
       // get access token with a password flow
-      const tokenInfo = await authClient.customerPasswordFlow({
-        username: userEmail,
-        password: userPassword,
-      }, {
-        disableRefreshToken: true
-      })
+      const tokenInfo = await authClient.customerPasswordFlow(
+        {
+          username: userEmail,
+          password: userPassword,
+        },
+        {
+          disableRefreshToken: true,
+        }
+      )
 
       // check returned properties
       expect(tokenInfo).toHaveProperty('access_token')
@@ -194,7 +197,10 @@ describe('Auth Flows', () => {
   describe('Token Provider', () => {
     it('should return access_token from provided tokenInfo', async () => {
       const tokenInfo = await authClient.anonymousFlow()
-      const tokenProvider = new TokenProvider({ sdkAuth: authClient }, tokenInfo)
+      const tokenProvider = new TokenProvider(
+        { sdkAuth: authClient },
+        tokenInfo
+      )
 
       const accessToken = await tokenProvider.getAccessToken()
       expect(accessToken).toEqual(tokenInfo.access_token)
@@ -205,15 +211,20 @@ describe('Auth Flows', () => {
       const tokenInfo = await authClient.anonymousFlow()
       tokenInfo.expires_at = 0 // emulate expired access_token
 
-      const tokenProvider = new TokenProvider({
-        sdkAuth: authClient,
-        onTokenInfoRefreshed: onTokenInfoRefreshedMock
-      }, tokenInfo)
+      const tokenProvider = new TokenProvider(
+        {
+          sdkAuth: authClient,
+          onTokenInfoRefreshed: onTokenInfoRefreshedMock,
+        },
+        tokenInfo
+      )
 
       const accessToken = await tokenProvider.getAccessToken()
       expect(accessToken).not.toEqual(tokenInfo.access_token)
       expect(onTokenInfoRefreshedMock).toHaveBeenCalledTimes(1)
-      expect(accessToken).not.toEqual(onTokenInfoRefreshedMock.mock.calls[0][0].refresh_token)
+      expect(accessToken).not.toEqual(
+        onTokenInfoRefreshedMock.mock.calls[0][0].refresh_token
+      )
 
       const newTokenInfo = await tokenProvider.getTokenInfo()
       expect(newTokenInfo.expires_at).not.toEqual(0)
@@ -224,7 +235,7 @@ describe('Auth Flows', () => {
     it('should automatically retrieve tokenInfo', async () => {
       const tokenProvider = new TokenProvider({
         sdkAuth: authClient,
-        fetchTokenInfo: sdkAuth => sdkAuth.clientCredentialsFlow()
+        fetchTokenInfo: sdkAuth => sdkAuth.clientCredentialsFlow(),
       })
 
       const tokenInfo = await tokenProvider.getTokenInfo()
@@ -252,18 +263,23 @@ describe('Auth Flows', () => {
       tokenInfo.expires_at = 0 // emulate expired access_token
       tokenInfo.refresh_token = 'invalid' // emulate broken refresh_token
 
-      const tokenProvider = new TokenProvider({
-        sdkAuth: authClient,
-        onTokenInfoRefreshed: onTokenInfoRefreshedMock
-      }, tokenInfo)
+      const tokenProvider = new TokenProvider(
+        {
+          sdkAuth: authClient,
+          onTokenInfoRefreshed: onTokenInfoRefreshedMock,
+        },
+        tokenInfo
+      )
 
       try {
         await tokenProvider.getAccessToken()
         throw new Error('Should throw an error')
       } catch (err) {
-        expect(err.toString()).toEqual(expect.stringContaining(
-          'BadRequest: The refresh token was not found. It may have expired.'
-        ))
+        expect(err.toString()).toEqual(
+          expect.stringContaining(
+            'BadRequest: The refresh token was not found. It may have expired.'
+          )
+        )
       }
     })
   })

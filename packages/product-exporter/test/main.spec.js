@@ -45,7 +45,9 @@ describe('ProductExporter', () => {
       const outputStream = streamtest.v2.toText(() => {})
       await productExporter.run(outputStream)
       expect(productExporter._getProducts).toHaveBeenCalled()
-      expect(productExporter._getProducts).not.toBeCalledWith(outputStream)
+      expect(productExporter._getProducts).not.toHaveBeenCalledWith(
+        outputStream
+      )
     })
 
     test('should emit `error` on output stream if error occurs', done => {
