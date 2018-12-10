@@ -74,41 +74,35 @@ describe('Resource Deleter', () => {
 
     // Create resources on API
     await Promise.all([
-      await Promise.all([
-        createData(apiConfig, 'productTypes', productTypes),
-        createData(apiConfig, 'categories', categories),
-        createData(apiConfig, 'taxCategories', taxCategories),
-        createData(apiConfig, 'channels', channels),
-        createData(apiConfig, 'customers', customers),
-        createData(apiConfig, 'inventory', inventoryEntries),
-        createData(apiConfig, 'customObjects', customObjects),
-        createData(apiConfig, 'payments', payments),
-        createData(apiConfig, 'customerGroups', customerGroups),
-        createData(apiConfig, 'reviews', reviews),
-        createData(apiConfig, 'productDiscounts', productDiscounts),
-        createData(apiConfig, 'zones', zones),
-        createData(apiConfig, 'types', types),
-      ]),
+      createData(apiConfig, 'categories', categories),
+      createData(apiConfig, 'channels', channels),
+      createData(apiConfig, 'customerGroups', customerGroups),
+      createData(apiConfig, 'customers', customers),
+      createData(apiConfig, 'customObjects', customObjects),
+      createData(apiConfig, 'inventory', inventoryEntries),
+      createData(apiConfig, 'payments', payments),
+      createData(apiConfig, 'productDiscounts', productDiscounts),
+      createData(apiConfig, 'productTypes', productTypes),
+      createData(apiConfig, 'reviews', reviews),
+      createData(apiConfig, 'taxCategories', taxCategories),
+      createData(apiConfig, 'types', types),
+      createData(apiConfig, 'zones', zones),
+    ])
+    await Promise.all([
+      createData(apiConfig, 'carts', carts),
       createData(apiConfig, 'products', products),
       createData(apiConfig, 'shippingMethods', shippingMethods),
-      createData(apiConfig, 'carts', carts),
     ])
   }, 30000)
 
   // clear resources on API
   afterAll(async () => {
     await Promise.all([
-      await Promise.all([
-        clearData(apiConfig, 'products'),
-        clearData(apiConfig, 'shippingMethods'),
-        clearData(apiConfig, 'carts'),
-      ]),
-      clearData(apiConfig, 'productDiscounts'),
-      clearData(apiConfig, 'reviews'),
-      clearData(apiConfig, 'taxCategories'),
-      clearData(apiConfig, 'types'),
-      clearData(apiConfig, 'zones'),
-      clearData(apiConfig, 'productTypes'),
+      clearData(apiConfig, 'carts'),
+      clearData(apiConfig, 'products'),
+      clearData(apiConfig, 'shippingMethods'),
+    ])
+    await Promise.all([
       clearData(apiConfig, 'categories'),
       clearData(apiConfig, 'channels'),
       clearData(apiConfig, 'customerGroups'),
@@ -116,6 +110,12 @@ describe('Resource Deleter', () => {
       clearData(apiConfig, 'customObjects'),
       clearData(apiConfig, 'inventory'),
       clearData(apiConfig, 'payments'),
+      clearData(apiConfig, 'productDiscounts'),
+      clearData(apiConfig, 'productTypes'),
+      clearData(apiConfig, 'reviews'),
+      clearData(apiConfig, 'taxCategories'),
+      clearData(apiConfig, 'types'),
+      clearData(apiConfig, 'zones'),
     ])
   })
 
@@ -135,14 +135,6 @@ describe('Resource Deleter', () => {
 
   describe.each([
     'carts',
-    'products',
-    'shippingMethods',
-    'productDiscounts',
-    'reviews',
-    'taxCategories',
-    'types',
-    'zones',
-    'productTypes',
     'categories',
     'channels',
     'customerGroups',
@@ -150,6 +142,14 @@ describe('Resource Deleter', () => {
     'customObjects',
     'inventory',
     'payments',
+    'productDiscounts',
+    'products',
+    'productTypes',
+    'reviews',
+    'shippingMethods',
+    'taxCategories',
+    'types',
+    'zones',
   ])('should delete resource', resource => {
     beforeEach(() => {
       const options = {

@@ -87,7 +87,7 @@ describe('::ResourceDeleter', () => {
 
       test('should throw error for empty resource', () => {
         expect(resourceDeleter.run('sample-test-project')).rejects.toThrow(
-          /Nothing to delete/
+          /nothing to delete/
         )
       })
     })
@@ -129,9 +129,9 @@ describe('::ResourceDeleter', () => {
         })
       })
 
-      test('should throw internal server error', async () => {
+      test('should throw internal server error', () => {
         const request = ResourceDeleter.buildRequest('example.com', 'GET')
-        expect(resourceDeleter.run(request)).rejects.toThrowError(
+        expect(resourceDeleter.run(request)).rejects.toThrow(
           /Request returned status code 500/
         )
       })
