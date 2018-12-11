@@ -284,7 +284,10 @@ const tokenProvider = new TokenProvider({
 const accessToken = await tokenProvider.getAccessToken()
 
 // get whole tokenInfo object
-const accessToken = await tokenProvider.getTokenInfo()
+const tokenInfo = await tokenProvider.getTokenInfo()
+
+// invalidate current tokenInfo so the tokenProvider will use fetchTokenInfo fn to fetch new one
+tokenProvider.invalidateTokenInfo()
 ```
 
 Another example:
