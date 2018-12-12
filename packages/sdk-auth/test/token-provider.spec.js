@@ -200,6 +200,23 @@ describe('Token Provider', () => {
       const resToken = await _tokenProvider.getAccessToken()
       expect(resToken).toEqual('new-access-token')
     })
+
+    test('should call fetchTokenInfo method only once', async () => {
+      const _tokenProvider = new TokenProvider({
+        sdkAuth,
+        fetchTokenInfo: jest
+          .fn()
+          .mockImplementation(() => Promise.resolve(tokenInfo)),
+      })
+
+      const tokenInfos = await Promise.all([
+        _tokenProvider.getTokenInfo(),
+        _tokenProvider.getTokenInfo(),
+      ])
+
+      expect(_tokenProvider.fetchTokenInfo).toHaveBeenCalledTimes(1)
+      expect(tokenInfos).toEqual([tokenInfo, tokenInfo])
+    })
   })
 
   describe('Valid token', () => {
@@ -265,6 +282,35 @@ describe('Token Provider', () => {
         'refreshToken'
       )
       expect(refreshedInfo).toEqual('refreshedInfo')
+    })
+
+    test('should call sdkAuth refreshToken flow only once', async () => {
+      const _tokenProvider = new TokenProvider({ sdkAuth }, tokenInfo)
+      _tokenProvider.sdkAuth.refreshTokenFlow = jest
+        .fn()
+        .mockImplementation(() => Promise.resolve('refreshedInfo'))
+
+      const refreshedInfo = await Promise.all([
+        _tokenProvider._performRefreshTokenFlow('refreshToken'),
+        _tokenProvider._performRefreshTokenFlow('refreshToken'),
+      ])
+
+      expect(_tokenProvider.sdkAuth.refreshTokenFlow).toHaveBeenCalledTimes(1)
+      expect(_tokenProvider.sdkAuth.refreshTokenFlow).toHaveBeenCalledWith(
+        'refreshToken'
+      )
+
+      expect(refreshedInfo).toEqual(['refreshedInfo', 'refreshedInfo'])
+    })
+  })
+
+  describe('invalidateTokenInfo', () => {
+    test('should invalidate stored tokenInfo', () => {
+      const _tokenProvider = new TokenProvider({ sdkAuth }, tokenInfo)
+      expect(_tokenProvider.tokenInfo).not.toEqual(null)
+
+      _tokenProvider.invalidateTokenInfo()
+      expect(_tokenProvider.tokenInfo).toEqual(null)
     })
   })
 })
