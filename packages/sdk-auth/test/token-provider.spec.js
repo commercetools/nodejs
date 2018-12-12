@@ -305,7 +305,7 @@ describe('Token Provider', () => {
   })
 
   describe('invalidateTokenInfo', () => {
-    test('should invalidate stored tokenInfo', async () => {
+    test('should invalidate stored tokenInfo', () => {
       const _tokenProvider = new TokenProvider({ sdkAuth }, tokenInfo)
       expect(_tokenProvider.tokenInfo).not.toEqual(null)
 
