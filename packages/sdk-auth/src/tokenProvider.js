@@ -8,6 +8,8 @@ export default class TokenProvider {
   tokenInfo: ?TokenInfo
   sdkAuth: SdkAuth
   onTokenInfoChanged: (tokenInfo: TokenInfo) => void
+  fetchTokenInfoPromise: ?Promise<TokenInfo>
+  refreshTokenFlowPromise: ?Promise<TokenInfo>
   fetchTokenInfo: (sdkAuth: SdkAuth) => Promise<TokenInfo>
   onTokenInfoRefreshed: (
     newTokenInfo: TokenInfo,
@@ -40,6 +42,9 @@ export default class TokenProvider {
 
     this.sdkAuth = sdkAuth
     this.tokenInfo = tokenInfo
+
+    this.fetchTokenInfoPromise = null
+    this.refreshTokenFlowPromise = null
   }
 
   static _validateTokenInfo(tokenInfo: TokenInfo) {
@@ -64,11 +69,29 @@ export default class TokenProvider {
         new Error('Method "fetchTokenInfo" was not provided')
       )
 
-    return Promise.resolve(this.fetchTokenInfo(this.sdkAuth))
+    // do not run fetchTokenInfo more than once at any given time and cache the result
+    if (this.fetchTokenInfoPromise) return this.fetchTokenInfoPromise
+
+    this.fetchTokenInfoPromise = Promise.resolve(
+      this.fetchTokenInfo(this.sdkAuth)
+    )
+
+    return this.fetchTokenInfoPromise.then(tokenInfo => {
+      this.fetchTokenInfoPromise = null
+      return tokenInfo
+    })
   }
 
   _performRefreshTokenFlow(refreshToken: string): Promise<TokenInfo> {
-    return this.sdkAuth.refreshTokenFlow(refreshToken)
+    // run refreshTokenFlow only once when multiple requests comes at the same time
+    if (this.refreshTokenFlowPromise) return this.refreshTokenFlowPromise
+
+    this.refreshTokenFlowPromise = this.sdkAuth.refreshTokenFlow(refreshToken)
+
+    return this.refreshTokenFlowPromise.then(refreshTokenInfo => {
+      this.refreshTokenFlowPromise = null
+      return refreshTokenInfo
+    })
   }
 
   _refreshToken(oldTokenInfo: TokenInfo): Promise<TokenInfo> {
@@ -90,12 +113,20 @@ export default class TokenProvider {
       .then(
         (tokenInfo: TokenInfo): void => {
           newTokenInfo = tokenInfo
-          newTokenInfo.refresh_token = oldTokenInfo?.['refresh_token']
+          if (oldTokenInfo?.['refresh_token'])
+            newTokenInfo.refresh_token = oldTokenInfo.refresh_token
           // $FlowFixMe
           return this.onTokenInfoRefreshed?.(newTokenInfo, oldTokenInfo)
         }
       )
       .then((): Promise<TokenInfo> => this.setTokenInfo(newTokenInfo))
+  }
+
+  /**
+   * Set current token info to null
+   */
+  invalidateTokenInfo(): void {
+    this.tokenInfo = null
   }
 
   /**
