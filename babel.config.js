@@ -19,7 +19,7 @@ const getPresets = () => {
       return {
         targets: {
           browsers: ['last 2 versions'],
-          node: '6',
+          node: '8',
         },
         modules: false,
         useBuiltIns: 'usage',
@@ -27,7 +27,7 @@ const getPresets = () => {
       }
     case 'cli':
       return {
-        targets: { node: '6' },
+        targets: { node: '8' },
         modules: 'commonjs',
         useBuiltIns: 'usage',
         include: ['es7.object.entries'],
