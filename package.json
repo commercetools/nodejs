@@ -2,8 +2,8 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": ">=6",
-    "npm": ">=5.6"
+    "node": ">=8",
+    "npm": ">=5.10"
   },
   "scripts": {
     "postinstall": "check-node-version --package --print && npm run bootstrap && cross-env NODE_ENV=development npm run build",
