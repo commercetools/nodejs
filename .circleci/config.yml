@@ -4,7 +4,7 @@ node6Environment: &node6Environment
   working_directory: ~/nodejs
 node8Environment: &node8Environment
   docker:
-    - image: circleci/node:8@sha256:fa335a5e6518c937e4e261e79158a69c9a4c855fbc38bea89e6da720f63a3177
+    - image: circleci/node:8@sha256:fbacb358b81169b319c95a5135de49efbb6bcdcee60dcd57d276c4a0fb676c9f
   working_directory: ~/nodejs
 
 aliases:
