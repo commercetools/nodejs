@@ -4,8 +4,6 @@ const getPresets = () => {
       return {
         targets: { node: 'current' },
         modules: 'commonjs',
-        useBuiltIns: 'usage',
-        include: ['es7.object.entries'],
       }
     case 'rollup':
       return {
@@ -22,15 +20,11 @@ const getPresets = () => {
           node: '8',
         },
         modules: false,
-        useBuiltIns: 'usage',
-        include: ['es7.object.entries'],
       }
     case 'cli':
       return {
         targets: { node: '8' },
         modules: 'commonjs',
-        useBuiltIns: 'usage',
-        include: ['es7.object.entries'],
       }
     default:
       return {}
