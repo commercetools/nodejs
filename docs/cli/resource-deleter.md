@@ -2,7 +2,7 @@
 
 A package which deletes resources from the [commercetools platform](https://docs.commercetools.com/).
 
-Examples of the resources are :-
+Examples of the resources are :
 
 - [carts](https://docs.commercetools.com/http-api-projects-carts#delete-cart)
 - [categories](https://docs.commercetools.com/http-api-projects-categories#delete-category)
@@ -29,11 +29,11 @@ Examples of the resources are :-
 The constructor accepts two arguments:
 
 - A required object containing the following values:
-  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
-  - `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`manage_products`, `manage_customers`, `manage_types`]. More info on how to get the access token [here](https://docs.commercetools.com/http-api-authorization.html#authorization-flows)
-  - `resource` (Object): [resource] that need to be deleted.
-  - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates) (Optional)
-- An optional logger object having four functions (`info`, `warn`, `error` and `debug`)
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options)).
+  - `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`manage_products`, `manage_customers`, `manage_types`]. More info on how to get the access token [here](https://docs.commercetools.com/http-api-authorization.html#authorization-flows).
+  - `resource` (String): [resource] that need to be deleted.
+  - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates) (Optional).
+- An optional logger object having four functions (`info`, `warn`, `error` and `debug`).
 
 ## Usage
 
@@ -43,27 +43,37 @@ The constructor accepts two arguments:
 
 ```
 Usage: resource-deleter [options]
-Delete resource from the commercetools platform
+Delete resource from the commercetools platform.
 
 Options:
   --help                     Show help text.                           [boolean]
-  --version                  Show version number                       [boolean]
+  --version                  Show version number.                       [boolean]
   --output, -o               Path to output file.            [default: "stdout"]
   --apiUrl                   The host URL of the HTTP API service.
                                               [default: "https://api.sphere.io"]
   --authUrl                  The host URL of the OAuth API service.
                                              [default: "https://auth.sphere.io"]
-  --accessToken              CTP client access token
+  --accessToken              CTP client access token.
                              Required scopes: ['manage_products', 'manage_customers', 'manage_types'][string]
   --projectKey, -p           API project key.                         [required]
 
   --resource, -r             Resource that need to be deleted.        [required]
-  --where, -w                specify where predicate
+  --where, -w                specify where predicate.
   --logLevel                 Logging level: error, warn, info or debug.
                                                                [default: "info"]
-  --prettyLogs               Pretty print logs to the terminal         [boolean]
+  --prettyLogs               Pretty print logs to the terminal.         [boolean]
   --logFile                  Path to file where to save logs file.
                                               [default: "resource-deleter.log"]
+```
+
+Then you can delete resource using the cli:
+
+```
+- Without predicate
+  resource-deleter -p my-project-key -r my-resource
+
+- With predicate
+  resource-deleter -p my-project-key -r my-resource -w my-desired-key
 ```
 
 #### Info on flags
@@ -71,7 +81,7 @@ Options:
 - The `--output` flag specifies where to output the deleted resource. Several notes on this flag:
   - The default location for status report logging is the standard output.
   - If no output path is specified, the deleted resource output will be logged to the standard output as a result, status reports will be logged to a `resource-deleter.log` file in the current directory.
-- The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates)
+- The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates).
 
 ### JS
 
@@ -82,33 +92,34 @@ import resourceDeleter from '@commercetools/resource-deleter'
 import fs from 'fs'
 
 const options = {
-    apiConfig: {
-      apiUrl: 'https://api.sphere.io',
-      host: 'https://auth.sphere.com',
-      project_key: 'PROJECT_KEY',
-      credentials: {
-        clientId: '*********',
-        clientSecret: '*********',
-      }
+  apiConfig: {
+    apiUrl: 'https://api.sphere.io',
+    host: 'https://auth.sphere.com',
+    project_key: 'my-project-key',
+    credentials: {
+      clientId: '*********',
+      clientSecret: '*********',
     },
-    accessToken: '123456yuhgfdwegh675412wefb4rgb',
-    resource: 'my-resource',
-    predicate: 'key="my-desired-key"',
-    logger: {
-        error: console.error,
-        warn: console.warn,
-        info: console.log,
-        debug: console.debug,
-    }
-  }
+  },
+  accessToken: '123456yuhgfdwegh675412wefb4rgb',
+  resource: 'my-resource',
+  predicate: 'key="my-desired-key"',
+  logger: {
+    error: console.error,
+    warn: console.warn,
+    info: console.log,
+    debug: console.debug,
+  },
 }
 
-const resourceDeleter = new resourceDeleter(options)
+const resourceDeleter = new ResourceDeleter(options)
 
-// Register error listener
-outputStream.on('error', errorHandler)
-
-outputStream.on('finish', () => console.log('done with delete'))
-
-resourceDeleter.run()
+resourceDeleter
+  .run()
+  .then(() => {
+    console.log('resource deleted')
+  })
+  .catch(error => {
+    // handle error
+  })
 ```
