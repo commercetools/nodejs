@@ -160,7 +160,7 @@ export const customObjects = [
   },
 ]
 
-export const inventoryEntries = [
+export const inventory = [
   {
     sku: 'mySKU',
     quantityOnStock: 1,
@@ -271,18 +271,18 @@ export const reviews = [
   },
 ]
 
-export const zones = [
+export const shippingMethods = [
   {
-    name: 'fooZone',
-    key: 'fooZoneKey',
+    name: 'fooShippingMethod',
+    taxCategory: {
+      key: 'fooTaxCategoryKey',
+    },
   },
   {
-    name: 'barZone',
-    key: 'barZoneKey',
-  },
-  {
-    name: 'fooBarZone',
-    key: 'foobarZoneKey',
+    name: 'barShippingMethod',
+    taxCategory: {
+      key: 'barTaxCategoryKey',
+    },
   },
 ]
 
@@ -303,21 +303,6 @@ export const taxCategories = [
   },
 ]
 
-export const shippingMethods = [
-  {
-    name: 'fooShippingMethod',
-    taxCategory: {
-      key: 'fooTaxCategoryKey',
-    },
-  },
-  {
-    name: 'barShippingMethod',
-    taxCategory: {
-      key: 'barTaxCategoryKey',
-    },
-  },
-]
-
 export const types = [
   {
     key: 'DefaultType',
@@ -326,5 +311,20 @@ export const types = [
       de: 'DefaultTypeDE',
     },
     resourceTypeIds: ['order'],
+  },
+]
+
+export const zones = [
+  {
+    name: 'fooZone',
+    key: 'fooZoneKey',
+  },
+  {
+    name: 'barZone',
+    key: 'barZoneKey',
+  },
+  {
+    name: 'fooBarZone',
+    key: 'foobarZoneKey',
   },
 ]
