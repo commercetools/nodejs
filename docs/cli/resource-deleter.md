@@ -89,7 +89,6 @@ For more direct usage, it is possible to use this module directly:
 
 ```js
 import resourceDeleter from '@commercetools/resource-deleter'
-import fs from 'fs'
 
 const options = {
   apiConfig: {
