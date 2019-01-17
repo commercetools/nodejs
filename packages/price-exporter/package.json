@@ -1,13 +1,14 @@
 {
   "name": "@commercetools/price-exporter",
   "version": "2.0.0",
-  "description": "Export prices from the commercetools platform",
+  "description": "Exports prices from the commercetools platform",
   "keywords": [
     "commercetools",
     "csv",
     "parser",
     "price",
-    "json"
+    "json",
+    "cli"
   ],
   "repository": {
     "type": "git",

@@ -1,14 +1,15 @@
 {
   "name": "@commercetools/csv-parser-orders",
   "version": "2.0.0",
-  "description": "Module that parses order csv to json",
+  "description": "Converts commercetools order data from CSV to JSON.",
   "keywords": [
     "commercetools",
     "csv",
     "nodejs",
     "parser",
     "orders",
-    "json"
+    "json",
+    "cli"
   ],
   "repository": {
     "type": "git",

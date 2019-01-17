@@ -1,7 +1,7 @@
 {
   "name": "@commercetools/product-json-to-csv",
   "version": "3.0.0",
-  "description": "Convert commercetools products from JSON to CSV",
+  "description": "Converts commercetools products from JSON to CSV",
   "keywords": [
     "commercetools",
     "products",
@@ -9,7 +9,8 @@
     "parser",
     "export",
     "csv",
-    "json"
+    "json",
+    "cli"
   ],
   "repository": {
     "type": "git",

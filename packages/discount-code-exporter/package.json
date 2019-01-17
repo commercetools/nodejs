@@ -1,13 +1,14 @@
 {
   "name": "@commercetools/discount-code-exporter",
   "version": "3.0.0",
-  "description": "Export discount codes from the commercetools platform.",
+  "description": "Exports discount codes from the commercetools platform.",
   "keywords": [
     "commercetools",
     "discount",
     "code",
     "export",
-    "exporter"
+    "exporter",
+    "cli"
   ],
   "repository": {
     "type": "git",

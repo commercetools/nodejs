@@ -1,7 +1,7 @@
 {
   "name": "@commercetools/csv-parser-state",
   "version": "2.0.0",
-  "description": "Package to parse states from CSV to JSON",
+  "description": "Converts commercetools states from CSV to JSON.",
   "main": "lib/main.js",
   "scripts": {
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
@@ -17,7 +17,8 @@
     "state",
     "states",
     "csv",
-    "parser"
+    "parser",
+    "cli"
   ],
   "author": {
     "name": "Williams Omayuku",

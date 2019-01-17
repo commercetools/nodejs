@@ -1,7 +1,7 @@
 {
     "name": "@commercetools/customer-groups-exporter",
     "version": "2.0.0",
-    "description": "Export customer groups from the commercetools platform",
+    "description": "Exports customer groups from the commercetools platform.",
     "main": "lib/main.js",
     "bin": {
         "customer-groups-exporter": "bin/customer-groups-exporter.js"
@@ -21,7 +21,8 @@
         "groups",
         "json",
         "export",
-        "customer"
+        "customer",
+        "cli"
     ],
     "author": {
         "name": "Daniel Eriksson",
