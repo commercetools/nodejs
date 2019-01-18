@@ -1,6 +1,6 @@
 {
     "name": "@commercetools/customer-groups-exporter",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "Exports customer groups from the commercetools platform.",
     "main": "lib/main.js",
     "bin": {

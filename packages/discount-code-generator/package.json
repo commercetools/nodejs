@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/discount-code-generator",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Generates discount codes for the commercetools platform, according to constraints.",
   "keywords": [
     "commercetools",
