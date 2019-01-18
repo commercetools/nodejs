@@ -4,7 +4,7 @@
     "publishConfig": {
         "access": "public"
     },
-    "description": "Export categories from the commercetools platform",
+    "description": "Exports categories from the commercetools platform.",
     "main": "lib/main.js",
     "bin": {
         "category-exporter": "bin/category-exporter.js"
@@ -23,7 +23,8 @@
         "category",
         "categories",
         "json",
-        "export"
+        "export",
+        "cli"
     ],
     "author": {
         "name": "Babajide Williams",

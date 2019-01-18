@@ -3,7 +3,7 @@
 exports[`Category Exporter CLI basic functionality should print usage information given the help flag 1`] = `
 "
 Usage: category-exporter [options]
-Export categories from the commercetools platform
+Exports categories from the commercetools platform.
 
 Options:
   --help            Show help                                          [boolean]

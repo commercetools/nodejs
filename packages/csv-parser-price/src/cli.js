@@ -13,7 +13,7 @@ const args = yargs
   .usage(
     `\n
 Usage: $0 [options]
-Convert commercetools price CSV data to JSON.`
+Converts commercetools states from CSV to JSON`
   )
   .showHelpOnFail(false)
   .option('inputFile', {

@@ -1,12 +1,13 @@
 {
   "name": "@commercetools/discount-code-generator",
   "version": "2.0.0",
-  "description": "Generate discount codes according to constraints.",
+  "description": "Generates discount codes for the commercetools platform, according to constraints.",
   "keywords": [
     "commercetools",
     "discount",
     "code",
-    "generator"
+    "generator",
+    "cli"
   ],
   "repository": {
     "type": "git",

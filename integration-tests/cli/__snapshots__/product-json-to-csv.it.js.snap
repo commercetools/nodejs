@@ -3,7 +3,7 @@
 exports[`CSV and CLI Tests CLI basic functionality should print usage information given the help flag 1`] = `
 "
 Usage: product-json-to-csv [options]
-Convert commercetools products from JSON to CSV
+Converts commercetools products from JSON to CSV
 
 Options:
   --help                          Show help                            [boolean]

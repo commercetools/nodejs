@@ -1,12 +1,13 @@
 {
   "name": "@commercetools/product-exporter",
   "version": "2.0.0",
-  "description": "Export products from the commercetools platform",
+  "description": "Exports products from the commercetools platform",
   "keywords": [
     "commercetools",
     "products",
     "projections",
-    "json"
+    "json",
+    "cli"
   ],
   "repository": {
     "type": "git",

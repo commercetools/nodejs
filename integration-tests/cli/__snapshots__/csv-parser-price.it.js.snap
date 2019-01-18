@@ -4,7 +4,7 @@ exports[`CSV and CLI Tests CLI basic functionality should print usage informatio
 "
 
 Usage: csvparserprice [options]
-Convert commercetools price CSV data to JSON.
+Converts commercetools states from CSV to JSON
 
 Options:
   --help            Show help                                          [boolean]

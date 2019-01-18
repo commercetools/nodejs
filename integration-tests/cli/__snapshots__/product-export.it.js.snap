@@ -3,7 +3,7 @@
 exports[`Product Exporter CLI basic functionality should print usage information given the help flag 1`] = `
 "
 Usage: product-exporter [options]
-Export products from the commercetools platform
+Exports products from the commercetools platform
 
 Options:
   --help            Show help                                          [boolean]

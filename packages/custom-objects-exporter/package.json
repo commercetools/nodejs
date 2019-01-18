@@ -1,7 +1,7 @@
 {
     "name": "@commercetools/custom-objects-exporter",
     "version": "2.0.0",
-    "description": "Export custom objects from the commercetools platform",
+    "description": "Exports custom objects from the commercetools platform.",
     "main": "lib/main.js",
     "bin": {
         "custom-objects-exporter": "bin/custom-objects-exporter.js"
@@ -21,7 +21,8 @@
         "objects",
         "json",
         "export",
-        "custom"
+        "custom",
+        "cli"
     ],
     "author": {
         "name": "Daniel Eriksson",

@@ -1,14 +1,15 @@
 {
   "name": "@commercetools/inventories-exporter",
   "version": "2.0.0",
-  "description": "Export inventories from the commercetools platform.",
+  "description": "Exports inventories from the commercetools platform.",
   "keywords": [
     "commercetools",
     "inventories",
     "stock",
     "code",
     "export",
-    "exporter"
+    "exporter",
+    "cli"
   ],
   "repository": {
     "type": "git",
