@@ -1,44 +1,44 @@
 export const categories = [
   {
-    key: 'fooKey',
+    key: 'fooCatKey',
     name: {
-      en: 'categoryA',
+      en: 'categoryFoo',
     },
     slug: {
-      en: 'category-a',
+      en: 'category-foo',
     },
     description: {
-      en: 'descA',
+      en: 'descFoo',
     },
-    externalId: 'a',
+    externalId: 'foo',
     assets: [],
   },
   {
-    key: 'barKey',
+    key: 'barCatKey',
     name: {
-      en: 'categoryB',
+      en: 'categoryBar',
     },
     slug: {
-      en: 'category-b',
+      en: 'category-bar',
     },
     description: {
-      en: 'descB',
+      en: 'descBar',
     },
-    externalId: 'b',
+    externalId: 'bar',
     assets: [],
   },
   {
-    key: 'fooBarKey',
+    key: 'foobarCatKey',
     name: {
-      en: 'categoryC',
+      en: 'categoryFoobar',
     },
     slug: {
-      en: 'category-c',
+      en: 'category-foobar',
     },
     description: {
-      en: 'descC',
+      en: 'descFoobar',
     },
-    externalId: 'c',
+    externalId: 'foobar',
     assets: [],
   },
 ]
@@ -52,14 +52,14 @@ export const channels = [
     },
   },
   {
-    key: 'fooChannel',
+    key: 'fooChKey',
     name: {
       de: 'fooChannel',
       en: 'fooChannel',
     },
   },
   {
-    key: 'barChannel',
+    key: 'barChKey',
     name: {
       de: 'barChannel',
       en: 'barChannel',
@@ -69,16 +69,16 @@ export const channels = [
 
 export const customerGroups = [
   {
-    key: 'myKey',
-    groupName: 'myGroup',
+    key: 'myCGKey',
+    groupName: 'myCGName',
   },
   {
-    groupName: 'fooGroup',
-    key: 'fooKey',
+    groupName: 'fooCustGroup',
+    key: 'fooCGKey',
   },
   {
-    groupName: 'barGroup',
-    key: 'barKey',
+    groupName: 'barCGName',
+    key: 'barCGKey',
   },
 ]
 
@@ -86,17 +86,17 @@ export const customers = [
   {
     email: 'foo@baba.de',
     password: 'foobaba',
-    key: 'fooKey',
+    key: 'fooCKey',
   },
   {
     email: 'bar@baba.de',
     password: 'barbaba',
-    key: 'barKey',
+    key: 'barCKey',
   },
   {
     email: 'foobar@baba.de',
     password: 'foobarbaba',
-    key: 'foobarKey',
+    key: 'foobarCKey',
   },
 ]
 
@@ -117,7 +117,7 @@ export const customObjects = [
   },
   {
     container: 'foo.custom.namespace',
-    key: 'fooKey',
+    key: 'fooCOKey',
     value: {
       text: {
         de: 'Das ist ein Text',
@@ -131,7 +131,7 @@ export const customObjects = [
   },
   {
     container: 'bar.custom.namespace',
-    key: 'barKey',
+    key: 'barCOKey',
     value: {
       text: {
         de: 'Das ist ein Text',
@@ -217,13 +217,13 @@ export const productTypes = [
   },
   {
     name: 'FooProductType',
-    key: 'fooProductTypeKey',
+    key: 'fooPTKey',
     description: 'Product Type',
     version: 1,
   },
   {
     name: 'BarProductType',
-    key: 'barProductTypeKey',
+    key: 'barPTKey',
     description: 'Product Type',
     version: 1,
   },
@@ -244,14 +244,14 @@ export const reviews = [
 export const taxCategories = [
   {
     name: 'fooTaxCategory',
-    key: 'fooTaxCategoryKey',
+    key: 'fooTCKey',
     rates: [
       { name: 'fooRate', amount: 0.1, includedInPrice: true, country: 'DE' },
     ],
   },
   {
     name: 'barTaxCategory',
-    key: 'barTaxCategoryKey',
+    key: 'barTCKey',
     rates: [
       { name: 'barRate', amount: 0.3, includedInPrice: true, country: 'US' },
     ],
@@ -272,15 +272,15 @@ export const types = [
 export const zones = [
   {
     name: 'fooZone',
-    key: 'fooZoneKey',
+    key: 'fooZKey',
   },
   {
     name: 'barZone',
-    key: 'barZoneKey',
+    key: 'barZKey',
   },
   {
     name: 'fooBarZone',
-    key: 'foobarZoneKey',
+    key: 'foobarZKey',
   },
 ]
 
@@ -301,7 +301,7 @@ export const carts = [
 
 export const products = [
   {
-    key: 'fooProduct',
+    key: 'fooPKey',
     name: {
       en: 'fooP',
     },
@@ -309,7 +309,7 @@ export const products = [
       en: 'foo-product-type',
     },
     productType: {
-      key: 'fooProductTypeKey',
+      key: 'fooPTKey',
     },
   },
 ]
@@ -318,13 +318,13 @@ export const shippingMethods = [
   {
     name: 'fooShippingMethod',
     taxCategory: {
-      key: 'fooTaxCategoryKey',
+      key: 'fooTCKey',
     },
   },
   {
     name: 'barShippingMethod',
     taxCategory: {
-      key: 'barTaxCategoryKey',
+      key: 'barTCKey',
     },
   },
 ]
