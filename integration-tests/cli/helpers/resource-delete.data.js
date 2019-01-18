@@ -1,18 +1,3 @@
-export const carts = [
-  {
-    currency: 'EUR',
-    shippingAddress: {
-      country: 'DE',
-    },
-  },
-  {
-    currency: 'USD',
-    shippingAddress: {
-      country: 'US',
-    },
-  },
-]
-
 export const categories = [
   {
     key: 'fooKey',
@@ -244,21 +229,6 @@ export const productTypes = [
   },
 ]
 
-export const products = [
-  {
-    key: 'fooProduct',
-    name: {
-      en: 'fooP',
-    },
-    slug: {
-      en: 'foo-product-type',
-    },
-    productType: {
-      key: 'fooProductTypeKey',
-    },
-  },
-]
-
 export const reviews = [
   {
     text: 'Review text',
@@ -268,21 +238,6 @@ export const reviews = [
   },
   {
     text: 'Review text bar',
-  },
-]
-
-export const shippingMethods = [
-  {
-    name: 'fooShippingMethod',
-    taxCategory: {
-      key: 'fooTaxCategoryKey',
-    },
-  },
-  {
-    name: 'barShippingMethod',
-    taxCategory: {
-      key: 'barTaxCategoryKey',
-    },
   },
 ]
 
@@ -326,5 +281,50 @@ export const zones = [
   {
     name: 'fooBarZone',
     key: 'foobarZoneKey',
+  },
+]
+
+export const carts = [
+  {
+    currency: 'EUR',
+    shippingAddress: {
+      country: 'DE',
+    },
+  },
+  {
+    currency: 'USD',
+    shippingAddress: {
+      country: 'US',
+    },
+  },
+]
+
+export const products = [
+  {
+    key: 'fooProduct',
+    name: {
+      en: 'fooP',
+    },
+    slug: {
+      en: 'foo-product-type',
+    },
+    productType: {
+      key: 'fooProductTypeKey',
+    },
+  },
+]
+
+export const shippingMethods = [
+  {
+    name: 'fooShippingMethod',
+    taxCategory: {
+      key: 'fooTaxCategoryKey',
+    },
+  },
+  {
+    name: 'barShippingMethod',
+    taxCategory: {
+      key: 'barTaxCategoryKey',
+    },
   },
 ]
