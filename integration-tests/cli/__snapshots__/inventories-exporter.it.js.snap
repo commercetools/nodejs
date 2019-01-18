@@ -14,7 +14,7 @@ exports[`StockExporter CLI CLI basic functionality should print usage informatio
 "
 
 Usage: inventoriesexporter [options]
-Export inventories from the commercetools platform.
+Exports inventories from the commercetools platform.
 
 Options:
   --help            Show help                                          [boolean]

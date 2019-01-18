@@ -3,7 +3,7 @@
 exports[`Price Exporter CLI basic functionality should print usage information given the help flag 1`] = `
 "
 Usage: price-exporter [options]
-Export prices from the commercetools platform
+Exports prices from the commercetools platform
 
 Options:
   --help              Show help                                        [boolean]
