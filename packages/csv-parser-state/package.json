@@ -48,7 +48,7 @@
     "highland": "2.13.0",
     "lodash.memoize": "4.1.2",
     "node-fetch": "2.3.0",
-    "pino": "5.10.6",
+    "pino": "5.10.8",
     "pretty-error": "2.1.1",
     "yargs": "12.0.5"
   }
