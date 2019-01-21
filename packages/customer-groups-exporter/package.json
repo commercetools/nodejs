@@ -39,7 +39,7 @@
         "@commercetools/sdk-middleware-user-agent": "2.0.0",
         "JSONStream": "1.3.5",
         "node-fetch": "2.3.0",
-        "pino": "5.10.6",
+        "pino": "5.10.8",
         "pretty-error": "2.1.1",
         "yargs": "12.0.5"
     },
