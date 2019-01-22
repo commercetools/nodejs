@@ -49,6 +49,12 @@ Required scopes: ['manage_products', 'manage_customers', 'manage_types']`,
     describe: 'Resource that need to be deleted.',
     demand: true,
   })
+  .option('confirm', {
+    alias: 'c',
+    describe: 'Confirm the resource to delete.',
+    default: 'false',
+    type: 'boolean',
+  })
   .option('where', {
     alias: 'w',
     describe: 'Specify where predicate.',
@@ -126,8 +132,10 @@ async function execute() {
         info: logger.info.bind(logger),
         debug: logger.debug.bind(logger),
       },
+      confirm: args.confirm,
     }
     const resourceDeleter = new ResourceDeleter(deleterOptions)
+    if (args.confirm) await resourceDeleter.run()
     const response = await prompts({
       type: 'confirm',
       name: 'value',

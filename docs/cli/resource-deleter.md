@@ -58,6 +58,8 @@ Options:
   --projectKey, -p           API project key.                         [required]
 
   --resource, -r             Resource that need to be deleted.        [required]
+  --confirm, -c              Confirm the resource to delete.          [boolean]
+                                                               [default: "false"]
   --where, -w                specify where predicate.
   --logLevel                 Logging level: error, warn, info or debug.
                                                                [default: "info"]
