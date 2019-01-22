@@ -1,4 +1,5 @@
 import fetch from 'node-fetch'
+import Promise from 'bluebird'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
@@ -7,24 +8,7 @@ import ResourceDeleter from '@commercetools/resource-deleter'
 import { getCredentials } from '@commercetools/get-credentials'
 import { exec } from 'mz/child_process'
 import { version } from '@commercetools/resource-deleter/package.json'
-import {
-  carts,
-  categories,
-  channels,
-  customerGroups,
-  customers,
-  customObjects,
-  inventoryEntries,
-  payments,
-  productDiscounts,
-  products,
-  productTypes,
-  reviews,
-  shippingMethods,
-  taxCategories,
-  types,
-  zones,
-} from './helpers/resource-delete.data'
+import * as resources from './helpers/resource-delete.data'
 import { createData, clearData } from './helpers/utils'
 
 let projectKey
@@ -72,52 +56,18 @@ describe('Resource Deleter', () => {
       credentials,
     }
 
-    // Create resources on API
-    await Promise.all([
-      createData(apiConfig, 'categories', categories),
-      createData(apiConfig, 'channels', channels),
-      createData(apiConfig, 'customerGroups', customerGroups),
-      createData(apiConfig, 'customers', customers),
-      createData(apiConfig, 'customObjects', customObjects),
-      createData(apiConfig, 'inventory', inventoryEntries),
-      createData(apiConfig, 'payments', payments),
-      createData(apiConfig, 'productDiscounts', productDiscounts),
-      createData(apiConfig, 'productTypes', productTypes),
-      createData(apiConfig, 'reviews', reviews),
-      createData(apiConfig, 'taxCategories', taxCategories),
-      createData(apiConfig, 'types', types),
-      createData(apiConfig, 'zones', zones),
-    ])
-    await Promise.all([
-      createData(apiConfig, 'carts', carts),
-      createData(apiConfig, 'products', products),
-      createData(apiConfig, 'shippingMethods', shippingMethods),
-    ])
+    // create resources on API
+    await Promise.each(Object.keys(resources), name => {
+      return createData(apiConfig, name, resources[name])
+    })
   }, 30000)
 
   // clear resources on API
   afterAll(async () => {
-    await Promise.all([
-      clearData(apiConfig, 'carts'),
-      clearData(apiConfig, 'products'),
-      clearData(apiConfig, 'shippingMethods'),
-    ])
-    await Promise.all([
-      clearData(apiConfig, 'categories'),
-      clearData(apiConfig, 'channels'),
-      clearData(apiConfig, 'customerGroups'),
-      clearData(apiConfig, 'customers'),
-      clearData(apiConfig, 'customObjects'),
-      clearData(apiConfig, 'inventory'),
-      clearData(apiConfig, 'payments'),
-      clearData(apiConfig, 'productDiscounts'),
-      clearData(apiConfig, 'productTypes'),
-      clearData(apiConfig, 'reviews'),
-      clearData(apiConfig, 'taxCategories'),
-      clearData(apiConfig, 'types'),
-      clearData(apiConfig, 'zones'),
-    ])
-  })
+    await Promise.each(Object.keys(resources), name => {
+      clearData(apiConfig, name)
+    })
+  }, 45000)
 
   describe('CLI basic functionality', () => {
     it('should print usage information given the help flag', async () => {
@@ -133,44 +83,111 @@ describe('Resource Deleter', () => {
     })
   })
 
-  describe.each([
-    'carts',
-    'categories',
-    'channels',
-    'customerGroups',
-    'customers',
-    'customObjects',
-    'inventory',
-    'payments',
-    'productDiscounts',
-    'products',
-    'productTypes',
-    'reviews',
-    'shippingMethods',
-    'taxCategories',
-    'types',
-    'zones',
-  ])('should delete resource', resource => {
-    beforeEach(() => {
-      const options = {
-        apiConfig,
-        resource,
-        logger,
-      }
-      resourceDeleter = new ResourceDeleter(options)
-    })
+  describe.each(Object.keys(resources).reverse())(
+    'should delete resource',
+    resource => {
+      beforeEach(() => {
+        const options = {
+          apiConfig,
+          resource,
+          logger,
+        }
+        resourceDeleter = new ResourceDeleter(options)
+      })
 
-    it(`${resource} deleted`, async () => {
-      // Check that resource exists
+      it(`${resource} deleted`, async () => {
+        // Check that resource exists
+        const payload = await getResource(resource)
+        expect(payload.body.results.length).toBeGreaterThanOrEqual(1)
+
+        // Delete resource
+        await resourceDeleter.run()
+
+        // Check that resource is deleted
+        const newPayload = await getResource(resource)
+        expect(newPayload.body.results).toHaveLength(0)
+      }, 25000)
+    }
+  )
+
+  describe('should delete a specific resource', () => {
+    const resource = 'channels'
+    if (resource === 'channels') {
+      beforeEach(() => {
+        const options = {
+          apiConfig,
+          resource,
+          logger,
+        }
+        resourceDeleter = new ResourceDeleter(options)
+        return createData(apiConfig, resource, [
+          {
+            key: 'singleChannel',
+            name: {
+              en: 'singleChannel',
+              de: 'singleChannel',
+            },
+          },
+          {
+            key: 'nextChannel',
+            name: {
+              en: 'nextChannel',
+              de: 'nextChannel',
+            },
+          },
+        ])
+      })
+    }
+
+    it(`The specified ${resource} deleted`, async () => {
       const payload = await getResource(resource)
       expect(payload.body.results.length).toBeGreaterThanOrEqual(1)
-
-      // Delete resource
       await resourceDeleter.run()
-
-      // Check that resource is deleted
       const newPayload = await getResource(resource)
       expect(newPayload.body.results).toHaveLength(0)
+    })
+  })
+
+  describe('should delete a specific resource with predicate', () => {
+    const resource = 'customerGroups'
+    if (resource === 'customerGroups') {
+      beforeEach(() => {
+        const options = {
+          apiConfig,
+          resource,
+          logger,
+          predicate: 'key="CGKey2"',
+        }
+        resourceDeleter = new ResourceDeleter(options)
+        return createData(apiConfig, resource, [
+          {
+            key: 'CGKey1',
+            groupName: 'SampleCGName1',
+          },
+          {
+            key: 'CGKey2',
+            groupName: 'SampleCGName2',
+          },
+          {
+            key: 'CGKey3',
+            groupName: 'SampleCGName3',
+          },
+        ])
+      })
+    }
+
+    it(`The specified ${resource} deleted`, async () => {
+      const payload = await getResource(resource)
+
+      // Check the total number of item in the resource.
+      expect(payload.body.results).toHaveLength(3)
+
+      // Delete the selected item.
+      await resourceDeleter.run()
+
+      // Check that the selected item is deleted
+      const newPayload = await getResource(resource)
+      expect(newPayload.body.results).toHaveLength(2)
     })
   })
 })
