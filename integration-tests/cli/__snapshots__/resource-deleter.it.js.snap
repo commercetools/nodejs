@@ -18,8 +18,7 @@ Options:
                     'manage_types']
   --projectKey, -p  API project key.                                  [required]
   --resource, -r    Resource that need to be deleted.                 [required]
-  --confirm, -c     Confirm the resource to delete.
-                                             [string] [required] [default: \\"no\\"]
+  --confirm, -c     Confirm the resource to delete. [boolean] [default: \\"false\\"]
   --where, -w       Specify where predicate.
   --logLevel        Logging level: error, warn, info or debug. [default: \\"info\\"]
   --prettyLogs      Pretty print logs to the terminal                  [boolean]
