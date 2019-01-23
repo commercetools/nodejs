@@ -4,7 +4,7 @@ import pino from 'pino'
 import PrettyError from 'pretty-error'
 import yargs from 'yargs'
 import prompts from 'prompts'
-
+import CONSTANTS from './constants'
 import ResourceDeleter from './main'
 import { description } from '../package.json'
 
@@ -28,11 +28,11 @@ ${description}`
     return process.stdout
   })
   .option('apiUrl', {
-    default: 'https://api.sphere.io',
+    default: CONSTANTS.host.api,
     describe: 'The host URL of the HTTP API service.',
   })
   .option('authUrl', {
-    default: 'https://auth.sphere.io',
+    default: CONSTANTS.host.auth,
     describe: 'The host URL of the OAuth API service.',
   })
   .option('accessToken', {
@@ -52,7 +52,7 @@ Required scopes: ['manage_products', 'manage_customers', 'manage_types']`,
   .option('confirm', {
     alias: 'c',
     describe: 'Confirm the resource to delete.',
-    default: 'false',
+    default: CONSTANTS.standardOption.confirm,
     type: 'boolean',
   })
   .option('where', {
@@ -68,7 +68,7 @@ Required scopes: ['manage_products', 'manage_customers', 'manage_types']`,
     type: 'boolean',
   })
   .option('logFile', {
-    default: 'resources-deleted-report.log',
+    default: CONSTANTS.standardOption.defaultLogFile,
     describe: 'Path to where to save logs file.',
     type: 'string',
   }).argv
