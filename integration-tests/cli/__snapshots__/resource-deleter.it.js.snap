@@ -20,6 +20,8 @@ Options:
   --resource, -r    Resource that need to be deleted.                 [required]
   --confirm, -c     Confirm the resource to delete. [boolean] [default: \\"false\\"]
   --where, -w       Specify where predicate.
+  --batchSize, -b   Amount of resource to delete for each API call (max: 500)
+                                                                    [default: 0]
   --logLevel        Logging level: error, warn, info or debug. [default: \\"info\\"]
   --prettyLogs      Pretty print logs to the terminal                  [boolean]
   --logFile         Path to where to save logs file.
