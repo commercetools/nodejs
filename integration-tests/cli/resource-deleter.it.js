@@ -188,6 +188,59 @@ describe('Resource Deleter', () => {
       // Check that the selected item is deleted
       const newPayload = await getResource(resource)
       expect(newPayload.body.results).toHaveLength(2)
+    }, 15000)
+  })
+
+  describe('should delete a published product', () => {
+    const productType = [
+      {
+        name: 'sampleProductType',
+        key: 'sample-product-123PTKey',
+        description: 'Sample Product Type',
+        version: 1,
+      },
+    ]
+    const products = [
+      {
+        key: 'sample-product-123Key',
+        name: {
+          en: 'sample-product-123',
+        },
+        slug: {
+          en: 'sample-product-123-product-type',
+        },
+        productType: {
+          key: 'sample-product-123PTKey',
+          description: 'Sample Product Type',
+        },
+        version: 1,
+        publish: true,
+      },
+    ]
+    const resource = 'products'
+
+    beforeAll(async () => {
+      const options = {
+        apiConfig,
+        resource,
+        logger,
+      }
+      resourceDeleter = new ResourceDeleter(options)
+      await createData(apiConfig, 'productTypes', productType)
+      await createData(apiConfig, 'products', products)
+      return resources
     })
+    afterAll(async () => {
+      await clearData(apiConfig, 'products')
+      return clearData(apiConfig, 'productTypes')
+    })
+
+    it(`The published ${resource} deleted`, async () => {
+      const payload = await getResource(resource)
+      expect(payload.body.results.length).toBe(1)
+      await resourceDeleter.run()
+      const newPayload = await getResource(resource)
+      expect(newPayload.body.results).toHaveLength(0)
+    }, 30000)
   })
 })
