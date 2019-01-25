@@ -66,14 +66,14 @@ describe('::ResourceDeleter', () => {
       })
 
       test('should delete fetched resource', async () => {
-        const data = await resourceDeleter.run('sample-test-project')
+        const data = await resourceDeleter.run()
         expect(data).toBeDefined()
         expect(data).toBeTruthy()
         expect(data).toHaveLength(0)
       })
     })
 
-    describe('should throw error when resource is empty with status code 200', () => {
+    describe('should show message that no resource is found when resource is empty with status code 200', () => {
       beforeEach(() => {
         payload = {
           statusCode: 200,
@@ -85,10 +85,39 @@ describe('::ResourceDeleter', () => {
         resourceDeleter.client.execute = jest.fn(() => Promise.resolve(payload))
       })
 
-      test('should throw error for empty resource', () => {
-        expect(resourceDeleter.run('sample-test-project')).rejects.toThrow(
-          /nothing to delete/
+      test('should resolve for an empty resource', async () => {
+        const data = await resourceDeleter.run()
+        expect(data).toBeDefined()
+        expect(data).toBeTruthy()
+        expect(data).toHaveLength(0)
+        await expect(Promise.resolve('nothing to delete')).resolves.toBe(
+          'nothing to delete'
         )
+      })
+    })
+
+    describe('should delete product that is published', () => {
+      beforeEach(() => {
+        payload = {
+          statusCode: 200,
+          body: {
+            results: [
+              {
+                id: 'foo1',
+                version: 1,
+                masterData: { published: true },
+              },
+            ],
+          },
+        }
+
+        resourceDeleter.client.execute = jest.fn(() => Promise.resolve(payload))
+      })
+      test('should delete published resource', async () => {
+        const data = await resourceDeleter.run()
+        expect(data).toBeDefined()
+        expect(data).toBeTruthy()
+        expect(data).toHaveLength(0)
       })
     })
 
@@ -110,7 +139,7 @@ describe('::ResourceDeleter', () => {
           .mockImplementationOnce(() => Promise.resolve(payload))
       })
       test('should throw error if required parameter are missing with the resource during deletion', () => {
-        expect(resourceDeleter.run('sample-test-project')).rejects.toThrow(
+        expect(resourceDeleter.run()).rejects.toThrow(
           /error during `resource` deletion/
         )
       })
@@ -130,8 +159,7 @@ describe('::ResourceDeleter', () => {
       })
 
       test('should throw internal server error', () => {
-        const request = ResourceDeleter.buildRequest('example.com', 'GET')
-        expect(resourceDeleter.run(request)).rejects.toThrow(
+        expect(resourceDeleter.run()).rejects.toThrow(
           /Request returned status code 500/
         )
       })

@@ -8,6 +8,7 @@ import {
 } from '@commercetools/sdk-middleware-auth'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
+import { createQueueMiddleware } from '@commercetools/sdk-middleware-queue'
 import type {
   ApiConfigOptions,
   LoggerOptions,
@@ -50,6 +51,9 @@ export default class ResourceDeleter {
           libraryVersion: pkg.version,
         }),
         createHttpMiddleware({ host: this.apiConfig.apiUrl, fetch }),
+        createQueueMiddleware({
+          concurrency: 20,
+        }),
       ],
     })
     this.logger = {
@@ -78,30 +82,51 @@ export default class ResourceDeleter {
           )
         }
         const results = response.body?.results
-        if (!results || !results.length)
-          return Promise.reject(
-            new Error(
-              `No ${this.resource} is found in the project ${
-                this.apiConfig.projectKey
-              }, therefore nothing to delete.`
-            )
+
+        // Check if the resource is empty
+        if (!results || !results.length) {
+          this.logger.info(
+            `No ${this.resource} is found in the project ${
+              this.apiConfig.projectKey
+            }, therefore nothing to delete.`
           )
+          return Promise.resolve('nothing to delete')
+        }
+
         return Promise.all(
           results.map(
-            (result: Object): Promise<any> =>
-              this.client.execute({
+            async (result: Object): Promise<any> => {
+              let newVersion
+              // Check if the resource is published
+              if (result.masterData?.published) {
+                await this.client.execute({
+                  uri: service
+                    .byId(result.id)
+                    .withVersion(result.version)
+                    .build(),
+                  method: 'POST',
+                  body: JSON.stringify({
+                    version: result.version,
+                    actions: [{ action: 'unpublish' }],
+                  }),
+                })
+                newVersion = result.version + 1
+              }
+
+              return this.client.execute({
                 uri: service
                   .byId(result.id)
-                  .withVersion(result.version)
+                  .withVersion(newVersion || result.version)
                   .build(),
                 method: 'DELETE',
               })
+            }
           )
         )
           .then((): void => this.logger.info('All deleted'))
           .catch(
             (error: Error): Promise<Error> => {
-              this.logger.info(error)
+              this.logger.error(error)
               return Promise.reject(error)
             }
           )
@@ -115,6 +140,7 @@ export default class ResourceDeleter {
       projectKey: this.apiConfig.projectKey,
     })[this.resource]
     if (predicate) service.where(predicate)
+    service.perPage(500)
     return service.build()
   }
 
