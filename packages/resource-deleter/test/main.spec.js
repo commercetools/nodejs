@@ -121,6 +121,36 @@ describe('::ResourceDeleter', () => {
       })
     })
 
+    describe('should delete children categories before deleting the parent', () => {
+      beforeEach(() => {
+        payload = {
+          statusCode: 200,
+          body: {
+            results: [
+              {
+                id: 'barParent123',
+                version: 1,
+                ancestors: [],
+              },
+              {
+                id: 'barChild123',
+                version: 1,
+                ancestors: [{ id: 'barParent123', typeId: 'category' }],
+              },
+            ],
+          },
+        }
+
+        resourceDeleter.client.execute = jest.fn(() => Promise.resolve(payload))
+      })
+      test('should delete categories with the offspring', async () => {
+        const data = await resourceDeleter.run()
+        expect(data).toBeDefined()
+        expect(data).toBeTruthy()
+        expect(data).toHaveLength(0)
+      })
+    })
+
     describe('should throw error when requires parameters are not passed with status code 200', () => {
       beforeEach(() => {
         payload = {
