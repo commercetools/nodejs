@@ -6626,10 +6626,10 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
-leasot@7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/leasot/-/leasot-7.1.0.tgz#ce32080b6882b39bf0caa534a80a0883ad148b5b"
-  integrity sha512-FgdEMj+NtQyJCBJWkGC7e9NN5kLKHfBPAnsSbw8ZU1gDlnbz+fkUrV/31alAXowvX6uc5LJt+dwrlp2/VIA1jw==
+leasot@7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/leasot/-/leasot-7.2.0.tgz#88bb54da2db2af58950a2082c5c610449963ce98"
+  integrity sha512-JUyKDXnn6ESFs/n3s5MWhssO5P1zaFW30NTtJPxGzAKzW02Wi9G7JiVU5weSKIXvJQ1MGm8iRy9JzFVd5VrEwA==
   dependencies:
     async "^2.6.1"
     chalk "^2.4.2"
