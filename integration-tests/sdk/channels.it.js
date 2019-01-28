@@ -22,7 +22,13 @@ function uniqueId(prefix) {
 }
 
 describe('Channels', () => {
-  const ignoredResponseKeys = ['id', 'createdAt', 'lastModifiedAt']
+  const ignoredResponseKeys = [
+    'id',
+    'createdAt',
+    'createdBy',
+    'lastModifiedAt',
+    'lastModifiedBy',
+  ]
   const service = createRequestBuilder({ projectKey }).channels
   const httpMiddleware = createHttpMiddleware({
     host: 'https://api.sphere.io',
