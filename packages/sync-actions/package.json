@@ -34,7 +34,7 @@
     "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSyncActions -i src/index.js -o dist/commercetools-sync-actions.cjs.js"
   },
   "dependencies": {
-    "fast-equals": "1.6.1",
+    "fast-equals": "1.6.2",
     "jsondiffpatch": "0.3.11",
     "lodash.flatten": "4.4.0",
     "lodash.foreach": "4.5.0",
