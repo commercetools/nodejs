@@ -12,7 +12,7 @@ const args = yargs
   .usage(
     `
 Usage: $0 [options]
-Convert commercetools discount codes CSV data to JSON.`
+Converts commercetools discount code data from CSV to JSON.`
   )
   .showHelpOnFail(false, 'Use --help to display the CLI options.\n')
   .option('input', {

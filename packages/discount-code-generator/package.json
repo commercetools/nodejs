@@ -1,12 +1,13 @@
 {
   "name": "@commercetools/discount-code-generator",
-  "version": "1.1.18",
-  "description": "Generate discount codes according to constraints.",
+  "version": "2.0.1",
+  "description": "Generates discount codes for the commercetools platform, according to constraints.",
   "keywords": [
     "commercetools",
     "discount",
     "code",
-    "generator"
+    "generator",
+    "cli"
   ],
   "repository": {
     "type": "git",
@@ -32,7 +33,7 @@
   "dependencies": {
     "csv-parser": "2.1.0",
     "flat": "4.1.0",
-    "json2csv": "4.3.2",
+    "json2csv": "4.3.3",
     "npmlog": "4.1.2",
     "pretty-error": "2.1.1",
     "tokgen": "1.0.0",

@@ -1,13 +1,14 @@
 {
   "name": "@commercetools/csv-parser-discount-code",
-  "version": "1.2.15",
-  "description": "Convert commercetools discount codes CSV data to JSON.",
+  "version": "2.0.1",
+  "description": "Converts commercetools discount code data from CSV to JSON.",
   "keywords": [
     "commercetools",
     "discount",
     "code",
     "csv",
-    "json"
+    "json",
+    "cli"
   ],
   "repository": {
     "type": "git",

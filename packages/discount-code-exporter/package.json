@@ -1,13 +1,14 @@
 {
   "name": "@commercetools/discount-code-exporter",
-  "version": "2.0.22",
-  "description": "Export discount codes from the commercetools platform.",
+  "version": "3.0.1",
+  "description": "Exports discount codes from the commercetools platform.",
   "keywords": [
     "commercetools",
     "discount",
     "code",
     "export",
-    "exporter"
+    "exporter",
+    "cli"
   ],
   "repository": {
     "type": "git",
@@ -31,12 +32,12 @@
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {
-    "@commercetools/api-request-builder": "4.1.1",
-    "@commercetools/get-credentials": "2.1.11",
-    "@commercetools/sdk-client": "1.5.10",
-    "@commercetools/sdk-middleware-auth": "4.0.11",
-    "@commercetools/sdk-middleware-http": "4.0.10",
-    "@commercetools/sdk-middleware-user-agent": "1.2.11",
+    "@commercetools/api-request-builder": "5.0.0",
+    "@commercetools/get-credentials": "3.0.0",
+    "@commercetools/sdk-client": "2.0.0",
+    "@commercetools/sdk-middleware-auth": "5.0.0",
+    "@commercetools/sdk-middleware-http": "5.0.0",
+    "@commercetools/sdk-middleware-user-agent": "2.0.0",
     "JSONStream": "1.3.5",
     "fast-csv": "2.4.1",
     "flat": "4.1.0",
