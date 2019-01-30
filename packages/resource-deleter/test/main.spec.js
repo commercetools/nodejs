@@ -121,8 +121,16 @@ describe('::ResourceDeleter', () => {
       })
     })
 
-    describe('should delete children categories before deleting the parent', () => {
+    describe('should delete categories', () => {
       beforeEach(() => {
+        const options = {
+          apiConfig: {
+            projectKey: 'sample-test-project1',
+          },
+          resource: 'categories',
+          logger,
+        }
+        resourceDeleter = new ResourceDeleter(options)
         payload = {
           statusCode: 200,
           body: {
@@ -133,21 +141,35 @@ describe('::ResourceDeleter', () => {
                 ancestors: [],
               },
               {
-                id: 'barChild123',
+                id: 'barChild1',
+                version: 1,
+                ancestors: [{ id: 'barParent123', typeId: 'category' }],
+              },
+              {
+                id: 'barChild2',
                 version: 1,
                 ancestors: [{ id: 'barParent123', typeId: 'category' }],
               },
             ],
           },
         }
+        resourceDeleter.client.execute = jest
+          .fn(() => Promise.resolve())
+          .mockImplementationOnce(() => Promise.resolve(payload))
+          .mockImplementationOnce(() => Promise.resolve(payload.body.result[0]))
+          .mockImplementationOnce(() => Promise.resolve())
 
-        resourceDeleter.client.execute = jest.fn(() => Promise.resolve(payload))
+        resourceDeleter.deleteResource = jest.fn()
+        resourceDeleter.logger.info = jest.fn()
       })
-      test('should delete categories with the offspring', async () => {
+
+      test('should delete children categories before deleting the parent', async () => {
         const data = await resourceDeleter.run()
         expect(data).toBeDefined()
         expect(data).toBeTruthy()
         expect(data).toHaveLength(0)
+        expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(3)
+        expect(resourceDeleter.logger.info).toHaveBeenCalledWith('All deleted')
       })
     })
 
