@@ -11,9 +11,10 @@ import { version } from '@commercetools/resource-deleter/package.json'
 import * as resources from './helpers/resource-delete.data'
 import { createData, clearData } from './helpers/utils'
 
-let projectKey
-if (process.env.CI === 'true') projectKey = 'resource-deleter-int-test'
-else projectKey = process.env.npm_config_projectkey
+const projectKey =
+  process.env.CI === 'true'
+    ? 'resource-deleter-int-test'
+    : process.env.npm_config_projectkey
 
 describe('Resource Deleter', () => {
   let apiConfig
@@ -112,32 +113,30 @@ describe('Resource Deleter', () => {
 
   describe('should delete a specific resource', () => {
     const resource = 'channels'
-    if (resource === 'channels') {
-      beforeEach(() => {
-        const options = {
-          apiConfig,
-          resource,
-          logger,
-        }
-        resourceDeleter = new ResourceDeleter(options)
-        return createData(apiConfig, resource, [
-          {
-            key: 'singleChannel',
-            name: {
-              en: 'singleChannel',
-              de: 'singleChannel',
-            },
+    beforeEach(() => {
+      const options = {
+        apiConfig,
+        resource,
+        logger,
+      }
+      resourceDeleter = new ResourceDeleter(options)
+      return createData(apiConfig, resource, [
+        {
+          key: 'singleChannel',
+          name: {
+            en: 'singleChannel',
+            de: 'singleChannel',
           },
-          {
-            key: 'nextChannel',
-            name: {
-              en: 'nextChannel',
-              de: 'nextChannel',
-            },
+        },
+        {
+          key: 'nextChannel',
+          name: {
+            en: 'nextChannel',
+            de: 'nextChannel',
           },
-        ])
-      })
-    }
+        },
+      ])
+    })
 
     it(`The specified ${resource} deleted`, async () => {
       const payload = await getResource(resource)
@@ -146,37 +145,35 @@ describe('Resource Deleter', () => {
       const newPayload = await getResource(resource)
       expect(newPayload.body.results).toHaveLength(0)
     })
-  })
+  }, 15000)
 
   describe('should delete a specific resource with predicate', () => {
     const resource = 'customerGroups'
-    if (resource === 'customerGroups') {
-      beforeEach(() => {
-        const options = {
-          apiConfig,
-          resource,
-          logger,
-          predicate: 'key="CGKey2"',
-        }
-        resourceDeleter = new ResourceDeleter(options)
-        return createData(apiConfig, resource, [
-          {
-            key: 'CGKey1',
-            groupName: 'SampleCGName1',
-          },
-          {
-            key: 'CGKey2',
-            groupName: 'SampleCGName2',
-          },
-          {
-            key: 'CGKey3',
-            groupName: 'SampleCGName3',
-          },
-        ])
-      })
-    }
+    beforeEach(() => {
+      const options = {
+        apiConfig,
+        resource,
+        logger,
+        predicate: 'key="CGKey2"',
+      }
+      resourceDeleter = new ResourceDeleter(options)
+      return createData(apiConfig, resource, [
+        {
+          key: 'CGKey1',
+          groupName: 'SampleCGName1',
+        },
+        {
+          key: 'CGKey2',
+          groupName: 'SampleCGName2',
+        },
+        {
+          key: 'CGKey3',
+          groupName: 'SampleCGName3',
+        },
+      ])
+    })
 
-    it(`The specified ${resource} deleted`, async () => {
+    it(`The specified ${resource} with predicate deleted`, async () => {
       const payload = await getResource(resource)
 
       // Check the total number of item in the resource.
@@ -189,6 +186,52 @@ describe('Resource Deleter', () => {
       const newPayload = await getResource(resource)
       expect(newPayload.body.results).toHaveLength(2)
     }, 15000)
+  })
+
+  describe('should delete categories with its offspring', () => {
+    const resource = 'categories'
+    beforeEach(async () => {
+      const options = {
+        apiConfig,
+        resource,
+        logger,
+      }
+
+      const parentCategories = [
+        {
+          name: { en: 'barParentCategory' },
+          key: 'parentBCNkey',
+          slug: { en: 'barParent123-slug' },
+        },
+      ]
+
+      const childCategories = [
+        {
+          name: { en: 'barChild1Category' },
+          key: 'child1BCNkey',
+          slug: { en: 'barChild1Category-slug' },
+          parent: { key: 'parentBCNkey', typeId: 'category' },
+        },
+        {
+          name: { en: 'barChild2Category' },
+          key: 'child2BCNkey',
+          slug: { en: 'barChild2Category-slug' },
+          parent: { key: 'parentBCNkey', typeId: 'category' },
+        },
+      ]
+
+      resourceDeleter = new ResourceDeleter(options)
+      await createData(apiConfig, resource, parentCategories)
+      return createData(apiConfig, resource, childCategories)
+    })
+
+    it(`The ${resource} offspring deleted before its ancestors`, async () => {
+      const payload = await getResource(resource)
+      expect(payload.body.results).toHaveLength(3)
+      await resourceDeleter.run()
+      const newPayload = await getResource(resource)
+      expect(newPayload.body.results).toHaveLength(0)
+    })
   })
 
   describe('should delete a published product', () => {
