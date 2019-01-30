@@ -93,6 +93,38 @@ export default class ResourceDeleter {
           return Promise.resolve('nothing to delete')
         }
 
+        // Sort the categories using the ancestors value
+        if (this.resource === 'categories') {
+          const childResults = results.filter(
+            (result: Object): boolean => result.ancestors?.length > 0
+          )
+
+          const parentResults = results.filter(
+            (result: Object): boolean => result.ancestors?.length === 0
+          )
+          return Promise.all(
+            childResults.map(
+              (result: Object): Promise<any> => this.deleteResource(result)
+            )
+          )
+            .then(
+              (): Promise<any> =>
+                Promise.all(
+                  parentResults.map(
+                    (result: Object): Promise<any> =>
+                      this.deleteResource(result)
+                  )
+                )
+            )
+            .then((): void => this.logger.info('All deleted'))
+            .catch(
+              (error: Error): Promise<Error> => {
+                this.logger.error(error)
+                return Promise.reject(error)
+              }
+            )
+        }
+
         return Promise.all(
           results.map(
             async (result: Object): Promise<any> => {
@@ -113,12 +145,9 @@ export default class ResourceDeleter {
                 newVersion = result.version + 1
               }
 
-              return this.client.execute({
-                uri: service
-                  .byId(result.id)
-                  .withVersion(newVersion || result.version)
-                  .build(),
-                method: 'DELETE',
+              return this.deleteResource({
+                ...result,
+                version: newVersion || result.version,
               })
             }
           )
@@ -133,6 +162,19 @@ export default class ResourceDeleter {
       },
       { accumulate: false }
     )
+  }
+
+  deleteResource(resource: Object): Promise<any> {
+    const service = createRequestBuilder({
+      projectKey: this.apiConfig.projectKey,
+    })[this.resource]
+    return this.client.execute({
+      uri: service
+        .byId(resource.id)
+        .withVersion(resource.version)
+        .build(),
+      method: 'DELETE',
+    })
   }
 
   buildUri(projectKey: string, predicate: ?string): string {
