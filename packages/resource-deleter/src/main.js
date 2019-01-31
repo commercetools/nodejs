@@ -66,12 +66,8 @@ export default class ResourceDeleter {
 
   run(): Promise<any> {
     this.logger.info(`Starting to delete fetched ${this.resource}`)
-
     const uri = this.buildUri(this.apiConfig.projectKey, this.predicate)
     const request = ResourceDeleter.buildRequest(uri, 'GET')
-    const service = createRequestBuilder({
-      projectKey: this.apiConfig.projectKey,
-    })[this.resource]
 
     return this.client.process(
       request,
@@ -93,36 +89,14 @@ export default class ResourceDeleter {
           return Promise.resolve('nothing to delete')
         }
 
-        // Sort the categories using the ancestors value
+        // Check if the resource is categories
         if (this.resource === 'categories') {
-          const childResults = results.filter(
-            (result: Object): boolean => result.ancestors?.length > 0
-          )
+          const {
+            childCategories,
+            parentCategories,
+          } = ResourceDeleter._splitCategories(results)
 
-          const parentResults = results.filter(
-            (result: Object): boolean => result.ancestors?.length === 0
-          )
-          return Promise.all(
-            childResults.map(
-              (result: Object): Promise<any> => this.deleteResource(result)
-            )
-          )
-            .then(
-              (): Promise<any> =>
-                Promise.all(
-                  parentResults.map(
-                    (result: Object): Promise<any> =>
-                      this.deleteResource(result)
-                  )
-                )
-            )
-            .then((): void => this.logger.info(`All ${this.resource} deleted`))
-            .catch(
-              (error: Error): Promise<Error> => {
-                this.logger.error(error)
-                return Promise.reject(error)
-              }
-            )
+          return this.deleteCategories(childCategories, parentCategories)
         }
 
         return Promise.all(
@@ -131,17 +105,7 @@ export default class ResourceDeleter {
               let newVersion
               // Check if the resource is published
               if (result.masterData?.published) {
-                await this.client.execute({
-                  uri: service
-                    .byId(result.id)
-                    .withVersion(result.version)
-                    .build(),
-                  method: 'POST',
-                  body: JSON.stringify({
-                    version: result.version,
-                    actions: [{ action: 'unpublish' }],
-                  }),
-                })
+                await this.unPublishResource(result)
                 newVersion = result.version + 1
               }
 
@@ -164,10 +128,62 @@ export default class ResourceDeleter {
     )
   }
 
+  static _splitCategories(results: Array<Object>): Object {
+    // Sort the categories using the ancestors value
+    const childCategories = results.filter(
+      (result: Object): boolean => result.ancestors?.length > 0
+    )
+
+    const parentCategories = results.filter(
+      (result: Object): boolean => result.ancestors?.length === 0
+    )
+    return { childCategories, parentCategories }
+  }
+
+  deleteCategories(
+    childCategories: Array<Object>,
+    parentCategories: Array<Object>
+  ): Promise<any> {
+    return Promise.all(
+      childCategories.map(
+        (result: Object): Promise<any> => this.deleteResource(result)
+      )
+    )
+      .then(
+        (): Promise<any> =>
+          Promise.all(
+            parentCategories.map(
+              (result: Object): Promise<any> => this.deleteResource(result)
+            )
+          )
+      )
+      .then((): void => this.logger.info(`All ${this.resource} deleted`))
+      .catch(
+        (error: Error): Promise<Error> => {
+          this.logger.error(error)
+          return Promise.reject(error)
+        }
+      )
+  }
+
+  unPublishResource(resource: Object): Promise<any> {
+    const service = this.createService()
+    // Check if the resource is published
+    return this.client.execute({
+      uri: service
+        .byId(resource.id)
+        .withVersion(resource.version)
+        .build(),
+      method: 'POST',
+      body: JSON.stringify({
+        version: resource.version,
+        actions: [{ action: 'unpublish' }],
+      }),
+    })
+  }
+
   deleteResource(resource: Object): Promise<any> {
-    const service = createRequestBuilder({
-      projectKey: this.apiConfig.projectKey,
-    })[this.resource]
+    const service = this.createService()
     return this.client.execute({
       uri: service
         .byId(resource.id)
@@ -177,10 +193,14 @@ export default class ResourceDeleter {
     })
   }
 
-  buildUri(projectKey: string, predicate: ?string): string {
-    const service = createRequestBuilder({
+  createService(): Object {
+    return createRequestBuilder({
       projectKey: this.apiConfig.projectKey,
     })[this.resource]
+  }
+
+  buildUri(projectKey: string, predicate: ?string): string {
+    const service = this.createService()
     if (predicate) service.where(predicate)
     service.perPage(500)
     return service.build()
