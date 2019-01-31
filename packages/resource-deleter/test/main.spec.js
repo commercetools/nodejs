@@ -169,7 +169,52 @@ describe('::ResourceDeleter', () => {
         expect(data).toBeTruthy()
         expect(data).toHaveLength(0)
         expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(3)
-        expect(resourceDeleter.logger.info).toHaveBeenCalledWith('All deleted')
+        expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
+          `All ${resourceDeleter.resource} deleted`
+        )
+      })
+    })
+
+    describe('should throw error during categories deletion when problem occur', () => {
+      beforeEach(() => {
+        const options = {
+          apiConfig: {
+            projectKey: 'sample-test-project2',
+          },
+          resource: 'categories',
+          logger,
+        }
+        resourceDeleter = new ResourceDeleter(options)
+        payload = {
+          statusCode: 200,
+          body: {
+            results: [
+              {
+                id: 'barParent2',
+                version: 1,
+                ancestors: [],
+              },
+              {
+                id: 'barChild21',
+                version: 1,
+                ancestors: [{ id: 'barParent23', typeId: 'category' }],
+              },
+            ],
+          },
+        }
+
+        resourceDeleter.client.execute = jest
+          .fn()
+          .mockImplementationOnce(() => Promise.resolve(payload))
+          .mockImplementation(() =>
+            Promise.reject(new Error('error during `categories` deletion'))
+          )
+      })
+
+      test('should throw error when there is a problem during categories deletion ', async () => {
+        expect(resourceDeleter.run()).rejects.toThrow(
+          'error during `categories` deletion'
+        )
       })
     })
 

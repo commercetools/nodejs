@@ -116,7 +116,7 @@ export default class ResourceDeleter {
                   )
                 )
             )
-            .then((): void => this.logger.info('All deleted'))
+            .then((): void => this.logger.info(`All ${this.resource} deleted`))
             .catch(
               (error: Error): Promise<Error> => {
                 this.logger.error(error)
