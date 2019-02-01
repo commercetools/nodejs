@@ -106,9 +106,9 @@ workflows:
       - test_unit_node_10:
           requires:
             - lint
-      - build_aws_lambda_layer:
-          requires:
-            - test_unit_node_8
+      - build_aws_lambda_layer
+        # requires:
+        #   - test_unit_node_8
       - publish_aws_lambda_layer:
           requires:
             - build_aws_lambda_layer
