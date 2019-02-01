@@ -85,10 +85,10 @@ jobs:
           paths:
             - dist
   publish_aws_lambda_layer:
-    docker:
-      - image: mesosphere/aws-cli
-    working_directory: ~/nodejs
-    # <<: *node8Environment
+    # docker:
+    #   - image: mesosphere/aws-cli
+    # working_directory: ~/nodejs
+    <<: *node8Environment
     steps:
       - checkout
       - attach_workspace:
