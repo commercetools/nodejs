@@ -77,6 +77,9 @@ jobs:
     steps:
       - checkout
       - run: sh scripts/build-aws-lambda-layer
+      - store_artifacts:
+          path: dist/commercetools-nodejs-sdk.zip
+          destination: commercetools-nodejs-sdk.zip
       - persist_to_workspace:
           root: ~/nodejs
           paths:
