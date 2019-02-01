@@ -81,13 +81,14 @@ jobs:
           path: dist/commercetools-nodejs-sdk.zip
           destination: commercetools-nodejs-sdk.zip
       - persist_to_workspace:
-          root: /home/circleci/nodejs
+          # root: .
           paths:
             - dist
   publish_aws_lambda_layer:
-    docker:
-      - image: mesosphere/aws-cli
-    working_directory: ~/nodejs
+    # docker:
+    #   - image: mesosphere/aws-cli
+    # working_directory: ~/nodejs
+    <<: *node8Environment
     steps:
       - checkout
       - attach_workspace:
