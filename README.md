@@ -66,6 +66,10 @@ https://commercetools.github.io/nodejs/
 [sdk-middleware-user-agent-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/sdk-middleware-user-agent
 [sdk-middleware-user-agent-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/sdk-middleware-user-agent&style=flat-square
 
+### SDK as an AWS Lambda Layer
+
+We also a publish an [AWS Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html#configuration-layers-using) with the packages above. Find the ARN for your region [here](lambdaLayerArns.md).
+
 ### CLI tools
 
 | Package                                                          | Version                                                                                                | Dependencies                                                                                                                         |
