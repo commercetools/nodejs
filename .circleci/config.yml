@@ -81,7 +81,7 @@ jobs:
           path: dist/commercetools-nodejs-sdk.zip
           destination: commercetools-nodejs-sdk.zip
       - persist_to_workspace:
-          root: ~/nodejs
+          root: /home/circleci/nodejs
           paths:
             - dist
   publish_aws_lambda_layer:
@@ -91,7 +91,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/nodejs
+          at: /home/circleci/nodejs
       - run: sh scripts/publish-aws-lambda-layer
 
 workflows:
