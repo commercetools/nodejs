@@ -1,0 +1,12 @@
+#!/bin/bash
+
+mkdir dist
+cd dist
+
+mkdir nodejs
+cd nodejs
+npm init -y
+npm install @commercetools/sdk-client @commercetools/sdk-middleware-auth @commercetools/sdk-middleware-http @commercetools/sdk-middleware-logger @commercetools/sdk-middleware-queue @commercetools/sdk-middleware-user-agent @commercetools/api-request-builder
+
+cd ..
+zip -r commercetools-nodejs-sdk.zip nodejs/ -x nodejs/package.json nodejs/package-lock.json

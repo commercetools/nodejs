@@ -72,10 +72,22 @@ jobs:
       - run:
           name: Integration testing
           command: yarn test:integration
-  publish_aws_lambda_layer:
+  build_aws_lambda_layer:
     <<: *node8Environment
     steps:
       - checkout
+      - run: sh scripts/build_aws_lambda_layer
+      - persist_to_workspace:
+          root: ~/nodejs
+          paths:
+            - dist
+  publish_aws_lambda_layer:
+    docker:
+      - image: mesosphere/aws-cli
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/nodejs
       - run: sh scripts/publish_aws_lambda_layer
 
 workflows:
@@ -89,9 +101,12 @@ workflows:
       - test_unit_node_10:
           requires:
             - lint
-      - publish_aws_lambda_layer:
+      - build_aws_lambda_layer:
           requires:
             - test_unit_node_8
+      - publish_aws_lambda_layer:
+          requires:
+            - build_aws_lambda_layer
       - test_integration:
           context: org-global
           requires:

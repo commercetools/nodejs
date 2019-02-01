@@ -1,19 +1,6 @@
 #!/bin/bash
 
-mkdir dist
 cd dist
-
-curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-unzip awscli-bundle.zip
-./awscli-bundle/install -b ./aws
-
-mkdir nodejs
-cd nodejs
-npm init -y
-npm install @commercetools/sdk-client @commercetools/sdk-middleware-auth @commercetools/sdk-middleware-http @commercetools/sdk-middleware-logger @commercetools/sdk-middleware-queue @commercetools/sdk-middleware-user-agent @commercetools/api-request-builder
-
-cd ..
-zip -r commercetools-nodejs-sdk.zip nodejs/ -x nodejs/package.json nodejs/package-lock.json
 
 regions=($(./aws ec2 describe-regions --query "Regions[].{Name:RegionName}" --output text --region="eu-central-1"))
 
