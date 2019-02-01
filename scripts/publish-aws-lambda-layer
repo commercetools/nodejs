@@ -2,7 +2,9 @@
 
 cd dist
 
-regions=($(aws ec2 describe-regions --query "Regions[].{Name:RegionName}" --output text --region="eu-central-1"))
+regions=$(aws ec2 describe-regions --query "Regions[].{Name:RegionName}" --output text --region="eu-central-1")
+
+echo $regions
 
 for region in "${regions[@]}"
 do
