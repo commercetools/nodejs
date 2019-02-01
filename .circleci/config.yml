@@ -6,6 +6,10 @@ node10Environment: &node10Environment
   docker:
     - image: circleci/node:10
   working_directory: ~/nodejs
+awsCLIEnvironment: &awsCLIEnvironment
+  docker:
+    - image: rhinogram/node-awscli
+  working_directory: ~/nodejs
 
 aliases:
   - &restore_yarn_cache
@@ -73,7 +77,7 @@ jobs:
           name: Integration testing
           command: yarn test:integration
   build_aws_lambda_layer:
-    <<: *node8Environment
+    <<: *awsCLIEnvironment
     steps:
       - checkout
       - run: sh scripts/build-aws-lambda-layer
@@ -88,7 +92,7 @@ jobs:
     # docker:
     #   - image: mesosphere/aws-cli
     # working_directory: ~/nodejs
-    <<: *node8Environment
+    <<: *awsCLIEnvironment
     steps:
       - checkout
       - attach_workspace:
