@@ -1,0 +1,27 @@
+#!/bin/bash
+
+mkdir dist
+cd dist
+
+curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+unzip awscli-bundle.zip
+./awscli-bundle/install -b ./aws
+
+mkdir nodejs
+cd nodejs
+npm init -y
+npm install @commercetools/sdk-client @commercetools/sdk-middleware-auth @commercetools/sdk-middleware-http @commercetools/sdk-middleware-logger @commercetools/sdk-middleware-queue @commercetools/sdk-middleware-user-agent @commercetools/api-request-builder
+
+cd ..
+zip -r commercetools-nodejs-sdk.zip nodejs/ -x nodejs/package.json nodejs/package-lock.json
+
+regions=($(./aws ec2 describe-regions --query "Regions[].{Name:RegionName}" --output text --region="eu-central-1"))
+
+for region in "${regions[@]}"
+do
+    echo "Uploading to $region"
+
+    version=$(./aws lambda publish-layer-version --layer-name commercetools-nodejs-sdk --description "commercetools' node.js SDK" --license-info "MIT" --zip-file fileb://commercetools-nodejs-sdk.zip --compatible-runtimes nodejs6.10 nodejs8.10 --region="$region" --query 'Version')
+
+    ./aws lambda add-layer-version-permission --layer-name commercetools-nodejs-sdk --statement-id engineering-org --version-number $version --principal '*' --action lambda:GetLayerVersion --region="$region" > /dev/null
+done

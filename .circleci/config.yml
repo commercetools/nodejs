@@ -72,6 +72,11 @@ jobs:
       - run:
           name: Integration testing
           command: yarn test:integration
+  publish_aws_lambda_layer:
+    <<: *node8Environment
+    steps:
+      - checkout
+      - run: sh scripts/publish_aws_lambda_layer
 
 workflows:
   version: 2
@@ -84,6 +89,9 @@ workflows:
       - test_unit_node_10:
           requires:
             - lint
+      - publish_aws_lambda_layer:
+          requires:
+            - test_unit_node_8
       - test_integration:
           context: org-global
           requires:
