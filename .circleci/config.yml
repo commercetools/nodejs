@@ -81,7 +81,7 @@ jobs:
           path: dist/commercetools-nodejs-sdk.zip
           destination: commercetools-nodejs-sdk.zip
       - persist_to_workspace:
-          # root: .
+          root: .
           paths:
             - dist
   publish_aws_lambda_layer:
