@@ -84,6 +84,7 @@ jobs:
   publish_aws_lambda_layer:
     docker:
       - image: mesosphere/aws-cli
+    working_directory: ~/nodejs
     steps:
       - checkout
       - attach_workspace:
