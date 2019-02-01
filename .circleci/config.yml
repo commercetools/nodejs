@@ -76,7 +76,7 @@ jobs:
     <<: *node8Environment
     steps:
       - checkout
-      - run: sh scripts/build_aws_lambda_layer
+      - run: sh scripts/build-aws-lambda-layer
       - persist_to_workspace:
           root: ~/nodejs
           paths:
@@ -88,7 +88,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/nodejs
-      - run: sh scripts/publish_aws_lambda_layer
+      - run: sh scripts/publish-aws-lambda-layer
 
 workflows:
   version: 2
