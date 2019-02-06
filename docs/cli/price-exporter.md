@@ -11,7 +11,7 @@ The constructor accepts two arguments:
   - `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_orders`]
   - `delimiter` (String): CSV delimiter (Optional. Default: `','`)
   - `exportFormat` (String): Export format ['csv', 'json'] (Optional. Default: 'json')
-  - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates) (Optional)
+  - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api-query-predicates) (Optional)
   - `staged` (Boolean): Specify if prices should be fetched from all products (true) or only published products (false) (Optional. Default: false)
   - `csvHeaders` (Array<String>): Array containing headers for the returned CSV price data. If omitted, all headers will be turned. (Optional)
 - An optional logger object having four functions (`info`, `warn`, `error` and `verbose`)
@@ -59,7 +59,7 @@ Options:
   - The default location for status report logging is the standard output.
   - If no output path is specified, the exported prices will be logged to the standard output.
 - The `--delimiter` flag specifies the delimiter used in the input and output file if CSV. Defaults to `','` if omitted.
-- The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate is on the products containing the prices (`product-proections` endpoint) and not on the prices themselves. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates)
+- The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate is on the products containing the prices (`product-proections` endpoint) and not on the prices themselves. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/http-api-query-predicates)
 - The `--staged` flag specifies the projection of the products from which the prices should be fetched.
   - If passed `true`, prices from published and unpublished products are retrieved
   - If passed `false` (or omitted), only prices from published products are retrieved
