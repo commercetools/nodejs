@@ -62,14 +62,13 @@ describe('::ResourceDeleter', () => {
           },
         }
 
+        resourceDeleter.logger.info = jest.fn()
         resourceDeleter.client.execute = jest.fn(() => Promise.resolve(payload))
       })
 
       test('should delete fetched resource', async () => {
-        const data = await resourceDeleter.run()
-        expect(data).toBeDefined()
-        expect(data).toBeTruthy()
-        expect(data).toHaveLength(0)
+        await resourceDeleter.run()
+        expect(resourceDeleter.logger.info).toHaveBeenCalledWith(`All deleted`)
       })
     })
 
@@ -82,16 +81,17 @@ describe('::ResourceDeleter', () => {
           },
         }
 
+        resourceDeleter.logger.error = jest.fn()
         resourceDeleter.client.execute = jest.fn(() => Promise.resolve(payload))
       })
 
       test('should resolve for an empty resource', async () => {
-        const data = await resourceDeleter.run()
-        expect(data).toBeDefined()
-        expect(data).toBeTruthy()
-        expect(data).toHaveLength(0)
+        await resourceDeleter.run()
         await expect(Promise.resolve('nothing to delete')).resolves.toBe(
           'nothing to delete'
+        )
+        expect(resourceDeleter.logger.error).not.toHaveBeenCalledWith(
+          `All deleted`
         )
       })
     })
@@ -111,13 +111,16 @@ describe('::ResourceDeleter', () => {
           },
         }
 
+        resourceDeleter.logger.info = jest.fn()
+        resourceDeleter.logger.error = jest.fn()
         resourceDeleter.client.execute = jest.fn(() => Promise.resolve(payload))
       })
       test('should delete published resource', async () => {
-        const data = await resourceDeleter.run()
-        expect(data).toBeDefined()
-        expect(data).toBeTruthy()
-        expect(data).toHaveLength(0)
+        await resourceDeleter.run()
+        expect(resourceDeleter.logger.info).toHaveBeenCalledWith(`All deleted`)
+        expect(resourceDeleter.logger.error).not.toHaveBeenCalledWith(
+          `All deleted`
+        )
       })
     })
 
@@ -164,10 +167,7 @@ describe('::ResourceDeleter', () => {
       })
 
       test('should delete children categories before deleting the parent', async () => {
-        const data = await resourceDeleter.run()
-        expect(data).toBeDefined()
-        expect(data).toBeTruthy()
-        expect(data).toHaveLength(0)
+        await resourceDeleter.run()
         expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(3)
         expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
           `All ${resourceDeleter.resource} deleted`
