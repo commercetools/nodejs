@@ -68,7 +68,9 @@ describe('::ResourceDeleter', () => {
 
       test('should delete fetched resource', async () => {
         await resourceDeleter.run()
-        expect(resourceDeleter.logger.info).toHaveBeenCalledWith(`All deleted`)
+        expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
+          `All ${resourceDeleter.resource} deleted`
+        )
       })
     })
 
@@ -81,7 +83,6 @@ describe('::ResourceDeleter', () => {
           },
         }
 
-        resourceDeleter.logger.error = jest.fn()
         resourceDeleter.client.execute = jest.fn(() => Promise.resolve(payload))
       })
 
@@ -89,9 +90,6 @@ describe('::ResourceDeleter', () => {
         await resourceDeleter.run()
         await expect(Promise.resolve('nothing to delete')).resolves.toBe(
           'nothing to delete'
-        )
-        expect(resourceDeleter.logger.error).not.toHaveBeenCalledWith(
-          `All deleted`
         )
       })
     })
@@ -117,18 +115,59 @@ describe('::ResourceDeleter', () => {
       })
       test('should delete published resource', async () => {
         await resourceDeleter.run()
-        expect(resourceDeleter.logger.info).toHaveBeenCalledWith(`All deleted`)
+        expect(resourceDeleter.logger.info).toHaveBeenCalled()
         expect(resourceDeleter.logger.error).not.toHaveBeenCalledWith(
-          `All deleted`
+          `All ${resourceDeleter} deleted`
         )
       })
     })
 
-    describe('should delete categories', () => {
+    describe('should delete categories without children', () => {
       beforeEach(() => {
         const options = {
           apiConfig: {
             projectKey: 'sample-test-project1',
+          },
+          resource: 'categories',
+          logger,
+        }
+        resourceDeleter = new ResourceDeleter(options)
+        payload = {
+          statusCode: 200,
+          body: {
+            results: [
+              {
+                id: 'barCat',
+                version: 1,
+                ancestors: [],
+              },
+            ],
+          },
+        }
+        resourceDeleter.client.execute = jest
+          .fn(() => Promise.resolve())
+          .mockImplementationOnce(() => Promise.resolve(payload))
+          .mockImplementationOnce(() => Promise.resolve(payload.body.result[0]))
+          .mockImplementationOnce(() => Promise.resolve())
+
+        resourceDeleter.deleteResource = jest.fn()
+        resourceDeleter.logger.info = jest.fn()
+      })
+
+      test('should delete children categories before deleting the parent', async () => {
+        await resourceDeleter.run()
+        expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(1)
+        expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
+          `All ${resourceDeleter.resource} deleted`
+        )
+      })
+    })
+
+    describe('should delete categories with children', () => {
+      beforeEach(() => {
+        const options = {
+          apiConfig: {
+            projectKey: 'sample-test-project3',
           },
           resource: 'categories',
           logger,
@@ -169,6 +208,106 @@ describe('::ResourceDeleter', () => {
       test('should delete children categories before deleting the parent', async () => {
         await resourceDeleter.run()
         expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(3)
+        expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
+          `All ${resourceDeleter.resource} deleted`
+        )
+      })
+    })
+
+    describe('should delete categories with & without children', () => {
+      beforeEach(() => {
+        const options = {
+          apiConfig: {
+            projectKey: 'sample-test-project3',
+          },
+          resource: 'categories',
+          logger,
+        }
+        resourceDeleter = new ResourceDeleter(options)
+        payload = {
+          statusCode: 200,
+          body: {
+            results: [
+              {
+                id: 'barCat21',
+                version: 1,
+                ancestors: [],
+              },
+              {
+                id: 'fooCat1',
+                version: 1,
+                ancestors: [],
+              },
+              {
+                id: 'fooCat2',
+                version: 1,
+                ancestors: [],
+              },
+              {
+                id: 'barParent123',
+                version: 1,
+                ancestors: [],
+              },
+              {
+                id: 'barChild1',
+                version: 1,
+                ancestors: [{ id: 'barParent123', typeId: 'category' }],
+              },
+              {
+                id: 'barChild2',
+                version: 1,
+                ancestors: [{ id: 'barParent123', typeId: 'category' }],
+              },
+              {
+                id: 'barGrandChild21',
+                version: 1,
+                ancestors: [
+                  { id: 'barParent123', typeId: 'category' },
+                  { id: 'barChild2', typeId: 'category' },
+                ],
+              },
+              {
+                id: 'barGrandChild22',
+                version: 1,
+                ancestors: [
+                  { id: 'barParent123', typeId: 'category' },
+                  { id: 'barChild2', typeId: 'category' },
+                ],
+              },
+              {
+                id: 'barGreatGrandChild21',
+                version: 1,
+                ancestors: [
+                  { id: 'barParent123', typeId: 'category' },
+                  { id: 'barChild2', typeId: 'category' },
+                  { id: 'barGrandChild21', typeId: 'category' },
+                ],
+              },
+              {
+                id: 'barGreatGrandChild22',
+                version: 1,
+                ancestors: [
+                  { id: 'barParent123', typeId: 'category' },
+                  { id: 'barChild2', typeId: 'category' },
+                  { id: 'barGrandChild21', typeId: 'category' },
+                ],
+              },
+            ],
+          },
+        }
+        resourceDeleter.client.execute = jest
+          .fn(() => Promise.resolve())
+          .mockImplementationOnce(() => Promise.resolve(payload))
+          .mockImplementationOnce(() => Promise.resolve(payload.body.result[0]))
+          .mockImplementationOnce(() => Promise.resolve())
+
+        resourceDeleter.deleteResource = jest.fn()
+        resourceDeleter.logger.info = jest.fn()
+      })
+
+      test('should delete categories without children first before deleting others', async () => {
+        await resourceDeleter.run()
+        expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(10)
         expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
           `All ${resourceDeleter.resource} deleted`
         )
