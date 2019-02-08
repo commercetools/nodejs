@@ -69,93 +69,55 @@ export default class ResourceDeleter {
     const uri = this.buildUri(this.apiConfig.projectKey, this.predicate)
     const request = ResourceDeleter.buildRequest(uri, 'GET')
 
-    return this.client.process(
-      request,
-      (response: ClientResponse): Promise<any> => {
-        if (response.statusCode !== 200) {
-          return Promise.reject(
-            new Error(`Request returned status code ${response.statusCode}`)
-          )
-        }
-        const results = response.body?.results
-
-        // Check if the resource is empty
-        if (!results || !results.length) {
-          this.logger.info(
-            `No ${this.resource} is found in the project ${
-              this.apiConfig.projectKey
-            }, therefore nothing to delete.`
-          )
-          return Promise.resolve('nothing to delete')
-        }
-
-        // Check if the resource is categories
-        if (this.resource === 'categories') {
-          const {
-            childCategories,
-            parentCategories,
-          } = ResourceDeleter._splitCategories(results)
-
-          return this.deleteCategories(childCategories, parentCategories)
-        }
-
-        return Promise.all(
-          results.map(
-            async (result: Object): Promise<any> => {
-              let newVersion
-              // Check if the resource is published
-              if (result.masterData?.published) {
-                await this.unPublishResource(result)
-                newVersion = result.version + 1
-              }
-
-              return this.deleteResource({
-                ...result,
-                version: newVersion || result.version,
-              })
-            }
-          )
-        )
-          .then((): void => this.logger.info('All deleted'))
-          .catch(
-            (error: Error): Promise<Error> => {
-              this.logger.error(error)
-              return Promise.reject(error)
-            }
-          )
-      },
-      { accumulate: false }
-    )
-  }
-
-  static _splitCategories(results: Array<Object>): Object {
-    // Sort the categories using the ancestors value
-    const childCategories = results.filter(
-      (result: Object): boolean => result.ancestors?.length > 0
-    )
-
-    const parentCategories = results.filter(
-      (result: Object): boolean => result.ancestors?.length === 0
-    )
-    return { childCategories, parentCategories }
-  }
-
-  deleteCategories(
-    childCategories: Array<Object>,
-    parentCategories: Array<Object>
-  ): Promise<any> {
-    return Promise.all(
-      childCategories.map(
-        (result: Object): Promise<any> => this.deleteResource(result)
-      )
-    )
-      .then(
-        (): Promise<any> =>
-          Promise.all(
-            parentCategories.map(
-              (result: Object): Promise<any> => this.deleteResource(result)
+    return this.client
+      .process(
+        request,
+        (response: ClientResponse): Promise<any> => {
+          if (response.statusCode !== 200) {
+            return Promise.reject(
+              new Error(`Request returned status code ${response.statusCode}`)
             )
+          }
+          let results = response.body?.results
+
+          // Check if the resource is empty
+          if (!results || !results.length) {
+            this.logger.info(
+              `No ${this.resource} is found in the project ${
+                this.apiConfig.projectKey
+              }, therefore nothing to delete.`
+            )
+            return Promise.resolve('nothing to delete')
+          }
+
+          // Check if the resource is categories
+          if (this.resource === 'categories')
+            // Sort categories by their ancestors attributes sizes
+            results = results.sort(ResourceDeleter.sortCategories)
+
+          let deletedItems = 0
+          return Promise.all(
+            results.map(
+              async (result: Object): Promise<any> => {
+                let newVersion
+                // Check if the resource is published
+                if (result.masterData?.published) {
+                  await this.unPublishResource(result)
+                  newVersion = result.version + 1
+                }
+                deletedItems += 1
+                return this.deleteResource({
+                  ...result,
+                  version: newVersion || result.version,
+                })
+              }
+            )
+          ).then(
+            (): void =>
+              this.logger.info(`${deletedItems} ${this.resource} deleted`)
           )
+        },
+        { accumulate: false }
       )
       .then((): void => this.logger.info(`All ${this.resource} deleted`))
       .catch(
@@ -166,14 +128,21 @@ export default class ResourceDeleter {
       )
   }
 
+  static sortCategories(categoryA: Object, categoryB: Object): Object {
+    const a = categoryA.ancestors.length
+    const b = categoryB.ancestors.length
+    let comparison = 0
+    if (a > b) {
+      comparison = -1
+    } else if (a < b) {
+      comparison = 1
+    }
+    return comparison
+  }
+
   unPublishResource(resource: Object): Promise<any> {
-    const service = this.createService()
-    // Check if the resource is published
     return this.client.execute({
-      uri: service
-        .byId(resource.id)
-        .withVersion(resource.version)
-        .build(),
+      uri: this.getServiceWithBuildUri(resource),
       method: 'POST',
       body: JSON.stringify({
         version: resource.version,
@@ -183,12 +152,8 @@ export default class ResourceDeleter {
   }
 
   deleteResource(resource: Object): Promise<any> {
-    const service = this.createService()
     return this.client.execute({
-      uri: service
-        .byId(resource.id)
-        .withVersion(resource.version)
-        .build(),
+      uri: this.getServiceWithBuildUri(resource),
       method: 'DELETE',
     })
   }
@@ -197,6 +162,14 @@ export default class ResourceDeleter {
     return createRequestBuilder({
       projectKey: this.apiConfig.projectKey,
     })[this.resource]
+  }
+
+  getServiceWithBuildUri(resource: Object): string {
+    const service = this.createService()
+    return service
+      .byId(resource.id)
+      .withVersion(resource.version)
+      .build()
   }
 
   buildUri(projectKey: string, predicate: ?string): string {
