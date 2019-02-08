@@ -175,17 +175,46 @@ describe('Resource Deleter', () => {
 
     it(`The specified ${resource} with predicate deleted`, async () => {
       const payload = await getResource(resource)
-
-      // Check the total number of item in the resource.
       expect(payload.body.results).toHaveLength(3)
-
-      // Delete the selected item.
       await resourceDeleter.run()
-
-      // Check that the selected item is deleted
       const newPayload = await getResource(resource)
       expect(newPayload.body.results).toHaveLength(2)
     }, 15000)
+  })
+
+  describe('should delete categories without offspring', () => {
+    const resource = 'categories'
+    beforeEach(async () => {
+      const options = {
+        apiConfig,
+        resource,
+        logger,
+      }
+
+      const sampleCategories = [
+        {
+          name: { en: 'barCategory1' },
+          key: 'b1CNkey',
+          slug: { en: 'barCategory1-slug' },
+        },
+        {
+          name: { en: 'barCategory2' },
+          key: 'b2CNkey',
+          slug: { en: 'barCategory2-slug' },
+        },
+      ]
+
+      resourceDeleter = new ResourceDeleter(options)
+      return createData(apiConfig, resource, sampleCategories)
+    })
+
+    it(`The ${resource} offspring deleted before its ancestors`, async () => {
+      const payload = await getResource(resource)
+      expect(payload.body.results).toHaveLength(2)
+      await resourceDeleter.run()
+      const newPayload = await getResource(resource)
+      expect(newPayload.body.results).toHaveLength(0)
+    })
   })
 
   describe('should delete categories with its offspring', () => {
@@ -232,6 +261,100 @@ describe('Resource Deleter', () => {
       const newPayload = await getResource(resource)
       expect(newPayload.body.results).toHaveLength(0)
     })
+  })
+
+  describe('should delete categories with its grandchildren', () => {
+    const resource = 'categories'
+    beforeEach(async () => {
+      const options = {
+        apiConfig,
+        resource,
+        logger,
+      }
+
+      const parentCategories = [
+        {
+          name: { en: 'barParentCategory2' },
+          key: 'parent2BCNkey',
+          slug: { en: 'barParentCategory2-slug' },
+        },
+      ]
+
+      const childCategories = [
+        {
+          name: { en: 'barChild1Category' },
+          key: 'barChild1BCNkey',
+          slug: { en: 'barChild1Category-slug' },
+          parent: { key: 'parent2BCNkey', typeId: 'category' },
+        },
+        {
+          name: { en: 'barChild2Category' },
+          key: 'barChild2BCNkey',
+          slug: { en: 'barChild2Category2-slug' },
+          parent: { key: 'parent2BCNkey', typeId: 'category' },
+        },
+      ]
+
+      const grandChildCategories = [
+        {
+          name: { en: 'barGrandChild1Category' },
+          key: 'b1GCNkey',
+          slug: { en: 'barGrandChild1Category-slug' },
+          parent: { key: 'barChild1BCNkey', typeId: 'category' },
+        },
+        {
+          name: { en: 'barGrandChild2Category' },
+          key: 'b2GCNkey',
+          slug: { en: 'barGrandChild2Category-slug' },
+          parent: { key: 'barChild1BCNkey', typeId: 'category' },
+        },
+      ]
+
+      const greatGrandChildCategories = [
+        {
+          name: { en: 'barGGChild1Category' },
+          key: 'b1GGCNkey',
+          slug: { en: 'barGGChild1Category-slug' },
+          parent: { key: 'b1GCNkey', typeId: 'category' },
+        },
+        {
+          name: { en: 'barGGChild2Category' },
+          key: 'b2GGCNkey',
+          slug: { en: 'barGGChild2Category-slug' },
+          parent: { key: 'b1GCNkey', typeId: 'category' },
+        },
+      ]
+
+      const greatGreatGrandChildCategories = [
+        {
+          name: { en: 'barGGGChild1Category' },
+          key: 'b1GGGCNkey',
+          slug: { en: 'barGGGChild1Category-slug' },
+          parent: { key: 'b2GGCNkey', typeId: 'category' },
+        },
+        {
+          name: { en: 'barGGGChild2Category' },
+          key: 'b2GGGCNkey',
+          slug: { en: 'barGGGChild2Category-slug' },
+          parent: { key: 'b2GGCNkey', typeId: 'category' },
+        },
+      ]
+
+      resourceDeleter = new ResourceDeleter(options)
+      await createData(apiConfig, resource, parentCategories)
+      await createData(apiConfig, resource, childCategories)
+      await createData(apiConfig, resource, grandChildCategories)
+      await createData(apiConfig, resource, greatGrandChildCategories)
+      return createData(apiConfig, resource, greatGreatGrandChildCategories)
+    })
+
+    it(`The ${resource} grandchildren should be deleted before their ancestors`, async () => {
+      const payload = await getResource(resource)
+      expect(payload.body.results).toHaveLength(9)
+      await resourceDeleter.run()
+      const newPayload = await getResource(resource)
+      expect(newPayload.body.results).toHaveLength(0)
+    }, 15000)
   })
 
   describe('should delete a published product', () => {
