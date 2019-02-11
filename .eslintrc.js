@@ -14,6 +14,10 @@ module.exports = {
     jest: true,
     node: true,
   },
+  globals: {
+    Request: 'readable',
+    Headers: 'readable',
+  },
   rules: {
     'flowtype/define-flow-type': 1,
     'flowtype/require-parameter-type': 1,
