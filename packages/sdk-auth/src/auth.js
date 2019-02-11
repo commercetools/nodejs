@@ -1,5 +1,5 @@
 /* @flow */
-// global fetch Request Headers
+/* eslint no-unused-vars: "error" */
 import type {
   AuthOptions,
   CustomAuthOptions,
