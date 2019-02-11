@@ -1,5 +1,4 @@
 /* @flow */
-/* eslint no-unused-vars: "error" */
 import type {
   AuthOptions,
   CustomAuthOptions,
