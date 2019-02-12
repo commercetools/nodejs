@@ -346,7 +346,7 @@ describe('Resource Deleter', () => {
       await createData(apiConfig, resource, grandChildCategories)
       await createData(apiConfig, resource, greatGrandChildCategories)
       return createData(apiConfig, resource, greatGreatGrandChildCategories)
-    })
+    }, 15000)
 
     it(`The ${resource} grandchildren should be deleted before their ancestors`, async () => {
       const payload = await getResource(resource)
