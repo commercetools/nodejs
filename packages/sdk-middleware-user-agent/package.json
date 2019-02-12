@@ -35,6 +35,6 @@
     "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSdkMiddlewareUserAgent -i src/index.js -o dist/commercetools-sdk-middleware-user-agent.cjs.js"
   },
   "dependencies": {
-    "@commercetools/http-user-agent": "2.0.0"
+    "@commercetools/http-user-agent": "^2.0.0"
   }
 }
