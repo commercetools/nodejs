@@ -17,6 +17,7 @@ module.exports = {
   globals: {
     Request: 'readable',
     Headers: 'readable',
+    fetch: 'readable',
   },
   rules: {
     'flowtype/define-flow-type': 1,
