@@ -292,6 +292,16 @@ describe('::ResourceDeleter', () => {
                   { id: 'barGrandChild21', typeId: 'category' },
                 ],
               },
+              {
+                id: 'barGGreatGrandChild22',
+                version: 1,
+                ancestors: [
+                  { id: 'barParent123', typeId: 'category' },
+                  { id: 'barChild2', typeId: 'category' },
+                  { id: 'barGrandChild21', typeId: 'category' },
+                  { id: 'barGreatGrandChild22', typeId: 'category' },
+                ],
+              },
             ],
           },
         }
@@ -307,7 +317,7 @@ describe('::ResourceDeleter', () => {
 
       test('should delete categories without children first before deleting others', async () => {
         await resourceDeleter.run()
-        expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(10)
+        expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(11)
         expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
           `All ${resourceDeleter.resource} deleted`
         )
