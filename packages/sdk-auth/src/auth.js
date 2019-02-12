@@ -1,4 +1,5 @@
 /* @flow */
+/* global fetch */
 import type {
   AuthOptions,
   CustomAuthOptions,
