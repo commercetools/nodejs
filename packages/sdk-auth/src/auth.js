@@ -1,6 +1,5 @@
 /* @flow */
-/* global fetch Request Headers */
-
+/* global fetch */
 import type {
   AuthOptions,
   CustomAuthOptions,
