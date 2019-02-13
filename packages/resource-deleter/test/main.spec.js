@@ -67,9 +67,10 @@ describe('::ResourceDeleter', () => {
       })
 
       test('should delete fetched resource', async () => {
+        const noOfResourceToDelete = payload.body.results.length
         await resourceDeleter.run()
         expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
-          `All ${resourceDeleter.resource} deleted`
+          `${noOfResourceToDelete} ${resourceDeleter.resource} deleted`
         )
       })
     })
@@ -114,10 +115,11 @@ describe('::ResourceDeleter', () => {
         resourceDeleter.client.execute = jest.fn(() => Promise.resolve(payload))
       })
       test('should delete published resource', async () => {
+        const noOfResourceToDelete = payload.body.results.length
         await resourceDeleter.run()
         expect(resourceDeleter.logger.info).toHaveBeenCalled()
         expect(resourceDeleter.logger.error).not.toHaveBeenCalledWith(
-          `All ${resourceDeleter} deleted`
+          `${noOfResourceToDelete} ${resourceDeleter} deleted`
         )
       })
     })
@@ -155,10 +157,11 @@ describe('::ResourceDeleter', () => {
       })
 
       test('should delete children categories before deleting the parent', async () => {
+        const noOfResourceToDelete = payload.body.results.length
         await resourceDeleter.run()
         expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(1)
         expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
-          `All ${resourceDeleter.resource} deleted`
+          `${noOfResourceToDelete} ${resourceDeleter.resource} deleted`
         )
       })
     })
@@ -206,10 +209,11 @@ describe('::ResourceDeleter', () => {
       })
 
       test('should delete children categories before deleting the parent', async () => {
+        const noOfResourceToDelete = payload.body.results.length
         await resourceDeleter.run()
         expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(3)
         expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
-          `All ${resourceDeleter.resource} deleted`
+          `${noOfResourceToDelete} ${resourceDeleter.resource} deleted`
         )
       })
     })
@@ -316,10 +320,11 @@ describe('::ResourceDeleter', () => {
       })
 
       test('should delete categories without children first before deleting others', async () => {
+        const noOfResourceToDelete = payload.body.results.length
         await resourceDeleter.run()
         expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(11)
         expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
-          `All ${resourceDeleter.resource} deleted`
+          `${noOfResourceToDelete} ${resourceDeleter.resource} deleted`
         )
       })
     })
