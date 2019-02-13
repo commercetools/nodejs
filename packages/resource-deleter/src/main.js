@@ -79,7 +79,7 @@ export default class ResourceDeleter {
               new Error(`Request returned status code ${response.statusCode}`)
             )
           }
-          let results = response.body?.results
+          const results = response.body?.results
 
           // Check if the resource is empty
           if (!results || !results.length) {
@@ -90,11 +90,6 @@ export default class ResourceDeleter {
             )
             return Promise.resolve('nothing to delete')
           }
-
-          // Check if the resource is categories
-          if (this.resource === 'categories')
-            // Sort categories by their ancestors attributes sizes
-            results = results.sort(ResourceDeleter.sortCategories)
 
           const noOfBatchItemDeleted = results.length
           return Promise.all(
@@ -131,18 +126,6 @@ export default class ResourceDeleter {
           return Promise.reject(error)
         }
       )
-  }
-
-  static sortCategories(categoryA: Object, categoryB: Object): Object {
-    const a = categoryA.ancestors.length
-    const b = categoryB.ancestors.length
-    let comparison = 0
-    if (a > b) {
-      comparison = -1
-    } else if (a < b) {
-      comparison = 1
-    }
-    return comparison
   }
 
   unPublishResource(resource: Object): Promise<any> {
