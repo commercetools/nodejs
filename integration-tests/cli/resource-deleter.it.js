@@ -182,87 +182,6 @@ describe('Resource Deleter', () => {
     }, 15000)
   })
 
-  describe('should delete categories without offspring', () => {
-    const resource = 'categories'
-    beforeEach(async () => {
-      const options = {
-        apiConfig,
-        resource,
-        logger,
-      }
-
-      const sampleCategories = [
-        {
-          name: { en: 'barCategory1' },
-          key: 'b1CNkey',
-          slug: { en: 'barCategory1-slug' },
-        },
-        {
-          name: { en: 'barCategory2' },
-          key: 'b2CNkey',
-          slug: { en: 'barCategory2-slug' },
-        },
-      ]
-
-      resourceDeleter = new ResourceDeleter(options)
-      return createData(apiConfig, resource, sampleCategories)
-    })
-
-    it(`The ${resource} without offspring deleted`, async () => {
-      const payload = await getResource(resource)
-      expect(payload.body.results).toHaveLength(2)
-      await resourceDeleter.run()
-      const newPayload = await getResource(resource)
-      expect(newPayload.body.results).toHaveLength(0)
-    })
-  })
-
-  describe('should delete categories with its offspring', () => {
-    const resource = 'categories'
-    beforeAll(async () => {
-      const options = {
-        apiConfig,
-        resource,
-        logger,
-      }
-
-      const parentCategories = [
-        {
-          name: { en: 'barParentCategory' },
-          key: 'parentBCNkey',
-          slug: { en: 'barParent123-slug' },
-        },
-      ]
-
-      const childCategories = [
-        {
-          name: { en: 'barChild1Category' },
-          key: 'child1BCNkey',
-          slug: { en: 'barChild1Category-slug' },
-          parent: { key: 'parentBCNkey', typeId: 'category' },
-        },
-        {
-          name: { en: 'barChild2Category' },
-          key: 'child2BCNkey',
-          slug: { en: 'barChild2Category-slug' },
-          parent: { key: 'parentBCNkey', typeId: 'category' },
-        },
-      ]
-
-      resourceDeleter = new ResourceDeleter(options)
-      await createData(apiConfig, resource, parentCategories)
-      return createData(apiConfig, resource, childCategories)
-    }, 15000)
-
-    it(`The ${resource} with its offspring deleted`, async () => {
-      const payload = await getResource(resource)
-      expect(payload.body.results).toHaveLength(3)
-      await resourceDeleter.run()
-      const newPayload = await getResource(resource)
-      expect(newPayload.body.results).toHaveLength(0)
-    }, 15000)
-  })
-
   describe('should delete categories with its grandchildren', () => {
     const resource = 'categories'
     beforeAll(async () => {
@@ -346,7 +265,7 @@ describe('Resource Deleter', () => {
       await createData(apiConfig, resource, grandChildCategories)
       await createData(apiConfig, resource, greatGrandChildCategories)
       return createData(apiConfig, resource, greatGreatGrandChildCategories)
-    }, 45000)
+    }, 8000)
 
     it(`The ${resource} grandchildren deleted first before their ancestors deletion`, async () => {
       const payload = await getResource(resource)
@@ -354,7 +273,7 @@ describe('Resource Deleter', () => {
       await resourceDeleter.run()
       const newPayload = await getResource(resource)
       expect(newPayload.body.results).toHaveLength(0)
-    }, 30000)
+    }, 15000)
   })
 
   describe('should delete a published product', () => {
