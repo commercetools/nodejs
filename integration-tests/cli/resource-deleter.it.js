@@ -208,7 +208,7 @@ describe('Resource Deleter', () => {
       return createData(apiConfig, resource, sampleCategories)
     })
 
-    it(`The ${resource} offspring deleted before its ancestors`, async () => {
+    it(`The ${resource} without offspring deleted`, async () => {
       const payload = await getResource(resource)
       expect(payload.body.results).toHaveLength(2)
       await resourceDeleter.run()
@@ -219,7 +219,7 @@ describe('Resource Deleter', () => {
 
   describe('should delete categories with its offspring', () => {
     const resource = 'categories'
-    beforeEach(async () => {
+    beforeAll(async () => {
       const options = {
         apiConfig,
         resource,
@@ -252,20 +252,20 @@ describe('Resource Deleter', () => {
       resourceDeleter = new ResourceDeleter(options)
       await createData(apiConfig, resource, parentCategories)
       return createData(apiConfig, resource, childCategories)
-    })
+    }, 15000)
 
-    it(`The ${resource} offspring deleted before its ancestors`, async () => {
+    it(`The ${resource} with its offspring deleted`, async () => {
       const payload = await getResource(resource)
       expect(payload.body.results).toHaveLength(3)
       await resourceDeleter.run()
       const newPayload = await getResource(resource)
       expect(newPayload.body.results).toHaveLength(0)
-    })
+    }, 15000)
   })
 
   describe('should delete categories with its grandchildren', () => {
     const resource = 'categories'
-    beforeEach(async () => {
+    beforeAll(async () => {
       const options = {
         apiConfig,
         resource,
@@ -346,15 +346,15 @@ describe('Resource Deleter', () => {
       await createData(apiConfig, resource, grandChildCategories)
       await createData(apiConfig, resource, greatGrandChildCategories)
       return createData(apiConfig, resource, greatGreatGrandChildCategories)
-    }, 15000)
+    }, 45000)
 
-    it(`The ${resource} grandchildren should be deleted before their ancestors`, async () => {
+    it(`The ${resource} grandchildren deleted first before their ancestors deletion`, async () => {
       const payload = await getResource(resource)
       expect(payload.body.results).toHaveLength(9)
       await resourceDeleter.run()
       const newPayload = await getResource(resource)
       expect(newPayload.body.results).toHaveLength(0)
-    }, 15000)
+    }, 30000)
   })
 
   describe('should delete a published product', () => {
