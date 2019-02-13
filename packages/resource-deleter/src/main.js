@@ -69,6 +69,7 @@ export default class ResourceDeleter {
     const uri = this.buildUri(this.apiConfig.projectKey, this.predicate)
     const request = ResourceDeleter.buildRequest(uri, 'GET')
 
+    let deletedItems = 0
     return this.client
       .process(
         request,
@@ -95,7 +96,7 @@ export default class ResourceDeleter {
             // Sort categories by their ancestors attributes sizes
             results = results.sort(ResourceDeleter.sortCategories)
 
-          let deletedItems = 0
+          const noOfBatchItemDeleted = results.length
           return Promise.all(
             results.map(
               async (result: Object): Promise<any> => {
@@ -114,12 +115,16 @@ export default class ResourceDeleter {
             )
           ).then(
             (): void =>
-              this.logger.info(`${deletedItems} ${this.resource} deleted`)
+              this.logger.info(
+                `${noOfBatchItemDeleted} ${this.resource} deleted`
+              )
           )
         },
         { accumulate: false }
       )
-      .then((): void => this.logger.info(`All ${this.resource} deleted`))
+      .then(
+        (): void => this.logger.info(`${deletedItems} ${this.resource} deleted`)
+      )
       .catch(
         (error: Error): Promise<Error> => {
           this.logger.error(error)
