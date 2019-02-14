@@ -1,50 +1,50 @@
 {
-    "name": "@commercetools/category-exporter",
-    "version": "2.0.1",
-    "publishConfig": {
-        "access": "public"
-    },
-    "description": "Exports categories from the commercetools platform.",
-    "main": "lib/main.js",
-    "bin": {
-        "category-exporter": "bin/category-exporter.js"
-    },
-    "scripts": {
-        "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/commercetools/nodejs/tree/master/packages/category-exporter"
-    },
-    "homepage": "https://commercetools.github.io/nodejs/cli/category-exporter.html",
-    "bugs": "https://github.com/commercetools/nodejs/issues",
-    "keywords": [
-        "commercetools",
-        "category",
-        "categories",
-        "json",
-        "export",
-        "cli"
-    ],
-    "author": {
-        "name": "Babajide Williams",
-        "email": "babajide.williams@commercetools.de"
-    },
-    "license": "MIT",
-    "dependencies": {
-        "@commercetools/api-request-builder": "5.0.0",
-        "@commercetools/get-credentials": "3.0.0",
-        "@commercetools/sdk-client": "2.0.0",
-        "@commercetools/sdk-middleware-auth": "5.0.0",
-        "@commercetools/sdk-middleware-http": "5.0.0",
-        "@commercetools/sdk-middleware-user-agent": "2.0.0",
-        "node-fetch": "2.3.0",
-        "pino": "5.11.1",
-        "pino-pretty": "2.5.0",
-        "pretty-error": "2.1.1",
-        "yargs": "12.0.5"
-    },
-    "devDependencies": {
-        "streamtest": "1.2.4"
-    }
+  "name": "@commercetools/category-exporter",
+  "version": "2.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "Exports categories from the commercetools platform.",
+  "main": "lib/main.js",
+  "bin": {
+    "category-exporter": "bin/category-exporter.js"
+  },
+  "scripts": {
+    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs/tree/master/packages/category-exporter"
+  },
+  "homepage": "https://commercetools.github.io/nodejs/cli/category-exporter.html",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "keywords": [
+    "commercetools",
+    "category",
+    "categories",
+    "json",
+    "export",
+    "cli"
+  ],
+  "author": {
+    "name": "Babajide Williams",
+    "email": "babajide.williams@commercetools.de"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@commercetools/api-request-builder": "^5.0.0",
+    "@commercetools/get-credentials": "^3.0.0",
+    "@commercetools/sdk-client": "^2.0.0",
+    "@commercetools/sdk-middleware-auth": "^5.0.0",
+    "@commercetools/sdk-middleware-http": "^5.0.0",
+    "@commercetools/sdk-middleware-user-agent": "^2.0.0",
+    "node-fetch": "^2.3.0",
+    "pino": "^5.11.1",
+    "pino-pretty": "^2.5.0",
+    "pretty-error": "^2.1.1",
+    "yargs": "^12.0.5"
+  },
+  "devDependencies": {
+    "streamtest": "1.2.4"
+  }
 }
