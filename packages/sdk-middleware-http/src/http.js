@@ -1,5 +1,5 @@
 /* @flow */
-/* global fetch Request Headers */
+/* global fetch */
 import type {
   HttpErrorType,
   HttpMiddlewareOptions,
