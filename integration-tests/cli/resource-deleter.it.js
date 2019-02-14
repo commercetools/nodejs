@@ -264,8 +264,22 @@ describe('Resource Deleter', () => {
       await createData(apiConfig, resource, childCategories)
       await createData(apiConfig, resource, grandChildCategories)
       await createData(apiConfig, resource, greatGrandChildCategories)
-      return createData(apiConfig, resource, greatGreatGrandChildCategories)
+      await createData(apiConfig, resource, greatGreatGrandChildCategories)
+
+      const categories = [
+        parentCategories,
+        childCategories,
+        grandChildCategories,
+        greatGrandChildCategories,
+        greatGreatGrandChildCategories,
+      ]
+
+      return categories
     }, 8000)
+
+    afterAll(async () => {
+      return clearData(apiConfig, 'categories')
+    })
 
     it(`The ${resource} grandchildren deleted first before their ancestors deletion`, async () => {
       const payload = await getResource(resource)
