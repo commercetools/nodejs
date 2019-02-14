@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/csv-parser-orders",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Converts commercetools order data from CSV to JSON.",
   "keywords": [
     "commercetools",

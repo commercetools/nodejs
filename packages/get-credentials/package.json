@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/get-credentials",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Get CT credentials from the system environment.",
   "keywords": [
     "commercetools",
