@@ -179,6 +179,18 @@ export default {
       features.queryExpand,
     ],
   },
+  myShoppingLists: {
+    type: 'my-shopping-lists',
+    endpoint: '/me/shopping-lists',
+    features: [
+      features.create,
+      features.update,
+      features.del,
+      features.query,
+      features.queryOne,
+      features.queryExpand,
+    ],
+  },
   orders: {
     type: 'orders',
     endpoint: '/orders',
