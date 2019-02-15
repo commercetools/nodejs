@@ -73,13 +73,14 @@ export default class ResourceDeleter {
     return this.client
       .process(
         request,
-        (response: ClientResponse): Promise<any> => {
+        async (response: ClientResponse): Promise<any> => {
           if (response.statusCode !== 200) {
             return Promise.reject(
               new Error(`Request returned status code ${response.statusCode}`)
             )
           }
-          const results = response.body?.results
+
+          let results = response.body?.results
 
           // Check if the resource is empty
           if (!results || !results.length) {
@@ -91,7 +92,11 @@ export default class ResourceDeleter {
             return Promise.resolve('nothing to delete')
           }
 
-          const noOfBatchItemDeleted = results.length
+          const noOfBatchItemDeleted = 0
+          // Check if the resource is categories
+          if (this.resource === 'categories')
+            results = await ResourceDeleter.getRootCategories(results)
+
           return Promise.all(
             results.map(
               async (result: Object): Promise<any> => {
@@ -126,6 +131,13 @@ export default class ResourceDeleter {
           return Promise.reject(error)
         }
       )
+  }
+
+  static getRootCategories(results: Array<Object>): Array<Object> {
+    const parentCategories = results.filter(
+      (result: Object): boolean => !result.parent
+    )
+    return parentCategories
   }
 
   unPublishResource(resource: Object): Promise<any> {
