@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/get-credentials",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Get CT credentials from the system environment.",
   "keywords": [
     "commercetools",
@@ -27,6 +27,6 @@
     "sinon": "7.2.3"
   },
   "dependencies": {
-    "dotenv": "6.2.0"
+    "dotenv": "^6.2.0"
   }
 }

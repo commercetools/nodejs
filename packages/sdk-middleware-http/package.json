@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-middleware-http",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Middleware for http requests, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",

@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/state-importer",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Import states to the commercetools platform",
   "main": "lib/main.js",
   "scripts": {
@@ -26,13 +26,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commercetools/api-request-builder": "5.0.0",
-    "@commercetools/sdk-client": "2.0.0",
-    "@commercetools/sdk-middleware-auth": "5.0.0",
-    "@commercetools/sdk-middleware-http": "5.0.0",
-    "@commercetools/sdk-middleware-user-agent": "2.0.0",
-    "@commercetools/sync-actions": "3.0.0",
-    "node-fetch": "2.3.0"
+    "@commercetools/api-request-builder": "^5.0.0",
+    "@commercetools/sdk-client": "^2.0.0",
+    "@commercetools/sdk-middleware-auth": "5.0.1",
+    "@commercetools/sdk-middleware-http": "5.0.1",
+    "@commercetools/sdk-middleware-user-agent": "2.0.1",
+    "@commercetools/sync-actions": "3.0.1",
+    "node-fetch": "^2.3.0"
   },
   "devDependencies": {
     "common-tags": "1.8.0"

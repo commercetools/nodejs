@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sync-actions",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Build API update actions for the commercetools platform.",
   "keywords": [
     "commercetools",
@@ -34,14 +34,14 @@
     "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSyncActions -i src/index.js -o dist/commercetools-sync-actions.cjs.js"
   },
   "dependencies": {
-    "fast-equals": "1.6.2",
-    "jsondiffpatch": "0.3.11",
-    "lodash.flatten": "4.4.0",
-    "lodash.foreach": "4.5.0",
-    "lodash.isequal": "4.5.0",
-    "lodash.isnil": "4.0.0",
-    "lodash.shuffle": "4.2.0",
-    "lodash.sortby": "4.7.0",
-    "lodash.uniqwith": "4.5.0"
+    "fast-equals": "^1.6.2",
+    "jsondiffpatch": "^0.3.11",
+    "lodash.flatten": "^4.4.0",
+    "lodash.foreach": "^4.5.0",
+    "lodash.isequal": "^4.5.0",
+    "lodash.isnil": "^4.0.0",
+    "lodash.shuffle": "^4.2.0",
+    "lodash.sortby": "^4.7.0",
+    "lodash.uniqwith": "^4.5.0"
   }
 }
