@@ -1954,7 +1954,7 @@ async-some@~1.0.2:
   dependencies:
     dezalgo "^1.0.2"
 
-async@^2.0.1, async@^2.1.4, async@^2.5.0, async@^2.6.1:
+async@^2.0.1, async@^2.1.4, async@^2.5.0, async@^2.6.2:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.2.tgz#18330ea7e6e313887f5d2f2a904bac6fe4dd5381"
   integrity sha512-H1qVYh1MYhEEFLsP97cVKqCGo7KfCyTt6uEWqsTBr9SO84oK9Uwbyd/yCW+6rKJLHksBNUVWZDAjfS+Ccx0Bbg==
@@ -6811,12 +6811,12 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
-leasot@7.3.0:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/leasot/-/leasot-7.3.0.tgz#133a6879088d6f827474cec929003d95702f3ba7"
-  integrity sha512-Bs1c+gRz6V8r4ObetQPzl+UEs6CnmvNwObfA/mi0Nm1yRJ8HYU9xxl79bpLbw6Af+0aspkwOMgSkMy4mNVRtRw==
+leasot@7.3.1:
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/leasot/-/leasot-7.3.1.tgz#7d707a262ae667c1966f8d0137e3f5e0eb6700e3"
+  integrity sha512-lAbQCD7c+FQUdaWRPeLKd0ldFwcGds6pTKpgAlnbxOZtgk+fDg+2ItQgML+o3t0lgtna5z7U4BAZmbFrlmDoUg==
   dependencies:
-    async "^2.6.1"
+    async "^2.6.2"
     chalk "^2.4.2"
     commander "^2.19.0"
     eol "^0.9.1"
