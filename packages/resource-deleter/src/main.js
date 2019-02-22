@@ -80,23 +80,21 @@ export default class ResourceDeleter {
             )
           }
 
-          let results = response.body?.results
+          const results = response.body?.results
 
           // Check if the resource is empty
           if (!results || !results.length) {
             this.logger.info(
-              `No ${this.resource} is found in the project ${
+              `No ${this.resource} were found in the project ${
                 this.apiConfig.projectKey
               }, therefore nothing to delete.`
             )
             return Promise.resolve('nothing to delete')
           }
 
-          const noOfBatchItemDeleted = 0
-          // Check if the resource is categories
-          if (this.resource === 'categories')
-            results = await ResourceDeleter.getRootCategories(results)
+          this.logger.info(`Deleting ${results.length} ${this.resource}`)
 
+          // concurrency is set in the clients middleware
           return Promise.all(
             results.map(
               async (result: Object): Promise<any> => {
@@ -113,17 +111,15 @@ export default class ResourceDeleter {
                 })
               }
             )
-          ).then(
-            (): void =>
-              this.logger.info(
-                `${noOfBatchItemDeleted} ${this.resource} deleted`
-              )
           )
         },
         { accumulate: false }
       )
       .then(
-        (): void => this.logger.info(`${deletedItems} ${this.resource} deleted`)
+        (): void =>
+          this.logger.info(
+            `A total of ${deletedItems} ${this.resource} have been removed`
+          )
       )
       .catch(
         (error: Error): Promise<Error> => {
@@ -133,29 +129,33 @@ export default class ResourceDeleter {
       )
   }
 
-  static getRootCategories(results: Array<Object>): Array<Object> {
-    const parentCategories = results.filter(
-      (result: Object): boolean => !result.parent
-    )
-    return parentCategories
-  }
-
   unPublishResource(resource: Object): Promise<any> {
-    return this.client.execute({
-      uri: this.getServiceWithBuildUri(resource),
-      method: 'POST',
-      body: JSON.stringify({
-        version: resource.version,
-        actions: [{ action: 'unpublish' }],
-      }),
-    })
+    return this.client
+      .execute({
+        uri: this.getServiceWithBuildUri(resource),
+        method: 'POST',
+        body: JSON.stringify({
+          version: resource.version,
+          actions: [{ action: 'unpublish' }],
+        }),
+      })
+      .then((res: Object): Object => res.body)
   }
 
   deleteResource(resource: Object): Promise<any> {
-    return this.client.execute({
-      uri: this.getServiceWithBuildUri(resource),
-      method: 'DELETE',
-    })
+    return this.client
+      .execute({
+        uri: this.getServiceWithBuildUri(resource),
+        method: 'DELETE',
+      })
+      .catch(
+        (error: ClientResponse): Promise<any> => {
+          // do not throw error if the resource does not exist anymore
+          if (error.statusCode === 404) return Promise.resolve()
+
+          return Promise.reject(error)
+        }
+      )
   }
 
   createService(): Object {
