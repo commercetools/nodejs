@@ -42,7 +42,7 @@
     "node-fetch": "^2.3.0",
     "pino": "^5.11.1",
     "pretty-error": "^2.1.1",
-    "yargs": "^12.0.5"
+    "yargs": "^13.0.0"
   },
   "devDependencies": {
     "common-tags": "1.8.0",
