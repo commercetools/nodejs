@@ -70,7 +70,9 @@ describe('::ResourceDeleter', () => {
         const noOfResourceToDelete = payload.body.results.length
         await resourceDeleter.run()
         expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
-          `${noOfResourceToDelete} ${resourceDeleter.resource} deleted`
+          `A total of ${noOfResourceToDelete} ${
+            resourceDeleter.resource
+          } have been removed`
         )
       })
     })
@@ -119,7 +121,7 @@ describe('::ResourceDeleter', () => {
         await resourceDeleter.run()
         expect(resourceDeleter.logger.info).toHaveBeenCalled()
         expect(resourceDeleter.logger.error).not.toHaveBeenCalledWith(
-          `${noOfResourceToDelete} ${resourceDeleter} deleted`
+          `Deleting ${noOfResourceToDelete} ${resourceDeleter}`
         )
       })
     })
@@ -161,7 +163,9 @@ describe('::ResourceDeleter', () => {
         await resourceDeleter.run()
         expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(1)
         expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
-          `${noOfResourceToDelete} ${resourceDeleter.resource} deleted`
+          `A total of ${noOfResourceToDelete} ${
+            resourceDeleter.resource
+          } have been removed`
         )
       })
     })
@@ -214,7 +218,7 @@ describe('::ResourceDeleter', () => {
         expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(3)
         expect(resourceDeleter.logger.info).toHaveBeenCalledTimes(3)
         expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
-          `${noOfResourceToDelete} ${resourceDeleter.resource} deleted`
+          `Deleting ${noOfResourceToDelete} ${resourceDeleter.resource}`
         )
       })
     })
@@ -326,7 +330,9 @@ describe('::ResourceDeleter', () => {
         expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(11)
         expect(resourceDeleter.logger.info).toHaveBeenCalledTimes(3)
         expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
-          `${noOfResourceToDelete} ${resourceDeleter.resource} deleted`
+          `A total of ${noOfResourceToDelete} ${
+            resourceDeleter.resource
+          } have been removed`
         )
       })
     })
