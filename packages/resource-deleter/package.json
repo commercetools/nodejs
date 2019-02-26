@@ -1,44 +1,43 @@
 {
-    "name": "@commercetools/resource-deleter",
-    "version": "0.0.1-dev",
-    "description": "Delete resources from the commercetools platform",
-    "main": "lib/main.js",
-    "bin": {
-        "resource-deleter": "bin/resource-deleter.js"
-    },
-    "scripts": {
-        "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/commercetools/nodejs/tree/master/packages/resource-deleter"
-    },
-    "homepage": "https://commercetools.github.io/nodejs/cli/resource-deleter.html",
-    "bugs": "https://github.com/commercetools/nodejs/issues",
-    "keywords": [
-        "commercetools",
-        "resource",
-        "resources",
-        "delete",
-        "json"
-    ],
-    "author": {
-        "name": "Babajide Williams",
-        "email": "babajide.williams@commercetools.de"
-    },
-    "license": "MIT",
-    "dependencies": {
-        "@commercetools/api-request-builder": "4.0.2",
-        "@commercetools/get-credentials": "2.1.10",
-        "@commercetools/sdk-client": "1.5.8",
-        "@commercetools/sdk-middleware-auth": "4.0.7",
-        "@commercetools/sdk-middleware-http": "4.0.5",
-        "@commercetools/sdk-middleware-queue": "2.0.0",
-        "@commercetools/sdk-middleware-user-agent": "1.2.10",
-        "node-fetch": "2.2.0",
-        "pino": "5.8.1",
-        "pretty-error": "2.1.1",
-        "prompts": "2.0.0",
-        "yargs": "12.0.2"
-    }
+  "name": "@commercetools/resource-deleter",
+  "version": "0.0.1-dev",
+  "description": "Delete resources from the commercetools platform",
+  "main": "lib/main.js",
+  "bin": {
+    "resource-deleter": "bin/resource-deleter.js"
+  },
+  "scripts": {
+    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs/tree/master/packages/resource-deleter"
+  },
+  "homepage": "https://commercetools.github.io/nodejs/cli/resource-deleter.html",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "keywords": [
+    "commercetools",
+    "resource",
+    "resources",
+    "delete"
+  ],
+  "author": {
+    "name": "Babajide Williams",
+    "email": "babajide.williams@commercetools.de"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@commercetools/api-request-builder": "4.0.2",
+    "@commercetools/get-credentials": "2.1.10",
+    "@commercetools/sdk-client": "1.5.8",
+    "@commercetools/sdk-middleware-auth": "4.0.7",
+    "@commercetools/sdk-middleware-http": "4.0.5",
+    "@commercetools/sdk-middleware-queue": "2.0.0",
+    "@commercetools/sdk-middleware-user-agent": "1.2.10",
+    "node-fetch": "2.2.0",
+    "pino": "5.8.1",
+    "pretty-error": "2.1.1",
+    "prompts": "2.0.0",
+    "yargs": "12.0.2"
+  }
 }
