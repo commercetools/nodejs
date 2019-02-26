@@ -135,16 +135,21 @@ async function execute() {
       confirm: args.confirm,
     }
     const resourceDeleter = new ResourceDeleter(deleterOptions)
-    if (args.confirm) await resourceDeleter.run()
-    const response = await prompts({
-      type: 'confirm',
-      name: 'value',
-      message: `You are about to delete all ${args.resource} from this project.
+    if (args.confirm) {
+      await resourceDeleter.run()
+    } else {
+      const response = await prompts({
+        type: 'confirm',
+        name: 'value',
+        message: `You are about to delete all ${
+          args.resource
+        } from this project.
       WARNING: This operation is final and is not reversible. 
       Are you sure about this?`,
-      initial: false,
-    })
-    if (response.value) await resourceDeleter.run()
+        initial: false,
+      })
+      if (response.value) await resourceDeleter.run()
+    }
     process.exit()
   } catch (error) {
     errorHandler(error)
