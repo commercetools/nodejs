@@ -117,12 +117,11 @@ describe('::ResourceDeleter', () => {
         resourceDeleter.client.execute = jest.fn(() => Promise.resolve(payload))
       })
       test('should delete published resource', async () => {
-        const noOfResourceToDelete = payload.body.results.length
         await resourceDeleter.run()
-        expect(resourceDeleter.logger.info).toHaveBeenCalled()
-        expect(resourceDeleter.logger.error).not.toHaveBeenCalledWith(
-          `Deleting ${noOfResourceToDelete} ${resourceDeleter}`
+        expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
+          `Starting to delete fetched ${resourceDeleter.resource}`
         )
+        expect(resourceDeleter.logger.error).not.toHaveBeenCalled()
       })
     })
 
