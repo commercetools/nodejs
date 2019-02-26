@@ -27,4 +27,5 @@ export type resourceDeleterOptions = {
   predicate?: string,
   logger?: LoggerOptions,
   resource: string,
+  fetchedResource: ClientResult,
 }
