@@ -11,14 +11,17 @@ import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createQueueMiddleware } from '@commercetools/sdk-middleware-queue'
 import type {
   ApiConfigOptions,
-  ClientRequest,
-  ClientResult,
   CustomClientResult,
   LoggerOptions,
-  MethodType,
   resourceDeleterOptions,
 } from 'types/resourceDeleter'
-import type { Client, ClientResponse } from 'types/sdk'
+import type {
+  Client,
+  ClientResponse,
+  ClientRequest,
+  ClientResult,
+  MethodType,
+} from 'types/sdk'
 import silentLogger from './utils/silent-logger'
 import pkg from '../package.json'
 
