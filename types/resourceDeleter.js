@@ -21,7 +21,16 @@ export type ApiConfigOptions = {
 }
 
 /* Client */
-export type MethodType = 'GET' | 'POST' | 'DELETE'
+// eslint-disable-next-line max-len
+export type MethodType =
+  | 'GET'
+  | 'POST'
+  | 'DELETE'
+  | 'HEAD'
+  | 'OPTIONS'
+  | 'PUT'
+  | 'PATCH'
+  | 'TRACE'
 
 export type ClientRequest = {
   uri: string,
