@@ -20,6 +20,44 @@ export type ApiConfigOptions = {
   apiUrl?: string,
 }
 
+/* Client */
+export type MethodType = 'GET' | 'POST' | 'DELETE'
+
+export type ClientRequest = {
+  uri: string,
+  method: MethodType,
+  body?: string | Object,
+  headers?: {
+    [key: string]: string,
+  },
+}
+
+export type HttpErrorType = {
+  name: string,
+  message: string,
+  code: number,
+  status: number,
+  statusCode: number,
+  originalRequest: ClientRequest,
+  body?: Object,
+  headers?: {
+    [key: string]: string,
+  },
+}
+
+export type SuccessResult = {
+  body: Object,
+  statusCode: number,
+  headers?: Object,
+}
+
+export type ClientResult = SuccessResult | HttpErrorType
+
+export type CustomClientResult = ClientResult & {
+  id?: string,
+  version?: number,
+}
+
 /* ResourceDeleter Objects */
 export type resourceDeleterOptions = {
   apiConfig: ApiConfigOptions,
@@ -27,5 +65,5 @@ export type resourceDeleterOptions = {
   predicate?: string,
   logger?: LoggerOptions,
   resource: string,
-  fetchedResource: ClientResult,
+  fetchedResource: CustomClientResult,
 }
