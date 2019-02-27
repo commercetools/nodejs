@@ -11,15 +11,14 @@ import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createQueueMiddleware } from '@commercetools/sdk-middleware-queue'
 import type {
   ApiConfigOptions,
+  ClientRequest,
+  ClientResult,
+  CustomClientResult,
   LoggerOptions,
+  MethodType,
   resourceDeleterOptions,
 } from 'types/resourceDeleter'
-import type {
-  Client,
-  ClientRequest,
-  ClientResponse,
-  MethodType,
-} from 'types/sdk'
+import type { Client, ClientResponse } from 'types/sdk'
 import silentLogger from './utils/silent-logger'
 import pkg from '../package.json'
 
@@ -64,7 +63,7 @@ export default class ResourceDeleter {
     this.resource = options.resource
   }
 
-  run(): Promise<any> {
+  run(): Promise<void | Error> {
     this.logger.info(`Starting to delete fetched ${this.resource}`)
     const uri = this.buildUri(this.apiConfig.projectKey, this.predicate)
     const request = ResourceDeleter.buildRequest(uri, 'GET')
@@ -97,7 +96,7 @@ export default class ResourceDeleter {
           // concurrency is set in the clients middleware
           return Promise.all(
             results.map(
-              async (result: Object): Promise<any> => {
+              async (result: Object): Promise<ClientResult> => {
                 let newVersion
                 // Check if the resource is published
                 if (result.masterData?.published) {
@@ -129,23 +128,25 @@ export default class ResourceDeleter {
       )
   }
 
-  unPublishResource(resource: Object): Promise<any> {
+  unPublishResource(
+    fetchedResource: CustomClientResult
+  ): Promise<ClientResult> {
     return this.client
       .execute({
-        uri: this.getServiceWithBuildUri(resource),
+        uri: this.getServiceWithBuildUri(fetchedResource),
         method: 'POST',
         body: JSON.stringify({
-          version: resource.version,
+          version: fetchedResource.version,
           actions: [{ action: 'unpublish' }],
         }),
       })
-      .then((res: Object): Object => res.body)
+      .then((res: ClientResult): Object => res.body)
   }
 
-  deleteResource(resource: Object): Promise<any> {
+  deleteResource(fetchedResource: CustomClientResult): Promise<ClientResult> {
     return this.client
       .execute({
-        uri: this.getServiceWithBuildUri(resource),
+        uri: this.getServiceWithBuildUri(fetchedResource),
         method: 'DELETE',
       })
       .catch(
@@ -158,17 +159,17 @@ export default class ResourceDeleter {
       )
   }
 
-  createService(): Object {
+  createService() {
     return createRequestBuilder({
       projectKey: this.apiConfig.projectKey,
     })[this.resource]
   }
 
-  getServiceWithBuildUri(resource: Object): string {
+  getServiceWithBuildUri(fetchedResource: CustomClientResult): string {
     const service = this.createService()
     return service
-      .byId(resource.id)
-      .withVersion(resource.version)
+      .byId(fetchedResource.id)
+      .withVersion(fetchedResource.version)
       .build()
   }
 
