@@ -1,4 +1,5 @@
 /* @flow */
+import type { ClientResult } from 'types/sdk'
 
 /* Logger */
 export type LoggerOptions = {
@@ -21,47 +22,6 @@ export type ApiConfigOptions = {
 }
 
 /* Client */
-// eslint-disable-next-line max-len
-export type MethodType =
-  | 'GET'
-  | 'POST'
-  | 'DELETE'
-  | 'HEAD'
-  | 'OPTIONS'
-  | 'PUT'
-  | 'PATCH'
-  | 'TRACE'
-
-export type ClientRequest = {
-  uri: string,
-  method: MethodType,
-  body?: string | Object,
-  headers?: {
-    [key: string]: string,
-  },
-}
-
-export type HttpErrorType = {
-  name: string,
-  message: string,
-  code: number,
-  status: number,
-  statusCode: number,
-  originalRequest: ClientRequest,
-  body?: Object,
-  headers?: {
-    [key: string]: string,
-  },
-}
-
-export type SuccessResult = {
-  body: Object,
-  statusCode: number,
-  headers?: Object,
-}
-
-export type ClientResult = SuccessResult | HttpErrorType
-
 export type CustomClientResult = ClientResult & {
   id?: string,
   version?: number,
