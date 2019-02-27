@@ -159,6 +159,10 @@ https://commercetools.github.io/nodejs/
 [product-json-to-csv-icon]: https://img.shields.io/npm/v/@commercetools/product-json-to-csv.svg?style=flat-square
 [product-json-to-csv-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/product-json-to-csv
 [product-json-to-csv-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/product-json-to-csv&style=flat-square
+[resource-deleter-version]: https://www.npmjs.com/package/@commercetools/resource-deleter
+[resource-deleter-icon]: https://img.shields.io/npm/v/@commercetools/resource-deleter.svg?style=flat-square
+[resource-deleter-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/resource-deleter
+[resource-deleter-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/resource-deleter&style=flat-square
 [state-importer-version]: https://www.npmjs.com/package/@commercetools/state-importer
 [state-importer-icon]: https://img.shields.io/npm/v/@commercetools/state-importer.svg?style=flat-square
 [state-importer-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/state-importer
