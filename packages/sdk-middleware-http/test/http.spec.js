@@ -59,6 +59,37 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
+  test('should accept only header request and return without response body', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest()
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          statusCode: 200,
+          headers: {
+            'content-type': ['application/json'],
+          },
+        })
+        resolve()
+      }
+      // Use default options
+      const httpOptions = {
+        host: testHost,
+        includeResponseHeaders: true,
+        fetch,
+      }
+      const httpMiddleware = createHttpMiddleware(httpOptions)
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/')
+        .reply(200, {})
+
+      httpMiddleware(next)(request, response)
+    }))
+
   test('should return the headers in the response when enabled', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
