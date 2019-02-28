@@ -124,6 +124,14 @@ export type Channel = {
   description: Object,
 }
 
+export type CustomerGroup = {
+  id: string,
+  version?: number,
+  key: string,
+  name: string,
+  custom: Object,
+}
+
 type ScopedPrice = {
   id: string,
   value: Money,

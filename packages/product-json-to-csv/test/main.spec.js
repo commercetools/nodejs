@@ -262,15 +262,14 @@ describe('ProductJsonToCsv', () => {
         productJsonToCsv._resolveProductType = jest.fn(() => ({ productType }))
         productJsonToCsv._resolveTaxCategory = jest.fn(() => ({ taxCategory }))
         productJsonToCsv._resolveState = jest.fn(() => ({ state }))
-        productJsonToCsv._getChannelsById = jest.fn(() => ({ channelsById }))
-        productJsonToCsv._getCustomerGroupsById = jest.fn(() => ({
-          customerGroupsById,
-        }))
         productJsonToCsv._resolveCategories = jest.fn(() => ({ categories }))
         productJsonToCsv._resolveCategoryOrderHints = jest.fn(() => ({
           categoryOrderHints,
         }))
         productJsonToCsv._getChannelsById = jest.fn(() => channelsById)
+        productJsonToCsv._getCustomerGroupsById = jest.fn(
+          () => customerGroupsById
+        )
       })
 
       test('should pass the products to all resolver functions', async () => {
