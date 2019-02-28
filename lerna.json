@@ -1,7 +1,6 @@
 {
   "lerna": "3.4.3",
   "version": "independent",
-  "exact": true,
   "npmclient": "yarn",
   "changelog": {
     "rootPath": ".",
