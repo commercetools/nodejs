@@ -85,6 +85,11 @@ export const samplePriceChannel = {
   },
 }
 
+export const samplePriceCustomerGroup = {
+  key: 'priceCustomerGroup',
+  groupName: 'priceCustomerGroup',
+}
+
 export const createProducts = (state, taxCategory) => [
   {
     key: 'productKey-1',
