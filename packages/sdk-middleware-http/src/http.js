@@ -114,7 +114,8 @@ export default function createHttpMiddleware({
                 ...response,
                 statusCode: res.status,
               }
-              if (Object.keys(result).length > 0) parsedResponse.body = result
+
+              if (fetchOptions.method !== 'HEAD') parsedResponse.body = result
 
               if (includeResponseHeaders)
                 parsedResponse.headers = parseHeaders(res.headers)
