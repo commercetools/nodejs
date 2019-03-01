@@ -59,9 +59,9 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  test('should accept only header request and return without response body', () =>
+  test('should accept HEAD request and return without response body', () =>
     new Promise((resolve, reject) => {
-      const request = createTestRequest()
+      const request = createTestRequest({ uri: '/foo/foo', method: 'HEAD' })
       const response = { resolve, reject }
       const next = (req, res) => {
         expect(res).toEqual({
@@ -84,7 +84,7 @@ describe('Http', () => {
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
         })
-        .get('/')
+        .head('/foo/foo')
         .reply(200, {})
 
       httpMiddleware(next)(request, response)
