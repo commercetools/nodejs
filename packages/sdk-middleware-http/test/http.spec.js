@@ -61,14 +61,14 @@ describe('Http', () => {
 
   test('should accept HEAD request and return without response body', () =>
     new Promise((resolve, reject) => {
-      const request = createTestRequest({ uri: '/foo/foo', method: 'HEAD' })
+      const request = createTestRequest({ uri: '/foo', method: 'HEAD' })
       const response = { resolve, reject }
       const next = (req, res) => {
         expect(res).toEqual({
           ...response,
           statusCode: 200,
           headers: {
-            'content-type': ['application/json'],
+            'Content-Type': ['application/json'],
           },
         })
         resolve()
@@ -84,8 +84,8 @@ describe('Http', () => {
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
         })
-        .head('/foo/foo')
-        .reply(200, {})
+        .head('/foo')
+        .reply(200)
 
       httpMiddleware(next)(request, response)
     }))
