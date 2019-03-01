@@ -13,6 +13,7 @@ import {
   sampleParentCategory,
   sampleCategory,
   samplePriceChannel,
+  samplePriceCustomerGroup,
   createProducts,
 } from './helpers/product-json2csv.data'
 import { createData, clearData } from './helpers/utils'
@@ -31,6 +32,7 @@ async function cleanup(apiConfig) {
     clearData(apiConfig, 'states'),
     clearData(apiConfig, 'taxCategories'),
     clearData(apiConfig, 'channels'),
+    clearData(apiConfig, 'customerGroups'),
   ])
 }
 
@@ -61,6 +63,9 @@ describe('CSV and CLI Tests', () => {
     const priceChannel = await createData(apiConfig, 'channels', [
       samplePriceChannel,
     ])
+    const priceCustomerGroup = await createData(apiConfig, 'customerGroups', [
+      samplePriceCustomerGroup,
+    ])
     const state = await createData(apiConfig, 'states', [sampleState])
     const taxCategory = await createData(apiConfig, 'taxCategories', [
       sampleTaxCategory,
@@ -74,13 +79,21 @@ describe('CSV and CLI Tests', () => {
       typeId: 'tax-category',
       id: taxCategory[0].body.id,
     }
-
-    const sampleProducts = createProducts(stateRef, taxCategoryRef)
-    sampleProducts[0].masterVariant.prices[0].channel = {
+    const priceChannelRef = {
       typeId: 'channel',
       id: priceChannel[0].body.id,
     }
+    const priceCustomerGroupRef = {
+      typeId: 'customer-group',
+      id: priceCustomerGroup[0].body.id,
+    }
 
+    const sampleProducts = createProducts(
+      stateRef,
+      taxCategoryRef,
+      priceChannelRef,
+      priceCustomerGroupRef
+    )
     await createData(apiConfig, 'products', sampleProducts)
   }, 20000)
 
@@ -220,6 +233,11 @@ describe('CSV and CLI Tests', () => {
             expect(product[0]).toEqual(expect.objectContaining({ tax }))
             expect(product[1]).toEqual(expect.objectContaining({ tax }))
             expect(product[2]).toEqual(expect.objectContaining({ tax }))
+          })
+
+          it('contains resolved `prices`', () => {
+            const prices = 'US-USD 2233@priceCustomerGroup#priceChannel'
+            expect(product[0]).toEqual(expect.objectContaining({ prices }))
           })
 
           it('contains variants `SKUs`', () => {
@@ -609,6 +627,11 @@ describe('CSV and CLI Tests', () => {
             expect(product[0]).toEqual(expect.objectContaining({ tax }))
             expect(product[1]).toEqual(expect.objectContaining({ tax }))
             expect(product[2]).toEqual(expect.objectContaining({ tax }))
+          })
+
+          it('contains resolved `prices`', () => {
+            const prices = 'US-USD 2233@priceCustomerGroup#priceChannel'
+            expect(product[0]).toEqual(expect.objectContaining({ prices }))
           })
 
           it('contains variants `SKUs`', () => {
