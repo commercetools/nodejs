@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-auth",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Auth module for different authentication flows of commercetools platform API",
   "keywords": [
     "commercetools",
