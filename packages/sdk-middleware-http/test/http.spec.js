@@ -67,9 +67,6 @@ describe('Http', () => {
         expect(res).toEqual({
           ...response,
           statusCode: 200,
-          headers: {
-            'Content-Type': ['application/json'],
-          },
         })
         resolve()
       }
