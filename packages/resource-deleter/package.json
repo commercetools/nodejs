@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/resource-deleter",
-  "version": "0.0.1-dev",
+  "version": "1.0.0",
   "description": "Delete resources from the commercetools platform",
   "main": "lib/main.js",
   "bin": {
