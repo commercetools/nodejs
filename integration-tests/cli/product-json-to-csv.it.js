@@ -79,17 +79,21 @@ describe('CSV and CLI Tests', () => {
       typeId: 'tax-category',
       id: taxCategory[0].body.id,
     }
-
-    const sampleProducts = createProducts(stateRef, taxCategoryRef)
-    sampleProducts[0].masterVariant.prices[0].channel = {
+    const priceChannelRef = {
       typeId: 'channel',
       id: priceChannel[0].body.id,
     }
-    sampleProducts[0].masterVariant.prices[0].customerGroup = {
+    const priceCustomerGroupRef = {
       typeId: 'customer-group',
       id: priceCustomerGroup[0].body.id,
     }
 
+    const sampleProducts = createProducts(
+      stateRef,
+      taxCategoryRef,
+      priceChannelRef,
+      priceCustomerGroupRef
+    )
     await createData(apiConfig, 'products', sampleProducts)
   }, 20000)
 
