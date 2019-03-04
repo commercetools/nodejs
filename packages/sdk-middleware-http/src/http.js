@@ -109,12 +109,21 @@ export default function createHttpMiddleware({
       fetcher(url, fetchOptions).then(
         (res: Response) => {
           if (res.ok) {
+            if (fetchOptions.method === 'HEAD') {
+              next(request, {
+                ...response,
+                statusCode: res.status,
+              })
+              return
+            }
+
             res.json().then((result: Object) => {
               const parsedResponse: Object = {
                 ...response,
                 body: result,
                 statusCode: res.status,
               }
+
               if (includeResponseHeaders)
                 parsedResponse.headers = parseHeaders(res.headers)
 
