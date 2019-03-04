@@ -28,7 +28,7 @@
   "license": "MIT",
   "dependencies": {
     "@commercetools/api-request-builder": "5.0.0",
-    "@commercetools/get-credentials": "2.1.11",
+    "@commercetools/get-credentials": "3.0.2",
     "@commercetools/sdk-client": "1.5.10",
     "@commercetools/sdk-middleware-auth": "4.0.11",
     "@commercetools/sdk-middleware-http": "4.0.10",
