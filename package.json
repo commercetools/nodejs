@@ -84,7 +84,7 @@
     "jest-runner-eslint": "0.7.3",
     "jest-runner-flowtype": "0.0.7",
     "jest-silent-reporter": "0.1.1",
-    "leasot": "7.3.1",
+    "leasot": "7.3.4",
     "lerna": "3.6.0",
     "lint-staged": "8.1.4",
     "npm-check-updates": "2.15.0",
