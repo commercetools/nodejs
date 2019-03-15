@@ -23,6 +23,43 @@ function getApiClient(token) {
   })
 }
 
+function modifiedTokenInfo(tokenInput, unUsedParameter) {
+  const receivedScope = tokenInput.scope
+  let changeScopeToArrayOfObject = '[{'
+  const newScope = receivedScope.split(' ')
+
+  for (let i = 0; i < newScope.length; i++) {
+    const splitScope = newScope[i].split(':')
+    changeScopeToArrayOfObject +=
+      '"' + splitScope[0] + '":"' + splitScope[1] + '",'
+  }
+
+  // This remove the last comma from the object before the closing tag
+  changeScopeToArrayOfObject = changeScopeToArrayOfObject.substr(
+    0,
+    changeScopeToArrayOfObject.length - 1
+  )
+  changeScopeToArrayOfObject += '}]'
+
+  // Convert to JSON
+  const modifiedScope = JSON.parse(changeScopeToArrayOfObject)
+
+  const deleteScopeParams = modifiedScope.map(scopeParams => {
+    if (scopeParams.hasOwnProperty(unUsedParameter))
+      delete scopeParams[unUsedParameter]
+    return scopeParams
+  })
+  const scopeValue = String(JSON.stringify(deleteScopeParams[0]))
+  const redefineScopeValue = scopeValue.split(/ |:|"/)
+  let returnModifiedScope = []
+  const redefinedScope = redefineScopeValue[1] + ':' + redefineScopeValue[4]
+  returnModifiedScope.push(redefinedScope)
+  tokenInput.scope = returnModifiedScope[0]
+  return tokenInput
+}
+
+const ignoredResponseKeys = ['anonymous_id', 'customer_id']
+
 describe('Auth Flows', () => {
   const userEmail = `user+date_is/${Date.now()}@commercetooler.com`
   const userPassword = 'testing4^lks*aJ@ETso+/\\HdE1!x0u4q5'
@@ -70,7 +107,9 @@ describe('Auth Flows', () => {
 
       // check returned properties
       expect(tokenInfo).toHaveProperty('access_token')
-      expect(tokenInfo).toHaveProperty('scope', `manage_project:${projectKey}`)
+      expect(
+        modifiedTokenInfo(tokenInfo, ignoredResponseKeys[0])
+      ).toHaveProperty('scope', `manage_project:${projectKey}`)
       expect(tokenInfo).toHaveProperty('expires_in')
       expect(tokenInfo).toHaveProperty('expires_at')
       expect(tokenInfo).toHaveProperty('refresh_token')
@@ -104,7 +143,9 @@ describe('Auth Flows', () => {
 
       // check returned properties
       expect(tokenInfo).toHaveProperty('access_token')
-      expect(tokenInfo).toHaveProperty('scope', `manage_project:${projectKey}`)
+      expect(
+        modifiedTokenInfo(tokenInfo, ignoredResponseKeys[1])
+      ).toHaveProperty('scope', `manage_project:${projectKey}`)
       expect(tokenInfo).toHaveProperty('expires_in')
       expect(tokenInfo).not.toHaveProperty('refresh_token')
       expect(tokenInfo).toHaveProperty('token_type', 'Bearer')
