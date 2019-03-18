@@ -70,7 +70,9 @@ describe('Auth Flows', () => {
 
       // check returned properties
       expect(tokenInfo).toHaveProperty('access_token')
-      expect(tokenInfo).toHaveProperty('scope', `manage_project:${projectKey}`)
+      expect(tokenInfo.scope).toMatch(
+        `manage_project:${projectKey} anonymous_id`
+      )
       expect(tokenInfo).toHaveProperty('expires_in')
       expect(tokenInfo).toHaveProperty('expires_at')
       expect(tokenInfo).toHaveProperty('refresh_token')
@@ -104,7 +106,9 @@ describe('Auth Flows', () => {
 
       // check returned properties
       expect(tokenInfo).toHaveProperty('access_token')
-      expect(tokenInfo).toHaveProperty('scope', `manage_project:${projectKey}`)
+      expect(tokenInfo.scope).toMatch(
+        `manage_project:${projectKey} customer_id`
+      )
       expect(tokenInfo).toHaveProperty('expires_in')
       expect(tokenInfo).not.toHaveProperty('refresh_token')
       expect(tokenInfo).toHaveProperty('token_type', 'Bearer')
