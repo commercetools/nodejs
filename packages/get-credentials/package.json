@@ -27,6 +27,6 @@
     "sinon": "7.2.6"
   },
   "dependencies": {
-    "dotenv": "^6.2.0"
+    "dotenv": "^7.0.0"
   }
 }
