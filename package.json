@@ -87,7 +87,7 @@
     "leasot": "7.3.4",
     "lerna": "3.6.0",
     "lint-staged": "8.1.5",
-    "npm-check-updates": "3.0.4",
+    "npm-check-updates": "3.1.0",
     "prettier": "1.16.4",
     "resolve": "1.10.0",
     "rimraf": "2.6.3",
