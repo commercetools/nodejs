@@ -110,6 +110,6 @@
   },
   "dependencies": {
     "gitbook-plugin-ga": "^1.0.1",
-    "gitbook-plugin-github": "^2.0.0"
+    "gitbook-plugin-github": "^3.0.0"
   }
 }
