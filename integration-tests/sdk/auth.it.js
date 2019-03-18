@@ -24,37 +24,21 @@ function getApiClient(token) {
 }
 
 function modifiedTokenInfo(tokenInput, unUsedParameter) {
-  const receivedScope = tokenInput.scope
-  let changeScopeToArrayOfObject = '[{'
-  const newScope = receivedScope.split(' ')
+  const scopeDetails = tokenInput.scope
 
-  for (let i = 0; i < newScope.length; i++) {
-    const splitScope = newScope[i].split(':')
-    changeScopeToArrayOfObject +=
-      '"' + splitScope[0] + '":"' + splitScope[1] + '",'
+  let i
+  const newScope = {}
+  const receivedScope = scopeDetails.split(' ')
+  for (i in receivedScope) {
+    receivedScope[i] = receivedScope[i].split(':')
+    newScope[receivedScope[i][0]] = receivedScope[i][1]
   }
+  delete newScope[unUsedParameter]
+  const scopeKey = Object.keys(newScope)
+  const scopeValue = Object.values(newScope)
+  const modifiedScope = scopeKey + ':' + scopeValue
 
-  // This remove the last comma from the object before the closing tag
-  changeScopeToArrayOfObject = changeScopeToArrayOfObject.substr(
-    0,
-    changeScopeToArrayOfObject.length - 1
-  )
-  changeScopeToArrayOfObject += '}]'
-
-  // Convert to JSON
-  const modifiedScope = JSON.parse(changeScopeToArrayOfObject)
-
-  const deleteScopeParams = modifiedScope.map(scopeParams => {
-    if (scopeParams.hasOwnProperty(unUsedParameter))
-      delete scopeParams[unUsedParameter]
-    return scopeParams
-  })
-  const scopeValue = String(JSON.stringify(deleteScopeParams[0]))
-  const redefineScopeValue = scopeValue.split(/ |:|"/)
-  let returnModifiedScope = []
-  const redefinedScope = redefineScopeValue[1] + ':' + redefineScopeValue[4]
-  returnModifiedScope.push(redefinedScope)
-  tokenInput.scope = returnModifiedScope[0]
+  tokenInput.scope = modifiedScope
   return tokenInput
 }
 
