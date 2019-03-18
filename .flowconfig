@@ -59,4 +59,4 @@ emoji=true
 esproposal.optional_chaining=enable
 
 [version]
-0.94.0
+0.95.1
