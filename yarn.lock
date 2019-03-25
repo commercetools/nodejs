@@ -8224,10 +8224,10 @@ npm-cache-filename@~1.0.2:
   resolved "https://registry.yarnpkg.com/npm-cache-filename/-/npm-cache-filename-1.0.2.tgz#ded306c5b0bfc870a9e9faf823bc5f283e05ae11"
   integrity sha1-3tMGxbC/yHCp6fr4I7xfKD4FrhE=
 
-npm-check-updates@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-3.1.0.tgz#045d7f6fa4c8c18201bdb3117c521dac88de2336"
-  integrity sha512-M0Q2tfsSoC5yU7XhAPCINey13lAKVxJygA2uwkJkDalhyCpMTlsUAoMV0oqoFOmLuBkaGe5Zmc7ATfIqFAtBZg==
+npm-check-updates@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-3.1.1.tgz#91af124e69a7598f8c6fe7885c69068d5e2c046b"
+  integrity sha512-xUf4iL28QAMjOkd9eH2CIxt98KMub3Z5BN1rkLMphb3WoGeiRZ4YDs82KmR3Jl5cheeWjJjI+HBXiiGFAxAYuQ==
   dependencies:
     bluebird "^3.5.3"
     chalk "^2.4.2"
@@ -8242,8 +8242,9 @@ npm-check-updates@3.1.0:
     node-alias "^1.0.4"
     package-json "^6.1.0"
     progress "^2.0.3"
-    prompts "^2.0.3"
+    prompts "^2.0.4"
     rc-config-loader "^2.0.2"
+    registry-auth-token "^3.4.0"
     requireg "^0.2.1"
     semver "^5.6.0"
     semver-utils "^1.1.4"
@@ -9437,7 +9438,7 @@ prompts@^0.1.9:
     kleur "^2.0.1"
     sisteransi "^0.1.1"
 
-prompts@^2.0.3:
+prompts@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/prompts/-/prompts-2.0.4.tgz#179f9d4db3128b9933aa35f93a800d8fce76a682"
   integrity sha512-HTzM3UWp/99A0gk51gAegwo1QRYA7xjcZufMNe33rCclFszUYAuHe1fIN/3ZmiHeGPkUsNaRyQm1hHOfM0PKxA==
@@ -9944,6 +9945,14 @@ registry-auth-token@^3.0.1, registry-auth-token@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/registry-auth-token/-/registry-auth-token-3.3.2.tgz#851fd49038eecb586911115af845260eec983f20"
   integrity sha512-JL39c60XlzCVgNrO+qq68FoNb56w/m7JYvGR2jT5iR1xBrUA3Mfx5Twk5rqTThPmQKMWydGmq8oFtDlxfrmxnQ==
+  dependencies:
+    rc "^1.1.6"
+    safe-buffer "^5.0.1"
+
+registry-auth-token@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/registry-auth-token/-/registry-auth-token-3.4.0.tgz#d7446815433f5d5ed6431cd5dca21048f66b397e"
+  integrity sha512-4LM6Fw8eBQdwMYcES4yTnn2TqIasbXuwDx3um+QRs7S55aMKCBKBxvPXl2RiUjHwuJLTyYfxSpmfSAjQpcuP+A==
   dependencies:
     rc "^1.1.6"
     safe-buffer "^5.0.1"
