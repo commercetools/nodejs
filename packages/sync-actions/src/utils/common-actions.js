@@ -95,6 +95,17 @@ export function buildReferenceActions({
 
         if (!newValue) return { action }
 
+        // When the `id` of the object is undefined
+        if (!newValue.id) {
+          return {
+            action,
+            [key]: {
+              typeId: newValue.typeId,
+              key: newValue.key,
+            },
+          }
+        }
+
         return {
           action,
           // We only need to pass a reference to the object.
