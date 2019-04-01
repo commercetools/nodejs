@@ -53,7 +53,7 @@
     "yargs": "^13.0.0"
   },
   "devDependencies": {
-    "sinon": "7.3.0",
+    "sinon": "7.3.1",
     "streamtest": "1.2.4",
     "tmp": "0.0.33"
   }
