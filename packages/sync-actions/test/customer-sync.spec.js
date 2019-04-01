@@ -1,4 +1,3 @@
-import omit from 'lodash.omit'
 import customerSyncFn, { actionGroups } from '../src/customers'
 import { baseActionsList, referenceActionsList } from '../src/customer-actions'
 
@@ -235,7 +234,7 @@ describe('Actions', () => {
     const expected = [
       {
         action: 'setCustomerGroup',
-        customerGroup: omit(now.customerGroup, ['key']),
+        customerGroup: now.customerGroup,
       },
     ]
     expect(actual).toEqual(expected)
