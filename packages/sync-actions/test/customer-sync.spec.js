@@ -1,3 +1,4 @@
+import omit from 'lodash.omit'
 import customerSyncFn, { actionGroups } from '../src/customers'
 import { baseActionsList, referenceActionsList } from '../src/customer-actions'
 
@@ -217,6 +218,24 @@ describe('Actions', () => {
         // CREATE ACTIONS LAST
         action: 'addAddress',
         address: now.addresses[2],
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build `setCustomerGroup` action with key', () => {
+    const before = {}
+    const now = {
+      customerGroup: {
+        typeId: 'customer-group',
+        key: 'foo-customer-group',
+      },
+    }
+    const actual = customerSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'setCustomerGroup',
+        customerGroup: omit(now.customerGroup, ['key']),
       },
     ]
     expect(actual).toEqual(expected)
