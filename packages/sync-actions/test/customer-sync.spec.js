@@ -223,6 +223,24 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
+  test('should build `setCustomerGroup` action with key', () => {
+    const before = {}
+    const now = {
+      customerGroup: {
+        typeId: 'customer-group',
+        key: 'foo-customer-group',
+      },
+    }
+    const actual = customerSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'setCustomerGroup',
+        customerGroup: now.customerGroup,
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
+
   describe('custom fields', () => {
     test('should build `setCustomType` action', () => {
       const before = {
