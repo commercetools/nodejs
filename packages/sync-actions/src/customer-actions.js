@@ -18,6 +18,7 @@ export const baseActionsList = [
   { action: 'setExternalId', key: 'externalId' },
   { action: 'setCompanyName', key: 'companyName' },
   { action: 'setDateOfBirth', key: 'dateOfBirth' },
+  { action: 'setLocale', key: 'locale' },
   { action: 'setVatId', key: 'vatId' },
   {
     action: 'setDefaultBillingAddress',
