@@ -223,6 +223,18 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
+  test('should build `addBillingAddressId` action', () => {
+    const before = { billingAddressIds: [] }
+    const addressId = 'addressId'
+    const now = {
+      billingAddressIds: [addressId],
+    }
+
+    const actual = customerSync.buildActions(now, before)
+    const expected = [{ action: 'addBillingAddressId', addressId }]
+    expect(actual).toEqual(expected)
+  })
+
   test('should build `setCustomerGroup` action with key', () => {
     const before = {}
     const now = {
