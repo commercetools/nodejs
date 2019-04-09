@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/custom-objects-importer",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Import custom objects to the commercetools platform",
   "main": "lib/main.js",
   "scripts": {
@@ -32,7 +32,7 @@
     "@commercetools/sdk-middleware-auth": "^5.0.1",
     "@commercetools/sdk-middleware-http": "^5.1.0",
     "@commercetools/sdk-middleware-user-agent": "^2.0.1",
-    "@commercetools/sync-actions": "^3.0.2",
+    "@commercetools/sync-actions": "^3.1.0",
     "common-tags": "^1.8.0",
     "lodash.compact": "^3.0.1",
     "lodash.isequal": "^4.5.0",
