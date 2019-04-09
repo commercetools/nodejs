@@ -51,6 +51,14 @@ function createCustomerMapActions(
 
     allActions.push(
       mapActionGroup(
+        'billingAddressIds',
+        (): Array<UpdateAction> =>
+          customerActions.actionsMapBillingAddresses(diff, oldObj, newObj)
+      )
+    )
+
+    allActions.push(
+      mapActionGroup(
         'custom',
         (): Array<UpdateAction> => actionsMapCustom(diff, newObj, oldObj)
       )
