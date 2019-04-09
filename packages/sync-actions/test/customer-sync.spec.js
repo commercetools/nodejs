@@ -224,14 +224,26 @@ describe('Actions', () => {
   })
 
   test('should build `addBillingAddressId` action', () => {
-    const before = { billingAddressIds: [] }
     const addressId = 'addressId'
+    const before = { billingAddressIds: [] }
     const now = {
       billingAddressIds: [addressId],
     }
 
     const actual = customerSync.buildActions(now, before)
     const expected = [{ action: 'addBillingAddressId', addressId }]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build `removeBillingAddressId` action', () => {
+    const addressId = 'addressId'
+    const before = {
+      billingAddressIds: [addressId],
+    }
+    const now = { billingAddressIds: [] }
+
+    const actual = customerSync.buildActions(now, before)
+    const expected = [{ action: 'removeBillingAddressId', addressId }]
     expect(actual).toEqual(expected)
   })
 
