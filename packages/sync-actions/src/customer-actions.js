@@ -93,3 +93,17 @@ export function actionsMapBillingAddresses(diff, oldObj, newObj) {
 
   return handler(diff, oldObj, newObj)
 }
+export function actionsMapShippingAddresses(diff, oldObj, newObj) {
+  const handler = createBuildArrayActions('shippingAddressIds', {
+    [ADD_ACTIONS]: newObject => ({
+      action: 'addShippingAddressId',
+      addressId: newObject,
+    }),
+    [REMOVE_ACTIONS]: objectToRemove => ({
+      action: 'removeShippingAddressId',
+      addressId: objectToRemove,
+    }),
+  })
+
+  return handler(diff, oldObj, newObj)
+}
