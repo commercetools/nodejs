@@ -8334,10 +8334,10 @@ npm-cache-filename@~1.0.2:
   resolved "https://registry.yarnpkg.com/npm-cache-filename/-/npm-cache-filename-1.0.2.tgz#ded306c5b0bfc870a9e9faf823bc5f283e05ae11"
   integrity sha1-3tMGxbC/yHCp6fr4I7xfKD4FrhE=
 
-npm-check-updates@3.1.4:
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-3.1.4.tgz#651c1be45e50227aaa02fe97413ecffd4f61b83c"
-  integrity sha512-kiz2Z+Wn5J1JyIZGTcCRLCUVwO+C1l0Mj6c7fKDlXRUxSHOEoUUuQsj+fPLU1htuNNeL7gbM1KbvE1SIGLOgvA==
+npm-check-updates@3.1.7:
+  version "3.1.7"
+  resolved "https://registry.yarnpkg.com/npm-check-updates/-/npm-check-updates-3.1.7.tgz#54ab8cbacbe0c0ddee6228749cbacf4abdc11ffc"
+  integrity sha512-6oN1DPXa7ey5NPuQ7E1CayEBpFW4sLwTo4d6wciqLHcLQ2A6ZcfiBo4zTzQk0EyPAmBsTdyk0ZetetY3BHdoYA==
   dependencies:
     bluebird "^3.5.3"
     chalk "^2.4.2"
