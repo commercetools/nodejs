@@ -109,6 +109,103 @@ describe('Actions', () => {
       })
     })
 
+    test('should not generate changeOrder action when the order did not change', () => {
+      before = {
+        name: 'Product Type',
+        attributes: [
+          { name: 'attr1' },
+          { name: 'attr2' }, // removed
+        ],
+      }
+      now = {
+        name: 'Product Type',
+        attributes: [{ name: 'attr1' }],
+      }
+
+      updateActions = productTypesSync.buildActions(now, before, {
+        nestedValuesChanges: {
+          attributeDefinitions: [
+            {
+              previous: {
+                name: 'attr2',
+              },
+            },
+          ],
+        },
+      })
+
+      expect(updateActions).toEqual([
+        {
+          action: 'removeAttributeDefinition',
+          name: 'attr2',
+        },
+      ])
+    })
+
+    test('should not generate changeOrder action when removing all attributes', () => {
+      before = {
+        name: 'Product Type',
+        attributes: [
+          { name: 'attr1' }, // removed
+        ],
+      }
+      now = {
+        name: 'Product Type',
+      }
+
+      updateActions = productTypesSync.buildActions(now, before, {
+        nestedValuesChanges: {
+          attributeDefinitions: [
+            {
+              previous: {
+                name: 'attr1',
+              },
+            },
+          ],
+        },
+      })
+
+      expect(updateActions).toEqual([
+        {
+          action: 'removeAttributeDefinition',
+          name: 'attr1',
+        },
+      ])
+    })
+
+    test('should not generate changeOrder action when adding first attributes', () => {
+      before = {
+        name: 'Product Type',
+      }
+      now = {
+        name: 'Product Type',
+        attributes: [
+          { name: 'attr1' }, // added
+        ],
+      }
+
+      updateActions = productTypesSync.buildActions(now, before, {
+        nestedValuesChanges: {
+          attributeDefinitions: [
+            {
+              next: {
+                name: 'attr1',
+              },
+            },
+          ],
+        },
+      })
+
+      expect(updateActions).toEqual([
+        {
+          action: 'addAttributeDefinition',
+          attribute: {
+            name: 'attr1',
+          },
+        },
+      ])
+    })
+
     test('should return `changeAttributeOrderByName` update-action', () => {
       before = {
         name: 'Product Type',
