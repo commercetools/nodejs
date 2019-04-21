@@ -256,11 +256,56 @@ const generateUpdateActionsForAttributeEnumValues = (
   ]
 }
 
-export const actionsMapForHints = (nestedValuesChanges = {}) => [
-  ...generateUpdateActionsForAttributeDefinitions(
-    nestedValuesChanges.attributeDefinitions
-  ),
-  ...generateUpdateActionsForAttributeEnumValues(
-    nestedValuesChanges.attributeEnumValues
-  ),
-]
+const generateChangeAttributeOrderAction = (
+  attrsOld = [],
+  attrsNew = [],
+  updateActions = []
+) => {
+  if (!attrsOld.length || !attrsNew.length) return null
+
+  const orderNew = attrsNew.map(attribute => attribute.name)
+
+  const removedAttributeNames = updateActions
+    .filter(action => action.action === 'removeAttributeDefinition')
+    .map(action => action.name)
+
+  const addedAttributeNames = updateActions
+    .filter(action => action.action === 'addAttributeDefinition')
+    .map(action => action.attribute.name)
+
+  // changeAttributeOrder action will be sent to CTP API as the last action so we have to
+  // calculate how the productType will look like after adding/removing attributes
+  const patchedOrderOld = attrsOld
+    .map(attribute => attribute.name)
+    .filter(name => !removedAttributeNames.includes(name))
+    .concat(addedAttributeNames)
+
+  if (orderNew.join(',') !== patchedOrderOld.join(','))
+    return {
+      action: 'changeAttributeOrderByName',
+      attributeNames: orderNew,
+    }
+
+  return null
+}
+
+export const actionsMapForHints = (nestedValuesChanges = {}, ptOld, ptNew) => {
+  const updateActions = [
+    ...generateUpdateActionsForAttributeDefinitions(
+      nestedValuesChanges.attributeDefinitions
+    ),
+    ...generateUpdateActionsForAttributeEnumValues(
+      nestedValuesChanges.attributeEnumValues
+    ),
+  ]
+
+  const changeAttributeOrderAction = generateChangeAttributeOrderAction(
+    ptOld.attributes,
+    ptNew.attributes,
+    updateActions
+  )
+
+  if (changeAttributeOrderAction) updateActions.push(changeAttributeOrderAction)
+
+  return updateActions
+}

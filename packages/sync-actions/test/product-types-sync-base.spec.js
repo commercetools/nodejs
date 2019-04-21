@@ -5,7 +5,7 @@ import {
   generateBaseFieldsUpdateActions,
 } from '../src/product-types-actions'
 
-describe('Exports', () => {
+describe('ProductTypes sync', () => {
   test('action group list', () => {
     expect(actionGroups).toEqual(['base'])
   })
@@ -38,9 +38,11 @@ describe('Actions', () => {
         name: 'Sneakers',
         key: 'unique-key-2',
       }
-      productTypesSync.buildActions(now, before)
-      expect(before).toEqual(clone(before))
-      expect(now).toEqual(clone(now))
+      const beforeClone = clone(before)
+      const nowClone = clone(now)
+      productTypesSync.buildActions(nowClone, beforeClone)
+      expect(before).toEqual(beforeClone)
+      expect(now).toEqual(nowClone)
     })
   })
   describe('with name change', () => {
@@ -96,6 +98,85 @@ describe('Actions', () => {
         {
           action: 'changeDescription',
           description: 'kicks-description',
+        },
+      ])
+    })
+  })
+  describe('with attribute order change', () => {
+    beforeEach(() => {
+      productTypesSync = createSyncProductTypes(undefined, {
+        withHints: true,
+      })
+    })
+
+    test('should return `changeAttributeOrderByName` update-action', () => {
+      before = {
+        name: 'Product Type',
+        attributes: [{ name: 'color' }, { name: 'material' }],
+      }
+      now = {
+        name: 'Product Type',
+        attributes: [{ name: 'material' }, { name: 'color' }],
+      }
+
+      updateActions = productTypesSync.buildActions(now, before)
+      expect(updateActions).toEqual([
+        {
+          action: 'changeAttributeOrderByName',
+          attributeNames: ['material', 'color'],
+        },
+      ])
+    })
+
+    test('should remove, add and change order of attributes', () => {
+      before = {
+        name: 'Product Type',
+        attributes: [
+          { name: 'attr1' },
+          { name: 'attr2' }, // removed
+          { name: 'attr3' },
+        ],
+      }
+      now = {
+        name: 'Product Type',
+        attributes: [
+          { name: 'attr3' },
+          { name: 'attr4' }, // added
+          { name: 'attr1' },
+        ],
+      }
+
+      updateActions = productTypesSync.buildActions(now, before, {
+        nestedValuesChanges: {
+          attributeDefinitions: [
+            {
+              previous: {
+                name: 'attr2',
+              },
+            },
+            {
+              next: {
+                name: 'attr4',
+              },
+            },
+          ],
+        },
+      })
+
+      expect(updateActions).toEqual([
+        {
+          action: 'removeAttributeDefinition',
+          name: 'attr2',
+        },
+        {
+          action: 'addAttributeDefinition',
+          attribute: {
+            name: 'attr4',
+          },
+        },
+        {
+          action: 'changeAttributeOrderByName',
+          attributeNames: ['attr3', 'attr4', 'attr1'],
         },
       ])
     })
