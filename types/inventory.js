@@ -18,6 +18,7 @@ export type Inventory = {
 }
 
 export type ExportConfig = {
+  headerFields: Array<string> | null,
   format: string,
   delimiter: string,
   channelKey?: string,

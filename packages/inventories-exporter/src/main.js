@@ -35,6 +35,7 @@ export default class InventoryExporter {
     apiConfig: ApiConfigOptions,
     logger: LoggerOptions,
     exportConfig: ExportConfig = {
+      headerFields: null,
       format: CONS.standardOption.format,
       delimiter: CONS.standardOption.delimiter,
     },
@@ -80,7 +81,16 @@ export default class InventoryExporter {
       const csvStream = csv.createWriteStream(csvOptions).transform(
         (row: Inventory): Object => {
           this.logger.verbose(`transforming row ${JSON.stringify(row)}`)
-          return InventoryExporter.inventoryMappings(row)
+
+          let mappedRow = InventoryExporter.inventoryMappings(row)
+          if (this.exportConfig.headerFields) {
+            mappedRow = InventoryExporter.applyHeaderFieldsOnRow(
+              mappedRow,
+              this.exportConfig.headerFields
+            )
+          }
+
+          return mappedRow
         }
       )
       csvStream.pipe(outputStream)
@@ -171,6 +181,29 @@ export default class InventoryExporter {
     InventoryExporter._writeEachInventory(outputStream, inventories)
     return Promise.resolve()
   }
+
+  static applyHeaderFieldsOnRow(
+    row: CsvInventoryMapping,
+    headerFields: Array<string>
+  ): CsvInventoryMapping {
+    const result = {}
+
+    // remove fields which are not in requested headers fields
+    Object.keys(row).forEach((header: string) => {
+      if (headerFields.includes(header)) {
+        result[header] = row[header]
+      }
+    })
+
+    // ensure missing header fields
+    headerFields.forEach((header: string) => {
+      if (typeof row[header] === 'undefined') {
+        result[header] = ''
+      }
+    })
+    return result
+  }
+
   // map to format acceptable by csv especially for import
   static inventoryMappings(row: Inventory): CsvInventoryMapping {
     const result: CsvInventoryMapping = {
