@@ -212,6 +212,145 @@ describe('InventoryExporter', () => {
 
       inventoryExporter.run(outputStream)
     })
+
+    test('should export inventories to CSV with custom fields', done => {
+      inventoryExporter.exportConfig.format = 'csv'
+      const sampleInventory = {
+        sku: 'hello',
+        quantityOnStock: 'me',
+        restockableInDays: 4,
+        custom: {
+          type: {
+            obj: {
+              key: 'customKey',
+            },
+          },
+          fields: {
+            textField: 'customText',
+            numberField: 123,
+          },
+        },
+      }
+      const spy = jest
+        .spyOn(inventoryExporter, '_fetchInventories')
+        .mockImplementation(csvStream => {
+          csvStream.write(sampleInventory)
+          return Promise.resolve()
+        })
+      const outputStream = streamtest.v2.toText((error, result) => {
+        console.log(error, result)
+        const expectedResult = stripIndent`
+          sku,quantityOnStock,restockableInDays,customType,customField.textField,customField.numberField,createdAt,lastModifiedAt
+          hello,me,4,customKey,customText,123,,
+        `
+        expect(result).toEqual(expectedResult)
+        spy.mockRestore()
+        done()
+      })
+
+      inventoryExporter.run(outputStream)
+    })
+
+    test('should not export inventories with custom fields on second inventory when no template is given', done => {
+      inventoryExporter.exportConfig.format = 'csv'
+      const sampleInventoryWithoutCustomField = {
+        sku: 'inv2',
+        quantityOnStock: 333,
+        restockableInDays: 4,
+      }
+      const sampleInventoryWithCustomField = {
+        sku: 'inv1',
+        quantityOnStock: 123,
+        restockableInDays: 4,
+        custom: {
+          type: {
+            obj: {
+              key: 'customKey',
+            },
+          },
+          fields: {
+            textField: 'customText',
+            numberField: 123,
+          },
+        },
+      }
+      const spy = jest
+        .spyOn(inventoryExporter, '_fetchInventories')
+        .mockImplementation(csvStream => {
+          csvStream.write(sampleInventoryWithoutCustomField)
+          csvStream.write(sampleInventoryWithCustomField)
+          return Promise.resolve()
+        })
+
+      const outputStream = streamtest.v2.toText((error, result) => {
+        const expectedResult = stripIndent`
+          sku,quantityOnStock,restockableInDays,createdAt,lastModifiedAt
+          inv2,333,4,,
+          inv1,123,4,,
+        `
+        expect(result).toEqual(expectedResult)
+        spy.mockRestore()
+        done()
+      })
+
+      inventoryExporter.run(outputStream)
+    })
+
+    test('should export inventories with custom fields on second inventory when provided template', done => {
+      const headerFields = [
+        'sku',
+        'quantityOnStock',
+        'restockableInDays',
+        'customType',
+        'customField.textField',
+        'customField.numberField',
+      ]
+      inventoryExporter = new InventoryExporter(apiConfig, logger)
+      inventoryExporter.exportConfig.headerFields = headerFields
+      inventoryExporter.exportConfig.format = 'csv'
+
+      const sampleInventoryWithoutCustomField = {
+        sku: 'inv2',
+        quantityOnStock: 333,
+        restockableInDays: 4,
+      }
+      const sampleInventoryWithCustomField = {
+        sku: 'inv1',
+        quantityOnStock: 123,
+        restockableInDays: 4,
+        custom: {
+          type: {
+            obj: {
+              key: 'customKey',
+            },
+          },
+          fields: {
+            textField: 'customText',
+            numberField: 123,
+          },
+        },
+      }
+      const spy = jest
+        .spyOn(inventoryExporter, '_fetchInventories')
+        .mockImplementation(csvStream => {
+          csvStream.write(sampleInventoryWithoutCustomField)
+          csvStream.write(sampleInventoryWithCustomField)
+          return Promise.resolve()
+        })
+
+      const outputStream = streamtest.v2.toText((error, result) => {
+        const expectedResult = stripIndent`
+          sku,quantityOnStock,restockableInDays,customType,customField.textField,customField.numberField
+          inv2,333,4,,,
+          inv1,123,4,customKey,customText,123
+        `
+        expect(result).toEqual(expectedResult)
+        spy.mockRestore()
+        done()
+      })
+
+      inventoryExporter.run(outputStream)
+    })
   })
   describe('::_writeEachInventory', () => {
     test('should loop over inventories and write to stream', () => {
