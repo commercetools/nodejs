@@ -74,12 +74,16 @@ can be used with channelKey flag
       'Path to a CSV template file with headers which should be exported.',
   })
   .coerce('template', arg => {
-    if (fs.existsSync(arg)) {
-      if (arg.match(/\.csv$/i)) return fs.createReadStream(String(arg))
+    const filePath = String(arg)
 
-      throw new Error('Invalid file format. Must be CSV file')
+    if (fs.existsSync(arg)) {
+      if (arg.match(/\.csv$/i)) return fs.createReadStream(filePath)
+
+      throw new Error('Invalid file format of a CSV template. Must be CSV file')
     }
-    throw new Error('File cannot be reached or does not exist')
+    throw new Error(
+      `CSV template file cannot be reached or does not exist on path "${filePath}"`
+    )
   })
   .option('logLevel', {
     default: 'info',
@@ -102,14 +106,18 @@ const getHeaders = _args =>
     let isFirstRow = true
     csv
       .fromStream(_args.template, {
-        headers: true,
         delimiter: _args.delimiter,
       })
       .on('data', function(data) {
-        _args.template.destroy()
         if (isFirstRow) {
           resolve(data)
           isFirstRow = false
+        }
+        _args.template.destroy()
+      })
+      .on('end', function() {
+        if (isFirstRow) {
+          reject(new Error('Template file does not contain any header row'))
         }
       })
       .on('error', reject)
