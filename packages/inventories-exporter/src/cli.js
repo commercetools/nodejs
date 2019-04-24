@@ -3,7 +3,7 @@ import { getCredentials } from '@commercetools/get-credentials'
 import npmlog from 'npmlog'
 import PrettyError from 'pretty-error'
 import yargs from 'yargs'
-
+import csv from 'fast-csv'
 import CONSTANTS from './constants'
 import InventoryExporter from './main'
 import { description } from '../package.json'
@@ -68,6 +68,23 @@ can be used with channelKey flag
     choices: ['csv', 'json'],
     default: CONSTANTS.standardOption.format,
   })
+  .option('template', {
+    alias: 't',
+    describe:
+      'Path to a CSV template file with headers which should be exported.',
+  })
+  .coerce('template', arg => {
+    const filePath = String(arg)
+
+    if (fs.existsSync(arg)) {
+      if (arg.match(/\.csv$/i)) return fs.createReadStream(filePath)
+
+      throw new Error('Invalid file format of a CSV template. Must be CSV file')
+    }
+    throw new Error(
+      `CSV template file cannot be reached or does not exist on path "${filePath}"`
+    )
+  })
   .option('logLevel', {
     default: 'info',
     describe: 'Logging level: error, warn, info or verbose.',
@@ -79,6 +96,32 @@ can be used with channelKey flag
   .coerce('logLevel', arg => {
     npmlog.level = arg
   }).argv
+
+// Retrieve the headers from the template file
+// Only the first line of the file is read
+const getHeaders = _args =>
+  new Promise((resolve, reject) => {
+    if (!_args.template) resolve(null)
+
+    let isFirstRow = true
+    csv
+      .fromStream(_args.template, {
+        delimiter: _args.delimiter,
+      })
+      .on('data', function(data) {
+        if (isFirstRow) {
+          resolve(data)
+          isFirstRow = false
+        }
+        _args.template.destroy()
+      })
+      .on('end', function() {
+        if (isFirstRow) {
+          reject(new Error('Template file does not contain any header row'))
+        }
+      })
+      .on('error', reject)
+  })
 
 const logError = error => {
   const errorFormatter = new PrettyError()
@@ -108,8 +151,8 @@ else npmlog.stream = process.stdout // npmlog streams to stderr by default
 // Register error listener
 args.outputFile.on('error', errorHandler)
 
-resolveCredentials(args)
-  .then(credentials => {
+Promise.all([getHeaders(args), resolveCredentials(args)])
+  .then(([headerFields, credentials]) => {
     npmlog.verbose('CLI:', 'fetched credentials')
     const apiConfig = {
       host: args.authUrl,
@@ -125,6 +168,7 @@ resolveCredentials(args)
       verbose: npmlog.verbose.bind(this, ''),
     }
     const exportConfig = {
+      headerFields,
       delimiter: args.delimiter,
       format: args.format,
       channelKey: args.channelKey,

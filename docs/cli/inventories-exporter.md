@@ -46,6 +46,8 @@ Options:
                     https://docs.commercetools.com/http-api-projects-inventory.html#query-inventory
                     can be used with channelKey flag
 
+  --template, -t    Path to a CSV template file with headers which should be
+                    exported.
   --format, -f      Format for export [choices: "csv", "json"] [default: "json"]
   --logLevel        Logging level: error, warn, info or verbose.
                                                                [default: "info"]
@@ -78,6 +80,7 @@ const logger = {
   verbose: console.debug,
 }
 const exportConfig = {
+  headerFields: null, // can contain an array of header fields which should be exported
   delimiter: ',',
   format: 'csv,
   queryString: 'description="new stocks"',
