@@ -263,7 +263,7 @@ const generateChangeAttributeOrderAction = (
 ) => {
   if (!attrsOld.length || !attrsNew.length) return null
 
-  const orderNew = attrsNew.map(attribute => attribute.name)
+  const newAttributesOrder = attrsNew.map(attribute => attribute.name)
 
   const removedAttributeNames = updateActions
     .filter(action => action.action === 'removeAttributeDefinition')
@@ -275,15 +275,15 @@ const generateChangeAttributeOrderAction = (
 
   // changeAttributeOrder action will be sent to CTP API as the last action so we have to
   // calculate how the productType will look like after adding/removing attributes
-  const patchedOrderOld = attrsOld
+  const patchedOldAttributesOrder = attrsOld
     .map(attribute => attribute.name)
     .filter(name => !removedAttributeNames.includes(name))
     .concat(addedAttributeNames)
 
-  if (orderNew.join(',') !== patchedOrderOld.join(','))
+  if (newAttributesOrder.join(',') !== patchedOldAttributesOrder.join(','))
     return {
       action: 'changeAttributeOrderByName',
-      attributeNames: orderNew,
+      attributeNames: newAttributesOrder,
     }
 
   return null
