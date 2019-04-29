@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/category-exporter",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "publishConfig": {
     "access": "public"
   },
@@ -33,14 +33,14 @@
   "license": "MIT",
   "dependencies": {
     "@commercetools/api-request-builder": "^5.0.0",
-    "@commercetools/get-credentials": "^3.0.4",
+    "@commercetools/get-credentials": "^3.0.5",
     "@commercetools/sdk-client": "^2.0.0",
     "@commercetools/sdk-middleware-auth": "^5.0.1",
     "@commercetools/sdk-middleware-http": "^5.1.0",
     "@commercetools/sdk-middleware-user-agent": "^2.0.1",
     "node-fetch": "^2.3.0",
     "pino": "^5.11.1",
-    "pino-pretty": "^2.5.0",
+    "pino-pretty": "^3.0.0",
     "pretty-error": "^2.1.1",
     "yargs": "^13.0.0"
   },
