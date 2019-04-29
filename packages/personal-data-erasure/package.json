@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/personal-data-erasure",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Export and delete all data related to a single customer",
   "main": "lib/main.js",
   "bin": {
@@ -33,7 +33,7 @@
     "@commercetools/get-credentials": "^3.0.5",
     "@commercetools/sdk-client": "^2.0.0",
     "@commercetools/sdk-middleware-auth": "^5.0.1",
-    "@commercetools/sdk-middleware-http": "^5.1.0",
+    "@commercetools/sdk-middleware-http": "^5.1.1",
     "@commercetools/sdk-middleware-user-agent": "^2.0.1",
     "lodash.flatten": "^4.4.0",
     "node-fetch": "^2.3.0",

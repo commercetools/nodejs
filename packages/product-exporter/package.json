@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/product-exporter",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "Exports products from the commercetools platform",
   "keywords": [
     "commercetools",
@@ -36,7 +36,7 @@
     "@commercetools/get-credentials": "^3.0.5",
     "@commercetools/sdk-client": "^2.0.0",
     "@commercetools/sdk-middleware-auth": "^5.0.1",
-    "@commercetools/sdk-middleware-http": "^5.1.0",
+    "@commercetools/sdk-middleware-http": "^5.1.1",
     "@commercetools/sdk-middleware-user-agent": "^2.0.1",
     "JSONStream": "^1.3.5",
     "node-fetch": "^2.3.0",
