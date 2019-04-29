@@ -44,7 +44,11 @@ function createProductTypeMapActions(
             syncActionConfig
           )
       ),
-      productTypeActions.actionsMapForHints(options.nestedValuesChanges),
+      productTypeActions.actionsMapForHints(
+        options.nestedValuesChanges,
+        previous,
+        next
+      ),
     ])
   }
 }
