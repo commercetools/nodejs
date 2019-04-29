@@ -34,7 +34,7 @@
     "@commercetools/sdk-middleware-http": "^5.1.0",
     "@commercetools/sdk-middleware-queue": "2.0.0",
     "@commercetools/sdk-middleware-user-agent": "2.0.1",
-    "node-fetch": "2.2.0",
+    "node-fetch": "2.4.1",
     "pino": "5.12.2",
     "pretty-error": "2.1.1",
     "prompts": "2.0.4",
