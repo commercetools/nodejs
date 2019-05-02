@@ -43,6 +43,7 @@ export default class CategoryExporter {
         }),
         createHttpMiddleware({
           host: this.apiConfig.apiUrl,
+          enableRetry: true,
           fetch,
         }),
       ],

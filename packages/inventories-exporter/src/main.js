@@ -58,6 +58,7 @@ export default class InventoryExporter {
         }),
         createHttpMiddleware({
           host: apiConfig.apiUrl,
+          enableRetry: true,
           fetch,
         }),
       ],
