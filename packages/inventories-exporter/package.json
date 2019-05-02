@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/inventories-exporter",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Exports inventories from the commercetools platform.",
   "keywords": [
     "commercetools",

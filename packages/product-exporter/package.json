@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/product-exporter",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Exports products from the commercetools platform",
   "keywords": [
     "commercetools",
