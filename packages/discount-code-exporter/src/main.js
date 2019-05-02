@@ -54,6 +54,7 @@ export default class DiscountCodeExport {
         }),
         createHttpMiddleware({
           host: this.apiConfig.apiUrl,
+          enableRetry: true,
           fetch,
         }),
       ],

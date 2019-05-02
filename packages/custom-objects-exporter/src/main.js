@@ -44,6 +44,7 @@ export default class CustomObjectsExporter {
         }),
         createHttpMiddleware({
           host: this.apiConfig.apiUrl,
+          enableRetry: true,
           fetch,
         }),
       ],
