@@ -14,7 +14,7 @@ The constructor accepts two arguments:
   - `delimiter` (String): CSV delimiter (Optional. Default: `','`)
   - `multiValueDelimiter` (String): CSV delimiter used in multivalue fields (Optional. Default: `';'`)
   - `exportFormat` (String): Export format ['csv', 'json'] (Optional. Default: 'json')
-  - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates) (Optional)
+  - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api-query-predicates) (Optional)
   - `fields` (Array<String>): An array of column names the exported CSV file should contain. This fields array should contain the required columns of the CSV file (Optional. If omitted, a default set of column fields is used. Currently, these fields are: `name`, `description`, `code`, `cartDiscounts`,`cartPredicate`,`groups`,`isActive`,`validFrom`,`validUntil`,`references`,`maxApplications`,`maxApplicationsPerCustomer`.
     The localised fields (`name` and `description` default to the language specified in the `language` value above.
     This is synonymous with the `--template` flag in the CLI)
@@ -66,7 +66,7 @@ Options:
   - If no output path is specified, the exported codes will be logged to the standard output as a result, status reports will be logged to a `discount-code-export.log` file in the current directory.
 - The `--delimiter` flag specifies the delimiter used in the output file if CSV. Defaults to `','` if omitted.
 - The `--multiValueDelimiter` flag specifies the delimiter for multiValue cells in the output file if CSV. Defaults to `';'` if omitted.
-- The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates)
+- The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/http-api-query-predicates)
 
 ### JS
 

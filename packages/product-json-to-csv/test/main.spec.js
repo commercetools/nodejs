@@ -184,6 +184,9 @@ describe('ProductJsonToCsv', () => {
               channel: {
                 id: '123',
               },
+              customerGroup: {
+                id: '123',
+              },
             },
             {
               country: 'GB',
@@ -192,6 +195,9 @@ describe('ProductJsonToCsv', () => {
                 centAmount: 1023,
               },
               channel: {
+                id: '456',
+              },
+              customerGroup: {
                 id: '456',
               },
             },
@@ -209,6 +215,9 @@ describe('ProductJsonToCsv', () => {
                 centAmount: 9383,
               },
               channel: {
+                id: 'unknown',
+              },
+              customerGroup: {
                 id: 'unknown',
               },
             },
@@ -241,6 +250,10 @@ describe('ProductJsonToCsv', () => {
           '123': { id: '123', key: 'channel123' },
           '456': { id: '456', key: 'channel456' },
         }
+        const customerGroupsById = {
+          '123': { id: '123', key: 'customerGroup123' },
+          '456': { id: '456', key: 'customerGroup456' },
+        }
         const categoryOrderHints = {
           'res-cat-name-1': '0.015',
           'res-cat-name-2': '0.987',
@@ -249,12 +262,14 @@ describe('ProductJsonToCsv', () => {
         productJsonToCsv._resolveProductType = jest.fn(() => ({ productType }))
         productJsonToCsv._resolveTaxCategory = jest.fn(() => ({ taxCategory }))
         productJsonToCsv._resolveState = jest.fn(() => ({ state }))
-        productJsonToCsv._getChannelsById = jest.fn(() => ({ channelsById }))
         productJsonToCsv._resolveCategories = jest.fn(() => ({ categories }))
         productJsonToCsv._resolveCategoryOrderHints = jest.fn(() => ({
           categoryOrderHints,
         }))
         productJsonToCsv._getChannelsById = jest.fn(() => channelsById)
+        productJsonToCsv._getCustomerGroupsById = jest.fn(
+          () => customerGroupsById
+        )
       })
 
       test('should pass the products to all resolver functions', async () => {
@@ -291,6 +306,11 @@ describe('ProductJsonToCsv', () => {
           sampleProduct.masterVariant.prices
         )
         expect(productJsonToCsv._getChannelsById).toHaveBeenCalledWith([
+          '123',
+          '456',
+          'unknown',
+        ])
+        expect(productJsonToCsv._getCustomerGroupsById).toHaveBeenCalledWith([
           '123',
           '456',
           'unknown',
@@ -333,6 +353,10 @@ describe('ProductJsonToCsv', () => {
                   id: '123',
                   key: 'channel123',
                 },
+                customerGroup: {
+                  id: '123',
+                  key: 'customerGroup123',
+                },
               },
               {
                 country: 'GB',
@@ -343,6 +367,10 @@ describe('ProductJsonToCsv', () => {
                 channel: {
                   id: '456',
                   key: 'channel456',
+                },
+                customerGroup: {
+                  id: '456',
+                  key: 'customerGroup456',
                 },
               },
               {
@@ -359,6 +387,9 @@ describe('ProductJsonToCsv', () => {
                   centAmount: 9383,
                 },
                 channel: {
+                  id: 'unknown',
+                },
+                customerGroup: {
                   id: 'unknown',
                 },
               },
@@ -510,6 +541,45 @@ describe('ProductJsonToCsv', () => {
                 centAmount: 4995,
               },
               channel: {
+                id: 'uuid',
+                name: 'resolved-name',
+                key: 'resolved-key',
+              },
+            },
+          ],
+        })
+      })
+
+      test('resolve variant with prices with customerGroups', async () => {
+        const sampleVariant = {
+          key: 'variantKey',
+          prices: [
+            {
+              value: {
+                currencyCode: 'EUR',
+                centAmount: 4995,
+              },
+              customerGroup: {
+                typeId: 'customerGroup',
+                id: 'uuid',
+              },
+            },
+          ],
+          attributes: [],
+        }
+
+        expect(
+          await productJsonToCsv._resolveVariantReferences(sampleVariant)
+        ).toEqual({
+          key: 'variantKey',
+          attributes: [],
+          prices: [
+            {
+              value: {
+                currencyCode: 'EUR',
+                centAmount: 4995,
+              },
+              customerGroup: {
                 id: 'uuid',
                 name: 'resolved-name',
                 key: 'resolved-key',
@@ -902,6 +972,49 @@ describe('ProductJsonToCsv', () => {
 
       // should not call fetchReferences again as it was already cached
       await productJsonToCsv._getChannelsById(['channel-id'])
+      expect(productJsonToCsv.fetchReferences).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('::fetchCustomerGroups', () => {
+    beforeEach(() => {
+      productJsonToCsv.fetchReferences = jest
+        .fn()
+        .mockImplementationOnce(() =>
+          Promise.resolve({
+            body: {
+              results: [
+                {
+                  id: 'customerGroup-id',
+                  key: 'customerGroup-key',
+                },
+              ],
+            },
+          })
+        )
+        .mockImplementation(() =>
+          Promise.reject(new Error('I should not be called'))
+        )
+    })
+
+    test('should fetch and cache customerGroup from API', async () => {
+      const res = await productJsonToCsv._getCustomerGroupsById([
+        'customerGroup-id',
+      ])
+
+      expect(res).toEqual({
+        'customerGroup-id': {
+          id: 'customerGroup-id',
+          key: 'customerGroup-key',
+        },
+      })
+      expect(productJsonToCsv.fetchReferences).toHaveBeenCalledWith(
+        '/project-key/customer-groups?where=id%20in%20(%22customerGroup-id%22)'
+      )
+      expect(productJsonToCsv.fetchReferences).toHaveBeenCalledTimes(1)
+
+      // should not call fetchReferences again as it was already cached
+      await productJsonToCsv._getCustomerGroupsById(['customerGroup-id'])
       expect(productJsonToCsv.fetchReferences).toHaveBeenCalledTimes(1)
     })
   })

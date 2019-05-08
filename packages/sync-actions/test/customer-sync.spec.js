@@ -17,6 +17,7 @@ describe('Exports', () => {
       { action: 'setExternalId', key: 'externalId' },
       { action: 'setCompanyName', key: 'companyName' },
       { action: 'setDateOfBirth', key: 'dateOfBirth' },
+      { action: 'setLocale', key: 'locale' },
       { action: 'setVatId', key: 'vatId' },
       {
         action: 'setDefaultBillingAddress',
@@ -217,6 +218,123 @@ describe('Actions', () => {
         // CREATE ACTIONS LAST
         action: 'addAddress',
         address: now.addresses[2],
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build `addBillingAddressId` action', () => {
+    const addressId = 'addressId'
+    const before = { billingAddressIds: [] }
+    const now = {
+      billingAddressIds: [addressId],
+    }
+
+    const actual = customerSync.buildActions(now, before)
+    const expected = [{ action: 'addBillingAddressId', addressId }]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build `removeBillingAddressId` action', () => {
+    const addressId = 'addressId'
+    const before = {
+      billingAddressIds: [addressId],
+    }
+    const now = { billingAddressIds: [] }
+
+    const actual = customerSync.buildActions(now, before)
+    const expected = [{ action: 'removeBillingAddressId', addressId }]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build both `add-` and `removeBillingAddressId` actions', () => {
+    const before = {
+      billingAddressIds: ['remove', 'keep', 'remove2'],
+    }
+    const now = {
+      billingAddressIds: ['keep', 'new'],
+    }
+
+    const actual = customerSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'removeBillingAddressId',
+        addressId: 'remove',
+      },
+      {
+        action: 'removeBillingAddressId',
+        addressId: 'remove2',
+      },
+      {
+        action: 'addBillingAddressId',
+        addressId: 'new',
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
+  test('should build `addShippingAddressId` action', () => {
+    const addressId = 'addressId'
+    const before = { shippingAddressIds: [] }
+    const now = {
+      shippingAddressIds: [addressId],
+    }
+
+    const actual = customerSync.buildActions(now, before)
+    const expected = [{ action: 'addShippingAddressId', addressId }]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build `removeShippingAddressId` action', () => {
+    const addressId = 'addressId'
+    const before = {
+      shippingAddressIds: [addressId],
+    }
+    const now = { shippingAddressIds: [] }
+
+    const actual = customerSync.buildActions(now, before)
+    const expected = [{ action: 'removeShippingAddressId', addressId }]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build both `add-` and `removeShippingAddressId` actions', () => {
+    const before = {
+      shippingAddressIds: ['remove', 'keep', 'remove2'],
+    }
+    const now = {
+      shippingAddressIds: ['keep', 'new'],
+    }
+
+    const actual = customerSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'removeShippingAddressId',
+        addressId: 'remove',
+      },
+      {
+        action: 'removeShippingAddressId',
+        addressId: 'remove2',
+      },
+      {
+        action: 'addShippingAddressId',
+        addressId: 'new',
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build `setCustomerGroup` action with key', () => {
+    const before = {}
+    const now = {
+      customerGroup: {
+        typeId: 'customer-group',
+        key: 'foo-customer-group',
+      },
+    }
+    const actual = customerSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'setCustomerGroup',
+        customerGroup: now.customerGroup,
       },
     ]
     expect(actual).toEqual(expected)

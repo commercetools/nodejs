@@ -49,6 +49,7 @@ export default class PriceExporter {
         }),
         createHttpMiddleware({
           host: this.apiConfig.apiUrl,
+          enableRetry: true,
           fetch,
         }),
       ],

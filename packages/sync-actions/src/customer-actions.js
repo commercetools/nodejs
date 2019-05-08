@@ -18,6 +18,7 @@ export const baseActionsList = [
   { action: 'setExternalId', key: 'externalId' },
   { action: 'setCompanyName', key: 'companyName' },
   { action: 'setDateOfBirth', key: 'dateOfBirth' },
+  { action: 'setLocale', key: 'locale' },
   { action: 'setVatId', key: 'vatId' },
   {
     action: 'setDefaultBillingAddress',
@@ -72,6 +73,35 @@ export function actionsMapAddresses(diff, oldObj, newObj) {
       action: 'changeAddress',
       addressId: oldObject.id,
       address: updatedObject,
+    }),
+  })
+
+  return handler(diff, oldObj, newObj)
+}
+
+export function actionsMapBillingAddresses(diff, oldObj, newObj) {
+  const handler = createBuildArrayActions('billingAddressIds', {
+    [ADD_ACTIONS]: addressId => ({
+      action: 'addBillingAddressId',
+      addressId,
+    }),
+    [REMOVE_ACTIONS]: addressId => ({
+      action: 'removeBillingAddressId',
+      addressId,
+    }),
+  })
+
+  return handler(diff, oldObj, newObj)
+}
+export function actionsMapShippingAddresses(diff, oldObj, newObj) {
+  const handler = createBuildArrayActions('shippingAddressIds', {
+    [ADD_ACTIONS]: addressId => ({
+      action: 'addShippingAddressId',
+      addressId,
+    }),
+    [REMOVE_ACTIONS]: addressId => ({
+      action: 'removeShippingAddressId',
+      addressId,
     }),
   })
 

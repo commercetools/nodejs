@@ -2,17 +2,18 @@
 import type {
   ApiConfigOptions,
   Category,
+  Channel,
+  CustomerGroup,
   LoggerOptions,
   ParserConfigOptions,
+  Price,
   ProductProjection,
   ProductType,
   ResolvedProductProjection,
   State,
-  Price,
-  Channel,
   TaxCategory,
-  Variant,
   TypeReference,
+  Variant,
 } from 'types/product'
 import type { Client, ClientRequest, SuccessResult } from 'types/sdk'
 
@@ -36,6 +37,7 @@ export default class ProductJsonToCsv {
   apiConfig: ApiConfigOptions
   categoriesCache: Object
   channelsCache: Object
+  customerGroupsCache: Object
   client: Client
   parserConfig: ParserConfigOptions
   logger: LoggerOptions
@@ -89,6 +91,7 @@ export default class ProductJsonToCsv {
     }
     this.categoriesCache = {}
     this.channelsCache = {}
+    this.customerGroupsCache = {}
     this.accessToken = accessToken
 
     const mappingParams = {
@@ -210,20 +213,37 @@ export default class ProductJsonToCsv {
     const channelIds: Array<string> = prices
       .map((price: Price) => get(price, 'channel.id'))
       .filter(Boolean)
+    const customerGroupIds: Array<string> = prices
+      .map((price: Price) => get(price, 'customerGroup.id'))
+      .filter(Boolean)
 
-    if (!channelIds.length) return prices
+    if (!channelIds.length && !customerGroupIds.length) return prices
 
     // resolve channels by their ids
     const channelsById: Object = await this._getChannelsById(channelIds)
-    // add channel objects to prices
+    // resolve customerGroups by their ids
+    const customerGroupsById: Object = await this._getCustomerGroupsById(
+      customerGroupIds
+    )
+    // add channel and customerGroup objects to prices
     return prices.map(
-      (price: Price): Price =>
-        price.channel && channelsById[price.channel.id]
-          ? {
-              ...price,
-              channel: channelsById[price.channel.id],
-            }
-          : price
+      (price: Price): Price => {
+        let resolvedPrice
+        if (price.channel && channelsById[price.channel.id]) {
+          resolvedPrice = {
+            ...price,
+            channel: channelsById[price.channel.id],
+          }
+        }
+        if (price.customerGroup && customerGroupsById[price.customerGroup.id]) {
+          resolvedPrice = {
+            ...price,
+            ...resolvedPrice,
+            customerGroup: customerGroupsById[price.customerGroup.id],
+          }
+        }
+        return resolvedPrice || price
+      }
     )
   }
 
@@ -249,6 +269,32 @@ export default class ProductJsonToCsv {
 
     // pick only requested channels from cache
     return pick(this.channelsCache, ids)
+  }
+
+  async _getCustomerGroupsById(ids: Array<string>): Promise<Array<Object>> {
+    const notCachedIds = ids.filter(
+      (id: string) => !this.customerGroupsCache[id]
+    )
+
+    // fetch unknown customerGroups from API
+    if (notCachedIds.length) {
+      const predicate = `id in ("${notCachedIds.join('", "')}")`
+      const customerGroupService = this._createService('customerGroups')
+      const uri = customerGroupService.where(predicate).build()
+      const {
+        body: { results },
+      } = await this.fetchReferences(uri)
+
+      results.forEach((result: CustomerGroup) => {
+        // we should keep old customerGroups in the cache because we can resolve
+        // multiple products in parallel and we don't want to fetch same customerGroups
+        // multiple times
+        this.customerGroupsCache[result.id] = result
+      })
+    }
+
+    // pick only requested customerGroups from cache
+    return pick(this.customerGroupsCache, ids)
   }
 
   _resolveProductType(productTypeReference: TypeReference): Object {

@@ -1,7 +1,7 @@
 {
   "extends": [
     "config:base",
-    ":pinAllExceptPeerDependencies",
+    ":pinOnlyDevDependencies",
     ":prHourlyLimitNone",
     ":prConcurrentLimitNone",
     "schedule:weekly"

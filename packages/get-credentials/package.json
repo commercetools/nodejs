@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/get-credentials",
-  "version": "3.0.0",
+  "version": "3.0.5",
   "description": "Get CT credentials from the system environment.",
   "keywords": [
     "commercetools",
@@ -24,9 +24,9 @@
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "devDependencies": {
-    "sinon": "7.2.3"
+    "sinon": "7.3.2"
   },
   "dependencies": {
-    "dotenv": "6.2.0"
+    "dotenv": "^8.0.0"
   }
 }
