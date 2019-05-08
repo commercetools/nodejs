@@ -176,6 +176,10 @@ https://commercetools.github.io/nodejs/
 [personal-data-erasure-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/personal-data-erasure
 [personal-data-erasure-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/personal-data-erasure&style=flat-square
 
+### SDK as an AWS Lambda Layer
+
+We also a publish an [AWS Lambda Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html#configuration-layers-using) with the packages [`sdk-client`](/packages/sdk-client), [`sdk-middleware-auth`](/packages/sdk-middleware-auth), [`sdk-middleware-http`](/packages/sdk-middleware-http), [`sdk-middleware-logger`](/packages/sdk-middleware-logger),[`sdk-middleware-queue`](/packages/sdk-middleware-queue), [`sdk-middleware-user-agent`](/packages/sdk-middleware-user-agent) and [`api-request-builder`](/packages/api-request-builder). Find the ARN for your region [here](lambdaLayerArns.md).
+
 ## Contributing
 
 We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information on our guidelines. We also have a [TODO list](TODOS.md) that may contain various tasks in addition to the [issues list](https://github.com/commercetools/nodejs/issues).
