@@ -4,6 +4,10 @@
     ":pinOnlyDevDependencies",
     ":prHourlyLimitNone",
     ":prConcurrentLimitNone",
+    ":automergeMinor",
+    "group:allNonMajor",
+    ":automergeBranchMergeCommit",
+    ":enableVulnerabilityAlerts",
     "schedule:weekly"
   ],
   "ignoreDeps": ["lerna"]
