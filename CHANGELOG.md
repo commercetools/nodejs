@@ -1,3 +1,9 @@
+## commercetools-sdk changed artefact generation
+
+#### :rocket: New Feature
+
+- now replacing Node Globals in UMD packages to allow distribution into browsers without using separate packaging processes, for example for JQuery based projects
+
 ## @commercetools/sdk-middleware-auth@4.0.0 (2018-05-10)
 
 #### :boom: Breaking Change
