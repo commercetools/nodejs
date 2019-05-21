@@ -1,6 +1,6 @@
 ## commercetools-sdk changed artefact generation
 
-#### :rocket: New Feature
+#### :rocket: New Feature (2019-05-21)
 
 - Now replaces Node.js globals (such as `Buffer`) in UMD builds to allow direct consumption in browsers without requiring a separate build step (e.g. webpack). This helps smaller projects to get started quicker.
 
