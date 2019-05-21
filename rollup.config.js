@@ -6,11 +6,13 @@ const babel = require('rollup-plugin-babel')
 const replace = require('rollup-plugin-replace')
 const { uglify } = require('rollup-plugin-uglify')
 const filesize = require('rollup-plugin-filesize')
+const globals = require('rollup-plugin-node-globals')
 const babelConfig = require('./babel.config')
 /* eslint-enable */
 
 const env = process.env.NODE_ENV
 const version = process.env.npm_package_version
+const [, format] = process.env.npm_lifecycle_event.split(':')
 
 const config = {
   output: {
@@ -36,18 +38,14 @@ const config = {
       runtimeHelpers: true,
       ...babelConfig,
     }),
+    format === 'umd' && globals(),
+    env === 'production' &&
+      uglify({
+        compress: {
+          warnings: false,
+        },
+      }),
     filesize(),
-  ],
+  ].filter(Boolean),
 }
-
-if (env === 'production') {
-  config.plugins.push(
-    uglify({
-      compress: {
-        warnings: false,
-      },
-    })
-  )
-}
-
 module.exports = config
