@@ -2,7 +2,7 @@
 
 #### :rocket: New Feature
 
-- now replacing Node Globals in UMD packages to allow distribution into browsers without using separate packaging processes, for example for JQuery based projects
+- Now replaces Node.js globals (such as `Buffer`) in UMD builds to allow direct consumption in browsers without requiring a separate build step (e.g. webpack). This helps smaller projects to get started quicker.
 
 ## @commercetools/sdk-middleware-auth@4.0.0 (2018-05-10)
 
