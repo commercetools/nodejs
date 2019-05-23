@@ -281,7 +281,7 @@ export default class SdkAuth {
       this.BASE_AUTH_FLOW_URI,
       'refresh_token'
     )
-    request.body += `&refresh_token=${token}`
+    request.body += `&refresh_token=${encodeURIComponent(token)}`
 
     return this._process(request)
   }
@@ -291,7 +291,7 @@ export default class SdkAuth {
     if (!token) throw new Error('Missing required token value')
 
     const request = SdkAuth._buildRequest(_config, this.INTROSPECT_URI)
-    request.body = `token=${token}`
+    request.body = `token=${encodeURIComponent(token)}`
 
     return this._process(request)
   }
