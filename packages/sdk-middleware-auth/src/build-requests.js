@@ -118,7 +118,9 @@ export function buildRequestForRefreshTokenFlow(
   // other oauth endpoints.
   const oauthUri = options.oauthUri || '/oauth/token'
   const url = options.host.replace(/\/$/, '') + oauthUri
-  const body = `grant_type=refresh_token&refresh_token=${options.refreshToken}`
+  const body = `grant_type=refresh_token&refresh_token=${encodeURIComponent(
+    options.refreshToken
+  )}`
 
   return { basicAuth, url, body }
 }
