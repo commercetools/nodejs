@@ -125,12 +125,15 @@ export default function createService(
 
       const uri =
         (withProjectKey ? `/${options}` : '') +
-        endpoint +
-        // TODO this can lead to invalid URIs as getIdOrKey can return
-        //   "/?customerId", so there can be multiple question marks,
-        // same for when `queryParams` and `version` are present
-        getIdOrKey(this.params) +
-        (queryParams ? `?${queryParams}` : '')
+        (/\{id\}/.test(endpoint)
+          ? // To check if the endpoint has an id
+            endpoint.replace(/\/\{id\}/, getIdOrKey(this.params))
+          : // TODO this can lead to invalid URIs as getIdOrKey can return
+            //   "/?customerId", so there can be multiple question marks,
+            // same for when `queryParams` and `version` are present
+            endpoint +
+            getIdOrKey(this.params) +
+            (queryParams ? `?${queryParams}` : ''))
 
       setDefaultParams.call(this)
       return uri
