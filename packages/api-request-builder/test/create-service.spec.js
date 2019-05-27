@@ -363,6 +363,14 @@ describe('createService', () => {
       )
     })
 
+    test('should support `applyOrderEditTo`', () => {
+      expect(
+        service
+          .parse({ applyOrderEditTo: 'order-edit-id' })
+          .build({ withProjectKey: true, applyOrderEdit: true })
+      ).toBe('/my-project1/foo/order-edit-id/apply')
+    })
+
     test('should throw on unknown keys', () => {
       expect(() => service.parse({ foo: 'bar' })).toThrow('Unknown key "foo"')
     })
@@ -498,24 +506,12 @@ describe('createService', () => {
           .build()
       ).toBe('/my-project1/foo/123?expand=channel')
     })
-  })
-
-  describe('build services with endpoint that include an id', () => {
-    let service
-    beforeEach(() => {
-      service = createService(
-        {
-          type: 'test2',
-          endpoint: '/test2/trial/{id}/apply',
-          features: ['queryOne'],
-        },
-        projectKey
-      )
-    })
-    test('should build endpoint with id', () => {
-      expect(service.byId('foo12-bar34').build()).toBe(
-        '/my-project1/test2/trial/foo12-bar34/apply'
-      )
+    test('apply order edit', () => {
+      expect(
+        service
+          .applyOrderEditTo('order-edit-id')
+          .build({ withProjectKey: true, applyOrderEdit: true })
+      ).toBe('/my-project1/foo/order-edit-id/apply')
     })
   })
 })
