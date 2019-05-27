@@ -205,8 +205,8 @@ export default {
   },
   orderEditsApply: {
     type: 'orders-edits-apply',
-    endpoint: '/orders/edits/:id/apply',
-    features: [features.update, features.query],
+    endpoint: '/orders/edits/{id}/apply',
+    features: [features.queryOne, features.update],
   },
   orderImport: {
     type: 'orderImport',
