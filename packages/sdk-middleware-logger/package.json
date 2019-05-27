@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-middleware-logger",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Middleware for logging request and response being executed, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",

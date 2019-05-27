@@ -1,3 +1,16 @@
+## commercetools-sdk changed artefact generation
+
+## @commercetools/sdk-middleware-auth@5.1.1, @commercetools/sdk-auth@2.1.1 (2019-05-23)
+
+#### :bug: Bug Fix
+
+- `sdk-auth`, `sdk-middleware-auth`
+  - [#1334](https://github.com/commercetools/nodejs/pull/1334) Correctly encode tokens with non-ascii characters.
+
+#### :rocket: New Feature (2019-05-21)
+
+- Now replaces Node.js globals (such as `Buffer`) in UMD builds to allow direct consumption in browsers without requiring a separate build step (e.g. webpack). This helps smaller projects to get started quicker.
+
 ## @commercetools/sdk-middleware-auth@4.0.0 (2018-05-10)
 
 #### :boom: Breaking Change

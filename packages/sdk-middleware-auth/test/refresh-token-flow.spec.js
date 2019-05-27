@@ -21,7 +21,7 @@ function createTestMiddlewareOptions(options) {
       clientId: '123',
       clientSecret: 'secret',
     },
-    refreshToken: 'foobar123',
+    refreshToken: 'foobar123@#%=',
     ...options,
   }
 }
@@ -47,7 +47,7 @@ describe('Refresh Token Flow', () => {
           pendingTasks: [],
           url: 'https://auth.commercetools.co/oauth/token',
           basicAuth: 'MTIzOnNlY3JldA==',
-          body: 'grant_type=refresh_token&refresh_token=foobar123',
+          body: 'grant_type=refresh_token&refresh_token=foobar123%40%23%25%3D',
         })
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)
         resolve()
