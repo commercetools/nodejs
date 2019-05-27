@@ -499,4 +499,23 @@ describe('createService', () => {
       ).toBe('/my-project1/foo/123?expand=channel')
     })
   })
+
+  describe('build services with endpoint that include an id', () => {
+    let service
+    beforeEach(() => {
+      service = createService(
+        {
+          type: 'test2',
+          endpoint: '/test2/trial/{id}/apply',
+          features: ['queryOne'],
+        },
+        projectKey
+      )
+    })
+    test('should build endpoint with id', () => {
+      expect(service.byId('foo12-bar34').build()).toBe(
+        '/my-project1/test2/trial/foo12-bar34/apply'
+      )
+    })
+  })
 })
