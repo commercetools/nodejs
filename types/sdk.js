@@ -293,6 +293,7 @@ export type ServiceBuilderDefaultParams = {
   customerId?: string,
   cartId?: string,
   dataErasure?: string,
+  applyOrderEditTo?: string,
 }
 export type ServiceBuilderParams = {
   // query-expand
@@ -347,6 +348,9 @@ export type ServiceBuilderParams = {
 
   // data-erasure
   dataErasure?: string,
+
+  // applyOrderEditTo
+  applyOrderEditTo?: boolean,
 }
 export type ServiceBuilder = {
   type: string,

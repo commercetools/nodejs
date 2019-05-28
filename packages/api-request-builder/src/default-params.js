@@ -129,6 +129,7 @@ export function setParams(params: ServiceBuilderParams) {
     'state',
     'dataErasure',
     'withTotal',
+    'applyOrderEditTo',
   ]
   Object.keys(params).forEach((key: string) => {
     if (!knownKeys.includes(key)) throw new Error(`Unknown key "${key}"`)
@@ -214,4 +215,8 @@ export function setParams(params: ServiceBuilderParams) {
 
   // withTotal
   if (hasKey(params, 'withTotal')) this.withTotal(params.withTotal)
+
+  // withTotal
+  if (hasKey(params, 'applyOrderEditTo'))
+    this.applyOrderEditTo(params.applyOrderEditTo)
 }
