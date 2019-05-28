@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/resource-deleter",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Delete resources from the commercetools platform",
   "main": "lib/main.js",
   "bin": {
@@ -27,7 +27,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commercetools/api-request-builder": "^5.1.0",
+    "@commercetools/api-request-builder": "^5.2.0",
     "@commercetools/get-credentials": "^3.0.6",
     "@commercetools/sdk-client": "^2.1.0",
     "@commercetools/sdk-middleware-auth": "^5.1.1",
