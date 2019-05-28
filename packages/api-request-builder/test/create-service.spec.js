@@ -513,5 +513,10 @@ describe('createService', () => {
           .build({ withProjectKey: true, applyOrderEdit: true })
       ).toBe('/my-project1/foo/order-edit-id/apply')
     })
+    test('to throw error when order-edit-id is not a string', () => {
+      expect(() => service.parse({ applyOrderEditTo: 2 })).toThrow(
+        /A resource orderEditId is missing or invalid/
+      )
+    })
   })
 })
