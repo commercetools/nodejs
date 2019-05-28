@@ -29,6 +29,7 @@ export default function buildQueryString(
     cartId,
     location,
     dataErasure,
+    applyOrderEditTo,
   } = params
   let queryString = []
 
@@ -119,6 +120,8 @@ export default function buildQueryString(
   if (version) queryString.push(`version=${version}`)
 
   if (dataErasure) queryString.push(dataErasure)
+
+  if (applyOrderEditTo) queryString.push(`/${applyOrderEditTo}/apply`)
 
   return queryString.join('&')
 }

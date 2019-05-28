@@ -15,6 +15,7 @@ import classify from './classify'
 import buildQueryString from './build-query-string'
 import withVersion from './version'
 import withFullDataErasure from './data-erasure'
+import applyOrderEditTo from './order-edit-apply'
 import * as defaultFeatures from './features'
 import * as query from './query'
 import * as queryId from './query-id'
@@ -27,6 +28,7 @@ import * as querySearch from './query-search'
 
 type UseKey = {
   withProjectKey: boolean,
+  applyOrderEdit: boolean,
 }
 
 const requiredDefinitionProps = ['type', 'endpoint', 'features']
@@ -63,6 +65,7 @@ export default function createService(
     params: getDefaultQueryParams(),
     withVersion,
     withFullDataErasure,
+    applyOrderEditTo,
 
     ...features.reduce((acc: Object, feature: string): Object => {
       if (feature === defaultFeatures.query)
@@ -118,8 +121,10 @@ export default function createService(
     // Call this method to get the built request URI
     // Pass some options to further configure the URI:
     // - `withProjectKey: false`: will omit the projectKey from the URI
-    build(uriOptions: UseKey = { withProjectKey: true }): string {
-      const { withProjectKey } = uriOptions
+    build(
+      uriOptions: UseKey = { withProjectKey: true, applyOrderEdit: false }
+    ): string {
+      const { withProjectKey, applyOrderEdit } = uriOptions
 
       const queryParams = buildQueryString(this.params)
 
@@ -130,7 +135,7 @@ export default function createService(
         //   "/?customerId", so there can be multiple question marks,
         // same for when `queryParams` and `version` are present
         getIdOrKey(this.params) +
-        (queryParams ? `?${queryParams}` : '')
+        (queryParams && !applyOrderEdit ? `?${queryParams}` : queryParams)
 
       setDefaultParams.call(this)
       return uri

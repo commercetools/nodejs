@@ -191,6 +191,18 @@ export default {
       features.queryExpand,
     ],
   },
+  orderEdits: {
+    type: 'orders-edits',
+    endpoint: '/orders/edits',
+    features: [
+      features.create,
+      features.update,
+      features.del,
+      features.query,
+      features.queryOne,
+      features.queryExpand,
+    ],
+  },
   orderImport: {
     type: 'orderImport',
     endpoint: '/orders/import',

@@ -363,6 +363,14 @@ describe('createService', () => {
       )
     })
 
+    test('should support `applyOrderEditTo`', () => {
+      expect(
+        service
+          .parse({ applyOrderEditTo: 'order-edit-id' })
+          .build({ withProjectKey: true, applyOrderEdit: true })
+      ).toBe('/my-project1/foo/order-edit-id/apply')
+    })
+
     test('should throw on unknown keys', () => {
       expect(() => service.parse({ foo: 'bar' })).toThrow('Unknown key "foo"')
     })
@@ -497,6 +505,18 @@ describe('createService', () => {
           .expand('channel')
           .build()
       ).toBe('/my-project1/foo/123?expand=channel')
+    })
+    test('apply order edit', () => {
+      expect(
+        service
+          .applyOrderEditTo('order-edit-id')
+          .build({ withProjectKey: true, applyOrderEdit: true })
+      ).toBe('/my-project1/foo/order-edit-id/apply')
+    })
+    test('to throw error when order-edit-id is not a string', () => {
+      expect(() => service.parse({ applyOrderEditTo: 2 })).toThrow(
+        /A resource orderEditId is missing or invalid/
+      )
     })
   })
 })
