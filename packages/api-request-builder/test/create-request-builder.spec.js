@@ -23,7 +23,6 @@ const expectedServiceKeys = [
   'myOrders',
   'orders',
   'orderEdits',
-  'orderEditsApply',
   'orderImport',
   'payments',
   'productDiscounts',

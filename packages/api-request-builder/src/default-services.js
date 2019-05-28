@@ -203,11 +203,6 @@ export default {
       features.queryExpand,
     ],
   },
-  orderEditsApply: {
-    type: 'orders-edits-apply',
-    endpoint: '/orders/edits/{id}/apply',
-    features: [features.queryOne, features.update],
-  },
   orderImport: {
     type: 'orderImport',
     endpoint: '/orders/import',
