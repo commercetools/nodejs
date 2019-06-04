@@ -155,6 +155,11 @@ export default {
     endpoint: '/messages',
     features: [features.query, features.queryOne, features.queryExpand],
   },
+  myActiveCart: {
+    type: 'my-carts',
+    endpoint: '/me/active-cart',
+    features: [features.queryOne],
+  },
   myCarts: {
     type: 'my-carts',
     endpoint: '/me/carts',

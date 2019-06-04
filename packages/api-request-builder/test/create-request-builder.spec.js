@@ -19,6 +19,7 @@ const expectedServiceKeys = [
   'inventory',
   'login',
   'messages',
+  'myActiveCart',
   'myCarts',
   'myOrders',
   'orders',
