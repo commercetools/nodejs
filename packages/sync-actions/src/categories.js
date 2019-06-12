@@ -9,10 +9,11 @@ import type {
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import actionsMapCustom from './utils/action-map-custom'
+import actionsMapAssets from './assets-actions'
 import * as categoryActions from './category-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
-export const actionGroups = ['base', 'references', 'meta', 'custom']
+export const actionGroups = ['base', 'references', 'meta', 'custom', 'assets']
 
 function createCategoryMapActions(
   mapActionGroup: Function,
@@ -53,6 +54,13 @@ function createCategoryMapActions(
       mapActionGroup(
         'custom',
         (): Array<UpdateAction> => actionsMapCustom(diff, newObj, oldObj)
+      )
+    )
+
+    allActions.push(
+      mapActionGroup(
+        'assets',
+        (): Array<UpdateAction> => actionsMapAssets(diff, newObj, oldObj)
       )
     )
 

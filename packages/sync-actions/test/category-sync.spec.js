@@ -7,7 +7,13 @@ import {
 
 describe('Exports', () => {
   test('action group list', () => {
-    expect(actionGroups).toEqual(['base', 'references', 'meta', 'custom'])
+    expect(actionGroups).toEqual([
+      'base',
+      'references',
+      'meta',
+      'custom',
+      'assets',
+    ])
   })
 
   test('correctly define base actions list', () => {
@@ -104,5 +110,96 @@ describe('Actions', () => {
       },
     ]
     expect(actual).toEqual(expected)
+  })
+
+  describe('assets', () => {
+    test('should build "addAsset" action with empty assets', () => {
+      const before = {}
+      const now = {
+        assets: [
+          {
+            key: 'asset-key',
+            name: {
+              en: 'asset name ',
+            },
+            sources: [
+              {
+                uri: 'http://example.org/content/product-manual.pdf',
+              },
+            ],
+          },
+        ],
+      }
+      const actual = categorySync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'addAsset',
+          asset: now.assets[0],
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
+    test('should build "addAsset" action with existing assets', () => {
+      const existingAsset = {
+        key: 'existing',
+        sources: [
+          {
+            uri: 'http://example.org/content/product-manual.pdf',
+          },
+        ],
+      }
+      const newAsset = {
+        key: 'new',
+        sources: [
+          {
+            uri: 'http://example.org/content/product-manual.gif',
+          },
+        ],
+      }
+      const before = {
+        assets: [existingAsset],
+      }
+      const now = {
+        assets: [existingAsset, newAsset],
+      }
+      const actual = categorySync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'addAsset',
+          asset: newAsset,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
+    test('should build "removeAsset" action', () => {
+      const before = {
+        assets: [
+          {
+            key: 'asset-key',
+            name: {
+              en: 'asset name ',
+            },
+            sources: [
+              {
+                uri: 'http://example.org/content/product-manual.pdf',
+              },
+            ],
+          },
+        ],
+      }
+      const now = {
+        assets: [],
+      }
+      const actual = categorySync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'removeAsset',
+          assetKey: before.assets[0].key,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
   })
 })
