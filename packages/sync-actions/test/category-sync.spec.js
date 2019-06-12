@@ -173,7 +173,36 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
 
-    test('should build "removeAsset" action', () => {
+    test('should build "removeAsset" action with assetId prop', () => {
+      const before = {
+        assets: [
+          {
+            id: 'c136c9dc-51e8-40fe-8e2e-2a4c159f3358',
+            name: {
+              en: 'asset name ',
+            },
+            sources: [
+              {
+                uri: 'http://example.org/content/product-manual.pdf',
+              },
+            ],
+          },
+        ],
+      }
+      const now = {
+        assets: [],
+      }
+      const actual = categorySync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'removeAsset',
+          assetId: before.assets[0].id,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
+    test('should build "removeAsset" action with assetKey prop', () => {
       const before = {
         assets: [
           {
@@ -201,5 +230,39 @@ describe('Actions', () => {
       ]
       expect(actual).toEqual(expected)
     })
+  })
+
+  test('should build "removeAsset" and "addasset" action when asset is changed', () => {
+    const initialAsset = {
+      key: 'asset-key',
+      name: {
+        en: 'asset name ',
+      },
+    }
+    const changedName = {
+      name: {
+        en: 'asset name ',
+        de: 'Asset Name',
+      },
+    }
+    const changedAsset = Object.assign({}, initialAsset, changedName)
+    const before = {
+      assets: [initialAsset],
+    }
+    const now = {
+      assets: [changedAsset],
+    }
+    const actual = categorySync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'removeAsset',
+        assetKey: before.assets[0].key,
+      },
+      {
+        action: 'addAsset',
+        asset: changedAsset,
+      },
+    ]
+    expect(actual).toEqual(expected)
   })
 })

@@ -26,32 +26,20 @@ export default function actionsMapAssets(diff) {
 
   if (assets && assets._t === 'a') {
     const keys = Object.keys(assets)
-    const changeDeltas = keys
-      .filter(key => REGEX_NUMBER.test(key))
-      .map(key => assets[key])
-    const addAssetActions = changeDeltas.map(createAddAssetAction)
-    assetsActions.push(addAssetActions)
 
     const removeDeltas = keys
       .filter(key => REGEX_UNDERSCORE_NUMBER.test(key))
       .map(key => assets[key])
     const removeAssetActions = removeDeltas.map(createRemoveAssetAction)
     assetsActions.push(removeAssetActions)
-  } else if (Array.isArray(assets)) {
-    const assetActions = diff.assets.map(assetDiff => {
-      let assetAction
-      if (Array.isArray(assetDiff)) {
-        const asset = assetDiff[0]
 
-        if (assetDiff.length === 1) {
-          assetAction = {
-            action: 'addAsset',
-            asset,
-          }
-        }
-      }
-      return assetAction
-    })
+    const changeDeltas = keys
+      .filter(key => REGEX_NUMBER.test(key))
+      .map(key => assets[key])
+    const addAssetActions = changeDeltas.map(createAddAssetAction)
+    assetsActions.push(addAssetActions)
+  } else if (Array.isArray(assets)) {
+    const assetActions = diff.assets.map(createAddAssetAction)
     assetsActions.push(assetActions)
   }
   return flatten(assetsActions)
