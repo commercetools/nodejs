@@ -21,20 +21,20 @@ export default function actionsMapAssets(diff, oldObj, newObj) {
       action: 'removeAsset',
       ...toAssetIdentifier(oldAsset),
     }),
-    [CHANGE_ACTIONS]: (oldAsset, newAsset) => {
-      const result = []
-      result.push({
-        action: 'removeAsset',
-        ...toAssetIdentifier(oldAsset),
-      })
-
-      result.push({
-        action: 'addAsset',
-        asset: newAsset,
-      })
-
-      return result
-    },
+    [CHANGE_ACTIONS]: (oldAsset, newAsset) =>
+      // here we could use more atomic update actions (e.g. changeAssetName)
+      // but for now we use the simpler approach to first remove and then
+      // re-add the asset - which reduces the code complexity
+      [
+        {
+          action: 'addAsset',
+          asset: newAsset,
+        },
+        {
+          action: 'removeAsset',
+          ...toAssetIdentifier(oldAsset),
+        },
+      ],
   })
 
   return handler(diff, oldObj, newObj)
