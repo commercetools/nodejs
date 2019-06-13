@@ -27,12 +27,12 @@ export default function actionsMapAssets(diff, oldObj, newObj) {
       // re-add the asset - which reduces the code complexity
       [
         {
-          action: 'addAsset',
-          asset: newAsset,
-        },
-        {
           action: 'removeAsset',
           ...toAssetIdentifier(oldAsset),
+        },
+        {
+          action: 'addAsset',
+          asset: newAsset,
         },
       ],
   })
