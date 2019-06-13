@@ -60,7 +60,7 @@ function createCategoryMapActions(
     allActions.push(
       mapActionGroup(
         'assets',
-        (): Array<UpdateAction> => actionsMapAssets(diff, newObj, oldObj)
+        (): Array<UpdateAction> => actionsMapAssets(diff, oldObj, newObj)
       )
     )
 

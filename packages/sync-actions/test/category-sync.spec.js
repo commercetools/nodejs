@@ -114,7 +114,9 @@ describe('Actions', () => {
 
   describe('assets', () => {
     test('should build "addAsset" action with empty assets', () => {
-      const before = {}
+      const before = {
+        assets: [],
+      }
       const now = {
         assets: [
           {
@@ -232,7 +234,7 @@ describe('Actions', () => {
     })
   })
 
-  test('should build "removeAsset" and "addasset" action when asset is changed', () => {
+  test('should build "removeAsset" and "addAsset" action when asset is changed', () => {
     const initialAsset = {
       key: 'asset-key',
       name: {
