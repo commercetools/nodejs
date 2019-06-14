@@ -7,7 +7,13 @@ import {
 
 describe('Exports', () => {
   test('action group list', () => {
-    expect(actionGroups).toEqual(['base', 'references', 'meta', 'custom'])
+    expect(actionGroups).toEqual([
+      'base',
+      'references',
+      'meta',
+      'custom',
+      'assets',
+    ])
   })
 
   test('correctly define base actions list', () => {
@@ -101,6 +107,162 @@ describe('Actions', () => {
         action: 'setCustomField',
         name: 'customField1',
         value: true,
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
+
+  describe('assets', () => {
+    test('should build "addAsset" action with empty assets', () => {
+      const before = {
+        assets: [],
+      }
+      const now = {
+        assets: [
+          {
+            key: 'asset-key',
+            name: {
+              en: 'asset name ',
+            },
+            sources: [
+              {
+                uri: 'http://example.org/content/product-manual.pdf',
+              },
+            ],
+          },
+        ],
+      }
+      const actual = categorySync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'addAsset',
+          asset: now.assets[0],
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
+    test('should build "addAsset" action with existing assets', () => {
+      const existingAsset = {
+        key: 'existing',
+        sources: [
+          {
+            uri: 'http://example.org/content/product-manual.pdf',
+          },
+        ],
+      }
+      const newAsset = {
+        key: 'new',
+        sources: [
+          {
+            uri: 'http://example.org/content/product-manual.gif',
+          },
+        ],
+      }
+      const before = {
+        assets: [existingAsset],
+      }
+      const now = {
+        assets: [existingAsset, newAsset],
+      }
+      const actual = categorySync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'addAsset',
+          asset: newAsset,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
+    test('should build "removeAsset" action with assetId prop', () => {
+      const before = {
+        assets: [
+          {
+            id: 'c136c9dc-51e8-40fe-8e2e-2a4c159f3358',
+            name: {
+              en: 'asset name ',
+            },
+            sources: [
+              {
+                uri: 'http://example.org/content/product-manual.pdf',
+              },
+            ],
+          },
+        ],
+      }
+      const now = {
+        assets: [],
+      }
+      const actual = categorySync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'removeAsset',
+          assetId: before.assets[0].id,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
+    test('should build "removeAsset" action with assetKey prop', () => {
+      const before = {
+        assets: [
+          {
+            key: 'asset-key',
+            name: {
+              en: 'asset name ',
+            },
+            sources: [
+              {
+                uri: 'http://example.org/content/product-manual.pdf',
+              },
+            ],
+          },
+        ],
+      }
+      const now = {
+        assets: [],
+      }
+      const actual = categorySync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'removeAsset',
+          assetKey: before.assets[0].key,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+  })
+
+  test('should build "removeAsset" and "addAsset" action when asset is changed', () => {
+    const initialAsset = {
+      key: 'asset-key',
+      name: {
+        en: 'asset name ',
+      },
+    }
+    const changedName = {
+      name: {
+        en: 'asset name ',
+        de: 'Asset Name',
+      },
+    }
+    const changedAsset = Object.assign({}, initialAsset, changedName)
+    const before = {
+      assets: [initialAsset],
+    }
+    const now = {
+      assets: [changedAsset],
+    }
+    const actual = categorySync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'removeAsset',
+        assetKey: before.assets[0].key,
+      },
+      {
+        action: 'addAsset',
+        asset: changedAsset,
       },
     ]
     expect(actual).toEqual(expected)
