@@ -11,6 +11,24 @@
 
 - Now replaces Node.js globals (such as `Buffer`) in UMD builds to allow direct consumption in browsers without requiring a separate build step (e.g. webpack). This helps smaller projects to get started quicker.
 
+## @commercetools/sync-actions@3.0.0, @commercetools/state-importer@2.0.0, @commercetools/sdk-middleware-user-agent@2.0.0, @commercetools/sdk-middleware-queue@2.0.0, @commercetools/sdk-middleware-logger@2.0.0, @commercetools/sdk-middleware-http@5.0.0, @commercetools/sdk-middleware-correlation-id@2.0.0, @commercetools/sdk-middleware-auth@5.0.0, @commercetools/sdk-client@2.0.0, @commercetools/sdk-auth@2.0.0, @commercetools/product-json-to-xlsx@2.0.0, @commercetools/product-json-to-csv@3.0.0, @commercetools/product-exporter@2.0.0, @commercetools/price-exporter@2.0.0, @commercetools/personal-data-erasure@2.0.0, @commercetools/inventories-exporter@2.0.0, @commercetools/http-user-agent@2.0.0, @commercetools/get-credentials@3.0.0, @commercetools/discount-code-importer@2.0.0, @commercetools/discount-code-generator@2.0.0, @commercetools/discount-code-exporter@3.0.0, @commercetools/customer-groups-exporter@2.0.0, @commercetools/custom-objects-importer@2.0.0, @commercetools/custom-objects-exporter@2.0.0, @commercetools/csv-parser-state@2.0.0, @commercetools/csv-parser-price@3.0.0, @commercetools/csv-parser-orders@2.0.0, @commercetools/csv-parser-discount-code@2.0.0, @commercetools/category-exporter@2.0.0, @commercetools/api-request-builder@5.0.0 (2019-01-15)
+
+#### :boom: Breaking Change
+
+Dropped support for Node < 8
+
+## @commercetools/sync-actions@2.0.0 (2018-09-21)
+
+#### :boom: Breaking Change
+
+[#789](https://github.com/commercetools/nodejs/pull/789). Rewrote implementation for `product-types` to use `hints` to calculate update actions.
+
+## @commercetools/api-request-builder@4.0.0 (2018-07-11)
+
+#### :boom: Breaking Change
+
+[#654](https://github.com/commercetools/nodejs/pull/654). Removed default addition of `staged=true` to built uri's.
+
 ## @commercetools/sdk-middleware-auth@4.0.0 (2018-05-10)
 
 #### :boom: Breaking Change
