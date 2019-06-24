@@ -19,6 +19,7 @@ describe('Exports', () => {
       { action: 'setDateOfBirth', key: 'dateOfBirth' },
       { action: 'setLocale', key: 'locale' },
       { action: 'setVatId', key: 'vatId' },
+      { action: 'setIsEmailVerified', key: 'isEmailVerified' },
       {
         action: 'setDefaultBillingAddress',
         key: 'defaultBillingAddressId',
