@@ -16,6 +16,10 @@ const extractTypeId = (type, nextObject) =>
   Array.isArray(type.id)
     ? diffpatcher.getDeltaValue(type.id)
     : nextObject.custom.type.id
+const extractTypeKey = (type, nextObject) =>
+  Array.isArray(type.key)
+    ? diffpatcher.getDeltaValue(type.key)
+    : nextObject.custom.type.key
 const extractTypeFields = (diffedFields, nextFields) =>
   Array.isArray(diffedFields)
     ? diffpatcher.getDeltaValue(diffedFields)
@@ -43,6 +47,15 @@ export default function actionsMapCustom(diff, nextObject, previousObject) {
         type: {
           typeId: 'type',
           id: extractTypeId(type, nextObject),
+        },
+        fields: extractTypeFields(diff.custom.fields, nextObject.custom.fields),
+      })
+    else if (type.key)
+      actions.push({
+        action: Actions.setCustomType,
+        type: {
+          typeId: 'type',
+          key: extractTypeKey(type, nextObject),
         },
         fields: extractTypeFields(diff.custom.fields, nextObject.custom.fields),
       })
