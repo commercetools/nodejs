@@ -36,6 +36,34 @@ describe('buildActions', () => {
     expect(actual).toEqual(expected)
   })
 
+  test('should build `setCustomType` action with key', () => {
+    const before = {
+      custom: {
+        type: {
+          typeId: 'type',
+          key: 'customType1',
+        },
+        fields: {
+          customField1: true,
+        },
+      },
+    }
+    const now = {
+      custom: {
+        type: {
+          typeId: 'type',
+          key: 'customType2',
+        },
+        fields: {
+          customField1: true,
+        },
+      },
+    }
+    const actual = buildActions(now, before)
+    const expected = [{ action: 'setCustomType', ...now.custom }]
+    expect(actual).toEqual(expected)
+  })
+
   test('should build `setCustomField` action', () => {
     const before = {
       custom: {
