@@ -1,5 +1,11 @@
 ## commercetools-sdk changed artefact generation
 
+## @commercetools/sync-actions@3.5.0 (2019-07-03)
+
+#### :rocket: New Feature
+
+- [#1353](https://github.com/commercetools/nodejs/pull/1353) Add ability to use `key` as a resource identifier in setting custom fields/types.
+
 ## @commercetools/sdk-middleware-auth@5.1.1, @commercetools/sdk-auth@2.1.1 (2019-05-23)
 
 #### :bug: Bug Fix
