@@ -39,12 +39,7 @@ const config = {
       ...babelConfig,
     }),
     format === 'umd' && globals(),
-    env === 'production' &&
-      uglify({
-        compress: {
-          warnings: false,
-        },
-      }),
+    env === 'production' && uglify(),
     filesize(),
   ].filter(Boolean),
 }
