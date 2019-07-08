@@ -9,6 +9,5 @@
     ":automergeBranchMergeCommit",
     ":enableVulnerabilityAlerts",
     "schedule:weekly"
-  ],
-  "ignoreDeps": ["lerna"]
+  ]
 }
