@@ -10,10 +10,10 @@ node10Environment: &node10Environment
 aliases:
   - &restore_yarn_cache
     keys:
-      - v4-yarn-cache-{{ checksum "yarn.lock" }}
+      - v2-yarn-cache-{{ checksum "yarn.lock" }}
 
   - &save_yarn_cache
-    key: v4-yarn-cache-{{ checksum "yarn.lock" }}
+    key: v2-yarn-cache-{{ checksum "yarn.lock" }}
     paths:
       - node_modules
       - ~/.cache/yarn
