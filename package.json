@@ -86,7 +86,7 @@
     "jest-silent-reporter": "0.1.2",
     "leasot": "7.5.0",
     "lerna": "3.15.0",
-    "lint-staged": "8.2.1",
+    "lint-staged": "9.1.0",
     "npm-check-updates": "3.1.16",
     "prettier": "1.18.2",
     "resolve": "1.11.1",
