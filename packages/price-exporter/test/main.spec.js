@@ -5,7 +5,7 @@ import sampleProduct from './helpers/sampleProduct.json'
 import expectedPrices from './helpers/expectedPrices.json'
 
 jest.mock('fast-csv', () => ({
-  createWriteStream: jest.fn(() => ({ pipe: jest.fn() })),
+  format: jest.fn(() => ({ pipe: jest.fn() })),
 }))
 
 describe('PriceExporter', () => {
@@ -71,7 +71,7 @@ describe('PriceExporter', () => {
   describe('::run', () => {
     test('should call `_processStream` with outputStream if json', async () => {
       jest.mock('fast-csv', () => ({
-        createWriteStream: jest.fn(() => ({ pipe: jest.fn() })),
+        format: jest.fn(() => ({ pipe: jest.fn() })),
       }))
       priceExporter._getProducts = jest.fn(() => Promise.resolve())
       const outputStream = streamtest.v2.toText(() => {})
@@ -79,7 +79,7 @@ describe('PriceExporter', () => {
       await priceExporter.run(outputStream)
       expect(priceExporter._getProducts).toHaveBeenCalled()
       expect(priceExporter._getProducts.mock.calls[0][0]).toEqual(outputStream)
-      expect(csv.createWriteStream).not.toHaveBeenCalled()
+      expect(csv.format).not.toHaveBeenCalled()
     })
 
     test('should call `_processStream` with outputStream if csv', async () => {
@@ -90,7 +90,7 @@ describe('PriceExporter', () => {
       await priceExporter.run(outputStream)
       expect(priceExporter._getProducts).toHaveBeenCalled()
       expect(priceExporter._getProducts.mock.calls[0][0]).toEqual(outputStream)
-      expect(csv.createWriteStream).toHaveBeenCalled()
+      expect(csv.format).toHaveBeenCalled()
     })
   })
 

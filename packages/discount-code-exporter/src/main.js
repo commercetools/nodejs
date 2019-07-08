@@ -100,9 +100,7 @@ export default class DiscountCodeExport {
         headers: this.headers,
         delimiter: this.config.delimiter,
       }
-      const csvStream = csv
-        .createWriteStream(csvOptions)
-        .transform(this._processCode)
+      const csvStream = csv.format(csvOptions).transform(this._processCode)
       csvStream.pipe(outputStream)
       this._handleOutput(outputStream, csvStream)
     } else {
