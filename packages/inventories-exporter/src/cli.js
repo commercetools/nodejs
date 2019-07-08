@@ -105,7 +105,7 @@ const getHeaders = _args =>
 
     let isFirstRow = true
     csv
-      .fromStream(_args.template, {
+      .parseStream(_args.template, {
         delimiter: _args.delimiter,
       })
       .on('data', function(data) {
