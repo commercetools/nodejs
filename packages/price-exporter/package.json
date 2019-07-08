@@ -40,7 +40,7 @@
     "@commercetools/sdk-middleware-http": "^5.2.0",
     "@commercetools/sdk-middleware-user-agent": "^2.1.0",
     "JSONStream": "^1.3.5",
-    "fast-csv": "^2.4.1",
+    "fast-csv": "^3.0.0",
     "flat": "^4.1.0",
     "lodash": "^4.17.11",
     "node-fetch": "^2.3.0",

@@ -79,7 +79,7 @@ export default class InventoryExporter {
         headers: true,
         delimiter: this.exportConfig.delimiter,
       }
-      const csvStream = csv.createWriteStream(csvOptions).transform(
+      const csvStream = csv.format(csvOptions).transform(
         (row: Inventory): Object => {
           this.logger.verbose(`transforming row ${JSON.stringify(row)}`)
 

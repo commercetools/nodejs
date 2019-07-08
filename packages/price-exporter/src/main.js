@@ -79,7 +79,7 @@ export default class PriceExporter {
         headers: this.config.csvHeaders,
         delimiter: this.config.delimiter,
       }
-      const csvStream = csv.createWriteStream(csvOptions)
+      const csvStream = csv.format(csvOptions)
       csvStream.pipe(outputStream)
       this._getProducts(outputStream, csvStream)
     } else {
