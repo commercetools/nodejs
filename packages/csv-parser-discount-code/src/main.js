@@ -89,12 +89,12 @@ export default class CsvParserDiscountCode {
 
     return cartDiscounts
       ? Object.assign(rest, {
-          cartDiscounts: cartDiscounts.split(this.multiValueDelimiter).map(
-            (cartDiscountId: string): Object => ({
+          cartDiscounts: cartDiscounts
+            .split(this.multiValueDelimiter)
+            .map((cartDiscountId: string): Object => ({
               typeId: 'cart-discount',
               id: cartDiscountId,
-            })
-          ),
+            })),
         })
       : rest
   }

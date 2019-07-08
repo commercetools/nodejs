@@ -34,15 +34,13 @@ function createProductTypeMapActions(
     return flatten([
       // we support only base fields for the product type,
       // for attributes, applying hints would be recommended
-      mapActionGroup(
-        'base',
-        (): Array<UpdateAction> =>
-          productTypeActions.actionsMapBase(
-            diff,
-            previous,
-            next,
-            syncActionConfig
-          )
+      mapActionGroup('base', (): Array<UpdateAction> =>
+        productTypeActions.actionsMapBase(
+          diff,
+          previous,
+          next,
+          syncActionConfig
+        )
       ),
       productTypeActions.actionsMapForHints(
         options.nestedValuesChanges,

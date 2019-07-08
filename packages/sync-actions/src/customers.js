@@ -26,49 +26,38 @@ function createCustomerMapActions(
     const allActions = []
 
     allActions.push(
-      mapActionGroup(
-        'base',
-        (): Array<UpdateAction> =>
-          customerActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
+      mapActionGroup('base', (): Array<UpdateAction> =>
+        customerActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
       )
     )
 
     allActions.push(
-      mapActionGroup(
-        'references',
-        (): Array<UpdateAction> =>
-          customerActions.actionsMapReferences(diff, oldObj, newObj)
+      mapActionGroup('references', (): Array<UpdateAction> =>
+        customerActions.actionsMapReferences(diff, oldObj, newObj)
       )
     )
 
     allActions.push(
-      mapActionGroup(
-        'addresses',
-        (): Array<UpdateAction> =>
-          customerActions.actionsMapAddresses(diff, oldObj, newObj)
+      mapActionGroup('addresses', (): Array<UpdateAction> =>
+        customerActions.actionsMapAddresses(diff, oldObj, newObj)
       )
     )
 
     allActions.push(
-      mapActionGroup(
-        'billingAddressIds',
-        (): Array<UpdateAction> =>
-          customerActions.actionsMapBillingAddresses(diff, oldObj, newObj)
+      mapActionGroup('billingAddressIds', (): Array<UpdateAction> =>
+        customerActions.actionsMapBillingAddresses(diff, oldObj, newObj)
       )
     )
 
     allActions.push(
-      mapActionGroup(
-        'shippingAddressIds',
-        (): Array<UpdateAction> =>
-          customerActions.actionsMapShippingAddresses(diff, oldObj, newObj)
+      mapActionGroup('shippingAddressIds', (): Array<UpdateAction> =>
+        customerActions.actionsMapShippingAddresses(diff, oldObj, newObj)
       )
     )
 
     allActions.push(
-      mapActionGroup(
-        'custom',
-        (): Array<UpdateAction> => actionsMapCustom(diff, newObj, oldObj)
+      mapActionGroup('custom', (): Array<UpdateAction> =>
+        actionsMapCustom(diff, newObj, oldObj)
       )
     )
 

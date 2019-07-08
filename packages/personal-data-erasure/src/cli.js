@@ -106,9 +106,7 @@ const deleteOrNot = (personalDataEraser, answer) => {
   if (answer === true) {
     personalDataEraser.deleteAll(args.customerId)
     logger.info(
-      `All data related to customer with id '${
-        args.customerId
-      }' has successfully been deleted.`
+      `All data related to customer with id '${args.customerId}' has successfully been deleted.`
     )
   } else {
     logger.info('No data was deleted.')
@@ -141,9 +139,7 @@ resolveCredentials(args)
       if (args.force) deleteOrNot(personalDataEraser, args.force)
       else {
         const confirm = new Confirm(
-          `Are you sure you want to delete all data related to customer with \nid: "${
-            args.customerId
-          }"?`
+          `Are you sure you want to delete all data related to customer with \nid: "${args.customerId}"?`
         )
         confirm.run().then(answer => {
           deleteOrNot(personalDataEraser, answer)
@@ -158,9 +154,7 @@ resolveCredentials(args)
           fs.writeFile(args.output, JSON.stringify(result, null, 2), err => {
             if (err) throw err
             logger.info(
-              `${
-                result.length
-              } entities has been successfully written to file '${args.output}'`
+              `${result.length} entities has been successfully written to file '${args.output}'`
             )
           })
         }

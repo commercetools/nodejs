@@ -274,9 +274,7 @@ describe('Writer', () => {
         productType: 'pt-1',
         key: 'Příliš žluťoučký kůň úpěl ďábelské ódy', // special characters
       }
-      const expected = `"id","productType","key"\n"${product.id}","${
-        product.productType
-      }","${product.key}"\n`
+      const expected = `"id","productType","key"\n"${product.id}","${product.productType}","${product.key}"\n`
 
       const sampleStream = highland([product])
       const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })

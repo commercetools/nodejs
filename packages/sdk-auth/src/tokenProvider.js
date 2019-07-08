@@ -110,15 +110,13 @@ export default class TokenProvider {
       : this._performFetchTokenInfo()
 
     return newTokenPromise
-      .then(
-        (tokenInfo: TokenInfo): void => {
-          newTokenInfo = tokenInfo
-          if (oldTokenInfo?.['refresh_token'])
-            newTokenInfo.refresh_token = oldTokenInfo.refresh_token
-          // $FlowFixMe
-          return this.onTokenInfoRefreshed?.(newTokenInfo, oldTokenInfo)
-        }
-      )
+      .then((tokenInfo: TokenInfo): void => {
+        newTokenInfo = tokenInfo
+        if (oldTokenInfo?.['refresh_token'])
+          newTokenInfo.refresh_token = oldTokenInfo.refresh_token
+        // $FlowFixMe
+        return this.onTokenInfoRefreshed?.(newTokenInfo, oldTokenInfo)
+      })
       .then((): Promise<TokenInfo> => this.setTokenInfo(newTokenInfo))
   }
 

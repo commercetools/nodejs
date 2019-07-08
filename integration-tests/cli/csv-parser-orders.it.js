@@ -142,9 +142,7 @@ describe('CSV and CLI Tests', () => {
       )
 
       await exec(
-        `${binPath} -t deliveries --inputFile ${csvFilePath} --logFile ${
-          tmpFile.name
-        }`
+        `${binPath} -t deliveries --inputFile ${csvFilePath} --logFile ${tmpFile.name}`
       )
       const data = await fs.readFile(tmpFile.name, { encoding: 'utf8' })
       expect(data).toMatchSnapshot()
@@ -157,9 +155,7 @@ describe('CSV and CLI Tests', () => {
 
       expect(
         exec(
-          `${binPath} -t deliveries --inputFile ${csvFilePath} --logFile ${
-            tmpFile.name
-          }`
+          `${binPath} -t deliveries --inputFile ${csvFilePath} --logFile ${tmpFile.name}`
         )
       ).rejects.toThrowError(expectedError)
     })

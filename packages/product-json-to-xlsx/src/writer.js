@@ -80,47 +80,43 @@ export function writeToZipFile(
   let lastProductType
 
   productStream
-    .each(
-      (product: Object): void => {
-        // check what productType are we exporting
-        if (product.productType && product.productType !== lastProductType) {
-          lastProductType = product.productType
-          lastExport = exportByProductType[lastProductType]
+    .each((product: Object): void => {
+      // check what productType are we exporting
+      if (product.productType && product.productType !== lastProductType) {
+        lastProductType = product.productType
+        lastExport = exportByProductType[lastProductType]
 
-          // if we haven't started exporting this productType yet
-          if (!lastExport) {
-            // generate a temp file name
-            const fileName: string = `${slugify(product.productType)}.xlsx`
-            const filePath: string = path.join(tmpDir, fileName)
+        // if we haven't started exporting this productType yet
+        if (!lastExport) {
+          // generate a temp file name
+          const fileName: string = `${slugify(product.productType)}.xlsx`
+          const filePath: string = path.join(tmpDir, fileName)
 
-            // create headers and file stream
-            lastExport = {
-              productType: lastProductType,
-              headers: mapHeaders(Object.keys(product)),
-              excel: new ProductExcel(fs.createWriteStream(filePath)),
-            }
-
-            // write a header row to XLSX file
-            const headerNames: Array<string> = lastExport.headers.map(
-              header => header.label
-            )
-            lastExport.excel.writeHeader(headerNames)
-
-            // register new export in cache
-            exportByProductType[lastProductType] = lastExport
+          // create headers and file stream
+          lastExport = {
+            productType: lastProductType,
+            headers: mapHeaders(Object.keys(product)),
+            excel: new ProductExcel(fs.createWriteStream(filePath)),
           }
-        }
 
-        // we have lastExport variable containing all necessary info
-        lastExport.excel.writeRow(mapValues(lastExport.headers, product))
+          // write a header row to XLSX file
+          const headerNames: Array<string> = lastExport.headers.map(
+            header => header.label
+          )
+          lastExport.excel.writeHeader(headerNames)
+
+          // register new export in cache
+          exportByProductType[lastProductType] = lastExport
+        }
       }
-    )
-    .done(
-      (): void => {
-        const exports: Array<Object> = Object.keys(exportByProductType).map(
-          key => exportByProductType[key]
-        )
-        finishWorksheetsAndArchive(exports, tmpDir, output, logger)
-      }
-    )
+
+      // we have lastExport variable containing all necessary info
+      lastExport.excel.writeRow(mapValues(lastExport.headers, product))
+    })
+    .done((): void => {
+      const exports: Array<Object> = Object.keys(exportByProductType).map(
+        key => exportByProductType[key]
+      )
+      finishWorksheetsAndArchive(exports, tmpDir, output, logger)
+    })
 }

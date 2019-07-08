@@ -87,9 +87,7 @@ export default class ResourceDeleter {
           // Check if the resource is empty
           if (!results || !results.length) {
             this.logger.info(
-              `No ${this.resource} were found in the project ${
-                this.apiConfig.projectKey
-              }, therefore nothing to delete.`
+              `No ${this.resource} were found in the project ${this.apiConfig.projectKey}, therefore nothing to delete.`
             )
             return Promise.resolve('nothing to delete')
           }
@@ -98,37 +96,32 @@ export default class ResourceDeleter {
 
           // concurrency is set in the clients middleware
           return Promise.all(
-            results.map(
-              async (result: Object): Promise<ClientResult> => {
-                let newVersion
-                // Check if the resource is published
-                if (result.masterData?.published) {
-                  await this.unPublishResource(result)
-                  newVersion = result.version + 1
-                }
-                deletedItems += 1
-                return this.deleteResource({
-                  ...result,
-                  version: newVersion || result.version,
-                })
+            results.map(async (result: Object): Promise<ClientResult> => {
+              let newVersion
+              // Check if the resource is published
+              if (result.masterData?.published) {
+                await this.unPublishResource(result)
+                newVersion = result.version + 1
               }
-            )
+              deletedItems += 1
+              return this.deleteResource({
+                ...result,
+                version: newVersion || result.version,
+              })
+            })
           )
         },
         { accumulate: false }
       )
-      .then(
-        (): void =>
-          this.logger.info(
-            `A total of ${deletedItems} ${this.resource} have been removed`
-          )
+      .then((): void =>
+        this.logger.info(
+          `A total of ${deletedItems} ${this.resource} have been removed`
+        )
       )
-      .catch(
-        (error: Error): Promise<Error> => {
-          this.logger.error(error)
-          return Promise.reject(error)
-        }
-      )
+      .catch((error: Error): Promise<Error> => {
+        this.logger.error(error)
+        return Promise.reject(error)
+      })
   }
 
   unPublishResource(
@@ -152,14 +145,12 @@ export default class ResourceDeleter {
         uri: this.getServiceWithBuildUri(fetchedResource),
         method: 'DELETE',
       })
-      .catch(
-        (error: ClientResponse): Promise<any> => {
-          // do not throw error if the resource does not exist anymore
-          if (error.statusCode === 404) return Promise.resolve()
+      .catch((error: ClientResponse): Promise<any> => {
+        // do not throw error if the resource does not exist anymore
+        if (error.statusCode === 404) return Promise.resolve()
 
-          return Promise.reject(error)
-        }
-      )
+        return Promise.reject(error)
+      })
   }
 
   createService() {

@@ -144,9 +144,8 @@ export default class CustomObjectsImporter {
   _createPromiseReturningFunction(requests: Array<ClientRequest>): Function {
     return async (): Promise<void> => {
       await Promise.all(
-        requests.map(
-          (request: ClientRequest): ExecutionResult =>
-            this._executeCreateOrUpdateAction(request)
+        requests.map((request: ClientRequest): ExecutionResult =>
+          this._executeCreateOrUpdateAction(request)
         )
       )
     }
@@ -158,51 +157,47 @@ export default class CustomObjectsImporter {
 
     return this.client
       .execute(request)
-      .then(
-        (): ExecutionResult => {
-          if (update) {
-            this._summary.updatedCount += 1
-          } else {
-            this._summary.createdCount += 1
-          }
-          return Promise.resolve()
+      .then((): ExecutionResult => {
+        if (update) {
+          this._summary.updatedCount += 1
+        } else {
+          this._summary.createdCount += 1
         }
-      )
-      .catch(
-        (error: Error): ExecutionResult => {
-          this._summary.errors.push(error.message || error)
-          let msg
-          if (this.continueOnProblems) {
-            if (update) {
-              this._summary.updateErrorCount += 1
-              msg = 'Update error occurred but ignored. See summary for details'
-            } else {
-              this._summary.createErrorCount += 1
-              msg = 'Create error occurred but ignored. See summary for details'
-            }
-            this.logger.error(msg)
-            return Promise.resolve()
-          }
+        return Promise.resolve()
+      })
+      .catch((error: Error): ExecutionResult => {
+        this._summary.errors.push(error.message || error)
+        let msg
+        if (this.continueOnProblems) {
           if (update) {
             this._summary.updateErrorCount += 1
-            msg =
-              'Process stopped due to error while updating custom object. See summary for details'
+            msg = 'Update error occurred but ignored. See summary for details'
           } else {
             this._summary.createErrorCount += 1
-            msg =
-              'Process stopped due to error while creating custom object. See summary for details'
+            msg = 'Create error occurred but ignored. See summary for details'
           }
           this.logger.error(msg)
-
-          return Promise.reject(
-            new CustomObjectImportError(
-              msg,
-              this._summary,
-              error.message || error
-            )
-          )
+          return Promise.resolve()
         }
-      )
+        if (update) {
+          this._summary.updateErrorCount += 1
+          msg =
+            'Process stopped due to error while updating custom object. See summary for details'
+        } else {
+          this._summary.createErrorCount += 1
+          msg =
+            'Process stopped due to error while creating custom object. See summary for details'
+        }
+        this.logger.error(msg)
+
+        return Promise.reject(
+          new CustomObjectImportError(
+            msg,
+            this._summary,
+            error.message || error
+          )
+        )
+      })
   }
 
   _createOrUpdateObjects(
@@ -237,9 +232,8 @@ export default class CustomObjectsImporter {
     this.logger.info('Creating requests...')
     const uri = CustomObjectsImporter.buildUri(this.apiConfig.projectKey)
 
-    return newObjects.map(
-      (newObject: CustomObjectDraft): ClientRequest =>
-        CustomObjectsImporter.buildRequest(uri, 'POST', newObject)
+    return newObjects.map((newObject: CustomObjectDraft): ClientRequest =>
+      CustomObjectsImporter.buildRequest(uri, 'POST', newObject)
     )
   }
 

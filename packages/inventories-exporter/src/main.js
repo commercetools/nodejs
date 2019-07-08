@@ -79,8 +79,9 @@ export default class InventoryExporter {
         headers: true,
         delimiter: this.exportConfig.delimiter,
       }
-      const csvStream = csv.format(csvOptions).transform(
-        (row: Inventory): Object => {
+      const csvStream = csv
+        .format(csvOptions)
+        .transform((row: Inventory): Object => {
           this.logger.verbose(`transforming row ${JSON.stringify(row)}`)
 
           let mappedRow = InventoryExporter.inventoryMappings(row)
@@ -92,8 +93,7 @@ export default class InventoryExporter {
           }
 
           return mappedRow
-        }
-      )
+        })
       csvStream.pipe(outputStream)
       this._fetchInventories(csvStream)
         .then((): stream$Writable => csvStream.end())
@@ -164,15 +164,13 @@ export default class InventoryExporter {
       request.headers = {
         Authorization: `Bearer ${this.accessToken}`,
       }
-    return this.client.execute(request).then(
-      (result: Object): Promise<any> => {
-        if (result.body?.results.length)
-          return Promise.resolve(result.body.results[0].id)
-        return Promise.reject(
-          new Error('No data with channel key in CTP Platform')
-        )
-      }
-    )
+    return this.client.execute(request).then((result: Object): Promise<any> => {
+      if (result.body?.results.length)
+        return Promise.resolve(result.body.results[0].id)
+      return Promise.reject(
+        new Error('No data with channel key in CTP Platform')
+      )
+    })
   }
 
   static _processFn(

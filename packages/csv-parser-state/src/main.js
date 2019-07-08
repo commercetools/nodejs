@@ -76,12 +76,11 @@ export default class CsvParserState {
       .map(CsvParserState._removeEmptyFields)
       .map(CsvParserState._parseInitialToBoolean)
       .map(unflatten)
-      .map(
-        (state: StateWithStringTransitions): StateWithStringTransitions =>
-          CsvParserState._mapMultiValueFieldsToArray(
-            state,
-            this.csvConfig.multiValueDelimiter
-          )
+      .map((state: StateWithStringTransitions): StateWithStringTransitions =>
+        CsvParserState._mapMultiValueFieldsToArray(
+          state,
+          this.csvConfig.multiValueDelimiter
+        )
       )
       .flatMap(
         (
@@ -89,9 +88,8 @@ export default class CsvParserState {
         ): StateWithUnresolvedTransitions =>
           highland(this._transformTransitions(state))
       )
-      .errors(
-        (error: HttpErrorType, cb: Function): void =>
-          this._handleErrors(error, cb)
+      .errors((error: HttpErrorType, cb: Function): void =>
+        this._handleErrors(error, cb)
       )
       .stopOnError((error: string) => {
         // <- Emit error and close stream if needed

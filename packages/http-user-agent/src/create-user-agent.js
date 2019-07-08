@@ -1,6 +1,5 @@
 /* @flow */
 import type { HttpUserAgentOptions } from 'types/sdk'
-/* global window */
 
 /*
   This is the easiest way, for this use case, to detect if we're running in

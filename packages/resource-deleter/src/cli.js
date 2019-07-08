@@ -141,9 +141,7 @@ async function execute() {
       const response = await prompts({
         type: 'confirm',
         name: 'value',
-        message: `You are about to delete all ${
-          args.resource
-        } from this project.
+        message: `You are about to delete all ${args.resource} from this project.
       WARNING: This operation is final and is not reversible. 
       Are you sure about this?`,
         initial: false,

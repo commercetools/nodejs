@@ -102,9 +102,7 @@ describe('CSV and CLI Tests', () => {
 
       await expect(
         exec(
-          `${binPath} -p ${projectKey}  -i ${csvFilePath} --logFile ${
-            tmpFile.name
-          }`
+          `${binPath} -p ${projectKey}  -i ${csvFilePath} --logFile ${tmpFile.name}`
         )
       ).rejects.toThrowError(expectedError)
 

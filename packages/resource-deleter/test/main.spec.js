@@ -70,9 +70,7 @@ describe('::ResourceDeleter', () => {
         const noOfResourceToDelete = payload.body.results.length
         await resourceDeleter.run()
         expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
-          `A total of ${noOfResourceToDelete} ${
-            resourceDeleter.resource
-          } have been removed`
+          `A total of ${noOfResourceToDelete} ${resourceDeleter.resource} have been removed`
         )
       })
     })
@@ -162,9 +160,7 @@ describe('::ResourceDeleter', () => {
         await resourceDeleter.run()
         expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(1)
         expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
-          `A total of ${noOfResourceToDelete} ${
-            resourceDeleter.resource
-          } have been removed`
+          `A total of ${noOfResourceToDelete} ${resourceDeleter.resource} have been removed`
         )
       })
     })
@@ -329,9 +325,7 @@ describe('::ResourceDeleter', () => {
         expect(resourceDeleter.deleteResource).toHaveBeenCalledTimes(11)
         expect(resourceDeleter.logger.info).toHaveBeenCalledTimes(3)
         expect(resourceDeleter.logger.info).toHaveBeenCalledWith(
-          `A total of ${noOfResourceToDelete} ${
-            resourceDeleter.resource
-          } have been removed`
+          `A total of ${noOfResourceToDelete} ${resourceDeleter.resource} have been removed`
         )
       })
     })
