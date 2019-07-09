@@ -15,23 +15,23 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Beniasaad Achraf <achraf.beniasaad@commercetools.com> (https://github.com/acbeni)",
-  "main": "dist/typescript-sdk.cjs.js",
-  "module": "dist/typescript-sdk.es.js",
-  "browser": "dist/typescript-sdk.umd.js",
+  "main": "lib/typescript-sdk.cjs.js",
+  "module": "lib/typescript-sdk.es.js",
+  "browser": "lib/typescript-sdk.umd.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
   },
   "files": [
-    "dist"
+    "lib"
   ],
   "scripts": {
     "check-types": "tsc",
-    "prebuild": "babel ./src --out-dir dist --extensions '.ts' --config-file '../../babel.config.js'",
+    "prebuild": "babel ./src --out-dir lib --extensions '.ts' --config-file '../../babel.config.js' && tsc --emitDeclarationOnly",
     "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
-    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n TypescriptSdk -i dist/index.js -o dist/typescript-sdk.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n TypescriptSdk -i dist/index.js -o dist/typescript-sdk.umd.min.js",
-    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n TypescriptSdk -i dist/index.js -o dist/typescript-sdk.es.js",
-    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n TypescriptSdk -i dist/index.js -o dist/typescript-sdk.cjs.js"
+    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n TypescriptSdk -i lib/index.js -o lib/typescript-sdk.umd.js",
+    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n TypescriptSdk -i lib/index.js -o lib/typescript-sdk.umd.min.js",
+    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n TypescriptSdk -i lib/index.js -o lib/typescript-sdk.es.js",
+    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n TypescriptSdk -i lib/index.js -o lib/typescript-sdk.cjs.js"
   }
 }

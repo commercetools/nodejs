@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "lib",
     "rootDir": "src",
     "target": "es2019",
     "types": ["node"],
@@ -9,9 +9,7 @@
     "sourceMap": true,
     "declaration": true,
 		"allowJs": false,
-		"noEmit": true,
-		"strict": true,
-		"isolatedModules": true,
+		// "strict": true,
 		"esModuleInterop": true
   },
   "exclude": ["**/node_modules", "**/dist"],
