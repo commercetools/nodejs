@@ -7,10 +7,11 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
-    "declaration": true,
+    "declaration": false,
 		"allowJs": false,
 		"strict": true,
-		"esModuleInterop": true
+    "esModuleInterop": true,
+		"isolatedModules": true
   },
   "exclude": ["**/node_modules", "**/dist"],
   "include": ["src"]
