@@ -1,0 +1,25 @@
+{
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "name": "@commercetools/typescript-sdk",
+  "version": "0.0.1",
+  "description": "Typescript definitions and sdk for commercetools platform",
+  "keywords": [
+    "commercetools",
+    "typescript",
+    "sdk"
+  ],
+  "homepage": "https://commercetools.github.io/nodejs/",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "author": "Beniasaad Achraf <achraf.beniasaad@commercetools.com> (https://github.com/acbeni)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs.git"
+  },
+  "files": [
+    "lib"
+  ]
+}
