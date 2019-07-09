@@ -6,9 +6,8 @@
     "types": ["node"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "sourceMap": false,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": false,
+    "sourceMap": true,
+    "declaration": true
   },
   "exclude": ["**/node_modules", "**/dist"]
 }
