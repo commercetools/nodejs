@@ -8,10 +8,12 @@ export type MethodType =
   | "OPTIONS"
   | "TRACE";
 
+export type VariableMap =  { [key: string]: string | number | boolean | undefined }
+
 export type MiddlewareArg = {
   request: ClientRequest;
-  response: ClientResponse<any>;
-  error: Error;
+  response?: ClientResponse<any>;
+  error?: Error;
   next: Middleware;
 };
 
@@ -19,14 +21,12 @@ export type ClientRequest = {
   uri: string,
   method: MethodType,
   body?: any,
-  headers?: {
-    [key: string]: string,
-  },
+  headers?: VariableMap,
 }
 
 export type ClientResponse<T> = {
   body?: T,
-  statusCode: number,
+  statusCode?: number,
   headers?: Object
 }
 

@@ -1,8 +1,8 @@
-import { ApiRoot } from '../gen/client/ApiRoot'
-import { middwareFromCtpClient } from '../necessary-middlewares/ctp_middlware'
+import { ApiRoot } from "../gen/client/ApiRoot";
+import { middwareFromCtpClient } from "../necessary-middlewares/ctp_middlware";
 
-export function createApiBuilderFromCtpClient(ctpClient): ApiRoot {
+export function createApiBuilderFromCtpClient(ctpClient: any): ApiRoot {
   return new ApiRoot({
-    middlewares: [middwareFromCtpClient(ctpClient)],
-  })
+    middlewares: [middwareFromCtpClient(ctpClient)]
+  });
 }

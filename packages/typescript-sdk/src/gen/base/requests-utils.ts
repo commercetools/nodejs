@@ -22,17 +22,20 @@ export class ApiRequest<O> {
       uri: getURI(this.commonRequest)
     };
 
-    const res = await this.middleware({
+    const res : MiddlewareArg= await this.middleware({
       request: req,
-      error: null,
       next: noOpMiddleware,
-      response: null
     });
 
     if (res.error) {
       throw res.error;
     }
-    return res.response;
+    
+    if(res.response){
+      return res.response
+    }
+    
+    return {};
   }
 }
 
@@ -55,7 +58,7 @@ function getURI(commonRequest: CommonRequest<any>): string {
   const pathMap = commonRequest.pathVariables;
   const queryMap = commonRequest.queryParams;
   var uri: String = commonRequest.uriTemplate;
-  var queryParams = [];
+  var queryParams : string[]= [];
   for (const param in pathMap) {
     uri = uri.replace(`{${param}}`, `${pathMap[param]}`);
   }

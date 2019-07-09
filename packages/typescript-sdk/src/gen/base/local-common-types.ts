@@ -1,14 +1,12 @@
-import { MethodType } from "./common-types";
-
-export type Variable =  { [key: string]: string | number | boolean }
+import { MethodType, VariableMap } from "./common-types";
 
 export interface CommonRequest<T> {
   baseURL: string;
   url?: string,
-  headers?: { [key: string]: string };
+  headers?: VariableMap;
   method: MethodType;
   uriTemplate: string;
-  pathVariables?: Variable;
-  queryParams?: Variable;
+  pathVariables?: VariableMap;
+  queryParams?: VariableMap;
   body?: T
 }
