@@ -33,7 +33,7 @@ const getPresets = () => {
 
 module.exports = {
   presets: [
-    '@babel/typescript',
+    // '@babel/typescript',
     ['@babel/preset-env', getPresets()],
     '@babel/preset-flow',
   ],
