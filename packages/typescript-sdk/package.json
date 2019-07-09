@@ -1,5 +1,4 @@
 {
-
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -27,11 +26,12 @@
     "dist"
   ],
   "scripts": {
-    "prebuild":"tsc",
+    "check-types": "tsc",
+    "prebuild": "babel ./src --out-dir dist --extensions '.ts' --config-file '../../babel.config.js'",
     "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
-    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n TypescriptSdk -i src/index.js -o dist/typescript-sdk.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n TypescriptSdk -i src/index.js -o dist/typescript-sdk.umd.min.js",
-    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n TypescriptSdk -i src/index.js -o dist/typescript-sdk.es.js",
-    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n TypescriptSdk -i src/index.js -o dist/typescript-sdk.cjs.js"
+    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n TypescriptSdk -i dist/index.js -o dist/typescript-sdk.umd.js",
+    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n TypescriptSdk -i dist/index.js -o dist/typescript-sdk.umd.min.js",
+    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n TypescriptSdk -i dist/index.js -o dist/typescript-sdk.es.js",
+    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n TypescriptSdk -i dist/index.js -o dist/typescript-sdk.cjs.js"
   }
 }

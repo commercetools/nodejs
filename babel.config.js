@@ -32,7 +32,11 @@ const getPresets = () => {
 }
 
 module.exports = {
-  presets: [['@babel/preset-env', getPresets()], '@babel/preset-flow'],
+  presets: [
+    '@babel/typescript',
+    ['@babel/preset-env', getPresets()],
+    '@babel/preset-flow',
+  ],
   plugins: [
     '@babel/plugin-proposal-export-default-from',
     '@babel/plugin-proposal-export-namespace-from',
@@ -40,5 +44,7 @@ module.exports = {
     '@babel/plugin-syntax-optional-chaining',
     ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
     '@babel/plugin-proposal-nullish-coalescing-operator',
+    '@babel/proposal-class-properties',
+    '@babel/proposal-object-rest-spread',
   ],
 }
