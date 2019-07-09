@@ -1,5 +1,5 @@
 
-import { Update } from './../../models/Common'
+import { ExtensionUpdate } from './../../models/Extension'
 import { Extension } from './../../models/Extension'
 import { Middleware } from './../../base/common-types'
 import { ApiRequest } from './../../base/requests-utils'
@@ -48,7 +48,7 @@ export class ByProjectKeyExtensionsByIDRequestBuilder {
             queryArgs?: {
                expand?: string
             },
-            body: Update,
+            body: ExtensionUpdate,
             headers?: {
                [key:string]:string
             },

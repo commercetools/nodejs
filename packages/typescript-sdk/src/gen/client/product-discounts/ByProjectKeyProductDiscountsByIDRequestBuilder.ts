@@ -1,5 +1,5 @@
 
-import { Update } from './../../models/Common'
+import { ProductDiscountUpdate } from './../../models/ProductDiscount'
 import { ProductDiscount } from './../../models/ProductDiscount'
 import { Middleware } from './../../base/common-types'
 import { ApiRequest } from './../../base/requests-utils'
@@ -48,7 +48,7 @@ export class ByProjectKeyProductDiscountsByIDRequestBuilder {
             queryArgs?: {
                expand?: string
             },
-            body: Update,
+            body: ProductDiscountUpdate,
             headers?: {
                [key:string]:string
             },

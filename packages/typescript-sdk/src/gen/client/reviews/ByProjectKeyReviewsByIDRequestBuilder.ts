@@ -1,5 +1,5 @@
 
-import { Update } from './../../models/Common'
+import { ReviewUpdate } from './../../models/Review'
 import { Review } from './../../models/Review'
 import { Middleware } from './../../base/common-types'
 import { ApiRequest } from './../../base/requests-utils'
@@ -48,7 +48,7 @@ export class ByProjectKeyReviewsByIDRequestBuilder {
             queryArgs?: {
                expand?: string
             },
-            body: Update,
+            body: ReviewUpdate,
             headers?: {
                [key:string]:string
             },

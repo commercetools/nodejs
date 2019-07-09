@@ -1,5 +1,5 @@
 
-import { Update } from './../../models/Common'
+import { ChannelUpdate } from './../../models/Channel'
 import { Channel } from './../../models/Channel'
 import { Middleware } from './../../base/common-types'
 import { ApiRequest } from './../../base/requests-utils'
@@ -48,7 +48,7 @@ export class ByProjectKeyChannelsByIDRequestBuilder {
             queryArgs?: {
                expand?: string
             },
-            body: Update,
+            body: ChannelUpdate,
             headers?: {
                [key:string]:string
             },

@@ -1,5 +1,5 @@
 
-import { Update } from './../../models/Common'
+import { ShippingMethodUpdate } from './../../models/ShippingMethod'
 import { ShippingMethod } from './../../models/ShippingMethod'
 import { Middleware } from './../../base/common-types'
 import { ApiRequest } from './../../base/requests-utils'
@@ -48,7 +48,7 @@ export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
             queryArgs?: {
                expand?: string
             },
-            body: Update,
+            body: ShippingMethodUpdate,
             headers?: {
                [key:string]:string
             },

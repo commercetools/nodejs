@@ -1,5 +1,5 @@
 
-import { Update } from './../../models/Common'
+import { ProductTypeUpdate } from './../../models/ProductType'
 import { ProductType } from './../../models/ProductType'
 import { Middleware } from './../../base/common-types'
 import { ApiRequest } from './../../base/requests-utils'
@@ -48,7 +48,7 @@ export class ByProjectKeyProductTypesByIDRequestBuilder {
             queryArgs?: {
                expand?: string
             },
-            body: Update,
+            body: ProductTypeUpdate,
             headers?: {
                [key:string]:string
             },

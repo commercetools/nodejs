@@ -1,5 +1,5 @@
 
-import { Update } from './../../models/Common'
+import { CartDiscountUpdate } from './../../models/CartDiscount'
 import { CartDiscount } from './../../models/CartDiscount'
 import { Middleware } from './../../base/common-types'
 import { ApiRequest } from './../../base/requests-utils'
@@ -48,7 +48,7 @@ export class ByProjectKeyCartDiscountsByIDRequestBuilder {
             queryArgs?: {
                expand?: string
             },
-            body: Update,
+            body: CartDiscountUpdate,
             headers?: {
                [key:string]:string
             },

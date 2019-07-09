@@ -1,5 +1,5 @@
 
-import { Update } from './../../models/Common'
+import { CustomerUpdate } from './../../models/Customer'
 import { Customer } from './../../models/Customer'
 import { Middleware } from './../../base/common-types'
 import { ApiRequest } from './../../base/requests-utils'
@@ -48,7 +48,7 @@ export class ByProjectKeyCustomersByIDRequestBuilder {
             queryArgs?: {
                expand?: string
             },
-            body: Update,
+            body: CustomerUpdate,
             headers?: {
                [key:string]:string
             },

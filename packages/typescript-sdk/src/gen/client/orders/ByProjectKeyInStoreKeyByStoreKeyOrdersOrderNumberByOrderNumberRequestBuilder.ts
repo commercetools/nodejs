@@ -1,5 +1,5 @@
 
-import { Update } from './../../models/Common'
+import { OrderUpdate } from './../../models/Order'
 import { Order } from './../../models/Order'
 import { Middleware } from './../../base/common-types'
 import { ApiRequest } from './../../base/requests-utils'
@@ -49,7 +49,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyOrdersOrderNumberByOrderNumberReque
             queryArgs?: {
                expand?: string
             },
-            body: Update,
+            body: OrderUpdate,
             headers?: {
                [key:string]:string
             },

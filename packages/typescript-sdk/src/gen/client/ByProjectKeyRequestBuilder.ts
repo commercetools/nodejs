@@ -30,7 +30,7 @@ import { ByProjectKeyExtensionsRequestBuilder } from './extensions/ByProjectKeyE
 import { ByProjectKeyApiClientsRequestBuilder } from './api-clients/ByProjectKeyApiClientsRequestBuilder'
 import { ByProjectKeyStoresRequestBuilder } from './stores/ByProjectKeyStoresRequestBuilder'
 import { ByProjectKeyInStoreKeyByStoreKeyRequestBuilder } from './in-store/ByProjectKeyInStoreKeyByStoreKeyRequestBuilder'
-import { Update } from './../models/Common'
+import { ProjectUpdate } from './../models/Project'
 import { Project } from './../models/Project'
 import { Middleware } from './../base/common-types'
 import { ApiRequest } from './../base/requests-utils'
@@ -418,7 +418,7 @@ export class ByProjectKeyRequestBuilder {
     post(
          methodArgs:{
             
-            body: Update,
+            body: ProjectUpdate,
             headers?: {
                [key:string]:string
             },

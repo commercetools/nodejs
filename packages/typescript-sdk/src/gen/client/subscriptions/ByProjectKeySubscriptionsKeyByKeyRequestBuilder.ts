@@ -1,5 +1,5 @@
 
-import { Update } from './../../models/Common'
+import { SubscriptionUpdate } from './../../models/Subscription'
 import { Subscription } from './../../models/Subscription'
 import { Middleware } from './../../base/common-types'
 import { ApiRequest } from './../../base/requests-utils'
@@ -48,7 +48,7 @@ export class ByProjectKeySubscriptionsKeyByKeyRequestBuilder {
             queryArgs?: {
                expand?: string
             },
-            body: Update,
+            body: SubscriptionUpdate,
             headers?: {
                [key:string]:string
             },

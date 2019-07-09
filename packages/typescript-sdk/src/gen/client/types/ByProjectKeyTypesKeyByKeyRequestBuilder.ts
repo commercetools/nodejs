@@ -1,5 +1,5 @@
 
-import { Update } from './../../models/Common'
+import { TypeUpdate } from './../../models/Type'
 import { Type } from './../../models/Type'
 import { Middleware } from './../../base/common-types'
 import { ApiRequest } from './../../base/requests-utils'
@@ -48,7 +48,7 @@ export class ByProjectKeyTypesKeyByKeyRequestBuilder {
             queryArgs?: {
                expand?: string
             },
-            body: Update,
+            body: TypeUpdate,
             headers?: {
                [key:string]:string
             },

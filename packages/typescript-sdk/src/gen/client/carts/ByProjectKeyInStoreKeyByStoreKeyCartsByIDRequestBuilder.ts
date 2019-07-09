@@ -1,5 +1,5 @@
 
-import { Update } from './../../models/Common'
+import { CartUpdate } from './../../models/Cart'
 import { Cart } from './../../models/Cart'
 import { Middleware } from './../../base/common-types'
 import { ApiRequest } from './../../base/requests-utils'
@@ -49,7 +49,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
             queryArgs?: {
                expand?: string
             },
-            body: Update,
+            body: CartUpdate,
             headers?: {
                [key:string]:string
             },

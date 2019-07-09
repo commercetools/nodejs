@@ -1,5 +1,5 @@
 
-import { Update } from './../../models/Common'
+import { PaymentUpdate } from './../../models/Payment'
 import { Payment } from './../../models/Payment'
 import { Middleware } from './../../base/common-types'
 import { ApiRequest } from './../../base/requests-utils'
@@ -48,7 +48,7 @@ export class ByProjectKeyPaymentsKeyByKeyRequestBuilder {
             queryArgs?: {
                expand?: string
             },
-            body: Update,
+            body: PaymentUpdate,
             headers?: {
                [key:string]:string
             },

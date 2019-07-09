@@ -1,5 +1,5 @@
 
-import { Update } from './../../models/Common'
+import { ShoppingListUpdate } from './../../models/ShoppingList'
 import { ShoppingList } from './../../models/ShoppingList'
 import { Middleware } from './../../base/common-types'
 import { ApiRequest } from './../../base/requests-utils'
@@ -48,7 +48,7 @@ export class ByProjectKeyShoppingListsKeyByKeyRequestBuilder {
             queryArgs?: {
                expand?: string
             },
-            body: Update,
+            body: ShoppingListUpdate,
             headers?: {
                [key:string]:string
             },

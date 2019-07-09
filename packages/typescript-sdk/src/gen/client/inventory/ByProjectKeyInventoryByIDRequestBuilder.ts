@@ -1,5 +1,5 @@
 
-import { Update } from './../../models/Common'
+import { InventoryUpdate } from './../../models/Inventory'
 import { InventoryEntry } from './../../models/Inventory'
 import { Middleware } from './../../base/common-types'
 import { ApiRequest } from './../../base/requests-utils'
@@ -48,7 +48,7 @@ export class ByProjectKeyInventoryByIDRequestBuilder {
             queryArgs?: {
                expand?: string
             },
-            body: Update,
+            body: InventoryUpdate,
             headers?: {
                [key:string]:string
             },

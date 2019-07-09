@@ -102,8 +102,9 @@
     "rollup-plugin-node-globals": "1.4.0",
     "rollup-plugin-uglify": "6.0.2",
     "rollup-watch": "4.3.1",
-    "streamtest": "1.2.4"
-    ,"typescript": "^3.5.3"
+    "streamtest": "1.2.4",
+    "typescript": "^3.5.3",
+    "node": "^12.6.0"
   },
   "config": {
     "commitizen": {
