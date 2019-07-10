@@ -18,6 +18,7 @@
   "main": "lib/typescript-sdk.cjs.js",
   "module": "lib/typescript-sdk.es.js",
   "browser": "lib/typescript-sdk.umd.js",
+  "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
