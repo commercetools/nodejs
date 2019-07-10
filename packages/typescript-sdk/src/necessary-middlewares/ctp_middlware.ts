@@ -1,47 +1,47 @@
-import { Middleware, MiddlewareArg } from "../gen/base/common-types";
+import { Middleware, MiddlewareArg } from '../gen/base/common-types'
 
-export function middwareFromCtpClient(client:any): Middleware {
-  return async (midlllewareArg: MiddlewareArg) =>
-    handleRequest(client, midlllewareArg);
+export function middlewareFromCtpClient(client: any): Middleware {
+  return async (middlewareArg: MiddlewareArg) =>
+    handleRequest(client, middlewareArg)
 }
 
 async function handleRequest(
-  client:any,
-  middlwareArg: MiddlewareArg
+  client: any,
+  middlewareArg: MiddlewareArg
 ): Promise<MiddlewareArg> {
-  const { request } = middlwareArg;
+  const { request } = middlewareArg
 
   const modifiedRequest = {
     ...request,
-    uri: removeBaseUrl(request.uri)
-  };
+    uri: removeBaseUrl(request.uri),
+  }
 
   try {
-    const result = await client.execute(modifiedRequest);
-    const { uri, error, ...response } = result;
+    const result = await client.execute(modifiedRequest)
+    const { uri, error, ...response } = result
 
-    return middlwareArg.next({
-      ...middlwareArg,
+    return middlewareArg.next({
+      ...middlewareArg,
       response,
-      error
-    });
+      error,
+    })
   } catch (error) {
-    return middlwareArg.next({
-      ...middlwareArg,
-      error
-    });
+    return middlewareArg.next({
+      ...middlewareArg,
+      error,
+    })
   }
 }
 
 function removeBaseUrl(url: string) {
-  var baseUrlPattern = /^https?:\/\/[a-z\:0-9.]+/;
-  var result = "";
-  var match = baseUrlPattern.exec(url);
+  const baseUrlPattern = /^https?:\/\/[a-z\:0-9.]+/
+  let result = ''
+  const match = baseUrlPattern.exec(url)
   if (match != null) {
-    result = match[0];
+    result = match[0]
   }
   if (result.length > 0) {
-    url = url.replace(result, "");
+    url = url.replace(result, '')
   }
-  return url;
+  return url
 }
