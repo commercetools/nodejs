@@ -3,6 +3,7 @@ import { getCredentials } from '@commercetools/get-credentials'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createApiBuilderFromCtpClient } from '@commercetools/typescript-sdk'
+import fetch from 'node-fetch'
 
 let projectKey
 if (process.env.CI === 'true') projectKey = 'auth-integration-test'
