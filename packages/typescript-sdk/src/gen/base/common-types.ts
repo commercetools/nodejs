@@ -25,7 +25,7 @@ export type ClientRequest = {
 }
 
 export type ClientResponse<T> = {
-  body?: T,
+  body: T,
   statusCode?: number,
   headers?: Object
 }

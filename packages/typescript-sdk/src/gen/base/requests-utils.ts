@@ -35,7 +35,9 @@ export class ApiRequest<O> {
       return res.response
     }
     
-    return {};
+    return {
+      body: {} as O
+    }
   }
 }
 
