@@ -2,6 +2,8 @@
 
 A package used to provide typescript definitions on top of ctp client
 
+![example usage](typescript_tutorial.gif)
+
 ## Install
 
 #### Node.js
