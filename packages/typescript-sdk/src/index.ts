@@ -1,3 +1,5 @@
+import 'regenerator-runtime/runtime'
+
 export * from './gen/models/Inventory'
 export * from './gen/models/State'
 export * from './gen/models/DiscountCode'
