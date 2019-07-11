@@ -24,40 +24,43 @@ npm install --save @commercetools/typescript-sdk
 #### Usage example
 
 ```ts
-import { createAuthMiddlewareForClientCredentialsFlow } from "@commercetools/sdk-middleware-auth";
-import { createHttpMiddleware } from "@commercetools/sdk-middleware-http";
-import { createClient } from "@commercetools/sdk-client";
-import { createApiBuilderFromCtpClient, ApiRoot } from "@commercetools/typescript-sdk";
+import { createAuthMiddlewareForClientCredentialsFlow } from "@commercetools/sdk-middleware-auth"
+import { createHttpMiddleware } from "@commercetools/sdk-middleware-http"
+import { createClient } from "@commercetools/sdk-client"
+import {
+  createApiBuilderFromCtpClient,
+  ApiRoot
+} from "@commercetools/typescript-sdk"
+import fetch from "node-fetch"
 
-import fetch = require("node-fetch");
+const projectKey = "some_project_key"
 
 const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
   host: "https://auth.sphere.io",
   projectKey,
-  scopes,
   credentials: {
     clientId: "some_id",
     clientSecret: "some_secret"
   },
   fetch
-});
+})
 
 const httpMiddleware = createHttpMiddleware({
   host: "https://api.sphere.io",
   fetch
-});
-
-const ctpClient = createClient({
-  middlewares:[authMiddleware,httpMiddleware]
 })
 
+const ctpClient = createClient({
+  middlewares: [authMiddleware, httpMiddleware]
+})
 
 const apiRoot: ApiRoot = createApiBuilderFromCtpClient(ctpClient)
 
-apiRoot.withProjectKeyValue({
-            projectKey:'some_project_key'
-        })
-        .get()
-        .execute()
-        .then(x => ...)
+apiRoot
+  .withProjectKeyValue({
+    projectKey
+  })
+  .get()
+  .execute()
+  .then(x => /*...*/)
 ```
