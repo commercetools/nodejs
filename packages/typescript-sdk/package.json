@@ -18,7 +18,7 @@
   "main": "lib/typescript-sdk.cjs.js",
   "module": "lib/typescript-sdk.es.js",
   "browser": "lib/typescript-sdk.umd.js",
-  "types": "lib/index.d.ts",
+  "types": "lib/types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
@@ -27,12 +27,13 @@
     "lib"
   ],
   "scripts": {
-    "check-types": "tsc",
-    "prebuild": "rimraf -rf lib && babel ./src --out-dir lib --extensions '.ts' --config-file './babel.config.js' && tsc --project tsconfig.types.json",
+    "type-check": "tsc --noEmit",
+    "build:types": "tsc --emitDeclarationOnly",
+    "prebuild": "rimraf -rf lib && npm run build:types",
     "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
-    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n TypescriptSdk -i lib/index.js -o lib/typescript-sdk.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n TypescriptSdk -i lib/index.js -o lib/typescript-sdk.umd.min.js",
-    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n TypescriptSdk -i lib/index.js -o lib/typescript-sdk.es.js",
-    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n TypescriptSdk -i lib/index.js -o lib/typescript-sdk.cjs.js"
+    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n TypescriptSdk -i ./src/index.ts -o lib/typescript-sdk.umd.js",
+    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n TypescriptSdk -i ./src/index.ts -o lib/typescript-sdk.umd.min.js",
+    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n TypescriptSdk -i ./src/index.ts -o lib/typescript-sdk.es.js",
+    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n TypescriptSdk -i ./src/index.ts -o lib/typescript-sdk.cjs.js"
   }
 }

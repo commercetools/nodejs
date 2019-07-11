@@ -13,6 +13,7 @@ const babelConfig = require('./babel.config')
 const env = process.env.NODE_ENV
 const version = process.env.npm_package_version
 const [, format] = process.env.npm_lifecycle_event.split(':')
+const extensions = ['.js', '.jsx', '.ts', '.tsx']
 
 const config = {
   output: {
@@ -29,6 +30,7 @@ const config = {
       jsnext: true,
       main: true,
       preferBuiltins: true,
+      extensions,
     }),
     commonjs({
       include: ['node_modules/**'],
@@ -36,6 +38,7 @@ const config = {
     babel({
       exclude: ['node_modules/**'],
       runtimeHelpers: true,
+      extensions,
       ...babelConfig,
     }),
     format === 'umd' && globals(),
