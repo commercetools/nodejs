@@ -1,6 +1,6 @@
 node8Environment: &node8Environment
   docker:
-    - image: circleci/node:8@sha256:72069ffd9cb1a2aac902b886a992fe712b62d25897e104303980785cf5bb25ca
+    - image: circleci/node:8@sha256:90cf94eb025c69bdba3839d568bfd72c3c38277a2a7ee15a783a312d48cbb2c4
   working_directory: ~/nodejs
 node10Environment: &node10Environment
   docker:
