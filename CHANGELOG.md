@@ -1,3 +1,190 @@
+## @commercetools/state-importer@2.0.14 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/resource-deleter@1.0.10 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-json-to-xlsx@2.0.13 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-json-to-csv@3.1.10 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-exporter@2.0.14 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/price-exporter@2.0.14 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/personal-data-erasure@2.0.12 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/inventories-exporter@2.1.8 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/discount-code-importer@2.0.14 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/discount-code-exporter@3.0.14 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/customer-groups-exporter@2.0.14 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/custom-objects-importer@2.0.14 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/custom-objects-exporter@2.0.14 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/csv-parser-state@2.0.13 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/csv-parser-price@3.0.13 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/category-exporter@2.0.14 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/api-request-builder@5.3.2 (2019-07-16)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1371](https://github.com/commercetools/nodejs/pull/1371) fix(req-builder): enable setting fuzzyLevel to 0 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
 ## commercetools-sdk changed artefact generation
 
 ## @commercetools/sync-actions@3.5.0 (2019-07-03)
