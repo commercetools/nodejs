@@ -112,6 +112,38 @@ describe('buildActions', () => {
     expect(actual).toEqual(expected)
   })
 
+  test('should build `setCustomField` action for a long text field', () => {
+    const before = {
+      custom: {
+        type: {
+          typeId: 'type',
+          id: 'customType',
+        },
+        fields: {
+          customField: 'word '.repeat(200),
+        },
+      },
+    }
+    const updatedValue = before.custom.fields.customField.concat('1')
+    const now = {
+      custom: {
+        ...before.custom,
+        fields: {
+          customField: updatedValue,
+        },
+      },
+    }
+    const actual = buildActions(now, before)
+    const expected = [
+      {
+        action: 'setCustomField',
+        name: 'customField',
+        value: updatedValue,
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
+
   describe('changing the custom type of a category', () => {
     describe('existing category has no `custom` object', () => {
       test('should build `setCustomType` action with the new type', () => {

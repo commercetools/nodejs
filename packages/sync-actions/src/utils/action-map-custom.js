@@ -24,21 +24,18 @@ const extractTypeFields = (diffedFields, nextFields) =>
   Array.isArray(diffedFields)
     ? diffpatcher.getDeltaValue(diffedFields)
     : nextFields
-const extractFieldValue = (diffedFields, nextFields, fieldName) =>
-  Array.isArray(diffedFields[fieldName])
-    ? diffpatcher.getDeltaValue(diffedFields[fieldName])
-    : nextFields[fieldName]
+const extractFieldValue = (newFields, fieldName) => newFields[fieldName]
 
-export default function actionsMapCustom(diff, nextObject, previousObject) {
+export default function actionsMapCustom(diff, newObj, oldObj) {
   const actions = []
   if (!diff.custom) return actions
   if (hasSingleCustomFieldChanged(diff)) {
     // If custom is not defined on the new or old category
-    const custom = diffpatcher.getDeltaValue(diff.custom, previousObject)
+    const custom = diffpatcher.getDeltaValue(diff.custom, oldObj)
     actions.push({ action: Actions.setCustomType, ...custom })
   } else if (hasCustomTypeChanged(diff)) {
     // If custom is set to an empty object on the new or old category
-    const type = extractCustomType(diff, previousObject)
+    const type = extractCustomType(diff, oldObj)
 
     if (!type) actions.push({ action: Actions.setCustomType })
     else if (type.id)
@@ -46,28 +43,24 @@ export default function actionsMapCustom(diff, nextObject, previousObject) {
         action: Actions.setCustomType,
         type: {
           typeId: 'type',
-          id: extractTypeId(type, nextObject),
+          id: extractTypeId(type, newObj),
         },
-        fields: extractTypeFields(diff.custom.fields, nextObject.custom.fields),
+        fields: extractTypeFields(diff.custom.fields, newObj.custom.fields),
       })
     else if (type.key)
       actions.push({
         action: Actions.setCustomType,
         type: {
           typeId: 'type',
-          key: extractTypeKey(type, nextObject),
+          key: extractTypeKey(type, newObj),
         },
-        fields: extractTypeFields(diff.custom.fields, nextObject.custom.fields),
+        fields: extractTypeFields(diff.custom.fields, newObj.custom.fields),
       })
   } else if (haveMultipleCustomFieldsChanged(diff)) {
     const customFieldsActions = Object.keys(diff.custom.fields).map(name => ({
       action: Actions.setCustomField,
       name,
-      value: extractFieldValue(
-        diff.custom.fields,
-        nextObject.custom.fields,
-        name
-      ),
+      value: extractFieldValue(newObj.custom.fields, name),
     }))
     actions.push(...customFieldsActions)
   }
