@@ -35,7 +35,7 @@ export function fuzzy(): Object {
  * @return {Object} The instance of the service, can be chained.
  */
 export function fuzzyLevel(value: number): Object {
-  if (!value && value !== 0)
+  if (value === undefined || value === null)
     throw new Error('Required argument for `fuzzyLevel` is missing')
   this.params.search.fuzzyLevel = value
   return this
