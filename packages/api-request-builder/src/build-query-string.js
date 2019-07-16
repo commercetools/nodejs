@@ -98,6 +98,7 @@ export default function buildQueryString(
 
     if (text) queryString.push(`text.${text.lang}=${text.value}`)
     if (fuzzy) queryString.push('fuzzy=true')
+
     if (fuzzyLevel) queryString.push(`fuzzyLevel=${fuzzyLevel}`)
     queryString.push(`markMatchingVariants=${markMatchingVariants.toString()}`)
 
