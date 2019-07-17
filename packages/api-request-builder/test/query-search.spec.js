@@ -30,9 +30,14 @@ describe('querySearch', () => {
     expect(service.params.search.fuzzy).toBeTruthy()
   })
 
-  test('should set the fuzzy level', () => {
+  test('should set the fuzzy level to 2', () => {
     service.fuzzyLevel(2)
     expect(service.params.search.fuzzyLevel).toBe(2)
+  })
+
+  test('should set the fuzzy level to 0', () => {
+    service.fuzzyLevel(0)
+    expect(service.params.search.fuzzyLevel).toBe(0)
   })
 
   test('should throw if fuzzy level is missing', () => {

@@ -1,6 +1,6 @@
 {
   "name": "@commercetools/personal-data-erasure",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "description": "Export and delete all data related to a single customer",
   "main": "lib/main.js",
   "bin": {
@@ -29,7 +29,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commercetools/api-request-builder": "^5.3.1",
+    "@commercetools/api-request-builder": "^5.3.2",
     "@commercetools/get-credentials": "^3.0.6",
     "@commercetools/sdk-client": "^2.1.0",
     "@commercetools/sdk-middleware-auth": "^5.1.2",
