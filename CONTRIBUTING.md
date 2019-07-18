@@ -63,6 +63,12 @@ To ensure the lock file is up-to-date with the new versions, it's recommended to
 
 We use lerna for releasing packages. Just run `npm run release` from `master` (after pulling in the latest merges) to publish a single or a set of modules. Lerna will check changes on packages providing semver bumps according to the commit messages used for each package.
 
+This will also append all PRs up until the release in the `CHANGELOG.md` and push it as a separate commit with the message `docs: update changelog`.
+
+For this to work, it is essential that you create and export a github token that has read access to your public repos.
+
+`$ export GITHUB_AUTH=<your_token>`
+
 #### Commit message
 
 Make sure your commit messages follow [Angular's commit message format](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines). To make this easy run `npm run commit` from the root.
