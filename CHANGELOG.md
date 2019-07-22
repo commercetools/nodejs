@@ -1,3 +1,111 @@
+## @commercetools/sync-actions@3.5.2 (2019-07-22)
+
+#### :bug: Bug Fix
+
+- `product-json-to-csv`
+  - [#1379](https://github.com/commercetools/nodejs/pull/1379) fix(product-json-to-csv): split requests with too large predicate ([@daern91](https://github.com/daern91))
+- `sync-actions`
+  - [#1373](https://github.com/commercetools/nodejs/pull/1373) fix(sync-actions): custom field with long text (#1357) ([@katmatt](https://github.com/katmatt))
+
+#### :house: Maintenance
+
+- [#1374](https://github.com/commercetools/nodejs/pull/1374) chore: automate changelog building ([@daern91](https://github.com/daern91))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/state-importer@2.0.15 (2019-07-22)
+
+#### :bug: Bug Fix
+
+- `product-json-to-csv`
+  - [#1379](https://github.com/commercetools/nodejs/pull/1379) fix(product-json-to-csv): split requests with too large predicate ([@daern91](https://github.com/daern91))
+- `sync-actions`
+  - [#1373](https://github.com/commercetools/nodejs/pull/1373) fix(sync-actions): custom field with long text (#1357) ([@katmatt](https://github.com/katmatt))
+
+#### :house: Maintenance
+
+- [#1374](https://github.com/commercetools/nodejs/pull/1374) chore: automate changelog building ([@daern91](https://github.com/daern91))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/product-json-to-xlsx@2.0.14 (2019-07-22)
+
+#### :bug: Bug Fix
+
+- `product-json-to-csv`
+  - [#1379](https://github.com/commercetools/nodejs/pull/1379) fix(product-json-to-csv): split requests with too large predicate ([@daern91](https://github.com/daern91))
+- `sync-actions`
+  - [#1373](https://github.com/commercetools/nodejs/pull/1373) fix(sync-actions): custom field with long text (#1357) ([@katmatt](https://github.com/katmatt))
+
+#### :house: Maintenance
+
+- [#1374](https://github.com/commercetools/nodejs/pull/1374) chore: automate changelog building ([@daern91](https://github.com/daern91))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/product-json-to-csv@3.1.11 (2019-07-22)
+
+#### :bug: Bug Fix
+
+- `product-json-to-csv`
+  - [#1379](https://github.com/commercetools/nodejs/pull/1379) fix(product-json-to-csv): split requests with too large predicate ([@daern91](https://github.com/daern91))
+- `sync-actions`
+  - [#1373](https://github.com/commercetools/nodejs/pull/1373) fix(sync-actions): custom field with long text (#1357) ([@katmatt](https://github.com/katmatt))
+
+#### :house: Maintenance
+
+- [#1374](https://github.com/commercetools/nodejs/pull/1374) chore: automate changelog building ([@daern91](https://github.com/daern91))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/discount-code-importer@2.0.15 (2019-07-22)
+
+#### :bug: Bug Fix
+
+- `product-json-to-csv`
+  - [#1379](https://github.com/commercetools/nodejs/pull/1379) fix(product-json-to-csv): split requests with too large predicate ([@daern91](https://github.com/daern91))
+- `sync-actions`
+  - [#1373](https://github.com/commercetools/nodejs/pull/1373) fix(sync-actions): custom field with long text (#1357) ([@katmatt](https://github.com/katmatt))
+
+#### :house: Maintenance
+
+- [#1374](https://github.com/commercetools/nodejs/pull/1374) chore: automate changelog building ([@daern91](https://github.com/daern91))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/custom-objects-importer@2.0.15 (2019-07-22)
+
+#### :bug: Bug Fix
+
+- `product-json-to-csv`
+  - [#1379](https://github.com/commercetools/nodejs/pull/1379) fix(product-json-to-csv): split requests with too large predicate ([@daern91](https://github.com/daern91))
+- `sync-actions`
+  - [#1373](https://github.com/commercetools/nodejs/pull/1373) fix(sync-actions): custom field with long text (#1357) ([@katmatt](https://github.com/katmatt))
+
+#### :house: Maintenance
+
+- [#1374](https://github.com/commercetools/nodejs/pull/1374) chore: automate changelog building ([@daern91](https://github.com/daern91))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
 ## @commercetools/state-importer@2.0.14 (2019-07-16)
 
 #### :bug: Bug Fix
