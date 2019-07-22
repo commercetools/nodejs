@@ -26,7 +26,7 @@ import highland from 'highland'
 import fetch from 'node-fetch'
 import Promise from 'bluebird'
 import JSONStream from 'JSONStream'
-import { memoize, map, get, pick } from 'lodash'
+import { memoize, map, get, pick, chunk } from 'lodash'
 import ProductMapping from './map-product-data'
 import { writeToSingleCsvFile, writeToZipFile } from './writer'
 import pkg from '../package.json'
@@ -217,12 +217,34 @@ export default class ProductJsonToCsv {
 
     if (!channelIds.length && !customerGroupIds.length) return prices
 
+    const CHUNK_SIZE = 150
     // resolve channels by their ids
-    const channelsById: Object = await this._getChannelsById(channelIds)
+    let channelsById: Object = {}
+    if (channelIds.length > CHUNK_SIZE) {
+      channelsById = await chunk(channelIds, CHUNK_SIZE).reduce(
+        async (acc: Object, currentIds: Array<string>): Promise<{}> => ({
+          ...acc,
+          ...(await this._getChannelsById(currentIds)),
+        }),
+        Promise.resolve({})
+      )
+    } else {
+      channelsById = await this._getChannelsById(channelIds)
+    }
+
     // resolve customerGroups by their ids
-    const customerGroupsById: Object = await this._getCustomerGroupsById(
-      customerGroupIds
-    )
+    let customerGroupsById: Object = {}
+    if (customerGroupIds.length > CHUNK_SIZE) {
+      customerGroupsById = await chunk(customerGroupIds, CHUNK_SIZE).reduce(
+        async (acc: Object, currentIds: Array<string>): Promise<{}> => ({
+          ...acc,
+          ...(await this._getCustomerGroupsById(currentIds)),
+        }),
+        Promise.resolve({})
+      )
+    } else {
+      customerGroupsById = await this._getCustomerGroupsById(customerGroupIds)
+    }
     // add channel and customerGroup objects to prices
     return prices.map((price: Price): Price => {
       let resolvedPrice
