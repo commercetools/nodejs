@@ -5,8 +5,6 @@ import type {
   RefreshAuthMiddlewareOptions,
 } from 'types/sdk'
 
-import * as authScopes from './scopes'
-
 type BuiltRequestParams = {
   basicAuth: string,
   url: string,
@@ -33,8 +31,7 @@ export function buildRequestForClientCredentialsFlow(
   if (!(clientId && clientSecret))
     throw new Error('Missing required credentials (clientId, clientSecret)')
 
-  const defaultScope = `${authScopes.MANAGE_PROJECT}:${options.projectKey}`
-  const scope = (options.scopes || [defaultScope]).join(' ')
+  const scope = options.scopes ? options.scopes.join(' ') : undefined
 
   const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString(
     'base64'
@@ -43,7 +40,7 @@ export function buildRequestForClientCredentialsFlow(
   // other oauth endpoints.
   const oauthUri = options.oauthUri || '/oauth/token'
   const url = options.host.replace(/\/$/, '') + oauthUri
-  const body = `grant_type=client_credentials&scope=${scope}`
+  const body = `grant_type=client_credentials${scope ? `&scope=${scope}` : ''}`
 
   return { basicAuth, url, body }
 }

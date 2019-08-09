@@ -77,9 +77,7 @@ describe('Base Auth Flow', () => {
 
       nock(middlewareOptions.host)
         .filteringRequestBody(body => {
-          expect(body).toBe(
-            'grant_type=client_credentials&scope=manage_project:foo'
-          )
+          expect(body).toBe('grant_type=client_credentials')
           return '*'
         })
         .post('/oauth/token', '*')
@@ -106,9 +104,7 @@ describe('Base Auth Flow', () => {
 
       nock(middlewareOptions.host)
         .filteringRequestBody(body => {
-          expect(body).toBe(
-            'grant_type=client_credentials&scope=manage_project:foo'
-          )
+          expect(body).toBe('grant_type=client_credentials')
           return '*'
         })
         .post('/oauth/token', '*')
