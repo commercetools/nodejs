@@ -26,7 +26,7 @@ import highland from 'highland'
 import fetch from 'node-fetch'
 import Promise from 'bluebird'
 import JSONStream from 'JSONStream'
-import { memoize, map, get, pick, chunk } from 'lodash'
+import { memoize, map, get, pick, chunk, flatten } from 'lodash'
 import ProductMapping from './map-product-data'
 import { writeToSingleCsvFile, writeToZipFile } from './writer'
 import pkg from '../package.json'
@@ -265,6 +265,10 @@ export default class ProductJsonToCsv {
     })
   }
 
+  static _pickAndConcatResults(results: SuccessResult[]): any[] {
+    return flatten(results.map((res: SuccessResult): any[] => res.body.results))
+  }
+
   async _getChannelsById(ids: Array<string>): Promise<Array<Object>> {
     const notCachedIds = ids.filter((id: string) => !this.channelsCache[id])
 
@@ -273,10 +277,10 @@ export default class ProductJsonToCsv {
       const predicate = `id in ("${notCachedIds.join('", "')}")`
       const channelService = this._createService('channels')
       const uri = channelService.where(predicate).build()
-      const {
-        body: { results },
-      } = await this.fetchReferences(uri)
 
+      const results = ProductJsonToCsv._pickAndConcatResults(
+        await this.fetchReferences(uri)
+      )
       results.forEach((result: Channel) => {
         // we should keep old channels in the cache because we can resolve
         // multiple products in parallel and we don't want to fetch same channels
@@ -299,9 +303,9 @@ export default class ProductJsonToCsv {
       const predicate = `id in ("${notCachedIds.join('", "')}")`
       const customerGroupService = this._createService('customerGroups')
       const uri = customerGroupService.where(predicate).build()
-      const {
-        body: { results },
-      } = await this.fetchReferences(uri)
+      const results = ProductJsonToCsv._pickAndConcatResults(
+        await this.fetchReferences(uri)
+      )
 
       results.forEach((result: CustomerGroup) => {
         // we should keep old customerGroups in the cache because we can resolve
@@ -320,7 +324,7 @@ export default class ProductJsonToCsv {
 
     const productTypeService = this._createService('productTypes')
     const uri = productTypeService.byId(productTypeReference.id).build()
-    return this.fetchReferences(uri).then(({ body }: SuccessResult): {
+    return this.fetchReferences(uri).then(([{ body }]: SuccessResult): {
       productType: ProductType,
     } => ({ productType: body }))
   }
@@ -330,7 +334,7 @@ export default class ProductJsonToCsv {
 
     const taxCategoryService = this._createService('taxCategories')
     const uri = taxCategoryService.byId(taxCategoryReference.id).build()
-    return this.fetchReferences(uri).then(({ body }: SuccessResult): {
+    return this.fetchReferences(uri).then(([{ body }]: SuccessResult): {
       taxCategory: TaxCategory,
     } => ({ taxCategory: body }))
   }
@@ -340,7 +344,7 @@ export default class ProductJsonToCsv {
 
     const stateService = this._createService('states')
     const uri = stateService.byId(stateReference.id).build()
-    return this.fetchReferences(uri).then(({ body }: SuccessResult): {
+    return this.fetchReferences(uri).then(([{ body }]: SuccessResult): {
       state: State,
     } => ({ state: body }))
   }
@@ -417,7 +421,8 @@ export default class ProductJsonToCsv {
     const categoriesService = this._createService('categories')
     const uri = categoriesService.where(predicate).build()
     return this.fetchReferences(uri).then(
-      ({ body: { results } }: SuccessResult): Array<Category> => {
+      (res: SuccessResult[]): Array<Category> => {
+        const results = ProductJsonToCsv._pickAndConcatResults(res)
         results.forEach((result: Category) => {
           cachedCategories.push(result)
           this.categoriesCache[result.id] = result
@@ -447,5 +452,8 @@ ProductJsonToCsv.prototype.fetchReferences = memoize(function _fetchReferences(
     request.headers = {
       Authorization: `Bearer ${this.accessToken}`,
     }
-  return this.client.execute(request)
+  return this.client.process(
+    request,
+    (res: SuccessResult): Promise<SuccessResult> => Promise.resolve(res)
+  )
 })
