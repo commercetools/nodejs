@@ -356,13 +356,15 @@ describe('ProductJsonToXlsx', () => {
     describe('::_resolveProductType', () => {
       beforeEach(() => {
         productJsonToXlsx.fetchReferences = jest.fn(() =>
-          Promise.resolve({
-            body: {
-              id: 'product-type-id',
-              name: 'resolved-name',
-              attributes: [{}],
+          Promise.resolve([
+            {
+              body: {
+                id: 'product-type-id',
+                name: 'resolved-name',
+                attributes: [{}],
+              },
             },
-          })
+          ])
         )
       })
 
@@ -398,17 +400,19 @@ describe('ProductJsonToXlsx', () => {
     describe('::_resolveVariantReferences', () => {
       beforeEach(() => {
         productJsonToXlsx.fetchReferences = jest.fn(() =>
-          Promise.resolve({
-            body: {
-              results: [
-                {
-                  id: 'uuid',
-                  name: 'resolved-name',
-                  key: 'resolved-key',
-                },
-              ],
+          Promise.resolve([
+            {
+              body: {
+                results: [
+                  {
+                    id: 'uuid',
+                    name: 'resolved-name',
+                    key: 'resolved-key',
+                  },
+                ],
+              },
             },
-          })
+          ])
         )
       })
 
@@ -504,12 +508,14 @@ describe('ProductJsonToXlsx', () => {
     describe('::_resolveTaxCategory', () => {
       beforeEach(() => {
         productJsonToXlsx.fetchReferences = jest.fn(() =>
-          Promise.resolve({
-            body: {
-              id: 'tax-cat-id',
-              key: 'resolved-tax-cat-key',
+          Promise.resolve([
+            {
+              body: {
+                id: 'tax-cat-id',
+                key: 'resolved-tax-cat-key',
+              },
             },
-          })
+          ])
         )
       })
 
@@ -544,12 +550,14 @@ describe('ProductJsonToXlsx', () => {
     describe('::_resolveState', () => {
       beforeEach(() => {
         productJsonToXlsx.fetchReferences = jest.fn(() =>
-          Promise.resolve({
-            body: {
-              id: 'state-id',
-              key: 'res-state-key',
+          Promise.resolve([
+            {
+              body: {
+                id: 'state-id',
+                key: 'res-state-key',
+              },
             },
-          })
+          ])
         )
       })
 
@@ -711,7 +719,7 @@ describe('ProductJsonToXlsx', () => {
         const results = [{ id: 'cat-id-2', key: 'cat-key-2-new-in-cache' }]
 
         productJsonToXlsx.fetchReferences = jest.fn(() =>
-          Promise.resolve({ body: { results } })
+          Promise.resolve([{ body: { results } }])
         )
       })
 
@@ -825,7 +833,11 @@ describe('ProductJsonToXlsx', () => {
       productJsonToXlsx.fetchReferences(uri)
       expect(productJsonToXlsx.client.execute).toHaveBeenCalled()
       expect(productJsonToXlsx.client.execute).toHaveBeenCalledWith(
-        expectedRequest
+        expect.objectContaining({
+          ...expectedRequest,
+          // client.process enhances query with sort, withTotal and limit params
+          uri: expect.stringMatching(uri),
+        })
       )
     })
 
@@ -841,7 +853,11 @@ describe('ProductJsonToXlsx', () => {
       productJsonToXlsx.fetchReferences(uri)
       expect(productJsonToXlsx.client.execute).toHaveBeenCalledTimes(1)
       expect(productJsonToXlsx.client.execute).toHaveBeenCalledWith(
-        expectedRequest
+        expect.objectContaining({
+          ...expectedRequest,
+          // client.process enhances query with sort, withTotal and limit params
+          uri: expect.stringMatching(uri),
+        })
       )
     })
   })
@@ -851,16 +867,18 @@ describe('ProductJsonToXlsx', () => {
       productJsonToXlsx.fetchReferences = jest
         .fn()
         .mockImplementationOnce(() =>
-          Promise.resolve({
-            body: {
-              results: [
-                {
-                  id: 'channel-id',
-                  key: 'channel-key',
-                },
-              ],
+          Promise.resolve([
+            {
+              body: {
+                results: [
+                  {
+                    id: 'channel-id',
+                    key: 'channel-key',
+                  },
+                ],
+              },
             },
-          })
+          ])
         )
         .mockImplementation(() =>
           Promise.reject(new Error('I should not be called'))

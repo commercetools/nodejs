@@ -406,13 +406,15 @@ describe('ProductJsonToCsv', () => {
     describe('::_resolveProductType', () => {
       beforeEach(() => {
         productJsonToCsv.fetchReferences = jest.fn(() =>
-          Promise.resolve({
-            body: {
-              id: 'product-type-id',
-              name: 'resolved-name',
-              attributes: [{}],
+          Promise.resolve([
+            {
+              body: {
+                id: 'product-type-id',
+                name: 'resolved-name',
+                attributes: [{}],
+              },
             },
-          })
+          ])
         )
       })
 
@@ -448,17 +450,19 @@ describe('ProductJsonToCsv', () => {
     describe('::_resolveVariantReferences', () => {
       beforeEach(() => {
         productJsonToCsv.fetchReferences = jest.fn(() =>
-          Promise.resolve({
-            body: {
-              results: [
-                {
-                  id: 'uuid',
-                  name: 'resolved-name',
-                  key: 'resolved-key',
-                },
-              ],
+          Promise.resolve([
+            {
+              body: {
+                results: [
+                  {
+                    id: 'uuid',
+                    name: 'resolved-name',
+                    key: 'resolved-key',
+                  },
+                ],
+              },
             },
-          })
+          ])
         )
       })
 
@@ -593,12 +597,14 @@ describe('ProductJsonToCsv', () => {
     describe('::_resolveTaxCategory', () => {
       beforeEach(() => {
         productJsonToCsv.fetchReferences = jest.fn(() =>
-          Promise.resolve({
-            body: {
-              id: 'tax-cat-id',
-              key: 'resolved-tax-cat-key',
+          Promise.resolve([
+            {
+              body: {
+                id: 'tax-cat-id',
+                key: 'resolved-tax-cat-key',
+              },
             },
-          })
+          ])
         )
       })
 
@@ -633,12 +639,14 @@ describe('ProductJsonToCsv', () => {
     describe('::_resolveState', () => {
       beforeEach(() => {
         productJsonToCsv.fetchReferences = jest.fn(() =>
-          Promise.resolve({
-            body: {
-              id: 'state-id',
-              key: 'res-state-key',
+          Promise.resolve([
+            {
+              body: {
+                id: 'state-id',
+                key: 'res-state-key',
+              },
             },
-          })
+          ])
         )
       })
 
@@ -800,7 +808,7 @@ describe('ProductJsonToCsv', () => {
         const results = [{ id: 'cat-id-2', key: 'cat-key-2-new-in-cache' }]
 
         productJsonToCsv.fetchReferences = jest.fn(() =>
-          Promise.resolve({ body: { results } })
+          Promise.resolve([{ body: { results } }])
         )
       })
 
@@ -914,7 +922,11 @@ describe('ProductJsonToCsv', () => {
       productJsonToCsv.fetchReferences(uri)
       expect(productJsonToCsv.client.execute).toHaveBeenCalled()
       expect(productJsonToCsv.client.execute).toHaveBeenCalledWith(
-        expectedRequest
+        expect.objectContaining({
+          ...expectedRequest,
+          // client.process enhances query with sort, withTotal and limit params
+          uri: expect.stringMatching(uri),
+        })
       )
     })
 
@@ -930,7 +942,11 @@ describe('ProductJsonToCsv', () => {
       productJsonToCsv.fetchReferences(uri)
       expect(productJsonToCsv.client.execute).toHaveBeenCalledTimes(1)
       expect(productJsonToCsv.client.execute).toHaveBeenCalledWith(
-        expectedRequest
+        expect.objectContaining({
+          ...expectedRequest,
+          // client.process enhances query with sort, withTotal and limit params
+          uri: expect.stringMatching(uri),
+        })
       )
     })
   })
@@ -940,16 +956,18 @@ describe('ProductJsonToCsv', () => {
       productJsonToCsv.fetchReferences = jest
         .fn()
         .mockImplementationOnce(() =>
-          Promise.resolve({
-            body: {
-              results: [
-                {
-                  id: 'channel-id',
-                  key: 'channel-key',
-                },
-              ],
+          Promise.resolve([
+            {
+              body: {
+                results: [
+                  {
+                    id: 'channel-id',
+                    key: 'channel-key',
+                  },
+                ],
+              },
             },
-          })
+          ])
         )
         .mockImplementation(() =>
           Promise.reject(new Error('I should not be called'))
@@ -981,16 +999,18 @@ describe('ProductJsonToCsv', () => {
       productJsonToCsv.fetchReferences = jest
         .fn()
         .mockImplementationOnce(() =>
-          Promise.resolve({
-            body: {
-              results: [
-                {
-                  id: 'customerGroup-id',
-                  key: 'customerGroup-key',
-                },
-              ],
+          Promise.resolve([
+            {
+              body: {
+                results: [
+                  {
+                    id: 'customerGroup-id',
+                    key: 'customerGroup-key',
+                  },
+                ],
+              },
             },
-          })
+          ])
         )
         .mockImplementation(() =>
           Promise.reject(new Error('I should not be called'))
