@@ -1,3 +1,223 @@
+## @commercetools/product-json-to-xlsx@2.0.16 (2019-08-12)
+
+#### :bug: Bug Fix
+
+- `inventories-exporter`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1389](https://github.com/commercetools/nodejs/pull/1389) fix(product-json-to-\*): fetch all references ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-json-to-csv@3.1.13 (2019-08-12)
+
+#### :bug: Bug Fix
+
+- `inventories-exporter`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1389](https://github.com/commercetools/nodejs/pull/1389) fix(product-json-to-\*): fetch all references ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/inventories-exporter@2.1.10 (2019-08-12)
+
+#### :bug: Bug Fix
+
+- `inventories-exporter`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1389](https://github.com/commercetools/nodejs/pull/1389) fix(product-json-to-\*): fetch all references ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/state-importer@2.0.16 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/sdk-middleware-auth@5.1.3 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/resource-deleter@1.0.11 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/product-json-to-xlsx@2.0.15 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/product-json-to-csv@3.1.12 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/product-exporter@2.0.15 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/price-exporter@2.0.15 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/personal-data-erasure@2.0.13 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/inventories-exporter@2.1.9 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/discount-code-importer@2.0.16 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/discount-code-exporter@3.0.15 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/customer-groups-exporter@2.0.15 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/custom-objects-importer@2.0.16 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/custom-objects-exporter@2.0.15 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/csv-parser-state@2.0.14 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/csv-parser-price@3.0.14 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/category-exporter@2.0.15 (2019-08-09)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1384](https://github.com/commercetools/nodejs/pull/1384) fix(sdk-middleware-auth): remove authScopes.MANAGE_PROJECT as default scope ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
 ## @commercetools/sync-actions@3.5.2 (2019-07-22)
 
 #### :bug: Bug Fix
