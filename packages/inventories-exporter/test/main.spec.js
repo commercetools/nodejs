@@ -238,7 +238,6 @@ describe('InventoryExporter', () => {
           return Promise.resolve()
         })
       const outputStream = streamtest.v2.toText((error, result) => {
-        console.log(error, result)
         const expectedResult = stripIndent`
           sku,quantityOnStock,restockableInDays,customType,customField.textField,customField.numberField,createdAt,lastModifiedAt
           hello,me,4,customKey,customText,123,,
