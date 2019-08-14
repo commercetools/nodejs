@@ -223,7 +223,7 @@ export default class ProductJsonToCsv {
     if (channelIds.length > CHUNK_SIZE) {
       channelsById = await chunk(channelIds, CHUNK_SIZE).reduce(
         async (acc: Object, currentIds: Array<string>): Promise<{}> => ({
-          ...acc,
+          ...(await acc),
           ...(await this._getChannelsById(currentIds)),
         }),
         Promise.resolve({})
@@ -237,7 +237,7 @@ export default class ProductJsonToCsv {
     if (customerGroupIds.length > CHUNK_SIZE) {
       customerGroupsById = await chunk(customerGroupIds, CHUNK_SIZE).reduce(
         async (acc: Object, currentIds: Array<string>): Promise<{}> => ({
-          ...acc,
+          ...(await acc),
           ...(await this._getCustomerGroupsById(currentIds)),
         }),
         Promise.resolve({})
