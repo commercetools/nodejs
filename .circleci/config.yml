@@ -10,17 +10,19 @@ node10Environment: &node10Environment
 aliases:
   - &restore_yarn_cache
     keys:
-      - v2-yarn-cache-{{ checksum "yarn.lock" }}
+      - v3-yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - v3-yarn-cache-{{ .Branch }}
+      - v3-yarn-cache
 
   - &save_yarn_cache
-    key: v2-yarn-cache-{{ checksum "yarn.lock" }}
+    key: v3-yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
     paths:
       - node_modules
       - ~/.cache/yarn
 
   - &yarn_install
     name: Installing
-    command: yarn install --pure-lockfile
+    command: yarn --frozen-lockfile
 
   - &unit_test
     name: Unit testing
