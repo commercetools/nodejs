@@ -9,6 +9,7 @@ import createBuildArrayActions, {
 } from './utils/create-build-array-actions'
 
 export const baseActionsList = [
+  { action: 'setSalutation', key: 'salutation' },
   { action: 'changeEmail', key: 'email' },
   { action: 'setFirstName', key: 'firstName' },
   { action: 'setLastName', key: 'lastName' },
