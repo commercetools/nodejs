@@ -8,6 +8,7 @@ describe('Exports', () => {
 
   test('correctly define base actions list', () => {
     expect(baseActionsList).toEqual([
+      { action: 'setSalutation', key: 'salutation' },
       { action: 'changeEmail', key: 'email' },
       { action: 'setFirstName', key: 'firstName' },
       { action: 'setLastName', key: 'lastName' },
@@ -43,6 +44,19 @@ describe('Actions', () => {
   let customerSync
   beforeEach(() => {
     customerSync = customerSyncFn()
+  })
+
+  test('should build `setSalutation` action', () => {
+    const before = {
+      salutation: 'Best',
+    }
+    const now = {
+      salutation: 'Dear',
+    }
+
+    const actual = customerSync.buildActions(now, before)
+    const expected = [{ action: 'setSalutation', salutation: now.salutation }]
+    expect(actual).toEqual(expected)
   })
 
   test('should build `changeEmail` action', () => {
