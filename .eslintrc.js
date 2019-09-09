@@ -34,13 +34,6 @@ module.exports = {
         devDependencies: ['**/test/**/*.js'],
       },
     ],
-    'prettier/prettier': [
-      'error',
-      {
-        trailingComma: 'es5',
-        singleQuote: true,
-      },
-    ],
     'jest/no-disabled-tests': 'warn',
     'jest/no-focused-tests': 'error',
     'jest/no-identical-title': 'error',

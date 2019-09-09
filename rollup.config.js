@@ -1,3 +1,6 @@
+// Do this as the first thing so that any code reading it knows the right env.
+process.env.BUILD_ROLLUP = true
+
 /* eslint-disable */
 const resolve = require('rollup-plugin-node-resolve')
 const commonjs = require('rollup-plugin-commonjs')
@@ -12,37 +15,66 @@ const babelConfig = require('./babel.config')
 
 const env = process.env.NODE_ENV
 const version = process.env.npm_package_version
-const [, format] = process.env.npm_lifecycle_event.split(':')
+const [, packageName] = process.env.npm_package_name.split('@commercetools/')
 const extensions = ['.js', '.jsx', '.ts', '.tsx']
+const plugins = [
+  json(),
+  replace({
+    'process.env.NODE_ENV': JSON.stringify(env),
+    VERSION: `'${version}'`,
+  }),
+  resolve({
+    extensions,
+    mainFields: ['module', 'main', 'jsnext'],
+    preferBuiltins: true,
+    modulesOnly: true,
+  }),
+  commonjs({
+    include: ['node_modules/**'],
+  }),
+  babel({
+    exclude: ['node_modules/**'],
+    runtimeHelpers: true,
+    extensions,
+    ...babelConfig,
+  }),
+  filesize(),
+].filter(Boolean)
 
-const config = {
-  output: {
-    sourcemap: true,
+const createConfig = cliArgs => [
+  {
+    input: cliArgs.input,
+    output: {
+      format: 'umd',
+      file: `dist/${packageName}.umd.js`,
+      name: cliArgs.name,
+    },
+    plugins: plugins.concat([globals()]),
   },
-  plugins: [
-    json(),
-    replace({
-      'process.env.NODE_ENV': JSON.stringify(env),
-      VERSION: `'${version}'`,
-    }),
-    resolve({
-      extensions,
-      mainFields: ['module', 'main', 'jsnext'],
-      preferBuiltins: true,
-      modulesOnly: true,
-    }),
-    commonjs({
-      include: ['node_modules/**'],
-    }),
-    babel({
-      exclude: ['node_modules/**'],
-      runtimeHelpers: true,
-      extensions,
-      ...babelConfig,
-    }),
-    format === 'umd' && globals(),
-    env === 'production' && uglify(),
-    filesize(),
-  ].filter(Boolean),
-}
-module.exports = config
+  {
+    input: cliArgs.input,
+    output: {
+      format: 'umd',
+      file: `dist/${packageName}.umd.min.js`,
+      name: cliArgs.name,
+    },
+    plugins: plugins.concat([globals(), uglify()]),
+  },
+  {
+    input: cliArgs.input,
+    output: {
+      format: 'cjs',
+      file: `dist/${packageName}.cjs.js`,
+    },
+    plugins,
+  },
+  {
+    input: cliArgs.input,
+    output: {
+      format: 'es',
+      file: `dist/${packageName}.es.js`,
+    },
+    plugins,
+  },
+]
+module.exports = createConfig

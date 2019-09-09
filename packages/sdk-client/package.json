@@ -16,22 +16,19 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
-  "main": "dist/commercetools-sdk-client.cjs.js",
-  "module": "dist/commercetools-sdk-client.es.js",
-  "browser": "dist/commercetools-sdk-client.umd.js",
+  "main": "dist/sdk-client.cjs.js",
+  "module": "dist/sdk-client.es.js",
+  "browser": "dist/sdk-client.umd.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
   },
   "files": [
-    "dist",
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
-    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n CommercetoolsSdkClient -i src/index.js -o dist/commercetools-sdk-client.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n CommercetoolsSdkClient -i src/index.js -o dist/commercetools-sdk-client.umd.min.js",
-    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n CommercetoolsSdkClient -i src/index.js -o dist/commercetools-sdk-client.es.js",
-    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSdkClient -i src/index.js -o dist/commercetools-sdk-client.cjs.js"
+    "prebuild": "rimraf dist/**",
+    "build": "cross-env yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkClient -i ./src/index.js"
   }
 }

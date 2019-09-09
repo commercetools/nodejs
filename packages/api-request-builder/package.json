@@ -17,22 +17,18 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
-  "main": "dist/commercetools-api-request-builder.cjs.js",
-  "module": "dist/commercetools-api-request-builder.es.js",
-  "browser": "dist/commercetools-api-request-builder.umd.js",
+  "main": "dist/api-request-builder.cjs.js",
+  "module": "dist/api-request-builder.es.js",
+  "browser": "dist/api-request-builder.umd.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
   },
   "files": [
-    "dist",
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
-    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n CommercetoolsApiRequestBuilder -i src/index.js -o dist/commercetools-api-request-builder.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n CommercetoolsApiRequestBuilder -i src/index.js -o dist/commercetools-api-request-builder.umd.min.js",
-    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n CommercetoolsApiRequestBuilder -i src/index.js -o dist/commercetools-api-request-builder.es.js",
-    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsApiRequestBuilder -i src/index.js -o dist/commercetools-api-request-builder.cjs.js"
+    "build": "cross-env yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsApiRequestBuilder -i ./src/index.js"
   }
 }

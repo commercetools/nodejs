@@ -1,4 +1,8 @@
 {
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "name": "@commercetools/personal-data-erasure",
   "version": "2.0.13",
   "description": "Export and delete all data related to a single customer",
@@ -7,6 +11,7 @@
     "personal-data-erasure": "bin/personal-data-erasure.js"
   },
   "scripts": {
+    "prebuild": "rimraf lib/**",
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "repository": {

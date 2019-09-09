@@ -1,4 +1,8 @@
 {
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "name": "@commercetools/category-exporter",
   "version": "2.0.15",
   "publishConfig": {
@@ -10,6 +14,7 @@
     "category-exporter": "bin/category-exporter.js"
   },
   "scripts": {
+    "prebuild": "rimraf lib/**",
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "repository": {

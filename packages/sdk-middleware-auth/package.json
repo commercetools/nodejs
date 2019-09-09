@@ -17,23 +17,20 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
-  "main": "dist/commercetools-sdk-middleware-auth.cjs.js",
-  "module": "dist/commercetools-sdk-middleware-auth.es.js",
-  "browser": "dist/commercetools-sdk-middleware-auth.umd.js",
+  "main": "dist/sdk-middleware-auth.cjs.js",
+  "module": "dist/sdk-middleware-auth.es.js",
+  "browser": "dist/sdk-middleware-auth.umd.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
   },
   "files": [
-    "dist",
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
-    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n CommercetoolsSdkMiddlewareAuth -i src/index.js -o dist/commercetools-sdk-middleware-auth.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n CommercetoolsSdkMiddlewareAuth -i src/index.js -o dist/commercetools-sdk-middleware-auth.umd.min.js",
-    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n CommercetoolsSdkMiddlewareAuth -i src/index.js -o dist/commercetools-sdk-middleware-auth.es.js",
-    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSdkMiddlewareAuth -i src/index.js -o dist/commercetools-sdk-middleware-auth.cjs.js"
+    "prebuild": "rimraf dist/**",
+    "build": "cross-env yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkMiddlewareAuth -i ./src/index.js"
   },
   "dependencies": {
     "node-fetch": "^2.3.0"

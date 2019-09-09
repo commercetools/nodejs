@@ -16,23 +16,20 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
-  "main": "dist/commercetools-sdk-middleware-user-agent.cjs.js",
-  "module": "dist/commercetools-sdk-middleware-user-agent.es.js",
-  "browser": "dist/commercetools-sdk-middleware-user-agent.umd.js",
+  "main": "dist/sdk-middleware-user-agent.cjs.js",
+  "module": "dist/sdk-middleware-user-agent.es.js",
+  "browser": "dist/sdk-middleware-user-agent.umd.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
   },
   "files": [
-    "dist",
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
-    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n CommercetoolsSdkMiddlewareUserAgent -i src/index.js -o dist/commercetools-sdk-middleware-user-agent.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n CommercetoolsSdkMiddlewareUserAgent -i src/index.js -o dist/commercetools-sdk-middleware-user-agent.umd.min.js",
-    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n CommercetoolsSdkMiddlewareUserAgent -i src/index.js -o dist/commercetools-sdk-middleware-user-agent.es.js",
-    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSdkMiddlewareUserAgent -i src/index.js -o dist/commercetools-sdk-middleware-user-agent.cjs.js"
+    "prebuild": "rimraf dist/**",
+    "build": "cross-env yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkMiddlewareUserAgent -i ./src/index.js"
   },
   "dependencies": {
     "@commercetools/http-user-agent": "^2.1.1"
