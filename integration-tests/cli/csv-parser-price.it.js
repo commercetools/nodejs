@@ -60,13 +60,13 @@ describe('CSV and CLI Tests', () => {
   })
 
   describe('CLI logs specific errors', () => {
-    it('on faulty CSV format', async () => {
+    it('on faulty CSV format', () => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
-      expect(
+      return expect(
         exec(`${binPath} -p ${projectKey} -i ${csvFilePath} -o ${jsonFilePath}`)
-      ).rejects.toThrowError(/Row length does not match headers/)
+      ).rejects.toThrow(/Row length does not match headers/)
     })
 
     it('on parsing errors', async () => {
@@ -104,7 +104,7 @@ describe('CSV and CLI Tests', () => {
         exec(
           `${binPath} -p ${projectKey}  -i ${csvFilePath} --logFile ${tmpFile.name}`
         )
-      ).rejects.toThrowError(expectedError)
+      ).rejects.toThrow(expectedError)
 
       const data = await fs.readFile(tmpFile.name, { encoding: 'utf8' })
       expect(data).toContain(expectedError)
