@@ -1,4 +1,4 @@
-/* eslint-disable strict,no-param-reassign */
+/* eslint-disable import/no-extraneous-dependencies,strict,no-param-reassign */
 
 // THIS FILE IS COPIED FROM jest
 // https://github.com/facebook/jest/blob/master/eslintImportResolver.js

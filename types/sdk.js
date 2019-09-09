@@ -1,6 +1,6 @@
 /* @flow */
+/* eslint-disable no-use-before-define */
 
-// eslint-disable-next-line max-len
 export type MethodType =
   | 'GET'
   | 'POST'
