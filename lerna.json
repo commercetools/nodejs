@@ -1,6 +1,7 @@
 {
   "lerna": "3.15.0",
   "version": "independent",
+  "useWorkspaces": true,
   "npmclient": "yarn",
   "changelog": {
     "rootPath": ".",
@@ -18,10 +19,8 @@
   },
   "command": {
     "publish": {
+      "npmClient": "yarn",
       "message": "chore(release): releasing component"
-    },
-    "bootstrap": {
-      "npmClientArgs": ["--no-package-lock"]
     }
   }
 }
