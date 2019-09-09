@@ -26,11 +26,10 @@ const config = {
       VERSION: `'${version}'`,
     }),
     resolve({
-      module: true,
-      jsnext: true,
-      main: true,
-      preferBuiltins: true,
       extensions,
+      mainFields: ['module', 'main', 'jsnext'],
+      preferBuiltins: true,
+      modulesOnly: true,
     }),
     commonjs({
       include: ['node_modules/**'],
