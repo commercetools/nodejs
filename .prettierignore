@@ -1,2 +1,4 @@
-package-lock.json
 credentials.js
+package.json
+**/dist/
+**/lib/

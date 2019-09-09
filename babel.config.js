@@ -41,4 +41,13 @@ module.exports = {
     ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
     '@babel/plugin-proposal-nullish-coalescing-operator',
   ],
+  overrides: [
+    {
+      test: ['./src/**/*.ts'],
+      presets: [
+        '@babel/preset-typescript',
+        ['@babel/preset-env', getPresets()],
+      ],
+    },
+  ],
 }

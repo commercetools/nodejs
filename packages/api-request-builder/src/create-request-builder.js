@@ -27,9 +27,6 @@ export default function createRequestBuilder(
   const allServices = { ...services, ...options.customServices }
 
   return Object.keys(allServices).reduce(
-    // a return type object is not allowed in flow due to a bug (https://github.com/facebook/flow/issues/5182)
-    /* eslint-disable-next-line */
-    // $FlowFixMe
     (acc: {}, key: string) => ({
       ...acc,
       [key]: createService(allServices[key], options.projectKey),
