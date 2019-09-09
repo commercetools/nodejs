@@ -8,7 +8,10 @@ module.exports = {
   },
   transform: {
     '^.+\\.js$': '<rootDir>/jest.transform.js',
+    '^.+\\.ts?$': '<rootDir>/node_modules/babel-jest',
   },
+  testRegex: '\\.spec\\.(js|ts)$',
+  moduleFileExtensions: ['ts', 'js'],
   testPathIgnorePatterns: [
     '/node_modules/',
     '/integration-tests/',

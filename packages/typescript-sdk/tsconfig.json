@@ -1,18 +1,4 @@
 {
-  "compilerOptions": {
-    "outDir": "lib",
-    "rootDir": "src",
-    "target": "es2019",
-    "types": ["node"],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "declaration": true,
-		"allowJs": false,
-		"strict": true,
-    "esModuleInterop": true,
-    "declarationDir": "lib/types",
-  },
-  "exclude": ["**/node_modules", "**/dist"],
-  "include": ["src"]
+  "extends": "../../tsconfig.json",
+  "files": ["src/index.ts"]
 }
