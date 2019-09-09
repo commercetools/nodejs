@@ -1,2 +1,2 @@
-export default from './auth'
+export { default } from './auth'
 export TokenProvider from './tokenProvider'

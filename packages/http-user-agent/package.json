@@ -18,6 +18,8 @@
   "main": "dist/http-user-agent.cjs.js",
   "module": "dist/http-user-agent.es.js",
   "browser": "dist/http-user-agent.umd.js",
+  "typings": "./dist/typings/index.d.ts",
+  "types": "./dist/typings/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
@@ -27,7 +29,8 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "cross-env yarn build:bundles",
-    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsHttpUserAgent -i ./src/index.js"
+    "build": "yarn build:bundles && yarn build:typings",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsHttpUserAgent -i ./src/index.ts",
+    "build:typings": "tsc -p tsconfig.declarations.json --emitDeclarationOnly --declarationDir dist/typings"
   }
 }

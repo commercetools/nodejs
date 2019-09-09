@@ -29,7 +29,7 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "cross-env yarn build:bundles && yarn build:typings",
+    "build": "yarn build:bundles && yarn build:typings",
     "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n TypescriptSdk -i ./src/index.ts",
     "build:typings": "tsc -p tsconfig.declarations.json --emitDeclarationOnly --declarationDir dist/typings"
   },

@@ -1,5 +1,11 @@
-/* @flow */
-import type { HttpUserAgentOptions } from 'types/sdk'
+type HttpUserAgentOptions = {
+  name: string
+  version?: string
+  libraryName?: string
+  libraryVersion?: string
+  contactUrl?: string
+  contactEmail?: string
+}
 
 /*
   This is the easiest way, for this use case, to detect if we're running in
@@ -9,13 +15,12 @@ import type { HttpUserAgentOptions } from 'types/sdk'
   the code running in both environments, by overriding `global.window` in
   the specific test.
 */
-
-const isBrowser = (): boolean =>
+const isBrowser = () =>
   typeof window !== 'undefined' &&
   window.document &&
   window.document.nodeType === 9
 
-function getSystemInfo(): string {
+function getSystemInfo() {
   if (isBrowser()) return window.navigator.userAgent
 
   const nodeVersion = process.version.slice(1)
@@ -23,7 +28,7 @@ function getSystemInfo(): string {
   return `Node.js/${nodeVersion} ${platformInfo}`
 }
 
-export default function createUserAgent(options: HttpUserAgentOptions): string {
+export default function createUserAgent(options: HttpUserAgentOptions) {
   if (
     !options ||
     Object.keys(options).length === 0 ||
@@ -37,14 +42,14 @@ export default function createUserAgent(options: HttpUserAgentOptions): string {
     : options.name
 
   // Library info
-  let libraryInfo
+  let libraryInfo: string | null = null
   if (options.libraryName && !options.libraryVersion)
     libraryInfo = options.libraryName
   else if (options.libraryName && options.libraryVersion)
     libraryInfo = `${options.libraryName}/${options.libraryVersion}`
 
   // Contact info
-  let contactInfo
+  let contactInfo: string | null = null
   if (options.contactUrl && !options.contactEmail)
     contactInfo = `(+${options.contactUrl})`
   else if (!options.contactUrl && options.contactEmail)
@@ -56,6 +61,6 @@ export default function createUserAgent(options: HttpUserAgentOptions): string {
   const systemInfo = getSystemInfo()
 
   return [baseInfo, systemInfo, libraryInfo, contactInfo]
-    .filter((x: ?string): boolean => Boolean(x))
+    .filter(Boolean)
     .join(' ')
 }

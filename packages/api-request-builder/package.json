@@ -28,7 +28,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "cross-env yarn build:bundles",
+    "build": "yarn build:bundles",
     "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsApiRequestBuilder -i ./src/index.js"
   }
 }

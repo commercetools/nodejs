@@ -1,5 +1,14 @@
 {
   "semi": false,
   "trailingComma": "es5",
-  "singleQuote": true
+  "singleQuote": true,
+  "parser": "babel-flow",
+  "overrides": [
+    {
+      "files": "*.ts",
+      "options": {
+        "parser": "typescript"
+      }
+    }
+  ]
 }

@@ -19,6 +19,8 @@
   "main": "dist/sdk-middleware-user-agent.cjs.js",
   "module": "dist/sdk-middleware-user-agent.es.js",
   "browser": "dist/sdk-middleware-user-agent.umd.js",
+  "typings": "./dist/typings/index.d.ts",
+  "types": "./dist/typings/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
@@ -28,10 +30,12 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "cross-env yarn build:bundles",
-    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkMiddlewareUserAgent -i ./src/index.js"
+    "build": "yarn build:bundles && yarn build:typings",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkMiddlewareUserAgent -i ./src/index.ts",
+    "build:typings": "tsc -p tsconfig.declarations.json --emitDeclarationOnly --declarationDir dist/typings"
   },
   "dependencies": {
-    "@commercetools/http-user-agent": "^2.1.1"
+    "@commercetools/http-user-agent": "^2.1.1",
+    "@commercetools/sdk-types": "^0.1.0"
   }
 }

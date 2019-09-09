@@ -29,7 +29,7 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "cross-env yarn build:bundles",
+    "build": "yarn build:bundles",
     "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkMiddlewareCorrelationId -i ./src/index.js"
   }
 }
