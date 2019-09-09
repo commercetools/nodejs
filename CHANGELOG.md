@@ -1,3 +1,47 @@
+## @commercetools/sync-actions@3.6.0 (2019-09-09)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1392](https://github.com/commercetools/nodejs/pull/1392) feat(sync-actions): add setSalutation to customer sync ([@tdeekens](https://github.com/tdeekens))
+
+#### Committers: 1
+
+- suǝʞǝǝpʇ ([@tdeekens](https://github.com/tdeekens))
+
+## @commercetools/state-importer@2.0.17 (2019-09-09)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1392](https://github.com/commercetools/nodejs/pull/1392) feat(sync-actions): add setSalutation to customer sync ([@tdeekens](https://github.com/tdeekens))
+
+#### Committers: 1
+
+- suǝʞǝǝpʇ ([@tdeekens](https://github.com/tdeekens))
+
+## @commercetools/discount-code-importer@2.0.17 (2019-09-09)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1392](https://github.com/commercetools/nodejs/pull/1392) feat(sync-actions): add setSalutation to customer sync ([@tdeekens](https://github.com/tdeekens))
+
+#### Committers: 1
+
+- suǝʞǝǝpʇ ([@tdeekens](https://github.com/tdeekens))
+
+## @commercetools/custom-objects-importer@2.0.17 (2019-09-09)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1392](https://github.com/commercetools/nodejs/pull/1392) feat(sync-actions): add setSalutation to customer sync ([@tdeekens](https://github.com/tdeekens))
+
+#### Committers: 1
+
+- suǝʞǝǝpʇ ([@tdeekens](https://github.com/tdeekens))
+
 ## @commercetools/product-json-to-xlsx@2.0.16 (2019-08-12)
 
 #### :bug: Bug Fix
