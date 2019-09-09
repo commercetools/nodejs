@@ -1,4 +1,8 @@
 {
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "name": "@commercetools/product-json-to-xlsx",
   "version": "2.0.17",
   "description": "Converts commercetools products from JSON to XLSX",
@@ -32,6 +36,7 @@
     "lib"
   ],
   "scripts": {
+    "prebuild": "rimraf lib/**",
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {

@@ -1,4 +1,8 @@
 {
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "name": "@commercetools/get-credentials",
   "version": "3.0.6",
   "description": "Get CT credentials from the system environment.",
@@ -21,6 +25,7 @@
     "lib"
   ],
   "scripts": {
+    "prebuild": "rimraf lib/**",
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "devDependencies": {

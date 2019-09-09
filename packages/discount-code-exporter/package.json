@@ -1,4 +1,8 @@
 {
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "name": "@commercetools/discount-code-exporter",
   "version": "3.0.15",
   "description": "Exports discount codes from the commercetools platform.",
@@ -29,6 +33,7 @@
     "lib"
   ],
   "scripts": {
+    "prebuild": "rimraf lib/**",
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {

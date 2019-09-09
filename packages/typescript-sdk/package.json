@@ -29,11 +29,8 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "cross-env yarn build:umd && yarn build:umd:min && yarn build:es && yarn build:cjs",
-    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n TypescriptSdk -i ./src/index.ts -o dist/typescript-sdk.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n TypescriptSdk -i ./src/index.ts -o dist/typescript-sdk.umd.min.js",
-    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n TypescriptSdk -i ./src/index.ts -o dist/typescript-sdk.es.js",
-    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n TypescriptSdk -i ./src/index.ts -o dist/typescript-sdk.cjs.js",
+    "build": "cross-env yarn build:bundles && yarn build:typings",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n TypescriptSdk -i ./src/index.ts",
     "build:typings": "tsc -p tsconfig.declarations.json --emitDeclarationOnly --declarationDir dist/typings"
   },
   "dependencies": {

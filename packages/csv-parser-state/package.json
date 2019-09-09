@@ -1,9 +1,14 @@
 {
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "name": "@commercetools/csv-parser-state",
   "version": "2.0.14",
   "description": "Package to parse states from CSV to JSON",
   "main": "lib/main.js",
   "scripts": {
+    "prebuild": "rimraf lib/**",
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "repository": {

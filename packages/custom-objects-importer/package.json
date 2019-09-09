@@ -1,9 +1,14 @@
 {
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "name": "@commercetools/custom-objects-importer",
   "version": "2.0.17",
   "description": "Import custom objects to the commercetools platform",
   "main": "lib/main.js",
   "scripts": {
+    "prebuild": "rimraf lib/**",
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "repository": {

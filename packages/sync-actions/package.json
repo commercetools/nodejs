@@ -27,11 +27,9 @@
     "lib"
   ],
   "scripts": {
-    "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
-    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n CommercetoolsSyncActions -i src/index.js -o dist/commercetools-sync-actions.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n CommercetoolsSyncActions -i src/index.js -o dist/commercetools-sync-actions.umd.min.js",
-    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n CommercetoolsSyncActions -i src/index.js -o dist/commercetools-sync-actions.es.js",
-    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSyncActions -i src/index.js -o dist/commercetools-sync-actions.cjs.js"
+    "prebuild": "rimraf dist/**",
+    "build": "cross-env yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSyncActions -i ./src/index.js"
   },
   "dependencies": {
     "fast-equals": "^2.0.0",

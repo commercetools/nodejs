@@ -1,4 +1,8 @@
 {
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "name": "@commercetools/csv-parser-price",
   "version": "3.0.14",
   "description": "Converts commercetools price data from CSV to JSON.",
@@ -30,6 +34,7 @@
     "lib"
   ],
   "scripts": {
+    "prebuild": "rimraf lib/**",
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {

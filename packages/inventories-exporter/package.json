@@ -1,4 +1,8 @@
 {
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "name": "@commercetools/inventories-exporter",
   "version": "2.1.10",
   "description": "Exports inventories from the commercetools platform.",
@@ -32,6 +36,7 @@
     "bin"
   ],
   "scripts": {
+    "prebuild": "rimraf lib/**",
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {

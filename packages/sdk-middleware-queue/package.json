@@ -24,14 +24,11 @@
     "url": "https://github.com/commercetools/nodejs.git"
   },
   "files": [
-    "dist",
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "build": "cross-env npm run build:umd && npm run build:umd:min && npm run build:es && npm run build:cjs",
-    "build:umd": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f umd -n CommercetoolsSdkMiddlewareQueue -i src/index.js -o dist/commercetools-sdk-middleware-queue.umd.js",
-    "build:umd:min": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -f umd -n CommercetoolsSdkMiddlewareQueue -i src/index.js -o dist/commercetools-sdk-middleware-queue.umd.min.js",
-    "build:es": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f es -n CommercetoolsSdkMiddlewareQueue -i src/index.js -o dist/commercetools-sdk-middleware-queue.es.js",
-    "build:cjs": "cross-env NODE_ENV=rollup rollup -c ../../rollup.config.js -f cjs -n CommercetoolsSdkMiddlewareQueue -i src/index.js -o dist/commercetools-sdk-middleware-queue.cjs.js"
+    "prebuild": "rimraf dist/**",
+    "build": "cross-env yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkMiddlewareQueue -i ./src/index.js"
   }
 }

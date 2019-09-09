@@ -1,4 +1,8 @@
 {
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "name": "@commercetools/price-exporter",
   "version": "2.0.15",
   "description": "Exports prices from the commercetools platform",
@@ -30,6 +34,7 @@
     "lib"
   ],
   "scripts": {
+    "prebuild": "rimraf lib/**",
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {

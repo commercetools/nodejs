@@ -1,9 +1,17 @@
 {
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "name": "@commercetools/state-importer",
   "version": "2.0.17",
   "description": "Import states to the commercetools platform",
   "main": "lib/main.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
+    "prebuild": "rimraf lib/**",
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "repository": {
