@@ -1,10 +1,10 @@
 import { ByProjectKeyTypesKeyByKeyRequestBuilder } from './ByProjectKeyTypesKeyByKeyRequestBuilder'
 import { ByProjectKeyTypesByIDRequestBuilder } from './ByProjectKeyTypesByIDRequestBuilder'
-import { TypeDraft } from './../../models/Type'
-import { TypePagedQueryResponse } from './../../models/Type'
-import { Type } from './../../models/Type'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { TypeDraft } from '../../models/Type'
+import { TypePagedQueryResponse } from '../../models/Type'
+import { Type } from '../../models/Type'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyTypesRequestBuilder {
   constructor(

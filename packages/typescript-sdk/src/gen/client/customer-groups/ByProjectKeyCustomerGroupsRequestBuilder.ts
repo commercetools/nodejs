@@ -1,10 +1,10 @@
 import { ByProjectKeyCustomerGroupsKeyByKeyRequestBuilder } from './ByProjectKeyCustomerGroupsKeyByKeyRequestBuilder'
 import { ByProjectKeyCustomerGroupsByIDRequestBuilder } from './ByProjectKeyCustomerGroupsByIDRequestBuilder'
-import { CustomerGroupDraft } from './../../models/CustomerGroup'
-import { CustomerGroupPagedQueryResponse } from './../../models/CustomerGroup'
-import { CustomerGroup } from './../../models/CustomerGroup'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { CustomerGroupDraft } from '../../models/CustomerGroup'
+import { CustomerGroupPagedQueryResponse } from '../../models/CustomerGroup'
+import { CustomerGroup } from '../../models/CustomerGroup'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyCustomerGroupsRequestBuilder {
   constructor(

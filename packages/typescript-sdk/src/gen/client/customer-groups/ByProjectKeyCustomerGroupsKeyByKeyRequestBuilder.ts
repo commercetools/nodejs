@@ -1,7 +1,7 @@
-import { CustomerGroupUpdate } from './../../models/CustomerGroup'
-import { CustomerGroup } from './../../models/CustomerGroup'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { CustomerGroupUpdate } from '../../models/CustomerGroup'
+import { CustomerGroup } from '../../models/CustomerGroup'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyCustomerGroupsKeyByKeyRequestBuilder {
   constructor(

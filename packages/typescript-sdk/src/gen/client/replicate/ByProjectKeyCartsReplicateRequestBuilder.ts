@@ -1,7 +1,7 @@
-import { ReplicaCartDraft } from './../../models/Cart'
-import { Cart } from './../../models/Cart'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ReplicaCartDraft } from '../../models/Cart'
+import { Cart } from '../../models/Cart'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyCartsReplicateRequestBuilder {
   constructor(

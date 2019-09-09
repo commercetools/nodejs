@@ -1,6 +1,6 @@
-import { ByProjectKeyCustomersEmailConfirmRequestBuilder } from './../confirm/ByProjectKeyCustomersEmailConfirmRequestBuilder'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ByProjectKeyCustomersEmailConfirmRequestBuilder } from '../confirm/ByProjectKeyCustomersEmailConfirmRequestBuilder'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyCustomersEmailRequestBuilder {
   constructor(

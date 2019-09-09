@@ -1,6 +1,6 @@
-import { Order } from './../../models/Order'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { Order } from '../../models/Order'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyMeOrdersByIDRequestBuilder {
   constructor(

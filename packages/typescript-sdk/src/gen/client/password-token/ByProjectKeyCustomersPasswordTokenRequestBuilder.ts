@@ -1,7 +1,7 @@
-import { CustomerCreatePasswordResetToken } from './../../models/Customer'
-import { CustomerToken } from './../../models/Customer'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { CustomerCreatePasswordResetToken } from '../../models/Customer'
+import { CustomerToken } from '../../models/Customer'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyCustomersPasswordTokenRequestBuilder {
   constructor(

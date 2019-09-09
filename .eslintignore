@@ -10,3 +10,4 @@ scripts/*
 **/scripts/*
 node_modules/*
 **/node_modules/*
+**/typescript-sdk/*

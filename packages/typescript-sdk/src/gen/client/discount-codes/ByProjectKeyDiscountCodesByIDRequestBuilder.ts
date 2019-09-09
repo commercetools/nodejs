@@ -1,7 +1,7 @@
-import { DiscountCodeUpdate } from './../../models/DiscountCode'
-import { DiscountCode } from './../../models/DiscountCode'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { DiscountCodeUpdate } from '../../models/DiscountCode'
+import { DiscountCode } from '../../models/DiscountCode'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyDiscountCodesByIDRequestBuilder {
   constructor(

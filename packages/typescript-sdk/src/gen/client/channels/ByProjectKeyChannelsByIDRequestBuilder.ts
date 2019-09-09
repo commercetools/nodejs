@@ -1,7 +1,7 @@
-import { ChannelUpdate } from './../../models/Channel'
-import { Channel } from './../../models/Channel'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ChannelUpdate } from '../../models/Channel'
+import { Channel } from '../../models/Channel'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyChannelsByIDRequestBuilder {
   constructor(

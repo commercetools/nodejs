@@ -1,6 +1,6 @@
-import { OrderEditApply } from './../../models/OrderEdit'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { OrderEditApply } from '../../models/OrderEdit'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyOrdersEditsByIDApplyRequestBuilder {
   constructor(

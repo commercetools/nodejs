@@ -1,9 +1,9 @@
 import { ByProjectKeyChannelsByIDRequestBuilder } from './ByProjectKeyChannelsByIDRequestBuilder'
-import { ChannelDraft } from './../../models/Channel'
-import { ChannelPagedQueryResponse } from './../../models/Channel'
-import { Channel } from './../../models/Channel'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ChannelDraft } from '../../models/Channel'
+import { ChannelPagedQueryResponse } from '../../models/Channel'
+import { Channel } from '../../models/Channel'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyChannelsRequestBuilder {
   constructor(

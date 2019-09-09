@@ -125,12 +125,14 @@ describe('CsvParserState', () => {
 
   describe('::_transformTransitions', () => {
     describe('without state transitions', () => {
-      test('should not mutate state', async () => {
+      test('should not mutate state', () => {
         const actual = {
           foo: 'bar',
           key: 'my-state',
         }
-        expect(csvParser._transformTransitions(actual)).resolves.toEqual(actual)
+        return expect(csvParser._transformTransitions(actual)).resolves.toEqual(
+          actual
+        )
       })
     })
 
@@ -159,11 +161,10 @@ describe('CsvParserState', () => {
             )
         })
 
-        test('should resolve with modified state', () => {
+        test('should resolve with modified state', () =>
           expect(
             csvParser._transformTransitions(state)
-          ).resolves.toMatchSnapshot()
-        })
+          ).resolves.toMatchSnapshot())
       })
 
       describe('when execute rejects', () => {
@@ -173,11 +174,10 @@ describe('CsvParserState', () => {
           )
         })
 
-        test('should reject with execute rejection error', () => {
+        test('should reject with execute rejection error', () =>
           expect(csvParser._transformTransitions(state)).rejects.toThrow(
             /Invalid Request/
-          )
-        })
+          ))
       })
     })
   })

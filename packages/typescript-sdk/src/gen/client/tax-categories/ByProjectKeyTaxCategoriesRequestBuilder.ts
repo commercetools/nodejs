@@ -1,9 +1,9 @@
 import { ByProjectKeyTaxCategoriesByIDRequestBuilder } from './ByProjectKeyTaxCategoriesByIDRequestBuilder'
-import { TaxCategoryDraft } from './../../models/TaxCategory'
-import { TaxCategoryPagedQueryResponse } from './../../models/TaxCategory'
-import { TaxCategory } from './../../models/TaxCategory'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { TaxCategoryDraft } from '../../models/TaxCategory'
+import { TaxCategoryPagedQueryResponse } from '../../models/TaxCategory'
+import { TaxCategory } from '../../models/TaxCategory'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyTaxCategoriesRequestBuilder {
   constructor(

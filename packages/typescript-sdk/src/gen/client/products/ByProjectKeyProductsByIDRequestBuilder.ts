@@ -1,8 +1,8 @@
-import { ByProjectKeyProductsByIDImagesRequestBuilder } from './../images/ByProjectKeyProductsByIDImagesRequestBuilder'
-import { ProductUpdate } from './../../models/Product'
-import { Product } from './../../models/Product'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ByProjectKeyProductsByIDImagesRequestBuilder } from '../images/ByProjectKeyProductsByIDImagesRequestBuilder'
+import { ProductUpdate } from '../../models/Product'
+import { Product } from '../../models/Product'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyProductsByIDRequestBuilder {
   constructor(

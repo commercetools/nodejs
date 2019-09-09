@@ -1,7 +1,7 @@
-import { OrderUpdate } from './../../models/Order'
-import { Order } from './../../models/Order'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { OrderUpdate } from '../../models/Order'
+import { Order } from '../../models/Order'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyOrdersByIDRequestBuilder {
   constructor(

@@ -1,7 +1,7 @@
-import { InventoryUpdate } from './../../models/Inventory'
-import { InventoryEntry } from './../../models/Inventory'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { InventoryUpdate } from '../../models/Inventory'
+import { InventoryEntry } from '../../models/Inventory'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyInventoryByIDRequestBuilder {
   constructor(

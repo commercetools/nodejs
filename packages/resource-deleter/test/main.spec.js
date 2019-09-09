@@ -366,11 +366,10 @@ describe('::ResourceDeleter', () => {
           )
       })
 
-      test('should throw error when there is a problem during categories deletion ', async () => {
+      test('should throw error when there is a problem during categories deletion ', () =>
         expect(resourceDeleter.run()).rejects.toThrow(
           'error during `categories` deletion'
-        )
-      })
+        ))
     })
 
     describe('should throw error when requires parameters are not passed with status code 200', () => {
@@ -390,11 +389,10 @@ describe('::ResourceDeleter', () => {
           .fn(() => Promise.reject(Error('error during `resource` deletion')))
           .mockImplementationOnce(() => Promise.resolve(payload))
       })
-      test('should throw error if required parameter are missing with the resource during deletion', () => {
+      test('should throw error if required parameter are missing with the resource during deletion', () =>
         expect(resourceDeleter.run()).rejects.toThrow(
           /error during `resource` deletion/
-        )
-      })
+        ))
     })
 
     describe('with status code 500', () => {
@@ -410,11 +408,10 @@ describe('::ResourceDeleter', () => {
         })
       })
 
-      test('should throw internal server error', () => {
+      test('should throw internal server error', () =>
         expect(resourceDeleter.run()).rejects.toThrow(
           /Request returned status code 500/
-        )
-      })
+        ))
     })
   })
 

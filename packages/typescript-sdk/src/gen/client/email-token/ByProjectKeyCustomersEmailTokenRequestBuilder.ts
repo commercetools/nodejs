@@ -1,7 +1,7 @@
-import { CustomerCreateEmailToken } from './../../models/Customer'
-import { CustomerToken } from './../../models/Customer'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { CustomerCreateEmailToken } from '../../models/Customer'
+import { CustomerToken } from '../../models/Customer'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyCustomersEmailTokenRequestBuilder {
   constructor(

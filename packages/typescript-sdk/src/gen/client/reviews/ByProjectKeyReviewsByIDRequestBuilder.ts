@@ -1,7 +1,7 @@
-import { ReviewUpdate } from './../../models/Review'
-import { Review } from './../../models/Review'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ReviewUpdate } from '../../models/Review'
+import { Review } from '../../models/Review'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyReviewsByIDRequestBuilder {
   constructor(

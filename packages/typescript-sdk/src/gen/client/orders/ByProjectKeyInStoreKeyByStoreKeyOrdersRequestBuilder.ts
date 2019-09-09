@@ -1,10 +1,10 @@
 import { ByProjectKeyInStoreKeyByStoreKeyOrdersOrderNumberByOrderNumberRequestBuilder } from './ByProjectKeyInStoreKeyByStoreKeyOrdersOrderNumberByOrderNumberRequestBuilder'
 import { ByProjectKeyInStoreKeyByStoreKeyOrdersByIDRequestBuilder } from './ByProjectKeyInStoreKeyByStoreKeyOrdersByIDRequestBuilder'
-import { OrderFromCartDraft } from './../../models/Order'
-import { OrderPagedQueryResponse } from './../../models/Order'
-import { Order } from './../../models/Order'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { OrderFromCartDraft } from '../../models/Order'
+import { OrderPagedQueryResponse } from '../../models/Order'
+import { Order } from '../../models/Order'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder {
   constructor(

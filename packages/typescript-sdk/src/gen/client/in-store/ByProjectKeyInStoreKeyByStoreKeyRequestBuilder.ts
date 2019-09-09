@@ -1,8 +1,8 @@
-import { ByProjectKeyInStoreKeyByStoreKeyCartsRequestBuilder } from './../carts/ByProjectKeyInStoreKeyByStoreKeyCartsRequestBuilder'
-import { ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder } from './../orders/ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder'
-import { ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder } from './../me/ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ByProjectKeyInStoreKeyByStoreKeyCartsRequestBuilder } from '../carts/ByProjectKeyInStoreKeyByStoreKeyCartsRequestBuilder'
+import { ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder } from '../orders/ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder'
+import { ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder } from '../me/ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyRequestBuilder {
   constructor(

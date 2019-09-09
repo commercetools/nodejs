@@ -1,7 +1,7 @@
-import { CustomerUpdate } from './../../models/Customer'
-import { Customer } from './../../models/Customer'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { CustomerUpdate } from '../../models/Customer'
+import { Customer } from '../../models/Customer'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyCustomersByIDRequestBuilder {
   constructor(

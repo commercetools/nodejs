@@ -1,9 +1,9 @@
 import { ByProjectKeyStatesByIDRequestBuilder } from './ByProjectKeyStatesByIDRequestBuilder'
-import { StateDraft } from './../../models/State'
-import { StatePagedQueryResponse } from './../../models/State'
-import { State } from './../../models/State'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { StateDraft } from '../../models/State'
+import { StatePagedQueryResponse } from '../../models/State'
+import { State } from '../../models/State'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyStatesRequestBuilder {
   constructor(

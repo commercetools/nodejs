@@ -101,6 +101,7 @@ describe('PriceExporter', () => {
           results: [],
         },
       }
+      // eslint-disable-next-line jest/valid-expect-in-promise
       const processMock = jest.fn((request, processFn) =>
         processFn(sampleResult).then(() => Promise.resolve())
       )

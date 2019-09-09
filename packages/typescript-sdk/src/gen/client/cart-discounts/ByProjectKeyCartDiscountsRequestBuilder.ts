@@ -1,10 +1,10 @@
 import { ByProjectKeyCartDiscountsByIDRequestBuilder } from './ByProjectKeyCartDiscountsByIDRequestBuilder'
 import { ByProjectKeyCartDiscountsKeyByKeyRequestBuilder } from './ByProjectKeyCartDiscountsKeyByKeyRequestBuilder'
-import { CartDiscountDraft } from './../../models/CartDiscount'
-import { CartDiscountPagedQueryResponse } from './../../models/CartDiscount'
-import { CartDiscount } from './../../models/CartDiscount'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { CartDiscountDraft } from '../../models/CartDiscount'
+import { CartDiscountPagedQueryResponse } from '../../models/CartDiscount'
+import { CartDiscount } from '../../models/CartDiscount'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyCartDiscountsRequestBuilder {
   constructor(

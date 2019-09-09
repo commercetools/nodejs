@@ -1,7 +1,7 @@
-import { ProductDiscountMatchQuery } from './../../models/ProductDiscount'
-import { ProductDiscount } from './../../models/ProductDiscount'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ProductDiscountMatchQuery } from '../../models/ProductDiscount'
+import { ProductDiscount } from '../../models/ProductDiscount'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyProductDiscountsMatchingRequestBuilder {
   constructor(
