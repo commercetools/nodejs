@@ -136,14 +136,14 @@ describe('CustomObjectsImporter', () => {
       objectsImport.client.execute = jest.fn()
     })
 
-    test('should resolve', () => {
+    test('should resolve', async () => {
       objectsImport.client.execute.mockReturnValue(
         Promise.resolve({ body: { results: existingObjects } })
       )
 
       return expect(
         objectsImport._processBatches(newObjects)
-      ).resolves.toBeTruthy()
+      ).resolves.not.toThrow()
     })
   })
 

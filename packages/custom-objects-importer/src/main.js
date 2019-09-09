@@ -141,8 +141,10 @@ export default class CustomObjectsImporter {
     return pSeries(functionsList).then((): Promise<void> => Promise.resolve())
   }
 
-  _createPromiseReturningFunction(requests: Array<ClientRequest>): Function {
-    return async (): Promise<void> => {
+  _createPromiseReturningFunction(
+    requests: Array<ClientRequest>
+  ): () => Promise<void> {
+    return async () => {
       await Promise.all(
         requests.map((request: ClientRequest): ExecutionResult =>
           this._executeCreateOrUpdateAction(request)
@@ -289,7 +291,7 @@ export default class CustomObjectsImporter {
         ${unchangedCount} were unchanged.
         `
     if (createErrorCount || updateErrorCount) {
-      message += ` ${oneLine`     
+      message += ` ${oneLine`
         ${createErrorCount + updateErrorCount} errors occurred
         (${createErrorCount} create errors and
         ${updateErrorCount} update errors.)
