@@ -17,9 +17,9 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Tobias Deekens <tobias.deekens@commercetools.com> (https://github.com/tdeekens)",
-  "main": "dist/commercetools-sdk-middleware-correlation-id.cjs.js",
-  "module": "dist/commercetools-sdk-middleware-correlation-id.es.js",
-  "browser": "dist/commercetools-sdk-middleware-correlation-id.umd.js",
+  "main": "dist/sdk-middleware-correlation-id.cjs.js",
+  "module": "dist/sdk-middleware-correlation-id.es.js",
+  "browser": "dist/sdk-middleware-correlation-id.umd.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"

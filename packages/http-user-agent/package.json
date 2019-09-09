@@ -15,9 +15,9 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
-  "main": "dist/commercetools-http-user-agent.cjs.js",
-  "module": "dist/commercetools-http-user-agent.es.js",
-  "browser": "dist/commercetools-http-user-agent.umd.js",
+  "main": "dist/http-user-agent.cjs.js",
+  "module": "dist/http-user-agent.es.js",
+  "browser": "dist/http-user-agent.umd.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"

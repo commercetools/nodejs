@@ -15,9 +15,9 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
-  "main": "dist/commercetools-sync-actions.cjs.js",
-  "module": "dist/commercetools-sync-actions.es.js",
-  "browser": "dist/commercetools-sync-actions.umd.js",
+  "main": "dist/sync-actions.cjs.js",
+  "module": "dist/sync-actions.es.js",
+  "browser": "dist/sync-actions.umd.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"

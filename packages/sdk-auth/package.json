@@ -16,9 +16,9 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Jan Juna <jan.juna-ext@commercetools.com> (https://github.com/junajan)",
-  "main": "dist/commercetools-sdk-auth.cjs.js",
-  "module": "dist/commercetools-sdk-auth.es.js",
-  "browser": "dist/commercetools-sdk-auth.umd.js",
+  "main": "dist/sdk-auth.cjs.js",
+  "module": "dist/sdk-auth.es.js",
+  "browser": "dist/sdk-auth.umd.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
