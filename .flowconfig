@@ -1,3 +1,6 @@
+[version]
+^0.107.0
+
 [ignore]
 <PROJECT_ROOT>/_book/.*
 <PROJECT_ROOT>/docs/.*
@@ -57,6 +60,3 @@ module.name_mapper='^types/\(.*\)$' -> '<PROJECT_ROOT>/types/\1.js'
 include_warnings=true
 emoji=true
 esproposal.optional_chaining=enable
-
-[version]
-0.102.0
