@@ -3,21 +3,21 @@
 tars=()
 
 echo "--> Pack all packages:"
-for dir in $(ls ./packages); do
-  pushd "./packages/$dir" > /dev/null
+for dir in packages/*; do
   echo "$dir"
+  pushd "$dir" > /dev/null
   tarName=$(npm pack)
-  tars=(${tars[@]} "$(pwd)/${tarName}")
+  tars=("${tars[@]}" "$(pwd)/${tarName}")
   popd > /dev/null
 done
 
 echo "--> Install dependencies and packages for integration-tests:"
 pushd "./integration-tests" > /dev/null
-npm i ${tars[@]} --no-save
-npm i
+npm i "${tars[@]}" --no-save --no-package-lock
+npm i --no-package-lock
 popd > /dev/null
 
 echo "--> Cleanup tarballs"
 for tar in "${tars[@]}"; do
-  rm ${tar}
+  rm "${tar}"
 done
