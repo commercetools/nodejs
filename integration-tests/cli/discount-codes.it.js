@@ -195,9 +195,8 @@ describe('DiscountCode tests', () => {
   })
 
   describe('Discount Code Exporter', () => {
-    const UTCDateTimeRegex = new RegExp(
-      /[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g
-    )
+    const UTCDateTimeRegex = /[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g
+
     let preparedDiscountCodes
     const bin = './integration-tests/node_modules/.bin/discount-code-exporter'
 
