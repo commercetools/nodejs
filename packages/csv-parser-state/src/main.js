@@ -108,7 +108,7 @@ export default class CsvParserState {
     transitions,
     ...remainingState
   }: StateWithUnresolvedTransitions): Promise<SuccessResult> {
-    return new Promise((resolve: Function) => {
+    return new Promise((resolve: Function, reject: Function) => {
       if (!transitions) resolve(remainingState)
       // We setup the client here because it is unnecessary
       // if there are no transitions
@@ -125,8 +125,8 @@ export default class CsvParserState {
             )
           )
       )
-      Promise.all(stateRequests).then(
-        (resolvedStates: Array<SuccessResult>) => {
+      Promise.all(stateRequests)
+        .then((resolvedStates: Array<SuccessResult>) => {
           const stateReferences = resolvedStates.map(
             (response: SuccessResult): StateReference => ({
               typeId: 'state',
@@ -134,8 +134,10 @@ export default class CsvParserState {
             })
           )
           resolve({ ...remainingState, transitions: stateReferences })
-        }
-      )
+        })
+        .catch((error: Error) => {
+          reject(error)
+        })
     })
   }
 

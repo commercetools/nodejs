@@ -1,7 +1,7 @@
-import { ShoppingListUpdate } from './../../models/ShoppingList'
-import { ShoppingList } from './../../models/ShoppingList'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ShoppingListUpdate } from '../../models/ShoppingList'
+import { ShoppingList } from '../../models/ShoppingList'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyShoppingListsByIDRequestBuilder {
   constructor(

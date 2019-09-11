@@ -1,7 +1,7 @@
-import { StateUpdate } from './../../models/State'
-import { State } from './../../models/State'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { StateUpdate } from '../../models/State'
+import { State } from '../../models/State'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyStatesByIDRequestBuilder {
   constructor(

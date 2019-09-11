@@ -1,7 +1,7 @@
 import { ByProjectKeyMessagesByIDRequestBuilder } from './ByProjectKeyMessagesByIDRequestBuilder'
-import { MessagePagedQueryResponse } from './../../models/Message'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { MessagePagedQueryResponse } from '../../models/Message'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyMessagesRequestBuilder {
   constructor(

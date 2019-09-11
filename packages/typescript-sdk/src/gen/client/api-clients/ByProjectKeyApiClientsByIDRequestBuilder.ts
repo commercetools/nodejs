@@ -1,6 +1,6 @@
-import { ApiClient } from './../../models/ApiClient'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ApiClient } from '../../models/ApiClient'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyApiClientsByIDRequestBuilder {
   constructor(

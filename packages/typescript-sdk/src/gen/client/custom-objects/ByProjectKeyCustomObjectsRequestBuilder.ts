@@ -1,10 +1,10 @@
 import { ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder } from './ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder'
 import { ByProjectKeyCustomObjectsByIDRequestBuilder } from './ByProjectKeyCustomObjectsByIDRequestBuilder'
-import { CustomObjectDraft } from './../../models/CustomObject'
-import { CustomObjectPagedQueryResponse } from './../../models/CustomObject'
-import { CustomObject } from './../../models/CustomObject'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { CustomObjectDraft } from '../../models/CustomObject'
+import { CustomObjectPagedQueryResponse } from '../../models/CustomObject'
+import { CustomObject } from '../../models/CustomObject'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyCustomObjectsRequestBuilder {
   constructor(

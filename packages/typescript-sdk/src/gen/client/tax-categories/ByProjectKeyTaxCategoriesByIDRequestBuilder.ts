@@ -1,7 +1,7 @@
-import { TaxCategoryUpdate } from './../../models/TaxCategory'
-import { TaxCategory } from './../../models/TaxCategory'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { TaxCategoryUpdate } from '../../models/TaxCategory'
+import { TaxCategory } from '../../models/TaxCategory'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyTaxCategoriesByIDRequestBuilder {
   constructor(

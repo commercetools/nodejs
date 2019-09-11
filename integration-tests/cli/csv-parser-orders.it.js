@@ -39,42 +39,42 @@ describe('CSV and CLI Tests', () => {
   })
 
   describe('CLI logs specific errors', () => {
-    it('on faulty CSV format', async () => {
+    it('on faulty CSV format', () => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
-      expect(
+      return expect(
         exec(`${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t returninfo`)
-      ).rejects.toThrowError(/Row length does not match headers/)
+      ).rejects.toThrow(/Row length does not match headers/)
     })
 
-    it('on missing return-info headers', async () => {
+    it('on missing return-info headers', () => {
       const csvFilePath = path.join(
         samplesFolder,
         'return-info-error2-sample.csv'
       )
       const jsonFilePath = tmp.fileSync().name
 
-      expect(
+      return expect(
         exec(`${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t returninfo`)
-      ).rejects.toThrowError(/Required headers missing: 'orderNumber'/)
+      ).rejects.toThrow(/Required headers missing: 'orderNumber'/)
     })
 
-    it('on missing line-item-state headers', async () => {
+    it('on missing line-item-state headers', () => {
       const csvFilePath = path.join(samplesFolder, 'return-info-sample.csv')
       const jsonFilePath = tmp.fileSync().name
 
-      expect(
+      return expect(
         exec(`${binPath} -i ${csvFilePath} -o ${jsonFilePath} -t lineitemstate`)
-      ).rejects.toThrowError(/Required headers missing: 'fromState,toState'/)
+      ).rejects.toThrow(/Required headers missing: 'fromState,toState'/)
     })
 
-    it('stack trace on verbose level', async () => {
+    it('stack trace on verbose level', () => {
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
 
-      expect(
+      return expect(
         exec(`${binPath} -i ${csvFilePath} --logLevel verbose -t returninfo`)
-      ).rejects.toThrowError(/ERR: Row length does not match headers/)
+      ).rejects.toThrow(/ERR: Row length does not match headers/)
     })
   })
 
@@ -148,16 +148,16 @@ describe('CSV and CLI Tests', () => {
       expect(data).toMatchSnapshot()
     })
 
-    it('CLI should log errors to stderr and log file', async () => {
+    it('CLI should log errors to stderr and log file', () => {
       const tmpFile = tmp.fileSync()
       const expectedError = 'Row length does not match headers'
       const csvFilePath = path.join(samplesFolder, 'faulty-sample.csv')
 
-      expect(
+      return expect(
         exec(
           `${binPath} -t deliveries --inputFile ${csvFilePath} --logFile ${tmpFile.name}`
         )
-      ).rejects.toThrowError(expectedError)
+      ).rejects.toThrow(expectedError)
     })
   })
 })

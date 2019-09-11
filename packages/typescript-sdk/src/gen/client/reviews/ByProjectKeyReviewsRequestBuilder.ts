@@ -1,10 +1,10 @@
 import { ByProjectKeyReviewsKeyByKeyRequestBuilder } from './ByProjectKeyReviewsKeyByKeyRequestBuilder'
 import { ByProjectKeyReviewsByIDRequestBuilder } from './ByProjectKeyReviewsByIDRequestBuilder'
-import { ReviewDraft } from './../../models/Review'
-import { ReviewPagedQueryResponse } from './../../models/Review'
-import { Review } from './../../models/Review'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ReviewDraft } from '../../models/Review'
+import { ReviewPagedQueryResponse } from '../../models/Review'
+import { Review } from '../../models/Review'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyReviewsRequestBuilder {
   constructor(

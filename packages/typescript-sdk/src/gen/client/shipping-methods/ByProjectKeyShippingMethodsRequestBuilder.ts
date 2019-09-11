@@ -1,10 +1,10 @@
 import { ByProjectKeyShippingMethodsKeyByKeyRequestBuilder } from './ByProjectKeyShippingMethodsKeyByKeyRequestBuilder'
 import { ByProjectKeyShippingMethodsByIDRequestBuilder } from './ByProjectKeyShippingMethodsByIDRequestBuilder'
-import { ShippingMethodDraft } from './../../models/ShippingMethod'
-import { ShippingMethodPagedQueryResponse } from './../../models/ShippingMethod'
-import { ShippingMethod } from './../../models/ShippingMethod'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ShippingMethodDraft } from '../../models/ShippingMethod'
+import { ShippingMethodPagedQueryResponse } from '../../models/ShippingMethod'
+import { ShippingMethod } from '../../models/ShippingMethod'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyShippingMethodsRequestBuilder {
   constructor(

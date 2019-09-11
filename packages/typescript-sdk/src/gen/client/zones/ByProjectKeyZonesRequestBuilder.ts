@@ -1,10 +1,10 @@
 import { ByProjectKeyZonesKeyByKeyRequestBuilder } from './ByProjectKeyZonesKeyByKeyRequestBuilder'
 import { ByProjectKeyZonesByIDRequestBuilder } from './ByProjectKeyZonesByIDRequestBuilder'
-import { ZoneDraft } from './../../models/Zone'
-import { ZonePagedQueryResponse } from './../../models/Zone'
-import { Zone } from './../../models/Zone'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ZoneDraft } from '../../models/Zone'
+import { ZonePagedQueryResponse } from '../../models/Zone'
+import { Zone } from '../../models/Zone'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyZonesRequestBuilder {
   constructor(

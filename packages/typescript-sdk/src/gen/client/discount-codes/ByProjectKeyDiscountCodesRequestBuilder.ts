@@ -1,9 +1,9 @@
 import { ByProjectKeyDiscountCodesByIDRequestBuilder } from './ByProjectKeyDiscountCodesByIDRequestBuilder'
-import { DiscountCodeDraft } from './../../models/DiscountCode'
-import { DiscountCodePagedQueryResponse } from './../../models/DiscountCode'
-import { DiscountCode } from './../../models/DiscountCode'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { DiscountCodeDraft } from '../../models/DiscountCode'
+import { DiscountCodePagedQueryResponse } from '../../models/DiscountCode'
+import { DiscountCode } from '../../models/DiscountCode'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyDiscountCodesRequestBuilder {
   constructor(

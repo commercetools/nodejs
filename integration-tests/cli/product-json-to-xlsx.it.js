@@ -44,17 +44,6 @@ function mapRowsToProducts(rows) {
   return _rows.map(row => zipObject(header, row))
 }
 
-function analyzeExcelStream(stream) {
-  const workbook = new Excel.Workbook()
-  const readStream = workbook.xlsx.createInputStream()
-  stream.pipe(readStream)
-
-  return new Promise((resolve, reject) => {
-    readStream.on('error', reject)
-    readStream.on('done', () => resolve(analyzeExcelWorkbook(workbook)))
-  })
-}
-
 function analyzeExcelWorkbook(workbook) {
   const rows = []
   const worksheet = workbook.getWorksheet('Products')
@@ -70,11 +59,22 @@ function analyzeExcelWorkbook(workbook) {
   }
 }
 
-async function analyzeExcelFile(path) {
+function analyzeExcelStream(stream) {
   const workbook = new Excel.Workbook()
-  await workbook.xlsx.readFile(path)
+  const readStream = workbook.xlsx.createInputStream()
+  stream.pipe(readStream)
+
+  return new Promise((resolve, reject) => {
+    readStream.on('error', reject)
+    readStream.on('done', () => resolve(analyzeExcelWorkbook(workbook)))
+  })
+}
+
+async function analyzeExcelFile(filePath) {
+  const workbook = new Excel.Workbook()
+  await workbook.xlsx.readFile(filePath)
   return {
-    path,
+    filePath,
     ...(await analyzeExcelWorkbook(workbook)),
   }
 }
@@ -532,8 +532,6 @@ describe('XLSX and CLI Tests', () => {
       describe('WITHOUT HEADERS::should write products to `zip` file', () => {
         let product1
         let product2
-        let stdout
-        let stderr
         const fileNames = []
 
         beforeAll(async done => {
@@ -791,8 +789,6 @@ describe('XLSX and CLI Tests', () => {
         let xlsxFile
         let excel
         let products
-        let stdout
-        let stderr
 
         beforeAll(async () => {
           xlsxFile = tmp.fileSync({ postfix: '.xlsx' }).name

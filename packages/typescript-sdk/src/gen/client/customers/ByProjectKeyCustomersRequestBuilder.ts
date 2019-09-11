@@ -1,14 +1,14 @@
 import { ByProjectKeyCustomersPasswordTokenByPasswordTokenRequestBuilder } from './ByProjectKeyCustomersPasswordTokenByPasswordTokenRequestBuilder'
 import { ByProjectKeyCustomersEmailTokenByEmailTokenRequestBuilder } from './ByProjectKeyCustomersEmailTokenByEmailTokenRequestBuilder'
-import { ByProjectKeyCustomersEmailTokenRequestBuilder } from './../email-token/ByProjectKeyCustomersEmailTokenRequestBuilder'
-import { ByProjectKeyCustomersEmailRequestBuilder } from './../email/ByProjectKeyCustomersEmailRequestBuilder'
-import { ByProjectKeyCustomersPasswordRequestBuilder } from './../password/ByProjectKeyCustomersPasswordRequestBuilder'
-import { ByProjectKeyCustomersPasswordTokenRequestBuilder } from './../password-token/ByProjectKeyCustomersPasswordTokenRequestBuilder'
+import { ByProjectKeyCustomersEmailTokenRequestBuilder } from '../email-token/ByProjectKeyCustomersEmailTokenRequestBuilder'
+import { ByProjectKeyCustomersEmailRequestBuilder } from '../email/ByProjectKeyCustomersEmailRequestBuilder'
+import { ByProjectKeyCustomersPasswordRequestBuilder } from '../password/ByProjectKeyCustomersPasswordRequestBuilder'
+import { ByProjectKeyCustomersPasswordTokenRequestBuilder } from '../password-token/ByProjectKeyCustomersPasswordTokenRequestBuilder'
 import { ByProjectKeyCustomersByIDRequestBuilder } from './ByProjectKeyCustomersByIDRequestBuilder'
-import { CustomerDraft } from './../../models/Customer'
-import { CustomerSignInResult } from './../../models/Customer'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { CustomerDraft } from '../../models/Customer'
+import { CustomerSignInResult } from '../../models/Customer'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyCustomersRequestBuilder {
   constructor(

@@ -1,6 +1,6 @@
-import { Message } from './../../models/Message'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { Message } from '../../models/Message'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyMessagesByIDRequestBuilder {
   constructor(

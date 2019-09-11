@@ -29,7 +29,7 @@ module.exports = {
     // Specific for the generated SDK
     'import/no-duplicates': 0,
     'import/no-cycle': 0,
-    'spaced-comment': 0
+    'spaced-comment': 0,
   },
   settings: {
     'import/parsers': {

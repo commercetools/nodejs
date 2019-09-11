@@ -1,7 +1,7 @@
-import { ZoneUpdate } from './../../models/Zone'
-import { Zone } from './../../models/Zone'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ZoneUpdate } from '../../models/Zone'
+import { Zone } from '../../models/Zone'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyZonesByIDRequestBuilder {
   constructor(

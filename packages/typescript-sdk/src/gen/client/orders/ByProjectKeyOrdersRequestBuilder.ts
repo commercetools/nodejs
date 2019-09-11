@@ -1,12 +1,12 @@
-import { ByProjectKeyOrdersImportRequestBuilder } from './../import/ByProjectKeyOrdersImportRequestBuilder'
+import { ByProjectKeyOrdersImportRequestBuilder } from '../import/ByProjectKeyOrdersImportRequestBuilder'
 import { ByProjectKeyOrdersOrderNumberByOrderNumberRequestBuilder } from './ByProjectKeyOrdersOrderNumberByOrderNumberRequestBuilder'
-import { ByProjectKeyOrdersEditsRequestBuilder } from './../edits/ByProjectKeyOrdersEditsRequestBuilder'
+import { ByProjectKeyOrdersEditsRequestBuilder } from '../edits/ByProjectKeyOrdersEditsRequestBuilder'
 import { ByProjectKeyOrdersByIDRequestBuilder } from './ByProjectKeyOrdersByIDRequestBuilder'
-import { OrderFromCartDraft } from './../../models/Order'
-import { OrderPagedQueryResponse } from './../../models/Order'
-import { Order } from './../../models/Order'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { OrderFromCartDraft } from '../../models/Order'
+import { OrderPagedQueryResponse } from '../../models/Order'
+import { Order } from '../../models/Order'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyOrdersRequestBuilder {
   constructor(

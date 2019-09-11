@@ -1,7 +1,7 @@
-import { CategoryUpdate } from './../../models/Category'
-import { Category } from './../../models/Category'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { CategoryUpdate } from '../../models/Category'
+import { Category } from '../../models/Category'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyCategoriesKeyByKeyRequestBuilder {
   constructor(

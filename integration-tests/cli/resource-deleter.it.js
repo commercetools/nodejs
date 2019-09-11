@@ -9,7 +9,7 @@ import { getCredentials } from '@commercetools/get-credentials'
 import { exec } from 'mz/child_process'
 import { version } from '@commercetools/resource-deleter/package.json'
 import * as resources from './helpers/resource-delete.data'
-import { logger } from '../../packages/resource-deleter/src/utils/silent-logger'
+import logger from '../../packages/resource-deleter/src/utils/silent-logger'
 import { createData, clearData } from './helpers/utils'
 
 const projectKey =

@@ -73,11 +73,10 @@ describe('PersonalDataErasure', () => {
         )
       })
 
-      test('should throw internal server error', async () => {
+      test('should throw internal server error', () =>
         expect(
           personalDataErasure.getCustomerData('customerId')
-        ).rejects.toThrowErrorMatchingSnapshot()
-      })
+        ).rejects.toThrowErrorMatchingSnapshot())
     })
 
     describe('with status code 404', () => {
@@ -156,11 +155,10 @@ describe('PersonalDataErasure', () => {
         )
       })
 
-      test('should throw internal server error', async () => {
+      test('should throw internal server error', () =>
         expect(
           personalDataErasure.deleteAll('customerId')
-        ).rejects.toThrowErrorMatchingSnapshot()
-      })
+        ).rejects.toThrowErrorMatchingSnapshot())
     })
     test('should throw error if no customerID is passed', () => {
       expect(() =>
@@ -219,9 +217,9 @@ describe('PersonalDataErasure', () => {
         )
       })
 
-      test('should throw internal server error', async () => {
+      test('should throw internal server error', () => {
         const request = PersonalDataErasure.buildRequest('example.com', 'GET')
-        expect(
+        return expect(
           personalDataErasure._getAllMessages(request)
         ).rejects.toThrowErrorMatchingSnapshot()
       })

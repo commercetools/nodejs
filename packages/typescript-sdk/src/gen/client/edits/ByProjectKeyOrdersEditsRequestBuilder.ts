@@ -1,10 +1,10 @@
 import { ByProjectKeyOrdersEditsKeyByKeyRequestBuilder } from './ByProjectKeyOrdersEditsKeyByKeyRequestBuilder'
 import { ByProjectKeyOrdersEditsByIDRequestBuilder } from './ByProjectKeyOrdersEditsByIDRequestBuilder'
-import { OrderEditDraft } from './../../models/OrderEdit'
-import { OrderEditPagedQueryResponse } from './../../models/OrderEdit'
-import { OrderEdit } from './../../models/OrderEdit'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { OrderEditDraft } from '../../models/OrderEdit'
+import { OrderEditPagedQueryResponse } from '../../models/OrderEdit'
+import { OrderEdit } from '../../models/OrderEdit'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyOrdersEditsRequestBuilder {
   constructor(

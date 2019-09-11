@@ -39,7 +39,7 @@ describe('Product Exporter', () => {
 
       await expect(
         exec(`${bin} -o ${filePath} -p ${projectKey} --staged`)
-      ).rejects.toThrowError('No products found')
+      ).rejects.toThrow('No products found')
     })
   })
 

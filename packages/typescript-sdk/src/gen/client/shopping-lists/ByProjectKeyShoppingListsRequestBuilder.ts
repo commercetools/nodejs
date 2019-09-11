@@ -1,10 +1,10 @@
 import { ByProjectKeyShoppingListsKeyByKeyRequestBuilder } from './ByProjectKeyShoppingListsKeyByKeyRequestBuilder'
 import { ByProjectKeyShoppingListsByIDRequestBuilder } from './ByProjectKeyShoppingListsByIDRequestBuilder'
-import { ShoppingListDraft } from './../../models/ShoppingList'
-import { ShoppingListPagedQueryResponse } from './../../models/ShoppingList'
-import { ShoppingList } from './../../models/ShoppingList'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ShoppingListDraft } from '../../models/ShoppingList'
+import { ShoppingListPagedQueryResponse } from '../../models/ShoppingList'
+import { ShoppingList } from '../../models/ShoppingList'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyShoppingListsRequestBuilder {
   constructor(

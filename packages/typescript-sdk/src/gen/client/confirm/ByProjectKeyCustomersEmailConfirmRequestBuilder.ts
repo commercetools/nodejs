@@ -1,6 +1,6 @@
-import { CustomerEmailVerify } from './../../models/Customer'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { CustomerEmailVerify } from '../../models/Customer'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyCustomersEmailConfirmRequestBuilder {
   constructor(

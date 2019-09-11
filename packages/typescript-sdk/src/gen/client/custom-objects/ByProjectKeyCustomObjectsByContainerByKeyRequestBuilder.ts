@@ -1,6 +1,6 @@
-import { CustomObject } from './../../models/CustomObject'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { CustomObject } from '../../models/CustomObject'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder {
   constructor(

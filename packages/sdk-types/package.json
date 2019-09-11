@@ -1,0 +1,30 @@
+{
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "name": "@commercetools/sdk-types",
+  "version": "0.1.0",
+  "description": "TypeScript declarations for SDK packages",
+  "keywords": [
+    "commercetools",
+    "typescript",
+    "sdk"
+  ],
+  "homepage": "https://commercetools.github.io/nodejs/",
+  "bugs": "https://github.com/commercetools/nodejs/issues",
+  "license": "MIT",
+  "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
+  "typings": "./index.d.ts",
+  "types": "./index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/commercetools/nodejs.git"
+  },
+  "files": [
+    "index.ts"
+  ],
+  "scripts": {
+    "build": "exit 0"
+  }
+}

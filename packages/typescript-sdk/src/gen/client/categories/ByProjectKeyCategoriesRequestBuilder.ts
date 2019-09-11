@@ -1,10 +1,10 @@
 import { ByProjectKeyCategoriesKeyByKeyRequestBuilder } from './ByProjectKeyCategoriesKeyByKeyRequestBuilder'
 import { ByProjectKeyCategoriesByIDRequestBuilder } from './ByProjectKeyCategoriesByIDRequestBuilder'
-import { CategoryDraft } from './../../models/Category'
-import { CategoryPagedQueryResponse } from './../../models/Category'
-import { Category } from './../../models/Category'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { CategoryDraft } from '../../models/Category'
+import { CategoryPagedQueryResponse } from '../../models/Category'
+import { Category } from '../../models/Category'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyCategoriesRequestBuilder {
   constructor(

@@ -59,8 +59,8 @@ function reduceMiddleware(op1: Middleware, op2: Middleware): Middleware {
 function getURI(commonRequest: CommonRequest<any>): string {
   const pathMap = commonRequest.pathVariables
   const queryMap = commonRequest.queryParams
-  var uri: String = commonRequest.uriTemplate
-  var queryParams: string[] = []
+  let uri: string = commonRequest.uriTemplate
+  let queryParams: string[] = []
   for (const param in pathMap) {
     uri = uri.replace(`{${param}}`, `${pathMap[param]}`)
   }

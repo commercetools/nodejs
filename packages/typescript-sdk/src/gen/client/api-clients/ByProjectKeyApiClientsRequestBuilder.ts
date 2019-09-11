@@ -1,9 +1,9 @@
 import { ByProjectKeyApiClientsByIDRequestBuilder } from './ByProjectKeyApiClientsByIDRequestBuilder'
-import { ApiClientDraft } from './../../models/ApiClient'
-import { ApiClientPagedQueryResponse } from './../../models/ApiClient'
-import { ApiClient } from './../../models/ApiClient'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ApiClientDraft } from '../../models/ApiClient'
+import { ApiClientPagedQueryResponse } from '../../models/ApiClient'
+import { ApiClient } from '../../models/ApiClient'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyApiClientsRequestBuilder {
   constructor(

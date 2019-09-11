@@ -1,9 +1,9 @@
 import { ByProjectKeyMeOrdersByIDRequestBuilder } from './ByProjectKeyMeOrdersByIDRequestBuilder'
-import { MyOrderFromCartDraft } from './../../models/Me'
-import { OrderPagedQueryResponse } from './../../models/Order'
-import { Order } from './../../models/Order'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { MyOrderFromCartDraft } from '../../models/Me'
+import { OrderPagedQueryResponse } from '../../models/Order'
+import { Order } from '../../models/Order'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyMeOrdersRequestBuilder {
   constructor(

@@ -1,9 +1,9 @@
 import { ByProjectKeyInStoreKeyByStoreKeyMeCartsByIDRequestBuilder } from './ByProjectKeyInStoreKeyByStoreKeyMeCartsByIDRequestBuilder'
-import { MyCartDraft } from './../../models/Me'
-import { CartPagedQueryResponse } from './../../models/Cart'
-import { Cart } from './../../models/Cart'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { MyCartDraft } from '../../models/Me'
+import { CartPagedQueryResponse } from '../../models/Cart'
+import { Cart } from '../../models/Cart'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyMeCartsRequestBuilder {
   constructor(

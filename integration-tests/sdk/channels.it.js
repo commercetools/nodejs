@@ -7,7 +7,7 @@ import { createQueueMiddleware } from '@commercetools/sdk-middleware-queue'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import omit from 'lodash.omit'
 import fetch from 'node-fetch'
-import { clearData } from './../cli/helpers/utils'
+import { clearData } from '../cli/helpers/utils'
 import pkg from '../package.json'
 
 let projectKey

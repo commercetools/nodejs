@@ -1,10 +1,10 @@
 import { ByProjectKeySubscriptionsKeyByKeyRequestBuilder } from './ByProjectKeySubscriptionsKeyByKeyRequestBuilder'
 import { ByProjectKeySubscriptionsByIDRequestBuilder } from './ByProjectKeySubscriptionsByIDRequestBuilder'
-import { SubscriptionDraft } from './../../models/Subscription'
-import { SubscriptionPagedQueryResponse } from './../../models/Subscription'
-import { Subscription } from './../../models/Subscription'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { SubscriptionDraft } from '../../models/Subscription'
+import { SubscriptionPagedQueryResponse } from '../../models/Subscription'
+import { Subscription } from '../../models/Subscription'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeySubscriptionsRequestBuilder {
   constructor(

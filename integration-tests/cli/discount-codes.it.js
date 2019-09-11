@@ -195,9 +195,6 @@ describe('DiscountCode tests', () => {
   })
 
   describe('Discount Code Exporter', () => {
-    const UTCDateTimeRegex = new RegExp(
-      /[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/g
-    )
     let preparedDiscountCodes
     const bin = './integration-tests/node_modules/.bin/discount-code-exporter'
 
@@ -261,8 +258,6 @@ describe('DiscountCode tests', () => {
       actual.forEach(codeObj => {
         expect(codeObj).toMatchObject(expected)
         expect(isuuid(codeObj.id)).toBe(true)
-        expect(codeObj.createdAt).toMatch(UTCDateTimeRegex)
-        expect(codeObj.lastModifiedAt).toMatch(UTCDateTimeRegex)
       })
     })
 

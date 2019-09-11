@@ -1,7 +1,7 @@
-import { ShippingMethodUpdate } from './../../models/ShippingMethod'
-import { ShippingMethod } from './../../models/ShippingMethod'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ShippingMethodUpdate } from '../../models/ShippingMethod'
+import { ShippingMethod } from '../../models/ShippingMethod'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
   constructor(

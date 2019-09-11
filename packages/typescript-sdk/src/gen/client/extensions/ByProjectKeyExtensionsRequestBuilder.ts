@@ -1,10 +1,10 @@
 import { ByProjectKeyExtensionsKeyByKeyRequestBuilder } from './ByProjectKeyExtensionsKeyByKeyRequestBuilder'
 import { ByProjectKeyExtensionsByIDRequestBuilder } from './ByProjectKeyExtensionsByIDRequestBuilder'
-import { ExtensionDraft } from './../../models/Extension'
-import { ExtensionPagedQueryResponse } from './../../models/Extension'
-import { Extension } from './../../models/Extension'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ExtensionDraft } from '../../models/Extension'
+import { ExtensionPagedQueryResponse } from '../../models/Extension'
+import { Extension } from '../../models/Extension'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyExtensionsRequestBuilder {
   constructor(

@@ -1,9 +1,9 @@
-import { ByProjectKeyCartsReplicateRequestBuilder } from './../replicate/ByProjectKeyCartsReplicateRequestBuilder'
+import { ByProjectKeyCartsReplicateRequestBuilder } from '../replicate/ByProjectKeyCartsReplicateRequestBuilder'
 import { ByProjectKeyCartsByIDRequestBuilder } from './ByProjectKeyCartsByIDRequestBuilder'
-import { CartDraft } from './../../models/Cart'
-import { Cart } from './../../models/Cart'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { CartDraft } from '../../models/Cart'
+import { Cart } from '../../models/Cart'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyCartsRequestBuilder {
   constructor(

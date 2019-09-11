@@ -1,10 +1,10 @@
-import { ByProjectKeyProductProjectionsSearchRequestBuilder } from './../search/ByProjectKeyProductProjectionsSearchRequestBuilder'
-import { ByProjectKeyProductProjectionsSuggestRequestBuilder } from './../suggest/ByProjectKeyProductProjectionsSuggestRequestBuilder'
+import { ByProjectKeyProductProjectionsSearchRequestBuilder } from '../search/ByProjectKeyProductProjectionsSearchRequestBuilder'
+import { ByProjectKeyProductProjectionsSuggestRequestBuilder } from '../suggest/ByProjectKeyProductProjectionsSuggestRequestBuilder'
 import { ByProjectKeyProductProjectionsKeyByKeyRequestBuilder } from './ByProjectKeyProductProjectionsKeyByKeyRequestBuilder'
 import { ByProjectKeyProductProjectionsByIDRequestBuilder } from './ByProjectKeyProductProjectionsByIDRequestBuilder'
-import { ProductProjectionPagedQueryResponse } from './../../models/Product'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ProductProjectionPagedQueryResponse } from '../../models/Product'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyProductProjectionsRequestBuilder {
   constructor(

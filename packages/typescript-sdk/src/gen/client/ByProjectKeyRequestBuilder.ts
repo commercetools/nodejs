@@ -29,10 +29,10 @@ import { ByProjectKeyExtensionsRequestBuilder } from './extensions/ByProjectKeyE
 import { ByProjectKeyApiClientsRequestBuilder } from './api-clients/ByProjectKeyApiClientsRequestBuilder'
 import { ByProjectKeyStoresRequestBuilder } from './stores/ByProjectKeyStoresRequestBuilder'
 import { ByProjectKeyInStoreKeyByStoreKeyRequestBuilder } from './in-store/ByProjectKeyInStoreKeyByStoreKeyRequestBuilder'
-import { ProjectUpdate } from './../models/Project'
-import { Project } from './../models/Project'
-import { Middleware } from './../base/common-types'
-import { ApiRequest } from './../base/requests-utils'
+import { ProjectUpdate } from '../models/Project'
+import { Project } from '../models/Project'
+import { Middleware } from '../base/common-types'
+import { ApiRequest } from '../base/requests-utils'
 
 export class ByProjectKeyRequestBuilder {
   constructor(

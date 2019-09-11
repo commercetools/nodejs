@@ -1,9 +1,9 @@
 import { ByProjectKeyInventoryByIDRequestBuilder } from './ByProjectKeyInventoryByIDRequestBuilder'
-import { InventoryEntryDraft } from './../../models/Inventory'
-import { InventoryPagedQueryResponse } from './../../models/Inventory'
-import { InventoryEntry } from './../../models/Inventory'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { InventoryEntryDraft } from '../../models/Inventory'
+import { InventoryPagedQueryResponse } from '../../models/Inventory'
+import { InventoryEntry } from '../../models/Inventory'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyInventoryRequestBuilder {
   constructor(

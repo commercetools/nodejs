@@ -136,12 +136,14 @@ describe('CustomObjectsImporter', () => {
       objectsImport.client.execute = jest.fn()
     })
 
-    test('should resolve', () => {
+    test('should resolve', async () => {
       objectsImport.client.execute.mockReturnValue(
         Promise.resolve({ body: { results: existingObjects } })
       )
 
-      expect(objectsImport._processBatches(newObjects)).resolves.toBeTruthy()
+      return expect(
+        objectsImport._processBatches(newObjects)
+      ).resolves.not.toThrow()
     })
   })
 
@@ -160,7 +162,7 @@ describe('CustomObjectsImporter', () => {
     })
     test('should run anonymous function', () => {
       const func = objectsImport._createPromiseReturningFunction(requests)
-      expect(func()).resolves.toBe(undefined)
+      return expect(func()).resolves.toBe(undefined)
     })
   })
 
@@ -182,11 +184,10 @@ describe('CustomObjectsImporter', () => {
         expect(objectsImport._summary.updatedCount).toBe(1)
       })
 
-      test('should resolve promise', () => {
+      test('should resolve promise', () =>
         expect(
           objectsImport._executeCreateOrUpdateAction(createRequest)
-        ).resolves.toBeUndefined()
-      })
+        ).resolves.toBeUndefined())
     })
 
     describe('when error is thrown', () => {
@@ -217,11 +218,10 @@ describe('CustomObjectsImporter', () => {
               expect(objectsImport._summary.updateErrorCount).toBe(1)
             }))
 
-        test('should resolve promise', () => {
+        test('should resolve promise', () =>
           expect(
             objectsImport._executeCreateOrUpdateAction(createRequest)
-          ).resolves.toBeUndefined()
-        })
+          ).resolves.toBeUndefined())
       })
 
       describe('without `continueOnProblems`', () => {
@@ -240,11 +240,10 @@ describe('CustomObjectsImporter', () => {
           expect(objectsImport._summary.updateErrorCount).toBe(1)
         })
 
-        test('should reject promise', () => {
+        test('should reject promise', () =>
           expect(
             objectsImport._executeCreateOrUpdateAction(createRequest)
-          ).rejects.toThrowErrorMatchingSnapshot()
-        })
+          ).rejects.toThrowErrorMatchingSnapshot())
       })
     })
   })

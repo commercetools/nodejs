@@ -1,10 +1,10 @@
 import { ByProjectKeyProductsKeyByKeyRequestBuilder } from './ByProjectKeyProductsKeyByKeyRequestBuilder'
 import { ByProjectKeyProductsByIDRequestBuilder } from './ByProjectKeyProductsByIDRequestBuilder'
-import { ProductDraft } from './../../models/Product'
-import { ProductPagedQueryResponse } from './../../models/Product'
-import { Product } from './../../models/Product'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ProductDraft } from '../../models/Product'
+import { ProductPagedQueryResponse } from '../../models/Product'
+import { Product } from '../../models/Product'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyProductsRequestBuilder {
   constructor(

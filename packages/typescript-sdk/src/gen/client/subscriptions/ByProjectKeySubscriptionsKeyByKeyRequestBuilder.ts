@@ -1,7 +1,7 @@
-import { SubscriptionUpdate } from './../../models/Subscription'
-import { Subscription } from './../../models/Subscription'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { SubscriptionUpdate } from '../../models/Subscription'
+import { Subscription } from '../../models/Subscription'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeySubscriptionsKeyByKeyRequestBuilder {
   constructor(

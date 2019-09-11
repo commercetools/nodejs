@@ -1,10 +1,10 @@
 import { ByProjectKeyPaymentsKeyByKeyRequestBuilder } from './ByProjectKeyPaymentsKeyByKeyRequestBuilder'
 import { ByProjectKeyPaymentsByIDRequestBuilder } from './ByProjectKeyPaymentsByIDRequestBuilder'
-import { PaymentDraft } from './../../models/Payment'
-import { PaymentPagedQueryResponse } from './../../models/Payment'
-import { Payment } from './../../models/Payment'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { PaymentDraft } from '../../models/Payment'
+import { PaymentPagedQueryResponse } from '../../models/Payment'
+import { Payment } from '../../models/Payment'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyPaymentsRequestBuilder {
   constructor(

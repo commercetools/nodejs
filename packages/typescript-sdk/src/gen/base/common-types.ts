@@ -29,7 +29,7 @@ export type ClientRequest = {
 export type ClientResponse<T> = {
   body: T
   statusCode?: number
-  headers?: Object
+  headers?: Record<string, any>
 }
 
 export type Middleware = (arg: MiddlewareArg) => Promise<MiddlewareArg>

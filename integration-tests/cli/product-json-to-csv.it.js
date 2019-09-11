@@ -512,8 +512,6 @@ describe('CSV and CLI Tests', () => {
         const fileNames = []
         let csvContents1 = ''
         let csvContents2 = ''
-        let stdout
-        let stderr
 
         beforeAll(async done => {
           const zipFile = tmp.fileSync({ postfix: '.zip' }).name
@@ -782,8 +780,6 @@ describe('CSV and CLI Tests', () => {
         const templateFile = `${__dirname}/helpers/product-headers.csv`
         let csvFile
         let products = []
-        let stdout
-        let stderr
 
         beforeAll(async () => {
           csvFile = tmp.fileSync({ postfix: '.csv' }).name

@@ -1,7 +1,7 @@
-import { ByProjectKeyMePasswordResetRequestBuilder } from './../reset/ByProjectKeyMePasswordResetRequestBuilder'
-import { Customer } from './../../models/Customer'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { ByProjectKeyMePasswordResetRequestBuilder } from '../reset/ByProjectKeyMePasswordResetRequestBuilder'
+import { Customer } from '../../models/Customer'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyMePasswordRequestBuilder {
   constructor(

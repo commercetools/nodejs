@@ -1,12 +1,17 @@
-/* @flow */
 import createHttpUserAgent from '@commercetools/http-user-agent'
-import type {
+import {
+  Dispatch,
   Middleware,
   MiddlewareRequest,
   MiddlewareResponse,
-  UserAgentMiddlewareOptions,
-  Next,
-} from 'types/sdk'
+} from '@commercetools/sdk-types'
+
+type UserAgentMiddlewareOptions = {
+  libraryName?: string
+  libraryVersion?: string
+  contactUrl?: string
+  contactEmail?: string
+}
 
 export default function createUserAgentMiddleware(
   options: UserAgentMiddlewareOptions
@@ -16,7 +21,7 @@ export default function createUserAgentMiddleware(
     ...options,
   })
 
-  return (next: Next): Next => (
+  return (next: Dispatch): Dispatch => (
     request: MiddlewareRequest,
     response: MiddlewareResponse
   ) => {

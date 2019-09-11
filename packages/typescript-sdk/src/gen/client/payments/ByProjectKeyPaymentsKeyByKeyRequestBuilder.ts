@@ -1,7 +1,7 @@
-import { PaymentUpdate } from './../../models/Payment'
-import { Payment } from './../../models/Payment'
-import { Middleware } from './../../base/common-types'
-import { ApiRequest } from './../../base/requests-utils'
+import { PaymentUpdate } from '../../models/Payment'
+import { Payment } from '../../models/Payment'
+import { Middleware } from '../../base/common-types'
+import { ApiRequest } from '../../base/requests-utils'
 
 export class ByProjectKeyPaymentsKeyByKeyRequestBuilder {
   constructor(
