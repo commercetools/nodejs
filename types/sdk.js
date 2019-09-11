@@ -351,6 +351,9 @@ export type ServiceBuilderParams = {
 
   // applyOrderEditTo
   applyOrderEditTo?: boolean,
+
+  // container
+  container?: ?string,
 }
 export type ServiceBuilder = {
   type: string,
