@@ -130,6 +130,7 @@ export function setParams(params: ServiceBuilderParams) {
     'dataErasure',
     'withTotal',
     'applyOrderEditTo',
+    'container',
   ]
   Object.keys(params).forEach((key: string) => {
     if (!knownKeys.includes(key)) throw new Error(`Unknown key "${key}"`)
@@ -143,7 +144,8 @@ export function setParams(params: ServiceBuilderParams) {
 
   // query-id
   if (hasKey(params, 'id')) this.byId(params.id)
-  if (hasKey(params, 'key')) this.byKey(params.key)
+  if (hasKey(params, 'key') && !hasKey(params, 'container'))
+    this.byKey(params.key)
   if (hasKey(params, 'customerId')) this.byCustomerId(params.customerId)
   if (hasKey(params, 'cartId')) this.byCartId(params.cartId)
 
@@ -219,4 +221,8 @@ export function setParams(params: ServiceBuilderParams) {
   // withTotal
   if (hasKey(params, 'applyOrderEditTo'))
     this.applyOrderEditTo(params.applyOrderEditTo)
+
+  // container and key
+  if (hasKey(params, 'container') && hasKey(params, 'key'))
+    this.byContainerAndKey(params.container, params.key)
 }

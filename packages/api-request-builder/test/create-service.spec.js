@@ -374,6 +374,12 @@ describe('createService', () => {
     test('should throw on unknown keys', () => {
       expect(() => service.parse({ foo: 'bar' })).toThrow('Unknown key "foo"')
     })
+
+    test('should support `container` and `key` together', () => {
+      expect(
+        service.parse({ container: 'container', key: 'key' }).build()
+      ).toBe('/my-project1/foo/container/key')
+    })
   })
 
   describe('build', () => {
@@ -516,6 +522,21 @@ describe('createService', () => {
     test('to throw error when order-edit-id is not a string', () => {
       expect(() => service.parse({ applyOrderEditTo: 2 })).toThrow(
         /A resource orderEditId is missing or invalid/
+      )
+    })
+    test('should add container and key', () => {
+      expect(service.byContainerAndKey('container', 'key123').build()).toBe(
+        '/my-project1/foo/container/key123'
+      )
+    })
+    test('to throw error when container is not a string', () => {
+      expect(() => service.byContainerAndKey(123, 'key123')).toThrow(
+        /Required `container` or `key` argument for `byContainerAndKey` needs to be a string/
+      )
+    })
+    test('to throw error when key is not supplied', () => {
+      expect(() => service.byContainerAndKey('container')).toThrow(
+        /Required `container` or `key` argument for `byContainerAndKey` needs to be a string/
       )
     })
   })

@@ -88,3 +88,22 @@ export function byCartId(cartId: string): Object {
   this.params.cartId = cartId
   return this
 }
+
+/**
+ * Set the given `container` and `key` to the internal state of the service instance.
+ *
+ * @param  {string} container - A resource `container`
+ * @param  {string} key - A resource `key`
+ * @throws If `container` or `key` is missing.
+ * @return {Object} The instance of the service, can be chained.
+ */
+export function byContainerAndKey(container: string, key: string): Object {
+  if (typeof container !== 'string' || typeof key !== 'string')
+    throw new Error(
+      'Required `container` or `key` argument for `byContainerAndKey` needs to be a string'
+    )
+
+  this.params.container = container
+  this.params.key = key
+  return this
+}
