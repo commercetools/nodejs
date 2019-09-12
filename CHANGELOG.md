@@ -1,3 +1,564 @@
+## @commercetools/typescript-sdk@0.0.4-alpha.0 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/sync-actions@3.6.1 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/state-importer@2.0.18 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/sdk-types@0.1.1 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/sdk-middleware-user-agent@2.1.2 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/sdk-middleware-queue@2.1.1 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/sdk-middleware-logger@2.1.1 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/sdk-middleware-http@5.2.2 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/sdk-middleware-correlation-id@2.1.1 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/sdk-middleware-auth@5.1.4 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/sdk-client@2.1.1 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/sdk-auth@2.1.3 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/resource-deleter@1.0.12 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/product-json-to-xlsx@2.0.18 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/product-json-to-csv@3.1.15 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/product-exporter@2.0.16 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/price-exporter@2.0.16 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/personal-data-erasure@2.0.14 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/inventories-exporter@2.1.11 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/http-user-agent@2.1.2 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/get-credentials@3.0.7 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/discount-code-importer@2.0.18 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/discount-code-generator@2.0.5 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/discount-code-exporter@3.0.16 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/customer-groups-exporter@2.0.16 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/custom-objects-importer@2.0.18 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/custom-objects-exporter@2.0.16 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/csv-parser-state@2.0.15 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/csv-parser-price@3.0.15 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/csv-parser-orders@2.0.8 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/csv-parser-discount-code@2.0.7 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/category-exporter@2.0.16 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/api-request-builder@5.4.0 (2019-09-12)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1398](https://github.com/commercetools/nodejs/pull/1398) feat: querying custom objects by container and key ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- `api-request-builder`, `csv-parser-state`, `custom-objects-importer`, `discount-code-importer`, `http-user-agent`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-logger`, `sdk-middleware-queue`, `sdk-middleware-user-agent`, `sdk-types`, `sync-actions`, `typescript-sdk`
+  - [#1393](https://github.com/commercetools/nodejs/pull/1393) refactor: migrate user-agent packages to TS ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
 ## @commercetools/sync-actions@3.6.0 (2019-09-09)
 
 #### :rocket: New Feature
