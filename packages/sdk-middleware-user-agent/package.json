@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-middleware-user-agent",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Middleware for setting the User-Agent on the HTTP request, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
@@ -35,7 +35,7 @@
     "build:typings": "tsc -p tsconfig.declarations.json --emitDeclarationOnly --declarationDir dist/typings"
   },
   "dependencies": {
-    "@commercetools/http-user-agent": "^2.1.1",
-    "@commercetools/sdk-types": "^0.1.0"
+    "@commercetools/http-user-agent": "^2.1.2",
+    "@commercetools/sdk-types": "^0.1.1"
   }
 }

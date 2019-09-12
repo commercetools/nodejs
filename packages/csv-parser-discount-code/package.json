@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/csv-parser-discount-code",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "Converts commercetools discount code data from CSV to JSON.",
   "keywords": [
     "commercetools",
