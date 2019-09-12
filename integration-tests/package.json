@@ -1,7 +1,6 @@
 {
   "private": true,
   "name": "@commercetools/integration-tests",
-  "version": "1.0.0",
   "dependencies": {
     "@commercetools/api-request-builder": "5.3.2",
     "@commercetools/category-exporter": "2.0.15",

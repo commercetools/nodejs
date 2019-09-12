@@ -6,10 +6,11 @@
     "npm": ">=5.10"
   },
   "scripts": {
-    "postinstall": "check-node-version --package --print && cross-env NODE_ENV=development lerna run build --no-private",
+    "postinstall": "check-node-version --package --print && cross-env NODE_ENV=development npm run build",
     "check-updates": "./scripts/check-updates",
     "clean": "rm -rf coverage; lerna exec -- rimraf lib dist",
     "commit": "git-cz",
+    "build": "lerna run build --no-private",
     "build:changelog": "lerna-changelog --from=$(git log --grep='chore(release): releasing component' --format='%H' | sed -n 2p) > tmp && cat CHANGELOG.md >> tmp && cat tmp > CHANGELOG.md && rm tmp",
     "push:changelog": "git add CHANGELOG.md && git commit -m 'docs: update changelog' && git push",
     "check-gh-auth-token": "if [[ -z \"${GITHUB_AUTH}\" ]]; then echo \"Need to set GITHUB_AUTH\" && exit 1; fi",
