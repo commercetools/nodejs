@@ -123,7 +123,7 @@
     "rollup-watch": "4.3.1",
     "streamtest": "1.2.4",
     "ts-jest": "24.1.0",
-    "typescript": "3.6.3"
+    "typescript": "3.5.3"
   },
   "config": {
     "commitizen": {
