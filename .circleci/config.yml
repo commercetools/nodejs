@@ -22,7 +22,7 @@ aliases:
 
   - &yarn_install
     name: Installing
-    command: yarn --frozen-lockfile
+    command: yarn --frozen-lockfile --ignore-engines
 
   - &unit_test
     name: Unit testing
