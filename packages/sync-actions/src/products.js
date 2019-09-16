@@ -8,6 +8,7 @@ import type {
 } from 'types/sdk'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
+import actionsMapAssets from './assets-actions'
 import * as productActions from './product-actions'
 import * as diffpatcher from './utils/diffpatcher'
 import findMatchingPairs from './utils/find-matching-pairs'
@@ -107,6 +108,12 @@ function createProductMapActions(
     allActions.push(
       mapActionGroup('categories', (): Array<UpdateAction> =>
         productActions.actionsMapCategoryOrderHints(diff, oldObj)
+      )
+    )
+
+    allActions.push(
+      mapActionGroup('assets', (): Array<UpdateAction> =>
+        actionsMapAssets(diff, oldObj, newObj)
       )
     )
 
