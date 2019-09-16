@@ -54,4 +54,12 @@ module.exports = {
       },
     },
   },
+  overrides: [
+    {
+      files: ['integration-tests/**/*.js'],
+      rules: {
+        'import/no-extraneous-dependencies': 0
+      },
+    },
+  ],
 }
