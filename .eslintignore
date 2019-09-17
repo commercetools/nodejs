@@ -12,3 +12,6 @@ scripts/*
 node_modules/*
 **/node_modules/*
 **/typescript-sdk/*
+_book
+.changelog
+.yarn
