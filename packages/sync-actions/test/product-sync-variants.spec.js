@@ -1016,6 +1016,46 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
 
+    test('should build "addAsset" action for variant with sku with empty assets', () => {
+      const before = {
+        variants: [
+          {
+            sku: 'my-sku',
+            assets: [],
+          },
+        ],
+      }
+      const now = {
+        variants: [
+          {
+            sku: 'my-sku',
+            assets: [
+              {
+                key: 'asset-key',
+                name: {
+                  en: 'asset name ',
+                },
+                sources: [
+                  {
+                    uri: 'http://example.org/content/product-manual.pdf',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      }
+      const actual = productsSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'addAsset',
+          asset: now.assets[0],
+          sku: 'my-sku',
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
     test('should build "addAsset" action with existing assets', () => {
       const existingAsset = {
         key: 'existing',
@@ -1094,6 +1134,7 @@ describe('Actions', () => {
         {
           action: 'removeAsset',
           assetId: before.assets[0].id,
+          variantId: 2,
         },
       ]
       expect(actual).toEqual(expected)
@@ -1133,10 +1174,52 @@ describe('Actions', () => {
         {
           action: 'removeAsset',
           assetKey: before.assets[0].key,
+          variantId: 1,
         },
       ]
       expect(actual).toEqual(expected)
     })
+
+    test('should build "removeAsset" action for variant with sku and asset with assetKey prop', () => {
+      const before = {
+        variants: [
+          {
+            sku: 'my-sku',
+            assets: [
+              {
+                key: 'asset-key',
+                name: {
+                  en: 'asset name ',
+                },
+                sources: [
+                  {
+                    uri: 'http://example.org/content/product-manual.pdf',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      }
+      const now = {
+        variants: [
+          {
+            sku: 'my-sku',
+            assets: [],
+          },
+        ],
+      }
+      const actual = productsSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'removeAsset',
+          assetKey: before.assets[0].key,
+          sku: 'my-sku',
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
     test('should build "removeAsset" and "addAsset" action when asset is changed', () => {
       const initialAsset = {
         key: 'asset-key',
