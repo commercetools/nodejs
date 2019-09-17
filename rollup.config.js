@@ -8,7 +8,6 @@ const json = require('rollup-plugin-json')
 const babel = require('rollup-plugin-babel')
 const replace = require('rollup-plugin-replace')
 const { uglify } = require('rollup-plugin-uglify')
-const filesize = require('rollup-plugin-filesize')
 const globals = require('rollup-plugin-node-globals')
 const babelConfig = require('./babel.config')
 /* eslint-enable */
@@ -38,7 +37,6 @@ const plugins = [
     extensions,
     ...babelConfig,
   }),
-  filesize(),
 ].filter(Boolean)
 
 const createConfig = cliArgs => [
