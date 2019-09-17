@@ -9,6 +9,7 @@ import {
 } from './utils/common-actions'
 import createBuildArrayActions, {
   ADD_ACTIONS,
+  CHANGE_ACTIONS,
   REMOVE_ACTIONS,
 } from './utils/create-build-array-actions'
 import findMatchingPairs from './utils/find-matching-pairs'
@@ -366,6 +367,50 @@ function _buildVariantAttributesActions(
   return actions
 }
 
+function toAssetIdentifier(asset) {
+  const assetIdentifier = asset.id
+    ? { assetId: asset.id }
+    : { assetKey: asset.key }
+  return assetIdentifier
+}
+
+function toVariantIdentifier(variant) {
+  const { id, sku } = variant
+  return { variantId: id, sku }
+}
+
+function _buildVariantAssetsActions(diff, oldObj, newObj) {
+  const handler = createBuildArrayActions('assets', {
+    [ADD_ACTIONS]: newAsset => ({
+      action: 'addAsset',
+      asset: newAsset,
+      ...toVariantIdentifier(newObj),
+    }),
+    [REMOVE_ACTIONS]: oldAsset => ({
+      action: 'removeAsset',
+      ...toAssetIdentifier(oldAsset),
+    }),
+    [CHANGE_ACTIONS]: (oldAsset, newAsset) =>
+      // here we could use more atomic update actions (e.g. changeAssetName)
+      // but for now we use the simpler approach to first remove and then
+      // re-add the asset - which reduces the code complexity
+      [
+        {
+          action: 'removeAsset',
+          ...toAssetIdentifier(oldAsset),
+          ...toVariantIdentifier(newObj),
+        },
+        {
+          action: 'addAsset',
+          asset: newAsset,
+          ...toVariantIdentifier(newObj),
+        },
+      ],
+  })
+
+  return handler(diff, oldObj, newObj)
+}
+
 /**
  * SYNC FUNCTIONS
  */
@@ -463,6 +508,30 @@ export function actionsMapCategoryOrderHints(diff) {
 
     return action
   })
+}
+
+export function actionsMapAssets(diff, oldObj, newObj, variantHashMap) {
+  let actions = []
+  const { variants } = diff
+
+  if (variants)
+    forEach(variants, (variant, key) => {
+      const { oldObj: oldVariant, newObj: newVariant } = extractMatchingPairs(
+        variantHashMap,
+        key,
+        oldObj.variants,
+        newObj.variants
+      )
+      if (REGEX_NUMBER.test(key) && !Array.isArray(variant)) {
+        const assetActions = _buildVariantAssetsActions(
+          variant,
+          oldVariant,
+          newVariant
+        )
+        if (assetActions) actions = actions.concat(assetActions)
+      }
+    })
+  return actions
 }
 
 export function actionsMapAttributes(
