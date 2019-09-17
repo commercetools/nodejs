@@ -46,7 +46,7 @@
     "node-fetch": "^2.3.0",
     "pino": "^5.11.1",
     "pretty-error": "^2.1.1",
-    "yargs": "^13.0.0"
+    "yargs": "^14.0.0"
   },
   "devDependencies": {
     "streamtest": "1.2.4"
