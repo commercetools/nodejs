@@ -247,7 +247,7 @@ describe('Actions', () => {
         de: 'Asset Name',
       },
     }
-    const changedAsset = Object.assign({}, initialAsset, changedName)
+    const changedAsset = { ...initialAsset, ...changedName }
     const before = {
       assets: [initialAsset],
     }

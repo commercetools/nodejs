@@ -17,19 +17,14 @@ const packageFilter = pkg => {
   return pkg
 }
 
-const opts = (file, config) =>
-  Object.assign(
-    {
-      // more closely matches Node (#333)
-      extensions: ['.js', '.json'],
-    },
-    config,
-    {
-      // path.resolve will handle paths relative to CWD
-      basedir: path.dirname(path.resolve(file)),
-      packageFilter,
-    }
-  )
+const opts = (file, config) => ({
+  // more closely matches Node (#333)
+  extensions: ['.js', '.json'],
+  ...config,
+  // path.resolve will handle paths relative to CWD
+  basedir: path.dirname(path.resolve(file)),
+  packageFilter,
+})
 
 const applyModuleNameMapper = (source, config) => {
   Object.keys(config.moduleNameMapper).forEach(regex => {
