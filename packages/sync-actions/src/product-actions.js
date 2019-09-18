@@ -376,7 +376,7 @@ function toAssetIdentifier(asset) {
 
 function toVariantIdentifier(variant) {
   const { id, sku } = variant
-  return { variantId: id, sku }
+  return id ? { variantId: id } : { sku }
 }
 
 function _buildVariantAssetsActions(diff, oldObj, newObj) {
@@ -389,6 +389,7 @@ function _buildVariantAssetsActions(diff, oldObj, newObj) {
     [REMOVE_ACTIONS]: oldAsset => ({
       action: 'removeAsset',
       ...toAssetIdentifier(oldAsset),
+      ...toVariantIdentifier(oldObj),
     }),
     [CHANGE_ACTIONS]: (oldAsset, newAsset) =>
       // here we could use more atomic update actions (e.g. changeAssetName)
@@ -398,7 +399,7 @@ function _buildVariantAssetsActions(diff, oldObj, newObj) {
         {
           action: 'removeAsset',
           ...toAssetIdentifier(oldAsset),
-          ...toVariantIdentifier(newObj),
+          ...toVariantIdentifier(oldObj),
         },
         {
           action: 'addAsset',

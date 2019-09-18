@@ -1009,7 +1009,7 @@ describe('Actions', () => {
       const expected = [
         {
           action: 'addAsset',
-          asset: now.assets[0],
+          asset: now.masterVariant.assets[0],
           variantId: 1,
         },
       ]
@@ -1049,7 +1049,7 @@ describe('Actions', () => {
       const expected = [
         {
           action: 'addAsset',
-          asset: now.assets[0],
+          asset: now.variants[0].assets[0],
           sku: 'my-sku',
         },
       ]
@@ -1133,7 +1133,7 @@ describe('Actions', () => {
       const expected = [
         {
           action: 'removeAsset',
-          assetId: before.assets[0].id,
+          assetId: before.variants[0].assets[0].id,
           variantId: 2,
         },
       ]
@@ -1173,8 +1173,8 @@ describe('Actions', () => {
       const expected = [
         {
           action: 'removeAsset',
-          assetKey: before.assets[0].key,
-          variantId: 1,
+          assetKey: before.variants[0].assets[0].key,
+          variantId: 2,
         },
       ]
       expect(actual).toEqual(expected)
@@ -1213,7 +1213,7 @@ describe('Actions', () => {
       const expected = [
         {
           action: 'removeAsset',
-          assetKey: before.assets[0].key,
+          assetKey: before.variants[0].assets[0].key,
           sku: 'my-sku',
         },
       ]
