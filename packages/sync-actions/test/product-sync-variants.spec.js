@@ -1235,26 +1235,32 @@ describe('Actions', () => {
       }
       const changedAsset = Object.assign({}, initialAsset, changedName)
       const before = {
-        variants: {
-          id: 2,
-          assets: [initialAsset],
-        },
+        variants: [
+          {
+            id: 1,
+            assets: [initialAsset],
+          },
+        ],
       }
       const now = {
-        variants: {
-          id: 2,
-          assets: [changedAsset],
-        },
+        variants: [
+          {
+            id: 1,
+            assets: [changedAsset],
+          },
+        ],
       }
       const actual = productsSync.buildActions(now, before)
       const expected = [
         {
           action: 'removeAsset',
-          assetKey: before.assets[0].key,
+          assetKey: before.variants[0].assets[0].key,
+          variantId: 1,
         },
         {
           action: 'addAsset',
           asset: changedAsset,
+          variantId: 1,
         },
       ]
       expect(actual).toEqual(expected)
