@@ -102,7 +102,7 @@
     "jest-runner-eslint": "0.7.4",
     "jest-runner-flowtype": "0.0.7",
     "jest-silent-reporter": "0.1.2",
-    "leasot": "7.5.0",
+    "leasot": "8.2.0",
     "lerna": "3.16.4",
     "lerna-changelog": "0.8.2",
     "lint-staged": "9.2.5",
