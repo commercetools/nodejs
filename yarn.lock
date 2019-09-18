@@ -2855,7 +2855,7 @@ async@^2.6.3:
   dependencies:
     lodash "^4.17.14"
 
-async@^3.0.1:
+async@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/async/-/async-3.1.0.tgz#42b3b12ae1b74927b5217d8c0016baaf62463772"
   integrity sha512-4vx/aaY6j/j3Lw3fbCHNWP0pPaTCew3F6F3hYyl/tHs/ndmV1q7NW9T5yuJ2XAGwdQrP+6Wu20x06U4APo/iQQ==
@@ -6033,16 +6033,17 @@ gitbook-cli@daern91/gitbook-cli:
   version "2.3.2"
   resolved "https://codeload.github.com/daern91/gitbook-cli/tar.gz/6a95e4c021cc25306ff5df231fc58504162d84cf"
   dependencies:
-    bash-color "^0.0.4"
-    commander "^2.20.0"
-    fs-extra "^8.1.0"
-    lodash "^4.17.15"
-    npmi "^4.0.0"
-    optimist "^0.6.1"
-    q "^1.5.1"
-    semver "^6.3.0"
-    tmp "^0.1.0"
-    user-home "^2.0.0"
+    bash-color "0.0.4"
+    commander "2.11.0"
+    fs-extra "3.0.1"
+    lodash "4.17.11"
+    npm "5.10.0"
+    npmi "1.0.1"
+    optimist "0.6.1"
+    q "1.5.1"
+    semver "5.3.0"
+    tmp "0.0.33"
+    user-home "2.0.0"
 
 gitbook-plugin-anchorjs@2.1.0:
   version "2.1.0"
@@ -7890,19 +7891,19 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
-leasot@7.5.0:
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/leasot/-/leasot-7.5.0.tgz#40d31b94bc7378da71837416f41745bb7532e13b"
-  integrity sha512-/vFxfV8u6X8BlJzav4ykNSGZDGoGdMYhyad56baCxk1lKIVld4O3z17EeCIKMqErX7ipwO7+H3kFHgjD5AGCHg==
+leasot@8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/leasot/-/leasot-8.2.0.tgz#5e86c82a7fecb1225f987d99db19360534b4be35"
+  integrity sha512-6hyF8/MAUH6Ke5rkm22xrHk4kTPQpkPKdS9SXC8LcEqMbVmk9J3rlZUBWRHeP09PRMV5TX/Z5E26zJOqE6UxsQ==
   dependencies:
-    async "^3.0.1"
+    async "^3.1.0"
     chalk "^2.4.2"
-    commander "^2.20.0"
+    commander "^3.0.1"
     eol "^0.9.1"
     get-stdin "^7.0.0"
-    globby "^9.2.0"
+    globby "^10.0.1"
     json2xml "^0.1.3"
-    lodash "^4.17.11"
+    lodash "^4.17.15"
     log-symbols "^3.0.0"
     strip-ansi "^5.2.0"
     text-table "^0.2.0"
