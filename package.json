@@ -71,7 +71,7 @@
     "babel-jest": "24.9.0",
     "check-node-version": "3.3.0",
     "codecov": "3.5.0",
-    "commitizen": "4.0.3",
+    "commitizen": "3.1.2",
     "common-tags": "1.8.0",
     "cross-env": "5.2.1",
     "cz-lerna-changelog": "2.0.2",
