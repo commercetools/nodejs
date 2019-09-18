@@ -41,6 +41,7 @@ module.exports = {
     'no-underscore-dangle': 0,
     'prefer-destructuring': 0,
     'lines-between-class-members': 0,
+    'max-classes-per-file': 0,
   },
   settings: {
     flowtype: {

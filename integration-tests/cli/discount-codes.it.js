@@ -105,16 +105,15 @@ describe('DiscountCode tests', () => {
           path.join(__dirname, './helpers/discountCodes.json'),
           'utf8'
         )
-      ).map(codeObj =>
-        Object.assign({}, codeObj, {
-          cartDiscounts: [
-            {
-              typeId: 'cart-discount',
-              id: cartDiscount.id,
-            },
-          ],
-        })
-      )
+      ).map(codeObj => ({
+        ...codeObj,
+        cartDiscounts: [
+          {
+            typeId: 'cart-discount',
+            id: cartDiscount.id,
+          },
+        ],
+      }))
     }, 20000)
 
     // Delete Discount codes
@@ -130,16 +129,17 @@ describe('DiscountCode tests', () => {
       // First, import the codes that need to be updated
       const oldCodesToUpdate = preparedDiscountCodes.map(codeObj => {
         const uniqueCode = codeObj.code
-        return Object.assign({}, codeObj, { code: `${uniqueCode}foo` })
+        return { ...codeObj, code: `${uniqueCode}foo` }
       })
       await codeImport.run(oldCodesToUpdate)
 
       // Call a new `codeImport` instance so we reset the summary
       codeImport = new DiscountCodeImport({ apiConfig }, logger)
 
-      const newCodesToUpdate = oldCodesToUpdate.map(codeObj =>
-        Object.assign({}, codeObj, { maxApplications: 20 })
-      )
+      const newCodesToUpdate = oldCodesToUpdate.map(codeObj => ({
+        ...codeObj,
+        maxApplications: 20,
+      }))
 
       await codeImport.run(newCodesToUpdate)
       const summary = codeImport.summaryReport()
@@ -152,7 +152,7 @@ describe('DiscountCode tests', () => {
       // Make codes unique
       const discountCodesSample = preparedDiscountCodes.map(codeObj => {
         const uniqueCode = codeObj.code
-        return Object.assign({}, codeObj, { code: `${uniqueCode}bar` })
+        return { ...codeObj, code: `${uniqueCode}bar` }
       })
 
       // Make code invalid
@@ -180,7 +180,7 @@ describe('DiscountCode tests', () => {
       // Make codes unique
       const discountCodesSample = preparedDiscountCodes.map(codeObj => {
         const uniqueCode = codeObj.code
-        return Object.assign({}, codeObj, { code: `${uniqueCode}foobar` })
+        return { ...codeObj, code: `${uniqueCode}foobar` }
       })
       // Make code invalid
       discountCodesSample[1].code = ''
@@ -207,16 +207,15 @@ describe('DiscountCode tests', () => {
           path.join(__dirname, './helpers/discountCodes.json'),
           'utf8'
         )
-      ).map(codeObj =>
-        Object.assign({}, codeObj, {
-          cartDiscounts: [
-            {
-              typeId: 'cart-discount',
-              id: cartDiscount.id,
-            },
-          ],
-        })
-      )
+      ).map(codeObj => ({
+        ...codeObj,
+        cartDiscounts: [
+          {
+            typeId: 'cart-discount',
+            id: cartDiscount.id,
+          },
+        ],
+      }))
       await createData(apiConfig, 'discountCodes', preparedDiscountCodes).catch(
         process.stderr.write
       )
