@@ -1,9 +1,6 @@
 import { buildBaseAttributesActions } from './utils/common-actions'
 
-export const baseActionsList = [
-  { action: 'setLanguages', key: 'languages' },
-  { action: 'setName', key: 'name' },
-]
+export const baseActionsList = [{ action: 'setName', key: 'name' }]
 
 export function actionsMapBase(diff, oldObj, newObj) {
   return buildBaseAttributesActions({

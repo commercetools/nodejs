@@ -613,16 +613,10 @@ const client = createClient({
 })
 const before = {
   id: 'store-1',
-  version: 2,
-  name: { locale: 'en', value: 'Germany' },
-  languages: 'en'
+  name: { 'en': 'Germany' },
 }
 const now = {
-  name: [
-    { locale: 'en', value: 'Germany' },
-    { locale: 'de', value: 'Deutschland' },
-  ],
-  languages: ['de', 'en']
+  name: { 'de': 'Deutschland', 'en': 'Germany' },
 }
 const actions = syncStores.buildActions(now, before)
 const storesRequest = {
