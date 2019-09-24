@@ -19,10 +19,10 @@ describe('Actions', () => {
 
   test('should build `setName` action', () => {
     const before = {
-      name: [{ en: 'Algeria' }],
+      name: { en: 'Algeria' },
     }
     const now = {
-      name: [{ en: 'Algeria' }, { de: 'Algerian' }],
+      name: { en: 'Algeria', de: 'Algerian' },
     }
 
     const actual = storesSync.buildActions(now, before)
