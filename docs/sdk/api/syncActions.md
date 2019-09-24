@@ -488,51 +488,6 @@ client.execute(productTypesRequest)
 .catch(error => ...)
 ```
 
-## `createSyncStores(actionGroups)`
-
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
-
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _stores_.
-
-#### Arguments
-
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
-
-#### Usage example
-
-```js
-import { createSyncStores } from '@commercetools/sync-actions'
-import { createClient } from '@commercetools/sdk-client'
-
-const syncStores = createSyncStores()
-const client = createClient({
-  middlewares: [...],
-})
-const before = {
-  id: 'store-1',
-  version: 2,
-  name: { locale: 'en', value: 'Germany' },
-  languages: 'en'
-}
-const now = {
-  name: [
-    { locale: 'en', value: 'Germany' },
-    { locale: 'de', value: 'Deutschland' },
-  ],
-  languages: ['de', 'en']
-}
-const actions = syncStores.buildActions(now, before)
-const storesRequest = {
-  url: `/stores/${before.id}`,
-  method: 'POST',
-  body: JSON.stringify({ version: before.version, actions }),
-}
-
-client.execute(storesRequest)
-.then(result => ...)
-.catch(error => ...)
-```
-
 #### Difference to sync-actions for other resources
 
 Unlike other resources (e.g `createSyncProducts`), `createSyncProductTypes` requires that you apply hints to calculate update actions for nested values such as `attributes` and `enumValues`.
@@ -634,6 +589,51 @@ console.log(updateActions)
 //     keys: ['previous-enum-key-2'],
 //   }
 // ]
+```
+
+## `createSyncStores(actionGroups)`
+
+> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _stores_.
+
+#### Arguments
+
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+
+#### Usage example
+
+```js
+import { createSyncStores } from '@commercetools/sync-actions'
+import { createClient } from '@commercetools/sdk-client'
+
+const syncStores = createSyncStores()
+const client = createClient({
+  middlewares: [...],
+})
+const before = {
+  id: 'store-1',
+  version: 2,
+  name: { locale: 'en', value: 'Germany' },
+  languages: 'en'
+}
+const now = {
+  name: [
+    { locale: 'en', value: 'Germany' },
+    { locale: 'de', value: 'Deutschland' },
+  ],
+  languages: ['de', 'en']
+}
+const actions = syncStores.buildActions(now, before)
+const storesRequest = {
+  url: `/stores/${before.id}`,
+  method: 'POST',
+  body: JSON.stringify({ version: before.version, actions }),
+}
+
+client.execute(storesRequest)
+.then(result => ...)
+.catch(error => ...)
 ```
 
 ## `createSyncShippingMethods(actionGroups)`
