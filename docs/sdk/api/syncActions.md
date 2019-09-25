@@ -591,6 +591,45 @@ console.log(updateActions)
 // ]
 ```
 
+## `createSyncStores(actionGroups)`
+
+> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _stores_.
+
+#### Arguments
+
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+
+#### Usage example
+
+```js
+import { createSyncStores } from '@commercetools/sync-actions'
+import { createClient } from '@commercetools/sdk-client'
+
+const syncStores = createSyncStores()
+const client = createClient({
+  middlewares: [...],
+})
+const before = {
+  id: 'store-1',
+  name: { 'en': 'Germany' },
+}
+const now = {
+  name: { 'de': 'Deutschland', 'en': 'Germany' },
+}
+const actions = syncStores.buildActions(now, before)
+const storesRequest = {
+  url: `/stores/${before.id}`,
+  method: 'POST',
+  body: JSON.stringify({ version: before.version, actions }),
+}
+
+client.execute(storesRequest)
+.then(result => ...)
+.catch(error => ...)
+```
+
 ## `createSyncShippingMethods(actionGroups)`
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
