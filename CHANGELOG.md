@@ -1,3 +1,278 @@
+## @commercetools/sync-actions@3.7.0 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/state-importer@2.0.19 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/sdk-middleware-http@5.2.3 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/sdk-middleware-auth@5.1.5 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/sdk-auth@2.1.4 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/resource-deleter@1.0.13 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/product-json-to-xlsx@2.0.19 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/product-json-to-csv@3.1.16 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/product-exporter@2.0.17 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/price-exporter@2.0.17 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/personal-data-erasure@2.0.15 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/inventories-exporter@2.1.12 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/integration-tests@0.0.1 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/get-credentials@3.0.8 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/discount-code-importer@2.0.19 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/discount-code-generator@2.0.6 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/discount-code-exporter@3.0.17 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/customer-groups-exporter@2.0.17 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/custom-objects-importer@2.0.19 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/custom-objects-exporter@2.0.17 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/csv-parser-state@2.0.16 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/csv-parser-price@3.0.16 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/csv-parser-orders@2.0.9 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/csv-parser-discount-code@2.0.8 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/category-exporter@2.0.17 (2019-09-25)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1410](https://github.com/commercetools/nodejs/pull/1410) Sync actions product assets ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
 ## @commercetools/typescript-sdk@0.0.4-alpha.0 (2019-09-12)
 
 #### :rocket: New Feature
