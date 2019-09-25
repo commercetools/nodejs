@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/resource-deleter",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Delete resources from the commercetools platform",
   "main": "lib/main.js",
   "bin": {
@@ -33,10 +33,10 @@
   "license": "MIT",
   "dependencies": {
     "@commercetools/api-request-builder": "^5.4.0",
-    "@commercetools/get-credentials": "^3.0.7",
+    "@commercetools/get-credentials": "^3.0.8",
     "@commercetools/sdk-client": "^2.1.1",
-    "@commercetools/sdk-middleware-auth": "^5.1.4",
-    "@commercetools/sdk-middleware-http": "^5.2.2",
+    "@commercetools/sdk-middleware-auth": "^5.1.5",
+    "@commercetools/sdk-middleware-http": "^5.2.3",
     "@commercetools/sdk-middleware-queue": "^2.1.1",
     "@commercetools/sdk-middleware-user-agent": "^2.1.2",
     "node-fetch": "^2.4.1",
