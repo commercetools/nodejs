@@ -110,6 +110,12 @@ function createProductMapActions(
       )
     )
 
+    allActions.push(
+      mapActionGroup('assets', (): Array<UpdateAction> =>
+        productActions.actionsMapAssets(diff, oldObj, newObj, variantHashMap)
+      )
+    )
+
     return flatten(allActions)
   }
 }
