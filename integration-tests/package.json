@@ -38,7 +38,7 @@
     "common-tags": "^1.8.0",
     "csvtojson": "^2.0.8",
     "dotenv": "^8.0.0",
-    "exceljs": "^2.0.0",
+    "exceljs": "^3.0.0",
     "isuuid": "^0.1.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.omit": "^4.5.0",
