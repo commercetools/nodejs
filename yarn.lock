@@ -5541,13 +5541,12 @@ eventemitter3@^3.1.0:
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.1.2.tgz#2d3d48f9c346698fce83a85d7d664e98535df6e7"
   integrity sha512-tvtQIeLVHjDkJYnzf2dgVMxfuSGJeM/7UCG17TT4EumTfNtF+0nebF/4zWOIkCreAbtNqhGEboB6BWrwqNaw4Q==
 
-exceljs@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/exceljs/-/exceljs-2.0.1.tgz#eb85e09ad51482624a57507070f97b7113703e76"
-  integrity sha512-PhqkpotsaerdXt1ifID+Nvr2+RDdvf9QbSp5UF/F326HXZjCme1FRlfoLZtNjKgTd6tXCxSn7RJzIadNlVyJXQ==
+exceljs@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/exceljs/-/exceljs-3.0.0.tgz#2eead25d05118430bf8fc8a53031d3abe13c31e9"
+  integrity sha512-ms/2VI/12GCqC/6eI4NU5foLA/C1RJtAmPRhA9ibZ5vPeCXmHi1UuGmAoyrsKfp0cOZPTchy3g58Ozu5X+5Huw==
   dependencies:
     archiver "^3.0.0"
-    babel-polyfill "^6.26.0"
     dayjs "^1.8.15"
     fast-csv "^2.4.1"
     jszip "^3.1.5"
