@@ -227,6 +227,7 @@ export type HttpMiddlewareOptions = {
   includeResponseHeaders?: boolean,
   includeOriginalRequest?: boolean,
   maskSensitiveHeaderData?: boolean,
+  signal?: number,
   enableRetry?: boolean,
   retryConfig?: {
     maxRetries?: number,
