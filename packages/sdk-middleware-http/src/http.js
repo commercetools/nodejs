@@ -57,6 +57,7 @@ export default function createHttpMiddleware({
   includeOriginalRequest,
   maskSensitiveHeaderData = true,
   enableRetry,
+  signal,
   retryConfig: {
     // encourage exponential backoff to prevent spamming the server if down
     maxRetries = 10,
@@ -100,6 +101,7 @@ export default function createHttpMiddleware({
       method: request.method,
       headers: requestHeader,
       ...(credentialsMode ? { credentials: credentialsMode } : {}),
+      ...(signal ? { signal } : {}),
       ...(body ? { body } : null),
     }
     let retryCount = 0
