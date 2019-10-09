@@ -59,6 +59,37 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
+  test('execute a get request with short timeout (fail)', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          error: expect.any(Error),
+          statusCode: 0,
+        })
+        resolve()
+      }
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        signal: 1, // time out after 1ms
+        fetch,
+      })
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .delay(100) // delay response with 100ms
+        .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    }))
+
   test('should accept HEAD request and return without response body', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({ uri: '/foo', method: 'HEAD' })
