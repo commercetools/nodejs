@@ -220,6 +220,16 @@ export type PasswordAuthMiddlewareOptions = {
   fetch?: (url: string, args?: Object) => Promise<any>,
 }
 
+// translation of https://dom.spec.whatwg.org/#abortcontroller
+interface AbortSignal extends EventTarget {
+  +aborted: boolean;
+  onabort: EventHandler;
+}
+class AbortController {
+  +signal: AbortSignal
+  abort: () => void
+}
+
 export type HttpMiddlewareOptions = {
   host: string,
   credentialsMode?: 'omit' | 'same-origin' | 'include',
@@ -227,7 +237,7 @@ export type HttpMiddlewareOptions = {
   includeResponseHeaders?: boolean,
   includeOriginalRequest?: boolean,
   maskSensitiveHeaderData?: boolean,
-  signal?: number,
+  timeout?: number,
   enableRetry?: boolean,
   retryConfig?: {
     maxRetries?: number,
@@ -236,6 +246,7 @@ export type HttpMiddlewareOptions = {
     maxDelay?: number,
   },
   fetch?: (url: string, options?: Object) => Promise<any>,
+  abortController?: AbortController,
 }
 export type QueueMiddlewareOptions = {
   concurrency: number,
