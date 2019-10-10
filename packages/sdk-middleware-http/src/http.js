@@ -186,6 +186,7 @@ export default function createHttpMiddleware({
               const error: HttpErrorType = createError({
                 statusCode: res.status,
                 originalRequest: request,
+                isCommercetools: true,
                 retryCount,
                 headers: parseHeaders(res.headers),
                 ...(typeof parsed === 'object'
@@ -222,6 +223,7 @@ export default function createHttpMiddleware({
 
             const error = new NetworkError(e.message, {
               originalRequest: request,
+              isCommercetools: true,
               retryCount,
             })
             maskAuthData(error.originalRequest, maskSensitiveHeaderData)
