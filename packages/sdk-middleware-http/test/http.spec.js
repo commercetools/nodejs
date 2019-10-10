@@ -31,6 +31,16 @@ describe('Http', () => {
     )
   })
 
+  test('throw without `AbortController` passed or globally available when using timeout', () => {
+    expect(() => {
+      createHttpMiddleware({ host: testHost, timeout: 100, fetch })
+    }).toThrow(
+      new Error(
+        '`AbortController` is not available. Please pass in `AbortController` as an option or have it globally available when using timeout.'
+      )
+    )
+  })
+
   test('execute a get request (success)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
