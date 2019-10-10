@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import nock from 'nock'
 import fetch from 'node-fetch'
+import AbortController from 'abort-controller'
 import { createHttpMiddleware } from '../src'
 
 function createTestRequest(options) {
@@ -30,6 +31,16 @@ describe('Http', () => {
     )
   })
 
+  test('throw without `AbortController` passed or globally available when using timeout', () => {
+    expect(() => {
+      createHttpMiddleware({ host: testHost, timeout: 100, fetch })
+    }).toThrow(
+      new Error(
+        '`AbortController` is not available. Please pass in `AbortController` as an option or have it globally available when using timeout.'
+      )
+    )
+  })
+
   test('execute a get request (success)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
@@ -54,6 +65,70 @@ describe('Http', () => {
           'Content-Type': 'application/json',
         })
         .get('/foo/bar')
+        .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    }))
+
+  test('execute a get request with timeout (success)', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          body: { foo: 'bar' },
+          statusCode: 200,
+        })
+        resolve()
+      }
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        timeout: 1000, // time out after 1s
+        fetch,
+        AbortController: new AbortController(),
+      })
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .delay(10) // delay response with 10ms
+        .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    }))
+
+  test('execute a get request with short timeout (fail)', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          error: expect.any(Error),
+          statusCode: 0,
+        })
+        resolve()
+      }
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        timeout: 10, // time out after 10ms
+        fetch,
+        AbortController: new AbortController(),
+      })
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .delay(100) // delay response with 100ms
         .reply(200, { foo: 'bar' })
 
       httpMiddleware(next)(request, response)
