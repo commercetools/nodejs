@@ -378,6 +378,7 @@ describe('Http', () => {
       const response = { resolve, reject }
       const next = (req, res) => {
         expect(res.error.name).toBe('NetworkError')
+        expect(res.error.isCommercetools).toBe(true)
         expect(res.error.headers).toBeUndefined()
         expect(res.error.originalRequest).toBeDefined()
         expect(res.error.message).toBe(
@@ -410,6 +411,7 @@ describe('Http', () => {
         const response = { resolve, reject }
         const next = (req, res) => {
           expect(res.error.name).toBe('NetworkError')
+          expect(res.error.isCommercetools).toBe(true)
           expect(res.error.headers).toBeUndefined()
           expect(res.error.originalRequest).toBeDefined()
           expect(res.error.retryCount).toBe(2)
@@ -449,6 +451,7 @@ describe('Http', () => {
         const response = { resolve, reject }
         const next = (req, res) => {
           expect(res.error.name).toBe('ServiceUnavailable')
+          expect(res.error.isCommercetools).toBe(true)
           expect(res.error.originalRequest).toBeDefined()
           expect(res.body).toBeUndefined()
           expect(res.statusCode).toBe(503)
@@ -483,6 +486,7 @@ describe('Http', () => {
           const response = { resolve, reject }
           const next = (req, res) => {
             expect(res.error.name).toBe('NetworkError')
+            expect(res.error.isCommercetools).toBe(true)
             expect(res.error.headers).toBeUndefined()
             expect(res.error.originalRequest).toBeDefined()
             expect(res.error.retryCount).toBe(2)
@@ -525,6 +529,7 @@ describe('Http', () => {
         const response = { resolve, reject }
         const next = (req, res) => {
           expect(res.error.message).toBe('URI not found: /foo/bar')
+          expect(res.error.isCommercetools).toBe(true)
           expect(res.error.body).toBeFalsy()
           expect(res.body).toBeFalsy()
           expect(res.statusCode).toBe(404)
@@ -565,6 +570,7 @@ describe('Http', () => {
         }
         expectedError.code = 400
         expectedError.statusCode = 400
+        expectedError.isCommercetools = true
         expectedError.headers = {
           'content-type': ['application/json'],
         }
@@ -606,6 +612,7 @@ describe('Http', () => {
         }
         expectedError.code = 500
         expectedError.statusCode = 500
+        expectedError.isCommercetools = true
         expectedError.headers = {
           'content-type': ['application/json'],
         }
@@ -648,6 +655,7 @@ describe('Http', () => {
         }
         expectedError.code = 500
         expectedError.statusCode = 500
+        expectedError.isCommercetools = true
         expectedError.headers = {
           'content-type': ['application/json'],
         }
@@ -702,6 +710,7 @@ describe('Http', () => {
         }
         expectedError.code = 500
         expectedError.statusCode = 500
+        expectedError.isCommercetools = true
         expectedError.headers = {
           'content-type': ['application/json'],
         }
@@ -747,6 +756,7 @@ describe('Http', () => {
       const response = { resolve, reject }
       const next = (req, res) => {
         expect(res.error.message).toBe('URI not found: /foo/bar')
+        expect(res.error.isCommercetools).toBe(true)
         expect(res.error.body).toBeFalsy()
         expect(res.body).toBeFalsy()
         expect(res.statusCode).toBe(404)
@@ -776,6 +786,7 @@ describe('Http', () => {
         expect(res.error.message).toBe('oops')
         expect(res.error.name).toBe('HttpError')
         expect(res.error.body).toEqual({ message: 'oops' })
+        expect(res.error.isCommercetools).toBe(true)
         expect(res.body).toBeUndefined()
         expect(res.statusCode).toBe(415)
         resolve()
@@ -808,6 +819,7 @@ describe('Http', () => {
       const response = { resolve, reject }
       const next = (req, res) => {
         expect(res.error.name).toBe('NetworkError')
+        expect(res.error.isCommercetools).toBe(true)
         expect(res.error.originalRequest).toMatchObject({
           body: null,
           method: 'GET',
@@ -846,6 +858,7 @@ describe('Http', () => {
       const response = { resolve, reject }
       const next = (req, res) => {
         expect(res.error.name).toBe('NetworkError')
+        expect(res.error.isCommercetools).toBe(true)
         expect(res.error.originalRequest).toMatchObject({
           body: null,
           method: 'GET',
