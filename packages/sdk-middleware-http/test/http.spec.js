@@ -89,7 +89,7 @@ describe('Http', () => {
         host: testHost,
         timeout: 1000, // time out after 1s
         fetch,
-        AbortController: new AbortController(),
+        abortController: new AbortController(),
       })
       nock(testHost)
         .defaultReplyHeaders({
@@ -121,7 +121,7 @@ describe('Http', () => {
         host: testHost,
         timeout: 10, // time out after 10ms
         fetch,
-        AbortController: new AbortController(),
+        abortController: new AbortController(),
       })
       nock(testHost)
         .defaultReplyHeaders({

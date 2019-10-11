@@ -66,13 +66,13 @@ export default function createHttpMiddleware({
     maxDelay = Infinity,
   } = {},
   fetch: fetcher,
-  AbortController: _AbortController,
+  abortController: _abortController,
 }: HttpMiddlewareOptions): Middleware {
   if (!fetcher && typeof fetch === 'undefined')
     throw new Error(
       '`fetch` is not available. Please pass in `fetch` as an option or have it globally available.'
     )
-  if (timeout && !_AbortController && typeof AbortController === 'undefined')
+  if (timeout && !_abortController && typeof AbortController === 'undefined')
     throw new Error(
       '`AbortController` is not available. Please pass in `AbortController` as an option or have it globally available when using timeout.'
     )
@@ -86,9 +86,9 @@ export default function createHttpMiddleware({
     fetcher = fetch
 
   let abortController
-  if (timeout || _AbortController)
+  if (timeout || _abortController)
     // eslint-disable-next-line
-    abortController = _AbortController || new AbortController()
+    abortController = _abortController || new AbortController()
 
   let timer
   if (timeout)

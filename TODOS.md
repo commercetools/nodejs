@@ -6,5 +6,3 @@
 | packages/product-json-to-csv/test/writer.spec.js | 263 | the "unzipper" package fires finish event before entry events
 | packages/product-json-to-csv/test/writer.spec.js | 308 | the "unzipper" package fires finish event before entry events
 | packages/sync-actions/src/utils/diffpatcher.js | 3 | create an issue here https://github.com/benjamine/jsondiffpatch/issues/new
-| /Users/deriksson/Sites/commercetools/nodejs/packages/product-json-to-csv/test/writer.spec.js | 263 | the "unzipper" package fires finish event before entry events
-| /Users/deriksson/Sites/commercetools/nodejs/packages/product-json-to-csv/test/writer.spec.js | 308 | the "unzipper" package fires finish event before entry events
