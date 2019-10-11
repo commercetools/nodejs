@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/state-importer",
-  "version": "2.0.20",
+  "version": "3.0.0",
   "description": "Import states to the commercetools platform",
   "main": "lib/main.js",
   "files": [
@@ -37,9 +37,9 @@
     "@commercetools/api-request-builder": "^5.4.0",
     "@commercetools/sdk-client": "^2.1.1",
     "@commercetools/sdk-middleware-auth": "^5.1.6",
-    "@commercetools/sdk-middleware-http": "^5.3.0",
+    "@commercetools/sdk-middleware-http": "^6.0.0",
     "@commercetools/sdk-middleware-user-agent": "^2.1.2",
-    "@commercetools/sync-actions": "^3.7.0",
+    "@commercetools/sync-actions": "^4.0.0",
     "node-fetch": "^2.3.0"
   },
   "devDependencies": {
