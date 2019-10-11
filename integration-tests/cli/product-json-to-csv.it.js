@@ -1,6 +1,6 @@
 import fs from 'mz/fs'
 import tmp from 'tmp'
-import unzip from 'unzip'
+import unzipper from 'unzipper'
 import csvToJson from 'csvtojson'
 import { exec } from 'mz/child_process'
 import { getCredentials } from '@commercetools/get-credentials'
@@ -130,7 +130,7 @@ describe('CSV and CLI Tests', () => {
           )
 
           fs.createReadStream(zipFile)
-            .pipe(unzip.Parse())
+            .pipe(unzipper.Parse())
             .on('entry', entry => {
               if (entry.path.includes('anotherProductType')) {
                 entry.on('data', data => {
@@ -522,7 +522,7 @@ describe('CSV and CLI Tests', () => {
           )
 
           fs.createReadStream(zipFile)
-            .pipe(unzip.Parse())
+            .pipe(unzipper.Parse())
             .on('entry', entry => {
               if (entry.path.includes('anotherProductType')) {
                 entry.on('data', data => {

@@ -2,7 +2,7 @@ import fs from 'mz/fs'
 import tmp from 'tmp'
 import Promise from 'bluebird'
 import path from 'path'
-import unzip from 'unzip'
+import unzipper from 'unzipper'
 import Excel from 'exceljs'
 import zipObject from 'lodash.zipobject'
 import cloneDeep from 'lodash.clonedeep'
@@ -162,7 +162,7 @@ describe('XLSX and CLI Tests', () => {
           )
 
           fs.createReadStream(zipFile)
-            .pipe(unzip.Parse())
+            .pipe(unzipper.Parse())
             .on('entry', async entry => {
               const excelInfo = await analyzeExcelStream(entry)
               fileNames.push(entry.path)
@@ -171,7 +171,7 @@ describe('XLSX and CLI Tests', () => {
                 product1 = mapRowsToProducts(excelInfo.rows)
               else product2 = mapRowsToProducts(excelInfo.rows)
 
-              // unzip module fires done event before we finish async operations
+              // unzipper module fires done event before we finish async operations
               if (fileNames.length === 2) done()
             })
         }, 15000)
@@ -543,7 +543,7 @@ describe('XLSX and CLI Tests', () => {
           )
 
           fs.createReadStream(zipFile)
-            .pipe(unzip.Parse())
+            .pipe(unzipper.Parse())
             .on('entry', async entry => {
               const excelInfo = await analyzeExcelStream(entry)
               fileNames.push(entry.path)
@@ -552,7 +552,7 @@ describe('XLSX and CLI Tests', () => {
                 product1 = mapRowsToProducts(excelInfo.rows)
               else product2 = mapRowsToProducts(excelInfo.rows)
 
-              // unzip module fires done event before we finish async operations
+              // unzipper module fires done event before we finish async operations
               if (fileNames.length === 2) done()
             })
         }, 30000)

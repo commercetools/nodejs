@@ -2,7 +2,7 @@ import fs from 'fs'
 import highland from 'highland'
 import tmp from 'tmp'
 import StreamTest from 'streamtest'
-import unzip from 'unzip'
+import unzipper from 'unzipper'
 import streamToString from 'stream-to-string'
 import iconv from 'iconv-lite'
 
@@ -239,7 +239,7 @@ describe('Writer', () => {
       // Extract data from zip file and test
       outputStream.on('finish', () => {
         fs.createReadStream(output)
-          .pipe(unzip.Parse())
+          .pipe(unzipper.Parse())
           .on('entry', async entry => {
             const csvContent = await streamToString(entry)
             entries.push(entry.path)
@@ -260,7 +260,7 @@ describe('Writer', () => {
             }
           })
           .on('finish', () => {
-            // TODO the "unzip" package fires finish event before entry events
+            // TODO the "unzipper" package fires finish event before entry events
             // so we call done() on second entry instead of calling it here
           })
       })
@@ -284,7 +284,7 @@ describe('Writer', () => {
       // Extract data from zip file and test
       outputStream.on('finish', () => {
         fs.createReadStream(output)
-          .pipe(unzip.Parse())
+          .pipe(unzipper.Parse())
           .on('entry', async entry => {
             expect(entry.path).toEqual('products/pt-1.csv')
 
@@ -305,7 +305,7 @@ describe('Writer', () => {
             entry.pipe(entryStream)
           })
           .on('finish', () => {
-            // TODO the "unzip" package fires finish event before entry events
+            // TODO the "unzipper" package fires finish event before entry events
             // so we call done() on second entry instead of calling it here
           })
       })
@@ -326,7 +326,7 @@ describe('Writer', () => {
       // Extract data from zip file and test
       outputStream.on('finish', () => {
         fs.createReadStream(output)
-          .pipe(unzip.Parse())
+          .pipe(unzipper.Parse())
           .on('entry', () => {
             entries += 1
           })

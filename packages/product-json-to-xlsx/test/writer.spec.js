@@ -3,7 +3,7 @@ import highland from 'highland'
 import Excel from 'exceljs'
 import tmp from 'tmp'
 import StreamTest from 'streamtest'
-import unzip from 'unzip'
+import unzipper from 'unzipper'
 import * as writer from '../src/writer'
 
 tmp.setGracefulCleanup()
@@ -200,7 +200,7 @@ describe('Writer', () => {
       // Extract data from zip file and test
       outputStream.on('finish', () => {
         fs.createReadStream(output)
-          .pipe(unzip.Parse())
+          .pipe(unzipper.Parse())
           .on('entry', async entry => {
             const excelInfo = await analyzeExcelStream(entry)
             // push to entries array after we finish async operation
@@ -241,7 +241,7 @@ describe('Writer', () => {
       // Extract data from zip file and test
       outputStream.on('finish', () => {
         fs.createReadStream(output)
-          .pipe(unzip.Parse())
+          .pipe(unzipper.Parse())
           .on('entry', () => {
             entries += 1
             throw new Error('No entries should be archived')
