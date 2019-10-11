@@ -1,3 +1,223 @@
+## @commercetools/sync-actions@4.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/state-importer@3.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sdk-middleware-http@6.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sdk-auth@3.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/resource-deleter@2.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-json-to-xlsx@3.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-json-to-csv@4.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-exporter@3.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/price-exporter@3.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/personal-data-erasure@3.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/inventories-exporter@3.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/integration-tests@0.0.3 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/discount-code-importer@3.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/discount-code-exporter@4.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/customer-groups-exporter@3.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/custom-objects-importer@3.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/custom-objects-exporter@3.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/csv-parser-state@3.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/csv-parser-price@4.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/category-exporter@3.0.0 (2019-10-11)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
 ## @commercetools/state-importer@2.0.20 (2019-10-11)
 
 #### :rocket: New Feature
