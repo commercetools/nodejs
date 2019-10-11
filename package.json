@@ -37,8 +37,6 @@
     "typecheck": "yarn typecheck:flow && yarn typecheck:ts",
     "typecheck:flow": "flow check --include-warnings",
     "typecheck:ts": "tsc --noEmit",
-    "generate:todos": "leasot -x 'packages/*/(src|test)/**/**.js'",
-    "build:todos": "leasot -x --reporter markdown 'packages/*/(src|test)/**/**.js' > TODOS.md",
     "package-readme-entry": "./scripts/package-readme-entry.sh"
   },
   "workspaces": [
@@ -102,7 +100,6 @@
     "jest-runner-eslint": "0.7.4",
     "jest-runner-flowtype": "0.0.7",
     "jest-silent-reporter": "0.1.2",
-    "leasot": "8.2.0",
     "lerna": "3.16.4",
     "lerna-changelog": "0.8.2",
     "lint-staged": "9.4.1",

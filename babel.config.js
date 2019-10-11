@@ -3,7 +3,6 @@ const getPresets = () => {
     case 'development':
       return {
         targets: { node: 'current' },
-        useBuiltIns: 'usage',
         modules: 'commonjs',
       }
     case 'rollup':
@@ -12,22 +11,19 @@ const getPresets = () => {
           browsers: ['last 2 versions'],
           node: 'current',
         },
-        useBuiltIns: 'usage',
         modules: false,
       }
     case 'production':
       return {
         targets: {
           browsers: ['last 2 versions'],
-          node: '8',
+          node: '10',
         },
-        useBuiltIns: 'usage',
         modules: false,
       }
     case 'cli':
       return {
-        targets: { node: '8' },
-        useBuiltIns: 'usage',
+        targets: { node: '10' },
         modules: 'commonjs',
       }
     default:

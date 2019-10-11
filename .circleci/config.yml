@@ -1,10 +1,10 @@
-node8Environment: &node8Environment
-  docker:
-    - image: circleci/node:8@sha256:8b7053d25f5759ad37941aef4885ba3739607c941235ec33345cf71bc1d0457b
-  working_directory: ~/nodejs
 node10Environment: &node10Environment
   docker:
     - image: circleci/node:10
+  working_directory: ~/nodejs
+node12Environment: &node12Environment
+  docker:
+    - image: circleci/node:12
   working_directory: ~/nodejs
 
 aliases:
@@ -37,7 +37,7 @@ aliases:
 version: 2
 jobs:
   lint:
-    <<: *node10Environment
+    <<: *node12Environment
     steps:
       - checkout
       - restore-cache: *restore_yarn_cache
@@ -48,14 +48,6 @@ jobs:
           # Limiting the workers of Jest to 10
           # as the build otherwise dies due to resouce restrictions.
           command: yarn lint --maxWorkers=10
-  test_unit_node_8:
-    <<: *node8Environment
-    steps:
-      - checkout
-      - restore-cache: *restore_yarn_cache
-      - run: *yarn_install
-      - save_cache: *save_yarn_cache
-      - run: *unit_test
   test_unit_node_10:
     <<: *node10Environment
     steps:
@@ -63,9 +55,17 @@ jobs:
       - restore-cache: *restore_yarn_cache
       - run: *yarn_install
       - save_cache: *save_yarn_cache
+      - run: *unit_test
+  test_unit_node_12:
+    <<: *node12Environment
+    steps:
+      - checkout
+      - restore-cache: *restore_yarn_cache
+      - run: *yarn_install
+      - save_cache: *save_yarn_cache
       - run: *unit_test_with_coverage
   test_integration:
-    <<: *node10Environment
+    <<: *node12Environment
     steps:
       - checkout
       - restore-cache: *restore_yarn_cache
@@ -80,10 +80,10 @@ workflows:
   build_and_test:
     jobs:
       - lint
-      - test_unit_node_8:
+      - test_unit_node_10:
           requires:
             - lint
-      - test_unit_node_10:
+      - test_unit_node_12:
           requires:
             - lint
       - test_integration:
@@ -92,4 +92,4 @@ workflows:
             # Only depending on one unit testing
             # job will speed up the build by starting
             # the integration testing early (in confidence).
-            - test_unit_node_10
+            - test_unit_node_12
