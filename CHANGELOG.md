@@ -1,3 +1,355 @@
+## @commercetools/state-importer@2.0.20 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sdk-middleware-http@5.3.0 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sdk-middleware-auth@5.1.6 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sdk-auth@2.1.5 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/resource-deleter@1.0.14 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-json-to-xlsx@2.0.20 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-json-to-csv@3.1.17 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-exporter@2.0.18 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/price-exporter@2.0.18 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/personal-data-erasure@2.0.16 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/inventories-exporter@2.1.13 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/integration-tests@0.0.2 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/get-credentials@3.0.9 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/discount-code-importer@2.0.20 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/discount-code-exporter@3.0.18 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/customer-groups-exporter@2.0.18 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/custom-objects-importer@2.0.20 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/custom-objects-exporter@2.0.18 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/csv-parser-state@2.0.17 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/csv-parser-price@3.0.17 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/csv-parser-orders@2.0.10 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/category-exporter@2.0.18 (2019-10-11)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-http`
+  - [#1418](https://github.com/commercetools/nodejs/pull/1418) feat(http-middleware): custom timeout and abortcontroller options ([@daern91](https://github.com/daern91))
+
+#### :house: Maintenance
+
+- [#1413](https://github.com/commercetools/nodejs/pull/1413) chore(package.json): deps installed ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 2
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
 ## @commercetools/sync-actions@3.7.0 (2019-09-25)
 
 #### :rocket: New Feature
