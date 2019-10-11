@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-middleware-http",
-  "version": "5.2.3",
+  "version": "5.3.0",
   "description": "Middleware for http requests, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
@@ -32,8 +32,8 @@
     "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkMiddlewareHttp -i ./src/index.js"
   },
   "devDependencies": {
+    "abort-controller": "3.0.0",
     "nock": "11.3.6",
-    "node-fetch": "2.6.0",
-    "abort-controller":"3.0.0"
+    "node-fetch": "2.6.0"
   }
 }
