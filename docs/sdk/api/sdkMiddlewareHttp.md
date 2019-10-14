@@ -48,6 +48,10 @@ This modules have a retrying ability incase of network failures or 503 response 
 
 The repeater implements an exponential delay, meaning the wait time is not constant and it grows on every retry.
 
+#### Token caching
+
+The token gets retrieved and cached upon the first request made by the client. Then, it gets refreshed when it expires.
+
 #### Usage example
 
 ```js
