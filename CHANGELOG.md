@@ -31,6 +31,17 @@
 
 - Daniel Eriksson ([@daern91](https://github.com/daern91))
 
+## @commercetools/sdk-middleware-auth@6.0.0 (2019-10-14)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-middleware-http`, `sync-actions`
+  - [#1421](https://github.com/commercetools/nodejs/pull/1421) chore: drop support for node 8 ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
 ## @commercetools/sdk-auth@3.0.0 (2019-10-11)
 
 #### :boom: Breaking Change
