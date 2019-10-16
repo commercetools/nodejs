@@ -50,7 +50,7 @@ The repeater implements an exponential delay, meaning the wait time is not const
 
 #### Token caching
 
-The token gets retrieved and cached upon the first request made by the client. Then, it gets refreshed when it expires.
+The token is retrieved and cached upon the first request made by the client. Then, it gets refreshed when it expires. To utilize this, please make sure you use the same client instance and do not create new ones.
 
 #### Usage example
 
