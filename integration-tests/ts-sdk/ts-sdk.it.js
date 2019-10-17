@@ -55,7 +55,7 @@ describe('Auth Middleware Flows', () => {
       const apiRoot = createApiBuilderFromCtpClient(client)
 
       return apiRoot
-        .withProjectKeyValue({
+        .withProjectKey({
           projectKey,
         })
         .get()

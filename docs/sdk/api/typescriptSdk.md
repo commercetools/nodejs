@@ -57,7 +57,7 @@ const ctpClient = createClient({
 const apiRoot: ApiRoot = createApiBuilderFromCtpClient(ctpClient)
 
 apiRoot
-  .withProjectKeyValue({
+  .withProjectKey({
     projectKey
   })
   .get()
