@@ -39,7 +39,7 @@ The HTTP middleware can run in either a browser or Node.js environment. For Node
 10. `backoff` _(Boolean)_: activates exponential backoff. Recommended to prevent spamming of the server. (Default: true)
 11. `maxDelay` _(Number)_: The maximum duration (milliseconds) to wait before retrying, useful if the delay time grew exponentially more than reasonable
 12. `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function
-13. `timeout` _(Number)_: Req/res timeout in ms. Must have globally available or passed in `AbortController`
+13. `timeout` _(Number)_: Request/response timeout in ms. Must have globally available or passed in `AbortController`
 14. `AbortController` (_AbortController_): An `AbortController` instance. Could be [abort-controller](https://www.npmjs.com/package/abort-controller) or globally available one.
 
 #### Retrying requests
