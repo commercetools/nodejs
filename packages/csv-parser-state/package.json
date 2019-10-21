@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/csv-parser-state",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Package to parse states from CSV to JSON",
   "main": "lib/main.js",
   "scripts": {
@@ -45,7 +45,7 @@
     "@commercetools/get-credentials": "^3.0.9",
     "@commercetools/sdk-client": "^2.1.1",
     "@commercetools/sdk-middleware-auth": "^5.1.6",
-    "@commercetools/sdk-middleware-http": "^6.0.0",
+    "@commercetools/sdk-middleware-http": "^6.0.1",
     "@commercetools/sdk-middleware-user-agent": "^2.1.2",
     "JSONStream": "^1.3.5",
     "csv-parser": "^2.1.0",
