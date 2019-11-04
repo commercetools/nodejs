@@ -34,14 +34,5 @@ async function handleRequest(
 }
 
 function removeBaseUrl(url: string) {
-  const baseUrlPattern = /^https?:\/\/[a-z\:0-9.]+/
-  let result = ''
-  const match = baseUrlPattern.exec(url)
-  if (match != null) {
-    result = match[0]
-  }
-  if (result.length > 0) {
-    url = url.replace(result, '')
-  }
-  return url
+  return url.replace(/^(?:\/\/|[^\/]+)*\//, '/')
 }
