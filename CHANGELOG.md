@@ -1,3 +1,25 @@
+## @commercetools/typescript-sdk@0.0.6-alpha.0 (2019-11-05)
+
+#### :bug: Bug Fix
+
+- `typescript-sdk`
+  - [#1431](https://github.com/commercetools/nodejs/pull/1431) fix(ts-sdk): extract url correctly ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/integration-tests@0.0.5 (2019-11-05)
+
+#### :bug: Bug Fix
+
+- `typescript-sdk`
+  - [#1431](https://github.com/commercetools/nodejs/pull/1431) fix(ts-sdk): extract url correctly ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
 ## @commercetools/sync-actions@4.0.0 (2019-10-11)
 
 #### :boom: Breaking Change
