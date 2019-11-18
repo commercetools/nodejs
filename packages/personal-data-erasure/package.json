@@ -45,6 +45,6 @@
     "pino": "^5.11.1",
     "pretty-error": "^2.1.1",
     "prompt-confirm": "^2.0.4",
-    "yargs": "^14.0.0"
+    "yargs": "^15.0.0"
   }
 }
