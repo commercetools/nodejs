@@ -114,7 +114,6 @@ export default class TokenProvider {
         newTokenInfo = tokenInfo
         if (oldTokenInfo?.['refresh_token'])
           newTokenInfo.refresh_token = oldTokenInfo.refresh_token
-        // $FlowFixMe
         return this.onTokenInfoRefreshed?.(newTokenInfo, oldTokenInfo)
       })
       .then((): Promise<TokenInfo> => this.setTokenInfo(newTokenInfo))
@@ -144,7 +143,6 @@ export default class TokenProvider {
     TokenProvider._validateTokenInfo(tokenInfo)
 
     this.tokenInfo = tokenInfo
-    // $FlowFixMe
     return Promise.resolve(this.onTokenInfoChanged?.(tokenInfo)).then(
       (): TokenInfo => tokenInfo
     )

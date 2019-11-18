@@ -163,6 +163,10 @@ export default function authMiddlewareBase(
     (!tokenObj.token ||
       (tokenObj.token && Date.now() > tokenObj.expirationTime))
   ) {
+    if (!userOptions)
+      throw new Error('Missing required options')
+      // eslint-disable-next-line
+    ;(userOptions: AuthMiddlewareOptions | PasswordAuthMiddlewareOptions)
     executeRequest({
       fetcher,
       ...buildRequestForRefreshTokenFlow({

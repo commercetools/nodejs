@@ -13,12 +13,12 @@ export type ApiConfigOptions = {
 }
 
 export type Configuration = {
-  accessToken: string,
+  accessToken?: string,
   delimiter: string,
   exportFormat: string,
   predicate: string,
   staged: boolean,
-  csvHeaders: Array<string>,
+  csvHeaders?: Array<string>,
 }
 
 export type ExporterOptions = {
