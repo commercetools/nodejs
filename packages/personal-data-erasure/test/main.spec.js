@@ -44,7 +44,10 @@ describe('PersonalDataErasure', () => {
         payload = {
           statusCode: 200,
           body: {
-            results: [{ version: 1, id: 'id1' }, { version: 1, id: 'id2' }],
+            results: [
+              { version: 1, id: 'id1' },
+              { version: 1, id: 'id2' },
+            ],
           },
         }
         personalDataErasure.client.execute = jest.fn(() =>
@@ -110,7 +113,10 @@ describe('PersonalDataErasure', () => {
         payload = {
           statusCode: 200,
           body: {
-            results: [{ version: 1, id: 'id1' }, { version: 1, id: 'id2' }],
+            results: [
+              { version: 1, id: 'id1' },
+              { version: 1, id: 'id2' },
+            ],
           },
         }
         personalDataErasure.client.execute = jest.fn(() =>

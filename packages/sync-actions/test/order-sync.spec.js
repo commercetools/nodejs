@@ -55,7 +55,10 @@ describe('Actions', () => {
         shippingInfo: {
           deliveries: [
             {
-              items: [{ id: 'li-1', qty: 1 }, { id: 'li-2', qty: 2 }],
+              items: [
+                { id: 'li-1', qty: 1 },
+                { id: 'li-2', qty: 2 },
+              ],
               parcels: [
                 {
                   measurements: {

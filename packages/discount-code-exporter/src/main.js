@@ -19,19 +19,11 @@ import type { Client, ClientRequest } from 'types/sdk'
 import { defaultHeaders } from './headers'
 import pkg from '../package.json'
 
-type ConfigType = {
-  batchSize: number,
-  accessToken: string,
-  delimiter: string,
-  exportFormat: string,
-  predicate: string,
-  multiValueDelimiter: string,
-}
 export default class DiscountCodeExport {
   // Set flowtype annotations
   apiConfig: ApiConfigOptions
   client: Client
-  config: ConfigType
+  config: ExporterOptions
   logger: LoggerOptions
   _processCode: Function
   headers: Array<string>
@@ -87,8 +79,8 @@ export default class DiscountCodeExport {
   }
 
   static setupHeaders(
-    fields: Array<string> | null,
-    language: string
+    fields?: Array<string> | null,
+    language: string = 'en'
   ): Array<string> {
     return fields && fields.length ? fields : defaultHeaders(language)
   }
