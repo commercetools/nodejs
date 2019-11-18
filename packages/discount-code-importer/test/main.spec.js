@@ -65,13 +65,15 @@ describe('DiscountCodeImporter', () => {
       expect(codeImport.processStream).toBeDefined()
     })
 
-    test('should call callback when done', done => {
-      codeImport._processBatches = jest.fn()
-      codeImport._processBatches.mockReturnValue(Promise.resolve())
-      const myMockCallback = jest.fn(() => {
-        done()
+    test('should call callback when done', () => {
+      return new Promise(done => {
+        codeImport._processBatches = jest.fn()
+        codeImport._processBatches.mockReturnValue(Promise.resolve())
+        const myMockCallback = jest.fn(() => {
+          done()
+        })
+        codeImport.processStream('foo', myMockCallback)
       })
-      codeImport.processStream('foo', myMockCallback)
     })
   })
 

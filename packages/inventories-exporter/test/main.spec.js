@@ -135,220 +135,234 @@ describe('InventoryExporter', () => {
 
   describe('::run', () => {
     beforeEach(() => {})
-    test('should fetch inventories and output csv to stream', done => {
-      inventoryExporter.exportConfig.format = 'csv'
-      const sampleInventory = {
-        sku: 'hello',
-        quantityOnStock: 'me',
-        restockableInDays: 4,
-      }
-      const spy = jest
-        .spyOn(inventoryExporter, '_fetchInventories')
-        .mockImplementation(csvStream => {
-          csvStream.write(sampleInventory)
-          return Promise.resolve()
-        })
-      const outputStream = streamtest.v2.toText((error, result) => {
-        const expectedResult = stripIndent`	
+    test('should fetch inventories and output csv to stream', () => {
+      return new Promise(done => {
+        inventoryExporter.exportConfig.format = 'csv'
+        const sampleInventory = {
+          sku: 'hello',
+          quantityOnStock: 'me',
+          restockableInDays: 4,
+        }
+        const spy = jest
+          .spyOn(inventoryExporter, '_fetchInventories')
+          .mockImplementation(csvStream => {
+            csvStream.write(sampleInventory)
+            return Promise.resolve()
+          })
+        const outputStream = streamtest.v2.toText((error, result) => {
+          const expectedResult = stripIndent`	
           sku,quantityOnStock,restockableInDays,createdAt,lastModifiedAt
           hello,me,4,,
         `
-        expect(result).toEqual(expectedResult)
-        spy.mockRestore()
-        done()
-      })
-
-      inventoryExporter.run(outputStream)
-    })
-
-    test('should emit error if it occurs when streaming to csv', done => {
-      inventoryExporter.exportConfig.format = 'csv'
-      const spy = jest
-        .spyOn(inventoryExporter, '_fetchInventories')
-        .mockImplementation(() => Promise.reject(new Error('error occured')))
-      const outputStream = streamtest.v2.toText((error, result) => {
-        expect(error.message).toBe('error occured')
-        expect(result).toBeUndefined()
-        spy.mockRestore()
-        done()
-      })
-
-      inventoryExporter.run(outputStream)
-    })
-
-    test('should emit error if it occurs when streaming to json', done => {
-      inventoryExporter.exportConfig.format = 'json'
-      const spy = jest
-        .spyOn(inventoryExporter, '_fetchInventories')
-        .mockImplementation(() => Promise.reject(new Error('error occured')))
-      const outputStream = streamtest.v2.toText((error, result) => {
-        expect(error.message).toBe('error occured')
-        expect(result).toBeUndefined()
-        spy.mockRestore()
-        done()
-      })
-
-      inventoryExporter.run(outputStream)
-    })
-
-    test('should fetch inventories and output json as default', done => {
-      const sampleInventory = {
-        sku: 'hello',
-        quantityOnStock: 'me',
-        restockableInDays: 4,
-      }
-      const spy = jest
-        .spyOn(inventoryExporter, '_fetchInventories')
-        .mockImplementation(csvStream => {
-          csvStream.write(sampleInventory)
-          return Promise.resolve()
+          expect(result).toEqual(expectedResult)
+          spy.mockRestore()
+          done()
         })
-      const outputStream = streamtest.v2.toText((error, result) => {
-        const expectedResult = [{ ...sampleInventory }]
-        expect(JSON.parse(result)).toEqual(expectedResult)
-        spy.mockRestore()
-        done()
-      })
 
-      inventoryExporter.run(outputStream)
+        inventoryExporter.run(outputStream)
+      })
     })
 
-    test('should export inventories to CSV with custom fields', done => {
-      inventoryExporter.exportConfig.format = 'csv'
-      const sampleInventory = {
-        sku: 'hello',
-        quantityOnStock: 'me',
-        restockableInDays: 4,
-        custom: {
-          type: {
-            obj: {
-              key: 'customKey',
+    test('should emit error if it occurs when streaming to csv', () => {
+      return new Promise(done => {
+        inventoryExporter.exportConfig.format = 'csv'
+        const spy = jest
+          .spyOn(inventoryExporter, '_fetchInventories')
+          .mockImplementation(() => Promise.reject(new Error('error occured')))
+        const outputStream = streamtest.v2.toText((error, result) => {
+          expect(error.message).toBe('error occured')
+          expect(result).toBeUndefined()
+          spy.mockRestore()
+          done()
+        })
+
+        inventoryExporter.run(outputStream)
+      })
+    })
+
+    test('should emit error if it occurs when streaming to json', () => {
+      return new Promise(done => {
+        inventoryExporter.exportConfig.format = 'json'
+        const spy = jest
+          .spyOn(inventoryExporter, '_fetchInventories')
+          .mockImplementation(() => Promise.reject(new Error('error occured')))
+        const outputStream = streamtest.v2.toText((error, result) => {
+          expect(error.message).toBe('error occured')
+          expect(result).toBeUndefined()
+          spy.mockRestore()
+          done()
+        })
+
+        inventoryExporter.run(outputStream)
+      })
+    })
+
+    test('should fetch inventories and output json as default', () => {
+      return new Promise(done => {
+        const sampleInventory = {
+          sku: 'hello',
+          quantityOnStock: 'me',
+          restockableInDays: 4,
+        }
+        const spy = jest
+          .spyOn(inventoryExporter, '_fetchInventories')
+          .mockImplementation(csvStream => {
+            csvStream.write(sampleInventory)
+            return Promise.resolve()
+          })
+        const outputStream = streamtest.v2.toText((error, result) => {
+          const expectedResult = [{ ...sampleInventory }]
+          expect(JSON.parse(result)).toEqual(expectedResult)
+          spy.mockRestore()
+          done()
+        })
+
+        inventoryExporter.run(outputStream)
+      })
+    })
+
+    test('should export inventories to CSV with custom fields', () => {
+      return new Promise(done => {
+        inventoryExporter.exportConfig.format = 'csv'
+        const sampleInventory = {
+          sku: 'hello',
+          quantityOnStock: 'me',
+          restockableInDays: 4,
+          custom: {
+            type: {
+              obj: {
+                key: 'customKey',
+              },
+            },
+            fields: {
+              textField: 'customText',
+              numberField: 123,
             },
           },
-          fields: {
-            textField: 'customText',
-            numberField: 123,
-          },
-        },
-      }
-      const spy = jest
-        .spyOn(inventoryExporter, '_fetchInventories')
-        .mockImplementation(csvStream => {
-          csvStream.write(sampleInventory)
-          return Promise.resolve()
-        })
-      const outputStream = streamtest.v2.toText((error, result) => {
-        const expectedResult = stripIndent`
+        }
+        const spy = jest
+          .spyOn(inventoryExporter, '_fetchInventories')
+          .mockImplementation(csvStream => {
+            csvStream.write(sampleInventory)
+            return Promise.resolve()
+          })
+        const outputStream = streamtest.v2.toText((error, result) => {
+          const expectedResult = stripIndent`
           sku,quantityOnStock,restockableInDays,customType,customField.textField,customField.numberField,createdAt,lastModifiedAt
           hello,me,4,customKey,customText,123,,
         `
-        expect(result).toEqual(expectedResult)
-        spy.mockRestore()
-        done()
-      })
-
-      inventoryExporter.run(outputStream)
-    })
-
-    test('should not export inventories with custom fields on second inventory when no template is given', done => {
-      inventoryExporter.exportConfig.format = 'csv'
-      const sampleInventoryWithoutCustomField = {
-        sku: 'inv2',
-        quantityOnStock: 333,
-        restockableInDays: 4,
-      }
-      const sampleInventoryWithCustomField = {
-        sku: 'inv1',
-        quantityOnStock: 123,
-        restockableInDays: 4,
-        custom: {
-          type: {
-            obj: {
-              key: 'customKey',
-            },
-          },
-          fields: {
-            textField: 'customText',
-            numberField: 123,
-          },
-        },
-      }
-      const spy = jest
-        .spyOn(inventoryExporter, '_fetchInventories')
-        .mockImplementation(csvStream => {
-          csvStream.write(sampleInventoryWithoutCustomField)
-          csvStream.write(sampleInventoryWithCustomField)
-          return Promise.resolve()
+          expect(result).toEqual(expectedResult)
+          spy.mockRestore()
+          done()
         })
 
-      const outputStream = streamtest.v2.toText((error, result) => {
-        const expectedResult = stripIndent`
+        inventoryExporter.run(outputStream)
+      })
+    })
+
+    test('should not export inventories with custom fields on second inventory when no template is given', () => {
+      return new Promise(done => {
+        inventoryExporter.exportConfig.format = 'csv'
+        const sampleInventoryWithoutCustomField = {
+          sku: 'inv2',
+          quantityOnStock: 333,
+          restockableInDays: 4,
+        }
+        const sampleInventoryWithCustomField = {
+          sku: 'inv1',
+          quantityOnStock: 123,
+          restockableInDays: 4,
+          custom: {
+            type: {
+              obj: {
+                key: 'customKey',
+              },
+            },
+            fields: {
+              textField: 'customText',
+              numberField: 123,
+            },
+          },
+        }
+        const spy = jest
+          .spyOn(inventoryExporter, '_fetchInventories')
+          .mockImplementation(csvStream => {
+            csvStream.write(sampleInventoryWithoutCustomField)
+            csvStream.write(sampleInventoryWithCustomField)
+            return Promise.resolve()
+          })
+
+        const outputStream = streamtest.v2.toText((error, result) => {
+          const expectedResult = stripIndent`
           sku,quantityOnStock,restockableInDays,createdAt,lastModifiedAt
           inv2,333,4,,
           inv1,123,4,,
         `
-        expect(result).toEqual(expectedResult)
-        spy.mockRestore()
-        done()
-      })
-
-      inventoryExporter.run(outputStream)
-    })
-
-    test('should export inventories with custom fields on second inventory when provided template', done => {
-      const headerFields = [
-        'sku',
-        'quantityOnStock',
-        'restockableInDays',
-        'customType',
-        'customField.textField',
-        'customField.numberField',
-      ]
-      inventoryExporter = new InventoryExporter(apiConfig, logger)
-      inventoryExporter.exportConfig.headerFields = headerFields
-      inventoryExporter.exportConfig.format = 'csv'
-
-      const sampleInventoryWithoutCustomField = {
-        sku: 'inv2',
-        quantityOnStock: 333,
-        restockableInDays: 4,
-      }
-      const sampleInventoryWithCustomField = {
-        sku: 'inv1',
-        quantityOnStock: 123,
-        restockableInDays: 4,
-        custom: {
-          type: {
-            obj: {
-              key: 'customKey',
-            },
-          },
-          fields: {
-            textField: 'customText',
-            numberField: 123,
-          },
-        },
-      }
-      const spy = jest
-        .spyOn(inventoryExporter, '_fetchInventories')
-        .mockImplementation(csvStream => {
-          csvStream.write(sampleInventoryWithoutCustomField)
-          csvStream.write(sampleInventoryWithCustomField)
-          return Promise.resolve()
+          expect(result).toEqual(expectedResult)
+          spy.mockRestore()
+          done()
         })
 
-      const outputStream = streamtest.v2.toText((error, result) => {
-        const expectedResult = stripIndent`
+        inventoryExporter.run(outputStream)
+      })
+    })
+
+    test('should export inventories with custom fields on second inventory when provided template', () => {
+      return new Promise(done => {
+        const headerFields = [
+          'sku',
+          'quantityOnStock',
+          'restockableInDays',
+          'customType',
+          'customField.textField',
+          'customField.numberField',
+        ]
+        inventoryExporter = new InventoryExporter(apiConfig, logger)
+        inventoryExporter.exportConfig.headerFields = headerFields
+        inventoryExporter.exportConfig.format = 'csv'
+
+        const sampleInventoryWithoutCustomField = {
+          sku: 'inv2',
+          quantityOnStock: 333,
+          restockableInDays: 4,
+        }
+        const sampleInventoryWithCustomField = {
+          sku: 'inv1',
+          quantityOnStock: 123,
+          restockableInDays: 4,
+          custom: {
+            type: {
+              obj: {
+                key: 'customKey',
+              },
+            },
+            fields: {
+              textField: 'customText',
+              numberField: 123,
+            },
+          },
+        }
+        const spy = jest
+          .spyOn(inventoryExporter, '_fetchInventories')
+          .mockImplementation(csvStream => {
+            csvStream.write(sampleInventoryWithoutCustomField)
+            csvStream.write(sampleInventoryWithCustomField)
+            return Promise.resolve()
+          })
+
+        const outputStream = streamtest.v2.toText((error, result) => {
+          const expectedResult = stripIndent`
           sku,quantityOnStock,restockableInDays,customType,customField.textField,customField.numberField
           inv2,333,4,,,
           inv1,123,4,customKey,customText,123
         `
-        expect(result).toEqual(expectedResult)
-        spy.mockRestore()
-        done()
-      })
+          expect(result).toEqual(expectedResult)
+          spy.mockRestore()
+          done()
+        })
 
-      inventoryExporter.run(outputStream)
+        inventoryExporter.run(outputStream)
+      })
     })
   })
   describe('::_writeEachInventory', () => {

@@ -52,24 +52,28 @@ describe('CustomObjectsExporter', () => {
       })
     })
 
-    test('should write to outputStream', done => {
-      const outputStream = streamtest.v2.toText((error, data) => {
-        expect(error).toBeFalsy()
-        expect(data).toMatchSnapshot()
+    test('should write to outputStream', () => {
+      return new Promise(done => {
+        const outputStream = streamtest.v2.toText((error, data) => {
+          expect(error).toBeFalsy()
+          expect(data).toMatchSnapshot()
 
-        done()
+          done()
+        })
+        objectsExport.run(outputStream)
       })
-      objectsExport.run(outputStream)
     })
 
-    test('should return error', done => {
-      payload.statusCode = '404'
-      const outputStream = streamtest.v2.toText((error, data) => {
-        expect(error).toBeTruthy()
-        expect(data).toBeFalsy()
-        done()
+    test('should return error', () => {
+      return new Promise(done => {
+        payload.statusCode = '404'
+        const outputStream = streamtest.v2.toText((error, data) => {
+          expect(error).toBeTruthy()
+          expect(data).toBeFalsy()
+          done()
+        })
+        objectsExport.run(outputStream)
       })
-      objectsExport.run(outputStream)
     })
   })
 

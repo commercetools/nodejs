@@ -79,48 +79,52 @@ describe('CSV and CLI Tests', () => {
   })
 
   describe('parses CSV to JSON', () => {
-    it('should parse return-info CSV into JSON', done => {
-      const csvFilePath = path.join(samplesFolder, 'return-info-sample.csv')
-      const csvParserOrder = new AddReturnInfoCsvParser()
-      const inputStream = fs.createReadStream(csvFilePath)
+    it('should parse return-info CSV into JSON', () => {
+      return new Promise(done => {
+        const csvFilePath = path.join(samplesFolder, 'return-info-sample.csv')
+        const csvParserOrder = new AddReturnInfoCsvParser()
+        const inputStream = fs.createReadStream(csvFilePath)
 
-      const outputStream = streamtest.v2.toText((error, output) => {
-        const returnInfos = JSON.parse(output)
-        const expected = path.join(
-          __dirname,
-          'expected-output',
-          'csv-parser-order-returninfo.json'
-        )
-        const expectedArray = JSON.parse(fs.readFileSync(expected, 'utf8'))
+        const outputStream = streamtest.v2.toText((error, output) => {
+          const returnInfos = JSON.parse(output)
+          const expected = path.join(
+            __dirname,
+            'expected-output',
+            'csv-parser-order-returninfo.json'
+          )
+          const expectedArray = JSON.parse(fs.readFileSync(expected, 'utf8'))
 
-        expect(returnInfos).toBeInstanceOf(Array)
-        expect(returnInfos).toMatchObject(expectedArray)
-        done()
+          expect(returnInfos).toBeInstanceOf(Array)
+          expect(returnInfos).toMatchObject(expectedArray)
+          done()
+        })
+
+        csvParserOrder.parse(inputStream, outputStream)
       })
-
-      csvParserOrder.parse(inputStream, outputStream)
     })
 
-    it('should parse line-item-state CSV into JSON', done => {
-      const csvFilePath = path.join(samplesFolder, 'lineitemstate-sample.csv')
-      const csvParserOrder = new LineItemStateCsvParser()
-      const inputStream = fs.createReadStream(csvFilePath)
+    it('should parse line-item-state CSV into JSON', () => {
+      return new Promise(done => {
+        const csvFilePath = path.join(samplesFolder, 'lineitemstate-sample.csv')
+        const csvParserOrder = new LineItemStateCsvParser()
+        const inputStream = fs.createReadStream(csvFilePath)
 
-      const outputStream = streamtest.v2.toText((error, output) => {
-        const lineItemStates = JSON.parse(output)
-        const expected = path.join(
-          __dirname,
-          'expected-output',
-          'csv-parser-order-lineitemstate.json'
-        )
-        const expectedArray = JSON.parse(fs.readFileSync(expected, 'utf8'))
+        const outputStream = streamtest.v2.toText((error, output) => {
+          const lineItemStates = JSON.parse(output)
+          const expected = path.join(
+            __dirname,
+            'expected-output',
+            'csv-parser-order-lineitemstate.json'
+          )
+          const expectedArray = JSON.parse(fs.readFileSync(expected, 'utf8'))
 
-        expect(lineItemStates).toBeInstanceOf(Array)
-        expect(lineItemStates).toMatchObject(expectedArray)
-        done()
+          expect(lineItemStates).toBeInstanceOf(Array)
+          expect(lineItemStates).toMatchObject(expectedArray)
+          done()
+        })
+
+        csvParserOrder.parse(inputStream, outputStream)
       })
-
-      csvParserOrder.parse(inputStream, outputStream)
     })
 
     it('CLI accepts deliveries csv type', async () => {

@@ -17,22 +17,26 @@ const expectedErrorText = {
 describe('getCredentials', () => {
   afterEach(() => sinon.restore())
 
-  test('should reject error when missing project key argument', done => {
-    getCredentials()
-      .then(done.fail)
-      .catch(error => {
-        expect(error.message).toBe('Missing "projectKey" argument')
-        done()
-      })
+  test('should reject error when missing project key argument', () => {
+    return new Promise(done => {
+      getCredentials()
+        .then(done.fail)
+        .catch(error => {
+          expect(error.message).toBe('Missing "projectKey" argument')
+          done()
+        })
+    })
   })
 
-  test('should reject when project credentials are not found', done => {
-    getCredentials('forgery')
-      .then(done.fail)
-      .catch(error => {
-        expect(error.message).toMatch(expectedErrorText.undefinedEnv)
-        done()
-      })
+  test('should reject when project credentials are not found', () => {
+    return new Promise(done => {
+      getCredentials('forgery')
+        .then(done.fail)
+        .catch(error => {
+          expect(error.message).toMatch(expectedErrorText.undefinedEnv)
+          done()
+        })
+    })
   })
 })
 
@@ -68,14 +72,16 @@ describe('getCredentialsFromEnvironment', () => {
       })
   })
 
-  test('should reject on absent environment variable key', done => {
-    getCredentialsFromEnvironment('pepernoten')
-      .then(done.fail)
-      .catch(error => {
-        expect(error.message).toMatch(expectedErrorText.undefinedEnv)
-        expect(error.message).toMatch(new RegExp(homepage))
-        done()
-      })
+  test('should reject on absent environment variable key', () => {
+    return new Promise(done => {
+      getCredentialsFromEnvironment('pepernoten')
+        .then(done.fail)
+        .catch(error => {
+          expect(error.message).toMatch(expectedErrorText.undefinedEnv)
+          expect(error.message).toMatch(new RegExp(homepage))
+          done()
+        })
+    })
   })
 })
 

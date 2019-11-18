@@ -45,11 +45,13 @@ describe('StateImport', () => {
         stateImport._processBatches.mockReturnValue(Promise.resolve())
       })
 
-      test('should call callback when done', done => {
-        const myMockCallback = jest.fn(() => {
-          done()
+      test('should call callback when done', () => {
+        return new Promise(done => {
+          const myMockCallback = jest.fn(() => {
+            done()
+          })
+          stateImport.processStream('foo', myMockCallback)
         })
-        stateImport.processStream('foo', myMockCallback)
       })
     })
   })

@@ -125,18 +125,20 @@ describe('PriceExporter', () => {
       expect(pipeStream.end).toHaveBeenCalled()
     })
 
-    test('should emit `error` on output stream if error occurs', done => {
-      const spy = jest
-        .spyOn(priceExporter.client, 'process')
-        .mockImplementation(() => Promise.reject(new Error('error occured')))
+    test('should emit `error` on output stream if error occurs', () => {
+      return new Promise(done => {
+        const spy = jest
+          .spyOn(priceExporter.client, 'process')
+          .mockImplementation(() => Promise.reject(new Error('error occured')))
 
-      const outputStream = streamtest.v2.toText((error, result) => {
-        expect(error.message).toBe('error occured')
-        expect(result).toBeUndefined()
-        spy.mockRestore()
-        done()
+        const outputStream = streamtest.v2.toText((error, result) => {
+          expect(error.message).toBe('error occured')
+          expect(result).toBeUndefined()
+          spy.mockRestore()
+          done()
+        })
+        priceExporter._getProducts(outputStream)
       })
-      priceExporter._getProducts(outputStream)
     })
   })
 
@@ -159,24 +161,28 @@ describe('PriceExporter', () => {
       },
     ]
 
-    test('should write json output once for each sku to stream', done => {
-      const pipeStream = { write: jest.fn(() => done()) }
-      priceExporter._writePrices(sample, pipeStream)
+    test('should write json output once for each sku to stream', () => {
+      return new Promise(done => {
+        const pipeStream = { write: jest.fn(() => done()) }
+        priceExporter._writePrices(sample, pipeStream)
 
-      expect(pipeStream.write).toHaveBeenCalledTimes(1)
-      expect(pipeStream.write).toHaveBeenCalledWith(sample[0])
+        expect(pipeStream.write).toHaveBeenCalledTimes(1)
+        expect(pipeStream.write).toHaveBeenCalledWith(sample[0])
+      })
     })
 
-    test('should flatten csv output and write to stream', done => {
-      const pipeStream = { write: jest.fn(() => done()) }
-      const firstExpected = { 'value.centAmount': 16125 }
-      const secondExpected = { 'value.centAmount': 4000 }
-      priceExporter.config.exportFormat = 'csv'
-      priceExporter._writePrices(sample, pipeStream)
+    test('should flatten csv output and write to stream', () => {
+      return new Promise(done => {
+        const pipeStream = { write: jest.fn(() => done()) }
+        const firstExpected = { 'value.centAmount': 16125 }
+        const secondExpected = { 'value.centAmount': 4000 }
+        priceExporter.config.exportFormat = 'csv'
+        priceExporter._writePrices(sample, pipeStream)
 
-      expect(pipeStream.write).toHaveBeenCalledTimes(2)
-      expect(pipeStream.write).toHaveBeenCalledWith(firstExpected)
-      expect(pipeStream.write).toHaveBeenCalledWith(secondExpected)
+        expect(pipeStream.write).toHaveBeenCalledTimes(2)
+        expect(pipeStream.write).toHaveBeenCalledWith(firstExpected)
+        expect(pipeStream.write).toHaveBeenCalledWith(secondExpected)
+      })
     })
   })
 

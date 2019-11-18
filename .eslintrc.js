@@ -38,6 +38,7 @@ module.exports = {
     'jest/no-focused-tests': 'error',
     'jest/no-identical-title': 'error',
     'jest/valid-expect': 'error',
+    'jest/no-try-expect': 0,
     'no-underscore-dangle': 0,
     'prefer-destructuring': 0,
     'lines-between-class-members': 0,

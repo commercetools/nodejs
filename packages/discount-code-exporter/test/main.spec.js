@@ -134,16 +134,18 @@ describe('DiscountCodeExport', () => {
             })
           })
 
-          test('should export with template headers', done => {
-            const outputStream = streamtest.v2.toText((error, result) => {
-              const expectedResult = stripIndent`
+          test('should export with template headers', () => {
+            return new Promise(done => {
+              const outputStream = streamtest.v2.toText((error, result) => {
+                const expectedResult = stripIndent`
               code,name.en,cartDiscounts,groups
               discount-code,some-discount-name,cart-discount-1;cart-discount-2,
               `
-              expect(result).toEqual(expectedResult)
-              done()
+                expect(result).toEqual(expectedResult)
+                done()
+              })
+              codeExport.run(outputStream)
             })
-            codeExport.run(outputStream)
           })
         })
 
@@ -164,28 +166,32 @@ describe('DiscountCodeExport', () => {
             })
           })
 
-          test('should export with default headers', done => {
-            const outputStream = streamtest.v2.toText((error, result) => {
-              const expectedResult = stripIndent`
+          test('should export with default headers', () => {
+            return new Promise(done => {
+              const outputStream = streamtest.v2.toText((error, result) => {
+                const expectedResult = stripIndent`
               name.en,description.en,code,cartDiscounts,cartPredicate,groups,isActive,validFrom,validUntil,references,maxApplications,maxApplicationsPerCustomer
               some-discount-name,,discount-code,cart-discount-1;cart-discount-2,,,,,,,,
               `
-              expect(result).toEqual(expectedResult)
-              done()
+                expect(result).toEqual(expectedResult)
+                done()
+              })
+              codeExport.run(outputStream)
             })
-            codeExport.run(outputStream)
           })
         })
       })
 
       describe('JSON export', () => {
-        test('should fetch codes and output json to stream by default', done => {
-          const outputStream = streamtest.v2.toText((error, result) => {
-            const expectedResult = [sampleCode]
-            expect(JSON.parse(result)).toEqual(expectedResult)
-            done()
+        test('should fetch codes and output json to stream by default', () => {
+          return new Promise(done => {
+            const outputStream = streamtest.v2.toText((error, result) => {
+              const expectedResult = [sampleCode]
+              expect(JSON.parse(result)).toEqual(expectedResult)
+              done()
+            })
+            codeExport.run(outputStream)
           })
-          codeExport.run(outputStream)
         })
       })
     })
@@ -197,23 +203,27 @@ describe('DiscountCodeExport', () => {
           .mockImplementation(() => Promise.reject(new Error('error occured')))
       })
 
-      test('should emit error if it occurs when streaming to csv', done => {
-        codeExport.exportFormat = 'csv'
-        const outputStream = streamtest.v2.toText((error, result) => {
-          expect(error.message).toBe('error occured')
-          expect(result).toBeUndefined()
-          done()
+      test('should emit error if it occurs when streaming to csv', () => {
+        return new Promise(done => {
+          codeExport.exportFormat = 'csv'
+          const outputStream = streamtest.v2.toText((error, result) => {
+            expect(error.message).toBe('error occured')
+            expect(result).toBeUndefined()
+            done()
+          })
+          codeExport.run(outputStream)
         })
-        codeExport.run(outputStream)
       })
 
-      test('should emit error if it occurs when streaming to json', done => {
-        const outputStream = streamtest.v2.toText((error, result) => {
-          expect(error.message).toBe('error occured')
-          expect(result).toBeUndefined()
-          done()
+      test('should emit error if it occurs when streaming to json', () => {
+        return new Promise(done => {
+          const outputStream = streamtest.v2.toText((error, result) => {
+            expect(error.message).toBe('error occured')
+            expect(result).toBeUndefined()
+            done()
+          })
+          codeExport.run(outputStream)
         })
-        codeExport.run(outputStream)
       })
     })
   })

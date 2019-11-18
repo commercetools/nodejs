@@ -85,80 +85,94 @@ describe('Writer', () => {
   })
 
   describe('::writeToSingleCsvFile', () => {
-    test('write products to a single file with specified headers', done => {
-      const sampleStream = highland(sampleProducts)
-      const headers = [
-        'id',
-        'key',
-        'productType',
-        'variantId',
-        'sku',
-        'images',
-        'anotherAddedAttr',
-        'article',
-        'designer',
-        'color',
-      ]
-      const outputStream = streamTest.toText((error, actual) => {
-        expect(error).toBeFalsy()
-        expect(actual).toMatchSnapshot()
-        done()
-      })
+    test('write products to a single file with specified headers', () => {
+      return new Promise(done => {
+        const sampleStream = highland(sampleProducts)
+        const headers = [
+          'id',
+          'key',
+          'productType',
+          'variantId',
+          'sku',
+          'images',
+          'anotherAddedAttr',
+          'article',
+          'designer',
+          'color',
+        ]
+        const outputStream = streamTest.toText((error, actual) => {
+          expect(error).toBeFalsy()
+          expect(actual).toMatchSnapshot()
+          done()
+        })
 
-      writer.writeToSingleCsvFile(sampleStream, outputStream, logger, headers)
-    })
-
-    test('write products to a single file with specified delimiter', done => {
-      const sampleStream = highland(sampleProducts)
-      const headers = [
-        'id',
-        'key',
-        'productType',
-        'variantId',
-        'sku',
-        'images',
-        'anotherAddedAttr',
-        'article',
-        'designer',
-        'color',
-      ]
-      const delimiter = ';'
-      const outputStream = streamTest.toText((error, actual) => {
-        expect(error).toBeFalsy()
-        expect(actual).toMatchSnapshot()
-        done()
-      })
-
-      writer.writeToSingleCsvFile(sampleStream, outputStream, logger, headers, {
-        delimiter,
-        encoding: 'utf8',
+        writer.writeToSingleCsvFile(sampleStream, outputStream, logger, headers)
       })
     })
 
-    test('do not output empty rows', done => {
-      const sampleStream = highland(sampleProducts)
-      const headers = ['id', 'key', 'productType']
-      const outputStream = streamTest.toText((error, actual) => {
-        expect(error).toBeFalsy()
-        expect(actual).toMatchSnapshot()
-        done()
-      })
+    test('write products to a single file with specified delimiter', () => {
+      return new Promise(done => {
+        const sampleStream = highland(sampleProducts)
+        const headers = [
+          'id',
+          'key',
+          'productType',
+          'variantId',
+          'sku',
+          'images',
+          'anotherAddedAttr',
+          'article',
+          'designer',
+          'color',
+        ]
+        const delimiter = ';'
+        const outputStream = streamTest.toText((error, actual) => {
+          expect(error).toBeFalsy()
+          expect(actual).toMatchSnapshot()
+          done()
+        })
 
-      writer.writeToSingleCsvFile(sampleStream, outputStream, logger, headers)
-    })
-
-    test('log success info on csv completion', done => {
-      const sampleStream = highland(sampleProducts)
-      const headers = []
-      const outputStream = streamTest.toText(() => {})
-      outputStream.on('finish', () => {
-        expect(logger.info).toHaveBeenCalledWith(
-          expect.stringMatching(/written to CSV file/)
+        writer.writeToSingleCsvFile(
+          sampleStream,
+          outputStream,
+          logger,
+          headers,
+          {
+            delimiter,
+            encoding: 'utf8',
+          }
         )
-        done()
       })
+    })
 
-      writer.writeToSingleCsvFile(sampleStream, outputStream, logger, headers)
+    test('do not output empty rows', () => {
+      return new Promise(done => {
+        const sampleStream = highland(sampleProducts)
+        const headers = ['id', 'key', 'productType']
+        const outputStream = streamTest.toText((error, actual) => {
+          expect(error).toBeFalsy()
+          expect(actual).toMatchSnapshot()
+          done()
+        })
+
+        writer.writeToSingleCsvFile(sampleStream, outputStream, logger, headers)
+      })
+    })
+
+    test('log success info on csv completion', () => {
+      return new Promise(done => {
+        const sampleStream = highland(sampleProducts)
+        const headers = []
+        const outputStream = streamTest.toText(() => {})
+        outputStream.on('finish', () => {
+          expect(logger.info).toHaveBeenCalledWith(
+            expect.stringMatching(/written to CSV file/)
+          )
+          done()
+        })
+
+        writer.writeToSingleCsvFile(sampleStream, outputStream, logger, headers)
+      })
     })
 
     describe('::encoding', () => {
@@ -175,263 +189,283 @@ describe('Writer', () => {
         sampleStream = highland([product])
       })
 
-      test('write products in a different encoding', done => {
-        const config = {
-          encoding: 'win1250',
-        }
+      test('write products in a different encoding', () => {
+        return new Promise(done => {
+          const config = {
+            encoding: 'win1250',
+          }
 
-        const outputStream = streamTest.toChunks((error, chunks) => {
-          expect(error).toBeFalsy()
+          const outputStream = streamTest.toChunks((error, chunks) => {
+            expect(error).toBeFalsy()
 
-          // buffer containing text encoded in win1250
-          const res = Buffer.concat(chunks)
+            // buffer containing text encoded in win1250
+            const res = Buffer.concat(chunks)
 
-          // decode back to utf8
-          const decoded = iconv.decode(res, 'win1250')
+            // decode back to utf8
+            const decoded = iconv.decode(res, 'win1250')
 
-          expect(decoded).toBe(expected)
-          expect(res).toMatchSnapshot()
-          done()
+            expect(decoded).toBe(expected)
+            expect(res).toMatchSnapshot()
+            done()
+          })
+
+          writer.writeToSingleCsvFile(
+            sampleStream,
+            outputStream,
+            logger,
+            headers,
+            config
+          )
         })
-
-        writer.writeToSingleCsvFile(
-          sampleStream,
-          outputStream,
-          logger,
-          headers,
-          config
-        )
       })
 
-      test('throw error while using unknown encoding', done => {
-        const config = {
-          encoding: 'invalid',
-        }
-        const outputStream = streamTest.toText(() => {})
+      test('throw error while using unknown encoding', () => {
+        return new Promise(done => {
+          const config = {
+            encoding: 'invalid',
+          }
+          const outputStream = streamTest.toText(() => {})
 
-        outputStream.on('error', error => {
-          expect(error).toBeDefined()
-          expect(error.toString()).toContain(
-            'Encoding does not exist: "invalid"'
+          outputStream.on('error', error => {
+            expect(error).toBeDefined()
+            expect(error.toString()).toContain(
+              'Encoding does not exist: "invalid"'
+            )
+            done()
+          })
+
+          writer.writeToSingleCsvFile(
+            sampleStream,
+            outputStream,
+            logger,
+            headers,
+            config
           )
-          done()
         })
-
-        writer.writeToSingleCsvFile(
-          sampleStream,
-          outputStream,
-          logger,
-          headers,
-          config
-        )
       })
     })
   })
 
   describe('::writeToZipFile', () => {
-    test('write products to multiple files based on productTypes', done => {
-      const sampleStream = highland(sampleProducts)
-      const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
-      const output = tempFile.name
-      const outputStream = fs.createWriteStream(output)
-      const entries = []
+    test('write products to multiple files based on productTypes', () => {
+      return new Promise(done => {
+        const sampleStream = highland(sampleProducts)
+        const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
+        const output = tempFile.name
+        const outputStream = fs.createWriteStream(output)
+        const entries = []
 
-      // Extract data from zip file and test
-      outputStream.on('finish', () => {
-        fs.createReadStream(output)
-          .pipe(unzipper.Parse())
-          .on('entry', async entry => {
-            const csvContent = await streamToString(entry)
-            entries.push(entry.path)
+        // Extract data from zip file and test
+        outputStream.on('finish', () => {
+          fs.createReadStream(output)
+            .pipe(unzipper.Parse())
+            .on('entry', async entry => {
+              const csvContent = await streamToString(entry)
+              entries.push(entry.path)
 
-            if (entry.path === 'products/product-type-1.csv')
-              expect(csvContent).toMatchSnapshot('csv1')
-            else if (entry.path === 'products/product-type-2.csv')
-              expect(csvContent).toMatchSnapshot('csv2')
+              if (entry.path === 'products/product-type-1.csv')
+                expect(csvContent).toMatchSnapshot('csv1')
+              else if (entry.path === 'products/product-type-2.csv')
+                expect(csvContent).toMatchSnapshot('csv2')
 
-            if (entries.length === 2) {
-              expect(entries.sort()).toEqual([
-                'products/product-type-1.csv',
-                'products/product-type-2.csv',
-              ])
-              expect(entries).toHaveLength(2)
-              tempFile.removeCallback()
-              done()
-            }
-          })
-          .on('finish', () => {
-            // TODO the "unzipper" package fires finish event before entry events
-            // so we call done() on second entry instead of calling it here
-          })
+              if (entries.length === 2) {
+                expect(entries.sort()).toEqual([
+                  'products/product-type-1.csv',
+                  'products/product-type-2.csv',
+                ])
+                expect(entries).toHaveLength(2)
+                tempFile.removeCallback()
+                done()
+              }
+            })
+            .on('finish', () => {
+              // TODO the "unzipper" package fires finish event before entry events
+              // so we call done() on second entry instead of calling it here
+            })
+        })
+
+        writer.writeToZipFile(sampleStream, outputStream, logger)
       })
-
-      writer.writeToZipFile(sampleStream, outputStream, logger)
     })
 
-    test('write products in different encoding to zip file', done => {
-      const product = {
-        id: '1',
-        productType: 'pt-1',
-        key: 'Příliš žluťoučký kůň úpěl ďábelské ódy', // special characters
-      }
-      const expected = `"id","productType","key"\n"${product.id}","${product.productType}","${product.key}"\n`
+    test('write products in different encoding to zip file', () => {
+      return new Promise(done => {
+        const product = {
+          id: '1',
+          productType: 'pt-1',
+          key: 'Příliš žluťoučký kůň úpěl ďábelské ódy', // special characters
+        }
+        const expected = `"id","productType","key"\n"${product.id}","${product.productType}","${product.key}"\n`
 
-      const sampleStream = highland([product])
-      const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
-      const output = tempFile.name
-      const outputStream = fs.createWriteStream(output)
+        const sampleStream = highland([product])
+        const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
+        const output = tempFile.name
+        const outputStream = fs.createWriteStream(output)
 
-      // Extract data from zip file and test
-      outputStream.on('finish', () => {
-        fs.createReadStream(output)
-          .pipe(unzipper.Parse())
-          .on('entry', async entry => {
-            expect(entry.path).toEqual('products/pt-1.csv')
+        // Extract data from zip file and test
+        outputStream.on('finish', () => {
+          fs.createReadStream(output)
+            .pipe(unzipper.Parse())
+            .on('entry', async entry => {
+              expect(entry.path).toEqual('products/pt-1.csv')
 
-            const entryStream = streamTest.toChunks((error, chunks) => {
-              expect(error).toBeFalsy()
+              const entryStream = streamTest.toChunks((error, chunks) => {
+                expect(error).toBeFalsy()
 
-              // buffer containing text encoded in win1250
-              const res = Buffer.concat(chunks)
+                // buffer containing text encoded in win1250
+                const res = Buffer.concat(chunks)
 
-              // decode back to utf8
-              const decoded = iconv.decode(res, 'win1250')
-              expect(decoded).toBe(expected)
+                // decode back to utf8
+                const decoded = iconv.decode(res, 'win1250')
+                expect(decoded).toBe(expected)
 
+                tempFile.removeCallback()
+                done()
+              })
+
+              entry.pipe(entryStream)
+            })
+            .on('finish', () => {
+              // TODO the "unzipper" package fires finish event before entry events
+              // so we call done() on second entry instead of calling it here
+            })
+        })
+
+        writer.writeToZipFile(sampleStream, outputStream, logger, {
+          encoding: 'win1250',
+        })
+      })
+    })
+
+    test('should handle exporting zero products', () => {
+      return new Promise(done => {
+        const sampleStream = highland([])
+
+        const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
+        const output = tempFile.name
+        const outputStream = fs.createWriteStream(output)
+        let entries = 0
+
+        // Extract data from zip file and test
+        outputStream.on('finish', () => {
+          fs.createReadStream(output)
+            .pipe(unzipper.Parse())
+            .on('entry', () => {
+              entries += 1
+            })
+            .on('finish', () => {
+              // there should be no products in a result zip file
+              expect(entries).toEqual(0)
               tempFile.removeCallback()
               done()
             })
+        })
 
-            entry.pipe(entryStream)
-          })
-          .on('finish', () => {
-            // TODO the "unzipper" package fires finish event before entry events
-            // so we call done() on second entry instead of calling it here
-          })
-      })
-
-      writer.writeToZipFile(sampleStream, outputStream, logger, {
-        encoding: 'win1250',
+        writer.writeToZipFile(sampleStream, outputStream, logger)
       })
     })
 
-    test('should handle exporting zero products', done => {
-      const sampleStream = highland([])
+    test('log success info on zip completion', () => {
+      return new Promise(done => {
+        const sampleStream = highland(sampleProducts)
 
-      const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
-      const output = tempFile.name
-      const outputStream = fs.createWriteStream(output)
-      let entries = 0
+        const tempFile = tmp.fileSync({ postfix: '.zip' })
+        const output = tempFile.name
+        const outputStream = fs.createWriteStream(output)
 
-      // Extract data from zip file and test
-      outputStream.on('finish', () => {
-        fs.createReadStream(output)
-          .pipe(unzipper.Parse())
-          .on('entry', () => {
-            entries += 1
-          })
-          .on('finish', () => {
-            // there should be no products in a result zip file
-            expect(entries).toEqual(0)
-            tempFile.removeCallback()
-            done()
-          })
+        outputStream.on('finish', () => {
+          expect(logger.info).toHaveBeenCalledWith(
+            expect.stringMatching(/written to ZIP file/)
+          )
+          tempFile.removeCallback()
+          done()
+        })
+
+        writer.writeToZipFile(sampleStream, outputStream, logger)
       })
-
-      writer.writeToZipFile(sampleStream, outputStream, logger)
     })
 
-    test('log success info on zip completion', done => {
-      const sampleStream = highland(sampleProducts)
+    test('throw an error when archiver fails', () => {
+      return new Promise(done => {
+        const outputStream = streamTest.toText(() => {})
 
-      const tempFile = tmp.fileSync({ postfix: '.zip' })
-      const output = tempFile.name
-      const outputStream = fs.createWriteStream(output)
+        outputStream.on('error', err => {
+          expect(err).toBeDefined()
+          expect(err.code).toEqual('DIRECTORYDIRPATHREQUIRED')
+          done()
+        })
 
-      outputStream.on('finish', () => {
-        expect(logger.info).toHaveBeenCalledWith(
-          expect.stringMatching(/written to ZIP file/)
+        // try to archive an invalid folder
+        writer.archiveDir(null, outputStream, logger)
+      })
+    })
+
+    test('throw an error when using an invalid encoding fails', () => {
+      return new Promise(done => {
+        const sampleStream = highland(sampleProducts)
+        const outputStream = streamTest.toChunks(() => {})
+
+        outputStream.on('error', err => {
+          expect(err).toBeDefined()
+          expect(err.toString()).toContain('Encoding does not exist: "invalid"')
+          done()
+        })
+
+        // try to archive an invalid folder
+        writer.writeToZipFile(sampleStream, outputStream, logger, {
+          encoding: 'invalid',
+        })
+      })
+    })
+
+    test('throw an error when streams fail', () => {
+      return new Promise(done => {
+        const tempFile = tmp.fileSync({ postfix: '.zip' })
+        const tmpDir = tmp.dirSync({ unsafeCleanup: true })
+        const outputStream = fs.createWriteStream(tempFile.name)
+        const failedStream = fs.createWriteStream(tempFile.name)
+        // throw error while ending stream
+        failedStream.end = () => {
+          failedStream.emit('error', new Error('test error'))
+        }
+        const inputStreams = { failedStream }
+
+        tmp.setGracefulCleanup()
+
+        outputStream.on('error', err => {
+          expect(err).toBeDefined()
+          expect(err.message).toEqual('test error')
+
+          tempFile.removeCallback()
+          tmpDir.removeCallback()
+          done()
+        })
+
+        writer.finishStreamsAndArchive(
+          inputStreams,
+          tmpDir.name,
+          outputStream,
+          logger
         )
-        tempFile.removeCallback()
-        done()
-      })
-
-      writer.writeToZipFile(sampleStream, outputStream, logger)
-    })
-
-    test('throw an error when archiver fails', done => {
-      const outputStream = streamTest.toText(() => {})
-
-      outputStream.on('error', err => {
-        expect(err).toBeDefined()
-        expect(err.code).toEqual('DIRECTORYDIRPATHREQUIRED')
-        done()
-      })
-
-      // try to archive an invalid folder
-      writer.archiveDir(null, outputStream, logger)
-    })
-
-    test('throw an error when using an invalid encoding fails', done => {
-      const sampleStream = highland(sampleProducts)
-      const outputStream = streamTest.toChunks(() => {})
-
-      outputStream.on('error', err => {
-        expect(err).toBeDefined()
-        expect(err.toString()).toContain('Encoding does not exist: "invalid"')
-        done()
-      })
-
-      // try to archive an invalid folder
-      writer.writeToZipFile(sampleStream, outputStream, logger, {
-        encoding: 'invalid',
       })
     })
 
-    test('throw an error when streams fail', done => {
-      const tempFile = tmp.fileSync({ postfix: '.zip' })
-      const tmpDir = tmp.dirSync({ unsafeCleanup: true })
-      const outputStream = fs.createWriteStream(tempFile.name)
-      const failedStream = fs.createWriteStream(tempFile.name)
-      // throw error while ending stream
-      failedStream.end = () => {
+    test('throw an error when a write stream in emitOnce fails', () => {
+      return new Promise(done => {
+        const tempFile = tmp.fileSync({ postfix: '.tmp' })
+        const output = tempFile.name
+        const failedStream = fs.createWriteStream(output)
+        const inputStreams = { failedStream }
+
+        writer.onStreamsFinished(inputStreams, err => {
+          expect(err).toBeDefined()
+          expect(err.message).toEqual('test error')
+          tempFile.removeCallback()
+          done()
+        })
+
         failedStream.emit('error', new Error('test error'))
-      }
-      const inputStreams = { failedStream }
-
-      tmp.setGracefulCleanup()
-
-      outputStream.on('error', err => {
-        expect(err).toBeDefined()
-        expect(err.message).toEqual('test error')
-
-        tempFile.removeCallback()
-        tmpDir.removeCallback()
-        done()
       })
-
-      writer.finishStreamsAndArchive(
-        inputStreams,
-        tmpDir.name,
-        outputStream,
-        logger
-      )
-    })
-
-    test('throw an error when a write stream in emitOnce fails', done => {
-      const tempFile = tmp.fileSync({ postfix: '.tmp' })
-      const output = tempFile.name
-      const failedStream = fs.createWriteStream(output)
-      const inputStreams = { failedStream }
-
-      writer.onStreamsFinished(inputStreams, err => {
-        expect(err).toBeDefined()
-        expect(err.message).toEqual('test error')
-        tempFile.removeCallback()
-        done()
-      })
-
-      failedStream.emit('error', new Error('test error'))
     })
   })
 })

@@ -50,17 +50,19 @@ describe('ProductExporter', () => {
       )
     })
 
-    test('should emit `error` on output stream if error occurs', done => {
-      productExporter._getProducts = jest.fn(() =>
-        Promise.reject(new Error('error occured'))
-      )
+    test('should emit `error` on output stream if error occurs', () => {
+      return new Promise(done => {
+        productExporter._getProducts = jest.fn(() =>
+          Promise.reject(new Error('error occured'))
+        )
 
-      const outputStream = streamtest.v2.toText((error, result) => {
-        expect(error.message).toBe('error occured')
-        expect(result).toBeUndefined()
-        done()
+        const outputStream = streamtest.v2.toText((error, result) => {
+          expect(error.message).toBe('error occured')
+          expect(result).toBeUndefined()
+          done()
+        })
+        productExporter.run(outputStream)
       })
-      productExporter.run(outputStream)
     })
   })
 
