@@ -92,48 +92,54 @@ describe('CsvParserDiscountCode', () => {
   })
 
   describe(':: parse', () => {
-    test('should successfully parse CSV to JSON', done => {
-      const inputStream = fs.createReadStream(
-        path.join(__dirname, 'helpers/sampleCodes.csv')
-      )
+    test('should successfully parse CSV to JSON', () => {
+      return new Promise(done => {
+        const inputStream = fs.createReadStream(
+          path.join(__dirname, 'helpers/sampleCodes.csv')
+        )
 
-      const outputStream = streamtest.v2.toText((err, data) => {
-        const result = JSON.parse(data)
-        expect(result).toBeInstanceOf(Array)
-        expect(result).toHaveLength(5)
-        done()
+        const outputStream = streamtest.v2.toText((err, data) => {
+          const result = JSON.parse(data)
+          expect(result).toBeInstanceOf(Array)
+          expect(result).toHaveLength(5)
+          done()
+        })
+        csvParser.parse(inputStream, outputStream)
       })
-      csvParser.parse(inputStream, outputStream)
     })
 
-    test('should stop parsing by default on error', done => {
-      const inputStream = fs.createReadStream(
-        path.join(__dirname, 'helpers/faultyCsv.csv')
-      )
-      const expectedError = 'Row length does not match headers'
-      const outputStream = streamtest.v2.toText((err, data) => {
-        expect(err.message).toMatch(expectedError)
-        expect(data).toBeFalsy()
-        done()
+    test('should stop parsing by default on error', () => {
+      return new Promise(done => {
+        const inputStream = fs.createReadStream(
+          path.join(__dirname, 'helpers/faultyCsv.csv')
+        )
+        const expectedError = 'Row length does not match headers'
+        const outputStream = streamtest.v2.toText((err, data) => {
+          expect(err.message).toMatch(expectedError)
+          expect(data).toBeFalsy()
+          done()
+        })
+        csvParser.parse(inputStream, outputStream)
       })
-      csvParser.parse(inputStream, outputStream)
     })
 
-    test('should skip rows with error if `continueOnProblems`', done => {
-      csvParser = new CsvParserDiscountCode(logger, {
-        continueOnProblems: true,
-      })
-      const inputStream = fs.createReadStream(
-        path.join(__dirname, 'helpers/faultyCsv.csv')
-      )
+    test('should skip rows with error if `continueOnProblems`', () => {
+      return new Promise(done => {
+        csvParser = new CsvParserDiscountCode(logger, {
+          continueOnProblems: true,
+        })
+        const inputStream = fs.createReadStream(
+          path.join(__dirname, 'helpers/faultyCsv.csv')
+        )
 
-      const outputStream = streamtest.v2.toText((err, data) => {
-        const result = JSON.parse(data)
-        expect(result).toBeInstanceOf(Array)
-        expect(result).toHaveLength(3)
-        done()
+        const outputStream = streamtest.v2.toText((err, data) => {
+          const result = JSON.parse(data)
+          expect(result).toBeInstanceOf(Array)
+          expect(result).toHaveLength(3)
+          done()
+        })
+        csvParser.parse(inputStream, outputStream)
       })
-      csvParser.parse(inputStream, outputStream)
     })
   })
 })

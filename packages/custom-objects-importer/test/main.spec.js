@@ -59,12 +59,14 @@ describe('CustomObjectsImporter', () => {
     test('should be defined', () =>
       expect(objectsImport.processStream).toBeDefined())
 
-    test('should call callback when done', done => {
-      objectsImport._processBatches.mockReturnValue(Promise.resolve())
-      const myMockCallback = jest.fn(() => {
-        done()
+    test('should call callback when done', () => {
+      return new Promise(done => {
+        objectsImport._processBatches.mockReturnValue(Promise.resolve())
+        const myMockCallback = jest.fn(() => {
+          done()
+        })
+        objectsImport.processStream('foo', myMockCallback)
       })
-      objectsImport.processStream('foo', myMockCallback)
     })
   })
 
