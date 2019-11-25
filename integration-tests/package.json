@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@commercetools/integration-tests",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "dependencies": {
     "@commercetools/api-request-builder": "5.x",
     "@commercetools/category-exporter": "^3.0.1",
@@ -33,7 +33,7 @@
     "@commercetools/sdk-middleware-user-agent": "2.x",
     "@commercetools/state-importer": "^3.0.1",
     "@commercetools/sync-actions": "^4.0.0",
-    "@commercetools/typescript-sdk": "^0.0.5-alpha.0",
+    "@commercetools/typescript-sdk": "^0.0.6-alpha.0",
     "bluebird": "^3.5.3",
     "common-tags": "^1.8.0",
     "csvtojson": "^2.0.8",

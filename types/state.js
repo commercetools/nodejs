@@ -39,7 +39,7 @@ export type StateData = {
   transitions?: Array<StateReference>,
 }
 
-export type StateWithStringTransitions = {
+export type StateWithStringTransitions = {|
   key: string,
   type: StateType,
   name?: Object,
@@ -48,7 +48,7 @@ export type StateWithStringTransitions = {
   builtIn?: boolean,
   roles?: string,
   transitions?: string,
-}
+|}
 
 export type StateWithUnresolvedTransitions = {
   key: string,

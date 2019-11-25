@@ -177,31 +177,33 @@ describe('CSV and CLI Tests', () => {
       }
     }, 10000)
 
-    it('should parse CSV into JSON with array of prices', done => {
-      const csvFilePath = path.join(samplesFolder, 'sample.csv')
-      const csvParserPrice = new CsvParserPrice({ apiConfig })
-      const inputStream = fs.createReadStream(csvFilePath)
-      const outputStream = streamtest.v2.toText((error, output) => {
-        const prices = JSON.parse(output).prices
-        const expected = path.join(
-          __dirname,
-          'expected-output',
-          'csv-parser-price.json'
-        )
-        const expectedArray = JSON.parse(fs.readFileSync(expected, 'utf8'))
+    it('should parse CSV into JSON with array of prices', () => {
+      return new Promise(done => {
+        const csvFilePath = path.join(samplesFolder, 'sample.csv')
+        const csvParserPrice = new CsvParserPrice({ apiConfig })
+        const inputStream = fs.createReadStream(csvFilePath)
+        const outputStream = streamtest.v2.toText((error, output) => {
+          const prices = JSON.parse(output).prices
+          const expected = path.join(
+            __dirname,
+            'expected-output',
+            'csv-parser-price.json'
+          )
+          const expectedArray = JSON.parse(fs.readFileSync(expected, 'utf8'))
 
-        expect(prices).toBeInstanceOf(Array)
-        expect(prices).toMatchObject(expectedArray.prices)
-        expect(prices).toHaveLength(2)
+          expect(prices).toBeInstanceOf(Array)
+          expect(prices).toMatchObject(expectedArray.prices)
+          expect(prices).toHaveLength(2)
 
-        // Because customTypeId is dynamic, match it against uuid regex
-        expect(isuuid(prices[0].prices[0].custom.type.id)).toBe(true)
-        expect(isuuid(prices[0].prices[1].custom.type.id)).toBe(true)
-        expect(isuuid(prices[1].prices[0].custom.type.id)).toBe(true)
-        done()
+          // Because customTypeId is dynamic, match it against uuid regex
+          expect(isuuid(prices[0].prices[0].custom.type.id)).toBe(true)
+          expect(isuuid(prices[0].prices[1].custom.type.id)).toBe(true)
+          expect(isuuid(prices[1].prices[0].custom.type.id)).toBe(true)
+          done()
+        })
+
+        csvParserPrice.parse(inputStream, outputStream)
       })
-
-      csvParserPrice.parse(inputStream, outputStream)
     })
   })
 })

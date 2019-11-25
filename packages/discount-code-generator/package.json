@@ -37,11 +37,11 @@
   },
   "dependencies": {
     "csv-parser": "^2.1.0",
-    "flat": "^4.1.0",
+    "flat": "^5.0.0",
     "json2csv": "^4.3.3",
     "npmlog": "^4.1.2",
     "pretty-error": "^2.1.1",
     "tokgen": "^1.0.0",
-    "yargs": "^14.0.0"
+    "yargs": "^15.0.0"
   }
 }

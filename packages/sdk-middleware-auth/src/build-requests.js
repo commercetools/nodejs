@@ -5,11 +5,11 @@ import type {
   RefreshAuthMiddlewareOptions,
 } from 'types/sdk'
 
-type BuiltRequestParams = {
+type BuiltRequestParams = {|
   basicAuth: string,
   url: string,
   body: string,
-}
+|}
 
 // POST https://{host}/oauth/token?grant_type=client_credentials&scope={scope}
 // Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==

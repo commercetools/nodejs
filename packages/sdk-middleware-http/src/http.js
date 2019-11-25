@@ -106,6 +106,7 @@ export default function createHttpMiddleware({
         ? request.body
         : // NOTE: `stringify` of `null` gives the String('null')
           JSON.stringify(request.body || undefined)
+    // $FlowFixMe
     const requestHeader = {
       'Content-Type': ['application/json'],
       ...request.headers,
@@ -113,6 +114,7 @@ export default function createHttpMiddleware({
         ? { 'Content-Length': Buffer.byteLength(body).toString() }
         : null),
     }
+    // $FlowFixMe
     const fetchOptions: Object = {
       method: request.method,
       headers: requestHeader,

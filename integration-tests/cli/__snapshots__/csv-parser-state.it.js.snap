@@ -87,20 +87,20 @@ Array [
 
 exports[`CSV and CLI Tests Parse with transitions without \`projectkey\` with \`continueOnProblems\` should skip rows having transition 1`] = `
 "[
-{\\"key\\":\\"state-key-1\\",\\"type\\":\\"OrderState\\",\\"name\\":{\\"en\\":\\"Will's state\\"},\\"initial\\":true,\\"description\\":{\\"en\\":\\"beschreibung\\"}}
+{\\"name\\":{\\"en\\":\\"Will's state\\"},\\"key\\":\\"state-key-1\\",\\"description\\":{\\"en\\":\\"beschreibung\\"},\\"type\\":\\"OrderState\\",\\"initial\\":true}
 ,
-{\\"key\\":\\"state-key-3\\",\\"type\\":\\"LineItemState\\",\\"name\\":{\\"en\\":\\"completion\\"},\\"initial\\":false,\\"description\\":{\\"en\\":\\"only used when some state is complete\\"}}
+{\\"name\\":{\\"en\\":\\"completion\\"},\\"key\\":\\"state-key-3\\",\\"description\\":{\\"en\\":\\"only used when some state is complete\\"},\\"type\\":\\"LineItemState\\",\\"initial\\":false}
 ,
-{\\"key\\":\\"state-key-4\\",\\"type\\":\\"PaymentState\\",\\"name\\":{\\"en\\":\\"auto gen\\"},\\"initial\\":true,\\"description\\":{\\"en\\":\\"this state should be auto generated\\"}}
+{\\"name\\":{\\"en\\":\\"auto gen\\"},\\"key\\":\\"state-key-4\\",\\"description\\":{\\"en\\":\\"this state should be auto generated\\"},\\"type\\":\\"PaymentState\\",\\"initial\\":true}
 ]
 "
 `;
 
 exports[`CSV and CLI Tests Parse without transitions should parse states without projectKey 1`] = `
 "[
-{\\"key\\":\\"state-key-1\\",\\"type\\":\\"OrderState\\",\\"name\\":{\\"en\\":\\"Will's state\\"},\\"initial\\":true,\\"description\\":{\\"en\\":\\"beschreibung\\"}}
+{\\"name\\":{\\"en\\":\\"Will's state\\"},\\"key\\":\\"state-key-1\\",\\"description\\":{\\"en\\":\\"beschreibung\\"},\\"type\\":\\"OrderState\\",\\"initial\\":true}
 ,
-{\\"key\\":\\"state-key-2\\",\\"type\\":\\"ProductState\\",\\"name\\":{\\"en\\":\\"tester\\"},\\"initial\\":false,\\"description\\":{\\"en\\":\\"uniqueness of states\\"}}
+{\\"name\\":{\\"en\\":\\"tester\\"},\\"key\\":\\"state-key-2\\",\\"description\\":{\\"en\\":\\"uniqueness of states\\"},\\"type\\":\\"ProductState\\",\\"initial\\":false}
 ]
 "
 `;

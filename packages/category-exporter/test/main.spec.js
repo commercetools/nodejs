@@ -57,13 +57,15 @@ describe('CategoryExporter', () => {
         expect(typeof categoryExport.run).toBe('function')
       })
 
-      test('should write to outputStream', done => {
-        const outputStream = streamtest.v2.toText((error, data) => {
-          expect(error).toBeFalsy()
-          expect(data).toEqual(JSON.stringify(payload.body.results))
-          done()
+      test('should write to outputStream', () => {
+        return new Promise(done => {
+          const outputStream = streamtest.v2.toText((error, data) => {
+            expect(error).toBeFalsy()
+            expect(data).toEqual(JSON.stringify(payload.body.results))
+            done()
+          })
+          categoryExport.run(outputStream)
         })
-        categoryExport.run(outputStream)
       })
     })
 
@@ -81,13 +83,15 @@ describe('CategoryExporter', () => {
           .mockReturnValue(Promise.resolve(results))
       })
 
-      test('should throw error', done => {
-        const outputStream = streamtest.v2.toText((error, data) => {
-          expect(error).toBeTruthy()
-          expect(data).toBeFalsy()
-          done()
+      test('should throw error', () => {
+        return new Promise(done => {
+          const outputStream = streamtest.v2.toText((error, data) => {
+            expect(error).toBeTruthy()
+            expect(data).toBeFalsy()
+            done()
+          })
+          categoryExport.run(outputStream)
         })
-        categoryExport.run(outputStream)
       })
     })
 
@@ -108,13 +112,15 @@ describe('CategoryExporter', () => {
           .mockReturnValue(Promise.resolve(results))
       })
 
-      test('should throw error', done => {
-        const outputStream = streamtest.v2.toText((error, data) => {
-          expect(error).toBeTruthy()
-          expect(data).toBeFalsy()
-          done()
+      test('should throw error', () => {
+        return new Promise(done => {
+          const outputStream = streamtest.v2.toText((error, data) => {
+            expect(error).toBeTruthy()
+            expect(data).toBeFalsy()
+            done()
+          })
+          categoryExport.run(outputStream)
         })
-        categoryExport.run(outputStream)
       })
     })
   })

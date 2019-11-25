@@ -33,14 +33,15 @@ export type ParserConfigOptions = {
   multiValueDelimiter: string,
 }
 
-export type ExportConfigOptions = {
+export type ExportConfigOptions = {|
   batch: number,
   expand: Array<string>,
   exportType: 'json' | 'chunk',
   predicate: string,
   staged: boolean,
   total: number,
-}
+  json: boolean,
+|}
 
 /* From API */
 
