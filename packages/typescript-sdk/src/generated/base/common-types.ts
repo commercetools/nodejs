@@ -1,42 +1,35 @@
 export type MethodType =
-  | 'GET'
-  | 'HEAD'
-  | 'POST'
-  | 'PUT'
-  | 'DELETE'
-  | 'CONNECT'
-  | 'OPTIONS'
-  | 'TRACE'
+  | "GET"
+  | "HEAD"
+  | "POST"
+  | "PUT"
+  | "DELETE"
+  | "CONNECT"
+  | "OPTIONS"
+  | "TRACE";
 
 export type VariableMap = {
-  [key: string]:
-    | string
-    | string[]
-    | number
-    | number[]
-    | boolean
-    | boolean[]
-    | undefined
+  [key: string]: string | string[] | number | number[] | boolean | boolean[] | undefined
 }
 
 export type MiddlewareArg = {
-  request: ClientRequest
-  response?: ClientResponse<any>
-  error?: Error
-  next: Middleware
-}
+  request: ClientRequest;
+  response?: ClientResponse<any>;
+  error?: Error;
+  next: Middleware;
+};
 
 export type ClientRequest = {
-  uri: string
-  method: MethodType
-  body?: any
-  headers?: VariableMap
+  uri: string,
+  method: MethodType,
+  body?: any,
+  headers?: VariableMap,
 }
 
 export type ClientResponse<T> = {
-  body: T
-  statusCode?: number
+  body: T,
+  statusCode?: number,
   headers?: Object
 }
 
-export type Middleware = (arg: MiddlewareArg) => Promise<MiddlewareArg>
+export type Middleware = (arg: MiddlewareArg) => Promise<MiddlewareArg>;

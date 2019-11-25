@@ -699,7 +699,10 @@ describe('Actions', () => {
           { name: 'welcome', value: ['hello', 'world'] }, // set text
           {
             name: 'welcome2',
-            value: [{ en: 'hello', it: 'ciao' }, { en: 'world', it: 'mondo' }],
+            value: [
+              { en: 'hello', it: 'ciao' },
+              { en: 'world', it: 'mondo' },
+            ],
           }, // set ltext
           { name: 'multicolor', value: ['red'] }, // set enum
           {

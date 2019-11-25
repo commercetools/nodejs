@@ -1,88 +1,105 @@
+
 import { ShoppingList, ShoppingListUpdate } from './../../models/shopping-list'
 import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
 
 export class ByProjectKeyShoppingListsKeyByKeyRequestBuilder {
-  constructor(
-    protected readonly args: {
-      pathArgs: {
-        projectKey: string
-        key: string
-      }
-      apiRequestExecutor: ApiRequestExecutor
-    }
-  ) {}
 
-  public get(methodArgs?: {
-    queryArgs?: {
-      expand?: string | string[]
+    
+      constructor(
+        protected readonly args: {
+          pathArgs: {
+                projectKey: string,
+                key: string
+           },
+          apiRequestExecutor: ApiRequestExecutor;
+        }
+      ) {}
+    /**
+    *		Gets a shopping list by Key.
+    */
+    public get(
+               methodArgs?:{
+                  
+                  queryArgs?: {
+                     'expand'?: string | string[]
+                  },
+                  headers?: {
+                     [key:string]:string
+                  },
+               }): ApiRequest<ShoppingList> {
+       return new ApiRequest<ShoppingList>(
+           {
+              baseURL: 'https://api.sphere.io',
+              method: 'GET',
+              uriTemplate: '/{projectKey}/shopping-lists/key={key}',
+              pathVariables: this.args.pathArgs,
+              headers: {
+                  ...methodArgs?.headers
+              },
+              queryParams: methodArgs?.queryArgs,
+           },
+           this.args.apiRequestExecutor
+       )
     }
-    headers?: {
-      [key: string]: string
+    /**
+    *		Update a shopping list found by its Key.
+    */
+    public post(
+                methodArgs:{
+                   
+                   queryArgs?: {
+                      'expand'?: string | string[]
+                   },
+                   body: ShoppingListUpdate,
+                   headers?: {
+                      [key:string]:string
+                   },
+                }): ApiRequest<ShoppingList> {
+       return new ApiRequest<ShoppingList>(
+           {
+              baseURL: 'https://api.sphere.io',
+              method: 'POST',
+              uriTemplate: '/{projectKey}/shopping-lists/key={key}',
+              pathVariables: this.args.pathArgs,
+              headers: {
+                  'Content-Type': 'application/json',
+                  ...methodArgs?.headers
+              },
+              queryParams: methodArgs?.queryArgs,
+              body: methodArgs?.body,
+           },
+           this.args.apiRequestExecutor
+       )
     }
-  }): ApiRequest<ShoppingList> {
-    return new ApiRequest<ShoppingList>(
-      {
-        baseURL: 'https://api.sphere.io',
-        method: 'GET',
-        uriTemplate: '/{projectKey}/shopping-lists/key={key}',
-        pathVariables: this.args.pathArgs,
-        headers: {
-          ...(methodArgs || ({} as any)).headers,
-        },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-      },
-      this.args.apiRequestExecutor
-    )
-  }
+    /**
+    *		Delete ShoppingList by key
+    */
+    public delete(
+                  methodArgs:{
+                     
+                     queryArgs: {
+                        'dataErasure'?: boolean | boolean[]
+                        'version': number | number[]
+                        'expand'?: string | string[]
+                     },
+                     headers?: {
+                        [key:string]:string
+                     },
+                  }): ApiRequest<ShoppingList> {
+       return new ApiRequest<ShoppingList>(
+           {
+              baseURL: 'https://api.sphere.io',
+              method: 'DELETE',
+              uriTemplate: '/{projectKey}/shopping-lists/key={key}',
+              pathVariables: this.args.pathArgs,
+              headers: {
+                  ...methodArgs?.headers
+              },
+              queryParams: methodArgs?.queryArgs,
+           },
+           this.args.apiRequestExecutor
+       )
+    }
+    
 
-  public post(methodArgs: {
-    queryArgs?: {
-      expand?: string | string[]
-    }
-    body: ShoppingListUpdate
-    headers?: {
-      [key: string]: string
-    }
-  }): ApiRequest<ShoppingList> {
-    return new ApiRequest<ShoppingList>(
-      {
-        baseURL: 'https://api.sphere.io',
-        method: 'POST',
-        uriTemplate: '/{projectKey}/shopping-lists/key={key}',
-        pathVariables: this.args.pathArgs,
-        headers: {
-          'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
-        },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
-      },
-      this.args.apiRequestExecutor
-    )
-  }
-
-  public delete(methodArgs: {
-    queryArgs: {
-      dataErasure?: boolean | boolean[]
-      version: number | number[]
-      expand?: string | string[]
-    }
-    headers?: {
-      [key: string]: string
-    }
-  }): ApiRequest<ShoppingList> {
-    return new ApiRequest<ShoppingList>(
-      {
-        baseURL: 'https://api.sphere.io',
-        method: 'DELETE',
-        uriTemplate: '/{projectKey}/shopping-lists/key={key}',
-        pathVariables: this.args.pathArgs,
-        headers: {
-          ...(methodArgs || ({} as any)).headers,
-        },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-      },
-      this.args.apiRequestExecutor
-    )
-  }
 }
