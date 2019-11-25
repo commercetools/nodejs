@@ -8,19 +8,19 @@ export interface Extension extends LoggedResource {
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   readonly key?: string
   readonly destination: ExtensionDestination
   readonly triggers: ExtensionTrigger[]
   /**
-   *		The maximum time the commercetools platform waits for a response from the extension.
-   *		If not present, `2000` (2 seconds) is used.
+   *	The maximum time the commercetools platform waits for a response from the extension.
+   *	If not present, `2000` (2 seconds) is used.
    */
   readonly timeoutInMs?: number
 }
@@ -36,22 +36,22 @@ export interface ExtensionAWSLambdaDestination {
 }
 export interface ExtensionDraft {
   /**
-   *		User-specific unique identifier for the extension
+   *	User-specific unique identifier for the extension
    */
   readonly key?: string
   /**
-   *		Details where the extension can be reached
+   *	Details where the extension can be reached
    */
   readonly destination: ExtensionDestination
   /**
-   *		Describes what triggers the extension
+   *	Describes what triggers the extension
    */
   readonly triggers: ExtensionTrigger[]
   /**
-   *		The maximum time the commercetools platform waits for a response from the extension.
-   *		The maximum value is 2000 ms (2 seconds).
-   *		This limit can be increased per project after we review the performance impact.
-   *		Please contact Support via the [Support Portal](https://support.commercetools.com) and provide the region, project key and use case.
+   *	The maximum time the commercetools platform waits for a response from the extension.
+   *	The maximum value is 2000 ms (2 seconds).
+   *	This limit can be increased per project after we review the performance impact.
+   *	Please contact Support via the [Support Portal](https://support.commercetools.com) and provide the region, project key and use case.
    */
   readonly timeoutInMs?: number
 }

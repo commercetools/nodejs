@@ -40,7 +40,7 @@ export class ByProjectKeyShoppingListsRequestBuilder {
   }
 
   /**
-   *		Query shopping-lists
+   *	Query shopping-lists
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -70,7 +70,7 @@ export class ByProjectKeyShoppingListsRequestBuilder {
     )
   }
   /**
-   *		Create ShoppingList
+   *	Create ShoppingList
    */
   public post(methodArgs: {
     queryArgs?: {

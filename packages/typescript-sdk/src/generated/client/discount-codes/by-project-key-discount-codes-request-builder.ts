@@ -28,7 +28,7 @@ export class ByProjectKeyDiscountCodesRequestBuilder {
   }
 
   /**
-   *		Query discount-codes
+   *	Query discount-codes
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -58,7 +58,7 @@ export class ByProjectKeyDiscountCodesRequestBuilder {
     )
   }
   /**
-   *		Create DiscountCode
+   *	Create DiscountCode
    */
   public post(methodArgs: {
     queryArgs?: {

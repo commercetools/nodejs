@@ -22,7 +22,7 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
   }
 
   /**
-   *		Get OrderEdit by ID
+   *	Get OrderEdit by ID
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -47,7 +47,7 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
     )
   }
   /**
-   *		Update OrderEdit by ID
+   *	Update OrderEdit by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -75,7 +75,7 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
     )
   }
   /**
-   *		Delete OrderEdit by ID
+   *	Delete OrderEdit by ID
    */
   public delete(methodArgs: {
     queryArgs: {

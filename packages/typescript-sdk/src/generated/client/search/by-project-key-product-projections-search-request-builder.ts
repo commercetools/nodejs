@@ -11,7 +11,7 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
     }
   ) {}
   /**
-   *		Search Product Projection
+   *	Search Product Projection
    */
   public post(methodArgs?: {
     headers?: {
@@ -32,7 +32,7 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
     )
   }
   /**
-   *		Search Product Projection
+   *	Search Product Projection
    */
   public get(methodArgs?: {
     queryArgs?: {

@@ -40,7 +40,7 @@ export class ByProjectKeyOrdersEditsRequestBuilder {
   }
 
   /**
-   *		Query edits
+   *	Query edits
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -70,7 +70,7 @@ export class ByProjectKeyOrdersEditsRequestBuilder {
     )
   }
   /**
-   *		Create OrderEdit
+   *	Create OrderEdit
    */
   public post(methodArgs: {
     queryArgs?: {

@@ -19,25 +19,25 @@ export interface Store extends LoggedResource {
   readonly lastModifiedBy?: LastModifiedBy
   readonly createdBy?: CreatedBy
   /**
-   *		User-specific unique identifier for the store.
-   *		The `key` is mandatory and immutable.
-   *		It is used to reference the store.
+   *	User-specific unique identifier for the store.
+   *	The `key` is mandatory and immutable.
+   *	It is used to reference the store.
    */
   readonly key: string
   /**
-   *		The name of the store
+   *	The name of the store
    */
   readonly name?: LocalizedString
 }
 export interface StoreDraft {
   /**
-   *		User-specific unique identifier for the store.
-   *		The `key` is mandatory and immutable.
-   *		It is used to reference the store.
+   *	User-specific unique identifier for the store.
+   *	The `key` is mandatory and immutable.
+   *	It is used to reference the store.
    */
   readonly key: string
   /**
-   *		The name of the store
+   *	The name of the store
    */
   readonly name: LocalizedString
 }

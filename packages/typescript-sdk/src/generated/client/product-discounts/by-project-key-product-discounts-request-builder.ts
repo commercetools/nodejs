@@ -49,7 +49,7 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
   }
 
   /**
-   *		Query product-discounts
+   *	Query product-discounts
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -79,7 +79,7 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
     )
   }
   /**
-   *		Create ProductDiscount
+   *	Create ProductDiscount
    */
   public post(methodArgs: {
     queryArgs?: {

@@ -12,7 +12,7 @@ export class ByProjectKeyCustomersPasswordTokenByPasswordTokenRequestBuilder {
     }
   ) {}
   /**
-   *		Get Customer by passwordToken
+   *	Get Customer by passwordToken
    */
   public get(methodArgs?: {
     queryArgs?: {

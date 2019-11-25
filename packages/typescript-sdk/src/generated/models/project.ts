@@ -10,29 +10,29 @@ export interface ExternalOAuth {
 }
 export interface Project {
   /**
-   *		The current version of the project.
+   *	The current version of the project.
    */
   readonly version: number
   /**
-   *		The unique key of the project.
+   *	The unique key of the project.
    */
   readonly key: string
   /**
-   *		The name of the project.
+   *	The name of the project.
    */
   readonly name: string
   /**
-   *		A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   *	A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
    */
   readonly countries: string[]
   /**
-   *		A three-digit currency code as per [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
+   *	A three-digit currency code as per [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
    */
   readonly currencies: string[]
   readonly languages: string[]
   readonly createdAt: string
   /**
-   *		The time is in the format Year-Month `YYYY-MM`.
+   *	The time is in the format Year-Month `YYYY-MM`.
    */
   readonly trialUntil?: string
   readonly messages: MessageConfiguration

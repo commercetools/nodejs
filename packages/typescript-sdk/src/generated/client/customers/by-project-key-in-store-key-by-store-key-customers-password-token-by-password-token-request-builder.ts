@@ -13,7 +13,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordTokenByPasswordTok
     }
   ) {}
   /**
-   *		Get Customer by passwordToken
+   *	Get Customer by passwordToken
    */
   public get(methodArgs?: {
     queryArgs?: {

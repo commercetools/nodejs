@@ -14,7 +14,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder {
     }
   ) {}
   /**
-   *		A shopping cart holds product variants and can be ordered.
+   *	A shopping cart holds product variants and can be ordered.
    */
   public carts(): ByProjectKeyInStoreKeyByStoreKeyMeCartsRequestBuilder {
     return new ByProjectKeyInStoreKeyByStoreKeyMeCartsRequestBuilder({
@@ -25,7 +25,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder {
     })
   }
   /**
-   *		An order can be created from a order, usually after a checkout process has been completed.
+   *	An order can be created from a order, usually after a checkout process has been completed.
    */
   public orders(): ByProjectKeyInStoreKeyByStoreKeyMeOrdersRequestBuilder {
     return new ByProjectKeyInStoreKeyByStoreKeyMeOrdersRequestBuilder({

@@ -36,7 +36,7 @@ export class ByProjectKeyTypesRequestBuilder {
   }
 
   /**
-   *		Query types
+   *	Query types
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -66,7 +66,7 @@ export class ByProjectKeyTypesRequestBuilder {
     )
   }
   /**
-   *		Create Type
+   *	Create Type
    */
   public post(methodArgs: {
     queryArgs?: {

@@ -12,8 +12,8 @@ export class ByProjectKeyOrdersOrderNumberByOrderNumberRequestBuilder {
     }
   ) {}
   /**
-   *		In case the orderNumber does not match the regular expression [a-zA-Z0-9_\-]+,
-   *		it should be provided in URL-encoded format.
+   *	In case the orderNumber does not match the regular expression [a-zA-Z0-9_\-]+,
+   *	it should be provided in URL-encoded format.
    *
    */
   public get(methodArgs?: {
@@ -39,7 +39,7 @@ export class ByProjectKeyOrdersOrderNumberByOrderNumberRequestBuilder {
     )
   }
   /**
-   *		Update Order by orderNumber
+   *	Update Order by orderNumber
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -67,7 +67,7 @@ export class ByProjectKeyOrdersOrderNumberByOrderNumberRequestBuilder {
     )
   }
   /**
-   *		Delete Order by orderNumber
+   *	Delete Order by orderNumber
    */
   public delete(methodArgs: {
     queryArgs: {

@@ -12,7 +12,7 @@ export class ByProjectKeyCartDiscountsByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get CartDiscount by ID
+   *	Get CartDiscount by ID
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyCartDiscountsByIDRequestBuilder {
     )
   }
   /**
-   *		Update CartDiscount by ID
+   *	Update CartDiscount by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyCartDiscountsByIDRequestBuilder {
     )
   }
   /**
-   *		Delete CartDiscount by ID
+   *	Delete CartDiscount by ID
    */
   public delete(methodArgs: {
     queryArgs: {

@@ -40,7 +40,7 @@ export class ByProjectKeyCategoriesRequestBuilder {
   }
 
   /**
-   *		Query categories
+   *	Query categories
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -70,7 +70,7 @@ export class ByProjectKeyCategoriesRequestBuilder {
     )
   }
   /**
-   *		Creating a category produces the CategoryCreated message.
+   *	Creating a category produces the CategoryCreated message.
    */
   public post(methodArgs: {
     queryArgs?: {

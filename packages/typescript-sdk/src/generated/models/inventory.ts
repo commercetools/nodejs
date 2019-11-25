@@ -18,41 +18,41 @@ import {
 
 export interface InventoryEntry extends LoggedResource {
   /**
-   *		The unique ID of the inventory entry.
+   *	The unique ID of the inventory entry.
    */
   readonly id: string
   readonly version: number
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   readonly sku: string
   /**
-   *		Optional connection to a particular supplier.
+   *	Optional connection to a particular supplier.
    */
   readonly supplyChannel?: ChannelResourceIdentifier
   /**
-   *		Overall amount of stock.
-   *		(available + reserved)
+   *	Overall amount of stock.
+   *	(available + reserved)
    */
   readonly quantityOnStock: number
   /**
-   *		Available amount of stock.
-   *		(available means: `quantityOnStock` - reserved quantity)
+   *	Available amount of stock.
+   *	(available means: `quantityOnStock` - reserved quantity)
    */
   readonly availableQuantity: number
   /**
-   *		The time period in days, that tells how often this inventory entry is restocked.
+   *	The time period in days, that tells how often this inventory entry is restocked.
    */
   readonly restockableInDays?: number
   /**
-   *		The date and time of the next restock.
+   *	The date and time of the next restock.
    */
   readonly expectedDelivery?: string
   readonly custom?: CustomFields
@@ -64,7 +64,7 @@ export interface InventoryEntryDraft {
   readonly restockableInDays?: number
   readonly expectedDelivery?: string
   /**
-   *		The custom fields.
+   *	The custom fields.
    */
   readonly custom?: CustomFieldsDraft
 }

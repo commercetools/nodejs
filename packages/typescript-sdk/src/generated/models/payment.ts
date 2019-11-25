@@ -26,31 +26,31 @@ export interface Payment extends LoggedResource {
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   /**
-   *		A reference to the customer this payment belongs to.
+   *	A reference to the customer this payment belongs to.
    */
   readonly customer?: CustomerReference
   /**
-   *		Identifies payments belonging to an anonymous session (the customer has not signed up/in yet).
+   *	Identifies payments belonging to an anonymous session (the customer has not signed up/in yet).
    */
   readonly anonymousId?: string
   readonly externalId?: string
   /**
-   *		The identifier that is used by the interface that manages the payment (usually the PSP).
-   *		Cannot be changed once it has been set.
-   *		The combination of this ID and the PaymentMethodInfo `paymentInterface` must be unique.
+   *	The identifier that is used by the interface that manages the payment (usually the PSP).
+   *	Cannot be changed once it has been set.
+   *	The combination of this ID and the PaymentMethodInfo `paymentInterface` must be unique.
    */
   readonly interfaceId?: string
   /**
-   *		How much money this payment intends to receive from the customer.
-   *		The value usually matches the cart or order gross total.
+   *	How much money this payment intends to receive from the customer.
+   *	The value usually matches the cart or order gross total.
    */
   readonly amountPlanned: TypedMoney
   readonly amountAuthorized?: TypedMoney
@@ -60,42 +60,42 @@ export interface Payment extends LoggedResource {
   readonly paymentMethodInfo: PaymentMethodInfo
   readonly paymentStatus: PaymentStatus
   /**
-   *		A list of financial transactions of different TransactionTypes with different TransactionStates.
+   *	A list of financial transactions of different TransactionTypes with different TransactionStates.
    */
   readonly transactions: Transaction[]
   /**
-   *		Interface interactions can be requests sent to the PSP, responses received from the PSP or notifications received from the PSP.
-   *		Some interactions may result in a transaction.
-   *		If so, the `interactionId` in the Transaction should be set to match the ID of the PSP for the interaction.
-   *		Interactions are managed by the PSP integration and are usually neither written nor read by the user facing frontends or other services.
+   *	Interface interactions can be requests sent to the PSP, responses received from the PSP or notifications received from the PSP.
+   *	Some interactions may result in a transaction.
+   *	If so, the `interactionId` in the Transaction should be set to match the ID of the PSP for the interaction.
+   *	Interactions are managed by the PSP integration and are usually neither written nor read by the user facing frontends or other services.
    */
   readonly interfaceInteractions: CustomFields[]
   readonly custom?: CustomFields
   /**
-   *		User-specific unique identifier for the payment (max.
-   *		256 characters).
+   *	User-specific unique identifier for the payment (max.
+   *	256 characters).
    */
   readonly key?: string
 }
 export interface PaymentDraft {
   /**
-   *		A reference to the customer this payment belongs to.
+   *	A reference to the customer this payment belongs to.
    */
   readonly customer?: CustomerResourceIdentifier
   /**
-   *		Identifies payments belonging to an anonymous session (the customer has not signed up/in yet).
+   *	Identifies payments belonging to an anonymous session (the customer has not signed up/in yet).
    */
   readonly anonymousId?: string
   readonly externalId?: string
   /**
-   *		The identifier that is used by the interface that manages the payment (usually the PSP).
-   *		Cannot be changed once it has been set.
-   *		The combination of this ID and the PaymentMethodInfo `paymentInterface` must be unique.
+   *	The identifier that is used by the interface that manages the payment (usually the PSP).
+   *	Cannot be changed once it has been set.
+   *	The combination of this ID and the PaymentMethodInfo `paymentInterface` must be unique.
    */
   readonly interfaceId?: string
   /**
-   *		How much money this payment intends to receive from the customer.
-   *		The value usually matches the cart or order gross total.
+   *	How much money this payment intends to receive from the customer.
+   *	The value usually matches the cart or order gross total.
    */
   readonly amountPlanned: Money
   readonly amountAuthorized?: Money
@@ -105,39 +105,39 @@ export interface PaymentDraft {
   readonly paymentMethodInfo?: PaymentMethodInfo
   readonly paymentStatus?: PaymentStatusDraft
   /**
-   *		A list of financial transactions of different TransactionTypes with different TransactionStates.
+   *	A list of financial transactions of different TransactionTypes with different TransactionStates.
    */
   readonly transactions?: TransactionDraft[]
   /**
-   *		Interface interactions can be requests send to the PSP, responses received from the PSP or notifications received from the PSP.
-   *		Some interactions may result in a transaction.
-   *		If so, the `interactionId` in the Transaction should be set to match the ID of the PSP for the interaction.
-   *		Interactions are managed by the PSP integration and are usually neither written nor read by the user facing frontends or other services.
+   *	Interface interactions can be requests send to the PSP, responses received from the PSP or notifications received from the PSP.
+   *	Some interactions may result in a transaction.
+   *	If so, the `interactionId` in the Transaction should be set to match the ID of the PSP for the interaction.
+   *	Interactions are managed by the PSP integration and are usually neither written nor read by the user facing frontends or other services.
    */
   readonly interfaceInteractions?: CustomFieldsDraft[]
   readonly custom?: CustomFieldsDraft
   /**
-   *		User-specific unique identifier for the payment (max.
-   *		256 characters).
+   *	User-specific unique identifier for the payment (max.
+   *	256 characters).
    */
   readonly key?: string
 }
 export interface PaymentMethodInfo {
   /**
-   *		The interface that handles the payment (usually a PSP).
-   *		Cannot be changed once it has been set.
-   *		The combination of Payment`interfaceId` and this field must be unique.
+   *	The interface that handles the payment (usually a PSP).
+   *	Cannot be changed once it has been set.
+   *	The combination of Payment`interfaceId` and this field must be unique.
    */
   readonly paymentInterface?: string
   /**
-   *		The payment method that is used, e.g.
-   *		e.g.
-   *		a conventional string representing Credit Card, Cash Advance etc.
+   *	The payment method that is used, e.g.
+   *	e.g.
+   *	a conventional string representing Credit Card, Cash Advance etc.
    */
   readonly method?: string
   /**
-   *		A human-readable, localized name for the payment method, e.g.
-   *		'Credit Card'.
+   *	A human-readable, localized name for the payment method, e.g.
+   *	'Credit Card'.
    */
   readonly name?: LocalizedString
 }
@@ -160,11 +160,11 @@ export interface PaymentResourceIdentifier {
 }
 export interface PaymentStatus {
   /**
-   *		A code describing the current status returned by the interface that processes the payment.
+   *	A code describing the current status returned by the interface that processes the payment.
    */
   readonly interfaceCode?: string
   /**
-   *		A text describing the current status returned by the interface that processes the payment.
+   *	A text describing the current status returned by the interface that processes the payment.
    */
   readonly interfaceText?: string
   readonly state?: StateReference
@@ -203,46 +203,46 @@ export type PaymentUpdateAction =
   | PaymentTransitionStateAction
 export interface Transaction {
   /**
-   *		The unique ID of this object.
+   *	The unique ID of this object.
    */
   readonly id: string
   /**
-   *		The time at which the transaction took place.
+   *	The time at which the transaction took place.
    */
   readonly timestamp?: string
   /**
-   *		The type of this transaction.
+   *	The type of this transaction.
    */
   readonly type: TransactionType
   readonly amount: TypedMoney
   /**
-   *		The identifier that is used by the interface that managed the transaction (usually the PSP).
-   *		If a matching interaction was logged in the `interfaceInteractions` array, the corresponding interaction should be findable with this ID.
+   *	The identifier that is used by the interface that managed the transaction (usually the PSP).
+   *	If a matching interaction was logged in the `interfaceInteractions` array, the corresponding interaction should be findable with this ID.
    */
   readonly interactionId?: string
   /**
-   *		The state of this transaction.
+   *	The state of this transaction.
    */
   readonly state?: TransactionState
 }
 export interface TransactionDraft {
   /**
-   *		The time at which the transaction took place.
+   *	The time at which the transaction took place.
    */
   readonly timestamp?: string
   /**
-   *		The type of this transaction.
+   *	The type of this transaction.
    */
   readonly type: TransactionType
   readonly amount: Money
   /**
-   *		The identifier that is used by the interface that managed the transaction (usually the PSP).
-   *		If a matching interaction was logged in the `interfaceInteractions` array, the corresponding interaction should be findable with this ID.
+   *	The identifier that is used by the interface that managed the transaction (usually the PSP).
+   *	If a matching interaction was logged in the `interfaceInteractions` array, the corresponding interaction should be findable with this ID.
    */
   readonly interactionId?: string
   /**
-   *		The state of this transaction.
-   *		If not set, defaults to `Initial`.
+   *	The state of this transaction.
+   *	If not set, defaults to `Initial`.
    */
   readonly state?: TransactionState
 }

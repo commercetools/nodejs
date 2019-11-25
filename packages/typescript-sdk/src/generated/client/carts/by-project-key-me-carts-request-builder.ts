@@ -25,7 +25,7 @@ export class ByProjectKeyMeCartsRequestBuilder {
   }
 
   /**
-   *		Query carts
+   *	Query carts
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -55,7 +55,7 @@ export class ByProjectKeyMeCartsRequestBuilder {
     )
   }
   /**
-   *		Create MyCart
+   *	Create MyCart
    */
   public post(methodArgs: {
     queryArgs?: {

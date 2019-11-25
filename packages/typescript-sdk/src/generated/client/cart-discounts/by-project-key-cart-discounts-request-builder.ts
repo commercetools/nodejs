@@ -40,7 +40,7 @@ export class ByProjectKeyCartDiscountsRequestBuilder {
   }
 
   /**
-   *		Query cart-discounts
+   *	Query cart-discounts
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -70,7 +70,7 @@ export class ByProjectKeyCartDiscountsRequestBuilder {
     )
   }
   /**
-   *		Create CartDiscount
+   *	Create CartDiscount
    */
   public post(methodArgs: {
     queryArgs?: {

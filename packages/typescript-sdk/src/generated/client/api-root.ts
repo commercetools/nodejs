@@ -9,7 +9,7 @@ export class ApiRoot {
   }
 
   /**
-   *		The Project endpoint is used to retrieve certain information from a project.
+   *	The Project endpoint is used to retrieve certain information from a project.
    */
   public withProjectKey(childPathArgs: {
     projectKey: string

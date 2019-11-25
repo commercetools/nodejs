@@ -42,7 +42,7 @@ export class ByProjectKeyRequestBuilder {
     }
   ) {}
   /**
-   *		Categories are used to organize products in a hierarchical structure.
+   *	Categories are used to organize products in a hierarchical structure.
    */
   public categories(): ByProjectKeyCategoriesRequestBuilder {
     return new ByProjectKeyCategoriesRequestBuilder({
@@ -53,7 +53,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		A shopping cart holds product variants and can be ordered.
+   *	A shopping cart holds product variants and can be ordered.
    */
   public carts(): ByProjectKeyCartsRequestBuilder {
     return new ByProjectKeyCartsRequestBuilder({
@@ -64,7 +64,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Cart discounts are used to change the prices of different elements within a cart.
+   *	Cart discounts are used to change the prices of different elements within a cart.
    */
   public cartDiscounts(): ByProjectKeyCartDiscountsRequestBuilder {
     return new ByProjectKeyCartDiscountsRequestBuilder({
@@ -75,7 +75,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Channels represent a source or destination of different entities. They can be used to model warehouses or stores.
+   *	Channels represent a source or destination of different entities. They can be used to model warehouses or stores.
    *
    */
   public channels(): ByProjectKeyChannelsRequestBuilder {
@@ -87,7 +87,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		A customer is a person purchasing products. customers, Orders, Comments and Reviews can be associated to a customer.
+   *	A customer is a person purchasing products. customers, Orders, Comments and Reviews can be associated to a customer.
    *
    */
   public customers(): ByProjectKeyCustomersRequestBuilder {
@@ -99,7 +99,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		customer-groups are used to evaluate products and channels.
+   *	customer-groups are used to evaluate products and channels.
    */
   public customerGroups(): ByProjectKeyCustomerGroupsRequestBuilder {
     return new ByProjectKeyCustomerGroupsRequestBuilder({
@@ -110,7 +110,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Store custom JSON values.
+   *	Store custom JSON values.
    */
   public customObjects(): ByProjectKeyCustomObjectsRequestBuilder {
     return new ByProjectKeyCustomObjectsRequestBuilder({
@@ -121,7 +121,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Discount codes can be added to a discount-code to enable certain discount-code discounts.
+   *	Discount codes can be added to a discount-code to enable certain discount-code discounts.
    */
   public discountCodes(): ByProjectKeyDiscountCodesRequestBuilder {
     return new ByProjectKeyDiscountCodesRequestBuilder({
@@ -132,7 +132,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		The commercetools™ platform provides a GraphQL API
+   *	The commercetools™ platform provides a GraphQL API
    */
   public graphql(): ByProjectKeyGraphqlRequestBuilder {
     return new ByProjectKeyGraphqlRequestBuilder({
@@ -143,7 +143,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Inventory allows you to track stock quantities.
+   *	Inventory allows you to track stock quantities.
    */
   public inventory(): ByProjectKeyInventoryRequestBuilder {
     return new ByProjectKeyInventoryRequestBuilder({
@@ -154,7 +154,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Retrieves the authenticated customer.
+   *	Retrieves the authenticated customer.
    */
   public login(): ByProjectKeyLoginRequestBuilder {
     return new ByProjectKeyLoginRequestBuilder({
@@ -165,7 +165,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		A message represents a change or an action performed on a resource (like an Order or a Product).
+   *	A message represents a change or an action performed on a resource (like an Order or a Product).
    */
   public messages(): ByProjectKeyMessagesRequestBuilder {
     return new ByProjectKeyMessagesRequestBuilder({
@@ -176,7 +176,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		An order can be created from a order, usually after a checkout process has been completed.
+   *	An order can be created from a order, usually after a checkout process has been completed.
    */
   public orders(): ByProjectKeyOrdersRequestBuilder {
     return new ByProjectKeyOrdersRequestBuilder({
@@ -187,7 +187,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Payments hold information about the current state of receiving and/or refunding money
+   *	Payments hold information about the current state of receiving and/or refunding money
    */
   public payments(): ByProjectKeyPaymentsRequestBuilder {
     return new ByProjectKeyPaymentsRequestBuilder({
@@ -198,8 +198,8 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Products are the sellable goods in an e-commerce project on CTP. This document explains some design concepts
-   *		of products on CTP and describes the available HTTP APIs for working with them.
+   *	Products are the sellable goods in an e-commerce project on CTP. This document explains some design concepts
+   *	of products on CTP and describes the available HTTP APIs for working with them.
    *
    */
   public products(): ByProjectKeyProductsRequestBuilder {
@@ -211,7 +211,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Product discounts are used to change certain product prices.
+   *	Product discounts are used to change certain product prices.
    */
   public productDiscounts(): ByProjectKeyProductDiscountsRequestBuilder {
     return new ByProjectKeyProductDiscountsRequestBuilder({
@@ -222,8 +222,8 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		A projected representation of a product shows the product with its current or staged data. The current or staged
-   *		representation of a product in a catalog is called a product projection.
+   *	A projected representation of a product shows the product with its current or staged data. The current or staged
+   *	representation of a product in a catalog is called a product projection.
    *
    */
   public productProjections(): ByProjectKeyProductProjectionsRequestBuilder {
@@ -235,8 +235,8 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Product Types are used to describe common characteristics, most importantly common custom attributes,
-   *		of many concrete products.
+   *	Product Types are used to describe common characteristics, most importantly common custom attributes,
+   *	of many concrete products.
    *
    */
   public productTypes(): ByProjectKeyProductTypesRequestBuilder {
@@ -248,7 +248,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Reviews are used to evaluate products and channels.
+   *	Reviews are used to evaluate products and channels.
    */
   public reviews(): ByProjectKeyReviewsRequestBuilder {
     return new ByProjectKeyReviewsRequestBuilder({
@@ -259,7 +259,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Shipping Methods define where orders can be shipped and what the costs are.
+   *	Shipping Methods define where orders can be shipped and what the costs are.
    */
   public shippingMethods(): ByProjectKeyShippingMethodsRequestBuilder {
     return new ByProjectKeyShippingMethodsRequestBuilder({
@@ -270,7 +270,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		shopping-lists e.g. for wishlist support
+   *	shopping-lists e.g. for wishlist support
    */
   public shoppingLists(): ByProjectKeyShoppingListsRequestBuilder {
     return new ByProjectKeyShoppingListsRequestBuilder({
@@ -281,9 +281,9 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		The commercetools platform allows you to model states of certain objects, such as orders, line items, products,
-   *		reviews, and payments in order to define finite state machines reflecting the business logic you’d like to
-   *		implement.
+   *	The commercetools platform allows you to model states of certain objects, such as orders, line items, products,
+   *	reviews, and payments in order to define finite state machines reflecting the business logic you’d like to
+   *	implement.
    *
    */
   public states(): ByProjectKeyStatesRequestBuilder {
@@ -295,7 +295,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Subscriptions allow you to be notified of new messages or changes via a Message Queue of your choice
+   *	Subscriptions allow you to be notified of new messages or changes via a Message Queue of your choice
    */
   public subscriptions(): ByProjectKeySubscriptionsRequestBuilder {
     return new ByProjectKeySubscriptionsRequestBuilder({
@@ -306,7 +306,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Tax Categories define how products are to be taxed in different countries.
+   *	Tax Categories define how products are to be taxed in different countries.
    */
   public taxCategories(): ByProjectKeyTaxCategoriesRequestBuilder {
     return new ByProjectKeyTaxCategoriesRequestBuilder({
@@ -317,7 +317,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Types define custom fields that are used to enhance resources as you need.
+   *	Types define custom fields that are used to enhance resources as you need.
    */
   public types(): ByProjectKeyTypesRequestBuilder {
     return new ByProjectKeyTypesRequestBuilder({
@@ -328,7 +328,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Zones allow defining ShippingRates for specific Locations.
+   *	Zones allow defining ShippingRates for specific Locations.
    */
   public zones(): ByProjectKeyZonesRequestBuilder {
     return new ByProjectKeyZonesRequestBuilder({
@@ -347,7 +347,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Extend the behavior of an API with your business logic
+   *	Extend the behavior of an API with your business logic
    */
   public extensions(): ByProjectKeyExtensionsRequestBuilder {
     return new ByProjectKeyExtensionsRequestBuilder({
@@ -358,7 +358,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Manage your API Clients via an API. Useful for Infrastructure-as-Code tooling, and regularly rotating API secrets.
+   *	Manage your API Clients via an API. Useful for Infrastructure-as-Code tooling, and regularly rotating API secrets.
    *
    */
   public apiClients(): ByProjectKeyApiClientsRequestBuilder {
@@ -370,7 +370,7 @@ export class ByProjectKeyRequestBuilder {
     })
   }
   /**
-   *		Stores let you model the context your customers shop in.
+   *	Stores let you model the context your customers shop in.
    */
   public stores(): ByProjectKeyStoresRequestBuilder {
     return new ByProjectKeyStoresRequestBuilder({
@@ -393,7 +393,7 @@ export class ByProjectKeyRequestBuilder {
   }
 
   /**
-   *		The Endpoint is responding a limited set of information about settings and configuration of the project.
+   *	The Endpoint is responding a limited set of information about settings and configuration of the project.
    *
    */
   public get(methodArgs?: {
@@ -415,7 +415,7 @@ export class ByProjectKeyRequestBuilder {
     )
   }
   /**
-   *		Update project
+   *	Update project
    */
   public post(methodArgs: {
     body: ProjectUpdate

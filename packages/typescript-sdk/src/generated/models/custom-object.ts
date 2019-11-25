@@ -16,7 +16,7 @@ export interface CustomObject extends LoggedResource {
   readonly lastModifiedBy?: LastModifiedBy
   readonly createdBy?: CreatedBy
   /**
-   *		A namespace to group custom objects.
+   *	A namespace to group custom objects.
    */
   readonly container: string
   readonly key: string
@@ -24,11 +24,11 @@ export interface CustomObject extends LoggedResource {
 }
 export interface CustomObjectDraft {
   /**
-   *		A namespace to group custom objects.
+   *	A namespace to group custom objects.
    */
   readonly container: string
   /**
-   *		A user-defined key that is unique within the given container.
+   *	A user-defined key that is unique within the given container.
    */
   readonly key: string
   readonly value: object

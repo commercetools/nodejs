@@ -28,7 +28,7 @@ export class ByProjectKeyInventoryRequestBuilder {
   }
 
   /**
-   *		Query inventory
+   *	Query inventory
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -58,7 +58,7 @@ export class ByProjectKeyInventoryRequestBuilder {
     )
   }
   /**
-   *		Create InventoryEntry
+   *	Create InventoryEntry
    */
   public post(methodArgs: {
     queryArgs?: {

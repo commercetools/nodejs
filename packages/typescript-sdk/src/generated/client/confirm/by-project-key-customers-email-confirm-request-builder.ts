@@ -11,7 +11,7 @@ export class ByProjectKeyCustomersEmailConfirmRequestBuilder {
     }
   ) {}
   /**
-   *		Verifies customer's email using a token.
+   *	Verifies customer's email using a token.
    */
   public post(methodArgs: {
     body: CustomerEmailVerify

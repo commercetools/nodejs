@@ -12,7 +12,7 @@ export class ByProjectKeyZonesByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get Zone by ID
+   *	Get Zone by ID
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyZonesByIDRequestBuilder {
     )
   }
   /**
-   *		Update Zone by ID
+   *	Update Zone by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyZonesByIDRequestBuilder {
     )
   }
   /**
-   *		Delete Zone by ID
+   *	Delete Zone by ID
    */
   public delete(methodArgs: {
     queryArgs: {

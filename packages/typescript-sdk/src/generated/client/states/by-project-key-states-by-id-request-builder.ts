@@ -12,7 +12,7 @@ export class ByProjectKeyStatesByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get State by ID
+   *	Get State by ID
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyStatesByIDRequestBuilder {
     )
   }
   /**
-   *		Update State by ID
+   *	Update State by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyStatesByIDRequestBuilder {
     )
   }
   /**
-   *		Delete State by ID
+   *	Delete State by ID
    */
   public delete(methodArgs: {
     queryArgs: {

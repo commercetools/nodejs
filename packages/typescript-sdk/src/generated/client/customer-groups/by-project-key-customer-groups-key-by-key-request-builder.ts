@@ -15,7 +15,7 @@ export class ByProjectKeyCustomerGroupsKeyByKeyRequestBuilder {
     }
   ) {}
   /**
-   *		Gets a customer group by Key.
+   *	Gets a customer group by Key.
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -40,7 +40,7 @@ export class ByProjectKeyCustomerGroupsKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Updates a customer group by Key.
+   *	Updates a customer group by Key.
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -68,7 +68,7 @@ export class ByProjectKeyCustomerGroupsKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Delete CustomerGroup by key
+   *	Delete CustomerGroup by key
    */
   public delete(methodArgs: {
     queryArgs: {

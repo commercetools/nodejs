@@ -11,7 +11,7 @@ export class ByProjectKeyOrdersImportRequestBuilder {
     }
   ) {}
   /**
-   *		Create an Order by Import
+   *	Create an Order by Import
    */
   public post(methodArgs: {
     body: OrderImportDraft

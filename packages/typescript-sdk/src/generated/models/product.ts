@@ -35,7 +35,7 @@ import { FieldContainer, TypeResourceIdentifier } from './type'
 export interface Attribute {
   readonly name: string
   /**
-   *		A valid JSON value, based on an AttributeDefinition.
+   *	A valid JSON value, based on an AttributeDefinition.
    */
   readonly value: object
 }
@@ -78,37 +78,37 @@ export interface FilteredFacetResult {
 }
 export interface Product extends LoggedResource {
   /**
-   *		The unique ID of the product.
+   *	The unique ID of the product.
    */
   readonly id: string
   /**
-   *		The current version of the product.
+   *	The current version of the product.
    */
   readonly version: number
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   /**
-   *		User-specific unique identifier for the product.
-   *		*Product keys are different from product variant keys.*
+   *	User-specific unique identifier for the product.
+   *	*Product keys are different from product variant keys.*
    */
   readonly key?: string
   readonly productType: ProductTypeReference
   /**
-   *		The product data in the master catalog.
+   *	The product data in the master catalog.
    */
   readonly masterData: ProductCatalogData
   readonly taxCategory?: TaxCategoryReference
   readonly state?: StateReference
   /**
-   *		Statistics about the review ratings taken into account for this product.
+   *	Statistics about the review ratings taken into account for this product.
    */
   readonly reviewRatingStatistics?: ReviewRatingStatistics
 }
@@ -133,25 +133,25 @@ export interface ProductData {
 }
 export interface ProductDraft {
   /**
-   *		A predefined product type assigned to the product.
-   *		All products must have a product type.
+   *	A predefined product type assigned to the product.
+   *	All products must have a product type.
    */
   readonly productType: ProductTypeResourceIdentifier
   readonly name: LocalizedString
   /**
-   *		Human-readable identifiers usually used as deep-link URLs for the product.
-   *		A slug must be unique across a project, but a product can have the same slug for different languages.
-   *		Slugs have a maximum size of 256.
-   *		Valid characters are: alphabetic characters (`A-Z, a-z`), numeric characters (`0-9`), underscores (`_`) and hyphens (`-`).
+   *	Human-readable identifiers usually used as deep-link URLs for the product.
+   *	A slug must be unique across a project, but a product can have the same slug for different languages.
+   *	Slugs have a maximum size of 256.
+   *	Valid characters are: alphabetic characters (`A-Z, a-z`), numeric characters (`0-9`), underscores (`_`) and hyphens (`-`).
    */
   readonly slug: LocalizedString
   /**
-   *		User-specific unique identifier for the product.
+   *	User-specific unique identifier for the product.
    */
   readonly key?: string
   readonly description?: LocalizedString
   /**
-   *		Categories assigned to the product.
+   *	Categories assigned to the product.
    */
   readonly categories?: CategoryResourceIdentifier[]
   readonly categoryOrderHints?: CategoryOrderHints
@@ -159,19 +159,19 @@ export interface ProductDraft {
   readonly metaDescription?: LocalizedString
   readonly metaKeywords?: LocalizedString
   /**
-   *		The master product variant.
-   *		Required if the `variants` array has product variants.
+   *	The master product variant.
+   *	Required if the `variants` array has product variants.
    */
   readonly masterVariant?: ProductVariantDraft
   /**
-   *		An array of related product variants.
+   *	An array of related product variants.
    */
   readonly variants?: ProductVariantDraft[]
   readonly taxCategory?: TaxCategoryResourceIdentifier
   readonly searchKeywords?: SearchKeywords
   readonly state?: StateResourceIdentifier
   /**
-   *		If `true`, the product is published immediately.
+   *	If `true`, the product is published immediately.
    */
   readonly publish?: boolean
 }
@@ -184,15 +184,15 @@ export interface ProductPagedQueryResponse {
 }
 export interface ProductProjection extends BaseResource {
   /**
-   *		The unique ID of the Product.
+   *	The unique ID of the Product.
    */
   readonly id: string
   /**
-   *		The current version of the Product.
+   *	The current version of the Product.
    */
   readonly version: number
   /**
-   *		User-specific unique identifier of the Product.
+   *	User-specific unique identifier of the Product.
    */
   readonly key?: string
   readonly productType: ProductTypeReference
@@ -200,7 +200,7 @@ export interface ProductProjection extends BaseResource {
   readonly description?: LocalizedString
   readonly slug: LocalizedString
   /**
-   *		References to categories the product is in.
+   *	References to categories the product is in.
    */
   readonly categories: CategoryReference[]
   readonly categoryOrderHints?: CategoryOrderHints
@@ -215,7 +215,7 @@ export interface ProductProjection extends BaseResource {
   readonly taxCategory?: TaxCategoryReference
   readonly state?: StateReference
   /**
-   *		Statistics about the review ratings taken into account for this product.
+   *	Statistics about the review ratings taken into account for this product.
    */
   readonly reviewRatingStatistics?: ReviewRatingStatistics
 }
@@ -351,7 +351,7 @@ export interface CustomTokenizer {
 }
 export interface Suggestion {
   /**
-   *		The suggested text.
+   *	The suggested text.
    */
   readonly text: string
 }

@@ -21,7 +21,7 @@ export class ByProjectKeyCustomersPasswordRequestBuilder {
   }
 
   /**
-   *		Change a customers password
+   *	Change a customers password
    */
   public post(methodArgs: {
     body: CustomerChangePassword

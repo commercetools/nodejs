@@ -40,7 +40,7 @@ export class ByProjectKeyCustomerGroupsRequestBuilder {
   }
 
   /**
-   *		Query customer-groups
+   *	Query customer-groups
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -70,7 +70,7 @@ export class ByProjectKeyCustomerGroupsRequestBuilder {
     )
   }
   /**
-   *		Create CustomerGroup
+   *	Create CustomerGroup
    */
   public post(methodArgs: {
     queryArgs?: {

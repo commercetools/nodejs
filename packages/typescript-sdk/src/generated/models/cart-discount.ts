@@ -17,64 +17,64 @@ import { CustomFields, TypeResourceIdentifier } from './type'
 
 export interface CartDiscount extends LoggedResource {
   /**
-   *		The unique ID of the cart discount.
+   *	The unique ID of the cart discount.
    */
   readonly id: string
   /**
-   *		The current version of the cart discount.
+   *	The current version of the cart discount.
    */
   readonly version: number
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   readonly name: LocalizedString
   /**
-   *		User-specific unique identifier for a cart discount.
-   *		Must be unique across a project.
+   *	User-specific unique identifier for a cart discount.
+   *	Must be unique across a project.
    */
   readonly key?: string
   readonly description?: LocalizedString
   readonly value: CartDiscountValue
   /**
-   *		A valid Cart predicate.
+   *	A valid Cart predicate.
    */
   readonly cartPredicate: string
   /**
-   *		Empty when the `value` has type `giftLineItem`, otherwise a CartDiscountTarget is set.
+   *	Empty when the `value` has type `giftLineItem`, otherwise a CartDiscountTarget is set.
    */
   readonly target?: CartDiscountTarget
   /**
-   *		The string must contain a number between 0 and 1.
-   *		All matching cart discounts are applied to a cart in the order defined by this field.
-   *		A discount with greater sort order is prioritized higher than a discount with lower sort order.
-   *		The sort order is unambiguous among all cart discounts.
+   *	The string must contain a number between 0 and 1.
+   *	All matching cart discounts are applied to a cart in the order defined by this field.
+   *	A discount with greater sort order is prioritized higher than a discount with lower sort order.
+   *	The sort order is unambiguous among all cart discounts.
    */
   readonly sortOrder: string
   /**
-   *		Only active discount can be applied to the cart.
+   *	Only active discount can be applied to the cart.
    */
   readonly isActive: boolean
   readonly validFrom?: string
   readonly validUntil?: string
   /**
-   *		States whether the discount can only be used in a connection with a DiscountCode.
+   *	States whether the discount can only be used in a connection with a DiscountCode.
    */
   readonly requiresDiscountCode: boolean
   /**
-   *		The platform will generate this array from the predicate.
-   *		It contains the references of all the resources that are addressed in the predicate.
+   *	The platform will generate this array from the predicate.
+   *	It contains the references of all the resources that are addressed in the predicate.
    */
   readonly references: Reference[]
   /**
-   *		Specifies whether the application of this discount causes the following discounts to be ignored.
-   *		Defaults to Stacking.
+   *	Specifies whether the application of this discount causes the following discounts to be ignored.
+   *	Defaults to Stacking.
    */
   readonly stackingMode: StackingMode
   readonly custom?: CustomFields
@@ -82,42 +82,42 @@ export interface CartDiscount extends LoggedResource {
 export interface CartDiscountDraft {
   readonly name: LocalizedString
   /**
-   *		User-specific unique identifier for a cart discount.
-   *		Must be unique across a project.
-   *		The field can be reset using the Set Key UpdateAction.
+   *	User-specific unique identifier for a cart discount.
+   *	Must be unique across a project.
+   *	The field can be reset using the Set Key UpdateAction.
    */
   readonly key?: string
   readonly description?: LocalizedString
   readonly value: CartDiscountValueDraft
   /**
-   *		A valid Cart predicate.
+   *	A valid Cart predicate.
    */
   readonly cartPredicate: string
   /**
-   *		Must not be set when the `value` has type `giftLineItem`, otherwise a CartDiscountTarget must be set.
+   *	Must not be set when the `value` has type `giftLineItem`, otherwise a CartDiscountTarget must be set.
    */
   readonly target?: CartDiscountTarget
   /**
-   *		The string must contain a number between 0 and 1.
-   *		A discount with greater sort order is prioritized higher than a discount with lower sort order.
-   *		The sort order must be unambiguous among all cart discounts.
+   *	The string must contain a number between 0 and 1.
+   *	A discount with greater sort order is prioritized higher than a discount with lower sort order.
+   *	The sort order must be unambiguous among all cart discounts.
    */
   readonly sortOrder: string
   /**
-   *		Only active discount can be applied to the cart.
-   *		Defaults to `true`.
+   *	Only active discount can be applied to the cart.
+   *	Defaults to `true`.
    */
   readonly isActive?: boolean
   readonly validFrom?: string
   readonly validUntil?: string
   /**
-   *		States whether the discount can only be used in a connection with a DiscountCode.
-   *		Defaults to `false`.
+   *	States whether the discount can only be used in a connection with a DiscountCode.
+   *	Defaults to `false`.
    */
   readonly requiresDiscountCode: boolean
   /**
-   *		Specifies whether the application of this discount causes the following discounts to be ignored.
-   *		Defaults to Stacking.
+   *	Specifies whether the application of this discount causes the following discounts to be ignored.
+   *	Defaults to Stacking.
    */
   readonly stackingMode?: StackingMode
   readonly custom?: CustomFields
@@ -217,21 +217,21 @@ export interface CartDiscountValueRelativeDraft {
 export interface MultiBuyCustomLineItemsTarget {
   readonly type: 'multiBuyCustomLineItems'
   /**
-   *		A valid custom line item target predicate. The discount will be applied to custom line items that are
-   *		matched by the predicate.
+   *	A valid custom line item target predicate. The discount will be applied to custom line items that are
+   *	matched by the predicate.
    *
    */
   readonly predicate: string
   /**
-   *		Quantity of line items that need to be present in order to trigger an application of this discount.
+   *	Quantity of line items that need to be present in order to trigger an application of this discount.
    */
   readonly triggerQuantity: number
   /**
-   *		Quantity of line items that are discounted per application of this discount.
+   *	Quantity of line items that are discounted per application of this discount.
    */
   readonly discountedQuantity: number
   /**
-   *		Maximum number of applications of this discount.
+   *	Maximum number of applications of this discount.
    */
   readonly maxOccurrence?: number
   readonly selectionMode: SelectionMode
@@ -239,20 +239,20 @@ export interface MultiBuyCustomLineItemsTarget {
 export interface MultiBuyLineItemsTarget {
   readonly type: 'multiBuyLineItems'
   /**
-   *		A valid line item target predicate. The discount will be applied to line items that are matched by the predicate.
+   *	A valid line item target predicate. The discount will be applied to line items that are matched by the predicate.
    *
    */
   readonly predicate: string
   /**
-   *		Quantity of line items that need to be present in order to trigger an application of this discount.
+   *	Quantity of line items that need to be present in order to trigger an application of this discount.
    */
   readonly triggerQuantity: number
   /**
-   *		Quantity of line items that are discounted per application of this discount.
+   *	Quantity of line items that are discounted per application of this discount.
    */
   readonly discountedQuantity: number
   /**
-   *		Maximum number of applications of this discount.
+   *	Maximum number of applications of this discount.
    */
   readonly maxOccurrence?: number
   readonly selectionMode: SelectionMode

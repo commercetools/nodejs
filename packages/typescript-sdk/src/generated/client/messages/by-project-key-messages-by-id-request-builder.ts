@@ -12,7 +12,7 @@ export class ByProjectKeyMessagesByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get Message by ID
+   *	Get Message by ID
    */
   public get(methodArgs?: {
     queryArgs?: {

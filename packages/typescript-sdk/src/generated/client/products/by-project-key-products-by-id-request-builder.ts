@@ -22,7 +22,7 @@ export class ByProjectKeyProductsByIDRequestBuilder {
   }
 
   /**
-   *		Gets the full representation of a product by ID.
+   *	Gets the full representation of a product by ID.
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -51,7 +51,7 @@ export class ByProjectKeyProductsByIDRequestBuilder {
     )
   }
   /**
-   *		Update Product by ID
+   *	Update Product by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -83,7 +83,7 @@ export class ByProjectKeyProductsByIDRequestBuilder {
     )
   }
   /**
-   *		Delete Product by ID
+   *	Delete Product by ID
    */
   public delete(methodArgs: {
     queryArgs: {

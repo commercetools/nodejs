@@ -14,7 +14,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeCartsByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get Cart by ID
+   *	Get Cart by ID
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -39,7 +39,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeCartsByIDRequestBuilder {
     )
   }
   /**
-   *		Update Cart by ID
+   *	Update Cart by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -67,7 +67,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeCartsByIDRequestBuilder {
     )
   }
   /**
-   *		Delete Cart by ID
+   *	Delete Cart by ID
    */
   public delete(methodArgs: {
     queryArgs: {

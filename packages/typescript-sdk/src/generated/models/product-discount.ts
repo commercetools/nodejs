@@ -15,92 +15,92 @@ import {
 
 export interface ProductDiscount extends LoggedResource {
   /**
-   *		The unique ID of the product discount
+   *	The unique ID of the product discount
    */
   readonly id: string
   /**
-   *		The current version of the product discount.
+   *	The current version of the product discount.
    */
   readonly version: number
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   readonly name: LocalizedString
   /**
-   *		User-specific unique identifier for a product discount.
-   *		Must be unique across a project.
+   *	User-specific unique identifier for a product discount.
+   *	Must be unique across a project.
    */
   readonly key?: string
   readonly description?: LocalizedString
   readonly value: ProductDiscountValue
   /**
-   *		A valid ProductDiscount Predicate.
+   *	A valid ProductDiscount Predicate.
    */
   readonly predicate: string
   /**
-   *		The string contains a number between 0 and 1.
-   *		A discount with greater sortOrder is prioritized higher than a discount with lower sortOrder.
-   *		A sortOrder must be unambiguous.
+   *	The string contains a number between 0 and 1.
+   *	A discount with greater sortOrder is prioritized higher than a discount with lower sortOrder.
+   *	A sortOrder must be unambiguous.
    */
   readonly sortOrder: string
   /**
-   *		Only active discount will be applied to product prices.
+   *	Only active discount will be applied to product prices.
    */
   readonly isActive: boolean
   /**
-   *		The platform will generate this array from the predicate.
-   *		It contains the references of all the resources that are addressed in the predicate.
+   *	The platform will generate this array from the predicate.
+   *	It contains the references of all the resources that are addressed in the predicate.
    */
   readonly references: Reference[]
   /**
-   *		The time from which the discount should be effective.
-   *		Please take Eventual Consistency into account for calculated product discount values.
+   *	The time from which the discount should be effective.
+   *	Please take Eventual Consistency into account for calculated product discount values.
    */
   readonly validFrom?: string
   /**
-   *		The time from which the discount should be ineffective.
-   *		Please take Eventual Consistency into account for calculated undiscounted values.
+   *	The time from which the discount should be ineffective.
+   *	Please take Eventual Consistency into account for calculated undiscounted values.
    */
   readonly validUntil?: string
 }
 export interface ProductDiscountDraft {
   readonly name: LocalizedString
   /**
-   *		User-specific unique identifier for a product discount.
-   *		Must be unique across a project.
-   *		The field can be reset using the Set Key UpdateAction
+   *	User-specific unique identifier for a product discount.
+   *	Must be unique across a project.
+   *	The field can be reset using the Set Key UpdateAction
    */
   readonly key?: string
   readonly description?: LocalizedString
   readonly value: ProductDiscountValueDraft
   /**
-   *		A valid ProductDiscount Predicate.
+   *	A valid ProductDiscount Predicate.
    */
   readonly predicate: string
   /**
-   *		The string must contain a decimal number between 0 and 1.
-   *		A discount with greater sortOrder is prioritized higher than a discount with lower sortOrder.
+   *	The string must contain a decimal number between 0 and 1.
+   *	A discount with greater sortOrder is prioritized higher than a discount with lower sortOrder.
    */
   readonly sortOrder: string
   /**
-   *		If set to `true` the discount will be applied to product prices.
+   *	If set to `true` the discount will be applied to product prices.
    */
   readonly isActive: boolean
   /**
-   *		The time from which the discount should be effective.
-   *		Please take Eventual Consistency into account for calculated product discount values.
+   *	The time from which the discount should be effective.
+   *	Please take Eventual Consistency into account for calculated product discount values.
    */
   readonly validFrom?: string
   /**
-   *		The time from which the discount should be effective.
-   *		Please take Eventual Consistency into account for calculated undiscounted values.
+   *	The time from which the discount should be effective.
+   *	Please take Eventual Consistency into account for calculated undiscounted values.
    */
   readonly validUntil?: string
 }

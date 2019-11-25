@@ -40,7 +40,7 @@ export class ByProjectKeyStoresRequestBuilder {
   }
 
   /**
-   *		Query stores
+   *	Query stores
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -70,7 +70,7 @@ export class ByProjectKeyStoresRequestBuilder {
     )
   }
   /**
-   *		Create Store
+   *	Create Store
    */
   public post(methodArgs: {
     queryArgs?: {

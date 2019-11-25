@@ -12,7 +12,7 @@ export class ByProjectKeyProductsByIDImagesRequestBuilder {
     }
   ) {}
   /**
-   *		Uploads a binary image file to a given product variant. The supported image formats are JPEG, PNG and GIF.
+   *	Uploads a binary image file to a given product variant. The supported image formats are JPEG, PNG and GIF.
    *
    */
   public post(methodArgs: {

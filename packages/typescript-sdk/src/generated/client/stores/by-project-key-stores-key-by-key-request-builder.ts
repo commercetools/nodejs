@@ -12,7 +12,7 @@ export class ByProjectKeyStoresKeyByKeyRequestBuilder {
     }
   ) {}
   /**
-   *		Get Store by key
+   *	Get Store by key
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyStoresKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Update Store by key
+   *	Update Store by key
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyStoresKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Delete Store by key
+   *	Delete Store by key
    */
   public delete(methodArgs: {
     queryArgs: {

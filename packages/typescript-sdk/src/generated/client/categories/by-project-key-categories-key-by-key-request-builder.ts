@@ -12,7 +12,7 @@ export class ByProjectKeyCategoriesKeyByKeyRequestBuilder {
     }
   ) {}
   /**
-   *		Get Category by key
+   *	Get Category by key
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyCategoriesKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Update Category by key
+   *	Update Category by key
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyCategoriesKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Delete Category by key
+   *	Delete Category by key
    */
   public delete(methodArgs: {
     queryArgs: {

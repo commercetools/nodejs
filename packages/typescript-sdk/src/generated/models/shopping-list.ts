@@ -39,74 +39,74 @@ export interface MyShoppingList extends LoggedResource {
 }
 export interface ShoppingList extends LoggedResource {
   /**
-   *		The unique ID of the shopping list.
+   *	The unique ID of the shopping list.
    */
   readonly id: string
   /**
-   *		The current version of the shopping list.
+   *	The current version of the shopping list.
    */
   readonly version: number
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   readonly custom?: CustomFields
   readonly customer?: CustomerReference
   /**
-   *		The shopping list will be deleted automatically if it hasn't been modified for the specified amount of days.
+   *	The shopping list will be deleted automatically if it hasn't been modified for the specified amount of days.
    */
   readonly deleteDaysAfterLastModification?: number
   readonly description?: LocalizedString
   /**
-   *		User-specific unique identifier for the shopping list.
+   *	User-specific unique identifier for the shopping list.
    */
   readonly key?: string
   readonly lineItems?: ShoppingListLineItem[]
   readonly name: LocalizedString
   /**
-   *		Human-readable identifiers usually used as deep-link URL to the related shopping list.
-   *		Each slug is unique across a project, but a shopping list can have the same slug for different languages.
-   *		The slug must match the pattern [a-zA-Z0-9_-]{2,256}.
+   *	Human-readable identifiers usually used as deep-link URL to the related shopping list.
+   *	Each slug is unique across a project, but a shopping list can have the same slug for different languages.
+   *	The slug must match the pattern [a-zA-Z0-9_-]{2,256}.
    */
   readonly slug?: LocalizedString
   readonly textLineItems?: TextLineItem[]
   /**
-   *		Identifies shopping lists belonging to an anonymous session (the customer has not signed up/in yet).
+   *	Identifies shopping lists belonging to an anonymous session (the customer has not signed up/in yet).
    */
   readonly anonymousId?: string
 }
 export interface ShoppingListDraft {
   /**
-   *		The custom fields.
+   *	The custom fields.
    */
   readonly custom?: CustomFieldsDraft
   readonly customer?: CustomerResourceIdentifier
   /**
-   *		The shopping list will be deleted automatically if it hasn't been modified for the specified amount of days.
+   *	The shopping list will be deleted automatically if it hasn't been modified for the specified amount of days.
    */
   readonly deleteDaysAfterLastModification?: number
   readonly description?: LocalizedString
   /**
-   *		User-specific unique identifier for the shopping list.
+   *	User-specific unique identifier for the shopping list.
    */
   readonly key?: string
   readonly lineItems?: ShoppingListLineItemDraft[]
   readonly name: LocalizedString
   /**
-   *		Human-readable identifiers usually used as deep-link URL to the related shopping list.
-   *		Each slug is unique across a project, but a shopping list can have the same slug for different languages.
-   *		The slug must match the pattern [a-zA-Z0-9_-]{2,256}.
+   *	Human-readable identifiers usually used as deep-link URL to the related shopping list.
+   *	Each slug is unique across a project, but a shopping list can have the same slug for different languages.
+   *	The slug must match the pattern [a-zA-Z0-9_-]{2,256}.
    */
   readonly slug?: LocalizedString
   readonly textLineItems?: TextLineItemDraft[]
   /**
-   *		Identifies shopping lists belonging to an anonymous session (the customer has not signed up/in yet).
+   *	Identifies shopping lists belonging to an anonymous session (the customer has not signed up/in yet).
    */
   readonly anonymousId?: string
 }
@@ -178,13 +178,13 @@ export type ShoppingListUpdateAction =
   | ShoppingListSetTextLineItemDescriptionAction
 export interface TextLineItem {
   /**
-   *		When the text line item was added to the shopping list.
+   *	When the text line item was added to the shopping list.
    */
   readonly addedAt: string
   readonly custom?: CustomFields
   readonly description?: LocalizedString
   /**
-   *		The unique ID of this TextLineItem.
+   *	The unique ID of this TextLineItem.
    */
   readonly id: string
   readonly name: LocalizedString
@@ -192,17 +192,17 @@ export interface TextLineItem {
 }
 export interface TextLineItemDraft {
   /**
-   *		Defaults to the current date and time.
+   *	Defaults to the current date and time.
    */
   readonly addedAt?: string
   /**
-   *		The custom fields.
+   *	The custom fields.
    */
   readonly custom?: CustomFieldsDraft
   readonly description?: LocalizedString
   readonly name: LocalizedString
   /**
-   *		Defaults to `1`.
+   *	Defaults to `1`.
    */
   readonly quantity?: number
 }

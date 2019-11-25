@@ -125,7 +125,7 @@ export interface Address {
   readonly region?: string
   readonly state?: string
   /**
-   *		A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   *	A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
    *
    */
   readonly country: string
@@ -211,7 +211,7 @@ export interface LoggedResource extends BaseResource {
 export interface Money {
   readonly centAmount: number
   /**
-   *		The currency code compliant to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
+   *	The currency code compliant to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
    *
    */
   readonly currencyCode: string
@@ -221,7 +221,7 @@ export interface Price {
   readonly id: string
   readonly value: TypedMoney
   /**
-   *		A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   *	A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
    *
    */
   readonly country?: string
@@ -236,7 +236,7 @@ export interface Price {
 export interface PriceDraft {
   readonly value: Money
   /**
-   *		A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   *	A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
    *
    */
   readonly country?: string
@@ -260,7 +260,7 @@ export interface QueryPrice {
   readonly id: string
   readonly value: Money
   /**
-   *		A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   *	A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
    *
    */
   readonly country?: string
@@ -348,7 +348,7 @@ export interface ScopedPrice {
   readonly value: TypedMoney
   readonly currentValue: TypedMoney
   /**
-   *		A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   *	A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
    *
    */
   readonly country?: string
@@ -365,7 +365,7 @@ export interface CentPrecisionMoney {
   readonly centAmount: number
   readonly fractionDigits: number
   /**
-   *		The currency code compliant to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
+   *	The currency code compliant to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
    *
    */
   readonly currencyCode: string
@@ -375,7 +375,7 @@ export interface HighPrecisionMoney {
   readonly centAmount: number
   readonly fractionDigits: number
   /**
-   *		The currency code compliant to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
+   *	The currency code compliant to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
    *
    */
   readonly currencyCode: string
@@ -386,7 +386,7 @@ export interface CentPrecisionMoneyDraft {
   readonly type: 'centPrecision'
   readonly centAmount: number
   /**
-   *		The currency code compliant to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
+   *	The currency code compliant to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
    *
    */
   readonly currencyCode: string
@@ -395,7 +395,7 @@ export interface HighPrecisionMoneyDraft {
   readonly type: 'highPrecision'
   readonly centAmount: number
   /**
-   *		The currency code compliant to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
+   *	The currency code compliant to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
    *
    */
   readonly currencyCode: string

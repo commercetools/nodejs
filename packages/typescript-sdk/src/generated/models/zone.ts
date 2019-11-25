@@ -11,18 +11,18 @@ import {
 
 export interface Location {
   /**
-   *		A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   *	A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
    */
   readonly country: string
   readonly state?: string
 }
 export interface Zone extends LoggedResource {
   /**
-   *		The unique ID of the zone.
+   *	The unique ID of the zone.
    */
   readonly id: string
   /**
-   *		The current version of the zone.
+   *	The current version of the zone.
    */
   readonly version: number
   readonly createdAt: string
@@ -30,9 +30,9 @@ export interface Zone extends LoggedResource {
   readonly lastModifiedBy?: LastModifiedBy
   readonly createdBy?: CreatedBy
   /**
-   *		User-specific unique identifier for a zone.
-   *		Must be unique across a project.
-   *		The field can be reset using the Set Key UpdateAction.
+   *	User-specific unique identifier for a zone.
+   *	Must be unique across a project.
+   *	The field can be reset using the Set Key UpdateAction.
    */
   readonly key?: string
   readonly name: string
@@ -41,9 +41,9 @@ export interface Zone extends LoggedResource {
 }
 export interface ZoneDraft {
   /**
-   *		User-specific unique identifier for a zone.
-   *		Must be unique across a project.
-   *		The field can be reset using the Set Key UpdateAction.
+   *	User-specific unique identifier for a zone.
+   *	Must be unique across a project.
+   *	The field can be reset using the Set Key UpdateAction.
    */
   readonly key?: string
   readonly name: string

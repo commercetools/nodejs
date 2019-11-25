@@ -33,7 +33,7 @@ export class ByProjectKeyCartsRequestBuilder {
   }
 
   /**
-   *		Query carts
+   *	Query carts
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -64,8 +64,8 @@ export class ByProjectKeyCartsRequestBuilder {
     )
   }
   /**
-   *		Creating a cart can fail with an InvalidOperation if the referenced shipping method in the
-   *		CartDraft has a predicate which does not match the cart.
+   *	Creating a cart can fail with an InvalidOperation if the referenced shipping method in the
+   *	CartDraft has a predicate which does not match the cart.
    *
    */
   public post(methodArgs: {

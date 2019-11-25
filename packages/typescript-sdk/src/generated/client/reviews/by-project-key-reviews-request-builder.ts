@@ -40,7 +40,7 @@ export class ByProjectKeyReviewsRequestBuilder {
   }
 
   /**
-   *		Query reviews
+   *	Query reviews
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -70,7 +70,7 @@ export class ByProjectKeyReviewsRequestBuilder {
     )
   }
   /**
-   *		Create Review
+   *	Create Review
    */
   public post(methodArgs: {
     queryArgs?: {

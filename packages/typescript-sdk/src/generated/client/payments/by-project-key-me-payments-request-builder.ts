@@ -28,7 +28,7 @@ export class ByProjectKeyMePaymentsRequestBuilder {
   }
 
   /**
-   *		Query payments
+   *	Query payments
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -58,7 +58,7 @@ export class ByProjectKeyMePaymentsRequestBuilder {
     )
   }
   /**
-   *		Create MyPayment
+   *	Create MyPayment
    */
   public post(methodArgs: {
     queryArgs?: {

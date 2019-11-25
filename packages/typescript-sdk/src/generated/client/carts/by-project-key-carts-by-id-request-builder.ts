@@ -12,8 +12,8 @@ export class ByProjectKeyCartsByIDRequestBuilder {
     }
   ) {}
   /**
-   *		The cart may not contain up-to-date prices, discounts etc.
-   *		If you want to ensure they’re up-to-date, send an Update request with the Recalculate update action instead.
+   *	The cart may not contain up-to-date prices, discounts etc.
+   *	If you want to ensure they’re up-to-date, send an Update request with the Recalculate update action instead.
    *
    */
   public get(methodArgs?: {
@@ -39,7 +39,7 @@ export class ByProjectKeyCartsByIDRequestBuilder {
     )
   }
   /**
-   *		Update Cart by ID
+   *	Update Cart by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -67,7 +67,7 @@ export class ByProjectKeyCartsByIDRequestBuilder {
     )
   }
   /**
-   *		Delete Cart by ID
+   *	Delete Cart by ID
    */
   public delete(methodArgs: {
     queryArgs: {

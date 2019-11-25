@@ -40,7 +40,7 @@ export class ByProjectKeyTaxCategoriesRequestBuilder {
   }
 
   /**
-   *		Query tax-categories
+   *	Query tax-categories
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -70,7 +70,7 @@ export class ByProjectKeyTaxCategoriesRequestBuilder {
     )
   }
   /**
-   *		Create TaxCategory
+   *	Create TaxCategory
    */
   public post(methodArgs: {
     queryArgs?: {

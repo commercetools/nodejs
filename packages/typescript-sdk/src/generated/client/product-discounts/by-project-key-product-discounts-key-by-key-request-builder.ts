@@ -15,7 +15,7 @@ export class ByProjectKeyProductDiscountsKeyByKeyRequestBuilder {
     }
   ) {}
   /**
-   *		Get ProductDiscount by key
+   *	Get ProductDiscount by key
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -40,7 +40,7 @@ export class ByProjectKeyProductDiscountsKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Update ProductDiscount by key
+   *	Update ProductDiscount by key
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -68,7 +68,7 @@ export class ByProjectKeyProductDiscountsKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Delete ProductDiscount by key
+   *	Delete ProductDiscount by key
    */
   public delete(methodArgs: {
     queryArgs: {

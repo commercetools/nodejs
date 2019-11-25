@@ -10,7 +10,7 @@ export class ByProjectKeyGraphqlRequestBuilder {
     }
   ) {}
   /**
-   *		Execute a GraphQL query
+   *	Execute a GraphQL query
    */
   public post(methodArgs: {
     body: object

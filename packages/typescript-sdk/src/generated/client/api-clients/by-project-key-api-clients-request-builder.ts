@@ -28,7 +28,7 @@ export class ByProjectKeyApiClientsRequestBuilder {
   }
 
   /**
-   *		Query api-clients
+   *	Query api-clients
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -58,7 +58,7 @@ export class ByProjectKeyApiClientsRequestBuilder {
     )
   }
   /**
-   *		Create ApiClient
+   *	Create ApiClient
    */
   public post(methodArgs: {
     queryArgs?: {

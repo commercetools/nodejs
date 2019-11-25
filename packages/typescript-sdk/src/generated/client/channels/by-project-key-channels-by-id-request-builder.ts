@@ -12,7 +12,7 @@ export class ByProjectKeyChannelsByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get Channel by ID
+   *	Get Channel by ID
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyChannelsByIDRequestBuilder {
     )
   }
   /**
-   *		Update Channel by ID
+   *	Update Channel by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyChannelsByIDRequestBuilder {
     )
   }
   /**
-   *		Delete Channel by ID
+   *	Delete Channel by ID
    */
   public delete(methodArgs: {
     queryArgs: {

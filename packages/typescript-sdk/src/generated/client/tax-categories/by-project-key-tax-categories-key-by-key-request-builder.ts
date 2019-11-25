@@ -12,7 +12,7 @@ export class ByProjectKeyTaxCategoriesKeyByKeyRequestBuilder {
     }
   ) {}
   /**
-   *		Get TaxCategory by key
+   *	Get TaxCategory by key
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyTaxCategoriesKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Update TaxCategory by key
+   *	Update TaxCategory by key
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyTaxCategoriesKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Delete TaxCategory by key
+   *	Delete TaxCategory by key
    */
   public delete(methodArgs: {
     queryArgs: {

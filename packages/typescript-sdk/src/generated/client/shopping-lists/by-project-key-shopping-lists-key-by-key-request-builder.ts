@@ -12,7 +12,7 @@ export class ByProjectKeyShoppingListsKeyByKeyRequestBuilder {
     }
   ) {}
   /**
-   *		Gets a shopping list by Key.
+   *	Gets a shopping list by Key.
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyShoppingListsKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Update a shopping list found by its Key.
+   *	Update a shopping list found by its Key.
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyShoppingListsKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Delete ShoppingList by key
+   *	Delete ShoppingList by key
    */
   public delete(methodArgs: {
     queryArgs: {

@@ -13,9 +13,9 @@ export class ByProjectKeyInStoreKeyByStoreKeyOrdersByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Returns an order by its ID from a specific Store. The {storeKey} path parameter maps to a Store’s key.
-   *		If the order exists in the commercetools project but does not have the store field,
-   *		or the store field references a different store, this method returns a ResourceNotFound error.
+   *	Returns an order by its ID from a specific Store. The {storeKey} path parameter maps to a Store’s key.
+   *	If the order exists in the commercetools project but does not have the store field,
+   *	or the store field references a different store, this method returns a ResourceNotFound error.
    *
    */
   public get(methodArgs?: {
@@ -41,9 +41,9 @@ export class ByProjectKeyInStoreKeyByStoreKeyOrdersByIDRequestBuilder {
     )
   }
   /**
-   *		Updates an order in the store specified by {storeKey}. The {storeKey} path parameter maps to a Store’s key.
-   *		If the order exists in the commercetools project but does not have the store field,
-   *		or the store field references a different store, this method returns a ResourceNotFound error.
+   *	Updates an order in the store specified by {storeKey}. The {storeKey} path parameter maps to a Store’s key.
+   *	If the order exists in the commercetools project but does not have the store field,
+   *	or the store field references a different store, this method returns a ResourceNotFound error.
    *
    */
   public post(methodArgs: {
@@ -72,7 +72,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyOrdersByIDRequestBuilder {
     )
   }
   /**
-   *		Delete Order by ID
+   *	Delete Order by ID
    */
   public delete(methodArgs: {
     queryArgs: {

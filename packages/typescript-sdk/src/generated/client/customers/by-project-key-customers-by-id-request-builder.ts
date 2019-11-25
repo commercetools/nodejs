@@ -12,7 +12,7 @@ export class ByProjectKeyCustomersByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get Customer by ID
+   *	Get Customer by ID
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyCustomersByIDRequestBuilder {
     )
   }
   /**
-   *		Update Customer by ID
+   *	Update Customer by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyCustomersByIDRequestBuilder {
     )
   }
   /**
-   *		Delete Customer by ID
+   *	Delete Customer by ID
    */
   public delete(methodArgs: {
     queryArgs: {

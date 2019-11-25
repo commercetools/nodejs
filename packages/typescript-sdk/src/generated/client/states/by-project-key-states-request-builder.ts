@@ -28,7 +28,7 @@ export class ByProjectKeyStatesRequestBuilder {
   }
 
   /**
-   *		Query states
+   *	Query states
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -58,7 +58,7 @@ export class ByProjectKeyStatesRequestBuilder {
     )
   }
   /**
-   *		Create State
+   *	Create State
    */
   public post(methodArgs: {
     queryArgs?: {

@@ -16,42 +16,42 @@ export interface State extends LoggedResource {
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   /**
-   *		A unique identifier for the state.
+   *	A unique identifier for the state.
    */
   readonly key: string
   readonly type: StateTypeEnum
   /**
-   *		A human-readable name of the state.
+   *	A human-readable name of the state.
    */
   readonly name?: LocalizedString
   /**
-   *		A human-readable description of the state.
+   *	A human-readable description of the state.
    */
   readonly description?: LocalizedString
   /**
-   *		A state can be declared as an initial state for any state machine.
-   *		When a workflow starts, this first state must be an `initial` state.
+   *	A state can be declared as an initial state for any state machine.
+   *	When a workflow starts, this first state must be an `initial` state.
    */
   readonly initial: boolean
   /**
-   *		Builtin states are integral parts of the project that cannot be deleted nor the key can be changed.
+   *	Builtin states are integral parts of the project that cannot be deleted nor the key can be changed.
    */
   readonly builtIn: boolean
   readonly roles?: StateRoleEnum[]
   /**
-   *		Transitions are a way to describe possible transformations of the current state to other states of the same `type` (e.g.: _Initial_ -> _Shipped_).
-   *		When performing a `transitionState` update action and `transitions` is set, the currently referenced state must have a transition to the new state.
-   *		If `transitions` is an empty list, it means the current state is a final state and no further transitions are allowed.
-   *		If `transitions` is not set, the validation is turned off.
-   *		When performing a `transitionState` update action, any other state of the same `type` can be transitioned to.
+   *	Transitions are a way to describe possible transformations of the current state to other states of the same `type` (e.g.: _Initial_ -> _Shipped_).
+   *	When performing a `transitionState` update action and `transitions` is set, the currently referenced state must have a transition to the new state.
+   *	If `transitions` is an empty list, it means the current state is a final state and no further transitions are allowed.
+   *	If `transitions` is not set, the validation is turned off.
+   *	When performing a `transitionState` update action, any other state of the same `type` can be transitioned to.
    */
   readonly transitions?: StateReference[]
 }

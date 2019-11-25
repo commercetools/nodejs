@@ -12,7 +12,7 @@ export class ByProjectKeyReviewsKeyByKeyRequestBuilder {
     }
   ) {}
   /**
-   *		Get Review by key
+   *	Get Review by key
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyReviewsKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Update Review by key
+   *	Update Review by key
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyReviewsKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Delete Review by key
+   *	Delete Review by key
    */
   public delete(methodArgs: {
     queryArgs: {

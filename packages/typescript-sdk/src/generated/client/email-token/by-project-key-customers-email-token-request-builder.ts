@@ -14,7 +14,7 @@ export class ByProjectKeyCustomersEmailTokenRequestBuilder {
     }
   ) {}
   /**
-   *		Create a Token for verifying the Customer's Email
+   *	Create a Token for verifying the Customer's Email
    */
   public post(methodArgs: {
     body: CustomerCreateEmailToken

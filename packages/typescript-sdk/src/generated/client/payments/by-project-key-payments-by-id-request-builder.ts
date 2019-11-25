@@ -12,7 +12,7 @@ export class ByProjectKeyPaymentsByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get Payment by ID
+   *	Get Payment by ID
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyPaymentsByIDRequestBuilder {
     )
   }
   /**
-   *		Update Payment by ID
+   *	Update Payment by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyPaymentsByIDRequestBuilder {
     )
   }
   /**
-   *		Delete Payment by ID
+   *	Delete Payment by ID
    */
   public delete(methodArgs: {
     queryArgs: {

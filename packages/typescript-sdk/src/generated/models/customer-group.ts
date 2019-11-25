@@ -12,25 +12,25 @@ import { CustomFields, FieldContainer, TypeResourceIdentifier } from './type'
 
 export interface CustomerGroup extends LoggedResource {
   /**
-   *		The unique ID of the customer group.
+   *	The unique ID of the customer group.
    */
   readonly id: string
   /**
-   *		The current version of the customer group.
+   *	The current version of the customer group.
    */
   readonly version: number
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   /**
-   *		User-specific unique identifier for the customer group.
+   *	User-specific unique identifier for the customer group.
    */
   readonly key?: string
   readonly name: string
@@ -38,7 +38,7 @@ export interface CustomerGroup extends LoggedResource {
 }
 export interface CustomerGroupDraft {
   /**
-   *		User-specific unique identifier for the customer group.
+   *	User-specific unique identifier for the customer group.
    */
   readonly key?: string
   readonly groupName: string

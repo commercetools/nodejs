@@ -13,7 +13,7 @@ export class ByProjectKeyMePaymentsByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get MyPayment by ID
+   *	Get MyPayment by ID
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -38,7 +38,7 @@ export class ByProjectKeyMePaymentsByIDRequestBuilder {
     )
   }
   /**
-   *		Update MyPayment by ID
+   *	Update MyPayment by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -66,7 +66,7 @@ export class ByProjectKeyMePaymentsByIDRequestBuilder {
     )
   }
   /**
-   *		Delete MyPayment by ID
+   *	Delete MyPayment by ID
    */
   public delete(methodArgs: {
     queryArgs: {

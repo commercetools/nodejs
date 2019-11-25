@@ -13,7 +13,7 @@ export class ByProjectKeyMeShoppingListsByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get MyShoppingList by ID
+   *	Get MyShoppingList by ID
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -38,7 +38,7 @@ export class ByProjectKeyMeShoppingListsByIDRequestBuilder {
     )
   }
   /**
-   *		Update MyShoppingList by ID
+   *	Update MyShoppingList by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -66,7 +66,7 @@ export class ByProjectKeyMeShoppingListsByIDRequestBuilder {
     )
   }
   /**
-   *		Delete MyShoppingList by ID
+   *	Delete MyShoppingList by ID
    */
   public delete(methodArgs: {
     queryArgs: {

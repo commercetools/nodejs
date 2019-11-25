@@ -13,7 +13,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeOrdersByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get Order by ID
+   *	Get Order by ID
    */
   public get(methodArgs?: {
     queryArgs?: {

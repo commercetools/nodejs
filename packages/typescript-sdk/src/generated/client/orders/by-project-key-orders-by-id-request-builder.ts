@@ -12,7 +12,7 @@ export class ByProjectKeyOrdersByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get Order by ID
+   *	Get Order by ID
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyOrdersByIDRequestBuilder {
     )
   }
   /**
-   *		Update Order by ID
+   *	Update Order by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyOrdersByIDRequestBuilder {
     )
   }
   /**
-   *		Delete Order by ID
+   *	Delete Order by ID
    */
   public delete(methodArgs: {
     queryArgs: {

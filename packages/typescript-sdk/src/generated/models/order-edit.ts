@@ -78,44 +78,44 @@ import {
 
 export interface OrderEdit extends LoggedResource {
   /**
-   *		The unique ID of the OrderEdit.
+   *	The unique ID of the OrderEdit.
    */
   readonly id: string
   /**
-   *		The current version of the OrderEdit.
+   *	The current version of the OrderEdit.
    */
   readonly version: number
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   /**
-   *		Unique identifier for this edit.
+   *	Unique identifier for this edit.
    */
   readonly key?: string
   /**
-   *		The order to be updated with this edit.
+   *	The order to be updated with this edit.
    */
   readonly resource: OrderReference
   /**
-   *		The actions to apply to the Order.
-   *		Cannot be updated after the edit has been applied.
+   *	The actions to apply to the Order.
+   *	Cannot be updated after the edit has been applied.
    */
   readonly stagedActions: StagedOrderUpdateAction[]
   readonly custom?: CustomFields
   /**
-   *		Contains a preview of the changes in case of unapplied edit.
-   *		For applied edits, it contains the summary of the changes.
+   *	Contains a preview of the changes in case of unapplied edit.
+   *	For applied edits, it contains the summary of the changes.
    */
   readonly result: OrderEditResult
   /**
-   *		This field can be used to add textual information regarding the edit.
+   *	This field can be used to add textual information regarding the edit.
    */
   readonly comment?: string
 }
@@ -125,27 +125,27 @@ export interface OrderEditApply {
 }
 export interface OrderEditDraft {
   /**
-   *		Unique identifier for this edit.
+   *	Unique identifier for this edit.
    */
   readonly key?: string
   /**
-   *		The order to be updated with this edit.
+   *	The order to be updated with this edit.
    */
   readonly resource: OrderReference
   /**
-   *		The actions to apply to `resource`.
+   *	The actions to apply to `resource`.
    */
   readonly stagedActions?: StagedOrderUpdateAction[]
   /**
-   *		The custom fields.
+   *	The custom fields.
    */
   readonly custom?: CustomFieldsDraft
   /**
-   *		This field can be used to add additional textual information regarding the edit.
+   *	This field can be used to add additional textual information regarding the edit.
    */
   readonly comment?: string
   /**
-   *		When set to `true` the edit is applied on the Order without persisting it.
+   *	When set to `true` the edit is applied on the Order without persisting it.
    */
   readonly dryRun?: boolean
 }

@@ -40,7 +40,7 @@ export class ByProjectKeyShippingMethodsRequestBuilder {
   }
 
   /**
-   *		Query shipping-methods
+   *	Query shipping-methods
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -74,7 +74,7 @@ export class ByProjectKeyShippingMethodsRequestBuilder {
     )
   }
   /**
-   *		Create ShippingMethod
+   *	Create ShippingMethod
    */
   public post(methodArgs: {
     queryArgs?: {

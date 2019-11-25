@@ -18,84 +18,84 @@ export type AttributeConstraintEnum =
 export type AttributeConstraintEnumDraft = 'None'
 export interface AttributeDefinition {
   /**
-   *		Describes the type of the attribute.
+   *	Describes the type of the attribute.
    */
   readonly type: AttributeType
   /**
-   *		The unique name of the attribute used in the API.
-   *		The name must be between two and 256 characters long and can contain the ASCII letters A to Z in lowercase or uppercase, digits, underscores (`_`) and the hyphen-minus (`-`).
-   *		When using the same `name` for an attribute in two or more product types all fields of the AttributeDefinition of this attribute need to be the same across the product types, otherwise an AttributeDefinitionAlreadyExists error code will be returned.
-   *		An exception to this are the values of an `enum` or `lenum` type and sets thereof.
+   *	The unique name of the attribute used in the API.
+   *	The name must be between two and 256 characters long and can contain the ASCII letters A to Z in lowercase or uppercase, digits, underscores (`_`) and the hyphen-minus (`-`).
+   *	When using the same `name` for an attribute in two or more product types all fields of the AttributeDefinition of this attribute need to be the same across the product types, otherwise an AttributeDefinitionAlreadyExists error code will be returned.
+   *	An exception to this are the values of an `enum` or `lenum` type and sets thereof.
    */
   readonly name: string
   /**
-   *		A human-readable label for the attribute.
+   *	A human-readable label for the attribute.
    */
   readonly label: LocalizedString
   /**
-   *		Whether the attribute is required to have a value.
+   *	Whether the attribute is required to have a value.
    */
   readonly isRequired: boolean
   /**
-   *		Describes how an attribute or a set of attributes should be validated across all variants of a product.
+   *	Describes how an attribute or a set of attributes should be validated across all variants of a product.
    */
   readonly attributeConstraint: AttributeConstraintEnum
   /**
-   *		Additional information about the attribute that aids content managers when setting product details.
+   *	Additional information about the attribute that aids content managers when setting product details.
    */
   readonly inputTip?: LocalizedString
   /**
-   *		Provides a visual representation type for this attribute.
-   *		only relevant for text-based attribute types
-   *		like TextType and LocalizableTextType.
+   *	Provides a visual representation type for this attribute.
+   *	only relevant for text-based attribute types
+   *	like TextType and LocalizableTextType.
    */
   readonly inputHint: TextInputHint
   /**
-   *		Whether the attribute's values should generally be enabled in product search.
-   *		This determines whether the value is stored in products for matching terms in the context of full-text search queries  and can be used in facets & filters as part of product search queries.
-   *		The exact features that are enabled/disabled with this flag depend on the concrete attribute type and are described there.
-   *		The max size of a searchable field is **restricted to 10922 characters**.
-   *		This constraint is enforced at both product creation and product update.
-   *		If the length of the input exceeds the maximum size an InvalidField error is returned.
+   *	Whether the attribute's values should generally be enabled in product search.
+   *	This determines whether the value is stored in products for matching terms in the context of full-text search queries  and can be used in facets & filters as part of product search queries.
+   *	The exact features that are enabled/disabled with this flag depend on the concrete attribute type and are described there.
+   *	The max size of a searchable field is **restricted to 10922 characters**.
+   *	This constraint is enforced at both product creation and product update.
+   *	If the length of the input exceeds the maximum size an InvalidField error is returned.
    */
   readonly isSearchable: boolean
 }
 export interface AttributeDefinitionDraft {
   /**
-   *		Describes the type of the attribute.
+   *	Describes the type of the attribute.
    */
   readonly type: AttributeType
   /**
-   *		The unique name of the attribute used in the API.
-   *		The name must be between two and 256 characters long and can contain the ASCII letters A to Z in lowercase or uppercase, digits, underscores (`_`) and the hyphen-minus (`-`).
-   *		When using the same `name` for an attribute in two or more product types all fields of the AttributeDefinition of this attribute need to be the same across the product types.
+   *	The unique name of the attribute used in the API.
+   *	The name must be between two and 256 characters long and can contain the ASCII letters A to Z in lowercase or uppercase, digits, underscores (`_`) and the hyphen-minus (`-`).
+   *	When using the same `name` for an attribute in two or more product types all fields of the AttributeDefinition of this attribute need to be the same across the product types.
    */
   readonly name: string
   /**
-   *		A human-readable label for the attribute.
+   *	A human-readable label for the attribute.
    */
   readonly label: LocalizedString
   /**
-   *		Whether the attribute is required to have a value.
+   *	Whether the attribute is required to have a value.
    */
   readonly isRequired: boolean
   /**
-   *		Describes how an attribute or a set of attributes should be validated across all variants of a product.
+   *	Describes how an attribute or a set of attributes should be validated across all variants of a product.
    */
   readonly attributeConstraint?: AttributeConstraintEnum
   /**
-   *		Additional information about the attribute that aids content managers when setting product details.
+   *	Additional information about the attribute that aids content managers when setting product details.
    */
   readonly inputTip?: LocalizedString
   /**
-   *		Provides a visual representation type for this attribute.
-   *		only relevant for text-based attribute types like TextType and LocalizableTextType.
+   *	Provides a visual representation type for this attribute.
+   *	only relevant for text-based attribute types like TextType and LocalizableTextType.
    */
   readonly inputHint?: TextInputHint
   /**
-   *		Whether the attribute's values should generally be enabled in product search.
-   *		This determines whether the value is stored in products for matching terms in the context of full-text search queries and can be used in facets & filters as part of product search queries.
-   *		The exact features that are enabled/disabled with this flag depend on the concrete attribute type and are described there.
+   *	Whether the attribute's values should generally be enabled in product search.
+   *	This determines whether the value is stored in products for matching terms in the context of full-text search queries and can be used in facets & filters as part of product search queries.
+   *	The exact features that are enabled/disabled with this flag depend on the concrete attribute type and are described there.
    */
   readonly isSearchable?: boolean
 }
@@ -167,26 +167,26 @@ export interface AttributeTimeType {
 }
 export interface ProductType extends LoggedResource {
   /**
-   *		The unique ID of the product type.
+   *	The unique ID of the product type.
    */
   readonly id: string
   /**
-   *		The current version of the product type.
+   *	The current version of the product type.
    */
   readonly version: number
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   /**
-   *		User-specific unique identifier for the product type (max.
-   *		256 characters).
+   *	User-specific unique identifier for the product type (max.
+   *	256 characters).
    */
   readonly key?: string
   readonly name: string
@@ -195,9 +195,9 @@ export interface ProductType extends LoggedResource {
 }
 export interface ProductTypeDraft {
   /**
-   *		User-specific unique identifier for the product type (min.
-   *		2 and max.
-   *		256 characters).
+   *	User-specific unique identifier for the product type (min.
+   *	2 and max.
+   *	256 characters).
    */
   readonly key?: string
   readonly name: string

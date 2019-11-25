@@ -12,7 +12,7 @@ export class ByProjectKeyCustomObjectsByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get CustomObject by container
+   *	Get CustomObject by container
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyCustomObjectsByIDRequestBuilder {
     )
   }
   /**
-   *		The version control is optional. If the query contains a version, then it must match the version of the object.
+   *	The version control is optional. If the query contains a version, then it must match the version of the object.
    *
    */
   public delete(methodArgs?: {

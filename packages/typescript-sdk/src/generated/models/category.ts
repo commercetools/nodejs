@@ -21,40 +21,40 @@ import {
 
 export interface Category extends LoggedResource {
   /**
-   *		The unique ID of the category.
+   *	The unique ID of the category.
    */
   readonly id: string
   /**
-   *		The current version of the category.
+   *	The current version of the category.
    */
   readonly version: number
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   readonly name: LocalizedString
   /**
-   *		human-readable identifiers usually used as deep-link URL to the related category.
-   *		Each slug is unique across a project, but a category can have the same slug for different languages.
+   *	human-readable identifiers usually used as deep-link URL to the related category.
+   *	Each slug is unique across a project, but a category can have the same slug for different languages.
    */
   readonly slug: LocalizedString
   readonly description?: LocalizedString
   /**
-   *		Contains the parent path towards the root category.
+   *	Contains the parent path towards the root category.
    */
   readonly ancestors: CategoryReference[]
   /**
-   *		A category that is the parent of this category in the category tree.
+   *	A category that is the parent of this category in the category tree.
    */
   readonly parent?: CategoryReference
   /**
-   *		An attribute as base for a custom category order in one level.
+   *	An attribute as base for a custom category order in one level.
    */
   readonly orderHint: string
   readonly externalId?: string
@@ -63,32 +63,32 @@ export interface Category extends LoggedResource {
   readonly metaKeywords?: LocalizedString
   readonly custom?: CustomFields
   /**
-   *		Can be used to store images, icons or movies related to this category.
+   *	Can be used to store images, icons or movies related to this category.
    */
   readonly assets?: Asset[]
   /**
-   *		User-specific unique identifier for the category.
+   *	User-specific unique identifier for the category.
    */
   readonly key?: string
 }
 export interface CategoryDraft {
   readonly name: LocalizedString
   /**
-   *		human-readable identifier usually used as deep-link URL to the related category.
-   *		Allowed are alphabetic, numeric, underscore (`_`) and hyphen (`-`) characters.
-   *		Maximum size is 256.
-   *		**Must be unique across a project!** The same category can have the same slug for different languages.
+   *	human-readable identifier usually used as deep-link URL to the related category.
+   *	Allowed are alphabetic, numeric, underscore (`_`) and hyphen (`-`) characters.
+   *	Maximum size is 256.
+   *	**Must be unique across a project!** The same category can have the same slug for different languages.
    */
   readonly slug: LocalizedString
   readonly description?: LocalizedString
   /**
-   *		A category that is the parent of this category in the category tree.
-   *		The parent can be set by its ID or by its key.
+   *	A category that is the parent of this category in the category tree.
+   *	The parent can be set by its ID or by its key.
    */
   readonly parent?: CategoryResourceIdentifier
   /**
-   *		An attribute as base for a custom category order in one level.
-   *		A random value will be assigned by API if not set.
+   *	An attribute as base for a custom category order in one level.
+   *	A random value will be assigned by API if not set.
    */
   readonly orderHint?: string
   readonly externalId?: string
@@ -96,13 +96,13 @@ export interface CategoryDraft {
   readonly metaDescription?: LocalizedString
   readonly metaKeywords?: LocalizedString
   /**
-   *		The custom fields.
+   *	The custom fields.
    */
   readonly custom?: CustomFieldsDraft
   readonly assets?: AssetDraft[]
   /**
-   *		User-defined unique identifier for the category.
-   *		Keys can only contain alphanumeric characters (`a-Z, 0-9`), underscores and hyphens (`-, _`) and be between 2 and 256 characters.
+   *	User-defined unique identifier for the category.
+   *	Keys can only contain alphanumeric characters (`a-Z, 0-9`), underscores and hyphens (`-, _`) and be between 2 and 256 characters.
    */
   readonly key?: string
 }

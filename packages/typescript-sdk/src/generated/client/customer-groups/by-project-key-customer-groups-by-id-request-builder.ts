@@ -15,7 +15,7 @@ export class ByProjectKeyCustomerGroupsByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get CustomerGroup by ID
+   *	Get CustomerGroup by ID
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -40,7 +40,7 @@ export class ByProjectKeyCustomerGroupsByIDRequestBuilder {
     )
   }
   /**
-   *		Update CustomerGroup by ID
+   *	Update CustomerGroup by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -68,7 +68,7 @@ export class ByProjectKeyCustomerGroupsByIDRequestBuilder {
     )
   }
   /**
-   *		Delete CustomerGroup by ID
+   *	Delete CustomerGroup by ID
    */
   public delete(methodArgs: {
     queryArgs: {

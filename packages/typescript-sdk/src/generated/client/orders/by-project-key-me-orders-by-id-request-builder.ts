@@ -13,7 +13,7 @@ export class ByProjectKeyMeOrdersByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get MyOrder by ID
+   *	Get MyOrder by ID
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -38,7 +38,7 @@ export class ByProjectKeyMeOrdersByIDRequestBuilder {
     )
   }
   /**
-   *		Update MyOrder by ID
+   *	Update MyOrder by ID
    */
   public post(methodArgs: {
     queryArgs?: {

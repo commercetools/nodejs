@@ -40,7 +40,7 @@ export class ByProjectKeyExtensionsRequestBuilder {
   }
 
   /**
-   *		Query extensions
+   *	Query extensions
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -70,7 +70,7 @@ export class ByProjectKeyExtensionsRequestBuilder {
     )
   }
   /**
-   *		Currently, a maximum of 25 extensions can be created per project.
+   *	Currently, a maximum of 25 extensions can be created per project.
    */
   public post(methodArgs: {
     queryArgs?: {

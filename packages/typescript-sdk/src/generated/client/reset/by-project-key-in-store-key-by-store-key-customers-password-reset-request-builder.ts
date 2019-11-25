@@ -12,7 +12,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordResetRequestBuilde
     }
   ) {}
   /**
-   *		Set a new password using a token.
+   *	Set a new password using a token.
    */
   public post(methodArgs: {
     body: CustomerResetPassword

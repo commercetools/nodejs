@@ -87,7 +87,7 @@ export interface MyCart extends LoggedResource {
   readonly taxCalculationMode: TaxCalculationMode
   readonly customerGroup?: CustomerGroupReference
   /**
-   *		A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   *	A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
    *
    */
   readonly country?: string
@@ -104,16 +104,16 @@ export interface MyCart extends LoggedResource {
 }
 export interface MyCartDraft {
   /**
-   *		A three-digit currency code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   *	A three-digit currency code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
    */
   readonly currency: string
   readonly customerEmail?: string
   /**
-   *		A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   *	A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
    */
   readonly country?: string
   /**
-   *		Default inventory mode is `None`.
+   *	Default inventory mode is `None`.
    */
   readonly inventoryMode?: InventoryMode
   readonly lineItems?: MyLineItemDraft[]
@@ -121,22 +121,22 @@ export interface MyCartDraft {
   readonly billingAddress?: Address
   readonly shippingMethod?: ShippingMethodResourceIdentifier
   /**
-   *		The custom fields.
+   *	The custom fields.
    */
   readonly custom?: CustomFieldsDraft
   readonly locale?: string
   /**
-   *		The `TaxMode` `Disabled` can not be set on the My Carts endpoint.
+   *	The `TaxMode` `Disabled` can not be set on the My Carts endpoint.
    */
   readonly taxMode?: TaxMode
   /**
-   *		The cart will be deleted automatically if it hasn't been modified for the specified amount of days and it is in the `Active` CartState.
-   *		If a ChangeSubscription for carts exists, a `ResourceDeleted` notification will be sent.
+   *	The cart will be deleted automatically if it hasn't been modified for the specified amount of days and it is in the `Active` CartState.
+   *	If a ChangeSubscription for carts exists, a `ResourceDeleted` notification will be sent.
    */
   readonly deleteDaysAfterLastModification?: number
   /**
-   *		Contains addresses for orders with multiple shipping addresses.
-   *		Each address must contain a key which is unique in this cart.
+   *	Contains addresses for orders with multiple shipping addresses.
+   *	Each address must contain a key which is unique in this cart.
    */
   readonly itemShippingAddresses?: Address[]
 }
@@ -208,21 +208,21 @@ export interface MyCustomerDraft {
   readonly companyName?: string
   readonly vatId?: string
   /**
-   *		Sets the ID of each address to be unique in the addresses list.
+   *	Sets the ID of each address to be unique in the addresses list.
    */
   readonly addresses?: Address[]
   /**
-   *		The index of the address in the addresses array.
-   *		The `defaultShippingAddressId` of the customer will be set to the ID of that address.
+   *	The index of the address in the addresses array.
+   *	The `defaultShippingAddressId` of the customer will be set to the ID of that address.
    */
   readonly defaultShippingAddress?: number
   /**
-   *		The index of the address in the addresses array.
-   *		The `defaultBillingAddressId` of the customer will be set to the ID of that address.
+   *	The index of the address in the addresses array.
+   *	The `defaultBillingAddressId` of the customer will be set to the ID of that address.
    */
   readonly defaultBillingAddress?: number
   /**
-   *		The custom fields.
+   *	The custom fields.
    */
   readonly custom?: CustomFields
   readonly locale?: string
@@ -255,22 +255,22 @@ export interface MyLineItemDraft {
   readonly variantId: number
   readonly quantity: number
   /**
-   *		By providing supply channel information, you can unique identify
-   *		inventory entries that should be reserved.
-   *		The provided channel should have the InventorySupply role.
+   *	By providing supply channel information, you can unique identify
+   *	inventory entries that should be reserved.
+   *	The provided channel should have the InventorySupply role.
    */
   readonly supplyChannel?: ChannelResourceIdentifier
   /**
-   *		The channel is used to select a ProductPrice.
-   *		The provided channel should have the ProductDistribution role.
+   *	The channel is used to select a ProductPrice.
+   *	The provided channel should have the ProductDistribution role.
    */
   readonly distributionChannel?: ChannelResourceIdentifier
   /**
-   *		The custom fields.
+   *	The custom fields.
    */
   readonly custom?: CustomFieldsDraft
   /**
-   *		Container for line item specific address(es).
+   *	Container for line item specific address(es).
    */
   readonly shippingDetails?: ItemShippingDetailsDraft
   readonly sku?: string
@@ -320,7 +320,7 @@ export interface MyOrder extends LoggedResource {
 }
 export interface MyOrderFromCartDraft {
   /**
-   *		The unique ID of the cart from which an order is created.
+   *	The unique ID of the cart from which an order is created.
    */
   readonly id: string
   readonly version: number
@@ -329,37 +329,37 @@ export interface MyPayment {
   readonly id: string
   readonly version: number
   /**
-   *		A reference to the customer this payment belongs to.
+   *	A reference to the customer this payment belongs to.
    */
   readonly customer?: CustomerReference
   /**
-   *		Identifies payments belonging to an anonymous session (the customer has not signed up/in yet).
+   *	Identifies payments belonging to an anonymous session (the customer has not signed up/in yet).
    */
   readonly anonymousId?: string
   /**
-   *		How much money this payment intends to receive from the customer.
-   *		The value usually matches the cart or order gross total.
+   *	How much money this payment intends to receive from the customer.
+   *	The value usually matches the cart or order gross total.
    */
   readonly amountPlanned: TypedMoney
   readonly paymentMethodInfo: PaymentMethodInfo
   /**
-   *		A list of financial transactions of different TransactionTypes
-   *		with different TransactionStates.
+   *	A list of financial transactions of different TransactionTypes
+   *	with different TransactionStates.
    */
   readonly transactions: Transaction[]
   readonly custom?: CustomFields
 }
 export interface MyPaymentDraft {
   /**
-   *		How much money this payment intends to receive from the customer.
-   *		The value usually matches the cart or order gross total.
+   *	How much money this payment intends to receive from the customer.
+   *	The value usually matches the cart or order gross total.
    */
   readonly amountPlanned: Money
   readonly paymentMethodInfo?: PaymentMethodInfo
   readonly custom?: CustomFieldsDraft
   /**
-   *		A list of financial transactions of the `Authorization` or `Charge`
-   *		TransactionTypes.
+   *	A list of financial transactions of the `Authorization` or `Charge`
+   *	TransactionTypes.
    */
   readonly transaction?: MyTransactionDraft
 }
@@ -387,11 +387,11 @@ export interface MyShoppingListDraft {
   readonly lineItems?: ShoppingListLineItemDraft[]
   readonly textLineItems?: TextLineItemDraft[]
   /**
-   *		The custom fields.
+   *	The custom fields.
    */
   readonly custom?: CustomFieldsDraft
   /**
-   *		The shopping list will be deleted automatically if it hasn't been modified for the specified amount of days.
+   *	The shopping list will be deleted automatically if it hasn't been modified for the specified amount of days.
    */
   readonly deleteDaysAfterLastModification?: number
 }
@@ -421,21 +421,21 @@ export type MyShoppingListUpdateAction =
   | MyShoppingListSetTextLineItemDescriptionAction
 export interface MyTransactionDraft {
   /**
-   *		The time at which the transaction took place.
+   *	The time at which the transaction took place.
    */
   readonly timestamp?: string
   /**
-   *		The type of this transaction.
-   *		Only the `Authorization` or `Charge`
-   *		TransactionTypes are allowed here.
+   *	The type of this transaction.
+   *	Only the `Authorization` or `Charge`
+   *	TransactionTypes are allowed here.
    */
   readonly type: TransactionType
   readonly amount: Money
   /**
-   *		The identifier that is used by the interface that managed the transaction (usually the PSP).
-   *		If a matching interaction was logged in the interfaceInteractions array,
-   *		the corresponding interaction should be findable with this ID.
-   *		The `state` is set to the `Initial` TransactionState.
+   *	The identifier that is used by the interface that managed the transaction (usually the PSP).
+   *	If a matching interaction was logged in the interfaceInteractions array,
+   *	the corresponding interaction should be findable with this ID.
+   *	The `state` is set to the `Initial` TransactionState.
    */
   readonly interactionId?: string
 }
@@ -512,7 +512,7 @@ export interface MyCartSetBillingAddressAction {
 export interface MyCartSetCountryAction {
   readonly action: 'setCountry'
   /**
-   *		A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   *	A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
    *
    */
   readonly country?: string

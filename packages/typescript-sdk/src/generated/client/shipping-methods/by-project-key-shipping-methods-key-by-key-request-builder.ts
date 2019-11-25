@@ -15,7 +15,7 @@ export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
     }
   ) {}
   /**
-   *		Get ShippingMethod by key
+   *	Get ShippingMethod by key
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -40,7 +40,7 @@ export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Update ShippingMethod by key
+   *	Update ShippingMethod by key
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -68,7 +68,7 @@ export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Delete ShippingMethod by key
+   *	Delete ShippingMethod by key
    */
   public delete(methodArgs: {
     queryArgs: {

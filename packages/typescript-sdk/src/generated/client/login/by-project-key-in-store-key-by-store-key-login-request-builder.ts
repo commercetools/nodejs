@@ -12,7 +12,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyLoginRequestBuilder {
     }
   ) {}
   /**
-   *		Authenticate Customer (Sign In)
+   *	Authenticate Customer (Sign In)
    */
   public post(methodArgs: {
     body: CustomerSignin

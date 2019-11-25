@@ -201,8 +201,8 @@ export interface Delivery {
   readonly id: string
   readonly createdAt: string
   /**
-   *		Items which are shipped in this delivery regardless their distribution over several parcels.
-   *		Can also be specified individually for each Parcel.
+   *	Items which are shipped in this delivery regardless their distribution over several parcels.
+   *	Can also be specified individually for each Parcel.
    */
   readonly items: DeliveryItem[]
   readonly parcels: Parcel[]
@@ -222,12 +222,12 @@ export interface ItemState {
 }
 export interface LineItemImportDraft {
   /**
-   *		ID of the existing product.
-   *		You also need to specify the ID of the variant if this property is set or alternatively you can just specify SKU of the product variant.
+   *	ID of the existing product.
+   *	You also need to specify the ID of the variant if this property is set or alternatively you can just specify SKU of the product variant.
    */
   readonly productId?: string
   /**
-   *		The product name.
+   *	The product name.
    */
   readonly name: LocalizedString
   readonly variant: ProductVariantImportDraft
@@ -235,59 +235,59 @@ export interface LineItemImportDraft {
   readonly quantity: number
   readonly state?: ItemState[]
   /**
-   *		Optional connection to a particular supplier.
-   *		By providing supply channel information, you can uniquely identify
-   *		inventory entries that should be reserved.
-   *		The provided channel should have the
-   *		InventorySupply role.
+   *	Optional connection to a particular supplier.
+   *	By providing supply channel information, you can uniquely identify
+   *	inventory entries that should be reserved.
+   *	The provided channel should have the
+   *	InventorySupply role.
    */
   readonly supplyChannel?: ChannelResourceIdentifier
   /**
-   *		The channel is used to select a ProductPrice.
-   *		The provided channel should have the ProductDistribution role.
+   *	The channel is used to select a ProductPrice.
+   *	The provided channel should have the ProductDistribution role.
    */
   readonly distributionChannel?: ChannelResourceIdentifier
   readonly taxRate?: TaxRate
   /**
-   *		The custom fields.
+   *	The custom fields.
    */
   readonly custom?: CustomFieldsDraft
   readonly shippingDetails?: ItemShippingDetailsDraft
 }
 export interface Order extends LoggedResource {
   /**
-   *		The unique ID of the order.
+   *	The unique ID of the order.
    */
   readonly id: string
   /**
-   *		The current version of the order.
+   *	The current version of the order.
    */
   readonly version: number
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   /**
-   *		This field will only be present if it was set for Order Import
+   *	This field will only be present if it was set for Order Import
    */
   readonly completedAt?: string
   /**
-   *		String that uniquely identifies an order.
-   *		It can be used to create more human-readable (in contrast to ID) identifier for the order.
-   *		It should be unique across a project.
-   *		Once it's set it cannot be changed.
+   *	String that uniquely identifies an order.
+   *	It can be used to create more human-readable (in contrast to ID) identifier for the order.
+   *	It should be unique across a project.
+   *	Once it's set it cannot be changed.
    */
   readonly orderNumber?: string
   readonly customerId?: string
   readonly customerEmail?: string
   /**
-   *		Identifies carts and orders belonging to an anonymous session (the customer has not signed up/in yet).
+   *	Identifies carts and orders belonging to an anonymous session (the customer has not signed up/in yet).
    */
   readonly anonymousId?: string
   readonly store?: StoreKeyReference
@@ -295,51 +295,51 @@ export interface Order extends LoggedResource {
   readonly customLineItems: CustomLineItem[]
   readonly totalPrice: TypedMoney
   /**
-   *		The taxes are calculated based on the shipping address.
+   *	The taxes are calculated based on the shipping address.
    */
   readonly taxedPrice?: TaxedPrice
   readonly shippingAddress?: Address
   readonly billingAddress?: Address
   readonly taxMode?: TaxMode
   /**
-   *		When calculating taxes for `taxedPrice`, the selected mode is used for rouding.
+   *	When calculating taxes for `taxedPrice`, the selected mode is used for rouding.
    */
   readonly taxRoundingMode?: RoundingMode
   /**
-   *		Set when the customer is set and the customer is a member of a customer group.
-   *		Used for product variant price selection.
+   *	Set when the customer is set and the customer is a member of a customer group.
+   *	Used for product variant price selection.
    */
   readonly customerGroup?: CustomerGroupReference
   /**
-   *		A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-   *		Used for product variant price selection.
+   *	A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   *	Used for product variant price selection.
    */
   readonly country?: string
   /**
-   *		One of the four predefined OrderStates.
+   *	One of the four predefined OrderStates.
    */
   readonly orderState: OrderState
   /**
-   *		This reference can point to a state in a custom workflow.
+   *	This reference can point to a state in a custom workflow.
    */
   readonly state?: StateReference
   readonly shipmentState?: ShipmentState
   readonly paymentState?: PaymentState
   /**
-   *		Set if the ShippingMethod is set.
+   *	Set if the ShippingMethod is set.
    */
   readonly shippingInfo?: ShippingInfo
   readonly syncInfo: SyncInfo[]
   readonly returnInfo?: ReturnInfo[]
   readonly discountCodes?: DiscountCodeInfo[]
   /**
-   *		The sequence number of the last order message produced by changes to this order.
-   *		`0` means, that no messages were created yet.
+   *	The sequence number of the last order message produced by changes to this order.
+   *	`0` means, that no messages were created yet.
    */
   readonly lastMessageSequenceNumber: number
   /**
-   *		Set when this order was created from a cart.
-   *		The cart will have the state `Ordered`.
+   *	Set when this order was created from a cart.
+   *	The cart will have the state `Ordered`.
    */
   readonly cart?: CartReference
   readonly custom?: CustomFields
@@ -348,115 +348,115 @@ export interface Order extends LoggedResource {
   readonly inventoryMode?: InventoryMode
   readonly origin: CartOrigin
   /**
-   *		When calculating taxes for `taxedPrice`, the selected mode is used for calculating the price with LineItemLevel (horizontally) or UnitPriceLevel (vertically) calculation mode.
+   *	When calculating taxes for `taxedPrice`, the selected mode is used for calculating the price with LineItemLevel (horizontally) or UnitPriceLevel (vertically) calculation mode.
    */
   readonly taxCalculationMode?: TaxCalculationMode
   /**
-   *		The shippingRateInput is used as an input to select a ShippingRatePriceTier.
+   *	The shippingRateInput is used as an input to select a ShippingRatePriceTier.
    */
   readonly shippingRateInput?: ShippingRateInput
   /**
-   *		Contains addresses for orders with multiple shipping addresses.
+   *	Contains addresses for orders with multiple shipping addresses.
    */
   readonly itemShippingAddresses?: Address[]
   /**
-   *		Automatically filled when a line item with LineItemMode `GiftLineItem` is removed from this order.
+   *	Automatically filled when a line item with LineItemMode `GiftLineItem` is removed from this order.
    */
   readonly refusedGifts: CartDiscountReference[]
 }
 export interface OrderFromCartDraft {
   /**
-   *		The unique id of the cart from which an order is created.
+   *	The unique id of the cart from which an order is created.
    */
   readonly id: string
   readonly version: number
   /**
-   *		String that uniquely identifies an order.
-   *		It can be used to create more human-readable (in contrast to ID) identifier for the order.
-   *		It should be unique across a project.
-   *		Once it's set it cannot be changed.
-   *		For easier use on Get, Update and Delete actions we suggest assigning order numbers that match the regular expression `[a-z0-9_\-]{2,36}`.
+   *	String that uniquely identifies an order.
+   *	It can be used to create more human-readable (in contrast to ID) identifier for the order.
+   *	It should be unique across a project.
+   *	Once it's set it cannot be changed.
+   *	For easier use on Get, Update and Delete actions we suggest assigning order numbers that match the regular expression `[a-z0-9_\-]{2,36}`.
    */
   readonly orderNumber?: string
   readonly paymentState?: PaymentState
   readonly shipmentState?: ShipmentState
   /**
-   *		Order will be created with `Open` status by default.
+   *	Order will be created with `Open` status by default.
    */
   readonly orderState?: OrderState
   readonly state?: StateResourceIdentifier
 }
 export interface OrderImportDraft {
   /**
-   *		String that unique identifies an order.
-   *		It can be used to create more human-readable (in contrast to ID) identifier for the order.
-   *		It should be unique within a project.
+   *	String that unique identifies an order.
+   *	It can be used to create more human-readable (in contrast to ID) identifier for the order.
+   *	It should be unique within a project.
    */
   readonly orderNumber?: string
   /**
-   *		If given the customer with that ID must exist in the project.
+   *	If given the customer with that ID must exist in the project.
    */
   readonly customerId?: string
   /**
-   *		The customer email can be used when no check against existing Customers is desired during order import.
+   *	The customer email can be used when no check against existing Customers is desired during order import.
    */
   readonly customerEmail?: string
   /**
-   *		If not given `customLineItems` must not be empty.
+   *	If not given `customLineItems` must not be empty.
    */
   readonly lineItems?: LineItemImportDraft[]
   /**
-   *		If not given `lineItems` must not be empty.
+   *	If not given `lineItems` must not be empty.
    */
   readonly customLineItems?: CustomLineItemDraft[]
   readonly totalPrice: Money
   /**
-   *		Order Import does not support calculation of taxes.
-   *		When setting the draft the taxedPrice is to be provided.
+   *	Order Import does not support calculation of taxes.
+   *	When setting the draft the taxedPrice is to be provided.
    */
   readonly taxedPrice?: TaxedPriceDraft
   readonly shippingAddress?: Address
   readonly billingAddress?: Address
   /**
-   *		Set when the customer is set and the customer is a member of a customer group.
-   *		Used for product variant price selection.
+   *	Set when the customer is set and the customer is a member of a customer group.
+   *	Used for product variant price selection.
    */
   readonly customerGroup?: CustomerGroupResourceIdentifier
   /**
-   *		A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-   *		Used for product variant price selection.
+   *	A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   *	Used for product variant price selection.
    */
   readonly country?: string
   /**
-   *		If not given the `Open` state will be assigned by default.
+   *	If not given the `Open` state will be assigned by default.
    */
   readonly orderState?: OrderState
   readonly shipmentState?: ShipmentState
   readonly paymentState?: PaymentState
   /**
-   *		Set if the ShippingMethod is set.
+   *	Set if the ShippingMethod is set.
    */
   readonly shippingInfo?: ShippingInfoImportDraft
   readonly completedAt?: string
   /**
-   *		The custom fields.
+   *	The custom fields.
    */
   readonly custom?: CustomFieldsDraft
   /**
-   *		If not given the mode `None` will be assigned by default.
+   *	If not given the mode `None` will be assigned by default.
    */
   readonly inventoryMode?: InventoryMode
   /**
-   *		If not given the tax rounding mode `HalfEven` will be assigned by default.
+   *	If not given the tax rounding mode `HalfEven` will be assigned by default.
    */
   readonly taxRoundingMode?: RoundingMode
   /**
-   *		Contains addresses for orders with multiple shipping addresses.
+   *	Contains addresses for orders with multiple shipping addresses.
    */
   readonly itemShippingAddresses?: Address[]
   readonly store?: StoreResourceIdentifier
   /**
-   *		The default origin is `Customer`.
+   *	The default origin is `Customer`.
    */
   readonly origin?: CartOrigin
 }
@@ -529,7 +529,7 @@ export interface Parcel {
   readonly measurements?: ParcelMeasurements
   readonly trackingData?: TrackingData
   /**
-   *		The delivery items contained in this parcel.
+   *	The delivery items contained in this parcel.
    */
   readonly items?: DeliveryItem[]
 }
@@ -537,7 +537,7 @@ export interface ParcelDraft {
   readonly measurements?: ParcelMeasurements
   readonly trackingData?: TrackingData
   /**
-   *		The delivery items contained in this parcel.
+   *	The delivery items contained in this parcel.
    */
   readonly items?: DeliveryItem[]
 }
@@ -558,36 +558,36 @@ export type PaymentState =
   | 'Paid'
 export interface ProductVariantImportDraft {
   /**
-   *		The sequential ID of the variant within the product.
-   *		The variant with provided ID should exist in some existing product, so you also need to specify the productId if this property is set,
-   *		or alternatively you can just specify SKU of the product variant.
+   *	The sequential ID of the variant within the product.
+   *	The variant with provided ID should exist in some existing product, so you also need to specify the productId if this property is set,
+   *	or alternatively you can just specify SKU of the product variant.
    */
   readonly id?: number
   /**
-   *		The SKU of the existing variant.
+   *	The SKU of the existing variant.
    */
   readonly sku?: string
   /**
-   *		The prices of the variant.
-   *		The prices should not contain two prices for the same price scope (same currency, country and customer group).
-   *		If this property is defined, then it will override the `prices` property from the original product variant, otherwise `prices` property from the original product variant would be copied in the resulting order.
+   *	The prices of the variant.
+   *	The prices should not contain two prices for the same price scope (same currency, country and customer group).
+   *	If this property is defined, then it will override the `prices` property from the original product variant, otherwise `prices` property from the original product variant would be copied in the resulting order.
    */
   readonly prices?: PriceDraft[]
   /**
-   *		If this property is defined, then it will override the `attributes` property from the original
-   *		product variant, otherwise `attributes` property from the original product variant would be copied in the resulting order.
+   *	If this property is defined, then it will override the `attributes` property from the original
+   *	product variant, otherwise `attributes` property from the original product variant would be copied in the resulting order.
    */
   readonly attributes?: Attribute[]
   /**
-   *		If this property is defined, then it will override the `images` property from the original
-   *		product variant, otherwise `images` property from the original product variant would be copied in the resulting order.
+   *	If this property is defined, then it will override the `images` property from the original
+   *	product variant, otherwise `images` property from the original product variant would be copied in the resulting order.
    */
   readonly images?: Image[]
 }
 export interface ReturnInfo {
   readonly items: ReturnItem[]
   /**
-   *		Identifies, which return tracking ID is connected to this particular return.
+   *	Identifies, which return tracking ID is connected to this particular return.
    */
   readonly returnTrackingId?: string
   readonly returnDate?: string
@@ -643,32 +643,32 @@ export interface ShippingInfoImportDraft {
   readonly shippingMethodName: string
   readonly price: Money
   /**
-   *		The shipping rate used to determine the price.
+   *	The shipping rate used to determine the price.
    */
   readonly shippingRate: ShippingRateDraft
   readonly taxRate?: TaxRate
   readonly taxCategory?: TaxCategoryResourceIdentifier
   /**
-   *		Not set if custom shipping method is used.
+   *	Not set if custom shipping method is used.
    */
   readonly shippingMethod?: ShippingMethodResourceIdentifier
   /**
-   *		Deliveries are compilations of information on how the articles are being delivered to the customers.
+   *	Deliveries are compilations of information on how the articles are being delivered to the customers.
    */
   readonly deliveries?: Delivery[]
   readonly discountedPrice?: DiscountedLineItemPriceDraft
   /**
-   *		Indicates whether the ShippingMethod referenced is allowed for the cart or not.
+   *	Indicates whether the ShippingMethod referenced is allowed for the cart or not.
    */
   readonly shippingMethodState?: ShippingMethodState
 }
 export interface SyncInfo {
   /**
-   *		Connection to a particular synchronization destination.
+   *	Connection to a particular synchronization destination.
    */
   readonly channel: ChannelReference
   /**
-   *		Can be used to reference an external order instance, file etc.
+   *	Can be used to reference an external order instance, file etc.
    */
   readonly externalId?: string
   readonly syncedAt: string
@@ -679,17 +679,17 @@ export interface TaxedItemPriceDraft {
 }
 export interface TrackingData {
   /**
-   *		The ID to track one parcel.
+   *	The ID to track one parcel.
    */
   readonly trackingId?: string
   /**
-   *		The carrier that delivers the parcel.
+   *	The carrier that delivers the parcel.
    */
   readonly carrier?: string
   readonly provider?: string
   readonly providerTransaction?: string
   /**
-   *		Flag to distinguish if the parcel is on the way to the customer (false) or on the way back (true).
+   *	Flag to distinguish if the parcel is on the way to the customer (false) or on the way back (true).
    */
   readonly isReturn?: boolean
 }

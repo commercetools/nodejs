@@ -22,63 +22,63 @@ import {
 
 export interface DiscountCode extends LoggedResource {
   /**
-   *		The unique ID of the discount code.
+   *	The unique ID of the discount code.
    */
   readonly id: string
   readonly version: number
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   readonly name?: LocalizedString
   readonly description?: LocalizedString
   /**
-   *		Unique identifier of this discount code.
-   *		This value is added to the cart
-   *		to enable the related cart discounts in the cart.
+   *	Unique identifier of this discount code.
+   *	This value is added to the cart
+   *	to enable the related cart discounts in the cart.
    */
   readonly code: string
   /**
-   *		The referenced matching cart discounts can be applied to the cart once the DiscountCode is added.
+   *	The referenced matching cart discounts can be applied to the cart once the DiscountCode is added.
    */
   readonly cartDiscounts: CartDiscountReference[]
   /**
-   *		The discount code can only be applied to carts that match this predicate.
+   *	The discount code can only be applied to carts that match this predicate.
    */
   readonly cartPredicate?: string
   readonly isActive: boolean
   /**
-   *		The platform will generate this array from the cart predicate.
-   *		It contains the references of all the resources that are addressed in the predicate.
+   *	The platform will generate this array from the cart predicate.
+   *	It contains the references of all the resources that are addressed in the predicate.
    */
   readonly references: Reference[]
   /**
-   *		The discount code can only be applied `maxApplications` times.
+   *	The discount code can only be applied `maxApplications` times.
    */
   readonly maxApplications?: number
   /**
-   *		The discount code can only be applied `maxApplicationsPerCustomer` times per customer.
+   *	The discount code can only be applied `maxApplicationsPerCustomer` times per customer.
    */
   readonly maxApplicationsPerCustomer?: number
   readonly custom?: CustomFields
   /**
-   *		The groups to which this discount code belong.
+   *	The groups to which this discount code belong.
    */
   readonly groups: string[]
   /**
-   *		The time from which the discount can be applied on a cart.
-   *		Before that time the code is invalid.
+   *	The time from which the discount can be applied on a cart.
+   *	Before that time the code is invalid.
    */
   readonly validFrom?: string
   /**
-   *		The time until the discount can be applied on a cart.
-   *		After that time the code is invalid.
+   *	The time until the discount can be applied on a cart.
+   *	After that time the code is invalid.
    */
   readonly validUntil?: string
 }
@@ -86,18 +86,18 @@ export interface DiscountCodeDraft {
   readonly name?: LocalizedString
   readonly description?: LocalizedString
   /**
-   *		Unique identifier of this discount code.
-   *		This value is added to the cart
-   *		to enable the related cart discounts in the cart.
+   *	Unique identifier of this discount code.
+   *	This value is added to the cart
+   *	to enable the related cart discounts in the cart.
    */
   readonly code: string
   /**
-   *		The referenced matching cart discounts can be applied to the cart once the discount code is added.
-   *		The number of cart discounts in a discount code is limited to **10**.
+   *	The referenced matching cart discounts can be applied to the cart once the discount code is added.
+   *	The number of cart discounts in a discount code is limited to **10**.
    */
   readonly cartDiscounts: CartDiscountResourceIdentifier[]
   /**
-   *		The discount code can only be applied to carts that match this predicate.
+   *	The discount code can only be applied to carts that match this predicate.
    */
   readonly cartPredicate?: string
   readonly isActive?: boolean
@@ -105,17 +105,17 @@ export interface DiscountCodeDraft {
   readonly maxApplicationsPerCustomer?: number
   readonly custom?: CustomFieldsDraft
   /**
-   *		The groups to which this discount code shall belong to.
+   *	The groups to which this discount code shall belong to.
    */
   readonly groups?: string[]
   /**
-   *		The time from which the discount can be applied on a cart.
-   *		Before that time the code is invalid.
+   *	The time from which the discount can be applied on a cart.
+   *	Before that time the code is invalid.
    */
   readonly validFrom?: string
   /**
-   *		The time until the discount can be applied on a cart.
-   *		After that time the code is invalid.
+   *	The time until the discount can be applied on a cart.
+   *	After that time the code is invalid.
    */
   readonly validUntil?: string
 }

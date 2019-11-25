@@ -12,7 +12,7 @@ export class ByProjectKeySubscriptionsByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Retrieves the representation of a subscription by its id.
+   *	Retrieves the representation of a subscription by its id.
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeySubscriptionsByIDRequestBuilder {
     )
   }
   /**
-   *		Update Subscription by ID
+   *	Update Subscription by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeySubscriptionsByIDRequestBuilder {
     )
   }
   /**
-   *		Delete Subscription by ID
+   *	Delete Subscription by ID
    */
   public delete(methodArgs: {
     queryArgs: {

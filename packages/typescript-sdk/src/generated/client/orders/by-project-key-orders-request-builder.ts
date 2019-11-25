@@ -38,7 +38,7 @@ export class ByProjectKeyOrdersRequestBuilder {
     })
   }
   /**
-   *		OrderEdit are containers for financial changes after an Order has been placed.
+   *	OrderEdit are containers for financial changes after an Order has been placed.
    */
   public edits(): ByProjectKeyOrdersEditsRequestBuilder {
     return new ByProjectKeyOrdersEditsRequestBuilder({
@@ -61,7 +61,7 @@ export class ByProjectKeyOrdersRequestBuilder {
   }
 
   /**
-   *		Query orders
+   *	Query orders
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -91,9 +91,9 @@ export class ByProjectKeyOrdersRequestBuilder {
     )
   }
   /**
-   *		Creates an order from a Cart.
-   *		The cart must have a shipping address set before creating an order.
-   *		When using the Platform TaxMode, the shipping address is used for tax calculation.
+   *	Creates an order from a Cart.
+   *	The cart must have a shipping address set before creating an order.
+   *	When using the Platform TaxMode, the shipping address is used for tax calculation.
    *
    */
   public post(methodArgs: {

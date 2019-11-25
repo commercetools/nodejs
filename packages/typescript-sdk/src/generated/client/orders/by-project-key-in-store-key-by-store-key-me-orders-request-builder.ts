@@ -26,7 +26,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeOrdersRequestBuilder {
   }
 
   /**
-   *		Query orders
+   *	Query orders
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -56,7 +56,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeOrdersRequestBuilder {
     )
   }
   /**
-   *		Create Order
+   *	Create Order
    */
   public post(methodArgs: {
     queryArgs?: {

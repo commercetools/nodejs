@@ -15,31 +15,31 @@ export interface SubRate {
 }
 export interface TaxCategory extends LoggedResource {
   /**
-   *		The unique ID of the category.
+   *	The unique ID of the category.
    */
   readonly id: string
   /**
-   *		The current version of the category.
+   *	The current version of the category.
    */
   readonly version: number
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   readonly name: string
   readonly description?: string
   /**
-   *		The tax rates have unique IDs in the rates list
+   *	The tax rates have unique IDs in the rates list
    */
   readonly rates: TaxRate[]
   /**
-   *		User-specific unique identifier for the category.
+   *	User-specific unique identifier for the category.
    */
   readonly key?: string
 }
@@ -79,55 +79,55 @@ export type TaxCategoryUpdateAction =
   | TaxCategorySetKeyAction
 export interface TaxRate {
   /**
-   *		The ID is always set if the tax rate is part of a TaxCategory.
-   *		The external tax rates in a
-   *		Cart do not contain an `id`.
+   *	The ID is always set if the tax rate is part of a TaxCategory.
+   *	The external tax rates in a
+   *	Cart do not contain an `id`.
    */
   readonly id?: string
   readonly name: string
   /**
-   *		Percentage in the range of [0..1].
-   *		The sum of the amounts of all `subRates`, if there are any.
+   *	Percentage in the range of [0..1].
+   *	The sum of the amounts of all `subRates`, if there are any.
    */
   readonly amount: number
   readonly includedInPrice: boolean
   /**
-   *		A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   *	A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
    */
   readonly country: string
   /**
-   *		The state in the country
+   *	The state in the country
    */
   readonly state?: string
   /**
-   *		For countries (e.g.
-   *		the US) where the total tax is a combination of multiple taxes (e.g.
-   *		state and local taxes).
+   *	For countries (e.g.
+   *	the US) where the total tax is a combination of multiple taxes (e.g.
+   *	state and local taxes).
    */
   readonly subRates?: SubRate[]
 }
 export interface TaxRateDraft {
   readonly name: string
   /**
-   *		Percentage in the range of [0..1].
-   *		Must be supplied if no `subRates` are specified.
-   *		If `subRates` are specified
-   *		then the `amount` can be omitted or it must be the sum of the amounts of all `subRates`.
+   *	Percentage in the range of [0..1].
+   *	Must be supplied if no `subRates` are specified.
+   *	If `subRates` are specified
+   *	then the `amount` can be omitted or it must be the sum of the amounts of all `subRates`.
    */
   readonly amount?: number
   readonly includedInPrice: boolean
   /**
-   *		A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+   *	A two-digit country code as per [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
    */
   readonly country: string
   /**
-   *		The state in the country
+   *	The state in the country
    */
   readonly state?: string
   /**
-   *		For countries (e.g.
-   *		the US) where the total tax is a combination of multiple taxes (e.g.
-   *		state and local taxes).
+   *	For countries (e.g.
+   *	the US) where the total tax is a combination of multiple taxes (e.g.
+   *	state and local taxes).
    */
   readonly subRates?: SubRate[]
 }

@@ -24,7 +24,7 @@ export class ByProjectKeyMessagesRequestBuilder {
   }
 
   /**
-   *		Query messages
+   *	Query messages
    */
   public get(methodArgs?: {
     queryArgs?: {

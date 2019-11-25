@@ -50,10 +50,10 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersRequestBuilder {
     )
   }
   /**
-   *		To verify a customer's email, an email token can be created. This should be embedded in a link and sent to the
-   *		customer via email. When the customer clicks on the link,
-   *		the "verify customer's email" endpoint should be called,
-   *		which sets customer's isVerifiedEmail field to true.
+   *	To verify a customer's email, an email token can be created. This should be embedded in a link and sent to the
+   *	customer via email. When the customer clicks on the link,
+   *	the "verify customer's email" endpoint should be called,
+   *	which sets customer's isVerifiedEmail field to true.
    *
    */
   public emailToken(): ByProjectKeyInStoreKeyByStoreKeyCustomersEmailTokenRequestBuilder {
@@ -83,11 +83,11 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersRequestBuilder {
     })
   }
   /**
-   *		The following workflow can be used to reset the customer's password:
+   *	The following workflow can be used to reset the customer's password:
    *
-   *		* Create a password reset token and send it embedded in a link to the customer.
-   *		* When the customer clicks on the link, the customer is retrieved with the token.
-   *		* The customer enters a new password and the "reset customer's password" endpoint is called.
+   *	* Create a password reset token and send it embedded in a link to the customer.
+   *	* When the customer clicks on the link, the customer is retrieved with the token.
+   *	* The customer enters a new password and the "reset customer's password" endpoint is called.
    *
    */
   public passwordToken(): ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordTokenRequestBuilder {
@@ -124,7 +124,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersRequestBuilder {
   }
 
   /**
-   *		Query customers
+   *	Query customers
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -154,14 +154,14 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersRequestBuilder {
     )
   }
   /**
-   *		Creates a customer in a specific Store. The {storeKey} path parameter maps to a Store’s key.
-   *		When using this endpoint, if omitted,
-   *		the customer’s stores field is set to the store specified in the path parameter.
-   *		If an anonymous cart is passed in as when using this method,
-   *		then the cart is assigned to the created customer and the version number of the Cart increases.
-   *		If the ID of an anonymous session is given, all carts and orders will be assigned to the created customer and
-   *		the store specified. If you pass in a cart with a store field specified,
-   *		the store field must reference the same store specified in the {storeKey} path parameter.
+   *	Creates a customer in a specific Store. The {storeKey} path parameter maps to a Store’s key.
+   *	When using this endpoint, if omitted,
+   *	the customer’s stores field is set to the store specified in the path parameter.
+   *	If an anonymous cart is passed in as when using this method,
+   *	then the cart is assigned to the created customer and the version number of the Cart increases.
+   *	If the ID of an anonymous session is given, all carts and orders will be assigned to the created customer and
+   *	the store specified. If you pass in a cart with a store field specified,
+   *	the store field must reference the same store specified in the {storeKey} path parameter.
    *
    */
   public post(methodArgs: {

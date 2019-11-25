@@ -12,7 +12,7 @@ export class ByProjectKeyApiClientsByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get ApiClient by ID
+   *	Get ApiClient by ID
    */
   public get(methodArgs?: {
     headers?: {
@@ -33,7 +33,7 @@ export class ByProjectKeyApiClientsByIDRequestBuilder {
     )
   }
   /**
-   *		Delete ApiClient by ID
+   *	Delete ApiClient by ID
    */
   public delete(methodArgs?: {
     headers?: {

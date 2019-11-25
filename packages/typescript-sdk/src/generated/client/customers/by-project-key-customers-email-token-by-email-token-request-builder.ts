@@ -12,7 +12,7 @@ export class ByProjectKeyCustomersEmailTokenByEmailTokenRequestBuilder {
     }
   ) {}
   /**
-   *		Get Customer by emailToken
+   *	Get Customer by emailToken
    */
   public get(methodArgs?: {
     queryArgs?: {

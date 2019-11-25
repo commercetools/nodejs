@@ -16,7 +16,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyRequestBuilder {
     }
   ) {}
   /**
-   *		A shopping cart holds product variants and can be ordered.
+   *	A shopping cart holds product variants and can be ordered.
    */
   public carts(): ByProjectKeyInStoreKeyByStoreKeyCartsRequestBuilder {
     return new ByProjectKeyInStoreKeyByStoreKeyCartsRequestBuilder({
@@ -27,7 +27,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyRequestBuilder {
     })
   }
   /**
-   *		An order can be created from a cart, usually after a checkout process has been completed.
+   *	An order can be created from a cart, usually after a checkout process has been completed.
    */
   public orders(): ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder {
     return new ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder({
@@ -46,8 +46,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyRequestBuilder {
     })
   }
   /**
-   *		A customer is a person purchasing products. customers, Orders,
-   *		Comments and Reviews can be associated to a customer.
+   *	A customer is a person purchasing products. customers, Orders,
+   *	Comments and Reviews can be associated to a customer.
    *
    */
   public customers(): ByProjectKeyInStoreKeyByStoreKeyCustomersRequestBuilder {
@@ -59,7 +59,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyRequestBuilder {
     })
   }
   /**
-   *		Retrieves the authenticated customer.
+   *	Retrieves the authenticated customer.
    */
   public login(): ByProjectKeyInStoreKeyByStoreKeyLoginRequestBuilder {
     return new ByProjectKeyInStoreKeyByStoreKeyLoginRequestBuilder({

@@ -36,7 +36,7 @@ export class ByProjectKeyZonesRequestBuilder {
   }
 
   /**
-   *		Query zones
+   *	Query zones
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -66,7 +66,7 @@ export class ByProjectKeyZonesRequestBuilder {
     )
   }
   /**
-   *		Create Zone
+   *	Create Zone
    */
   public post(methodArgs: {
     queryArgs?: {

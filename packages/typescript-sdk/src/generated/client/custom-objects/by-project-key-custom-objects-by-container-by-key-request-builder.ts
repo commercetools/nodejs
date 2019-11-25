@@ -13,7 +13,7 @@ export class ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder {
     }
   ) {}
   /**
-   *		Get CustomObject by key
+   *	Get CustomObject by key
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -38,7 +38,7 @@ export class ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder {
     )
   }
   /**
-   *		Delete CustomObject by key
+   *	Delete CustomObject by key
    */
   public delete(methodArgs?: {
     queryArgs?: {

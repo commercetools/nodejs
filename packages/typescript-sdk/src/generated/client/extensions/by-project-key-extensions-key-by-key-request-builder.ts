@@ -12,7 +12,7 @@ export class ByProjectKeyExtensionsKeyByKeyRequestBuilder {
     }
   ) {}
   /**
-   *		Retrieves the representation of an extension by its key.
+   *	Retrieves the representation of an extension by its key.
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyExtensionsKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Update Extension by key
+   *	Update Extension by key
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyExtensionsKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Delete Extension by key
+   *	Delete Extension by key
    */
   public delete(methodArgs: {
     queryArgs: {

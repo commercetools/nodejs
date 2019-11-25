@@ -15,8 +15,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordTokenRequestBuilde
     }
   ) {}
   /**
-   *		The token value is used to reset the password of the customer with the given email. The token is
-   *		valid only for 10 minutes.
+   *	The token value is used to reset the password of the customer with the given email. The token is
+   *	valid only for 10 minutes.
    *
    */
   public post(methodArgs: {

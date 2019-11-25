@@ -12,7 +12,7 @@ export class ByProjectKeyInventoryByIDRequestBuilder {
     }
   ) {}
   /**
-   *		Get InventoryEntry by ID
+   *	Get InventoryEntry by ID
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyInventoryByIDRequestBuilder {
     )
   }
   /**
-   *		Update InventoryEntry by ID
+   *	Update InventoryEntry by ID
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyInventoryByIDRequestBuilder {
     )
   }
   /**
-   *		Delete InventoryEntry by ID
+   *	Delete InventoryEntry by ID
    */
   public delete(methodArgs: {
     queryArgs: {

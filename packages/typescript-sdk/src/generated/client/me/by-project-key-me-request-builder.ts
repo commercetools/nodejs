@@ -62,7 +62,7 @@ export class ByProjectKeyMeRequestBuilder {
     })
   }
   /**
-   *		A shopping cart holds product variants and can be ordered.
+   *	A shopping cart holds product variants and can be ordered.
    */
   public carts(): ByProjectKeyMeCartsRequestBuilder {
     return new ByProjectKeyMeCartsRequestBuilder({
@@ -73,7 +73,7 @@ export class ByProjectKeyMeRequestBuilder {
     })
   }
   /**
-   *		An order can be created from a cart, usually after a checkout process has been completed.
+   *	An order can be created from a cart, usually after a checkout process has been completed.
    */
   public orders(): ByProjectKeyMeOrdersRequestBuilder {
     return new ByProjectKeyMeOrdersRequestBuilder({
@@ -84,7 +84,7 @@ export class ByProjectKeyMeRequestBuilder {
     })
   }
   /**
-   *		The My Payments endpoint creates and provides access to payments scoped to a specific user.
+   *	The My Payments endpoint creates and provides access to payments scoped to a specific user.
    */
   public payments(): ByProjectKeyMePaymentsRequestBuilder {
     return new ByProjectKeyMePaymentsRequestBuilder({
@@ -95,7 +95,7 @@ export class ByProjectKeyMeRequestBuilder {
     })
   }
   /**
-   *		The My Shopping Lists endpoint creates and provides access to shopping lists scoped to a specific user.
+   *	The My Shopping Lists endpoint creates and provides access to shopping lists scoped to a specific user.
    */
   public shoppingLists(): ByProjectKeyMeShoppingListsRequestBuilder {
     return new ByProjectKeyMeShoppingListsRequestBuilder({
@@ -142,7 +142,7 @@ export class ByProjectKeyMeRequestBuilder {
     )
   }
   /**
-   *		Create a customer
+   *	Create a customer
    */
   public post(methodArgs: {
     body: Update
@@ -166,7 +166,7 @@ export class ByProjectKeyMeRequestBuilder {
     )
   }
   /**
-   *		Delete a Customer
+   *	Delete a Customer
    */
   public delete(methodArgs: {
     queryArgs: {

@@ -12,7 +12,7 @@ export class ByProjectKeyProductTypesKeyByKeyRequestBuilder {
     }
   ) {}
   /**
-   *		Get ProductType by key
+   *	Get ProductType by key
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyProductTypesKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Update ProductType by key
+   *	Update ProductType by key
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyProductTypesKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Delete ProductType by key
+   *	Delete ProductType by key
    */
   public delete(methodArgs: {
     queryArgs: {

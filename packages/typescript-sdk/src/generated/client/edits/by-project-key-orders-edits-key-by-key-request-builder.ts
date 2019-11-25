@@ -12,7 +12,7 @@ export class ByProjectKeyOrdersEditsKeyByKeyRequestBuilder {
     }
   ) {}
   /**
-   *		Get OrderEdit by key
+   *	Get OrderEdit by key
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -37,7 +37,7 @@ export class ByProjectKeyOrdersEditsKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Update OrderEdit by key
+   *	Update OrderEdit by key
    */
   public post(methodArgs: {
     queryArgs?: {
@@ -65,7 +65,7 @@ export class ByProjectKeyOrdersEditsKeyByKeyRequestBuilder {
     )
   }
   /**
-   *		Delete OrderEdit by key
+   *	Delete OrderEdit by key
    */
   public delete(methodArgs: {
     queryArgs: {

@@ -45,9 +45,9 @@ export class ByProjectKeyCustomersRequestBuilder {
     })
   }
   /**
-   *		To verify a customer's email, an email token can be created. This should be embedded in a link and sent to the
-   *		customer via email. When the customer clicks on the link, the "verify customer's email" endpoint should be called,
-   *		which sets customer's isVerifiedEmail field to true.
+   *	To verify a customer's email, an email token can be created. This should be embedded in a link and sent to the
+   *	customer via email. When the customer clicks on the link, the "verify customer's email" endpoint should be called,
+   *	which sets customer's isVerifiedEmail field to true.
    *
    */
   public emailToken(): ByProjectKeyCustomersEmailTokenRequestBuilder {
@@ -75,11 +75,11 @@ export class ByProjectKeyCustomersRequestBuilder {
     })
   }
   /**
-   *		The following workflow can be used to reset the customer's password:
+   *	The following workflow can be used to reset the customer's password:
    *
-   *		* Create a password reset token and send it embedded in a link to the customer.
-   *		* When the customer clicks on the link, the customer is retrieved with the token.
-   *		* The customer enters a new password and the "reset customer's password" endpoint is called.
+   *	* Create a password reset token and send it embedded in a link to the customer.
+   *	* When the customer clicks on the link, the customer is retrieved with the token.
+   *	* The customer enters a new password and the "reset customer's password" endpoint is called.
    *
    */
   public passwordToken(): ByProjectKeyCustomersPasswordTokenRequestBuilder {
@@ -114,7 +114,7 @@ export class ByProjectKeyCustomersRequestBuilder {
   }
 
   /**
-   *		Query customers
+   *	Query customers
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -144,9 +144,9 @@ export class ByProjectKeyCustomersRequestBuilder {
     )
   }
   /**
-   *		Creates a customer. If an anonymous cart is passed in,
-   *		then the cart is assigned to the created customer and the version number of the Cart will increase.
-   *		If the ID of an anonymous session is given, all carts and orders will be assigned to the created customer.
+   *	Creates a customer. If an anonymous cart is passed in,
+   *	then the cart is assigned to the created customer and the version number of the Cart will increase.
+   *	If the ID of an anonymous session is given, all carts and orders will be assigned to the created customer.
    *
    */
   public post(methodArgs: {

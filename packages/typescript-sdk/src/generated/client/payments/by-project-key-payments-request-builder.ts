@@ -40,7 +40,7 @@ export class ByProjectKeyPaymentsRequestBuilder {
   }
 
   /**
-   *		Query payments
+   *	Query payments
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -70,7 +70,7 @@ export class ByProjectKeyPaymentsRequestBuilder {
     )
   }
   /**
-   *		To create a payment object a payment draft object has to be given with the request.
+   *	To create a payment object a payment draft object has to be given with the request.
    */
   public post(methodArgs: {
     queryArgs?: {

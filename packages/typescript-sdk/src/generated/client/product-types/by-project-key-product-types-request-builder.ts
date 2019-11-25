@@ -40,7 +40,7 @@ export class ByProjectKeyProductTypesRequestBuilder {
   }
 
   /**
-   *		Query product-types
+   *	Query product-types
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -70,7 +70,7 @@ export class ByProjectKeyProductTypesRequestBuilder {
     )
   }
   /**
-   *		Create ProductType
+   *	Create ProductType
    */
   public post(methodArgs: {
     queryArgs?: {

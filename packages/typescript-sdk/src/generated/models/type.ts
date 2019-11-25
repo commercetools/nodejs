@@ -21,17 +21,17 @@ export interface CustomFieldLocalizedEnumValue {
 export interface CustomFields {
   readonly type: TypeReference
   /**
-   *		A valid JSON object, based on FieldDefinition.
+   *	A valid JSON object, based on FieldDefinition.
    */
   readonly fields: FieldContainer
 }
 export interface CustomFieldsDraft {
   /**
-   *		The `id` or the `key` of the type to use.
+   *	The `id` or the `key` of the type to use.
    */
   readonly type: TypeResourceIdentifier
   /**
-   *		A valid JSON object, based on the FieldDefinitions of the Type.
+   *	A valid JSON object, based on the FieldDefinitions of the Type.
    */
   readonly fields?: FieldContainer
 }
@@ -40,27 +40,27 @@ export interface FieldContainer {
 }
 export interface FieldDefinition {
   /**
-   *		Describes the type of the field.
+   *	Describes the type of the field.
    */
   readonly type: FieldType
   /**
-   *		The name of the field.
-   *		The name must be between two and 36 characters long and can contain the ASCII letters A to Z in lowercase or uppercase, digits, underscores (`_`) and the hyphen-minus (`-`).
-   *		The name must be unique for a given resource type ID.
-   *		In case there is a field with the same name in another type it has to have the same FieldType also.
+   *	The name of the field.
+   *	The name must be between two and 36 characters long and can contain the ASCII letters A to Z in lowercase or uppercase, digits, underscores (`_`) and the hyphen-minus (`-`).
+   *	The name must be unique for a given resource type ID.
+   *	In case there is a field with the same name in another type it has to have the same FieldType also.
    */
   readonly name: string
   /**
-   *		A human-readable label for the field.
+   *	A human-readable label for the field.
    */
   readonly label: LocalizedString
   /**
-   *		Whether the field is required to have a value.
+   *	Whether the field is required to have a value.
    */
   readonly required: boolean
   /**
-   *		Provides a visual representation type for this field.
-   *		It is only relevant for string-based field types like StringType and LocalizedStringType.
+   *	Provides a visual representation type for this field.
+   *	It is only relevant for string-based field types like StringType and LocalizedStringType.
    */
   readonly inputHint?: TypeTextInputHint
 }
@@ -138,32 +138,32 @@ export type ResourceTypeId =
   | 'customer-group'
 export interface Type extends LoggedResource {
   /**
-   *		The unique ID of the type.
+   *	The unique ID of the type.
    */
   readonly id: string
   /**
-   *		The current version of the type.
+   *	The current version of the type.
    */
   readonly version: number
   readonly createdAt: string
   readonly lastModifiedAt: string
   /**
-   *		Present on resources updated after 1/02/2019 except for events not tracked.
+   *	Present on resources updated after 1/02/2019 except for events not tracked.
    */
   readonly lastModifiedBy?: LastModifiedBy
   /**
-   *		Present on resources created after 1/02/2019 except for events not tracked.
+   *	Present on resources created after 1/02/2019 except for events not tracked.
    */
   readonly createdBy?: CreatedBy
   /**
-   *		Identifier for the type (max.
-   *		256 characters).
+   *	Identifier for the type (max.
+   *	256 characters).
    */
   readonly key: string
   readonly name: LocalizedString
   readonly description?: LocalizedString
   /**
-   *		Defines for which resource(s) the type is valid.
+   *	Defines for which resource(s) the type is valid.
    */
   readonly resourceTypeIds: ResourceTypeId[]
   readonly fieldDefinitions: FieldDefinition[]
@@ -173,7 +173,7 @@ export interface TypeDraft {
   readonly name: LocalizedString
   readonly description?: LocalizedString
   /**
-   *		The IDs of the resources that can be customized with this type.
+   *	The IDs of the resources that can be customized with this type.
    */
   readonly resourceTypeIds: ResourceTypeId[]
   readonly fieldDefinitions?: FieldDefinition[]

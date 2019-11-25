@@ -28,7 +28,7 @@ export class ByProjectKeyChannelsRequestBuilder {
   }
 
   /**
-   *		Query channels
+   *	Query channels
    */
   public get(methodArgs?: {
     queryArgs?: {
@@ -58,7 +58,7 @@ export class ByProjectKeyChannelsRequestBuilder {
     )
   }
   /**
-   *		Create Channel
+   *	Create Channel
    */
   public post(methodArgs: {
     queryArgs?: {
