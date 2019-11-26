@@ -11,7 +11,9 @@ export class ByProjectKeyStoresByIDRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Get Store by ID
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -27,14 +29,16 @@ export class ByProjectKeyStoresByIDRequestBuilder {
         uriTemplate: '/{projectKey}/stores/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Update Store by ID
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -52,15 +56,17 @@ export class ByProjectKeyStoresByIDRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Delete Store by ID
+   */
   public delete(methodArgs: {
     queryArgs: {
       version: number | number[]
@@ -77,9 +83,9 @@ export class ByProjectKeyStoresByIDRequestBuilder {
         uriTemplate: '/{projectKey}/stores/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

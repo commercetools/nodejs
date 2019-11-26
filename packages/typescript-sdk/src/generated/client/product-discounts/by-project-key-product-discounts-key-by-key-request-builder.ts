@@ -14,7 +14,9 @@ export class ByProjectKeyProductDiscountsKeyByKeyRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Get ProductDiscount by key
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -30,14 +32,16 @@ export class ByProjectKeyProductDiscountsKeyByKeyRequestBuilder {
         uriTemplate: '/{projectKey}/product-discounts/key={key}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Update ProductDiscount by key
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -55,15 +59,17 @@ export class ByProjectKeyProductDiscountsKeyByKeyRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Delete ProductDiscount by key
+   */
   public delete(methodArgs: {
     queryArgs: {
       version: number | number[]
@@ -80,9 +86,9 @@ export class ByProjectKeyProductDiscountsKeyByKeyRequestBuilder {
         uriTemplate: '/{projectKey}/product-discounts/key={key}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

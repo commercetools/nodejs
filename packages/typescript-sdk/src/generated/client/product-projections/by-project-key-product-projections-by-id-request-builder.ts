@@ -11,7 +11,12 @@ export class ByProjectKeyProductProjectionsByIDRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Gets the current or staged representation of a product in a catalog by ID.
+   *	When used with an API client that has the view_published_products:{projectKey} scope,
+   *	this endpoint only returns published (current) product projections.
+   *
+   */
   public get(methodArgs?: {
     queryArgs?: {
       staged?: boolean | boolean[]
@@ -32,9 +37,9 @@ export class ByProjectKeyProductProjectionsByIDRequestBuilder {
         uriTemplate: '/{projectKey}/product-projections/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

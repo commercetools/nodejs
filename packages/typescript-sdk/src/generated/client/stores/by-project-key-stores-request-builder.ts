@@ -16,7 +16,6 @@ export class ByProjectKeyStoresRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withKey(childPathArgs: {
     key: string
   }): ByProjectKeyStoresKeyByKeyRequestBuilder {
@@ -28,7 +27,6 @@ export class ByProjectKeyStoresRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyStoresByIDRequestBuilder {
@@ -41,6 +39,9 @@ export class ByProjectKeyStoresRequestBuilder {
     })
   }
 
+  /**
+   *	Query stores
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -61,14 +62,16 @@ export class ByProjectKeyStoresRequestBuilder {
         uriTemplate: '/{projectKey}/stores',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Create Store
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -86,10 +89,10 @@ export class ByProjectKeyStoresRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

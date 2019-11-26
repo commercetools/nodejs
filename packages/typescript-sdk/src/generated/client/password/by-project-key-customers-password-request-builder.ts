@@ -11,7 +11,6 @@ export class ByProjectKeyCustomersPasswordRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public reset(): ByProjectKeyCustomersPasswordResetRequestBuilder {
     return new ByProjectKeyCustomersPasswordResetRequestBuilder({
       pathArgs: {
@@ -21,6 +20,9 @@ export class ByProjectKeyCustomersPasswordRequestBuilder {
     })
   }
 
+  /**
+   *	Change a customers password
+   */
   public post(methodArgs: {
     body: CustomerChangePassword
     headers?: {
@@ -35,9 +37,9 @@ export class ByProjectKeyCustomersPasswordRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        body: (methodArgs || ({} as any)).body,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

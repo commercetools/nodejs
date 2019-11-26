@@ -16,7 +16,6 @@ export class ByProjectKeyShippingMethodsRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withKey(childPathArgs: {
     key: string
   }): ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
@@ -28,7 +27,6 @@ export class ByProjectKeyShippingMethodsRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyShippingMethodsByIDRequestBuilder {
@@ -41,6 +39,9 @@ export class ByProjectKeyShippingMethodsRequestBuilder {
     })
   }
 
+  /**
+   *	Query shipping-methods
+   */
   public get(methodArgs?: {
     queryArgs?: {
       'shipping-methodId'?: string | string[]
@@ -65,14 +66,16 @@ export class ByProjectKeyShippingMethodsRequestBuilder {
         uriTemplate: '/{projectKey}/shipping-methods',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Create ShippingMethod
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -90,10 +93,10 @@ export class ByProjectKeyShippingMethodsRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

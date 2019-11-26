@@ -12,7 +12,9 @@ export class ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Get CustomObject by key
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -28,14 +30,16 @@ export class ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder {
         uriTemplate: '/{projectKey}/custom-objects/{container}/{key}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Delete CustomObject by key
+   */
   public delete(methodArgs?: {
     queryArgs?: {
       version?: number | number[]
@@ -53,9 +57,9 @@ export class ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder {
         uriTemplate: '/{projectKey}/custom-objects/{container}/{key}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

@@ -10,7 +10,9 @@ export class ByProjectKeyCustomersEmailConfirmRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Verifies customer's email using a token.
+   */
   public post(methodArgs: {
     body: CustomerEmailVerify
     headers?: {
@@ -25,9 +27,9 @@ export class ByProjectKeyCustomersEmailConfirmRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        body: (methodArgs || ({} as any)).body,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

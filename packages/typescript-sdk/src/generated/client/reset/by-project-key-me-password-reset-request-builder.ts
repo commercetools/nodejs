@@ -10,7 +10,6 @@ export class ByProjectKeyMePasswordResetRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public post(methodArgs?: {
     headers?: {
       [key: string]: string
@@ -23,7 +22,7 @@ export class ByProjectKeyMePasswordResetRequestBuilder {
         uriTemplate: '/{projectKey}/me/password/reset',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
       },
       this.args.apiRequestExecutor

@@ -11,7 +11,9 @@ export class ByProjectKeyPaymentsByIDRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Get Payment by ID
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -27,14 +29,16 @@ export class ByProjectKeyPaymentsByIDRequestBuilder {
         uriTemplate: '/{projectKey}/payments/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Update Payment by ID
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -52,15 +56,17 @@ export class ByProjectKeyPaymentsByIDRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Delete Payment by ID
+   */
   public delete(methodArgs: {
     queryArgs: {
       dataErasure?: boolean | boolean[]
@@ -78,9 +84,9 @@ export class ByProjectKeyPaymentsByIDRequestBuilder {
         uriTemplate: '/{projectKey}/payments/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

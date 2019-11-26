@@ -9,7 +9,6 @@ export class ByProjectKeyMeEmailConfirmRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public post(methodArgs?: {
     headers?: {
       [key: string]: string
@@ -22,7 +21,7 @@ export class ByProjectKeyMeEmailConfirmRequestBuilder {
         uriTemplate: '/{projectKey}/me/email/confirm',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
       },
       this.args.apiRequestExecutor

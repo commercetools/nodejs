@@ -21,7 +21,6 @@ export class ByProjectKeyMeRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public email(): ByProjectKeyMeEmailRequestBuilder {
     return new ByProjectKeyMeEmailRequestBuilder({
       pathArgs: {
@@ -30,7 +29,6 @@ export class ByProjectKeyMeRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public password(): ByProjectKeyMePasswordRequestBuilder {
     return new ByProjectKeyMePasswordRequestBuilder({
       pathArgs: {
@@ -39,7 +37,6 @@ export class ByProjectKeyMeRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public signup(): ByProjectKeyMeSignupRequestBuilder {
     return new ByProjectKeyMeSignupRequestBuilder({
       pathArgs: {
@@ -48,7 +45,6 @@ export class ByProjectKeyMeRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public login(): ByProjectKeyMeLoginRequestBuilder {
     return new ByProjectKeyMeLoginRequestBuilder({
       pathArgs: {
@@ -57,7 +53,6 @@ export class ByProjectKeyMeRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public activeCart(): ByProjectKeyMeActiveCartRequestBuilder {
     return new ByProjectKeyMeActiveCartRequestBuilder({
       pathArgs: {
@@ -66,7 +61,9 @@ export class ByProjectKeyMeRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
+  /**
+   *	A shopping cart holds product variants and can be ordered.
+   */
   public carts(): ByProjectKeyMeCartsRequestBuilder {
     return new ByProjectKeyMeCartsRequestBuilder({
       pathArgs: {
@@ -75,7 +72,9 @@ export class ByProjectKeyMeRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
+  /**
+   *	An order can be created from a cart, usually after a checkout process has been completed.
+   */
   public orders(): ByProjectKeyMeOrdersRequestBuilder {
     return new ByProjectKeyMeOrdersRequestBuilder({
       pathArgs: {
@@ -84,7 +83,9 @@ export class ByProjectKeyMeRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
+  /**
+   *	The My Payments endpoint creates and provides access to payments scoped to a specific user.
+   */
   public payments(): ByProjectKeyMePaymentsRequestBuilder {
     return new ByProjectKeyMePaymentsRequestBuilder({
       pathArgs: {
@@ -93,7 +94,9 @@ export class ByProjectKeyMeRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
+  /**
+   *	The My Shopping Lists endpoint creates and provides access to shopping lists scoped to a specific user.
+   */
   public shoppingLists(): ByProjectKeyMeShoppingListsRequestBuilder {
     return new ByProjectKeyMeShoppingListsRequestBuilder({
       pathArgs: {
@@ -102,7 +105,6 @@ export class ByProjectKeyMeRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public payment(): ByProjectKeyMePaymentRequestBuilder {
     return new ByProjectKeyMePaymentRequestBuilder({
       pathArgs: {
@@ -132,14 +134,16 @@ export class ByProjectKeyMeRequestBuilder {
         uriTemplate: '/{projectKey}/me',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Create a customer
+   */
   public post(methodArgs: {
     body: Update
     headers?: {
@@ -154,14 +158,16 @@ export class ByProjectKeyMeRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        body: (methodArgs || ({} as any)).body,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Delete a Customer
+   */
   public delete(methodArgs: {
     queryArgs: {
       version: number | number[]
@@ -177,9 +183,9 @@ export class ByProjectKeyMeRequestBuilder {
         uriTemplate: '/{projectKey}/me',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

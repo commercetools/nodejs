@@ -11,7 +11,9 @@ export class ByProjectKeyExtensionsByIDRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Retrieves the representation of an extension by its id.
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -27,14 +29,16 @@ export class ByProjectKeyExtensionsByIDRequestBuilder {
         uriTemplate: '/{projectKey}/extensions/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Update Extension by ID
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -52,15 +56,17 @@ export class ByProjectKeyExtensionsByIDRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Delete Extension by ID
+   */
   public delete(methodArgs: {
     queryArgs: {
       version: number | number[]
@@ -77,9 +83,9 @@ export class ByProjectKeyExtensionsByIDRequestBuilder {
         uriTemplate: '/{projectKey}/extensions/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

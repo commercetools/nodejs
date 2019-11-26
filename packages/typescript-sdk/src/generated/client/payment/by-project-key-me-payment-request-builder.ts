@@ -11,7 +11,6 @@ export class ByProjectKeyMePaymentRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public keyWithKeyValue(childPathArgs: {
     key: string
   }): ByProjectKeyMePaymentKeyByKeyRequestBuilder {
@@ -23,7 +22,6 @@ export class ByProjectKeyMePaymentRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withIDValue(childPathArgs: {
     ID: string
   }): ByProjectKeyMePaymentByIDRequestBuilder {

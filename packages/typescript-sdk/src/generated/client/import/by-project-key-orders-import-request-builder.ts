@@ -10,7 +10,9 @@ export class ByProjectKeyOrdersImportRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Create an Order by Import
+   */
   public post(methodArgs: {
     body: OrderImportDraft
     headers?: {
@@ -25,9 +27,9 @@ export class ByProjectKeyOrdersImportRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        body: (methodArgs || ({} as any)).body,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

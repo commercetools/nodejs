@@ -14,7 +14,9 @@ export class ByProjectKeyCustomerGroupsKeyByKeyRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Gets a customer group by Key.
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -30,14 +32,16 @@ export class ByProjectKeyCustomerGroupsKeyByKeyRequestBuilder {
         uriTemplate: '/{projectKey}/customer-groups/key={key}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Updates a customer group by Key.
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -55,15 +59,17 @@ export class ByProjectKeyCustomerGroupsKeyByKeyRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Delete CustomerGroup by key
+   */
   public delete(methodArgs: {
     queryArgs: {
       version: number | number[]
@@ -80,9 +86,9 @@ export class ByProjectKeyCustomerGroupsKeyByKeyRequestBuilder {
         uriTemplate: '/{projectKey}/customer-groups/key={key}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

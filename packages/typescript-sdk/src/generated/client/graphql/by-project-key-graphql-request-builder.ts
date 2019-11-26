@@ -9,7 +9,9 @@ export class ByProjectKeyGraphqlRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Execute a GraphQL query
+   */
   public post(methodArgs: {
     body: object
     headers?: {
@@ -24,9 +26,9 @@ export class ByProjectKeyGraphqlRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/graphql',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        body: (methodArgs || ({} as any)).body,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

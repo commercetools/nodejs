@@ -16,7 +16,6 @@ export class ByProjectKeyExtensionsRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withKey(childPathArgs: {
     key: string
   }): ByProjectKeyExtensionsKeyByKeyRequestBuilder {
@@ -28,7 +27,6 @@ export class ByProjectKeyExtensionsRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyExtensionsByIDRequestBuilder {
@@ -41,6 +39,9 @@ export class ByProjectKeyExtensionsRequestBuilder {
     })
   }
 
+  /**
+   *	Query extensions
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -61,14 +62,16 @@ export class ByProjectKeyExtensionsRequestBuilder {
         uriTemplate: '/{projectKey}/extensions',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Currently, a maximum of 25 extensions can be created per project.
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -86,10 +89,10 @@ export class ByProjectKeyExtensionsRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

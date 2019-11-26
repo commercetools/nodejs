@@ -12,7 +12,9 @@ export class ByProjectKeyMeShoppingListsByIDRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Get MyShoppingList by ID
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -28,14 +30,16 @@ export class ByProjectKeyMeShoppingListsByIDRequestBuilder {
         uriTemplate: '/{projectKey}/me/shopping-lists/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Update MyShoppingList by ID
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -53,15 +57,17 @@ export class ByProjectKeyMeShoppingListsByIDRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Delete MyShoppingList by ID
+   */
   public delete(methodArgs: {
     queryArgs: {
       version: number | number[]
@@ -78,9 +84,9 @@ export class ByProjectKeyMeShoppingListsByIDRequestBuilder {
         uriTemplate: '/{projectKey}/me/shopping-lists/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

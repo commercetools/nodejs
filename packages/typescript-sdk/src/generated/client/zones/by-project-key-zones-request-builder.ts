@@ -12,7 +12,6 @@ export class ByProjectKeyZonesRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withKey(childPathArgs: {
     key: string
   }): ByProjectKeyZonesKeyByKeyRequestBuilder {
@@ -24,7 +23,6 @@ export class ByProjectKeyZonesRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyZonesByIDRequestBuilder {
@@ -37,6 +35,9 @@ export class ByProjectKeyZonesRequestBuilder {
     })
   }
 
+  /**
+   *	Query zones
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -57,14 +58,16 @@ export class ByProjectKeyZonesRequestBuilder {
         uriTemplate: '/{projectKey}/zones',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Create Zone
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -82,10 +85,10 @@ export class ByProjectKeyZonesRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

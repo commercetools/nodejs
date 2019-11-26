@@ -13,7 +13,9 @@ export class ByProjectKeyCustomersEmailTokenRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Create a Token for verifying the Customer's Email
+   */
   public post(methodArgs: {
     body: CustomerCreateEmailToken
     headers?: {
@@ -28,9 +30,9 @@ export class ByProjectKeyCustomersEmailTokenRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        body: (methodArgs || ({} as any)).body,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

@@ -16,7 +16,6 @@ export class ByProjectKeyCustomerGroupsRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withKey(childPathArgs: {
     key: string
   }): ByProjectKeyCustomerGroupsKeyByKeyRequestBuilder {
@@ -28,7 +27,6 @@ export class ByProjectKeyCustomerGroupsRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyCustomerGroupsByIDRequestBuilder {
@@ -41,6 +39,9 @@ export class ByProjectKeyCustomerGroupsRequestBuilder {
     })
   }
 
+  /**
+   *	Query customer-groups
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -61,14 +62,16 @@ export class ByProjectKeyCustomerGroupsRequestBuilder {
         uriTemplate: '/{projectKey}/customer-groups',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Create CustomerGroup
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -86,10 +89,10 @@ export class ByProjectKeyCustomerGroupsRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

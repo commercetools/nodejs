@@ -11,7 +11,10 @@ export class ByProjectKeyProductsByIDImagesRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Uploads a binary image file to a given product variant. The supported image formats are JPEG, PNG and GIF.
+   *
+   */
   public post(methodArgs: {
     queryArgs?: {
       filename?: string | string[]
@@ -32,10 +35,10 @@ export class ByProjectKeyProductsByIDImagesRequestBuilder {
         uriTemplate: '/{projectKey}/products/{ID}/images',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

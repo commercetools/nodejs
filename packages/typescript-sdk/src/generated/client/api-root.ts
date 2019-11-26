@@ -8,6 +8,9 @@ export class ApiRoot {
     this.apiRequestExecutor = new ApiRequestExecutor(args.middlewares)
   }
 
+  /**
+   *	The Project endpoint is used to retrieve certain information from a project.
+   */
   public withProjectKey(childPathArgs: {
     projectKey: string
   }): ByProjectKeyRequestBuilder {

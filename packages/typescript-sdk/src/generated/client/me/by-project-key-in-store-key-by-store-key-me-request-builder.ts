@@ -13,7 +13,9 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	A shopping cart holds product variants and can be ordered.
+   */
   public carts(): ByProjectKeyInStoreKeyByStoreKeyMeCartsRequestBuilder {
     return new ByProjectKeyInStoreKeyByStoreKeyMeCartsRequestBuilder({
       pathArgs: {
@@ -22,7 +24,9 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
+  /**
+   *	An order can be created from a order, usually after a checkout process has been completed.
+   */
   public orders(): ByProjectKeyInStoreKeyByStoreKeyMeOrdersRequestBuilder {
     return new ByProjectKeyInStoreKeyByStoreKeyMeOrdersRequestBuilder({
       pathArgs: {
@@ -31,7 +35,6 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public activeCart(): ByProjectKeyInStoreKeyByStoreKeyMeActiveCartRequestBuilder {
     return new ByProjectKeyInStoreKeyByStoreKeyMeActiveCartRequestBuilder({
       pathArgs: {

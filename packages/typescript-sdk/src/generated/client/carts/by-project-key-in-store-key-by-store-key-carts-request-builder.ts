@@ -12,7 +12,6 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
@@ -25,6 +24,9 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsRequestBuilder {
     })
   }
 
+  /**
+   *	Queries carts in a specific Store. The {storeKey} path parameter maps to a Store’s key.
+   */
   public get(methodArgs?: {
     queryArgs?: {
       customerId?: string | string[]
@@ -46,14 +48,20 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsRequestBuilder {
         uriTemplate: '/{projectKey}/in-store/key={storeKey}/carts',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Creates a cart in the store specified by {storeKey}. The {storeKey} path parameter maps to a Store’s key.
+   *	When using this endpoint the cart’s store field is always set to the store specified in the path parameter.
+   *	Creating a cart can fail with an InvalidOperation if the referenced shipping method
+   *	in the CartDraft has a predicate which does not match the cart.
+   *
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -71,10 +79,10 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

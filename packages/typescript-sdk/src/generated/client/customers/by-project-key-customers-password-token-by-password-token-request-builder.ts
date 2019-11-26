@@ -11,7 +11,9 @@ export class ByProjectKeyCustomersPasswordTokenByPasswordTokenRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Get Customer by passwordToken
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -27,9 +29,9 @@ export class ByProjectKeyCustomersPasswordTokenByPasswordTokenRequestBuilder {
         uriTemplate: '/{projectKey}/customers/password-token={passwordToken}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

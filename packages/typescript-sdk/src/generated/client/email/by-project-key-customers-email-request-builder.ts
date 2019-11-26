@@ -10,7 +10,6 @@ export class ByProjectKeyCustomersEmailRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public confirm(): ByProjectKeyCustomersEmailConfirmRequestBuilder {
     return new ByProjectKeyCustomersEmailConfirmRequestBuilder({
       pathArgs: {

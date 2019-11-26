@@ -13,7 +13,6 @@ export class ByProjectKeyProductDiscountsMatchingRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public post(methodArgs: {
     body: ProductDiscountMatchQuery
     headers?: {
@@ -28,9 +27,9 @@ export class ByProjectKeyProductDiscountsMatchingRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        body: (methodArgs || ({} as any)).body,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

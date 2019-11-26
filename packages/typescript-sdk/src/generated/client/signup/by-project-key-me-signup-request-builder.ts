@@ -11,7 +11,6 @@ export class ByProjectKeyMeSignupRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public post(methodArgs: {
     body: MyCustomerDraft
     headers?: {
@@ -26,9 +25,9 @@ export class ByProjectKeyMeSignupRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        body: (methodArgs || ({} as any)).body,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

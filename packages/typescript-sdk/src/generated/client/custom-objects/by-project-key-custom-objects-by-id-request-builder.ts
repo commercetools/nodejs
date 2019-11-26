@@ -11,7 +11,9 @@ export class ByProjectKeyCustomObjectsByIDRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Get CustomObject by container
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -27,14 +29,17 @@ export class ByProjectKeyCustomObjectsByIDRequestBuilder {
         uriTemplate: '/{projectKey}/custom-objects/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	The version control is optional. If the query contains a version, then it must match the version of the object.
+   *
+   */
   public delete(methodArgs?: {
     queryArgs?: {
       version?: number | number[]
@@ -52,9 +57,9 @@ export class ByProjectKeyCustomObjectsByIDRequestBuilder {
         uriTemplate: '/{projectKey}/custom-objects/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

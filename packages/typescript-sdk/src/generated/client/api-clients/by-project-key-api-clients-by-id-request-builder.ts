@@ -11,7 +11,9 @@ export class ByProjectKeyApiClientsByIDRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Get ApiClient by ID
+   */
   public get(methodArgs?: {
     headers?: {
       [key: string]: string
@@ -24,13 +26,15 @@ export class ByProjectKeyApiClientsByIDRequestBuilder {
         uriTemplate: '/{projectKey}/api-clients/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Delete ApiClient by ID
+   */
   public delete(methodArgs?: {
     headers?: {
       [key: string]: string
@@ -43,7 +47,7 @@ export class ByProjectKeyApiClientsByIDRequestBuilder {
         uriTemplate: '/{projectKey}/api-clients/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
       },
       this.args.apiRequestExecutor

@@ -11,7 +11,9 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Gets the full representation of a product by Key.
+   */
   public get(methodArgs?: {
     queryArgs?: {
       priceCurrency?: string | string[]
@@ -31,14 +33,16 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
         uriTemplate: '/{projectKey}/products/key={key}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Update Product by key
+   */
   public post(methodArgs: {
     queryArgs?: {
       priceCurrency?: string | string[]
@@ -60,15 +64,17 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Delete Product by key
+   */
   public delete(methodArgs: {
     queryArgs: {
       priceCurrency?: string | string[]
@@ -89,9 +95,9 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
         uriTemplate: '/{projectKey}/products/key={key}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

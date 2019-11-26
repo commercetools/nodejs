@@ -16,7 +16,6 @@ export class ByProjectKeyProductsRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withKey(childPathArgs: {
     key: string
   }): ByProjectKeyProductsKeyByKeyRequestBuilder {
@@ -28,7 +27,6 @@ export class ByProjectKeyProductsRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyProductsByIDRequestBuilder {
@@ -41,6 +39,12 @@ export class ByProjectKeyProductsRequestBuilder {
     })
   }
 
+  /**
+   *	You can use the query endpoint to get the full representations of products.
+   *	REMARK: We suggest to use the performance optimized search endpoint which has a bunch functionalities,
+   *	the query API lacks like sorting on custom attributes, etc.
+   *
+   */
   public get(methodArgs?: {
     queryArgs?: {
       priceCurrency?: string | string[]
@@ -65,14 +69,19 @@ export class ByProjectKeyProductsRequestBuilder {
         uriTemplate: '/{projectKey}/products',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	To create a new product, send a representation that is going to become the initial staged representation
+   *	of the new product in the master catalog. If price selection query parameters are provided,
+   *	the selected prices will be added to the response.
+   *
+   */
   public post(methodArgs: {
     queryArgs?: {
       priceCurrency?: string | string[]
@@ -94,10 +103,10 @@ export class ByProjectKeyProductsRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

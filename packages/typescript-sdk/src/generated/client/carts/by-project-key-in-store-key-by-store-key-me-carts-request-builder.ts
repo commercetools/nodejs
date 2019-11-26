@@ -13,7 +13,6 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeCartsRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyInStoreKeyByStoreKeyMeCartsByIDRequestBuilder {
@@ -26,6 +25,9 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeCartsRequestBuilder {
     })
   }
 
+  /**
+   *	Query carts
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -46,14 +48,16 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeCartsRequestBuilder {
         uriTemplate: '/{projectKey}/in-store/key={storeKey}/me/carts',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Create Cart
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -71,10 +75,10 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeCartsRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

@@ -10,7 +10,9 @@ export class ByProjectKeyCustomersPasswordResetRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Set a new password using a token.
+   */
   public post(methodArgs: {
     body: CustomerResetPassword
     headers?: {
@@ -25,9 +27,9 @@ export class ByProjectKeyCustomersPasswordResetRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        body: (methodArgs || ({} as any)).body,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

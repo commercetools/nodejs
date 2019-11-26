@@ -10,7 +10,6 @@ export class ByProjectKeyMeLoginRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public post(methodArgs: {
     body: void
     headers?: {
@@ -25,9 +24,9 @@ export class ByProjectKeyMeLoginRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        body: (methodArgs || ({} as any)).body,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

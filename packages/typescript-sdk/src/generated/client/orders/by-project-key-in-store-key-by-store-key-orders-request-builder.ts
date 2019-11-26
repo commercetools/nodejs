@@ -17,7 +17,6 @@ export class ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withOrderNumber(childPathArgs: {
     orderNumber: string
   }): ByProjectKeyInStoreKeyByStoreKeyOrdersOrderNumberByOrderNumberRequestBuilder {
@@ -31,7 +30,6 @@ export class ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder {
       }
     )
   }
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyInStoreKeyByStoreKeyOrdersByIDRequestBuilder {
@@ -44,6 +42,9 @@ export class ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder {
     })
   }
 
+  /**
+   *	Queries orders in a specific Store. The {storeKey} path parameter maps to a Store’s key.
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -64,14 +65,20 @@ export class ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder {
         uriTemplate: '/{projectKey}/in-store/key={storeKey}/orders',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Creates an order from a Cart from a specific Store. The {storeKey} path parameter maps to a Store’s key.
+   *	When using this endpoint the orders’s store field is always set to the store specified in the path parameter.
+   *	The cart must have a shipping address set before creating an order. When using the Platform TaxMode,
+   *	the shipping address is used for tax calculation.
+   *
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -89,10 +96,10 @@ export class ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

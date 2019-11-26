@@ -16,7 +16,6 @@ export class ByProjectKeyOrdersEditsRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withKey(childPathArgs: {
     key: string
   }): ByProjectKeyOrdersEditsKeyByKeyRequestBuilder {
@@ -28,7 +27,6 @@ export class ByProjectKeyOrdersEditsRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyOrdersEditsByIDRequestBuilder {
@@ -41,6 +39,9 @@ export class ByProjectKeyOrdersEditsRequestBuilder {
     })
   }
 
+  /**
+   *	Query edits
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -61,14 +62,16 @@ export class ByProjectKeyOrdersEditsRequestBuilder {
         uriTemplate: '/{projectKey}/orders/edits',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Create OrderEdit
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -86,10 +89,10 @@ export class ByProjectKeyOrdersEditsRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

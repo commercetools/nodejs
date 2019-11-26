@@ -11,7 +11,6 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeActiveCartRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public get(methodArgs?: {
     headers?: {
       [key: string]: string
@@ -24,7 +23,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeActiveCartRequestBuilder {
         uriTemplate: '/{projectKey}/in-store/key={storeKey}/me/active-cart',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
       },
       this.args.apiRequestExecutor

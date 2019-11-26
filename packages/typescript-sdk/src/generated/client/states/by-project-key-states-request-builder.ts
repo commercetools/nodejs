@@ -15,7 +15,6 @@ export class ByProjectKeyStatesRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyStatesByIDRequestBuilder {
@@ -28,6 +27,9 @@ export class ByProjectKeyStatesRequestBuilder {
     })
   }
 
+  /**
+   *	Query states
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -48,14 +50,16 @@ export class ByProjectKeyStatesRequestBuilder {
         uriTemplate: '/{projectKey}/states',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Create State
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -73,10 +77,10 @@ export class ByProjectKeyStatesRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

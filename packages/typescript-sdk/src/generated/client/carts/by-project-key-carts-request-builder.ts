@@ -12,7 +12,6 @@ export class ByProjectKeyCartsRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public replicate(): ByProjectKeyCartsReplicateRequestBuilder {
     return new ByProjectKeyCartsReplicateRequestBuilder({
       pathArgs: {
@@ -21,7 +20,6 @@ export class ByProjectKeyCartsRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyCartsByIDRequestBuilder {
@@ -34,6 +32,9 @@ export class ByProjectKeyCartsRequestBuilder {
     })
   }
 
+  /**
+   *	Query carts
+   */
   public get(methodArgs?: {
     queryArgs?: {
       customerId?: string | string[]
@@ -55,14 +56,18 @@ export class ByProjectKeyCartsRequestBuilder {
         uriTemplate: '/{projectKey}/carts',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Creating a cart can fail with an InvalidOperation if the referenced shipping method in the
+   *	CartDraft has a predicate which does not match the cart.
+   *
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -80,10 +85,10 @@ export class ByProjectKeyCartsRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

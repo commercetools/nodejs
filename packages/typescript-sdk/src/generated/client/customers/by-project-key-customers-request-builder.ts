@@ -22,7 +22,6 @@ export class ByProjectKeyCustomersRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withPasswordToken(childPathArgs: {
     passwordToken: string
   }): ByProjectKeyCustomersPasswordTokenByPasswordTokenRequestBuilder {
@@ -34,7 +33,6 @@ export class ByProjectKeyCustomersRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withEmailToken(childPathArgs: {
     emailToken: string
   }): ByProjectKeyCustomersEmailTokenByEmailTokenRequestBuilder {
@@ -46,7 +44,12 @@ export class ByProjectKeyCustomersRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
+  /**
+   *	To verify a customer's email, an email token can be created. This should be embedded in a link and sent to the
+   *	customer via email. When the customer clicks on the link, the "verify customer's email" endpoint should be called,
+   *	which sets customer's isVerifiedEmail field to true.
+   *
+   */
   public emailToken(): ByProjectKeyCustomersEmailTokenRequestBuilder {
     return new ByProjectKeyCustomersEmailTokenRequestBuilder({
       pathArgs: {
@@ -55,7 +58,6 @@ export class ByProjectKeyCustomersRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public email(): ByProjectKeyCustomersEmailRequestBuilder {
     return new ByProjectKeyCustomersEmailRequestBuilder({
       pathArgs: {
@@ -64,7 +66,6 @@ export class ByProjectKeyCustomersRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public password(): ByProjectKeyCustomersPasswordRequestBuilder {
     return new ByProjectKeyCustomersPasswordRequestBuilder({
       pathArgs: {
@@ -73,7 +74,14 @@ export class ByProjectKeyCustomersRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
+  /**
+   *	The following workflow can be used to reset the customer's password:
+   *
+   *	* Create a password reset token and send it embedded in a link to the customer.
+   *	* When the customer clicks on the link, the customer is retrieved with the token.
+   *	* The customer enters a new password and the "reset customer's password" endpoint is called.
+   *
+   */
   public passwordToken(): ByProjectKeyCustomersPasswordTokenRequestBuilder {
     return new ByProjectKeyCustomersPasswordTokenRequestBuilder({
       pathArgs: {
@@ -82,7 +90,6 @@ export class ByProjectKeyCustomersRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withKey(childPathArgs: {
     key: string
   }): ByProjectKeyCustomersKeyByKeyRequestBuilder {
@@ -94,7 +101,6 @@ export class ByProjectKeyCustomersRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyCustomersByIDRequestBuilder {
@@ -107,6 +113,9 @@ export class ByProjectKeyCustomersRequestBuilder {
     })
   }
 
+  /**
+   *	Query customers
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -127,14 +136,19 @@ export class ByProjectKeyCustomersRequestBuilder {
         uriTemplate: '/{projectKey}/customers',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Creates a customer. If an anonymous cart is passed in,
+   *	then the cart is assigned to the created customer and the version number of the Cart will increase.
+   *	If the ID of an anonymous session is given, all carts and orders will be assigned to the created customer.
+   *
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -152,10 +166,10 @@ export class ByProjectKeyCustomersRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

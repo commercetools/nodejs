@@ -12,7 +12,6 @@ export class ByProjectKeyMeCartsRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyMeCartsByIDRequestBuilder {
@@ -25,6 +24,9 @@ export class ByProjectKeyMeCartsRequestBuilder {
     })
   }
 
+  /**
+   *	Query carts
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -45,14 +47,16 @@ export class ByProjectKeyMeCartsRequestBuilder {
         uriTemplate: '/{projectKey}/me/carts',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Create MyCart
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -70,10 +74,10 @@ export class ByProjectKeyMeCartsRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

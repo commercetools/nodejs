@@ -16,7 +16,6 @@ export class ByProjectKeyCartDiscountsRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withKey(childPathArgs: {
     key: string
   }): ByProjectKeyCartDiscountsKeyByKeyRequestBuilder {
@@ -28,7 +27,6 @@ export class ByProjectKeyCartDiscountsRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyCartDiscountsByIDRequestBuilder {
@@ -41,6 +39,9 @@ export class ByProjectKeyCartDiscountsRequestBuilder {
     })
   }
 
+  /**
+   *	Query cart-discounts
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -61,14 +62,16 @@ export class ByProjectKeyCartDiscountsRequestBuilder {
         uriTemplate: '/{projectKey}/cart-discounts',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Create CartDiscount
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -86,10 +89,10 @@ export class ByProjectKeyCartDiscountsRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

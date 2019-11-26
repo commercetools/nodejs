@@ -16,7 +16,6 @@ export class ByProjectKeySubscriptionsRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withKey(childPathArgs: {
     key: string
   }): ByProjectKeySubscriptionsKeyByKeyRequestBuilder {
@@ -28,7 +27,6 @@ export class ByProjectKeySubscriptionsRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeySubscriptionsByIDRequestBuilder {
@@ -41,6 +39,9 @@ export class ByProjectKeySubscriptionsRequestBuilder {
     })
   }
 
+  /**
+   *	Query subscriptions
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -61,14 +62,21 @@ export class ByProjectKeySubscriptionsRequestBuilder {
         uriTemplate: '/{projectKey}/subscriptions',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	The creation of a Subscription is eventually consistent, it may take up to a minute before it becomes fully active.
+   *	In order to test that the destination is correctly configured, a test message will be put into the queue.
+   *	If the message could not be delivered, the subscription will not be created.
+   *	The payload of the test message is a notification of type ResourceCreated for the resourceTypeId subscription.
+   *	Currently, a maximum of 25 subscriptions can be created per project.
+   *
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -86,10 +94,10 @@ export class ByProjectKeySubscriptionsRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

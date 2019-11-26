@@ -14,7 +14,13 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	This endpoint provides high performance search queries over ProductProjections. The query result contains the
+   *	ProductProjections for which at least one ProductVariant matches the search query. This means that variants can
+   *	be included in the result also for which the search query does not match. To determine which ProductVariants match
+   *	the search query, the returned ProductProjections include the additional field isMatchingVariant.
+   *
+   */
   public search(): ByProjectKeyProductProjectionsSearchRequestBuilder {
     return new ByProjectKeyProductProjectionsSearchRequestBuilder({
       pathArgs: {
@@ -23,7 +29,9 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
+  /**
+   *	The source of data for suggestions is the searchKeyword field in a product
+   */
   public suggest(): ByProjectKeyProductProjectionsSuggestRequestBuilder {
     return new ByProjectKeyProductProjectionsSuggestRequestBuilder({
       pathArgs: {
@@ -32,7 +40,6 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withKey(childPathArgs: {
     key: string
   }): ByProjectKeyProductProjectionsKeyByKeyRequestBuilder {
@@ -44,7 +51,6 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyProductProjectionsByIDRequestBuilder {
@@ -57,6 +63,12 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
     })
   }
 
+  /**
+   *	You can use the product projections query endpoint to get the current or staged representations of Products.
+   *	When used with an API client that has the view_published_products:{projectKey} scope,
+   *	this endpoint only returns published (current) product projections.
+   *
+   */
   public get(methodArgs?: {
     queryArgs?: {
       staged?: boolean | boolean[]
@@ -82,9 +94,9 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
         uriTemplate: '/{projectKey}/product-projections',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

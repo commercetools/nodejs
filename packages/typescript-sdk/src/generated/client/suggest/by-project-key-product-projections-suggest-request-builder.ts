@@ -9,7 +9,6 @@ export class ByProjectKeyProductProjectionsSuggestRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public get(methodArgs?: {
     queryArgs?: {
       fuzzy?: boolean | boolean[]
@@ -31,9 +30,9 @@ export class ByProjectKeyProductProjectionsSuggestRequestBuilder {
         uriTemplate: '/{projectKey}/product-projections/suggest',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

@@ -13,7 +13,11 @@ export class ByProjectKeyCustomersPasswordTokenRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	The token value is used to reset the password of the customer with the given email. The token is
+   *	valid only for 10 minutes.
+   *
+   */
   public post(methodArgs: {
     body: CustomerCreatePasswordResetToken
     headers?: {
@@ -28,9 +32,9 @@ export class ByProjectKeyCustomersPasswordTokenRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        body: (methodArgs || ({} as any)).body,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

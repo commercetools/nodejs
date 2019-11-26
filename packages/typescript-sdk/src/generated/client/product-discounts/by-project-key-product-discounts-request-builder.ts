@@ -17,7 +17,6 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public matching(): ByProjectKeyProductDiscountsMatchingRequestBuilder {
     return new ByProjectKeyProductDiscountsMatchingRequestBuilder({
       pathArgs: {
@@ -26,7 +25,6 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withKey(childPathArgs: {
     key: string
   }): ByProjectKeyProductDiscountsKeyByKeyRequestBuilder {
@@ -38,7 +36,6 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyProductDiscountsByIDRequestBuilder {
@@ -51,6 +48,9 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
     })
   }
 
+  /**
+   *	Query product-discounts
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -71,14 +71,16 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
         uriTemplate: '/{projectKey}/product-discounts',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Create ProductDiscount
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -96,10 +98,10 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

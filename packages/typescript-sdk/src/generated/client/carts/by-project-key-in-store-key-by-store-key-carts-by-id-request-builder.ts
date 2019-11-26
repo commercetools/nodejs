@@ -12,7 +12,14 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Returns a cart by its ID from a specific Store. The {storeKey} path parameter maps to a Store’s key.
+   *	If the cart exists in the commercetools project but does not have the store field,
+   *	or the store field references a different store, this method returns a ResourceNotFound error.
+   *	The cart may not contain up-to-date prices, discounts etc.
+   *	If you want to ensure they’re up-to-date, send an Update request with the Recalculate update action instead.
+   *
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -28,14 +35,19 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
         uriTemplate: '/{projectKey}/in-store/key={storeKey}/carts/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Updates a cart in the store specified by {storeKey}. The {storeKey} path parameter maps to a Store’s key.
+   *	If the cart exists in the commercetools project but does not have the store field,
+   *	or the store field references a different store, this method returns a ResourceNotFound error.
+   *
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -53,15 +65,17 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Delete Cart by ID
+   */
   public delete(methodArgs: {
     queryArgs: {
       dataErasure?: boolean | boolean[]
@@ -79,9 +93,9 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
         uriTemplate: '/{projectKey}/in-store/key={storeKey}/carts/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

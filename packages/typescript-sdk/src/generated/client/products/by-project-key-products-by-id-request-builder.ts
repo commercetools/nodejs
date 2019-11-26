@@ -12,7 +12,6 @@ export class ByProjectKeyProductsByIDRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public images(): ByProjectKeyProductsByIDImagesRequestBuilder {
     return new ByProjectKeyProductsByIDImagesRequestBuilder({
       pathArgs: {
@@ -22,6 +21,9 @@ export class ByProjectKeyProductsByIDRequestBuilder {
     })
   }
 
+  /**
+   *	Gets the full representation of a product by ID.
+   */
   public get(methodArgs?: {
     queryArgs?: {
       priceCurrency?: string | string[]
@@ -41,14 +43,16 @@ export class ByProjectKeyProductsByIDRequestBuilder {
         uriTemplate: '/{projectKey}/products/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Update Product by ID
+   */
   public post(methodArgs: {
     queryArgs?: {
       priceCurrency?: string | string[]
@@ -70,15 +74,17 @@ export class ByProjectKeyProductsByIDRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Delete Product by ID
+   */
   public delete(methodArgs: {
     queryArgs: {
       priceCurrency?: string | string[]
@@ -99,9 +105,9 @@ export class ByProjectKeyProductsByIDRequestBuilder {
         uriTemplate: '/{projectKey}/products/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

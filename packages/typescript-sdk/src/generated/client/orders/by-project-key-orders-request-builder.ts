@@ -18,7 +18,6 @@ export class ByProjectKeyOrdersRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public importOrder(): ByProjectKeyOrdersImportRequestBuilder {
     return new ByProjectKeyOrdersImportRequestBuilder({
       pathArgs: {
@@ -27,7 +26,6 @@ export class ByProjectKeyOrdersRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withOrderNumber(childPathArgs: {
     orderNumber: string
   }): ByProjectKeyOrdersOrderNumberByOrderNumberRequestBuilder {
@@ -39,7 +37,9 @@ export class ByProjectKeyOrdersRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
+  /**
+   *	OrderEdit are containers for financial changes after an Order has been placed.
+   */
   public edits(): ByProjectKeyOrdersEditsRequestBuilder {
     return new ByProjectKeyOrdersEditsRequestBuilder({
       pathArgs: {
@@ -48,7 +48,6 @@ export class ByProjectKeyOrdersRequestBuilder {
       apiRequestExecutor: this.args.apiRequestExecutor,
     })
   }
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyOrdersByIDRequestBuilder {
@@ -61,6 +60,9 @@ export class ByProjectKeyOrdersRequestBuilder {
     })
   }
 
+  /**
+   *	Query orders
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -81,14 +83,19 @@ export class ByProjectKeyOrdersRequestBuilder {
         uriTemplate: '/{projectKey}/orders',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Creates an order from a Cart.
+   *	The cart must have a shipping address set before creating an order.
+   *	When using the Platform TaxMode, the shipping address is used for tax calculation.
+   *
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -106,10 +113,10 @@ export class ByProjectKeyOrdersRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

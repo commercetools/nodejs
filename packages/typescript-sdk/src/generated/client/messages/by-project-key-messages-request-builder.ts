@@ -11,7 +11,6 @@ export class ByProjectKeyMessagesRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyMessagesByIDRequestBuilder {
@@ -24,6 +23,9 @@ export class ByProjectKeyMessagesRequestBuilder {
     })
   }
 
+  /**
+   *	Query messages
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -44,9 +46,9 @@ export class ByProjectKeyMessagesRequestBuilder {
         uriTemplate: '/{projectKey}/messages',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

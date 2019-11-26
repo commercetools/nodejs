@@ -10,7 +10,16 @@ export class ByProjectKeyLoginRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Authenticate Customer (Sign In). Retrieves the authenticated
+   *	customer (a customer that matches the given email/password pair).
+   *	If used with an access token for Anonymous Sessions,
+   *	all orders and carts belonging to the anonymousId will be assigned to the newly created customer.
+   *	If a cart is is returned as part of the CustomerSignInResult,
+   *	it has been recalculated (It will have up-to-date prices, taxes and discounts,
+   *	and invalid line items have been removed.).
+   *
+   */
   public post(methodArgs: {
     body: CustomerSignin
     headers?: {
@@ -25,9 +34,9 @@ export class ByProjectKeyLoginRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        body: (methodArgs || ({} as any)).body,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

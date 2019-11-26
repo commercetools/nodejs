@@ -12,7 +12,9 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeOrdersByIDRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Get Order by ID
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -28,9 +30,9 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeOrdersByIDRequestBuilder {
         uriTemplate: '/{projectKey}/in-store/key={storeKey}/me/orders/{ID}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

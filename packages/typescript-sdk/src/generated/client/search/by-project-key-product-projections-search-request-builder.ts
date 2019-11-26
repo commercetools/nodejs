@@ -10,7 +10,9 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Search Product Projection
+   */
   public post(methodArgs?: {
     headers?: {
       [key: string]: string
@@ -23,13 +25,15 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
         uriTemplate: '/{projectKey}/product-projections/search',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Search Product Projection
+   */
   public get(methodArgs?: {
     queryArgs?: {
       fuzzy?: boolean | boolean[]
@@ -61,9 +65,9 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
         uriTemplate: '/{projectKey}/product-projections/search',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )

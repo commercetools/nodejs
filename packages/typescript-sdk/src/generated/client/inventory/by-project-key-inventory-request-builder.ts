@@ -15,7 +15,6 @@ export class ByProjectKeyInventoryRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyInventoryByIDRequestBuilder {
@@ -28,6 +27,9 @@ export class ByProjectKeyInventoryRequestBuilder {
     })
   }
 
+  /**
+   *	Query inventory
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -48,14 +50,16 @@ export class ByProjectKeyInventoryRequestBuilder {
         uriTemplate: '/{projectKey}/inventory',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Create InventoryEntry
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -73,10 +77,10 @@ export class ByProjectKeyInventoryRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

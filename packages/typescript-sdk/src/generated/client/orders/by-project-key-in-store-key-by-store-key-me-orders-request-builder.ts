@@ -13,7 +13,6 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeOrdersRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyInStoreKeyByStoreKeyMeOrdersByIDRequestBuilder {
@@ -26,6 +25,9 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeOrdersRequestBuilder {
     })
   }
 
+  /**
+   *	Query orders
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -46,14 +48,16 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeOrdersRequestBuilder {
         uriTemplate: '/{projectKey}/in-store/key={storeKey}/me/orders',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
   }
-
+  /**
+   *	Create Order
+   */
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
@@ -71,10 +75,10 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeOrdersRequestBuilder {
         pathVariables: this.args.pathArgs,
         headers: {
           'Content-Type': 'application/json',
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
-        body: (methodArgs || ({} as any)).body,
+        queryParams: methodArgs?.queryArgs,
+        body: methodArgs?.body,
       },
       this.args.apiRequestExecutor
     )

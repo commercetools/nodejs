@@ -11,7 +11,9 @@ export class ByProjectKeyCustomersEmailTokenByEmailTokenRequestBuilder {
       apiRequestExecutor: ApiRequestExecutor
     }
   ) {}
-
+  /**
+   *	Get Customer by emailToken
+   */
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
@@ -27,9 +29,9 @@ export class ByProjectKeyCustomersEmailTokenByEmailTokenRequestBuilder {
         uriTemplate: '/{projectKey}/customers/email-token={emailToken}',
         pathVariables: this.args.pathArgs,
         headers: {
-          ...(methodArgs || ({} as any)).headers,
+          ...methodArgs?.headers,
         },
-        queryParams: (methodArgs || ({} as any)).queryArgs,
+        queryParams: methodArgs?.queryArgs,
       },
       this.args.apiRequestExecutor
     )
