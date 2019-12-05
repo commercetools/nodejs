@@ -1,3 +1,367 @@
+## @commercetools/typescript-sdk@0.0.7-alpha.0 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/sync-actions@4.1.0 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/state-importer@3.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/sdk-middleware-http@6.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/sdk-middleware-auth@6.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/sdk-auth@3.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/resource-deleter@2.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/product-json-to-xlsx@3.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/product-json-to-csv@4.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/product-exporter@3.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/price-exporter@3.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/personal-data-erasure@3.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/inventories-exporter@3.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/integration-tests@0.0.6 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/get-credentials@3.0.10 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/discount-code-importer@3.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/discount-code-generator@2.0.7 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/discount-code-exporter@4.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/customer-groups-exporter@3.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/custom-objects-importer@3.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/custom-objects-exporter@3.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/csv-parser-state@3.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/csv-parser-price@4.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/csv-parser-orders@2.0.11 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/csv-parser-discount-code@2.0.9 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/category-exporter@3.0.2 (2019-12-05)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1441](https://github.com/commercetools/nodejs/pull/1441) feat(sync-actions): add setLanguages update action to stores ([@amine-benselim](https://github.com/amine-benselim))
+- `typescript-sdk`
+  - [#1440](https://github.com/commercetools/nodejs/pull/1440) feat(ts-sdk): add generated docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Amin Benselim ([@amine-benselim](https://github.com/amine-benselim))
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
 ## @commercetools/typescript-sdk@0.0.6-alpha.0 (2019-11-05)
 
 #### :bug: Bug Fix
