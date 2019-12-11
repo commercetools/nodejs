@@ -152,6 +152,9 @@ export type CategoryUpdateAction =
   | CategorySetMetaTitleAction
 export interface CategoryAddAssetAction {
   readonly action: 'addAsset'
+  /**
+   *	When specified, the value might be `0` and should be lower than the total of the assets list.
+   */
   readonly position?: number
   readonly asset: AssetDraft
 }
@@ -179,6 +182,10 @@ export interface CategoryChangeParentAction {
 }
 export interface CategoryChangeSlugAction {
   readonly action: 'changeSlug'
+  /**
+   *	Allowed are alphabetic, numeric, underscore (&#95;) and hyphen (&#45;) characters.
+   *	Maximum size is {{ site.data.api-limits.slugLength }}.
+   */
   readonly slug: LocalizedString
 }
 export interface CategoryRemoveAssetAction {
@@ -196,7 +203,14 @@ export interface CategorySetAssetCustomFieldAction {
 export interface CategorySetAssetCustomTypeAction {
   readonly action: 'setAssetCustomType'
   readonly assetId?: string
+  /**
+   *	If set, the custom fields are set to this new value.
+   */
   readonly fields?: object
+  /**
+   *	If set, the custom type is set to this new value.
+   *	If absent, the custom type and any existing custom fields are removed.
+   */
   readonly type?: TypeResourceIdentifier
   readonly assetKey?: string
 }
@@ -209,6 +223,10 @@ export interface CategorySetAssetDescriptionAction {
 export interface CategorySetAssetKeyAction {
   readonly action: 'setAssetKey'
   readonly assetId: string
+  /**
+   *	User-defined identifier for the asset.
+   *	If left blank or set to `null`, the asset key is unset/removed.
+   */
   readonly assetKey?: string
 }
 export interface CategorySetAssetSourcesAction {
@@ -230,7 +248,13 @@ export interface CategorySetCustomFieldAction {
 }
 export interface CategorySetCustomTypeAction {
   readonly action: 'setCustomType'
+  /**
+   *	A valid JSON object, based on the FieldDefinitions of the Type. Sets the custom fields to this value.
+   */
   readonly fields?: FieldContainer
+  /**
+   *	If absent, the custom type and any existing CustomFields are removed.
+   */
   readonly type?: TypeResourceIdentifier
 }
 export interface CategorySetDescriptionAction {
@@ -239,10 +263,18 @@ export interface CategorySetDescriptionAction {
 }
 export interface CategorySetExternalIdAction {
   readonly action: 'setExternalId'
+  /**
+   *	If not defined, the external ID is unset.
+   */
   readonly externalId?: string
 }
 export interface CategorySetKeyAction {
   readonly action: 'setKey'
+  /**
+   *	User-defined unique identifier for the category.
+   *	Keys can only contain alphanumeric characters (`a-Z, 0-9`), underscores and hyphens (`-, _`) and be between 2 and 256 characters.
+   *	If `key` is absent or `null`, this field will be removed if it exists.
+   */
   readonly key?: string
 }
 export interface CategorySetMetaDescriptionAction {

@@ -262,6 +262,10 @@ export interface ShoppingListRemoveTextLineItemAction {
 }
 export interface ShoppingListSetAnonymousIdAction {
   readonly action: 'setAnonymousId'
+  /**
+   *	Anonymous ID of the anonymous customer that this shopping list belongs to.
+   *	If this field is not set any existing `anonymousId` is removed.
+   */
   readonly anonymousId?: string
 }
 export interface ShoppingListSetCustomFieldAction {
@@ -271,7 +275,14 @@ export interface ShoppingListSetCustomFieldAction {
 }
 export interface ShoppingListSetCustomTypeAction {
   readonly action: 'setCustomType'
+  /**
+   *	If set, the custom fields are set to this new value.
+   */
   readonly fields?: FieldContainer
+  /**
+   *	If set, the custom type is set to this new value.
+   *	If absent, the custom type and any existing custom fields are removed.
+   */
   readonly type?: TypeResourceIdentifier
 }
 export interface ShoppingListSetCustomerAction {
@@ -288,6 +299,9 @@ export interface ShoppingListSetDescriptionAction {
 }
 export interface ShoppingListSetKeyAction {
   readonly action: 'setKey'
+  /**
+   *	User-specific unique identifier for the shopping list.
+   */
   readonly key?: string
 }
 export interface ShoppingListSetLineItemCustomFieldAction {

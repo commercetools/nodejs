@@ -182,10 +182,17 @@ export interface ProductDiscountChangeNameAction {
 }
 export interface ProductDiscountChangePredicateAction {
   readonly action: 'changePredicate'
+  /**
+   *	A valid ProductDiscount Predicate.
+   */
   readonly predicate: string
 }
 export interface ProductDiscountChangeSortOrderAction {
   readonly action: 'changeSortOrder'
+  /**
+   *	The string must contain a number between 0 and 1.
+   *	A discount with greater sortOrder is prioritized higher than a discount with lower sortOrder.
+   */
   readonly sortOrder: string
 }
 export interface ProductDiscountChangeValueAction {
@@ -198,18 +205,34 @@ export interface ProductDiscountSetDescriptionAction {
 }
 export interface ProductDiscountSetKeyAction {
   readonly action: 'setKey'
+  /**
+   *	The key to set.
+   *	If you provide a `null` value or do not set this field at all, the existing `key` field is removed.
+   */
   readonly key?: string
 }
 export interface ProductDiscountSetValidFromAction {
   readonly action: 'setValidFrom'
+  /**
+   *	The time from which the discount should be effective.
+   *	Please take Eventual Consistency into account for calculated product discount values.
+   */
   readonly validFrom?: string
 }
 export interface ProductDiscountSetValidFromAndUntilAction {
   readonly action: 'setValidFromAndUntil'
+  /**
+   *	The timeframe for which the discount should be effective.
+   *	Please take Eventual Consistency into account for calculated undiscounted values.
+   */
   readonly validUntil?: string
   readonly validFrom?: string
 }
 export interface ProductDiscountSetValidUntilAction {
   readonly action: 'setValidUntil'
+  /**
+   *	The time from which the discount should be ineffective.
+   *	Please take Eventual Consistency into account for calculated undiscounted values.
+   */
   readonly validUntil?: string
 }

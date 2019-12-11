@@ -222,15 +222,28 @@ export interface OrderEditSetCustomFieldAction {
 }
 export interface OrderEditSetCustomTypeAction {
   readonly action: 'setCustomType'
+  /**
+   *	If set, the custom fields are set to this new value.
+   */
   readonly fields?: object
+  /**
+   *	If set, the custom type is set to this new value.
+   *	If absent, the custom type and any existing custom fields are removed.
+   */
   readonly type?: TypeResourceIdentifier
 }
 export interface OrderEditSetKeyAction {
   readonly action: 'setKey'
+  /**
+   *	If `key` is absent or `null`, this field will be removed if it exists.
+   */
   readonly key?: string
 }
 export interface OrderEditSetStagedActionsAction {
   readonly action: 'setStagedActions'
+  /**
+   *	The actions to edit the `resource`.
+   */
   readonly stagedActions: StagedOrderUpdateAction[]
 }
 export interface StagedOrderAddCustomLineItemAction {

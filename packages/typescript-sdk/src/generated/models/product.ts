@@ -378,6 +378,9 @@ export interface WhitespaceTokenizer {
 }
 export interface ProductAddAssetAction {
   readonly action: 'addAsset'
+  /**
+   *	Position of the new asset inside the existing list (from `0` to the size of the list)
+   */
   readonly position?: number
   readonly staged?: boolean
   readonly variantId?: number
@@ -445,11 +448,19 @@ export interface ProductChangePriceAction {
   readonly action: 'changePrice'
   readonly price: PriceDraft
   readonly staged?: boolean
+  /**
+   *	ID of the [Price](#price)
+   */
   readonly priceId: string
 }
 export interface ProductChangeSlugAction {
   readonly action: 'changeSlug'
   readonly staged?: boolean
+  /**
+   *	Every slug must be unique across a project, but a product can have the same slug for different languages.
+   *	Allowed are alphabetic, numeric, underscore (`_`) and hyphen (`-`) characters.
+   *	Maximum size is `256`.
+   */
   readonly slug: LocalizedString
 }
 export interface ProductLegacySetSkuAction {
@@ -459,6 +470,9 @@ export interface ProductLegacySetSkuAction {
 }
 export interface ProductMoveImageToPositionAction {
   readonly action: 'moveImageToPosition'
+  /**
+   *	The URL of the image
+   */
   readonly imageUrl: string
   readonly staged?: boolean
   readonly position: number
@@ -484,6 +498,9 @@ export interface ProductRemoveFromCategoryAction {
 }
 export interface ProductRemoveImageAction {
   readonly action: 'removeImage'
+  /**
+   *	The URL of the image.
+   */
   readonly imageUrl: string
   readonly staged?: boolean
   readonly variantId?: number
@@ -492,6 +509,9 @@ export interface ProductRemoveImageAction {
 export interface ProductRemovePriceAction {
   readonly action: 'removePrice'
   readonly staged?: boolean
+  /**
+   *	ID of the [Price](#price)
+   */
   readonly priceId: string
 }
 export interface ProductRemoveVariantAction {
@@ -522,7 +542,14 @@ export interface ProductSetAssetCustomTypeAction {
   readonly assetId?: string
   readonly staged?: boolean
   readonly variantId?: number
+  /**
+   *	If set, the custom fields are set to this new value.
+   */
   readonly fields?: object
+  /**
+   *	If set, the custom type is set to this new value.
+   *	If absent, the custom type and any existing custom fields are removed.
+   */
   readonly type?: TypeResourceIdentifier
   readonly sku?: string
   readonly assetKey?: string
@@ -542,6 +569,10 @@ export interface ProductSetAssetKeyAction {
   readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
+  /**
+   *	User-defined identifier for the asset.
+   *	If left blank or set to `null`, the asset key is unset/removed.
+   */
   readonly assetKey?: string
 }
 export interface ProductSetAssetSourcesAction {
@@ -568,12 +599,20 @@ export interface ProductSetAttributeAction {
   readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
+  /**
+   *	If the attribute exists and the value is omitted or set to `null`, the attribute is removed.
+   *	If the attribute exists and a value is provided, the new value is applied.
+   *	If the attribute does not exist and a value is provided, it is added as a new attribute.
+   */
   readonly value?: object
 }
 export interface ProductSetAttributeInAllVariantsAction {
   readonly action: 'setAttributeInAllVariants'
   readonly name: string
   readonly staged?: boolean
+  /**
+   *	The same update behavior as for Set Attribute applies.
+   */
   readonly value?: object
 }
 export interface ProductSetCategoryOrderHintAction {
@@ -595,14 +634,25 @@ export interface ProductSetDiscountedPriceAction {
 }
 export interface ProductSetImageLabelAction {
   readonly action: 'setImageLabel'
+  /**
+   *	The URL of the image.
+   */
   readonly imageUrl: string
   readonly staged?: boolean
+  /**
+   *	The new image label.
+   *	If left blank or set to null, the label is removed.
+   */
   readonly label?: string
   readonly variantId?: number
   readonly sku?: string
 }
 export interface ProductSetKeyAction {
   readonly action: 'setKey'
+  /**
+   *	User-specific unique identifier for the product.
+   *	If left blank or set to `null`, the product key is unset/removed.
+   */
   readonly key?: string
 }
 export interface ProductSetMetaDescriptionAction {
@@ -646,6 +696,9 @@ export interface ProductSetProductVariantKeyAction {
   readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
+  /**
+   *	If left blank or set to `null`, the key is unset/removed.
+   */
   readonly key?: string
 }
 export interface ProductSetSearchKeywordsAction {
@@ -657,10 +710,17 @@ export interface ProductSetSkuAction {
   readonly action: 'setSku'
   readonly staged?: boolean
   readonly variantId: number
+  /**
+   *	SKU must be unique.
+   *	If left blank or set to `null`, the sku is unset/removed.
+   */
   readonly sku?: string
 }
 export interface ProductSetTaxCategoryAction {
   readonly action: 'setTaxCategory'
+  /**
+   *	If left blank or set to `null`, the tax category is unset/removed.
+   */
   readonly taxCategory?: TaxCategoryResourceIdentifier
 }
 export interface ProductTransitionStateAction {

@@ -50,6 +50,7 @@ export type Message =
   | OrderCreatedMessage
   | OrderCustomLineItemDiscountSetMessage
   | OrderCustomerEmailSetMessage
+  | OrderCustomerGroupSetMessage
   | OrderCustomerSetMessage
   | OrderDeletedMessage
   | OrderDiscountCodeAddedMessage
@@ -451,6 +452,21 @@ export interface OrderCustomerEmailSetMessage {
   readonly resourceVersion: number
   readonly oldEmail?: string
   readonly email?: string
+}
+export interface OrderCustomerGroupSetMessage {
+  readonly type: 'OrderCustomerGroupSet'
+  readonly createdAt: string
+  readonly lastModifiedAt: string
+  readonly id: string
+  readonly version: number
+  readonly createdBy?: CreatedBy
+  readonly lastModifiedBy?: LastModifiedBy
+  readonly sequenceNumber: number
+  readonly resource: Reference
+  readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
+  readonly resourceVersion: number
+  readonly oldCustomerGroup?: CustomerGroupReference
+  readonly customerGroup?: CustomerGroupReference
 }
 export interface OrderCustomerSetMessage {
   readonly type: 'OrderCustomerSet'
@@ -1154,6 +1170,7 @@ export type MessagePayload =
   | OrderCreatedMessagePayload
   | OrderCustomLineItemDiscountSetMessagePayload
   | OrderCustomerEmailSetMessagePayload
+  | OrderCustomerGroupSetMessagePayload
   | OrderCustomerSetMessagePayload
   | OrderDeletedMessagePayload
   | OrderDiscountCodeAddedMessagePayload
@@ -1320,6 +1337,11 @@ export interface OrderCustomerEmailSetMessagePayload {
   readonly type: 'OrderCustomerEmailSet'
   readonly oldEmail?: string
   readonly email?: string
+}
+export interface OrderCustomerGroupSetMessagePayload {
+  readonly type: 'OrderCustomerGroupSet'
+  readonly oldCustomerGroup?: CustomerGroupReference
+  readonly customerGroup?: CustomerGroupReference
 }
 export interface OrderCustomerSetMessagePayload {
   readonly type: 'OrderCustomerSet'

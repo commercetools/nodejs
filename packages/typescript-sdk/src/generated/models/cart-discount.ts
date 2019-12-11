@@ -261,6 +261,9 @@ export type SelectionMode = 'Cheapest' | 'MostExpensive'
 export type StackingMode = 'Stacking' | 'StopAfterThisDiscount'
 export interface CartDiscountChangeCartPredicateAction {
   readonly action: 'changeCartPredicate'
+  /**
+   *	A valid Cart predicate.
+   */
   readonly cartPredicate: string
 }
 export interface CartDiscountChangeIsActiveAction {
@@ -277,6 +280,10 @@ export interface CartDiscountChangeRequiresDiscountCodeAction {
 }
 export interface CartDiscountChangeSortOrderAction {
   readonly action: 'changeSortOrder'
+  /**
+   *	The string must contain a number between 0 and 1.
+   *	A discount with greater sortOrder is prioritized higher than a discount with lower sortOrder.
+   */
   readonly sortOrder: string
 }
 export interface CartDiscountChangeStackingModeAction {
@@ -294,31 +301,61 @@ export interface CartDiscountChangeValueAction {
 export interface CartDiscountSetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
+  /**
+   *	If `value` is absent or `null`, this field will be removed if it exists.
+   *	If `value` is provided, set the `value` of the field defined by the `name`.
+   *	The FieldDefinition determines the format for the `value` to be provided.
+   */
   readonly value?: object
 }
 export interface CartDiscountSetCustomTypeAction {
   readonly action: 'setCustomType'
+  /**
+   *	A valid JSON object, based on the FieldDefinitions of the Type.
+   *	Sets the custom fields to this value.
+   */
   readonly fields?: object
+  /**
+   *	If absent, the custom type and any existing CustomFields are removed.
+   */
   readonly type?: TypeResourceIdentifier
 }
 export interface CartDiscountSetDescriptionAction {
   readonly action: 'setDescription'
+  /**
+   *	If the `description` parameter is not included, the field will be emptied.
+   */
   readonly description?: LocalizedString
 }
 export interface CartDiscountSetKeyAction {
   readonly action: 'setKey'
+  /**
+   *	If `key` is absent or `null`, this field will be removed if it exists.
+   */
   readonly key?: string
 }
 export interface CartDiscountSetValidFromAction {
   readonly action: 'setValidFrom'
+  /**
+   *	If absent, the field with the value is removed in case a value was set before.
+   */
   readonly validFrom?: string
 }
 export interface CartDiscountSetValidFromAndUntilAction {
   readonly action: 'setValidFromAndUntil'
+  /**
+   *	If absent, the field with the value is removed in case a value was set before.
+   */
   readonly validUntil?: string
+  /**
+   *	If absent, the field with the value is removed in case a value was set before.
+   */
   readonly validFrom?: string
 }
 export interface CartDiscountSetValidUntilAction {
   readonly action: 'setValidUntil'
+  /**
+   *	If absent, the field with the value is removed in case a value was set before.
+   */
   readonly validUntil?: string
 }

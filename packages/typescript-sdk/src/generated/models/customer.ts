@@ -126,7 +126,7 @@ export interface CustomerDraft {
    */
   readonly customerNumber?: string
   /**
-   *	 The customer's email address and the main identifier of uniqueness for a customer account.
+   *	The customer's email address and the main identifier of uniqueness for a customer account.
    *	Email addresses are either unique to the store they're specified for, _or_ for the entire project, and are case insensitive.
    *	For more information, see Email uniquenes.
    */
@@ -311,6 +311,9 @@ export interface CustomerRemoveShippingAddressIdAction {
 }
 export interface CustomerSetCompanyNameAction {
   readonly action: 'setCompanyName'
+  /**
+   *	If not defined, the company name is unset.
+   */
   readonly companyName?: string
 }
 export interface CustomerSetCustomFieldAction {
@@ -320,31 +323,57 @@ export interface CustomerSetCustomFieldAction {
 }
 export interface CustomerSetCustomTypeAction {
   readonly action: 'setCustomType'
+  /**
+   *	A valid JSON object, based on the FieldDefinitions of the Type.
+   *	Sets the custom fields to this value.
+   */
   readonly fields?: FieldContainer
+  /**
+   *	If absent, the custom type and any existing custom fields are removed.
+   */
   readonly type?: TypeResourceIdentifier
 }
 export interface CustomerSetCustomerGroupAction {
   readonly action: 'setCustomerGroup'
+  /**
+   *	If not defined, the customer group is unset.
+   */
   readonly customerGroup?: CustomerGroupResourceIdentifier
 }
 export interface CustomerSetCustomerNumberAction {
   readonly action: 'setCustomerNumber'
+  /**
+   *	It should be **unique** across a project.
+   *	Once it's set, it cannot be changed.
+   */
   readonly customerNumber?: string
 }
 export interface CustomerSetDateOfBirthAction {
   readonly action: 'setDateOfBirth'
+  /**
+   *	If not defined, the date of birth is unset.
+   */
   readonly dateOfBirth?: string
 }
 export interface CustomerSetDefaultBillingAddressAction {
   readonly action: 'setDefaultBillingAddress'
+  /**
+   *	If not defined, the customer's `defaultBillingAddress` is unset.
+   */
   readonly addressId?: string
 }
 export interface CustomerSetDefaultShippingAddressAction {
   readonly action: 'setDefaultShippingAddress'
+  /**
+   *	If not defined, the customer's `defaultShippingAddress` is unset.
+   */
   readonly addressId?: string
 }
 export interface CustomerSetExternalIdAction {
   readonly action: 'setExternalId'
+  /**
+   *	If not defined, the external ID is unset.
+   */
   readonly externalId?: string
 }
 export interface CustomerSetFirstNameAction {
@@ -353,6 +382,9 @@ export interface CustomerSetFirstNameAction {
 }
 export interface CustomerSetKeyAction {
   readonly action: 'setKey'
+  /**
+   *	If `key` is absent or `null`, this field will be removed if it exists.
+   */
   readonly key?: string
 }
 export interface CustomerSetLastNameAction {
@@ -377,5 +409,8 @@ export interface CustomerSetTitleAction {
 }
 export interface CustomerSetVatIdAction {
   readonly action: 'setVatId'
+  /**
+   *	If not defined, the vat Id is unset.
+   */
   readonly vatId?: string
 }

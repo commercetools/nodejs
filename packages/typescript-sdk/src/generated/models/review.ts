@@ -162,6 +162,9 @@ export type ReviewUpdateAction =
   | ReviewTransitionStateAction
 export interface ReviewSetAuthorNameAction {
   readonly action: 'setAuthorName'
+  /**
+   *	If `authorName` is absent or `null`, this field will be removed if it exists.
+   */
   readonly authorName?: string
 }
 export interface ReviewSetCustomFieldAction {
@@ -171,35 +174,67 @@ export interface ReviewSetCustomFieldAction {
 }
 export interface ReviewSetCustomTypeAction {
   readonly action: 'setCustomType'
+  /**
+   *	A valid JSON object, based on the FieldDefinitions of the Type.
+   *	Sets the CustomFields to this value.
+   */
   readonly fields?: FieldContainer
+  /**
+   *	If absent, the custom type and any existing custom fields are removed.
+   */
   readonly type?: TypeResourceIdentifier
 }
 export interface ReviewSetCustomerAction {
   readonly action: 'setCustomer'
+  /**
+   *	The customer who created the review.
+   *	If `customer` is absent or `null`, this field will be removed if it exists.
+   */
   readonly customer?: CustomerResourceIdentifier
 }
 export interface ReviewSetKeyAction {
   readonly action: 'setKey'
+  /**
+   *	If `key` is absent or `null`, this field will be removed if it exists.
+   */
   readonly key?: string
 }
 export interface ReviewSetLocaleAction {
   readonly action: 'setLocale'
+  /**
+   *	If `locale` is absent or `null`, this field will be removed if it exists.
+   */
   readonly locale?: string
 }
 export interface ReviewSetRatingAction {
   readonly action: 'setRating'
+  /**
+   *	Number between -100 and 100 included.
+   *	If `rating` is absent or `null`, this field will be removed if it exists.
+   */
   readonly rating?: number
 }
 export interface ReviewSetTargetAction {
   readonly action: 'setTarget'
+  /**
+   *	Identifies the target of the review.
+   *	Can be a Product or a Channel.
+   *	If `target` is absent or `null`, this field will be removed if it exists.
+   */
   readonly target: ProductResourceIdentifier | ChannelResourceIdentifier
 }
 export interface ReviewSetTextAction {
   readonly action: 'setText'
+  /**
+   *	If `text` is absent or `null`, this field will be removed if it exists.
+   */
   readonly text?: string
 }
 export interface ReviewSetTitleAction {
   readonly action: 'setTitle'
+  /**
+   *	If `title` is absent or `null`, this field will be removed if it exists.
+   */
   readonly title?: string
 }
 export interface ReviewTransitionStateAction {

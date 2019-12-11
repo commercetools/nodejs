@@ -331,6 +331,9 @@ export interface ProductTypeChangePlainEnumValueOrderAction {
 }
 export interface ProductTypeRemoveAttributeDefinitionAction {
   readonly action: 'removeAttributeDefinition'
+  /**
+   *	The name of the attribute to remove.
+   */
   readonly name: string
 }
 export interface ProductTypeRemoveEnumValuesAction {
@@ -345,5 +348,8 @@ export interface ProductTypeSetInputTipAction {
 }
 export interface ProductTypeSetKeyAction {
   readonly action: 'setKey'
+  /**
+   *	If `key` is absent or `null`, this field will be removed if it exists.
+   */
   readonly key?: string
 }

@@ -160,6 +160,10 @@ export interface DiscountCodeChangeCartDiscountsAction {
 }
 export interface DiscountCodeChangeGroupsAction {
   readonly action: 'changeGroups'
+  /**
+   *	The groups to which this discount code shall belong to.
+   *	Use empty array to remove the code from all groups.
+   */
   readonly groups: string[]
 }
 export interface DiscountCodeChangeIsActiveAction {
@@ -168,6 +172,9 @@ export interface DiscountCodeChangeIsActiveAction {
 }
 export interface DiscountCodeSetCartPredicateAction {
   readonly action: 'setCartPredicate'
+  /**
+   *	If the `cartPredicate` parameter is not included, the field will be emptied.
+   */
   readonly cartPredicate?: string
 }
 export interface DiscountCodeSetCustomFieldAction {
@@ -177,35 +184,66 @@ export interface DiscountCodeSetCustomFieldAction {
 }
 export interface DiscountCodeSetCustomTypeAction {
   readonly action: 'setCustomType'
+  /**
+   *	A valid JSON object, based on the FieldDefinitions of the Type.
+   *	Sets the custom fields to this value.
+   */
   readonly fields?: FieldContainer
+  /**
+   *	If absent, the custom type and any existing CustomFields are removed.
+   */
   readonly type?: TypeResourceIdentifier
 }
 export interface DiscountCodeSetDescriptionAction {
   readonly action: 'setDescription'
+  /**
+   *	If the `description` parameter is not included, the field will be emptied.
+   */
   readonly description?: LocalizedString
 }
 export interface DiscountCodeSetMaxApplicationsAction {
   readonly action: 'setMaxApplications'
+  /**
+   *	If the `maxApplications` parameter is not included, the field will be emptied.
+   */
   readonly maxApplications?: number
 }
 export interface DiscountCodeSetMaxApplicationsPerCustomerAction {
   readonly action: 'setMaxApplicationsPerCustomer'
+  /**
+   *	If the `maxApplicationsPerCustomer` parameter is not included, the field will be emptied.
+   */
   readonly maxApplicationsPerCustomer?: number
 }
 export interface DiscountCodeSetNameAction {
   readonly action: 'setName'
+  /**
+   *	If the `name` parameter is not included, the field will be emptied.
+   */
   readonly name?: LocalizedString
 }
 export interface DiscountCodeSetValidFromAction {
   readonly action: 'setValidFrom'
+  /**
+   *	If absent, the field with the value is removed in case a value was set before.
+   */
   readonly validFrom?: string
 }
 export interface DiscountCodeSetValidFromAndUntilAction {
   readonly action: 'setValidFromAndUntil'
+  /**
+   *	If absent, the field with the value is removed in case a value was set before.
+   */
   readonly validUntil?: string
+  /**
+   *	If absent, the field with the value is removed in case a value was set before.
+   */
   readonly validFrom?: string
 }
 export interface DiscountCodeSetValidUntilAction {
   readonly action: 'setValidUntil'
+  /**
+   *	If absent, the field with the value is removed in case a value was set before.
+   */
   readonly validUntil?: string
 }

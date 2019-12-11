@@ -183,6 +183,9 @@ export interface ShippingMethodAddZoneAction {
 }
 export interface ShippingMethodChangeIsDefaultAction {
   readonly action: 'changeIsDefault'
+  /**
+   *	Only one ShippingMethod in a project can be default.
+   */
   readonly isDefault: boolean
 }
 export interface ShippingMethodChangeNameAction {
@@ -208,9 +211,16 @@ export interface ShippingMethodSetDescriptionAction {
 }
 export interface ShippingMethodSetKeyAction {
   readonly action: 'setKey'
+  /**
+   *	If `key` is absent or `null`, it is removed if it exists.
+   */
   readonly key?: string
 }
 export interface ShippingMethodSetPredicateAction {
   readonly action: 'setPredicate'
+  /**
+   *	A valid Cart predicate.
+   *	If `predicate` is absent or `null`, it is removed if it exists.
+   */
   readonly predicate?: string
 }
