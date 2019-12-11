@@ -291,6 +291,10 @@ export interface PaymentSetAmountRefundedAction {
 }
 export interface PaymentSetAnonymousIdAction {
   readonly action: 'setAnonymousId'
+  /**
+   *	Anonymous ID of the anonymous customer that this payment belongs to.
+   *	If this field is not set any existing `anonymousId` is removed.
+   */
   readonly anonymousId?: string
 }
 export interface PaymentSetAuthorizationAction {
@@ -305,11 +309,21 @@ export interface PaymentSetCustomFieldAction {
 }
 export interface PaymentSetCustomTypeAction {
   readonly action: 'setCustomType'
+  /**
+   *	Sets the custom fields to this value.
+   */
   readonly fields?: FieldContainer
+  /**
+   *	If set, the custom type is set to this new value.
+   *	If absent, the custom type and any existing custom fields are removed.
+   */
   readonly type?: TypeResourceIdentifier
 }
 export interface PaymentSetCustomerAction {
   readonly action: 'setCustomer'
+  /**
+   *	A reference to the customer this payment belongs to.
+   */
   readonly customer?: CustomerResourceIdentifier
 }
 export interface PaymentSetExternalIdAction {
@@ -322,6 +336,11 @@ export interface PaymentSetInterfaceIdAction {
 }
 export interface PaymentSetKeyAction {
   readonly action: 'setKey'
+  /**
+   *	User-specific unique identifier for the payment (max.
+   *	256 characters).
+   *	If not provided an existing key will be removed.
+   */
   readonly key?: string
 }
 export interface PaymentSetMethodInfoInterfaceAction {
@@ -330,10 +349,16 @@ export interface PaymentSetMethodInfoInterfaceAction {
 }
 export interface PaymentSetMethodInfoMethodAction {
   readonly action: 'setMethodInfoMethod'
+  /**
+   *	If not provided, the method is unset.
+   */
   readonly method?: string
 }
 export interface PaymentSetMethodInfoNameAction {
   readonly action: 'setMethodInfoName'
+  /**
+   *	If not provided, the name is unset.
+   */
   readonly name?: LocalizedString
 }
 export interface PaymentSetStatusInterfaceCodeAction {

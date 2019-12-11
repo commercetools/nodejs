@@ -669,7 +669,7 @@ export interface TaxPortion {
 export interface TaxPortionDraft {
   readonly name?: string
   readonly rate: number
-  readonly amount: TypedMoneyDraft
+  readonly amount: Money
 }
 export interface TaxedItemPrice {
   readonly totalNet: TypedMoney
@@ -774,6 +774,12 @@ export interface CartChangeTaxRoundingModeAction {
 }
 export interface CartRecalculateAction {
   readonly action: 'recalculate'
+  /**
+   *	If set to `true`, the line item product data (`name`, `variant` and `productType`) will also be updated.
+   *	If set to `false`,
+   *	only the prices and tax rates of the line item will be updated.
+   *	The updated price of a line item may not correspond to a price in `variant.prices` anymore.
+   */
   readonly updateProductData?: boolean
 }
 export interface CartRemoveCustomLineItemAction {
@@ -802,6 +808,9 @@ export interface CartRemovePaymentAction {
 }
 export interface CartSetAnonymousIdAction {
   readonly action: 'setAnonymousId'
+  /**
+   *	If not set, any existing anonymous ID will be removed.
+   */
   readonly anonymousId?: string
 }
 export interface CartSetBillingAddressAction {
@@ -811,6 +820,9 @@ export interface CartSetBillingAddressAction {
 export interface CartSetCartTotalTaxAction {
   readonly action: 'setCartTotalTax'
   readonly externalTaxPortions?: TaxPortionDraft[]
+  /**
+   *	The total gross amount of the cart (totalNet + taxes).
+   */
   readonly externalTotalGross: Money
 }
 export interface CartSetCountryAction {
@@ -875,6 +887,9 @@ export interface CartSetCustomerGroupAction {
 }
 export interface CartSetCustomerIdAction {
   readonly action: 'setCustomerId'
+  /**
+   *	If set, a customer with the given ID must exist in the project.
+   */
   readonly customerId?: string
 }
 export interface CartSetDeleteDaysAfterLastModificationAction {
@@ -941,6 +956,12 @@ export interface CartSetShippingMethodTaxRateAction {
 }
 export interface CartSetShippingRateInputAction {
   readonly action: 'setShippingRateInput'
+  /**
+   *	Based on the definition of ShippingRateInputType.
+   *	If CartClassification is defined, it must be ClassificationShippingRateInput.
+   *	If CartScore is defined, it must be ScoreShippingRateInput.
+   *	Otherwise it can not bet set.
+   */
   readonly shippingRateInput?: ShippingRateInputDraft
 }
 export interface CartUpdateItemShippingAddressAction {

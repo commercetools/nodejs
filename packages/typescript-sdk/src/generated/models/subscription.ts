@@ -161,6 +161,9 @@ export interface SubscriptionSetChangesAction {
 }
 export interface SubscriptionSetKeyAction {
   readonly action: 'setKey'
+  /**
+   *	If `key` is absent or `null`, this field will be removed if it exists.
+   */
   readonly key?: string
 }
 export interface SubscriptionSetMessagesAction {

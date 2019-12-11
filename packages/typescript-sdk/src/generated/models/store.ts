@@ -69,5 +69,8 @@ export interface StoreUpdate {
 export type StoreUpdateAction = StoreSetNameAction
 export interface StoreSetNameAction {
   readonly action: 'setName'
+  /**
+   *	The updated name of the store
+   */
   readonly name?: LocalizedString
 }

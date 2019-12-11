@@ -117,7 +117,14 @@ export interface InventoryEntrySetCustomFieldAction {
 }
 export interface InventoryEntrySetCustomTypeAction {
   readonly action: 'setCustomType'
+  /**
+   *	A valid JSON object, based on the FieldDefinitions of the Type.
+   *	Sets the custom fields to this value.
+   */
   readonly fields?: FieldContainer
+  /**
+   *	If absent, the custom type and any existing CustomFields are removed.
+   */
   readonly type?: TypeResourceIdentifier
 }
 export interface InventoryEntrySetExpectedDeliveryAction {
@@ -130,5 +137,9 @@ export interface InventoryEntrySetRestockableInDaysAction {
 }
 export interface InventoryEntrySetSupplyChannelAction {
   readonly action: 'setSupplyChannel'
+  /**
+   *	If absent, the supply channel is removed.
+   *	This action will fail if an entry with the combination of sku and supplyChannel already exists.
+   */
   readonly supplyChannel?: ChannelResourceIdentifier
 }

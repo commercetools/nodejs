@@ -154,5 +154,8 @@ export interface TaxCategorySetDescriptionAction {
 }
 export interface TaxCategorySetKeyAction {
   readonly action: 'setKey'
+  /**
+   *	If `key` is absent or `null`, it is removed if it exists.
+   */
   readonly key?: string
 }

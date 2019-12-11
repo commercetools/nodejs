@@ -68,14 +68,23 @@ export interface CartValueType {
 }
 export interface ProjectChangeCountriesAction {
   readonly action: 'changeCountries'
+  /**
+   *	A two-digit country code as per country code.
+   */
   readonly countries: string[]
 }
 export interface ProjectChangeCurrenciesAction {
   readonly action: 'changeCurrencies'
+  /**
+   *	A three-digit currency code as per currency code.
+   */
   readonly currencies: string[]
 }
 export interface ProjectChangeLanguagesAction {
   readonly action: 'changeLanguages'
+  /**
+   *	 .
+   */
   readonly languages: string[]
 }
 export interface ProjectChangeMessagesConfigurationAction {
@@ -92,9 +101,17 @@ export interface ProjectChangeNameAction {
 }
 export interface ProjectSetExternalOAuthAction {
   readonly action: 'setExternalOAuth'
+  /**
+   *	If you do not provide the `externalOAuth` field or provide a value
+   *	of `null`, the update action unsets the External OAuth provider.
+   *
+   */
   readonly externalOAuth?: ExternalOAuth
 }
 export interface ProjectSetShippingRateInputTypeAction {
   readonly action: 'setShippingRateInputType'
+  /**
+   *	If not set, removes existing shippingRateInputType.
+   */
   readonly shippingRateInputType?: ShippingRateInputType
 }

@@ -106,9 +106,18 @@ export interface ExtensionChangeTriggersAction {
 }
 export interface ExtensionSetKeyAction {
   readonly action: 'setKey'
+  /**
+   *	If `key` is absent or `null`, this field will be removed if it exists.
+   */
   readonly key?: string
 }
 export interface ExtensionSetTimeoutInMsAction {
   readonly action: 'setTimeoutInMs'
+  /**
+   *	The maximum time the commercetools platform waits for a response from the extension.
+   *	The maximum value is 2000 ms (2 seconds).
+   *	This limit can be increased per project after we review the performance impact.
+   *	Please contact Support via the support and provide the region, project key and use case.
+   */
   readonly timeoutInMs?: number
 }

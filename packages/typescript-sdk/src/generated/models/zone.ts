@@ -95,5 +95,8 @@ export interface ZoneSetDescriptionAction {
 }
 export interface ZoneSetKeyAction {
   readonly action: 'setKey'
+  /**
+   *	If `key` is absent or `null`, this field will be removed if it exists.
+   */
   readonly key?: string
 }
