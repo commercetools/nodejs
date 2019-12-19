@@ -36,7 +36,7 @@ export interface CustomFieldsDraft {
   readonly fields?: FieldContainer
 }
 export interface FieldContainer {
-  [key: string]: object
+  [key: string]: any
 }
 export interface FieldDefinition {
   /**

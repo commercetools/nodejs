@@ -228,7 +228,7 @@ export interface CustomerSignInResult {
    *	A cart that is associated to the customer.
    *	Empty if the customer does not have a cart yet.
    */
-  readonly cart?: object
+  readonly cart?: any
 }
 export interface CustomerSignin {
   readonly email: string
@@ -319,7 +319,7 @@ export interface CustomerSetCompanyNameAction {
 export interface CustomerSetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface CustomerSetCustomTypeAction {
   readonly action: 'setCustomType'

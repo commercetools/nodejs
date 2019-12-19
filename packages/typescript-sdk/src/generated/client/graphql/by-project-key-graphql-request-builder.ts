@@ -1,3 +1,4 @@
+import { GraphQLRequest, GraphQLResponse } from './../../models/graph-ql'
 import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
 
 export class ByProjectKeyGraphqlRequestBuilder {
@@ -13,12 +14,12 @@ export class ByProjectKeyGraphqlRequestBuilder {
    *	Execute a GraphQL query
    */
   public post(methodArgs: {
-    body: object
+    body: GraphQLRequest
     headers?: {
       [key: string]: string
     }
-  }): ApiRequest<object> {
-    return new ApiRequest<object>(
+  }): ApiRequest<GraphQLResponse> {
+    return new ApiRequest<GraphQLResponse>(
       {
         baseURL: 'https://api.sphere.io',
         method: 'POST',

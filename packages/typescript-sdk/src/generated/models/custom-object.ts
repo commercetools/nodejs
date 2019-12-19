@@ -20,7 +20,7 @@ export interface CustomObject extends LoggedResource {
    */
   readonly container: string
   readonly key: string
-  readonly value: object
+  readonly value: any
 }
 export interface CustomObjectDraft {
   /**
@@ -31,7 +31,7 @@ export interface CustomObjectDraft {
    *	A user-defined key that is unique within the given container.
    */
   readonly key: string
-  readonly value: object
+  readonly value: any
   readonly version?: number
 }
 export interface CustomObjectPagedQueryResponse {

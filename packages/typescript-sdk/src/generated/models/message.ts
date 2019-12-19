@@ -1017,7 +1017,7 @@ export interface ProductPublishedMessage {
   readonly resource: Reference
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
-  readonly removedImageUrls: object[]
+  readonly removedImageUrls: any[]
   readonly productProjection: ProductProjection
   readonly scope: ProductPublishScope
 }

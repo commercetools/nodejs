@@ -101,7 +101,7 @@ export interface PagedQueryResponse {
   readonly offset: number
   readonly results: BaseResource[]
   readonly facets?: FacetResults
-  readonly meta?: object
+  readonly meta?: any
 }
 export interface Update {
   readonly version: number
