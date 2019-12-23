@@ -81,14 +81,14 @@ export interface DuplicateFieldError {
   readonly code: 'DuplicateField'
   readonly message: string
   readonly conflictingResource?: Reference
-  readonly duplicateValue?: object
+  readonly duplicateValue?: any
   readonly field?: string
 }
 export interface DuplicateFieldWithConflictingResourceError {
   readonly code: 'DuplicateFieldWithConflictingResource'
   readonly message: string
   readonly conflictingResource: Reference
-  readonly duplicateValue: object
+  readonly duplicateValue: any
   readonly field: string
 }
 export interface DuplicatePriceScopeError {
@@ -116,21 +116,21 @@ export interface ExtensionBadResponseError {
   readonly code: 'ExtensionBadResponse'
   readonly message: string
   readonly localizedMessage?: LocalizedString
-  readonly extensionExtraInfo?: object
+  readonly extensionExtraInfo?: any
   readonly errorByExtension: ErrorByExtension
 }
 export interface ExtensionNoResponseError {
   readonly code: 'ExtensionNoResponse'
   readonly message: string
   readonly localizedMessage?: LocalizedString
-  readonly extensionExtraInfo?: object
+  readonly extensionExtraInfo?: any
   readonly errorByExtension: ErrorByExtension
 }
 export interface ExtensionUpdateActionsFailedError {
   readonly code: 'ExtensionUpdateActionsFailed'
   readonly message: string
   readonly localizedMessage?: LocalizedString
-  readonly extensionExtraInfo?: object
+  readonly extensionExtraInfo?: any
   readonly errorByExtension: ErrorByExtension
 }
 export interface InsufficientScopeError {
@@ -148,9 +148,9 @@ export interface InvalidCurrentPasswordError {
 export interface InvalidFieldError {
   readonly code: 'InvalidField'
   readonly message: string
-  readonly allowedValues?: object[]
+  readonly allowedValues?: any[]
   readonly field: string
-  readonly invalidValue: object
+  readonly invalidValue: any
 }
 export interface InvalidInputError {
   readonly code: 'InvalidInput'

@@ -197,7 +197,7 @@ export interface CategorySetAssetCustomFieldAction {
   readonly action: 'setAssetCustomField'
   readonly assetId?: string
   readonly name: string
-  readonly value?: object
+  readonly value?: any
   readonly assetKey?: string
 }
 export interface CategorySetAssetCustomTypeAction {
@@ -206,7 +206,7 @@ export interface CategorySetAssetCustomTypeAction {
   /**
    *	If set, the custom fields are set to this new value.
    */
-  readonly fields?: object
+  readonly fields?: any
   /**
    *	If set, the custom type is set to this new value.
    *	If absent, the custom type and any existing custom fields are removed.
@@ -244,7 +244,7 @@ export interface CategorySetAssetTagsAction {
 export interface CategorySetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface CategorySetCustomTypeAction {
   readonly action: 'setCustomType'

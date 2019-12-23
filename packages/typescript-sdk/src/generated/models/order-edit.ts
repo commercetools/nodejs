@@ -218,14 +218,14 @@ export interface OrderEditSetCommentAction {
 export interface OrderEditSetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface OrderEditSetCustomTypeAction {
   readonly action: 'setCustomType'
   /**
    *	If set, the custom fields are set to this new value.
    */
-  readonly fields?: object
+  readonly fields?: any
   /**
    *	If set, the custom type is set to this new value.
    *	If absent, the custom type and any existing custom fields are removed.
@@ -401,13 +401,13 @@ export interface StagedOrderSetCountryAction {
 export interface StagedOrderSetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface StagedOrderSetCustomLineItemCustomFieldAction {
   readonly action: 'setCustomLineItemCustomField'
   readonly customLineItemId: string
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface StagedOrderSetCustomLineItemCustomTypeAction {
   readonly action: 'setCustomLineItemCustomType'
@@ -468,7 +468,7 @@ export interface StagedOrderSetLineItemCustomFieldAction {
   readonly action: 'setLineItemCustomField'
   readonly lineItemId: string
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface StagedOrderSetLineItemCustomTypeAction {
   readonly action: 'setLineItemCustomType'

@@ -37,7 +37,7 @@ export interface Attribute {
   /**
    *	A valid JSON value, based on an AttributeDefinition.
    */
-  readonly value: object
+  readonly value: any
 }
 export interface CategoryOrderHints {
   [key: string]: string
@@ -59,7 +59,7 @@ export interface FacetResultRange {
   readonly mean: number
 }
 export interface FacetResultTerm {
-  readonly term: object
+  readonly term: any
   readonly count: number
   readonly productCount?: number
 }
@@ -534,7 +534,7 @@ export interface ProductSetAssetCustomFieldAction {
   readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
-  readonly value?: object
+  readonly value?: any
   readonly assetKey?: string
 }
 export interface ProductSetAssetCustomTypeAction {
@@ -545,7 +545,7 @@ export interface ProductSetAssetCustomTypeAction {
   /**
    *	If set, the custom fields are set to this new value.
    */
-  readonly fields?: object
+  readonly fields?: any
   /**
    *	If set, the custom type is set to this new value.
    *	If absent, the custom type and any existing custom fields are removed.
@@ -604,7 +604,7 @@ export interface ProductSetAttributeAction {
    *	If the attribute exists and a value is provided, the new value is applied.
    *	If the attribute does not exist and a value is provided, it is added as a new attribute.
    */
-  readonly value?: object
+  readonly value?: any
 }
 export interface ProductSetAttributeInAllVariantsAction {
   readonly action: 'setAttributeInAllVariants'
@@ -613,7 +613,7 @@ export interface ProductSetAttributeInAllVariantsAction {
   /**
    *	The same update behavior as for Set Attribute applies.
    */
-  readonly value?: object
+  readonly value?: any
 }
 export interface ProductSetCategoryOrderHintAction {
   readonly action: 'setCategoryOrderHint'
@@ -682,7 +682,7 @@ export interface ProductSetProductPriceCustomFieldAction {
   readonly name: string
   readonly staged?: boolean
   readonly priceId: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface ProductSetProductPriceCustomTypeAction {
   readonly action: 'setProductPriceCustomType'

@@ -765,13 +765,13 @@ export interface OrderSetBillingAddressAction {
 export interface OrderSetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface OrderSetCustomLineItemCustomFieldAction {
   readonly action: 'setCustomLineItemCustomField'
   readonly customLineItemId: string
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface OrderSetCustomLineItemCustomTypeAction {
   readonly action: 'setCustomLineItemCustomType'
@@ -811,7 +811,7 @@ export interface OrderSetLineItemCustomFieldAction {
   readonly action: 'setLineItemCustomField'
   readonly lineItemId: string
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface OrderSetLineItemCustomTypeAction {
   readonly action: 'setLineItemCustomType'

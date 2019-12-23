@@ -77,7 +77,7 @@ export interface CustomerGroupChangeNameAction {
 export interface CustomerGroupSetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface CustomerGroupSetCustomTypeAction {
   readonly action: 'setCustomType'

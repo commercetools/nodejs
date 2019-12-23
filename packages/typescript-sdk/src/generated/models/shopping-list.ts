@@ -271,7 +271,7 @@ export interface ShoppingListSetAnonymousIdAction {
 export interface ShoppingListSetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface ShoppingListSetCustomTypeAction {
   readonly action: 'setCustomType'
@@ -308,7 +308,7 @@ export interface ShoppingListSetLineItemCustomFieldAction {
   readonly action: 'setLineItemCustomField'
   readonly lineItemId: string
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface ShoppingListSetLineItemCustomTypeAction {
   readonly action: 'setLineItemCustomType'
@@ -323,7 +323,7 @@ export interface ShoppingListSetSlugAction {
 export interface ShoppingListSetTextLineItemCustomFieldAction {
   readonly action: 'setTextLineItemCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
   readonly textLineItemId: string
 }
 export interface ShoppingListSetTextLineItemCustomTypeAction {

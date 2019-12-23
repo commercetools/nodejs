@@ -147,7 +147,7 @@ export interface ChannelSetAddressAction {
 export interface ChannelSetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface ChannelSetCustomTypeAction {
   readonly action: 'setCustomType'

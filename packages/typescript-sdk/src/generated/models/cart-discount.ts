@@ -303,10 +303,11 @@ export interface CartDiscountSetCustomFieldAction {
   readonly name: string
   /**
    *	If `value` is absent or `null`, this field will be removed if it exists.
+   *	Trying to remove a field that does not exist will fail with an `InvalidOperation` error.
    *	If `value` is provided, set the `value` of the field defined by the `name`.
    *	The FieldDefinition determines the format for the `value` to be provided.
    */
-  readonly value?: object
+  readonly value?: any
 }
 export interface CartDiscountSetCustomTypeAction {
   readonly action: 'setCustomType'
@@ -314,7 +315,7 @@ export interface CartDiscountSetCustomTypeAction {
    *	A valid JSON object, based on the FieldDefinitions of the Type.
    *	Sets the custom fields to this value.
    */
-  readonly fields?: object
+  readonly fields?: any
   /**
    *	If absent, the custom type and any existing CustomFields are removed.
    */
