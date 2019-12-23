@@ -5,7 +5,7 @@ import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import fetch from 'node-fetch'
-import csv from 'fast-csv'
+import * as csv from 'fast-csv'
 import JSONStream from 'JSONStream'
 import { flatten } from 'flat'
 import type {
