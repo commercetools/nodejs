@@ -7,7 +7,7 @@ import type {
   CsvInventoryMapping,
 } from 'types/inventory'
 
-import csv from 'fast-csv'
+import * as csv from 'fast-csv'
 import fetch from 'node-fetch'
 import JSONStream from 'JSONStream'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'

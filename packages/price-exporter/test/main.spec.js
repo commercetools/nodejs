@@ -1,5 +1,5 @@
 import streamtest from 'streamtest'
-import csv from 'fast-csv'
+import * as csv from 'fast-csv'
 import PriceExporter from '../src/main'
 import sampleProduct from './helpers/sampleProduct.json'
 import expectedPrices from './helpers/expectedPrices.json'
