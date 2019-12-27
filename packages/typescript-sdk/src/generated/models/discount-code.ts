@@ -180,7 +180,7 @@ export interface DiscountCodeSetCartPredicateAction {
 export interface DiscountCodeSetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface DiscountCodeSetCustomTypeAction {
   readonly action: 'setCustomType'

@@ -836,13 +836,13 @@ export interface CartSetCountryAction {
 export interface CartSetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface CartSetCustomLineItemCustomFieldAction {
   readonly action: 'setCustomLineItemCustomField'
   readonly customLineItemId: string
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface CartSetCustomLineItemCustomTypeAction {
   readonly action: 'setCustomLineItemCustomType'
@@ -900,7 +900,7 @@ export interface CartSetLineItemCustomFieldAction {
   readonly action: 'setLineItemCustomField'
   readonly lineItemId: string
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface CartSetLineItemCustomTypeAction {
   readonly action: 'setLineItemCustomType'

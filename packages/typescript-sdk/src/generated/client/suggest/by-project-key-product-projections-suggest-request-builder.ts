@@ -22,8 +22,8 @@ export class ByProjectKeyProductProjectionsSuggestRequestBuilder {
     headers?: {
       [key: string]: string
     }
-  }): ApiRequest<object> {
-    return new ApiRequest<object>(
+  }): ApiRequest<any> {
+    return new ApiRequest<any>(
       {
         baseURL: 'https://api.sphere.io',
         method: 'GET',

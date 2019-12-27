@@ -520,7 +520,7 @@ export interface MyCartSetCountryAction {
 export interface MyCartSetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface MyCartSetCustomShippingMethodAction {
   readonly action: 'setCustomShippingMethod'
@@ -542,7 +542,7 @@ export interface MyCartSetLineItemCustomFieldAction {
   readonly action: 'setLineItemCustomField'
   readonly lineItemId: string
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface MyCartSetLineItemCustomTypeAction {
   readonly action: 'setLineItemCustomType'
@@ -612,7 +612,7 @@ export interface MyCustomerSetCompanyNameAction {
 export interface MyCustomerSetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface MyCustomerSetCustomTypeAction {
   readonly action: 'setCustomType'
@@ -670,7 +670,7 @@ export interface MyPaymentChangeAmountPlannedAction {
 export interface MyPaymentSetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface MyPaymentSetMethodInfoInterfaceAction {
   readonly action: 'setMethodInfoInterface'
@@ -741,7 +741,7 @@ export interface MyShoppingListRemoveTextLineItemAction {
 export interface MyShoppingListSetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface MyShoppingListSetCustomTypeAction {
   readonly action: 'setCustomType'
@@ -760,7 +760,7 @@ export interface MyShoppingListSetLineItemCustomFieldAction {
   readonly action: 'setLineItemCustomField'
   readonly lineItemId: string
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface MyShoppingListSetLineItemCustomTypeAction {
   readonly action: 'setLineItemCustomType'
@@ -771,7 +771,7 @@ export interface MyShoppingListSetLineItemCustomTypeAction {
 export interface MyShoppingListSetTextLineItemCustomFieldAction {
   readonly action: 'setTextLineItemCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
   readonly textLineItemId: string
 }
 export interface MyShoppingListSetTextLineItemCustomTypeAction {

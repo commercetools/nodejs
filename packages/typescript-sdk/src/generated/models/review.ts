@@ -132,7 +132,7 @@ export interface ReviewRatingStatistics {
    *	The keys are the different ratings and the values are the count of reviews having this rating.
    *	Only the used ratings appear in this object.
    */
-  readonly ratingsDistribution: object
+  readonly ratingsDistribution: any
 }
 export interface ReviewReference {
   readonly typeId: 'review'
@@ -170,7 +170,7 @@ export interface ReviewSetAuthorNameAction {
 export interface ReviewSetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface ReviewSetCustomTypeAction {
   readonly action: 'setCustomType'

@@ -113,7 +113,7 @@ export interface InventoryEntryRemoveQuantityAction {
 export interface InventoryEntrySetCustomFieldAction {
   readonly action: 'setCustomField'
   readonly name: string
-  readonly value?: object
+  readonly value?: any
 }
 export interface InventoryEntrySetCustomTypeAction {
   readonly action: 'setCustomType'
