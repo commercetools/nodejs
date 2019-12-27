@@ -1,3 +1,93 @@
+## @commercetools/typescript-sdk@0.0.8-alpha.0 (2019-12-27)
+
+#### :bug: Bug Fix
+
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1447](https://github.com/commercetools/nodejs/pull/1447) fix(dep): fast-csv imports ([@daern91](https://github.com/daern91))
+
+#### :nail_care: Enhancement
+
+- `typescript-sdk`
+  - [#1448](https://github.com/commercetools/nodejs/pull/1448) chore(ts-sdk): update definitions ([@acbeni](https://github.com/acbeni))
+  - [#1443](https://github.com/commercetools/nodejs/pull/1443) chore(ts-sdk): update docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/price-exporter@3.0.3 (2019-12-27)
+
+#### :bug: Bug Fix
+
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1447](https://github.com/commercetools/nodejs/pull/1447) fix(dep): fast-csv imports ([@daern91](https://github.com/daern91))
+
+#### :nail_care: Enhancement
+
+- `typescript-sdk`
+  - [#1448](https://github.com/commercetools/nodejs/pull/1448) chore(ts-sdk): update definitions ([@acbeni](https://github.com/acbeni))
+  - [#1443](https://github.com/commercetools/nodejs/pull/1443) chore(ts-sdk): update docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/inventories-exporter@3.0.3 (2019-12-27)
+
+#### :bug: Bug Fix
+
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1447](https://github.com/commercetools/nodejs/pull/1447) fix(dep): fast-csv imports ([@daern91](https://github.com/daern91))
+
+#### :nail_care: Enhancement
+
+- `typescript-sdk`
+  - [#1448](https://github.com/commercetools/nodejs/pull/1448) chore(ts-sdk): update definitions ([@acbeni](https://github.com/acbeni))
+  - [#1443](https://github.com/commercetools/nodejs/pull/1443) chore(ts-sdk): update docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/integration-tests@0.0.7 (2019-12-27)
+
+#### :bug: Bug Fix
+
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1447](https://github.com/commercetools/nodejs/pull/1447) fix(dep): fast-csv imports ([@daern91](https://github.com/daern91))
+
+#### :nail_care: Enhancement
+
+- `typescript-sdk`
+  - [#1448](https://github.com/commercetools/nodejs/pull/1448) chore(ts-sdk): update definitions ([@acbeni](https://github.com/acbeni))
+  - [#1443](https://github.com/commercetools/nodejs/pull/1443) chore(ts-sdk): update docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/discount-code-exporter@4.0.3 (2019-12-27)
+
+#### :bug: Bug Fix
+
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1447](https://github.com/commercetools/nodejs/pull/1447) fix(dep): fast-csv imports ([@daern91](https://github.com/daern91))
+
+#### :nail_care: Enhancement
+
+- `typescript-sdk`
+  - [#1448](https://github.com/commercetools/nodejs/pull/1448) chore(ts-sdk): update definitions ([@acbeni](https://github.com/acbeni))
+  - [#1443](https://github.com/commercetools/nodejs/pull/1443) chore(ts-sdk): update docs ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 2
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
 ## @commercetools/typescript-sdk@0.0.7-alpha.0 (2019-12-05)
 
 #### :nail_care: Enhancement
