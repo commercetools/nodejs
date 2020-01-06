@@ -43,6 +43,15 @@ module.exports = {
     'prefer-destructuring': 0,
     'lines-between-class-members': 0,
     'max-classes-per-file': 0,
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        mjs: 'never',
+        ts: 'never',
+      },
+    ],
   },
   settings: {
     flowtype: {
