@@ -1077,6 +1077,29 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
+"@fast-csv/format@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@fast-csv/format/-/format-4.0.2.tgz#7ed0ac63776e77c2e3502addf30a8acff79ed888"
+  integrity sha512-OqnJINuEdlmXTqEkSQXBCb2oR/4GcAV+Smy38q07Wdz2JSYw55O4McppteVcAYbp7eK+bgoha3ZGTC+R3GTUfg==
+  dependencies:
+    lodash.escaperegexp "^4.1.2"
+    lodash.isboolean "^3.0.3"
+    lodash.isequal "^4.5.0"
+    lodash.isfunction "^3.0.9"
+    lodash.isnil "^4.0.0"
+
+"@fast-csv/parse@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@fast-csv/parse/-/parse-4.0.2.tgz#f6d6e204521e1154e07575ca9c6617197fb29a04"
+  integrity sha512-QQ9Vqn/QWQ/IcxMz5TlhJcr89b0A0Tclo5P1JdkYrSZB4VvyOHspM/EHqNJ8p4smesLDxw0b4flMxsTITSBl0g==
+  dependencies:
+    lodash.escaperegexp "^4.1.2"
+    lodash.groupby "^4.6.0"
+    lodash.isfunction "^3.0.9"
+    lodash.isnil "^4.0.0"
+    lodash.isundefined "^3.0.1"
+    lodash.uniq "^4.5.0"
+
 "@hapi/address@^2.1.2":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -5485,7 +5508,7 @@ eyes@0.1.x:
   resolved "https://registry.yarnpkg.com/eyes/-/eyes-0.1.8.tgz#62cf120234c683785d902348a800ef3e0cc20bc0"
   integrity sha1-Ys8SAjTGg3hdkCNIqADvPgzCC8A=
 
-fast-csv@^3.4.0, fast-csv@^3.7.0:
+fast-csv@^3.4.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/fast-csv/-/fast-csv-3.7.0.tgz#7f737115b77b19c1576432e6e5eae457f3eb7129"
   integrity sha512-vCuVnDX0yjJEpSuQxZW0+Wf7aL8P7EtRzUgmLqpjwooza7mgpfKs2hwuV7nSdmjcb3f0abCp3jJY+E5Ws3piDw==
@@ -5500,6 +5523,15 @@ fast-csv@^3.4.0, fast-csv@^3.7.0:
     lodash.isstring "^4.0.1"
     lodash.isundefined "^3.0.1"
     lodash.uniq "^4.5.0"
+
+fast-csv@^4.0.0:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/fast-csv/-/fast-csv-4.0.2.tgz#ce01a7c433926512558ac18e15aee78683c674e1"
+  integrity sha512-ra9uIiXDEY1pRNnJJKPDtpL3ij9A1r4mCBef893yRkY4O4L0uWlpsZjEMPBME7Te9aqWNin6mbnqLG/QDpqw3A==
+  dependencies:
+    "@fast-csv/format" "^4.0.2"
+    "@fast-csv/parse" "^4.0.2"
+    "@types/node" "^12.12.17"
 
 fast-deep-equal@^2.0.1:
   version "2.0.1"
