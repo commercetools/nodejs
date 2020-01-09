@@ -74,12 +74,17 @@ function getURI(commonRequest: CommonRequest): string {
   }
   for (const query in queryMap) {
     const queryParameter = queryMap[query]
+    if (queryParameter === null || queryParameter === undefined) {
+      continue
+    }
     if (queryParameter instanceof Array) {
-      for (const element in queryParameter) {
-        queryParams.push(
-          `${query}=${encodeURIComponent(`${queryParameter[element]}`)}`
+      ;(queryParameter as [])
+        .filter(value => value != null && value != undefined)
+        .forEach(value =>
+          queryParams.push(
+            `${query}=${encodeURIComponent(`${queryParameter[value]}`)}`
+          )
         )
-      }
     } else {
       queryParams.push(`${query}=${encodeURIComponent(`${queryParameter}`)}`)
     }
