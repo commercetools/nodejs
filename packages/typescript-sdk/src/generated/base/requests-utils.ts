@@ -79,7 +79,7 @@ function getURI(commonRequest: CommonRequest): string {
     }
     if (queryParameter instanceof Array) {
       ;(queryParameter as [])
-        .filter(value => value != null && value != undefined)
+        .filter(value => value !== null && value !== undefined)
         .forEach(value =>
           queryParams.push(
             `${query}=${encodeURIComponent(`${queryParameter[value]}`)}`
