@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-middleware-auth",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "description": "Middleware for different authentication flows of commercetools platform API, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
