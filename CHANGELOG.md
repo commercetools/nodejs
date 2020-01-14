@@ -1,578 +1,825 @@
+## @commercetools/state-importer@3.0.4 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/resource-deleter@2.0.4 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/product-json-to-xlsx@3.0.4 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/product-json-to-csv@4.0.4 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/product-exporter@3.0.4 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/price-exporter@3.0.5 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/personal-data-erasure@3.0.4 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/inventories-exporter@3.0.5 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/integration-tests@0.0.9 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/discount-code-importer@3.0.4 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/discount-code-exporter@4.0.5 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/customer-groups-exporter@3.0.4 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/custom-objects-importer@3.0.4 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/custom-objects-exporter@3.0.4 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/csv-parser-state@3.0.4 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/csv-parser-price@4.0.4 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/category-exporter@3.0.4 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+
+## @commercetools/api-request-builder@5.4.1 (2020-01-14)
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1459](https://github.com/commercetools/nodejs/pull/1459) fix(api-request-builder): reset key ([@katmatt](https://github.com/katmatt))
+
+#### Committers: 1
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
 
 ## @commercetools/typescript-sdk@0.0.9-alpha.0 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/sync-actions@4.1.1 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/state-importer@3.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/sdk-middleware-http@6.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/sdk-middleware-auth@6.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/sdk-auth@3.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/resource-deleter@2.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/product-json-to-xlsx@3.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/product-json-to-csv@4.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/product-exporter@3.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/price-exporter@3.0.4 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/personal-data-erasure@3.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/inventories-exporter@3.0.4 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/integration-tests@0.0.8 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/get-credentials@3.0.11 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/discount-code-importer@3.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/discount-code-exporter@4.0.4 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/customer-groups-exporter@3.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/custom-objects-importer@3.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/custom-objects-exporter@3.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/csv-parser-state@3.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/csv-parser-price@4.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/csv-parser-orders@2.0.12 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
-
 
 ## @commercetools/category-exporter@3.0.3 (2020-01-13)
 
 #### :bug: Bug Fix
-* `typescript-sdk`
-  * [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
+
+- `typescript-sdk`
+  - [#1455](https://github.com/commercetools/nodejs/pull/1455) fix(ts-sdk): handling of undefined parameter ([@acbeni](https://github.com/acbeni))
 
 #### :house: Maintenance
-* Other
-  * [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
-  * [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
-* `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
-  * [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `discount-code-exporter`, `inventories-exporter`, `price-exporter`
-  * [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`
-  * [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
+
+- Other
+  - [#1458](https://github.com/commercetools/nodejs/pull/1458) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1457](https://github.com/commercetools/nodejs/pull/1457) chore: regenerate lockfile ([@emmenko](https://github.com/emmenko))
+  - [#1451](https://github.com/commercetools/nodejs/pull/1451) chore(deps): update dependency npm-check-updates to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1450](https://github.com/commercetools/nodejs/pull/1450) chore(deps): update dependency lerna-changelog to v1 ([@renovate[bot]](https://github.com/apps/renovate))
+- `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`, `sync-actions`
+  - [#1449](https://github.com/commercetools/nodejs/pull/1449) chore(deps): update all non-major dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `discount-code-exporter`, `inventories-exporter`, `price-exporter`
+  - [#1453](https://github.com/commercetools/nodejs/pull/1453) fix(deps): update dependency fast-csv to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`
+  - [#1452](https://github.com/commercetools/nodejs/pull/1452) chore(deps): update dependency sinon to v8 ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 2
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 - Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
 ## @commercetools/typescript-sdk@0.0.8-alpha.0 (2019-12-27)
 
 #### :bug: Bug Fix
