@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/discount-code-importer",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "Import discount codes to the commercetools platform.",
   "keywords": [
     "commercetools",
@@ -33,7 +33,7 @@
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {
-    "@commercetools/api-request-builder": "^5.4.0",
+    "@commercetools/api-request-builder": "^5.4.1",
     "@commercetools/sdk-client": "^2.1.1",
     "@commercetools/sdk-middleware-auth": "^5.1.6",
     "@commercetools/sdk-middleware-http": "^6.0.3",
