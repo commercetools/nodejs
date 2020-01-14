@@ -64,4 +64,17 @@ describe('createRequestBuilder', () => {
       expectedServiceKeys.concat('foo').sort()
     )
   })
+
+
+  test('calling build resets all paramas', () => {
+    const requestBuilder = createRequestBuilder({
+      projectKey: 'foo'
+    })
+    requestBuilder.categories.byKey('Test').build();
+    const nextRequest = requestBuilder.categories.parse({ where: ['bar']}).build();
+    expect(nextRequest).toEqual(
+      "/foo/categories?where=bar"
+    )
+  })
+
 })
