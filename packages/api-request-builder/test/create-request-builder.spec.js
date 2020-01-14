@@ -65,8 +65,7 @@ describe('createRequestBuilder', () => {
     )
   })
 
-
-  test('calling build resets all paramas', () => {
+  test('calling build resets all params', () => {
     const requestBuilder = createRequestBuilder({
       projectKey: 'foo'
     })
