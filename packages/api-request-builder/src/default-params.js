@@ -68,6 +68,8 @@ export function getDefaultSearchParams(): ServiceBuilderDefaultParams {
  */
 export function setDefaultParams() {
   this.params.expand = getDefaultQueryParams().expand
+  
+  this.params.key = null
 
   if (this.features.includes(features.queryOne))
     this.params.id = getDefaultQueryParams().id

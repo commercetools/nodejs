@@ -8,6 +8,7 @@ describe('defaultParams', () => {
     setDefaultParams.call({ features: serviceFeatures, params })
     expect(params).toEqual({
       id: null,
+      key: null,
       expand: [],
       pagination: {
         page: null,
@@ -32,6 +33,7 @@ describe('defaultParams', () => {
     setDefaultParams.call({ features: serviceFeatures, params })
     expect(params).toEqual({
       id: null,
+      key: null,
       expand: [],
       pagination: {
         page: null,
@@ -57,6 +59,7 @@ describe('defaultParams', () => {
     setDefaultParams.call({ features: serviceFeatures, params })
     expect(params).toEqual({
       id: null,
+      key: null,
       expand: [],
       pagination: {
         page: null,
@@ -77,6 +80,7 @@ describe('defaultParams', () => {
     const params = {}
     setDefaultParams.call({ features: serviceFeatures, params })
     expect(params).toEqual({
+      key: null,
       expand: [],
       pagination: {
         page: null,
