@@ -8,7 +8,7 @@ Object {
   "state": "my-resolved-state",
   "variant": Object {
     "id": 1,
-    "images": "https://example.com/foobar/commer.jpg;https://example-2.com/demo/tools.jpg|image-label",
+    "images": "https://example.com/foobar/commer.jpg||3x4;https://example-2.com/demo/tools.jpg|image-label|1x5",
     "sku": "A0E200000001YKI",
   },
 }
@@ -106,7 +106,7 @@ Array [
     "taxCategory": "resolved-tax-name",
     "variant.availability": 10,
     "variant.id": 1,
-    "variant.images": "https://example.com/foobar/commer.jpg;https://example-2.com/demo/tools.jpg|image-label",
+    "variant.images": "https://example.com/foobar/commer.jpg||3x4;https://example-2.com/demo/tools.jpg|image-label|1x5",
     "variant.sku": "A0E200000001YKI",
   },
 ]
@@ -162,7 +162,7 @@ Array [
     "taxCategory": "resolved-tax-name",
     "variant.availability": 10,
     "variant.id": 1,
-    "variant.images": "https://example.com/foobar/commer.jpg;https://example-2.com/demo/tools.jpg|image-label",
+    "variant.images": "https://example.com/foobar/commer.jpg||3x4;https://example-2.com/demo/tools.jpg|image-label|1x5",
     "variant.sku": "A0E200000001YKI",
   },
   Object {
@@ -179,7 +179,7 @@ Array [
     "setLenums-2.en": "myLenums-2-en",
     "setLenums-2.es": "myLenums-2-es",
     "variant.id": 2,
-    "variant.images": "https://example.com/foobar/commer234.jpg;https://example-2.com/demo/tools67.jpg",
+    "variant.images": "https://example.com/foobar/commer234.jpg||3x3;https://example-2.com/demo/tools67.jpg||1x1",
     "variant.sku": "A0E200001YKI123",
   },
 ]
