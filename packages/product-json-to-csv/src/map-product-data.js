@@ -402,8 +402,8 @@ export default class ProductMapping {
   _mapImagesToString(images: Array<Image>): string {
     return images
       .map((image: Image): string => {
-        const { url, label } = image
-        return label ? `${url}|${label}` : url
+        const { url, label, dimensions = { w: 0, h: 0 } } = image
+        return `${url}|${label || ''}|${dimensions.w}x${dimensions.h}`
       })
       .join(this.multiValDel)
   }
