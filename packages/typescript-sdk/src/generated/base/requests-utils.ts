@@ -65,8 +65,8 @@ function reduceMiddleware(op1: Middleware, op2: Middleware): Middleware {
   }
 }
 
-function isDefined<T>(value: T | undefined): value is T {
-  return typeof value !== "undefined"
+function isDefined<T>(value: T | undefined | null): value is T {
+  return typeof value !== "undefined" && value !== null
 }
 
 function cleanObject<T extends VariableMap>(obj: T): T {
