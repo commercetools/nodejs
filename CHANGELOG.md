@@ -1,3 +1,4 @@
+
 ## @commercetools/state-importer@3.0.4 (2020-01-14)
 
 #### :bug: Bug Fix
