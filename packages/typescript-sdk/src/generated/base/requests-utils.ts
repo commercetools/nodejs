@@ -60,7 +60,7 @@ function reduceMiddleware(op1: Middleware, op2: Middleware): Middleware {
 
     return op1({
       ...rest,
-      next: intermediateOp,
+      next: intermediateOp
     })
   }
 }
@@ -72,10 +72,19 @@ function isDefined<T>(value: T | undefined | null): value is T {
 function cleanObject<T extends VariableMap>(obj: T): T {
   return Object.keys(obj).reduce<T>((result, key) => {
     const value = obj[key]
-    if (isDefined(value)) {
-      return { ...result, [key]: value };
+
+    if (Array.isArray(value)) {
+      return {
+        ...result,
+        [key]: (value as unknown[]).filter(isDefined)
+      }
     }
-    return result;
+
+    if (isDefined(value)) {
+      return { ...result, [key]: value }
+    }
+
+    return result
   }, {} as T)
 }
 
