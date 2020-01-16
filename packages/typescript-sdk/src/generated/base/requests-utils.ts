@@ -1,5 +1,6 @@
-import { Middleware, MiddlewareArg, ClientResponse } from './common-types'
+import { Middleware, MiddlewareArg, ClientResponse, VariableMap } from './common-types'
 import { CommonRequest } from './local-common-types'
+import { stringify } from "querystring"
 
 export class ApiRequestExecutor {
   private middleware: Middleware
@@ -42,7 +43,7 @@ export class ApiRequest<O> {
   constructor(
     private readonly commonRequest: CommonRequest,
     private readonly apiRequestExecutor: ApiRequestExecutor
-  ) {}
+  ) { }
 
   public execute(): Promise<ClientResponse<O>> {
     return this.apiRequestExecutor.execute(this.commonRequest)
@@ -64,36 +65,39 @@ function reduceMiddleware(op1: Middleware, op2: Middleware): Middleware {
   }
 }
 
+function isDefined<T>(value: T | undefined): value is T {
+  return typeof value !== "undefined"
+}
+
+function cleanObject<T extends VariableMap>(obj: T): T {
+  return Object.keys(obj).reduce<T>((result, key) => {
+    const value = obj[key]
+    if (isDefined(value)) {
+      return { ...result, [key]: value };
+    }
+    return result;
+  }, {} as T)
+}
+
+function formatQueryString(variableMap: VariableMap) {
+  const map = cleanObject(variableMap);
+  const result = stringify(map)
+  if (result === '') {
+    return ''
+  }
+  return `?${result}`
+}
+
 function getURI(commonRequest: CommonRequest): string {
   const pathMap = commonRequest.pathVariables
-  const queryMap = commonRequest.queryParams
   var uri: String = commonRequest.uriTemplate
-  var queryParams: string[] = []
+
   for (const param in pathMap) {
     uri = uri.replace(`{${param}}`, `${pathMap[param]}`)
   }
-  for (const query in queryMap) {
-    const queryParameter = queryMap[query]
-    if (queryParameter === null || queryParameter === undefined) {
-      continue
-    }
-    if (queryParameter instanceof Array) {
-      ;(queryParameter as [])
-        .filter(value => value !== null && value !== undefined)
-        .forEach(value =>
-          queryParams.push(
-            `${query}=${encodeURIComponent(`${queryParameter[value]}`)}`
-          )
-        )
-    } else {
-      queryParams.push(`${query}=${encodeURIComponent(`${queryParameter}`)}`)
-    }
-  }
-  const resQuery = queryParams.join('&')
-  if (resQuery == '') {
-    return `${commonRequest.baseURL}${uri}`
-  }
-  return `${commonRequest.baseURL}${uri}?${resQuery}`
+
+  const resQuery = formatQueryString(commonRequest.queryParams || {})
+  return `${commonRequest.baseURL}${uri}${resQuery}`
 }
 
 const noOpMiddleware = async (x: MiddlewareArg) => x
