@@ -240,6 +240,29 @@ describe('CsvParserPrice::parse', () => {
     })
   })
 
+  test('should exit and show appropriate message on missing Sku variant Header in CSV', () => {
+    return new Promise(done => {
+      const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+      const inputStream = fs.createReadStream(
+        path.join(__dirname, 'helpers/invalid-sku-sample.csv')
+      )
+
+      const spy = sinon.spy(csvParserPrice.logger, 'error')
+
+      const outputStream = streamtest.v2.toText(() => {
+        console.log(spy.args)
+        const errorString = spy.args[0][0].toString()
+        expect(spy.calledOnce).toBeTruthy()
+        expect(errorString).toMatch(
+          'variant-sku key is missing/mis-spelled in the csv header.'
+        )
+        csvParserPrice.logger.error.restore()
+        done()
+      })
+      csvParserPrice.parse(inputStream, outputStream)
+    })
+  })
+
   test('should exit on CSV parsing error', () => {
     return new Promise(done => {
       const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
