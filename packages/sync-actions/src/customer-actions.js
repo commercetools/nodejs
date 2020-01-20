@@ -31,6 +31,10 @@ export const baseActionsList = [
     key: 'defaultShippingAddressId',
     actionKey: 'addressId',
   },
+  {
+    action: 'setStores',
+    key: 'stores',
+  },
 ]
 
 export const referenceActionsList = [
