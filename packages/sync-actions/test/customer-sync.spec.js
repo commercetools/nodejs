@@ -30,6 +30,10 @@ describe('Exports', () => {
         key: 'defaultShippingAddressId',
         actionKey: 'addressId',
       },
+      {
+        action: 'setStores',
+        key: 'stores',
+      },
     ])
   })
 
@@ -416,5 +420,44 @@ describe('Actions', () => {
       },
     ]
     expect(actual).toEqual(expected)
+  })
+
+  test('should build `setStores` action', () => {
+    const before = {
+      stores: [
+        {
+          typeId: 'store',
+          key: 'canada',
+        },
+      ],
+    }
+    const now = {
+      stores: [
+        {
+          typeId: 'store',
+          key: 'canada',
+        },
+        {
+          typeId: 'store',
+          key: 'usa',
+        },
+      ],
+    }
+    const actual = customerSync.buildActions(now, before)
+    expect(actual).toEqual([
+      {
+        action: 'setStores',
+        stores: [
+          {
+            typeId: 'store',
+            key: 'canada',
+          },
+          {
+            typeId: 'store',
+            key: 'usa',
+          },
+        ],
+      },
+    ])
   })
 })
