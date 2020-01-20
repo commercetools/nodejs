@@ -36,7 +36,7 @@
     "lodash.defaultsdeep": "^4.6.0"
   },
   "devDependencies": {
-    "nock": "11.7.1",
+    "nock": "11.7.2",
     "node-fetch": "2.6.0"
   }
 }
