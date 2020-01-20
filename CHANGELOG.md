@@ -1,3 +1,301 @@
+## @commercetools/sync-actions@4.2.0 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/state-importer@3.0.5 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/sdk-middleware-http@6.0.4 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/sdk-middleware-auth@6.0.4 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/sdk-auth@3.0.4 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/resource-deleter@2.0.5 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/product-json-to-xlsx@3.1.1 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/product-json-to-csv@4.1.1 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/product-exporter@3.0.5 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/price-exporter@3.0.6 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/personal-data-erasure@3.0.5 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/inventories-exporter@3.0.6 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/integration-tests@0.0.12 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/get-credentials@3.0.12 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/discount-code-importer@3.0.5 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/discount-code-exporter@4.0.6 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/customer-groups-exporter@3.0.5 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/custom-objects-importer@3.0.5 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/custom-objects-exporter@3.0.5 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/csv-parser-state@3.0.5 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/csv-parser-price@4.0.5 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/csv-parser-orders@2.0.13 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/category-exporter@3.0.5 (2020-01-20)
+
+#### :house: Maintenance
+
+- Other
+  - [#1467](https://github.com/commercetools/nodejs/pull/1467) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1466](https://github.com/commercetools/nodejs/pull/1466) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
 
 ## @commercetools/state-importer@3.0.4 (2020-01-14)
 
