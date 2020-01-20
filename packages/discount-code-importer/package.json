@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/discount-code-importer",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "Import discount codes to the commercetools platform.",
   "keywords": [
     "commercetools",
@@ -36,10 +36,10 @@
     "@commercetools/api-request-builder": "^5.4.1",
     "@commercetools/sdk-client": "^2.1.1",
     "@commercetools/sdk-middleware-auth": "^5.1.6",
-    "@commercetools/sdk-middleware-http": "^6.0.3",
+    "@commercetools/sdk-middleware-http": "^6.0.4",
     "@commercetools/sdk-middleware-queue": "^2.1.1",
     "@commercetools/sdk-middleware-user-agent": "^2.1.2",
-    "@commercetools/sync-actions": "^4.1.1",
+    "@commercetools/sync-actions": "^4.2.0",
     "lodash": "^4.17.11",
     "node-fetch": "^2.3.0",
     "npmlog": "^4.1.2"

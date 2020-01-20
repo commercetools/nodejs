@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/price-exporter",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "Exports prices from the commercetools platform",
   "keywords": [
     "commercetools",
@@ -39,10 +39,10 @@
   },
   "dependencies": {
     "@commercetools/api-request-builder": "^5.4.1",
-    "@commercetools/get-credentials": "^3.0.11",
+    "@commercetools/get-credentials": "^3.0.12",
     "@commercetools/sdk-client": "^2.1.1",
     "@commercetools/sdk-middleware-auth": "^5.1.6",
-    "@commercetools/sdk-middleware-http": "^6.0.3",
+    "@commercetools/sdk-middleware-http": "^6.0.4",
     "@commercetools/sdk-middleware-user-agent": "^2.1.2",
     "JSONStream": "^1.3.5",
     "fast-csv": "^4.0.0",
