@@ -47,6 +47,14 @@ describe('ApiRequestExecutor', () => {
       expect(await testQuery({ foo: '<>abc /' })).toEqual("foo=%3C%3Eabc%20%2F")
     })
 
+    test('handle empty arrays', async () => {
+      expect(await testQuery({ foo: [] })).toBeNull();
+    })
+
+    test('handle empty arrays after defined property', async () => {
+      expect(await testQuery({ bar: "baz", foo: [] })).toEqual("bar=baz")
+    })
+
     test('remove undefined and null', async () => {
       expect(await testQuery({ nullValue: null as any, undefinedValue: undefined, value: "bar" })).toEqual("value=bar")
     })
