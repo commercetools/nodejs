@@ -250,7 +250,6 @@ describe('CsvParserPrice::parse', () => {
       const spy = sinon.spy(csvParserPrice.logger, 'error')
 
       const outputStream = streamtest.v2.toText(() => {
-        console.log(spy.args)
         const errorString = spy.args[0][0].toString()
         expect(spy.calledOnce).toBeTruthy()
         expect(errorString).toMatch(
