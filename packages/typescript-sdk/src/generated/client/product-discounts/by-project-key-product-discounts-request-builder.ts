@@ -1,12 +1,24 @@
-import { ByProjectKeyProductDiscountsMatchingRequestBuilder } from './../matching/by-project-key-product-discounts-matching-request-builder'
-import { ByProjectKeyProductDiscountsByIDRequestBuilder } from './by-project-key-product-discounts-by-id-request-builder'
-import { ByProjectKeyProductDiscountsKeyByKeyRequestBuilder } from './by-project-key-product-discounts-key-by-key-request-builder'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyProductDiscountsMatchingRequestBuilder } from 'client/matching/by-project-key-product-discounts-matching-request-builder'
+import { ByProjectKeyProductDiscountsByIDRequestBuilder } from 'client/product-discounts/by-project-key-product-discounts-by-id-request-builder'
+import { ByProjectKeyProductDiscountsKeyByKeyRequestBuilder } from 'client/product-discounts/by-project-key-product-discounts-key-by-key-request-builder'
 import {
   ProductDiscount,
   ProductDiscountDraft,
   ProductDiscountPagedQueryResponse,
-} from './../../models/product-discount'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+} from 'models/product-discount'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductDiscountsRequestBuilder {
   constructor(

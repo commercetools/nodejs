@@ -1,11 +1,23 @@
-import { ByProjectKeyOrdersEditsByIDRequestBuilder } from './by-project-key-orders-edits-by-id-request-builder'
-import { ByProjectKeyOrdersEditsKeyByKeyRequestBuilder } from './by-project-key-orders-edits-key-by-key-request-builder'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyOrdersEditsByIDRequestBuilder } from 'client/edits/by-project-key-orders-edits-by-id-request-builder'
+import { ByProjectKeyOrdersEditsKeyByKeyRequestBuilder } from 'client/edits/by-project-key-orders-edits-key-by-key-request-builder'
 import {
   OrderEdit,
   OrderEditDraft,
   OrderEditPagedQueryResponse,
-} from './../../models/order-edit'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+} from 'models/order-edit'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyOrdersEditsRequestBuilder {
   constructor(

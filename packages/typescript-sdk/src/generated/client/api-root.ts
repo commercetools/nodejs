@@ -1,6 +1,18 @@
-import { ByProjectKeyRequestBuilder } from './by-project-key-request-builder'
-import { Middleware } from '../base/common-types'
-import { ApiRequestExecutor } from '../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyRequestBuilder } from 'client//by-project-key-request-builder'
+import { Middleware } from 'shared/utils/common-types'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ApiRoot {
   private apiRequestExecutor: ApiRequestExecutor

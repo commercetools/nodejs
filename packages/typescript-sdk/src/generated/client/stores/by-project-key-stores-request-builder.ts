@@ -1,11 +1,19 @@
-import { ByProjectKeyStoresByIDRequestBuilder } from './by-project-key-stores-by-id-request-builder'
-import { ByProjectKeyStoresKeyByKeyRequestBuilder } from './by-project-key-stores-key-by-key-request-builder'
-import {
-  Store,
-  StoreDraft,
-  StorePagedQueryResponse,
-} from './../../models/store'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyStoresByIDRequestBuilder } from 'client/stores/by-project-key-stores-by-id-request-builder'
+import { ByProjectKeyStoresKeyByKeyRequestBuilder } from 'client/stores/by-project-key-stores-key-by-key-request-builder'
+import { Store, StoreDraft, StorePagedQueryResponse } from 'models/store'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyStoresRequestBuilder {
   constructor(

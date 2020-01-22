@@ -1,7 +1,19 @@
-import { ByProjectKeyMeOrdersByIDRequestBuilder } from './by-project-key-me-orders-by-id-request-builder'
-import { MyOrder, MyOrderFromCartDraft } from './../../models/me'
-import { OrderPagedQueryResponse } from './../../models/order'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyMeOrdersByIDRequestBuilder } from 'client/orders/by-project-key-me-orders-by-id-request-builder'
+import { MyOrder, MyOrderFromCartDraft } from 'models/me'
+import { OrderPagedQueryResponse } from 'models/order'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeOrdersRequestBuilder {
   constructor(

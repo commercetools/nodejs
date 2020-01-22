@@ -1,11 +1,23 @@
-import { ByProjectKeyCartDiscountsByIDRequestBuilder } from './by-project-key-cart-discounts-by-id-request-builder'
-import { ByProjectKeyCartDiscountsKeyByKeyRequestBuilder } from './by-project-key-cart-discounts-key-by-key-request-builder'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyCartDiscountsByIDRequestBuilder } from 'client/cart-discounts/by-project-key-cart-discounts-by-id-request-builder'
+import { ByProjectKeyCartDiscountsKeyByKeyRequestBuilder } from 'client/cart-discounts/by-project-key-cart-discounts-key-by-key-request-builder'
 import {
   CartDiscount,
   CartDiscountDraft,
   CartDiscountPagedQueryResponse,
-} from './../../models/cart-discount'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+} from 'models/cart-discount'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCartDiscountsRequestBuilder {
   constructor(

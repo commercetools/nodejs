@@ -1,11 +1,23 @@
-import { ByProjectKeyCategoriesByIDRequestBuilder } from './by-project-key-categories-by-id-request-builder'
-import { ByProjectKeyCategoriesKeyByKeyRequestBuilder } from './by-project-key-categories-key-by-key-request-builder'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyCategoriesByIDRequestBuilder } from 'client/categories/by-project-key-categories-by-id-request-builder'
+import { ByProjectKeyCategoriesKeyByKeyRequestBuilder } from 'client/categories/by-project-key-categories-key-by-key-request-builder'
 import {
   Category,
   CategoryDraft,
   CategoryPagedQueryResponse,
-} from './../../models/category'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+} from 'models/category'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCategoriesRequestBuilder {
   constructor(

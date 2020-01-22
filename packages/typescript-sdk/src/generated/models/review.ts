@@ -1,6 +1,17 @@
-//Generated file, please do not change
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
 
-import { ChannelReference, ChannelResourceIdentifier } from './channel'
+import { ChannelReference, ChannelResourceIdentifier } from 'models/channel'
 import {
   CreatedBy,
   LastModifiedBy,
@@ -8,16 +19,16 @@ import {
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
-} from './common'
-import { CustomerReference, CustomerResourceIdentifier } from './customer'
-import { ProductReference, ProductResourceIdentifier } from './product'
-import { StateReference, StateResourceIdentifier } from './state'
+} from 'models/common'
+import { CustomerReference, CustomerResourceIdentifier } from 'models/customer'
+import { ProductReference, ProductResourceIdentifier } from 'models/product'
+import { StateReference, StateResourceIdentifier } from 'models/state'
 import {
   CustomFields,
   CustomFieldsDraft,
   FieldContainer,
   TypeResourceIdentifier,
-} from './type'
+} from 'models/type'
 
 export interface Review extends LoggedResource {
   /**

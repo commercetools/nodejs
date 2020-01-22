@@ -1,11 +1,23 @@
-import { ByProjectKeyPaymentsByIDRequestBuilder } from './by-project-key-payments-by-id-request-builder'
-import { ByProjectKeyPaymentsKeyByKeyRequestBuilder } from './by-project-key-payments-key-by-key-request-builder'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyPaymentsByIDRequestBuilder } from 'client/payments/by-project-key-payments-by-id-request-builder'
+import { ByProjectKeyPaymentsKeyByKeyRequestBuilder } from 'client/payments/by-project-key-payments-key-by-key-request-builder'
 import {
   Payment,
   PaymentDraft,
   PaymentPagedQueryResponse,
-} from './../../models/payment'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+} from 'models/payment'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyPaymentsRequestBuilder {
   constructor(

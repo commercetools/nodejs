@@ -1,15 +1,26 @@
-//Generated file, please do not change
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
 
-import { ChannelReference } from './channel'
+import { ChannelReference } from 'models/channel'
 import {
   LocalizedString,
   Price,
   PriceDraft,
   Reference,
   ReferenceTypeId,
-} from './common'
-import { CustomerGroupReference } from './customer-group'
-import { Attribute } from './product'
+} from 'models/common'
+import { CustomerGroupReference } from 'models/customer-group'
+import { Attribute } from 'models/product'
 
 export interface ErrorByExtension {
   readonly id: string

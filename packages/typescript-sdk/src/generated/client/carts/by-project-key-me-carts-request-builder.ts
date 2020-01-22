@@ -1,7 +1,19 @@
-import { ByProjectKeyMeCartsByIDRequestBuilder } from './by-project-key-me-carts-by-id-request-builder'
-import { CartPagedQueryResponse } from './../../models/cart'
-import { MyCart, MyCartDraft } from './../../models/me'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyMeCartsByIDRequestBuilder } from 'client/carts/by-project-key-me-carts-by-id-request-builder'
+import { CartPagedQueryResponse } from 'models/cart'
+import { MyCart, MyCartDraft } from 'models/me'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeCartsRequestBuilder {
   constructor(

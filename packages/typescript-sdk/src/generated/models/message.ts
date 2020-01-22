@@ -1,4 +1,15 @@
-//Generated file, please do not change
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
 
 import {
   DiscountCodeState,
@@ -8,9 +19,9 @@ import {
   ShippingInfo,
   ShippingRateInput,
   TaxedItemPrice,
-} from './cart'
-import { Category, CategoryReference } from './category'
-import { ChannelReference } from './channel'
+} from 'models/cart'
+import { Category, CategoryReference } from 'models/category'
+import { ChannelReference } from 'models/channel'
 import {
   Address,
   CreatedBy,
@@ -21,10 +32,10 @@ import {
   LoggedResource,
   Money,
   Reference,
-} from './common'
-import { Customer, CustomerReference } from './customer'
-import { CustomerGroupReference } from './customer-group'
-import { DiscountCodeReference } from './discount-code'
+} from 'models/common'
+import { Customer, CustomerReference } from 'models/customer'
+import { CustomerGroupReference } from 'models/customer-group'
+import { DiscountCodeReference } from 'models/discount-code'
 import {
   Delivery,
   DeliveryItem,
@@ -37,13 +48,13 @@ import {
   ReturnShipmentState,
   ShipmentState,
   TrackingData,
-} from './order'
-import { OrderEditApplied, OrderEditReference } from './order-edit'
-import { Payment, Transaction, TransactionState } from './payment'
-import { ProductProjection, ProductVariant } from './product'
-import { Review } from './review'
-import { StateReference } from './state'
-import { CustomFields } from './type'
+} from 'models/order'
+import { OrderEditApplied, OrderEditReference } from 'models/order-edit'
+import { Payment, Transaction, TransactionState } from 'models/payment'
+import { ProductProjection, ProductVariant } from 'models/product'
+import { Review } from 'models/review'
+import { StateReference } from 'models/state'
+import { CustomFields } from 'models/type'
 
 export type Message =
   | OrderBillingAddressSetMessage

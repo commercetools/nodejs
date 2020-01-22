@@ -1,10 +1,22 @@
-import { ByProjectKeyApiClientsByIDRequestBuilder } from './by-project-key-api-clients-by-id-request-builder'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyApiClientsByIDRequestBuilder } from 'client/api-clients/by-project-key-api-clients-by-id-request-builder'
 import {
   ApiClient,
   ApiClientDraft,
   ApiClientPagedQueryResponse,
-} from './../../models/api-client'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+} from 'models/api-client'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyApiClientsRequestBuilder {
   constructor(

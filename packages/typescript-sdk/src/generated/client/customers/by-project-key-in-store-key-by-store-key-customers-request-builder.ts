@@ -1,17 +1,29 @@
-import { ByProjectKeyInStoreKeyByStoreKeyCustomersByIDRequestBuilder } from './by-project-key-in-store-key-by-store-key-customers-by-id-request-builder'
-import { ByProjectKeyInStoreKeyByStoreKeyCustomersEmailTokenByEmailTokenRequestBuilder } from './by-project-key-in-store-key-by-store-key-customers-email-token-by-email-token-request-builder'
-import { ByProjectKeyInStoreKeyByStoreKeyCustomersKeyByKeyRequestBuilder } from './by-project-key-in-store-key-by-store-key-customers-key-by-key-request-builder'
-import { ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordTokenByPasswordTokenRequestBuilder } from './by-project-key-in-store-key-by-store-key-customers-password-token-by-password-token-request-builder'
-import { ByProjectKeyInStoreKeyByStoreKeyCustomersEmailTokenRequestBuilder } from './../email-token/by-project-key-in-store-key-by-store-key-customers-email-token-request-builder'
-import { ByProjectKeyInStoreKeyByStoreKeyCustomersEmailRequestBuilder } from './../email/by-project-key-in-store-key-by-store-key-customers-email-request-builder'
-import { ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordTokenRequestBuilder } from './../password-token/by-project-key-in-store-key-by-store-key-customers-password-token-request-builder'
-import { ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordRequestBuilder } from './../password/by-project-key-in-store-key-by-store-key-customers-password-request-builder'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyInStoreKeyByStoreKeyCustomersByIDRequestBuilder } from 'client/customers/by-project-key-in-store-key-by-store-key-customers-by-id-request-builder'
+import { ByProjectKeyInStoreKeyByStoreKeyCustomersEmailTokenByEmailTokenRequestBuilder } from 'client/customers/by-project-key-in-store-key-by-store-key-customers-email-token-by-email-token-request-builder'
+import { ByProjectKeyInStoreKeyByStoreKeyCustomersKeyByKeyRequestBuilder } from 'client/customers/by-project-key-in-store-key-by-store-key-customers-key-by-key-request-builder'
+import { ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordTokenByPasswordTokenRequestBuilder } from 'client/customers/by-project-key-in-store-key-by-store-key-customers-password-token-by-password-token-request-builder'
+import { ByProjectKeyInStoreKeyByStoreKeyCustomersEmailTokenRequestBuilder } from 'client/email-token/by-project-key-in-store-key-by-store-key-customers-email-token-request-builder'
+import { ByProjectKeyInStoreKeyByStoreKeyCustomersEmailRequestBuilder } from 'client/email/by-project-key-in-store-key-by-store-key-customers-email-request-builder'
+import { ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordTokenRequestBuilder } from 'client/password-token/by-project-key-in-store-key-by-store-key-customers-password-token-request-builder'
+import { ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordRequestBuilder } from 'client/password/by-project-key-in-store-key-by-store-key-customers-password-request-builder'
 import {
   CustomerDraft,
   CustomerPagedQueryResponse,
   CustomerSignInResult,
-} from './../../models/customer'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+} from 'models/customer'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyCustomersRequestBuilder {
   constructor(

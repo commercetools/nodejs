@@ -1,4 +1,15 @@
-//Generated file, please do not change
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
 
 import {
   CartOrigin,
@@ -18,9 +29,9 @@ import {
   TaxMode,
   TaxedPrice,
   TaxedPriceDraft,
-} from './cart'
-import { CartDiscountReference } from './cart-discount'
-import { ChannelReference, ChannelResourceIdentifier } from './channel'
+} from 'models/cart'
+import { CartDiscountReference } from 'models/cart-discount'
+import { ChannelReference, ChannelResourceIdentifier } from 'models/channel'
 import {
   Address,
   CreatedBy,
@@ -34,11 +45,11 @@ import {
   ReferenceTypeId,
   ResourceIdentifier,
   TypedMoney,
-} from './common'
+} from 'models/common'
 import {
   CustomerGroupReference,
   CustomerGroupResourceIdentifier,
-} from './customer-group'
+} from 'models/customer-group'
 import {
   StagedOrder,
   StagedOrderAddCustomLineItemAction,
@@ -110,22 +121,22 @@ import {
   StagedOrderTransitionStateAction,
   StagedOrderUpdateItemShippingAddressAction,
   StagedOrderUpdateSyncInfoAction,
-} from './order-edit'
-import { PaymentReference, PaymentResourceIdentifier } from './payment'
-import { Attribute } from './product'
+} from 'models/order-edit'
+import { PaymentReference, PaymentResourceIdentifier } from 'models/payment'
+import { Attribute } from 'models/product'
 import {
   ShippingMethodResourceIdentifier,
   ShippingRateDraft,
-} from './shipping-method'
-import { StateReference, StateResourceIdentifier } from './state'
-import { StoreKeyReference, StoreResourceIdentifier } from './store'
-import { TaxCategoryResourceIdentifier, TaxRate } from './tax-category'
+} from 'models/shipping-method'
+import { StateReference, StateResourceIdentifier } from 'models/state'
+import { StoreKeyReference, StoreResourceIdentifier } from 'models/store'
+import { TaxCategoryResourceIdentifier, TaxRate } from 'models/tax-category'
 import {
   CustomFields,
   CustomFieldsDraft,
   FieldContainer,
   TypeResourceIdentifier,
-} from './type'
+} from 'models/type'
 
 export type StagedOrderUpdateAction =
   | StagedOrderAddCustomLineItemAction

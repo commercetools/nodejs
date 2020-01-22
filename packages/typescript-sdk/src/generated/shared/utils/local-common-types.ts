@@ -1,4 +1,4 @@
-import { MethodType, VariableMap } from './common-types'
+import { MethodType, VariableMap } from 'shared/utils/common-types'
 
 export interface CommonRequest {
   baseURL: string

@@ -1,7 +1,18 @@
-//Generated file, please do not change
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
 
-import { ProductPublishScope } from './cart'
-import { CategoryReference, CategoryResourceIdentifier } from './category'
+import { ProductPublishScope } from 'models/cart'
+import { CategoryReference, CategoryResourceIdentifier } from 'models/category'
 import {
   Asset,
   AssetDraft,
@@ -19,18 +30,18 @@ import {
   ReferenceTypeId,
   ResourceIdentifier,
   ScopedPrice,
-} from './common'
+} from 'models/common'
 import {
   ProductTypeReference,
   ProductTypeResourceIdentifier,
-} from './product-type'
-import { ReviewRatingStatistics } from './review'
-import { StateReference, StateResourceIdentifier } from './state'
+} from 'models/product-type'
+import { ReviewRatingStatistics } from 'models/review'
+import { StateReference, StateResourceIdentifier } from 'models/state'
 import {
   TaxCategoryReference,
   TaxCategoryResourceIdentifier,
-} from './tax-category'
-import { FieldContainer, TypeResourceIdentifier } from './type'
+} from 'models/tax-category'
+import { FieldContainer, TypeResourceIdentifier } from 'models/type'
 
 export interface Attribute {
   readonly name: string

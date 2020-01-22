@@ -1,11 +1,23 @@
-import { ByProjectKeyShoppingListsByIDRequestBuilder } from './by-project-key-shopping-lists-by-id-request-builder'
-import { ByProjectKeyShoppingListsKeyByKeyRequestBuilder } from './by-project-key-shopping-lists-key-by-key-request-builder'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyShoppingListsByIDRequestBuilder } from 'client/shopping-lists/by-project-key-shopping-lists-by-id-request-builder'
+import { ByProjectKeyShoppingListsKeyByKeyRequestBuilder } from 'client/shopping-lists/by-project-key-shopping-lists-key-by-key-request-builder'
 import {
   ShoppingList,
   ShoppingListDraft,
   ShoppingListPagedQueryResponse,
-} from './../../models/shopping-list'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+} from 'models/shopping-list'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyShoppingListsRequestBuilder {
   constructor(

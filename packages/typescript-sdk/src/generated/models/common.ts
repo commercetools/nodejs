@@ -1,98 +1,121 @@
-//Generated file, please do not change
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
 
-import { Cart, CartReference, CartResourceIdentifier } from './cart'
+import { Cart, CartReference, CartResourceIdentifier } from 'models/cart'
 import {
   CartDiscount,
   CartDiscountReference,
   CartDiscountResourceIdentifier,
-} from './cart-discount'
+} from 'models/cart-discount'
 import {
   Category,
   CategoryReference,
   CategoryResourceIdentifier,
-} from './category'
-import { Channel, ChannelReference, ChannelResourceIdentifier } from './channel'
-import { CustomObject, CustomObjectReference } from './custom-object'
+} from 'models/category'
+import {
+  Channel,
+  ChannelReference,
+  ChannelResourceIdentifier,
+} from 'models/channel'
+import { CustomObject, CustomObjectReference } from 'models/custom-object'
 import {
   Customer,
   CustomerReference,
   CustomerResourceIdentifier,
-} from './customer'
+} from 'models/customer'
 import {
   CustomerGroup,
   CustomerGroupReference,
   CustomerGroupResourceIdentifier,
-} from './customer-group'
+} from 'models/customer-group'
 import {
   DiscountCode,
   DiscountCodeReference,
   DiscountCodeResourceIdentifier,
-} from './discount-code'
-import { Extension } from './extension'
+} from 'models/discount-code'
+import { Extension } from 'models/extension'
 import {
   InventoryEntry,
   InventoryEntryReference,
   InventoryEntryResourceIdentifier,
-} from './inventory'
-import { MyCart, MyCustomer, MyOrder } from './me'
-import { Message } from './message'
-import { Order, OrderReference, OrderResourceIdentifier } from './order'
+} from 'models/inventory'
+import { MyCart, MyCustomer, MyOrder } from 'models/me'
+import { Message } from 'models/message'
+import { Order, OrderReference, OrderResourceIdentifier } from 'models/order'
 import {
   OrderEdit,
   OrderEditReference,
   OrderEditResourceIdentifier,
-} from './order-edit'
-import { Payment, PaymentReference, PaymentResourceIdentifier } from './payment'
+} from 'models/order-edit'
+import {
+  Payment,
+  PaymentReference,
+  PaymentResourceIdentifier,
+} from 'models/payment'
 import {
   FacetResults,
   Product,
   ProductProjection,
   ProductReference,
   ProductResourceIdentifier,
-} from './product'
+} from 'models/product'
 import {
   ProductDiscount,
   ProductDiscountReference,
   ProductDiscountResourceIdentifier,
-} from './product-discount'
+} from 'models/product-discount'
 import {
   ProductType,
   ProductTypeReference,
   ProductTypeResourceIdentifier,
-} from './product-type'
-import { Review, ReviewReference, ReviewResourceIdentifier } from './review'
+} from 'models/product-type'
+import {
+  Review,
+  ReviewReference,
+  ReviewResourceIdentifier,
+} from 'models/review'
 import {
   ShippingMethod,
   ShippingMethodReference,
   ShippingMethodResourceIdentifier,
-} from './shipping-method'
+} from 'models/shipping-method'
 import {
   MyShoppingList,
   ShoppingList,
   ShoppingListReference,
   ShoppingListResourceIdentifier,
-} from './shopping-list'
-import { State, StateReference, StateResourceIdentifier } from './state'
+} from 'models/shopping-list'
+import { State, StateReference, StateResourceIdentifier } from 'models/state'
 import {
   Store,
   StoreKeyReference,
   StoreReference,
   StoreResourceIdentifier,
-} from './store'
-import { Subscription } from './subscription'
+} from 'models/store'
+import { Subscription } from 'models/subscription'
 import {
   TaxCategory,
   TaxCategoryReference,
   TaxCategoryResourceIdentifier,
-} from './tax-category'
+} from 'models/tax-category'
 import {
   CustomFields,
   CustomFieldsDraft,
   Type,
   TypeReference,
   TypeResourceIdentifier,
-} from './type'
-import { Zone, ZoneReference, ZoneResourceIdentifier } from './zone'
+} from 'models/type'
+import { Zone, ZoneReference, ZoneResourceIdentifier } from 'models/zone'
 
 export interface PagedQueryResponse {
   readonly limit: number

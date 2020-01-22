@@ -1,4 +1,4 @@
-import { Middleware, MiddlewareArg } from '../generated/base/common-types'
+import { Middleware, MiddlewareArg } from '~/generated/index'
 
 export function middlewareFromCtpClient(client: any): Middleware {
   return async (middlewareArg: MiddlewareArg) =>

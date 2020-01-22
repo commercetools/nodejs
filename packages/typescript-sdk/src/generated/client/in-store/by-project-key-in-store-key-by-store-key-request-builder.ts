@@ -1,9 +1,21 @@
-import { ByProjectKeyInStoreKeyByStoreKeyCartsRequestBuilder } from './../carts/by-project-key-in-store-key-by-store-key-carts-request-builder'
-import { ByProjectKeyInStoreKeyByStoreKeyCustomersRequestBuilder } from './../customers/by-project-key-in-store-key-by-store-key-customers-request-builder'
-import { ByProjectKeyInStoreKeyByStoreKeyLoginRequestBuilder } from './../login/by-project-key-in-store-key-by-store-key-login-request-builder'
-import { ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder } from './../me/by-project-key-in-store-key-by-store-key-me-request-builder'
-import { ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder } from './../orders/by-project-key-in-store-key-by-store-key-orders-request-builder'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyInStoreKeyByStoreKeyCartsRequestBuilder } from 'client/carts/by-project-key-in-store-key-by-store-key-carts-request-builder'
+import { ByProjectKeyInStoreKeyByStoreKeyCustomersRequestBuilder } from 'client/customers/by-project-key-in-store-key-by-store-key-customers-request-builder'
+import { ByProjectKeyInStoreKeyByStoreKeyLoginRequestBuilder } from 'client/login/by-project-key-in-store-key-by-store-key-login-request-builder'
+import { ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder } from 'client/me/by-project-key-in-store-key-by-store-key-me-request-builder'
+import { ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder } from 'client/orders/by-project-key-in-store-key-by-store-key-orders-request-builder'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyRequestBuilder {
   constructor(

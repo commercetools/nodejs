@@ -1,6 +1,13 @@
 {
   "compilerOptions": {
-    "removeComments": false
+    "removeComments": false,
+    "baseUrl": ".",
+    "paths": {
+      "~/*" :["./src/*"],
+      "models/*" :["./src/generated/models/*"],
+      "client/*" :["./src/generated/client/*"],
+      "shared/*" :["./src/generated/shared/*"],
+    }
   },
   "extends": "../../tsconfig.json",
   "files": ["src/index.ts"]

@@ -1,11 +1,23 @@
-import { ByProjectKeyShippingMethodsByIDRequestBuilder } from './by-project-key-shipping-methods-by-id-request-builder'
-import { ByProjectKeyShippingMethodsKeyByKeyRequestBuilder } from './by-project-key-shipping-methods-key-by-key-request-builder'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyShippingMethodsByIDRequestBuilder } from 'client/shipping-methods/by-project-key-shipping-methods-by-id-request-builder'
+import { ByProjectKeyShippingMethodsKeyByKeyRequestBuilder } from 'client/shipping-methods/by-project-key-shipping-methods-key-by-key-request-builder'
 import {
   ShippingMethod,
   ShippingMethodDraft,
   ShippingMethodPagedQueryResponse,
-} from './../../models/shipping-method'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+} from 'models/shipping-method'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyShippingMethodsRequestBuilder {
   constructor(

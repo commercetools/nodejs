@@ -1,16 +1,28 @@
-import { ByProjectKeyMeActiveCartRequestBuilder } from './../active-cart/by-project-key-me-active-cart-request-builder'
-import { ByProjectKeyMeCartsRequestBuilder } from './../carts/by-project-key-me-carts-request-builder'
-import { ByProjectKeyMeEmailRequestBuilder } from './../email/by-project-key-me-email-request-builder'
-import { ByProjectKeyMeLoginRequestBuilder } from './../login/by-project-key-me-login-request-builder'
-import { ByProjectKeyMeOrdersRequestBuilder } from './../orders/by-project-key-me-orders-request-builder'
-import { ByProjectKeyMePasswordRequestBuilder } from './../password/by-project-key-me-password-request-builder'
-import { ByProjectKeyMePaymentRequestBuilder } from './../payment/by-project-key-me-payment-request-builder'
-import { ByProjectKeyMePaymentsRequestBuilder } from './../payments/by-project-key-me-payments-request-builder'
-import { ByProjectKeyMeShoppingListsRequestBuilder } from './../shopping-lists/by-project-key-me-shopping-lists-request-builder'
-import { ByProjectKeyMeSignupRequestBuilder } from './../signup/by-project-key-me-signup-request-builder'
-import { Update } from './../../models/common'
-import { MyCustomer } from './../../models/me'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyMeActiveCartRequestBuilder } from 'client/active-cart/by-project-key-me-active-cart-request-builder'
+import { ByProjectKeyMeCartsRequestBuilder } from 'client/carts/by-project-key-me-carts-request-builder'
+import { ByProjectKeyMeEmailRequestBuilder } from 'client/email/by-project-key-me-email-request-builder'
+import { ByProjectKeyMeLoginRequestBuilder } from 'client/login/by-project-key-me-login-request-builder'
+import { ByProjectKeyMeOrdersRequestBuilder } from 'client/orders/by-project-key-me-orders-request-builder'
+import { ByProjectKeyMePasswordRequestBuilder } from 'client/password/by-project-key-me-password-request-builder'
+import { ByProjectKeyMePaymentRequestBuilder } from 'client/payment/by-project-key-me-payment-request-builder'
+import { ByProjectKeyMePaymentsRequestBuilder } from 'client/payments/by-project-key-me-payments-request-builder'
+import { ByProjectKeyMeShoppingListsRequestBuilder } from 'client/shopping-lists/by-project-key-me-shopping-lists-request-builder'
+import { ByProjectKeyMeSignupRequestBuilder } from 'client/signup/by-project-key-me-signup-request-builder'
+import { Update } from 'models/common'
+import { MyCustomer } from 'models/me'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeRequestBuilder {
   constructor(

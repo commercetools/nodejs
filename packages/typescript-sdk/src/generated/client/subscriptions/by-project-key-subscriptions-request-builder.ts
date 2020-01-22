@@ -1,11 +1,23 @@
-import { ByProjectKeySubscriptionsByIDRequestBuilder } from './by-project-key-subscriptions-by-id-request-builder'
-import { ByProjectKeySubscriptionsKeyByKeyRequestBuilder } from './by-project-key-subscriptions-key-by-key-request-builder'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeySubscriptionsByIDRequestBuilder } from 'client/subscriptions/by-project-key-subscriptions-by-id-request-builder'
+import { ByProjectKeySubscriptionsKeyByKeyRequestBuilder } from 'client/subscriptions/by-project-key-subscriptions-key-by-key-request-builder'
 import {
   Subscription,
   SubscriptionDraft,
   SubscriptionPagedQueryResponse,
-} from './../../models/subscription'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+} from 'models/subscription'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeySubscriptionsRequestBuilder {
   constructor(

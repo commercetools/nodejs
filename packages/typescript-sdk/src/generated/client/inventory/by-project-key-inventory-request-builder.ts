@@ -1,10 +1,22 @@
-import { ByProjectKeyInventoryByIDRequestBuilder } from './by-project-key-inventory-by-id-request-builder'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyInventoryByIDRequestBuilder } from 'client/inventory/by-project-key-inventory-by-id-request-builder'
 import {
   InventoryEntry,
   InventoryEntryDraft,
   InventoryPagedQueryResponse,
-} from './../../models/inventory'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+} from 'models/inventory'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInventoryRequestBuilder {
   constructor(
