@@ -99,6 +99,7 @@ We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.
 | [`price-exporter`](/packages/price-exporter)                     | [![price-exporter Version][price-exporter-icon]][price-exporter-version]                               | [![price-exporter Dependencies Status][price-exporter-dependencies-icon]][discount-code-importer-dependencies]                       |
 | [`product-exporter`](/packages/product-exporter)                 | [![product-exporter Version][product-exporter-icon]][product-exporter-version]                         | [![product-exporter Dependencies Status][product-exporter-dependencies-icon]][product-exporter-dependencies]                         |
 | [`product-json-to-csv`](/packages/product-json-to-csv)           | [![product-json-to-csv Version][product-json-to-csv-icon]][product-json-to-csv-version]                | [![product-json-to-csv Dependencies Status][product-json-to-csv-dependencies-icon]][product-json-to-csv-dependencies]                |
+| [`product-json-to-xlsx`](/packages/product-json-to-xlsx)         | [![product-json-to-xlsx Version][product-json-to-xlsx-icon]][product-json-to-xlsx-version]             | [![product-json-to-xlsx Dependencies Status][product-json-to-xlsx-dependencies-icon]][product-json-to-xlsx-dependencies]             |
 | [`state-importer`](/packages/state-importer)                     | [![state-importer Version][state-importer-icon]][state-importer-version]                               | [![state-importer Dependencies Status][state-importer-dependencies-icon]][state-importer-dependencies]                               |
 
 ### Other
@@ -172,6 +173,10 @@ We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.
 [product-json-to-csv-icon]: https://img.shields.io/npm/v/@commercetools/product-json-to-csv.svg?style=flat-square
 [product-json-to-csv-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/product-json-to-csv
 [product-json-to-csv-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/product-json-to-csv&style=flat-square
+[product-json-to-xlsx-version]: https://www.npmjs.com/package/@commercetools/product-json-to-xlsx
+[product-json-to-xlsx-icon]: https://img.shields.io/npm/v/@commercetools/product-json-to-xlsx.svg?style=flat-square
+[product-json-to-xlsx-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/product-json-to-xlsx
+[product-json-to-xlsx-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/product-json-to-xlsx&style=flat-square
 [resource-deleter-version]: https://www.npmjs.com/package/@commercetools/resource-deleter
 [resource-deleter-icon]: https://img.shields.io/npm/v/@commercetools/resource-deleter.svg?style=flat-square
 [resource-deleter-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/resource-deleter
