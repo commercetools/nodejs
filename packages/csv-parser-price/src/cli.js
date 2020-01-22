@@ -78,8 +78,9 @@ const logError = error => {
   const errorFormatter = new PrettyError()
 
   if (npmlog.level === 'verbose')
-    process.stderr.write(`ERR: ${errorFormatter.render(error)}`)
-  else process.stderr.write(`ERR: ${error.message || error}`)
+    process.stderr.write(`ERR: ${errorFormatter.render(error)} \n`)
+  // Add new line to make it intuitive
+  else process.stderr.write(`ERR: ${error.message || error} \n`) // Add new line to make it intuitive
 }
 
 const errorHandler = errors => {

@@ -61,8 +61,25 @@ export default class CsvParserPrice {
           strict: true,
         })
       )
+      .map(a => {
+        if (!a[CONSTANTS.header.sku]) {
+          throw new Error(
+            `${CONSTANTS.header.sku} key is missing/mis-spelled in the csv header.`
+          )
+        }
+        return a
+      })
+      .errors((err, push) => {
+        push(err.message)
+      })
+      .stopOnError(err => {
+        this.logger.error(err)
+        output.emit('error', err)
+      })
       // Sort by SKU so later when reducing prices we can easily group by SKU
-      .sortBy((a, b) => a['variant-sku'].localeCompare(b['variant-sku']))
+      .sortBy((a, b) =>
+        a[CONSTANTS.header.sku].localeCompare(b[CONSTANTS.header.sku])
+      )
       // Limit amount of rows to be handled at the same time
       .batch(this.batchSize)
       .stopOnError(err => {
