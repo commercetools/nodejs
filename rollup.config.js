@@ -9,6 +9,7 @@ const babel = require('rollup-plugin-babel')
 const replace = require('rollup-plugin-replace')
 const { uglify } = require('rollup-plugin-uglify')
 const globals = require('rollup-plugin-node-globals')
+const alias = require('@rollup/plugin-alias')
 const babelConfig = require('./babel.config')
 /* eslint-enable */
 
@@ -16,7 +17,18 @@ const env = process.env.NODE_ENV
 const version = process.env.npm_package_version
 const [, packageName] = process.env.npm_package_name.split('@commercetools/')
 const extensions = ['.js', '.jsx', '.ts', '.tsx']
+const packageDir = process.cwd()
+
 const plugins = [
+  alias({
+    entries: [
+      { find: '~', replacement: `${packageDir}/src` },
+      { find: 'models', replacement: `${packageDir}/src/generated/models` },
+      { find: 'client', replacement: `${packageDir}/src/generated/client` },
+      { find: 'shared', replacement: `${packageDir}/src/generated/shared` },
+    ],
+    customResolver: resolve({ extensions: ['.ts'] }),
+  }),
   json(),
   replace({
     'process.env.NODE_ENV': JSON.stringify(env),
