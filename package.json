@@ -119,6 +119,7 @@
     "rollup-watch": "4.3.1",
     "streamtest": "1.2.4",
     "ts-jest": "24.3.0",
+    "tsconfig-replace-paths": "^0.0.5",
     "typescript": "3.7.5"
   },
   "config": {

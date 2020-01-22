@@ -29,9 +29,10 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "yarn build:bundles && yarn build:typings",
+    "build": "yarn build:bundles && yarn build:typings && yarn build:paths",
     "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n TypescriptSdk -i ./src/index.ts",
-    "build:typings": "tsc -p tsconfig.declarations.json --emitDeclarationOnly --declarationDir dist/typings"
+    "build:typings": "tsc -p tsconfig.declarations.json",
+    "build:paths": "tsconfig-replace-paths --project tsconfig.declarationpaths.json -s dist/typings -o dist/typings"
   },
   "dependencies": {
     "regenerator-runtime": "^0.13.2"

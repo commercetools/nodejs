@@ -5,7 +5,6 @@
     "experimentalDecorators": false,
     "esModuleInterop": true,
     "importHelpers": true,
-    // See https://devblogs.microsoft.com/typescript/typescript-and-babel-7/
     "isolatedModules": true,
     "lib": [
       "esnext",
@@ -18,7 +17,7 @@
     "noImplicitReturns": true,
     "resolveJsonModule": true,
     "noImplicitThis": true,
-    "noUnusedLocals": false, // <-- turn it on once the generated sdk does not have unused variables
+    "noUnusedLocals": false, 
     "noUnusedParameters": true,
     "preserveSymlinks": true,
     "pretty": true,
