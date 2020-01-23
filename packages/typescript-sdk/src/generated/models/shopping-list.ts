@@ -1,4 +1,15 @@
-//Generated file, please do not change
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
 
 import {
   CreatedBy,
@@ -8,16 +19,16 @@ import {
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
-} from './common'
-import { CustomerReference, CustomerResourceIdentifier } from './customer'
-import { ProductVariant } from './product'
-import { ProductTypeReference } from './product-type'
+} from 'models/common'
+import { CustomerReference, CustomerResourceIdentifier } from 'models/customer'
+import { ProductVariant } from 'models/product'
+import { ProductTypeReference } from 'models/product-type'
 import {
   CustomFields,
   CustomFieldsDraft,
   FieldContainer,
   TypeResourceIdentifier,
-} from './type'
+} from 'models/type'
 
 export interface MyShoppingList extends LoggedResource {
   readonly id: string

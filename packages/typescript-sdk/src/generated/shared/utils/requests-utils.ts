@@ -1,6 +1,11 @@
-import { Middleware, MiddlewareArg, ClientResponse, VariableMap } from './common-types'
-import { CommonRequest } from './local-common-types'
-import { stringify } from "querystring"
+import {
+  Middleware,
+  MiddlewareArg,
+  ClientResponse,
+  VariableMap,
+} from 'shared/utils/common-types'
+import { CommonRequest } from 'shared/utils/local-common-types'
+import { stringify } from 'querystring'
 
 export class ApiRequestExecutor {
   private middleware: Middleware
@@ -43,7 +48,7 @@ export class ApiRequest<O> {
   constructor(
     private readonly commonRequest: CommonRequest,
     private readonly apiRequestExecutor: ApiRequestExecutor
-  ) { }
+  ) {}
 
   public execute(): Promise<ClientResponse<O>> {
     return this.apiRequestExecutor.execute(this.commonRequest)
@@ -60,13 +65,13 @@ function reduceMiddleware(op1: Middleware, op2: Middleware): Middleware {
 
     return op1({
       ...rest,
-      next: intermediateOp
+      next: intermediateOp,
     })
   }
 }
 
 function isDefined<T>(value: T | undefined | null): value is T {
-  return typeof value !== "undefined" && value !== null
+  return typeof value !== 'undefined' && value !== null
 }
 
 function cleanObject<T extends VariableMap>(obj: T): T {
@@ -74,14 +79,14 @@ function cleanObject<T extends VariableMap>(obj: T): T {
     const value = obj[key]
 
     if (Array.isArray(value)) {
-      const values = (value as unknown[]).filter(isDefined);
+      const values = (value as unknown[]).filter(isDefined)
       if (!values.length) {
-        return result;
+        return result
       }
 
       return {
         ...result,
-        [key]: values
+        [key]: values,
       }
     }
 
@@ -94,7 +99,7 @@ function cleanObject<T extends VariableMap>(obj: T): T {
 }
 
 function formatQueryString(variableMap: VariableMap) {
-  const map = cleanObject(variableMap);
+  const map = cleanObject(variableMap)
   const result = stringify(map)
   if (result === '') {
     return ''

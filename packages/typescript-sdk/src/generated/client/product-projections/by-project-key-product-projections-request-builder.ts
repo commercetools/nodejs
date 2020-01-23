@@ -1,9 +1,21 @@
-import { ByProjectKeyProductProjectionsByIDRequestBuilder } from './by-project-key-product-projections-by-id-request-builder'
-import { ByProjectKeyProductProjectionsKeyByKeyRequestBuilder } from './by-project-key-product-projections-key-by-key-request-builder'
-import { ByProjectKeyProductProjectionsSearchRequestBuilder } from './../search/by-project-key-product-projections-search-request-builder'
-import { ByProjectKeyProductProjectionsSuggestRequestBuilder } from './../suggest/by-project-key-product-projections-suggest-request-builder'
-import { ProductProjectionPagedQueryResponse } from './../../models/product'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyProductProjectionsByIDRequestBuilder } from 'client/product-projections/by-project-key-product-projections-by-id-request-builder'
+import { ByProjectKeyProductProjectionsKeyByKeyRequestBuilder } from 'client/product-projections/by-project-key-product-projections-key-by-key-request-builder'
+import { ByProjectKeyProductProjectionsSearchRequestBuilder } from 'client/search/by-project-key-product-projections-search-request-builder'
+import { ByProjectKeyProductProjectionsSuggestRequestBuilder } from 'client/suggest/by-project-key-product-projections-suggest-request-builder'
+import { ProductProjectionPagedQueryResponse } from 'models/product'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductProjectionsRequestBuilder {
   constructor(
@@ -82,6 +94,14 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string

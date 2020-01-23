@@ -1,7 +1,19 @@
-import { ByProjectKeyInStoreKeyByStoreKeyMeActiveCartRequestBuilder } from './../active-cart/by-project-key-in-store-key-by-store-key-me-active-cart-request-builder'
-import { ByProjectKeyInStoreKeyByStoreKeyMeCartsRequestBuilder } from './../carts/by-project-key-in-store-key-by-store-key-me-carts-request-builder'
-import { ByProjectKeyInStoreKeyByStoreKeyMeOrdersRequestBuilder } from './../orders/by-project-key-in-store-key-by-store-key-me-orders-request-builder'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyInStoreKeyByStoreKeyMeActiveCartRequestBuilder } from 'client/active-cart/by-project-key-in-store-key-by-store-key-me-active-cart-request-builder'
+import { ByProjectKeyInStoreKeyByStoreKeyMeCartsRequestBuilder } from 'client/carts/by-project-key-in-store-key-by-store-key-me-carts-request-builder'
+import { ByProjectKeyInStoreKeyByStoreKeyMeOrdersRequestBuilder } from 'client/orders/by-project-key-in-store-key-by-store-key-me-orders-request-builder'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder {
   constructor(

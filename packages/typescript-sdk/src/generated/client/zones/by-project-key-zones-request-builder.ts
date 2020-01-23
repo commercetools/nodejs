@@ -1,7 +1,19 @@
-import { ByProjectKeyZonesByIDRequestBuilder } from './by-project-key-zones-by-id-request-builder'
-import { ByProjectKeyZonesKeyByKeyRequestBuilder } from './by-project-key-zones-key-by-key-request-builder'
-import { Zone, ZoneDraft, ZonePagedQueryResponse } from './../../models/zone'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyZonesByIDRequestBuilder } from 'client/zones/by-project-key-zones-by-id-request-builder'
+import { ByProjectKeyZonesKeyByKeyRequestBuilder } from 'client/zones/by-project-key-zones-key-by-key-request-builder'
+import { Zone, ZoneDraft, ZonePagedQueryResponse } from 'models/zone'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyZonesRequestBuilder {
   constructor(
@@ -46,6 +58,14 @@ export class ByProjectKeyZonesRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
@@ -71,6 +91,14 @@ export class ByProjectKeyZonesRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     body: ZoneDraft
     headers?: {

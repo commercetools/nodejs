@@ -1,5 +1,17 @@
-import { ProductProjectionPagedSearchResponse } from './../../models/product'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ProductProjectionPagedSearchResponse } from 'models/product'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductProjectionsSearchRequestBuilder {
   constructor(
@@ -34,16 +46,16 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
   /**
    *	Search Product Projection
    */
-  public get(methodArgs?: {
-    queryArgs?: {
+  public get(methodArgs: {
+    queryArgs: {
       fuzzy?: boolean | boolean[]
       fuzzyLevel?: number | number[]
+      markMatchingVariants: boolean | boolean[]
       staged?: boolean | boolean[]
       filter?: string | string[]
-      facets?: string | string[]
-      query?: string | string[]
+      'filter.facets'?: string | string[]
+      'filter.query'?: string | string[]
       facet?: string | string[]
-      text?: string | string[]
       sort?: string | string[]
       limit?: number | number[]
       offset?: number | number[]
@@ -53,6 +65,14 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string

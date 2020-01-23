@@ -59,6 +59,7 @@
     "@babel/preset-typescript": "7.8.3",
     "@commitlint/cli": "8.3.5",
     "@commitlint/config-conventional": "8.3.4",
+    "@rollup/plugin-alias": "^3.0.0",
     "@types/jest": "24.9.0",
     "@types/node": "10.17.13",
     "@types/node-fetch": "2.5.4",
@@ -119,6 +120,7 @@
     "rollup-watch": "4.3.1",
     "streamtest": "1.2.4",
     "ts-jest": "24.3.0",
+    "tsconfig-replace-paths": "^0.0.5",
     "typescript": "3.7.5"
   },
   "config": {

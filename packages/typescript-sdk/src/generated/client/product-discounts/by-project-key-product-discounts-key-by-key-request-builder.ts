@@ -1,8 +1,17 @@
-import {
-  ProductDiscount,
-  ProductDiscountUpdate,
-} from './../../models/product-discount'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ProductDiscount, ProductDiscountUpdate } from 'models/product-discount'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductDiscountsKeyByKeyRequestBuilder {
   constructor(
@@ -20,6 +29,14 @@ export class ByProjectKeyProductDiscountsKeyByKeyRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
@@ -45,6 +62,14 @@ export class ByProjectKeyProductDiscountsKeyByKeyRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     body: ProductDiscountUpdate
     headers?: {
@@ -74,6 +99,14 @@ export class ByProjectKeyProductDiscountsKeyByKeyRequestBuilder {
     queryArgs: {
       version: number | number[]
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string

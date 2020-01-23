@@ -1,6 +1,17 @@
-//Generated file, please do not change
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
 
-import { ChannelReference } from './channel'
+import { ChannelReference } from 'models/channel'
 import {
   CreatedBy,
   LastModifiedBy,
@@ -11,9 +22,9 @@ import {
   ReferenceTypeId,
   ResourceIdentifier,
   TypedMoney,
-} from './common'
-import { ProductReference } from './product'
-import { CustomFields, TypeResourceIdentifier } from './type'
+} from 'models/common'
+import { ProductReference } from 'models/product'
+import { CustomFields, TypeResourceIdentifier } from 'models/type'
 
 export interface CartDiscount extends LoggedResource {
   /**

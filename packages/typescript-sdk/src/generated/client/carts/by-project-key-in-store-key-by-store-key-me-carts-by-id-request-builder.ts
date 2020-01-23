@@ -1,6 +1,18 @@
-import { Cart } from './../../models/cart'
-import { Update } from './../../models/common'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { Cart } from 'models/cart'
+import { Update } from 'models/common'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyMeCartsByIDRequestBuilder {
   constructor(
@@ -19,6 +31,14 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeCartsByIDRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
@@ -44,6 +64,14 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeCartsByIDRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     body: Update
     headers?: {
@@ -73,6 +101,14 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeCartsByIDRequestBuilder {
     queryArgs: {
       version: number | number[]
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string

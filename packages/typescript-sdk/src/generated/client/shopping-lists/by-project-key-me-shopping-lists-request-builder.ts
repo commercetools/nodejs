@@ -1,11 +1,23 @@
-import { ByProjectKeyMeShoppingListsByIDRequestBuilder } from './by-project-key-me-shopping-lists-by-id-request-builder'
-import { ByProjectKeyMeShoppingListsKeyByKeyRequestBuilder } from './by-project-key-me-shopping-lists-key-by-key-request-builder'
-import { MyShoppingListDraft } from './../../models/me'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyMeShoppingListsByIDRequestBuilder } from 'client/shopping-lists/by-project-key-me-shopping-lists-by-id-request-builder'
+import { ByProjectKeyMeShoppingListsKeyByKeyRequestBuilder } from 'client/shopping-lists/by-project-key-me-shopping-lists-key-by-key-request-builder'
+import { MyShoppingListDraft } from 'models/me'
 import {
   MyShoppingList,
   ShoppingListPagedQueryResponse,
-} from './../../models/shopping-list'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+} from 'models/shopping-list'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeShoppingListsRequestBuilder {
   constructor(
@@ -50,6 +62,14 @@ export class ByProjectKeyMeShoppingListsRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
@@ -75,6 +95,14 @@ export class ByProjectKeyMeShoppingListsRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     body: MyShoppingListDraft
     headers?: {

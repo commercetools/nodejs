@@ -1,5 +1,17 @@
-import { CustomObject } from './../../models/custom-object'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { CustomObject } from 'models/custom-object'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder {
   constructor(
@@ -18,6 +30,14 @@ export class ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
@@ -45,6 +65,14 @@ export class ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder {
       version?: number | number[]
       dataErasure?: boolean | boolean[]
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string

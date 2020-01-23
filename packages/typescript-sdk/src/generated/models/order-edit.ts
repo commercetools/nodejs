@@ -1,4 +1,15 @@
-//Generated file, please do not change
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
 
 import {
   CartOrigin,
@@ -19,9 +30,9 @@ import {
   TaxMode,
   TaxPortionDraft,
   TaxedPrice,
-} from './cart'
-import { CartDiscountReference } from './cart-discount'
-import { ChannelResourceIdentifier } from './channel'
+} from 'models/cart'
+import { CartDiscountReference } from 'models/cart-discount'
+import { ChannelResourceIdentifier } from 'models/channel'
 import {
   Address,
   CreatedBy,
@@ -33,14 +44,14 @@ import {
   ReferenceTypeId,
   ResourceIdentifier,
   TypedMoney,
-} from './common'
+} from 'models/common'
 import {
   CustomerGroupReference,
   CustomerGroupResourceIdentifier,
-} from './customer-group'
-import { DiscountCodeReference } from './discount-code'
-import { ErrorObject } from './error'
-import { MessagePayload } from './message'
+} from 'models/customer-group'
+import { DiscountCodeReference } from 'models/discount-code'
+import { ErrorObject } from 'models/error'
+import { MessagePayload } from 'models/message'
 import {
   DeliveryItem,
   ItemState,
@@ -59,22 +70,22 @@ import {
   StagedOrderUpdateAction,
   SyncInfo,
   TrackingData,
-} from './order'
-import { PaymentResourceIdentifier } from './payment'
+} from 'models/order'
+import { PaymentResourceIdentifier } from 'models/payment'
 import {
   ShippingMethodResourceIdentifier,
   ShippingRateDraft,
-} from './shipping-method'
-import { ShoppingListResourceIdentifier } from './shopping-list'
-import { StateReference, StateResourceIdentifier } from './state'
-import { StoreKeyReference } from './store'
-import { TaxCategoryResourceIdentifier } from './tax-category'
+} from 'models/shipping-method'
+import { ShoppingListResourceIdentifier } from 'models/shopping-list'
+import { StateReference, StateResourceIdentifier } from 'models/state'
+import { StoreKeyReference } from 'models/store'
+import { TaxCategoryResourceIdentifier } from 'models/tax-category'
 import {
   CustomFields,
   CustomFieldsDraft,
   FieldContainer,
   TypeResourceIdentifier,
-} from './type'
+} from 'models/type'
 
 export interface OrderEdit extends LoggedResource {
   /**

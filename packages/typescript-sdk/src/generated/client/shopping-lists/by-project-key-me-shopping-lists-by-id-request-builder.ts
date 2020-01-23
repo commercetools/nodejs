@@ -1,6 +1,18 @@
-import { MyShoppingListUpdate } from './../../models/me'
-import { MyShoppingList } from './../../models/shopping-list'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { MyShoppingListUpdate } from 'models/me'
+import { MyShoppingList } from 'models/shopping-list'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeShoppingListsByIDRequestBuilder {
   constructor(
@@ -18,6 +30,14 @@ export class ByProjectKeyMeShoppingListsByIDRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
@@ -43,6 +63,14 @@ export class ByProjectKeyMeShoppingListsByIDRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     body: MyShoppingListUpdate
     headers?: {
@@ -72,6 +100,14 @@ export class ByProjectKeyMeShoppingListsByIDRequestBuilder {
     queryArgs: {
       version: number | number[]
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string

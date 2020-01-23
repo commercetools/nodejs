@@ -1,7 +1,19 @@
-import { ByProjectKeyTypesByIDRequestBuilder } from './by-project-key-types-by-id-request-builder'
-import { ByProjectKeyTypesKeyByKeyRequestBuilder } from './by-project-key-types-key-by-key-request-builder'
-import { Type, TypeDraft, TypePagedQueryResponse } from './../../models/type'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyTypesByIDRequestBuilder } from 'client/types/by-project-key-types-by-id-request-builder'
+import { ByProjectKeyTypesKeyByKeyRequestBuilder } from 'client/types/by-project-key-types-key-by-key-request-builder'
+import { Type, TypeDraft, TypePagedQueryResponse } from 'models/type'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyTypesRequestBuilder {
   constructor(
@@ -46,6 +58,14 @@ export class ByProjectKeyTypesRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
@@ -71,6 +91,14 @@ export class ByProjectKeyTypesRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     body: TypeDraft
     headers?: {

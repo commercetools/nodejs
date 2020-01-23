@@ -1,17 +1,29 @@
-import { ByProjectKeyCustomersByIDRequestBuilder } from './by-project-key-customers-by-id-request-builder'
-import { ByProjectKeyCustomersEmailTokenByEmailTokenRequestBuilder } from './by-project-key-customers-email-token-by-email-token-request-builder'
-import { ByProjectKeyCustomersKeyByKeyRequestBuilder } from './by-project-key-customers-key-by-key-request-builder'
-import { ByProjectKeyCustomersPasswordTokenByPasswordTokenRequestBuilder } from './by-project-key-customers-password-token-by-password-token-request-builder'
-import { ByProjectKeyCustomersEmailTokenRequestBuilder } from './../email-token/by-project-key-customers-email-token-request-builder'
-import { ByProjectKeyCustomersEmailRequestBuilder } from './../email/by-project-key-customers-email-request-builder'
-import { ByProjectKeyCustomersPasswordTokenRequestBuilder } from './../password-token/by-project-key-customers-password-token-request-builder'
-import { ByProjectKeyCustomersPasswordRequestBuilder } from './../password/by-project-key-customers-password-request-builder'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyCustomersByIDRequestBuilder } from 'client/customers/by-project-key-customers-by-id-request-builder'
+import { ByProjectKeyCustomersEmailTokenByEmailTokenRequestBuilder } from 'client/customers/by-project-key-customers-email-token-by-email-token-request-builder'
+import { ByProjectKeyCustomersKeyByKeyRequestBuilder } from 'client/customers/by-project-key-customers-key-by-key-request-builder'
+import { ByProjectKeyCustomersPasswordTokenByPasswordTokenRequestBuilder } from 'client/customers/by-project-key-customers-password-token-by-password-token-request-builder'
+import { ByProjectKeyCustomersEmailTokenRequestBuilder } from 'client/email-token/by-project-key-customers-email-token-request-builder'
+import { ByProjectKeyCustomersEmailRequestBuilder } from 'client/email/by-project-key-customers-email-request-builder'
+import { ByProjectKeyCustomersPasswordTokenRequestBuilder } from 'client/password-token/by-project-key-customers-password-token-request-builder'
+import { ByProjectKeyCustomersPasswordRequestBuilder } from 'client/password/by-project-key-customers-password-request-builder'
 import {
   CustomerDraft,
   CustomerPagedQueryResponse,
   CustomerSignInResult,
-} from './../../models/customer'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+} from 'models/customer'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCustomersRequestBuilder {
   constructor(
@@ -124,6 +136,14 @@ export class ByProjectKeyCustomersRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
@@ -152,6 +172,14 @@ export class ByProjectKeyCustomersRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     body: CustomerDraft
     headers?: {

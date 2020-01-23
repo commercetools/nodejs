@@ -1,6 +1,18 @@
-import { ByProjectKeyProductsByIDImagesRequestBuilder } from './../images/by-project-key-products-by-id-images-request-builder'
-import { Product, ProductUpdate } from './../../models/product'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyProductsByIDImagesRequestBuilder } from 'client/images/by-project-key-products-by-id-images-request-builder'
+import { Product, ProductUpdate } from 'models/product'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductsByIDRequestBuilder {
   constructor(
@@ -31,6 +43,14 @@ export class ByProjectKeyProductsByIDRequestBuilder {
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
@@ -60,6 +80,14 @@ export class ByProjectKeyProductsByIDRequestBuilder {
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     body: ProductUpdate
     headers?: {
@@ -93,6 +121,14 @@ export class ByProjectKeyProductsByIDRequestBuilder {
       priceChannel?: string | string[]
       version: number | number[]
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string

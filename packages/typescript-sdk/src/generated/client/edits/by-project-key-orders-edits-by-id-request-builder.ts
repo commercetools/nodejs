@@ -1,6 +1,18 @@
-import { ByProjectKeyOrdersEditsByIDApplyRequestBuilder } from './../apply/by-project-key-orders-edits-by-id-apply-request-builder'
-import { OrderEdit, OrderEditUpdate } from './../../models/order-edit'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyOrdersEditsByIDApplyRequestBuilder } from 'client/apply/by-project-key-orders-edits-by-id-apply-request-builder'
+import { OrderEdit, OrderEditUpdate } from 'models/order-edit'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyOrdersEditsByIDRequestBuilder {
   constructor(
@@ -27,6 +39,14 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
@@ -52,6 +72,14 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     body: OrderEditUpdate
     headers?: {
@@ -81,6 +109,14 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
     queryArgs: {
       version: number | number[]
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string

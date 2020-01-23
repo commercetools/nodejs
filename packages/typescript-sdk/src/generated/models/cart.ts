@@ -1,7 +1,18 @@
-//Generated file, please do not change
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
 
-import { CartDiscountReference } from './cart-discount'
-import { ChannelReference, ChannelResourceIdentifier } from './channel'
+import { CartDiscountReference } from 'models/cart-discount'
+import { ChannelReference, ChannelResourceIdentifier } from 'models/channel'
 import {
   Address,
   CreatedBy,
@@ -15,36 +26,36 @@ import {
   ResourceIdentifier,
   TypedMoney,
   TypedMoneyDraft,
-} from './common'
+} from 'models/common'
 import {
   CustomerGroupReference,
   CustomerGroupResourceIdentifier,
-} from './customer-group'
-import { DiscountCodeReference } from './discount-code'
-import { Delivery, ItemState, OrderReference, PaymentInfo } from './order'
-import { PaymentResourceIdentifier } from './payment'
-import { ProductVariant } from './product'
-import { ProductTypeReference } from './product-type'
+} from 'models/customer-group'
+import { DiscountCodeReference } from 'models/discount-code'
+import { Delivery, ItemState, OrderReference, PaymentInfo } from 'models/order'
+import { PaymentResourceIdentifier } from 'models/payment'
+import { ProductVariant } from 'models/product'
+import { ProductTypeReference } from 'models/product-type'
 import {
   ShippingMethodReference,
   ShippingMethodResourceIdentifier,
   ShippingRate,
   ShippingRateDraft,
-} from './shipping-method'
-import { ShoppingListResourceIdentifier } from './shopping-list'
-import { StoreKeyReference, StoreResourceIdentifier } from './store'
+} from 'models/shipping-method'
+import { ShoppingListResourceIdentifier } from 'models/shopping-list'
+import { StoreKeyReference, StoreResourceIdentifier } from 'models/store'
 import {
   SubRate,
   TaxCategoryReference,
   TaxCategoryResourceIdentifier,
   TaxRate,
-} from './tax-category'
+} from 'models/tax-category'
 import {
   CustomFields,
   CustomFieldsDraft,
   FieldContainer,
   TypeResourceIdentifier,
-} from './type'
+} from 'models/type'
 
 export interface Cart extends LoggedResource {
   /**

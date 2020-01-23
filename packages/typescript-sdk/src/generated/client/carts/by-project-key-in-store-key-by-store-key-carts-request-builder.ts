@@ -1,6 +1,18 @@
-import { ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder } from './by-project-key-in-store-key-by-store-key-carts-by-id-request-builder'
-import { Cart, CartDraft } from './../../models/cart'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder } from 'client/carts/by-project-key-in-store-key-by-store-key-carts-by-id-request-builder'
+import { Cart, CartDraft } from 'models/cart'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyCartsRequestBuilder {
   constructor(
@@ -36,6 +48,14 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
@@ -65,6 +85,14 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     body: CartDraft
     headers?: {

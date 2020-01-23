@@ -1,11 +1,23 @@
-import { ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder } from './by-project-key-custom-objects-by-container-by-key-request-builder'
-import { ByProjectKeyCustomObjectsByIDRequestBuilder } from './by-project-key-custom-objects-by-id-request-builder'
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+import { ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder } from 'client/custom-objects/by-project-key-custom-objects-by-container-by-key-request-builder'
+import { ByProjectKeyCustomObjectsByIDRequestBuilder } from 'client/custom-objects/by-project-key-custom-objects-by-id-request-builder'
 import {
   CustomObject,
   CustomObjectDraft,
   CustomObjectPagedQueryResponse,
-} from './../../models/custom-object'
-import { ApiRequestExecutor, ApiRequest } from './../../base/requests-utils'
+} from 'models/custom-object'
+import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCustomObjectsRequestBuilder {
   constructor(
@@ -54,6 +66,14 @@ export class ByProjectKeyCustomObjectsRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
@@ -86,6 +106,14 @@ export class ByProjectKeyCustomObjectsRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     body: CustomObjectDraft
     headers?: {

@@ -2,7 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "declaration": true,
-    "isolatedModules": false
+    "isolatedModules": false,
+    "emitDeclarationOnly": true,
+    "declarationDir": "dist/typings"
   },
   "exclude": [
     "**/*.spec.ts",
