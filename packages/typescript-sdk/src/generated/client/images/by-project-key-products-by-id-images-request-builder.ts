@@ -33,6 +33,14 @@ export class ByProjectKeyProductsByIDImagesRequestBuilder {
       variant?: number | number[]
       sku?: string | string[]
       staged?: boolean | boolean[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     body: Buffer
     headers: {

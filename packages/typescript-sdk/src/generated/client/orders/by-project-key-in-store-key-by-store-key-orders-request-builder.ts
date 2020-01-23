@@ -65,6 +65,14 @@ export class ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
@@ -94,6 +102,14 @@ export class ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     body: OrderFromCartDraft
     headers?: {

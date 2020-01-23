@@ -46,16 +46,16 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
   /**
    *	Search Product Projection
    */
-  public get(methodArgs?: {
-    queryArgs?: {
+  public get(methodArgs: {
+    queryArgs: {
       fuzzy?: boolean | boolean[]
       fuzzyLevel?: number | number[]
+      markMatchingVariants: boolean | boolean[]
       staged?: boolean | boolean[]
       filter?: string | string[]
-      facets?: string | string[]
-      query?: string | string[]
+      'filter.facets'?: string | string[]
+      'filter.query'?: string | string[]
       facet?: string | string[]
-      text?: string | string[]
       sort?: string | string[]
       limit?: number | number[]
       offset?: number | number[]
@@ -65,6 +65,14 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string

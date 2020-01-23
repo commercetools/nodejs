@@ -26,11 +26,18 @@ export class ByProjectKeyProductProjectionsSuggestRequestBuilder {
     queryArgs?: {
       fuzzy?: boolean | boolean[]
       staged?: boolean | boolean[]
-      searchKeywords?: string | string[]
       sort?: string | string[]
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string

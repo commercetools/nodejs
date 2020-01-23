@@ -134,6 +134,14 @@ export class ByProjectKeyMeRequestBuilder {
       offset?: number | number[]
       withTotal?: boolean | boolean[]
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
@@ -183,6 +191,14 @@ export class ByProjectKeyMeRequestBuilder {
   public delete(methodArgs: {
     queryArgs: {
       version: number | number[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string

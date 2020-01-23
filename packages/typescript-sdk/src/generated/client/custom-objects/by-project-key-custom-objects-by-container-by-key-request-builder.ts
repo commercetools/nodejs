@@ -30,6 +30,14 @@ export class ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
@@ -57,6 +65,14 @@ export class ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder {
       version?: number | number[]
       dataErasure?: boolean | boolean[]
       expand?: string | string[]
+      [key: string]:
+        | boolean
+        | boolean[]
+        | string
+        | string[]
+        | number
+        | number[]
+        | undefined
     }
     headers?: {
       [key: string]: string
