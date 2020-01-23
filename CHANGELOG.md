@@ -1,4 +1,5 @@
 
+
 ## @commercetools/typescript-sdk@0.0.12-alpha.0 (2020-01-23)
 
 #### :bug: Bug Fix
