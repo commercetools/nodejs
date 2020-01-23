@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/typescript-sdk",
-  "version": "0.0.12-alpha.0",
+  "version": "0.0.12",
   "description": "Typescript definitions and sdk for commercetools platform",
   "keywords": [
     "commercetools",
