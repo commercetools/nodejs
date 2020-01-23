@@ -10,7 +10,7 @@
  *                    `Y'
  *
  */
-import { ByProjectKeyRequestBuilder } from 'client//by-project-key-request-builder'
+import { ByProjectKeyRequestBuilder } from 'client/by-project-key-request-builder'
 import { Middleware } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
