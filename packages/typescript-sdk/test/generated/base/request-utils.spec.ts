@@ -1,5 +1,8 @@
 import { ApiRequestExecutor } from '../../../src/generated/shared/utils/requests-utils'
-import { MiddlewareArg, VariableMap } from '../../../src/generated/shared/utils/common-types'
+import {
+  MiddlewareArg,
+  VariableMap,
+} from '../../../src/generated/shared/utils/common-types'
 import * as url from 'url'
 
 describe('ApiRequestExecutor', () => {

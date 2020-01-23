@@ -79,9 +79,14 @@ function cleanObject<T extends VariableMap>(obj: T): T {
     const value = obj[key]
 
     if (Array.isArray(value)) {
+      const values = (value as unknown[]).filter(isDefined)
+      if (!values.length) {
+        return result
+      }
+
       return {
         ...result,
-        [key]: (value as unknown[]).filter(isDefined),
+        [key]: values,
       }
     }
 
