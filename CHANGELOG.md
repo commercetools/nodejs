@@ -263,6 +263,271 @@
 
 #### Committers: 1
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+## @commercetools/typescript-sdk@0.0.12-alpha.0 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/state-importer@3.0.6 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/resource-deleter@2.0.6 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/product-json-to-xlsx@3.1.2 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/product-json-to-csv@4.1.2 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/product-exporter@3.0.6 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/price-exporter@3.0.7 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/personal-data-erasure@3.0.6 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/inventories-exporter@3.0.7 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/integration-tests@0.0.14 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/discount-code-importer@3.0.6 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/discount-code-exporter@4.0.7 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/customer-groups-exporter@3.0.6 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/custom-objects-importer@3.0.6 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/custom-objects-exporter@3.0.6 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/csv-parser-state@3.0.6 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/csv-parser-price@4.0.7 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/category-exporter@3.0.6 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
+
+## @commercetools/api-request-builder@5.4.2 (2020-01-23)
+
+#### :bug: Bug Fix
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### :house: Maintenance
+* `api-request-builder`, `typescript-sdk`
+  * [#1475](https://github.com/commercetools/nodejs/pull/1475) fix(ts-sdk) Add paths relative to route ([@acbeni](https://github.com/acbeni))
+
+#### Committers: 1
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 ## @commercetools/typescript-sdk@0.0.11-alpha.0 (2020-01-22)
 
 #### :bug: Bug Fix
