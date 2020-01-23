@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/csv-parser-price",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "description": "Converts commercetools price data from CSV to JSON.",
   "keywords": [
     "commercetools",

@@ -91,7 +91,7 @@ describe('CSV and CLI Tests', () => {
         )
       } catch (error) {
         expect(error.code).toBe(1)
-        expect(String(error)).toMatch(/\.js:\d+:\d+/)
+        expect(String(error)).toMatch(/Row length does not match headers/)
       }
     })
 

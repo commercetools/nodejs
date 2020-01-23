@@ -1,3 +1,45 @@
+## @commercetools/typescript-sdk@0.0.11-alpha.0 (2020-01-22)
+
+#### :bug: Bug Fix
+
+- `csv-parser-price`
+  - [#1473](https://github.com/commercetools/nodejs/pull/1473) fix(csv-parser-price): handle error when variant-sku key is missing/mis-spelled ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+- `typescript-sdk`
+  - [#1472](https://github.com/commercetools/nodejs/pull/1472) fix(ts-sdk): ensure empty arrays does not affect query parameters ([@lenkan](https://github.com/lenkan))
+
+#### Committers: 2
+
+- Daniel Lenksjö ([@lenkan](https://github.com/lenkan))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/integration-tests@0.0.13 (2020-01-22)
+
+#### :bug: Bug Fix
+
+- `csv-parser-price`
+  - [#1473](https://github.com/commercetools/nodejs/pull/1473) fix(csv-parser-price): handle error when variant-sku key is missing/mis-spelled ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+- `typescript-sdk`
+  - [#1472](https://github.com/commercetools/nodejs/pull/1472) fix(ts-sdk): ensure empty arrays does not affect query parameters ([@lenkan](https://github.com/lenkan))
+
+#### Committers: 2
+
+- Daniel Lenksjö ([@lenkan](https://github.com/lenkan))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/csv-parser-price@4.0.6 (2020-01-22)
+
+#### :bug: Bug Fix
+
+- `csv-parser-price`
+  - [#1473](https://github.com/commercetools/nodejs/pull/1473) fix(csv-parser-price): handle error when variant-sku key is missing/mis-spelled ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+- `typescript-sdk`
+  - [#1472](https://github.com/commercetools/nodejs/pull/1472) fix(ts-sdk): ensure empty arrays does not affect query parameters ([@lenkan](https://github.com/lenkan))
+
+#### Committers: 2
+
+- Daniel Lenksjö ([@lenkan](https://github.com/lenkan))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
 ## @commercetools/sync-actions@4.2.0 (2020-01-20)
 
 #### :house: Maintenance
