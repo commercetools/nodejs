@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/category-exporter",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "Exports categories from the commercetools platform.",
   "main": "lib/main.js",
   "bin": {
@@ -34,7 +34,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commercetools/api-request-builder": "^5.4.1",
+    "@commercetools/api-request-builder": "^5.4.2",
     "@commercetools/get-credentials": "^3.0.12",
     "@commercetools/sdk-client": "^2.1.1",
     "@commercetools/sdk-middleware-auth": "^5.1.6",
