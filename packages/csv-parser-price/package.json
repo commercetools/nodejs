@@ -58,7 +58,7 @@
     "yargs": "^15.0.0"
   },
   "devDependencies": {
-    "sinon": "8.1.0",
+    "sinon": "8.1.1",
     "streamtest": "1.2.4",
     "tmp": "0.1.0"
   }
