@@ -67,6 +67,6 @@
   "devDependencies": {
     "stream-to-string": "1.2.0",
     "streamtest": "1.2.4",
-    "unzipper": "0.10.5"
+    "unzipper": "0.10.7"
   }
 }
