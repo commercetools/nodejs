@@ -11,6 +11,7 @@
  *
  */
 import { CartDiscount, CartDiscountUpdate } from 'models/cart-discount'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCartDiscountsKeyByKeyRequestBuilder {
@@ -29,14 +30,7 @@ export class ByProjectKeyCartDiscountsKeyByKeyRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -62,14 +56,7 @@ export class ByProjectKeyCartDiscountsKeyByKeyRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     body: CartDiscountUpdate
     headers?: {
@@ -99,14 +86,7 @@ export class ByProjectKeyCartDiscountsKeyByKeyRequestBuilder {
     queryArgs: {
       version: number | number[]
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string

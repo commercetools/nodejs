@@ -14,6 +14,7 @@ import {
   CustomerCreatePasswordResetToken,
   CustomerToken,
 } from 'models/customer'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordTokenRequestBuilder {

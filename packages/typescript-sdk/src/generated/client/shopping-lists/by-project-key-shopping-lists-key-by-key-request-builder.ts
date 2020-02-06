@@ -11,6 +11,7 @@
  *
  */
 import { ShoppingList, ShoppingListUpdate } from 'models/shopping-list'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyShoppingListsKeyByKeyRequestBuilder {
@@ -29,14 +30,7 @@ export class ByProjectKeyShoppingListsKeyByKeyRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -62,14 +56,7 @@ export class ByProjectKeyShoppingListsKeyByKeyRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     body: ShoppingListUpdate
     headers?: {
@@ -100,14 +87,7 @@ export class ByProjectKeyShoppingListsKeyByKeyRequestBuilder {
       dataErasure?: boolean | boolean[]
       version: number | number[]
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string

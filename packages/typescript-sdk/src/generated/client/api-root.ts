@@ -11,6 +11,7 @@
  *
  */
 import { ByProjectKeyRequestBuilder } from 'client/by-project-key-request-builder'
+import { QueryParamType } from 'shared/utils/common-types'
 import { Middleware } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 

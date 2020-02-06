@@ -11,6 +11,7 @@
  *
  */
 import { ProductProjectionPagedSearchResponse } from 'models/product'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductProjectionsSearchRequestBuilder {
@@ -65,14 +66,7 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string

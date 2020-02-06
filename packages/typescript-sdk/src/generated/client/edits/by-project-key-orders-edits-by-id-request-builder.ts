@@ -12,6 +12,7 @@
  */
 import { ByProjectKeyOrdersEditsByIDApplyRequestBuilder } from 'client/apply/by-project-key-orders-edits-by-id-apply-request-builder'
 import { OrderEdit, OrderEditUpdate } from 'models/order-edit'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyOrdersEditsByIDRequestBuilder {
@@ -39,14 +40,7 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -72,14 +66,7 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     body: OrderEditUpdate
     headers?: {
@@ -109,14 +96,7 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
     queryArgs: {
       version: number | number[]
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string

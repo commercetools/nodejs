@@ -11,6 +11,7 @@
  *
  */
 import { Order, OrderImportDraft } from 'models/order'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyOrdersImportRequestBuilder {

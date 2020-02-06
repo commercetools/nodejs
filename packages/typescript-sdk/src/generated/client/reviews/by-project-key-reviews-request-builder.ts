@@ -13,6 +13,7 @@
 import { ByProjectKeyReviewsByIDRequestBuilder } from 'client/reviews/by-project-key-reviews-by-id-request-builder'
 import { ByProjectKeyReviewsKeyByKeyRequestBuilder } from 'client/reviews/by-project-key-reviews-key-by-key-request-builder'
 import { Review, ReviewDraft, ReviewPagedQueryResponse } from 'models/review'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyReviewsRequestBuilder {
@@ -58,14 +59,7 @@ export class ByProjectKeyReviewsRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -91,14 +85,7 @@ export class ByProjectKeyReviewsRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     body: ReviewDraft
     headers?: {

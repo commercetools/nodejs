@@ -11,6 +11,7 @@
  *
  */
 import { Product } from 'models/product'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductsByIDImagesRequestBuilder {
@@ -33,14 +34,7 @@ export class ByProjectKeyProductsByIDImagesRequestBuilder {
       variant?: number | number[]
       sku?: string | string[]
       staged?: boolean | boolean[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     body: Buffer
     headers: {

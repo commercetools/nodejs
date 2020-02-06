@@ -15,6 +15,7 @@ import { ByProjectKeyProductProjectionsKeyByKeyRequestBuilder } from 'client/pro
 import { ByProjectKeyProductProjectionsSearchRequestBuilder } from 'client/search/by-project-key-product-projections-search-request-builder'
 import { ByProjectKeyProductProjectionsSuggestRequestBuilder } from 'client/suggest/by-project-key-product-projections-suggest-request-builder'
 import { ProductProjectionPagedQueryResponse } from 'models/product'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductProjectionsRequestBuilder {
@@ -94,14 +95,7 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string

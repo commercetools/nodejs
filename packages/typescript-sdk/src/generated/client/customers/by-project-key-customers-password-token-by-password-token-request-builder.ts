@@ -11,6 +11,7 @@
  *
  */
 import { Customer } from 'models/customer'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCustomersPasswordTokenByPasswordTokenRequestBuilder {
@@ -29,14 +30,7 @@ export class ByProjectKeyCustomersPasswordTokenByPasswordTokenRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string

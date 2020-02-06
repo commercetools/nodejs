@@ -22,6 +22,7 @@ import { ByProjectKeyMeShoppingListsRequestBuilder } from 'client/shopping-lists
 import { ByProjectKeyMeSignupRequestBuilder } from 'client/signup/by-project-key-me-signup-request-builder'
 import { Update } from 'models/common'
 import { MyCustomer } from 'models/me'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeRequestBuilder {
@@ -134,14 +135,7 @@ export class ByProjectKeyMeRequestBuilder {
       offset?: number | number[]
       withTotal?: boolean | boolean[]
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -191,14 +185,7 @@ export class ByProjectKeyMeRequestBuilder {
   public delete(methodArgs: {
     queryArgs: {
       version: number | number[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string

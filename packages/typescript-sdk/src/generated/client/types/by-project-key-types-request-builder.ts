@@ -13,6 +13,7 @@
 import { ByProjectKeyTypesByIDRequestBuilder } from 'client/types/by-project-key-types-by-id-request-builder'
 import { ByProjectKeyTypesKeyByKeyRequestBuilder } from 'client/types/by-project-key-types-key-by-key-request-builder'
 import { Type, TypeDraft, TypePagedQueryResponse } from 'models/type'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyTypesRequestBuilder {
@@ -58,14 +59,7 @@ export class ByProjectKeyTypesRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -91,14 +85,7 @@ export class ByProjectKeyTypesRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     body: TypeDraft
     headers?: {

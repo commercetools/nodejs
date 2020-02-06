@@ -11,6 +11,7 @@
  *
  */
 import { Product, ProductUpdate } from 'models/product'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductsKeyByKeyRequestBuilder {
@@ -33,14 +34,7 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -70,14 +64,7 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     body: ProductUpdate
     headers?: {
@@ -111,14 +98,7 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
       priceChannel?: string | string[]
       version: number | number[]
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string

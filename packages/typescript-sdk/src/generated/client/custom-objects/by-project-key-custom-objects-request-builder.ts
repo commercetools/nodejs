@@ -17,6 +17,7 @@ import {
   CustomObjectDraft,
   CustomObjectPagedQueryResponse,
 } from 'models/custom-object'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCustomObjectsRequestBuilder {
@@ -66,14 +67,7 @@ export class ByProjectKeyCustomObjectsRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -106,14 +100,7 @@ export class ByProjectKeyCustomObjectsRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     body: CustomObjectDraft
     headers?: {

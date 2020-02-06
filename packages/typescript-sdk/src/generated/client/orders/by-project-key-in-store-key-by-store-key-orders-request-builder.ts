@@ -17,6 +17,7 @@ import {
   OrderFromCartDraft,
   OrderPagedQueryResponse,
 } from 'models/order'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder {
@@ -65,14 +66,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -102,14 +96,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     body: OrderFromCartDraft
     headers?: {

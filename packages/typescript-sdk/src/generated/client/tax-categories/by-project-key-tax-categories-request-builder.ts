@@ -17,6 +17,7 @@ import {
   TaxCategoryDraft,
   TaxCategoryPagedQueryResponse,
 } from 'models/tax-category'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyTaxCategoriesRequestBuilder {
@@ -62,14 +63,7 @@ export class ByProjectKeyTaxCategoriesRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -95,14 +89,7 @@ export class ByProjectKeyTaxCategoriesRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     body: TaxCategoryDraft
     headers?: {

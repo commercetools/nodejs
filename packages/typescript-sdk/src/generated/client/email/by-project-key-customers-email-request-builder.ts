@@ -11,6 +11,7 @@
  *
  */
 import { ByProjectKeyCustomersEmailConfirmRequestBuilder } from 'client/confirm/by-project-key-customers-email-confirm-request-builder'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCustomersEmailRequestBuilder {

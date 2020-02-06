@@ -11,6 +11,7 @@
  *
  */
 import { GraphQLRequest, GraphQLResponse } from 'models/graph-ql'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyGraphqlRequestBuilder {

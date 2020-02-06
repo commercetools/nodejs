@@ -11,6 +11,7 @@
  *
  */
 import { MyPaymentUpdate } from 'models/me'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMePaymentKeyByKeyRequestBuilder {

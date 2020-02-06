@@ -12,6 +12,7 @@
  */
 import { ByProjectKeyCustomersPasswordResetRequestBuilder } from 'client/reset/by-project-key-customers-password-reset-request-builder'
 import { Customer, CustomerChangePassword } from 'models/customer'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCustomersPasswordRequestBuilder {

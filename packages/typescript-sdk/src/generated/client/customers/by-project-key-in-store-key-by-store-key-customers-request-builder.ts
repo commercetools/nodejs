@@ -23,6 +23,7 @@ import {
   CustomerPagedQueryResponse,
   CustomerSignInResult,
 } from 'models/customer'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyCustomersRequestBuilder {
@@ -146,14 +147,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -187,14 +181,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     body: CustomerDraft
     headers?: {

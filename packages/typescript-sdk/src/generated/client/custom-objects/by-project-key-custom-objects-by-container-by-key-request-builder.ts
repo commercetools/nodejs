@@ -11,6 +11,7 @@
  *
  */
 import { CustomObject } from 'models/custom-object'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder {
@@ -30,14 +31,7 @@ export class ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -65,14 +59,7 @@ export class ByProjectKeyCustomObjectsByContainerByKeyRequestBuilder {
       version?: number | number[]
       dataErasure?: boolean | boolean[]
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
