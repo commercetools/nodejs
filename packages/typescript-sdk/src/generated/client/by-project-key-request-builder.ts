@@ -42,6 +42,7 @@ import { ByProjectKeyTaxCategoriesRequestBuilder } from 'client/tax-categories/b
 import { ByProjectKeyTypesRequestBuilder } from 'client/types/by-project-key-types-request-builder'
 import { ByProjectKeyZonesRequestBuilder } from 'client/zones/by-project-key-zones-request-builder'
 import { Project, ProjectUpdate } from 'models/project'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyRequestBuilder {

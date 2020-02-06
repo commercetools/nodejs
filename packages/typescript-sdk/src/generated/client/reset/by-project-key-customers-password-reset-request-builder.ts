@@ -11,6 +11,7 @@
  *
  */
 import { Customer, CustomerResetPassword } from 'models/customer'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCustomersPasswordResetRequestBuilder {

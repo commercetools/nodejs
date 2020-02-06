@@ -16,6 +16,7 @@ import {
   MyPaymentDraft,
   MyPaymentPagedQueryResponse,
 } from 'models/me'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMePaymentsRequestBuilder {
@@ -50,14 +51,7 @@ export class ByProjectKeyMePaymentsRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -83,14 +77,7 @@ export class ByProjectKeyMePaymentsRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     body: MyPaymentDraft
     headers?: {

@@ -12,6 +12,7 @@
  */
 import { ByProjectKeyMePaymentByIDRequestBuilder } from 'client/payment/by-project-key-me-payment-by-id-request-builder'
 import { ByProjectKeyMePaymentKeyByKeyRequestBuilder } from 'client/payment/by-project-key-me-payment-key-by-key-request-builder'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMePaymentRequestBuilder {

@@ -12,6 +12,7 @@
  */
 import { ByProjectKeyStatesByIDRequestBuilder } from 'client/states/by-project-key-states-by-id-request-builder'
 import { State, StateDraft, StatePagedQueryResponse } from 'models/state'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyStatesRequestBuilder {
@@ -46,14 +47,7 @@ export class ByProjectKeyStatesRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -79,14 +73,7 @@ export class ByProjectKeyStatesRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     body: StateDraft
     headers?: {

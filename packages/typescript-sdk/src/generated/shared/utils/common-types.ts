@@ -8,15 +8,17 @@ export type MethodType =
   | 'OPTIONS'
   | 'TRACE'
 
+export type QueryParamType =
+  | string
+  | string[]
+  | number
+  | number[]
+  | boolean
+  | boolean[]
+  | undefined
+
 export type VariableMap = {
-  [key: string]:
-    | string
-    | string[]
-    | number
-    | number[]
-    | boolean
-    | boolean[]
-    | undefined
+  [key: string]: QueryParamType
 }
 
 export type MiddlewareArg = {

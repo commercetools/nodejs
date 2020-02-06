@@ -13,6 +13,7 @@
 import { ByProjectKeyInStoreKeyByStoreKeyMeCartsByIDRequestBuilder } from 'client/carts/by-project-key-in-store-key-by-store-key-me-carts-by-id-request-builder'
 import { Cart, CartPagedQueryResponse } from 'models/cart'
 import { MyCartDraft } from 'models/me'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyMeCartsRequestBuilder {
@@ -48,14 +49,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeCartsRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -81,14 +75,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeCartsRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     body: MyCartDraft
     headers?: {

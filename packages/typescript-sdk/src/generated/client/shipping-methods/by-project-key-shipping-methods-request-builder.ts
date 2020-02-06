@@ -17,6 +17,7 @@ import {
   ShippingMethodDraft,
   ShippingMethodPagedQueryResponse,
 } from 'models/shipping-method'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyShippingMethodsRequestBuilder {
@@ -66,14 +67,7 @@ export class ByProjectKeyShippingMethodsRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     headers?: {
       [key: string]: string
@@ -99,14 +93,7 @@ export class ByProjectKeyShippingMethodsRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]:
-        | boolean
-        | boolean[]
-        | string
-        | string[]
-        | number
-        | number[]
-        | undefined
+      [key: string]: QueryParamType
     }
     body: ShippingMethodDraft
     headers?: {

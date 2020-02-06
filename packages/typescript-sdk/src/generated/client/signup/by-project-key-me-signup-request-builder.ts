@@ -12,6 +12,7 @@
  */
 import { CustomerSignInResult } from 'models/customer'
 import { MyCustomerDraft } from 'models/me'
+import { QueryParamType } from 'shared/utils/common-types'
 import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeSignupRequestBuilder {
