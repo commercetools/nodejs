@@ -1,7 +1,6 @@
 import {
   VariableMap,
 } from '../../../src/generated/shared/utils/common-types'
-import * as url from 'url'
 import { buildRelativeUri } from '../../../src/generated/shared/utils/uri-utils'
 
 describe('ApiRequestExecutor', () => {
@@ -18,23 +17,23 @@ describe('ApiRequestExecutor', () => {
     }
 
     test('handle single element array query parameters', async () => {
-      expect(testQuery({ foo: ['bar'] })).toEqual('foo=bar')
+      expect(testQuery({ foo: ['bar'] })).toEqual('?foo=bar')
     })
 
     test('handle array query parameters', async () => {
-      expect(testQuery({ foo: ['bar', 'baz'] })).toEqual('foo=bar&foo=baz')
+      expect(testQuery({ foo: ['bar', 'baz'] })).toEqual('?foo=bar&foo=baz')
     })
 
     test('handle number query parameters', async () => {
-      expect(testQuery({ foo: 123 })).toEqual('foo=123')
+      expect(testQuery({ foo: 123 })).toEqual('?foo=123')
     })
 
     test('handle boolean query parameters', async () => {
-      expect(testQuery({ foo: true, bar: false })).toEqual('foo=true&bar=false')
+      expect(testQuery({ foo: true, bar: false })).toEqual('?foo=true&bar=false')
     })
 
     test('handle invalid characters', async () => {
-      expect(testQuery({ foo: '<>abc /' })).toEqual('foo=%3C%3Eabc%20%2F')
+      expect(testQuery({ foo: '<>abc /' })).toEqual('?foo=%3C%3Eabc%20%2F')
     })
 
     test('handle empty arrays', async () => {
@@ -42,7 +41,7 @@ describe('ApiRequestExecutor', () => {
     })
 
     test('handle empty arrays after defined property', async () => {
-      expect(testQuery({ bar: 'baz', foo: [] })).toEqual('bar=baz')
+      expect(testQuery({ bar: 'baz', foo: [] })).toEqual('?bar=baz')
     })
 
     test('remove undefined and null', async () => {
@@ -52,17 +51,17 @@ describe('ApiRequestExecutor', () => {
           undefinedValue: undefined,
           value: 'bar',
         })
-      ).toEqual('value=bar')
+      ).toEqual('?value=bar')
     })
 
     test('remove undefined and null values in array', async () => {
       expect(
         testQuery({ foo: [null as any, 'bar', undefined, 'baz'] })
-      ).toEqual('foo=bar&foo=baz')
+      ).toEqual('?foo=bar&foo=baz')
     })
 
     test('handle undefined variable map', async () => {
-      expect(testQuery(undefined)).toBeNull()
+      expect(testQuery(undefined)).toEqual("")
     })
   })
 })
