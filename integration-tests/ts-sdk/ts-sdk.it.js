@@ -36,12 +36,11 @@ describe('Auth Middleware Flows', () => {
     it('create an anonymous session and a cart tied to the session', () => {
       const authConfig = {
         ...apiConfig,
-              ]        scopes: [`manage_project:${projectKey}`],
+        scopes: [`manage_project:${projectKey}`],
         credentials: {
           clientId: apiConfig.credentials.clientId,
           clientSecret: apiConfig.credentials.clientSecret,
         },
-
         fetch,
       }
       const client = createClient({
