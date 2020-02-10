@@ -12,8 +12,8 @@
  */
 import { ByProjectKeyMessagesByIDRequestBuilder } from 'client/messages/by-project-key-messages-by-id-request-builder'
 import { MessagePagedQueryResponse } from 'models/message'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMessagesRequestBuilder {
   constructor(
@@ -21,7 +21,8 @@ export class ByProjectKeyMessagesRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public withId(childPathArgs: {
@@ -32,7 +33,8 @@ export class ByProjectKeyMessagesRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -47,7 +49,7 @@ export class ByProjectKeyMessagesRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -55,7 +57,7 @@ export class ByProjectKeyMessagesRequestBuilder {
   }): ApiRequest<MessagePagedQueryResponse> {
     return new ApiRequest<MessagePagedQueryResponse>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/messages',
         pathVariables: this.args.pathArgs,
@@ -64,7 +66,7 @@ export class ByProjectKeyMessagesRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

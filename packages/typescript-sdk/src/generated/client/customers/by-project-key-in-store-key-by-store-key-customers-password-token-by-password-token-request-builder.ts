@@ -11,8 +11,8 @@
  *
  */
 import { Customer } from 'models/customer'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordTokenByPasswordTokenRequestBuilder {
   constructor(
@@ -22,7 +22,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordTokenByPasswordTok
         storeKey: string
         passwordToken: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -31,7 +32,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordTokenByPasswordTok
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -39,7 +40,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordTokenByPasswordTok
   }): ApiRequest<Customer> {
     return new ApiRequest<Customer>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate:
           '/{projectKey}/in-store/key={storeKey}/customers/password-token={passwordToken}',
@@ -49,7 +50,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordTokenByPasswordTok
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

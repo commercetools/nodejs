@@ -13,9 +13,9 @@
 
 import {
   Address,
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
-  LoggedResource,
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
@@ -35,7 +35,7 @@ import {
 export type AnonymousCartSignInMode =
   | 'MergeWithExistingCustomerCart'
   | 'UseAsNewActiveCustomerCart'
-export interface Customer extends LoggedResource {
+export interface Customer extends BaseResource {
   /**
    *	The unique ID of the customer.
    */

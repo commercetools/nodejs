@@ -13,8 +13,8 @@
 import { ByProjectKeyStoresByIDRequestBuilder } from 'client/stores/by-project-key-stores-by-id-request-builder'
 import { ByProjectKeyStoresKeyByKeyRequestBuilder } from 'client/stores/by-project-key-stores-key-by-key-request-builder'
 import { Store, StoreDraft, StorePagedQueryResponse } from 'models/store'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyStoresRequestBuilder {
   constructor(
@@ -22,7 +22,8 @@ export class ByProjectKeyStoresRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public withKey(childPathArgs: {
@@ -33,7 +34,8 @@ export class ByProjectKeyStoresRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public withId(childPathArgs: {
@@ -44,7 +46,8 @@ export class ByProjectKeyStoresRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -59,7 +62,7 @@ export class ByProjectKeyStoresRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -67,7 +70,7 @@ export class ByProjectKeyStoresRequestBuilder {
   }): ApiRequest<StorePagedQueryResponse> {
     return new ApiRequest<StorePagedQueryResponse>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/stores',
         pathVariables: this.args.pathArgs,
@@ -76,7 +79,7 @@ export class ByProjectKeyStoresRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -85,7 +88,7 @@ export class ByProjectKeyStoresRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: StoreDraft
     headers?: {
@@ -94,7 +97,7 @@ export class ByProjectKeyStoresRequestBuilder {
   }): ApiRequest<Store> {
     return new ApiRequest<Store>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/stores',
         pathVariables: this.args.pathArgs,
@@ -105,7 +108,7 @@ export class ByProjectKeyStoresRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

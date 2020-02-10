@@ -11,8 +11,8 @@
  *
  */
 import { ProductProjection } from 'models/product'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductProjectionsKeyByKeyRequestBuilder {
   constructor(
@@ -21,7 +21,8 @@ export class ByProjectKeyProductProjectionsKeyByKeyRequestBuilder {
         projectKey: string
         key: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -38,7 +39,7 @@ export class ByProjectKeyProductProjectionsKeyByKeyRequestBuilder {
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -46,7 +47,7 @@ export class ByProjectKeyProductProjectionsKeyByKeyRequestBuilder {
   }): ApiRequest<ProductProjection> {
     return new ApiRequest<ProductProjection>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/product-projections/key={key}',
         pathVariables: this.args.pathArgs,
@@ -55,7 +56,7 @@ export class ByProjectKeyProductProjectionsKeyByKeyRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

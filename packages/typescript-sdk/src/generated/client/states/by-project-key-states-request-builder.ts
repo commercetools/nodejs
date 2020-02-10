@@ -12,8 +12,8 @@
  */
 import { ByProjectKeyStatesByIDRequestBuilder } from 'client/states/by-project-key-states-by-id-request-builder'
 import { State, StateDraft, StatePagedQueryResponse } from 'models/state'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyStatesRequestBuilder {
   constructor(
@@ -21,7 +21,8 @@ export class ByProjectKeyStatesRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public withId(childPathArgs: {
@@ -32,7 +33,8 @@ export class ByProjectKeyStatesRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -47,7 +49,7 @@ export class ByProjectKeyStatesRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -55,7 +57,7 @@ export class ByProjectKeyStatesRequestBuilder {
   }): ApiRequest<StatePagedQueryResponse> {
     return new ApiRequest<StatePagedQueryResponse>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/states',
         pathVariables: this.args.pathArgs,
@@ -64,7 +66,7 @@ export class ByProjectKeyStatesRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -73,7 +75,7 @@ export class ByProjectKeyStatesRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: StateDraft
     headers?: {
@@ -82,7 +84,7 @@ export class ByProjectKeyStatesRequestBuilder {
   }): ApiRequest<State> {
     return new ApiRequest<State>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/states',
         pathVariables: this.args.pathArgs,
@@ -93,7 +95,7 @@ export class ByProjectKeyStatesRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

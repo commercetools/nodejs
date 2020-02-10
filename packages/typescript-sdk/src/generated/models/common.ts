@@ -227,10 +227,6 @@ export interface LastModifiedBy extends ClientLogging {}
 export interface LocalizedString {
   [key: string]: string
 }
-export interface LoggedResource extends BaseResource {
-  readonly lastModifiedBy?: LastModifiedBy
-  readonly createdBy?: CreatedBy
-}
 export interface Money {
   readonly centAmount: number
   /**

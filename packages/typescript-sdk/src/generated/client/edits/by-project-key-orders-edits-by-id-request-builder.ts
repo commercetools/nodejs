@@ -12,8 +12,8 @@
  */
 import { ByProjectKeyOrdersEditsByIDApplyRequestBuilder } from 'client/apply/by-project-key-orders-edits-by-id-apply-request-builder'
 import { OrderEdit, OrderEditUpdate } from 'models/order-edit'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyOrdersEditsByIDRequestBuilder {
   constructor(
@@ -22,7 +22,8 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
         projectKey: string
         ID: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public apply(): ByProjectKeyOrdersEditsByIDApplyRequestBuilder {
@@ -30,7 +31,8 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -40,7 +42,7 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -48,7 +50,7 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
   }): ApiRequest<OrderEdit> {
     return new ApiRequest<OrderEdit>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/orders/edits/{ID}',
         pathVariables: this.args.pathArgs,
@@ -57,7 +59,7 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -66,7 +68,7 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: OrderEditUpdate
     headers?: {
@@ -75,7 +77,7 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
   }): ApiRequest<OrderEdit> {
     return new ApiRequest<OrderEdit>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/orders/edits/{ID}',
         pathVariables: this.args.pathArgs,
@@ -86,7 +88,7 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -96,7 +98,7 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
     queryArgs: {
       version: number | number[]
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -104,7 +106,7 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
   }): ApiRequest<OrderEdit> {
     return new ApiRequest<OrderEdit>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'DELETE',
         uriTemplate: '/{projectKey}/orders/edits/{ID}',
         pathVariables: this.args.pathArgs,
@@ -113,7 +115,7 @@ export class ByProjectKeyOrdersEditsByIDRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

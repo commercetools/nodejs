@@ -22,8 +22,8 @@ import { ByProjectKeyMeShoppingListsRequestBuilder } from 'client/shopping-lists
 import { ByProjectKeyMeSignupRequestBuilder } from 'client/signup/by-project-key-me-signup-request-builder'
 import { Update } from 'models/common'
 import { MyCustomer } from 'models/me'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeRequestBuilder {
   constructor(
@@ -31,7 +31,8 @@ export class ByProjectKeyMeRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public email(): ByProjectKeyMeEmailRequestBuilder {
@@ -39,7 +40,8 @@ export class ByProjectKeyMeRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public password(): ByProjectKeyMePasswordRequestBuilder {
@@ -47,7 +49,8 @@ export class ByProjectKeyMeRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public signup(): ByProjectKeyMeSignupRequestBuilder {
@@ -55,7 +58,8 @@ export class ByProjectKeyMeRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public login(): ByProjectKeyMeLoginRequestBuilder {
@@ -63,7 +67,8 @@ export class ByProjectKeyMeRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public activeCart(): ByProjectKeyMeActiveCartRequestBuilder {
@@ -71,7 +76,8 @@ export class ByProjectKeyMeRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   /**
@@ -82,7 +88,8 @@ export class ByProjectKeyMeRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   /**
@@ -93,7 +100,8 @@ export class ByProjectKeyMeRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   /**
@@ -104,7 +112,8 @@ export class ByProjectKeyMeRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   /**
@@ -115,7 +124,8 @@ export class ByProjectKeyMeRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public payment(): ByProjectKeyMePaymentRequestBuilder {
@@ -123,7 +133,8 @@ export class ByProjectKeyMeRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -135,7 +146,7 @@ export class ByProjectKeyMeRequestBuilder {
       offset?: number | number[]
       withTotal?: boolean | boolean[]
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -143,7 +154,7 @@ export class ByProjectKeyMeRequestBuilder {
   }): ApiRequest<MyCustomer> {
     return new ApiRequest<MyCustomer>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/me',
         pathVariables: this.args.pathArgs,
@@ -152,7 +163,7 @@ export class ByProjectKeyMeRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -166,7 +177,7 @@ export class ByProjectKeyMeRequestBuilder {
   }): ApiRequest<MyCustomer> {
     return new ApiRequest<MyCustomer>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/me',
         pathVariables: this.args.pathArgs,
@@ -176,7 +187,7 @@ export class ByProjectKeyMeRequestBuilder {
         },
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -185,7 +196,7 @@ export class ByProjectKeyMeRequestBuilder {
   public delete(methodArgs: {
     queryArgs: {
       version: number | number[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -193,7 +204,7 @@ export class ByProjectKeyMeRequestBuilder {
   }): ApiRequest<MyCustomer> {
     return new ApiRequest<MyCustomer>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'DELETE',
         uriTemplate: '/{projectKey}/me',
         pathVariables: this.args.pathArgs,
@@ -202,7 +213,7 @@ export class ByProjectKeyMeRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

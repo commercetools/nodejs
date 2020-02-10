@@ -12,13 +12,13 @@
  */
 
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
-  LoggedResource,
   Reference,
 } from 'models/common'
 
-export interface Extension extends LoggedResource {
+export interface Extension extends BaseResource {
   readonly id: string
   readonly version: number
   readonly createdAt: string

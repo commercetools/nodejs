@@ -1,21 +1,15 @@
-import { ApiRequestExecutor } from '../../../src/generated/shared/utils/requests-utils'
-import {
-  MiddlewareArg,
-  VariableMap,
-} from '../../../src/generated/shared/utils/common-types'
+import { VariableMap, executeRequest } from '../../../src/'
 import * as url from 'url'
 
 describe('ApiRequestExecutor', () => {
   describe('query parameters', () => {
     async function testQuery(params: VariableMap | undefined) {
-      const middleware = jest.fn(async (args: MiddlewareArg) => {
+      const execute = jest.fn(async _ => {
         return {
-          ...args,
-          response: { body: undefined, statusCode: 200 },
+          body: undefined,
+          statusCode: 200,
         }
       })
-
-      const executor = new ApiRequestExecutor([middleware])
 
       const args = {
         baseURL: 'http://base-url',
@@ -24,10 +18,10 @@ describe('ApiRequestExecutor', () => {
         queryParams: params,
       }
 
-      await executor.execute(args)
+      await execute(args)
 
-      expect(middleware).toHaveBeenCalledTimes(1)
-      return url.parse(middleware.mock.calls[0][0].request.uri).query
+      expect(execute).toHaveBeenCalledTimes(1)
+      return url.parse(execute.mock.calls[0][0].request.uri).query
     }
 
     test('handle single element array query parameters', async () => {

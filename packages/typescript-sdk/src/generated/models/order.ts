@@ -34,11 +34,11 @@ import { CartDiscountReference } from 'models/cart-discount'
 import { ChannelReference, ChannelResourceIdentifier } from 'models/channel'
 import {
   Address,
+  BaseResource,
   CreatedBy,
   Image,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Money,
   PriceDraft,
   Reference,
@@ -265,7 +265,7 @@ export interface LineItemImportDraft {
   readonly custom?: CustomFieldsDraft
   readonly shippingDetails?: ItemShippingDetailsDraft
 }
-export interface Order extends LoggedResource {
+export interface Order extends BaseResource {
   /**
    *	The unique ID of the order.
    */

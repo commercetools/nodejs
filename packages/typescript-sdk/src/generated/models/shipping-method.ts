@@ -12,9 +12,9 @@
  */
 
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
-  LoggedResource,
   Money,
   Reference,
   ReferenceTypeId,
@@ -35,7 +35,7 @@ export interface PriceFunction {
   readonly currencyCode: string
   readonly function: string
 }
-export interface ShippingMethod extends LoggedResource {
+export interface ShippingMethod extends BaseResource {
   /**
    *	The unique ID of the shipping method.
    */

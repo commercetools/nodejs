@@ -12,10 +12,10 @@
  */
 
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
@@ -176,7 +176,7 @@ export interface AttributeTextType {
 export interface AttributeTimeType {
   readonly name: 'time'
 }
-export interface ProductType extends LoggedResource {
+export interface ProductType extends BaseResource {
   /**
    *	The unique ID of the product type.
    */

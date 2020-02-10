@@ -11,8 +11,8 @@
  *
  */
 import { Order, OrderImportDraft } from 'models/order'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyOrdersImportRequestBuilder {
   constructor(
@@ -20,7 +20,8 @@ export class ByProjectKeyOrdersImportRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -34,7 +35,7 @@ export class ByProjectKeyOrdersImportRequestBuilder {
   }): ApiRequest<Order> {
     return new ApiRequest<Order>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/orders/import',
         pathVariables: this.args.pathArgs,
@@ -44,7 +45,7 @@ export class ByProjectKeyOrdersImportRequestBuilder {
         },
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

@@ -12,9 +12,9 @@
  */
 
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
-  LoggedResource,
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
@@ -24,7 +24,7 @@ export interface SubRate {
   readonly name: string
   readonly amount: number
 }
-export interface TaxCategory extends LoggedResource {
+export interface TaxCategory extends BaseResource {
   /**
    *	The unique ID of the category.
    */

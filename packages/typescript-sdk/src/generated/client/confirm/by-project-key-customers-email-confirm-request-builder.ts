@@ -11,8 +11,8 @@
  *
  */
 import { CustomerEmailVerify } from 'models/customer'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCustomersEmailConfirmRequestBuilder {
   constructor(
@@ -20,7 +20,8 @@ export class ByProjectKeyCustomersEmailConfirmRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -34,7 +35,7 @@ export class ByProjectKeyCustomersEmailConfirmRequestBuilder {
   }): ApiRequest<void> {
     return new ApiRequest<void>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/customers/email/confirm',
         pathVariables: this.args.pathArgs,
@@ -44,7 +45,7 @@ export class ByProjectKeyCustomersEmailConfirmRequestBuilder {
         },
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

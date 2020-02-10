@@ -12,10 +12,10 @@
  */
 
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
@@ -147,7 +147,7 @@ export type ResourceTypeId =
   | 'discount-code'
   | 'cart-discount'
   | 'customer-group'
-export interface Type extends LoggedResource {
+export interface Type extends BaseResource {
   /**
    *	The unique ID of the type.
    */

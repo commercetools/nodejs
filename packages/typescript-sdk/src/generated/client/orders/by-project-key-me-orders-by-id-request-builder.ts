@@ -12,8 +12,8 @@
  */
 import { Update } from 'models/common'
 import { MyOrder } from 'models/me'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeOrdersByIDRequestBuilder {
   constructor(
@@ -22,7 +22,8 @@ export class ByProjectKeyMeOrdersByIDRequestBuilder {
         projectKey: string
         ID: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -31,7 +32,7 @@ export class ByProjectKeyMeOrdersByIDRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -39,7 +40,7 @@ export class ByProjectKeyMeOrdersByIDRequestBuilder {
   }): ApiRequest<MyOrder> {
     return new ApiRequest<MyOrder>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/me/orders/{ID}',
         pathVariables: this.args.pathArgs,
@@ -48,7 +49,7 @@ export class ByProjectKeyMeOrdersByIDRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -57,7 +58,7 @@ export class ByProjectKeyMeOrdersByIDRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: Update
     headers?: {
@@ -66,7 +67,7 @@ export class ByProjectKeyMeOrdersByIDRequestBuilder {
   }): ApiRequest<MyOrder> {
     return new ApiRequest<MyOrder>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/me/orders/{ID}',
         pathVariables: this.args.pathArgs,
@@ -77,7 +78,7 @@ export class ByProjectKeyMeOrdersByIDRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

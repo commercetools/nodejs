@@ -1,72 +1,25 @@
 import {
-  Middleware,
-  MiddlewareArg,
   ClientResponse,
   VariableMap,
+  executeRequest,
+  ClientRequest,
 } from 'shared/utils/common-types'
-import { CommonRequest } from 'shared/utils/local-common-types'
 import { stringify } from 'querystring'
 
-export class ApiRequestExecutor {
-  private middleware: Middleware
-  constructor(middlewares: Middleware[]) {
-    if (!middlewares || middlewares.length == 0) {
-      middlewares = [noOpMiddleware]
-    }
-    this.middleware = middlewares.reduce(reduceMiddleware)
-  }
-
-  public async execute<O>(request: CommonRequest): Promise<ClientResponse<O>> {
-    const { body, headers, method } = request
-    const req = {
-      headers,
-      method,
-      body,
-      uri: getURI(request),
-    }
-
-    const res: MiddlewareArg = await this.middleware({
-      request: req,
-      next: noOpMiddleware,
-    })
-
-    if (res.error) {
-      throw res.error
-    }
-
-    if (res.response) {
-      return res.response
-    }
-
-    return {
-      body: {} as O,
-    }
-  }
-}
-
 export class ApiRequest<O> {
+  private request: ClientRequest
   constructor(
-    private readonly commonRequest: CommonRequest,
-    private readonly apiRequestExecutor: ApiRequestExecutor
-  ) {}
+    request: ClientRequest,
+    private readonly requestExecutor: executeRequest
+  ) {
+    this.request = {
+      ...request,
+      uri: buildRelativeUri(request),
+    }
+  }
 
   public execute(): Promise<ClientResponse<O>> {
-    return this.apiRequestExecutor.execute(this.commonRequest)
-  }
-}
-
-function reduceMiddleware(op1: Middleware, op2: Middleware): Middleware {
-  return async (arg: MiddlewareArg) => {
-    const { next, ...rest } = arg
-    const intermediateOp: Middleware = (tmpArg: MiddlewareArg) => {
-      const { next, ...rest } = tmpArg
-      return op2({ ...rest, next: arg.next })
-    }
-
-    return op1({
-      ...rest,
-      next: intermediateOp,
-    })
+    return this.requestExecutor(this.request)
   }
 }
 
@@ -107,16 +60,14 @@ function formatQueryString(variableMap: VariableMap) {
   return `?${result}`
 }
 
-function getURI(commonRequest: CommonRequest): string {
+function buildRelativeUri(commonRequest: ClientRequest): string {
   const pathMap = commonRequest.pathVariables
-  var uri: String = commonRequest.uriTemplate
+  var uri: string = commonRequest.uriTemplate as string
 
   for (const param in pathMap) {
     uri = uri.replace(`{${param}}`, `${pathMap[param]}`)
   }
 
   const resQuery = formatQueryString(commonRequest.queryParams || {})
-  return `${commonRequest.baseURL}${uri}${resQuery}`
+  return `${uri}${resQuery}`
 }
-
-const noOpMiddleware = async (x: MiddlewareArg) => x

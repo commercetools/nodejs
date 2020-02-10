@@ -11,8 +11,8 @@
  *
  */
 import { MyPaymentUpdate } from 'models/me'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMePaymentByIDRequestBuilder {
   constructor(
@@ -21,7 +21,8 @@ export class ByProjectKeyMePaymentByIDRequestBuilder {
         projectKey: string
         ID: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public post(methodArgs: {
@@ -32,7 +33,7 @@ export class ByProjectKeyMePaymentByIDRequestBuilder {
   }): ApiRequest<void> {
     return new ApiRequest<void>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/me/payment/{ID}',
         pathVariables: this.args.pathArgs,
@@ -42,7 +43,7 @@ export class ByProjectKeyMePaymentByIDRequestBuilder {
         },
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

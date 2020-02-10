@@ -12,10 +12,10 @@
  */
 
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
@@ -30,7 +30,7 @@ import {
   TypeResourceIdentifier,
 } from 'models/type'
 
-export interface MyShoppingList extends LoggedResource {
+export interface MyShoppingList extends BaseResource {
   readonly id: string
   readonly version: number
   readonly createdAt: string
@@ -48,7 +48,7 @@ export interface MyShoppingList extends LoggedResource {
   readonly textLineItems?: TextLineItem[]
   readonly anonymousId?: string
 }
-export interface ShoppingList extends LoggedResource {
+export interface ShoppingList extends BaseResource {
   /**
    *	The unique ID of the shopping list.
    */

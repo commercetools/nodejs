@@ -16,8 +16,8 @@ import {
   DiscountCodeDraft,
   DiscountCodePagedQueryResponse,
 } from 'models/discount-code'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyDiscountCodesRequestBuilder {
   constructor(
@@ -25,7 +25,8 @@ export class ByProjectKeyDiscountCodesRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public withId(childPathArgs: {
@@ -36,7 +37,8 @@ export class ByProjectKeyDiscountCodesRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -51,7 +53,7 @@ export class ByProjectKeyDiscountCodesRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -59,7 +61,7 @@ export class ByProjectKeyDiscountCodesRequestBuilder {
   }): ApiRequest<DiscountCodePagedQueryResponse> {
     return new ApiRequest<DiscountCodePagedQueryResponse>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/discount-codes',
         pathVariables: this.args.pathArgs,
@@ -68,7 +70,7 @@ export class ByProjectKeyDiscountCodesRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -77,7 +79,7 @@ export class ByProjectKeyDiscountCodesRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: DiscountCodeDraft
     headers?: {
@@ -86,7 +88,7 @@ export class ByProjectKeyDiscountCodesRequestBuilder {
   }): ApiRequest<DiscountCode> {
     return new ApiRequest<DiscountCode>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/discount-codes',
         pathVariables: this.args.pathArgs,
@@ -97,7 +99,7 @@ export class ByProjectKeyDiscountCodesRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

@@ -12,10 +12,10 @@
  */
 
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Money,
   Reference,
   ReferenceTypeId,
@@ -31,7 +31,7 @@ import {
   TypeResourceIdentifier,
 } from 'models/type'
 
-export interface Payment extends LoggedResource {
+export interface Payment extends BaseResource {
   readonly id: string
   readonly version: number
   readonly createdAt: string

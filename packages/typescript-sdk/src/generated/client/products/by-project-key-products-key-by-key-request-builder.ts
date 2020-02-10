@@ -11,8 +11,8 @@
  *
  */
 import { Product, ProductUpdate } from 'models/product'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductsKeyByKeyRequestBuilder {
   constructor(
@@ -21,7 +21,8 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
         projectKey: string
         key: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -34,7 +35,7 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -42,7 +43,7 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
   }): ApiRequest<Product> {
     return new ApiRequest<Product>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/products/key={key}',
         pathVariables: this.args.pathArgs,
@@ -51,7 +52,7 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -64,7 +65,7 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: ProductUpdate
     headers?: {
@@ -73,7 +74,7 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
   }): ApiRequest<Product> {
     return new ApiRequest<Product>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/products/key={key}',
         pathVariables: this.args.pathArgs,
@@ -84,7 +85,7 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -98,7 +99,7 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
       priceChannel?: string | string[]
       version: number | number[]
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -106,7 +107,7 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
   }): ApiRequest<Product> {
     return new ApiRequest<Product>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'DELETE',
         uriTemplate: '/{projectKey}/products/key={key}',
         pathVariables: this.args.pathArgs,
@@ -115,7 +116,7 @@ export class ByProjectKeyProductsKeyByKeyRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

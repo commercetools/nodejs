@@ -13,8 +13,8 @@
 import { ByProjectKeyZonesByIDRequestBuilder } from 'client/zones/by-project-key-zones-by-id-request-builder'
 import { ByProjectKeyZonesKeyByKeyRequestBuilder } from 'client/zones/by-project-key-zones-key-by-key-request-builder'
 import { Zone, ZoneDraft, ZonePagedQueryResponse } from 'models/zone'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyZonesRequestBuilder {
   constructor(
@@ -22,7 +22,8 @@ export class ByProjectKeyZonesRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public withKey(childPathArgs: {
@@ -33,7 +34,8 @@ export class ByProjectKeyZonesRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public withId(childPathArgs: {
@@ -44,7 +46,8 @@ export class ByProjectKeyZonesRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -59,7 +62,7 @@ export class ByProjectKeyZonesRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -67,7 +70,7 @@ export class ByProjectKeyZonesRequestBuilder {
   }): ApiRequest<ZonePagedQueryResponse> {
     return new ApiRequest<ZonePagedQueryResponse>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/zones',
         pathVariables: this.args.pathArgs,
@@ -76,7 +79,7 @@ export class ByProjectKeyZonesRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -85,7 +88,7 @@ export class ByProjectKeyZonesRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: ZoneDraft
     headers?: {
@@ -94,7 +97,7 @@ export class ByProjectKeyZonesRequestBuilder {
   }): ApiRequest<Zone> {
     return new ApiRequest<Zone>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/zones',
         pathVariables: this.args.pathArgs,
@@ -105,7 +108,7 @@ export class ByProjectKeyZonesRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

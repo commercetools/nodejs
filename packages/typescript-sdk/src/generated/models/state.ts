@@ -12,16 +12,16 @@
  */
 
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
 } from 'models/common'
 
-export interface State extends LoggedResource {
+export interface State extends BaseResource {
   readonly id: string
   readonly version: number
   readonly createdAt: string

@@ -12,8 +12,8 @@
  */
 import { ByProjectKeyMePaymentByIDRequestBuilder } from 'client/payment/by-project-key-me-payment-by-id-request-builder'
 import { ByProjectKeyMePaymentKeyByKeyRequestBuilder } from 'client/payment/by-project-key-me-payment-key-by-key-request-builder'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMePaymentRequestBuilder {
   constructor(
@@ -21,7 +21,8 @@ export class ByProjectKeyMePaymentRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public keyWithKeyValue(childPathArgs: {
@@ -32,7 +33,8 @@ export class ByProjectKeyMePaymentRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public withIDValue(childPathArgs: {
@@ -43,7 +45,8 @@ export class ByProjectKeyMePaymentRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 }

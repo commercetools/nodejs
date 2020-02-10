@@ -13,9 +13,9 @@
 
 import { ChannelReference, ChannelResourceIdentifier } from 'models/channel'
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
-  LoggedResource,
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
@@ -30,7 +30,7 @@ import {
   TypeResourceIdentifier,
 } from 'models/type'
 
-export interface Review extends LoggedResource {
+export interface Review extends BaseResource {
   /**
    *	The unique ID of the review.
    */

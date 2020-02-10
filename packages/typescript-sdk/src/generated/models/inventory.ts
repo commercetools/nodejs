@@ -13,9 +13,9 @@
 
 import { ChannelResourceIdentifier } from 'models/channel'
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
-  LoggedResource,
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
@@ -27,7 +27,7 @@ import {
   TypeResourceIdentifier,
 } from 'models/type'
 
-export interface InventoryEntry extends LoggedResource {
+export interface InventoryEntry extends BaseResource {
   /**
    *	The unique ID of the inventory entry.
    */

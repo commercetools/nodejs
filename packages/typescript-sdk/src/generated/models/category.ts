@@ -15,10 +15,10 @@ import {
   Asset,
   AssetDraft,
   AssetSource,
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
@@ -30,7 +30,7 @@ import {
   TypeResourceIdentifier,
 } from 'models/type'
 
-export interface Category extends LoggedResource {
+export interface Category extends BaseResource {
   /**
    *	The unique ID of the category.
    */

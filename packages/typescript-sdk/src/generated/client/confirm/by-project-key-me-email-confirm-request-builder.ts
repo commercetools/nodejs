@@ -10,8 +10,8 @@
  *                    `Y'
  *
  */
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeEmailConfirmRequestBuilder {
   constructor(
@@ -19,7 +19,8 @@ export class ByProjectKeyMeEmailConfirmRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public post(methodArgs?: {
@@ -29,7 +30,7 @@ export class ByProjectKeyMeEmailConfirmRequestBuilder {
   }): ApiRequest<void> {
     return new ApiRequest<void>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/me/email/confirm',
         pathVariables: this.args.pathArgs,
@@ -37,7 +38,7 @@ export class ByProjectKeyMeEmailConfirmRequestBuilder {
           ...methodArgs?.headers,
         },
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

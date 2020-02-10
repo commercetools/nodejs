@@ -12,9 +12,9 @@
  */
 
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
-  LoggedResource,
   Reference,
 } from 'models/common'
 import { UserProvidedIdentifiers } from 'models/message'
@@ -76,7 +76,7 @@ export interface SqsDestination {
   readonly region: string
   readonly accessSecret: string
 }
-export interface Subscription extends LoggedResource {
+export interface Subscription extends BaseResource {
   readonly id: string
   readonly version: number
   readonly createdAt: string

@@ -17,8 +17,8 @@ import {
   CustomObjectDraft,
   CustomObjectPagedQueryResponse,
 } from 'models/custom-object'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCustomObjectsRequestBuilder {
   constructor(
@@ -26,7 +26,8 @@ export class ByProjectKeyCustomObjectsRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public withContainerAndKey(childPathArgs: {
@@ -38,7 +39,8 @@ export class ByProjectKeyCustomObjectsRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public withId(childPathArgs: {
@@ -49,7 +51,8 @@ export class ByProjectKeyCustomObjectsRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -67,7 +70,7 @@ export class ByProjectKeyCustomObjectsRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -75,7 +78,7 @@ export class ByProjectKeyCustomObjectsRequestBuilder {
   }): ApiRequest<CustomObjectPagedQueryResponse> {
     return new ApiRequest<CustomObjectPagedQueryResponse>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/custom-objects',
         pathVariables: this.args.pathArgs,
@@ -84,7 +87,7 @@ export class ByProjectKeyCustomObjectsRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -100,7 +103,7 @@ export class ByProjectKeyCustomObjectsRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: CustomObjectDraft
     headers?: {
@@ -109,7 +112,7 @@ export class ByProjectKeyCustomObjectsRequestBuilder {
   }): ApiRequest<CustomObject> {
     return new ApiRequest<CustomObject>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/custom-objects',
         pathVariables: this.args.pathArgs,
@@ -120,7 +123,7 @@ export class ByProjectKeyCustomObjectsRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

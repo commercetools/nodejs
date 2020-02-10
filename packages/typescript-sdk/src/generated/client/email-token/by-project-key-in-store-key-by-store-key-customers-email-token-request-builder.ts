@@ -11,8 +11,8 @@
  *
  */
 import { CustomerCreateEmailToken, CustomerToken } from 'models/customer'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyCustomersEmailTokenRequestBuilder {
   constructor(
@@ -21,7 +21,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersEmailTokenRequestBuilder {
         projectKey: string
         storeKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -35,7 +36,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersEmailTokenRequestBuilder {
   }): ApiRequest<CustomerToken> {
     return new ApiRequest<CustomerToken>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate:
           '/{projectKey}/in-store/key={storeKey}/customers/email-token',
@@ -46,7 +47,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersEmailTokenRequestBuilder {
         },
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }
