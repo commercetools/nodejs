@@ -1,64 +1,53 @@
-import { VariableMap, executeRequest } from '../../../src/'
+import {
+  VariableMap,
+} from '../../../src/generated/shared/utils/common-types'
 import * as url from 'url'
+import { buildRelativeUri } from '~/generated/shared/utils/uri-utils'
 
 describe('ApiRequestExecutor', () => {
   describe('query parameters', () => {
-    async function testQuery(params: VariableMap | undefined) {
-      const execute = jest.fn(async _ => {
-        return {
-          body: undefined,
-          statusCode: 200,
-        }
-      })
-
-      const args = {
+    function testQuery(params: VariableMap | undefined): string {
+      const request = {
         baseURL: 'http://base-url',
         method: 'GET' as const,
         uriTemplate: '',
         queryParams: params,
       }
 
-      await execute(args)
-
-      expect(execute).toHaveBeenCalledTimes(1)
-      return url.parse(execute.mock.calls[0][0].request.uri).query
+      return buildRelativeUri(request)
     }
 
     test('handle single element array query parameters', async () => {
-      expect(await testQuery({ foo: ['bar'] })).toEqual('foo=bar')
+      expect(testQuery({ foo: ['bar'] })).toEqual('foo=bar')
     })
 
     test('handle array query parameters', async () => {
-      expect(await testQuery({ foo: ['bar', 'baz'] })).toEqual(
-        'foo=bar&foo=baz'
-      )
+      expect(testQuery({ foo: ['bar', 'baz'] })).toEqual('foo=bar&foo=baz')
     })
 
     test('handle number query parameters', async () => {
-      expect(await testQuery({ foo: 123 })).toEqual('foo=123')
+      expect(testQuery({ foo: 123 })).toEqual('foo=123')
     })
 
     test('handle boolean query parameters', async () => {
-      expect(await testQuery({ foo: true, bar: false })).toEqual(
-        'foo=true&bar=false'
-      )
+      expect(testQuery({ foo: true, bar: false })).toEqual('foo=true&bar=false')
     })
 
     test('handle invalid characters', async () => {
-      expect(await testQuery({ foo: '<>abc /' })).toEqual('foo=%3C%3Eabc%20%2F')
+      expect(testQuery({ foo: '<>abc /' })).toEqual('foo=%3C%3Eabc%20%2F')
     })
 
     test('handle empty arrays', async () => {
-      expect(await testQuery({ foo: [] })).toBeNull()
+      expect(testQuery({ foo: [] })).toBeNull()
     })
 
     test('handle empty arrays after defined property', async () => {
-      expect(await testQuery({ bar: 'baz', foo: [] })).toEqual('bar=baz')
+      expect(testQuery({ bar: 'baz', foo: [] })).toEqual('bar=baz')
     })
 
     test('remove undefined and null', async () => {
       expect(
-        await testQuery({
+        testQuery({
           nullValue: null as any,
           undefinedValue: undefined,
           value: 'bar',
@@ -68,12 +57,12 @@ describe('ApiRequestExecutor', () => {
 
     test('remove undefined and null values in array', async () => {
       expect(
-        await testQuery({ foo: [null as any, 'bar', undefined, 'baz'] })
+        testQuery({ foo: [null as any, 'bar', undefined, 'baz'] })
       ).toEqual('foo=bar&foo=baz')
     })
 
     test('handle undefined variable map', async () => {
-      expect(await testQuery(undefined)).toBeNull()
+      expect(testQuery(undefined)).toBeNull()
     })
   })
 })
