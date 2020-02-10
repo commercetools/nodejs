@@ -1023,6 +1023,60 @@ describe('::ProductMapping', () => {
       const expected = 'US-USD 1230#priceChannelKey'
       expect(ProductMapping._mapPriceToString(samplePrice)).toBe(expected)
     })
+  
+    test('map a price with a customer group name and percentage', () => {
+      const samplePrice = {
+        value: {
+          type: 'centPrecision',
+          currencyCode: 'USD',
+          centAmount: 1230,
+          fractionDigits: 2,
+        },
+        country: 'US',
+        discounted: {
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 4495,
+            fractionDigits: 2,
+          },
+        },
+        customerGroup: {
+          id: '8882d61e-c4a1-4c63-8430-09ac21383f76',
+          version: 1,
+          createdAt: '2018-07-13T10:03:04.703Z',
+          lastModifiedAt: '2018-07-13T10:03:04.703Z',
+          name: 'b2b',
+          key: 'b2b'
+        }
+      };
+
+      const expected = 'US-USD 1230|4495 b2b'
+      expect(ProductMapping._mapPriceToString(samplePrice)).toBe(expected)
+    })
+
+    test('map a price with a customer group name', () => {
+      const samplePrice = {
+        value: {
+          type: 'centPrecision',
+          currencyCode: 'USD',
+          centAmount: 1230,
+          fractionDigits: 2,
+        },
+        country: 'US',
+        customerGroup: {
+          id: '8882d61e-c4a1-4c63-8430-09ac21383f76',
+          version: 1,
+          createdAt: '2018-07-13T10:03:04.703Z',
+          lastModifiedAt: '2018-07-13T10:03:04.703Z',
+          name: 'b2b',
+          key: 'b2b'
+        }
+      };
+
+      const expected = 'US-USD 1230 b2b'
+      expect(ProductMapping._mapPriceToString(samplePrice)).toBe(expected)
+    })
 
     test('map a price with a discount', () => {
       const samplePrice = {

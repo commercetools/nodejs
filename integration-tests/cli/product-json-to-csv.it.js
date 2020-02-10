@@ -236,7 +236,7 @@ describe('CSV and CLI Tests', () => {
           })
 
           it('contains resolved `prices`', () => {
-            const prices = 'US-USD 2233@priceCustomerGroup#priceChannel'
+            const prices = 'US-USD 2233 priceCustomerGroup#priceChannel'
             expect(product[0]).toEqual(expect.objectContaining({ prices }))
           })
 
@@ -628,7 +628,7 @@ describe('CSV and CLI Tests', () => {
           })
 
           it('contains resolved `prices`', () => {
-            const prices = 'US-USD 2233@priceCustomerGroup#priceChannel'
+            const prices = 'US-USD 2233 priceCustomerGroup#priceChannel'
             expect(product[0]).toEqual(expect.objectContaining({ prices }))
           })
 
