@@ -1,6 +1,4 @@
-import {
-  VariableMap,
-} from '../../../src/generated/shared/utils/common-types'
+import { VariableMap } from '../../../src/generated/shared/utils/common-types'
 import { buildRelativeUri } from '../../../src/generated/shared/utils/uri-utils'
 
 describe('ApiRequestExecutor', () => {
@@ -29,7 +27,9 @@ describe('ApiRequestExecutor', () => {
     })
 
     test('handle boolean query parameters', async () => {
-      expect(testQuery({ foo: true, bar: false })).toEqual('?foo=true&bar=false')
+      expect(testQuery({ foo: true, bar: false })).toEqual(
+        '?foo=true&bar=false'
+      )
     })
 
     test('handle invalid characters', async () => {
@@ -37,7 +37,7 @@ describe('ApiRequestExecutor', () => {
     })
 
     test('handle empty arrays', async () => {
-      expect(testQuery({ foo: [] })).toBeNull()
+      expect(testQuery({ foo: [] })).toEqual('')
     })
 
     test('handle empty arrays after defined property', async () => {
@@ -61,7 +61,7 @@ describe('ApiRequestExecutor', () => {
     })
 
     test('handle undefined variable map', async () => {
-      expect(testQuery(undefined)).toEqual("")
+      expect(testQuery(undefined)).toEqual('')
     })
   })
 })
