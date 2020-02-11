@@ -10,8 +10,8 @@
  *                    `Y'
  *
  */
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductProjectionsSuggestRequestBuilder {
   constructor(
@@ -19,7 +19,8 @@ export class ByProjectKeyProductProjectionsSuggestRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public get(methodArgs?: {
@@ -30,7 +31,7 @@ export class ByProjectKeyProductProjectionsSuggestRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -38,7 +39,7 @@ export class ByProjectKeyProductProjectionsSuggestRequestBuilder {
   }): ApiRequest<any> {
     return new ApiRequest<any>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/product-projections/suggest',
         pathVariables: this.args.pathArgs,
@@ -47,7 +48,7 @@ export class ByProjectKeyProductProjectionsSuggestRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

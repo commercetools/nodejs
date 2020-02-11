@@ -8,7 +8,7 @@ export type MethodType =
   | 'OPTIONS'
   | 'TRACE'
 
-export type QueryParamType =
+export type QueryParam =
   | string
   | string[]
   | number
@@ -18,27 +18,24 @@ export type QueryParamType =
   | undefined
 
 export type VariableMap = {
-  [key: string]: QueryParamType
+  [key: string]: QueryParam
 }
 
-export type MiddlewareArg = {
-  request: ClientRequest
-  response?: ClientResponse<any>
-  error?: Error
-  next: Middleware
-}
-
-export type ClientRequest = {
-  uri: string
-  method: MethodType
-  body?: any
+export interface ClientRequest {
+  baseUri?: string
+  uri?: string
   headers?: VariableMap
+  method: MethodType
+  uriTemplate?: string
+  pathVariables?: VariableMap
+  queryParams?: VariableMap
+  body?: any
 }
 
-export type ClientResponse<T> = {
+export type ClientResponse<T = any> = {
   body: T
   statusCode?: number
   headers?: Object
 }
 
-export type Middleware = (arg: MiddlewareArg) => Promise<MiddlewareArg>
+export type executeRequest = (request: ClientRequest) => Promise<ClientResponse>

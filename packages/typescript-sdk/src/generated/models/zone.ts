@@ -12,9 +12,9 @@
  */
 
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
-  LoggedResource,
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
@@ -27,7 +27,7 @@ export interface Location {
   readonly country: string
   readonly state?: string
 }
-export interface Zone extends LoggedResource {
+export interface Zone extends BaseResource {
   /**
    *	The unique ID of the zone.
    */

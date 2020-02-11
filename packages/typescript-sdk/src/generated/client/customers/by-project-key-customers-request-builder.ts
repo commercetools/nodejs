@@ -23,8 +23,8 @@ import {
   CustomerPagedQueryResponse,
   CustomerSignInResult,
 } from 'models/customer'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCustomersRequestBuilder {
   constructor(
@@ -32,7 +32,8 @@ export class ByProjectKeyCustomersRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public withPasswordToken(childPathArgs: {
@@ -43,7 +44,8 @@ export class ByProjectKeyCustomersRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public withEmailToken(childPathArgs: {
@@ -54,7 +56,8 @@ export class ByProjectKeyCustomersRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   /**
@@ -68,7 +71,8 @@ export class ByProjectKeyCustomersRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public email(): ByProjectKeyCustomersEmailRequestBuilder {
@@ -76,7 +80,8 @@ export class ByProjectKeyCustomersRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public password(): ByProjectKeyCustomersPasswordRequestBuilder {
@@ -84,7 +89,8 @@ export class ByProjectKeyCustomersRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   /**
@@ -100,7 +106,8 @@ export class ByProjectKeyCustomersRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public withKey(childPathArgs: {
@@ -111,7 +118,8 @@ export class ByProjectKeyCustomersRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public withId(childPathArgs: {
@@ -122,7 +130,8 @@ export class ByProjectKeyCustomersRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -137,7 +146,7 @@ export class ByProjectKeyCustomersRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -145,7 +154,7 @@ export class ByProjectKeyCustomersRequestBuilder {
   }): ApiRequest<CustomerPagedQueryResponse> {
     return new ApiRequest<CustomerPagedQueryResponse>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/customers',
         pathVariables: this.args.pathArgs,
@@ -154,7 +163,7 @@ export class ByProjectKeyCustomersRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -166,7 +175,7 @@ export class ByProjectKeyCustomersRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: CustomerDraft
     headers?: {
@@ -175,7 +184,7 @@ export class ByProjectKeyCustomersRequestBuilder {
   }): ApiRequest<CustomerSignInResult> {
     return new ApiRequest<CustomerSignInResult>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/customers',
         pathVariables: this.args.pathArgs,
@@ -186,7 +195,7 @@ export class ByProjectKeyCustomersRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

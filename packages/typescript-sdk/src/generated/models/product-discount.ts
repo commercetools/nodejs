@@ -12,10 +12,10 @@
  */
 
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Money,
   QueryPrice,
   Reference,
@@ -24,7 +24,7 @@ import {
   TypedMoney,
 } from 'models/common'
 
-export interface ProductDiscount extends LoggedResource {
+export interface ProductDiscount extends BaseResource {
   /**
    *	The unique ID of the product discount
    */

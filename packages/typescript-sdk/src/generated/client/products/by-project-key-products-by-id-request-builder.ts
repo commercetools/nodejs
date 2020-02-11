@@ -12,8 +12,8 @@
  */
 import { ByProjectKeyProductsByIDImagesRequestBuilder } from 'client/images/by-project-key-products-by-id-images-request-builder'
 import { Product, ProductUpdate } from 'models/product'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductsByIDRequestBuilder {
   constructor(
@@ -22,7 +22,8 @@ export class ByProjectKeyProductsByIDRequestBuilder {
         projectKey: string
         ID: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public images(): ByProjectKeyProductsByIDImagesRequestBuilder {
@@ -30,7 +31,8 @@ export class ByProjectKeyProductsByIDRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -44,7 +46,7 @@ export class ByProjectKeyProductsByIDRequestBuilder {
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -52,7 +54,7 @@ export class ByProjectKeyProductsByIDRequestBuilder {
   }): ApiRequest<Product> {
     return new ApiRequest<Product>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/products/{ID}',
         pathVariables: this.args.pathArgs,
@@ -61,7 +63,7 @@ export class ByProjectKeyProductsByIDRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -74,7 +76,7 @@ export class ByProjectKeyProductsByIDRequestBuilder {
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: ProductUpdate
     headers?: {
@@ -83,7 +85,7 @@ export class ByProjectKeyProductsByIDRequestBuilder {
   }): ApiRequest<Product> {
     return new ApiRequest<Product>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/products/{ID}',
         pathVariables: this.args.pathArgs,
@@ -94,7 +96,7 @@ export class ByProjectKeyProductsByIDRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -108,7 +110,7 @@ export class ByProjectKeyProductsByIDRequestBuilder {
       priceChannel?: string | string[]
       version: number | number[]
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -116,7 +118,7 @@ export class ByProjectKeyProductsByIDRequestBuilder {
   }): ApiRequest<Product> {
     return new ApiRequest<Product>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'DELETE',
         uriTemplate: '/{projectKey}/products/{ID}',
         pathVariables: this.args.pathArgs,
@@ -125,7 +127,7 @@ export class ByProjectKeyProductsByIDRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

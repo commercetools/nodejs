@@ -23,7 +23,6 @@ import {
   Image,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Price,
   PriceDraft,
   Reference,
@@ -87,7 +86,7 @@ export interface FilteredFacetResult {
   readonly count: number
   readonly productCount?: number
 }
-export interface Product extends LoggedResource {
+export interface Product extends BaseResource {
   /**
    *	The unique ID of the product.
    */

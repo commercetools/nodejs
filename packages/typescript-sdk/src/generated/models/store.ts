@@ -12,17 +12,17 @@
  */
 
 import {
+  BaseResource,
   CreatedBy,
   KeyReference,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
 } from 'models/common'
 
-export interface Store extends LoggedResource {
+export interface Store extends BaseResource {
   readonly id: string
   readonly version: number
   readonly createdAt: string

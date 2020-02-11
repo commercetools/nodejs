@@ -11,10 +11,11 @@
  *
  */
 import { ByProjectKeyCartsByIDRequestBuilder } from 'client/carts/by-project-key-carts-by-id-request-builder'
+import { ByProjectKeyCartsCustomerIdByCustomerIdRequestBuilder } from 'client/carts/by-project-key-carts-customer-id-by-customer-id-request-builder'
 import { ByProjectKeyCartsReplicateRequestBuilder } from 'client/replicate/by-project-key-carts-replicate-request-builder'
 import { Cart, CartDraft } from 'models/cart'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCartsRequestBuilder {
   constructor(
@@ -22,7 +23,8 @@ export class ByProjectKeyCartsRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public replicate(): ByProjectKeyCartsReplicateRequestBuilder {
@@ -30,7 +32,20 @@ export class ByProjectKeyCartsRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
+    })
+  }
+  public withCustomerId(childPathArgs: {
+    customerId: string
+  }): ByProjectKeyCartsCustomerIdByCustomerIdRequestBuilder {
+    return new ByProjectKeyCartsCustomerIdByCustomerIdRequestBuilder({
+      pathArgs: {
+        ...this.args.pathArgs,
+        ...childPathArgs,
+      },
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public withId(childPathArgs: {
@@ -41,7 +56,8 @@ export class ByProjectKeyCartsRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -57,7 +73,7 @@ export class ByProjectKeyCartsRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -65,7 +81,7 @@ export class ByProjectKeyCartsRequestBuilder {
   }): ApiRequest<any> {
     return new ApiRequest<any>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/carts',
         pathVariables: this.args.pathArgs,
@@ -74,7 +90,7 @@ export class ByProjectKeyCartsRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -85,7 +101,7 @@ export class ByProjectKeyCartsRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: CartDraft
     headers?: {
@@ -94,7 +110,7 @@ export class ByProjectKeyCartsRequestBuilder {
   }): ApiRequest<Cart> {
     return new ApiRequest<Cart>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/carts',
         pathVariables: this.args.pathArgs,
@@ -105,7 +121,7 @@ export class ByProjectKeyCartsRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

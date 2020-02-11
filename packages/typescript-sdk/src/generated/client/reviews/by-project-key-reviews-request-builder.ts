@@ -13,8 +13,8 @@
 import { ByProjectKeyReviewsByIDRequestBuilder } from 'client/reviews/by-project-key-reviews-by-id-request-builder'
 import { ByProjectKeyReviewsKeyByKeyRequestBuilder } from 'client/reviews/by-project-key-reviews-key-by-key-request-builder'
 import { Review, ReviewDraft, ReviewPagedQueryResponse } from 'models/review'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyReviewsRequestBuilder {
   constructor(
@@ -22,7 +22,8 @@ export class ByProjectKeyReviewsRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public withKey(childPathArgs: {
@@ -33,7 +34,8 @@ export class ByProjectKeyReviewsRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public withId(childPathArgs: {
@@ -44,7 +46,8 @@ export class ByProjectKeyReviewsRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -59,7 +62,7 @@ export class ByProjectKeyReviewsRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -67,7 +70,7 @@ export class ByProjectKeyReviewsRequestBuilder {
   }): ApiRequest<ReviewPagedQueryResponse> {
     return new ApiRequest<ReviewPagedQueryResponse>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/reviews',
         pathVariables: this.args.pathArgs,
@@ -76,7 +79,7 @@ export class ByProjectKeyReviewsRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -85,7 +88,7 @@ export class ByProjectKeyReviewsRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: ReviewDraft
     headers?: {
@@ -94,7 +97,7 @@ export class ByProjectKeyReviewsRequestBuilder {
   }): ApiRequest<Review> {
     return new ApiRequest<Review>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/reviews',
         pathVariables: this.args.pathArgs,
@@ -105,7 +108,7 @@ export class ByProjectKeyReviewsRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

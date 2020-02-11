@@ -12,9 +12,9 @@
  */
 
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
-  LoggedResource,
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
@@ -25,7 +25,7 @@ import {
   TypeResourceIdentifier,
 } from 'models/type'
 
-export interface CustomerGroup extends LoggedResource {
+export interface CustomerGroup extends BaseResource {
   /**
    *	The unique ID of the customer group.
    */

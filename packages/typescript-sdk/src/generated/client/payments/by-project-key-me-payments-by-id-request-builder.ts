@@ -12,8 +12,8 @@
  */
 import { Update } from 'models/common'
 import { MyPayment } from 'models/me'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMePaymentsByIDRequestBuilder {
   constructor(
@@ -22,7 +22,8 @@ export class ByProjectKeyMePaymentsByIDRequestBuilder {
         projectKey: string
         ID: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -31,7 +32,7 @@ export class ByProjectKeyMePaymentsByIDRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -39,7 +40,7 @@ export class ByProjectKeyMePaymentsByIDRequestBuilder {
   }): ApiRequest<MyPayment> {
     return new ApiRequest<MyPayment>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/me/payments/{ID}',
         pathVariables: this.args.pathArgs,
@@ -48,7 +49,7 @@ export class ByProjectKeyMePaymentsByIDRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -57,7 +58,7 @@ export class ByProjectKeyMePaymentsByIDRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: Update
     headers?: {
@@ -66,7 +67,7 @@ export class ByProjectKeyMePaymentsByIDRequestBuilder {
   }): ApiRequest<MyPayment> {
     return new ApiRequest<MyPayment>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/me/payments/{ID}',
         pathVariables: this.args.pathArgs,
@@ -77,7 +78,7 @@ export class ByProjectKeyMePaymentsByIDRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -87,7 +88,7 @@ export class ByProjectKeyMePaymentsByIDRequestBuilder {
     queryArgs: {
       version: number | number[]
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -95,7 +96,7 @@ export class ByProjectKeyMePaymentsByIDRequestBuilder {
   }): ApiRequest<MyPayment> {
     return new ApiRequest<MyPayment>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'DELETE',
         uriTemplate: '/{projectKey}/me/payments/{ID}',
         pathVariables: this.args.pathArgs,
@@ -104,7 +105,7 @@ export class ByProjectKeyMePaymentsByIDRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

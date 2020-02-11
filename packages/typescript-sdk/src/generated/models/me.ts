@@ -34,10 +34,10 @@ import { CartDiscountReference } from 'models/cart-discount'
 import { ChannelResourceIdentifier } from 'models/channel'
 import {
   Address,
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Money,
   TypedMoney,
 } from 'models/common'
@@ -77,7 +77,7 @@ import {
   TypeResourceIdentifier,
 } from 'models/type'
 
-export interface MyCart extends LoggedResource {
+export interface MyCart extends BaseResource {
   readonly id: string
   readonly version: number
   readonly createdAt: string
@@ -180,7 +180,7 @@ export type MyCartUpdateAction =
   | MyCartSetShippingAddressAction
   | MyCartSetShippingMethodAction
   | MyCartUpdateItemShippingAddressAction
-export interface MyCustomer extends LoggedResource {
+export interface MyCustomer extends BaseResource {
   readonly id: string
   readonly version: number
   readonly createdAt: string
@@ -289,7 +289,7 @@ export interface MyLineItemDraft {
   readonly shippingDetails?: ItemShippingDetailsDraft
   readonly sku?: string
 }
-export interface MyOrder extends LoggedResource {
+export interface MyOrder extends BaseResource {
   readonly id: string
   readonly version: number
   readonly createdAt: string

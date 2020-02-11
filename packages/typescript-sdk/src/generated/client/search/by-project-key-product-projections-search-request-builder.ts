@@ -11,8 +11,8 @@
  *
  */
 import { ProductProjectionPagedSearchResponse } from 'models/product'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductProjectionsSearchRequestBuilder {
   constructor(
@@ -20,7 +20,8 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -33,7 +34,7 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
   }): ApiRequest<void> {
     return new ApiRequest<void>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/product-projections/search',
         pathVariables: this.args.pathArgs,
@@ -41,7 +42,7 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
           ...methodArgs?.headers,
         },
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -66,7 +67,7 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -74,7 +75,7 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
   }): ApiRequest<ProductProjectionPagedSearchResponse> {
     return new ApiRequest<ProductProjectionPagedSearchResponse>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/product-projections/search',
         pathVariables: this.args.pathArgs,
@@ -83,7 +84,7 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

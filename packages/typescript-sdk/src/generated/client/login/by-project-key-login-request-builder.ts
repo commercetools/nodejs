@@ -11,8 +11,8 @@
  *
  */
 import { CustomerSignInResult, CustomerSignin } from 'models/customer'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyLoginRequestBuilder {
   constructor(
@@ -20,7 +20,8 @@ export class ByProjectKeyLoginRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -41,7 +42,7 @@ export class ByProjectKeyLoginRequestBuilder {
   }): ApiRequest<CustomerSignInResult> {
     return new ApiRequest<CustomerSignInResult>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/login',
         pathVariables: this.args.pathArgs,
@@ -51,7 +52,7 @@ export class ByProjectKeyLoginRequestBuilder {
         },
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

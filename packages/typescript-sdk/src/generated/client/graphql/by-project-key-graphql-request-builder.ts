@@ -11,8 +11,8 @@
  *
  */
 import { GraphQLRequest, GraphQLResponse } from 'models/graph-ql'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyGraphqlRequestBuilder {
   constructor(
@@ -20,7 +20,8 @@ export class ByProjectKeyGraphqlRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -34,7 +35,7 @@ export class ByProjectKeyGraphqlRequestBuilder {
   }): ApiRequest<GraphQLResponse> {
     return new ApiRequest<GraphQLResponse>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/graphql',
         pathVariables: this.args.pathArgs,
@@ -44,7 +45,7 @@ export class ByProjectKeyGraphqlRequestBuilder {
         },
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

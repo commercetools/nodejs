@@ -15,8 +15,8 @@ import { ByProjectKeyInStoreKeyByStoreKeyCustomersRequestBuilder } from 'client/
 import { ByProjectKeyInStoreKeyByStoreKeyLoginRequestBuilder } from 'client/login/by-project-key-in-store-key-by-store-key-login-request-builder'
 import { ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder } from 'client/me/by-project-key-in-store-key-by-store-key-me-request-builder'
 import { ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder } from 'client/orders/by-project-key-in-store-key-by-store-key-orders-request-builder'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyRequestBuilder {
   constructor(
@@ -25,7 +25,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyRequestBuilder {
         projectKey: string
         storeKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -36,7 +37,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   /**
@@ -47,7 +49,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public me(): ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder {
@@ -55,7 +58,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   /**
@@ -68,7 +72,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   /**
@@ -79,7 +84,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 }

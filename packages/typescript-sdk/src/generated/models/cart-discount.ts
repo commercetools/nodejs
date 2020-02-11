@@ -13,10 +13,10 @@
 
 import { ChannelReference } from 'models/channel'
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Money,
   Reference,
   ReferenceTypeId,
@@ -26,7 +26,7 @@ import {
 import { ProductReference } from 'models/product'
 import { CustomFields, TypeResourceIdentifier } from 'models/type'
 
-export interface CartDiscount extends LoggedResource {
+export interface CartDiscount extends BaseResource {
   /**
    *	The unique ID of the cart discount.
    */

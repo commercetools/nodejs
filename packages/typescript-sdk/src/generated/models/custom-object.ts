@@ -12,14 +12,14 @@
  */
 
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
-  LoggedResource,
   Reference,
   ReferenceTypeId,
 } from 'models/common'
 
-export interface CustomObject extends LoggedResource {
+export interface CustomObject extends BaseResource {
   readonly id: string
   readonly version: number
   readonly createdAt: string

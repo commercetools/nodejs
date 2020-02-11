@@ -11,8 +11,8 @@
  *
  */
 import { Order } from 'models/order'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyMeOrdersByIDRequestBuilder {
   constructor(
@@ -22,7 +22,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeOrdersByIDRequestBuilder {
         storeKey: string
         ID: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -31,7 +32,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeOrdersByIDRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -39,7 +40,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeOrdersByIDRequestBuilder {
   }): ApiRequest<Order> {
     return new ApiRequest<Order>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/in-store/key={storeKey}/me/orders/{ID}',
         pathVariables: this.args.pathArgs,
@@ -48,7 +49,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeOrdersByIDRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

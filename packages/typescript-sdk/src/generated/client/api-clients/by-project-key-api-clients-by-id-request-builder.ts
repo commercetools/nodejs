@@ -11,8 +11,8 @@
  *
  */
 import { ApiClient } from 'models/api-client'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyApiClientsByIDRequestBuilder {
   constructor(
@@ -21,7 +21,8 @@ export class ByProjectKeyApiClientsByIDRequestBuilder {
         projectKey: string
         ID: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -34,7 +35,7 @@ export class ByProjectKeyApiClientsByIDRequestBuilder {
   }): ApiRequest<ApiClient> {
     return new ApiRequest<ApiClient>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/api-clients/{ID}',
         pathVariables: this.args.pathArgs,
@@ -42,7 +43,7 @@ export class ByProjectKeyApiClientsByIDRequestBuilder {
           ...methodArgs?.headers,
         },
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -55,7 +56,7 @@ export class ByProjectKeyApiClientsByIDRequestBuilder {
   }): ApiRequest<ApiClient> {
     return new ApiRequest<ApiClient>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'DELETE',
         uriTemplate: '/{projectKey}/api-clients/{ID}',
         pathVariables: this.args.pathArgs,
@@ -63,7 +64,7 @@ export class ByProjectKeyApiClientsByIDRequestBuilder {
           ...methodArgs?.headers,
         },
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

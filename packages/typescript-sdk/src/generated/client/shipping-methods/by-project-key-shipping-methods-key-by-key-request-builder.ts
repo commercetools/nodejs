@@ -11,8 +11,8 @@
  *
  */
 import { ShippingMethod, ShippingMethodUpdate } from 'models/shipping-method'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
   constructor(
@@ -21,7 +21,8 @@ export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
         projectKey: string
         key: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -30,7 +31,7 @@ export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -38,7 +39,7 @@ export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
   }): ApiRequest<ShippingMethod> {
     return new ApiRequest<ShippingMethod>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/shipping-methods/key={key}',
         pathVariables: this.args.pathArgs,
@@ -47,7 +48,7 @@ export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -56,7 +57,7 @@ export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: ShippingMethodUpdate
     headers?: {
@@ -65,7 +66,7 @@ export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
   }): ApiRequest<ShippingMethod> {
     return new ApiRequest<ShippingMethod>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/shipping-methods/key={key}',
         pathVariables: this.args.pathArgs,
@@ -76,7 +77,7 @@ export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -86,7 +87,7 @@ export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
     queryArgs: {
       version: number | number[]
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -94,7 +95,7 @@ export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
   }): ApiRequest<ShippingMethod> {
     return new ApiRequest<ShippingMethod>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'DELETE',
         uriTemplate: '/{projectKey}/shipping-methods/key={key}',
         pathVariables: this.args.pathArgs,
@@ -103,7 +104,7 @@ export class ByProjectKeyShippingMethodsKeyByKeyRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

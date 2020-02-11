@@ -11,8 +11,8 @@
  *
  */
 import { Channel, ChannelUpdate } from 'models/channel'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyChannelsByIDRequestBuilder {
   constructor(
@@ -21,7 +21,8 @@ export class ByProjectKeyChannelsByIDRequestBuilder {
         projectKey: string
         ID: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -30,7 +31,7 @@ export class ByProjectKeyChannelsByIDRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -38,7 +39,7 @@ export class ByProjectKeyChannelsByIDRequestBuilder {
   }): ApiRequest<Channel> {
     return new ApiRequest<Channel>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/channels/{ID}',
         pathVariables: this.args.pathArgs,
@@ -47,7 +48,7 @@ export class ByProjectKeyChannelsByIDRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -56,7 +57,7 @@ export class ByProjectKeyChannelsByIDRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: ChannelUpdate
     headers?: {
@@ -65,7 +66,7 @@ export class ByProjectKeyChannelsByIDRequestBuilder {
   }): ApiRequest<Channel> {
     return new ApiRequest<Channel>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/channels/{ID}',
         pathVariables: this.args.pathArgs,
@@ -76,7 +77,7 @@ export class ByProjectKeyChannelsByIDRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -86,7 +87,7 @@ export class ByProjectKeyChannelsByIDRequestBuilder {
     queryArgs: {
       version: number | number[]
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -94,7 +95,7 @@ export class ByProjectKeyChannelsByIDRequestBuilder {
   }): ApiRequest<Channel> {
     return new ApiRequest<Channel>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'DELETE',
         uriTemplate: '/{projectKey}/channels/{ID}',
         pathVariables: this.args.pathArgs,
@@ -103,7 +104,7 @@ export class ByProjectKeyChannelsByIDRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

@@ -11,8 +11,8 @@
  *
  */
 import { Cart } from 'models/cart'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyMeActiveCartRequestBuilder {
   constructor(
@@ -21,7 +21,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeActiveCartRequestBuilder {
         projectKey: string
         storeKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public get(methodArgs?: {
@@ -31,7 +32,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeActiveCartRequestBuilder {
   }): ApiRequest<Cart> {
     return new ApiRequest<Cart>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/in-store/key={storeKey}/me/active-cart',
         pathVariables: this.args.pathArgs,
@@ -39,7 +40,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeActiveCartRequestBuilder {
           ...methodArgs?.headers,
         },
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

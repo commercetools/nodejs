@@ -15,8 +15,8 @@ import { ByProjectKeyProductProjectionsKeyByKeyRequestBuilder } from 'client/pro
 import { ByProjectKeyProductProjectionsSearchRequestBuilder } from 'client/search/by-project-key-product-projections-search-request-builder'
 import { ByProjectKeyProductProjectionsSuggestRequestBuilder } from 'client/suggest/by-project-key-product-projections-suggest-request-builder'
 import { ProductProjectionPagedQueryResponse } from 'models/product'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductProjectionsRequestBuilder {
   constructor(
@@ -24,7 +24,8 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -39,7 +40,8 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   /**
@@ -50,7 +52,8 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public withKey(childPathArgs: {
@@ -61,7 +64,8 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public withId(childPathArgs: {
@@ -72,7 +76,8 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -95,7 +100,7 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -103,7 +108,7 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
   }): ApiRequest<ProductProjectionPagedQueryResponse> {
     return new ApiRequest<ProductProjectionPagedQueryResponse>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/product-projections',
         pathVariables: this.args.pathArgs,
@@ -112,7 +117,7 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

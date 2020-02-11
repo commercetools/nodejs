@@ -11,8 +11,8 @@
  *
  */
 import { Customer, CustomerResetPassword } from 'models/customer'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordResetRequestBuilder {
   constructor(
@@ -21,7 +21,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordResetRequestBuilde
         projectKey: string
         storeKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -35,7 +36,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordResetRequestBuilde
   }): ApiRequest<Customer> {
     return new ApiRequest<Customer>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate:
           '/{projectKey}/in-store/key={storeKey}/customers/password/reset',
@@ -46,7 +47,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCustomersPasswordResetRequestBuilde
         },
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

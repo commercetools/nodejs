@@ -24,12 +24,12 @@ import { Category, CategoryReference } from 'models/category'
 import { ChannelReference } from 'models/channel'
 import {
   Address,
+  BaseResource,
   CreatedBy,
   DiscountedPrice,
   Image,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Money,
   Reference,
 } from 'models/common'
@@ -131,12 +131,12 @@ export interface CategoryCreatedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly category: Category
 }
 export interface CategorySlugChangedMessage {
@@ -145,12 +145,12 @@ export interface CategorySlugChangedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly slug: LocalizedString
 }
 export interface CustomLineItemStateTransitionMessage {
@@ -159,12 +159,12 @@ export interface CustomLineItemStateTransitionMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly toState: StateReference
   readonly fromState: StateReference
   readonly customLineItemId: string
@@ -177,12 +177,12 @@ export interface CustomerAddressAddedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly address: Address
 }
 export interface CustomerAddressChangedMessage {
@@ -191,12 +191,12 @@ export interface CustomerAddressChangedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly address: Address
 }
 export interface CustomerAddressRemovedMessage {
@@ -205,12 +205,12 @@ export interface CustomerAddressRemovedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly address: Address
 }
 export interface CustomerCompanyNameSetMessage {
@@ -219,12 +219,12 @@ export interface CustomerCompanyNameSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly companyName: string
 }
 export interface CustomerCreatedMessage {
@@ -233,12 +233,12 @@ export interface CustomerCreatedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly customer: Customer
 }
 export interface CustomerDateOfBirthSetMessage {
@@ -247,12 +247,12 @@ export interface CustomerDateOfBirthSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly dateOfBirth: string
 }
 export interface CustomerEmailChangedMessage {
@@ -261,12 +261,12 @@ export interface CustomerEmailChangedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly email: string
 }
 export interface CustomerEmailVerifiedMessage {
@@ -275,12 +275,12 @@ export interface CustomerEmailVerifiedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
 }
 export interface CustomerGroupSetMessage {
   readonly type: 'CustomerGroupSet'
@@ -288,12 +288,12 @@ export interface CustomerGroupSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly customerGroup: CustomerGroupReference
 }
 export interface DeliveryAddedMessage {
@@ -302,12 +302,12 @@ export interface DeliveryAddedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly delivery: Delivery
 }
 export interface DeliveryAddressSetMessage {
@@ -316,12 +316,12 @@ export interface DeliveryAddressSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly oldAddress?: Address
   readonly deliveryId: string
   readonly address?: Address
@@ -332,12 +332,12 @@ export interface DeliveryItemsUpdatedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly deliveryId: string
   readonly oldItems: DeliveryItem[]
   readonly items: DeliveryItem[]
@@ -348,12 +348,12 @@ export interface DeliveryRemovedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly delivery: Delivery
 }
 export interface InventoryEntryDeletedMessage {
@@ -362,12 +362,12 @@ export interface InventoryEntryDeletedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly supplyChannel: ChannelReference
   readonly sku: string
 }
@@ -377,12 +377,12 @@ export interface LineItemStateTransitionMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly toState: StateReference
   readonly fromState: StateReference
   readonly quantity: number
@@ -410,12 +410,12 @@ export interface OrderBillingAddressSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly oldAddress?: Address
   readonly address?: Address
 }
@@ -425,12 +425,12 @@ export interface OrderCreatedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly order: Order
 }
 export interface OrderCustomLineItemDiscountSetMessage {
@@ -439,12 +439,12 @@ export interface OrderCustomLineItemDiscountSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly customLineItemId: string
   readonly taxedPrice?: TaxedItemPrice
   readonly discountedPricePerQuantity: DiscountedLineItemPriceForQuantity[]
@@ -455,12 +455,12 @@ export interface OrderCustomerEmailSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly oldEmail?: string
   readonly email?: string
 }
@@ -470,12 +470,12 @@ export interface OrderCustomerGroupSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly oldCustomerGroup?: CustomerGroupReference
   readonly customerGroup?: CustomerGroupReference
 }
@@ -485,12 +485,12 @@ export interface OrderCustomerSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly oldCustomerGroup?: CustomerGroupReference
   readonly customerGroup?: CustomerGroupReference
   readonly oldCustomer?: CustomerReference
@@ -502,12 +502,12 @@ export interface OrderDeletedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly order: Order
 }
 export interface OrderDiscountCodeAddedMessage {
@@ -516,12 +516,12 @@ export interface OrderDiscountCodeAddedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly discountCode: DiscountCodeReference
 }
 export interface OrderDiscountCodeRemovedMessage {
@@ -530,12 +530,12 @@ export interface OrderDiscountCodeRemovedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly discountCode: DiscountCodeReference
 }
 export interface OrderDiscountCodeStateSetMessage {
@@ -544,12 +544,12 @@ export interface OrderDiscountCodeStateSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly discountCode: DiscountCodeReference
   readonly oldState?: DiscountCodeState
   readonly state: DiscountCodeState
@@ -560,12 +560,12 @@ export interface OrderEditAppliedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly result: OrderEditApplied
   readonly edit: OrderEditReference
 }
@@ -575,12 +575,12 @@ export interface OrderImportedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly order: Order
 }
 export interface OrderLineItemAddedMessage {
@@ -589,12 +589,12 @@ export interface OrderLineItemAddedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly lineItem: LineItem
   readonly addedQuantity: number
 }
@@ -604,12 +604,12 @@ export interface OrderLineItemDiscountSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly totalPrice: Money
   readonly lineItemId: string
   readonly taxedPrice?: TaxedItemPrice
@@ -621,12 +621,12 @@ export interface OrderPaymentStateChangedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly oldPaymentState?: PaymentState
   readonly paymentState: PaymentState
 }
@@ -636,12 +636,12 @@ export interface OrderReturnInfoAddedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly returnInfo: ReturnInfo
 }
 export interface OrderReturnShipmentStateChangedMessage {
@@ -650,12 +650,12 @@ export interface OrderReturnShipmentStateChangedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly returnItemId: string
   readonly returnShipmentState: ReturnShipmentState
 }
@@ -665,12 +665,12 @@ export interface OrderShipmentStateChangedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly shipmentState: ShipmentState
   readonly oldShipmentState?: ShipmentState
 }
@@ -680,12 +680,12 @@ export interface OrderShippingAddressSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly oldAddress?: Address
   readonly address?: Address
 }
@@ -695,12 +695,12 @@ export interface OrderShippingInfoSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly shippingInfo?: ShippingInfo
   readonly oldShippingInfo?: ShippingInfo
 }
@@ -710,12 +710,12 @@ export interface OrderShippingRateInputSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly shippingRateInput?: ShippingRateInput
   readonly oldShippingRateInput?: ShippingRateInput
 }
@@ -725,12 +725,12 @@ export interface OrderStateChangedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly oldOrderState: OrderState
   readonly orderState: OrderState
 }
@@ -740,12 +740,12 @@ export interface OrderStateTransitionMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly force: boolean
   readonly state: StateReference
 }
@@ -755,12 +755,12 @@ export interface ParcelAddedToDeliveryMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly delivery: Delivery
   readonly parcel: Parcel
 }
@@ -770,12 +770,12 @@ export interface ParcelItemsUpdatedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly deliveryId?: string
   readonly oldItems: DeliveryItem[]
   readonly items: DeliveryItem[]
@@ -787,12 +787,12 @@ export interface ParcelMeasurementsUpdatedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly deliveryId: string
   readonly measurements?: ParcelMeasurements
   readonly parcelId: string
@@ -803,12 +803,12 @@ export interface ParcelRemovedFromDeliveryMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly parcel: Parcel
   readonly deliveryId: string
 }
@@ -818,12 +818,12 @@ export interface ParcelTrackingDataUpdatedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly deliveryId: string
   readonly trackingData?: TrackingData
   readonly parcelId: string
@@ -834,12 +834,12 @@ export interface PaymentCreatedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly payment: Payment
 }
 export interface PaymentInteractionAddedMessage {
@@ -848,12 +848,12 @@ export interface PaymentInteractionAddedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly interaction: CustomFields
 }
 export interface PaymentStatusInterfaceCodeSetMessage {
@@ -862,12 +862,12 @@ export interface PaymentStatusInterfaceCodeSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly paymentId: string
   readonly interfaceCode: string
 }
@@ -877,12 +877,12 @@ export interface PaymentStatusStateTransitionMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly force: boolean
   readonly state: StateReference
 }
@@ -892,12 +892,12 @@ export interface PaymentTransactionAddedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly transaction: Transaction
 }
 export interface PaymentTransactionStateChangedMessage {
@@ -906,12 +906,12 @@ export interface PaymentTransactionStateChangedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly state: TransactionState
   readonly transactionId: string
 }
@@ -921,12 +921,12 @@ export interface ProductAddedToCategoryMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly staged: boolean
   readonly category: CategoryReference
 }
@@ -936,12 +936,12 @@ export interface ProductCreatedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly productProjection: ProductProjection
 }
 export interface ProductDeletedMessage {
@@ -950,12 +950,12 @@ export interface ProductDeletedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly removedImageUrls: string[]
   readonly currentProjection: ProductProjection
 }
@@ -965,12 +965,12 @@ export interface ProductImageAddedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly image: Image
   readonly staged: boolean
   readonly variantId: number
@@ -981,12 +981,12 @@ export interface ProductPriceDiscountsSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly updatedPrices: ProductPriceDiscountsSetUpdatedPrice[]
 }
 export interface ProductPriceDiscountsSetUpdatedPrice {
@@ -1003,12 +1003,12 @@ export interface ProductPriceExternalDiscountSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly discounted?: DiscountedPrice
   readonly staged: boolean
   readonly variantId: number
@@ -1022,12 +1022,12 @@ export interface ProductPublishedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly removedImageUrls: any[]
   readonly productProjection: ProductProjection
   readonly scope: ProductPublishScope
@@ -1038,12 +1038,12 @@ export interface ProductRemovedFromCategoryMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly staged: boolean
   readonly category: CategoryReference
 }
@@ -1053,12 +1053,12 @@ export interface ProductRevertedStagedChangesMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly removedImageUrls: string[]
 }
 export interface ProductSlugChangedMessage {
@@ -1067,12 +1067,12 @@ export interface ProductSlugChangedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly slug: LocalizedString
 }
 export interface ProductStateTransitionMessage {
@@ -1081,12 +1081,12 @@ export interface ProductStateTransitionMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly force: boolean
   readonly state: StateReference
 }
@@ -1096,12 +1096,12 @@ export interface ProductUnpublishedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
 }
 export interface ProductVariantDeletedMessage {
   readonly type: 'ProductVariantDeleted'
@@ -1109,12 +1109,12 @@ export interface ProductVariantDeletedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly removedImageUrls: string[]
   readonly variant: ProductVariant
 }
@@ -1124,12 +1124,12 @@ export interface ReviewCreatedMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly review: Review
 }
 export interface ReviewRatingSetMessage {
@@ -1138,12 +1138,12 @@ export interface ReviewRatingSetMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly oldRating?: number
   readonly includedInStatistics: boolean
   readonly newRating?: number
@@ -1155,12 +1155,12 @@ export interface ReviewStateTransitionMessage {
   readonly lastModifiedAt: string
   readonly id: string
   readonly version: number
-  readonly createdBy?: CreatedBy
-  readonly lastModifiedBy?: LastModifiedBy
   readonly sequenceNumber: number
   readonly resource: Reference
+  readonly createdBy?: CreatedBy
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
   readonly resourceVersion: number
+  readonly lastModifiedBy?: LastModifiedBy
   readonly newIncludedInStatistics: boolean
   readonly oldState: StateReference
   readonly force: boolean

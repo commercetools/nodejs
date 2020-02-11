@@ -18,8 +18,8 @@ import {
   ProductDiscountDraft,
   ProductDiscountPagedQueryResponse,
 } from 'models/product-discount'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductDiscountsRequestBuilder {
   constructor(
@@ -27,7 +27,8 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public matching(): ByProjectKeyProductDiscountsMatchingRequestBuilder {
@@ -35,7 +36,8 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public withKey(childPathArgs: {
@@ -46,7 +48,8 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public withId(childPathArgs: {
@@ -57,7 +60,8 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -72,7 +76,7 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -80,7 +84,7 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
   }): ApiRequest<ProductDiscountPagedQueryResponse> {
     return new ApiRequest<ProductDiscountPagedQueryResponse>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/product-discounts',
         pathVariables: this.args.pathArgs,
@@ -89,7 +93,7 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -98,7 +102,7 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: ProductDiscountDraft
     headers?: {
@@ -107,7 +111,7 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
   }): ApiRequest<ProductDiscount> {
     return new ApiRequest<ProductDiscount>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/product-discounts',
         pathVariables: this.args.pathArgs,
@@ -118,7 +122,7 @@ export class ByProjectKeyProductDiscountsRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

@@ -13,8 +13,8 @@
 import { ByProjectKeyInStoreKeyByStoreKeyMeActiveCartRequestBuilder } from 'client/active-cart/by-project-key-in-store-key-by-store-key-me-active-cart-request-builder'
 import { ByProjectKeyInStoreKeyByStoreKeyMeCartsRequestBuilder } from 'client/carts/by-project-key-in-store-key-by-store-key-me-carts-request-builder'
 import { ByProjectKeyInStoreKeyByStoreKeyMeOrdersRequestBuilder } from 'client/orders/by-project-key-in-store-key-by-store-key-me-orders-request-builder'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder {
   constructor(
@@ -23,7 +23,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder {
         projectKey: string
         storeKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -34,7 +35,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   /**
@@ -45,7 +47,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public activeCart(): ByProjectKeyInStoreKeyByStoreKeyMeActiveCartRequestBuilder {
@@ -53,7 +56,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 }

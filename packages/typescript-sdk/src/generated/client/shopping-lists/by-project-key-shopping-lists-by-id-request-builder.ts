@@ -11,8 +11,8 @@
  *
  */
 import { ShoppingList, ShoppingListUpdate } from 'models/shopping-list'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyShoppingListsByIDRequestBuilder {
   constructor(
@@ -21,7 +21,8 @@ export class ByProjectKeyShoppingListsByIDRequestBuilder {
         projectKey: string
         ID: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -30,7 +31,7 @@ export class ByProjectKeyShoppingListsByIDRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -38,7 +39,7 @@ export class ByProjectKeyShoppingListsByIDRequestBuilder {
   }): ApiRequest<ShoppingList> {
     return new ApiRequest<ShoppingList>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/shopping-lists/{ID}',
         pathVariables: this.args.pathArgs,
@@ -47,7 +48,7 @@ export class ByProjectKeyShoppingListsByIDRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -56,7 +57,7 @@ export class ByProjectKeyShoppingListsByIDRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: ShoppingListUpdate
     headers?: {
@@ -65,7 +66,7 @@ export class ByProjectKeyShoppingListsByIDRequestBuilder {
   }): ApiRequest<ShoppingList> {
     return new ApiRequest<ShoppingList>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/shopping-lists/{ID}',
         pathVariables: this.args.pathArgs,
@@ -76,7 +77,7 @@ export class ByProjectKeyShoppingListsByIDRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -87,7 +88,7 @@ export class ByProjectKeyShoppingListsByIDRequestBuilder {
       dataErasure?: boolean | boolean[]
       version: number | number[]
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -95,7 +96,7 @@ export class ByProjectKeyShoppingListsByIDRequestBuilder {
   }): ApiRequest<ShoppingList> {
     return new ApiRequest<ShoppingList>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'DELETE',
         uriTemplate: '/{projectKey}/shopping-lists/{ID}',
         pathVariables: this.args.pathArgs,
@@ -104,7 +105,7 @@ export class ByProjectKeyShoppingListsByIDRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

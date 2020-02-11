@@ -13,8 +13,8 @@
 import { ByProjectKeyMeOrdersByIDRequestBuilder } from 'client/orders/by-project-key-me-orders-by-id-request-builder'
 import { MyOrder, MyOrderFromCartDraft } from 'models/me'
 import { OrderPagedQueryResponse } from 'models/order'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeOrdersRequestBuilder {
   constructor(
@@ -22,7 +22,8 @@ export class ByProjectKeyMeOrdersRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public withId(childPathArgs: {
@@ -33,7 +34,8 @@ export class ByProjectKeyMeOrdersRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -48,7 +50,7 @@ export class ByProjectKeyMeOrdersRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -56,7 +58,7 @@ export class ByProjectKeyMeOrdersRequestBuilder {
   }): ApiRequest<OrderPagedQueryResponse> {
     return new ApiRequest<OrderPagedQueryResponse>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/me/orders',
         pathVariables: this.args.pathArgs,
@@ -65,7 +67,7 @@ export class ByProjectKeyMeOrdersRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -74,7 +76,7 @@ export class ByProjectKeyMeOrdersRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: MyOrderFromCartDraft
     headers?: {
@@ -83,7 +85,7 @@ export class ByProjectKeyMeOrdersRequestBuilder {
   }): ApiRequest<MyOrder> {
     return new ApiRequest<MyOrder>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/me/orders',
         pathVariables: this.args.pathArgs,
@@ -94,7 +96,7 @@ export class ByProjectKeyMeOrdersRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

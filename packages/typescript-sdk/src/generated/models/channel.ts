@@ -13,11 +13,11 @@
 
 import {
   Address,
+  BaseResource,
   CreatedBy,
   GeoJson,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
@@ -30,7 +30,7 @@ import {
   TypeResourceIdentifier,
 } from 'models/type'
 
-export interface Channel extends LoggedResource {
+export interface Channel extends BaseResource {
   /**
    *	The unique ID of the channel.
    */

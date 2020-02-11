@@ -11,8 +11,8 @@
  *
  */
 import { Cart, ReplicaCartDraft } from 'models/cart'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCartsReplicateRequestBuilder {
   constructor(
@@ -20,7 +20,8 @@ export class ByProjectKeyCartsReplicateRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public post(methodArgs: {
@@ -31,7 +32,7 @@ export class ByProjectKeyCartsReplicateRequestBuilder {
   }): ApiRequest<Cart> {
     return new ApiRequest<Cart>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/carts/replicate',
         pathVariables: this.args.pathArgs,
@@ -41,7 +42,7 @@ export class ByProjectKeyCartsReplicateRequestBuilder {
         },
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

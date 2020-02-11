@@ -11,8 +11,8 @@
  *
  */
 import { ByProjectKeyMeEmailConfirmRequestBuilder } from 'client/confirm/by-project-key-me-email-confirm-request-builder'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeEmailRequestBuilder {
   constructor(
@@ -20,7 +20,8 @@ export class ByProjectKeyMeEmailRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public confirm(): ByProjectKeyMeEmailConfirmRequestBuilder {
@@ -28,7 +29,8 @@ export class ByProjectKeyMeEmailRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 }

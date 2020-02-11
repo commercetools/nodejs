@@ -14,8 +14,8 @@ import {
   ProductDiscount,
   ProductDiscountMatchQuery,
 } from 'models/product-discount'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductDiscountsMatchingRequestBuilder {
   constructor(
@@ -23,7 +23,8 @@ export class ByProjectKeyProductDiscountsMatchingRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public post(methodArgs: {
@@ -34,7 +35,7 @@ export class ByProjectKeyProductDiscountsMatchingRequestBuilder {
   }): ApiRequest<ProductDiscount> {
     return new ApiRequest<ProductDiscount>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/product-discounts/matching',
         pathVariables: this.args.pathArgs,
@@ -44,7 +45,7 @@ export class ByProjectKeyProductDiscountsMatchingRequestBuilder {
         },
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

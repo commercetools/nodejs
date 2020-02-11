@@ -17,8 +17,8 @@ import {
   CategoryDraft,
   CategoryPagedQueryResponse,
 } from 'models/category'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCategoriesRequestBuilder {
   constructor(
@@ -26,7 +26,8 @@ export class ByProjectKeyCategoriesRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public withKey(childPathArgs: {
@@ -37,7 +38,8 @@ export class ByProjectKeyCategoriesRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
   public withId(childPathArgs: {
@@ -48,7 +50,8 @@ export class ByProjectKeyCategoriesRequestBuilder {
         ...this.args.pathArgs,
         ...childPathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -63,7 +66,7 @@ export class ByProjectKeyCategoriesRequestBuilder {
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -71,7 +74,7 @@ export class ByProjectKeyCategoriesRequestBuilder {
   }): ApiRequest<CategoryPagedQueryResponse> {
     return new ApiRequest<CategoryPagedQueryResponse>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/categories',
         pathVariables: this.args.pathArgs,
@@ -80,7 +83,7 @@ export class ByProjectKeyCategoriesRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -89,7 +92,7 @@ export class ByProjectKeyCategoriesRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: CategoryDraft
     headers?: {
@@ -98,7 +101,7 @@ export class ByProjectKeyCategoriesRequestBuilder {
   }): ApiRequest<Category> {
     return new ApiRequest<Category>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/categories',
         pathVariables: this.args.pathArgs,
@@ -109,7 +112,7 @@ export class ByProjectKeyCategoriesRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

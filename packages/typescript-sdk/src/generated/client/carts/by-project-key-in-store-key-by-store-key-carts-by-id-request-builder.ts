@@ -11,8 +11,8 @@
  *
  */
 import { Cart, CartUpdate } from 'models/cart'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
   constructor(
@@ -22,7 +22,8 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
         storeKey: string
         ID: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -36,7 +37,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -44,7 +45,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
   }): ApiRequest<Cart> {
     return new ApiRequest<Cart>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'GET',
         uriTemplate: '/{projectKey}/in-store/key={storeKey}/carts/{ID}',
         pathVariables: this.args.pathArgs,
@@ -53,7 +54,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -65,7 +66,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
   public post(methodArgs: {
     queryArgs?: {
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     body: CartUpdate
     headers?: {
@@ -74,7 +75,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
   }): ApiRequest<Cart> {
     return new ApiRequest<Cart>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/in-store/key={storeKey}/carts/{ID}',
         pathVariables: this.args.pathArgs,
@@ -85,7 +86,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
         queryParams: methodArgs?.queryArgs,
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
   /**
@@ -96,7 +97,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
       dataErasure?: boolean | boolean[]
       version: number | number[]
       expand?: string | string[]
-      [key: string]: QueryParamType
+      [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
@@ -104,7 +105,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
   }): ApiRequest<Cart> {
     return new ApiRequest<Cart>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'DELETE',
         uriTemplate: '/{projectKey}/in-store/key={storeKey}/carts/{ID}',
         pathVariables: this.args.pathArgs,
@@ -113,7 +114,7 @@ export class ByProjectKeyInStoreKeyByStoreKeyCartsByIDRequestBuilder {
         },
         queryParams: methodArgs?.queryArgs,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

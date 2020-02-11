@@ -16,10 +16,10 @@ import {
   CartDiscountResourceIdentifier,
 } from 'models/cart-discount'
 import {
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Reference,
   ReferenceTypeId,
   ResourceIdentifier,
@@ -31,7 +31,7 @@ import {
   TypeResourceIdentifier,
 } from 'models/type'
 
-export interface DiscountCode extends LoggedResource {
+export interface DiscountCode extends BaseResource {
   /**
    *	The unique ID of the discount code.
    */

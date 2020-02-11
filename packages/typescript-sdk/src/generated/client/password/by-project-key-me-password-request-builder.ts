@@ -12,8 +12,8 @@
  */
 import { ByProjectKeyMePasswordResetRequestBuilder } from 'client/reset/by-project-key-me-password-reset-request-builder'
 import { MyCustomer } from 'models/me'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMePasswordRequestBuilder {
   constructor(
@@ -21,7 +21,8 @@ export class ByProjectKeyMePasswordRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   public reset(): ByProjectKeyMePasswordResetRequestBuilder {
@@ -29,7 +30,8 @@ export class ByProjectKeyMePasswordRequestBuilder {
       pathArgs: {
         ...this.args.pathArgs,
       },
-      apiRequestExecutor: this.args.apiRequestExecutor,
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
     })
   }
 
@@ -41,7 +43,7 @@ export class ByProjectKeyMePasswordRequestBuilder {
   }): ApiRequest<MyCustomer> {
     return new ApiRequest<MyCustomer>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/me/password',
         pathVariables: this.args.pathArgs,
@@ -51,7 +53,7 @@ export class ByProjectKeyMePasswordRequestBuilder {
         },
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

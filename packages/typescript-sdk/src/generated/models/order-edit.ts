@@ -35,10 +35,10 @@ import { CartDiscountReference } from 'models/cart-discount'
 import { ChannelResourceIdentifier } from 'models/channel'
 import {
   Address,
+  BaseResource,
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  LoggedResource,
   Money,
   Reference,
   ReferenceTypeId,
@@ -87,7 +87,7 @@ import {
   TypeResourceIdentifier,
 } from 'models/type'
 
-export interface OrderEdit extends LoggedResource {
+export interface OrderEdit extends BaseResource {
   /**
    *	The unique ID of the OrderEdit.
    */

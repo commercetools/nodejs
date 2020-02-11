@@ -14,8 +14,8 @@ import {
   CustomerCreatePasswordResetToken,
   CustomerToken,
 } from 'models/customer'
-import { QueryParamType } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCustomersPasswordTokenRequestBuilder {
   constructor(
@@ -23,7 +23,8 @@ export class ByProjectKeyCustomersPasswordTokenRequestBuilder {
       pathArgs: {
         projectKey: string
       }
-      apiRequestExecutor: ApiRequestExecutor
+      executeRequest: executeRequest
+      baseUri?: string
     }
   ) {}
   /**
@@ -39,7 +40,7 @@ export class ByProjectKeyCustomersPasswordTokenRequestBuilder {
   }): ApiRequest<CustomerToken> {
     return new ApiRequest<CustomerToken>(
       {
-        baseURL: 'https://api.sphere.io',
+        baseUri: this.args.baseUri,
         method: 'POST',
         uriTemplate: '/{projectKey}/customers/password-token',
         pathVariables: this.args.pathArgs,
@@ -49,7 +50,7 @@ export class ByProjectKeyCustomersPasswordTokenRequestBuilder {
         },
         body: methodArgs?.body,
       },
-      this.args.apiRequestExecutor
+      this.args.executeRequest
     )
   }
 }

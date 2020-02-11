@@ -11,14 +11,17 @@
  *
  */
 import { ByProjectKeyRequestBuilder } from 'client/by-project-key-request-builder'
-import { QueryParamType } from 'shared/utils/common-types'
-import { Middleware } from 'shared/utils/common-types'
-import { ApiRequestExecutor, ApiRequest } from 'shared/utils/requests-utils'
+import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ApiRoot {
-  private apiRequestExecutor: ApiRequestExecutor
-  constructor(args: { middlewares: Middleware[] }) {
-    this.apiRequestExecutor = new ApiRequestExecutor(args.middlewares)
+  private executeRequest: executeRequest
+  private baseUri: string
+
+  constructor(args: { executeRequest: executeRequest; baseUri?: string }) {
+    this.executeRequest = args.executeRequest
+    this.baseUri =
+      args.baseUri ?? 'https://api.europe-west1.gcp.commercetools.com/'
   }
 
   /**
@@ -31,7 +34,8 @@ export class ApiRoot {
       pathArgs: {
         ...childPathArgs,
       },
-      apiRequestExecutor: this.apiRequestExecutor,
+      executeRequest: this.executeRequest,
+      baseUri: this.baseUri,
     })
   }
 }
