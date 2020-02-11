@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/discount-code-exporter",
-  "version": "4.0.7",
+  "version": "4.0.8",
   "description": "Exports discount codes from the commercetools platform.",
   "keywords": [
     "commercetools",
@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@commercetools/api-request-builder": "^5.4.2",
-    "@commercetools/get-credentials": "^3.0.12",
+    "@commercetools/get-credentials": "^3.0.13",
     "@commercetools/sdk-client": "^2.1.1",
     "@commercetools/sdk-middleware-auth": "^5.1.6",
     "@commercetools/sdk-middleware-http": "^6.0.4",
