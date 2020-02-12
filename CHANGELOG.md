@@ -1,274 +1,512 @@
+## @commercetools/typescript-sdk@0.0.16 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/state-importer@3.0.7 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/sdk-types@0.1.2 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/sdk-middleware-user-agent@2.1.3 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/resource-deleter@2.0.8 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/product-json-to-xlsx@4.0.0 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/product-json-to-csv@5.0.0 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/product-exporter@3.0.8 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/price-exporter@3.0.9 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/personal-data-erasure@3.0.8 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/inventories-exporter@3.0.9 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/integration-tests@0.0.17 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/discount-code-importer@3.0.7 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/discount-code-exporter@4.0.9 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/customer-groups-exporter@3.0.8 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/custom-objects-importer@3.0.7 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/custom-objects-exporter@3.0.8 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/csv-parser-state@3.0.8 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/csv-parser-price@4.0.9 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/category-exporter@3.0.8 (2020-02-12)
+
+#### :boom: Breaking Change
+
+- `product-json-to-csv`
+  - [#1487](https://github.com/commercetools/nodejs/pull/1487) fix(product-json-to-csv): replace the @ with space before from the customer group ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### Committers: 1
+
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
 
 ## @commercetools/typescript-sdk@0.0.16-alpha.0 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/resource-deleter@2.0.7 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/product-json-to-xlsx@3.1.3 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/product-json-to-csv@4.1.3 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/product-exporter@3.0.7 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/price-exporter@3.0.8 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/personal-data-erasure@3.0.7 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/inventories-exporter@3.0.8 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/integration-tests@0.0.16 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/get-credentials@3.0.13 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/discount-code-exporter@4.0.8 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/customer-groups-exporter@3.0.7 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/custom-objects-exporter@3.0.7 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/csv-parser-state@3.0.7 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/csv-parser-price@4.0.8 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/csv-parser-orders@2.0.14 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
-- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
 
 ## @commercetools/category-exporter@3.0.7 (2020-02-11)
 
 #### :house: Maintenance
-* `typescript-sdk`
-  * [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
-* Other
-  * [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
-  * [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
-* `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
-  * [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+- `typescript-sdk`
+  - [#1484](https://github.com/commercetools/nodejs/pull/1484) refactor(ts-sdk): refactor query params ([@acbeni](https://github.com/acbeni))
+- Other
+  - [#1481](https://github.com/commercetools/nodejs/pull/1481) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1479](https://github.com/commercetools/nodejs/pull/1479) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1477](https://github.com/commercetools/nodejs/pull/1477) chore(deps): pin dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`
+  - [#1478](https://github.com/commercetools/nodejs/pull/1478) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
 
 #### Committers: 1
+
 - Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+
 ## @commercetools/typescript-sdk@0.0.12-alpha.0 (2020-01-23)
 
 #### :bug: Bug Fix
