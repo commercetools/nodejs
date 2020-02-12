@@ -25,6 +25,7 @@
     "index.ts"
   ],
   "scripts": {
-    "build": "exit 0"
+    "build": "exit 0",
+    "typecheck:ts": "tsc --noEmit"
   }
 }
