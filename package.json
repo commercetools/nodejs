@@ -36,7 +36,7 @@
     "docs:publish": "npm run docs:clean && npm run docs:build && ./scripts/publish-docs",
     "typecheck": "yarn typecheck:flow && yarn typecheck:ts",
     "typecheck:flow": "flow check --include-warnings",
-    "typecheck:ts": "tsc --noEmit",
+    "typecheck:ts": "lerna run typecheck:ts",
     "package-readme-entry": "./scripts/package-readme-entry.sh"
   },
   "workspaces": [
