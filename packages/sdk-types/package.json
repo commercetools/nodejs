@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-types",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "TypeScript declarations for SDK packages",
   "keywords": [
     "commercetools",

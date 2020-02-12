@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-middleware-user-agent",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Middleware for setting the User-Agent on the HTTP request, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
@@ -36,6 +36,6 @@
   },
   "dependencies": {
     "@commercetools/http-user-agent": "^2.1.2",
-    "@commercetools/sdk-types": "^0.1.1"
+    "@commercetools/sdk-types": "^0.1.2"
   }
 }
