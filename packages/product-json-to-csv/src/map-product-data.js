@@ -262,16 +262,13 @@ export default class ProductMapping {
   static _mapPriceToString(price: Price): string {
     // Full price:
     // 'country-currencyCode centAmount|discounted.centAmount@customerGroup.name#channel.key$validFrom~validUntil'
+    const customerGroupName = price.customerGroup?.name
 
     return oneLineTrim`
       ${price.country ? `${price.country}-` : ''}
-      ${price.value.currencyCode} ${price.value.centAmount}
-      ${price.discounted ? `|${price.discounted.value.centAmount}` : ''}
-      ${
-        price.customerGroup && price.customerGroup.name
-          ? `@${price.customerGroup.name}`
-          : ''
-      }
+      ${price.value.currencyCode} ${price.value.centAmount}${
+      price.discounted ? `|${price.discounted.value.centAmount}` : ''
+    }${customerGroupName ? ` ${price.customerGroup.name}` : ''}
       ${price.channel && price.channel.key ? `#${price.channel.key}` : ''}
       ${price.validFrom ? `$${price.validFrom}` : ''}
       ${price.validUntil ? `~${price.validUntil}` : ''}
