@@ -61,11 +61,11 @@ export class ByProjectKeyExtensionsRequestBuilder {
   public get(methodArgs?: {
     queryArgs?: {
       expand?: string | string[]
-      where?: string | string[]
       sort?: string | string[]
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
+      where?: string | string[]
       [key: string]: QueryParam
     }
     headers?: {
