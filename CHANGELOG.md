@@ -1,3 +1,4 @@
+
 ## @commercetools/typescript-sdk@0.0.17-alpha.0 (2020-02-13)
 
 #### :boom: Breaking Change
