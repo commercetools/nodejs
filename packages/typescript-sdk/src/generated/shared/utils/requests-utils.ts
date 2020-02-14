@@ -1,11 +1,22 @@
+/**
+ *
+ *    Generated file, please do not change!!!
+ *    From http://www.vrap.io/ with love
+ *
+ *                ,d88b.d88b,
+ *                88888888888
+ *                `Y8888888Y'
+ *                  `Y888Y'
+ *                    `Y'
+ *
+ */
+
 import {
   ClientResponse,
-  VariableMap,
   executeRequest,
   ClientRequest,
 } from 'shared/utils/common-types'
 import { buildRelativeUri } from 'shared/utils/uri-utils'
-import { stringify } from 'querystring'
 
 export class ApiRequest<O> {
   private request: ClientRequest
