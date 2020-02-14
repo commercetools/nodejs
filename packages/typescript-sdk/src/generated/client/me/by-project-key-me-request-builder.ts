@@ -140,12 +140,12 @@ export class ByProjectKeyMeRequestBuilder {
 
   public get(methodArgs?: {
     queryArgs?: {
-      where?: string | string[]
       sort?: string | string[]
       limit?: number | number[]
       offset?: number | number[]
       withTotal?: boolean | boolean[]
       expand?: string | string[]
+      where?: string | string[]
       [key: string]: QueryParam
     }
     headers?: {

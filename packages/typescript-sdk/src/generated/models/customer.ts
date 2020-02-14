@@ -265,11 +265,13 @@ export type CustomerUpdateAction =
   | CustomerAddAddressAction
   | CustomerAddBillingAddressIdAction
   | CustomerAddShippingAddressIdAction
+  | CustomerAddStoreAction
   | CustomerChangeAddressAction
   | CustomerChangeEmailAction
   | CustomerRemoveAddressAction
   | CustomerRemoveBillingAddressIdAction
   | CustomerRemoveShippingAddressIdAction
+  | CustomerRemoveStoreAction
   | CustomerSetCompanyNameAction
   | CustomerSetCustomFieldAction
   | CustomerSetCustomTypeAction
@@ -285,6 +287,7 @@ export type CustomerUpdateAction =
   | CustomerSetLocaleAction
   | CustomerSetMiddleNameAction
   | CustomerSetSalutationAction
+  | CustomerSetStoresAction
   | CustomerSetTitleAction
   | CustomerSetVatIdAction
 export interface CustomerAddAddressAction {
@@ -298,6 +301,10 @@ export interface CustomerAddBillingAddressIdAction {
 export interface CustomerAddShippingAddressIdAction {
   readonly action: 'addShippingAddressId'
   readonly addressId: string
+}
+export interface CustomerAddStoreAction {
+  readonly action: 'addStores'
+  readonly store: StoreResourceIdentifier
 }
 export interface CustomerChangeAddressAction {
   readonly action: 'changeAddress'
@@ -319,6 +326,10 @@ export interface CustomerRemoveBillingAddressIdAction {
 export interface CustomerRemoveShippingAddressIdAction {
   readonly action: 'removeShippingAddressId'
   readonly addressId: string
+}
+export interface CustomerRemoveStoreAction {
+  readonly action: 'removeStores'
+  readonly store: StoreResourceIdentifier
 }
 export interface CustomerSetCompanyNameAction {
   readonly action: 'setCompanyName'
@@ -413,6 +424,10 @@ export interface CustomerSetMiddleNameAction {
 export interface CustomerSetSalutationAction {
   readonly action: 'setSalutation'
   readonly salutation?: string
+}
+export interface CustomerSetStoresAction {
+  readonly action: 'setStores'
+  readonly stores?: StoreResourceIdentifier
 }
 export interface CustomerSetTitleAction {
   readonly action: 'setTitle'

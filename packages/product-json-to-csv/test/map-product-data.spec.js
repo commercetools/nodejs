@@ -1023,7 +1023,7 @@ describe('::ProductMapping', () => {
       const expected = 'US-USD 1230#priceChannelKey'
       expect(ProductMapping._mapPriceToString(samplePrice)).toBe(expected)
     })
-  
+
     test('map a price with a customer group name and percentage', () => {
       const samplePrice = {
         value: {
@@ -1047,9 +1047,9 @@ describe('::ProductMapping', () => {
           createdAt: '2018-07-13T10:03:04.703Z',
           lastModifiedAt: '2018-07-13T10:03:04.703Z',
           name: 'b2b',
-          key: 'b2b'
-        }
-      };
+          key: 'b2b',
+        },
+      }
 
       const expected = 'US-USD 1230|4495 b2b'
       expect(ProductMapping._mapPriceToString(samplePrice)).toBe(expected)
@@ -1070,9 +1070,9 @@ describe('::ProductMapping', () => {
           createdAt: '2018-07-13T10:03:04.703Z',
           lastModifiedAt: '2018-07-13T10:03:04.703Z',
           name: 'b2b',
-          key: 'b2b'
-        }
-      };
+          key: 'b2b',
+        },
+      }
 
       const expected = 'US-USD 1230 b2b'
       expect(ProductMapping._mapPriceToString(samplePrice)).toBe(expected)
