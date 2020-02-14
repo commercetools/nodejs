@@ -50,3 +50,4 @@ export * from 'client/api-root'
 
 //Common package
 export * from 'shared/utils/common-types'
+export * from 'shared/utils/middleware'
