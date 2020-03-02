@@ -53,6 +53,6 @@
   },
   "devDependencies": {
     "streamtest": "1.2.4",
-    "unzipper": "0.10.7"
+    "unzipper": "0.10.10"
   }
 }

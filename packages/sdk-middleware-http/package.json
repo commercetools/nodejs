@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "abort-controller": "3.0.0",
-    "nock": "11.7.2",
+    "nock": "11.9.1",
     "node-fetch": "2.6.0"
   }
 }
