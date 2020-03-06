@@ -40,6 +40,7 @@ export default function createAuthMiddlewareForPasswordFlow(
       requestState,
       tokenCache,
       fetch: options.fetch,
+      clientId: options.credentials.clientId,
     }
     authMiddlewareBase(params, next, options)
   }

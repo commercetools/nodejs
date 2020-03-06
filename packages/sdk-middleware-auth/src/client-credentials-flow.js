@@ -15,10 +15,15 @@ import store from './utils'
 export default function createAuthMiddlewareForClientCredentialsFlow(
   options: AuthMiddlewareOptions
 ): Middleware {
-  const tokenCache = store({})
+  const tokenCache =
+    options.tokenCache ||
+    store({
+      token: '',
+      expirationTime: -1,
+    })
+  const requestState = store(false)
   const pendingTasks: Array<Task> = []
 
-  const requestState = store(false)
   return (next: Next): Next => (
     request: MiddlewareRequest,
     response: MiddlewareResponse
@@ -40,6 +45,7 @@ export default function createAuthMiddlewareForClientCredentialsFlow(
       requestState,
       tokenCache,
       fetch: options.fetch,
+      clientId: options.credentials.clientId,
     }
     authMiddlewareBase(params, next)
   }
