@@ -344,6 +344,7 @@ export type MappedProduct = {
   createdAt?: string,
   lastModifiedAt?: string,
   productType?: string,
+  productTypeKey?: string,
   name?: Object,
   description?: Object,
   slug?: Object,
