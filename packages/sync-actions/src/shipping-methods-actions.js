@@ -10,6 +10,7 @@ export const baseActionsList = [
   { action: 'setKey', key: 'key' },
   { action: 'changeName', key: 'name' },
   { action: 'setDescription', key: 'description' },
+  { action: 'setLocalizedDescription', key: 'localizedDescription' },
   { action: 'changeIsDefault', key: 'isDefault' },
   { action: 'setPredicate', key: 'predicate' },
   { action: 'changeTaxCategory', key: 'taxCategory' },
