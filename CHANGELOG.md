@@ -1,4 +1,485 @@
+## @commercetools/sync-actions@4.3.0 (2020-03-11)
 
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/state-importer@3.0.9 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/sdk-middleware-http@6.0.5 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/sdk-middleware-auth@6.0.5 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/sdk-auth@3.0.5 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/resource-deleter@2.0.10 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/product-json-to-xlsx@4.0.2 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/product-json-to-csv@5.0.2 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/product-exporter@3.1.0 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/price-exporter@3.0.11 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/personal-data-erasure@3.0.10 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/inventories-exporter@3.0.11 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/integration-tests@0.0.19 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/get-credentials@3.0.14 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/discount-code-importer@3.0.9 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/discount-code-exporter@4.0.11 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/customer-groups-exporter@3.0.10 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/custom-objects-importer@3.0.9 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/custom-objects-exporter@3.0.10 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/csv-parser-state@3.0.10 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/csv-parser-price@4.0.11 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/csv-parser-orders@2.0.15 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/category-exporter@3.0.10 (2020-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1501](https://github.com/commercetools/nodejs/pull/1501) feat(sync-actions): add localized description for shipping methods ([@tdeekens](https://github.com/tdeekens))
+- `product-json-to-csv`
+  - [#1496](https://github.com/commercetools/nodejs/pull/1496) feat(product-exporter): add productTypeKey column while exporting ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1499](https://github.com/commercetools/nodejs/pull/1499) chore(deps): update all dependencies (major) ([@renovate[bot]](https://github.com/apps/renovate))
+- `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1495](https://github.com/commercetools/nodejs/pull/1495) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Tobias Deekens ([@tdeekens](https://github.com/tdeekens))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
 
 ## @commercetools/typescript-sdk@0.0.17-alpha.0 (2020-02-13)
 
