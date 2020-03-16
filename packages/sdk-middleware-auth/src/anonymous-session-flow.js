@@ -40,7 +40,6 @@ export default function createAuthMiddlewareForAnonymousSessionFlow(
       requestState,
       tokenCache,
       fetch: options.fetch,
-      clientId: options.credentials.clientId,
     }
     authMiddlewareBase(params, next, options)
   }

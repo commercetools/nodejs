@@ -171,9 +171,16 @@ export type TokenStore = {
   expirationTime: number,
   refreshToken?: string,
 }
+
+export type TokenCacheOptions = {
+  clientId: string,
+  projectKey: string,
+  host: string,
+}
+
 export type TokenCache = {
-  get: (clientId?: string) => TokenStore,
-  set: (cache: TokenStore, clientId?: string) => TokenStore,
+  get: (tokenCacheOptions?: TokenCacheOptions) => TokenStore,
+  set: (cache: TokenStore, tokenCacheOptions?: TokenCacheOptions) => void,
 }
 
 /* Request */
@@ -184,12 +191,12 @@ type requestBaseOptions = {
   body: string,
   basicAuth: string,
   pendingTasks: Array<Task>,
-  clientId: string,
   requestState: {
     get: () => RequestState,
-    set: (requestState: RequestState) => RequestState,
+    set: (requestState: RequestState) => void,
   },
   tokenCache: TokenCache,
+  tokenCacheKey?: TokenCacheOptions,
 }
 export type executeRequestOptions = requestBaseOptions & {
   fetcher: (url: string, args?: Object) => Promise<any>,

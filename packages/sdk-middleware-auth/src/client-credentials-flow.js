@@ -9,6 +9,7 @@ import type {
 } from 'types/sdk'
 
 import { buildRequestForClientCredentialsFlow } from './build-requests'
+import buildTokenCacheKey from './build-token-cache-key'
 import authMiddlewareBase from './base-auth-flow'
 import store from './utils'
 
@@ -44,8 +45,8 @@ export default function createAuthMiddlewareForClientCredentialsFlow(
       pendingTasks,
       requestState,
       tokenCache,
+      tokenCacheKey: buildTokenCacheKey(options),
       fetch: options.fetch,
-      clientId: options.credentials.clientId,
     }
     authMiddlewareBase(params, next)
   }

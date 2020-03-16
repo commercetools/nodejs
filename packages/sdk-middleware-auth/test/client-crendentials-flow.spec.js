@@ -49,6 +49,11 @@ describe('Client Crentials Flow', () => {
           pendingTasks: [],
           url: 'https://auth.commercetools.co/oauth/token',
           basicAuth: 'MTIzOnNlY3JldA==',
+          tokenCacheKey: {
+            host: 'https://auth.commercetools.co',
+            projectKey: 'foo',
+            clientId: '123',
+          },
         })
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)
         resolve()
@@ -83,7 +88,11 @@ describe('Client Crentials Flow', () => {
           basicAuth: 'MTIzOnNlY3JldA==',
           fetch,
           tokenCache,
-          clientId: '123',
+          tokenCacheKey: {
+            host: 'https://auth.commercetools.co',
+            projectKey: 'foo',
+            clientId: '123',
+          },
         })
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)
         resolve()
