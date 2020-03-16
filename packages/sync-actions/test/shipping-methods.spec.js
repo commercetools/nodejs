@@ -11,6 +11,7 @@ describe('Exports', () => {
       { action: 'setKey', key: 'key' },
       { action: 'changeName', key: 'name' },
       { action: 'setDescription', key: 'description' },
+      { action: 'setLocalizedDescription', key: 'localizedDescription' },
       { action: 'changeIsDefault', key: 'isDefault' },
       { action: 'setPredicate', key: 'predicate' },
       { action: 'changeTaxCategory', key: 'taxCategory' },
@@ -68,6 +69,29 @@ describe('Actions', () => {
         {
           action: 'setDescription',
           description: now.description,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
+    test('should build `setLocalizedDescription` action', () => {
+      const before = {
+        localizedDescription: {
+          en: 'Custom description',
+        },
+      }
+      const now = {
+        localizedDescription: {
+          fr: 'Description personnalisée',
+          en: 'Custom description',
+        },
+      }
+
+      const actual = shippingMethodsSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'setLocalizedDescription',
+          localizedDescription: now.localizedDescription,
         },
       ]
       expect(actual).toEqual(expected)
