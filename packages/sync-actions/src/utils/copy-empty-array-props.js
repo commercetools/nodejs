@@ -1,6 +1,6 @@
 /**
  * @function copyEmptyArrayProps
- * @deprecated Takes two objects and if there is Array props in oldObj which doesnt exist in newObj then it Copy name with empty value
+ * @description Takes two objects and if there is Array props in oldObj which doesnt exist in newObj then it Copy name with empty value
  * @param {Object} oldObj
  * @param {Object} newObj
  * @returns {Array} Inorder Array [oldObj, newObj]

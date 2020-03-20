@@ -233,7 +233,7 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
 
-    test('should return empty array', () => {
+    test('should throw no exception on missing assets', () => {
       const before = {
         assets: [],
       }
