@@ -12,6 +12,7 @@ import actionsMapCustom from './utils/action-map-custom'
 import actionsMapAssets from './assets-actions'
 import * as categoryActions from './category-actions'
 import * as diffpatcher from './utils/diffpatcher'
+import copyEmptyArrayProps from './utils/copy-empty-array-props'
 
 export const actionGroups = ['base', 'references', 'meta', 'custom', 'assets']
 
@@ -80,6 +81,10 @@ export default (
     mapActionGroup,
     syncActionConfig
   )
-  const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
+  const buildActions = createBuildActions(
+    diffpatcher.diff,
+    doMapActions,
+    copyEmptyArrayProps
+  )
   return { buildActions }
 }
