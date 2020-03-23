@@ -68,7 +68,7 @@ import PersonalDataErasure from '@commercetools/personal-data-erasure'
 const options = {
     apiConfig: {
       apiUrl: 'https://api.europe-west1.gcp.commercetools.com'
-      host: 'https://auth.sphere.com'
+      host: 'https://auth.europe-west1.gcp.commercetools.com'
       project_key: <PROJECT_KEY>,
       credentials: {
         clientId: '*********',
