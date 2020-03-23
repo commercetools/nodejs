@@ -52,7 +52,7 @@ describe('Channels', () => {
     getCredentials(projectKey)
       .then(credentials => {
         apiConfig = {
-          host: 'https://https://docs.commercetools.com/http-api-authorization#http-api---authorization',
+          host: 'https://auth.europe-west1.gcp.commercetools.com',
           apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
           projectKey,
           credentials: {

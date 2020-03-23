@@ -29,7 +29,7 @@ Options:
   --apiUrl                   The host URL of the HTTP API service.
                                               [default: "https://api.europe-west1.gcp.commercetools.com"]
   --authUrl                  The host URL of the OAuth API service.
-                                             [default: "https://https://docs.commercetools.com/http-api-authorization#http-api---authorization"]
+                                             [default: "https://auth.europe-west1.gcp.commercetools.com"]
   --accessToken              CTP client access token
                              Required scopes: ['view_products', 'manage_products'][string]
   --projectKey, -p           API project key.                         [required]

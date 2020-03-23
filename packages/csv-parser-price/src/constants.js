@@ -1,8 +1,7 @@
 const CONSTANTS = {
   host: {
     api: 'https://api.europe-west1.gcp.commercetools.com',
-    auth:
-      'https://https://docs.commercetools.com/http-api-authorization#http-api---authorization',
+    auth: 'https://auth.europe-west1.gcp.commercetools.com',
   },
 
   field: {

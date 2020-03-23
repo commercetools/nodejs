@@ -36,8 +36,7 @@ import fetch from 'node-fetch'
 const projectKey = 'some_project_key'
 
 const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
-  host:
-    'https://https://docs.commercetools.com/http-api-authorization#http-api---authorization',
+  host: 'https://auth.europe-west1.gcp.commercetools.com',
   projectKey,
   credentials: {
     clientId: 'some_id',

@@ -42,7 +42,7 @@ Options:
   --apiUrl                   The host URL of the HTTP API service.
                                               [default: "https://api.europe-west1.gcp.commercetools.com"]
   --authUrl                  The host URL of the OAuth API service.
-                                             [default: "https://https://docs.commercetools.com/http-api-authorization#http-api---authorization"]
+                                             [default: "https://auth.europe-west1.gcp.commercetools.com"]
   --delimiter, -d            Used CSV delimiter.                  [default: ","]
   --multiValueDelimiter, -m  Used CSV delimiter in multiValue fields.
                                                                   [default: ";"]

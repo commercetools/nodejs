@@ -47,8 +47,7 @@ ${description}`
     describe: 'The host URL of the HTTP API service.',
   })
   .option('authUrl', {
-    default:
-      'https://https://docs.commercetools.com/http-api-authorization#http-api---authorization',
+    default: 'https://auth.europe-west1.gcp.commercetools.com',
     describe: 'The host URL of the OAuth API service.',
   })
   .option('delimiter', {
