@@ -23,9 +23,9 @@ Options:
   --inputFile, -i   Path to input CSV file.                   [default: "stdin"]
   --outputFile, -o  Path to output JSON file.                [default: "stdout"]
   --apiUrl          The host URL of the HTTP API service.
-                                              [default: "https://api.sphere.io"]
+                                              [default: "https://api.europe-west1.gcp.commercetools.com"]
   --authUrl         The host URL of the OAuth API service.
-                                             [default: "https://auth.sphere.io"]
+                                             [default: "https://https://docs.commercetools.com/http-api-authorization#http-api---authorization"]
   --batchSize, -b   Number of CSV rows to handle simultaneously.  [default: 100]
   --delimiter, -d   Used CSV delimiter.                           [default: ","]
   --accessToken     CTP client access token

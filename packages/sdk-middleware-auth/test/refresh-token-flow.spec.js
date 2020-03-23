@@ -15,7 +15,7 @@ function createTestRequest(options) {
 
 function createTestMiddlewareOptions(options) {
   return {
-    host: 'https://auth.commercetools.co',
+    host: 'https://auth.europe-west1.gcp.commercetools.com',
     projectKey: 'foo',
     credentials: {
       clientId: '123',
@@ -45,7 +45,7 @@ describe('Refresh Token Flow', () => {
           request,
           response,
           pendingTasks: [],
-          url: 'https://auth.commercetools.co/oauth/token',
+          url: 'https://auth.europe-west1.gcp.commercetools.com/oauth/token',
           basicAuth: 'MTIzOnNlY3JldA==',
           body: 'grant_type=refresh_token&refresh_token=foobar123%40%23%25%3D',
         })

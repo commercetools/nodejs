@@ -15,8 +15,8 @@ describe('Auth Middleware Flows', () => {
     () =>
       getCredentials(projectKey).then(credentials => {
         apiConfig = {
-          host: 'https://auth.sphere.io',
-          apiUrl: 'https://api.sphere.io',
+          host: 'https://https://docs.commercetools.com/http-api-authorization#http-api---authorization',
+          apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
           projectKey,
           credentials: {
             clientId: credentials.clientId,
@@ -29,7 +29,7 @@ describe('Auth Middleware Flows', () => {
 
   describe('Anonymous Session Flow', () => {
     const httpMiddleware = createHttpMiddleware({
-      host: 'https://api.sphere.io',
+      host: 'https://api.europe-west1.gcp.commercetools.com',
       fetch,
     })
 

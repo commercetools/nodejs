@@ -53,8 +53,8 @@ describe('personal data erasure', () => {
     const setupProject = async () => {
       const credentials = await getCredentials(projectKey)
       apiConfig = {
-        host: 'https://auth.sphere.io',
-        apiUrl: 'https://api.sphere.io',
+        host: 'https://https://docs.commercetools.com/http-api-authorization#http-api---authorization',
+        apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
         projectKey,
         credentials,
       }

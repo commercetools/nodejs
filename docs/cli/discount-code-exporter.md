@@ -40,9 +40,9 @@ Options:
                                                                  [default: "en"]
   --output, -o               Path to output file.            [default: "stdout"]
   --apiUrl                   The host URL of the HTTP API service.
-                                              [default: "https://api.sphere.io"]
+                                              [default: "https://api.europe-west1.gcp.commercetools.com"]
   --authUrl                  The host URL of the OAuth API service.
-                                             [default: "https://auth.sphere.io"]
+                                             [default: "https://https://docs.commercetools.com/http-api-authorization#http-api---authorization"]
   --delimiter, -d            Used CSV delimiter.                  [default: ","]
   --multiValueDelimiter, -m  Used CSV delimiter in multiValue fields.
                                                                   [default: ";"]
@@ -78,7 +78,7 @@ import fs from 'fs'
 
 const options = {
     apiConfig: {
-      apiUrl: 'https://api.sphere.io'
+      apiUrl: 'https://api.europe-west1.gcp.commercetools.com'
       host: 'https://auth.sphere.com'
       project_key: <PROJECT_KEY>,
       credentials: {
