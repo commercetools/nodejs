@@ -411,8 +411,8 @@ describe('Base Auth Flow', () => {
 
   describe('client id token cache', () => {
     let tokenCache
-    const createCacheKey = cacheKey =>
-      `${cacheKey.clientId}-${cacheKey.projectKey}-${cacheKey.host}`
+    const createCacheKey = options =>
+      `${options.clientId}-${options.projectKey}-${options.host}`
 
     beforeEach(() => {
       tokenCache = {
@@ -428,7 +428,7 @@ describe('Base Auth Flow', () => {
 
     test('it stores token in token cache in context of token cache key', () =>
       new Promise(resolve => {
-        const tokenCacheKey = {
+        const tokenCacheKeyOptions = {
           clientId: 'clientId',
           projectKey: 'projectKey',
           host: 'host',
