@@ -1,3 +1,83 @@
+## @commercetools/sdk-middleware-auth@6.1.0 (2020-03-25)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-auth`
+  - [#1498](https://github.com/commercetools/nodejs/pull/1498) feat: shared token cached between different client ([@kamaz](https://github.com/kamaz))
+
+#### :house: Maintenance
+
+- `discount-code-generator`, `product-json-to-csv`
+  - [#1503](https://github.com/commercetools/nodejs/pull/1503) fix(deps): update dependency json2csv to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Kamaz ([@kamaz](https://github.com/kamaz))
+
+## @commercetools/product-json-to-xlsx@4.0.3 (2020-03-25)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-auth`
+  - [#1498](https://github.com/commercetools/nodejs/pull/1498) feat: shared token cached between different client ([@kamaz](https://github.com/kamaz))
+
+#### :house: Maintenance
+
+- `discount-code-generator`, `product-json-to-csv`
+  - [#1503](https://github.com/commercetools/nodejs/pull/1503) fix(deps): update dependency json2csv to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Kamaz ([@kamaz](https://github.com/kamaz))
+
+## @commercetools/product-json-to-csv@5.0.3 (2020-03-25)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-auth`
+  - [#1498](https://github.com/commercetools/nodejs/pull/1498) feat: shared token cached between different client ([@kamaz](https://github.com/kamaz))
+
+#### :house: Maintenance
+
+- `discount-code-generator`, `product-json-to-csv`
+  - [#1503](https://github.com/commercetools/nodejs/pull/1503) fix(deps): update dependency json2csv to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Kamaz ([@kamaz](https://github.com/kamaz))
+
+## @commercetools/integration-tests@0.0.20 (2020-03-25)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-auth`
+  - [#1498](https://github.com/commercetools/nodejs/pull/1498) feat: shared token cached between different client ([@kamaz](https://github.com/kamaz))
+
+#### :house: Maintenance
+
+- `discount-code-generator`, `product-json-to-csv`
+  - [#1503](https://github.com/commercetools/nodejs/pull/1503) fix(deps): update dependency json2csv to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Kamaz ([@kamaz](https://github.com/kamaz))
+
+## @commercetools/discount-code-generator@2.0.8 (2020-03-25)
+
+#### :rocket: New Feature
+
+- `sdk-middleware-auth`
+  - [#1498](https://github.com/commercetools/nodejs/pull/1498) feat: shared token cached between different client ([@kamaz](https://github.com/kamaz))
+
+#### :house: Maintenance
+
+- `discount-code-generator`, `product-json-to-csv`
+  - [#1503](https://github.com/commercetools/nodejs/pull/1503) fix(deps): update dependency json2csv to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Kamaz ([@kamaz](https://github.com/kamaz))
+
 ## @commercetools/sync-actions@4.3.0 (2020-03-11)
 
 #### :rocket: New Feature
