@@ -1,3 +1,135 @@
+## @commercetools/sdk-middleware-auth@6.1.1 (2020-03-25)
+
+#### :nail_care: Enhancement
+
+- `category-exporter`, `csv-parser-orders`, `csv-parser-price`, `custom-objects-exporter`, `customer-groups-exporter`, `discount-code-exporter`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `resource-deleter`, `sdk-middleware-auth`
+  - [#1507](https://github.com/commercetools/nodejs/pull/1507) improvement(packages): change .sphere.io .commercetools.co to .europe-west1.gcp.commercetools.com ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/resource-deleter@2.0.11 (2020-03-25)
+
+#### :nail_care: Enhancement
+
+- `category-exporter`, `csv-parser-orders`, `csv-parser-price`, `custom-objects-exporter`, `customer-groups-exporter`, `discount-code-exporter`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `resource-deleter`, `sdk-middleware-auth`
+  - [#1507](https://github.com/commercetools/nodejs/pull/1507) improvement(packages): change .sphere.io .commercetools.co to .europe-west1.gcp.commercetools.com ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/price-exporter@3.0.12 (2020-03-25)
+
+#### :nail_care: Enhancement
+
+- `category-exporter`, `csv-parser-orders`, `csv-parser-price`, `custom-objects-exporter`, `customer-groups-exporter`, `discount-code-exporter`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `resource-deleter`, `sdk-middleware-auth`
+  - [#1507](https://github.com/commercetools/nodejs/pull/1507) improvement(packages): change .sphere.io .commercetools.co to .europe-west1.gcp.commercetools.com ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/personal-data-erasure@3.0.11 (2020-03-25)
+
+#### :nail_care: Enhancement
+
+- `category-exporter`, `csv-parser-orders`, `csv-parser-price`, `custom-objects-exporter`, `customer-groups-exporter`, `discount-code-exporter`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `resource-deleter`, `sdk-middleware-auth`
+  - [#1507](https://github.com/commercetools/nodejs/pull/1507) improvement(packages): change .sphere.io .commercetools.co to .europe-west1.gcp.commercetools.com ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/inventories-exporter@3.0.12 (2020-03-25)
+
+#### :nail_care: Enhancement
+
+- `category-exporter`, `csv-parser-orders`, `csv-parser-price`, `custom-objects-exporter`, `customer-groups-exporter`, `discount-code-exporter`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `resource-deleter`, `sdk-middleware-auth`
+  - [#1507](https://github.com/commercetools/nodejs/pull/1507) improvement(packages): change .sphere.io .commercetools.co to .europe-west1.gcp.commercetools.com ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/integration-tests@0.0.22 (2020-03-25)
+
+#### :nail_care: Enhancement
+
+- `category-exporter`, `csv-parser-orders`, `csv-parser-price`, `custom-objects-exporter`, `customer-groups-exporter`, `discount-code-exporter`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `resource-deleter`, `sdk-middleware-auth`
+  - [#1507](https://github.com/commercetools/nodejs/pull/1507) improvement(packages): change .sphere.io .commercetools.co to .europe-west1.gcp.commercetools.com ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/discount-code-exporter@4.0.12 (2020-03-25)
+
+#### :nail_care: Enhancement
+
+- `category-exporter`, `csv-parser-orders`, `csv-parser-price`, `custom-objects-exporter`, `customer-groups-exporter`, `discount-code-exporter`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `resource-deleter`, `sdk-middleware-auth`
+  - [#1507](https://github.com/commercetools/nodejs/pull/1507) improvement(packages): change .sphere.io .commercetools.co to .europe-west1.gcp.commercetools.com ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/customer-groups-exporter@3.0.11 (2020-03-25)
+
+#### :nail_care: Enhancement
+
+- `category-exporter`, `csv-parser-orders`, `csv-parser-price`, `custom-objects-exporter`, `customer-groups-exporter`, `discount-code-exporter`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `resource-deleter`, `sdk-middleware-auth`
+  - [#1507](https://github.com/commercetools/nodejs/pull/1507) improvement(packages): change .sphere.io .commercetools.co to .europe-west1.gcp.commercetools.com ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/custom-objects-exporter@3.0.11 (2020-03-25)
+
+#### :nail_care: Enhancement
+
+- `category-exporter`, `csv-parser-orders`, `csv-parser-price`, `custom-objects-exporter`, `customer-groups-exporter`, `discount-code-exporter`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `resource-deleter`, `sdk-middleware-auth`
+  - [#1507](https://github.com/commercetools/nodejs/pull/1507) improvement(packages): change .sphere.io .commercetools.co to .europe-west1.gcp.commercetools.com ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/csv-parser-price@4.0.12 (2020-03-25)
+
+#### :nail_care: Enhancement
+
+- `category-exporter`, `csv-parser-orders`, `csv-parser-price`, `custom-objects-exporter`, `customer-groups-exporter`, `discount-code-exporter`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `resource-deleter`, `sdk-middleware-auth`
+  - [#1507](https://github.com/commercetools/nodejs/pull/1507) improvement(packages): change .sphere.io .commercetools.co to .europe-west1.gcp.commercetools.com ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/csv-parser-orders@2.0.16 (2020-03-25)
+
+#### :nail_care: Enhancement
+
+- `category-exporter`, `csv-parser-orders`, `csv-parser-price`, `custom-objects-exporter`, `customer-groups-exporter`, `discount-code-exporter`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `resource-deleter`, `sdk-middleware-auth`
+  - [#1507](https://github.com/commercetools/nodejs/pull/1507) improvement(packages): change .sphere.io .commercetools.co to .europe-west1.gcp.commercetools.com ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/category-exporter@3.0.11 (2020-03-25)
+
+#### :nail_care: Enhancement
+
+- `category-exporter`, `csv-parser-orders`, `csv-parser-price`, `custom-objects-exporter`, `customer-groups-exporter`, `discount-code-exporter`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `resource-deleter`, `sdk-middleware-auth`
+  - [#1507](https://github.com/commercetools/nodejs/pull/1507) improvement(packages): change .sphere.io .commercetools.co to .europe-west1.gcp.commercetools.com ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
 ## @commercetools/sync-actions@4.3.1 (2020-03-25)
 
 #### :bug: Bug Fix
