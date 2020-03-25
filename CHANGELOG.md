@@ -1,3 +1,58 @@
+## @commercetools/sync-actions@4.3.1 (2020-03-25)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1505](https://github.com/commercetools/nodejs/pull/1505) fix(sync-actions): bug where we throw on empty assets in categories ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/state-importer@3.0.10 (2020-03-25)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1505](https://github.com/commercetools/nodejs/pull/1505) fix(sync-actions): bug where we throw on empty assets in categories ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/integration-tests@0.0.21 (2020-03-25)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1505](https://github.com/commercetools/nodejs/pull/1505) fix(sync-actions): bug where we throw on empty assets in categories ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/discount-code-importer@3.0.10 (2020-03-25)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1505](https://github.com/commercetools/nodejs/pull/1505) fix(sync-actions): bug where we throw on empty assets in categories ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/custom-objects-importer@3.0.10 (2020-03-25)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1505](https://github.com/commercetools/nodejs/pull/1505) fix(sync-actions): bug where we throw on empty assets in categories ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
 ## @commercetools/sdk-middleware-auth@6.1.0 (2020-03-25)
 
 #### :rocket: New Feature
