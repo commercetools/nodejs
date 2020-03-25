@@ -1,7 +1,7 @@
 const CONSTANTS = {
   host: {
-    api: 'https://api.sphere.io',
-    auth: 'https://auth.sphere.io',
+    api: 'https://api.europe-west1.gcp.commercetools.com',
+    auth: 'https://auth.europe-west1.gcp.commercetools.com',
   },
 
   standardOption: {

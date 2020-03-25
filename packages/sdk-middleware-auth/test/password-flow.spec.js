@@ -19,7 +19,7 @@ function createTestRequest(options) {
 
 function createTestMiddlewareOptions(options) {
   return {
-    host: 'https://auth.commercetools.co',
+    host: 'https://auth.europe-west1.gcp.commercetools.com',
     projectKey: 'foo',
     credentials: {
       clientId: '123',
@@ -52,7 +52,8 @@ describe('Password Flow', () => {
           request,
           response,
           pendingTasks: [],
-          url: 'https://auth.commercetools.co/oauth/foo/customers/token',
+          url:
+            'https://auth.europe-west1.gcp.commercetools.com/oauth/foo/customers/token',
           basicAuth: 'MTIzOnNlY3JldA==',
         })
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)

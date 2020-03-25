@@ -31,7 +31,7 @@ describe('Channels', () => {
   ]
   const service = createRequestBuilder({ projectKey }).channels
   const httpMiddleware = createHttpMiddleware({
-    host: 'https://api.sphere.io',
+    host: 'https://api.europe-west1.gcp.commercetools.com',
     fetch,
   })
   const queueMiddleware = createQueueMiddleware({
@@ -52,8 +52,8 @@ describe('Channels', () => {
     getCredentials(projectKey)
       .then(credentials => {
         apiConfig = {
-          host: 'https://auth.sphere.io',
-          apiUrl: 'https://api.sphere.io',
+          host: 'https://auth.europe-west1.gcp.commercetools.com',
+          apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
           projectKey,
           credentials: {
             clientId: credentials.clientId,

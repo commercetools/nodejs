@@ -10,9 +10,9 @@ Options:
   --version         Show version number                                [boolean]
   --output, -o      Path to output file.                     [default: \\"stdout\\"]
   --apiUrl          The host URL of the HTTP API service.
-                                              [default: \\"https://api.sphere.io\\"]
+                                              [default: \\"https://api.europe-west1.gcp.commercetools.com\\"]
   --authUrl         The host URL of the OAuth API service.
-                                             [default: \\"https://auth.sphere.io\\"]
+                                             [default: \\"https://auth.europe-west1.gcp.commercetools.com\\"]
   --accessToken     CTP client access token.
                     Required scopes: ['manage_products', 'manage_customers',
                     'manage_types']

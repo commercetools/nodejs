@@ -59,7 +59,7 @@ You can use this package from the [`sphere-node-cli`](https://github.com/spherei
 Then you can import this file using the cli:
 
 ```bash
-sphere import -t customObject -p my-project-key --host 'https://api.sphere.io' --authHost 'https://auth.sphere.io' -f /path/to/file.json -c
+sphere import -t customObject -p my-project-key --host 'https://api.europe-west1.gcp.commercetools.com' --authHost 'https://auth.europe-west1.gcp.commercetools.com' -f /path/to/file.json -c
 '{"continueOnProblems": true}'
 ```
 

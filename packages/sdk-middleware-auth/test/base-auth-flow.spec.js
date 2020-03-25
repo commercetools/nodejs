@@ -23,7 +23,7 @@ function createTestResponse(options) {
 
 function createTestMiddlewareOptions(options) {
   return {
-    host: 'https://auth.commercetools.co',
+    host: 'https://auth.europe-west1.gcp.commercetools.com',
     projectKey: 'foo',
     credentials: {
       clientId: '123',

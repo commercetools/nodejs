@@ -16,7 +16,7 @@ function createTestRequest(options) {
 
 function createTestMiddlewareOptions(options) {
   return {
-    host: 'https://auth.commercetools.co',
+    host: 'https://auth.europe-west1.gcp.commercetools.com',
     projectKey: 'foo',
     credentials: {
       clientId: '123',
@@ -43,7 +43,7 @@ describe('Anonymous Session Flow', () => {
         expect(actualParams.response).toEqual(response)
         expect(actualParams.pendingTasks).toEqual([])
         expect(actualParams.url).toBe(
-          'https://auth.commercetools.co/oauth/foo/anonymous/token'
+          'https://auth.europe-west1.gcp.commercetools.com/oauth/foo/anonymous/token'
         )
         expect(actualParams.basicAuth).toBe('MTIzOnNlY3JldA==')
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)

@@ -28,11 +28,11 @@ ${description}`
     demand: true,
   })
   .option('apiUrl', {
-    default: 'https://api.sphere.io',
+    default: 'https://api.europe-west1.gcp.commercetools.com',
     describe: 'The host URL of the HTTP API service.',
   })
   .option('authUrl', {
-    default: 'https://auth.sphere.io',
+    default: 'https://auth.europe-west1.gcp.commercetools.com',
     describe: 'The host URL of the OAuth API service.',
   })
   .option('accessToken', {
