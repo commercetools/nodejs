@@ -433,6 +433,7 @@ describe('Base Auth Flow', () => {
           projectKey: 'projectKey',
           host: 'host',
         }
+        const tokenCacheKey = createCacheKey(tokenCacheKeyOptions)
         const customTokenCache = {
           cache: {},
           get(cacheKey) {
