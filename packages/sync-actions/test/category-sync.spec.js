@@ -232,6 +232,16 @@ describe('Actions', () => {
       ]
       expect(actual).toEqual(expected)
     })
+
+    test('should throw no exception on missing assets', () => {
+      const before = {
+        assets: [],
+      }
+      const now = {}
+      const actual = categorySync.buildActions(now, before)
+      const expected = []
+      expect(actual).toEqual(expected)
+    })
   })
 
   test('should build "removeAsset" and "addAsset" action when asset is changed', () => {
