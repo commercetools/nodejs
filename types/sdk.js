@@ -89,6 +89,7 @@ export type ClientOptions = {
 }
 
 export type ConfigFetch = (url: string, args?: Object) => Promise<any>
+
 export type AuthMiddlewareOptions = {
   host: string,
   projectKey: string,
@@ -101,6 +102,7 @@ export type AuthMiddlewareOptions = {
   // For internal usage only
   oauthUri: string,
   fetch?: ConfigFetch,
+  tokenCache?: TokenCache,
 }
 
 export type AuthOptions = {
@@ -170,6 +172,17 @@ export type TokenStore = {
   refreshToken?: string,
 }
 
+export type TokenCacheOptions = {
+  clientId: string,
+  projectKey: string,
+  host: string,
+}
+
+export type TokenCache = {
+  get: (tokenCacheOptions?: TokenCacheOptions) => TokenStore,
+  set: (cache: TokenStore, tokenCacheOptions?: TokenCacheOptions) => void,
+}
+
 /* Request */
 
 type requestBaseOptions = {
@@ -180,12 +193,10 @@ type requestBaseOptions = {
   pendingTasks: Array<Task>,
   requestState: {
     get: () => RequestState,
-    set: (requestState: RequestState) => RequestState,
+    set: (requestState: RequestState) => void,
   },
-  tokenCache: {
-    get: () => TokenStore,
-    set: (cache: TokenStore) => TokenStore,
-  },
+  tokenCache: TokenCache,
+  tokenCacheKey?: TokenCacheOptions,
 }
 export type executeRequestOptions = requestBaseOptions & {
   fetcher: (url: string, args?: Object) => Promise<any>,

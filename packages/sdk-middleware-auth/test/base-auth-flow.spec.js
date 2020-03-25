@@ -408,4 +408,184 @@ describe('Base Auth Flow', () => {
       )
       createBaseMiddleware({ pendingTasks, tokenCache, requestState }, call2)
     }))
+
+  describe('client id token cache', () => {
+    let tokenCache
+    const createCacheKey = options =>
+      `${options.clientId}-${options.projectKey}-${options.host}`
+
+    beforeEach(() => {
+      tokenCache = {
+        cache: {},
+        get(client) {
+          return this.cache[client]
+        },
+        set(value, client) {
+          this.cache[client] = value
+        },
+      }
+    })
+
+    test('it stores token in token cache in context of token cache key', () =>
+      new Promise(resolve => {
+        const tokenCacheKeyOptions = {
+          clientId: 'clientId',
+          projectKey: 'projectKey',
+          host: 'host',
+        }
+        const customTokenCache = {
+          cache: {},
+          get(cacheKey) {
+            return this.cache[createCacheKey(cacheKey)]
+          },
+          set(token, cacheKey) {
+            this.cache[createCacheKey(cacheKey)] = token
+          },
+        }
+        const next = req => {
+          expect(req).toHaveProperty('headers.Authorization', 'Bearer xxx')
+          expect(customTokenCache.get(tokenCacheKey)).toEqual(
+            expect.objectContaining({
+              token: 'xxx',
+            })
+          )
+          resolve()
+        }
+
+        const middlewareOptions = createTestMiddlewareOptions()
+
+        nock(middlewareOptions.host)
+          .filteringRequestBody(body => {
+            expect(body).toBe('grant_type=client_credentials')
+            return '*'
+          })
+          .post('/oauth/token', '*')
+          .reply(200, {
+            access_token: 'xxx',
+            expires_in: 100,
+          })
+        createBaseMiddleware(
+          { tokenCache: customTokenCache, tokenCacheKey },
+          next
+        )
+      }))
+
+    test('ensure to fetch new token only once for each client and keep track of pending tasks in context of client instance of middleware', () =>
+      new Promise(resolve => {
+        const middlewareOptions = createTestMiddlewareOptions()
+        let requestCount = 0
+
+        const tokenCacheKeyOne = {
+          clientId: 'clientIdOne',
+          projectKey: 'projectKey',
+          host: 'host',
+        }
+        const tokenCacheKeyTwo = {
+          clientId: 'clientIdTwo',
+          projectKey: 'projectKey',
+          host: 'host',
+        }
+        nock(middlewareOptions.host)
+          .persist() // <-- use the same interceptor for all requests
+          .log(() => {
+            requestCount += 1
+          }) // keep track of the request count
+          .filteringRequestBody(/.*/, '*')
+          .post('/oauth/token', '*')
+          .reply(200, {
+            access_token: 'xxx',
+            expires_in: Date.now() + 60 * 60 * 24,
+          })
+
+        let nextCount = 0
+        const next = () => {
+          nextCount += 1
+          if (nextCount === 6) {
+            expect(requestCount).toBe(2)
+            // assert that shared cached has been populated
+            expect(tokenCache.get(tokenCacheKeyOne)).toEqual(
+              expect.objectContaining({
+                token: 'xxx',
+              })
+            )
+            expect(tokenCache.get(tokenCacheKeyTwo)).toEqual(
+              expect.objectContaining({
+                token: 'xxx',
+              })
+            )
+            resolve()
+          }
+        }
+        // configure 2 instances of separate clients
+        const pendingTasksClientOne = []
+        const requestStateClientOne = store(false)
+        const pendingTasksClientTwo = []
+        const requestStateClientTwo = store(false)
+        // Execute multiple requests at once.
+        // This should queue all of them for each client
+        createBaseMiddleware(
+          {
+            pendingTasks: pendingTasksClientOne,
+            tokenCache,
+            requestState: requestStateClientOne,
+            tokenCacheKey: tokenCacheKeyOne,
+          },
+          next
+        )
+        createBaseMiddleware(
+          {
+            pendingTasks: pendingTasksClientOne,
+            tokenCache,
+            requestState: requestStateClientOne,
+            tokenCacheKey: tokenCacheKeyOne,
+          },
+          next
+        )
+        createBaseMiddleware(
+          {
+            pendingTasks: pendingTasksClientTwo,
+            tokenCache,
+            requestState: requestStateClientTwo,
+            tokenCacheKey: tokenCacheKeyTwo,
+          },
+          next
+        )
+        createBaseMiddleware(
+          {
+            pendingTasks: pendingTasksClientTwo,
+            tokenCache,
+            requestState: requestStateClientTwo,
+            tokenCacheKey: tokenCacheKeyTwo,
+          },
+          next
+        )
+        createBaseMiddleware(
+          {
+            pendingTasks: pendingTasksClientTwo,
+            tokenCache,
+            requestState: requestStateClientTwo,
+            tokenCacheKey: tokenCacheKeyTwo,
+          },
+          next
+        )
+        createBaseMiddleware(
+          {
+            pendingTasks: pendingTasksClientTwo,
+            tokenCache,
+            requestState: requestStateClientTwo,
+            tokenCacheKey: tokenCacheKeyTwo,
+          },
+          next
+        )
+        createBaseMiddleware(
+          {
+            pendingTasks: pendingTasksClientOne,
+            tokenCache,
+            requestState: requestStateClientOne,
+            tokenCacheKey: tokenCacheKeyOne,
+          },
+          next
+        )
+      }))
+  })
 })

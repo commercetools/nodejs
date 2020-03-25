@@ -42,6 +42,7 @@ function executeRequest({
   requestState,
   pendingTasks,
   response,
+  tokenCacheKey,
 }: executeRequestOptions) {
   fetcher(url, {
     method: 'POST',
@@ -65,7 +66,10 @@ function executeRequest({
               const expirationTime = calculateExpirationTime(expiresIn)
 
               // Cache new token
-              tokenCache.set({ token, expirationTime, refreshToken })
+              tokenCache.set(
+                { token, expirationTime, refreshToken },
+                tokenCacheKey
+              )
 
               // Dispatch all pending requests
               requestState.set(false)
@@ -114,6 +118,7 @@ export default function authMiddlewareBase(
     pendingTasks,
     requestState,
     tokenCache,
+    tokenCacheKey,
     fetch: fetcher,
   }: AuthMiddlewareBaseOptions,
   next: Next,
@@ -137,7 +142,7 @@ export default function authMiddlewareBase(
   }
   // If there was a token in the tokenCache, and it's not expired, append
   // the token in the `Authorization` header.
-  const tokenObj = tokenCache.get()
+  const tokenObj = tokenCache.get(tokenCacheKey)
   if (tokenObj && tokenObj.token && Date.now() < tokenObj.expirationTime) {
     const requestWithAuth = mergeAuthHeader(tokenObj.token, request)
     next(requestWithAuth, response)
@@ -173,6 +178,7 @@ export default function authMiddlewareBase(
         ...userOptions,
         refreshToken: tokenObj.refreshToken,
       }),
+      tokenCacheKey,
       tokenCache,
       requestState,
       pendingTasks,
@@ -187,6 +193,7 @@ export default function authMiddlewareBase(
     url,
     basicAuth,
     body,
+    tokenCacheKey,
     tokenCache,
     requestState,
     pendingTasks,
