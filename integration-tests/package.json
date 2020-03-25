@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@commercetools/integration-tests",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "dependencies": {
     "@commercetools/api-request-builder": "^5.4.2",
     "@commercetools/category-exporter": "^3.0.10",
@@ -13,7 +13,7 @@
     "@commercetools/custom-objects-importer": "^3.0.9",
     "@commercetools/customer-groups-exporter": "^3.0.10",
     "@commercetools/discount-code-exporter": "^4.0.11",
-    "@commercetools/discount-code-generator": "^2.0.7",
+    "@commercetools/discount-code-generator": "^2.0.8",
     "@commercetools/discount-code-importer": "^3.0.9",
     "@commercetools/get-credentials": "^3.0.14",
     "@commercetools/http-user-agent": "2.x",
@@ -21,8 +21,8 @@
     "@commercetools/personal-data-erasure": "^3.0.10",
     "@commercetools/price-exporter": "^3.0.11",
     "@commercetools/product-exporter": "^3.1.0",
-    "@commercetools/product-json-to-csv": "^5.0.2",
-    "@commercetools/product-json-to-xlsx": "^4.0.2",
+    "@commercetools/product-json-to-csv": "^5.0.3",
+    "@commercetools/product-json-to-xlsx": "^4.0.3",
     "@commercetools/resource-deleter": "^2.0.10",
     "@commercetools/sdk-auth": "^3.0.5",
     "@commercetools/sdk-client": "2.x",
