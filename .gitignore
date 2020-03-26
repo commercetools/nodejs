@@ -28,3 +28,4 @@ coverage
 
 # IDE tools
 .idea
+*.swp
