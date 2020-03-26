@@ -22,8 +22,8 @@ describe('State importer', () => {
   beforeAll(() =>
     getCredentials(projectKey).then(credentials => {
       apiConfig = {
-        host: 'https://auth..commercetools.co',
-        apiUrl: 'https://api..commercetools.co',
+        host: 'https://auth..sphere.io',
+        apiUrl: 'https://api..sphere.io',
         projectKey,
         credentials,
       }

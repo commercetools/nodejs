@@ -11,9 +11,9 @@ Options:
   --input, -i         Path to CSV template.
   --output, -o        Path to output file.                   [default: \\"stdout\\"]
   --apiUrl            The host URL of the HTTP API service.
-                                              [default: \\"https://api..commercetools.co\\"]
+                                              [default: \\"https://api..sphere.io\\"]
   --authUrl           The host URL of the OAuth API service.
-                                             [default: \\"https://auth..commercetools.co\\"]
+                                             [default: \\"https://auth..sphere.io\\"]
   --projectKey, -p    API project key.                                [required]
   --accessToken       CTP client access token.
                       Required scopes: ['view_products', 'view_customers',

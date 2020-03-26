@@ -10,9 +10,9 @@ Options:
   --version                  Show version number                       [boolean]
   --projectKey, -p           API project key                            [string]
   --apiUrl                   The host URL of the HTTP API service
-                             [string] [default: \\"https://api.commercetools.com\\"]
+                             [string] [default: \\"https://api.sphere.io\\"]
   --authUrl                  The host URL of the OAuth API service
-                            [string] [default: \\"https://auth.commercetools.com\\"]
+                            [string] [default: \\"https://auth.sphere.io\\"]
   --accessToken              CTP client access token
                              Required scopes: ['view_orders']           [string]
   --input, -i                Path to CSV file.                [default: \\"stdin\\"]
