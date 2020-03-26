@@ -1,6 +1,6 @@
 import typesSyncFn from '../src/types'
 
-const createTestType = custom => ({
+const createTestType = (custom) => ({
   id: 'type-id',
   fieldDefinitions: [],
   ...custom,

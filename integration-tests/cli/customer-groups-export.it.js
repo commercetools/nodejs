@@ -69,7 +69,7 @@ describe('Customer Groups Exporter', () => {
 
       // Assert that the 3 created customer groups are the objects returned
       // `groupName` is only used during creating, `name` is the key returned after that.
-      const returnGroups = customerGroups.map(group => {
+      const returnGroups = customerGroups.map((group) => {
         const { groupName, ...withoutGroupName } = group
         return { ...withoutGroupName, name: groupName }
       })

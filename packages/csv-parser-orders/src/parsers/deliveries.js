@@ -14,11 +14,11 @@ export default class DeliveriesParser extends AbstractParser {
     this.logger.info('Starting Deliveries CSV conversion')
     this._streamInput(input, output)
       .reduce([], DeliveriesParser._groupByDeliveryId)
-      .stopOnError(err => {
+      .stopOnError((err) => {
         this.logger.error(err)
         return output.emit('error', err)
       })
-      .flatMap(data => data |> DeliveriesParser._cleanOrders |> highland)
+      .flatMap((data) => data |> DeliveriesParser._cleanOrders |> highland)
       .pipe(JSONStream.stringify(false))
       .pipe(output)
   }
@@ -120,9 +120,9 @@ export default class DeliveriesParser extends AbstractParser {
 
   // remove internal properties
   static _cleanOrders(orders) {
-    orders.forEach(order =>
-      order.shippingInfo.deliveries.forEach(delivery =>
-        delivery.items.forEach(item => {
+    orders.forEach((order) =>
+      order.shippingInfo.deliveries.forEach((delivery) =>
+        delivery.items.forEach((item) => {
           // eslint-disable-next-line no-param-reassign
           delete item._groupId
         })
@@ -145,7 +145,7 @@ export default class DeliveriesParser extends AbstractParser {
 
     // find newOrder in results using its orderNumber
     const existingOrder = results.find(
-      order => order.orderNumber === newOrder.orderNumber
+      (order) => order.orderNumber === newOrder.orderNumber
     )
 
     if (!existingOrder) results.push(newOrder)
@@ -155,7 +155,7 @@ export default class DeliveriesParser extends AbstractParser {
 
       // find newDelivery in results using its id
       const existingDelivery = oldDeliveries.find(
-        delivery => delivery.id === newDelivery.id
+        (delivery) => delivery.id === newDelivery.id
       )
 
       // if this delivery is not yet in results array, insert it
@@ -183,7 +183,9 @@ export default class DeliveriesParser extends AbstractParser {
   // merge delivery parcels to one array based on parcel.id field
   static _mergeDeliveryParcels(allParcels, newParcel, delivery) {
     // try to find this parcel in array using parcel id
-    const duplicitParcel = allParcels.find(parcel => parcel.id === newParcel.id)
+    const duplicitParcel = allParcels.find(
+      (parcel) => parcel.id === newParcel.id
+    )
 
     // if this parcel item is not yet in array, insert it
     if (!duplicitParcel) return allParcels.push(newParcel)
@@ -204,7 +206,7 @@ export default class DeliveriesParser extends AbstractParser {
   // merge delivery items to one array based on _groupId field
   static _mergeDeliveryItems(allItems, newItem, delivery) {
     const duplicitItem = allItems.find(
-      item => item._groupId === newItem._groupId
+      (item) => item._groupId === newItem._groupId
     )
 
     // if an item is not yet in array, insert it
@@ -242,7 +244,7 @@ export default class DeliveriesParser extends AbstractParser {
     }
 
     // Build parcel object
-    Object.keys(data).forEach(fieldName => {
+    Object.keys(data).forEach((fieldName) => {
       if (!transitionMap[fieldName]) return
 
       // All values are loaded as a string
@@ -271,7 +273,7 @@ export default class DeliveriesParser extends AbstractParser {
   static _parseParcelItems(parcelItemsAsString) {
     if (!parcelItemsAsString) return []
 
-    return parcelItemsAsString.split(';').map(parcelItemString => {
+    return parcelItemsAsString.split(';').map((parcelItemString) => {
       const [id, quantity] = parcelItemString.split(':')
       return {
         id,

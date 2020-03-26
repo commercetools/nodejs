@@ -239,7 +239,7 @@ describe('Auth Flows', () => {
     it('should automatically retrieve tokenInfo', async () => {
       const tokenProvider = new TokenProvider({
         sdkAuth: authClient,
-        fetchTokenInfo: sdkAuth => sdkAuth.clientCredentialsFlow(),
+        fetchTokenInfo: (sdkAuth) => sdkAuth.clientCredentialsFlow(),
       })
 
       const tokenInfo = await tokenProvider.getTokenInfo()

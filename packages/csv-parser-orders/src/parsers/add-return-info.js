@@ -11,7 +11,7 @@ export default class AddReturnInfoParser extends AbstractParser {
     this.logger.info('Starting Return Info CSV conversion')
     this._streamInput(input, output)
       .reduce([], AddReturnInfoParser._reduceOrders)
-      .stopOnError(err => {
+      .stopOnError((err) => {
         this.logger.error(err)
         return output.emit('error', err)
       })
@@ -96,7 +96,7 @@ export default class AddReturnInfoParser extends AbstractParser {
       existingOrder.returnInfo.push(...currentOrder.returnInfo)
     // else concat items from currentOrder
     else
-      existingReturnInfos.forEach(returnInfo => {
+      existingReturnInfos.forEach((returnInfo) => {
         returnInfo.items.push(...currentOrder.returnInfo[0].items)
       })
 

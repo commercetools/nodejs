@@ -28,7 +28,7 @@ Convert commercetools order CSV data to JSON.`
     default: 'stdin',
     describe: 'Path to input CSV file.',
   })
-  .coerce('inputFile', arg => {
+  .coerce('inputFile', (arg) => {
     if (arg !== 'stdin') return fs.createReadStream(String(arg))
 
     return process.stdin
@@ -38,7 +38,7 @@ Convert commercetools order CSV data to JSON.`
     default: 'stdout',
     describe: 'Path to output JSON file.',
   })
-  .coerce('outputFile', arg => {
+  .coerce('outputFile', (arg) => {
     if (arg !== 'stdout') return fs.createWriteStream(String(arg))
 
     return process.stdout
@@ -73,7 +73,7 @@ Convert commercetools order CSV data to JSON.`
     describe: 'Path to file where to save logs.',
   }).argv
 
-const logError = error => {
+const logError = (error) => {
   const errorFormatter = new PrettyError()
 
   if (npmlog.level === 'verbose')
@@ -81,7 +81,7 @@ const logError = error => {
   else process.stderr.write(`ERR: ${error.message || error}`)
 }
 
-const errorHandler = errors => {
+const errorHandler = (errors) => {
   if (Array.isArray(errors)) errors.forEach(logError)
   else logError(errors)
 
@@ -106,9 +106,9 @@ if (args.outputFile === process.stdout)
   npmlog.stream = fs.createWriteStream(args.logFile)
 
 const methodMapping = {
-  lineitemstate: config => new LineItemStateCsvParser(config),
-  returninfo: config => new AddReturnInfoCsvParser(config),
-  deliveries: config => new DeliveriesCsvParser(config),
+  lineitemstate: (config) => new LineItemStateCsvParser(config),
+  returninfo: (config) => new AddReturnInfoCsvParser(config),
+  deliveries: (config) => new DeliveriesCsvParser(config),
 }
 
 // Register error listener

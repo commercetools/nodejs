@@ -49,7 +49,7 @@ describe('Custom Object tests', () => {
     }, 15000)
 
     it('should update custom objects on the CTP', async () => {
-      const oldCustomObjectsToUpdate = customObjects.map(object => ({
+      const oldCustomObjectsToUpdate = customObjects.map((object) => ({
         ...object,
         value: { paymentMethod: 'gold' },
       }))

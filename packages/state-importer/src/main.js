@@ -244,13 +244,15 @@ export default class StateImport {
     if (created + updated + errors.create.length + errors.update.length === 0)
       message = 'Summary: nothing to do, everything is fine'
     else
-      message = `Summary: there were ${created +
-        updated} successfully imported states (${created} were newly created, ${updated} were updated and ${unchanged} were unchanged).`
+      message = `Summary: there were ${
+        created + updated
+      } successfully imported states (${created} were newly created, ${updated} were updated and ${unchanged} were unchanged).`
     if (errors.create.length || errors.update.length)
-      message += ` ${errors.create.length +
-        errors.update.length} errors occured (${
-        errors.create.length
-      } create errors and ${errors.update.length} update errors.)`
+      message += ` ${
+        errors.create.length + errors.update.length
+      } errors occured (${errors.create.length} create errors and ${
+        errors.update.length
+      } update errors.)`
     return {
       reportMessage: message,
       detailedSummary: this._summary,

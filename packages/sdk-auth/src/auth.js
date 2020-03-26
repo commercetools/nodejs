@@ -114,7 +114,7 @@ export default class SdkAuth {
   }
 
   _process(request: AuthRequest) {
-    return this._performRequest(request).then(response =>
+    return this._performRequest(request).then((response) =>
       SdkAuth._handleResponse(request.uri, response)
     )
   }
@@ -156,7 +156,7 @@ export default class SdkAuth {
   }
 
   static _handleResponse(uri: string, response: Object) {
-    return SdkAuth._parseResponseJson(response).then(jsonResponse => {
+    return SdkAuth._parseResponseJson(response).then((jsonResponse) => {
       if (SdkAuth._isErrorResponse(response))
         throw SdkAuth._createResponseError(jsonResponse, uri, response.status)
       return SdkAuth._enrichTokenResponse(jsonResponse)

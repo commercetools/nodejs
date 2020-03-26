@@ -23,7 +23,7 @@ Generate multiple discount codes to import to the commercetools platform.`
     describe: 'Quantity of discount codes to generate. (Between 1 and 500000)',
     demandOption: true,
   })
-  .coerce('quantity', arg => {
+  .coerce('quantity', (arg) => {
     const quantity = parseInt(arg, 10)
     // Limit quantity to 500000 to avoid `out-of-memory` error
     if (quantity <= 0 || quantity > 500000)
@@ -36,7 +36,7 @@ Generate multiple discount codes to import to the commercetools platform.`
     default: 11,
     describe: 'Length of the discount codes to generate.',
   })
-  .coerce('code-length', arg => parseInt(arg, 10))
+  .coerce('code-length', (arg) => parseInt(arg, 10))
   .option('code-prefix', {
     alias: 'p',
     default: '',
@@ -46,7 +46,7 @@ Generate multiple discount codes to import to the commercetools platform.`
     alias: 'i',
     describe: 'Path to code options CSV or JSON file.',
   })
-  .coerce('input', arg => {
+  .coerce('input', (arg) => {
     if (fs.existsSync(arg)) {
       if (arg.match(/\.json$/i) || arg.match(/\.csv$/i)) return String(arg)
 
@@ -59,7 +59,7 @@ Generate multiple discount codes to import to the commercetools platform.`
     default: 'stdout',
     describe: 'Path to store generated output file.',
   })
-  .coerce('output', arg => {
+  .coerce('output', (arg) => {
     if (arg === 'stdout') {
       npmlog.stream = fs.createWriteStream('discountCodeGenerator.log')
       return process.stdout
@@ -83,12 +83,12 @@ Generate multiple discount codes to import to the commercetools platform.`
     default: 'info',
     describe: 'Logging level: error, warn, info or verbose.',
   })
-  .coerce('logLevel', arg => {
+  .coerce('logLevel', (arg) => {
     npmlog.level = arg
   }).argv
 
 // Resolve stream input to javascript object
-const resolveInput = _args => {
+const resolveInput = (_args) => {
   const input = _args.input
   return new Promise((resolve, reject) => {
     if (input === undefined) resolve({})
@@ -103,10 +103,10 @@ const resolveInput = _args => {
             strict: true,
           })
         )
-        .on('error', error => {
+        .on('error', (error) => {
           reject(error)
         })
-        .on('data', data => {
+        .on('data', (data) => {
           const arrayDelim = _args.multiValueDelimiter
           // pass to `prepareInput` to handle object formatting
           _attributes.push(prepareInput(data, arrayDelim))
@@ -129,7 +129,7 @@ const resolveOutput = (_args, outputData) => {
       resolve(total)
     } else if (outputStream.path.match(/\.json$/i)) {
       // Write to json file
-      outputStream.on('error', error => {
+      outputStream.on('error', (error) => {
         reject(error)
       })
       outputStream.end(JSON.stringify(outputData, null, 1))
@@ -139,19 +139,19 @@ const resolveOutput = (_args, outputData) => {
     } else if (outputStream.path.match(/\.csv$/i)) {
       // Convert to csv and write to file
       const arrayDelim = _args.multiValueDelimiter
-      const flatObjects = outputData.map(obj => {
+      const flatObjects = outputData.map((obj) => {
         // Add condition so module doesn't fail if there are no cartDiscounts
         if (obj.cartDiscounts)
           // eslint-disable-next-line no-param-reassign
           obj.cartDiscounts = obj.cartDiscounts
-            .map(cartDiscountObj => cartDiscountObj.id)
+            .map((cartDiscountObj) => cartDiscountObj.id)
             .join(arrayDelim)
         return flatten(obj)
       })
       const csvOutput = parse(flatObjects, {
         del: _args.delimiter,
       })
-      outputStream.on('error', error => {
+      outputStream.on('error', (error) => {
         reject(error)
       })
       outputStream.end(csvOutput)
@@ -163,13 +163,13 @@ const resolveOutput = (_args, outputData) => {
 }
 
 // Build discount code options
-const buildOptions = _args => ({
+const buildOptions = (_args) => ({
   quantity: _args.quantity,
   length: _args['code-length'],
   prefix: _args['code-prefix'],
 })
 
-const logError = error => {
+const logError = (error) => {
   const errorFormatter = new PrettyError()
 
   if (npmlog.level === 'verbose')
@@ -177,7 +177,7 @@ const logError = error => {
   else npmlog.error('', error.message)
 }
 
-const errorHandler = errors => {
+const errorHandler = (errors) => {
   if (Array.isArray(errors)) errors.forEach(logError)
   else logError(errors)
 
@@ -185,12 +185,12 @@ const errorHandler = errors => {
 }
 
 resolveInput(args)
-  .then(attributes => {
+  .then((attributes) => {
     const options = buildOptions(args)
     const codes = discountCodeGenerator(options, attributes)
     return resolveOutput(args, codes)
   })
-  .then(total => {
+  .then((total) => {
     npmlog.info(`Successfully generated ${total} discount codes\n`)
   })
   .catch(errorHandler)

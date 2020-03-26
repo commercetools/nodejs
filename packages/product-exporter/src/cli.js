@@ -43,7 +43,7 @@ Required scopes: ['view_products', 'view_customers']`,
     describe: 'Path to output',
     type: 'string',
   })
-  .coerce('output', arg => {
+  .coerce('output', (arg) => {
     if (arg !== 'stdout') return fs.createWriteStream(String(arg))
 
     return process.stdout
@@ -55,7 +55,7 @@ Required scopes: ['view_products', 'view_customers']`,
     type: 'number',
   })
   // Limit batchSize to 500 in accord with the API
-  .coerce('batchSize', arg => {
+  .coerce('batchSize', (arg) => {
     const batchSize = parseInt(arg, 10)
     if (batchSize <= 0 || batchSize > 500)
       throw new Error('Invalid batchSize, must be a number between 1 and 500')
@@ -120,7 +120,7 @@ const logger = pino(loggerConfig, logDestination)
 
 // print errors to stderr if we use stdout for data output
 // if we save data to output file errors are already logged by pino
-const logError = error => {
+const logError = (error) => {
   const errorFormatter = new PrettyError()
 
   if (logger.level === 'debug')
@@ -128,14 +128,14 @@ const logError = error => {
   else process.stderr.write(`ERR: ${error.message || error}`)
 }
 
-const errorHandler = errors => {
+const errorHandler = (errors) => {
   if (Array.isArray(errors)) errors.forEach(logError)
   else logError(errors)
 
   process.exitCode = 1
 }
 
-const resolveCredentials = _args => {
+const resolveCredentials = (_args) => {
   if (_args.accessToken) return Promise.resolve({})
   return getCredentials(_args.projectKey)
 }
@@ -144,7 +144,7 @@ const resolveCredentials = _args => {
 args.output.on('error', errorHandler)
 
 resolveCredentials(args)
-  .then(credentials => {
+  .then((credentials) => {
     const apiConfig = {
       host: args.authUrl,
       apiUrl: args.apiUrl,
@@ -174,5 +174,5 @@ resolveCredentials(args)
       accessToken
     )
   })
-  .then(productExporter => productExporter.run(args.output))
+  .then((productExporter) => productExporter.run(args.output))
   .catch(errorHandler)

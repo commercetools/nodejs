@@ -47,7 +47,7 @@ describe('Password Flow', () => {
         resolve,
         reject,
       }
-      const next = actualParams => {
+      const next = (actualParams) => {
         expect(actualParams).toMatchObject({
           request,
           response,

@@ -24,7 +24,7 @@ function createTestMiddlewareOptions(options) {
 
 describe('Queue', () => {
   test('correctly enqueue / resolve tasks based on concurrency', () =>
-    new Promise(resolve => {
+    new Promise((resolve) => {
       const request = createTestRequest({
         uri: '/foo/bar',
       })
@@ -71,7 +71,7 @@ describe('Queue', () => {
     }))
 
   test('dispatch incoming tasks with default concurrency', () =>
-    new Promise(resolve => {
+    new Promise((resolve) => {
       const request = createTestRequest({
         uri: '/foo/bar',
       })

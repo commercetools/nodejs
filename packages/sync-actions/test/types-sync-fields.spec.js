@@ -1,6 +1,6 @@
 import typesSyncFn from '../src/types'
 
-const createTestType = custom => ({
+const createTestType = (custom) => ({
   id: 'type-id',
   fieldDefinitions: [],
   ...custom,
@@ -41,7 +41,7 @@ describe('Actions', () => {
     })
     test('should return `addFieldDefinition` action', () => {
       expect(updateActions).toEqual(
-        now.fieldDefinitions.map(fieldDefinition => ({
+        now.fieldDefinitions.map((fieldDefinition) => ({
           action: 'addFieldDefinition',
           fieldDefinition,
         }))
@@ -75,7 +75,7 @@ describe('Actions', () => {
     })
     test('should return `removeFieldDefinition` actions', () => {
       expect(updateActions).toEqual(
-        before.fieldDefinitions.map(fieldDefinition => ({
+        before.fieldDefinitions.map((fieldDefinition) => ({
           action: 'removeFieldDefinition',
           fieldName: fieldDefinition.name,
         }))

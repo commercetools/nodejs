@@ -686,7 +686,7 @@ describe('Actions', () => {
     })
 
     test('should sync when optional fields are different', () => {
-      const actionNames = actions.map(action => action.action)
+      const actionNames = actions.map((action) => action.action)
 
       expect(actions).toHaveLength(2)
       expect(actionNames).toEqual(['changePrice', 'changePrice'])

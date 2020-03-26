@@ -53,5 +53,5 @@ export default function getCredentials(projectKey) {
 
   return Promise.resolve(setCredentialsFromEnvFile())
     .then(() => getCredentialsFromEnvironment(projectKey))
-    .catch(environmentError => Promise.reject(environmentError))
+    .catch((environmentError) => Promise.reject(environmentError))
 }

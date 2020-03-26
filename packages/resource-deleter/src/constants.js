@@ -11,7 +11,7 @@ const CONSTANTS = {
 }
 
 // Go through object because `freeze` works shallow
-Object.keys(CONSTANTS).forEach(key => {
+Object.keys(CONSTANTS).forEach((key) => {
   Object.freeze(CONSTANTS[key])
 })
 

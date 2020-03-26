@@ -62,7 +62,7 @@ apiRoot
   })
   .get()
   .execute()
-  .then(x => {
+  .then((x) => {
     /*...*/
   })
 
@@ -73,7 +73,7 @@ apiRoot
     body: { name: 'product-type-name', description: 'some description' },
   })
   .execute()
-  .then(x => {
+  .then((x) => {
     /*...*/
   })
 
@@ -91,7 +91,7 @@ apiRoot
     },
   })
   .execute()
-  .then(x => {
+  .then((x) => {
     /*...*/
   })
 ```

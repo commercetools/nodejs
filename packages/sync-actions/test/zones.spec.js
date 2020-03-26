@@ -75,7 +75,9 @@ describe('Actions', () => {
 
   describe('`removeLocation`', () => {
     test('should build `removeLocation` action removing one location', () => {
-      const before = { locations: [{ country: 'Spain' }, { country: 'Italy' }] }
+      const before = {
+        locations: [{ country: 'Spain' }, { country: 'Italy' }],
+      }
       const now = { locations: [{ country: 'Spain' }] }
 
       const actual = zonesSync.buildActions(now, before)
@@ -85,7 +87,9 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
     test('should build `removeLocation` action removing two locations', () => {
-      const before = { locations: [{ country: 'Spain' }, { country: 'Italy' }] }
+      const before = {
+        locations: [{ country: 'Spain' }, { country: 'Italy' }],
+      }
       const now = { locations: [] }
 
       const actual = zonesSync.buildActions(now, before)

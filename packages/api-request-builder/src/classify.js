@@ -8,7 +8,7 @@
 export default function classify(object, forceEnumerable = false) {
   const clone = {}
 
-  Object.keys(object).forEach(key => {
+  Object.keys(object).forEach((key) => {
     Object.defineProperty(clone, key, {
       value: object[key],
       enumerable: forceEnumerable ? true : typeof object[key] === 'function',

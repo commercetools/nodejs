@@ -29,7 +29,7 @@ export function actionsMapDeliveries(diff, oldObj, newObj) {
   if (!deliveriesDiff) return []
 
   const handler = createBuildArrayActions('deliveries', {
-    [ADD_ACTIONS]: newObject => ({
+    [ADD_ACTIONS]: (newObject) => ({
       action: 'addDelivery',
       items: newObject.items,
       parcels: newObject.parcels,

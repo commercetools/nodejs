@@ -26,7 +26,7 @@ nock('https://api.commercetools.com')
   .reply(201, { id: '1' })
 
   // we could also do assertions on the body payload
-  .filteringRequestBody(body => {
+  .filteringRequestBody((body) => {
     expect(body).toBe(JSON.stringify({ foo: 'bar' }))
     return '*'
   })
@@ -44,10 +44,10 @@ Another approach would be to provide a `http-mock` _middleware_ that replaces th
 ```js
 import { getErrorByCode } from '@commercetools/sdk-middleware-http'
 const BadRequest = getErrorByCode(400)
-const httpMockSuccessMiddleware = next => (request, response) => {
+const httpMockSuccessMiddleware = (next) => (request, response) => {
   next(request, { ...response, body: { foo: 'bar' } })
 }
-const httpMockFailureMiddleware = next => (request, response) => {
+const httpMockFailureMiddleware = (next) => (request, response) => {
   next(request, { ...response, error: new BadRequest('Invalid field') })
 }
 const client = createClient({
@@ -78,8 +78,8 @@ const client = createClient()
 function testImplementation(request, cb) {
   client
     .execute(request)
-    .then(result => cb(null, result))
-    .catch(error => cb(error))
+    .then((result) => cb(null, result))
+    .catch((error) => cb(error))
 }
 
 describe('SDK client', () => {

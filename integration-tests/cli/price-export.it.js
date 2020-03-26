@@ -121,7 +121,7 @@ describe('Price Exporter', () => {
         validFrom: '2017-11-01T08:01:19.000Z',
         validUntil: '2019-11-01T08:01:21.000Z',
       }
-      actual.prices.forEach(variantPrice => {
+      actual.prices.forEach((variantPrice) => {
         expect(variantPrice['variant-sku']).toMatch(/variant-sku/)
         expect(variantPrice.prices[0]).toMatchObject(expectedPrice)
       })
@@ -153,7 +153,7 @@ describe('Price Exporter', () => {
       ]
       csv({ flatKeys: true })
         .fromString(data)
-        .on('json', jsonObj => {
+        .on('json', (jsonObj) => {
           expect(Object.keys(jsonObj)).toEqual(expected)
           expect(jsonObj['customerGroup.groupName']).toBe('customerGroupName')
           expect(jsonObj['channel.key']).toBe('my-channel-key')

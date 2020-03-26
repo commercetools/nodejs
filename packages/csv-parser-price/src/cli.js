@@ -21,7 +21,7 @@ Converts commercetools states from CSV to JSON`
     default: 'stdin',
     describe: 'Path to input CSV file.',
   })
-  .coerce('inputFile', arg => {
+  .coerce('inputFile', (arg) => {
     if (arg !== 'stdin') return fs.createReadStream(String(arg))
 
     return process.stdin
@@ -31,7 +31,7 @@ Converts commercetools states from CSV to JSON`
     default: 'stdout',
     describe: 'Path to output JSON file.',
   })
-  .coerce('outputFile', arg => {
+  .coerce('outputFile', (arg) => {
     if (arg !== 'stdout') return fs.createWriteStream(String(arg))
 
     return process.stdout
@@ -70,11 +70,11 @@ Converts commercetools states from CSV to JSON`
     default: CONSTANTS.standardOption.defaultLogFile,
     describe: 'Path to file where to save logs.',
   })
-  .coerce('logLevel', arg => {
+  .coerce('logLevel', (arg) => {
     npmlog.level = arg
   }).argv
 
-const logError = error => {
+const logError = (error) => {
   const errorFormatter = new PrettyError()
 
   if (npmlog.level === 'verbose')
@@ -83,7 +83,7 @@ const logError = error => {
   else process.stderr.write(`ERR: ${error.message || error} \n`) // Add new line to make it intuitive
 }
 
-const errorHandler = errors => {
+const errorHandler = (errors) => {
   // print errors to stderr if we use stdout for data output
   // if we save data to output file errors are already logged by npmlog
   if (Array.isArray(errors)) errors.forEach(logError)
@@ -92,7 +92,7 @@ const errorHandler = errors => {
   process.exitCode = 1
 }
 
-const resolveCredentials = _args => {
+const resolveCredentials = (_args) => {
   if (_args.accessToken) return Promise.resolve({})
   return getCredentials(_args.projectKey)
 }
@@ -106,7 +106,7 @@ args.outputFile.on('error', errorHandler)
 
 resolveCredentials(args)
   .then(
-    credentials =>
+    (credentials) =>
       new CsvParserPrice({
         apiConfig: {
           host: args.authUrl,
@@ -127,4 +127,6 @@ resolveCredentials(args)
         },
       })
   )
-  .then(csvParserPrice => csvParserPrice.parse(args.inputFile, args.outputFile))
+  .then((csvParserPrice) =>
+    csvParserPrice.parse(args.inputFile, args.outputFile)
+  )

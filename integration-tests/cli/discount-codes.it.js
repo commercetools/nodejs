@@ -85,7 +85,7 @@ describe('DiscountCode tests', () => {
       expect(stderr).toBeFalsy()
       const generatedCodes = JSON.parse(stdout)
       expect(generatedCodes).toHaveLength(10)
-      generatedCodes.forEach(codeObj => {
+      generatedCodes.forEach((codeObj) => {
         expect(codeObj).toMatchObject(expected)
         expect(codeObj.code).toMatch(/^IT/)
         expect(codeObj.code).toHaveLength(8)
@@ -105,7 +105,7 @@ describe('DiscountCode tests', () => {
           path.join(__dirname, './helpers/discountCodes.json'),
           'utf8'
         )
-      ).map(codeObj => ({
+      ).map((codeObj) => ({
         ...codeObj,
         cartDiscounts: [
           {
@@ -127,7 +127,7 @@ describe('DiscountCode tests', () => {
 
     it('should update discount codes on the CTP', async () => {
       // First, import the codes that need to be updated
-      const oldCodesToUpdate = preparedDiscountCodes.map(codeObj => {
+      const oldCodesToUpdate = preparedDiscountCodes.map((codeObj) => {
         const uniqueCode = codeObj.code
         return { ...codeObj, code: `${uniqueCode}foo` }
       })
@@ -136,7 +136,7 @@ describe('DiscountCode tests', () => {
       // Call a new `codeImport` instance so we reset the summary
       codeImport = new DiscountCodeImport({ apiConfig }, logger)
 
-      const newCodesToUpdate = oldCodesToUpdate.map(codeObj => ({
+      const newCodesToUpdate = oldCodesToUpdate.map((codeObj) => ({
         ...codeObj,
         maxApplications: 20,
       }))
@@ -150,7 +150,7 @@ describe('DiscountCode tests', () => {
       // Set batchSize to 1 so it executes serially
       codeImport = new DiscountCodeImport({ apiConfig, batchSize: 1 }, logger)
       // Make codes unique
-      const discountCodesSample = preparedDiscountCodes.map(codeObj => {
+      const discountCodesSample = preparedDiscountCodes.map((codeObj) => {
         const uniqueCode = codeObj.code
         return { ...codeObj, code: `${uniqueCode}bar` }
       })
@@ -178,7 +178,7 @@ describe('DiscountCode tests', () => {
         logger
       )
       // Make codes unique
-      const discountCodesSample = preparedDiscountCodes.map(codeObj => {
+      const discountCodesSample = preparedDiscountCodes.map((codeObj) => {
         const uniqueCode = codeObj.code
         return { ...codeObj, code: `${uniqueCode}foobar` }
       })
@@ -207,7 +207,7 @@ describe('DiscountCode tests', () => {
           path.join(__dirname, './helpers/discountCodes.json'),
           'utf8'
         )
-      ).map(codeObj => ({
+      ).map((codeObj) => ({
         ...codeObj,
         cartDiscounts: [
           {
@@ -254,7 +254,7 @@ describe('DiscountCode tests', () => {
       const data = await fs.readFile(jsonFilePath, { encoding: 'utf8' })
 
       const actual = JSON.parse(data)
-      actual.forEach(codeObj => {
+      actual.forEach((codeObj) => {
         expect(codeObj).toMatchObject(expected)
         expect(isuuid(codeObj.id)).toBe(true)
       })
@@ -283,10 +283,10 @@ describe('DiscountCode tests', () => {
 
       const data = await fs.readFile(csvFilePath, { encoding: 'utf8' })
 
-      await new Promise(resolve => {
+      await new Promise((resolve) => {
         csv()
           .fromString(data)
-          .subscribe(jsonObj => {
+          .subscribe((jsonObj) => {
             expect(jsonObj).toMatchObject(expected)
             resolve()
           })

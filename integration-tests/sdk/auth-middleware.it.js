@@ -21,7 +21,7 @@ describe('Auth Middleware Flows', () => {
   beforeAll(
     () =>
       getCredentials(projectKey)
-        .then(credentials => {
+        .then((credentials) => {
           apiConfig = {
             host: 'https://auth.europe-west1.gcp.commercetools.com',
             apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
@@ -83,7 +83,7 @@ describe('Auth Middleware Flows', () => {
           uri: `/${projectKey}/me`,
           method: 'GET',
         })
-        .then(response => {
+        .then((response) => {
           const user = response.body
           expect(user).toHaveProperty('email', userEmail)
         })
@@ -170,8 +170,8 @@ describe('Auth Middleware Flows', () => {
         },
         body,
       })
-        .then(res => res.json())
-        .then(jsonResponse => {
+        .then((res) => res.json())
+        .then((jsonResponse) => {
           tokenObject = { ...jsonResponse }
 
           const client = createClient({

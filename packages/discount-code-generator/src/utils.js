@@ -3,7 +3,7 @@ function _parseBool(value) {
 }
 
 function _formatCartDiscountInput(cartDiscounts, arrayDelim) {
-  return cartDiscounts.split(arrayDelim).map(cartDiscount => ({
+  return cartDiscounts.split(arrayDelim).map((cartDiscount) => ({
     typeId: 'cart-discount',
     id: cartDiscount,
   }))

@@ -38,7 +38,7 @@ describe('Anonymous Session Flow', () => {
         resolve,
         reject,
       }
-      const next = actualParams => {
+      const next = (actualParams) => {
         expect(actualParams.request).toEqual(request)
         expect(actualParams.response).toEqual(response)
         expect(actualParams.pendingTasks).toEqual([])

@@ -47,7 +47,5 @@ Returns a `Promise` which resolves to `{ clientId, clientSecret }`. When no cred
 ```js
 import { getCredentials } from '@commercetools/get-credentials'
 
-getCredentials('my-project-key')
-  .then(console.log)
-  .catch(console.error)
+getCredentials('my-project-key').then(console.log).catch(console.error)
 ```

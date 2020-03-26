@@ -72,7 +72,7 @@ export default class CategoryExporter {
             )
           const results = payload.body.results
           const JSONResults = results
-            .map(result => JSON.stringify(result))
+            .map((result) => JSON.stringify(result))
             .join(',')
           if (hasFirstPageBeenProcessed) outputStream.write(',')
           else hasFirstPageBeenProcessed = true

@@ -68,15 +68,15 @@ describe('Base Auth Flow', () => {
   })
 
   test('get a new auth token if not present in request headers', () =>
-    new Promise(resolve => {
-      const next = req => {
+    new Promise((resolve) => {
+      const next = (req) => {
         expect(req).toHaveProperty('headers.Authorization', 'Bearer xxx')
         resolve()
       }
       const middlewareOptions = createTestMiddlewareOptions()
 
       nock(middlewareOptions.host)
-        .filteringRequestBody(body => {
+        .filteringRequestBody((body) => {
           expect(body).toBe('grant_type=client_credentials')
           return '*'
         })
@@ -92,7 +92,7 @@ describe('Base Auth Flow', () => {
     new Promise((resolve, reject) => {
       const response = createTestResponse({
         resolve,
-        reject: error => {
+        reject: (error) => {
           expect(error.message).toMatch('socket timeout')
           resolve()
         },
@@ -103,7 +103,7 @@ describe('Base Auth Flow', () => {
       const middlewareOptions = createTestMiddlewareOptions()
 
       nock(middlewareOptions.host)
-        .filteringRequestBody(body => {
+        .filteringRequestBody((body) => {
           expect(body).toBe('grant_type=client_credentials')
           return '*'
         })
@@ -116,7 +116,7 @@ describe('Base Auth Flow', () => {
     new Promise((resolve, reject) => {
       const response = createTestResponse({
         resolve,
-        reject: error => {
+        reject: (error) => {
           expect(error.message).toBe('Oops')
           expect(error.body).toEqual({ message: 'Oops' })
           resolve()
@@ -142,7 +142,7 @@ describe('Base Auth Flow', () => {
     new Promise((resolve, reject) => {
       const response = createTestResponse({
         resolve,
-        reject: error => {
+        reject: (error) => {
           expect(error.message).toBe('Oops')
           expect(error.body).toBeUndefined()
           resolve()
@@ -165,7 +165,7 @@ describe('Base Auth Flow', () => {
     }))
 
   test('retrieve a new token if previous one expired', () =>
-    new Promise(resolve => {
+    new Promise((resolve) => {
       const middlewareOptions = createTestMiddlewareOptions()
       let requestCount = 0
       nock(middlewareOptions.host)
@@ -211,7 +211,7 @@ describe('Base Auth Flow', () => {
     }))
 
   test('use refresh token to fetch a new token if no token or is expired', () =>
-    new Promise(resolve => {
+    new Promise((resolve) => {
       const spy = jest.spyOn(buildRequests, 'buildRequestForRefreshTokenFlow')
       const middlewareOptions = createTestMiddlewareOptions()
       let requestCount = 0
@@ -304,7 +304,7 @@ describe('Base Auth Flow', () => {
         // - we simulate that the request has a token set in the headers
         // which does not match any of the cached tokens. In this case
         // do not refetch and keep going.
-        const call2 = rq => {
+        const call2 = (rq) => {
           const requestWithHeaders = {
             ...rq,
             headers: {
@@ -334,7 +334,7 @@ describe('Base Auth Flow', () => {
   )
 
   test('ensure to fetch new token only once and keep track of pending tasks', () =>
-    new Promise(resolve => {
+    new Promise((resolve) => {
       const middlewareOptions = createTestMiddlewareOptions()
       let requestCount = 0
       nock(middlewareOptions.host)
@@ -372,7 +372,7 @@ describe('Base Auth Flow', () => {
     }))
 
   test('if a token has been fetched, use it for the new incoming requests', () =>
-    new Promise(resolve => {
+    new Promise((resolve) => {
       const middlewareOptions = createTestMiddlewareOptions()
       let requestCount = 0
       nock(middlewareOptions.host)
@@ -389,7 +389,7 @@ describe('Base Auth Flow', () => {
       const pendingTasks = []
       const tokenCache = store({})
       const requestState = store(false)
-      const next = rq2 => {
+      const next = (rq2) => {
         // 2. Should not get a new token
         expect(requestCount).toBe(1)
         expect(rq2).toEqual(
@@ -411,7 +411,7 @@ describe('Base Auth Flow', () => {
 
   describe('client id token cache', () => {
     let tokenCache
-    const createCacheKey = options =>
+    const createCacheKey = (options) =>
       `${options.clientId}-${options.projectKey}-${options.host}`
 
     beforeEach(() => {
@@ -427,7 +427,7 @@ describe('Base Auth Flow', () => {
     })
 
     test('it stores token in token cache in context of token cache key', () =>
-      new Promise(resolve => {
+      new Promise((resolve) => {
         const tokenCacheKeyOptions = {
           clientId: 'clientId',
           projectKey: 'projectKey',
@@ -443,7 +443,7 @@ describe('Base Auth Flow', () => {
             this.cache[createCacheKey(cacheKey)] = token
           },
         }
-        const next = req => {
+        const next = (req) => {
           expect(req).toHaveProperty('headers.Authorization', 'Bearer xxx')
           expect(customTokenCache.get(tokenCacheKey)).toEqual(
             expect.objectContaining({
@@ -456,7 +456,7 @@ describe('Base Auth Flow', () => {
         const middlewareOptions = createTestMiddlewareOptions()
 
         nock(middlewareOptions.host)
-          .filteringRequestBody(body => {
+          .filteringRequestBody((body) => {
             expect(body).toBe('grant_type=client_credentials')
             return '*'
           })
@@ -472,7 +472,7 @@ describe('Base Auth Flow', () => {
       }))
 
     test('ensure to fetch new token only once for each client and keep track of pending tasks in context of client instance of middleware', () =>
-      new Promise(resolve => {
+      new Promise((resolve) => {
         const middlewareOptions = createTestMiddlewareOptions()
         let requestCount = 0
 

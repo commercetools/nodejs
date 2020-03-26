@@ -6,7 +6,7 @@ import createBuildArrayActions, {
 } from '../../src/utils/create-build-array-actions'
 
 const testObjKey = 'someNestedObjects'
-const getTestObj = list => ({ [testObjKey]: list || [] })
+const getTestObj = (list) => ({ [testObjKey]: list || [] })
 
 describe('createBuildArrayActions', () => {
   test('returns function', () => {

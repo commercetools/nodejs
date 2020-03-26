@@ -20,7 +20,7 @@ describe('State importer', () => {
   }
 
   beforeAll(() =>
-    getCredentials(projectKey).then(credentials => {
+    getCredentials(projectKey).then((credentials) => {
       apiConfig = {
         host: 'https://auth.europe-west1.gcp.commercetools.com',
         apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
@@ -59,7 +59,10 @@ describe('State importer', () => {
     })
 
     it('should update states on the CTP', async () => {
-      const statesToUpdate = states.map(state => ({ ...state, initial: false }))
+      const statesToUpdate = states.map((state) => ({
+        ...state,
+        initial: false,
+      }))
       const reportMessage = oneLine`
           Summary: there were 3 successfully imported states
           (0 were newly created, 3 were updated and 1 were unchanged).`
@@ -82,7 +85,7 @@ describe('State importer', () => {
   describe('Error handling', () => {
     let invalidStates
     beforeEach(() => {
-      invalidStates = states.map(state => ({ ...state, key: '' }))
+      invalidStates = states.map((state) => ({ ...state, key: '' }))
     })
     describe('without `continueOnProblems', () => {
       it('should stop import on first error', async () => {

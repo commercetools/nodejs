@@ -10,7 +10,7 @@ export default function copyEmptyArrayProps(oldObj, newObj) {
   Object.entries(oldObj).forEach(([key, value]) => {
     if (Array.isArray(value)) {
       const foundKey = Object.keys(newObj).findIndex(
-        newObjKey => JSON.stringify(newObjKey) === JSON.stringify(key)
+        (newObjKey) => JSON.stringify(newObjKey) === JSON.stringify(key)
       )
 
       if (foundKey === -1) {

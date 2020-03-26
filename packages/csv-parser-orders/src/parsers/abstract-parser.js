@@ -33,22 +33,22 @@ export default class AbstractParser {
           strict: this.csvConfig.strictMode,
         })
       )
-      .stopOnError(err => {
+      .stopOnError((err) => {
         this.logger.error(err)
         return output.emit('error', err)
       })
       .batch(this.csvConfig.batchSize)
-      .doto(data => {
+      .doto((data) => {
         this.logger.verbose(`Parsed row-${rowIndex}: ${JSON.stringify(data)}`)
         rowIndex += 1
       })
       .flatMap(highland)
-      .flatMap(data => data |> this._processData |> highland)
-      .stopOnError(err => {
+      .flatMap((data) => data |> this._processData |> highland)
+      .stopOnError((err) => {
         this.logger.error(err)
         return output.emit('error', err)
       })
-      .doto(data =>
+      .doto((data) =>
         this.logger.verbose(
           `Converted row-${rowIndex}: ${JSON.stringify(data)}`
         )

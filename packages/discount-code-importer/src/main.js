@@ -133,10 +133,7 @@ export default class DiscountCodeImport {
         // Build predicate and fetch existing code
         const predicate = DiscountCodeImport._buildPredicate(codeObjects)
         const service = this._createService()
-        const uri = service
-          .where(predicate)
-          .perPage(this.batchSize)
-          .build()
+        const uri = service.where(predicate).perPage(this.batchSize).build()
         const req = this._buildRequest(uri, 'GET')
         return this.client
           .execute(req)
@@ -287,12 +284,14 @@ export default class DiscountCodeImport {
       message = 'Summary: nothing to do, everything is fine'
     // eslint-disable-next-line max-len
     else
-      message = `Summary: there were ${created +
-        updated} successfully imported discount codes (${created} were newly created, ${updated} were updated and ${unchanged} were unchanged).`
+      message = `Summary: there were ${
+        created + updated
+      } successfully imported discount codes (${created} were newly created, ${updated} were updated and ${unchanged} were unchanged).`
     if (createErrorCount || updateErrorCount)
       // eslint-disable-next-line max-len
-      message += ` ${createErrorCount +
-        updateErrorCount} errors occured (${createErrorCount} create errors and ${updateErrorCount} update errors.)`
+      message += ` ${
+        createErrorCount + updateErrorCount
+      } errors occured (${createErrorCount} create errors and ${updateErrorCount} update errors.)`
     return {
       reportMessage: message,
       detailedSummary: this._summary,

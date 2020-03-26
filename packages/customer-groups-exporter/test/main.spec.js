@@ -55,7 +55,7 @@ describe('CustomerGroupsExporter', () => {
     })
 
     test('should write to outputStream', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const outputStream = streamtest.v2.toText((error, data) => {
           expect(error).toBeFalsy()
           expect(data).toMatchSnapshot()
@@ -67,7 +67,7 @@ describe('CustomerGroupsExporter', () => {
     })
 
     test('should return error', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         payload.statusCode = '404'
         const outputStream = streamtest.v2.toText((error, data) => {
           expect(error).toBeTruthy()

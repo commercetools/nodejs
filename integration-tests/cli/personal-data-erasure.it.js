@@ -112,8 +112,8 @@ describe('personal data erasure', () => {
       describe('::deleteAll', () => {
         it('should delete data on the CTP', async () => {
           let data
-          const fetchDataAfterTimeout = ms =>
-            new Promise(resolve =>
+          const fetchDataAfterTimeout = (ms) =>
+            new Promise((resolve) =>
               setTimeout(async () => {
                 data = await personalDataErasure.getCustomerData(customerId)
                 resolve()
