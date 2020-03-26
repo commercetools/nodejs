@@ -16,7 +16,7 @@ function getApiClient(token) {
     middlewares: [
       createAuthMiddlewareWithExistingToken(token),
       createHttpMiddleware({
-        host: 'https://api..sphere.io',
+        host: 'https://api.sphere.io',
         fetch,
       }),
     ],
@@ -36,8 +36,8 @@ describe('Auth Flows', () => {
   beforeAll(async () => {
     const credentials = await getCredentials(projectKey)
     apiConfig = {
-      host: 'https://auth..sphere.io',
-      apiUrl: 'https://api..sphere.io',
+      host: 'https://auth.sphere.io',
+      apiUrl: 'https://api.sphere.io',
       projectKey,
       credentials: {
         clientId: credentials.clientId,

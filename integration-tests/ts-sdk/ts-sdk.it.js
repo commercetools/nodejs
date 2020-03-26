@@ -15,8 +15,8 @@ describe('Auth Middleware Flows', () => {
     () =>
       getCredentials(projectKey).then(credentials => {
         apiConfig = {
-          host: 'https://auth..sphere.io',
-          apiUrl: 'https://api..sphere.io',
+          host: 'https://auth.sphere.io',
+          apiUrl: 'https://api.sphere.io',
           projectKey,
           credentials: {
             clientId: credentials.clientId,
@@ -29,7 +29,7 @@ describe('Auth Middleware Flows', () => {
 
   describe('Anonymous Session Flow', () => {
     const httpMiddleware = createHttpMiddleware({
-      host: 'https://api..sphere.io',
+      host: 'https://api.sphere.io',
       fetch,
     })
 

@@ -18,8 +18,8 @@ describe('Category Exporter', () => {
     // Get test credentials
     const credentials = await getCredentials(projectKey)
     apiConfig = {
-      host: 'https://auth..sphere.io',
-      apiUrl: 'https://api..sphere.io',
+      host: 'https://auth.sphere.io',
+      apiUrl: 'https://api.sphere.io',
       projectKey,
       credentials,
     }

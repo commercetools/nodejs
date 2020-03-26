@@ -29,8 +29,8 @@ describe('DiscountCode tests', () => {
     // Get test credentials
 
     apiConfig = {
-      host: 'https://auth..sphere.io',
-      apiUrl: 'https://api..sphere.io',
+      host: 'https://auth.sphere.io',
+      apiUrl: 'https://api.sphere.io',
       projectKey,
       credentials,
     }
