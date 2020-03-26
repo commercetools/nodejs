@@ -31,7 +31,7 @@ describe('CorrelationId', () => {
     middlewareOptions
   )
 
-  const next = req => {
+  const next = (req) => {
     test('retains existing headers', () => {
       expect(req.headers.Authorization).toBe('123')
     })

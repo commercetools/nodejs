@@ -112,26 +112,26 @@ const generateUpdateActionsForAttributeDefinitions = (
   attributeDefinitions = []
 ) => {
   const removedAttributeDefinitions = attributeDefinitions.filter(
-    attributeDefinition =>
+    (attributeDefinition) =>
       attributeDefinition.previous && !attributeDefinition.next
   )
   const updatedAttributeDefinitions = attributeDefinitions.filter(
-    attributeDefinition =>
+    (attributeDefinition) =>
       attributeDefinition.previous && attributeDefinition.next
   )
 
   const addedAttributeDefinitions = attributeDefinitions.filter(
-    attributeDefinition =>
+    (attributeDefinition) =>
       !attributeDefinition.previous && attributeDefinition.next
   )
 
   return [
-    ...removedAttributeDefinitions.map(attributeDef => ({
+    ...removedAttributeDefinitions.map((attributeDef) => ({
       action: 'removeAttributeDefinition',
       name: attributeDef.previous.name,
     })),
     ...flatten(
-      updatedAttributeDefinitions.map(updatedAttributeDefinition =>
+      updatedAttributeDefinitions.map((updatedAttributeDefinition) =>
         generateBaseFieldsUpdateActions(
           updatedAttributeDefinition.previous,
           updatedAttributeDefinition.next,
@@ -160,7 +160,7 @@ const generateUpdateActionsForAttributeDefinitions = (
         )
       )
     ),
-    ...addedAttributeDefinitions.map(attributeDef => ({
+    ...addedAttributeDefinitions.map((attributeDef) => ({
       action: 'addAttributeDefinition',
       attribute: attributeDef.next,
     })),
@@ -170,14 +170,15 @@ const generateUpdateActionsForAttributeEnumValues = (
   attributeEnumValues = []
 ) => {
   const removedAttributeEnumValues = attributeEnumValues.filter(
-    attributeEnumValue =>
+    (attributeEnumValue) =>
       attributeEnumValue.previous && !attributeEnumValue.next
   )
   const updatedAttributeEnumValues = attributeEnumValues.filter(
-    attributeEnumValue => attributeEnumValue.next && attributeEnumValue.previous
+    (attributeEnumValue) =>
+      attributeEnumValue.next && attributeEnumValue.previous
   )
   const addedAttributeEnumValues = attributeEnumValues.filter(
-    attributeEnumValue =>
+    (attributeEnumValue) =>
       !attributeEnumValue.previous && attributeEnumValue.next
   )
 
@@ -207,7 +208,7 @@ const generateUpdateActionsForAttributeEnumValues = (
       )
     ),
     ...flatten(
-      updatedAttributeEnumValues.map(updatedAttributeEnumValue => {
+      updatedAttributeEnumValues.map((updatedAttributeEnumValue) => {
         const updateActions = generateBaseFieldsUpdateActions(
           updatedAttributeEnumValue.previous,
           updatedAttributeEnumValue.next,
@@ -246,7 +247,7 @@ const generateUpdateActionsForAttributeEnumValues = (
         return updateActions
       })
     ),
-    ...addedAttributeEnumValues.map(addedAttributeEnumValue => ({
+    ...addedAttributeEnumValues.map((addedAttributeEnumValue) => ({
       action: addedAttributeEnumValue.hint.isLocalized
         ? 'addLocalizedEnumValue'
         : 'addPlainEnumValue',
@@ -263,21 +264,21 @@ const generateChangeAttributeOrderAction = (
 ) => {
   if (!attrsOld.length || !attrsNew.length) return null
 
-  const newAttributesOrder = attrsNew.map(attribute => attribute.name)
+  const newAttributesOrder = attrsNew.map((attribute) => attribute.name)
 
   const removedAttributeNames = updateActions
-    .filter(action => action.action === 'removeAttributeDefinition')
-    .map(action => action.name)
+    .filter((action) => action.action === 'removeAttributeDefinition')
+    .map((action) => action.name)
 
   const addedAttributeNames = updateActions
-    .filter(action => action.action === 'addAttributeDefinition')
-    .map(action => action.attribute.name)
+    .filter((action) => action.action === 'addAttributeDefinition')
+    .map((action) => action.attribute.name)
 
   // changeAttributeOrder action will be sent to CTP API as the last action so we have to
   // calculate how the productType will look like after adding/removing attributes
   const patchedOldAttributesOrder = attrsOld
-    .map(attribute => attribute.name)
-    .filter(name => !removedAttributeNames.includes(name))
+    .map((attribute) => attribute.name)
+    .filter((name) => !removedAttributeNames.includes(name))
     .concat(addedAttributeNames)
 
   if (newAttributesOrder.join(',') !== patchedOldAttributesOrder.join(','))

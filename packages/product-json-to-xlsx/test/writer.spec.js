@@ -14,9 +14,9 @@ function analyzeExcelWorkbook(workbook) {
   const rows = []
   const worksheet = workbook.getWorksheet('Products')
 
-  worksheet.eachRow(row => rows.push(row.values))
+  worksheet.eachRow((row) => rows.push(row.values))
   // remove first column containing null values
-  rows.forEach(row => row.shift())
+  rows.forEach((row) => row.shift())
 
   return {
     workbook,
@@ -118,7 +118,7 @@ describe('Writer', () => {
 
   describe('::writeToSingleXlsxFile', () => {
     test('write products to a single file with specified headers', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const tempFile = tmp.fileSync({ postfix: '.xlsx', keep: true })
         const output = tempFile.name
@@ -161,7 +161,7 @@ describe('Writer', () => {
     })
 
     test('handle empty rows', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const tempFile = tmp.fileSync({ postfix: '.xlsx', keep: true })
         const output = tempFile.name
@@ -189,7 +189,7 @@ describe('Writer', () => {
     })
 
     test('log success info on xlsx completion', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const headers = []
         const outputStream = streamTest.toText(() => {})
@@ -212,7 +212,7 @@ describe('Writer', () => {
 
   describe('::writeToZipFile', () => {
     test('write products to multiple files based on productTypes', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
         const output = tempFile.name
@@ -223,7 +223,7 @@ describe('Writer', () => {
         outputStream.on('finish', () => {
           fs.createReadStream(output)
             .pipe(unzipper.Parse())
-            .on('entry', async entry => {
+            .on('entry', async (entry) => {
               const excelInfo = await analyzeExcelStream(entry)
               // push to entries array after we finish async operation
               // otherwise it would push both entries while analysing first entry
@@ -255,7 +255,7 @@ describe('Writer', () => {
     })
 
     test('should handle exporting zero products', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const sampleStream = highland([])
         const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
         const output = tempFile.name
@@ -283,7 +283,7 @@ describe('Writer', () => {
     })
 
     test('log success info on zip completion', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
 
         const tempFile = tmp.fileSync({ postfix: '.zip' })
@@ -303,7 +303,7 @@ describe('Writer', () => {
     })
 
     test('throw an error when streams fail', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const tempFile = tmp.fileSync({ postfix: '.zip' })
         const tmpDir = tmp.dirSync({ unsafeCleanup: true })
         const outputStream = fs.createWriteStream(tempFile.name)
@@ -317,7 +317,7 @@ describe('Writer', () => {
           },
         ]
 
-        outputStream.on('error', err => {
+        outputStream.on('error', (err) => {
           expect(err).toBeDefined()
           expect(err.message).toEqual('test error')
 

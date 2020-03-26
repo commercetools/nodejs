@@ -120,7 +120,7 @@ resourceDeleter
   .then(() => {
     console.log('resource deleted')
   })
-  .catch(error => {
+  .catch((error) => {
     // handle error
   })
 ```

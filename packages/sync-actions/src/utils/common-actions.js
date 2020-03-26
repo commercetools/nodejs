@@ -2,11 +2,11 @@ import isNil from 'lodash.isnil'
 import clone from './clone'
 import * as diffpatcher from './diffpatcher'
 
-const normalizeValue = value =>
+const normalizeValue = (value) =>
   typeof value === 'string' ? value.trim() : value
 
-export const createIsEmptyValue = emptyValues => value =>
-  emptyValues.some(emptyValue => emptyValue === normalizeValue(value))
+export const createIsEmptyValue = (emptyValues) => (value) =>
+  emptyValues.some((emptyValue) => emptyValue === normalizeValue(value))
 
 /**
  * Builds actions for simple object properties, given a list of actions
@@ -30,7 +30,7 @@ export function buildBaseAttributesActions({
     shouldOmitEmptyString ? [undefined, null, ''] : [undefined, null]
   )
   return actions
-    .map(item => {
+    .map((item) => {
       const key = item.key // e.g.: name, description, ...
       const actionKey = item.actionKey || item.key
       const delta = diff[key]
@@ -58,7 +58,7 @@ export function buildBaseAttributesActions({
       const patched = diffpatcher.patch(clone(before), delta)
       return { action: item.action, [actionKey]: patched }
     })
-    .filter(action => !isNil(action))
+    .filter((action) => !isNil(action))
 }
 
 /**
@@ -78,7 +78,7 @@ export function buildReferenceActions({
   newObj,
 }) {
   return actions
-    .map(item => {
+    .map((item) => {
       const action = item.action
       const key = item.key
 
@@ -120,5 +120,5 @@ export function buildReferenceActions({
 
       return undefined
     })
-    .filter(action => action)
+    .filter((action) => action)
 }

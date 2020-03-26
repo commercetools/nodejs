@@ -66,7 +66,7 @@ describe('DiscountCodeImporter', () => {
     })
 
     test('should call callback when done', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         codeImport._processBatches = jest.fn()
         codeImport._processBatches.mockReturnValue(Promise.resolve())
         const myMockCallback = jest.fn(() => {

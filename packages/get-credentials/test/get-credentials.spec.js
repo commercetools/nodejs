@@ -18,10 +18,10 @@ describe('getCredentials', () => {
   afterEach(() => sinon.restore())
 
   test('should reject error when missing project key argument', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       getCredentials()
         .then(done.fail)
-        .catch(error => {
+        .catch((error) => {
           expect(error.message).toBe('Missing "projectKey" argument')
           done()
         })
@@ -29,10 +29,10 @@ describe('getCredentials', () => {
   })
 
   test('should reject when project credentials are not found', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       getCredentials('forgery')
         .then(done.fail)
-        .catch(error => {
+        .catch((error) => {
           expect(error.message).toMatch(expectedErrorText.undefinedEnv)
           done()
         })
@@ -52,7 +52,7 @@ describe('getCredentialsFromEnvironment', () => {
   test('should resolve credentials from environment variables', () => {
     sinon.stub(process.env, 'CT_STROOPWAFEL').value('nyw:les')
 
-    return getCredentialsFromEnvironment('stroopwafel').then(credentials =>
+    return getCredentialsFromEnvironment('stroopwafel').then((credentials) =>
       expect(credentials).toEqual({
         clientId: 'nyw',
         clientSecret: 'les',
@@ -66,17 +66,17 @@ describe('getCredentialsFromEnvironment', () => {
 
     await getCredentialsFromEnvironment('stroopwafel')
       .then()
-      .catch(error => {
+      .catch((error) => {
         expect(error.message).toMatch(expectedErrorText.invalidEnvFormat)
         expect(error.message).toMatch(new RegExp(homepage))
       })
   })
 
   test('should reject on absent environment variable key', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       getCredentialsFromEnvironment('pepernoten')
         .then(done.fail)
-        .catch(error => {
+        .catch((error) => {
           expect(error.message).toMatch(expectedErrorText.undefinedEnv)
           expect(error.message).toMatch(new RegExp(homepage))
           done()

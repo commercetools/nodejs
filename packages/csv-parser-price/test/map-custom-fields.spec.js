@@ -96,7 +96,9 @@ describe('mapCustomFields::parse', () => {
       "[row 1: liqui 63 69 ty] - The number t isn't valid",
     ]
     expect(result.data).toEqual(expected)
-    expect(result.error.map(error => error.message)).toEqual(expectedErrorArray)
+    expect(result.error.map((error) => error.message)).toEqual(
+      expectedErrorArray
+    )
   })
 })
 

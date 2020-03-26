@@ -41,16 +41,16 @@ function mapRowsToProducts(rows) {
   const _rows = cloneDeep(rows)
   // first line contains header
   const header = _rows.shift()
-  return _rows.map(row => zipObject(header, row))
+  return _rows.map((row) => zipObject(header, row))
 }
 
 function analyzeExcelWorkbook(workbook) {
   const rows = []
   const worksheet = workbook.getWorksheet('Products')
 
-  worksheet.eachRow(row => rows.push(row.values))
+  worksheet.eachRow((row) => rows.push(row.values))
   // remove first column containing null values
-  rows.forEach(row => row.shift())
+  rows.forEach((row) => row.shift())
 
   return {
     workbook,
@@ -155,7 +155,7 @@ describe('XLSX and CLI Tests', () => {
         let stderr
         const fileNames = []
 
-        beforeAll(async done => {
+        beforeAll(async (done) => {
           const zipFile = tmp.fileSync({ postfix: '.zip' }).name
           ;[stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
@@ -163,7 +163,7 @@ describe('XLSX and CLI Tests', () => {
 
           fs.createReadStream(zipFile)
             .pipe(unzipper.Parse())
-            .on('entry', async entry => {
+            .on('entry', async (entry) => {
               const excelInfo = await analyzeExcelStream(entry)
               fileNames.push(entry.path)
 
@@ -407,7 +407,7 @@ describe('XLSX and CLI Tests', () => {
         let stderr
         const templateFile = `${__dirname}/helpers/product-headers.csv`
 
-        beforeAll(async done => {
+        beforeAll(async (done) => {
           xlsxFile = tmp.fileSync({ postfix: '.xlsx' }).name
           ;[stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} -t ${templateFile} --referenceCategoryBy name -o ${xlsxFile}`
@@ -465,7 +465,7 @@ describe('XLSX and CLI Tests', () => {
             'text-attribute',
             'another-text-attribute',
           ]
-          products.forEach(product => {
+          products.forEach((product) => {
             const productColumns = Object.keys(product)
             expect(productColumns).toEqual(columns)
           })
@@ -534,7 +534,7 @@ describe('XLSX and CLI Tests', () => {
         let product2
         const fileNames = []
 
-        beforeAll(async done => {
+        beforeAll(async (done) => {
           const zipFile = tmp.fileSync({ postfix: '.zip' }).name
 
           // Map products from a JSON file to archived XLSX files
@@ -544,7 +544,7 @@ describe('XLSX and CLI Tests', () => {
 
           fs.createReadStream(zipFile)
             .pipe(unzipper.Parse())
-            .on('entry', async entry => {
+            .on('entry', async (entry) => {
               const excelInfo = await analyzeExcelStream(entry)
               fileNames.push(entry.path)
 
@@ -860,7 +860,7 @@ describe('XLSX and CLI Tests', () => {
             'text-attribute',
             'another-text-attribute',
           ]
-          products.forEach(product => {
+          products.forEach((product) => {
             const productColumns = Object.keys(product)
             expect(productColumns).toEqual(columns)
           })

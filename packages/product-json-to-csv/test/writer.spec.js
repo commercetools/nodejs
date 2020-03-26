@@ -86,7 +86,7 @@ describe('Writer', () => {
 
   describe('::writeToSingleCsvFile', () => {
     test('write products to a single file with specified headers', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const headers = [
           'id',
@@ -111,7 +111,7 @@ describe('Writer', () => {
     })
 
     test('write products to a single file with specified delimiter', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const headers = [
           'id',
@@ -146,7 +146,7 @@ describe('Writer', () => {
     })
 
     test('do not output empty rows', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const headers = ['id', 'key', 'productType']
         const outputStream = streamTest.toText((error, actual) => {
@@ -160,7 +160,7 @@ describe('Writer', () => {
     })
 
     test('log success info on csv completion', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const headers = []
         const outputStream = streamTest.toText(() => {})
@@ -190,7 +190,7 @@ describe('Writer', () => {
       })
 
       test('write products in a different encoding', () => {
-        return new Promise(done => {
+        return new Promise((done) => {
           const config = {
             encoding: 'win1250',
           }
@@ -220,13 +220,13 @@ describe('Writer', () => {
       })
 
       test('throw error while using unknown encoding', () => {
-        return new Promise(done => {
+        return new Promise((done) => {
           const config = {
             encoding: 'invalid',
           }
           const outputStream = streamTest.toText(() => {})
 
-          outputStream.on('error', error => {
+          outputStream.on('error', (error) => {
             expect(error).toBeDefined()
             expect(error.toString()).toContain(
               'Encoding does not exist: "invalid"'
@@ -248,7 +248,7 @@ describe('Writer', () => {
 
   describe('::writeToZipFile', () => {
     test('write products to multiple files based on productTypes', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
         const output = tempFile.name
@@ -259,7 +259,7 @@ describe('Writer', () => {
         outputStream.on('finish', () => {
           fs.createReadStream(output)
             .pipe(unzipper.Parse())
-            .on('entry', async entry => {
+            .on('entry', async (entry) => {
               const csvContent = await streamToString(entry)
               entries.push(entry.path)
 
@@ -289,7 +289,7 @@ describe('Writer', () => {
     })
 
     test('write products in different encoding to zip file', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const product = {
           id: '1',
           productType: 'pt-1',
@@ -306,7 +306,7 @@ describe('Writer', () => {
         outputStream.on('finish', () => {
           fs.createReadStream(output)
             .pipe(unzipper.Parse())
-            .on('entry', async entry => {
+            .on('entry', async (entry) => {
               expect(entry.path).toEqual('products/pt-1.csv')
 
               const entryStream = streamTest.toChunks((error, chunks) => {
@@ -338,7 +338,7 @@ describe('Writer', () => {
     })
 
     test('should handle exporting zero products', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const sampleStream = highland([])
 
         const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
@@ -366,7 +366,7 @@ describe('Writer', () => {
     })
 
     test('log success info on zip completion', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
 
         const tempFile = tmp.fileSync({ postfix: '.zip' })
@@ -386,10 +386,10 @@ describe('Writer', () => {
     })
 
     test('throw an error when archiver fails', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const outputStream = streamTest.toText(() => {})
 
-        outputStream.on('error', err => {
+        outputStream.on('error', (err) => {
           expect(err).toBeDefined()
           expect(err.code).toEqual('DIRECTORYDIRPATHREQUIRED')
           done()
@@ -401,11 +401,11 @@ describe('Writer', () => {
     })
 
     test('throw an error when using an invalid encoding fails', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const outputStream = streamTest.toChunks(() => {})
 
-        outputStream.on('error', err => {
+        outputStream.on('error', (err) => {
           expect(err).toBeDefined()
           expect(err.toString()).toContain('Encoding does not exist: "invalid"')
           done()
@@ -419,7 +419,7 @@ describe('Writer', () => {
     })
 
     test('throw an error when streams fail', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const tempFile = tmp.fileSync({ postfix: '.zip' })
         const tmpDir = tmp.dirSync({ unsafeCleanup: true })
         const outputStream = fs.createWriteStream(tempFile.name)
@@ -432,7 +432,7 @@ describe('Writer', () => {
 
         tmp.setGracefulCleanup()
 
-        outputStream.on('error', err => {
+        outputStream.on('error', (err) => {
           expect(err).toBeDefined()
           expect(err.message).toEqual('test error')
 
@@ -451,13 +451,13 @@ describe('Writer', () => {
     })
 
     test('throw an error when a write stream in emitOnce fails', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const tempFile = tmp.fileSync({ postfix: '.tmp' })
         const output = tempFile.name
         const failedStream = fs.createWriteStream(output)
         const inputStreams = { failedStream }
 
-        writer.onStreamsFinished(inputStreams, err => {
+        writer.onStreamsFinished(inputStreams, (err) => {
           expect(err).toBeDefined()
           expect(err.message).toEqual('test error')
           tempFile.removeCallback()

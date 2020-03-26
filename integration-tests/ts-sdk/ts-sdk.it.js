@@ -13,7 +13,7 @@ describe('Auth Middleware Flows', () => {
   let apiConfig
   beforeAll(
     () =>
-      getCredentials(projectKey).then(credentials => {
+      getCredentials(projectKey).then((credentials) => {
         apiConfig = {
           host: 'https://auth.europe-west1.gcp.commercetools.com',
           apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
@@ -58,7 +58,7 @@ describe('Auth Middleware Flows', () => {
         })
         .get()
         .execute()
-        .then(res => {
+        .then((res) => {
           expect(res.body.key).toEqual(projectKey)
         })
     }, 7000)

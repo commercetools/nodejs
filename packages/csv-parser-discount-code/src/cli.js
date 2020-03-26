@@ -20,7 +20,7 @@ Converts commercetools discount code data from CSV to JSON.`
     default: 'stdin',
     describe: 'Path to CSV file.',
   })
-  .coerce('input', arg => {
+  .coerce('input', (arg) => {
     if (arg === 'stdin') return process.stdin
 
     if (fs.existsSync(arg)) {
@@ -35,7 +35,7 @@ Converts commercetools discount code data from CSV to JSON.`
     default: 'stdout',
     describe: 'Path to output JSON file.',
   })
-  .coerce('output', arg => {
+  .coerce('output', (arg) => {
     if (arg === 'stdout') {
       npmlog.stream = fs.createWriteStream('csv-parser-discount-code.log')
       return process.stdout
@@ -66,7 +66,7 @@ Converts commercetools discount code data from CSV to JSON.`
     default: 'info',
     describe: 'Logging level: error, warn, info or verbose.',
   })
-  .coerce('logLevel', arg => {
+  .coerce('logLevel', (arg) => {
     npmlog.level = arg
   }).argv
 
@@ -77,7 +77,7 @@ const buildOptions = ({
   continueOnProblems,
 }) => ({ delimiter, multiValueDelimiter, continueOnProblems })
 
-const logError = error => {
+const logError = (error) => {
   const errorFormatter = new PrettyError()
 
   if (npmlog.level === 'verbose')
@@ -85,14 +85,14 @@ const logError = error => {
   else process.stderr.write(`ERR: ${error.message || error}\n`)
 }
 
-const errorHandler = errors => {
+const errorHandler = (errors) => {
   if (Array.isArray(errors)) errors.forEach(logError)
   else logError(errors)
 
   process.exitCode = 1
 }
 
-const main = _args => {
+const main = (_args) => {
   const options = buildOptions(_args)
   const csvParserDiscountCode = new CsvParserDiscountCode(
     {
@@ -118,7 +118,7 @@ const main = _args => {
   csvParserDiscountCode.parse(_args.input, outputStream)
   // Listen for terminal errors on the output stream
   outputStream
-    .on('error', error => {
+    .on('error', (error) => {
       npmlog.stream = process.stderr
       errorHandler(error)
     })

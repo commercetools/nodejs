@@ -103,7 +103,7 @@ describe('ProductJsonToCsv', () => {
     let outputStream
     let productStream
     beforeEach(() => {
-      productJsonToCsv._resolveReferences = jest.fn(data =>
+      productJsonToCsv._resolveReferences = jest.fn((data) =>
         Promise.resolve(data)
       )
       const product = oneLineTrim`
@@ -144,10 +144,10 @@ describe('ProductJsonToCsv', () => {
     })
 
     test('should process data through stream if no error occurs', async () => {
-      productJsonToCsv._resolveReferences = jest.fn(data =>
+      productJsonToCsv._resolveReferences = jest.fn((data) =>
         Promise.resolve(data)
       )
-      productJsonToCsv._productMapping.run = jest.fn(data => data)
+      productJsonToCsv._productMapping.run = jest.fn((data) => data)
       // No headers in expected
       const expected = [
         'product-1-id',

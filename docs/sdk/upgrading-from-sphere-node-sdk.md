@@ -94,10 +94,7 @@ const client = createClient({
   ],
 })
 const service = createRequestBuilder({ projectKey: 'my-project' }).products
-const uri = service
-  .byId('1')
-  .expand('productType')
-  .build()
+const uri = service.byId('1').expand('productType').build()
 const sync = createSyncProducts()
 const updateActions = sync.buildActions(/* newProduct, existingProduct */)
 const updateRequest = {
@@ -105,10 +102,7 @@ const updateRequest = {
   method: 'POST',
   body: { version: 1, actions: updateActions },
 }
-client
-  .execute(updateRequest)
-  .then(/* result */)
-  .catch(/* error */)
+client.execute(updateRequest).then(/* result */).catch(/* error */)
 ```
 
 ### API differences

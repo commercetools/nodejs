@@ -23,11 +23,11 @@ export function actionsMapBase(diff, oldObj, newObj, config = {}) {
 
 export function actionsMapRates(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('rates', {
-    [ADD_ACTIONS]: newObject => ({
+    [ADD_ACTIONS]: (newObject) => ({
       action: 'addTaxRate',
       taxRate: newObject,
     }),
-    [REMOVE_ACTIONS]: objectToRemove => ({
+    [REMOVE_ACTIONS]: (objectToRemove) => ({
       action: 'removeTaxRate',
       taxRateId: objectToRemove.id,
     }),

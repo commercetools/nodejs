@@ -58,7 +58,7 @@ describe('CategoryExporter', () => {
       })
 
       test('should write to outputStream', () => {
-        return new Promise(done => {
+        return new Promise((done) => {
           const outputStream = streamtest.v2.toText((error, data) => {
             expect(error).toBeFalsy()
             expect(data).toEqual(JSON.stringify(payload.body.results))
@@ -84,7 +84,7 @@ describe('CategoryExporter', () => {
       })
 
       test('should throw error', () => {
-        return new Promise(done => {
+        return new Promise((done) => {
           const outputStream = streamtest.v2.toText((error, data) => {
             expect(error).toBeTruthy()
             expect(data).toBeFalsy()
@@ -113,7 +113,7 @@ describe('CategoryExporter', () => {
       })
 
       test('should throw error', () => {
-        return new Promise(done => {
+        return new Promise((done) => {
           const outputStream = streamtest.v2.toText((error, data) => {
             expect(error).toBeTruthy()
             expect(data).toBeFalsy()

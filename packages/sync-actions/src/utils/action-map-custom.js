@@ -5,9 +5,9 @@ const Actions = {
   setCustomField: 'setCustomField',
 }
 
-const hasSingleCustomFieldChanged = diff => Array.isArray(diff.custom)
-const haveMultipleCustomFieldsChanged = diff => Boolean(diff.custom.fields)
-const hasCustomTypeChanged = diff => Boolean(diff.custom.type)
+const hasSingleCustomFieldChanged = (diff) => Array.isArray(diff.custom)
+const haveMultipleCustomFieldsChanged = (diff) => Boolean(diff.custom.fields)
+const hasCustomTypeChanged = (diff) => Boolean(diff.custom.type)
 const extractCustomType = (diff, previousObject) =>
   Array.isArray(diff.custom.type)
     ? diffpatcher.getDeltaValue(diff.custom.type, previousObject)
@@ -57,7 +57,7 @@ export default function actionsMapCustom(diff, newObj, oldObj) {
         fields: extractTypeFields(diff.custom.fields, newObj.custom.fields),
       })
   } else if (haveMultipleCustomFieldsChanged(diff)) {
-    const customFieldsActions = Object.keys(diff.custom.fields).map(name => ({
+    const customFieldsActions = Object.keys(diff.custom.fields).map((name) => ({
       action: Actions.setCustomField,
       name,
       value: extractFieldValue(newObj.custom.fields, name),

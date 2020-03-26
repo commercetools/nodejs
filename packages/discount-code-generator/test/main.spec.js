@@ -47,7 +47,7 @@ describe('discountCodeGenerator', () => {
     expect(Array.isArray(codes)).toBeTruthy()
     expect(codes).toHaveLength(100)
 
-    codes.forEach(codeObject => {
+    codes.forEach((codeObject) => {
       expect(codeObject).toMatchObject(data)
       expect(codeObject.code).toHaveLength(15)
       expect(codeObject.code).toMatch(/^CT/)
@@ -56,7 +56,7 @@ describe('discountCodeGenerator', () => {
 
   test('should generate codes with default length when not passed', () => {
     const codes = discountCodeGenerator({ quantity: 2 }, data)
-    codes.forEach(codeObject => {
+    codes.forEach((codeObject) => {
       expect(codeObject).toMatchObject(data)
       expect(codeObject.code).toHaveLength(11)
     })

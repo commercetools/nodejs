@@ -317,7 +317,7 @@ export default class ProductMapping {
       if (!ind) return setValue
 
       // take all keys from already mapped values and new setValues
-      uniq([...Object.keys(res), ...Object.keys(setValue)]).forEach(key => {
+      uniq([...Object.keys(res), ...Object.keys(setValue)]).forEach((key) => {
         // if we haven't set this key yet, prepend the given value with delimiters
         if (isUndefined(res[key])) res[key] = emptyDelim
 
@@ -334,7 +334,7 @@ export default class ProductMapping {
   }
 
   _mapSetAttribute(name: string, values: Array<any>): Object {
-    const mappedValues: Array<any> = values.map(value =>
+    const mappedValues: Array<any> = values.map((value) =>
       this._mapAttribute({ name, value })
     )
 

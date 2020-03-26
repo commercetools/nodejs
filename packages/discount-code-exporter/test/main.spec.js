@@ -109,7 +109,7 @@ describe('DiscountCodeExport', () => {
           name: { en: 'some-discount-name' },
           cartDiscounts: [{ id: 'cart-discount-1' }, { id: 'cart-discount-2' }],
         }
-        codeExport._fetchCodes = jest.fn(csvStream => {
+        codeExport._fetchCodes = jest.fn((csvStream) => {
           csvStream.write(sampleCode)
           return Promise.resolve()
         })
@@ -128,14 +128,14 @@ describe('DiscountCodeExport', () => {
               },
               logger
             )
-            codeExport._fetchCodes = jest.fn(csvStream => {
+            codeExport._fetchCodes = jest.fn((csvStream) => {
               csvStream.write(sampleCode)
               return Promise.resolve()
             })
           })
 
           test('should export with template headers', () => {
-            return new Promise(done => {
+            return new Promise((done) => {
               const outputStream = streamtest.v2.toText((error, result) => {
                 const expectedResult = stripIndent`
               code,name.en,cartDiscounts,groups
@@ -160,14 +160,14 @@ describe('DiscountCodeExport', () => {
               },
               logger
             )
-            codeExport._fetchCodes = jest.fn(csvStream => {
+            codeExport._fetchCodes = jest.fn((csvStream) => {
               csvStream.write(sampleCode)
               return Promise.resolve()
             })
           })
 
           test('should export with default headers', () => {
-            return new Promise(done => {
+            return new Promise((done) => {
               const outputStream = streamtest.v2.toText((error, result) => {
                 const expectedResult = stripIndent`
               name.en,description.en,code,cartDiscounts,cartPredicate,groups,isActive,validFrom,validUntil,references,maxApplications,maxApplicationsPerCustomer
@@ -184,7 +184,7 @@ describe('DiscountCodeExport', () => {
 
       describe('JSON export', () => {
         test('should fetch codes and output json to stream by default', () => {
-          return new Promise(done => {
+          return new Promise((done) => {
             const outputStream = streamtest.v2.toText((error, result) => {
               const expectedResult = [sampleCode]
               expect(JSON.parse(result)).toEqual(expectedResult)
@@ -204,7 +204,7 @@ describe('DiscountCodeExport', () => {
       })
 
       test('should emit error if it occurs when streaming to csv', () => {
-        return new Promise(done => {
+        return new Promise((done) => {
           codeExport.exportFormat = 'csv'
           const outputStream = streamtest.v2.toText((error, result) => {
             expect(error.message).toBe('error occured')
@@ -216,7 +216,7 @@ describe('DiscountCodeExport', () => {
       })
 
       test('should emit error if it occurs when streaming to json', () => {
-        return new Promise(done => {
+        return new Promise((done) => {
           const outputStream = streamtest.v2.toText((error, result) => {
             expect(error.message).toBe('error occured')
             expect(result).toBeUndefined()

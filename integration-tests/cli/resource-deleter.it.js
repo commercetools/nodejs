@@ -53,14 +53,14 @@ describe('Resource Deleter', () => {
     }
 
     // create resources on API
-    await Promise.each(Object.keys(resources), name => {
+    await Promise.each(Object.keys(resources), (name) => {
       return createData(apiConfig, name, resources[name])
     })
   }, 30000)
 
   // clear resources on API
   afterAll(async () => {
-    await Promise.each(Object.keys(resources), name => {
+    await Promise.each(Object.keys(resources), (name) => {
       clearData(apiConfig, name)
     })
   }, 45000)
@@ -81,7 +81,7 @@ describe('Resource Deleter', () => {
 
   describe.each(Object.keys(resources).reverse())(
     'should delete resource',
-    resource => {
+    (resource) => {
       beforeEach(() => {
         const options = {
           apiConfig,

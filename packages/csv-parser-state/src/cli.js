@@ -41,7 +41,7 @@ Required scopes: ['view_orders']`,
     default: 'stdin',
     describe: 'Path to CSV file.',
   })
-  .coerce('input', arg => {
+  .coerce('input', (arg) => {
     if (arg === 'stdin') return process.stdin
 
     if (fs.existsSync(arg)) {
@@ -57,7 +57,7 @@ Required scopes: ['view_orders']`,
     describe: 'Path to output JSON file',
     type: 'string',
   })
-  .coerce('output', arg => {
+  .coerce('output', (arg) => {
     if (arg !== 'stdout') return fs.createWriteStream(String(arg))
 
     return process.stdout
@@ -109,7 +109,7 @@ const logger = pino(loggerConfig, logDestination)
 
 // print errors to stderr if we use stdout for data output
 // if we save data to output file errors are already logged by pino
-const logError = error => {
+const logError = (error) => {
   const errorFormatter = new PrettyError()
 
   if (args.logLevel === 'debug')
@@ -117,7 +117,7 @@ const logError = error => {
   else process.stderr.write(`ERR: ${error.message || error}`)
 }
 
-const errorHandler = errors => {
+const errorHandler = (errors) => {
   if (Array.isArray(errors)) errors.forEach(logError)
   else logError(errors)
 
@@ -134,7 +134,7 @@ args.output.on('error', errorHandler)
 
 resolveCredentials(args)
   .then(
-    credentials =>
+    (credentials) =>
       new CsvParserState(
         {
           apiConfig: {
@@ -158,7 +158,7 @@ resolveCredentials(args)
         }
       )
   )
-  .then(csvParserState => {
+  .then((csvParserState) => {
     csvParserState.parse(args.input, args.output)
   })
   .catch(errorHandler)

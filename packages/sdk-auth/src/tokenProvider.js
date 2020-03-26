@@ -76,7 +76,7 @@ export default class TokenProvider {
       this.fetchTokenInfo(this.sdkAuth)
     )
 
-    return this.fetchTokenInfoPromise.then(tokenInfo => {
+    return this.fetchTokenInfoPromise.then((tokenInfo) => {
       this.fetchTokenInfoPromise = null
       return tokenInfo
     })
@@ -88,7 +88,7 @@ export default class TokenProvider {
 
     this.refreshTokenFlowPromise = this.sdkAuth.refreshTokenFlow(refreshToken)
 
-    return this.refreshTokenFlowPromise.then(refreshTokenInfo => {
+    return this.refreshTokenFlowPromise.then((refreshTokenInfo) => {
       this.refreshTokenFlowPromise = null
       return refreshTokenInfo
     })

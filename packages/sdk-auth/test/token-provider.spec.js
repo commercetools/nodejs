@@ -257,7 +257,7 @@ describe('Token Provider', () => {
 
       const _tokenProvider = new TokenProvider({
         sdkAuth: _sdkAuth,
-        fetchTokenInfo: __sdkAuth => __sdkAuth.clientCredentialsFlow(),
+        fetchTokenInfo: (__sdkAuth) => __sdkAuth.clientCredentialsFlow(),
       })
       jest
         .spyOn(TokenProvider, '_isTokenExpired')

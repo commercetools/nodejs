@@ -50,7 +50,7 @@ describe('Channels', () => {
 
   beforeAll(() =>
     getCredentials(projectKey)
-      .then(credentials => {
+      .then((credentials) => {
         apiConfig = {
           host: 'https://auth.europe-west1.gcp.commercetools.com',
           apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
@@ -91,7 +91,7 @@ describe('Channels', () => {
       },
     }
 
-    return client.execute(createRequest).then(response => {
+    return client.execute(createRequest).then((response) => {
       channelResponse = response.body
       expect(omit(response.body, ignoredResponseKeys)).toEqual({
         ...body,
@@ -112,7 +112,7 @@ describe('Channels', () => {
       },
     }
 
-    return client.execute(fetchRequest).then(response => {
+    return client.execute(fetchRequest).then((response) => {
       expect(response.body.results).toHaveLength(1)
       expect(response.statusCode).toBe(200)
     })
@@ -132,7 +132,7 @@ describe('Channels', () => {
       },
     }
 
-    return client.execute(updateRequest).then(response => {
+    return client.execute(updateRequest).then((response) => {
       channelResponse = response.body
       expect(omit(response.body, ignoredResponseKeys)).toEqual({
         key,
@@ -156,11 +156,11 @@ describe('Channels', () => {
 
     let resultCount = 0
     return client
-      .process(processRequest, payload => {
+      .process(processRequest, (payload) => {
         resultCount += payload.body.results.length
-        return Promise.resolve(payload.body.results.map(c => c.id))
+        return Promise.resolve(payload.body.results.map((c) => c.id))
       })
-      .then(response => {
+      .then((response) => {
         expect(response).toHaveLength(resultCount)
       })
   })
@@ -180,7 +180,7 @@ describe('Channels', () => {
       },
     }
 
-    return client.execute(deleteRequest).then(response => {
+    return client.execute(deleteRequest).then((response) => {
       expect(response.statusCode).toBe(200)
     })
   })

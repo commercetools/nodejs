@@ -126,7 +126,7 @@ describe('PriceExporter', () => {
     })
 
     test('should emit `error` on output stream if error occurs', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const spy = jest
           .spyOn(priceExporter.client, 'process')
           .mockImplementation(() => Promise.reject(new Error('error occured')))
@@ -162,7 +162,7 @@ describe('PriceExporter', () => {
     ]
 
     test('should write json output once for each sku to stream', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const pipeStream = { write: jest.fn(() => done()) }
         priceExporter._writePrices(sample, pipeStream)
 
@@ -172,7 +172,7 @@ describe('PriceExporter', () => {
     })
 
     test('should flatten csv output and write to stream', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const pipeStream = { write: jest.fn(() => done()) }
         const firstExpected = { 'value.centAmount': 16125 }
         const secondExpected = { 'value.centAmount': 4000 }
@@ -222,13 +222,13 @@ describe('PriceExporter', () => {
           ],
         },
       ]
-      priceExporter._resolveChannel = jest.fn(price =>
+      priceExporter._resolveChannel = jest.fn((price) =>
         price.channel ? resolvedChannel : {}
       )
-      priceExporter._resolveCustomerGroup = jest.fn(price =>
+      priceExporter._resolveCustomerGroup = jest.fn((price) =>
         price.customerGroup ? resolvedCustGroup : {}
       )
-      priceExporter._resolveCustomType = jest.fn(price =>
+      priceExporter._resolveCustomType = jest.fn((price) =>
         price.custom ? resolvedCustomType : {}
       )
       const expected = [

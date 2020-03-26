@@ -25,7 +25,7 @@ describe('LineItemStateParser', () => {
 
   describe('_processData', () => {
     test('should transform CSV object into order', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const mockOrder = {
           orderNumber: '123',
           fromState: 'ordered',
@@ -34,7 +34,7 @@ describe('LineItemStateParser', () => {
           lineItemId: '123',
         }
 
-        parser._processData(mockOrder).then(result => {
+        parser._processData(mockOrder).then((result) => {
           expect(result.orderNumber).toBe(mockOrder.orderNumber)
 
           expect(result.lineItems[0].state[0].quantity).toBe(
@@ -50,7 +50,7 @@ describe('LineItemStateParser', () => {
     })
 
     test('should return an error if required headers are missing', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const mockOrder = {
           fromState: 'okay',
           toState: 'yeah',
@@ -63,7 +63,7 @@ describe('LineItemStateParser', () => {
           .then(() =>
             done.fail('Should throw an error because of a missing headers.')
           )
-          .catch(error => {
+          .catch((error) => {
             expect(error).toEqual(
               new Error("Required headers missing: 'orderNumber'")
             )
@@ -74,7 +74,7 @@ describe('LineItemStateParser', () => {
   })
 
   test('should accept a stream and output a stream', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       const readStream = fs.createReadStream(
         path.join(__dirname, 'data/lineitemstate-sample.csv')
       )
@@ -109,7 +109,7 @@ describe('LineItemStateParser', () => {
   })
 
   test('should parse CSV with two lineItemStates from one order', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       const readStream = fs.createReadStream(
         path.join(__dirname, 'data/lineitemstate-duplicate-ordernumber.csv')
       )

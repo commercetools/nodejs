@@ -213,12 +213,6 @@ The imperative API can be mixed with the declarative one.
 
 ```js
 // these both lead to the same result
-requestBuilder.channels
-  .parse({ page: 5 })
-  .perPage(10)
-  .build()
-requestBuilder.channels
-  .perPage(10)
-  .parse({ page: 5 })
-  .build()
+requestBuilder.channels.parse({ page: 5 }).perPage(10).build()
+requestBuilder.channels.perPage(10).parse({ page: 5 }).build()
 ```

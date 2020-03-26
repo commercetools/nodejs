@@ -82,7 +82,7 @@ const logger = pino(loggerConfig, logDestination)
 
 // print errors to stderr if we use stdout for data output
 // if we save data to output file errors are already logged by pino
-const logError = error => {
+const logError = (error) => {
   const errorFormatter = new PrettyError()
 
   if (args.logLevel === 'debug')
@@ -90,14 +90,14 @@ const logError = error => {
   else process.stderr.write(`ERR: ${error.message || error}`)
 }
 
-const errorHandler = errors => {
+const errorHandler = (errors) => {
   if (Array.isArray(errors)) errors.forEach(logError)
   else logError(errors)
 
   process.exitCode = 1
 }
 
-const resolveCredentials = options => {
+const resolveCredentials = (options) => {
   if (options.accessToken) return Promise.resolve({})
   return getCredentials(options.projectKey)
 }
@@ -114,7 +114,7 @@ const deleteOrNot = (personalDataEraser, answer) => {
 }
 
 resolveCredentials(args)
-  .then(credentials => {
+  .then((credentials) => {
     const apiConfig = {
       host: args.authUrl,
       apiUrl: args.apiUrl,
@@ -134,24 +134,24 @@ resolveCredentials(args)
     }
     return new PersonalDataErasure(exporterOptions)
   })
-  .then(personalDataEraser => {
+  .then((personalDataEraser) => {
     if (args.deleteAll) {
       if (args.force) deleteOrNot(personalDataEraser, args.force)
       else {
         const confirm = new Confirm(
           `Are you sure you want to delete all data related to customer with \nid: "${args.customerId}"?`
         )
-        confirm.run().then(answer => {
+        confirm.run().then((answer) => {
           deleteOrNot(personalDataEraser, answer)
         })
       }
     } else {
-      personalDataEraser.getCustomerData(args.customerId).then(result => {
+      personalDataEraser.getCustomerData(args.customerId).then((result) => {
         if (args.output === 'stdout') {
           // eslint-disable-next-line
           console.log(result)
         } else {
-          fs.writeFile(args.output, JSON.stringify(result, null, 2), err => {
+          fs.writeFile(args.output, JSON.stringify(result, null, 2), (err) => {
             if (err) throw err
             logger.info(
               `${result.length} entities has been successfully written to file '${args.output}'`

@@ -72,7 +72,7 @@ export default class ProductExcel {
    * @param row Array of values
    */
   static _cleanRow(row: Array<any> | any): Array<any> {
-    return row.map(item =>
+    return row.map((item) =>
       typeof item === 'undefined' || item === '' ? null : item
     )
   }
@@ -80,7 +80,7 @@ export default class ProductExcel {
   writeHeader(header: Array<string> | string) {
     // eslint-disable-next-line no-param-reassign
     this.excel.worksheet.columns = Array.isArray(header)
-      ? header.map(name => ({ header: name }))
+      ? header.map((name) => ({ header: name }))
       : [{ header }]
   }
 

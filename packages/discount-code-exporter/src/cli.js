@@ -27,7 +27,7 @@ ${description}`
     describe:
       'Language used for localised fields (such as `name` and `description`) when exporting without template. This field is ignored for exports with template',
   })
-  .coerce('template', arg => {
+  .coerce('template', (arg) => {
     if (fs.existsSync(arg)) return fs.createReadStream(String(arg))
 
     throw new Error('Input file cannot be reached or does not exist')
@@ -37,7 +37,7 @@ ${description}`
     default: 'stdout',
     describe: 'Path to output file.',
   })
-  .coerce('output', arg => {
+  .coerce('output', (arg) => {
     if (arg !== 'stdout') return fs.createWriteStream(String(arg))
 
     return process.stdout
@@ -91,11 +91,11 @@ ${description}`
     default: 'discount-code-export.log',
     describe: 'Path to file where to save logs.',
   })
-  .coerce('logLevel', arg => {
+  .coerce('logLevel', (arg) => {
     npmlog.level = arg
   }).argv
 
-const logError = error => {
+const logError = (error) => {
   const errorFormatter = new PrettyError()
 
   if (npmlog.level === 'verbose')
@@ -105,7 +105,7 @@ const logError = error => {
 
 // print errors to stderr if we use stdout for data output
 // if we save data to output file errors are already logged by npmlog
-const errorHandler = errors => {
+const errorHandler = (errors) => {
   if (Array.isArray(errors)) errors.forEach(logError)
   else logError(errors)
 
@@ -114,7 +114,7 @@ const errorHandler = errors => {
 
 // Retrieve the headers from the template file
 // Only the first line of the file is read
-const getFields = _args =>
+const getFields = (_args) =>
   new Promise((resolve, reject) => {
     if (!_args.template) resolve(null)
     else {
@@ -122,14 +122,14 @@ const getFields = _args =>
         input: _args.template,
       })
       rl.on('error', reject)
-      rl.on('line', line => {
+      rl.on('line', (line) => {
         rl.close()
         resolve(line.split(_args.delimiter))
       })
     }
   })
 
-const resolveCredentials = _args => {
+const resolveCredentials = (_args) => {
   if (_args.accessToken) return Promise.resolve({})
   return getCredentials(_args.projectKey)
 }
@@ -169,5 +169,5 @@ Promise.all([resolveCredentials(args), getFields(args)])
     }
     return new DiscountCodeExport(constructorOptions, logger)
   })
-  .then(discountCodeExport => discountCodeExport.run(args.output))
+  .then((discountCodeExport) => discountCodeExport.run(args.output))
   .catch(errorHandler)

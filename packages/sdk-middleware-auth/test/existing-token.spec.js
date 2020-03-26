@@ -25,7 +25,7 @@ describe('Existing Token', () => {
   describe('Basics', () => {
     test('should not modify request if no argument passed', () => {
       const request = createRequest()
-      const next = req => {
+      const next = (req) => {
         expect(req).toBe(request)
       }
       const authMiddleware = createAuthMiddlewareWithExistingToken()
@@ -41,7 +41,7 @@ describe('Existing Token', () => {
 
   describe('with only authorization argument', () => {
     test('should configure request header with authorization', () => {
-      const next = req => {
+      const next = (req) => {
         expect(req).toEqual(expect.objectContaining(restOfRequest))
         expect(req).toEqual(
           expect.objectContaining({
@@ -57,7 +57,7 @@ describe('Existing Token', () => {
     })
 
     test('should overide existing authorization', () => {
-      const next = req => {
+      const next = (req) => {
         expect(req).toEqual(expect.objectContaining(restOfRequest))
         expect(req).toEqual(
           expect.objectContaining({
@@ -77,7 +77,7 @@ describe('Existing Token', () => {
 
   describe('with two arguments', () => {
     test('should overide existing authorization if false is true', () => {
-      const next = req => {
+      const next = (req) => {
         expect(req).toEqual(expect.objectContaining(restOfRequest))
         expect(req).toEqual(
           expect.objectContaining({
@@ -96,7 +96,7 @@ describe('Existing Token', () => {
     })
 
     test('should not overide authorization if force is false', () => {
-      const next = req => {
+      const next = (req) => {
         expect(req).toEqual(expect.objectContaining(restOfRequest))
         expect(req).toEqual(
           expect.objectContaining({

@@ -66,7 +66,7 @@ const csvParserPrice = new CsvParserPrice(
 
 const outputStream = fs.createWriteStream('./output.json')
 
-outputStream.on('error', err => {
+outputStream.on('error', (err) => {
   // handle error event
 })
 

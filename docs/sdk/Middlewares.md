@@ -12,7 +12,7 @@ The most important thing is the **contract** the middlewares have between each o
 A _Middleware_ is a higher-order function that composes a _dispatch function_ to return a new _dispatch function_.
 
 ```js
-const middleware = next => (request, response) => next(request, response)
+const middleware = (next) => (request, response) => next(request, response)
 ```
 
 The dispatch function accepts 2 arguments: [`request`](/sdk/Glossary.md#clientrequest) and [`response`](/sdk/Glossary.md#clientresponse) objects.
@@ -23,7 +23,7 @@ After doing the side effects, the middleware should call `next`, passing the (mu
 Let's see a simple practical example: a middleware that logs the incoming `request` and `response` objects.
 
 ```js
-const loggerMiddleware = next => (request, response) => {
+const loggerMiddleware = (next) => (request, response) => {
   const { statusCode, body, error } = response
   console.log('Request:', request)
   console.log('Response:', { statusCode, body, error })

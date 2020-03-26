@@ -21,13 +21,13 @@ export function writeToSingleXlsxFile(
   headers: Array<Object>
 ) {
   const mappedHeaders = mapHeaders(headers)
-  const headerNames = mappedHeaders.map(header => header.label)
+  const headerNames = mappedHeaders.map((header) => header.label)
 
   const excel = new ProductExcel(output)
   excel.writeHeader(headerNames)
 
   productStream
-    .each(product => {
+    .each((product) => {
       const row = mapValues(mappedHeaders, product)
       if (row.join('')) excel.writeRow(row)
     })
@@ -47,9 +47,9 @@ export function finishWorksheetsAndArchive(
   if (exports.length === 0) return archiveDir(dir, output, logger)
 
   const writeStreams: Array<stream$Writable> = exports.map(
-    exportInfo => exportInfo.excel.stream
+    (exportInfo) => exportInfo.excel.stream
   )
-  onStreamsFinished(writeStreams, err => {
+  onStreamsFinished(writeStreams, (err) => {
     if (err) {
       logger.error(err)
       output.emit('error', err)
@@ -101,7 +101,7 @@ export function writeToZipFile(
 
           // write a header row to XLSX file
           const headerNames: Array<string> = lastExport.headers.map(
-            header => header.label
+            (header) => header.label
           )
           lastExport.excel.writeHeader(headerNames)
 
@@ -115,7 +115,7 @@ export function writeToZipFile(
     })
     .done((): void => {
       const exports: Array<Object> = Object.keys(exportByProductType).map(
-        key => exportByProductType[key]
+        (key) => exportByProductType[key]
       )
       finishWorksheetsAndArchive(exports, tmpDir, output, logger)
     })
