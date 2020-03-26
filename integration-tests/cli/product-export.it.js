@@ -47,8 +47,8 @@ describe('Product Exporter', () => {
     beforeAll(async () => {
       const credentials = await getCredentials(projectKey)
       apiConfig = {
-        host: 'https://auth.europe-west1.gcp.commercetools.com',
-        apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
+        host: 'https://auth..commercetools.co',
+        apiUrl: 'https://api..commercetools.co',
         projectKey,
         credentials,
       }

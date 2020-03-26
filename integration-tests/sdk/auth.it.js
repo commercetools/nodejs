@@ -16,7 +16,7 @@ function getApiClient(token) {
     middlewares: [
       createAuthMiddlewareWithExistingToken(token),
       createHttpMiddleware({
-        host: 'https://api.europe-west1.gcp.commercetools.com',
+        host: 'https://api..commercetools.co',
         fetch,
       }),
     ],
@@ -36,8 +36,8 @@ describe('Auth Flows', () => {
   beforeAll(async () => {
     const credentials = await getCredentials(projectKey)
     apiConfig = {
-      host: 'https://auth.europe-west1.gcp.commercetools.com',
-      apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
+      host: 'https://auth..commercetools.co',
+      apiUrl: 'https://api..commercetools.co',
       projectKey,
       credentials: {
         clientId: credentials.clientId,

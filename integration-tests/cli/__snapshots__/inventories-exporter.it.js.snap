@@ -21,9 +21,9 @@ Options:
   --version         Show version number                                [boolean]
   --outputFile, -o  Path to output file.                     [default: \\"stdout\\"]
   --apiUrl          The host URL of the HTTP API service.
-                                              [default: \\"https://api.europe-west1.gcp.commercetools.com\\"]
+                                              [default: \\"https://api..commercetools.co\\"]
   --authUrl         The host URL of the OAuth API service.
-                                             [default: \\"https://auth.europe-west1.gcp.commercetools.com\\"]
+                                             [default: \\"https://auth..commercetools.co\\"]
   --delimiter, -d   Used CSV delimiter.                           [default: \\",\\"]
   --accessToken     CTP client access token
   --projectKey, -p  API project key.                                  [required]

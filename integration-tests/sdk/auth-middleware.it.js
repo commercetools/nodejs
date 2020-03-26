@@ -23,8 +23,8 @@ describe('Auth Middleware Flows', () => {
       getCredentials(projectKey)
         .then(credentials => {
           apiConfig = {
-            host: 'https://auth.europe-west1.gcp.commercetools.com',
-            apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
+            host: 'https://auth..commercetools.co',
+            apiUrl: 'https://api..commercetools.co',
             projectKey,
             credentials: {
               clientId: credentials.clientId,
@@ -52,7 +52,7 @@ describe('Auth Middleware Flows', () => {
 
   describe('Password Session Flow', () => {
     const httpMiddleware = createHttpMiddleware({
-      host: 'https://api.europe-west1.gcp.commercetools.com',
+      host: 'https://api..commercetools.co',
       fetch,
     })
 
@@ -92,7 +92,7 @@ describe('Auth Middleware Flows', () => {
 
   describe('Anonymous Session Flow', () => {
     const httpMiddleware = createHttpMiddleware({
-      host: 'https://api.europe-west1.gcp.commercetools.com',
+      host: 'https://api..commercetools.co',
       fetch,
     })
 
@@ -145,7 +145,7 @@ describe('Auth Middleware Flows', () => {
   describe('Refresh Token Flow', () => {
     it('uses the refresh token', () => {
       const httpMiddleware = createHttpMiddleware({
-        host: 'https://api.europe-west1.gcp.commercetools.com',
+        host: 'https://api..commercetools.co',
         includeOriginalRequest: true,
         fetch,
       })
