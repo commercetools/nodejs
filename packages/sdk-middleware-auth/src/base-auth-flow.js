@@ -99,10 +99,17 @@ function executeRequest({
         }
         const error: Object = new Error(parsed ? parsed.message : text)
         if (parsed) error.body = parsed
+
+        // Dispatch all pending requests
+        requestState.set(false)
+
         response.reject(error)
       })
     })
     .catch((error: Error) => {
+      // Dispatch all pending requests
+      requestState.set(false)
+
       if (response && typeof response.reject === 'function')
         response.reject(error)
     })
