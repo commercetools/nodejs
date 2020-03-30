@@ -12,6 +12,7 @@ export const baseActionsList = [
   { action: 'setValidFrom', key: 'validFrom' },
   { action: 'setValidUntil', key: 'validUntil' },
   { action: 'changeStackingMode', key: 'stackingMode' },
+  { action: 'setKey', key: 'key' },
 ]
 
 export function actionsMapBase(diff, oldObj, newObj, config = {}) {
