@@ -94,6 +94,17 @@ describe('Cart Discounts Exports', () => {
         ])
       )
     })
+
+    test('should contain `setKey` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setKey',
+            key: 'key'
+          }
+        ])
+      )
+    })
   })
 })
 
@@ -414,6 +425,25 @@ describe('Cart Discounts Actions', () => {
         value: true,
       },
     ]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build the `setKey` action', () => {
+    const before = {
+      key: 'key-before'
+    }
+
+    const now = {
+      key: 'key-now'
+    }
+
+    const expected = [
+      {
+        action: 'setKey',
+        key: 'key-now'
+      }
+    ]
+    const actual = cartDiscountsSync.buildActions(now, before)
     expect(actual).toEqual(expected)
   })
 })
