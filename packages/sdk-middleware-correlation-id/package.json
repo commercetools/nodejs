@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-middleware-correlation-id",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Middleware for adding a correlation id to requests being executed, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
