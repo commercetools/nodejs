@@ -263,7 +263,6 @@ const generateChangeAttributeOrderAction = (
   updateActions = []
 ) => {
   if (!attrsOld.length || !attrsNew.length) return null
-
   const newAttributesOrder = attrsNew.map((attribute) => attribute.name)
 
   const removedAttributeNames = updateActions
@@ -300,13 +299,15 @@ export const actionsMapForHints = (nestedValuesChanges = {}, ptOld, ptNew) => {
     ),
   ]
 
-  const changeAttributeOrderAction = generateChangeAttributeOrderAction(
-    ptOld.attributes,
-    ptNew.attributes,
-    updateActions
-  )
-
-  if (changeAttributeOrderAction) updateActions.push(changeAttributeOrderAction)
+  if (!updateActions.length) {
+    const changeAttributeOrderAction = generateChangeAttributeOrderAction(
+      ptOld.attributes,
+      ptNew.attributes,
+      updateActions
+    )
+    if (changeAttributeOrderAction)
+      updateActions.push(changeAttributeOrderAction)
+  }
 
   return updateActions
 }

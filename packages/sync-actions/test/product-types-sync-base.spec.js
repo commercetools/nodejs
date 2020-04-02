@@ -225,7 +225,7 @@ describe('Actions', () => {
       ])
     })
 
-    test('should remove, add and change order of attributes', () => {
+    test('should remove, add but should not change order of attributes', () => {
       before = {
         name: 'Product Type',
         attributes: [
@@ -270,10 +270,6 @@ describe('Actions', () => {
           attribute: {
             name: 'attr4',
           },
-        },
-        {
-          action: 'changeAttributeOrderByName',
-          attributeNames: ['attr3', 'attr4', 'attr1'],
         },
       ])
     })
