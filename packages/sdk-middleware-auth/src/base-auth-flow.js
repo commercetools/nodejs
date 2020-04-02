@@ -71,7 +71,7 @@ function executeRequest({
                 tokenCacheKey
               )
 
-              // Dispatch all pending requests
+              // Reset requestState to false
               requestState.set(false)
 
               // Freeze and copy pending queue, reset original one for accepting
@@ -100,14 +100,14 @@ function executeRequest({
         const error: Object = new Error(parsed ? parsed.message : text)
         if (parsed) error.body = parsed
 
-        // Dispatch all pending requests
+        // Reset requestState to false
         requestState.set(false)
 
         response.reject(error)
       })
     })
     .catch((error: Error) => {
-      // Dispatch all pending requests
+      // Reset requestState to false
       requestState.set(false)
 
       if (response && typeof response.reject === 'function')
