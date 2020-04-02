@@ -371,6 +371,53 @@ describe('Base Auth Flow', () => {
       createBaseMiddleware({ pendingTasks, tokenCache, requestState }, next)
     }))
 
+  test('should change requestState to false when createAuthMiddlewareBase fails', async () => {
+    const middlewareOptions = createTestMiddlewareOptions()
+    let requestCount = 0
+
+    nock(middlewareOptions.host)
+      .persist() // <-- use the same interceptor for all requests
+      .log(() => {
+        requestCount += 1
+      }) // keep track of the request count
+      .filteringRequestBody(/.*/, '*')
+      .post('/oauth/token', '*')
+      .delay(2000) // <-- Delay the response
+      .reply(401, {
+        message: 'invalid_client',
+        error: 'invalid_client',
+      })
+
+    const requestState = store(false)
+    const pendingTasks = []
+
+    const startCreateBaseMiddleware = () =>
+      new Promise((resolve, reject) => {
+        expect(requestState.get()).toBe(false)
+
+        // fire off promise returning function and change requestState to true
+        // we do not await the response before the assertion since we set
+        // reqeustState to false in the catch block
+        const start = createBaseMiddleware({
+          response: { resolve, reject },
+          pendingTasks,
+          requestState,
+        })
+
+        expect(requestState.get()).toBe(true)
+        expect(requestCount).toBe(1) // Make sure that nock runned the mocked request
+
+        return start
+      })
+
+    try {
+      // await promise to fail and set requestState to false
+      await startCreateBaseMiddleware()
+    } catch (error) {
+      expect(requestState.get()).toBe(false)
+    }
+  })
+
   test('if a token has been fetched, use it for the new incoming requests', () =>
     new Promise((resolve) => {
       const middlewareOptions = createTestMiddlewareOptions()
