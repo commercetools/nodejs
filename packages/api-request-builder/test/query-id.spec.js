@@ -53,7 +53,7 @@ describe('queryId', () => {
 
   test('should throw if orderNumber is invalid', () => {
     expect(() => service.byOrderNumber('hi')).toThrow(
-      /Required argument for `byCustomerId` is missing/
+      /Required argument for `byOrderNumber` is missing/
     )
   })
 

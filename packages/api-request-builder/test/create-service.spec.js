@@ -426,7 +426,7 @@ describe('createService', () => {
 
       test('should mix orderNumber and queryParams', () => {
         expect(service.byOrderNumber(123).expand('baz').build()).toBe(
-          '/my-project1/test?orderNumber=123&expand=baz'
+          '/my-project1/test/order-number=123?expand=baz'
         )
       })
 
