@@ -34,6 +34,10 @@ describe('Exports', () => {
         action: 'setStores',
         key: 'stores',
       },
+      {
+        action: 'setKey',
+        key: 'key',
+      },
     ])
   })
 
@@ -457,6 +461,23 @@ describe('Actions', () => {
             key: 'usa',
           },
         ],
+      },
+    ])
+  })
+
+  test('should build `setKey` action', () => {
+    const before = {
+      key: 'key-before',
+    }
+
+    const now = {
+      key: 'key-now',
+    }
+    const actual = customerSync.buildActions(now, before)
+    expect(actual).toEqual([
+      {
+        action: 'setKey',
+        key: 'key-now',
       },
     ])
   })

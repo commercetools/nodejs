@@ -1,3 +1,468 @@
+## @commercetools/sync-actions@4.5.0 (2020-04-03)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1514](https://github.com/commercetools/nodejs/pull/1514) feat(sync-actions): add set key actions ([@NickDevG](https://github.com/NickDevG))
+
+#### Committers: 1
+
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/state-importer@3.0.12 (2020-04-03)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1514](https://github.com/commercetools/nodejs/pull/1514) feat(sync-actions): add set key actions ([@NickDevG](https://github.com/NickDevG))
+
+#### Committers: 1
+
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/sdk-middleware-queue@2.1.4 (2020-04-03)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1514](https://github.com/commercetools/nodejs/pull/1514) feat(sync-actions): add set key actions ([@NickDevG](https://github.com/NickDevG))
+
+#### Committers: 1
+
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/sdk-middleware-correlation-id@2.1.4 (2020-04-03)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1514](https://github.com/commercetools/nodejs/pull/1514) feat(sync-actions): add set key actions ([@NickDevG](https://github.com/NickDevG))
+
+#### Committers: 1
+
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/resource-deleter@2.0.13 (2020-04-03)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1514](https://github.com/commercetools/nodejs/pull/1514) feat(sync-actions): add set key actions ([@NickDevG](https://github.com/NickDevG))
+
+#### Committers: 1
+
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/integration-tests@0.0.24 (2020-04-03)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1514](https://github.com/commercetools/nodejs/pull/1514) feat(sync-actions): add set key actions ([@NickDevG](https://github.com/NickDevG))
+
+#### Committers: 1
+
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/discount-code-importer@3.0.12 (2020-04-03)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1514](https://github.com/commercetools/nodejs/pull/1514) feat(sync-actions): add set key actions ([@NickDevG](https://github.com/NickDevG))
+
+#### Committers: 1
+
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/custom-objects-importer@3.0.12 (2020-04-03)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1514](https://github.com/commercetools/nodejs/pull/1514) feat(sync-actions): add set key actions ([@NickDevG](https://github.com/NickDevG))
+
+#### Committers: 1
+
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/sync-actions@4.4.0 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/state-importer@3.0.11 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sdk-middleware-queue@2.1.2 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sdk-middleware-http@6.0.6 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sdk-middleware-correlation-id@2.1.2 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sdk-middleware-auth@6.1.2 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sdk-client@2.1.2 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sdk-auth@3.0.6 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/resource-deleter@2.0.12 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-json-to-xlsx@4.0.4 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-json-to-csv@5.0.4 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-exporter@3.1.1 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/price-exporter@3.0.13 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/personal-data-erasure@3.0.12 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/inventories-exporter@3.0.13 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/integration-tests@0.0.23 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/get-credentials@3.0.15 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/discount-code-importer@3.0.11 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/discount-code-generator@2.0.9 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/discount-code-exporter@4.0.13 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/customer-groups-exporter@3.0.12 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/custom-objects-importer@3.0.11 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/custom-objects-exporter@3.0.12 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/csv-parser-state@3.0.11 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/csv-parser-price@4.0.13 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/csv-parser-orders@2.0.17 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/csv-parser-discount-code@2.0.10 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/category-exporter@3.0.12 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/api-request-builder@5.4.3 (2020-03-30)
+
+#### :house: Maintenance
+
+- `category-exporter`, `csv-parser-state`, `custom-objects-exporter`, `customer-groups-exporter`, `personal-data-erasure`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`
+  - [#1510](https://github.com/commercetools/nodejs/pull/1510) fix(deps): update dependency pino to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `category-exporter`, `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `csv-parser-state`, `custom-objects-exporter`, `custom-objects-importer`, `customer-groups-exporter`, `discount-code-exporter`, `discount-code-generator`, `discount-code-importer`, `get-credentials`, `inventories-exporter`, `personal-data-erasure`, `price-exporter`, `product-exporter`, `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-client`, `sdk-middleware-auth`, `sdk-middleware-correlation-id`, `sdk-middleware-http`, `sdk-middleware-queue`, `state-importer`, `sync-actions`
+  - [#1506](https://github.com/commercetools/nodejs/pull/1506) chore(deps): update dependency prettier to v2 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
 ## @commercetools/sdk-middleware-auth@6.1.1 (2020-03-25)
 
 #### :nail_care: Enhancement
