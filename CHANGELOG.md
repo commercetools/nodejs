@@ -1,3 +1,14 @@
+## @commercetools/sdk-middleware-auth@6.1.3 (2020-04-03)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-auth`
+  - [#1512](https://github.com/commercetools/nodejs/pull/1512) fix(packages): set requestStates in case of wrong auth ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- Markus Azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
 ## @commercetools/sync-actions@4.5.0 (2020-04-03)
 
 #### :rocket: New Feature
