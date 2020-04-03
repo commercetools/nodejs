@@ -37,6 +37,7 @@ const expectedServiceProperties = [
   'byCurrency',
   'byCountry',
   'byState',
+  'byOrderNumber',
 ]
 const projectKey = 'my-project1'
 
@@ -420,6 +421,12 @@ describe('createService', () => {
       test('should mix customerId and dataErasure', () => {
         expect(service.byCustomerId('foo').withFullDataErasure().build()).toBe(
           '/my-project1/test?customerId=foo&dataErasure=true'
+        )
+      })
+
+      test('should mix orderNumber and queryParams', () => {
+        expect(service.byOrderNumber(123).expand('baz').build()).toBe(
+          '/my-project1/test?orderNumber=123&expand=baz'
         )
       })
 
