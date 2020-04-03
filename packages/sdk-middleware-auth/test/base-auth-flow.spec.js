@@ -397,7 +397,7 @@ describe('Base Auth Flow', () => {
 
         // fire off promise returning function and change requestState to true
         // we do not await the response before the assertion since we set
-        // reqeustState to false in the catch block
+        // `reqeustState` to `false` after the promise is fulfilled or rejected.
         const start = createBaseMiddleware({
           response: { resolve, reject },
           pendingTasks,
@@ -411,7 +411,7 @@ describe('Base Auth Flow', () => {
       })
 
     try {
-      // await promise to fail and set requestState to false
+      // await promise failure which should set `requestState` to `false`
       await startCreateBaseMiddleware()
     } catch (error) {
       expect(requestState.get()).toBe(false)

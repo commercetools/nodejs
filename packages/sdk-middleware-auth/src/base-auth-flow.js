@@ -71,7 +71,7 @@ function executeRequest({
                 tokenCacheKey
               )
 
-              // Reset requestState to false
+              // Dispatch all pending requests
               requestState.set(false)
 
               // Freeze and copy pending queue, reset original one for accepting
@@ -100,14 +100,20 @@ function executeRequest({
         const error: Object = new Error(parsed ? parsed.message : text)
         if (parsed) error.body = parsed
 
-        // Reset requestState to false
+        // to notify that token is either fetched or failed
+        // in the below case token failed to be fetched
+        // and reset requestState to false
+        // so requestState could be shared between multi authMiddlewareBase functions
         requestState.set(false)
 
         response.reject(error)
       })
     })
     .catch((error: Error) => {
-      // Reset requestState to false
+      // to notify that token is either fetched or failed
+      // in the below case token failed to be fetched
+      // and reset requestState to false
+      // so requestState could be shared between multi authMiddlewareBase functions
       requestState.set(false)
 
       if (response && typeof response.reject === 'function')
