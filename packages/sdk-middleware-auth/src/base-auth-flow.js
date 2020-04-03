@@ -99,10 +99,23 @@ function executeRequest({
         }
         const error: Object = new Error(parsed ? parsed.message : text)
         if (parsed) error.body = parsed
+
+        // to notify that token is either fetched or failed
+        // in the below case token failed to be fetched
+        // and reset requestState to false
+        // so requestState could be shared between multi authMiddlewareBase functions
+        requestState.set(false)
+
         response.reject(error)
       })
     })
     .catch((error: Error) => {
+      // to notify that token is either fetched or failed
+      // in the below case token failed to be fetched
+      // and reset requestState to false
+      // so requestState could be shared between multi authMiddlewareBase functions
+      requestState.set(false)
+
       if (response && typeof response.reject === 'function')
         response.reject(error)
     })
