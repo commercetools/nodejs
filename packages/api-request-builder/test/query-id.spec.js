@@ -40,6 +40,23 @@ describe('queryId', () => {
     )
   })
 
+  test('should set the orderNumber param', () => {
+    service.byOrderNumber(123)
+    expect(service.params.orderNumber).toBe(123)
+  })
+
+  test('should throw if orderNumber is missing', () => {
+    expect(() => service.byOrderNumber()).toThrow(
+      /Required argument for `byOrderNumber` is missing/
+    )
+  })
+
+  test('should throw if orderNumber is invalid', () => {
+    expect(() => service.byOrderNumber('hi')).toThrow(
+      /Required argument for `byOrderNumber` is missing/
+    )
+  })
+
   test('should set the cartId param', () => {
     service.byCartId('myCart')
     expect(service.params.cartId).toBe('myCart')

@@ -133,6 +133,7 @@ export function setParams(params: ServiceBuilderParams) {
     'withTotal',
     'applyOrderEditTo',
     'container',
+    'orderNumber',
   ]
   Object.keys(params).forEach((key: string) => {
     if (!knownKeys.includes(key)) throw new Error(`Unknown key "${key}"`)
@@ -173,6 +174,7 @@ export function setParams(params: ServiceBuilderParams) {
   if (hasKey(params, 'priceCustomerGroup'))
     this.priceCustomerGroup(params.priceCustomerGroup)
   if (hasKey(params, 'priceChannel')) this.priceChannel(params.priceChannel)
+  if (hasKey(params, 'orderNumber')) this.byOrderNumber(params.orderNumber)
 
   // query-search
   if (params.text) this.text(params.text.value, params.text.language)

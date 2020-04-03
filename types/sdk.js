@@ -377,6 +377,9 @@ export type ServiceBuilderParams = {
 
   // container
   container?: ?string,
+
+  // params
+  orderNumber?: number,
 }
 export type ServiceBuilder = {
   type: string,
