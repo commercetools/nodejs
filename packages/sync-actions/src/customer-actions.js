@@ -35,6 +35,7 @@ export const baseActionsList = [
     action: 'setStores',
     key: 'stores',
   },
+  { action: 'setKey', key: 'key' },
 ]
 
 export const referenceActionsList = [
