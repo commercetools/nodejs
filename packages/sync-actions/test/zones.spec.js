@@ -10,6 +10,7 @@ describe('Exports', () => {
     expect(baseActionsList).toEqual([
       { action: 'changeName', key: 'name' },
       { action: 'setDescription', key: 'description' },
+      { action: 'setKey', key: 'key' },
     ])
   })
 })
@@ -47,6 +48,25 @@ describe('Actions', () => {
         action: 'setDescription',
         description: now.description,
       },
+    ]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build `setKey` action', () => {
+    const before = {
+      key: 'key-before',
+    }
+
+    const now = {
+      key: 'key-now',
+    }
+
+    const actual = zonesSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'setKey',
+        key: 'key-now',
+      }
     ]
     expect(actual).toEqual(expected)
   })
