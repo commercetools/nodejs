@@ -430,17 +430,17 @@ describe('Cart Discounts Actions', () => {
 
   test('should build the `setKey` action', () => {
     const before = {
-      key: 'key-before'
+      key: 'key-before',
     }
 
     const now = {
-      key: 'key-now'
+      key: 'key-now',
     }
 
     const expected = [
       {
         action: 'setKey',
-        key: 'key-now'
+        key: 'key-now',
       }
     ]
     const actual = cartDiscountsSync.buildActions(now, before)
