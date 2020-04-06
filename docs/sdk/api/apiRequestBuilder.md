@@ -276,7 +276,7 @@ This declarative `parse` API accepts an object of the following shape:
   dataErasure?: string;
 
   // params
-  orderNumber?: number,
+  orderNumber?: number;
 }
 ```
 
