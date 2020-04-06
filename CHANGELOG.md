@@ -1,3 +1,219 @@
+## @commercetools/state-importer@3.0.13 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/resource-deleter@2.0.14 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/product-json-to-xlsx@4.0.5 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/product-json-to-csv@5.0.5 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/product-exporter@3.1.2 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/price-exporter@3.0.14 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/personal-data-erasure@3.0.13 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/inventories-exporter@3.0.14 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/integration-tests@0.0.25 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/discount-code-importer@3.0.13 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/discount-code-exporter@4.0.14 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/customer-groups-exporter@3.0.13 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/custom-objects-importer@3.0.13 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/custom-objects-exporter@3.0.13 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/csv-parser-state@3.0.12 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/csv-parser-price@4.0.14 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/category-exporter@3.0.13 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/api-request-builder@5.5.0 (2020-04-06)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1515](https://github.com/commercetools/nodejs/pull/1515) feat(request-builder): add orderNumber support on order service ([@jherey](https://github.com/jherey))
+
+#### Committers: 2
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
 ## @commercetools/sdk-middleware-auth@6.1.3 (2020-04-03)
 
 #### :bug: Bug Fix
