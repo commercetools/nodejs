@@ -345,6 +345,18 @@ export default {
       features.queryExpand,
     ],
   },
+  stores: {
+    type: 'stores',
+    endpoint: '/stores',
+    features: [
+      features.create,
+      features.update,
+      features.del,
+      features.query,
+      features.queryOne,
+      features.queryExpand,
+    ],
+  },
   subscriptions: {
     type: 'subscriptions',
     endpoint: '/subscriptions',

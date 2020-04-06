@@ -37,6 +37,7 @@ const expectedServiceKeys = [
   'shippingMethods',
   'shoppingLists',
   'states',
+  'stores',
   'subscriptions',
   'taxCategories',
   'types',
