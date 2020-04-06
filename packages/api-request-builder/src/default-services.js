@@ -95,12 +95,12 @@ export default {
   },
   customersEmailVerificationToken: {
     type: 'customers-email-verification-token',
-    endpoint: '/customers/customers/email-token',
+    endpoint: '/customers/email-token',
     features: [features.create, features.queryOne],
   },
   customersEmailVerification: {
     type: 'customers-email-verification',
-    endpoint: '/customers/customers/email/confirm',
+    endpoint: '/customers/email/confirm',
     features: [features.create],
   },
   customObjects: {
