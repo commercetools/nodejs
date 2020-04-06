@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/state-importer",
-  "version": "3.0.12",
+  "version": "3.0.13",
   "description": "Import states to the commercetools platform",
   "main": "lib/main.js",
   "files": [
@@ -34,7 +34,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commercetools/api-request-builder": "^5.4.3",
+    "@commercetools/api-request-builder": "^5.5.0",
     "@commercetools/sdk-client": "^2.1.2",
     "@commercetools/sdk-middleware-auth": "^5.1.6",
     "@commercetools/sdk-middleware-http": "^6.0.6",

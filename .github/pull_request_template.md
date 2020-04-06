@@ -13,4 +13,7 @@
   - [ ] Integration
   - [ ] Acceptance
 - [ ] Documentation
-<!-- Two persons should review a PR, don't forget to assign them. -->
+- [ ] `Type` label for the PR <!-- Used to automatically generate the changelog -->
+  <!-- Two persons should review a PR, don't forget to assign them. -->
+  <!-- Please remember to squash merge. -->
+  <!-- All contribution guidelines can be found here: https://github.com/commercetools/nodejs/blob/master/CONTRIBUTING.md -->

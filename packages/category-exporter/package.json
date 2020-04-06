@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/category-exporter",
-  "version": "3.0.12",
+  "version": "3.0.13",
   "description": "Exports categories from the commercetools platform.",
   "main": "lib/main.js",
   "bin": {
@@ -34,7 +34,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commercetools/api-request-builder": "^5.4.3",
+    "@commercetools/api-request-builder": "^5.5.0",
     "@commercetools/get-credentials": "^3.0.15",
     "@commercetools/sdk-client": "^2.1.2",
     "@commercetools/sdk-middleware-auth": "^5.1.6",
@@ -42,7 +42,7 @@
     "@commercetools/sdk-middleware-user-agent": "^2.1.5",
     "node-fetch": "^2.3.0",
     "pino": "^6.0.0",
-    "pino-pretty": "^3.0.0",
+    "pino-pretty": "^4.0.0",
     "pretty-error": "^2.1.1",
     "yargs": "^15.0.0"
   },
