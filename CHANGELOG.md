@@ -1,3 +1,507 @@
+## @commercetools/state-importer@3.0.14 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/resource-deleter@2.0.15 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/product-json-to-xlsx@4.0.6 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/product-json-to-csv@5.0.6 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/product-exporter@3.1.3 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/price-exporter@3.0.15 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/personal-data-erasure@3.0.14 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/inventories-exporter@3.0.15 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/integration-tests@0.0.26 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/discount-code-importer@3.0.14 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/discount-code-exporter@4.0.15 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/customer-groups-exporter@3.0.14 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/custom-objects-importer@3.0.14 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/custom-objects-exporter@3.0.14 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/csv-parser-state@3.0.13 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/csv-parser-price@4.0.15 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/category-exporter@3.0.14 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/api-request-builder@5.6.0 (2020-04-07)
+
+#### :rocket: New Feature
+
+- `api-request-builder`
+  - [#1522](https://github.com/commercetools/nodejs/pull/1522) feat(api-request-builder): adding stores to the package ([@NickDevG](https://github.com/NickDevG))
+
+#### :bug: Bug Fix
+
+- `api-request-builder`
+  - [#1521](https://github.com/commercetools/nodejs/pull/1521) fix(default-services): change wrong endpoints ([@jherey](https://github.com/jherey))
+
+#### :nail_care: Enhancement
+
+- `api-request-builder`
+  - [#1524](https://github.com/commercetools/nodejs/pull/1524) refactor(api-request-builder): rename createService argument ([@jherey](https://github.com/jherey))
+
+#### :house: Maintenance
+
+- `category-exporter`
+  - [#1518](https://github.com/commercetools/nodejs/pull/1518) fix(deps): update dependency pino-pretty to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
 ## @commercetools/state-importer@3.0.13 (2020-04-06)
 
 #### :rocket: New Feature
