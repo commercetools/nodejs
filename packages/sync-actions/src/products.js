@@ -11,6 +11,7 @@ import createMapActionGroup from './utils/create-map-action-group'
 import * as productActions from './product-actions'
 import * as diffpatcher from './utils/diffpatcher'
 import findMatchingPairs from './utils/find-matching-pairs'
+import copyEmptyArrayProps from './utils/copy-empty-array-props'
 
 const actionGroups = [
   'base',
@@ -121,9 +122,10 @@ function createProductMapActions(
 }
 
 function moveMasterVariantsIntoVariants(
-  before: Object,
-  now: Object
+  objectBefore: Object,
+  objectNow: Object
 ): Array<Object> {
+  const [before, now] = copyEmptyArrayProps(objectBefore, objectNow)
   const move = (obj: Object): Object => ({
     ...obj,
     masterVariant: undefined,

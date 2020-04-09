@@ -16,6 +16,8 @@ export default function copyEmptyArrayProps(oldObj, newObj) {
       if (foundKey === -1) {
         newObj[key] = [] // eslint-disable-line no-param-reassign
       }
+    } else if (typeof value === 'object' && oldObj[key] && newObj[key]) {
+      copyEmptyArrayProps(oldObj[key], newObj[key])
     }
   })
 
