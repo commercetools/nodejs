@@ -988,6 +988,7 @@ describe('Actions', () => {
       masterVariant: {
         id: 1,
         key: 'default-masterVariant-key-de07e9bc-e352-422f-abe6-910d9879b995',
+        isMasterVariant: true,
         prices: [],
         images: [],
         attributes: [],
@@ -1000,25 +1001,12 @@ describe('Actions', () => {
         id: 1,
         key: 'default-masterVariant-key-de07e9bc-e352-422f-abe6-910d9879b995',
         isMasterVariant: true,
-        attributes: [
-          {
-            name: 'ct-imp-bool',
-            value: true,
-          },
-        ],
       },
     }
 
-    const actions = productsSync.buildActions(now, before)
+    productsSync.buildActions(now, before)
 
-    expect(actions).toEqual([
-      {
-        action: 'setAttribute',
-        variantId: 1,
-        name: 'ct-imp-bool',
-        value: true,
-      },
-    ])
+    expect(before).toMatchObject(now)
   })
 
   describe('assets', () => {
