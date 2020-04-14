@@ -17,6 +17,7 @@ export default function copyEmptyArrayProps(oldObj, newObj) {
         newObj[key] = [] // eslint-disable-line no-param-reassign
       }
     } else if (typeof value === 'object' && oldObj[key] && newObj[key]) {
+      // recursion, so we could check for nested objects
       copyEmptyArrayProps(oldObj[key], newObj[key])
     }
   })
