@@ -122,10 +122,11 @@ function createProductMapActions(
 }
 
 function moveMasterVariantsIntoVariants(
-  objectBefore: Object,
-  objectNow: Object
+  before: Object,
+  now: Object
 ): Array<Object> {
-  const [before, now] = copyEmptyArrayProps(objectBefore, objectNow)
+  /* eslint-disable no-param-reassign */
+  ;[before, now] = copyEmptyArrayProps(before, now)
   const move = (obj: Object): Object => ({
     ...obj,
     masterVariant: undefined,
