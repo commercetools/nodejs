@@ -982,57 +982,9 @@ describe('Actions', () => {
     ])
   })
 
-  test('update product-variant', async () => {
-    const now = {
-      name: {
-        en: 'Default Product d58a25cf-30d3-4988-bc3a-42ec7c22723d',
-      },
-      categories: [],
-      categoryOrderHints: {},
-      slug: {
-        en: 'product-d58a25cf-30d3-4988-bc3a-42ec7c22723d-slug',
-      },
-      masterVariant: {
-        attributes: [
-          {
-            name: 'ct-imp-bool',
-            value: true,
-          },
-        ],
-        id: 1,
-        key: 'default-masterVariant-key-de07e9bc-e352-422f-abe6-910d9879b995',
-        isMasterVariant: true,
-      },
-      variants: [
-        {
-          id: 2,
-          key: 'default-firstVariant-key-474276e6-56e1-467b-a67a-2c4494a848fa',
-          prices: [],
-          images: [],
-          attributes: [],
-          assets: [],
-        },
-        {
-          id: 3,
-          key: 'default-secondVariant-key-d490cbd6-4236-4928-92c5-79e9ff5962c7',
-          prices: [],
-          images: [],
-          attributes: [],
-          assets: [],
-        },
-      ],
-      searchKeywords: {},
-    }
-
+  test('shouldnt thow `TypeError: Cannot read property 0 of undefined` if array props exist on before and doesnt exist on now object', async () => {
     const before = {
-      name: {
-        en: 'Default Product d58a25cf-30d3-4988-bc3a-42ec7c22723d',
-      },
       categories: [],
-      categoryOrderHints: {},
-      slug: {
-        en: 'product-d58a25cf-30d3-4988-bc3a-42ec7c22723d-slug',
-      },
       masterVariant: {
         id: 1,
         key: 'default-masterVariant-key-de07e9bc-e352-422f-abe6-910d9879b995',
@@ -1041,28 +993,22 @@ describe('Actions', () => {
         attributes: [],
         assets: [],
       },
-      variants: [
-        {
-          id: 2,
-          key: 'default-firstVariant-key-474276e6-56e1-467b-a67a-2c4494a848fa',
-          prices: [],
-          images: [],
-          attributes: [],
-          assets: [],
-        },
-        {
-          id: 3,
-          key: 'default-secondVariant-key-d490cbd6-4236-4928-92c5-79e9ff5962c7',
-          prices: [],
-          images: [],
-          attributes: [],
-          assets: [],
-        },
-      ],
-      searchKeywords: {},
     }
 
-    /* eslint-enable max-len */
+    const now = {
+      masterVariant: {
+        id: 1,
+        key: 'default-masterVariant-key-de07e9bc-e352-422f-abe6-910d9879b995',
+        isMasterVariant: true,
+        attributes: [
+          {
+            name: 'ct-imp-bool',
+            value: true,
+          },
+        ],
+      },
+    }
+
     const actions = productsSync.buildActions(now, before)
 
     expect(actions).toEqual([
