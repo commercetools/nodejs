@@ -982,7 +982,7 @@ describe('Actions', () => {
     ])
   })
 
-  test('shouldnt thow `TypeError: Cannot read property 0 of undefined` if array props exist on before and doesnt exist on now object', async () => {
+  test('should build `setAttribute` action', async () => {
     const before = {
       categories: [],
       masterVariant: {
@@ -1001,12 +1001,25 @@ describe('Actions', () => {
         id: 1,
         key: 'default-masterVariant-key-de07e9bc-e352-422f-abe6-910d9879b995',
         isMasterVariant: true,
+        attributes: [
+          {
+            name: 'ct-imp-bool',
+            value: true,
+          },
+        ],
       },
     }
 
-    productsSync.buildActions(now, before)
+    const actions = productsSync.buildActions(now, before)
 
-    expect(before).toMatchObject(now)
+    expect(actions).toEqual([
+      {
+        action: 'setAttribute',
+        variantId: 1,
+        name: 'ct-imp-bool',
+        value: true,
+      },
+    ])
   })
 
   describe('assets', () => {

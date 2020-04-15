@@ -125,8 +125,7 @@ function moveMasterVariantsIntoVariants(
   before: Object,
   now: Object
 ): Array<Object> {
-  /* eslint-disable no-param-reassign */
-  ;[before, now] = copyEmptyArrayProps(before, now)
+  const [beforeCopy, nowCopy] = copyEmptyArrayProps(before, now)
   const move = (obj: Object): Object => ({
     ...obj,
     masterVariant: undefined,
@@ -135,8 +134,8 @@ function moveMasterVariantsIntoVariants(
   const hasMasterVariant = (obj: Object): Object => obj && obj.masterVariant
 
   return [
-    hasMasterVariant(before) ? move(before) : before,
-    hasMasterVariant(now) ? move(now) : now,
+    hasMasterVariant(beforeCopy) ? move(beforeCopy) : beforeCopy,
+    hasMasterVariant(nowCopy) ? move(nowCopy) : nowCopy,
   ]
 }
 
