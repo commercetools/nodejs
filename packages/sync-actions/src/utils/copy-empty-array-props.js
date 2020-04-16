@@ -6,7 +6,7 @@
  * @returns {Array} Ordered Array [oldObj, newObj]
  */
 export default function copyEmptyArrayProps(oldObj, newObj) {
-  const entriesWithEmptyArrays = Object.entries(oldObj).reduce(
+  const newObjWithFixedEmptyArray = Object.entries(oldObj).reduce(
     (acc, [key, value]) => {
       const replaceWithEmptyArray =
         Array.isArray(value) && newObj[key] === undefined
@@ -16,5 +16,5 @@ export default function copyEmptyArrayProps(oldObj, newObj) {
     {}
   )
 
-  return [oldObj, entriesWithEmptyArrays]
+  return [oldObj, newObjWithFixedEmptyArray]
 }
