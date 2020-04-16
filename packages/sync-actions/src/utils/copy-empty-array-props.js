@@ -9,18 +9,15 @@ export default function copyEmptyArrayProps(oldObj, newObj) {
   const newObjWithFixedEmptyArray = Object.entries(oldObj).reduce(
     (acc, [key, value]) => {
       const isArray = Array.isArray(value)
+      const newObjectValueIsUndefined = newObj[key] === undefined
 
-      // check if the value is array on `oldObj` and the key not found in `acc` (newObjWithFixedEmptyArray)
-      if (isArray && acc[key] === undefined) {
-        // init `key` with empty array
+      if (isArray && newObjectValueIsUndefined) {
         return { ...acc, [key]: [] }
       }
 
-      // note that `typeof value === 'object'` returns true also in case of array
-      // check if its not array and its object
-      if (!isArray && typeof value === 'object' && acc[key]) {
+      if (!isArray && typeof value === 'object' && newObj[key]) {
         // recursion, so we could check for nested objects
-        const returnedNewObjCopy = copyEmptyArrayProps(value, acc[key])[1]
+        const returnedNewObjCopy = copyEmptyArrayProps(value, newObj[key])[1]
         return { ...acc, [key]: returnedNewObjCopy }
       }
 
