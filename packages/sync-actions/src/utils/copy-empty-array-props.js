@@ -5,7 +5,6 @@
  * @param {Object} newObj
  * @returns {Array} Ordered Array [oldObj, newObj]
  */
-
 export default function copyEmptyArrayProps(oldObj, newObj) {
   const newObjWithFixedEmptyArray = Object.entries(oldObj).reduce(
     (acc, [key, value]) => {
