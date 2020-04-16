@@ -5,19 +5,16 @@
  * @param {Object} newObj
  * @returns {Array} Ordered Array [oldObj, newObj]
  */
-
 export default function copyEmptyArrayProps(oldObj, newObj) {
-  Object.entries(oldObj).forEach(([key, value]) => {
-    if (Array.isArray(value)) {
-      const foundKey = Object.keys(newObj).findIndex(
-        (newObjKey) => JSON.stringify(newObjKey) === JSON.stringify(key)
-      )
+  const newObjWithFixedEmptyArray = Object.entries(oldObj).reduce(
+    (acc, [key, value]) => {
+      const replaceWithEmptyArray =
+        Array.isArray(value) && newObj[key] === undefined
+      acc[key] = replaceWithEmptyArray ? [] : newObj[key]
+      return acc
+    },
+    {}
+  )
 
-      if (foundKey === -1) {
-        newObj[key] = [] // eslint-disable-line no-param-reassign
-      }
-    }
-  })
-
-  return [oldObj, newObj]
+  return [oldObj, newObjWithFixedEmptyArray]
 }
