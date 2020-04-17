@@ -1,3 +1,63 @@
+## @commercetools/sync-actions@4.5.1 (2020-04-17)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1525](https://github.com/commercetools/nodejs/pull/1525) fix(sync-actions): copy empty array props for products and variants ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 2
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/state-importer@3.0.15 (2020-04-17)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1525](https://github.com/commercetools/nodejs/pull/1525) fix(sync-actions): copy empty array props for products and variants ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 2
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/integration-tests@0.0.27 (2020-04-17)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1525](https://github.com/commercetools/nodejs/pull/1525) fix(sync-actions): copy empty array props for products and variants ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 2
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/discount-code-importer@3.0.15 (2020-04-17)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1525](https://github.com/commercetools/nodejs/pull/1525) fix(sync-actions): copy empty array props for products and variants ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 2
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/custom-objects-importer@3.0.15 (2020-04-17)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1525](https://github.com/commercetools/nodejs/pull/1525) fix(sync-actions): copy empty array props for products and variants ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 2
+
+- Matthias Köster ([@katmatt](https://github.com/katmatt))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
 ## @commercetools/state-importer@3.0.14 (2020-04-07)
 
 #### :rocket: New Feature
