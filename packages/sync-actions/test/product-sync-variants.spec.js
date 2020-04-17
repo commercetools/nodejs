@@ -982,6 +982,46 @@ describe('Actions', () => {
     ])
   })
 
+  test('should build `setAttribute` action', async () => {
+    const before = {
+      categories: [],
+      masterVariant: {
+        id: 1,
+        key: 'default-masterVariant-key-de07e9bc-e352-422f-abe6-910d9879b995',
+        isMasterVariant: true,
+        prices: [],
+        images: [],
+        attributes: [],
+        assets: [],
+      },
+    }
+
+    const now = {
+      masterVariant: {
+        id: 1,
+        key: 'default-masterVariant-key-de07e9bc-e352-422f-abe6-910d9879b995',
+        isMasterVariant: true,
+        attributes: [
+          {
+            name: 'ct-imp-bool',
+            value: true,
+          },
+        ],
+      },
+    }
+
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual([
+      {
+        action: 'setAttribute',
+        variantId: 1,
+        name: 'ct-imp-bool',
+        value: true,
+      },
+    ])
+  })
+
   describe('assets', () => {
     test('should build "addAsset" action with empty assets', () => {
       const before = {
