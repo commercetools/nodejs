@@ -1,3 +1,58 @@
+## @commercetools/sync-actions@4.6.0 (2020-04-22)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1530](https://github.com/commercetools/nodejs/pull/1530) feat(sync-actions/stores): add `setDistributionChannels` ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/state-importer@3.0.16 (2020-04-22)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1530](https://github.com/commercetools/nodejs/pull/1530) feat(sync-actions/stores): add `setDistributionChannels` ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/integration-tests@0.0.28 (2020-04-22)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1530](https://github.com/commercetools/nodejs/pull/1530) feat(sync-actions/stores): add `setDistributionChannels` ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/discount-code-importer@3.0.16 (2020-04-22)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1530](https://github.com/commercetools/nodejs/pull/1530) feat(sync-actions/stores): add `setDistributionChannels` ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/custom-objects-importer@3.0.16 (2020-04-22)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1530](https://github.com/commercetools/nodejs/pull/1530) feat(sync-actions/stores): add `setDistributionChannels` ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
 ## @commercetools/sync-actions@4.5.1 (2020-04-17)
 
 #### :bug: Bug Fix
