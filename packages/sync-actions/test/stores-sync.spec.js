@@ -10,6 +10,7 @@ describe('Exports', () => {
     expect(baseActionsList).toEqual([
       { action: 'setName', key: 'name' },
       { action: 'setLanguages', key: 'languages' },
+      { action: 'setDistributionChannels', key: 'distributionChannels' },
     ])
   })
 })
@@ -44,5 +45,36 @@ describe('Actions', () => {
     const actual = storesSync.buildActions(now, before)
     const expected = [{ action: 'setLanguages', languages: now.languages }]
     expect(actual).toEqual(expected)
+  })
+
+  test('should build `setDistributionsChannels` action', () => {
+    const before = {
+      distributionChannels: [
+        {
+          typeId: 'product-distribution',
+          id: 'pd-001',
+        },
+      ],
+    }
+    const now = {
+      distributionChannels: [
+        {
+          typeId: 'product-distribution',
+          id: 'pd-001',
+        },
+        {
+          typeId: 'product-distribution',
+          key: 'pd-002',
+        },
+      ],
+    }
+
+    const actual = storesSync.buildActions(now, before)
+    expect(actual).toEqual([
+      {
+        action: 'setDistributionChannels',
+        distributionChannels: now.distributionChannels,
+      },
+    ])
   })
 })
