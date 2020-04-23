@@ -11,9 +11,8 @@ export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
     const nextObjectWithEmptyArray = Object.entries(oldObj).reduce(
       (nextObject, [key, value]) => {
         const isArray = Array.isArray(value)
-        const newObjectValueIsUndefined = newObj[key] === undefined
 
-        if (isArray && newObjectValueIsUndefined) {
+        if (isArray && isNil(newObj[key])) {
           return { ...nextObject, [key]: [] }
         }
 
