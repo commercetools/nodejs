@@ -1,6 +1,6 @@
 import copyEmptyArrayProps from '../../src/utils/copy-empty-array-props'
 
-describe('null check on roo value', () => {
+describe('null check on root value', () => {
   test('old root value', () => {
     const oldObj = null
     const newObj = {
