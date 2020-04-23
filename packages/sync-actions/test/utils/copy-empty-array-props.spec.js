@@ -1,5 +1,26 @@
 import copyEmptyArrayProps from '../../src/utils/copy-empty-array-props'
 
+test('null check', () => {
+  const oldObj = {
+    // typeof `null` === 'object'
+    metaDescription: null,
+  }
+  const newObj = {
+    metaDescription: {
+      en: 'new value',
+    },
+  }
+  // eslint-disable-next-line no-unused-vars
+  const [_, fixedNewObj] = copyEmptyArrayProps(oldObj, newObj)
+  expect(fixedNewObj).toEqual(newObj)
+})
+
+test('undefined check', () => {
+  const [old, fixed] = copyEmptyArrayProps(undefined, undefined)
+  expect(old).toEqual({})
+  expect(fixed).toEqual({})
+})
+
 test('should add empty array for undefined prop', () => {
   const oldObj = {
     emptyArray: [],
