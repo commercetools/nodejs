@@ -7,13 +7,13 @@ import isNil from 'lodash.isnil'
  * @returns {Array} Ordered Array [oldObj, newObj]
  */
 export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
-  const newObjWithFixedEmptyArray = Object.entries(oldObj).reduce(
-    (acc, [key, value]) => {
+  const nextObjectWithEmptyArray = Object.entries(oldObj).reduce(
+    (nextObject, [key, value]) => {
       const isArray = Array.isArray(value)
       const newObjectValueIsUndefined = newObj[key] === undefined
 
       if (isArray && newObjectValueIsUndefined) {
-        return { ...acc, [key]: [] }
+        return { ...nextObject, [key]: [] }
       }
 
       if (
@@ -24,13 +24,13 @@ export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
       ) {
         // recursion, so we could check for nested objects
         const [, returnedNewObjCopy] = copyEmptyArrayProps(value, newObj[key])
-        return { ...acc, [key]: returnedNewObjCopy }
+        return { ...nextObject, [key]: returnedNewObjCopy }
       }
 
-      return acc
+      return nextObject
     },
     { ...newObj }
   )
 
-  return [oldObj, newObjWithFixedEmptyArray]
+  return [oldObj, nextObjectWithEmptyArray]
 }

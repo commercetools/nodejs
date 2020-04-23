@@ -10,8 +10,7 @@ test('null check', () => {
       en: 'new value',
     },
   }
-  // eslint-disable-next-line no-unused-vars
-  const [_, fixedNewObj] = copyEmptyArrayProps(oldObj, newObj)
+  const [, fixedNewObj] = copyEmptyArrayProps(oldObj, newObj)
   expect(fixedNewObj).toEqual(newObj)
 })
 
