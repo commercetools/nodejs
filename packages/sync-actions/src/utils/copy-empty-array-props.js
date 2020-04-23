@@ -7,30 +7,32 @@ import isNil from 'lodash.isnil'
  * @returns {Array} Ordered Array [oldObj, newObj]
  */
 export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
-  const nextObjectWithEmptyArray = Object.entries(oldObj).reduce(
-    (nextObject, [key, value]) => {
-      const isArray = Array.isArray(value)
-      const newObjectValueIsUndefined = newObj[key] === undefined
+  if (!isNil(oldObj) && !isNil(newObj)) {
+    const nextObjectWithEmptyArray = Object.entries(oldObj).reduce(
+      (nextObject, [key, value]) => {
+        const isArray = Array.isArray(value)
+        const newObjectValueIsUndefined = newObj[key] === undefined
 
-      if (isArray && newObjectValueIsUndefined) {
-        return { ...nextObject, [key]: [] }
-      }
+        if (isArray && newObjectValueIsUndefined) {
+          return { ...nextObject, [key]: [] }
+        }
 
-      if (
-        !isNil(value) &&
-        !isArray &&
-        typeof value === 'object' &&
-        !isNil(newObj[key])
-      ) {
-        // recursion, so we could check for nested objects
-        const [, returnedNewObjCopy] = copyEmptyArrayProps(value, newObj[key])
-        return { ...nextObject, [key]: returnedNewObjCopy }
-      }
+        if (
+          !isNil(value) &&
+          !isArray &&
+          typeof value === 'object' &&
+          !isNil(newObj[key])
+        ) {
+          // recursion, so we could check for nested objects
+          const [, returnedNewObjCopy] = copyEmptyArrayProps(value, newObj[key])
+          return { ...nextObject, [key]: returnedNewObjCopy }
+        }
 
-      return nextObject
-    },
-    { ...newObj }
-  )
-
-  return [oldObj, nextObjectWithEmptyArray]
+        return nextObject
+      },
+      { ...newObj }
+    )
+    return [oldObj, nextObjectWithEmptyArray]
+  }
+  return [oldObj, newObj]
 }

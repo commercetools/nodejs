@@ -1,5 +1,30 @@
 import copyEmptyArrayProps from '../../src/utils/copy-empty-array-props'
 
+describe('null check on roo value', () => {
+  test('old root value', () => {
+    const oldObj = null
+    const newObj = {
+      metaDescription: {
+        en: 'new value',
+      },
+    }
+    const [old, fixedNewObj] = copyEmptyArrayProps(oldObj, newObj)
+    expect(fixedNewObj).toEqual(newObj)
+    expect(old).toEqual(oldObj)
+  })
+  test('new root value', () => {
+    const oldObj = {
+      metaDescription: {
+        en: 'new value',
+      },
+    }
+    const newObj = null
+    const [old, fixedNewObj] = copyEmptyArrayProps(oldObj, newObj)
+    expect(fixedNewObj).toEqual(newObj)
+    expect(old).toEqual(oldObj)
+  })
+})
+
 test('null check', () => {
   const oldObj = {
     // typeof `null` === 'object'
