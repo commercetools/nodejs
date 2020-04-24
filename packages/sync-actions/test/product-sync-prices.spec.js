@@ -217,6 +217,56 @@ describe('Actions', () => {
             validFrom: dateNow,
             validUntil: twoWeeksFromNow,
           },
+          {
+            // set price custom type
+            id: '888',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+          },
+          {
+            // set price custom type and field
+            id: '999',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+          },
+          {
+            // change price custom field
+            id: '1010',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+            custom: {
+              type: {
+                typeId: 'type',
+                id: 'customType1',
+              },
+              fields: {
+                source: 'shop',
+              },
+            },
+          },
+          // {
+          //   // remove price custom field
+          //   id: '1111',
+          //   value: { currencyCode: 'GBP', centAmount: 1000 },
+          //   country: 'UK',
+          //   validFrom: dateNow,
+          //   validUntil: twoWeeksFromNow,
+          //   custom: {
+          //     type: {
+          //       typeId: 'type',
+          //       id: 'customType1',
+          //     },
+          //     fields: {
+          //       source: "shop",
+          //     },
+          //   },
+          // },
         ],
       },
     }
@@ -257,6 +307,62 @@ describe('Actions', () => {
             validFrom: twoWeeksFromNow,
             validUntil: threeWeeksFromNow,
           },
+          {
+            // set price custom type
+            id: '888',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+            custom: {
+              type: {
+                typeId: 'type',
+                id: 'customType1',
+              },
+            },
+          },
+          {
+            // set price custom type and field
+            id: '999',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+            custom: {
+              type: {
+                typeId: 'type',
+                id: 'customType1',
+              },
+              fields: {
+                source: 'shop',
+              },
+            },
+          },
+          {
+            // change price custom field
+            id: '1010',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+            custom: {
+              type: {
+                typeId: 'type',
+                id: 'customType1',
+              },
+              fields: {
+                source: 'random',
+              },
+            },
+          },
+          // {
+          //   // remove price custom field and type
+          //   id: '1111',
+          //   value: { currencyCode: 'GBP', centAmount: 1000 },
+          //   country: 'UK',
+          //   validFrom: dateNow,
+          //   validUntil: twoWeeksFromNow,
+          // },
         ],
       },
     }
@@ -267,7 +373,7 @@ describe('Actions', () => {
     })
 
     test('should build five update actions', () => {
-      expect(actions).toHaveLength(5)
+      expect(actions).toHaveLength(8)
     })
 
     test('should build `changePrice` actions', () => {
@@ -335,6 +441,48 @@ describe('Actions', () => {
               validUntil: threeWeeksFromNow,
             },
             variantId: 1,
+          },
+        ])
+      )
+    })
+
+    test('should build `setProductPriceCustomType` action without fields', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setProductPriceCustomType',
+            typeKey: 'customType1',
+            priceId: '888',
+          },
+        ])
+      )
+    })
+
+    test('should build `setProductPriceCustomType` action', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setProductPriceCustomType',
+            typeKey: 'customType1',
+            priceId: '999',
+            fields: {
+              source: 'shop',
+            },
+          },
+        ])
+      )
+    })
+
+    test('should build `setProductPriceCustomField` action', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setProductPriceCustomField',
+            name: 'source',
+            priceId: '1010',
+            value: {
+              source: 'random',
+            },
           },
         ])
       )
@@ -567,7 +715,7 @@ describe('Actions', () => {
               fractionDigits: 2,
             },
             id: '7960b455-ab04-4722-a8b2-431460d60012',
-            custom: {
+            customField: {
               type: {
                 typeId: 'type',
                 id: 'aada6bfb-2df1-4877-90f3-6efae0fbefa8',
@@ -595,7 +743,7 @@ describe('Actions', () => {
                 fractionDigits: 2,
               },
               id: '38a9667a-976d-4bcc-8d2a-b04701e41f18',
-              custom: {
+              customField: {
                 type: {
                   typeId: 'type',
                   id: 'aada6bfb-2df1-4877-90f3-6efae0fbefa8',
@@ -640,7 +788,7 @@ describe('Actions', () => {
               centAmount: 6495,
               currencyCode: 'EUR',
             },
-            custom: {
+            customField: {
               type: {
                 id: 'aada6bfb-2df1-4877-90f3-6efae0fbefa8',
               },
@@ -664,7 +812,7 @@ describe('Actions', () => {
                 centAmount: 8995,
                 currencyCode: 'EUR',
               },
-              custom: {
+              customField: {
                 type: {
                   id: 'aada6bfb-2df1-4877-90f3-6efae0fbefa8',
                 },
