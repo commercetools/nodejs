@@ -1,3 +1,58 @@
+## @commercetools/sync-actions@4.6.1 (2020-04-24)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1532](https://github.com/commercetools/nodejs/pull/1532) Adnasa null check copy array props ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/state-importer@3.0.17 (2020-04-24)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1532](https://github.com/commercetools/nodejs/pull/1532) Adnasa null check copy array props ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/integration-tests@0.0.29 (2020-04-24)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1532](https://github.com/commercetools/nodejs/pull/1532) Adnasa null check copy array props ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/discount-code-importer@3.0.17 (2020-04-24)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1532](https://github.com/commercetools/nodejs/pull/1532) Adnasa null check copy array props ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/custom-objects-importer@3.0.17 (2020-04-24)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1532](https://github.com/commercetools/nodejs/pull/1532) Adnasa null check copy array props ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
 ## @commercetools/sync-actions@4.6.0 (2020-04-22)
 
 #### :nail_care: Enhancement
