@@ -250,23 +250,23 @@ describe('Actions', () => {
               },
             },
           },
-          // {
-          //   // remove price custom field
-          //   id: '1111',
-          //   value: { currencyCode: 'GBP', centAmount: 1000 },
-          //   country: 'UK',
-          //   validFrom: dateNow,
-          //   validUntil: twoWeeksFromNow,
-          //   custom: {
-          //     type: {
-          //       typeId: 'type',
-          //       id: 'customType1',
-          //     },
-          //     fields: {
-          //       source: "shop",
-          //     },
-          //   },
-          // },
+          {
+            // remove price custom field
+            id: '1111',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+            custom: {
+              type: {
+                typeId: 'type',
+                id: '5678',
+              },
+              fields: {
+                source: 'shop',
+              },
+            },
+          },
         ],
       },
     }
@@ -355,14 +355,14 @@ describe('Actions', () => {
               },
             },
           },
-          // {
-          //   // remove price custom field and type
-          //   id: '1111',
-          //   value: { currencyCode: 'GBP', centAmount: 1000 },
-          //   country: 'UK',
-          //   validFrom: dateNow,
-          //   validUntil: twoWeeksFromNow,
-          // },
+          {
+            // remove price custom field and type
+            id: '1111',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+          },
         ],
       },
     }
@@ -373,7 +373,7 @@ describe('Actions', () => {
     })
 
     test('should build five update actions', () => {
-      expect(actions).toHaveLength(8)
+      expect(actions).toHaveLength(9)
     })
 
     test('should build `changePrice` actions', () => {
@@ -474,6 +474,17 @@ describe('Actions', () => {
             fields: {
               source: 'shop',
             },
+          },
+        ])
+      )
+    })
+
+    test('should build `setProductPriceCustomType` action which delete custom type', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setProductPriceCustomType',
+            priceId: '1111',
           },
         ])
       )
