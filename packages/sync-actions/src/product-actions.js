@@ -3,6 +3,7 @@ import forEach from 'lodash.foreach'
 import uniqWith from 'lodash.uniqwith'
 import * as diffpatcher from './utils/diffpatcher'
 import extractMatchingPairs from './utils/extract-matching-pairs'
+import actionsMapCustom from './utils/action-map-custom'
 import {
   buildBaseAttributesActions,
   buildReferenceActions,
@@ -297,73 +298,6 @@ function _buildVariantPricesAction(
   })
 
   return [addPriceActions, changePriceActions, removePriceActions]
-}
-
-function _buildVariantPricesCustomAction(
-  diffedPrices,
-  oldVariant = {},
-  newVariant = {}
-) {
-  const addPriceCustomTypeAndFieldsActions = []
-  const addPriceCustomTypeActions = []
-  const updatePriceCustomFieldsActions = []
-
-  // generate a hashMap to be able to reference the right image from both ends
-  const matchingPricePairs = findMatchingPairs(
-    diffedPrices,
-    oldVariant.prices,
-    newVariant.prices
-  )
-
-  forEach(diffedPrices, (price, key) => {
-    const { oldObj, newObj } = extractMatchingPairs(
-      matchingPricePairs,
-      key,
-      oldVariant.prices,
-      newVariant.prices
-    )
-
-    if (REGEX_NUMBER.test(key)) {
-      if (
-        Array.isArray(price.custom) &&
-        price.custom &&
-        price.custom.length &&
-        price.custom[0].fields &&
-        oldObj.custom === undefined
-      ) {
-        addPriceCustomTypeAndFieldsActions.push({
-          action: 'setProductPriceCustomType',
-          priceId: oldObj.id,
-          typeKey: newObj.custom.type.id,
-          fields: newObj.custom.fields,
-        })
-      } else if (
-        Array.isArray(price.custom) &&
-        price.custom &&
-        price.custom.length &&
-        price.custom[0].fields === undefined
-      ) {
-        addPriceCustomTypeAndFieldsActions.push({
-          action: 'setProductPriceCustomType',
-          priceId: oldObj.id,
-          typeKey: newObj.custom.type.id,
-        })
-      } else if (price.custom && price.custom.fields) {
-        addPriceCustomTypeAndFieldsActions.push({
-          action: 'setProductPriceCustomField',
-          priceId: oldObj.id,
-          name: Object.keys(newObj.custom.fields)[0],
-          value: newObj.custom.fields,
-        })
-      }
-    }
-  })
-
-  return [
-    addPriceCustomTypeAndFieldsActions,
-    addPriceCustomTypeActions,
-    updatePriceCustomFieldsActions,
-  ]
 }
 
 function _buildVariantAttributesActions(
@@ -704,9 +638,7 @@ export function actionsMapPrices(diff, oldObj, newObj, variantHashMap) {
 }
 
 export function actionsMapPricesCustom(diff, oldObj, newObj, variantHashMap) {
-  let addPriceActions = []
-  let changePriceActions = []
-  let removePriceActions = []
+  let actions = []
 
   const { variants } = diff
 
@@ -718,20 +650,42 @@ export function actionsMapPricesCustom(diff, oldObj, newObj, variantHashMap) {
         oldObj.variants,
         newObj.variants
       )
-      if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
-        const [a, c, r] = _buildVariantPricesCustomAction(
+
+      if (
+        variant &&
+        variant.prices &&
+        (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key))
+      ) {
+        const priceHashMap = findMatchingPairs(
           variant.prices,
-          oldVariant,
-          newVariant
+          oldVariant.prices,
+          newVariant.prices
         )
 
-        addPriceActions = addPriceActions.concat(a)
-        changePriceActions = changePriceActions.concat(c)
-        removePriceActions = removePriceActions.concat(r)
+        forEach(variant.prices, (price, index) => {
+          const { oldObj: oldPrice, newObj: newPrice } = extractMatchingPairs(
+            priceHashMap,
+            index,
+            oldVariant.prices,
+            newVariant.prices
+          )
+
+          if (
+            price.custom &&
+            (REGEX_UNDERSCORE_NUMBER.test(index) || REGEX_NUMBER.test(index))
+          ) {
+            const a = actionsMapCustom(price, newPrice, oldPrice, {
+              setCustomType: 'setProductPriceCustomType',
+              setCustomField: 'setProductPriceCustomField',
+            })
+
+            actions = actions.concat(a)
+          }
+        })
       }
     })
 
-  return changePriceActions.concat(removePriceActions).concat(addPriceActions)
+  return actions
 }
 
 export function actionsMapMasterVariant(oldObj, newObj) {
