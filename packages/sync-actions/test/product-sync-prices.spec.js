@@ -243,7 +243,7 @@ describe('Actions', () => {
             custom: {
               type: {
                 typeId: 'type',
-                id: 'customType1',
+                id: '5678',
               },
               fields: {
                 source: 'shop',
@@ -317,7 +317,7 @@ describe('Actions', () => {
             custom: {
               type: {
                 typeId: 'type',
-                id: 'customType1',
+                id: '5678',
               },
             },
           },
@@ -331,7 +331,7 @@ describe('Actions', () => {
             custom: {
               type: {
                 typeId: 'type',
-                id: 'customType1',
+                id: '5678',
               },
               fields: {
                 source: 'shop',
@@ -348,7 +348,7 @@ describe('Actions', () => {
             custom: {
               type: {
                 typeId: 'type',
-                id: 'customType1',
+                id: '5678',
               },
               fields: {
                 source: 'random',
@@ -451,8 +451,11 @@ describe('Actions', () => {
         expect.arrayContaining([
           {
             action: 'setProductPriceCustomType',
-            typeKey: 'customType1',
             priceId: '888',
+            type: {
+              id: '5678',
+              typeId: 'type',
+            },
           },
         ])
       )
@@ -463,8 +466,11 @@ describe('Actions', () => {
         expect.arrayContaining([
           {
             action: 'setProductPriceCustomType',
-            typeKey: 'customType1',
             priceId: '999',
+            type: {
+              id: '5678',
+              typeId: 'type',
+            },
             fields: {
               source: 'shop',
             },
@@ -480,9 +486,7 @@ describe('Actions', () => {
             action: 'setProductPriceCustomField',
             name: 'source',
             priceId: '1010',
-            value: {
-              source: 'random',
-            },
+            value: 'random',
           },
         ])
       )
