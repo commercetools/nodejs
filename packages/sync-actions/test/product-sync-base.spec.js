@@ -13,6 +13,7 @@ describe('Exports', () => {
       'meta',
       'references',
       'prices',
+      'pricesCustom',
       'attributes',
       'images',
       'variants',
