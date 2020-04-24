@@ -55,7 +55,8 @@
     "node-fetch": "^2.3.0",
     "npmlog": "^4.1.2",
     "pretty-error": "^2.1.1",
-    "yargs": "^15.0.0"
+    "yargs": "^15.0.0",
+    "strip-bom-stream": "^4.0.0"
   },
   "devDependencies": {
     "sinon": "9.0.0",

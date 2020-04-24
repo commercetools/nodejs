@@ -71,6 +71,31 @@ describe('CsvParserPrice::parse', () => {
     })
   })
 
+  test('should parse the UTF-8 BOM encoding file', () => {
+    return new Promise((done) => {
+      const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+      const readStream = fs.createReadStream(
+        path.join(__dirname, 'helpers/utf-bom.csv')
+      )
+
+      sinon
+        .stub(csvParserPrice, 'getCustomTypeDefinition')
+        .returns(Promise.resolve(customTypeSample))
+
+      const outputStream = streamtest.v2.toText((error, result) => {
+        const prices = JSON.parse(result).prices
+        const price = prices[0].prices[0]
+        expect(prices).toHaveLength(2)
+        expect(prices[0].sku).toBeTruthy()
+        expect(price.value.centAmount).toBeTruthy()
+        expect(price.value.currencyCode).toBeTruthy()
+        done()
+      })
+      csvParserPrice.parse(readStream, outputStream)
+      csvParserPrice.parse(readStream, outputStream)
+    })
+  })
+
   test('should group prices by variants sku', () => {
     return new Promise((done) => {
       const csvParserPrice = new CsvParserPrice({ apiConfig, logger })

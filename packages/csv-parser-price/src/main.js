@@ -7,6 +7,7 @@ import memoize from 'lodash.memoize'
 import isNil from 'lodash.isnil'
 import { unflatten } from 'flat'
 import fetch from 'node-fetch'
+import stripBom from 'strip-bom-stream'
 
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createClient } from '@commercetools/sdk-client'
@@ -55,6 +56,7 @@ export default class CsvParserPrice {
 
     highland(input)
       // Parse CSV return each row as object
+      .through(stripBom())
       .through(
         csv({
           separator: this.delimiter,
