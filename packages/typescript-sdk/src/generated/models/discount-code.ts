@@ -196,14 +196,14 @@ export interface DiscountCodeSetCustomFieldAction {
 export interface DiscountCodeSetCustomTypeAction {
   readonly action: 'setCustomType'
   /**
+   *	If absent, the custom type and any existing CustomFields are removed.
+   */
+  readonly type?: TypeResourceIdentifier
+  /**
    *	A valid JSON object, based on the FieldDefinitions of the Type.
    *	Sets the custom fields to this value.
    */
   readonly fields?: FieldContainer
-  /**
-   *	If absent, the custom type and any existing CustomFields are removed.
-   */
-  readonly type?: TypeResourceIdentifier
 }
 export interface DiscountCodeSetDescriptionAction {
   readonly action: 'setDescription'
@@ -245,11 +245,11 @@ export interface DiscountCodeSetValidFromAndUntilAction {
   /**
    *	If absent, the field with the value is removed in case a value was set before.
    */
-  readonly validUntil?: string
+  readonly validFrom?: string
   /**
    *	If absent, the field with the value is removed in case a value was set before.
    */
-  readonly validFrom?: string
+  readonly validUntil?: string
 }
 export interface DiscountCodeSetValidUntilAction {
   readonly action: 'setValidUntil'

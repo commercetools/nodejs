@@ -163,17 +163,17 @@ export type CategoryUpdateAction =
   | CategorySetMetaTitleAction
 export interface CategoryAddAssetAction {
   readonly action: 'addAsset'
+  readonly asset: AssetDraft
   /**
    *	When specified, the value might be `0` and should be lower than the total of the assets list.
    */
   readonly position?: number
-  readonly asset: AssetDraft
 }
 export interface CategoryChangeAssetNameAction {
   readonly action: 'changeAssetName'
   readonly assetId?: string
-  readonly name: LocalizedString
   readonly assetKey?: string
+  readonly name: LocalizedString
 }
 export interface CategoryChangeAssetOrderAction {
   readonly action: 'changeAssetOrder'
@@ -207,29 +207,29 @@ export interface CategoryRemoveAssetAction {
 export interface CategorySetAssetCustomFieldAction {
   readonly action: 'setAssetCustomField'
   readonly assetId?: string
+  readonly assetKey?: string
   readonly name: string
   readonly value?: any
-  readonly assetKey?: string
 }
 export interface CategorySetAssetCustomTypeAction {
   readonly action: 'setAssetCustomType'
   readonly assetId?: string
-  /**
-   *	If set, the custom fields are set to this new value.
-   */
-  readonly fields?: any
+  readonly assetKey?: string
   /**
    *	If set, the custom type is set to this new value.
    *	If absent, the custom type and any existing custom fields are removed.
    */
   readonly type?: TypeResourceIdentifier
-  readonly assetKey?: string
+  /**
+   *	If set, the custom fields are set to this new value.
+   */
+  readonly fields?: any
 }
 export interface CategorySetAssetDescriptionAction {
   readonly action: 'setAssetDescription'
   readonly assetId?: string
-  readonly description?: LocalizedString
   readonly assetKey?: string
+  readonly description?: LocalizedString
 }
 export interface CategorySetAssetKeyAction {
   readonly action: 'setAssetKey'
@@ -242,9 +242,9 @@ export interface CategorySetAssetKeyAction {
 }
 export interface CategorySetAssetSourcesAction {
   readonly action: 'setAssetSources'
-  readonly sources: AssetSource[]
   readonly assetId?: string
   readonly assetKey?: string
+  readonly sources: AssetSource[]
 }
 export interface CategorySetAssetTagsAction {
   readonly action: 'setAssetTags'
@@ -260,13 +260,13 @@ export interface CategorySetCustomFieldAction {
 export interface CategorySetCustomTypeAction {
   readonly action: 'setCustomType'
   /**
-   *	A valid JSON object, based on the FieldDefinitions of the Type. Sets the custom fields to this value.
-   */
-  readonly fields?: FieldContainer
-  /**
    *	If absent, the custom type and any existing CustomFields are removed.
    */
   readonly type?: TypeResourceIdentifier
+  /**
+   *	A valid JSON object, based on the FieldDefinitions of the Type. Sets the custom fields to this value.
+   */
+  readonly fields?: FieldContainer
 }
 export interface CategorySetDescriptionAction {
   readonly action: 'setDescription'

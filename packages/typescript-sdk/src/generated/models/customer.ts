@@ -296,20 +296,23 @@ export interface CustomerAddAddressAction {
 }
 export interface CustomerAddBillingAddressIdAction {
   readonly action: 'addBillingAddressId'
-  readonly addressId: string
+  readonly addressId?: string
+  readonly addressKey?: string
 }
 export interface CustomerAddShippingAddressIdAction {
   readonly action: 'addShippingAddressId'
-  readonly addressId: string
+  readonly addressId?: string
+  readonly addressKey?: string
 }
 export interface CustomerAddStoreAction {
-  readonly action: 'addStores'
+  readonly action: 'addStore'
   readonly store: StoreResourceIdentifier
 }
 export interface CustomerChangeAddressAction {
   readonly action: 'changeAddress'
+  readonly addressId?: string
+  readonly addressKey?: string
   readonly address: Address
-  readonly addressId: string
 }
 export interface CustomerChangeEmailAction {
   readonly action: 'changeEmail'
@@ -317,18 +320,21 @@ export interface CustomerChangeEmailAction {
 }
 export interface CustomerRemoveAddressAction {
   readonly action: 'removeAddress'
-  readonly addressId: string
+  readonly addressId?: string
+  readonly addressKey?: string
 }
 export interface CustomerRemoveBillingAddressIdAction {
   readonly action: 'removeBillingAddressId'
-  readonly addressId: string
+  readonly addressId?: string
+  readonly addressKey?: string
 }
 export interface CustomerRemoveShippingAddressIdAction {
   readonly action: 'removeShippingAddressId'
-  readonly addressId: string
+  readonly addressId?: string
+  readonly addressKey?: string
 }
 export interface CustomerRemoveStoreAction {
-  readonly action: 'removeStores'
+  readonly action: 'removeStore'
   readonly store: StoreResourceIdentifier
 }
 export interface CustomerSetCompanyNameAction {
@@ -346,14 +352,14 @@ export interface CustomerSetCustomFieldAction {
 export interface CustomerSetCustomTypeAction {
   readonly action: 'setCustomType'
   /**
+   *	If absent, the custom type and any existing custom fields are removed.
+   */
+  readonly type?: TypeResourceIdentifier
+  /**
    *	A valid JSON object, based on the FieldDefinitions of the Type.
    *	Sets the custom fields to this value.
    */
   readonly fields?: FieldContainer
-  /**
-   *	If absent, the custom type and any existing custom fields are removed.
-   */
-  readonly type?: TypeResourceIdentifier
 }
 export interface CustomerSetCustomerGroupAction {
   readonly action: 'setCustomerGroup'
@@ -383,6 +389,7 @@ export interface CustomerSetDefaultBillingAddressAction {
    *	If not defined, the customer's `defaultBillingAddress` is unset.
    */
   readonly addressId?: string
+  readonly addressKey?: string
 }
 export interface CustomerSetDefaultShippingAddressAction {
   readonly action: 'setDefaultShippingAddress'
@@ -390,6 +397,7 @@ export interface CustomerSetDefaultShippingAddressAction {
    *	If not defined, the customer's `defaultShippingAddress` is unset.
    */
   readonly addressId?: string
+  readonly addressKey?: string
 }
 export interface CustomerSetExternalIdAction {
   readonly action: 'setExternalId'
@@ -427,7 +435,7 @@ export interface CustomerSetSalutationAction {
 }
 export interface CustomerSetStoresAction {
   readonly action: 'setStores'
-  readonly stores?: StoreResourceIdentifier
+  readonly stores?: StoreResourceIdentifier[]
 }
 export interface CustomerSetTitleAction {
   readonly action: 'setTitle'

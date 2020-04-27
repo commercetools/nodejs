@@ -64,9 +64,9 @@ export type ProjectUpdateAction =
   | ProjectSetExternalOAuthAction
   | ProjectSetShippingRateInputTypeAction
 export type ShippingRateInputType =
-  | CartClassificationType
-  | CartScoreType
   | CartValueType
+  | CartScoreType
+  | CartClassificationType
 export interface CartClassificationType {
   readonly type: 'CartClassification'
   readonly values: CustomFieldLocalizedEnumValue[]

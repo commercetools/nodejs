@@ -186,14 +186,14 @@ export interface ReviewSetCustomFieldAction {
 export interface ReviewSetCustomTypeAction {
   readonly action: 'setCustomType'
   /**
+   *	If absent, the custom type and any existing custom fields are removed.
+   */
+  readonly type?: TypeResourceIdentifier
+  /**
    *	A valid JSON object, based on the FieldDefinitions of the Type.
    *	Sets the CustomFields to this value.
    */
   readonly fields?: FieldContainer
-  /**
-   *	If absent, the custom type and any existing custom fields are removed.
-   */
-  readonly type?: TypeResourceIdentifier
 }
 export interface ReviewSetCustomerAction {
   readonly action: 'setCustomer'
@@ -250,6 +250,6 @@ export interface ReviewSetTitleAction {
 }
 export interface ReviewTransitionStateAction {
   readonly action: 'transitionState'
-  readonly force?: boolean
   readonly state: StateResourceIdentifier
+  readonly force?: boolean
 }

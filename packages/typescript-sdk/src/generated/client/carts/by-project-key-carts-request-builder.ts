@@ -13,7 +13,7 @@
 import { ByProjectKeyCartsByIDRequestBuilder } from 'client/carts/by-project-key-carts-by-id-request-builder'
 import { ByProjectKeyCartsCustomerIdByCustomerIdRequestBuilder } from 'client/carts/by-project-key-carts-customer-id-by-customer-id-request-builder'
 import { ByProjectKeyCartsReplicateRequestBuilder } from 'client/replicate/by-project-key-carts-replicate-request-builder'
-import { Cart, CartDraft } from 'models/cart'
+import { Cart, CartDraft, CartPagedQueryResponse } from 'models/cart'
 import { QueryParam, executeRequest } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
@@ -78,8 +78,8 @@ export class ByProjectKeyCartsRequestBuilder {
     headers?: {
       [key: string]: string
     }
-  }): ApiRequest<any> {
-    return new ApiRequest<any>(
+  }): ApiRequest<CartPagedQueryResponse> {
+    return new ApiRequest<CartPagedQueryResponse>(
       {
         baseUri: this.args.baseUri,
         method: 'GET',

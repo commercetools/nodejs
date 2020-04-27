@@ -10,48 +10,36 @@
  *                    `Y'
  *
  */
-import { ProductProjection } from 'models/product'
 import { QueryParam, executeRequest } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
-export class ByProjectKeyProductProjectionsKeyByKeyRequestBuilder {
+export class ByProjectKeyShippingMethodsMatchingLocationRequestBuilder {
   constructor(
     protected readonly args: {
       pathArgs: {
         projectKey: string
-        key: string
       }
       executeRequest: executeRequest
       baseUri?: string
     }
   ) {}
-  /**
-   *	Gets the current or staged representation of a product found by Key.
-   *	When used with an API client that has the view_published_products:{projectKey} scope,
-   *	this endpoint only returns published (current) product projections.
-   *
-   */
-  public get(methodArgs?: {
-    queryArgs?: {
-      staged?: boolean | boolean[]
-      priceCurrency?: string | string[]
-      priceCountry?: string | string[]
-      priceCustomerGroup?: string | string[]
-      priceChannel?: string | string[]
-      localeProjection?: string | string[]
-      storeProjection?: string | string[]
+  public get(methodArgs: {
+    queryArgs: {
+      country: string | string[]
+      state?: string | string[]
+      currency?: string | string[]
       expand?: string | string[]
       [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
     }
-  }): ApiRequest<ProductProjection> {
-    return new ApiRequest<ProductProjection>(
+  }): ApiRequest<any> {
+    return new ApiRequest<any>(
       {
         baseUri: this.args.baseUri,
         method: 'GET',
-        uriTemplate: '/{projectKey}/product-projections/key={key}',
+        uriTemplate: '/{projectKey}/shipping-methods/matching-location',
         pathVariables: this.args.pathArgs,
         headers: {
           ...methodArgs?.headers,

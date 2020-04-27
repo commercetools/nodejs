@@ -15,6 +15,7 @@ import {
   BaseResource,
   CreatedBy,
   LastModifiedBy,
+  LocalizedString,
   Money,
   Reference,
   ReferenceTypeId,
@@ -54,6 +55,7 @@ export interface ShippingMethod extends BaseResource {
   readonly key?: string
   readonly name: string
   readonly description?: string
+  readonly localizedDescription?: LocalizedString
   readonly taxCategory: TaxCategoryReference
   readonly zoneRates: ZoneRate[]
   /**
@@ -69,6 +71,7 @@ export interface ShippingMethodDraft {
   readonly key?: string
   readonly name: string
   readonly description?: string
+  readonly localizedDescription?: LocalizedString
   readonly taxCategory: TaxCategoryResourceIdentifier
   readonly zoneRates: ZoneRateDraft[]
   /**
@@ -111,6 +114,7 @@ export type ShippingMethodUpdateAction =
   | ShippingMethodRemoveZoneAction
   | ShippingMethodSetDescriptionAction
   | ShippingMethodSetKeyAction
+  | ShippingMethodSetLocalizedDescriptionAction
   | ShippingMethodSetPredicateAction
 export interface ShippingRate {
   readonly price: TypedMoney
@@ -148,16 +152,16 @@ export type ShippingRatePriceTier =
   | CartValueTier
 export interface CartClassificationTier {
   readonly type: 'CartClassification'
+  readonly value: string
   readonly price: Money
   readonly isMatching?: boolean
-  readonly value: string
 }
 export interface CartScoreTier {
   readonly type: 'CartScore'
   readonly score: number
   readonly price?: Money
-  readonly isMatching?: boolean
   readonly priceFunction?: PriceFunction
+  readonly isMatching?: boolean
 }
 export interface CartValueTier {
   readonly type: 'CartValue'
@@ -185,8 +189,8 @@ export interface ZoneRateDraft {
 }
 export interface ShippingMethodAddShippingRateAction {
   readonly action: 'addShippingRate'
-  readonly shippingRate: ShippingRateDraft
   readonly zone: ZoneResourceIdentifier
+  readonly shippingRate: ShippingRateDraft
 }
 export interface ShippingMethodAddZoneAction {
   readonly action: 'addZone'
@@ -209,8 +213,8 @@ export interface ShippingMethodChangeTaxCategoryAction {
 }
 export interface ShippingMethodRemoveShippingRateAction {
   readonly action: 'removeShippingRate'
-  readonly shippingRate: ShippingRateDraft
   readonly zone: ZoneResourceIdentifier
+  readonly shippingRate: ShippingRateDraft
 }
 export interface ShippingMethodRemoveZoneAction {
   readonly action: 'removeZone'
@@ -226,6 +230,10 @@ export interface ShippingMethodSetKeyAction {
    *	If `key` is absent or `null`, it is removed if it exists.
    */
   readonly key?: string
+}
+export interface ShippingMethodSetLocalizedDescriptionAction {
+  readonly action: 'setLocalizedDescription'
+  readonly localizedDescription?: string
 }
 export interface ShippingMethodSetPredicateAction {
   readonly action: 'setPredicate'

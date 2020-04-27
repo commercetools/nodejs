@@ -463,17 +463,17 @@ export interface MyCartAddItemShippingAddressAction {
 }
 export interface MyCartAddLineItemAction {
   readonly action: 'addLineItem'
-  readonly quantity?: number
-  readonly externalTaxRate?: ExternalTaxRateDraft
-  readonly shippingDetails?: ItemShippingDetailsDraft
-  readonly productId?: string
-  readonly externalTotalPrice?: ExternalLineItemTotalPrice
   readonly custom?: CustomFieldsDraft
-  readonly supplyChannel?: ChannelResourceIdentifier
+  readonly distributionChannel?: ChannelResourceIdentifier
+  readonly externalTaxRate?: ExternalTaxRateDraft
+  readonly productId?: string
   readonly variantId?: number
   readonly sku?: string
-  readonly distributionChannel?: ChannelResourceIdentifier
+  readonly quantity?: number
+  readonly supplyChannel?: ChannelResourceIdentifier
   readonly externalPrice?: Money
+  readonly externalTotalPrice?: ExternalLineItemTotalPrice
+  readonly shippingDetails?: ItemShippingDetailsDraft
 }
 export interface MyCartAddPaymentAction {
   readonly action: 'addPayment'
@@ -486,10 +486,10 @@ export interface MyCartApplyDeltaToLineItemShippingDetailsTargetsAction {
 }
 export interface MyCartChangeLineItemQuantityAction {
   readonly action: 'changeLineItemQuantity'
-  readonly quantity: number
-  readonly externalTotalPrice?: ExternalLineItemTotalPrice
   readonly lineItemId: string
+  readonly quantity: number
   readonly externalPrice?: Money
+  readonly externalTotalPrice?: ExternalLineItemTotalPrice
 }
 export interface MyCartChangeTaxModeAction {
   readonly action: 'changeTaxMode'
@@ -509,11 +509,11 @@ export interface MyCartRemoveItemShippingAddressAction {
 }
 export interface MyCartRemoveLineItemAction {
   readonly action: 'removeLineItem'
-  readonly quantity?: number
-  readonly externalTotalPrice?: ExternalLineItemTotalPrice
   readonly lineItemId: string
-  readonly shippingDetailsToRemove?: ItemShippingDetailsDraft
+  readonly quantity?: number
   readonly externalPrice?: Money
+  readonly externalTotalPrice?: ExternalLineItemTotalPrice
+  readonly shippingDetailsToRemove?: ItemShippingDetailsDraft
 }
 export interface MyCartRemovePaymentAction {
   readonly action: 'removePayment'
@@ -538,15 +538,15 @@ export interface MyCartSetCustomFieldAction {
 }
 export interface MyCartSetCustomShippingMethodAction {
   readonly action: 'setCustomShippingMethod'
-  readonly shippingRate: ShippingRateDraft
-  readonly externalTaxRate?: ExternalTaxRateDraft
   readonly shippingMethodName: string
+  readonly shippingRate: ShippingRateDraft
   readonly taxCategory?: TaxCategoryResourceIdentifier
+  readonly externalTaxRate?: ExternalTaxRateDraft
 }
 export interface MyCartSetCustomTypeAction {
   readonly action: 'setCustomType'
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface MyCartSetDeleteDaysAfterLastModificationAction {
   readonly action: 'setDeleteDaysAfterLastModification'
@@ -561,13 +561,13 @@ export interface MyCartSetLineItemCustomFieldAction {
 export interface MyCartSetLineItemCustomTypeAction {
   readonly action: 'setLineItemCustomType'
   readonly lineItemId: string
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface MyCartSetLineItemShippingDetailsAction {
   readonly action: 'setLineItemShippingDetails'
-  readonly shippingDetails?: ItemShippingDetailsDraft
   readonly lineItemId: string
+  readonly shippingDetails?: ItemShippingDetailsDraft
 }
 export interface MyCartSetLocaleAction {
   readonly action: 'setLocale'
@@ -579,8 +579,8 @@ export interface MyCartSetShippingAddressAction {
 }
 export interface MyCartSetShippingMethodAction {
   readonly action: 'setShippingMethod'
-  readonly externalTaxRate?: ExternalTaxRateDraft
   readonly shippingMethod?: ShippingMethodResourceIdentifier
+  readonly externalTaxRate?: ExternalTaxRateDraft
 }
 export interface MyCartUpdateItemShippingAddressAction {
   readonly action: 'updateItemShippingAddress'
@@ -600,8 +600,8 @@ export interface MyCustomerAddShippingAddressIdAction {
 }
 export interface MyCustomerChangeAddressAction {
   readonly action: 'changeAddress'
-  readonly address: Address
   readonly addressId: string
+  readonly address: Address
 }
 export interface MyCustomerChangeEmailAction {
   readonly action: 'changeEmail'
@@ -630,8 +630,8 @@ export interface MyCustomerSetCustomFieldAction {
 }
 export interface MyCustomerSetCustomTypeAction {
   readonly action: 'setCustomType'
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface MyCustomerSetDateOfBirthAction {
   readonly action: 'setDateOfBirth'
@@ -700,25 +700,25 @@ export interface MyPaymentSetMethodInfoNameAction {
 }
 export interface MyShoppingListAddLineItemAction {
   readonly action: 'addLineItem'
-  readonly addedAt?: string
-  readonly quantity?: number
-  readonly productId?: string
-  readonly custom?: CustomFieldsDraft
-  readonly variantId?: number
   readonly sku?: string
+  readonly productId?: string
+  readonly variantId?: number
+  readonly quantity?: number
+  readonly addedAt?: string
+  readonly custom?: CustomFieldsDraft
 }
 export interface MyShoppingListAddTextLineItemAction {
   readonly action: 'addTextLineItem'
-  readonly addedAt?: string
-  readonly quantity?: number
-  readonly custom?: CustomFieldsDraft
   readonly name: LocalizedString
   readonly description?: LocalizedString
+  readonly quantity?: number
+  readonly addedAt?: string
+  readonly custom?: CustomFieldsDraft
 }
 export interface MyShoppingListChangeLineItemQuantityAction {
   readonly action: 'changeLineItemQuantity'
-  readonly quantity: number
   readonly lineItemId: string
+  readonly quantity: number
 }
 export interface MyShoppingListChangeLineItemsOrderAction {
   readonly action: 'changeLineItemsOrder'
@@ -730,13 +730,13 @@ export interface MyShoppingListChangeNameAction {
 }
 export interface MyShoppingListChangeTextLineItemNameAction {
   readonly action: 'changeTextLineItemName'
-  readonly name: LocalizedString
   readonly textLineItemId: string
+  readonly name: LocalizedString
 }
 export interface MyShoppingListChangeTextLineItemQuantityAction {
   readonly action: 'changeTextLineItemQuantity'
-  readonly quantity: number
   readonly textLineItemId: string
+  readonly quantity: number
 }
 export interface MyShoppingListChangeTextLineItemsOrderAction {
   readonly action: 'changeTextLineItemsOrder'
@@ -744,13 +744,13 @@ export interface MyShoppingListChangeTextLineItemsOrderAction {
 }
 export interface MyShoppingListRemoveLineItemAction {
   readonly action: 'removeLineItem'
-  readonly quantity?: number
   readonly lineItemId: string
+  readonly quantity?: number
 }
 export interface MyShoppingListRemoveTextLineItemAction {
   readonly action: 'removeTextLineItem'
-  readonly quantity?: number
   readonly textLineItemId: string
+  readonly quantity?: number
 }
 export interface MyShoppingListSetCustomFieldAction {
   readonly action: 'setCustomField'
@@ -759,8 +759,8 @@ export interface MyShoppingListSetCustomFieldAction {
 }
 export interface MyShoppingListSetCustomTypeAction {
   readonly action: 'setCustomType'
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface MyShoppingListSetDeleteDaysAfterLastModificationAction {
   readonly action: 'setDeleteDaysAfterLastModification'
@@ -779,23 +779,23 @@ export interface MyShoppingListSetLineItemCustomFieldAction {
 export interface MyShoppingListSetLineItemCustomTypeAction {
   readonly action: 'setLineItemCustomType'
   readonly lineItemId: string
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface MyShoppingListSetTextLineItemCustomFieldAction {
   readonly action: 'setTextLineItemCustomField'
+  readonly textLineItemId: string
   readonly name: string
   readonly value?: any
-  readonly textLineItemId: string
 }
 export interface MyShoppingListSetTextLineItemCustomTypeAction {
   readonly action: 'setTextLineItemCustomType'
-  readonly fields?: FieldContainer
-  readonly type?: TypeResourceIdentifier
   readonly textLineItemId: string
+  readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface MyShoppingListSetTextLineItemDescriptionAction {
   readonly action: 'setTextLineItemDescription'
-  readonly description?: LocalizedString
   readonly textLineItemId: string
+  readonly description?: LocalizedString
 }

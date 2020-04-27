@@ -178,15 +178,15 @@ export interface OrderEditResourceIdentifier {
   readonly key?: string
 }
 export type OrderEditResult =
+  | OrderEditPreviewFailure
   | OrderEditApplied
   | OrderEditNotProcessed
-  | OrderEditPreviewFailure
   | OrderEditPreviewSuccess
 export interface OrderEditApplied {
   readonly type: 'Applied'
-  readonly excerptAfterEdit: OrderExcerpt
-  readonly excerptBeforeEdit: OrderExcerpt
   readonly appliedAt: string
+  readonly excerptBeforeEdit: OrderExcerpt
+  readonly excerptAfterEdit: OrderExcerpt
 }
 export interface OrderEditNotProcessed {
   readonly type: 'NotProcessed'
@@ -234,14 +234,14 @@ export interface OrderEditSetCustomFieldAction {
 export interface OrderEditSetCustomTypeAction {
   readonly action: 'setCustomType'
   /**
-   *	If set, the custom fields are set to this new value.
-   */
-  readonly fields?: any
-  /**
    *	If set, the custom type is set to this new value.
    *	If absent, the custom type and any existing custom fields are removed.
    */
   readonly type?: TypeResourceIdentifier
+  /**
+   *	If set, the custom fields are set to this new value.
+   */
+  readonly fields?: any
 }
 export interface OrderEditSetKeyAction {
   readonly action: 'setKey'
@@ -259,18 +259,18 @@ export interface OrderEditSetStagedActionsAction {
 }
 export interface StagedOrderAddCustomLineItemAction {
   readonly action: 'addCustomLineItem'
-  readonly externalTaxRate?: ExternalTaxRateDraft
-  readonly quantity?: number
   readonly money: Money
-  readonly custom?: CustomFieldsDraft
   readonly name: LocalizedString
+  readonly quantity?: number
   readonly slug: string
   readonly taxCategory?: TaxCategoryResourceIdentifier
+  readonly custom?: CustomFieldsDraft
+  readonly externalTaxRate?: ExternalTaxRateDraft
 }
 export interface StagedOrderAddDeliveryAction {
   readonly action: 'addDelivery'
-  readonly address?: Address
   readonly items?: DeliveryItem[]
+  readonly address?: Address
   readonly parcels?: ParcelDraft[]
 }
 export interface StagedOrderAddDiscountCodeAction {
@@ -283,24 +283,24 @@ export interface StagedOrderAddItemShippingAddressAction {
 }
 export interface StagedOrderAddLineItemAction {
   readonly action: 'addLineItem'
-  readonly quantity?: number
-  readonly externalTaxRate?: ExternalTaxRateDraft
-  readonly shippingDetails?: ItemShippingDetailsDraft
-  readonly productId?: string
-  readonly externalTotalPrice?: ExternalLineItemTotalPrice
   readonly custom?: CustomFieldsDraft
-  readonly supplyChannel?: ChannelResourceIdentifier
+  readonly distributionChannel?: ChannelResourceIdentifier
+  readonly externalTaxRate?: ExternalTaxRateDraft
+  readonly productId?: string
   readonly variantId?: number
   readonly sku?: string
-  readonly distributionChannel?: ChannelResourceIdentifier
+  readonly quantity?: number
+  readonly supplyChannel?: ChannelResourceIdentifier
   readonly externalPrice?: Money
+  readonly externalTotalPrice?: ExternalLineItemTotalPrice
+  readonly shippingDetails?: ItemShippingDetailsDraft
 }
 export interface StagedOrderAddParcelToDeliveryAction {
   readonly action: 'addParcelToDelivery'
   readonly deliveryId: string
-  readonly items?: DeliveryItem[]
-  readonly trackingData?: TrackingData
   readonly measurements?: ParcelMeasurements
+  readonly trackingData?: TrackingData
+  readonly items?: DeliveryItem[]
 }
 export interface StagedOrderAddPaymentAction {
   readonly action: 'addPayment'
@@ -308,9 +308,9 @@ export interface StagedOrderAddPaymentAction {
 }
 export interface StagedOrderAddReturnInfoAction {
   readonly action: 'addReturnInfo'
-  readonly returnDate?: string
   readonly returnTrackingId?: string
   readonly items: ReturnItemDraft[]
+  readonly returnDate?: string
 }
 export interface StagedOrderAddShoppingListAction {
   readonly action: 'addShoppingList'
@@ -330,10 +330,10 @@ export interface StagedOrderChangeCustomLineItemQuantityAction {
 }
 export interface StagedOrderChangeLineItemQuantityAction {
   readonly action: 'changeLineItemQuantity'
-  readonly quantity: number
-  readonly externalTotalPrice?: ExternalLineItemTotalPrice
   readonly lineItemId: string
+  readonly quantity: number
   readonly externalPrice?: Money
+  readonly externalTotalPrice?: ExternalLineItemTotalPrice
 }
 export interface StagedOrderChangeOrderStateAction {
   readonly action: 'changeOrderState'
@@ -387,11 +387,11 @@ export interface StagedOrderRemoveItemShippingAddressAction {
 }
 export interface StagedOrderRemoveLineItemAction {
   readonly action: 'removeLineItem'
-  readonly quantity?: number
-  readonly externalTotalPrice?: ExternalLineItemTotalPrice
   readonly lineItemId: string
-  readonly shippingDetailsToRemove?: ItemShippingDetailsDraft
+  readonly quantity?: number
   readonly externalPrice?: Money
+  readonly externalTotalPrice?: ExternalLineItemTotalPrice
+  readonly shippingDetailsToRemove?: ItemShippingDetailsDraft
 }
 export interface StagedOrderRemoveParcelFromDeliveryAction {
   readonly action: 'removeParcelFromDelivery'
@@ -423,8 +423,8 @@ export interface StagedOrderSetCustomLineItemCustomFieldAction {
 export interface StagedOrderSetCustomLineItemCustomTypeAction {
   readonly action: 'setCustomLineItemCustomType'
   readonly customLineItemId: string
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface StagedOrderSetCustomLineItemShippingDetailsAction {
   readonly action: 'setCustomLineItemShippingDetails'
@@ -443,15 +443,15 @@ export interface StagedOrderSetCustomLineItemTaxRateAction {
 }
 export interface StagedOrderSetCustomShippingMethodAction {
   readonly action: 'setCustomShippingMethod'
-  readonly shippingRate: ShippingRateDraft
-  readonly externalTaxRate?: ExternalTaxRateDraft
   readonly shippingMethodName: string
+  readonly shippingRate: ShippingRateDraft
   readonly taxCategory?: TaxCategoryResourceIdentifier
+  readonly externalTaxRate?: ExternalTaxRateDraft
 }
 export interface StagedOrderSetCustomTypeAction {
   readonly action: 'setCustomType'
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface StagedOrderSetCustomerEmailAction {
   readonly action: 'setCustomerEmail'
@@ -484,8 +484,8 @@ export interface StagedOrderSetLineItemCustomFieldAction {
 export interface StagedOrderSetLineItemCustomTypeAction {
   readonly action: 'setLineItemCustomType'
   readonly lineItemId: string
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface StagedOrderSetLineItemPriceAction {
   readonly action: 'setLineItemPrice'
@@ -494,8 +494,8 @@ export interface StagedOrderSetLineItemPriceAction {
 }
 export interface StagedOrderSetLineItemShippingDetailsAction {
   readonly action: 'setLineItemShippingDetails'
-  readonly shippingDetails?: ItemShippingDetailsDraft
   readonly lineItemId: string
+  readonly shippingDetails?: ItemShippingDetailsDraft
 }
 export interface StagedOrderSetLineItemTaxAmountAction {
   readonly action: 'setLineItemTaxAmount'
@@ -504,13 +504,13 @@ export interface StagedOrderSetLineItemTaxAmountAction {
 }
 export interface StagedOrderSetLineItemTaxRateAction {
   readonly action: 'setLineItemTaxRate'
-  readonly externalTaxRate?: ExternalTaxRateDraft
   readonly lineItemId: string
+  readonly externalTaxRate?: ExternalTaxRateDraft
 }
 export interface StagedOrderSetLineItemTotalPriceAction {
   readonly action: 'setLineItemTotalPrice'
-  readonly externalTotalPrice?: ExternalLineItemTotalPrice
   readonly lineItemId: string
+  readonly externalTotalPrice?: ExternalLineItemTotalPrice
 }
 export interface StagedOrderSetLocaleAction {
   readonly action: 'setLocale'
@@ -522,23 +522,23 @@ export interface StagedOrderSetOrderNumberAction {
 }
 export interface StagedOrderSetOrderTotalTaxAction {
   readonly action: 'setOrderTotalTax'
-  readonly externalTaxPortions?: TaxPortionDraft[]
   readonly externalTotalGross: Money
+  readonly externalTaxPortions?: TaxPortionDraft[]
 }
 export interface StagedOrderSetParcelItemsAction {
   readonly action: 'setParcelItems'
-  readonly items: DeliveryItem[]
   readonly parcelId: string
+  readonly items: DeliveryItem[]
 }
 export interface StagedOrderSetParcelMeasurementsAction {
   readonly action: 'setParcelMeasurements'
-  readonly measurements?: ParcelMeasurements
   readonly parcelId: string
+  readonly measurements?: ParcelMeasurements
 }
 export interface StagedOrderSetParcelTrackingDataAction {
   readonly action: 'setParcelTrackingData'
-  readonly trackingData?: TrackingData
   readonly parcelId: string
+  readonly trackingData?: TrackingData
 }
 export interface StagedOrderSetReturnPaymentStateAction {
   readonly action: 'setReturnPaymentState'
@@ -547,8 +547,8 @@ export interface StagedOrderSetReturnPaymentStateAction {
 }
 export interface StagedOrderSetReturnShipmentStateAction {
   readonly action: 'setReturnShipmentState'
-  readonly shipmentState: ReturnShipmentState
   readonly returnItemId: string
+  readonly shipmentState: ReturnShipmentState
 }
 export interface StagedOrderSetShippingAddressAction {
   readonly action: 'setShippingAddress'
@@ -556,22 +556,22 @@ export interface StagedOrderSetShippingAddressAction {
 }
 export interface StagedOrderSetShippingAddressAndCustomShippingMethodAction {
   readonly action: 'setShippingAddressAndCustomShippingMethod'
-  readonly shippingRate: ShippingRateDraft
-  readonly externalTaxRate?: ExternalTaxRateDraft
   readonly address: Address
   readonly shippingMethodName: string
+  readonly shippingRate: ShippingRateDraft
   readonly taxCategory?: TaxCategoryResourceIdentifier
+  readonly externalTaxRate?: ExternalTaxRateDraft
 }
 export interface StagedOrderSetShippingAddressAndShippingMethodAction {
   readonly action: 'setShippingAddressAndShippingMethod'
-  readonly externalTaxRate?: ExternalTaxRateDraft
   readonly address: Address
   readonly shippingMethod?: ShippingMethodResourceIdentifier
+  readonly externalTaxRate?: ExternalTaxRateDraft
 }
 export interface StagedOrderSetShippingMethodAction {
   readonly action: 'setShippingMethod'
-  readonly externalTaxRate?: ExternalTaxRateDraft
   readonly shippingMethod?: ShippingMethodResourceIdentifier
+  readonly externalTaxRate?: ExternalTaxRateDraft
 }
 export interface StagedOrderSetShippingMethodTaxAmountAction {
   readonly action: 'setShippingMethodTaxAmount'
@@ -587,24 +587,24 @@ export interface StagedOrderSetShippingRateInputAction {
 }
 export interface StagedOrderTransitionCustomLineItemStateAction {
   readonly action: 'transitionCustomLineItemState'
-  readonly toState: StateResourceIdentifier
-  readonly fromState: StateResourceIdentifier
   readonly customLineItemId: string
   readonly quantity: number
+  readonly fromState: StateResourceIdentifier
+  readonly toState: StateResourceIdentifier
   readonly actualTransitionDate?: string
 }
 export interface StagedOrderTransitionLineItemStateAction {
   readonly action: 'transitionLineItemState'
-  readonly toState: StateResourceIdentifier
-  readonly fromState: StateResourceIdentifier
-  readonly quantity: number
   readonly lineItemId: string
+  readonly quantity: number
+  readonly fromState: StateResourceIdentifier
+  readonly toState: StateResourceIdentifier
   readonly actualTransitionDate?: string
 }
 export interface StagedOrderTransitionStateAction {
   readonly action: 'transitionState'
-  readonly force?: boolean
   readonly state: StateResourceIdentifier
+  readonly force?: boolean
 }
 export interface StagedOrderUpdateItemShippingAddressAction {
   readonly action: 'updateItemShippingAddress'
