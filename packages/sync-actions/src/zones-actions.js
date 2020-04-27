@@ -8,10 +8,11 @@ import { buildBaseAttributesActions } from './utils/common-actions'
 export const baseActionsList = [
   { action: 'changeName', key: 'name' },
   { action: 'setDescription', key: 'description' },
+  { action: 'setKey', key: 'key' },
 ]
 
 const hasLocation = (locations, otherLocation) =>
-  locations.some(location => location.country === otherLocation.country)
+  locations.some((location) => location.country === otherLocation.country)
 
 export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   return buildBaseAttributesActions({
@@ -25,11 +26,11 @@ export function actionsMapBase(diff, oldObj, newObj, config = {}) {
 
 export function actionsMapLocations(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('locations', {
-    [ADD_ACTIONS]: newLocation => ({
+    [ADD_ACTIONS]: (newLocation) => ({
       action: 'addLocation',
       location: newLocation,
     }),
-    [REMOVE_ACTIONS]: oldLocation =>
+    [REMOVE_ACTIONS]: (oldLocation) =>
       // We only add the action if the location is not included in the new object.
       !hasLocation(newObj.locations, oldLocation)
         ? {

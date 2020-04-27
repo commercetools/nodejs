@@ -66,6 +66,12 @@ describe('Exports', () => {
         expect.arrayContaining([{ action: 'setValidUntil', key: 'validUntil' }])
       )
     })
+
+    test('should contain `setKey` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([{ action: 'setKey', key: 'key' }])
+      )
+    })
   })
 })
 
@@ -252,6 +258,25 @@ describe('Actions', () => {
         validFrom: 'date-2-From',
         validUntil: 'date-2-Until',
       },
+    ]
+    const actual = productDiscountsSync.buildActions(now, before)
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build the `setKey` action', () => {
+    const before = {
+      key: 'key-before',
+    }
+
+    const now = {
+      key: 'key-now',
+    }
+
+    const expected = [
+      {
+        action: 'setKey',
+        key: 'key-now',
+      }
     ]
     const actual = productDiscountsSync.buildActions(now, before)
     expect(actual).toEqual(expected)

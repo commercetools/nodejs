@@ -20,7 +20,7 @@ describe('AddReturnInfoParser', () => {
 
   describe('::parse', () => {
     test('should accept a stream and output a stream', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const parser = new AddReturnInfoParser()
         const readStream = fs.createReadStream(
           path.join(__dirname, 'data/return-info-sample.csv')
@@ -96,7 +96,7 @@ describe('AddReturnInfoParser', () => {
     })
 
     test('should return error with missing headers', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const mockErrorLog = jest.fn()
         const parser = new AddReturnInfoParser({
           logger: {
@@ -123,7 +123,7 @@ describe('AddReturnInfoParser', () => {
     })
 
     test('should return error with invalid csv', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const mockErrorLog = jest.fn()
         const parser = new AddReturnInfoParser({
           logger: {
@@ -135,7 +135,7 @@ describe('AddReturnInfoParser', () => {
           path.join(__dirname, 'data/return-info-error-sample.csv')
         )
 
-        const outputStream = StreamTest.v2.toText(err => {
+        const outputStream = StreamTest.v2.toText((err) => {
           expect(err.toString()).toEqual(
             'RangeError: Row length does not match headers'
           )
@@ -148,7 +148,7 @@ describe('AddReturnInfoParser', () => {
 
   describe('::_processData', () => {
     test('should accept CSV object and output an order', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const parser = new AddReturnInfoParser()
         const mockOrder = {
           orderNumber: '123',
@@ -160,7 +160,7 @@ describe('AddReturnInfoParser', () => {
 
         parser
           ._processData(mockOrder)
-          .then(result => {
+          .then((result) => {
             expect(result.orderNumber).toBe(mockOrder.orderNumber)
             const expectedResult = {
               orderNumber: '123',
@@ -188,7 +188,7 @@ describe('AddReturnInfoParser', () => {
     })
 
     test('should return error because of missing headers', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const parser = new AddReturnInfoParser()
         const mockOrder = {
           quantity: '234',
@@ -200,7 +200,7 @@ describe('AddReturnInfoParser', () => {
         parser
           ._processData(mockOrder)
           .then(done.fail)
-          .catch(err => {
+          .catch((err) => {
             expect(err).toEqual(
               new Error("Required headers missing: 'orderNumber'")
             )

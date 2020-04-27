@@ -21,10 +21,10 @@ describe('Auth Middleware Flows', () => {
   beforeAll(
     () =>
       getCredentials(projectKey)
-        .then(credentials => {
+        .then((credentials) => {
           apiConfig = {
-            host: 'https://auth.sphere.io',
-            apiUrl: 'https://api.sphere.io',
+            host: 'https://auth.europe-west1.gcp.commercetools.com',
+            apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
             projectKey,
             credentials: {
               clientId: credentials.clientId,
@@ -52,7 +52,7 @@ describe('Auth Middleware Flows', () => {
 
   describe('Password Session Flow', () => {
     const httpMiddleware = createHttpMiddleware({
-      host: 'https://api.sphere.io',
+      host: 'https://api.europe-west1.gcp.commercetools.com',
       fetch,
     })
 
@@ -83,7 +83,7 @@ describe('Auth Middleware Flows', () => {
           uri: `/${projectKey}/me`,
           method: 'GET',
         })
-        .then(response => {
+        .then((response) => {
           const user = response.body
           expect(user).toHaveProperty('email', userEmail)
         })
@@ -92,7 +92,7 @@ describe('Auth Middleware Flows', () => {
 
   describe('Anonymous Session Flow', () => {
     const httpMiddleware = createHttpMiddleware({
-      host: 'https://api.sphere.io',
+      host: 'https://api.europe-west1.gcp.commercetools.com',
       fetch,
     })
 
@@ -145,7 +145,7 @@ describe('Auth Middleware Flows', () => {
   describe('Refresh Token Flow', () => {
     it('uses the refresh token', () => {
       const httpMiddleware = createHttpMiddleware({
-        host: 'https://api.sphere.io',
+        host: 'https://api.europe-west1.gcp.commercetools.com',
         includeOriginalRequest: true,
         fetch,
       })
@@ -170,8 +170,8 @@ describe('Auth Middleware Flows', () => {
         },
         body,
       })
-        .then(res => res.json())
-        .then(jsonResponse => {
+        .then((res) => res.json())
+        .then((jsonResponse) => {
           tokenObject = { ...jsonResponse }
 
           const client = createClient({

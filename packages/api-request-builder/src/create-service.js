@@ -35,6 +35,7 @@ const requiredDefinitionProps = ['type', 'endpoint', 'features']
 
 function getIdOrKey(params: Object): string {
   if (params.id) return `/${params.id}`
+  if (params.orderNumber) return `/order-number=${params.orderNumber}`
   if (params.key && !params.container) return `/key=${params.key}`
   if (params.key && params.container)
     return `/${params.container}/${params.key}`
@@ -43,7 +44,7 @@ function getIdOrKey(params: Object): string {
 
 export default function createService(
   definition: ServiceBuilderDefinition,
-  options: string = ''
+  projectKey: string = ''
 ): ServiceBuilder {
   if (!definition)
     throw new Error('Cannot create a service without its definition.')
@@ -56,7 +57,7 @@ export default function createService(
   if (!Array.isArray(definition.features) || !definition.features.length)
     throw new Error('Definition requires `features` to be a non empty array.')
 
-  if (!options)
+  if (!projectKey)
     throw new Error('No project defined. Please enter a project key')
 
   const { type, endpoint, features } = definition
@@ -131,7 +132,7 @@ export default function createService(
       const queryParams = buildQueryString(this.params)
 
       const uri =
-        (withProjectKey ? `/${options}` : '') +
+        (withProjectKey ? `/${projectKey}` : '') +
         endpoint +
         // TODO this can lead to invalid URIs as getIdOrKey can return
         //   "/?customerId", so there can be multiple question marks,

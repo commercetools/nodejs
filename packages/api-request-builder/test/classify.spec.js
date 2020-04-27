@@ -12,7 +12,7 @@ describe('classify', () => {
         return this.bar
       },
     })
-    Object.keys(composed).forEach(key => {
+    Object.keys(composed).forEach((key) => {
       expect(typeof composed[key]).toBe('function')
     })
     expect(Object.keys(composed)).toHaveLength(2)

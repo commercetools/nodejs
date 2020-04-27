@@ -23,7 +23,7 @@ function createTestResponse(options) {
 
 function createTestMiddlewareOptions(options) {
   return {
-    host: 'https://auth.commercetools.co',
+    host: 'https://auth.europe-west1.gcp.commercetools.com',
     projectKey: 'foo',
     credentials: {
       clientId: '123',
@@ -68,15 +68,15 @@ describe('Base Auth Flow', () => {
   })
 
   test('get a new auth token if not present in request headers', () =>
-    new Promise(resolve => {
-      const next = req => {
+    new Promise((resolve) => {
+      const next = (req) => {
         expect(req).toHaveProperty('headers.Authorization', 'Bearer xxx')
         resolve()
       }
       const middlewareOptions = createTestMiddlewareOptions()
 
       nock(middlewareOptions.host)
-        .filteringRequestBody(body => {
+        .filteringRequestBody((body) => {
           expect(body).toBe('grant_type=client_credentials')
           return '*'
         })
@@ -92,7 +92,7 @@ describe('Base Auth Flow', () => {
     new Promise((resolve, reject) => {
       const response = createTestResponse({
         resolve,
-        reject: error => {
+        reject: (error) => {
           expect(error.message).toMatch('socket timeout')
           resolve()
         },
@@ -103,7 +103,7 @@ describe('Base Auth Flow', () => {
       const middlewareOptions = createTestMiddlewareOptions()
 
       nock(middlewareOptions.host)
-        .filteringRequestBody(body => {
+        .filteringRequestBody((body) => {
           expect(body).toBe('grant_type=client_credentials')
           return '*'
         })
@@ -116,7 +116,7 @@ describe('Base Auth Flow', () => {
     new Promise((resolve, reject) => {
       const response = createTestResponse({
         resolve,
-        reject: error => {
+        reject: (error) => {
           expect(error.message).toBe('Oops')
           expect(error.body).toEqual({ message: 'Oops' })
           resolve()
@@ -142,7 +142,7 @@ describe('Base Auth Flow', () => {
     new Promise((resolve, reject) => {
       const response = createTestResponse({
         resolve,
-        reject: error => {
+        reject: (error) => {
           expect(error.message).toBe('Oops')
           expect(error.body).toBeUndefined()
           resolve()
@@ -165,7 +165,7 @@ describe('Base Auth Flow', () => {
     }))
 
   test('retrieve a new token if previous one expired', () =>
-    new Promise(resolve => {
+    new Promise((resolve) => {
       const middlewareOptions = createTestMiddlewareOptions()
       let requestCount = 0
       nock(middlewareOptions.host)
@@ -211,7 +211,7 @@ describe('Base Auth Flow', () => {
     }))
 
   test('use refresh token to fetch a new token if no token or is expired', () =>
-    new Promise(resolve => {
+    new Promise((resolve) => {
       const spy = jest.spyOn(buildRequests, 'buildRequestForRefreshTokenFlow')
       const middlewareOptions = createTestMiddlewareOptions()
       let requestCount = 0
@@ -304,7 +304,7 @@ describe('Base Auth Flow', () => {
         // - we simulate that the request has a token set in the headers
         // which does not match any of the cached tokens. In this case
         // do not refetch and keep going.
-        const call2 = rq => {
+        const call2 = (rq) => {
           const requestWithHeaders = {
             ...rq,
             headers: {
@@ -334,7 +334,7 @@ describe('Base Auth Flow', () => {
   )
 
   test('ensure to fetch new token only once and keep track of pending tasks', () =>
-    new Promise(resolve => {
+    new Promise((resolve) => {
       const middlewareOptions = createTestMiddlewareOptions()
       let requestCount = 0
       nock(middlewareOptions.host)
@@ -371,8 +371,55 @@ describe('Base Auth Flow', () => {
       createBaseMiddleware({ pendingTasks, tokenCache, requestState }, next)
     }))
 
+  test('should change requestState to false when createAuthMiddlewareBase fails', async () => {
+    const middlewareOptions = createTestMiddlewareOptions()
+    let requestCount = 0
+
+    nock(middlewareOptions.host)
+      .persist() // <-- use the same interceptor for all requests
+      .log(() => {
+        requestCount += 1
+      }) // keep track of the request count
+      .filteringRequestBody(/.*/, '*')
+      .post('/oauth/token', '*')
+      .delay(2000) // <-- Delay the response
+      .reply(401, {
+        message: 'invalid_client',
+        error: 'invalid_client',
+      })
+
+    const requestState = store(false)
+    const pendingTasks = []
+
+    const startCreateBaseMiddleware = () =>
+      new Promise((resolve, reject) => {
+        expect(requestState.get()).toBe(false)
+
+        // fire off promise returning function and change requestState to true
+        // we do not await the response before the assertion since we set
+        // `reqeustState` to `false` after the promise is fulfilled or rejected.
+        const start = createBaseMiddleware({
+          response: { resolve, reject },
+          pendingTasks,
+          requestState,
+        })
+
+        expect(requestState.get()).toBe(true)
+        expect(requestCount).toBe(1) // Make sure that nock runned the mocked request
+
+        return start
+      })
+
+    try {
+      // await promise failure which should set `requestState` to `false`
+      await startCreateBaseMiddleware()
+    } catch (error) {
+      expect(requestState.get()).toBe(false)
+    }
+  })
+
   test('if a token has been fetched, use it for the new incoming requests', () =>
-    new Promise(resolve => {
+    new Promise((resolve) => {
       const middlewareOptions = createTestMiddlewareOptions()
       let requestCount = 0
       nock(middlewareOptions.host)
@@ -389,7 +436,7 @@ describe('Base Auth Flow', () => {
       const pendingTasks = []
       const tokenCache = store({})
       const requestState = store(false)
-      const next = rq2 => {
+      const next = (rq2) => {
         // 2. Should not get a new token
         expect(requestCount).toBe(1)
         expect(rq2).toEqual(
@@ -408,4 +455,185 @@ describe('Base Auth Flow', () => {
       )
       createBaseMiddleware({ pendingTasks, tokenCache, requestState }, call2)
     }))
+
+  describe('client id token cache', () => {
+    let tokenCache
+    const createCacheKey = (options) =>
+      `${options.clientId}-${options.projectKey}-${options.host}`
+
+    beforeEach(() => {
+      tokenCache = {
+        cache: {},
+        get(client) {
+          return this.cache[client]
+        },
+        set(value, client) {
+          this.cache[client] = value
+        },
+      }
+    })
+
+    test('it stores token in token cache in context of token cache key', () =>
+      new Promise((resolve) => {
+        const tokenCacheKeyOptions = {
+          clientId: 'clientId',
+          projectKey: 'projectKey',
+          host: 'host',
+        }
+        const tokenCacheKey = createCacheKey(tokenCacheKeyOptions)
+        const customTokenCache = {
+          cache: {},
+          get(cacheKey) {
+            return this.cache[createCacheKey(cacheKey)]
+          },
+          set(token, cacheKey) {
+            this.cache[createCacheKey(cacheKey)] = token
+          },
+        }
+        const next = (req) => {
+          expect(req).toHaveProperty('headers.Authorization', 'Bearer xxx')
+          expect(customTokenCache.get(tokenCacheKey)).toEqual(
+            expect.objectContaining({
+              token: 'xxx',
+            })
+          )
+          resolve()
+        }
+
+        const middlewareOptions = createTestMiddlewareOptions()
+
+        nock(middlewareOptions.host)
+          .filteringRequestBody((body) => {
+            expect(body).toBe('grant_type=client_credentials')
+            return '*'
+          })
+          .post('/oauth/token', '*')
+          .reply(200, {
+            access_token: 'xxx',
+            expires_in: 100,
+          })
+        createBaseMiddleware(
+          { tokenCache: customTokenCache, tokenCacheKey },
+          next
+        )
+      }))
+
+    test('ensure to fetch new token only once for each client and keep track of pending tasks in context of client instance of middleware', () =>
+      new Promise((resolve) => {
+        const middlewareOptions = createTestMiddlewareOptions()
+        let requestCount = 0
+
+        const tokenCacheKeyOne = {
+          clientId: 'clientIdOne',
+          projectKey: 'projectKey',
+          host: 'host',
+        }
+        const tokenCacheKeyTwo = {
+          clientId: 'clientIdTwo',
+          projectKey: 'projectKey',
+          host: 'host',
+        }
+        nock(middlewareOptions.host)
+          .persist() // <-- use the same interceptor for all requests
+          .log(() => {
+            requestCount += 1
+          }) // keep track of the request count
+          .filteringRequestBody(/.*/, '*')
+          .post('/oauth/token', '*')
+          .reply(200, {
+            access_token: 'xxx',
+            expires_in: Date.now() + 60 * 60 * 24,
+          })
+
+        let nextCount = 0
+        const next = () => {
+          nextCount += 1
+          if (nextCount === 6) {
+            expect(requestCount).toBe(2)
+            // assert that shared cached has been populated
+            expect(tokenCache.get(tokenCacheKeyOne)).toEqual(
+              expect.objectContaining({
+                token: 'xxx',
+              })
+            )
+            expect(tokenCache.get(tokenCacheKeyTwo)).toEqual(
+              expect.objectContaining({
+                token: 'xxx',
+              })
+            )
+            resolve()
+          }
+        }
+        // configure 2 instances of separate clients
+        const pendingTasksClientOne = []
+        const requestStateClientOne = store(false)
+        const pendingTasksClientTwo = []
+        const requestStateClientTwo = store(false)
+        // Execute multiple requests at once.
+        // This should queue all of them for each client
+        createBaseMiddleware(
+          {
+            pendingTasks: pendingTasksClientOne,
+            tokenCache,
+            requestState: requestStateClientOne,
+            tokenCacheKey: tokenCacheKeyOne,
+          },
+          next
+        )
+        createBaseMiddleware(
+          {
+            pendingTasks: pendingTasksClientOne,
+            tokenCache,
+            requestState: requestStateClientOne,
+            tokenCacheKey: tokenCacheKeyOne,
+          },
+          next
+        )
+        createBaseMiddleware(
+          {
+            pendingTasks: pendingTasksClientTwo,
+            tokenCache,
+            requestState: requestStateClientTwo,
+            tokenCacheKey: tokenCacheKeyTwo,
+          },
+          next
+        )
+        createBaseMiddleware(
+          {
+            pendingTasks: pendingTasksClientTwo,
+            tokenCache,
+            requestState: requestStateClientTwo,
+            tokenCacheKey: tokenCacheKeyTwo,
+          },
+          next
+        )
+        createBaseMiddleware(
+          {
+            pendingTasks: pendingTasksClientTwo,
+            tokenCache,
+            requestState: requestStateClientTwo,
+            tokenCacheKey: tokenCacheKeyTwo,
+          },
+          next
+        )
+        createBaseMiddleware(
+          {
+            pendingTasks: pendingTasksClientTwo,
+            tokenCache,
+            requestState: requestStateClientTwo,
+            tokenCacheKey: tokenCacheKeyTwo,
+          },
+          next
+        )
+        createBaseMiddleware(
+          {
+            pendingTasks: pendingTasksClientOne,
+            tokenCache,
+            requestState: requestStateClientOne,
+            tokenCacheKey: tokenCacheKeyOne,
+          },
+          next
+        )
+      }))
+  })
 })

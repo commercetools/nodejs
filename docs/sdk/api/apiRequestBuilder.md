@@ -62,6 +62,58 @@ const options = {
 const requestBuilder = createRequestBuilder(options)
 ```
 
+#### Default Services
+
+```js
+const requestBuilder = createRequestBuilder(options)
+const uri = requestBuilder.productProjections.build()
+// uri = "/project-key/product-projections"
+```
+
+Default services match the commercetools API using a camel-case convention.
+
+| Endpoints                    | Service                         | Features                                                         |
+| ---------------------------- | ------------------------------- | ---------------------------------------------------------------- |
+| /login                       | login                           | create                                                           |
+| /cart-discounts              | cartDiscounts                   | create, update, del, query, queryOne, queryExpand                |
+| /carts                       | carts                           | create, update, del, query, queryOne, queryExpand                |
+| /categories                  | categories                      | create, update, del, query, queryOne, queryExpand                |
+| /channels                    | channels                        | create, update, del, query, queryOne, queryExpand                |
+| /customer-groups             | customerGroups                  | create, update, del, query, queryOne, queryExpand                |
+| /customers                   | customers                       | create, update, del, query, queryOne, queryExpand                |
+| /customers/password          | customersPassword               | create                                                           |
+| /customers/password-token    | customersPasswordToken          | create, queryOne                                                 |
+| /customers/password/reset    | customersPasswordReset          | create                                                           |
+| /customers/email-token       | customersEmailVerificationToken | create, queryOne                                                 |
+| /customers/email/confirm     | customersEmailVerification      | create                                                           |
+| /custom-objects              | customObjects                   | create, update, del, query, queryOne                             |
+| /discount-codes              | discountCodes                   | create, update, del, query, queryOne, queryExpand                |
+| /extensions                  | extensions                      | create, update, del, query, queryOne, queryExpand                |
+| /inventory                   | inventory                       | create, update, del, query, queryOne, queryExpand                |
+| /messages                    | messages                        | query, queryOne, queryExpand                                     |
+| /me/active-cart              | myActiveCart                    | queryOne                                                         |
+| /me/carts                    | myCarts                         | create, update, del, query, queryOne, queryExpand                |
+| /me/orders                   | myOrders                        | create, update, del, query, queryOne, queryExpand                |
+| /orders                      | orders                          | create, update, del, query, queryOne, queryExpand                |
+| /orders/edits                | orderEdits                      | create, update, del, query, queryOne, queryExpand                |
+| /orders/import               | orderImport                     | create, query                                                    |
+| /payments                    | payments                        | create, update, del, query, queryOne, queryExpand                |
+| /product-discounts           | productDiscounts                | create, update, del, query, queryOne, queryExpand                |
+| /product-projections         | productProjections              | query, queryOne, queryExpand, projection                         |
+| /product-projections/search  | productProjectionsSearch        | search, queryOne, queryExpand, projection                        |
+| /product-projections/suggest | productProjectionsSuggest       | search, suggest, queryOne, projection                            |
+| /products                    | products                        | create, update, del, query, queryOne, queryExpand                |
+| /product-types               | productTypes                    | create, update, del, query, queryOne, queryExpand                |
+| /                            | project                         | update, query                                                    |
+| /reviews                     | reviews                         | create, update, del, query, queryOne, queryExpand                |
+| /shipping-methods            | shippingMethods                 | create, update, del, query, queryOne, queryExpand, queryLocation |
+| /shopping-lists              | shoppingLists                   | create, update, del, query, queryOne, queryExpand                |
+| /states                      | states                          | create, update, del, query, queryOne, queryExpand                |
+| /subscriptions               | subscriptions                   | create, update, del, query, queryOne, queryExpand                |
+| /tax-categories              | taxCategories                   | create, update, del, query, queryOne, queryExpand                |
+| /types                       | types                           | create, update, del, query, queryOne, queryExpand                |
+| /zones                       | zones                           | create, update, del, query, queryOne, queryExpand                |
+
 Note that `markMatchingVariants` is set by default to `false` which turns off this feature on the API.
 
 #### Staged
@@ -80,6 +132,24 @@ It is also possible to append the version of a resource to the uri when making a
 ```js
 const service = createRequestBuilder(options)
 const uri = service.channels.withVersion(2).build()
+```
+
+#### QueryOne
+
+It is also possible to query for just one resource. QueryOne consists of `byId`, `byKey`, `byCustomerId`, `byCartId`.
+
+When retrieving a resource using it's own ID, use `byId` or `byKey`.
+
+```js
+const requestBuilder = createRequestBuilder(options)
+const uri = requestBuilder.carts.byId('cartId').build()
+```
+
+When retrieving a resource by a customer or cart reference use `byCustomerId` or `byCartId`.
+
+```js
+const requestBuilder = createRequestBuilder(options)
+const uri = requestBuilder.carts.byCustomerId('customerId').build()
 ```
 
 #### dataErasure
@@ -204,6 +274,9 @@ This declarative `parse` API accepts an object of the following shape:
 
   // dataErasure
   dataErasure?: string;
+
+  // params
+  orderNumber?: number;
 }
 ```
 
@@ -213,12 +286,6 @@ The imperative API can be mixed with the declarative one.
 
 ```js
 // these both lead to the same result
-requestBuilder.channels
-  .parse({ page: 5 })
-  .perPage(10)
-  .build()
-requestBuilder.channels
-  .perPage(10)
-  .parse({ page: 5 })
-  .build()
+requestBuilder.channels.parse({ page: 5 }).perPage(10).build()
+requestBuilder.channels.perPage(10).parse({ page: 5 }).build()
 ```

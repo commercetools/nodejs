@@ -51,7 +51,7 @@ describe('ProductExporter', () => {
     })
 
     test('should emit `error` on output stream if error occurs', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         productExporter._getProducts = jest.fn(() =>
           Promise.reject(new Error('error occured'))
         )

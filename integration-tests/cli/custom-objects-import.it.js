@@ -23,8 +23,8 @@ describe('Custom Object tests', () => {
   beforeAll(async () => {
     const credentials = await getCredentials(projectKey)
     apiConfig = {
-      host: 'https://auth.sphere.io',
-      apiUrl: 'https://api.sphere.io',
+      host: 'https://auth.europe-west1.gcp.commercetools.com',
+      apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
       projectKey,
       credentials,
     }
@@ -49,7 +49,7 @@ describe('Custom Object tests', () => {
     }, 15000)
 
     it('should update custom objects on the CTP', async () => {
-      const oldCustomObjectsToUpdate = customObjects.map(object => ({
+      const oldCustomObjectsToUpdate = customObjects.map((object) => ({
         ...object,
         value: { paymentMethod: 'gold' },
       }))

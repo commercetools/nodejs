@@ -45,7 +45,7 @@ const now = {
 }
 const actions = syncCategories.buildActions(now, before)
 const categoriesRequest = {
-  url: `/categories/${before.id}`,
+  uri: `/categories/${before.id}`,
   method: 'POST',
   body: JSON.stringify({ version: before.version, actions }),
 }
@@ -84,7 +84,7 @@ const now = {
 }
 const actions = syncCustomers.buildActions(now, before)
 const customersRequest = {
-  url: `/customers/${before.id}`,
+  uri: `/customers/${before.id}`,
   method: 'POST',
   body: JSON.stringify({ version: before.version, actions }),
 }
@@ -122,7 +122,7 @@ const now = {
 }
 const actions = syncInventories.buildActions(now, before)
 const inventoriesRequest = {
-  url: `/inventory/${before.id}`,
+  uri: `/inventory/${before.id}`,
   method: 'POST',
   body: JSON.stringify({ version: before.version, actions }),
 }
@@ -160,7 +160,7 @@ const now = {
 }
 const actions = syncOrders.buildActions(now, before)
 const ordersRequest = {
-  url: `/orders/${before.id}`,
+  uri: `/orders/${before.id}`,
   method: 'POST',
   body: JSON.stringify({ version: before.version, actions }),
 }
@@ -198,7 +198,7 @@ const now = {
 }
 const actions = syncProducts.buildActions(now, before)
 const productsRequest = {
-  url: `/products/${before.id}`,
+  uri: `/products/${before.id}`,
   method: 'POST',
   body: JSON.stringify({ version: before.version, actions }),
 }
@@ -236,7 +236,7 @@ const now = {
 }
 const actions = syncProductDiscounts.buildActions(now, before)
 const productDiscountsRequests = {
-  url: `/product-discounts/${before.id}`,
+  uri: `/product-discounts/${before.id}`,
   method: 'POST',
   body: JSON.stringify({ version: before.version, actions }),
 }
@@ -274,7 +274,7 @@ const now = {
 }
 const actions = syncDiscountCodes.buildActions(now, before)
 const discountCodesRequest = {
-  url: `/discount-codes/${before.id}`,
+  uri: `/discount-codes/${before.id}`,
   method: 'POST',
   body: JSON.stringify({ version: before.version, actions }),
 }
@@ -314,7 +314,7 @@ const now = {
 }
 const actions = syncCustomerGroups.buildActions(now, before)
 const customerGroupRequest = {
-  url: `/customer-groups/${before.id}`,
+  uri: `/customer-groups/${before.id}`,
   method: 'POST',
   body: JSON.stringify({ version: before.version, actions }),
 }
@@ -352,7 +352,7 @@ const now = {
 }
 const actions = syncCartDiscounts.buildActions(now, before)
 const cartDiscountsRequests = {
-  url: `/cart-discounts/${before.id}`,
+  uri: `/cart-discounts/${before.id}`,
   method: 'POST',
   body: JSON.stringify({ version: before.version, actions }),
 }
@@ -390,7 +390,7 @@ const now = {
 }
 const actions = syncTaxCategories.buildActions(now, before)
 const taxCategoriesRequests = {
-  url: `/tax-categories/${before.id}`,
+  uri: `/tax-categories/${before.id}`,
   method: 'POST',
   body: JSON.stringify({ version: before.version, actions }),
 }
@@ -428,7 +428,7 @@ const now = {
 }
 const actions = syncZones.buildActions(now, before)
 const zonesRequests = {
-  url: `/zones/${before.id}`,
+  uri: `/zones/${before.id}`,
   method: 'POST',
   body: JSON.stringify({ version: before.version, actions }),
 }
@@ -478,7 +478,7 @@ const now = {
 
 const actions = syncProductTypes.buildActions(now, before)
 const productTypesRequest = {
-  url: `/product-types/${before.id}`,
+  uri: `/product-types/${before.id}`,
   method: 'POST',
   body: JSON.stringify({ version: before.version, actions }),
 }
@@ -620,7 +620,7 @@ const now = {
 }
 const actions = syncStores.buildActions(now, before)
 const storesRequest = {
-  url: `/stores/${before.id}`,
+  uri: `/stores/${before.id}`,
   method: 'POST',
   body: JSON.stringify({ version: before.version, actions }),
 }
@@ -661,7 +661,7 @@ const now = {
 
 const actions = syncShippingMethods.buildActions(now, before)
 const shippingMethodsRequests = {
-  url: `/shipping-methods/${before.id}`,
+  uri: `/shipping-methods/${before.id}`,
 
 
 client.execute(shippingMethodsRequests)
@@ -700,8 +700,8 @@ const now = {
 
 const actions = syncStates.buildActions(now, before)
 const statesRequests = {
-  url: `/states/${before.id}`,
-
+  uri: `/states/${before.id}`,
+}
 
 client.execute(statesRequests)
 .then(result => ...)
@@ -750,7 +750,7 @@ const now = {
 
 const actions = syncTypes.buildActions(now, before)
 const typesRequest = {
-  url: `/types/${before.id}`,
+  uri: `/types/${before.id}`,
   method: 'POST',
   body: JSON.stringify({ version: before.version, actions }),
 }
@@ -793,7 +793,7 @@ const now = {
 
 const actions = syncChannels.buildActions(now, before)
 const channelsRequests = {
-  url: `/channels/${before.id}`,
+  uri: `/channels/${before.id}`,
 }
 
 
@@ -873,7 +873,7 @@ const now = {
 
 const actions = syncProjects.buildActions(now, before)
 const projectsRequests = {
-  url: `/projects/${before.id}`,
+  uri: `/projects/${before.id}`,
 }
 
 

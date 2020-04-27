@@ -465,10 +465,7 @@ describe('Http', () => {
           fetch,
         }
         const httpMiddleware = createHttpMiddleware(options)
-        nock(testHost)
-          .get('/foo/bar')
-          .times(3)
-          .reply(503)
+        nock(testHost).get('/foo/bar').times(3).reply(503)
 
         httpMiddleware(next)(request, response)
       }))

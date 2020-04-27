@@ -43,8 +43,8 @@ describe('CSV and CLI Tests', () => {
   beforeAll(async () => {
     const credentials = await getCredentials(projectKey)
     apiConfig = {
-      host: 'https://auth.sphere.io',
-      apiUrl: 'https://api.sphere.io',
+      host: 'https://auth.europe-west1.gcp.commercetools.com',
+      apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
       projectKey,
       credentials,
     }
@@ -123,7 +123,7 @@ describe('CSV and CLI Tests', () => {
         let stderr
         const fileNames = []
 
-        beforeAll(async done => {
+        beforeAll(async (done) => {
           const zipFile = tmp.fileSync({ postfix: '.zip' }).name
           ;[stdout, stderr] = await exec(
             `${exporter} -p ${projectKey} -s | ${binPath} -p ${projectKey} --referenceCategoryBy namedPath --fillAllRows -o ${zipFile}`
@@ -131,14 +131,14 @@ describe('CSV and CLI Tests', () => {
 
           fs.createReadStream(zipFile)
             .pipe(unzipper.Parse())
-            .on('entry', entry => {
+            .on('entry', (entry) => {
               if (entry.path.includes('anotherProductType')) {
-                entry.on('data', data => {
+                entry.on('data', (data) => {
                   fileNames.push(entry.path)
                   csvContents2 += data.toString()
                 })
               } else {
-                entry.on('data', data => {
+                entry.on('data', (data) => {
                   fileNames.push(entry.path)
                   csvContents1 += data.toString()
                 })
@@ -443,7 +443,7 @@ describe('CSV and CLI Tests', () => {
             'text-attribute',
             'another-text-attribute',
           ]
-          products.forEach(product => {
+          products.forEach((product) => {
             const productColumns = Object.keys(product)
             expect(productColumns).toEqual(columns)
           })
@@ -513,7 +513,7 @@ describe('CSV and CLI Tests', () => {
         let csvContents1 = ''
         let csvContents2 = ''
 
-        beforeAll(async done => {
+        beforeAll(async (done) => {
           const zipFile = tmp.fileSync({ postfix: '.zip' }).name
 
           // Send request from with JSON file to parser
@@ -523,14 +523,14 @@ describe('CSV and CLI Tests', () => {
 
           fs.createReadStream(zipFile)
             .pipe(unzipper.Parse())
-            .on('entry', entry => {
+            .on('entry', (entry) => {
               if (entry.path.includes('anotherProductType')) {
-                entry.on('data', data => {
+                entry.on('data', (data) => {
                   fileNames.push(entry.path)
                   csvContents2 += data.toString()
                 })
               } else {
-                entry.on('data', data => {
+                entry.on('data', (data) => {
                   fileNames.push(entry.path)
                   csvContents1 += data.toString()
                 })
@@ -832,7 +832,7 @@ describe('CSV and CLI Tests', () => {
             'text-attribute',
             'another-text-attribute',
           ]
-          products.forEach(product => {
+          products.forEach((product) => {
             const productColumns = Object.keys(product)
             expect(productColumns).toEqual(columns)
           })

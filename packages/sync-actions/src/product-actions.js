@@ -103,7 +103,7 @@ function _buildSetAttributeAction(
 
   // Used as original object for patching long diff text
   const oldAttribute =
-    oldVariant.attributes.find(a => a.name === attribute.name) || {}
+    oldVariant.attributes.find((a) => a.name === attribute.name) || {}
 
   if (sameForAllAttributeNames.indexOf(attribute.name) !== -1) {
     action = { ...action, action: 'setAttributeInAllVariants' }
@@ -257,7 +257,7 @@ function _buildVariantPricesAction(
     if (REGEX_NUMBER.test(key)) {
       if (Array.isArray(price) && price.length) {
         // Remove read-only fields
-        const patchedPrice = price.map(p => {
+        const patchedPrice = price.map((p) => {
           const shallowClone = { ...p }
           delete shallowClone.discounted
           return shallowClone
@@ -381,12 +381,12 @@ function toVariantIdentifier(variant) {
 
 function _buildVariantAssetsActions(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('assets', {
-    [ADD_ACTIONS]: newAsset => ({
+    [ADD_ACTIONS]: (newAsset) => ({
       action: 'addAsset',
       asset: newAsset,
       ...toVariantIdentifier(newObj),
     }),
-    [REMOVE_ACTIONS]: oldAsset => ({
+    [REMOVE_ACTIONS]: (oldAsset) => ({
       action: 'removeAsset',
       ...toAssetIdentifier(oldAsset),
       ...toVariantIdentifier(oldObj),
@@ -437,7 +437,7 @@ export function actionsMapMeta(diff, oldObj, newObj) {
 
 export function actionsMapVariants(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('variants', {
-    [ADD_ACTIONS]: newObject => ({
+    [ADD_ACTIONS]: (newObject) => ({
       ...newObject,
       action: 'addVariant',
     }),
@@ -466,7 +466,7 @@ export function actionsMapCategories(diff) {
   const addToCategoryActions = []
   const removeFromCategoryActions = []
 
-  forEach(diff.categories, category => {
+  forEach(diff.categories, (category) => {
     if (Array.isArray(category)) {
       const action = { category: category[0] }
 
@@ -490,7 +490,7 @@ export function actionsMapCategories(diff) {
 export function actionsMapCategoryOrderHints(diff) {
   if (!diff.categoryOrderHints) return []
 
-  return Object.keys(diff.categoryOrderHints).map(categoryId => {
+  return Object.keys(diff.categoryOrderHints).map((categoryId) => {
     const hintChange = diff.categoryOrderHints[categoryId]
 
     const action = {
@@ -636,11 +636,11 @@ export function actionsMapPrices(diff, oldObj, newObj, variantHashMap) {
 }
 
 export function actionsMapMasterVariant(oldObj, newObj) {
-  const createChangeMasterVariantAction = variantId => ({
+  const createChangeMasterVariantAction = (variantId) => ({
     action: 'changeMasterVariant',
     variantId,
   })
-  const extractMasterVariantId = fromObj => {
+  const extractMasterVariantId = (fromObj) => {
     const variants = Array.isArray(fromObj.variants) ? fromObj.variants : []
 
     return variants[0] ? variants[0].id : undefined

@@ -136,7 +136,7 @@ describe('InventoryExporter', () => {
   describe('::run', () => {
     beforeEach(() => {})
     test('should fetch inventories and output csv to stream', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         inventoryExporter.exportConfig.format = 'csv'
         const sampleInventory = {
           sku: 'hello',
@@ -145,7 +145,7 @@ describe('InventoryExporter', () => {
         }
         const spy = jest
           .spyOn(inventoryExporter, '_fetchInventories')
-          .mockImplementation(csvStream => {
+          .mockImplementation((csvStream) => {
             csvStream.write(sampleInventory)
             return Promise.resolve()
           })
@@ -164,7 +164,7 @@ describe('InventoryExporter', () => {
     })
 
     test('should emit error if it occurs when streaming to csv', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         inventoryExporter.exportConfig.format = 'csv'
         const spy = jest
           .spyOn(inventoryExporter, '_fetchInventories')
@@ -181,7 +181,7 @@ describe('InventoryExporter', () => {
     })
 
     test('should emit error if it occurs when streaming to json', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         inventoryExporter.exportConfig.format = 'json'
         const spy = jest
           .spyOn(inventoryExporter, '_fetchInventories')
@@ -198,7 +198,7 @@ describe('InventoryExporter', () => {
     })
 
     test('should fetch inventories and output json as default', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const sampleInventory = {
           sku: 'hello',
           quantityOnStock: 'me',
@@ -206,7 +206,7 @@ describe('InventoryExporter', () => {
         }
         const spy = jest
           .spyOn(inventoryExporter, '_fetchInventories')
-          .mockImplementation(csvStream => {
+          .mockImplementation((csvStream) => {
             csvStream.write(sampleInventory)
             return Promise.resolve()
           })
@@ -222,7 +222,7 @@ describe('InventoryExporter', () => {
     })
 
     test('should export inventories to CSV with custom fields', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         inventoryExporter.exportConfig.format = 'csv'
         const sampleInventory = {
           sku: 'hello',
@@ -242,7 +242,7 @@ describe('InventoryExporter', () => {
         }
         const spy = jest
           .spyOn(inventoryExporter, '_fetchInventories')
-          .mockImplementation(csvStream => {
+          .mockImplementation((csvStream) => {
             csvStream.write(sampleInventory)
             return Promise.resolve()
           })
@@ -261,7 +261,7 @@ describe('InventoryExporter', () => {
     })
 
     test('should not export inventories with custom fields on second inventory when no template is given', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         inventoryExporter.exportConfig.format = 'csv'
         const sampleInventoryWithoutCustomField = {
           sku: 'inv2',
@@ -286,7 +286,7 @@ describe('InventoryExporter', () => {
         }
         const spy = jest
           .spyOn(inventoryExporter, '_fetchInventories')
-          .mockImplementation(csvStream => {
+          .mockImplementation((csvStream) => {
             csvStream.write(sampleInventoryWithoutCustomField)
             csvStream.write(sampleInventoryWithCustomField)
             return Promise.resolve()
@@ -308,7 +308,7 @@ describe('InventoryExporter', () => {
     })
 
     test('should export inventories with custom fields on second inventory when provided template', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const headerFields = [
           'sku',
           'quantityOnStock',
@@ -344,7 +344,7 @@ describe('InventoryExporter', () => {
         }
         const spy = jest
           .spyOn(inventoryExporter, '_fetchInventories')
-          .mockImplementation(csvStream => {
+          .mockImplementation((csvStream) => {
             csvStream.write(sampleInventoryWithoutCustomField)
             csvStream.write(sampleInventoryWithCustomField)
             return Promise.resolve()
@@ -456,7 +456,7 @@ describe('InventoryExporter', () => {
       }
       const executeMock = jest.fn(() => Promise.resolve(mockResult))
       inventoryExporter.client.execute = executeMock
-      return inventoryExporter._resolveChannelKey(channelKey).then(id => {
+      return inventoryExporter._resolveChannelKey(channelKey).then((id) => {
         expect(executeMock).toHaveBeenCalled()
         expect(id).toBe(expectedChannelId)
       })
@@ -477,7 +477,7 @@ describe('InventoryExporter', () => {
       const executeMock = jest.fn(() => Promise.resolve(mockResult))
       inventoryExporter.client.execute = executeMock
       inventoryExporter.accessToken = '12345'
-      return inventoryExporter._resolveChannelKey(channelKey).then(id => {
+      return inventoryExporter._resolveChannelKey(channelKey).then((id) => {
         expect(executeMock.mock.calls[0][0]).toEqual({
           uri: '/foo/channels?where=key%3D%22foobar%22',
           method: 'GET',
@@ -499,7 +499,7 @@ describe('InventoryExporter', () => {
       }
       const executeMock = jest.fn(() => Promise.resolve(mockResult))
       inventoryExporter.client.execute = executeMock
-      return inventoryExporter._resolveChannelKey(channelKey).catch(err => {
+      return inventoryExporter._resolveChannelKey(channelKey).catch((err) => {
         expect(err.message).toBe('No data with channel key in CTP Platform')
       })
     })

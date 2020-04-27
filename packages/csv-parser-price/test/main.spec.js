@@ -30,7 +30,7 @@ test(`CsvParserPrice
     'info',
     'verbose',
   ])
-  Object.keys(csvParserPrice.logger).forEach(key => {
+  Object.keys(csvParserPrice.logger).forEach((key) => {
     expect(typeof csvParserPrice.logger[key]).toBe('function')
   })
 
@@ -42,7 +42,7 @@ test(`CsvParserPrice
 
 describe('CsvParserPrice::parse', () => {
   test('should accept a stream and output a stream', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
       const readStream = fs.createReadStream(
         path.join(__dirname, 'helpers/sample.csv')
@@ -71,8 +71,33 @@ describe('CsvParserPrice::parse', () => {
     })
   })
 
+  test('should parse the UTF-8 BOM encoding file', () => {
+    return new Promise((done) => {
+      const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
+      const readStream = fs.createReadStream(
+        path.join(__dirname, 'helpers/utf-bom.csv')
+      )
+
+      sinon
+        .stub(csvParserPrice, 'getCustomTypeDefinition')
+        .returns(Promise.resolve(customTypeSample))
+
+      const outputStream = streamtest.v2.toText((error, result) => {
+        const prices = JSON.parse(result).prices
+        const price = prices[0].prices[0]
+        expect(prices).toHaveLength(2)
+        expect(prices[0].sku).toBeTruthy()
+        expect(price.value.centAmount).toBeTruthy()
+        expect(price.value.currencyCode).toBeTruthy()
+        done()
+      })
+      csvParserPrice.parse(readStream, outputStream)
+      csvParserPrice.parse(readStream, outputStream)
+    })
+  })
+
   test('should group prices by variants sku', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
       const readStream = fs.createReadStream(
         path.join(__dirname, 'helpers/sample.csv')
@@ -95,7 +120,7 @@ describe('CsvParserPrice::parse', () => {
   })
 
   test('should parse a full price.value object', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
       const readStream = fs.createReadStream(
         path.join(__dirname, 'helpers/full-price.csv')
@@ -150,7 +175,7 @@ describe('CsvParserPrice::parse', () => {
   })
 
   test('should parse a highPrecision fields in price and custom fields money object', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
       const readStream = fs.createReadStream(
         path.join(__dirname, 'helpers/high-precision-price.csv')
@@ -221,7 +246,7 @@ describe('CsvParserPrice::parse', () => {
   })
 
   test('should exit on faulty CSV format', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
       const inputStream = fs.createReadStream(
         path.join(__dirname, 'helpers/faulty-sample.csv')
@@ -241,7 +266,7 @@ describe('CsvParserPrice::parse', () => {
   })
 
   test('should exit and show appropriate message on missing Sku variant Header in CSV', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
       const inputStream = fs.createReadStream(
         path.join(__dirname, 'helpers/invalid-sku-sample.csv')
@@ -263,7 +288,7 @@ describe('CsvParserPrice::parse', () => {
   })
 
   test('should exit on CSV parsing error', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
       const inputStream = fs.createReadStream(
         path.join(__dirname, 'helpers/missing-type-sample.csv')
@@ -294,14 +319,14 @@ describe('CsvParserPrice::transformPriceData', () => {
 
 describe('CsvParserPrice::transformCustomData', () => {
   test('should process object and build valid price object', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
 
       sinon
         .stub(csvParserPrice, 'getCustomTypeDefinition')
         .returns(Promise.resolve(customTypeSample))
 
-      csvParserPrice.transformCustomData(priceSample(), 2).then(result => {
+      csvParserPrice.transformCustomData(priceSample(), 2).then((result) => {
         expect(result.custom).toEqual({
           type: { id: '53 45 4c 57 59 4e 2e' },
           fields: {
@@ -319,12 +344,12 @@ describe('CsvParserPrice::transformCustomData', () => {
   })
 
   test('should return input when there is no price.customType', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
 
       csvParserPrice
         .transformCustomData({ a: true })
-        .then(result => {
+        .then((result) => {
           expect(result).toEqual({ a: true })
           done()
         })
@@ -374,14 +399,14 @@ describe('CsvParserPrice::renameHeaders', () => {
 
 describe('CsvParserPrice::processCustomField', () => {
   test('should build custom object', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
 
       sinon
         .stub(csvParserPrice, 'getCustomTypeDefinition')
         .returns(Promise.resolve(customTypeSample))
 
-      csvParserPrice.processCustomField(priceSample(), 2).then(result => {
+      csvParserPrice.processCustomField(priceSample(), 2).then((result) => {
         expect(result.fields).toBeTruthy()
         expect(result.type).toBeTruthy()
         const expected = {
@@ -404,7 +429,7 @@ describe('CsvParserPrice::processCustomField', () => {
   })
 
   test('should build report errors on data', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
       const modifiedPriceSample = priceSample()
 
@@ -415,12 +440,12 @@ describe('CsvParserPrice::processCustomField', () => {
 
       csvParserPrice
         .processCustomField(modifiedPriceSample, 2)
-        .then(result => {
+        .then((result) => {
           done.fail()
           expect(result).toBeFalsy()
           done()
         })
-        .catch(error => {
+        .catch((error) => {
           expect(error).toHaveLength(1)
           expect(error[0].message).toBe(
             "[row 2: liqui 63 69 ty] - The number '2' isn't valid"
@@ -433,7 +458,7 @@ describe('CsvParserPrice::processCustomField', () => {
 
 describe('CsvParserPrice::getCustomTypeDefinition', () => {
   test('should reject when no type with given key exists', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       const csvParserPrice = new CsvParserPrice({ apiConfig, logger })
 
       sinon.stub(csvParserPrice.client, 'execute').returns(
@@ -445,7 +470,7 @@ describe('CsvParserPrice::getCustomTypeDefinition', () => {
       csvParserPrice
         .getCustomTypeDefinition('(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧')
         .then(done.fail)
-        .catch(error => {
+        .catch((error) => {
           expect(error.message).toBe("No type with key '(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧' found")
           done()
         })
@@ -453,7 +478,7 @@ describe('CsvParserPrice::getCustomTypeDefinition', () => {
   })
 
   test('should resolve to type definition when given key exists', () => {
-    return new Promise(done => {
+    return new Promise((done) => {
       const options = { apiConfig, logger, accessToken: 'testingToken' }
       const csvParserPrice = new CsvParserPrice(options)
 
@@ -468,7 +493,7 @@ describe('CsvParserPrice::getCustomTypeDefinition', () => {
 
       csvParserPrice
         .getCustomTypeDefinition()
-        .then(result => {
+        .then((result) => {
           expect(stub.args[0][0].headers.Authorization).toBe(
             `Bearer ${options.accessToken}`
           )

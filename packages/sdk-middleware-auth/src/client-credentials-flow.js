@@ -9,16 +9,22 @@ import type {
 } from 'types/sdk'
 
 import { buildRequestForClientCredentialsFlow } from './build-requests'
+import buildTokenCacheKey from './build-token-cache-key'
 import authMiddlewareBase from './base-auth-flow'
 import store from './utils'
 
 export default function createAuthMiddlewareForClientCredentialsFlow(
   options: AuthMiddlewareOptions
 ): Middleware {
-  const tokenCache = store({})
+  const tokenCache =
+    options.tokenCache ||
+    store({
+      token: '',
+      expirationTime: -1,
+    })
+  const requestState = store(false)
   const pendingTasks: Array<Task> = []
 
-  const requestState = store(false)
   return (next: Next): Next => (
     request: MiddlewareRequest,
     response: MiddlewareResponse
@@ -39,6 +45,7 @@ export default function createAuthMiddlewareForClientCredentialsFlow(
       pendingTasks,
       requestState,
       tokenCache,
+      tokenCacheKey: buildTokenCacheKey(options),
       fetch: options.fetch,
     }
     authMiddlewareBase(params, next)

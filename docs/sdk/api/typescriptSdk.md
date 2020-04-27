@@ -36,7 +36,7 @@ import fetch from 'node-fetch'
 const projectKey = 'some_project_key'
 
 const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
-  host: 'https://auth.sphere.io',
+  host: 'https://auth.europe-west1.gcp.commercetools.com',
   projectKey,
   credentials: {
     clientId: 'some_id',
@@ -46,7 +46,7 @@ const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
 })
 
 const httpMiddleware = createHttpMiddleware({
-  host: 'https://api.sphere.io',
+  host: 'https://api.europe-west1.gcp.commercetools.com',
   fetch,
 })
 
@@ -62,7 +62,7 @@ apiRoot
   })
   .get()
   .execute()
-  .then(x => {
+  .then((x) => {
     /*...*/
   })
 
@@ -73,7 +73,7 @@ apiRoot
     body: { name: 'product-type-name', description: 'some description' },
   })
   .execute()
-  .then(x => {
+  .then((x) => {
     /*...*/
   })
 
@@ -91,7 +91,7 @@ apiRoot
     },
   })
   .execute()
-  .then(x => {
+  .then((x) => {
     /*...*/
   })
 ```

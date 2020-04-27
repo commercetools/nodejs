@@ -7,6 +7,7 @@ import memoize from 'lodash.memoize'
 import isNil from 'lodash.isnil'
 import { unflatten } from 'flat'
 import fetch from 'node-fetch'
+import stripBom from 'strip-bom-stream'
 
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createClient } from '@commercetools/sdk-client'
@@ -55,13 +56,14 @@ export default class CsvParserPrice {
 
     highland(input)
       // Parse CSV return each row as object
+      .through(stripBom())
       .through(
         csv({
           separator: this.delimiter,
           strict: true,
         })
       )
-      .map(a => {
+      .map((a) => {
         if (!a[CONSTANTS.header.sku]) {
           throw new Error(
             `${CONSTANTS.header.sku} key is missing/mis-spelled in the csv header.`
@@ -72,7 +74,7 @@ export default class CsvParserPrice {
       .errors((err, push) => {
         push(err.message)
       })
-      .stopOnError(err => {
+      .stopOnError((err) => {
         this.logger.error(err)
         output.emit('error', err)
       })
@@ -82,7 +84,7 @@ export default class CsvParserPrice {
       )
       // Limit amount of rows to be handled at the same time
       .batch(this.batchSize)
-      .stopOnError(err => {
+      .stopOnError((err) => {
         this.logger.error(err)
         output.emit('error', err)
       })
@@ -91,18 +93,18 @@ export default class CsvParserPrice {
       .map(unflatten)
       .map(this.transformPriceData)
       .map(this.renameHeaders)
-      .flatMap(data => highland(this.transformCustomData(data, rowIndex)))
+      .flatMap((data) => highland(this.transformCustomData(data, rowIndex)))
       .map(this.deleteMovedData)
       .doto(() => {
         this.logger.verbose(`Processed row ${rowIndex}`)
         rowIndex += 1
       })
-      .stopOnError(err => {
+      .stopOnError((err) => {
         this.logger.error(err)
         output.emit('error', err)
       })
       .reduce({ prices: [] }, this.mergeBySku)
-      .doto(data => {
+      .doto((data) => {
         const numberOfPrices = Number(JSON.stringify(data.length)) + 1
         this.logger.info(`Done with conversion of ${numberOfPrices} prices`)
       })
@@ -113,7 +115,7 @@ export default class CsvParserPrice {
   // Transform price values to the type the API expects
   // eslint-disable-next-line class-methods-use-this
   transformPriceData(price) {
-    return mapValues(price, value => {
+    return mapValues(price, (value) => {
       if (value.centAmount) {
         const optFields = pick(value, [
           'type',
@@ -149,7 +151,7 @@ export default class CsvParserPrice {
         this.processCustomField(price, rowIndex)
           // Using arrow without body trips up babel transform-object-rest-spread
           // eslint-disable-next-line arrow-body-style
-          .then(customTypeObj => {
+          .then((customTypeObj) => {
             return {
               ...price,
               custom: customTypeObj,
@@ -212,7 +214,7 @@ export default class CsvParserPrice {
 
   // Convert custom type value to the expected native type
   processCustomField(data, rowIndex) {
-    return this.getCustomTypeDefinition(data.customType).then(customType => {
+    return this.getCustomTypeDefinition(data.customType).then((customType) => {
       this.logger.info(`Fetched custom type ${customType.key} definition`)
 
       const customTypeObj = mapCustomFields.parse(
@@ -244,7 +246,7 @@ CsvParserPrice.prototype.getCustomTypeDefinition = memoize(
         Authorization: `Bearer ${this.accessToken}`,
       }
 
-    return this.client.execute(execObj).then(response => {
+    return this.client.execute(execObj).then((response) => {
       if (response.body.count === 0)
         return Promise.reject(
           new Error(`No type with key '${customTypeKey}' found`)

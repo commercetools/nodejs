@@ -10,6 +10,7 @@ export const baseActionsList = [
   { action: 'setKey', key: 'key' },
   { action: 'changeName', key: 'name' },
   { action: 'setDescription', key: 'description' },
+  { action: 'setLocalizedDescription', key: 'localizedDescription' },
   { action: 'changeIsDefault', key: 'isDefault' },
   { action: 'setPredicate', key: 'predicate' },
   { action: 'changeTaxCategory', key: 'taxCategory' },
@@ -25,9 +26,9 @@ export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   })
 }
 
-const addShippingRates = newZoneRate =>
+const addShippingRates = (newZoneRate) =>
   newZoneRate.shippingRates
-    ? newZoneRate.shippingRates.map(shippingRate => ({
+    ? newZoneRate.shippingRates.map((shippingRate) => ({
         action: 'addShippingRate',
         zone: newZoneRate.zone,
         shippingRate,
@@ -36,12 +37,12 @@ const addShippingRates = newZoneRate =>
 
 function actionsMapZoneRatesShippingRates(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('shippingRates', {
-    [ADD_ACTIONS]: newShippingRate => ({
+    [ADD_ACTIONS]: (newShippingRate) => ({
       action: 'addShippingRate',
       zone: newObj.zone,
       shippingRate: newShippingRate,
     }),
-    [REMOVE_ACTIONS]: oldShippingRate => ({
+    [REMOVE_ACTIONS]: (oldShippingRate) => ({
       action: 'removeShippingRate',
       zone: oldObj.zone,
       shippingRate: oldShippingRate,
@@ -65,14 +66,14 @@ function actionsMapZoneRatesShippingRates(diff, oldObj, newObj) {
 
 export function actionsMapZoneRates(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('zoneRates', {
-    [ADD_ACTIONS]: newZoneRate => [
+    [ADD_ACTIONS]: (newZoneRate) => [
       {
         action: 'addZone',
         zone: newZoneRate.zone,
       },
       ...addShippingRates(newZoneRate),
     ],
-    [REMOVE_ACTIONS]: oldZoneRate => ({
+    [REMOVE_ACTIONS]: (oldZoneRate) => ({
       action: 'removeZone',
       zone: oldZoneRate.zone,
     }),

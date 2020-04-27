@@ -22,7 +22,7 @@ ${description}`
     default: 'stdout',
     describe: 'Path to output file.',
   })
-  .coerce('outputFile', arg => {
+  .coerce('outputFile', (arg) => {
     if (arg !== 'stdout') return fs.createWriteStream(String(arg))
 
     return process.stdout
@@ -73,7 +73,7 @@ can be used with channelKey flag
     describe:
       'Path to a CSV template file with headers which should be exported.',
   })
-  .coerce('template', arg => {
+  .coerce('template', (arg) => {
     const filePath = String(arg)
 
     if (fs.existsSync(arg)) {
@@ -93,13 +93,13 @@ can be used with channelKey flag
     default: CONSTANTS.standardOption.defaultLogFile,
     describe: 'Path to file where to save logs.',
   })
-  .coerce('logLevel', arg => {
+  .coerce('logLevel', (arg) => {
     npmlog.level = arg
   }).argv
 
 // Retrieve the headers from the template file
 // Only the first line of the file is read
-const getHeaders = _args =>
+const getHeaders = (_args) =>
   new Promise((resolve, reject) => {
     if (!_args.template) resolve(null)
 
@@ -108,14 +108,14 @@ const getHeaders = _args =>
       .parseStream(_args.template, {
         delimiter: _args.delimiter,
       })
-      .on('data', function(data) {
+      .on('data', function (data) {
         if (isFirstRow) {
           resolve(data)
           isFirstRow = false
         }
         _args.template.destroy()
       })
-      .on('end', function() {
+      .on('end', function () {
         if (isFirstRow) {
           reject(new Error('Template file does not contain any header row'))
         }
@@ -123,7 +123,7 @@ const getHeaders = _args =>
       .on('error', reject)
   })
 
-const logError = error => {
+const logError = (error) => {
   const errorFormatter = new PrettyError()
 
   if (npmlog.level === 'verbose')
@@ -131,14 +131,14 @@ const logError = error => {
   else process.stderr.write(`ERR: ${error.message || error}`)
 }
 
-const errorHandler = errors => {
+const errorHandler = (errors) => {
   if (Array.isArray(errors)) errors.forEach(logError)
   else logError(errors)
 
   process.exitCode = 1
 }
 
-const resolveCredentials = _args => {
+const resolveCredentials = (_args) => {
   if (_args.accessToken) return Promise.resolve({})
   return getCredentials(_args.projectKey)
 }
@@ -176,5 +176,5 @@ Promise.all([getHeaders(args), resolveCredentials(args)])
     }
     return new InventoryExporter(apiConfig, logger, exportConfig, accessToken)
   })
-  .then(inventoryExporter => inventoryExporter.run(args.outputFile))
+  .then((inventoryExporter) => inventoryExporter.run(args.outputFile))
   .catch(errorHandler)

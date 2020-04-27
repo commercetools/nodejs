@@ -60,7 +60,7 @@ describe('CustomObjectsImporter', () => {
       expect(objectsImport.processStream).toBeDefined())
 
     test('should call callback when done', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         objectsImport._processBatches.mockReturnValue(Promise.resolve())
         const myMockCallback = jest.fn(() => {
           done()
@@ -207,7 +207,7 @@ describe('CustomObjectsImporter', () => {
         test('should update summary `createErrorCount`', () =>
           objectsImport
             ._executeCreateOrUpdateAction(createRequest)
-            .catch(error => {
+            .catch((error) => {
               expect(error).toMatchSnapshot()
               expect(objectsImport._summary.createErrorCount).toBe(1)
             }))
@@ -215,7 +215,7 @@ describe('CustomObjectsImporter', () => {
         test('should update summary `updateErrorCount`', () =>
           objectsImport
             ._executeCreateOrUpdateAction(updateRequest)
-            .catch(error => {
+            .catch((error) => {
               expect(error).toMatchSnapshot()
               expect(objectsImport._summary.updateErrorCount).toBe(1)
             }))

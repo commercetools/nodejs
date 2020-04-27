@@ -37,13 +37,14 @@ const expectedServiceProperties = [
   'byCurrency',
   'byCountry',
   'byState',
+  'byOrderNumber',
 ]
 const projectKey = 'my-project1'
 
 describe('createService', () => {
   test('should create a full service', () => {
     const service = createService(fakeService, projectKey)
-    expectedServiceProperties.forEach(key => {
+    expectedServiceProperties.forEach((key) => {
       expect(service[key]).toBeDefined()
     })
   })
@@ -406,67 +407,51 @@ describe('createService', () => {
         )
       })
       test('should mix customerId and queryParams', () => {
-        expect(
-          service
-            .byCustomerId('foo')
-            .expand('baz')
-            .build()
-        ).toBe('/my-project1/test?customerId=foo&expand=baz')
+        expect(service.byCustomerId('foo').expand('baz').build()).toBe(
+          '/my-project1/test?customerId=foo&expand=baz'
+        )
       })
 
       test('should mix customerId and version', () => {
-        expect(
-          service
-            .byCustomerId('foo')
-            .withVersion(3)
-            .build()
-        ).toBe('/my-project1/test?customerId=foo&version=3')
+        expect(service.byCustomerId('foo').withVersion(3).build()).toBe(
+          '/my-project1/test?customerId=foo&version=3'
+        )
       })
 
       test('should mix customerId and dataErasure', () => {
-        expect(
-          service
-            .byCustomerId('foo')
-            .withFullDataErasure()
-            .build()
-        ).toBe('/my-project1/test?customerId=foo&dataErasure=true')
+        expect(service.byCustomerId('foo').withFullDataErasure().build()).toBe(
+          '/my-project1/test?customerId=foo&dataErasure=true'
+        )
+      })
+
+      test('should mix orderNumber and queryParams', () => {
+        expect(service.byOrderNumber(123).expand('baz').build()).toBe(
+          '/my-project1/test/order-number=123?expand=baz'
+        )
       })
 
       test('should mix cartId and queryParams', () => {
-        expect(
-          service
-            .byCartId('foo')
-            .expand('baz')
-            .build()
-        ).toBe('/my-project1/test?cartId=foo&expand=baz')
+        expect(service.byCartId('foo').expand('baz').build()).toBe(
+          '/my-project1/test?cartId=foo&expand=baz'
+        )
       })
 
       test('should mix cartId and version', () => {
-        expect(
-          service
-            .byCartId('foo')
-            .withVersion(3)
-            .build()
-        ).toBe('/my-project1/test?cartId=foo&version=3')
+        expect(service.byCartId('foo').withVersion(3).build()).toBe(
+          '/my-project1/test?cartId=foo&version=3'
+        )
       })
 
       test('should mix cartId, version and dataErasure', () => {
         expect(
-          service
-            .byCartId('foo')
-            .withVersion(3)
-            .withFullDataErasure()
-            .build()
+          service.byCartId('foo').withVersion(3).withFullDataErasure().build()
         ).toBe('/my-project1/test?cartId=foo&version=3&dataErasure=true')
       })
 
       test('should mix queryParams and version', () => {
-        expect(
-          service
-            .withVersion(3)
-            .expand('baz')
-            .build()
-        ).toBe('/my-project1/test?expand=baz&version=3')
+        expect(service.withVersion(3).expand('baz').build()).toBe(
+          '/my-project1/test?expand=baz&version=3'
+        )
       })
     })
 
@@ -505,12 +490,9 @@ describe('createService', () => {
       expect(service.withVersion(2).build()).toBe('/my-project1/foo?version=2')
     })
     test('full endpoint', () => {
-      expect(
-        service
-          .byId('123')
-          .expand('channel')
-          .build()
-      ).toBe('/my-project1/foo/123?expand=channel')
+      expect(service.byId('123').expand('channel').build()).toBe(
+        '/my-project1/foo/123?expand=channel'
+      )
     })
     test('apply order edit', () => {
       expect(

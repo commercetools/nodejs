@@ -95,12 +95,12 @@ export default {
   },
   customersEmailVerificationToken: {
     type: 'customers-email-verification-token',
-    endpoint: '/customers/customers/email-token',
+    endpoint: '/customers/email-token',
     features: [features.create, features.queryOne],
   },
   customersEmailVerification: {
     type: 'customers-email-verification',
-    endpoint: '/customers/customers/email/confirm',
+    endpoint: '/customers/email/confirm',
     features: [features.create],
   },
   customObjects: {
@@ -336,6 +336,18 @@ export default {
   states: {
     type: 'states',
     endpoint: '/states',
+    features: [
+      features.create,
+      features.update,
+      features.del,
+      features.query,
+      features.queryOne,
+      features.queryExpand,
+    ],
+  },
+  stores: {
+    type: 'stores',
+    endpoint: '/stores',
     features: [
       features.create,
       features.update,

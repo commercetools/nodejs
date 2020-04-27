@@ -10,7 +10,7 @@ describe('Parse headers', () => {
   test('return headers for polyfill (whatwg-fetch)', () => {
     const spy = jest
       .fn()
-      .mockImplementation(cb => cb(['application/json'], 'content-type'))
+      .mockImplementation((cb) => cb(['application/json'], 'content-type'))
     expect(parseHeaders({ forEach: spy })).toEqual({
       'content-type': ['application/json'],
     })

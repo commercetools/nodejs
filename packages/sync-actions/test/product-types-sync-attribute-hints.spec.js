@@ -1,6 +1,6 @@
 import createSyncProductTypes from '../src/product-types'
 
-const createAttributeDefinitionDraftItem = custom => ({
+const createAttributeDefinitionDraftItem = (custom) => ({
   previous: {
     type: { name: 'text' },
     name: 'attribute-name',
@@ -24,7 +24,7 @@ const createAttributeDefinitionDraftItem = custom => ({
   ...custom,
 })
 
-const createAttributeEnumDraftItem = custom => ({
+const createAttributeEnumDraftItem = (custom) => ({
   previous: {
     key: 'enum-key',
     label: 'enum-label',

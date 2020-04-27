@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/api-request-builder",
-  "version": "5.4.2",
+  "version": "5.6.0",
   "description": "Helper functions to construct API requests URI for the commercetools platform in a declarative way.",
   "keywords": [
     "commercetools",

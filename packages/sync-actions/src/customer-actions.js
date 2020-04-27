@@ -35,6 +35,7 @@ export const baseActionsList = [
     action: 'setStores',
     key: 'stores',
   },
+  { action: 'setKey', key: 'key' },
 ]
 
 export const referenceActionsList = [
@@ -66,11 +67,11 @@ export function actionsMapReferences(diff, oldObj, newObj) {
 
 export function actionsMapAddresses(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('addresses', {
-    [ADD_ACTIONS]: newObject => ({
+    [ADD_ACTIONS]: (newObject) => ({
       action: 'addAddress',
       address: newObject,
     }),
-    [REMOVE_ACTIONS]: objectToRemove => ({
+    [REMOVE_ACTIONS]: (objectToRemove) => ({
       action: 'removeAddress',
       addressId: objectToRemove.id,
     }),
@@ -86,11 +87,11 @@ export function actionsMapAddresses(diff, oldObj, newObj) {
 
 export function actionsMapBillingAddresses(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('billingAddressIds', {
-    [ADD_ACTIONS]: addressId => ({
+    [ADD_ACTIONS]: (addressId) => ({
       action: 'addBillingAddressId',
       addressId,
     }),
-    [REMOVE_ACTIONS]: addressId => ({
+    [REMOVE_ACTIONS]: (addressId) => ({
       action: 'removeBillingAddressId',
       addressId,
     }),
@@ -100,11 +101,11 @@ export function actionsMapBillingAddresses(diff, oldObj, newObj) {
 }
 export function actionsMapShippingAddresses(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('shippingAddressIds', {
-    [ADD_ACTIONS]: addressId => ({
+    [ADD_ACTIONS]: (addressId) => ({
       action: 'addShippingAddressId',
       addressId,
     }),
-    [REMOVE_ACTIONS]: addressId => ({
+    [REMOVE_ACTIONS]: (addressId) => ({
       action: 'removeShippingAddressId',
       addressId,
     }),

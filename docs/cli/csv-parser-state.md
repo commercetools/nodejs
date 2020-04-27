@@ -67,7 +67,7 @@ csvParser.parse(inputStream, outputStream)
 
 // Listen for events
 outputStream
-  .on('error', error => {
+  .on('error', (error) => {
     // <- Handle errors here
   })
   .on('finish', () => {

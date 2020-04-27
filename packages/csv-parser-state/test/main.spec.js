@@ -45,14 +45,14 @@ describe('CsvParserState', () => {
       )
       jest
         .spyOn(CsvParserState, '_removeEmptyFields')
-        .mockImplementation(data => data)
-      csvParser._mapTransitionsToArray = jest.fn(data => data)
-      csvParser._transformTransitions = jest.fn(data => Promise.resolve(data))
+        .mockImplementation((data) => data)
+      csvParser._mapTransitionsToArray = jest.fn((data) => data)
+      csvParser._transformTransitions = jest.fn((data) => Promise.resolve(data))
     })
 
     describe('when parsing is successful', () => {
       test('should output states as JSON', () => {
-        return new Promise(done => {
+        return new Promise((done) => {
           const outputStream = streamtest.v2.toText((err, data) => {
             expect(csvParser.logger.info).toHaveBeenCalledWith(
               'Starting conversion'
@@ -79,12 +79,12 @@ describe('CsvParserState', () => {
           // Fail on parsing of second state
           csvParser._transformTransitions = jest
             .fn()
-            .mockImplementationOnce(data => Promise.resolve(data))
+            .mockImplementationOnce((data) => Promise.resolve(data))
             .mockImplementationOnce(() => Promise.reject(myError))
         })
 
         test('should stop parsing on first error', () => {
-          return new Promise(done => {
+          return new Promise((done) => {
             const outputStream = streamtest.v2.toText((err, data) => {
               expect(data).toBeFalsy()
               expect(err).toEqual(myError)
@@ -104,13 +104,13 @@ describe('CsvParserState', () => {
           // Fail on parsing of second state
           csvParser._transformTransitions = jest
             .fn()
-            .mockImplementationOnce(data => Promise.resolve(data))
+            .mockImplementationOnce((data) => Promise.resolve(data))
             .mockImplementationOnce(() => Promise.reject(myError))
-            .mockImplementation(data => Promise.resolve(data))
+            .mockImplementation((data) => Promise.resolve(data))
         })
 
         test('should skip rows with error', () => {
-          return new Promise(done => {
+          return new Promise((done) => {
             const outputStream = streamtest.v2.toText((err, data) => {
               expect(err).toBeFalsy()
               const result = JSON.parse(data)

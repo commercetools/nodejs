@@ -23,27 +23,27 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 
 1.  Clone the repo with `git clone git@github.com:commercetools/nodejs.git`
 
-2.  Run `npm install` (or `yarn`) in the root `nodejs` folder. This will ensure that all package dependencies are properly installed / linked. The repository uses [lerna](https://github.com/lerna/lerna) to orchestrate the different packages.
+2.  Run `yarn install` (or `yarn`) in the root `nodejs` folder. This will ensure that all package dependencies are properly installed / linked. The repository uses [lerna](https://github.com/lerna/lerna) to orchestrate the different packages.
 
-3.  If you're writing documentation, you can start the gitbook development server with `npm run docs:watch`
+3.  If you're writing documentation, you can start the gitbook development server with `yarn docs:watch`
 
-4.  To run all packages tests simply do `npm test` (we use [jest](https://github.com/facebook/jest)). If you want to work on a specific package and run the tests only for that package, we recommend to use `npm run test:package`. This will prompt you to select one of the available packages. To run in _watch_ mode simply do `npm run test:package -- --watch`.
+4.  To run all packages tests simply do `yarn test` (we use [jest](https://github.com/facebook/jest)). If you want to work on a specific package and run the tests only for that package, we recommend to use `yarn test:package`. This will prompt you to select one of the available packages. To run in _watch_ mode simply do `yarn test:package --watch`.
 
 5.  Integration tests are separated out in another folder "/integration-tests". To run the integration test, you need to export the environment variables into the process env by doing the following :-
 
     - Export `npm_config_projectkey` = `projectKey`,
     - Export `CT_PROJECT_KEY`=`CLIENT_ID`:`CLIENT_SECRET` as specified [here](https://commercetools.github.io/nodejs/sdk/api/getCredentials.html).
-    - Then run integration test with `npm run test:integration`
+    - Then run integration test with `yarn test:integration`
 
 **Note: Due to the setup/teardown nature of the integration tests, there is the risk of potential data loss in your project**
 
-6.  Linting and static checks are done by `npm run lint`. We the [Airbnb eslint config](https://www.npmjs.com/package/eslint-config-airbnb). Static checks are done using [Flow](https://flowtype.org/) and can be included / adopted incrementally. Committing also runs a git hook to lint the changed files.
+6.  Linting and static checks are done by `yarn lint`. We the [Airbnb eslint config](https://www.npmjs.com/package/eslint-config-airbnb). Static checks are done using [Flow](https://flowtype.org/) and can be included / adopted incrementally. Committing also runs a git hook to lint the changed files.
 
 ## Formatting (Prettier)
 
 We use [prettier](https://github.com/jlongster/prettier) to format our code, so we don't ever have to argue over code-style.
 
-Prettier is integrated into ESLint, so all code is checked. The rules are only enabled when running `yarn run lint` from the command-line.
+Prettier is integrated into ESLint, so all code is checked. The rules are only enabled when running `yarn lint` from the command-line.
 The rules are disabled in Atom so we don't get the annoying warnings while developing.
 
 ### Setup
@@ -61,9 +61,9 @@ To ensure the lock file is up-to-date with the new versions, it's recommended to
 
 ## Releases
 
-We use lerna for releasing packages. Just run `npm run release` from `master` (after pulling in the latest merges) to publish a single or a set of modules. Lerna will check changes on packages providing semver bumps according to the commit messages used for each package.
+We use lerna for releasing packages. Just run `yarn release` from `master` (after pulling in the latest merges) to publish a single or a set of modules. Lerna will check changes on packages providing semver bumps according to the commit messages used for each package.
 
-This will also append all PRs up until the release in the `CHANGELOG.md` and push it as a separate commit with the message `docs: update changelog`.
+This will also append all PRs up until the release in the `CHANGELOG.md` and push it as a separate commit with the message `docs: update changelog`. For this to work, we need to have a `Type`-label on the PRs, so please make sure they are added.
 
 For this to work, it is essential that you create and export a github token that has read access to your public repos.
 
@@ -71,7 +71,7 @@ For this to work, it is essential that you create and export a github token that
 
 #### Commit message
 
-Make sure your commit messages follow [Angular's commit message format](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines). To make this easy run `npm run commit` from the root.
+Make sure your commit messages follow [Angular's commit message format](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines). To make this easy run `yarn commit` from the root.
 
 ```
     docs(contributing): add example of a full commit message

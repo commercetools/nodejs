@@ -5,7 +5,7 @@ function applyOnBeforeDiff(before, now, fn) {
   return fn && typeof fn === 'function' ? fn(before, now) : [before, now]
 }
 
-const createPriceComparator = price => ({
+const createPriceComparator = (price) => ({
   value: { currencyCode: price.value.currencyCode },
   channel: price.channel,
   country: price.country,
@@ -22,19 +22,19 @@ function arePricesStructurallyEqual(oldPrice, newPrice) {
 
 function extractPriceFromPreviousVariant(newPrice, previousVariant) {
   if (!previousVariant) return null
-  const price = previousVariant.prices.find(oldPrice =>
+  const price = previousVariant.prices.find((oldPrice) =>
     arePricesStructurallyEqual(oldPrice, newPrice)
   )
   return price || null
 }
 
 function injectMissingPriceIds(nextVariants, previousVariants) {
-  return nextVariants.map(newVariant => {
+  return nextVariants.map((newVariant) => {
     const { prices, ...restOfVariant } = newVariant
 
     if (!prices) return restOfVariant
     const oldVariant = previousVariants.find(
-      previousVariant =>
+      (previousVariant) =>
         (!isNil(previousVariant.id) && previousVariant.id === newVariant.id) ||
         (!isNil(previousVariant.key) &&
           previousVariant.key === newVariant.key) ||
@@ -43,7 +43,7 @@ function injectMissingPriceIds(nextVariants, previousVariants) {
 
     return {
       ...restOfVariant,
-      prices: prices.map(price => {
+      prices: prices.map((price) => {
         const newPrice = { ...price }
         const oldPrice = extractPriceFromPreviousVariant(price, oldVariant)
 

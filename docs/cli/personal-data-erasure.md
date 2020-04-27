@@ -36,9 +36,9 @@ Options:
   --output, -o      Path to output file.                     [default: "stdout"]
   --customerId, -c  Customer to fetch or delete.                      [required]
   --apiUrl          The host URL of the HTTP API service.
-                                              [default: "https://api.sphere.io"]
+                                              [default: "https://api.europe-west1.gcp.commercetools.com"]
   --authUrl         The host URL of the OAuth API service.
-                                             [default: "https://auth.sphere.io"]
+                                             [default: "https://auth.europe-west1.gcp.commercetools.com"]
   --accessToken     CTP client access token.
   --projectKey, -p  API project key.                                  [required]
   --deleteAll, -D   Delete all data related to customer.               [boolean]
@@ -67,8 +67,8 @@ import PersonalDataErasure from '@commercetools/personal-data-erasure'
 
 const options = {
     apiConfig: {
-      apiUrl: 'https://api.sphere.io'
-      host: 'https://auth.sphere.com'
+      apiUrl: 'https://api.europe-west1.gcp.commercetools.com'
+      host: 'https://auth.europe-west1.gcp.commercetools.com'
       project_key: <PROJECT_KEY>,
       credentials: {
         clientId: '*********',

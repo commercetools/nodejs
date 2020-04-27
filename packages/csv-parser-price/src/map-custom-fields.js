@@ -29,10 +29,10 @@ export default (function MapCustomFields() {
       data: custom,
     }
 
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       const value = data[key]
 
-      customType.fieldDefinitions.forEach(fieldDef => {
+      customType.fieldDefinitions.forEach((fieldDef) => {
         if (fieldDef.name === key)
           switch (fieldDef.type.name) {
             case 'Number': {
@@ -163,7 +163,7 @@ export default (function MapCustomFields() {
       data: [],
     }
     const values = value.split(',')
-    const _result = values.map(item => {
+    const _result = values.map((item) => {
       const _item = item.trim()
       switch (elementType.name) {
         case 'Number': {

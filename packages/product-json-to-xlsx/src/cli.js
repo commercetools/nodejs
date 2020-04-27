@@ -43,7 +43,7 @@ Required scopes: ['view_products']`,
     describe:
       'CSV file containing your header that defines what you want to export.',
   })
-  .coerce('template', arg => {
+  .coerce('template', (arg) => {
     if (fs.existsSync(arg)) {
       if (arg.match(/\.csv$/i)) return fs.createReadStream(String(arg))
 
@@ -56,7 +56,7 @@ Required scopes: ['view_products']`,
     default: 'stdin',
     describe: 'Path from which to read product chunks.',
   })
-  .coerce('input', arg => {
+  .coerce('input', (arg) => {
     if (arg === 'stdin') return process.stdin
 
     if (fs.existsSync(arg)) {
@@ -72,7 +72,7 @@ Required scopes: ['view_products']`,
     describe: 'Path to output',
     type: 'string',
   })
-  .coerce('output', arg => {
+  .coerce('output', (arg) => {
     if (arg !== 'stdout') return fs.createWriteStream(String(arg))
 
     return process.stdout
@@ -147,7 +147,7 @@ const logger = pino(loggerConfig)
 
 // print errors to stderr if we use stdout for data output
 // if we save data to output file errors are already logged by pino
-const logError = error => {
+const logError = (error) => {
   const errorFormatter = new PrettyError()
 
   if (args.logLevel === 'debug')
@@ -155,7 +155,7 @@ const logError = error => {
   else process.stderr.write(`ERR: ${error.message || error}`)
 }
 
-const errorHandler = errors => {
+const errorHandler = (errors) => {
   if (Array.isArray(errors)) errors.forEach(logError)
   else logError(errors)
 
@@ -164,7 +164,7 @@ const errorHandler = errors => {
 
 // Retrieve the headers from the template file
 // Only the first line of the file is read
-const getHeaders = _args =>
+const getHeaders = (_args) =>
   new Promise((resolve, reject) => {
     if (!_args.template) resolve(null)
     else {
@@ -172,16 +172,16 @@ const getHeaders = _args =>
         input: _args.template,
       })
       rl.on('error', reject)
-      rl.on('line', line => {
+      rl.on('line', (line) => {
         rl.close()
         const headers = line.split(_args.delimiter)
-        const trimmedHeaders = headers.map(header => header.trim())
+        const trimmedHeaders = headers.map((header) => header.trim())
         resolve(trimmedHeaders)
       })
     }
   })
 
-const resolveCredentials = _args => {
+const resolveCredentials = (_args) => {
   if (_args.accessToken) return Promise.resolve({})
   return getCredentials(_args.projectKey)
 }
@@ -227,7 +227,7 @@ Promise.all([getHeaders(args), resolveCredentials(args)])
       accessToken
     )
   })
-  .then(productJsonToXlsx => {
+  .then((productJsonToXlsx) => {
     args.input.setEncoding(args.encoding)
     productJsonToXlsx.run(args.input, args.output)
   })

@@ -268,7 +268,7 @@ export default class ProductMapping {
       ${price.country ? `${price.country}-` : ''}
       ${price.value.currencyCode} ${price.value.centAmount}${
       price.discounted ? `|${price.discounted.value.centAmount}` : ''
-    }${customerGroupName ? ` ${price.customerGroup.name}` : ''}
+    }${customerGroupName ? ` ${customerGroupName}` : ''}
       ${price.channel && price.channel.key ? `#${price.channel.key}` : ''}
       ${price.validFrom ? `$${price.validFrom}` : ''}
       ${price.validUntil ? `~${price.validUntil}` : ''}
@@ -317,7 +317,7 @@ export default class ProductMapping {
       if (!ind) return setValue
 
       // take all keys from already mapped values and new setValues
-      uniq([...Object.keys(res), ...Object.keys(setValue)]).forEach(key => {
+      uniq([...Object.keys(res), ...Object.keys(setValue)]).forEach((key) => {
         // if we haven't set this key yet, prepend the given value with delimiters
         if (isUndefined(res[key])) res[key] = emptyDelim
 
@@ -334,7 +334,7 @@ export default class ProductMapping {
   }
 
   _mapSetAttribute(name: string, values: Array<any>): Object {
-    const mappedValues: Array<any> = values.map(value =>
+    const mappedValues: Array<any> = values.map((value) =>
       this._mapAttribute({ name, value })
     )
 
@@ -412,6 +412,13 @@ export default class ProductMapping {
   ): any {
     switch (property) {
       case 'productType':
+        return {
+          multipleValues: true,
+          values: {
+            productType: value.name,
+            productTypeKey: value.key,
+          },
+        }
       case 'taxCategory':
         return value.name
       case 'state':
@@ -455,7 +462,15 @@ export default class ProductMapping {
     return reduce(
       product,
       (acc: Object, value: any, property: string): Object => {
-        acc[property] = this._mapProductProperty(value, property, product)
+        const extractedValue = this._mapProductProperty(
+          value,
+          property,
+          product
+        )
+        if (extractedValue?.multipleValues) {
+          return { ...acc, ...extractedValue.values }
+        }
+        acc[property] = extractedValue
         return acc
       },
       {}

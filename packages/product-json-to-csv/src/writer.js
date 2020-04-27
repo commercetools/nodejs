@@ -25,14 +25,14 @@ export function encode(string, encoding = 'utf8') {
 
 export function onStreamsFinished(streams, cb) {
   const emitOnce = new EmitOnce(streams, 'finish')
-  emitOnce.on('error', err => cb(err))
+  emitOnce.on('error', (err) => cb(err))
   // call callback when all streams are finished
   emitOnce.on('finish', () => cb())
 }
 
 export function archiveDir(dir, output, logger) {
   const archive = archiver('zip')
-  archive.on('error', err => {
+  archive.on('error', (err) => {
     logger.error(err)
     output.emit('error', err)
   })
@@ -44,7 +44,7 @@ export function archiveDir(dir, output, logger) {
 export function finishStreamsAndArchive(streams, dir, output, logger) {
   if (Object.keys(streams).length === 0) return archiveDir(dir, output, logger)
 
-  onStreamsFinished(streams, err => {
+  onStreamsFinished(streams, (err) => {
     if (err) {
       logger.error(err)
       return output.emit('error', err)
@@ -55,7 +55,7 @@ export function finishStreamsAndArchive(streams, dir, output, logger) {
   })
 
   // close all open file streams
-  return Object.keys(streams).forEach(key => {
+  return Object.keys(streams).forEach((key) => {
     streams[key].end()
   })
 }
@@ -68,13 +68,13 @@ export function writeToSingleCsvFile(
   headerFields,
   config = { delimiter: ',', encoding: 'utf8' }
 ) {
-  const trimmedHeaders = headerFields.map(header => header.trim())
+  const trimmedHeaders = headerFields.map((header) => header.trim())
   output.write(`${trimmedHeaders.join(config.delimiter)}\n`) // Write headers first
   const columnNames = mapHeaders(trimmedHeaders)
   let error = null
 
   productStream
-    .map(product => {
+    .map((product) => {
       const csvData = parse(product, {
         fields: columnNames,
         header: false,
@@ -88,7 +88,7 @@ export function writeToSingleCsvFile(
       }
       return true
     })
-    .stopOnError(err => {
+    .stopOnError((err) => {
       error = err
     })
     .done(() => {
@@ -116,7 +116,7 @@ export function writeToZipFile(
   const columnNamesCache = {}
   const streamCache = {}
   productStream
-    .map(product => {
+    .map((product) => {
       let header = false
       // Process this block only if item is a masterVariant and was
       // not the last processed item
@@ -152,7 +152,7 @@ export function writeToZipFile(
       fileStream.write('\n')
       return true
     })
-    .stopOnError(err => {
+    .stopOnError((err) => {
       error = err
     })
     .done(() => {

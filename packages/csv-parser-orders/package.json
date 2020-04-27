@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/csv-parser-orders",
-  "version": "2.0.14",
+  "version": "2.0.17",
   "description": "Converts commercetools order data from CSV to JSON.",
   "keywords": [
     "commercetools",
@@ -50,7 +50,7 @@
     "yargs": "^15.0.0"
   },
   "devDependencies": {
-    "sinon": "8.1.1",
+    "sinon": "9.0.0",
     "streamtest": "1.2.4",
     "tmp": "0.1.0"
   }

@@ -93,7 +93,7 @@ describe('CsvParserDiscountCode', () => {
 
   describe(':: parse', () => {
     test('should successfully parse CSV to JSON', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const inputStream = fs.createReadStream(
           path.join(__dirname, 'helpers/sampleCodes.csv')
         )
@@ -109,7 +109,7 @@ describe('CsvParserDiscountCode', () => {
     })
 
     test('should stop parsing by default on error', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const inputStream = fs.createReadStream(
           path.join(__dirname, 'helpers/faultyCsv.csv')
         )
@@ -124,7 +124,7 @@ describe('CsvParserDiscountCode', () => {
     })
 
     test('should skip rows with error if `continueOnProblems`', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         csvParser = new CsvParserDiscountCode(logger, {
           continueOnProblems: true,
         })

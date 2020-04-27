@@ -84,7 +84,7 @@ describe('ProductJsonToXlsx', () => {
     let outputStream
     let productStream
     beforeEach(() => {
-      productJsonToXlsx._resolveReferences = jest.fn(data =>
+      productJsonToXlsx._resolveReferences = jest.fn((data) =>
         Promise.resolve(data)
       )
       const product = oneLineTrim`
@@ -125,10 +125,10 @@ describe('ProductJsonToXlsx', () => {
     })
 
     test('should process data through stream if no error occurs', async () => {
-      productJsonToXlsx._resolveReferences = jest.fn(data =>
+      productJsonToXlsx._resolveReferences = jest.fn((data) =>
         Promise.resolve(data)
       )
-      productJsonToXlsx._productMapping.run = jest.fn(data => data)
+      productJsonToXlsx._productMapping.run = jest.fn((data) => data)
       // No headers in expected
       const expected = [
         'product-1-id',
@@ -227,8 +227,12 @@ describe('ProductJsonToXlsx', () => {
           'res-cat-name-2': '0.987',
         }
 
-        productJsonToXlsx._resolveProductType = jest.fn(() => ({ productType }))
-        productJsonToXlsx._resolveTaxCategory = jest.fn(() => ({ taxCategory }))
+        productJsonToXlsx._resolveProductType = jest.fn(() => ({
+          productType,
+        }))
+        productJsonToXlsx._resolveTaxCategory = jest.fn(() => ({
+          taxCategory,
+        }))
         productJsonToXlsx._resolveState = jest.fn(() => ({ state }))
         productJsonToXlsx._getChannelsById = jest.fn(() => ({ channelsById }))
         productJsonToXlsx._resolveCategories = jest.fn(() => ({ categories }))

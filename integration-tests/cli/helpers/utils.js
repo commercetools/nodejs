@@ -23,19 +23,16 @@ export function clearData(apiConfig, entityName, predicate = null) {
     method: 'GET',
   }
 
-  return client.process(request, payload => {
+  return client.process(request, (payload) => {
     // Built-in states cannot be deleted
     const results =
       entityName === 'states'
-        ? payload.body.results.filter(state => state.builtIn === false)
+        ? payload.body.results.filter((state) => state.builtIn === false)
         : payload.body.results
     return Promise.all(
-      results.map(result =>
+      results.map((result) =>
         client.execute({
-          uri: service
-            .byId(result.id)
-            .withVersion(result.version)
-            .build(),
+          uri: service.byId(result.id).withVersion(result.version).build(),
           method: 'DELETE',
         })
       )
@@ -53,7 +50,7 @@ export function createData(apiConfig, entityName, data, id) {
   const requestOption = { projectKey: apiConfig.projectKey }
   const service = createRequestBuilder(requestOption)[entityName]
   return Promise.all(
-    data.map(_data => {
+    data.map((_data) => {
       if (id) service.byId(id)
       const request = {
         uri: service.build(),
@@ -84,5 +81,5 @@ export function getId(apiConfig, entityName) {
 
   return client
     .execute(request)
-    .then(result => Promise.resolve(result.body.results[0].id))
+    .then((result) => Promise.resolve(result.body.results[0].id))
 }

@@ -86,7 +86,7 @@ export default function createBuildArrayActions(key, config) {
     if (diff[key]) {
       const arrayDelta = diff[key]
 
-      Object.keys(arrayDelta).forEach(index => {
+      Object.keys(arrayDelta).forEach((index) => {
         if (config[ADD_ACTIONS] && isCreateAction(arrayDelta, index)) {
           const actionGenerator = config[ADD_ACTIONS]
           // When adding a new element you don't need the oldObj

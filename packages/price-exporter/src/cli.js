@@ -21,7 +21,7 @@ ${description}`
     alias: 'i',
     describe: 'Path to CSV template.',
   })
-  .coerce('input', arg => {
+  .coerce('input', (arg) => {
     if (fs.existsSync(arg)) return fs.createReadStream(String(arg))
 
     throw new Error('Input file cannot be reached or does not exist')
@@ -31,17 +31,17 @@ ${description}`
     default: 'stdout',
     describe: 'Path to output file.',
   })
-  .coerce('output', arg => {
+  .coerce('output', (arg) => {
     if (arg !== 'stdout') return fs.createWriteStream(String(arg))
 
     return process.stdout
   })
   .option('apiUrl', {
-    default: 'https://api.sphere.io',
+    default: 'https://api.europe-west1.gcp.commercetools.com',
     describe: 'The host URL of the HTTP API service.',
   })
   .option('authUrl', {
-    default: 'https://auth.sphere.io',
+    default: 'https://auth.europe-west1.gcp.commercetools.com',
     describe: 'The host URL of the OAuth API service.',
   })
   .option('projectKey', {
@@ -81,11 +81,11 @@ Required scopes: ['view_products', 'view_customers', 'view_types']`,
     default: 'price-exporter.log',
     describe: 'Path to file where to save logs.',
   })
-  .coerce('logLevel', arg => {
+  .coerce('logLevel', (arg) => {
     npmlog.level = arg
   }).argv
 
-const logError = error => {
+const logError = (error) => {
   const errorFormatter = new PrettyError()
 
   if (npmlog.level === 'verbose')
@@ -95,7 +95,7 @@ const logError = error => {
 
 // print errors to stderr if we use stdout for data output
 // if we save data to output file errors are already logged by npmlog
-const errorHandler = errors => {
+const errorHandler = (errors) => {
   if (Array.isArray(errors)) errors.forEach(logError)
   else logError(errors)
 
@@ -104,7 +104,7 @@ const errorHandler = errors => {
 
 // Retrieve the headers from the input file
 // Only the first line of the file is read
-const getHeaders = _args =>
+const getHeaders = (_args) =>
   new Promise((resolve, reject) => {
     if (!_args.input)
       if (_args.exportFormat === 'json') resolve()
@@ -113,13 +113,13 @@ const getHeaders = _args =>
       input: _args.input,
     })
     rl.on('error', reject)
-    rl.on('line', line => {
+    rl.on('line', (line) => {
       rl.close()
       resolve(line.split(_args.delimiter))
     })
   })
 
-const resolveCredentials = _args => {
+const resolveCredentials = (_args) => {
   if (_args.accessToken) return Promise.resolve({})
   return getCredentials(_args.projectKey)
 }
@@ -134,11 +134,11 @@ args.output.on('error', errorHandler)
 
 let csvHeaders
 getHeaders(args)
-  .then(csvHeadersfromInput => {
+  .then((csvHeadersfromInput) => {
     csvHeaders = csvHeadersfromInput
     return resolveCredentials(args)
   })
-  .then(credentials => {
+  .then((credentials) => {
     const apiConfig = {
       host: args.authUrl,
       apiUrl: args.apiUrl,
@@ -163,5 +163,5 @@ getHeaders(args)
 
     return new PriceExporter(priceExporterOptions, logger)
   })
-  .then(priceExporter => priceExporter.run(args.output))
+  .then((priceExporter) => priceExporter.run(args.output))
   .catch(errorHandler)

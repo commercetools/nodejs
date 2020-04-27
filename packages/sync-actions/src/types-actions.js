@@ -12,8 +12,8 @@ import extractMatchingPairs from './utils/extract-matching-pairs'
 
 const REGEX_NUMBER = new RegExp(/^\d+$/)
 const REGEX_UNDERSCORE_NUMBER = new RegExp(/^_\d+$/)
-const getIsChangedOperation = key => REGEX_NUMBER.test(key)
-const getIsRemovedOperation = key => REGEX_UNDERSCORE_NUMBER.test(key)
+const getIsChangedOperation = (key) => REGEX_NUMBER.test(key)
+const getIsRemovedOperation = (key) => REGEX_UNDERSCORE_NUMBER.test(key)
 
 export const baseActionsList = [
   { action: 'changeKey', key: 'key' },
@@ -39,14 +39,14 @@ function actionsMapEnums(attributeType, attributeDiff, previous, next) {
       ? 'changeEnumValueOrder'
       : 'changeLocalizedEnumValueOrder'
   const buildArrayActions = createBuildArrayActions('values', {
-    [ADD_ACTIONS]: newEnum => ({
+    [ADD_ACTIONS]: (newEnum) => ({
       fieldName: next.name,
       action: addEnumActionName,
       value: newEnum,
     }),
     [CHANGE_ACTIONS]: (oldEnum, newEnum) => {
       const oldEnumInNext = next.values.find(
-        nextEnum => nextEnum.key === oldEnum.key
+        (nextEnum) => nextEnum.key === oldEnum.key
       )
 
       // These `changeActions` would impose a nested structure among
@@ -77,7 +77,7 @@ function actionsMapEnums(attributeType, attributeDiff, previous, next) {
   const newEnumValuesOrder = []
 
   flatten(buildArrayActions(attributeDiff, previous, next)).forEach(
-    updateAction => {
+    (updateAction) => {
       if (updateAction.action === changeEnumOrderActionName) {
         newEnumValuesOrder.push(updateAction.value)
       } else actions.push(updateAction)
@@ -163,7 +163,7 @@ export function actionsMapFieldDefinitions(
   // https://docs.commercetools.com/http-api-projects-types.html#change-key
   const sortedActions = sortBy(
     actions,
-    action => action.action !== 'removeFieldDefinition'
+    (action) => action.action !== 'removeFieldDefinition'
   )
 
   return sortedActions

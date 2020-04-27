@@ -53,8 +53,8 @@ describe('personal data erasure', () => {
     const setupProject = async () => {
       const credentials = await getCredentials(projectKey)
       apiConfig = {
-        host: 'https://auth.sphere.io',
-        apiUrl: 'https://api.sphere.io',
+        host: 'https://auth.europe-west1.gcp.commercetools.com',
+        apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
         projectKey,
         credentials,
       }
@@ -112,8 +112,8 @@ describe('personal data erasure', () => {
       describe('::deleteAll', () => {
         it('should delete data on the CTP', async () => {
           let data
-          const fetchDataAfterTimeout = ms =>
-            new Promise(resolve =>
+          const fetchDataAfterTimeout = (ms) =>
+            new Promise((resolve) =>
               setTimeout(async () => {
                 data = await personalDataErasure.getCustomerData(customerId)
                 resolve()

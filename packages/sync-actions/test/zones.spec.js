@@ -10,6 +10,7 @@ describe('Exports', () => {
     expect(baseActionsList).toEqual([
       { action: 'changeName', key: 'name' },
       { action: 'setDescription', key: 'description' },
+      { action: 'setKey', key: 'key' },
     ])
   })
 })
@@ -51,6 +52,25 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
   })
 
+  test('should build `setKey` action', () => {
+    const before = {
+      key: 'key-before',
+    }
+
+    const now = {
+      key: 'key-now',
+    }
+
+    const actual = zonesSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'setKey',
+        key: 'key-now',
+      }
+    ]
+    expect(actual).toEqual(expected)
+  })
+
   describe('`addLocation`', () => {
     test('should build `addLocation` action with one location', () => {
       const before = { locations: [] }
@@ -75,7 +95,9 @@ describe('Actions', () => {
 
   describe('`removeLocation`', () => {
     test('should build `removeLocation` action removing one location', () => {
-      const before = { locations: [{ country: 'Spain' }, { country: 'Italy' }] }
+      const before = {
+        locations: [{ country: 'Spain' }, { country: 'Italy' }],
+      }
       const now = { locations: [{ country: 'Spain' }] }
 
       const actual = zonesSync.buildActions(now, before)
@@ -85,7 +107,9 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
     test('should build `removeLocation` action removing two locations', () => {
-      const before = { locations: [{ country: 'Spain' }, { country: 'Italy' }] }
+      const before = {
+        locations: [{ country: 'Spain' }, { country: 'Italy' }],
+      }
       const now = { locations: [] }
 
       const actual = zonesSync.buildActions(now, before)

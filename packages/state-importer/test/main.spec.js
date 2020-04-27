@@ -46,7 +46,7 @@ describe('StateImport', () => {
       })
 
       test('should call callback when done', () => {
-        return new Promise(done => {
+        return new Promise((done) => {
           const myMockCallback = jest.fn(() => {
             done()
           })

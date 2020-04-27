@@ -277,7 +277,7 @@ const tokenProvider = new TokenProvider({
   sdkAuth: new SdkAuth({
     // .. init SdkAuth
   }),
-  fetchTokenInfo: sdkAuth => sdkAuth.clientCredentialsFlow(),
+  fetchTokenInfo: (sdkAuth) => sdkAuth.clientCredentialsFlow(),
 })
 
 // get access token
@@ -309,7 +309,7 @@ const tokenInfo = await authClient.clientPasswordFlow({
 const tokenProvider = new TokenProvider(
   {
     sdkAuth,
-    onTokenInfoChanged: newTokenInfo =>
+    onTokenInfoChanged: (newTokenInfo) =>
       console.log('Token info was changed', newTokenInfo),
   },
   tokenInfo

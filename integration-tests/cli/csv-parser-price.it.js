@@ -26,8 +26,8 @@ describe('CSV and CLI Tests', () => {
   beforeAll(async () => {
     const credentials = await getCredentials(projectKey)
     apiConfig = {
-      host: 'https://auth.sphere.io',
-      apiUrl: 'https://api.sphere.io',
+      host: 'https://auth.europe-west1.gcp.commercetools.com',
+      apiUrl: 'https://api.europe-west1.gcp.commercetools.com',
       projectKey,
       credentials,
     }
@@ -178,7 +178,7 @@ describe('CSV and CLI Tests', () => {
     }, 10000)
 
     it('should parse CSV into JSON with array of prices', () => {
-      return new Promise(done => {
+      return new Promise((done) => {
         const csvFilePath = path.join(samplesFolder, 'sample.csv')
         const csvParserPrice = new CsvParserPrice({ apiConfig })
         const inputStream = fs.createReadStream(csvFilePath)
