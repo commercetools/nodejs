@@ -10,6 +10,7 @@
  *                    `Y'
  *
  */
+import { ShippingMethodPagedQueryResponse } from 'models/shipping-method'
 import { QueryParam, executeRequest } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
@@ -34,8 +35,8 @@ export class ByProjectKeyShippingMethodsMatchingLocationRequestBuilder {
     headers?: {
       [key: string]: string
     }
-  }): ApiRequest<any> {
-    return new ApiRequest<any>(
+  }): ApiRequest<ShippingMethodPagedQueryResponse> {
+    return new ApiRequest<ShippingMethodPagedQueryResponse>(
       {
         baseUri: this.args.baseUri,
         method: 'GET',
