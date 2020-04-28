@@ -274,7 +274,6 @@ function _buildVariantPricesAction(
         // still has other values, otherwise simply return
         const filteredPrice = { ...price }
         delete filteredPrice.discounted
-        delete filteredPrice.custom
         if (Object.keys(filteredPrice).length) {
           // At this point price should have changed, simply pick the new one
           const newPrice = { ...newObj }
