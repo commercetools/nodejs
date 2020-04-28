@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sync-actions",
-  "version": "4.6.1",
+  "version": "4.6.2",
   "description": "Build API update actions for the commercetools platform.",
   "keywords": [
     "commercetools",
