@@ -153,9 +153,9 @@ export interface CartDiscountResourceIdentifier {
 export type CartDiscountTarget =
   | MultiBuyCustomLineItemsTarget
   | MultiBuyLineItemsTarget
-  | CartDiscountCustomLineItemsTarget
   | CartDiscountLineItemsTarget
   | CartDiscountShippingCostTarget
+  | CartDiscountCustomLineItemsTarget
 export interface CartDiscountCustomLineItemsTarget {
   readonly type: 'customLineItems'
   readonly predicate: string
@@ -206,15 +206,15 @@ export interface CartDiscountValueAbsoluteDraft {
 export interface CartDiscountValueGiftLineItem {
   readonly type: 'giftLineItem'
   readonly product: ProductReference
-  readonly supplyChannel?: ChannelReference
   readonly variantId: number
+  readonly supplyChannel?: ChannelReference
   readonly distributionChannel?: ChannelReference
 }
 export interface CartDiscountValueGiftLineItemDraft {
   readonly type: 'giftLineItem'
   readonly product: ProductReference
-  readonly supplyChannel?: ChannelReference
   readonly variantId: number
+  readonly supplyChannel?: ChannelReference
   readonly distributionChannel?: ChannelReference
 }
 export interface CartDiscountValueRelative {
@@ -323,14 +323,14 @@ export interface CartDiscountSetCustomFieldAction {
 export interface CartDiscountSetCustomTypeAction {
   readonly action: 'setCustomType'
   /**
+   *	If absent, the custom type and any existing CustomFields are removed.
+   */
+  readonly type?: TypeResourceIdentifier
+  /**
    *	A valid JSON object, based on the FieldDefinitions of the Type.
    *	Sets the custom fields to this value.
    */
   readonly fields?: any
-  /**
-   *	If absent, the custom type and any existing CustomFields are removed.
-   */
-  readonly type?: TypeResourceIdentifier
 }
 export interface CartDiscountSetDescriptionAction {
   readonly action: 'setDescription'
@@ -358,11 +358,11 @@ export interface CartDiscountSetValidFromAndUntilAction {
   /**
    *	If absent, the field with the value is removed in case a value was set before.
    */
-  readonly validUntil?: string
+  readonly validFrom?: string
   /**
    *	If absent, the field with the value is removed in case a value was set before.
    */
-  readonly validFrom?: string
+  readonly validUntil?: string
 }
 export interface CartDiscountSetValidUntilAction {
   readonly action: 'setValidUntil'

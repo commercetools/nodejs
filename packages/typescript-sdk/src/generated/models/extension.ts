@@ -46,8 +46,8 @@ export type ExtensionDestination =
   | ExtensionAWSLambdaDestination
 export interface ExtensionAWSLambdaDestination {
   readonly type: 'AWSLambda'
-  readonly accessKey: string
   readonly arn: string
+  readonly accessKey: string
   readonly accessSecret: string
 }
 export interface ExtensionDraft {

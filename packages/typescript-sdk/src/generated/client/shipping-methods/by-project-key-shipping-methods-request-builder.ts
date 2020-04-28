@@ -10,6 +10,9 @@
  *                    `Y'
  *
  */
+import { ByProjectKeyShippingMethodsMatchingCartRequestBuilder } from 'client/matching-cart/by-project-key-shipping-methods-matching-cart-request-builder'
+import { ByProjectKeyShippingMethodsMatchingLocationRequestBuilder } from 'client/matching-location/by-project-key-shipping-methods-matching-location-request-builder'
+import { ByProjectKeyShippingMethodsMatchingOrdereditRequestBuilder } from 'client/matching-orderedit/by-project-key-shipping-methods-matching-orderedit-request-builder'
 import { ByProjectKeyShippingMethodsByIDRequestBuilder } from 'client/shipping-methods/by-project-key-shipping-methods-by-id-request-builder'
 import { ByProjectKeyShippingMethodsKeyByKeyRequestBuilder } from 'client/shipping-methods/by-project-key-shipping-methods-key-by-key-request-builder'
 import {
@@ -42,6 +45,42 @@ export class ByProjectKeyShippingMethodsRequestBuilder {
       baseUri: this.args.baseUri,
     })
   }
+  /**
+   *	Get ShippingMethods for a cart
+   */
+  public matchingCart(): ByProjectKeyShippingMethodsMatchingCartRequestBuilder {
+    return new ByProjectKeyShippingMethodsMatchingCartRequestBuilder({
+      pathArgs: {
+        ...this.args.pathArgs,
+      },
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
+    })
+  }
+  /**
+   *	Get ShippingMethods for an order edit
+   */
+  public matchingOrderedit(): ByProjectKeyShippingMethodsMatchingOrdereditRequestBuilder {
+    return new ByProjectKeyShippingMethodsMatchingOrdereditRequestBuilder({
+      pathArgs: {
+        ...this.args.pathArgs,
+      },
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
+    })
+  }
+  /**
+   *	Get ShippingMethods for a location
+   */
+  public matchingLocation(): ByProjectKeyShippingMethodsMatchingLocationRequestBuilder {
+    return new ByProjectKeyShippingMethodsMatchingLocationRequestBuilder({
+      pathArgs: {
+        ...this.args.pathArgs,
+      },
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
+    })
+  }
   public withId(childPathArgs: {
     ID: string
   }): ByProjectKeyShippingMethodsByIDRequestBuilder {
@@ -60,10 +99,6 @@ export class ByProjectKeyShippingMethodsRequestBuilder {
    */
   public get(methodArgs?: {
     queryArgs?: {
-      'shipping-methodId'?: string | string[]
-      country?: string | string[]
-      state?: string | string[]
-      currency?: string | string[]
       expand?: string | string[]
       sort?: string | string[]
       limit?: number | number[]

@@ -529,6 +529,7 @@ export type OrderUpdateAction =
   | OrderSetReturnPaymentStateAction
   | OrderSetReturnShipmentStateAction
   | OrderSetShippingAddressAction
+  | OrderSetStoreAction
   | OrderTransitionCustomLineItemStateAction
   | OrderTransitionLineItemStateAction
   | OrderTransitionStateAction
@@ -606,24 +607,24 @@ export interface ReturnInfo {
 export type ReturnItem = CustomLineItemReturnItem | LineItemReturnItem
 export interface CustomLineItemReturnItem {
   readonly type: 'CustomLineItemReturnItem'
-  readonly shipmentState: ReturnShipmentState
-  readonly createdAt: string
-  readonly lastModifiedAt: string
+  readonly id: string
   readonly quantity: number
   readonly comment?: string
-  readonly id: string
+  readonly shipmentState: ReturnShipmentState
   readonly paymentState: ReturnPaymentState
+  readonly lastModifiedAt: string
+  readonly createdAt: string
   readonly customLineItemId: string
 }
 export interface LineItemReturnItem {
   readonly type: 'LineItemReturnItem'
-  readonly shipmentState: ReturnShipmentState
-  readonly createdAt: string
-  readonly lastModifiedAt: string
+  readonly id: string
   readonly quantity: number
   readonly comment?: string
-  readonly id: string
+  readonly shipmentState: ReturnShipmentState
   readonly paymentState: ReturnPaymentState
+  readonly lastModifiedAt: string
+  readonly createdAt: string
   readonly lineItemId: string
 }
 export interface ReturnItemDraft {
@@ -706,8 +707,8 @@ export interface TrackingData {
 }
 export interface OrderAddDeliveryAction {
   readonly action: 'addDelivery'
-  readonly address?: Address
   readonly items?: DeliveryItem[]
+  readonly address?: Address
   readonly parcels?: ParcelDraft[]
 }
 export interface OrderAddItemShippingAddressAction {
@@ -717,9 +718,9 @@ export interface OrderAddItemShippingAddressAction {
 export interface OrderAddParcelToDeliveryAction {
   readonly action: 'addParcelToDelivery'
   readonly deliveryId: string
-  readonly items?: DeliveryItem[]
-  readonly trackingData?: TrackingData
   readonly measurements?: ParcelMeasurements
+  readonly trackingData?: TrackingData
+  readonly items?: DeliveryItem[]
 }
 export interface OrderAddPaymentAction {
   readonly action: 'addPayment'
@@ -727,9 +728,9 @@ export interface OrderAddPaymentAction {
 }
 export interface OrderAddReturnInfoAction {
   readonly action: 'addReturnInfo'
-  readonly returnDate?: string
   readonly returnTrackingId?: string
   readonly items: ReturnItemDraft[]
+  readonly returnDate?: string
 }
 export interface OrderChangeOrderStateAction {
   readonly action: 'changeOrderState'
@@ -787,8 +788,8 @@ export interface OrderSetCustomLineItemCustomFieldAction {
 export interface OrderSetCustomLineItemCustomTypeAction {
   readonly action: 'setCustomLineItemCustomType'
   readonly customLineItemId: string
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface OrderSetCustomLineItemShippingDetailsAction {
   readonly action: 'setCustomLineItemShippingDetails'
@@ -797,8 +798,8 @@ export interface OrderSetCustomLineItemShippingDetailsAction {
 }
 export interface OrderSetCustomTypeAction {
   readonly action: 'setCustomType'
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface OrderSetCustomerEmailAction {
   readonly action: 'setCustomerEmail'
@@ -827,13 +828,13 @@ export interface OrderSetLineItemCustomFieldAction {
 export interface OrderSetLineItemCustomTypeAction {
   readonly action: 'setLineItemCustomType'
   readonly lineItemId: string
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface OrderSetLineItemShippingDetailsAction {
   readonly action: 'setLineItemShippingDetails'
-  readonly shippingDetails?: ItemShippingDetailsDraft
   readonly lineItemId: string
+  readonly shippingDetails?: ItemShippingDetailsDraft
 }
 export interface OrderSetLocaleAction {
   readonly action: 'setLocale'
@@ -845,18 +846,18 @@ export interface OrderSetOrderNumberAction {
 }
 export interface OrderSetParcelItemsAction {
   readonly action: 'setParcelItems'
-  readonly items: DeliveryItem[]
   readonly parcelId: string
+  readonly items: DeliveryItem[]
 }
 export interface OrderSetParcelMeasurementsAction {
   readonly action: 'setParcelMeasurements'
-  readonly measurements?: ParcelMeasurements
   readonly parcelId: string
+  readonly measurements?: ParcelMeasurements
 }
 export interface OrderSetParcelTrackingDataAction {
   readonly action: 'setParcelTrackingData'
-  readonly trackingData?: TrackingData
   readonly parcelId: string
+  readonly trackingData?: TrackingData
 }
 export interface OrderSetReturnPaymentStateAction {
   readonly action: 'setReturnPaymentState'
@@ -865,33 +866,37 @@ export interface OrderSetReturnPaymentStateAction {
 }
 export interface OrderSetReturnShipmentStateAction {
   readonly action: 'setReturnShipmentState'
-  readonly shipmentState: ReturnShipmentState
   readonly returnItemId: string
+  readonly shipmentState: ReturnShipmentState
 }
 export interface OrderSetShippingAddressAction {
   readonly action: 'setShippingAddress'
   readonly address?: Address
 }
+export interface OrderSetStoreAction {
+  readonly action: 'setStore'
+  readonly store?: StoreResourceIdentifier
+}
 export interface OrderTransitionCustomLineItemStateAction {
   readonly action: 'transitionCustomLineItemState'
-  readonly toState: StateResourceIdentifier
-  readonly fromState: StateResourceIdentifier
   readonly customLineItemId: string
   readonly quantity: number
+  readonly fromState: StateResourceIdentifier
+  readonly toState: StateResourceIdentifier
   readonly actualTransitionDate?: string
 }
 export interface OrderTransitionLineItemStateAction {
   readonly action: 'transitionLineItemState'
-  readonly toState: StateResourceIdentifier
-  readonly fromState: StateResourceIdentifier
-  readonly quantity: number
   readonly lineItemId: string
+  readonly quantity: number
+  readonly fromState: StateResourceIdentifier
+  readonly toState: StateResourceIdentifier
   readonly actualTransitionDate?: string
 }
 export interface OrderTransitionStateAction {
   readonly action: 'transitionState'
-  readonly force?: boolean
   readonly state: StateResourceIdentifier
+  readonly force?: boolean
 }
 export interface OrderUpdateItemShippingAddressAction {
   readonly action: 'updateItemShippingAddress'

@@ -15,6 +15,7 @@ import { ByProjectKeyInStoreKeyByStoreKeyCustomersRequestBuilder } from 'client/
 import { ByProjectKeyInStoreKeyByStoreKeyLoginRequestBuilder } from 'client/login/by-project-key-in-store-key-by-store-key-login-request-builder'
 import { ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder } from 'client/me/by-project-key-in-store-key-by-store-key-me-request-builder'
 import { ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder } from 'client/orders/by-project-key-in-store-key-by-store-key-orders-request-builder'
+import { ByProjectKeyInStoreKeyByStoreKeyShippingMethodsRequestBuilder } from 'client/shipping-methods/by-project-key-in-store-key-by-store-key-shipping-methods-request-builder'
 import { QueryParam, executeRequest } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
@@ -81,6 +82,15 @@ export class ByProjectKeyInStoreKeyByStoreKeyRequestBuilder {
    */
   public login(): ByProjectKeyInStoreKeyByStoreKeyLoginRequestBuilder {
     return new ByProjectKeyInStoreKeyByStoreKeyLoginRequestBuilder({
+      pathArgs: {
+        ...this.args.pathArgs,
+      },
+      executeRequest: this.args.executeRequest,
+      baseUri: this.args.baseUri,
+    })
+  }
+  public shippingMethods(): ByProjectKeyInStoreKeyByStoreKeyShippingMethodsRequestBuilder {
+    return new ByProjectKeyInStoreKeyByStoreKeyShippingMethodsRequestBuilder({
       pathArgs: {
         ...this.args.pathArgs,
       },

@@ -66,6 +66,8 @@ export class ByProjectKeyProductProjectionsSearchRequestBuilder {
       priceCountry?: string | string[]
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
+      localeProjection?: string | string[]
+      storeProjection?: string | string[]
       expand?: string | string[]
       [key: string]: QueryParam
     }

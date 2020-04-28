@@ -232,12 +232,12 @@ export interface ProductDiscountSetValidFromAction {
 }
 export interface ProductDiscountSetValidFromAndUntilAction {
   readonly action: 'setValidFromAndUntil'
+  readonly validFrom?: string
   /**
    *	The timeframe for which the discount should be effective.
    *	Please take Eventual Consistency into account for calculated undiscounted values.
    */
   readonly validUntil?: string
-  readonly validFrom?: string
 }
 export interface ProductDiscountSetValidUntilAction {
   readonly action: 'setValidUntil'

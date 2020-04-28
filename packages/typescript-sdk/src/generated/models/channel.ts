@@ -162,8 +162,8 @@ export interface ChannelSetCustomFieldAction {
 }
 export interface ChannelSetCustomTypeAction {
   readonly action: 'setCustomType'
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface ChannelSetGeoLocationAction {
   readonly action: 'setGeoLocation'

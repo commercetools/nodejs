@@ -35,12 +35,12 @@ export type Destination =
   | IronMqDestination
   | SnsDestination
   | SqsDestination
-  | AzureEventGridDestination
   | AzureServiceBusDestination
+  | AzureEventGridDestination
 export interface AzureEventGridDestination {
   readonly type: 'EventGrid'
-  readonly accessKey: string
   readonly uri: string
+  readonly accessKey: string
 }
 export interface AzureServiceBusDestination {
   readonly type: 'AzureServiceBus'
@@ -48,8 +48,8 @@ export interface AzureServiceBusDestination {
 }
 export interface GoogleCloudPubSubDestination {
   readonly type: 'GoogleCloudPubSub'
-  readonly topic: string
   readonly projectId: string
+  readonly topic: string
 }
 export interface IronMqDestination {
   readonly type: 'IronMQ'
@@ -66,15 +66,15 @@ export interface PayloadNotIncluded {
 export interface SnsDestination {
   readonly type: 'SNS'
   readonly accessKey: string
-  readonly topicArn: string
   readonly accessSecret: string
+  readonly topicArn: string
 }
 export interface SqsDestination {
   readonly type: 'SQS'
   readonly accessKey: string
+  readonly accessSecret: string
   readonly queueUrl: string
   readonly region: string
-  readonly accessSecret: string
 }
 export interface Subscription extends BaseResource {
   readonly id: string
@@ -97,47 +97,47 @@ export interface Subscription extends BaseResource {
   readonly status: SubscriptionHealthStatus
 }
 export type SubscriptionDelivery =
-  | MessageDelivery
+  | ResourceUpdatedDelivery
   | ResourceCreatedDelivery
   | ResourceDeletedDelivery
-  | ResourceUpdatedDelivery
+  | MessageDelivery
 export interface MessageDelivery {
   readonly notificationType: 'Message'
   readonly projectKey: string
   readonly resource: Reference
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
-  readonly sequenceNumber: number
-  readonly createdAt: string
-  readonly lastModifiedAt: string
-  readonly resourceVersion: number
-  readonly payloadNotIncluded: PayloadNotIncluded
   readonly id: string
   readonly version: number
+  readonly createdAt: string
+  readonly lastModifiedAt: string
+  readonly sequenceNumber: number
+  readonly resourceVersion: number
+  readonly payloadNotIncluded: PayloadNotIncluded
 }
 export interface ResourceCreatedDelivery {
   readonly notificationType: 'ResourceCreated'
   readonly projectKey: string
   readonly resource: Reference
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
-  readonly modifiedAt: string
   readonly version: number
+  readonly modifiedAt: string
 }
 export interface ResourceDeletedDelivery {
   readonly notificationType: 'ResourceDeleted'
   readonly projectKey: string
   readonly resource: Reference
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
-  readonly modifiedAt: string
   readonly version: number
+  readonly modifiedAt: string
 }
 export interface ResourceUpdatedDelivery {
   readonly notificationType: 'ResourceUpdated'
   readonly projectKey: string
   readonly resource: Reference
   readonly resourceUserProvidedIdentifiers?: UserProvidedIdentifiers
-  readonly modifiedAt: string
-  readonly oldVersion: number
   readonly version: number
+  readonly oldVersion: number
+  readonly modifiedAt: string
 }
 export interface SubscriptionDraft {
   readonly changes?: ChangeSubscription[]
