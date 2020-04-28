@@ -43,4 +43,68 @@ describe('Actions', () => {
     const expected = [{ action: 'changeQuantity', quantity: 2 }]
     expect(actual).toEqual(expected)
   })
+
+  describe('custom fields', () => {
+    test('should build `setCustomType` action', () => {
+      const before = {
+        custom: {
+          type: {
+            typeId: 'type',
+            id: 'customType1',
+          },
+          fields: {
+            customField1: true,
+          },
+        },
+      }
+      const now = {
+        custom: {
+          type: {
+            typeId: 'type',
+            id: 'customType2',
+          },
+          fields: {
+            customField1: true,
+          },
+        },
+      }
+      const actual = inventorySync.buildActions(now, before)
+      const expected = [{ action: 'setCustomType', ...now.custom }]
+      expect(actual).toEqual(expected)
+    })
+  })
+
+  test('should build `setCustomField` action', () => {
+    const before = {
+      custom: {
+        type: {
+          typeId: 'type',
+          id: 'customType1',
+        },
+        fields: {
+          customField1: false,
+        },
+      },
+    }
+    const now = {
+      custom: {
+        type: {
+          typeId: 'type',
+          id: 'customType1',
+        },
+        fields: {
+          customField1: true,
+        },
+      },
+    }
+    const actual = inventorySync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'setCustomField',
+        name: 'customField1',
+        value: true,
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
 })

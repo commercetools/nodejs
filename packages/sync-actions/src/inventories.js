@@ -4,10 +4,11 @@ import type {
   SyncAction,
   SyncActionConfig,
   UpdateAction,
-  ActionGroup,
+  ActionGroup
 } from 'types/sdk'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
+import actionsMapCustom from './utils/action-map-custom'
 import * as inventoryActions from './inventory-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
@@ -31,6 +32,11 @@ function createInventoryMapActions(
     allActions.push(
       mapActionGroup('references', (): Array<UpdateAction> =>
         inventoryActions.actionsMapReferences(diff, oldObj, newObj)
+      )
+    )
+    allActions.push(
+      mapActionGroup('custom', (): Array<UpdateAction> =>
+        actionsMapCustom(diff, newObj, oldObj)
       )
     )
     return flatten(allActions)
