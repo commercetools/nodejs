@@ -267,6 +267,23 @@ describe('Actions', () => {
               },
             },
           },
+          {
+            // action `changePrice` should contian custom object
+            id: '2222',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+            custom: {
+              type: {
+                typeId: 'type',
+                id: '5678',
+              },
+              fields: {
+                source: 'shop',
+              },
+            },
+          },
         ],
       },
     }
@@ -363,6 +380,23 @@ describe('Actions', () => {
             validFrom: dateNow,
             validUntil: twoWeeksFromNow,
           },
+          {
+            // action `changePrice` should contian custom object
+            id: '2222',
+            value: { currencyCode: 'GBP', centAmount: 2000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+            custom: {
+              type: {
+                typeId: 'type',
+                id: '5678',
+              },
+              fields: {
+                source: 'shop',
+              },
+            },
+          },
         ],
       },
     }
@@ -373,7 +407,7 @@ describe('Actions', () => {
     })
 
     test('should build five update actions', () => {
-      expect(actions).toHaveLength(9)
+      expect(actions).toHaveLength(14)
     })
 
     test('should build `changePrice` actions', () => {
@@ -441,6 +475,38 @@ describe('Actions', () => {
               validUntil: threeWeeksFromNow,
             },
             variantId: 1,
+          },
+        ])
+      )
+    })
+
+    test('should build `changePrice` action without deleting `custom` prop', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'changePrice',
+            price: {
+              id: '2222',
+              value: {
+                currencyCode: 'GBP',
+                centAmount: 2000,
+                fractionDigits: undefined,
+                type: undefined,
+              },
+              country: 'UK',
+              validFrom: dateNow,
+              validUntil: twoWeeksFromNow,
+              custom: {
+                type: {
+                  typeId: 'type',
+                  id: '5678',
+                },
+                fields: {
+                  source: 'shop',
+                },
+              },
+            },
+            priceId: '2222',
           },
         ])
       )
@@ -730,7 +796,7 @@ describe('Actions', () => {
               fractionDigits: 2,
             },
             id: '7960b455-ab04-4722-a8b2-431460d60012',
-            customField: {
+            custom: {
               type: {
                 typeId: 'type',
                 id: 'aada6bfb-2df1-4877-90f3-6efae0fbefa8',
@@ -758,7 +824,7 @@ describe('Actions', () => {
                 fractionDigits: 2,
               },
               id: '38a9667a-976d-4bcc-8d2a-b04701e41f18',
-              customField: {
+              custom: {
                 type: {
                   typeId: 'type',
                   id: 'aada6bfb-2df1-4877-90f3-6efae0fbefa8',
@@ -803,7 +869,7 @@ describe('Actions', () => {
               centAmount: 6495,
               currencyCode: 'EUR',
             },
-            customField: {
+            custom: {
               type: {
                 id: 'aada6bfb-2df1-4877-90f3-6efae0fbefa8',
               },
@@ -827,7 +893,7 @@ describe('Actions', () => {
                 centAmount: 8995,
                 currencyCode: 'EUR',
               },
-              customField: {
+              custom: {
                 type: {
                   id: 'aada6bfb-2df1-4877-90f3-6efae0fbefa8',
                 },
