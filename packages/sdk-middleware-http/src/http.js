@@ -114,11 +114,11 @@ export default function createHttpMiddleware({
         ? { 'Content-Length': Buffer.byteLength(body).toString() }
         : null),
     }
-    // $FlowFixMe
     const fetchOptions: Object = {
       method: request.method,
       headers: requestHeader,
       ...(credentialsMode ? { credentials: credentialsMode } : {}),
+      // $FlowFixMe
       ...(timeout || abortController ? { signal: abortController.signal } : {}),
       ...(body ? { body } : null),
     }
