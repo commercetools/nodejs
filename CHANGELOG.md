@@ -1,3 +1,57 @@
+
+## @commercetools/typescript-sdk@0.0.20-alpha.0 (2020-04-28)
+
+#### :house: Maintenance
+* `product-json-to-csv`
+  * [#1538](https://github.com/commercetools/nodejs/pull/1538) fix(deps): update dependency archiver to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+
+## @commercetools/product-json-to-xlsx@4.0.7 (2020-04-28)
+
+#### :house: Maintenance
+* `product-json-to-csv`
+  * [#1538](https://github.com/commercetools/nodejs/pull/1538) fix(deps): update dependency archiver to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+
+## @commercetools/product-json-to-csv@5.0.7 (2020-04-28)
+
+#### :house: Maintenance
+* `product-json-to-csv`
+  * [#1538](https://github.com/commercetools/nodejs/pull/1538) fix(deps): update dependency archiver to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+
+## @commercetools/integration-tests@0.0.30 (2020-04-28)
+
+#### :house: Maintenance
+* `product-json-to-csv`
+  * [#1538](https://github.com/commercetools/nodejs/pull/1538) fix(deps): update dependency archiver to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+
+## @commercetools/csv-parser-price@4.0.16 (2020-04-28)
+
+#### :house: Maintenance
+* `product-json-to-csv`
+  * [#1538](https://github.com/commercetools/nodejs/pull/1538) fix(deps): update dependency archiver to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
 ## @commercetools/sync-actions@4.6.1 (2020-04-24)
 
 #### :bug: Bug Fix
