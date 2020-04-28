@@ -49,16 +49,16 @@ export type ErrorObject =
   | RequiredFieldError
   | ResourceNotFoundError
   | ShippingMethodDoesNotMatchCartError
-  | DiscountCodeNonApplicableError
   | AccessDeniedError
-  | DuplicateAttributeValueError
-  | DuplicateVariantValuesError
-  | DuplicateAttributeValuesError
   | ConcurrentModificationError
+  | DuplicateFieldWithConflictingResourceError
+  | DuplicateVariantValuesError
+  | DiscountCodeNonApplicableError
+  | DuplicatePriceScopeError
+  | DuplicateAttributeValueError
   | EnumValueIsUsedError
   | DuplicateFieldError
-  | DuplicatePriceScopeError
-  | DuplicateFieldWithConflictingResourceError
+  | DuplicateAttributeValuesError
 export interface AccessDeniedError {
   readonly code: 'access_denied'
   readonly message: string

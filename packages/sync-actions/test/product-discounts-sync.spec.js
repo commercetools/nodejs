@@ -276,7 +276,7 @@ describe('Actions', () => {
       {
         action: 'setKey',
         key: 'key-now',
-      }
+      },
     ]
     const actual = productDiscountsSync.buildActions(now, before)
     expect(actual).toEqual(expected)

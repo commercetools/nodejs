@@ -66,7 +66,7 @@ describe('Actions', () => {
       {
         action: 'setKey',
         key: 'key-now',
-      }
+      },
     ]
     expect(actual).toEqual(expected)
   })
