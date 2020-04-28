@@ -1,4 +1,5 @@
-import { createRequestBuilder, features } from '../src'
+import { createRequestBuilder } from '../src'
+import { query } from '../src/features'
 
 // order matters!
 const expectedServiceKeys = [
@@ -57,7 +58,7 @@ describe('createRequestBuilder', () => {
         foo: {
           type: 'foo',
           endpoint: '/foo',
-          features: [features.query],
+          features: [query],
         },
       },
     })
