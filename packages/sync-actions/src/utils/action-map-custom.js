@@ -30,27 +30,25 @@ export default function actionsMapCustom(
   diff,
   newObj,
   oldObj,
-  customActions = {}
+  customProps = { actions: {} }
 ) {
   const actions = []
-  const priceId = oldObj.id || undefined
-  if (customActions.setCustomType)
-    Actions.setCustomType = customActions.setCustomType
-  if (customActions.setCustomField)
-    Actions.setCustomField = customActions.setCustomField
+  const priceId = customProps.priceId
+  const actionGroup = { ...Actions, ...customProps.actions }
+
   if (!diff.custom) return actions
   if (hasSingleCustomFieldChanged(diff)) {
     // If custom is not defined on the new or old category
     const custom = diffpatcher.getDeltaValue(diff.custom, oldObj)
-    actions.push({ action: Actions.setCustomType, priceId, ...custom })
+    actions.push({ action: actionGroup.setCustomType, priceId, ...custom })
   } else if (hasCustomTypeChanged(diff)) {
     // If custom is set to an empty object on the new or old category
     const type = extractCustomType(diff, oldObj)
 
-    if (!type) actions.push({ action: Actions.setCustomType, priceId })
+    if (!type) actions.push({ action: actionGroup.setCustomType, priceId })
     else if (type.id)
       actions.push({
-        action: Actions.setCustomType,
+        action: actionGroup.setCustomType,
         priceId,
         type: {
           typeId: 'type',
@@ -60,7 +58,7 @@ export default function actionsMapCustom(
       })
     else if (type.key)
       actions.push({
-        action: Actions.setCustomType,
+        action: actionGroup.setCustomType,
         priceId,
         type: {
           typeId: 'type',
@@ -70,7 +68,7 @@ export default function actionsMapCustom(
       })
   } else if (haveMultipleCustomFieldsChanged(diff)) {
     const customFieldsActions = Object.keys(diff.custom.fields).map((name) => ({
-      action: Actions.setCustomField,
+      action: actionGroup.setCustomField,
       priceId,
       name,
       value: extractFieldValue(newObj.custom.fields, name),

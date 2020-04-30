@@ -674,8 +674,11 @@ export function actionsMapPricesCustom(diff, oldObj, newObj, variantHashMap) {
             (REGEX_UNDERSCORE_NUMBER.test(index) || REGEX_NUMBER.test(index))
           ) {
             const a = actionsMapCustom(price, newPrice, oldPrice, {
-              setCustomType: 'setProductPriceCustomType',
-              setCustomField: 'setProductPriceCustomField',
+              actions: {
+                setCustomType: 'setProductPriceCustomType',
+                setCustomField: 'setProductPriceCustomField',
+              },
+              priceId: oldPrice.id,
             })
 
             actions = actions.concat(a)
