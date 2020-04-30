@@ -10,48 +10,36 @@
  *                    `Y'
  *
  */
-import { ProductProjection } from 'models/product'
+import { ShippingMethodPagedQueryResponse } from 'models/shipping-method'
 import { QueryParam, executeRequest } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
-export class ByProjectKeyProductProjectionsByIDRequestBuilder {
+export class ByProjectKeyShippingMethodsMatchingOrdereditRequestBuilder {
   constructor(
     protected readonly args: {
       pathArgs: {
         projectKey: string
-        ID: string
       }
       executeRequest: executeRequest
       baseUri?: string
     }
   ) {}
-  /**
-   *	Gets the current or staged representation of a product in a catalog by ID.
-   *	When used with an API client that has the view_published_products:{projectKey} scope,
-   *	this endpoint only returns published (current) product projections.
-   *
-   */
-  public get(methodArgs?: {
-    queryArgs?: {
-      staged?: boolean | boolean[]
-      priceCurrency?: string | string[]
-      priceCountry?: string | string[]
-      priceCustomerGroup?: string | string[]
-      priceChannel?: string | string[]
-      localeProjection?: string | string[]
-      storeProjection?: string | string[]
-      expand?: string | string[]
+  public get(methodArgs: {
+    queryArgs: {
+      orderEditId: string | string[]
+      country: string | string[]
+      state?: string | string[]
       [key: string]: QueryParam
     }
     headers?: {
       [key: string]: string
     }
-  }): ApiRequest<ProductProjection> {
-    return new ApiRequest<ProductProjection>(
+  }): ApiRequest<ShippingMethodPagedQueryResponse> {
+    return new ApiRequest<ShippingMethodPagedQueryResponse>(
       {
         baseUri: this.args.baseUri,
         method: 'GET',
-        uriTemplate: '/{projectKey}/product-projections/{ID}',
+        uriTemplate: '/{projectKey}/shipping-methods/matching-orderedit',
         pathVariables: this.args.pathArgs,
         headers: {
           ...methodArgs?.headers,

@@ -156,8 +156,8 @@ export interface TaxCategoryRemoveTaxRateAction {
 }
 export interface TaxCategoryReplaceTaxRateAction {
   readonly action: 'replaceTaxRate'
-  readonly taxRate: TaxRateDraft
   readonly taxRateId: string
+  readonly taxRate: TaxRateDraft
 }
 export interface TaxCategorySetDescriptionAction {
   readonly action: 'setDescription'

@@ -80,7 +80,7 @@ export default (
   // this resulting function mapActionGroup will call the callback function
   // for whitelisted action groups and return the return value of the callback
   // It will return an empty array for blacklisted action groups
-  const mapActionGroup = createMapActionGroup(syncActionConfig)
+  const mapActionGroup = createMapActionGroup(actionGroupList)
   const doMapActions = createCustomerMapActions(
     mapActionGroup,
     syncActionConfig

@@ -100,8 +100,8 @@ describe('Cart Discounts Exports', () => {
         expect.arrayContaining([
           {
             action: 'setKey',
-            key: 'key'
-          }
+            key: 'key',
+          },
         ])
       )
     })
@@ -441,7 +441,7 @@ describe('Cart Discounts Actions', () => {
       {
         action: 'setKey',
         key: 'key-now',
-      }
+      },
     ]
     const actual = cartDiscountsSync.buildActions(now, before)
     expect(actual).toEqual(expected)

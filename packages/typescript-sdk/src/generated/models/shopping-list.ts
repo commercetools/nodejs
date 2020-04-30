@@ -219,25 +219,25 @@ export interface TextLineItemDraft {
 }
 export interface ShoppingListAddLineItemAction {
   readonly action: 'addLineItem'
-  readonly addedAt?: string
-  readonly quantity?: number
-  readonly productId?: string
-  readonly custom?: CustomFieldsDraft
-  readonly variantId?: number
   readonly sku?: string
+  readonly productId?: string
+  readonly variantId?: number
+  readonly quantity?: number
+  readonly addedAt?: string
+  readonly custom?: CustomFieldsDraft
 }
 export interface ShoppingListAddTextLineItemAction {
   readonly action: 'addTextLineItem'
-  readonly addedAt?: string
-  readonly quantity?: number
-  readonly custom?: CustomFieldsDraft
   readonly name: LocalizedString
   readonly description?: LocalizedString
+  readonly quantity?: number
+  readonly addedAt?: string
+  readonly custom?: CustomFieldsDraft
 }
 export interface ShoppingListChangeLineItemQuantityAction {
   readonly action: 'changeLineItemQuantity'
-  readonly quantity: number
   readonly lineItemId: string
+  readonly quantity: number
 }
 export interface ShoppingListChangeLineItemsOrderAction {
   readonly action: 'changeLineItemsOrder'
@@ -249,13 +249,13 @@ export interface ShoppingListChangeNameAction {
 }
 export interface ShoppingListChangeTextLineItemNameAction {
   readonly action: 'changeTextLineItemName'
-  readonly name: LocalizedString
   readonly textLineItemId: string
+  readonly name: LocalizedString
 }
 export interface ShoppingListChangeTextLineItemQuantityAction {
   readonly action: 'changeTextLineItemQuantity'
-  readonly quantity: number
   readonly textLineItemId: string
+  readonly quantity: number
 }
 export interface ShoppingListChangeTextLineItemsOrderAction {
   readonly action: 'changeTextLineItemsOrder'
@@ -263,13 +263,13 @@ export interface ShoppingListChangeTextLineItemsOrderAction {
 }
 export interface ShoppingListRemoveLineItemAction {
   readonly action: 'removeLineItem'
-  readonly quantity?: number
   readonly lineItemId: string
+  readonly quantity?: number
 }
 export interface ShoppingListRemoveTextLineItemAction {
   readonly action: 'removeTextLineItem'
-  readonly quantity?: number
   readonly textLineItemId: string
+  readonly quantity?: number
 }
 export interface ShoppingListSetAnonymousIdAction {
   readonly action: 'setAnonymousId'
@@ -287,14 +287,14 @@ export interface ShoppingListSetCustomFieldAction {
 export interface ShoppingListSetCustomTypeAction {
   readonly action: 'setCustomType'
   /**
-   *	If set, the custom fields are set to this new value.
-   */
-  readonly fields?: FieldContainer
-  /**
    *	If set, the custom type is set to this new value.
    *	If absent, the custom type and any existing custom fields are removed.
    */
   readonly type?: TypeResourceIdentifier
+  /**
+   *	If set, the custom fields are set to this new value.
+   */
+  readonly fields?: FieldContainer
 }
 export interface ShoppingListSetCustomerAction {
   readonly action: 'setCustomer'
@@ -324,8 +324,8 @@ export interface ShoppingListSetLineItemCustomFieldAction {
 export interface ShoppingListSetLineItemCustomTypeAction {
   readonly action: 'setLineItemCustomType'
   readonly lineItemId: string
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface ShoppingListSetSlugAction {
   readonly action: 'setSlug'
@@ -333,18 +333,18 @@ export interface ShoppingListSetSlugAction {
 }
 export interface ShoppingListSetTextLineItemCustomFieldAction {
   readonly action: 'setTextLineItemCustomField'
+  readonly textLineItemId: string
   readonly name: string
   readonly value?: any
-  readonly textLineItemId: string
 }
 export interface ShoppingListSetTextLineItemCustomTypeAction {
   readonly action: 'setTextLineItemCustomType'
-  readonly fields?: FieldContainer
-  readonly type?: TypeResourceIdentifier
   readonly textLineItemId: string
+  readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface ShoppingListSetTextLineItemDescriptionAction {
   readonly action: 'setTextLineItemDescription'
-  readonly description?: LocalizedString
   readonly textLineItemId: string
+  readonly description?: LocalizedString
 }

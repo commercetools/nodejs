@@ -51,14 +51,14 @@ export type ErrorObject =
   | ShippingMethodDoesNotMatchCartError
   | AccessDeniedError
   | ConcurrentModificationError
-  | DiscountCodeNonApplicableError
-  | DuplicateAttributeValueError
-  | DuplicateAttributeValuesError
-  | DuplicateFieldError
   | DuplicateFieldWithConflictingResourceError
-  | DuplicatePriceScopeError
   | DuplicateVariantValuesError
+  | DiscountCodeNonApplicableError
+  | DuplicatePriceScopeError
+  | DuplicateAttributeValueError
   | EnumValueIsUsedError
+  | DuplicateFieldError
+  | DuplicateAttributeValuesError
 export interface AccessDeniedError {
   readonly code: 'access_denied'
   readonly message: string
@@ -71,12 +71,12 @@ export interface ConcurrentModificationError {
 export interface DiscountCodeNonApplicableError {
   readonly code: 'DiscountCodeNonApplicable'
   readonly message: string
-  readonly reason?: string
-  readonly validityCheckTime?: string
   readonly discountCode?: string
-  readonly validUntil?: string
-  readonly validFrom?: string
+  readonly reason?: string
   readonly dicountCodeId?: string
+  readonly validFrom?: string
+  readonly validUntil?: string
+  readonly validityCheckTime?: string
 }
 export interface DuplicateAttributeValueError {
   readonly code: 'DuplicateAttributeValue'
@@ -91,16 +91,16 @@ export interface DuplicateAttributeValuesError {
 export interface DuplicateFieldError {
   readonly code: 'DuplicateField'
   readonly message: string
-  readonly conflictingResource?: Reference
-  readonly duplicateValue?: any
   readonly field?: string
+  readonly duplicateValue?: any
+  readonly conflictingResource?: Reference
 }
 export interface DuplicateFieldWithConflictingResourceError {
   readonly code: 'DuplicateFieldWithConflictingResource'
   readonly message: string
-  readonly conflictingResource: Reference
-  readonly duplicateValue: any
   readonly field: string
+  readonly duplicateValue: any
+  readonly conflictingResource: Reference
 }
 export interface DuplicatePriceScopeError {
   readonly code: 'DuplicatePriceScope'
@@ -159,9 +159,9 @@ export interface InvalidCurrentPasswordError {
 export interface InvalidFieldError {
   readonly code: 'InvalidField'
   readonly message: string
-  readonly allowedValues?: any[]
   readonly field: string
   readonly invalidValue: any
+  readonly allowedValues?: any[]
 }
 export interface InvalidInputError {
   readonly code: 'InvalidInput'
@@ -170,8 +170,8 @@ export interface InvalidInputError {
 export interface InvalidItemShippingDetailsError {
   readonly code: 'InvalidItemShippingDetails'
   readonly message: string
-  readonly itemId: string
   readonly subject: string
+  readonly itemId: string
 }
 export interface InvalidJsonInputError {
   readonly code: 'InvalidJsonInput'
@@ -192,19 +192,19 @@ export interface InvalidTokenError {
 export interface MatchingPriceNotFoundError {
   readonly code: 'MatchingPriceNotFound'
   readonly message: string
-  readonly country?: string
   readonly productId: string
+  readonly variantId: number
+  readonly currency?: string
+  readonly country?: string
   readonly customerGroup?: CustomerGroupReference
   readonly channel?: ChannelReference
-  readonly currency?: string
-  readonly variantId: number
 }
 export interface MissingTaxRateForCountryError {
   readonly code: 'MissingTaxRateForCountry'
   readonly message: string
+  readonly taxCategoryId: string
   readonly country?: string
   readonly state?: string
-  readonly taxCategoryId: string
 }
 export interface NoMatchingProductDiscountFoundError {
   readonly code: 'NoMatchingProductDiscountFound'

@@ -266,8 +266,8 @@ export type TransactionType =
   | 'Chargeback'
 export interface PaymentAddInterfaceInteractionAction {
   readonly action: 'addInterfaceInteraction'
-  readonly fields?: FieldContainer
   readonly type: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface PaymentAddTransactionAction {
   readonly action: 'addTransaction'
@@ -279,13 +279,13 @@ export interface PaymentChangeAmountPlannedAction {
 }
 export interface PaymentChangeTransactionInteractionIdAction {
   readonly action: 'changeTransactionInteractionId'
-  readonly interactionId: string
   readonly transactionId: string
+  readonly interactionId: string
 }
 export interface PaymentChangeTransactionStateAction {
   readonly action: 'changeTransactionState'
-  readonly state: TransactionState
   readonly transactionId: string
+  readonly state: TransactionState
 }
 export interface PaymentChangeTransactionTimestampAction {
   readonly action: 'changeTransactionTimestamp'
@@ -321,14 +321,14 @@ export interface PaymentSetCustomFieldAction {
 export interface PaymentSetCustomTypeAction {
   readonly action: 'setCustomType'
   /**
-   *	Sets the custom fields to this value.
-   */
-  readonly fields?: FieldContainer
-  /**
    *	If set, the custom type is set to this new value.
    *	If absent, the custom type and any existing custom fields are removed.
    */
   readonly type?: TypeResourceIdentifier
+  /**
+   *	Sets the custom fields to this value.
+   */
+  readonly fields?: FieldContainer
 }
 export interface PaymentSetCustomerAction {
   readonly action: 'setCustomer'
@@ -382,6 +382,6 @@ export interface PaymentSetStatusInterfaceTextAction {
 }
 export interface PaymentTransitionStateAction {
   readonly action: 'transitionState'
-  readonly force?: boolean
   readonly state: StateResourceIdentifier
+  readonly force?: boolean
 }

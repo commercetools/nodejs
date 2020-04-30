@@ -358,10 +358,10 @@ export type ResourceIdentifier =
   | TaxCategoryResourceIdentifier
   | TypeResourceIdentifier
   | ZoneResourceIdentifier
-  | CartDiscountResourceIdentifier
-  | CartResourceIdentifier
   | CategoryResourceIdentifier
+  | CartDiscountResourceIdentifier
   | ChannelResourceIdentifier
+  | CartResourceIdentifier
 export interface ScopedPrice {
   readonly id: string
   readonly value: TypedMoney
@@ -381,8 +381,8 @@ export interface ScopedPrice {
 export type TypedMoney = CentPrecisionMoney | HighPrecisionMoney
 export interface CentPrecisionMoney {
   readonly type: 'centPrecision'
-  readonly centAmount: number
   readonly fractionDigits: number
+  readonly centAmount: number
   /**
    *	The currency code compliant to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
    *
@@ -391,8 +391,8 @@ export interface CentPrecisionMoney {
 }
 export interface HighPrecisionMoney {
   readonly type: 'highPrecision'
-  readonly centAmount: number
   readonly fractionDigits: number
+  readonly centAmount: number
   /**
    *	The currency code compliant to [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217).
    *

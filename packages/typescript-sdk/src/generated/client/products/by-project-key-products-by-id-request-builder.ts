@@ -45,6 +45,8 @@ export class ByProjectKeyProductsByIDRequestBuilder {
       priceCountry?: string | string[]
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
+      localeProjection?: string | string[]
+      storeProjection?: string | string[]
       expand?: string | string[]
       [key: string]: QueryParam
     }
@@ -75,6 +77,8 @@ export class ByProjectKeyProductsByIDRequestBuilder {
       priceCountry?: string | string[]
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
+      localeProjection?: string | string[]
+      storeProjection?: string | string[]
       expand?: string | string[]
       [key: string]: QueryParam
     }
@@ -108,6 +112,8 @@ export class ByProjectKeyProductsByIDRequestBuilder {
       priceCountry?: string | string[]
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
+      localeProjection?: string | string[]
+      storeProjection?: string | string[]
       version: number | number[]
       expand?: string | string[]
       [key: string]: QueryParam

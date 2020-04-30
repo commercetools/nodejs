@@ -405,6 +405,8 @@ export type DiscountCodeState =
   | 'DoesNotMatchCart'
   | 'MatchesCart'
   | 'MaxApplicationReached'
+  | 'ApplicationStoppedByPreviousDiscount'
+  | 'NotValid'
 export interface DiscountedLineItemPortion {
   readonly discount: CartDiscountReference
   readonly discountedAmount: TypedMoney
@@ -645,20 +647,20 @@ export interface ShippingInfo {
 }
 export type ShippingMethodState = 'DoesNotMatchCart' | 'MatchesCart'
 export type ShippingRateInput =
-  | ClassificationShippingRateInput
   | ScoreShippingRateInput
+  | ClassificationShippingRateInput
 export interface ClassificationShippingRateInput {
   readonly type: 'Classification'
-  readonly label: LocalizedString
   readonly key: string
+  readonly label: LocalizedString
 }
 export interface ScoreShippingRateInput {
   readonly type: 'Score'
   readonly score: number
 }
 export type ShippingRateInputDraft =
-  | ClassificationShippingRateInputDraft
   | ScoreShippingRateInputDraft
+  | ClassificationShippingRateInputDraft
 export interface ClassificationShippingRateInputDraft {
   readonly type: 'Classification'
   readonly key: string
@@ -704,13 +706,13 @@ export interface TaxedPriceDraft {
 }
 export interface CartAddCustomLineItemAction {
   readonly action: 'addCustomLineItem'
-  readonly externalTaxRate?: ExternalTaxRateDraft
-  readonly quantity: number
   readonly money: Money
-  readonly custom?: CustomFieldsDraft
   readonly name: LocalizedString
+  readonly quantity: number
   readonly slug: string
   readonly taxCategory?: TaxCategoryResourceIdentifier
+  readonly custom?: CustomFieldsDraft
+  readonly externalTaxRate?: ExternalTaxRateDraft
 }
 export interface CartAddDiscountCodeAction {
   readonly action: 'addDiscountCode'
@@ -722,17 +724,17 @@ export interface CartAddItemShippingAddressAction {
 }
 export interface CartAddLineItemAction {
   readonly action: 'addLineItem'
-  readonly quantity?: number
-  readonly externalTaxRate?: ExternalTaxRateDraft
-  readonly shippingDetails?: ItemShippingDetailsDraft
-  readonly productId?: string
-  readonly externalTotalPrice?: ExternalLineItemTotalPrice
   readonly custom?: CustomFieldsDraft
-  readonly supplyChannel?: ChannelResourceIdentifier
+  readonly distributionChannel?: ChannelResourceIdentifier
+  readonly externalTaxRate?: ExternalTaxRateDraft
+  readonly productId?: string
   readonly variantId?: number
   readonly sku?: string
-  readonly distributionChannel?: ChannelResourceIdentifier
+  readonly quantity?: number
+  readonly supplyChannel?: ChannelResourceIdentifier
   readonly externalPrice?: Money
+  readonly externalTotalPrice?: ExternalLineItemTotalPrice
+  readonly shippingDetails?: ItemShippingDetailsDraft
 }
 export interface CartAddPaymentAction {
   readonly action: 'addPayment'
@@ -766,10 +768,10 @@ export interface CartChangeCustomLineItemQuantityAction {
 }
 export interface CartChangeLineItemQuantityAction {
   readonly action: 'changeLineItemQuantity'
-  readonly quantity: number
-  readonly externalTotalPrice?: ExternalLineItemTotalPrice
   readonly lineItemId: string
+  readonly quantity: number
   readonly externalPrice?: Money
+  readonly externalTotalPrice?: ExternalLineItemTotalPrice
 }
 export interface CartChangeTaxCalculationModeAction {
   readonly action: 'changeTaxCalculationMode'
@@ -807,11 +809,11 @@ export interface CartRemoveItemShippingAddressAction {
 }
 export interface CartRemoveLineItemAction {
   readonly action: 'removeLineItem'
-  readonly quantity?: number
-  readonly externalTotalPrice?: ExternalLineItemTotalPrice
   readonly lineItemId: string
-  readonly shippingDetailsToRemove?: ItemShippingDetailsDraft
+  readonly quantity?: number
   readonly externalPrice?: Money
+  readonly externalTotalPrice?: ExternalLineItemTotalPrice
+  readonly shippingDetailsToRemove?: ItemShippingDetailsDraft
 }
 export interface CartRemovePaymentAction {
   readonly action: 'removePayment'
@@ -830,11 +832,11 @@ export interface CartSetBillingAddressAction {
 }
 export interface CartSetCartTotalTaxAction {
   readonly action: 'setCartTotalTax'
-  readonly externalTaxPortions?: TaxPortionDraft[]
   /**
    *	The total gross amount of the cart (totalNet + taxes).
    */
   readonly externalTotalGross: Money
+  readonly externalTaxPortions?: TaxPortionDraft[]
 }
 export interface CartSetCountryAction {
   readonly action: 'setCountry'
@@ -858,8 +860,8 @@ export interface CartSetCustomLineItemCustomFieldAction {
 export interface CartSetCustomLineItemCustomTypeAction {
   readonly action: 'setCustomLineItemCustomType'
   readonly customLineItemId: string
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface CartSetCustomLineItemShippingDetailsAction {
   readonly action: 'setCustomLineItemShippingDetails'
@@ -878,15 +880,15 @@ export interface CartSetCustomLineItemTaxRateAction {
 }
 export interface CartSetCustomShippingMethodAction {
   readonly action: 'setCustomShippingMethod'
-  readonly shippingRate: ShippingRateDraft
-  readonly externalTaxRate?: ExternalTaxRateDraft
   readonly shippingMethodName: string
+  readonly shippingRate: ShippingRateDraft
   readonly taxCategory?: TaxCategoryResourceIdentifier
+  readonly externalTaxRate?: ExternalTaxRateDraft
 }
 export interface CartSetCustomTypeAction {
   readonly action: 'setCustomType'
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface CartSetCustomerEmailAction {
   readonly action: 'setCustomerEmail'
@@ -916,8 +918,8 @@ export interface CartSetLineItemCustomFieldAction {
 export interface CartSetLineItemCustomTypeAction {
   readonly action: 'setLineItemCustomType'
   readonly lineItemId: string
-  readonly fields?: FieldContainer
   readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface CartSetLineItemPriceAction {
   readonly action: 'setLineItemPrice'
@@ -926,8 +928,8 @@ export interface CartSetLineItemPriceAction {
 }
 export interface CartSetLineItemShippingDetailsAction {
   readonly action: 'setLineItemShippingDetails'
-  readonly shippingDetails?: ItemShippingDetailsDraft
   readonly lineItemId: string
+  readonly shippingDetails?: ItemShippingDetailsDraft
 }
 export interface CartSetLineItemTaxAmountAction {
   readonly action: 'setLineItemTaxAmount'
@@ -936,13 +938,13 @@ export interface CartSetLineItemTaxAmountAction {
 }
 export interface CartSetLineItemTaxRateAction {
   readonly action: 'setLineItemTaxRate'
-  readonly externalTaxRate?: ExternalTaxRateDraft
   readonly lineItemId: string
+  readonly externalTaxRate?: ExternalTaxRateDraft
 }
 export interface CartSetLineItemTotalPriceAction {
   readonly action: 'setLineItemTotalPrice'
-  readonly externalTotalPrice?: ExternalLineItemTotalPrice
   readonly lineItemId: string
+  readonly externalTotalPrice?: ExternalLineItemTotalPrice
 }
 export interface CartSetLocaleAction {
   readonly action: 'setLocale'
@@ -954,8 +956,8 @@ export interface CartSetShippingAddressAction {
 }
 export interface CartSetShippingMethodAction {
   readonly action: 'setShippingMethod'
-  readonly externalTaxRate?: ExternalTaxRateDraft
   readonly shippingMethod?: ShippingMethodResourceIdentifier
+  readonly externalTaxRate?: ExternalTaxRateDraft
 }
 export interface CartSetShippingMethodTaxAmountAction {
   readonly action: 'setShippingMethodTaxAmount'

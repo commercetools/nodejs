@@ -370,11 +370,11 @@ export interface SuggestionResult {
 }
 export interface TermFacetResult {
   readonly type: 'terms'
-  readonly other: number
-  readonly total: number
-  readonly terms: FacetResultTerm[]
   readonly dataType: TermFacetResultType
   readonly missing: number
+  readonly total: number
+  readonly other: number
+  readonly terms: FacetResultTerm[]
 }
 export type TermFacetResultType =
   | 'text'
@@ -388,66 +388,66 @@ export interface WhitespaceTokenizer {
 }
 export interface ProductAddAssetAction {
   readonly action: 'addAsset'
+  readonly variantId?: number
+  readonly sku?: string
+  readonly staged?: boolean
+  readonly asset: AssetDraft
   /**
    *	Position of the new asset inside the existing list (from `0` to the size of the list)
    */
   readonly position?: number
-  readonly staged?: boolean
-  readonly variantId?: number
-  readonly asset: AssetDraft
-  readonly sku?: string
 }
 export interface ProductAddExternalImageAction {
   readonly action: 'addExternalImage'
-  readonly image: Image
-  readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
+  readonly image: Image
+  readonly staged?: boolean
 }
 export interface ProductAddPriceAction {
   readonly action: 'addPrice'
-  readonly price: PriceDraft
-  readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
+  readonly price: PriceDraft
+  readonly staged?: boolean
 }
 export interface ProductAddToCategoryAction {
   readonly action: 'addToCategory'
+  readonly category: CategoryResourceIdentifier
   readonly orderHint?: string
   readonly staged?: boolean
-  readonly category: CategoryResourceIdentifier
 }
 export interface ProductAddVariantAction {
   readonly action: 'addVariant'
-  readonly images?: Image[]
-  readonly assets?: Asset[]
-  readonly attributes?: Attribute[]
-  readonly staged?: boolean
-  readonly prices?: PriceDraft[]
   readonly sku?: string
   readonly key?: string
+  readonly prices?: PriceDraft[]
+  readonly images?: Image[]
+  readonly attributes?: Attribute[]
+  readonly staged?: boolean
+  readonly assets?: Asset[]
 }
 export interface ProductChangeAssetNameAction {
   readonly action: 'changeAssetName'
-  readonly assetId?: string
-  readonly name: LocalizedString
-  readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
+  readonly staged?: boolean
+  readonly assetId?: string
   readonly assetKey?: string
+  readonly name: LocalizedString
 }
 export interface ProductChangeAssetOrderAction {
   readonly action: 'changeAssetOrder'
-  readonly assetOrder: string[]
-  readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
+  readonly staged?: boolean
+  readonly assetOrder: string[]
 }
 export interface ProductChangeMasterVariantAction {
   readonly action: 'changeMasterVariant'
-  readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
+  readonly staged?: boolean
 }
 export interface ProductChangeNameAction {
   readonly action: 'changeName'
@@ -456,38 +456,38 @@ export interface ProductChangeNameAction {
 }
 export interface ProductChangePriceAction {
   readonly action: 'changePrice'
-  readonly price: PriceDraft
-  readonly staged?: boolean
   /**
    *	ID of the [Price](#price)
    */
   readonly priceId: string
+  readonly price: PriceDraft
+  readonly staged?: boolean
 }
 export interface ProductChangeSlugAction {
   readonly action: 'changeSlug'
-  readonly staged?: boolean
   /**
    *	Every slug must be unique across a project, but a product can have the same slug for different languages.
    *	Allowed are alphabetic, numeric, underscore (`_`) and hyphen (`-`) characters.
    *	Maximum size is `256`.
    */
   readonly slug: LocalizedString
+  readonly staged?: boolean
 }
 export interface ProductLegacySetSkuAction {
   readonly action: 'legacySetSku'
-  readonly variantId: number
   readonly sku?: string
+  readonly variantId: number
 }
 export interface ProductMoveImageToPositionAction {
   readonly action: 'moveImageToPosition'
+  readonly variantId?: number
+  readonly sku?: string
   /**
    *	The URL of the image
    */
   readonly imageUrl: string
-  readonly staged?: boolean
   readonly position: number
-  readonly variantId?: number
-  readonly sku?: string
+  readonly staged?: boolean
 }
 export interface ProductPublishAction {
   readonly action: 'publish'
@@ -495,40 +495,40 @@ export interface ProductPublishAction {
 }
 export interface ProductRemoveAssetAction {
   readonly action: 'removeAsset'
-  readonly assetId?: string
-  readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
+  readonly staged?: boolean
+  readonly assetId?: string
   readonly assetKey?: string
 }
 export interface ProductRemoveFromCategoryAction {
   readonly action: 'removeFromCategory'
-  readonly staged?: boolean
   readonly category: CategoryResourceIdentifier
+  readonly staged?: boolean
 }
 export interface ProductRemoveImageAction {
   readonly action: 'removeImage'
+  readonly variantId?: number
+  readonly sku?: string
   /**
    *	The URL of the image.
    */
   readonly imageUrl: string
   readonly staged?: boolean
-  readonly variantId?: number
-  readonly sku?: string
 }
 export interface ProductRemovePriceAction {
   readonly action: 'removePrice'
-  readonly staged?: boolean
   /**
    *	ID of the [Price](#price)
    */
   readonly priceId: string
+  readonly staged?: boolean
 }
 export interface ProductRemoveVariantAction {
   readonly action: 'removeVariant'
-  readonly staged?: boolean
   readonly id?: number
   readonly sku?: string
+  readonly staged?: boolean
 }
 export interface ProductRevertStagedChangesAction {
   readonly action: 'revertStagedChanges'
@@ -539,46 +539,46 @@ export interface ProductRevertStagedVariantChangesAction {
 }
 export interface ProductSetAssetCustomFieldAction {
   readonly action: 'setAssetCustomField'
-  readonly assetId?: string
-  readonly name: string
-  readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
-  readonly value?: any
+  readonly staged?: boolean
+  readonly assetId?: string
   readonly assetKey?: string
+  readonly name: string
+  readonly value?: any
 }
 export interface ProductSetAssetCustomTypeAction {
   readonly action: 'setAssetCustomType'
-  readonly assetId?: string
-  readonly staged?: boolean
   readonly variantId?: number
-  /**
-   *	If set, the custom fields are set to this new value.
-   */
-  readonly fields?: any
+  readonly sku?: string
+  readonly staged?: boolean
+  readonly assetId?: string
+  readonly assetKey?: string
   /**
    *	If set, the custom type is set to this new value.
    *	If absent, the custom type and any existing custom fields are removed.
    */
   readonly type?: TypeResourceIdentifier
-  readonly sku?: string
-  readonly assetKey?: string
+  /**
+   *	If set, the custom fields are set to this new value.
+   */
+  readonly fields?: any
 }
 export interface ProductSetAssetDescriptionAction {
   readonly action: 'setAssetDescription'
-  readonly assetId?: string
-  readonly description?: LocalizedString
-  readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
+  readonly staged?: boolean
+  readonly assetId?: string
   readonly assetKey?: string
+  readonly description?: LocalizedString
 }
 export interface ProductSetAssetKeyAction {
   readonly action: 'setAssetKey'
-  readonly assetId: string
-  readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
+  readonly staged?: boolean
+  readonly assetId: string
   /**
    *	User-defined identifier for the asset.
    *	If left blank or set to `null`, the asset key is unset/removed.
@@ -587,49 +587,49 @@ export interface ProductSetAssetKeyAction {
 }
 export interface ProductSetAssetSourcesAction {
   readonly action: 'setAssetSources'
-  readonly sources: AssetSource[]
-  readonly assetId?: string
-  readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
+  readonly staged?: boolean
+  readonly assetId?: string
   readonly assetKey?: string
+  readonly sources: AssetSource[]
 }
 export interface ProductSetAssetTagsAction {
   readonly action: 'setAssetTags'
-  readonly assetId?: string
-  readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
+  readonly staged?: boolean
+  readonly assetId?: string
   readonly assetKey?: string
   readonly tags?: string[]
 }
 export interface ProductSetAttributeAction {
   readonly action: 'setAttribute'
-  readonly name: string
-  readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
+  readonly name: string
   /**
    *	If the attribute exists and the value is omitted or set to `null`, the attribute is removed.
    *	If the attribute exists and a value is provided, the new value is applied.
    *	If the attribute does not exist and a value is provided, it is added as a new attribute.
    */
   readonly value?: any
+  readonly staged?: boolean
 }
 export interface ProductSetAttributeInAllVariantsAction {
   readonly action: 'setAttributeInAllVariants'
   readonly name: string
-  readonly staged?: boolean
   /**
    *	The same update behavior as for Set Attribute applies.
    */
   readonly value?: any
+  readonly staged?: boolean
 }
 export interface ProductSetCategoryOrderHintAction {
   readonly action: 'setCategoryOrderHint'
+  readonly categoryId: string
   readonly orderHint?: string
   readonly staged?: boolean
-  readonly categoryId: string
 }
 export interface ProductSetDescriptionAction {
   readonly action: 'setDescription'
@@ -638,24 +638,24 @@ export interface ProductSetDescriptionAction {
 }
 export interface ProductSetDiscountedPriceAction {
   readonly action: 'setDiscountedPrice'
-  readonly discounted?: DiscountedPrice
-  readonly staged?: boolean
   readonly priceId: string
+  readonly staged?: boolean
+  readonly discounted?: DiscountedPrice
 }
 export interface ProductSetImageLabelAction {
   readonly action: 'setImageLabel'
+  readonly sku?: string
+  readonly variantId?: number
   /**
    *	The URL of the image.
    */
   readonly imageUrl: string
-  readonly staged?: boolean
   /**
    *	The new image label.
    *	If left blank or set to null, the label is removed.
    */
   readonly label?: string
-  readonly variantId?: number
-  readonly sku?: string
+  readonly staged?: boolean
 }
 export interface ProductSetKeyAction {
   readonly action: 'setKey'
@@ -667,8 +667,8 @@ export interface ProductSetKeyAction {
 }
 export interface ProductSetMetaDescriptionAction {
   readonly action: 'setMetaDescription'
-  readonly staged?: boolean
   readonly metaDescription?: LocalizedString
+  readonly staged?: boolean
 }
 export interface ProductSetMetaKeywordsAction {
   readonly action: 'setMetaKeywords'
@@ -682,34 +682,34 @@ export interface ProductSetMetaTitleAction {
 }
 export interface ProductSetPricesAction {
   readonly action: 'setPrices'
-  readonly staged?: boolean
   readonly variantId?: number
-  readonly prices: PriceDraft[]
   readonly sku?: string
+  readonly prices: PriceDraft[]
+  readonly staged?: boolean
 }
 export interface ProductSetProductPriceCustomFieldAction {
   readonly action: 'setProductPriceCustomField'
-  readonly name: string
-  readonly staged?: boolean
   readonly priceId: string
+  readonly staged?: boolean
+  readonly name: string
   readonly value?: any
 }
 export interface ProductSetProductPriceCustomTypeAction {
   readonly action: 'setProductPriceCustomType'
-  readonly staged?: boolean
-  readonly fields?: FieldContainer
-  readonly type?: TypeResourceIdentifier
   readonly priceId: string
+  readonly staged?: boolean
+  readonly type?: TypeResourceIdentifier
+  readonly fields?: FieldContainer
 }
 export interface ProductSetProductVariantKeyAction {
   readonly action: 'setProductVariantKey'
-  readonly staged?: boolean
   readonly variantId?: number
   readonly sku?: string
   /**
    *	If left blank or set to `null`, the key is unset/removed.
    */
   readonly key?: string
+  readonly staged?: boolean
 }
 export interface ProductSetSearchKeywordsAction {
   readonly action: 'setSearchKeywords'
@@ -718,13 +718,13 @@ export interface ProductSetSearchKeywordsAction {
 }
 export interface ProductSetSkuAction {
   readonly action: 'setSku'
-  readonly staged?: boolean
   readonly variantId: number
   /**
    *	SKU must be unique.
    *	If left blank or set to `null`, the sku is unset/removed.
    */
   readonly sku?: string
+  readonly staged?: boolean
 }
 export interface ProductSetTaxCategoryAction {
   readonly action: 'setTaxCategory'
@@ -735,8 +735,8 @@ export interface ProductSetTaxCategoryAction {
 }
 export interface ProductTransitionStateAction {
   readonly action: 'transitionState'
-  readonly force?: boolean
   readonly state?: StateResourceIdentifier
+  readonly force?: boolean
 }
 export interface ProductUnpublishAction {
   readonly action: 'unpublish'

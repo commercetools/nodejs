@@ -119,19 +119,19 @@ export interface AttributePlainEnumValue {
   readonly label: string
 }
 export type AttributeType =
-  | AttributeBooleanType
-  | AttributeDateTimeType
-  | AttributeDateType
-  | AttributeEnumType
-  | AttributeLocalizableTextType
   | AttributeLocalizedEnumType
+  | AttributeDateType
   | AttributeMoneyType
-  | AttributeNestedType
-  | AttributeNumberType
+  | AttributeEnumType
   | AttributeReferenceType
-  | AttributeSetType
-  | AttributeTextType
+  | AttributeNestedType
+  | AttributeDateTimeType
   | AttributeTimeType
+  | AttributeTextType
+  | AttributeLocalizableTextType
+  | AttributeBooleanType
+  | AttributeSetType
+  | AttributeNumberType
 export interface AttributeBooleanType {
   readonly name: 'boolean'
 }
@@ -275,13 +275,13 @@ export interface ProductTypeAddPlainEnumValueAction {
 }
 export interface ProductTypeChangeAttributeConstraintAction {
   readonly action: 'changeAttributeConstraint'
-  readonly newValue: AttributeConstraintEnumDraft
   readonly attributeName: string
+  readonly newValue: AttributeConstraintEnumDraft
 }
 export interface ProductTypeChangeAttributeNameAction {
   readonly action: 'changeAttributeName'
-  readonly newAttributeName: string
   readonly attributeName: string
+  readonly newAttributeName: string
 }
 export interface ProductTypeChangeAttributeOrderAction {
   readonly action: 'changeAttributeOrder'
@@ -297,14 +297,14 @@ export interface ProductTypeChangeDescriptionAction {
 }
 export interface ProductTypeChangeEnumKeyAction {
   readonly action: 'changeEnumKey'
-  readonly newKey: string
   readonly attributeName: string
   readonly key: string
+  readonly newKey: string
 }
 export interface ProductTypeChangeInputHintAction {
   readonly action: 'changeInputHint'
-  readonly newValue: TextInputHint
   readonly attributeName: string
+  readonly newValue: TextInputHint
 }
 export interface ProductTypeChangeIsSearchableAction {
   readonly action: 'changeIsSearchable'
@@ -318,13 +318,13 @@ export interface ProductTypeChangeLabelAction {
 }
 export interface ProductTypeChangeLocalizedEnumValueLabelAction {
   readonly action: 'changeLocalizedEnumValueLabel'
-  readonly newValue: AttributeLocalizedEnumValue
   readonly attributeName: string
+  readonly newValue: AttributeLocalizedEnumValue
 }
 export interface ProductTypeChangeLocalizedEnumValueOrderAction {
   readonly action: 'changeLocalizedEnumValueOrder'
-  readonly values: AttributeLocalizedEnumValue[]
   readonly attributeName: string
+  readonly values: AttributeLocalizedEnumValue[]
 }
 export interface ProductTypeChangeNameAction {
   readonly action: 'changeName'
@@ -332,13 +332,13 @@ export interface ProductTypeChangeNameAction {
 }
 export interface ProductTypeChangePlainEnumValueLabelAction {
   readonly action: 'changePlainEnumValueLabel'
-  readonly newValue: AttributePlainEnumValue
   readonly attributeName: string
+  readonly newValue: AttributePlainEnumValue
 }
 export interface ProductTypeChangePlainEnumValueOrderAction {
   readonly action: 'changePlainEnumValueOrder'
-  readonly values: AttributePlainEnumValue[]
   readonly attributeName: string
+  readonly values: AttributePlainEnumValue[]
 }
 export interface ProductTypeRemoveAttributeDefinitionAction {
   readonly action: 'removeAttributeDefinition'
@@ -349,8 +349,8 @@ export interface ProductTypeRemoveAttributeDefinitionAction {
 }
 export interface ProductTypeRemoveEnumValuesAction {
   readonly action: 'removeEnumValues'
-  readonly keys: string[]
   readonly attributeName: string
+  readonly keys: string[]
 }
 export interface ProductTypeSetInputTipAction {
   readonly action: 'setInputTip'

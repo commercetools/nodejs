@@ -1,3 +1,118 @@
+## @commercetools/sync-actions@4.7.0 (2020-04-28)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1543](https://github.com/commercetools/nodejs/pull/1543) feat(SyncActions): Add CustomType actions in inventory entries ([@NickDevG](https://github.com/NickDevG))
+
+#### Committers: 1
+
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/state-importer@3.0.19 (2020-04-28)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1543](https://github.com/commercetools/nodejs/pull/1543) feat(SyncActions): Add CustomType actions in inventory entries ([@NickDevG](https://github.com/NickDevG))
+
+#### Committers: 1
+
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/integration-tests@0.0.32 (2020-04-28)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1543](https://github.com/commercetools/nodejs/pull/1543) feat(SyncActions): Add CustomType actions in inventory entries ([@NickDevG](https://github.com/NickDevG))
+
+#### Committers: 1
+
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/discount-code-importer@3.0.19 (2020-04-28)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1543](https://github.com/commercetools/nodejs/pull/1543) feat(SyncActions): Add CustomType actions in inventory entries ([@NickDevG](https://github.com/NickDevG))
+
+#### Committers: 1
+
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/custom-objects-importer@3.0.19 (2020-04-28)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1543](https://github.com/commercetools/nodejs/pull/1543) feat(SyncActions): Add CustomType actions in inventory entries ([@NickDevG](https://github.com/NickDevG))
+
+#### Committers: 1
+
+- Nicolas Lucero ([@NickDevG](https://github.com/NickDevG))
+
+## @commercetools/typescript-sdk@0.0.20-alpha.0 (2020-04-28)
+
+#### :house: Maintenance
+
+- `product-json-to-csv`
+  - [#1538](https://github.com/commercetools/nodejs/pull/1538) fix(deps): update dependency archiver to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/product-json-to-xlsx@4.0.7 (2020-04-28)
+
+#### :house: Maintenance
+
+- `product-json-to-csv`
+  - [#1538](https://github.com/commercetools/nodejs/pull/1538) fix(deps): update dependency archiver to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/product-json-to-csv@5.0.7 (2020-04-28)
+
+#### :house: Maintenance
+
+- `product-json-to-csv`
+  - [#1538](https://github.com/commercetools/nodejs/pull/1538) fix(deps): update dependency archiver to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/integration-tests@0.0.30 (2020-04-28)
+
+#### :house: Maintenance
+
+- `product-json-to-csv`
+  - [#1538](https://github.com/commercetools/nodejs/pull/1538) fix(deps): update dependency archiver to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/csv-parser-price@4.0.16 (2020-04-28)
+
+#### :house: Maintenance
+
+- `product-json-to-csv`
+  - [#1538](https://github.com/commercetools/nodejs/pull/1538) fix(deps): update dependency archiver to v4 ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
 ## @commercetools/sync-actions@4.6.1 (2020-04-24)
 
 #### :bug: Bug Fix

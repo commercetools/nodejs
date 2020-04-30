@@ -39,6 +39,7 @@ export interface Store extends BaseResource {
    *	The name of the store
    */
   readonly name?: LocalizedString
+  readonly languages?: string[]
 }
 export interface StoreDraft {
   /**
@@ -51,6 +52,7 @@ export interface StoreDraft {
    *	The name of the store
    */
   readonly name: LocalizedString
+  readonly languages?: string[]
 }
 export interface StoreKeyReference {
   readonly typeId: 'store'
@@ -77,7 +79,11 @@ export interface StoreUpdate {
   readonly version: number
   readonly actions: StoreUpdateAction[]
 }
-export type StoreUpdateAction = StoreSetNameAction
+export type StoreUpdateAction = StoreSetLanguagesAction | StoreSetNameAction
+export interface StoreSetLanguagesAction {
+  readonly action: 'setLanguages'
+  readonly languages?: string[]
+}
 export interface StoreSetNameAction {
   readonly action: 'setName'
   /**

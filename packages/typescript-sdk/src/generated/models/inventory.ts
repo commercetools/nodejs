@@ -129,14 +129,14 @@ export interface InventoryEntrySetCustomFieldAction {
 export interface InventoryEntrySetCustomTypeAction {
   readonly action: 'setCustomType'
   /**
+   *	If absent, the custom type and any existing CustomFields are removed.
+   */
+  readonly type?: TypeResourceIdentifier
+  /**
    *	A valid JSON object, based on the FieldDefinitions of the Type.
    *	Sets the custom fields to this value.
    */
   readonly fields?: FieldContainer
-  /**
-   *	If absent, the custom type and any existing CustomFields are removed.
-   */
-  readonly type?: TypeResourceIdentifier
 }
 export interface InventoryEntrySetExpectedDeliveryAction {
   readonly action: 'setExpectedDelivery'

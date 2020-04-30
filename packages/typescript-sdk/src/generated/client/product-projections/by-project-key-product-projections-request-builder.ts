@@ -94,6 +94,8 @@ export class ByProjectKeyProductProjectionsRequestBuilder {
       priceCountry?: string | string[]
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
+      localeProjection?: string | string[]
+      storeProjection?: string | string[]
       expand?: string | string[]
       sort?: string | string[]
       limit?: number | number[]

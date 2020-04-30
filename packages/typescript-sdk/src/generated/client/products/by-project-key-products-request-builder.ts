@@ -67,6 +67,8 @@ export class ByProjectKeyProductsRequestBuilder {
       priceCountry?: string | string[]
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
+      localeProjection?: string | string[]
+      storeProjection?: string | string[]
       expand?: string | string[]
       sort?: string | string[]
       limit?: number | number[]
@@ -105,6 +107,8 @@ export class ByProjectKeyProductsRequestBuilder {
       priceCountry?: string | string[]
       priceCustomerGroup?: string | string[]
       priceChannel?: string | string[]
+      localeProjection?: string | string[]
+      storeProjection?: string | string[]
       expand?: string | string[]
       [key: string]: QueryParam
     }
