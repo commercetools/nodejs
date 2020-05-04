@@ -217,6 +217,73 @@ describe('Actions', () => {
             validFrom: dateNow,
             validUntil: twoWeeksFromNow,
           },
+          {
+            // set price custom type
+            id: '888',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+          },
+          {
+            // set price custom type and field
+            id: '999',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+          },
+          {
+            // change price custom field
+            id: '1010',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+            custom: {
+              type: {
+                typeId: 'type',
+                id: '5678',
+              },
+              fields: {
+                source: 'shop',
+              },
+            },
+          },
+          {
+            // remove price custom field
+            id: '1111',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+            custom: {
+              type: {
+                typeId: 'type',
+                id: '5678',
+              },
+              fields: {
+                source: 'shop',
+              },
+            },
+          },
+          {
+            // action `changePrice` should contian custom object
+            id: '2222',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+            custom: {
+              type: {
+                typeId: 'type',
+                id: '5678',
+              },
+              fields: {
+                source: 'shop',
+              },
+            },
+          },
         ],
       },
     }
@@ -257,6 +324,79 @@ describe('Actions', () => {
             validFrom: twoWeeksFromNow,
             validUntil: threeWeeksFromNow,
           },
+          {
+            // set price custom type
+            id: '888',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+            custom: {
+              type: {
+                typeId: 'type',
+                id: '5678',
+              },
+            },
+          },
+          {
+            // set price custom type and field
+            id: '999',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+            custom: {
+              type: {
+                typeId: 'type',
+                id: '5678',
+              },
+              fields: {
+                source: 'shop',
+              },
+            },
+          },
+          {
+            // change price custom field
+            id: '1010',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+            custom: {
+              type: {
+                typeId: 'type',
+                id: '5678',
+              },
+              fields: {
+                source: 'random',
+              },
+            },
+          },
+          {
+            // remove price custom field and type
+            id: '1111',
+            value: { currencyCode: 'GBP', centAmount: 1000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+          },
+          {
+            // action `changePrice` should contian custom object
+            id: '2222',
+            value: { currencyCode: 'GBP', centAmount: 2000 },
+            country: 'UK',
+            validFrom: dateNow,
+            validUntil: twoWeeksFromNow,
+            custom: {
+              type: {
+                typeId: 'type',
+                id: '5678',
+              },
+              fields: {
+                source: 'shop',
+              },
+            },
+          },
         ],
       },
     }
@@ -267,7 +407,7 @@ describe('Actions', () => {
     })
 
     test('should build five update actions', () => {
-      expect(actions).toHaveLength(5)
+      expect(actions).toHaveLength(14)
     })
 
     test('should build `changePrice` actions', () => {
@@ -335,6 +475,95 @@ describe('Actions', () => {
               validUntil: threeWeeksFromNow,
             },
             variantId: 1,
+          },
+        ])
+      )
+    })
+
+    test('should build `changePrice` action without deleting `custom` prop', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'changePrice',
+            price: {
+              id: '2222',
+              value: {
+                currencyCode: 'GBP',
+                centAmount: 2000,
+                fractionDigits: undefined,
+                type: undefined,
+              },
+              country: 'UK',
+              validFrom: dateNow,
+              validUntil: twoWeeksFromNow,
+              custom: {
+                type: {
+                  typeId: 'type',
+                  id: '5678',
+                },
+                fields: {
+                  source: 'shop',
+                },
+              },
+            },
+            priceId: '2222',
+          },
+        ])
+      )
+    })
+
+    test('should build `setProductPriceCustomType` action without fields', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setProductPriceCustomType',
+            priceId: '888',
+            type: {
+              id: '5678',
+              typeId: 'type',
+            },
+          },
+        ])
+      )
+    })
+
+    test('should build `setProductPriceCustomType` action', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setProductPriceCustomType',
+            priceId: '999',
+            type: {
+              id: '5678',
+              typeId: 'type',
+            },
+            fields: {
+              source: 'shop',
+            },
+          },
+        ])
+      )
+    })
+
+    test('should build `setProductPriceCustomType` action which delete custom type', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setProductPriceCustomType',
+            priceId: '1111',
+          },
+        ])
+      )
+    })
+
+    test('should build `setProductPriceCustomField` action', () => {
+      expect(actions).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setProductPriceCustomField',
+            name: 'source',
+            priceId: '1010',
+            value: 'random',
           },
         ])
       )

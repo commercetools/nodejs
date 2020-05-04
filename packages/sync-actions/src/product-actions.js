@@ -3,6 +3,7 @@ import forEach from 'lodash.foreach'
 import uniqWith from 'lodash.uniqwith'
 import * as diffpatcher from './utils/diffpatcher'
 import extractMatchingPairs from './utils/extract-matching-pairs'
+import actionsMapCustom from './utils/action-map-custom'
 import {
   buildBaseAttributesActions,
   buildReferenceActions,
@@ -633,6 +634,65 @@ export function actionsMapPrices(diff, oldObj, newObj, variantHashMap) {
     })
 
   return changePriceActions.concat(removePriceActions).concat(addPriceActions)
+}
+
+export function actionsMapPricesCustom(diff, oldObj, newObj, variantHashMap) {
+  let actions = []
+
+  const { variants } = diff
+
+  if (variants)
+    forEach(variants, (variant, key) => {
+      const { oldObj: oldVariant, newObj: newVariant } = extractMatchingPairs(
+        variantHashMap,
+        key,
+        oldObj.variants,
+        newObj.variants
+      )
+
+      if (
+        variant &&
+        variant.prices &&
+        (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key))
+      ) {
+        const priceHashMap = findMatchingPairs(
+          variant.prices,
+          oldVariant.prices,
+          newVariant.prices
+        )
+
+        forEach(variant.prices, (price, index) => {
+          const { oldObj: oldPrice, newObj: newPrice } = extractMatchingPairs(
+            priceHashMap,
+            index,
+            oldVariant.prices,
+            newVariant.prices
+          )
+
+          if (
+            price.custom &&
+            (REGEX_UNDERSCORE_NUMBER.test(index) || REGEX_NUMBER.test(index))
+          ) {
+            const generatedActions = actionsMapCustom(
+              price,
+              newPrice,
+              oldPrice,
+              {
+                actions: {
+                  setCustomType: 'setProductPriceCustomType',
+                  setCustomField: 'setProductPriceCustomField',
+                },
+                priceId: oldPrice.id,
+              }
+            )
+
+            actions = actions.concat(generatedActions)
+          }
+        })
+      }
+    })
+
+  return actions
 }
 
 export function actionsMapMasterVariant(oldObj, newObj) {

@@ -26,21 +26,30 @@ const extractTypeFields = (diffedFields, nextFields) =>
     : nextFields
 const extractFieldValue = (newFields, fieldName) => newFields[fieldName]
 
-export default function actionsMapCustom(diff, newObj, oldObj) {
+export default function actionsMapCustom(
+  diff,
+  newObj,
+  oldObj,
+  customProps = { actions: {} }
+) {
   const actions = []
+  const priceId = customProps.priceId
+  const actionGroup = { ...Actions, ...customProps.actions }
+
   if (!diff.custom) return actions
   if (hasSingleCustomFieldChanged(diff)) {
     // If custom is not defined on the new or old category
     const custom = diffpatcher.getDeltaValue(diff.custom, oldObj)
-    actions.push({ action: Actions.setCustomType, ...custom })
+    actions.push({ action: actionGroup.setCustomType, priceId, ...custom })
   } else if (hasCustomTypeChanged(diff)) {
     // If custom is set to an empty object on the new or old category
     const type = extractCustomType(diff, oldObj)
 
-    if (!type) actions.push({ action: Actions.setCustomType })
+    if (!type) actions.push({ action: actionGroup.setCustomType, priceId })
     else if (type.id)
       actions.push({
-        action: Actions.setCustomType,
+        action: actionGroup.setCustomType,
+        priceId,
         type: {
           typeId: 'type',
           id: extractTypeId(type, newObj),
@@ -49,7 +58,8 @@ export default function actionsMapCustom(diff, newObj, oldObj) {
       })
     else if (type.key)
       actions.push({
-        action: Actions.setCustomType,
+        action: actionGroup.setCustomType,
+        priceId,
         type: {
           typeId: 'type',
           key: extractTypeKey(type, newObj),
@@ -58,7 +68,8 @@ export default function actionsMapCustom(diff, newObj, oldObj) {
       })
   } else if (haveMultipleCustomFieldsChanged(diff)) {
     const customFieldsActions = Object.keys(diff.custom.fields).map((name) => ({
-      action: Actions.setCustomField,
+      action: actionGroup.setCustomField,
+      priceId,
       name,
       value: extractFieldValue(newObj.custom.fields, name),
     }))

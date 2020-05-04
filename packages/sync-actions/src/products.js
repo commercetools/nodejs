@@ -18,6 +18,7 @@ const actionGroups = [
   'meta',
   'references',
   'prices',
+  'pricesCustom',
   'attributes',
   'images',
   'variants',
@@ -96,6 +97,17 @@ function createProductMapActions(
     allActions.push(
       mapActionGroup('prices', (): Array<UpdateAction> =>
         productActions.actionsMapPrices(diff, oldObj, newObj, variantHashMap)
+      )
+    )
+
+    allActions.push(
+      mapActionGroup('pricesCustom', (): Array<UpdateAction> =>
+        productActions.actionsMapPricesCustom(
+          diff,
+          oldObj,
+          newObj,
+          variantHashMap
+        )
       )
     )
 
