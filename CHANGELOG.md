@@ -1,3 +1,58 @@
+## @commercetools/sync-actions@4.7.1 (2020-05-04)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1533](https://github.com/commercetools/nodejs/pull/1533) Feat support custom price ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/state-importer@3.0.20 (2020-05-04)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1533](https://github.com/commercetools/nodejs/pull/1533) Feat support custom price ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/integration-tests@0.0.33 (2020-05-04)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1533](https://github.com/commercetools/nodejs/pull/1533) Feat support custom price ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/discount-code-importer@3.0.20 (2020-05-04)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1533](https://github.com/commercetools/nodejs/pull/1533) Feat support custom price ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/custom-objects-importer@3.0.20 (2020-05-04)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1533](https://github.com/commercetools/nodejs/pull/1533) Feat support custom price ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### Committers: 1
+
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
 ## @commercetools/sync-actions@4.7.0 (2020-04-28)
 
 #### :rocket: New Feature
