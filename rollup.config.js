@@ -51,7 +51,7 @@ const plugins = [
   }),
 ].filter(Boolean)
 
-const createConfig = cliArgs => [
+const createConfig = (cliArgs) => [
   {
     input: cliArgs.input,
     output: {

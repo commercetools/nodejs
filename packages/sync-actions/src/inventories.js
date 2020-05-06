@@ -4,7 +4,7 @@ import type {
   SyncAction,
   SyncActionConfig,
   UpdateAction,
-  ActionGroup
+  ActionGroup,
 } from 'types/sdk'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'

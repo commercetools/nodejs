@@ -10,7 +10,7 @@ const log = require('debug')('eslint-plugin-import:resolver:node')
 
 module.exports.interfaceVersion = 2
 
-const packageFilter = pkg => {
+const packageFilter = (pkg) => {
   if (pkg['jsnext:main']) {
     pkg.main = pkg['jsnext:main']
   }
@@ -27,7 +27,7 @@ const opts = (file, config) => ({
 })
 
 const applyModuleNameMapper = (source, config) => {
-  Object.keys(config.moduleNameMapper).forEach(regex => {
+  Object.keys(config.moduleNameMapper).forEach((regex) => {
     const mappedModuleName = config.moduleNameMapper[regex]
 
     if (source.match(regex)) {
