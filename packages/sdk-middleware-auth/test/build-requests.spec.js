@@ -6,7 +6,7 @@ import {
   buildRequestForRefreshTokenFlow,
   buildRequestForAnonymousSessionFlow,
 } from '../src/build-requests'
-import { scopes } from '../src'
+import * as scopes from '../src/scopes'
 
 const allScopes = Object.keys(scopes).map((key) => scopes[key])
 
