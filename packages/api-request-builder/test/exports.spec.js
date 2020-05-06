@@ -1,5 +1,5 @@
 import { createRequestBuilder } from '../src'
-import features from '../src/features'
+import * as features from '../src/features'
 
 describe('exports', () => {
   test('default', () => {
