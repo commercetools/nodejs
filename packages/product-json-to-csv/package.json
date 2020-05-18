@@ -61,12 +61,12 @@
     "pretty-error": "^2.1.1",
     "single-emit": "^2.0.0",
     "slugify": "^1.3.4",
-    "tmp": "^0.1.0",
+    "tmp": "^0.2.0",
     "yargs": "^15.0.0"
   },
   "devDependencies": {
     "stream-to-string": "1.2.0",
     "streamtest": "1.2.4",
-    "unzipper": "0.10.10"
+    "unzipper": "0.10.11"
   }
 }
