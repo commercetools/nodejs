@@ -104,7 +104,7 @@
     "lerna": "3.20.2",
     "lerna-changelog": "1.0.0",
     "lint-staged": "10.0.8",
-    "npm-check-updates": "4.0.3",
+    "npm-check-updates": "6.0.1",
     "prettier": "2.0.2",
     "resolve": "1.15.1",
     "rimraf": "3.0.2",
