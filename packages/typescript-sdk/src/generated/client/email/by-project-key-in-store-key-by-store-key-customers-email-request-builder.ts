@@ -11,8 +11,7 @@
  *
  */
 import { ByProjectKeyInStoreKeyByStoreKeyCustomersEmailConfirmRequestBuilder } from 'client/confirm/by-project-key-in-store-key-by-store-key-customers-email-confirm-request-builder'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
-import { ApiRequest } from 'shared/utils/requests-utils'
+import { executeRequest } from 'shared/utils/common-types'
 
 export class ByProjectKeyInStoreKeyByStoreKeyCustomersEmailRequestBuilder {
   constructor(

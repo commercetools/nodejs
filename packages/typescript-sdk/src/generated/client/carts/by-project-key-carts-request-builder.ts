@@ -14,7 +14,7 @@ import { ByProjectKeyCartsByIDRequestBuilder } from 'client/carts/by-project-key
 import { ByProjectKeyCartsCustomerIdByCustomerIdRequestBuilder } from 'client/carts/by-project-key-carts-customer-id-by-customer-id-request-builder'
 import { ByProjectKeyCartsReplicateRequestBuilder } from 'client/replicate/by-project-key-carts-replicate-request-builder'
 import { Cart, CartDraft, CartPagedQueryResponse } from 'models/cart'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyCartsRequestBuilder {

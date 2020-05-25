@@ -16,9 +16,6 @@ import {
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  Reference,
-  ReferenceTypeId,
-  ResourceIdentifier,
 } from 'models/common'
 
 export interface State extends BaseResource {

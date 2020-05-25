@@ -11,13 +11,7 @@
  *
  */
 
-import {
-  BaseResource,
-  CreatedBy,
-  LastModifiedBy,
-  Reference,
-  ReferenceTypeId,
-} from 'models/common'
+import { BaseResource, CreatedBy, LastModifiedBy } from 'models/common'
 
 export interface CustomObject extends BaseResource {
   readonly id: string

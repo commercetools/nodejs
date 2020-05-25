@@ -11,8 +11,7 @@
  *
  */
 import { ByProjectKeyRequestBuilder } from 'client/by-project-key-request-builder'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
-import { ApiRequest } from 'shared/utils/requests-utils'
+import { executeRequest } from 'shared/utils/common-types'
 
 export class ApiRoot {
   private executeRequest: executeRequest

@@ -13,7 +13,7 @@
 import { ByProjectKeyReviewsByIDRequestBuilder } from 'client/reviews/by-project-key-reviews-by-id-request-builder'
 import { ByProjectKeyReviewsKeyByKeyRequestBuilder } from 'client/reviews/by-project-key-reviews-key-by-key-request-builder'
 import { Review, ReviewDraft, ReviewPagedQueryResponse } from 'models/review'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyReviewsRequestBuilder {

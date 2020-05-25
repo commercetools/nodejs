@@ -12,7 +12,7 @@
  */
 import { ByProjectKeyProductsByIDImagesRequestBuilder } from 'client/images/by-project-key-products-by-id-images-request-builder'
 import { Product, ProductUpdate } from 'models/product'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductsByIDRequestBuilder {

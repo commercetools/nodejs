@@ -10,8 +10,8 @@
  *                    `Y'
  *
  */
-import { CustomerSignInResult, CustomerSignin } from 'models/customer'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { CustomerSignin, CustomerSignInResult } from 'models/customer'
+import { executeRequest } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyLoginRequestBuilder {

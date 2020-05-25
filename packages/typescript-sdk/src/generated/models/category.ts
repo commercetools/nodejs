@@ -19,9 +19,6 @@ import {
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  Reference,
-  ReferenceTypeId,
-  ResourceIdentifier,
 } from 'models/common'
 import {
   CustomFields,

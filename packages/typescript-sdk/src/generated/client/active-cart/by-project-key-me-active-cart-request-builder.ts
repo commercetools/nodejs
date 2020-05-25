@@ -11,7 +11,7 @@
  *
  */
 import { MyCart } from 'models/me'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeActiveCartRequestBuilder {

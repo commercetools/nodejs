@@ -12,26 +12,17 @@
  */
 
 import {
-  CartOrigin,
-  CartReference,
-  CustomLineItem,
-  DiscountCodeInfo,
   ExternalLineItemTotalPrice,
   ExternalTaxAmountDraft,
   ExternalTaxRateDraft,
-  InventoryMode,
   ItemShippingDetailsDraft,
-  LineItem,
   RoundingMode,
-  ShippingInfo,
-  ShippingRateInput,
   ShippingRateInputDraft,
   TaxCalculationMode,
+  TaxedPrice,
   TaxMode,
   TaxPortionDraft,
-  TaxedPrice,
 } from 'models/cart'
-import { CartDiscountReference } from 'models/cart-discount'
 import { ChannelResourceIdentifier } from 'models/channel'
 import {
   Address,
@@ -40,15 +31,9 @@ import {
   LastModifiedBy,
   LocalizedString,
   Money,
-  Reference,
-  ReferenceTypeId,
-  ResourceIdentifier,
   TypedMoney,
 } from 'models/common'
-import {
-  CustomerGroupReference,
-  CustomerGroupResourceIdentifier,
-} from 'models/customer-group'
+import { CustomerGroupResourceIdentifier } from 'models/customer-group'
 import { DiscountCodeReference } from 'models/discount-code'
 import { ErrorObject } from 'models/error'
 import { MessagePayload } from 'models/message'
@@ -60,15 +45,12 @@ import {
   OrderState,
   ParcelDraft,
   ParcelMeasurements,
-  PaymentInfo,
   PaymentState,
-  ReturnInfo,
   ReturnItemDraft,
   ReturnPaymentState,
   ReturnShipmentState,
   ShipmentState,
   StagedOrderUpdateAction,
-  SyncInfo,
   TrackingData,
 } from 'models/order'
 import { PaymentResourceIdentifier } from 'models/payment'
@@ -77,8 +59,7 @@ import {
   ShippingRateDraft,
 } from 'models/shipping-method'
 import { ShoppingListResourceIdentifier } from 'models/shopping-list'
-import { StateReference, StateResourceIdentifier } from 'models/state'
-import { StoreKeyReference } from 'models/store'
+import { StateResourceIdentifier } from 'models/state'
 import { TaxCategoryResourceIdentifier } from 'models/tax-category'
 import {
   CustomFields,

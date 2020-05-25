@@ -13,7 +13,7 @@
 import { ByProjectKeyStoresByIDRequestBuilder } from 'client/stores/by-project-key-stores-by-id-request-builder'
 import { ByProjectKeyStoresKeyByKeyRequestBuilder } from 'client/stores/by-project-key-stores-key-by-key-request-builder'
 import { Store, StoreDraft, StorePagedQueryResponse } from 'models/store'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyStoresRequestBuilder {

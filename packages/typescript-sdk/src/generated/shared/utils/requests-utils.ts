@@ -12,9 +12,9 @@
  */
 
 import {
+  ClientRequest,
   ClientResponse,
   executeRequest,
-  ClientRequest,
 } from 'shared/utils/common-types'
 import { buildRelativeUri } from 'shared/utils/uri-utils'
 

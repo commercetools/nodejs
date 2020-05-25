@@ -22,7 +22,7 @@ import { ByProjectKeyMeShoppingListsRequestBuilder } from 'client/shopping-lists
 import { ByProjectKeyMeSignupRequestBuilder } from 'client/signup/by-project-key-me-signup-request-builder'
 import { Update } from 'models/common'
 import { MyCustomer } from 'models/me'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeRequestBuilder {

@@ -16,9 +16,6 @@ import {
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  Reference,
-  ReferenceTypeId,
-  ResourceIdentifier,
 } from 'models/common'
 import { CustomerReference, CustomerResourceIdentifier } from 'models/customer'
 import { ProductVariant } from 'models/product'

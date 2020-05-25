@@ -12,7 +12,7 @@
  */
 import { ByProjectKeyMePasswordResetRequestBuilder } from 'client/reset/by-project-key-me-password-reset-request-builder'
 import { MyCustomer } from 'models/me'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMePasswordRequestBuilder {

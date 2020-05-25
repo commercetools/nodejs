@@ -12,14 +12,7 @@
  */
 
 import { ChannelResourceIdentifier } from 'models/channel'
-import {
-  BaseResource,
-  CreatedBy,
-  LastModifiedBy,
-  Reference,
-  ReferenceTypeId,
-  ResourceIdentifier,
-} from 'models/common'
+import { BaseResource, CreatedBy, LastModifiedBy } from 'models/common'
 import {
   CustomFields,
   CustomFieldsDraft,

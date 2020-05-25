@@ -11,8 +11,7 @@
  *
  */
 import { ByProjectKeyMeEmailConfirmRequestBuilder } from 'client/confirm/by-project-key-me-email-confirm-request-builder'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
-import { ApiRequest } from 'shared/utils/requests-utils'
+import { executeRequest } from 'shared/utils/common-types'
 
 export class ByProjectKeyMeEmailRequestBuilder {
   constructor(

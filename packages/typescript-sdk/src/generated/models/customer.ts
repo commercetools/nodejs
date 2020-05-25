@@ -11,15 +11,7 @@
  *
  */
 
-import {
-  Address,
-  BaseResource,
-  CreatedBy,
-  LastModifiedBy,
-  Reference,
-  ReferenceTypeId,
-  ResourceIdentifier,
-} from 'models/common'
+import { Address, BaseResource, CreatedBy, LastModifiedBy } from 'models/common'
 import {
   CustomerGroupReference,
   CustomerGroupResourceIdentifier,

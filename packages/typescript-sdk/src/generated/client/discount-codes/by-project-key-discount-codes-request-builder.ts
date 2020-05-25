@@ -16,7 +16,7 @@ import {
   DiscountCodeDraft,
   DiscountCodePagedQueryResponse,
 } from 'models/discount-code'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyDiscountCodesRequestBuilder {
