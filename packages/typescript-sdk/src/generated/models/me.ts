@@ -27,8 +27,8 @@ import {
   ShippingInfo,
   ShippingRateInput,
   TaxCalculationMode,
-  TaxMode,
   TaxedPrice,
+  TaxMode,
 } from 'models/cart'
 import { CartDiscountReference } from 'models/cart-discount'
 import { ChannelResourceIdentifier } from 'models/channel'

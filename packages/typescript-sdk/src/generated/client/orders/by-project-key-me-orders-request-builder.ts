@@ -13,7 +13,7 @@
 import { ByProjectKeyMeOrdersByIDRequestBuilder } from 'client/orders/by-project-key-me-orders-by-id-request-builder'
 import { MyOrder, MyOrderFromCartDraft } from 'models/me'
 import { OrderPagedQueryResponse } from 'models/order'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeOrdersRequestBuilder {

@@ -11,111 +11,72 @@
  *
  */
 
-import { Cart, CartReference, CartResourceIdentifier } from 'models/cart'
+import { CartReference, CartResourceIdentifier } from 'models/cart'
 import {
-  CartDiscount,
   CartDiscountReference,
   CartDiscountResourceIdentifier,
 } from 'models/cart-discount'
+import { CategoryReference, CategoryResourceIdentifier } from 'models/category'
+import { ChannelReference, ChannelResourceIdentifier } from 'models/channel'
+import { CustomObjectReference } from 'models/custom-object'
+import { CustomerReference, CustomerResourceIdentifier } from 'models/customer'
 import {
-  Category,
-  CategoryReference,
-  CategoryResourceIdentifier,
-} from 'models/category'
-import {
-  Channel,
-  ChannelReference,
-  ChannelResourceIdentifier,
-} from 'models/channel'
-import { CustomObject, CustomObjectReference } from 'models/custom-object'
-import {
-  Customer,
-  CustomerReference,
-  CustomerResourceIdentifier,
-} from 'models/customer'
-import {
-  CustomerGroup,
   CustomerGroupReference,
   CustomerGroupResourceIdentifier,
 } from 'models/customer-group'
 import {
-  DiscountCode,
   DiscountCodeReference,
   DiscountCodeResourceIdentifier,
 } from 'models/discount-code'
-import { Extension } from 'models/extension'
 import {
-  InventoryEntry,
   InventoryEntryReference,
   InventoryEntryResourceIdentifier,
 } from 'models/inventory'
-import { MyCart, MyCustomer, MyOrder } from 'models/me'
-import { Message } from 'models/message'
-import { Order, OrderReference, OrderResourceIdentifier } from 'models/order'
+import { OrderReference, OrderResourceIdentifier } from 'models/order'
 import {
-  OrderEdit,
   OrderEditReference,
   OrderEditResourceIdentifier,
 } from 'models/order-edit'
-import {
-  Payment,
-  PaymentReference,
-  PaymentResourceIdentifier,
-} from 'models/payment'
+import { PaymentReference, PaymentResourceIdentifier } from 'models/payment'
 import {
   FacetResults,
-  Product,
-  ProductProjection,
   ProductReference,
   ProductResourceIdentifier,
 } from 'models/product'
 import {
-  ProductDiscount,
   ProductDiscountReference,
   ProductDiscountResourceIdentifier,
 } from 'models/product-discount'
 import {
-  ProductType,
   ProductTypeReference,
   ProductTypeResourceIdentifier,
 } from 'models/product-type'
+import { ReviewReference, ReviewResourceIdentifier } from 'models/review'
 import {
-  Review,
-  ReviewReference,
-  ReviewResourceIdentifier,
-} from 'models/review'
-import {
-  ShippingMethod,
   ShippingMethodReference,
   ShippingMethodResourceIdentifier,
 } from 'models/shipping-method'
 import {
-  MyShoppingList,
-  ShoppingList,
   ShoppingListReference,
   ShoppingListResourceIdentifier,
 } from 'models/shopping-list'
-import { State, StateReference, StateResourceIdentifier } from 'models/state'
+import { StateReference, StateResourceIdentifier } from 'models/state'
 import {
-  Store,
   StoreKeyReference,
   StoreReference,
   StoreResourceIdentifier,
 } from 'models/store'
-import { Subscription } from 'models/subscription'
 import {
-  TaxCategory,
   TaxCategoryReference,
   TaxCategoryResourceIdentifier,
 } from 'models/tax-category'
 import {
   CustomFields,
   CustomFieldsDraft,
-  Type,
   TypeReference,
   TypeResourceIdentifier,
 } from 'models/type'
-import { Zone, ZoneReference, ZoneResourceIdentifier } from 'models/zone'
+import { ZoneReference, ZoneResourceIdentifier } from 'models/zone'
 
 export interface PagedQueryResponse {
   readonly limit: number
@@ -311,10 +272,10 @@ export type Reference =
   | TaxCategoryReference
   | TypeReference
   | ZoneReference
-  | CartDiscountReference
-  | CartReference
   | CategoryReference
+  | CartReference
   | ChannelReference
+  | CartDiscountReference
 export type ReferenceTypeId =
   | 'cart'
   | 'cart-discount'
@@ -358,9 +319,9 @@ export type ResourceIdentifier =
   | TaxCategoryResourceIdentifier
   | TypeResourceIdentifier
   | ZoneResourceIdentifier
+  | ChannelResourceIdentifier
   | CategoryResourceIdentifier
   | CartDiscountResourceIdentifier
-  | ChannelResourceIdentifier
   | CartResourceIdentifier
 export interface ScopedPrice {
   readonly id: string
@@ -378,7 +339,7 @@ export interface ScopedPrice {
   readonly discounted?: DiscountedPrice
   readonly custom?: CustomFields
 }
-export type TypedMoney = CentPrecisionMoney | HighPrecisionMoney
+export type TypedMoney = HighPrecisionMoney | CentPrecisionMoney
 export interface CentPrecisionMoney {
   readonly type: 'centPrecision'
   readonly fractionDigits: number

@@ -17,9 +17,6 @@ import {
   LastModifiedBy,
   LocalizedString,
   Money,
-  Reference,
-  ReferenceTypeId,
-  ResourceIdentifier,
   TypedMoney,
 } from 'models/common'
 import { CustomerReference, CustomerResourceIdentifier } from 'models/customer'

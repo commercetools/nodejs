@@ -13,7 +13,7 @@
 import { ByProjectKeyZonesByIDRequestBuilder } from 'client/zones/by-project-key-zones-by-id-request-builder'
 import { ByProjectKeyZonesKeyByKeyRequestBuilder } from 'client/zones/by-project-key-zones-key-by-key-request-builder'
 import { Zone, ZoneDraft, ZonePagedQueryResponse } from 'models/zone'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyZonesRequestBuilder {

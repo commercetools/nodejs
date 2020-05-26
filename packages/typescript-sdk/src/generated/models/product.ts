@@ -25,9 +25,6 @@ import {
   LocalizedString,
   Price,
   PriceDraft,
-  Reference,
-  ReferenceTypeId,
-  ResourceIdentifier,
   ScopedPrice,
 } from 'models/common'
 import {

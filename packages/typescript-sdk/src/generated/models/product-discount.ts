@@ -19,8 +19,6 @@ import {
   Money,
   QueryPrice,
   Reference,
-  ReferenceTypeId,
-  ResourceIdentifier,
   TypedMoney,
 } from 'models/common'
 

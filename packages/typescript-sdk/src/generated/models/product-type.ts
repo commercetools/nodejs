@@ -16,9 +16,7 @@ import {
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  Reference,
   ReferenceTypeId,
-  ResourceIdentifier,
 } from 'models/common'
 
 export type AttributeConstraintEnum =
@@ -119,19 +117,19 @@ export interface AttributePlainEnumValue {
   readonly label: string
 }
 export type AttributeType =
-  | AttributeLocalizedEnumType
-  | AttributeDateType
   | AttributeMoneyType
+  | AttributeDateType
   | AttributeEnumType
-  | AttributeReferenceType
-  | AttributeNestedType
+  | AttributeNumberType
+  | AttributeLocalizedEnumType
   | AttributeDateTimeType
-  | AttributeTimeType
   | AttributeTextType
   | AttributeLocalizableTextType
-  | AttributeBooleanType
   | AttributeSetType
-  | AttributeNumberType
+  | AttributeTimeType
+  | AttributeNestedType
+  | AttributeBooleanType
+  | AttributeReferenceType
 export interface AttributeBooleanType {
   readonly name: 'boolean'
 }

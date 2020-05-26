@@ -11,7 +11,7 @@
  *
  */
 import { Review, ReviewUpdate } from 'models/review'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyReviewsKeyByKeyRequestBuilder {

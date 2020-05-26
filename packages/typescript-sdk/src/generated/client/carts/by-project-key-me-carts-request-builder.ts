@@ -13,7 +13,7 @@
 import { ByProjectKeyMeCartsByIDRequestBuilder } from 'client/carts/by-project-key-me-carts-by-id-request-builder'
 import { CartPagedQueryResponse } from 'models/cart'
 import { MyCart, MyCartDraft } from 'models/me'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMeCartsRequestBuilder {

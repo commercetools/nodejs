@@ -19,8 +19,6 @@ import {
   LocalizedString,
   Money,
   Reference,
-  ReferenceTypeId,
-  ResourceIdentifier,
   TypedMoney,
 } from 'models/common'
 import { ProductReference } from 'models/product'
@@ -153,9 +151,9 @@ export interface CartDiscountResourceIdentifier {
 export type CartDiscountTarget =
   | MultiBuyCustomLineItemsTarget
   | MultiBuyLineItemsTarget
-  | CartDiscountCustomLineItemsTarget
-  | CartDiscountShippingCostTarget
   | CartDiscountLineItemsTarget
+  | CartDiscountShippingCostTarget
+  | CartDiscountCustomLineItemsTarget
 export interface CartDiscountCustomLineItemsTarget {
   readonly type: 'customLineItems'
   readonly predicate: string

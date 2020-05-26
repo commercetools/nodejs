@@ -13,7 +13,7 @@
 import { ByProjectKeyTypesByIDRequestBuilder } from 'client/types/by-project-key-types-by-id-request-builder'
 import { ByProjectKeyTypesKeyByKeyRequestBuilder } from 'client/types/by-project-key-types-key-by-key-request-builder'
 import { Type, TypeDraft, TypePagedQueryResponse } from 'models/type'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyTypesRequestBuilder {

@@ -26,9 +26,9 @@ import {
   ShippingMethodState,
   ShippingRateInput,
   TaxCalculationMode,
-  TaxMode,
   TaxedPrice,
   TaxedPriceDraft,
+  TaxMode,
 } from 'models/cart'
 import { CartDiscountReference } from 'models/cart-discount'
 import { ChannelReference, ChannelResourceIdentifier } from 'models/channel'
@@ -41,9 +41,6 @@ import {
   LocalizedString,
   Money,
   PriceDraft,
-  Reference,
-  ReferenceTypeId,
-  ResourceIdentifier,
   TypedMoney,
 } from 'models/common'
 import {
@@ -51,7 +48,6 @@ import {
   CustomerGroupResourceIdentifier,
 } from 'models/customer-group'
 import {
-  StagedOrder,
   StagedOrderAddCustomLineItemAction,
   StagedOrderAddDeliveryAction,
   StagedOrderAddDiscountCodeAction,
@@ -81,6 +77,9 @@ import {
   StagedOrderRemovePaymentAction,
   StagedOrderSetBillingAddressAction,
   StagedOrderSetCountryAction,
+  StagedOrderSetCustomerEmailAction,
+  StagedOrderSetCustomerGroupAction,
+  StagedOrderSetCustomerIdAction,
   StagedOrderSetCustomFieldAction,
   StagedOrderSetCustomLineItemCustomFieldAction,
   StagedOrderSetCustomLineItemCustomTypeAction,
@@ -89,9 +88,6 @@ import {
   StagedOrderSetCustomLineItemTaxRateAction,
   StagedOrderSetCustomShippingMethodAction,
   StagedOrderSetCustomTypeAction,
-  StagedOrderSetCustomerEmailAction,
-  StagedOrderSetCustomerGroupAction,
-  StagedOrderSetCustomerIdAction,
   StagedOrderSetDeliveryAddressAction,
   StagedOrderSetDeliveryItemsAction,
   StagedOrderSetLineItemCustomFieldAction,

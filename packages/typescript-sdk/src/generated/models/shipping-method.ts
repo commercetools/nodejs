@@ -17,9 +17,6 @@ import {
   LastModifiedBy,
   LocalizedString,
   Money,
-  Reference,
-  ReferenceTypeId,
-  ResourceIdentifier,
   TypedMoney,
 } from 'models/common'
 import {
@@ -148,8 +145,8 @@ export interface ShippingRateDraft {
 }
 export type ShippingRatePriceTier =
   | CartClassificationTier
-  | CartValueTier
   | CartScoreTier
+  | CartValueTier
 export interface CartClassificationTier {
   readonly type: 'CartClassification'
   readonly value: string

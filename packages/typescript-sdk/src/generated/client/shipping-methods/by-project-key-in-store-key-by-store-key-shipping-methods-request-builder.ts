@@ -11,8 +11,7 @@
  *
  */
 import { ByProjectKeyInStoreKeyByStoreKeyShippingMethodsMatchingCartRequestBuilder } from 'client/matching-cart/by-project-key-in-store-key-by-store-key-shipping-methods-matching-cart-request-builder'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
-import { ApiRequest } from 'shared/utils/requests-utils'
+import { executeRequest } from 'shared/utils/common-types'
 
 export class ByProjectKeyInStoreKeyByStoreKeyShippingMethodsRequestBuilder {
   constructor(

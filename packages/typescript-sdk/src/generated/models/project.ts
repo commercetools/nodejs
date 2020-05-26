@@ -12,7 +12,6 @@
  */
 
 import { MessageConfiguration, MessageConfigurationDraft } from 'models/message'
-import { ShippingRateTierType } from 'models/shipping-method'
 import { CustomFieldLocalizedEnumValue } from 'models/type'
 
 export interface ExternalOAuth {
@@ -64,9 +63,9 @@ export type ProjectUpdateAction =
   | ProjectSetExternalOAuthAction
   | ProjectSetShippingRateInputTypeAction
 export type ShippingRateInputType =
-  | CartClassificationType
   | CartValueType
   | CartScoreType
+  | CartClassificationType
 export interface CartClassificationType {
   readonly type: 'CartClassification'
   readonly values: CustomFieldLocalizedEnumValue[]

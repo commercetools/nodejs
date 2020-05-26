@@ -28,6 +28,9 @@
     "dist"
   ],
   "scripts": {
+    "organize_imports": "find src/generated -type f -name '*.ts' | xargs organize-imports-cli",
+    "generate-ts-sdk": "rmf-codegen generate ${API_RAML_FILE} -o src/generated -t typescript_client",
+    "generate": "yarn generate-ts-sdk && yarn organize_imports",
     "typecheck:ts": "tsc --noEmit",
     "prebuild": "rimraf dist/**",
     "build": "yarn build:bundles && yarn build:typings && yarn build:paths",
@@ -37,5 +40,8 @@
   },
   "dependencies": {
     "regenerator-runtime": "^0.13.2"
+  },
+  "devDependencies": {
+    "organize-imports-cli": "^0.7.0"
   }
 }

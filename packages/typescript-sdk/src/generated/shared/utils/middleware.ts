@@ -12,9 +12,9 @@
  */
 
 import {
-  executeRequest,
-  ClientResponse,
   ClientRequest,
+  ClientResponse,
+  executeRequest,
 } from 'shared/utils/common-types'
 
 export type Middleware = (

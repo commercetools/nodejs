@@ -12,14 +12,7 @@
  */
 
 import { ChannelReference, ChannelResourceIdentifier } from 'models/channel'
-import {
-  BaseResource,
-  CreatedBy,
-  LastModifiedBy,
-  Reference,
-  ReferenceTypeId,
-  ResourceIdentifier,
-} from 'models/common'
+import { BaseResource, CreatedBy, LastModifiedBy } from 'models/common'
 import { CustomerReference, CustomerResourceIdentifier } from 'models/customer'
 import { ProductReference, ProductResourceIdentifier } from 'models/product'
 import { StateReference, StateResourceIdentifier } from 'models/state'

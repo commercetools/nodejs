@@ -12,7 +12,7 @@
  */
 import { Cart } from 'models/cart'
 import { Update } from 'models/common'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyInStoreKeyByStoreKeyMeCartsByIDRequestBuilder {

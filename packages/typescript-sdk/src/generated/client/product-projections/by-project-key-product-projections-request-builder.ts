@@ -15,7 +15,7 @@ import { ByProjectKeyProductProjectionsKeyByKeyRequestBuilder } from 'client/pro
 import { ByProjectKeyProductProjectionsSearchRequestBuilder } from 'client/search/by-project-key-product-projections-search-request-builder'
 import { ByProjectKeyProductProjectionsSuggestRequestBuilder } from 'client/suggest/by-project-key-product-projections-suggest-request-builder'
 import { ProductProjectionPagedQueryResponse } from 'models/product'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyProductProjectionsRequestBuilder {

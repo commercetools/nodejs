@@ -12,7 +12,7 @@
  */
 import { ByProjectKeyStatesByIDRequestBuilder } from 'client/states/by-project-key-states-by-id-request-builder'
 import { State, StateDraft, StatePagedQueryResponse } from 'models/state'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyStatesRequestBuilder {

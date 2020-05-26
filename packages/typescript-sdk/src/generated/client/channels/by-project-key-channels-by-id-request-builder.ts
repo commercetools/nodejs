@@ -11,7 +11,7 @@
  *
  */
 import { Channel, ChannelUpdate } from 'models/channel'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyChannelsByIDRequestBuilder {

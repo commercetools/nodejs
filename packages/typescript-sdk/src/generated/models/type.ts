@@ -16,9 +16,7 @@ import {
   CreatedBy,
   LastModifiedBy,
   LocalizedString,
-  Reference,
   ReferenceTypeId,
-  ResourceIdentifier,
 } from 'models/common'
 
 export interface CustomFieldEnumValue {
@@ -76,18 +74,18 @@ export interface FieldDefinition {
   readonly inputHint?: TypeTextInputHint
 }
 export type FieldType =
-  | CustomFieldDateTimeType
-  | CustomFieldLocalizedStringType
-  | CustomFieldReferenceType
+  | CustomFieldEnumType
   | CustomFieldNumberType
   | CustomFieldStringType
-  | CustomFieldEnumType
-  | CustomFieldTimeType
   | CustomFieldSetType
+  | CustomFieldDateTimeType
+  | CustomFieldLocalizedEnumType
   | CustomFieldMoneyType
   | CustomFieldBooleanType
+  | CustomFieldTimeType
+  | CustomFieldReferenceType
   | CustomFieldDateType
-  | CustomFieldLocalizedEnumType
+  | CustomFieldLocalizedStringType
 export interface CustomFieldBooleanType {
   readonly name: 'Boolean'
 }

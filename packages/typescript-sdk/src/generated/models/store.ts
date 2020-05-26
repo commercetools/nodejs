@@ -14,12 +14,8 @@
 import {
   BaseResource,
   CreatedBy,
-  KeyReference,
   LastModifiedBy,
   LocalizedString,
-  Reference,
-  ReferenceTypeId,
-  ResourceIdentifier,
 } from 'models/common'
 
 export interface Store extends BaseResource {

@@ -16,8 +16,7 @@ import { ByProjectKeyInStoreKeyByStoreKeyLoginRequestBuilder } from 'client/logi
 import { ByProjectKeyInStoreKeyByStoreKeyMeRequestBuilder } from 'client/me/by-project-key-in-store-key-by-store-key-me-request-builder'
 import { ByProjectKeyInStoreKeyByStoreKeyOrdersRequestBuilder } from 'client/orders/by-project-key-in-store-key-by-store-key-orders-request-builder'
 import { ByProjectKeyInStoreKeyByStoreKeyShippingMethodsRequestBuilder } from 'client/shipping-methods/by-project-key-in-store-key-by-store-key-shipping-methods-request-builder'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
-import { ApiRequest } from 'shared/utils/requests-utils'
+import { executeRequest } from 'shared/utils/common-types'
 
 export class ByProjectKeyInStoreKeyByStoreKeyRequestBuilder {
   constructor(

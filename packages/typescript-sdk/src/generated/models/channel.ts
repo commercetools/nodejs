@@ -18,9 +18,6 @@ import {
   GeoJson,
   LastModifiedBy,
   LocalizedString,
-  Reference,
-  ReferenceTypeId,
-  ResourceIdentifier,
 } from 'models/common'
 import { ReviewRatingStatistics } from 'models/review'
 import {

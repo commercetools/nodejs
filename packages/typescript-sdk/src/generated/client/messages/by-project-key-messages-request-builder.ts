@@ -12,7 +12,7 @@
  */
 import { ByProjectKeyMessagesByIDRequestBuilder } from 'client/messages/by-project-key-messages-by-id-request-builder'
 import { MessagePagedQueryResponse } from 'models/message'
-import { QueryParam, executeRequest } from 'shared/utils/common-types'
+import { executeRequest, QueryParam } from 'shared/utils/common-types'
 import { ApiRequest } from 'shared/utils/requests-utils'
 
 export class ByProjectKeyMessagesRequestBuilder {
