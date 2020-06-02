@@ -11484,7 +11484,7 @@ optionator@^0.9.1:
     type-check "^0.4.0"
     word-wrap "^1.2.3"
 
-organize-imports-cli@^0.7.0:
+organize-imports-cli@0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/organize-imports-cli/-/organize-imports-cli-0.7.0.tgz#a6ffcec2d31c5de60748efe8861ea8cecd727276"
   integrity sha512-fl0BdatZq9Dq2TDFlsKII5nE2TgKLdUGOYlXr656R2wzFa9pHAWKLjbCqyCDjYHHFVCFfPAZvO50pZn7PgSoAA==

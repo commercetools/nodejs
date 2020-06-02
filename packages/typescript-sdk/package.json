@@ -42,6 +42,6 @@
     "regenerator-runtime": "^0.13.2"
   },
   "devDependencies": {
-    "organize-imports-cli": "^0.7.0"
+    "organize-imports-cli": "0.7.0"
   }
 }
