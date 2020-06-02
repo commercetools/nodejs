@@ -95,12 +95,6 @@ function createProductMapActions(
     )
 
     allActions.push(
-      mapActionGroup('prices', (): Array<UpdateAction> =>
-        productActions.actionsMapPrices(diff, oldObj, newObj, variantHashMap)
-      )
-    )
-
-    allActions.push(
       mapActionGroup('pricesCustom', (): Array<UpdateAction> =>
         productActions.actionsMapPricesCustom(
           diff,
@@ -108,6 +102,12 @@ function createProductMapActions(
           newObj,
           variantHashMap
         )
+      )
+    )
+
+    allActions.push(
+      mapActionGroup('prices', (): Array<UpdateAction> =>
+        productActions.actionsMapPrices(diff, oldObj, newObj, variantHashMap)
       )
     )
 

@@ -169,6 +169,101 @@ describe('Actions', () => {
     expect(actions).toEqual([])
   })
 
+  test('should generate PriceCustom actions before changePrice action', () => {
+    const before = {
+      id: '123',
+      masterVariant: {
+        prices: [
+          {
+            value: {
+              type: 'centPrecision',
+              currencyCode: 'EUR',
+              centAmount: 1900,
+              fractionDigits: 2,
+            },
+            id: '9fe6610f',
+            country: 'DE',
+            custom: {
+              type: {
+                typeId: 'type',
+                id: '218d8068',
+              },
+              fields: {
+                touchpoints: ['value'],
+              },
+            },
+          },
+        ],
+      },
+    }
+
+    const now = {
+      id: '123',
+      masterVariant: {
+        prices: [
+          {
+            value: {
+              type: 'centPrecision',
+              currencyCode: 'EUR',
+              centAmount: 5678,
+              fractionDigits: 2,
+            },
+            id: '9fe6610f',
+            country: 'DE',
+            custom: {
+              type: {
+                typeId: 'type',
+                id: '218d8068',
+              },
+              fields: {
+                published: false,
+              },
+            },
+          },
+        ],
+      },
+    }
+
+    const actions = productsSync.buildActions(now, before)
+    expect(actions).toEqual([
+      {
+        action: 'setProductPriceCustomField',
+        name: 'touchpoints',
+        priceId: '9fe6610f',
+        value: undefined,
+      },
+      {
+        action: 'setProductPriceCustomField',
+        name: 'published',
+        priceId: '9fe6610f',
+        value: false,
+      },
+      {
+        action: 'changePrice',
+        price: {
+          country: 'DE',
+          custom: {
+            fields: {
+              published: false,
+            },
+            type: {
+              id: '218d8068',
+              typeId: 'type',
+            },
+          },
+          id: '9fe6610f',
+          value: {
+            centAmount: 5678,
+            currencyCode: 'EUR',
+            fractionDigits: 2,
+            type: 'centPrecision',
+          },
+        },
+        priceId: '9fe6610f',
+      },
+    ])
+  })
+
   describe('without `priceID`', () => {
     let actions
     const dateNow = new Date()
