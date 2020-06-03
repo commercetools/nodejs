@@ -1,3 +1,835 @@
+## @commercetools/typescript-sdk@0.0.21 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/sync-actions@4.7.2 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/state-importer@3.0.21 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/sdk-middleware-http@6.0.7 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/sdk-middleware-auth@6.1.4 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/sdk-auth@3.0.7 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/resource-deleter@2.0.16 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/product-json-to-xlsx@4.0.8 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/product-json-to-csv@5.0.8 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/product-exporter@3.1.4 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/price-exporter@3.0.16 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/personal-data-erasure@3.0.15 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/inventories-exporter@3.0.16 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/integration-tests@0.0.34 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/get-credentials@3.0.16 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/discount-code-importer@3.0.21 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/discount-code-exporter@4.0.16 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/customer-groups-exporter@3.0.15 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/custom-objects-importer@3.0.21 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/custom-objects-exporter@3.0.15 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/csv-parser-state@3.0.14 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/csv-parser-price@4.0.17 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/csv-parser-orders@2.0.18 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/csv-parser-discount-code@2.0.11 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/category-exporter@3.0.15 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
+## @commercetools/api-request-builder@5.6.1 (2020-06-03)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1562](https://github.com/commercetools/nodejs/pull/1562) fix(sync-actions): generate PriceCustom actions before changePrice ([@MarkusAzer](https://github.com/MarkusAzer))
+
+#### :house: Maintenance
+
+- Other
+  - [#1555](https://github.com/commercetools/nodejs/pull/1555) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1560](https://github.com/commercetools/nodejs/pull/1560) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1557](https://github.com/commercetools/nodejs/pull/1557) chore(deps): update typescript-eslint monorepo to v3 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1556](https://github.com/commercetools/nodejs/pull/1556) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1552](https://github.com/commercetools/nodejs/pull/1552) chore(deps): update dependency npm-check-updates to v6 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1553](https://github.com/commercetools/nodejs/pull/1553) chore(deps): update dependency ts-jest to v26 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1554](https://github.com/commercetools/nodejs/pull/1554) chore(deps): update jest monorepo to v26 (major) ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1551](https://github.com/commercetools/nodejs/pull/1551) chore(deps): update dependency eslint-plugin-flowtype to v5 ([@renovate[bot]](https://github.com/apps/renovate))
+  - [#1550](https://github.com/commercetools/nodejs/pull/1550) chore(deps): update dependency eslint to v7 ([@renovate[bot]](https://github.com/apps/renovate))
+- `typescript-sdk`
+  - [#1559](https://github.com/commercetools/nodejs/pull/1559) chore(deps): pin dependency organize-imports-cli to 0.7.0 ([@renovate[bot]](https://github.com/apps/renovate))
+- `csv-parser-discount-code`, `csv-parser-orders`, `csv-parser-price`, `get-credentials`, `product-json-to-csv`, `product-json-to-xlsx`, `sdk-auth`, `sdk-middleware-auth`, `sdk-middleware-http`
+  - [#1546](https://github.com/commercetools/nodejs/pull/1546) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+- `api-request-builder`, `sdk-middleware-auth`, `sync-actions`
+  - [#1544](https://github.com/commercetools/nodejs/pull/1544) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Beniasaad Achraf ([@acbeni](https://github.com/acbeni))
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- markus azer ([@MarkusAzer](https://github.com/MarkusAzer))
+
 ## @commercetools/sync-actions@4.7.1 (2020-05-04)
 
 #### :rocket: New Feature
