@@ -83,7 +83,7 @@ describe('Actions', () => {
       supplyChannels: [
         {
           typeId: 'channel',
-          id: 'pd-001',
+          id: 'inventory-supply-001',
         },
       ],
     }
@@ -91,11 +91,11 @@ describe('Actions', () => {
       supplyChannels: [
         {
           typeId: 'channel',
-          id: 'pd-001',
+          id: 'inventory-supply-001',
         },
         {
           typeId: 'channel',
-          key: 'pd-002',
+          key: 'inventory-supply-002',
         },
       ],
     }
