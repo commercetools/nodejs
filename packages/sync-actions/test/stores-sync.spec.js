@@ -52,7 +52,7 @@ describe('Actions', () => {
     const before = {
       distributionChannels: [
         {
-          typeId: 'product-distribution',
+          typeId: 'channel',
           id: 'pd-001',
         },
       ],
@@ -60,11 +60,11 @@ describe('Actions', () => {
     const now = {
       distributionChannels: [
         {
-          typeId: 'product-distribution',
+          typeId: 'channel',
           id: 'pd-001',
         },
         {
-          typeId: 'product-distribution',
+          typeId: 'channel',
           key: 'pd-002',
         },
       ],
@@ -82,7 +82,7 @@ describe('Actions', () => {
     const before = {
       supplyChannels: [
         {
-          typeId: 'inventory-supply',
+          typeId: 'channel',
           id: 'pd-001',
         },
       ],
@@ -90,11 +90,11 @@ describe('Actions', () => {
     const now = {
       supplyChannels: [
         {
-          typeId: 'inventory-supply',
+          typeId: 'channel',
           id: 'pd-001',
         },
         {
-          typeId: 'inventory-supply',
+          typeId: 'channel',
           key: 'pd-002',
         },
       ],
