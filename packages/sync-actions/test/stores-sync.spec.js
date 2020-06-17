@@ -11,6 +11,7 @@ describe('Exports', () => {
       { action: 'setName', key: 'name' },
       { action: 'setLanguages', key: 'languages' },
       { action: 'setDistributionChannels', key: 'distributionChannels' },
+      { action: 'setSupplyChannels', key: 'supplyChannels' },
     ])
   })
 })
@@ -74,6 +75,36 @@ describe('Actions', () => {
       {
         action: 'setDistributionChannels',
         distributionChannels: now.distributionChannels,
+      },
+    ])
+  })
+  test('should build `setSupplyChannels` action', () => {
+    const before = {
+      supplyChannels: [
+        {
+          typeId: 'inventory-supply',
+          id: 'pd-001',
+        },
+      ],
+    }
+    const now = {
+      supplyChannels: [
+        {
+          typeId: 'inventory-supply',
+          id: 'pd-001',
+        },
+        {
+          typeId: 'inventory-supply',
+          key: 'pd-002',
+        },
+      ],
+    }
+
+    const actual = storesSync.buildActions(now, before)
+    expect(actual).toEqual([
+      {
+        action: 'setSupplyChannels',
+        supplyChannels: now.supplyChannels,
       },
     ])
   })

@@ -4,6 +4,7 @@ export const baseActionsList = [
   { action: 'setName', key: 'name' },
   { action: 'setLanguages', key: 'languages' },
   { action: 'setDistributionChannels', key: 'distributionChannels' },
+  { action: 'setSupplyChannels', key: 'supplyChannels' },
 ]
 
 export function actionsMapBase(diff, oldObj, newObj) {
