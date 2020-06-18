@@ -1,3 +1,80 @@
+## @commercetools/sync-actions@4.8.0 (2020-06-18)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1571](https://github.com/commercetools/nodejs/pull/1571) feat(sync-actions/stores): add set supply channels ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/state-importer@3.0.22 (2020-06-18)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1571](https://github.com/commercetools/nodejs/pull/1571) feat(sync-actions/stores): add set supply channels ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/product-json-to-xlsx@4.0.9 (2020-06-18)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1571](https://github.com/commercetools/nodejs/pull/1571) feat(sync-actions/stores): add set supply channels ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/product-json-to-csv@5.0.9 (2020-06-18)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1571](https://github.com/commercetools/nodejs/pull/1571) feat(sync-actions/stores): add set supply channels ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/integration-tests@0.1.0 (2020-06-18)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1571](https://github.com/commercetools/nodejs/pull/1571) feat(sync-actions/stores): add set supply channels ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/discount-code-importer@3.0.22 (2020-06-18)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1571](https://github.com/commercetools/nodejs/pull/1571) feat(sync-actions/stores): add set supply channels ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
+## @commercetools/custom-objects-importer@3.0.22 (2020-06-18)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1571](https://github.com/commercetools/nodejs/pull/1571) feat(sync-actions/stores): add set supply channels ([@adnasa](https://github.com/adnasa))
+
+#### Committers: 1
+
+- Adnan Asani ([@adnasa](https://github.com/adnasa))
+
 ## @commercetools/typescript-sdk@0.0.21 (2020-06-03)
 
 #### :bug: Bug Fix
