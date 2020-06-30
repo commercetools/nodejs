@@ -79,6 +79,9 @@ export default class TokenProvider {
     return this.fetchTokenInfoPromise.then((tokenInfo) => {
       this.fetchTokenInfoPromise = null
       return tokenInfo
+    }).catch((error) => {
+        this.fetchTokenInfoPromise = null
+        throw error
     })
   }
 
@@ -91,6 +94,9 @@ export default class TokenProvider {
     return this.refreshTokenFlowPromise.then((refreshTokenInfo) => {
       this.refreshTokenFlowPromise = null
       return refreshTokenInfo
+    }).catch((error) => {
+        this.refreshTokenFlowPromise = null;
+        throw error
     })
   }
 
