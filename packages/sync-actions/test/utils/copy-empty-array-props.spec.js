@@ -240,6 +240,40 @@ test('should init empty arrays into nested objects', () => {
   })
 })
 
+test('should ignore dates', () => {
+  const dateNow = new Date()
+  const oldObj = {
+    variants: [
+      {
+        id: 1,
+        prices: [],
+        date: dateNow,
+      },
+    ],
+  }
+
+  const newObj = {
+    variants: [
+      {
+        id: 1,
+        date: dateNow,
+      },
+    ],
+  }
+  const [old, fixedNewObj] = copyEmptyArrayProps(oldObj, newObj)
+
+  expect(old).toEqual(oldObj)
+  expect(fixedNewObj).toEqual({
+    variants: [
+      {
+        id: 1,
+        prices: [],
+        date: dateNow,
+      },
+    ],
+  })
+})
+
 test('shouldnt mutate `newObj`', () => {
   const oldObj = {
     emptyArray: [],
