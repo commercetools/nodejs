@@ -147,6 +147,99 @@ test('should add empty array for `nestedObject`, `nestedObjectOne`', () => {
   })
 })
 
+test('should init empty arrays into nested objects', () => {
+  const oldObj = {
+    variants: [
+      {
+        id: 1,
+        prices: [
+          {
+            id: 1,
+            customerGroup: [],
+          },
+          {
+            id: 2,
+            customerGroup: [],
+          },
+        ],
+        assets: [],
+      },
+      {
+        id: 2,
+      },
+      {
+        id: 3,
+        prices: [],
+      },
+      {
+        id: 4,
+        att: '44444',
+        prices: [],
+      },
+    ],
+  }
+
+  const newObj = {
+    variants: [
+      {
+        id: 1,
+        prices: [
+          {
+            id: 1,
+            att: '11111',
+            p: [],
+          },
+          {
+            id: 2,
+            att: '22222',
+          },
+          {
+            id: 3,
+            att: '333333',
+          },
+        ],
+        att: 'anything',
+      },
+      {
+        id: 4,
+      },
+    ],
+  }
+  const [old, fixedNewObj] = copyEmptyArrayProps(oldObj, newObj)
+
+  expect(old).toEqual(oldObj)
+  expect(fixedNewObj).toEqual({
+    variants: [
+      {
+        id: 1,
+        prices: [
+          {
+            id: 1,
+            att: '11111',
+            p: [],
+            customerGroup: [],
+          },
+          {
+            id: 2,
+            att: '22222',
+            customerGroup: [],
+          },
+          {
+            id: 3,
+            att: '333333',
+          },
+        ],
+        att: 'anything',
+        assets: [],
+      },
+      {
+        id: 4,
+        prices: [],
+      },
+    ],
+  })
+})
+
 test('shouldnt mutate `newObj`', () => {
   const oldObj = {
     emptyArray: [],
