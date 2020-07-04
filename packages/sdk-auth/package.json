@@ -33,7 +33,8 @@
   },
   "dependencies": {
     "@commercetools/sdk-middleware-http": "^6.0.7",
-    "lodash.defaultsdeep": "^4.6.0"
+    "lodash.defaultsdeep": "^4.6.0",
+    "qss": "2.0.3"
   },
   "devDependencies": {
     "nock": "12.0.3",

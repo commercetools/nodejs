@@ -1,4 +1,5 @@
 import nock from 'nock'
+import { encode } from 'qss'
 import Auth from '../src/auth'
 import config from './resources/sample-config'
 import response from './resources/sample-response.json'
@@ -11,12 +12,15 @@ describe('Customer Password flow', () => {
 
   test('should authenticate with correct user credentials', async () => {
     const scope = nock(config.host)
-      .post(`/oauth/${config.projectKey}/customers/token`, {
-        grant_type: 'password',
-        scope: `manage_project:${config.projectKey}`,
-        username: 'user123',
-        password: 'pass123',
-      })
+      .post(
+        `/oauth/${config.projectKey}/customers/token`,
+        encode({
+          grant_type: 'password',
+          scope: `manage_project:${config.projectKey}`,
+          username: 'user123',
+          password: 'pass123',
+        })
+      )
       .reply(200, JSON.stringify(response))
 
     expect(scope.isDone()).toBe(false)
@@ -39,10 +43,12 @@ describe('Customer Password flow', () => {
     const scope = nock(config.host)
       .post(
         `/oauth/${config.projectKey}/customers/token`,
-        // expected body
-        `grant_type=password&scope=manage_project:${config.projectKey}` +
-        `&username=user%204%5El*aJ%40ETso%2B%2F%5CHdE1!x0u4q5` + // encoded
-          `&password=pass%204%5El*aJ%40ETso%2B%2F%5CHdE1!x0u4q5` // encoded
+        encode({
+          grant_type: 'password',
+          scope: `manage_project:${config.projectKey}`,
+          username: userCredentials.username,
+          password: userCredentials.password,
+        })
       )
       .reply(200, JSON.stringify(response))
 

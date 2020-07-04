@@ -1,5 +1,6 @@
 import nock from 'nock'
 import fetch from 'node-fetch'
+import { encode } from 'qss'
 import { getErrorByCode } from '@commercetools/sdk-middleware-http'
 import Auth from '../src/auth'
 import config from './resources/sample-config'
@@ -14,7 +15,10 @@ describe('Common processes', () => {
   const request = {
     basicAuth,
     uri: 'https://auth.commercetools.com/api-endpoint',
-    body: 'grant_type=client_credentials&scope=manage_project:project-key',
+    body: encode({
+      grant_type: 'client_credentials',
+      scope: 'manage_project:project-key',
+    }),
   }
 
   beforeEach(() => nock.cleanAll())
@@ -220,8 +224,10 @@ describe('Common processes', () => {
         basicAuth,
         authType: 'Basic',
         uri: 'https://auth.commercetools.com/api-endpoint',
-        body:
-          'grant_type=client_credentials&scope=view_products:sample-project manage_types:sample-project',
+        body: encode({
+          grant_type: 'client_credentials',
+          scope: 'view_products:sample-project manage_types:sample-project',
+        }),
       })
     })
   })

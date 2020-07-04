@@ -9,6 +9,7 @@ import type {
   AuthRequest,
   UserAuthOptions,
 } from 'types/sdk'
+import { decode, encode } from 'qss'
 import defaultsDeep from 'lodash.defaultsdeep'
 import { getErrorByCode } from '@commercetools/sdk-middleware-http'
 import * as constants from './constants'
@@ -106,11 +107,28 @@ export default class SdkAuth {
       config.token || SdkAuth._encodeClientCredentials(credentials)
     const authType = config.authType || constants.DEFAULT_AUTH_TYPE
 
-    let body = `grant_type=${grantType}`
-    if (grantType !== 'refresh_token') body += `&scope=${scope}`
-    if (disableRefreshToken === true) body += '&refresh_token=false'
+    const isNotRefreshTokenGrantType = grantType !== 'refresh_token'
+    const initialBody = encode({
+      grant_type: grantType,
+      ...(disableRefreshToken && { refresh_token: false }),
+      ...(isNotRefreshTokenGrantType && { scope }),
+    })
 
-    return { basicAuth, authType, uri, body, headers }
+    return { basicAuth, authType, uri, body: initialBody, headers }
+  }
+
+  static _appendToRequestBody(
+    request: AuthRequest,
+    toAppend: Object
+  ): AuthRequest {
+    const previousDecodedRequestBody = request.body ? decode(request.body) : {}
+    const nextEncdedRequestBody = encode({
+      ...previousDecodedRequestBody,
+      ...toAppend,
+    })
+    request.body = nextEncdedRequestBody
+
+    return request
   }
 
   _process(request: AuthRequest) {
@@ -159,29 +177,25 @@ export default class SdkAuth {
     return SdkAuth._parseResponseJson(response).then((jsonResponse) => {
       if (SdkAuth._isErrorResponse(response))
         throw SdkAuth._createResponseError(jsonResponse, uri, response.status)
+
       return SdkAuth._enrichTokenResponse(jsonResponse)
     })
   }
 
   static _appendUserCredentialsToBody(
-    body: string,
+    request: AuthRequest,
     username: string,
     password: string
-  ): string {
+  ): AuthRequest {
     if (!(username && password))
       throw new Error('Missing required user credentials (username, password)')
 
-    return [
-      body,
-      `username=${encodeURIComponent(username)}`,
-      `password=${encodeURIComponent(password)}`,
-    ]
-      .filter(Boolean)
-      .join('&')
+    return SdkAuth._appendToRequestBody(request, { username, password })
   }
 
   static _enrichUriWithProjectKey(uri: string, projectKey: ?string): string {
     if (!projectKey) throw new Error('Missing required option (projectKey)')
+
     return uri.replace('--projectKey--', projectKey)
   }
 
@@ -216,7 +230,7 @@ export default class SdkAuth {
 
   anonymousFlow(anonymousId: string = '', config: CustomAuthOptions = {}) {
     const _config = this._getRequestConfig(config)
-    const request = SdkAuth._buildRequest(
+    let request = SdkAuth._buildRequest(
       _config,
       SdkAuth._enrichUriWithProjectKey(
         this.ANONYMOUS_FLOW_URI,
@@ -224,13 +238,18 @@ export default class SdkAuth {
       )
     )
 
-    if (anonymousId) request.body += `&anonymous_id=${anonymousId}`
+    if (anonymousId)
+      request = SdkAuth._appendToRequestBody(request, {
+        anonymous_id: anonymousId,
+      })
+
     return this._process(request)
   }
 
   clientCredentialsFlow(config: CustomAuthOptions = {}) {
     const _config = this._getRequestConfig(config)
     const request = SdkAuth._buildRequest(_config, this.BASE_AUTH_FLOW_URI)
+
     return this._process(request)
   }
 
@@ -240,13 +259,9 @@ export default class SdkAuth {
     url: string
   ) {
     const { username, password } = credentials || {}
-    const request = SdkAuth._buildRequest(config, url, 'password')
+    let request = SdkAuth._buildRequest(config, url, 'password')
 
-    request.body = SdkAuth._appendUserCredentialsToBody(
-      request.body,
-      username,
-      password
-    )
+    request = SdkAuth._appendUserCredentialsToBody(request, username, password)
 
     return this._process(request)
   }
@@ -269,6 +284,7 @@ export default class SdkAuth {
     config: CustomAuthOptions = {}
   ) {
     const _config = this._getRequestConfig(config)
+
     return this._passwordFlow(credentials, _config, this.BASE_AUTH_FLOW_URI)
   }
 
@@ -276,12 +292,12 @@ export default class SdkAuth {
     if (!token) throw new Error('Missing required token value')
     const _config = this._getRequestConfig(config)
 
-    const request = SdkAuth._buildRequest(
+    let request = SdkAuth._buildRequest(
       _config,
       this.BASE_AUTH_FLOW_URI,
       'refresh_token'
     )
-    request.body += `&refresh_token=${encodeURIComponent(token)}`
+    request = SdkAuth._appendToRequestBody(request, { refresh_token: token })
 
     return this._process(request)
   }
@@ -290,8 +306,8 @@ export default class SdkAuth {
     const _config = this._getRequestConfig(config)
     if (!token) throw new Error('Missing required token value')
 
-    const request = SdkAuth._buildRequest(_config, this.INTROSPECT_URI)
-    request.body = `token=${encodeURIComponent(token)}`
+    let request = SdkAuth._buildRequest(_config, this.INTROSPECT_URI)
+    request = SdkAuth._appendToRequestBody(request, { token })
 
     return this._process(request)
   }
@@ -313,12 +329,12 @@ export default class SdkAuth {
       headers,
     })
 
-    const request = SdkAuth._buildRequest(_config, uri)
+    let request = SdkAuth._buildRequest(_config, uri)
     request.body = body || '' // let user to build their own body
 
     if (credentials)
-      request.body = SdkAuth._appendUserCredentialsToBody(
-        request.body,
+      request = SdkAuth._appendUserCredentialsToBody(
+        request,
         credentials.username,
         credentials.password
       )
