@@ -122,11 +122,11 @@ export default class SdkAuth {
     toAppend: Object
   ): AuthRequest {
     const previousDecodedRequestBody = request.body ? decode(request.body) : {}
-    const nextEncdedRequestBody = encode({
+    const nextEncodedRequestBody = encode({
       ...previousDecodedRequestBody,
       ...toAppend,
     })
-    request.body = nextEncdedRequestBody
+    request.body = nextEncodedRequestBody
 
     return request
   }
@@ -290,24 +290,24 @@ export default class SdkAuth {
 
   refreshTokenFlow(token: string, config: CustomAuthOptions = {}) {
     if (!token) throw new Error('Missing required token value')
-    const _config = this._getRequestConfig(config)
 
-    let request = SdkAuth._buildRequest(
-      _config,
-      this.BASE_AUTH_FLOW_URI,
-      'refresh_token'
+    const _config = this._getRequestConfig(config)
+    const request = SdkAuth._appendToRequestBody(
+      SdkAuth._buildRequest(_config, this.BASE_AUTH_FLOW_URI, 'refresh_token'),
+      { refresh_token: token }
     )
-    request = SdkAuth._appendToRequestBody(request, { refresh_token: token })
 
     return this._process(request)
   }
 
   introspectToken(token: string, config: CustomAuthOptions = {}) {
-    const _config = this._getRequestConfig(config)
     if (!token) throw new Error('Missing required token value')
 
-    let request = SdkAuth._buildRequest(_config, this.INTROSPECT_URI)
-    request = SdkAuth._appendToRequestBody(request, { token })
+    const _config = this._getRequestConfig(config)
+    const request = SdkAuth._appendToRequestBody(
+      SdkAuth._buildRequest(_config, this.INTROSPECT_URI),
+      { token }
+    )
 
     return this._process(request)
   }
