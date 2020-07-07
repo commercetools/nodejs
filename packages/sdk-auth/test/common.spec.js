@@ -1,6 +1,6 @@
 import nock from 'nock'
 import fetch from 'node-fetch'
-import { encode } from 'qss'
+import querystring from 'querystring'
 import { getErrorByCode } from '@commercetools/sdk-middleware-http'
 import Auth from '../src/auth'
 import config from './resources/sample-config'
@@ -15,7 +15,7 @@ describe('Common processes', () => {
   const request = {
     basicAuth,
     uri: 'https://auth.commercetools.com/api-endpoint',
-    body: encode({
+    body: querystring.encode({
       grant_type: 'client_credentials',
       scope: 'manage_project:project-key',
     }),
@@ -224,7 +224,7 @@ describe('Common processes', () => {
         basicAuth,
         authType: 'Basic',
         uri: 'https://auth.commercetools.com/api-endpoint',
-        body: encode({
+        body: querystring.encode({
           grant_type: 'client_credentials',
           scope: 'view_products:sample-project manage_types:sample-project',
         }),

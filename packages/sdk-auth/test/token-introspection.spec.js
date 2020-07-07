@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { encode } from 'qss'
+import querystring from 'querystring'
 import Auth from '../src/auth'
 import config from './resources/sample-config'
 
@@ -18,7 +18,7 @@ describe('Token Introspection', () => {
     const scope = nock(config.host)
       .post(
         '/oauth/introspect',
-        encode({
+        querystring.encode({
           grant_type: 'client_credentials',
           scope: 'manage_project:sample-project',
           token: 'tokenValue',

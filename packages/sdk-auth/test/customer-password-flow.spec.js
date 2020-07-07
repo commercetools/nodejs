@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { encode } from 'qss'
+import querystring from 'querystring'
 import Auth from '../src/auth'
 import config from './resources/sample-config'
 import response from './resources/sample-response.json'
@@ -14,7 +14,7 @@ describe('Customer Password flow', () => {
     const scope = nock(config.host)
       .post(
         `/oauth/${config.projectKey}/customers/token`,
-        encode({
+        querystring.encode({
           grant_type: 'password',
           scope: `manage_project:${config.projectKey}`,
           username: 'user123',
@@ -43,7 +43,7 @@ describe('Customer Password flow', () => {
     const scope = nock(config.host)
       .post(
         `/oauth/${config.projectKey}/customers/token`,
-        encode({
+        querystring.encode({
           grant_type: 'password',
           scope: `manage_project:${config.projectKey}`,
           username: userCredentials.username,
