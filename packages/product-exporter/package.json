@@ -22,7 +22,7 @@
   "license": "MIT",
   "author": {
     "name": "Williams Omayuku",
-    "email": "williams.omayuku@commercetools.de"
+    "email": "williams.omayuku@commercetools.com"
   },
   "main": "lib/index.js",
   "bin": {

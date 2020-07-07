@@ -25,7 +25,7 @@
   "license": "MIT",
   "author": {
     "name": "Jan Juna",
-    "email": "jan.juna-ext@commercetools.de"
+    "email": "jan.juna-ext@commercetools.com"
   },
   "main": "lib/index.js",
   "bin": {
