@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/product-json-to-csv",
-  "version": "5.0.9",
+  "version": "5.0.10",
   "description": "Converts commercetools products from JSON to CSV",
   "keywords": [
     "commercetools",
