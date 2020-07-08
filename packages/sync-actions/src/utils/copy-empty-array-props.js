@@ -1,5 +1,7 @@
 import isNil from 'lodash.isnil'
 
+const CUSTOM = 'custom'
+
 /**
  * @function copyEmptyArrayProps
  * @description Takes two objects and if there are Array props in oldObj which doesn't exist in newObj, then copy it with an empty value.
@@ -16,12 +18,14 @@ export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
           ...nextObject,
         }
 
-        if (key === 'custom') {
-          return {
-            ...merged,
-          }
+        if (key === CUSTOM) {
+          return merged
         }
 
+        /**
+         * Check if `oldObj` value is an array and that same array exist on `newObj` with more than one element
+         * then Loop over `newObj` array to copy empty array props from `oldObj` to `newObj`
+         */
         if (Array.isArray(value) && newObj[key] && newObj[key].length >= 1) {
           /* eslint-disable no-plusplus */
           for (let i = 0; i < newObj[key].length; i++) {
@@ -30,8 +34,10 @@ export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
               typeof newObj[key][i] === 'object' &&
               !isNil(newObj[key][i].id)
             ) {
-              /* eslint-disable eqeqeq */
-              const foundObject = value.find((v) => v.id == newObj[key][i].id)
+              // Since its unordered array elements then check if the element on `oldObj` exists by id
+              const foundObject = value.find(
+                (v) => Number(v.id) === Number(newObj[key][i].id)
+              )
               if (!isNil(foundObject)) {
                 const [, nestedObject] = copyEmptyArrayProps(
                   foundObject,
@@ -43,9 +49,7 @@ export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
             }
           }
 
-          return {
-            ...merged,
-          }
+          return merged
         }
         if (Array.isArray(value)) {
           return {
