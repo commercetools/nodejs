@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/state-importer",
-  "version": "3.0.22",
+  "version": "3.0.23",
   "description": "Import states to the commercetools platform",
   "main": "lib/main.js",
   "files": [

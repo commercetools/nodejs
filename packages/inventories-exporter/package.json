@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/inventories-exporter",
-  "version": "3.0.16",
+  "version": "3.0.17",
   "description": "Exports inventories from the commercetools platform.",
   "keywords": [
     "commercetools",

@@ -1,4 +1,5 @@
 import nock from 'nock'
+import querystring from 'querystring'
 import Auth from '../src/auth'
 import config from './resources/sample-config'
 
@@ -15,9 +16,14 @@ describe('Token Introspection', () => {
 
   test('should introspect token', async () => {
     const scope = nock(config.host)
-      .post('/oauth/introspect', {
-        token: 'tokenValue',
-      })
+      .post(
+        '/oauth/introspect',
+        querystring.encode({
+          grant_type: 'client_credentials',
+          scope: 'manage_project:sample-project',
+          token: 'tokenValue',
+        })
+      )
       .reply(200, JSON.stringify(response))
 
     expect(scope.isDone()).toBe(false)

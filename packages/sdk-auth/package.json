@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-auth",
-  "version": "3.0.7",
+  "version": "3.0.8",
   "description": "Auth module for different authentication flows of commercetools platform API",
   "keywords": [
     "commercetools",
@@ -33,7 +33,8 @@
   },
   "dependencies": {
     "@commercetools/sdk-middleware-http": "^6.0.7",
-    "lodash.defaultsdeep": "^4.6.0"
+    "lodash.defaultsdeep": "^4.6.0",
+    "qss": "2.0.3"
   },
   "devDependencies": {
     "nock": "12.0.3",
