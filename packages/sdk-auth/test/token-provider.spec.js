@@ -41,6 +41,35 @@ describe('Token Provider', () => {
       )
     })
 
+    test('should clear cache after _performFetchTokenInfo rejects', async () => {
+        const _tokenProvider = new TokenProvider({
+            sdkAuth,
+            fetchTokenInfo: jest
+                .fn()
+                .mockImplementation(() => Promise.reject(new Error("Invalid Token"))),
+        })
+        expect(_tokenProvider.fetchTokenInfoPromise).toBeFalsy();
+        try {
+            await _tokenProvider._performFetchTokenInfo()
+        } catch(e) {
+            expect(_tokenProvider.fetchTokenInfoPromise).toBeFalsy();
+        }
+    })
+    test('should clear cache after _performRefreshTokenFlow rejects', async () => {
+        const _tokenProvider = new TokenProvider({
+            sdkAuth,
+            fetchTokenInfo: jest
+                .fn()
+                .mockImplementation(() => Promise.reject(new Error("Invalid Token"))),
+        })
+        expect(_tokenProvider.refreshTokenFlowPromise).toBeFalsy();
+        try {
+            await _tokenProvider._performRefreshTokenFlow("invalid refresh token")
+        } catch(e) {
+            expect(_tokenProvider.refreshTokenFlowPromise).toBeFalsy();
+        }
+    })
+
     test('should throw an error when refreshing without "refresh_token" property', async () => {
       const _tokenProvider = new TokenProvider(
         { sdkAuth },
