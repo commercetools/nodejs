@@ -4,7 +4,8 @@ const CUSTOM = 'custom'
 
 /**
  * @function copyEmptyArrayProps
- * @description Takes two objects and if there are Array props in oldObj which doesn't exist in newObj, then copy it with an empty value.
+ * @description Create new key with empty array value on `newobj` for the arrays exist on `oldObj` and doesnt exist on `newobj`
+ * One use case is to easly compare two object without generating this error `Cannot read property '0' of undefined`
  * @param {Object} oldObj
  * @param {Object} newObj
  * @returns {Array} Ordered Array [oldObj, newObj]
@@ -18,14 +19,10 @@ export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
           ...nextObject,
         }
 
-        if (key === CUSTOM) {
-          return merged
-        }
+        // Ignore CUSTOM key as this object is dynamic and its up to the user to dynamically change it
+        // todo, i would be better if we pass it as ignored keys param
+        if (key === CUSTOM) return merged
 
-        /**
-         * Check if `oldObj` value is an array and that same array exist on `newObj` with more than one element
-         * then Loop over `newObj` array to copy empty array props from `oldObj` to `newObj`
-         */
         if (Array.isArray(value) && newObj[key] && newObj[key].length >= 1) {
           /* eslint-disable no-plusplus */
           for (let i = 0; i < newObj[key].length; i++) {
@@ -60,6 +57,8 @@ export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
         if (
           !isNil(newObj[key]) &&
           typeof value === 'object' &&
+          // Ignore Date as this will create invalid object since typeof date === 'object' return true
+          // ex: {date: new Date()} will result {date: {}}
           !(value instanceof Date)
         ) {
           const [, nestedObject] = copyEmptyArrayProps(value, newObj[key])
