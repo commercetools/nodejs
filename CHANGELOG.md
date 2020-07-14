@@ -1,3 +1,58 @@
+## @commercetools/sync-actions@4.8.1 (2020-07-14)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1580](https://github.com/commercetools/nodejs/pull/1580) Add array check for copy empty array props ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/state-importer@3.0.24 (2020-07-14)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1580](https://github.com/commercetools/nodejs/pull/1580) Add array check for copy empty array props ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/integration-tests@0.1.2 (2020-07-14)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1580](https://github.com/commercetools/nodejs/pull/1580) Add array check for copy empty array props ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/discount-code-importer@3.0.23 (2020-07-14)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1580](https://github.com/commercetools/nodejs/pull/1580) Add array check for copy empty array props ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/custom-objects-importer@3.0.24 (2020-07-14)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1580](https://github.com/commercetools/nodejs/pull/1580) Add array check for copy empty array props ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
 ## @commercetools/sync-actions@4.8.0 (2020-06-18)
 
 #### :rocket: New Feature
