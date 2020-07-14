@@ -5,7 +5,7 @@ const CUSTOM = 'custom'
 /**
  * @function copyEmptyArrayProps
  * @description Create new key with empty array value on `newobj` for the arrays exist on `oldObj` and doesnt exist on `newobj`
- * One use case is to easly compare two object without generating this error `Cannot read property '0' of undefined`
+ * One use case is to easily compare two object without generating this error `Cannot read property '0' of undefined`
  * @param {Object} oldObj
  * @param {Object} newObj
  * @returns {Array} Ordered Array [oldObj, newObj]
@@ -20,7 +20,7 @@ export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
         }
 
         // Ignore CUSTOM key as this object is dynamic and its up to the user to dynamically change it
-        // todo, i would be better if we pass it as ignored keys param
+        // todo, it would be better if we pass it as ignored keys param
         if (key === CUSTOM) return merged
 
         if (Array.isArray(value) && newObj[key] && newObj[key].length >= 1) {
