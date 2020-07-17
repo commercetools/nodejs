@@ -102,6 +102,26 @@ describe('Actions', () => {
     expect(actions).toEqual([{ action: 'changeName', ...now }])
   })
 
+  test('should build action with `staged` flag as false', () => {
+    const before = { name: { en: 'Car', de: 'Auto' } }
+    const now = { name: { en: 'Sport car' }, publish: true }
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual([
+      { action: 'changeName', name: { en: 'Sport car' }, staged: false },
+    ])
+  })
+
+  test('should build action without `staged` flag', () => {
+    const before = { name: { en: 'Car', de: 'Auto' } }
+    const now = { name: { en: 'Sport car' }, publish: false }
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual([
+      { action: 'changeName', name: { en: 'Sport car' } },
+    ])
+  })
+
   test('should build `setSearchKeywords` action', () => {
     /* eslint-disable max-len */
     const before = {
