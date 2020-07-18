@@ -112,6 +112,7 @@ export default {
       features.del,
       features.query,
       features.queryOne,
+      features.queryExpand,
     ],
   },
   discountCodes: {
