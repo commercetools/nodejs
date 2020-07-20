@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/inventories-exporter",
-  "version": "3.0.17",
+  "version": "3.0.18",
   "description": "Exports inventories from the commercetools platform.",
   "keywords": [
     "commercetools",
@@ -40,7 +40,7 @@
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {
-    "@commercetools/api-request-builder": "^5.6.1",
+    "@commercetools/api-request-builder": "^5.6.2",
     "@commercetools/get-credentials": "^3.0.16",
     "@commercetools/sdk-client": "^2.1.2",
     "@commercetools/sdk-middleware-auth": "^5.1.6",
