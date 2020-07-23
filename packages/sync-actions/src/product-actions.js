@@ -490,7 +490,9 @@ export function actionsMapCategories(diff) {
 
 export function actionsMapCategoryOrderHints(diff) {
   if (!diff.categoryOrderHints) return []
-  // Here we should ignore this pattern as its still no changes happened [{},0,0]
+  // Ignore this pattern as its means no changes happened [{},0,0]
+  if (Array.isArray(diff.categoryOrderHints)) return []
+
   return Object.keys(diff.categoryOrderHints).map((categoryId) => {
     const hintChange = diff.categoryOrderHints[categoryId]
 
