@@ -73,12 +73,12 @@ export function byCustomerId(custId: string): Object {
  * Set the given `orderNumber` to the `orderNumber` internal state of the service instance.
  * For querying orders
  *
- * @param  {number} orderNumber - An order number
+ * @param  {string} orderNumber - An order number
  * @throws If `orderNumber` is missing or invalid
  * @return {Object} The instance of the service, can be chained.
  */
-export function byOrderNumber(orderNumber: number): Object {
-  if (typeof orderNumber !== 'number')
+export function byOrderNumber(orderNumber: string): Object {
+  if (typeof orderNumber !== 'string')
     throw new Error(
       'Required argument for `byOrderNumber` is missing or invalid'
     )
