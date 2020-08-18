@@ -41,8 +41,8 @@ describe('queryId', () => {
   })
 
   test('should set the orderNumber param', () => {
-    service.byOrderNumber(123)
-    expect(service.params.orderNumber).toBe(123)
+    service.byOrderNumber('123')
+    expect(service.params.orderNumber).toBe('123')
   })
 
   test('should throw if orderNumber is missing', () => {
@@ -52,7 +52,7 @@ describe('queryId', () => {
   })
 
   test('should throw if orderNumber is invalid', () => {
-    expect(() => service.byOrderNumber('hi')).toThrow(
+    expect(() => service.byOrderNumber(123)).toThrow(
       /Required argument for `byOrderNumber` is missing/
     )
   })

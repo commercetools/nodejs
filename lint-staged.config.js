@@ -1,5 +1,5 @@
 module.exports = {
-  '*.md': ['npm run format:md'],
+  '*.md': ['yarn format:md'],
   'packages/**/*.js': [
     // NOTE: apparently if you pass some argument that is not a flag AFTER the `reporters`
     // flag, jest does not seem correctly parse the arguments.
@@ -9,7 +9,7 @@ module.exports = {
     //   Error: An error occurred while adding the reporter at path "/path/to/file".Reporter is not a constructor
     //
     // For that reason, we move the `--onlyChanged` flag next to it.
-    'npm run lint:js -- --reporters=jest-silent-reporter --onlyChanged',
+    'yarn lint:js -- --reporters=jest-silent-reporter --onlyChanged',
     'flow focus-check',
   ],
 }

@@ -1,95 +1,90 @@
-node10Environment: &node10Environment
-  docker:
-    - image: circleci/node:10
-  working_directory: ~/nodejs
-node12Environment: &node12Environment
-  docker:
-    - image: circleci/node:12
-  working_directory: ~/nodejs
+version: 2.1
 
 aliases:
-  - &restore_yarn_cache
-    keys:
-      - v3-yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - v3-yarn-cache-{{ .Branch }}
-      - v3-yarn-cache
+  - &working_directory ~/nodejs
 
-  - &save_yarn_cache
-    key: v3-yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+  - &restore_yarn_cache_node_10
+    keys:
+      - v1-yarn-cache-node_10-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - v1-yarn-cache-node_10-{{ .Branch }}
+      - v1-yarn-cache-node_10
+
+  - &save_yarn_cache_node_10
+    key: v1-yarn-cache-node_10-{{ .Branch }}-{{ checksum "yarn.lock" }}
     paths:
-      - node_modules
+      - ~/.cache/yarn
+
+  - &restore_yarn_cache_node_12
+    keys:
+      - v1-yarn-cache-node_12-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - v1-yarn-cache-node_12-{{ .Branch }}
+      - v1-yarn-cache-node_12
+
+  - &save_yarn_cache_node_12
+    key: v1-yarn-cache-node_12-{{ .Branch }}-{{ checksum "yarn.lock" }}
+    paths:
       - ~/.cache/yarn
 
   - &yarn_install
     name: Installing
     command: yarn --frozen-lockfile
 
-  - &unit_test
-    name: Unit testing
-    # Limiting the workers of Jest to 10
-    # as the build otherwise dies due to resouce restrictions.
-    command: yarn test:ci --maxWorkers=10
+executors:
+  node_10:
+    docker:
+      - image: circleci/node:10.22.0
+    working_directory: *working_directory
+  node_12:
+    docker:
+      # Keep it at `12.18.2` as otherwise there may be bugs with `graceful-fs` dependency
+      # https://github.com/nodejs/node/issues/34529
+      - image: circleci/node:12.18.2
+    working_directory: *working_directory
 
-  - &unit_test_with_coverage
-    name: Unit testing (with coverage report)
-    command: yarn test:coverage:ci
-
-version: 2
 jobs:
-  lint:
-    <<: *node12Environment
+  install_test_node_10:
+    executor: node_10
     steps:
       - checkout
-      - restore-cache: *restore_yarn_cache
+      - restore_cache: *restore_yarn_cache_node_10
       - run: *yarn_install
-      - save_cache: *save_yarn_cache
+      - save_cache: *save_yarn_cache_node_10
       - run:
-          name: Linting
+          name: Running linters
           # Limiting the workers of Jest to 10
-          # as the build otherwise dies due to resouce restrictions.
+          # as the build otherwise dies due to resource restrictions.
           command: yarn lint --maxWorkers=10
-  test_unit_node_10:
-    <<: *node10Environment
-    steps:
-      - checkout
-      - restore-cache: *restore_yarn_cache
-      - run: *yarn_install
-      - save_cache: *save_yarn_cache
-      - run: *unit_test
-  test_unit_node_12:
-    <<: *node12Environment
-    steps:
-      - checkout
-      - restore-cache: *restore_yarn_cache
-      - run: *yarn_install
-      - save_cache: *save_yarn_cache
-      - run: *unit_test_with_coverage
-  test_integration:
-    <<: *node12Environment
-    steps:
-      - checkout
-      - restore-cache: *restore_yarn_cache
-      - run: *yarn_install
-      - save_cache: *save_yarn_cache
       - run:
-          name: Integration testing
+          name: Running tests
+          # Limiting the workers of Jest to 10
+          # as the build otherwise dies due to resource restrictions.
+          command: yarn test:ci
+
+  install_test_node_12:
+    executor: node_12
+    steps:
+      - checkout
+      - restore_cache: *restore_yarn_cache_node_12
+      - run: *yarn_install
+      - save_cache: *save_yarn_cache_node_12
+      - run:
+          name: Running linters
+          # Limiting the workers of Jest to 10
+          # as the build otherwise dies due to resource restrictions.
+          command: yarn lint --maxWorkers=10
+      - run:
+          name: Running tests (with coverage report)
+          # Limiting the workers of Jest to 10
+          # as the build otherwise dies due to resource restrictions.
+          command: yarn test:coverage:ci
+      - run:
+          name: Running integration tests
           command: yarn test:integration
 
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - lint
-      - test_unit_node_10:
-          requires:
-            - lint
-      - test_unit_node_12:
-          requires:
-            - lint
-      - test_integration:
+      - install_test_node_10
+      - install_test_node_12:
           context: org-global
-          requires:
-            # Only depending on one unit testing
-            # job will speed up the build by starting
-            # the integration testing early (in confidence).
-            - test_unit_node_12
