@@ -218,7 +218,7 @@ describe('Auth Middleware Flows', () => {
             body: { results: carts },
             request: {
               headers: {
-                Authorization: [token],
+                Authorization: token,
               },
             },
           }) => {
