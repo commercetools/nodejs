@@ -2,11 +2,6 @@
 
 tars=()
 
-# https://github.com/nodejs/node/issues/34529
-echo "Patching NPM bug with graceful-fs"
-npm -v
-node -v
-
 echo "--> Pack all packages:"
 for dir in packages/*; do
   echo "$dir"
