@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/csv-parser-price",
-  "version": "4.0.18",
+  "version": "4.0.19",
   "description": "Converts commercetools price data from CSV to JSON.",
   "keywords": [
     "commercetools",
@@ -38,7 +38,7 @@
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {
-    "@commercetools/api-request-builder": "^5.6.2",
+    "@commercetools/api-request-builder": "^5.6.3",
     "@commercetools/get-credentials": "^3.0.16",
     "@commercetools/sdk-client": "^2.1.2",
     "@commercetools/sdk-middleware-auth": "^5.1.6",

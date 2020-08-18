@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/custom-objects-importer",
-  "version": "3.0.26",
+  "version": "3.0.27",
   "description": "Import custom objects to the commercetools platform",
   "main": "lib/main.js",
   "scripts": {
@@ -32,7 +32,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commercetools/api-request-builder": "^5.6.2",
+    "@commercetools/api-request-builder": "^5.6.3",
     "@commercetools/sdk-client": "^2.1.2",
     "@commercetools/sdk-middleware-auth": "^5.1.6",
     "@commercetools/sdk-middleware-http": "^6.0.7",
