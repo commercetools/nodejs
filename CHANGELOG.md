@@ -1,3 +1,201 @@
+## @commercetools/state-importer@3.0.27 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/resource-deleter@2.0.19 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/product-json-to-xlsx@4.0.12 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/product-json-to-csv@5.0.12 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/product-exporter@3.1.7 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/price-exporter@3.0.19 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/personal-data-erasure@3.0.18 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/inventories-exporter@3.0.19 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/integration-tests@0.1.5 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/discount-code-importer@3.0.26 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/discount-code-exporter@4.0.18 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/customer-groups-exporter@3.0.18 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/custom-objects-importer@3.0.27 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/custom-objects-exporter@3.0.18 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/csv-parser-state@3.0.17 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/csv-parser-price@4.0.19 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/category-exporter@3.0.18 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/api-request-builder@5.6.3 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
 ## @commercetools/sync-actions@4.8.1 (2020-07-14)
 
 #### :bug: Bug Fix
