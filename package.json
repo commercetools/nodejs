@@ -123,6 +123,10 @@
     "tsconfig-replace-paths": "0.0.5",
     "typescript": "3.9.7"
   },
+  "resolutions": {
+    "graceful-fs": "4.2.4",
+    "**/graceful-fs": "4.2.4"
+  },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
