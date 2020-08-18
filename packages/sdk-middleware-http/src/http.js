@@ -45,9 +45,9 @@ function calcDelayDuration(
 function maskAuthData(request: Object, maskSensitiveHeaderData: ?boolean) {
   if (maskSensitiveHeaderData) {
     if (request.headers.authorization)
-      request.headers.authorization = ['Bearer ********']
+      request.headers.authorization = 'Bearer ********'
     if (request.headers.Authorization)
-      request.headers.Authorization = ['Bearer ********']
+      request.headers.Authorization = 'Bearer ********'
   }
 }
 

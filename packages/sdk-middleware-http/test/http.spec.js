@@ -239,7 +239,7 @@ describe('Http', () => {
         expect(res.request).toEqual(
           expect.objectContaining({
             headers: {
-              'Content-Type': ['application/json'],
+              'Content-Type': 'application/json',
             },
           })
         )
@@ -275,8 +275,8 @@ describe('Http', () => {
         expect(res.request).toEqual(
           expect.objectContaining({
             headers: {
-              'Content-Type': ['application/json'],
-              Authorization: ['Bearer ********'],
+              'Content-Type': 'application/json',
+              Authorization: 'Bearer ********',
             },
           })
         )
@@ -291,7 +291,7 @@ describe('Http', () => {
       const httpMiddleware = createHttpMiddleware(httpOptions)
       nock(testHost)
         .defaultReplyHeaders({
-          'Content-Type': ['application/json'],
+          'Content-Type': 'application/json',
         })
         .get('/foo/bar')
         .reply(200, { foo: 'bar' })
@@ -304,7 +304,7 @@ describe('Http', () => {
       const request = createTestRequest({
         uri: '/foo/bar',
         headers: {
-          authorization: ['Bearer 123'],
+          authorization: 'Bearer 123',
         },
       })
       const response = { resolve, reject }
@@ -312,8 +312,8 @@ describe('Http', () => {
         expect(res.request).toEqual(
           expect.objectContaining({
             headers: {
-              'Content-Type': ['application/json'],
-              authorization: ['Bearer 123'],
+              'Content-Type': 'application/json',
+              authorization: 'Bearer 123',
             },
           })
         )
@@ -596,7 +596,7 @@ describe('Http', () => {
         expectedError.code = 400
         expectedError.statusCode = 400
         expectedError.headers = {
-          'content-type': ['application/json'],
+          'content-type': 'application/json',
         }
         expect(res).toEqual({
           ...response,
@@ -637,7 +637,7 @@ describe('Http', () => {
         expectedError.code = 500
         expectedError.statusCode = 500
         expectedError.headers = {
-          'content-type': ['application/json'],
+          'content-type': 'application/json',
         }
         expect(res).toEqual({
           ...response,
@@ -679,7 +679,7 @@ describe('Http', () => {
         expectedError.code = 500
         expectedError.statusCode = 500
         expectedError.headers = {
-          'content-type': ['application/json'],
+          'content-type': 'application/json',
         }
         expect(res).toEqual({
           ...response,
@@ -691,8 +691,8 @@ describe('Http', () => {
           method: 'GET',
           uri: '/foo/bar',
           headers: {
-            authorization: ['Bearer ********'],
-            Authorization: ['Bearer ********'],
+            authorization: 'Bearer ********',
+            Authorization: 'Bearer ********',
           },
         })
         resolve()
@@ -733,7 +733,7 @@ describe('Http', () => {
         expectedError.code = 500
         expectedError.statusCode = 500
         expectedError.headers = {
-          'content-type': ['application/json'],
+          'content-type': 'application/json',
         }
         expect(res).toEqual({
           ...response,
@@ -843,8 +843,8 @@ describe('Http', () => {
           method: 'GET',
           uri: '/foo/bar',
           headers: {
-            authorization: ['Bearer ********'],
-            Authorization: ['Bearer ********'],
+            authorization: 'Bearer ********',
+            Authorization: 'Bearer ********',
           },
         })
         resolve()
