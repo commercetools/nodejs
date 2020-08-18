@@ -25,7 +25,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -63,7 +63,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -102,7 +102,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -140,7 +140,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -178,7 +178,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -216,7 +216,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -254,7 +254,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -292,7 +292,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -332,7 +332,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -370,7 +370,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -408,7 +408,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -446,7 +446,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 2.  `config` _(Object)_: A configuration object to which has one of the following options:
 
 | Key                     | Type      | Required             | Description                                                                                                            |
@@ -599,7 +599,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -638,7 +638,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -677,7 +677,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -718,7 +718,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 2.  `config` _(Object)_: A configuration object to which has one of the following options:
 
 | Key                     | Type      | Required             | Description                                                                                                            |
@@ -768,7 +768,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -847,7 +847,7 @@ Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API up
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _blacklisted_ or _whitelisted_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 

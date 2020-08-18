@@ -109,6 +109,6 @@ type SyncAction = {
 
 type ActionGroup = {
   type: string,
-  group: 'black' | 'white',
+  group: 'ignore' | 'allow',
 }
 ```

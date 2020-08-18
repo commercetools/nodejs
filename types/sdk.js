@@ -436,7 +436,7 @@ export type SyncActionConfig = {
 }
 export type ActionGroup = {
   type: string,
-  group: 'black' | 'white',
+  group: 'ignore' | 'allow',
 }
 
 export type ExistingTokenMiddlewareOptions = {
