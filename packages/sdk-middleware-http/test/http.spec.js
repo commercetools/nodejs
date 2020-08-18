@@ -134,6 +134,39 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
+  test('execute a request with timeout and client re-use', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          body: { foo: 'bar' },
+          statusCode: 200,
+        })
+        resolve()
+      }
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        timeout: 100, // time out after 100ms
+        fetch,
+        abortController: new AbortController(),
+      })
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(200, { foo: 'bar' })
+      // Set delay to emulate instantiated SDK sitting idle
+      setTimeout(() => {
+        httpMiddleware(next)(request, response)
+      }, 110)
+    }))
+
   test('should accept HEAD request and return without response body', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({ uri: '/foo', method: 'HEAD' })

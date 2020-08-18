@@ -90,12 +90,6 @@ export default function createHttpMiddleware({
     // eslint-disable-next-line
     abortController = _abortController || new AbortController()
 
-  let timer
-  if (timeout)
-    timer = setTimeout(() => {
-      abortController.abort()
-    }, timeout)
-
   return (next: Next): Next => (
     request: MiddlewareRequest,
     response: MiddlewareResponse
@@ -125,6 +119,12 @@ export default function createHttpMiddleware({
     let retryCount = 0
     // wrap in a fn so we can retry if error occur
     function executeFetch() {
+      // Kick off timer for abortController directly before fetch.
+      let timer
+      if (timeout)
+        timer = setTimeout(() => {
+          abortController.abort()
+        }, timeout)
       // $FlowFixMe
       fetcher(url, fetchOptions)
         .then(
