@@ -21,6 +21,7 @@ import type {
   ClientRequest,
   ClientResult,
   MethodType,
+  ServiceBuilderInstance,
 } from 'types/sdk'
 import silentLogger from './utils/silent-logger'
 import pkg from '../package.json'
@@ -153,7 +154,7 @@ export default class ResourceDeleter {
       })
   }
 
-  createService() {
+  createService(): ServiceBuilderInstance {
     return createRequestBuilder({
       projectKey: this.apiConfig.projectKey,
     })[this.resource]

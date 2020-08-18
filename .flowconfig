@@ -1,5 +1,5 @@
 [version]
-^0.126.1
+^0.131.0
 
 [ignore]
 <PROJECT_ROOT>/_book/.*
@@ -55,8 +55,24 @@ packages/*/src
 
 [libs]
 
+[lints]
+# https://dev.to/wgao19/making-flow-happy-after-0-98-32bb
+# NOTE: express flow-typed currently contain some `$Subtype` types.
+deprecated-utility=off
+
 [options]
-module.name_mapper='^types/\(.*\)$' -> '<PROJECT_ROOT>/types/\1.js'
-include_warnings=true
 emoji=true
+include_warnings=true
 esproposal.optional_chaining=enable
+esproposal.nullish_coalescing=enable
+
+server.max_workers=2
+
+module.name_mapper='^types/\(.*\)$' -> '<PROJECT_ROOT>/types/\1.js'
+
+suppress_type=$FlowIssue
+suppress_type=$FlowFixMe
+
+# https://medium.com/flow-type/types-first-a-scalable-new-architecture-for-flow-3d8c7ba1d4eb
+well_formed_exports=true
+types_first=true

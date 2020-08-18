@@ -11,21 +11,23 @@ export type MethodType =
   | 'PATCH'
   | 'TRACE'
 
+export type HttpHeaders = {
+  [key: string]: string,
+}
+
 /* Client */
 export type ClientRequest = {
   uri: string,
   method: MethodType,
   body?: string | Object,
-  headers?: {
-    [key: string]: string,
-  },
+  headers?: HttpHeaders,
 }
 export type AuthRequest = {
   uri: string,
   body: string,
   basicAuth: string,
   authType: string,
-  headers?: Object,
+  headers?: HttpHeaders,
 }
 export type HttpErrorType = {
   name: string,
@@ -35,22 +37,20 @@ export type HttpErrorType = {
   statusCode: number,
   originalRequest: ClientRequest,
   body?: Object,
-  headers?: {
-    [key: string]: string,
-  },
+  headers?: HttpHeaders,
 }
 export type ClientResponse = {
   body?: Object,
   error?: HttpErrorType,
   statusCode: number,
-  headers?: Object,
+  headers?: HttpHeaders,
   request?: Object,
 }
 
 export type SuccessResult = {
   body: Object,
   statusCode: number,
-  headers?: Object,
+  headers?: HttpHeaders,
 }
 export type ClientResult = SuccessResult | HttpErrorType
 export type Client = {
@@ -75,7 +75,7 @@ export type MiddlewareResponse = {
   body?: Object,
   error?: HttpErrorType,
   statusCode: number,
-  headers?: Object,
+  headers?: HttpHeaders,
   request?: Object,
 }
 // eslint-disable-next-line max-len
@@ -88,8 +88,6 @@ export type ClientOptions = {
   middlewares: Array<Middleware>,
 }
 
-export type ConfigFetch = (url: string, args?: Object) => Promise<any>
-
 export type AuthMiddlewareOptions = {
   host: string,
   projectKey: string,
@@ -101,7 +99,7 @@ export type AuthMiddlewareOptions = {
   scopes: Array<string>,
   // For internal usage only
   oauthUri: string,
-  fetch?: ConfigFetch,
+  fetch?: typeof fetch,
   tokenCache?: TokenCache,
 }
 
@@ -115,10 +113,9 @@ export type AuthOptions = {
     clientId: string,
     clientSecret: string,
   },
-  headers?: Object,
+  headers?: HttpHeaders,
   scopes?: Array<string>,
-  // For internal usage only
-  fetch?: ConfigFetch,
+  fetch?: typeof fetch,
 }
 
 export type CustomAuthOptions = {
@@ -131,10 +128,9 @@ export type CustomAuthOptions = {
     clientId: string,
     clientSecret: string,
   },
-  headers?: Object,
+  headers?: HttpHeaders,
   scopes?: Array<string>,
-  // For internal usage only
-  fetch?: ConfigFetch,
+  fetch?: typeof fetch,
 }
 
 export type TokenInfo = {
@@ -156,7 +152,7 @@ export type RefreshAuthMiddlewareOptions = {
   refreshToken: string,
   // For internal usage only
   oauthUri: string,
-  fetch?: (url: string, args?: Object) => Promise<any>,
+  fetch?: typeof fetch,
 }
 
 export type Task = {
@@ -199,12 +195,12 @@ type requestBaseOptions = {
   tokenCacheKey?: TokenCacheOptions,
 }
 export type executeRequestOptions = requestBaseOptions & {
-  fetcher: (url: string, args?: Object) => Promise<any>,
+  fetcher: typeof fetch,
 }
 
 export type AuthMiddlewareBaseOptions = requestBaseOptions & {
   request: MiddlewareRequest,
-  fetch?: (url: string, args?: Object) => Promise<any>,
+  fetch?: typeof fetch,
 }
 
 export type UserAuthOptions = {
@@ -228,17 +224,7 @@ export type PasswordAuthMiddlewareOptions = {
   scopes: Array<string>,
   // For internal usage only
   oauthUri: string,
-  fetch?: (url: string, args?: Object) => Promise<any>,
-}
-
-// translation of https://dom.spec.whatwg.org/#abortcontroller
-interface AbortSignal extends EventTarget {
-  +aborted: boolean;
-  onabort: EventHandler;
-}
-class AbortController {
-  +signal: AbortSignal
-  abort: () => void
+  fetch?: typeof fetch,
 }
 
 export type HttpMiddlewareOptions = {
@@ -256,7 +242,7 @@ export type HttpMiddlewareOptions = {
     backoff?: boolean,
     maxDelay?: number,
   },
-  fetch?: (url: string, options?: Object) => Promise<any>,
+  fetch?: typeof fetch,
   abortController?: AbortController,
 }
 export type QueueMiddlewareOptions = {

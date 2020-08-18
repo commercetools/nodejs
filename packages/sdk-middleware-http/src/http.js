@@ -1,6 +1,7 @@
 /* @flow */
 
 import type {
+  HttpHeaders,
   HttpErrorType,
   HttpMiddlewareOptions,
   Middleware,
@@ -76,14 +77,18 @@ export default function createHttpMiddleware({
     throw new Error(
       '`AbortController` is not available. Please pass in `AbortController` as an option or have it globally available when using timeout.'
     )
-
-  if (!fetcher)
+  let fetchFunction: typeof fetch
+  if (fetcher) {
+    fetchFunction = fetcher
+  } else {
     // `fetcher` is set here rather than the destructuring to ensure fetch is
     // declared before referencing it otherwise it would cause a `ReferenceError`.
     // For reference of this pattern: https://github.com/apollographql/apollo-link/blob/498b413a5b5199b0758ce898b3bb55451f57a2fa/packages/apollo-link-http/src/httpLink.ts#L49
 
-    // eslint-disable-next-line
-    fetcher = fetch
+    /* eslint-disable */
+    fetchFunction = fetch
+    /* eslint-enable */
+  }
 
   let abortController
   if (timeout || _abortController)
@@ -100,21 +105,28 @@ export default function createHttpMiddleware({
         ? request.body
         : // NOTE: `stringify` of `null` gives the String('null')
           JSON.stringify(request.body || undefined)
-    // $FlowFixMe
-    const requestHeader = {
-      'Content-Type': ['application/json'],
-      ...request.headers,
-      ...(body
-        ? { 'Content-Length': Buffer.byteLength(body).toString() }
-        : null),
+
+    const requestHeader: HttpHeaders = { ...request.headers }
+    if (
+      !Object.prototype.hasOwnProperty.call(request.headers, 'Content-Type')
+    ) {
+      requestHeader['Content-Type'] = 'application/json'
     }
-    // $FlowFixMe
-    const fetchOptions: Object = {
+    if (body) {
+      requestHeader['Content-Length'] = Buffer.byteLength(body).toString()
+    }
+    const fetchOptions: RequestOptions = {
       method: request.method,
       headers: requestHeader,
-      ...(credentialsMode ? { credentials: credentialsMode } : {}),
-      ...(timeout || abortController ? { signal: abortController.signal } : {}),
-      ...(body ? { body } : null),
+    }
+    if (credentialsMode) {
+      fetchOptions.credentials = credentialsMode
+    }
+    if (timeout || abortController) {
+      fetchOptions.signal = abortController.signal
+    }
+    if (body) {
+      fetchOptions.body = body
     }
     let retryCount = 0
     // wrap in a fn so we can retry if error occur
@@ -125,8 +137,7 @@ export default function createHttpMiddleware({
         timer = setTimeout(() => {
           abortController.abort()
         }, timeout)
-      // $FlowFixMe
-      fetcher(url, fetchOptions)
+      fetchFunction(url, fetchOptions)
         .then(
           (res: Response) => {
             if (res.ok) {

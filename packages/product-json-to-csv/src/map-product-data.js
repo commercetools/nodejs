@@ -305,7 +305,7 @@ export default class ProductMapping {
    * @returns Object
    * @private
    */
-  _joinMappedSetValues(setValues: Array<Object>) {
+  _joinMappedSetValues(setValues: Array<Object>): Object {
     // when there is an object property missing in first N objects, we should
     // prepend value from N+1 object with delimiters:
     // [{attrName.en: 'AA'}, {attrName.en: 'BB'},{attrName.de: '12'}]
