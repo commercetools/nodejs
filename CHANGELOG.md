@@ -1,3 +1,410 @@
+## @commercetools/state-importer@3.0.28 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/sdk-middleware-http@6.0.8 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/sdk-auth@3.0.9 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/resource-deleter@2.0.20 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/product-json-to-xlsx@4.0.13 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/product-json-to-csv@5.0.13 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/product-exporter@3.1.8 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/price-exporter@3.0.20 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/personal-data-erasure@3.0.19 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/inventories-exporter@3.0.20 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/integration-tests@0.1.6 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/discount-code-importer@3.0.27 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/discount-code-exporter@4.0.19 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/customer-groups-exporter@3.0.19 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/custom-objects-importer@3.0.28 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/custom-objects-exporter@3.0.19 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/csv-parser-state@3.0.18 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/csv-parser-price@4.0.20 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/category-exporter@3.0.19 (2020-08-18)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1600](https://github.com/commercetools/nodejs/pull/1600) fix(sdk-middleware-http): abortController timing ([@jluterek](https://github.com/jluterek))
+
+#### Committers: 1
+
+- James Luterek ([@jluterek](https://github.com/jluterek))
+
+## @commercetools/state-importer@3.0.27 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/resource-deleter@2.0.19 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/product-json-to-xlsx@4.0.12 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/product-json-to-csv@5.0.12 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/product-exporter@3.1.7 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/price-exporter@3.0.19 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/personal-data-erasure@3.0.18 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/inventories-exporter@3.0.19 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/integration-tests@0.1.5 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/discount-code-importer@3.0.26 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/discount-code-exporter@4.0.18 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/customer-groups-exporter@3.0.18 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/custom-objects-importer@3.0.27 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/custom-objects-exporter@3.0.18 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/csv-parser-state@3.0.17 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/csv-parser-price@4.0.19 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/category-exporter@3.0.18 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
+## @commercetools/api-request-builder@5.6.3 (2020-08-18)
+
+#### :house: Maintenance
+
+- [#1592](https://github.com/commercetools/nodejs/pull/1592) chore(deps): update all dependencies ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 2
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+- Reinier Hartog ([@rmhartog](https://github.com/rmhartog))
+
 ## @commercetools/sync-actions@4.8.1 (2020-07-14)
 
 #### :bug: Bug Fix
