@@ -38,7 +38,7 @@ executors:
     docker:
       # Keep it at `12.18.2` as otherwise there may be bugs with `graceful-fs` dependency
       # https://github.com/nodejs/node/issues/34529
-      - image: circleci/node:12.18.2
+      - image: circleci/node:12.18.3
     working_directory: *working_directory
 
 jobs:
