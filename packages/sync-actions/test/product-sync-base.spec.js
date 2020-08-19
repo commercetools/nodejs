@@ -288,6 +288,30 @@ describe('Actions', () => {
     ])
   })
 
+  test('shouldnt generate any categoryOrderHints actions', () => {
+    const before = {
+      categoryOrderHints: {},
+    }
+
+    const now = {}
+
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual([])
+  })
+
+  test('shouldnt generate any searchKeywords actions', () => {
+    const before = {
+      searchKeywords: {},
+    }
+
+    const now = {}
+
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual([])
+  })
+
   test('should build base actions for long diff text', () => {
     const longText = `
     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
