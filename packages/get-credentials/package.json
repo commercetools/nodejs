@@ -29,7 +29,7 @@
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "devDependencies": {
-    "sinon": "9.0.2"
+    "sinon": "9.0.3"
   },
   "dependencies": {
     "dotenv": "^8.0.0"
