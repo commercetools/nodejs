@@ -118,7 +118,7 @@
     "rollup-plugin-replace": "2.2.0",
     "rollup-plugin-uglify": "6.0.4",
     "rollup-watch": "4.3.1",
-    "streamtest": "1.2.4",
+    "streamtest": "2.0.0",
     "ts-jest": "26.2.0",
     "tsconfig-replace-paths": "0.0.5",
     "typescript": "3.9.7"
