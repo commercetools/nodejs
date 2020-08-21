@@ -16,9 +16,9 @@ describe('createMapActionGroup', () => {
   })
 
   describe('with found `actionGroup` (type)', () => {
-    describe('with `group` being `white`', () => {
+    describe('with `group` being `allow`', () => {
       const fn = jest.fn()
-      const actionGroups = [{ type: 'base', group: 'white' }]
+      const actionGroups = [{ type: 'base', group: 'allow' }]
       let mapActionGroup
 
       beforeEach(() => {
@@ -31,9 +31,9 @@ describe('createMapActionGroup', () => {
       })
     })
 
-    describe('with `group` being `black`', () => {
+    describe('with `group` being `ignore`', () => {
       const fn = jest.fn()
-      const actionGroups = [{ type: 'base', group: 'black' }]
+      const actionGroups = [{ type: 'base', group: 'ignore' }]
       let mapActionGroup
 
       beforeEach(() => {
@@ -66,7 +66,7 @@ describe('createMapActionGroup', () => {
           mapActionGroup(actionGroups[0].type, fn)
         }).toThrow(
           `Action group '${actionGroups[0].group}' ` +
-            'not supported. Please use black or white.'
+            'not supported. Use either "allow" or "ignore".'
         )
       })
     })
@@ -74,7 +74,7 @@ describe('createMapActionGroup', () => {
 
   describe('with non found `actionGroup` (type)', () => {
     const fn = jest.fn()
-    const actionGroups = [{ type: 'base', group: 'white' }]
+    const actionGroups = [{ type: 'base', group: 'allow' }]
     let mapActionGroup
 
     beforeEach(() => {

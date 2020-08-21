@@ -32,8 +32,8 @@ If you have any urgent issues regarding this repository please create a support 
 We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information on our guidelines.
 
 ## Packages
-:warning: **Typescript SDK** is moved to a new [`repository`](https://github.com/commercetools/commercetools-typescript-sdks) now, this package will be deleted soon from the current repository.
 
+:warning: **Typescript SDK** is moved to a new [`repository`](https://github.com/commercetools/commercetools-typescript-sdks) now, this package will be deleted soon from the current repository.
 
 ### SDK
 

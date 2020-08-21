@@ -25,7 +25,7 @@ function createDiscountCodesMapActions(mapActionGroup, syncActionConfig) {
 
 export default (actionGroupList, syncActionConfig = {}) => {
   // actionGroupList contains information about which action groups
-  // are white/black listed
+  // are allowed or ignored
 
   // createMapActionGroup returns function 'mapActionGroup' that takes params:
   // - action group name
@@ -33,8 +33,8 @@ export default (actionGroupList, syncActionConfig = {}) => {
   //    to the for the action group
 
   // this resulting function mapActionGroup will call the callback function
-  // for whitelisted action groups and return the return value of the callback
-  // It will return an empty array for blacklisted action groups
+  // for allowed action groups and return the return value of the callback
+  // It will return an empty array for ignored action groups
   const mapActionGroup = createMapActionGroup(actionGroupList)
   const doMapActions = createDiscountCodesMapActions(
     mapActionGroup,

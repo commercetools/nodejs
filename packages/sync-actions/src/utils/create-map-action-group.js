@@ -1,9 +1,9 @@
-// Array of action groups which need to be whitelisted or blacklisted.
+// Array of action groups which need to be allowed or ignored.
 // Example:
 // [
-//   { type: 'base', group: 'black' },
-//   { type: 'prices', group: 'white' },
-//   { type: 'variants', group: 'black' },
+//   { type: 'base', group: 'ignore' },
+//   { type: 'prices', group: 'allow' },
+//   { type: 'variants', group: 'ignore' },
 // ]
 export default function createMapActionGroup(actionGroups = []) {
   return function mapActionGroup(type, fn) {
@@ -12,11 +12,13 @@ export default function createMapActionGroup(actionGroups = []) {
     const found = actionGroups.find((c) => c.type === type)
     if (!found) return []
 
-    if (found.group === 'black') return []
-    if (found.group === 'white') return fn()
+    // Keep `black` for backwards compatibility.
+    if (found.group === 'ignore' || found.group === 'black') return []
+    // Keep `white` for backwards compatibility.
+    if (found.group === 'allow' || found.group === 'white') return fn()
 
     throw new Error(
-      `Action group '${found.group}' not supported. Please use black or white.`
+      `Action group '${found.group}' not supported. Use either "allow" or "ignore".`
     )
   }
 }
