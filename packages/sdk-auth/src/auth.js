@@ -64,10 +64,7 @@ export default class SdkAuth {
       // `fetcher` is set here rather than the destructuring to ensure fetch is
       // declared before referencing it otherwise it would cause a `ReferenceError`.
       // For reference of this pattern: https://github.com/apollographql/apollo-link/blob/498b413a5b5199b0758ce898b3bb55451f57a2fa/packages/apollo-link-http/src/httpLink.ts#L49
-
-      /* eslint-disable */
       fetchFunction = fetch
-      /* eslint-enable */
     }
     return fetchFunction
   }
