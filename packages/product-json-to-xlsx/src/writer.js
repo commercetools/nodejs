@@ -43,7 +43,7 @@ export function finishWorksheetsAndArchive(
   dir: string,
   output: stream$Writable,
   logger: Object
-) {
+): void {
   if (exports.length === 0) return archiveDir(dir, output, logger)
 
   const writeStreams: Array<stream$Writable> = exports.map(

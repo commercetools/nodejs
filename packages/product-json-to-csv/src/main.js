@@ -197,7 +197,7 @@ export default class ProductJsonToCsv {
     )
   }
 
-  async _resolveVariantReferences(variant: Variant) {
+  async _resolveVariantReferences(variant: Variant): Promise<Variant> {
     if (!variant) return variant
 
     return {

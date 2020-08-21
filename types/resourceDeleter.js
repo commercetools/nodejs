@@ -23,7 +23,7 @@ export type ApiConfigOptions = {
 
 /* Client */
 export type CustomClientResult = ClientResult & {
-  id?: string,
+  id: string,
   version?: number,
 }
 

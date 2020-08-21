@@ -4,7 +4,6 @@ import type {
   AuthOptions,
   CustomAuthOptions,
   ClientAuthOptions,
-  ConfigFetch,
   HttpErrorType,
   AuthRequest,
   UserAuthOptions,
@@ -17,7 +16,7 @@ import * as constants from './constants'
 export default class SdkAuth {
   // Set flowtype annotations
   config: AuthOptions
-  fetcher: ConfigFetch
+  fetcher: typeof fetch
   ANONYMOUS_FLOW_URI: string
   BASE_AUTH_FLOW_URI: string
   CUSTOMER_PASSWORD_FLOW_URI: string
@@ -53,12 +52,21 @@ export default class SdkAuth {
     this.INTROSPECT_URI = '/oauth/introspect'
   }
 
-  static _getFetcher(configFetch: ?ConfigFetch): ConfigFetch {
-    if (!configFetch && typeof fetch === 'undefined')
+  static _getFetcher(fetcher: ?typeof fetch): typeof fetch {
+    if (!fetcher && typeof fetch === 'undefined')
       throw new Error(
         '`fetch` is not available. Please pass in `fetch` as an option or have it globally available.'
       )
-    return configFetch || fetch
+    let fetchFunction: typeof fetch
+    if (fetcher) {
+      fetchFunction = fetcher
+    } else {
+      // `fetcher` is set here rather than the destructuring to ensure fetch is
+      // declared before referencing it otherwise it would cause a `ReferenceError`.
+      // For reference of this pattern: https://github.com/apollographql/apollo-link/blob/498b413a5b5199b0758ce898b3bb55451f57a2fa/packages/apollo-link-http/src/httpLink.ts#L49
+      fetchFunction = fetch
+    }
+    return fetchFunction
   }
 
   static _checkRequiredConfiguration(config: AuthOptions) {
@@ -78,11 +86,11 @@ export default class SdkAuth {
   static _encodeClientCredentials({
     clientId,
     clientSecret,
-  }: ClientAuthOptions) {
+  }: ClientAuthOptions): string {
     return Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
   }
 
-  static _getScopes(scopes: ?Array<string>, projectKey: ?string) {
+  static _getScopes(scopes: ?Array<string>, projectKey: ?string): string {
     return scopes
       ? scopes.join(' ')
       : [constants.MANAGE_PROJECT, projectKey].filter(Boolean).join(':') // generate a default scope manage_project:projectKey
@@ -108,11 +116,20 @@ export default class SdkAuth {
     const authType = config.authType || constants.DEFAULT_AUTH_TYPE
 
     const isNotRefreshTokenGrantType = grantType !== 'refresh_token'
-    const initialBody = encode({
+    const queryParams: {
+      grant_type: string,
+      refresh_token?: boolean,
+      scope?: string,
+    } = {
       grant_type: grantType,
-      ...(disableRefreshToken && { refresh_token: false }),
-      ...(isNotRefreshTokenGrantType && { scope }),
-    })
+    }
+    if (disableRefreshToken) {
+      queryParams.refresh_token = false
+    }
+    if (isNotRefreshTokenGrantType) {
+      queryParams.scope = scope
+    }
+    const initialBody = encode(queryParams)
 
     return { basicAuth, authType, uri, body: initialBody, headers }
   }
@@ -131,7 +148,7 @@ export default class SdkAuth {
     return request
   }
 
-  _process(request: AuthRequest) {
+  _process(request: AuthRequest): Promise<Object> {
     return this._performRequest(request).then((response) =>
       SdkAuth._handleResponse(request.uri, response)
     )
@@ -173,7 +190,7 @@ export default class SdkAuth {
     return response
   }
 
-  static _handleResponse(uri: string, response: Object) {
+  static _handleResponse(uri: string, response: Response): Promise<Object> {
     return SdkAuth._parseResponseJson(response).then((jsonResponse) => {
       if (SdkAuth._isErrorResponse(response))
         throw SdkAuth._createResponseError(jsonResponse, uri, response.status)
@@ -199,7 +216,7 @@ export default class SdkAuth {
     return uri.replace('--projectKey--', projectKey)
   }
 
-  _performRequest(request: AuthRequest) {
+  _performRequest(request: AuthRequest): Promise<Response> {
     const { uri, body, basicAuth, authType, headers } = request
     const fetchHeaders = headers || {
       Authorization: `${authType || constants.DEFAULT_AUTH_TYPE} ${basicAuth}`,
@@ -228,7 +245,10 @@ export default class SdkAuth {
     return mergedConfig
   }
 
-  anonymousFlow(anonymousId: string = '', config: CustomAuthOptions = {}) {
+  anonymousFlow(
+    anonymousId: string = '',
+    config: CustomAuthOptions = {}
+  ): Promise<Object> {
     const _config = this._getRequestConfig(config)
     let request = SdkAuth._buildRequest(
       _config,
@@ -246,7 +266,7 @@ export default class SdkAuth {
     return this._process(request)
   }
 
-  clientCredentialsFlow(config: CustomAuthOptions = {}) {
+  clientCredentialsFlow(config: CustomAuthOptions = {}): Promise<Object> {
     const _config = this._getRequestConfig(config)
     const request = SdkAuth._buildRequest(_config, this.BASE_AUTH_FLOW_URI)
 
@@ -257,7 +277,7 @@ export default class SdkAuth {
     credentials: UserAuthOptions,
     config: AuthOptions,
     url: string
-  ) {
+  ): Promise<Object> {
     const { username, password } = credentials || {}
     let request = SdkAuth._buildRequest(config, url, 'password')
 
@@ -269,7 +289,7 @@ export default class SdkAuth {
   customerPasswordFlow(
     credentials: UserAuthOptions,
     config: CustomAuthOptions = {}
-  ) {
+  ): Promise<Object> {
     const _config = this._getRequestConfig(config)
     const url = SdkAuth._enrichUriWithProjectKey(
       this.CUSTOMER_PASSWORD_FLOW_URI,
@@ -282,13 +302,16 @@ export default class SdkAuth {
   clientPasswordFlow(
     credentials: UserAuthOptions,
     config: CustomAuthOptions = {}
-  ) {
+  ): Promise<Object> {
     const _config = this._getRequestConfig(config)
 
     return this._passwordFlow(credentials, _config, this.BASE_AUTH_FLOW_URI)
   }
 
-  refreshTokenFlow(token: string, config: CustomAuthOptions = {}) {
+  refreshTokenFlow(
+    token: string,
+    config: CustomAuthOptions = {}
+  ): Promise<Object> {
     if (!token) throw new Error('Missing required token value')
 
     const _config = this._getRequestConfig(config)
@@ -300,7 +323,10 @@ export default class SdkAuth {
     return this._process(request)
   }
 
-  introspectToken(token: string, config: CustomAuthOptions = {}) {
+  introspectToken(
+    token: string,
+    config: CustomAuthOptions = {}
+  ): Promise<Object> {
     if (!token) throw new Error('Missing required token value')
 
     const _config = this._getRequestConfig(config)
@@ -312,7 +338,7 @@ export default class SdkAuth {
     return this._process(request)
   }
 
-  customFlow(requestConfig: Object) {
+  customFlow(requestConfig: Object): Promise<Object> {
     const {
       credentials,
       host,
