@@ -38,7 +38,7 @@
     "lib"
   ],
   "devDependencies": {
-    "streamtest": "1.2.4"
+    "streamtest": "2.0.0"
   },
   "dependencies": {
     "@commercetools/api-request-builder": "^5.6.3",

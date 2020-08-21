@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "sinon": "9.0.3",
-    "streamtest": "1.2.4",
+    "streamtest": "2.0.0",
     "tmp": "0.2.1"
   }
 }
