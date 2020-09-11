@@ -243,7 +243,8 @@ export type HttpMiddlewareOptions = {
     maxDelay?: number,
   },
   fetch?: typeof fetch,
-  abortController?: AbortController,
+  abortController?: AbortController, // deprecated
+  getAbortController: () => AbortController
 }
 export type QueueMiddlewareOptions = {
   concurrency: number,
