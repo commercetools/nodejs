@@ -26,6 +26,6 @@ module.exports = {
     '/integration-tests/',
     '/packages/.*/node_modules',
     '/packages/.*/dist',
-    '/packages/.*/li',
+    '/packages/.*/lib',
   ],
 }
