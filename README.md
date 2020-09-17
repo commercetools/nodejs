@@ -33,8 +33,6 @@ We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.
 
 ## Packages
 
-:warning: **Typescript SDK** is moved to a new [`repository`](https://github.com/commercetools/commercetools-typescript-sdks) now, this package will be deleted soon from the current repository.
-
 ### SDK
 
 | Package                                                            | Version                                                                                                   | Dependencies                                                                                                                            |
