@@ -952,4 +952,34 @@ describe('Http', () => {
 
       httpMiddleware(next)(request, response)
     }))
+
+  test('execute a post request with empty 202 response', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+        method: 'POST',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          body: {},
+          statusCode: 202,
+        })
+        resolve()
+      }
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        fetch,
+      })
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .post('/foo/bar')
+        .reply(202, undefined)
+
+      httpMiddleware(next)(request, response)
+    }))
 })
