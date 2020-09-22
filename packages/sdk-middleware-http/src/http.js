@@ -146,10 +146,10 @@ export default function createHttpMiddleware({
                 return
               }
 
-              res.json().then((result: Object) => {
+              res.text().then((result: Object) => {
                 const parsedResponse: Object = {
                   ...response,
-                  body: result,
+                  body: result.length > 0 ? JSON.parse(result) : {},
                   statusCode: res.status,
                 }
 
