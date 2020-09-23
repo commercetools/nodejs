@@ -46,6 +46,10 @@ export default class LineItemStateParser extends AbstractParser {
       toState: data.toState,
     }
 
+    if (data.actualTransitionDate) {
+      state.actualTransitionDate = data.actualTransitionDate
+    }
+
     if (data._fromStateQty)
       state._fromStateQty = parseInt(data._fromStateQty, 10)
 
