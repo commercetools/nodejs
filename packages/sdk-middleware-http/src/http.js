@@ -95,7 +95,7 @@ export default function createHttpMiddleware({
     let abortController
     if (timeout || getAbortController || _abortController)
       // eslint-disable-next-line
-      abortController = getAbortController() || _abortController || new AbortController()
+      abortController = (getAbortController ? getAbortController(): null) || _abortController || new AbortController()
 
     const url = host.replace(/\/$/, '') + request.uri
     const body =
