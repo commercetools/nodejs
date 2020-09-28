@@ -151,7 +151,6 @@ describe('Actions', () => {
       const actions = productsSync.buildActions(now, before, {
         enableDiscounted: true,
       })
-      console.log(`=>>>>>>>> ${JSON.stringify(actions)}`)
       expect(actions).toEqual([
         {
           action: 'changePrice',
