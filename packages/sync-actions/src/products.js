@@ -42,7 +42,7 @@ function createProductMapActions(
     options: Object = {}
   ): Array<UpdateAction> {
     const allActions = []
-    const { sameForAllAttributeNames } = options
+    const { sameForAllAttributeNames, enableDiscounted } = options
     const { publish } = newObj
 
     const variantHashMap = findMatchingPairs(
@@ -108,7 +108,13 @@ function createProductMapActions(
 
     allActions.push(
       mapActionGroup('prices', (): Array<UpdateAction> =>
-        productActions.actionsMapPrices(diff, oldObj, newObj, variantHashMap)
+        productActions.actionsMapPrices(
+          diff,
+          oldObj,
+          newObj,
+          variantHashMap,
+          enableDiscounted
+        )
       )
     )
 

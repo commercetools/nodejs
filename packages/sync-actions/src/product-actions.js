@@ -236,7 +236,8 @@ function _buildVariantImagesAction(
 function _buildVariantPricesAction(
   diffedPrices,
   oldVariant = {},
-  newVariant = {}
+  newVariant = {},
+  enableDiscounted = false
 ) {
   const addPriceActions = []
   const changePriceActions = []
@@ -260,7 +261,7 @@ function _buildVariantPricesAction(
         // Remove read-only fields
         const patchedPrice = price.map((p) => {
           const shallowClone = { ...p }
-          delete shallowClone.discounted
+          if (enableDiscounted === false) delete shallowClone.discounted
           return shallowClone
         })
 
@@ -273,11 +274,11 @@ function _buildVariantPricesAction(
         // Remove the discounted field and make sure that the price
         // still has other values, otherwise simply return
         const filteredPrice = { ...price }
-        delete filteredPrice.discounted
+        if (enableDiscounted === false) delete filteredPrice.discounted
         if (Object.keys(filteredPrice).length) {
           // At this point price should have changed, simply pick the new one
           const newPrice = { ...newObj }
-          delete newPrice.discounted
+          if (enableDiscounted === false) delete newPrice.discounted
 
           changePriceActions.push({
             action: 'changePrice',
@@ -607,7 +608,13 @@ export function actionsMapImages(diff, oldObj, newObj, variantHashMap) {
   return actions
 }
 
-export function actionsMapPrices(diff, oldObj, newObj, variantHashMap) {
+export function actionsMapPrices(
+  diff,
+  oldObj,
+  newObj,
+  variantHashMap,
+  enableDiscounted
+) {
   let addPriceActions = []
   let changePriceActions = []
   let removePriceActions = []
@@ -626,7 +633,8 @@ export function actionsMapPrices(diff, oldObj, newObj, variantHashMap) {
         const [a, c, r] = _buildVariantPricesAction(
           variant.prices,
           oldVariant,
-          newVariant
+          newVariant,
+          enableDiscounted
         )
 
         addPriceActions = addPriceActions.concat(a)
