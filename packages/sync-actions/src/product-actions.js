@@ -261,7 +261,7 @@ function _buildVariantPricesAction(
         // Remove read-only fields
         const patchedPrice = price.map((p) => {
           const shallowClone = { ...p }
-          if (enableDiscounted === false) delete shallowClone.discounted
+          if (enableDiscounted !== true) delete shallowClone.discounted
           return shallowClone
         })
 
@@ -274,11 +274,11 @@ function _buildVariantPricesAction(
         // Remove the discounted field and make sure that the price
         // still has other values, otherwise simply return
         const filteredPrice = { ...price }
-        if (enableDiscounted === false) delete filteredPrice.discounted
+        if (enableDiscounted !== true) delete filteredPrice.discounted
         if (Object.keys(filteredPrice).length) {
           // At this point price should have changed, simply pick the new one
           const newPrice = { ...newObj }
-          if (enableDiscounted === false) delete newPrice.discounted
+          if (enableDiscounted !== true) delete newPrice.discounted
 
           changePriceActions.push({
             action: 'changePrice',
