@@ -71,8 +71,11 @@ export function setDefaultParams() {
 
   this.params.key = null
 
-  if (this.features.includes(features.queryOne))
+  if (this.features.includes(features.queryOne)) {
     this.params.id = getDefaultQueryParams().id
+    this.params.customerId = null
+    this.params.cartId = null
+  }
 
   if (this.features.includes(features.query)) {
     this.params.pagination = getDefaultQueryParams().pagination

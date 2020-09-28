@@ -9,6 +9,8 @@ describe('defaultParams', () => {
     expect(params).toEqual({
       id: null,
       key: null,
+      customerId: null,
+      cartId: null,
       expand: [],
       pagination: {
         page: null,
@@ -34,6 +36,8 @@ describe('defaultParams', () => {
     expect(params).toEqual({
       id: null,
       key: null,
+      customerId: null,
+      cartId: null,
       expand: [],
       pagination: {
         page: null,
@@ -60,6 +64,8 @@ describe('defaultParams', () => {
     expect(params).toEqual({
       id: null,
       key: null,
+      customerId: null,
+      cartId: null,
       expand: [],
       pagination: {
         page: null,
