@@ -92,7 +92,7 @@ export default function createHttpMiddleware({
     request: MiddlewareRequest,
     response: MiddlewareResponse
   ) => {
-    let abortController
+    let abortController: any
     if (timeout || getAbortController || _abortController)
       // eslint-disable-next-line
       abortController = (getAbortController ? getAbortController(): null) || _abortController || new AbortController()
@@ -120,7 +120,7 @@ export default function createHttpMiddleware({
     if (credentialsMode) {
       fetchOptions.credentials = credentialsMode
     }
-    if (timeout || abortController) {
+    if (abortController) {
       fetchOptions.signal = abortController.signal
     }
     if (body) {
