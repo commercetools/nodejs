@@ -104,7 +104,7 @@ describe('Http', () => {
 
   test('execute a get request with getAbortController timeout (success)', () => {
     expect.assertions(1)
-    new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
       })
@@ -133,7 +133,8 @@ describe('Http', () => {
         .reply(200, { foo: 'bar' })
 
       httpMiddleware(next)(request, response)
-    })})
+    })
+  })
 
   test('execute a get request with short timeout (fail)', () =>
     new Promise((resolve, reject) => {
@@ -198,7 +199,8 @@ describe('Http', () => {
         .reply(200, { foo: 'bar' })
 
       httpMiddleware(next)(request, response)
-    })})
+    })
+  })
 
   test('execute a request with timeout and client re-use', () =>
     new Promise((resolve, reject) => {
