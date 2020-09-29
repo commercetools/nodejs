@@ -1,1 +1,0 @@
-- :warning: **Typescript SDK** is moved to a new [`repository`](https://github.com/commercetools/commercetools-typescript-sdks) now, this package will be deleted soon from the current repository.
