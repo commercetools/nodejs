@@ -147,6 +147,61 @@ describe('Actions', () => {
       ])
     })
 
+    test('should build actions for prices with discounted when enableDiscounted is set to true', () => {
+      const actions = productsSync.buildActions(now, before, {
+        enableDiscounted: true,
+      })
+      expect(actions).toEqual([
+        {
+          action: 'changePrice',
+          priceId: '111',
+          price: {
+            country: 'US',
+            id: '111',
+            value: { currencyCode: 'EUR', centAmount: 2000 },
+            discounted: {
+              value: { centAmount: 4000, currencyCode: 'EUR' },
+              discount: { typeId: 'product-discount', id: 'pd1' },
+            },
+          },
+        },
+        {
+          action: 'changePrice',
+          price: {
+            channel: {
+              id: 'ch1',
+              typeId: 'channel',
+            },
+            country: 'DE',
+            customerGroup: {
+              id: 'cg1',
+              typeId: 'customer-group',
+            },
+            id: '444',
+            value: {
+              centAmount: 1000,
+              currencyCode: 'EUR',
+              fractionDigits: undefined,
+              type: undefined,
+            },
+          },
+          priceId: '444',
+        },
+        { action: 'removePrice', priceId: '222' },
+        {
+          action: 'addPrice',
+          variantId: 3,
+          price: {
+            value: { currencyCode: 'USD', centAmount: 5000 },
+            country: 'US',
+            customerGroup: { typeId: 'customer-group', id: 'cg1' },
+            channel: { typeId: 'channel', id: 'ch1' },
+            validFrom,
+          },
+        },
+      ])
+    })
+
     test('should not delete the discounted field from the original object', () => {
       expect('discounted' in before.masterVariant.prices[0]).toBeTruthy()
       expect('discounted' in now.masterVariant.prices[0]).toBeTruthy()
