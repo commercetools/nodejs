@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/get-credentials",
-  "version": "3.0.16",
+  "version": "3.0.17",
   "description": "Get CT credentials from the system environment.",
   "keywords": [
     "commercetools",
