@@ -1,3 +1,363 @@
+## @commercetools/typescript-sdk@0.0.22 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/sync-actions@4.8.4 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/state-importer@3.0.30 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/sdk-middleware-http@6.0.9 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/sdk-auth@3.0.10 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/resource-deleter@2.0.21 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/product-json-to-xlsx@4.0.14 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/product-json-to-csv@5.0.14 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/product-exporter@3.1.9 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/price-exporter@3.0.21 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/personal-data-erasure@3.0.20 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/inventories-exporter@3.0.21 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/integration-tests@0.1.8 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/get-credentials@3.0.17 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/discount-code-importer@3.0.29 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/discount-code-exporter@4.0.20 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/customer-groups-exporter@3.0.20 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/custom-objects-importer@3.0.30 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/custom-objects-exporter@3.0.20 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/csv-parser-state@3.0.19 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/csv-parser-price@4.0.21 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/csv-parser-orders@2.0.19 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/category-exporter@3.0.20 (2020-09-29)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1626](https://github.com/commercetools/nodejs/pull/1626) feat(sync-actions): add enableDiscounted option to product ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 2
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1618](https://github.com/commercetools/nodejs/pull/1618) [fix] abort controller issue ([@hakobpogh](https://github.com/hakobpogh))
+  - [#1622](https://github.com/commercetools/nodejs/pull/1622) Remove dependence on content in ok result when executeFetch ([@OlofMoriya](https://github.com/OlofMoriya))
+- `csv-parser-orders`
+  - [#1614](https://github.com/commercetools/nodejs/pull/1614) fix(csv-parser-orders): Add actualTransitionDate to lineitem ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- [#1612](https://github.com/commercetools/nodejs/pull/1612) chore(deps): lock file maintenance ([@renovate[bot]](https://github.com/apps/renovate))
+
+#### Committers: 3
+
+- Olof Moriya ([@OlofMoriya](https://github.com/OlofMoriya))
+- hakobpogh ([@hakobpogh](https://github.com/hakobpogh))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+#### :house: Maintenance
+
+- `product-json-to-csv`, `product-json-to-xlsx`, `resource-deleter`, `sdk-auth`, `sdk-middleware-http`
+  - [#1603](https://github.com/commercetools/nodejs/pull/1603) chore: upgrade flowtype to 0.131.0 ([@emmenko](https://github.com/emmenko))
+- `sync-actions`
+  - [#1601](https://github.com/commercetools/nodejs/pull/1601) refactor(sync-actions): rename terminology to allow/ignore ([@emmenko](https://github.com/emmenko))
+
+#### Committers: 1
+
+- Nicola Molinari ([@emmenko](https://github.com/emmenko))
+
+## @commercetools/sync-actions@4.8.3 (2020-08-19)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1594](https://github.com/commercetools/nodejs/pull/1594) fix(sync-actions): add test for empty categoryOrderHints ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/state-importer@3.0.29 (2020-08-19)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1594](https://github.com/commercetools/nodejs/pull/1594) fix(sync-actions): add test for empty categoryOrderHints ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/integration-tests@0.1.7 (2020-08-19)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1594](https://github.com/commercetools/nodejs/pull/1594) fix(sync-actions): add test for empty categoryOrderHints ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/discount-code-importer@3.0.28 (2020-08-19)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1594](https://github.com/commercetools/nodejs/pull/1594) fix(sync-actions): add test for empty categoryOrderHints ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/custom-objects-importer@3.0.29 (2020-08-19)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1594](https://github.com/commercetools/nodejs/pull/1594) fix(sync-actions): add test for empty categoryOrderHints ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
 ## @commercetools/state-importer@3.0.28 (2020-08-18)
 
 #### :bug: Bug Fix
