@@ -1,21 +1,25 @@
-# `typescript-sdk`(Alpha package)
+# `typescript`
 
-A package used to provide typescript definitions on top of ctp client
+We provide a packages written in typescript for using our API
 
 ![example usage](typescript_tutorial.gif)
+
+The source code for these packages are located in the [typescript](https://github.com/commercetools/commercetools-sdk-typescript/) repository.
 
 ## Install
 
 #### Node.js
 
 ```bash
-npm install --save @commercetools/typescript-sdk
+npm install --save @commercetools/platform-sdk
+npm install --save @commercetools/importapi-sdk
+npm install --save @commercetools/ml-sdk
 ```
 
 #### Browser
 
 ```html
-<script src="https://unpkg.com/@commercetools/typescript-sdk/lib/typescript-sdk.umd.min.js"></script>
+<script src="https://unpkg.com/@commercetools/platform-sdk/dist/platform-sdk.umd.js"></script>
 <script>
   // global: TypescriptSdk
 </script>
@@ -30,7 +34,7 @@ import { createClient } from '@commercetools/sdk-client'
 import {
   createApiBuilderFromCtpClient,
   ApiRoot,
-} from '@commercetools/typescript-sdk'
+} from '@commercetools/platform-sdk'
 import fetch from 'node-fetch'
 
 const projectKey = 'some_project_key'

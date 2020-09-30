@@ -11,7 +11,7 @@
     - [core](/sdk/api/README.md#core)
       - [sdk-auth](/sdk/api/sdkAuth.md)
       - [sdk-client](/sdk/api/sdkClient.md)
-      - [typescript-sdk](/sdk/api/typescriptSdk.md)
+      - [typescript](/sdk/api/typescriptSdk.md)
     - [middlewares](/sdk/api/README.md#middlewares)
       - [sdk-middleware-auth](/sdk/api/sdkMiddlewareAuth.md)
       - [sdk-middleware-http](/sdk/api/sdkMiddlewareHttp.md)
