@@ -45,6 +45,7 @@ describe('Logger', () => {
       body: { foo: 'bar' },
       error: new Error('Oops'),
     })
+
     const loggerMiddleware = createLoggerMiddleware()
 
     const next = () => {
