@@ -19,6 +19,9 @@
       "url": "https://github.com/commercetools/nodejs/"
     },
     "ga": {
+      "configuration": {
+        "anonymizeIp": true
+      },
       "token": "UA-38285631-20"
     },
     "theme-default": {
