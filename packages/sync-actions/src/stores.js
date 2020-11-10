@@ -3,6 +3,7 @@ import flatten from 'lodash.flatten'
 import type { SyncAction, UpdateAction, ActionGroup } from 'types/sdk'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
+import actionsMapCustom from './utils/action-map-custom'
 import * as storesActions from './stores-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
@@ -24,11 +25,19 @@ function createStoresMapActions(
     next: Object,
     previous: Object
   ): Array<UpdateAction> {
-    return flatten([
+    const allActions = []
+    allActions.push(
       mapActionGroup('base', (): Array<UpdateAction> =>
         storesActions.actionsMapBase(diff, previous, next)
-      ),
-    ])
+      )
+    )
+    allActions.push(
+      mapActionGroup('custom', (): Array<UpdateAction> =>
+        actionsMapCustom(diff, next, previous)
+      )
+    )
+
+    return flatten(allActions)
   }
 }
 
