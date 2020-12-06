@@ -1,3 +1,123 @@
+## @commercetools/sync-actions@4.9.0 (2020-11-19)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1638](https://github.com/commercetools/nodejs/pull/1638) feat(sync-actions/stores): add support custom fields actions on store level ([@mohib0306](https://github.com/mohib0306))
+
+#### :memo: Documentation
+
+- [#1631](https://github.com/commercetools/nodejs/pull/1631) docs(typescript): update the docs for the typescript SDK ([@jenschude](https://github.com/jenschude))
+
+#### :house: Maintenance
+
+- Other
+  - [#1635](https://github.com/commercetools/nodejs/pull/1635) 1634 Github Pages: add ip anonymization to the ga ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+- `typescript-sdk`
+  - [#1630](https://github.com/commercetools/nodejs/pull/1630) chore(Packages): remove typescript SDK from repo ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- [@mohib0306](https://github.com/mohib0306)
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/state-importer@3.0.31 (2020-11-19)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1638](https://github.com/commercetools/nodejs/pull/1638) feat(sync-actions/stores): add support custom fields actions on store level ([@mohib0306](https://github.com/mohib0306))
+
+#### :memo: Documentation
+
+- [#1631](https://github.com/commercetools/nodejs/pull/1631) docs(typescript): update the docs for the typescript SDK ([@jenschude](https://github.com/jenschude))
+
+#### :house: Maintenance
+
+- Other
+  - [#1635](https://github.com/commercetools/nodejs/pull/1635) 1634 Github Pages: add ip anonymization to the ga ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+- `typescript-sdk`
+  - [#1630](https://github.com/commercetools/nodejs/pull/1630) chore(Packages): remove typescript SDK from repo ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- [@mohib0306](https://github.com/mohib0306)
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/integration-tests@0.1.9 (2020-11-19)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1638](https://github.com/commercetools/nodejs/pull/1638) feat(sync-actions/stores): add support custom fields actions on store level ([@mohib0306](https://github.com/mohib0306))
+
+#### :memo: Documentation
+
+- [#1631](https://github.com/commercetools/nodejs/pull/1631) docs(typescript): update the docs for the typescript SDK ([@jenschude](https://github.com/jenschude))
+
+#### :house: Maintenance
+
+- Other
+  - [#1635](https://github.com/commercetools/nodejs/pull/1635) 1634 Github Pages: add ip anonymization to the ga ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+- `typescript-sdk`
+  - [#1630](https://github.com/commercetools/nodejs/pull/1630) chore(Packages): remove typescript SDK from repo ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- [@mohib0306](https://github.com/mohib0306)
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/discount-code-importer@3.0.30 (2020-11-19)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1638](https://github.com/commercetools/nodejs/pull/1638) feat(sync-actions/stores): add support custom fields actions on store level ([@mohib0306](https://github.com/mohib0306))
+
+#### :memo: Documentation
+
+- [#1631](https://github.com/commercetools/nodejs/pull/1631) docs(typescript): update the docs for the typescript SDK ([@jenschude](https://github.com/jenschude))
+
+#### :house: Maintenance
+
+- Other
+  - [#1635](https://github.com/commercetools/nodejs/pull/1635) 1634 Github Pages: add ip anonymization to the ga ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+- `typescript-sdk`
+  - [#1630](https://github.com/commercetools/nodejs/pull/1630) chore(Packages): remove typescript SDK from repo ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- [@mohib0306](https://github.com/mohib0306)
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/custom-objects-importer@3.0.31 (2020-11-19)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1638](https://github.com/commercetools/nodejs/pull/1638) feat(sync-actions/stores): add support custom fields actions on store level ([@mohib0306](https://github.com/mohib0306))
+
+#### :memo: Documentation
+
+- [#1631](https://github.com/commercetools/nodejs/pull/1631) docs(typescript): update the docs for the typescript SDK ([@jenschude](https://github.com/jenschude))
+
+#### :house: Maintenance
+
+- Other
+  - [#1635](https://github.com/commercetools/nodejs/pull/1635) 1634 Github Pages: add ip anonymization to the ga ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+- `typescript-sdk`
+  - [#1630](https://github.com/commercetools/nodejs/pull/1630) chore(Packages): remove typescript SDK from repo ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- [@mohib0306](https://github.com/mohib0306)
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
 ## @commercetools/typescript-sdk@0.0.22 (2020-09-29)
 
 #### :rocket: New Feature
