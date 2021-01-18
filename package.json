@@ -78,7 +78,7 @@
     "eslint": "7.7.0",
     "eslint-config-airbnb": "18.2.0",
     "eslint-config-airbnb-base": "14.2.0",
-    "eslint-config-prettier": "6.11.0",
+    "eslint-config-prettier": "7.2.0",
     "eslint-formatter-pretty": "4.0.0",
     "eslint-import-resolver-typescript": "2.2.1",
     "eslint-plugin-babel": "5.3.1",
