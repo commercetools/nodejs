@@ -87,7 +87,8 @@ export default class SdkAuth {
     clientId,
     clientSecret,
   }: ClientAuthOptions): string {
-    return Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
+    const targetStr = `${clientId}:${clientSecret}`;
+    return typeof Buffer === 'undefined' ? btoa(targetStr) : Buffer.from(targetStr).toString('base64');
   }
 
   static _getScopes(scopes: ?Array<string>, projectKey: ?string): string {
