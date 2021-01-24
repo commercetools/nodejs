@@ -9,7 +9,6 @@ import type {
   UserAuthOptions,
 } from 'types/sdk'
 import { decode, encode } from 'qss'
-import defaultsDeep from 'lodash.defaultsdeep'
 import { getErrorByCode } from '@commercetools/sdk-middleware-http'
 import * as constants from './constants'
 
@@ -236,9 +235,9 @@ export default class SdkAuth {
   }
 
   _getRequestConfig(config: CustomAuthOptions = {}): AuthOptions {
-    const mergedConfig = defaultsDeep({}, config, this.config)
+    const mergedConfig = Object.assign({}, config, this.config)
 
-    // handle scopes array - defaultsDeep would merge arrays together
+    // handle scopes array - Object.assign would merge arrays together
     // instead of taking its first occurrence
     if (config.scopes) mergedConfig.scopes = config.scopes
 
