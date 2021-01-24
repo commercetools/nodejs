@@ -220,7 +220,7 @@ export default class SdkAuth {
     const { uri, body, basicAuth, authType, headers } = request
     const fetchHeaders = headers || {
       Authorization: `${authType || constants.DEFAULT_AUTH_TYPE} ${basicAuth}`,
-      'Content-Length': Buffer.byteLength(body).toString(),
+      'Content-Length': body.length,  // do we really need Buffer.byteLength(body).toString() here that takes the ENTIRE 50kb Buffer polyfill to the browser?
       'Content-Type': 'application/x-www-form-urlencoded',
     }
 
