@@ -70,6 +70,35 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
+  test('execute a get request which give not json response', () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          body: 'not json response',
+          statusCode: 200,
+        })
+        resolve()
+      }
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        fetch,
+      })
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(200, 'not json response')
+
+      httpMiddleware(next)(request, response)
+    }))
+
   test('execute a get request with timeout (success)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
