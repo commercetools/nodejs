@@ -100,7 +100,10 @@ export default function createHttpMiddleware({
     let abortController: any
     if (timeout || getAbortController || _abortController)
       // eslint-disable-next-line
-      abortController = (getAbortController ? getAbortController(): null) || _abortController || new AbortController()
+      abortController =
+        (getAbortController ? getAbortController() : null) ||
+        _abortController ||
+        new AbortController()
 
     const url = host.replace(/\/$/, '') + request.uri
     const body =
@@ -153,17 +156,31 @@ export default function createHttpMiddleware({
               }
 
               res.text().then((result: Object) => {
-                let resBody
-
+                // Try to parse the response as JSON
+                let parsed
                 try {
-                  resBody = result.length > 0 ? JSON.parse(result) : {}
+                  parsed = result.length > 0 ? JSON.parse(result) : {}
                 } catch (err) {
-                  resBody = result
+                  if (enableRetry && retryCount < maxRetries) {
+                    setTimeout(
+                      executeFetch,
+                      calcDelayDuration(
+                        retryCount,
+                        retryDelay,
+                        maxRetries,
+                        backoff,
+                        maxDelay
+                      )
+                    )
+                    retryCount += 1
+                    return
+                  }
+                  parsed = result
                 }
 
                 const parsedResponse: Object = {
                   ...response,
-                  body: resBody,
+                  body: parsed,
                   statusCode: res.status,
                 }
 
