@@ -70,7 +70,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  test('execute a get request which give not json response', () =>
+  test("execute a get request which doesn't return a json response", () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
         uri: '/foo/bar',
