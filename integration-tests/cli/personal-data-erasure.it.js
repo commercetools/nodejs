@@ -105,7 +105,7 @@ describe('personal data erasure', () => {
         it('should get data on the CTP', async () => {
           const data = await personalDataErasure.getCustomerData(customerId)
 
-          expect(data).toHaveLength(11)
+          expect(data).toHaveLength(10)
         })
       })
 
