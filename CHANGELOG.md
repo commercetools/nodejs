@@ -1,3 +1,326 @@
+## @commercetools/state-importer@3.0.32 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/sdk-middleware-http@6.0.10 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/sdk-auth@3.0.11 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/resource-deleter@2.0.22 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/product-json-to-xlsx@4.0.15 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/product-json-to-csv@5.0.15 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/product-exporter@3.1.10 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/price-exporter@3.0.22 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/personal-data-erasure@3.0.21 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/inventories-exporter@3.0.22 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/integration-tests@0.1.10 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/discount-code-importer@3.0.31 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/discount-code-exporter@4.0.21 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/customer-groups-exporter@3.0.21 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/custom-objects-importer@3.0.32 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/custom-objects-exporter@3.0.21 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/csv-parser-state@3.0.20 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/csv-parser-price@4.0.22 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/category-exporter@3.0.21 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
 ## @commercetools/sync-actions@4.9.0 (2020-11-19)
 
 #### :rocket: New Feature
