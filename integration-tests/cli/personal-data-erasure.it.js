@@ -105,7 +105,19 @@ describe('personal data erasure', () => {
         it('should get data on the CTP', async () => {
           const data = await personalDataErasure.getCustomerData(customerId)
 
-          expect(data).toHaveLength(10)
+          expect(data).toHaveLength(11)
+          expect(data).toContainEqual(expect.objectContaining({type: 'CartCreated'}))
+          expect(data).toContainEqual(expect.objectContaining({type: 'PaymentCreated'}))
+          expect(data).toContainEqual(expect.objectContaining({type: 'CustomerCreated'}))
+          expect(data).toContainEqual(expect.objectContaining({type: 'ReviewCreated'}))
+          expect(data).toContainEqual(expect.objectContaining({type: 'OrderCreated'}))
+          expect(data).toContainEqual(expect.objectContaining({type: 'CartCreated'}))
+          expect(data).toContainEqual(expect.objectContaining({type: 'Order'}))
+          expect(data).toContainEqual(expect.objectContaining({type: 'Cart'}))
+          expect(data).toContainEqual(expect.objectContaining({email: 'foo@bar.de'}))
+          expect(data).toContainEqual(expect.objectContaining({amountPlanned: { type: 'centPrecision', currencyCode: 'EUR', centAmount: 100, fractionDigits: 2}}))
+          expect(data).toContainEqual(expect.objectContaining({name: {de: 'deutscherListenName', en: 'englishListName'}}))
+          expect(data).toContainEqual(expect.objectContaining({text: 'Review text'}))
         })
       })
 
