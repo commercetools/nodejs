@@ -63,7 +63,7 @@ export const customLineItem = [
         slug: 'mySlug',
         taxCategory: {
           typeId: 'tax-category',
-          id: 'fd890829-7554-4c22-a806-d6c6dcdbb0c5',
+          id: 'd205cc42-e399-424a-b6fc-0ef44772d6bc',
         },
       },
     ],

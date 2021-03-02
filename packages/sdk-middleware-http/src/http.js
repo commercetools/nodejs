@@ -68,13 +68,18 @@ export default function createHttpMiddleware({
   } = {},
   fetch: fetcher,
   abortController: _abortController,
-  getAbortController
+  getAbortController,
 }: HttpMiddlewareOptions): Middleware {
   if (!fetcher && typeof fetch === 'undefined')
     throw new Error(
       '`fetch` is not available. Please pass in `fetch` as an option or have it globally available.'
     )
-  if (timeout && !getAbortController && !_abortController && typeof AbortController === 'undefined')
+  if (
+    timeout &&
+    !getAbortController &&
+    !_abortController &&
+    typeof AbortController === 'undefined'
+  )
     throw new Error(
       '`AbortController` is not available. Please pass in `getAbortController` as an option or have AbortController globally available when using timeout.'
     )
@@ -95,7 +100,10 @@ export default function createHttpMiddleware({
     let abortController: any
     if (timeout || getAbortController || _abortController)
       // eslint-disable-next-line
-      abortController = (getAbortController ? getAbortController(): null) || _abortController || new AbortController()
+      abortController =
+        (getAbortController ? getAbortController() : null) ||
+        _abortController ||
+        new AbortController()
 
     const url = host.replace(/\/$/, '') + request.uri
     const body =
@@ -148,9 +156,31 @@ export default function createHttpMiddleware({
               }
 
               res.text().then((result: Object) => {
+                // Try to parse the response as JSON
+                let parsed
+                try {
+                  parsed = result.length > 0 ? JSON.parse(result) : {}
+                } catch (err) {
+                  if (enableRetry && retryCount < maxRetries) {
+                    setTimeout(
+                      executeFetch,
+                      calcDelayDuration(
+                        retryCount,
+                        retryDelay,
+                        maxRetries,
+                        backoff,
+                        maxDelay
+                      )
+                    )
+                    retryCount += 1
+                    return
+                  }
+                  parsed = result
+                }
+
                 const parsedResponse: Object = {
                   ...response,
-                  body: result.length > 0 ? JSON.parse(result) : {},
+                  body: parsed,
                   statusCode: res.status,
                 }
 
