@@ -101,7 +101,7 @@
     "jest-runner-eslint": "0.10.0",
     "jest-runner-flowtype": "0.0.7",
     "jest-silent-reporter": "0.2.1",
-    "lerna": "3.22.1",
+    "lerna": "4.0.0",
     "lerna-changelog": "1.0.1",
     "lint-staged": "10.2.11",
     "npm-check-updates": "7.1.1",
