@@ -305,12 +305,12 @@ describe('Actions', () => {
       const actions = productsSync.buildActions(now, before)
       expect(actions).toEqual([
         {
-          action: 'removeVariant',
-          id: 10,
-        },
-        {
           action: 'changeMasterVariant',
           variantId: 1,
+        },
+        {
+          action: 'removeVariant',
+          id: 10,
         },
         {
           action: 'moveImageToPosition',
@@ -455,12 +455,12 @@ describe('Actions', () => {
       const actions = productsSync.buildActions(now, before)
       expect(actions).toEqual([
         {
-          action: 'removeVariant',
-          id: 10,
-        },
-        {
           action: 'changeMasterVariant',
           variantId: 1,
+        },
+        {
+          action: 'removeVariant',
+          id: 10,
         },
         {
           action: 'removeImage',

@@ -437,18 +437,23 @@ export function actionsMapMeta(diff, oldObj, newObj) {
   })
 }
 
-export function actionsMapVariants(diff, oldObj, newObj) {
+export function actionsMapAddVariants(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('variants', {
     [ADD_ACTIONS]: (newObject) => ({
       ...newObject,
       action: 'addVariant',
     }),
+  })
+  return handler(diff, oldObj, newObj)
+}
+
+export function actionsMapRemoveVariants(diff, oldObj, newObj) {
+  const handler = createBuildArrayActions('variants', {
     [REMOVE_ACTIONS]: ({ id }) => ({
       action: 'removeVariant',
       id,
     }),
   })
-
   return handler(diff, oldObj, newObj)
 }
 
