@@ -1,3 +1,63 @@
+## @commercetools/sync-actions@4.9.1 (2021-03-09)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1662](https://github.com/commercetools/nodejs/pull/1662) fix(sync-actions): changing order of actions ([@danrleyt](https://github.com/danrleyt))
+
+#### Committers: 2
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/state-importer@3.0.33 (2021-03-09)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1662](https://github.com/commercetools/nodejs/pull/1662) fix(sync-actions): changing order of actions ([@danrleyt](https://github.com/danrleyt))
+
+#### Committers: 2
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/integration-tests@0.1.11 (2021-03-09)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1662](https://github.com/commercetools/nodejs/pull/1662) fix(sync-actions): changing order of actions ([@danrleyt](https://github.com/danrleyt))
+
+#### Committers: 2
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/discount-code-importer@3.0.32 (2021-03-09)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1662](https://github.com/commercetools/nodejs/pull/1662) fix(sync-actions): changing order of actions ([@danrleyt](https://github.com/danrleyt))
+
+#### Committers: 2
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/custom-objects-importer@3.0.33 (2021-03-09)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1662](https://github.com/commercetools/nodejs/pull/1662) fix(sync-actions): changing order of actions ([@danrleyt](https://github.com/danrleyt))
+
+#### Committers: 2
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
 ## @commercetools/state-importer@3.0.32 (2021-03-02)
 
 #### :bug: Bug Fix
