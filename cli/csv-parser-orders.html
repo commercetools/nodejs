@@ -1,0 +1,1258 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>CSV Order Parser · commercetools node.js</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="csv-parser-state.html" />
+    
+    
+    <link rel="prev" href="csv-parser-price.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Read Me
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../sdk/">
+            
+                <a href="../sdk/">
+            
+                    
+                    SDK
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../sdk/Middlewares.html">
+            
+                <a href="../sdk/Middlewares.html">
+            
+                    
+                    Middlewares
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../sdk/Middlewares.html">
+            
+                <a href="../sdk/Middlewares.html#example">
+            
+                    
+                    Example
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../sdk/upgrading-from-sphere-node-sdk.html">
+            
+                <a href="../sdk/upgrading-from-sphere-node-sdk.html">
+            
+                    
+                    Upgrading from sphere-node-sdk
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../sdk/Testing.html">
+            
+                <a href="../sdk/Testing.html">
+            
+                    
+                    Testing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../sdk/Glossary.html">
+            
+                <a href="../sdk/Glossary.html">
+            
+                    
+                    Glossary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/#core">
+            
+                    
+                    core
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1.1" data-path="../sdk/api/sdkAuth.html">
+            
+                <a href="../sdk/api/sdkAuth.html">
+            
+                    
+                    sdk-auth
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.1.2" data-path="../sdk/api/sdkClient.html">
+            
+                <a href="../sdk/api/sdkClient.html">
+            
+                    
+                    sdk-client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.1.3" data-path="../sdk/api/typescriptSdk.html">
+            
+                <a href="../sdk/api/typescriptSdk.html">
+            
+                    
+                    typescript
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/#middlewares">
+            
+                    
+                    middlewares
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.2.1" data-path="../sdk/api/sdkMiddlewareAuth.html">
+            
+                <a href="../sdk/api/sdkMiddlewareAuth.html">
+            
+                    
+                    sdk-middleware-auth
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.2" data-path="../sdk/api/sdkMiddlewareHttp.html">
+            
+                <a href="../sdk/api/sdkMiddlewareHttp.html">
+            
+                    
+                    sdk-middleware-http
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.3" data-path="../sdk/api/sdkMiddlewareQueue.html">
+            
+                <a href="../sdk/api/sdkMiddlewareQueue.html">
+            
+                    
+                    sdk-middleware-queue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.4" data-path="../sdk/api/sdkMiddlewareLogger.html">
+            
+                <a href="../sdk/api/sdkMiddlewareLogger.html">
+            
+                    
+                    sdk-middleware-logger
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.5" data-path="../sdk/api/sdkMiddlewareCorrelationId.html">
+            
+                <a href="../sdk/api/sdkMiddlewareCorrelationId.html">
+            
+                    
+                    sdk-middleware-correlation-id
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.6" data-path="../sdk/api/sdkMiddlewareUserAgent.html">
+            
+                <a href="../sdk/api/sdkMiddlewareUserAgent.html">
+            
+                    
+                    sdk-middleware-user-agent
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/#helpers">
+            
+                    
+                    helpers
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.3.1" data-path="../sdk/api/apiRequestBuilder.html">
+            
+                <a href="../sdk/api/apiRequestBuilder.html">
+            
+                    
+                    api-request-builder
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.2" data-path="../sdk/api/getCredentials.html">
+            
+                <a href="../sdk/api/getCredentials.html">
+            
+                    
+                    get-credentials
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.3" data-path="../sdk/api/httpUserAgent.html">
+            
+                <a href="../sdk/api/httpUserAgent.html">
+            
+                    
+                    http-user-agent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.4" data-path="../sdk/api/syncActions.html">
+            
+                <a href="../sdk/api/syncActions.html">
+            
+                    
+                    sync-actions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    CLI
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="category-exporter.html">
+            
+                <a href="category-exporter.html">
+            
+                    
+                    Category Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="csv-parser-discount-code.html">
+            
+                <a href="csv-parser-discount-code.html">
+            
+                    
+                    CSV Discount Code Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="csv-parser-price.html">
+            
+                <a href="csv-parser-price.html">
+            
+                    
+                    CSV Price Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.4" data-path="csv-parser-orders.html">
+            
+                <a href="csv-parser-orders.html">
+            
+                    
+                    CSV Order Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="csv-parser-state.html">
+            
+                <a href="csv-parser-state.html">
+            
+                    
+                    CSV State Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="custom-objects-exporter.html">
+            
+                <a href="custom-objects-exporter.html">
+            
+                    
+                    Custom Objects Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="custom-objects-importer.html">
+            
+                <a href="custom-objects-importer.html">
+            
+                    
+                    Custom Objects Importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="customer-groups-exporter.html">
+            
+                <a href="customer-groups-exporter.html">
+            
+                    
+                    Customer Groups Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="personal-data-erasure.html">
+            
+                <a href="personal-data-erasure.html">
+            
+                    
+                    Personal Data Erasure
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="discount-code-generator.html">
+            
+                <a href="discount-code-generator.html">
+            
+                    
+                    Discount Code Generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="discount-code-exporter.html">
+            
+                <a href="discount-code-exporter.html">
+            
+                    
+                    Discount Code Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="discount-code-importer.html">
+            
+                <a href="discount-code-importer.html">
+            
+                    
+                    Discount Code Importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.13" data-path="inventories-exporter.html">
+            
+                <a href="inventories-exporter.html">
+            
+                    
+                    Inventories Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.14" data-path="price-exporter.html">
+            
+                <a href="price-exporter.html">
+            
+                    
+                    Price Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.15" data-path="product-exporter.html">
+            
+                <a href="product-exporter.html">
+            
+                    
+                    Product Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.16" data-path="product-json-to-csv.html">
+            
+                <a href="product-json-to-csv.html">
+            
+                    
+                    Product JSON to CSV
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.17" data-path="product-json-to-xlsx.html">
+            
+                <a href="product-json-to-xlsx.html">
+            
+                    
+                    Product JSON to XLSX
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.18" data-path="resource-deleter.html">
+            
+                <a href="resource-deleter.html">
+            
+                    
+                    Resource Deleter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.19" data-path="state-importer.html">
+            
+                <a href="state-importer.html">
+            
+                    
+                    State importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >CSV Order Parser</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="csv-parser-orders">CSV Parser Orders</h1>
+<p><a href="https://travis-ci.org/commercetools/csv-parser-orders" target="_blank"><img src="https://img.shields.io/travis/commercetools/csv-parser-orders/master.svg?style=flat-square" alt="Travis Build Status"></a>
+<a href="https://codecov.io/gh/commercetools/csv-parser-orders" target="_blank"><img src="https://img.shields.io/codecov/c/github/commercetools/csv-parser-orders.svg?style=flat-square" alt="Codecov Coverage Status"></a>
+<a href="https://david-dm.org/commercetools/csv-parser-orders" target="_blank"><img src="https://img.shields.io/david/commercetools/csv-parser-orders.svg?style=flat-square" alt="David Dependencies Status"></a>
+<a href="https://david-dm.org/commercetools/csv-parser-orders?type=dev" target="_blank"><img src="https://img.shields.io/david/dev/commercetools/csv-parser-orders.svg?style=flat-square" alt="David devDependencies Status"></a></p>
+<p>Convert <a href="https://docs.commercetools.com/http-api-projects-orders.html" target="_blank">commercetools order</a> CSV data to JSON. See examples below for supported CSV format and sample responses.</p>
+<h2 id="usage">Usage</h2>
+<p><code>npm install @commercetools/csv-parser-orders --global</code></p>
+<h3 id="cli">CLI</h3>
+<pre class="language-"><code>Usage: csvparserorder [options]
+Convert commercetools order CSV data to JSON.
+
+Options:
+  --help, -h        Show help text.                              [boolean]
+  --version, -v     Show version number.                         [boolean]
+  --type, -t        Predefined type of csv.                      [required] [choices: &quot;lineitemstate&quot;, &quot;returninfo&quot;, &quot;deliveries&quot;]
+  --inputFile, -i   Path to input CSV file.                      [default: &quot;stdin&quot;]
+  --outputFile, -o  Path to output JSON file.                    [default: &quot;stdout&quot;]
+  --batchSize, -b   Number of CSV rows to handle simultaneously. [default: 100]
+  --delimiter, -d   Used CSV delimiter.                          [default: &quot;,&quot;]
+  --encoding, -e    Encoding used in the CSV.                    [default: &quot;utf8&quot;]
+  --strictMode, -s  Parse CSV strictly.                          [default: true]
+  --logLevel, -l    Logging level: error, warn, info or verbose. [default: &quot;info&quot;]
+  --logFile         Path to file where to save logs.             [default: &quot;csvparserorder.log&quot;]
+</code></pre><h4 id="usage">Usage</h4>
+<h5 id="line-item-state-parser">Line item state parser:</h5>
+<p><strong>Command:</strong></p>
+<pre class="language-"><code class="lang-bash">$ csvparserorder -t lineitemstate -i data/lineitemstate-input.csv
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre class="language-"><code class="lang-json"><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;orderNumber&quot;</span><span class="token operator">:</span> <span class="token string">&quot;234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;lineItems&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;123&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;state&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;fromState&quot;</span><span class="token operator">:</span> <span class="token string">&quot;order&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;toState&quot;</span><span class="token operator">:</span> <span class="token string">&quot;shipped&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;_fromStateQty&quot;</span><span class="token operator">:</span> <span class="token number">100</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre>
+<h5 id="return-info-parser">Return info parser:</h5>
+<p><strong>Command:</strong></p>
+<pre class="language-"><code class="lang-bash">$ csvparserorder -t returninfo -i data/return-info-sample-input.csv
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre class="language-"><code class="lang-json"><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;orderNumber&quot;</span><span class="token operator">:</span> <span class="token string">&quot;123&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;returnInfo&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">&quot;returnTrackingId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;aefa34fe&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;_returnId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;returnDate&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2016-11-01T08:01:19+0000&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;items&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;lineItemId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12ae&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;comment&quot;</span><span class="token operator">:</span> <span class="token string">&quot;yeah&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;shipmentState&quot;</span><span class="token operator">:</span> <span class="token string">&quot;shipped&quot;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;lineItemId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12ae&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;comment&quot;</span><span class="token operator">:</span> <span class="token string">&quot;yeah&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;shipmentState&quot;</span><span class="token operator">:</span> <span class="token string">&quot;not-shipped&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">&quot;returnTrackingId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;aefa34fe&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;_returnId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;returnDate&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2016-11-01T08:01:19+0000&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;items&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;lineItemId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12ae&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;comment&quot;</span><span class="token operator">:</span> <span class="token string">&quot;yeah&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;shipmentState&quot;</span><span class="token operator">:</span> <span class="token string">&quot;not-shipped&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;orderNumber&quot;</span><span class="token operator">:</span> <span class="token string">&quot;124&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;returnInfo&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">&quot;returnTrackingId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;aefa34fe&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;_returnId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;returnDate&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2016-11-01T08:01:19+0000&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;items&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;lineItemId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12ae&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;comment&quot;</span><span class="token operator">:</span> <span class="token string">&quot;yeah&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;shipmentState&quot;</span><span class="token operator">:</span> <span class="token string">&quot;not-shipped&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre>
+<h5 id="deliveries-parser">Deliveries parser:</h5>
+<p><strong>Command:</strong></p>
+<pre class="language-"><code class="lang-bash">$ csvparserorder.js -t deliveries -i data/deliveries/delivery.csv
+</code></pre>
+<p><strong>Output:</strong></p>
+<pre class="language-"><code class="lang-json"><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;orderNumber&quot;</span><span class="token operator">:</span> <span class="token string">&quot;222&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;shippingInfo&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;deliveries&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;items&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">100</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">100</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">200</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;items&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;3&quot;</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">300</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;3&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;items&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;4&quot;</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">400</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;5&quot;</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">400</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;5&quot;</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">400</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">100</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;orderNumber&quot;</span><span class="token operator">:</span> <span class="token string">&quot;100&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;shippingInfo&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;deliveries&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;items&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;4&quot;</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">400</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre>
+<h3 id="js">JS</h3>
+<pre class="language-"><code class="lang-js"><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;fs&apos;</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span>
+  LineItemStateCsvParser<span class="token punctuation">,</span>
+  AddReturnInfoCsvParser<span class="token punctuation">,</span>
+  DeliveriesCsvParser<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;@commercetools/csv-parser-orders&apos;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> parser <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LineItemStateCsvParser</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  logger<span class="token operator">:</span> <span class="token punctuation">{</span>
+    error<span class="token operator">:</span> console<span class="token punctuation">.</span>error<span class="token punctuation">,</span>
+    warn<span class="token operator">:</span> console<span class="token punctuation">.</span>warn<span class="token punctuation">,</span>
+    info<span class="token operator">:</span> console<span class="token punctuation">.</span>log<span class="token punctuation">,</span>
+    verbose<span class="token operator">:</span> console<span class="token punctuation">.</span>log<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  csvConfig<span class="token operator">:</span> <span class="token punctuation">{</span>
+    delimiter<span class="token operator">:</span> <span class="token string">&apos;,&apos;</span><span class="token punctuation">,</span>
+    batchSize<span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+    strictMode<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token comment">// parser._processData(&lt;CSV OBJECT&gt;) // returns parsed order</span>
+
+parser<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>
+  fs<span class="token punctuation">.</span><span class="token function">createReadStream</span><span class="token punctuation">(</span><span class="token string">&apos;./input.csv&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  fs<span class="token punctuation">.</span><span class="token function">createWriteStream</span><span class="token punctuation">(</span><span class="token string">&apos;./output.json&apos;</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span>
+</code></pre>
+<p>Errors on the level <code>error</code> come from events that are fatal and thus stop the stream of data.</p>
+<h2 id="configuration">Configuration</h2>
+<p>All <code>LineItemStateCsvParser</code>, <code>AddReturnInfoCsvParser</code> and <code>DeliveriesCsvParser</code> classes accept an object with two fields:</p>
+<ul>
+<li><code>logger</code> takes object with four functions (<em>optional</em>)</li>
+<li><code>csvConfig</code> takes configuration for CSV parser (<em>optional</em>)<ul>
+<li><code>batchSize</code>: number of CSV rows to handle simultaneously. (<em>default</em>: <code>100</code>)</li>
+<li><code>delimiter</code>: the used CSV delimiter (<em>default</em>: <code>,</code>)</li>
+<li><code>strictMode</code>: require CSV column length to match headers length (<em>default</em>: true)</li>
+</ul>
+</li>
+</ul>
+<h2 id="csv-formats">CSV formats</h2>
+<h3 id="return-info">Return info</h3>
+<p>Sample returnInfo sample CSV file</p>
+<pre class="language-"><code class="lang-csv">orderNumber,lineItemId,quantity,comment,shipmentState,returnDate,returnTrackingId,_returnId
+123,12ae,4,yeah,shipped,2016-11-01T08:01:19+0000,aefa34fe,1
+123,12ae,4,yeah,not-shipped,2016-11-01T08:01:19+0000,aefa34fe,1
+123,12ae,4,yeah,not-shipped,2016-11-01T08:01:19+0000,aefa34fe,2
+124,12ae,4,yeah,not-shipped,2016-11-01T08:01:19+0000,aefa34fe,2
+</code></pre>
+<p>JSON object returned from the conversion of the CSV file above</p>
+<pre class="language-"><code class="lang-json"><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;orderNumber&quot;</span><span class="token operator">:</span> <span class="token string">&quot;123&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;returnInfo&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">&quot;returnTrackingId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;aefa34fe&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;_returnId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;returnDate&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2016-11-01T08:01:19+0000&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;items&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;lineItemId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12ae&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;comment&quot;</span><span class="token operator">:</span> <span class="token string">&quot;yeah&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;shipmentState&quot;</span><span class="token operator">:</span> <span class="token string">&quot;shipped&quot;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;lineItemId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12ae&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;comment&quot;</span><span class="token operator">:</span> <span class="token string">&quot;yeah&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;shipmentState&quot;</span><span class="token operator">:</span> <span class="token string">&quot;not-shipped&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">&quot;returnTrackingId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;aefa34fe&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;_returnId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;returnDate&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2016-11-01T08:01:19+0000&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;items&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;lineItemId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12ae&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;comment&quot;</span><span class="token operator">:</span> <span class="token string">&quot;yeah&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;shipmentState&quot;</span><span class="token operator">:</span> <span class="token string">&quot;not-shipped&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;orderNumber&quot;</span><span class="token operator">:</span> <span class="token string">&quot;124&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;returnInfo&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">&quot;returnTrackingId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;aefa34fe&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;_returnId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;returnDate&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2016-11-01T08:01:19+0000&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;items&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;lineItemId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;12ae&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;comment&quot;</span><span class="token operator">:</span> <span class="token string">&quot;yeah&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;shipmentState&quot;</span><span class="token operator">:</span> <span class="token string">&quot;not-shipped&quot;</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre>
+<h3 id="line-item-state">Line item state</h3>
+<p>Sample lineItemState sample CSV file</p>
+<pre class="language-"><code class="lang-csv">orderNumber,lineItemId,quantity,fromState,toState,actualTransitionDate,_fromStateQty
+234,123,10,order,shipped,2016-11-01T08:01:19+0000,100
+</code></pre>
+<p>JSON object returned from the conversion of the CSV file above</p>
+<pre class="language-"><code class="lang-json"><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;orderNumber&quot;</span><span class="token operator">:</span> <span class="token string">&quot;234&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;lineItems&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;123&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;state&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+          <span class="token punctuation">{</span>
+            <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;fromState&quot;</span><span class="token operator">:</span> <span class="token string">&quot;order&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;toState&quot;</span><span class="token operator">:</span> <span class="token string">&quot;shipped&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;_fromStateQty&quot;</span><span class="token operator">:</span> <span class="token number">100</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre>
+<h3 id="deliveries">Deliveries</h3>
+<p>CSV file with deliveries have the following format:</p>
+<pre class="language-"><code class="lang-csv">orderNumber,delivery.id,_itemGroupId,item.id,item.quantity,parcel.id,parcel.length,parcel.height,parcel.width,parcel.weight,parcel.trackingId,parcel.carrier,parcel.provider,parcel.providerTransaction,parcel.isReturn,parcel.items
+111,1,1,123,1,1,100,200,200,500,123456789,DHL,provider,transaction provider,0,123:1;222:1
+111,1,2,222,3,1,100,200,200,500,123456789,DHL,provider,transaction provider,0,123:1;222:1
+111,1,1,123,1,2,100,200,200,500,2222222,,abcd,dcba,true,222:2
+</code></pre>
+<p>Where CSV fields <code>orderNumber, delivery.id, _itemGroupId, item.id, item.quantity</code> are mandatory because every delivery has to have at least one delivery item.</p>
+<p>If the CSV file contains measurement fields (<code>parcel.length, parcel.height, parcel.width, parcel.weight</code>) all of them has to be provided or the parser returns an error <code>All measurement fields are mandatory</code>.</p>
+<p>Because an API allows us to save multiple delivery items with same <code>id</code> and <code>quantity</code> there is <code>_itemGroupId</code> field which helps us to distinguish different delivery items. This field has to have a unique value for different delivery items (in example above CSV rows 2 and 3 belongs to one delivery which has 2 delivery items - two different _itemGroupIds).</p>
+<p>Example provided above will be parsed into following JSON:</p>
+<pre class="language-"><code class="lang-json"><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">&quot;orderNumber&quot;</span><span class="token operator">:</span> <span class="token string">&quot;111&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;shippingInfo&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">&quot;deliveries&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;items&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;123&quot;</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">1</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;222&quot;</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">3</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;parcels&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;measurements&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">&quot;heightInMillimeter&quot;</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;lengthInMillimeter&quot;</span><span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;weightInGram&quot;</span><span class="token operator">:</span> <span class="token number">500</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;widthInMillimeter&quot;</span><span class="token operator">:</span> <span class="token number">200</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;trackingData&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">&quot;carrier&quot;</span><span class="token operator">:</span> <span class="token string">&quot;DHL&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;isReturn&quot;</span><span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;provider&quot;</span><span class="token operator">:</span> <span class="token string">&quot;provider&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;providerTransaction&quot;</span><span class="token operator">:</span> <span class="token string">&quot;transaction provider&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;trackingId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;123456789&quot;</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;items&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;123&quot;</span><span class="token punctuation">,</span>
+                  <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">1</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span>
+                  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;222&quot;</span><span class="token punctuation">,</span>
+                  <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">1</span>
+                <span class="token punctuation">}</span>
+              <span class="token punctuation">]</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+              <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;measurements&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">&quot;heightInMillimeter&quot;</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;lengthInMillimeter&quot;</span><span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;widthInMillimeter&quot;</span><span class="token operator">:</span> <span class="token number">200</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;weightInGram&quot;</span><span class="token operator">:</span> <span class="token number">500</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;trackingData&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                <span class="token property">&quot;isReturn&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;provider&quot;</span><span class="token operator">:</span> <span class="token string">&quot;abcd&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;providerTransaction&quot;</span><span class="token operator">:</span> <span class="token string">&quot;dcba&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;trackingId&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2222222&quot;</span>
+              <span class="token punctuation">}</span><span class="token punctuation">,</span>
+              <span class="token property">&quot;items&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                  <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;222&quot;</span><span class="token punctuation">,</span>
+                  <span class="token property">&quot;quantity&quot;</span><span class="token operator">:</span> <span class="token number">2</span>
+                <span class="token punctuation">}</span>
+              <span class="token punctuation">]</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span>
+</code></pre>
+<p>More delivery examples can be seen <a href="https://github.com/commercetools/nodejs/tree/master/packages/csv-parser-orders/test/data/deliveries" target="_blank">here</a>.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="csv-parser-price.html" class="navigation navigation-prev " aria-label="Previous page: CSV Price Parser">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="csv-parser-state.html" class="navigation navigation-next " aria-label="Next page: CSV State Parser">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"CSV Order Parser","level":"1.3.4","depth":2,"next":{"title":"CSV State Parser","level":"1.3.5","depth":2,"path":"cli/csv-parser-state.md","ref":"cli/csv-parser-state.md","articles":[]},"previous":{"title":"CSV Price Parser","level":"1.3.3","depth":2,"path":"cli/csv-parser-price.md","ref":"cli/csv-parser-price.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs","ga"],"root":"docs","styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/commercetools/nodejs/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"ga":{"configuration":{"anonymizeIp":true},"token":"UA-38285631-20"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/commercetools/nodejs/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"commercetools node.js","gitbook":">=3.2.1"},"file":{"path":"cli/csv-parser-orders.md","mtime":"2020-03-26T14:24:36.178Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-03-09T11:59:53.785Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-anchorjs/anchor.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,931 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Category Exporter · commercetools node.js</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="csv-parser-discount-code.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Read Me
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../sdk/">
+            
+                <a href="../sdk/">
+            
+                    
+                    SDK
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../sdk/Middlewares.html">
+            
+                <a href="../sdk/Middlewares.html">
+            
+                    
+                    Middlewares
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../sdk/Middlewares.html">
+            
+                <a href="../sdk/Middlewares.html#example">
+            
+                    
+                    Example
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../sdk/upgrading-from-sphere-node-sdk.html">
+            
+                <a href="../sdk/upgrading-from-sphere-node-sdk.html">
+            
+                    
+                    Upgrading from sphere-node-sdk
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../sdk/Testing.html">
+            
+                <a href="../sdk/Testing.html">
+            
+                    
+                    Testing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../sdk/Glossary.html">
+            
+                <a href="../sdk/Glossary.html">
+            
+                    
+                    Glossary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/#core">
+            
+                    
+                    core
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1.1" data-path="../sdk/api/sdkAuth.html">
+            
+                <a href="../sdk/api/sdkAuth.html">
+            
+                    
+                    sdk-auth
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.1.2" data-path="../sdk/api/sdkClient.html">
+            
+                <a href="../sdk/api/sdkClient.html">
+            
+                    
+                    sdk-client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.1.3" data-path="../sdk/api/typescriptSdk.html">
+            
+                <a href="../sdk/api/typescriptSdk.html">
+            
+                    
+                    typescript
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/#middlewares">
+            
+                    
+                    middlewares
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.2.1" data-path="../sdk/api/sdkMiddlewareAuth.html">
+            
+                <a href="../sdk/api/sdkMiddlewareAuth.html">
+            
+                    
+                    sdk-middleware-auth
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.2" data-path="../sdk/api/sdkMiddlewareHttp.html">
+            
+                <a href="../sdk/api/sdkMiddlewareHttp.html">
+            
+                    
+                    sdk-middleware-http
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.3" data-path="../sdk/api/sdkMiddlewareQueue.html">
+            
+                <a href="../sdk/api/sdkMiddlewareQueue.html">
+            
+                    
+                    sdk-middleware-queue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.4" data-path="../sdk/api/sdkMiddlewareLogger.html">
+            
+                <a href="../sdk/api/sdkMiddlewareLogger.html">
+            
+                    
+                    sdk-middleware-logger
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.5" data-path="../sdk/api/sdkMiddlewareCorrelationId.html">
+            
+                <a href="../sdk/api/sdkMiddlewareCorrelationId.html">
+            
+                    
+                    sdk-middleware-correlation-id
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.6" data-path="../sdk/api/sdkMiddlewareUserAgent.html">
+            
+                <a href="../sdk/api/sdkMiddlewareUserAgent.html">
+            
+                    
+                    sdk-middleware-user-agent
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/#helpers">
+            
+                    
+                    helpers
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.3.1" data-path="../sdk/api/apiRequestBuilder.html">
+            
+                <a href="../sdk/api/apiRequestBuilder.html">
+            
+                    
+                    api-request-builder
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.2" data-path="../sdk/api/getCredentials.html">
+            
+                <a href="../sdk/api/getCredentials.html">
+            
+                    
+                    get-credentials
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.3" data-path="../sdk/api/httpUserAgent.html">
+            
+                <a href="../sdk/api/httpUserAgent.html">
+            
+                    
+                    http-user-agent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.4" data-path="../sdk/api/syncActions.html">
+            
+                <a href="../sdk/api/syncActions.html">
+            
+                    
+                    sync-actions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    CLI
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.3.1" data-path="category-exporter.html">
+            
+                <a href="category-exporter.html">
+            
+                    
+                    Category Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="csv-parser-discount-code.html">
+            
+                <a href="csv-parser-discount-code.html">
+            
+                    
+                    CSV Discount Code Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="csv-parser-price.html">
+            
+                <a href="csv-parser-price.html">
+            
+                    
+                    CSV Price Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="csv-parser-orders.html">
+            
+                <a href="csv-parser-orders.html">
+            
+                    
+                    CSV Order Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="csv-parser-state.html">
+            
+                <a href="csv-parser-state.html">
+            
+                    
+                    CSV State Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="custom-objects-exporter.html">
+            
+                <a href="custom-objects-exporter.html">
+            
+                    
+                    Custom Objects Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="custom-objects-importer.html">
+            
+                <a href="custom-objects-importer.html">
+            
+                    
+                    Custom Objects Importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="customer-groups-exporter.html">
+            
+                <a href="customer-groups-exporter.html">
+            
+                    
+                    Customer Groups Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="personal-data-erasure.html">
+            
+                <a href="personal-data-erasure.html">
+            
+                    
+                    Personal Data Erasure
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="discount-code-generator.html">
+            
+                <a href="discount-code-generator.html">
+            
+                    
+                    Discount Code Generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="discount-code-exporter.html">
+            
+                <a href="discount-code-exporter.html">
+            
+                    
+                    Discount Code Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="discount-code-importer.html">
+            
+                <a href="discount-code-importer.html">
+            
+                    
+                    Discount Code Importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.13" data-path="inventories-exporter.html">
+            
+                <a href="inventories-exporter.html">
+            
+                    
+                    Inventories Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.14" data-path="price-exporter.html">
+            
+                <a href="price-exporter.html">
+            
+                    
+                    Price Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.15" data-path="product-exporter.html">
+            
+                <a href="product-exporter.html">
+            
+                    
+                    Product Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.16" data-path="product-json-to-csv.html">
+            
+                <a href="product-json-to-csv.html">
+            
+                    
+                    Product JSON to CSV
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.17" data-path="product-json-to-xlsx.html">
+            
+                <a href="product-json-to-xlsx.html">
+            
+                    
+                    Product JSON to XLSX
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.18" data-path="resource-deleter.html">
+            
+                <a href="resource-deleter.html">
+            
+                    
+                    Resource Deleter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.19" data-path="state-importer.html">
+            
+                <a href="state-importer.html">
+            
+                    
+                    State importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Category Exporter</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="category-exporter">Category Exporter</h1>
+<p>A package which exports <a href="https://docs.commercetools.com/http-api-projects-categories.html" target="_blank">commercetools categories</a> in <code>JSON</code> format from the <a href="https://docs.commercetools.com/" target="_blank">commercetools platform</a>.</p>
+<h2 id="configuration">Configuration</h2>
+<p>The constructor accepts two arguments:</p>
+<ul>
+<li>A required object containing the following values:<ul>
+<li><code>apiConfig</code> (Object): <code>AuthMiddleware</code> options for authentication on the commercetools platform. (Required. See <a href="https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options" target="_blank">here</a>)</li>
+<li><code>accessToken</code> (String): [Access token] to be used to authenticate requests to API. Requires scope of [<code>view_products</code>, <code>manage_products</code>]. More info on how to get the access token <a href="https://docs.commercetools.com/http-api-authorization.html#authorization-flows" target="_blank">here</a></li>
+<li><code>predicate</code> (String): Query string specifying (where) predicate. More info on predicates <a href="https://docs.commercetools.com/http-api-query-predicates" target="_blank">here</a> (Optional)</li>
+</ul>
+</li>
+<li>An optional logger object having four functions (<code>info</code>, <code>warn</code>, <code>error</code> and <code>debug</code>)</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<p><code>npm install @commercetools/category-exporter --global</code></p>
+<h3 id="cli">CLI</h3>
+<pre class="language-"><code>Usage: category-exporter [options]
+Export categories from the commercetools platform
+
+Options:
+  --help                     Show help text.                           [boolean]
+  --version                  Show version number                       [boolean]
+  --output, -o               Path to output file.            [default: &quot;stdout&quot;]
+  --apiUrl                   The host URL of the HTTP API service.
+                                              [default: &quot;https://api.europe-west1.gcp.commercetools.com&quot;]
+  --authUrl                  The host URL of the OAuth API service.
+                                             [default: &quot;https://auth.europe-west1.gcp.commercetools.com&quot;]
+  --accessToken              CTP client access token
+                             Required scopes: [&apos;view_products&apos;, &apos;manage_products&apos;][string]
+  --projectKey, -p           API project key.                         [required]
+  --where, -w                specify where predicate
+  --logLevel                 Logging level: error, warn, info or debug.
+                                                               [default: &quot;info&quot;]
+  --prettyLogs               Pretty print logs to the terminal         [boolean]
+  --logFile                  Path to file where to save logs.
+                                              [default: &quot;category-exporter.log&quot;]
+</code></pre><h4 id="info-on-flags">Info on flags</h4>
+<ul>
+<li>The <code>--output</code> flag specifies where to output/save the exported categories. Several notes on this flag:<ul>
+<li>If the file specified already exists, it will be overwritten.</li>
+<li>The default location for status report logging is the standard output.</li>
+<li>If no output path is specified, the exported categories will be logged to the standard output as a result, status reports will be logged to a <code>category-exporter.log</code> file in the current directory.</li>
+</ul>
+</li>
+<li>The <code>where</code> flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes (&apos;single quoted predicate&apos;). More info on predicates <a href="https://docs.commercetools.com/http-api-query-predicates" target="_blank">here</a></li>
+</ul>
+<h3 id="js">JS</h3>
+<p>For more direct usage, it is possible to use this module directly:</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> CategoryExporter <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/category-exporter&apos;</span>
+<span class="token keyword">import</span> fs <span class="token keyword">from</span> <span class="token string">&apos;fs&apos;</span>
+
+<span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token punctuation">{</span>
+    apiConfig<span class="token operator">:</span> <span class="token punctuation">{</span>
+      apiUrl<span class="token operator">:</span> <span class="token string">&apos;https://api.europe-west1.gcp.commercetools.com&apos;</span>
+      host<span class="token operator">:</span> <span class="token string">&apos;https://auth.europe-west1.gcp.commercetools.com&apos;</span>
+      project_key<span class="token operator">:</span> <span class="token string">&apos;PROJECT_KEY&apos;</span><span class="token punctuation">,</span>
+      credentials<span class="token operator">:</span> <span class="token punctuation">{</span>
+        clientId<span class="token operator">:</span> <span class="token string">&apos;*********&apos;</span><span class="token punctuation">,</span>
+        clientSecret<span class="token operator">:</span> <span class="token string">&apos;*********&apos;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    accessToken<span class="token operator">:</span> <span class="token string">&apos;123456yuhgfdwegh675412wefb4rgb&apos;</span><span class="token punctuation">,</span>
+    predicate<span class="token operator">:</span> <span class="token string">&apos;key=&quot;my-desired-key&quot;&apos;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> logger <span class="token operator">=</span> <span class="token punctuation">{</span>
+  error<span class="token operator">:</span> console<span class="token punctuation">.</span>error<span class="token punctuation">,</span>
+  warn<span class="token operator">:</span> console<span class="token punctuation">.</span>warn<span class="token punctuation">,</span>
+  info<span class="token operator">:</span> console<span class="token punctuation">.</span>log<span class="token punctuation">,</span>
+  debug<span class="token operator">:</span> console<span class="token punctuation">.</span>debug<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> categoryExporter <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CategoryExporter</span><span class="token punctuation">(</span>options<span class="token punctuation">,</span> logger<span class="token punctuation">)</span>
+
+<span class="token comment">// Register error listener</span>
+outputStream<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">&apos;error&apos;</span><span class="token punctuation">,</span> errorHandler<span class="token punctuation">)</span>
+
+outputStream<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">&apos;finish&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&apos;done with export&apos;</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+categoryExporter<span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span>outputStream<span class="token punctuation">)</span>
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: CLI">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="csv-parser-discount-code.html" class="navigation navigation-next " aria-label="Next page: CSV Discount Code Parser">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Category Exporter","level":"1.3.1","depth":2,"next":{"title":"CSV Discount Code Parser","level":"1.3.2","depth":2,"path":"cli/csv-parser-discount-code.md","ref":"cli/csv-parser-discount-code.md","articles":[]},"previous":{"title":"CLI","level":"1.3","depth":1,"path":"cli/README.md","ref":"cli/README.md","articles":[{"title":"Category Exporter","level":"1.3.1","depth":2,"path":"cli/category-exporter.md","ref":"cli/category-exporter.md","articles":[]},{"title":"CSV Discount Code Parser","level":"1.3.2","depth":2,"path":"cli/csv-parser-discount-code.md","ref":"cli/csv-parser-discount-code.md","articles":[]},{"title":"CSV Price Parser","level":"1.3.3","depth":2,"path":"cli/csv-parser-price.md","ref":"cli/csv-parser-price.md","articles":[]},{"title":"CSV Order Parser","level":"1.3.4","depth":2,"path":"cli/csv-parser-orders.md","ref":"cli/csv-parser-orders.md","articles":[]},{"title":"CSV State Parser","level":"1.3.5","depth":2,"path":"cli/csv-parser-state.md","ref":"cli/csv-parser-state.md","articles":[]},{"title":"Custom Objects Exporter","level":"1.3.6","depth":2,"path":"cli/custom-objects-exporter.md","ref":"cli/custom-objects-exporter.md","articles":[]},{"title":"Custom Objects Importer","level":"1.3.7","depth":2,"path":"cli/custom-objects-importer.md","ref":"cli/custom-objects-importer.md","articles":[]},{"title":"Customer Groups Exporter","level":"1.3.8","depth":2,"path":"cli/customer-groups-exporter.md","ref":"cli/customer-groups-exporter.md","articles":[]},{"title":"Personal Data Erasure","level":"1.3.9","depth":2,"path":"cli/personal-data-erasure.md","ref":"cli/personal-data-erasure.md","articles":[]},{"title":"Discount Code Generator","level":"1.3.10","depth":2,"path":"cli/discount-code-generator.md","ref":"cli/discount-code-generator.md","articles":[]},{"title":"Discount Code Exporter","level":"1.3.11","depth":2,"path":"cli/discount-code-exporter.md","ref":"cli/discount-code-exporter.md","articles":[]},{"title":"Discount Code Importer","level":"1.3.12","depth":2,"path":"cli/discount-code-importer.md","ref":"cli/discount-code-importer.md","articles":[]},{"title":"Inventories Exporter","level":"1.3.13","depth":2,"path":"cli/inventories-exporter.md","ref":"cli/inventories-exporter.md","articles":[]},{"title":"Price Exporter","level":"1.3.14","depth":2,"path":"cli/price-exporter.md","ref":"cli/price-exporter.md","articles":[]},{"title":"Product Exporter","level":"1.3.15","depth":2,"path":"cli/product-exporter.md","ref":"cli/product-exporter.md","articles":[]},{"title":"Product JSON to CSV","level":"1.3.16","depth":2,"path":"cli/product-json-to-csv.md","ref":"cli/product-json-to-csv.md","articles":[]},{"title":"Product JSON to XLSX","level":"1.3.17","depth":2,"path":"cli/product-json-to-xlsx.md","ref":"cli/product-json-to-xlsx.md","articles":[]},{"title":"Resource Deleter","level":"1.3.18","depth":2,"path":"cli/resource-deleter.md","ref":"cli/resource-deleter.md","articles":[]},{"title":"State importer","level":"1.3.19","depth":2,"path":"cli/state-importer.md","ref":"cli/state-importer.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs","ga"],"root":"docs","styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/commercetools/nodejs/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"ga":{"configuration":{"anonymizeIp":true},"token":"UA-38285631-20"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/commercetools/nodejs/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"commercetools node.js","gitbook":">=3.2.1"},"file":{"path":"cli/category-exporter.md","mtime":"2020-03-26T11:26:30.424Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-03-09T11:59:53.785Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-anchorjs/anchor.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

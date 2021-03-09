@@ -1,0 +1,1031 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Upgrading from sphere-node-sdk · commercetools node.js</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="Testing.html" />
+    
+    
+    <link rel="prev" href="Middlewares.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Read Me
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    SDK
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="Middlewares.html">
+            
+                <a href="Middlewares.html">
+            
+                    
+                    Middlewares
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="Middlewares.html">
+            
+                <a href="Middlewares.html#example">
+            
+                    
+                    Example
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2.2" data-path="upgrading-from-sphere-node-sdk.html">
+            
+                <a href="upgrading-from-sphere-node-sdk.html">
+            
+                    
+                    Upgrading from sphere-node-sdk
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="Testing.html">
+            
+                <a href="Testing.html">
+            
+                    
+                    Testing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="Glossary.html">
+            
+                <a href="Glossary.html">
+            
+                    
+                    Glossary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="api/">
+            
+                <a href="api/">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" data-path="api/">
+            
+                <a href="api/#core">
+            
+                    
+                    core
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1.1" data-path="api/sdkAuth.html">
+            
+                <a href="api/sdkAuth.html">
+            
+                    
+                    sdk-auth
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.1.2" data-path="api/sdkClient.html">
+            
+                <a href="api/sdkClient.html">
+            
+                    
+                    sdk-client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.1.3" data-path="api/typescriptSdk.html">
+            
+                <a href="api/typescriptSdk.html">
+            
+                    
+                    typescript
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2" data-path="api/">
+            
+                <a href="api/#middlewares">
+            
+                    
+                    middlewares
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.2.1" data-path="api/sdkMiddlewareAuth.html">
+            
+                <a href="api/sdkMiddlewareAuth.html">
+            
+                    
+                    sdk-middleware-auth
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.2" data-path="api/sdkMiddlewareHttp.html">
+            
+                <a href="api/sdkMiddlewareHttp.html">
+            
+                    
+                    sdk-middleware-http
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.3" data-path="api/sdkMiddlewareQueue.html">
+            
+                <a href="api/sdkMiddlewareQueue.html">
+            
+                    
+                    sdk-middleware-queue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.4" data-path="api/sdkMiddlewareLogger.html">
+            
+                <a href="api/sdkMiddlewareLogger.html">
+            
+                    
+                    sdk-middleware-logger
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.5" data-path="api/sdkMiddlewareCorrelationId.html">
+            
+                <a href="api/sdkMiddlewareCorrelationId.html">
+            
+                    
+                    sdk-middleware-correlation-id
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.6" data-path="api/sdkMiddlewareUserAgent.html">
+            
+                <a href="api/sdkMiddlewareUserAgent.html">
+            
+                    
+                    sdk-middleware-user-agent
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3" data-path="api/">
+            
+                <a href="api/#helpers">
+            
+                    
+                    helpers
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.3.1" data-path="api/apiRequestBuilder.html">
+            
+                <a href="api/apiRequestBuilder.html">
+            
+                    
+                    api-request-builder
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.2" data-path="api/getCredentials.html">
+            
+                <a href="api/getCredentials.html">
+            
+                    
+                    get-credentials
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.3" data-path="api/httpUserAgent.html">
+            
+                <a href="api/httpUserAgent.html">
+            
+                    
+                    http-user-agent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.4" data-path="api/syncActions.html">
+            
+                <a href="api/syncActions.html">
+            
+                    
+                    sync-actions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../cli/">
+            
+                <a href="../cli/">
+            
+                    
+                    CLI
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../cli/category-exporter.html">
+            
+                <a href="../cli/category-exporter.html">
+            
+                    
+                    Category Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../cli/csv-parser-discount-code.html">
+            
+                <a href="../cli/csv-parser-discount-code.html">
+            
+                    
+                    CSV Discount Code Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../cli/csv-parser-price.html">
+            
+                <a href="../cli/csv-parser-price.html">
+            
+                    
+                    CSV Price Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../cli/csv-parser-orders.html">
+            
+                <a href="../cli/csv-parser-orders.html">
+            
+                    
+                    CSV Order Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../cli/csv-parser-state.html">
+            
+                <a href="../cli/csv-parser-state.html">
+            
+                    
+                    CSV State Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../cli/custom-objects-exporter.html">
+            
+                <a href="../cli/custom-objects-exporter.html">
+            
+                    
+                    Custom Objects Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../cli/custom-objects-importer.html">
+            
+                <a href="../cli/custom-objects-importer.html">
+            
+                    
+                    Custom Objects Importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../cli/customer-groups-exporter.html">
+            
+                <a href="../cli/customer-groups-exporter.html">
+            
+                    
+                    Customer Groups Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="../cli/personal-data-erasure.html">
+            
+                <a href="../cli/personal-data-erasure.html">
+            
+                    
+                    Personal Data Erasure
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="../cli/discount-code-generator.html">
+            
+                <a href="../cli/discount-code-generator.html">
+            
+                    
+                    Discount Code Generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="../cli/discount-code-exporter.html">
+            
+                <a href="../cli/discount-code-exporter.html">
+            
+                    
+                    Discount Code Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="../cli/discount-code-importer.html">
+            
+                <a href="../cli/discount-code-importer.html">
+            
+                    
+                    Discount Code Importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.13" data-path="../cli/inventories-exporter.html">
+            
+                <a href="../cli/inventories-exporter.html">
+            
+                    
+                    Inventories Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.14" data-path="../cli/price-exporter.html">
+            
+                <a href="../cli/price-exporter.html">
+            
+                    
+                    Price Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.15" data-path="../cli/product-exporter.html">
+            
+                <a href="../cli/product-exporter.html">
+            
+                    
+                    Product Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.16" data-path="../cli/product-json-to-csv.html">
+            
+                <a href="../cli/product-json-to-csv.html">
+            
+                    
+                    Product JSON to CSV
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.17" data-path="../cli/product-json-to-xlsx.html">
+            
+                <a href="../cli/product-json-to-xlsx.html">
+            
+                    
+                    Product JSON to XLSX
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.18" data-path="../cli/resource-deleter.html">
+            
+                <a href="../cli/resource-deleter.html">
+            
+                    
+                    Resource Deleter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.19" data-path="../cli/state-importer.html">
+            
+                <a href="../cli/state-importer.html">
+            
+                    
+                    State importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Upgrading from sphere-node-sdk</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="upgrading-from-sphere-node-sdk">Upgrading from <code>sphere-node-sdk</code></h1>
+<p>If you&apos;re still using the <a href="https://github.com/sphereio/sphere-node-sdk" target="_blank">sphere-node-sdk</a>, this guide will help you migrating to the new SDK. Overall it&apos;s a completely new <em>library</em>, although some of APIs didn&apos;t change much.</p>
+<blockquote>
+<p>The SDK officially supports <code>node --version</code> starting from <code>4</code>.
+Older versions might still work but we don&apos;t support them. Use them at your own risk or <em>upgrade</em> node version as well.</p>
+</blockquote>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#dependencies">Dependencies</a><ul>
+<li><a href="#example-migration">Example migration</a></li>
+</ul>
+</li>
+<li><a href="#api-differences">API differences</a><ul>
+<li><a href="#sync-actions">Sync actions</a></li>
+<li><a href="#request-builder">Request builder</a></li>
+<li><a href="#sphereclient-options">SphereClient options</a></li>
+</ul>
+</li>
+<li><a href="#implicit-benefits">Implicit benefits</a><ul>
+<li><a href="#auth-flows">Auth flows</a></li>
+<li><a href="#always-100-compatibility-with-new-api-features">Always 100% compatibility with new API features</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="dependencies">Dependencies</h3>
+<p>The SDK is <em>not a single package</em> anymore, it&apos;s <a href="api/">composed of different packages</a>.
+It&apos;s up to you to <em>pick only the packages that you need</em>, many of them are optional and can also be replaced with custom implementations.</p>
+<blockquote>
+<p>All new packages are now <a href="https://docs.npmjs.com/misc/scope" target="_blank">scoped</a> to <code>@commercetools</code>. This is mainly to have better package names and to have them all under <em>commercetools</em> organization.</p>
+</blockquote>
+<p>The <em>core</em> package is the <code>@commercetools/sdk-client</code>. <strong>Using it alone is useless</strong>, you need to provide at least a <a href="api/#middlewares">middleware</a> (e.g. <code>@commercetools/sdk-middleware-http</code>).</p>
+<p>If you aim to have all the functionalities of the <code>sphere-node-sdk</code>, you probably need the following packages:</p>
+<ul>
+<li><code>@commercetools/sdk-client</code></li>
+<li><code>@commercetools/sdk-middleware-auth</code></li>
+<li><code>@commercetools/sdk-middleware-http</code></li>
+<li><code>@commercetools/sdk-middleware-queue</code></li>
+<li><code>@commercetools/sdk-middleware-logger</code></li>
+<li><code>@commercetools/sdk-middleware-user-agent</code></li>
+<li><code>@commercetools/api-request-builder</code></li>
+<li><code>@commercetools/sync-actions</code></li>
+</ul>
+<h4 id="example-migration">Example migration</h4>
+<pre class="language-"><code class="lang-js"><span class="token comment">// before</span>
+<span class="token keyword">import</span> SphereClient<span class="token punctuation">,</span> <span class="token punctuation">{</span> ProductSync <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;sphere-node-sdk&apos;</span>
+<span class="token keyword">const</span> client <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SphereClient</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  config<span class="token operator">:</span> <span class="token punctuation">{</span>
+    project_key<span class="token operator">:</span> <span class="token string">&apos;my-project&apos;</span><span class="token punctuation">,</span>
+    client_id<span class="token operator">:</span> <span class="token string">&apos;123&apos;</span><span class="token punctuation">,</span>
+    client_secret<span class="token operator">:</span> <span class="token string">&apos;secret&apos;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  user_agent<span class="token operator">:</span> <span class="token string">&apos;sphere-node-sdk&apos;</span><span class="token punctuation">,</span>
+  host<span class="token operator">:</span> <span class="token string">&apos;api.commercetools.com&apos;</span><span class="token punctuation">,</span>
+  protocol<span class="token operator">:</span> <span class="token string">&apos;https&apos;</span><span class="token punctuation">,</span>
+  oauth_host<span class="token operator">:</span> <span class="token string">&apos;auth.commercetools.com&apos;</span><span class="token punctuation">,</span>
+  oauth_protocol<span class="token operator">:</span> <span class="token string">&apos;https&apos;</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> sync <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ProductSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> updateActions <span class="token operator">=</span> sync<span class="token punctuation">.</span><span class="token function">buildActions</span><span class="token punctuation">(</span><span class="token comment">/* newProduct, existingProduct */</span><span class="token punctuation">)</span>
+client<span class="token punctuation">.</span>products
+  <span class="token punctuation">.</span><span class="token function">byId</span><span class="token punctuation">(</span><span class="token string">&apos;1&apos;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">expand</span><span class="token punctuation">(</span><span class="token string">&apos;productType&apos;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span><span class="token punctuation">{</span> version<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> actions<span class="token operator">:</span> updateActions <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token comment">/* result */</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token comment">/* error */</span><span class="token punctuation">)</span>
+
+<span class="token comment">// after</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createClient <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-client&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createAuthMiddlewareForClientCredentialsFlow <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-middleware-auth&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createHttpMiddleware <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-middleware-http&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createQueueMiddleware <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-middleware-queue&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createUserAgentMiddleware <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-middleware-user-agent&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createRequestBuilder <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/api-request-builder&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createSyncProducts <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sync-actions&apos;</span>
+
+<span class="token keyword">const</span> client <span class="token operator">=</span> <span class="token function">createClient</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token comment">// The order of the middlewares is important !!!</span>
+  middlewares<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token function">createAuthMiddlewareForClientCredentialsFlow</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      host<span class="token operator">:</span> <span class="token string">&apos;https://auth.commercetools.com&apos;</span><span class="token punctuation">,</span>
+      projectKey<span class="token operator">:</span> <span class="token string">&apos;my-project&apos;</span><span class="token punctuation">,</span>
+      credentials<span class="token operator">:</span> <span class="token punctuation">{</span>
+        clientId<span class="token operator">:</span> <span class="token string">&apos;123&apos;</span><span class="token punctuation">,</span>
+        clientSecret<span class="token operator">:</span> <span class="token string">&apos;secret&apos;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">createQueueMiddleware</span><span class="token punctuation">(</span><span class="token punctuation">{</span> concurrency<span class="token operator">:</span> <span class="token number">10</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">createHttpMiddleware</span><span class="token punctuation">(</span><span class="token punctuation">{</span> host<span class="token operator">:</span> <span class="token string">&apos;https://api.commercetools.com&apos;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token function">createHttpUserAgent</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      libraryName<span class="token operator">:</span> <span class="token string">&apos;my-library&apos;</span><span class="token punctuation">,</span>
+      libraryVersion<span class="token operator">:</span> <span class="token string">&apos;1.0.0&apos;</span><span class="token punctuation">,</span>
+      contactUrl<span class="token operator">:</span> <span class="token string">&apos;https://github.com/commercetools/nodejs&apos;</span><span class="token punctuation">,</span>
+      contactEmail<span class="token operator">:</span> <span class="token string">&apos;npmjs@commercetools.com&apos;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> service <span class="token operator">=</span> <span class="token function">createRequestBuilder</span><span class="token punctuation">(</span><span class="token punctuation">{</span> projectKey<span class="token operator">:</span> <span class="token string">&apos;my-project&apos;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>products
+<span class="token keyword">const</span> uri <span class="token operator">=</span> service<span class="token punctuation">.</span><span class="token function">byId</span><span class="token punctuation">(</span><span class="token string">&apos;1&apos;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">expand</span><span class="token punctuation">(</span><span class="token string">&apos;productType&apos;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> sync <span class="token operator">=</span> <span class="token function">createSyncProducts</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> updateActions <span class="token operator">=</span> sync<span class="token punctuation">.</span><span class="token function">buildActions</span><span class="token punctuation">(</span><span class="token comment">/* newProduct, existingProduct */</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> updateRequest <span class="token operator">=</span> <span class="token punctuation">{</span>
+  uri<span class="token punctuation">,</span>
+  method<span class="token operator">:</span> <span class="token string">&apos;POST&apos;</span><span class="token punctuation">,</span>
+  body<span class="token operator">:</span> <span class="token punctuation">{</span> version<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> actions<span class="token operator">:</span> updateActions <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+client<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span>updateRequest<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token comment">/* result */</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token comment">/* error */</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id="api-differences">API differences</h3>
+<h4 id="sync-actions">Sync actions</h4>
+<p>In the <code>sphere-node-sdk</code> the sync utils were exported within the same package.<br>
+In the new SDK they are scoped in their own module and they implement only 1 main function: <code>buildActions</code>.</p>
+<pre class="language-"><code class="lang-js"><span class="token comment">// before</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> ProductSync <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;sphere-node-sdk&apos;</span>
+<span class="token keyword">const</span> sync <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ProductSync</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> payload <span class="token operator">=</span> sync<span class="token punctuation">.</span><span class="token function">buildActions</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getUpdatePayload</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token comment">// after</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createSyncProducts <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sync-actions&apos;</span>
+<span class="token keyword">const</span> sync <span class="token operator">=</span> <span class="token function">createSyncProducts</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> actions <span class="token operator">=</span> sync<span class="token punctuation">.</span><span class="token function">buildActions</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> payload <span class="token operator">=</span> <span class="token punctuation">{</span> version<span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span> actions <span class="token punctuation">}</span>
+</code></pre>
+<h4 id="request-builder">Request builder</h4>
+<p>In the <code>sphere-node-sdk</code> you were building the request for each service by chaining different commands and executing <code>fetch</code>, <code>update</code>, etc at the end.<br>
+In the new SDK, we saw that the <a href="api/#sdk-client"><code>sdk-client</code></a> simply accepts a <a href="Glossary.html#clientrequest">request object</a>. The <code>uri</code> parameter can be simply defined manually or can be generated using the <em>request builder</em>. This has basically the same API as the <code>sphere-node-sdk</code>.</p>
+<pre class="language-"><code class="lang-js"><span class="token comment">// before</span>
+<span class="token keyword">import</span> SphereClient <span class="token keyword">from</span> <span class="token string">&apos;sphere-node-sdk&apos;</span>
+<span class="token keyword">const</span> client <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SphereClient</span><span class="token punctuation">(</span><span class="token punctuation">{</span> config<span class="token operator">:</span> <span class="token punctuation">{</span> projectKey<span class="token operator">:</span> <span class="token string">&apos;my-project&apos;</span> <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+client<span class="token punctuation">.</span>channels<span class="token punctuation">.</span><span class="token function">perPage</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">fetch</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+
+<span class="token comment">// after</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createClient <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-client&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createRequestBuilder <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/api-request-builder&apos;</span>
+<span class="token keyword">const</span> client <span class="token operator">=</span> <span class="token function">createClient</span><span class="token punctuation">(</span><span class="token punctuation">{</span> middlewares<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token operator">...</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+client<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token comment">// manually define the request URI</span>
+  uri<span class="token operator">:</span> <span class="token string">&apos;/my-project/channels?limit=10&apos;</span><span class="token punctuation">,</span>
+  method<span class="token operator">:</span> <span class="token string">&apos;GET&apos;</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> channels <span class="token operator">=</span> <span class="token function">createRequestBuilder</span><span class="token punctuation">(</span><span class="token punctuation">{</span> projectKey<span class="token operator">:</span> <span class="token string">&apos;my-project&apos;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>channels
+client<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token comment">// define the request URI using the request builder</span>
+  uri<span class="token operator">:</span> channels<span class="token punctuation">.</span><span class="token function">perPage</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  method<span class="token operator">:</span> <span class="token string">&apos;GET&apos;</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p>Additionally, all <em>services</em> provided by the <em>request builder</em> are defined using <a href="api/apiRequestBuilder.html#arguments">features</a>. This allows to configure a service with only the <em>features</em> or <em>functions</em> that the service supports.
+The package allows also to pass <a href="api/apiRequestBuilder.html#createrequestbuildercustomservices">custom services</a>.</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span>
+  createRequestBuilder<span class="token punctuation">,</span>
+  features<span class="token punctuation">,</span>
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/api-request-builder&apos;</span>
+<span class="token keyword">const</span> customServices <span class="token operator">=</span> <span class="token punctuation">{</span>
+  users<span class="token operator">:</span> <span class="token punctuation">{</span>
+    type<span class="token operator">:</span> <span class="token string">&apos;users&apos;</span><span class="token punctuation">,</span>
+    endpoint<span class="token operator">:</span> <span class="token string">&apos;/users&apos;</span><span class="token punctuation">,</span>
+    features<span class="token operator">:</span> <span class="token punctuation">[</span>features<span class="token punctuation">.</span>query<span class="token punctuation">,</span> features<span class="token punctuation">.</span>queryOne<span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> requestBuilder <span class="token operator">=</span> <span class="token function">createRequestBuilder</span><span class="token punctuation">(</span>
+  <span class="token punctuation">{</span> projectKey<span class="token operator">:</span> <span class="token string">&apos;my-project&apos;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  customServices
+<span class="token punctuation">)</span>
+requestBuilder<span class="token punctuation">.</span>users<span class="token punctuation">.</span><span class="token function">byId</span><span class="token punctuation">(</span><span class="token string">&apos;1&apos;</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<h4 id="sphereclient-options">SphereClient options</h4>
+<p>In the <code>sphere-node-sdk</code> all sorts of configuration options were passed as a big object to the <code>SphereClient</code> contructor.<br>
+In the new SDK all those options are split across the <a href="api/#middlewares">middlewares</a>. See <a href="#example-migration">example</a> above.</p>
+<h3 id="implicit-benefits">Implicit benefits</h3>
+<h4 id="auth-flows">Auth flows</h4>
+<p>In the <code>sphere-node-sdk</code> the way of getting an <em>access_token</em> was restricted to the <strong>client credentials flow</strong> and it wasn&apos;t possible to define the <strong>scopes</strong> for the token.<br>
+In the new SDK, because of the flexibility that the <a href="Middlewares.html">middlewares</a> provide, it&apos;s possible to have <a href="api/sdkMiddlewareAuth.html">all sorts of different auth flows</a>.</p>
+<h4 id="always-100-compatibility-with-new-api-features">Always 100% compatibility with new API features</h4>
+<p>In the <code>sphere-node-sdk</code> requests for a service had to be defined using the methods that the service provided. If the commercetools HTTP API would release new endpoints or new request options, the SDK had to be adjusted in order to support those new features.<br>
+In the new SDK <em>this problem becomes obsolete</em> because the <a href="Glossary.html#clientrequest">request</a> URI can simply be provided manually. The <a href="api/apiRequestBuilder.html">request builder</a> is just a helper to construct the URI for a given service but the URI can be typed manually as well.</p>
+<pre class="language-"><code class="lang-js">client<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  uri<span class="token operator">:</span> <span class="token string">&apos;/my-project/some-new-endpoint?wow=this-is-a-new-query-option&apos;</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="Middlewares.html#example" class="navigation navigation-prev " aria-label="Previous page: Example">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="Testing.html" class="navigation navigation-next " aria-label="Next page: Testing">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Upgrading from sphere-node-sdk","level":"1.2.2","depth":2,"next":{"title":"Testing","level":"1.2.3","depth":2,"path":"sdk/Testing.md","ref":"sdk/Testing.md","articles":[]},"previous":{"title":"Example","level":"1.2.1.1","depth":3,"anchor":"#example","path":"sdk/Middlewares.md","ref":"sdk/Middlewares.md#example","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs","ga"],"root":"docs","styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/commercetools/nodejs/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"ga":{"configuration":{"anonymizeIp":true},"token":"UA-38285631-20"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/commercetools/nodejs/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"commercetools node.js","gitbook":">=3.2.1"},"file":{"path":"sdk/upgrading-from-sphere-node-sdk.md","mtime":"2020-03-27T09:44:40.598Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-03-09T11:59:53.785Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-anchorjs/anchor.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

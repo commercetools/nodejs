@@ -1,0 +1,1016 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>sdk-middleware-auth · commercetools node.js</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="sdkMiddlewareHttp.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Read Me
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    SDK
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../Middlewares.html">
+            
+                <a href="../Middlewares.html">
+            
+                    
+                    Middlewares
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../Middlewares.html">
+            
+                <a href="../Middlewares.html#example">
+            
+                    
+                    Example
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../upgrading-from-sphere-node-sdk.html">
+            
+                <a href="../upgrading-from-sphere-node-sdk.html">
+            
+                    
+                    Upgrading from sphere-node-sdk
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../Testing.html">
+            
+                <a href="../Testing.html">
+            
+                    
+                    Testing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../Glossary.html">
+            
+                <a href="../Glossary.html">
+            
+                    
+                    Glossary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" data-path="./">
+            
+                <a href="./#core">
+            
+                    
+                    core
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1.1" data-path="sdkAuth.html">
+            
+                <a href="sdkAuth.html">
+            
+                    
+                    sdk-auth
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.1.2" data-path="sdkClient.html">
+            
+                <a href="sdkClient.html">
+            
+                    
+                    sdk-client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.1.3" data-path="typescriptSdk.html">
+            
+                <a href="typescriptSdk.html">
+            
+                    
+                    typescript
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2" data-path="./">
+            
+                <a href="./#middlewares">
+            
+                    
+                    middlewares
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.2.5.2.1" data-path="sdkMiddlewareAuth.html">
+            
+                <a href="sdkMiddlewareAuth.html">
+            
+                    
+                    sdk-middleware-auth
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.2" data-path="sdkMiddlewareHttp.html">
+            
+                <a href="sdkMiddlewareHttp.html">
+            
+                    
+                    sdk-middleware-http
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.3" data-path="sdkMiddlewareQueue.html">
+            
+                <a href="sdkMiddlewareQueue.html">
+            
+                    
+                    sdk-middleware-queue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.4" data-path="sdkMiddlewareLogger.html">
+            
+                <a href="sdkMiddlewareLogger.html">
+            
+                    
+                    sdk-middleware-logger
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.5" data-path="sdkMiddlewareCorrelationId.html">
+            
+                <a href="sdkMiddlewareCorrelationId.html">
+            
+                    
+                    sdk-middleware-correlation-id
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.6" data-path="sdkMiddlewareUserAgent.html">
+            
+                <a href="sdkMiddlewareUserAgent.html">
+            
+                    
+                    sdk-middleware-user-agent
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3" data-path="./">
+            
+                <a href="./#helpers">
+            
+                    
+                    helpers
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.3.1" data-path="apiRequestBuilder.html">
+            
+                <a href="apiRequestBuilder.html">
+            
+                    
+                    api-request-builder
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.2" data-path="getCredentials.html">
+            
+                <a href="getCredentials.html">
+            
+                    
+                    get-credentials
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.3" data-path="httpUserAgent.html">
+            
+                <a href="httpUserAgent.html">
+            
+                    
+                    http-user-agent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.4" data-path="syncActions.html">
+            
+                <a href="syncActions.html">
+            
+                    
+                    sync-actions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../cli/">
+            
+                <a href="../../cli/">
+            
+                    
+                    CLI
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../cli/category-exporter.html">
+            
+                <a href="../../cli/category-exporter.html">
+            
+                    
+                    Category Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../cli/csv-parser-discount-code.html">
+            
+                <a href="../../cli/csv-parser-discount-code.html">
+            
+                    
+                    CSV Discount Code Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../../cli/csv-parser-price.html">
+            
+                <a href="../../cli/csv-parser-price.html">
+            
+                    
+                    CSV Price Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../../cli/csv-parser-orders.html">
+            
+                <a href="../../cli/csv-parser-orders.html">
+            
+                    
+                    CSV Order Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../../cli/csv-parser-state.html">
+            
+                <a href="../../cli/csv-parser-state.html">
+            
+                    
+                    CSV State Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../../cli/custom-objects-exporter.html">
+            
+                <a href="../../cli/custom-objects-exporter.html">
+            
+                    
+                    Custom Objects Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../../cli/custom-objects-importer.html">
+            
+                <a href="../../cli/custom-objects-importer.html">
+            
+                    
+                    Custom Objects Importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="../../cli/customer-groups-exporter.html">
+            
+                <a href="../../cli/customer-groups-exporter.html">
+            
+                    
+                    Customer Groups Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="../../cli/personal-data-erasure.html">
+            
+                <a href="../../cli/personal-data-erasure.html">
+            
+                    
+                    Personal Data Erasure
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="../../cli/discount-code-generator.html">
+            
+                <a href="../../cli/discount-code-generator.html">
+            
+                    
+                    Discount Code Generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="../../cli/discount-code-exporter.html">
+            
+                <a href="../../cli/discount-code-exporter.html">
+            
+                    
+                    Discount Code Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="../../cli/discount-code-importer.html">
+            
+                <a href="../../cli/discount-code-importer.html">
+            
+                    
+                    Discount Code Importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.13" data-path="../../cli/inventories-exporter.html">
+            
+                <a href="../../cli/inventories-exporter.html">
+            
+                    
+                    Inventories Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.14" data-path="../../cli/price-exporter.html">
+            
+                <a href="../../cli/price-exporter.html">
+            
+                    
+                    Price Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.15" data-path="../../cli/product-exporter.html">
+            
+                <a href="../../cli/product-exporter.html">
+            
+                    
+                    Product Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.16" data-path="../../cli/product-json-to-csv.html">
+            
+                <a href="../../cli/product-json-to-csv.html">
+            
+                    
+                    Product JSON to CSV
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.17" data-path="../../cli/product-json-to-xlsx.html">
+            
+                <a href="../../cli/product-json-to-xlsx.html">
+            
+                    
+                    Product JSON to XLSX
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.18" data-path="../../cli/resource-deleter.html">
+            
+                <a href="../../cli/resource-deleter.html">
+            
+                    
+                    Resource Deleter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.19" data-path="../../cli/state-importer.html">
+            
+                <a href="../../cli/state-importer.html">
+            
+                    
+                    State importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >sdk-middleware-auth</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="sdk-middleware-auth"><code>sdk-middleware-auth</code></h1>
+<p>Middleware to authenticate the <a href="../Glossary.html#clientrequest">request</a> using one of the supported <em>auth flows</em>.</p>
+<h2 id="install">Install</h2>
+<h4 id="nodejs">Node.js</h4>
+<pre class="language-"><code class="lang-bash"><span class="token function">npm</span> <span class="token function">install</span> --save @commercetools/sdk-middleware-auth
+</code></pre>
+<h4 id="browser">Browser</h4>
+<pre class="language-"><code class="lang-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>https://unpkg.com/@commercetools/sdk-middleware-auth/dist/commercetools-sdk-middleware-auth.umd.min.js<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span>
+  // global: CommercetoolsSdkMiddlewareAuth
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<h2 id="createauthmiddlewareforclientcredentialsflowoptions"><code>createAuthMiddlewareForClientCredentialsFlow(options)</code></h2>
+<p>Creates a <a href="../Glossary.html#middleware">middleware</a> to handle authentication for the <a href="https://docs.commercetools.com/http-api-authorization.html#client-credentials-flow" target="_blank">Client Credentials Flow</a> of the commercetools platform API.</p>
+<h4 id="named-arguments-options">Named arguments (options)</h4>
+<ol>
+<li><code>host</code> <em>(String)</em>: the host of the OAuth API service</li>
+<li><code>projectKey</code> <em>(String)</em>: the key of the project to assign the default scope to</li>
+<li><code>credentials</code> <em>(Object)</em>: the client credentials for authentication (<code>clientId</code>, <code>clientSecret</code>)</li>
+<li><code>scopes</code> <em>(Array)</em>: a list of <a href="https://docs.commercetools.com/http-api-authorization.html#scopes" target="_blank">scopes</a> (default <code>manage_project:{projectKey}</code>) to assign to the OAuth token</li>
+<li><code>fetch</code> <em>(Function)</em>: A <code>fetch</code> implementation which can be e.g. <code>node-fetch</code> or <code>unfetch</code> but also the native browser <code>fetch</code> function. Only needs be be passed if not globally available (e.g. through <code>isomorphic-fetch</code>)</li>
+</ol>
+<h4 id="usage-example">Usage example</h4>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> createClient <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-client&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createAuthMiddlewareForClientCredentialsFlow <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-middleware-auth&apos;</span>
+
+<span class="token keyword">const</span> client <span class="token operator">=</span> <span class="token function">createClient</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  middlewares<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token function">createAuthMiddlewareForClientCredentialsFlow</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      host<span class="token operator">:</span> <span class="token string">&apos;https://auth.commercetools.com&apos;</span><span class="token punctuation">,</span>
+      projectKey<span class="token operator">:</span> <span class="token string">&apos;test&apos;</span><span class="token punctuation">,</span>
+      credentials<span class="token operator">:</span> <span class="token punctuation">{</span>
+        clientId<span class="token operator">:</span> <span class="token string">&apos;123&apos;</span><span class="token punctuation">,</span>
+        clientSecret<span class="token operator">:</span> <span class="token string">&apos;secret&apos;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      scopes<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&apos;view_products:test&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;manage_orders:test&apos;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+      <span class="token comment">// Optional if not globally available</span>
+      fetch<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="createauthmiddlewareforpasswordflowoptions"><code>createAuthMiddlewareForPasswordFlow(options)</code></h2>
+<p>Creates a <a href="../Glossary.html#middleware">middleware</a> to handle authentication for the <a href="https://docs.commercetools.com/http-api-authorization.html#password-flow" target="_blank">Password Flow</a> of the commercetools platform API.</p>
+<h4 id="named-arguments-options">Named arguments (options)</h4>
+<ol>
+<li><code>host</code> <em>(String)</em>: the host of the OAuth API service</li>
+<li><code>projectKey</code> <em>(String)</em>: the key of the project to assign the default scope to</li>
+<li><p><code>credentials</code> <em>(Object)</em>: the client credentials for authentication (<code>clientId</code>, <code>clientSecret</code>, <code>user</code>)</p>
+</li>
+<li><p>The <code>user</code> field is an object containing <code>username</code> and <code>password</code>. <a href="#usage-example-1">Sample below</a></p>
+</li>
+<li><p><code>scopes</code> <em>(Array)</em>: a list of <a href="https://docs.commercetools.com/http-api-authorization.html#scopes" target="_blank">scopes</a> to assign to the OAuth token. <em>No default scope is sent</em></p>
+</li>
+<li><code>fetch</code> <em>(Function)</em>: A <code>fetch</code> implementation which can be e.g. <code>node-fetch</code> or <code>unfetch</code> but also the native browser <code>fetch</code> function. Only needs be be passed if not globally available (e.g. through <code>isomorphic-fetch</code>)</li>
+</ol>
+<h4 id="usage-example">Usage example</h4>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> createClient <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-client&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createAuthMiddlewareForPasswordFlow <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-middleware-auth&apos;</span>
+
+<span class="token keyword">const</span> client <span class="token operator">=</span> <span class="token function">createClient</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  middlewares<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token function">createAuthMiddlewareForPasswordFlow</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      host<span class="token operator">:</span> <span class="token string">&apos;https://auth.commercetools.com&apos;</span><span class="token punctuation">,</span>
+      projectKey<span class="token operator">:</span> <span class="token string">&apos;test&apos;</span><span class="token punctuation">,</span>
+      credentials<span class="token operator">:</span> <span class="token punctuation">{</span>
+        clientId<span class="token operator">:</span> <span class="token string">&apos;123&apos;</span><span class="token punctuation">,</span>
+        clientSecret<span class="token operator">:</span> <span class="token string">&apos;secret&apos;</span><span class="token punctuation">,</span>
+        user<span class="token operator">:</span> <span class="token punctuation">{</span>
+          username<span class="token operator">:</span> string<span class="token punctuation">,</span>
+          password<span class="token operator">:</span> string<span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      scopes<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&apos;view_products:test&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;manage_orders:test&apos;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+      <span class="token comment">// Optional if not globally available</span>
+      fetch<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="createauthmiddlewareforanonymoussessionflowoptions"><code>createAuthMiddlewareForAnonymousSessionFlow(options)</code></h2>
+<p>Creates a <a href="../Glossary.html#middleware">middleware</a> to handle authentication for the <a href="https://docs.commercetools.com/http-api-authorization.html#tokens-for-anonymous-sessions" target="_blank">Anonymous Session Flow</a> of the commercetools platform API.</p>
+<h4 id="named-arguments-options">Named arguments (options)</h4>
+<ol>
+<li><code>host</code> <em>(String)</em>: the host of the OAuth API service</li>
+<li><code>projectKey</code> <em>(String)</em>: the key of the project to assign the default scope to</li>
+<li><code>credentials</code> <em>(Object)</em>: the client credentials for authentication (<code>clientId</code>, <code>clientSecret</code>, <code>anonymousId</code>)</li>
+<li><code>scopes</code> <em>(Array)</em>: a list of <a href="https://docs.commercetools.com/http-api-authorization.html#scopes" target="_blank">scopes</a> (default <code>manage_project:{projectKey}</code>) to assign to the OAuth token</li>
+<li><code>fetch</code> <em>(Function)</em>: A <code>fetch</code> implementation which can be e.g. <code>node-fetch</code> or <code>unfetch</code> but also the native browser <code>fetch</code> function. Only needs be be passed if not globally available (e.g. through <code>isomorphic-fetch</code>)</li>
+</ol>
+<h4 id="usage-example">Usage example</h4>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> createClient <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-client&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createAuthMiddlewareForAnonymousSessionFlow <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-middleware-auth&apos;</span>
+
+<span class="token keyword">const</span> client <span class="token operator">=</span> <span class="token function">createClient</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  middlewares<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token function">createAuthMiddlewareForAnonymousSessionFlow</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      host<span class="token operator">:</span> <span class="token string">&apos;https://auth.commercetools.com&apos;</span><span class="token punctuation">,</span>
+      projectKey<span class="token operator">:</span> <span class="token string">&apos;test&apos;</span><span class="token punctuation">,</span>
+      credentials<span class="token operator">:</span> <span class="token punctuation">{</span>
+        clientId<span class="token operator">:</span> <span class="token string">&apos;123&apos;</span><span class="token punctuation">,</span>
+        clientSecret<span class="token operator">:</span> <span class="token string">&apos;secret&apos;</span><span class="token punctuation">,</span>
+        anonymousId<span class="token operator">:</span> <span class="token string">&apos;unique-id-of-customer-not-required&apos;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      scopes<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&apos;view_products:test&apos;</span><span class="token punctuation">,</span> <span class="token string">&apos;manage_orders:test&apos;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+      <span class="token comment">// Optional if not globally available</span>
+      fetch<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="createauthmiddlewareforrefreshtokenflowoptions"><code>createAuthMiddlewareForRefreshTokenFlow(options)</code></h2>
+<p>Creates a <a href="../Glossary.html#middleware">middleware</a> to handle authentication for the <a href="https://docs.commercetools.com/http-api-authorization.html#refresh-token-flow" target="_blank">Refresh Token Flow</a> of the commercetools platform API.</p>
+<h4 id="named-arguments-options">Named arguments (options)</h4>
+<ol>
+<li><code>host</code> <em>(String)</em>: the host of the OAuth API service</li>
+<li><code>projectKey</code> <em>(String)</em>: the key of the project to assign the default scope to</li>
+<li><code>credentials</code> <em>(Object)</em>: the client credentials for authentication (<code>clientId</code>, <code>clientSecret</code>)</li>
+<li><code>refreshToken</code> <em>(String)</em>: refreshToken from the API to use to fetch new token.</li>
+<li><code>fetch</code> <em>(Function)</em>: A <code>fetch</code> implementation which can be e.g. <code>node-fetch</code> or <code>unfetch</code> but also the native browser <code>fetch</code> function. Only needs be be passed if not globally available (e.g. through <code>isomorphic-fetch</code>)</li>
+</ol>
+<h4 id="usage-example">Usage example</h4>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> createClient <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-client&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createAuthMiddlewareForRefreshTokenFlow <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-middleware-auth&apos;</span>
+
+<span class="token keyword">const</span> client <span class="token operator">=</span> <span class="token function">createClient</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  middlewares<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token function">createAuthMiddlewareForRefreshTokenFlow</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+      host<span class="token operator">:</span> <span class="token string">&apos;https://auth.commercetools.com&apos;</span><span class="token punctuation">,</span>
+      projectKey<span class="token operator">:</span> <span class="token string">&apos;test&apos;</span><span class="token punctuation">,</span>
+      credentials<span class="token operator">:</span> <span class="token punctuation">{</span>
+        clientId<span class="token operator">:</span> <span class="token string">&apos;123&apos;</span><span class="token punctuation">,</span>
+        clientSecret<span class="token operator">:</span> <span class="token string">&apos;secret&apos;</span><span class="token punctuation">,</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      refreshToken<span class="token operator">:</span> <span class="token string">&apos;foobar123&apos;</span><span class="token punctuation">,</span>
+
+      <span class="token comment">// Optional if not globally available</span>
+      fetch<span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="createauthmiddlewarewithexistingtokenauthorization-options"><code>createAuthMiddlewareWithExistingToken(authorization, options)</code></h2>
+<p>Creates a <a href="../Glossary.html#middleware">middleware</a> that attaches a provided access token <code>Authorization</code> header.</p>
+<h4 id="named-arguments-authorization-options">Named arguments (authorization, options)</h4>
+<p><code>authorization</code> <em>(String)</em>: the value for the <code>Authorization</code> header. For example, you may pass the scheme <code>&quot;Bearer&quot;</code> (<code>&quot;Bearer 1234&quot;</code>) or <code>&quot;Basic&quot;</code> (<code>&quot;Basic 134&quot;</code>) and so on, depending on your authentication mechanism.</p>
+<p><code>options</code> is an optional <em>(Object)</em>, having the following properties:</p>
+<ol>
+<li><code>force</code> <em>(Boolean)</em>: if set to true, existing Authorization header (if any) in the request will be overridden with the supplied access token (Default: <code>true</code>)</li>
+</ol>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> createClient <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-client&apos;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> createAuthMiddlewareWithExistingToken <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/sdk-middleware-auth&apos;</span>
+
+<span class="token keyword">const</span> accessToken <span class="token operator">=</span> <span class="token string">&apos;my-access-token&apos;</span>
+
+<span class="token keyword">const</span> client <span class="token operator">=</span> <span class="token function">createClient</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+  middlewares<span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token function">createAuthMiddlewareWithExistingToken</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">Bearer </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>accessToken<span class="token interpolation-punctuation punctuation">}</span></span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+      force<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./#middlewares" class="navigation navigation-prev " aria-label="Previous page: middlewares">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="sdkMiddlewareHttp.html" class="navigation navigation-next " aria-label="Next page: sdk-middleware-http">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"sdk-middleware-auth","level":"1.2.5.2.1","depth":4,"next":{"title":"sdk-middleware-http","level":"1.2.5.2.2","depth":4,"path":"sdk/api/sdkMiddlewareHttp.md","ref":"sdk/api/sdkMiddlewareHttp.md","articles":[]},"previous":{"title":"middlewares","level":"1.2.5.2","depth":3,"anchor":"#middlewares","path":"sdk/api/README.md","ref":"sdk/api/README.md#middlewares","articles":[{"title":"sdk-middleware-auth","level":"1.2.5.2.1","depth":4,"path":"sdk/api/sdkMiddlewareAuth.md","ref":"sdk/api/sdkMiddlewareAuth.md","articles":[]},{"title":"sdk-middleware-http","level":"1.2.5.2.2","depth":4,"path":"sdk/api/sdkMiddlewareHttp.md","ref":"sdk/api/sdkMiddlewareHttp.md","articles":[]},{"title":"sdk-middleware-queue","level":"1.2.5.2.3","depth":4,"path":"sdk/api/sdkMiddlewareQueue.md","ref":"sdk/api/sdkMiddlewareQueue.md","articles":[]},{"title":"sdk-middleware-logger","level":"1.2.5.2.4","depth":4,"path":"sdk/api/sdkMiddlewareLogger.md","ref":"sdk/api/sdkMiddlewareLogger.md","articles":[]},{"title":"sdk-middleware-correlation-id","level":"1.2.5.2.5","depth":4,"path":"sdk/api/sdkMiddlewareCorrelationId.md","ref":"sdk/api/sdkMiddlewareCorrelationId.md","articles":[]},{"title":"sdk-middleware-user-agent","level":"1.2.5.2.6","depth":4,"path":"sdk/api/sdkMiddlewareUserAgent.md","ref":"sdk/api/sdkMiddlewareUserAgent.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs","ga"],"root":"docs","styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/commercetools/nodejs/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"ga":{"configuration":{"anonymizeIp":true},"token":"UA-38285631-20"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/commercetools/nodejs/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"commercetools node.js","gitbook":">=3.2.1"},"file":{"path":"sdk/api/sdkMiddlewareAuth.md","mtime":"2020-03-26T14:24:37.273Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-03-09T11:59:53.785Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-anchorjs/anchor.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

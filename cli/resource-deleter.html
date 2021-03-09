@@ -1,0 +1,964 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Resource Deleter · commercetools node.js</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="state-importer.html" />
+    
+    
+    <link rel="prev" href="product-json-to-xlsx.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Read Me
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../sdk/">
+            
+                <a href="../sdk/">
+            
+                    
+                    SDK
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../sdk/Middlewares.html">
+            
+                <a href="../sdk/Middlewares.html">
+            
+                    
+                    Middlewares
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../sdk/Middlewares.html">
+            
+                <a href="../sdk/Middlewares.html#example">
+            
+                    
+                    Example
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../sdk/upgrading-from-sphere-node-sdk.html">
+            
+                <a href="../sdk/upgrading-from-sphere-node-sdk.html">
+            
+                    
+                    Upgrading from sphere-node-sdk
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../sdk/Testing.html">
+            
+                <a href="../sdk/Testing.html">
+            
+                    
+                    Testing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../sdk/Glossary.html">
+            
+                <a href="../sdk/Glossary.html">
+            
+                    
+                    Glossary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/#core">
+            
+                    
+                    core
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1.1" data-path="../sdk/api/sdkAuth.html">
+            
+                <a href="../sdk/api/sdkAuth.html">
+            
+                    
+                    sdk-auth
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.1.2" data-path="../sdk/api/sdkClient.html">
+            
+                <a href="../sdk/api/sdkClient.html">
+            
+                    
+                    sdk-client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.1.3" data-path="../sdk/api/typescriptSdk.html">
+            
+                <a href="../sdk/api/typescriptSdk.html">
+            
+                    
+                    typescript
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/#middlewares">
+            
+                    
+                    middlewares
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.2.1" data-path="../sdk/api/sdkMiddlewareAuth.html">
+            
+                <a href="../sdk/api/sdkMiddlewareAuth.html">
+            
+                    
+                    sdk-middleware-auth
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.2" data-path="../sdk/api/sdkMiddlewareHttp.html">
+            
+                <a href="../sdk/api/sdkMiddlewareHttp.html">
+            
+                    
+                    sdk-middleware-http
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.3" data-path="../sdk/api/sdkMiddlewareQueue.html">
+            
+                <a href="../sdk/api/sdkMiddlewareQueue.html">
+            
+                    
+                    sdk-middleware-queue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.4" data-path="../sdk/api/sdkMiddlewareLogger.html">
+            
+                <a href="../sdk/api/sdkMiddlewareLogger.html">
+            
+                    
+                    sdk-middleware-logger
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.5" data-path="../sdk/api/sdkMiddlewareCorrelationId.html">
+            
+                <a href="../sdk/api/sdkMiddlewareCorrelationId.html">
+            
+                    
+                    sdk-middleware-correlation-id
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.6" data-path="../sdk/api/sdkMiddlewareUserAgent.html">
+            
+                <a href="../sdk/api/sdkMiddlewareUserAgent.html">
+            
+                    
+                    sdk-middleware-user-agent
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/#helpers">
+            
+                    
+                    helpers
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.3.1" data-path="../sdk/api/apiRequestBuilder.html">
+            
+                <a href="../sdk/api/apiRequestBuilder.html">
+            
+                    
+                    api-request-builder
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.2" data-path="../sdk/api/getCredentials.html">
+            
+                <a href="../sdk/api/getCredentials.html">
+            
+                    
+                    get-credentials
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.3" data-path="../sdk/api/httpUserAgent.html">
+            
+                <a href="../sdk/api/httpUserAgent.html">
+            
+                    
+                    http-user-agent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.4" data-path="../sdk/api/syncActions.html">
+            
+                <a href="../sdk/api/syncActions.html">
+            
+                    
+                    sync-actions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    CLI
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="category-exporter.html">
+            
+                <a href="category-exporter.html">
+            
+                    
+                    Category Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="csv-parser-discount-code.html">
+            
+                <a href="csv-parser-discount-code.html">
+            
+                    
+                    CSV Discount Code Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="csv-parser-price.html">
+            
+                <a href="csv-parser-price.html">
+            
+                    
+                    CSV Price Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="csv-parser-orders.html">
+            
+                <a href="csv-parser-orders.html">
+            
+                    
+                    CSV Order Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="csv-parser-state.html">
+            
+                <a href="csv-parser-state.html">
+            
+                    
+                    CSV State Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="custom-objects-exporter.html">
+            
+                <a href="custom-objects-exporter.html">
+            
+                    
+                    Custom Objects Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="custom-objects-importer.html">
+            
+                <a href="custom-objects-importer.html">
+            
+                    
+                    Custom Objects Importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="customer-groups-exporter.html">
+            
+                <a href="customer-groups-exporter.html">
+            
+                    
+                    Customer Groups Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="personal-data-erasure.html">
+            
+                <a href="personal-data-erasure.html">
+            
+                    
+                    Personal Data Erasure
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="discount-code-generator.html">
+            
+                <a href="discount-code-generator.html">
+            
+                    
+                    Discount Code Generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="discount-code-exporter.html">
+            
+                <a href="discount-code-exporter.html">
+            
+                    
+                    Discount Code Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="discount-code-importer.html">
+            
+                <a href="discount-code-importer.html">
+            
+                    
+                    Discount Code Importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.13" data-path="inventories-exporter.html">
+            
+                <a href="inventories-exporter.html">
+            
+                    
+                    Inventories Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.14" data-path="price-exporter.html">
+            
+                <a href="price-exporter.html">
+            
+                    
+                    Price Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.15" data-path="product-exporter.html">
+            
+                <a href="product-exporter.html">
+            
+                    
+                    Product Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.16" data-path="product-json-to-csv.html">
+            
+                <a href="product-json-to-csv.html">
+            
+                    
+                    Product JSON to CSV
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.17" data-path="product-json-to-xlsx.html">
+            
+                <a href="product-json-to-xlsx.html">
+            
+                    
+                    Product JSON to XLSX
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.18" data-path="resource-deleter.html">
+            
+                <a href="resource-deleter.html">
+            
+                    
+                    Resource Deleter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.19" data-path="state-importer.html">
+            
+                <a href="state-importer.html">
+            
+                    
+                    State importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Resource Deleter</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="resource-deleter">Resource Deleter</h1>
+<p>A package which deletes resources from the <a href="https://docs.commercetools.com/" target="_blank">commercetools platform</a>.</p>
+<p>Examples of the resources are :</p>
+<ul>
+<li><a href="https://docs.commercetools.com/http-api-projects-carts#delete-cart" target="_blank">carts</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-categories#delete-category" target="_blank">categories</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-channels#delete-channel" target="_blank">channels</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-customerGroups#delete-customergroup" target="_blank">customergroups</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-customers#delete-customer" target="_blank">customers</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-custom-objects#delete-customobject-by-id" target="_blank">customobjects</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-discountCodes#delete-discountcode" target="_blank">discountcodes</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-inventory#delete-an-inventoryentry" target="_blank">inventoryentries</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-orders#delete-order" target="_blank">orders</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-payments#delete-payment" target="_blank">payments</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-productDiscounts#delete-productdiscount" target="_blank">productdiscounts</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-products#delete-product" target="_blank">products</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-productTypes#delete-producttype" target="_blank">producttypes</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-reviews#delete-review" target="_blank">reviews</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-shippingMethods#delete-shippingmethod" target="_blank">shippingmethods</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-states#delete-state" target="_blank">states</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-taxCategories#delete-taxcategory" target="_blank">taxcategories</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-types#delete-type" target="_blank">types</a></li>
+<li><a href="https://docs.commercetools.com/http-api-projects-zones#delete-zone" target="_blank">zones</a></li>
+</ul>
+<h2 id="configuration">Configuration</h2>
+<p>The constructor accepts two arguments:</p>
+<ul>
+<li>A required object containing the following values:<ul>
+<li><code>apiConfig</code> (Object): <code>AuthMiddleware</code> options for authentication on the commercetools platform. (Required. See <a href="https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options" target="_blank">here</a>).</li>
+<li><code>accessToken</code> (String): [Access token] to be used to authenticate requests to API. Requires scope of [<code>manage_products</code>, <code>manage_customers</code>, <code>manage_types</code>]. More info on how to get the access token <a href="https://docs.commercetools.com/http-api-authorization.html#authorization-flows" target="_blank">here</a>.</li>
+<li><code>resource</code> (String): [resource] that need to be deleted.</li>
+<li><code>predicate</code> (String): Query string specifying (where) predicate. More info on predicates <a href="https://docs.commercetools.com/http-api.html#predicates" target="_blank">here</a> (Optional).</li>
+</ul>
+</li>
+<li>An optional logger object having four functions (<code>info</code>, <code>warn</code>, <code>error</code> and <code>debug</code>).</li>
+</ul>
+<h2 id="usage">Usage</h2>
+<p><code>npm install @commercetools/resource-deleter --global</code></p>
+<h3 id="cli">CLI</h3>
+<pre class="language-"><code>Usage: resource-deleter [options]
+Delete resource from the commercetools platform.
+
+Options:
+  --help                     Show help text.                           [boolean]
+  --version                  Show version number.                       [boolean]
+  --output, -o               Path to output file.            [default: &quot;stdout&quot;]
+  --apiUrl                   The host URL of the HTTP API service.
+                                              [default: &quot;https://api.europe-west1.gcp.commercetools.com&quot;]
+  --authUrl                  The host URL of the OAuth API service.
+                                             [default: &quot;https://auth.europe-west1.gcp.commercetools.com&quot;]
+  --accessToken              CTP client access token.
+                             Required scopes: [&apos;manage_products&apos;, &apos;manage_customers&apos;, &apos;manage_types&apos;][string]
+  --projectKey, -p           API project key.                         [required]
+
+  --resource, -r             Resource that need to be deleted.        [required]
+  --confirm, -c              Confirm the resource to delete.          [boolean]
+                                                               [default: &quot;false&quot;]
+  --where, -w                specify where predicate.
+  --logLevel                 Logging level: error, warn, info or debug.
+                                                               [default: &quot;info&quot;]
+  --prettyLogs               Pretty print logs to the terminal.         [boolean]
+  --logFile                  Path to file where to save logs file.
+                                              [default: &quot;resource-deleter.log&quot;]
+</code></pre><p>Then you can delete resource using the cli:</p>
+<pre class="language-"><code>- Without predicate
+  resource-deleter -p my-project-key -r my-resource
+
+- With predicate
+  resource-deleter -p my-project-key -r my-resource -w my-desired-key
+</code></pre><h4 id="info-on-flags">Info on flags</h4>
+<ul>
+<li>The <code>--output</code> flag specifies where to output the deleted resource. Several notes on this flag:<ul>
+<li>The default location for status report logging is the standard output.</li>
+<li>If no output path is specified, the deleted resource output will be logged to the standard output as a result, status reports will be logged to a <code>resource-deleter.log</code> file in the current directory.</li>
+</ul>
+</li>
+<li>The <code>where</code> flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes (&apos;single quoted predicate&apos;). More info on predicates <a href="https://docs.commercetools.com/http-api.html#predicates" target="_blank">here</a>.</li>
+</ul>
+<h3 id="js">JS</h3>
+<p>For more direct usage, it is possible to use this module directly:</p>
+<pre class="language-"><code class="lang-js"><span class="token keyword">import</span> resourceDeleter <span class="token keyword">from</span> <span class="token string">&apos;@commercetools/resource-deleter&apos;</span>
+
+<span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token punctuation">{</span>
+  apiConfig<span class="token operator">:</span> <span class="token punctuation">{</span>
+    apiUrl<span class="token operator">:</span> <span class="token string">&apos;https://api.europe-west1.gcp.commercetools.com&apos;</span><span class="token punctuation">,</span>
+    host<span class="token operator">:</span> <span class="token string">&apos;https://auth.europe-west1.gcp.commercetools.com&apos;</span><span class="token punctuation">,</span>
+    project_key<span class="token operator">:</span> <span class="token string">&apos;my-project-key&apos;</span><span class="token punctuation">,</span>
+    credentials<span class="token operator">:</span> <span class="token punctuation">{</span>
+      clientId<span class="token operator">:</span> <span class="token string">&apos;*********&apos;</span><span class="token punctuation">,</span>
+      clientSecret<span class="token operator">:</span> <span class="token string">&apos;*********&apos;</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  accessToken<span class="token operator">:</span> <span class="token string">&apos;123456yuhgfdwegh675412wefb4rgb&apos;</span><span class="token punctuation">,</span>
+  resource<span class="token operator">:</span> <span class="token string">&apos;my-resource&apos;</span><span class="token punctuation">,</span>
+  predicate<span class="token operator">:</span> <span class="token string">&apos;key=&quot;my-desired-key&quot;&apos;</span><span class="token punctuation">,</span>
+  logger<span class="token operator">:</span> <span class="token punctuation">{</span>
+    error<span class="token operator">:</span> console<span class="token punctuation">.</span>error<span class="token punctuation">,</span>
+    warn<span class="token operator">:</span> console<span class="token punctuation">.</span>warn<span class="token punctuation">,</span>
+    info<span class="token operator">:</span> console<span class="token punctuation">.</span>log<span class="token punctuation">,</span>
+    debug<span class="token operator">:</span> console<span class="token punctuation">.</span>debug<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">const</span> resourceDeleter <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ResourceDeleter</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span>
+
+resourceDeleter
+  <span class="token punctuation">.</span><span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&apos;resource deleted&apos;</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">error</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// handle error</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="product-json-to-xlsx.html" class="navigation navigation-prev " aria-label="Previous page: Product JSON to XLSX">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="state-importer.html" class="navigation navigation-next " aria-label="Next page: State importer">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Resource Deleter","level":"1.3.18","depth":2,"next":{"title":"State importer","level":"1.3.19","depth":2,"path":"cli/state-importer.md","ref":"cli/state-importer.md","articles":[]},"previous":{"title":"Product JSON to XLSX","level":"1.3.17","depth":2,"path":"cli/product-json-to-xlsx.md","ref":"cli/product-json-to-xlsx.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs","ga"],"root":"docs","styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/commercetools/nodejs/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"ga":{"configuration":{"anonymizeIp":true},"token":"UA-38285631-20"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/commercetools/nodejs/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"commercetools node.js","gitbook":">=3.2.1"},"file":{"path":"cli/resource-deleter.md","mtime":"2020-03-27T09:44:40.259Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-03-09T11:59:53.785Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-anchorjs/anchor.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

@@ -1,0 +1,1012 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>CSV Price Parser · commercetools node.js</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="csv-parser-orders.html" />
+    
+    
+    <link rel="prev" href="csv-parser-discount-code.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Read Me
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../sdk/">
+            
+                <a href="../sdk/">
+            
+                    
+                    SDK
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1" data-path="../sdk/Middlewares.html">
+            
+                <a href="../sdk/Middlewares.html">
+            
+                    
+                    Middlewares
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.1.1" data-path="../sdk/Middlewares.html">
+            
+                <a href="../sdk/Middlewares.html#example">
+            
+                    
+                    Example
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.2" data-path="../sdk/upgrading-from-sphere-node-sdk.html">
+            
+                <a href="../sdk/upgrading-from-sphere-node-sdk.html">
+            
+                    
+                    Upgrading from sphere-node-sdk
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.3" data-path="../sdk/Testing.html">
+            
+                <a href="../sdk/Testing.html">
+            
+                    
+                    Testing
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.4" data-path="../sdk/Glossary.html">
+            
+                <a href="../sdk/Glossary.html">
+            
+                    
+                    Glossary
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/">
+            
+                    
+                    API Reference
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/#core">
+            
+                    
+                    core
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.1.1" data-path="../sdk/api/sdkAuth.html">
+            
+                <a href="../sdk/api/sdkAuth.html">
+            
+                    
+                    sdk-auth
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.1.2" data-path="../sdk/api/sdkClient.html">
+            
+                <a href="../sdk/api/sdkClient.html">
+            
+                    
+                    sdk-client
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.1.3" data-path="../sdk/api/typescriptSdk.html">
+            
+                <a href="../sdk/api/typescriptSdk.html">
+            
+                    
+                    typescript
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/#middlewares">
+            
+                    
+                    middlewares
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.2.1" data-path="../sdk/api/sdkMiddlewareAuth.html">
+            
+                <a href="../sdk/api/sdkMiddlewareAuth.html">
+            
+                    
+                    sdk-middleware-auth
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.2" data-path="../sdk/api/sdkMiddlewareHttp.html">
+            
+                <a href="../sdk/api/sdkMiddlewareHttp.html">
+            
+                    
+                    sdk-middleware-http
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.3" data-path="../sdk/api/sdkMiddlewareQueue.html">
+            
+                <a href="../sdk/api/sdkMiddlewareQueue.html">
+            
+                    
+                    sdk-middleware-queue
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.4" data-path="../sdk/api/sdkMiddlewareLogger.html">
+            
+                <a href="../sdk/api/sdkMiddlewareLogger.html">
+            
+                    
+                    sdk-middleware-logger
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.5" data-path="../sdk/api/sdkMiddlewareCorrelationId.html">
+            
+                <a href="../sdk/api/sdkMiddlewareCorrelationId.html">
+            
+                    
+                    sdk-middleware-correlation-id
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.2.6" data-path="../sdk/api/sdkMiddlewareUserAgent.html">
+            
+                <a href="../sdk/api/sdkMiddlewareUserAgent.html">
+            
+                    
+                    sdk-middleware-user-agent
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3" data-path="../sdk/api/">
+            
+                <a href="../sdk/api/#helpers">
+            
+                    
+                    helpers
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.2.5.3.1" data-path="../sdk/api/apiRequestBuilder.html">
+            
+                <a href="../sdk/api/apiRequestBuilder.html">
+            
+                    
+                    api-request-builder
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.2" data-path="../sdk/api/getCredentials.html">
+            
+                <a href="../sdk/api/getCredentials.html">
+            
+                    
+                    get-credentials
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.3" data-path="../sdk/api/httpUserAgent.html">
+            
+                <a href="../sdk/api/httpUserAgent.html">
+            
+                    
+                    http-user-agent
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3.4" data-path="../sdk/api/syncActions.html">
+            
+                <a href="../sdk/api/syncActions.html">
+            
+                    
+                    sync-actions
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    CLI
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="category-exporter.html">
+            
+                <a href="category-exporter.html">
+            
+                    
+                    Category Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="csv-parser-discount-code.html">
+            
+                <a href="csv-parser-discount-code.html">
+            
+                    
+                    CSV Discount Code Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.3" data-path="csv-parser-price.html">
+            
+                <a href="csv-parser-price.html">
+            
+                    
+                    CSV Price Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="csv-parser-orders.html">
+            
+                <a href="csv-parser-orders.html">
+            
+                    
+                    CSV Order Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="csv-parser-state.html">
+            
+                <a href="csv-parser-state.html">
+            
+                    
+                    CSV State Parser
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="custom-objects-exporter.html">
+            
+                <a href="custom-objects-exporter.html">
+            
+                    
+                    Custom Objects Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="custom-objects-importer.html">
+            
+                <a href="custom-objects-importer.html">
+            
+                    
+                    Custom Objects Importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.8" data-path="customer-groups-exporter.html">
+            
+                <a href="customer-groups-exporter.html">
+            
+                    
+                    Customer Groups Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.9" data-path="personal-data-erasure.html">
+            
+                <a href="personal-data-erasure.html">
+            
+                    
+                    Personal Data Erasure
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.10" data-path="discount-code-generator.html">
+            
+                <a href="discount-code-generator.html">
+            
+                    
+                    Discount Code Generator
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.11" data-path="discount-code-exporter.html">
+            
+                <a href="discount-code-exporter.html">
+            
+                    
+                    Discount Code Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.12" data-path="discount-code-importer.html">
+            
+                <a href="discount-code-importer.html">
+            
+                    
+                    Discount Code Importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.13" data-path="inventories-exporter.html">
+            
+                <a href="inventories-exporter.html">
+            
+                    
+                    Inventories Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.14" data-path="price-exporter.html">
+            
+                <a href="price-exporter.html">
+            
+                    
+                    Price Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.15" data-path="product-exporter.html">
+            
+                <a href="product-exporter.html">
+            
+                    
+                    Product Exporter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.16" data-path="product-json-to-csv.html">
+            
+                <a href="product-json-to-csv.html">
+            
+                    
+                    Product JSON to CSV
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.17" data-path="product-json-to-xlsx.html">
+            
+                <a href="product-json-to-xlsx.html">
+            
+                    
+                    Product JSON to XLSX
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.18" data-path="resource-deleter.html">
+            
+                <a href="resource-deleter.html">
+            
+                    
+                    Resource Deleter
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.19" data-path="state-importer.html">
+            
+                <a href="state-importer.html">
+            
+                    
+                    State importer
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >CSV Price Parser</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="csv-parser-price">CSV Parser Price</h1>
+<p><a href="https://travis-ci.org/commercetools/csv-parser-price" target="_blank"><img src="https://img.shields.io/travis/commercetools/csv-parser-price/master.svg?style=flat-square" alt="Travis Build Status"></a>
+<a href="https://codecov.io/gh/commercetools/csv-parser-price" target="_blank"><img src="https://img.shields.io/codecov/c/github/commercetools/csv-parser-price.svg?style=flat-square" alt="Codecov Coverage Status"></a>
+<a href="https://david-dm.org/commercetools/csv-parser-price" target="_blank"><img src="https://img.shields.io/david/commercetools/csv-parser-price.svg?style=flat-square" alt="David Dependencies Status"></a>
+<a href="https://david-dm.org/commercetools/csv-parser-price?type=dev" target="_blank"><img src="https://img.shields.io/david/dev/commercetools/csv-parser-price.svg?style=flat-square" alt="David devDependencies Status"></a></p>
+<p>Convert <a href="https://docs.commercetools.com/http-api-projects-products.html#price" target="_blank">commercetools price</a> CSV data to JSON. See example below for CSV format and sample response</p>
+<h2 id="usage">Usage</h2>
+<p><code>npm install @commercetools/csv-parser-price --global</code></p>
+<h3 id="cli">CLI</h3>
+<pre class="language-"><code>Usage: csvparserprice [options]
+Convert commercetools price CSV data to JSON.
+
+Options:
+  --help, -h        Show help text.                                    [boolean]
+  --version, -v     Show version number.                               [boolean]
+  --inputFile, -i   Path to input CSV file.                   [default: &quot;stdin&quot;]
+  --outputFile, -o  Path to output JSON file.                [default: &quot;stdout&quot;]
+  --apiUrl          The host URL of the HTTP API service.
+                                              [default: &quot;https://api.europe-west1.gcp.commercetools.com&quot;]
+  --authUrl         The host URL of the OAuth API service.
+                                             [default: &quot;https://auth.europe-west1.gcp.commercetools.com&quot;]
+  --batchSize, -b   Number of CSV rows to handle simultaneously.  [default: 100]
+  --delimiter, -d   Used CSV delimiter.                           [default: &quot;,&quot;]
+  --accessToken     CTP client access token
+  --projectKey, -p  API project key.                                  [required]
+  --logLevel        Logging level: error, warn, info or verbose.
+                                                               [default: &quot;info&quot;]
+  --logFile         Path to file where to save logs.
+                                                 [default: &quot;csvparserprice.log&quot;]
+</code></pre><p>Note that when the stdout is used as an output stream all log messages are written by default to <code>csvparserprice.log</code> log file.</p>
+<h3 id="js">JS</h3>
+<pre class="language-"><code class="lang-js"><span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;fs&apos;</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> CsvParserPrice <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;@commercetools/csv-parser-price&apos;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> csvParserPrice <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">CsvParserPrice</span><span class="token punctuation">(</span>
+  <span class="token punctuation">{</span>
+    projectKey<span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">CT_PROJECT_KEY</span><span class="token punctuation">,</span>
+    credentials<span class="token operator">:</span> <span class="token punctuation">{</span>
+      clientId<span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">CT_CLIENT_ID</span><span class="token punctuation">,</span>
+      clientSecret<span class="token operator">:</span> process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">CT_CLIENT_SECRET</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    accessToken<span class="token operator">:</span> <span class="token string">&apos;&lt;tokenfromapi&gt;&apos;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    error<span class="token operator">:</span> console<span class="token punctuation">.</span>error<span class="token punctuation">,</span>
+    warn<span class="token operator">:</span> console<span class="token punctuation">.</span>warn<span class="token punctuation">,</span>
+    info<span class="token operator">:</span> console<span class="token punctuation">.</span>log<span class="token punctuation">,</span>
+    verbose<span class="token operator">:</span> console<span class="token punctuation">.</span>log<span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    delimiter<span class="token operator">:</span> <span class="token string">&apos;^&apos;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> outputStream <span class="token operator">=</span> fs<span class="token punctuation">.</span><span class="token function">createWriteStream</span><span class="token punctuation">(</span><span class="token string">&apos;./output.json&apos;</span><span class="token punctuation">)</span>
+
+outputStream<span class="token punctuation">.</span><span class="token function">on</span><span class="token punctuation">(</span><span class="token string">&apos;error&apos;</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">err</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// handle error event</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+csvParserPrice<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>fs<span class="token punctuation">.</span><span class="token function">createReadStream</span><span class="token punctuation">(</span><span class="token string">&apos;./input.csv&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> outputStream<span class="token punctuation">)</span>
+</code></pre>
+<p>Errors on the level <code>error</code> come from events that are fatal and thus stop the stream of data.</p>
+<h2 id="configuration">Configuration</h2>
+<p><code>CsvParserPrice</code> accepts three objects as arguments:</p>
+<ul>
+<li>API client credentials for the <a href="https://commercetools.github.io/nodejs/docs/sdk/api/createAuthMiddlewareForClientCredentialsFlow.html" target="_blank">authentication middleware</a> (<em>required</em>)</li>
+<li>Logger takes object with four functions (<em>optional</em>)</li>
+<li>Config (<em>optional</em>)<ul>
+<li><code>batchSize</code>: number of CSV rows to handle simultaneously. (<em>default</em>: <code>100</code>)</li>
+<li><code>delimiter</code>: the used CSV delimiter (<em>default</em>: <code>,</code>)</li>
+</ul>
+</li>
+</ul>
+<p>Sample CSV file</p>
+<pre class="language-"><code class="lang-csv">variant-sku,value.currencyCode,value.centAmount,country,customerGroup.groupName,channel.key,validFrom,validUntil,customType,customField.foo,customField.bar,customField.current,customField.name.nl,customField.name.de,customField.status,customField.price,customField.priceset
+my-price,EUR,4200,DE,customer-group,my-channel,2016-11-01T08:01:19+0000,2016-12-01T08:03:10+0000,custom-type,12,nac,true,Selwyn,Merkel,Ready,EUR 1200,&quot;1,2,3,5&quot;
+my-price2,EUR,4200,DE,customer-group,my-channel,2016-11-01T08:01:19+0000,2016-12-01T08:03:10+0000,custom-type,12,nac,true,Selwyn,Merkel,Ready,EUR 1200,&quot;1,2,3,5&quot;
+my-price,EUR,4200,DE,customer-group,my-channel,2016-11-01T08:01:19+0000,2016-12-01T08:03:10+0000,custom-type,12,nac,true,Selwyn,Merkel,Ready,EUR 1200,&quot;1,2,3,5&quot;
+</code></pre>
+<p>JSON object returned from the conversion of the CSV file above</p>
+<pre class="language-"><code class="lang-json"><span class="token punctuation">{</span>
+  <span class="token property">&quot;prices&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;sku&quot;</span><span class="token operator">:</span> <span class="token string">&quot;my-price&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;prices&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;value&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;centAmount&quot;</span><span class="token operator">:</span> <span class="token number">4200</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;fractionDigits&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;centPrecision&quot;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;country&quot;</span><span class="token operator">:</span> <span class="token string">&quot;DE&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;customerGroup&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;customer-group&quot;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;channel&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;my-channel&quot;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;validFrom&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2016-11-01T08:01:19+0000&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;validUntil&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2016-12-01T08:03:10+0000&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;custom&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;fields&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+              <span class="token property">&quot;foo&quot;</span><span class="token operator">:</span> <span class="token number">12</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;value&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;centAmount&quot;</span><span class="token operator">:</span> <span class="token number">4200</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;fractionDigits&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;centPrecision&quot;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;country&quot;</span><span class="token operator">:</span> <span class="token string">&quot;DE&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;customerGroup&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;customer-group&quot;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;channel&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;my-channel&quot;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;validFrom&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2016-11-01T08:01:19+0000&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;validUntil&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2016-12-01T08:03:10+0000&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;custom&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;fields&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+              <span class="token property">&quot;foo&quot;</span><span class="token operator">:</span> <span class="token number">12</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">&quot;sku&quot;</span><span class="token operator">:</span> <span class="token string">&quot;my-price2&quot;</span><span class="token punctuation">,</span>
+      <span class="token property">&quot;prices&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+          <span class="token property">&quot;value&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;centAmount&quot;</span><span class="token operator">:</span> <span class="token number">4200</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;fractionDigits&quot;</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;centPrecision&quot;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;country&quot;</span><span class="token operator">:</span> <span class="token string">&quot;DE&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;customerGroup&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;customer-group&quot;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;channel&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;my-channel&quot;</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;validFrom&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2016-11-01T08:01:19+0000&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;validUntil&quot;</span><span class="token operator">:</span> <span class="token string">&quot;2016-12-01T08:03:10+0000&quot;</span><span class="token punctuation">,</span>
+          <span class="token property">&quot;custom&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;fields&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+              <span class="token property">&quot;foo&quot;</span><span class="token operator">:</span> <span class="token number">12</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="csv-parser-discount-code.html" class="navigation navigation-prev " aria-label="Previous page: CSV Discount Code Parser">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="csv-parser-orders.html" class="navigation navigation-next " aria-label="Next page: CSV Order Parser">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"CSV Price Parser","level":"1.3.3","depth":2,"next":{"title":"CSV Order Parser","level":"1.3.4","depth":2,"path":"cli/csv-parser-orders.md","ref":"cli/csv-parser-orders.md","articles":[]},"previous":{"title":"CSV Discount Code Parser","level":"1.3.2","depth":2,"path":"cli/csv-parser-discount-code.md","ref":"cli/csv-parser-discount-code.md","articles":[]},"dir":"ltr"},"config":{"plugins":["edit-link","prism","-highlight","github","anchorjs","ga"],"root":"docs","styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{},"github":{"url":"https://github.com/commercetools/nodejs/"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"ga":{"configuration":{"anonymizeIp":true},"token":"UA-38285631-20"},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/commercetools/nodejs/tree/master"},"theme-default":{"styles":{"website":"build/gitbook.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchorjs":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"commercetools node.js","gitbook":">=3.2.1"},"file":{"path":"cli/csv-parser-price.md","mtime":"2020-03-27T09:44:40.173Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-03-09T11:59:53.785Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-anchorjs/anchor.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-anchorjs/anchor-style.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-ga/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
