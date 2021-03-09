@@ -269,8 +269,8 @@ describe('Actions', () => {
     const actions = productsSync.buildActions(now, before)
 
     expect(actions).toEqual([
-      { action: 'removeVariant', id: 3 },
       { action: 'addVariant', ...newVariant },
+      { action: 'removeVariant', id: 3 },
     ])
   })
 
@@ -524,7 +524,6 @@ describe('Actions', () => {
           const actions = productsSync.buildActions(now, before)
 
           expect(actions).toEqual([
-            { action: 'removeVariant', id: 1 },
             {
               action: 'addVariant',
               attributes: [{ name: 'foo', value: 'bar' }],
@@ -532,6 +531,7 @@ describe('Actions', () => {
               sku: 'v1',
             },
             { action: 'changeMasterVariant', variantId: 2 },
+            { action: 'removeVariant', id: 1 },
           ])
         })
       })

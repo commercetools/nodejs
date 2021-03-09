@@ -65,7 +65,15 @@ function createProductMapActions(
 
     allActions.push(
       mapActionGroup('variants', (): Array<UpdateAction> =>
-        productActions.actionsMapVariants(diff, oldObj, newObj)
+        productActions.actionsMapAddVariants(diff, oldObj, newObj)
+      )
+    )
+
+    allActions.push(productActions.actionsMapMasterVariant(oldObj, newObj))
+
+    allActions.push(
+      mapActionGroup('variants', (): Array<UpdateAction> =>
+        productActions.actionsMapRemoveVariants(diff, oldObj, newObj)
       )
     )
 
@@ -86,8 +94,6 @@ function createProductMapActions(
         productActions.actionsMapReferences(diff, oldObj, newObj)
       )
     )
-
-    allActions.push(productActions.actionsMapMasterVariant(oldObj, newObj))
 
     allActions.push(
       mapActionGroup('images', (): Array<UpdateAction> =>
