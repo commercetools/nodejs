@@ -1054,6 +1054,64 @@ describe('Actions', () => {
           action: 'addAsset',
           asset: now.masterVariant.assets[0],
           variantId: 1,
+          position: 0,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
+    test('should build "addAsset" action with non exist assets', () => {
+      const before = {
+        masterVariant: {
+          id: 1,
+          assets: [
+            {
+              id: 'xyz',
+              key: 'asset-key-one',
+            },
+            {
+              id: 'xyz2',
+              key: 'asset-key-two',
+              name: {
+                en: 'asset name two',
+              },
+            },
+          ],
+        },
+      }
+      const now = {
+        masterVariant: {
+          id: 1,
+          assets: [
+            {
+              id: 'xyz',
+              key: 'asset-key-one',
+            },
+            {
+              id: 'xyz2',
+              key: 'asset-key-two',
+            },
+            {
+              key: 'asset-key',
+              name: {
+                en: 'asset name ',
+              },
+              sources: [
+                {
+                  uri: 'http://example.org/content/product-manual.pdf',
+                },
+              ],
+            },
+          ],
+        },
+      }
+      const actual = productsSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'addAsset',
+          asset: now.masterVariant.assets[2],
+          variantId: 1,
+          position: 2,
         },
       ]
       expect(actual).toEqual(expected)
@@ -1094,6 +1152,7 @@ describe('Actions', () => {
           action: 'addAsset',
           asset: now.variants[0].assets[0],
           sku: 'my-sku',
+          position: 0,
         },
       ]
       expect(actual).toEqual(expected)
@@ -1138,6 +1197,7 @@ describe('Actions', () => {
           action: 'addAsset',
           asset: newAsset,
           variantId: 2,
+          position: 1,
         },
       ]
       expect(actual).toEqual(expected)
@@ -1263,8 +1323,9 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
 
-    test('should build "removeAsset" and "addAsset" action when asset is changed', () => {
+    test('should build "changeAssetName" action when asset name is changed', () => {
       const initialAsset = {
+        id: 'xyz',
         key: 'asset-key',
         name: {
           en: 'asset name ',
@@ -1296,14 +1357,205 @@ describe('Actions', () => {
       const actual = productsSync.buildActions(now, before)
       const expected = [
         {
-          action: 'removeAsset',
-          assetKey: before.variants[0].assets[0].key,
+          action: 'changeAssetName',
+          ...changedName,
+          assetId: 'xyz',
           variantId: 1,
         },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
+    test('should build "setAssetKey", "changeAssetName", "setAssetDescription", "setAssetSources", "setAssetTags", "setAssetCustomType" actions', () => {
+      const initialAsset = {
+        id: 'xyz',
+        key: 'asset-key',
+        name: {
+          en: 'asset name ',
+        },
+        description: {
+          en: 'description',
+        },
+        sources: [
+          {
+            uri: 'http://example.org/content/product-manual.pdf',
+            contentType: 'application/pdf',
+          },
+        ],
+        tags: ['manual', 'pdf'],
+        custom: {
+          type: {
+            typeId: 'type',
+            id: 'customType1',
+          },
+          fields: {
+            customField1: true,
+          },
+        },
+      }
+
+      const changedAsset = {
+        id: 'xyz',
+        key: 'update-asset-key',
+        name: {
+          en: 'update asset name ',
+        },
+        description: {
+          en: 'update description',
+        },
+        sources: [
+          {
+            uri: 'http://example.org/content/product-manual.xml',
+            contentType: 'application/xml',
+          },
+        ],
+        tags: ['manual', 'xml'],
+        custom: {
+          type: {
+            typeId: 'type',
+            id: 'customType2',
+          },
+          fields: {
+            customField1: false,
+          },
+        },
+      }
+
+      const before = {
+        variants: [
+          {
+            id: 1,
+            assets: [initialAsset],
+          },
+        ],
+      }
+      const now = {
+        variants: [
+          {
+            id: 1,
+            assets: [changedAsset],
+          },
+        ],
+      }
+      const actual = productsSync.buildActions(now, before)
+      const expected = [
         {
-          action: 'addAsset',
-          asset: changedAsset,
+          action: 'setAssetKey',
+          assetKey: 'update-asset-key',
           variantId: 1,
+          assetId: 'xyz',
+        },
+        {
+          action: 'changeAssetName',
+          name: { en: 'update asset name ' },
+          variantId: 1,
+          assetId: 'xyz',
+        },
+        {
+          action: 'setAssetDescription',
+          description: { en: 'update description' },
+          variantId: 1,
+          assetId: 'xyz',
+        },
+        {
+          action: 'setAssetTags',
+          tags: ['manual', 'xml'],
+          variantId: 1,
+          assetId: 'xyz',
+        },
+        {
+          action: 'setAssetSources',
+          sources: [
+            {
+              uri: 'http://example.org/content/product-manual.xml',
+              contentType: 'application/xml',
+            },
+          ],
+          variantId: 1,
+          assetId: 'xyz',
+        },
+        {
+          action: 'setAssetCustomType',
+          variantId: 1,
+          assetId: 'xyz',
+          type: { typeId: 'type', id: 'customType2' },
+          fields: { customField1: false },
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
+    test('should build "setAssetKey", "changeAssetName" and "setAssetCustomField" ', () => {
+      const initialAsset = {
+        id: 'xyz',
+        key: 'asset-key',
+        name: {
+          en: 'asset name ',
+        },
+        custom: {
+          type: {
+            typeId: 'type',
+            id: 'customType1',
+          },
+          fields: {
+            customField1: true,
+          },
+        },
+      }
+      const changedAsset = {
+        id: 'xyz',
+        key: 'asset-key-two',
+        name: {
+          en: 'asset name change',
+        },
+        custom: {
+          type: {
+            typeId: 'type',
+            id: 'customType1',
+          },
+          fields: {
+            customField1: false,
+          },
+        },
+      }
+      const before = {
+        variants: [
+          {
+            id: 1,
+            assets: [initialAsset],
+          },
+        ],
+      }
+      const now = {
+        variants: [
+          {
+            id: 1,
+            assets: [changedAsset],
+          },
+        ],
+      }
+      const actual = productsSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'setAssetKey',
+          assetKey: 'asset-key-two',
+          variantId: 1,
+          assetId: 'xyz',
+        },
+        {
+          action: 'changeAssetName',
+          name: {
+            en: 'asset name change',
+          },
+          variantId: 1,
+          assetId: 'xyz',
+        },
+        {
+          action: 'setAssetCustomField',
+          variantId: 1,
+          assetId: 'xyz',
+          name: 'customField1',
+          value: false,
         },
       ]
       expect(actual).toEqual(expected)

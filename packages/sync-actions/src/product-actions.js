@@ -10,7 +10,6 @@ import {
 } from './utils/common-actions'
 import createBuildArrayActions, {
   ADD_ACTIONS,
-  CHANGE_ACTIONS,
   REMOVE_ACTIONS,
 } from './utils/create-build-array-actions'
 import findMatchingPairs from './utils/find-matching-pairs'
@@ -24,6 +23,14 @@ export const baseActionsList = [
   { action: 'setDescription', key: 'description' },
   { action: 'setSearchKeywords', key: 'searchKeywords' },
   { action: 'setKey', key: 'key' },
+]
+
+export const baseAssetActionsList = [
+  { action: 'setAssetKey', key: 'key', actionKey: 'assetKey' },
+  { action: 'changeAssetName', key: 'name' },
+  { action: 'setAssetDescription', key: 'description' },
+  { action: 'setAssetTags', key: 'tags' },
+  { action: 'setAssetSources', key: 'sources' },
 ]
 
 export const metaActionsList = [
@@ -381,37 +388,81 @@ function toVariantIdentifier(variant) {
   return id ? { variantId: id } : { sku }
 }
 
-function _buildVariantAssetsActions(diff, oldObj, newObj) {
-  const handler = createBuildArrayActions('assets', {
-    [ADD_ACTIONS]: (newAsset) => ({
-      action: 'addAsset',
-      asset: newAsset,
-      ...toVariantIdentifier(newObj),
-    }),
-    [REMOVE_ACTIONS]: (oldAsset) => ({
-      action: 'removeAsset',
-      ...toAssetIdentifier(oldAsset),
-      ...toVariantIdentifier(oldObj),
-    }),
-    [CHANGE_ACTIONS]: (oldAsset, newAsset) =>
-      // here we could use more atomic update actions (e.g. changeAssetName)
-      // but for now we use the simpler approach to first remove and then
-      // re-add the asset - which reduces the code complexity
-      [
-        {
+function _buildVariantAssetsActions(diffAssets, oldVariant, newVariant) {
+  const addAssetActions = []
+  let changeAssetActions = []
+  const removeAssetActions = []
+
+  // generate a hashMap to be able to reference the right image from both ends
+  const matchingAssetPairs = findMatchingPairs(
+    diffAssets,
+    oldVariant.assets,
+    newVariant.assets
+  )
+
+  forEach(diffAssets, (asset, key) => {
+    const { oldObj: oldAsset, newObj: newAsset } = extractMatchingPairs(
+      matchingAssetPairs,
+      key,
+      oldVariant.assets,
+      newVariant.assets
+    )
+    if (REGEX_NUMBER.test(key)) {
+      if (Array.isArray(asset) && asset.length) {
+        addAssetActions.push({
+          action: 'addAsset',
+          asset: diffpatcher.getDeltaValue(asset),
+          ...toVariantIdentifier(newVariant),
+          position: Number(key),
+        })
+      } else if (Object.keys(asset).length) {
+        // todo add changeAssetOrder
+        const basicActions = buildBaseAttributesActions({
+          actions: baseAssetActionsList,
+          diff: asset,
+          oldObj: oldAsset,
+          newObj: newAsset,
+        }).map((action) => {
+          if (action.action === 'setAssetKey') {
+            return {
+              ...action,
+              ...toVariantIdentifier(oldVariant),
+              assetId: oldAsset.id,
+            }
+          }
+
+          return {
+            ...action,
+            ...toVariantIdentifier(oldVariant),
+            ...toAssetIdentifier(oldAsset),
+          }
+        })
+        changeAssetActions = changeAssetActions.concat(basicActions)
+
+        if (asset.custom) {
+          const customActions = actionsMapCustom(asset, newAsset, oldAsset, {
+            actions: {
+              setCustomType: 'setAssetCustomType',
+              setCustomField: 'setAssetCustomField',
+            },
+            ...toVariantIdentifier(oldVariant),
+            ...toAssetIdentifier(oldAsset),
+          })
+          changeAssetActions = changeAssetActions.concat(customActions)
+        }
+      }
+    } else if (REGEX_UNDERSCORE_NUMBER.test(key))
+      if (Number(asset[2]) === 0) {
+        // asset removed
+        removeAssetActions.push({
           action: 'removeAsset',
           ...toAssetIdentifier(oldAsset),
-          ...toVariantIdentifier(oldObj),
-        },
-        {
-          action: 'addAsset',
-          asset: newAsset,
-          ...toVariantIdentifier(newObj),
-        },
-      ],
+          ...toVariantIdentifier(oldVariant),
+        })
+      }
   })
 
-  return handler(diff, oldObj, newObj)
+  return [addAssetActions, changeAssetActions, removeAssetActions]
 }
 
 /**
@@ -516,7 +567,10 @@ export function actionsMapCategoryOrderHints(diff) {
 }
 
 export function actionsMapAssets(diff, oldObj, newObj, variantHashMap) {
-  let actions = []
+  let addAssetActions = []
+  let changeAssetActions = []
+  let removeAssetActions = []
+
   const { variants } = diff
 
   if (variants)
@@ -527,16 +581,24 @@ export function actionsMapAssets(diff, oldObj, newObj, variantHashMap) {
         oldObj.variants,
         newObj.variants
       )
-      if (REGEX_NUMBER.test(key) && !Array.isArray(variant)) {
-        const assetActions = _buildVariantAssetsActions(
-          variant,
+      if (
+        variant.assets &&
+        (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key))
+      ) {
+        const [a, c, r] = _buildVariantAssetsActions(
+          variant.assets,
           oldVariant,
           newVariant
         )
-        if (assetActions) actions = actions.concat(assetActions)
+
+        // add if (assetActions)
+        addAssetActions = addAssetActions.concat(a)
+        changeAssetActions = changeAssetActions.concat(c)
+        removeAssetActions = removeAssetActions.concat(r)
       }
     })
-  return actions
+
+  return changeAssetActions.concat(removeAssetActions).concat(addAssetActions)
 }
 
 export function actionsMapAttributes(
