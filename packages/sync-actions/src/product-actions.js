@@ -416,7 +416,7 @@ function _buildVariantAssetsActions(diffAssets, oldVariant, newVariant) {
           position: Number(key),
         })
       } else if (Object.keys(asset).length) {
-        // todo add changeAssetOrder
+        // todo add changeAssetOrder issue https://github.com/commercetools/nodejs/issues/1665
         const basicActions = buildBaseAttributesActions({
           actions: baseAssetActionsList,
           diff: asset,
