@@ -48,6 +48,15 @@ export const referenceActionsList = [
  * HELPER FUNCTIONS
  */
 
+const addAction = (key, resource) =>
+  REGEX_NUMBER.test(key) && Array.isArray(resource) && resource.length
+
+const updateAction = (key, resource) =>
+  REGEX_NUMBER.test(key) && Object.keys(resource).length
+
+const removeAction = (key, resource) =>
+  REGEX_UNDERSCORE_NUMBER.test(key) && Number(resource[2]) === 0
+
 function _buildSkuActions(variantDiff, oldVariant) {
   if ({}.hasOwnProperty.call(variantDiff, 'sku')) {
     const newValue = diffpatcher.getDeltaValue(variantDiff.sku)
@@ -263,45 +272,48 @@ function _buildVariantPricesAction(
       oldVariant.prices,
       newVariant.prices
     )
-    if (REGEX_NUMBER.test(key)) {
-      if (Array.isArray(price) && price.length) {
-        // Remove read-only fields
-        const patchedPrice = price.map((p) => {
-          const shallowClone = { ...p }
-          if (enableDiscounted !== true) delete shallowClone.discounted
-          return shallowClone
-        })
+    if (addAction(key, price)) {
+      // Remove read-only fields
+      const patchedPrice = price.map((p) => {
+        const shallowClone = { ...p }
+        if (enableDiscounted !== true) delete shallowClone.discounted
+        return shallowClone
+      })
 
-        addPriceActions.push({
-          action: 'addPrice',
-          variantId: oldVariant.id,
-          price: diffpatcher.getDeltaValue(patchedPrice),
-        })
-      } else if (Object.keys(price).length) {
-        // Remove the discounted field and make sure that the price
-        // still has other values, otherwise simply return
-        const filteredPrice = { ...price }
-        if (enableDiscounted !== true) delete filteredPrice.discounted
-        if (Object.keys(filteredPrice).length) {
-          // At this point price should have changed, simply pick the new one
-          const newPrice = { ...newObj }
-          if (enableDiscounted !== true) delete newPrice.discounted
+      addPriceActions.push({
+        action: 'addPrice',
+        variantId: oldVariant.id,
+        price: diffpatcher.getDeltaValue(patchedPrice),
+      })
+      return
+    }
 
-          changePriceActions.push({
-            action: 'changePrice',
-            priceId: oldObj.id,
-            price: newPrice,
-          })
-        }
-      }
-    } else if (REGEX_UNDERSCORE_NUMBER.test(key))
-      if (Number(price[2]) === 0) {
-        // price removed
-        removePriceActions.push({
-          action: 'removePrice',
+    if (updateAction(key, price)) {
+      // Remove the discounted field and make sure that the price
+      // still has other values, otherwise simply return
+      const filteredPrice = { ...price }
+      if (enableDiscounted !== true) delete filteredPrice.discounted
+      if (Object.keys(filteredPrice).length) {
+        // At this point price should have changed, simply pick the new one
+        const newPrice = { ...newObj }
+        if (enableDiscounted !== true) delete newPrice.discounted
+
+        changePriceActions.push({
+          action: 'changePrice',
           priceId: oldObj.id,
+          price: newPrice,
         })
       }
+      return
+    }
+
+    if (removeAction(key, price)) {
+      // price removed
+      removePriceActions.push({
+        action: 'removePrice',
+        priceId: oldObj.id,
+      })
+    }
   })
 
   return [addPriceActions, changePriceActions, removePriceActions]
@@ -389,11 +401,9 @@ function toVariantIdentifier(variant) {
 }
 
 function _buildVariantAssetsActions(diffAssets, oldVariant, newVariant) {
-  const addAssetActions = []
-  let changeAssetActions = []
-  const removeAssetActions = []
+  const assetActions = []
 
-  // generate a hashMap to be able to reference the right image from both ends
+  // generate a hashMap to be able to reference the right asset from both ends
   const matchingAssetPairs = findMatchingPairs(
     diffAssets,
     oldVariant.assets,
@@ -407,62 +417,67 @@ function _buildVariantAssetsActions(diffAssets, oldVariant, newVariant) {
       oldVariant.assets,
       newVariant.assets
     )
-    if (REGEX_NUMBER.test(key)) {
-      if (Array.isArray(asset) && asset.length) {
-        addAssetActions.push({
-          action: 'addAsset',
-          asset: diffpatcher.getDeltaValue(asset),
-          ...toVariantIdentifier(newVariant),
-          position: Number(key),
-        })
-      } else if (Object.keys(asset).length) {
-        // todo add changeAssetOrder
-        const basicActions = buildBaseAttributesActions({
-          actions: baseAssetActionsList,
-          diff: asset,
-          oldObj: oldAsset,
-          newObj: newAsset,
-        }).map((action) => {
-          if (action.action === 'setAssetKey') {
-            return {
-              ...action,
-              ...toVariantIdentifier(oldVariant),
-              assetId: oldAsset.id,
-            }
-          }
 
+    if (addAction(key, asset)) {
+      assetActions.push({
+        action: 'addAsset',
+        asset: diffpatcher.getDeltaValue(asset),
+        ...toVariantIdentifier(newVariant),
+        position: Number(key),
+      })
+      return
+    }
+
+    if (updateAction(key, asset)) {
+      // todo add changeAssetOrder
+      const basicActions = buildBaseAttributesActions({
+        actions: baseAssetActionsList,
+        diff: asset,
+        oldObj: oldAsset,
+        newObj: newAsset,
+      }).map((action) => {
+        // in case of 'setAssetKey' then the identifier will be only 'assetId'
+        if (action.action === 'setAssetKey') {
           return {
             ...action,
             ...toVariantIdentifier(oldVariant),
-            ...toAssetIdentifier(oldAsset),
+            assetId: oldAsset.id,
           }
-        })
-        changeAssetActions = changeAssetActions.concat(basicActions)
-
-        if (asset.custom) {
-          const customActions = actionsMapCustom(asset, newAsset, oldAsset, {
-            actions: {
-              setCustomType: 'setAssetCustomType',
-              setCustomField: 'setAssetCustomField',
-            },
-            ...toVariantIdentifier(oldVariant),
-            ...toAssetIdentifier(oldAsset),
-          })
-          changeAssetActions = changeAssetActions.concat(customActions)
         }
-      }
-    } else if (REGEX_UNDERSCORE_NUMBER.test(key))
-      if (Number(asset[2]) === 0) {
-        // asset removed
-        removeAssetActions.push({
-          action: 'removeAsset',
-          ...toAssetIdentifier(oldAsset),
+
+        return {
+          ...action,
           ...toVariantIdentifier(oldVariant),
+          ...toAssetIdentifier(oldAsset),
+        }
+      })
+      assetActions.push(...basicActions)
+
+      if (asset.custom) {
+        const customActions = actionsMapCustom(asset, newAsset, oldAsset, {
+          actions: {
+            setCustomType: 'setAssetCustomType',
+            setCustomField: 'setAssetCustomField',
+          },
+          ...toVariantIdentifier(oldVariant),
+          ...toAssetIdentifier(oldAsset),
         })
+        assetActions.push(...customActions)
       }
+
+      return
+    }
+
+    if (removeAction(key, asset)) {
+      assetActions.push({
+        action: 'removeAsset',
+        ...toAssetIdentifier(oldAsset),
+        ...toVariantIdentifier(oldVariant),
+      })
+    }
   })
 
-  return [addAssetActions, changeAssetActions, removeAssetActions]
+  return assetActions
 }
 
 /**
@@ -572,9 +587,7 @@ export function actionsMapCategoryOrderHints(diff) {
 }
 
 export function actionsMapAssets(diff, oldObj, newObj, variantHashMap) {
-  let addAssetActions = []
-  let changeAssetActions = []
-  let removeAssetActions = []
+  let allAssetsActions = []
 
   const { variants } = diff
 
@@ -590,20 +603,17 @@ export function actionsMapAssets(diff, oldObj, newObj, variantHashMap) {
         variant.assets &&
         (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key))
       ) {
-        const [a, c, r] = _buildVariantAssetsActions(
+        const assetActions = _buildVariantAssetsActions(
           variant.assets,
           oldVariant,
           newVariant
         )
 
-        // add if (assetActions)
-        addAssetActions = addAssetActions.concat(a)
-        changeAssetActions = changeAssetActions.concat(c)
-        removeAssetActions = removeAssetActions.concat(r)
+        allAssetsActions = allAssetsActions.concat(assetActions)
       }
     })
 
-  return changeAssetActions.concat(removeAssetActions).concat(addAssetActions)
+  return allAssetsActions
 }
 
 export function actionsMapAttributes(
@@ -697,19 +707,24 @@ export function actionsMapPrices(
         newObj.variants
       )
       if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
-        const [a, c, r] = _buildVariantPricesAction(
+        const [
+          addPriceAction,
+          changePriceAction,
+          removePriceAction,
+        ] = _buildVariantPricesAction(
           variant.prices,
           oldVariant,
           newVariant,
           enableDiscounted
         )
 
-        addPriceActions = addPriceActions.concat(a)
-        changePriceActions = changePriceActions.concat(c)
-        removePriceActions = removePriceActions.concat(r)
+        addPriceActions = addPriceActions.concat(addPriceAction)
+        changePriceActions = changePriceActions.concat(changePriceAction)
+        removePriceActions = removePriceActions.concat(removePriceAction)
       }
     })
 
+  // price actions need to be in this below order
   return changePriceActions.concat(removePriceActions).concat(addPriceActions)
 }
 
