@@ -1,3 +1,58 @@
+## @commercetools/sync-actions@4.9.2 (2021-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1664](https://github.com/commercetools/nodejs/pull/1664) feat(sync-actions): add sync actions for assets ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/state-importer@3.0.34 (2021-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1664](https://github.com/commercetools/nodejs/pull/1664) feat(sync-actions): add sync actions for assets ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/integration-tests@0.1.12 (2021-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1664](https://github.com/commercetools/nodejs/pull/1664) feat(sync-actions): add sync actions for assets ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/discount-code-importer@3.0.33 (2021-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1664](https://github.com/commercetools/nodejs/pull/1664) feat(sync-actions): add sync actions for assets ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/custom-objects-importer@3.0.34 (2021-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1664](https://github.com/commercetools/nodejs/pull/1664) feat(sync-actions): add sync actions for assets ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
 ## @commercetools/sync-actions@4.9.1 (2021-03-09)
 
 #### :bug: Bug Fix
