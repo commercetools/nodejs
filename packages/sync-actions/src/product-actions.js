@@ -48,13 +48,13 @@ export const referenceActionsList = [
  * HELPER FUNCTIONS
  */
 
-const addAction = (key, resource) =>
+const getIsAddAction = (key, resource) =>
   REGEX_NUMBER.test(key) && Array.isArray(resource) && resource.length
 
-const updateAction = (key, resource) =>
+const getIsUpdateAction = (key, resource) =>
   REGEX_NUMBER.test(key) && Object.keys(resource).length
 
-const removeAction = (key, resource) =>
+const getIsRemoveAction = (key, resource) =>
   REGEX_UNDERSCORE_NUMBER.test(key) && Number(resource[2]) === 0
 
 function _buildSkuActions(variantDiff, oldVariant) {
@@ -272,7 +272,7 @@ function _buildVariantPricesAction(
       oldVariant.prices,
       newVariant.prices
     )
-    if (addAction(key, price)) {
+    if (getIsAddAction(key, price)) {
       // Remove read-only fields
       const patchedPrice = price.map((p) => {
         const shallowClone = { ...p }
@@ -288,7 +288,7 @@ function _buildVariantPricesAction(
       return
     }
 
-    if (updateAction(key, price)) {
+    if (getIsUpdateAction(key, price)) {
       // Remove the discounted field and make sure that the price
       // still has other values, otherwise simply return
       const filteredPrice = { ...price }
@@ -307,7 +307,7 @@ function _buildVariantPricesAction(
       return
     }
 
-    if (removeAction(key, price)) {
+    if (getIsRemoveAction(key, price)) {
       // price removed
       removePriceActions.push({
         action: 'removePrice',
@@ -418,7 +418,7 @@ function _buildVariantAssetsActions(diffAssets, oldVariant, newVariant) {
       newVariant.assets
     )
 
-    if (addAction(key, asset)) {
+    if (getIsAddAction(key, asset)) {
       assetActions.push({
         action: 'addAsset',
         asset: diffpatcher.getDeltaValue(asset),
@@ -428,7 +428,7 @@ function _buildVariantAssetsActions(diffAssets, oldVariant, newVariant) {
       return
     }
 
-    if (updateAction(key, asset)) {
+    if (getIsUpdateAction(key, asset)) {
       // todo add changeAssetOrder
       const basicActions = buildBaseAttributesActions({
         actions: baseAssetActionsList,
@@ -468,7 +468,7 @@ function _buildVariantAssetsActions(diffAssets, oldVariant, newVariant) {
       return
     }
 
-    if (removeAction(key, asset)) {
+    if (getIsRemoveAction(key, asset)) {
       assetActions.push({
         action: 'removeAsset',
         ...toAssetIdentifier(oldAsset),
