@@ -36,7 +36,7 @@
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {
-    "csv-parser": "^2.1.0",
+    "csv-parser": "^3.0.0",
     "flat": "^5.0.0",
     "json2csv": "^5.0.0",
     "npmlog": "^4.1.2",
