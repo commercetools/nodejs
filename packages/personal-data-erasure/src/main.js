@@ -222,7 +222,7 @@ export default class PersonalDataErasure {
                 this._deleteOne(response, resource.builder)
               return Promise.resolve()
             },
-            { accumulate: true }
+            { accumulate: true, disableSort: true }
           )
         }
       )
