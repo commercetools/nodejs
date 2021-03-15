@@ -95,7 +95,6 @@ export default function createClient(options: ClientOptions): Client {
       const opt = {
         total: Number.POSITIVE_INFINITY,
         accumulate: true,
-        disableSort: false,
         ...processOpt,
       }
       return new Promise((resolve: Function, reject: Function) => {

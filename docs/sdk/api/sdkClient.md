@@ -69,7 +69,6 @@ Returns a `Promise` with the accumulated result of each `processFn` calls.
 - `options` _(Object)_
   - `accumulate` _(Boolean)_: (default `true`) a flag to indicate whether all the results of the iterations should be accumulated. This is useful if you want to e.g. fetch all the entities of an API endpoint and do something with it at the end. _Be careful that this might lead to memory problems if the fetched data gets too big. If it's not necessary to have all the data when the process function resolves, it's recommended to disable this option_.
   - `total` _(Number)_: a number to indicate the total amount of items to be fetched from all API calls
-  - `disableSort` _(Boolean)_: (default `false`) disables sorting during iteration, useful when deleting multiple entries. Please do not use it otherwise as it will introduce an infinite loop.
 
 #### Usage example
 
