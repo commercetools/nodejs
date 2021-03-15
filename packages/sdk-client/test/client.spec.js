@@ -318,53 +318,6 @@ describe('process', () => {
       })
   })
 
-  test('disabling sort', () => {
-    let reqCount = 0
-    const reqStubs = {
-      0: {
-        body: createPayloadResult(20),
-        query: {
-          withTotal: 'false',
-          limit: '20',
-        },
-      },
-      1: {
-        body: createPayloadResult(20),
-        query: {
-          withTotal: 'false',
-          limit: '20',
-        },
-      },
-      2: {
-        body: createPayloadResult(6),
-        query: {
-          withTotal: 'false',
-          limit: '20',
-        },
-      },
-    }
-
-    const client = createClient({
-      middlewares: [
-        (next) => (req, res) => {
-          const body = reqStubs[reqCount].body
-          expect(qs.parse(req.uri.split('?')[1])).toEqual(
-            reqStubs[reqCount].query
-          )
-
-          reqCount += 1
-          next(req, { ...res, body, statusCode: 200 })
-        },
-      ],
-    })
-
-    return client
-      .process(request, () => Promise.resolve('OK'), { disableSort: true })
-      .then((response) => {
-        expect(response).toEqual(['OK', 'OK', 'OK'])
-      })
-  })
-
   test('process and resolve pagination by preserving original query', () => {
     let reqCount = 0
     const reqStubs = {
