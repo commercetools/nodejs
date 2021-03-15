@@ -195,49 +195,35 @@ export default class PersonalDataErasure {
         .build(),
       builder: requestBuilder.reviews,
     }
-
     const resourcesToDelete = [
-      customersResource,
+      reviewsResource,
+      shoppingListsResource,
       ordersResource,
       paymentsResource,
-      shoppingListsResource,
-      reviewsResource,
+      customersResource,
     ]
-
-    await Promise.all(
-      resourcesToDelete.map(
-        async (resource: {
-          uri: string,
-          builder: ServiceBuilderInstance,
-        }): Promise<void> => {
-          let continueProcessing = true
-          while (continueProcessing) {
-            const request = PersonalDataErasure.buildRequest(
-              resource.uri,
-              'GET'
-            )
-            /* eslint-disable no-await-in-loop */
-            const response = await this.client.execute(request)
-            if (response.statusCode !== 200 && response.statusCode !== 404)
-              return Promise.reject(
-                Error(`Request returned status code ${response.statusCode}`)
-              )
-            if (response.body && response.body.results.length < 20)
-              continueProcessing = false
-            if (response.statusCode === 200)
-              await this._deleteOne(response, resource.builder)
-            /* eslint-enable no-await-in-loop */
-          }
-          return Promise.resolve()
-        }
-      )
-    )
+    for (let i = 0; i < resourcesToDelete.length; i += 1) {
+      const resource = resourcesToDelete[i]
+      let continueProcessing = true
+      while (continueProcessing) {
+        const request = PersonalDataErasure.buildRequest(resource.uri, 'GET')
+        /* eslint-disable no-await-in-loop */
+        const response = await this.client.execute(request)
+        if (response.statusCode !== 200 && response.statusCode !== 404)
+          return Promise.reject(
+            Error(`Request returned status code ${response.statusCode}`)
+          )
+        if (response.body && response.body.results.length < 20)
+          continueProcessing = false
+        if (response.statusCode === 200)
+          await this._deleteOne(response, resource.builder)
+        /* eslint-enable no-await-in-loop */
+      }
+    }
+    return Promise.resolve()
   }
 
-  async _deleteOne(
-    response: SuccessResult,
-    builder: ServiceBuilderInstance
-  ): Promise<void> {
+  async _deleteOne(response: SuccessResult, builder: ServiceBuilderInstance) {
     const results = response.body ? response.body.results : []
     if (results.length > 0) {
       await Promise.all(
