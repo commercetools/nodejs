@@ -110,20 +110,15 @@ export default function createClient(options: ClientOptions): Client {
 
         let hasFirstPageBeenProcessed = false
         let itemsToGet = opt.total
-        const { disableSort } = opt
         const processPage = (lastId?: string, acc?: Array<any> = []) => {
           // Use the lesser value between limit and itemsToGet in query
           const limit = query.limit < itemsToGet ? query.limit : itemsToGet
           const originalQueryString = qs.stringify({ ...query, limit })
 
-          let enhancedQuery = {
+          const enhancedQuery = {
+            sort: 'id asc',
             withTotal: false,
-          }
-          if (!disableSort) {
-            enhancedQuery = { sort: 'id asc', ...enhancedQuery }
-          }
-          if (lastId && !disableSort) {
-            enhancedQuery = { where: `id > "${lastId}"`, ...enhancedQuery }
+            ...(lastId ? { where: `id > "${lastId}"` } : {}),
           }
           const enhancedQueryString = qs.stringify(enhancedQuery)
           const enhancedRequest = {

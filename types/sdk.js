@@ -65,7 +65,6 @@ export type ProcessFn = (result: SuccessResult) => Promise<any>
 export type ProcessOptions = {
   accumulate?: boolean,
   total?: number,
-  disableSort?: boolean,
 }
 
 /* Middlewares */
@@ -245,7 +244,7 @@ export type HttpMiddlewareOptions = {
   },
   fetch?: typeof fetch,
   abortController?: AbortController, // deprecated
-  getAbortController: () => AbortController,
+  getAbortController: () => AbortController
 }
 export type QueueMiddlewareOptions = {
   concurrency: number,
