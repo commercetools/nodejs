@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@commercetools/integration-tests",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "dependencies": {
     "@commercetools/api-request-builder": "^5.6.3",
     "@commercetools/category-exporter": "^3.0.21",
@@ -18,7 +18,7 @@
     "@commercetools/get-credentials": "^3.0.17",
     "@commercetools/http-user-agent": "2.x",
     "@commercetools/inventories-exporter": "^3.0.22",
-    "@commercetools/personal-data-erasure": "^3.0.21",
+    "@commercetools/personal-data-erasure": "^3.0.22",
     "@commercetools/price-exporter": "^3.0.22",
     "@commercetools/product-exporter": "^3.1.10",
     "@commercetools/product-json-to-csv": "^5.0.15",
