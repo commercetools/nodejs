@@ -1,3 +1,25 @@
+## @commercetools/personal-data-erasure@3.0.22 (2021-03-16)
+
+#### :bug: Bug Fix
+
+- `personal-data-erasure`
+  - [#1668](https://github.com/commercetools/nodejs/pull/1668) 1667 personal data eraser timeout with sorting ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/integration-tests@0.1.13 (2021-03-16)
+
+#### :bug: Bug Fix
+
+- `personal-data-erasure`
+  - [#1668](https://github.com/commercetools/nodejs/pull/1668) 1667 personal data eraser timeout with sorting ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
 ## @commercetools/sync-actions@4.9.2 (2021-03-11)
 
 #### :rocket: New Feature
