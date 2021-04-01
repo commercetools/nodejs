@@ -113,9 +113,7 @@ export default function createHttpMiddleware({
           JSON.stringify(request.body || undefined)
 
     const requestHeader: HttpHeaders = { ...request.headers }
-    if (
-      !Object.prototype.hasOwnProperty.call(request.headers, 'Content-Type')
-    ) {
+    if (!Object.prototype.hasOwnProperty.call(requestHeader, 'Content-Type')) {
       requestHeader['Content-Type'] = 'application/json'
     }
     if (body) {
