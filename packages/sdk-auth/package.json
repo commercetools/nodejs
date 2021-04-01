@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-auth",
-  "version": "3.0.11",
+  "version": "3.0.12",
   "description": "Auth module for different authentication flows of commercetools platform API",
   "keywords": [
     "commercetools",
@@ -32,7 +32,7 @@
     "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkAuth -i ./src/index.js"
   },
   "dependencies": {
-    "@commercetools/sdk-middleware-http": "^6.0.10",
+    "@commercetools/sdk-middleware-http": "^6.0.11",
     "lodash.defaultsdeep": "^4.6.0",
     "qss": "2.0.3"
   },

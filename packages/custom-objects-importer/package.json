@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/custom-objects-importer",
-  "version": "3.0.34",
+  "version": "3.0.35",
   "description": "Import custom objects to the commercetools platform",
   "main": "lib/main.js",
   "scripts": {
@@ -35,7 +35,7 @@
     "@commercetools/api-request-builder": "^5.6.3",
     "@commercetools/sdk-client": "^2.1.2",
     "@commercetools/sdk-middleware-auth": "^5.1.6",
-    "@commercetools/sdk-middleware-http": "^6.0.10",
+    "@commercetools/sdk-middleware-http": "^6.0.11",
     "@commercetools/sdk-middleware-user-agent": "^2.1.5",
     "@commercetools/sync-actions": "^4.9.2",
     "common-tags": "^1.8.0",
