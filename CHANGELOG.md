@@ -1,3 +1,212 @@
+## @commercetools/state-importer@3.0.35 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sdk-middleware-http@6.0.11 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sdk-auth@3.0.12 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/resource-deleter@2.0.23 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-json-to-xlsx@4.0.16 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-json-to-csv@5.0.16 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-exporter@3.1.11 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/price-exporter@3.0.23 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/personal-data-erasure@3.0.23 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/inventories-exporter@3.0.23 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/integration-tests@0.1.14 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/discount-code-importer@3.0.34 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/discount-code-exporter@4.0.22 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/customer-groups-exporter@3.0.22 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/custom-objects-importer@3.0.35 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/custom-objects-exporter@3.0.22 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/csv-parser-state@3.0.21 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/csv-parser-price@4.0.23 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/category-exporter@3.0.22 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
 ## @commercetools/personal-data-erasure@3.0.22 (2021-03-16)
 
 #### :bug: Bug Fix
