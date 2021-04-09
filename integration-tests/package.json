@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@commercetools/integration-tests",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "dependencies": {
     "@commercetools/api-request-builder": "^5.6.3",
     "@commercetools/category-exporter": "^3.0.22",
@@ -23,7 +23,7 @@
     "@commercetools/product-exporter": "^3.1.11",
     "@commercetools/product-json-to-csv": "^5.0.16",
     "@commercetools/product-json-to-xlsx": "^4.0.16",
-    "@commercetools/resource-deleter": "^2.0.23",
+    "@commercetools/resource-deleter": "^2.0.24",
     "@commercetools/sdk-auth": "^3.0.12",
     "@commercetools/sdk-client": "^2.1.2",
     "@commercetools/sdk-middleware-auth": "^5.1.6",
