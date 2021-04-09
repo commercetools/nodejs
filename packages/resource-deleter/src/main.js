@@ -53,10 +53,10 @@ export default class ResourceDeleter {
           libraryName: pkg.name,
           libraryVersion: pkg.version,
         }),
-        createHttpMiddleware({ host: this.apiConfig.apiUrl, fetch }),
         createQueueMiddleware({
           concurrency: 20,
         }),
+        createHttpMiddleware({ host: this.apiConfig.apiUrl, fetch }),
       ],
     })
     this.logger = {
