@@ -42,6 +42,28 @@
 
 - Jens Schulze ([@jenschude](https://github.com/jenschude))
 
+## @commercetools/resource-deleter@2.0.24 (2021-04-09)
+
+#### :bug: Bug Fix
+
+- `resource-deleter`
+  - [#1676](https://github.com/commercetools/nodejs/pull/1676) Queue middleware misplaced in resource deleter ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 1
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+
+## @commercetools/integration-tests@0.1.15 (2021-04-09)
+
+#### :bug: Bug Fix
+
+- `resource-deleter`
+  - [#1676](https://github.com/commercetools/nodejs/pull/1676) Queue middleware misplaced in resource deleter ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 1
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+
 ## @commercetools/state-importer@3.0.35 (2021-04-01)
 
 #### :bug: Bug Fix
