@@ -481,4 +481,29 @@ describe('Actions', () => {
       },
     ])
   })
+
+  test('should build not throw error for empty array', () => {
+    const before = {
+      stores: [
+        {
+          typeId: 'store',
+          key: 'canada',
+        },
+        {
+          typeId: 'store',
+          key: 'usa',
+        },
+      ],
+    }
+
+    const now = {}
+
+    const actual = customerSync.buildActions(now, before)
+    expect(actual).toEqual([
+      {
+        action: 'setStores',
+        stores: [],
+      },
+    ])
+  })
 })

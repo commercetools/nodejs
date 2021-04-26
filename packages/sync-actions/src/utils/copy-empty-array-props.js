@@ -69,7 +69,7 @@ export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
         }
         return merged
       },
-      {}
+      { ...newObj }
     )
     return [oldObj, nextObjectWithEmptyArray]
   }
