@@ -290,3 +290,19 @@ test('shouldnt mutate `newObj`', () => {
   expect(fixedNewObj).toEqual({ ...newObj, emptyArray: [] })
   expect(newObj).toEqual({ anotherProp: 2 })
 })
+
+test('shouldnt change objects', () => {
+  const oldObj = {}
+
+  const newObj = {
+    customerGroup: {
+      typeId: 'customer-group',
+      key: 'foo-customer-group',
+    },
+  }
+
+  const [old, fixedNewObj] = copyEmptyArrayProps(oldObj, newObj)
+
+  expect(old).toEqual(oldObj)
+  expect(fixedNewObj).toEqual(newObj)
+})
