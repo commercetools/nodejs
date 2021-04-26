@@ -1,3 +1,47 @@
+## @commercetools/sync-actions@4.9.3 (2021-04-26)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1678](https://github.com/commercetools/nodejs/pull/1678) fix(sync-actions): fix customer error for Cannot read property '0' of undefined ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/state-importer@3.0.36 (2021-04-26)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1678](https://github.com/commercetools/nodejs/pull/1678) fix(sync-actions): fix customer error for Cannot read property '0' of undefined ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/discount-code-importer@3.0.35 (2021-04-26)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1678](https://github.com/commercetools/nodejs/pull/1678) fix(sync-actions): fix customer error for Cannot read property '0' of undefined ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/custom-objects-importer@3.0.36 (2021-04-26)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1678](https://github.com/commercetools/nodejs/pull/1678) fix(sync-actions): fix customer error for Cannot read property '0' of undefined ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
 ## @commercetools/state-importer@3.0.35 (2021-04-01)
 
 #### :bug: Bug Fix
