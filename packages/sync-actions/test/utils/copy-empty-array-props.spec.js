@@ -291,7 +291,7 @@ test('shouldnt mutate `newObj`', () => {
   expect(newObj).toEqual({ anotherProp: 2 })
 })
 
-test('shouldnt change objects', () => {
+test('shouldnt change objects since there is no arrays to copy', () => {
   const oldObj = {}
 
   const newObj = {
