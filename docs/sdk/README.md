@@ -19,6 +19,9 @@ The [SDK _client_](/sdk/api/README.md#sdk-client) itself is in fact really simpl
 
 If we take a step back and look at the general requirement, at the end we simply want to **execute a request**. It just happens to be that we want to make specific requests to the commercetools platform API but it might be as well any other API. That's where the [middlewares](/sdk/Middlewares.md) come in, which provide the _side effects_ of the given request.
 
+## Getting started
+This tutorial will show you how to use the packages in this commercetools Node SDK to get a simple commercetools Node app running.
+
 ## Usage example
 
 In this example (integration test) we are going to make some requests to the `/channels` API endpoint. For that we need to be able to make actual requests (`http` middleware) as well as to authenticate the requests using the API Client Credentials Flow (`auth` middleware).
