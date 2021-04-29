@@ -27,7 +27,7 @@ This tutorial will show you how to use the middlewares in this commercetools Nod
 In this guide we’ll be calling a method of commercetools API using Node SDK to get a commercetools project information. The commercetools API is the foundation of the commercetools Platform, and almost every commercetools client app uses it. Aside from get project information, the commercetools API allows client to call methods that can be used for everything from creating a products to updating a order’s status. Before we can call any methods, we need to configure our new app with the proper permissions.
 
 ### Getting a client credentails to use the commercetools API
-From API client Details page from previous step copy  `project_key`, `API URL`, `scope` and `Auth URL`. The commercetools API uses `clientId` and ``clientSecret` to authenticate the requests your app makes. In a later step, you’ll be asked to use these values in your code.
+From API client Details page from previous step copy  `project_key`, `clientId`, `clientSecret`, `API URL`, `scope` and `Auth URL`. The commercetools API uses `clientId` and `clientSecret` to authenticate the requests your app makes. In a later step, you’ll be asked to use these values in your code.
 
 ### Set up your local project
 If you don’t already have a project, let’s create a new one. In an empty directory, you can initialize a new project using the following command:
