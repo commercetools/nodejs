@@ -43,7 +43,7 @@ Install the `@commercetools/sdk-client`, `@commercetools/sdk-middleware-auth`, `
 $ npm install @commercetools/sdk-client @commercetools/sdk-middleware-auth @commercetools/sdk-middleware-http @commercetools/api-request-builder dotenv
 ```
 
-Create a new file called project.js in this directory and add the following code:
+Create a new file called `project.js` in this directory and add the following code:
 ```js
 const { createClient } = require('@commercetools/sdk-client')
 const { createRequestBuilder } = require('@commercetools/api-request-builder')
@@ -73,7 +73,7 @@ ADMIN_CLIENT_SECRET=<your_admin_secret_id>
 ```
 Replace the values with your client id and client sceret that you copied earlier.
 
-Re-open project.js and add the following code:
+Re-open `project.js` and add the following code:
 ```js
 const { 
     ADMIN_CLIENT_ID,
