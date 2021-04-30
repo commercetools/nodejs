@@ -20,14 +20,14 @@ The [SDK _client_](/sdk/api/README.md#sdk-client) itself is in fact really simpl
 If we take a step back and look at the general requirement, at the end we simply want to **execute a request**. It just happens to be that we want to make specific requests to the commercetools platform API but it might be as well any other API. That's where the [middlewares](/sdk/Middlewares.md) come in, which provide the _side effects_ of the given request.
 
 ## Getting started
-This tutorial will show you how to use the middlewares in this commercetools Node SDK to get a simple commercetools Node app running.
+This tutorial will show you how to use the middlewares in this commercetools JavaScript SDK to get a simple commercetools JavaScript app running.
 
 ### Create a API client
-[Create API client](https://docs.commercetools.com/tutorials/getting-started#creating-an-api-client) from Merchant Center. If you not have account [follow the steps to create a free trail account](https://docs.commercetools.com/tutorials/getting-started#first-steps). 
-In this guide we’ll be calling a method of commercetools API using Node SDK to get a commercetools project information. The commercetools API is the foundation of the commercetools Platform, and almost every commercetools client app uses it. Aside from get project information, the commercetools API allows client to call methods that can be used for everything from creating a products to updating a order’s status. Before we can call any methods, we need to configure our new app with the proper permissions.
+[Create API client](https://docs.commercetools.com/tutorials/getting-started#creating-an-api-client) from Merchant Center. If you do not have account [follow the steps to create a free trial account](https://docs.commercetools.com/tutorials/getting-started#first-steps). 
+In this guide we’ll be calling a method of commercetools API using JavaScript SDK to get the settings of a commercetools project. The commercetools API is the foundation of the commercetools Platform, and almost every commercetools client app uses it. Aside from getting project information, the commercetools API allows clients to call methods that can be used for everything from creating products to updating an order’s status. Before we can call any methods, we need to configure our new app to obtain an access token.
 
-### Getting a client credentails to use the commercetools API
-From API client Details page from previous step copy  `project_key`, `clientId`, `clientSecret`, `API URL`, `scope` and `Auth URL`. The commercetools API uses `clientId` and `clientSecret` to authenticate the requests your app makes. In a later step, you’ll be asked to use these values in your code.
+### Getting a client credentials to use the commercetools API
+From the API client Details page mentioned in the previous step copy  `project_key`, `clientId`, `clientSecret`, `API URL`, `scope` and `Auth URL`. The commercetools API uses `clientId` and `clientSecret` to authenticate the requests your app makes. In a later step, you’ll be asked to use these values in your code.
 
 ### Set up your local project
 If you don’t already have a project, let’s create a new one. In an empty directory, you can initialize a new project using the following command:
@@ -53,25 +53,25 @@ const fetch = require('node-fetch')
 
 require('dotenv').config()
 
-console.log('Getting started with commercetools Nodejs SDK');
+console.log('Getting started with commercetools JavaScript SDK');
 ```
 
 Back at the command line, run the program using the following command:
 ```
 $ node project.js
-Getting started with commercetools Nodejs SDK
+Getting started with commercetools JavaScript SDK
 ```
 If you see the same output as above, we’re ready to start.
 
 ### Get commercetools project information with the commercetools API
-In this guide we’ll get a project information. We’ll also follow the best practice of keeping secrets outside of your code (do not hardcode sensitive data).
+In this guide we’ll get project settings information. We’ll also follow the best practice of keeping secrets outside of your code (do not hardcode sensitive data).
 
 Store the client id and secret in a new environment variable. Create a new file called .env in this directory and add the following code: 
 ```
 ADMIN_CLIENT_ID=<your_admin_client_id>
 ADMIN_CLIENT_SECRET=<your_admin_secret_id>
 ```
-Replace the values with your client id and client sceret that you copied earlier.
+Replace the values with your client id and client secret that you copied earlier.
 
 Re-open `project.js` and add the following code:
 ```js
@@ -128,7 +128,6 @@ const createGetProjectRequest = {
     } catch (error) {
         console.log('ERROR --->', error);
     }
-    console.log('Got project information');
 })();
 ```
 Replace the value `<your_project_key>`, `<your_auth_url>`, `<your_client_scope>` and `<your_api_url>` with your client `project_key`, `API URL`, `scope`, and `Auth URL` that you copied earlier.
@@ -138,9 +137,13 @@ This code creates a **client**, which uses `authMiddleware` and `httpMiddleware`
 Run the program. The output should look like the following if the request is successful:
 ```
 $ node project.js
-Getting started with commercetools Nodejs SDK
-Project information ---> {<projectData>}
-Got project information
+Getting started with commercetools JavaScript SDK
+Project information ---> {
+  body: {
+    <projectData>
+  },
+  statusCode: 200
+}
 ```
 
 ## Usage example
