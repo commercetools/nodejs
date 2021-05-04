@@ -22,6 +22,14 @@ export const baseActionsList = [
   { action: 'setLocale', key: 'locale' },
   { action: 'setVatId', key: 'vatId' },
   {
+    action: 'setStores',
+    key: 'stores',
+  },
+  { action: 'setKey', key: 'key' },
+]
+
+export const setDefaultBaseActionsList = [
+  {
     action: 'setDefaultBillingAddress',
     key: 'defaultBillingAddressId',
     actionKey: 'addressId',
@@ -31,11 +39,6 @@ export const baseActionsList = [
     key: 'defaultShippingAddressId',
     actionKey: 'addressId',
   },
-  {
-    action: 'setStores',
-    key: 'stores',
-  },
-  { action: 'setKey', key: 'key' },
 ]
 
 export const referenceActionsList = [
@@ -49,6 +52,16 @@ export const referenceActionsList = [
 export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
+    diff,
+    oldObj,
+    newObj,
+    shouldOmitEmptyString: config.shouldOmitEmptyString,
+  })
+}
+
+export function actionsMapSetDefaultBase(diff, oldObj, newObj, config = {}) {
+  return buildBaseAttributesActions({
+    actions: setDefaultBaseActionsList,
     diff,
     oldObj,
     newObj,
