@@ -32,13 +32,13 @@ aliases:
 executors:
   node_10:
     docker:
-      - image: circleci/node:10.22.0
+      - image: circleci/node:10.24.1
     working_directory: *working_directory
   node_12:
     docker:
       # Keep it at `12.18.2` as otherwise there may be bugs with `graceful-fs` dependency
       # https://github.com/nodejs/node/issues/34529
-      - image: circleci/node:12.18.2
+      - image: circleci/node:12.22.1
     working_directory: *working_directory
 
 jobs:
