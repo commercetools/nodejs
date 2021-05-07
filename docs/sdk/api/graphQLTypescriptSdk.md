@@ -144,14 +144,16 @@ Project information ---> {
 ### Next Steps
 You just built your first commercetools Javascript app with TypeScript SDK and GraphQL API! 🥳🎉
 
-There’s plenty more to learn and explore about this TypeScript SDK and the commercetools platform. Here are some advanced tutorials:
+There’s plenty more to learn and explore about this TypeScript SDK and the commercetools platform. Here are some advanced tutorials and links:
 - [Create a new customer using GraphQL mutation and TypeScript SDK](#create-a-new-customer)
-- [How to use where clause with GraphQL query  using TypeScript SDK](#how-to-use-graphql-where-clause)
+- [How to use where clause with GraphQL query  using TypeScript SDK](#how-to-use-where-clause-with-graphql-query-using-typescript-sdk)
+- [commercetools developer tutorials](https://docs.commercetools.com/tutorials/)
+- [commercetools JS SDK training](https://github.com/commercetools/commercetools-js-sdk-v2-training)
 
 
 
 ## Create a new Customer
-This tutorial will show you how to create a new customer using **[commercetools Typescript SDK](https://github.com/commercetools/commercetools-sdk-typescript/)** and **[GraphQL](https://docs.commercetools.com/api/graphql)** on your commercetools project. You already finished [Getting started with TypeScript SDK and GraphQL](#getting-started) tutorials and basic project steps are not repeated here again. 
+This tutorial will show you how to create a new customer using **[commercetools Typescript SDK](https://github.com/commercetools/commercetools-sdk-typescript/)** and **[GraphQL](https://docs.commercetools.com/api/graphql)** on your commercetools project. Assuming you already finished [Getting started with TypeScript SDK and GraphQL](#getting-started) tutorials and basic project steps are not repeated here again. 
 
 ### Set up `customer.js` file
 Create a new file called `customer.js` in your project root directory and add the following code:
@@ -260,7 +262,7 @@ const getCustomerByIdQuery = `
 
 To explore commercetools GraphQL API you can use an interactive [GraphiQL environment](https://github.com/graphql/graphiql/tree/main/packages/graphiql#readme) which is available as a part of [ImpEx & API Playground](https://docs.commercetools.com/docs/login).
 
-### Call API to create new Customer using TypeScript SDK and Graph API
+### Call API to create new Customer using TypeScript SDK and GraphQL API
 
 Add the following code to `customer.js`.
 ```js
@@ -316,4 +318,126 @@ Run the program. The output should look like the following if the request is suc
 $ node customer.js
 Create a new customer using GraphQL and TypeScript SDK
 Newly created customer info ----> {"body":{"data":{"customer":{"email":"your.test@test.com","firstName":"yourFirstName"}}},"statusCode":200}
+```
+
+
+## How to use where clause with GraphQL query using TypeScript SDK
+This tutorial will show you how to use **where clause** with **[GraphQL query](https://docs.commercetools.com/api/graphql)** and **[commercetools Typescript SDK](https://github.com/commercetools/commercetools-sdk-typescript/)**. Assuming you already finished [Getting started with TypeScript SDK and GraphQL](#getting-started) tutorials and basic project steps are not repeated here again. 
+
+### Set up `whereClauseQuery.js` file
+Create a new file called `whereClauseQuery.js` in your project root directory and add the following code:
+
+```js
+const { createClient } = require('@commercetools/sdk-client')
+const { createAuthMiddlewareForClientCredentialsFlow } = require('@commercetools/sdk-middleware-auth')
+const { createHttpMiddleware } = require('@commercetools/sdk-middleware-http')
+const { createApiBuilderFromCtpClient } = require("@commercetools/typescript-sdk");
+  
+const fetch = require('node-fetch')
+require('dotenv').config()
+
+console.log('where clause query with GraphQL and TypeScript SDK');
+```
+
+Nodejs dependencies `@commercetools/sdk-client`, `@commercetools/sdk-middleware-auth`,`@commercetools/sdk-middleware-http`, `@commercetools/typescript-sdk`, and `dotenv` are already installed as part of [Getting started with TypeScript SDK and GraphQL](#getting-started) tutorial. Back at the command line, run the program using the following command:
+```
+$ node whereClauseQuery.js
+where clause query with GraphQL and TypeScript SDK
+```
+If you see the same output as above, we’re ready to start.
+
+### Create an API client
+You already have API client from the [Getting started with TypeScript SDK and GraphQL](#getting-started) tutorial on `project.js` file.
+Re-open `whereClauseQuery.js` and add the following code:
+```js
+const { 
+    ADMIN_CLIENT_ID,
+    ADMIN_CLIENT_SECRET,
+} = process.env;
+
+const projectKey = '<your_project_key>'
+
+// Create a httpMiddleware for the your project AUTH URL
+const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
+    host: '<your_auth_url>',
+    projectKey,
+    credentials: {
+        clientId: ADMIN_CLIENT_ID,
+        clientSecret: ADMIN_CLIENT_SECRET,
+    },
+    scopes: ['<your_client_scopes>'],
+    fetch,
+})
+
+// Create a httpMiddleware for the your project API URL
+const httpMiddleware = createHttpMiddleware({
+    host: '<your_api_url>',
+    fetch,
+})
+
+// Create a client using authMiddleware and httpMiddleware
+const client = createClient({
+    middlewares: [authMiddleware, httpMiddleware],
+})
+
+// Create a API root from API builder of commercetools platform client
+const apiRoot = createApiBuilderFromCtpClient(client)
+
+```
+Replace the value `<your_project_key>`, `<your_auth_url>`, `<your_client_scopes>` and `<your_api_url>` with your client `projectKey`, `host API_URL`, `scopes`, and `host Auth_URL` values from `project.js` file.
+
+### Create GraphQL query and mutation
+Add the following code to `whereClauseQuery.js`.
+
+```js
+// where clause with query by customer id
+const whereClauseCustomerIdVariable = {
+    "where": "id=\"<your-customer-id>\""
+  };
+
+// GraphQL query to get customer `email` and `firstName` using where clause and customer id query predicate
+const getCustomerByWhereClauseQuery = `
+    query ($where: String) {
+        customers (where: $where) {
+          email
+          firstName
+        }
+    }
+`;
+```
+
+`whereClauseCustomerIdVariable` contains where clause with value `"id=\"<your-customer-id>\""`. For details about `where` query refer [Query Predicates](https://docs.commercetools.com/api/predicates/query) documentation. Replace `<your-customer-id>` with your customer [id](https://docs.commercetools.com/api/general-concepts#identifier) for which you would like to retrieve customer `email` and `firstName`.
+
+`getCustomerByWhereClauseQuery` is the GraphQL **query** to get  customer info `email` and `firstName` by using **where clause**  and **customer id** query predicate.
+
+To explore commercetools GraphQL API you can use an interactive [GraphiQL environment](https://github.com/graphql/graphiql/tree/main/packages/graphiql#readme) which is available as a part of [ImpEx & API Playground](https://docs.commercetools.com/docs/login).
+
+### Call API to get customer information using TypeScript SDK and GraphQL
+
+Add the following code to `whereClauseQuery.js`.
+```js
+// Get customer's email and firstName by customer id
+const getCustomerByWhereClause = async () => apiRoot.withProjectKey({projectKey}).graphql().post({
+        body: {
+            query: getCustomerByWhereClauseQuery,
+            variables: whereClauseCustomerIdVariable
+        }
+    })
+    .execute()
+
+(async () => {
+    try {
+        const result = await getCustomerByWhereClause()
+        console.log('Customer info ---->', JSON.stringify(result))
+    } catch (error) {
+        console.log('ERROR --->', error)
+    }
+})()
+```
+
+Run the program. The output should look like the following if the request is successful:
+```
+$ node whereClauseQuery.js
+where clause query with GraphQL and TypeScript SDK
+Customer info ----> {"body":{"data":{"customer":{"email":"your.test@test.com","firstName":"yourFirstName"}}},"statusCode":200}
 ```
