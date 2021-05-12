@@ -11,6 +11,7 @@ import createMapActionGroup from './utils/create-map-action-group'
 import actionsMapCustom from './utils/action-map-custom'
 import * as orderActions from './order-actions'
 import * as diffpatcher from './utils/diffpatcher'
+import findMatchingPairs from './utils/find-matching-pairs'
 
 export const actionGroups = ['base', 'deliveries']
 
@@ -24,6 +25,15 @@ function createOrderMapActions(
     oldObj: Object /* , options */
   ): Array<UpdateAction> {
     const allActions = []
+    let deliveryHashMap
+
+    if (diff.shippingInfo && diff.shippingInfo.deliveries) {
+      deliveryHashMap = findMatchingPairs(
+        diff.shippingInfo.deliveries,
+        oldObj.shippingInfo.deliveries,
+        newObj.shippingInfo.deliveries
+      )
+    }
 
     allActions.push(
       mapActionGroup('base', (): Array<UpdateAction> =>
@@ -34,6 +44,12 @@ function createOrderMapActions(
     allActions.push(
       mapActionGroup('deliveries', (): Array<UpdateAction> =>
         orderActions.actionsMapDeliveries(diff, oldObj, newObj)
+      )
+    )
+
+    allActions.push(
+      mapActionGroup('parcels', (): Array<UpdateAction> =>
+        orderActions.actionsMapParcels(diff, oldObj, newObj, deliveryHashMap)
       )
     )
 
