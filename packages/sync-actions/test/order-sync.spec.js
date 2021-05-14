@@ -89,7 +89,209 @@ describe('Actions', () => {
     })
   })
 
+  describe('parcels', () => {
+    test('should add `parcel` action', () => {
+      const before = {
+        shippingInfo: {
+          deliveries: [
+            {
+              id: 'id-1',
+              parcels: [
+                {
+                  id: 'unique-id-1',
+                  measurements: {
+                    heightInMillimeter: 20,
+                    lengthInMillimeter: 40,
+                    widthInMillimeter: 5,
+                    weightInGram: 10,
+                  },
+                  trackingData: {
+                    trackingId: 'tracking-id-1',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      }
+
+      const now = {
+        shippingInfo: {
+          deliveries: [
+            {
+              id: 'id-1',
+              parcels: [
+                {
+                  id: 'unique-id-1',
+                  measurements: {
+                    heightInMillimeter: 20,
+                    lengthInMillimeter: 40,
+                    widthInMillimeter: 5,
+                    weightInGram: 10,
+                  },
+                  trackingData: {
+                    trackingId: 'tracking-id-1',
+                  },
+                },
+                {
+                  measurements: {
+                    heightInMillimeter: 10,
+                    lengthInMillimeter: 20,
+                    widthInMillimeter: 2,
+                    weightInGram: 5,
+                  },
+                  trackingData: {
+                    trackingId: 'tracking-id-2',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      }
+
+      const actual = orderSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'addParcelToDelivery',
+          deliveryId: now.shippingInfo.deliveries[0].id,
+          measurements: now.shippingInfo.deliveries[0].parcels[1].measurements,
+          trackingData: now.shippingInfo.deliveries[0].parcels[1].trackingData,
+        },
+      ]
+
+      expect(actual).toEqual(expected)
+    })
+
+    test('should create remove `parcel` action', () => {
+      const before = {
+        shippingInfo: {
+          deliveries: [
+            {
+              id: 'id-1',
+              parcels: [
+                {
+                  id: 'unique-id-1',
+                  measurements: {
+                    heightInMillimeter: 20,
+                    lengthInMillimeter: 40,
+                    widthInMillimeter: 5,
+                    weightInGram: 10,
+                  },
+                  trackingData: {
+                    trackingId: 'tracking-id-1',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      }
+
+      const now = {
+        shippingInfo: {
+          deliveries: [
+            {
+              id: 'id-1',
+              parcels: [],
+            },
+          ],
+        },
+      }
+
+      const actual = orderSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'removeParcelFromDelivery',
+          parcelId: before.shippingInfo.deliveries[0].parcels[0].id,
+        },
+      ]
+
+      expect(actual).toEqual(expected)
+    })
+  })
+
   describe('returnInfo', () => {
+    test('should not build `returnInfo` action if items are not set', () => {
+      const before = {
+        returnInfo: [],
+      }
+
+      const now = {
+        returnInfo: [
+          {
+            returnTrackingId: 'tracking-id-1',
+            returnDate: '21-04-30T09:21:15.003Z',
+          },
+        ],
+      }
+
+      const actual = orderSync.buildActions(now, before)
+      const expected = []
+      expect(actual).toEqual(expected)
+    })
+
+    test('should add `returnInfo` action', () => {
+      const before = {
+        returnInfo: [],
+      }
+
+      const now = {
+        returnInfo: [
+          {
+            returnTrackingId: 'tracking-id-1',
+            items: [
+              {
+                id: 'test-1',
+                type: 'LineItemReturnItem',
+                quantity: 1,
+                lineItemId: '1',
+                shipmentState: 'Advised',
+                paymentState: 'Initial',
+              },
+              {
+                id: 'test-2',
+                type: 'LineItemReturnItem',
+                quantity: 1,
+                lineItemId: '1',
+                shipmentState: 'Advised',
+                paymentState: 'Initial',
+              },
+            ],
+          },
+          {
+            returnTrackingId: 'tracking-id-2',
+            items: [
+              {
+                id: 'test-3',
+                type: 'LineItemReturnItem',
+                quantity: 2,
+                lineItemId: '2',
+                shipmentState: 'Advised',
+                paymentState: 'Initial',
+              },
+            ],
+          },
+        ],
+      }
+
+      const actual = orderSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'addReturnInfo',
+          returnTrackingId: now.returnInfo[0].returnTrackingId,
+          items: now.returnInfo[0].items,
+        },
+        {
+          action: 'addReturnInfo',
+          returnTrackingId: now.returnInfo[1].returnTrackingId,
+          items: now.returnInfo[1].items,
+        },
+      ]
+
+      expect(actual).toEqual(expected)
+    })
+
     test('should build `setReturnShipmentState` action', () => {
       const before = {
         returnInfo: [
