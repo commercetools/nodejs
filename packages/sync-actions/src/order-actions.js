@@ -84,7 +84,6 @@ function _buildDeliveryParcelsAction(
     }
 
     if (isRemoveAction(key, parcel)) {
-      // parcel removed
       removeParcelActions.push({
         action: 'removeParcelFromDelivery',
         parcelId: oldObj.id,
@@ -138,12 +137,14 @@ export function actionsMapReturnsInfo(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('returnInfo', {
     [ADD_ACTIONS]: (newReturnInfo) => {
       if (newReturnInfo.items) {
-        return {
-          action: 'addReturnInfo',
-          ...newReturnInfo,
-        }
+        return [
+          {
+            action: 'addReturnInfo',
+            ...newReturnInfo,
+          },
+        ]
       }
-      return {}
+      return []
     },
     [CHANGE_ACTIONS]: (oldSReturnInfo, newReturnInfo) => {
       const updateActions = Object.keys(returnInfoDiff).reduce(

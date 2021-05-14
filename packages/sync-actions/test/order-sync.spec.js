@@ -212,6 +212,25 @@ describe('Actions', () => {
   })
 
   describe('returnInfo', () => {
+    test('should not build `returnInfo` action if items are not set', () => {
+      const before = {
+        returnInfo: [],
+      }
+
+      const now = {
+        returnInfo: [
+          {
+            returnTrackingId: 'tracking-id-1',
+            returnDate: '21-04-30T09:21:15.003Z',
+          },
+        ],
+      }
+
+      const actual = orderSync.buildActions(now, before)
+      const expected = []
+      expect(actual).toEqual(expected)
+    })
+
     test('should add `returnInfo` action', () => {
       const before = {
         returnInfo: [],
