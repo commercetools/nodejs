@@ -1,3 +1,113 @@
+## @commercetools/sync-actions@4.9.5 (2021-05-14)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1687](https://github.com/commercetools/nodejs/pull/1687) feat(sync-actions): create more order update actions ([@jherey](https://github.com/jherey))
+
+#### Committers: 1
+
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/state-importer@3.0.38 (2021-05-14)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1687](https://github.com/commercetools/nodejs/pull/1687) feat(sync-actions): create more order update actions ([@jherey](https://github.com/jherey))
+
+#### Committers: 1
+
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/integration-tests@0.1.18 (2021-05-14)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1687](https://github.com/commercetools/nodejs/pull/1687) feat(sync-actions): create more order update actions ([@jherey](https://github.com/jherey))
+
+#### Committers: 1
+
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/discount-code-importer@3.0.37 (2021-05-14)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1687](https://github.com/commercetools/nodejs/pull/1687) feat(sync-actions): create more order update actions ([@jherey](https://github.com/jherey))
+
+#### Committers: 1
+
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/custom-objects-importer@3.0.38 (2021-05-14)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1687](https://github.com/commercetools/nodejs/pull/1687) feat(sync-actions): create more order update actions ([@jherey](https://github.com/jherey))
+
+#### Committers: 1
+
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/sync-actions@4.9.4 (2021-05-06)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1682](https://github.com/commercetools/nodejs/pull/1682) fix(sync-actions): organize customer sync actions, ex: addAdress, then setDefaultShippingAddress ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/state-importer@3.0.37 (2021-05-06)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1682](https://github.com/commercetools/nodejs/pull/1682) fix(sync-actions): organize customer sync actions, ex: addAdress, then setDefaultShippingAddress ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/integration-tests@0.1.17 (2021-05-06)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1682](https://github.com/commercetools/nodejs/pull/1682) fix(sync-actions): organize customer sync actions, ex: addAdress, then setDefaultShippingAddress ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/discount-code-importer@3.0.36 (2021-05-06)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1682](https://github.com/commercetools/nodejs/pull/1682) fix(sync-actions): organize customer sync actions, ex: addAdress, then setDefaultShippingAddress ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/custom-objects-importer@3.0.37 (2021-05-06)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1682](https://github.com/commercetools/nodejs/pull/1682) fix(sync-actions): organize customer sync actions, ex: addAdress, then setDefaultShippingAddress ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
 ## @commercetools/sync-actions@4.9.3 (2021-04-26)
 
 #### :bug: Bug Fix

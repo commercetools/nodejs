@@ -40,7 +40,7 @@ The HTTP middleware can run in either a browser or Node.js environment. For Node
 11. `maxDelay` _(Number)_: The maximum duration (milliseconds) to wait before retrying, useful if the delay time grew exponentially more than reasonable
 12. `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function
 13. `timeout` _(Number)_: Request/response timeout in ms. Must have globally available or passed in `AbortController`
-14. `AbortController` (_AbortController_): An `AbortController` instance. Could be [abort-controller](https://www.npmjs.com/package/abort-controller) or globally available one.
+14. `abortController` or `getAbortController` depending on you chose to handle the timeout (_abortController_): This property accepts the `AbortController` instance. Could be [abort-controller](https://www.npmjs.com/package/abort-controller) or globally available one.
 
 #### Retrying requests
 
@@ -78,6 +78,36 @@ const client = createClient({
   ],
 })
 ```
+
+## `abortController` | `getAbortController`
+
+This is used to signal the retry module to retry the request in an event of a request timeout or service outage.
+
+#### Usage example
+
+```js
+// Use default options
+const httpMiddleware = createHttpMiddleware({
+  host: testHost,
+  timeout: 1000, // time out after 1s
+  fetch,
+  abortController: new AbortController(),
+})
+```
+
+Note however the slight difference in usage of the `getAbortController` property of the http middleware.
+
+```js
+// Use default options
+const httpMiddleware = createHttpMiddleware({
+  host: testHost,
+  timeout: 1000, // time out after 1s
+  fetch,
+  getAbortController: () => new AbortController(),
+})
+```
+
+This is to ensure that a new instance of the AbortController is always created and is independent of each other. Unlike the former (abortController) which only creates a single abortController instance for the middleware, in this very case, if a single request times out, it will propagate to all other http requests that is using the `AbortController` instance. This is useful when a bunch of sent out requests needs to timeout if at least one within the bunch times out.
 
 ## `getErrorByCode(code)`
 

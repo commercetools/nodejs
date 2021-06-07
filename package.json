@@ -125,7 +125,17 @@
   },
   "resolutions": {
     "graceful-fs": "4.2.4",
-    "**/graceful-fs": "4.2.4"
+    "**/graceful-fs": "4.2.4",
+    "y18n": "3.2.2",
+    "lodash": "4.17.21",
+    "handlebars": "4.7.7",
+    "growl": "1.10.2",
+    "dot-prop": "5.1.1",
+    "merge": "2.1.1",
+    "npm-user-validate": "1.0.1",
+    "serialize-javascript": "3.1.0",
+    "diff": "3.5.0",
+    "object-path": "0.11.5"
   },
   "config": {
     "commitizen": {

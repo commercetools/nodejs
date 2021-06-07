@@ -45,6 +45,17 @@ function createCustomerMapActions(
     )
 
     allActions.push(
+      mapActionGroup('base', (): Array<UpdateAction> =>
+        customerActions.actionsMapSetDefaultBase(
+          diff,
+          oldObj,
+          newObj,
+          syncActionConfig
+        )
+      )
+    )
+
+    allActions.push(
       mapActionGroup('billingAddressIds', (): Array<UpdateAction> =>
         customerActions.actionsMapBillingAddresses(diff, oldObj, newObj)
       )

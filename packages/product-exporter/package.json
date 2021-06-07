@@ -49,6 +49,11 @@
     "pretty-error": "^2.1.1",
     "yargs": "^15.0.1"
   },
+  "resolutions": {
+    "y18n": "3.2.2",
+    "hosted-git-info": "2.8.9",
+    "yargs-parser": "13.1.2"
+  },
   "devDependencies": {
     "common-tags": "1.8.0",
     "streamtest": "2.0.0"
