@@ -112,6 +112,16 @@ describe('Actions', () => {
     ])
   })
 
+  test('should build action with `staged` flag as false when `staged` is set to false', () => {
+    const before = { name: { en: 'Car', de: 'Auto' } }
+    const now = { name: { en: 'New sport car' }, staged: false }
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual([
+      { action: 'changeName', name: { en: 'New sport car' }, staged: false },
+    ])
+  })
+
   test('should build action without `staged` flag', () => {
     const before = { name: { en: 'Car', de: 'Auto' } }
     const now = { name: { en: 'Sport car' }, publish: false }
