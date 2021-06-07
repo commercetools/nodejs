@@ -356,18 +356,20 @@ const whereClauseCustomerIdVariable = {
 const getCustomerByWhereClauseQuery = `
     query ($where: String) {
         customers (where: $where) {
-          email
-          firstName
+          results {
+            email
+            firstName
+          }
         }
     }
 `;
 ```
 
-`whereClauseCustomerIdVariable` contains where clause with value `"id=\"<your-customer-id>\""`. For details about `where` query refer [Query Predicates](https://docs.commercetools.com/api/predicates/query) documentation. Replace `<your-customer-id>` with your customer [id](https://docs.commercetools.com/api/general-concepts#identifier) for which you would like to retrieve customer `email` and `firstName`.
+`whereClauseCustomerIdVariable` contains where clause with value `"id=\"<your-customer-id>\""`. For details about `where` query, refer [Query Predicates](https://docs.commercetools.com/api/predicates/query) documentation. Replace `<your-customer-id>` with your customer [id](https://docs.commercetools.com/api/general-concepts#identifier) for which you would like to retrieve customer `email` and `firstName`.
 
 `getCustomerByWhereClauseQuery` is the GraphQL **query** to get  customer info `email` and `firstName` by using **where clause**  and **customer id** query predicate.
 
-To explore commercetools GraphQL API you can use an interactive [GraphiQL environment](https://github.com/graphql/graphiql/tree/main/packages/graphiql#readme) which is available as a part of [ImpEx & API Playground](https://docs.commercetools.com/docs/login).
+To explore commercetools GraphQL API, you can use an interactive [GraphiQL environment](https://github.com/graphql/graphiql/tree/main/packages/graphiql#readme) available as a part of [ImpEx & API Playground](https://docs.commercetools.com/docs/login).
 
 ### Call API to get customer information using TypeScript SDK and GraphQL
 
@@ -380,7 +382,7 @@ const getCustomerByWhereClause = async () => apiRoot.withProjectKey({projectKey}
             variables: whereClauseCustomerIdVariable
         }
     })
-    .execute()
+    .execute();
 
 (async () => {
     try {
@@ -389,7 +391,7 @@ const getCustomerByWhereClause = async () => apiRoot.withProjectKey({projectKey}
     } catch (error) {
         console.log('ERROR --->', error)
     }
-})()
+})();
 ```
 
 Run the program. The output should look like the following if the request is successful:
