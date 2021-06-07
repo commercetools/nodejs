@@ -136,7 +136,7 @@ There’s plenty more to learn and explore about this TypeScript SDK and the com
 - [commercetools JS SDK training](https://github.com/commercetools/commercetools-js-sdk-v2-training)
 
 
-## Create a new Customer
+## Create a new Customer using commercetools GraphQL API and TypeScript SDK
 This tutorial will show you how to create a new customer using **[commercetools Typescript SDK](https://github.com/commercetools/commercetools-sdk-typescript/)** and **[GraphQL](https://docs.commercetools.com/api/graphql)** on your commercetools project. Assuming you already finished [Getting started with TypeScript SDK and GraphQL](#getting-started) tutorials and basic project steps are not repeated here again. 
 
 ### Set up `customer.js` file
@@ -144,17 +144,42 @@ Create a new file called `customer.js` in your project root directory and add th
 
 ```js
 const { createClient } = require('@commercetools/sdk-client')
-const { createAuthMiddlewareForClientCredentialsFlow } = require('@commercetools/sdk-middleware-auth')
-const { createHttpMiddleware } = require('@commercetools/sdk-middleware-http')
-const { createApiBuilderFromCtpClient } = require("@commercetools/typescript-sdk");
-  
-const fetch = require('node-fetch')
-require('dotenv').config()
-
-console.log('Create a new customer using GraphQL and TypeScript SDK');
+  const { createAuthMiddlewareForClientCredentialsFlow } = require('@commercetools/sdk-middleware-auth')
+  const { createHttpMiddleware } = require('@commercetools/sdk-middleware-http')
+  const { createApiBuilderFromCtpClient } = require("@commercetools/typescript-sdk")
+  const fetch = require('node-fetch')
+  require('dotenv').config()
+  //reference API client credentials from environment variables
+  const {
+    CTP_PROJECT_KEY,
+    CTP_CLIENT_SECRET,
+    CTP_CLIENT_ID,
+    CTP_AUTH_URL,
+    CTP_API_URL,
+    CTP_SCOPES,
+  } = process.env
+  const projectKey = CTP_PROJECT_KEY
+  const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
+    host: CTP_AUTH_URL,
+    projectKey,
+    credentials: {
+      clientId: CTP_CLIENT_ID,
+      clientSecret: CTP_CLIENT_SECRET,
+    },
+    scopes: [CTP_SCOPES],    fetch,
+  })
+  const httpMiddleware = createHttpMiddleware({
+    host: CTP_API_URL,
+    fetch,
+  })
+  const client = createClient({
+    middlewares: [authMiddleware, httpMiddleware],
+  })
+  // Create an API root from API builder of commercetools platform client
+  const apiRoot = createApiBuilderFromCtpClient(client);
+  console.log('Create a new customer using GraphQL and TypeScript SDK');
 ```
-
-Nodejs dependencies `@commercetools/sdk-client`, `@commercetools/sdk-middleware-auth`,`@commercetools/sdk-middleware-http`, `@commercetools/typescript-sdk`, and `dotenv` are already installed as part of [Getting started with TypeScript SDK and GraphQL](../getting-started-with-graphql-ts-sdk/getting-started.md) tutorial. Back at the command line, run the program using the following command:
+Environment variables and Nodejs dependencies `@commercetools/sdk-client`, `@commercetools/sdk-middleware-auth`,`@commercetools/sdk-middleware-http`, `@commercetools/typescript-sdk`, and `dotenv` are already installed as part of [Getting started with TypeScript SDK and GraphQL](../getting-started-with-graphql-ts-sdk/getting-started.md) tutorial. Back at the command line, run the program using the following command:
 ```
 $ node customer.js
 Create a new customer using GraphQL and TypeScript SDK
@@ -164,44 +189,6 @@ If you see the same output as above, we’re ready to start.
 ### Create an API client
 You already have API client from the [Getting started with TypeScript SDK and GraphQL](../getting-started-with-graphql-ts-sdk/getting-started.md) tutorial on `project.js` file.
 
-Re-open `customer.js` and add the following code:
-```js
-const { 
-    ADMIN_CLIENT_ID,
-    ADMIN_CLIENT_SECRET,
-} = process.env;
-
-const projectKey = '<your_project_key>'
-
-// Create a httpMiddleware for the your project AUTH URL
-const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
-    host: '<your_auth_url>',
-    projectKey,
-    credentials: {
-        clientId: ADMIN_CLIENT_ID,
-        clientSecret: ADMIN_CLIENT_SECRET,
-    },
-    scopes: ['<your_client_scopes>'],
-    fetch,
-})
-
-// Create a httpMiddleware for the your project API URL
-const httpMiddleware = createHttpMiddleware({
-    host: '<your_api_url>',
-    fetch,
-})
-
-// Create a client using authMiddleware and httpMiddleware
-const client = createClient({
-    middlewares: [authMiddleware, httpMiddleware],
-})
-
-// Create a API root from API builder of commercetools platform client
-const apiRoot = createApiBuilderFromCtpClient(client)
-
-```
-Replace the value `<your_project_key>`, `<your_auth_url>`, `<your_client_scopes>` and `<your_api_url>` with your client `projectKey`, `hostAPI_URL`, `scopes`, and `host Auth_URL` values from `project.js` file.
-
 ### Create GraphQL query and mutation
 Add the following code to `customer.js`.
 
@@ -209,7 +196,7 @@ Add the following code to `customer.js`.
 // New customer data
 const createCustomerMutationVariable = {
     "newCustomer": {
-      "email": "your.test@test.com",
+      "email": "your.test-1@test.com",
       "password": "123",
       "firstName": "yourFirstName", 
       "lastName": "yourLastName"
@@ -254,7 +241,7 @@ Add the following code to `customer.js`.
 const createNewCustomer = async () => {
     const result  = await apiRoot.withProjectKey({projectKey}).graphql().post({
         body : {
-            query: CreateCustomerMutation,
+            query: createCustomerMutation,
             variables: createCustomerMutationVariable,
         }
     }).execute()
@@ -273,18 +260,18 @@ const createNewCustomer = async () => {
     } = result
     
     return customerId
-}
+};
 
 // Get customer's email and firstName by customer id
 const getCustomerById = async (customerId) => apiRoot.withProjectKey({projectKey}).graphql().post({
         body: {
-            query: customerQuery,
+            query: getCustomerByIdQuery,
             variables: {
                 id: customerId
             }
         }
     })
-    .execute()
+    .execute();
 
 (async () => {
     try {
@@ -294,7 +281,7 @@ const getCustomerById = async (customerId) => apiRoot.withProjectKey({projectKey
     } catch (error) {
         console.log('ERROR --->', error)
     }
-})()
+})();
 ```
 
 Run the program. The output should look like the following if the request is successful:
