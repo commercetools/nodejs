@@ -300,62 +300,48 @@ Create a new file called `whereClauseQuery.js` in your project root directory an
 
 ```js
 const { createClient } = require('@commercetools/sdk-client')
-const { createAuthMiddlewareForClientCredentialsFlow } = require('@commercetools/sdk-middleware-auth')
-const { createHttpMiddleware } = require('@commercetools/sdk-middleware-http')
-const { createApiBuilderFromCtpClient } = require("@commercetools/typescript-sdk");
-  
-const fetch = require('node-fetch')
-require('dotenv').config()
-
-console.log('where clause query with GraphQL and TypeScript SDK');
+  const { createAuthMiddlewareForClientCredentialsFlow } = require('@commercetools/sdk-middleware-auth')
+  const { createHttpMiddleware } = require('@commercetools/sdk-middleware-http')
+  const { createApiBuilderFromCtpClient } = require("@commercetools/typescript-sdk")
+  const fetch = require('node-fetch')
+  require('dotenv').config()
+  //reference API client credentials from environment variables
+  const {
+    CTP_PROJECT_KEY,
+    CTP_CLIENT_SECRET,
+    CTP_CLIENT_ID,
+    CTP_AUTH_URL,
+    CTP_API_URL,
+    CTP_SCOPES,
+  } = process.env
+  const projectKey = CTP_PROJECT_KEY
+  const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
+    host: CTP_AUTH_URL,
+    projectKey,
+    credentials: {
+      clientId: CTP_CLIENT_ID,
+      clientSecret: CTP_CLIENT_SECRET,
+    },
+    scopes: [CTP_SCOPES],    fetch,
+  })
+  const httpMiddleware = createHttpMiddleware({
+    host: CTP_API_URL,
+    fetch,
+  })
+  const client = createClient({
+    middlewares: [authMiddleware, httpMiddleware],
+  })
+  // Create an API root from API builder of commercetools platform client
+  const apiRoot = createApiBuilderFromCtpClient(client);
+  console.log('where clause query with GraphQL and TypeScript SDK');
 ```
 
-Nodejs dependencies `@commercetools/sdk-client`, `@commercetools/sdk-middleware-auth`,`@commercetools/sdk-middleware-http`, `@commercetools/typescript-sdk`, and `dotenv` are already installed as part of [Getting started with TypeScript SDK and GraphQL](#getting-started) tutorial. Back at the command line, run the program using the following command:
+Environment variables and Nodejs dependencies `@commercetools/sdk-client`, `@commercetools/sdk-middleware-auth`,`@commercetools/sdk-middleware-http`, `@commercetools/typescript-sdk`, and `dotenv` are already installed as part of [Getting started with TypeScript SDK and GraphQL](#getting-started) tutorial. Back at the command line, run the program using the following command:
 ```
 $ node whereClauseQuery.js
 where clause query with GraphQL and TypeScript SDK
 ```
 If you see the same output as above, we’re ready to start.
-
-### Create an API client
-You already have API client from the [Getting started with TypeScript SDK and GraphQL](#getting-started) tutorial on `project.js` file.
-Re-open `whereClauseQuery.js` and add the following code:
-```js
-const { 
-    ADMIN_CLIENT_ID,
-    ADMIN_CLIENT_SECRET,
-} = process.env;
-
-const projectKey = '<your_project_key>'
-
-// Create a httpMiddleware for the your project AUTH URL
-const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
-    host: '<your_auth_url>',
-    projectKey,
-    credentials: {
-        clientId: ADMIN_CLIENT_ID,
-        clientSecret: ADMIN_CLIENT_SECRET,
-    },
-    scopes: ['<your_client_scopes>'],
-    fetch,
-})
-
-// Create a httpMiddleware for the your project API URL
-const httpMiddleware = createHttpMiddleware({
-    host: '<your_api_url>',
-    fetch,
-})
-
-// Create a client using authMiddleware and httpMiddleware
-const client = createClient({
-    middlewares: [authMiddleware, httpMiddleware],
-})
-
-// Create a API root from API builder of commercetools platform client
-const apiRoot = createApiBuilderFromCtpClient(client)
-
-```
-Replace the value `<your_project_key>`, `<your_auth_url>`, `<your_client_scopes>` and `<your_api_url>` with your client `projectKey`, `host API_URL`, `scopes`, and `host Auth_URL` values from `project.js` file.
 
 ### Create GraphQL query and mutation
 Add the following code to `whereClauseQuery.js`.
