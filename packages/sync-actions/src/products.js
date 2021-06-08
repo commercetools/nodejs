@@ -43,7 +43,7 @@ function createProductMapActions(
   ): Array<UpdateAction> {
     const allActions = []
     const { sameForAllAttributeNames, enableDiscounted } = options
-    const { publish } = newObj
+    const { publish, staged } = newObj
 
     const variantHashMap = findMatchingPairs(
       diff.variants,
@@ -142,7 +142,7 @@ function createProductMapActions(
       )
     )
 
-    if (publish === true)
+    if (publish === true || staged === false)
       return flatten(allActions).map((action) => ({ ...action, staged: false }))
 
     return flatten(allActions)
