@@ -1,3 +1,129 @@
+## @commercetools/sync-actions@4.9.6 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/state-importer@3.0.39 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/product-exporter@3.1.12 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/integration-tests@0.1.19 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/discount-code-importer@3.0.38 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/custom-objects-importer@3.0.39 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
 ## @commercetools/sync-actions@4.9.5 (2021-05-14)
 
 #### :rocket: New Feature
