@@ -109,7 +109,7 @@ const projectSettingsQuery = `
     }
 })();
 ```
-Then the client will **execute** get project information request from `apiRoot` using **TypeScript SDK** and **GraphQL** query[projectSettingsQuery] to get project settings. `projectSettingsQuery` retrieves project's `name`, `languages`,`currencies`,`countries`, `version` and `createdAt` fields. To explore commercetools GraphQL API, you can use an interactive [GraphiQL environment](https://github.com/graphql/graphiql/tree/main/packages/graphiql#readme) available as a part of our [ImpEx & API Playground](https://docs.commercetools.com/docs/login).
+Then the client will **execute** get project information request from `apiRoot` using **TypeScript SDK** and **GraphQL** query[projectSettingsQuery] to get project settings. `projectSettingsQuery` retrieves project's `name`, `languages`,`currencies`,`countries`, `version` and `createdAt` fields. To explore commercetools GraphQL API, you can use an interactive [GraphQL console](https://docs.commercetools.com/api/graphql#interactive-graphql-console).
 
 Run the program. The output should look like the following if the request is successful:
 
@@ -231,7 +231,7 @@ const getCustomerByIdQuery = `
 
 `getCustomerByIdQuery` is the GraphQL **query** to get newly created customer info `email` and `firstName` by `id`.
 
-To explore commercetools GraphQL API you can use an interactive [GraphiQL environment](https://github.com/graphql/graphiql/tree/main/packages/graphiql#readme) which is available as a part of [ImpEx & API Playground](https://docs.commercetools.com/docs/login).
+To explore commercetools GraphQL API you can use an interactive [GraphQL console](https://docs.commercetools.com/api/graphql#interactive-graphql-console).
 
 ### Call API to create new Customer using TypeScript SDK and GraphQL API
 
@@ -347,9 +347,9 @@ If you see the same output as above, we’re ready to start.
 Add the following code to `whereClauseQuery.js`.
 
 ```js
-// where clause with query by customer id
+// where clause with query by email
 const whereClauseCustomerIdVariable = {
-    "where": "id=\"<your-customer-id>\""
+    "where": "email=\"your.test-1@test.com\""
   };
 
 // GraphQL query to get customer `email` and `firstName` using where clause and customer id query predicate
@@ -369,7 +369,7 @@ const getCustomerByWhereClauseQuery = `
 
 `getCustomerByWhereClauseQuery` is the GraphQL **query** to get  customer info `email` and `firstName` by using **where clause**  and **customer id** query predicate.
 
-To explore commercetools GraphQL API, you can use an interactive [GraphiQL environment](https://github.com/graphql/graphiql/tree/main/packages/graphiql#readme) available as a part of [ImpEx & API Playground](https://docs.commercetools.com/docs/login).
+To explore commercetools GraphQL API, you can use an interactive [GraphQL console](https://docs.commercetools.com/api/graphql#interactive-graphql-console).
 
 ### Call API to get customer information using TypeScript SDK and GraphQL
 
