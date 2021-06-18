@@ -634,6 +634,71 @@ describe('Actions', () => {
     })
   })
 
+  describe('adding newly master variant', () => {
+    const before = {
+      id: '123',
+      version: 1,
+      masterVariant: {
+        id: 1,
+        sku: 'v1',
+        attributes: [{ name: 'foo', value: 'bar' }],
+      },
+      variants: [],
+    }
+
+    const now = {
+      id: '123',
+      version: 1,
+      variants: [
+        {
+          sku: 'v3',
+          attributes: [{ name: 'foooo', value: 'baaar' }],
+        },
+        {
+          sku: 'v4',
+          attributes: [{ name: 'fooooo', value: 'baaaar' }],
+        },
+      ],
+      masterVariant: {
+        id: 2,
+        sku: 'v2',
+        attributes: [{ name: 'fooo', value: 'baar' }],
+      },
+    }
+
+    test('should add newly added masterVariant as first `addVariant` ', () => {
+      const actions = productsSync.buildActions(now, before)
+
+      expect(actions[0]).toEqual({
+        action: 'addVariant',
+        id: 2,
+        attributes: [{ name: 'fooo', value: 'baar' }],
+        sku: 'v2',
+      })
+
+      expect(actions).toEqual([
+        {
+          action: 'addVariant',
+          id: 2,
+          attributes: [{ name: 'fooo', value: 'baar' }],
+          sku: 'v2',
+        },
+        {
+          action: 'addVariant',
+          attributes: [{ name: 'foooo', value: 'baaar' }],
+          sku: 'v3',
+        },
+        {
+          action: 'addVariant',
+          attributes: [{ name: 'fooooo', value: 'baaaar' }],
+          sku: 'v4',
+        },
+        { action: 'changeMasterVariant', variantId: 2 },
+        { action: 'removeVariant', id: 1 },
+      ])
+    })
+  })
+
   test('should handle unsetting the sku of a variant', () => {
     const before = {
       id: '123',
