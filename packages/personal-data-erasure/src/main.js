@@ -195,10 +195,17 @@ export default class PersonalDataErasure {
         .build(),
       builder: requestBuilder.reviews,
     }
+
+    const cartsResource = {
+      uri: requestBuilder.carts.where(`customerId = "${customerId}"`).build(),
+      builder: requestBuilder.carts,
+    }
+
     const resourcesToDelete = [
       reviewsResource,
       shoppingListsResource,
       ordersResource,
+      cartsResource,
       paymentsResource,
       customersResource,
     ]
