@@ -99,7 +99,7 @@ const projectSettingsQuery = `
             })
             .execute()
             .then(data => {
-                console.log('Project information --->', data);
+                console.log('Project information --->', JSON.stringify(data));
             })
             .catch(error => {
                 console.log('ERROR --->', error);
