@@ -243,6 +243,9 @@ export type HttpMiddlewareOptions = {
     maxDelay?: number,
   },
   fetch?: typeof fetch,
+  /**
+   * @deprecated use getAbortController instead
+   */
   abortController?: AbortController, // deprecated
   getAbortController: () => AbortController
 }
