@@ -193,6 +193,9 @@ type requestBaseOptions = {
   },
   tokenCache: TokenCache,
   tokenCacheKey?: TokenCacheOptions,
+  timeout?: number,
+  getAbortController?: () => AbortController,
+  maskSensitiveHeaderData?: boolean
 }
 export type executeRequestOptions = requestBaseOptions & {
   fetcher: typeof fetch,
@@ -243,6 +246,9 @@ export type HttpMiddlewareOptions = {
     maxDelay?: number,
   },
   fetch?: typeof fetch,
+  /**
+   * @deprecated use getAbortController instead
+   */
   abortController?: AbortController, // deprecated
   getAbortController: () => AbortController
 }

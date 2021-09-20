@@ -2,6 +2,10 @@
 
 We provide a packages written in typescript for using our API
 
+#### Note:
+
+Please checkout the new [TypeScript Client](#typescript-sdk-client-v2) that is more updated and actively maintained and also consider migrating.
+
 ![example usage](typescript_tutorial.gif)
 
 The source code for these packages are located in the [typescript](https://github.com/commercetools/commercetools-sdk-typescript/) repository.
@@ -27,7 +31,7 @@ npm install --save @commercetools/ml-sdk
 
 #### Usage example
 
-```ts
+```typescript
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
 import { createClient } from '@commercetools/sdk-client'
@@ -143,7 +147,8 @@ const client: Client = new ClientBuilder()
   .build()
 ```
 
-It is also important to note that we can also chain other middlewares or further configure the default client to suit the specific need of the client being built.
+It is also important to note that we can chain other middlewares or further configure the default client to suit the specific need of the client being built.
+
 Example
 
 ```typescript
@@ -223,11 +228,25 @@ getProject().then(console.log).catch(console.error)
 
 `-`
 
-# Middlewares
+# Middleware Creator Methods
 
 Below is a list of all the class methods that can be invoked to add the functionality of a given middleware.
 
-### The authMiddleware methods
+1. The authMiddleware creator methods
+   - withAnonymousSessionFlow
+   - withClientCredentialsFlow
+   - withExistingTokenFlow
+   - withPasswordFlow
+   - withRefreshToken
+2. Other middleware creator methods
+   - withHttpMiddleware
+   - withUserAgentMiddleware
+   - withCorrelationIdMiddleware
+   - withQueueMiddlewareware
+   - withLoggerMiddleware
+   - withMiddleware
+
+### 1. The authMiddleware creator methods
 
 These are class methods that creates auth middlewares using different authentication flows or method.
 
@@ -413,7 +432,7 @@ const client: Client = new ClientBuilder()
 
 `-`
 
-### Other middlewares
+### 2. Other middleware creator methods
 
 There are also other class methods that creates middlewares used to fully cusotmize and control the client, they are described in details below.
 
@@ -432,21 +451,38 @@ The HTTP middleware can run in either a browser or Node.js environment. For Node
 5. `maskSensitiveHeaderData` (_Boolean_): flag to mask sensitie data in the header. e.g. Authorization token
 6. `enableRetry` (_Boolean_): flag to enable retry on network errors and 500 response. (Default: false)
 7. `retryConfig` (_Object_): Field required in the object listed below
-8. `maxRetries` (_Number_): number of times to retry the request before failing the request. (Default: 50)
-9. `retryDelay` (_Number_): amount of milliseconds to wait before retrying the next request. (Default: 200)
-10. `backoff` (_Boolean_): activates exponential backoff. Recommended to prevent spamming of the server. (Default: true)
-11. `maxDelay` (_Number_): The maximum duration (milliseconds) to wait before retrying, useful if the delay time grew exponentially more than reasonable
+8. - `maxRetries` (_Number_): number of times to retry the request before failing the request. (Default: 50)
+9. - `retryDelay` (_Number_): amount of milliseconds to wait before retrying the next request. (Default: 200)
+10. - `backoff` (_Boolean_): activates exponential backoff. Recommended to prevent spamming of the server. (Default: true)
+11. - `maxDelay` (_Number_): The maximum duration (milliseconds) to wait before retrying, useful if the delay time grew exponentially more than reasonable
 12. `fetch` (_Function_): A fetch implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function
 13. `timeout` (_Number_): Request/response timeout in ms. Must have globally available or passed in AbortController
-14. `abortController` or `getAbortController` depending on you chose to handle the timeout (`abortController`): This property accepts the `AbortController` instance. Could be [abort-controller](https://www.npmjs.com/package/abort-controller) or globally available one.
+14. `getAbortController` depending on you chose to handle the timeout (`abortController`): This property accepts the `AbortController` instance. Could be [abort-controller](https://www.npmjs.com/package/abort-controller) or globally available one.
+
+#### Note:
+
+The `arbortController` property is deprecated, use the `getAbortController` property instead.
 
 #### Retrying requests
 
-This modules have a retrying ability incase of network failures or 503 response errors. To enable this behavior, pass the `enableRetry` flag in the options and also set the maximum number of retries (`maxRetries`) and amount of milliseconds to wait before retrying a request (`retryDelay`).
+This modules have a retrying ability incase of network failures or 503 response errors. To enable this behavior, pass the `enableRetry` flag in the options and also set the maximum number of retries (`maxRetries`) and amount in milliseconds to wait before retrying a request (`retryDelay`).
 
 The repeater implements an `exponential` delay, meaning the wait time is not constant and it grows on every retry.
 
-##### Token caching
+#### retryConfig
+
+This is an object that defines the properties needed to properly configure the retry logic. This configuration only works if the `enableRetries` property is set to `true`
+
+- _maxRetries_ - This property is used to set the number of times the request should retry in an event the previous request failed, the default retries is 50.
+- _retryDelay_ - This set the delay (time in milliseconds) between retries, it is important to choose a number that allow the previous request to fully complete before initiating the next retry assuming the previous request failed.
+- _backoff_ - This is used to configure how the retries should be carried out, setting this property to `true` means the request will backoff for a while before retrying. Assuming the previous retry was done in a 2 seconds (2000 milliseconds) delay, the next retry will be say 4 seconds (4000 milliseconds) and the next 8 seconds (8 milliseconds) etc. It is also advisable to set the `maxDelay` property so delay doesn't grow too large.
+- _maxDelay_ - Used to set the delay time limit for the backoff property, so as to prevent the backoff delay from increasing exponentially to infinity.
+
+#### timeout
+
+For setting the timeout (in milliseconds) for all http requests or responses in a situation where a request or response might take too long to be processed or completed respectively.
+
+#### Token caching
 
 The token is retrieved and cached upon the first request made by the client. Then, it gets refreshed when it expires. To utilize this, please make sure you use the same client instance and do not create new ones.
 
@@ -465,6 +501,7 @@ const options: HttpMiddlewareOptions = {
   retryConfig: {
     maxRetries: 2,
     retryDelay: 300, //milliseconds
+    backoff: false,
     maxDelay: 5000, //milliseconds
   },
   fetch,
@@ -482,6 +519,7 @@ This is used to signal the retry module to retry the request in an event of a re
 #### Usage example
 
 ```typescript
+import AbortController from 'abort-controller'
 // Use default options
 const options: HttpMiddlewareOptions = {
   host: testHost,
@@ -591,6 +629,51 @@ cont client: Client = new ClientBuilder()
   .withLoggerMiddleware() // Log the request / response at this point in the middleware chain, before it gets to the http-middleware
   .withHttpMiddleware(...)
   .withLoggerMiddleware() // Log the request / response after it's being handled by the http-middleware
+  ...
+```
+
+`-`
+
+#### withMiddleware(middleware: Middleware)
+
+A custom class method that accepts a middleware as a argument which is used to further configure the client. Notice how we called the underlying middleware creator function `createHttpClient` and `createAuthForClientCredentialsFlow` to create the middlewares here. With this one can easily use a custom middleware that serve a specific need.
+
+#### Usage Example
+
+```typescript
+// ClientBuilder.js
+
+import fetch from 'node-fetch'
+import {
+  ClientBuilder,
+  Client,
+  AuthMiddlewareOptions,
+  HttpMiddlewareOptions,
+  createAuthForClientCredentialsFlow,
+  createHttpClient
+} from '@commercetools/sdk-client-v2'
+// create the authMiddlewareOptions object
+const authMiddlewareOptions: AuthMiddlewareOptions = {
+  host: 'https://auth.europe-west1.gcp.commercetools.com',
+  projectKey: 'demo-key',
+  credentials: {
+    clientId: 'clientID12345',
+    clientSecret: 'clientSecret12345',
+  },
+  oauthUri: 'adminAuthUrl',
+  scopes: ['manage_project:demo-key'],
+  fetch,
+}
+
+// create the httpMiddlewareOptions object also
+const httpMiddlewareOptions: HttpMiddlewareOptions = {
+  host: 'https://api.europe-west1.gcp.commercetools.com',
+  fetch,
+}
+
+const Client: client = new clientBuilder()
+  .withMiddleware(createAuthForClientCredentialsFlow(authMiddlewareOptions))
+  .withMiddleware(createHttpClient(httpMiddlewareOptions))
   ...
 ```
 
