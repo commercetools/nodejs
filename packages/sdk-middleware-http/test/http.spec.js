@@ -2,6 +2,8 @@
 import nock from 'nock'
 import fetch from 'node-fetch'
 import AbortController from 'abort-controller'
+import { createQueueMiddleware } from '@commercetools/sdk-middleware-queue'
+import { createClient } from '@commercetools/sdk-client'
 import { createHttpMiddleware } from '../src'
 
 function createTestRequest(options) {
@@ -1116,4 +1118,45 @@ describe('Http', () => {
 
       httpMiddleware(next)(request, response)
     }))
+
+  test('queueMiddleware with timeout', async () => {
+    expect.assertions(20)
+    const queueMiddleware = createQueueMiddleware({
+      concurrency: 10,
+    })
+
+    const httpMiddleware = createHttpMiddleware({
+      host: testHost,
+      timeout: 1000,
+      fetch,
+      getAbortController: () => new AbortController(),
+    })
+
+    const ctpClient = createClient({
+      middlewares: [queueMiddleware, httpMiddleware],
+    })
+
+    const request = createTestRequest({
+      uri: '/foo/bar',
+    })
+
+    nock(testHost)
+      .defaultReplyHeaders({
+        'Content-Type': 'application/json',
+      })
+      .get('/foo/bar')
+      .times(20)
+      .delay(1500) // delay response with 1.5 s
+      .reply(200, { foo: 'bar' })
+
+    await Promise.all(
+      [...Array(20)].map(async () => {
+        try {
+          await ctpClient.execute(request)
+        } catch (err) {
+          expect(err.message).toEqual('The user aborted a request.')
+        }
+      })
+    )
+  })
 })
