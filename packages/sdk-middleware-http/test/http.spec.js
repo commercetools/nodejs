@@ -713,6 +713,87 @@ describe('Http', () => {
 
         httpMiddleware(next)(request, response)
       }))
+
+    test('should retry when request is aborted (success)', () => {
+      expect.assertions(1)
+      return new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res).toEqual({
+            ...response,
+            body: { foo: 'bar' },
+            statusCode: 200,
+          })
+          resolve()
+        }
+        // Use default options
+        const httpMiddleware = createHttpMiddleware({
+          host: testHost,
+          timeout: 100,
+          fetch,
+          enableRetry: true,
+          getAbortController: () => new AbortController(),
+        })
+        nock(testHost)
+          .defaultReplyHeaders({
+            'Content-Type': 'application/json',
+          })
+          .get('/foo/bar')
+          .once()
+          .delay(200) // delay response to fail
+          .reply(200, { foo: 'bar' })
+          .get('/foo/bar')
+          .delay(50) // delay lower then timeout
+          .reply(200, { foo: 'bar' })
+
+        httpMiddleware(next)(request, response)
+      })
+    })
+
+    test('should retry when requests are aborted (fail)', () => {
+      expect.assertions(1)
+      return new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res).toEqual({
+            ...response,
+            error: expect.any(Error),
+            statusCode: 0,
+          })
+          resolve()
+        }
+        // Use default options
+        const httpMiddleware = createHttpMiddleware({
+          host: testHost,
+          timeout: 100, // time out after 10ms
+          fetch,
+          enableRetry: true,
+          retryConfig: {
+            maxRetries: 1,
+          },
+          getAbortController: () => new AbortController(),
+        })
+        nock(testHost)
+          .defaultReplyHeaders({
+            'Content-Type': 'application/json',
+          })
+          .get('/foo/bar')
+          .once()
+          .delay(150) // delay response to fail (higher than timeout)
+          .reply(200, { foo: 'bar' })
+          .get('/foo/bar')
+          .delay(150) // delay response to fail (higher than timeout)
+          .reply(200, { foo: 'bar' })
+
+        httpMiddleware(next)(request, response)
+      })
+    })
   })
 
   test('handle failed response (api error)', () =>

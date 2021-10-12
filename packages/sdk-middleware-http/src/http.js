@@ -97,14 +97,6 @@ export default function createHttpMiddleware({
     request: MiddlewareRequest,
     response: MiddlewareResponse
   ) => {
-    let abortController: any
-    if (timeout || getAbortController || _abortController)
-      // eslint-disable-next-line
-      abortController =
-        (getAbortController ? getAbortController() : null) ||
-        _abortController ||
-        new AbortController()
-
     const url = host.replace(/\/$/, '') + request.uri
     const body =
       typeof request.body === 'string' || Buffer.isBuffer(request.body)
@@ -126,15 +118,23 @@ export default function createHttpMiddleware({
     if (credentialsMode) {
       fetchOptions.credentials = credentialsMode
     }
-    if (abortController) {
-      fetchOptions.signal = abortController.signal
-    }
     if (body) {
       fetchOptions.body = body
     }
     let retryCount = 0
     // wrap in a fn so we can retry if error occur
     function executeFetch() {
+      let abortController: any
+      if (timeout || getAbortController || _abortController)
+        // eslint-disable-next-line
+        abortController =
+          (getAbortController ? getAbortController() : null) ||
+          _abortController ||
+          new AbortController()
+
+      if (abortController) {
+        fetchOptions.signal = abortController.signal
+      }
       // Kick off timer for abortController directly before fetch.
       let timer
       if (timeout)
@@ -195,7 +195,7 @@ export default function createHttpMiddleware({
               })
               return
             }
-            if (res.status === 503 && enableRetry)
+            if (res.status === 503 && enableRetry) {
               if (retryCount < maxRetries) {
                 setTimeout(
                   executeFetch,
@@ -210,6 +210,7 @@ export default function createHttpMiddleware({
                 retryCount += 1
                 return
               }
+            }
 
             // Server responded with an error. Try to parse it as JSON, then
             // return a proper error type with all necessary meta information.
@@ -243,21 +244,20 @@ export default function createHttpMiddleware({
           },
           // We know that this is a "network" error thrown by the `fetch` library
           (e: Error) => {
-            if (enableRetry)
+            if (enableRetry) {
               if (retryCount < maxRetries) {
-                setTimeout(
-                  executeFetch,
-                  calcDelayDuration(
-                    retryCount,
-                    retryDelay,
-                    maxRetries,
-                    backoff,
-                    maxDelay
-                  )
+                const runningIn = calcDelayDuration(
+                  retryCount,
+                  retryDelay,
+                  maxRetries,
+                  backoff,
+                  maxDelay
                 )
+                setTimeout(executeFetch, runningIn)
                 retryCount += 1
                 return
               }
+            }
 
             const error = new NetworkError(e.message, {
               originalRequest: request,
