@@ -40,7 +40,7 @@
     "flat": "^5.0.0",
     "json2csv": "^5.0.0",
     "npmlog": "^4.1.2",
-    "pretty-error": "^2.1.1",
+    "pretty-error": "^3.0.0",
     "tokgen": "^1.0.0",
     "yargs": "^15.0.0"
   }
