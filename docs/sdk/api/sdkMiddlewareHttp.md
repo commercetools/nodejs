@@ -38,9 +38,10 @@ The HTTP middleware can run in either a browser or Node.js environment. For Node
 9.  `retryDelay` _(Number)_: amount of milliseconds to wait before retrying the next request. (Default: 200)
 10. `backoff` _(Boolean)_: activates exponential backoff. Recommended to prevent spamming of the server. (Default: true)
 11. `maxDelay` _(Number)_: The maximum duration (milliseconds) to wait before retrying, useful if the delay time grew exponentially more than reasonable
-12. `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function
-13. `timeout` _(Number)_: Request/response timeout in ms. Must have globally available or passed in `AbortController`
-14. `abortController` or `getAbortController` depending on you chose to handle the timeout (_abortController_): This property accepts the `AbortController` instance. Could be [abort-controller](https://www.npmjs.com/package/abort-controller) or globally available one.
+12. `retryOnAbort` _(Boolean)_: Configure the client to retry an aborted request or not. defaults to false.
+13. `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function
+14. `timeout` _(Number)_: Request/response timeout in ms. Must have globally available or passed in `AbortController`
+15. `abortController` or `getAbortController` depending on you chose to handle the timeout (_abortController_): This property accepts the `AbortController` instance. Could be [abort-controller](https://www.npmjs.com/package/abort-controller) or globally available one.
 
 #### Retrying requests
 
@@ -70,9 +71,11 @@ const client = createClient({
         maxRetries: 2,
         retryDelay: 300, //milliseconds
         maxDelay: 5000, //milliseconds
+        retryOnAbort: false,
       },
 
       // Optional if not globally available
+      timeout: 1000,
       fetch,
     }),
   ],
