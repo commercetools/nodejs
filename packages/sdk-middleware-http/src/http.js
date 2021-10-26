@@ -65,6 +65,7 @@ export default function createHttpMiddleware({
     backoff = true,
     retryDelay = 200,
     maxDelay = Infinity,
+    retryOnAbort = false,
   } = {},
   fetch: fetcher,
   abortController: _abortController,
@@ -98,13 +99,6 @@ export default function createHttpMiddleware({
     response: MiddlewareResponse
   ) => {
     let abortController: any
-    if (timeout || getAbortController || _abortController)
-      // eslint-disable-next-line
-      abortController =
-        (getAbortController ? getAbortController() : null) ||
-        _abortController ||
-        new AbortController()
-
     const url = host.replace(/\/$/, '') + request.uri
     const body =
       typeof request.body === 'string' || Buffer.isBuffer(request.body)
@@ -126,15 +120,38 @@ export default function createHttpMiddleware({
     if (credentialsMode) {
       fetchOptions.credentials = credentialsMode
     }
-    if (abortController) {
-      fetchOptions.signal = abortController.signal
+
+    if (!retryOnAbort) {
+      if (timeout || getAbortController || _abortController)
+        // eslint-disable-next-line
+        abortController =
+          (getAbortController ? getAbortController() : null) ||
+          _abortController ||
+          new AbortController()
+
+      if (abortController) {
+        fetchOptions.signal = abortController.signal
+      }
     }
+
     if (body) {
       fetchOptions.body = body
     }
     let retryCount = 0
     // wrap in a fn so we can retry if error occur
     function executeFetch() {
+      if (retryOnAbort) {
+        if (timeout || getAbortController || _abortController)
+          // eslint-disable-next-line
+          abortController =
+            (getAbortController ? getAbortController() : null) ||
+            _abortController ||
+            new AbortController()
+
+        if (abortController) {
+          fetchOptions.signal = abortController.signal
+        }
+      }
       // Kick off timer for abortController directly before fetch.
       let timer
       if (timeout)
