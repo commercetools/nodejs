@@ -168,6 +168,34 @@ describe('DiscountCode tests', () => {
       }
     })
 
+    it('should show mandatory fields error', async () => {
+      // Set batchSize to 1 so it executes serially
+      codeImport = new DiscountCodeImport({ apiConfig, batchSize: 1 }, logger)
+      // Make codes unique
+      const discountCodesSample = preparedDiscountCodes.map((codeObj) => {
+        const uniqueCode = codeObj.code
+        return { ...codeObj, code: `${uniqueCode}bar` }
+      })
+
+      // Make code invalid
+      discountCodesSample[1].code = ''
+      discountCodesSample[2].code = ''
+      const throwError = () => {
+        const errorObj = new Error('Mandatory Fields are missing');
+        errorObj.body = {
+          errors: ['Mandatory Fields are missing']
+        }
+        throw errorObj;
+      }
+
+      codeImport._buildPredicate = throwError
+      try {
+        await codeImport.run(discountCodesSample)
+      } catch (e) {
+        expect(e.summary.errors[1]).toMatch(/Mandatory Fields are missing/)
+      }
+    })
+
     it('should continueOnProblems if `continueOnProblems`', async () => {
       codeImport = new DiscountCodeImport(
         {
