@@ -182,6 +182,7 @@ export type TokenCache = {
 /* Request */
 
 type requestBaseOptions = {
+  request: MiddlewareRequest,
   response: MiddlewareResponse,
   url: string,
   body: string,
@@ -193,6 +194,8 @@ type requestBaseOptions = {
   },
   tokenCache: TokenCache,
   tokenCacheKey?: TokenCacheOptions,
+  timeout?: number,
+  getAbortController?: () => AbortController
 }
 export type executeRequestOptions = requestBaseOptions & {
   fetcher: typeof fetch,
@@ -248,7 +251,7 @@ export type HttpMiddlewareOptions = {
    * @deprecated use getAbortController instead
    */
   abortController?: AbortController, // deprecated
-  getAbortController: () => AbortController
+  getAbortController: () => AbortController,
 }
 export type QueueMiddlewareOptions = {
   concurrency: number,
