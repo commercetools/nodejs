@@ -28,7 +28,6 @@
     "test:coverage": "yarn build && npm test -- --no-watchman --coverage",
     "test:ci": "yarn test -- --ci --no-watchman --maxWorkers=10",
     "test:coverage:ci": "yarn test:ci -- --coverage && codecov",
-    "release": "yarn check-gh-auth-token && cross-env NODE_ENV=cli yarn build && lerna publish --registry=https://registry.npmjs.org/ && yarn build:changelog && yarn push:changelog && yarn docs:publish",
     "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
     "docs:build": "yarn docs:prepare && gitbook build && cp logo/apple-touch-icon.png _book/gitbook/images/apple-touch-icon-precomposed-152.png && cp logo/favicon.ico _book/gitbook/images",
@@ -37,7 +36,9 @@
     "typecheck": "yarn typecheck:flow && yarn typecheck:ts",
     "typecheck:flow": "flow check --include-warnings",
     "typecheck:ts": "lerna run typecheck:ts",
-    "package-readme-entry": "./scripts/package-readme-entry.sh"
+    "package-readme-entry": "./scripts/package-readme-entry.sh",
+    "changeset": "changeset",
+    "changeset:version-and-format": "changeset version && prettier --write --parser json '**/package.json'"
   },
   "workspaces": [
     "integration-tests",
@@ -121,7 +122,9 @@
     "streamtest": "2.0.0",
     "ts-jest": "26.2.0",
     "tsconfig-replace-paths": "0.0.5",
-    "typescript": "3.9.7"
+    "typescript": "3.9.7",
+    "@changesets/changelog-github": "^0.4.1",
+    "@changesets/cli": "^2.17.0"
   },
   "resolutions": {
     "graceful-fs": "4.2.4",
