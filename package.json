@@ -11,8 +11,6 @@
     "clean": "rm -rf coverage; lerna exec -- rimraf lib dist",
     "commit": "git-cz",
     "build": "lerna run build --no-private",
-    "build:changelog": "lerna-changelog --from=$(git log --grep='chore(release): releasing component' --format='%H' | sed -n 2p) > tmp && cat CHANGELOG.md >> tmp && cat tmp > CHANGELOG.md && rm tmp",
-    "push:changelog": "git add CHANGELOG.md && git commit -m 'docs: update changelog' && git push",
     "check-gh-auth-token": "if [[ -z \"${GITHUB_AUTH}\" ]]; then echo \"Need to set GITHUB_AUTH\" && exit 1; fi",
     "build:typings": "NODE_ENV=production lerna run build:typings --no-private",
     "lint": "jest --projects jest.eslint.config.js jest.flow.config.js",
@@ -58,6 +56,8 @@
     "@babel/preset-env": "7.11.0",
     "@babel/preset-flow": "7.10.4",
     "@babel/preset-typescript": "7.10.4",
+    "@changesets/changelog-github": "^0.4.1",
+    "@changesets/cli": "^2.17.0",
     "@commitlint/cli": "9.1.2",
     "@commitlint/config-conventional": "9.1.2",
     "@rollup/plugin-alias": "3.1.1",
@@ -74,7 +74,6 @@
     "commitizen": "4.1.2",
     "common-tags": "1.8.0",
     "cross-env": "7.0.2",
-    "cz-lerna-changelog": "2.0.3",
     "debug": "4.1.1",
     "eslint": "7.7.0",
     "eslint-config-airbnb": "18.2.0",
@@ -103,7 +102,6 @@
     "jest-runner-flowtype": "0.0.7",
     "jest-silent-reporter": "0.2.1",
     "lerna": "3.22.1",
-    "lerna-changelog": "1.0.1",
     "lint-staged": "10.2.11",
     "npm-check-updates": "7.1.1",
     "prettier": "2.0.5",
@@ -122,9 +120,7 @@
     "streamtest": "2.0.0",
     "ts-jest": "26.2.0",
     "tsconfig-replace-paths": "0.0.5",
-    "typescript": "3.9.7",
-    "@changesets/changelog-github": "^0.4.1",
-    "@changesets/cli": "^2.17.0"
+    "typescript": "3.9.7"
   },
   "resolutions": {
     "graceful-fs": "4.2.4",
@@ -139,10 +135,5 @@
     "serialize-javascript": "3.1.0",
     "diff": "3.5.0",
     "object-path": "0.11.5"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-lerna-changelog"
-    }
   }
 }
