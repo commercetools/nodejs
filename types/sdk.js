@@ -195,10 +195,17 @@ type requestBaseOptions = {
   tokenCache: TokenCache,
   tokenCacheKey?: TokenCacheOptions,
   timeout?: number,
-  getAbortController?: () => AbortController
+  getAbortController?: () => AbortController,
+  retryConfig?: {
+    retryDelay: number,
+    maxRetries: number,
+    backoff: boolean,
+    maxDelay: number,
+  },
 }
 export type executeRequestOptions = requestBaseOptions & {
   fetcher: typeof fetch,
+  tokenCache: TokenCache
 }
 
 export type AuthMiddlewareBaseOptions = requestBaseOptions & {
