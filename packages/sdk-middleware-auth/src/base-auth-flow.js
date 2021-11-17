@@ -34,6 +34,23 @@ function calculateExpirationTime(expiresIn: number): number {
   )
 }
 
+function calcDelayDuration(
+  retryCount: number,
+  retryDelay: number = 60000, // 60 seconds retry delay
+  maxRetries: number,
+  backoff: boolean = true,
+  maxDelay: number = Infinity
+): number {
+  if (backoff)
+    return retryCount !== 0 // do not increase if it's the first retry
+      ? Math.min(
+          Math.round((Math.random() + 1) * retryDelay * 2 ** retryCount),
+          maxDelay
+        )
+      : retryDelay
+  return retryDelay
+}
+
 function executeRequest({
   fetcher,
   url,
@@ -47,6 +64,12 @@ function executeRequest({
   tokenCacheKey,
   timeout,
   getAbortController,
+  retryConfig: {
+    retryDelay = 300, // 60 seconds retry delay
+    maxRetries = 10,
+    backoff = true, // encourage exponential backoff
+    maxDelay = Infinity,
+  } = {},
 }: executeRequestOptions) {
   // if timeout is configured and no instance of AbortController is passed then throw
   if (
@@ -65,112 +88,148 @@ function executeRequest({
       'The passed value for timeout is not a number, please provide a timeout of type number.'
     )
 
-  let signal
-  let abortController: any
-  if (timeout || getAbortController)
-    abortController =
-      (getAbortController ? getAbortController() : null) ||
-      new AbortController()
-  if (abortController) {
-    signal = abortController.signal
-  }
+  let retryCount = 0
+  function executeFetch() {
+    let signal
+    let abortController: any
+    if (timeout || getAbortController)
+      abortController =
+        (getAbortController ? getAbortController() : null) ||
+        new AbortController()
+    if (abortController) {
+      signal = abortController.signal
+    }
 
-  let timer
-  if (timeout)
-    timer = setTimeout(() => {
-      abortController.abort()
-    }, timeout)
-  fetcher(url, {
-    method: 'POST',
-    headers: {
-      Authorization: `Basic ${basicAuth}`,
-      'Content-Length': Buffer.byteLength(body).toString(),
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body,
-    signal,
-  })
-    .then((res: Response): Promise<*> => {
-      if (res.ok)
-        return res
-          .json()
-          .then(
-            ({
-              access_token: token,
-              expires_in: expiresIn,
-              refresh_token: refreshToken,
-            }: Object) => {
-              const expirationTime = calculateExpirationTime(expiresIn)
+    let timer
+    if (timeout)
+      timer = setTimeout(() => {
+        abortController.abort()
+      }, timeout)
+    fetcher(url, {
+      method: 'POST',
+      headers: {
+        Authorization: `Basic ${basicAuth}`,
+        'Content-Length': Buffer.byteLength(body).toString(),
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body,
+      signal,
+    })
+      .then((res: Response): Promise<*> => {
+        if (res.ok)
+          return res
+            .json()
+            .then(
+              ({
+                access_token: token,
+                expires_in: expiresIn,
+                refresh_token: refreshToken,
+              }: Object) => {
+                const expirationTime = calculateExpirationTime(expiresIn)
 
-              // Cache new token
-              tokenCache.set(
-                { token, expirationTime, refreshToken },
-                tokenCacheKey
+                // Cache new token
+                tokenCache.set(
+                  { token, expirationTime, refreshToken },
+                  tokenCacheKey
+                )
+
+                // Dispatch all pending requests
+                requestState.set(false)
+
+                // Freeze and copy pending queue, reset original one for accepting
+                // new pending tasks
+                const executionQueue = pendingTasks.slice()
+                // eslint-disable-next-line no-param-reassign
+                pendingTasks = []
+                executionQueue.forEach((task: Task) => {
+                  // Assign the new token in the request header
+                  const requestWithAuth = mergeAuthHeader(token, task.request)
+                  // console.log('test', cache, pendingTasks)
+                  // Continue by calling the task's own next function
+                  task.next(requestWithAuth, task.response)
+                })
+              }
+            )
+
+        // Handle error response
+        return res.text().then((text: any) => {
+          let parsed
+          try {
+            parsed = JSON.parse(text)
+          } catch (error) {
+            /* noop */
+          }
+          const error: Object = new Error(parsed ? parsed.message : text)
+          if (parsed) error.body = parsed
+
+          // to notify that token is either fetched or failed
+          // in the below case token failed to be fetched
+          // and reset requestState to false
+          // so requestState could be shared between multi authMiddlewareBase functions
+          requestState.set(false)
+
+          // check that error message matches the pattern '...is suspended'
+          if (error.message.includes('is suspended')) {
+            // empty the tokenCache
+            tokenCache.set(null)
+
+            // retry
+            if (retryCount < maxRetries) {
+              setTimeout(
+                executeFetch,
+                calcDelayDuration(
+                  retryCount,
+                  retryDelay,
+                  maxRetries,
+                  backoff,
+                  maxDelay
+                )
               )
-
-              // Dispatch all pending requests
-              requestState.set(false)
-
-              // Freeze and copy pending queue, reset original one for accepting
-              // new pending tasks
-              const executionQueue = pendingTasks.slice()
-              // eslint-disable-next-line no-param-reassign
-              pendingTasks = []
-              executionQueue.forEach((task: Task) => {
-                // Assign the new token in the request header
-                const requestWithAuth = mergeAuthHeader(token, task.request)
-                // console.log('test', cache, pendingTasks)
-                // Continue by calling the task's own next function
-                task.next(requestWithAuth, task.response)
-              })
+              retryCount += 1
+              return
             }
-          )
 
-      // Handle error response
-      return res.text().then((text: any) => {
-        let parsed
-        try {
-          parsed = JSON.parse(text)
-        } catch (error) {
-          /* noop */
-        }
-        const error: Object = new Error(parsed ? parsed.message : text)
-        if (parsed) error.body = parsed
+            // construct a suitable error message for the caller
+            const errorResponse = {
+              message: error.body.error,
+              statusCode: error.body.statusCode,
+              originalRequest: request,
+              retryCount,
+            }
+            response.reject(errorResponse)
+          }
 
+          response.reject(error)
+        })
+      })
+      .catch((error: Error & { type?: string }) => {
         // to notify that token is either fetched or failed
         // in the below case token failed to be fetched
         // and reset requestState to false
         // so requestState could be shared between multi authMiddlewareBase functions
         requestState.set(false)
 
-        response.reject(error)
+        if (response && typeof response.reject === 'function')
+          response.reject(error)
+
+        if (
+          response &&
+          typeof response.reject === 'function' &&
+          error?.type === 'aborted'
+        ) {
+          const _error = new NetworkError(error.message, {
+            type: error.type,
+            request,
+          })
+          response.reject(_error)
+        }
       })
-    })
-    .catch((error: Error & { type?: string }) => {
-      // to notify that token is either fetched or failed
-      // in the below case token failed to be fetched
-      // and reset requestState to false
-      // so requestState could be shared between multi authMiddlewareBase functions
-      requestState.set(false)
+      .finally(() => {
+        clearTimeout(timer)
+      })
+  }
 
-      if (response && typeof response.reject === 'function')
-        response.reject(error)
-
-      if (
-        response &&
-        typeof response.reject === 'function' &&
-        error?.type === 'aborted'
-      ) {
-        const _error = new NetworkError(error.message, {
-          type: error.type,
-          request,
-        })
-        response.reject(_error)
-      }
-    })
-    .finally(() => {
-      clearTimeout(timer)
-    })
+  executeFetch()
 }
 
 export default function authMiddlewareBase(
@@ -187,6 +246,7 @@ export default function authMiddlewareBase(
     fetch: fetcher,
     timeout,
     getAbortController,
+    retryConfig,
   }: AuthMiddlewareBaseOptions,
   next: Next,
   userOptions?: AuthMiddlewareOptions | PasswordAuthMiddlewareOptions
@@ -253,6 +313,7 @@ export default function authMiddlewareBase(
       response,
       timeout,
       getAbortController,
+      retryConfig,
     })
     return
   }
@@ -271,5 +332,6 @@ export default function authMiddlewareBase(
     response,
     timeout,
     getAbortController,
+    retryConfig,
   })
 }

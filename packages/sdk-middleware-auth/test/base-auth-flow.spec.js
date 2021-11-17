@@ -197,6 +197,141 @@ describe('Base Auth Flow', () => {
       })
   })
 
+  describe('::repeater', () => {
+    it('should reject response if project is suspended', () => {
+      const projectKey = process.env.SUS_PROJECT_KEY
+      const userConfig = {
+        host: 'https://auth.europe-west1.gcp.commercetools.com',
+        projectKey,
+        credentials: {
+          clientId: process.env.SUS_CLIENT_ID,
+          clientSecret: process.env.SUS_CLIENT_SECRET,
+        },
+        timeout: 3000, // timeout set to 10ms
+        getAbortController: () => new AbortController(),
+        retryConfig: {
+          maxRetries: 2,
+          retryDelay: 300,
+          backoff: false,
+        },
+        scope: [`view_project_settings:${projectKey}`],
+        fetch,
+      }
+
+      const client = createClient({
+        middlewares: [
+          createAuthMiddlewareForClientCredentialsFlow(userConfig),
+          createHttpMiddleware({
+            host: 'https://api.europe-west1.gcp.commercetools.com',
+            fetch,
+          }),
+        ],
+      })
+
+      return client
+        .execute({
+          uri: `/${projectKey}`,
+          method: 'GET',
+        })
+        .catch((error) => {
+          expect(error.statusCode).toEqual(400)
+          expect(error.message).toEqual('invalid_scope')
+        })
+    })
+
+    test('should retry if project was suspended', () => {
+      const projectKey = process.env.SUS_PROJECT_KEY
+      const userConfig = {
+        host: 'https://auth.europe-west1.gcp.commercetools.com',
+        projectKey,
+        credentials: {
+          clientId: process.env.SUS_CLIENT_ID,
+          clientSecret: process.env.SUS_CLIENT_SECRET,
+        },
+        timeout: 3000, // timeout set to 10ms
+        getAbortController: () => new AbortController(),
+        retryConfig: {
+          maxRetries: 3,
+          retryDelay: 30,
+          backoff: true,
+        },
+        tokenCache: store({}),
+        scope: [`view_project_settings:${projectKey}`],
+        fetch,
+      }
+
+      const client = createClient({
+        middlewares: [
+          createAuthMiddlewareForClientCredentialsFlow(userConfig),
+          createHttpMiddleware({
+            host: 'https://api.europe-west1.gcp.commercetools.com',
+            fetch,
+          }),
+        ],
+      })
+
+      return client
+        .execute({
+          uri: `/${projectKey}`,
+          method: 'GET',
+        })
+        .catch((error) => {
+          expect(userConfig.tokenCache.get()).toBe(null)
+          expect(error.statusCode).toEqual(400)
+          expect(error.headers).toBeUndefined()
+          expect(error.originalRequest).toBeDefined()
+          expect(error.retryCount).toBe(3) // same value as the maxRetries
+          expect(error.message).toBe(`invalid_scope`)
+        })
+    })
+
+    test('should set tokenCache to null if project is suspended', () => {
+      const projectKey = process.env.SUS_PROJECT_KEY
+      const userConfig = {
+        host: 'https://auth.europe-west1.gcp.commercetools.com',
+        projectKey,
+        credentials: {
+          clientId: process.env.SUS_CLIENT_ID,
+          clientSecret: process.env.SUS_CLIENT_SECRET,
+        },
+        timeout: 3000, // timeout set to 10ms
+        getAbortController: () => new AbortController(),
+        retryConfig: {
+          maxRetries: 3,
+          retryDelay: 30,
+          backoff: true,
+        },
+        tokenCache: store({}),
+        scope: [`view_project_settings:${projectKey}`],
+        fetch,
+      }
+
+      // before executing the request tokenCache should have default value
+      expect(userConfig.tokenCache.get()).toStrictEqual({})
+      const client = createClient({
+        middlewares: [
+          createAuthMiddlewareForClientCredentialsFlow(userConfig),
+          createHttpMiddleware({
+            host: 'https://api.europe-west1.gcp.commercetools.com',
+            fetch,
+          }),
+        ],
+      })
+
+      return client
+        .execute({
+          uri: `/${projectKey}`,
+          method: 'GET',
+        })
+        .catch((error) => {
+          // after executing request tokenCache should be null
+          expect(userConfig.tokenCache.get()).toBe(null)
+          expect(error.statusCode).toEqual(400)
+          expect(error.message).toBe(`invalid_scope`)
+        })
+    })
+  })
+
   test('reject if request was not processed within the set timeout', () =>
     new Promise((resolve, reject) => {
       const response = createTestResponse({
