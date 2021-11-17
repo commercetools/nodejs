@@ -9,6 +9,7 @@ import type {
   AuthMiddlewareOptions,
   executeRequestOptions,
 } from 'types/sdk'
+import { NetworkError } from '../../sdk-middleware-http/src/errors'
 import { buildRequestForRefreshTokenFlow } from './build-requests'
 
 function mergeAuthHeader(
@@ -38,12 +39,47 @@ function executeRequest({
   url,
   basicAuth,
   body,
+  request,
   tokenCache,
   requestState,
   pendingTasks,
   response,
   tokenCacheKey,
+  timeout,
+  getAbortController,
 }: executeRequestOptions) {
+  // if timeout is configured and no instance of AbortController is passed then throw
+  if (
+    timeout &&
+    !getAbortController &&
+    typeof AbortController === 'undefined'
+  ) {
+    throw new Error(
+      '`AbortController` is not available. Please pass in `getAbortController` as an option or have AbortController globally available when using timeout.'
+    )
+  }
+
+  // ensure that the passed value of the timeout is of type number
+  if (timeout && typeof timeout !== 'number')
+    throw new Error(
+      'The passed value for timeout is not a number, please provide a timeout of type number.'
+    )
+
+  let signal
+  let abortController: any
+  if (timeout || getAbortController)
+    abortController =
+      (getAbortController ? getAbortController() : null) ||
+      new AbortController()
+  if (abortController) {
+    signal = abortController.signal
+  }
+
+  let timer
+  if (timeout)
+    timer = setTimeout(() => {
+      abortController.abort()
+    }, timeout)
   fetcher(url, {
     method: 'POST',
     headers: {
@@ -52,6 +88,7 @@ function executeRequest({
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body,
+    signal,
   })
     .then((res: Response): Promise<*> => {
       if (res.ok)
@@ -109,7 +146,7 @@ function executeRequest({
         response.reject(error)
       })
     })
-    .catch((error: Error) => {
+    .catch((error: Error & { type?: string }) => {
       // to notify that token is either fetched or failed
       // in the below case token failed to be fetched
       // and reset requestState to false
@@ -118,6 +155,21 @@ function executeRequest({
 
       if (response && typeof response.reject === 'function')
         response.reject(error)
+
+      if (
+        response &&
+        typeof response.reject === 'function' &&
+        error?.type === 'aborted'
+      ) {
+        const _error = new NetworkError(error.message, {
+          type: error.type,
+          request,
+        })
+        response.reject(_error)
+      }
+    })
+    .finally(() => {
+      clearTimeout(timer)
     })
 }
 
@@ -133,6 +185,8 @@ export default function authMiddlewareBase(
     tokenCache,
     tokenCacheKey,
     fetch: fetcher,
+    timeout,
+    getAbortController,
   }: AuthMiddlewareBaseOptions,
   next: Next,
   userOptions?: AuthMiddlewareOptions | PasswordAuthMiddlewareOptions
@@ -192,10 +246,13 @@ export default function authMiddlewareBase(
         refreshToken: tokenObj.refreshToken,
       }),
       tokenCacheKey,
+      request,
       tokenCache,
       requestState,
       pendingTasks,
       response,
+      timeout,
+      getAbortController,
     })
     return
   }
@@ -206,10 +263,13 @@ export default function authMiddlewareBase(
     url,
     basicAuth,
     body,
+    request,
     tokenCacheKey,
     tokenCache,
     requestState,
     pendingTasks,
     response,
+    timeout,
+    getAbortController,
   })
 }

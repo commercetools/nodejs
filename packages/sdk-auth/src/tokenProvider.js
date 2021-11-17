@@ -76,13 +76,15 @@ export default class TokenProvider {
       this.fetchTokenInfo(this.sdkAuth)
     )
 
-    return this.fetchTokenInfoPromise.then((tokenInfo) => {
-      this.fetchTokenInfoPromise = null
-      return tokenInfo
-    }).catch((error) => {
+    return this.fetchTokenInfoPromise
+      .then((tokenInfo) => {
+        this.fetchTokenInfoPromise = null
+        return tokenInfo
+      })
+      .catch((error) => {
         this.fetchTokenInfoPromise = null
         throw error
-    })
+      })
   }
 
   _performRefreshTokenFlow(refreshToken: string): Promise<TokenInfo> {
@@ -91,19 +93,21 @@ export default class TokenProvider {
 
     this.refreshTokenFlowPromise = this.sdkAuth.refreshTokenFlow(refreshToken)
 
-    return this.refreshTokenFlowPromise.then((refreshTokenInfo) => {
-      this.refreshTokenFlowPromise = null
-      return refreshTokenInfo
-    }).catch((error) => {
-        this.refreshTokenFlowPromise = null;
+    return this.refreshTokenFlowPromise
+      .then((refreshTokenInfo) => {
+        this.refreshTokenFlowPromise = null
+        return refreshTokenInfo
+      })
+      .catch((error) => {
+        this.refreshTokenFlowPromise = null
         throw error
-    })
+      })
   }
 
   _refreshToken(oldTokenInfo: TokenInfo): Promise<TokenInfo> {
     let newTokenInfo
 
-    if (!oldTokenInfo?.['refresh_token'] && !this.fetchTokenInfo)
+    if (!oldTokenInfo?.refresh_token && !this.fetchTokenInfo)
       return Promise.reject(
         new Error(
           'Property "refresh_token" and "fetchTokenInfo" method are missing'
@@ -111,14 +115,14 @@ export default class TokenProvider {
       )
 
     // perform refreshTokenFlow if we have refresh token otherwise call getTokenInfo method
-    const newTokenPromise = oldTokenInfo?.['refresh_token']
+    const newTokenPromise = oldTokenInfo?.refresh_token
       ? this._performRefreshTokenFlow(oldTokenInfo.refresh_token)
       : this._performFetchTokenInfo()
 
     return newTokenPromise
       .then((tokenInfo: TokenInfo): void => {
         newTokenInfo = tokenInfo
-        if (oldTokenInfo?.['refresh_token'])
+        if (oldTokenInfo?.refresh_token)
           newTokenInfo.refresh_token = oldTokenInfo.refresh_token
         return this.onTokenInfoRefreshed?.(newTokenInfo, oldTokenInfo)
       })

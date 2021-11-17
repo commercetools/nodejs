@@ -39,6 +39,7 @@ export default function createAuthMiddlewareForClientCredentialsFlow(
       return
     }
     const params = {
+      ...options,
       request,
       response,
       ...buildRequestForClientCredentialsFlow(options),

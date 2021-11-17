@@ -1,6 +1,10 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import nock from 'nock'
 import fetch from 'node-fetch'
+import AbortController from 'abort-controller'
+import { createHttpMiddleware } from '../../sdk-middleware-http'
+import { createAuthMiddlewareForClientCredentialsFlow } from '../src/index'
+import { createClient } from '../../sdk-client'
 import createAuthMiddlewareBase from '../src/base-auth-flow'
 import * as buildRequests from '../src/build-requests'
 import store from '../src/utils'
@@ -66,6 +70,198 @@ describe('Base Auth Flow', () => {
       )
     )
   })
+
+  test('throw if timeout was passed and getAbortController was not', () => {
+    const middlewareOptions = createTestMiddlewareOptions({ timeout: 8000 })
+
+    const next = () => {}
+    expect(() => {
+      createBaseMiddleware(middlewareOptions, next)
+    }).toThrow(
+      new Error(
+        '`AbortController` is not available. Please pass in `getAbortController` as an option or have AbortController globally available when using timeout.'
+      )
+    )
+  })
+
+  test('throw if getAbortController is passed but its value is undefined', () => {
+    const middlewareOptions = createTestMiddlewareOptions({
+      timeout: 8000,
+      getAbortController: undefined,
+    })
+
+    const next = () => {}
+    expect(() => {
+      createBaseMiddleware(middlewareOptions, next)
+    }).toThrow(
+      new Error(
+        '`AbortController` is not available. Please pass in `getAbortController` as an option or have AbortController globally available when using timeout.'
+      )
+    )
+  })
+
+  test('throw if getAbortController is passed and timeout was not', () => {
+    const middlewareOptions = createTestMiddlewareOptions({
+      timeout: '8000',
+      getAbortController: () => new AbortController(),
+    })
+
+    expect(() => {
+      createBaseMiddleware(middlewareOptions, () => {})
+    }).toThrow(
+      new Error(
+        'The passed value for timeout is not a number, please provide a timeout of type number.'
+      )
+    )
+  })
+
+  test('do not throw if timeout and getAbortController are correctly passed', () => {
+    const middlewareOptions = createTestMiddlewareOptions({
+      timeout: 8000,
+      getAbortController: () => new AbortController(),
+    })
+
+    expect(() => {
+      createBaseMiddleware(middlewareOptions, () => {})
+    }).not.toThrow()
+  })
+
+  it('should timeout a request with an error', () => {
+    const projectKey = process.env.CTP_PROJECT_KEY
+    const userConfig = {
+      host: 'https://auth.europe-west1.gcp.commercetools.com',
+      projectKey,
+      credentials: {
+        clientId: process.env.CTP_CLIENT_ID,
+        clientSecret: process.env.CTP_CLIENT_SECRET,
+      },
+      timeout: 10, // timeout set to 10ms
+      getAbortController: () => new AbortController(),
+      scope: [`view_project_settings:${projectKey}`],
+      fetch,
+    }
+
+    const client = createClient({
+      middlewares: [
+        createAuthMiddlewareForClientCredentialsFlow(userConfig),
+        createHttpMiddleware({
+          host: 'https://api.europe-west1.gcp.commercetools.com',
+          fetch,
+        }),
+      ],
+    })
+
+    return client
+      .execute({
+        uri: `/${projectKey}`,
+        method: 'GET',
+      })
+      .catch((error) => {
+        expect(error.type).toEqual('aborted')
+        expect(error.message).toEqual('The user aborted a request.')
+      })
+  })
+
+  it('should execute a request if request completed within the set timeout', () => {
+    const projectKey = process.env.CTP_PROJECT_KEY
+    const userConfig = {
+      host: 'https://auth.europe-west1.gcp.commercetools.com',
+      projectKey,
+      credentials: {
+        clientId: process.env.CTP_CLIENT_ID,
+        clientSecret: process.env.CTP_CLIENT_SECRET,
+      },
+      timeout: 3000, // tomeout set to 3sec
+      getAbortController: () => new AbortController(),
+      scope: [`view_project_settings:${projectKey}`],
+      fetch,
+    }
+
+    const client = createClient({
+      middlewares: [
+        createAuthMiddlewareForClientCredentialsFlow(userConfig),
+        createHttpMiddleware({
+          host: 'https://api.europe-west1.gcp.commercetools.com',
+          fetch,
+        }),
+      ],
+    })
+
+    return client
+      .execute({
+        uri: `/${projectKey}`,
+        method: 'GET',
+      })
+      .then(({ body }) => {
+        expect(body.key).toEqual(projectKey)
+      })
+  })
+
+  test('reject if request was not processed within the set timeout', () =>
+    new Promise((resolve, reject) => {
+      const response = createTestResponse({
+        resolve,
+        reject: (error) => {
+          expect(error.message).toBe('request timeout')
+          expect(error.body).toEqual({ message: 'request timeout' })
+          resolve()
+        },
+      })
+      const next = () => {
+        reject(
+          new Error(
+            'This function should never be called, the response was rejected'
+          )
+        )
+      }
+      const middlewareOptions = createTestMiddlewareOptions({
+        timeout: 10, // timeout the request by 10ms
+        getAbortController: new AbortController(),
+      })
+      nock(middlewareOptions.host)
+        .filteringRequestBody(/.*/, '*')
+        .post('/oauth/token', '*')
+        .reply(504, { message: 'request timeout' }) // <-- JSON error response
+
+      createBaseMiddleware({ response }, next)
+    }))
+
+  test('call next if request is within the limits of timeout', () =>
+    new Promise((resolve) => {
+      const response = createTestResponse({
+        resolve,
+        reject: (error) => {
+          expect(error.message).toMatch('socket timeout')
+          resolve()
+        },
+      })
+
+      const next = (req) => {
+        expect(req).toHaveProperty('headers.Authorization', 'Bearer xxx')
+        resolve()
+      }
+
+      const middlewareOptions = createTestMiddlewareOptions({
+        timeout: 10000, // timeout the request by 10s
+        getAbortController: () => new AbortController(),
+        headers: {
+          Authorization: 'Bearer xxx',
+        },
+      })
+
+      nock(middlewareOptions.host)
+        .filteringRequestBody((body) => {
+          expect(body).toBe('grant_type=client_credentials')
+          return '*'
+        })
+        .post('/oauth/token', '*')
+        .delay(100)
+        .reply(200, {
+          access_token: 'xxx',
+          expires_in: 100,
+        })
+      createBaseMiddleware({ request: middlewareOptions, response }, next)
+    }))
 
   test('get a new auth token if not present in request headers', () =>
     new Promise((resolve) => {
