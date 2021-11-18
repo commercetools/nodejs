@@ -134,6 +134,7 @@ Run the program using the following command:
 You should see the following message in your output:
 ```Getting started with commercetools Typescript SDK```
 
+
 If you have the same output as above, then you have set up everything correctly.
 
 ### Retrieve your commercetools project settings with the TypeScript SDK
