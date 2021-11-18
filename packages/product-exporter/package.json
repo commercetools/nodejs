@@ -55,7 +55,7 @@
     "yargs-parser": "13.1.2"
   },
   "devDependencies": {
-    "common-tags": "1.8.0",
+    "common-tags": "1.8.2",
     "streamtest": "2.0.0"
   }
 }
