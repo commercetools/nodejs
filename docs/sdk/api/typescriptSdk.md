@@ -33,7 +33,11 @@ npm install --save @commercetools/ml-sdk
 This tutorial will show you how to use the middlewares in this **[commercetools TypeScript SDK](https://github.com/commercetools/commercetools-sdk-typescript/)** to get a simple commercetools JavaScript app running.
 
 ### Create a API client
-[Create API client](https://docs.commercetools.com/tutorials/getting-started#creating-an-api-client) from Merchant Center. If you do not have account [follow the steps to create a free trial account](https://docs.commercetools.com/tutorials/getting-started#first-steps). 
+[Create an API client](https://docs.commercetools.com/tutorials/getting-started#creating-an-api-client) from the Merchant Center.
+
+If you do not have account [follow these steps to create a free trial account](https://docs.commercetools.com/tutorials/getting-started#first-steps). 
+
+When you have set up your API Client, ensure that you save your **project_key**, **client_id**, **secret**, **scope**, **API URL**, and **Auth URL**. We recommend using the drop-down list to save your API Client details as an **Environment Variables (.env)** file.
 In this guide we’ll be calling a method of commercetools API using TypeScript SDK to get the settings of a commercetools project. The commercetools API is the foundation of the commercetools Platform, and almost every commercetools client app uses it. Aside from getting project information, the commercetools API allows clients to call methods that can be used for everything from creating products to updating an order’s status. Before we can call any methods, we need to configure our new app to obtain an access token.
 
 ### Set up your local project
