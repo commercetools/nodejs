@@ -54,7 +54,6 @@ Before we can call any methods, we need to configure a new app to obtain an acce
 4. The project will be created and a package.json file will be created in the directory.
 5. Enter the following command to open this folder in your code editor: ```code .```
 
-```
 
 
 ### Setting up API client credentials to use the commercetools API
