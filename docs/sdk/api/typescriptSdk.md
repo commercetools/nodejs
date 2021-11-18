@@ -37,7 +37,11 @@ This tutorial will show you how to use the middlewares in this **[commercetools 
 In this guide we’ll be calling a method of commercetools API using TypeScript SDK to get the settings of a commercetools project. The commercetools API is the foundation of the commercetools Platform, and almost every commercetools client app uses it. Aside from getting project information, the commercetools API allows clients to call methods that can be used for everything from creating products to updating an order’s status. Before we can call any methods, we need to configure our new app to obtain an access token.
 
 ### Set up your local project
-If you don’t already have a Node.js project, let’s create a new one. In an empty directory, you can initialize a new project using the following command:
+1. Open a terminal window.
+2. Create a new directory for the project.
+3. Open the new directory and create a new project using the following command: ```npm init -y```
+4. The project will be created and a package.json file will be created in the directory.
+5. Enter the following command to open this folder in your code editor ```code .````
 
 ```
 $ npm init -y
