@@ -57,7 +57,7 @@ Before we can call any methods, we need to configure a new app to obtain an acce
 ```
 
 
-#### Getting a client credentials to use the commercetools API
+### Setting up API client credentials to use the commercetools API
 If you downloaded the **Environment Variables (.env)** when creating your API Client, then you should save it as `.env` in the project directory.
 
 If you did not download the Environment Variables file, then create a new file called `.env` in the project directory. Open it in your code editor and insert the following, replacing the values with those from your API client.
