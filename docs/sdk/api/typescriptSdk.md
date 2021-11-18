@@ -119,7 +119,9 @@ Create a new file called `project.js` in the project directory and add the follo
 console.log('Getting started with commercetools Typescript SDK');
 ```
 
-Install the `@commercetools/sdk-client`, `@commercetools/sdk-middleware-auth`, `@commercetools/sdk-middleware-http`, `@commercetools/typescript-sdk` and `dotenv` packages and save it to your `package.json` dependencies using the following command:
+You must now install the following packages: `@commercetools/sdk-client`, `@commercetools/sdk-middleware-auth`, `@commercetools/sdk-middleware-http`, `@commercetools/typescript-sdk` and `dotenv`.
+
+You can do so by using the following command:
 
 ```
 $ npm install @commercetools/sdk-client @commercetools/sdk-middleware-auth @commercetools/sdk-middleware-http @commercetools/typescript-sdk dotenv
