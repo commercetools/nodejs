@@ -7,17 +7,19 @@ describe('exports', () => {
   })
 
   test('features', () => {
-    expect(Object.keys(features)).toEqual([
-      'create',
-      'update',
-      'del',
-      'query',
-      'queryOne',
-      'queryExpand',
-      'queryLocation',
-      'search',
-      'projection',
-      'suggest',
-    ])
+    expect(Object.keys(features).sort()).toEqual(
+      [
+        'create',
+        'update',
+        'del',
+        'query',
+        'queryOne',
+        'queryExpand',
+        'queryLocation',
+        'search',
+        'projection',
+        'suggest',
+      ].sort()
+    )
   })
 })
