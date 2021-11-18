@@ -138,7 +138,7 @@ Add the following code to the end of your `project.js` file:
     }
 })();
 ```
-Then client will **execute** get project information request from `apiRoot` using **TypeScript SDK**.
+The client will **execute** and retrieve the project information from `apiRoot` using the **TypeScript SDK**.
 Run the program. The output should look like the following if the request is successful:
 ```
 $ node project.js
