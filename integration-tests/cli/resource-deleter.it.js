@@ -73,16 +73,16 @@ describe('Resource Deleter', () => {
     }
 
     // create resources on API
-    for (const name of resourcesOrder) {
-      await createData(apiConfig, name, resources[name]);
-    }
+    await Promise.each(resourcesOrder, (name) => {
+      return createData(apiConfig, name, resources[name])
+    })
   }, 30000)
 
   // clear resources on API
   afterAll(async () => {
-    for (const name of resourcesOrderReversed) {
-      await clearData(apiConfig, name);
-    }
+    await Promise.each(resourcesOrderReversed, (name) => {
+      return createData(apiConfig, name, resources[name])
+    })
   }, 45000)
 
   describe('CLI basic functionality', () => {
