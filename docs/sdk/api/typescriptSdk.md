@@ -124,7 +124,7 @@ You must now install the following packages: `@commercetools/sdk-client`, `@comm
 You can do so by using the following command:
 
 ```
-$ npm install @commercetools/sdk-client @commercetools/sdk-middleware-auth @commercetools/sdk-middleware-http @commercetools/typescript-sdk dotenv
+npm install @commercetools/sdk-client @commercetools/sdk-middleware-auth @commercetools/sdk-middleware-http @commercetools/typescript-sdk dotenv
 ```
 
 This code creates a **client**, which uses `authMiddleware` and `httpMiddleware`. The `httpMiddleware` reads the `clientId` and `clientSecret` from the `.env` file.
