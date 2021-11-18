@@ -130,7 +130,7 @@
     "dot-prop": "6.0.1",
     "merge": "2.1.1",
     "npm-user-validate": "1.0.1",
-    "serialize-javascript": "3.1.0",
+    "serialize-javascript": "6.0.0",
     "diff": "5.0.0",
     "object-path": "0.11.8"
   }
