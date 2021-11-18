@@ -130,7 +130,7 @@ $ npm install @commercetools/sdk-client @commercetools/sdk-middleware-auth @comm
 This code creates a **client**, which uses `authMiddleware` and `httpMiddleware`. The `httpMiddleware` reads the `clientId` and `clientSecret` from the `.env` file.
 
 Run the program using the following command:
-```
+```node project.js```
 Getting started with commercetools Typescript SDK
 ```
 If you see the same output as above, we’re ready to start.
