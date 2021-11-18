@@ -1453,19 +1453,23 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@commercetools/platform-sdk@^1.19.0":
+  version "1.19.0"
+  resolved "https://registry.yarnpkg.com/@commercetools/platform-sdk/-/platform-sdk-1.19.0.tgz#e722c9b887feeb00f0df55581a07db15f99ffe4c"
+  integrity sha512-0YGqwuoyYrjtBZkFYUrI7Cc7RgJl9KSfKz+3iIOnwtKbWrk+fXC8gBbmHEpcMIeZDJbXGKM1FCwR7CBPnjCplQ==
+  dependencies:
+    "@commercetools/sdk-client" "^2.1.1"
+    "@commercetools/sdk-middleware-auth" "^6.0.4"
+    "@commercetools/sdk-middleware-http" "^6.0.4"
+    "@commercetools/sdk-middleware-logger" "^2.1.1"
+    querystring "^0.2.1"
+
 "@commercetools/sdk-middleware-auth@^5.1.6":
   version "5.1.7"
   resolved "https://registry.yarnpkg.com/@commercetools/sdk-middleware-auth/-/sdk-middleware-auth-5.1.7.tgz#3035d51597e34ac4e2aad60b72036b361738506f"
   integrity sha512-lSuGWmyVtS1XRnu/R8KaUJDvF/k0OIM2lRmvCL0ih0SdRy6ztaMiEXDTKkvqS1F/mfsNjDVQRhXB6yT4OjYF7w==
   dependencies:
     node-fetch "^2.3.0"
-
-"@commercetools/typescript-sdk@^0.0.22":
-  version "0.0.22"
-  resolved "https://registry.yarnpkg.com/@commercetools/typescript-sdk/-/typescript-sdk-0.0.22.tgz#fc218125023a796c9d670b3003e1e2bb371e9342"
-  integrity sha512-IbA18Da5mLP2MbZxEfLP1GDdO7S2AFjn+Z1kIKXON3y+uofI8YxpCeWx+Trnk4eoIbFADT9advgZt2TKa7Iqdg==
-  dependencies:
-    regenerator-runtime "^0.13.2"
 
 "@commitlint/cli@12.1.4":
   version "12.1.4"
@@ -12351,6 +12355,11 @@ query-string@^6.1.0:
     split-on-first "^1.0.0"
     strict-uri-encode "^2.0.0"
 
+querystring@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.1.tgz#40d77615bb09d16902a85c3e38aa8b5ed761c2dd"
+  integrity sha512-wkvS7mL/JMugcup3/rMitHmd9ecIGd2lhFhK9N3UUQ450h66d1r3Y9nvXzQAW1Lq+wyx61k/1pfKS5KuKiyEbg==
+
 quick-format-unescaped@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/quick-format-unescaped/-/quick-format-unescaped-4.0.1.tgz#437a5ea1a0b61deb7605f8ab6a8fd3858dbeb701"
@@ -12703,7 +12712,7 @@ regenerator-runtime@^0.11.0:
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
   integrity sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
 
-regenerator-runtime@^0.13.2, regenerator-runtime@^0.13.4:
+regenerator-runtime@^0.13.4:
   version "0.13.7"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.7.tgz#cac2dacc8a1ea675feaabaeb8ae833898ae46f55"
   integrity sha512-a54FxoJDIr27pgf7IgeQGxmqUNYrcV338lf/6gH456HZ/PhX+5BcwHXG9ajESmwe6WRO0tAzRUrRmNONWgkrew==
