@@ -131,7 +131,8 @@ This code creates a **client**, which uses `authMiddleware` and `httpMiddleware`
 
 Run the program using the following command:
 ```node project.js```
-Getting started with commercetools Typescript SDK
+You should see the following message in your output:
+```Getting started with commercetools Typescript SDK
 ```
 If you have the same output as above, then you have set up everything correctly.
 
