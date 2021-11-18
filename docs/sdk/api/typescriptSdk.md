@@ -133,7 +133,7 @@ Run the program using the following command:
 ```node project.js```
 Getting started with commercetools Typescript SDK
 ```
-If you see the same output as above, we’re ready to start.
+If you have the same output as above, then you have set up everything correctly.
 
 ### Get commercetools project settings with the commercetools API
 Add the following code to the end of your `project.js` file:
