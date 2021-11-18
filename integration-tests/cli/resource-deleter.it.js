@@ -17,6 +17,26 @@ const projectKey =
     ? 'resource-deleter-int-test'
     : process.env.npm_config_projectkey
 
+const resourcesOrder = [
+  'categories',
+  'channels',
+  'customerGroups',
+  'customers',
+  'customObjects',
+  'inventory',
+  'payments',
+  'productDiscounts',
+  'productTypes',
+  'reviews',
+  'taxCategories',
+  'types',
+  'zones',
+  'carts',
+  'products',
+  'shippingMethods',
+]
+const resourcesOrderReversed = Object.assign([], resourcesOrder).reverse()
+
 describe('Resource Deleter', () => {
   let apiConfig
   let resourceDeleter
@@ -53,16 +73,16 @@ describe('Resource Deleter', () => {
     }
 
     // create resources on API
-    await Promise.each(Object.keys(resources), (name) => {
-      return createData(apiConfig, name, resources[name])
-    })
+    for (const name of resourcesOrder) {
+      await createData(apiConfig, name, resources[name]);
+    }
   }, 30000)
 
   // clear resources on API
   afterAll(async () => {
-    await Promise.each(Object.keys(resources), (name) => {
-      clearData(apiConfig, name)
-    })
+    for (const name of resourcesOrderReversed) {
+      await clearData(apiConfig, name);
+    }
   }, 45000)
 
   describe('CLI basic functionality', () => {
@@ -79,7 +99,7 @@ describe('Resource Deleter', () => {
     })
   })
 
-  describe.each(Object.keys(resources).reverse())(
+  describe.each(resourcesOrderReversed)(
     'should delete resource',
     (resource) => {
       beforeEach(() => {
