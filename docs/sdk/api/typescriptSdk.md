@@ -135,7 +135,7 @@ Getting started with commercetools Typescript SDK
 ```
 If you have the same output as above, then you have set up everything correctly.
 
-### Get commercetools project settings with the commercetools API
+### Retrieve your commercetools project settings with the TypeScript SDK
 Add the following code to the end of your `project.js` file:
 ```js
 (async () => {
