@@ -122,7 +122,7 @@ Getting started with commercetools Typescript SDK
 If you see the same output as above, we’re ready to start.
 
 ### Get commercetools project settings with the commercetools API
-In this guide we’ll get project settings information. Re-open `project.js` and add the following code:
+Add the following code to the end of your `project.js` file:
 ```js
 (async () => {
     try {
