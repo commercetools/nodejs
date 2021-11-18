@@ -71,7 +71,10 @@ CTP_API_URL=your_api_url
 CTP_SCOPES=your_scopes
 `
 
-Create a new file called `project.js` in this directory and add the following code:
+
+### Setting up example code 
+
+Create a new file called `project.js` in the project directory and add the following code:
 ```js
   const { createClient } = require('@commercetools/sdk-client')
   const { createAuthMiddlewareForClientCredentialsFlow } = require('@commercetools/sdk-middleware-auth')
