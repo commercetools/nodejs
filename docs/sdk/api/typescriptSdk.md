@@ -44,7 +44,6 @@ In this guide we’ll be calling a method of commercetools API using TypeScript 
 5. Enter the following command to open this folder in your code editor ```code .````
 
 ```
-```
 
 After you’re done, you’ll have a new package.json file in your directory.
 
