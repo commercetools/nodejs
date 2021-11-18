@@ -46,7 +46,18 @@ $ npm init -y
 After you’re done, you’ll have a new package.json file in your directory.
 
 #### Getting a client credentials to use the commercetools API
-Create a new file called `.env` in this directory. Select **Environment Variables (.env)** in the dropdown on the API client details page mentioned in the previous step and copy client credentails to `.env` file. Should have values these variables `CTP_PROJECT_KEY`, `CTP_CLIENT_SECRET`, `CTP_CLIENT_ID`, `CTP_AUTH_URL`, `CTP_API_URL` and `CTP_SCOPES`.
+If you downloaded the **Environment Variables (.env)** when creating your API Client, then you should save it as `.env` in the project directory.
+
+If you did not download the Environment Variables file, then create a new file called `.env` in the project directory. Open it in your code editor and insert the following, replacing the values with those from your API client.
+
+`
+CTP_PROJECT_KEY=your_project_key
+CTP_CLIENT_SECRET=your_client_secret
+CTP_CLIENT_ID=your_client_id
+CTP_AUTH_URL=your_auth_url
+CTP_API_URL=your_api_url
+CTP_SCOPES=your_scopes
+`
 
 Create a new file called `project.js` in this directory and add the following code:
 ```js
