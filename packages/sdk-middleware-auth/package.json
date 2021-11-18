@@ -36,7 +36,7 @@
     "node-fetch": "^2.3.0"
   },
   "devDependencies": {
-    "abort-controller": "^3.0.0",
+    "abort-controller": "3.0.0",
     "nock": "12.0.3"
   }
 }
