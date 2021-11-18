@@ -139,7 +139,7 @@ Add the following code to the end of your `project.js` file:
 })();
 ```
 The client will **execute** and retrieve the project information from `apiRoot` using the **TypeScript SDK**.
-Run the program. The output should look like the following if the request is successful:
+Run the program and your output should look like the following if the request is successful:
 ```
 $ node project.js
 Getting started with commercetools Typescript SDK
