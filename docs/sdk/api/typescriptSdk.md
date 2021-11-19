@@ -132,6 +132,7 @@ Run the program using the following command:
 ```node project.js```
 
 You should see the following message in your output:
+
 ```Getting started with commercetools Typescript SDK```
 
 
