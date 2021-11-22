@@ -33,7 +33,7 @@
     "@commercetools/sdk-middleware-user-agent": "^2.1.5",
     "@commercetools/state-importer": "^3.0.39",
     "@commercetools/sync-actions": "^4.9.6",
-    "@commercetools/typescript-sdk": "^0.0.22",
+    "@commercetools/platform-sdk": "^1.19.0",
     "bluebird": "^3.5.3",
     "common-tags": "^1.8.0",
     "csvtojson": "^2.0.8",

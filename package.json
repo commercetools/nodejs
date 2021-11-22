@@ -7,7 +7,6 @@
   },
   "scripts": {
     "postinstall": "check-node-version --package --print && cross-env NODE_ENV=development yarn build",
-    "check-updates": "./scripts/check-updates",
     "clean": "rm -rf coverage; lerna exec -- rimraf lib dist",
     "commit": "git-cz",
     "build": "lerna run build --no-private",
@@ -58,8 +57,8 @@
     "@babel/preset-typescript": "7.16.0",
     "@changesets/changelog-github": "0.4.1",
     "@changesets/cli": "2.18.0",
-    "@commitlint/cli": "9.1.2",
-    "@commitlint/config-conventional": "9.1.2",
+    "@commitlint/cli": "12.1.4",
+    "@commitlint/config-conventional": "12.1.4",
     "@rollup/plugin-alias": "3.1.8",
     "@types/jest": "26.0.24",
     "@types/node": "10.17.60",
@@ -101,9 +100,8 @@
     "jest-runner-eslint": "0.11.1",
     "jest-runner-flowtype": "0.0.7",
     "jest-silent-reporter": "0.5.0",
-    "lerna": "3.22.1",
+    "lerna": "4.0.0",
     "lint-staged": "10.5.4",
-    "npm-check-updates": "7.1.1",
     "prettier": "2.4.1",
     "resolve": "1.20.0",
     "rimraf": "3.0.2",
@@ -120,7 +118,7 @@
     "streamtest": "2.0.0",
     "ts-jest": "26.5.6",
     "tsconfig-replace-paths": "0.0.11",
-    "typescript": "3.9.10"
+    "typescript": "4.5.2"
   },
   "resolutions": {
     "graceful-fs": "4.2.8",
@@ -129,11 +127,11 @@
     "lodash": "4.17.21",
     "handlebars": "4.7.7",
     "growl": "1.10.5",
-    "dot-prop": "5.3.0",
+    "dot-prop": "6.0.1",
     "merge": "2.1.1",
     "npm-user-validate": "1.0.1",
-    "serialize-javascript": "3.1.0",
-    "diff": "3.5.0",
+    "serialize-javascript": "6.0.0",
+    "diff": "5.0.0",
     "object-path": "0.11.8"
   }
 }
