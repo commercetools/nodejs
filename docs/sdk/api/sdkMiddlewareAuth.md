@@ -30,6 +30,8 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 3.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
 4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
 5.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
+6.  `timeout` _(Number)_: An optional number value (in milliseconds) which specifies when a request should timeout if authentication request fails to complete.
+7.  `getAbortController` _(Function)_: An optional abortController class instance that should signal the http-client to abandon the current request instance.
 
 #### Usage example
 
@@ -50,6 +52,8 @@ const client = createClient({
 
       // Optional if not globally available
       fetch,
+      timeout: 10000, // timeout the request if it doesn't complete in 10000ms or 10 seconds
+      getAbortController: () => new AbortController(),
     }),
   ],
 })
@@ -69,6 +73,8 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 
 4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) to assign to the OAuth token. _No default scope is sent_
 5.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
+6.  `timeout` _(Number)_: An optional number value (in milliseconds) which specifies when a request should timeout if authentication request fails to complete.
+7.  `getAbortController` _(Function)_: An optional abortController class instance that should signal the http-client to abandon the current request instance.
 
 #### Usage example
 
@@ -93,6 +99,8 @@ const client = createClient({
 
       // Optional if not globally available
       fetch,
+      timeout: 10000, // timeout the request if it doesn't complete in 10000ms or 10 seconds
+      getAbortController: () => new AbortController(),
     }),
   ],
 })
@@ -109,6 +117,8 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 3.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`, `anonymousId`)
 4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
 5.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
+6.  `timeout` _(Number)_: An optional number value (in milliseconds) which specifies when a request should timeout if authentication request fails to complete.
+7.  `getAbortController` _(Function)_: An optional abortController class instance that should signal the http-client to abandon the current request instance.
 
 #### Usage example
 
@@ -130,6 +140,8 @@ const client = createClient({
 
       // Optional if not globally available
       fetch,
+      timeout: 10000, // timeout the request if it doesn't complete in 10000ms or 10 seconds
+      getAbortController: () => new AbortController(),
     }),
   ],
 })
@@ -146,6 +158,8 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 3.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
 4.  `refreshToken` _(String)_: refreshToken from the API to use to fetch new token.
 5.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
+6.  `timeout` _(Number)_: An optional number value (in milliseconds) which specifies when a request should timeout if authentication request fails to complete.
+7.  `getAbortController` _(Function)_: An optional abortController class instance that should signal the http-client to abandon the current request instance.
 
 #### Usage example
 
@@ -166,6 +180,8 @@ const client = createClient({
 
       // Optional if not globally available
       fetch,
+      timeout: 10000, // timeout the request if it doesn't complete in 10000ms or 10 seconds
+      getAbortController: () => new AbortController(),
     }),
   ],
 })
@@ -182,6 +198,10 @@ Creates a [middleware](/sdk/Glossary.md#middleware) that attaches a provided acc
 `options` is an optional _(Object)_, having the following properties:
 
 1.  `force` _(Boolean)_: if set to true, existing Authorization header (if any) in the request will be overridden with the supplied access token (Default: `true`)
+2.  `timeout` _(Number)_: An optional number value (in milliseconds) which specifies when a request should timeout if authentication request fails to complete.
+3.  `getAbortController` _(Function)_: An optional abortController class instance that should signal the http-client to abandon the current request instance.
+
+**Note**: if timeout is specified, then it's mandatory to also specify the getAbortController property.
 
 ```js
 import { createClient } from '@commercetools/sdk-client'
@@ -193,6 +213,8 @@ const client = createClient({
   middlewares: [
     createAuthMiddlewareWithExistingToken(`Bearer ${accessToken}`, {
       force: true,
+      timeout: 10000, // timeout the request if it doesn't complete in 10000ms or 10 seconds
+      getAbortController: () => new AbortController(),
     }),
   ],
 })

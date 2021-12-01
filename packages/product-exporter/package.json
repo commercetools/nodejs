@@ -47,15 +47,15 @@
     "node-fetch": "^2.3.0",
     "pino": "^6.0.0",
     "pretty-error": "^2.1.1",
-    "yargs": "^15.0.1"
+    "yargs": "^16.0.0"
   },
   "resolutions": {
     "y18n": "3.2.2",
-    "hosted-git-info": "2.8.9",
+    "hosted-git-info": "4.0.2",
     "yargs-parser": "13.1.2"
   },
   "devDependencies": {
-    "common-tags": "1.8.0",
+    "common-tags": "1.8.2",
     "streamtest": "2.0.0"
   }
 }

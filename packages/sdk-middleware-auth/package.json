@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/sdk-middleware-auth",
-  "version": "6.1.4",
+  "version": "6.2.0",
   "description": "Middleware for different authentication flows of commercetools platform API, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
@@ -36,6 +36,7 @@
     "node-fetch": "^2.3.0"
   },
   "devDependencies": {
+    "abort-controller": "3.0.0",
     "nock": "12.0.3"
   }
 }

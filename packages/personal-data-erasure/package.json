@@ -4,7 +4,7 @@
     "access": "public"
   },
   "name": "@commercetools/personal-data-erasure",
-  "version": "3.0.23",
+  "version": "3.1.0",
   "description": "Export and delete all data related to a single customer",
   "main": "lib/main.js",
   "bin": {
@@ -45,6 +45,6 @@
     "pino": "^6.0.0",
     "pretty-error": "^2.1.1",
     "prompt-confirm": "^2.0.4",
-    "yargs": "^15.0.0"
+    "yargs": "^16.0.0"
   }
 }

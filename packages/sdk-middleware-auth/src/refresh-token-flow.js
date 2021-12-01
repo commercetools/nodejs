@@ -33,6 +33,7 @@ export default function createAuthMiddlewareForRefreshTokenFlow(
       return
     }
     const params = {
+      ...options,
       request,
       response,
       ...buildRequestForRefreshTokenFlow(options),

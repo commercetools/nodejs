@@ -182,6 +182,7 @@ export type TokenCache = {
 /* Request */
 
 type requestBaseOptions = {
+  request: MiddlewareRequest,
   response: MiddlewareResponse,
   url: string,
   body: string,
@@ -193,9 +194,18 @@ type requestBaseOptions = {
   },
   tokenCache: TokenCache,
   tokenCacheKey?: TokenCacheOptions,
+  timeout?: number,
+  getAbortController?: () => AbortController,
+  retryConfig?: {
+    retryDelay: number,
+    maxRetries: number,
+    backoff: boolean,
+    maxDelay: number,
+  },
 }
 export type executeRequestOptions = requestBaseOptions & {
   fetcher: typeof fetch,
+  tokenCache: TokenCache
 }
 
 export type AuthMiddlewareBaseOptions = requestBaseOptions & {
@@ -241,10 +251,14 @@ export type HttpMiddlewareOptions = {
     retryDelay?: number,
     backoff?: boolean,
     maxDelay?: number,
+    retryOnAbort: boolean
   },
   fetch?: typeof fetch,
+  /**
+   * @deprecated use getAbortController instead
+   */
   abortController?: AbortController, // deprecated
-  getAbortController: () => AbortController
+  getAbortController: () => AbortController,
 }
 export type QueueMiddlewareOptions = {
   concurrency: number,

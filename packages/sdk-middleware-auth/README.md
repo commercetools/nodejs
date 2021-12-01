@@ -4,7 +4,7 @@ Auth middlewares collection for usage with `@commercetools/sdk-client`
 
 https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html
 
-## Install
+### Install
 
 ```bash
 npm install --save @commercetools/sdk-middleware-auth

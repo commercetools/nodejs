@@ -32,7 +32,7 @@ aliases:
 executors:
   node_10:
     docker:
-      - image: circleci/node:10.22.0
+      - image: circleci/node:10.24.1
     working_directory: *working_directory
   node_12:
     docker:

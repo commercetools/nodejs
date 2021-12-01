@@ -33,6 +33,7 @@ export default function createAuthMiddlewareForPasswordFlow(
       return
     }
     const params = {
+      ...options,
       request,
       response,
       ...buildRequestForPasswordFlow(options),

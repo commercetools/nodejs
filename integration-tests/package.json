@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@commercetools/integration-tests",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "dependencies": {
     "@commercetools/api-request-builder": "^5.6.3",
     "@commercetools/category-exporter": "^3.0.22",
@@ -18,7 +18,7 @@
     "@commercetools/get-credentials": "^3.0.17",
     "@commercetools/http-user-agent": "2.x",
     "@commercetools/inventories-exporter": "^3.0.23",
-    "@commercetools/personal-data-erasure": "^3.0.23",
+    "@commercetools/personal-data-erasure": "^3.1.0",
     "@commercetools/price-exporter": "^3.0.23",
     "@commercetools/product-exporter": "^3.1.12",
     "@commercetools/product-json-to-csv": "^5.0.16",
@@ -33,7 +33,7 @@
     "@commercetools/sdk-middleware-user-agent": "^2.1.5",
     "@commercetools/state-importer": "^3.0.39",
     "@commercetools/sync-actions": "^4.9.6",
-    "@commercetools/typescript-sdk": "^0.0.16",
+    "@commercetools/platform-sdk": "^1.19.0",
     "bluebird": "^3.5.3",
     "common-tags": "^1.8.0",
     "csvtojson": "^2.0.8",
