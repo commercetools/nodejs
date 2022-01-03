@@ -1,49 +1,156 @@
-# `typescript`
+# TypeScript SDK Client v2
 
 We provide a packages written in typescript for using our API
 
-#### Note:
+The **@commercetools/sdk-client-v2** is the TypeScript package that facilitates HTTP [requests](https://commercetools.github.io/nodejs/sdk/Glossary.html#clientrequest) to the Platform, ML or History API by using a predefined set of middlewares.
 
-Please checkout the new [TypeScript Client](#typescript-sdk-client-v2) that is more updated and actively maintained and also consider migrating.
+Unlike the Node.js sdk-client, the TypeScript client is a little different in its usage however, they are both very similar in every other aspect and it's also backward compatible with the Nodejs sdk-client.
+
+## Issues and Contribution
+
+Please feel free to open an [issue](https://github.com/commercetools/commercetools-sdk-typescript/issues) or even a [PR](https://github.com/commercetools/commercetools-sdk-typescript/pulls) in this repository if you come across any issue while using this SDK.
 
 ![example usage](typescript_tutorial.gif)
 
 The source code for these packages are located in the [typescript](https://github.com/commercetools/commercetools-sdk-typescript/) repository.
 
-## Install
+## Usage examples
 
-#### Node.js
+### Browser environment
+
+```html
+<script src="https://unpkg.com/@commercetools/sdk-client-v2@0.2.0/dist/commercetools-sdk-client-v2.umd.js"></script>
+<script src="https://unpkg.com/@commercetools/platform-sdk@1.20.0/dist/commercetools-platform-sdk.umd.js"></script>
+...
+```
+
+```html
+<script>
+  // global: @commercetools/sdk-client-v2
+  // global: @commercetools/platform-sdk
+  ;(function () {
+    //  We can now access the sdk-client-v2 and platform-sdk object as:
+    //  const { ClientBuilder } = this['@commercetools/sdk-client-v2']
+    //  const { createApiBuilderFromCtpClient } = this['@commercetools/platform-sdk']
+    //  or
+    //  const { ClientBuilder } = window['@commercetools/sdk-client-v2']
+    //  const { createApiBuilderFromCtpClient } = window['@commercetools/platform-sdk']
+    //  ...
+  })()
+</script>
+```
+
+See full usage example [here](https://github.com/commercetools/commercetools-sdk-typescript/blob/master/examples/browser/browser.html)
+
+### Node environment
 
 ```bash
 npm install --save @commercetools/platform-sdk
 npm install --save @commercetools/importapi-sdk
 npm install --save @commercetools/ml-sdk
+npm install --save @commercetools/sdk-client-v2
 ```
 
-#### Browser
+```ts
+const {
+  ClientBuilder,
+  createAuthForClientCredentialsFlow,
+  createHttpClient,
+} = require('@commercetools/sdk-client-v2')
+const { createApiBuilderFromCtpClient } = require('@commercetools/platform-sdk')
+const fetch = require('node-fetch')
 
-```html
-<script src="https://unpkg.com/@commercetools/platform-sdk/dist/platform-sdk.umd.js"></script>
-<script>
-  // global: TypescriptSdk
-</script>
-```
+const projectKey = 'mc-project-key'
+const authMiddlewareOptions = {
+  host: 'https://auth.europe-west1.gcp.commercetools.com',
+  projectKey,
+  credentials: {
+    clientId: 'mc-client-id',
+    clientSecret: 'mc-client-secrets',
+  },
+  oauthUri: '/oauth/token', // - optional custom oauthUri
+  scopes: [`manage_project:${projectKey}`],
+  fetch
+}
 
-#### Usage example
+const httpMiddlewareOptions = {
+  host: 'https://api.europe-west1.gcp.commercetools.com',
+  fetch
+}
 
-```typescript
-import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
-import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
-import { createClient } from '@commercetools/sdk-client'
+const client = new ClientBuilder()
+  .withProjectKey(projectKey)
+  .withMiddleware(createAuthForClientCredentialsFlow(authMiddlewareOptions))
+  .withMiddleware(createHttpClient(httpMiddlewareOptions))
+  .withUserAgentMiddleware()
+  .build()
+
+// or
+const client = new ClientBuilder()
+  .withProjectKey(projectKey)
+  .withClientCredentialsFlow(authMiddlewareOptions)
+  .withHttpMiddleware(httpMiddlewareOptions)
+  .withUserAgentMiddleware()
+  .build()
+
+const apiRoot = createApiBuilderFromCtpClient(client)
+
+// calling the platform functions
+// get project details
+apiRoot
+  .withProjectKey({
+    projectKey,
+  })
+  .get()
+  .execute()
+  .then((x) => {
+    /*...*/
+  })
+
+// create a productType
+apiRoot
+  .withProjectKey({ projectKey })
+  .productTypes()
+  .post({
+    body: { name: 'product-type-name', description: 'some description' },
+  })
+  .execute()
+  .then((x) => {
+    /*...*/
+  })
+
+// create a product
+apiRoot
+  .withProjectKey({ projectKey })
+  .products()
+  .post({
+    body: {
+      name: { en: 'our-great-product-name' },
+      productType: {
+        typeId: 'product-type',
+        id: 'some-product-type-id',
+      },
+      slug: { en: 'some-slug' },
+    },
+  })
+  .execute()
+  .then((x) => {
+    /*...*/
+  })
+
+// -----------------------------------------------------------------------
+// The sdk-client-v2 also have support for the old syntax
 import {
-  createApiBuilderFromCtpClient,
-  ApiRoot,
-} from '@commercetools/platform-sdk'
+  createClient,
+  createHttpClient,
+  createAuthForClientCredentialsFlow,
+} from '@commercetools/sdk-client-v2'
+import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk'
 import fetch from 'node-fetch'
 
 const projectKey = 'some_project_key'
 
-const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
+const authMiddleware = createAuthForClientCredentialsFlow({
   host: 'https://auth.europe-west1.gcp.commercetools.com',
   projectKey,
   credentials: {
@@ -53,7 +160,7 @@ const authMiddleware = createAuthMiddlewareForClientCredentialsFlow({
   fetch,
 })
 
-const httpMiddleware = createHttpMiddleware({
+const httpMiddleware = createHttpClient({
   host: 'https://api.europe-west1.gcp.commercetools.com',
   fetch,
 })
@@ -62,7 +169,7 @@ const ctpClient = createClient({
   middlewares: [authMiddleware, httpMiddleware],
 })
 
-const apiRoot: ApiRoot = createApiBuilderFromCtpClient(ctpClient)
+const apiRoot = createApiBuilderFromCtpClient(ctpClient)
 
 apiRoot
   .withProjectKey({
@@ -104,29 +211,9 @@ apiRoot
   })
 ```
 
-# TypeScript SDK Client v2
+See an actual usage example [here](https://github.com/commercetools/commercetools-sdk-typescript/blob/master/examples/node/node.js)
 
-The **@commercetools/sdk-client-v2** is the TypeScript package that facilitates HTTP [requests](https://commercetools.github.io/nodejs/sdk/Glossary.html#clientrequest) to the Platform, ML or History API by using a predefined set of middlewares.
-
-Unlike the Node.js client, the TypeScript client is a little different in its usage however, they are both very similar in every other way and backwards compatible with the Nodejs client.
-
-### Install
-
-```bash
-npm install --save @commercetools/sdk-client-v2
-or
-yarn add @commercetools/sdk-client-v2
-```
-
-<!-- ### Browser
-```js
-<script src="https://unpkg.com/@commercetools/platform-sdk/dist/platform-sdk.umd.js"></script>
-<script>
-  // global: TypescriptSdk
-</script>
-``` -->
-
-### Usasge example
+# Comprehensive usasge example
 
 Example on how to build a client using only the `defaultClient` class method. The default client enables client creation using very minimal configuratioin.
 
@@ -135,7 +222,7 @@ Example on how to build a client using only the `defaultClient` class method. Th
 import { ClientBuilder, Client } from '@commercetools/sdk-client-v2'
 
 const projectKey = 'demo-key'
-const oauthUri = 'https://auth.europe-west1.gcp.commercetools.com'
+const authUri = 'https://auth.europe-west1.gcp.commercetools.com'
 const baseUri = 'https://api.europe-west1.gcp.commercetools.com'
 const credentials = {
   clientId: 'clientID12345',
@@ -143,7 +230,7 @@ const credentials = {
 }
 
 const client: Client = new ClientBuilder()
-  .defaultClient(baseUri, credentials, oauthUri, projectKey)
+  .defaultClient(baseUri, credentials, authUri, projectKey)
   .build()
 ```
 
@@ -153,14 +240,14 @@ Example
 
 ```typescript
 const client: Client = new ClientBuilder()
-  .defaultClient(baseUri, credentials, oauthUri, projectKey)
+  .defaultClient(baseUri, credentials, authUri, projectKey)
   .withUserAgentMiddleware()
   .build()
 
 or
 
 const client: Client = new ClientBuilder()
-  .defaultClient(baseUri, credentials, oauthUri, projectKey)
+  .defaultClient(baseUri, credentials, authUri, projectKey)
   .withUserAgentMiddleware()
   .withLoggerMiddleware()
   .build()
@@ -178,6 +265,7 @@ import {
   AuthMiddlewareOptions,
   HttpMiddlewareOptions,
 } from '@commercetools/sdk-client-v2'
+
 // create the authMiddlewareOptions object
 const authMiddlewareOptions: AuthMiddlewareOptions = {
   host: 'https://auth.europe-west1.gcp.commercetools.com',
@@ -186,7 +274,7 @@ const authMiddlewareOptions: AuthMiddlewareOptions = {
     clientId: 'clientID12345',
     clientSecret: 'clientSecret12345',
   },
-  oauthUri: 'adminAuthUrl',
+  authUri: 'adminAuthUrl',
   scopes: ['manage_project:demo-key'],
   fetch,
 }
@@ -313,7 +401,7 @@ const options: AuthMiddlewareOptions = {
     clientId: 'clientID12345',
     clientSecret: 'clientSecret12345',
   },
-  oauthUri: 'admin-authUrl',
+  oauthUri: '/oauth/token', // - optional custom oauthUri
   scopes: ['manage_project:demo-key'],
   fetch: fetch
 }
@@ -660,7 +748,7 @@ const authMiddlewareOptions: AuthMiddlewareOptions = {
     clientId: 'clientID12345',
     clientSecret: 'clientSecret12345',
   },
-  oauthUri: 'adminAuthUrl',
+  oauthUri: '/oauth/token', // - optional custom oauthUri
   scopes: ['manage_project:demo-key'],
   fetch,
 }
@@ -679,7 +767,7 @@ const Client: client = new clientBuilder()
 
 `-`
 
-#### buid()
+#### build()
 
 To build the client after calling the class methods of choice that adds the middleware, we invoke the `build()` as the last method on the `new ClientBuilder()` class instance.
 
