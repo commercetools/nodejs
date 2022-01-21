@@ -35,9 +35,9 @@ function calcDelayDuration(
   if (backoff)
     return retryCount !== 0 // do not increase if it's the first retry
       ? Math.min(
-          Math.round((Math.random() + 1) * retryDelay * 2 ** retryCount),
-          maxDelay
-        )
+        Math.round((Math.random() + 1) * retryDelay * 2 ** retryCount),
+        maxDelay
+      )
       : retryDelay
   return retryDelay
 }
@@ -100,17 +100,26 @@ export default function createHttpMiddleware({
   ) => {
     let abortController: any
     const url = host.replace(/\/$/, '') + request.uri
+
+    // if it's allowed, the client will detect the correct content-type, used will sending files, ex: multipart/form-data
+    const allowEmptyContentType =
+      request.headers['x-allow-empty-content-type']
     const body =
-      typeof request.body === 'string' || Buffer.isBuffer(request.body)
+      typeof request.body === 'string' ||
+        Buffer.isBuffer(request.body) ||
+        allowEmptyContentType
         ? request.body
         : // NOTE: `stringify` of `null` gives the String('null')
-          JSON.stringify(request.body || undefined)
+        JSON.stringify(request.body || undefined)
 
     const requestHeader: HttpHeaders = { ...request.headers }
-    if (!Object.prototype.hasOwnProperty.call(requestHeader, 'Content-Type')) {
+    if (
+      !allowEmptyContentType &&
+      !Object.prototype.hasOwnProperty.call(requestHeader, 'Content-Type')
+    ) {
       requestHeader['Content-Type'] = 'application/json'
     }
-    if (body) {
+    if (body && !allowEmptyContentType) {
       requestHeader['Content-Length'] = Buffer.byteLength(body).toString()
     }
     const fetchOptions: RequestOptions = {
