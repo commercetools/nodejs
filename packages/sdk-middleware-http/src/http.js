@@ -100,13 +100,10 @@ export default function createHttpMiddleware({
   ) => {
     let abortController: any
     const url = host.replace(/\/$/, '') + request.uri
-
-    // if it's true, the client will detect the correct content-type, will be used in sending files (ex: multipart/form-data)
-    const hasNullContentType = request.headers["Content-Type"] === null
     const body =
       typeof request.body === 'string' ||
         Buffer.isBuffer(request.body) ||
-        hasNullContentType
+        (request.body instanceof FormData)
         ? request.body
         : // NOTE: `stringify` of `null` gives the String('null')
         JSON.stringify(request.body || undefined)
@@ -115,10 +112,10 @@ export default function createHttpMiddleware({
     if (!Object.prototype.hasOwnProperty.call(requestHeader, 'Content-Type')) {
       requestHeader['Content-Type'] = 'application/json'
     }
-    if(hasNullContentType) {
+    if(request.headers["Content-Type"] === null) {
       delete requestHeader['Content-Type']
     }
-    else if (body) {
+    if (body && !(body instanceof FormData)) {
       requestHeader['Content-Length'] = Buffer.byteLength(body).toString()
     }
     const fetchOptions: RequestOptions = {
