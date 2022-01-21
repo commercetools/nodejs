@@ -542,7 +542,7 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
-  test('should accept a FormData body', () =>
+  test('should accept a FormData body with null content type', () =>
     new Promise((resolve, reject) => {
       const formData = new FormData()
       formData.append('file', 'file content', 'file123')
@@ -551,7 +551,7 @@ describe('Http', () => {
         method: 'POST',
         body: formData,
         headers: {
-          'x-allow-empty-content-type': 'true',
+          'Content-Type': null,
         },
       })
       const response = { resolve, reject }
