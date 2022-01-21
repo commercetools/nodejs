@@ -94,53 +94,40 @@ export default function createHttpMiddleware({
     fetchFunction = fetch
   }
 
-  return (next: Next): Next => (
-    request: MiddlewareRequest,
-    response: MiddlewareResponse
-  ) => {
-    let abortController: any
-    const url = host.replace(/\/$/, '') + request.uri
-    const body =
-      typeof request.body === 'string' || Buffer.isBuffer(request.body)
-        ? request.body
-        : // NOTE: `stringify` of `null` gives the String('null')
-          JSON.stringify(request.body || undefined)
+  return (next: Next): Next =>
+    (request: MiddlewareRequest, response: MiddlewareResponse) => {
+      let abortController: any
+      const url = host.replace(/\/$/, '') + request.uri
+      // if it's allowed, the client will detect the correct content-type, used will sending files, ex: multipart/form-data
+      const allowEmptyContentType =
+        request.headers['x-allow-empty-content-type']
+      const body =
+        typeof request.body === 'string' ||
+        Buffer.isBuffer(request.body) ||
+        allowEmptyContentType
+          ? request.body
+          : // NOTE: `stringify` of `null` gives the String('null')
+            JSON.stringify(request.body || undefined)
 
-    const requestHeader: HttpHeaders = { ...request.headers }
-    if (!Object.prototype.hasOwnProperty.call(requestHeader, 'Content-Type')) {
-      requestHeader['Content-Type'] = 'application/json'
-    }
-    if (body) {
-      requestHeader['Content-Length'] = Buffer.byteLength(body).toString()
-    }
-    const fetchOptions: RequestOptions = {
-      method: request.method,
-      headers: requestHeader,
-    }
-    if (credentialsMode) {
-      fetchOptions.credentials = credentialsMode
-    }
-
-    if (!retryOnAbort) {
-      if (timeout || getAbortController || _abortController)
-        // eslint-disable-next-line
-        abortController =
-          (getAbortController ? getAbortController() : null) ||
-          _abortController ||
-          new AbortController()
-
-      if (abortController) {
-        fetchOptions.signal = abortController.signal
+      const requestHeader: HttpHeaders = { ...request.headers }
+      if (
+        !allowEmptyContentType &&
+        !Object.prototype.hasOwnProperty.call(requestHeader, 'Content-Type')
+      ) {
+        requestHeader['Content-Type'] = 'application/json'
       }
-    }
+      if (body && !allowEmptyContentType) {
+        requestHeader['Content-Length'] = Buffer.byteLength(body).toString()
+      }
+      const fetchOptions: RequestOptions = {
+        method: request.method,
+        headers: requestHeader,
+      }
+      if (credentialsMode) {
+        fetchOptions.credentials = credentialsMode
+      }
 
-    if (body) {
-      fetchOptions.body = body
-    }
-    let retryCount = 0
-    // wrap in a fn so we can retry if error occur
-    function executeFetch() {
-      if (retryOnAbort) {
+      if (!retryOnAbort) {
         if (timeout || getAbortController || _abortController)
           // eslint-disable-next-line
           abortController =
@@ -152,142 +139,164 @@ export default function createHttpMiddleware({
           fetchOptions.signal = abortController.signal
         }
       }
-      // Kick off timer for abortController directly before fetch.
-      let timer
-      if (timeout)
-        timer = setTimeout(() => {
-          abortController.abort()
-        }, timeout)
-      fetchFunction(url, fetchOptions)
-        .then(
-          (res: Response) => {
-            if (res.ok) {
-              if (fetchOptions.method === 'HEAD') {
-                next(request, {
-                  ...response,
-                  statusCode: res.status,
+
+      if (body) {
+        fetchOptions.body = body
+      }
+      let retryCount = 0
+      // wrap in a fn so we can retry if error occur
+      function executeFetch() {
+        if (retryOnAbort) {
+          if (timeout || getAbortController || _abortController)
+            // eslint-disable-next-line
+            abortController =
+              (getAbortController ? getAbortController() : null) ||
+              _abortController ||
+              new AbortController()
+
+          if (abortController) {
+            fetchOptions.signal = abortController.signal
+          }
+        }
+        // Kick off timer for abortController directly before fetch.
+        let timer
+        if (timeout)
+          timer = setTimeout(() => {
+            abortController.abort()
+          }, timeout)
+        fetchFunction(url, fetchOptions)
+          .then(
+            (res: Response) => {
+              if (res.ok) {
+                if (fetchOptions.method === 'HEAD') {
+                  next(request, {
+                    ...response,
+                    statusCode: res.status,
+                  })
+                  return
+                }
+
+                res.text().then((result: Object) => {
+                  // Try to parse the response as JSON
+                  let parsed
+                  try {
+                    parsed = result.length > 0 ? JSON.parse(result) : {}
+                  } catch (err) {
+                    if (enableRetry && retryCount < maxRetries) {
+                      setTimeout(
+                        executeFetch,
+                        calcDelayDuration(
+                          retryCount,
+                          retryDelay,
+                          maxRetries,
+                          backoff,
+                          maxDelay
+                        )
+                      )
+                      retryCount += 1
+                      return
+                    }
+                    parsed = result
+                  }
+
+                  const parsedResponse: Object = {
+                    ...response,
+                    body: parsed,
+                    statusCode: res.status,
+                  }
+
+                  if (includeResponseHeaders)
+                    parsedResponse.headers = parseHeaders(res.headers)
+
+                  if (includeOriginalRequest) {
+                    parsedResponse.request = {
+                      ...fetchOptions,
+                    }
+                    maskAuthData(
+                      parsedResponse.request,
+                      maskSensitiveHeaderData
+                    )
+                  }
+                  next(request, parsedResponse)
                 })
                 return
               }
+              if (res.status === 503 && enableRetry)
+                if (retryCount < maxRetries) {
+                  setTimeout(
+                    executeFetch,
+                    calcDelayDuration(
+                      retryCount,
+                      retryDelay,
+                      maxRetries,
+                      backoff,
+                      maxDelay
+                    )
+                  )
+                  retryCount += 1
+                  return
+                }
 
-              res.text().then((result: Object) => {
-                // Try to parse the response as JSON
+              // Server responded with an error. Try to parse it as JSON, then
+              // return a proper error type with all necessary meta information.
+              res.text().then((text: any) => {
+                // Try to parse the error response as JSON
                 let parsed
                 try {
-                  parsed = result.length > 0 ? JSON.parse(result) : {}
-                } catch (err) {
-                  if (enableRetry && retryCount < maxRetries) {
-                    setTimeout(
-                      executeFetch,
-                      calcDelayDuration(
-                        retryCount,
-                        retryDelay,
-                        maxRetries,
-                        backoff,
-                        maxDelay
-                      )
-                    )
-                    retryCount += 1
-                    return
-                  }
-                  parsed = result
+                  parsed = JSON.parse(text)
+                } catch (error) {
+                  parsed = text
                 }
 
-                const parsedResponse: Object = {
-                  ...response,
-                  body: parsed,
+                const error: HttpErrorType = createError({
                   statusCode: res.status,
-                }
-
-                if (includeResponseHeaders)
-                  parsedResponse.headers = parseHeaders(res.headers)
-
-                if (includeOriginalRequest) {
-                  parsedResponse.request = {
-                    ...fetchOptions,
-                  }
-                  maskAuthData(parsedResponse.request, maskSensitiveHeaderData)
+                  originalRequest: request,
+                  retryCount,
+                  headers: parseHeaders(res.headers),
+                  ...(typeof parsed === 'object'
+                    ? { message: parsed.message, body: parsed }
+                    : { message: parsed, body: parsed }),
+                })
+                maskAuthData(error.originalRequest, maskSensitiveHeaderData)
+                // Let the final resolver to reject the promise
+                const parsedResponse = {
+                  ...response,
+                  error,
+                  statusCode: res.status,
                 }
                 next(request, parsedResponse)
               })
-              return
-            }
-            if (res.status === 503 && enableRetry)
-              if (retryCount < maxRetries) {
-                setTimeout(
-                  executeFetch,
-                  calcDelayDuration(
-                    retryCount,
-                    retryDelay,
-                    maxRetries,
-                    backoff,
-                    maxDelay
+            },
+            // We know that this is a "network" error thrown by the `fetch` library
+            (e: Error) => {
+              if (enableRetry)
+                if (retryCount < maxRetries) {
+                  setTimeout(
+                    executeFetch,
+                    calcDelayDuration(
+                      retryCount,
+                      retryDelay,
+                      maxRetries,
+                      backoff,
+                      maxDelay
+                    )
                   )
-                )
-                retryCount += 1
-                return
-              }
+                  retryCount += 1
+                  return
+                }
 
-            // Server responded with an error. Try to parse it as JSON, then
-            // return a proper error type with all necessary meta information.
-            res.text().then((text: any) => {
-              // Try to parse the error response as JSON
-              let parsed
-              try {
-                parsed = JSON.parse(text)
-              } catch (error) {
-                parsed = text
-              }
-
-              const error: HttpErrorType = createError({
-                statusCode: res.status,
+              const error = new NetworkError(e.message, {
                 originalRequest: request,
                 retryCount,
-                headers: parseHeaders(res.headers),
-                ...(typeof parsed === 'object'
-                  ? { message: parsed.message, body: parsed }
-                  : { message: parsed, body: parsed }),
               })
               maskAuthData(error.originalRequest, maskSensitiveHeaderData)
-              // Let the final resolver to reject the promise
-              const parsedResponse = {
-                ...response,
-                error,
-                statusCode: res.status,
-              }
-              next(request, parsedResponse)
-            })
-          },
-          // We know that this is a "network" error thrown by the `fetch` library
-          (e: Error) => {
-            if (enableRetry)
-              if (retryCount < maxRetries) {
-                setTimeout(
-                  executeFetch,
-                  calcDelayDuration(
-                    retryCount,
-                    retryDelay,
-                    maxRetries,
-                    backoff,
-                    maxDelay
-                  )
-                )
-                retryCount += 1
-                return
-              }
-
-            const error = new NetworkError(e.message, {
-              originalRequest: request,
-              retryCount,
-            })
-            maskAuthData(error.originalRequest, maskSensitiveHeaderData)
-            next(request, { ...response, error, statusCode: 0 })
-          }
-        )
-        .finally(() => {
-          clearTimeout(timer)
-        })
+              next(request, { ...response, error, statusCode: 0 })
+            }
+          )
+          .finally(() => {
+            clearTimeout(timer)
+          })
+      }
+      executeFetch()
     }
-    executeFetch()
-  }
 }
