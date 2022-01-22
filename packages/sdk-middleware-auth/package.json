@@ -33,7 +33,7 @@
     "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkMiddlewareAuth -i ./src/index.js"
   },
   "dependencies": {
-    "node-fetch": "^2.3.0"
+    "node-fetch": "^3.1.1"
   },
   "devDependencies": {
     "abort-controller": "3.0.0",
