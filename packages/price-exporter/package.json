@@ -48,7 +48,7 @@
     "fast-csv": "^4.0.0",
     "flat": "^5.0.0",
     "lodash": "^4.17.11",
-    "node-fetch": "^2.3.0",
+    "node-fetch": "^3.0.0",
     "npmlog": "^4.1.2",
     "pretty-error": "^2.1.1",
     "yargs": "^16.0.0"
