@@ -100,14 +100,6 @@ export default function createHttpMiddleware({
   ) => {
     let abortController: any
     const url = host.replace(/\/$/, '') + request.uri
-    const body =
-      typeof request.body === 'string' ||
-        Buffer.isBuffer(request.body) ||
-        (request.body instanceof FormData)
-        ? request.body
-        : // NOTE: `stringify` of `null` gives the String('null')
-        JSON.stringify(request.body || undefined)
-
     const requestHeader: HttpHeaders = { ...request.headers }
     if (!Object.prototype.hasOwnProperty.call(requestHeader, 'Content-Type')) {
       requestHeader['Content-Type'] = 'application/json'
@@ -115,7 +107,12 @@ export default function createHttpMiddleware({
     if(request.headers["Content-Type"] === null) {
       delete requestHeader['Content-Type']
     }
-    if (body && !(body instanceof FormData)) {
+    const body = requestHeader['Content-Type'] === 'application/json'
+        // NOTE: `stringify` of `null` gives the String('null')
+        ? JSON.stringify(request.body || undefined)
+        : request.body
+        
+    if (typeof body === 'string' || Buffer.isBuffer(request.body)) {
       requestHeader['Content-Length'] = Buffer.byteLength(body).toString()
     }
     const fetchOptions: RequestOptions = {
