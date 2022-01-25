@@ -104,14 +104,14 @@ export default function createHttpMiddleware({
     if (!Object.prototype.hasOwnProperty.call(requestHeader, 'Content-Type')) {
       requestHeader['Content-Type'] = 'application/json'
     }
-    if(request.headers["Content-Type"] === null) {
-      delete requestHeader['Content-Type']
-    }
+    // if(request.headers["Content-Type"] === null) {
+    //   delete requestHeader['Content-Type']
+    // }
     const body = requestHeader['Content-Type'] === 'application/json'
         // NOTE: `stringify` of `null` gives the String('null')
         ? JSON.stringify(request.body || undefined)
         : request.body
-        
+
     if (typeof body === 'string' || Buffer.isBuffer(request.body)) {
       requestHeader['Content-Length'] = Buffer.byteLength(body).toString()
     }
