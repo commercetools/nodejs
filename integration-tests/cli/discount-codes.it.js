@@ -52,7 +52,6 @@ describe('DiscountCode tests', () => {
 
     cartDiscount = data[0].body
 
-    console.log("""""""""""""""""""""""""""""""""""" + cartDiscount + """"""""""""""""""""""""""""""""""")
   }, 15000)
 
   afterAll(async () => {
