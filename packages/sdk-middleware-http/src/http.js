@@ -98,23 +98,41 @@ export default function createHttpMiddleware({
     request: MiddlewareRequest,
     response: MiddlewareResponse
   ) => {
+    // let abortController: any
+    // const url = host.replace(/\/$/, '') + request.uri
+    // const requestHeader: HttpHeaders = { ...request.headers }
+    // if (!Object.prototype.hasOwnProperty.call(requestHeader, 'Content-Type')) {
+    //   requestHeader['Content-Type'] = 'application/json'
+    // }
+    // if(request.headers["Content-Type"] === null) {
+    //   delete requestHeader['Content-Type']
+    // }
+    // const body = requestHeader['Content-Type'] === 'application/json'
+    //     // NOTE: `stringify` of `null` gives the String('null')
+    //     ? JSON.stringify(request.body || undefined)
+    //     : request.body
+
+    // if (typeof body === 'string' || Buffer.isBuffer(request.body)) {
+    //   requestHeader['Content-Length'] = Buffer.byteLength(body).toString()
+    // }
+
+    // reverting all changes to default to see if integration test passes
     let abortController: any
     const url = host.replace(/\/$/, '') + request.uri
+    const body =
+      typeof request.body === 'string' || Buffer.isBuffer(request.body)
+        ? request.body
+        : // NOTE: `stringify` of `null` gives the String('null')
+          JSON.stringify(request.body || undefined)
+
     const requestHeader: HttpHeaders = { ...request.headers }
     if (!Object.prototype.hasOwnProperty.call(requestHeader, 'Content-Type')) {
       requestHeader['Content-Type'] = 'application/json'
     }
-    // if(request.headers["Content-Type"] === null) {
-    //   delete requestHeader['Content-Type']
-    // }
-    const body = requestHeader['Content-Type'] === 'application/json'
-        // NOTE: `stringify` of `null` gives the String('null')
-        ? JSON.stringify(request.body || undefined)
-        : request.body
-
-    if (typeof body === 'string' || Buffer.isBuffer(request.body)) {
+    if (body) {
       requestHeader['Content-Length'] = Buffer.byteLength(body).toString()
     }
+
     const fetchOptions: RequestOptions = {
       method: request.method,
       headers: requestHeader,
