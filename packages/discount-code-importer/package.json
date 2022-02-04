@@ -40,8 +40,8 @@
     "@commercetools/sdk-middleware-queue": "^2.1.4",
     "@commercetools/sdk-middleware-user-agent": "^2.1.5",
     "@commercetools/sync-actions": "^4.9.6",
-    "lodash": "^4.17.11",
-    "node-fetch": "^2.3.0",
+    "lodash": "^4.17.21",
+    "node-fetch": "^2.6.7",
     "npmlog": "^4.1.2"
   }
 }

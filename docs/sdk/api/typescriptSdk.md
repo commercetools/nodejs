@@ -70,12 +70,12 @@ const authMiddlewareOptions = {
   },
   oauthUri: '/oauth/token', // - optional custom oauthUri
   scopes: [`manage_project:${projectKey}`],
-  fetch
+  fetch,
 }
 
 const httpMiddlewareOptions = {
   host: 'https://api.europe-west1.gcp.commercetools.com',
-  fetch
+  fetch,
 }
 
 const client = new ClientBuilder()
