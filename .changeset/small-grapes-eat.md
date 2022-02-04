@@ -21,4 +21,4 @@
 '@commercetools/state-importer': patch
 ---
 
-Bump versions of `node-fetch` and `lodash` to fix security vulnerabilities
+Bump versions of `node-fetch`, `lodash`, and `fast-csv` to fix security vulnerabilities
