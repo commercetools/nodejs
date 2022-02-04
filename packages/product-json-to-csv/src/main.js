@@ -24,7 +24,7 @@ import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk
 import { createUserAgentMiddleware } from '@commercetools/sdk-middleware-user-agent'
 import highland from 'highland'
 import fetch from 'node-fetch'
-import Promise from 'bluebird'
+import PromiseBlueBird from 'bluebird'
 import JSONStream from 'JSONStream'
 import { memoize, map, get, pick, chunk, flatten } from 'lodash'
 import ProductMapping from './map-product-data'
@@ -163,14 +163,14 @@ export default class ProductJsonToCsv {
     // **CategoryOrderHints
     // **Variant prices
 
-    return Promise.all([
+    return PromiseBlueBird.all([
       this._resolveProductType(product.productType),
       this._resolveTaxCategory(product.taxCategory),
       this._resolveState(product.state),
       this._resolveCategories(product.categories),
       this._resolveCategoryOrderHints(product.categoryOrderHints),
       this._resolveVariantReferences(product.masterVariant),
-      Promise.map(
+      PromiseBlueBird.map(
         product.variants,
         (variant: Variant) => this._resolveVariantReferences(variant),
         { concurrency: 3 }
@@ -226,7 +226,7 @@ export default class ProductJsonToCsv {
           ...(await acc),
           ...(await this._getChannelsById(currentIds)),
         }),
-        Promise.resolve({})
+        PromiseBlueBird.resolve({})
       )
     } else {
       channelsById = await this._getChannelsById(channelIds)
@@ -240,7 +240,7 @@ export default class ProductJsonToCsv {
           ...(await acc),
           ...(await this._getCustomerGroupsById(currentIds)),
         }),
-        Promise.resolve({})
+        PromiseBlueBird.resolve({})
       )
     } else {
       customerGroupsById = await this._getCustomerGroupsById(customerGroupIds)
@@ -324,9 +324,11 @@ export default class ProductJsonToCsv {
 
     const productTypeService = this._createService('productTypes')
     const uri = productTypeService.byId(productTypeReference.id).build()
-    return this.fetchReferences(uri).then(([{ body }]: SuccessResult): {
-      productType: ProductType,
-    } => ({ productType: body }))
+    return this.fetchReferences(uri).then(
+      ([{ body }]: SuccessResult): {
+        productType: ProductType,
+      } => ({ productType: body })
+    )
   }
 
   _resolveTaxCategory(taxCategoryReference: TypeReference): Object {
@@ -334,9 +336,11 @@ export default class ProductJsonToCsv {
 
     const taxCategoryService = this._createService('taxCategories')
     const uri = taxCategoryService.byId(taxCategoryReference.id).build()
-    return this.fetchReferences(uri).then(([{ body }]: SuccessResult): {
-      taxCategory: TaxCategory,
-    } => ({ taxCategory: body }))
+    return this.fetchReferences(uri).then(
+      ([{ body }]: SuccessResult): {
+        taxCategory: TaxCategory,
+      } => ({ taxCategory: body })
+    )
   }
 
   _resolveState(stateReference: TypeReference): Object {
@@ -344,9 +348,11 @@ export default class ProductJsonToCsv {
 
     const stateService = this._createService('states')
     const uri = stateService.byId(stateReference.id).build()
-    return this.fetchReferences(uri).then(([{ body }]: SuccessResult): {
-      state: State,
-    } => ({ state: body }))
+    return this.fetchReferences(uri).then(
+      ([{ body }]: SuccessResult): {
+        state: State,
+      } => ({ state: body })
+    )
   }
 
   _resolveCategories(
@@ -359,8 +365,9 @@ export default class ProductJsonToCsv {
     return this._getCategories(categoryIds).then(
       (categories: Array<Category>): { categories: Array<Category> } => {
         if (this.parserConfig.categoryBy !== 'namedPath') return { categories }
-        return Promise.map(categories, (cat: Category): Array<Category> =>
-          this._resolveAncestors(cat)
+        return PromiseBlueBird.map(
+          categories,
+          (cat: Category): Promise<Category> => this._resolveAncestors(cat)
         ).then((categoriesWithParents: Array<Category>): Object => ({
           categories: categoriesWithParents,
         }))
@@ -395,13 +402,16 @@ export default class ProductJsonToCsv {
 
   _resolveAncestors(category: Category): Promise<Category> {
     const getParent = (cat: Category): Promise<Category> => {
-      if (!cat.parent) return Promise.resolve(cat)
+      if (!cat.parent) return PromiseBlueBird.resolve(cat)
 
-      return this._getCategories([cat.parent.id])
-        .then((resolvedCategory: Object): Promise<Category> =>
-          getParent(resolvedCategory[0])
-        )
-        .then((parent: Object): Promise<Category> => ({ ...cat, parent }))
+      return (
+        this._getCategories([cat.parent.id])
+          .then((resolvedCategory: Object): Promise<Category> =>
+            getParent(resolvedCategory[0])
+          )
+          // $FlowFixMe: incompatible returns
+          .then((parent: Object): Promise<Category> => ({ ...cat, parent }))
+      )
     }
     return getParent(category)
   }
@@ -415,7 +425,7 @@ export default class ProductJsonToCsv {
         cachedCategories.push(this.categoriesCache[id])
       else notCachedIds.push(id)
     })
-    if (!notCachedIds.length) return Promise.resolve(cachedCategories)
+    if (!notCachedIds.length) return PromiseBlueBird.resolve(cachedCategories)
 
     const predicate = `id in ("${notCachedIds.join('", "')}")`
     const categoriesService = this._createService('categories')
@@ -454,6 +464,6 @@ ProductJsonToCsv.prototype.fetchReferences = memoize(function _fetchReferences(
     }
   return this.client.process(
     request,
-    (res: SuccessResult): Promise<SuccessResult> => Promise.resolve(res)
+    (res: SuccessResult): Promise<SuccessResult> => PromiseBlueBird.resolve(res)
   )
 })
