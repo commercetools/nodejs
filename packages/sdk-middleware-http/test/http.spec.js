@@ -17,7 +17,6 @@ function createTestRequest(options) {
 function FormDataMock() {
   this.append = jest.fn()
 }
-global.FormData = FormDataMock
 
 const testHost = 'https://api.commercetools.com'
 
@@ -544,7 +543,7 @@ describe('Http', () => {
 
   test('should accept a FormData body with null content type', () =>
     new Promise((resolve, reject) => {
-      const formData = new FormData()
+      const formData = new FormDataMock()
       formData.append('file', 'file content', 'file123')
       const request = createTestRequest({
         uri: '/import/file-upload',

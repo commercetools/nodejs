@@ -1,6 +1,7 @@
 ---
-"@commercetools/sdk-middleware-http": patch
+'@commercetools/sdk-middleware-http': patch
 ---
 
-- Allow requests with empty content-type
-- To unset a request header content-type, explicitly pass `null` as the value. 
+Allow to unset the `content-type` HTTP header by explicitly passing `null` as the value.
+
+A use case for that is using `FormData` as the request body, for example to perform a file upload. The browser generally sets the `content-type` HTTP header automatically.
