@@ -123,9 +123,8 @@ export default class CustomObjectsImporter {
     )
     const {
       body: { results: existingObjects },
-      // skip below because of flow issue with async/await
-      // todo: remove `FlowFixMe` when [this](https://github.com/facebook/flow/issues/5294) issue is fixed
-      // $FlowFixMe
+      // TODO: remove `FlowFixMe` when [this](https://github.com/facebook/flow/issues/5294) issue is fixed
+      // $FlowFixMe[incompatible-call]: skip below because of flow issue with async/await
     } = await this.client.execute(existingObjectsRequest)
 
     const requestsList = batches.map(

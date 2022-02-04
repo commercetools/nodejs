@@ -409,7 +409,7 @@ export default class ProductJsonToCsv {
           .then((resolvedCategory: Object): Promise<Category> =>
             getParent(resolvedCategory[0])
           )
-          // $FlowFixMe: incompatible returns
+          // $FlowFixMe[incompatible-return]
           .then((parent: Object): Promise<Category> => ({ ...cat, parent }))
       )
     }

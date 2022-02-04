@@ -145,7 +145,7 @@ export default class TokenProvider {
     if (this.tokenInfo && !TokenProvider._isTokenExpired(this.tokenInfo))
       return Promise.resolve(this.tokenInfo)
 
-    // $FlowFixMe - _refreshToken method will fetch new tokenInfo if not provided
+    // $FlowFixMe[incompatible-call]: _refreshToken method will fetch new tokenInfo if not provided
     return this._refreshToken(this.tokenInfo)
   }
 
