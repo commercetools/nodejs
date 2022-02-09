@@ -54,9 +54,8 @@ describe('Refresh Token Flow', () => {
         jest.unmock('../src/base-auth-flow')
       }
       const middlewareOptions = createTestMiddlewareOptions()
-      const authMiddleware = createAuthMiddlewareForRefreshTokenFlow(
-        middlewareOptions
-      )
+      const authMiddleware =
+        createAuthMiddlewareForRefreshTokenFlow(middlewareOptions)
 
       authMiddleware(next)(request, response)
     }))

@@ -60,9 +60,8 @@ describe('Client Crentials Flow', () => {
         jest.unmock('../src/base-auth-flow')
       }
       const middlewareOptions = createTestMiddlewareOptions()
-      const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
-        middlewareOptions
-      )
+      const authMiddleware =
+        createAuthMiddlewareForClientCredentialsFlow(middlewareOptions)
 
       authMiddleware(next)(request, response)
     }))
@@ -102,9 +101,8 @@ describe('Client Crentials Flow', () => {
         fetch,
         tokenCache,
       })
-      const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
-        middlewareOptions
-      )
+      const authMiddleware =
+        createAuthMiddlewareForClientCredentialsFlow(middlewareOptions)
 
       authMiddleware(next)(request, response)
     }))

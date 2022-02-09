@@ -25,30 +25,28 @@ export default function createAuthMiddlewareForClientCredentialsFlow(
   const requestState = store(false)
   const pendingTasks: Array<Task> = []
 
-  return (next: Next): Next => (
-    request: MiddlewareRequest,
-    response: MiddlewareResponse
-  ) => {
-    // Check if there is already a `Authorization` header in the request.
-    // If so, then go directly to the next middleware.
-    if (
-      (request.headers && request.headers.authorization) ||
-      (request.headers && request.headers.Authorization)
-    ) {
-      next(request, response)
-      return
+  return (next: Next): Next =>
+    (request: MiddlewareRequest, response: MiddlewareResponse) => {
+      // Check if there is already a `Authorization` header in the request.
+      // If so, then go directly to the next middleware.
+      if (
+        (request.headers && request.headers.authorization) ||
+        (request.headers && request.headers.Authorization)
+      ) {
+        next(request, response)
+        return
+      }
+      const params = {
+        ...options,
+        request,
+        response,
+        ...buildRequestForClientCredentialsFlow(options),
+        pendingTasks,
+        requestState,
+        tokenCache,
+        tokenCacheKey: buildTokenCacheKey(options),
+        fetch: options.fetch,
+      }
+      authMiddlewareBase(params, next)
     }
-    const params = {
-      ...options,
-      request,
-      response,
-      ...buildRequestForClientCredentialsFlow(options),
-      pendingTasks,
-      requestState,
-      tokenCache,
-      tokenCacheKey: buildTokenCacheKey(options),
-      fetch: options.fetch,
-    }
-    authMiddlewareBase(params, next)
-  }
 }

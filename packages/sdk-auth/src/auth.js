@@ -339,15 +339,8 @@ export default class SdkAuth {
   }
 
   customFlow(requestConfig: Object): Promise<Object> {
-    const {
-      credentials,
-      host,
-      uri,
-      body,
-      token,
-      authType,
-      headers,
-    } = requestConfig
+    const { credentials, host, uri, body, token, authType, headers } =
+      requestConfig
     const _config = this._getRequestConfig({
       host,
       token,

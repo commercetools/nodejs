@@ -677,6 +677,66 @@ describe('Http', () => {
         httpMiddleware(next)(request, response)
       }))
 
+    test('should retry when status (error) code is part of retryCodes', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res.error.name).toBe('InternalServerError')
+          expect(res.error.originalRequest).toBeDefined()
+          expect(res.body).toBeUndefined()
+          expect(res.statusCode).toBe(500)
+          expect(res.error.retryCount).toBe(2)
+          resolve()
+        }
+        const options = {
+          host: testHost,
+          enableRetry: true,
+          retryCodes: [500, 501, 502],
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+          },
+          fetch,
+        }
+        const httpMiddleware = createHttpMiddleware(options)
+        nock(testHost).get('/foo/bar').times(3).reply(500)
+
+        httpMiddleware(next)(request, response)
+      }))
+
+    test('should not retry when status (error) code is not part of retryCodes', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res.error.name).toBe('InternalServerError')
+          expect(res.error.originalRequest).toBeDefined()
+          expect(res.body).toBeUndefined()
+          expect(res.statusCode).toBe(500)
+          expect(res.error.retryCount).toBe(0)
+          resolve()
+        }
+        const options = {
+          host: testHost,
+          enableRetry: true,
+          retryCodes: [501, 502],
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+          },
+          fetch,
+        }
+        const httpMiddleware = createHttpMiddleware(options)
+        nock(testHost).get('/foo/bar').times(3).reply(500)
+
+        httpMiddleware(next)(request, response)
+      }))
+
     test(
       'should toggle `exponential backoff` off',
       () =>

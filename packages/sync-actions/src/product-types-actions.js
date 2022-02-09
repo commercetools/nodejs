@@ -186,13 +186,14 @@ const generateUpdateActionsForAttributeEnumValues = (
     ...Object.values(
       removedAttributeEnumValues.reduce(
         (nextEnumUpdateActions, removedAttributeEnumValue) => {
-          const removedAttributeEnumValueOfSameAttributeName = nextEnumUpdateActions[
-            removedAttributeEnumValue.hint.attributeName
-          ] || {
-            keys: [],
-            attributeName: removedAttributeEnumValue.hint.attributeName,
-            action: 'removeEnumValues',
-          }
+          const removedAttributeEnumValueOfSameAttributeName =
+            nextEnumUpdateActions[
+              removedAttributeEnumValue.hint.attributeName
+            ] || {
+              keys: [],
+              attributeName: removedAttributeEnumValue.hint.attributeName,
+              action: 'removeEnumValues',
+            }
           return {
             ...nextEnumUpdateActions,
             [removedAttributeEnumValue.hint.attributeName]: {

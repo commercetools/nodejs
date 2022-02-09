@@ -1,5 +1,5 @@
 [version]
-^0.141.0
+^0.165.0
 
 [ignore]
 <PROJECT_ROOT>/_book/.*
@@ -63,8 +63,13 @@ deprecated-utility=off
 [options]
 emoji=true
 include_warnings=true
-esproposal.optional_chaining=enable
-esproposal.nullish_coalescing=enable
+
+; these options are deprecated:
+; see https://flow.org/en/docs/config/options/#toc-available-options
+; esproposal.optional_chaining=enable
+; esproposal.nullish_coalescing=enable
+; well_formed_exports=true
+; types_first=true
 
 server.max_workers=2
 
@@ -74,5 +79,3 @@ suppress_type=$FlowIssue
 suppress_type=$FlowFixMe
 
 # https://medium.com/flow-type/types-first-a-scalable-new-architecture-for-flow-3d8c7ba1d4eb
-well_formed_exports=true
-types_first=true

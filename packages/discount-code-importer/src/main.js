@@ -129,18 +129,20 @@ export default class DiscountCodeImport {
     // Batch to `batchSize` to reduce necessary fetch API calls
     const batchedList = _.chunk(codes, this.batchSize)
     const functionsList = batchedList.map(
-      (codeObjects: CodeDataArray): Function => (): Promise<void> => {
-        // Build predicate and fetch existing code
-        const predicate = DiscountCodeImport._buildPredicate(codeObjects)
-        const service = this._createService()
-        const uri = service.where(predicate).perPage(this.batchSize).build()
-        const req = this._buildRequest(uri, 'GET')
-        return this.client
-          .execute(req)
-          .then(({ body: { results: existingCodes } }: Object): Promise<void> =>
-            this._createOrUpdate(codeObjects, existingCodes)
-          )
-      }
+      (codeObjects: CodeDataArray): Function =>
+        (): Promise<void> => {
+          // Build predicate and fetch existing code
+          const predicate = DiscountCodeImport._buildPredicate(codeObjects)
+          const service = this._createService()
+          const uri = service.where(predicate).perPage(this.batchSize).build()
+          const req = this._buildRequest(uri, 'GET')
+          return this.client
+            .execute(req)
+            .then(
+              ({ body: { results: existingCodes } }: Object): Promise<void> =>
+                this._createOrUpdate(codeObjects, existingCodes)
+            )
+        }
     )
     return DiscountCodeImport.promiseMapSerially(functionsList)
       .then((): Promise<void> => Promise.resolve())
@@ -272,13 +274,8 @@ export default class DiscountCodeImport {
   }
 
   summaryReport(): Object {
-    const {
-      created,
-      updated,
-      unchanged,
-      createErrorCount,
-      updateErrorCount,
-    } = this._summary
+    const { created, updated, unchanged, createErrorCount, updateErrorCount } =
+      this._summary
     let message = ''
     if (created + updated + createErrorCount + updateErrorCount === 0)
       message = 'Summary: nothing to do, everything is fine'

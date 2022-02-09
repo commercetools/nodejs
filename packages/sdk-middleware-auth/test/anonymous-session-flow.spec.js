@@ -51,9 +51,8 @@ describe('Anonymous Session Flow', () => {
         resolve()
       }
       const middlewareOptions = createTestMiddlewareOptions()
-      const authMiddleware = createAuthMiddlewareForAnonymousSessionFlow(
-        middlewareOptions
-      )
+      const authMiddleware =
+        createAuthMiddlewareForAnonymousSessionFlow(middlewareOptions)
 
       authMiddleware(next)(request, response)
     }))

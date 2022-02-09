@@ -20,9 +20,9 @@ function compose(...funcs: Array<Function>): Function {
   if (funcs.length === 1) return funcs[0]
 
   return funcs.reduce(
-    (a: Function, b: Function): Function => (
-      ...args: Array<Function>
-    ): Array<Function> => a(b(...args))
+    (a: Function, b: Function): Function =>
+      (...args: Array<Function>): Array<Function> =>
+        a(b(...args))
   )
 }
 
@@ -125,6 +125,7 @@ export default function createClient(options: ClientOptions): Client {
             uri: `${path}?${enhancedQueryString}&${originalQueryString}`,
           }
 
+          // $FlowFixMe
           this.execute(enhancedRequest)
             .then((payload: SuccessResult) => {
               const { results, count: resultsLength } = payload.body

@@ -113,14 +113,12 @@ export function actionsMapParcels(diff, oldObj, newObj, deliveryHashMap) {
         newObj.shippingInfo.deliveries
       )
       if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
-        const [
-          addParcelAction,
-          removeParcelAction,
-        ] = _buildDeliveryParcelsAction(
-          delivery.parcels,
-          oldDelivery,
-          newDelivery
-        )
+        const [addParcelAction, removeParcelAction] =
+          _buildDeliveryParcelsAction(
+            delivery.parcels,
+            oldDelivery,
+            newDelivery
+          )
 
         addParcelActions = addParcelActions.concat(addParcelAction)
         removeParcelActions = removeParcelActions.concat(removeParcelAction)

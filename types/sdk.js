@@ -205,7 +205,7 @@ type requestBaseOptions = {
 }
 export type executeRequestOptions = requestBaseOptions & {
   fetcher: typeof fetch,
-  tokenCache: TokenCache
+  tokenCache: TokenCache,
 }
 
 export type AuthMiddlewareBaseOptions = requestBaseOptions & {
@@ -246,12 +246,13 @@ export type HttpMiddlewareOptions = {
   maskSensitiveHeaderData?: boolean,
   timeout?: number,
   enableRetry?: boolean,
+  retryCodes?: Array<number>,
   retryConfig?: {
     maxRetries?: number,
     retryDelay?: number,
     backoff?: boolean,
     maxDelay?: number,
-    retryOnAbort: boolean
+    retryOnAbort: boolean,
   },
   fetch?: typeof fetch,
   /**

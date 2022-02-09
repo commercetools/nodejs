@@ -52,8 +52,7 @@ describe('Password Flow', () => {
           request,
           response,
           pendingTasks: [],
-          url:
-            'https://auth.europe-west1.gcp.commercetools.com/oauth/foo/customers/token',
+          url: 'https://auth.europe-west1.gcp.commercetools.com/oauth/foo/customers/token',
           basicAuth: 'MTIzOnNlY3JldA==',
         })
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)
@@ -61,9 +60,8 @@ describe('Password Flow', () => {
         resolve()
       }
       const middlewareOptions = createTestMiddlewareOptions()
-      const authMiddleware = createAuthMiddlewareForPasswordFlow(
-        middlewareOptions
-      )
+      const authMiddleware =
+        createAuthMiddlewareForPasswordFlow(middlewareOptions)
 
       authMiddleware(next)(request, response)
     }))

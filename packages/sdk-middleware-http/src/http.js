@@ -59,6 +59,7 @@ export default function createHttpMiddleware({
   maskSensitiveHeaderData = true,
   enableRetry,
   timeout,
+  retryCodes = [],
   retryConfig: {
     // encourage exponential backoff to prevent spamming the server if down
     maxRetries = 10,
@@ -102,6 +103,7 @@ export default function createHttpMiddleware({
 
       // If no content-type is provided, defaults to application/json
       if (
+        // $FlowFixMe
         !Object.prototype.hasOwnProperty.call(requestHeader, 'Content-Type')
       ) {
         requestHeader['Content-Type'] = 'application/json'
@@ -134,7 +136,7 @@ export default function createHttpMiddleware({
       if (!retryOnAbort) {
         if (timeout || getAbortController || _abortController)
           // eslint-disable-next-line
-        abortController =
+          abortController =
             (getAbortController ? getAbortController() : null) ||
             _abortController ||
             new AbortController()
@@ -153,7 +155,7 @@ export default function createHttpMiddleware({
         if (retryOnAbort) {
           if (timeout || getAbortController || _abortController)
             // eslint-disable-next-line
-          abortController =
+            abortController =
               (getAbortController ? getAbortController() : null) ||
               _abortController ||
               new AbortController()
@@ -225,7 +227,10 @@ export default function createHttpMiddleware({
                 })
                 return
               }
-              if (res.status === 503 && enableRetry)
+              if (
+                enableRetry &&
+                (res.status === 503 || retryCodes.includes(res.status))
+              ) {
                 if (retryCount < maxRetries) {
                   setTimeout(
                     executeFetch,
@@ -240,6 +245,7 @@ export default function createHttpMiddleware({
                   retryCount += 1
                   return
                 }
+              }
 
               // Server responded with an error. Try to parse it as JSON, then
               // return a proper error type with all necessary meta information.

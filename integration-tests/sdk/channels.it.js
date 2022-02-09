@@ -61,9 +61,8 @@ describe('Channels', () => {
           },
           fetch,
         }
-        const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
-          apiConfig
-        )
+        const authMiddleware =
+          createAuthMiddlewareForClientCredentialsFlow(apiConfig)
         client = createClient({
           middlewares: [
             authMiddleware,
