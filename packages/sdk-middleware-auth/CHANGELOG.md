@@ -1,5 +1,11 @@
 # @commercetools/sdk-middleware-auth
 
+## 6.2.1
+
+### Patch Changes
+
+- [#1759](https://github.com/commercetools/nodejs/pull/1759) [`6a5b0572`](https://github.com/commercetools/nodejs/commit/6a5b05728f6fcb7e74e752962553870b9a89c1fe) Thanks [@emmenko](https://github.com/emmenko)! - Bump versions of `node-fetch`, `lodash`, and `fast-csv` to fix security vulnerabilities
+
 ## 6.2.0
 
 ### Minor Changes
