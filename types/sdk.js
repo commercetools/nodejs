@@ -246,6 +246,7 @@ export type HttpMiddlewareOptions = {
   maskSensitiveHeaderData?: boolean,
   timeout?: number,
   enableRetry?: boolean,
+  retryCodes?: Array<number>,
   retryConfig?: {
     maxRetries?: number,
     retryDelay?: number,

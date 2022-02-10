@@ -33,7 +33,7 @@ The HTTP middleware can run in either a browser or Node.js environment. For Node
 4.  `includeOriginalRequest` _(Boolean)_: flag whether to include the original request sent in the response. Can be useful if you want to see the final request being sent.
 5.  `maskSensitiveHeaderData` _(Boolean)_: flag to mask sensitie data in the header. e.g. Authorization token
 6.  `enableRetry` _(Boolean)_: flag to enable retry on network errors and `500` response. (Default: false)
-7.  `retryConfig` _(Object)_: Field required in the object listed below
+7.  `retryCodes` - _(Array)_: array of numbers used to retry requests when the status (error) code matches an entry in the list.
 8.  `maxRetries` _(Number)_: number of times to retry the request before failing the request. (Default: 50)
 9.  `retryDelay` _(Number)_: amount of milliseconds to wait before retrying the next request. (Default: 200)
 10. `backoff` _(Boolean)_: activates exponential backoff. Recommended to prevent spamming of the server. (Default: true)
@@ -42,6 +42,7 @@ The HTTP middleware can run in either a browser or Node.js environment. For Node
 13. `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function
 14. `timeout` _(Number)_: Request/response timeout in ms. Must be globally available or passed in `AbortController`
 15. `abortController` or `getAbortController` depending on what you chose to handle the timeout (_abortController_): This property accepts the `AbortController` instance. Could be [abort-controller](https://www.npmjs.com/package/abort-controller) or a globally available one.
+16.  `retryConfig` _(Object)_: Field required in the object listed below
 
 #### Retrying requests
 
@@ -67,6 +68,7 @@ const client = createClient({
       includeOriginalRequest: true,
       maskSensitiveHeaderData: true,
       enableRetry: true,
+      retryCodes: [500, 504],
       retryConfig: {
         maxRetries: 2,
         retryDelay: 300, //milliseconds

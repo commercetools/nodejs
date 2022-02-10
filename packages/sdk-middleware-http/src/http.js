@@ -35,9 +35,9 @@ function calcDelayDuration(
   if (backoff)
     return retryCount !== 0 // do not increase if it's the first retry
       ? Math.min(
-          Math.round((Math.random() + 1) * retryDelay * 2 ** retryCount),
-          maxDelay
-        )
+        Math.round((Math.random() + 1) * retryDelay * 2 ** retryCount),
+        maxDelay
+      )
       : retryDelay
   return retryDelay
 }
@@ -59,6 +59,7 @@ export default function createHttpMiddleware({
   maskSensitiveHeaderData = true,
   enableRetry,
   timeout,
+  retryCodes = [],
   retryConfig: {
     // encourage exponential backoff to prevent spamming the server if down
     maxRetries = 10,
@@ -114,9 +115,9 @@ export default function createHttpMiddleware({
       // Ensure body is a string if content type is application/json
       const body =
         requestHeader['Content-Type'] === 'application/json' &&
-        typeof request.body !== 'string'
+          typeof request.body !== 'string'
           ? // NOTE: `stringify` of `null` gives the String('null')
-            JSON.stringify(request.body || undefined)
+          JSON.stringify(request.body || undefined)
           : request.body
 
       if (body && (typeof body === 'string' || Buffer.isBuffer(body))) {
@@ -132,15 +133,16 @@ export default function createHttpMiddleware({
       }
 
       if (!retryOnAbort) {
-        if (timeout || getAbortController || _abortController)
+        if (timeout || getAbortController || _abortController) {
           // eslint-disable-next-line
-        abortController =
+          abortController =
             (getAbortController ? getAbortController() : null) ||
             _abortController ||
             new AbortController()
 
-        if (abortController) {
-          fetchOptions.signal = abortController.signal
+          if (abortController) {
+            fetchOptions.signal = abortController.signal
+          }
         }
       }
 
@@ -151,16 +153,18 @@ export default function createHttpMiddleware({
       // wrap in a fn so we can retry if error occur
       function executeFetch() {
         if (retryOnAbort) {
-          if (timeout || getAbortController || _abortController)
+          if (timeout || getAbortController || _abortController) {
             // eslint-disable-next-line
-          abortController =
+            abortController =
               (getAbortController ? getAbortController() : null) ||
               _abortController ||
               new AbortController()
 
-          if (abortController) {
-            fetchOptions.signal = abortController.signal
+            if (abortController) {
+              fetchOptions.signal = abortController.signal
+            }
           }
+
         }
         // Kick off timer for abortController directly before fetch.
         let timer
@@ -225,7 +229,11 @@ export default function createHttpMiddleware({
                 })
                 return
               }
-              if (res.status === 503 && enableRetry)
+
+              if (
+                enableRetry &&
+                (res.status === 503 || retryCodes.includes(res.status))
+              ) {
                 if (retryCount < maxRetries) {
                   setTimeout(
                     executeFetch,
@@ -240,6 +248,7 @@ export default function createHttpMiddleware({
                   retryCount += 1
                   return
                 }
+              }
 
               // Server responded with an error. Try to parse it as JSON, then
               // return a proper error type with all necessary meta information.
