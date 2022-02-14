@@ -95,6 +95,12 @@ export default function createHttpMiddleware({
     fetchFunction = fetch
   }
 
+  if (!Array.isArray(retryCodes)) {
+    throw new Error(
+      '`retryCodes` option must be an array of retry status (error) codes.'
+    )
+  }
+
   return (next: Next): Next =>
     (request: MiddlewareRequest, response: MiddlewareResponse) => {
       let abortController: any
@@ -232,7 +238,7 @@ export default function createHttpMiddleware({
 
               if (
                 enableRetry &&
-                (res.status === 503 || retryCodes.includes(res.status))
+                (res.status === 503 || (retryCodes?.indexOf(res.status) !== -1))
               ) {
                 if (retryCount < maxRetries) {
                   setTimeout(

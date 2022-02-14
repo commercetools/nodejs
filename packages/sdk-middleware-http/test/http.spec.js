@@ -45,6 +45,16 @@ describe('Http', () => {
     )
   })
 
+  test('throw when a non-array option is passed as retryCodes in the httpMiddlewareOptions', () => {
+    expect(() => {
+      createHttpMiddleware({ host: testHost, retryCodes: null, fetch })
+    }).toThrow(
+      new Error(
+        '`retryCodes` option must be an array of retry status (error) codes.'
+      )
+    )
+  })
+
   test('execute a get request (success)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
