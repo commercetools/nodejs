@@ -33,7 +33,7 @@ The HTTP middleware can run in either a browser or Node.js environment. For Node
 4.  `includeOriginalRequest` _(Boolean)_: flag whether to include the original request sent in the response. Can be useful if you want to see the final request being sent.
 5.  `maskSensitiveHeaderData` _(Boolean)_: flag to mask sensitie data in the header. e.g. Authorization token
 6.  `enableRetry` _(Boolean)_: flag to enable retry on network errors and `500` response. (Default: false)
-7.  `retryCodes` - _(Array)_: array of numbers used to retry requests when the status (error) code matches an entry in the list.
+7.  `retryCodes` - _(Array)_: array of `statusCodes` [`numbers`] and error code or messages [`string`] for retring requests when the statusCodes and/or error message/code matches an entry in the list.
 8.  `maxRetries` _(Number)_: number of times to retry the request before failing the request. (Default: 50)
 9.  `retryDelay` _(Number)_: amount of milliseconds to wait before retrying the next request. (Default: 200)
 10. `backoff` _(Boolean)_: activates exponential backoff. Recommended to prevent spamming of the server. (Default: true)
@@ -68,7 +68,7 @@ const client = createClient({
       includeOriginalRequest: true,
       maskSensitiveHeaderData: true,
       enableRetry: true,
-      retryCodes: [500, 504],
+      retryCodes: [504, 'ETIMEDOUT', 'ECONNREFUSED', 503],
       retryConfig: {
         maxRetries: 2,
         retryDelay: 300, //milliseconds

@@ -236,26 +236,6 @@ export default function createHttpMiddleware({
                 return
               }
 
-              if (
-                enableRetry &&
-                (res.status === 503 || (retryCodes?.indexOf(res.status) !== -1))
-              ) {
-                if (retryCount < maxRetries) {
-                  setTimeout(
-                    executeFetch,
-                    calcDelayDuration(
-                      retryCount,
-                      retryDelay,
-                      maxRetries,
-                      backoff,
-                      maxDelay
-                    )
-                  )
-                  retryCount += 1
-                  return
-                }
-              }
-
               // Server responded with an error. Try to parse it as JSON, then
               // return a proper error type with all necessary meta information.
               res.text().then((text: any) => {
@@ -276,6 +256,28 @@ export default function createHttpMiddleware({
                     ? { message: parsed.message, body: parsed }
                     : { message: parsed, body: parsed }),
                 })
+
+                if (
+                  enableRetry &&
+                  ([503, ...retryCodes].indexOf(error.statusCode) !== -1 ||
+                    retryCodes?.indexOf(error.message) !== -1)
+                ) {
+                  if (retryCount < maxRetries) {
+                    setTimeout(
+                      executeFetch,
+                      calcDelayDuration(
+                        retryCount,
+                        retryDelay,
+                        maxRetries,
+                        backoff,
+                        maxDelay
+                      )
+                    )
+                    retryCount += 1
+                    return
+                  }
+                }
+
                 maskAuthData(error.originalRequest, maskSensitiveHeaderData)
                 // Let the final resolver to reject the promise
                 const parsedResponse = {

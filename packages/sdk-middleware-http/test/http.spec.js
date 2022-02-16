@@ -717,6 +717,109 @@ describe('Http', () => {
         httpMiddleware(next)(request, response)
       }))
 
+    test('should retry when status (error) message is part of retryCodes', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res.error.name).toBe('InternalServerError')
+          expect(res.error.message).toBe('ETIMEDOUT')
+          expect(res.error.retryCount).toBe(2)
+          expect(res.error.statusCode).toBe(500)
+          resolve()
+        }
+
+        const httpMiddleware = createHttpMiddleware({
+          host: testHost,
+          enableRetry: true,
+          retryCodes: ['ETIMEDOUT', 'ECONNREFUSED', 'write EPIPE'],
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+          },
+          fetch,
+        })
+        nock(testHost)
+          .defaultReplyHeaders({
+            'Content-Type': 'application/json'
+          })
+          .persist()
+          .get('/foo/bar')
+          .reply(500, 'ETIMEDOUT')
+
+        httpMiddleware(next)(request, response)
+      }))
+
+    test('should retry when status (error) code and message are both part of retryCodes', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res.error.name).toBe('HttpError')
+          expect(res.error.message).toBe('ETIMEDOUT')
+          expect(res.error.retryCount).toBe(2)
+          expect(res.error.statusCode).toBe(502)
+          resolve()
+        }
+
+        const httpMiddleware = createHttpMiddleware({
+          host: testHost,
+          enableRetry: true,
+          retryCodes: ['ETIMEDOUT', 503, 502, 'ECONNREFUSED', 'write EPIPE'],
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+          },
+          fetch,
+        })
+        nock(testHost)
+          .defaultReplyHeaders({
+            'Content-Type': 'application/json'
+          })
+          .persist()
+          .get('/foo/bar')
+          .reply(502, 'ETIMEDOUT')
+
+        httpMiddleware(next)(request, response)
+      }))
+
+    test('should not retry when status (error) message is not part of retryCodes', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res.error.name).toBe('InternalServerError')
+          expect(res.error.originalRequest).toBeDefined()
+          expect(res.body).toBeUndefined()
+          expect(res.statusCode).toBe(500)
+          expect(res.error.retryCount).toBe(0)
+          resolve()
+        }
+        const options = {
+          host: testHost,
+          enableRetry: true,
+          retryCodes: ['Not Included'],
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+          },
+          fetch,
+        }
+        const httpMiddleware = createHttpMiddleware(options)
+        nock(testHost)
+          .get('/foo/bar')
+          .times(3)
+          .reply(500, 'Internal Server Error')
+
+        httpMiddleware(next)(request, response)
+      }))
+
     test('should not retry when status (error) code is not part of retryCodes', () =>
       new Promise((resolve, reject) => {
         const request = createTestRequest({
