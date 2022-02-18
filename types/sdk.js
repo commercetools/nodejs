@@ -246,13 +246,13 @@ export type HttpMiddlewareOptions = {
   maskSensitiveHeaderData?: boolean,
   timeout?: number,
   enableRetry?: boolean,
-  retryCodes?: Array<number | string>,
   retryConfig?: {
     maxRetries?: number,
     retryDelay?: number,
     backoff?: boolean,
     maxDelay?: number,
-    retryOnAbort: boolean
+    retryOnAbort: boolean,
+    retryCodes?: Array<number | string>,
   },
   fetch?: typeof fetch,
   /**

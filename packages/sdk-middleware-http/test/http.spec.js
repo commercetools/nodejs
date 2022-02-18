@@ -47,7 +47,7 @@ describe('Http', () => {
 
   test('throw when a non-array option is passed as retryCodes in the httpMiddlewareOptions', () => {
     expect(() => {
-      createHttpMiddleware({ host: testHost, retryCodes: null, fetch })
+      createHttpMiddleware({ host: testHost, retryConfig: { retryCodes: null }, fetch })
     }).toThrow(
       new Error(
         '`retryCodes` option must be an array of retry status (error) codes.'
@@ -704,10 +704,12 @@ describe('Http', () => {
         const options = {
           host: testHost,
           enableRetry: true,
-          retryCodes: [500, 501, 502],
           retryConfig: {
             maxRetries: 2,
             retryDelay: 300,
+            retryCodes: [
+              500, 501, 502
+            ],
           },
           fetch,
         }
@@ -734,10 +736,12 @@ describe('Http', () => {
         const httpMiddleware = createHttpMiddleware({
           host: testHost,
           enableRetry: true,
-          retryCodes: ['ETIMEDOUT', 'ECONNREFUSED', 'write EPIPE'],
           retryConfig: {
             maxRetries: 2,
             retryDelay: 300,
+            retryCodes: [
+              'ETIMEDOUT', 'ECONNREFUSED', 'write EPIPE'
+            ]
           },
           fetch,
         })
@@ -769,10 +773,12 @@ describe('Http', () => {
         const httpMiddleware = createHttpMiddleware({
           host: testHost,
           enableRetry: true,
-          retryCodes: ['ETIMEDOUT', 503, 502, 'ECONNREFUSED', 'write EPIPE'],
           retryConfig: {
             maxRetries: 2,
             retryDelay: 300,
+            retryCodes: [
+              'ETIMEDOUT', 503, 502, 'ECONNREFUSED', 'write EPIPE'
+            ]
           },
           fetch,
         })

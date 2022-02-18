@@ -59,7 +59,6 @@ export default function createHttpMiddleware({
   maskSensitiveHeaderData = true,
   enableRetry,
   timeout,
-  retryCodes = [],
   retryConfig: {
     // encourage exponential backoff to prevent spamming the server if down
     maxRetries = 10,
@@ -67,6 +66,7 @@ export default function createHttpMiddleware({
     retryDelay = 200,
     maxDelay = Infinity,
     retryOnAbort = false,
+    retryCodes = [],
   } = {},
   fetch: fetcher,
   abortController: _abortController,

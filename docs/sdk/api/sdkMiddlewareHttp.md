@@ -68,12 +68,17 @@ const client = createClient({
       includeOriginalRequest: true,
       maskSensitiveHeaderData: true,
       enableRetry: true,
-      retryCodes: [504, 'ETIMEDOUT', 'ECONNREFUSED', 503],
       retryConfig: {
         maxRetries: 2,
         retryDelay: 300, //milliseconds
         maxDelay: 5000, //milliseconds
         retryOnAbort: false,
+        retryCodes: [
+          504,
+          'ETIMEDOUT',
+          'ECONNREFUSED',
+          503
+        ]
       },
 
       // Optional if not globally available
