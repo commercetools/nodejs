@@ -66,7 +66,7 @@ export default function createHttpMiddleware({
     retryDelay = 200,
     maxDelay = Infinity,
     retryOnAbort = false,
-    retryCodes = [],
+    retryCodes = [503],
   } = {},
   fetch: fetcher,
   abortController: _abortController,
@@ -259,7 +259,7 @@ export default function createHttpMiddleware({
 
                 if (
                   enableRetry &&
-                  ([503, ...retryCodes].indexOf(error.statusCode) !== -1 ||
+                  (retryCodes.indexOf(error.statusCode) !== -1 ||
                     retryCodes?.indexOf(error.message) !== -1)
                 ) {
                   if (retryCount < maxRetries) {
