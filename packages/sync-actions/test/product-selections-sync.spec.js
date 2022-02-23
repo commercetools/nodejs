@@ -10,7 +10,7 @@ describe('Exports', () => {
 
   test('correctly define base actions list', () => {
     expect(baseActionsList).toEqual([
-      { action: 'setName', key: 'name' },
+      { action: 'changeName', key: 'name' },
       { action: 'setKey', key: 'key' },
     ])
   })
@@ -22,7 +22,7 @@ describe('Actions', () => {
     productSelectionsSync = productSelectionsSyncFn()
   })
 
-  test('should build `setName` action', () => {
+  test('should build `changeName` action', () => {
     const before = {
       name: { en: 'Algeria' },
     }
@@ -31,7 +31,7 @@ describe('Actions', () => {
     }
 
     const actual = productSelectionsSync.buildActions(now, before)
-    const expected = [{ action: 'setName', name: now.name }]
+    const expected = [{ action: 'changeName', name: now.name }]
     expect(actual).toEqual(expected)
   })
 
