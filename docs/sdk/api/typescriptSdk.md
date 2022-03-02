@@ -1,5 +1,8 @@
 # TypeScript SDK Client v2
 
+Follow this [link](https://docs.commercetools.com/sdk/javascript-sdk) for an up to date and more accurate JavaScript/TypeScript SDK documentation.
+
+<!--
 We provide a packages written in typescript for using our API
 
 The **@commercetools/sdk-client-v2** is the TypeScript package that facilitates HTTP [requests](https://commercetools.github.io/nodejs/sdk/Glossary.html#clientrequest) to the Platform, ML or History API by using a predefined set of middlewares.
@@ -782,3 +785,5 @@ const client: Client = new ClientBuilder()
   ...
   .build()
 ```
+
+-->
