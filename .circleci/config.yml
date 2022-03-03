@@ -37,6 +37,18 @@ aliases:
     paths:
       - ~/.cache/yarn
 
+
+  - &restore_yarn_cache_node_14
+    keys:
+      - v1-yarn-cache-node_14-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - v1-yarn-cache-node_14-{{ .Branch }}
+      - v1-yarn-cache-node_14
+
+  - &save_yarn_cache_node_14
+    key: v1-yarn-cache-node_14-{{ .Branch }}-{{ checksum "yarn.lock" }}
+    paths:
+      - ~/.cache/yarn
+
   - &yarn_install
     name: Installing
     command: yarn --frozen-lockfile
