@@ -34,7 +34,6 @@ aliases:
 
   - &save_yarn_cache_node_18
     key: v1-yarn-cache-node_18-{{ .Branch }}-{{ checksum "yarn.lock" }}
-<<<<<<< HEAD
     paths:
       - ~/.cache/yarn
 
@@ -47,8 +46,18 @@ aliases:
 
   - &save_yarn_cache_node_16
     key: v1-yarn-cache-node_14-{{ .Branch }}-{{ checksum "yarn.lock" }}
-=======
->>>>>>> chore(node-version): add v18 to the upgrade
+    paths:
+      - ~/.cache/yarn
+
+
+  - &restore_yarn_cache_node_14
+    keys:
+      - v1-yarn-cache-node_14-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - v1-yarn-cache-node_14-{{ .Branch }}
+      - v1-yarn-cache-node_14
+
+  - &save_yarn_cache_node_14
+    key: v1-yarn-cache-node_14-{{ .Branch }}-{{ checksum "yarn.lock" }}
     paths:
       - ~/.cache/yarn
 
@@ -66,7 +75,6 @@ executors:
       # This version of the polyfill fixes (the above) issue in the graceful-fs package
       # https://raw.githubusercontent.com/isaacs/node-graceful-fs/168bdb8f0bb3174e8499d4bc5878deead4172c39/polyfills.js
       - image: cimg/node:14.19.3
-<<<<<<< HEAD
     working_directory: *working_directory
   node_16:
     docker:
@@ -76,8 +84,6 @@ executors:
   node_18:
     docker:
       - image: cimg/node:18.4.0
-=======
->>>>>>> Apply suggestions from code review
     working_directory: *working_directory
   node_16:
     docker:
@@ -87,6 +93,16 @@ executors:
   node_18:
     docker:
       - image: cimg/node:18.4.0
+  node_12:
+    docker:
+      # Keep it at `12.18.2` as otherwise there may be bugs with `graceful-fs` dependency
+      # https://github.com/nodejs/node/issues/34529
+      # https://raw.githubusercontent.com/isaacs/node-graceful-fs/168bdb8f0bb3174e8499d4bc5878deead4172c39/polyfills.js
+      - image: circleci/node:12.18.2
+    working_directory: *working_directory
+  node_14:
+    docker:
+      - image: circleci/node:14.18.1
     working_directory: *working_directory
 
 jobs:
