@@ -61,6 +61,9 @@ jobs:
           # Limiting the workers of Jest to 10
           # as the build otherwise dies due to resource restrictions.
           command: yarn test:ci
+      - run:
+          name: Running test (with coverage report)
+          command: yarn test:coverage:ci
 
   install_test_node_14:
     executor: node_14
@@ -78,7 +81,7 @@ jobs:
           name: Running tests (with coverage report)
           # Limiting the workers of Jest to 10
           # as the build otherwise dies due to resource restrictions.
-          command: yarn test:coverage:ci
+          command: yarn test
       - run:
           name: Running integration tests
           command: yarn test:integration
