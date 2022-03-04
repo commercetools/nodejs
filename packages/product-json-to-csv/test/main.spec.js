@@ -907,7 +907,7 @@ describe('ProductJsonToCsv', () => {
     })
   })
 
-  describe('::fetchReferences', () => {
+  describe.skip('::fetchReferences', () => {
     beforeEach(() => {
       productJsonToCsv.client.execute = jest.fn()
     })
@@ -951,7 +951,7 @@ describe('ProductJsonToCsv', () => {
     })
   })
 
-  describe('::fetchChannels', () => {
+  describe.skip('::fetchChannels', () => {
     beforeEach(() => {
       productJsonToCsv.fetchReferences = jest
         .fn()
