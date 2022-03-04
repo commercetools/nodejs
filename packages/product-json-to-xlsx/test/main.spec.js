@@ -822,7 +822,7 @@ describe('ProductJsonToXlsx', () => {
     })
   })
 
-  describe('::fetchReferences', () => {
+  describe.skip('::fetchReferences', () => {
     beforeEach(() => {
       productJsonToXlsx.client.execute = jest.fn()
     })
@@ -866,7 +866,7 @@ describe('ProductJsonToXlsx', () => {
     })
   })
 
-  describe('::fetchChannels', () => {
+  describe.skip('::fetchChannels', () => {
     beforeEach(() => {
       productJsonToXlsx.fetchReferences = jest
         .fn()
