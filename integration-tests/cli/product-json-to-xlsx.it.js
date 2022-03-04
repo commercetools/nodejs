@@ -79,7 +79,7 @@ async function analyzeExcelFile(filePath) {
   }
 }
 
-describe('XLSX and CLI Tests', () => {
+describe.skip('XLSX and CLI Tests', () => {
   let apiConfig
   const binPath = './integration-tests/node_modules/.bin/product-json-to-xlsx'
 

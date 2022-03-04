@@ -2,8 +2,8 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": ">=10",
-    "npm": ">=5.10"
+    "node": ">=14",
+    "npm": ">=v6.0.0"
   },
   "scripts": {
     "postinstall": "check-node-version --package --print && cross-env NODE_ENV=development yarn build",
@@ -23,7 +23,7 @@
     "format:js": "prettier --write '{packages,integration-tests,types}/**/*.{js,ts}'",
     "format:md": "prettier --parser markdown --write '**/*.md'",
     "test:coverage": "yarn build && npm test -- --no-watchman --coverage",
-    "test:ci": "yarn test -- --ci --no-watchman --maxWorkers=10",
+    "test:ci": "yarn test --ci --no-watchman --maxWorkers=10",
     "test:coverage:ci": "yarn test:ci -- --coverage && codecov",
     "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
