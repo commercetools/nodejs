@@ -35,9 +35,9 @@ function calcDelayDuration(
   if (backoff)
     return retryCount !== 0 // do not increase if it's the first retry
       ? Math.min(
-          Math.round((Math.random() + 1) * retryDelay * 2 ** retryCount),
-          maxDelay
-        )
+        Math.round((Math.random() + 1) * retryDelay * 2 ** retryCount),
+        maxDelay
+      )
       : retryDelay
   return retryDelay
 }
@@ -66,6 +66,7 @@ export default function createHttpMiddleware({
     retryDelay = 200,
     maxDelay = Infinity,
     retryOnAbort = false,
+    retryCodes = [503],
   } = {},
   fetch: fetcher,
   abortController: _abortController,
@@ -94,6 +95,12 @@ export default function createHttpMiddleware({
     fetchFunction = fetch
   }
 
+  if (!Array.isArray(retryCodes)) {
+    throw new Error(
+      '`retryCodes` option must be an array of retry status (error) codes.'
+    )
+  }
+
   return (next: Next): Next =>
     (request: MiddlewareRequest, response: MiddlewareResponse) => {
       let abortController: any
@@ -114,9 +121,9 @@ export default function createHttpMiddleware({
       // Ensure body is a string if content type is application/json
       const body =
         requestHeader['Content-Type'] === 'application/json' &&
-        typeof request.body !== 'string'
+          typeof request.body !== 'string'
           ? // NOTE: `stringify` of `null` gives the String('null')
-            JSON.stringify(request.body || undefined)
+          JSON.stringify(request.body || undefined)
           : request.body
 
       if (body && (typeof body === 'string' || Buffer.isBuffer(body))) {
@@ -132,15 +139,16 @@ export default function createHttpMiddleware({
       }
 
       if (!retryOnAbort) {
-        if (timeout || getAbortController || _abortController)
+        if (timeout || getAbortController || _abortController) {
           // eslint-disable-next-line
-        abortController =
+          abortController =
             (getAbortController ? getAbortController() : null) ||
             _abortController ||
             new AbortController()
 
-        if (abortController) {
-          fetchOptions.signal = abortController.signal
+          if (abortController) {
+            fetchOptions.signal = abortController.signal
+          }
         }
       }
 
@@ -151,16 +159,18 @@ export default function createHttpMiddleware({
       // wrap in a fn so we can retry if error occur
       function executeFetch() {
         if (retryOnAbort) {
-          if (timeout || getAbortController || _abortController)
+          if (timeout || getAbortController || _abortController) {
             // eslint-disable-next-line
-          abortController =
+            abortController =
               (getAbortController ? getAbortController() : null) ||
               _abortController ||
               new AbortController()
 
-          if (abortController) {
-            fetchOptions.signal = abortController.signal
+            if (abortController) {
+              fetchOptions.signal = abortController.signal
+            }
           }
+
         }
         // Kick off timer for abortController directly before fetch.
         let timer
@@ -225,21 +235,6 @@ export default function createHttpMiddleware({
                 })
                 return
               }
-              if (res.status === 503 && enableRetry)
-                if (retryCount < maxRetries) {
-                  setTimeout(
-                    executeFetch,
-                    calcDelayDuration(
-                      retryCount,
-                      retryDelay,
-                      maxRetries,
-                      backoff,
-                      maxDelay
-                    )
-                  )
-                  retryCount += 1
-                  return
-                }
 
               // Server responded with an error. Try to parse it as JSON, then
               // return a proper error type with all necessary meta information.
@@ -261,6 +256,28 @@ export default function createHttpMiddleware({
                     ? { message: parsed.message, body: parsed }
                     : { message: parsed, body: parsed }),
                 })
+
+                if (
+                  enableRetry &&
+                  (retryCodes.indexOf(error.statusCode) !== -1 ||
+                    retryCodes?.indexOf(error.message) !== -1)
+                ) {
+                  if (retryCount < maxRetries) {
+                    setTimeout(
+                      executeFetch,
+                      calcDelayDuration(
+                        retryCount,
+                        retryDelay,
+                        maxRetries,
+                        backoff,
+                        maxDelay
+                      )
+                    )
+                    retryCount += 1
+                    return
+                  }
+                }
+
                 maskAuthData(error.originalRequest, maskSensitiveHeaderData)
                 // Let the final resolver to reject the promise
                 const parsedResponse = {
