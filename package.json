@@ -94,7 +94,7 @@
     "gitbook-plugin-ga": "2.0.0",
     "gitbook-plugin-github": "3.0.0",
     "gitbook-plugin-prism": "2.4.0",
-    "husky": "4.3.8",
+    "husky": "7.0.4",
     "jest": "26.6.3",
     "jest-each": "26.6.2",
     "jest-runner-eslint": "0.11.1",
