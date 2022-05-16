@@ -5,7 +5,7 @@
 [![David Dependencies Status][david-icon]][david]
 [![David devDependencies Status][david-dev-icon]][david-dev]
 
-Convert [commercetools price](https://docs.commercetools.com/http-api-projects-products.html#price) CSV data to JSON. See example below for CSV format and sample response
+Convert [commercetools Composable Commerce price](https://docs.commercetools.com/http-api-projects-products.html#price) CSV data to JSON. See example below for CSV format and sample response
 
 ## Usage
 
@@ -15,7 +15,7 @@ Convert [commercetools price](https://docs.commercetools.com/http-api-projects-p
 
 ```
 Usage: csvparserprice [options]
-Convert commercetools price CSV data to JSON.
+Convert commercetools Composable Commerce price CSV data to JSON.
 
 Options:
   --help, -h        Show help text.                                    [boolean]

@@ -1,6 +1,6 @@
 # `sdk-auth`
 
-Auth module for different [authorization flows](https://docs.commercetools.com/http-api-authorization.html#authorization-flows) of commercetools platform API
+Auth module for different [authorization flows](https://docs.commercetools.com/http-api-authorization.html#authorization-flows) of commercetools Composable Commerce API
 
 ## Install
 
@@ -21,7 +21,7 @@ npm install --save @commercetools/sdk-auth
 
 ## Initialization
 
-Creates an auth client to handle authorization against the commercetools platform API.
+Creates an auth client to handle authorization against commercetools Composable Commerce API.
 
 #### Named arguments (options)
 
@@ -67,7 +67,7 @@ const token = await authClient.clientCredentialsFlow({
 
 ### Client Credentials Flow
 
-Fetches access token using [Client Credentials Flow](https://docs.commercetools.com/http-api-authorization.html#client-credentials-flow) from the commercetools platform API.
+Fetches access token using [Client Credentials Flow](https://docs.commercetools.com/http-api-authorization.html#client-credentials-flow) from commercetools Composable Commerce API.
 
 #### Argument
 
@@ -88,7 +88,7 @@ await authClient.clientCredentialsFlow()
 
 ### Customer Password Flow
 
-Fetches access token using [Password Flow](https://docs.commercetools.com/http-api-authorization.html#password-flow) from the commercetools platform API.
+Fetches access token using [Password Flow](https://docs.commercetools.com/http-api-authorization.html#password-flow) from commercetools Composable Commerce API.
 
 #### Argument
 
@@ -151,7 +151,7 @@ await authClient.clientPasswordFlow({
 
 ### Refresh Token Flow
 
-Fetches a new access token using [Refresh Token Flow](https://docs.commercetools.com/http-api-authorization.html#refresh-token-flow) from the commercetools platform API.
+Fetches a new access token using [Refresh Token Flow](https://docs.commercetools.com/http-api-authorization.html#refresh-token-flow) from commercetools Composable Commerce API.
 
 #### Argument
 
@@ -173,7 +173,7 @@ await authClient.refreshTokenFlow('refreshToken')
 
 ### Anonymous Session Flow
 
-Fetches access token using [Anonymous Session Flow](https://docs.commercetools.com/http-api-authorization.html#tokens-for-anonymous-sessions) from the commercetools platform API.
+Fetches access token using [Anonymous Session Flow](https://docs.commercetools.com/http-api-authorization.html#tokens-for-anonymous-sessions) from commercetools Composable Commerce API.
 
 #### Argument
 
@@ -229,7 +229,7 @@ await authClient.customFlow({
 
 ### Token Introspection
 
-Fetches info about `access_token` using [Token Introspection](https://docs.commercetools.com/http-api-authorization.html#oauth2-token-introspection) from the commercetools platform API.
+Fetches info about `access_token` using [Token Introspection](https://docs.commercetools.com/http-api-authorization.html#oauth2-token-introspection) from commercetools Composable Commerce API.
 
 #### Argument
 

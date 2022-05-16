@@ -1,13 +1,13 @@
 # Price Exporter
 
-A package that helps with exporting [commercetools price](https://docs.commercetools.com/http-api-projects-products.html#price) in `JSON` or `CSV` format from the [commercetools platform](https://docs.commercetools.com/).
+A package that helps with exporting [Composable Commerce price](https://docs.commercetools.com/http-api-projects-products.html#price) in `JSON` or `CSV` format from [commercetools Composable Commerce](https://docs.commercetools.com/).
 
 ## Configuration
 
 The constructor accepts two arguments:
 
 - A required object containing the following values:
-  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on commercetools Composable Commerce. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
   - `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_orders`]
   - `delimiter` (String): CSV delimiter (Optional. Default: `','`)
   - `exportFormat` (String): Export format ['csv', 'json'] (Optional. Default: 'json')
@@ -24,7 +24,7 @@ The constructor accepts two arguments:
 
 ```
 Usage: price-exporter [options]
-Export prices from the commercetools platform.
+Export prices from commercetools Composable Commerce.
 
 Options:
   --help, -h          Show help text.                                  [boolean]
@@ -104,7 +104,7 @@ You can export the custom field by passing in a header file like below
 customType,customField.foo,customField.localized.de,customField.localized.en
 ```
 
-The CSV exported is compatible with the [csv-parser-price](https://commercetools.github.io/nodejs/cli/csv-parser-price.html) module, and can be used to import exported prices to the CTP platform.
+The CSV exported is compatible with the [csv-parser-price](https://commercetools.github.io/nodejs/cli/csv-parser-price.html) module, and can be used to import exported prices to the CTP API.
 
 ### JS
 

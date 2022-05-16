@@ -5,7 +5,7 @@
   },
   "name": "@commercetools/customer-groups-exporter",
   "version": "3.0.23",
-  "description": "Exports customer groups from the commercetools platform.",
+  "description": "Exports customer groups from commercetools Composable Commerce.",
   "main": "lib/main.js",
   "bin": {
     "customer-groups-exporter": "bin/customer-groups-exporter.js"
@@ -22,6 +22,7 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "group",
     "groups",
     "json",

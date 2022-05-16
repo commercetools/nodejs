@@ -15,7 +15,7 @@ const args = yargs
   .usage(
     `
 Usage: $0 [options]
-Generate multiple discount codes to import to the commercetools platform.`
+Generate multiple discount codes to import to commercetools Composable Commerce.`
   )
   .showHelpOnFail(false, 'Use --help to display the CLI options.\n')
   .option('quantity', {

@@ -8,6 +8,7 @@
   "description": "Middleware for setting the User-Agent on the HTTP request, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "sdk",
     "middleware",
     "user-agent"

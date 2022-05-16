@@ -8,6 +8,7 @@
   "description": "Middleware for http requests, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "sdk",
     "middleware",
     "http"

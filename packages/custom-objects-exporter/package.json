@@ -5,7 +5,7 @@
   },
   "name": "@commercetools/custom-objects-exporter",
   "version": "3.0.23",
-  "description": "Exports custom objects from the commercetools platform.",
+  "description": "Exports custom objects from commercetools Composable Commerce.",
   "main": "lib/main.js",
   "bin": {
     "custom-objects-exporter": "bin/custom-objects-exporter.js"
@@ -22,6 +22,7 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "object",
     "objects",
     "json",

@@ -1,6 +1,6 @@
 # Product JSON to XLSX Parser
 
-A package that parses [commercetools products](https://docs.commercetools.com/http-api-projects-products.html#product) JSON data to XLSX.
+A package that parses [commercetools Composable Commerce products](https://docs.commercetools.com/http-api-projects-products.html#product) JSON data to XLSX.
 The products to be parsed can either be read from a `.json` file or directly [piped in](http://www.gnu.org/software/bash/manual/bash.html#Pipelines) from the [product exporter](https://commercetools.github.io/nodejs/cli/product-exporter.html).
 
 ## Usage
@@ -11,7 +11,7 @@ The products to be parsed can either be read from a `.json` file or directly [pi
 
 ```
 Usage: product-json-to-xlsx [options]
-Convert commercetools products from JSON to XLSX
+Convert commercetools Composable Commerce products from JSON to XLSX
 
 Options:
   --help, -h                       Show help                                   [boolean]
@@ -57,7 +57,7 @@ The products to be parsed from JSON to XLSX can be passed to this module in one 
 
 #### Pass products through a pipe
 
-Piping products in JSON to be parsed. This ideally works with the commercetools product exporter. In this scenario, the products are parsed directly after export. More information on pipe streams can be found [here](http://www.gnu.org/software/bash/manual/bash.html#Pipelines)
+Piping products in JSON to be parsed. This ideally works with the commercetools Composable Commerce product exporter. In this scenario, the products are parsed directly after export. More information on pipe streams can be found [here](http://www.gnu.org/software/bash/manual/bash.html#Pipelines)
 
 ##### Example
 
@@ -108,7 +108,7 @@ For more direct usage, it is possible to use this module directly
 
 The constructor accepts four arguments:
 
-- `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+- `apiConfig` (Object): `AuthMiddleware` options for authentication on commercetools Composable Commerce. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
 - `parserConfig` (Object): Internal Parse configurations
   - `categoryBy` (String): Specify which identifier should be used to reference the categories (Options: `name`, `key`, `externalId` and `namedPath`. Default: `name`)
   - `categoryOrderHintBy` (String): Specify which identifier should be used to reference the categoryOrderHints (Options: `name`, `key`, `externalId` and `namedPath`. Default: `name`)

@@ -1,6 +1,6 @@
 # Discount Code Importer
 
-A package that helps with importing [commercetools discount codes](https://docs.commercetools.com/http-api-projects-discountCodes.html) in JSON format to the [commercetools platform](https://docs.commercetools.com/).
+A package that helps with importing [Composable Commerce discount codes](https://docs.commercetools.com/http-api-projects-discountCodes.html) in JSON format to [commercetools Composable Commerce](https://docs.commercetools.com/).
 This package is built to be used in conjunction with [sphere-node-cli](https://github.com/sphereio/sphere-node-cli)
 
 ## Configuration
@@ -8,7 +8,7 @@ This package is built to be used in conjunction with [sphere-node-cli](https://g
 The constructor accepts two arguments:
 
 - A required object containing the following values:
-  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on commercetools Composable Commerce. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
   - `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`manage_orders`]
   - `batchSize` (Number): Amount of codes not more than 500 to process concurrently (Optional. Default: 50)
   - `continueOnProblems` (Boolean): Flag whether to continue processing if an error occurs (Optional. Default: false)

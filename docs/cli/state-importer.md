@@ -1,6 +1,6 @@
 # State Importer
 
-A package that helps with importing [commercetools states](https://docs.commercetools.com/http-api-projects-states.html) in JSON format to the [commercetools platform](https://docs.commercetools.com/).
+A package that helps with importing [Composable Commerce states](https://docs.commercetools.com/http-api-projects-states.html) in JSON format to [commercetools Composable Commerce](https://docs.commercetools.com/).
 This package is built to be used in conjunction with [sphere-node-cli](https://github.com/sphereio/sphere-node-cli)
 
 ## Configuration
@@ -8,7 +8,7 @@ This package is built to be used in conjunction with [sphere-node-cli](https://g
 The constructor accepts three arguments:
 
 - A required object containing the following values:
-  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on commercetools Composable Commerce. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
   - `continueOnProblems` (Boolean): Flag whether to continue processing if an error occurs (Optional. Default: false)
 - `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`manage_project`] to create and/or update states or [`manage_orders`] to update states
 - An optional logger object having four functions (`info`, `warn`, `error` and `verbose`)

@@ -5,9 +5,10 @@
   },
   "name": "@commercetools/price-exporter",
   "version": "3.0.24",
-  "description": "Exports prices from the commercetools platform",
+  "description": "Exports prices from commercetools Composable Commerce",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "csv",
     "parser",
     "price",

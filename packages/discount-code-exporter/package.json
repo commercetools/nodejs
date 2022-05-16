@@ -5,9 +5,10 @@
   },
   "name": "@commercetools/discount-code-exporter",
   "version": "4.0.23",
-  "description": "Exports discount codes from the commercetools platform.",
+  "description": "Exports discount codes from commercetools Composable Commerce.",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "discount",
     "code",
     "export",

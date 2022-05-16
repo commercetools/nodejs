@@ -5,7 +5,7 @@
   },
   "name": "@commercetools/custom-objects-importer",
   "version": "3.0.40",
-  "description": "Import custom objects to the commercetools platform",
+  "description": "Import custom objects to commercetools Composable Commerce",
   "main": "lib/main.js",
   "scripts": {
     "prebuild": "rimraf lib/**",
@@ -19,6 +19,7 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "object",
     "objects",
     "json",

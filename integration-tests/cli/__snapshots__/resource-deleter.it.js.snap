@@ -3,7 +3,7 @@
 exports[`Resource Deleter CLI basic functionality should print usage information given the help flag 1`] = `
 "
 Usage: resource-deleter [options]
-Delete resources from the commercetools platform
+Delete resources from commercetools Composable Commerce
 
 Options:
       --help         Show help                                         [boolean]

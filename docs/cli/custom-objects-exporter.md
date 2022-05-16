@@ -1,13 +1,13 @@
 # Custom Objects Exporter
 
-A package which exports [commercetools custom objects](https://docs.commercetools.com/http-api-projects-custom-objects.html) in `JSON` format from the [commercetools platform](https://docs.commercetools.com/).
+A package which exports [Composable Commerce custom objects](https://docs.commercetools.com/http-api-projects-custom-objects.html) in `JSON` format from [commercetools Composable Commerce](https://docs.commercetools.com/).
 
 ## Configuration
 
 The constructor accepts two arguments:
 
 - A required object containing the following values:
-  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on commercetools Composable Commerce. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
   - `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`view_products`, `view_orders`, `view_customers`]. More info on how to get the access token [here](https://docs.commercetools.com/http-api-authorization.html#authorization-flows)
   - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api-query-predicates) (Optional)
 - An optional logger object having four functions (`info`, `warn`, `error` and `debug`)
@@ -20,7 +20,7 @@ The constructor accepts two arguments:
 
 ```
 Usage: custom-objects-exporter [options]
-Export custom objects from the commercetools platform
+Export custom objects from commercetools Composable Commerce
 
 Options:
   --help                     Show help text.                           [boolean]

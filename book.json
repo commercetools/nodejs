@@ -1,7 +1,7 @@
 {
   "gitbook": ">=3.2.1",
   "root": "docs",
-  "title": "commercetools node.js",
+  "title": "commercetools composable commerce node.js",
   "plugins": [
     "edit-link",
     "prism",

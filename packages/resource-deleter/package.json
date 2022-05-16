@@ -5,7 +5,7 @@
   },
   "name": "@commercetools/resource-deleter",
   "version": "2.0.26",
-  "description": "Delete resources from the commercetools platform",
+  "description": "Delete resources from commercetools Composable Commerce",
   "main": "lib/main.js",
   "bin": {
     "resource-deleter": "bin/resource-deleter.js"
@@ -22,6 +22,7 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "resource",
     "resources",
     "delete"

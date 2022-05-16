@@ -22,6 +22,7 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "customer",
     "get",
     "delete",

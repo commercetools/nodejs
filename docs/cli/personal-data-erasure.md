@@ -1,6 +1,6 @@
 # Personal Data Erasure
 
-A package which deletes or exports [commercetools personal data](#list-of-personal-data) in `JSON` format from the [commercetools platform](https://docs.commercetools.com/).
+A package which deletes or exports [personal data](#list-of-personal-data) in `JSON` format from [commercetools Composable Commerce](https://docs.commercetools.com/).
 
 ## List of personal data
 
@@ -16,7 +16,7 @@ A package which deletes or exports [commercetools personal data](#list-of-person
 The constructor accepts two arguments:
 
 - A required object containing the following values:
-  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on commercetools Composable Commerce. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
   - `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`view_products`, `manage_products`, `view_orders`, `manage_orders`, `view_payments`, `manage_payments`, `view_shopping_lists`, `manage_shopping_lists`, `view_customers`, `manage_customers`]. More info on how to get the access token [here](https://docs.commercetools.com/http-api-authorization.html#authorization-flows)
 - An optional logger object having four functions (`info`, `warn`, `error` and `debug`)
 

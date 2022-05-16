@@ -15,9 +15,9 @@ The SDK is now split into multiple little packages, think about it as a _microse
 The core of the SDK lies within its [middlewares](/sdk/Middlewares.md) implementation.
 Middlewares do specific things and can be replaced by other middlewares depending on the use case, allowing many possible combinations.
 
-The [SDK _client_](/sdk/api/README.md#sdk-client) itself is in fact really simple and somehow even agnostic of the specific commercetools platform API that can be used as a generic HTTP client.
+The [SDK _client_](/sdk/api/README.md#sdk-client) itself is in fact really simple and somehow even agnostic of the specific commercetools Composable Commerce API that can be used as a generic HTTP client.
 
-If we take a step back and look at the general requirement, at the end we simply want to **execute a request**. It just happens to be that we want to make specific requests to the commercetools platform API but it might be as well any other API. That's where the [middlewares](/sdk/Middlewares.md) come in, which provide the _side effects_ of the given request.
+If we take a step back and look at the general requirement, at the end we simply want to **execute a request**. It just happens to be that we want to make specific requests to commercetools Composable Commerce API but it might be as well any other API. That's where the [middlewares](/sdk/Middlewares.md) come in, which provide the _side effects_ of the given request.
 
 ## Usage example
 

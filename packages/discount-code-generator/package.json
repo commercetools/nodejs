@@ -5,9 +5,10 @@
   },
   "name": "@commercetools/discount-code-generator",
   "version": "2.0.10",
-  "description": "Generates discount codes for the commercetools platform, according to constraints.",
+  "description": "Generates discount codes for commercetools Composable Commerce, according to constraints.",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "discount",
     "code",
     "generator",

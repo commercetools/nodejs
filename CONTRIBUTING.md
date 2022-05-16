@@ -1,4 +1,4 @@
-# Contributing to commercetools nodejs
+# Contributing to commercetools Composable Commerce nodejs
 
 Please take a moment to review this document in order to make the contribution
 process easy and effective for everyone involved.

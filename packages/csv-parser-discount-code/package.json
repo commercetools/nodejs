@@ -8,6 +8,7 @@
   "description": "Converts commercetools discount code data from CSV to JSON.",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "discount",
     "code",
     "csv",

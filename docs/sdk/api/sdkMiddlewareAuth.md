@@ -21,7 +21,7 @@ npm install --save @commercetools/sdk-middleware-auth
 
 ## `createAuthMiddlewareForClientCredentialsFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Client Credentials Flow](https://docs.commercetools.com/http-api-authorization.html#client-credentials-flow) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Client Credentials Flow](https://docs.commercetools.com/http-api-authorization.html#client-credentials-flow) of commercetools Composable Commerce API.
 
 #### Named arguments (options)
 
@@ -61,7 +61,7 @@ const client = createClient({
 
 ## `createAuthMiddlewareForPasswordFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Password Flow](https://docs.commercetools.com/http-api-authorization.html#password-flow) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Password Flow](https://docs.commercetools.com/http-api-authorization.html#password-flow) of commercetools Composable Commerce API.
 
 #### Named arguments (options)
 
@@ -108,7 +108,7 @@ const client = createClient({
 
 ## `createAuthMiddlewareForAnonymousSessionFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Anonymous Session Flow](https://docs.commercetools.com/http-api-authorization.html#tokens-for-anonymous-sessions) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Anonymous Session Flow](https://docs.commercetools.com/http-api-authorization.html#tokens-for-anonymous-sessions) of commercetools Composable Commerce API.
 
 #### Named arguments (options)
 
@@ -149,7 +149,7 @@ const client = createClient({
 
 ## `createAuthMiddlewareForRefreshTokenFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Refresh Token Flow](https://docs.commercetools.com/http-api-authorization.html#refresh-token-flow) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Refresh Token Flow](https://docs.commercetools.com/http-api-authorization.html#refresh-token-flow) of commercetools Composable Commerce API.
 
 #### Named arguments (options)
 

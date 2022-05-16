@@ -5,9 +5,10 @@
   },
   "name": "@commercetools/sdk-client",
   "version": "2.1.2",
-  "description": "SDK Client for usage of commercetools platform API",
+  "description": "SDK Client for usage of commercetools Composable Commerce API",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "sdk",
     "api",
     "client"

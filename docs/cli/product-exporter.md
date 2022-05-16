@@ -1,13 +1,13 @@
 # Product Exporter
 
-A package that helps with exporting [commercetools products](https://docs.commercetools.com/http-api-projects-productProjections.html#productprojection) from the [commercetools platform](http://dev.commercetools.com/).
+A package that helps with exporting [Composable Commerce products](https://docs.commercetools.com/http-api-projects-productProjections.html#productprojection) from [commercetools Composable Commerce](http://dev.commercetools.com/).
 The products can be exported in JSON format, or as chunks that can be piped to a parser for more export formats.
 
 ## Configuration
 
 The constructor accepts four arguments:
 
-- `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+- `apiConfig` (Object): `AuthMiddleware` options for authentication on commercetools Composable Commerce. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
 - `exportConfig` (Object): Internal Export configurations
   - `batch` (Number): Amount of products to fetch for each API call
   - `expand` (Array): An array of strings signifying reference fields to expand in the returned product
@@ -26,7 +26,7 @@ The constructor accepts four arguments:
 
 ```
 Usage: product-exporter [options]
-Export products from the commercetools platform
+Export products from commercetools Composable Commerce
 
 Options:
   --help, -h        Show help text.                                    [boolean]

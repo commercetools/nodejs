@@ -8,6 +8,7 @@
   "description": "Middleware for queueing requests, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "sdk",
     "middleware",
     "queue"
