@@ -2,7 +2,7 @@
   <a href="https://commercetools.com/">
     <img alt="commercetools logo" src="http://cdn.rawgit.com/commercetools/press-kit/master/PNG/72DPI/CT%20logo%20chrom%20black%20horizontal%20RGB%2072dpi.png">
   </a>
-  <b>Node.js commercetools ecosystem.</b>
+  <b>Node.js commercetools Composable Commerce ecosystem.</b>
 </p>
 
 <p align="center">

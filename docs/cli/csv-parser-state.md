@@ -1,6 +1,6 @@
 # CSV Parser State
 
-Convert [commercetools states](https://docs.commercetools.com/http-api-projects-states.html#state) CSV data to JSON. See example below for CSV format, sample response and usage.
+Convert [commercetools Composable Commerce states](https://docs.commercetools.com/http-api-projects-states.html#state) CSV data to JSON. See example below for CSV format, sample response and usage.
 
 ## Usage
 
@@ -78,7 +78,7 @@ outputStream
 The constructor takes in 2 optional parameters
 
 - A configuration object containing any/all of the following values:
-  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (only required if states have a `transitions` field containing one or more states that need to be resolved. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on commercetools Composable Commerce. (only required if states have a `transitions` field containing one or more states that need to be resolved. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
   - `csvConfig` (Object): A configuration object for describing the CSV file:
     - `delimiter` (String): Used delimiter in the CSV (Default: `','`)
     - `multiValueDelimiter` (String): Used delimiter in multiValue fields in the CSV (Default: `';'`)

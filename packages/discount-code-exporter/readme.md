@@ -1,6 +1,6 @@
 # discount-code-exporter
 
-Export discount codes from the commercetools platform.
+Export discount codes from commercetools Composable Commerce.
 
 more info here: https://commercetools.github.io/nodejs/cli/discount-code-exporter.html
 

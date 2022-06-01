@@ -5,9 +5,10 @@
   },
   "name": "@commercetools/get-credentials",
   "version": "3.0.18",
-  "description": "Get CT credentials from the system environment.",
+  "description": "Get commercetools Composable Commerce credentials from the system environment.",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "credentials"
   ],
   "repository": {

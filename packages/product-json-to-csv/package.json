@@ -5,9 +5,10 @@
   },
   "name": "@commercetools/product-json-to-csv",
   "version": "5.0.17",
-  "description": "Converts commercetools products from JSON to CSV",
+  "description": "Converts commercetools Composable Commerce products from JSON to CSV",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "products",
     "projections",
     "parser",

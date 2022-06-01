@@ -1,6 +1,6 @@
 # product-exporter
 
-Export commercetools products using [product projections](https://dev.commercetools.com/http-api-projects-productProjections.html#productprojection) from the commercetools platform.
+Export Composable Commerce products using [product projections](https://dev.commercetools.com/http-api-projects-productProjections.html#productprojection) from commercetools Composable Commerce.
 
 More info here: https://commercetools.github.io/nodejs/cli/product-exporter.html
 

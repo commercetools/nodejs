@@ -5,7 +5,7 @@ Follow this [link](https://docs.commercetools.com/sdk/javascript-sdk) for an up 
 <!--
 We provide a packages written in typescript for using our API
 
-The **@commercetools/sdk-client-v2** is the TypeScript package that facilitates HTTP [requests](https://commercetools.github.io/nodejs/sdk/Glossary.html#clientrequest) to the Platform, ML or History API by using a predefined set of middlewares.
+The **@commercetools/sdk-client-v2** is the TypeScript package that facilitates HTTP [requests](https://commercetools.github.io/nodejs/sdk/Glossary.html#clientrequest) to the commercetools Composable Commerce, ML or History API by using a predefined set of middlewares.
 
 Unlike the Node.js sdk-client, the TypeScript client is a little different in its usage however, they are both very similar in every other aspect and it's also backward compatible with the Nodejs sdk-client.
 
@@ -98,7 +98,7 @@ const client = new ClientBuilder()
 
 const apiRoot = createApiBuilderFromCtpClient(client)
 
-// calling the platform functions
+// calling the commercetools Composable Commerce functions
 // get project details
 apiRoot
   .withProjectKey({
@@ -343,7 +343,7 @@ These are class methods that creates auth middlewares using different authentica
 
 #### withAnonymousSessionFlow(options: _AnonymousAuthMiddlewareOptions_)
 
-Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle authentication for the [Anonymous Session](https://docs.commercetools.com/http-api-authorization.html#tokens-for-anonymous-sessions) flow of the commercetools Platform API.
+Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle authentication for the [Anonymous Session](https://docs.commercetools.com/http-api-authorization.html#tokens-for-anonymous-sessions) flow of commercetools Composable Commerce API.
 
 #### Named arguments (options)
 
@@ -380,7 +380,7 @@ const client: Client = new ClientBuilder()
 
 #### withClientCredentialsFlow(options: _AuthMiddlewareOptions_)
 
-Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle authentication for the Client [Credentials Flow](https://docs.commercetools.com/http-api-authorization.html#client-credentials-flow) of the commercetools platform API.
+Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle authentication for the Client [Credentials Flow](https://docs.commercetools.com/http-api-authorization.html#client-credentials-flow) of commercetools Composable Commerce API.
 
 #### Named arguments (options)
 
@@ -447,7 +447,7 @@ const client: Client = new ClientBuilder()
 
 #### withPasswordFlow(options: _PasswordAuthMiddlewareOptions_)
 
-Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle authentication for the [Password Flow](https://docs.commercetools.com/http-api-authorization.html#password-flow) of the commercetools platform API.
+Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle authentication for the [Password Flow](https://docs.commercetools.com/http-api-authorization.html#password-flow) of commercetools Composable Commerce API.
 
 #### Named arguments (options)
 
@@ -489,7 +489,7 @@ const client: Client = new ClientBuilder()
 
 #### withRefreshTokenFlow(options: _RefreshAuthMiddlewareOptions_)
 
-Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle authentication for the Refresh Token Flow of the commercetools platform API.
+Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle authentication for the Refresh Token Flow of commercetools Composable Commerce API.
 
 #### Named arguments (options)
 
@@ -529,7 +529,7 @@ There are also other class methods that creates middlewares used to fully cusotm
 
 #### withHttpMiddleware(options: _HttpMiddlewareOptions_)
 
-Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle HTTP requests for the commercetools platform API.
+Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle HTTP requests for commercetools Composable Commerce API.
 
 The HTTP middleware can run in either a browser or Node.js environment. For Node.js environments it is important to either have a fetch implementation either globally available via e.g. [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) or to pass it in as an argument (see below) via e.g. [node-fetch](https://github.com/bitinn/node-fetch). In browsers without a native fetch implementation any well known fetch polyfill should be compatible with the middleware such as [whatwg-fetch](https://github.com/whatwg/fetch) or [unfetch](https://github.com/developit/unfetch).
 

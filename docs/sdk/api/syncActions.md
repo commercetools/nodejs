@@ -714,7 +714,7 @@ client.execute(statesRequests)
 
 Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for [_types_](https://docs.commercetools.com/http-api-projects-types.html).
 
-**Please note** that there is no `remove action` for `enum` values. So this package will comply with the [platform](https://docs.commercetools.com/http-api-projects-types.html#add-enumvalue-to-fielddefinition) and only generate `changeOrder` and `add` actions for any `enum`.
+**Please note** that there is no `remove action` for `enum` values. So this package will comply with the [API](https://docs.commercetools.com/http-api-projects-types.html#add-enumvalue-to-fielddefinition) and only generate `changeOrder` and `add` actions for any `enum`.
 
 #### Arguments
 

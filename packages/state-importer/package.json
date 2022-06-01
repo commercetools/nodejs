@@ -5,7 +5,7 @@
   },
   "name": "@commercetools/state-importer",
   "version": "3.0.40",
-  "description": "Import states to the commercetools platform",
+  "description": "Import states to commercetools Composable Commerce",
   "main": "lib/main.js",
   "files": [
     "lib"
@@ -22,6 +22,7 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "state",
     "states",
     "json",

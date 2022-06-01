@@ -1,12 +1,12 @@
 # Inventories Exporter
 
-This package helps in exporting [inventories](https://docs.commercetools.com/http-api-projects-inventory.html) from the commercetools platform in `csv` and `json` format
+This package helps in exporting [inventories](https://docs.commercetools.com/http-api-projects-inventory.html) from commercetools Composable Commerce in `csv` and `json` format
 
 ## Configuration
 
 The constructor accepts four arguments:
 
-- `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+- `apiConfig` (Object): `AuthMiddleware` options for authentication on commercetools Composable Commerce. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
 - An optional logger object having four methods (`info`, `warn`, `error` and `verbose`)
 - `exportConfig` (Object): Internal Export configurations
   - `delimiter` (Object): CSV delimiter
@@ -25,7 +25,7 @@ npm install @commercetools/inventories-exporter --global
 
 ```
 Usage: inventoriesexporter [options]
-Export inventories from the commercetools platform.
+Export inventories from commercetools Composable Commerce.
 
 Options:
   --help, -h        Show help text.                                    [boolean]

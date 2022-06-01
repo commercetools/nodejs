@@ -1,13 +1,13 @@
 # Category Exporter
 
-A package which exports [commercetools categories](https://docs.commercetools.com/http-api-projects-categories.html) in `JSON` format from the [commercetools platform](https://docs.commercetools.com/).
+A package which exports [Composable Commerce categories](https://docs.commercetools.com/http-api-projects-categories.html) in `JSON` format from the [commercetools Composable Commerce](https://docs.commercetools.com/).
 
 ## Configuration
 
 The constructor accepts two arguments:
 
 - A required object containing the following values:
-  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on commercetools Composable Commerce. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
   - `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`view_products`, `manage_products`]. More info on how to get the access token [here](https://docs.commercetools.com/http-api-authorization.html#authorization-flows)
   - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api-query-predicates) (Optional)
 - An optional logger object having four functions (`info`, `warn`, `error` and `debug`)
@@ -20,7 +20,7 @@ The constructor accepts two arguments:
 
 ```
 Usage: category-exporter [options]
-Export categories from the commercetools platform
+Export categories from the commercetools Composable Commerce
 
 Options:
   --help                     Show help text.                           [boolean]

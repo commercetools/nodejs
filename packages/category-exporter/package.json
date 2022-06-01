@@ -5,7 +5,7 @@
   },
   "name": "@commercetools/category-exporter",
   "version": "3.0.23",
-  "description": "Exports categories from the commercetools platform.",
+  "description": "Exports categories from commercetools Composable Commerce.",
   "main": "lib/main.js",
   "bin": {
     "category-exporter": "bin/category-exporter.js"
@@ -22,6 +22,7 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "category",
     "categories",
     "json",

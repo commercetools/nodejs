@@ -191,7 +191,7 @@ In the new SDK, because of the flexibility that the [middlewares](/sdk/Middlewar
 
 #### Always 100% compatibility with new API features
 
-In the `sphere-node-sdk` requests for a service had to be defined using the methods that the service provided. If the commercetools HTTP API would release new endpoints or new request options, the SDK had to be adjusted in order to support those new features.<br/>
+In the `sphere-node-sdk` requests for a service had to be defined using the methods that the service provided. If the commercetools Composable Commerce HTTP API would release new endpoints or new request options, the SDK had to be adjusted in order to support those new features.<br/>
 In the new SDK _this problem becomes obsolete_ because the [request](/sdk/Glossary.md#clientrequest) URI can simply be provided manually. The [request builder](/sdk/api/apiRequestBuilder.md) is just a helper to construct the URI for a given service but the URI can be typed manually as well.
 
 ```js

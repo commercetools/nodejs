@@ -5,9 +5,10 @@
   },
   "name": "@commercetools/api-request-builder",
   "version": "5.6.3",
-  "description": "Helper functions to construct API requests URI for the commercetools platform in a declarative way.",
+  "description": "Helper functions to construct API requests URI for commercetools Composable Commerce in a declarative way.",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "api",
     "uri",
     "builder",

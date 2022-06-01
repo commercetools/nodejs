@@ -5,9 +5,10 @@
   },
   "name": "@commercetools/inventories-exporter",
   "version": "3.0.24",
-  "description": "Exports inventories from the commercetools platform.",
+  "description": "Exports inventories from commercetools Composable Commerce.",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "inventories",
     "stock",
     "code",

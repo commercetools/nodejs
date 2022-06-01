@@ -1,6 +1,6 @@
 # get-credentials
 
-Retrieve commercetools platform credentials from environment variables or file system.
+Retrieve commercetools Composable Commerce credentials from environment variables or file system.
 
 https://commercetools.github.io/nodejs/sdk/api/getCredentials.html
 

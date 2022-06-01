@@ -1,13 +1,13 @@
 # Discount Code Exporter
 
-A package that helps with exporting [commercetools discount codes](https://docs.commercetools.com/http-api-projects-discountCodes.html) in `JSON` or `CSV` format from the [commercetools platform](https://docs.commercetools.com/).
+A package that helps with exporting [Composable Commerce discount codes](https://docs.commercetools.com/http-api-projects-discountCodes.html) in `JSON` or `CSV` format from [commercetools Composable Commerce](https://docs.commercetools.com/).
 
 ## Configuration
 
 The constructor accepts two arguments:
 
 - A required object containing the following values:
-  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on commercetools Composable Commerce. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
   - `batchSize` (Number): Amount of codes not more than 500 to process concurrently (Optional. Default: 500)
   - `language` (String): Language used for localised fields if no template is given (Optional. Default: `'en'`)
   - `accessToken` (String): Access token to be used to authenticate requests to API. Requires scope of [`view_orders`]
@@ -28,7 +28,7 @@ The constructor accepts two arguments:
 
 ```
 Usage: bin/discount-code-exporter.js [options]
-Export discount codes from the commercetools platform.
+Export discount codes from commercetools Composable Commerce.
 
 Options:
   --help, -h                 Show help text.                           [boolean]

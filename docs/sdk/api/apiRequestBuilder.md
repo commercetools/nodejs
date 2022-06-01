@@ -21,7 +21,7 @@ npm install --save @commercetools/api-request-builder
 
 ## `createRequestBuilder(options)`
 
-Creates a _request builder_ that allows to declaratively build a HTTP API request URI for the commercetools platform.
+Creates a _request builder_ that allows to declaratively build a HTTP API request URI for commercetools Composable Commerce.
 
 #### Arguments
 
@@ -70,7 +70,7 @@ const uri = requestBuilder.productProjections.build()
 // uri = "/project-key/product-projections"
 ```
 
-Default services match the commercetools API using a camel-case convention.
+Default services match the commercetools Composable Commerce API using a camel-case convention.
 
 | Endpoints                    | Service                         | Features                                                         |
 | ---------------------------- | ------------------------------- | ---------------------------------------------------------------- |

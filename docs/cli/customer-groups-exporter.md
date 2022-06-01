@@ -1,13 +1,13 @@
 # Customer Groups Exporter
 
-A package which exports [commercetools customer groups](https://docs.commercetools.com/http-api-projects-customerGroups.html) in `JSON` format from the [commercetools platform](https://docs.commercetools.com/).
+A package which exports [Composable Commerce customer groups](https://docs.commercetools.com/http-api-projects-customerGroups.html) in `JSON` format from [commercetools Composable Commerce](https://docs.commercetools.com/).
 
 ## Configuration
 
 The constructor accepts two arguments:
 
 - A required object containing the following values:
-  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on commercetools Composable Commerce. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
   - `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`view_customers`]. More info on how to get the access token [here](https://docs.commercetools.com/http-api-authorization.html#authorization-flows)
   - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api-query-predicates) (Optional)
 - An optional logger object having four functions (`info`, `warn`, `error` and `debug`)
@@ -20,7 +20,7 @@ The constructor accepts two arguments:
 
 ```
 Usage: customer-groups-exporter [options]
-Export customer groups from the commercetools platform
+Export customer groups from commercetools Composable Commerce
 
 Options:
   --help                     Show help text.                           [boolean]

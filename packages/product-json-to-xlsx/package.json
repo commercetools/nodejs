@@ -5,9 +5,10 @@
   },
   "name": "@commercetools/product-json-to-xlsx",
   "version": "4.0.16",
-  "description": "Converts commercetools products from JSON to XLSX",
+  "description": "Converts commercetools Composable Commerce products from JSON to XLSX",
   "keywords": [
     "commercetools",
+    "composable commerce",
     "products",
     "projections",
     "parser",

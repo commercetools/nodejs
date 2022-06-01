@@ -1,6 +1,6 @@
 # Inventories Exporter
 
-Export inventories from the commercetools platform.
+Export inventories from commercetools Composable Commerce.
 
 Read the documentation here => https://commercetools.github.io/nodejs/cli/inventories-exporter.html
 

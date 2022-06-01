@@ -1,6 +1,6 @@
 # `get-credentials`
 
-Retrieve commercetools project credentials from environment variables or file system.
+Retrieve Project credentials from environment variables or file system.
 
 ## Install
 
