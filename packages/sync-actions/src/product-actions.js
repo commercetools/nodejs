@@ -707,16 +707,13 @@ export function actionsMapPrices(
         newObj.variants
       )
       if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
-        const [
-          addPriceAction,
-          changePriceAction,
-          removePriceAction,
-        ] = _buildVariantPricesAction(
-          variant.prices,
-          oldVariant,
-          newVariant,
-          enableDiscounted
-        )
+        const [addPriceAction, changePriceAction, removePriceAction] =
+          _buildVariantPricesAction(
+            variant.prices,
+            oldVariant,
+            newVariant,
+            enableDiscounted
+          )
 
         addPriceActions = addPriceActions.concat(addPriceAction)
         changePriceActions = changePriceActions.concat(changePriceAction)
@@ -805,5 +802,17 @@ export function actionsMapMasterVariant(oldObj, newObj) {
   if (newMasterVariantId && oldMasterVariantId !== newMasterVariantId)
     return [createChangeMasterVariantAction(newMasterVariantId)]
 
+  return []
+}
+
+export function actionsMapPriceMode(diff) {
+  const setPriceModeAction = function setPriceModeAction(priceMode) {
+    return {
+      action: 'setPriceMode',
+      priceMode: priceMode[0],
+    }
+  }
+  if (diff.priceMode && diff.priceMode.length)
+    return [setPriceModeAction(diff.priceMode)]
   return []
 }
