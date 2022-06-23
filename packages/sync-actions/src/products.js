@@ -142,8 +142,6 @@ function createProductMapActions(
       )
     )
 
-    allActions.push(productActions.actionsMapPriceMode(diff))
-
     if (publish === true || staged === false)
       return flatten(allActions).map((action) => ({ ...action, staged: false }))
 

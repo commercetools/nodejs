@@ -1086,6 +1086,41 @@ describe('Actions', () => {
     expect(actions).toHaveLength(0)
   })
 
+  test('should change `setPriceMode` action', async () => {
+    const before = {
+      masterVariant: {
+        id: 1,
+        prices: [],
+        images: [],
+        attributes: [],
+        assets: [],
+      },
+      variants: [],
+      priceMode: 'Embedded',
+    }
+
+    const now = {
+      masterVariant: {
+        id: 1,
+        prices: [],
+        images: [],
+        attributes: [],
+        assets: [],
+      },
+      variants: [],
+      priceMode: 'Standalone',
+    }
+
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual([
+      {
+        action: 'setPriceMode',
+        priceMode: 'Standalone',
+      },
+    ])
+  })
+
   describe('assets', () => {
     test('should build "addAsset" action with empty assets', () => {
       const before = {

@@ -23,6 +23,7 @@ export const baseActionsList = [
   { action: 'setDescription', key: 'description' },
   { action: 'setSearchKeywords', key: 'searchKeywords' },
   { action: 'setKey', key: 'key' },
+  { action: 'setPriceMode', key: 'priceMode' },
 ]
 
 export const baseAssetActionsList = [
@@ -802,17 +803,5 @@ export function actionsMapMasterVariant(oldObj, newObj) {
   if (newMasterVariantId && oldMasterVariantId !== newMasterVariantId)
     return [createChangeMasterVariantAction(newMasterVariantId)]
 
-  return []
-}
-
-export function actionsMapPriceMode(diff) {
-  const setPriceModeAction = function setPriceModeAction(priceMode) {
-    return {
-      action: 'setPriceMode',
-      priceMode: priceMode[0],
-    }
-  }
-  if (diff.priceMode && diff.priceMode.length)
-    return [setPriceModeAction(diff.priceMode)]
   return []
 }
