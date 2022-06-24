@@ -23,6 +23,7 @@ export const baseActionsList = [
   { action: 'setDescription', key: 'description' },
   { action: 'setSearchKeywords', key: 'searchKeywords' },
   { action: 'setKey', key: 'key' },
+  { action: 'setPriceMode', key: 'priceMode' },
 ]
 
 export const baseAssetActionsList = [
@@ -707,16 +708,13 @@ export function actionsMapPrices(
         newObj.variants
       )
       if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
-        const [
-          addPriceAction,
-          changePriceAction,
-          removePriceAction,
-        ] = _buildVariantPricesAction(
-          variant.prices,
-          oldVariant,
-          newVariant,
-          enableDiscounted
-        )
+        const [addPriceAction, changePriceAction, removePriceAction] =
+          _buildVariantPricesAction(
+            variant.prices,
+            oldVariant,
+            newVariant,
+            enableDiscounted
+          )
 
         addPriceActions = addPriceActions.concat(addPriceAction)
         changePriceActions = changePriceActions.concat(changePriceAction)

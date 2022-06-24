@@ -29,6 +29,7 @@ describe('Exports', () => {
       { action: 'setDescription', key: 'description' },
       { action: 'setSearchKeywords', key: 'searchKeywords' },
       { action: 'setKey', key: 'key' },
+      { action: 'setPriceMode', key: 'priceMode' },
     ])
   })
 
