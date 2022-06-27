@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 4.11.0
+
+### Minor Changes
+
+- [#1788](https://github.com/commercetools/nodejs/pull/1788) [`f1acfb67`](https://github.com/commercetools/nodejs/commit/f1acfb67708d8253f551481fd65097add48c6686) Thanks [@nicolasnieto92](https://github.com/nicolasnieto92)! - Add setPriceMode sync action for commercetools-importer project
+
 ## 4.10.1
 
 ### Patch Changes
