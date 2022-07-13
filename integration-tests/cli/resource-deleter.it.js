@@ -38,7 +38,7 @@ const resourcesOrder = [
 const resourcesOrderReversed = Object.assign([], resourcesOrder).reverse()
 
 // FIXME: currently it fails, as it seems like there are more resources than expected.
-describe.skip('Resource Deleter', () => {
+describe('Resource Deleter', () => {
   let apiConfig
   let resourceDeleter
   const bin = './integration-tests/node_modules/.bin/resource-deleter'

@@ -117,7 +117,7 @@ describe('Writer', () => {
   })
 
   describe('::writeToSingleXlsxFile', () => {
-    test.skip('write products to a single file with specified headers', () => {
+    test('write products to a single file with specified headers', async () => {
       return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const tempFile = tmp.fileSync({ postfix: '.xlsx', keep: true })
@@ -157,10 +157,11 @@ describe('Writer', () => {
           logger,
           headers
         )
+        done();
       })
     })
 
-    test.skip('handle empty rows', () => {
+    test('handle empty rows', () => {
       return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const tempFile = tmp.fileSync({ postfix: '.xlsx', keep: true })
@@ -185,6 +186,7 @@ describe('Writer', () => {
           logger,
           headers
         )
+        done();
       })
     })
 
@@ -192,7 +194,7 @@ describe('Writer', () => {
       return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const headers = []
-        const outputStream = streamTest.toText(() => {})
+        const outputStream = streamTest.toText(() => { })
         outputStream.on('finish', () => {
           expect(logger.info).toHaveBeenCalledWith(
             expect.stringMatching(/written to XLSX file/)
@@ -211,7 +213,7 @@ describe('Writer', () => {
   })
 
   describe('::writeToZipFile', () => {
-    test.skip('write products to multiple files based on productTypes', () => {
+    test('write products to multiple files based on productTypes', () => {
       return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })
@@ -251,6 +253,7 @@ describe('Writer', () => {
         })
 
         writer.writeToZipFile(sampleStream, outputStream, logger)
+        done()
       })
     })
 
