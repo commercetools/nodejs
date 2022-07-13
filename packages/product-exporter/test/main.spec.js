@@ -66,7 +66,7 @@ describe('ProductExporter', () => {
     })
   })
 
-  describe.skip('::_getProducts', () => {
+  describe('::_getProducts', () => {
     let processMock
     const outputStream = {
       emit: () => { },
