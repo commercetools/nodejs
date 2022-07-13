@@ -117,11 +117,7 @@ describe('Writer', () => {
   })
 
   describe('::writeToSingleXlsxFile', () => {
-<<<<<<< HEAD
     test('write products to a single file with specified headers', async () => {
-=======
-    test.skip('write products to a single file with specified headers', () => {
->>>>>>> chore(node-version): deprecate v12
       return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const tempFile = tmp.fileSync({ postfix: '.xlsx', keep: true })
@@ -165,7 +161,7 @@ describe('Writer', () => {
       })
     })
 
-    test.skip('handle empty rows', () => {
+    test('handle empty rows', () => {
       return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const tempFile = tmp.fileSync({ postfix: '.xlsx', keep: true })
@@ -217,7 +213,7 @@ describe('Writer', () => {
   })
 
   describe('::writeToZipFile', () => {
-    test.skip('write products to multiple files based on productTypes', () => {
+    test('write products to multiple files based on productTypes', () => {
       return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const tempFile = tmp.fileSync({ postfix: '.zip', keep: true })

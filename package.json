@@ -23,7 +23,7 @@
     "format:js": "prettier --write '{packages,integration-tests,types}/**/*.{js,ts}'",
     "format:md": "prettier --parser markdown --write '**/*.md'",
     "test:coverage": "yarn build && npm test -- --no-watchman --coverage",
-    "test:ci": "yarn test --ci --no-watchman --maxWorkers=10",
+    "test:ci": "yarn test -u --ci --no-watchman --maxWorkers=10",
     "test:coverage:ci": "yarn test:ci -- --coverage && codecov",
     "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
