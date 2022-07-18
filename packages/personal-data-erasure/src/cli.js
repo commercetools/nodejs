@@ -149,7 +149,6 @@ resolveCredentials(args)
       personalDataEraser.getCustomerData(args.customerId).then((result) => {
         if (args.output === 'stdout') {
           // eslint-disable-next-line
-          console.log(result)
         } else {
           fs.writeFile(args.output, JSON.stringify(result, null, 2), (err) => {
             if (err) throw err
