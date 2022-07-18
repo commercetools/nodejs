@@ -22,7 +22,18 @@ aliases:
       - v1-yarn-cache-node_16
 
   - &save_yarn_cache_node_16
-    key: v1-yarn-cache-node_14-{{ .Branch }}-{{ checksum "yarn.lock" }}
+    key: v1-yarn-cache-node_16-{{ .Branch }}-{{ checksum "yarn.lock" }}
+    paths:
+      - ~/.cache/yarn
+
+  - &restore_yarn_cache_node_18
+    keys:
+      - v1-yarn-cache-node_18-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - v1-yarn-cache-node_18-{{ .Branch }}
+      - v1-yarn-cache-node_18
+
+  - &save_yarn_cache_node_18
+    key: v1-yarn-cache-node_18-{{ .Branch }}-{{ checksum "yarn.lock" }}
     paths:
       - ~/.cache/yarn
 
@@ -46,6 +57,11 @@ executors:
       - image: circleci/node:16.13.1
     working_directory: *working_directory
 
+  node_18:
+    docker:
+      - image: circleci/node:18.6.0
+    working_directory: *working_directory
+
 jobs:
   install_test_node_14:
     executor: node_14
@@ -54,9 +70,6 @@ jobs:
       - restore_cache: *restore_yarn_cache_node_14
       - run: *yarn_install
       - save_cache: *save_yarn_cache_node_14
-      - run:
-          name: Install compatible npm version
-          command: npm install -g npm@8.5.3
       - run:
           name: Running linters
           # Limiting the workers of Jest to 10
@@ -79,12 +92,26 @@ jobs:
       - run: *yarn_install
       - save_cache: *save_yarn_cache_node_16
       - run:
-          name: Set runtime env variable
-          # Due to the new way of handling promise rejections in
-          # node v15 and newer, we would want to fallback to the
-          # unhandled promise rejection method in node version <= 14
-          # See: https://developer.ibm.com/blogs/nodejs-15-release-blog/
-          command: export NODE_OPTIONS=--unhandled-rejections=warn
+          name: Running linters
+          # Limiting the workers of Jest to 10
+          # as the build otherwise dies due to resource restrictions.
+          command: yarn lint --maxWorkers=10
+      - run:
+          name: Running tests (with coverage report)
+          # Limiting the workers of Jest to 10
+          # as the build otherwise dies due to resource restrictions.
+          command: yarn test:coverage:ci
+      - run:
+          name: Running integration tests
+          command: yarn test:integration
+
+  install_test_node_18:
+    executor: node_18
+    steps:
+      - checkout
+      - restore_cache: *restore_yarn_cache_node_18
+      - run: *yarn_install
+      - save_cache: *save_yarn_cache_node_18
       - run:
           name: Running linters
           # Limiting the workers of Jest to 10
@@ -105,4 +132,5 @@ workflows:
     jobs:
       - install_test_node_14
       - install_test_node_16:
+      - install_test_node_18:
           context: org-global
