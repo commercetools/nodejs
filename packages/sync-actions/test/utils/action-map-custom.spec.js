@@ -239,6 +239,9 @@ describe('buildActions', () => {
           const expected = [{ action: 'setCustomType' }]
           expect(actual).toEqual(expected)
         })
+        test('throw error if either argument function arguments are not provided', () => {
+          expect(() => buildActions(null, null)).toThrow();
+        })
       })
     })
   })
