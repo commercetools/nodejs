@@ -34,6 +34,7 @@ aliases:
 
   - &save_yarn_cache_node_18
     key: v1-yarn-cache-node_18-{{ .Branch }}-{{ checksum "yarn.lock" }}
+<<<<<<< HEAD
     paths:
       - ~/.cache/yarn
 
@@ -46,6 +47,8 @@ aliases:
 
   - &save_yarn_cache_node_16
     key: v1-yarn-cache-node_14-{{ .Branch }}-{{ checksum "yarn.lock" }}
+=======
+>>>>>>> chore(node-version): add v18 to the upgrade
     paths:
       - ~/.cache/yarn
 
@@ -80,6 +83,12 @@ executors:
   node_16:
     docker:
       - image: cimg/node:16.16.0
+    working_directory: *working_directory
+
+  node_18:
+    docker:
+      # - image: circleci/node:18.6.0
+      - image: cimg/node:18.4.0
     working_directory: *working_directory
 
   node_18:
