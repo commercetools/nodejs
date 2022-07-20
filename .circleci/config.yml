@@ -86,7 +86,6 @@ executors:
 
   node_18:
     docker:
-      # - image: circleci/node:18.6.0
       - image: cimg/node:18.4.0
     working_directory: *working_directory
 
