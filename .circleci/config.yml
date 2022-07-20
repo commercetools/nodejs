@@ -50,11 +50,11 @@ executors:
 
       # This version of the polyfill fixes (the above) issue in the graceful-fs package
       # https://raw.githubusercontent.com/isaacs/node-graceful-fs/168bdb8f0bb3174e8499d4bc5878deead4172c39/polyfills.js
-      - image: circleci/node:14.18.1
+      - image: cimg/node:14.19.3
     working_directory: *working_directory
   node_16:
     docker:
-      - image: circleci/node:16.13.1
+      - image: cimg/node:16.16.0
     working_directory: *working_directory
 
   node_18:
@@ -132,6 +132,8 @@ workflows:
   build_and_test:
     jobs:
       - install_test_node_14
+            context: org-global
       - install_test_node_16
+            context: org-global
       - install_test_node_18:
           context: org-global

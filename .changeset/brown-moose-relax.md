@@ -32,4 +32,4 @@
 '@commercetools/sync-actions': major
 ---
 
-Deprecate and remove support for node version 10 and 12
+Drop support for Node `v10` and `v12`. Supported versions now are `v14`, `v16` and `v18`.
