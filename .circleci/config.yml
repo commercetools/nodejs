@@ -81,7 +81,7 @@ executors:
     working_directory: *working_directory
   node_16:
     docker:
-      - image: circleci/node:16.13.1
+      - image: cimg/node:16.16.0
     working_directory: *working_directory
 
   node_18:
