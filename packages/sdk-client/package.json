@@ -3,6 +3,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14",
+    "npm": ">=v6.0.0"
+  },
   "name": "@commercetools/sdk-client",
   "version": "2.1.2",
   "description": "SDK Client for usage of commercetools platform API",

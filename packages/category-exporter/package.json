@@ -3,6 +3,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14",
+    "npm": ">=v6.0.0"
+  },
   "name": "@commercetools/category-exporter",
   "version": "3.0.23",
   "description": "Exports categories from the commercetools platform.",
