@@ -3,6 +3,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14",
+    "npm": ">=v6.0.0"
+  },
   "name": "@commercetools/sdk-middleware-user-agent",
   "version": "2.1.5",
   "description": "Middleware for setting the User-Agent on the HTTP request, to use with @commercetools/sdk-client",
