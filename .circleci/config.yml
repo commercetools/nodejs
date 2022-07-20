@@ -66,6 +66,7 @@ executors:
       # This version of the polyfill fixes (the above) issue in the graceful-fs package
       # https://raw.githubusercontent.com/isaacs/node-graceful-fs/168bdb8f0bb3174e8499d4bc5878deead4172c39/polyfills.js
       - image: cimg/node:14.19.3
+<<<<<<< HEAD
     working_directory: *working_directory
   node_16:
     docker:
@@ -75,10 +76,12 @@ executors:
   node_18:
     docker:
       - image: cimg/node:18.4.0
+=======
+>>>>>>> Apply suggestions from code review
     working_directory: *working_directory
   node_16:
     docker:
-      - image: circleci/node:16.13.1
+      - image: cimg/node:16.16.0
     working_directory: *working_directory
   node_16:
     docker:
