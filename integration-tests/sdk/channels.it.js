@@ -28,6 +28,7 @@ describe('Channels', () => {
     'createdBy',
     'lastModifiedAt',
     'lastModifiedBy',
+    'versionModifiedAt'
   ]
   const service = createRequestBuilder({ projectKey }).channels
   const httpMiddleware = createHttpMiddleware({
