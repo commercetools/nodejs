@@ -907,49 +907,55 @@ describe('ProductJsonToCsv', () => {
     })
   })
 
-  // describe('::fetchReferences', () => {
-  //   beforeEach(() => {
-  //     productJsonToCsv.client.execute = jest.fn()
-  //   })
-  //   test('should fetch reference from API from url', () => {
-  //     const uri = 'dummy-uri'
-  //     const expectedRequest = {
-  //       uri,
-  //       method: 'GET',
-  //       headers: { Authorization: 'Bearer myAccessToken' },
-  //     }
+  describe('::fetchReferences', () => {
+    const payload = {
+      body: {
+        count: 5,
+        results: [{}]
+      },
+    }
+    beforeEach(() => {
+      productJsonToCsv.client.execute = jest.fn().mockImplementation(() => Promise.resolve(payload));
+    })
+    test('should fetch reference from API from url', async () => {
+      const uri = 'dummy-uri'
+      const expectedRequest = {
+        uri,
+        method: 'GET',
+        headers: { Authorization: 'Bearer myAccessToken' },
+      }
 
-  //     productJsonToCsv.fetchReferences(uri)
-  //     expect(productJsonToCsv.client.execute).toHaveBeenCalled()
-  //     expect(productJsonToCsv.client.execute).toHaveBeenCalledWith(
-  //       expect.objectContaining({
-  //         ...expectedRequest,
-  //         // client.process enhances query with sort, withTotal and limit params
-  //         uri: expect.stringMatching(uri),
-  //       })
-  //     )
-  //   })
+      await productJsonToCsv.fetchReferences(uri)
+      expect(productJsonToCsv.client.execute).toHaveBeenCalled()
+      expect(productJsonToCsv.client.execute).toHaveBeenCalledWith(
+        expect.objectContaining({
+          ...expectedRequest,
+          // client.process enhances query with sort, withTotal and limit params
+          uri: expect.stringMatching(uri),
+        })
+      )
+    })
 
-  //   test('should fetch only once for multiple calls with same parameter', () => {
-  //     const uri = 'dummy-uri-2'
-  //     const expectedRequest = {
-  //       uri,
-  //       method: 'GET',
-  //       headers: { Authorization: 'Bearer myAccessToken' },
-  //     }
+    test('should fetch only once for multiple calls with same parameter', () => {
+      const uri = 'dummy-uri-2'
+      const expectedRequest = {
+        uri,
+        method: 'GET',
+        headers: { Authorization: 'Bearer myAccessToken' },
+      }
 
-  //     productJsonToCsv.fetchReferences(uri)
-  //     productJsonToCsv.fetchReferences(uri)
-  //     expect(productJsonToCsv.client.execute).toHaveBeenCalledTimes(1)
-  //     expect(productJsonToCsv.client.execute).toHaveBeenCalledWith(
-  //       expect.objectContaining({
-  //         ...expectedRequest,
-  //         // client.process enhances query with sort, withTotal and limit params
-  //         uri: expect.stringMatching(uri),
-  //       })
-  //     )
-  //   })
-  // })
+      productJsonToCsv.fetchReferences(uri)
+      productJsonToCsv.fetchReferences(uri)
+      expect(productJsonToCsv.client.execute).toHaveBeenCalledTimes(1)
+      expect(productJsonToCsv.client.execute).toHaveBeenCalledWith(
+        expect.objectContaining({
+          ...expectedRequest,
+          // client.process enhances query with sort, withTotal and limit params
+          uri: expect.stringMatching(uri),
+        })
+      )
+    })
+  })
 
   describe('::fetchChannels', () => {
     beforeEach(() => {
