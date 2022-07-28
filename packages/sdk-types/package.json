@@ -4,8 +4,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=14",
-    "npm": ">=6.0.0"
+    "node": ">=14"
   },
   "name": "@commercetools/sdk-types",
   "version": "0.1.2",
