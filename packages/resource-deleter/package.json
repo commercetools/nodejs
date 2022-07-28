@@ -8,7 +8,7 @@
     "npm": ">=v6.0.0"
   },
   "name": "@commercetools/resource-deleter",
-  "version": "2.0.26",
+  "version": "2.0.27",
   "description": "Delete resources from the commercetools platform",
   "main": "lib/main.js",
   "bin": {
