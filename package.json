@@ -3,7 +3,7 @@
   "license": "MIT",
   "engines": {
     "node": ">=14",
-    "npm": ">=v6.0.0"
+    "npm": ">=6.0.0"
   },
   "scripts": {
     "postinstall": "check-node-version --package --print && cross-env NODE_ENV=development yarn build",

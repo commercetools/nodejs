@@ -5,7 +5,7 @@
   },
   "engines": {
     "node": ">=14",
-    "npm": ">=v6.0.0"
+    "npm": ">=6.0.0"
   },
   "name": "@commercetools/custom-objects-exporter",
   "version": "3.0.23",
