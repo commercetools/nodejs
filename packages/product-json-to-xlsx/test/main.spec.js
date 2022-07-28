@@ -822,49 +822,55 @@ describe('ProductJsonToXlsx', () => {
     })
   })
 
-  // describe('::fetchReferences', () => {
-  //   beforeEach(() => {
-  //     productJsonToXlsx.client.execute = jest.fn()
-  //   })
-  //   test('should fetch reference from API from url', async () => {
-  //     const uri = 'dummy-uri'
-  //     const expectedRequest = {
-  //       uri,
-  //       method: 'GET',
-  //       headers: { Authorization: 'Bearer myAccessToken' },
-  //     }
+  describe('::fetchReferences', () => {
+    const payload = {
+      body: {
+        count: 5,
+        results: [{}]
+      },
+    }
+    beforeEach(() => {
+      productJsonToXlsx.client.execute = jest.fn().mockImplementation(() => Promise.resolve(payload));
+    })
+    test('should fetch reference from API from url', async () => {
+      const uri = 'dummy-uri'
+      const expectedRequest = {
+        uri,
+        method: 'GET',
+        headers: { Authorization: 'Bearer myAccessToken' },
+      }
 
-  //     await productJsonToXlsx.fetchReferences(uri)
-  //     expect(productJsonToXlsx.client.execute).toHaveBeenCalled()
-  //     expect(productJsonToXlsx.client.execute).toHaveBeenCalledWith(
-  //       expect.objectContaining({
-  //         ...expectedRequest,
-  //         // client.process enhances query with sort, withTotal and limit params
-  //         uri: expect.stringMatching(uri),
-  //       })
-  //     )
-  //   })
+      await productJsonToXlsx.fetchReferences(uri)
+      expect(productJsonToXlsx.client.execute).toHaveBeenCalled()
+      expect(productJsonToXlsx.client.execute).toHaveBeenCalledWith(
+        expect.objectContaining({
+          ...expectedRequest,
+          // client.process enhances query with sort, withTotal and limit params
+          uri: expect.stringMatching(uri),
+        })
+      )
+    })
 
-  //   test('should fetch only once for multiple calls with same parameter', () => {
-  //     const uri = 'dummy-uri-2'
-  //     const expectedRequest = {
-  //       uri,
-  //       method: 'GET',
-  //       headers: { Authorization: 'Bearer myAccessToken' },
-  //     }
+    test('should fetch only once for multiple calls with same parameter', () => {
+      const uri = 'dummy-uri-2'
+      const expectedRequest = {
+        uri,
+        method: 'GET',
+        headers: { Authorization: 'Bearer myAccessToken' },
+      }
 
-  //     productJsonToXlsx.fetchReferences(uri)
-  //     productJsonToXlsx.fetchReferences(uri)
-  //     expect(productJsonToXlsx.client.execute).toHaveBeenCalledTimes(1)
-  //     expect(productJsonToXlsx.client.execute).toHaveBeenCalledWith(
-  //       expect.objectContaining({
-  //         ...expectedRequest,
-  //         // client.process enhances query with sort, withTotal and limit params
-  //         uri: expect.stringMatching(uri),
-  //       })
-  //     )
-  //   })
-  // })
+      productJsonToXlsx.fetchReferences(uri)
+      productJsonToXlsx.fetchReferences(uri)
+      expect(productJsonToXlsx.client.execute).toHaveBeenCalledTimes(1)
+      expect(productJsonToXlsx.client.execute).toHaveBeenCalledWith(
+        expect.objectContaining({
+          ...expectedRequest,
+          // client.process enhances query with sort, withTotal and limit params
+          uri: expect.stringMatching(uri),
+        })
+      )
+    })
+  })
 
   describe('::fetchChannels', () => {
     beforeEach(() => {
