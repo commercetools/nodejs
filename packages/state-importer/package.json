@@ -4,8 +4,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=14",
-    "npm": ">=v6.0.0"
+    "node": ">=14"
   },
   "name": "@commercetools/state-importer",
   "version": "3.0.40",

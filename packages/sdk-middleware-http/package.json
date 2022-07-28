@@ -4,8 +4,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=14",
-    "npm": ">=v6.0.0"
+    "node": ">=14"
   },
   "name": "@commercetools/sdk-middleware-http",
   "version": "6.2.0",

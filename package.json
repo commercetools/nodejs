@@ -2,8 +2,7 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": ">=14",
-    "npm": ">=v6.0.0"
+    "node": ">=14"
   },
   "scripts": {
     "postinstall": "check-node-version --package --print && cross-env NODE_ENV=development yarn build",
