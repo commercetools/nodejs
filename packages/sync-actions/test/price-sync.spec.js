@@ -3,8 +3,7 @@ import pricesSyncFn from '../src/prices'
 const pricesSync = pricesSyncFn()
 
 const dateNow = new Date()
-const twoWeeksFromNow = new Date(Date.now() + 12096e5) // two weeks from now
-const threeWeeksFromNow = new Date(Date.now() + 12096e5 * 1.5)
+const twoWeeksFromNow = new Date(Date.now() + 12096e5)
 
 /* eslint-disable max-len */
 describe('price actions', () => {
