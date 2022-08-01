@@ -1,7 +1,6 @@
 /* @flow */
 import npmlog from 'npmlog'
 import _ from 'lodash'
-import fetch from 'node-fetch'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
@@ -24,6 +23,7 @@ import type {
   ClientResult,
   ServiceBuilderInstance,
 } from 'types/sdk'
+import fetch from './fetcher'
 import pkg from '../package.json'
 
 class DiscountCodeImportError extends Error {
