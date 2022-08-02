@@ -20,8 +20,9 @@ describe('Actions', () => {
         before = createTestType({
           fieldDefinitions: [
             {
+              name: 'enum',
               type: {
-                name: 'enum',
+                name: 'Enum',
                 values: [],
               },
             },
@@ -30,8 +31,9 @@ describe('Actions', () => {
         now = createTestType({
           fieldDefinitions: [
             {
+              name: 'enum',
               type: {
-                name: 'enum',
+                name: 'Enum',
                 values: [
                   {
                     key: 'enum_1',
@@ -63,8 +65,9 @@ describe('Actions', () => {
         before = createTestType({
           fieldDefinitions: [
             {
+              name: 'enum',
               type: {
-                name: 'enum',
+                name: 'Enum',
                 values: [
                   { key: 'enum_0', label: 'enum-0' },
                   { key: 'enum_2', label: 'enum-2' },
@@ -77,8 +80,9 @@ describe('Actions', () => {
         now = createTestType({
           fieldDefinitions: [
             {
+              name: 'enum',
               type: {
-                name: 'enum',
+                name: 'Enum',
                 values: [
                   { key: 'enum_1', label: 'enum-1' },
                   { key: 'enum_3', label: 'enum-3' },
@@ -115,8 +119,9 @@ describe('Actions', () => {
         before = createTestType({
           fieldDefinitions: [
             {
+              name: 'enum',
               type: {
-                name: 'enum',
+                name: 'Enum',
                 values: [
                   { key: 'enum_1', label: 'enum-1' },
                   { key: 'enum_2', label: 'enum-2' },
@@ -129,8 +134,9 @@ describe('Actions', () => {
         now = createTestType({
           fieldDefinitions: [
             {
+              name: 'enum',
               type: {
-                name: 'enum',
+                name: 'Enum',
                 values: [
                   { key: 'enum_4', label: 'enum-4' },
                   { key: 'enum_1', label: 'enum-1' },
@@ -163,6 +169,7 @@ describe('Actions', () => {
         before = createTestType({
           fieldDefinitions: [
             {
+              name: 'lenum',
               type: {
                 name: 'lenum',
                 values: [],
@@ -173,6 +180,7 @@ describe('Actions', () => {
         now = createTestType({
           fieldDefinitions: [
             {
+              name: 'lenum',
               type: {
                 name: 'lenum',
                 values: [
@@ -212,6 +220,7 @@ describe('Actions', () => {
         before = createTestType({
           fieldDefinitions: [
             {
+              name: 'lenum',
               type: {
                 name: 'lenum',
                 values: [
@@ -226,6 +235,7 @@ describe('Actions', () => {
         now = createTestType({
           fieldDefinitions: [
             {
+              name: 'lenum',
               type: {
                 name: 'lenum',
                 values: [
@@ -257,6 +267,7 @@ describe('Actions', () => {
         before = createTestType({
           fieldDefinitions: [
             {
+              name: 'lenum',
               type: {
                 name: 'lenum',
                 values: [
@@ -271,6 +282,7 @@ describe('Actions', () => {
         now = createTestType({
           fieldDefinitions: [
             {
+              name: 'lenum',
               type: {
                 name: 'lenum',
                 values: [
