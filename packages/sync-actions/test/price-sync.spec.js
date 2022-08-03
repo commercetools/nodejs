@@ -30,6 +30,56 @@ describe('price actions', () => {
     expect(actions).toEqual([])
   })
 
+  test('should not build actions if there is no changes', () => {
+    const before = {
+      id: '9fe6610f',
+      value: {
+        type: 'centPrecision',
+        currencyCode: 'EUR',
+        centAmount: 1900,
+        fractionDigits: 2,
+      },
+      discounted: {
+        value: { centAmount: 4000, currencyCode: 'EGP' },
+        discount: { typeId: 'product-discount', id: 'pd1' },
+      },
+      custom: {
+        type: {
+          typeId: 'type',
+          id: '5678',
+        },
+        fields: {
+          source: 'shop',
+        },
+      },
+    }
+
+    const now = {
+      id: '9fe6610f',
+      value: {
+        type: 'centPrecision',
+        currencyCode: 'EUR',
+        centAmount: 1900,
+        fractionDigits: 2,
+      },
+      discounted: {
+        value: { centAmount: 4000, currencyCode: 'EGP' },
+        discount: { typeId: 'product-discount', id: 'pd1' },
+      },
+      custom: {
+        type: {
+          typeId: 'type',
+          id: '5678',
+        },
+        fields: {
+          source: 'shop',
+        },
+      },
+    }
+    const actions = pricesSync.buildActions(now, before)
+    expect(actions).toEqual([])
+  })
+
   test('should generate changeValue action', () => {
     const before = {
       id: '9fe6610f',
