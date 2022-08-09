@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 4.13.0
+
+### Minor Changes
+
+- [#1798](https://github.com/commercetools/nodejs/pull/1798) [`850325d0`](https://github.com/commercetools/nodejs/commit/850325d08603764787c387b2341e4009d0c4f788) Thanks [@markus-azer](https://github.com/markus-azer)! - support standalone prices
+
 ## 4.12.0
 
 ### Minor Changes
