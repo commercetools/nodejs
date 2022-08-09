@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 4.12.0
+
+### Minor Changes
+
+- [#1796](https://github.com/commercetools/nodejs/pull/1796) [`7aaf91cd`](https://github.com/commercetools/nodejs/commit/7aaf91cdecb7c844943369fc137a5356becdba36) Thanks [@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha)! - Fix custom types sync actions to detect addEnumValue action correctly
+
 ## 4.11.0
 
 ### Minor Changes
