@@ -59,12 +59,6 @@ aliases:
 executors:
   node_14:
     docker:
-      # There is an issue with the graceful-fs which throws an error during the
-      # package installation on node version newer than v12.8.2 see issue below
-      # https://github.com/nodejs/node/issues/34529
-
-      # This version of the polyfill fixes (the above) issue in the graceful-fs package
-      # https://raw.githubusercontent.com/isaacs/node-graceful-fs/168bdb8f0bb3174e8499d4bc5878deead4172c39/polyfills.js
       - image: cimg/node:14.19.3
 <<<<<<< HEAD
     working_directory: *working_directory
