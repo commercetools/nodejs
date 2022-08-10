@@ -3,25 +3,37 @@ version: 2.1
 aliases:
   - &working_directory ~/nodejs
 
-  - &restore_yarn_cache_node_10
+  - &restore_yarn_cache_node_14
     keys:
-      - v1-yarn-cache-node_10-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - v1-yarn-cache-node_10-{{ .Branch }}
-      - v1-yarn-cache-node_10
+      - v1-yarn-cache-node_14-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - v1-yarn-cache-node_14-{{ .Branch }}
+      - v1-yarn-cache-node_14
 
-  - &save_yarn_cache_node_10
-    key: v1-yarn-cache-node_10-{{ .Branch }}-{{ checksum "yarn.lock" }}
+  - &save_yarn_cache_node_14
+    key: v1-yarn-cache-node_14-{{ .Branch }}-{{ checksum "yarn.lock" }}
     paths:
       - ~/.cache/yarn
 
-  - &restore_yarn_cache_node_12
-    keys:
-      - v1-yarn-cache-node_12-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - v1-yarn-cache-node_12-{{ .Branch }}
-      - v1-yarn-cache-node_12
 
-  - &save_yarn_cache_node_12
-    key: v1-yarn-cache-node_12-{{ .Branch }}-{{ checksum "yarn.lock" }}
+  - &restore_yarn_cache_node_16
+    keys:
+      - v1-yarn-cache-node_16-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - v1-yarn-cache-node_16-{{ .Branch }}
+      - v1-yarn-cache-node_16
+
+  - &save_yarn_cache_node_16
+    key: v1-yarn-cache-node_16-{{ .Branch }}-{{ checksum "yarn.lock" }}
+    paths:
+      - ~/.cache/yarn
+
+  - &restore_yarn_cache_node_18
+    keys:
+      - v1-yarn-cache-node_18-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - v1-yarn-cache-node_18-{{ .Branch }}
+      - v1-yarn-cache-node_18
+
+  - &save_yarn_cache_node_18
+    key: v1-yarn-cache-node_18-{{ .Branch }}-{{ checksum "yarn.lock" }}
     paths:
       - ~/.cache/yarn
 
@@ -30,25 +42,28 @@ aliases:
     command: yarn --frozen-lockfile
 
 executors:
-  node_10:
+  node_14:
     docker:
-      - image: circleci/node:10.24.1
+      - image: cimg/node:14.19.3
     working_directory: *working_directory
-  node_12:
+  node_16:
     docker:
-      # Keep it at `12.18.2` as otherwise there may be bugs with `graceful-fs` dependency
-      # https://github.com/nodejs/node/issues/34529
-      - image: circleci/node:12.18.2
+      - image: cimg/node:16.16.0
+    working_directory: *working_directory
+
+  node_18:
+    docker:
+      - image: cimg/node:18.4.0
     working_directory: *working_directory
 
 jobs:
-  install_test_node_10:
-    executor: node_10
+  install_test_node_14:
+    executor: node_14
     steps:
       - checkout
-      - restore_cache: *restore_yarn_cache_node_10
+      - restore_cache: *restore_yarn_cache_node_14
       - run: *yarn_install
-      - save_cache: *save_yarn_cache_node_10
+      - save_cache: *save_yarn_cache_node_14
       - run:
           name: Running linters
           # Limiting the workers of Jest to 10
@@ -59,14 +74,38 @@ jobs:
           # Limiting the workers of Jest to 10
           # as the build otherwise dies due to resource restrictions.
           command: yarn test:ci
+      - run:
+          name: Running test (with coverage report)
+          command: yarn test:ci
 
-  install_test_node_12:
-    executor: node_12
+  install_test_node_16:
+    executor: node_16
     steps:
       - checkout
-      - restore_cache: *restore_yarn_cache_node_12
+      - restore_cache: *restore_yarn_cache_node_16
       - run: *yarn_install
-      - save_cache: *save_yarn_cache_node_12
+      - save_cache: *save_yarn_cache_node_16
+      - run:
+          name: Running linters
+          # Limiting the workers of Jest to 10
+          # as the build otherwise dies due to resource restrictions.
+          command: yarn lint --maxWorkers=10
+      - run:
+          name: Running tests (with coverage report)
+          # Limiting the workers of Jest to 10
+          # as the build otherwise dies due to resource restrictions.
+          command: yarn test:coverage:ci
+      - run:
+          name: Running integration tests
+          command: yarn test:integration
+
+  install_test_node_18:
+    executor: node_18
+    steps:
+      - checkout
+      - restore_cache: *restore_yarn_cache_node_18
+      - run: *yarn_install
+      - save_cache: *save_yarn_cache_node_18
       - run:
           name: Running linters
           # Limiting the workers of Jest to 10
@@ -85,6 +124,11 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - install_test_node_10
-      - install_test_node_12:
+      - install_test_node_14:
           context: org-global
+      - install_test_node_16:
+          context: org-global
+      - install_test_node_18:
+          context: org-global
+          requires:
+            - install_test_node_16
