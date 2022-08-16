@@ -3,6 +3,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/personal-data-erasure",
   "version": "3.1.1",
   "description": "Export and delete all data related to a single customer",

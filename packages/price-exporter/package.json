@@ -3,6 +3,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/price-exporter",
   "version": "3.0.24",
   "description": "Exports prices from the commercetools platform",

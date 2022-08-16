@@ -3,6 +3,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/resource-deleter",
   "version": "2.0.27",
   "description": "Delete resources from the commercetools platform",

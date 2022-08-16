@@ -3,6 +3,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/discount-code-importer",
   "version": "3.0.39",
   "description": "Import discount codes to the commercetools platform.",

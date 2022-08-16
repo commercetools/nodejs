@@ -3,6 +3,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/custom-objects-importer",
   "version": "3.0.40",
   "description": "Import custom objects to the commercetools platform",

@@ -28,6 +28,43 @@ function createTestMiddlewareOptions(options) {
 }
 
 describe('Anonymous Session Flow', () => {
+  test('should call next if auth is present in the headers', () =>
+    new Promise((resolve, reject) => {
+      authMiddlewareBase.mockImplementation((params, next) => {
+        next(params)
+      })
+      const request = createTestRequest({
+        headers: {
+          Authorization: 'bearer xxxx'
+        }
+      })
+      const response = {
+        resolve,
+        reject,
+      }
+      const next = jest.fn().mockImplementation((actualParams) => {
+        expect(actualParams)
+          .toEqual({
+            url: '',
+            method: 'GET',
+            body: null,
+            headers: {
+              Authorization: 'bearer xxxx'
+            }
+          })
+        expect(next).toHaveBeenCalledTimes(1)
+        expect(authMiddlewareBase).toHaveBeenCalledTimes(0)
+        resolve()
+        jest.unmock('../src/base-auth-flow')
+      })
+      const middlewareOptions = createTestMiddlewareOptions()
+      const authMiddleware = createAuthMiddlewareForAnonymousSessionFlow(
+        middlewareOptions
+      )
+
+      authMiddleware(next)(request, response)
+    })
+  )
   test('should call the base-auth-flow method with the right params', () =>
     new Promise((resolve, reject) => {
       authMiddlewareBase.mockImplementation((params, next) => {

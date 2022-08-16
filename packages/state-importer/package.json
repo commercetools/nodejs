@@ -3,6 +3,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/state-importer",
   "version": "3.0.40",
   "description": "Import states to the commercetools platform",

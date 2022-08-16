@@ -3,6 +3,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/sdk-middleware-queue",
   "version": "2.1.4",
   "description": "Middleware for queueing requests, to use with @commercetools/sdk-client",

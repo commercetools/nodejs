@@ -3,6 +3,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/product-exporter",
   "version": "3.1.13",
   "description": "Exports products from the commercetools platform",

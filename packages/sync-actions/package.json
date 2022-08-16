@@ -3,6 +3,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/sync-actions",
   "version": "4.13.0",
   "description": "Build API update actions for the commercetools platform.",

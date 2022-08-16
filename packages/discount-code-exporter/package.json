@@ -3,6 +3,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/discount-code-exporter",
   "version": "4.0.23",
   "description": "Exports discount codes from the commercetools platform.",

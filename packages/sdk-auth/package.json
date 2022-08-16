@@ -3,6 +3,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/sdk-auth",
   "version": "3.0.13",
   "description": "Auth module for different authentication flows of commercetools platform API",
