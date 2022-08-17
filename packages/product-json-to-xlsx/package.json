@@ -7,7 +7,7 @@
     "node": ">=14"
   },
   "name": "@commercetools/product-json-to-xlsx",
-  "version": "4.0.16",
+  "version": "5.0.0",
   "description": "Converts commercetools products from JSON to XLSX",
   "keywords": [
     "commercetools",
@@ -43,8 +43,8 @@
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {
-    "@commercetools/get-credentials": "^3.0.17",
-    "@commercetools/product-json-to-csv": "^5.0.16",
+    "@commercetools/get-credentials": "^4.0.0",
+    "@commercetools/product-json-to-csv": "^6.0.0",
     "common-tags": "^1.8.0",
     "exceljs": "^3.0.0",
     "highland": "^2.13.0",

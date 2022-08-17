@@ -7,7 +7,7 @@
     "node": ">=14"
   },
   "name": "@commercetools/discount-code-importer",
-  "version": "3.0.39",
+  "version": "4.0.0",
   "description": "Import discount codes to the commercetools platform.",
   "keywords": [
     "commercetools",
@@ -36,13 +36,13 @@
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {
-    "@commercetools/api-request-builder": "^5.6.3",
-    "@commercetools/sdk-client": "^2.1.2",
-    "@commercetools/sdk-middleware-auth": "^6.2.1",
-    "@commercetools/sdk-middleware-http": "^6.1.1",
-    "@commercetools/sdk-middleware-queue": "^2.1.4",
-    "@commercetools/sdk-middleware-user-agent": "^2.1.5",
-    "@commercetools/sync-actions": "^4.9.6",
+    "@commercetools/api-request-builder": "^6.0.0",
+    "@commercetools/sdk-client": "^3.0.0",
+    "@commercetools/sdk-middleware-auth": "^7.0.0",
+    "@commercetools/sdk-middleware-http": "^7.0.0",
+    "@commercetools/sdk-middleware-queue": "^3.0.0",
+    "@commercetools/sdk-middleware-user-agent": "^3.0.0",
+    "@commercetools/sync-actions": "^5.0.0",
     "lodash": "^4.17.21",
     "node-fetch": "^2.6.7",
     "npmlog": "^4.1.2"
