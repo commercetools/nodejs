@@ -1,5 +1,11 @@
 # @commercetools/sdk-middleware-auth
 
+## 7.0.1
+
+### Patch Changes
+
+- [#1805](https://github.com/commercetools/nodejs/pull/1805) [`4ef07faf`](https://github.com/commercetools/nodejs/commit/4ef07faf13db8a155e11e802fcf7ff4efa4c160f) Thanks [@ajimae](https://github.com/ajimae)! - Change token fetch window from 2 hours to 5 minutes.
+
 ## 7.0.0
 
 ### Major Changes
