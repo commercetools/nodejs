@@ -29,8 +29,8 @@ function calculateExpirationTime(expiresIn: number): number {
   return (
     Date.now() +
     expiresIn * 1000 -
-    // Add a gap of 2 hours before expiration time.
-    2 * 60 * 60 * 1000
+    // Add a gap of 5 minutes before expiration time.
+    5 * 60 * 1000
   )
 }
 
