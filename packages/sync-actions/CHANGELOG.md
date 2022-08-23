@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.1.0
+
+### Minor Changes
+
+- [#1803](https://github.com/commercetools/nodejs/pull/1803) [`823985ae`](https://github.com/commercetools/nodejs/commit/823985ae67465673c26f296b68681f255230d571) Thanks [@nicolasnieto92](https://github.com/nicolasnieto92)! - Add createSyncStandalonePrices export to index for supporting prices sync actions
+
 ## 5.0.0
 
 ### Major Changes
