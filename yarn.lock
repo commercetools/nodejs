@@ -1335,6 +1335,23 @@
     node-fetch "^2.6.1"
     querystring "^0.2.1"
 
+"@commercetools/sdk-middleware-auth@^6.0.4":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@commercetools/sdk-middleware-auth/-/sdk-middleware-auth-6.2.1.tgz#bac3324bbedda004fc848167abe9b90abe0d6e85"
+  integrity sha512-JNVRVf7zssECg0i/amAG0gnFmx4Kj7rB0J9MfRlvN/54qyA6tKJOJaA5j9hYy60qKSW/NCGbVMcVlBnPJLhREQ==
+  dependencies:
+    node-fetch "^2.6.7"
+
+"@commercetools/sdk-middleware-http@^6.0.4":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@commercetools/sdk-middleware-http/-/sdk-middleware-http-6.2.0.tgz#8e51107bea9d3a7003ee653e1ed9e97d4d1171b8"
+  integrity sha512-3E1nV+awhP0eeFuyChxgbaPF5CWWH0PvGZO9FtNl/mirlYjGbXAHO4Ql5tG4/G+CywlXI9XVA9wKSwxG0kgwgA==
+
+"@commercetools/sdk-middleware-logger@^2.1.1":
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@commercetools/sdk-middleware-logger/-/sdk-middleware-logger-2.1.2.tgz#6b8ce77699bf5d8e5ec4f243a2c9d691094ef0c7"
+  integrity sha512-uGhhAUnZzLWO3ozzz6VDMUAKr5Y9ctVyqfExXVC7t37IgppLsKrrvLl6VMoU2uXjIGSNA0VN0Kxgj93rBBejTQ==
+
 "@commitlint/cli@12.1.4":
   version "12.1.4"
   resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-12.1.4.tgz#af4d9dd3c0122c7b39a61fa1cd2abbad0422dbe0"
