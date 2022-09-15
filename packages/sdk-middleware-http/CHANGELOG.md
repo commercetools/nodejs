@@ -1,5 +1,11 @@
 # @commercetools/sdk-middleware-http
 
+## 7.0.1
+
+### Patch Changes
+
+- [#1807](https://github.com/commercetools/nodejs/pull/1807) [`c05f4917`](https://github.com/commercetools/nodejs/commit/c05f4917e119150d8422a09f7be546a7599ff528) Thanks [@ajimae](https://github.com/ajimae)! - Allow @commercetools/middleware-sdk-http to accept `application/graphql` content-type.
+
 ## 7.0.0
 
 ### Major Changes
