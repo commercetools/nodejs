@@ -107,24 +107,25 @@ export default function createHttpMiddleware({
       const url = host.replace(/\/$/, '') + request.uri
       const requestHeader: HttpHeaders = { ...request.headers }
 
-      // If no content-type is provided, defaults to application/json
-      if (
-        !Object.prototype.hasOwnProperty.call(requestHeader, 'Content-Type')
-      ) {
-        requestHeader['Content-Type'] = 'application/json'
-      }
       // Unset the content-type header if explicitly asked to (passing `null` as value).
       if (requestHeader['Content-Type'] === null) {
         delete requestHeader['Content-Type']
       }
 
-      // Ensure body is a string if content type is application/json
-      const body =
-        requestHeader['Content-Type'] === 'application/json' &&
-          typeof request.body !== 'string'
-          ? // NOTE: `stringify` of `null` gives the String('null')
-          JSON.stringify(request.body || undefined)
-          : request.body
+      // If no content-type is provided, defaults to application/json
+      if (
+        !(
+          Object.prototype.hasOwnProperty.call(requestHeader, 'Content-Type') ||
+          Object.prototype.hasOwnProperty.call(requestHeader, 'content-type')
+        )
+      ) {
+        requestHeader['Content-Type'] = 'application/json'
+      }
+
+      const body = (['application/json', 'application/graphql']
+        .indexOf(requestHeader['Content-Type']) > -1 && typeof request.body === 'string') ||
+        Buffer.isBuffer(request.body) ? request.body : JSON.stringify(request.body || undefined)
+
 
       if (body && (typeof body === 'string' || Buffer.isBuffer(body))) {
         requestHeader['Content-Length'] = Buffer.byteLength(body).toString()
