@@ -1,38 +1,72 @@
 /* @flow */
 import flatten from 'lodash.flatten'
+import type {
+  SyncAction,
+  SyncActionConfig,
+  ActionGroup,
+  UpdateAction,
+} from 'types/sdk'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import actionsMapCustom from './utils/action-map-custom'
-import { actionsMapBase } from './quotes-actions'
-import combineValidityActions from './utils/combine-validity-actions'
+import * as QuotesActions from './quotes-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
-export const actionGroups = ['base', 'custom']
+const actionGroups = [
+  'base',
+  'custom',
+]
 
-function createQuotesMapActions(mapActionGroup, syncActionConfig) {
-  return function doMapActions(diff, newObj, oldObj) {
+function createQuotesMapActions(
+  mapActionGroup: Function,
+  syncActionConfig: SyncActionConfig
+): (
+  diff: Object,
+  newObj: Object,
+  oldObj: Object,
+  options: Object
+) => Array<UpdateAction> {
+  return function doMapActions(
+    diff: Object,
+    newObj: Object,
+    oldObj: Object,
+  ): Array<UpdateAction> {
     const allActions = []
 
     allActions.push(
-      mapActionGroup('base', () =>
-        actionsMapBase(diff, oldObj, newObj, syncActionConfig)
+      mapActionGroup('base', (): Array<UpdateAction> =>
+        QuotesActions.actionsMapBase(
+          diff,
+          oldObj,
+          newObj,
+          syncActionConfig
+        )
       )
     )
 
     allActions.push(
-      mapActionGroup('custom', () => actionsMapCustom(diff, newObj, oldObj))
+      mapActionGroup('custom', (): Array<UpdateAction> =>
+        actionsMapCustom(diff, newObj, oldObj)
+      )
     )
 
-    return combineValidityActions(flatten(allActions))
+    return flatten(allActions)
   }
 }
 
-export default (actionGroupList, syncActionConfig = {}) => {
+export default (
+  actionGroupList: Array<ActionGroup>,
+  syncActionConfig: SyncActionConfig
+): SyncAction => {
   const mapActionGroup = createMapActionGroup(actionGroupList)
-  const doMapActions = createQuotesMapActions(
-    mapActionGroup,
-    syncActionConfig
+  const doMapActions = createQuotesMapActions(mapActionGroup, syncActionConfig)
+
+  const buildActions = createBuildActions(
+    diffpatcher.diff,
+    doMapActions,
   )
-  const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
+
   return { buildActions }
 }
+
+export { actionGroups }
