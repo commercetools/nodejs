@@ -308,7 +308,7 @@ test('shouldnt change objects since there is no arrays to copy', () => {
   expect(fixedNewObj).toEqual(newObj)
 })
 
-test('performance test for large arrays should be less than 100 ms', () => {
+test('performance test for large arrays should be less than 200 ms', () => {
   const oldObj = {
     addresses: Array(5000)
       .fill(null)
@@ -327,5 +327,5 @@ test('performance test for large arrays should be less than 100 ms', () => {
 
   expect(old).toEqual(oldObj)
   expect(fixedNewObj).toEqual(newObj)
-  expect(end - start).toBeLessThan(100)
+  expect(end - start).toBeLessThan(200)
 })
