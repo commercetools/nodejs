@@ -1,3 +1,4 @@
+import { performance } from 'perf_hooks'
 import copyEmptyArrayProps from '../../src/utils/copy-empty-array-props'
 
 describe('null check on root value', () => {
@@ -305,4 +306,26 @@ test('shouldnt change objects since there is no arrays to copy', () => {
 
   expect(old).toEqual(oldObj)
   expect(fixedNewObj).toEqual(newObj)
+})
+
+test('performance test for large arrays should be less than 200 ms', () => {
+  const oldObj = {
+    addresses: Array(5000)
+      .fill(null)
+      .map((a, index) => ({ id: `address-${index}` })),
+  }
+
+  const newObj = {
+    addresses: Array(5000)
+      .fill(null)
+      .map((a, index) => ({ id: `address-${index}` })),
+  }
+
+  const start = performance.now()
+  const [old, fixedNewObj] = copyEmptyArrayProps(oldObj, newObj)
+  const end = performance.now()
+
+  expect(old).toEqual(oldObj)
+  expect(fixedNewObj).toEqual(newObj)
+  expect(end - start).toBeLessThan(200)
 })
