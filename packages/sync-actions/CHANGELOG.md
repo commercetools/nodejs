@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.2.0
+
+### Minor Changes
+
+- [`cad54c42`](https://github.com/commercetools/nodejs/commit/cad54c421e18464ae03fb283a30f2ba2f3f6e46a) Thanks [@qmateub](https://github.com/qmateub)! - feat(sync-actions): improve performance for large arrays comparisons"
+
 ## 5.1.0
 
 ### Minor Changes
