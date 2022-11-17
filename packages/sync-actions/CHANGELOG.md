@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.3.0
+
+### Minor Changes
+
+- [#1820](https://github.com/commercetools/nodejs/pull/1820) [`c3964026`](https://github.com/commercetools/nodejs/commit/c3964026b401cb1c8ae8b581a3fcc4ea692ed3b4) Thanks [@danrleyt](https://github.com/danrleyt)! - Adding support to quote requests and staged quotes
+
 ## 5.2.0
 
 ### Minor Changes
