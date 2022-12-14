@@ -148,11 +148,9 @@ export function actionsMapReturnsInfo(diff, oldObj, newObj) {
     },
     [CHANGE_ACTIONS]: (oldSReturnInfo, newReturnInfo, key) => {
       const { items = {} } = returnInfoDiff[key]
-
       if (Object.keys(items).length === 0) {
         return []
       }
-
       return Object.keys(items).reduce((actions, index) => {
         const item = newReturnInfo.items[index]
         if (items[index].shipmentState) {
@@ -169,7 +167,6 @@ export function actionsMapReturnsInfo(diff, oldObj, newObj) {
             paymentState: item.paymentState,
           })
         }
-
         return actions
       }, [])
     },
