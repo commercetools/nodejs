@@ -692,7 +692,7 @@ describe('Actions', () => {
           orderSync.buildActions(now, before)
           const end = performance.now()
 
-          expect(end - start).toBeLessThan(200)
+          expect(end - start).toBeLessThan(400)
         })
       })
     })
