@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.3.1
+
+### Patch Changes
+
+- [#1818](https://github.com/commercetools/nodejs/pull/1818) [`856929e3`](https://github.com/commercetools/nodejs/commit/856929e3bc176021a9b52e1ff9c888e51c83cccd) Thanks [@qmateub](https://github.com/qmateub)! - fix(sync-actions/orders): adjust diff calculation of returnInfo items
+
 ## 5.3.0
 
 ### Minor Changes
