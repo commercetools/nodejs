@@ -1,3 +1,4 @@
+import { performance } from 'perf_hooks'
 import orderSyncFn, { actionGroups } from '../src/orders'
 import { baseActionsList } from '../src/order-actions'
 
@@ -653,6 +654,46 @@ describe('Actions', () => {
           },
         ]
         expect(actual).toEqual(expected)
+      })
+      describe('performance test', () => {
+        it('should be performant for large arrays', () => {
+          const before = {
+            returnInfo: Array(100)
+              .fill(null)
+              .map((a, index) => ({
+                items: Array(50)
+                  .fill(null)
+                  .map((b, index2) => {
+                    return {
+                      id: `id-${index}-${index2}`,
+                      shipmentState: 'Returned',
+                      paymentState: 'Initial',
+                    }
+                  }),
+              })),
+          }
+          const now = {
+            returnInfo: Array(100)
+              .fill(null)
+              .map((a, index) => ({
+                items: Array(50)
+                  .fill(null)
+                  .map((b, index2) => {
+                    return {
+                      id: `id-${index}-${index2}`,
+                      shipmentState: 'Returned',
+                      paymentState: 'Refunded',
+                    }
+                  }),
+              })),
+          }
+
+          const start = performance.now()
+          orderSync.buildActions(now, before)
+          const end = performance.now()
+
+          expect(end - start).toBeLessThan(200)
+        })
       })
     })
   })

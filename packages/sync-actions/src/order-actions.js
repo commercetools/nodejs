@@ -148,34 +148,30 @@ export function actionsMapReturnsInfo(diff, oldObj, newObj) {
     },
     [CHANGE_ACTIONS]: (oldSReturnInfo, newReturnInfo, key) => {
       const { items = {} } = returnInfoDiff[key]
-      const itemActions = []
-      if (Object.keys(items).length > 0) {
-        return [
-          ...itemActions,
-          ...Object.keys(items).reduce((actions, index) => {
-            const itActions = []
-            const item = newReturnInfo.items[index]
-            if (items[index].shipmentState) {
-              itActions.push({
-                action: 'setReturnShipmentState',
-                returnItemId: item.id,
-                shipmentState: item.shipmentState,
-              })
-            }
-            if (items[index].paymentState) {
-              itActions.push({
-                action: 'setReturnPaymentState',
-                returnItemId: item.id,
-                paymentState: item.paymentState,
-              })
-            }
 
-            return [...actions, ...itActions]
-          }, []),
-        ]
+      if (Object.keys(items).length === 0) {
+        return []
       }
 
-      return itemActions
+      return Object.keys(items).reduce((actions, index) => {
+        const item = newReturnInfo.items[index]
+        if (items[index].shipmentState) {
+          actions.push({
+            action: 'setReturnShipmentState',
+            returnItemId: item.id,
+            shipmentState: item.shipmentState,
+          })
+        }
+        if (items[index].paymentState) {
+          actions.push({
+            action: 'setReturnPaymentState',
+            returnItemId: item.id,
+            paymentState: item.paymentState,
+          })
+        }
+
+        return actions
+      }, [])
     },
   })
 
