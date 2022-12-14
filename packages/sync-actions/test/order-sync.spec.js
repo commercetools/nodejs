@@ -1,3 +1,4 @@
+import { performance } from 'perf_hooks'
 import orderSyncFn, { actionGroups } from '../src/orders'
 import { baseActionsList } from '../src/order-actions'
 
@@ -545,6 +546,155 @@ describe('Actions', () => {
         },
       ]
       expect(actual).toEqual(expected)
+    })
+    describe('when all items have changed its `paymentState`', () => {
+      test('should build `returnInfoPaymentState` action', () => {
+        const before = {
+          returnInfo: [
+            {
+              items: [
+                {
+                  id: 'id1',
+                  shipmentState: 'Returned',
+                  paymentState: 'Initial',
+                },
+              ],
+            },
+            {
+              items: [
+                {
+                  id: 'id2',
+                  shipmentState: 'Returned',
+                  paymentState: 'Initial',
+                },
+                {
+                  id: 'id3',
+                  shipmentState: 'Returned',
+                  paymentState: 'Initial',
+                },
+                {
+                  id: 'id4',
+                  shipmentState: 'Returned',
+                  paymentState: 'Initial',
+                },
+                {
+                  id: 'id5',
+                  shipmentState: 'Returned',
+                  paymentState: 'Initial',
+                },
+              ],
+              returnDate: '2022-10-24T00:00:00.000Z',
+            },
+          ],
+        }
+        const now = {
+          returnInfo: [
+            {
+              items: [
+                {
+                  id: 'id1',
+                  shipmentState: 'Returned',
+                  paymentState: 'NotRefunded',
+                },
+              ],
+            },
+            {
+              items: [
+                {
+                  id: 'id2',
+                  shipmentState: 'Returned',
+                  paymentState: 'Refunded',
+                },
+                {
+                  id: 'id3',
+                  shipmentState: 'Returned',
+                  paymentState: 'Refunded',
+                },
+                {
+                  id: 'id4',
+                  shipmentState: 'Returned',
+                  paymentState: 'Refunded',
+                },
+                {
+                  id: 'id5',
+                  shipmentState: 'Returned',
+                  paymentState: 'Refunded',
+                },
+              ],
+              returnDate: '2022-10-24T00:00:00.000Z',
+            },
+          ],
+        }
+        const actual = orderSync.buildActions(now, before)
+        const expected = [
+          {
+            action: 'setReturnPaymentState',
+            returnItemId: now.returnInfo[0].items[0].id,
+            paymentState: now.returnInfo[0].items[0].paymentState,
+          },
+          {
+            action: 'setReturnPaymentState',
+            returnItemId: now.returnInfo[1].items[0].id,
+            paymentState: now.returnInfo[1].items[0].paymentState,
+          },
+          {
+            action: 'setReturnPaymentState',
+            returnItemId: now.returnInfo[1].items[1].id,
+            paymentState: now.returnInfo[1].items[1].paymentState,
+          },
+          {
+            action: 'setReturnPaymentState',
+            returnItemId: now.returnInfo[1].items[2].id,
+            paymentState: now.returnInfo[1].items[2].paymentState,
+          },
+          {
+            action: 'setReturnPaymentState',
+            returnItemId: now.returnInfo[1].items[3].id,
+            paymentState: now.returnInfo[1].items[3].paymentState,
+          },
+        ]
+        expect(actual).toEqual(expected)
+      })
+      describe('performance test', () => {
+        it('should be performant for large arrays', () => {
+          const before = {
+            returnInfo: Array(100)
+              .fill(null)
+              .map((a, index) => ({
+                items: Array(50)
+                  .fill(null)
+                  .map((b, index2) => {
+                    return {
+                      id: `id-${index}-${index2}`,
+                      shipmentState: 'Returned',
+                      paymentState: 'Initial',
+                    }
+                  }),
+              })),
+          }
+          const now = {
+            returnInfo: Array(100)
+              .fill(null)
+              .map((a, index) => ({
+                items: Array(50)
+                  .fill(null)
+                  .map((b, index2) => {
+                    return {
+                      id: `id-${index}-${index2}`,
+                      shipmentState: 'Returned',
+                      paymentState: 'Refunded',
+                    }
+                  }),
+              })),
+          }
+
+          const start = performance.now()
+          orderSync.buildActions(now, before)
+          const end = performance.now()
+
+          expect(end - start).toBeLessThan(400)
+        })
+      })
     })
   })
 })
