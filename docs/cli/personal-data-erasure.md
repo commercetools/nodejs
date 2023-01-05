@@ -4,12 +4,12 @@ A package which deletes or exports [commercetools personal data](#list-of-person
 
 ## List of personal data
 
-- [Customer](https://docs.commercetools.com/http-api-projects-customers.html)
-- [Orders](https://docs.commercetools.com/http-api-projects-orders.html)
-- [Carts](https://docs.commercetools.com/http-api-projects-carts.html)
-- [Payments](https://docs.commercetools.com/http-api-projects-payments.html)
-- [ShoppingLists](https://docs.commercetools.com/http-api-projects-shoppingLists.html)
-- [Reviews](https://docs.commercetools.com/http-api-projects-reviews.html)
+- [Customer](https://docs.commercetools.com/api/projects/customers)
+- [Orders](https://docs.commercetools.com/api/projects/orders)
+- [Carts](https://docs.commercetools.com/api/projects/carts)
+- [Payments](https://docs.commercetools.com/api/projects/payments)
+- [ShoppingLists](https://docs.commercetools.com/api/projects/shoppingLists)
+- [Reviews](https://docs.commercetools.com/api/projects/reviews)
 
 ## Configuration
 
