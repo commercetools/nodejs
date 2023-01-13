@@ -236,7 +236,7 @@ export default class SdkAuth {
   }
 
   _getRequestConfig(config: CustomAuthOptions = {}): AuthOptions {
-    const mergedConfig = Object.assign({}, config, this.config)
+    const mergedConfig = { ...config, ...this.config}
 
     // handle scopes array - Object.assign would merge arrays together
     // instead of taking its first occurrence
