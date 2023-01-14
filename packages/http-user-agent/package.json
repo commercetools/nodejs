@@ -3,8 +3,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/http-user-agent",
-  "version": "2.1.2",
+  "version": "3.0.0",
   "description": "Creates a proper HTTP User-Agent",
   "keywords": [
     "commercetools",

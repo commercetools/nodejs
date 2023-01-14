@@ -3,8 +3,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/sdk-middleware-http",
-  "version": "6.0.9",
+  "version": "7.0.1",
   "description": "Middleware for http requests, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
@@ -34,6 +37,6 @@
   "devDependencies": {
     "abort-controller": "3.0.0",
     "nock": "12.0.3",
-    "node-fetch": "2.6.1"
+    "node-fetch": "^2.6.7"
   }
 }

@@ -908,10 +908,16 @@ describe('ProductJsonToCsv', () => {
   })
 
   describe('::fetchReferences', () => {
+    const payload = {
+      body: {
+        count: 5,
+        results: [{}]
+      },
+    }
     beforeEach(() => {
-      productJsonToCsv.client.execute = jest.fn()
+      productJsonToCsv.client.execute = jest.fn().mockImplementation(() => Promise.resolve(payload));
     })
-    test('should fetch reference from API from url', () => {
+    test('should fetch reference from API from url', async () => {
       const uri = 'dummy-uri'
       const expectedRequest = {
         uri,
@@ -919,7 +925,7 @@ describe('ProductJsonToCsv', () => {
         headers: { Authorization: 'Bearer myAccessToken' },
       }
 
-      productJsonToCsv.fetchReferences(uri)
+      await productJsonToCsv.fetchReferences(uri)
       expect(productJsonToCsv.client.execute).toHaveBeenCalled()
       expect(productJsonToCsv.client.execute).toHaveBeenCalledWith(
         expect.objectContaining({

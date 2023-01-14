@@ -61,13 +61,14 @@ To ensure the lock file is up-to-date with the new versions, it's recommended to
 
 ## Releases
 
-We use lerna for releasing packages. Just run `yarn release` from `master` (after pulling in the latest merges) to publish a single or a set of modules. Lerna will check changes on packages providing semver bumps according to the commit messages used for each package.
+We use lerna to manage our multi-package (monorepo) repository and we use changesets to publish packages to npm, the following steps will allow you to add a changeset to a change you wish to publish
 
-This will also append all PRs up until the release in the `CHANGELOG.md` and push it as a separate commit with the message `docs: update changelog`. For this to work, we need to have a `Type`-label on the PRs, so please make sure they are added.
+- Run the command `yarn changeset`, a list of packages will be listed.
+- Select the package(s) that include the changes.
+- Add the packages you wish to publish to npm
+- Commit the changes, push to Github and then create a PR
 
-For this to work, it is essential that you create and export a github token that has read access to your public repos.
-
-`$ export GITHUB_AUTH=<your_token>`
+When this PR is merged into the base branch, a new release PR will be created by changeset and this PR is repsonsible for the actual package release.
 
 #### Commit message
 

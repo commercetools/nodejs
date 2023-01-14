@@ -154,10 +154,8 @@ describe('PersonalDataErasure', () => {
             results: [],
           },
         }
-        personalDataErasure.client.process = jest.fn(
-          async (request, callback) => {
-            await callback(payload)
-          }
+        personalDataErasure.client.execute = jest.fn(() =>
+          Promise.resolve(payload)
         )
       })
 
@@ -167,9 +165,9 @@ describe('PersonalDataErasure', () => {
         ).rejects.toThrowErrorMatchingSnapshot())
     })
     test('should throw error if no customerID is passed', () => {
-      expect(() =>
+      return expect(
         personalDataErasure.deleteAll()
-      ).toThrowErrorMatchingSnapshot()
+      ).rejects.toThrowErrorMatchingSnapshot()
     })
   })
 
@@ -239,7 +237,9 @@ describe('PersonalDataErasure', () => {
           results: [],
         },
       }
-      expect(personalDataErasure._deleteOne(payload)).toBeFalsy()
+      return expect(
+        personalDataErasure._deleteOne(payload)
+      ).resolves.toBeFalsy()
     })
   })
 })

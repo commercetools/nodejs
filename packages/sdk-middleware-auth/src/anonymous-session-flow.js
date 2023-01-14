@@ -33,6 +33,7 @@ export default function createAuthMiddlewareForAnonymousSessionFlow(
       return
     }
     const params = {
+      ...options,
       request,
       response,
       ...buildRequestForAnonymousSessionFlow(options),

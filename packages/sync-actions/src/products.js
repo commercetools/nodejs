@@ -43,7 +43,7 @@ function createProductMapActions(
   ): Array<UpdateAction> {
     const allActions = []
     const { sameForAllAttributeNames, enableDiscounted } = options
-    const { publish } = newObj
+    const { publish, staged } = newObj
 
     const variantHashMap = findMatchingPairs(
       diff.variants,
@@ -65,7 +65,15 @@ function createProductMapActions(
 
     allActions.push(
       mapActionGroup('variants', (): Array<UpdateAction> =>
-        productActions.actionsMapVariants(diff, oldObj, newObj)
+        productActions.actionsMapAddVariants(diff, oldObj, newObj)
+      )
+    )
+
+    allActions.push(productActions.actionsMapMasterVariant(oldObj, newObj))
+
+    allActions.push(
+      mapActionGroup('variants', (): Array<UpdateAction> =>
+        productActions.actionsMapRemoveVariants(diff, oldObj, newObj)
       )
     )
 
@@ -86,8 +94,6 @@ function createProductMapActions(
         productActions.actionsMapReferences(diff, oldObj, newObj)
       )
     )
-
-    allActions.push(productActions.actionsMapMasterVariant(oldObj, newObj))
 
     allActions.push(
       mapActionGroup('images', (): Array<UpdateAction> =>
@@ -136,7 +142,7 @@ function createProductMapActions(
       )
     )
 
-    if (publish === true)
+    if (publish === true || staged === false)
       return flatten(allActions).map((action) => ({ ...action, staged: false }))
 
     return flatten(allActions)

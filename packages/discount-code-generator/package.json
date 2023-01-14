@@ -3,8 +3,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/discount-code-generator",
-  "version": "2.0.9",
+  "version": "3.0.0",
   "description": "Generates discount codes for the commercetools platform, according to constraints.",
   "keywords": [
     "commercetools",
@@ -36,12 +39,12 @@
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "dependencies": {
-    "csv-parser": "^2.1.0",
+    "csv-parser": "^3.0.0",
     "flat": "^5.0.0",
     "json2csv": "^5.0.0",
     "npmlog": "^4.1.2",
     "pretty-error": "^2.1.1",
     "tokgen": "^1.0.0",
-    "yargs": "^15.0.0"
+    "yargs": "^16.0.0"
   }
 }

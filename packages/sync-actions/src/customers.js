@@ -11,6 +11,7 @@ import createMapActionGroup from './utils/create-map-action-group'
 import actionsMapCustom from './utils/action-map-custom'
 import * as customerActions from './customer-actions'
 import * as diffpatcher from './utils/diffpatcher'
+import copyEmptyArrayProps from './utils/copy-empty-array-props'
 
 export const actionGroups = ['base', 'references', 'addresses', 'custom']
 
@@ -40,6 +41,17 @@ function createCustomerMapActions(
     allActions.push(
       mapActionGroup('addresses', (): Array<UpdateAction> =>
         customerActions.actionsMapAddresses(diff, oldObj, newObj)
+      )
+    )
+
+    allActions.push(
+      mapActionGroup('base', (): Array<UpdateAction> =>
+        customerActions.actionsMapSetDefaultBase(
+          diff,
+          oldObj,
+          newObj,
+          syncActionConfig
+        )
       )
     )
 
@@ -85,6 +97,10 @@ export default (
     mapActionGroup,
     syncActionConfig
   )
-  const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
+  const buildActions = createBuildActions(
+    diffpatcher.diff,
+    doMapActions,
+    copyEmptyArrayProps
+  )
   return { buildActions }
 }

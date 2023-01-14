@@ -1,5 +1,9 @@
 import customerSyncFn, { actionGroups } from '../src/customers'
-import { baseActionsList, referenceActionsList } from '../src/customer-actions'
+import {
+  baseActionsList,
+  setDefaultBaseActionsList,
+  referenceActionsList,
+} from '../src/customer-actions'
 
 describe('Exports', () => {
   test('action group list', () => {
@@ -21,6 +25,19 @@ describe('Exports', () => {
       { action: 'setLocale', key: 'locale' },
       { action: 'setVatId', key: 'vatId' },
       {
+        action: 'setStores',
+        key: 'stores',
+      },
+      {
+        action: 'setKey',
+        key: 'key',
+      },
+    ])
+  })
+
+  test('correctly define base set default actions list', () => {
+    expect(setDefaultBaseActionsList).toEqual([
+      {
         action: 'setDefaultBillingAddress',
         key: 'defaultBillingAddressId',
         actionKey: 'addressId',
@@ -29,14 +46,6 @@ describe('Exports', () => {
         action: 'setDefaultShippingAddress',
         key: 'defaultShippingAddressId',
         actionKey: 'addressId',
-      },
-      {
-        action: 'setStores',
-        key: 'stores',
-      },
-      {
-        action: 'setKey',
-        key: 'key',
       },
     ])
   })
@@ -124,6 +133,24 @@ describe('Actions', () => {
 
     const actual = customerSync.buildActions(now, before)
     const expected = [{ action: 'addAddress', address: now.addresses[0] }]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build `addAddress` action before `setDefaultShippingAddress`', () => {
+    const before = { addresses: [] }
+    const now = {
+      addresses: [{ streetName: 'some name', streetNumber: '5' }],
+      defaultShippingAddressId: 'def456',
+    }
+
+    const actual = customerSync.buildActions(now, before)
+    const expected = [
+      { action: 'addAddress', address: now.addresses[0] },
+      {
+        action: 'setDefaultShippingAddress',
+        addressId: now.defaultShippingAddressId,
+      },
+    ]
     expect(actual).toEqual(expected)
   })
 
@@ -478,6 +505,31 @@ describe('Actions', () => {
       {
         action: 'setKey',
         key: 'key-now',
+      },
+    ])
+  })
+
+  test('should build not throw error for empty array', () => {
+    const before = {
+      stores: [
+        {
+          typeId: 'store',
+          key: 'canada',
+        },
+        {
+          typeId: 'store',
+          key: 'usa',
+        },
+      ],
+    }
+
+    const now = {}
+
+    const actual = customerSync.buildActions(now, before)
+    expect(actual).toEqual([
+      {
+        action: 'setStores',
+        stores: [],
       },
     ])
   })
