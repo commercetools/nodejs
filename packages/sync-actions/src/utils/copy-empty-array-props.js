@@ -13,18 +13,17 @@ const CUSTOM = 'custom'
 export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
   if (!isNil(oldObj) && !isNil(newObj)) {
     const nextObjectWithEmptyArray = Object.entries(oldObj).reduce(
-      (nextObject, [key, value]) => {
-        const merged = {
-          ...newObj,
-          ...nextObject,
-        }
-
+      (merged, [key, value]) => {
         // Ignore CUSTOM key as this object is dynamic and its up to the user to dynamically change it
         // todo, it would be better if we pass it as ignored keys param
         if (key === CUSTOM) return merged
 
         if (Array.isArray(value) && newObj[key] && newObj[key].length >= 1) {
           /* eslint-disable no-plusplus */
+          const hashMapValue = value.reduce((acc, val) => {
+            acc[val.id] = val
+            return acc
+          }, {})
           for (let i = 0; i < newObj[key].length; i++) {
             if (
               !isNil(newObj[key][i]) &&
@@ -32,16 +31,14 @@ export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
               !isNil(newObj[key][i].id)
             ) {
               // Since its unordered array elements then check if the element on `oldObj` exists by id
-              const foundObject = value.find(
-                (v) => Number(v.id) === Number(newObj[key][i].id)
-              )
+              const foundObject = hashMapValue[newObj[key][i].id]
               if (!isNil(foundObject)) {
                 const [, nestedObject] = copyEmptyArrayProps(
                   foundObject,
                   newObj[key][i]
                 )
                 /* eslint-disable no-param-reassign */
-                newObj[key][i] = nestedObject
+                merged[key][i] = nestedObject
               }
             }
           }
@@ -49,10 +46,8 @@ export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
           return merged
         }
         if (Array.isArray(value)) {
-          return {
-            ...merged,
-            [key]: isNil(newObj[key]) ? [] : newObj[key],
-          }
+          merged[key] = isNil(newObj[key]) ? [] : newObj[key]
+          return merged
         }
         if (
           !isNil(newObj[key]) &&
@@ -62,14 +57,12 @@ export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
           !(value instanceof Date)
         ) {
           const [, nestedObject] = copyEmptyArrayProps(value, newObj[key])
-          return {
-            ...merged,
-            [key]: nestedObject,
-          }
+          merged[key] = nestedObject
+          return merged
         }
         return merged
       },
-      {}
+      { ...newObj }
     )
     return [oldObj, nextObjectWithEmptyArray]
   }

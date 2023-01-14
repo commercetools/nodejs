@@ -1,3 +1,6 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+
 import fs from 'fs'
 import { getCredentials } from '@commercetools/get-credentials'
 import pino from 'pino'

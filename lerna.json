@@ -2,25 +2,5 @@
   "lerna": "3.16.4",
   "version": "independent",
   "useWorkspaces": true,
-  "npmclient": "yarn",
-  "changelog": {
-    "rootPath": ".",
-    "repo": "commercetools/nodejs",
-    "labels": {
-      "Type: New Feature": ":rocket: New Feature",
-      "Type: Breaking Change": ":boom: Breaking Change",
-      "Type: Bug": ":bug: Bug Fix",
-      "Type: Enhancement": ":nail_care: Enhancement",
-      "Type: Documentation": ":memo: Documentation",
-      "Type: Maintenance": ":house: Maintenance"
-    },
-    "cacheDir": ".changelog",
-    "ignoreCommitters": ["renovate", "renovate-bot"]
-  },
-  "command": {
-    "publish": {
-      "npmClient": "yarn",
-      "message": "chore(release): releasing component"
-    }
-  }
+  "npmclient": "yarn"
 }

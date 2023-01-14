@@ -3,8 +3,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/get-credentials",
-  "version": "3.0.17",
+  "version": "4.0.0",
   "description": "Get CT credentials from the system environment.",
   "keywords": [
     "commercetools",
@@ -29,7 +32,7 @@
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
   },
   "devDependencies": {
-    "sinon": "9.0.3"
+    "sinon": "9.2.4"
   },
   "dependencies": {
     "dotenv": "^8.0.0"

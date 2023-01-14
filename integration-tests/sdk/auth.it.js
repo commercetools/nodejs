@@ -288,39 +288,36 @@ describe('Auth Flows', () => {
     })
 
     it('should tokenProvider work even after changing fetchTokenInfo funtion', async () => {
-        const onTokenInfoRefreshedMock = jest.fn()
-  
-        const tokenProvider = new TokenProvider(
-          {
-            sdkAuth: authClient,
-            onTokenInfoRefreshed: onTokenInfoRefreshedMock,
-          }
-        )
-        tokenProvider.fetchTokenInfo = (sdkAuth) =>
-            sdkAuth.refreshTokenFlow(encodeURIComponent("invalid refresh token"));
+      const onTokenInfoRefreshedMock = jest.fn()
 
-        try {
-          await tokenProvider.getAccessToken()
-        } catch (err) {
-          expect(err.toString()).toEqual(
-            expect.stringContaining(
-              'BadRequest: The refresh token was not found. It may have expired.'
-            )
+      const tokenProvider = new TokenProvider({
+        sdkAuth: authClient,
+        onTokenInfoRefreshed: onTokenInfoRefreshedMock,
+      })
+      tokenProvider.fetchTokenInfo = (sdkAuth) =>
+        sdkAuth.refreshTokenFlow(encodeURIComponent('invalid refresh token'))
+
+      try {
+        await tokenProvider.getAccessToken()
+      } catch (err) {
+        expect(err.toString()).toEqual(
+          expect.stringContaining(
+            'BadRequest: The refresh token was not found. It may have expired.'
           )
-          tokenProvider.fetchTokenInfo = (sdkAuth) =>
-            sdkAuth.anonymousFlow();
-          const tokenInfo = await tokenProvider.getTokenInfo();
-  
-          // check returned properties
-          expect(tokenInfo).toHaveProperty('access_token')
-          expect(tokenInfo.scope).toMatch(
-              `manage_project:${projectKey} anonymous_id`
-          )
-          expect(tokenInfo).toHaveProperty('expires_in')
-          expect(tokenInfo).toHaveProperty('expires_at')
-          expect(tokenInfo).toHaveProperty('refresh_token')
-          expect(tokenInfo).toHaveProperty('token_type', 'Bearer')
-        }
+        )
+        tokenProvider.fetchTokenInfo = (sdkAuth) => sdkAuth.anonymousFlow()
+        const tokenInfo = await tokenProvider.getTokenInfo()
+
+        // check returned properties
+        expect(tokenInfo).toHaveProperty('access_token')
+        expect(tokenInfo.scope).toMatch(
+          `manage_project:${projectKey} anonymous_id`
+        )
+        expect(tokenInfo).toHaveProperty('expires_in')
+        expect(tokenInfo).toHaveProperty('expires_at')
+        expect(tokenInfo).toHaveProperty('refresh_token')
+        expect(tokenInfo).toHaveProperty('token_type', 'Bearer')
+      }
     })
   })
 

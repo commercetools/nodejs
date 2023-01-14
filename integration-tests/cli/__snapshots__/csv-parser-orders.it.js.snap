@@ -7,19 +7,19 @@ Usage: csvparserorder [options]
 Convert commercetools order CSV data to JSON.
 
 Options:
-  --help            Show help                                          [boolean]
-  --version         Show version number                                [boolean]
-  --type, -t        Predefined type of csv.
+      --help        Show help                                          [boolean]
+      --version     Show version number                                [boolean]
+  -t, --type        Predefined type of csv.
                [required] [choices: \\"lineitemstate\\", \\"returninfo\\", \\"deliveries\\"]
-  --inputFile, -i   Path to input CSV file.                   [default: \\"stdin\\"]
-  --outputFile, -o  Path to output JSON file.                [default: \\"stdout\\"]
-  --batchSize, -b   Number of CSV rows to handle simultaneously.  [default: 100]
-  --delimiter, -d   Used CSV delimiter.                           [default: \\",\\"]
-  --encoding, -e    Used CSV encoding.                         [default: \\"utf8\\"]
-  --strictMode, -s  Parse CSV strictly.                          [default: true]
-  --logLevel, -l    Logging level: error, warn, info or verbose.
+  -i, --inputFile   Path to input CSV file.                   [default: \\"stdin\\"]
+  -o, --outputFile  Path to output JSON file.                [default: \\"stdout\\"]
+  -b, --batchSize   Number of CSV rows to handle simultaneously.  [default: 100]
+  -d, --delimiter   Used CSV delimiter.                           [default: \\",\\"]
+  -e, --encoding    Used CSV encoding.                         [default: \\"utf8\\"]
+  -s, --strictMode  Parse CSV strictly.                          [default: true]
+  -l, --logLevel    Logging level: error, warn, info or verbose.
                                                                [default: \\"info\\"]
-  --logFile         Path to file where to save logs.
+      --logFile     Path to file where to save logs.
                                                  [default: \\"csvparserorder.log\\"]
 "
 `;
