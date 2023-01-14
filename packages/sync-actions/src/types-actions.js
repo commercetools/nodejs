@@ -31,16 +31,16 @@ export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   })
 }
 
-function actionsMapEnums(attributeType, attributeDiff, previous, next) {
+function actionsMapEnums(fieldName, attributeType, attributeDiff, previous, next) {
   const addEnumActionName =
-    attributeType === 'enum' ? 'addEnumValue' : 'addLocalizedEnumValue'
+    attributeType === 'Enum' ? 'addEnumValue' : 'addLocalizedEnumValue'
   const changeEnumOrderActionName =
-    attributeType === 'enum'
+    attributeType === 'Enum'
       ? 'changeEnumValueOrder'
       : 'changeLocalizedEnumValueOrder'
   const buildArrayActions = createBuildArrayActions('values', {
     [ADD_ACTIONS]: (newEnum) => ({
-      fieldName: next.name,
+      fieldName,
       action: addEnumActionName,
       value: newEnum,
     }),
@@ -56,13 +56,13 @@ function actionsMapEnums(attributeType, attributeDiff, previous, next) {
       const changeActions = []
       if (oldEnumInNext) {
         changeActions.push({
-          fieldName: next.name,
+          fieldName,
           action: changeEnumOrderActionName,
           value: newEnum,
         })
       } else {
         changeActions.push({
-          fieldName: next.name,
+          fieldName,
           action: addEnumActionName,
           value: newEnum,
         })
@@ -89,7 +89,7 @@ function actionsMapEnums(attributeType, attributeDiff, previous, next) {
     ...(newEnumValuesOrder.length > 0
       ? [
           {
-            fieldName: next.name,
+            fieldName,
             action: changeEnumOrderActionName,
             keys: newEnumValuesOrder,
           },
@@ -131,6 +131,7 @@ export function actionsMapFieldDefinitions(
       } else if (diffValue.type.values) {
         actions.push(
           ...actionsMapEnums(
+            extractedPairs.oldObj.name,
             extractedPairs.oldObj.type.name,
             diffValue.type,
             extractedPairs.oldObj.type,

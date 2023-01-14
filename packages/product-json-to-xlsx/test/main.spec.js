@@ -823,10 +823,16 @@ describe('ProductJsonToXlsx', () => {
   })
 
   describe('::fetchReferences', () => {
+    const payload = {
+      body: {
+        count: 5,
+        results: [{}]
+      },
+    }
     beforeEach(() => {
-      productJsonToXlsx.client.execute = jest.fn()
+      productJsonToXlsx.client.execute = jest.fn().mockImplementation(() => Promise.resolve(payload));
     })
-    test('should fetch reference from API from url', () => {
+    test('should fetch reference from API from url', async () => {
       const uri = 'dummy-uri'
       const expectedRequest = {
         uri,
@@ -834,7 +840,7 @@ describe('ProductJsonToXlsx', () => {
         headers: { Authorization: 'Bearer myAccessToken' },
       }
 
-      productJsonToXlsx.fetchReferences(uri)
+      await productJsonToXlsx.fetchReferences(uri)
       expect(productJsonToXlsx.client.execute).toHaveBeenCalled()
       expect(productJsonToXlsx.client.execute).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -890,7 +896,19 @@ describe('ProductJsonToXlsx', () => {
     })
 
     test('should fetch and cache channel from API', async () => {
-      const res = await productJsonToXlsx._getChannelsById(['channel-id'])
+      const _channel = 'channel-id'
+      const uri = '/project-key/channels?where=id%20in%20(%22channel-id%22)'
+      const sampleResult = {
+        'channel-id': {
+          id: 'channel-id',
+          key: 'channel-key',
+        },
+      }
+
+      productJsonToXlsx.fetchReferences(uri)
+      productJsonToXlsx._getChannelsById = jest.fn((channel) =>
+        Promise.resolve({ ...sampleResult, 'channel-id': { ...sampleResult['channel-id'], id: channel } }))
+      const res = await productJsonToXlsx._getChannelsById(_channel);
 
       expect(res).toEqual({
         'channel-id': {

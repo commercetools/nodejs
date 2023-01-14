@@ -6,27 +6,27 @@ Usage: csv-parser-state [options]
 Package to parse states from CSV to JSON
 
 Options:
-  --help                     Show help                                 [boolean]
-  --version                  Show version number                       [boolean]
-  --projectKey, -p           API project key                            [string]
-  --apiUrl                   The host URL of the HTTP API service
+      --help                 Show help                                 [boolean]
+      --version              Show version number                       [boolean]
+  -p, --projectKey           API project key                            [string]
+      --apiUrl               The host URL of the HTTP API service
                              [string] [default: \\"https://api.commercetools.com\\"]
-  --authUrl                  The host URL of the OAuth API service
+      --authUrl              The host URL of the OAuth API service
                             [string] [default: \\"https://auth.commercetools.com\\"]
-  --accessToken              CTP client access token
+      --accessToken          CTP client access token
                              Required scopes: ['view_orders']           [string]
-  --input, -i                Path to CSV file.                [default: \\"stdin\\"]
-  --output, -o               Path to output JSON file
+  -i, --input                Path to CSV file.                [default: \\"stdin\\"]
+  -o, --output               Path to output JSON file
                                                     [string] [default: \\"stdout\\"]
-  --delimiter, -d            Used CSV delimiter.                  [default: \\",\\"]
-  --multiValueDelimiter, -m  Used CSV delimiter in multiValue fields.
+  -d, --delimiter            Used CSV delimiter.                  [default: \\",\\"]
+  -m, --multiValueDelimiter  Used CSV delimiter in multiValue fields.
                                                                   [default: \\";\\"]
-  --continueOnProblems, -c   Flag if parsing should continue if module
+  -c, --continueOnProblems   Flag if parsing should continue if module
                              encounters an error.     [boolean] [default: false]
-  --logLevel                 Logging level: error, warn, info or debug
+      --logLevel             Logging level: error, warn, info or debug
                                                       [string] [default: \\"info\\"]
-  --prettyLogs               Pretty print logs to the terminal         [boolean]
-  --logFile                  Path to file where logs should be saved
+      --prettyLogs           Pretty print logs to the terminal         [boolean]
+      --logFile              Path to file where logs should be saved
                                       [string] [default: \\"csv-parser-state.log\\"]
 "
 `;

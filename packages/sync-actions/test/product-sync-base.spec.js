@@ -29,6 +29,7 @@ describe('Exports', () => {
       { action: 'setDescription', key: 'description' },
       { action: 'setSearchKeywords', key: 'searchKeywords' },
       { action: 'setKey', key: 'key' },
+      { action: 'setPriceMode', key: 'priceMode' },
     ])
   })
 
@@ -109,6 +110,16 @@ describe('Actions', () => {
 
     expect(actions).toEqual([
       { action: 'changeName', name: { en: 'Sport car' }, staged: false },
+    ])
+  })
+
+  test('should build action with `staged` flag as false when `staged` is set to false', () => {
+    const before = { name: { en: 'Car', de: 'Auto' } }
+    const now = { name: { en: 'New sport car' }, staged: false }
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual([
+      { action: 'changeName', name: { en: 'New sport car' }, staged: false },
     ])
   })
 

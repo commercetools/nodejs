@@ -14,6 +14,10 @@ function createTestRequest(options) {
   }
 }
 
+function FormDataMock() {
+  this.append = jest.fn()
+}
+
 const testHost = 'https://api.commercetools.com'
 
 describe('Http', () => {
@@ -41,6 +45,16 @@ describe('Http', () => {
     )
   })
 
+  test('throw when a non-array option is passed as retryCodes in the httpMiddlewareOptions', () => {
+    expect(() => {
+      createHttpMiddleware({ host: testHost, retryConfig: { retryCodes: null }, fetch })
+    }).toThrow(
+      new Error(
+        '`retryCodes` option must be an array of retry status (error) codes.'
+      )
+    )
+  })
+
   test('execute a get request (success)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
@@ -60,6 +74,72 @@ describe('Http', () => {
         host: testHost,
         fetch,
       })
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    }))
+
+  test("execute a get request which doesn't return a json response", () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          body: 'not json response',
+          statusCode: 200,
+        })
+        resolve()
+      }
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        fetch,
+      })
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(200, 'not json response')
+
+      httpMiddleware(next)(request, response)
+    }))
+
+  test("execute a get request which doesn't return a json response with retry", () =>
+    new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          body: { foo: 'bar' },
+          statusCode: 200,
+        })
+        resolve()
+      }
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        fetch,
+        enableRetry: true,
+      })
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .reply(200, 'not json response')
+
       nock(testHost)
         .defaultReplyHeaders({
           'Content-Type': 'application/json',
@@ -471,6 +551,42 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     }))
 
+  test('should accept a FormData body with null content type', () =>
+    new Promise((resolve, reject) => {
+      const formData = new FormDataMock()
+      formData.append('file', 'file content', 'file123')
+      const request = createTestRequest({
+        uri: '/import/file-upload',
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Content-Type': null,
+        },
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          body: { fileName: 'file123' },
+          statusCode: 200,
+        })
+        resolve()
+      }
+      // Use custom options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        fetch,
+      })
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .post('/import/file-upload')
+        .reply(200, { fileName: 'file123' })
+
+      httpMiddleware(next)(request, response)
+    }))
+
   test('handle failed response (network error)', () =>
     new Promise((resolve, reject) => {
       const request = createTestRequest({
@@ -570,6 +686,206 @@ describe('Http', () => {
 
         httpMiddleware(next)(request, response)
       }))
+
+    test('should retry when status (error) code is part of retryCodes', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res.error.name).toBe('InternalServerError')
+          expect(res.error.originalRequest).toBeDefined()
+          expect(res.body).toBeUndefined()
+          expect(res.statusCode).toBe(500)
+          expect(res.error.retryCount).toBe(2)
+          resolve()
+        }
+        const options = {
+          host: testHost,
+          enableRetry: true,
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+            retryCodes: [
+              500, 501, 502
+            ],
+          },
+          fetch,
+        }
+        const httpMiddleware = createHttpMiddleware(options)
+        nock(testHost).get('/foo/bar').times(3).reply(500)
+
+        httpMiddleware(next)(request, response)
+      }))
+
+    test('should retry when status (error) message is part of retryCodes', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res.error.name).toBe('InternalServerError')
+          expect(res.error.message).toBe('ETIMEDOUT')
+          expect(res.error.retryCount).toBe(2)
+          expect(res.error.statusCode).toBe(500)
+          resolve()
+        }
+
+        const httpMiddleware = createHttpMiddleware({
+          host: testHost,
+          enableRetry: true,
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+            retryCodes: [
+              'ETIMEDOUT', 'ECONNREFUSED', 'write EPIPE'
+            ]
+          },
+          fetch,
+        })
+        nock(testHost)
+          .defaultReplyHeaders({
+            'Content-Type': 'application/json'
+          })
+          .persist()
+          .get('/foo/bar')
+          .reply(500, 'ETIMEDOUT')
+
+        httpMiddleware(next)(request, response)
+      }))
+
+    test('should retry when status (error) code and message are both part of retryCodes', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res.error.name).toBe('HttpError')
+          expect(res.error.message).toBe('ETIMEDOUT')
+          expect(res.error.retryCount).toBe(2)
+          expect(res.error.statusCode).toBe(502)
+          resolve()
+        }
+
+        const httpMiddleware = createHttpMiddleware({
+          host: testHost,
+          enableRetry: true,
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+            retryCodes: [
+              'ETIMEDOUT', 503, 502, 'ECONNREFUSED', 'write EPIPE'
+            ]
+          },
+          fetch,
+        })
+        nock(testHost)
+          .defaultReplyHeaders({
+            'Content-Type': 'application/json'
+          })
+          .persist()
+          .get('/foo/bar')
+          .reply(502, 'ETIMEDOUT')
+
+        httpMiddleware(next)(request, response)
+      }))
+
+    test('should not retry when status (error) message is not part of retryCodes', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res.error.name).toBe('InternalServerError')
+          expect(res.error.originalRequest).toBeDefined()
+          expect(res.body).toBeUndefined()
+          expect(res.statusCode).toBe(500)
+          expect(res.error.retryCount).toBe(0)
+          resolve()
+        }
+        const options = {
+          host: testHost,
+          enableRetry: true,
+          retryCodes: ['Not Included'],
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+          },
+          fetch,
+        }
+        const httpMiddleware = createHttpMiddleware(options)
+        nock(testHost)
+          .get('/foo/bar')
+          .times(3)
+          .reply(500, 'Internal Server Error')
+
+        httpMiddleware(next)(request, response)
+      }))
+
+    test('should not retry when status (error) code is not part of retryCodes', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res.error.name).toBe('InternalServerError')
+          expect(res.error.originalRequest).toBeDefined()
+          expect(res.body).toBeUndefined()
+          expect(res.statusCode).toBe(500)
+          expect(res.error.retryCount).toBe(0)
+          resolve()
+        }
+        const options = {
+          host: testHost,
+          enableRetry: true,
+          retryCodes: [501, 502],
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+          },
+          fetch,
+        }
+        const httpMiddleware = createHttpMiddleware(options)
+        nock(testHost).get('/foo/bar').times(3).reply(500)
+
+        httpMiddleware(next)(request, response)
+      }))
+
+    test('should not retry when enableRetry is set to false ', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          expect(res.error.name).toBe('InternalServerError')
+          expect(res.error.originalRequest).toBeDefined()
+          expect(res.body).toBeUndefined()
+          expect(res.statusCode).toBe(500)
+          expect(res.error.retryCount).toBe(0)
+          resolve()
+        }
+        const options = {
+          host: testHost,
+          enableRetry: false,
+          retryCodes: [500, 502],
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+          },
+          fetch,
+        }
+        const httpMiddleware = createHttpMiddleware(options)
+        nock(testHost).get('/foo/bar').times(3).reply(500)
+
+        httpMiddleware(next)(request, response)
+      }))
+
 
     test(
       'should toggle `exponential backoff` off',
@@ -1050,4 +1366,132 @@ describe('Http', () => {
 
       httpMiddleware(next)(request, response)
     }))
+
+  test('should retry when request is aborted (success)', () => {
+    expect.assertions(1)
+    return new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          body: { foo: 'bar' },
+          statusCode: 200,
+        })
+        resolve()
+      }
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        timeout: 100,
+        fetch,
+        enableRetry: true,
+        retryConfig: {
+          retryOnAbort: true,
+        },
+        getAbortController: () => new AbortController(),
+      })
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .once()
+        .delay(200) // delay response to fail
+        .reply(200, { foo: 'bar' })
+        .get('/foo/bar')
+        .delay(50) // delay lower then timeout
+        .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    })
+  })
+
+  test('should retry when request is aborted (fail)', () => {
+    expect.assertions(1)
+    return new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          error: expect.any(Error),
+          statusCode: 0,
+        })
+        resolve()
+      }
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        timeout: 100,
+        fetch,
+        enableRetry: true,
+        retryConfig: {
+          maxRetries: 2,
+          retryOnAbort: false,
+        },
+        getAbortController: () => new AbortController(),
+      })
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .once()
+        .delay(200) // delay response to fail
+        .reply(200, { foo: 'bar' })
+        .get('/foo/bar')
+        .delay(150) // delay higher then timeout
+        .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    })
+  })
+
+  test('should retry when requests are aborted (fail)', () => {
+    expect.assertions(1)
+    return new Promise((resolve, reject) => {
+      const request = createTestRequest({
+        uri: '/foo/bar',
+      })
+      const response = { resolve, reject }
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          error: expect.any(Error),
+          statusCode: 0,
+        })
+        resolve()
+      }
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        timeout: 100, // time out after 10ms
+        fetch,
+        enableRetry: true,
+        retryConfig: {
+          maxRetries: 1,
+          retryOnAbort: true,
+        },
+        getAbortController: () => new AbortController(),
+      })
+      nock(testHost)
+        .defaultReplyHeaders({
+          'Content-Type': 'application/json',
+        })
+        .get('/foo/bar')
+        .once()
+        .delay(150) // delay response to fail (higher than timeout)
+        .reply(200, { foo: 'bar' })
+        .get('/foo/bar')
+        .delay(150) // delay response to fail (higher than timeout)
+        .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    })
+  })
 })

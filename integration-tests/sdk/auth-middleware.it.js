@@ -217,9 +217,7 @@ describe('Auth Middleware Flows', () => {
           ({
             body: { results: carts },
             request: {
-              headers: {
-                Authorization: token,
-              },
+              headers: { Authorization: token },
             },
           }) => {
             // Assert that a different token was used to fetch the carts

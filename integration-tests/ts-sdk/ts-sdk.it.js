@@ -2,7 +2,7 @@ import { createClient } from '@commercetools/sdk-client'
 import { getCredentials } from '@commercetools/get-credentials'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createHttpMiddleware } from '@commercetools/sdk-middleware-http'
-import { createApiBuilderFromCtpClient } from '@commercetools/typescript-sdk'
+import { createApiBuilderFromCtpClient } from '@commercetools/platform-sdk'
 import fetch from 'node-fetch'
 
 let projectKey

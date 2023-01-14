@@ -51,6 +51,7 @@ describe('DiscountCode tests', () => {
     ])
 
     cartDiscount = data[0].body
+
   }, 15000)
 
   afterAll(async () => {

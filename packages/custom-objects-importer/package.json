@@ -3,8 +3,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "name": "@commercetools/custom-objects-importer",
-  "version": "3.0.31",
+  "version": "4.0.0",
   "description": "Import custom objects to the commercetools platform",
   "main": "lib/main.js",
   "scripts": {
@@ -32,16 +35,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commercetools/api-request-builder": "^5.6.3",
-    "@commercetools/sdk-client": "^2.1.2",
-    "@commercetools/sdk-middleware-auth": "^5.1.6",
-    "@commercetools/sdk-middleware-http": "^6.0.9",
-    "@commercetools/sdk-middleware-user-agent": "^2.1.5",
-    "@commercetools/sync-actions": "^4.9.0",
+    "@commercetools/api-request-builder": "^6.0.0",
+    "@commercetools/sdk-client": "^3.0.0",
+    "@commercetools/sdk-middleware-auth": "^7.0.0",
+    "@commercetools/sdk-middleware-http": "^7.0.0",
+    "@commercetools/sdk-middleware-user-agent": "^3.0.0",
+    "@commercetools/sync-actions": "^5.0.0",
     "common-tags": "^1.8.0",
     "lodash.compact": "^3.0.1",
     "lodash.isequal": "^4.5.0",
-    "node-fetch": "^2.3.0",
+    "node-fetch": "^2.6.7",
     "p-series": "^2.0.0"
   }
 }

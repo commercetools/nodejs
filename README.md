@@ -73,10 +73,6 @@ We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.
 [sdk-middleware-user-agent-icon]: https://img.shields.io/npm/v/@commercetools/sdk-middleware-user-agent.svg?style=flat-square
 [sdk-middleware-user-agent-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/sdk-middleware-user-agent
 [sdk-middleware-user-agent-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/sdk-middleware-user-agent&style=flat-square
-[typescript-sdk-version]: https://www.npmjs.com/package/@commercetools/typescript-sdk
-[typescript-sdk-icon]: https://img.shields.io/npm/v/@commercetools/typescript-sdk.svg?style=flat-square
-[typescript-sdk-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/typescript-sdk
-[typescript-sdk-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/typescript-sdk&style=flat-square
 
 ### CLI tools
 

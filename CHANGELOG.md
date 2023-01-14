@@ -1,3 +1,1078 @@
+## @commercetools/sync-actions@4.9.6 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/state-importer@3.0.39 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/product-exporter@3.1.12 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/integration-tests@0.1.19 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/discount-code-importer@3.0.38 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/custom-objects-importer@3.0.39 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/sync-actions@4.9.6 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/state-importer@3.0.39 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/product-exporter@3.1.12 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/integration-tests@0.1.19 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/discount-code-importer@3.0.38 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/custom-objects-importer@3.0.39 (2021-06-08)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1701](https://github.com/commercetools/nodejs/pull/1701) feat(products): create update actions for `staged` flag ([@jherey](https://github.com/jherey))
+
+#### :memo: Documentation
+
+- [#1697](https://github.com/commercetools/nodejs/pull/1697) Documentation - SDK Middleware Http ([@ajimae](https://github.com/ajimae))
+
+#### :house: Maintenance
+
+- `product-exporter`
+  - [#1692](https://github.com/commercetools/nodejs/pull/1692) Fix the security Vulnerabilities ([@ajimae](https://github.com/ajimae))
+
+#### Committers: 2
+
+- Ajima Chukwuemeka ([@ajimae](https://github.com/ajimae))
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/sync-actions@4.9.5 (2021-05-14)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1687](https://github.com/commercetools/nodejs/pull/1687) feat(sync-actions): create more order update actions ([@jherey](https://github.com/jherey))
+
+#### Committers: 1
+
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/state-importer@3.0.38 (2021-05-14)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1687](https://github.com/commercetools/nodejs/pull/1687) feat(sync-actions): create more order update actions ([@jherey](https://github.com/jherey))
+
+#### Committers: 1
+
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/integration-tests@0.1.18 (2021-05-14)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1687](https://github.com/commercetools/nodejs/pull/1687) feat(sync-actions): create more order update actions ([@jherey](https://github.com/jherey))
+
+#### Committers: 1
+
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/discount-code-importer@3.0.37 (2021-05-14)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1687](https://github.com/commercetools/nodejs/pull/1687) feat(sync-actions): create more order update actions ([@jherey](https://github.com/jherey))
+
+#### Committers: 1
+
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/custom-objects-importer@3.0.38 (2021-05-14)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1687](https://github.com/commercetools/nodejs/pull/1687) feat(sync-actions): create more order update actions ([@jherey](https://github.com/jherey))
+
+#### Committers: 1
+
+- Jeremiah Olufayo ([@jherey](https://github.com/jherey))
+
+## @commercetools/sync-actions@4.9.4 (2021-05-06)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1682](https://github.com/commercetools/nodejs/pull/1682) fix(sync-actions): organize customer sync actions, ex: addAdress, then setDefaultShippingAddress ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/state-importer@3.0.37 (2021-05-06)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1682](https://github.com/commercetools/nodejs/pull/1682) fix(sync-actions): organize customer sync actions, ex: addAdress, then setDefaultShippingAddress ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/integration-tests@0.1.17 (2021-05-06)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1682](https://github.com/commercetools/nodejs/pull/1682) fix(sync-actions): organize customer sync actions, ex: addAdress, then setDefaultShippingAddress ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/discount-code-importer@3.0.36 (2021-05-06)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1682](https://github.com/commercetools/nodejs/pull/1682) fix(sync-actions): organize customer sync actions, ex: addAdress, then setDefaultShippingAddress ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/custom-objects-importer@3.0.37 (2021-05-06)
+
+#### :nail_care: Enhancement
+
+- `sync-actions`
+  - [#1682](https://github.com/commercetools/nodejs/pull/1682) fix(sync-actions): organize customer sync actions, ex: addAdress, then setDefaultShippingAddress ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/sync-actions@4.9.3 (2021-04-26)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1678](https://github.com/commercetools/nodejs/pull/1678) fix(sync-actions): fix customer error for Cannot read property '0' of undefined ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/state-importer@3.0.36 (2021-04-26)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1678](https://github.com/commercetools/nodejs/pull/1678) fix(sync-actions): fix customer error for Cannot read property '0' of undefined ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/discount-code-importer@3.0.35 (2021-04-26)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1678](https://github.com/commercetools/nodejs/pull/1678) fix(sync-actions): fix customer error for Cannot read property '0' of undefined ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/custom-objects-importer@3.0.36 (2021-04-26)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1678](https://github.com/commercetools/nodejs/pull/1678) fix(sync-actions): fix customer error for Cannot read property '0' of undefined ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/state-importer@3.0.35 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sdk-middleware-http@6.0.11 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sdk-auth@3.0.12 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/resource-deleter@2.0.23 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-json-to-xlsx@4.0.16 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-json-to-csv@5.0.16 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/product-exporter@3.1.11 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/price-exporter@3.0.23 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/personal-data-erasure@3.0.23 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/inventories-exporter@3.0.23 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/integration-tests@0.1.14 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/discount-code-importer@3.0.34 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/discount-code-exporter@4.0.22 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/customer-groups-exporter@3.0.22 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/custom-objects-importer@3.0.35 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/custom-objects-exporter@3.0.22 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/csv-parser-state@3.0.21 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/csv-parser-price@4.0.23 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/category-exporter@3.0.22 (2021-04-01)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1674](https://github.com/commercetools/nodejs/pull/1674) fix: check requestHeader content-type property ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/personal-data-erasure@3.0.22 (2021-03-16)
+
+#### :bug: Bug Fix
+
+- `personal-data-erasure`
+  - [#1668](https://github.com/commercetools/nodejs/pull/1668) 1667 personal data eraser timeout with sorting ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/integration-tests@0.1.13 (2021-03-16)
+
+#### :bug: Bug Fix
+
+- `personal-data-erasure`
+  - [#1668](https://github.com/commercetools/nodejs/pull/1668) 1667 personal data eraser timeout with sorting ([@daern91](https://github.com/daern91))
+
+#### Committers: 1
+
+- Daniel Eriksson ([@daern91](https://github.com/daern91))
+
+## @commercetools/sync-actions@4.9.2 (2021-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1664](https://github.com/commercetools/nodejs/pull/1664) feat(sync-actions): add sync actions for assets ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/state-importer@3.0.34 (2021-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1664](https://github.com/commercetools/nodejs/pull/1664) feat(sync-actions): add sync actions for assets ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/integration-tests@0.1.12 (2021-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1664](https://github.com/commercetools/nodejs/pull/1664) feat(sync-actions): add sync actions for assets ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/discount-code-importer@3.0.33 (2021-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1664](https://github.com/commercetools/nodejs/pull/1664) feat(sync-actions): add sync actions for assets ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/custom-objects-importer@3.0.34 (2021-03-11)
+
+#### :rocket: New Feature
+
+- `sync-actions`
+  - [#1664](https://github.com/commercetools/nodejs/pull/1664) feat(sync-actions): add sync actions for assets ([@markus-azer](https://github.com/markus-azer))
+
+#### Committers: 1
+
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+
+## @commercetools/sync-actions@4.9.1 (2021-03-09)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1662](https://github.com/commercetools/nodejs/pull/1662) fix(sync-actions): changing order of actions ([@danrleyt](https://github.com/danrleyt))
+
+#### Committers: 2
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/state-importer@3.0.33 (2021-03-09)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1662](https://github.com/commercetools/nodejs/pull/1662) fix(sync-actions): changing order of actions ([@danrleyt](https://github.com/danrleyt))
+
+#### Committers: 2
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/integration-tests@0.1.11 (2021-03-09)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1662](https://github.com/commercetools/nodejs/pull/1662) fix(sync-actions): changing order of actions ([@danrleyt](https://github.com/danrleyt))
+
+#### Committers: 2
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/discount-code-importer@3.0.32 (2021-03-09)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1662](https://github.com/commercetools/nodejs/pull/1662) fix(sync-actions): changing order of actions ([@danrleyt](https://github.com/danrleyt))
+
+#### Committers: 2
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/custom-objects-importer@3.0.33 (2021-03-09)
+
+#### :bug: Bug Fix
+
+- `sync-actions`
+  - [#1662](https://github.com/commercetools/nodejs/pull/1662) fix(sync-actions): changing order of actions ([@danrleyt](https://github.com/danrleyt))
+
+#### Committers: 2
+
+- Dan Teixeira ([@danrleyt](https://github.com/danrleyt))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/state-importer@3.0.32 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/sdk-middleware-http@6.0.10 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/sdk-auth@3.0.11 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/resource-deleter@2.0.22 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/product-json-to-xlsx@4.0.15 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/product-json-to-csv@5.0.15 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/product-exporter@3.1.10 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/price-exporter@3.0.22 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/personal-data-erasure@3.0.21 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/inventories-exporter@3.0.22 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/integration-tests@0.1.10 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/discount-code-importer@3.0.31 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/discount-code-exporter@4.0.21 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/customer-groups-exporter@3.0.21 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/custom-objects-importer@3.0.32 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/custom-objects-exporter@3.0.21 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/csv-parser-state@3.0.20 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/csv-parser-price@4.0.22 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
+## @commercetools/category-exporter@3.0.21 (2021-03-02)
+
+#### :bug: Bug Fix
+
+- `sdk-middleware-http`
+  - [#1654](https://github.com/commercetools/nodejs/pull/1654) fix(sdk-middleware-http): try json parse with catch block ([@markus-azer](https://github.com/markus-azer))
+
+#### :memo: Documentation
+
+- [#1658](https://github.com/commercetools/nodejs/pull/1658) docs(queue): clarify usage of queue middleware ([@jenschude](https://github.com/jenschude))
+
+#### Committers: 3
+
+- Jens Schulze ([@jenschude](https://github.com/jenschude))
+- Markus Azer ([@markus-azer](https://github.com/markus-azer))
+- vineet kumar ([@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha))
+
 ## @commercetools/sync-actions@4.9.0 (2020-11-19)
 
 #### :rocket: New Feature
