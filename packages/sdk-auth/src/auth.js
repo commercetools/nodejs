@@ -1,5 +1,4 @@
 /* @flow */
-
 import type {
   AuthOptions,
   CustomAuthOptions,
@@ -87,7 +86,8 @@ export default class SdkAuth {
     clientId,
     clientSecret,
   }: ClientAuthOptions): string {
-    return Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
+    const targetStr = `${clientId}:${clientSecret}`
+    return typeof Buffer === 'undefined' ? btoa(targetStr) : Buffer.from(targetStr).toString('base64')
   }
 
   static _getScopes(scopes: ?Array<string>, projectKey: ?string): string {
@@ -220,7 +220,7 @@ export default class SdkAuth {
     const { uri, body, basicAuth, authType, headers } = request
     const fetchHeaders = headers || {
       Authorization: `${authType || constants.DEFAULT_AUTH_TYPE} ${basicAuth}`,
-      'Content-Length': Buffer.byteLength(body).toString(),
+      'Content-Length': JSON.stringify(body?.length || 0),
       'Content-Type': 'application/x-www-form-urlencoded',
     }
 
@@ -236,10 +236,21 @@ export default class SdkAuth {
   }
 
   _getRequestConfig(config: CustomAuthOptions = {}): AuthOptions {
-    const mergedConfig = { ...config, ...this.config}
+
+    // It is important to note the difference between plain old javascript Object.assign()
+    // and the lodash _.defaultsDeep() functions especially how they are both used here
+
+    // _.defaultsDeep({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } }) // { a: { b: 2, c: 3 } }
+    // Object.assign({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } }) // { a: { b: 1, c: 3 } }
 
     // handle scopes array - Object.assign would merge arrays together
     // instead of taking its first occurrence
+    // const mergedConfig = defaultsDeep({}, config, this.config)
+
+    const mergedConfig = typeof window === 'undefined' ?
+      // eslint-disable-next-line global-require, prefer-object-spread
+      require('lodash.defaultsdeep')({}, config, this.config) : Object.assign({}, this.config, config)
+
     if (config.scopes) mergedConfig.scopes = config.scopes
 
     return mergedConfig
