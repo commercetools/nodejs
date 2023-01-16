@@ -236,21 +236,8 @@ export default class SdkAuth {
   }
 
   _getRequestConfig(config: CustomAuthOptions = {}): AuthOptions {
-
-    // It is important to note the difference between plain old javascript Object.assign()
-    // and the lodash _.defaultsDeep() functions especially how they are both used here
-
-    // _.defaultsDeep({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } }) // { a: { b: 2, c: 3 } }
-    // Object.assign({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } }) // { a: { b: 1, c: 3 } }
-
-    // handle scopes array - Object.assign would merge arrays together
-    // instead of taking its first occurrence
-    // const mergedConfig = defaultsDeep({}, config, this.config)
-
-    const mergedConfig = typeof window === 'undefined' ?
-      // eslint-disable-next-line global-require, prefer-object-spread
-      require('lodash.defaultsdeep')({}, config, this.config) : Object.assign({}, this.config, config)
-
+    // eslint-disable-next-line prefer-object-spread
+    const mergedConfig = Object.assign({}, this.config, config)
     if (config.scopes) mergedConfig.scopes = config.scopes
 
     return mergedConfig
