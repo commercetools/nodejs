@@ -1,5 +1,4 @@
 /* @flow */
-
 import type {
   AuthOptions,
   CustomAuthOptions,
@@ -9,7 +8,6 @@ import type {
   UserAuthOptions,
 } from 'types/sdk'
 import { decode, encode } from 'qss'
-import defaultsDeep from 'lodash.defaultsdeep'
 import { getErrorByCode } from '@commercetools/sdk-middleware-http'
 import * as constants from './constants'
 
@@ -88,7 +86,8 @@ export default class SdkAuth {
     clientId,
     clientSecret,
   }: ClientAuthOptions): string {
-    return Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
+    const targetStr = `${clientId}:${clientSecret}`
+    return typeof Buffer === 'undefined' ? btoa(targetStr) : Buffer.from(targetStr).toString('base64')
   }
 
   static _getScopes(scopes: ?Array<string>, projectKey: ?string): string {
@@ -221,7 +220,7 @@ export default class SdkAuth {
     const { uri, body, basicAuth, authType, headers } = request
     const fetchHeaders = headers || {
       Authorization: `${authType || constants.DEFAULT_AUTH_TYPE} ${basicAuth}`,
-      'Content-Length': Buffer.byteLength(body).toString(),
+      'Content-Length': JSON.stringify(body?.length || 0),
       'Content-Type': 'application/x-www-form-urlencoded',
     }
 
@@ -237,10 +236,8 @@ export default class SdkAuth {
   }
 
   _getRequestConfig(config: CustomAuthOptions = {}): AuthOptions {
-    const mergedConfig = defaultsDeep({}, config, this.config)
-
-    // handle scopes array - defaultsDeep would merge arrays together
-    // instead of taking its first occurrence
+    // eslint-disable-next-line prefer-object-spread
+    const mergedConfig = Object.assign({}, this.config, config)
     if (config.scopes) mergedConfig.scopes = config.scopes
 
     return mergedConfig

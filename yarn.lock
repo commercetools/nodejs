@@ -1625,6 +1625,14 @@
     update-notifier "^2.2.0"
     yargs "^8.0.2"
 
+"@iarna/cli@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@iarna/cli/-/cli-2.1.0.tgz#f830356d54c72c804bd7afc43999de31e40fc3d6"
+  integrity sha512-rvVVqDa2g860niRbqs3D5RhL4la3dc1vwk+NlpKPZxKaMSHtE2se6C2x8NeveN+rcjp3/686X+u+09CZ+7lmAQ==
+  dependencies:
+    glob "^7.1.2"
+    signal-exit "^3.0.2"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -9575,12 +9583,21 @@ locate-path@^6.0.0:
   dependencies:
     p-locate "^5.0.0"
 
-lock-verify@^2.0.2, lock-verify@^2.1.0:
+lock-verify@^2.0.2:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/lock-verify/-/lock-verify-2.2.1.tgz#81107948c51ed16f97b96ff8b60675affb243fc1"
   integrity sha512-n0Zw2DVupKfZMazy/HIFVNohJ1z8fIoZ77WBnyyBGG6ixw83uJNyrbiJvvHWe1QKkGiBCjj8RCPlymltliqEww==
   dependencies:
     "@iarna/cli" "^1.2.0"
+    npm-package-arg "^6.1.0"
+    semver "^5.4.1"
+
+lock-verify@^2.1.0:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/lock-verify/-/lock-verify-2.2.2.tgz#9e93c0999dc3cbbede4f16f9cfdaa93ead8c76ef"
+  integrity sha512-2CUNtr1ZSVKJHcYP8uEzafmmuyauCB5zZimj8TvQd/Lflt9kXVZs+8S+EbAzZLaVUDn8CYGmeC3DFGdYfnCzeQ==
+  dependencies:
+    "@iarna/cli" "^2.1.0"
     npm-package-arg "^6.1.0"
     semver "^5.4.1"
 
@@ -9702,11 +9719,6 @@ lodash.defaults@^4.0.1, lodash.defaults@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
   integrity sha512-qjxPLHd3r5DnsdGacqOMU6pb/avJzdh9tFX2ymgoZE27BmjXrNy/y4LoaiTeAb+O3gL8AfpJGtqfX/ae2leYYQ==
-
-lodash.defaultsdeep@^4.6.0:
-  version "4.6.1"
-  resolved "https://registry.yarnpkg.com/lodash.defaultsdeep/-/lodash.defaultsdeep-4.6.1.tgz#512e9bd721d272d94e3d3a63653fa17516741ca6"
-  integrity sha512-3j8wdDzYuWO3lM3Reg03MuQR957t287Rpcxp1njpEa8oDrikb+FwGdW3n+FELh/A6qib6yPit0j/pv9G/yeAqA==
 
 lodash.difference@^4.5.0:
   version "4.5.0"
