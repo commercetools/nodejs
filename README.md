@@ -45,6 +45,7 @@ We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.
 | [`sdk-middleware-queue`](/packages/sdk-middleware-queue)           | [![sdk-middleware-queue Version][sdk-middleware-queue-icon]][sdk-middleware-queue-version]                | [![sdk-middleware-queue Dependencies Status][sdk-middleware-queue-dependencies-icon]][sdk-middleware-queue-dependencies]                |
 | [`sdk-middleware-user-agent`](/packages/sdk-middleware-user-agent) | [![sdk-middleware-user-agent Version][sdk-middleware-user-agent-icon]][sdk-middleware-user-agent-version] | [![sdk-middleware-user-agent Dependencies Status][sdk-middleware-user-agent-dependencies-icon]][sdk-middleware-user-agent-dependencies] |
 
+
 [sdk-auth-version]: https://www.npmjs.com/package/@commercetools/sdk-auth
 [sdk-auth-icon]: https://img.shields.io/npm/v/@commercetools/sdk-auth.svg?style=flat-square
 [sdk-auth-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/sdk-auth
