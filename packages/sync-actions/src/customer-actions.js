@@ -26,6 +26,7 @@ export const baseActionsList = [
     key: 'stores',
   },
   { action: 'setKey', key: 'key' },
+  { action: 'setAuthenticationMode', key: 'authenticationMode' },
 ]
 
 export const setDefaultBaseActionsList = [

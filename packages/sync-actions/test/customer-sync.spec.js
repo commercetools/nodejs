@@ -32,6 +32,7 @@ describe('Exports', () => {
         action: 'setKey',
         key: 'key',
       },
+      { action: 'setAuthenticationMode', key: 'authenticationMode' },
     ])
   })
 
@@ -532,5 +533,23 @@ describe('Actions', () => {
         stores: [],
       },
     ])
+  })
+
+  test('should build setAuthenticationMode sync action', () => {
+    const before = {
+      authenticationMode: 'Password',
+    }
+    const now = {
+      authenticationMode: 'ExternalAuth',
+    }
+
+    const actual = customerSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'setAuthenticationMode',
+        authenticationMode: now.authenticationMode,
+      },
+    ]
+    expect(actual).toEqual(expected)
   })
 })
