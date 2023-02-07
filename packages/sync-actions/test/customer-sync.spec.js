@@ -536,15 +536,31 @@ describe('Actions', () => {
   })
 
   test('should build setAuthenticationMode sync action', () => {
-    const before = {
+    let before = {
       authenticationMode: 'Password',
     }
-    const now = {
+    let now = {
       authenticationMode: 'ExternalAuth',
     }
 
-    const actual = customerSync.buildActions(now, before)
-    const expected = [
+    let actual = customerSync.buildActions(now, before)
+    let expected = [
+      {
+        action: 'setAuthenticationMode',
+        authenticationMode: now.authenticationMode,
+      },
+    ]
+    expect(actual).toEqual(expected)
+
+    before = {
+      authenticationMode: 'ExternalAuth',
+    }
+    now = {
+      authenticationMode: 'Password',
+    }
+
+    actual = customerSync.buildActions(now, before)
+    expected = [
       {
         action: 'setAuthenticationMode',
         authenticationMode: now.authenticationMode,
