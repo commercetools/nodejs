@@ -17,6 +17,8 @@ const normalizeValue = (value) =>
 export const createIsEmptyValue = (emptyValues) => (value) =>
   emptyValues.some((emptyValue) => emptyValue === normalizeValue(value))
 
+const isEmptyValue = createIsEmptyValue([undefined, null, ''])
+
 export const baseActionsList = [
   { action: 'setSalutation', key: 'salutation' },
   { action: 'changeEmail', key: 'email' },
@@ -125,6 +127,7 @@ export function actionsMapBillingAddresses(diff, oldObj, newObj) {
 
   return handler(diff, oldObj, newObj)
 }
+
 export function actionsMapShippingAddresses(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('shippingAddressIds', {
     [ADD_ACTIONS]: (addressId) => ({
@@ -140,7 +143,15 @@ export function actionsMapShippingAddresses(diff, oldObj, newObj) {
   return handler(diff, oldObj, newObj)
 }
 
-const isEmptyValue = createIsEmptyValue([undefined, null, ''])
+export function actionsMapAuthenticationModes(diff, oldObj, newObj) {
+  // eslint-disable-next-line no-use-before-define
+  return buildAuthenticationModeActions({
+    actions: authenticationModeActionsList,
+    diff,
+    oldObj,
+    newObj,
+  })
+}
 
 function buildAuthenticationModeActions({ actions, diff, oldObj, newObj }) {
   return actions
@@ -152,6 +163,7 @@ function buildAuthenticationModeActions({ actions, diff, oldObj, newObj }) {
       const now = newObj[key]
       const isNotDefinedBefore = isEmptyValue(oldObj[key])
       const isNotDefinedNow = isEmptyValue(newObj[key])
+
       if (!delta) return undefined
 
       if (isNotDefinedNow && isNotDefinedBefore) return undefined
@@ -183,13 +195,4 @@ function buildAuthenticationModeActions({ actions, diff, oldObj, newObj }) {
       return { action: item.action, [key]: patched, [value]: newObj.password }
     })
     .filter((action) => !isNil(action))
-}
-
-export function actionsMapAuthenticationModes(diff, oldObj, newObj) {
-  return buildAuthenticationModeActions({
-    actions: authenticationModeActionsList,
-    diff,
-    oldObj,
-    newObj,
-  })
 }
