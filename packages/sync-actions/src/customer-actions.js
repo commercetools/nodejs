@@ -57,7 +57,11 @@ export const referenceActionsList = [
 ]
 
 export const authenticationModeActionsList = [
-  { action: 'setAuthenticationMode', key: 'authMode', value: 'password' },
+  {
+    action: 'setAuthenticationMode',
+    key: 'authenticationMode',
+    value: 'password',
+  },
 ]
 
 /**
@@ -168,16 +172,16 @@ function buildAuthenticationModeActions({ actions, diff, oldObj, newObj }) {
 
       if (isNotDefinedNow && isNotDefinedBefore) return undefined
 
-      if (newObj.authMode === 'Password' && !newObj.password)
+      if (newObj.authenticationMode === 'Password' && !newObj.password)
         throw new Error(
           'Cannot set to Password authentication mode without password'
         )
 
       if (!isNotDefinedNow && isNotDefinedBefore) {
         // no value previously set
-        if (newObj.authMode === 'ExternalAuth')
-          return { action: item.action, [key]: now }
-        return { action: item.action, [key]: now, [value]: newObj.password }
+        if (newObj.authenticationMode === 'ExternalAuth')
+          return { action: item.action, authMode: now }
+        return { action: item.action, authMode: now, [value]: newObj.password }
       }
 
       /* no new value */
@@ -190,9 +194,13 @@ function buildAuthenticationModeActions({ actions, diff, oldObj, newObj }) {
 
       // We need to clone `before` as `patch` will mutate it
       const patched = diffpatcher.patch(clone(before), delta)
-      if (newObj.authMode === 'ExternalAuth')
-        return { action: item.action, [key]: patched }
-      return { action: item.action, [key]: patched, [value]: newObj.password }
+      if (newObj.authenticationMode === 'ExternalAuth')
+        return { action: item.action, authMode: patched }
+      return {
+        action: item.action,
+        authMode: patched,
+        [value]: newObj.password,
+      }
     })
     .filter((action) => !isNil(action))
 }

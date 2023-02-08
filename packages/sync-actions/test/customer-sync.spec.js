@@ -547,10 +547,10 @@ describe('Actions', () => {
     let expected
 
     before = {
-      authMode: 'Password',
+      authenticationMode: 'Password',
     }
     now = {
-      authMode: 'ExternalAuth',
+      authenticationMode: 'ExternalAuth',
     }
 
     actual = customerSync.buildActions(now, before)
@@ -558,16 +558,16 @@ describe('Actions', () => {
     expected = [
       {
         action: 'setAuthenticationMode',
-        authMode: now.authMode,
+        authMode: now.authenticationMode,
       },
     ]
     expect(actual).toEqual(expected)
 
     before = {
-      authMode: 'ExternalAuth',
+      authenticationMode: 'ExternalAuth',
     }
     now = {
-      authMode: 'Password',
+      authenticationMode: 'Password',
       password: 'abc123',
     }
 
@@ -575,7 +575,7 @@ describe('Actions', () => {
     expected = [
       {
         action: 'setAuthenticationMode',
-        authMode: now.authMode,
+        authMode: now.authenticationMode,
         password: now.password,
       },
     ]
@@ -584,21 +584,20 @@ describe('Actions', () => {
 
     before = {}
     now = {
-      authMode: 'ExternalAuth',
+      authenticationMode: 'ExternalAuth',
     }
 
     actual = customerSync.buildActions(now, before)
-
     expected = [
       {
         action: 'setAuthenticationMode',
-        authMode: now.authMode,
+        authMode: now.authenticationMode,
       },
     ]
     expect(actual).toEqual(expected)
 
     before = {
-      authMode: 'ExternalAuth',
+      authenticationMode: 'ExternalAuth',
     }
     now = {}
 
@@ -608,10 +607,10 @@ describe('Actions', () => {
     expect(actual).toEqual(expected)
 
     before = {
-      authMode: 'ExternalAuth',
+      authenticationMode: 'ExternalAuth',
     }
     now = {
-      authMode: '',
+      authenticationMode: '',
     }
 
     actual = customerSync.buildActions(now, before)
@@ -622,10 +621,10 @@ describe('Actions', () => {
 
   test('should throw error if password not specified while setting authenticationMode to password', () => {
     const before = {
-      authMode: 'ExternalAuth',
+      authenticationMode: 'ExternalAuth',
     }
     const now = {
-      authMode: 'Password',
+      authenticationMode: 'Password',
     }
 
     expect(() => {
