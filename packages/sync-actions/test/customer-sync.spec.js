@@ -7,7 +7,13 @@ import {
 
 describe('Exports', () => {
   test('action group list', () => {
-    expect(actionGroups).toEqual(['base', 'references', 'addresses', 'custom'])
+    expect(actionGroups).toEqual([
+      'base',
+      'references',
+      'addresses',
+      'custom',
+      'authenticationModes',
+    ])
   })
 
   test('correctly define base actions list', () => {
@@ -32,7 +38,6 @@ describe('Exports', () => {
         action: 'setKey',
         key: 'key',
       },
-      { action: 'setAuthenticationMode', key: 'authenticationMode' },
     ])
   })
 
@@ -536,36 +541,95 @@ describe('Actions', () => {
   })
 
   test('should build setAuthenticationMode sync action', () => {
-    let before = {
-      authenticationMode: 'Password',
+    let before
+    let now
+    let actual
+    let expected
+
+    before = {
+      authMode: 'Password',
     }
-    let now = {
-      authenticationMode: 'ExternalAuth',
+    now = {
+      authMode: 'ExternalAuth',
     }
 
-    let actual = customerSync.buildActions(now, before)
-    let expected = [
+    actual = customerSync.buildActions(now, before)
+
+    expected = [
       {
         action: 'setAuthenticationMode',
-        authenticationMode: now.authenticationMode,
+        authMode: now.authMode,
       },
     ]
     expect(actual).toEqual(expected)
 
     before = {
-      authenticationMode: 'ExternalAuth',
+      authMode: 'ExternalAuth',
     }
     now = {
-      authenticationMode: 'Password',
+      authMode: 'Password',
+      password: 'abc123',
     }
 
     actual = customerSync.buildActions(now, before)
     expected = [
       {
         action: 'setAuthenticationMode',
-        authenticationMode: now.authenticationMode,
+        authMode: now.authMode,
+        password: now.password,
+      },
+    ]
+
+    expect(actual).toEqual(expected)
+
+    before = {}
+    now = {
+      authMode: 'ExternalAuth',
+    }
+
+    actual = customerSync.buildActions(now, before)
+
+    expected = [
+      {
+        action: 'setAuthenticationMode',
+        authMode: now.authMode,
       },
     ]
     expect(actual).toEqual(expected)
+
+    before = {
+      authMode: 'ExternalAuth',
+    }
+    now = {}
+
+    actual = customerSync.buildActions(now, before)
+
+    expected = []
+    expect(actual).toEqual(expected)
+
+    before = {
+      authMode: 'ExternalAuth',
+    }
+    now = {
+      authMode: '',
+    }
+
+    actual = customerSync.buildActions(now, before)
+
+    expected = []
+    expect(actual).toEqual(expected)
+  })
+
+  test('should throw error if password not specified while setting authenticationMode to password', () => {
+    const before = {
+      authMode: 'ExternalAuth',
+    }
+    const now = {
+      authMode: 'Password',
+    }
+
+    expect(() => {
+      customerSync.buildActions(now, before)
+    }).toThrow('Cannot set to Password authentication mode without password')
   })
 })

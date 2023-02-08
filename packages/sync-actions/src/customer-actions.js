@@ -1,3 +1,4 @@
+import isNil from 'lodash.isnil'
 import {
   buildBaseAttributesActions,
   buildReferenceActions,
@@ -7,6 +8,14 @@ import createBuildArrayActions, {
   REMOVE_ACTIONS,
   CHANGE_ACTIONS,
 } from './utils/create-build-array-actions'
+import * as diffpatcher from './utils/diffpatcher'
+import clone from './utils/clone'
+
+const normalizeValue = (value) =>
+  typeof value === 'string' ? value.trim() : value
+
+export const createIsEmptyValue = (emptyValues) => (value) =>
+  emptyValues.some((emptyValue) => emptyValue === normalizeValue(value))
 
 export const baseActionsList = [
   { action: 'setSalutation', key: 'salutation' },
@@ -26,7 +35,6 @@ export const baseActionsList = [
     key: 'stores',
   },
   { action: 'setKey', key: 'key' },
-  { action: 'setAuthenticationMode', key: 'authenticationMode' },
 ]
 
 export const setDefaultBaseActionsList = [
@@ -44,6 +52,10 @@ export const setDefaultBaseActionsList = [
 
 export const referenceActionsList = [
   { action: 'setCustomerGroup', key: 'customerGroup' },
+]
+
+export const authenticationModeActionsList = [
+  { action: 'setAuthenticationMode', key: 'authMode', value: 'password' },
 ]
 
 /**
@@ -126,4 +138,58 @@ export function actionsMapShippingAddresses(diff, oldObj, newObj) {
   })
 
   return handler(diff, oldObj, newObj)
+}
+
+const isEmptyValue = createIsEmptyValue([undefined, null, ''])
+
+function buildAuthenticationModeActions({ actions, diff, oldObj, newObj }) {
+  return actions
+    .map((item) => {
+      const key = item.key
+      const value = item.value || item.key
+      const delta = diff[key]
+      const before = oldObj[key]
+      const now = newObj[key]
+      const isNotDefinedBefore = isEmptyValue(oldObj[key])
+      const isNotDefinedNow = isEmptyValue(newObj[key])
+      if (!delta) return undefined
+
+      if (isNotDefinedNow && isNotDefinedBefore) return undefined
+
+      if (newObj.authMode === 'Password' && !newObj.password)
+        throw new Error(
+          'Cannot set to Password authentication mode without password'
+        )
+
+      if (!isNotDefinedNow && isNotDefinedBefore) {
+        // no value previously set
+        if (newObj.authMode === 'ExternalAuth')
+          return { action: item.action, [key]: now }
+        return { action: item.action, [key]: now, [value]: newObj.password }
+      }
+
+      /* no new value */
+      if (isNotDefinedNow && !{}.hasOwnProperty.call(newObj, key))
+        return undefined
+
+      if (isNotDefinedNow && {}.hasOwnProperty.call(newObj, key))
+        // value unset
+        return undefined
+
+      // We need to clone `before` as `patch` will mutate it
+      const patched = diffpatcher.patch(clone(before), delta)
+      if (newObj.authMode === 'ExternalAuth')
+        return { action: item.action, [key]: patched }
+      return { action: item.action, [key]: patched, [value]: newObj.password }
+    })
+    .filter((action) => !isNil(action))
+}
+
+export function actionsMapAuthenticationModes(diff, oldObj, newObj) {
+  return buildAuthenticationModeActions({
+    actions: authenticationModeActionsList,
+    diff,
+    oldObj,
+    newObj,
+  })
 }
