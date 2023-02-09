@@ -2,6 +2,7 @@ import isNil from 'lodash.isnil'
 import {
   buildBaseAttributesActions,
   buildReferenceActions,
+  createIsEmptyValue,
 } from './utils/common-actions'
 import createBuildArrayActions, {
   ADD_ACTIONS,
@@ -10,12 +11,6 @@ import createBuildArrayActions, {
 } from './utils/create-build-array-actions'
 import * as diffpatcher from './utils/diffpatcher'
 import clone from './utils/clone'
-
-const normalizeValue = (value) =>
-  typeof value === 'string' ? value.trim() : value
-
-export const createIsEmptyValue = (emptyValues) => (value) =>
-  emptyValues.some((emptyValue) => emptyValue === normalizeValue(value))
 
 const isEmptyValue = createIsEmptyValue([undefined, null, ''])
 
