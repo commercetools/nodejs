@@ -173,7 +173,10 @@ function buildAuthenticationModeActions({ actions, diff, oldObj, newObj }) {
           'Cannot set to Password authentication mode without password'
         )
 
-      if (!authenticationModes.includes(newObj.authenticationMode))
+      if (
+        'authenticationMode' in newObj &&
+        !authenticationModes.includes(newObj.authenticationMode)
+      )
         throw new Error('Invalid Authentication Mode')
 
       if (!isNotDefinedNow && isNotDefinedBefore) {

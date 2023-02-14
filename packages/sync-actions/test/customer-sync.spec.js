@@ -601,9 +601,10 @@ describe('Actions', () => {
     }
     now = {}
 
-    expect(() => {
-      customerSync.buildActions(now, before)
-    }).toThrow('Invalid Authentication Mode')
+    actual = customerSync.buildActions(now, before)
+
+    expected = []
+    expect(actual).toEqual(expected)
 
     before = {
       authenticationMode: 'ExternalAuth',
