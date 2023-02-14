@@ -1,5 +1,14 @@
 # @commercetools/discount-code-importer
 
+## 4.0.1
+
+### Patch Changes
+
+- [#1833](https://github.com/commercetools/nodejs/pull/1833) [`23e5c214`](https://github.com/commercetools/nodejs/commit/23e5c21413d7bb011c36fcb370f1ed635df75ce4) Thanks [@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha)! - Improve Error Logging for Discount Importer
+
+- Updated dependencies [[`21062826`](https://github.com/commercetools/nodejs/commit/21062826e5cf297b6d4959afafff0c1dfef8073d)]:
+  - @commercetools/sdk-middleware-http@7.0.2
+
 ## 4.0.0
 
 ### Major Changes
