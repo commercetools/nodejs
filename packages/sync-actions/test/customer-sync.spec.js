@@ -601,10 +601,9 @@ describe('Actions', () => {
     }
     now = {}
 
-    actual = customerSync.buildActions(now, before)
-
-    expected = []
-    expect(actual).toEqual(expected)
+    expect(() => {
+      customerSync.buildActions(now, before)
+    }).toThrow('Invalid Authentication Mode')
 
     before = {
       authenticationMode: 'ExternalAuth',
@@ -613,10 +612,9 @@ describe('Actions', () => {
       authenticationMode: '',
     }
 
-    actual = customerSync.buildActions(now, before)
-
-    expected = []
-    expect(actual).toEqual(expected)
+    expect(() => {
+      customerSync.buildActions(now, before)
+    }).toThrow('Invalid Authentication Mode')
   })
 
   test('should throw error if password not specified while setting authenticationMode to password', () => {
@@ -630,5 +628,18 @@ describe('Actions', () => {
     expect(() => {
       customerSync.buildActions(now, before)
     }).toThrow('Cannot set to Password authentication mode without password')
+  })
+
+  test('should throw error if user specifies invalid authentication mode', () => {
+    const before = {
+      authenticationMode: 'ExternalAuth',
+    }
+    const now = {
+      authenticationMode: 'xyz',
+    }
+
+    expect(() => {
+      customerSync.buildActions(now, before)
+    }).toThrow('Invalid Authentication Mode')
   })
 })

@@ -162,6 +162,7 @@ function buildAuthenticationModeActions({ actions, diff, oldObj, newObj }) {
       const now = newObj[key]
       const isNotDefinedBefore = isEmptyValue(oldObj[key])
       const isNotDefinedNow = isEmptyValue(newObj[key])
+      const authenticationModes = ['Password', 'ExternalAuth']
 
       if (!delta) return undefined
 
@@ -171,6 +172,9 @@ function buildAuthenticationModeActions({ actions, diff, oldObj, newObj }) {
         throw new Error(
           'Cannot set to Password authentication mode without password'
         )
+
+      if (!authenticationModes.includes(newObj.authenticationMode))
+        throw new Error('Invalid Authentication Mode')
 
       if (!isNotDefinedNow && isNotDefinedBefore) {
         // no value previously set
