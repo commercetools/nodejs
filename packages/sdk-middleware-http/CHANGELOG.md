@@ -1,5 +1,11 @@
 # @commercetools/sdk-middleware-http
 
+## 7.0.2
+
+### Patch Changes
+
+- [#1837](https://github.com/commercetools/nodejs/pull/1837) [`21062826`](https://github.com/commercetools/nodejs/commit/21062826e5cf297b6d4959afafff0c1dfef8073d) Thanks [@ajimae](https://github.com/ajimae)! - Fix issues with file uploads when using the @commercetools/sdk-middleware-http package.
+
 ## 7.0.1
 
 ### Patch Changes

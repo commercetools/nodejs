@@ -107,11 +107,6 @@ export default function createHttpMiddleware({
       const url = host.replace(/\/$/, '') + request.uri
       const requestHeader: HttpHeaders = { ...request.headers }
 
-      // Unset the content-type header if explicitly asked to (passing `null` as value).
-      if (requestHeader['Content-Type'] === null) {
-        delete requestHeader['Content-Type']
-      }
-
       // If no content-type is provided, defaults to application/json
       if (
         !(
@@ -120,6 +115,11 @@ export default function createHttpMiddleware({
         )
       ) {
         requestHeader['Content-Type'] = 'application/json'
+      }
+
+      // Unset the content-type header if explicitly asked to (passing `null` as value).
+      if (requestHeader['Content-Type'] === null) {
+        delete requestHeader['Content-Type']
       }
 
       const body = (['application/json', 'application/graphql']
