@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.4.0
+
+### Minor Changes
+
+- [#1836](https://github.com/commercetools/nodejs/pull/1836) [`ad34d030`](https://github.com/commercetools/nodejs/commit/ad34d03041e7e6b8284da6224dc968fde537a85a) Thanks [@nicolasnieto92](https://github.com/nicolasnieto92)! - Add setAuthenticationMode sync action
+
 ## 5.3.1
 
 ### Patch Changes
