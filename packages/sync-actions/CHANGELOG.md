@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.4.1
+
+### Patch Changes
+
+- [#1839](https://github.com/commercetools/nodejs/pull/1839) [`d6cadcbc`](https://github.com/commercetools/nodejs/commit/d6cadcbc4b850fa6f438b65c3b63b294a32a58ee) Thanks [@tdeekens](https://github.com/tdeekens)! - Fix failing to sync froozen arrays for prices
+
 ## 5.4.0
 
 ### Minor Changes
