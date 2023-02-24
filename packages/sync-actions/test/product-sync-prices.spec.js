@@ -1071,4 +1071,48 @@ describe('Actions', () => {
       expect(actionNames).toEqual(['changePrice', 'changePrice'])
     })
   })
+
+  describe('with read only prices', () => {
+    const before = {
+      id: '123',
+      masterVariant: {
+        id: 1,
+        prices: Object.freeze([
+          {
+            id: '111',
+            value: { currencyCode: 'EUR', centAmount: 1000 },
+          },
+        ]),
+      },
+    }
+
+    const now = {
+      id: '123',
+      masterVariant: {
+        id: 1,
+        prices: Object.freeze([
+          {
+            id: '111',
+            value: { currencyCode: 'EUR', centAmount: 2000 },
+            country: 'US',
+          },
+        ]),
+      },
+    }
+
+    test('should build actions for prices', () => {
+      const actions = productsSync.buildActions(now, before)
+      expect(actions).toEqual([
+        {
+          action: 'changePrice',
+          priceId: '111',
+          price: {
+            id: '111',
+            value: { currencyCode: 'EUR', centAmount: 2000 },
+            country: 'US',
+          },
+        },
+      ])
+    })
+  })
 })
