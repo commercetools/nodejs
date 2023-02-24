@@ -37,6 +37,10 @@ export default function copyEmptyArrayProps(oldObj = {}, newObj = {}) {
                   foundObject,
                   newObj[key][i]
                 )
+                if (Object.isFrozen(merged[key])) {
+                  /* eslint-disable no-param-reassign */
+                  merged[key] = merged[key].slice()
+                }
                 /* eslint-disable no-param-reassign */
                 merged[key][i] = nestedObject
               }
