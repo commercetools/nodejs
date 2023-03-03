@@ -12,7 +12,7 @@ import actionsMapCustom from './utils/action-map-custom'
 import * as shippingMethodsActions from './shipping-methods-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
-export const actionGroups = ['base', 'zoneRates']
+export const actionGroups = ['base', 'zoneRates', 'custom']
 
 function createShippingMethodsMapActions(
   mapActionGroup: Function,
