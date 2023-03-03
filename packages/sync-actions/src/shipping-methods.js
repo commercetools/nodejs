@@ -43,7 +43,7 @@ function createShippingMethodsMapActions(
     )
     allActions.push(
       mapActionGroup('custom', (): Array<UpdateAction> =>
-        actionsMapCustom(diff, oldObj, newObj)
+        actionsMapCustom(diff, newObj, oldObj)
       )
     )
     return flatten(allActions)
