@@ -8,6 +8,7 @@ import type {
 } from 'types/sdk'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
+import actionsMapCustom from './utils/action-map-custom'
 import * as shippingMethodsActions from './shipping-methods-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
@@ -38,6 +39,11 @@ function createShippingMethodsMapActions(
         mapActionGroup('zoneRates', (): Array<UpdateAction> =>
           shippingMethodsActions.actionsMapZoneRates(diff, oldObj, newObj)
         )
+      )
+    )
+    allActions.push(
+      mapActionGroup('custom', (): Array<UpdateAction> =>
+        actionsMapCustom(diff, oldObj, newObj)
       )
     )
     return flatten(allActions)
