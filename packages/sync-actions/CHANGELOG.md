@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.5.0
+
+### Minor Changes
+
+- [#1841](https://github.com/commercetools/nodejs/pull/1841) [`b90c7238`](https://github.com/commercetools/nodejs/commit/b90c7238f0d3d892e1066fd2883cff062b099e66) Thanks [@Rombelirk](https://github.com/Rombelirk)! - Add Custom Fields to Shipping Methods.
+
 ## 5.4.1
 
 ### Patch Changes
