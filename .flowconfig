@@ -49,11 +49,7 @@
 .*/node_modules/webpack.*
 .*/node_modules/worker-farm/.*
 .*/node_modules/yargs.*
-.*/node_modules/@babel/.*
-.*/node_modules/normalize-package-data/.*
-.*/node_modules/proxyquire/.*
-.*/node_modules/rollup-plugin-commonjs/.*
-.*/node_modules/rollup-plugin-node-resolve/.*
+.*/node_modules/.*/malformed_package_json/package.json
 
 [include]
 packages/*/src
