@@ -81,6 +81,26 @@ describe('Actions', () => {
       expect(actual).toEqual(expected)
     })
 
+    test('should build `setLocalizedName` action with an empty localizedName', () => {
+      const before = {
+        localizedName: {
+          en: 'Shipping Method  1',
+        },
+      }
+      const now = {
+        localizedName: undefined,
+      }
+
+      const actual = shippingMethodsSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'setLocalizedName',
+          localizedName: now.localizedName,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
     test('should build `setDescription` action', () => {
       const before = {
         description: 'Custom description',
