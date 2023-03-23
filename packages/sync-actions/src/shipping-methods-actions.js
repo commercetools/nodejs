@@ -9,6 +9,7 @@ import { buildBaseAttributesActions } from './utils/common-actions'
 export const baseActionsList = [
   { action: 'setKey', key: 'key' },
   { action: 'changeName', key: 'name' },
+  { action: 'setLocalizedName', key: 'localizedName' },
   { action: 'setDescription', key: 'description' },
   { action: 'setLocalizedDescription', key: 'localizedDescription' },
   { action: 'changeIsDefault', key: 'isDefault' },
