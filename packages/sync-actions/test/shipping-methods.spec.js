@@ -10,6 +10,7 @@ describe('Exports', () => {
     expect(baseActionsList).toEqual([
       { action: 'setKey', key: 'key' },
       { action: 'changeName', key: 'name' },
+      { action: 'setLocalizedName', key: 'localizedName' },
       { action: 'setDescription', key: 'description' },
       { action: 'setLocalizedDescription', key: 'localizedDescription' },
       { action: 'changeIsDefault', key: 'isDefault' },
@@ -38,6 +39,7 @@ describe('Actions', () => {
       const expected = [{ action: 'setKey', key: now.key }]
       expect(actual).toEqual(expected)
     })
+
     test('should build `changeName` action', () => {
       const before = {
         name: 'Shipping Method 1',
@@ -51,6 +53,49 @@ describe('Actions', () => {
         {
           action: 'changeName',
           name: now.name,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
+    test('should build `setLocalizedName` action', () => {
+      const before = {
+        localizedName: {
+          en: 'Shipping Method  1',
+        },
+      }
+      const now = {
+        localizedName: {
+          fr: 'Méthode de expédition 1',
+          en: 'Shipping Method 1',
+        },
+      }
+
+      const actual = shippingMethodsSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'setLocalizedName',
+          localizedName: now.localizedName,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
+    test('should build `setLocalizedName` action with an empty localizedName', () => {
+      const before = {
+        localizedName: {
+          en: 'Shipping Method  1',
+        },
+      }
+      const now = {
+        localizedName: undefined,
+      }
+
+      const actual = shippingMethodsSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'setLocalizedName',
+          localizedName: now.localizedName,
         },
       ]
       expect(actual).toEqual(expected)
