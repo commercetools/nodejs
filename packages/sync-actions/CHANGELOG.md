@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.6.0
+
+### Minor Changes
+
+- [#1844](https://github.com/commercetools/nodejs/pull/1844) [`23f0529b`](https://github.com/commercetools/nodejs/commit/23f0529bbf359a11500dbf87bdc9e59cb759c89a) Thanks [@markus-azer](https://github.com/markus-azer)! - Add localizedName action to shipping methods
+
 ## 5.5.0
 
 ### Minor Changes
