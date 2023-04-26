@@ -110,7 +110,7 @@ describe('Actions', () => {
       expect(updateActions).toEqual([
         {
           action: 'changeFieldDefinitionOrder',
-          fieldNames: [{ name: 'second' }, { name: 'first' }],
+          fieldNames: ['second', 'first'],
         },
       ])
     })
@@ -334,6 +334,30 @@ describe('Actions', () => {
           },
         },
       ])
+    })
+  })
+  describe('should ignore required field in fieldDefinition', () => {
+    beforeEach(() => {
+      before = createTestType({
+        fieldDefinitions: [
+          {
+            name: 'first',
+            required: true,
+          },
+        ],
+      })
+      now = createTestType({
+        fieldDefinitions: [
+          {
+            name: 'first',
+            required: false,
+          },
+        ],
+      })
+      updateActions = typesSync.buildActions(now, before)
+    })
+    test('should return no action', () => {
+      expect(updateActions).toEqual([])
     })
   })
 })

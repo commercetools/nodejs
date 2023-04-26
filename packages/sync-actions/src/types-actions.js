@@ -136,7 +136,7 @@ export function actionsMapFieldDefinitions(
           label: extractedPairs.newObj.label,
           fieldName: extractedPairs.oldObj.name,
         })
-      } else if (diffValue.type.values) {
+      } else if (diffValue?.type?.values) {
         actions.push(
           ...actionsMapEnums(
             extractedPairs.oldObj.name,
@@ -152,7 +152,7 @@ export function actionsMapFieldDefinitions(
         if (diffValue.length === 3 && diffValue[2] === 3) {
           actions.push({
             action: 'changeFieldDefinitionOrder',
-            fieldNames: next,
+            fieldNames: next.map((n) => n.name),
           })
         } else {
           const deltaValue = diffPatcher.getDeltaValue(diffValue)
