@@ -153,11 +153,7 @@ describe('Actions', () => {
           {
             action: 'changeEnumValueOrder',
             fieldName: 'enum',
-            keys: [
-              { key: 'enum_4', label: 'enum-4' },
-              { key: 'enum_1', label: 'enum-1' },
-              { key: 'enum_2', label: 'enum-2' },
-            ],
+            keys: ['enum_4', 'enum_1', 'enum_2'],
           },
         ])
       })
@@ -301,11 +297,7 @@ describe('Actions', () => {
           {
             action: 'changeLocalizedEnumValueOrder',
             fieldName: 'lenum',
-            keys: [
-              { key: 'enum_4', label: { en: 'enum-4' } },
-              { key: 'enum_1', label: { en: 'enum-1' } },
-              { key: 'enum_2', label: { en: 'enum-2' } },
-            ],
+            keys: ['enum_4', 'enum_1', 'enum_2'],
           },
         ])
       })

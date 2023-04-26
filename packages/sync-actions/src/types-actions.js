@@ -31,7 +31,13 @@ export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   })
 }
 
-function actionsMapEnums(fieldName, attributeType, attributeDiff, previous, next) {
+function actionsMapEnums(
+  fieldName,
+  attributeType,
+  attributeDiff,
+  previous,
+  next
+) {
   const addEnumActionName =
     attributeType === 'Enum' ? 'addEnumValue' : 'addLocalizedEnumValue'
   const changeEnumOrderActionName =
@@ -55,6 +61,8 @@ function actionsMapEnums(fieldName, attributeType, attributeDiff, previous, next
       // to the client.
       const changeActions = []
       if (oldEnumInNext) {
+        // todo check if action is relevant, there is no action with this structure
+        // https://docs.commercetools.com/api/projects/types#update-actions
         changeActions.push({
           fieldName,
           action: changeEnumOrderActionName,
@@ -79,7 +87,7 @@ function actionsMapEnums(fieldName, attributeType, attributeDiff, previous, next
   flatten(buildArrayActions(attributeDiff, previous, next)).forEach(
     (updateAction) => {
       if (updateAction.action === changeEnumOrderActionName) {
-        newEnumValuesOrder.push(updateAction.value)
+        newEnumValuesOrder.push(updateAction.value.key)
       } else actions.push(updateAction)
     }
   )
