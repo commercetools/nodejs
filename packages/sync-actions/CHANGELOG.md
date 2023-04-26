@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.7.0
+
+### Minor Changes
+
+- [#1850](https://github.com/commercetools/nodejs/pull/1850) [`330cd9a9`](https://github.com/commercetools/nodejs/commit/330cd9a9b4fca045d479d2d220d2a2a2b966b1f4) Thanks [@markus-azer](https://github.com/markus-azer)! - types sync-actions: fix action structure for changeLocalizedEnumValueOrder, changeEnumValueOrder
+
 ## 5.6.0
 
 ### Minor Changes
