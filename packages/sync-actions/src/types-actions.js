@@ -2,6 +2,7 @@ import forEach from 'lodash.foreach'
 import flatten from 'lodash.flatten'
 import sortBy from 'lodash.sortby'
 
+import isEqual from 'lodash.isequal'
 import createBuildArrayActions, {
   ADD_ACTIONS,
   CHANGE_ACTIONS,
@@ -40,6 +41,10 @@ function actionsMapEnums(
 ) {
   const addEnumActionName =
     attributeType === 'Enum' ? 'addEnumValue' : 'addLocalizedEnumValue'
+  const changeEnumValueLabelActionName =
+    attributeType === 'Enum'
+      ? 'changeEnumValueLabel'
+      : 'changeLocalizedEnumValueLabel'
   const changeEnumOrderActionName =
     attributeType === 'Enum'
       ? 'changeEnumValueOrder'
@@ -61,13 +66,31 @@ function actionsMapEnums(
       // to the client.
       const changeActions = []
       if (oldEnumInNext) {
-        // todo check if action is relevant, there is no action with this structure
-        // https://docs.commercetools.com/api/projects/types#update-actions
-        changeActions.push({
-          fieldName,
-          action: changeEnumOrderActionName,
-          value: newEnum,
-        })
+        // If the enum value is changed, we need to change the order first
+        const isKeyChanged = oldEnum.key !== newEnum.key
+
+        // check if the label is changed
+        const foundPreviousEnum = previous.values.find(
+          (previousEnum) => previousEnum.key === newEnum.key
+        )
+        const isLabelEqual = isEqual(foundPreviousEnum.label, newEnum.label)
+
+        if (isKeyChanged) {
+          // these actions is then flatten in the end
+          changeActions.push({
+            fieldName,
+            action: changeEnumOrderActionName,
+            value: newEnum,
+          })
+        }
+
+        if (!isLabelEqual) {
+          changeActions.push({
+            fieldName,
+            action: changeEnumValueLabelActionName,
+            value: newEnum,
+          })
+        }
       } else {
         changeActions.push({
           fieldName,
@@ -82,12 +105,12 @@ function actionsMapEnums(
   const actions = []
   // following lists are necessary to ensure that when we change the
   // order of enumValues, we generate one updateAction instead of one at a time.
-  const newEnumValuesOrder = []
+  let newEnumValuesOrder = []
 
   flatten(buildArrayActions(attributeDiff, previous, next)).forEach(
     (updateAction) => {
       if (updateAction.action === changeEnumOrderActionName) {
-        newEnumValuesOrder.push(updateAction.value.key)
+        newEnumValuesOrder = next.values.map((enumValue) => enumValue.key)
       } else actions.push(updateAction)
     }
   )
@@ -134,6 +157,12 @@ export function actionsMapFieldDefinitions(
         actions.push({
           action: 'changeLabel',
           label: extractedPairs.newObj.label,
+          fieldName: extractedPairs.oldObj.name,
+        })
+      } else if (diffValue.inputHint) {
+        actions.push({
+          action: 'changeInputHint',
+          inputHint: extractedPairs.newObj.inputHint,
           fieldName: extractedPairs.oldObj.name,
         })
       } else if (diffValue.type.values) {
