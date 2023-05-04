@@ -336,7 +336,14 @@ describe('Actions', () => {
       ])
     })
   })
-  describe('should ignore required field in fieldDefinition', () => {
+
+  /**
+   * there is no update action for fieldDefinition -> required,
+   * so this field is immutable and unchangeable.
+   * in case of changing it, this were throwing `Cannot read properties of undefined` cause its nested field.
+   * below test is making sure this field is ignored and without any internal package errors.
+   */
+  describe('should ignore changes in required field in fieldDefinition', () => {
     beforeEach(() => {
       before = createTestType({
         fieldDefinitions: [
