@@ -110,7 +110,7 @@ describe('Actions', () => {
       expect(updateActions).toEqual([
         {
           action: 'changeFieldDefinitionOrder',
-          fieldNames: [{ name: 'second' }, { name: 'first' }],
+          fieldNames: ['second', 'first'],
         },
       ])
     })
@@ -334,6 +334,37 @@ describe('Actions', () => {
           },
         },
       ])
+    })
+  })
+
+  /**
+   * there is no update action for fieldDefinition -> required,
+   * so this field is immutable and unchangeable.
+   * in case of changing it, this were throwing `Cannot read properties of undefined` cause its nested field.
+   * below test is making sure this field is ignored and without any internal package errors.
+   */
+  describe('should ignore changes in required field in fieldDefinition', () => {
+    beforeEach(() => {
+      before = createTestType({
+        fieldDefinitions: [
+          {
+            name: 'first',
+            required: true,
+          },
+        ],
+      })
+      now = createTestType({
+        fieldDefinitions: [
+          {
+            name: 'first',
+            required: false,
+          },
+        ],
+      })
+      updateActions = typesSync.buildActions(now, before)
+    })
+    test('should return no action', () => {
+      expect(updateActions).toEqual([])
     })
   })
 })
