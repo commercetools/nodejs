@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.9.0
+
+### Minor Changes
+
+- [#1853](https://github.com/commercetools/nodejs/pull/1853) [`4bb8f979`](https://github.com/commercetools/nodejs/commit/4bb8f979c317bbce1654ca0f1abc9b4717fdda0b) Thanks [@markus-azer](https://github.com/markus-azer)! - types sync-actions: support the following actions `changeInputHint`, `changeEnumValueLabel`, `changeLocalizedEnumValueLabel`.
+
 ## 5.8.0
 
 ### Minor Changes
