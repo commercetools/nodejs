@@ -48,6 +48,44 @@ describe('Actions', () => {
       )
     })
   })
+  describe('change InputHint', () => {
+    beforeEach(() => {
+      before = createTestType({
+        fieldDefinitions: [
+          {
+            type: { name: 'text' },
+            name: 'name-field-definition',
+            label: {
+              en: 'EN field definition',
+            },
+            inputHint: 'SingleLine',
+          },
+        ],
+      })
+      now = createTestType({
+        fieldDefinitions: [
+          {
+            type: { name: 'text' },
+            name: 'name-field-definition',
+            label: {
+              en: 'EN field definition',
+            },
+            inputHint: 'MultipleLine',
+          },
+        ],
+      })
+      updateActions = typesSync.buildActions(now, before)
+    })
+    test('should return `changeInputHint` action', () => {
+      expect(updateActions).toEqual(
+        now.fieldDefinitions.map((fieldDefinition) => ({
+          action: 'changeInputHint',
+          fieldName: fieldDefinition.name,
+          inputHint: 'MultipleLine',
+        }))
+      )
+    })
+  })
   describe('with fieldDefinitions removed', () => {
     beforeEach(() => {
       before = createTestType({
