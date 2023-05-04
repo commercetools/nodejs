@@ -1,5 +1,12 @@
 # @commercetools/sync-actions
 
+## 5.8.0
+
+### Minor Changes
+
+- [#1852](https://github.com/commercetools/nodejs/pull/1852) [`94a376c8`](https://github.com/commercetools/nodejs/commit/94a376c89525b7cee58b710154ddf7cb146cd16c) Thanks [@markus-azer](https://github.com/markus-azer)! - types sync-actions: fix action structure for changeFieldDefinitionOrder
+  fix internal type sync error by adding optional chaining
+
 ## 5.7.0
 
 ### Minor Changes
