@@ -88,6 +88,44 @@ describe('Actions', () => {
       ]
       expect(actual).toEqual(expected)
     })
+    test('should build `setDeliveryItems` action', () => {
+      const before = {
+        shippingInfo: {
+          deliveries: [
+            {
+              id: 'delivery-1',
+              items: [
+                { id: 'li-1', qty: 1 },
+                { id: 'li-2', qty: 2 },
+              ],
+              parcels: [],
+            },
+          ],
+        },
+      }
+      const now = {
+        shippingInfo: {
+          deliveries: [
+            {
+              id: 'delivery-1',
+              items: [{ id: 'li-2', qty: 2 }],
+              parcels: [],
+            },
+          ],
+        },
+      }
+
+      const actual = orderSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'setDeliveryItems',
+          items: now.shippingInfo.deliveries[0].items,
+          deliveryId: now.shippingInfo.deliveries[0].id,
+          deliveryKey: undefined,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
   })
 
   describe('parcels', () => {
