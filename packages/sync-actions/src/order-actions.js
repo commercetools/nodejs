@@ -154,24 +154,23 @@ export function actionsMapDeliveryItems(diff, oldObj, newObj, deliveryHashMap) {
 
   let setDeliveryItemsActions = []
 
-  if (deliveries)
-    forEach(deliveries, (delivery, key) => {
-      const { newObj: newDelivery } = extractMatchingPairs(
-        deliveryHashMap,
-        key,
-        oldObj.shippingInfo.deliveries,
-        newObj.shippingInfo.deliveries
+  forEach(deliveries, (delivery, key) => {
+    const { newObj: newDelivery } = extractMatchingPairs(
+      deliveryHashMap,
+      key,
+      oldObj.shippingInfo.deliveries,
+      newObj.shippingInfo.deliveries
+    )
+    if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
+      const [setDeliveryItemsAction] = _buildDeliveryItemsAction(
+        delivery.items,
+        newDelivery
       )
-      if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
-        const [setDeliveryItemsAction] = _buildDeliveryItemsAction(
-          delivery.items,
-          newDelivery
-        )
-        setDeliveryItemsActions = setDeliveryItemsActions.concat(
-          setDeliveryItemsAction
-        )
-      }
-    })
+      setDeliveryItemsActions = setDeliveryItemsActions.concat(
+        setDeliveryItemsAction
+      )
+    }
+  })
 
   return setDeliveryItemsActions
 }
