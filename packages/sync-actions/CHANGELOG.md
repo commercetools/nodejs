@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.10.0
+
+### Minor Changes
+
+- [#1856](https://github.com/commercetools/nodejs/pull/1856) [`9a3e3711`](https://github.com/commercetools/nodejs/commit/9a3e3711bf6594deafb5d54a9ce9e32450f9c4d6) Thanks [@qmateub](https://github.com/qmateub)! - orders sync-actions: support action on delivery items `setDeliveryItems`
+
 ## 5.9.0
 
 ### Minor Changes
