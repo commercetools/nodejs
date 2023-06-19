@@ -31,15 +31,11 @@ async function analyzeExcelFile(path) {
   return analyzeExcelWorkbook(workbook)
 }
 
-function analyzeExcelStream(stream) {
+async function analyzeExcelStream(stream) {
   const workbook = new Excel.Workbook()
-  const readStream = workbook.xlsx.createInputStream()
-  stream.pipe(readStream)
+  await workbook.xlsx.read(stream)
 
-  return new Promise((resolve, reject) => {
-    readStream.on('error', reject)
-    readStream.on('done', () => resolve(analyzeExcelWorkbook(workbook)))
-  })
+  analyzeExcelWorkbook(workbook)
 }
 
 describe('Writer', () => {
@@ -157,7 +153,7 @@ describe('Writer', () => {
           logger,
           headers
         )
-        done();
+        done()
       })
     })
 
@@ -185,7 +181,7 @@ describe('Writer', () => {
           logger,
           headers
         )
-        done();
+        done()
       })
     })
 
@@ -193,7 +189,7 @@ describe('Writer', () => {
       return new Promise((done) => {
         const sampleStream = highland(sampleProducts)
         const headers = []
-        const outputStream = streamTest.toText(() => { })
+        const outputStream = streamTest.toText(() => {})
         outputStream.on('finish', () => {
           expect(logger.info).toHaveBeenCalledWith(
             expect.stringMatching(/written to XLSX file/)
