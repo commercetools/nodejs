@@ -59,10 +59,9 @@ function analyzeExcelWorkbook(workbook) {
   }
 }
 
-function analyzeExcelStream(stream) {
+async function analyzeExcelStream(stream) {
   const workbook = new Excel.Workbook()
-  const readStream = workbook.xlsx.createInputStream()
-  stream.pipe(readStream)
+  const readStream = await workbook.xlsx.read(stream)
 
   return new Promise((resolve, reject) => {
     readStream.on('error', reject)
