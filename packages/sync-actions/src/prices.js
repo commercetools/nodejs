@@ -12,7 +12,7 @@ import actionsMapCustom from './utils/action-map-custom'
 import * as pricesActions from './prices-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
-const actionGroups = ['base', 'custom', 'priceTiers']
+const actionGroups = ['base', 'custom']
 
 function createPriceMapActions(
   mapActionGroup: Function,
