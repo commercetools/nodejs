@@ -495,4 +495,54 @@ describe('price actions', () => {
       },
     ])
   })
+
+  test('should  build `setPriceTiers` action if price tier are set', () => {
+    const before = {}
+    const now = {
+      id: '9fe6610f',
+      value: {
+        type: 'centPrecision',
+        currencyCode: 'EUR',
+        centAmount: 1900,
+        fractionDigits: 2,
+      },
+      tiers: [
+        {
+          minimumQuantity: 5,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 1900,
+            fractionDigits: 2,
+          },
+        },
+      ],
+    }
+    const actions = pricesSync.buildActions(now, before)
+    expect(actions).toEqual([
+      {
+        action: 'changeValue',
+        value: {
+          type: 'centPrecision',
+          currencyCode: 'EUR',
+          centAmount: 1900,
+          fractionDigits: 2,
+        },
+      },
+      {
+        action: 'setPriceTiers',
+        tiers: [
+          {
+            minimumQuantity: 5,
+            value: {
+              centAmount: 1900,
+              currencyCode: 'EUR',
+              fractionDigits: 2,
+              type: 'centPrecision',
+            },
+          },
+        ],
+      },
+    ])
+  })
 })
