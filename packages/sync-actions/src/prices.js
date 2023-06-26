@@ -12,7 +12,7 @@ import actionsMapCustom from './utils/action-map-custom'
 import * as pricesActions from './prices-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
-const actionGroups = ['base', 'custom', 'setPriceTiers']
+const actionGroups = ['base', 'custom', 'priceTiers']
 
 function createPriceMapActions(
   mapActionGroup: Function,
@@ -38,12 +38,6 @@ function createPriceMapActions(
 
     allActions.push(
       mapActionGroup('custom', (): Array<UpdateAction> =>
-        actionsMapCustom(diff, newObj, oldObj)
-      )
-    )
-
-    allActions.push(
-      mapActionGroup('setPriceTiers', (): Array<UpdateAction> =>
         actionsMapCustom(diff, newObj, oldObj)
       )
     )
