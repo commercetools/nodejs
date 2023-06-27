@@ -1,5 +1,11 @@
 # @commercetools/product-json-to-xlsx
 
+## 5.1.0
+
+### Minor Changes
+
+- [#1861](https://github.com/commercetools/nodejs/pull/1861) [`de30be9f`](https://github.com/commercetools/nodejs/commit/de30be9f06d08d23e71033caaa5ec70de7334e9a) Thanks [@VineetKumarKushwaha](https://github.com/VineetKumarKushwaha)! - Upgrage exceljs
+
 ## 5.0.0
 
 ### Major Changes
