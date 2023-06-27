@@ -9,9 +9,9 @@ export const baseActionsList = [
   { action: 'setValidFrom', key: 'validFrom' },
   { action: 'setValidUntil', key: 'validUntil' },
   { action: 'changeActive', key: 'active' },
-  // Alias for a special case of `changeValue`
-  { action: 'changeStagedPrice', key: 'staged' },
 ]
+
+export const stagedActionsList = [{ action: 'changeValue', key: 'value' }]
 
 export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   return buildBaseAttributesActions({
@@ -20,12 +20,23 @@ export function actionsMapBase(diff, oldObj, newObj, config = {}) {
     oldObj,
     newObj,
     shouldOmitEmptyString: config.shouldOmitEmptyString,
+  })
+}
+
+export function actionsMapStagedPrice(diff, oldObj, newObj, config = {}) {
+  if (!diff?.staged) return []
+
+  return buildBaseAttributesActions({
+    actions: stagedActionsList,
+    diff: diff?.staged,
+    oldObj: oldObj?.staged,
+    newObj: newObj?.staged,
+    shouldOmitEmptyString: config.shouldOmitEmptyString,
   }).map((actionObject) => {
-    // `changeStagedPrice` is a special case of `changeValue`
-    if (actionObject.action === 'changeStagedPrice') {
+    // `changeValue` for the staged price needs to be flagged
+    if (actionObject.action === 'changeValue') {
       return {
-        action: 'changeValue',
-        value: actionObject.staged.value,
+        ...actionObject,
         staged: true,
       }
     }
