@@ -33,14 +33,10 @@ export function actionsMapStagedPrice(diff, oldObj, newObj, config = {}) {
     newObj: newObj?.staged,
     shouldOmitEmptyString: config.shouldOmitEmptyString,
   }).map((actionObject) => {
-    // `changeValue` for the staged price needs to be flagged
-    if (actionObject.action === 'changeValue') {
-      return {
-        ...actionObject,
-        staged: true,
-      }
+    // staged price action needs to be flagged
+    return {
+      ...actionObject,
+      staged: true,
     }
-
-    return actionObject
   })
 }
