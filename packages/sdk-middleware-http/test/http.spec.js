@@ -1023,8 +1023,8 @@ describe('Http', () => {
             'content-type': 'application/json',
           }
 
-          expect(res.error.code).toEqual(0)
-          expect(res.error.name).toEqual('NetworkError')
+          expect(res.error.code).toEqual(500)
+          expect(res.error.name).toEqual('InternalServerError')
 
           resolve()
         }

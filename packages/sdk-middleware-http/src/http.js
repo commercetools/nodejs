@@ -10,7 +10,11 @@ import type {
   Next,
 } from 'types/sdk'
 
-import getErrorByCode, { NetworkError, HttpError } from './errors'
+import getErrorByCode, {
+  NetworkError,
+  HttpError,
+  InternalServerError,
+} from './errors'
 import parseHeaders from './parse-headers'
 
 function createError({ statusCode, message, ...rest }: Object): HttpErrorType {
@@ -310,7 +314,7 @@ export default function createHttpMiddleware({
                       return
                     }
 
-                  const error = new NetworkError(err.message, {
+                  const error = new InternalServerError(err.message, {
                     originalRequest: request,
                     retryCount,
                   })
