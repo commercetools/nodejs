@@ -7,7 +7,7 @@
     "node": ">=14"
   },
   "name": "@commercetools/sdk-middleware-http",
-  "version": "7.0.2",
+  "version": "7.0.3",
   "description": "Middleware for http requests, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",

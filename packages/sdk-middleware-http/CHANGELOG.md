@@ -1,5 +1,11 @@
 # @commercetools/sdk-middleware-http
 
+## 7.0.3
+
+### Patch Changes
+
+- [#1859](https://github.com/commercetools/nodejs/pull/1859) [`0ffe7243`](https://github.com/commercetools/nodejs/commit/0ffe72433906e74c2b3d287f1d2517b3b69fc382) Thanks [@ajimae](https://github.com/ajimae)! - Fix intermittent unhandled promise rejection error
+
 ## 7.0.2
 
 ### Patch Changes
