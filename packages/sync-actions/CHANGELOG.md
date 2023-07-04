@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.12.0
+
+### Minor Changes
+
+- [#1863](https://github.com/commercetools/nodejs/pull/1863) [`7ed7a663`](https://github.com/commercetools/nodejs/commit/7ed7a663c1cb3aa87bfb4b4c2c008949a66a62e0) Thanks [@ragafus](https://github.com/ragafus)! - Add support for StandalonePrice `setKey`, `setValidFrom`, `setValidUntil`, `setValidFromAndUntil` and `changeActive` actions.
+
 ## 5.11.0
 
 ### Minor Changes
