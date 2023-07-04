@@ -11,8 +11,6 @@ export const baseActionsList = [
   { action: 'changeActive', key: 'active' },
 ]
 
-export const stagedActionsList = [{ action: 'changeValue', key: 'value' }]
-
 export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
@@ -20,23 +18,5 @@ export function actionsMapBase(diff, oldObj, newObj, config = {}) {
     oldObj,
     newObj,
     shouldOmitEmptyString: config.shouldOmitEmptyString,
-  })
-}
-
-export function actionsMapStagedPrice(diff, oldObj, newObj, config = {}) {
-  if (!diff?.staged) return []
-
-  return buildBaseAttributesActions({
-    actions: stagedActionsList,
-    diff: diff?.staged,
-    oldObj: oldObj?.staged,
-    newObj: newObj?.staged,
-    shouldOmitEmptyString: config.shouldOmitEmptyString,
-  }).map((actionObject) => {
-    // staged price action needs to be flagged
-    return {
-      ...actionObject,
-      staged: true,
-    }
   })
 }
