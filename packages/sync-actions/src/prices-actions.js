@@ -4,6 +4,7 @@ import { buildBaseAttributesActions } from './utils/common-actions'
 export const baseActionsList = [
   { action: 'changeValue', key: 'value' },
   { action: 'setDiscountedPrice', key: 'discounted' },
+  //TODO Later add more accurate actions `addPriceTier`, `removePriceTier`
   { action: 'setPriceTiers', key: 'tiers' },
 ]
 
