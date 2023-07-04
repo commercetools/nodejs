@@ -727,4 +727,69 @@ describe('price actions', () => {
       },
     ])
   })
+
+  test('should not build `setPriceTiers` action when price tiers on now and then are equal', () => {
+    const before = {
+      id: '9fe6610f',
+      value: {
+        type: 'centPrecision',
+        currencyCode: 'EUR',
+        centAmount: 1900,
+        fractionDigits: 2,
+      },
+      tiers: [
+        {
+          minimumQuantity: 5,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 1900,
+            fractionDigits: 2,
+          },
+        },
+        {
+          minimumQuantity: 25,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 2900,
+            fractionDigits: 2,
+          },
+        },
+      ],
+    }
+
+    const now = {
+      id: '9fe6610f',
+      value: {
+        type: 'centPrecision',
+        currencyCode: 'EUR',
+        centAmount: 1900,
+        fractionDigits: 2,
+      },
+      tiers: [
+        {
+          minimumQuantity: 5,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 1900,
+            fractionDigits: 2,
+          },
+        },
+        {
+          minimumQuantity: 25,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 2900,
+            fractionDigits: 2,
+          },
+        },
+      ],
+    }
+
+    const actions = pricesSync.buildActions(now, before)
+    expect(actions).toEqual([])
+  })
 })
