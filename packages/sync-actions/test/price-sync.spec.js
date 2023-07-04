@@ -7,7 +7,6 @@ const twoWeeksFromNow = new Date(Date.now() + 12096e5)
 
 /* eslint-disable max-len */
 describe('price actions', () => {
-
   test('should not build actions if price are not set', () => {
     const before = {}
     const now = {}
@@ -121,7 +120,7 @@ describe('price actions', () => {
       value: { currencyCode: 'EGP', centAmount: 1000 },
       country: 'UK',
       validFrom: dateNow,
-      validUntil: twoWeeksFromNow
+      validUntil: twoWeeksFromNow,
     }
 
     const now = {
@@ -133,24 +132,22 @@ describe('price actions', () => {
       discounted: {
         value: { centAmount: 4000, currencyCode: 'EGP' },
         discount: { typeId: 'product-discount', id: 'pd1' },
-      }
+      },
     }
 
     const actions = pricesSync.buildActions(now, before)
-    expect(actions).toEqual(
-      [
-        {
-          action: 'setDiscountedPrice',
-          discounted: {
-            value: { centAmount: 4000, currencyCode: 'EGP' },
-            discount: {
-              typeId: 'product-discount',
-              id: 'pd1'
-            }
-          }
+    expect(actions).toEqual([
+      {
+        action: 'setDiscountedPrice',
+        discounted: {
+          value: { centAmount: 4000, currencyCode: 'EGP' },
+          discount: {
+            typeId: 'product-discount',
+            id: 'pd1',
+          },
         },
-      ]
-    )
+      },
+    ])
   })
 
   test('should build `setDiscountedPrice` action for removed discounted', () => {
@@ -163,7 +160,7 @@ describe('price actions', () => {
       discounted: {
         value: { centAmount: 4000, currencyCode: 'EGP' },
         discount: { typeId: 'product-discount', id: 'pd1' },
-      }
+      },
     }
 
     const now = {
@@ -172,19 +169,17 @@ describe('price actions', () => {
       country: 'UK',
       validFrom: dateNow,
       validUntil: twoWeeksFromNow,
-      //TODO: check this
-      discounted: null
+      // TODO: check this
+      discounted: null,
     }
 
     const actions = pricesSync.buildActions(now, before)
-    expect(actions).toEqual(
-      [
-        {
-          action: 'setDiscountedPrice',
-          discounted: undefined
-        },
-      ]
-    )
+    expect(actions).toEqual([
+      {
+        action: 'setDiscountedPrice',
+        discounted: undefined,
+      },
+    ])
   })
 
   test('should build `setDiscountedPrice` action for changed value centAmount', () => {
@@ -197,7 +192,7 @@ describe('price actions', () => {
       discounted: {
         value: { centAmount: 4000, currencyCode: 'EUR' },
         discount: { typeId: 'product-discount', id: 'pd1' },
-      }
+      },
     }
 
     const now = {
@@ -209,24 +204,22 @@ describe('price actions', () => {
       discounted: {
         value: { centAmount: 3000, currencyCode: 'EUR' },
         discount: { typeId: 'product-discount', id: 'pd1' },
-      }
+      },
     }
 
     const actions = pricesSync.buildActions(now, before)
-    expect(actions).toEqual(
-      [
-        {
-          action: 'setDiscountedPrice',
-          discounted: {
-            value: { centAmount: 3000, currencyCode: 'EUR' },
-            discount: {
-              typeId: 'product-discount',
-              id: 'pd1'
-            }
-          }
+    expect(actions).toEqual([
+      {
+        action: 'setDiscountedPrice',
+        discounted: {
+          value: { centAmount: 3000, currencyCode: 'EUR' },
+          discount: {
+            typeId: 'product-discount',
+            id: 'pd1',
+          },
         },
-      ]
-    )
+      },
+    ])
   })
 
   test('should generate setCustomField actions', () => {
@@ -359,8 +352,7 @@ describe('price actions', () => {
           source: 'shop',
         },
       },
-    ]
-    )
+    ])
   })
 
   test('should build `setCustomType` action which delete custom type', () => {
@@ -391,13 +383,11 @@ describe('price actions', () => {
     }
 
     const actions = pricesSync.buildActions(now, before)
-    expect(actions).toEqual(
-      [
-        {
-          action: 'setCustomType',
-        },
-      ]
-    )
+    expect(actions).toEqual([
+      {
+        action: 'setCustomType',
+      },
+    ])
   })
 
   test('should build `setCustomField` action', () => {
@@ -436,15 +426,13 @@ describe('price actions', () => {
     }
 
     const actions = pricesSync.buildActions(now, before)
-    expect(actions).toEqual(
-      [
-        {
-          action: 'setCustomField',
-          name: 'source',
-          value: 'random',
-        },
-      ]
-    )
+    expect(actions).toEqual([
+      {
+        action: 'setCustomField',
+        name: 'source',
+        value: 'random',
+      },
+    ])
   })
 
   test('should build three `setCustomField` action', () => {
@@ -489,24 +477,319 @@ describe('price actions', () => {
     }
 
     const actions = pricesSync.buildActions(now, before)
-    expect(actions).toEqual(
-      [
+    expect(actions).toEqual([
+      {
+        action: 'setCustomField',
+        name: 'source',
+        value: 'random',
+      },
+      {
+        action: 'setCustomField',
+        name: 'source2',
+        value: 'random2',
+      },
+      {
+        action: 'setCustomField',
+        name: 'source3',
+        value: 'random3',
+      },
+    ])
+  })
+
+  test('should  build `setPriceTiers` action if price tier are set', () => {
+    const before = {}
+    const now = {
+      id: '9fe6610f',
+      value: {
+        type: 'centPrecision',
+        currencyCode: 'EUR',
+        centAmount: 1900,
+        fractionDigits: 2,
+      },
+      tiers: [
         {
-          action: 'setCustomField',
-          name: 'source',
-          value: 'random',
+          minimumQuantity: 5,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 1900,
+            fractionDigits: 2,
+          },
+        },
+      ],
+    }
+    const actions = pricesSync.buildActions(now, before)
+    expect(actions).toEqual([
+      {
+        action: 'changeValue',
+        value: {
+          type: 'centPrecision',
+          currencyCode: 'EUR',
+          centAmount: 1900,
+          fractionDigits: 2,
+        },
+      },
+      {
+        action: 'setPriceTiers',
+        tiers: [
+          {
+            minimumQuantity: 5,
+            value: {
+              centAmount: 1900,
+              currencyCode: 'EUR',
+              fractionDigits: 2,
+              type: 'centPrecision',
+            },
+          },
+        ],
+      },
+    ])
+  })
+
+  test('should  build `setPriceTiers` action for price tier change', () => {
+    const before = {
+      id: '9fe6610f',
+      value: {
+        type: 'centPrecision',
+        currencyCode: 'EUR',
+        centAmount: 1900,
+        fractionDigits: 2,
+      },
+      tiers: [
+        {
+          minimumQuantity: 5,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 1900,
+            fractionDigits: 2,
+          },
+        },
+      ],
+    }
+    const now = {
+      id: '9fe6610f',
+      value: {
+        type: 'centPrecision',
+        currencyCode: 'EUR',
+        centAmount: 1900,
+        fractionDigits: 2,
+      },
+      tiers: [
+        {
+          minimumQuantity: 5,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 900,
+            fractionDigits: 2,
+          },
+        },
+      ],
+    }
+    const actions = pricesSync.buildActions(now, before)
+    expect(actions).toEqual([
+      {
+        action: 'setPriceTiers',
+        tiers: [
+          {
+            minimumQuantity: 5,
+            value: {
+              centAmount: 900,
+              currencyCode: 'EUR',
+              fractionDigits: 2,
+              type: 'centPrecision',
+            },
+          },
+        ],
+      },
+    ])
+  })
+
+  test('should build `setPriceTiers` action for removed price tier', () => {
+    const before = {
+      id: '9fe6610f',
+      value: {
+        type: 'centPrecision',
+        currencyCode: 'EUR',
+        centAmount: 1900,
+        fractionDigits: 2,
+      },
+      tiers: [
+        {
+          minimumQuantity: 5,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 1900,
+            fractionDigits: 2,
+          },
         },
         {
-          action: 'setCustomField',
-          name: 'source2',
-          value: 'random2',
+          minimumQuantity: 25,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 2900,
+            fractionDigits: 2,
+          },
+        },
+      ],
+    }
+
+    const now = {
+      id: '9fe6610f',
+      value: {
+        type: 'centPrecision',
+        currencyCode: 'EUR',
+        centAmount: 1900,
+        fractionDigits: 2,
+      },
+      tiers: [
+        {
+          minimumQuantity: 5,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 1900,
+            fractionDigits: 2,
+          },
+        },
+      ],
+    }
+
+    const actions = pricesSync.buildActions(now, before)
+    expect(actions).toEqual([
+      {
+        action: 'setPriceTiers',
+        tiers: [
+          {
+            minimumQuantity: 5,
+            value: {
+              centAmount: 1900,
+              currencyCode: 'EUR',
+              fractionDigits: 2,
+              type: 'centPrecision',
+            },
+          },
+        ],
+      },
+    ])
+  })
+
+  test('should build `setPriceTiers` action when removed all price tier', () => {
+    const before = {
+      id: '9fe6610f',
+      value: {
+        type: 'centPrecision',
+        currencyCode: 'EUR',
+        centAmount: 1900,
+        fractionDigits: 2,
+      },
+      tiers: [
+        {
+          minimumQuantity: 5,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 1900,
+            fractionDigits: 2,
+          },
         },
         {
-          action: 'setCustomField',
-          name: 'source3',
-          value: 'random3',
+          minimumQuantity: 25,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 2900,
+            fractionDigits: 2,
+          },
         },
-      ]
-    )
+      ],
+    }
+
+    const now = {
+      id: '9fe6610f',
+      value: {
+        type: 'centPrecision',
+        currencyCode: 'EUR',
+        centAmount: 1900,
+        fractionDigits: 2,
+      },
+      tiers: null,
+    }
+
+    const actions = pricesSync.buildActions(now, before)
+    expect(actions).toEqual([
+      {
+        action: 'setPriceTiers',
+        tiers: undefined,
+      },
+    ])
+  })
+
+  test('should not build `setPriceTiers` action when price tiers on now and then are equal', () => {
+    const before = {
+      id: '9fe6610f',
+      value: {
+        type: 'centPrecision',
+        currencyCode: 'EUR',
+        centAmount: 1900,
+        fractionDigits: 2,
+      },
+      tiers: [
+        {
+          minimumQuantity: 5,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 1900,
+            fractionDigits: 2,
+          },
+        },
+        {
+          minimumQuantity: 25,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 2900,
+            fractionDigits: 2,
+          },
+        },
+      ],
+    }
+
+    const now = {
+      id: '9fe6610f',
+      value: {
+        type: 'centPrecision',
+        currencyCode: 'EUR',
+        centAmount: 1900,
+        fractionDigits: 2,
+      },
+      tiers: [
+        {
+          minimumQuantity: 5,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 1900,
+            fractionDigits: 2,
+          },
+        },
+        {
+          minimumQuantity: 25,
+          value: {
+            type: 'centPrecision',
+            currencyCode: 'EUR',
+            centAmount: 2900,
+            fractionDigits: 2,
+          },
+        },
+      ],
+    }
+
+    const actions = pricesSync.buildActions(now, before)
+    expect(actions).toEqual([])
   })
 })
