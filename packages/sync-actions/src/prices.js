@@ -10,6 +10,7 @@ import createMapActionGroup from './utils/create-map-action-group'
 import actionsMapCustom from './utils/action-map-custom'
 import * as pricesActions from './prices-actions'
 import * as diffpatcher from './utils/diffpatcher'
+import combineValidityActions from './utils/combine-validity-actions'
 
 const actionGroups = ['base', 'custom']
 
@@ -35,7 +36,7 @@ function createPriceMapActions(
       actionsMapCustom(diff, newObj, oldObj)
     )
 
-    return [...baseActions, ...customActions]
+    return combineValidityActions([...baseActions, ...customActions])
   }
 }
 

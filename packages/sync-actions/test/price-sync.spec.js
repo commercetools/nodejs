@@ -1,4 +1,4 @@
-import pricesSyncFn from '../src/prices'
+import pricesSyncFn, { actionGroups } from '../src/prices'
 
 const pricesSync = pricesSyncFn()
 
@@ -7,6 +7,10 @@ const twoWeeksFromNow = new Date(Date.now() + 12096e5)
 
 /* eslint-disable max-len */
 describe('price actions', () => {
+  test('action group list', () => {
+    expect(actionGroups).toEqual(['base', 'custom'])
+  })
+
   test('should not build actions if prices are not set', () => {
     const before = {}
     const now = {}
@@ -591,6 +595,31 @@ describe('price actions', () => {
       expect(actions).toEqual([
         {
           action: 'setValidUntil',
+          validUntil: twoWeeksFromNow,
+        },
+      ])
+    })
+  })
+
+  describe('setValidFromAndUntil', () => {
+    it('should build `setValidFromAndUntil` action', () => {
+      const before = {
+        id: '1010',
+        validFrom: dateNow,
+        validUntil: dateNow,
+      }
+
+      const now = {
+        id: '1010',
+        validFrom: twoWeeksFromNow,
+        validUntil: twoWeeksFromNow,
+      }
+
+      const actions = pricesSync.buildActions(now, before)
+      expect(actions).toEqual([
+        {
+          action: 'setValidFromAndUntil',
+          validFrom: twoWeeksFromNow,
           validUntil: twoWeeksFromNow,
         },
       ])
