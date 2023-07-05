@@ -230,8 +230,8 @@ describe('price actions', () => {
     })
   })
 
-  describe('setPriceTiers', () => {
-    test('should  build `setPriceTiers` action if price tier are set', () => {
+  describe('setPriceTier', () => {
+    test('should  build `setPriceTier` action if price tier are set', () => {
       const before = {}
       const now = {
         id: '9fe6610f',
@@ -265,7 +265,7 @@ describe('price actions', () => {
           },
         },
         {
-          action: 'setPriceTiers',
+          action: 'setPriceTier',
           tiers: [
             {
               minimumQuantity: 5,
@@ -281,7 +281,7 @@ describe('price actions', () => {
       ])
     })
 
-    test('should  build `setPriceTiers` action for price tier change', () => {
+    test('should  build `setPriceTier` action for price tier change', () => {
       const before = {
         id: '9fe6610f',
         value: {
@@ -325,7 +325,7 @@ describe('price actions', () => {
       const actions = pricesSync.buildActions(now, before)
       expect(actions).toEqual([
         {
-          action: 'setPriceTiers',
+          action: 'setPriceTier',
           tiers: [
             {
               minimumQuantity: 5,
@@ -341,7 +341,7 @@ describe('price actions', () => {
       ])
     })
 
-    test('should build `setPriceTiers` action for removed price tier', () => {
+    test('should build `setPriceTier` action for removed price tier', () => {
       const before = {
         id: '9fe6610f',
         value: {
@@ -396,7 +396,7 @@ describe('price actions', () => {
       const actions = pricesSync.buildActions(now, before)
       expect(actions).toEqual([
         {
-          action: 'setPriceTiers',
+          action: 'setPriceTier',
           tiers: [
             {
               minimumQuantity: 5,
@@ -412,7 +412,7 @@ describe('price actions', () => {
       ])
     })
 
-    test('should build `setPriceTiers` action when removed all price tier', () => {
+    test('should build `setPriceTier` action when removed all price tier', () => {
       const before = {
         id: '9fe6610f',
         value: {
@@ -457,13 +457,13 @@ describe('price actions', () => {
       const actions = pricesSync.buildActions(now, before)
       expect(actions).toEqual([
         {
-          action: 'setPriceTiers',
+          action: 'setPriceTier',
           tiers: undefined,
         },
       ])
     })
 
-    test('should not build `setPriceTiers` action when price tiers on now and then are equal', () => {
+    test('should not build `setPriceTier` action when price tiers on now and then are equal', () => {
       const before = {
         id: '9fe6610f',
         value: {
