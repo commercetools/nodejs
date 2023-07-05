@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.12.1
+
+### Patch Changes
+
+- [#1869](https://github.com/commercetools/nodejs/pull/1869) [`7285a9fb`](https://github.com/commercetools/nodejs/commit/7285a9fbcbcfca6a9460e36ba7b58bb30f34fac6) Thanks [@ARRIOLALEO](https://github.com/ARRIOLALEO)! - Add support for StandalonePrice `setPriceTier`
+
 ## 5.12.0
 
 ### Minor Changes
