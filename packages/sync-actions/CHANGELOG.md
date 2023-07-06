@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.12.2
+
+### Patch Changes
+
+- [#1871](https://github.com/commercetools/nodejs/pull/1871) [`4f8ea39b`](https://github.com/commercetools/nodejs/commit/4f8ea39b66ddd5014ac8f923ed980584bd96290c) Thanks [@ARRIOLALEO](https://github.com/ARRIOLALEO)! - rollback setPriceTiers name change
+
 ## 5.12.1
 
 ### Patch Changes
