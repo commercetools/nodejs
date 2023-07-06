@@ -4,7 +4,7 @@ export const baseActionsList = [
   { action: 'changeValue', key: 'value' },
   { action: 'setDiscountedPrice', key: 'discounted' },
   // TODO: Later add more accurate actions `addPriceTier`, `removePriceTier`
-  { action: 'setPriceTier', key: 'tiers' },
+  { action: 'setPriceTiers', key: 'tiers' },
   { action: 'setKey', key: 'key' },
   { action: 'setValidFrom', key: 'validFrom' },
   { action: 'setValidUntil', key: 'validUntil' },
