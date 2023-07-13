@@ -116,6 +116,78 @@ describe('Actions', () => {
     ])
   })
 
+  test('should handle long text values performantly', () => {
+    const longText = 'a'.repeat(10_000)
+    const longText2 = 'b'.repeat(10_000)
+    const before = {
+      id: '123',
+      masterVariant: {
+        id: 1,
+        attributes: [
+          { name: 'color', value: longText },
+          { name: 'size', value: longText },
+          { name: 'weight', value: longText },
+        ],
+      },
+      variants: [
+        {
+          id: 2,
+          attributes: [
+            { name: 'color', value: longText },
+            { name: 'size', value: longText },
+            { name: 'weight', value: longText },
+          ],
+        },
+      ],
+    }
+
+    const now = {
+      id: '123',
+      masterVariant: {
+        id: 1,
+        attributes: [
+          { name: 'color', value: longText2 },
+          { name: 'size', value: longText2 },
+          { name: 'weight', value: longText2 },
+        ],
+      },
+      variants: [
+        {
+          id: 2,
+          attributes: [
+            { name: 'color', value: longText2 },
+            { name: 'size', value: longText2 },
+            { name: 'weight', value: longText2 },
+          ],
+        },
+      ],
+    }
+
+    const startTime = Date.now()
+    const actions = productsSync.buildActions(now, before)
+
+    // Should take less than 100ms.
+    expect(Date.now() - startTime).toBeLessThan(100)
+    expect(actions).toEqual([
+      { action: 'setAttribute', variantId: 1, name: 'color', value: longText2 },
+      { action: 'setAttribute', variantId: 1, name: 'size', value: longText2 },
+      {
+        action: 'setAttribute',
+        variantId: 1,
+        name: 'weight',
+        value: longText2,
+      },
+      { action: 'setAttribute', variantId: 2, name: 'color', value: longText2 },
+      { action: 'setAttribute', variantId: 2, name: 'size', value: longText2 },
+      {
+        action: 'setAttribute',
+        variantId: 2,
+        name: 'weight',
+        value: longText2,
+      },
+    ])
+  })
+
   test('should build SameForAll attribute actions', () => {
     const before = {
       id: '123',
