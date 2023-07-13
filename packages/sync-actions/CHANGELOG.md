@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.13.0
+
+### Minor Changes
+
+- [#1874](https://github.com/commercetools/nodejs/pull/1874) [`69f4501d`](https://github.com/commercetools/nodejs/commit/69f4501dc5401ab2b44f4d3096a978094e402c9f) Thanks [@taylor-knapp](https://github.com/taylor-knapp)! - Handle long text values performantly
+
 ## 5.12.2
 
 ### Patch Changes
