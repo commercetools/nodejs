@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.14.0
+
+### Minor Changes
+
+- [#1876](https://github.com/commercetools/nodejs/pull/1876) [`27f0d2b6`](https://github.com/commercetools/nodejs/commit/27f0d2b66fefbe082b6a27e7fa940b09e7e6088c) Thanks [@jaikumar-tj](https://github.com/jaikumar-tj)! - Add support for attribute groups `changeName`, `setKey`, `setDescription`, `addAttribute` and `removeAttribute` actions.
+
 ## 5.13.0
 
 ### Minor Changes
