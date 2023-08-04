@@ -27,13 +27,16 @@
   "contributors": [
     "Williams Omayuku <williams.omayuku@commercetools.com>"
   ],
-  "main": "lib/index.js",
+  "main": "dist/discount-code-importer.cjs.js",
+  "module": "dist/discount-code-importer.es.js",
+  "browser": "dist/discount-code-importer.umd.js",
   "files": [
     "lib"
   ],
   "scripts": {
-    "prebuild": "rimraf lib/**",
-    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+    "prebuild": "rimraf dist/**",
+    "build": "yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkClient -i ./src/index.js"
   },
   "dependencies": {
     "@commercetools/api-request-builder": "^6.0.0",
