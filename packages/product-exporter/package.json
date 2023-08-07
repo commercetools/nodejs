@@ -27,17 +27,23 @@
     "name": "Williams Omayuku",
     "email": "williams.omayuku@commercetools.com"
   },
-  "main": "lib/index.js",
+  "main": "dist/product-exporter.cjs.js",
+  "module": "dist/product-exporter.es.js",
+  "browser": "dist/product-exporter.umd.js",
   "bin": {
     "product-exporter": "bin/product-exporter.js"
   },
   "files": [
     "bin",
-    "lib"
+    "dist",
+    "readme.md",
+    "package.json"
   ],
   "scripts": {
-    "prebuild": "rimraf lib/**",
-    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+    "prebuild": "rimraf dist/**",
+    "build": "yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkClient -i ./src/index.js",
+    "postbuild": "babel src/cli.js --out-dir dist --config-file '../../babel.config.js'"
   },
   "dependencies": {
     "@commercetools/api-request-builder": "^6.0.0",

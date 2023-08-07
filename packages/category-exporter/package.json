@@ -9,13 +9,17 @@
   "name": "@commercetools/category-exporter",
   "version": "4.0.0",
   "description": "Exports categories from the commercetools platform.",
-  "main": "lib/main.js",
+  "main": "dist/category-eporter.cjs.js",
+  "module": "dist/category-eporter.es.js",
+  "browser": "dist/category-eporter.umd.js",
   "bin": {
     "category-exporter": "bin/category-exporter.js"
   },
   "scripts": {
-    "prebuild": "rimraf lib/**",
-    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+    "prebuild": "rimraf dist/**",
+    "build": "yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkClient -i ./src/index.js",
+    "postbuild": "babel src/cli.js --out-dir dist --config-file '../../babel.config.js'"
   },
   "repository": {
     "type": "git",
@@ -30,6 +34,12 @@
     "json",
     "export",
     "cli"
+  ],
+  "files": [
+    "bin",
+    "dist",
+    "readme.md",
+    "package.json"
   ],
   "author": {
     "name": "Babajide Williams",

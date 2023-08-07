@@ -23,13 +23,18 @@
   "contributors": [
     "Selwyn Versteeg <selwyn.versteeg@commercetools.com> (https://selwyn.cc/)"
   ],
-  "main": "lib/index.js",
+  "main": "dist/get-credentials.cjs.js",
+  "module": "dist/get-credentials.es.js",
+  "browser": "dist/get-credentials.umd.js",
   "files": [
-    "lib"
+    "dist",
+    "readme.md",
+    "package.json"
   ],
   "scripts": {
-    "prebuild": "rimraf lib/**",
-    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+    "prebuild": "rimraf dist/**",
+    "build": "yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkClient -i ./src/index.js"
   },
   "devDependencies": {
     "sinon": "9.2.4"

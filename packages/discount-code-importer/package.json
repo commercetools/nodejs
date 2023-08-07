@@ -31,7 +31,9 @@
   "module": "dist/discount-code-importer.es.js",
   "browser": "dist/discount-code-importer.umd.js",
   "files": [
-    "lib"
+    "dist",
+    "readme.md",
+    "package.json"
   ],
   "scripts": {
     "prebuild": "rimraf dist/**",

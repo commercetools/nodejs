@@ -27,17 +27,23 @@
   "contributors": [
     "Williams Omayuku <williams.omayuku@commercetools.com>"
   ],
-  "main": "lib/main.js",
+  "main": "dist/discount-code-exporter.cjs.js",
+  "module": "dist/discount-code-exporter.es.js",
+  "browser": "dist/discount-code-exporter.umd.js",
   "bin": {
     "discount-code-exporter": "bin/discount-code-exporter.js"
   },
   "files": [
     "bin",
-    "lib"
+    "dist",
+    "readme.md",
+    "package.json"
   ],
   "scripts": {
-    "prebuild": "rimraf lib/**",
-    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+    "prebuild": "rimraf dist/**",
+    "build": "yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkClient -i ./src/index.js",
+    "postbuild": "babel src/cli.js --out-dir dist --config-file '../../babel.config.js'"
   },
   "dependencies": {
     "@commercetools/api-request-builder": "^6.0.0",

@@ -9,13 +9,17 @@
   "name": "@commercetools/customer-groups-exporter",
   "version": "4.0.0",
   "description": "Exports customer groups from the commercetools platform.",
-  "main": "lib/main.js",
+  "main": "dist/customer-groups-exporter.cjs.js",
+  "module": "dist/customer-groups-exporter.es.js",
+  "browser": "dist/customer-groups-exporter.umd.js",
   "bin": {
     "customer-groups-exporter": "bin/customer-groups-exporter.js"
   },
   "scripts": {
-    "prebuild": "rimraf lib/**",
-    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+    "prebuild": "rimraf dist/**",
+    "build": "yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkClient -i ./src/index.js",
+    "postbuild": "babel src/cli.js --out-dir dist --config-file '../../babel.config.js'"
   },
   "repository": {
     "type": "git",
@@ -31,6 +35,12 @@
     "export",
     "customer",
     "cli"
+  ],
+  "files": [
+    "bin",
+    "dist",
+    "readme.md",
+    "package.json"
   ],
   "author": {
     "name": "Daniel Eriksson",

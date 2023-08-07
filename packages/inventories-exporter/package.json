@@ -33,14 +33,20 @@
   "bin": {
     "inventoriesexporter": "bin/inventories-exporter.js"
   },
-  "main": "lib/index.js",
+  "main": "dist/inventories-exporter.cjs.js",
+  "module": "dist/inventories-exporter.es.js",
+  "browser": "dist/inventories-exporter.umd.js",
   "files": [
-    "lib",
-    "bin"
+    "bin",
+    "dist",
+    "readme.md",
+    "package.json"
   ],
   "scripts": {
-    "prebuild": "rimraf lib/**",
-    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+    "prebuild": "rimraf dist/**",
+    "build": "yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkClient -i ./src/index.js",
+    "postbuild": "babel src/cli.js --out-dir dist --config-file '../../babel.config.js'"
   },
   "dependencies": {
     "@commercetools/api-request-builder": "^6.0.0",

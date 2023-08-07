@@ -1,4 +1,5 @@
-export { default } from './main'
+import ProductJsonToCsv from './main'
+
 export { default as MapProductData } from './map-product-data'
 export { default as mapHeaders } from './map-headers'
 export {
@@ -7,3 +8,5 @@ export {
   writeToSingleCsvFile,
   writeToZipFile,
 } from './writer'
+
+export default ProductJsonToCsv

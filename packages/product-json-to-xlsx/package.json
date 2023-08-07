@@ -30,17 +30,23 @@
     "name": "Jan Juna",
     "email": "jan.juna-ext@commercetools.com"
   },
-  "main": "lib/index.js",
+  "main": "dist/product-json-to-xlsx.cjs.js",
+  "module": "dist/product-json-to-xlsx.es.js",
+  "browser": "dist/product-json-to-xlsx.umd.js",
   "bin": {
     "product-json-to-xlsx": "bin/product-json-to-xlsx.js"
   },
   "files": [
     "bin",
-    "lib"
+    "dist",
+    "readme.md",
+    "package.json"
   ],
   "scripts": {
-    "prebuild": "rimraf lib/**",
-    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+    "prebuild": "rimraf dist/**",
+    "build": "yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkClient -i ./src/index.js",
+    "postbuild": "babel src/cli.js --out-dir dist --config-file '../../babel.config.js'"
   },
   "dependencies": {
     "@commercetools/get-credentials": "^4.0.0",

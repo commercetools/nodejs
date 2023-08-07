@@ -9,10 +9,14 @@
   "name": "@commercetools/csv-parser-state",
   "version": "4.0.0",
   "description": "Package to parse states from CSV to JSON",
-  "main": "lib/main.js",
+  "main": "dist/csv-parser-state.cjs.js",
+  "module": "dist/csv-parser-state.es.js",
+  "browser": "dist/csv-parser-state.umd.js",
   "scripts": {
-    "prebuild": "rimraf lib/**",
-    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+    "prebuild": "rimraf dist/**",
+    "build": "yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkClient -i ./src/index.js",
+    "postbuild": "babel src/cli.js --out-dir dist --config-file '../../babel.config.js'"
   },
   "repository": {
     "type": "git",
