@@ -27,9 +27,8 @@ describe('CorrelationId', () => {
     },
   })
   const response = createTestResponse()
-  const correlationIdMiddleware = createCorrelationIdMiddleware(
-    middlewareOptions
-  )
+  const correlationIdMiddleware =
+    createCorrelationIdMiddleware(middlewareOptions)
 
   const next = (req) => {
     test('retains existing headers', () => {

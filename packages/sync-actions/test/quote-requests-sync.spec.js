@@ -9,7 +9,9 @@ describe('Exports', () => {
   describe('action list', () => {
     test('should contain `changeQuoteRequestState` action', () => {
       expect(baseActionsList).toEqual(
-        expect.arrayContaining([{ action: 'changeQuoteRequestState', key: 'quoteRequestState' }])
+        expect.arrayContaining([
+          { action: 'changeQuoteRequestState', key: 'quoteRequestState' },
+        ])
       )
     })
 
@@ -34,31 +36,31 @@ describe('Actions', () => {
     const expected = [
       {
         action: 'changeQuoteRequestState',
-        ...now
-      }
+        ...now,
+      },
     ]
     expect(actual).toEqual(expected)
   })
 
   test('should build `transitionState` action', () => {
     const before = {
-      state : {
-      typeId : 'state',
-      id : 'sid1'
-      }
+      state: {
+        typeId: 'state',
+        id: 'sid1',
+      },
     }
     const now = {
-      state : {
-      typeId : 'state',
-      id : 'sid2'
-      }
+      state: {
+        typeId: 'state',
+        id: 'sid2',
+      },
     }
     const actual = quoteRequestsSync.buildActions(now, before)
     const expected = [
       {
         action: 'transitionState',
-        ...now
-      }
+        ...now,
+      },
     ]
     expect(actual).toEqual(expected)
   })

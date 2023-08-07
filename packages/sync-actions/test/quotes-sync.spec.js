@@ -9,13 +9,17 @@ describe('Exports', () => {
   describe('action list', () => {
     test('should contain `changeQuoteState` action', () => {
       expect(baseActionsList).toEqual(
-        expect.arrayContaining([{ action: 'changeQuoteState', key: 'quoteState' }])
+        expect.arrayContaining([
+          { action: 'changeQuoteState', key: 'quoteState' },
+        ])
       )
     })
 
     test('should contain `requestQuoteRenegotiation` action', () => {
       expect(baseActionsList).toEqual(
-        expect.arrayContaining([{ action: 'requestQuoteRenegotiation', key: 'buyerComment' }])
+        expect.arrayContaining([
+          { action: 'requestQuoteRenegotiation', key: 'buyerComment' },
+        ])
       )
     })
 
@@ -40,8 +44,8 @@ describe('Actions', () => {
     const expected = [
       {
         action: 'changeQuoteState',
-        ...now
-      }
+        ...now,
+      },
     ]
     expect(actual).toEqual(expected)
   })
@@ -53,31 +57,31 @@ describe('Actions', () => {
     const expected = [
       {
         action: 'requestQuoteRenegotiation',
-        ...now
-      }
+        ...now,
+      },
     ]
     expect(actual).toEqual(expected)
   })
 
   test('should build `transitionState` action', () => {
     const before = {
-      state : {
-      typeId : 'state',
-      id : 'sid1'
-      }
+      state: {
+        typeId: 'state',
+        id: 'sid1',
+      },
     }
     const now = {
-      state : {
-      typeId : 'state',
-      id : 'sid2'
-      }
+      state: {
+        typeId: 'state',
+        id: 'sid2',
+      },
     }
     const actual = quotesSync.buildActions(now, before)
     const expected = [
       {
         action: 'transitionState',
-        ...now
-      }
+        ...now,
+      },
     ]
     expect(actual).toEqual(expected)
   })

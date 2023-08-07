@@ -87,7 +87,9 @@ export default class SdkAuth {
     clientSecret,
   }: ClientAuthOptions): string {
     const targetStr = `${clientId}:${clientSecret}`
-    return typeof Buffer === 'undefined' ? btoa(targetStr) : Buffer.from(targetStr).toString('base64')
+    return typeof Buffer === 'undefined'
+      ? btoa(targetStr)
+      : Buffer.from(targetStr).toString('base64')
   }
 
   static _getScopes(scopes: ?Array<string>, projectKey: ?string): string {
@@ -337,15 +339,8 @@ export default class SdkAuth {
   }
 
   customFlow(requestConfig: Object): Promise<Object> {
-    const {
-      credentials,
-      host,
-      uri,
-      body,
-      token,
-      authType,
-      headers,
-    } = requestConfig
+    const { credentials, host, uri, body, token, authType, headers } =
+      requestConfig
     const _config = this._getRequestConfig({
       host,
       token,

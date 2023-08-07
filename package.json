@@ -8,7 +8,7 @@
     "postinstall": "check-node-version --package --print && cross-env NODE_ENV=development yarn build",
     "clean": "rm -rf coverage; lerna exec -- rimraf lib dist",
     "commit": "git-cz",
-    "build": "lerna run build --no-private",
+    "build": "lerna run build --concurrency=2 --no-private",
     "check-gh-auth-token": "if [[ -z \"${GITHUB_AUTH}\" ]]; then echo \"Need to set GITHUB_AUTH\" && exit 1; fi",
     "build:typings": "NODE_ENV=production lerna run build:typings --no-private",
     "lint": "jest --projects jest.eslint.config.js jest.flow.config.js",

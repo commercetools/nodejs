@@ -121,8 +121,7 @@ describe('InventoryExporter', () => {
         expect(processMock).toHaveBeenCalledTimes(1)
         expect(processMock.mock.calls[0][0]).toEqual({
           // eslint-disable-next-line max-len
-          uri:
-            '/foo/inventory?expand=custom.type&expand=supplyChannel&where=descript%3D%22lovely%22%20and%20supplyChannel(id%3D%221234567qwertyuxcv%22)',
+          uri: '/foo/inventory?expand=custom.type&expand=supplyChannel&where=descript%3D%22lovely%22%20and%20supplyChannel(id%3D%221234567qwertyuxcv%22)',
           method: 'GET',
           headers: {
             Authorization: 'Bearer 12345',

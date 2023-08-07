@@ -9,9 +9,9 @@
   "name": "@commercetools/personal-data-erasure",
   "version": "4.0.0",
   "description": "Export and delete all data related to a single customer",
-  "main": "data/personal-data-erasure.cjs.js",
-  "module": "data/personal-data-erasure.es.js",
-  "browser": "data/personal-data-erasure.umd.js",
+  "main": "dist/personal-data-erasure.cjs.js",
+  "module": "dist/personal-data-erasure.es.js",
+  "browser": "dist/personal-data-erasure.umd.js",
   "bin": {
     "personal-data-erasure": "bin/personal-data-erasure.js"
   },
