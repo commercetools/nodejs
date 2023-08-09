@@ -43,7 +43,7 @@
     "prebuild": "rimraf dist/**",
     "build": "yarn build:bundles",
     "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkClient -i ./src/index.js",
-    "postbuild": "babel src/cli.js --out-dir dist --config-file '../../babel.config.js'"
+    "postbuild": "cross-env NODE_ENV=production rollup -c ../../rollup.cli.config.js -n CommercetoolsSdkClient  -i ./src/cli.js -o dist/cli.js"
   },
   "dependencies": {
     "JSONStream": "^1.3.5",

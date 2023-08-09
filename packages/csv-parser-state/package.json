@@ -16,7 +16,7 @@
     "prebuild": "rimraf dist/**",
     "build": "yarn build:bundles",
     "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkClient -i ./src/index.js",
-    "postbuild": "babel src/cli.js --out-dir dist --config-file '../../babel.config.js'"
+    "postbuild": "cross-env NODE_ENV=production rollup -c ../../rollup.cli.config.js -n CommercetoolsSdkClient  -i ./src/cli.js -o dist/cli.js"
   },
   "repository": {
     "type": "git",
@@ -45,6 +45,7 @@
     "lib"
   ],
   "devDependencies": {
+    "rollup-plugin-node-polyfills": "^0.2.1",
     "streamtest": "2.0.0"
   },
   "dependencies": {
@@ -62,6 +63,10 @@
     "node-fetch": "^2.6.7",
     "pino": "^6.0.0",
     "pretty-error": "^2.1.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-flow": "^1.1.1",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "yargs": "^16.0.0"
   }
 }
