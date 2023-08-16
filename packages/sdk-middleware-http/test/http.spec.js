@@ -1578,4 +1578,34 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     })
   })
+
+  test('should handle error when parsing an invalid response object', () => {
+    expect(true).toEqual(true)
+    return new Promise((resolve, reject) => {
+
+      const response = { resolve, reject }
+      const request = createTestRequest({ uri: '/foo/bar' })
+
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          error: expect.any(Error),
+          statusCode: 500
+        })
+        resolve()
+      }
+
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        enableRetry: false,
+        fetch: jest.fn(() =>
+          Promise.resolve({
+            text: jest.fn(() => Promise.resolve({}))
+          }))
+      })
+
+      httpMiddleware(next)(request, response)
+    })
+  })
 })
