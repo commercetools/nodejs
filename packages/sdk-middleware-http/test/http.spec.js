@@ -1578,4 +1578,76 @@ describe('Http', () => {
       httpMiddleware(next)(request, response)
     })
   })
+
+  test('should handle error when parsing an invalid response object', () => {
+    expect(true).toEqual(true)
+    return new Promise((resolve, reject) => {
+
+      const response = { resolve, reject }
+      const request = createTestRequest({ uri: '/foo/bar' })
+
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          error: expect.any(Error),
+          statusCode: 0
+        })
+        resolve()
+      }
+
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        enableRetry: false,
+        fetch: jest.fn(() =>
+          Promise.resolve({
+            ok: true,
+            text: jest.fn(() =>
+              Promise.reject(new Error('malformed response'))
+            )
+          }))
+      })
+
+      httpMiddleware(next)(request, response)
+    })
+  })
+
+  test('should handle error when parsing an invalid response object - retry', () => {
+    expect(true).toEqual(true)
+    return new Promise((resolve, reject) => {
+
+      const response = { resolve, reject }
+      const request = createTestRequest({ uri: '/foo/bar' })
+
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          error: expect.any(Error),
+          statusCode: 0
+        })
+        resolve()
+      }
+
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        enableRetry: true,
+        credentialsMode: 'omit',
+        retryConfig: {
+          maxRetries: 2,
+          retryDelay: 100,
+          backoff: false,
+        },
+        fetch: jest.fn(() =>
+          Promise.resolve({
+            ok: true,
+            text: jest.fn(() =>
+              Promise.reject(new Error('malformed response'))
+            )
+          }))
+      })
+
+      httpMiddleware(next)(request, response)
+    })
+  })
 })

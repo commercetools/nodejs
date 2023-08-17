@@ -39,9 +39,9 @@ function calcDelayDuration(
   if (backoff)
     return retryCount !== 0 // do not increase if it's the first retry
       ? Math.min(
-          Math.round((Math.random() + 1) * retryDelay * 2 ** retryCount),
-          maxDelay
-        )
+        Math.round((Math.random() + 1) * retryDelay * 2 ** retryCount),
+        maxDelay
+      )
       : retryDelay
   return retryDelay
 }
@@ -131,7 +131,7 @@ export default function createHttpMiddleware({
           requestHeader['Content-Type']
         ) > -1 &&
           typeof request.body === 'string') ||
-        Buffer.isBuffer(request.body)
+          Buffer.isBuffer(request.body)
           ? request.body
           : JSON.stringify(request.body || undefined)
 
@@ -239,7 +239,32 @@ export default function createHttpMiddleware({
                       maskSensitiveHeaderData
                     )
                   }
+
                   next(request, parsedResponse)
+                }).catch((err: Error) => {
+                  if (enableRetry)
+                    if (retryCount < maxRetries) {
+                      setTimeout(
+                        executeFetch,
+                        calcDelayDuration(
+                          retryCount,
+                          retryDelay,
+                          maxRetries,
+                          backoff,
+                          maxDelay
+                        )
+                      )
+                      retryCount += 1
+                      return
+                    }
+
+                  const error = new NetworkError(err.message, {
+                    originalRequest: request,
+                    retryCount,
+                  })
+
+                  maskAuthData(error.originalRequest, maskSensitiveHeaderData)
+                  next(request, { ...response, error, statusCode: 0 })
                 })
                 return
               }

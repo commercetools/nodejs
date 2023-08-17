@@ -35,7 +35,7 @@ async function analyzeExcelStream(stream) {
   const workbook = new Excel.Workbook()
   await workbook.xlsx.read(stream)
 
-  analyzeExcelWorkbook(workbook)
+  return analyzeExcelWorkbook(workbook)
 }
 
 describe('Writer', () => {
