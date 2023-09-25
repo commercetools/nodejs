@@ -9,13 +9,17 @@ describe('Exports', () => {
   describe('action list', () => {
     test('should contain `changeStagedQuoteState` action', () => {
       expect(baseActionsList).toEqual(
-        expect.arrayContaining([{ action: 'changeStagedQuoteState', key: 'stagedQuoteState' }])
+        expect.arrayContaining([
+          { action: 'changeStagedQuoteState', key: 'stagedQuoteState' },
+        ])
       )
     })
 
     test('should contain `setSellerComment` action', () => {
       expect(baseActionsList).toEqual(
-        expect.arrayContaining([{ action: 'setSellerComment', key: 'sellerComment' }])
+        expect.arrayContaining([
+          { action: 'setSellerComment', key: 'sellerComment' },
+        ])
       )
     })
 
@@ -46,21 +50,23 @@ describe('Actions', () => {
     const expected = [
       {
         action: 'changeStagedQuoteState',
-        ...now
-      }
+        ...now,
+      },
     ]
     expect(actual).toEqual(expected)
   })
 
   test('should build `setSellerComment` action', () => {
     const before = { sellerComment: '' }
-    const now = { sellerComment: 'let me know if this matches your expectations' }
+    const now = {
+      sellerComment: 'let me know if this matches your expectations',
+    }
     const actual = stagedQuotesSync.buildActions(now, before)
     const expected = [
       {
         action: 'setSellerComment',
-        ...now
-      }
+        ...now,
+      },
     ]
     expect(actual).toEqual(expected)
   })
@@ -72,31 +78,31 @@ describe('Actions', () => {
     const expected = [
       {
         action: 'setValidTo',
-        ...now
-      }
+        ...now,
+      },
     ]
     expect(actual).toEqual(expected)
   })
 
   test('should build `transitionState` action', () => {
     const before = {
-      state : {
-      typeId : 'state',
-      id : 'sid1'
-      }
+      state: {
+        typeId: 'state',
+        id: 'sid1',
+      },
     }
     const now = {
-      state : {
-      typeId : 'state',
-      id : 'sid2'
-      }
+      state: {
+        typeId: 'state',
+        id: 'sid2',
+      },
     }
     const actual = stagedQuotesSync.buildActions(now, before)
     const expected = [
       {
         action: 'transitionState',
-        ...now
-      }
+        ...now,
+      },
     ]
     expect(actual).toEqual(expected)
   })

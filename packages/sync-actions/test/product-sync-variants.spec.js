@@ -1731,5 +1731,83 @@ describe('Actions', () => {
       ]
       expect(actual).toEqual(expected)
     })
+
+    describe('changeAssetOrder', () => {
+      const makeAsset = (asset) => {
+        const base = {
+          sources: [
+            {
+              uri: 'http://example.org/content/product-manual.xml',
+              contentType: 'application/xml',
+            },
+          ],
+        }
+        return {
+          ...base,
+          ...asset,
+        }
+      }
+
+      const makeVariant = (assets) => ({
+        variants: [
+          {
+            id: 1,
+            assets,
+          },
+        ],
+      })
+
+      test('should build "changeAssetOrder" if assets are simply re-ordered', () => {
+        const assetOne = makeAsset({ id: 'asset-one' })
+        const assetTwo = makeAsset({ id: 'asset-two' })
+        const assetThree = makeAsset({ id: 'asset-three' })
+
+        const before = makeVariant([assetOne, assetTwo, assetThree])
+        const now = makeVariant([assetTwo, assetThree, assetOne])
+        const actual = productsSync.buildActions(now, before)
+        const expected = [
+          {
+            action: 'changeAssetOrder',
+            assetOrder: [assetTwo.id, assetThree.id, assetOne.id],
+            variantId: 1,
+          },
+        ]
+        expect(actual).toEqual(expected)
+      })
+
+      test('moves to be deleted assets to the end of the ordering', () => {
+        const assetOne = makeAsset({ id: 'asset-one' })
+        const assetTwo = makeAsset({ id: 'asset-two' })
+        const assetThree = makeAsset({ id: 'asset-three' })
+
+        const before = makeVariant([assetOne, assetTwo, assetThree])
+        const now = makeVariant([assetTwo, assetOne])
+        const actual = productsSync.buildActions(now, before)[0]
+        const expected = {
+          action: 'changeAssetOrder',
+          assetOrder: [assetTwo.id, assetOne.id, assetThree.id],
+          variantId: 1,
+        }
+
+        expect(actual).toEqual(expected)
+      })
+
+      test('ignores to be added assets', () => {
+        const assetOne = makeAsset({ id: 'asset-one' })
+        const assetTwo = makeAsset({ id: 'asset-two' })
+        const assetThree = makeAsset({ id: 'asset-three' })
+
+        const before = makeVariant([assetOne, assetTwo])
+        const now = makeVariant([assetThree, assetTwo, assetOne])
+        const actual = productsSync.buildActions(now, before)[0]
+        const expected = {
+          action: 'changeAssetOrder',
+          assetOrder: [assetTwo.id, assetOne.id],
+          variantId: 1,
+        }
+
+        expect(actual).toEqual(expected)
+      })
+    })
   })
 })

@@ -42,7 +42,7 @@ The HTTP middleware can run in either a browser or Node.js environment. For Node
 13. `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function
 14. `timeout` _(Number)_: Request/response timeout in ms. Must be globally available or passed in `AbortController`
 15. `abortController` or `getAbortController` depending on what you chose to handle the timeout (_abortController_): This property accepts the `AbortController` instance. Could be [abort-controller](https://www.npmjs.com/package/abort-controller) or a globally available one.
-16.  `retryConfig` _(Object)_: Field required in the object listed below
+16. `retryConfig` _(Object)_: Field required in the object listed below
 
 #### Retrying requests
 
@@ -73,12 +73,7 @@ const client = createClient({
         retryDelay: 300, //milliseconds
         maxDelay: 5000, //milliseconds
         retryOnAbort: false,
-        retryCodes: [
-          504,
-          'ETIMEDOUT',
-          'ECONNREFUSED',
-          503
-        ]
+        retryCodes: [504, 'ETIMEDOUT', 'ECONNREFUSED', 503],
       },
 
       // Optional if not globally available

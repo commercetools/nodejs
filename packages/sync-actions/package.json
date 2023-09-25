@@ -43,6 +43,8 @@
     "lodash.isnil": "^4.0.0",
     "lodash.shuffle": "^4.2.0",
     "lodash.sortby": "^4.7.0",
-    "lodash.uniqwith": "^4.5.0"
+    "lodash.uniqwith": "^4.5.0",
+    "lodash.intersection": "^4.4.0",
+    "lodash.without": "^4.4.0"
   }
 }
