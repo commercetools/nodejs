@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.15.0
+
+### Minor Changes
+
+- [#1885](https://github.com/commercetools/nodejs/pull/1885) [`d6cb2740`](https://github.com/commercetools/nodejs/commit/d6cb27401279cb42a49366f32802f8ca8c7f01a3) Thanks [@kafis](https://github.com/kafis)! - Add support for 'changeAssetOrder' in (ProductVariants)[https://docs.commercetools.com/api/projects/products#change-asset-order].
+
 ## 5.14.0
 
 ### Minor Changes
