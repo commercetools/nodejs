@@ -1792,21 +1792,27 @@ describe('Actions', () => {
         expect(actual).toEqual(expected)
       })
 
-      test('ignores to be added assets', () => {
+      test('`changeAssetOrder` ignores newly added assets', () => {
         const assetOne = makeAsset({ id: 'asset-one' })
         const assetTwo = makeAsset({ id: 'asset-two' })
         const assetThree = makeAsset({ id: 'asset-three' })
 
         const before = makeVariant([assetOne, assetTwo])
         const now = makeVariant([assetThree, assetTwo, assetOne])
-        const actual = productsSync.buildActions(now, before)[0]
+        const actual = productsSync.buildActions(now, before)
         const expected = {
           action: 'changeAssetOrder',
           assetOrder: [assetTwo.id, assetOne.id],
           variantId: 1,
         }
 
-        expect(actual).toEqual(expected)
+        expect(actual[0]).toEqual(expected)
+        expect(actual[1]).toEqual({
+          action: 'addAsset',
+          asset: assetThree,
+          variantId: 1,
+          position: 0,
+        })
       })
     })
   })
