@@ -7,4 +7,4 @@
 */
 'use strict'
 
-require('../lib/cli.js')
+require('../dist/cli.js')

@@ -20,9 +20,9 @@ function compose(...funcs: Array<Function>): Function {
   if (funcs.length === 1) return funcs[0]
 
   return funcs.reduce(
-    (a: Function, b: Function): Function => (
-      ...args: Array<Function>
-    ): Array<Function> => a(b(...args))
+    (a: Function, b: Function): Function =>
+      (...args: Array<Function>): Array<Function> =>
+        a(b(...args))
   )
 }
 

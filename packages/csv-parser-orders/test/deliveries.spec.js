@@ -56,7 +56,8 @@ describe('DeliveriesParser', () => {
     test('should return an error with missing headers', () => {
       return new Promise((done) => {
         // eslint-disable-next-line max-len
-        const expectedError = /Required headers missing: 'orderNumber,item\.quantity'/
+        const expectedError =
+          /Required headers missing: 'orderNumber,item\.quantity'/
         const deliveriesParser = new DeliveriesParser()
         const spy = sinon.stub(deliveriesParser.logger, 'error')
         const readStream = streamTestFile('delivery-error-missing-headers.csv')

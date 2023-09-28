@@ -1,1 +1,3 @@
-export { default } from './main'
+import DiscountCodeImport from './main'
+
+export default DiscountCodeImport

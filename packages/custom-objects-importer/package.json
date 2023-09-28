@@ -9,10 +9,13 @@
   "name": "@commercetools/custom-objects-importer",
   "version": "4.0.0",
   "description": "Import custom objects to the commercetools platform",
-  "main": "lib/main.js",
+  "main": "dist/custom-objects-importer.cjs.js",
+  "module": "dist/custom-objects-importer.es.js",
+  "browser": "dist/custom-objects-importer.umd.js",
   "scripts": {
-    "prebuild": "rimraf lib/**",
-    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+    "prebuild": "rimraf dist/**",
+    "build": "yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkClient -i ./src/index.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +30,11 @@
     "json",
     "import",
     "custom"
+  ],
+  "files": [
+    "dist",
+    "readme.md",
+    "package.json"
   ],
   "author": {
     "name": "Daniel Eriksson",

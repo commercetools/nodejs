@@ -128,9 +128,10 @@ export default class StateImport {
     const existingStatesRequest = StateImport._buildRequest(uri, 'GET')
     return this.client
       .execute(existingStatesRequest)
-      .then(({ body: { results: existingStates } }: Object): Promise<
-        Array<void>
-      > => this._createOrUpdate(states, existingStates))
+      .then(
+        ({ body: { results: existingStates } }: Object): Promise<Array<void>> =>
+          this._createOrUpdate(states, existingStates)
+      )
       .then((): Promise<void> => Promise.resolve())
       .catch((error: any): Error => {
         // format error and throw to CLI error handler

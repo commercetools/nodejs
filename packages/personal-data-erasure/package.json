@@ -9,13 +9,17 @@
   "name": "@commercetools/personal-data-erasure",
   "version": "4.0.0",
   "description": "Export and delete all data related to a single customer",
-  "main": "lib/main.js",
+  "main": "dist/personal-data-erasure.cjs.js",
+  "module": "dist/personal-data-erasure.es.js",
+  "browser": "dist/personal-data-erasure.umd.js",
   "bin": {
     "personal-data-erasure": "bin/personal-data-erasure.js"
   },
   "scripts": {
-    "prebuild": "rimraf lib/**",
-    "build": "babel src --out-dir lib --config-file '../../babel.config.js'"
+    "prebuild": "rimraf dist/**",
+    "build": "yarn build:bundles",
+    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkClient -i ./src/index.js",
+    "postbuild": "cross-env NODE_ENV=production rollup -c ../../rollup.cli.config.js -n CommercetoolsSdkClient  -i ./src/cli.js -o dist/cli.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +34,12 @@
     "delete",
     "json",
     "personal-data"
+  ],
+  "files": [
+    "bin",
+    "dist",
+    "readme.md",
+    "package.json"
   ],
   "author": {
     "name": "Daniel Eriksson",
