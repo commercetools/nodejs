@@ -1,15 +1,15 @@
 # Personal Data Erasure
 
-A package which deletes or exports [commercetools personal data](#list-of-personal-data) in `JSON` format from the [commercetools platform](https://docs.commercetools.com/).
+A package which deletes or exports [commercetools personal data](#list-of-personal-data) in `JSON` format from the [commercetools Composable Commerce](https://docs.commercetools.com/docs/composable-commerce).
 
 ## List of personal data
 
-- [Customer](https://docs.commercetools.com/http-api-projects-customers.html)
-- [Orders](https://docs.commercetools.com/http-api-projects-orders.html)
-- [Carts](https://docs.commercetools.com/http-api-projects-carts.html)
-- [Payments](https://docs.commercetools.com/http-api-projects-payments.html)
-- [ShoppingLists](https://docs.commercetools.com/http-api-projects-shoppingLists.html)
-- [Reviews](https://docs.commercetools.com/http-api-projects-reviews.html)
+- [Customers](https://docs.commercetools.com/api/projects/customers)
+- [Orders](https://docs.commercetools.com/api/projects/orders)
+- [Carts](https://docs.commercetools.com/api/projects/carts)
+- [Payments](https://docs.commercetools.com/api/projects/payments)
+- [ShoppingLists](https://docs.commercetools.com/api/projects/shoppingLists)
+- [Reviews](https://docs.commercetools.com/api/projects/reviews)
 
 ## Configuration
 
