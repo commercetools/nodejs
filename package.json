@@ -73,7 +73,7 @@
     "common-tags": "1.8.2",
     "cross-env": "7.0.3",
     "debug": "4.3.2",
-    "eslint": "7.32.0",
+    "eslint": "8.57.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-airbnb-base": "14.2.1",
     "eslint-config-prettier": "6.15.0",
