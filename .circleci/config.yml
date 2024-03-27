@@ -44,16 +44,16 @@ aliases:
 executors:
   node_14:
     docker:
-      - image: cimg/node:14.19.3
+      - image: cimg/node:14.21.3
     working_directory: *working_directory
   node_16:
     docker:
-      - image: cimg/node:16.16.0
+      - image: cimg/node:16.20.2
     working_directory: *working_directory
 
   node_18:
     docker:
-      - image: cimg/node:18.4.0
+      - image: cimg/node:18.20.0
     working_directory: *working_directory
 
 jobs:
