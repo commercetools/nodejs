@@ -8,6 +8,15 @@ import yargs from 'yargs'
 import PriceExporter from './main'
 import { description } from '../package.json'
 
+const doesFileExist = (filePath) => {
+  try {
+    fs.accessSync(filePath)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 process.title = 'price-exporter'
 
 const args = yargs
@@ -22,7 +31,7 @@ ${description}`
     describe: 'Path to CSV template.',
   })
   .coerce('input', (arg) => {
-    if (fs.existsSync(arg)) return fs.createReadStream(String(arg))
+    if (doesFileExist(arg)) return fs.createReadStream(String(arg))
 
     throw new Error('Input file cannot be reached or does not exist')
   })

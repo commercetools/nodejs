@@ -7,6 +7,15 @@ import yargs from 'yargs'
 import CsvParserState from './main'
 import { description } from '../package.json'
 
+const doesFileExist = (filePath) => {
+  try {
+    fs.accessSync(filePath)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 process.title = 'csv-parser-state'
 
 const args = yargs
@@ -44,7 +53,7 @@ Required scopes: ['view_orders']`,
   .coerce('input', (arg) => {
     if (arg === 'stdin') return process.stdin
 
-    if (fs.existsSync(arg)) {
+    if (doesFileExist(arg)) {
       if (arg.match(/\.csv$/i)) return fs.createReadStream(String(arg))
 
       throw new Error('Invalid input file format. Must be CSV file')

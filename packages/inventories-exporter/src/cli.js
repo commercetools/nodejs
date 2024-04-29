@@ -8,6 +8,15 @@ import CONSTANTS from './constants'
 import InventoryExporter from './main'
 import { description } from '../package.json'
 
+const doesFileExist = (filePath) => {
+  try {
+    fs.accessSync(filePath)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 process.title = 'inventories-exporter'
 
 const args = yargs
@@ -76,7 +85,7 @@ can be used with channelKey flag
   .coerce('template', (arg) => {
     const filePath = String(arg)
 
-    if (fs.existsSync(arg)) {
+    if (doesFileExist(arg)) {
       if (arg.match(/\.csv$/i)) return fs.createReadStream(filePath)
 
       throw new Error('Invalid file format of a CSV template. Must be CSV file')
