@@ -30,6 +30,17 @@ describe('Exports', () => {
       )
     })
 
+    test('should contain `setKey` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setKey',
+            key: 'key',
+          },
+        ])
+      )
+    })
+
     test('should contain `setMaxApplications` action', () => {
       expect(baseActionsList).toEqual(
         expect.arrayContaining([
@@ -133,6 +144,24 @@ describe('Actions', () => {
       {
         action: 'setDescription',
         description: { en: 'new-en-description', de: 'new-de-description' },
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build `setKey` action', () => {
+    const before = {
+      key: 'old-key',
+    }
+    const now = {
+      key: 'new-key',
+    }
+
+    const actual = discountCodesSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'setKey',
+        key: 'new-key',
       },
     ]
     expect(actual).toEqual(expected)
