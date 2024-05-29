@@ -240,7 +240,7 @@ describe('buildActions', () => {
           expect(actual).toEqual(expected)
         })
         test('throw error if either argument function arguments are not provided', () => {
-          expect(() => buildActions(null, null)).toThrow();
+          expect(() => buildActions(null, null)).toThrow()
         })
       })
     })

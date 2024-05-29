@@ -3,8 +3,8 @@ import { buildBaseAttributesActions } from './utils/common-actions'
 export const baseActionsList = [
   { action: 'changeStagedQuoteState', key: 'stagedQuoteState' },
   { action: 'setSellerComment', key: 'sellerComment' },
-  { action: 'setValidTo', key: 'validTo'},
-  { action: 'transitionState', key: 'state'},
+  { action: 'setValidTo', key: 'validTo' },
+  { action: 'transitionState', key: 'state' },
 ]
 
 export function actionsMapBase(diff, oldObj, newObj, config = {}) {

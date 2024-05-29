@@ -188,4 +188,3 @@ We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.
 [personal-data-erasure-icon]: https://img.shields.io/npm/v/@commercetools/personal-data-erasure.svg?style=flat-square
 [personal-data-erasure-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/personal-data-erasure
 [personal-data-erasure-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/personal-data-erasure&style=flat-square
-

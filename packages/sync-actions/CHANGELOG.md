@@ -1,5 +1,17 @@
 # @commercetools/sync-actions
 
+## 5.16.0
+
+### Minor Changes
+
+- [#1892](https://github.com/commercetools/nodejs/pull/1892) [`fb03b746`](https://github.com/commercetools/nodejs/commit/fb03b7463a990934d2b11fd17b784af104431cc4) Thanks [@ragafus](https://github.com/ragafus)! - Add support for DiscountCodes `setKey` action.
+
+## 5.15.0
+
+### Minor Changes
+
+- [#1885](https://github.com/commercetools/nodejs/pull/1885) [`d6cb2740`](https://github.com/commercetools/nodejs/commit/d6cb27401279cb42a49366f32802f8ca8c7f01a3) Thanks [@kafis](https://github.com/kafis)! - Add support for 'changeAssetOrder' in (ProductVariants)[https://docs.commercetools.com/api/projects/products#change-asset-order].
+
 ## 5.14.0
 
 ### Minor Changes

@@ -3,7 +3,7 @@ import { buildBaseAttributesActions } from './utils/common-actions'
 export const baseActionsList = [
   { action: 'changeQuoteState', key: 'quoteState' },
   { action: 'requestQuoteRenegotiation', key: 'buyerComment' },
-  { action: 'transitionState', key: 'state'},
+  { action: 'transitionState', key: 'state' },
 ]
 
 export function actionsMapBase(diff, oldObj, newObj, config = {}) {
