@@ -1,6 +1,8 @@
 /* eslint-disable max-len */
 import forEach from 'lodash.foreach'
 import uniqWith from 'lodash.uniqwith'
+import intersection from 'lodash.intersection'
+import without from 'lodash.without'
 import * as diffpatcher from './utils/diffpatcher'
 import extractMatchingPairs from './utils/extract-matching-pairs'
 import actionsMapCustom from './utils/action-map-custom'
@@ -57,6 +59,9 @@ const getIsUpdateAction = (key, resource) =>
 
 const getIsRemoveAction = (key, resource) =>
   REGEX_UNDERSCORE_NUMBER.test(key) && Number(resource[2]) === 0
+
+const getIsItemMovedAction = (key, resource) =>
+  REGEX_UNDERSCORE_NUMBER.test(key) && Number(resource[2]) === 3
 
 function _buildSkuActions(variantDiff, oldVariant) {
   if ({}.hasOwnProperty.call(variantDiff, 'sku')) {
@@ -401,6 +406,30 @@ function toVariantIdentifier(variant) {
   return id ? { variantId: id } : { sku }
 }
 
+function _buildVariantChangeAssetOrderAction(
+  diffAssets,
+  oldVariant,
+  newVariant
+) {
+  const isAssetOrderChanged = Object.entries(diffAssets).find((entry) =>
+    getIsItemMovedAction(entry[0], entry[1])
+  )
+  if (!isAssetOrderChanged) {
+    return []
+  }
+  const assetIdsBefore = oldVariant.assets.map((_) => _.id)
+  const assetIdsCurrent = newVariant.assets
+    .map((_) => _.id)
+    .filter((_) => _ !== undefined)
+  const assetIdsToKeep = intersection(assetIdsCurrent, assetIdsBefore)
+  const assetIdsToRemove = without(assetIdsBefore, ...assetIdsToKeep)
+  const changeAssetOrderAction = {
+    action: 'changeAssetOrder',
+    assetOrder: assetIdsToKeep.concat(assetIdsToRemove),
+    ...toVariantIdentifier(oldVariant),
+  }
+  return [changeAssetOrderAction]
+}
 function _buildVariantAssetsActions(diffAssets, oldVariant, newVariant) {
   const assetActions = []
 
@@ -478,7 +507,12 @@ function _buildVariantAssetsActions(diffAssets, oldVariant, newVariant) {
     }
   })
 
-  return assetActions
+  const changedAssetOrderAction = _buildVariantChangeAssetOrderAction(
+    diffAssets,
+    oldVariant,
+    newVariant
+  )
+  return [...changedAssetOrderAction, ...assetActions]
 }
 
 /**

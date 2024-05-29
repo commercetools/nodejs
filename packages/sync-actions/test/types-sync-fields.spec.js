@@ -48,6 +48,44 @@ describe('Actions', () => {
       )
     })
   })
+  describe('change InputHint', () => {
+    beforeEach(() => {
+      before = createTestType({
+        fieldDefinitions: [
+          {
+            type: { name: 'text' },
+            name: 'name-field-definition',
+            label: {
+              en: 'EN field definition',
+            },
+            inputHint: 'SingleLine',
+          },
+        ],
+      })
+      now = createTestType({
+        fieldDefinitions: [
+          {
+            type: { name: 'text' },
+            name: 'name-field-definition',
+            label: {
+              en: 'EN field definition',
+            },
+            inputHint: 'MultipleLine',
+          },
+        ],
+      })
+      updateActions = typesSync.buildActions(now, before)
+    })
+    test('should return `changeInputHint` action', () => {
+      expect(updateActions).toEqual(
+        now.fieldDefinitions.map((fieldDefinition) => ({
+          action: 'changeInputHint',
+          fieldName: fieldDefinition.name,
+          inputHint: 'MultipleLine',
+        }))
+      )
+    })
+  })
   describe('with fieldDefinitions removed', () => {
     beforeEach(() => {
       before = createTestType({
@@ -110,7 +148,7 @@ describe('Actions', () => {
       expect(updateActions).toEqual([
         {
           action: 'changeFieldDefinitionOrder',
-          fieldNames: [{ name: 'second' }, { name: 'first' }],
+          fieldNames: ['second', 'first'],
         },
       ])
     })
@@ -334,6 +372,37 @@ describe('Actions', () => {
           },
         },
       ])
+    })
+  })
+
+  /**
+   * there is no update action for fieldDefinition -> required,
+   * so this field is immutable and unchangeable.
+   * in case of changing it, this were throwing `Cannot read properties of undefined` cause its nested field.
+   * below test is making sure this field is ignored and without any internal package errors.
+   */
+  describe('should ignore changes in required field in fieldDefinition', () => {
+    beforeEach(() => {
+      before = createTestType({
+        fieldDefinitions: [
+          {
+            name: 'first',
+            required: true,
+          },
+        ],
+      })
+      now = createTestType({
+        fieldDefinitions: [
+          {
+            name: 'first',
+            required: false,
+          },
+        ],
+      })
+      updateActions = typesSync.buildActions(now, before)
+    })
+    test('should return no action', () => {
+      expect(updateActions).toEqual([])
     })
   })
 })

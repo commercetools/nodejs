@@ -116,6 +116,78 @@ describe('Actions', () => {
     ])
   })
 
+  test('should handle long text values performantly', () => {
+    const longText = 'a'.repeat(10_000)
+    const longText2 = 'b'.repeat(10_000)
+    const before = {
+      id: '123',
+      masterVariant: {
+        id: 1,
+        attributes: [
+          { name: 'color', value: longText },
+          { name: 'size', value: longText },
+          { name: 'weight', value: longText },
+        ],
+      },
+      variants: [
+        {
+          id: 2,
+          attributes: [
+            { name: 'color', value: longText },
+            { name: 'size', value: longText },
+            { name: 'weight', value: longText },
+          ],
+        },
+      ],
+    }
+
+    const now = {
+      id: '123',
+      masterVariant: {
+        id: 1,
+        attributes: [
+          { name: 'color', value: longText2 },
+          { name: 'size', value: longText2 },
+          { name: 'weight', value: longText2 },
+        ],
+      },
+      variants: [
+        {
+          id: 2,
+          attributes: [
+            { name: 'color', value: longText2 },
+            { name: 'size', value: longText2 },
+            { name: 'weight', value: longText2 },
+          ],
+        },
+      ],
+    }
+
+    const startTime = Date.now()
+    const actions = productsSync.buildActions(now, before)
+
+    // Should take less than 100ms.
+    expect(Date.now() - startTime).toBeLessThan(100)
+    expect(actions).toEqual([
+      { action: 'setAttribute', variantId: 1, name: 'color', value: longText2 },
+      { action: 'setAttribute', variantId: 1, name: 'size', value: longText2 },
+      {
+        action: 'setAttribute',
+        variantId: 1,
+        name: 'weight',
+        value: longText2,
+      },
+      { action: 'setAttribute', variantId: 2, name: 'color', value: longText2 },
+      { action: 'setAttribute', variantId: 2, name: 'size', value: longText2 },
+      {
+        action: 'setAttribute',
+        variantId: 2,
+        name: 'weight',
+        value: longText2,
+      },
+    ])
+  })
+
   test('should build SameForAll attribute actions', () => {
     const before = {
       id: '123',
@@ -1658,6 +1730,90 @@ describe('Actions', () => {
         },
       ]
       expect(actual).toEqual(expected)
+    })
+
+    describe('changeAssetOrder', () => {
+      const makeAsset = (asset) => {
+        const base = {
+          sources: [
+            {
+              uri: 'http://example.org/content/product-manual.xml',
+              contentType: 'application/xml',
+            },
+          ],
+        }
+        return {
+          ...base,
+          ...asset,
+        }
+      }
+
+      const makeVariant = (assets) => ({
+        variants: [
+          {
+            id: 1,
+            assets,
+          },
+        ],
+      })
+
+      test('should build "changeAssetOrder" if assets are simply re-ordered', () => {
+        const assetOne = makeAsset({ id: 'asset-one' })
+        const assetTwo = makeAsset({ id: 'asset-two' })
+        const assetThree = makeAsset({ id: 'asset-three' })
+
+        const before = makeVariant([assetOne, assetTwo, assetThree])
+        const now = makeVariant([assetTwo, assetThree, assetOne])
+        const actual = productsSync.buildActions(now, before)
+        const expected = [
+          {
+            action: 'changeAssetOrder',
+            assetOrder: [assetTwo.id, assetThree.id, assetOne.id],
+            variantId: 1,
+          },
+        ]
+        expect(actual).toEqual(expected)
+      })
+
+      test('moves to be deleted assets to the end of the ordering', () => {
+        const assetOne = makeAsset({ id: 'asset-one' })
+        const assetTwo = makeAsset({ id: 'asset-two' })
+        const assetThree = makeAsset({ id: 'asset-three' })
+
+        const before = makeVariant([assetOne, assetTwo, assetThree])
+        const now = makeVariant([assetTwo, assetOne])
+        const actual = productsSync.buildActions(now, before)[0]
+        const expected = {
+          action: 'changeAssetOrder',
+          assetOrder: [assetTwo.id, assetOne.id, assetThree.id],
+          variantId: 1,
+        }
+
+        expect(actual).toEqual(expected)
+      })
+
+      test('`changeAssetOrder` ignores newly added assets', () => {
+        const assetOne = makeAsset({ id: 'asset-one' })
+        const assetTwo = makeAsset({ id: 'asset-two' })
+        const assetThree = makeAsset({ id: 'asset-three' })
+
+        const before = makeVariant([assetOne, assetTwo])
+        const now = makeVariant([assetThree, assetTwo, assetOne])
+        const actual = productsSync.buildActions(now, before)
+        const expected = {
+          action: 'changeAssetOrder',
+          assetOrder: [assetTwo.id, assetOne.id],
+          variantId: 1,
+        }
+
+        expect(actual[0]).toEqual(expected)
+        expect(actual[1]).toEqual({
+          action: 'addAsset',
+          asset: assetThree,
+          variantId: 1,
+          position: 0,
+        })
+      })
     })
   })
 })

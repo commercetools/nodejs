@@ -198,16 +198,14 @@ describe('Actions', () => {
             assets: [],
             images: [
               {
-                url:
-                  'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/Screen+Shot+2017-04--LOx1OrZZ.png',
+                url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/Screen+Shot+2017-04--LOx1OrZZ.png',
                 dimensions: {
                   w: 1456,
                   h: 1078,
                 },
               },
               {
-                url:
-                  'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/cactus-with-surfboar-BmOeVZEZ.jpg',
+                url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/cactus-with-surfboar-BmOeVZEZ.jpg',
                 label: 'cactus',
                 dimensions: {
                   w: 602,
@@ -245,8 +243,7 @@ describe('Actions', () => {
           sku: '89978FRU',
           images: [
             {
-              url:
-                'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/cactus-with-surfboar-BmOeVZEZ.jpg',
+              url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/cactus-with-surfboar-BmOeVZEZ.jpg',
               label: 'cactus',
               dimensions: {
                 w: 602,
@@ -254,8 +251,7 @@ describe('Actions', () => {
               },
             },
             {
-              url:
-                'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/Screen+Shot+2017-04--LOx1OrZZ.png',
+              url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/Screen+Shot+2017-04--LOx1OrZZ.png',
               dimensions: {
                 w: 1456,
                 h: 1078,
@@ -353,16 +349,14 @@ describe('Actions', () => {
             prices: [],
             images: [
               {
-                url:
-                  'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/Screen+Shot+2017-04--LOx1OrZZ.png',
+                url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/Screen+Shot+2017-04--LOx1OrZZ.png',
                 dimensions: {
                   w: 1456,
                   h: 1078,
                 },
               },
               {
-                url:
-                  'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/cactus-with-surfboar-BmOeVZEZ.jpg',
+                url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/cactus-with-surfboar-BmOeVZEZ.jpg',
                 label: 'cactus',
                 dimensions: {
                   w: 602,
@@ -402,8 +396,7 @@ describe('Actions', () => {
           prices: [],
           images: [
             {
-              url:
-                'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/cactus-with-surfboar-BmOeVZEZ.jpg',
+              url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/cactus-with-surfboar-BmOeVZEZ.jpg',
               label: 'cactus',
               dimensions: {
                 w: 602,
