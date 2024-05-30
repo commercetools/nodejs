@@ -12,10 +12,7 @@ import actionsMapCustom from './utils/action-map-custom'
 import * as QuoteRequestsActions from './quote-requests-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
-const actionGroups = [
-  'base',
-  'custom',
-]
+const actionGroups = ['base', 'custom']
 
 function createQuoteRequestsMapActions(
   mapActionGroup: Function,
@@ -29,7 +26,7 @@ function createQuoteRequestsMapActions(
   return function doMapActions(
     diff: Object,
     newObj: Object,
-    oldObj: Object,
+    oldObj: Object
   ): Array<UpdateAction> {
     const allActions = []
 
@@ -59,12 +56,12 @@ export default (
   syncActionConfig: SyncActionConfig
 ): SyncAction => {
   const mapActionGroup = createMapActionGroup(actionGroupList)
-  const doMapActions = createQuoteRequestsMapActions(mapActionGroup, syncActionConfig)
-
-  const buildActions = createBuildActions(
-    diffpatcher.diff,
-    doMapActions,
+  const doMapActions = createQuoteRequestsMapActions(
+    mapActionGroup,
+    syncActionConfig
   )
+
+  const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
 
   return { buildActions }
 }

@@ -2,46 +2,45 @@
 import flatten from 'lodash.flatten'
 import type {
   SyncAction,
-  SyncActionConfig,
   ActionGroup,
   UpdateAction,
+  SyncActionConfig,
 } from 'types/sdk'
+import * as attributeGroupsActions from './attribute-groups-actions'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
-import actionsMapCustom from './utils/action-map-custom'
-import * as QuotesActions from './quotes-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
-const actionGroups = ['base', 'custom']
-
-function createQuotesMapActions(
-  mapActionGroup: Function,
+function createAttributeGroupsMapActions(
+  mapActionGroup: (
+    type: string,
+    fn: () => Array<UpdateAction>
+  ) => Array<UpdateAction>,
   syncActionConfig: SyncActionConfig
-): (
-  diff: Object,
-  newObj: Object,
-  oldObj: Object,
-  options: Object
-) => Array<UpdateAction> {
+): (diff: Object, newObj: Object, oldObj: Object) => Array<UpdateAction> {
   return function doMapActions(
     diff: Object,
     newObj: Object,
     oldObj: Object
   ): Array<UpdateAction> {
     const allActions = []
-
     allActions.push(
       mapActionGroup('base', (): Array<UpdateAction> =>
-        QuotesActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
+        attributeGroupsActions.actionsMapBase(
+          diff,
+          oldObj,
+          newObj,
+          syncActionConfig
+        )
       )
     )
-
     allActions.push(
-      mapActionGroup('custom', (): Array<UpdateAction> =>
-        actionsMapCustom(diff, newObj, oldObj)
+      flatten(
+        mapActionGroup('attributes', (): Array<UpdateAction> =>
+          attributeGroupsActions.actionsMapAttributes(diff, oldObj, newObj)
+        )
       )
     )
-
     return flatten(allActions)
   }
 }
@@ -51,11 +50,10 @@ export default (
   syncActionConfig: SyncActionConfig
 ): SyncAction => {
   const mapActionGroup = createMapActionGroup(actionGroupList)
-  const doMapActions = createQuotesMapActions(mapActionGroup, syncActionConfig)
-
+  const doMapActions = createAttributeGroupsMapActions(
+    mapActionGroup,
+    syncActionConfig
+  )
   const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
-
   return { buildActions }
 }
-
-export { actionGroups }

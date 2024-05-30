@@ -1,5 +1,4 @@
 /* @flow */
-import flatten from 'lodash.flatten'
 import type {
   SyncAction,
   SyncActionConfig,
@@ -11,11 +10,9 @@ import createMapActionGroup from './utils/create-map-action-group'
 import actionsMapCustom from './utils/action-map-custom'
 import * as pricesActions from './prices-actions'
 import * as diffpatcher from './utils/diffpatcher'
+import combineValidityActions from './utils/combine-validity-actions'
 
-const actionGroups = [
-  'base',
-  'custom',
-]
+const actionGroups = ['base', 'custom']
 
 function createPriceMapActions(
   mapActionGroup: Function,
@@ -29,28 +26,17 @@ function createPriceMapActions(
   return function doMapActions(
     diff: Object,
     newObj: Object,
-    oldObj: Object,
+    oldObj: Object
   ): Array<UpdateAction> {
-    const allActions = []
-
-    allActions.push(
-      mapActionGroup('base', (): Array<UpdateAction> =>
-        pricesActions.actionsMapBase(
-          diff,
-          oldObj,
-          newObj,
-          syncActionConfig
-        )
-      )
+    const baseActions = mapActionGroup('base', (): Array<UpdateAction> =>
+      pricesActions.actionsMapBase(diff, oldObj, newObj, syncActionConfig)
     )
 
-    allActions.push(
-      mapActionGroup('custom', (): Array<UpdateAction> =>
-        actionsMapCustom(diff, newObj, oldObj)
-      )
+    const customActions = mapActionGroup('custom', (): Array<UpdateAction> =>
+      actionsMapCustom(diff, newObj, oldObj)
     )
 
-    return flatten(allActions)
+    return combineValidityActions([...baseActions, ...customActions])
   }
 }
 
@@ -61,10 +47,7 @@ export default (
   const mapActionGroup = createMapActionGroup(actionGroupList)
   const doMapActions = createPriceMapActions(mapActionGroup, syncActionConfig)
 
-  const buildActions = createBuildActions(
-    diffpatcher.diff,
-    doMapActions,
-  )
+  const buildActions = createBuildActions(diffpatcher.diff, doMapActions)
 
   return { buildActions }
 }

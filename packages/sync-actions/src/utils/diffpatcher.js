@@ -20,11 +20,14 @@ const diffpatcher = new DiffPatcher({
     includeValueOnMove: false,
   },
   textDiff: {
-    // If the value to diff has a bigger length,
-    // a text diffing algorithm is used
-    // See https://github.com/benjamine/jsondiffpatch/
-    // blob/master/docs/deltas.md#text-diffs
-    minLength: 300,
+    /**
+     * jsondiffpatch uses a very fine-grained diffing algorithm for long strings to easily identify
+     * what changed between strings. However, we don't actually care about what changed, just
+     * if the string changed at all. So we set the minimum length to diff to a very large number to avoid
+     * using the very slow algorithm.
+     * See https://github.com/benjamine/jsondiffpatch/blob/master/docs/deltas.md#text-diffs.
+     */
+    minLength: Number.MAX_SAFE_INTEGER,
   },
 })
 

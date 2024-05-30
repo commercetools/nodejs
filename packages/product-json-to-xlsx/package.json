@@ -7,7 +7,7 @@
     "node": ">=14"
   },
   "name": "@commercetools/product-json-to-xlsx",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "Converts commercetools products from JSON to XLSX",
   "keywords": [
     "commercetools",
@@ -46,7 +46,7 @@
     "@commercetools/get-credentials": "^4.0.0",
     "@commercetools/product-json-to-csv": "^6.0.0",
     "common-tags": "^1.8.0",
-    "exceljs": "^3.0.0",
+    "exceljs": "^4.0.0",
     "highland": "^2.13.0",
     "pino": "^6.0.0",
     "pretty-error": "^2.1.1",

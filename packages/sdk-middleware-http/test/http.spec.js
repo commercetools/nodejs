@@ -47,7 +47,11 @@ describe('Http', () => {
 
   test('throw when a non-array option is passed as retryCodes in the httpMiddlewareOptions', () => {
     expect(() => {
-      createHttpMiddleware({ host: testHost, retryConfig: { retryCodes: null }, fetch })
+      createHttpMiddleware({
+        host: testHost,
+        retryConfig: { retryCodes: null },
+        fetch,
+      })
     }).toThrow(
       new Error(
         '`retryCodes` option must be an array of retry status (error) codes.'
@@ -707,9 +711,7 @@ describe('Http', () => {
           retryConfig: {
             maxRetries: 2,
             retryDelay: 300,
-            retryCodes: [
-              500, 501, 502
-            ],
+            retryCodes: [500, 501, 502],
           },
           fetch,
         }
@@ -739,15 +741,13 @@ describe('Http', () => {
           retryConfig: {
             maxRetries: 2,
             retryDelay: 300,
-            retryCodes: [
-              'ETIMEDOUT', 'ECONNREFUSED', 'write EPIPE'
-            ]
+            retryCodes: ['ETIMEDOUT', 'ECONNREFUSED', 'write EPIPE'],
           },
           fetch,
         })
         nock(testHost)
           .defaultReplyHeaders({
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           })
           .persist()
           .get('/foo/bar')
@@ -776,15 +776,13 @@ describe('Http', () => {
           retryConfig: {
             maxRetries: 2,
             retryDelay: 300,
-            retryCodes: [
-              'ETIMEDOUT', 503, 502, 'ECONNREFUSED', 'write EPIPE'
-            ]
+            retryCodes: ['ETIMEDOUT', 503, 502, 'ECONNREFUSED', 'write EPIPE'],
           },
           fetch,
         })
         nock(testHost)
           .defaultReplyHeaders({
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           })
           .persist()
           .get('/foo/bar')
@@ -886,7 +884,6 @@ describe('Http', () => {
         httpMiddleware(next)(request, response)
       }))
 
-
     test(
       'should toggle `exponential backoff` off',
       () =>
@@ -962,6 +959,93 @@ describe('Http', () => {
           .reply(404)
 
         httpMiddleware(next)(request, response)
+      }))
+  })
+
+  describe('promise rejection error', () => {
+    test('handle failed response - (server error)', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          const expectedError = new Error('oops')
+          expectedError.body = {
+            message: 'oops',
+          }
+          expectedError.code = 500
+          expectedError.statusCode = 500
+          expectedError.headers = {
+            'content-type': 'application/json',
+          }
+
+          expect(res.error.statusCode).toEqual(0)
+          expect(res.error.retryCount).toEqual(2)
+          expect(res.error.name).toEqual('NetworkError')
+
+          resolve()
+        }
+        const httpMiddleware = createHttpMiddleware({
+          host: testHost,
+          enableRetry: true,
+          credentialsMode: 'include',
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+          },
+          fetch,
+        })
+        nock(testHost)
+          .defaultReplyHeaders({
+            'Content-Type': 'application/json',
+          })
+          .get('/foo/bar')
+          .reply(500, { message: 'Internal server error' })
+
+        httpMiddleware(next)(request, { ...response })
+      }))
+
+    test('handle failed response - (server error) - ', () =>
+      new Promise((resolve, reject) => {
+        const request = createTestRequest({
+          uri: '/foo/bar',
+        })
+        const response = { resolve, reject }
+        const next = (req, res) => {
+          const expectedError = new Error('oops')
+          expectedError.body = {
+            message: 'oops',
+          }
+          expectedError.code = 0
+          expectedError.statusCode = 0
+          expectedError.headers = {
+            'content-type': 'application/json',
+          }
+
+          expect(res.error.code).toEqual(500)
+          expect(res.error.name).toEqual('InternalServerError')
+
+          resolve()
+        }
+        const httpMiddleware = createHttpMiddleware({
+          host: testHost,
+          enableRetry: false,
+          credentialsMode: 'include',
+          retryConfig: {
+            maxRetries: 2,
+            retryDelay: 300,
+          },
+          fetch,
+        })
+        nock(testHost)
+          .defaultReplyHeaders({
+            'Content-Type': 'application/json',
+          })
+          .get('/foo/bar')
+          .reply(400, { message: 'Internal server error' })
+
+        httpMiddleware(next)(request, { ...response, text: (e) => reject(e) })
       }))
   })
 
@@ -1490,6 +1574,78 @@ describe('Http', () => {
         .get('/foo/bar')
         .delay(150) // delay response to fail (higher than timeout)
         .reply(200, { foo: 'bar' })
+
+      httpMiddleware(next)(request, response)
+    })
+  })
+
+  test('should handle error when parsing an invalid response object', () => {
+    expect(true).toEqual(true)
+    return new Promise((resolve, reject) => {
+
+      const response = { resolve, reject }
+      const request = createTestRequest({ uri: '/foo/bar' })
+
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          error: expect.any(Error),
+          statusCode: 0
+        })
+        resolve()
+      }
+
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        enableRetry: false,
+        fetch: jest.fn(() =>
+          Promise.resolve({
+            ok: true,
+            text: jest.fn(() =>
+              Promise.reject(new Error('malformed response'))
+            )
+          }))
+      })
+
+      httpMiddleware(next)(request, response)
+    })
+  })
+
+  test('should handle error when parsing an invalid response object - retry', () => {
+    expect(true).toEqual(true)
+    return new Promise((resolve, reject) => {
+
+      const response = { resolve, reject }
+      const request = createTestRequest({ uri: '/foo/bar' })
+
+      const next = (req, res) => {
+        expect(res).toEqual({
+          ...response,
+          error: expect.any(Error),
+          statusCode: 0
+        })
+        resolve()
+      }
+
+      // Use default options
+      const httpMiddleware = createHttpMiddleware({
+        host: testHost,
+        enableRetry: true,
+        credentialsMode: 'omit',
+        retryConfig: {
+          maxRetries: 2,
+          retryDelay: 100,
+          backoff: false,
+        },
+        fetch: jest.fn(() =>
+          Promise.resolve({
+            ok: true,
+            text: jest.fn(() =>
+              Promise.reject(new Error('malformed response'))
+            )
+          }))
+      })
 
       httpMiddleware(next)(request, response)
     })

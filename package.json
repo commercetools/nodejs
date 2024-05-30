@@ -68,7 +68,7 @@
     "babel-eslint": "10.1.0",
     "babel-jest": "26.6.3",
     "check-node-version": "4.2.1",
-    "codecov": "3.8.2",
+    "codecov": "^3.8.3",
     "commitizen": "4.2.4",
     "common-tags": "1.8.2",
     "cross-env": "7.0.3",
