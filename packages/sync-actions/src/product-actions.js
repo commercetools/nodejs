@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import forEach from 'lodash.foreach'
 import uniqWith from 'lodash.uniqwith'
+// eslint-disable-next-line import/no-unresolved
 import intersection from 'lodash.intersection'
 import without from 'lodash.without'
 import * as diffpatcher from './utils/diffpatcher'

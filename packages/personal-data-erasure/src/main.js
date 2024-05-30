@@ -114,32 +114,32 @@ export default class PersonalDataErasure {
           { accumulate: true }
         )
       })
-    ).then(async (responses: Array<Array<AllData>>): Promise<
-      Array<AllData>
-    > => {
-      const flattenedResponses = flatten(responses)
+    ).then(
+      async (responses: Array<Array<AllData>>): Promise<Array<AllData>> => {
+        const flattenedResponses = flatten(responses)
 
-      let results = flatten(
-        flattenedResponses.map(
-          (response: ClientResponse): Array<ClientResult> | void =>
-            response.body?.results
+        let results = flatten(
+          flattenedResponses.map(
+            (response: ClientResponse): Array<ClientResult> | void =>
+              response.body?.results
+          )
         )
-      )
-      const ids = results.map((result: AllData): string => result.id)
+        const ids = results.map((result: AllData): string => result.id)
 
-      if (ids.length > 0) {
-        const reference = PersonalDataErasure.buildReference(ids)
-        const messagesUri = requestBuilder.messages.where(reference).build()
-        const request = PersonalDataErasure.buildRequest(messagesUri, 'GET')
+        if (ids.length > 0) {
+          const reference = PersonalDataErasure.buildReference(ids)
+          const messagesUri = requestBuilder.messages.where(reference).build()
+          const request = PersonalDataErasure.buildRequest(messagesUri, 'GET')
 
-        const messages = await this._getAllMessages(request)
+          const messages = await this._getAllMessages(request)
 
-        results = [...messages, ...results]
+          results = [...messages, ...results]
+        }
+        this.logger.info('Export operation completed successfully')
+
+        return Promise.resolve(results)
       }
-      this.logger.info('Export operation completed successfully')
-
-      return Promise.resolve(results)
-    })
+    )
   }
 
   async _getAllMessages(request: ClientRequest): Promise<Messages> {

@@ -44,36 +44,33 @@ describe('Password Flow', () => {
       })
       const request = createTestRequest({
         headers: {
-          Authorization: 'bearer xxxx'
-        }
+          Authorization: 'bearer xxxx',
+        },
       })
       const response = {
         resolve,
         reject,
       }
       const next = jest.fn().mockImplementation((actualParams) => {
-        expect(actualParams)
-          .toEqual({
-            url: '',
-            method: 'GET',
-            body: null,
-            headers: {
-              Authorization: 'bearer xxxx'
-            }
-          })
+        expect(actualParams).toEqual({
+          url: '',
+          method: 'GET',
+          body: null,
+          headers: {
+            Authorization: 'bearer xxxx',
+          },
+        })
         expect(next).toHaveBeenCalledTimes(1)
         expect(authMiddlewareBase).toHaveBeenCalledTimes(0)
         resolve()
         jest.unmock('../src/base-auth-flow')
       })
       const middlewareOptions = createTestMiddlewareOptions()
-      const authMiddleware = createAuthMiddlewareForPasswordFlow(
-        middlewareOptions
-      )
+      const authMiddleware =
+        createAuthMiddlewareForPasswordFlow(middlewareOptions)
 
       authMiddleware(next)(request, response)
-    })
-  )
+    }))
   test('should call the base-auth-flow method with the right params', () =>
     new Promise((resolve, reject) => {
       authMiddlewareBase.mockImplementation((params, next) => {
@@ -89,8 +86,7 @@ describe('Password Flow', () => {
           request,
           response,
           pendingTasks: [],
-          url:
-            'https://auth.europe-west1.gcp.commercetools.com/oauth/foo/customers/token',
+          url: 'https://auth.europe-west1.gcp.commercetools.com/oauth/foo/customers/token',
           basicAuth: 'MTIzOnNlY3JldA==',
         })
         expect(authMiddlewareBase).toHaveBeenCalledTimes(1)
@@ -98,9 +94,8 @@ describe('Password Flow', () => {
         resolve()
       }
       const middlewareOptions = createTestMiddlewareOptions()
-      const authMiddleware = createAuthMiddlewareForPasswordFlow(
-        middlewareOptions
-      )
+      const authMiddleware =
+        createAuthMiddlewareForPasswordFlow(middlewareOptions)
 
       authMiddleware(next)(request, response)
     }))
