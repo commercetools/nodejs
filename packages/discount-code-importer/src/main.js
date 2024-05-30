@@ -146,13 +146,14 @@ export default class DiscountCodeImport {
       .then((): Promise<void> => Promise.resolve())
       .catch(
         // eslint-disable-next-line
-        (caughtError): Object =>
-          new DiscountCodeImportError(
+        (caughtError): Object => {
+          this.logger.error(caughtError.message || caughtError)
+          return new DiscountCodeImportError(
             'Processing batches failed',
             caughtError.message || caughtError,
             this._summary
-          )
-      )
+          );
+        })
   }
 
   _createOrUpdate(

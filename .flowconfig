@@ -49,6 +49,7 @@
 .*/node_modules/webpack.*
 .*/node_modules/worker-farm/.*
 .*/node_modules/yargs.*
+.*/node_modules/.*/malformed_package_json/package.json
 
 [include]
 packages/*/src

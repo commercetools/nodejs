@@ -88,6 +88,145 @@ describe('Actions', () => {
       ]
       expect(actual).toEqual(expected)
     })
+    test('should build `setDeliveryItems` action', () => {
+      const before = {
+        shippingInfo: {
+          deliveries: [
+            {
+              id: 'delivery-1',
+              items: [
+                { id: 'li-1', qty: 1 },
+                { id: 'li-2', qty: 2 },
+              ],
+              parcels: [],
+            },
+          ],
+        },
+      }
+      const now = {
+        shippingInfo: {
+          deliveries: [
+            {
+              id: 'delivery-1',
+              items: [{ id: 'li-2', qty: 2 }],
+              parcels: [],
+            },
+          ],
+        },
+      }
+
+      const actual = orderSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'setDeliveryItems',
+          items: now.shippingInfo.deliveries[0].items,
+          deliveryId: now.shippingInfo.deliveries[0].id,
+          deliveryKey: undefined,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+    test('should build multiple `setDeliveryItems` action', () => {
+      const before = {
+        shippingInfo: {
+          deliveries: [
+            {
+              id: 'delivery-1',
+              items: [
+                { id: 'li-1', qty: 1 },
+                { id: 'li-2', qty: 2 },
+              ],
+              parcels: [],
+            },
+            {
+              id: 'delivery-2',
+              items: [],
+              parcels: [],
+            },
+          ],
+        },
+      }
+      const now = {
+        shippingInfo: {
+          deliveries: [
+            {
+              id: 'delivery-1',
+              items: [{ id: 'li-2', qty: 2 }],
+              parcels: [],
+            },
+            {
+              id: 'delivery-2',
+              items: [
+                { id: 'li-1', qty: 1 },
+                { id: 'li-2', qty: 2 },
+              ],
+              parcels: [],
+            },
+          ],
+        },
+      }
+
+      const actual = orderSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'setDeliveryItems',
+          items: now.shippingInfo.deliveries[0].items,
+          deliveryId: now.shippingInfo.deliveries[0].id,
+          deliveryKey: undefined,
+        },
+        {
+          action: 'setDeliveryItems',
+          items: now.shippingInfo.deliveries[1].items,
+          deliveryId: now.shippingInfo.deliveries[1].id,
+          deliveryKey: undefined,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+    describe('performance test', () => {
+      it('should be performant for large arrays', () => {
+        const before = {
+          shippingInfo: {
+            deliveries: Array(100)
+              .fill(null)
+              .map((a, index) => ({
+                parcels: [],
+                items: Array(50)
+                  .fill(null)
+                  .map((b, index2) => {
+                    return {
+                      id: `id-${index}-${index2}`,
+                      qty: 1,
+                    }
+                  }),
+              })),
+          },
+        }
+        const now = {
+          shippingInfo: {
+            deliveries: Array(100)
+              .fill(null)
+              .map((a, index) => ({
+                parcels: [],
+                items: Array(50)
+                  .fill(null)
+                  .map((b, index2) => {
+                    return {
+                      id: `id-${index}-${index2}`,
+                      qty: 2,
+                    }
+                  }),
+              })),
+          },
+        }
+
+        const start = performance.now()
+        orderSync.buildActions(now, before)
+        const end = performance.now()
+
+        expect(end - start).toBeLessThan(500)
+      })
+    })
   })
 
   describe('parcels', () => {
@@ -692,7 +831,7 @@ describe('Actions', () => {
           orderSync.buildActions(now, before)
           const end = performance.now()
 
-          expect(end - start).toBeLessThan(400)
+          expect(end - start).toBeLessThan(500)
         })
       })
     })

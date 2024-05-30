@@ -2,6 +2,7 @@ import forEach from 'lodash.foreach'
 import flatten from 'lodash.flatten'
 import sortBy from 'lodash.sortby'
 
+import isEqual from 'lodash.isequal'
 import createBuildArrayActions, {
   ADD_ACTIONS,
   CHANGE_ACTIONS,
@@ -31,9 +32,19 @@ export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   })
 }
 
-function actionsMapEnums(fieldName, attributeType, attributeDiff, previous, next) {
+function actionsMapEnums(
+  fieldName,
+  attributeType,
+  attributeDiff,
+  previous,
+  next
+) {
   const addEnumActionName =
     attributeType === 'Enum' ? 'addEnumValue' : 'addLocalizedEnumValue'
+  const changeEnumValueLabelActionName =
+    attributeType === 'Enum'
+      ? 'changeEnumValueLabel'
+      : 'changeLocalizedEnumValueLabel'
   const changeEnumOrderActionName =
     attributeType === 'Enum'
       ? 'changeEnumValueOrder'
@@ -55,11 +66,31 @@ function actionsMapEnums(fieldName, attributeType, attributeDiff, previous, next
       // to the client.
       const changeActions = []
       if (oldEnumInNext) {
-        changeActions.push({
-          fieldName,
-          action: changeEnumOrderActionName,
-          value: newEnum,
-        })
+        // If the enum value is changed, we need to change the order first
+        const isKeyChanged = oldEnum.key !== newEnum.key
+
+        // check if the label is changed
+        const foundPreviousEnum = previous.values.find(
+          (previousEnum) => previousEnum.key === newEnum.key
+        )
+        const isLabelEqual = isEqual(foundPreviousEnum.label, newEnum.label)
+
+        if (isKeyChanged) {
+          // these actions is then flatten in the end
+          changeActions.push({
+            fieldName,
+            action: changeEnumOrderActionName,
+            value: newEnum,
+          })
+        }
+
+        if (!isLabelEqual) {
+          changeActions.push({
+            fieldName,
+            action: changeEnumValueLabelActionName,
+            value: newEnum,
+          })
+        }
       } else {
         changeActions.push({
           fieldName,
@@ -74,12 +105,12 @@ function actionsMapEnums(fieldName, attributeType, attributeDiff, previous, next
   const actions = []
   // following lists are necessary to ensure that when we change the
   // order of enumValues, we generate one updateAction instead of one at a time.
-  const newEnumValuesOrder = []
+  let newEnumValuesOrder = []
 
   flatten(buildArrayActions(attributeDiff, previous, next)).forEach(
     (updateAction) => {
       if (updateAction.action === changeEnumOrderActionName) {
-        newEnumValuesOrder.push(updateAction.value)
+        newEnumValuesOrder = next.values.map((enumValue) => enumValue.key)
       } else actions.push(updateAction)
     }
   )
@@ -128,7 +159,13 @@ export function actionsMapFieldDefinitions(
           label: extractedPairs.newObj.label,
           fieldName: extractedPairs.oldObj.name,
         })
-      } else if (diffValue.type.values) {
+      } else if (diffValue.inputHint) {
+        actions.push({
+          action: 'changeInputHint',
+          inputHint: extractedPairs.newObj.inputHint,
+          fieldName: extractedPairs.oldObj.name,
+        })
+      } else if (diffValue?.type?.values) {
         actions.push(
           ...actionsMapEnums(
             extractedPairs.oldObj.name,
@@ -144,7 +181,7 @@ export function actionsMapFieldDefinitions(
         if (diffValue.length === 3 && diffValue[2] === 3) {
           actions.push({
             action: 'changeFieldDefinitionOrder',
-            fieldNames: next,
+            fieldNames: next.map((n) => n.name),
           })
         } else {
           const deltaValue = diffPatcher.getDeltaValue(diffValue)

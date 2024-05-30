@@ -1,5 +1,102 @@
 # @commercetools/sync-actions
 
+## 5.16.0
+
+### Minor Changes
+
+- [#1892](https://github.com/commercetools/nodejs/pull/1892) [`fb03b746`](https://github.com/commercetools/nodejs/commit/fb03b7463a990934d2b11fd17b784af104431cc4) Thanks [@ragafus](https://github.com/ragafus)! - Add support for DiscountCodes `setKey` action.
+
+## 5.15.0
+
+### Minor Changes
+
+- [#1885](https://github.com/commercetools/nodejs/pull/1885) [`d6cb2740`](https://github.com/commercetools/nodejs/commit/d6cb27401279cb42a49366f32802f8ca8c7f01a3) Thanks [@kafis](https://github.com/kafis)! - Add support for 'changeAssetOrder' in (ProductVariants)[https://docs.commercetools.com/api/projects/products#change-asset-order].
+
+## 5.14.0
+
+### Minor Changes
+
+- [#1876](https://github.com/commercetools/nodejs/pull/1876) [`27f0d2b6`](https://github.com/commercetools/nodejs/commit/27f0d2b66fefbe082b6a27e7fa940b09e7e6088c) Thanks [@jaikumar-tj](https://github.com/jaikumar-tj)! - Add support for attribute groups `changeName`, `setKey`, `setDescription`, `addAttribute` and `removeAttribute` actions.
+
+## 5.13.0
+
+### Minor Changes
+
+- [#1874](https://github.com/commercetools/nodejs/pull/1874) [`69f4501d`](https://github.com/commercetools/nodejs/commit/69f4501dc5401ab2b44f4d3096a978094e402c9f) Thanks [@taylor-knapp](https://github.com/taylor-knapp)! - Handle long text values performantly
+
+## 5.12.2
+
+### Patch Changes
+
+- [#1871](https://github.com/commercetools/nodejs/pull/1871) [`4f8ea39b`](https://github.com/commercetools/nodejs/commit/4f8ea39b66ddd5014ac8f923ed980584bd96290c) Thanks [@ARRIOLALEO](https://github.com/ARRIOLALEO)! - rollback setPriceTiers name change
+
+## 5.12.1
+
+### Patch Changes
+
+- [#1869](https://github.com/commercetools/nodejs/pull/1869) [`7285a9fb`](https://github.com/commercetools/nodejs/commit/7285a9fbcbcfca6a9460e36ba7b58bb30f34fac6) Thanks [@ARRIOLALEO](https://github.com/ARRIOLALEO)! - Add support for StandalonePrice `setPriceTier`
+
+## 5.12.0
+
+### Minor Changes
+
+- [#1863](https://github.com/commercetools/nodejs/pull/1863) [`7ed7a663`](https://github.com/commercetools/nodejs/commit/7ed7a663c1cb3aa87bfb4b4c2c008949a66a62e0) Thanks [@ragafus](https://github.com/ragafus)! - Add support for StandalonePrice `setKey`, `setValidFrom`, `setValidUntil`, `setValidFromAndUntil` and `changeActive` actions.
+
+## 5.11.0
+
+### Minor Changes
+
+- [#1864](https://github.com/commercetools/nodejs/pull/1864) [`91f6b617`](https://github.com/commercetools/nodejs/commit/91f6b61794e7d66766097965e452e14c85e40f14) Thanks [@ARRIOLALEO](https://github.com/ARRIOLALEO)! - Add support for StandalonePrice `setPriceTiers`
+
+## 5.10.0
+
+### Minor Changes
+
+- [#1856](https://github.com/commercetools/nodejs/pull/1856) [`9a3e3711`](https://github.com/commercetools/nodejs/commit/9a3e3711bf6594deafb5d54a9ce9e32450f9c4d6) Thanks [@qmateub](https://github.com/qmateub)! - orders sync-actions: support action on delivery items `setDeliveryItems`
+
+## 5.9.0
+
+### Minor Changes
+
+- [#1853](https://github.com/commercetools/nodejs/pull/1853) [`4bb8f979`](https://github.com/commercetools/nodejs/commit/4bb8f979c317bbce1654ca0f1abc9b4717fdda0b) Thanks [@markus-azer](https://github.com/markus-azer)! - types sync-actions: support the following actions `changeInputHint`, `changeEnumValueLabel`, `changeLocalizedEnumValueLabel`.
+
+## 5.8.0
+
+### Minor Changes
+
+- [#1852](https://github.com/commercetools/nodejs/pull/1852) [`94a376c8`](https://github.com/commercetools/nodejs/commit/94a376c89525b7cee58b710154ddf7cb146cd16c) Thanks [@markus-azer](https://github.com/markus-azer)! - types sync-actions: fix action structure for changeFieldDefinitionOrder
+  fix internal type sync error by adding optional chaining
+
+## 5.7.0
+
+### Minor Changes
+
+- [#1850](https://github.com/commercetools/nodejs/pull/1850) [`330cd9a9`](https://github.com/commercetools/nodejs/commit/330cd9a9b4fca045d479d2d220d2a2a2b966b1f4) Thanks [@markus-azer](https://github.com/markus-azer)! - types sync-actions: fix action structure for changeLocalizedEnumValueOrder, changeEnumValueOrder
+
+## 5.6.0
+
+### Minor Changes
+
+- [#1844](https://github.com/commercetools/nodejs/pull/1844) [`23f0529b`](https://github.com/commercetools/nodejs/commit/23f0529bbf359a11500dbf87bdc9e59cb759c89a) Thanks [@markus-azer](https://github.com/markus-azer)! - Add localizedName action to shipping methods
+
+## 5.5.0
+
+### Minor Changes
+
+- [#1841](https://github.com/commercetools/nodejs/pull/1841) [`b90c7238`](https://github.com/commercetools/nodejs/commit/b90c7238f0d3d892e1066fd2883cff062b099e66) Thanks [@Rombelirk](https://github.com/Rombelirk)! - Add Custom Fields to Shipping Methods.
+
+## 5.4.1
+
+### Patch Changes
+
+- [#1839](https://github.com/commercetools/nodejs/pull/1839) [`d6cadcbc`](https://github.com/commercetools/nodejs/commit/d6cadcbc4b850fa6f438b65c3b63b294a32a58ee) Thanks [@tdeekens](https://github.com/tdeekens)! - Fix failing to sync froozen arrays for prices
+
+## 5.4.0
+
+### Minor Changes
+
+- [#1836](https://github.com/commercetools/nodejs/pull/1836) [`ad34d030`](https://github.com/commercetools/nodejs/commit/ad34d03041e7e6b8284da6224dc968fde537a85a) Thanks [@nicolasnieto92](https://github.com/nicolasnieto92)! - Add setAuthenticationMode sync action
+
 ## 5.3.1
 
 ### Patch Changes

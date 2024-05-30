@@ -342,4 +342,20 @@ describe('Token Provider', () => {
       expect(_tokenProvider.tokenInfo).toEqual(null)
     })
   })
+
+  describe('scopes', () => {
+    const auth = new Auth(config)
+    test('should include scope in the merged config', () => {
+      expect(config.scopes).toBeFalsy()
+
+      const mergedConfig = auth._getRequestConfig({ scopes: ['new-scope:demo-projectKey'] })
+
+      expect(mergedConfig).toBeTruthy()
+      expect(mergedConfig).toMatchObject(
+        expect.objectContaining({
+          scopes: ['new-scope:demo-projectKey']
+        })
+      )
+    })
+  })
 })

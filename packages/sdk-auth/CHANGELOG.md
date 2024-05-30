@@ -1,5 +1,11 @@
 # @commercetools/sdk-auth
 
+## 4.0.1
+
+### Patch Changes
+
+- [#1830](https://github.com/commercetools/nodejs/pull/1830) [`c70c30c4`](https://github.com/commercetools/nodejs/commit/c70c30c4182aa73e0c84e02f27a978018d35ada0) Thanks [@ajimae](https://github.com/ajimae)! - Remove redundant dependencies and improve browser integration.
+
 ## 4.0.0
 
 ### Major Changes

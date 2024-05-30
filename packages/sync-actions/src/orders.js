@@ -54,6 +54,17 @@ function createOrderMapActions(
     )
 
     allActions.push(
+      mapActionGroup('items', (): Array<UpdateAction> =>
+        orderActions.actionsMapDeliveryItems(
+          diff,
+          oldObj,
+          newObj,
+          deliveryHashMap
+        )
+      )
+    )
+
+    allActions.push(
       flatten(
         mapActionGroup('returnInfo', (): Array<UpdateAction> =>
           orderActions.actionsMapReturnsInfo(diff, oldObj, newObj)

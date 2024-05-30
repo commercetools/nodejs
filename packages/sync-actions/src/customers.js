@@ -13,7 +13,13 @@ import * as customerActions from './customer-actions'
 import * as diffpatcher from './utils/diffpatcher'
 import copyEmptyArrayProps from './utils/copy-empty-array-props'
 
-export const actionGroups = ['base', 'references', 'addresses', 'custom']
+export const actionGroups = [
+  'base',
+  'references',
+  'addresses',
+  'custom',
+  'authenticationModes',
+]
 
 function createCustomerMapActions(
   mapActionGroup: Function,
@@ -70,6 +76,12 @@ function createCustomerMapActions(
     allActions.push(
       mapActionGroup('custom', (): Array<UpdateAction> =>
         actionsMapCustom(diff, newObj, oldObj)
+      )
+    )
+
+    allActions.push(
+      mapActionGroup('authenticationModes', (): Array<UpdateAction> =>
+        customerActions.actionsMapAuthenticationModes(diff, oldObj, newObj)
       )
     )
 

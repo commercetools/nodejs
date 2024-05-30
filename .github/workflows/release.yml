@@ -10,14 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Get GitHub token via the CT Changesets App
+      - name: Generate GitHub token (via CT Changesets App)
+        id: generate_github_token
+        uses: tibdex/github-app-token@v2.1.0
+        with:
+          app_id: ${{ secrets.CT_CHANGESETS_APP_ID }}
+          private_key: ${{ secrets.CT_CHANGESETS_APP_PEM }}
+          
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          # Pass a personal access token (using our `ct-release-bot` account) to be able to trigger
-          # other workflows
+          # Pass a personal access token (using our CT Changesets App) to be able to trigger other workflows
           # https://help.github.com/en/actions/reference/events-that-trigger-workflows#triggering-new-workflows-using-a-personal-access-token
           # https://github.community/t/action-does-not-trigger-another-on-push-tag-action/17148/8
-          token: ${{ secrets.RELEASE_GITHUB_TOKEN }}
+          token: ${{ steps.generate_github_token.outputs.token }}
 
       - name: Read .nvmrc
         run: echo ::set-output name=NVMRC::$(cat .nvmrc)
@@ -62,4 +69,4 @@ jobs:
           version: yarn changeset:version-and-format
           commit: 'ci(changesets): version packages'
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.generate_github_token.outputs.token }}

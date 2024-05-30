@@ -94,6 +94,23 @@ function _buildDeliveryParcelsAction(
   return [addParcelActions, removeParcelActions]
 }
 
+function _buildDeliveryItemsAction(diffedItems, newDelivery = {}) {
+  const setDeliveryItemsAction = []
+  // If there is a diff it means that there were changes (update, adds or removes)
+  // over the items, which means that `setDeliveryItems` change has happened over
+  // the delivery
+  if (diffedItems && Object.keys(diffedItems).length > 0) {
+    setDeliveryItemsAction.push({
+      action: 'setDeliveryItems',
+      deliveryId: newDelivery.id,
+      deliveryKey: newDelivery.key,
+      items: newDelivery.items,
+    })
+  }
+
+  return [setDeliveryItemsAction]
+}
+
 export function actionsMapParcels(diff, oldObj, newObj, deliveryHashMap) {
   const shippingInfo = diff.shippingInfo
   if (!shippingInfo) return []
@@ -113,14 +130,12 @@ export function actionsMapParcels(diff, oldObj, newObj, deliveryHashMap) {
         newObj.shippingInfo.deliveries
       )
       if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
-        const [
-          addParcelAction,
-          removeParcelAction,
-        ] = _buildDeliveryParcelsAction(
-          delivery.parcels,
-          oldDelivery,
-          newDelivery
-        )
+        const [addParcelAction, removeParcelAction] =
+          _buildDeliveryParcelsAction(
+            delivery.parcels,
+            oldDelivery,
+            newDelivery
+          )
 
         addParcelActions = addParcelActions.concat(addParcelAction)
         removeParcelActions = removeParcelActions.concat(removeParcelAction)
@@ -128,6 +143,36 @@ export function actionsMapParcels(diff, oldObj, newObj, deliveryHashMap) {
     })
 
   return removeParcelActions.concat(addParcelActions)
+}
+
+export function actionsMapDeliveryItems(diff, oldObj, newObj, deliveryHashMap) {
+  const shippingInfo = diff.shippingInfo
+  if (!shippingInfo) return []
+
+  const deliveries = shippingInfo.deliveries
+  if (!deliveries) return []
+
+  let setDeliveryItemsActions = []
+
+  forEach(deliveries, (delivery, key) => {
+    const { newObj: newDelivery } = extractMatchingPairs(
+      deliveryHashMap,
+      key,
+      oldObj.shippingInfo.deliveries,
+      newObj.shippingInfo.deliveries
+    )
+    if (REGEX_UNDERSCORE_NUMBER.test(key) || REGEX_NUMBER.test(key)) {
+      const [setDeliveryItemsAction] = _buildDeliveryItemsAction(
+        delivery.items,
+        newDelivery
+      )
+      setDeliveryItemsActions = setDeliveryItemsActions.concat(
+        setDeliveryItemsAction
+      )
+    }
+  })
+
+  return setDeliveryItemsActions
 }
 
 export function actionsMapReturnsInfo(diff, oldObj, newObj) {
