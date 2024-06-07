@@ -925,4 +925,42 @@ describe('price actions', () => {
       ])
     })
   })
+
+  describe('removeStagedChanges', () => {
+    test('should build `removeStagedChanges` action when staged changes are removed', () => {
+      const before = {
+        id: '1234',
+        value: {
+          type: 'centPrecision',
+          currencyCode: 'USD',
+          centAmount: 5000,
+          fractionDigits: 2,
+        },
+        staged: {
+          type: 'centPrecision',
+          currencyCode: 'USD',
+          centAmount: 6000,
+          fractionDigits: 2,
+        },
+      }
+  
+      const now = {
+        id: '1234',
+        value: {
+          type: 'centPrecision',
+          currencyCode: 'USD',
+          centAmount: 5000,
+          fractionDigits: 2,
+        },
+      }
+  
+      const actions = pricesSync.buildActions(now, before)
+      expect(actions).toEqual([
+        {
+          action: 'removeStagedChanges',
+          key: 'staged',
+        },
+      ])
+    })
+  })
 })

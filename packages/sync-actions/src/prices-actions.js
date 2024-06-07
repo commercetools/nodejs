@@ -9,6 +9,7 @@ export const baseActionsList = [
   { action: 'setValidFrom', key: 'validFrom' },
   { action: 'setValidUntil', key: 'validUntil' },
   { action: 'changeActive', key: 'active' },
+  { action: 'removeStagedChanges', key: 'staged' },
 ]
 
 export function actionsMapBase(diff, oldObj, newObj, config = {}) {
