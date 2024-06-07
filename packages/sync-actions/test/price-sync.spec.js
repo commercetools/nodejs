@@ -952,13 +952,14 @@ describe('price actions', () => {
           centAmount: 5000,
           fractionDigits: 2,
         },
+        staged: null
       }
   
       const actions = pricesSync.buildActions(now, before)
       expect(actions).toEqual([
         {
           action: 'removeStagedChanges',
-          key: 'staged',
+          staged: undefined,
         },
       ])
     })
