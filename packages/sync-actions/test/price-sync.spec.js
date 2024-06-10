@@ -8,14 +8,14 @@ const twoWeeksFromNow = new Date(Date.now() + 12096e5)
 /* eslint-disable max-len */
 describe('price actions', () => {
   test('action group list', () => {
-    expect(actionGroups).toEqual(['base', 'custom'])
+    expect(actionGroups).toStrictEqual(['base', 'custom'])
   })
 
   test('should not build actions if prices are not set', () => {
     const before = {}
     const now = {}
     const actions = pricesSync.buildActions(now, before)
-    expect(actions).toEqual([])
+    expect(actions).toStrictEqual([])
   })
 
   test('should not build actions if now price is not set', () => {
@@ -30,7 +30,7 @@ describe('price actions', () => {
     }
     const now = {}
     const actions = pricesSync.buildActions(now, before)
-    expect(actions).toEqual([])
+    expect(actions).toStrictEqual([])
   })
 
   test('should not build actions if there is no change', () => {
@@ -80,7 +80,7 @@ describe('price actions', () => {
       },
     }
     const actions = pricesSync.buildActions(now, before)
-    expect(actions).toEqual([])
+    expect(actions).toStrictEqual([])
   })
 
   describe('changeValue', () => {
@@ -106,7 +106,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'changeValue',
           value: {
@@ -143,7 +143,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setDiscountedPrice',
           discounted: {
@@ -181,10 +181,9 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setDiscountedPrice',
-          discounted: undefined,
         },
       ])
     })
@@ -215,7 +214,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setDiscountedPrice',
           discounted: {
@@ -254,7 +253,7 @@ describe('price actions', () => {
         ],
       }
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'changeValue',
           value: {
@@ -323,7 +322,7 @@ describe('price actions', () => {
         ],
       }
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setPriceTiers',
           tiers: [
@@ -394,7 +393,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setPriceTiers',
           tiers: [
@@ -455,10 +454,9 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setPriceTiers',
-          tiers: undefined,
         },
       ])
     })
@@ -525,7 +523,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([])
+      expect(actions).toStrictEqual([])
     })
   })
 
@@ -544,7 +542,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setKey',
           key,
@@ -568,7 +566,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setValidFrom',
           validFrom: twoWeeksFromNow,
@@ -592,7 +590,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setValidUntil',
           validUntil: twoWeeksFromNow,
@@ -616,7 +614,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setValidFromAndUntil',
           validFrom: twoWeeksFromNow,
@@ -639,7 +637,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'changeActive',
           active: true,
@@ -673,7 +671,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setCustomType',
           type: {
@@ -712,7 +710,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setCustomType',
           type: {
@@ -754,7 +752,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setCustomType',
         },
@@ -805,7 +803,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setCustomField',
           name: 'touchpoints',
@@ -855,7 +853,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setCustomField',
           name: 'source',
@@ -906,7 +904,7 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'setCustomField',
           name: 'source',
@@ -956,10 +954,9 @@ describe('price actions', () => {
       }
 
       const actions = pricesSync.buildActions(now, before)
-      expect(actions).toEqual([
+      expect(actions).toStrictEqual([
         {
           action: 'removeStagedChanges',
-          staged: undefined,
         },
       ])
     })
