@@ -943,7 +943,7 @@ describe('price actions', () => {
           fractionDigits: 2,
         },
       }
-  
+
       const now = {
         id: '1234',
         value: {
@@ -952,9 +952,9 @@ describe('price actions', () => {
           centAmount: 5000,
           fractionDigits: 2,
         },
-        staged: null
+        staged: null,
       }
-  
+
       const actions = pricesSync.buildActions(now, before)
       expect(actions).toEqual([
         {
