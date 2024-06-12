@@ -205,7 +205,7 @@ type requestBaseOptions = {
 }
 export type executeRequestOptions = requestBaseOptions & {
   fetcher: typeof fetch,
-  tokenCache: TokenCache
+  tokenCache: TokenCache,
 }
 
 export type AuthMiddlewareBaseOptions = requestBaseOptions & {

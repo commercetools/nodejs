@@ -19,29 +19,27 @@ export default function createAuthMiddlewareForPasswordFlow(
   const pendingTasks: Array<Task> = []
   const requestState = store(false)
 
-  return (next: Next): Next => (
-    request: MiddlewareRequest,
-    response: MiddlewareResponse
-  ) => {
-    // Check if there is already a `Authorization` header in the request.
-    // If so, then go directly to the next middleware.
-    if (
-      (request.headers && request.headers.authorization) ||
-      (request.headers && request.headers.Authorization)
-    ) {
-      next(request, response)
-      return
+  return (next: Next): Next =>
+    (request: MiddlewareRequest, response: MiddlewareResponse) => {
+      // Check if there is already a `Authorization` header in the request.
+      // If so, then go directly to the next middleware.
+      if (
+        (request.headers && request.headers.authorization) ||
+        (request.headers && request.headers.Authorization)
+      ) {
+        next(request, response)
+        return
+      }
+      const params = {
+        ...options,
+        request,
+        response,
+        ...buildRequestForPasswordFlow(options),
+        pendingTasks,
+        requestState,
+        tokenCache,
+        fetch: options.fetch,
+      }
+      authMiddlewareBase(params, next, options)
     }
-    const params = {
-      ...options,
-      request,
-      response,
-      ...buildRequestForPasswordFlow(options),
-      pendingTasks,
-      requestState,
-      tokenCache,
-      fetch: options.fetch,
-    }
-    authMiddlewareBase(params, next, options)
-  }
 }

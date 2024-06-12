@@ -186,10 +186,8 @@ export default class CsvParserPrice {
     const previousPrice = data.prices[data.prices.length - 1]
 
     // remove variant-sku property from price object
-    const {
-      [CONSTANTS.header.sku]: currentSku,
-      ...restOfCurrentPrice
-    } = currentPrice
+    const { [CONSTANTS.header.sku]: currentSku, ...restOfCurrentPrice } =
+      currentPrice
 
     if (previousPrice?.sku === currentSku)
       previousPrice.prices.push(restOfCurrentPrice)

@@ -21,17 +21,15 @@ export default function createUserAgentMiddleware(
     ...options,
   })
 
-  return (next: Dispatch): Dispatch => (
-    request: MiddlewareRequest,
-    response: MiddlewareResponse
-  ) => {
-    const requestWithUserAgent = {
-      ...request,
-      headers: {
-        ...request.headers,
-        'User-Agent': userAgent,
-      },
+  return (next: Dispatch): Dispatch =>
+    (request: MiddlewareRequest, response: MiddlewareResponse) => {
+      const requestWithUserAgent = {
+        ...request,
+        headers: {
+          ...request.headers,
+          'User-Agent': userAgent,
+        },
+      }
+      next(requestWithUserAgent, response)
     }
-    next(requestWithUserAgent, response)
-  }
 }

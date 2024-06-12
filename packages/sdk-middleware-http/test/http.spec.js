@@ -1582,7 +1582,6 @@ describe('Http', () => {
   test('should handle error when parsing an invalid response object', () => {
     expect(true).toEqual(true)
     return new Promise((resolve, reject) => {
-
       const response = { resolve, reject }
       const request = createTestRequest({ uri: '/foo/bar' })
 
@@ -1590,7 +1589,7 @@ describe('Http', () => {
         expect(res).toEqual({
           ...response,
           error: expect.any(Error),
-          statusCode: 0
+          statusCode: 0,
         })
         resolve()
       }
@@ -1604,8 +1603,9 @@ describe('Http', () => {
             ok: true,
             text: jest.fn(() =>
               Promise.reject(new Error('malformed response'))
-            )
-          }))
+            ),
+          })
+        ),
       })
 
       httpMiddleware(next)(request, response)
@@ -1615,7 +1615,6 @@ describe('Http', () => {
   test('should handle error when parsing an invalid response object - retry', () => {
     expect(true).toEqual(true)
     return new Promise((resolve, reject) => {
-
       const response = { resolve, reject }
       const request = createTestRequest({ uri: '/foo/bar' })
 
@@ -1623,7 +1622,7 @@ describe('Http', () => {
         expect(res).toEqual({
           ...response,
           error: expect.any(Error),
-          statusCode: 0
+          statusCode: 0,
         })
         resolve()
       }
@@ -1643,8 +1642,9 @@ describe('Http', () => {
             ok: true,
             text: jest.fn(() =>
               Promise.reject(new Error('malformed response'))
-            )
-          }))
+            ),
+          })
+        ),
       })
 
       httpMiddleware(next)(request, response)
