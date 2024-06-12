@@ -16,6 +16,7 @@ describe('Exports', () => {
       { action: 'changeIsDefault', key: 'isDefault' },
       { action: 'setPredicate', key: 'predicate' },
       { action: 'changeTaxCategory', key: 'taxCategory' },
+      { action: 'changeActive', key: 'active' },
     ])
   })
 })
@@ -53,6 +54,24 @@ describe('Actions', () => {
         {
           action: 'changeName',
           name: now.name,
+        },
+      ]
+      expect(actual).toEqual(expected)
+    })
+
+    test('should build `changeActive` action', () => {
+      const before = {
+        active: false,
+      }
+      const now = {
+        active: true,
+      }
+
+      const actual = shippingMethodsSync.buildActions(now, before)
+      const expected = [
+        {
+          action: 'changeActive',
+          active: now.active,
         },
       ]
       expect(actual).toEqual(expected)
