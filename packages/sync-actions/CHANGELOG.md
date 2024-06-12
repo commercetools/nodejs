@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.17.0
+
+### Minor Changes
+
+- [#1897](https://github.com/commercetools/nodejs/pull/1897) [`940dd70b`](https://github.com/commercetools/nodejs/commit/940dd70ba53c51e0fb74849aadb688db6add764d) Thanks [@antoniolodias](https://github.com/antoniolodias)! - add changeActive to shipping methods base actions
+
 ## 5.16.0
 
 ### Minor Changes
