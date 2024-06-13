@@ -8,6 +8,15 @@ import yargs from 'yargs'
 import DiscountCodeExport from './main'
 import { description } from '../package.json'
 
+const doesFileExist = (filePath) => {
+  try {
+    fs.accessSync(filePath)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 process.title = 'discount-code-exporter'
 
 const args = yargs
@@ -28,7 +37,7 @@ ${description}`
       'Language used for localised fields (such as `name` and `description`) when exporting without template. This field is ignored for exports with template',
   })
   .coerce('template', (arg) => {
-    if (fs.existsSync(arg)) return fs.createReadStream(String(arg))
+    if (doesFileExist(arg)) return fs.createReadStream(String(arg))
 
     throw new Error('Input file cannot be reached or does not exist')
   })
