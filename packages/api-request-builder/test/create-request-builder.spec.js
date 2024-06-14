@@ -67,7 +67,7 @@ describe('createRequestBuilder', () => {
     )
   })
 
-  test('calling build resets all params', () => {
+  test('calling build resets all params after querying byKey', () => {
     const requestBuilder = createRequestBuilder({
       projectKey: 'foo',
     })
@@ -76,5 +76,29 @@ describe('createRequestBuilder', () => {
       .parse({ where: ['bar'] })
       .build()
     expect(nextRequest).toEqual('/foo/categories?where=bar')
+  })
+
+  test('calling build resets all params after querying byCustomerId', () => {
+    const requestBuilder = createRequestBuilder({
+      projectKey: 'foo',
+    })
+    requestBuilder.carts.byCustomerId('1234').build()
+    const nextRequest = requestBuilder.carts
+      .parse({ where: ['cartState="Active"'] })
+      .build()
+    expect(nextRequest).toEqual('/foo/carts?where=cartState%3D%22Active%22')
+  })
+
+  test('calling build resets all params after querying byCartId', () => {
+    const requestBuilder = createRequestBuilder({
+      projectKey: 'foo',
+    })
+    requestBuilder.orders.byCartId('1234').build()
+    const nextRequest = requestBuilder.orders
+      .parse({ where: ['orderNumber="testOrderNum"'] })
+      .build()
+    expect(nextRequest).toEqual(
+      '/foo/orders?where=orderNumber%3D%22testOrderNum%22'
+    )
   })
 })
