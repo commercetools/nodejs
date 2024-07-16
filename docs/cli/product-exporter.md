@@ -117,3 +117,18 @@ outputStream.on('finish', () => process.stdout.write('done with export'))
 
 productExporter.run(outputStream)
 ```
+
+## FAQ
+
+**Q: Windows CLI - Product export fails with Malformed parameter: where: Syntax error while parsing 'where'. Invalid input 'd', expected input parameter or primitive value**
+
+**A:** Make sure to use proper windows escaping sequences for encoding special characters.
+
+On windows cli you can escape special characters by enclosing them with `"""`.
+
+Example for query predicate
+
+```
+--predicate 'productType(id="ddddddd-fa0d-433f-b531-da12ddc84911")' # unescaped
+--predicate 'productType(id="""dddddd-fa0d-433f-b531-da12ddc84911""")' # correctly escaped
+```
