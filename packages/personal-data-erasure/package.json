@@ -49,5 +49,8 @@
     "pretty-error": "^2.1.1",
     "prompt-confirm": "^2.0.4",
     "yargs": "^16.0.0"
+  },
+  "resolutions": {
+    "prompt-choices": "5.0.0"
   }
 }
