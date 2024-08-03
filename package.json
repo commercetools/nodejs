@@ -132,6 +132,7 @@
     "serialize-javascript": "6.0.0",
     "diff": "5.0.0",
     "object-path": "0.11.8",
-    "npm": "6.14.17"
+    "npm": "6.14.17",
+    "set-value": "4.0.1"
   }
 }
