@@ -7,6 +7,15 @@ export const baseActionsList = [
   { action: 'changeLanguages', key: 'languages' },
   { action: 'changeMessagesConfiguration', key: 'messagesConfiguration' },
   { action: 'setShippingRateInputType', key: 'shippingRateInputType' },
+  {
+    action: 'changeMyBusinessUnitStatusOnCreation',
+    key: 'myBusinessUnitStatusOnCreation',
+  },
+  {
+    action: 'setMyBusinessUnitAssociateRoleOnCreation',
+    key: 'myBusinessUnitAssociateRoleOnCreation',
+  },
+  { action: 'changeCustomerSearchStatus', key: 'customerSearchStatus' },
 ]
 
 export function actionsMapBase(diff, oldObj, newObj, config = {}) {
