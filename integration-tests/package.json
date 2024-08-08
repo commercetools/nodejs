@@ -47,6 +47,6 @@
     "node-fetch": "^2.6.7",
     "streamtest": "^2.0.0",
     "tmp": "^0.2.0",
-    "unzipper": "^0.10.5"
+    "unzipper": "^0.12.0"
   }
 }
