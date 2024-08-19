@@ -1,5 +1,11 @@
 # @commercetools/personal-data-erasure
 
+## 4.0.1
+
+### Patch Changes
+
+- [#1905](https://github.com/commercetools/nodejs/pull/1905) [`cafce223`](https://github.com/commercetools/nodejs/commit/cafce2236f6a0eca2dbb73c83772925223242082) Thanks [@ajimae](https://github.com/ajimae)! - update set-value transitive dependency
+
 ## 4.0.0
 
 ### Major Changes
