@@ -64,6 +64,39 @@ describe('Exports', () => {
         ])
       )
     })
+
+    test('should contain `changeMyBusinessUnitStatusOnCreation` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'changeMyBusinessUnitStatusOnCreation',
+            key: 'myBusinessUnitStatusOnCreation',
+          },
+        ])
+      )
+    })
+
+    test('should contain `setMyBusinessUnitAssociateRoleOnCreation` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'setMyBusinessUnitAssociateRoleOnCreation',
+            key: 'myBusinessUnitAssociateRoleOnCreation',
+          },
+        ])
+      )
+    })
+
+    test('should contain `changeCustomerSearchStatus` action', () => {
+      expect(baseActionsList).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'changeCustomerSearchStatus',
+            key: 'customerSearchStatus',
+          },
+        ])
+      )
+    })
   })
 })
 
@@ -207,6 +240,55 @@ describe('Actions', () => {
     const expected = [
       {
         action: 'changeMessagesConfiguration',
+        ...now,
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build `changeMyBusinessUnitStatusOnCreation` action', () => {
+    const before = { myBusinessUnitStatusOnCreation: 'Active' }
+    const now = { myBusinessUnitStatusOnCreation: 'Deactive' }
+    const actual = projectsSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'changeMyBusinessUnitStatusOnCreation',
+        ...now,
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build `setMyBusinessUnitAssociateRoleOnCreation` action', () => {
+    const before = {
+      myBusinessUnitAssociateRoleOnCreation: {
+        typeId: 'associate-role',
+        key: 'old-role',
+      },
+    }
+    const now = {
+      myBusinessUnitAssociateRoleOnCreation: {
+        typeId: 'associate-role',
+        key: 'new-role',
+      },
+    }
+    const actual = projectsSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'setMyBusinessUnitAssociateRoleOnCreation',
+        ...now,
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build `changeCustomerSearchStatus` action', () => {
+    const before = { customerSearchStatus: 'Activated' }
+    const now = { customerSearchStatus: 'Deactivated' }
+    const actual = projectsSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'changeCustomerSearchStatus',
         ...now,
       },
     ]
