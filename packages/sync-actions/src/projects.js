@@ -1,10 +1,14 @@
 import flatten from 'lodash.flatten'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
-import { actionsMapBase } from './projects-actions'
+import {
+  actionsMapBase,
+  actionsMapBusinessUnit,
+  actionsMapCustomer,
+} from './projects-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
-export const actionGroups = ['base']
+export const actionGroups = ['base', 'myBusinessUnit', 'customerSearch']
 
 function createChannelsMapActions(mapActionGroup, syncActionConfig) {
   return function doMapActions(diff, newObj, oldObj) {
@@ -13,6 +17,18 @@ function createChannelsMapActions(mapActionGroup, syncActionConfig) {
     allActions.push(
       mapActionGroup('base', () =>
         actionsMapBase(diff, oldObj, newObj, syncActionConfig)
+      )
+    )
+
+    allActions.push(
+      mapActionGroup('myBusinessUnit', () =>
+        actionsMapBusinessUnit(diff, oldObj, newObj)
+      )
+    )
+
+    allActions.push(
+      mapActionGroup('customerSearch', () =>
+        actionsMapCustomer(diff, oldObj, newObj)
       )
     )
 

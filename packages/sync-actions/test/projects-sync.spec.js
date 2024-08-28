@@ -1,9 +1,13 @@
 import createProjectsSync, { actionGroups } from '../src/projects'
-import { baseActionsList } from '../src/projects-actions'
+import {
+  baseActionsList,
+  myBusinessUnitActionsList,
+  customerSearchActionsList,
+} from '../src/projects-actions'
 
 describe('Exports', () => {
   test('action group list', () => {
-    expect(actionGroups).toEqual(['base'])
+    expect(actionGroups).toEqual(['base', 'myBusinessUnit', 'customerSearch'])
   })
 
   describe('action list', () => {
@@ -66,33 +70,33 @@ describe('Exports', () => {
     })
 
     test('should contain `changeMyBusinessUnitStatusOnCreation` action', () => {
-      expect(baseActionsList).toEqual(
+      expect(myBusinessUnitActionsList).toEqual(
         expect.arrayContaining([
           {
             action: 'changeMyBusinessUnitStatusOnCreation',
-            key: 'myBusinessUnitStatusOnCreation',
+            key: 'status',
           },
         ])
       )
     })
 
     test('should contain `setMyBusinessUnitAssociateRoleOnCreation` action', () => {
-      expect(baseActionsList).toEqual(
+      expect(myBusinessUnitActionsList).toEqual(
         expect.arrayContaining([
           {
             action: 'setMyBusinessUnitAssociateRoleOnCreation',
-            key: 'myBusinessUnitAssociateRoleOnCreation',
+            key: 'associateRole',
           },
         ])
       )
     })
 
     test('should contain `changeCustomerSearchStatus` action', () => {
-      expect(baseActionsList).toEqual(
+      expect(customerSearchActionsList).toEqual(
         expect.arrayContaining([
           {
             action: 'changeCustomerSearchStatus',
-            key: 'customerSearchStatus',
+            key: 'status',
           },
         ])
       )
@@ -247,8 +251,14 @@ describe('Actions', () => {
   })
 
   test('should build `changeMyBusinessUnitStatusOnCreation` action', () => {
-    const before = { myBusinessUnitStatusOnCreation: 'Active' }
-    const now = { myBusinessUnitStatusOnCreation: 'Deactive' }
+    const actionGroupList = [
+      { type: 'base', group: 'allow' },
+      { type: 'myBusinessUnit', group: 'allow' },
+      { type: 'customerSearch', group: 'ignore' },
+    ]
+    projectsSync = createProjectsSync(actionGroupList)
+    const before = { status: 'Active' }
+    const now = { status: 'Deactive' }
     const actual = projectsSync.buildActions(now, before)
     const expected = [
       {
@@ -261,13 +271,13 @@ describe('Actions', () => {
 
   test('should build `setMyBusinessUnitAssociateRoleOnCreation` action', () => {
     const before = {
-      myBusinessUnitAssociateRoleOnCreation: {
+      associateRole: {
         typeId: 'associate-role',
         key: 'old-role',
       },
     }
     const now = {
-      myBusinessUnitAssociateRoleOnCreation: {
+      associateRole: {
         typeId: 'associate-role',
         key: 'new-role',
       },
@@ -283,8 +293,20 @@ describe('Actions', () => {
   })
 
   test('should build `changeCustomerSearchStatus` action', () => {
-    const before = { customerSearchStatus: 'Activated' }
-    const now = { customerSearchStatus: 'Deactivated' }
+    const actionGroupList = [
+      { type: 'base', group: 'allow' },
+      { type: 'myBusinessUnit', group: 'ignore' },
+      { type: 'customerSearch', group: 'allow' },
+    ]
+    projectsSync = createProjectsSync(actionGroupList)
+    const before = {
+      action: 'changeCustomerSearchStatus',
+      status: 'Activated',
+    }
+    const now = {
+      action: 'changeCustomerSearchStatus',
+      status: 'Deactivated',
+    }
     const actual = projectsSync.buildActions(now, before)
     const expected = [
       {
