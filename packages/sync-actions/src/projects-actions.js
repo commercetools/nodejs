@@ -12,11 +12,13 @@ export const baseActionsList = [
 export const myBusinessUnitActionsList = [
   {
     action: 'changeMyBusinessUnitStatusOnCreation',
-    key: 'status',
+    key: 'myBusinessUnitStatusOnCreation',
+    actionKey: 'status',
   },
   {
     action: 'setMyBusinessUnitAssociateRoleOnCreation',
-    key: 'associateRole',
+    key: 'myBusinessUnitAssociateRoleOnCreation',
+    actionKey: 'associateRole',
   },
 ]
 
@@ -37,20 +39,36 @@ export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   })
 }
 
-export function actionsMapBusinessUnit(diff, oldObj, newObj) {
+export const actionsMapBusinessUnit = (diff, oldObj, newObj) => {
+  const { businessUnits } = diff
+  if (!businessUnits) {
+    return []
+  }
+
   return buildBaseAttributesActions({
     actions: myBusinessUnitActionsList,
-    diff,
-    oldObj,
-    newObj,
+    diff: businessUnits,
+    oldObj: oldObj.businessUnits,
+    newObj: newObj.businessUnits,
   })
 }
 
 export function actionsMapCustomer(diff, oldObj, newObj) {
+  const { searchIndexing } = diff
+
+  if (!searchIndexing) {
+    return []
+  }
+
+  const { customers } = searchIndexing
+  if (!customers) {
+    return []
+  }
+
   return buildBaseAttributesActions({
     actions: customerSearchActionsList,
-    diff,
-    oldObj,
-    newObj,
+    diff: diff.searchIndexing.customers,
+    oldObj: oldObj.searchIndexing.customers,
+    newObj: newObj.searchIndexing.customers,
   })
 }
