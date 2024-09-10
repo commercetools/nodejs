@@ -7,7 +7,11 @@ import {
 
 describe('Exports', () => {
   test('action group list', () => {
-    expect(actionGroups).toEqual(['base'])
+    expect(actionGroups).toEqual([
+      'base',
+      'businessUnit',
+      'searchIndexingConfiguration',
+    ])
   })
 
   describe('action list', () => {

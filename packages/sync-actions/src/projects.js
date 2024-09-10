@@ -4,11 +4,15 @@ import createMapActionGroup from './utils/create-map-action-group'
 import {
   actionsMapBase,
   actionsMapBusinessUnit,
-  actionsMapCustomer,
+  actionsMapSearchIndexingConfiguration,
 } from './projects-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
-export const actionGroups = ['base']
+export const actionGroups = [
+  'base',
+  'businessUnit',
+  'searchIndexingConfiguration',
+]
 
 function createChannelsMapActions(mapActionGroup, syncActionConfig) {
   return function doMapActions(diff, newObj, oldObj) {
@@ -21,11 +25,15 @@ function createChannelsMapActions(mapActionGroup, syncActionConfig) {
     )
 
     allActions.push(
-      mapActionGroup('base', () => actionsMapBusinessUnit(diff, oldObj, newObj))
+      mapActionGroup('businessUnit', () =>
+        actionsMapBusinessUnit(diff, oldObj, newObj)
+      )
     )
 
     allActions.push(
-      mapActionGroup('base', () => actionsMapCustomer(diff, oldObj, newObj))
+      mapActionGroup('searchIndexingConfiguration', () =>
+        actionsMapSearchIndexingConfiguration(diff, oldObj, newObj)
+      )
     )
 
     return flatten(allActions)

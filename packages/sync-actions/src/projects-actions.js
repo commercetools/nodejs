@@ -53,7 +53,7 @@ export const actionsMapBusinessUnit = (diff, oldObj, newObj) => {
   })
 }
 
-export function actionsMapCustomer(diff, oldObj, newObj) {
+export function actionsMapSearchIndexingConfiguration(diff, oldObj, newObj) {
   const { searchIndexing } = diff
 
   if (!searchIndexing) {
