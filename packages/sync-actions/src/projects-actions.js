@@ -7,15 +7,26 @@ export const baseActionsList = [
   { action: 'changeLanguages', key: 'languages' },
   { action: 'changeMessagesConfiguration', key: 'messagesConfiguration' },
   { action: 'setShippingRateInputType', key: 'shippingRateInputType' },
+]
+
+export const myBusinessUnitActionsList = [
   {
     action: 'changeMyBusinessUnitStatusOnCreation',
     key: 'myBusinessUnitStatusOnCreation',
+    actionKey: 'status',
   },
   {
     action: 'setMyBusinessUnitAssociateRoleOnCreation',
     key: 'myBusinessUnitAssociateRoleOnCreation',
+    actionKey: 'associateRole',
   },
-  { action: 'changeCustomerSearchStatus', key: 'customerSearchStatus' },
+]
+
+export const customerSearchActionsList = [
+  {
+    action: 'changeCustomerSearchStatus',
+    key: 'status',
+  },
 ]
 
 export function actionsMapBase(diff, oldObj, newObj, config = {}) {
@@ -25,5 +36,39 @@ export function actionsMapBase(diff, oldObj, newObj, config = {}) {
     oldObj,
     newObj,
     shouldOmitEmptyString: config.shouldOmitEmptyString,
+  })
+}
+
+export const actionsMapBusinessUnit = (diff, oldObj, newObj) => {
+  const { businessUnits } = diff
+  if (!businessUnits) {
+    return []
+  }
+
+  return buildBaseAttributesActions({
+    actions: myBusinessUnitActionsList,
+    diff: businessUnits,
+    oldObj: oldObj.businessUnits,
+    newObj: newObj.businessUnits,
+  })
+}
+
+export function actionsMapSearchIndexingConfiguration(diff, oldObj, newObj) {
+  const { searchIndexing } = diff
+
+  if (!searchIndexing) {
+    return []
+  }
+
+  const { customers } = searchIndexing
+  if (!customers) {
+    return []
+  }
+
+  return buildBaseAttributesActions({
+    actions: customerSearchActionsList,
+    diff: diff.searchIndexing.customers,
+    oldObj: oldObj.searchIndexing.customers,
+    newObj: newObj.searchIndexing.customers,
   })
 }
