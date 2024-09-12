@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.19.0
+
+### Minor Changes
+
+- [#1908](https://github.com/commercetools/nodejs/pull/1908) [`df373a1a`](https://github.com/commercetools/nodejs/commit/df373a1adbcaa2340b0af0656fd0dbab055329f8) Thanks [@ChristianMoll](https://github.com/ChristianMoll)! - Fix action keys for changeMyBusinessUnitStatusOnCreation, setMyBusinessUnitAssociateRoleOnCreation and changeCustomerSearchStatus
+
 ## 5.18.0
 
 ### Minor Changes
