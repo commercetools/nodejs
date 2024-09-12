@@ -131,7 +131,7 @@ function createProductMapActions(
     )
 
     allActions.push(
-      mapActionGroup('categories', (): Array<UpdateAction> =>
+      mapActionGroup('categoryOrderHints', (): Array<UpdateAction> =>
         productActions.actionsMapCategoryOrderHints(diff, oldObj)
       )
     )
