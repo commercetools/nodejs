@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.19.1
+
+### Patch Changes
+
+- [#1912](https://github.com/commercetools/nodejs/pull/1912) [`06866537`](https://github.com/commercetools/nodejs/commit/06866537feb04eaf26521d43b654cbc2920bab0d) Thanks [@markus-azer](https://github.com/markus-azer)! - Fix product action groups category order hints
+
 ## 5.19.0
 
 ### Minor Changes
