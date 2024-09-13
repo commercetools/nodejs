@@ -1,3 +1,4 @@
+import { deepEqual } from 'fast-equals'
 import { buildBaseAttributesActions } from './utils/common-actions'
 import createBuildArrayActions, {
   ADD_ACTIONS,
@@ -31,12 +32,19 @@ export function actionsMapRates(diff, oldObj, newObj) {
       action: 'removeTaxRate',
       taxRateId: objectToRemove.id,
     }),
-    [CHANGE_ACTIONS]: (oldObject, updatedObject) => ({
-      action: 'replaceTaxRate',
-      taxRateId:
-        oldObject.id === updatedObject.id ? oldObject.id : updatedObject.id,
-      taxRate: updatedObject,
-    }),
+    [CHANGE_ACTIONS]: (oldObject, updatedObject) => {
+      // filter out taxRates that were not changed
+      // so the API doesn't return it with a different id
+      const { __typename, ...oldObjectWithoutTypename } = oldObject
+      if (deepEqual(oldObjectWithoutTypename, updatedObject)) return null
+
+      return {
+        action: 'replaceTaxRate',
+        taxRateId:
+          oldObject.id === updatedObject.id ? oldObject.id : updatedObject.id,
+        taxRate: updatedObject,
+      }
+    },
   })
 
   return handler(diff, oldObj, newObj)
