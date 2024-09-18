@@ -5,6 +5,7 @@ import createBuildArrayActions, {
   REMOVE_ACTIONS,
   CHANGE_ACTIONS,
 } from './utils/create-build-array-actions'
+import removeTypename from './utils/remove-typename'
 
 export const baseActionsList = [
   { action: 'changeName', key: 'name' },
@@ -20,11 +21,6 @@ export function actionsMapBase(diff, oldObj, newObj, config = {}) {
     newObj,
     shouldOmitEmptyString: config.shouldOmitEmptyString,
   })
-}
-
-function removeTypename(obj) {
-  const { __typename, ...objWithoutTypename } = obj
-  return objWithoutTypename
 }
 
 export function actionsMapRates(diff, oldObj, newObj) {
