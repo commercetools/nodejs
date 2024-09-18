@@ -64,6 +64,12 @@ describe('Actions', () => {
   })
 
   test('should build `replaceTaxRate` action', () => {
+    // unchanged tax rates should not be included in the actions
+    const unchangedTaxRate = {
+      id: 'taxRate-2',
+      name: '1% DE',
+      amount: '0.01',
+    }
     const before = {
       rates: [
         {
@@ -71,6 +77,7 @@ describe('Actions', () => {
           name: '5% US',
           amount: '0.05',
         },
+        unchangedTaxRate,
       ],
     }
     const now = {
@@ -80,6 +87,7 @@ describe('Actions', () => {
           name: '11% US',
           amount: '0.11',
         },
+        unchangedTaxRate,
       ],
     }
 
