@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 5.19.2
+
+### Patch Changes
+
+- [#1914](https://github.com/commercetools/nodejs/pull/1914) [`6e1195ed`](https://github.com/commercetools/nodejs/commit/6e1195ed05cc3338eac94e47f439f10b7b0e6e75) Thanks [@antoniolodias](https://github.com/antoniolodias)! - fix: filter out unchanged taxrates from changed list
+
 ## 5.19.1
 
 ### Patch Changes
