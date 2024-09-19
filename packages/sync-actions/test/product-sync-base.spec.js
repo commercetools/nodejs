@@ -311,6 +311,132 @@ describe('Actions', () => {
     expect(actions).toEqual([])
   })
 
+  test('shouldnt generate any categoryOrderHints actions in case of disallowed', () => {
+    const productsSyncWithIgnore = productsSyncFn([
+      { type: 'categoryOrderHints', group: 'ignore' },
+    ])
+
+    const before = {
+      categoryOrderHints: {
+        '123e844e-0616-420a-8397-a22c48d5e99f': '0.1',
+        'aebe844e-0616-420a-8397-a22c48d5e99f': '0.2',
+      },
+    }
+
+    const now = {
+      categoryOrderHints: {
+        '123e844e-0616-420a-8397-a22c48d5e99f': '0.1', // will be ignored
+        'aebe844e-0616-420a-8397-a22c48d5e99f': '0.5', // updated but will be ignored
+      },
+    }
+
+    const actions = productsSyncWithIgnore.buildActions(now, before)
+
+    expect(actions).toEqual([])
+  })
+
+  test('should generate categoryOrderHints actions and ignore categories', () => {
+    const productsSyncWithIgnore = productsSyncFn([
+      { type: 'categoryOrderHints', group: 'allow' },
+      { type: 'categories', group: 'ignore' },
+    ])
+
+    const before = {
+      categories: [
+        { id: '123e844e-0616-420a-8397-a22c48d5e99f' }, // will be ignored
+        { id: 'aebe844e-0616-420a-8397-a22c48d5e99f' }, // will be ignored
+        { id: '34cae6ad-5898-4f94-973b-ae9ceb7464ce' }, // will be ignored
+      ],
+      categoryOrderHints: {
+        '123e844e-0616-420a-8397-a22c48d5e99f': '0.1',
+        'aebe844e-0616-420a-8397-a22c48d5e99f': '0.2',
+        '34cae6ad-5898-4f94-973b-ae9ceb7464ce': '0.5',
+      },
+    }
+
+    const now = {
+      categories: [
+        { id: '123e844e-0616-420a-8397-a22c48d5e99f' },
+        { id: 'aebe844e-0616-420a-8397-a22c48d5e99f' },
+        { id: 'cca7a250-d8cf-4b8a-9d47-60fcc093b86b' },
+      ],
+      categoryOrderHints: {
+        '123e844e-0616-420a-8397-a22c48d5e99f': '0.1',
+        'aebe844e-0616-420a-8397-a22c48d5e99f': '0.5',
+        'cca7a250-d8cf-4b8a-9d47-60fcc093b86b': '0.999',
+      },
+    }
+
+    const actions = productsSyncWithIgnore.buildActions(now, before)
+
+    expect(actions).toEqual([
+      {
+        action: 'setCategoryOrderHint',
+        categoryId: 'aebe844e-0616-420a-8397-a22c48d5e99f',
+        orderHint: '0.5',
+      },
+      {
+        action: 'setCategoryOrderHint',
+        categoryId: '34cae6ad-5898-4f94-973b-ae9ceb7464ce',
+      },
+      {
+        action: 'setCategoryOrderHint',
+        categoryId: 'cca7a250-d8cf-4b8a-9d47-60fcc093b86b',
+        orderHint: '0.999',
+      },
+    ])
+  })
+
+  test('should generate categories actions and ignore categoryOrderHints', () => {
+    const productsSyncWithIgnore = productsSyncFn([
+      { type: 'categoryOrderHints', group: 'ignore' },
+      { type: 'categories', group: 'allow' },
+    ])
+
+    const before = {
+      categories: [
+        { id: '123e844e-0616-420a-8397-a22c48d5e99f' },
+        { id: 'aebe844e-0616-420a-8397-a22c48d5e99f' },
+        { id: '34cae6ad-5898-4f94-973b-ae9ceb7464ce' },
+      ],
+      categoryOrderHints: {
+        '123e844e-0616-420a-8397-a22c48d5e99f': '0.1', // will be ignored
+        'aebe844e-0616-420a-8397-a22c48d5e99f': '0.2', // will be ignored
+        '34cae6ad-5898-4f94-973b-ae9ceb7464ce': '0.5', // will be ignored
+      },
+    }
+
+    const now = {
+      categories: [
+        { id: '123e844e-0616-420a-8397-a22c48d5e99f' },
+        { id: 'aebe844e-0616-420a-8397-a22c48d5e99f' },
+        { id: 'cca7a250-d8cf-4b8a-9d47-60fcc093b86b' },
+      ],
+      categoryOrderHints: {
+        '123e844e-0616-420a-8397-a22c48d5e99f': '0.1',
+        'aebe844e-0616-420a-8397-a22c48d5e99f': '0.5',
+        'cca7a250-d8cf-4b8a-9d47-60fcc093b86b': '0.999',
+      },
+    }
+
+    const actions = productsSyncWithIgnore.buildActions(now, before)
+
+    expect(actions).toEqual([
+      {
+        action: 'removeFromCategory',
+        category: {
+          id: '34cae6ad-5898-4f94-973b-ae9ceb7464ce',
+        },
+      },
+      {
+        action: 'addToCategory',
+        category: {
+          id: 'cca7a250-d8cf-4b8a-9d47-60fcc093b86b',
+        },
+      },
+    ])
+  })
+
   test('shouldnt generate any searchKeywords actions', () => {
     const before = {
       searchKeywords: {},
