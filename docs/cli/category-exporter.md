@@ -61,10 +61,10 @@ const options = {
     apiConfig: {
       apiUrl: 'https://api.europe-west1.gcp.commercetools.com'
       host: 'https://auth.europe-west1.gcp.commercetools.com'
-      project_key: 'PROJECT_KEY',
+      project_key: '<ProjectKey>',
       credentials: {
-        clientId: '*********',
-        clientSecret: '*********'
+        clientId: '<clientId>',
+        clientSecret: '<clientSecret>'
       }
     },
     accessToken: '123456yuhgfdwegh675412wefb4rgb',
@@ -78,10 +78,12 @@ const logger = {
   debug: console.debug,
 }
 
-const categoryExporter = new CategoryExporter(options, logger)
+const categoryExporter = new CategoryExporter.default(options, logger)
+
+const outputStream = fs.createWriteStream('output.txt');
 
 // Register error listener
-outputStream.on('error', errorHandler)
+outputStream.on('error', (e) => console.log(e))
 
 outputStream.on('finish', () => console.log('done with export'))
 
