@@ -1,6 +1,6 @@
 # commercetools-csv-parser-price
 
-Convert [commercetools price](https://docs.commercetools.com/api/projects/products#price) CSV data to JSON
+Convert [commercetools price](https://docs.commercetools.com/api/types#price) CSV data to JSON
 
 https://commercetools.github.io/nodejs/cli/csv-parser-price.html
 

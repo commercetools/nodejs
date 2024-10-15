@@ -229,7 +229,7 @@ await authClient.customFlow({
 
 ### Token Introspection
 
-Fetches info about `access_token` using [Token Introspection](https://docs.commercetools.com/api/authorization#oauth2-token-introspection) from the commercetools platform API.
+Fetches info about `access_token` using [Token Introspection](https://docs.commercetools.com/api/authorization#introspection) from the commercetools platform API.
 
 #### Argument
 
