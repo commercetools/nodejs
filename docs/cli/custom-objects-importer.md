@@ -1,6 +1,6 @@
 # Custom Objects Importer
 
-This package helps with importing [commercetools custom objects](https://docs.commercetools.com/http-api-projects-custom-objects.html) in JSON format to the [commercetools platform](https://docs.commercetools.com/).
+This package helps with importing [commercetools custom objects](https://docs.commercetools.com/api/projects/custom-objects) in JSON format to the [commercetools platform](https://docs.commercetools.com/).
 The package is built to be used in conjunction with [sphere-node-cli](https://github.com/sphereio/sphere-node-cli)
 
 ## Configuration

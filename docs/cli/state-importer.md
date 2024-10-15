@@ -1,6 +1,6 @@
 # State Importer
 
-A package that helps with importing [commercetools states](https://docs.commercetools.com/http-api-projects-states.html) in JSON format to the [commercetools platform](https://docs.commercetools.com/).
+A package that helps with importing [commercetools states](https://docs.commercetools.com/api/projects/states) in JSON format to the [commercetools platform](https://docs.commercetools.com/).
 This package is built to be used in conjunction with [sphere-node-cli](https://github.com/sphereio/sphere-node-cli)
 
 ## Configuration

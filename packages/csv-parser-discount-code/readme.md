@@ -1,6 +1,6 @@
 # commercetools-csv-parser-discount-code
 
-Convert [commercetools discount codes](http://dev.commercetools.com/http-api-projects-discountCodes.html) CSV data to JSON
+Convert [commercetools discount codes](https://docs.commercetools.com/api/projects/discountCodes) CSV data to JSON
 
 more info here: https://commercetools.github.io/nodejs/cli/csv-parser-discount-code.html
 

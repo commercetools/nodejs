@@ -1,6 +1,6 @@
 # commercetools-csv-parser-state
 
-Convert [commercetools states](https://docs.commercetools.com/http-api-projects-states.html#state) CSV data to JSON
+Convert [commercetools states](https://docs.commercetools.com/api/projects/states#state) CSV data to JSON
 
 More info here: https://commercetools.github.io/nodejs/cli/csv-parser-state.html
 

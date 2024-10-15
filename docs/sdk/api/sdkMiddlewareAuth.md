@@ -21,14 +21,14 @@ npm install --save @commercetools/sdk-middleware-auth
 
 ## `createAuthMiddlewareForClientCredentialsFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Client Credentials Flow](https://docs.commercetools.com/http-api-authorization.html#client-credentials-flow) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Client Credentials Flow](https://docs.commercetools.com/api/authorization#client-credentials-flow) of the commercetools platform API.
 
 #### Named arguments (options)
 
 1.  `host` _(String)_: the host of the OAuth API service
 2.  `projectKey` _(String)_: the key of the project to assign the default scope to
 3.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`)
-4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
+4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/api/scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
 5.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
 6.  `timeout` _(Number)_: An optional number value (in milliseconds) which specifies when a request should timeout if authentication request fails to complete.
 7.  `getAbortController` _(Function)_: An optional abortController class instance that should signal the http-client to abandon the current request instance.
@@ -61,7 +61,7 @@ const client = createClient({
 
 ## `createAuthMiddlewareForPasswordFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Password Flow](https://docs.commercetools.com/http-api-authorization.html#password-flow) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Password Flow](https://docs.commercetools.com/api/authorization#password-flow) of the commercetools platform API.
 
 #### Named arguments (options)
 
@@ -71,7 +71,7 @@ Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for
 
 - The `user` field is an object containing `username` and `password`. [Sample below](#usage-example-1)
 
-4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) to assign to the OAuth token. _No default scope is sent_
+4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/api/scopes) to assign to the OAuth token. _No default scope is sent_
 5.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
 6.  `timeout` _(Number)_: An optional number value (in milliseconds) which specifies when a request should timeout if authentication request fails to complete.
 7.  `getAbortController` _(Function)_: An optional abortController class instance that should signal the http-client to abandon the current request instance.
@@ -108,14 +108,14 @@ const client = createClient({
 
 ## `createAuthMiddlewareForAnonymousSessionFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Anonymous Session Flow](https://docs.commercetools.com/http-api-authorization.html#tokens-for-anonymous-sessions) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Anonymous Session Flow](https://docs.commercetools.com/api/authorization#tokens-for-anonymous-sessions) of the commercetools platform API.
 
 #### Named arguments (options)
 
 1.  `host` _(String)_: the host of the OAuth API service
 2.  `projectKey` _(String)_: the key of the project to assign the default scope to
 3.  `credentials` _(Object)_: the client credentials for authentication (`clientId`, `clientSecret`, `anonymousId`)
-4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/http-api-authorization.html#scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
+4.  `scopes` _(Array)_: a list of [scopes](https://docs.commercetools.com/api/scopes) (default `manage_project:{projectKey}`) to assign to the OAuth token
 5.  `fetch` _(Function)_: A `fetch` implementation which can be e.g. `node-fetch` or `unfetch` but also the native browser `fetch` function. Only needs be be passed if not globally available (e.g. through `isomorphic-fetch`)
 6.  `timeout` _(Number)_: An optional number value (in milliseconds) which specifies when a request should timeout if authentication request fails to complete.
 7.  `getAbortController` _(Function)_: An optional abortController class instance that should signal the http-client to abandon the current request instance.
@@ -149,7 +149,7 @@ const client = createClient({
 
 ## `createAuthMiddlewareForRefreshTokenFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Refresh Token Flow](https://docs.commercetools.com/http-api-authorization.html#refresh-token-flow) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Refresh Token Flow](https://docs.commercetools.com/api/authorization#refresh-token-flow) of the commercetools platform API.
 
 #### Named arguments (options)
 

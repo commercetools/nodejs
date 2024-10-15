@@ -1,6 +1,6 @@
 # TypeScript SDK Client v2
 
-Follow this [link](https://docs.commercetools.com/sdk/javascript-sdk) for an up to date and more accurate JavaScript/TypeScript SDK documentation.
+Follow this [link](https://docs.commercetools.com/sdk/typescript-sdk) for an up to date and more accurate JavaScript/TypeScript SDK documentation.
 
 <!--
 We provide a packages written in typescript for using our API
