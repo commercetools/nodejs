@@ -1,6 +1,6 @@
 # CSV Parser Discount Code
 
-Convert [commercetools discount codes](https://docs.commercetools.com/http-api-projects-discountCodes.html) CSV data to JSON. See example below for CSV format, sample response and usage.
+Convert [commercetools discount codes](https://docs.commercetools.com/api/projects/discountCodes) CSV data to JSON. See example below for CSV format, sample response and usage.
 
 ## Usage
 

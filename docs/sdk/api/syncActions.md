@@ -442,7 +442,7 @@ client.execute(zonesRequests)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for [_productTypes_](https://docs.commercetools.com/http-api-projects-productTypes.html).
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for [_productTypes_](https://docs.commercetools.com/api/projects/productTypes).
 
 #### Arguments
 
@@ -492,7 +492,7 @@ client.execute(productTypesRequest)
 
 Unlike other resources (e.g `createSyncProducts`), `createSyncProductTypes` requires that you apply hints to calculate update actions for nested values such as `attributes` and `enumValues`.
 
-Since a [change in the API](https://docs.commercetools.com/release-notes.html#releases-2018-03-09-product-type-rename-name-and-enum-key), the [previous implementation was not capable for calculating appropiate update-actions](https://github.com/commercetools/nodejs/pull/760#issue-213684712) when an enum-value has changed its `key`, or when an attribute has changed its `name`.
+Since a [change in the API](https://docs.commercetools.com/api/releases/2018-03-09-product-type-rename_name_and_enum_key), the [previous implementation was not capable for calculating appropriate update-actions](https://github.com/commercetools/nodejs/pull/760#issue-213684712) when an enum-value has changed its `key`, or when an attribute has changed its `name`.
 
 The `key` of an enum value was used as its identifier to calculate correct update-actions. When the intention of a change was `changeEnumKey`, it is discernable for `sync-actions` to appropriately calculate that for you. Same goes for attribute values.
 
@@ -544,7 +544,7 @@ const updateActions = productTypeSync.buildActions(next, previous, {
           // isLocalized is a valuable hint to `sync-actions`, since in the API,
           // we have different update actions on an enum value depending on whether the label is localized or not.
           // read more about `changePlainEnumValueLabel` and `changeLocalizedEnumValueLabel`
-          // https://docs.commercetools.com/http-api-projects-productTypes.html#change-the-label-of-an-enumvalue
+          // https://docs.commercetools.com/api/projects/productTypes#change-the-label-of-an-enumvalue
           isLocalized: false,
         },
       },
@@ -712,9 +712,9 @@ client.execute(statesRequests)
 
 > From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for [_types_](https://docs.commercetools.com/http-api-projects-types.html).
+Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for [_types_](https://docs.commercetools.com/api/projects/types).
 
-**Please note** that there is no `remove action` for `enum` values. So this package will comply with the [platform](https://docs.commercetools.com/http-api-projects-types.html#add-enumvalue-to-fielddefinition) and only generate `changeOrder` and `add` actions for any `enum`.
+**Please note** that there is no `remove action` for `enum` values. So this package will comply with the [platform](https://docs.commercetools.com/api/projects/types#add-enumvalue-to-fielddefinition) and only generate `changeOrder` and `add` actions for any `enum`.
 
 #### Arguments
 

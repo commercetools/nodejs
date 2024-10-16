@@ -30,9 +30,9 @@ The constructor accepts two arguments:
 
 - A required object containing the following values:
   - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options)).
-  - `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`manage_products`, `manage_customers`, `manage_types`]. More info on how to get the access token [here](https://docs.commercetools.com/http-api-authorization.html#authorization-flows).
+  - `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`manage_products`, `manage_customers`, `manage_types`]. More info on how to get the access token [here](https://docs.commercetools.com/api/authorization).
   - `resource` (String): [resource] that need to be deleted.
-  - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates) (Optional).
+  - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/api/predicates/query) (Optional).
 - An optional logger object having four functions (`info`, `warn`, `error` and `debug`).
 
 ## Usage
@@ -83,7 +83,7 @@ Then you can delete resource using the cli:
 - The `--output` flag specifies where to output the deleted resource. Several notes on this flag:
   - The default location for status report logging is the standard output.
   - If no output path is specified, the deleted resource output will be logged to the standard output as a result, status reports will be logged to a `resource-deleter.log` file in the current directory.
-- The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/http-api.html#predicates).
+- The `where` flag specifies an optional (where) query predicate to be included in the request. This predicate should be wrapped in single quotes ('single quoted predicate'). More info on predicates [here](https://docs.commercetools.com/api/predicates/query).
 
 ### JS
 

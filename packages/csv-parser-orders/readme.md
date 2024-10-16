@@ -1,6 +1,6 @@
 # commercetools-csv-parser-orders
 
-Convert [commercetools order](https://dev.commercetools.com/http-api-projects-orders.html) CSV data to JSON
+Convert [commercetools order](https://docs.commercetools.com/api/projects/orders) CSV data to JSON
 
 https://commercetools.github.io/nodejs/cli/csv-parser-orders.html
 

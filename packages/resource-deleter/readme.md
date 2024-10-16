@@ -1,6 +1,6 @@
 # resource-deleter
 
-Deletes [commercetools resources](https://docs.commercetools.com/http-api.html#reference-expansion) from the commercetools platform.
+Deletes commercetools resources from the commercetools platform.
 
 More info here: https://commercetools.github.io/nodejs/cli/resource-deleter.html
 

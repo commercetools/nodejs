@@ -1,6 +1,6 @@
 # Inventories Exporter
 
-This package helps in exporting [inventories](https://docs.commercetools.com/http-api-projects-inventory.html) from the commercetools platform in `csv` and `json` format
+This package helps in exporting [inventories](https://docs.commercetools.com/api/projects/inventory) from the commercetools platform in `csv` and `json` format
 
 ## Configuration
 
@@ -43,7 +43,7 @@ Options:
                     Can be used with the query flag
 
   --query, -q       Filter query for stocks:
-                    https://docs.commercetools.com/http-api-projects-inventory.html#query-inventory
+                    https://docs.commercetools.com/api/projects/inventory#query-inventory
                     can be used with channelKey flag
 
   --template, -t    Path to a CSV template file with headers which should be

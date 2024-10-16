@@ -1,6 +1,6 @@
 # CSV Parser State
 
-Convert [commercetools states](https://docs.commercetools.com/http-api-projects-states.html#state) CSV data to JSON. See example below for CSV format, sample response and usage.
+Convert [commercetools states](https://docs.commercetools.com/api/projects/states#state) CSV data to JSON. See example below for CSV format, sample response and usage.
 
 ## Usage
 

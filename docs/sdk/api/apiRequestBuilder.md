@@ -118,7 +118,7 @@ Note that `markMatchingVariants` is set by default to `false` which turns off th
 
 #### Staged
 
-It is possible to add the `staged` boolean option to the uri. This decides wether to query the `current` or `staged` projections, for example in [Product Projections](https://docs.commercetools.com/http-api-projects-productProjections.html#product-projections). (Defaults to **false**)
+It is possible to add the `staged` boolean option to the uri. This decides wether to query the `current` or `staged` projections, for example in [Product Projections](https://docs.commercetools.com/api/projects/productProjections). (Defaults to **false**)
 
 ```js
 const service = createRequestBuilder(options)
@@ -154,7 +154,7 @@ const uri = requestBuilder.carts.byCustomerId('customerId').build()
 
 #### dataErasure
 
-You can also append the `dataErasure` option to the uri when making a delete request if you want to make sure all related data is deleted. For example, regarding the GDPR, this means that all personal data related to the particular object, including invisible data, is erased. [More info here](https://docs.commercetools.com/release-notes#releases-2018-05-24-data-erasure)
+You can also append the `dataErasure` option to the uri when making a delete request if you want to make sure all related data is deleted. For example, regarding the GDPR, this means that all personal data related to the particular object, including invisible data, is erased. [More info here](https://docs.commercetools.com/api/releases/2018-05-24-data-erasure)
 
 This can be done by using the `.withFullDataErasure()` method.
 
@@ -169,7 +169,7 @@ const deleteUri = service.payments
 
 #### withTotal
 
-You can also append the `withTotal` option to the uri when making a query. [More info here](https://docs.commercetools.com/http-api#pagedqueryresult).
+You can also append the `withTotal` option to the uri when making a query. [More info here](https://docs.commercetools.com/api/general-concepts#pagedqueryresult).
 
 This can be done by using the `.withTotal(false)` method.
 

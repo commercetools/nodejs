@@ -1,6 +1,6 @@
 # Product JSON to XLSX Parser
 
-A package that parses [commercetools products](https://docs.commercetools.com/http-api-projects-products.html#product) JSON data to XLSX.
+A package that parses [commercetools products](https://docs.commercetools.com/api/projects/products#product) JSON data to XLSX.
 The products to be parsed can either be read from a `.json` file or directly [piped in](http://www.gnu.org/software/bash/manual/bash.html#Pipelines) from the [product exporter](https://commercetools.github.io/nodejs/cli/product-exporter.html).
 
 ## Usage
