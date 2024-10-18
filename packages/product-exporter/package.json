@@ -54,7 +54,7 @@
   },
   "resolutions": {
     "y18n": "3.2.2",
-    "hosted-git-info": "4.0.2",
+    "hosted-git-info": "4.1.0",
     "yargs-parser": "13.1.2"
   },
   "devDependencies": {
