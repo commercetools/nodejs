@@ -7,7 +7,7 @@
     "node": ">=14"
   },
   "name": "@commercetools/sync-actions",
-  "version": "5.19.2",
+  "version": "6.0.0",
   "description": "Build API update actions for the commercetools platform.",
   "keywords": [
     "commercetools",
