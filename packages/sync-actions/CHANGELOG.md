@@ -1,8 +1,8 @@
 # @commercetools/sync-actions
 
-## 5.19.3
+## 6.0.0
 
-### Patch Changes
+### Major Changes
 
 - [#1919](https://github.com/commercetools/nodejs/pull/1919) [`1c867e02`](https://github.com/commercetools/nodejs/commit/1c867e02285f5030d5ef7aebef46ea27e5e8521b) Thanks [@CarlosCortizasCT](https://github.com/CarlosCortizasCT)! - Update the way we import the `jsondiffpath` dependency to use `import` instead of `require`.
 
