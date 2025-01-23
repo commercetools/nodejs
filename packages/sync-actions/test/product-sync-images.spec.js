@@ -463,6 +463,121 @@ describe('Actions', () => {
         },
       ])
     })
+    test('should build actions for adding an image', () => {
+      const before = {
+        key: 'foo-key',
+        published: true,
+        hasStagedChanges: true,
+        masterVariant: {
+          assets: [],
+          images: [],
+          prices: [],
+          sku: 'third-variant',
+          id: 3,
+        },
+        variants: [
+          {
+            assets: [],
+            prices: [],
+            images: [
+              {
+                url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/Screen+Shot+2017-04--LOx1OrZZ.png',
+                dimensions: {
+                  w: 1456,
+                  h: 1078,
+                },
+              },
+              {
+                url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/cactus-with-surfboar-BmOeVZEZ.jpg',
+                label: 'cactus',
+                dimensions: {
+                  w: 602,
+                  h: 600,
+                },
+              },
+            ],
+            sku: '89978FRU',
+            id: 1,
+          },
+        ],
+      }
+
+      const now = {
+        key: 'foo-key',
+        published: true,
+        hasStagedChanges: true,
+        masterVariant: {
+          assets: [],
+          images: [],
+          prices: [],
+          sku: 'third-variant',
+          id: 3,
+        },
+        variants: [
+          {
+            assets: [],
+            prices: [],
+            images: [
+              {
+                url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/plant.jpg',
+                label: 'plant',
+                dimensions: {
+                  w: 1602,
+                  h: 1600,
+                },
+              },
+              {
+                url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/seed.jpg',
+                label: 'seed',
+                dimensions: {
+                  w: 800,
+                  h: 600,
+                },
+              },
+              {
+                url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/Screen+Shot+2017-04--LOx1OrZZ.png',
+                dimensions: {
+                  w: 1456,
+                  h: 1078,
+                },
+              },
+              {
+                url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/cactus-with-surfboar-BmOeVZEZ.jpg',
+                label: 'cactus',
+                dimensions: {
+                  w: 602,
+                  h: 600,
+                },
+              },
+            ],
+            sku: '89978FRU',
+            id: 1,
+          },
+        ],
+      }
+
+      const actions = productsSync.buildActions(now, before)
+      expect(actions).toEqual([
+        {
+          action: 'addExternalImage',
+          image: {
+            dimensions: { h: 1600, w: 1602 },
+            label: 'plant',
+            url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/plant.jpg',
+          },
+          variantId: 1,
+        },
+        {
+          action: 'addExternalImage',
+          image: {
+            dimensions: { h: 600, w: 800 },
+            label: 'seed',
+            url: 'https://95bc80c3c245100a18cc-04fc5bec7ec901344d7cbd57f9a2fab3.ssl.cf3.rackcdn.com/seed.jpg',
+          },
+          variantId: 1,
+        },
+      ])
+    })
   })
 
   describe('without images', () => {
