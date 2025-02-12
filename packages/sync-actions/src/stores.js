@@ -1,6 +1,11 @@
 /* @flow */
 import flatten from 'lodash.flatten'
-import type { SyncAction, UpdateAction, ActionGroup } from 'types/sdk'
+import type {
+  SyncAction,
+  UpdateAction,
+  ActionGroup,
+  SyncActionConfig,
+} from 'types/sdk'
 import createBuildActions from './utils/create-build-actions'
 import createMapActionGroup from './utils/create-map-action-group'
 import actionsMapCustom from './utils/action-map-custom'
@@ -41,14 +46,18 @@ function createStoresMapActions(
   }
 }
 
-export default (actionGroupList: Array<ActionGroup>): SyncAction => {
+export default (
+  actionGroupList: Array<ActionGroup>,
+  options: SyncActionConfig = {}
+): SyncAction => {
   const mapActionGroup = createMapActionGroup(actionGroupList)
   const doMapActions = createStoresMapActions(mapActionGroup)
   const onBeforeApplyingDiff = null
   const buildActions = createBuildActions(
     diffpatcher.diff,
     doMapActions,
-    onBeforeApplyingDiff
+    onBeforeApplyingDiff,
+    options
   )
 
   return { buildActions }

@@ -12,5 +12,6 @@ export function actionsMapBase(diff, oldObj, newObj, config = {}) {
     oldObj,
     newObj,
     shouldOmitEmptyString: config.shouldOmitEmptyString,
+    shouldUnsetOmittedProperties: config.shouldUnsetOmittedProperties,
   })
 }

@@ -7,11 +7,13 @@ export const baseActionsList = [
   { action: 'setSupplyChannels', key: 'supplyChannels' },
 ]
 
-export function actionsMapBase(diff, oldObj, newObj) {
+export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
     diff,
     oldObj,
     newObj,
+    shouldOmitEmptyString: config.shouldOmitEmptyString,
+    shouldUnsetOmittedProperties: config.shouldUnsetOmittedProperties,
   })
 }
