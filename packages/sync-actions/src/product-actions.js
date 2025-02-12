@@ -526,15 +526,18 @@ export function actionsMapBase(diff, oldObj, newObj, config = {}) {
     oldObj,
     newObj,
     shouldOmitEmptyString: config.shouldOmitEmptyString,
+    shouldUnsetOmittedProperties: config.shouldUnsetOmittedProperties,
   })
 }
 
-export function actionsMapMeta(diff, oldObj, newObj) {
+export function actionsMapMeta(diff, oldObj, newObj, config = {}) {
   return buildBaseAttributesActions({
     actions: metaActionsList,
     diff,
     oldObj,
     newObj,
+    shouldOmitEmptyString: config.shouldOmitEmptyString,
+    shouldUnsetOmittedProperties: config.shouldUnsetOmittedProperties,
   })
 }
 

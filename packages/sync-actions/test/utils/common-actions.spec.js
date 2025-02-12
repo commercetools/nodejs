@@ -35,10 +35,6 @@ describe('Common actions', () => {
         key: 'customerNumber',
       },
       {
-        action: 'setCustomerNumber',
-        key: 'customerNumber',
-      },
-      {
         action: 'changeQuantity',
         key: 'quantityOnStock',
         actionKey: 'quantity',
@@ -114,6 +110,55 @@ describe('Common actions', () => {
             key: '',
           },
         ])
+      })
+    })
+    describe('`shouldUnsetOmittedProperties`', () => {
+      test('if true => should generate unset actions for omitted properties', () => {
+        before = {
+          name: { en: 'Foo' },
+          description: 'description',
+          externalId: '123',
+          slug: { en: 'foo' },
+          customerNumber: 'customer-number',
+          quantityOnStock: 1,
+        }
+        now = {}
+        actions = buildBaseAttributesActions({
+          actions: testActions,
+          diff: diffpatcher.diff(before, now),
+          oldObj: before,
+          newObj: now,
+          shouldOmitEmptyString: false,
+          shouldUnsetOmittedProperties: true,
+        })
+        expect(actions).toEqual([
+          { action: 'changeName' },
+          { action: 'setDescription' },
+          { action: 'setExternalId' },
+          { action: 'changeSlug' },
+          { action: 'setCustomerNumber' },
+          { action: 'changeQuantity' },
+        ])
+      })
+      test('if false => should not generate unset actions for omitted properties', () => {
+        before = {
+          name: { en: 'Foo' },
+          description: 'description',
+          externalId: '123',
+          slug: { en: 'foo' },
+          customerNumber: 'customer-number',
+          quantityOnStock: 1,
+        }
+        now = {}
+        actions = buildBaseAttributesActions({
+          actions: testActions,
+          diff: diffpatcher.diff(before, now),
+          oldObj: before,
+          newObj: now,
+          shouldOmitEmptyString: false,
+          shouldUnsetOmittedProperties: false,
+        })
+        expect(actions).toEqual([])
       })
     })
   })
