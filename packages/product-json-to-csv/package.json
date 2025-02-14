@@ -68,8 +68,8 @@
     "yargs": "^16.0.0"
   },
   "devDependencies": {
-    "stream-to-string": "1.2.0",
+    "stream-to-string": "1.2.1",
     "streamtest": "2.0.0",
-    "unzipper": "0.10.11"
+    "unzipper": "0.12.3"
   }
 }
