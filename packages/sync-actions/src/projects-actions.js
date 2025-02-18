@@ -39,7 +39,7 @@ export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   })
 }
 
-export const actionsMapBusinessUnit = (diff, oldObj, newObj) => {
+export const actionsMapBusinessUnit = (diff, oldObj, newObj, config = {}) => {
   const { businessUnits } = diff
   if (!businessUnits) {
     return []
@@ -50,10 +50,17 @@ export const actionsMapBusinessUnit = (diff, oldObj, newObj) => {
     diff: businessUnits,
     oldObj: oldObj.businessUnits,
     newObj: newObj.businessUnits,
+    shouldOmitEmptyString: config.shouldOmitEmptyString,
+    shouldUnsetOmittedProperties: config.shouldUnsetOmittedProperties,
   })
 }
 
-export function actionsMapSearchIndexingConfiguration(diff, oldObj, newObj) {
+export function actionsMapSearchIndexingConfiguration(
+  diff,
+  oldObj,
+  newObj,
+  config = {}
+) {
   const { searchIndexing } = diff
 
   if (!searchIndexing) {
@@ -70,5 +77,9 @@ export function actionsMapSearchIndexingConfiguration(diff, oldObj, newObj) {
     diff: diff.searchIndexing.customers,
     oldObj: oldObj.searchIndexing.customers,
     newObj: newObj.searchIndexing.customers,
+    shouldOmitEmptyString: config.shouldOmitEmptyString,
+    shouldUnsetOmittedProperties: config.shouldUnsetOmittedProperties,
+    shouldPreventUnsettingRequiredFields:
+      config.shouldPreventUnsettingRequiredFields,
   })
 }

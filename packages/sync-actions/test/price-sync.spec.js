@@ -575,6 +575,29 @@ describe('price actions', () => {
         },
       ])
     })
+    test('should build `setValidFromAndUntil` empty action when `shouldUnsetOmittedProperties=true`', () => {
+      const priceSyncer = pricesSyncFn([], {
+        shouldUnsetOmittedProperties: true,
+      })
+      const before = {
+        id: '1010',
+        validFrom: dateNow,
+        validUntil: dateNow,
+      }
+
+      const now = {
+        id: '1010',
+      }
+
+      const actions = priceSyncer.buildActions(now, before)
+      expect(actions).toEqual([
+        {
+          action: 'setValidFromAndUntil',
+          validFrom: undefined,
+          validUntil: undefined,
+        },
+      ])
+    })
   })
 
   describe('setValidUntil', () => {
