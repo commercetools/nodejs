@@ -8,6 +8,9 @@ const normalizeValue = (value) =>
 export const createIsEmptyValue = (emptyValues) => (value) =>
   emptyValues.some((emptyValue) => emptyValue === normalizeValue(value))
 
+/* actions that start with 'set' can generate undefined valued */
+export const isOptionalField = (action) => action.startsWith('set')
+
 /**
  * Builds actions for simple object properties, given a list of actions
  * E.g. [{ action: `changeName`, key: 'name' }]
@@ -19,6 +22,7 @@ export const createIsEmptyValue = (emptyValues) => (value) =>
  * @param  {Object} options.newObj - the new representation of the object
  * @param {Boolean} options.shouldOmitEmptyString - a flag to determine if we should treat an empty string a NON-value
  * @param {Boolean} options.shouldUnsetOmittedProperties - a flag to determine if we should unset fields which are omitted in the newObj
+ * @param {Boolean} options.shouldPreventUnsettingRequiredFields - a flag to determine if required fields should be unset
  */
 export function buildBaseAttributesActions({
   actions,
@@ -27,6 +31,7 @@ export function buildBaseAttributesActions({
   newObj,
   shouldOmitEmptyString,
   shouldUnsetOmittedProperties,
+  shouldPreventUnsettingRequiredFields,
 }) {
   const isEmptyValue = createIsEmptyValue(
     shouldOmitEmptyString ? [undefined, null, ''] : [undefined, null]
@@ -42,6 +47,13 @@ export function buildBaseAttributesActions({
       const isNotDefinedNow = isEmptyValue(newObj[key])
       const isOmitted = !{}.hasOwnProperty.call(newObj, key)
       if (!delta) return undefined
+
+      if (
+        isNotDefinedNow &&
+        !isOptionalField(item.action) &&
+        shouldPreventUnsettingRequiredFields
+      )
+        return undefined
 
       if (isNotDefinedNow && isNotDefinedBefore) return undefined
 

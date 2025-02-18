@@ -79,5 +79,7 @@ export function actionsMapSearchIndexingConfiguration(
     newObj: newObj.searchIndexing.customers,
     shouldOmitEmptyString: config.shouldOmitEmptyString,
     shouldUnsetOmittedProperties: config.shouldUnsetOmittedProperties,
+    shouldPreventUnsettingRequiredFields:
+      config.shouldPreventUnsettingRequiredFields,
   })
 }

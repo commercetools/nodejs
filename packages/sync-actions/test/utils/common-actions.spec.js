@@ -161,6 +161,71 @@ describe('Common actions', () => {
         expect(actions).toEqual([])
       })
     })
+    describe('`shouldPreventUnsettingRequiredFields`', () => {
+      test('if true => should not generate unset actions for required fields', () => {
+        before = {
+          name: { en: 'Foo' },
+          description: 'description',
+          externalId: '123',
+          slug: { en: 'foo' },
+          customerNumber: 'customer-number',
+          quantityOnStock: 1,
+        }
+        now = {
+          name: null,
+          description: null,
+          externalId: null,
+          slug: null,
+          customerNumber: null,
+          quantityOnStock: null,
+        }
+        actions = buildBaseAttributesActions({
+          actions: testActions,
+          diff: diffpatcher.diff(before, now),
+          oldObj: before,
+          newObj: now,
+          shouldPreventUnsettingRequiredFields: true,
+        })
+        expect(actions).toEqual([
+          { action: 'setDescription' },
+          { action: 'setExternalId' },
+          { action: 'setCustomerNumber' },
+        ])
+      })
+      test('if false => should generate unset actions for required fields', () => {
+        before = {
+          name: { en: 'Foo' },
+          description: 'description',
+          externalId: '123',
+          slug: { en: 'foo' },
+          customerNumber: 'customer-number',
+          quantityOnStock: 1,
+        }
+        now = {
+          name: null,
+          description: null,
+          externalId: null,
+          slug: null,
+          customerNumber: null,
+          quantityOnStock: null,
+        }
+        actions = buildBaseAttributesActions({
+          actions: testActions,
+          diff: diffpatcher.diff(before, now),
+          oldObj: before,
+          newObj: now,
+          shouldPreventUnsettingRequiredFields: false,
+        })
+        expect(actions).toEqual([
+          { action: 'changeName' },
+          { action: 'setDescription' },
+          { action: 'setExternalId' },
+          { action: 'changeSlug' },
+          { action: 'setCustomerNumber' },
+          { action: 'changeQuantity' },
+        ])
+      })
+    })
   })
 
   describe('::buildReferenceActions', () => {
