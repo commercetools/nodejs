@@ -45,7 +45,7 @@ export function buildBaseAttributesActions({
       const now = newObj[key]
       const isNotDefinedBefore = isEmptyValue(oldObj[key])
       const isNotDefinedNow = isEmptyValue(newObj[key])
-      const isOmitted = !{}.hasOwnProperty.call(newObj, key)
+      const isOmitted = !Object.keys(newObj).includes(key)
       if (!delta) return undefined
 
       if (
