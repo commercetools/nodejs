@@ -435,6 +435,8 @@ export type SyncAction = {
 }
 export type SyncActionConfig = {
   shouldOmitEmptyString: boolean,
+  shouldUnsetOmittedProperties: boolean,
+  shouldPreventUnsettingRequiredFields: boolean
 }
 export type ActionGroup = {
   type: string,
