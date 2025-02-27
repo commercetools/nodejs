@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 6.1.0
+
+### Minor Changes
+
+- [#1921](https://github.com/commercetools/nodejs/pull/1921) [`c9d23e86`](https://github.com/commercetools/nodejs/commit/c9d23e86a6013aafb6a3c296121e1c5995d9eab6) Thanks [@kafis](https://github.com/kafis)! - Introducing configuration to control the behaviour regarding generation of UpdateActions in respect to unsetting fields
+
 ## 6.0.0
 
 ### Major Changes
