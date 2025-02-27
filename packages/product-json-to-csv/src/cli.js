@@ -8,6 +8,15 @@ import yargs from 'yargs'
 import ProductJsonToCsv from './main'
 import { description } from '../package.json'
 
+const doesFileExist = (filePath) => {
+  try {
+    fs.accessSync(filePath)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 process.title = 'product-json-to-csv'
 
 const args = yargs
@@ -44,7 +53,7 @@ Required scopes: ['view_products']`,
       'CSV file containing your header that defines what you want to export.',
   })
   .coerce('template', (arg) => {
-    if (fs.existsSync(arg)) {
+    if (doesFileExist(arg)) {
       if (arg.match(/\.csv$/i)) return fs.createReadStream(String(arg))
 
       throw new Error('Invalid file format. Must be CSV file')
@@ -59,7 +68,7 @@ Required scopes: ['view_products']`,
   .coerce('input', (arg) => {
     if (arg === 'stdin') return process.stdin
 
-    if (fs.existsSync(arg)) {
+    if (doesFileExist(arg)) {
       if (arg.match(/\.json$/i)) return fs.createReadStream(String(arg))
 
       throw new Error('Invalid input file format. Must be JSON file')
