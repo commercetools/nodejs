@@ -104,7 +104,7 @@
     "prettier": "2.4.1",
     "resolve": "1.20.0",
     "rimraf": "3.0.2",
-    "rollup": "2.60.0",
+    "rollup": "2.79.2",
     "rollup-plugin-babel": "4.4.0",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-includepaths": "0.2.4",
