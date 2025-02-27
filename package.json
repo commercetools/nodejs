@@ -122,7 +122,7 @@
   "resolutions": {
     "graceful-fs": "4.2.8",
     "**/graceful-fs": "4.2.8",
-    "y18n": "3.2.2",
+    "y18n": "5.0.8",
     "lodash": "4.17.21",
     "handlebars": "4.7.7",
     "growl": "1.10.5",
