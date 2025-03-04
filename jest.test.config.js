@@ -19,6 +19,9 @@ module.exports = {
     '^.+\\.js$': '<rootDir>/jest.transform.js',
     '^.+\\.ts?$': 'ts-jest',
   },
+  transformIgnorePatterns: [
+    "node_modules/(?!(jsondiffpatch)/)"
+  ],
   testRegex: '\\.spec\\.(js|ts)$',
   moduleFileExtensions: ['ts', 'js'],
   testPathIgnorePatterns: [

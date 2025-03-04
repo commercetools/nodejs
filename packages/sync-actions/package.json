@@ -4,7 +4,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "name": "@commercetools/sync-actions",
   "version": "6.1.0",
@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "fast-equals": "^2.0.0",
-    "jsondiffpatch": "0.4.0",
+    "jsondiffpatch": "0.6.0",
     "lodash.flatten": "^4.4.0",
     "lodash.foreach": "^4.5.0",
     "lodash.isequal": "^4.5.0",
