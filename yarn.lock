@@ -1350,6 +1350,23 @@
   resolved "https://registry.yarnpkg.com/@commercetools/sdk-middleware-logger/-/sdk-middleware-logger-2.1.2.tgz#6b8ce77699bf5d8e5ec4f243a2c9d691094ef0c7"
   integrity sha512-uGhhAUnZzLWO3ozzz6VDMUAKr5Y9ctVyqfExXVC7t37IgppLsKrrvLl6VMoU2uXjIGSNA0VN0Kxgj93rBBejTQ==
 
+"@commercetools/sync-actions@^5.0.0":
+  version "5.19.2"
+  resolved "https://registry.yarnpkg.com/@commercetools/sync-actions/-/sync-actions-5.19.2.tgz#93cf5bd624feeabe56517299b3c54b13593eb906"
+  integrity sha512-9CrqaSxhZ2+TIcfr1Jvatj1Mme85rYkWtcAevrA/wqYbTkU095hQMHu1cIJ3vH4zkKXtq6ORL0k1DXVLgy8lXA==
+  dependencies:
+    fast-equals "^2.0.0"
+    jsondiffpatch "^0.4.0"
+    lodash.flatten "^4.4.0"
+    lodash.foreach "^4.5.0"
+    lodash.intersection "^4.4.0"
+    lodash.isequal "^4.5.0"
+    lodash.isnil "^4.0.0"
+    lodash.shuffle "^4.2.0"
+    lodash.sortby "^4.7.0"
+    lodash.uniqwith "^4.5.0"
+    lodash.without "^4.4.0"
+
 "@commitlint/cli@12.1.4":
   version "12.1.4"
   resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-12.1.4.tgz#af4d9dd3c0122c7b39a61fa1cd2abbad0422dbe0"
@@ -9286,6 +9303,14 @@ jsondiffpatch@0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/jsondiffpatch/-/jsondiffpatch-0.4.0.tgz#0a7bf7e9ddb42a7353fc8f36323a0644b548e756"
   integrity sha512-QdGUINo8RyqCjskw1vVeVJNdj2BAtOixXU1C1pQ3FQGvaBmNoPdXrMlTr3wvIna4I3SXuUMmjyxxSBOIuGShcg==
+  dependencies:
+    chalk "^2.3.0"
+    diff-match-patch "^1.0.0"
+
+jsondiffpatch@^0.4.0:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/jsondiffpatch/-/jsondiffpatch-0.4.1.tgz#9fb085036767f03534ebd46dcd841df6070c5773"
+  integrity sha512-t0etAxTUk1w5MYdNOkZBZ8rvYYN5iL+2dHCCx/DpkFm/bW28M6y5nUS83D4XdZiHy35Fpaw6LBb+F88fHZnVCw==
   dependencies:
     chalk "^2.3.0"
     diff-match-patch "^1.0.0"
