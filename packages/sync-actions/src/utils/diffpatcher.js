@@ -1,4 +1,4 @@
-import { DiffPatcher } from 'jsondiffpatch'
+import { DiffPatcher } from 'jsondiffpatch/dist/jsondiffpatch.cjs'
 
 export function objectHash(obj, index) {
   const objIndex = `$$index:${index}`
