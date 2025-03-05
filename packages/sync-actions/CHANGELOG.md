@@ -1,5 +1,13 @@
 # @commercetools/sync-actions
 
+## 6.1.1
+
+### Patch Changes
+
+- [#1927](https://github.com/commercetools/nodejs/pull/1927) [`a4705c19`](https://github.com/commercetools/nodejs/commit/a4705c19af234cccde74cb52bfff912bf380c6ba) Thanks [@CarlosCortizasCT](https://github.com/CarlosCortizasCT)! - We found an issue in the way the `jsondiffpatch` was used that made this package not usable in a browser environment.
+
+  In this version we adjust the way that package is imported and we pin a transitive dependency (`chalk`) to fix the error.
+
 ## 6.1.0
 
 ### Minor Changes
