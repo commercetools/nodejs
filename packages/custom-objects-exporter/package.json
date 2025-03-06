@@ -9,9 +9,7 @@
   "version": "5.0.0",
   "description": "Exports custom objects from the commercetools platform.",
   "main": "lib/main.js",
-  "bin": {
-    "custom-objects-exporter": "bin/custom-objects-exporter.js"
-  },
+  "bin": "bin/custom-objects-exporter.js",
   "scripts": {
     "prebuild": "rimraf lib/**",
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"

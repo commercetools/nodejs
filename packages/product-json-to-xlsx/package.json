@@ -30,9 +30,7 @@
     "email": "jan.juna-ext@commercetools.com"
   },
   "main": "lib/index.js",
-  "bin": {
-    "product-json-to-xlsx": "bin/product-json-to-xlsx.js"
-  },
+  "bin": "bin/product-json-to-xlsx.js",
   "files": [
     "bin",
     "lib"

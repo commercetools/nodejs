@@ -27,9 +27,7 @@
     "Williams Omayuku <williams.omayuku@commercetools.com>"
   ],
   "main": "lib/main.js",
-  "bin": {
-    "discount-code-exporter": "bin/discount-code-exporter.js"
-  },
+  "bin": "bin/discount-code-exporter.js",
   "files": [
     "bin",
     "lib"
