@@ -4,7 +4,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "name": "@commercetools/sync-actions",
   "version": "6.1.1",

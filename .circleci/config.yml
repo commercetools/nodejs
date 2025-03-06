@@ -3,29 +3,6 @@ version: 2.1
 aliases:
   - &working_directory ~/nodejs
 
-  - &restore_yarn_cache_node_14
-    keys:
-      - v1-yarn-cache-node_14-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - v1-yarn-cache-node_14-{{ .Branch }}
-      - v1-yarn-cache-node_14
-
-  - &save_yarn_cache_node_14
-    key: v1-yarn-cache-node_14-{{ .Branch }}-{{ checksum "yarn.lock" }}
-    paths:
-      - ~/.cache/yarn
-
-
-  - &restore_yarn_cache_node_16
-    keys:
-      - v1-yarn-cache-node_16-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - v1-yarn-cache-node_16-{{ .Branch }}
-      - v1-yarn-cache-node_16
-
-  - &save_yarn_cache_node_16
-    key: v1-yarn-cache-node_16-{{ .Branch }}-{{ checksum "yarn.lock" }}
-    paths:
-      - ~/.cache/yarn
-
   - &restore_yarn_cache_node_18
     keys:
       - v1-yarn-cache-node_18-{{ .Branch }}-{{ checksum "yarn.lock" }}
@@ -37,33 +14,56 @@ aliases:
     paths:
       - ~/.cache/yarn
 
+
+  - &restore_yarn_cache_node_20
+    keys:
+      - v1-yarn-cache-node_20-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - v1-yarn-cache-node_20-{{ .Branch }}
+      - v1-yarn-cache-node_20
+
+  - &save_yarn_cache_node_20
+    key: v1-yarn-cache-node_20-{{ .Branch }}-{{ checksum "yarn.lock" }}
+    paths:
+      - ~/.cache/yarn
+
+  - &restore_yarn_cache_node_22
+    keys:
+      - v1-yarn-cache-node_22-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - v1-yarn-cache-node_22-{{ .Branch }}
+      - v1-yarn-cache-node_22
+
+  - &save_yarn_cache_node_22
+    key: v1-yarn-cache-node_22-{{ .Branch }}-{{ checksum "yarn.lock" }}
+    paths:
+      - ~/.cache/yarn
+
   - &yarn_install
     name: Installing
     command: yarn --frozen-lockfile
 
 executors:
-  node_14:
-    docker:
-      - image: cimg/node:14.19.3
-    working_directory: *working_directory
-  node_16:
-    docker:
-      - image: cimg/node:16.16.0
-    working_directory: *working_directory
-
   node_18:
     docker:
-      - image: cimg/node:18.4.0
+      - image: cimg/node:18.18.0
+    working_directory: *working_directory
+  node_20:
+    docker:
+      - image: cimg/node:20.9.0
+    working_directory: *working_directory
+
+  node_22:
+    docker:
+      - image: cimg/node:22.14.0
     working_directory: *working_directory
 
 jobs:
-  install_test_node_14:
-    executor: node_14
+  install_test_node_18:
+    executor: node_18
     steps:
       - checkout
-      - restore_cache: *restore_yarn_cache_node_14
+      - restore_cache: *restore_yarn_cache_node_18
       - run: *yarn_install
-      - save_cache: *save_yarn_cache_node_14
+      - save_cache: *save_yarn_cache_node_18
       - run:
           name: Running linters
           # Limiting the workers of Jest to 10
@@ -78,13 +78,13 @@ jobs:
           name: Running test (with coverage report)
           command: yarn test:ci
 
-  install_test_node_16:
-    executor: node_16
+  install_test_node_20:
+    executor: node_20
     steps:
       - checkout
-      - restore_cache: *restore_yarn_cache_node_16
+      - restore_cache: *restore_yarn_cache_node_20
       - run: *yarn_install
-      - save_cache: *save_yarn_cache_node_16
+      - save_cache: *save_yarn_cache_node_20
       - run:
           name: Running linters
           # Limiting the workers of Jest to 10
@@ -99,13 +99,13 @@ jobs:
           name: Running integration tests
           command: yarn test:integration
 
-  install_test_node_18:
-    executor: node_18
+  install_test_node_22:
+    executor: node_22
     steps:
       - checkout
-      - restore_cache: *restore_yarn_cache_node_18
+      - restore_cache: *restore_yarn_cache_node_22
       - run: *yarn_install
-      - save_cache: *save_yarn_cache_node_18
+      - save_cache: *save_yarn_cache_node_22
       - run:
           name: Running linters
           # Limiting the workers of Jest to 10
@@ -124,13 +124,13 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - install_test_node_14:
-          context: org-global
-      - install_test_node_16:
-          context: org-global
-          requires:
-            - install_test_node_14
       - install_test_node_18:
           context: org-global
+      - install_test_node_20:
+          context: org-global
           requires:
-            - install_test_node_16
+            - install_test_node_18
+      - install_test_node_22:
+          context: org-global
+          requires:
+            - install_test_node_20
