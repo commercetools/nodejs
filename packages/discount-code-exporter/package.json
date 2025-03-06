@@ -1,10 +1,9 @@
 {
-  "private": false,
   "publishConfig": {
     "access": "public"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "name": "@commercetools/discount-code-exporter",
   "version": "5.0.0",
@@ -28,9 +27,7 @@
     "Williams Omayuku <williams.omayuku@commercetools.com>"
   ],
   "main": "lib/main.js",
-  "bin": {
-    "discount-code-exporter": "bin/discount-code-exporter.js"
-  },
+  "bin": "bin/discount-code-exporter.js",
   "files": [
     "bin",
     "lib"

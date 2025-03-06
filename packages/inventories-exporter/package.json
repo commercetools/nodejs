@@ -1,10 +1,9 @@
 {
-  "private": false,
   "publishConfig": {
     "access": "public"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "name": "@commercetools/inventories-exporter",
   "version": "4.0.0",

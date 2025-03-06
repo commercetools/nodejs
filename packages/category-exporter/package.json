@@ -1,18 +1,15 @@
 {
-  "private": false,
   "publishConfig": {
     "access": "public"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "name": "@commercetools/category-exporter",
   "version": "4.0.0",
   "description": "Exports categories from the commercetools platform.",
   "main": "lib/main.js",
-  "bin": {
-    "category-exporter": "bin/category-exporter.js"
-  },
+  "bin": "bin/category-exporter.js",
   "scripts": {
     "prebuild": "rimraf lib/**",
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"

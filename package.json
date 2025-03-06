@@ -2,7 +2,7 @@
   "private": true,
   "license": "MIT",
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "scripts": {
     "postinstall": "check-node-version --package --print && cross-env NODE_ENV=development yarn build",
@@ -121,7 +121,6 @@
   },
   "resolutions": {
     "graceful-fs": "4.2.8",
-    "**/graceful-fs": "4.2.8",
     "y18n": "3.2.2",
     "lodash": "4.17.21",
     "handlebars": "4.7.7",
@@ -135,5 +134,6 @@
     "npm": "6.14.17",
     "set-value": "4.0.1",
     "chalk": "3.0.0"
-  }
+  },
+  "packageManager": "yarn@1.22.4+sha512.a1833b862fe52169bd6c2a033045a07df5bc6a23595c259e675fed1b2d035ab37abe6ce309720abb6636d68f03615054b6292dc0a70da31c8697fda228b50d18"
 }
