@@ -23,8 +23,7 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 
 1.  Clone the repo with `git clone git@github.com:commercetools/nodejs.git`
 
-2.  Run `pnpm install` in the root `nodejs` folder. This will ensure that all package dependencies are properly installed / linked. The repository uses [lerna](https://github.com/lerna/lerna) to orchestrate the different packages.
-
+2.  Run `pnpm install` in the root `nodejs` folder. This will ensure that all package dependencies are properly installed / linked. The repository uses [manypkg](https://github.com/Thinkmill/manypkg) to orchestrate the different packages.
 3.  If you're writing documentation, you can start the gitbook development server with `pnpm docs:watch`
 
 4.  To run all packages tests simply do `pnpm test` (we use [jest](https://github.com/facebook/jest)). If you want to work on a specific package and run the tests only for that package, we recommend to use `pnpm test:package`. This will prompt you to select one of the available packages. To run in _watch_ mode simply do `pnpm test:package --watch`.
