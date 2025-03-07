@@ -23,7 +23,7 @@ overrides:
 importers:
 
   .:
-    dependencies:
+    devDependencies:
       '@babel/cli':
         specifier: 7.26.4
         version: 7.26.4(@babel/core@7.26.9)
@@ -259,103 +259,103 @@ importers:
   integration-tests:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@commercetools/category-exporter':
-        specifier: ^4.0.0
-        version: 4.0.0(encoding@0.1.13)
+        specifier: ^5.0.0
+        version: 5.0.0(encoding@0.1.13)
       '@commercetools/csv-parser-discount-code':
-        specifier: ^3.0.0
-        version: 3.0.0
-      '@commercetools/csv-parser-orders':
-        specifier: ^3.0.0
-        version: 3.0.0
-      '@commercetools/csv-parser-price':
-        specifier: ^5.0.0
-        version: 5.0.0(encoding@0.1.13)
-      '@commercetools/csv-parser-state':
-        specifier: ^4.0.0
-        version: 4.0.0(encoding@0.1.13)
-      '@commercetools/custom-objects-exporter':
-        specifier: ^4.0.0
-        version: 4.0.0(encoding@0.1.13)
-      '@commercetools/custom-objects-importer':
-        specifier: ^4.0.0
-        version: 4.0.0(encoding@0.1.13)
-      '@commercetools/customer-groups-exporter':
-        specifier: ^4.0.0
-        version: 4.0.0(encoding@0.1.13)
-      '@commercetools/discount-code-exporter':
-        specifier: ^5.0.0
-        version: 5.0.0(encoding@0.1.13)
-      '@commercetools/discount-code-generator':
-        specifier: ^3.0.0
-        version: 3.0.0
-      '@commercetools/discount-code-importer':
-        specifier: ^4.0.0
-        version: 4.0.1(encoding@0.1.13)
-      '@commercetools/get-credentials':
         specifier: ^4.0.0
         version: 4.0.0
+      '@commercetools/csv-parser-orders':
+        specifier: ^4.0.0
+        version: 4.0.0
+      '@commercetools/csv-parser-price':
+        specifier: ^6.0.0
+        version: 6.0.0(encoding@0.1.13)
+      '@commercetools/csv-parser-state':
+        specifier: ^5.0.0
+        version: 5.0.0(encoding@0.1.13)
+      '@commercetools/custom-objects-exporter':
+        specifier: ^5.0.0
+        version: 5.0.0(encoding@0.1.13)
+      '@commercetools/custom-objects-importer':
+        specifier: ^5.0.0
+        version: 5.0.0(encoding@0.1.13)
+      '@commercetools/customer-groups-exporter':
+        specifier: ^5.0.0
+        version: 5.0.0(encoding@0.1.13)
+      '@commercetools/discount-code-exporter':
+        specifier: ^6.0.0
+        version: 6.0.0(encoding@0.1.13)
+      '@commercetools/discount-code-generator':
+        specifier: ^4.0.0
+        version: 4.0.0
+      '@commercetools/discount-code-importer':
+        specifier: ^5.0.0
+        version: 5.0.0(encoding@0.1.13)
+      '@commercetools/get-credentials':
+        specifier: ^5.0.0
+        version: 5.0.0
       '@commercetools/http-user-agent':
-        specifier: 3.0.0
-        version: 3.0.0
+        specifier: 4.0.0
+        version: 4.0.0
       '@commercetools/inventories-exporter':
-        specifier: ^4.0.0
-        version: 4.0.0(encoding@0.1.13)
+        specifier: ^5.0.0
+        version: 5.0.0(encoding@0.1.13)
       '@commercetools/personal-data-erasure':
-        specifier: ^4.0.0
-        version: 4.0.1(encoding@0.1.13)
+        specifier: ^5.0.0
+        version: 5.0.0(encoding@0.1.13)
       '@commercetools/platform-sdk':
         specifier: ^2.2.0
         version: 2.8.0(encoding@0.1.13)
       '@commercetools/price-exporter':
-        specifier: ^4.0.0
-        version: 4.0.0(encoding@0.1.13)
+        specifier: ^5.0.0
+        version: 5.0.0(encoding@0.1.13)
       '@commercetools/product-exporter':
-        specifier: ^4.0.0
-        version: 4.0.0(encoding@0.1.13)
+        specifier: ^5.0.0
+        version: 5.0.0(encoding@0.1.13)
       '@commercetools/product-json-to-csv':
+        specifier: ^7.0.0
+        version: 7.0.0(encoding@0.1.13)
+      '@commercetools/product-json-to-xlsx':
         specifier: ^6.0.0
         version: 6.0.0(encoding@0.1.13)
-      '@commercetools/product-json-to-xlsx':
-        specifier: ^5.0.0
-        version: 5.1.0(encoding@0.1.13)
       '@commercetools/resource-deleter':
-        specifier: ^3.0.0
-        version: 3.0.0(encoding@0.1.13)
-      '@commercetools/sdk-auth':
-        specifier: ^4.0.0
-        version: 4.0.1
-      '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
-      '@commercetools/sdk-middleware-auth':
-        specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
-      '@commercetools/sdk-middleware-logger':
-        specifier: 3.0.0
-        version: 3.0.0
-      '@commercetools/sdk-middleware-queue':
-        specifier: ^3.0.0
-        version: 3.0.0
-      '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
-      '@commercetools/state-importer':
         specifier: ^4.0.0
         version: 4.0.0(encoding@0.1.13)
-      '@commercetools/sync-actions':
+      '@commercetools/sdk-auth':
         specifier: ^5.0.0
-        version: 5.19.2
+        version: 5.0.0
+      '@commercetools/sdk-client':
+        specifier: ^4.0.0
+        version: 4.0.0
+      '@commercetools/sdk-middleware-auth':
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http':
+        specifier: ^8.0.0
+        version: 8.0.0
+      '@commercetools/sdk-middleware-logger':
+        specifier: 4.0.0
+        version: 4.0.0
+      '@commercetools/sdk-middleware-queue':
+        specifier: ^4.0.0
+        version: 4.0.0
+      '@commercetools/sdk-middleware-user-agent':
+        specifier: ^4.0.0
+        version: 4.0.0
+      '@commercetools/state-importer':
+        specifier: ^5.0.0
+        version: 5.0.0(encoding@0.1.13)
+      '@commercetools/sync-actions':
+        specifier: ^7.0.0
+        version: 7.0.0
       bluebird:
         specifier: ^3.5.3
         version: 3.7.2
       common-tags:
-        specifier: ^1.8.0
+        specifier: 1.8.2
         version: 1.8.2
       csvtojson:
         specifier: ^2.0.8
@@ -364,8 +364,8 @@ importers:
         specifier: ^8.0.0
         version: 8.6.0
       exceljs:
-        specifier: ^3.0.0
-        version: 3.10.0
+        specifier: ^4.0.0
+        version: 4.4.0
       isuuid:
         specifier: ^0.1.0
         version: 0.1.0
@@ -385,13 +385,13 @@ importers:
         specifier: ^2.6.7
         version: 2.7.0(encoding@0.1.13)
       streamtest:
-        specifier: ^2.0.0
+        specifier: 2.0.0
         version: 2.0.0
       tmp:
         specifier: ^0.2.0
         version: 0.2.1
       unzipper:
-        specifier: ^0.10.5
+        specifier: 0.10.11
         version: 0.10.11
 
   packages/api-request-builder: {}
@@ -399,23 +399,23 @@ importers:
   packages/category-exporter:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@commercetools/get-credentials':
+        specifier: ^5.0.0
+        version: 5.0.0
+      '@commercetools/sdk-client':
         specifier: ^4.0.0
         version: 4.0.0
-      '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
       '@commercetools/sdk-middleware-auth':
-        specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       node-fetch:
         specifier: ^2.6.7
         version: 2.7.0(encoding@0.1.13)
@@ -497,29 +497,29 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       tmp:
-        specifier: 0.2.1
+        specifier: ^0.2.0
         version: 0.2.1
 
   packages/csv-parser-price:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@commercetools/get-credentials':
+        specifier: ^5.0.0
+        version: 5.0.0
+      '@commercetools/sdk-client':
         specifier: ^4.0.0
         version: 4.0.0
-      '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
       '@commercetools/sdk-middleware-auth':
-        specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       JSONStream:
         specifier: ^1.3.5
         version: 1.3.5
@@ -567,29 +567,29 @@ importers:
         specifier: 2.0.0
         version: 2.0.0
       tmp:
-        specifier: 0.2.1
+        specifier: ^0.2.0
         version: 0.2.1
 
   packages/csv-parser-state:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@commercetools/get-credentials':
+        specifier: ^5.0.0
+        version: 5.0.0
+      '@commercetools/sdk-client':
         specifier: ^4.0.0
         version: 4.0.0
-      '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
       '@commercetools/sdk-middleware-auth':
-        specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       JSONStream:
         specifier: ^1.3.5
         version: 1.3.5
@@ -625,23 +625,23 @@ importers:
   packages/custom-objects-exporter:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@commercetools/get-credentials':
+        specifier: ^5.0.0
+        version: 5.0.0
+      '@commercetools/sdk-client':
         specifier: ^4.0.0
         version: 4.0.0
-      '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
       '@commercetools/sdk-middleware-auth':
-        specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       JSONStream:
         specifier: ^1.3.5
         version: 1.3.5
@@ -665,25 +665,25 @@ importers:
   packages/custom-objects-importer:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       '@commercetools/sdk-middleware-auth':
-        specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       '@commercetools/sync-actions':
-        specifier: ^5.0.0
-        version: 5.19.2
+        specifier: ^7.0.0
+        version: 7.0.0
       common-tags:
-        specifier: ^1.8.0
+        specifier: 1.8.2
         version: 1.8.2
       lodash.compact:
         specifier: ^3.0.1
@@ -701,23 +701,23 @@ importers:
   packages/customer-groups-exporter:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@commercetools/get-credentials':
+        specifier: ^5.0.0
+        version: 5.0.0
+      '@commercetools/sdk-client':
         specifier: ^4.0.0
         version: 4.0.0
-      '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
       '@commercetools/sdk-middleware-auth':
-        specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       JSONStream:
         specifier: ^1.3.5
         version: 1.3.5
@@ -741,23 +741,23 @@ importers:
   packages/discount-code-exporter:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@commercetools/get-credentials':
+        specifier: ^5.0.0
+        version: 5.0.0
+      '@commercetools/sdk-client':
         specifier: ^4.0.0
         version: 4.0.0
-      '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
       '@commercetools/sdk-middleware-auth':
-        specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       JSONStream:
         specifier: ^1.3.5
         version: 1.3.5
@@ -814,26 +814,26 @@ importers:
   packages/discount-code-importer:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
-      '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
-      '@commercetools/sdk-middleware-auth':
         specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
+        version: 7.0.0
+      '@commercetools/sdk-client':
+        specifier: ^4.0.0
+        version: 4.0.0
+      '@commercetools/sdk-middleware-auth':
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.2
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       '@commercetools/sdk-middleware-queue':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       '@commercetools/sync-actions':
-        specifier: ^5.0.0
-        version: 5.19.2
+        specifier: ^7.0.0
+        version: 7.0.0
       lodash:
         specifier: 4.17.21
         version: 4.17.21
@@ -859,23 +859,23 @@ importers:
   packages/inventories-exporter:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@commercetools/get-credentials':
+        specifier: ^5.0.0
+        version: 5.0.0
+      '@commercetools/sdk-client':
         specifier: ^4.0.0
         version: 4.0.0
-      '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
       '@commercetools/sdk-middleware-auth':
-        specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       JSONStream:
         specifier: ^1.3.5
         version: 1.3.5
@@ -905,23 +905,23 @@ importers:
   packages/personal-data-erasure:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@commercetools/get-credentials':
+        specifier: ^5.0.0
+        version: 5.0.0
+      '@commercetools/sdk-client':
         specifier: ^4.0.0
         version: 4.0.0
-      '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
       '@commercetools/sdk-middleware-auth':
-        specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       lodash.flatten:
         specifier: ^4.4.0
         version: 4.4.0
@@ -944,23 +944,23 @@ importers:
   packages/price-exporter:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@commercetools/get-credentials':
+        specifier: ^5.0.0
+        version: 5.0.0
+      '@commercetools/sdk-client':
         specifier: ^4.0.0
         version: 4.0.0
-      '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
       '@commercetools/sdk-middleware-auth':
-        specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       JSONStream:
         specifier: ^1.3.5
         version: 1.3.5
@@ -993,23 +993,23 @@ importers:
   packages/product-exporter:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@commercetools/get-credentials':
+        specifier: ^5.0.0
+        version: 5.0.0
+      '@commercetools/sdk-client':
         specifier: ^4.0.0
         version: 4.0.0
-      '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
       '@commercetools/sdk-middleware-auth':
-        specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       JSONStream:
         specifier: ^1.3.5
         version: 1.3.5
@@ -1036,23 +1036,23 @@ importers:
   packages/product-json-to-csv:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@commercetools/get-credentials':
+        specifier: ^5.0.0
+        version: 5.0.0
+      '@commercetools/sdk-client':
         specifier: ^4.0.0
         version: 4.0.0
-      '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
       '@commercetools/sdk-middleware-auth':
-        specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       JSONStream:
         specifier: ^1.3.5
         version: 1.3.5
@@ -1066,7 +1066,7 @@ importers:
         specifier: ^3.5.3
         version: 3.7.2
       common-tags:
-        specifier: ^1.8.0
+        specifier: 1.8.2
         version: 1.8.2
       flat:
         specifier: ^5.0.0
@@ -1118,13 +1118,13 @@ importers:
   packages/product-json-to-xlsx:
     dependencies:
       '@commercetools/get-credentials':
-        specifier: ^4.0.0
-        version: 4.0.0
+        specifier: ^5.0.0
+        version: 5.0.0
       '@commercetools/product-json-to-csv':
-        specifier: ^6.0.0
-        version: 6.0.0(encoding@0.1.13)
+        specifier: ^7.0.0
+        version: 7.0.0(encoding@0.1.13)
       common-tags:
-        specifier: ^1.8.0
+        specifier: 1.8.2
         version: 1.8.2
       exceljs:
         specifier: ^4.0.0
@@ -1158,26 +1158,26 @@ importers:
   packages/resource-deleter:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@commercetools/get-credentials':
+        specifier: ^5.0.0
+        version: 5.0.0
+      '@commercetools/sdk-client':
         specifier: ^4.0.0
         version: 4.0.0
-      '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
       '@commercetools/sdk-middleware-auth':
-        specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       '@commercetools/sdk-middleware-queue':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       core-js:
         specifier: ^3.22.5
         version: 3.41.0
@@ -1203,8 +1203,8 @@ importers:
   packages/sdk-auth:
     dependencies:
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       qss:
         specifier: 2.0.3
         version: 2.0.3
@@ -1252,34 +1252,34 @@ importers:
   packages/sdk-middleware-user-agent:
     dependencies:
       '@commercetools/http-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       '@commercetools/sdk-types':
-        specifier: ^0.1.2
-        version: 0.1.2
+        specifier: ^1.0.0
+        version: 1.0.0
 
   packages/sdk-types: {}
 
   packages/state-importer:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       '@commercetools/sdk-client':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       '@commercetools/sdk-middleware-auth':
-        specifier: ^7.0.0
-        version: 7.0.1(encoding@0.1.13)
+        specifier: ^8.0.0
+        version: 8.0.0(encoding@0.1.13)
       '@commercetools/sdk-middleware-http':
-        specifier: ^7.0.0
-        version: 7.0.4
+        specifier: ^8.0.0
+        version: 8.0.0
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^4.0.0
+        version: 4.0.0
       '@commercetools/sync-actions':
-        specifier: ^5.0.0
-        version: 5.19.2
+        specifier: ^7.0.0
+        version: 7.0.0
       node-fetch:
         specifier: ^2.6.7
         version: 2.7.0(encoding@0.1.13)
@@ -2075,159 +2075,160 @@ packages:
     engines: {node: '>=0.1.95'}
     hasBin: true
 
-  '@commercetools/api-request-builder@6.0.0':
-    resolution: {integrity: sha512-4QhfpWnW161XaRs/2o9h4ZVr21R31vYNHmpKbDh2Dp+lFR9IqdwiafP0fqfLzI+Xg6vTrA2s5coyxkh0qj7Gng==}
-    engines: {node: '>=14'}
+  '@commercetools/api-request-builder@7.0.0':
+    resolution: {integrity: sha512-ecHoi51fjFknAYHFumtuiHdQuRlvdGnI19S6FUVo8YsJlSc91BIU6AodBN99Zzq9Vu+9k39jSpPJ4lR7mKgfNQ==}
+    engines: {node: '>=18'}
 
-  '@commercetools/category-exporter@4.0.0':
-    resolution: {integrity: sha512-kKVJkm4u6//22Z/X4APPeNvXZsx9akZsruyB4VscRYTrtcrOIEoj8qzPhCUOBc+DyZCLSGFRUKzwQjmYSvz6NA==}
-    engines: {node: '>=14'}
+  '@commercetools/category-exporter@5.0.0':
+    resolution: {integrity: sha512-HdEdB7/t57hOExh3IaPnlH6bR352AyO6eYaH7h79LvMXYADlPCAeNGWZ1n2o24hyYxkZl0Nf7RvyLC1c0qjq2g==}
+    engines: {node: '>=18'}
     hasBin: true
 
-  '@commercetools/csv-parser-discount-code@3.0.0':
-    resolution: {integrity: sha512-Ch2fzNir0SPITxMoTr2k4EYo2VKBfU3/NQxHsYgn5/aSe5PHD3YPqu2++xJrEyehvPdToiqOWTN2ZjRJxo5IGA==}
-    engines: {node: '>=14'}
+  '@commercetools/csv-parser-discount-code@4.0.0':
+    resolution: {integrity: sha512-8n83pSMXjqkBFeR3yZFjfU5fS6M3M4pgFgJG0IoSh9m+grP//QlT8LRbEs9P6+kV+dEuCou0lk2Jw2ZGEOZ5AQ==}
+    engines: {node: '>=18'}
     hasBin: true
 
-  '@commercetools/csv-parser-orders@3.0.0':
-    resolution: {integrity: sha512-dp2BrJwieMU937fGAvg35SrWhTUyXP2/Bx/yLV9p7IYwR1LFiLgQR+vdNXpcJPbuG/XXhCXP2BI7i8ctbDv/Eg==}
-    engines: {node: '>=14'}
+  '@commercetools/csv-parser-orders@4.0.0':
+    resolution: {integrity: sha512-/q/0LCpUvwcGs23lq8lpqlWMXWZ1O4HWFeMM7VlHTZmJjOvmB7l3JxhiN2BP1HDHB6lVJuzWUjtm5qdFd6O4bA==}
+    engines: {node: '>=18'}
     hasBin: true
 
-  '@commercetools/csv-parser-price@5.0.0':
-    resolution: {integrity: sha512-ONt8niaCnLe/gU6eBUgX4kd1dcsGMOVBVZE5wzBeIxivrcXLv6dn3+AJzoppeKUgFk7kpVPKISgS6DMvY57qkQ==}
-    engines: {node: '>=14'}
+  '@commercetools/csv-parser-price@6.0.0':
+    resolution: {integrity: sha512-5JCAhf+EBhzsBwEb0Mjow+5gNZGf4w3C/hW8tJ0RSjIeJf0FM3szdhxSqzjvVhEPDLAcY9FXDwNtzEnTO/bUdg==}
+    engines: {node: '>=18'}
     hasBin: true
 
-  '@commercetools/csv-parser-state@4.0.0':
-    resolution: {integrity: sha512-LmBJpTAvvjuXZJh3WYZmTdKiTS0MozYSfd2ix0sGpTFCL4VWcbzwZYnzN6v2iECwKkekllnmSLANpUSCqIuVpQ==}
-    engines: {node: '>=14'}
+  '@commercetools/csv-parser-state@5.0.0':
+    resolution: {integrity: sha512-tBMIVtu9Auxs25NFy5NyflCjsQy1m3IQ0vUhGH0ow7Yw3Syp3+Q8oyyldT4MQtlBYe4D5XnhGJl6nrFtwvh2mA==}
+    engines: {node: '>=18'}
     hasBin: true
 
-  '@commercetools/custom-objects-exporter@4.0.0':
-    resolution: {integrity: sha512-j9tY8K2ivBvBdsNCme7kX0VALtK6r9YzkkDIQcF68ULTunNeif9lngerw42It+nVgE+r1wRNruD1Hihh6TCJfQ==}
-    engines: {node: '>=14'}
+  '@commercetools/custom-objects-exporter@5.0.0':
+    resolution: {integrity: sha512-SSKKyRlKgQV1QOHfvcEGsRNY8UEB9uhuhbON8Z7fuabziXw90uC5V5HcWSLOobByN7l+T4GGOEI/WwKk0NOwlw==}
+    engines: {node: '>=18'}
     hasBin: true
 
-  '@commercetools/custom-objects-importer@4.0.0':
-    resolution: {integrity: sha512-T9X3yijDvPq4j+H4iGR9pTOXJJLJTpGukytahXNmx64+V97cVWJvWqYHMPqAjZ8Kwp7jQyrsaRQNJ003FWBbZQ==}
-    engines: {node: '>=14'}
+  '@commercetools/custom-objects-importer@5.0.0':
+    resolution: {integrity: sha512-XVM+QCmgfhqT3JJuLUOnSrbgs/6/M5JVb//JkTR/Q39MC301iAtAensXDyl178tt7dcKnptlxLBc0oNmH3Ex0w==}
+    engines: {node: '>=18'}
 
-  '@commercetools/customer-groups-exporter@4.0.0':
-    resolution: {integrity: sha512-DP68RtBV6jd4pV+euHfjKWjMn+022uBov/k3sHNn3/PRPr9lUOfSZ+tdPEtR7MN3zU/SOjrAIYC8IZxyNpzbbA==}
-    engines: {node: '>=14'}
+  '@commercetools/customer-groups-exporter@5.0.0':
+    resolution: {integrity: sha512-YCqZ4oJm/5IvnPnY0aJqS9/HRsNe3VROLx0lX86teaaMth0u/578jU0covoYJDqvLNOSXKtW7E/QETz7IoG0og==}
+    engines: {node: '>=18'}
     hasBin: true
 
-  '@commercetools/discount-code-exporter@5.0.0':
-    resolution: {integrity: sha512-hu6W2ArTg+D/3LVLSqco+Js9g2Ni8cd/kv5GZL2kG+AfqyqpzGtSUErGmXsi7Ygcxhi+Vj3T6h8epMMLIAwy5w==}
-    engines: {node: '>=14'}
+  '@commercetools/discount-code-exporter@6.0.0':
+    resolution: {integrity: sha512-Jar8za5tGgewK9KeO9Y4VwkBRWpzvwVVA2yJAsy48WkRk+BCu57DJgeiPUT0jGsMoQUDRjTS2NVyoM/e0kzKcw==}
+    engines: {node: '>=18'}
     hasBin: true
 
-  '@commercetools/discount-code-generator@3.0.0':
-    resolution: {integrity: sha512-cqPED2Fx8MQo9/SpjJ5LXGHFhS94kdGUBE+0fV2rDGthzhEYuxd+ZxBju+bCx9t0sJVPq2IxXVUQTgBtPb0WVw==}
-    engines: {node: '>=14'}
+  '@commercetools/discount-code-generator@4.0.0':
+    resolution: {integrity: sha512-I06oq7zywEeyhgdR0H9xeMkyNOjksUPNR7XXHfKDl8XYwCqVPwFnF9spKz7nhUDdgqFy3e/ObNkEuIVPTKhuNA==}
+    engines: {node: '>=18'}
     hasBin: true
 
-  '@commercetools/discount-code-importer@4.0.1':
-    resolution: {integrity: sha512-/+sltmbI1EhlsCY5yNUN/XmdY6OX1TjiYjKWPaAYE96PJUeW/ctZXLYj9HKuqd6NnDatWvDDhgPIEPfyLgIx1w==}
-    engines: {node: '>=14'}
+  '@commercetools/discount-code-importer@5.0.0':
+    resolution: {integrity: sha512-7kxThi5AlBRyelOFpF3M9y458H9sP/abOsMXtd+qV/HMFwWBGSDIhHmlvt7+HUq4aNA3H2Kqx0yysebedmfGEw==}
+    engines: {node: '>=18'}
 
-  '@commercetools/get-credentials@4.0.0':
-    resolution: {integrity: sha512-60eWJDIeaw14qRsNUm84zjOSWH3yNRPTt3P/5OkRXg2+x3Pf7j618WEqjMVe1rKa7u2tv1ROzGImojOGG3tRDA==}
-    engines: {node: '>=14'}
+  '@commercetools/get-credentials@5.0.0':
+    resolution: {integrity: sha512-bmZL+PlvXp9HfM/P4cMiwfBMNRcmnC/ex3I5vkMICH0jwLiazhP5bMqCVtjENpYsMzYSmo6VhbW83VbzAG7+EA==}
+    engines: {node: '>=18'}
 
-  '@commercetools/http-user-agent@3.0.0':
-    resolution: {integrity: sha512-kHlVST/Ax8GFpG9vpcUR5wKBGBoY2tZDA87kSC3nxhgk2+szZfv7MMMaAt0EIz2thpyO7oJv9NyPY/3XrrNIXQ==}
-    engines: {node: '>=14'}
+  '@commercetools/http-user-agent@4.0.0':
+    resolution: {integrity: sha512-w3f3uH7bN0wsQ+Q82jJDciFskYcRkXdz5pk4Pg70qdzITNHtuADLH/pKsvDSS0ocvP2TNZIR8drIzmkcc7Qwow==}
+    engines: {node: '>=18'}
 
-  '@commercetools/inventories-exporter@4.0.0':
-    resolution: {integrity: sha512-3/DzdAswaClYnX5U+lh8M9WWL2PNaiybro5U6+HcL1Em+84mumCuih9sc45uk8OVnVk3fd/LvsW0rlBq9GwxWQ==}
-    engines: {node: '>=14'}
+  '@commercetools/inventories-exporter@5.0.0':
+    resolution: {integrity: sha512-OLPj27/qw25GE5Z1fC6DlkEmaCppLBCD4MB6JXa96/888CadFRljW8eGpSUb/rsyk8O8V8dwxzx42W5wcnvKXA==}
+    engines: {node: '>=18'}
     hasBin: true
 
-  '@commercetools/personal-data-erasure@4.0.1':
-    resolution: {integrity: sha512-0zXpFJTwXvq/QZOr9LLFg+QioQCjHjxp3AyP6fCGv4xmWwmKIpwkwUwxQ3uHxye4MoSH6i5axROGLaeKmfg69g==}
-    engines: {node: '>=14'}
+  '@commercetools/personal-data-erasure@5.0.0':
+    resolution: {integrity: sha512-NLqIIuLkvV8nvqBFvsS0FSrSVVSqua/d6VKGf4NVkMOd8UI9v75CmPcEj7Bfjsqmeo9yC0DmXWRb04do6WWw1w==}
+    engines: {node: '>=18'}
     hasBin: true
 
   '@commercetools/platform-sdk@2.8.0':
     resolution: {integrity: sha512-np2mPic66eS+NegcuxUK/rUqzoXHD0rHAfD9usHx/Gr0JlXdeCkN1VLkwAZr5G3cayH+31BWbhiebLqILNmf3A==}
 
-  '@commercetools/price-exporter@4.0.0':
-    resolution: {integrity: sha512-Elyk1XoNabBU1zz8vh8TTTVwZI0oOHiwO4/coC0ryM1T3ip3vX9nZSYmFWLYKyvzp1ZqBXhOfV+8L5e+PcXWYg==}
-    engines: {node: '>=14'}
+  '@commercetools/price-exporter@5.0.0':
+    resolution: {integrity: sha512-S/Qu24rqMFEigv3cIPmPR9JMmOjBJQi1VVcnQKlcFUUy6A5QSUTzey2DzYQQTuC5ZaRv7ydIRM0PGUzymKSQPA==}
+    engines: {node: '>=18'}
     hasBin: true
 
-  '@commercetools/product-exporter@4.0.0':
-    resolution: {integrity: sha512-TQtuBp5sC6XAVPky1uSqkg66gJlREAfiLPjI/R95sqz0AiCv5xoZ9GYZqOdNwIIkhgKOKN90GIhHzkSUWPdbLQ==}
-    engines: {node: '>=14'}
+  '@commercetools/product-exporter@5.0.0':
+    resolution: {integrity: sha512-rQ3w1v+sCL58T/3IBGANNLBo0CtrkBmVPQNJmmA9jtcwoLThn+x9un2wmXeD7bx9xcjcFyr7Tq5u+0F5nVxPjw==}
+    engines: {node: '>=18'}
     hasBin: true
 
-  '@commercetools/product-json-to-csv@6.0.0':
-    resolution: {integrity: sha512-k0YT94InQ5ADQtX/V8dXD7j+a/LzzQz9AEOa+SG8I28F7v7fdsfTH3iZ+DNE5OzSuIZYMVyRayYjf3skqRAkTA==}
-    engines: {node: '>=14'}
+  '@commercetools/product-json-to-csv@7.0.0':
+    resolution: {integrity: sha512-Synr8UrFGHXKXCFtjxlelW62jeZ/QiDJZSNRhoDK1W4BPto4pAyxCz+/pJ6blDeuRCoGvk360BhBC753cx759Q==}
+    engines: {node: '>=18'}
     hasBin: true
 
-  '@commercetools/product-json-to-xlsx@5.1.0':
-    resolution: {integrity: sha512-UEmQ1dQAsVnqW9QUaLnmdS+/vKHqiakmU5ZhVnwNjPuB1V41eYHLrhOcZNIItgKwMOHJ1TYwZTQC7M75q3q8ig==}
-    engines: {node: '>=14'}
+  '@commercetools/product-json-to-xlsx@6.0.0':
+    resolution: {integrity: sha512-cfkfTQzlq5ok/xUhCZBLQI17b5JhYi2UBiexemDHmkCv+9nXr4i6GEN8OCtnZg9y0pra3cWzkLlxiz0poty2Tw==}
+    engines: {node: '>=18'}
     hasBin: true
 
-  '@commercetools/resource-deleter@3.0.0':
-    resolution: {integrity: sha512-bAAhB/vCtyi9H2oAW68vwRG6by9oJgbDDUE/CcmkUS85mfMr49CuwdGYZvmaNMDg0a+Hqj4i5GK2k3vVyn8pTw==}
-    engines: {node: '>=14'}
+  '@commercetools/resource-deleter@4.0.0':
+    resolution: {integrity: sha512-/Dx9iB2nKRegiSSx330cOZT/PEcAAYGBZadIRdTwVxbb6vsGNfYsyFwwkVjFy5E3n4qHmKtyHrqp5AAO7eaX2A==}
+    engines: {node: '>=18'}
     hasBin: true
 
-  '@commercetools/sdk-auth@4.0.1':
-    resolution: {integrity: sha512-P/3LHeWBMHJXw2SVBHyjiHFBVqjYxSmPPVQzJOBzYkfPIH1HHHqyptfg9o7N+PmmIp27VIfPikeLSv6iZPYa1g==}
-    engines: {node: '>=14'}
+  '@commercetools/sdk-auth@5.0.0':
+    resolution: {integrity: sha512-WelE9A+SBdBmjRjuA05oV63AaJAiuerhsPh45Bez6HglNB7F8go23vAcArlAAFP6QQyJVPAf79KvKqaZ4vhU6w==}
+    engines: {node: '>=18'}
 
   '@commercetools/sdk-client-v2@1.4.2':
     resolution: {integrity: sha512-zdaiw1okcP2MleEs79GfWcfrH91WitLCHqSQ+0OChOc4FH+7cPBW5sFClirvb4Gd/bgFkMGioX8nWQOYpMNaPg==}
 
-  '@commercetools/sdk-client@3.0.0':
-    resolution: {integrity: sha512-N8Eem8aHyxs3xAfscuemERbhH4po/1fMQs0SBfWgLda77qaIGyyfMqwgJNsPBweBsyt5RC9p5tpMDZ0lSPugDA==}
-    engines: {node: '>=14'}
+  '@commercetools/sdk-client@4.0.0':
+    resolution: {integrity: sha512-AhgcGtGXh1fiFKlpukV+WLGNffMgV8bxfBpGNfDSV/jWLUVZ7ipv6tDSwnGnIObLD0r7FcdVl9rKo2QRh8XZmg==}
+    engines: {node: '>=18'}
 
   '@commercetools/sdk-middleware-auth@6.2.1':
     resolution: {integrity: sha512-JNVRVf7zssECg0i/amAG0gnFmx4Kj7rB0J9MfRlvN/54qyA6tKJOJaA5j9hYy60qKSW/NCGbVMcVlBnPJLhREQ==}
 
-  '@commercetools/sdk-middleware-auth@7.0.1':
-    resolution: {integrity: sha512-XLRm+o3Yd0mkVoyzsOA98PUu0U0ajQdBHMhZ8N2XMOtL4OY8zsgT8ap5JneXV8zWZNiwIYYAYoUDwBlLZh2lAQ==}
-    engines: {node: '>=14'}
+  '@commercetools/sdk-middleware-auth@8.0.0':
+    resolution: {integrity: sha512-4UkhDgGpeeGr7TrdDuqGmjjuX6KaKgez2HLpeyOUFcUKIeUo7EIG/7KT2Rm1EH1h5/D6O7wCeBvqeULwSYCCfA==}
+    engines: {node: '>=18'}
 
   '@commercetools/sdk-middleware-http@6.2.0':
     resolution: {integrity: sha512-3E1nV+awhP0eeFuyChxgbaPF5CWWH0PvGZO9FtNl/mirlYjGbXAHO4Ql5tG4/G+CywlXI9XVA9wKSwxG0kgwgA==}
 
-  '@commercetools/sdk-middleware-http@7.0.4':
-    resolution: {integrity: sha512-YpBDTA1NqjfwqPxrll6FzDc0A7hLSRwd9OLGMlPcvUG2Je1ks8Pe34pLdPqz7jgdURwfFXRBmXxPhezDzMbnZA==}
-    engines: {node: '>=14'}
+  '@commercetools/sdk-middleware-http@8.0.0':
+    resolution: {integrity: sha512-msk3d9nL6tqnY7Dmf7tRD9IL3J7tOCwZdTVZ7qGCbmVwm10urrQMTn5Rf7tauHLJBV4NQZuobnznHTXQQx/0hw==}
+    engines: {node: '>=18'}
 
   '@commercetools/sdk-middleware-logger@2.1.2':
     resolution: {integrity: sha512-uGhhAUnZzLWO3ozzz6VDMUAKr5Y9ctVyqfExXVC7t37IgppLsKrrvLl6VMoU2uXjIGSNA0VN0Kxgj93rBBejTQ==}
 
-  '@commercetools/sdk-middleware-logger@3.0.0':
-    resolution: {integrity: sha512-DhMXAA2yIch/AaGxy7st85Z1HFmeLtHWGkr9z5rX4xKjan4PHGB/IE5saAR+SNGHhs6+1Lp8vZEHDo3tFqVLmg==}
-    engines: {node: '>=14'}
+  '@commercetools/sdk-middleware-logger@4.0.0':
+    resolution: {integrity: sha512-U5YSVfPnfajkC1Zs3G8temIMx8YSDFuc/BTRm2O8TvSVzrrXP7Hr+An1T0PhktotzQjfdcuE8X4BZXPVlyC20g==}
+    engines: {node: '>=18'}
 
-  '@commercetools/sdk-middleware-queue@3.0.0':
-    resolution: {integrity: sha512-IKsE0fl2/sBqgZIDG+WrZeOOkZIf1kzF6+tCF7ykVfU9NYJyvarOha1e8Bz1wG+u6SOfBuSnK1OeSx2wj3ppRg==}
-    engines: {node: '>=14'}
+  '@commercetools/sdk-middleware-queue@4.0.0':
+    resolution: {integrity: sha512-l3qQ8w8v1ZrthTaTNJPe+RLqgpKU86TWIuCIkl6iqnNhhDUMX/jKtPELcRk0ULXQy+7gtEsWdxcB9lSLFeWhlQ==}
+    engines: {node: '>=18'}
 
-  '@commercetools/sdk-middleware-user-agent@3.0.0':
-    resolution: {integrity: sha512-EmfUjOLSalZayTO5x1JgX08UeLStqtj2KKZ0y3j4CEyQALgKPEeKndN2aL630UledOD3/+9s7J4rPtIo6AjcuQ==}
-    engines: {node: '>=14'}
+  '@commercetools/sdk-middleware-user-agent@4.0.0':
+    resolution: {integrity: sha512-5TQJUoxU0hGGBw+AHXiUZ3mRoEmMZdhevolmrVQOg6tjmojJeSHpibGERsRPy5FKaev3wtjkOCDH+ZKKjXy7Rw==}
+    engines: {node: '>=18'}
 
-  '@commercetools/sdk-types@0.1.2':
-    resolution: {integrity: sha512-j9yFGbdOxc4RRaYXzQbGLdm9tpLFOLkFmqKjaj+rOrkpNstsbiBNE8BgHt0D+rXlTGaNa4PjoK7PImCj69Jpuw==}
+  '@commercetools/sdk-types@1.0.0':
+    resolution: {integrity: sha512-31XMMBv/pSLGi6NdUTYim69UJf+BKf/4p0ll2gVoiz0ZGIPauxLOOh8YAEG8HfqH4RVeuB0Y0r89OGC0gMolRg==}
+    engines: {node: '>=18'}
 
-  '@commercetools/state-importer@4.0.0':
-    resolution: {integrity: sha512-ggiw2uIdwZQQU3m903xuPqFpsaKgHeJ1SljTUXZ0mS2eGaN9Oj+xpQV3vBOEio0i1ffhtsDjA60prmjrxeFH3A==}
-    engines: {node: '>=14'}
+  '@commercetools/state-importer@5.0.0':
+    resolution: {integrity: sha512-vivxVwoOF0TP5OVvcCxmK0rjtn+Ad/ZiQetzMo463PVeuRTgKZCRuwsCe6mM9h25ViXintdt+qmw0iVLEIRazA==}
+    engines: {node: '>=18'}
 
-  '@commercetools/sync-actions@5.19.2':
-    resolution: {integrity: sha512-9CrqaSxhZ2+TIcfr1Jvatj1Mme85rYkWtcAevrA/wqYbTkU095hQMHu1cIJ3vH4zkKXtq6ORL0k1DXVLgy8lXA==}
-    engines: {node: '>=14'}
+  '@commercetools/sync-actions@7.0.0':
+    resolution: {integrity: sha512-VZn29sqEJ3KHtZgS9U4B21cepykonnwkqwJ55pbJeh1Gz9eL5TUdQW764Gr281TL7Guex43ORjq6nFCBQqIUjw==}
+    engines: {node: '>=18'}
 
   '@commitlint/cli@19.7.1':
     resolution: {integrity: sha512-iObGjR1tE/PfDtDTEfd+tnRkB3/HJzpQqRTyofS2MPPkDn1mp3DBC8SoPDayokfAy+xKhF8+bwRCJO25Nea0YQ==}
@@ -2923,10 +2924,6 @@ packages:
     resolution: {integrity: sha512-KVgf4XQVrTjhyWmx6cte4RxonPLR9onExufI1jhvw/MQ4BB6IsZD5gT8Lq+u/+pRkWna/6JoHpiQioaqFP5Rzw==}
     engines: {node: '>= 10'}
 
-  archiver@4.0.2:
-    resolution: {integrity: sha512-B9IZjlGwaxF33UN4oPbfBkyA4V1SxNLeIhR1qY8sRXSsbdUkEHrrOvwlYFPx+8uQeCe9M+FG6KgO+imDmQ79CQ==}
-    engines: {node: '>= 8'}
-
   archiver@5.3.2:
     resolution: {integrity: sha512-+25nxyyznAXF7Nef3y0EbBeqmGZgeN/BxHX29Rs39djAfaFalmQ89SE6CWyDCHzGL0yt/ycBtNOmGTW0FyGWNw==}
     engines: {node: '>= 10'}
@@ -3460,10 +3457,6 @@ packages:
   component-emitter@1.3.1:
     resolution: {integrity: sha512-T0+barUSQRTUQASh8bx02dl+DhF54GtIDY13Y3m9oWTklKbb3Wv974meRpeZ3lp1JpLVECWWNHC4vaG2XHXouQ==}
 
-  compress-commons@3.0.0:
-    resolution: {integrity: sha512-FyDqr8TKX5/X0qo+aVfaZ+PVmNJHJeckFBlq8jZGSJOgnynhfifoyl24qaqdUdDIBe0EVTHByN6NAkqYvE/2Xg==}
-    engines: {node: '>= 8'}
-
   compress-commons@4.1.2:
     resolution: {integrity: sha512-D3uMHtGc/fcO1Gt1/L7i1e33VOvD4A9hfQLP+6ewd+BvG/gQ84Yh4oftEhAdjSMgBgwGL+jsppT7JYNpo6MHHg==}
     engines: {node: '>= 10'}
@@ -3552,16 +3545,9 @@ packages:
     engines: {node: '>=0.8'}
     hasBin: true
 
-  crc32-stream@3.0.1:
-    resolution: {integrity: sha512-mctvpXlbzsvK+6z8kJwSJ5crm7yBwrQMTybJzMw1O4lLGJqjlDCXY2Zw7KheiA6XBEcBmfLx1D88mjRGVJtY9w==}
-    engines: {node: '>= 6.9.0'}
-
   crc32-stream@4.0.3:
     resolution: {integrity: sha512-NT7w2JVU7DFroFdYkeq8cywxrgjPHWkdX1wjpRQXPX5Asews3tA+Ght6lddQO5Mkumffp3X7GEqku3epj2toIw==}
     engines: {node: '>= 10'}
-
-  crc@3.8.0:
-    resolution: {integrity: sha512-iX3mfgcTMIq3ZKLIsVFAbv7+Mc10kxabAGQb8HvjA1o3T1PIYprbakQ65d3I+2HGHt6nSKkM9PYjgoJO2KcFBQ==}
 
   create-jest-runner@0.1.1:
     resolution: {integrity: sha512-chpm74OsFa8cAqmbkcAJKDC6fbMa4v6CnPK6KbgkKT8JvnGs7Br3vxAjwTB/sf2Gt+6WOetIbT7Zk75QNGs9Tw==}
@@ -4106,10 +4092,6 @@ packages:
     resolution: {integrity: sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==}
     engines: {node: '>=6'}
 
-  exceljs@3.10.0:
-    resolution: {integrity: sha512-c48puhmEvXOBB/FqX0GLkMr7GLOySTHIbEaDSYiSXjSk0UMMAKwWpYT+VNv9IVnRso3d/8gMKF9k0lBbxUdMaw==}
-    engines: {node: '>=8.3.0'}
-
   exceljs@4.4.0:
     resolution: {integrity: sha512-XctvKaEMaj1Ii9oDOqbW/6e1gXknSY4g/aLCDicOXqBE4M0nRWkUu0PTp++UPNzoFY12BNHMfs/VadKIS6llvg==}
     engines: {node: '>=8.3.0'}
@@ -4231,10 +4213,6 @@ packages:
 
   filename-regex@2.0.1:
     resolution: {integrity: sha512-BTCqyBaWBTsauvnHiE8i562+EdJj+oUpkqWp2R1iCoR8f6oo8STRu3of7WJJ0TqWtxN50a5YFpzYK4Jj9esYfQ==}
-    engines: {node: '>=0.10.0'}
-
-  fill-keys@1.0.2:
-    resolution: {integrity: sha512-tcgI872xXjwFF4xgQmLxi76GnwJG3g/3isB1l4/G5Z4zrbddGpBjqZCO9oEAcB5wX0Hj/5iQB3toxfO7in1hHA==}
     engines: {node: '>=0.10.0'}
 
   fill-range@2.2.4:
@@ -4890,9 +4868,6 @@ packages:
     resolution: {integrity: sha512-drqDG3cbczxxEJRoOXcOjtdp1J/lyp1mNn0xaznRs8+muBhgQcrnbspox5X5fOw0HnMnbfDzvnEMEtqDEJEo8w==}
     engines: {node: '>=8'}
 
-  is-object@1.0.2:
-    resolution: {integrity: sha512-2rRIahhZr2UWb45fIOuvZGpFtz0TyOZLf32KxBbSoUCeZR495zCKlWUKKUByk3geS2eAs7ZAABt0Y/Rx0GiQGA==}
-
   is-plain-object@2.0.4:
     resolution: {integrity: sha512-h5PpgXkWitc38BBMYawTYMWJHFZJVnBquFE57xFpjB8pJFiF6gZ+bU+WyI/yqXiFR5mdLsgYNaPe8uao6Uv9Og==}
     engines: {node: '>=0.10.0'}
@@ -5280,12 +5255,6 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
-  jsondiffpatch@0.4.1:
-    resolution: {integrity: sha512-t0etAxTUk1w5MYdNOkZBZ8rvYYN5iL+2dHCCx/DpkFm/bW28M6y5nUS83D4XdZiHy35Fpaw6LBb+F88fHZnVCw==}
-    engines: {node: '>=8.17.0'}
-    hasBin: true
-    bundledDependencies: []
-
   jsondiffpatch@0.6.0:
     resolution: {integrity: sha512-3QItJOXp2AP1uv7waBkao5nCvhEv+QmJAd38Ybq7wNI74Q+BBmnLn4EDKz6yI9xGAIQoUF87qHt+kc1IVxB4zQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -5639,9 +5608,6 @@ packages:
     resolution: {integrity: sha512-BhXM0Au22RwUneMPwSCnyhTOizdWoIEPU9sp0Aqa1PnDMR5Wv2FGXYDjuzJEIX+Eo2Rb8xuYe5jrnm5QowQFkw==}
     engines: {node: '>=16.10'}
 
-  merge-descriptors@1.0.3:
-    resolution: {integrity: sha512-gaNvAS7TZ897/rVaZ0nMtAyxNyi/pdbjbAwUpFQpN70GqnVfOiXpeUUMKRBmzXaSQ8DdTX4/0ms62r2K+hE6mQ==}
-
   merge-stream@1.0.1:
     resolution: {integrity: sha512-e6RM36aegd4f+r8BZCcYXlO2P3H6xbUM6ktL2Xmf45GAOit9bI4z6/3VU7JwllVO1L7u0UDSg/EhzQ5lmMLolA==}
 
@@ -5727,9 +5693,6 @@ packages:
     resolution: {integrity: sha512-pIU2PJjrPYvYRqVpjXzj76qltO9uBYI7woYAMoxbSefsa+vqAfptjoeevd6bUgwD0mPIO+hv9f7ltvsNreL2PA==}
     engines: {node: '>= 0.10.x', npm: '>= 1.4.x'}
     hasBin: true
-
-  module-not-found-error@1.0.1:
-    resolution: {integrity: sha512-pEk4ECWQXV6z2zjhRZUongnLJNUeGQJ3w6OQ5ctGwD+i5o93qjRQUk2Rt6VdNeu3sEP0AB4LcfvdebpxBRVr4g==}
 
   mri@1.1.4:
     resolution: {integrity: sha512-6y7IjGPm8AzlvoUrwAaw1tLnUBudaS3752vcd8JtrpGGQn+rXIe63LFVHm/YMwtqAuh+LJPCFdlLYPWM1nYn6w==}
@@ -6343,9 +6306,6 @@ packages:
 
   proto-list@1.2.4:
     resolution: {integrity: sha512-vtK/94akxsTMhe0/cbfpR+syPuszcuwhqVjJq26CuNDgFGj682oRBXOP5MJpv2r7JtE8MsiepGIqvvOTBwn2vA==}
-
-  proxyquire@2.1.3:
-    resolution: {integrity: sha512-BQWfCqYM+QINd+yawJz23tbBM40VIGXOdDw3X344KcclI/gtBbdWF6SlQ4nK/bYhF9d27KYug9WzljHC6B9Ysg==}
 
   prr@1.0.1:
     resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
@@ -7347,10 +7307,6 @@ packages:
   utila@0.4.0:
     resolution: {integrity: sha512-Z0DbgELS9/L/75wZbro8xAnT50pBVFQZ+hUEueGDU5FN51YSCYM+jdxsfCiHjwNP/4LCDD0i/graKpeBnOXKRA==}
 
-  uuid@7.0.3:
-    resolution: {integrity: sha512-DPSke0pXhTZgoF/d+WSt2QaKMCFSfx7QegxEWT+JOuHF5aWrKEn0G+ztjuJg/gG8/ItK+rbPCD/yNv8yyih6Cg==}
-    hasBin: true
-
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
@@ -7534,10 +7490,6 @@ packages:
   yocto-queue@1.2.0:
     resolution: {integrity: sha512-KHBC7z61OJeaMGnF3wqNZj+GGNXOyypZviiKpQeiHirG5Ib1ImwcLBH70rbMSkKfSmUNBsdf2PwaEJtKvgmkNw==}
     engines: {node: '>=12.20'}
-
-  zip-stream@3.0.1:
-    resolution: {integrity: sha512-r+JdDipt93ttDjsOVPU5zaq5bAyY+3H19bDrThkvuVxC0xMQzU1PJcS6D+KrP3u96gH9XLomcHPb+2skoDjulQ==}
-    engines: {node: '>= 8'}
 
   zip-stream@4.1.1:
     resolution: {integrity: sha512-9qv4rlDiopXg4E69k+vMHjNN63YFMe9sZMrdlvKnCjlCRWeCBswPPMPUfx+ipsAWq1LXHe70RcbaHdJJpS6hyQ==}
@@ -8562,16 +8514,16 @@ snapshots:
       exec-sh: 0.3.6
       minimist: 1.2.8
 
-  '@commercetools/api-request-builder@6.0.0': {}
+  '@commercetools/api-request-builder@7.0.0': {}
 
-  '@commercetools/category-exporter@4.0.0(encoding@0.1.13)':
+  '@commercetools/category-exporter@5.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/api-request-builder': 6.0.0
-      '@commercetools/get-credentials': 4.0.0
-      '@commercetools/sdk-client': 3.0.0
-      '@commercetools/sdk-middleware-auth': 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 7.0.4
-      '@commercetools/sdk-middleware-user-agent': 3.0.0
+      '@commercetools/api-request-builder': 7.0.0
+      '@commercetools/get-credentials': 5.0.0
+      '@commercetools/sdk-client': 4.0.0
+      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http': 8.0.0
+      '@commercetools/sdk-middleware-user-agent': 4.0.0
       node-fetch: 2.7.0(encoding@0.1.13)
       pino: 6.14.0
       pino-pretty: 4.8.0
@@ -8580,7 +8532,7 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/csv-parser-discount-code@3.0.0':
+  '@commercetools/csv-parser-discount-code@4.0.0':
     dependencies:
       JSONStream: 1.3.5
       csv-parser: 3.2.0
@@ -8591,7 +8543,7 @@ snapshots:
       tmp: 0.2.1
       yargs: 16.2.0
 
-  '@commercetools/csv-parser-orders@3.0.0':
+  '@commercetools/csv-parser-orders@4.0.0':
     dependencies:
       JSONStream: 1.3.5
       csv-parser: 3.2.0
@@ -8602,14 +8554,14 @@ snapshots:
       pretty-error: 2.1.2
       yargs: 16.2.0
 
-  '@commercetools/csv-parser-price@5.0.0(encoding@0.1.13)':
+  '@commercetools/csv-parser-price@6.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/api-request-builder': 6.0.0
-      '@commercetools/get-credentials': 4.0.0
-      '@commercetools/sdk-client': 3.0.0
-      '@commercetools/sdk-middleware-auth': 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 7.0.4
-      '@commercetools/sdk-middleware-user-agent': 3.0.0
+      '@commercetools/api-request-builder': 7.0.0
+      '@commercetools/get-credentials': 5.0.0
+      '@commercetools/sdk-client': 4.0.0
+      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http': 8.0.0
+      '@commercetools/sdk-middleware-user-agent': 4.0.0
       JSONStream: 1.3.5
       csv-parser: 3.2.0
       flat: 5.0.2
@@ -8626,14 +8578,14 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/csv-parser-state@4.0.0(encoding@0.1.13)':
+  '@commercetools/csv-parser-state@5.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/api-request-builder': 6.0.0
-      '@commercetools/get-credentials': 4.0.0
-      '@commercetools/sdk-client': 3.0.0
-      '@commercetools/sdk-middleware-auth': 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 7.0.4
-      '@commercetools/sdk-middleware-user-agent': 3.0.0
+      '@commercetools/api-request-builder': 7.0.0
+      '@commercetools/get-credentials': 5.0.0
+      '@commercetools/sdk-client': 4.0.0
+      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http': 8.0.0
+      '@commercetools/sdk-middleware-user-agent': 4.0.0
       JSONStream: 1.3.5
       csv-parser: 3.2.0
       flat: 5.0.2
@@ -8646,14 +8598,14 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/custom-objects-exporter@4.0.0(encoding@0.1.13)':
+  '@commercetools/custom-objects-exporter@5.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/api-request-builder': 6.0.0
-      '@commercetools/get-credentials': 4.0.0
-      '@commercetools/sdk-client': 3.0.0
-      '@commercetools/sdk-middleware-auth': 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 7.0.4
-      '@commercetools/sdk-middleware-user-agent': 3.0.0
+      '@commercetools/api-request-builder': 7.0.0
+      '@commercetools/get-credentials': 5.0.0
+      '@commercetools/sdk-client': 4.0.0
+      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http': 8.0.0
+      '@commercetools/sdk-middleware-user-agent': 4.0.0
       JSONStream: 1.3.5
       node-fetch: 2.7.0(encoding@0.1.13)
       pino: 6.14.0
@@ -8662,14 +8614,14 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/custom-objects-importer@4.0.0(encoding@0.1.13)':
+  '@commercetools/custom-objects-importer@5.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/api-request-builder': 6.0.0
-      '@commercetools/sdk-client': 3.0.0
-      '@commercetools/sdk-middleware-auth': 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 7.0.4
-      '@commercetools/sdk-middleware-user-agent': 3.0.0
-      '@commercetools/sync-actions': 5.19.2
+      '@commercetools/api-request-builder': 7.0.0
+      '@commercetools/sdk-client': 4.0.0
+      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http': 8.0.0
+      '@commercetools/sdk-middleware-user-agent': 4.0.0
+      '@commercetools/sync-actions': 7.0.0
       common-tags: 1.8.2
       lodash.compact: 3.0.1
       lodash.isequal: 4.5.0
@@ -8678,14 +8630,14 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/customer-groups-exporter@4.0.0(encoding@0.1.13)':
+  '@commercetools/customer-groups-exporter@5.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/api-request-builder': 6.0.0
-      '@commercetools/get-credentials': 4.0.0
-      '@commercetools/sdk-client': 3.0.0
-      '@commercetools/sdk-middleware-auth': 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 7.0.4
-      '@commercetools/sdk-middleware-user-agent': 3.0.0
+      '@commercetools/api-request-builder': 7.0.0
+      '@commercetools/get-credentials': 5.0.0
+      '@commercetools/sdk-client': 4.0.0
+      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http': 8.0.0
+      '@commercetools/sdk-middleware-user-agent': 4.0.0
       JSONStream: 1.3.5
       node-fetch: 2.7.0(encoding@0.1.13)
       pino: 6.14.0
@@ -8694,14 +8646,14 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/discount-code-exporter@5.0.0(encoding@0.1.13)':
+  '@commercetools/discount-code-exporter@6.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/api-request-builder': 6.0.0
-      '@commercetools/get-credentials': 4.0.0
-      '@commercetools/sdk-client': 3.0.0
-      '@commercetools/sdk-middleware-auth': 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 7.0.4
-      '@commercetools/sdk-middleware-user-agent': 3.0.0
+      '@commercetools/api-request-builder': 7.0.0
+      '@commercetools/get-credentials': 5.0.0
+      '@commercetools/sdk-client': 4.0.0
+      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http': 8.0.0
+      '@commercetools/sdk-middleware-user-agent': 4.0.0
       JSONStream: 1.3.5
       fast-csv: 4.3.6
       flat: 5.0.2
@@ -8712,7 +8664,7 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/discount-code-generator@3.0.0':
+  '@commercetools/discount-code-generator@4.0.0':
     dependencies:
       csv-parser: 3.2.0
       flat: 5.0.2
@@ -8722,35 +8674,35 @@ snapshots:
       tokgen: 1.0.0
       yargs: 16.2.0
 
-  '@commercetools/discount-code-importer@4.0.1(encoding@0.1.13)':
+  '@commercetools/discount-code-importer@5.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/api-request-builder': 6.0.0
-      '@commercetools/sdk-client': 3.0.0
-      '@commercetools/sdk-middleware-auth': 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 7.0.4
-      '@commercetools/sdk-middleware-queue': 3.0.0
-      '@commercetools/sdk-middleware-user-agent': 3.0.0
-      '@commercetools/sync-actions': 5.19.2
+      '@commercetools/api-request-builder': 7.0.0
+      '@commercetools/sdk-client': 4.0.0
+      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http': 8.0.0
+      '@commercetools/sdk-middleware-queue': 4.0.0
+      '@commercetools/sdk-middleware-user-agent': 4.0.0
+      '@commercetools/sync-actions': 7.0.0
       lodash: 4.17.21
       node-fetch: 2.7.0(encoding@0.1.13)
       npmlog: 4.1.2
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/get-credentials@4.0.0':
+  '@commercetools/get-credentials@5.0.0':
     dependencies:
       dotenv: 8.6.0
 
-  '@commercetools/http-user-agent@3.0.0': {}
+  '@commercetools/http-user-agent@4.0.0': {}
 
-  '@commercetools/inventories-exporter@4.0.0(encoding@0.1.13)':
+  '@commercetools/inventories-exporter@5.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/api-request-builder': 6.0.0
-      '@commercetools/get-credentials': 4.0.0
-      '@commercetools/sdk-client': 3.0.0
-      '@commercetools/sdk-middleware-auth': 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 7.0.4
-      '@commercetools/sdk-middleware-user-agent': 3.0.0
+      '@commercetools/api-request-builder': 7.0.0
+      '@commercetools/get-credentials': 5.0.0
+      '@commercetools/sdk-client': 4.0.0
+      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http': 8.0.0
+      '@commercetools/sdk-middleware-user-agent': 4.0.0
       JSONStream: 1.3.5
       fast-csv: 4.3.6
       node-fetch: 2.7.0(encoding@0.1.13)
@@ -8760,14 +8712,14 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/personal-data-erasure@4.0.1(encoding@0.1.13)':
+  '@commercetools/personal-data-erasure@5.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/api-request-builder': 6.0.0
-      '@commercetools/get-credentials': 4.0.0
-      '@commercetools/sdk-client': 3.0.0
-      '@commercetools/sdk-middleware-auth': 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 7.0.4
-      '@commercetools/sdk-middleware-user-agent': 3.0.0
+      '@commercetools/api-request-builder': 7.0.0
+      '@commercetools/get-credentials': 5.0.0
+      '@commercetools/sdk-client': 4.0.0
+      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http': 8.0.0
+      '@commercetools/sdk-middleware-user-agent': 4.0.0
       lodash.flatten: 4.4.0
       node-fetch: 2.7.0(encoding@0.1.13)
       pino: 6.14.0
@@ -8788,14 +8740,14 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/price-exporter@4.0.0(encoding@0.1.13)':
+  '@commercetools/price-exporter@5.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/api-request-builder': 6.0.0
-      '@commercetools/get-credentials': 4.0.0
-      '@commercetools/sdk-client': 3.0.0
-      '@commercetools/sdk-middleware-auth': 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 7.0.4
-      '@commercetools/sdk-middleware-user-agent': 3.0.0
+      '@commercetools/api-request-builder': 7.0.0
+      '@commercetools/get-credentials': 5.0.0
+      '@commercetools/sdk-client': 4.0.0
+      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http': 8.0.0
+      '@commercetools/sdk-middleware-user-agent': 4.0.0
       JSONStream: 1.3.5
       fast-csv: 4.3.6
       flat: 5.0.2
@@ -8807,14 +8759,14 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/product-exporter@4.0.0(encoding@0.1.13)':
+  '@commercetools/product-exporter@5.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/api-request-builder': 6.0.0
-      '@commercetools/get-credentials': 4.0.0
-      '@commercetools/sdk-client': 3.0.0
-      '@commercetools/sdk-middleware-auth': 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 7.0.4
-      '@commercetools/sdk-middleware-user-agent': 3.0.0
+      '@commercetools/api-request-builder': 7.0.0
+      '@commercetools/get-credentials': 5.0.0
+      '@commercetools/sdk-client': 4.0.0
+      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http': 8.0.0
+      '@commercetools/sdk-middleware-user-agent': 4.0.0
       JSONStream: 1.3.5
       node-fetch: 2.7.0(encoding@0.1.13)
       pino: 6.14.0
@@ -8823,14 +8775,14 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/product-json-to-csv@6.0.0(encoding@0.1.13)':
+  '@commercetools/product-json-to-csv@7.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/api-request-builder': 6.0.0
-      '@commercetools/get-credentials': 4.0.0
-      '@commercetools/sdk-client': 3.0.0
-      '@commercetools/sdk-middleware-auth': 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 7.0.4
-      '@commercetools/sdk-middleware-user-agent': 3.0.0
+      '@commercetools/api-request-builder': 7.0.0
+      '@commercetools/get-credentials': 5.0.0
+      '@commercetools/sdk-client': 4.0.0
+      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http': 8.0.0
+      '@commercetools/sdk-middleware-user-agent': 4.0.0
       JSONStream: 1.3.5
       archiver: 5.3.2
       babel-runtime: 6.26.0
@@ -8851,10 +8803,10 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/product-json-to-xlsx@5.1.0(encoding@0.1.13)':
+  '@commercetools/product-json-to-xlsx@6.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/get-credentials': 4.0.0
-      '@commercetools/product-json-to-csv': 6.0.0(encoding@0.1.13)
+      '@commercetools/get-credentials': 5.0.0
+      '@commercetools/product-json-to-csv': 7.0.0(encoding@0.1.13)
       common-tags: 1.8.2
       exceljs: 4.4.0
       highland: 2.13.5
@@ -8866,15 +8818,15 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/resource-deleter@3.0.0(encoding@0.1.13)':
+  '@commercetools/resource-deleter@4.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/api-request-builder': 6.0.0
-      '@commercetools/get-credentials': 4.0.0
-      '@commercetools/sdk-client': 3.0.0
-      '@commercetools/sdk-middleware-auth': 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 7.0.4
-      '@commercetools/sdk-middleware-queue': 3.0.0
-      '@commercetools/sdk-middleware-user-agent': 3.0.0
+      '@commercetools/api-request-builder': 7.0.0
+      '@commercetools/get-credentials': 5.0.0
+      '@commercetools/sdk-client': 4.0.0
+      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http': 8.0.0
+      '@commercetools/sdk-middleware-queue': 4.0.0
+      '@commercetools/sdk-middleware-user-agent': 4.0.0
       core-js: 3.41.0
       node-fetch: 2.7.0(encoding@0.1.13)
       pino: 6.14.0
@@ -8885,9 +8837,9 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/sdk-auth@4.0.1':
+  '@commercetools/sdk-auth@5.0.0':
     dependencies:
-      '@commercetools/sdk-middleware-http': 7.0.4
+      '@commercetools/sdk-middleware-http': 8.0.0
       qss: 2.0.3
 
   '@commercetools/sdk-client-v2@1.4.2(encoding@0.1.13)':
@@ -8898,7 +8850,7 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/sdk-client@3.0.0': {}
+  '@commercetools/sdk-client@4.0.0': {}
 
   '@commercetools/sdk-middleware-auth@6.2.1(encoding@0.1.13)':
     dependencies:
@@ -8906,7 +8858,7 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/sdk-middleware-auth@7.0.1(encoding@0.1.13)':
+  '@commercetools/sdk-middleware-auth@8.0.0(encoding@0.1.13)':
     dependencies:
       node-fetch: 2.7.0(encoding@0.1.13)
     transitivePeerDependencies:
@@ -8914,37 +8866,37 @@ snapshots:
 
   '@commercetools/sdk-middleware-http@6.2.0': {}
 
-  '@commercetools/sdk-middleware-http@7.0.4': {}
+  '@commercetools/sdk-middleware-http@8.0.0': {}
 
   '@commercetools/sdk-middleware-logger@2.1.2': {}
 
-  '@commercetools/sdk-middleware-logger@3.0.0': {}
+  '@commercetools/sdk-middleware-logger@4.0.0': {}
 
-  '@commercetools/sdk-middleware-queue@3.0.0': {}
+  '@commercetools/sdk-middleware-queue@4.0.0': {}
 
-  '@commercetools/sdk-middleware-user-agent@3.0.0':
+  '@commercetools/sdk-middleware-user-agent@4.0.0':
     dependencies:
-      '@commercetools/http-user-agent': 3.0.0
-      '@commercetools/sdk-types': 0.1.2
+      '@commercetools/http-user-agent': 4.0.0
+      '@commercetools/sdk-types': 1.0.0
 
-  '@commercetools/sdk-types@0.1.2': {}
+  '@commercetools/sdk-types@1.0.0': {}
 
-  '@commercetools/state-importer@4.0.0(encoding@0.1.13)':
+  '@commercetools/state-importer@5.0.0(encoding@0.1.13)':
     dependencies:
-      '@commercetools/api-request-builder': 6.0.0
-      '@commercetools/sdk-client': 3.0.0
-      '@commercetools/sdk-middleware-auth': 7.0.1(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 7.0.4
-      '@commercetools/sdk-middleware-user-agent': 3.0.0
-      '@commercetools/sync-actions': 5.19.2
+      '@commercetools/api-request-builder': 7.0.0
+      '@commercetools/sdk-client': 4.0.0
+      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
+      '@commercetools/sdk-middleware-http': 8.0.0
+      '@commercetools/sdk-middleware-user-agent': 4.0.0
+      '@commercetools/sync-actions': 7.0.0
       node-fetch: 2.7.0(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
 
-  '@commercetools/sync-actions@5.19.2':
+  '@commercetools/sync-actions@7.0.0':
     dependencies:
       fast-equals: 2.0.4
-      jsondiffpatch: 0.4.1
+      jsondiffpatch: 0.6.0
       lodash.flatten: 4.4.0
       lodash.foreach: 4.5.0
       lodash.intersection: 4.4.0
@@ -9876,16 +9828,6 @@ snapshots:
       normalize-path: 3.0.0
       readable-stream: 3.6.2
 
-  archiver@4.0.2:
-    dependencies:
-      archiver-utils: 2.1.0
-      async: 3.2.6
-      buffer-crc32: 0.2.13
-      glob: 7.2.3
-      readable-stream: 3.6.2
-      tar-stream: 2.2.0
-      zip-stream: 3.0.1
-
   archiver@5.3.2:
     dependencies:
       archiver-utils: 2.1.0
@@ -10603,13 +10545,6 @@ snapshots:
 
   component-emitter@1.3.1: {}
 
-  compress-commons@3.0.0:
-    dependencies:
-      buffer-crc32: 0.2.13
-      crc32-stream: 3.0.1
-      normalize-path: 3.0.0
-      readable-stream: 2.3.8
-
   compress-commons@4.1.2:
     dependencies:
       buffer-crc32: 0.2.13
@@ -10699,19 +10634,10 @@ snapshots:
 
   crc-32@1.2.2: {}
 
-  crc32-stream@3.0.1:
-    dependencies:
-      crc: 3.8.0
-      readable-stream: 3.6.2
-
   crc32-stream@4.0.3:
     dependencies:
       crc-32: 1.2.2
       readable-stream: 3.6.2
-
-  crc@3.8.0:
-    dependencies:
-      buffer: 5.7.1
 
   create-jest-runner@0.1.1:
     dependencies:
@@ -11368,19 +11294,6 @@ snapshots:
 
   event-target-shim@5.0.1: {}
 
-  exceljs@3.10.0:
-    dependencies:
-      archiver: 4.0.2
-      dayjs: 1.11.13
-      fast-csv: 4.3.6
-      jszip: 3.10.1
-      proxyquire: 2.1.3
-      readable-stream: 3.6.2
-      saxes: 5.0.1
-      tmp: 0.2.1
-      unzipper: 0.10.11
-      uuid: 7.0.3
-
   exceljs@4.4.0:
     dependencies:
       archiver: 5.3.2
@@ -11543,11 +11456,6 @@ snapshots:
     optional: true
 
   filename-regex@2.0.1: {}
-
-  fill-keys@1.0.2:
-    dependencies:
-      is-object: 1.0.2
-      merge-descriptors: 1.0.3
 
   fill-range@2.2.4:
     dependencies:
@@ -12229,8 +12137,6 @@ snapshots:
 
   is-obj@2.0.0: {}
 
-  is-object@1.0.2: {}
-
   is-plain-object@2.0.4:
     dependencies:
       isobject: 3.0.1
@@ -12843,11 +12749,6 @@ snapshots:
 
   json5@2.2.3: {}
 
-  jsondiffpatch@0.4.1:
-    dependencies:
-      chalk: 3.0.0
-      diff-match-patch: 1.0.5
-
   jsondiffpatch@0.6.0:
     dependencies:
       '@types/diff-match-patch': 1.0.36
@@ -13180,8 +13081,6 @@ snapshots:
 
   meow@12.1.1: {}
 
-  merge-descriptors@1.0.3: {}
-
   merge-stream@1.0.1:
     dependencies:
       readable-stream: 2.3.8
@@ -13292,8 +13191,6 @@ snapshots:
       lodash.create: 3.1.1
       mkdirp: 0.5.1
       supports-color: 3.1.2
-
-  module-not-found-error@1.0.1: {}
 
   mri@1.1.4: {}
 
@@ -13827,12 +13724,6 @@ snapshots:
   propagate@2.0.1: {}
 
   proto-list@1.2.4: {}
-
-  proxyquire@2.1.3:
-    dependencies:
-      fill-keys: 1.0.2
-      module-not-found-error: 1.0.1
-      resolve: 1.22.10
 
   prr@1.0.1: {}
 
@@ -14978,8 +14869,6 @@ snapshots:
 
   utila@0.4.0: {}
 
-  uuid@7.0.3: {}
-
   uuid@8.3.2: {}
 
   v8-compile-cache@2.4.0: {}
@@ -15187,12 +15076,6 @@ snapshots:
       yargs-parser: 21.1.1
 
   yocto-queue@1.2.0: {}
-
-  zip-stream@3.0.1:
-    dependencies:
-      archiver-utils: 2.1.0
-      compress-commons: 3.0.0
-      readable-stream: 3.6.2
 
   zip-stream@4.1.1:
     dependencies:

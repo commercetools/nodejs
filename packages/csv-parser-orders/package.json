@@ -54,6 +54,6 @@
   "devDependencies": {
     "sinon": "9.2.4",
     "streamtest": "2.0.0",
-    "tmp": "0.2.1"
+    "tmp": "^0.2.0"
   }
 }
