@@ -1,10 +1,10 @@
 type HttpUserAgentOptions = {
-  name: string
-  version?: string
-  libraryName?: string
-  libraryVersion?: string
-  contactUrl?: string
-  contactEmail?: string
+  name: string;
+  version?: string;
+  libraryName?: string;
+  libraryVersion?: string;
+  contactUrl?: string;
+  contactEmail?: string;
 }
 
 /*
