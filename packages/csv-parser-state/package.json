@@ -32,7 +32,9 @@
     "email": "williams.omayuku@commercetools.com"
   },
   "license": "MIT",
-  "bin": "bin/csv-parser-state.js",
+  "bin": {
+    "csv-parser-state": "bin/csv-parser-state.js"
+  },
   "files": [
     "bin",
     "lib"

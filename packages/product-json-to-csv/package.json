@@ -30,7 +30,9 @@
     "email": "williams.omayuku@commercetools.com"
   },
   "main": "lib/index.js",
-  "bin": "bin/product-json-to-csv.js",
+  "bin": {
+    "product-json-to-csv": "bin/product-json-to-csv.js"
+  },
   "files": [
     "bin",
     "lib"

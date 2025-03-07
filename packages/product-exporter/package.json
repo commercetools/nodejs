@@ -27,7 +27,9 @@
     "email": "williams.omayuku@commercetools.com"
   },
   "main": "lib/index.js",
-  "bin": "bin/product-exporter.js",
+  "bin": {
+    "price-exporter": "bin/price-exporter.js"
+  },
   "files": [
     "bin",
     "lib"
