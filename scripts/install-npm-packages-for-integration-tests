@@ -13,7 +13,7 @@ done
 
 echo "--> Install dependencies and packages for integration-tests:"
 pushd "./integration-tests" > /dev/null
-pnpm add "${tars[@]}" -w --frozen-lockfile
+pnpm add "${tars[@]}" -w
 popd > /dev/null
 
 echo "--> Cleanup tarballs"
