@@ -205,7 +205,7 @@ type requestBaseOptions = {
 }
 export type executeRequestOptions = requestBaseOptions & {
   fetcher: typeof fetch,
-  tokenCache: TokenCache
+  tokenCache: TokenCache,
 }
 
 export type AuthMiddlewareBaseOptions = requestBaseOptions & {
@@ -436,7 +436,7 @@ export type SyncAction = {
 export type SyncActionConfig = {
   shouldOmitEmptyString: boolean,
   shouldUnsetOmittedProperties: boolean,
-  shouldPreventUnsettingRequiredFields: boolean
+  shouldPreventUnsettingRequiredFields: boolean,
 }
 export type ActionGroup = {
   type: string,

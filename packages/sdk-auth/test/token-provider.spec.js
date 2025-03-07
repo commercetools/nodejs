@@ -348,12 +348,14 @@ describe('Token Provider', () => {
     test('should include scope in the merged config', () => {
       expect(config.scopes).toBeFalsy()
 
-      const mergedConfig = auth._getRequestConfig({ scopes: ['new-scope:demo-projectKey'] })
+      const mergedConfig = auth._getRequestConfig({
+        scopes: ['new-scope:demo-projectKey'],
+      })
 
       expect(mergedConfig).toBeTruthy()
       expect(mergedConfig).toMatchObject(
         expect.objectContaining({
-          scopes: ['new-scope:demo-projectKey']
+          scopes: ['new-scope:demo-projectKey'],
         })
       )
     })

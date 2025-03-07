@@ -39,9 +39,9 @@ function calcDelayDuration(
   if (backoff)
     return retryCount !== 0 // do not increase if it's the first retry
       ? Math.min(
-        Math.round((Math.random() + 1) * retryDelay * 2 ** retryCount),
-        maxDelay
-      )
+          Math.round((Math.random() + 1) * retryDelay * 2 ** retryCount),
+          maxDelay
+        )
       : retryDelay
   return retryDelay
 }
@@ -131,7 +131,7 @@ export default function createHttpMiddleware({
           requestHeader['Content-Type']
         ) > -1 &&
           typeof request.body === 'string') ||
-          Buffer.isBuffer(request.body)
+        Buffer.isBuffer(request.body)
           ? request.body
           : JSON.stringify(request.body || undefined)
 
@@ -198,74 +198,77 @@ export default function createHttpMiddleware({
                   return
                 }
 
-                res.text().then((result: Object) => {
-                  // Try to parse the response as JSON
-                  let parsed
-                  try {
-                    parsed = result.length > 0 ? JSON.parse(result) : {}
-                  } catch (err) {
-                    if (enableRetry && retryCount < maxRetries) {
-                      setTimeout(
-                        executeFetch,
-                        calcDelayDuration(
-                          retryCount,
-                          retryDelay,
-                          maxRetries,
-                          backoff,
-                          maxDelay
+                res
+                  .text()
+                  .then((result: Object) => {
+                    // Try to parse the response as JSON
+                    let parsed
+                    try {
+                      parsed = result.length > 0 ? JSON.parse(result) : {}
+                    } catch (err) {
+                      if (enableRetry && retryCount < maxRetries) {
+                        setTimeout(
+                          executeFetch,
+                          calcDelayDuration(
+                            retryCount,
+                            retryDelay,
+                            maxRetries,
+                            backoff,
+                            maxDelay
+                          )
                         )
+                        retryCount += 1
+                        return
+                      }
+                      parsed = result
+                    }
+
+                    const parsedResponse: Object = {
+                      ...response,
+                      body: parsed,
+                      statusCode: res.status,
+                    }
+
+                    if (includeResponseHeaders)
+                      parsedResponse.headers = parseHeaders(res.headers)
+
+                    if (includeOriginalRequest) {
+                      parsedResponse.request = {
+                        ...fetchOptions,
+                      }
+                      maskAuthData(
+                        parsedResponse.request,
+                        maskSensitiveHeaderData
                       )
-                      retryCount += 1
-                      return
-                    }
-                    parsed = result
-                  }
-
-                  const parsedResponse: Object = {
-                    ...response,
-                    body: parsed,
-                    statusCode: res.status,
-                  }
-
-                  if (includeResponseHeaders)
-                    parsedResponse.headers = parseHeaders(res.headers)
-
-                  if (includeOriginalRequest) {
-                    parsedResponse.request = {
-                      ...fetchOptions,
-                    }
-                    maskAuthData(
-                      parsedResponse.request,
-                      maskSensitiveHeaderData
-                    )
-                  }
-
-                  next(request, parsedResponse)
-                }).catch((err: Error) => {
-                  if (enableRetry)
-                    if (retryCount < maxRetries) {
-                      setTimeout(
-                        executeFetch,
-                        calcDelayDuration(
-                          retryCount,
-                          retryDelay,
-                          maxRetries,
-                          backoff,
-                          maxDelay
-                        )
-                      )
-                      retryCount += 1
-                      return
                     }
 
-                  const error = new NetworkError(err.message, {
-                    originalRequest: request,
-                    retryCount,
+                    next(request, parsedResponse)
                   })
+                  .catch((err: Error) => {
+                    if (enableRetry)
+                      if (retryCount < maxRetries) {
+                        setTimeout(
+                          executeFetch,
+                          calcDelayDuration(
+                            retryCount,
+                            retryDelay,
+                            maxRetries,
+                            backoff,
+                            maxDelay
+                          )
+                        )
+                        retryCount += 1
+                        return
+                      }
 
-                  maskAuthData(error.originalRequest, maskSensitiveHeaderData)
-                  next(request, { ...response, error, statusCode: 0 })
-                })
+                    const error = new NetworkError(err.message, {
+                      originalRequest: request,
+                      retryCount,
+                    })
+
+                    maskAuthData(error.originalRequest, maskSensitiveHeaderData)
+                    next(request, { ...response, error, statusCode: 0 })
+                  })
                 return
               }
 
