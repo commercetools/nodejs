@@ -54,6 +54,21 @@
     "set-value": "4.0.1",
     "chalk": "3.0.0"
   },
+  "preconstruct": {
+    "packages": [
+      "packages/api-request-builder",
+      "packages/http-user-agent",
+      "packages/sdk-auth",
+      "packages/sdk-client",
+      "packages/sdk-middleware-auth",
+      "packages/sdk-middleware-correlation-id",
+      "packages/sdk-middleware-http",
+      "packages/sdk-middleware-logger",
+      "packages/sdk-middleware-queue",
+      "packages/sdk-middleware-user-agent",
+      "packages/sync-actions"
+    ]
+  },
   "packageManager": "pnpm@9.15.6",
   "devDependencies": {
     "@babel/cli": "7.26.4",
