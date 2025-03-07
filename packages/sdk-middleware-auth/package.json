@@ -19,9 +19,15 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
-  "main": "dist/sdk-middleware-auth.cjs.js",
-  "module": "dist/sdk-middleware-auth.es.js",
-  "browser": "dist/sdk-middleware-auth.umd.js",
+  "main": "dist/commercetools-sdk-middleware-auth.cjs.js",
+  "module": "dist/commercetools-sdk-middleware-auth.esm.js",
+  "umd:min": "dist/sdk-middleware-auth.umd.js",
+  "preconstruct": {
+    "entrypoints": [
+      "./index.js"
+    ],
+    "umdName": "commercetoolsSdkMiddlewareAuth"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
@@ -31,8 +37,7 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "pnpm build:bundles",
-    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkMiddlewareAuth -i ./src/index.js"
+    "build": "exit 0;"
   },
   "dependencies": {
     "node-fetch": "^2.6.7"

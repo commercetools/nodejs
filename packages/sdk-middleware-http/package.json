@@ -18,9 +18,15 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
-  "main": "dist/sdk-middleware-http.cjs.js",
-  "module": "dist/sdk-middleware-http.es.js",
-  "browser": "dist/sdk-middleware-http.umd.js",
+  "main": "dist/commercetools-sdk-middleware-http.cjs.js",
+  "module": "dist/commercetools-sdk-middleware-http.esm.js",
+  "umd:min": "dist/sdk-middleware-http.umd.js",
+  "preconstruct": {
+    "entrypoints": [
+      "./index.js"
+    ],
+    "umdName": "commercetoolsSdkMiddlewareHttp"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
@@ -30,8 +36,7 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "pnpm build:bundles",
-    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkMiddlewareHttp -i ./src/index.js"
+    "build": "exit 0;"
   },
   "devDependencies": {
     "abort-controller": "3.0.0",

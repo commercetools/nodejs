@@ -17,11 +17,20 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
-  "main": "dist/http-user-agent.cjs.js",
-  "module": "dist/http-user-agent.es.js",
-  "browser": "dist/http-user-agent.umd.js",
+  "main": "dist/commercetools-http-user-agent.cjs.js",
+  "module": "dist/commercetools-http-user-agent.esm.js",
+  "browser": {
+    "./dist/commercetools-http-user-agent.cjs.js": "./dist/commercetools-http-user-agent.browser.cjs.js",
+    "./dist/commercetools-http-user-agent.esm.js": "./dist/commercetools-http-user-agent.browser.esm.js"
+  },
   "typings": "./dist/typings/index.d.ts",
   "types": "./dist/typings/index.d.ts",
+  "preconstruct": {
+    "entrypoints": [
+      "./index.ts"
+    ],
+    "umdName": "commercetoolsHttpUserAgent"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
@@ -31,8 +40,6 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "pnpm build:bundles && pnpm build:typings",
-    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsHttpUserAgent -i ./src/index.ts",
-    "build:typings": "tsc -p tsconfig.declarations.json --emitDeclarationOnly --declarationDir dist/typings"
+    "build": "exit 0;"
   }
 }

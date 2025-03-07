@@ -18,11 +18,20 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
-  "main": "dist/sdk-middleware-user-agent.cjs.js",
-  "module": "dist/sdk-middleware-user-agent.es.js",
-  "browser": "dist/sdk-middleware-user-agent.umd.js",
+  "main": "dist/commercetools-sdk-middleware-user-agent.cjs.js",
+  "module": "dist/commercetools-sdk-middleware-user-agent.esm.js",
+  "browser": {
+    "./dist/commercetools-sdk-middleware-user-agent.cjs.js": "./dist/commercetools-sdk-middleware-user-agent.browser.cjs.js",
+    "./dist/commercetools-sdk-middleware-user-agent.esm.js": "./dist/commercetools-sdk-middleware-user-agent.browser.esm.js"
+  },
   "typings": "./dist/typings/index.d.ts",
   "types": "./dist/typings/index.d.ts",
+  "preconstruct": {
+    "entrypoints": [
+      "./index.ts"
+    ],
+    "umdName": "commercetoolsSdkMiddlewareUserAgent"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
@@ -32,9 +41,7 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "pnpm build:bundles && pnpm build:typings",
-    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkMiddlewareUserAgent -i ./src/index.ts",
-    "build:typings": "tsc -p tsconfig.declarations.json --emitDeclarationOnly --declarationDir dist/typings"
+    "build": "exit 0;"
   },
   "dependencies": {
     "@commercetools/http-user-agent": "^4.0.0",
