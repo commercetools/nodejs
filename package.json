@@ -24,7 +24,7 @@
     "format:js": "prettier --write '{packages,integration-tests,types}/**/*.{js,ts}'",
     "format:md": "prettier --parser markdown --write '**/*.md'",
     "test:coverage": "pnpm build && npm test -- --no-watchman --coverage",
-    "test:ci": "pnpm test --ci --no-watchman --maxWorkers=10",
+    "test:ci": "pnpm test -- --ci --no-watchman --maxWorkers=10",
     "test:coverage:ci": "pnpm test:ci -- --coverage && codecov",
     "docs:clean": "rimraf _book",
     "docs:prepare": "gitbook install",
