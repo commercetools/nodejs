@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-packages: 
-  - 'packages/*' 
-||||||| parent of 60dd899e (refactor: add integration tests as workspace)
-packages: 
-  - 'packages/*'
-=======
 packages:
   - 'packages/*'
->>>>>>> 60dd899e (refactor: add integration tests as workspace)
   - 'integration-tests'
