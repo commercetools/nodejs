@@ -24,8 +24,7 @@
   "preconstruct": {
     "entrypoints": [
       "./index.js"
-    ]
-    ,
+    ],
     "umdName": "commercetoolsSdkClient"
   },
   "repository": {

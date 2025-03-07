@@ -1190,6 +1190,9 @@ importers:
 
   packages/sdk-middleware-auth:
     dependencies:
+      '@commercetools/sdk-middleware-http':
+        specifier: ^8.0.0
+        version: 8.0.0
       node-fetch:
         specifier: ^2.6.7
         version: 2.7.0(encoding@0.1.13)

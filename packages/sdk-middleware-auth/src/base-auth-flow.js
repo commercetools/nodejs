@@ -9,7 +9,7 @@ import type {
   AuthMiddlewareOptions,
   executeRequestOptions,
 } from 'types/sdk'
-import { NetworkError } from '../../sdk-middleware-http/src/errors'
+import { NetworkError } from '@commercetools/sdk-middleware-http'
 import { buildRequestForRefreshTokenFlow } from './build-requests'
 
 function mergeAuthHeader(
