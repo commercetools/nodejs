@@ -2,7 +2,7 @@
 
 exports[`Price Exporter CLI basic functionality should print usage information given the help flag 1`] = `
 "
-Usage: price-exporter [options]
+Usage: price-exporter.js [options]
 Exports prices from the commercetools platform
 
 Options:

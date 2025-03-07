@@ -3,7 +3,7 @@
 exports[`CSV and CLI Tests CLI basic functionality should print usage information given the help flag 1`] = `
 "
 
-Usage: csvparserprice [options]
+Usage: csvparserprice.js [options]
 Converts commercetools states from CSV to JSON
 
 Options:
