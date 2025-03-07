@@ -9,7 +9,7 @@ import type {
   AuthMiddlewareOptions,
   executeRequestOptions,
 } from 'types/sdk'
-import { NetworkError } from '@commercetools/sdk-middleware-http'
+import { errors } from '@commercetools/sdk-middleware-http'
 import { buildRequestForRefreshTokenFlow } from './build-requests'
 
 function mergeAuthHeader(
@@ -217,7 +217,7 @@ function executeRequest({
           typeof response.reject === 'function' &&
           error?.type === 'aborted'
         ) {
-          const _error = new NetworkError(error.message, {
+          const _error = new errors.NetworkError(error.message, {
             type: error.type,
             request,
           })

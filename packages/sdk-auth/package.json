@@ -20,7 +20,7 @@
   "author": "Jan Juna <jan.juna-ext@commercetools.com> (https://github.com/junajan)",
   "main": "dist/commercetools-sdk-auth.cjs.js",
   "module": "dist/commercetools-sdk-auth.esm.js",
-  "umd:min": "dist/sdk-auth.umd.js",
+  "umd:min": "dist/commercetools-sdk-auth.umd.js",
   "preconstruct": {
     "entrypoints": [
       "./index.js"
