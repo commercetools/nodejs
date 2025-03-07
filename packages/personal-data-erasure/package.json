@@ -6,7 +6,7 @@
     "node": ">=18"
   },
   "name": "@commercetools/personal-data-erasure",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "Export and delete all data related to a single customer",
   "main": "lib/main.js",
   "bin": {
@@ -36,12 +36,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@commercetools/api-request-builder": "^6.0.0",
-    "@commercetools/get-credentials": "^4.0.0",
-    "@commercetools/sdk-client": "^3.0.0",
-    "@commercetools/sdk-middleware-auth": "^7.0.0",
-    "@commercetools/sdk-middleware-http": "^7.0.0",
-    "@commercetools/sdk-middleware-user-agent": "^3.0.0",
+    "@commercetools/api-request-builder": "^7.0.0",
+    "@commercetools/get-credentials": "^5.0.0",
+    "@commercetools/sdk-client": "^4.0.0",
+    "@commercetools/sdk-middleware-auth": "^8.0.0",
+    "@commercetools/sdk-middleware-http": "^8.0.0",
+    "@commercetools/sdk-middleware-user-agent": "^4.0.0",
     "lodash.flatten": "^4.4.0",
     "node-fetch": "^2.6.7",
     "pino": "^6.0.0",

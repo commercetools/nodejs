@@ -1,5 +1,41 @@
 # @commercetools/integration-tests
 
+## 0.1.23
+
+### Patch Changes
+
+- Updated dependencies [[`5a56792`](https://github.com/commercetools/nodejs/commit/5a5679256a4a7e4b90bc47b945b12acb4f70b411)]:
+  - @commercetools/sdk-middleware-user-agent@4.0.0
+  - @commercetools/csv-parser-discount-code@4.0.0
+  - @commercetools/customer-groups-exporter@5.0.0
+  - @commercetools/custom-objects-exporter@5.0.0
+  - @commercetools/custom-objects-importer@5.0.0
+  - @commercetools/discount-code-generator@4.0.0
+  - @commercetools/discount-code-exporter@6.0.0
+  - @commercetools/discount-code-importer@5.0.0
+  - @commercetools/personal-data-erasure@5.0.0
+  - @commercetools/sdk-middleware-logger@4.0.0
+  - @commercetools/inventories-exporter@5.0.0
+  - @commercetools/product-json-to-xlsx@6.0.0
+  - @commercetools/sdk-middleware-queue@4.0.0
+  - @commercetools/api-request-builder@7.0.0
+  - @commercetools/product-json-to-csv@7.0.0
+  - @commercetools/sdk-middleware-auth@8.0.0
+  - @commercetools/sdk-middleware-http@8.0.0
+  - @commercetools/category-exporter@5.0.0
+  - @commercetools/csv-parser-orders@4.0.0
+  - @commercetools/csv-parser-price@6.0.0
+  - @commercetools/csv-parser-state@5.0.0
+  - @commercetools/product-exporter@5.0.0
+  - @commercetools/resource-deleter@4.0.0
+  - @commercetools/get-credentials@5.0.0
+  - @commercetools/http-user-agent@4.0.0
+  - @commercetools/price-exporter@5.0.0
+  - @commercetools/state-importer@5.0.0
+  - @commercetools/sync-actions@7.0.0
+  - @commercetools/sdk-client@4.0.0
+  - @commercetools/sdk-auth@5.0.0
+
 ## 0.1.22
 
 ### Patch Changes

@@ -6,7 +6,7 @@
     "node": ">=18"
   },
   "name": "@commercetools/sdk-types",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "TypeScript declarations for SDK packages",
   "keywords": [
     "commercetools",
