@@ -68,6 +68,9 @@ jobs:
       - checkout
       - pnpm_install
       - run:
+          name: Building libraries
+          command: pnpm build
+      - run:
           name: Running linters
           # Limiting the workers of Jest to 10
           # as the build otherwise dies due to resource restrictions.
@@ -87,6 +90,9 @@ jobs:
       - checkout
       - pnpm_install
       - run:
+          name: Building libraries
+          command: pnpm build
+      - run:
           name: Running linters
           # Limiting the workers of Jest to 10
           # as the build otherwise dies due to resource restrictions.
@@ -105,6 +111,9 @@ jobs:
     steps:
       - checkout
       - pnpm_install
+      - run:
+          name: Building libraries
+          command: pnpm build
       - run:
           name: Running linters
           # Limiting the workers of Jest to 10
