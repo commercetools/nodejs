@@ -28,7 +28,7 @@
   },
   "main": "lib/index.js",
   "bin": {
-    "price-exporter": "bin/price-exporter.js"
+    "product-exporter": "bin/product-exporter.js"
   },
   "files": [
     "bin",
