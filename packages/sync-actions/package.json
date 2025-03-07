@@ -19,7 +19,7 @@
   "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
   "main": "dist/commercetools-sync-actions.cjs.js",
   "module": "dist/commercetools-sync-actions.esm.js",
-  "umd:min": "dist/sync-actions.umd.js",
+  "umd:min": "dist/commercetools-sync-actions.umd.js",
   "preconstruct": {
     "entrypoints": [
       "./index.js"

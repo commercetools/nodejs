@@ -20,7 +20,7 @@
   "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
   "main": "dist/commercetools-sdk-middleware-http.cjs.js",
   "module": "dist/commercetools-sdk-middleware-http.esm.js",
-  "umd:min": "dist/sdk-middleware-http.umd.js",
+  "umd:min": "dist/commercetools-sdk-middleware-http.umd.js",
   "preconstruct": {
     "entrypoints": [
       "./index.js"

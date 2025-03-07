@@ -23,8 +23,8 @@
     "./dist/commercetools-http-user-agent.cjs.js": "./dist/commercetools-http-user-agent.browser.cjs.js",
     "./dist/commercetools-http-user-agent.esm.js": "./dist/commercetools-http-user-agent.browser.esm.js"
   },
-  "typings": "./dist/typings/index.d.ts",
-  "types": "./dist/typings/index.d.ts",
+  "typings": "./dist/commercetools-http-user-agent.cjs.d.ts",
+  "types": "./dist/commercetools-http-user-agent.cjs.d.ts",
   "preconstruct": {
     "entrypoints": [
       "./index.ts"
