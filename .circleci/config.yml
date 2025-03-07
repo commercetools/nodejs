@@ -3,44 +3,6 @@ version: 2.1
 aliases:
   - &working_directory ~/nodejs
 
-  - &restore_yarn_cache_node_18
-    keys:
-      - v1-yarn-cache-node_18-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - v1-yarn-cache-node_18-{{ .Branch }}
-      - v1-yarn-cache-node_18
-
-  - &save_yarn_cache_node_18
-    key: v1-yarn-cache-node_18-{{ .Branch }}-{{ checksum "yarn.lock" }}
-    paths:
-      - ~/.cache/yarn
-
-
-  - &restore_yarn_cache_node_20
-    keys:
-      - v1-yarn-cache-node_20-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - v1-yarn-cache-node_20-{{ .Branch }}
-      - v1-yarn-cache-node_20
-
-  - &save_yarn_cache_node_20
-    key: v1-yarn-cache-node_20-{{ .Branch }}-{{ checksum "yarn.lock" }}
-    paths:
-      - ~/.cache/yarn
-
-  - &restore_yarn_cache_node_22
-    keys:
-      - v1-yarn-cache-node_22-{{ .Branch }}-{{ checksum "yarn.lock" }}
-      - v1-yarn-cache-node_22-{{ .Branch }}
-      - v1-yarn-cache-node_22
-
-  - &save_yarn_cache_node_22
-    key: v1-yarn-cache-node_22-{{ .Branch }}-{{ checksum "yarn.lock" }}
-    paths:
-      - ~/.cache/yarn
-
-  - &yarn_install
-    name: Installing
-    command: yarn --frozen-lockfile
-
 executors:
   node_18:
     docker:
@@ -56,72 +18,108 @@ executors:
       - image: cimg/node:22.14.0
     working_directory: *working_directory
 
+commands:
+  pnpm_install:
+    description: Installs dependencies using PNPM
+    parameters:
+      pnpm_store_dir:
+        type: string
+        default: /home/circleci/.local/share/pnpm/store
+      pnpm_install_directory:
+        type: string
+        default: /home/circleci/bin
+      command:
+        type: string
+        default: pnpm install --frozen-lockfile
+    steps:
+      - restore_cache:
+          name: Restoring pnpm cache
+          keys:
+            # Delete and re-create a increased `CACHE_VERSION_PNPM` variable in CircleCI's project configuration.
+            # https://app.circleci.com/settings/project/github/commercetools/nodejs/environment-variables
+            - pnpm-cache-{{ .Environment.CACHE_VERSION_PNPM }}-{{ checksum "pnpm-lock.yaml" }}
+      - run:
+          name: Ensuring pnpm installation directory exists
+          command: mkdir -p << parameters.pnpm_install_directory >>
+      - run:
+          name: Exporting << parameters.pnpm_install_directory >> to PATH
+          command: echo 'export PATH=$PATH:<< parameters.pnpm_install_directory >>' >> $BASH_ENV
+      - run:
+          name: Installing pnpm via corepack
+          command: |
+            corepack enable --install-directory << parameters.pnpm_install_directory >>
+            corepack prepare --activate
+      - run:
+          name: Setting pnpm store
+          command: pnpm config set store-dir << parameters.pnpm_store_dir >>
+      - save_cache:
+          name: Saving pnpm cache
+          key: pnpm-cache-{{ .Environment.CACHE_VERSION_PNPM }}-{{ checksum "pnpm-lock.yaml" }}
+          paths:
+            - node_modules
+      - run:
+          name: Installing project dependencies
+          command: << parameters.command >>
+
 jobs:
   install_test_node_18:
     executor: node_18
     steps:
       - checkout
-      - restore_cache: *restore_yarn_cache_node_18
-      - run: *yarn_install
-      - save_cache: *save_yarn_cache_node_18
+      - pnpm_install
       - run:
           name: Running linters
           # Limiting the workers of Jest to 10
           # as the build otherwise dies due to resource restrictions.
-          command: yarn lint --maxWorkers=10
+          command: pnpm lint --maxWorkers=10
       - run:
           name: Running tests
           # Limiting the workers of Jest to 10
           # as the build otherwise dies due to resource restrictions.
-          command: yarn test:ci
+          command: pnpm test:ci
       - run:
           name: Running test (with coverage report)
-          command: yarn test:ci
+          command: pnpm test:ci
 
   install_test_node_20:
     executor: node_20
     steps:
       - checkout
-      - restore_cache: *restore_yarn_cache_node_20
-      - run: *yarn_install
-      - save_cache: *save_yarn_cache_node_20
+      - pnpm_install
       - run:
           name: Running linters
           # Limiting the workers of Jest to 10
           # as the build otherwise dies due to resource restrictions.
-          command: yarn lint --maxWorkers=10
+          command: pnpm lint --maxWorkers=10
       - run:
           name: Running tests (with coverage report)
           # Limiting the workers of Jest to 10
           # as the build otherwise dies due to resource restrictions.
-          command: yarn test:coverage:ci
+          command: pnpm test:coverage:ci
       - run:
           name: Running integration tests
-          command: yarn test:integration
+          command: pnpm test:integration
 
   install_test_node_22:
     executor: node_22
     steps:
       - checkout
-      - restore_cache: *restore_yarn_cache_node_22
-      - run: *yarn_install
-      - save_cache: *save_yarn_cache_node_22
+      - pnpm_install
       - run:
           name: Running linters
           # Limiting the workers of Jest to 10
           # as the build otherwise dies due to resource restrictions.
-          command: yarn lint --maxWorkers=10
+          command: pnpm lint --maxWorkers=10
       - run:
           name: Running tests (with coverage report)
           # Limiting the workers of Jest to 10
           # as the build otherwise dies due to resource restrictions.
-          command: yarn test:coverage:ci
+          command: pnpm test:coverage:ci
       - run:
           name: Running integration tests
-          command: yarn test:integration
+          command: pnpm test:integration
 
 workflows:
-  version: 2
   build_and_test:
     jobs:
       - install_test_node_18:

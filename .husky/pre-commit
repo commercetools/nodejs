@@ -1,0 +1,3 @@
+pnpm typecheck:ts
+
+pnpm lint-staged
