@@ -1,4 +1,4 @@
-import { DiffPatcher } from 'jsondiffpatch/dist/jsondiffpatch.cjs'
+import * as jsondiffpatch from 'jsondiffpatch'
 
 export function objectHash(obj, index) {
   const objIndex = `$$index:${index}`
@@ -7,7 +7,7 @@ export function objectHash(obj, index) {
     : objIndex
 }
 
-const diffpatcher = new DiffPatcher({
+const diffpatcher = jsondiffpatch.create({
   objectHash,
   arrays: {
     // detect items moved inside the array
