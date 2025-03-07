@@ -141,7 +141,17 @@
   },
   "preconstruct": {
     "packages": [
-      "packages/*"
+      "packages/api-request-builder",
+      "packages/http-user-agent",
+      "packages/sdk-auth",
+      "packages/sdk-client",
+      "packages/sdk-middleware-auth",
+      "packages/sdk-middleware-correlation-id",
+      "packages/sdk-middleware-http",
+      "packages/sdk-middleware-logger",
+      "packages/sdk-middleware-queue",
+      "packages/sdk-middleware-user-agent",
+      "packages/sync-actions"
     ]
   }
 }
