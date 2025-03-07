@@ -10,7 +10,7 @@
     "postinstall": "./scripts/postinstall.sh",
     "clean": "rm -rf coverage; manypkg exec rimraf lib dist node_modules; rm -rf node_modules",
     "commit": "git-cz",
-    "build": "pnpm --recursive run build",
+    "build": "pnpm preconstruct build",
     "check-gh-auth-token": "if [[ -z \"${GITHUB_AUTH}\" ]]; then echo \"Need to set GITHUB_AUTH\" && exit 1; fi",
     "build:typings": "NODE_ENV=production pnpm --recursive run build:typings",
     "lint": "jest --projects jest.eslint.config.js jest.flow.config.js",
@@ -138,5 +138,10 @@
     "ts-jest": "26.5.6",
     "tsconfig-replace-paths": "0.0.14",
     "typescript": "4.5.2"
+  },
+  "preconstruct": {
+    "packages": [
+      "packages/*"
+    ]
   }
 }
