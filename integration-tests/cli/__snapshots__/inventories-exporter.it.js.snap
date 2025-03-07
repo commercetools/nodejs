@@ -13,7 +13,7 @@ exports[`StockExporter CLI CLI basic functionality should export inventories to 
 exports[`StockExporter CLI CLI basic functionality should print usage information given the help flag 1`] = `
 "
 
-Usage: inventoriesexporter [options]
+Usage: inventories-exporter.js [options]
 Exports inventories from the commercetools platform.
 
 Options:

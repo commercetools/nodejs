@@ -911,11 +911,13 @@ describe('ProductJsonToCsv', () => {
     const payload = {
       body: {
         count: 5,
-        results: [{}]
+        results: [{}],
       },
     }
     beforeEach(() => {
-      productJsonToCsv.client.execute = jest.fn().mockImplementation(() => Promise.resolve(payload));
+      productJsonToCsv.client.execute = jest
+        .fn()
+        .mockImplementation(() => Promise.resolve(payload))
     })
     test('should fetch reference from API from url', async () => {
       const uri = 'dummy-uri'

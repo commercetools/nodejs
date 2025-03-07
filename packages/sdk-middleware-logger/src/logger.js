@@ -7,15 +7,13 @@ import type {
 } from 'types/sdk'
 
 export default function createLoggerMiddleware(): Middleware {
-  return (next: Next): Next => (
-    request: MiddlewareRequest,
-    response: MiddlewareResponse
-  ) => {
-    const { error, body, statusCode } = response
-    /* eslint-disable */
-    console.log('Request: ', request)
-    console.log('Response: ', { error, body, statusCode })
-    /* eslint-enable */
-    next(request, response)
-  }
+  return (next: Next): Next =>
+    (request: MiddlewareRequest, response: MiddlewareResponse) => {
+      const { error, body, statusCode } = response
+      /* eslint-disable */
+      console.log('Request: ', request)
+      console.log('Response: ', { error, body, statusCode })
+      /* eslint-enable */
+      next(request, response)
+    }
 }

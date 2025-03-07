@@ -9,9 +9,7 @@
   "version": "4.0.0",
   "description": "Delete resources from the commercetools platform",
   "main": "lib/main.js",
-  "bin": {
-    "resource-deleter": "bin/resource-deleter.js"
-  },
+  "bin": "bin/resource-deleter.js",
   "scripts": {
     "prebuild": "rimraf lib/**",
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"

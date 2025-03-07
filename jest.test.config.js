@@ -28,5 +28,7 @@ module.exports = {
     '/packages/.*/dist',
     '/packages/.*/lib',
   ],
-  transformIgnorePatterns: ['node_modules/(?!(jsondiffpatch)/)'],
+  transformIgnorePatterns: [
+    '<rootDir>/node_modules/.pnpm/(?!(jsondiffpatch|@jsondiffpatch)@)',
+  ],
 }

@@ -1,5 +1,5 @@
 module.exports = {
-  '*.md': ['yarn format:md'],
+  '*.md': ['pnpm format:md'],
   'packages/**/*.js': [
     'prettier --write',
     // NOTE: apparently if you pass some argument that is not a flag AFTER the `reporters`
@@ -10,7 +10,7 @@ module.exports = {
     //   Error: An error occurred while adding the reporter at path "/path/to/file".Reporter is not a constructor
     //
     // For that reason, we move the `--onlyChanged` flag next to it.
-    'yarn lint:js -- --reporters=jest-silent-reporter --onlyChanged',
+    'pnpm lint:js -- --reporters=jest-silent-reporter --onlyChanged',
     'flow focus-check',
   ],
 }

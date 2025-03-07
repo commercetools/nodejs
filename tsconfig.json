@@ -17,7 +17,7 @@
     "noImplicitReturns": true,
     "resolveJsonModule": true,
     "noImplicitThis": true,
-    "noUnusedLocals": false, 
+    "noUnusedLocals": false,
     "noUnusedParameters": true,
     "preserveSymlinks": true,
     "pretty": true,
@@ -29,6 +29,7 @@
     "target": "esnext",
     "allowJs": false,
     "baseUrl": ".",
+    "skipLibCheck": true,
     "typeRoots": [
       "node_modules/@types"
     ]

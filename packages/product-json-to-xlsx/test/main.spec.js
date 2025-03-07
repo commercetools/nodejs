@@ -826,11 +826,13 @@ describe('ProductJsonToXlsx', () => {
     const payload = {
       body: {
         count: 5,
-        results: [{}]
+        results: [{}],
       },
     }
     beforeEach(() => {
-      productJsonToXlsx.client.execute = jest.fn().mockImplementation(() => Promise.resolve(payload));
+      productJsonToXlsx.client.execute = jest
+        .fn()
+        .mockImplementation(() => Promise.resolve(payload))
     })
     test('should fetch reference from API from url', async () => {
       const uri = 'dummy-uri'
@@ -907,8 +909,12 @@ describe('ProductJsonToXlsx', () => {
 
       productJsonToXlsx.fetchReferences(uri)
       productJsonToXlsx._getChannelsById = jest.fn((channel) =>
-        Promise.resolve({ ...sampleResult, 'channel-id': { ...sampleResult['channel-id'], id: channel } }))
-      const res = await productJsonToXlsx._getChannelsById(_channel);
+        Promise.resolve({
+          ...sampleResult,
+          'channel-id': { ...sampleResult['channel-id'], id: channel },
+        })
+      )
+      const res = await productJsonToXlsx._getChannelsById(_channel)
 
       expect(res).toEqual({
         'channel-id': {

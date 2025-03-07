@@ -9,9 +9,7 @@
   "version": "5.0.0",
   "description": "Exports customer groups from the commercetools platform.",
   "main": "lib/main.js",
-  "bin": {
-    "customer-groups-exporter": "bin/customer-groups-exporter.js"
-  },
+  "bin": "bin/customer-groups-exporter.js",
   "scripts": {
     "prebuild": "rimraf lib/**",
     "build": "babel src --out-dir lib --config-file '../../babel.config.js'"

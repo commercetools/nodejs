@@ -7,10 +7,10 @@ describe('ProductExporter', () => {
   let productExporter
   beforeEach(() => {
     const logger = {
-      error: () => { },
-      warn: () => { },
-      info: () => { },
-      verbose: () => { },
+      error: () => {},
+      warn: () => {},
+      info: () => {},
+      verbose: () => {},
     }
     const exportConfig = {
       staged: true,
@@ -42,7 +42,7 @@ describe('ProductExporter', () => {
   describe('::run', () => {
     test('prepare the output stream and pass to `_getProducts`', async () => {
       productExporter._getProducts = jest.fn(() => Promise.resolve())
-      const outputStream = streamtest.v2.toText(() => { })
+      const outputStream = streamtest.v2.toText(() => {})
       await productExporter.run(outputStream)
       expect(productExporter._getProducts).toHaveBeenCalled()
       expect(productExporter._getProducts).not.toHaveBeenCalledWith(
@@ -69,9 +69,9 @@ describe('ProductExporter', () => {
   describe('::_getProducts', () => {
     let processMock
     const outputStream = {
-      emit: () => { },
+      emit: () => {},
       end: jest.fn(),
-      write: jest.fn()
+      write: jest.fn(),
     }
     beforeEach(() => {
       const sampleResult = {

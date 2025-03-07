@@ -3,7 +3,7 @@
 exports[`CSV and CLI Tests CLI basic functionality should print usage information given the help flag 1`] = `
 "
 
-Usage: csvparserorder [options]
+Usage: csvparserorder.js [options]
 Convert commercetools order CSV data to JSON.
 
 Options:

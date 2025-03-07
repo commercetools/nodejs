@@ -28,7 +28,7 @@ describe('Channels', () => {
     'createdBy',
     'lastModifiedAt',
     'lastModifiedBy',
-    'versionModifiedAt'
+    'versionModifiedAt',
   ]
   const service = createRequestBuilder({ projectKey }).channels
   const httpMiddleware = createHttpMiddleware({
@@ -62,9 +62,8 @@ describe('Channels', () => {
           },
           fetch,
         }
-        const authMiddleware = createAuthMiddlewareForClientCredentialsFlow(
-          apiConfig
-        )
+        const authMiddleware =
+          createAuthMiddlewareForClientCredentialsFlow(apiConfig)
         client = createClient({
           middlewares: [
             authMiddleware,
