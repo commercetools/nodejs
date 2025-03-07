@@ -39,3 +39,6 @@ mise.toml
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# mise-en-place
+mise.toml
