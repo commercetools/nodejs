@@ -1,10 +1,9 @@
 {
-  "private": false,
   "publishConfig": {
     "access": "public"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "name": "@commercetools/resource-deleter",
   "version": "3.0.0",
@@ -42,12 +41,12 @@
     "@commercetools/sdk-middleware-http": "^7.0.0",
     "@commercetools/sdk-middleware-queue": "^3.0.0",
     "@commercetools/sdk-middleware-user-agent": "^3.0.0",
+    "core-js": "^3.22.5",
     "node-fetch": "^2.6.7",
     "pino": "^6.0.0",
     "pretty-error": "^2.1.1",
     "prompts": "^2.0.4",
-    "yargs": "^16.0.0",
-    "core-js": "^3.22.5",
-    "regenerator-runtime": "^0.13.9"
+    "regenerator-runtime": "^0.13.9",
+    "yargs": "^16.0.0"
   }
 }

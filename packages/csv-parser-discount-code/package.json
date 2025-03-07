@@ -1,10 +1,9 @@
 {
-  "private": false,
   "publishConfig": {
     "access": "public"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "name": "@commercetools/csv-parser-discount-code",
   "version": "3.0.0",
