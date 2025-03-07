@@ -8,7 +8,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "postinstall": "./scripts/postinstall.sh",
-    "clean": "rm -rf coverage; manypkg exec rimraf lib dist",
+    "clean": "rm -rf coverage; manypkg exec rimraf lib dist node_modules; rm -rf node_modules",
     "commit": "git-cz",
     "build": "pnpm --recursive run build",
     "check-gh-auth-token": "if [[ -z \"${GITHUB_AUTH}\" ]]; then echo \"Need to set GITHUB_AUTH\" && exit 1; fi",
