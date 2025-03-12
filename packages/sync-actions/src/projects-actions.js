@@ -29,6 +29,13 @@ export const customerSearchActionsList = [
   },
 ]
 
+export const businessUnitSearchActionsList = [
+  {
+    action: 'changeBusinessUnitSearchStatus',
+    key: 'status',
+  },
+]
+
 export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
@@ -67,19 +74,36 @@ export function actionsMapSearchIndexingConfiguration(
     return []
   }
 
-  const { customers } = searchIndexing
-  if (!customers) {
+  const { businessUnits, customers } = searchIndexing
+  if (!customers && !businessUnits) {
     return []
   }
 
-  return buildBaseAttributesActions({
-    actions: customerSearchActionsList,
-    diff: diff.searchIndexing.customers,
-    oldObj: oldObj.searchIndexing.customers,
-    newObj: newObj.searchIndexing.customers,
-    shouldOmitEmptyString: config.shouldOmitEmptyString,
-    shouldUnsetOmittedProperties: config.shouldUnsetOmittedProperties,
-    shouldPreventUnsettingRequiredFields:
-      config.shouldPreventUnsettingRequiredFields,
-  })
+  const businessUnitsActions = businessUnits
+    ? buildBaseAttributesActions({
+        actions: businessUnitSearchActionsList,
+        diff: diff.searchIndexing.businessUnits,
+        oldObj: oldObj.searchIndexing.businessUnits,
+        newObj: newObj.searchIndexing.businessUnits,
+        shouldOmitEmptyString: config.shouldOmitEmptyString,
+        shouldUnsetOmittedProperties: config.shouldUnsetOmittedProperties,
+        shouldPreventUnsettingRequiredFields:
+          config.shouldPreventUnsettingRequiredFields,
+      })
+    : []
+
+  const customersActions = customers
+    ? buildBaseAttributesActions({
+        actions: customerSearchActionsList,
+        diff: diff.searchIndexing.customers,
+        oldObj: oldObj.searchIndexing.customers,
+        newObj: newObj.searchIndexing.customers,
+        shouldOmitEmptyString: config.shouldOmitEmptyString,
+        shouldUnsetOmittedProperties: config.shouldUnsetOmittedProperties,
+        shouldPreventUnsettingRequiredFields:
+          config.shouldPreventUnsettingRequiredFields,
+      })
+    : []
+
+  return [...businessUnitsActions, ...customersActions]
 }

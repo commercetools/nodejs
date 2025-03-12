@@ -3,6 +3,7 @@ import {
   baseActionsList,
   myBusinessUnitActionsList,
   customerSearchActionsList,
+  businessUnitSearchActionsList,
 } from '../src/projects-actions'
 
 describe('Exports', () => {
@@ -102,6 +103,17 @@ describe('Exports', () => {
         expect.arrayContaining([
           {
             action: 'changeCustomerSearchStatus',
+            key: 'status',
+          },
+        ])
+      )
+    })
+
+    test('should contain `changeBusinessUnitSearchStatus` action', () => {
+      expect(businessUnitSearchActionsList).toEqual(
+        expect.arrayContaining([
+          {
+            action: 'changeBusinessUnitSearchStatus',
             key: 'status',
           },
         ])
@@ -331,6 +343,40 @@ describe('Actions', () => {
     const expected = [
       {
         action: 'changeCustomerSearchStatus',
+        status: 'Deactivated',
+      },
+    ]
+    expect(actual).toEqual(expected)
+  })
+
+  test('should build `changeBusinessUnitSearchStatus` action', () => {
+    const before = {
+      searchIndexing: {
+        businessUnits: {
+          status: 'Activated',
+          lastModifiedAt: '2024-05-31T08:20:26.187Z',
+          lastModifiedBy: {
+            isPlatformClient: true,
+          },
+        },
+      },
+    }
+
+    const now = {
+      searchIndexing: {
+        businessUnits: {
+          status: 'Deactivated',
+          lastModifiedAt: '2024-05-31T08:20:26.187Z',
+          lastModifiedBy: {
+            isPlatformClient: true,
+          },
+        },
+      },
+    }
+    const actual = projectsSync.buildActions(now, before)
+    const expected = [
+      {
+        action: 'changeBusinessUnitSearchStatus',
         status: 'Deactivated',
       },
     ]
