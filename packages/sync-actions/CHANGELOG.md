@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 7.1.0
+
+### Minor Changes
+
+- [#1934](https://github.com/commercetools/nodejs/pull/1934) [`0d20ce7`](https://github.com/commercetools/nodejs/commit/0d20ce78f58b012106e1005249a7eaeae4faef40) Thanks [@NickDevG](https://github.com/NickDevG)! - Adding business unit search status coverage
+
 ## 7.0.0
 
 ### Major Changes
