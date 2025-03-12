@@ -36,17 +36,6 @@ export const businessUnitSearchActionsList = [
   },
 ]
 
-export const searchIndexActionsList = [
-  {
-    action: 'changeCustomerSearchStatus',
-    key: 'status',
-  },
-  {
-    action: 'changeBusinessUnitSearchStatus',
-    key: 'status',
-  },
-]
-
 export function actionsMapBase(diff, oldObj, newObj, config = {}) {
   return buildBaseAttributesActions({
     actions: baseActionsList,
