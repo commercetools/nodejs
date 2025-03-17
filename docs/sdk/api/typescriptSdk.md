@@ -50,7 +50,6 @@ See full usage example [here](https://github.com/commercetools/commercetools-sdk
 ```bash
 npm install --save @commercetools/platform-sdk
 npm install --save @commercetools/importapi-sdk
-npm install --save @commercetools/ml-sdk
 npm install --save @commercetools/sdk-client-v2
 ```
 
@@ -525,7 +524,7 @@ const client: Client = new ClientBuilder()
 
 ### 2. Other middleware creator methods
 
-There are also other class methods that creates middlewares used to fully cusotmize and control the client, they are described in details below.
+However, there are other class methods that creates middlewares used to fully customize and control the client, they are described in details below.
 
 #### withHttpMiddleware(options: _HttpMiddlewareOptions_)
 
@@ -552,13 +551,13 @@ The HTTP middleware can run in either a browser or Node.js environment. For Node
 
 #### Note:
 
-The `arbortController` property is deprecated, use the `getAbortController` property instead.
+The `abortController` property is deprecated, use the `getAbortController` property instead.
 
 #### Retrying requests
 
-This modules have a retrying ability incase of network failures or 503 response errors. To enable this behavior, pass the `enableRetry` flag in the options and also set the maximum number of retries (`maxRetries`) and amount in milliseconds to wait before retrying a request (`retryDelay`).
+This modules have a retrying ability in case of network failures or 503 response errors. To enable this behavior, pass the `enableRetry` flag in the options and also set the maximum number of retries (`maxRetries`) and amount in milliseconds to wait before retrying a request (`retryDelay`).
 
-The repeater implements an `exponential` delay, meaning the wait time is not constant and it grows on every retry.
+The repeater implements an `exponential` delay, meaning the wait time is not constant, and it grows on every retry.
 
 #### retryConfig
 
