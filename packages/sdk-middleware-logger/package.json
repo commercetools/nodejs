@@ -18,9 +18,15 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Nicola Molinari <nicola.molinari@commercetools.com> (https://github.com/emmenko)",
-  "main": "dist/sdk-middleware-logger.cjs.js",
-  "module": "dist/sdk-middleware-logger.es.js",
-  "browser": "dist/sdk-middleware-logger.umd.js",
+  "main": "dist/commercetools-sdk-middleware-logger.cjs.js",
+  "module": "dist/commercetools-sdk-middleware-logger.esm.js",
+  "umd:min": "dist/commercetools-sdk-middleware-logger.umd.js",
+  "preconstruct": {
+    "entrypoints": [
+      "./index.js"
+    ],
+    "umdName": "commercetoolsSdkMiddlewareLogger"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
@@ -30,7 +36,6 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "pnpm build:bundles",
-    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkMiddlewareLogger -i ./src/index.js"
+    "build": "exit 0;"
   }
 }

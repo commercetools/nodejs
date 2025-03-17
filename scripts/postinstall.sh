@@ -2,10 +2,19 @@
 
 set -e
 
-echo "Preparing development setup."
+if [ -n "$SKIP_POSTINSTALL" ]; then
+  echo "Skipping postinstall steps."
 
-pnpm husky
+else
+  if [ -n "$SKIP_POSTINSTALL_DEV_SETUP" ]; then
+    echo "Skipping development setup."
 
-pnpm check-node-version --package --print
+  else
+    echo "Preparing development setup."
 
-pnpm manypkg check
+    pnpm husky install
+    pnpm preconstruct dev
+    pnpm check-node-version --package --print
+    pnpm manypkg check
+  fi
+fi
