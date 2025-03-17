@@ -2,7 +2,7 @@
 
 exports[`Custom Objects Exporter CLI basic functionality should print usage information given the help flag 1`] = `
 "
-Usage: custom-objects-exporter [options]
+Usage: custom-objects-exporter.js [options]
 Exports custom objects from the commercetools platform.
 
 Options:

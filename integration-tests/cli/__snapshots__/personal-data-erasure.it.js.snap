@@ -2,7 +2,7 @@
 
 exports[`personal data erasure CLI basic functionality should print usage information given the help flag 1`] = `
 "
-Usage: personal-data-erasure [options]
+Usage: personal-data-erasure.js [options]
 Export and delete all data related to a single customer
 
 Options:

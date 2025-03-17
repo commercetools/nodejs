@@ -23,27 +23,26 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 
 1.  Clone the repo with `git clone git@github.com:commercetools/nodejs.git`
 
-2.  Run `yarn install` (or `yarn`) in the root `nodejs` folder. This will ensure that all package dependencies are properly installed / linked. The repository uses [lerna](https://github.com/lerna/lerna) to orchestrate the different packages.
+2.  Run `pnpm install` in the root `nodejs` folder. This will ensure that all package dependencies are properly installed / linked. The repository uses [manypkg](https://github.com/Thinkmill/manypkg) to orchestrate the different packages.
+3.  If you're writing documentation, you can start the gitbook development server with `pnpm docs:watch`
 
-3.  If you're writing documentation, you can start the gitbook development server with `yarn docs:watch`
-
-4.  To run all packages tests simply do `yarn test` (we use [jest](https://github.com/facebook/jest)). If you want to work on a specific package and run the tests only for that package, we recommend to use `yarn test:package`. This will prompt you to select one of the available packages. To run in _watch_ mode simply do `yarn test:package --watch`.
+4.  To run all packages tests simply do `pnpm test` (we use [jest](https://github.com/facebook/jest)). If you want to work on a specific package and run the tests only for that package, we recommend to use `pnpm test:package`. This will prompt you to select one of the available packages. To run in _watch_ mode simply do `pnpm test:package --watch`.
 
 5.  Integration tests are separated out in another folder "/integration-tests". To run the integration test, you need to export the environment variables into the process env by doing the following :-
 
     - Export `npm_config_projectkey` = `projectKey`,
     - Export `CT_PROJECT_KEY`=`CLIENT_ID`:`CLIENT_SECRET` as specified [here](https://commercetools.github.io/nodejs/sdk/api/getCredentials.html).
-    - Then run integration test with `yarn test:integration`
+    - Then run integration test with `pnpm test:integration`
 
 **Note: Due to the setup/teardown nature of the integration tests, there is the risk of potential data loss in your project**
 
-6.  Linting and static checks are done by `yarn lint`. We the [Airbnb eslint config](https://www.npmjs.com/package/eslint-config-airbnb). Static checks are done using [Flow](https://flowtype.org/) and can be included / adopted incrementally. Committing also runs a git hook to lint the changed files.
+6.  Linting and static checks are done by `pnpm lint`. We the [Airbnb eslint config](https://www.npmjs.com/package/eslint-config-airbnb). Static checks are done using [Flow](https://flowtype.org/) and can be included / adopted incrementally. Committing also runs a git hook to lint the changed files.
 
 ## Formatting (Prettier)
 
 We use [prettier](https://github.com/jlongster/prettier) to format our code, so we don't ever have to argue over code-style.
 
-Prettier is integrated into ESLint, so all code is checked. The rules are only enabled when running `yarn lint` from the command-line.
+Prettier is integrated into ESLint, so all code is checked. The rules are only enabled when running `pnpm lint` from the command-line.
 The rules are disabled in Atom so we don't get the annoying warnings while developing.
 
 ### Setup
@@ -55,15 +54,15 @@ We run prettier as part of ESLint using `eslint-plugin-prettier`. We disable all
 
 We use [Renovate](https://renovateapp.com/) to get notified whenever there is a new version of a dependency, in form of a Pull Request. It's recommended to check the changes of the new versions before merging the PR. If necessary the PR should be updated with necessary code changes / migrations.
 
-#### Update `yarn.lock` file
+#### Update `pnpm-lock.yaml` file
 
-To ensure the lock file is up-to-date with the new versions, it's recommended to do checkout the branch, install the new deps with `yarn` and push the updated lock file to the PR.
+To ensure the lock file is up-to-date with the new versions, it's recommended to do checkout the branch, install the new deps with `pnpm` and push the updated lock file to the PR.
 
 ## Releases
 
 We use lerna to manage our multi-package (monorepo) repository and we use changesets to publish packages to npm, the following steps will allow you to add a changeset to a change you wish to publish
 
-- Run the command `yarn changeset`, a list of packages will be listed.
+- Run the command `pnpm changeset`, a list of packages will be listed.
 - Select the package(s) that include the changes.
 - Add the packages you wish to publish to npm
 - Commit the changes, push to Github and then create a PR
@@ -72,7 +71,7 @@ When this PR is merged into the base branch, a new release PR will be created by
 
 #### Commit message
 
-Make sure your commit messages follow [Angular's commit message format](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines). To make this easy run `yarn commit` from the root.
+Make sure your commit messages follow [Angular's commit message format](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines). To make this easy run `pnpm commit` from the root.
 
 ```
     docs(contributing): add example of a full commit message

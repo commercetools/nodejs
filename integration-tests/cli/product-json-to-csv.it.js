@@ -179,10 +179,8 @@ describe('CSV and CLI Tests', () => {
 
           it('contains `description`', () => {
             const description = {
-              en:
-                'The light jackets of Save the Duck keep us cozy warm. The slight',
-              de:
-                'Die leichten Freizeitjacken von Save the Duck halten uns wohlig',
+              en: 'The light jackets of Save the Duck keep us cozy warm. The slight',
+              de: 'Die leichten Freizeitjacken von Save the Duck halten uns wohlig',
             }
             expect(product[0]).toEqual(expect.objectContaining({ description }))
             expect(product[1]).toEqual(expect.objectContaining({ description }))
@@ -305,8 +303,7 @@ describe('CSV and CLI Tests', () => {
 
           it('contains `description`', () => {
             const description = {
-              en:
-                'Golom Jacop Caesar Icarve the Duck keep us cozy warm. The slight',
+              en: 'Golom Jacop Caesar Icarve the Duck keep us cozy warm. The slight',
               de: 'Lorem Ipsum Text von Save the Duck halten uns wohlig',
             }
             expect(product[0]).toEqual(expect.objectContaining({ description }))
@@ -571,10 +568,8 @@ describe('CSV and CLI Tests', () => {
 
           it('contains `description`', () => {
             const description = {
-              en:
-                'The light jackets of Save the Duck keep us cozy warm. The slight',
-              de:
-                'Die leichten Freizeitjacken von Save the Duck halten uns wohlig',
+              en: 'The light jackets of Save the Duck keep us cozy warm. The slight',
+              de: 'Die leichten Freizeitjacken von Save the Duck halten uns wohlig',
             }
             expect(product[0]).toEqual(expect.objectContaining({ description }))
             expect(product[1]).toEqual(expect.objectContaining({ description }))
@@ -697,8 +692,7 @@ describe('CSV and CLI Tests', () => {
 
           it('contains `description`', () => {
             const description = {
-              en:
-                'Golom Jacop Caesar Icarve the Duck keep us cozy warm. The slight',
+              en: 'Golom Jacop Caesar Icarve the Duck keep us cozy warm. The slight',
               de: 'Lorem Ipsum Text von Save the Duck halten uns wohlig',
             }
             expect(product[0]).toEqual(expect.objectContaining({ description }))

@@ -25,7 +25,11 @@ describe('validate options', () => {
 })
 
 describe('api', () => {
-  const middlewares = [(next) => (...args) => next(...args)]
+  const middlewares = [
+    (next) =>
+      (...args) =>
+        next(...args),
+  ]
   const client = createClient({ middlewares })
   const request = {
     uri: '/foo',
@@ -51,7 +55,11 @@ describe('execute', () => {
   }
 
   test('should throw if request is missing', () => {
-    const middlewares = [(next) => (...args) => next(...args)]
+    const middlewares = [
+      (next) =>
+        (...args) =>
+          next(...args),
+    ]
     const client = createClient({ middlewares })
     expect(() => client.execute()).toThrow(
       /The "exec" function requires a "Request" object/
@@ -59,7 +67,11 @@ describe('execute', () => {
   })
 
   test('should throw if request uri is invalid', () => {
-    const middlewares = [(next) => (...args) => next(...args)]
+    const middlewares = [
+      (next) =>
+        (...args) =>
+          next(...args),
+    ]
     const client = createClient({ middlewares })
     const badRequest = {
       ...request,
@@ -71,7 +83,11 @@ describe('execute', () => {
   })
 
   test('should throw if request method is invalid', () => {
-    const middlewares = [(next) => (...args) => next(...args)]
+    const middlewares = [
+      (next) =>
+        (...args) =>
+          next(...args),
+    ]
     const client = createClient({ middlewares })
     const badRequest = {
       ...request,
@@ -192,7 +208,11 @@ describe('process', () => {
   }
 
   describe('validate arguments', () => {
-    const middlewares = [(next) => (...args) => next(...args)]
+    const middlewares = [
+      (next) =>
+        (...args) =>
+          next(...args),
+    ]
     const client = createClient({ middlewares })
 
     test('should throw if second argument missing', () => {

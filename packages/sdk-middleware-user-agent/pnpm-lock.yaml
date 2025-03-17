@@ -1,0 +1,31 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@commercetools/http-user-agent':
+        specifier: ^3.0.0
+        version: 3.0.0
+      '@commercetools/sdk-types':
+        specifier: ^0.1.2
+        version: 0.1.2
+
+packages:
+
+  '@commercetools/http-user-agent@3.0.0':
+    resolution: {integrity: sha512-kHlVST/Ax8GFpG9vpcUR5wKBGBoY2tZDA87kSC3nxhgk2+szZfv7MMMaAt0EIz2thpyO7oJv9NyPY/3XrrNIXQ==}
+    engines: {node: '>=14'}
+
+  '@commercetools/sdk-types@0.1.2':
+    resolution: {integrity: sha512-j9yFGbdOxc4RRaYXzQbGLdm9tpLFOLkFmqKjaj+rOrkpNstsbiBNE8BgHt0D+rXlTGaNa4PjoK7PImCj69Jpuw==}
+
+snapshots:
+
+  '@commercetools/http-user-agent@3.0.0': {}
+
+  '@commercetools/sdk-types@0.1.2': {}
