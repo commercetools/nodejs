@@ -13,7 +13,7 @@ overrides:
   dot-prop: 6.0.1
   merge: 2.1.1
   npm-user-validate: 1.0.1
-  serialize-javascript: 6.0.0
+  serialize-javascript: 6.0.2
   diff: 5.0.0
   object-path: 0.11.8
   npm: 6.14.17
@@ -6743,8 +6743,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
-  serialize-javascript@6.0.0:
-    resolution: {integrity: sha512-Qr3TosvguFt8ePWqsvRfrKyQXIiW+nGbYpy8XK24NQHE83caxWt+mIymTT19DGFbNWNLfEwsrkSmN64lVWB9ag==}
+  serialize-javascript@6.0.2:
+    resolution: {integrity: sha512-Saa1xPByTTq2gdeFZYLLo+RFE35NHZkAbqZeWNd3BpzppeVisAqpDjcp8dyf6uIvEqJRd46jemmyA4iFIeVk8g==}
 
   set-blocking@2.0.0:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
@@ -12525,11 +12525,7 @@ snapshots:
       pretty-format: 26.6.2
       throat: 5.0.0
     transitivePeerDependencies:
-      - bufferutil
-      - canvas
       - supports-color
-      - ts-node
-      - utf-8-validate
 
   jest-leak-detector@26.6.2:
     dependencies:
@@ -14175,7 +14171,7 @@ snapshots:
       '@babel/code-frame': 7.26.2
       jest-worker: 24.9.0
       rollup: 4.34.9
-      serialize-javascript: 6.0.0
+      serialize-javascript: 6.0.2
       uglify-js: 3.19.3
 
   rollup-pluginutils@2.8.2:
@@ -14284,7 +14280,7 @@ snapshots:
 
   semver@7.7.1: {}
 
-  serialize-javascript@6.0.0:
+  serialize-javascript@6.0.2:
     dependencies:
       randombytes: 2.1.0
 
