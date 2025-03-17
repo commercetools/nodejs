@@ -1,6 +1,6 @@
 # CSV Parser Orders
 
-[![Travis Build Status][travis-icon]][travis]
+[![GitHub Actions Status][github-actions-icon]][github-actions]
 [![Codecov Coverage Status][codecov-icon]][codecov]
 [![David Dependencies Status][david-icon]][david]
 [![David devDependencies Status][david-dev-icon]][david-dev]
@@ -468,8 +468,8 @@ More delivery examples can be seen [here](https://github.com/commercetools/nodej
 
 [commercetools]: https://commercetools.com/
 [commercetools-icon]: https://cdn.rawgit.com/commercetools/press-kit/master/PNG/72DPI/CT%20logo%20horizontal%20RGB%2072dpi.png
-[travis]: https://travis-ci.org/commercetools/csv-parser-orders
-[travis-icon]: https://img.shields.io/travis/commercetools/csv-parser-orders/master.svg?style=flat-square
+[github-actions]: https://github.com/commercetools/nodejs/actions/workflows/quality.yml
+[github-actions-icon]: https://github.com/commercetools/nodejs/actions/workflows/quality.yml/badge.svg
 [codecov]: https://codecov.io/gh/commercetools/csv-parser-orders
 [codecov-icon]: https://img.shields.io/codecov/c/github/commercetools/csv-parser-orders.svg?style=flat-square
 [david]: https://david-dm.org/commercetools/csv-parser-orders
