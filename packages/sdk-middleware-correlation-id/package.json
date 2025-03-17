@@ -19,9 +19,15 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Tobias Deekens <tobias.deekens@commercetools.com> (https://github.com/tdeekens)",
-  "main": "dist/sdk-middleware-correlation-id.cjs.js",
-  "module": "dist/sdk-middleware-correlation-id.es.js",
-  "browser": "dist/sdk-middleware-correlation-id.umd.js",
+  "main": "dist/commercetools-sdk-middleware-correlation-id.cjs.js",
+  "module": "dist/commercetools-sdk-middleware-correlation-id.esm.js",
+  "umd:min": "dist/commercetools-sdk-middleware-correlation-id.umd.js",
+  "preconstruct": {
+    "entrypoints": [
+      "./index.js"
+    ],
+    "umdName": "commercetoolsSdkMiddlewareCorrelationId"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
@@ -31,7 +37,6 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "pnpm build:bundles",
-    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkMiddlewareCorrelationId -i ./src/index.js"
+    "build": "exit 0;"
   }
 }

@@ -7,10 +7,10 @@ import {
 } from '@commercetools/sdk-types'
 
 type UserAgentMiddlewareOptions = {
-  libraryName?: string
-  libraryVersion?: string
-  contactUrl?: string
-  contactEmail?: string
+  libraryName?: string;
+  libraryVersion?: string;
+  contactUrl?: string;
+  contactEmail?: string;
 }
 
 export default function createUserAgentMiddleware(

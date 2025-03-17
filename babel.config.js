@@ -5,14 +5,6 @@ const getPresets = () => {
         targets: { node: 'current' },
         modules: 'commonjs',
       }
-    case 'rollup':
-      return {
-        targets: {
-          browsers: ['last 2 versions'],
-          node: 'current',
-        },
-        modules: false,
-      }
     case 'production':
       return {
         targets: {

@@ -18,9 +18,15 @@
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "author": "Jan Juna <jan.juna-ext@commercetools.com> (https://github.com/junajan)",
-  "main": "dist/sdk-auth.cjs.js",
-  "module": "dist/sdk-auth.es.js",
-  "browser": "dist/sdk-auth.umd.js",
+  "main": "dist/commercetools-sdk-auth.cjs.js",
+  "module": "dist/commercetools-sdk-auth.esm.js",
+  "umd:min": "dist/commercetools-sdk-auth.umd.js",
+  "preconstruct": {
+    "entrypoints": [
+      "./index.js"
+    ],
+    "umdName": "commercetoolsSdkAuth"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/commercetools/nodejs.git"
@@ -30,8 +36,7 @@
   ],
   "scripts": {
     "prebuild": "rimraf dist/**",
-    "build": "pnpm build:bundles",
-    "build:bundles": "cross-env NODE_ENV=production rollup -c ../../rollup.config.js -n CommercetoolsSdkAuth -i ./src/index.js"
+    "build": "exit 0;"
   },
   "dependencies": {
     "@commercetools/sdk-middleware-http": "^8.0.0",
