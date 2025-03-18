@@ -1,6 +1,6 @@
 # CSV Parser Price
 
-[![Travis Build Status][travis-icon]][travis]
+[![GitHub Actions Status][github-actions-icon]][github-actions]
 [![Codecov Coverage Status][codecov-icon]][codecov]
 [![David Dependencies Status][david-icon]][david]
 [![David devDependencies Status][david-dev-icon]][david-dev]
@@ -181,8 +181,8 @@ JSON object returned from the conversion of the CSV file above
 
 [commercetools]: https://commercetools.com/
 [commercetools-icon]: https://cdn.rawgit.com/commercetools/press-kit/master/PNG/72DPI/CT%20logo%20horizontal%20RGB%2072dpi.png
-[travis]: https://travis-ci.org/commercetools/csv-parser-price
-[travis-icon]: https://img.shields.io/travis/commercetools/csv-parser-price/master.svg?style=flat-square
+[github-actions]: https://github.com/commercetools/nodejs/actions/workflows/quality.yml
+[github-actions-icon]: https://github.com/commercetools/nodejs/actions/workflows/quality.yml/badge.svg
 [codecov]: https://codecov.io/gh/commercetools/csv-parser-price
 [codecov-icon]: https://img.shields.io/codecov/c/github/commercetools/csv-parser-price.svg?style=flat-square
 [david]: https://david-dm.org/commercetools/csv-parser-price
