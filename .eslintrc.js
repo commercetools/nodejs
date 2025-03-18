@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 8,
     sourceType: 'module',
