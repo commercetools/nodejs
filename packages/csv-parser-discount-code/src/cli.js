@@ -6,6 +6,15 @@ import yargs from 'yargs'
 
 import CsvParserDiscountCode from './main'
 
+const doesFileExist = (filePath) => {
+  try {
+    fs.accessSync(filePath)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 process.title = 'csvParserDiscountCode'
 
 const args = yargs
@@ -23,7 +32,7 @@ Converts commercetools discount code data from CSV to JSON.`
   .coerce('input', (arg) => {
     if (arg === 'stdin') return process.stdin
 
-    if (fs.existsSync(arg)) {
+    if (doesFileExist(arg)) {
       if (arg.match(/\.csv$/i)) return fs.createReadStream(String(arg))
 
       throw new Error('Invalid input file format. Must be CSV file')

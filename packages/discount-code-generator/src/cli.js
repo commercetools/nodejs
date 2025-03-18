@@ -9,6 +9,15 @@ import flatten, { unflatten } from 'flat'
 import discountCodeGenerator from './main'
 import prepareInput from './utils'
 
+const doesFileExist = (filePath) => {
+  try {
+    fs.accessSync(filePath)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 process.title = 'discountCodeGenerator'
 
 const args = yargs
@@ -47,7 +56,7 @@ Generate multiple discount codes to import to the commercetools platform.`
     describe: 'Path to code options CSV or JSON file.',
   })
   .coerce('input', (arg) => {
-    if (fs.existsSync(arg)) {
+    if (doesFileExist(arg)) {
       if (arg.match(/\.json$/i) || arg.match(/\.csv$/i)) return String(arg)
 
       throw new Error('Invalid input file format. Must be CSV or JSON')
