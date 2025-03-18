@@ -18,7 +18,6 @@ overrides:
   object-path: 0.11.8
   npm: 6.14.17
   set-value: 4.0.1
-  chalk: 3.0.0
 
 importers:
 
@@ -2802,6 +2801,14 @@ packages:
     resolution: {integrity: sha512-gWkLPDvHH2pC9YEKqp8dIl0mg3sRglMPvioqGDIOXiwxjxUwIJ1gF86E2o4R5yLNh8IAkwHbaMtASkJfkQ2hIA==}
     engines: {node: '>=0.10.0'}
 
+  ansi-styles@2.2.1:
+    resolution: {integrity: sha512-kmCevFghRiWM7HB5zTPULl4r9bVFSWjz62MhqizDGUrq2NWuNMQyuv4tHHoKJHs69M/MF64lEcHdYIocrdWQYA==}
+    engines: {node: '>=0.10.0'}
+
+  ansi-styles@3.2.1:
+    resolution: {integrity: sha512-VT0ZI6kZRdTh8YyJw3SMbYm/u+NqfsAxEpWO0Pf9sq8/e94WxxOpPKx9FR1FlyCtOVDNOQ+8ntlqFxiRc+r5qA==}
+    engines: {node: '>=4'}
+
   ansi-styles@4.3.0:
     resolution: {integrity: sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==}
     engines: {node: '>=8'}
@@ -3209,9 +3216,25 @@ packages:
   chainsaw@0.1.0:
     resolution: {integrity: sha512-75kWfWt6MEKNC8xYXIdRpDehRYY/tNSgwKaJq+dbbDcxORuVrrQ+SEHoWsniVn9XPYfP4gmdWIeDk/4YNp1rNQ==}
 
+  chalk@1.1.3:
+    resolution: {integrity: sha512-U3lRVLMSlsCfjqYPbLyVv11M9CPW4I728d6TCKMAOJueEeB9/8o+eSsMnxPJD+Q+K909sdESg7C+tIkoH6on1A==}
+    engines: {node: '>=0.10.0'}
+
+  chalk@2.4.2:
+    resolution: {integrity: sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ==}
+    engines: {node: '>=4'}
+
   chalk@3.0.0:
     resolution: {integrity: sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==}
     engines: {node: '>=8'}
+
+  chalk@4.1.2:
+    resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
+    engines: {node: '>=10'}
+
+  chalk@5.4.1:
+    resolution: {integrity: sha512-zgVZuo2WcZgfUEmsn6eO3kINexW8RAE4maiQ8QNs8CtpPCSyMiYsULR3HQYkm3w8FIA3SberyMJMSldGsW+U3w==}
+    engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
 
   char-regex@1.0.2:
     resolution: {integrity: sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==}
@@ -3314,9 +3337,15 @@ packages:
     resolution: {integrity: sha512-lNkKvzEeMBBjUGHZ+q6z9pSJla0KWAQPvtzhEV9+iGyQYG+pBpl7xKDhxoNSOZH2hhv0v5k0y2yAM4o4SjoSkw==}
     engines: {node: '>=0.10.0'}
 
+  color-convert@1.9.3:
+    resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
+
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
+
+  color-name@1.1.3:
+    resolution: {integrity: sha512-72fSenhMw2HZMTVHeCA9KCmpEIbzWiQsjN+BHcBbS9vr1mtt+vJjPdksIBNUmKAW8TFUDPJK5SUU3QhE9NEXDw==}
 
   color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
@@ -4433,6 +4462,10 @@ packages:
   growly@1.3.0:
     resolution: {integrity: sha512-+xGQY0YyAWCnqy7Cd++hc2JqMYzlm0dG30Jd0beaA64sROr8C4nt8Yc9V5Ro3avlSUDTN0ulqP/VBKi1/lLygw==}
 
+  has-ansi@2.0.0:
+    resolution: {integrity: sha512-C8vBJ8DwUCx19vhm7urhTuUsr4/IyP6l4VzNQDv+ryHQObW3TTTp9yB68WpYgRe2bbaGuZ/se74IqFeVnMnLZg==}
+    engines: {node: '>=0.10.0'}
+
   has-bigints@1.1.0:
     resolution: {integrity: sha512-R3pbpkcIqv2Pm3dUwgjclDRVmWpTJW2DcMzcIhEXEx1oh/CEMObMm3KLmRJOdvhM7o4uQBnwr8pzRK2sJWIqfg==}
     engines: {node: '>= 0.4'}
@@ -4440,6 +4473,10 @@ packages:
   has-flag@1.0.0:
     resolution: {integrity: sha512-DyYHfIYwAJmjAjSSPKANxI8bFY9YtFrgkAfinBojQ8YJTOuOuav64tMUJv584SES4xl74PmuaevIyaLESHdTAA==}
     engines: {node: '>=0.10.0'}
+
+  has-flag@3.0.0:
+    resolution: {integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==}
+    engines: {node: '>=4'}
 
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
@@ -6907,9 +6944,17 @@ packages:
     resolution: {integrity: sha512-7S6uOTxPklNGxOSbDIg4KlVLBQw1UiGVyfCUYgYxrZUKRblUkmGj7r8xlfQoFudvqLv6Ap5gd76/IIFfI9JG2A==}
     engines: {node: '>=0.10.0'}
 
+  supports-color@2.0.0:
+    resolution: {integrity: sha512-KKNVtd6pCYgPIKU4cp2733HWYCpplQhddZLBUryaAHou723x+FRzQ5Df824Fj+IyyuiQTRoub4SnIFfIcrp70g==}
+    engines: {node: '>=0.8.0'}
+
   supports-color@3.1.2:
     resolution: {integrity: sha512-F8dvPrZJtNzvDRX26eNXT4a7AecAvTGljmmnI39xEgSpbHKhQ7N0dO/NTxUExd0wuLHp4zbwYY7lvHq0aKpwrA==}
     engines: {node: '>=0.8.0'}
+
+  supports-color@5.5.0:
+    resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
+    engines: {node: '>=4'}
 
   supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
@@ -7597,7 +7642,7 @@ snapshots:
   '@babel/highlight@7.25.9':
     dependencies:
       '@babel/helper-validator-identifier': 7.25.9
-      chalk: 3.0.0
+      chalk: 2.4.2
       js-tokens: 4.0.0
       picocolors: 1.1.1
 
@@ -8865,7 +8910,7 @@ snapshots:
   '@commitlint/format@19.5.0':
     dependencies:
       '@commitlint/types': 19.5.0
-      chalk: 3.0.0
+      chalk: 5.4.1
 
   '@commitlint/is-ignored@19.7.1':
     dependencies:
@@ -8885,7 +8930,7 @@ snapshots:
       '@commitlint/execute-rule': 19.5.0
       '@commitlint/resolve-extends': 19.5.0
       '@commitlint/types': 19.5.0
-      chalk: 3.0.0
+      chalk: 5.4.1
       cosmiconfig: 9.0.0(typescript@4.5.2)
       cosmiconfig-typescript-loader: 6.1.0(@types/node@10.17.60)(cosmiconfig@9.0.0(typescript@4.5.2))(typescript@4.5.2)
       lodash.isplainobject: 4.0.6
@@ -8936,7 +8981,7 @@ snapshots:
   '@commitlint/types@19.5.0':
     dependencies:
       '@types/conventional-commits-parser': 5.0.1
-      chalk: 3.0.0
+      chalk: 5.4.1
 
   '@eslint/eslintrc@0.4.3':
     dependencies:
@@ -8997,7 +9042,7 @@ snapshots:
     dependencies:
       '@jest/types': 26.6.2
       '@types/node': 10.17.60
-      chalk: 3.0.0
+      chalk: 4.1.2
       jest-message-util: 26.6.2
       jest-util: 26.6.2
       slash: 3.0.0
@@ -9011,7 +9056,7 @@ snapshots:
       '@jest/types': 26.6.2
       '@types/node': 10.17.60
       ansi-escapes: 4.3.2
-      chalk: 3.0.0
+      chalk: 4.1.2
       exit: 0.1.2
       graceful-fs: 4.2.8
       jest-changed-files: 26.6.2
@@ -9068,7 +9113,7 @@ snapshots:
       '@jest/test-result': 26.6.2
       '@jest/transform': 26.6.2
       '@jest/types': 26.6.2
-      chalk: 3.0.0
+      chalk: 4.1.2
       collect-v8-coverage: 1.0.2
       exit: 0.1.2
       glob: 7.2.3
@@ -9124,7 +9169,7 @@ snapshots:
       '@babel/core': 7.26.9
       '@jest/types': 26.6.2
       babel-plugin-istanbul: 6.1.1
-      chalk: 3.0.0
+      chalk: 4.1.2
       convert-source-map: 1.9.0
       fast-json-stable-stringify: 2.1.0
       graceful-fs: 4.2.8
@@ -9145,7 +9190,7 @@ snapshots:
       '@types/istanbul-reports': 3.0.4
       '@types/node': 10.17.60
       '@types/yargs': 15.0.19
-      chalk: 3.0.0
+      chalk: 4.1.2
 
   '@jridgewell/gen-mapping@0.3.8':
     dependencies:
@@ -9254,7 +9299,7 @@ snapshots:
       '@rollup/plugin-node-resolve': 11.2.1(rollup@2.79.2)
       '@rollup/plugin-replace': 2.4.2(rollup@2.79.2)
       builtin-modules: 3.3.0
-      chalk: 3.0.0
+      chalk: 4.1.2
       ci-info: 3.9.0
       dataloader: 2.2.3
       detect-indent: 6.1.0
@@ -9724,6 +9769,12 @@ snapshots:
     dependencies:
       ansi-wrap: 0.1.0
 
+  ansi-styles@2.2.1: {}
+
+  ansi-styles@3.2.1:
+    dependencies:
+      color-convert: 1.9.3
+
   ansi-styles@4.3.0:
     dependencies:
       color-convert: 2.0.1
@@ -9810,7 +9861,7 @@ snapshots:
   args@5.0.3:
     dependencies:
       camelcase: 5.0.0
-      chalk: 3.0.0
+      chalk: 2.4.2
       leven: 2.1.0
       mri: 1.1.4
 
@@ -9911,7 +9962,7 @@ snapshots:
 
   babel-code-frame@6.26.0:
     dependencies:
-      chalk: 3.0.0
+      chalk: 1.1.3
       esutils: 2.0.3
       js-tokens: 3.0.2
 
@@ -9969,7 +10020,7 @@ snapshots:
       '@types/babel__core': 7.20.5
       babel-plugin-istanbul: 6.1.1
       babel-preset-jest: 26.6.2(@babel/core@7.26.9)
-      chalk: 3.0.0
+      chalk: 4.1.2
       graceful-fs: 4.2.8
       slash: 3.0.0
     transitivePeerDependencies:
@@ -10273,10 +10324,31 @@ snapshots:
     dependencies:
       traverse: 0.3.9
 
+  chalk@1.1.3:
+    dependencies:
+      ansi-styles: 2.2.1
+      escape-string-regexp: 1.0.5
+      has-ansi: 2.0.0
+      strip-ansi: 3.0.1
+      supports-color: 2.0.0
+
+  chalk@2.4.2:
+    dependencies:
+      ansi-styles: 3.2.1
+      escape-string-regexp: 1.0.5
+      supports-color: 5.5.0
+
   chalk@3.0.0:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+
+  chalk@4.1.2:
+    dependencies:
+      ansi-styles: 4.3.0
+      supports-color: 7.2.0
+
+  chalk@5.4.1: {}
 
   char-regex@1.0.2: {}
 
@@ -10416,9 +10488,15 @@ snapshots:
       map-visit: 1.0.0
       object-visit: 1.0.1
 
+  color-convert@1.9.3:
+    dependencies:
+      color-name: 1.1.3
+
   color-convert@2.0.1:
     dependencies:
       color-name: 1.1.4
+
+  color-name@1.1.3: {}
 
   color-name@1.1.4: {}
 
@@ -10633,7 +10711,7 @@ snapshots:
 
   cz-conventional-changelog@3.3.0(@types/node@10.17.60)(typescript@4.5.2):
     dependencies:
-      chalk: 3.0.0
+      chalk: 2.4.2
       commitizen: 4.3.1(@types/node@10.17.60)(typescript@4.5.2)
       conventional-commit-types: 3.0.0
       lodash.map: 4.6.0
@@ -11002,7 +11080,7 @@ snapshots:
     dependencies:
       '@types/eslint': 7.29.0
       ansi-escapes: 4.3.2
-      chalk: 3.0.0
+      chalk: 4.1.2
       eslint-rule-docs: 1.1.235
       log-symbols: 4.1.0
       plur: 4.0.0
@@ -11156,7 +11234,7 @@ snapshots:
       '@eslint/eslintrc': 0.4.3
       '@humanwhocodes/config-array': 0.5.0
       ajv: 6.12.6
-      chalk: 3.0.0
+      chalk: 4.1.2
       cross-spawn: 7.0.6
       debug: 4.4.0
       doctrine: 3.0.0
@@ -11735,9 +11813,15 @@ snapshots:
   growly@1.3.0:
     optional: true
 
+  has-ansi@2.0.0:
+    dependencies:
+      ansi-regex: 2.1.1
+
   has-bigints@1.1.0: {}
 
   has-flag@1.0.0: {}
+
+  has-flag@3.0.0: {}
 
   has-flag@4.0.0: {}
 
@@ -11892,7 +11976,7 @@ snapshots:
   inquirer@8.2.5:
     dependencies:
       ansi-escapes: 4.3.2
-      chalk: 3.0.0
+      chalk: 4.1.2
       cli-cursor: 3.1.0
       cli-width: 3.0.0
       external-editor: 3.1.0
@@ -12234,7 +12318,7 @@ snapshots:
       '@jest/core': 26.6.3
       '@jest/test-result': 26.6.2
       '@jest/types': 26.6.2
-      chalk: 3.0.0
+      chalk: 4.1.2
       exit: 0.1.2
       graceful-fs: 4.2.8
       import-local: 3.2.0
@@ -12257,7 +12341,7 @@ snapshots:
       '@jest/test-sequencer': 26.6.3
       '@jest/types': 26.6.2
       babel-jest: 26.6.3(@babel/core@7.26.9)
-      chalk: 3.0.0
+      chalk: 4.1.2
       deepmerge: 4.3.1
       glob: 7.2.3
       graceful-fs: 4.2.8
@@ -12279,7 +12363,7 @@ snapshots:
 
   jest-diff@26.6.2:
     dependencies:
-      chalk: 3.0.0
+      chalk: 4.1.2
       diff-sequences: 26.6.2
       jest-get-type: 26.3.0
       pretty-format: 26.6.2
@@ -12291,7 +12375,7 @@ snapshots:
   jest-each@26.6.2:
     dependencies:
       '@jest/types': 26.6.2
-      chalk: 3.0.0
+      chalk: 4.1.2
       jest-get-type: 26.3.0
       jest-util: 26.6.2
       pretty-format: 26.6.2
@@ -12350,7 +12434,7 @@ snapshots:
       '@jest/test-result': 26.6.2
       '@jest/types': 26.6.2
       '@types/node': 10.17.60
-      chalk: 3.0.0
+      chalk: 4.1.2
       co: 4.6.0
       expect: 26.6.2
       is-generator-fn: 2.1.0
@@ -12363,7 +12447,11 @@ snapshots:
       pretty-format: 26.6.2
       throat: 5.0.0
     transitivePeerDependencies:
+      - bufferutil
+      - canvas
       - supports-color
+      - ts-node
+      - utf-8-validate
 
   jest-leak-detector@26.6.2:
     dependencies:
@@ -12372,7 +12460,7 @@ snapshots:
 
   jest-matcher-utils@26.6.2:
     dependencies:
-      chalk: 3.0.0
+      chalk: 4.1.2
       jest-diff: 26.6.2
       jest-get-type: 26.3.0
       pretty-format: 26.6.2
@@ -12382,7 +12470,7 @@ snapshots:
       '@babel/code-frame': 7.26.2
       '@jest/types': 26.6.2
       '@types/stack-utils': 2.0.3
-      chalk: 3.0.0
+      chalk: 4.1.2
       graceful-fs: 4.2.8
       micromatch: 4.0.8
       pretty-format: 26.6.2
@@ -12411,7 +12499,7 @@ snapshots:
   jest-resolve@26.6.2:
     dependencies:
       '@jest/types': 26.6.2
-      chalk: 3.0.0
+      chalk: 4.1.2
       graceful-fs: 4.2.8
       jest-pnp-resolver: 1.2.3(jest-resolve@26.6.2)
       jest-util: 26.6.2
@@ -12443,7 +12531,7 @@ snapshots:
       '@jest/test-result': 26.6.2
       '@jest/types': 26.6.2
       '@types/node': 10.17.60
-      chalk: 3.0.0
+      chalk: 4.1.2
       emittery: 0.7.2
       exit: 0.1.2
       graceful-fs: 4.2.8
@@ -12476,7 +12564,7 @@ snapshots:
       '@jest/transform': 26.6.2
       '@jest/types': 26.6.2
       '@types/yargs': 15.0.19
-      chalk: 3.0.0
+      chalk: 4.1.2
       cjs-module-lexer: 0.6.0
       collect-v8-coverage: 1.0.2
       exit: 0.1.2
@@ -12508,7 +12596,7 @@ snapshots:
 
   jest-silent-reporter@0.5.0:
     dependencies:
-      chalk: 3.0.0
+      chalk: 4.1.2
       jest-util: 26.6.2
 
   jest-snapshot@26.6.2:
@@ -12517,7 +12605,7 @@ snapshots:
       '@jest/types': 26.6.2
       '@types/babel__traverse': 7.20.6
       '@types/prettier': 2.7.3
-      chalk: 3.0.0
+      chalk: 4.1.2
       expect: 26.6.2
       graceful-fs: 4.2.8
       jest-diff: 26.6.2
@@ -12536,7 +12624,7 @@ snapshots:
     dependencies:
       '@jest/types': 26.6.2
       '@types/node': 10.17.60
-      chalk: 3.0.0
+      chalk: 4.1.2
       graceful-fs: 4.2.8
       is-ci: 2.0.0
       micromatch: 4.0.8
@@ -12545,7 +12633,7 @@ snapshots:
     dependencies:
       '@jest/types': 26.6.2
       camelcase: 6.3.0
-      chalk: 3.0.0
+      chalk: 4.1.2
       jest-get-type: 26.3.0
       leven: 3.1.0
       pretty-format: 26.6.2
@@ -12556,7 +12644,7 @@ snapshots:
       '@jest/types': 26.6.2
       '@types/node': 10.17.60
       ansi-escapes: 4.3.2
-      chalk: 3.0.0
+      chalk: 4.1.2
       jest-util: 26.6.2
       string-length: 4.0.2
 
@@ -12679,7 +12767,7 @@ snapshots:
   jsondiffpatch@0.6.0:
     dependencies:
       '@types/diff-match-patch': 1.0.36
-      chalk: 3.0.0
+      chalk: 5.4.1
       diff-match-patch: 1.0.5
 
   jsonfile@4.0.0:
@@ -12765,7 +12853,7 @@ snapshots:
 
   lint-staged@15.4.3:
     dependencies:
-      chalk: 3.0.0
+      chalk: 5.4.1
       commander: 13.1.0
       debug: 4.4.0
       execa: 8.0.1
@@ -12934,7 +13022,7 @@ snapshots:
 
   log-symbols@4.1.0:
     dependencies:
-      chalk: 3.0.0
+      chalk: 4.1.2
       is-unicode-supported: 0.1.0
 
   log-update@6.1.0:
@@ -13353,7 +13441,7 @@ snapshots:
   ora@5.4.1:
     dependencies:
       bl: 4.1.0
-      chalk: 3.0.0
+      chalk: 4.1.2
       cli-cursor: 3.1.0
       cli-spinners: 2.9.2
       is-interactive: 1.0.0
@@ -13520,7 +13608,7 @@ snapshots:
     dependencies:
       '@hapi/bourne': 2.1.0
       args: 5.0.3
-      chalk: 3.0.0
+      chalk: 4.1.2
       dateformat: 4.6.3
       fast-safe-stringify: 2.1.1
       jmespath: 0.15.0
@@ -14388,9 +14476,15 @@ snapshots:
 
   success-symbol@0.1.0: {}
 
+  supports-color@2.0.0: {}
+
   supports-color@3.1.2:
     dependencies:
       has-flag: 1.0.0
+
+  supports-color@5.5.0:
+    dependencies:
+      has-flag: 3.0.0
 
   supports-color@7.2.0:
     dependencies:
