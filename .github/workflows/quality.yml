@@ -1,0 +1,95 @@
+name: Quality
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  linting:
+    name: Linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/ci
+
+      - name: Lint
+        run: pnpm lint
+
+  type-checking:
+    name: Type checking
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/ci
+
+      - name: TypeScript
+        run: pnpm typecheck:ts
+
+      - name: Flow
+        run: pnpm typecheck:flow
+
+  testing:
+    name: Testing
+    needs: [linting, type-checking]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/ci
+
+      - name: Build
+        run: pnpm build
+
+      - uses: oNaiPs/secrets-to-env-action@v1
+        with:
+          secrets: ${{ toJSON(secrets) }}
+
+      - name: Test (with coverage)
+        run: pnpm test:coverage:ci
+
+      - name: Integration tests
+        run: pnpm test:integration
+
+  regression-testing:
+    name: Regression Testing
+    needs: [testing]
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [18, 20]
+      fail-fast: true
+      max-parallel: 1
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/ci
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.version }}
+
+      - name: Build
+        run: pnpm build
+
+      - uses: oNaiPs/secrets-to-env-action@v1
+        with:
+          secrets: ${{ toJSON(secrets) }}
+
+      - name: Integration tests
+        run: pnpm test:integration

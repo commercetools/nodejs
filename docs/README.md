@@ -6,14 +6,11 @@
 </p>
 
 <p align="center">
-  <a href="https://travis-ci.org/commercetools/nodejs">
-    <img alt="Travis CI Status" src="https://img.shields.io/travis/commercetools/nodejs/master.svg?style=flat-square&label=travis">
+  <a href="https://github.com/commercetools/nodejs/actions">
+    <img alt="GitHub Actions Status" src="https://github.com/commercetools/nodejs/actions/workflows/quality.yml/badge.svg">
   </a>
   <a href="https://codecov.io/gh/commercetools/nodejs">
     <img src="https://img.shields.io/codecov/c/github/commercetools/nodejs.svg" alt="Codecov" />
-  </a>
-  <a href="https://waffle.io/commercetools/nodejs-tasks-board">
-    <img alt="Waffle.io Board" src="https://img.shields.io/badge/Waffle-board-yellow.svg?style=flat-square">
   </a>
 </p>
 
