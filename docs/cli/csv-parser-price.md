@@ -79,7 +79,7 @@ Errors on the level `error` come from events that are fatal and thus stop the st
 
 `CsvParserPrice` accepts three objects as arguments:
 
-- API client credentials for the [authentication middleware](https://commercetools.github.io/nodejs/docs/sdk/api/createAuthMiddlewareForClientCredentialsFlow.html) (_required_)
+- API client credentials for the [authentication middleware](https://commercetools.github.io/nodejs/sdk/api/sdkAuth.html) (_required_)
 - Logger takes object with four functions (_optional_)
 - Config (_optional_)
   - `batchSize`: number of CSV rows to handle simultaneously. (_default_: `100`)

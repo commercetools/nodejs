@@ -4,7 +4,7 @@ A package which deletes resources from the [commercetools platform](https://docs
 
 Examples of the resources are :
 
-- [carts](https://docs.commercetools.com/api/projects/carts#delete-a-cart)
+- [carts](https://docs.commercetools.com/api/projects/carts#delete-cart)
 - [categories](https://docs.commercetools.com/api/projects/categories#delete-category)
 - [channels](https://docs.commercetools.com/api/projects/channels#delete-channel)
 - [customergroups](https://docs.commercetools.com/api/projects/customerGroups#delete-customergroup)
