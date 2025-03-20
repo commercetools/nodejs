@@ -1,5 +1,4 @@
 import fetch from 'node-fetch'
-import Promise from 'bluebird'
 import { createAuthMiddlewareForClientCredentialsFlow } from '@commercetools/sdk-middleware-auth'
 import { createClient } from '@commercetools/sdk-client'
 import { createRequestBuilder } from '@commercetools/api-request-builder'
@@ -74,16 +73,18 @@ describe('Resource Deleter', () => {
     }
 
     // create resources on API
-    await Promise.each(resourcesOrder, (name) => {
-      return createData(apiConfig, name, resources[name])
-    })
+    await Promise.all(
+      resourcesOrder.map((name) => createData(apiConfig, name, resources[name]))
+    )
   }, 30000)
 
   // clear resources on API
   afterAll(async () => {
-    await Promise.each(resourcesOrderReversed, (name) => {
-      return createData(apiConfig, name, resources[name])
-    })
+    await Promise.all(
+      resourcesOrderReversed.map((name) =>
+        createData(apiConfig, name, resources[name])
+      )
+    )
   }, 45000)
 
   describe('CLI basic functionality', () => {
