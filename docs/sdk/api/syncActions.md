@@ -1,6 +1,6 @@
 # `sync-actions`
 
-Provides an API to construct update actions. Useful for building [request](/sdk/Glossary.md#clientrequest) `body` for updates.
+Provides an API to construct update actions. Useful for building [request](/sdk/Glossary#clientrequest) `body` for updates.
 
 ## Install
 
@@ -21,11 +21,11 @@ npm install --save @commercetools/sync-actions
 
 ## `createSyncCategories(actionGroups)`
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _categories_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _categories_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -57,13 +57,13 @@ client.execute(categoriesRequest)
 
 ## `createSyncCustomers(actionGroups)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _customers_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _customers_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -96,13 +96,13 @@ client.execute(customersRequest)
 
 ## `createSyncInventories(actionGroups)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _inventories_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _inventories_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -134,13 +134,13 @@ client.execute(inventoriesRequest)
 
 ## `createSyncOrders(actionGroups)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _orders_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _orders_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -172,13 +172,13 @@ client.execute(ordersRequest)
 
 ## `createSyncProducts(actionGroups)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _products_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _products_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -210,13 +210,13 @@ client.execute(productsRequest)
 
 ## `createSyncProductDiscounts(actionGroups)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _product-discounts_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _product-discounts_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -248,13 +248,13 @@ client.execute(productDiscountsRequests)
 
 ## `createSyncDiscountCodes(actionGroups)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _discount-codes_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _discount-codes_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -286,13 +286,13 @@ client.execute(discountCodesRequest)
 
 ## `createSyncCustomerGroup(actionGroups)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _customer-groups_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _customer-groups_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -326,13 +326,13 @@ client.execute(customerGroupRequest)
 
 ## `createSyncCartDiscounts(actionGroups)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _cart-discounts_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _cart-discounts_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -364,13 +364,13 @@ client.execute(cartDiscountsRequests)
 
 ## `createSyncTaxCategories(actionGroups)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _tax-categories_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _tax-categories_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -402,13 +402,13 @@ client.execute(taxCategoriesRequests)
 
 ## `createSyncZones(actionGroups)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _zones_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _zones_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -440,13 +440,13 @@ client.execute(zonesRequests)
 
 ## `createSyncProductTypes(actionGroups, config)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for [_productTypes_](https://docs.commercetools.com/api/projects/productTypes).
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for [_productTypes_](https://docs.commercetools.com/api/projects/productTypes).
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 2.  `config` _(Object)_: A configuration object to which has one of the following options:
 
 | Key                     | Type      | Required             | Description                                                                                                            |
@@ -593,13 +593,13 @@ console.log(updateActions)
 
 ## `createSyncStores(actionGroups)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _stores_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _stores_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -632,13 +632,13 @@ client.execute(storesRequest)
 
 ## `createSyncShippingMethods(actionGroups)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _zones_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _zones_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -671,13 +671,13 @@ client.execute(shippingMethodsRequests)
 
 ## `createSyncStates(actionGroups)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _states_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _states_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -710,15 +710,15 @@ client.execute(statesRequests)
 
 ## `createSyncTypes(actionGroups, config)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for [_types_](https://docs.commercetools.com/api/projects/types).
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for [_types_](https://docs.commercetools.com/api/projects/types).
 
 **Please note** that there is no `remove action` for `enum` values. So this package will comply with the [platform](https://docs.commercetools.com/api/projects/types#add-enumvalue-to-fielddefinition) and only generate `changeOrder` and `add` actions for any `enum`.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 2.  `config` _(Object)_: A configuration object to which has one of the following options:
 
 | Key                     | Type      | Required             | Description                                                                                                            |
@@ -762,13 +762,13 @@ client.execute(typesRequest)
 
 ## `createSyncChannels(actionGroups)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _channels_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _channels_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 
@@ -841,13 +841,13 @@ const actions = sync.buildActions(now, before)
 
 ## `createSyncProjects(actionGroups)`
 
-> From package [@commercetools/sync-actions](/sdk/api/README.md#sync-actions).
+> From package [@commercetools/sync-actions](/sdk/api/README#sync-actions).
 
-Creates a [sync action](/sdk/Glossary.md#syncaction) that allows to build API update actions for _projects_.
+Creates a [sync action](/sdk/Glossary#syncaction) that allows to build API update actions for _projects_.
 
 #### Arguments
 
-1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary.md#syncaction) in case some actions need to be _ignored_ or _allowed_.
+1.  `actionGroups` _(Array)_: A list of [action group](/sdk/Glossary#syncaction) in case some actions need to be _ignored_ or _allowed_.
 
 #### Usage example
 

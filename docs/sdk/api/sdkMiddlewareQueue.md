@@ -1,6 +1,6 @@
 # `sdk-middleware-queue`
 
-Middleware to throttle concurrent [request](/sdk/Glossary.md#clientrequest) to a certain limit. Useful to reduce concurrent HTTP requests.
+Middleware to throttle concurrent [request](/sdk/Glossary#clientrequest) to a certain limit. Useful to reduce concurrent HTTP requests.
 
 ## Install
 
@@ -21,7 +21,7 @@ npm install --save @commercetools/sdk-middleware-queue
 
 ## `createQueueMiddleware(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle concurrent requests.
+Creates a [middleware](/sdk/Glossary#middleware) to handle concurrent requests.
 
 #### Named arguments (options)
 

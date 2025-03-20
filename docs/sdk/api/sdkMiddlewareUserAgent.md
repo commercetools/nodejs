@@ -1,6 +1,6 @@
 # `sdk-middleware-user-agent`
 
-Middleware to automatically set the `User-Agent` to the [request](/sdk/Glossary.md#clientrequest).
+Middleware to automatically set the `User-Agent` to the [request](/sdk/Glossary#clientrequest).
 
 ## Install
 
@@ -21,7 +21,7 @@ npm install --save @commercetools/sdk-middleware-user-agent
 
 ## `createUserAgentMiddleware(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to append the `User-Agent` HTTP header to the request.
+Creates a [middleware](/sdk/Glossary#middleware) to append the `User-Agent` HTTP header to the request.
 
 #### Named arguments (options)
 

@@ -1,6 +1,6 @@
 # `sdk-middleware-auth`
 
-Middleware to authenticate the [request](/sdk/Glossary.md#clientrequest) using one of the supported _auth flows_.
+Middleware to authenticate the [request](/sdk/Glossary#clientrequest) using one of the supported _auth flows_.
 
 ## Install
 
@@ -21,7 +21,7 @@ npm install --save @commercetools/sdk-middleware-auth
 
 ## `createAuthMiddlewareForClientCredentialsFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Client Credentials Flow](https://docs.commercetools.com/api/authorization#client-credentials-flow) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary#middleware) to handle authentication for the [Client Credentials Flow](https://docs.commercetools.com/api/authorization#client-credentials-flow) of the commercetools platform API.
 
 #### Named arguments (options)
 
@@ -61,7 +61,7 @@ const client = createClient({
 
 ## `createAuthMiddlewareForPasswordFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Password Flow](https://docs.commercetools.com/api/authorization#password-flow) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary#middleware) to handle authentication for the [Password Flow](https://docs.commercetools.com/api/authorization#password-flow) of the commercetools platform API.
 
 #### Named arguments (options)
 
@@ -108,7 +108,7 @@ const client = createClient({
 
 ## `createAuthMiddlewareForAnonymousSessionFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Anonymous Session Flow](https://docs.commercetools.com/api/authorization#tokens-for-anonymous-sessions) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary#middleware) to handle authentication for the [Anonymous Session Flow](https://docs.commercetools.com/api/authorization#tokens-for-anonymous-sessions) of the commercetools platform API.
 
 #### Named arguments (options)
 
@@ -149,7 +149,7 @@ const client = createClient({
 
 ## `createAuthMiddlewareForRefreshTokenFlow(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle authentication for the [Refresh Token Flow](https://docs.commercetools.com/api/authorization#refresh-token-flow) of the commercetools platform API.
+Creates a [middleware](/sdk/Glossary#middleware) to handle authentication for the [Refresh Token Flow](https://docs.commercetools.com/api/authorization#refresh-token-flow) of the commercetools platform API.
 
 #### Named arguments (options)
 
@@ -189,7 +189,7 @@ const client = createClient({
 
 ## `createAuthMiddlewareWithExistingToken(authorization, options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) that attaches a provided access token `Authorization` header.
+Creates a [middleware](/sdk/Glossary#middleware) that attaches a provided access token `Authorization` header.
 
 #### Named arguments (authorization, options)
 

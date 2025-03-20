@@ -1,6 +1,6 @@
 # `api-request-builder`
 
-Provides an API to construct a URI for the HTTP API endpoints in a declarative way. Useful for building [request](/sdk/Glossary.md#clientrequest) `uri` for requests.
+Provides an API to construct a URI for the HTTP API endpoints in a declarative way. Useful for building [request](/sdk/Glossary#clientrequest) `uri` for requests.
 
 ## Install
 
