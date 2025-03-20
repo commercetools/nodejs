@@ -1,0 +1,5 @@
+site_name: commercetools NodeJS
+theme:
+  name: material
+  features:
+    - navigation.expand
