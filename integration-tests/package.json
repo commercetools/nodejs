@@ -17,9 +17,7 @@
     "@commercetools/sdk-middleware-queue": "^4.0.0",
     "@commercetools/sdk-middleware-user-agent": "^4.0.0",
     "@commercetools/sync-actions": "^7.0.0",
-    "bluebird": "^3.5.3",
     "lodash.omit": "^4.5.0",
-    "mz": "^2.7.0",
     "node-fetch": "^2.6.7"
   }
 }
