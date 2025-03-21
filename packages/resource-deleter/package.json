@@ -44,7 +44,7 @@
     "pino": "^6.0.0",
     "pretty-error": "^2.1.1",
     "prompts": "^2.0.4",
-    "regenerator-runtime": "^0.13.9",
+    "regenerator-runtime": "^0.14.0",
     "yargs": "^16.0.0"
   }
 }
