@@ -6,7 +6,7 @@
     "node": ">=18"
   },
   "name": "@commercetools/sdk-client",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "SDK Client for usage of commercetools platform API",
   "keywords": [
     "commercetools",

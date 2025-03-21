@@ -6,7 +6,7 @@
     "node": ">=18"
   },
   "name": "@commercetools/sdk-middleware-user-agent",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Middleware for setting the User-Agent on the HTTP request, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
@@ -44,7 +44,7 @@
     "build": "exit 0;"
   },
   "dependencies": {
-    "@commercetools/http-user-agent": "^4.0.0",
-    "@commercetools/sdk-types": "^1.0.0"
+    "@commercetools/http-user-agent": "^5.0.0",
+    "@commercetools/sdk-types": "^2.0.0"
   }
 }

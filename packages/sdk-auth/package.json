@@ -6,7 +6,7 @@
     "node": ">=18"
   },
   "name": "@commercetools/sdk-auth",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "description": "Auth module for different authentication flows of commercetools platform API",
   "keywords": [
     "commercetools",
@@ -39,7 +39,7 @@
     "build": "exit 0;"
   },
   "dependencies": {
-    "@commercetools/sdk-middleware-http": "^8.0.0",
+    "@commercetools/sdk-middleware-http": "^9.0.0",
     "qss": "2.0.3"
   },
   "devDependencies": {
