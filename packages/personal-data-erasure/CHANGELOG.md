@@ -1,5 +1,25 @@
 # @commercetools/personal-data-erasure
 
+## 6.0.0
+
+### Major Changes
+
+- [#1931](https://github.com/commercetools/nodejs/pull/1931) [`ccb7812`](https://github.com/commercetools/nodejs/commit/ccb78121ba6a49cd1d5601db99b217058ec1e187) Thanks [@tdeekens](https://github.com/tdeekens)! - # Requires Node.js v18 or later
+
+  This releases migrates packages to require Node.js v18 or later. Ideally you should be already using Node.js v20 or later. According to [Node.js Releases](https://nodejs.org/en/about/previous-releases) Node.js v18 will be in maintenance and reach End of Life by the end of April.
+
+  Other than requiring Node.js v18 packages with this releases do not contain any internal breaking changes.
+
+### Patch Changes
+
+- Updated dependencies [[`ccb7812`](https://github.com/commercetools/nodejs/commit/ccb78121ba6a49cd1d5601db99b217058ec1e187)]:
+  - @commercetools/sdk-middleware-user-agent@5.0.0
+  - @commercetools/api-request-builder@8.0.0
+  - @commercetools/sdk-middleware-auth@9.0.0
+  - @commercetools/sdk-middleware-http@9.0.0
+  - @commercetools/get-credentials@6.0.0
+  - @commercetools/sdk-client@5.0.0
+
 ## 5.0.0
 
 ### Major Changes

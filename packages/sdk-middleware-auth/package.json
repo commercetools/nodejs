@@ -6,7 +6,7 @@
     "node": ">=18"
   },
   "name": "@commercetools/sdk-middleware-auth",
-  "version": "8.0.0",
+  "version": "9.0.0",
   "description": "Middleware for different authentication flows of commercetools platform API, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
@@ -40,7 +40,7 @@
     "build": "exit 0;"
   },
   "dependencies": {
-    "@commercetools/sdk-middleware-http": "^8.0.0",
+    "@commercetools/sdk-middleware-http": "^9.0.0",
     "node-fetch": "^2.6.7"
   },
   "devDependencies": {
