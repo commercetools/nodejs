@@ -19,12 +19,12 @@ If you're still using the [sphere-node-sdk](https://github.com/sphereio/sphere-n
 
 ### Dependencies
 
-The SDK is _not a single package_ anymore, it's [composed of different packages](/sdk/api/README.md).
+The SDK is _not a single package_ anymore, it's [composed of different packages](/sdk/api/README).
 It's up to you to _pick only the packages that you need_, many of them are optional and can also be replaced with custom implementations.
 
 > All new packages are now [scoped](https://docs.npmjs.com/misc/scope) to `@commercetools`. This is mainly to have better package names and to have them all under _commercetools_ organization.
 
-The _core_ package is the `@commercetools/sdk-client`. **Using it alone is useless**, you need to provide at least a [middleware](/sdk/api/README.md#middlewares) (e.g. `@commercetools/sdk-middleware-http`).
+The _core_ package is the `@commercetools/sdk-client`. **Using it alone is useless**, you need to provide at least a [middleware](/sdk/api/README#middlewares) (e.g. `@commercetools/sdk-middleware-http`).
 
 If you aim to have all the functionalities of the `sphere-node-sdk`, you probably need the following packages:
 
@@ -128,7 +128,7 @@ const payload = { version: 1, actions }
 #### Request builder
 
 In the `sphere-node-sdk` you were building the request for each service by chaining different commands and executing `fetch`, `update`, etc at the end.<br/>
-In the new SDK, we saw that the [`sdk-client`](/sdk/api/README.md#sdk-client) simply accepts a [request object](/sdk/Glossary.md#clientrequest). The `uri` parameter can be simply defined manually or can be generated using the _request builder_. This has basically the same API as the `sphere-node-sdk`.
+In the new SDK, we saw that the [`sdk-client`](/sdk/api/README#sdk-client) simply accepts a [request object](/sdk/Glossary#clientrequest). The `uri` parameter can be simply defined manually or can be generated using the _request builder_. This has basically the same API as the `sphere-node-sdk`.
 
 ```js
 // before
@@ -155,8 +155,8 @@ client.execute({
 })
 ```
 
-Additionally, all _services_ provided by the _request builder_ are defined using [features](/sdk/api/apiRequestBuilder.md#arguments). This allows to configure a service with only the _features_ or _functions_ that the service supports.
-The package allows also to pass [custom services](/sdk/api/apiRequestBuilder.md#createrequestbuildercustomservices).
+Additionally, all _services_ provided by the _request builder_ are defined using [features](/sdk/api/apiRequestBuilder#arguments). This allows to configure a service with only the _features_ or _functions_ that the service supports.
+The package allows also to pass [custom services](/sdk/api/apiRequestBuilder#createrequestbuildercustomservices).
 
 ```js
 import {
@@ -180,19 +180,19 @@ requestBuilder.users.byId('1').build()
 #### SphereClient options
 
 In the `sphere-node-sdk` all sorts of configuration options were passed as a big object to the `SphereClient` contructor.<br/>
-In the new SDK all those options are split across the [middlewares](/sdk/api/README.md#middlewares). See [example](#example-migration) above.
+In the new SDK all those options are split across the [middlewares](/sdk/api/README#middlewares). See [example](#example-migration) above.
 
 ### Implicit benefits
 
 #### Auth flows
 
 In the `sphere-node-sdk` the way of getting an _access_token_ was restricted to the **client credentials flow** and it wasn't possible to define the **scopes** for the token.<br/>
-In the new SDK, because of the flexibility that the [middlewares](/sdk/Middlewares.md) provide, it's possible to have [all sorts of different auth flows](/sdk/api/sdkMiddlewareAuth.md).
+In the new SDK, because of the flexibility that the [middlewares](/sdk/Middlewares) provide, it's possible to have [all sorts of different auth flows](/sdk/api/sdkMiddlewareAuth).
 
 #### Always 100% compatibility with new API features
 
 In the `sphere-node-sdk` requests for a service had to be defined using the methods that the service provided. If the commercetools HTTP API would release new endpoints or new request options, the SDK had to be adjusted in order to support those new features.<br/>
-In the new SDK _this problem becomes obsolete_ because the [request](/sdk/Glossary.md#clientrequest) URI can simply be provided manually. The [request builder](/sdk/api/apiRequestBuilder.md) is just a helper to construct the URI for a given service but the URI can be typed manually as well.
+In the new SDK _this problem becomes obsolete_ because the [request](/sdk/Glossary#clientrequest) URI can simply be provided manually. The [request builder](/sdk/api/apiRequestBuilder) is just a helper to construct the URI for a given service but the URI can be typed manually as well.
 
 ```js
 client.execute({

@@ -15,7 +15,7 @@ type ClientRequest = {
 }
 ```
 
-A _ClientRequest_ is an object describing the request that needs to be executed by the `sdk-client`. This is also the signature of the **request** object passed to a [middleware](/sdk/Middlewares.md).
+A _ClientRequest_ is an object describing the request that needs to be executed by the `sdk-client`. This is also the signature of the **request** object passed to a [middleware](/sdk/Middlewares).
 
 ## ClientResponse
 
@@ -27,7 +27,7 @@ type ClientResponse = {
 }
 ```
 
-A _ClientResponse_ is an object describing the **response** object passed to a [middleware](/sdk/Middlewares.md).
+A _ClientResponse_ is an object describing the **response** object passed to a [middleware](/sdk/Middlewares).
 
 ## Middleware
 
@@ -50,7 +50,7 @@ type Middleware = (next: Dispatch) => Dispatch
 
 A _Middleware_ is a higher-order function that composes a _dispatch function_ to return a new _dispatch function_.
 
-Middleware is composable using function composition. It is used for authentication, making http requests, logging requests, etc. See section about [middlewares](/sdk/Middlewares.md) for more information.
+Middleware is composable using function composition. It is used for authentication, making http requests, logging requests, etc. See section about [middlewares](/sdk/Middlewares) for more information.
 
 ## Client
 

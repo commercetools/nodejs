@@ -1,6 +1,6 @@
 # `sdk-middleware-logger`
 
-Middleware to log incoming [request](/sdk/Glossary.md#clientrequest) and [response](/sdk/Glossary.md#clientrequest) objects.
+Middleware to log incoming [request](/sdk/Glossary#clientrequest) and [response](/sdk/Glossary#clientrequest) objects.
 
 ## Install
 
@@ -21,7 +21,7 @@ npm install --save @commercetools/sdk-middleware-logger
 
 ## `createLoggerMiddleware(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to log request and response objects being executed.
+Creates a [middleware](/sdk/Glossary#middleware) to log request and response objects being executed.
 
 #### Usage example
 

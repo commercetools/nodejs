@@ -1,6 +1,6 @@
 # `sdk-middleware-correlation-id`
 
-Middleware add a correlation id to [requests](/sdk/Glossary.md#clientrequest).
+Middleware add a correlation id to [requests](/sdk/Glossary#clientrequest).
 
 ## Install
 
@@ -21,7 +21,7 @@ npm install --save @commercetools/sdk-middleware-correlation-id
 
 ## `createCorrelationIdMiddleware(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to add a correlation id to executed requests.
+Creates a [middleware](/sdk/Glossary#middleware) to add a correlation id to executed requests.
 
 #### Usage example
 

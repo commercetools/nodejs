@@ -1,6 +1,6 @@
 # `sdk-middleware-http`
 
-Middleware to send the actual HTTP [request](/sdk/Glossary.md#clientrequest).
+Middleware to send the actual HTTP [request](/sdk/Glossary#clientrequest).
 
 ## Install
 
@@ -21,7 +21,7 @@ npm install --save @commercetools/sdk-middleware-http
 
 ## `createHttpMiddleware(options)`
 
-Creates a [middleware](/sdk/Glossary.md#middleware) to handle HTTP requests for the commercetools platform API.
+Creates a [middleware](/sdk/Glossary#middleware) to handle HTTP requests for the commercetools platform API.
 
 The HTTP middleware can run in either a browser or Node.js environment. For Node.js environments it is important to either have a `fetch` implementation either globally available via e.g. [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) or to pass it in as an argument (see below) via e.g. [node-fetch](https://github.com/bitinn/node-fetch). In browsers without a native `fetch` implementation any well known `fetch` polyfill should be compatible with the middleware such as [whatwg-fetch](https://github.com/whatwg/fetch) or [unfetch](https://github.com/developit/unfetch).
 
@@ -116,7 +116,7 @@ This is to ensure that a new instance of the AbortController is always created a
 
 ## `getErrorByCode(code)`
 
-Returns a [custom error type](/sdk/Glossary.md#httperrortype) given its status _code_.
+Returns a [custom error type](/sdk/Glossary#httperrortype) given its status _code_.
 
 #### Arguments
 
