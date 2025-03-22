@@ -76,26 +76,7 @@ We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.
 
 ### CLI tools
 
-| Package                                                          | Version                                                                                                | Dependencies                                                                                                                         |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| [`category-exporter`](/packages/category-exporter)               | [![category-exporter Version][category-exporter-icon]][category-exporter-version]                      | [![category-exporter Dependencies Status][category-exporter-dependencies-icon]][category-exporter-dependencies]                      |
-| [`csv-parser-discount-code`](/packages/csv-parser-discount-code) | [![csv-parser-discount-code Version][csv-parser-discount-code-icon]][csv-parser-discount-code-version] | [![csv-parser-discount-code Dependencies Status][csv-parser-discount-code-dependencies-icon]][csv-parser-discount-code-dependencies] |
-| [`csv-parser-orders`](/packages/csv-parser-orders)               | [![csv-parser-orders Version][csv-parser-orders-icon]][csv-parser-orders-version]                      | [![csv-parser-orders Dependencies Status][csv-parser-orders-dependencies-icon]][csv-parser-orders-dependencies]                      |
-| [`csv-parser-price`](/packages/csv-parser-price)                 | [![csv-parser-price Version][csv-parser-price-icon]][csv-parser-price-version]                         | [![csv-parser-price Dependencies Status][csv-parser-price-dependencies-icon]][csv-parser-price-dependencies]                         |
-| [`csv-parser-state`](/packages/csv-parser-state)                 | [![csv-parser-state Version][csv-parser-state-icon]][csv-parser-state-version]                         | [![csv-parser-state Dependencies Status][csv-parser-state-dependencies-icon]][csv-parser-state-dependencies]                         |
-| [`custom-objects-exporter`](/packages/custom-objects-exporter)   | [![custom-objects-exporter Version][custom-objects-exporter-icon]][custom-objects-exporter-version]    | [![custom-objects-exporter Dependencies Status][custom-objects-exporter-dependencies-icon]][custom-objects-exporter-dependencies]    |
-| [`custom-objects-importer`](/packages/custom-objects-importer)   | [![custom-objects-importer Version][custom-objects-importer-icon]][custom-objects-importer-version]    | [![custom-objects-importer Dependencies Status][custom-objects-importer-dependencies-icon]][custom-objects-importer-dependencies]    |
-| [`customer-groups-exporter`](/packages/customer-groups-exporter) | [![customer-groups-exporter Version][customer-groups-exporter-icon]][customer-groups-exporter-version] | [![customer-groups-exporter Dependencies Status][customer-groups-exporter-dependencies-icon]][customer-groups-exporter-dependencies] |
-| [`personal-data-erasure`](/packages/personal-data-erasure)       | [![personal-data-erasure Version][personal-data-erasure-icon]][personal-data-erasure-version]          | [![personal-data-erasure Dependencies Status][personal-data-erasure-dependencies-icon]][personal-data-erasure-dependencies]          |
-| [`discount-code-exporter`](/packages/discount-code-exporter)     | [![discount-code-exporter Version][discount-code-exporter-icon]][discount-code-exporter-version]       | [![discount-code-exporter Dependencies Status][discount-code-exporter-dependencies-icon]][discount-code-exporter-dependencies]       |
-| [`discount-code-generator`](/packages/discount-code-generator)   | [![discount-code-generator Version][discount-code-generator-icon]][discount-code-generator-version]    | [![discount-code-generator Dependencies Status][discount-code-generator-dependencies-icon]][discount-code-generator-dependencies]    |
-| [`discount-code-importer`](/packages/discount-code-importer)     | [![discount-code-importer Version][discount-code-importer-icon]][discount-code-importer-version]       | [![discount-code-importer Dependencies Status][discount-code-importer-dependencies-icon]][discount-code-importer-dependencies]       |
-| [`inventories-exporter`](/packages/inventories-exporter)         | [![inventories-exporter Version][inventories-exporter-icon]][inventories-exporter-version]             | [![inventories-exporter Dependencies Status][inventories-exporter-dependencies-icon]][inventories-exporter-dependencies]             |
-| [`price-exporter`](/packages/price-exporter)                     | [![price-exporter Version][price-exporter-icon]][price-exporter-version]                               | [![price-exporter Dependencies Status][price-exporter-dependencies-icon]][discount-code-importer-dependencies]                       |
-| [`product-exporter`](/packages/product-exporter)                 | [![product-exporter Version][product-exporter-icon]][product-exporter-version]                         | [![product-exporter Dependencies Status][product-exporter-dependencies-icon]][product-exporter-dependencies]                         |
-| [`product-json-to-csv`](/packages/product-json-to-csv)           | [![product-json-to-csv Version][product-json-to-csv-icon]][product-json-to-csv-version]                | [![product-json-to-csv Dependencies Status][product-json-to-csv-dependencies-icon]][product-json-to-csv-dependencies]                |
-| [`product-json-to-xlsx`](/packages/product-json-to-xlsx)         | [![product-json-to-xlsx Version][product-json-to-xlsx-icon]][product-json-to-xlsx-version]             | [![product-json-to-xlsx Dependencies Status][product-json-to-xlsx-dependencies-icon]][product-json-to-xlsx-dependencies]             |
-| [`state-importer`](/packages/state-importer)                     | [![state-importer Version][state-importer-icon]][state-importer-version]                               | [![state-importer Dependencies Status][state-importer-dependencies-icon]][state-importer-dependencies]                               |
+The CLI tools have been deprecated starting March 31st 2025.
 
 ### Other
 
@@ -108,78 +89,10 @@ We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.
 [api-request-builder-icon]: https://img.shields.io/npm/v/@commercetools/api-request-builder.svg?style=flat-square
 [api-request-builder-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/api-request-builder
 [api-request-builder-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/api-request-builder&style=flat-square
-[category-exporter-version]: https://www.npmjs.com/package/@commercetools/category-exporter
-[category-exporter-icon]: https://img.shields.io/npm/v/@commercetools/category-exporter.svg?style=flat-square
-[category-exporter-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/category-exporter
-[category-exporter-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/category-exporter&style=flat-square
-[csv-parser-discount-code-version]: https://www.npmjs.com/package/@commercetools/csv-parser-discount-code
-[csv-parser-discount-code-icon]: https://img.shields.io/npm/v/@commercetools/csv-parser-discount-code.svg?style=flat-square
-[csv-parser-discount-code-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/csv-parser-discount-code
-[csv-parser-discount-code-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/csv-parser-discount-code&style=flat-square
-[csv-parser-orders-version]: https://www.npmjs.com/package/@commercetools/csv-parser-orders
-[csv-parser-orders-icon]: https://img.shields.io/npm/v/@commercetools/csv-parser-orders.svg?style=flat-square
-[csv-parser-orders-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/csv-parser-orders
-[csv-parser-orders-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/csv-parser-orders&style=flat-square
-[csv-parser-price-version]: https://www.npmjs.com/package/@commercetools/csv-parser-price
-[csv-parser-price-icon]: https://img.shields.io/npm/v/@commercetools/csv-parser-price.svg?style=flat-square
-[csv-parser-price-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/csv-parser-price
-[csv-parser-price-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/csv-parser-price&style=flat-square
-[csv-parser-state-version]: https://www.npmjs.com/package/@commercetools/csv-parser-state
-[csv-parser-state-icon]: https://img.shields.io/npm/v/@commercetools/csv-parser-state.svg?style=flat-square
-[csv-parser-state-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/csv-parser-state
-[csv-parser-state-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/csv-parser-state&style=flat-square
-[custom-objects-exporter-version]: https://www.npmjs.com/package/@commercetools/custom-objects-exporter
-[custom-objects-exporter-icon]: https://img.shields.io/npm/v/@commercetools/custom-objects-exporter.svg?style=flat-square
-[custom-objects-exporter-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/custom-objects-exporter
-[custom-objects-exporter-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/custom-objects-exporter&style=flat-square
-[custom-objects-importer-version]: https://www.npmjs.com/package/@commercetools/custom-objects-importer
-[custom-objects-importer-icon]: https://img.shields.io/npm/v/@commercetools/custom-objects-importer.svg?style=flat-square
-[custom-objects-importer-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/custom-objects-importer
-[custom-objects-importer-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/custom-objects-importer&style=flat-square
-[customer-groups-exporter-version]: https://www.npmjs.com/package/@commercetools/customer-groups-exporter
-[customer-groups-exporter-icon]: https://img.shields.io/npm/v/@commercetools/customer-groups-exporter.svg?style=flat-square
-[customer-groups-exporter-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/customer-groups-exporter
-[customer-groups-exporter-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/customer-groups-exporter&style=flat-square
-[discount-code-exporter-version]: https://www.npmjs.com/package/@commercetools/discount-code-exporter
-[discount-code-exporter-icon]: https://img.shields.io/npm/v/@commercetools/discount-code-exporter.svg?style=flat-square
-[discount-code-exporter-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/discount-code-exporter
-[discount-code-exporter-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/discount-code-exporter&style=flat-square
-[discount-code-generator-version]: https://www.npmjs.com/package/@commercetools/discount-code-generator
-[discount-code-generator-icon]: https://img.shields.io/npm/v/@commercetools/discount-code-generator.svg?style=flat-square
-[discount-code-generator-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/discount-code-generator
-[discount-code-generator-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/discount-code-generator&style=flat-square
-[discount-code-importer-version]: https://www.npmjs.com/package/@commercetools/discount-code-importer
-[discount-code-importer-icon]: https://img.shields.io/npm/v/@commercetools/discount-code-importer.svg?style=flat-square
-[discount-code-importer-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/discount-code-importer
-[discount-code-importer-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/discount-code-importer&style=flat-square
-[inventories-exporter-version]: https://www.npmjs.com/package/@commercetools/inventories-exporter
-[inventories-exporter-icon]: https://img.shields.io/npm/v/@commercetools/inventories-exporter.svg?style=flat-square
-[inventories-exporter-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/inventories-exporter
-[inventories-exporter-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/inventories-exporter&style=flat-square
-[price-exporter-version]: https://www.npmjs.com/package/@commercetools/price-exporter
-[price-exporter-icon]: https://img.shields.io/npm/v/@commercetools/price-exporter.svg?style=flat-square
-[price-exporter-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/price-exporter
-[price-exporter-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/price-exporter&style=flat-square
-[product-exporter-version]: https://www.npmjs.com/package/@commercetools/product-exporter
-[product-exporter-icon]: https://img.shields.io/npm/v/@commercetools/product-exporter.svg?style=flat-square
-[product-exporter-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/product-exporter
-[product-exporter-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/product-exporter&style=flat-square
-[product-json-to-csv-version]: https://www.npmjs.com/package/@commercetools/product-json-to-csv
-[product-json-to-csv-icon]: https://img.shields.io/npm/v/@commercetools/product-json-to-csv.svg?style=flat-square
-[product-json-to-csv-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/product-json-to-csv
-[product-json-to-csv-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/product-json-to-csv&style=flat-square
-[product-json-to-xlsx-version]: https://www.npmjs.com/package/@commercetools/product-json-to-xlsx
-[product-json-to-xlsx-icon]: https://img.shields.io/npm/v/@commercetools/product-json-to-xlsx.svg?style=flat-square
-[product-json-to-xlsx-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/product-json-to-xlsx
-[product-json-to-xlsx-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/product-json-to-xlsx&style=flat-square
 [resource-deleter-version]: https://www.npmjs.com/package/@commercetools/resource-deleter
 [resource-deleter-icon]: https://img.shields.io/npm/v/@commercetools/resource-deleter.svg?style=flat-square
 [resource-deleter-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/resource-deleter
 [resource-deleter-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/resource-deleter&style=flat-square
-[state-importer-version]: https://www.npmjs.com/package/@commercetools/state-importer
-[state-importer-icon]: https://img.shields.io/npm/v/@commercetools/state-importer.svg?style=flat-square
-[state-importer-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/state-importer
-[state-importer-dependencies-icon]: https://img.shields.io/david/commercetools/nodejs.svg?path=packages/state-importer&style=flat-square
 [sync-actions-version]: https://www.npmjs.com/package/@commercetools/sync-actions
 [sync-actions-icon]: https://img.shields.io/npm/v/@commercetools/sync-actions.svg?style=flat-square
 [sync-actions-dependencies]: https://david-dm.org/commercetools/nodejs?path=packages/sync-actions
