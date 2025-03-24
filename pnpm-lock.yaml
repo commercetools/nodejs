@@ -128,8 +128,8 @@ importers:
         specifier: 7.32.0
         version: 7.32.0
       eslint-config-airbnb:
-        specifier: 18.2.1
-        version: 18.2.1(eslint-plugin-import@2.25.3)(eslint-plugin-jsx-a11y@6.5.1(eslint@7.32.0))(eslint-plugin-react-hooks@4.6.2(eslint@7.32.0))(eslint-plugin-react@7.27.0(eslint@7.32.0))(eslint@7.32.0)
+        specifier: 19.0.4
+        version: 19.0.4(eslint-plugin-import@2.25.3)(eslint-plugin-jsx-a11y@6.5.1(eslint@7.32.0))(eslint-plugin-react-hooks@4.6.2(eslint@7.32.0))(eslint-plugin-react@7.27.0(eslint@7.32.0))(eslint@7.32.0)
       eslint-config-airbnb-base:
         specifier: 14.2.1
         version: 14.2.1(eslint-plugin-import@2.25.3)(eslint@7.32.0)
@@ -2785,15 +2785,22 @@ packages:
       eslint: ^5.16.0 || ^6.8.0 || ^7.2.0
       eslint-plugin-import: ^2.22.1
 
-  eslint-config-airbnb@18.2.1:
-    resolution: {integrity: sha512-glZNDEZ36VdlZWoxn/bUR1r/sdFKPd1mHPbqUtkctgNG4yT2DLLtJ3D+yCV+jzZCc2V1nBVkmdknOJBZ5Hc0fg==}
-    engines: {node: '>= 6'}
+  eslint-config-airbnb-base@15.0.0:
+    resolution: {integrity: sha512-xaX3z4ZZIcFLvh2oUNvcX5oEofXda7giYmuplVxoOg5A7EXJMrUyqRgR+mhDhPK8LZ4PttFOBvCYDbX3sUoUig==}
+    engines: {node: ^10.12.0 || >=12.0.0}
     peerDependencies:
-      eslint: ^5.16.0 || ^6.8.0 || ^7.2.0
-      eslint-plugin-import: ^2.22.1
-      eslint-plugin-jsx-a11y: ^6.4.1
-      eslint-plugin-react: ^7.21.5
-      eslint-plugin-react-hooks: ^4 || ^3 || ^2.3.0 || ^1.7.0
+      eslint: ^7.32.0 || ^8.2.0
+      eslint-plugin-import: ^2.25.2
+
+  eslint-config-airbnb@19.0.4:
+    resolution: {integrity: sha512-T75QYQVQX57jiNgpF9r1KegMICE94VYwoFQyMGhrvc+lB8YF2E/M/PYDaQe1AJcWaEgqLE+ErXV1Og/+6Vyzew==}
+    engines: {node: ^10.12.0 || ^12.22.0 || ^14.17.0 || >=16.0.0}
+    peerDependencies:
+      eslint: ^7.32.0 || ^8.2.0
+      eslint-plugin-import: ^2.25.3
+      eslint-plugin-jsx-a11y: ^6.5.1
+      eslint-plugin-react: ^7.28.0
+      eslint-plugin-react-hooks: ^4.3.0
 
   eslint-config-prettier@6.15.0:
     resolution: {integrity: sha512-a1+kOYLR8wMGustcgAjdydMsQ2A/2ipRPwRKUmfYaSxc9ZPcrku080Ctl6zrZzZNs/U82MjSv+qKREkoq3bJaw==}
@@ -9075,10 +9082,19 @@ snapshots:
       object.assign: 4.1.7
       object.entries: 1.1.8
 
-  eslint-config-airbnb@18.2.1(eslint-plugin-import@2.25.3)(eslint-plugin-jsx-a11y@6.5.1(eslint@7.32.0))(eslint-plugin-react-hooks@4.6.2(eslint@7.32.0))(eslint-plugin-react@7.27.0(eslint@7.32.0))(eslint@7.32.0):
+  eslint-config-airbnb-base@15.0.0(eslint-plugin-import@2.25.3)(eslint@7.32.0):
+    dependencies:
+      confusing-browser-globals: 1.0.11
+      eslint: 7.32.0
+      eslint-plugin-import: 2.25.3(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.5.2))(eslint-import-resolver-typescript@2.5.0)(eslint@7.32.0)
+      object.assign: 4.1.7
+      object.entries: 1.1.8
+      semver: 6.3.1
+
+  eslint-config-airbnb@19.0.4(eslint-plugin-import@2.25.3)(eslint-plugin-jsx-a11y@6.5.1(eslint@7.32.0))(eslint-plugin-react-hooks@4.6.2(eslint@7.32.0))(eslint-plugin-react@7.27.0(eslint@7.32.0))(eslint@7.32.0):
     dependencies:
       eslint: 7.32.0
-      eslint-config-airbnb-base: 14.2.1(eslint-plugin-import@2.25.3)(eslint@7.32.0)
+      eslint-config-airbnb-base: 15.0.0(eslint-plugin-import@2.25.3)(eslint@7.32.0)
       eslint-plugin-import: 2.25.3(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.5.2))(eslint-import-resolver-typescript@2.5.0)(eslint@7.32.0)
       eslint-plugin-jsx-a11y: 6.5.1(eslint@7.32.0)
       eslint-plugin-react: 7.27.0(eslint@7.32.0)
@@ -10365,7 +10381,11 @@ snapshots:
       pretty-format: 26.6.2
       throat: 5.0.0
     transitivePeerDependencies:
+      - bufferutil
+      - canvas
       - supports-color
+      - ts-node
+      - utf-8-validate
 
   jest-leak-detector@26.6.2:
     dependencies:
