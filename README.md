@@ -35,6 +35,9 @@ We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.
 
 ### SDK
 
+> [!WARNING]  
+> These packages have been replaced by the [TypeScript SDK](https://docs.commercetools.com/sdk/typescript-sdk) is in maintenance mode as such this tool will no longer receive bug fixes, security patches, or new features.
+
 | Package                                                            | Version                                                                                                   | Dependencies                                                                                                                            |
 | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | [`sdk-auth`](/packages/sdk-auth)                                   | [![sdk-auth Version][sdk-auth-icon]][sdk-auth-version]                                                    | [![sdk-auth Dependencies Status][sdk-auth-dependencies-icon]][sdk-auth-dependencies]                                                    |

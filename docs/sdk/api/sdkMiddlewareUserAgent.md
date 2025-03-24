@@ -2,6 +2,12 @@
 
 Middleware to automatically set the `User-Agent` to the [request](/sdk/Glossary#clientrequest).
 
+## ⚠️ In maintenance mode ⚠️
+
+This package has been replaced by the [TypeScript SDK](https://docs.commercetools.com/sdk/typescript-sdk) is in maintenance mode as such this tool will no longer receive bug fixes, security patches, or new features.
+
+We recommend to use the [TypeScript SDK](https://docs.commercetools.com/sdk/typescript-sdk) for any new implementation and plan migrating to it.
+
 ## Install
 
 #### Node.js
