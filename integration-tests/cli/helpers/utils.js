@@ -61,25 +61,3 @@ export function createData(apiConfig, entityName, data, id) {
     })
   )
 }
-
-export function getId(apiConfig, entityName) {
-  const client = createClient({
-    middlewares: [
-      createAuthMiddlewareForClientCredentialsFlow({ ...apiConfig, fetch }),
-      createHttpMiddleware({ host: apiConfig.apiUrl, fetch }),
-    ],
-  })
-
-  const service = createRequestBuilder({
-    projectKey: apiConfig.projectKey,
-  })[entityName]
-
-  const request = {
-    uri: service.build(),
-    method: 'GET',
-  }
-
-  return client
-    .execute(request)
-    .then((result) => Promise.resolve(result.body.results[0].id))
-}
