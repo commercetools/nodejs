@@ -2,7 +2,7 @@
 
 Creates a proper HTTP User-Agent. Can be used everywhere.
 
-## ⚠️ In maintenance mode ⚠️
+## ⚠️ In Maintenance Mode ⚠️
 
 This package has been replaced by the <a href="https://docs.commercetools.com/sdk/typescript-sdk">TypeScript SDK</a> is in maintenance mode as such this tool will no longer receive new features or bug fixes.
 
