@@ -110,7 +110,7 @@ importers:
         specifier: 4.2.1
         version: 4.2.1
       codecov:
-        specifier: ^3.8.3
+        specifier: 3.8.3
         version: 3.8.3(encoding@0.1.13)
       commitizen:
         specifier: 4.3.1
@@ -371,7 +371,7 @@ importers:
         specifier: 12.0.3
         version: 12.0.3
       node-fetch:
-        specifier: ^2.6.7
+        specifier: 2.7.0
         version: 2.7.0(encoding@0.1.13)
 
   packages/sdk-client: {}
@@ -403,7 +403,7 @@ importers:
         specifier: 12.0.3
         version: 12.0.3
       node-fetch:
-        specifier: ^2.6.7
+        specifier: 2.7.0
         version: 2.7.0(encoding@0.1.13)
 
   packages/sdk-middleware-logger: {}
@@ -8113,7 +8113,7 @@ snapshots:
       debug: 2.6.9
       json5: 0.5.1
       lodash: 4.17.21
-      minimatch: 3.0.4
+      minimatch: 3.1.2
       path-is-absolute: 1.0.1
       private: 0.1.8
       slash: 1.0.0
@@ -9676,7 +9676,7 @@ snapshots:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
-      minimatch: 3.0.4
+      minimatch: 3.1.2
       once: 1.4.0
       path-is-absolute: 1.0.1
 
