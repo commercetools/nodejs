@@ -36,7 +36,7 @@ We'd love to have your helping hand on this ecosystem! Please see [CONTRIBUTING.
 ### SDK
 
 > [!WARNING]  
-> These packages have been replaced by the [TypeScript SDK](https://docs.commercetools.com/sdk/typescript-sdk) is in maintenance mode as such this tool will no longer receive bug fixes, security patches, or new features.
+> These packages have been replaced by the <a href="https://docs.commercetools.com/sdk/typescript-sdk">TypeScript SDK</a> is in maintenance mode as such this tool will no longer receive bug fixes, security patches, or new features.
 
 | Package                                                            | Version                                                                                                   | Dependencies                                                                                                                            |
 | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
