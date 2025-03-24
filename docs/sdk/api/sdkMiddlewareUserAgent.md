@@ -4,7 +4,7 @@ Middleware to automatically set the `User-Agent` to the [request](/sdk/Glossary#
 
 ## ⚠️ In maintenance mode ⚠️
 
-This package has been replaced by the <a href="https://docs.commercetools.com/sdk/typescript-sdk">TypeScript SDK</a> is in maintenance mode as such this tool will no longer receive bug fixes, security patches, or new features.
+This package has been replaced by the <a href="https://docs.commercetools.com/sdk/typescript-sdk">TypeScript SDK</a> is in maintenance mode as such this tool will no longer receive new features or bug fixes.
 
 We recommend to use the <a href="https://docs.commercetools.com/sdk/typescript-sdk">TypeScript SDK</a> for any new implementation and plan migrating to it.
 
