@@ -1,5 +1,3 @@
-const path = require('path')
-
 module.exports = {
   parser: '@babel/eslint-parser',
   parserOptions: {
@@ -56,13 +54,6 @@ module.exports = {
   settings: {
     flowtype: {
       onlyFilesWithFlowAnnotation: true,
-    },
-    'import/resolver': {
-      [path.resolve('./eslint-import-resolver-local')]: {
-        moduleNameMapper: {
-          '^types/(.*)': './types/$1',
-        },
-      },
     },
   },
 }
