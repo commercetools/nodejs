@@ -260,23 +260,23 @@ importers:
   packages/personal-data-erasure:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: workspace:*
+        version: link:../api-request-builder
       '@commercetools/get-credentials':
-        specifier: ^5.0.0
-        version: 5.0.0
+        specifier: workspace:*
+        version: link:../get-credentials
       '@commercetools/sdk-client':
-        specifier: ^4.0.0
-        version: 4.0.0
+        specifier: workspace:*
+        version: link:../sdk-client
       '@commercetools/sdk-middleware-auth':
-        specifier: ^8.0.0
-        version: 8.0.0(encoding@0.1.13)
+        specifier: workspace:*
+        version: link:../sdk-middleware-auth
       '@commercetools/sdk-middleware-http':
-        specifier: ^8.0.0
-        version: 8.0.0
+        specifier: workspace:*
+        version: link:../sdk-middleware-http
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^4.0.0
-        version: 4.0.0
+        specifier: workspace:*
+        version: link:../sdk-middleware-user-agent
       lodash.flatten:
         specifier: ^4.4.0
         version: 4.4.0
