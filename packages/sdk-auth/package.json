@@ -39,7 +39,7 @@
     "build": "exit 0;"
   },
   "dependencies": {
-    "@commercetools/sdk-middleware-http": "^8.0.0",
+    "@commercetools/sdk-middleware-http": "workspace:*",
     "qss": "2.0.3"
   },
   "devDependencies": {

@@ -44,7 +44,7 @@
     "build": "exit 0;"
   },
   "dependencies": {
-    "@commercetools/http-user-agent": "^4.0.0",
-    "@commercetools/sdk-types": "^1.0.0"
+    "@commercetools/http-user-agent": "workspace:*",
+    "@commercetools/sdk-types": "workspace:*"
   }
 }
