@@ -195,47 +195,47 @@ importers:
   integration-tests:
     dependencies:
       '@commercetools/api-request-builder':
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: workspace:*
+        version: link:../packages/api-request-builder
       '@commercetools/get-credentials':
-        specifier: ^5.0.0
-        version: 5.0.0
+        specifier: workspace:*
+        version: link:../packages/get-credentials
       '@commercetools/http-user-agent':
-        specifier: 4.0.0
-        version: 4.0.0
+        specifier: workspace:*
+        version: link:../packages/http-user-agent
       '@commercetools/personal-data-erasure':
-        specifier: ^5.0.0
-        version: 5.0.0(encoding@0.1.13)
+        specifier: workspace:*
+        version: link:../packages/personal-data-erasure
       '@commercetools/platform-sdk':
         specifier: ^2.2.0
         version: 2.8.0(encoding@0.1.13)
       '@commercetools/resource-deleter':
-        specifier: ^4.0.0
-        version: 4.0.0(encoding@0.1.13)
+        specifier: workspace:*
+        version: link:../packages/resource-deleter
       '@commercetools/sdk-auth':
-        specifier: ^5.0.0
-        version: 5.0.0
+        specifier: workspace:*
+        version: link:../packages/sdk-auth
       '@commercetools/sdk-client':
-        specifier: ^4.0.0
-        version: 4.0.0
+        specifier: workspace:*
+        version: link:../packages/sdk-client
       '@commercetools/sdk-middleware-auth':
-        specifier: ^8.0.0
-        version: 8.0.0(encoding@0.1.13)
+        specifier: workspace:*
+        version: link:../packages/sdk-middleware-auth
       '@commercetools/sdk-middleware-http':
-        specifier: ^8.0.0
-        version: 8.0.0
+        specifier: workspace:*
+        version: link:../packages/sdk-middleware-http
       '@commercetools/sdk-middleware-logger':
-        specifier: 4.0.0
-        version: 4.0.0
+        specifier: workspace:*
+        version: link:../packages/sdk-middleware-logger
       '@commercetools/sdk-middleware-queue':
-        specifier: ^4.0.0
-        version: 4.0.0
+        specifier: workspace:*
+        version: link:../packages/sdk-middleware-queue
       '@commercetools/sdk-middleware-user-agent':
-        specifier: ^4.0.0
-        version: 4.0.0
+        specifier: workspace:*
+        version: link:../packages/sdk-middleware-user-agent
       '@commercetools/sync-actions':
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: workspace:*
+        version: link:../packages/sync-actions
       lodash.omit:
         specifier: ^4.5.0
         version: 4.5.0
@@ -1233,22 +1233,8 @@ packages:
     resolution: {integrity: sha512-w3f3uH7bN0wsQ+Q82jJDciFskYcRkXdz5pk4Pg70qdzITNHtuADLH/pKsvDSS0ocvP2TNZIR8drIzmkcc7Qwow==}
     engines: {node: '>=18'}
 
-  '@commercetools/personal-data-erasure@5.0.0':
-    resolution: {integrity: sha512-NLqIIuLkvV8nvqBFvsS0FSrSVVSqua/d6VKGf4NVkMOd8UI9v75CmPcEj7Bfjsqmeo9yC0DmXWRb04do6WWw1w==}
-    engines: {node: '>=18'}
-    hasBin: true
-
   '@commercetools/platform-sdk@2.8.0':
     resolution: {integrity: sha512-np2mPic66eS+NegcuxUK/rUqzoXHD0rHAfD9usHx/Gr0JlXdeCkN1VLkwAZr5G3cayH+31BWbhiebLqILNmf3A==}
-
-  '@commercetools/resource-deleter@4.0.0':
-    resolution: {integrity: sha512-/Dx9iB2nKRegiSSx330cOZT/PEcAAYGBZadIRdTwVxbb6vsGNfYsyFwwkVjFy5E3n4qHmKtyHrqp5AAO7eaX2A==}
-    engines: {node: '>=18'}
-    hasBin: true
-
-  '@commercetools/sdk-auth@5.0.0':
-    resolution: {integrity: sha512-WelE9A+SBdBmjRjuA05oV63AaJAiuerhsPh45Bez6HglNB7F8go23vAcArlAAFP6QQyJVPAf79KvKqaZ4vhU6w==}
-    engines: {node: '>=18'}
 
   '@commercetools/sdk-client-v2@1.4.2':
     resolution: {integrity: sha512-zdaiw1okcP2MleEs79GfWcfrH91WitLCHqSQ+0OChOc4FH+7cPBW5sFClirvb4Gd/bgFkMGioX8nWQOYpMNaPg==}
@@ -1274,10 +1260,6 @@ packages:
   '@commercetools/sdk-middleware-logger@2.1.2':
     resolution: {integrity: sha512-uGhhAUnZzLWO3ozzz6VDMUAKr5Y9ctVyqfExXVC7t37IgppLsKrrvLl6VMoU2uXjIGSNA0VN0Kxgj93rBBejTQ==}
 
-  '@commercetools/sdk-middleware-logger@4.0.0':
-    resolution: {integrity: sha512-U5YSVfPnfajkC1Zs3G8temIMx8YSDFuc/BTRm2O8TvSVzrrXP7Hr+An1T0PhktotzQjfdcuE8X4BZXPVlyC20g==}
-    engines: {node: '>=18'}
-
   '@commercetools/sdk-middleware-queue@4.0.0':
     resolution: {integrity: sha512-l3qQ8w8v1ZrthTaTNJPe+RLqgpKU86TWIuCIkl6iqnNhhDUMX/jKtPELcRk0ULXQy+7gtEsWdxcB9lSLFeWhlQ==}
     engines: {node: '>=18'}
@@ -1288,10 +1270,6 @@ packages:
 
   '@commercetools/sdk-types@1.0.0':
     resolution: {integrity: sha512-31XMMBv/pSLGi6NdUTYim69UJf+BKf/4p0ll2gVoiz0ZGIPauxLOOh8YAEG8HfqH4RVeuB0Y0r89OGC0gMolRg==}
-    engines: {node: '>=18'}
-
-  '@commercetools/sync-actions@7.0.0':
-    resolution: {integrity: sha512-VZn29sqEJ3KHtZgS9U4B21cepykonnwkqwJ55pbJeh1Gz9eL5TUdQW764Gr281TL7Guex43ORjq6nFCBQqIUjw==}
     engines: {node: '>=18'}
 
   '@commitlint/cli@19.8.0':
@@ -4094,11 +4072,6 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
-  jsondiffpatch@0.6.0:
-    resolution: {integrity: sha512-3QItJOXp2AP1uv7waBkao5nCvhEv+QmJAd38Ybq7wNI74Q+BBmnLn4EDKz6yI9xGAIQoUF87qHt+kc1IVxB4zQ==}
-    engines: {node: ^18.0.0 || >=20.0.0}
-    hasBin: true
-
   jsondiffpatch@0.6.2:
     resolution: {integrity: sha512-c4RkbPb6RXWjkhirwcKK87PuZCITdGRN1usrW4pXKEkwp7Gqf+0pSwQHoh/LtlYNHcxzoF6kok2/EFe6KL0qqQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -5037,9 +5010,6 @@ packages:
 
   regenerator-runtime@0.11.1:
     resolution: {integrity: sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==}
-
-  regenerator-runtime@0.13.11:
-    resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
 
   regenerator-runtime@0.14.1:
     resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
@@ -7092,24 +7062,6 @@ snapshots:
 
   '@commercetools/http-user-agent@4.0.0': {}
 
-  '@commercetools/personal-data-erasure@5.0.0(encoding@0.1.13)':
-    dependencies:
-      '@commercetools/api-request-builder': 7.0.0
-      '@commercetools/get-credentials': 5.0.0
-      '@commercetools/sdk-client': 4.0.0
-      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 8.0.0
-      '@commercetools/sdk-middleware-user-agent': 4.0.0
-      lodash.flatten: 4.4.0
-      node-fetch: 2.7.0(encoding@0.1.13)
-      pino: 6.14.0
-      pretty-error: 2.1.2
-      prompt-confirm: 2.0.4
-      yargs: 16.2.0
-    transitivePeerDependencies:
-      - encoding
-      - supports-color
-
   '@commercetools/platform-sdk@2.8.0(encoding@0.1.13)':
     dependencies:
       '@commercetools/sdk-client-v2': 1.4.2(encoding@0.1.13)
@@ -7119,30 +7071,6 @@ snapshots:
       querystring: 0.2.1
     transitivePeerDependencies:
       - encoding
-
-  '@commercetools/resource-deleter@4.0.0(encoding@0.1.13)':
-    dependencies:
-      '@commercetools/api-request-builder': 7.0.0
-      '@commercetools/get-credentials': 5.0.0
-      '@commercetools/sdk-client': 4.0.0
-      '@commercetools/sdk-middleware-auth': 8.0.0(encoding@0.1.13)
-      '@commercetools/sdk-middleware-http': 8.0.0
-      '@commercetools/sdk-middleware-queue': 4.0.0
-      '@commercetools/sdk-middleware-user-agent': 4.0.0
-      core-js: 3.41.0
-      node-fetch: 2.7.0(encoding@0.1.13)
-      pino: 6.14.0
-      pretty-error: 2.1.2
-      prompts: 2.4.2
-      regenerator-runtime: 0.13.11
-      yargs: 16.2.0
-    transitivePeerDependencies:
-      - encoding
-
-  '@commercetools/sdk-auth@5.0.0':
-    dependencies:
-      '@commercetools/sdk-middleware-http': 8.0.0
-      qss: 2.0.3
 
   '@commercetools/sdk-client-v2@1.4.2(encoding@0.1.13)':
     dependencies:
@@ -7172,8 +7100,6 @@ snapshots:
 
   '@commercetools/sdk-middleware-logger@2.1.2': {}
 
-  '@commercetools/sdk-middleware-logger@4.0.0': {}
-
   '@commercetools/sdk-middleware-queue@4.0.0': {}
 
   '@commercetools/sdk-middleware-user-agent@4.0.0':
@@ -7182,20 +7108,6 @@ snapshots:
       '@commercetools/sdk-types': 1.0.0
 
   '@commercetools/sdk-types@1.0.0': {}
-
-  '@commercetools/sync-actions@7.0.0':
-    dependencies:
-      fast-equals: 2.0.4
-      jsondiffpatch: 0.6.0
-      lodash.flatten: 4.4.0
-      lodash.foreach: 4.5.0
-      lodash.intersection: 4.4.0
-      lodash.isequal: 4.5.0
-      lodash.isnil: 4.0.0
-      lodash.shuffle: 4.2.0
-      lodash.sortby: 4.7.0
-      lodash.uniqwith: 4.5.0
-      lodash.without: 4.4.0
 
   '@commitlint/cli@19.8.0(@types/node@10.17.60)(typescript@4.9.5)':
     dependencies:
@@ -10591,11 +10503,7 @@ snapshots:
       pretty-format: 26.6.2
       throat: 5.0.0
     transitivePeerDependencies:
-      - bufferutil
-      - canvas
       - supports-color
-      - ts-node
-      - utf-8-validate
 
   jest-leak-detector@26.6.2:
     dependencies:
@@ -10897,12 +10805,6 @@ snapshots:
       minimist: 1.2.8
 
   json5@2.2.3: {}
-
-  jsondiffpatch@0.6.0:
-    dependencies:
-      '@types/diff-match-patch': 1.0.36
-      chalk: 5.4.1
-      diff-match-patch: 1.0.5
 
   jsondiffpatch@0.6.2:
     dependencies:
@@ -11916,8 +11818,6 @@ snapshots:
   regenerator-runtime@0.10.5: {}
 
   regenerator-runtime@0.11.1: {}
-
-  regenerator-runtime@0.13.11: {}
 
   regenerator-runtime@0.14.1: {}
 
