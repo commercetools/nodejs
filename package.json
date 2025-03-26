@@ -33,7 +33,7 @@
     "changeset:version-and-format": "changeset version && prettier --write --parser json '**/package.json'"
   },
   "resolutions": {
-    "y18n": "3.2.2",
+    "y18n": "5.0.8",
     "hosted-git-info": "4.1.0",
     "yargs-parser": "13.1.2",
     "graceful-fs": "4.2.11",
