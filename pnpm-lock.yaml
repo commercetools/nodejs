@@ -164,8 +164,8 @@ importers:
         specifier: 7.37.4
         version: 7.37.4(eslint@7.32.0)
       flow-bin:
-        specifier: 0.265.3
-        version: 0.265.3
+        specifier: 0.141.0
+        version: 0.141.0
       husky:
         specifier: 9.1.7
         version: 9.1.7
@@ -3190,8 +3190,8 @@ packages:
   flatted@3.3.3:
     resolution: {integrity: sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==}
 
-  flow-bin@0.265.3:
-    resolution: {integrity: sha512-08PjO2kjuQxy8MxYJNCzmgRpAe1uqTf7kQ+U32QTavRzTD/7IJASYKFEEvCkVNHlhSy8CTJsN+AQdHsXVqChIw==}
+  flow-bin@0.141.0:
+    resolution: {integrity: sha512-NxaECTjIWfs2Y91GuA1PlgPd5uCulZcqR9wiXRg6n7/AbmvVetM2ewoGxCKxJm7wIml3f0/5KXIZvZa/3msqXg==}
     engines: {node: '>=0.10.0'}
     hasBin: true
 
@@ -7506,7 +7506,11 @@ snapshots:
       jest-runner: 26.6.3
       jest-runtime: 26.6.3
     transitivePeerDependencies:
+      - bufferutil
+      - canvas
       - supports-color
+      - ts-node
+      - utf-8-validate
 
   '@jest/transform@26.6.2':
     dependencies:
@@ -9744,7 +9748,7 @@ snapshots:
 
   flatted@3.3.3: {}
 
-  flow-bin@0.265.3: {}
+  flow-bin@0.141.0: {}
 
   flow-bin@0.63.1: {}
 
@@ -10591,11 +10595,7 @@ snapshots:
       pretty-format: 26.6.2
       throat: 5.0.0
     transitivePeerDependencies:
-      - bufferutil
-      - canvas
       - supports-color
-      - ts-node
-      - utf-8-validate
 
   jest-leak-detector@26.6.2:
     dependencies:
