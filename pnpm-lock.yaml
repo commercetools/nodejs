@@ -198,8 +198,8 @@ importers:
         specifier: workspace:*
         version: link:../packages/api-request-builder
       '@commercetools/get-credentials':
-        specifier: workspace:*
-        version: link:../packages/get-credentials
+        specifier: ^5.0.0
+        version: 5.0.0
       '@commercetools/http-user-agent':
         specifier: workspace:*
         version: link:../packages/http-user-agent
@@ -263,8 +263,8 @@ importers:
         specifier: workspace:*
         version: link:../api-request-builder
       '@commercetools/get-credentials':
-        specifier: workspace:*
-        version: link:../get-credentials
+        specifier: ^5.0.0
+        version: 5.0.0
       '@commercetools/sdk-client':
         specifier: workspace:*
         version: link:../sdk-client
@@ -302,8 +302,8 @@ importers:
         specifier: workspace:*
         version: link:../api-request-builder
       '@commercetools/get-credentials':
-        specifier: workspace:*
-        version: link:../get-credentials
+        specifier: ^5.0.0
+        version: 5.0.0
       '@commercetools/sdk-client':
         specifier: workspace:*
         version: link:../sdk-client
@@ -1220,6 +1220,10 @@ packages:
     resolution: {integrity: sha512-v9kIhKwjeZThiWrLmj0y17CWoyddASLj9O2yvbZkbvw/N3rWOYy9zkV66ursAoVr0mV15bL8g0c4QZUE6cdDoQ==}
     engines: {node: '>=0.1.95'}
     hasBin: true
+
+  '@commercetools/get-credentials@5.0.0':
+    resolution: {integrity: sha512-bmZL+PlvXp9HfM/P4cMiwfBMNRcmnC/ex3I5vkMICH0jwLiazhP5bMqCVtjENpYsMzYSmo6VhbW83VbzAG7+EA==}
+    engines: {node: '>=18'}
 
   '@commercetools/platform-sdk@2.8.0':
     resolution: {integrity: sha512-np2mPic66eS+NegcuxUK/rUqzoXHD0rHAfD9usHx/Gr0JlXdeCkN1VLkwAZr5G3cayH+31BWbhiebLqILNmf3A==}
@@ -7017,6 +7021,10 @@ snapshots:
     dependencies:
       exec-sh: 0.3.6
       minimist: 1.2.8
+
+  '@commercetools/get-credentials@5.0.0':
+    dependencies:
+      dotenv: 8.6.0
 
   '@commercetools/platform-sdk@2.8.0(encoding@0.1.13)':
     dependencies:

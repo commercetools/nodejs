@@ -4,7 +4,7 @@
   "version": "0.1.23",
   "dependencies": {
     "@commercetools/api-request-builder": "workspace:*",
-    "@commercetools/get-credentials": "workspace:*",
+    "@commercetools/get-credentials": "^5.0.0",
     "@commercetools/http-user-agent": "workspace:*",
     "@commercetools/personal-data-erasure": "workspace:*",
     "@commercetools/platform-sdk": "^2.2.0",
