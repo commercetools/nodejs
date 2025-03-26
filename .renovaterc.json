@@ -15,6 +15,10 @@
       "updateTypes": ["minor", "patch"],
       "groupName": "all dependencies",
       "groupSlug": "all"
+    },
+    {
+      "matchPackageNames": ["flow-bin"],
+      "allowedVersions": "0.141.0"
     }
   ],
   "lockFileMaintenance": {
