@@ -17,6 +17,16 @@ runs:
         node-version-file: ".nvmrc"
         cache: "pnpm"
 
+    # Whenever on a changeset versioning PR
+    # Then installing con not fail with lockfile changes
+    # Because the package.json for integration test changes.
+
     - name: Install
+      if: startsWith(github.ref, 'refs/heads/changeset-')
+      run: pnpm install --no-frozen-lockfile
+      shell: bash
+
+    - name: Install
+      if: ${{ !startsWith(github.ref, 'refs/heads/changeset-') }}
       run: pnpm install
       shell: bash
