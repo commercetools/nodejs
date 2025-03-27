@@ -3,12 +3,11 @@ name: Quality
 on:
   push:
     branches:
-      - master
-    branches-ignore:
-      - changeset-release/*
+      - 'master'
+      - '!changeset-release/*'
   pull_request:
-      branches-ignore:
-      - changeset-release/*
+    branches-ignore:
+      - 'changeset-release/**'
 
 jobs:
   lockfile:
