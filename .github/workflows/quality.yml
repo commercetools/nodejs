@@ -9,7 +9,7 @@ on:
 
 jobs:
   lockfile:
-    if: ${{ !startsWith(github.head_ref, 'refs/heads/changeset-release/') }}
+    if: ${{ !startsWith(github.ref, 'refs/heads/changeset-release/') }}
     name: Lockfile
     runs-on: ubuntu-latest
 
@@ -26,7 +26,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
   linting:
-    if: ${{ !startsWith(github.head_ref, 'refs/heads/changeset-release/') }}
+    if: ${{ !startsWith(github.ref, 'refs/heads/changeset-release/') }}
     name: Linting
     runs-on: ubuntu-latest
 
@@ -41,7 +41,7 @@ jobs:
         run: pnpm lint
 
   type-checking:
-    if: ${{ !startsWith(github.head_ref, 'refs/heads/changeset-release/') }}
+    if: ${{ !startsWith(github.ref, 'refs/heads/changeset-release/') }}
     name: Type checking
     runs-on: ubuntu-latest
 
@@ -59,7 +59,7 @@ jobs:
         run: pnpm typecheck:flow
 
   testing:
-    if: ${{ !startsWith(github.head_ref, 'refs/heads/changeset-release/') }}
+    if: ${{ !startsWith(github.ref, 'refs/heads/changeset-release/') }}
     name: Testing
     needs: [lockfile, linting, type-checking]
     runs-on: ubuntu-latest
@@ -85,7 +85,7 @@ jobs:
         run: pnpm test:integration
 
   regression-testing:
-    if: ${{ !startsWith(github.head_ref, 'refs/heads/changeset-release/') }}
+    if: ${{ !startsWith(github.ref, 'refs/heads/changeset-release/') }}
     name: Regression Testing
     needs: [testing]
     runs-on: ubuntu-latest
