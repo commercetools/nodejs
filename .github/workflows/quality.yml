@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - 'master'
-      - '!changeset-release/*'
+      - '!changeset-release/**'
   pull_request:
     branches-ignore:
       - 'changeset-release/**'
