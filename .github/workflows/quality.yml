@@ -59,7 +59,7 @@ jobs:
 
   testing:
     name: Testing
-    needs: [linting, type-checking]
+    needs: [lockfile, linting, type-checking]
     runs-on: ubuntu-latest
 
     steps:
