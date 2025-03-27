@@ -22,11 +22,11 @@ runs:
     # Because the package.json for integration test changes.
 
     - name: Install
-      if: startsWith(github.ref, 'refs/heads/changeset-')
+      if: github.ref == 'changeset-release/master'
       run: pnpm install --no-frozen-lockfile
       shell: bash
 
     - name: Install
-      if: ${{ !startsWith(github.ref, 'refs/heads/changeset-') }}
+      if: github.ref != 'changeset-release/master'
       run: pnpm install
       shell: bash
