@@ -6,7 +6,7 @@
     "node": ">=18"
   },
   "name": "@commercetools/sdk-middleware-logger",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Middleware for logging request and response being executed, to use with @commercetools/sdk-client",
   "keywords": [
     "commercetools",
