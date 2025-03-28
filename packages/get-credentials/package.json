@@ -16,7 +16,7 @@
     "type": "git",
     "url": "https://github.com/commercetools/nodejs/tree/master/packages/get-credentials"
   },
-  "homepage": "https://commercetools.github.io/nodejs/sdk/api/getCredentials.html",
+  "homepage": "https://commercetools.github.io/nodejs/sdk/api/getCredentials",
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "license": "MIT",
   "contributors": [

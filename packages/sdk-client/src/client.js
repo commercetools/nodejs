@@ -88,7 +88,7 @@ export default function createClient(options: ClientOptions): Client {
       if (typeof fn !== 'function')
         // eslint-disable-next-line max-len
         throw new Error(
-          'The "process" function accepts a "Function" as a second argument that returns a Promise. See https://commercetools.github.io/nodejs/sdk/api/sdkClient.html#processrequest-processfn-options'
+          'The "process" function accepts a "Function" as a second argument that returns a Promise. See https://commercetools.github.io/nodejs/sdk/api/sdkClient#processrequest-processfn-options'
         )
 
       // Set default process options

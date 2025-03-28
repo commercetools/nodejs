@@ -12,7 +12,7 @@
 
 Middleware for queueing requests for usage with `@commercetools/sdk-client`
 
-https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareLogger.html
+https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareLogger
 
 ## Install
 

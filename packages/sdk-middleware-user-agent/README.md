@@ -12,7 +12,7 @@
 
 Middleware for setting the User-Agent on the HTTP request for usage with `@commercetools/sdk-client`
 
-https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareUserAgent.html
+https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareUserAgent
 
 ## Install
 

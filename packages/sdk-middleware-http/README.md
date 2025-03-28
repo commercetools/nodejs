@@ -12,7 +12,7 @@
 
 Middleware for making http requests for usage with `@commercetools/sdk-client`
 
-https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareHttp.html
+https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareHttp
 
 ## Install
 

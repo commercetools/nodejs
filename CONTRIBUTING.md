@@ -31,7 +31,7 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 5.  Integration tests are separated out in another folder "/integration-tests". To run the integration test, you need to export the environment variables into the process env by doing the following :-
 
     - Export `npm_config_projectkey` = `projectKey`,
-    - Export `CT_PROJECT_KEY`=`CLIENT_ID`:`CLIENT_SECRET` as specified [here](https://commercetools.github.io/nodejs/sdk/api/getCredentials.html).
+    - Export `CT_PROJECT_KEY`=`CLIENT_ID`:`CLIENT_SECRET` as specified [here](https://commercetools.github.io/nodejs/sdk/api/getCredentials).
     - Then run integration test with `pnpm test:integration`
 
 **Note: Due to the setup/teardown nature of the integration tests, there is the risk of potential data loss in your project**

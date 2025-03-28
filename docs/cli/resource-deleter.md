@@ -29,7 +29,7 @@ Examples of the resources are :
 The constructor accepts two arguments:
 
 - A required object containing the following values:
-  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options)).
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth#named-arguments-options)).
   - `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`manage_products`, `manage_customers`, `manage_types`]. More info on how to get the access token [here](https://docs.commercetools.com/api/authorization).
   - `resource` (String): [resource] that need to be deleted.
   - `predicate` (String): Query string specifying (where) predicate. More info on predicates [here](https://docs.commercetools.com/api/predicates/query) (Optional).

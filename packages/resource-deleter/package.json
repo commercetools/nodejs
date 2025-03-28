@@ -18,7 +18,7 @@
     "type": "git",
     "url": "https://github.com/commercetools/nodejs/tree/master/packages/resource-deleter"
   },
-  "homepage": "https://commercetools.github.io/nodejs/cli/resource-deleter.html",
+  "homepage": "https://commercetools.github.io/nodejs/cli/resource-deleter",
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "keywords": [
     "commercetools",

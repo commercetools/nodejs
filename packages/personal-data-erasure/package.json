@@ -18,7 +18,7 @@
     "type": "git",
     "url": "https://github.com/commercetools/nodejs/tree/master/packages/personal-data-erasure"
   },
-  "homepage": "https://commercetools.github.io/nodejs/cli/personal-data-erasure.html",
+  "homepage": "https://commercetools.github.io/nodejs/cli/personal-data-erasure",
   "bugs": "https://github.com/commercetools/nodejs/issues",
   "keywords": [
     "commercetools",

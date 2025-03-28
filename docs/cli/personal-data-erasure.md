@@ -16,7 +16,7 @@ A package which deletes or exports [commercetools personal data](#list-of-person
 The constructor accepts two arguments:
 
 - A required object containing the following values:
-  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html#named-arguments-options))
+  - `apiConfig` (Object): `AuthMiddleware` options for authentication on the commercetools platform. (Required. See [here](https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth#named-arguments-options))
   - `accessToken` (String): [Access token] to be used to authenticate requests to API. Requires scope of [`view_products`, `manage_products`, `view_orders`, `manage_orders`, `view_payments`, `manage_payments`, `view_shopping_lists`, `manage_shopping_lists`, `view_customers`, `manage_customers`]. More info on how to get the access token [here](https://docs.commercetools.com/api/authorization)
 - An optional logger object having four functions (`info`, `warn`, `error` and `debug`)
 
