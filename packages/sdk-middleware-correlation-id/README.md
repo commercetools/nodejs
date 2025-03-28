@@ -12,7 +12,7 @@
 
 Middleware for adding a correlation id to requests with `@commercetools/sdk-client`
 
-https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareCorrelationId.html
+https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareCorrelationId
 
 ## Install
 

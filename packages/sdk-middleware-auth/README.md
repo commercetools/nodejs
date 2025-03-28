@@ -12,7 +12,7 @@
 
 Auth middlewares collection for usage with `@commercetools/sdk-client`
 
-https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth.html
+https://commercetools.github.io/nodejs/sdk/api/sdkMiddlewareAuth
 
 ### Install
 

@@ -201,7 +201,7 @@ export function actionsMapFieldDefinitions(
   // Make sure to execute removeActions before creating new ones
   // in order to prevent any eventual removal of `addAction`.
   // List of `removeActions` can be found here
-  // https://docs.commercetools.com/http-api-projects-types.html#change-key
+  // https://docs.commercetools.com/api/projects/types#change-key
   const sortedActions = sortBy(
     actions,
     (action) => action.action !== 'removeFieldDefinition'

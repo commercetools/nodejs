@@ -5,7 +5,7 @@ Follow this [link](https://docs.commercetools.com/sdk/typescript-sdk) for an up 
 <!--
 We provide a packages written in typescript for using our API
 
-The **@commercetools/sdk-client-v2** is the TypeScript package that facilitates HTTP [requests](https://commercetools.github.io/nodejs/sdk/Glossary.html#clientrequest) to the Platform, ML or History API by using a predefined set of middlewares.
+The **@commercetools/sdk-client-v2** is the TypeScript package that facilitates HTTP [requests](https://commercetools.github.io/nodejs/sdk/Glossary#clientrequest) to the Platform, ML or History API by using a predefined set of middlewares.
 
 Unlike the Node.js sdk-client, the TypeScript client is a little different in its usage however, they are both very similar in every other aspect and it's also backward compatible with the Nodejs sdk-client.
 
@@ -342,7 +342,7 @@ These are class methods that creates auth middlewares using different authentica
 
 #### withAnonymousSessionFlow(options: _AnonymousAuthMiddlewareOptions_)
 
-Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle authentication for the [Anonymous Session](https://docs.commercetools.com/http-api-authorization.html#tokens-for-anonymous-sessions) flow of the commercetools Platform API.
+Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary#middleware) to handle authentication for the [Anonymous Session](https://docs.commercetools.com/api/authorization#tokens-for-anonymous-sessions) flow of the commercetools Platform API.
 
 #### Named arguments (options)
 
@@ -379,7 +379,7 @@ const client: Client = new ClientBuilder()
 
 #### withClientCredentialsFlow(options: _AuthMiddlewareOptions_)
 
-Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle authentication for the Client [Credentials Flow](https://docs.commercetools.com/http-api-authorization.html#client-credentials-flow) of the commercetools platform API.
+Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary#middleware) to handle authentication for the Client [Credentials Flow](https://docs.commercetools.com/api/authorization#client-credentials-flow) of the commercetools platform API.
 
 #### Named arguments (options)
 
@@ -417,7 +417,7 @@ const client: Client = new ClientBuilder()
 
 #### withExistingTokenFlow(authorization: _string_, options: _ExistingTokenMiddlewareOptions_)
 
-Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) that attaches a provided access token `Authorization` header.
+Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary#middleware) that attaches a provided access token `Authorization` header.
 
 #### Named arguments (authorization, options)
 
@@ -446,7 +446,7 @@ const client: Client = new ClientBuilder()
 
 #### withPasswordFlow(options: _PasswordAuthMiddlewareOptions_)
 
-Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle authentication for the [Password Flow](https://docs.commercetools.com/http-api-authorization.html#password-flow) of the commercetools platform API.
+Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary#middleware) to handle authentication for the [Password Flow](https://docs.commercetools.com/api/authorization#password-flow) of the commercetools platform API.
 
 #### Named arguments (options)
 
@@ -488,7 +488,7 @@ const client: Client = new ClientBuilder()
 
 #### withRefreshTokenFlow(options: _RefreshAuthMiddlewareOptions_)
 
-Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle authentication for the Refresh Token Flow of the commercetools platform API.
+Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary#middleware) to handle authentication for the Refresh Token Flow of the commercetools platform API.
 
 #### Named arguments (options)
 
@@ -528,7 +528,7 @@ There are other class methods that creates middlewares used to fully customize a
 
 #### withHttpMiddleware(options: _HttpMiddlewareOptions_)
 
-Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle HTTP requests for the commercetools platform API.
+Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary#middleware) to handle HTTP requests for the commercetools platform API.
 
 The HTTP middleware can run in either a browser or Node.js environment. For Node.js environments it is important to either have a fetch implementation either globally available via e.g. [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch) or to pass it in as an argument (see below) via e.g. [node-fetch](https://github.com/bitinn/node-fetch). In browsers without a native fetch implementation any well known fetch polyfill should be compatible with the middleware such as [whatwg-fetch](https://github.com/whatwg/fetch) or [unfetch](https://github.com/developit/unfetch).
 
@@ -623,12 +623,12 @@ This is to ensure that a new instance of the AbortController is always created a
 
 ##### getErrorByCode(code)
 
-Returns a [custom error](https://commercetools.github.io/nodejs/sdk/Glossary.html#httperrortype) type given its status code.
+Returns a [custom error](https://commercetools.github.io/nodejs/sdk/Glossary#httperrortype) type given its status code.
 
 Arguments
 `code` (_Number_): the HTTP status code
 Returns
-(`Error` or `undefined`): A [custom error](https://commercetools.github.io/nodejs/sdk/Glossary.html#httperrortype) type (e.g. `BadRequest`, `Unauthorized`) if the code matches, otherwise `undefined`.
+(`Error` or `undefined`): A [custom error](https://commercetools.github.io/nodejs/sdk/Glossary#httperrortype) type (e.g. `BadRequest`, `Unauthorized`) if the code matches, otherwise `undefined`.
 
 #### Usage example
 
@@ -643,7 +643,7 @@ const error = new ErrorType('Oops')
 
 #### withUserAgentMiddleware()
 
-Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to append the `User-Agent` HTTP header to the request.
+Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary#middleware) to append the `User-Agent` HTTP header to the request.
 
 #### Usage example
 
@@ -662,7 +662,7 @@ const client: Client = new ClientBuilder()
 
 #### withCorrelationIdMiddleware(options: _CorrelationIdMiddlewareOptions_)
 
-Creates a middleware to add a correlation ID to executed [requests](https://commercetools.github.io/nodejs/sdk/Glossary.html#clientrequest).
+Creates a middleware to add a correlation ID to executed [requests](https://commercetools.github.io/nodejs/sdk/Glossary#clientrequest).
 
 #### Usage example
 
@@ -683,7 +683,7 @@ const client: Client = new ClientBuilder()
 
 #### withQueueMiddleware(options: _QueueMiddlewareOptions_)
 
-Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to handle concurrent requests.
+Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary#middleware) to handle concurrent requests.
 
 #### Named arguments (options)
 
@@ -707,7 +707,7 @@ const client: Client = new ClientBuilder()
 
 #### withLoggerMiddleware()
 
-Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary.html#middleware) to log request and response objects being executed.
+Creates a [middleware](https://commercetools.github.io/nodejs/sdk/Glossary#middleware) to log request and response objects being executed.
 
 #### Usage Example
 

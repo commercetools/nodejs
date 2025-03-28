@@ -238,7 +238,7 @@ describe('product type hints', () => {
                 newValue: {
                   key: 'next-enum-draft-item',
                   // this is a possibility on clients. we ought to rely on the API, to return an error
-                  // ref: https://docs.commercetools.com/http-api-projects-productTypes.html#change-the-label-of-an-enumvalue
+                  // ref: https://docs.commercetools.com/api/projects/productTypes#change-the-label-of-an-enumvalue
                   label: undefined,
                 },
               },

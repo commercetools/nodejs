@@ -12,7 +12,7 @@
 
 Auth module for working with commercetools platform API
 
-https://commercetools.github.io/nodejs/sdk/api/sdkAuth.html
+https://commercetools.github.io/nodejs/sdk/api/sdkAuth
 
 ## Install
 
