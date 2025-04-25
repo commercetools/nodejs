@@ -1,13 +1,5 @@
 # @commercetools/sdk-middleware-correlation-id
 
-## 4.0.1
-
-### Patch Changes
-
-- [#1741](https://github.com/commercetools/nodejs/pull/1741) [`dd64902`](https://github.com/commercetools/nodejs/commit/dd6490249727ee462c238b35b1e38ec89464a1d0) Thanks [@renovate](https://github.com/apps/renovate)! - Remove resolutions from dependencies.
-
-- [#1949](https://github.com/commercetools/nodejs/pull/1949) [`6fe114e`](https://github.com/commercetools/nodejs/commit/6fe114e9a15edd319819cf98c33a4de22a6de301) Thanks [@industrian](https://github.com/industrian)! - Update links to documentation.
-
 ## 4.0.0
 
 ### Major Changes

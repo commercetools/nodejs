@@ -6,7 +6,7 @@
     "node": ">=18"
   },
   "name": "@commercetools/http-user-agent",
-  "version": "4.0.1",
+  "version": "4.0.0",
   "description": "Creates a proper HTTP User-Agent",
   "keywords": [
     "commercetools",

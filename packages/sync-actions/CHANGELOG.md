@@ -1,25 +1,5 @@
 # @commercetools/sync-actions
 
-## 7.1.0
-
-### Minor Changes
-
-- [#1934](https://github.com/commercetools/nodejs/pull/1934) [`0d20ce7`](https://github.com/commercetools/nodejs/commit/0d20ce78f58b012106e1005249a7eaeae4faef40) Thanks [@NickDevG](https://github.com/NickDevG)! - Adding business unit search status coverage
-
-### Patch Changes
-
-- [#1735](https://github.com/commercetools/nodejs/pull/1735) [`4879752`](https://github.com/commercetools/nodejs/commit/487975227ced4809e8ce30d9ae5cbd402c275672) Thanks [@renovate](https://github.com/apps/renovate)! - Update all dependencies
-
-- [#1741](https://github.com/commercetools/nodejs/pull/1741) [`dd64902`](https://github.com/commercetools/nodejs/commit/dd6490249727ee462c238b35b1e38ec89464a1d0) Thanks [@renovate](https://github.com/apps/renovate)! - Remove resolutions from dependencies.
-
-- [#1948](https://github.com/commercetools/nodejs/pull/1948) [`586ce1d`](https://github.com/commercetools/nodejs/commit/586ce1d212b5d69c023e1f4e31beaee6bda9f0cd) Thanks [@renovate](https://github.com/apps/renovate)! - chore(deps): update all dependencies
-
-- [#1957](https://github.com/commercetools/nodejs/pull/1957) [`acdf899`](https://github.com/commercetools/nodejs/commit/acdf8992103d8210d459bb247a3f6927339ef0bc) Thanks [@YahiaElTai](https://github.com/YahiaElTai)! - added recurring orders sync actions
-
-- [#1949](https://github.com/commercetools/nodejs/pull/1949) [`6fe114e`](https://github.com/commercetools/nodejs/commit/6fe114e9a15edd319819cf98c33a4de22a6de301) Thanks [@industrian](https://github.com/industrian)! - Update links to documentation.
-
-- [#1952](https://github.com/commercetools/nodejs/pull/1952) [`8ce2297`](https://github.com/commercetools/nodejs/commit/8ce2297ef43434ae4033efbf142d92401d81cd05) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update all dependencies
-
 ## 7.0.0
 
 ### Major Changes

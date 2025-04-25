@@ -1,11 +1,5 @@
 # @commercetools/sdk-types
 
-## 1.0.1
-
-### Patch Changes
-
-- [#1741](https://github.com/commercetools/nodejs/pull/1741) [`dd64902`](https://github.com/commercetools/nodejs/commit/dd6490249727ee462c238b35b1e38ec89464a1d0) Thanks [@renovate](https://github.com/apps/renovate)! - Remove resolutions from dependencies.
-
 ## 1.0.0
 
 ### Major Changes

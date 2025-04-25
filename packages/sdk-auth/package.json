@@ -6,7 +6,7 @@
     "node": ">=18"
   },
   "name": "@commercetools/sdk-auth",
-  "version": "5.0.1",
+  "version": "5.0.0",
   "description": "Auth module for different authentication flows of commercetools platform API",
   "keywords": [
     "commercetools",
