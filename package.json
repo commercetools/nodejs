@@ -110,5 +110,8 @@
       "packages/sdk-middleware-user-agent",
       "packages/sync-actions"
     ]
+  },
+  "manypkg": {
+    "ignoredRules": ["INTERNAL_MISMATCH"]
   }
 }

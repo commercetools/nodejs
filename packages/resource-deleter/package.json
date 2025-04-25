@@ -33,7 +33,7 @@
   "license": "MIT",
   "dependencies": {
     "@commercetools/api-request-builder": "workspace:*",
-    "@commercetools/get-credentials": "^5.0.1",
+    "@commercetools/get-credentials": "workspace:*",
     "@commercetools/sdk-client": "workspace:*",
     "@commercetools/sdk-middleware-auth": "workspace:*",
     "@commercetools/sdk-middleware-http": "workspace:*",
