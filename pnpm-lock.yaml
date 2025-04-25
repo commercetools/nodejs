@@ -354,7 +354,7 @@ importers:
         specifier: 12.0.3
         version: 12.0.3
       node-fetch:
-        specifier: ^2.6.7
+        specifier: 2.7.0
         version: 2.7.0(encoding@0.1.13)
 
   packages/sdk-client: {}
@@ -386,7 +386,7 @@ importers:
         specifier: 12.0.3
         version: 12.0.3
       node-fetch:
-        specifier: ^2.6.7
+        specifier: 2.7.0
         version: 2.7.0(encoding@0.1.13)
 
   packages/sdk-middleware-logger: {}
@@ -7508,7 +7508,11 @@ snapshots:
       jest-runner: 26.6.3
       jest-runtime: 26.6.3
     transitivePeerDependencies:
+      - bufferutil
+      - canvas
       - supports-color
+      - ts-node
+      - utf-8-validate
 
   '@jest/transform@26.6.2':
     dependencies:
@@ -10593,11 +10597,7 @@ snapshots:
       pretty-format: 26.6.2
       throat: 5.0.0
     transitivePeerDependencies:
-      - bufferutil
-      - canvas
       - supports-color
-      - ts-node
-      - utf-8-validate
 
   jest-leak-detector@26.6.2:
     dependencies:
