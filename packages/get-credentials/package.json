@@ -6,7 +6,7 @@
     "node": ">=18"
   },
   "name": "@commercetools/get-credentials",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Get CT credentials from the system environment.",
   "keywords": [
     "commercetools",
