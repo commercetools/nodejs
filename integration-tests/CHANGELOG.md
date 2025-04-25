@@ -1,5 +1,26 @@
 # @commercetools/integration-tests
 
+## 0.1.24
+
+### Patch Changes
+
+- [#1741](https://github.com/commercetools/nodejs/pull/1741) [`dd64902`](https://github.com/commercetools/nodejs/commit/dd6490249727ee462c238b35b1e38ec89464a1d0) Thanks [@renovate](https://github.com/apps/renovate)! - Remove resolutions from dependencies.
+
+- Updated dependencies [[`4879752`](https://github.com/commercetools/nodejs/commit/487975227ced4809e8ce30d9ae5cbd402c275672), [`dd64902`](https://github.com/commercetools/nodejs/commit/dd6490249727ee462c238b35b1e38ec89464a1d0), [`467c5ea`](https://github.com/commercetools/nodejs/commit/467c5ea26eb26d12a0c6e4638db19eb5751cf0b3), [`0d20ce7`](https://github.com/commercetools/nodejs/commit/0d20ce78f58b012106e1005249a7eaeae4faef40), [`586ce1d`](https://github.com/commercetools/nodejs/commit/586ce1d212b5d69c023e1f4e31beaee6bda9f0cd), [`acdf899`](https://github.com/commercetools/nodejs/commit/acdf8992103d8210d459bb247a3f6927339ef0bc), [`6fe114e`](https://github.com/commercetools/nodejs/commit/6fe114e9a15edd319819cf98c33a4de22a6de301), [`8ce2297`](https://github.com/commercetools/nodejs/commit/8ce2297ef43434ae4033efbf142d92401d81cd05)]:
+  - @commercetools/resource-deleter@4.0.1
+  - @commercetools/sync-actions@7.1.0
+  - @commercetools/api-request-builder@7.0.1
+  - @commercetools/get-credentials@5.0.1
+  - @commercetools/http-user-agent@4.0.1
+  - @commercetools/personal-data-erasure@5.0.1
+  - @commercetools/sdk-auth@5.0.1
+  - @commercetools/sdk-client@4.0.1
+  - @commercetools/sdk-middleware-auth@8.0.1
+  - @commercetools/sdk-middleware-http@8.0.1
+  - @commercetools/sdk-middleware-logger@4.0.1
+  - @commercetools/sdk-middleware-queue@4.0.1
+  - @commercetools/sdk-middleware-user-agent@4.0.1
+
 ## 0.1.23
 
 ### Patch Changes
