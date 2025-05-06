@@ -37,6 +37,10 @@ jobs:
       - name: Setup
         uses: ./.github/actions/ci
 
+      # Needed for ESLint as otherwise imports are not resolved
+      - name: Build CLIs
+        uses: pnpm build:clis
+
       - name: Lint
         run: pnpm lint
 
