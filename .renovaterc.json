@@ -22,7 +22,7 @@
     },
     {
       "matchPackageNames": ["jsondiffpatch"],
-      "allowedVersions": "<= 0.6.2"
+      "allowedVersions": "<= 0.6.0"
     }
   ],
   "lockFileMaintenance": {
