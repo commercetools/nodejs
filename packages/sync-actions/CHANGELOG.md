@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 7.1.2
+
+### Patch Changes
+
+- [#1962](https://github.com/commercetools/nodejs/pull/1962) [`b41c274`](https://github.com/commercetools/nodejs/commit/b41c274bfb0f86fcf7ff6172cab385db2f9e8769) Thanks [@tdeekens](https://github.com/tdeekens)! - Downgrade jsondiffpatch to 0.6.0
+
 ## 7.1.1
 
 ### Patch Changes
