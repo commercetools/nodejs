@@ -19,6 +19,10 @@
     {
       "matchPackageNames": ["flow-bin"],
       "allowedVersions": "0.141.0"
+    },
+    {
+      "matchPackageNames": ["jsondiffpatch"],
+      "allowedVersions": "<= 0.6.2"
     }
   ],
   "lockFileMaintenance": {

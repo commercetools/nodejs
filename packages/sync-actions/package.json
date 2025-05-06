@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "fast-equals": "^2.0.0",
-    "jsondiffpatch": "0.7.3",
+    "jsondiffpatch": "0.6.2",
     "lodash.flatten": "^4.4.0",
     "lodash.foreach": "^4.5.0",
     "lodash.intersection": "^4.4.0",
