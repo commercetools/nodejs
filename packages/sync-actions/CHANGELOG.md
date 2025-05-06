@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 7.1.1
+
+### Patch Changes
+
+- [#1960](https://github.com/commercetools/nodejs/pull/1960) [`c19a0d5`](https://github.com/commercetools/nodejs/commit/c19a0d5f6b6fd90b8b6042b0feb0d960c9d46b26) Thanks [@tdeekens](https://github.com/tdeekens)! - Downgrade jsondiffpatch to fix ESM bundling issue.
+
 ## 7.1.0
 
 ### Minor Changes
