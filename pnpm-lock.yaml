@@ -293,8 +293,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4
       yargs:
-        specifier: ^16.0.0
-        version: 16.2.0
+        specifier: ^17.0.0
+        version: 17.7.2
 
   packages/resource-deleter:
     dependencies:
@@ -338,8 +338,8 @@ importers:
         specifier: ^0.14.0
         version: 0.14.1
       yargs:
-        specifier: ^16.0.0
-        version: 16.2.0
+        specifier: ^17.0.0
+        version: 17.7.2
 
   packages/sdk-auth:
     dependencies:
@@ -410,8 +410,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.4
       jsondiffpatch:
-        specifier: 0.6.2
-        version: 0.6.2
+        specifier: 0.6.0
+        version: 0.6.0
       lodash.flatten:
         specifier: ^4.4.0
         version: 4.4.0
@@ -4096,11 +4096,6 @@ packages:
 
   jsondiffpatch@0.6.0:
     resolution: {integrity: sha512-3QItJOXp2AP1uv7waBkao5nCvhEv+QmJAd38Ybq7wNI74Q+BBmnLn4EDKz6yI9xGAIQoUF87qHt+kc1IVxB4zQ==}
-    engines: {node: ^18.0.0 || >=20.0.0}
-    hasBin: true
-
-  jsondiffpatch@0.6.2:
-    resolution: {integrity: sha512-c4RkbPb6RXWjkhirwcKK87PuZCITdGRN1usrW4pXKEkwp7Gqf+0pSwQHoh/LtlYNHcxzoF6kok2/EFe6KL0qqQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
@@ -10907,11 +10902,6 @@ snapshots:
     dependencies:
       '@types/diff-match-patch': 1.0.36
       chalk: 5.4.1
-      diff-match-patch: 1.0.5
-
-  jsondiffpatch@0.6.2:
-    dependencies:
-      '@types/diff-match-patch': 1.0.36
       diff-match-patch: 1.0.5
 
   jsonfile@4.0.0:
