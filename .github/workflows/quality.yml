@@ -39,7 +39,7 @@ jobs:
 
       # Needed for ESLint as otherwise imports are not resolved
       - name: Build CLIs
-        uses: pnpm build:clis
+        run: pnpm build:clis
 
       - name: Lint
         run: pnpm lint
