@@ -117,8 +117,8 @@ importers:
         specifier: 14.2.1
         version: 14.2.1(eslint-plugin-import@2.31.0)(eslint@7.32.0)
       eslint-config-prettier:
-        specifier: 6.15.0
-        version: 6.15.0(eslint@7.32.0)
+        specifier: 10.1.5
+        version: 10.1.5(eslint@7.32.0)
       eslint-formatter-pretty:
         specifier: 4.1.0
         version: 4.1.0
@@ -142,7 +142,7 @@ importers:
         version: 6.10.2(eslint@7.32.0)
       eslint-plugin-prettier:
         specifier: 3.4.1
-        version: 3.4.1(eslint-config-prettier@6.15.0(eslint@7.32.0))(eslint@7.32.0)(prettier@2.8.8)
+        version: 3.4.1(eslint-config-prettier@10.1.5(eslint@7.32.0))(eslint@7.32.0)(prettier@2.8.8)
       eslint-plugin-react:
         specifier: 7.37.5
         version: 7.37.5(eslint@7.32.0)
@@ -410,8 +410,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.4
       jsondiffpatch:
-        specifier: 0.6.2
-        version: 0.6.2
+        specifier: 0.6.0
+        version: 0.6.0
       lodash.flatten:
         specifier: ^4.4.0
         version: 4.4.0
@@ -2845,11 +2845,11 @@ packages:
       eslint-plugin-react: ^7.21.5
       eslint-plugin-react-hooks: ^4 || ^3 || ^2.3.0 || ^1.7.0
 
-  eslint-config-prettier@6.15.0:
-    resolution: {integrity: sha512-a1+kOYLR8wMGustcgAjdydMsQ2A/2ipRPwRKUmfYaSxc9ZPcrku080Ctl6zrZzZNs/U82MjSv+qKREkoq3bJaw==}
+  eslint-config-prettier@10.1.5:
+    resolution: {integrity: sha512-zc1UmCpNltmVY34vuLRV61r1K27sWuX39E+uyUnY8xS2Bex88VV9cugG+UZbRSRGtGyFboj+D8JODyme1plMpw==}
     hasBin: true
     peerDependencies:
-      eslint: '>=3.14.1'
+      eslint: '>=7.0.0'
 
   eslint-formatter-pretty@4.1.0:
     resolution: {integrity: sha512-IsUTtGxF1hrH6lMWiSl1WbGaiP01eT6kzywdY1U+zLc0MP+nwEnUiS9UI8IaOTUhTeQJLlCEWIbXINBH4YJbBQ==}
@@ -3278,10 +3278,6 @@ packages:
   get-proto@1.0.1:
     resolution: {integrity: sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g==}
     engines: {node: '>= 0.4'}
-
-  get-stdin@6.0.0:
-    resolution: {integrity: sha512-jp4tHawyV7+fkkSKyvjuLZswblUtz+SQKzSWnBbii16BuZksJlU1wuBYXY75r+duh/llF1ur6oNwi+2ZzjKZ7g==}
-    engines: {node: '>=4'}
 
   get-stream@4.1.0:
     resolution: {integrity: sha512-GMat4EJ5161kIy2HevLlr4luNjBgvmj413KaQA7jt4V8B4RDsfpHk7WQ9GVqfYyyx8OS/L66Kox+rJRNklLK7w==}
@@ -4096,11 +4092,6 @@ packages:
 
   jsondiffpatch@0.6.0:
     resolution: {integrity: sha512-3QItJOXp2AP1uv7waBkao5nCvhEv+QmJAd38Ybq7wNI74Q+BBmnLn4EDKz6yI9xGAIQoUF87qHt+kc1IVxB4zQ==}
-    engines: {node: ^18.0.0 || >=20.0.0}
-    hasBin: true
-
-  jsondiffpatch@0.6.2:
-    resolution: {integrity: sha512-c4RkbPb6RXWjkhirwcKK87PuZCITdGRN1usrW4pXKEkwp7Gqf+0pSwQHoh/LtlYNHcxzoF6kok2/EFe6KL0qqQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
@@ -9295,10 +9286,9 @@ snapshots:
       object.assign: 4.1.7
       object.entries: 1.1.8
 
-  eslint-config-prettier@6.15.0(eslint@7.32.0):
+  eslint-config-prettier@10.1.5(eslint@7.32.0):
     dependencies:
       eslint: 7.32.0
-      get-stdin: 6.0.0
 
   eslint-formatter-pretty@4.1.0:
     dependencies:
@@ -9409,13 +9399,13 @@ snapshots:
       safe-regex-test: 1.1.0
       string.prototype.includes: 2.0.1
 
-  eslint-plugin-prettier@3.4.1(eslint-config-prettier@6.15.0(eslint@7.32.0))(eslint@7.32.0)(prettier@2.8.8):
+  eslint-plugin-prettier@3.4.1(eslint-config-prettier@10.1.5(eslint@7.32.0))(eslint@7.32.0)(prettier@2.8.8):
     dependencies:
       eslint: 7.32.0
       prettier: 2.8.8
       prettier-linter-helpers: 1.0.0
     optionalDependencies:
-      eslint-config-prettier: 6.15.0(eslint@7.32.0)
+      eslint-config-prettier: 10.1.5(eslint@7.32.0)
 
   eslint-plugin-react-hooks@4.6.2(eslint@7.32.0):
     dependencies:
@@ -9855,8 +9845,6 @@ snapshots:
     dependencies:
       dunder-proto: 1.0.1
       es-object-atoms: 1.1.1
-
-  get-stdin@6.0.0: {}
 
   get-stream@4.1.0:
     dependencies:
@@ -10596,11 +10584,7 @@ snapshots:
       pretty-format: 26.6.2
       throat: 5.0.0
     transitivePeerDependencies:
-      - bufferutil
-      - canvas
       - supports-color
-      - ts-node
-      - utf-8-validate
 
   jest-leak-detector@26.6.2:
     dependencies:
@@ -10907,11 +10891,6 @@ snapshots:
     dependencies:
       '@types/diff-match-patch': 1.0.36
       chalk: 5.4.1
-      diff-match-patch: 1.0.5
-
-  jsondiffpatch@0.6.2:
-    dependencies:
-      '@types/diff-match-patch': 1.0.36
       diff-match-patch: 1.0.5
 
   jsonfile@4.0.0:
