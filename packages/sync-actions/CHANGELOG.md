@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 7.1.3
+
+### Patch Changes
+
+- [`50bb5fd`](https://github.com/commercetools/nodejs/commit/50bb5fdc39f8341b54548aadd8835d37375b6ab1) Thanks [@tdeekens](https://github.com/tdeekens)! - Downgrade jsondiffpatch to v0.5.0 before becoming ESM only
+
 ## 7.1.2
 
 ### Patch Changes
