@@ -1,5 +1,14 @@
 # @commercetools/integration-tests
 
+## 0.1.25
+
+### Patch Changes
+
+- [#1959](https://github.com/commercetools/nodejs/pull/1959) [`a3ead6e`](https://github.com/commercetools/nodejs/commit/a3ead6ecf9ea9d76e3145614e03012190a710cf9) Thanks [@renovate](https://github.com/apps/renovate)! - fix(deps): update all dependencies
+
+- Updated dependencies [[`50bb5fd`](https://github.com/commercetools/nodejs/commit/50bb5fdc39f8341b54548aadd8835d37375b6ab1)]:
+  - @commercetools/sync-actions@7.1.3
+
 ## 0.1.24
 
 ### Patch Changes
