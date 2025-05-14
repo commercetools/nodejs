@@ -234,8 +234,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       '@commercetools/sync-actions':
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: ^7.1.2
+        version: 7.1.3
       lodash.omit:
         specifier: ^4.5.0
         version: 4.5.0
@@ -293,8 +293,8 @@ importers:
         specifier: ^2.0.4
         version: 2.0.4
       yargs:
-        specifier: ^16.0.0
-        version: 16.2.0
+        specifier: ^17.0.0
+        version: 17.7.2
 
   packages/resource-deleter:
     dependencies:
@@ -338,8 +338,8 @@ importers:
         specifier: ^0.14.0
         version: 0.14.1
       yargs:
-        specifier: ^16.0.0
-        version: 16.2.0
+        specifier: ^17.0.0
+        version: 17.7.2
 
   packages/sdk-auth:
     dependencies:
@@ -1378,8 +1378,8 @@ packages:
     resolution: {integrity: sha512-31XMMBv/pSLGi6NdUTYim69UJf+BKf/4p0ll2gVoiz0ZGIPauxLOOh8YAEG8HfqH4RVeuB0Y0r89OGC0gMolRg==}
     engines: {node: '>=18'}
 
-  '@commercetools/sync-actions@7.0.0':
-    resolution: {integrity: sha512-VZn29sqEJ3KHtZgS9U4B21cepykonnwkqwJ55pbJeh1Gz9eL5TUdQW764Gr281TL7Guex43ORjq6nFCBQqIUjw==}
+  '@commercetools/sync-actions@7.1.3':
+    resolution: {integrity: sha512-u12JMgL3rnDZeuY1bCZvRegd7mT7GP4jej0SnkGSxj8lxiKw4nkj+txkWsd5BvynR1RlgF00CWH05/bIicrKcA==}
     engines: {node: '>=18'}
 
   '@commitlint/cli@19.8.1':
@@ -1684,9 +1684,6 @@ packages:
 
   '@types/conventional-commits-parser@5.0.1':
     resolution: {integrity: sha512-7uz5EHdzz2TqoMfV7ee61Egf5y6NkcO4FB/1iCCQnbeiI1F3xzv3vK5dBCXUCLQgGYS+mUeigK1iKQzvED+QnQ==}
-
-  '@types/diff-match-patch@1.0.36':
-    resolution: {integrity: sha512-xFdR6tkm0MWvBfO8xXCSsinYxHcqkQUlcHeSpMC2ukzOb6lwQAfDmW+Qt0AvlGd8HpsS28qKsB+oPeJn9I39jg==}
 
   '@types/eslint-visitor-keys@1.0.0':
     resolution: {integrity: sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==}
@@ -4206,11 +4203,6 @@ packages:
   jsondiffpatch@0.5.0:
     resolution: {integrity: sha512-Quz3MvAwHxVYNXsOByL7xI5EB2WYOeFswqaHIA3qOK3isRWTxiplBEocmmru6XmxDB2L7jDNYtYA4FyimoAFEw==}
     engines: {node: '>=8.17.0'}
-    hasBin: true
-
-  jsondiffpatch@0.6.0:
-    resolution: {integrity: sha512-3QItJOXp2AP1uv7waBkao5nCvhEv+QmJAd38Ybq7wNI74Q+BBmnLn4EDKz6yI9xGAIQoUF87qHt+kc1IVxB4zQ==}
-    engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
   jsonfile@4.0.0:
@@ -7414,10 +7406,10 @@ snapshots:
 
   '@commercetools/sdk-types@1.0.0': {}
 
-  '@commercetools/sync-actions@7.0.0':
+  '@commercetools/sync-actions@7.1.3':
     dependencies:
       fast-equals: 2.0.4
-      jsondiffpatch: 0.6.0
+      jsondiffpatch: 0.5.0
       lodash.flatten: 4.4.0
       lodash.foreach: 4.5.0
       lodash.intersection: 4.4.0
@@ -8003,8 +7995,6 @@ snapshots:
   '@types/conventional-commits-parser@5.0.1':
     dependencies:
       '@types/node': 10.17.60
-
-  '@types/diff-match-patch@1.0.36': {}
 
   '@types/eslint-visitor-keys@1.0.0': {}
 
@@ -10832,7 +10822,11 @@ snapshots:
       pretty-format: 26.6.2
       throat: 5.0.0
     transitivePeerDependencies:
+      - bufferutil
+      - canvas
       - supports-color
+      - ts-node
+      - utf-8-validate
 
   jest-leak-detector@26.6.2:
     dependencies:
@@ -11138,12 +11132,6 @@ snapshots:
   jsondiffpatch@0.5.0:
     dependencies:
       chalk: 3.0.0
-      diff-match-patch: 1.0.5
-
-  jsondiffpatch@0.6.0:
-    dependencies:
-      '@types/diff-match-patch': 1.0.36
-      chalk: 5.4.1
       diff-match-patch: 1.0.5
 
   jsonfile@4.0.0:
