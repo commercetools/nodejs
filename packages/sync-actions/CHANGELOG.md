@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 7.2.0
+
+### Minor Changes
+
+- [#1909](https://github.com/commercetools/nodejs/pull/1909) [`6740404`](https://github.com/commercetools/nodejs/commit/6740404987a0cd6b979105febb1965ac10a18d01) Thanks [@phofmann](https://github.com/phofmann)! - Added support for extensions, business-units and subscriptions
+
 ## 7.1.3
 
 ### Patch Changes
