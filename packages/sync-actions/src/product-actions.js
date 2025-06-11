@@ -91,15 +91,28 @@ function _buildKeyActions(variantDiff, oldVariant) {
   return null
 }
 
+function _buildNewSetProductAttributeAction(attr) {
+  const attributeName = attr && attr.name
+  if (!attributeName) return undefined
+
+  const action = {
+    action: 'setProductAttribute',
+    name: attributeName,
+    value: attr.value,
+  }
+
+  return action
+}
+
 function _buildNewSetAttributeAction(variantId, attr, sameForAllAttributeNames) {
   const attributeName = attr && attr.name
   if (!attributeName) return undefined
 
   let action = {
     action: 'setAttribute',
-    variantId: id,
+    variantId: variantId,
     name: attributeName,
-    value: el.value,
+    value: attr.value,
   }
 
   if (sameForAllAttributeNames.indexOf(attributeName) !== -1) {
