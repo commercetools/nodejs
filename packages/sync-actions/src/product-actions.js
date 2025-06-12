@@ -758,6 +758,18 @@ export function actionsMapAssets(diff, oldObj, newObj, variantHashMap) {
   return allAssetsActions
 }
 
+export function actionsMapProductAttributes(
+  diffedProductData,
+  oldProductData,
+  newProductData,
+) {
+  return _buildProductAttributesActions(
+    diffedProductData.attributes,
+    oldProductData,
+    newProductData
+  )
+}
+
 export function actionsMapVariantAttributes(
   diff,
   oldObj,
