@@ -363,6 +363,72 @@ function _buildVariantPricesAction(
   return [addPriceActions, changePriceActions, removePriceActions]
 }
 
+function _buildProductAttributesActions(
+  diffedAttributes,
+  oldProductData,
+  newProductData
+) {
+  const actions = []
+
+  if (!diffedAttributes) return actions
+
+  forEach(diffedAttributes, (value, key) => {
+    // What does this test tell us?
+    if (REGEX_NUMBER.test(key)) {
+      // What does this test tell us?
+      if (Array.isArray(value)) {
+        // Whats the difference between _buildNew... and _build... ?
+        const setAction = _buildNewSetProductAttributeAction(
+          diffpatcher.getDeltaValue(value)
+        )
+        if (setAction) actions.push(setAction)
+      // What does this test tell us?
+      } else if (newProductData.attributes) {
+        const setAction = _buildSetProductAttributeAction(
+          value.value,
+          oldProductData,
+          newProductData.attributes[key]
+        )
+        if (setAction) actions.push(setAction)
+      }
+    // What does this test tell us?
+    } else if (REGEX_UNDERSCORE_NUMBER.test(key)) {
+      if (Array.isArray(value)) {
+        // What does this test tell us?
+        // Ignore pure array moves!
+        if (value.length === 3 && value[2] === 3) return
+
+        let deltaValue = diffpatcher.getDeltaValue(value)
+
+        // What happens here?
+        if (!deltaValue)
+          if (value[0] && value[0].name)
+            // unset attribute if
+            deltaValue = { name: value[0].name }
+          else deltaValue = undefined
+
+        const setAction = _buildNewSetProductAttributeAction(
+          deltaValue
+        )
+
+        if (setAction) actions.push(setAction)
+      } else {
+        const index = key.substring(1) // what happens here? Shouldn't this always be underscore?
+        if (newProductData.attributes) {
+          const setAction = _buildSetProductAttributeAction(
+            value.value,
+            oldProductData,
+            newProductData.attributes[index]
+          )
+          if (setAction) actions.push(setAction)
+        }
+      }
+    }
+  })
+
+  return actions
+}
+
 function _buildVariantAttributesActions(
   attributes,
   oldVariant,
