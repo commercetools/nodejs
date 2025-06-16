@@ -758,7 +758,7 @@ export function actionsMapAssets(diff, oldObj, newObj, variantHashMap) {
   return allAssetsActions
 }
 
-export function actionsMapAttributes(
+export function actionsMapVariantAttributes(
   diff,
   oldObj,
   newObj,

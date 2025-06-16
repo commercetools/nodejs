@@ -53,7 +53,7 @@ function createProductMapActions(
 
     allActions.push(
       mapActionGroup('attributes', (): Array<UpdateAction> =>
-        productActions.actionsMapAttributes(
+        productActions.actionsMapVariantAttributes(
           diff,
           oldObj,
           newObj,
