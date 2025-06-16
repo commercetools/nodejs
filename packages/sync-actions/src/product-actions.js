@@ -110,6 +110,57 @@ function _buildNewSetAttributeAction(id, el, sameForAllAttributeNames) {
   return action
 }
 
+function _buildAttributeValue(diffedValue, oldAttributeValue, newAttributeValue) {
+  let value
+
+  if (Array.isArray(diffedValue))
+    value = diffpatcher.getDeltaValue(diffedValue, oldAttributeValue)
+  else if (typeof diffedValue === 'string')
+    // LText: value: {en: "", de: ""}
+    // Enum: value: {key: "foo", label: "Foo"}
+    // LEnum: value: {key: "foo", label: {en: "Foo", de: "Foo"}}
+    // Money: value: {centAmount: 123, currencyCode: ""}
+    // *: value: ""
+
+    // normal
+    value = diffpatcher.getDeltaValue(diffedValue, oldAttributeValue)
+  else if (diffedValue.centAmount || diffedValue.currencyCode)
+    // Money
+    value = {
+      centAmount: diffedValue.centAmount
+        ? diffpatcher.getDeltaValue(diffedValue.centAmount)
+        : newAttributeValue.centAmount,
+      currencyCode: diffedValue.currencyCode
+        ? diffpatcher.getDeltaValue(diffedValue.currencyCode)
+        : newAttributeValue.currencyCode,
+    }
+  else if (diffedValue.key)
+    // Enum / LEnum (use only the key)
+    value = diffpatcher.getDeltaValue(diffedValue.key)
+  else if (typeof diffedValue === 'object')
+    if ({}.hasOwnProperty.call(diffedValue, '_t') && diffedValue._t === 'a') {
+      // set-typed attribute
+      value = newAttributeValue
+    } else {
+      // LText
+
+      const updatedValue = Object.keys(diffedValue).reduce(
+        (acc, lang) => {
+          const patchedValue = diffpatcher.getDeltaValue(
+            diffedValue[lang],
+            acc[lang]
+          )
+          return Object.assign(acc, { [lang]: patchedValue })
+        },
+        { ...oldAttributeValue }
+      )
+
+      value = updatedValue
+    }
+
+  return value
+}
+
 function _buildSetAttributeAction(
   diffedValue,
   oldVariant,
@@ -133,50 +184,7 @@ function _buildSetAttributeAction(
     delete action.variantId
   }
 
-  if (Array.isArray(diffedValue))
-    action.value = diffpatcher.getDeltaValue(diffedValue, oldAttribute.value)
-  else if (typeof diffedValue === 'string')
-    // LText: value: {en: "", de: ""}
-    // Enum: value: {key: "foo", label: "Foo"}
-    // LEnum: value: {key: "foo", label: {en: "Foo", de: "Foo"}}
-    // Money: value: {centAmount: 123, currencyCode: ""}
-    // *: value: ""
-
-    // normal
-    action.value = diffpatcher.getDeltaValue(diffedValue, oldAttribute.value)
-  else if (diffedValue.centAmount || diffedValue.currencyCode)
-    // Money
-    action.value = {
-      centAmount: diffedValue.centAmount
-        ? diffpatcher.getDeltaValue(diffedValue.centAmount)
-        : attribute.value.centAmount,
-      currencyCode: diffedValue.currencyCode
-        ? diffpatcher.getDeltaValue(diffedValue.currencyCode)
-        : attribute.value.currencyCode,
-    }
-  else if (diffedValue.key)
-    // Enum / LEnum (use only the key)
-    action.value = diffpatcher.getDeltaValue(diffedValue.key)
-  else if (typeof diffedValue === 'object')
-    if ({}.hasOwnProperty.call(diffedValue, '_t') && diffedValue._t === 'a') {
-      // set-typed attribute
-      action = { ...action, value: attribute.value }
-    } else {
-      // LText
-
-      const updatedValue = Object.keys(diffedValue).reduce(
-        (acc, lang) => {
-          const patchedValue = diffpatcher.getDeltaValue(
-            diffedValue[lang],
-            acc[lang]
-          )
-          return Object.assign(acc, { [lang]: patchedValue })
-        },
-        { ...oldAttribute.value }
-      )
-
-      action.value = updatedValue
-    }
+  action.value = _buildAttributeValue(diffedValue, oldAttribute.value, attribute.value)
 
   return action
 }
