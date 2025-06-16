@@ -161,6 +161,23 @@ function _buildAttributeValue(diffedValue, oldAttributeValue, newAttributeValue)
   return value
 }
 
+function _buildSetProductAttributeAction(diffedValue, oldProductData, newAttribute) {
+  if (!newAttribute) return undefined
+
+  const action = {
+    action: 'setProductAttribute',
+    name: newAttribute.name,
+  }
+
+  // Used as original object for patching long diff text
+  const oldAttribute =
+    oldProductData.attributes.find((a) => a.name === newAttribute.name) || {}
+
+  action.value = _buildAttributeValue(diffedValue, oldAttribute.value, newAttribute.value)
+
+  return action
+}
+
 function _buildSetAttributeAction(
   diffedValue,
   oldVariant,
