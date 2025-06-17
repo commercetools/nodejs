@@ -504,4 +504,149 @@ describe('Actions', () => {
       },
     ])
   })
+
+  test('should build product attribute actions', () => {
+    const before = {
+      id: '123',
+      attributes: [
+        { name: 'uid', value: '20063672' },
+        { name: 'length', value: 160 },
+        { name: 'wide', value: 85 },
+        { name: 'bulkygoods', value: { label: 'Ja', key: 'YES' } },
+        { name: 'ean', value: '20063672' },
+        { name: 'foo', value: 'bar' }, // removed
+      ],
+    }
+
+    const now = {
+      id: '123',
+      attributes: [
+        { name: 'uid', value: '20063675' }, // changed
+        { name: 'length', value: 160 },
+        { name: 'wide', value: 10 }, // changed
+        { name: 'bulkygoods', value: 'NO' }, // changed
+        { name: 'ean', value: '20063672' },
+        { name: 'baz', value: 'bar' }, // added
+      ],
+    }
+
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual([
+      { action: 'setProductAttribute', name: 'uid', value: '20063675' },
+      { action: 'setProductAttribute', name: 'wide', value: 10 },
+      { action: 'setProductAttribute', name: 'bulkygoods', value: 'NO' },
+      { action: 'setProductAttribute', name: 'baz', value: 'bar' },
+      { action: 'setProductAttribute', name: 'foo', value: undefined },
+    ])
+  })
+
+  test('should build product attribute actions for all types', () => {
+    const before = {
+      id: '123',
+      attributes: [
+        { name: 'foo', value: 'bar' }, // text
+        { name: 'dog', value: { en: 'Dog', de: 'Hund', es: 'perro' } }, // ltext
+        { name: 'num', value: 50 }, // number
+        { name: 'count', value: { label: 'One', key: 'one' } }, // enum
+        { name: 'size', value: { label: { en: 'Medium' }, key: 'medium' } }, // lenum
+        { name: 'color', value: { label: { en: 'Color' }, key: 'red' } }, // lenum
+        { name: 'cost', value: { centAmount: 990, currencyCode: 'EUR' } }, // money
+        { name: 'reference', value: { typeId: 'product', id: '111' } }, // reference
+        { name: 'welcome', value: ['hello', 'world'] }, // set text
+        {
+          name: 'welcome2',
+          value: [
+            { en: 'hello', it: 'ciao' },
+            { en: 'world', it: 'mondo' },
+          ],
+        }, // set ltext
+        { name: 'multicolor', value: ['red'] }, // set enum
+        {
+          name: 'multicolor2',
+          value: [{ key: 'red', label: { en: 'red', it: 'rosso' } }],
+        }, // set lenum
+      ],
+    }
+
+    const now = {
+      id: '123',
+      attributes: [
+        { name: 'foo', value: 'qux' }, // text
+        { name: 'dog', value: { en: 'Doggy', it: 'Cane', es: 'perro' } }, // ltext
+        { name: 'num', value: 100 }, // number
+        { name: 'count', value: { label: 'Two', key: 'two' } }, // enum
+        { name: 'size', value: { label: { en: 'Small' }, key: 'small' } }, // lenum
+        { name: 'color', value: { label: { en: 'Blue' }, key: 'blue' } }, // lenum
+        { name: 'cost', value: { centAmount: 550, currencyCode: 'EUR' } }, // money
+        { name: 'reference', value: { typeId: 'category', id: '222' } }, // reference
+        { name: 'welcome', value: ['hello'] }, // set text
+        { name: 'welcome2', value: [{ en: 'hello', it: 'ciao' }] }, // set ltext
+        { name: 'multicolor', value: ['red', 'yellow'] }, // set enum
+        {
+          name: 'multicolor2',
+          value: [
+            { key: 'red', label: { en: 'red', it: 'rosso' } },
+            { key: 'yellow', label: { en: 'yellow', it: 'giallo' } },
+          ],
+        }, // set lenum
+        {
+          name: 'listWithEmptyValues',
+          value: ['', '', null, { id: '123', typeId: 'products' }],
+        }, // set reference
+      ],
+    }
+
+    const actions = productsSync.buildActions(now, before)
+    expect(actions).toEqual([
+      { action: 'setProductAttribute', name: 'foo', value: 'qux' },
+      {
+        action: 'setProductAttribute',
+        name: 'dog',
+        value: { en: 'Doggy', it: 'Cane', de: undefined, es: 'perro' },
+      },
+      { action: 'setProductAttribute', name: 'num', value: 100 },
+      { action: 'setProductAttribute', name: 'count', value: 'two' },
+      { action: 'setProductAttribute', name: 'size', value: 'small' },
+      { action: 'setProductAttribute', name: 'color', value: 'blue' },
+      {
+        action: 'setProductAttribute',
+        name: 'cost',
+        value: { centAmount: 550, currencyCode: 'EUR' },
+      },
+      {
+        action: 'setProductAttribute',
+        name: 'reference',
+        value: { typeId: 'category', id: '222' },
+      },
+      {
+        action: 'setProductAttribute',
+        name: 'welcome',
+        value: ['hello'],
+      },
+      {
+        action: 'setProductAttribute',
+        name: 'welcome2',
+        value: [{ en: 'hello', it: 'ciao' }],
+      },
+      {
+        action: 'setProductAttribute',
+        name: 'multicolor',
+        value: ['red', 'yellow'],
+      },
+      {
+        action: 'setProductAttribute',
+        name: 'multicolor2',
+        value: [
+          { key: 'red', label: { en: 'red', it: 'rosso' } },
+          { key: 'yellow', label: { en: 'yellow', it: 'giallo' } },
+        ],
+      }, // set lenum
+      {
+        action: 'setProductAttribute',
+        name: 'listWithEmptyValues',
+        value: ['', '', null, { id: '123', typeId: 'products' }],
+      }, // set reference
+    ])
+  })
 })
