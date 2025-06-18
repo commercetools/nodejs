@@ -26,7 +26,6 @@ export const baseActionsList = [
   { action: 'setSearchKeywords', key: 'searchKeywords' },
   { action: 'setKey', key: 'key' },
   { action: 'setPriceMode', key: 'priceMode' },
-  { action: 'setProductAttribute', key: 'attributes' }
 ]
 
 export const baseAssetActionsList = [
