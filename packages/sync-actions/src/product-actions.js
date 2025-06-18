@@ -91,8 +91,8 @@ function _buildKeyActions(variantDiff, oldVariant) {
   return null
 }
 
-function _buildNewSetAttributeAction(id, el, sameForAllAttributeNames) {
-  const attributeName = el && el.name
+function _buildNewSetAttributeAction(variantId, attr, sameForAllAttributeNames) {
+  const attributeName = attr && attr.name
   if (!attributeName) return undefined
 
   let action = {
