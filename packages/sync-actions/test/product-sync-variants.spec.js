@@ -1816,4 +1816,98 @@ describe('Actions', () => {
       })
     })
   })
+
+  describe('attribute edge cases', () => {
+    test('should handle Money attribute with only centAmount change', () => {
+      const before = {
+        id: '123',
+        masterVariant: {
+          id: 1,
+          attributes: [
+            { name: 'price', value: { centAmount: 100, currencyCode: 'USD' } },
+          ],
+        },
+      }
+
+      const now = {
+        id: '123',
+        masterVariant: {
+          id: 1,
+          attributes: [
+            { name: 'price', value: { centAmount: 200, currencyCode: 'USD' } },
+          ],
+        },
+      }
+
+      const actions = productsSync.buildActions(now, before)
+      expect(actions).toEqual([
+        {
+          action: 'setAttribute',
+          variantId: 1,
+          name: 'price',
+          value: { centAmount: 200, currencyCode: 'USD' },
+        },
+      ])
+    })
+
+    test('should handle Money attribute with only currencyCode change', () => {
+      const before = {
+        id: '123',
+        masterVariant: {
+          id: 1,
+          attributes: [
+            { name: 'price', value: { centAmount: 100, currencyCode: 'USD' } },
+          ],
+        },
+      }
+
+      const now = {
+        id: '123',
+        masterVariant: {
+          id: 1,
+          attributes: [
+            { name: 'price', value: { centAmount: 100, currencyCode: 'EUR' } },
+          ],
+        },
+      }
+
+      const actions = productsSync.buildActions(now, before)
+      expect(actions).toEqual([
+        {
+          action: 'setAttribute',
+          variantId: 1,
+          name: 'price',
+          value: { centAmount: 100, currencyCode: 'EUR' },
+        },
+      ])
+    })
+
+    test('should handle simple string attribute change', () => {
+      const before = {
+        id: '123',
+        masterVariant: {
+          id: 1,
+          attributes: [{ name: 'description', value: 'old description' }],
+        },
+      }
+
+      const now = {
+        id: '123',
+        masterVariant: {
+          id: 1,
+          attributes: [{ name: 'description', value: 'new description' }],
+        },
+      }
+
+      const actions = productsSync.buildActions(now, before)
+      expect(actions).toEqual([
+        {
+          action: 'setAttribute',
+          variantId: 1,
+          name: 'description',
+          value: 'new description',
+        },
+      ])
+    })
+  })
 })

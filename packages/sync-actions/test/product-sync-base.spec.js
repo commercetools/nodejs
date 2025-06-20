@@ -648,4 +648,193 @@ describe('Actions', () => {
       }, // set reference
     ])
   })
+
+  test('should create setProductAttribute action when attribute is removed from product', () => {
+    const before = {
+      id: '123',
+      attributes: [
+        { name: 'testAttr', value: 'oldValue' },
+        { name: 'anotherAttr', value: 'anotherValue' },
+      ],
+    }
+
+    const now = {
+      id: '123',
+      attributes: [
+        { name: 'anotherAttr', value: 'anotherValue' },
+        // testAttr is removed
+      ],
+    }
+
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual(
+      expect.arrayContaining([
+        { action: 'setProductAttribute', name: 'testAttr', value: undefined },
+      ])
+    )
+  })
+
+  test('should build setProductAttribute action', () => {
+    const before = {
+      id: '123',
+      attributes: [
+        { name: 'firstAttr', value: 'firstValue' },
+        { name: 'secondAttr', value: 'secondValue' },
+      ],
+    }
+
+    const now = {
+      id: '123',
+      attributes: [
+        { name: 'firstAttr', value: 'updatedValue' },
+        { name: 'secondAttr', value: 'secondValue' },
+      ],
+    }
+
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual(
+      expect.arrayContaining([
+        {
+          action: 'setProductAttribute',
+          name: 'firstAttr',
+          value: 'updatedValue',
+        },
+      ])
+    )
+  })
+
+  test('should update product attribute value when attribute content changes', () => {
+    const before = {
+      id: '123',
+      attributes: [{ name: 'indexTestAttr', value: 'originalValue' }],
+    }
+
+    const now = {
+      id: '123',
+      attributes: [{ name: 'indexTestAttr', value: 'modifiedValue' }],
+    }
+
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual([
+      {
+        action: 'setProductAttribute',
+        name: 'indexTestAttr',
+        value: 'modifiedValue',
+      },
+    ])
+  })
+
+  test('should update array attribute when items are removed', () => {
+    const before = {
+      id: '123',
+      attributes: [{ name: 'testAttr', value: ['item1', 'item2'] }],
+    }
+
+    const now = {
+      id: '123',
+      attributes: [{ name: 'testAttr', value: ['item1'] }],
+    }
+
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual(
+      expect.arrayContaining([
+        { action: 'setProductAttribute', name: 'testAttr', value: ['item1'] },
+      ])
+    )
+  })
+
+  test('should remove complex attribute with name fallback when attribute is deleted', () => {
+    const before = {
+      id: '123',
+      attributes: [
+        {
+          name: 'complexAttr',
+          value: [{ name: 'fallbackName', someProperty: 'value' }],
+        },
+      ],
+    }
+
+    const now = {
+      id: '123',
+      attributes: [],
+    }
+
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual(
+      expect.arrayContaining([
+        {
+          action: 'setProductAttribute',
+          name: 'complexAttr',
+          value: undefined,
+        },
+      ])
+    )
+  })
+
+  test('should remove simple attribute when no name fallback is available', () => {
+    const before = {
+      id: '123',
+      attributes: [{ name: 'simpleAttr', value: [{ someProperty: 'value' }] }],
+    }
+
+    const now = {
+      id: '123',
+      attributes: [],
+    }
+
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual(
+      expect.arrayContaining([
+        { action: 'setProductAttribute', name: 'simpleAttr', value: undefined },
+      ])
+    )
+  })
+
+  test('should generate setAttribute action for reordered array values', () => {
+    const before = {
+      id: '123',
+      attributes: [{ name: 'listAttr', value: ['a', 'b', 'c'] }],
+    }
+
+    const now = {
+      id: '123',
+      attributes: [{ name: 'listAttr', value: ['a', 'c', 'b'] }],
+    }
+
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual(
+      expect.arrayContaining([
+        {
+          action: 'setProductAttribute',
+          name: 'listAttr',
+          value: ['a', 'c', 'b'],
+        },
+      ])
+    )
+  })
+
+  test('should update simple attribute value when changed', () => {
+    const before = {
+      id: '123',
+      attributes: [{ name: 'indexedAttr', value: 'oldValue' }],
+    }
+
+    const now = {
+      id: '123',
+      attributes: [{ name: 'indexedAttr', value: 'newValue' }],
+    }
+
+    const actions = productsSync.buildActions(now, before)
+
+    expect(actions).toEqual([
+      { action: 'setProductAttribute', name: 'indexedAttr', value: 'newValue' },
+    ])
+  })
 })
