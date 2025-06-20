@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 7.3.0
+
+### Minor Changes
+
+- [#1969](https://github.com/commercetools/nodejs/pull/1969) [`961de7c`](https://github.com/commercetools/nodejs/commit/961de7ca90d50603d544332b0c6cab7ff6761c9b) Thanks [@peter-gerhard](https://github.com/peter-gerhard)! - Add support for product level attributes
+
 ## 7.2.0
 
 ### Minor Changes
