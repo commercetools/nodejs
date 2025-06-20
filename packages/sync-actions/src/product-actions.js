@@ -91,42 +91,6 @@ function _buildKeyActions(variantDiff, oldVariant) {
   return null
 }
 
-function _buildNewSetProductAttributeAction(attr) {
-  const attributeName = attr && attr.name
-  if (!attributeName) return undefined
-
-  const action = {
-    action: 'setProductAttribute',
-    name: attributeName,
-    value: attr.value,
-  }
-
-  return action
-}
-
-function _buildNewSetAttributeAction(
-  variantId,
-  attr,
-  sameForAllAttributeNames
-) {
-  const attributeName = attr && attr.name
-  if (!attributeName) return undefined
-
-  let action = {
-    action: 'setAttribute',
-    variantId,
-    name: attributeName,
-    value: attr.value,
-  }
-
-  if (sameForAllAttributeNames.indexOf(attributeName) !== -1) {
-    action = { ...action, action: 'setAttributeInAllVariants' }
-    delete action.variantId
-  }
-
-  return action
-}
-
 function _buildAttributeValue(
   diffedValue,
   oldAttributeValue,
@@ -182,27 +146,25 @@ function _buildAttributeValue(
   return value
 }
 
-function _buildSetProductAttributeAction(
-  diffedValue,
-  oldProductData,
-  newAttribute
+function _buildNewSetAttributeAction(
+  variantId,
+  attr,
+  sameForAllAttributeNames
 ) {
-  if (!newAttribute) return undefined
+  const attributeName = attr && attr.name
+  if (!attributeName) return undefined
 
-  const action = {
-    action: 'setProductAttribute',
-    name: newAttribute.name,
+  let action = {
+    action: 'setAttribute',
+    variantId,
+    name: attributeName,
+    value: attr.value,
   }
 
-  // Used as original object for patching long diff text
-  const oldAttribute =
-    oldProductData.attributes.find((a) => a.name === newAttribute.name) || {}
-
-  action.value = _buildAttributeValue(
-    diffedValue,
-    oldAttribute.value,
-    newAttribute.value
-  )
+  if (sameForAllAttributeNames.indexOf(attributeName) !== -1) {
+    action = { ...action, action: 'setAttributeInAllVariants' }
+    delete action.variantId
+  }
 
   return action
 }
@@ -234,6 +196,44 @@ function _buildSetAttributeAction(
     diffedValue,
     oldAttribute.value,
     attribute.value
+  )
+
+  return action
+}
+
+function _buildNewSetProductAttributeAction(attr) {
+  const attributeName = attr && attr.name
+  if (!attributeName) return undefined
+
+  const action = {
+    action: 'setProductAttribute',
+    name: attributeName,
+    value: attr.value,
+  }
+
+  return action
+}
+
+function _buildSetProductAttributeAction(
+  diffedValue,
+  oldProductData,
+  newAttribute
+) {
+  if (!newAttribute) return undefined
+
+  const action = {
+    action: 'setProductAttribute',
+    name: newAttribute.name,
+  }
+
+  // Used as original object for patching long diff text
+  const oldAttribute =
+    oldProductData.attributes.find((a) => a.name === newAttribute.name) || {}
+
+  action.value = _buildAttributeValue(
+    diffedValue,
+    oldAttribute.value,
+    newAttribute.value
   )
 
   return action
