@@ -91,15 +91,74 @@ function _buildKeyActions(variantDiff, oldVariant) {
   return null
 }
 
-function _buildNewSetAttributeAction(id, el, sameForAllAttributeNames) {
-  const attributeName = el && el.name
+function _buildAttributeValue(
+  diffedValue,
+  oldAttributeValue,
+  newAttributeValue
+) {
+  let value
+
+  if (Array.isArray(diffedValue))
+    value = diffpatcher.getDeltaValue(diffedValue, oldAttributeValue)
+  else if (typeof diffedValue === 'string')
+    // LText: value: {en: "", de: ""}
+    // Enum: value: {key: "foo", label: "Foo"}
+    // LEnum: value: {key: "foo", label: {en: "Foo", de: "Foo"}}
+    // Money: value: {centAmount: 123, currencyCode: ""}
+    // *: value: ""
+
+    // normal
+    value = diffpatcher.getDeltaValue(diffedValue, oldAttributeValue)
+  else if (diffedValue.centAmount || diffedValue.currencyCode)
+    // Money
+    value = {
+      centAmount: diffedValue.centAmount
+        ? diffpatcher.getDeltaValue(diffedValue.centAmount)
+        : newAttributeValue.centAmount,
+      currencyCode: diffedValue.currencyCode
+        ? diffpatcher.getDeltaValue(diffedValue.currencyCode)
+        : newAttributeValue.currencyCode,
+    }
+  else if (diffedValue.key)
+    // Enum / LEnum (use only the key)
+    value = diffpatcher.getDeltaValue(diffedValue.key)
+  else if (typeof diffedValue === 'object')
+    if ({}.hasOwnProperty.call(diffedValue, '_t') && diffedValue._t === 'a') {
+      // set-typed attribute
+      value = newAttributeValue
+    } else {
+      // LText
+
+      const updatedValue = Object.keys(diffedValue).reduce(
+        (acc, lang) => {
+          const patchedValue = diffpatcher.getDeltaValue(
+            diffedValue[lang],
+            acc[lang]
+          )
+          return Object.assign(acc, { [lang]: patchedValue })
+        },
+        { ...oldAttributeValue }
+      )
+
+      value = updatedValue
+    }
+
+  return value
+}
+
+function _buildNewSetAttributeAction(
+  variantId,
+  attr,
+  sameForAllAttributeNames
+) {
+  const attributeName = attr && attr.name
   if (!attributeName) return undefined
 
   let action = {
     action: 'setAttribute',
-    variantId: id,
+    variantId,
     name: attributeName,
-    value: el.value,
+    value: attr.value,
   }
 
   if (sameForAllAttributeNames.indexOf(attributeName) !== -1) {
@@ -133,50 +192,49 @@ function _buildSetAttributeAction(
     delete action.variantId
   }
 
-  if (Array.isArray(diffedValue))
-    action.value = diffpatcher.getDeltaValue(diffedValue, oldAttribute.value)
-  else if (typeof diffedValue === 'string')
-    // LText: value: {en: "", de: ""}
-    // Enum: value: {key: "foo", label: "Foo"}
-    // LEnum: value: {key: "foo", label: {en: "Foo", de: "Foo"}}
-    // Money: value: {centAmount: 123, currencyCode: ""}
-    // *: value: ""
+  action.value = _buildAttributeValue(
+    diffedValue,
+    oldAttribute.value,
+    attribute.value
+  )
 
-    // normal
-    action.value = diffpatcher.getDeltaValue(diffedValue, oldAttribute.value)
-  else if (diffedValue.centAmount || diffedValue.currencyCode)
-    // Money
-    action.value = {
-      centAmount: diffedValue.centAmount
-        ? diffpatcher.getDeltaValue(diffedValue.centAmount)
-        : attribute.value.centAmount,
-      currencyCode: diffedValue.currencyCode
-        ? diffpatcher.getDeltaValue(diffedValue.currencyCode)
-        : attribute.value.currencyCode,
-    }
-  else if (diffedValue.key)
-    // Enum / LEnum (use only the key)
-    action.value = diffpatcher.getDeltaValue(diffedValue.key)
-  else if (typeof diffedValue === 'object')
-    if ({}.hasOwnProperty.call(diffedValue, '_t') && diffedValue._t === 'a') {
-      // set-typed attribute
-      action = { ...action, value: attribute.value }
-    } else {
-      // LText
+  return action
+}
 
-      const updatedValue = Object.keys(diffedValue).reduce(
-        (acc, lang) => {
-          const patchedValue = diffpatcher.getDeltaValue(
-            diffedValue[lang],
-            acc[lang]
-          )
-          return Object.assign(acc, { [lang]: patchedValue })
-        },
-        { ...oldAttribute.value }
-      )
+function _buildNewSetProductAttributeAction(attr) {
+  const attributeName = attr && attr.name
+  if (!attributeName) return undefined
 
-      action.value = updatedValue
-    }
+  const action = {
+    action: 'setProductAttribute',
+    name: attributeName,
+    value: attr.value,
+  }
+
+  return action
+}
+
+function _buildSetProductAttributeAction(
+  diffedValue,
+  oldProductData,
+  newAttribute
+) {
+  if (!newAttribute) return undefined
+
+  const action = {
+    action: 'setProductAttribute',
+    name: newAttribute.name,
+  }
+
+  // Used as original object for patching long diff text
+  const oldAttribute =
+    oldProductData.attributes.find((a) => a.name === newAttribute.name) || {}
+
+  action.value = _buildAttributeValue(
+    diffedValue,
+    oldAttribute.value,
+    newAttribute.value
+  )
 
   return action
 }
@@ -323,6 +381,63 @@ function _buildVariantPricesAction(
   })
 
   return [addPriceActions, changePriceActions, removePriceActions]
+}
+
+function _buildProductAttributesActions(
+  diffedAttributes,
+  oldProductData,
+  newProductData
+) {
+  const actions = []
+
+  if (!diffedAttributes) return actions
+
+  forEach(diffedAttributes, (value, key) => {
+    if (REGEX_NUMBER.test(key)) {
+      if (Array.isArray(value)) {
+        const setAction = _buildNewSetProductAttributeAction(
+          diffpatcher.getDeltaValue(value)
+        )
+        if (setAction) actions.push(setAction)
+      } else if (newProductData.attributes) {
+        const setAction = _buildSetProductAttributeAction(
+          value.value,
+          oldProductData,
+          newProductData.attributes[key]
+        )
+        if (setAction) actions.push(setAction)
+      }
+    } else if (REGEX_UNDERSCORE_NUMBER.test(key)) {
+      if (Array.isArray(value)) {
+        // Ignore pure array moves!
+        if (value.length === 3 && value[2] === 3) return
+
+        let deltaValue = diffpatcher.getDeltaValue(value)
+
+        if (!deltaValue)
+          if (value[0] && value[0].name)
+            // unset attribute if
+            deltaValue = { name: value[0].name }
+          else deltaValue = undefined
+
+        const setAction = _buildNewSetProductAttributeAction(deltaValue)
+
+        if (setAction) actions.push(setAction)
+      } else {
+        const index = key.substring(1)
+        if (newProductData.attributes) {
+          const setAction = _buildSetProductAttributeAction(
+            value.value,
+            oldProductData,
+            newProductData.attributes[index]
+          )
+          if (setAction) actions.push(setAction)
+        }
+      }
+    }
+  })
+
+  return actions
 }
 
 function _buildVariantAttributesActions(
@@ -652,6 +767,18 @@ export function actionsMapAssets(diff, oldObj, newObj, variantHashMap) {
     })
 
   return allAssetsActions
+}
+
+export function actionsMapProductAttributes(
+  diffedProductData,
+  oldProductData,
+  newProductData
+) {
+  return _buildProductAttributesActions(
+    diffedProductData.attributes,
+    oldProductData,
+    newProductData
+  )
 }
 
 export function actionsMapAttributes(
