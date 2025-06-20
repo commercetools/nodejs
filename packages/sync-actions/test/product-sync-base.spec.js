@@ -15,7 +15,7 @@ describe('Exports', () => {
       'prices',
       'pricesCustom',
       'productAttributes',
-      'variantAttributes',
+      'attributes',
       'images',
       'variants',
       'categories',

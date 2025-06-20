@@ -20,7 +20,7 @@ const actionGroups = [
   'prices',
   'pricesCustom',
   'productAttributes',
-  'variantAttributes',
+  'attributes',
   'images',
   'variants',
   'categories',
@@ -54,17 +54,13 @@ function createProductMapActions(
 
     allActions.push(
       mapActionGroup('productAttributes', (): Array<UpdateAction> =>
-        productActions.actionsMapProductAttributes(
-          diff,
-          oldObj,
-          newObj
-        )
+        productActions.actionsMapProductAttributes(diff, oldObj, newObj)
       )
     )
 
     allActions.push(
-      mapActionGroup('variantAttributes', (): Array<UpdateAction> =>
-        productActions.actionsMapVariantAttributes(
+      mapActionGroup('attributes', (): Array<UpdateAction> =>
+        productActions.actionsMapAttributes(
           diff,
           oldObj,
           newObj,

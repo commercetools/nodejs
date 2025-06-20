@@ -104,13 +104,17 @@ function _buildNewSetProductAttributeAction(attr) {
   return action
 }
 
-function _buildNewSetAttributeAction(variantId, attr, sameForAllAttributeNames) {
+function _buildNewSetAttributeAction(
+  variantId,
+  attr,
+  sameForAllAttributeNames
+) {
   const attributeName = attr && attr.name
   if (!attributeName) return undefined
 
   let action = {
     action: 'setAttribute',
-    variantId: variantId,
+    variantId,
     name: attributeName,
     value: attr.value,
   }
@@ -123,7 +127,11 @@ function _buildNewSetAttributeAction(variantId, attr, sameForAllAttributeNames) 
   return action
 }
 
-function _buildAttributeValue(diffedValue, oldAttributeValue, newAttributeValue) {
+function _buildAttributeValue(
+  diffedValue,
+  oldAttributeValue,
+  newAttributeValue
+) {
   let value
 
   if (Array.isArray(diffedValue))
@@ -174,7 +182,11 @@ function _buildAttributeValue(diffedValue, oldAttributeValue, newAttributeValue)
   return value
 }
 
-function _buildSetProductAttributeAction(diffedValue, oldProductData, newAttribute) {
+function _buildSetProductAttributeAction(
+  diffedValue,
+  oldProductData,
+  newAttribute
+) {
   if (!newAttribute) return undefined
 
   const action = {
@@ -186,7 +198,11 @@ function _buildSetProductAttributeAction(diffedValue, oldProductData, newAttribu
   const oldAttribute =
     oldProductData.attributes.find((a) => a.name === newAttribute.name) || {}
 
-  action.value = _buildAttributeValue(diffedValue, oldAttribute.value, newAttribute.value)
+  action.value = _buildAttributeValue(
+    diffedValue,
+    oldAttribute.value,
+    newAttribute.value
+  )
 
   return action
 }
@@ -214,7 +230,11 @@ function _buildSetAttributeAction(
     delete action.variantId
   }
 
-  action.value = _buildAttributeValue(diffedValue, oldAttribute.value, attribute.value)
+  action.value = _buildAttributeValue(
+    diffedValue,
+    oldAttribute.value,
+    attribute.value
+  )
 
   return action
 }
@@ -373,16 +393,12 @@ function _buildProductAttributesActions(
   if (!diffedAttributes) return actions
 
   forEach(diffedAttributes, (value, key) => {
-    // What does this test tell us?
     if (REGEX_NUMBER.test(key)) {
-      // What does this test tell us?
       if (Array.isArray(value)) {
-        // Whats the difference between _buildNew... and _build... ?
         const setAction = _buildNewSetProductAttributeAction(
           diffpatcher.getDeltaValue(value)
         )
         if (setAction) actions.push(setAction)
-      // What does this test tell us?
       } else if (newProductData.attributes) {
         const setAction = _buildSetProductAttributeAction(
           value.value,
@@ -391,29 +407,24 @@ function _buildProductAttributesActions(
         )
         if (setAction) actions.push(setAction)
       }
-    // What does this test tell us?
     } else if (REGEX_UNDERSCORE_NUMBER.test(key)) {
       if (Array.isArray(value)) {
-        // What does this test tell us?
         // Ignore pure array moves!
         if (value.length === 3 && value[2] === 3) return
 
         let deltaValue = diffpatcher.getDeltaValue(value)
 
-        // What happens here?
         if (!deltaValue)
           if (value[0] && value[0].name)
             // unset attribute if
             deltaValue = { name: value[0].name }
           else deltaValue = undefined
 
-        const setAction = _buildNewSetProductAttributeAction(
-          deltaValue
-        )
+        const setAction = _buildNewSetProductAttributeAction(deltaValue)
 
         if (setAction) actions.push(setAction)
       } else {
-        const index = key.substring(1) // what happens here? Shouldn't this always be underscore?
+        const index = key.substring(1)
         if (newProductData.attributes) {
           const setAction = _buildSetProductAttributeAction(
             value.value,
@@ -761,7 +772,7 @@ export function actionsMapAssets(diff, oldObj, newObj, variantHashMap) {
 export function actionsMapProductAttributes(
   diffedProductData,
   oldProductData,
-  newProductData,
+  newProductData
 ) {
   return _buildProductAttributesActions(
     diffedProductData.attributes,
@@ -770,7 +781,7 @@ export function actionsMapProductAttributes(
   )
 }
 
-export function actionsMapVariantAttributes(
+export function actionsMapAttributes(
   diff,
   oldObj,
   newObj,
