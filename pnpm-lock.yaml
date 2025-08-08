@@ -354,7 +354,7 @@ importers:
         specifier: 12.0.3
         version: 12.0.3
       node-fetch:
-        specifier: ^2.6.7
+        specifier: 2.7.0
         version: 2.7.0(encoding@0.1.13)
 
   packages/sdk-client: {}
@@ -386,7 +386,7 @@ importers:
         specifier: 12.0.3
         version: 12.0.3
       node-fetch:
-        specifier: ^2.6.7
+        specifier: 2.7.0
         version: 2.7.0(encoding@0.1.13)
 
   packages/sdk-middleware-logger: {}
