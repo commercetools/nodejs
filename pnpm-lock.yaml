@@ -117,8 +117,8 @@ importers:
         specifier: 14.2.1
         version: 14.2.1(eslint-plugin-import@2.31.0)(eslint@7.32.0)
       eslint-config-prettier:
-        specifier: 6.15.0
-        version: 6.15.0(eslint@7.32.0)
+        specifier: 10.1.8
+        version: 10.1.8(eslint@7.32.0)
       eslint-formatter-pretty:
         specifier: 4.1.0
         version: 4.1.0
@@ -142,7 +142,7 @@ importers:
         version: 6.10.2(eslint@7.32.0)
       eslint-plugin-prettier:
         specifier: 3.4.1
-        version: 3.4.1(eslint-config-prettier@6.15.0(eslint@7.32.0))(eslint@7.32.0)(prettier@2.8.8)
+        version: 3.4.1(eslint-config-prettier@10.1.8(eslint@7.32.0))(eslint@7.32.0)(prettier@2.8.8)
       eslint-plugin-react:
         specifier: 7.37.5
         version: 7.37.5(eslint@7.32.0)
@@ -234,8 +234,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       '@commercetools/sync-actions':
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: ^7.1.2
+        version: 7.3.1
       lodash.omit:
         specifier: ^4.5.0
         version: 4.5.0
@@ -1378,8 +1378,8 @@ packages:
     resolution: {integrity: sha512-31XMMBv/pSLGi6NdUTYim69UJf+BKf/4p0ll2gVoiz0ZGIPauxLOOh8YAEG8HfqH4RVeuB0Y0r89OGC0gMolRg==}
     engines: {node: '>=18'}
 
-  '@commercetools/sync-actions@7.0.0':
-    resolution: {integrity: sha512-VZn29sqEJ3KHtZgS9U4B21cepykonnwkqwJ55pbJeh1Gz9eL5TUdQW764Gr281TL7Guex43ORjq6nFCBQqIUjw==}
+  '@commercetools/sync-actions@7.3.1':
+    resolution: {integrity: sha512-fZ0bIyojjn3xZy2fQ/8+dQoOOt78ASXvF+s3Mt1nwtaeNTCjT4vq/Giymk/y7rOGNiyLJBqk5pWbr0LfnGHfOQ==}
     engines: {node: '>=18'}
 
   '@commitlint/cli@19.8.1':
@@ -1684,9 +1684,6 @@ packages:
 
   '@types/conventional-commits-parser@5.0.1':
     resolution: {integrity: sha512-7uz5EHdzz2TqoMfV7ee61Egf5y6NkcO4FB/1iCCQnbeiI1F3xzv3vK5dBCXUCLQgGYS+mUeigK1iKQzvED+QnQ==}
-
-  '@types/diff-match-patch@1.0.36':
-    resolution: {integrity: sha512-xFdR6tkm0MWvBfO8xXCSsinYxHcqkQUlcHeSpMC2ukzOb6lwQAfDmW+Qt0AvlGd8HpsS28qKsB+oPeJn9I39jg==}
 
   '@types/eslint-visitor-keys@1.0.0':
     resolution: {integrity: sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==}
@@ -2946,11 +2943,11 @@ packages:
       eslint-plugin-react: ^7.21.5
       eslint-plugin-react-hooks: ^4 || ^3 || ^2.3.0 || ^1.7.0
 
-  eslint-config-prettier@6.15.0:
-    resolution: {integrity: sha512-a1+kOYLR8wMGustcgAjdydMsQ2A/2ipRPwRKUmfYaSxc9ZPcrku080Ctl6zrZzZNs/U82MjSv+qKREkoq3bJaw==}
+  eslint-config-prettier@10.1.8:
+    resolution: {integrity: sha512-82GZUjRS0p/jganf6q1rEO25VSoHH0hKPCTrgillPjdI/3bgBhAE1QzHrHTizjpRvy6pGAvKjDJtk2pF9NDq8w==}
     hasBin: true
     peerDependencies:
-      eslint: '>=3.14.1'
+      eslint: '>=7.0.0'
 
   eslint-formatter-pretty@4.1.0:
     resolution: {integrity: sha512-IsUTtGxF1hrH6lMWiSl1WbGaiP01eT6kzywdY1U+zLc0MP+nwEnUiS9UI8IaOTUhTeQJLlCEWIbXINBH4YJbBQ==}
@@ -3387,10 +3384,6 @@ packages:
   get-proto@1.0.1:
     resolution: {integrity: sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g==}
     engines: {node: '>= 0.4'}
-
-  get-stdin@6.0.0:
-    resolution: {integrity: sha512-jp4tHawyV7+fkkSKyvjuLZswblUtz+SQKzSWnBbii16BuZksJlU1wuBYXY75r+duh/llF1ur6oNwi+2ZzjKZ7g==}
-    engines: {node: '>=4'}
 
   get-stream@4.1.0:
     resolution: {integrity: sha512-GMat4EJ5161kIy2HevLlr4luNjBgvmj413KaQA7jt4V8B4RDsfpHk7WQ9GVqfYyyx8OS/L66Kox+rJRNklLK7w==}
@@ -4206,11 +4199,6 @@ packages:
   jsondiffpatch@0.5.0:
     resolution: {integrity: sha512-Quz3MvAwHxVYNXsOByL7xI5EB2WYOeFswqaHIA3qOK3isRWTxiplBEocmmru6XmxDB2L7jDNYtYA4FyimoAFEw==}
     engines: {node: '>=8.17.0'}
-    hasBin: true
-
-  jsondiffpatch@0.6.0:
-    resolution: {integrity: sha512-3QItJOXp2AP1uv7waBkao5nCvhEv+QmJAd38Ybq7wNI74Q+BBmnLn4EDKz6yI9xGAIQoUF87qHt+kc1IVxB4zQ==}
-    engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
   jsonfile@4.0.0:
@@ -7414,10 +7402,10 @@ snapshots:
 
   '@commercetools/sdk-types@1.0.0': {}
 
-  '@commercetools/sync-actions@7.0.0':
+  '@commercetools/sync-actions@7.3.1':
     dependencies:
       fast-equals: 2.0.4
-      jsondiffpatch: 0.6.0
+      jsondiffpatch: 0.5.0
       lodash.flatten: 4.4.0
       lodash.foreach: 4.5.0
       lodash.intersection: 4.4.0
@@ -8003,8 +7991,6 @@ snapshots:
   '@types/conventional-commits-parser@5.0.1':
     dependencies:
       '@types/node': 10.17.60
-
-  '@types/diff-match-patch@1.0.36': {}
 
   '@types/eslint-visitor-keys@1.0.0': {}
 
@@ -9527,10 +9513,9 @@ snapshots:
       object.assign: 4.1.7
       object.entries: 1.1.8
 
-  eslint-config-prettier@6.15.0(eslint@7.32.0):
+  eslint-config-prettier@10.1.8(eslint@7.32.0):
     dependencies:
       eslint: 7.32.0
-      get-stdin: 6.0.0
 
   eslint-formatter-pretty@4.1.0:
     dependencies:
@@ -9641,13 +9626,13 @@ snapshots:
       safe-regex-test: 1.1.0
       string.prototype.includes: 2.0.1
 
-  eslint-plugin-prettier@3.4.1(eslint-config-prettier@6.15.0(eslint@7.32.0))(eslint@7.32.0)(prettier@2.8.8):
+  eslint-plugin-prettier@3.4.1(eslint-config-prettier@10.1.8(eslint@7.32.0))(eslint@7.32.0)(prettier@2.8.8):
     dependencies:
       eslint: 7.32.0
       prettier: 2.8.8
       prettier-linter-helpers: 1.0.0
     optionalDependencies:
-      eslint-config-prettier: 6.15.0(eslint@7.32.0)
+      eslint-config-prettier: 10.1.8(eslint@7.32.0)
 
   eslint-plugin-react-hooks@4.6.2(eslint@7.32.0):
     dependencies:
@@ -10091,8 +10076,6 @@ snapshots:
     dependencies:
       dunder-proto: 1.0.1
       es-object-atoms: 1.1.1
-
-  get-stdin@6.0.0: {}
 
   get-stream@4.1.0:
     dependencies:
@@ -10832,7 +10815,11 @@ snapshots:
       pretty-format: 26.6.2
       throat: 5.0.0
     transitivePeerDependencies:
+      - bufferutil
+      - canvas
       - supports-color
+      - ts-node
+      - utf-8-validate
 
   jest-leak-detector@26.6.2:
     dependencies:
@@ -11138,12 +11125,6 @@ snapshots:
   jsondiffpatch@0.5.0:
     dependencies:
       chalk: 3.0.0
-      diff-match-patch: 1.0.5
-
-  jsondiffpatch@0.6.0:
-    dependencies:
-      '@types/diff-match-patch': 1.0.36
-      chalk: 5.4.1
       diff-match-patch: 1.0.5
 
   jsonfile@4.0.0:
