@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 7.3.1
+
+### Patch Changes
+
+- [#1971](https://github.com/commercetools/nodejs/pull/1971) [`4e14e72`](https://github.com/commercetools/nodejs/commit/4e14e723b3b7432ca5b6db0cb12f20ec6697a6d2) Thanks [@emuzych](https://github.com/emuzych)! - ensure proper order of address update actions
+
 ## 7.3.0
 
 ### Minor Changes
