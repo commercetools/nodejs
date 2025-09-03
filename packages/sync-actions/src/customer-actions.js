@@ -118,12 +118,19 @@ export function actionsMapAddresses(diff, oldObj, newObj) {
   return handler(diff, oldObj, newObj)
 }
 
-export function actionsMapBillingAddresses(diff, oldObj, newObj) {
+export function actionsMapAddBillingAddresses(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('billingAddressIds', {
     [ADD_ACTIONS]: (addressId) => ({
       action: 'addBillingAddressId',
       addressId,
     }),
+  })
+
+  return handler(diff, oldObj, newObj)
+}
+
+export function actionsMapRemoveBillingAddresses(diff, oldObj, newObj) {
+  const handler = createBuildArrayActions('billingAddressIds', {
     [REMOVE_ACTIONS]: (addressId) => ({
       action: 'removeBillingAddressId',
       addressId,
@@ -133,12 +140,19 @@ export function actionsMapBillingAddresses(diff, oldObj, newObj) {
   return handler(diff, oldObj, newObj)
 }
 
-export function actionsMapShippingAddresses(diff, oldObj, newObj) {
+export function actionsMapAddShippingAddresses(diff, oldObj, newObj) {
   const handler = createBuildArrayActions('shippingAddressIds', {
     [ADD_ACTIONS]: (addressId) => ({
       action: 'addShippingAddressId',
       addressId,
     }),
+  })
+
+  return handler(diff, oldObj, newObj)
+}
+
+export function actionsMapRemoveShippingAddresses(diff, oldObj, newObj) {
+  const handler = createBuildArrayActions('shippingAddressIds', {
     [REMOVE_ACTIONS]: (addressId) => ({
       action: 'removeShippingAddressId',
       addressId,

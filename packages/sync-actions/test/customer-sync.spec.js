@@ -643,4 +643,42 @@ describe('Actions', () => {
       customerSync.buildActions(now, before)
     }).toThrow('Invalid Authentication Mode')
   })
+
+  test('should build actions for addresses in proper order', () => {
+    const before = {
+      addresses: [{ id: 'abc123' }, { id: 'abc456' }],
+      billingAddressIds: ['abc123', 'abc456'],
+      defaultBillingAddress: 'abc123',
+    }
+    const now = {
+      addresses: [{ id: 'xyz123' }, { id: 'abc456' }],
+      billingAddressIds: ['xyz123', 'abc456'],
+      defaultBillingAddressId: 'xyz123',
+    }
+    expect(customerSync.buildActions(now, before)).toStrictEqual([
+      // removeBillingAddressId action should be before removeAddress
+      {
+        action: 'removeBillingAddressId',
+        addressId: 'abc123',
+      },
+      {
+        action: 'removeAddress',
+        addressId: 'abc123',
+      },
+      {
+        action: 'addAddress',
+        address: {
+          id: 'xyz123',
+        },
+      },
+      {
+        action: 'setDefaultBillingAddress',
+        addressId: 'xyz123',
+      },
+      {
+        action: 'addBillingAddressId',
+        addressId: 'xyz123',
+      },
+    ])
+  })
 })
