@@ -309,6 +309,68 @@ describe('Actions', () => {
     ])
   })
 
+  test('should avoid SameForAll attribute actions for none existing attributes', () => {
+    const before = {
+      id: '123',
+      masterVariant: {
+        id: 1,
+        attributes: [
+          { name: 'color', value: 'red' },
+          { name: 'size', value: 'M' },
+          { name: 'weigth', value: '1' },
+        ],
+      },
+      variants: [
+        { id: 3, attributes: [] },
+        {
+          id: 2,
+          attributes: [
+            { name: 'color', value: 'red' },
+            { name: 'size', value: 'M' },
+            { name: 'weigth', value: '2' },
+          ],
+        },
+      ],
+    }
+
+    const now = {
+      id: '123',
+      masterVariant: {
+        id: 1,
+        attributes: [
+          { name: 'color', value: 'red' },
+          { name: 'size', value: 'M' },
+          { name: 'weigth', value: '1' },
+        ],
+      },
+      variants: [
+        { id: 3, attributes: [] },
+        {
+          id: 2,
+          attributes: [
+            { name: 'color', value: 'red' },
+            { name: 'size', value: 'M' },
+            { name: 'weigth', value: '3' },
+          ],
+        },
+      ],
+    }
+
+    const actions = productsSync.buildActions(now, before, {
+      sameForAllAttributeNames: [
+        'non-existing',
+        'vendor',
+        'color',
+        'size',
+        'non-existing-1',
+      ],
+    })
+
+    expect(actions).toEqual([
+      { action: 'setAttribute', variantId: 2, name: 'weigth', value: '3' },
+    ])
+  })
+
   test('should build `addVariant` action', () => {
     const newVariant = {
       key: 'ddd',
