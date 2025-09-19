@@ -837,4 +837,35 @@ describe('Actions', () => {
       { action: 'setProductAttribute', name: 'indexedAttr', value: 'newValue' },
     ])
   })
+
+  test('should not fail when type is not passed', () => {
+    const before = {
+      attributes: [
+        {
+          name: 'price',
+          value: { centAmount: 100, currencyCode: 'USD' },
+        },
+      ],
+    }
+
+    const now = {
+      attributes: [
+        {
+          name: 'price',
+          value: undefined,
+        },
+      ],
+    }
+    const actions = productsSync.buildActions(now, before)
+
+    const expected = [
+      {
+        action: 'setProductAttribute',
+        name: 'price',
+        value: now.attributes[0].value,
+      },
+    ]
+
+    expect(actions).toEqual(expected)
+  })
 })

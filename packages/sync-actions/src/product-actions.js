@@ -97,7 +97,6 @@ function _buildAttributeValue(
   newAttributeValue
 ) {
   let value
-
   if (Array.isArray(diffedValue))
     value = diffpatcher.getDeltaValue(diffedValue, oldAttributeValue)
   else if (typeof diffedValue === 'string')
@@ -175,7 +174,8 @@ function _buildSetAttributeAction(
   attribute,
   sameForAllAttributeNames
 ) {
-  if (!attribute) return undefined
+  // in the case of diffedValue being null or undefined, _buildAttributeValue will fail.
+  if (!attribute || !diffedValue) return undefined
 
   let action = {
     action: 'setAttribute',
@@ -219,7 +219,8 @@ function _buildSetProductAttributeAction(
   oldProductData,
   newAttribute
 ) {
-  if (!newAttribute) return undefined
+  // in the case of diffedValue being null or undefined, _buildAttributeValue will fail.
+  if (!newAttribute || !diffedValue) return undefined
 
   const action = {
     action: 'setProductAttribute',
