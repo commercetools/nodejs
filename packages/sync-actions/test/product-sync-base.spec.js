@@ -842,9 +842,8 @@ describe('Actions', () => {
     const before = {
       attributes: [
         {
-          type: 'text',
-          name: 'batteryIncluded',
-          value: 'No',
+          name: 'price',
+          value: { centAmount: 100, currencyCode: 'USD' },
         },
       ],
     }
@@ -852,13 +851,21 @@ describe('Actions', () => {
     const now = {
       attributes: [
         {
-          name: 'batteryIncluded',
-          value: 'No',
+          name: 'price',
+          value: undefined,
         },
       ],
     }
     const actions = productsSync.buildActions(now, before)
 
-    expect(actions).toEqual([])
+    const expected = [
+      {
+        action: 'setProductAttribute',
+        name: 'price',
+        value: now.attributes[0].value,
+      },
+    ]
+
+    expect(actions).toEqual(expected)
   })
 })
