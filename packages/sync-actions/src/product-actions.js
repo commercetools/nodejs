@@ -174,6 +174,7 @@ function _buildSetAttributeAction(
   attribute,
   sameForAllAttributeNames
 ) {
+  // in the case of diffedValue being null or undefined, _buildAttributeValue will fail.
   if (!attribute || !diffedValue) return undefined
 
   let action = {
@@ -218,6 +219,7 @@ function _buildSetProductAttributeAction(
   oldProductData,
   newAttribute
 ) {
+  // in the case of diffedValue being null or undefined, _buildAttributeValue will fail.
   if (!newAttribute || !diffedValue) return undefined
 
   const action = {
