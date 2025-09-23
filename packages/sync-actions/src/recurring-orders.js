@@ -12,7 +12,7 @@ import actionsMapCustom from './utils/action-map-custom'
 import * as RecurringOrdersActions from './recurring-orders-actions'
 import * as diffpatcher from './utils/diffpatcher'
 
-const actionGroups = ['base', 'custom']
+const actionGroups = ['base', 'references', 'custom']
 
 function createRecurringOrdersMapActions(
   mapActionGroup: Function,
@@ -38,6 +38,12 @@ function createRecurringOrdersMapActions(
           newObj,
           syncActionConfig
         )
+      )
+    )
+
+    allActions.push(
+      mapActionGroup('references', (): Array<UpdateAction> =>
+        RecurringOrdersActions.actionsMapReferences(diff, oldObj, newObj)
       )
     )
 
