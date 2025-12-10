@@ -17,7 +17,7 @@ jobs:
           private_key: ${{ secrets.CT_CHANGESETS_APP_PEM }}
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           # Pass a personal access token (using our CT Changesets App) to be able to trigger other workflows
