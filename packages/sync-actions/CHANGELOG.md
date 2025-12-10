@@ -1,5 +1,20 @@
 # @commercetools/sync-actions
 
+## 7.4.0
+
+### Minor Changes
+
+- [#1975](https://github.com/commercetools/nodejs/pull/1975) [`a550762`](https://github.com/commercetools/nodejs/commit/a550762ed0bd20adb86a36aab0dbf0f49394d59f) Thanks [@nicolasnieto92](https://github.com/nicolasnieto92)! - handle product level attributes when money value is undefined
+
+### Patch Changes
+
+- [#1974](https://github.com/commercetools/nodejs/pull/1974) [`7c66fea`](https://github.com/commercetools/nodejs/commit/7c66fea90ed180a06253630cd02593897beea80f) Thanks [@jmakkoth-ct](https://github.com/jmakkoth-ct)! - Added the following recurring orders sync actions
+
+  - setOrderSkipConfiguration
+  - setStartsAt
+  - setExpiresAt
+  - setSchedule
+
 ## 7.3.1
 
 ### Patch Changes
