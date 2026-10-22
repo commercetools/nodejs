@@ -130,6 +130,11 @@ Array [
     "attributeName": "attribute-name",
     "newValue": "None",
   },
+  Object {
+    "action": "setSavedToLineItem",
+    "attributeName": "attribute-name",
+    "savedToLineItem": true,
+  },
 ]
 `;
 

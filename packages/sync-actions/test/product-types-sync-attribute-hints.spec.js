@@ -349,6 +349,7 @@ describe('product type hints', () => {
                 inputTip: { en: 'next-input-tip' },
                 inputHint: 'MultiLine',
                 isSearchable: true,
+                savedToLineItem: true,
               },
             })
             updateActions = sync.buildActions(
@@ -418,6 +419,14 @@ describe('product type hints', () => {
                 newValue: 'None',
               },
             ],
+            [
+              'savedToLineItem',
+              {
+                action: 'setSavedToLineItem',
+                attributeName: 'attribute-name',
+                savedToLineItem: true,
+              },
+            ],
           ]
           it.each(changes)(
             'should generate update action for %s',
@@ -427,6 +436,53 @@ describe('product type hints', () => {
               )
             }
           )
+        })
+      })
+      describe('with `savedToLineItem` changes', () => {
+        const build = (previous, next) => {
+          const base = createAttributeDefinitionDraftItem()
+          return sync.buildActions(
+            {},
+            {},
+            {
+              nestedValuesChanges: {
+                attributeDefinitions: [
+                  {
+                    previous: { ...base.previous, ...previous },
+                    next: { ...base.next, ...next },
+                  },
+                ],
+              },
+            }
+          )
+        }
+        it('should set `false` when changing from `true`', () => {
+          expect(
+            build({ savedToLineItem: true }, { savedToLineItem: false })
+          ).toEqual([
+            {
+              action: 'setSavedToLineItem',
+              attributeName: 'attribute-name',
+              savedToLineItem: false,
+            },
+          ])
+        })
+        it('should set `false` when previously undefined', () => {
+          expect(build({}, { savedToLineItem: false })).toEqual([
+            {
+              action: 'setSavedToLineItem',
+              attributeName: 'attribute-name',
+              savedToLineItem: false,
+            },
+          ])
+        })
+        it('should omit the value when changing to undefined', () => {
+          expect(build({ savedToLineItem: false }, {})).toEqual([
+            { action: 'setSavedToLineItem', attributeName: 'attribute-name' },
+          ])
+        })
+        it('should not generate an action when both are undefined', () => {
+          expect(build({}, {})).toEqual([])
         })
       })
       describe('without next', () => {
