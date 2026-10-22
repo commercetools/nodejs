@@ -157,6 +157,10 @@ const generateUpdateActionsForAttributeDefinitions = (
               action: 'changeAttributeConstraint',
               attributeName: updatedAttributeDefinition.previous.name,
             },
+            savedToLineItem: {
+              action: 'setSavedToLineItem',
+              attributeName: updatedAttributeDefinition.previous.name,
+            },
           }
         )
       )
