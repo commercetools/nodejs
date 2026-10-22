@@ -1,5 +1,11 @@
 # @commercetools/sync-actions
 
+## 7.5.0
+
+### Minor Changes
+
+- [#1983](https://github.com/commercetools/nodejs/pull/1983) [`7e07c2f`](https://github.com/commercetools/nodejs/commit/7e07c2f2058d7465d4ba41aaf9c0cd1fa7c91c37) Thanks [@markus-azer](https://github.com/markus-azer)! - Add support for the `setSavedToLineItem` update action on product type attribute definitions.
+
 ## 7.4.0
 
 ### Minor Changes
