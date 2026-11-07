@@ -123,8 +123,8 @@ importers:
         specifier: 4.1.0
         version: 4.1.0
       eslint-import-resolver-typescript:
-        specifier: 2.7.1
-        version: 2.7.1(eslint-plugin-import@2.31.0)(eslint@7.32.0)
+        specifier: 4.4.5
+        version: 4.4.5(eslint-plugin-import@2.31.0)(eslint@7.32.0)
       eslint-plugin-babel:
         specifier: 5.3.1
         version: 5.3.1(eslint@7.32.0)
@@ -133,7 +133,7 @@ importers:
         version: 5.10.0(eslint@7.32.0)
       eslint-plugin-import:
         specifier: 2.31.0
-        version: 2.31.0(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.9.5))(eslint-import-resolver-typescript@2.7.1)(eslint@7.32.0)
+        version: 2.31.0(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.9.5))(eslint-import-resolver-typescript@4.4.5)(eslint@7.32.0)
       eslint-plugin-jest:
         specifier: 23.20.0
         version: 23.20.0(eslint@7.32.0)(typescript@4.9.5)
@@ -234,8 +234,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       '@commercetools/sync-actions':
-        specifier: ^7.0.0
-        version: 7.0.0
+        specifier: ^7.1.2
+        version: 7.3.1
       lodash.omit:
         specifier: ^4.5.0
         version: 4.5.0
@@ -1378,8 +1378,8 @@ packages:
     resolution: {integrity: sha512-31XMMBv/pSLGi6NdUTYim69UJf+BKf/4p0ll2gVoiz0ZGIPauxLOOh8YAEG8HfqH4RVeuB0Y0r89OGC0gMolRg==}
     engines: {node: '>=18'}
 
-  '@commercetools/sync-actions@7.0.0':
-    resolution: {integrity: sha512-VZn29sqEJ3KHtZgS9U4B21cepykonnwkqwJ55pbJeh1Gz9eL5TUdQW764Gr281TL7Guex43ORjq6nFCBQqIUjw==}
+  '@commercetools/sync-actions@7.3.1':
+    resolution: {integrity: sha512-fZ0bIyojjn3xZy2fQ/8+dQoOOt78ASXvF+s3Mt1nwtaeNTCjT4vq/Giymk/y7rOGNiyLJBqk5pWbr0LfnGHfOQ==}
     engines: {node: '>=18'}
 
   '@commitlint/cli@19.8.1':
@@ -1665,6 +1665,9 @@ packages:
 
   '@sinonjs/text-encoding@0.7.3':
     resolution: {integrity: sha512-DE427ROAphMQzU4ENbliGYrBSYPXF+TtLg9S8vzeA+OF4ZKzoDdzfL8sxuMUGS/lgRhM6j1URSk9ghf7Xo1tyA==}
+    deprecated: |-
+      Deprecated: no longer maintained and no longer used by Sinon packages. See
+        https://github.com/sinonjs/nise/issues/243 for replacement details.
 
   '@tootallnate/once@1.1.2':
     resolution: {integrity: sha512-RbzJvlNzmRq5c3O09UipeuXno4tA1FE6ikOjxZK0tuxVv3412l64l5t1W5pj4+rJq9vpkm/kwiR07aZXnsKPxw==}
@@ -1684,9 +1687,6 @@ packages:
 
   '@types/conventional-commits-parser@5.0.1':
     resolution: {integrity: sha512-7uz5EHdzz2TqoMfV7ee61Egf5y6NkcO4FB/1iCCQnbeiI1F3xzv3vK5dBCXUCLQgGYS+mUeigK1iKQzvED+QnQ==}
-
-  '@types/diff-match-patch@1.0.36':
-    resolution: {integrity: sha512-xFdR6tkm0MWvBfO8xXCSsinYxHcqkQUlcHeSpMC2ukzOb6lwQAfDmW+Qt0AvlGd8HpsS28qKsB+oPeJn9I39jg==}
 
   '@types/eslint-visitor-keys@1.0.0':
     resolution: {integrity: sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==}
@@ -1815,6 +1815,111 @@ packages:
   '@typescript-eslint/visitor-keys@3.10.1':
     resolution: {integrity: sha512-9JgC82AaQeglebjZMgYR5wgmfUdUc+EitGUUMW8u2nDckaeimzW+VsoLV6FoimPv2id3VQzfjwBxEMVz08ameQ==}
     engines: {node: ^8.10.0 || ^10.13.0 || >=11.10.1}
+
+  '@unrs/resolver-binding-android-arm-eabi@1.13.0':
+    resolution: {integrity: sha512-60E5mvmIiW+i1E/HYeSX4iE4A8s9NJSGYPu7UM0DJght1c2tTkWwuyDyAwzsEXhKM/XbbndfnTiXdfrf27d2hw==}
+    cpu: [arm]
+    os: [android]
+
+  '@unrs/resolver-binding-android-arm64@1.13.0':
+    resolution: {integrity: sha512-qlh/JR3Tuy1cJ7xtf5pR4ykvLiK6os7X7EL2+zXZbrVc/s+yB8DoFdQrCAW9/a2TOxPVbR7QVNpkPWh7UWIsEQ==}
+    cpu: [arm64]
+    os: [android]
+
+  '@unrs/resolver-binding-darwin-arm64@1.13.0':
+    resolution: {integrity: sha512-yynnnnJXUC99WeD1GfvuXPKsKNfvgzGYC2eRayFnUfsHVROjqrbFOkFQLZiSx1H8+PLy5BzU8vqyPyLqbRfeBQ==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@unrs/resolver-binding-darwin-x64@1.13.0':
+    resolution: {integrity: sha512-t8PXE0Ip9tmGyhRlfVsnEbzGM5iSvJIeNIXciUACjzpg0mmPs13fGv2x7W8sBa0S8zbIiohxKXS9fL/LXW/ERQ==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@unrs/resolver-binding-freebsd-x64@1.13.0':
+    resolution: {integrity: sha512-qdtl9GDWDoDx6rhzF4RU5SJutV3lcLOiTiyqD6nBxYfEO6lAgLNukfrA+HJ2u2OiyWvV8JW5iEWD3LoONw7lYA==}
+    cpu: [x64]
+    os: [freebsd]
+
+  '@unrs/resolver-binding-linux-arm-gnueabihf@1.13.0':
+    resolution: {integrity: sha512-VrMUVwdrScTarsh4B6aUhTtziUavSlglo4Hi8XZ6CpAe4+j3nquY+XoP+tYkiSBDsXZ8386ne4pv4YYYBNi02w==}
+    cpu: [arm]
+    os: [linux]
+
+  '@unrs/resolver-binding-linux-arm-musleabihf@1.13.0':
+    resolution: {integrity: sha512-zSbTVwaxiTC+zYJ9xVNTC6c+BYO/kOV/odcTI3bHuFFXa+XmjLoUkb/8UxsZeU5YF4K000m17wrXoTblNWuzOg==}
+    cpu: [arm]
+    os: [linux]
+
+  '@unrs/resolver-binding-linux-arm64-gnu@1.13.0':
+    resolution: {integrity: sha512-Z/Rax87moZHsuvJ8awdfP+zrMlsCt3d7mggUPIiPe32KpeagimyzJWnZSMQoV67an9uVQghyh92Pc0VprITnYA==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@unrs/resolver-binding-linux-arm64-musl@1.13.0':
+    resolution: {integrity: sha512-oUzXz8hNvFLNEAag8lBKJe1euiV2dmGHAR+eQ5fNpsZO0F1K7IMRb4J6pqYsd7uLMRQNPiu5A1WKUJHbFLWbbw==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@unrs/resolver-binding-linux-loong64-gnu@1.13.0':
+    resolution: {integrity: sha512-BxhGYvZBg0YrvNOeSEGR3eNklwXYy0mUJk7oeGJvZoQMKM68zYvbbf52+fQI3Le4X0fW276FTKIoTwjpMob80A==}
+    cpu: [loong64]
+    os: [linux]
+
+  '@unrs/resolver-binding-linux-loong64-musl@1.13.0':
+    resolution: {integrity: sha512-nZcIuup9Ar3gAlqoZfX/KW6x83TMI11tLpCjldZG5M1KeY8qNUPNJJ71+sPvG8HMBpoh+ix1pAm5gkMFvcSAcQ==}
+    cpu: [loong64]
+    os: [linux]
+
+  '@unrs/resolver-binding-linux-ppc64-gnu@1.13.0':
+    resolution: {integrity: sha512-AG6AgdDrkRNjAPwD/cftFJGgZUWCiJX+E8vpYCDEnwFHLTHZ7ppBiU6/vyPPwrfjcPUPQCDbbxE/eZUXsx49jQ==}
+    cpu: [ppc64]
+    os: [linux]
+
+  '@unrs/resolver-binding-linux-riscv64-gnu@1.13.0':
+    resolution: {integrity: sha512-6vOqYGcAmzpRWpUURWutzvpf1qJ6eOu5cfYObdtPJnzZ0+Kw4cw+ZkZJqIYEh8fPuTBwSYDL/FwlUhma1G/JVQ==}
+    cpu: [riscv64]
+    os: [linux]
+
+  '@unrs/resolver-binding-linux-riscv64-musl@1.13.0':
+    resolution: {integrity: sha512-4HeIn0S2KVUowK0A+EweXrDvZ8CKHEfTtif0kx9vt3ORNsqcXNFFIFnHE0tizma3/Gt5OGrU2ovYNuj+D/bN4g==}
+    cpu: [riscv64]
+    os: [linux]
+
+  '@unrs/resolver-binding-linux-s390x-gnu@1.13.0':
+    resolution: {integrity: sha512-JfkvqY7NZbxyhexLE+g6Z8Hsx4utHOGaVazAVghPiBn8Upw2iERZPpKYnW1FBVU4WStv/BiIsoK/Muke0E7asA==}
+    cpu: [s390x]
+    os: [linux]
+
+  '@unrs/resolver-binding-linux-x64-gnu@1.13.0':
+    resolution: {integrity: sha512-iwjLeVdZo/8v5OKAeRIC+4VQV045t1EPZr5B/AVLgUQ04IdtNthWzg6not2cNjZgH2gHpSf4fOXMmN83aLO1FA==}
+    cpu: [x64]
+    os: [linux]
+
+  '@unrs/resolver-binding-linux-x64-musl@1.13.0':
+    resolution: {integrity: sha512-TOh1fqOjyq1OPoht3BDLd7Y+HeMJRwd5g2VNmCQclknEbjp4py5GFRmT4L/rOybF5Af8q0LT9zHs2WGkwlqtrw==}
+    cpu: [x64]
+    os: [linux]
+
+  '@unrs/resolver-binding-openharmony-arm64@1.13.0':
+    resolution: {integrity: sha512-3T2MNtF2dd1yjaXCVqrsi+/3VZeksEzU1hygPzqqkBLVVjn+2iJzXEkxxCKIVFrWnpmEbazeHJp/ruYD0RUVWA==}
+    cpu: [arm64]
+    os: [openharmony]
+
+  '@unrs/resolver-binding-win32-arm64-msvc@1.13.0':
+    resolution: {integrity: sha512-hKWfSLiN3L4cIxg0jrpyP/66AXLTcyD37jmSn//rGdOUYGlizYxTEFdJ+GZbp2NnaML3YS/A73nCysze8FaJdg==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@unrs/resolver-binding-win32-ia32-msvc@1.13.0':
+    resolution: {integrity: sha512-N4gDKkDoiyIQEcn3vTqe2ksRxUAtBvQ8c5TiT+WonSa6FHgCAY5+RggnZ134hXJoRj57JEjv4/m+i/pAKHWrTQ==}
+    cpu: [ia32]
+    os: [win32]
+
+  '@unrs/resolver-binding-win32-x64-msvc@1.13.0':
+    resolution: {integrity: sha512-DpLMlAqlrk4zBVK3DiDjwKD0oq7pZNy+8BiIBRuByqb6dm5jsdoLMhIiyh/xR7+WejaW/1Ui+XgbgMNa4+zWJg==}
+    cpu: [x64]
+    os: [win32]
 
   JSONStream@1.3.5:
     resolution: {integrity: sha512-E+iruNOY8VV9s4JEbe1aNEm6MiszPRr/UfcHMz0TQh1BXSxHK+ASV1R6W4HpjBhSeS+54PIsAMCBmwD06LLsqQ==}
@@ -2956,15 +3061,30 @@ packages:
     resolution: {integrity: sha512-IsUTtGxF1hrH6lMWiSl1WbGaiP01eT6kzywdY1U+zLc0MP+nwEnUiS9UI8IaOTUhTeQJLlCEWIbXINBH4YJbBQ==}
     engines: {node: '>=10'}
 
+  eslint-import-context@0.1.9:
+    resolution: {integrity: sha512-K9Hb+yRaGAGUbwjhFNHvSmmkZs9+zbuoe3kFQ4V1wYjrepUFYM2dZAfNtjbbj3qsPfUfsA68Bx/ICWQMi+C8Eg==}
+    engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
+    peerDependencies:
+      unrs-resolver: ^1.0.0
+    peerDependenciesMeta:
+      unrs-resolver:
+        optional: true
+
   eslint-import-resolver-node@0.3.9:
     resolution: {integrity: sha512-WFj2isz22JahUv+B788TlO3N6zL3nNJGU8CcZbPZvVEkBPaJdCV4vy5wyghty5ROFbCRnm132v8BScu5/1BQ8g==}
 
-  eslint-import-resolver-typescript@2.7.1:
-    resolution: {integrity: sha512-00UbgGwV8bSgUv34igBDbTOtKhqoRMy9bFjNehT40bXg6585PNIct8HhXZ0SybqB9rWtXj9crcku8ndDn/gIqQ==}
-    engines: {node: '>=4'}
+  eslint-import-resolver-typescript@4.4.5:
+    resolution: {integrity: sha512-nbE5XLph6TLtGYcu/U6e6ZVXyKBhbDWK5cLGk76eJ7NdZpwf1P9EFkpt1Z01mNZNrrilsAYWKH6zUkL4reoXbw==}
+    engines: {node: ^16.17.0 || >=18.6.0}
     peerDependencies:
       eslint: '*'
       eslint-plugin-import: '*'
+      eslint-plugin-import-x: '*'
+    peerDependenciesMeta:
+      eslint-plugin-import:
+        optional: true
+      eslint-plugin-import-x:
+        optional: true
 
   eslint-module-utils@2.12.0:
     resolution: {integrity: sha512-wALZ0HFoytlyh/1+4wuZ9FJCD/leWHQzzrxJ8+rebyReSLk7LApMyd3WJaLVoN+D5+WIdJyDK1c6JnE65V4Zyg==}
@@ -3226,6 +3346,15 @@ packages:
       picomatch:
         optional: true
 
+  fdir@6.5.0:
+    resolution: {integrity: sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      picomatch: ^3 || ^4
+    peerDependenciesMeta:
+      picomatch:
+        optional: true
+
   figures@3.2.0:
     resolution: {integrity: sha512-yaduQFRKLXYOGgEn6AZau90j3ggSOyiqXU0F9JZfeXYhNa+Jk4X+s45A2zg5jns87GAFa34BBm2kXw4XpNcbdg==}
     engines: {node: '>=8'}
@@ -3408,6 +3537,9 @@ packages:
     resolution: {integrity: sha512-w9UMqWwJxHNOvoNzSJ2oPF5wvYcvP7jUvYzhp67yEhTi17ZDBBC1z9pTdGuzjD+EFIqLSYRweZjqfiPzQ06Ebg==}
     engines: {node: '>= 0.4'}
 
+  get-tsconfig@4.14.3:
+    resolution: {integrity: sha512-++QEw4DIY7WGoukz+/+A/8dGYPT9l9yIadnmSgZ8Rjr3YVSVDipQSO9CdnJo9ePqFqUUqh+wk9uIaoiAwsiPkA==}
+
   get-value@2.0.6:
     resolution: {integrity: sha512-Ln0UQDlxH1BapMu3GPtf7CuYNwRZf2gwCuPqbyG6pB8WfmFpzqcy4xtAaAMUhnNqjMKTiCPZG2oMT3YSx8U2NA==}
     engines: {node: '>=0.10.0'}
@@ -3415,6 +3547,7 @@ packages:
   git-raw-commits@4.0.0:
     resolution: {integrity: sha512-ICsMM1Wk8xSGMowkOmPrzo2Fgmfo4bMHLNX6ytHjajRJUqvHOw/TFapQ+QG75c3X/tTDDhOSRPGC52dDbNM8FQ==}
     engines: {node: '>=16'}
+    deprecated: Deprecated and no longer maintained. Use @conventional-changelog/git-client instead.
     hasBin: true
 
   glob-base@0.3.0:
@@ -3430,11 +3563,11 @@ packages:
 
   glob@7.1.1:
     resolution: {integrity: sha512-mRyN/EsN2SyNhKWykF3eEGhDpeNplMWaW18Bmh76tnOqk5TbELAVwFAYOCmKVssOYFrYvvLMguiA+NXO3ZTuVA==}
-    deprecated: Glob versions prior to v9 are no longer supported
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
-    deprecated: Glob versions prior to v9 are no longer supported
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   global-directory@4.0.1:
     resolution: {integrity: sha512-wHTUcDUoZ1H5/0iVqEudYW4/kAlN5cZ3j/bXn0Dpbizl9iaUVeWSHqiOjsgk6OW2bkLclbBjzewBz6weQ1zA2Q==}
@@ -3692,6 +3825,9 @@ packages:
 
   is-buffer@1.1.6:
     resolution: {integrity: sha512-NcdALwpXkTm5Zvvbk7owOUSvVvBKDgKP5/ewfXEznmQFfs4ZRmanOeKBTjRVjka3QFoN6XJ+9F3USqfHqTaU5w==}
+
+  is-bun-module@2.0.0:
+    resolution: {integrity: sha512-gNCGbnnnnFAUGKeZ9PdbyeGYJqewpmc2aKHUEMO5nQPWU9lOmv7jcmQIv+qHD8fXW6W7qfuCwX4rY9LNRjXrkQ==}
 
   is-callable@1.2.7:
     resolution: {integrity: sha512-1BC0BVFhS/p0qtw6enp8e+8OD0UrK0oFLztSjNzhcKA3WDuJxxAPXzPuPtKkjEY9UUoEWlX/8fgKeu2S8i9JTA==}
@@ -4208,11 +4344,6 @@ packages:
     engines: {node: '>=8.17.0'}
     hasBin: true
 
-  jsondiffpatch@0.6.0:
-    resolution: {integrity: sha512-3QItJOXp2AP1uv7waBkao5nCvhEv+QmJAd38Ybq7wNI74Q+BBmnLn4EDKz6yI9xGAIQoUF87qHt+kc1IVxB4zQ==}
-    engines: {node: ^18.0.0 || >=20.0.0}
-    hasBin: true
-
   jsonfile@4.0.0:
     resolution: {integrity: sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg==}
 
@@ -4593,6 +4724,11 @@ packages:
     resolution: {integrity: sha512-fpoe2T0RbHwBTBUOftAfBPaDEi06ufaUai0mE6Yn1kacc3SnTErfb/h+X94VXzI64rKFHYImXSvdwGGCmwOqCA==}
     engines: {node: '>=0.10.0'}
 
+  napi-postinstall@0.3.8:
+    resolution: {integrity: sha512-dHbDC5V1g/EI8OLEtL4Iuwbu0fgzmyykxenn2KnlsX9XdhTXL3gWnfbbP+ab+oUcgV6CFpb8QGyQt/ZXA0UXig==}
+    engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
+    hasBin: true
+
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
@@ -4907,6 +5043,10 @@ packages:
 
   picomatch@4.0.2:
     resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
+    engines: {node: '>=12'}
+
+  picomatch@4.0.7:
+    resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
 
   pidtree@0.6.0:
@@ -5252,6 +5392,9 @@ packages:
     resolution: {integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==}
     engines: {node: '>=8'}
 
+  resolve-pkg-maps@1.0.0:
+    resolution: {integrity: sha512-seS2Tj26TBVOC2NIc2rOe2y2ZO7efxITtLZcGSOnHHNOQ7CkiUBfw0Iw2ck6xkIhPwLhKNLS8BO+hEpngQlqzw==}
+
   resolve-url@0.2.1:
     resolution: {integrity: sha512-ZuF55hVUQaaczgOIwqWzkEcEidmlD/xl44x1UZnhOXcYuFN2S6+rcxpG+C1N3So0wvNI3DmJICUFfu2SxhBmvg==}
     deprecated: https://github.com/lydell/resolve-url#deprecated
@@ -5537,6 +5680,10 @@ packages:
   sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
 
+  stable-hash-x@0.2.0:
+    resolution: {integrity: sha512-o3yWv49B/o4QZk5ZcsALc6t0+eCelPc44zZsLtCQnZPDwFpDYSWcDnrv2TtMmMbQ7uKo3J0HTURCqckw23czNQ==}
+    engines: {node: '>=12.0.0'}
+
   stack-utils@2.0.6:
     resolution: {integrity: sha512-XlkWvfIm6RmsWtNJx+uqtKLS8eqFbxUg0ZzLXqY0caEy9l7hruX8IpiDnjsLavoBgqCCR71TqWO8MaXYheJ3RQ==}
     engines: {node: '>=10'}
@@ -5749,6 +5896,10 @@ packages:
     resolution: {integrity: sha512-mEwzpUgrLySlveBwEVDMKk5B57bhLPYovRfPAXD5gA/98Opn0rCDj3GtLwFvCvH5RK9uPCExUROW5NjDwvqkxw==}
     engines: {node: '>=12.0.0'}
 
+  tinyglobby@0.2.17:
+    resolution: {integrity: sha512-wXR/dYpcqKmfWpEdZjiKJOwCNFndD0DMnrW/cYjVGttEkBfVgcLFHoNrlj47mjOVic9yyNu65alsgF4NQyTa2g==}
+    engines: {node: '>=12.0.0'}
+
   tmp@0.0.33:
     resolution: {integrity: sha512-jRCJlojKnZ3addtTOjdIqoRuPEKBvNXcGYqzO6zWZX8KfKEpnGY5jfggJQ3EjKuu8D4bJRr0y+cYJFmYbImXGw==}
     engines: {node: '>=0.6.0'}
@@ -5910,6 +6061,9 @@ packages:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
 
+  unrs-resolver@1.13.0:
+    resolution: {integrity: sha512-mcPQo9Vm6kXd84d/WqMiYBi2CcA57QHBX/ev5PoUEb8b2oQzUvJ6xYsfseQblnCncgnVmCZGWiFwK7KkS5JZJA==}
+
   unset-value@1.0.0:
     resolution: {integrity: sha512-PcA2tsuGSF9cnySLHTLSh2qrQiJ70mn+r+Glzxv2TWZblxsxCC52BDlZoPCsz7STd9pN7EZetkWZBAvk4cgZdQ==}
     engines: {node: '>=0.10.0'}
@@ -5945,6 +6099,7 @@ packages:
 
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   v8-compile-cache@2.4.0:
@@ -5992,6 +6147,7 @@ packages:
 
   whatwg-encoding@1.0.5:
     resolution: {integrity: sha512-b5lim54JOPN9HtzvK9HFXvBma/rnfFeqsic0hSpjtDbVxR3dJKLc+KB4V6GgiGOvl7CY/KNh8rxSo9DKQrnUEw==}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@2.3.0:
     resolution: {integrity: sha512-M4yMwr6mAnQz76TbJm914+gPpB/nCwvZbJU28cUD6dR004SAxDLOOSUaB1JDRqLtaOV/vi0IC5lEAGFgrjGv/g==}
@@ -7414,10 +7570,10 @@ snapshots:
 
   '@commercetools/sdk-types@1.0.0': {}
 
-  '@commercetools/sync-actions@7.0.0':
+  '@commercetools/sync-actions@7.3.1':
     dependencies:
       fast-equals: 2.0.4
-      jsondiffpatch: 0.6.0
+      jsondiffpatch: 0.5.0
       lodash.flatten: 4.4.0
       lodash.foreach: 4.5.0
       lodash.intersection: 4.4.0
@@ -7733,11 +7889,7 @@ snapshots:
       jest-runner: 26.6.3
       jest-runtime: 26.6.3
     transitivePeerDependencies:
-      - bufferutil
-      - canvas
       - supports-color
-      - ts-node
-      - utf-8-validate
 
   '@jest/transform@26.6.2':
     dependencies:
@@ -8004,8 +8156,6 @@ snapshots:
     dependencies:
       '@types/node': 10.17.60
 
-  '@types/diff-match-patch@1.0.36': {}
-
   '@types/eslint-visitor-keys@1.0.0': {}
 
   '@types/eslint@7.29.0':
@@ -8159,6 +8309,69 @@ snapshots:
   '@typescript-eslint/visitor-keys@3.10.1':
     dependencies:
       eslint-visitor-keys: 1.3.0
+
+  '@unrs/resolver-binding-android-arm-eabi@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-android-arm64@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-darwin-arm64@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-darwin-x64@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-freebsd-x64@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-linux-arm-gnueabihf@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-linux-arm-musleabihf@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-linux-arm64-gnu@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-linux-arm64-musl@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-linux-loong64-gnu@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-linux-loong64-musl@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-linux-ppc64-gnu@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-linux-riscv64-gnu@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-linux-riscv64-musl@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-linux-s390x-gnu@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-linux-x64-gnu@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-linux-x64-musl@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-openharmony-arm64@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-win32-arm64-msvc@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-win32-ia32-msvc@1.13.0':
+    optional: true
+
+  '@unrs/resolver-binding-win32-x64-msvc@1.13.0':
+    optional: true
 
   JSONStream@1.3.5:
     dependencies:
@@ -9512,7 +9725,7 @@ snapshots:
     dependencies:
       confusing-browser-globals: 1.0.11
       eslint: 7.32.0
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.9.5))(eslint-import-resolver-typescript@2.7.1)(eslint@7.32.0)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.9.5))(eslint-import-resolver-typescript@4.4.5)(eslint@7.32.0)
       object.assign: 4.1.7
       object.entries: 1.1.8
 
@@ -9520,7 +9733,7 @@ snapshots:
     dependencies:
       eslint: 7.32.0
       eslint-config-airbnb-base: 14.2.1(eslint-plugin-import@2.31.0)(eslint@7.32.0)
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.9.5))(eslint-import-resolver-typescript@2.7.1)(eslint@7.32.0)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.9.5))(eslint-import-resolver-typescript@4.4.5)(eslint@7.32.0)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@7.32.0)
       eslint-plugin-react: 7.37.5(eslint@7.32.0)
       eslint-plugin-react-hooks: 4.6.2(eslint@7.32.0)
@@ -9543,6 +9756,13 @@ snapshots:
       string-width: 4.2.3
       supports-hyperlinks: 2.3.0
 
+  eslint-import-context@0.1.9(unrs-resolver@1.13.0):
+    dependencies:
+      get-tsconfig: 4.14.3
+      stable-hash-x: 0.2.0
+    optionalDependencies:
+      unrs-resolver: 1.13.0
+
   eslint-import-resolver-node@0.3.9:
     dependencies:
       debug: 3.2.7
@@ -9551,26 +9771,29 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-import-resolver-typescript@2.7.1(eslint-plugin-import@2.31.0)(eslint@7.32.0):
+  eslint-import-resolver-typescript@4.4.5(eslint-plugin-import@2.31.0)(eslint@7.32.0):
     dependencies:
       debug: 4.4.1
       eslint: 7.32.0
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.9.5))(eslint-import-resolver-typescript@2.7.1)(eslint@7.32.0)
-      glob: 7.2.3
-      is-glob: 4.0.3
-      resolve: 1.22.10
-      tsconfig-paths: 3.15.0
+      eslint-import-context: 0.1.9(unrs-resolver@1.13.0)
+      get-tsconfig: 4.14.3
+      is-bun-module: 2.0.0
+      stable-hash-x: 0.2.0
+      tinyglobby: 0.2.17
+      unrs-resolver: 1.13.0
+    optionalDependencies:
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.9.5))(eslint-import-resolver-typescript@4.4.5)(eslint@7.32.0)
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.0(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.9.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@2.7.1)(eslint@7.32.0):
+  eslint-module-utils@2.12.0(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.9.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.4.5)(eslint@7.32.0):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
       '@typescript-eslint/parser': 3.10.1(eslint@7.32.0)(typescript@4.9.5)
       eslint: 7.32.0
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 2.7.1(eslint-plugin-import@2.31.0)(eslint@7.32.0)
+      eslint-import-resolver-typescript: 4.4.5(eslint-plugin-import@2.31.0)(eslint@7.32.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -9585,7 +9808,7 @@ snapshots:
       lodash: 4.17.21
       string-natural-compare: 3.0.1
 
-  eslint-plugin-import@2.31.0(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.9.5))(eslint-import-resolver-typescript@2.7.1)(eslint@7.32.0):
+  eslint-plugin-import@2.31.0(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.9.5))(eslint-import-resolver-typescript@4.4.5)(eslint@7.32.0):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.8
@@ -9596,7 +9819,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 7.32.0
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.0(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.9.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@2.7.1)(eslint@7.32.0)
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@3.10.1(eslint@7.32.0)(typescript@4.9.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@4.4.5)(eslint@7.32.0)
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3
@@ -9914,6 +10137,10 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.2
 
+  fdir@6.5.0(picomatch@4.0.7):
+    optionalDependencies:
+      picomatch: 4.0.7
+
   figures@3.2.0:
     dependencies:
       escape-string-regexp: 1.0.5
@@ -10109,6 +10336,10 @@ snapshots:
       call-bound: 1.0.4
       es-errors: 1.3.0
       get-intrinsic: 1.3.0
+
+  get-tsconfig@4.14.3:
+    dependencies:
+      resolve-pkg-maps: 1.0.0
 
   get-value@2.0.6: {}
 
@@ -10420,6 +10651,10 @@ snapshots:
       has-tostringtag: 1.0.2
 
   is-buffer@1.1.6: {}
+
+  is-bun-module@2.0.0:
+    dependencies:
+      semver: 7.7.1
 
   is-callable@1.2.7: {}
 
@@ -10832,7 +11067,11 @@ snapshots:
       pretty-format: 26.6.2
       throat: 5.0.0
     transitivePeerDependencies:
+      - bufferutil
+      - canvas
       - supports-color
+      - ts-node
+      - utf-8-validate
 
   jest-leak-detector@26.6.2:
     dependencies:
@@ -11138,12 +11377,6 @@ snapshots:
   jsondiffpatch@0.5.0:
     dependencies:
       chalk: 3.0.0
-      diff-match-patch: 1.0.5
-
-  jsondiffpatch@0.6.0:
-    dependencies:
-      '@types/diff-match-patch': 1.0.36
-      chalk: 5.4.1
       diff-match-patch: 1.0.5
 
   jsonfile@4.0.0:
@@ -11544,6 +11777,8 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  napi-postinstall@0.3.8: {}
+
   natural-compare@1.4.0: {}
 
   nice-try@1.0.5: {}
@@ -11871,6 +12106,8 @@ snapshots:
   picomatch@2.3.1: {}
 
   picomatch@4.0.2: {}
+
+  picomatch@4.0.7: {}
 
   pidtree@0.6.0: {}
 
@@ -12255,6 +12492,8 @@ snapshots:
 
   resolve-from@5.0.0: {}
 
+  resolve-pkg-maps@1.0.0: {}
+
   resolve-url@0.2.1: {}
 
   resolve@1.22.10:
@@ -12573,6 +12812,8 @@ snapshots:
 
   sprintf-js@1.0.3: {}
 
+  stable-hash-x@0.2.0: {}
+
   stack-utils@2.0.6:
     dependencies:
       escape-string-regexp: 2.0.0
@@ -12811,6 +13052,11 @@ snapshots:
       fdir: 6.4.4(picomatch@4.0.2)
       picomatch: 4.0.2
 
+  tinyglobby@0.2.17:
+    dependencies:
+      fdir: 6.5.0(picomatch@4.0.7)
+      picomatch: 4.0.7
+
   tmp@0.0.33:
     dependencies:
       os-tmpdir: 1.0.2
@@ -12980,6 +13226,32 @@ snapshots:
   universalify@0.2.0: {}
 
   universalify@2.0.1: {}
+
+  unrs-resolver@1.13.0:
+    dependencies:
+      napi-postinstall: 0.3.8
+    optionalDependencies:
+      '@unrs/resolver-binding-android-arm-eabi': 1.13.0
+      '@unrs/resolver-binding-android-arm64': 1.13.0
+      '@unrs/resolver-binding-darwin-arm64': 1.13.0
+      '@unrs/resolver-binding-darwin-x64': 1.13.0
+      '@unrs/resolver-binding-freebsd-x64': 1.13.0
+      '@unrs/resolver-binding-linux-arm-gnueabihf': 1.13.0
+      '@unrs/resolver-binding-linux-arm-musleabihf': 1.13.0
+      '@unrs/resolver-binding-linux-arm64-gnu': 1.13.0
+      '@unrs/resolver-binding-linux-arm64-musl': 1.13.0
+      '@unrs/resolver-binding-linux-loong64-gnu': 1.13.0
+      '@unrs/resolver-binding-linux-loong64-musl': 1.13.0
+      '@unrs/resolver-binding-linux-ppc64-gnu': 1.13.0
+      '@unrs/resolver-binding-linux-riscv64-gnu': 1.13.0
+      '@unrs/resolver-binding-linux-riscv64-musl': 1.13.0
+      '@unrs/resolver-binding-linux-s390x-gnu': 1.13.0
+      '@unrs/resolver-binding-linux-x64-gnu': 1.13.0
+      '@unrs/resolver-binding-linux-x64-musl': 1.13.0
+      '@unrs/resolver-binding-openharmony-arm64': 1.13.0
+      '@unrs/resolver-binding-win32-arm64-msvc': 1.13.0
+      '@unrs/resolver-binding-win32-ia32-msvc': 1.13.0
+      '@unrs/resolver-binding-win32-x64-msvc': 1.13.0
 
   unset-value@1.0.0:
     dependencies:
